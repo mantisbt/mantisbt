@@ -309,12 +309,12 @@
 <p>
 <table class="width100" cellspacing="0">
 <tr>
-	<td width="10%" bgcolor="<? echo $g_new_color?>"><? echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_feedback_color?>"><? echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_acknowledged_color?>"><? echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_confirmed_color?>"><? echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_assigned_color?>"><? echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_resolved_color?>"><? echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
-	<td width="10%" bgcolor="<? echo $g_closed_color?>"><? echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_new_color?>"><? echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_feedback_color?>"><? echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_acknowledged_color?>"><? echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_confirmed_color?>"><? echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_assigned_color?>"><? echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_resolved_color?>"><? echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<? echo $g_closed_color?>"><? echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
 </tr>
 </table>

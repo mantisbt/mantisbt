@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	### CONFIGURATION VARIABLES                                             ###
+	# CONFIGURATION VARIABLES
 	###########################################################################
 
 	########################
-	### Mantis Constants ###
+	# Mantis Constants
 	########################
 
 	# --- constants -------------------
@@ -31,7 +31,7 @@
 	define( "ADMINISTRATOR",  90 );
 
 	# status
-	define( "NEW_",          10 );   ### NEW seems to be a reserved keyword
+	define( "NEW_",          10 );   # NEW seems to be a reserved keyword
 	define( "FEEDBACK",      20 );
 	define( "ACKNOWLEDGED",  30 );
 	define( "CONFIRMED",     40 );
@@ -92,7 +92,7 @@
 
 	# email padding
 	define( "EMAIL_PAD_LENGTH", 28 );
-	
+
 	# show variable values
 	define( "BOTH",            0 );
 	define( "SIMPLE_ONLY",      1 );

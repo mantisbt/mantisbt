@@ -15,6 +15,7 @@ Mantis
  * Modified version string to be longer.
  * Modified html functions to consolidate code.
  * Modified confirm messages to consolidate localization strings.
+ * Modified comments to use one # instead of ### (save space)
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.

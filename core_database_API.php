@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	# Database                                                              ###
+	# Database
 	###########################################################################
 
 	# This in the general interface for all database calls.

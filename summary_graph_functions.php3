@@ -27,7 +27,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 						project_id='$g_project_cookie_val'";
 			$result = db_query( $query );
 			$enum_name_count[] = db_result( $result, 0 );
-		} ### end for
+		} # end for
 	}
 
 
@@ -110,7 +110,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$result2 = db_query( $query );
 			$resolved_bug_count[] = db_result( $result2, 0, 0 );
 
-		} ### end for
+		} # end for
 	}
 
 
@@ -188,7 +188,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$reporter_count[] = $t_count;
 			}
 
-		} ### end for
+		} # end for
 	}
 
 
@@ -248,7 +248,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$result2 = db_query( $query );
 			$category_bug_count[] = db_result( $result2, 0, 0 );
 
-		} ### end for
+		} # end for
 	}
 
 
@@ -307,7 +307,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 	function create_cumulative_bydate(){
 		global $metrics, $g_mantis_bug_table, $g_project_cookie_val;
 
-		### Get all the submitted dates
+		# Get all the submitted dates
 		$query = "SELECT UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bug_table
 			WHERE project_id='$g_project_cookie_val'
@@ -331,7 +331,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
-		### Get all the resolved dates
+		# Get all the resolved dates
 		$query = "SELECT UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM $g_mantis_bug_table
 			WHERE project_id='$g_project_cookie_val' AND

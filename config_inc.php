@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	### CONFIGURATION VARIABLES                                             ###
+	# CONFIGURATION VARIABLES
 	###########################################################################
 
 	# In general a value of 0 means the feature is disabled and 1 means the
@@ -17,7 +17,7 @@
 	error_reporting(E_ALL);
 
 	################################
-	### Mantis Database Settings ###
+	# Mantis Database Settings
 	################################
 
 	# --- database variables ---------
@@ -30,7 +30,7 @@
 	$g_database_name = "bugtracker";
 
 	############################
-	### Mantis Path Settings ###
+	# Mantis Path Settings
 	############################
 
 	# --- path variables --------------
@@ -48,7 +48,7 @@
 	$g_absolute_path = "/usr/local/www/data/mantis/";
 
 	#############################
-	### Web Server            ###
+	# Web Server
 	#############################
 
 	# --- using MS IIS ----------------
@@ -56,7 +56,7 @@
 	$g_use_iis = 0;
 
 	#############################
-	### Mantis Version String ###
+	# Mantis Version String
 	#############################
 
 	# --- version variables -----------
@@ -64,7 +64,7 @@
 	$g_show_version   = ON;
 
 	#############################
-	### Mantis Email Settings ###
+	# Mantis Email Settings
 	#############################
 
 	# --- email variables -------------
@@ -131,7 +131,7 @@
 	$g_smtp_host     = "localhost";
 
 	################################
-	### Mantis Language Settings ###
+	# Mantis Language Settings
 	################################
 
 	# --- language settings -----------
@@ -142,7 +142,7 @@
 	$g_language_choices_arr = array( "english", "chinese_traditional", "danish", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "polish", "portuguese_brazilian", "portuguese_standard", "russian", "spanish", "swedish", "turkish" );
 
 	###############################
-	### Mantis Display Settings ###
+	# Mantis Display Settings
 	###############################
 
 	# --- sitewide variables ----------
@@ -183,7 +183,7 @@
 	$g_show_priority_text = OFF;
 
 	############################
-	### Mantis JPGRAPH Addon ###
+	# Mantis JPGRAPH Addon
 	############################
 
 	# --- jpgraph settings --- #
@@ -199,7 +199,7 @@
 	$g_jpgraph_path = "./jpgraph/";   # dont forget the ending slash!
 
 	############################
-	### Mantis Time Settings ###
+	# Mantis Time Settings
 	############################
 
 	# --- time varaibles --------------
@@ -214,7 +214,7 @@
 	$g_content_expire     = 0;
 
 	############################
-	### Mantis Date Settings ###
+	# Mantis Date Settings
 	############################
 
 	# --- date format settings --------
@@ -226,7 +226,7 @@
 	$g_complete_date_format = "m-d-y H:i T";
 
 	############################
-	### Mantis News Settings ###
+	# Mantis News Settings
 	############################
 
 	# --- Limit News Items ------------
@@ -242,7 +242,7 @@
 	$g_news_view_limit_days = 30;
 
 	##################################
-	### Mantis Default Preferences ###
+	# Mantis Default Preferences
 	##################################
 
 	# --- signup default ---------------
@@ -276,7 +276,7 @@
 	# default_language - is set to site language
 
 	###############################
-	### Mantis Summary Settings ###
+	# Mantis Summary Settings
 	###############################
 
 	# how many reporters to show
@@ -291,7 +291,7 @@
 	$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
 
 	###############################
-	### Mantis Bugnote Settings ###
+	# Mantis Bugnote Settings
 	###############################
 
 	# --- bugnote settings ------------
@@ -300,11 +300,11 @@
 	$g_bugnote_order = "ASC";
 
 	###################################
-	### Mantis File Upload Settings ###
+	# Mantis File Upload Settings
 	###################################
 
 	# --- file upload settings --------
-	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
+	# @@@ This should be broken into per project settings and split between bug uploads and project document uploads
 	$g_allow_file_upload    = ON;
 
 	# Upload destination: specify actual location in project settings
@@ -314,7 +314,7 @@
 	$g_max_file_size = 5000000; # 5 MB
 
 	############################
-	### Mantis HTML Settings ###
+	# Mantis HTML Settings
 	############################
 
 	# --- html tags -------------------
@@ -336,7 +336,7 @@
 	$g_primary_table_tags          = "";
 
 	##########################
-	### Mantis HR Settings ###
+	# Mantis HR Settings
 	##########################
 
 	# --- hr --------------------------
@@ -344,7 +344,7 @@
 	$g_hr_width = 50;
 
 	#############################
-	### Mantis LDAP Settings  ###
+	# Mantis LDAP Settings
 	#############################
 
 	# look in README.LDAP for details
@@ -356,7 +356,7 @@
 	$g_use_ldap_email    = 0; # Should we send to the LDAP email address or what MySql tells us
 
 	############################
-	### Mantis Misc Settings ###
+	# Mantis Misc Settings
 	############################
 
 	# --- threshold -------------------
@@ -381,7 +381,7 @@
 	$g_allow_close_immediately = OFF;
 
 	##############################
-	### Mantis Color Variables ###
+	# Mantis Color Variables
 	##############################
 
 	# --- color values ----------------
@@ -409,7 +409,7 @@
 
 
 	###############################
-	### Mantis Cookie Variables ###
+	# Mantis Cookie Variables
 	###############################
 
 	# --- cookie prefix ---------------
@@ -457,7 +457,7 @@
 	}
 
 	#######################################
-	### Mantis Database Table Variables ###
+	# Mantis Database Table Variables
 	#######################################
 
 	# --- table prefix ----------------
@@ -481,7 +481,7 @@
 	$g_mantis_user_pref_table         = $g_db_table_prefix."_user_pref_table";
 
 	###########################
-	### Mantis Enum Strings ###
+	# Mantis Enum Strings
 	###########################
 
 	# --- enum strings ----------------
@@ -498,7 +498,7 @@
 	$g_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
 
 	#############################
-	### Mantis Page Variables ###
+	# Mantis Page Variables
 	#############################
 
 	#----------------------------------

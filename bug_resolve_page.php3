@@ -15,7 +15,7 @@
 <? print_page_top1() ?>
 <? print_page_top2() ?>
 
-<? ### Resolve Form BEGIN ?>
+<? # Resolve Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width50" cellspacing="0">
@@ -62,6 +62,6 @@
 </form>
 </table>
 </div>
-<? ### Resolve Form END ?>
+<? # Resolve Form END ?>
 
 <? print_page_bot1( __FILE__ ) ?>

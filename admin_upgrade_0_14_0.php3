@@ -66,7 +66,7 @@ PRINT "UPDATED PROJECTS";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 
-### update bug table
+# update bug table
 $query3 = "ALTER TABLE mantis_bug_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id";
 $result3 = db_query( $query3 );
 if ( $result3 ) {
@@ -112,7 +112,7 @@ PRINT "UPGRADED BUGS";
 		$result = db_query( $query );
 		$news_count = db_num_rows( $result );
 
-### update news table
+# update news table
 $query3 = "ALTER TABLE mantis_news_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id";
 $result3 = db_query( $query3 );
 if ( $result3 ) {
@@ -140,7 +140,7 @@ PRINT "UPGRADED NEWS";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 
-### update user tables
+# update user tables
 $query3 = "ALTER TABLE mantis_user_table ADD login_count INT not null DEFAULT '0' AFTER access_level";
 $result3 = db_query( $query3 );
 if ( $result3 ) {

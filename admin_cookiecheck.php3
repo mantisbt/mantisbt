@@ -23,6 +23,6 @@
 	?>
 	<p>
 	If the test is failed then your browser may have cookies turned off.  Additionally, your webserver or PHP may be configured incorrectly.
-<? } ### end f_action if ?>
+<? } # endif f_action ?>
 <p>
 <a href="admin_cookiecheck.php3?f_action=test">Click here</a> to reload the page and see if the value was set correctly.

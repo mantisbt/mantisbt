@@ -253,7 +253,7 @@
 				PRINT "</div>";
 		}
 	}
-	# --------------------
+ 	# --------------------
 	# print the hr
 	function print_hr( $p_hr_size, $p_hr_width ) {
 		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\">";
