@@ -179,7 +179,7 @@ CREATE TABLE mantis_project_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    name varchar(128) NOT NULL,
    status int(2) DEFAULT '10' NOT NULL,
-   enabled int(1) DEFAULT '0' NOT NULL,
+   enabled int(1) DEFAULT '1' NOT NULL,
    view_state int(2) DEFAULT '10' NOT NULL,
    access_min int(2) DEFAULT '10' NOT NULL,
    file_path varchar(250) NOT NULL,

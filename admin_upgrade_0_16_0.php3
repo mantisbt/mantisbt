@@ -22,7 +22,7 @@
 
 		function PrintAll() {
 			for ( $i=0; $i<$this->item_count; $i++ ) {
-				echo $this->query_arr[$i]."<br>";
+				echo "ONLY PRINTING: ".$this->query_arr[$i]."<br>";
 			}
 		}
 
