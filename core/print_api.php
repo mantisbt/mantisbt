@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.83 2004-05-26 05:25:32 int2str Exp $
+	# $Id: print_api.php,v 1.84 2004-05-27 01:07:36 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -199,7 +199,7 @@
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 			$t_project_table = config_get( 'mantis_project_table' );
 
-			$query = "SELECT DISTINCT u.id, u.username
+			$query = "SELECT DISTINCT u.id, u.username, u.realname
 					FROM 	$t_user_table u,
 							$t_project_user_list_table l,
 							$t_project_table p
