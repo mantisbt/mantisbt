@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.2 2004-05-24 22:23:06 vboctor Exp $
+	# $Id: changelog_page.php,v 1.3 2004-06-20 21:59:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,7 @@
 	html_page_top2();
 
 	$f_project_id	= helper_get_current_project();
+	$c_project_id   = db_prepare_int( $f_project_id );
 	$t_project_name = project_get_field( $f_project_id, 'name' );
 	$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $f_project_id );
 
@@ -40,7 +41,7 @@
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
-		$query = "SELECT id, summary, view_state FROM $t_bug_table WHERE fixed_in_version='$c_version' ORDER BY last_updated DESC";
+		$query = "SELECT id, summary, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
 		echo '<table class="table.width100" width="100%">';
 		echo '<tr><td class="category" colspan="2">', $t_project_name, ' - ', $t_version, '</td></tr>';
