@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.54 2003-02-18 02:18:02 jfitzell Exp $
+	# $Id: html_api.php,v 1.55 2003-02-18 02:28:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -27,24 +27,20 @@
 	# --------------------
 	# first part of the html followed by meta tags then the second part
 	function html_page_top1() {
-		global $g_css_include_file, $g_meta_include_file;
-
 		html_begin();
 		html_head_begin();
 		html_content_type();
 		html_title();
-		html_css( $g_css_include_file );
-		include( $g_meta_include_file );
+		html_css( config_get( 'css_include_file' ) );
+		include( config_get( 'meta_include_file' ) );
 	}
 	# --------------------
 	# core part of page top but without login info and menu - used in login pages
 	function html_page_top2a() {
-		global $g_top_include_page;
-
 		html_head_end();
 		html_body_begin();
 		html_header();
-		html_top_banner( $g_top_include_page );
+		html_top_banner( config_get( 'top_include_page' ) );
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
@@ -72,13 +68,11 @@
 	# --------------------
 	# core page bottom - used in login pages
 	function html_page_bottom1a( $p_file = null ) {
-		global $g_bottom_include_page;
-
 		if ( null === $p_file ) {
 			$p_file = basename( $GLOBALS['PHP_SELF'] );
 		}
 
-		html_bottom_banner( $g_bottom_include_page );
+		html_bottom_banner( config_get( 'bottom_include_page' ) );
 		html_footer( $p_file );
 		html_body_end();
 		html_end();
@@ -193,11 +187,7 @@
 	# --------------------
 	# (12) Prints the bottom of page information
 	function html_footer( $p_file ) {
-		global 	$g_string_cookie_val, $g_webmaster_email,
-				$g_menu_include_file, $g_show_footer_menu,
-				$g_mantis_version, $g_show_version,
-				$g_timer, $g_show_timer,
-				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
+		global $g_timer, $g_queries_array;
 
 		print_source_link( $p_file );
 
@@ -212,19 +202,19 @@
 
 		echo '<br />';
 		echo '<hr size="1" />';
-		if ( ON == $g_show_version ) {
-			echo "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
+		if ( ON == config_get( 'show_version' ) ) {
+			echo "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis " . config_get( 'mantis_version' ) . "</a></span>";
 		}
 		echo '<address>Copyright (C) 2000 - 2003</address>';
-		echo "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
-		if ( ON == $g_show_timer ) {
+		echo '<address><a href="mailto:"' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
+		if ( ON == config_get( 'show_timer' ) ) {
 			$g_timer->print_times();
 		}
-		if ( ON == $g_show_queries_count ) {
+		if ( ON == config_get( 'show_queries_count' ) ) {
 			$t_count = count( $g_queries_array );
 			echo "$t_count total queries executed.<br />";
 			echo count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
-			if ( ON == $g_show_queries_list ) {
+			if ( ON == config_get( 'show_queries_list' ) ) {
 				echo '<table>';
 				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
@@ -257,12 +247,9 @@
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
 	function html_login_info() {
-		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_complete_date_format, $g_use_javascript;
-
 		$t_username = current_user_get_field( 'username' );
 		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
-		$t_now = date( $g_complete_date_format );
+		$t_now = date( config_get( 'complete_date_format' ) );
 
 		echo '<table class="hide">';
 		echo '<tr>';
@@ -275,7 +262,7 @@
 			echo '<td class="login-info-right">';
 				echo '<form method="post" name="form_set_project" action="set_project.php">';
 
-				if ( ON == $g_use_javascript) {
+				if ( ON == config_get( 'use_javascript' )) {
 					echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
 					echo '<select name="project_id" class="small">';
@@ -297,10 +284,7 @@
 	# print the standard command menu at the top of the pages
 	# also prints the login info, time, and project select form
 	function print_menu() {
-		global	$g_string_cookie_val, $g_project_cookie_val,
-				$g_show_report, $g_view_summary_threshold;
-
-		if ( isset( $g_string_cookie_val ) ) {
+		if ( auth_is_user_authenticated() ) {
 			$t_protected = current_user_get_field( 'protected' );
 			echo '<table class="width100" cellspacing="0">';
 			echo '<tr>';
@@ -311,7 +295,7 @@
 					echo string_get_bug_report_link() . ' | ';
 				}
 
-				if ( access_has_project_level( $g_view_summary_threshold ) ) {
+				if ( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
 					echo '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
 				}
 
@@ -327,7 +311,7 @@
 				}
 				if ( access_has_project_level( MANAGER ) ) {
 					# Admin can edit news for All Projects (site-wide)
-					if ( ( "0000000" != $g_project_cookie_val ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
+					if ( ( 0 != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
 						echo '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					} else {
 						echo '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
@@ -480,9 +464,7 @@
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page='' ) {
-		global $g_path;
-
-		$g_path = $g_path.'doc/';
+		$t_path = config_get( 'path' ).'doc/';
 		$t_documentation_page = 'documentation_page.php';
 
 		switch ( $p_page ) {
@@ -491,22 +473,20 @@
 
 		echo '<br /><div align="center">';
 			print_bracket_link( $t_documentation_page, lang_get( 'system_info_link' ) );
-			print_bracket_link( $g_path.'ChangeLog', 'ChangeLog' );
-			print_bracket_link( $g_path.'README', 'README' );
-			print_bracket_link( $g_path.'INSTALL', 'INSTALL' );
-			print_bracket_link( $g_path.'UPGRADING', 'UPGRADING' );
-			print_bracket_link( $g_path.'CUSTOMIZATION', 'CUSTOMIZATION' );
+			print_bracket_link( $t_path.'ChangeLog', 'ChangeLog' );
+			print_bracket_link( $t_path.'README', 'README' );
+			print_bracket_link( $t_path.'INSTALL', 'INSTALL' );
+			print_bracket_link( $t_path.'UPGRADING', 'UPGRADING' );
+			print_bracket_link( $t_path.'CUSTOMIZATION', 'CUSTOMIZATION' );
 		echo '</div>';
 	}
 	# --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page='' ) {
-		global $g_use_jpgraph;
-
 		echo '<div align="center">';
 		print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 
-		if ( $g_use_jpgraph != 0 ) {
+		if ( config_get( 'use_jpgraph' ) != 0 ) {
 			$t_summary_page 		= 'summary_page.php';
 			$t_summary_jpgraph_page = 'summary_jpgraph_page.php';
 
@@ -523,12 +503,10 @@
 	# --------------------
 	# Print the color legend for the colors
 	function html_status_legend() {
-		global	$g_status_enum_string;
-
 		echo '<br />';
 		echo '<table class="width100" cellspacing="1">';
 		echo '<tr>';
-		$t_arr  = explode_enum_string( $g_status_enum_string );
+		$t_arr  = explode_enum_string( config_get( 'status_enum_string' ) );
 		$enum_count = count( $t_arr );
 		$width = (integer) (100 / $enum_count);
 		for ($i=0;$i<$enum_count;$i++) {
