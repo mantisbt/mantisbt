@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.23 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: project_api.php,v 1.24 2003-01-09 03:59:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -197,7 +197,7 @@
 
 		# Delete associations with custom field definitions.
 		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
-		    custom_field_delete_associations( $p_project_id );
+		    custom_field_unlink_all( $p_project_id );
 		}
 
 		# Delete the project categories

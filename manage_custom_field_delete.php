@@ -13,7 +13,7 @@
 	$f_field_id		= gpc_get_int( 'field_id' );
 
 	if( 0 == count( custom_field_get_project_ids( $f_field_id ) ) ) {
-		$result = custom_field_delete( $f_field_id );
+		$result = custom_field_destroy( $f_field_id );
 	} else {
 		$result = false;
 	}

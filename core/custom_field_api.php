@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.11 2003-01-08 05:55:26 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.12 2003-01-09 03:59:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -67,8 +67,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	# Check to see whether the field is included in the given project
 	#  return true if the field is included, false otherwise
 	#
-	# @@@ Rename to custom_field_is_linked()
-	function custom_field_in_project( $p_field_id, $p_project_id ) {
+	function custom_field_is_linked( $p_field_id, $p_project_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_field_id		= db_prepare_int( $p_field_id );
 
@@ -214,36 +213,6 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
-	# bind a custom field with the id $p_field_id to the
-	# project $p_project_id
-	# return true on success
-	# return false if an error occures (e.g. non existing id)
-	#
-	# @@@ Seems to be a duplicate to custom_field_add()
-	function custom_field_bind( $p_field_id, $p_project_id ) {
-		$c_field_id   = db_prepare_int( $p_field_id );
-		$c_project_id = db_prepare_int( $p_project_id );
-
-		custom_field_ensure_exists( $p_field_id );
-		project_ensure_exists( $p_project_id );
-
-		if( custom_field_in_project( $p_field_id, $p_project_id ) ) {
-			return false;
-		}
-		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "INSERT INTO
-				  $t_custom_field_project_table
-					( field_id, project_id )
-				  VALUES
-					( '$c_field_id', '$c_project_id' )";
-
-		db_query( $query );
-		# db_qery returns false if there's a problem
-
-		return true;
-	}
-
-	# --------------------
 	# Update the field definition
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
@@ -359,15 +328,16 @@ CREATE TABLE mantis_custom_field_project_table (
 
 	# --------------------
 	# Add a custom field to a project
-	#  return true on success, false on failure
-	#
-	# @@@ Should be renamed to custom_field_link()
-	function custom_field_add( $p_field_id, $p_project_id ) {
+	#  return true on success, false on failure or if already added
+	function custom_field_link( $p_field_id, $p_project_id ) {
 		$c_field_id		= db_prepare_int( $p_field_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		if ( custom_field_in_project( $p_field_id, $p_project_id ) ) {
-			return true;
+		custom_field_ensure_exists( $p_field_id );
+		project_ensure_exists( $p_project_id );
+
+		if ( custom_field_is_linked( $p_field_id, $p_project_id ) ) {
+			return false;
 		}
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
@@ -388,9 +358,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	# The values for the custom fields are not deleted.  This is to allow for the 
 	# case where a bug is moved to another project that has the field, or the
 	# field is linked again to the project.
-	#
-	# @@@ Should be renamed to custom_field_unlink()
-	function custom_field_remove( $p_field_id, $p_project_id ) {
+	function custom_field_unlink( $p_field_id, $p_project_id ) {
 		$c_field_id		= db_prepare_int( $p_field_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
@@ -408,9 +376,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	# Delete the field definition and all associated values and project
 	#  associations
 	#  return true on success, false on failure
-	#
-	# @@@ Should be renamed to custom_field_destroy()
-	function custom_field_delete( $p_field_id ) {
+	function custom_field_destroy( $p_field_id ) {
 		$c_field_id = db_prepare_int( $p_field_id );
 
 		# delete all values
@@ -443,9 +409,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	#  return true on success, false on failure
 	#
 	# To be called from within project_delete().
-	#
-	# @@@ custom_field_unlink_all()
-	function custom_field_delete_associations( $p_project_id ) {
+	function custom_field_unlink_all( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		# delete all project associations
@@ -505,9 +469,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	# Return an array of ids of custom fields bound to the specified project
 	#
 	# The ids will be sorted based on the sequence number associated with the binding
-	#
-	# @@@ Rename to custom_field_get_linked_ids()
-	function custom_field_get_bound_ids( $p_project_id ) {
+	function custom_field_get_linked_ids( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );

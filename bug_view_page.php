@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.23 2003-01-02 05:47:27 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.24 2003-01-09 03:59:16 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -275,7 +275,7 @@
 	<td colspan="6"></td>
 </tr>
 <?php
-	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( !$t_def['advanced'] ) {

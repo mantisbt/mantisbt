@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.46 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_update.php,v 1.47 2003-01-09 03:59:16 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@
 	bug_update( $f_bug_id, $t_bug_data, true );
 
 if( ON == config_get( 'use_experimental_custom_fields' ) ) {
-	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );

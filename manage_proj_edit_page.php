@@ -272,7 +272,7 @@
 	<td width="100%">
 		<table width="100%" cellspacing="1">
 		<?php
-			$t_custom_fields = custom_field_get_bound_ids( $f_project_id );
+			$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
 
 			foreach( $t_custom_fields as $t_field_id ) {
 				$t_desc = custom_field_get_definition( $t_field_id );
@@ -306,7 +306,7 @@
 
 				foreach( $t_custom_fields as $t_field_id )
 				{
-					if( !custom_field_in_project( $t_field_id, $f_project_id ) ) {
+					if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
 						$t_desc = custom_field_get_definition( $t_field_id );
 						echo "<option value=\"$t_field_id\">" . $t_desc['name'] . '</option>' ;
 					}

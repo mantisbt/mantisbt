@@ -13,7 +13,7 @@
 	$f_field_id		= gpc_get_int( 'field_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );
 
-	custom_field_bind( $f_field_id, $f_project_id );
+	custom_field_link( $f_field_id, $f_project_id );
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 ?>
