@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.09.xx  -  0.19.0
+
+
+
 2004.08.28  -  0.19.0rc1
 
 This is the first release candidate for 0.19.0, it requires database upgrade.  We consider this release considerably more stable than the 0.19.0a2.  This is a feature complete release, hence, 0.19.0 is not expected to include new features, but only bug fixes.
