@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2005.01.xx  -  0.19.2
+
+
+
 2004.11.06  -  0.19.1
 
 - 0004341: [security] Users removed from projects are still listed as 'monitoring' bugs (DGtlRift)
