@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.37 2003-02-20 16:12:50 jlatour Exp $
+	# $Id: bug_resolve.php,v 1.38 2003-02-26 09:24:55 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,7 +27,8 @@
 	$f_duplicate_id	= gpc_get_int( 'duplicate_id', null );
 	$f_close_now	= gpc_get_bool( 'close_now' );
 
-	access_ensure_bug_level( max( config_get( 'update_bug_threshold' ), config_get( 'handle_bug_threshold' ) ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
 
 	# make sure the bug is not being marked as a duplicate of itself
 	if ( $f_duplicate_id === $f_bug_id ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.34 2003-02-20 16:12:50 jlatour Exp $
+	# $Id: bug_assign.php,v 1.35 2003-02-26 09:24:55 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,8 @@
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	access_ensure_bug_level( max( config_get( 'update_bug_threshold' ), config_get( 'handle_bug_threshold' ) ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
 
 	bug_assign( $f_bug_id, auth_get_current_user_id() );
 
