@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.22 2002-11-10 21:38:22 jfitzell Exp $
+	# $Id: helper_api.php,v 1.23 2002-11-10 21:39:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -202,7 +202,8 @@
 
 		if ( null === $t_project_id ) {
 			$t_pref = current_user_get_pref( 'default_project' );
-			if ( '' == $t_pref ) {
+			if ( '' == $t_pref ) { #@@@ this shouldn't happen but may because of
+								   #  of DB data from before 0.18
 				$t_pref = 0;
 			}
 			return (int)$t_pref;
