@@ -8,49 +8,32 @@
 <?php
 	error_reporting( E_ALL );
 
-	$g_skip_open_db = true;  // don't open the database in database_api.php
-	require_once( 'admin_inc.php' );
+	$g_skip_open_db = true;  # don't open the database in database_api.php
+	@require_once( '../core.php' );
 
-	# mail test
-	if ( isset( $f_mail_test ) ) {
-		$result = mail( $g_administrator_email, 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', "From: $g_administrator_email\n" );
-	}
+	$f_mail_test	= gpc_get_bool( 'mail_test' );
+	$f_password		= gpc_get_string( 'password', null );
 
-	define( "CRYPT2", 10 );
-	define( "CRYPT3", 20 );
-
-	function get_password( $p_test_password, $p_type ) {
-		switch( $p_type ) {
-		case CRYPT:	$salt = substr( $p_test_password, 0, 2 );
-					return crypt( $p_test_password, $salt );
-		case CRYPT_FULL_SALT:$salt = $p_test_password;
-					return crypt( $p_test_password, $salt );
-		case PLAIN:	return $p_test_password;
-		case MD5:	return md5( $p_test_password );
-		#case LDAP:	if ( ldap_uid_pass( $f_username, $p_test_password ) ) {
-		}
-	}
-
-	define( "BAD", 0 );
-	define( "GOOD", 1 );
+	define( 'BAD', 0 );
+	define( 'GOOD', 1 );
 
 	function print_test_result( $p_result ) {
 		if ( BAD == $p_result ) {
-			PRINT '<td bgcolor="#ff0088">BAD</td>';
+			echo '<td bgcolor="#ff0088">BAD</td>';
 		}
 
 		if ( GOOD == $p_result ) {
-			PRINT '<td bgcolor="#00ff88">GOOD</td>';
+			echo '<td bgcolor="#00ff88">GOOD</td>';
 		}
 	}
 
 	function print_yes_no( $p_result ) {
-		if (( 0 === $p_result ) || ( "no" === strtolower( $p_result ) )) {
-			PRINT '<font bgcolor="#ff0088">No</font>';
+		if ( ( 0 === $p_result ) || ( "no" === strtolower( $p_result ) ) ) {
+			echo 'No';
 		}
 
-		if (( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) )) {
-			PRINT '<font bgcolor="#00ff88">Yes</font>';
+		if ( ( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) ) ) {
+			echo 'Yes';
 		}
 	}
 
@@ -63,16 +46,14 @@
 body { background-color: #ffffff; font-family:Verdana, Arial; font-size: 10pt }
 td { font-family:Verdana, Arial; font-size: 10pt }
 p { font-family:Verdana, Arial; font-size: 10pt }
-address { font-family:Verdana, Arial; font-size: 8pt }
-span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
-span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; font-weight: bold; }
+.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; font-weight: bold; }
 </style>
 </head>
 <body>
 
 <h2>Admin Check</h2>
 
-<?php # ---- Version Check ---- ?>
+<!-- Version Check -->
 <table width="100%" bgcolor="#0000aa" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f0f0ff">
@@ -86,18 +67,19 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 <br />
 
 <table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
-<!-- Test DATABASE part 1 -->
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking your installation</span>
 	</td>
 </tr>
+
+<!-- Test DATABASE part 1 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Opening connection to database on host [<?php echo $g_hostname ?>] with username [<?php echo $g_db_username ?>]
+		Opening connection to database on host [<?php echo config_get( 'hostname' ) . ':' . config_get( 'port' ) ?>] with username [<?php echo config_get( 'db_username' ) ?>]
 	</td>
 	<?php
-		$result = mysql_connect( $g_hostname, $g_db_username, $g_db_password );
+		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ), config_get( 'port' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {
@@ -105,13 +87,14 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		}
 	?>
 </tr>
+
 <!-- Test DATABASE part 2 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Selecting database [<?php echo $g_database_name ?>]
+		Selecting database [<?php echo config_get( 'database_name' ) ?>]
 	</td>
 	<?php
-		$result = mysql_select_db( $g_database_name );
+		$result = @db_select_db( config_get( 'database_name' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {
@@ -119,48 +102,59 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		}
 	?>
 </tr>
+
 <!-- Absolute path check -->
 <tr>
 	<td bgcolor="#ffffff">
-		Checking to see if your $g_absolute_path variable has a trailing / "<?php echo $g_absolute_path ?>"
+		Checking to see if your absolute_path config option has a trailing slash: "<?php echo config_get( 'absolute_path' ) ?>"
 	</td>
 	<?php
-		if (( "\\" == $g_absolute_path[strlen($g_absolute_path)-1] ) ||
-			( "/"  == $g_absolute_path[strlen($g_absolute_path)-1] )) {
+		$t_absolute_path = config_get( 'absolute_path' );
+
+		if ( ( "\\" == substr( $t_absolute_path, -1, 1 ) ) ||
+			 ( "/"  == substr( $t_absolute_path, -1, 1 ) ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
 		}
 	?>
 </tr>
-<?php # ---- Windows ? ---- 
-if (substr(php_uname(), 0, 7) == 'Windows') {
+
+
+<?php
+# Windows-only checks
+if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 ?>
+<!-- Email Validation -->
 <tr>
 	<td bgcolor="#ffffff">
-		$g_validate_email = OFF?
+		validate_email = OFF?
 	</td>
 	<?php
-		if ( ON != $g_validate_email ) {
+		if ( ON != config_get( 'validate_email' ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
 		}
 	?>
 </tr>
+
+<!-- MX Record Checking -->
 <tr>
 	<td bgcolor="#ffffff">
-		$g_check_mx_record = OFF?
+		check_mx_record = OFF?
 	</td>
 	<?php
-		if ( ON != $g_check_mx_record ) {
+		if ( ON != config_get( 'check_mx_record' ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
 		}
 	?>
 </tr>
-<?php } ?>
+<?php } # windows-only check ?>
+
+
 
 <!-- PHP Setup check -->
 <?php
@@ -185,12 +179,12 @@ if (substr(php_uname(), 0, 7) == 'Windows') {
 ?>
 </table>
 
-</p>
 
 <!-- register_globals check -->
 <?php
-	$t_register_globals = ini_get( 'register_globals' );
-	if ( 'off' != $t_register_globals || $t_register_globals ) { ?>
+	if ( ini_get_bool( 'register_globals' ) ) { ?>
+		<br />
+
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 		<tr>
 			<td bgcolor="#ffcc22">
@@ -207,26 +201,29 @@ if (substr(php_uname(), 0, 7) == 'Windows') {
 	}
 ?>
 
-<?php # ---- Uploads ? ---- ?>
+<br />
+
+
+<!-- Uploads -->
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4f4f4">
 		<span class="title">File Uploads</span><br />
 		<?php
-			if ( ini_get( 'file_uploads' ) ) {
+			if ( ini_get_bool( 'file_uploads' ) && config_get( 'allow_file_upload' ) ) {
 		?>
 				<p>File uploads are ENABLED</p>
 
 				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get( 'upload_max_filesize' ) ?><br />
 				PHP variable 'post_max_size': <?php echo ini_get( 'post_max_size' ) ?><br />
-				Mantis variable '$g_max_file_size': <?php echo $g_max_file_size ?> bytes</p>
+				Mantis variable 'max_file_size': <?php echo config_get( 'max_file_size' ) ?> bytes</p>
 
 				<p>There may also be settings in Apache (or MySQL if using the SQL upload method) that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.</p>
 		<?php
 			} else {
 		?>
-				<p>File uploads are DISABLED.  To enable them, add "file_uploads = TRUE" to your php.ini file</p>
+				<p>File uploads are DISABLED.  To enable them, make sure <tt>file_uploads = on</tt> is in your php.ini file and <tt>allow_file_upload = ON</tt> is in your mantis config file.</p>
 		<?php
 			}
 		?>
@@ -236,63 +233,40 @@ if (substr(php_uname(), 0, 7) == 'Windows') {
 
 <br />
 
+
+<!-- Email testing -->
 <a name="email"></a>
-<?php # ---- Email testing ---- ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4f4f4">
 		<span class="title">Testing Email</span>
-		<p>
-		You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
-		</p>
-		<?php if ( isset( $f_mail_test ) ) { ?>
-		<b><font color="#ff0000">Mail sent</font></b> -
+		<p>You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.</p>
 		<?php
-				if ( !$result ) {
-					PRINT " PROBLEMS SENDING MAIL TO: $g_administrator_email. Please check your php/mail server settings.<p>";
-				} else {
-					PRINT " mail() send successful.<p>";
-				}
+		if ( $f_mail_test ) {
+			echo '<b><font color="#ff0000">Mail sent</font></b> - ';
+			
+			$result = mail( config_get( 'administrator_email' ), 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', 'From: ' . config_get( 'administrator_email' ) . "\n" );
+
+			if ( !$result ) {
+				echo ' PROBLEMS SENDING MAIL TO: ' . config_get( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
+			} else {
+				echo ' mail() send successful.<br />';
 			}
+		}
 		?>
-		<form method="post" action="<?php echo $PHP_SELF ?>#email">
-		Email Address: <?php echo $g_administrator_email; ?><br />
-		<input type="submit" value="Send Mail" name="f_mail_test" />
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>#email">
+		Email Address: <?php echo config_get( 'administrator_email' ); ?><br />
+		<input type="submit" value="Send Mail" name="mail_test" />
 		</form>
 	</td>
 </tr>
 </table>
 
 <br />
-<a name="password"></a>
-<?php # ---- Password ---- ?>
-<table width="100%" bgcolor="#008800" border="0" cellpadding="20" cellspacing="1">
-<tr>
-	<td bgcolor="#f4fff4">
 
-		<span class="title">Password Check:</span>
-		<p>
-		<form method="post" action="<?php echo $PHP_SELF ?>#password">
-		Password: <input type="text" size="32" name="f_password" value="<?php if ( isset( $f_password ) ) echo $f_password ?>" /><br />
-		<input type="submit" name="f_password_test" />
-		</form>
-		<?php
-				if ( isset( $f_password_test ) ) {
-					echo "Password: ".get_password( $f_password, PLAIN )."<br />";
 
-					$crypt_pass = get_password( $f_password, CRYPT );
-					echo "CRYPT: ".get_password( $crypt_pass, CRYPT )."<br />";
-					echo "CRYPT_FULL_SALT: ".get_password( $f_password, CRYPT_FULL_SALT )."<br />";
-					echo "MD5: ".get_password( $f_password, MD5 )."<br />";
-				}
-		?>
-	</td>
-</tr>
-</table>
-
-<br />
+<!-- CRYPT CHECKS -->
 <a name="crypt"></a>
-<?php # ---- CRYPT CHECKS ---- ?>
 <table width="100%" bgcolor="#aa0000" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#fff0f0">
@@ -309,7 +283,7 @@ if (substr(php_uname(), 0, 7) == 'Windows') {
 		<br />
 		Blowfish:
 		<?php print_yes_no( CRYPT_BLOWFISH ) ?>
-                </p>
+		</p>
 	</td>
 </tr>
 </table>
