@@ -353,7 +353,7 @@
 	$s_version_deleted_msg = "Versão apagada com sucesso...";
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Tem certeza que deseja Remover esta versão?"; Todos os Bugs anexados serão Removidos.";
+	$s_version_delete_sure = "Tem certeza que deseja Remover esta versão?";
 	$s_delete_version_button = "Remover Versão";
 
 	# manage_project_version_edit_page.php3
@@ -506,7 +506,7 @@
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Relatório Avançado";
-	$s_upload_file = "Enviar Arquivo"
+	$s_upload_file = "Enviar Arquivo";
 	$s_report_stay = "Relatório Permanente";
 
 	# set_project.php3
