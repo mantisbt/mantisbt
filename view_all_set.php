@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.23 2004-03-26 20:30:26 narcissus Exp $
+	# $Id: view_all_set.php,v 1.24 2004-03-27 20:22:56 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -15,6 +15,7 @@
 	$f_type					= gpc_get_int( 'type', -1 );
 	$f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 	$f_print				= gpc_get_bool( 'print' );
+	$f_temp_filter			= gpc_get_bool( 'temporary' );
 
 	$f_show_category		= gpc_get_string( 'show_category', 'any' );
 	$f_show_severity		= gpc_get_string( 'show_severity', 'any' );
@@ -50,6 +51,10 @@
 		}
 	}
 
+	if ( $f_temp_filter ) {
+		$f_type = 1;
+	}
+	
 	if ( $f_hide_closed ) {
 		$f_hide_closed = 'on';
 	}
@@ -228,12 +233,15 @@
 	$t_settings_serialized = serialize( $t_setting_arr );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
-	# Store the filter string in the database: its the current filter, so some values won't change
-	$t_row_id = filter_db_set_for_current_user( -1, false, '', $t_settings_string );
-
-	# set cookie values
-	setcookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
-
+	# If only using a temporary filter, don't store it in the database
+	if ( !$f_temp_filter ) {
+		# Store the filter string in the database: its the current filter, so some values won't change
+		$t_row_id = filter_db_set_for_current_user( -1, false, '', $t_settings_string );
+	
+		# set cookie values
+		setcookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
+	}
+	
 	# redirect to print_all or view_all page
 	if ( $f_print ) {
 		$t_redirect_url = 'print_all_bug_page.php';
@@ -241,5 +249,9 @@
 		$t_redirect_url = 'view_all_bug_page.php';
 	}
 
+	if ( $f_temp_filter ) {
+		$t_redirect_url = $t_redirect_url . '?filter=' . $t_settings_serialized;
+	}
+	
 	print_header_redirect( $t_redirect_url );
 ?>

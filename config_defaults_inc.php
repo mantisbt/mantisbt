@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.156 2004-03-26 09:31:15 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.157 2004-03-27 20:22:55 narcissus Exp $
 	# --------------------------------------------------------
 
 	
@@ -795,6 +795,12 @@
 	# eg. for # a link would be #45
 	# eg. for bug: a link would be bug:98
 	$g_bug_link_tag			= '#';
+
+	# --- Bug Count Linking ----------
+	# this is the prefix to use when creating links to bug views from bug counts (eg. on the main
+	# page and the summary page).
+	# $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1';				# permanently change the filter
+	$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';	# only change the filter this time
 
 	# --- Queries --------------------
 	# Shows the total number/unique number of queries executed to serve the page.
