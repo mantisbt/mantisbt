@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.2 2004-07-15 13:32:12 vboctor Exp $
+	# $Id: my_view_inc.php,v 1.3 2004-07-18 10:09:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,9 @@
 
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
+	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
+	$t_hide_status_default = config_get( 'hide_status_default' );
+	$t_default_show_changed = config_get( 'default_show_changed' );
 ?>
 
 <?php
@@ -35,13 +38,13 @@
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
-		'highlight_changed'	=> '6',
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => $t_current_user_id ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
-		'hide_status'		=> Array ( '0' => 80 ),
+		'hide_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
 
@@ -49,7 +52,7 @@
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
-		'highlight_changed'	=> '6',
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => 'any' ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
@@ -63,28 +66,28 @@
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
-		'highlight_changed'	=> '6',
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
 		'handler_id'		=> Array ( '0' => 'any' ),
 		'sort'			=> 'last_updated',
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
-		'hide_status'		=> Array ( '0' => 90 ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
 
 	$c_filter['resolved'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 80 ),
-		'highlight_changed'	=> '6',
+		'show_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => 'any' ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
-		'hide_status'		=> Array ( '0' => 90 ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
 
@@ -92,13 +95,13 @@
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
-		'highlight_changed'	=> '6',
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => 'none' ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
-		'hide_status'		=> Array ( '0' => 90 ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
 
@@ -106,13 +109,13 @@
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
-		'highlight_changed'	=> '6',
+		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => 'none' ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
-		'hide_status'		=> Array ( '0' => 90 ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
 
