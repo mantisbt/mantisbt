@@ -5,15 +5,15 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Estonian: Villem Vannas, willu60@hotmail.com
+	# Estonian: Villem Vannas, willu60@hotmail.com (14.09.2004)
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-14 04:59:16 $
 	#
-	# $Id: strings_estonian.txt,v 1.15 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_estonian.txt,v 1.16 2004-09-14 04:59:16 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,30 +22,30 @@ $s_charset = 'Windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Liiguta';
-$s_actiongroup_menu_copy = 'Copy';
+$s_actiongroup_menu_copy = 'Kopeeri';
 $s_actiongroup_menu_assign = 'Määra';
 $s_actiongroup_menu_close = 'Sulge';
 $s_actiongroup_menu_delete = 'Kustuta';
 $s_actiongroup_menu_resolve = 'Lahenda';
 $s_actiongroup_menu_update_priority = 'Uuenda prioriteet';
 $s_actiongroup_menu_update_status = 'Uuenda olek';
-$s_actiongroup_menu_update_view_status = 'Update View Status';
-$s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_menu_update_view_status = 'Uuenda vaate olek';
+$s_actiongroup_bugs = 'Valitud kanded';
 
 # new strings:
 $s_all_projects = 'Kõik projektid';
-$s_move_bugs = 'Liiguta bugid';
+$s_move_bugs = 'Liiguta kanded';
 $s_operation_successful = 'Operatsioon õnnestus.';
 $s_date_order = 'Kuupäeva järgi';
 $s_print_all_bug_page_link = 'Trüki teated';
 $s_csv_export = 'CSV Eksport';
 $s_login_anonymously = 'Logi sisse anonüümselt';
 $s_anonymous = 'Anonüümne';
-$s_jump_to_bugnotes = 'Mine bugi märkustesse';
+$s_jump_to_bugnotes = 'Mine kande märkustesse';
 $s_public_project_msg = 'See projekt on AVALIK.  Kõik kasutajad omavad sellele juurdepääsu.';
 $s_private_project_msg = 'See projekt on PRIVAATNE.  Ainult administraator ja eraldi lisatud kasutajad omavad sellele juurdepääsu.';
 $s_access_level_project = 'Projekti kasutamisõiguste tase';
-$s_view_submitted_bug_link = 'Näita lisatud bugi';
+$s_view_submitted_bug_link = 'Näita lisatud kanne';
 $s_assigned_projects = 'Määratud projektid';
 $s_unassigned_projects = 'Määramata projektid';
 $s_print = 'Trüki';
@@ -53,7 +53,7 @@ $s_jump = 'Mine';
 $s_copy_users = 'Kopeeri kasutajad';
 $s_copy_categories_from = 'Kopeeri kategooriad siit';
 $s_copy_categories_to = 'Kopeeri kategooriad sinna';
-$s_bug_history = 'Bugi ajalugu';
+$s_bug_history = 'Kande ajalugu';
 $s_field = 'Väli';
 $s_old_value = 'Vana väärtus';
 $s_new_value = 'Uus väärtus';
@@ -61,8 +61,8 @@ $s_date_modified = 'Muudatuse kuupäev';
 $s_bugnote = 'Märkus';
 $s_change = 'Muuda';
 $s_bugnote_view_state = 'Näita märkuse olek';
-$s_bug_monitor = 'Bugiga tegeldakse';
-$s_bug_end_monitor = 'Lõpeta Bugiga tegelemine';
+$s_bug_monitor = 'Kandega tegeldakse';
+$s_bug_end_monitor = 'Lõpeta kandega tegelemine';
 $s_announcement = 'Teadaanne';
 $s_stays_on_top = 'Püsi pealmisena';
 $s_delete_bugnote_button = 'Kustuta märkus';
@@ -71,23 +71,23 @@ $s_bug_relationships = 'Seosed';
 $s_empty_password_sure_msg = 'Kasutajal on tühi parool.  Oled kindel, et soovid seda?';
 $s_empty_password_button = 'Kasuta tühja parooli';
 
-$s_duplicate_of = 'duplikaatne bugi %id';
+$s_duplicate_of = 'duplikaatne kande %id';
 $s_has_duplicate = 'on duplikaat %id';
-$s_related_to = 'sugulane bugiga %id';
-$s_dependant_on = 'sõltub bugist %id';
-$s_blocks = 'blokeerib bugi %id';
+$s_related_to = 'sugulane kandega %id';
+$s_dependant_on = 'sõltub kandest %id';
+$s_blocks = 'blokeerib kande %id';
 
-$s_new_bug = 'Uus Bugi';
+$s_new_bug = 'Uus kanne';
 $s_bugnote_added = 'Märkus lisatud';
 $s_bugnote_edited = 'Märkus redigeeritud';
 $s_bugnote_deleted = 'Märkus kustutatud';
 $s_summary_updated = 'Kokkuvõte uuendatud';
 $s_description_updated = 'Kirjeldus uuendatudd';
 $s_additional_information_updated = 'Lisainformatsioon uuendatud';
-$s_steps_to_reproduce_updated = 'Bugi kordamise sammud uuendatud';
+$s_steps_to_reproduce_updated = 'Juhtumi kordamise sammud uuendatud';
 $s_file_added = 'Fail lisatud';
 $s_file_deleted = 'Fail kustutatud';
-$s_bug_deleted = 'Bugi kustutatud';
+$s_bug_deleted = 'Kanne kustutatud';
 
 $s_make_private = 'Tee privaateseks';
 $s_make_public = 'Tee avalikuks';
@@ -97,27 +97,27 @@ $s_create_new_project_link = 'Loo uus projekt';
 $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Sul pole vajalikke õigusi järgmise bugiga tegelemiseks: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
-$s_close_bugs_conf_msg = 'Oled kindel, et soovid sulgeda need bugid ?';
-$s_delete_bugs_conf_msg = 'Oled kindel, et soovid kustutada need bugid ?';
-$s_move_bugs_conf_msg = 'Liiguta bugid sinna';
-$s_copy_bugs_conf_msg = 'Copy issues to';
-$s_assign_bugs_conf_msg = 'Määra bugid kasutajale';
-$s_resolve_bugs_conf_msg = 'Vali bugi lahendus';
-$s_priority_bugs_conf_msg = 'Vali bugi prioriteet';
-$s_status_bugs_conf_msg = 'Vali bugi olek';
-$s_view_status_bugs_conf_msg = 'Choose issues view status';
-$s_close_group_bugs_button = 'Sulge bugid' ;
-$s_delete_group_bugs_button = 'Kustuta bugid' ;
-$s_move_group_bugs_button = 'Liiguta bugid' ;
-$s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Määra bugid' ;
-$s_resolve_group_bugs_button = 'Lahenda bugid' ;
+$s_bug_actiongroup_failed = 'Sul pole vajalikke õigusi järgmise kandega tegelemiseks: ';
+$s_bug_actiongroup_access = 'Sul pole vajalikke õigusi selle tegevuse sooritamiseks.';
+$s_bug_actiongroup_status = 'Seda kannet ei saa muuta soovitud olekusse';
+$s_close_bugs_conf_msg = 'Oled kindel, et soovid sulgeda need kanded ?';
+$s_delete_bugs_conf_msg = 'Oled kindel, et soovid kustutada need kanded ?';
+$s_move_bugs_conf_msg = 'Liiguta kanded sinna';
+$s_copy_bugs_conf_msg = 'Kopeeri kanded sinna';
+$s_assign_bugs_conf_msg = 'Määra kanded kasutajale';
+$s_resolve_bugs_conf_msg = 'Vali kande lahendus';
+$s_priority_bugs_conf_msg = 'Vali kande prioriteet';
+$s_status_bugs_conf_msg = 'Vali kande olek';
+$s_view_status_bugs_conf_msg = 'Vali kande vaate olek';
+$s_close_group_bugs_button = 'Sulge kanded' ;
+$s_delete_group_bugs_button = 'Kustuta kanded' ;
+$s_move_group_bugs_button = 'Liiguta kanded' ;
+$s_copy_group_bugs_button = 'Kopeeri kanded' ;
+$s_assign_group_bugs_button = 'Määra kanded' ;
+$s_resolve_group_bugs_button = 'Lahenda kanded' ;
 $s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
 $s_status_group_bugs_button = 'Uuenda olekut' ;
-$s_view_status_group_bugs_button = 'Update View Status';
+$s_view_status_group_bugs_button = 'Uuenda vaate olekut';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graafikute süntees oleku järgi' ;
@@ -185,13 +185,13 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Uudiseid ei leitud.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Parool ei klapi kontrollparooliga.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Eeldati massiivi, aga vastu võeti string.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu võeti massiiv.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bugi %d ei leitud.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Kannet %d ei leitud.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Vigane e-posti aadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Faili tüüp pole üleslaadimiseks lubatud.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'See on korduv fail.  Palun kustuta kõigepealt varasem fail.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Vigane failitee.  Kataloog kas puudub või pole veebiserveri poolt kirjutatav';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Pole võimalik määrata bugi iseenda duplikaadiks.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Pole võimalik määrata kannet iseenda duplikaadiks.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Kasutaja välja ei leitud';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'See on duplikaatne kasutaja väli.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Vähemalt üks projekt kasutab seda välja.';
@@ -211,27 +211,27 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiooni ei leitud.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Kasutajanimi on vigane. Kasutajanimi võib sisaldada tähti, numbreid, tühikuid, sidekriipsu ja allkriipsu.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Kasutaja ei oma vajalikku kasutajaõiguste taset';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Valitud "Tegelik Nimi" langeb kokku teise kasutaja LOGIN nimega. Palun vali mõni teine.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorluse tugi pole lubatud.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsolust %d ei leitud.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorlus (%s) on väiksm kui miinimumväärtus (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Puudub vajalik pöördusõiguste tase, et käsitleda spondeeritud kandeid.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Keelatud: Spondeeritud kannete määramiseks on vajalik kõrgem pöördusõiguste tase.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor pole oma e-posti aadressi andnud. Palun uuenda oma profiili.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguratsiooni parameeter \'%s\' omab invaliidset väärtust \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tegevust ei saa sooritada, kuna kanne \'%d\' on ainult lugemiseks';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Kahe kande vahel oli juba varem seos.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Seost ei leitud.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Keelatud: Kanne %d nõuab suuremat pöördusõiguste taset.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Kanne ei saa olla sõltuv iseendast.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Kinnituse räsi ei klapi. Proovi uuesti.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Sinu kadunud parool\' omadus ei ole saadaval.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pead näitama e-posti aadressi, et taastada parool';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Esitatud informatsioon ei klaspi ühegi kasutajakontoga!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Kinnituse URL on vigane või varem kasutatud. Palun registreeru uuesti.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. arv töödeldavaid päringuid saavutatud. Palun kontakteeru süsteemi administraatoriga';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Sinu kasutajakonto on keelatud või blokeeritud(liiga palju ebaõnnestunud üritusi) või sisestatud kasutajanimi/parool on ebakorrektsed.';
 $s_login_error = 'VIGA: Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
 
@@ -262,45 +262,45 @@ $s_projection_enum_string = '10:pole,30:lihtne,50:kerge korrastada,70:raske ümbe
 $s_eta_enum_string = '10:pole,20:< 1 päev,30:2-3 päeva,40:< 1 nädal,50:< 1 kuu,60:> 1 kuu';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'Kasutajakonto registreerimine';
+$s_new_account_greeting = 'Täname registreerimast. Sul on kasutajakonto kasutajanimega\'';
+$s_new_account_greeting2 = '\'. Selleks, et lõpetada registreerimine, külasta järgmist URL-i (kontrolli, et oleks sisestatud ühele reale) ja määratle oma parool:';
 $s_new_account_username = 'Kasutaja: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
-$s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_message = 'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.' . "\n\n";
+$s_new_account_do_not_reply = 'ÄRA VASTA SELLELE TEATELE';
+$s_new_account_email = 'E-post: ';
+$s_new_account_IP = 'IP aadress: ';
+$s_new_account_signup_msg = 'Loodud on järgmine kasutajakonto:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = 'Keegi (loodetavasti sina) soovis vahetada parooli e-posti kontrollimeetodil. Kui see polnud sina, ignoreeri seda teadet ja midagi ei juhtu.' . "\n\n" . 'Kui sa soovisid seda uuendust, siis külasta järgmist URL-i, et vahetada oma parool:';
+$s_reset_request_in_progress_msg = 'Kui sa esitasid oma kasutajakonto õige kasutajanime ja e-posti aadressi, saadame me sellele aadressile kinnitusteate. Kui teade on saabunud, järgi selles esitatud instruktsioone, et muuta oma kasutajakonto parool.';
 
-$s_email_notification_title_for_status_bug_feedback = 'Järgmine bugi vajab sinu TAGASISIDET.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Järgnev bugi on TUNNISTATUD.';
-$s_email_notification_title_for_status_bug_confirmed = 'Järgmine bugi on KINNITATUD.';
-$s_email_notification_title_for_status_bug_assigned = 'Järgmine bugi on MÄÄRATUD.';
-$s_email_notification_title_for_status_bug_resolved = 'Järgmine bugi on LAHENDATUD.';
-$s_email_notification_title_for_status_bug_closed = 'Järgmine bugi on SULETUD';
+$s_email_notification_title_for_status_bug_feedback = 'Järgmine kanne vajab sinu TAGASISIDET.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Järgnev kanne on TUNNISTATUD.';
+$s_email_notification_title_for_status_bug_confirmed = 'Järgmine kanne on KINNITATUD.';
+$s_email_notification_title_for_status_bug_assigned = 'Järgmine kanne on MÄÄRATUD.';
+$s_email_notification_title_for_status_bug_resolved = 'Järgmine kanne on LAHENDATUD.';
+$s_email_notification_title_for_status_bug_closed = 'Järgmine kanne on SULETUD';
 
-$s_email_notification_title_for_action_bug_submitted = 'Järgmine bugi on TEATATUD.';
-$s_email_notification_title_for_action_bug_assigned = 'Järgmine bugi on MÄÄRATUD.';
-$s_email_notification_title_for_action_bug_reopened = 'Järgmine bugi on UUESTIAVATUD.';
-$s_email_notification_title_for_action_bug_deleted = 'Järgmine bugi on KUSTUTATUD.';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
-$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
-$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_bug_submitted = 'Järgmine kanne on TEATATUD.';
+$s_email_notification_title_for_action_bug_assigned = 'Järgmine kanne on MÄÄRATUD.';
+$s_email_notification_title_for_action_bug_reopened = 'Järgmine kanne on UUESTIAVATUD.';
+$s_email_notification_title_for_action_bug_deleted = 'Järgmine kanne on KUSTUTATUD.';
+$s_email_notification_title_for_action_bug_updated = 'Järgmine kanne on UUENDATUD.';
+$s_email_notification_title_for_action_sponsorship_added = 'Järgmine kanne on SPONSOREERITUD.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Järgmise kande sponsorlus on MUUDETUD.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Järgmise kande sponsorlus on KUSTUTATUD.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele bugile.';
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele kandele.';
+$s_email_notification_title_for_action_relationship_added = "Uus SEOS on järgmisele kandele lisatud.";
+$s_email_notification_title_for_action_relationship_deleted = "Selle kande SEOS on kustutatud.";
+$s_email_notification_title_for_action_relationship_child_resolved = "SEOTUD kanne on LAHENDATUD.";
+$s_email_notification_title_for_action_relationship_child_closed = "SEOTUD kanne on SULETUD.";
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';
 $s_email_project = 'Projekt';
-$s_email_bug = 'Bugi ID';
+$s_email_bug = 'Kande ID';
 $s_email_category = 'Kategooria';
 $s_email_reproducibility = 'Korratavus';
 $s_email_severity = 'Raskusaste';
@@ -308,7 +308,7 @@ $s_email_priority = 'Prioriteet';
 $s_email_status = 'Olek';
 $s_email_resolution = 'Lahendus';
 $s_email_duplicate = 'Duplikaatne';
-$s_email_fixed_in_version = 'Fixed in Version';
+$s_email_fixed_in_version = 'Parandatud versioonis';
 $s_email_date_submitted = 'Laekumise kuupäev';
 $s_email_last_modified = 'Viimati muudetud';
 $s_email_summary = 'Kokkuvõte';
@@ -327,7 +327,7 @@ $s_manage_profiles_link = 'Profiilid';
 $s_change_preferences_link = 'Eelistused';
 $s_edit_account_title = 'Redigeeri kasutajakontot';
 $s_username = 'Kasutaja';
-$s_realname = 'Real Name';
+$s_realname = 'Tegelik Nimi';
 $s_email = 'E-post';
 $s_password = 'Parool';
 $s_confirm_password = 'Kinnita parool';
@@ -338,24 +338,24 @@ $s_update_user_button = 'Uuenda kasutaja';
 $s_default_account_preferences_title = 'Kasutajakonto eelistused';
 $s_default_project = 'Vaikimisi Projekt';
 $s_advanced_report = 'Näita detailsed teated';
-$s_advanced_view = 'Näita bugide detaile';
-$s_advanced_update = 'Näita bugide detailset uuendust';
+$s_advanced_view = 'Näita kannete detaile';
+$s_advanced_update = 'Näita kannete detailset uuendust';
 $s_refresh_delay = 'uuenduse viivitus';
 $s_redirect_delay = 'Ümbersuunamise viivitus';
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
-$s_email_on_new = 'Saada E-mail uue bugi ilmumise kohta';
-$s_email_on_assigned = 'Saada E-mail bugi määramise kohta';
-$s_email_on_feedback = 'Saada E-mail bugile tagasiside andmise kohta';
-$s_email_on_resolved = 'Saada E-mail bugi lahendamise kohta';
-$s_email_on_closed = 'Saada E-mail bugi sulgemise kohta';
-$s_email_on_reopened = 'Saada E-mail bugi taasavamise kohta';
-$s_email_on_bugnote_added = 'Saada E-mail bugile märkuse lisamise kohta';
+$s_with_minimum_severity = 'Väiksim raskusaste sellest';
+$s_bugnote_order = 'Märkuste sorteerimisjärjekord';
+$s_bugnote_order_asc = 'Kasvav';
+$s_bugnote_order_desc = 'Kahanev';
+$s_email_on_new = 'Saada E-mail uue kande ilmumise kohta';
+$s_email_on_assigned = 'Saada E-mail kande määramise kohta';
+$s_email_on_feedback = 'Saada E-mail kandele tagasiside andmise kohta';
+$s_email_on_resolved = 'Saada E-mail kande lahendamise kohta';
+$s_email_on_closed = 'Saada E-mail kande sulgemise kohta';
+$s_email_on_reopened = 'Saada E-mail kande taasavamise kohta';
+$s_email_on_bugnote_added = 'Saada E-mail kandele märkuse lisamise kohta';
 $s_email_on_status_change = 'Saada E-mail oleku muutuse kohta';
 $s_email_on_priority_change = 'Saada E-mail prioriteedi muutuse kohta';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'E-mail märkuste limiit';
 $s_language = 'Keel';
 $s_update_prefs_button = 'Uuenda seaded';
 $s_reset_prefs_button = 'Taasta seadete vaikimisi olek';
@@ -398,42 +398,42 @@ $s_profile_updated_msg = 'Profiil uuendatud...';
 # account_update.php
 $s_account_updated_msg = 'Sinu kasutajakonto on uuendatud...';
 $s_email_updated = 'Sinu E-posti aadress on uuendatud';
-$s_realname_duplicated = 'Real name is used by another user';
-$s_realname_updated = 'Real name successfully updated';
+$s_realname_duplicated = 'Tegelik nimi on mõne teise kasutaja poolt kasutuses';
+$s_realname_updated = 'Tegelik nimi on edukalt uuendatud';
 $s_password_updated = 'Sinu parool on vahetatud';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Bugi on määratud...';
+$s_bug_assign_msg = 'Kanne on määratud...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
-$s_acknowledged_bug_title = 'Acknowledge Issue';
-$s_confirmed_bug_title = 'Confirm Issue';
-$s_assigned_bug_title = 'Assign Issue';
-$s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
-$s_acknowledged_bug_button = 'Acknowledge Issue';
-$s_confirmed_bug_button = 'Confirm Issue';
-$s_assigned_bug_button = 'Assign Issue';
+$s_new_bug_title = 'Uus kanne';
+$s_feedback_bug_title = 'Anna kandele tagasiside';
+$s_acknowledged_bug_title = 'Tunnista kanne';
+$s_confirmed_bug_title = 'Kinnita kanne';
+$s_assigned_bug_title = 'Määra kanne';
+$s_new_bug_button = 'Uus kanne';
+$s_feedback_bug_button = 'Esita tagasiside';
+$s_acknowledged_bug_button = 'Tunnista kanne';
+$s_confirmed_bug_button = 'Kinnita kanne';
+$s_assigned_bug_button = 'Määra kanne';
 
 # bug_close.php
-$s_bug_close_msg = 'Bugi on suletud...';
+$s_bug_close_msg = 'Kanne on suletud...';
 $s_close_immediately = 'Sulge viivitamatult:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Sulge bugi';
+$s_closed_bug_title = 'Sulge kanne';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Bugi on kustutatud...';
+$s_bug_deleted_msg = 'Kanne on kustutatud...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Oled kindel, et soovid selle bugi kustutada?';
-$s_delete_bug_button = 'Kustuta bugi';
+$s_delete_bug_sure_msg = 'Oled kindel, et soovid selle kande kustutada?';
+$s_delete_bug_button = 'Kustuta kanne';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Tegele bugiga';
-$s_unmonitor_bug_button = 'Lõpeta bugiga tegelemine';
+$s_monitor_bug_button = 'Tegele kandega';
+$s_unmonitor_bug_button = 'Lõpeta kandega tegelemine';
 
 # bug_file_add.php
 $s_file_upload_msg = 'Fail üles laaditud';
@@ -445,17 +445,17 @@ $s_upload_file_button = 'Laadi fail üles';
 $s_max_file_size = 'Max. suurus';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Bugi on uuesti avatud...';
-$s_reopen_add_bugnote_title = 'Lisa märkusena bugi taasavamise põhjus';
-$s_bugnote_add_reopen_button = 'Lisa märkus ja ava bugi uuesti';
+$s_bug_reopened_msg = 'Kanne on uuesti avatud...';
+$s_reopen_add_bugnote_title = 'Lisa märkusena kande taasavamise põhjus';
+$s_bugnote_add_reopen_button = 'Lisa märkus ja ava kanne uuesti';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Lahenda bugi';
-$s_resolved_bug_button = 'Lahenda bugi';
+$s_resolved_bug_title = 'Lahenda kanne';
+$s_resolved_bug_button = 'Lahenda kanne';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Bugi on lahendatud. Lisa märkus...';
-$s_resolve_add_bugnote_title = 'Kanna märkusesse bugi lahendus';
+$s_bug_resolved_msg = 'Kanne on lahendatud. Lisa märkus...';
+$s_resolve_add_bugnote_title = 'Kanna märkusesse kande lahendus';
 $s_bugnote_add_resolve_button = 'Lisa märkus';
 
 # bug_reminder_page.php
@@ -469,12 +469,12 @@ $s_bug_send_button = 'Saada';
 $s_reminder = 'Meeldetuletus';
 
 # bug_update.php
-$s_bug_updated_msg = 'Bugi on uuendatud...';
+$s_bug_updated_msg = 'Kanne on uuendatud...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Tagasi bugi juurde';
+$s_back_to_bug_link = 'Tagasi kande juurde';
 $s_update_simple_link = 'Tavaline uuendus';
-$s_updating_bug_advanced_title = 'Bugi andmete uuendus';
+$s_updating_bug_advanced_title = 'Kande andmete uuendus';
 $s_id = 'ID';
 $s_category = 'Kategooria';
 $s_severity = 'Raskusaste';
@@ -493,7 +493,7 @@ $s_os_version = 'Opsüsteemi versioon';
 $s_eta = 'ETA';
 $s_product_version = 'Tooteversioon';
 $s_build = 'Järk';
-$s_fixed_in_version = 'Fixed in Version';
+$s_fixed_in_version = 'Paranatud versioonis';
 $s_votes = 'Hääli';
 $s_summary = 'Kokkuvõte';
 $s_description = 'Kirjeldus';
@@ -502,7 +502,7 @@ $s_update_information_button = 'Uuenda info';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Spetsiaalne uuendus';
-$s_updating_bug_simple_title = 'Bugi andmete uuendus';
+$s_updating_bug_simple_title = 'Kande andmete uuendus';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Hääl lisatud...';
@@ -512,18 +512,18 @@ $s_bugnote_added_msg = 'Märkus lisatud...';
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = 'Märkus kustutatud...';
-$s_bug_notes_title = 'Bugi märkused';
+$s_bug_notes_title = 'Kande märkused';
 
 # bugnote_edit_page.php
 $s_edit_bugnote_title = 'Redigeeri märkust';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Sellel bugil pole ühtegi märkust.';
+$s_no_bugnotes_msg = 'Sellel kandel pole ühtegi märkust.';
 $s_delete_link = 'Kustuta';
 $s_add_bugnote_title = 'Lisa märkus';
 $s_add_bugnote_button = 'Lisa märkus';
 $s_bugnote_edit_link = 'Redigeeri';
-$s_closed_bug_button = 'Sulge bugi';
+$s_closed_bug_button = 'Sulge kanne';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Märkus uuendatud...';
@@ -542,7 +542,7 @@ $s_save_login = 'Salvesta oma login';
 $s_choose_project = 'Vali projekt';
 $s_login_button = 'Login';
 $s_signup_link = 'Tee endale uus kasutajakonto';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'Unustasid parooli?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Vali projekt';
@@ -552,11 +552,11 @@ $s_logged_out_title = 'Välja logitud...';
 $s_redirecting = '...ümbersuunamine';
 $s_here = 'Siin';
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "Parooli taastamine";
+$s_lost_password_done_title = "Parooli teade saadetud";
+$s_lost_password_subject = "Parooli taastamine";
+$s_lost_password_info = "Selleks, et taastada kadunud parool, esita oma kasutajakonto kasutajanimi ja e-posti aadress.<br/><br/>Kui esitatud andmed on tõesed, saadetakse sulle e-postiga spetsiaalne URL, mis sisaldab sinu kasutajakonto taastamise koodi. Palun suundu sellele aadressile, et vahetada oma parool.";
+$s_lost_password_confirm_hash_OK = "Sinu kinnitus on vastu võetud. Palun uuenda oma parool.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'avatud ja mulle määratud';
@@ -621,7 +621,7 @@ $s_category_updated_msg = 'Kategooria uuendatud...';
 $s_project_deleted_msg = 'Projekt eemaldatud...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Oled kindel, et soovid kustutada selle projekti ja kõik sellega seotud bugiteated?';
+$s_project_delete_msg = 'Oled kindel, et soovid kustutada selle projekti ja kõik sellega seotud teated?';
 $s_project_delete_button = 'Kustuta projekt';
 
 # manage_proj_edit_page.php
@@ -666,7 +666,7 @@ $s_delete_version_button = 'Kustuta versioon';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Redigeeri projekti versiooni';
 $s_update_version_button = 'Uuenda versioon';
-$s_released = 'Released';
+$s_released = 'Välja lastud';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Versioon uuendatud...';
@@ -687,24 +687,24 @@ $s_confirm_account_pruning = 'Oled kindel, et soovid kustutada kõik vanad kasuta
 $s_edit_user_title = 'Kasutaja redigeerimine';
 $s_reset_password_button = 'Taasta parooli algseade';
 $s_delete_user_button = 'Kustuta kasutaja';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg = 'Taasta parool saadab kinnituse URL-i e-posti teel.';
 $s_reset_password_msg2 = 'Parooli algseade taastamine annab kasutajale tühja parooli.';
 $s_show_all_users = 'KÕIK';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Kasutajatunnus kaitstud. Parooli algseade taastamine pole võimalik.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg = 'Kinnitusteade on saadetud kasutajakonto e-posti aadressile...';
 $s_account_reset_msg2 = 'Kasutajale on antud tühi parool...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Kasutajatunnus kaitstud. Juurdepääsu ja kasutusõiguste tase kaitstud. Teised kasutaja andmed uuendatud...';
+$s_manage_user_protected_msg = 'Kasutajatunnus on kaitstud. Juurdepääsu ja kasutusõiguste tase kaitstud. Teised kasutaja andmed uuendatud...';
 $s_manage_user_updated_msg = 'Kasutaja andmed uuendatud...';
 
 # menu_inc.php
 $s_main_link = 'Pealeht';
-$s_view_bugs_link = 'Bugide vaatamine';
-$s_report_bug_link = 'Bugidest teatamine';
-$s_changelog_link = 'Change Log';
+$s_view_bugs_link = 'Kannete vaatamine';
+$s_report_bug_link = 'Kannetest teatamine';
+$s_changelog_link = 'Muudatuste logi';
 $s_summary_link = 'Kokkuvõte';
 $s_account_link = 'Minu andmed';
 $s_users_link = 'Kasutajad';
@@ -712,17 +712,17 @@ $s_manage_link = 'Haldus';
 $s_edit_news_link = 'Uudiste redigeerimine';
 $s_docs_link = 'Dokumendid';
 $s_logout_link = 'Logi välja';
-$s_my_view_link = 'My View';
+$s_my_view_link = 'Minu vaade';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = 'Määramata';
+$s_my_view_title_recent_mod = 'Hiljuti uuendatud';
+$s_my_view_title_reported = 'Raporteeritud minu poolt';
+$s_my_view_title_assigned = 'Määratud mulle (lahendamata)';
+$s_my_view_title_resolved = 'Lahendatud';
+$s_my_view_title_monitored = 'Minu poolt tegeletud';
 
 # news_add.php
 $s_news_added_msg = 'Lisatud uudised...';
@@ -806,7 +806,7 @@ $s_must_enter_severity = 'Pead valima raskusastme';
 $s_must_enter_reproducibility = 'Pead valima korratavuse';
 $s_must_enter_summary = 'Pead andma kokkuvõtte';
 $s_must_enter_description = 'Pead andma kirjelduse';
-$s_report_more_bugs = 'Veel bugiteateid!';
+$s_report_more_bugs = 'Veel teateid!';
 $s_submission_thanks_msg = 'Suured tänud!';
 
 # report_bug_advanced_page.php
@@ -820,7 +820,7 @@ $s_or_fill_in = 'või täida väljad';
 $s_assign_to = 'Määra';
 $s_additional_information = 'Lisainfo';
 $s_submit_report_button = 'Saada teade';
-$s_check_report_more_bugs = 'Märgi lisabugidest teatamiseks';
+$s_check_report_more_bugs = 'Märgi lisakannetest teatamiseks';
 
 # report_bug_page.php
 $s_advanced_report_link = 'Detailne teade';
@@ -831,13 +831,13 @@ $s_selected_project = 'Valitud projekt';
 $s_valid_project_msg = 'Vali kehtiv projekt';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_signup_done_title = 'Kasutajakonto registreerimine tehtud';
+$s_password_emailed_msg = 'Õnnitleme. Oled registreeritud edukalt. Sulle saadetakse kinnitus e-posti kiri, et kontrollida e-posti aadressi. Sinule saadetud aadressi külastamine aktiveerib sinu kasutajakonto.';
+$s_no_reponse_msg = 'Sul on aega seitse päeva, et lõpetada oma kasutajakonto kinnitamise protsess; kui sul ei õnnestu nende seitsme päeva jooksul aktiveerida, siis see kasutajakonto hävitatakse.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_captcha_request = 'Sisesta kood, mida näed paremal kastis';
+$s_signup_info = 'Selle vormi vastustega täitmise järel saadetakse sulle kinnituseks e-posti kiri sellele aadressile, millise esitasid.<br/> Kasutades kinnituseks saadetud e-posti kirja, saad aktiveerida oma kasutajakonto. Kui sul ei õnnestu aktiveerida kasutajakontot seitsme päeva jooksul, siis kasutajakonto hävitatakse.<br/>Pead esitama eksisteeriva e-posti aadressi, et saaksid oma kasutajakonto aktiveerida.';
 $s_signup_title = 'Registreeru';
 $s_signup_button = 'Registreeru';
 
@@ -885,7 +885,7 @@ $s_orct = '(avatud/lahendatud/suletud/kokku)';
 $s_any = 'mistahes';
 $s_show = 'Näita';
 $s_changed = 'Muudetud (tunnid)';
-$s_viewing_bugs_title = 'Bugide vaatamine';
+$s_viewing_bugs_title = 'Kannete vaatamine';
 $s_updated = 'Uuendatud';
 
 # view_all_inc.php
@@ -897,40 +897,40 @@ $s_prev = 'Eelmine';
 $s_next = 'Järgmine';
 $s_first = 'Esimene';
 $s_last = 'Viimane';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_start_date = 'Alguskuupäev';
+$s_end_date = 'Lõpukuupäev';
+$s_use_date_filters = 'Kasutaja aja filtreid';
+$s_yes = 'Jah';
+$s_no = 'Ei';
+$s_open_filters = 'Muuda Filter';
+$s_or_unassigned = 'Või määramata';
 $s_ok = 'OK';
-$s_select_all = 'Select All';
+$s_select_all = 'Vali kõik';
 
 # stored query strings
-$s_use_query = 'Use Filter';
-$s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
-$s_save_query = 'Save Current Filter';
-$s_reset_query = 'Reset Filter';
-$s_query_name = 'Filter Name';
-$s_query_exists = 'This particular query appears to already exist.';
-$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
-$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
-$s_query_store_error = 'There was an error saving this query.';
-$s_open_queries = 'Manage Filters';
-$s_query_delete_msg = 'Are you sure you wish to delete this query?';
+$s_use_query = 'Kasuta filter';
+$s_delete_query = 'Kustuta filter';
+$s_query_deleted = 'Filter kustutatud';
+$s_save_query = 'Salvesta jooksev filter';
+$s_reset_query = 'Taasta filter';
+$s_query_name = 'Filtri Nimi';
+$s_query_exists = 'Selline päring näib juba varem eksisteerivat.';
+$s_query_dupe_name = 'Teine päring juba omab sellist nime. Palun sisesta uus nimi selle päringu jaoks.';
+$s_query_blank_name = 'Sa ei saa salvestada ilma nimeta filtrit. Palun anna sellele päringule enne salvestamist nimi.';
+$s_query_store_error = 'Päringu salvestamisel tekkis viga.';
+$s_open_queries = 'Filtrite majandamine';
+$s_query_delete_msg = 'Oled kindel, et soovid selle päringu kustutada?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Näita tavalist';
-$s_viewing_bug_advanced_details_title = 'Bugi detailsete andmete vaatamine';
+$s_viewing_bug_advanced_details_title = 'Kande detailsete andmete vaatamine';
 $s_product_build = 'Toote järk (Build)';
 $s_system_profile = 'Süsteemikirjeldus';
-$s_update_bug_button = 'Uuenda bugi';
+$s_update_bug_button = 'Uuenda kanne';
 $s_bug_assign_to_button = 'Määra:';
-$s_bug_status_to_button = 'Change Status To:';
-$s_reopen_bug_button = 'Reopen Issue';
-$s_move_bug_button = 'Move Issue';
+$s_bug_status_to_button = 'Vaheta olek selliseks:';
+$s_reopen_bug_button = 'Taasava kanne';
+$s_move_bug_button = 'Liiguta kanne';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';
 $s_cached = 'Vahemälus';
@@ -939,19 +939,19 @@ $s_cached = 'Vahemälus';
 
 # view_bug_page.php
 $s_view_advanced_link = 'Detailide vaatamine';
-$s_viewing_bug_simple_details_title = 'Bugi tavaandmete vaatamine';
+$s_viewing_bug_simple_details_title = 'Kande tavaandmete vaatamine';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Ükski kasutaja ei tegele selle bugiga.';
-$s_users_monitoring_bug = 'Selle bugiga tegelevad kasutajad';
+$s_no_users_monitoring_bug = 'Ükski kasutaja ei tegele selle kandega.';
+$s_users_monitoring_bug = 'Selle kandega tegelevad kasutajad';
 $s_monitoring_user_list = 'Kasutajate loend';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
-$s_users_sponsoring_bug = 'Users sponsoring this issue';
-$s_sponsors_list = 'Sponsors List';
-$s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
+$s_no_users_sponsoring_bug = 'Kasutajad ei sponsoreeri seda kannet.';
+$s_users_sponsoring_bug = 'Kasutajad, kes sponsoreerivad kannet';
+$s_sponsors_list = 'Sponsoreerijate loend';
+$s_total_sponsorship_amount = 'Kokku sponsoreeritud = %s';
+$s_sponsor_issue = 'Sponsori kanne';
 
 # custom field strings
 $s_add_custom_field_button = 'Uus kohandatud väli';
@@ -973,14 +973,14 @@ $s_custom_field_access_level_rw = 'Kirjutamisõigus';
 $s_custom_field_length_min = 'Min. pikkus';
 $s_custom_field_length_max = 'Max. pikkus';
 $s_custom_field_advanced = 'Detailne';
-$s_custom_field_display_report = 'Display When Reporting Issues';
-$s_custom_field_display_update = 'Display When Updating Issues';
-$s_custom_field_display_resolved = 'Display When Resolving Issues';
-$s_custom_field_display_closed = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolved = 'Required On Resolve';
-$s_custom_field_require_closed = 'Required On Close';
+$s_custom_field_display_report = 'Kuva, kui kannete registreerimine';
+$s_custom_field_display_update = 'Kuva, kui kannete uuendamine';
+$s_custom_field_display_resolved = 'Kuva, kui kannete lahendamine';
+$s_custom_field_display_closed = 'Kuva, kui kannete sulgemine';
+$s_custom_field_require_report = 'Nõutav registreerimisel';
+$s_custom_field_require_update = 'Nõutav uuendamisel';
+$s_custom_field_require_resolved = 'Nõutav lahendamisel';
+$s_custom_field_require_closed = 'Nõutav sulgemisel';
 
 $s_custom_field_sequence = 'Jada';
 $s_custom_field_type_enum_string = '0:String,1:Numbriline,2:Ujuv,3:Nummerdus,4:E-mail,5:Checkbox,6:List,7:Multiselection list';
@@ -992,12 +992,12 @@ $s_field_delete_button = 'Kustuta väli';
 $s_hide_status = 'Peida staatus';
 $s_filter_closed = "Suletud";
 $s_filter_resolved = "Lahendatud";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
-$s_and_above = 'And Above';
-$s_advanced_filters = 'Advanced Filters';
-$s_simple_filters = 'Simple Filters';
-$s_monitored_by = 'Monitored By';
+$s_hide_closed = "Peida suletud";
+$s_hide_resolved = "Peida lahendatud";
+$s_and_above = 'Ja enam';
+$s_advanced_filters = 'Keerulised Filtrid';
+$s_simple_filters = 'Lihtsad Filtrid';
+$s_monitored_by = 'Tegeletud';
 
 $s_attachments = "Lisa(d)";
 $s_attachment_alt = "A";
@@ -1006,11 +1006,11 @@ $s_attachment_alt = "A";
 $s_phpmailer_language = 'en';
 
 # Sponsorship Strings
-$s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = 'Sponsorship Added';
-$s_sponsorship_updated = 'Sponsorship Updated';
-$s_sponsorship_deleted = 'Sponsorship Deleted';
-$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsors = '%d sponsor(eid)';
+$s_sponsorship_added = 'Sponsorlus lisatud';
+$s_sponsorship_updated = 'Sponsorlus Uuendatud';
+$s_sponsorship_deleted = 'Sponsorlus Kustutatud';
+$s_sponsorship_more_info = 'Rohkem informatsiooni sponsorluse kohta';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1018,25 +1018,25 @@ $s_sponsorship_more_info = 'More information about sponsorship';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Change Log';
+$s_changelog = 'Muudatuste logi';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-$s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
+$s_bug = "kanne";
+$s_add_new_relationship = "Uus seos";
+$s_add_new_relationship_button = "Lisa";
+$s_this_bug = "Jooksev kanne";
+$s_relationship_added = "seos lisatud";
+$s_relationship_deleted = "seos kustutatud";
 $s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_delete_relationship_sure_msg = "Oled kindel, et soovid seda seost kustutada?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Mitte kõik selle kande lapsed pole lahendatud või suletud.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>TÄHELEPANU</b>. Mitte kõik selle kande lapsed pole lahendatud või suletud.<br>Enne vanema kande <b>lahendamist/sulgemist</b> peavad kõik selle kande lapsed olema lahendatud või suletud.";
+$s_create_child_bug_button = "Loo laps";
+$s_bug_cloned_to = "Kanne kloonitud";
+$s_bug_created_from = "Kanne genereeritud lähtekandest";
 
 # Source Control Integration
-$s_checkin = 'Checkin';
+$s_checkin = 'Sissevormistus';
 ?>
