@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.28 2004-05-10 13:03:55 vboctor Exp $
+	# $Id: database_api.php,v 1.29 2004-06-01 13:43:50 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -243,6 +243,7 @@
 
 		switch( $t_db_type ) {
 			case 'mssql':
+			case 'odbc_mssql':
 				return addslashes( $p_string );
 
 			case 'mysql':
@@ -317,6 +318,7 @@
 
 		switch( $t_db_type ) {
 			case 'mssql':
+			case 'odbc_mssql':
 				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
 			case 'mysql':
