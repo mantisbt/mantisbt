@@ -2,6 +2,7 @@ Mantis
 
 2002.06.??  -   0.18.0
 
+ * Fixed problem in core_API.php where constants were used before declaration
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem deleting bugnotes.
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
