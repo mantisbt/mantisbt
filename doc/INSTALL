@@ -150,7 +150,7 @@ You can load up admin_check.php to see if you set things up correctly.
 
 *** NOTE: admin_check sometimes reports the value of register_globals
 incorrectly.  Create a page with this line in it: <? phpinfo() ?>, save it
-with a ,php extension and load it up in your web browser.  It will, among a
+with a .php extension and load it up in your web browser.  It will, among a
 multitude of other things, have the correct value of register_globals that you
 are using.
 
