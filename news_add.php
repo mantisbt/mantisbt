@@ -15,13 +15,12 @@
 <?php
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
-	$f_poster_id	= gpc_get_int( 'poster_id' );
 	$f_view_state	= gpc_get_int( 'view_state' );
 	$f_headline		= gpc_get_string( 'headline' );
 	$f_announcement	= gpc_get_string( 'announcement', '' );
 	$f_body			= gpc_get_string( 'body', '' );
 
-	news_create( helper_get_current_project(), $f_poster_id, $f_view_state, $f_announcement, $f_headline, $f_body );
+	news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
     $f_headline = string_display( $f_headline );
     $f_body 	= string_display_links( $f_body );
 ?>

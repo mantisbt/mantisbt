@@ -19,7 +19,6 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="poster_id" value="<?php echo auth_get_current_user_id() ?>" />
 		<?php echo lang_get( 'add_news_title' ) ?>
 	</td>
 </tr>

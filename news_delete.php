@@ -15,7 +15,9 @@
 <?php
 	$f_news_id = gpc_get_int( 'news_id' );
 
-	access_ensure_project_level( config_get( 'manage_news_threshold' ), $f_news_id );
+	$row = news_get_row( $f_news_id );
+
+	access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
 
 	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
 							 lang_get( 'delete_news_item_button' ) );
