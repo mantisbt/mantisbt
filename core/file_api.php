@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.53 2004-08-27 00:47:14 thraxisp Exp $
+	# $Id: file_api.php,v 1.54 2004-08-30 11:56:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -149,6 +149,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+			$t_file_display_name = file_get_display_name( $v_filename );
 			$t_filesize		= number_format( $v_filesize );
 			$t_date_added	= date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 
@@ -170,8 +171,8 @@
 			}
 
 			PRINT $t_href_start;
-			print_file_icon ( file_get_display_name( $v_filename ) );
-			PRINT $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) .
+			print_file_icon ( $t_file_display_name );
+			PRINT $t_href_end . '</a>&nbsp;' . $t_href_start . $t_file_display_name .
 				$t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
@@ -185,7 +186,7 @@
 			if ( $t_can_download &&
 				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 				( $v_filesize != 0 ) &&
-				( in_array( strtolower( file_get_extension( $v_diskfile ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
+				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
 
 				PRINT "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
 				$image_previewed = true;
