@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.12 2004-07-15 21:51:16 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.13 2004-07-18 22:20:02 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -354,7 +354,7 @@
 			$query = "INSERT INTO $t_bug_relationship_table
 					( source_bug_id, destination_bug_id, relationship_type )
 					VALUES
-					( '" . $t_duplicate_bug_id . "', '" . $t_bug_id . "', '" . BUG_DUPLICATE . "')";
+					( '" . $t_bug_id . "', '" . $t_duplicate_bug_id . "', '" . BUG_DUPLICATE . "')";
 			db_query( $query );
 
 			$query = "SELECT id, user_id, date_modified
