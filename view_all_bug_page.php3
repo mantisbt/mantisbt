@@ -105,7 +105,10 @@
 
 	# Limit reporters to only see their reported bugs
 	if ( 1 == $g_limit_reporters ) {
-		$f_user_id = get_current_user_field( "id" );
+		if ( get_current_user_field( "access_level" ) <= REPORTER ) {
+			echo get_current_user_field( "access_level" )."AAAAAA";
+			$f_user_id = get_current_user_field( "id" );
+		}
 	}
 
 	# Build our query string based on our viewing criteria
