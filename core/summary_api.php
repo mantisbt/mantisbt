@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.19 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: summary_api.php,v 1.20 2004-02-10 22:33:48 jlatour Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -442,4 +442,351 @@
 		}
 	}
 	# --------------------
+	# Print developer / resolution report
+	function summary_print_developer_resolution( $p_resolution_enum_string ) {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		
+		$t_project_id = helper_get_current_project();
+
+		# Organise an array of resolution values to be used later
+		$t_res_arr = explode_enum_string( $p_resolution_enum_string );
+		$enum_res_count = count( $t_res_arr );
+		$c_res_s = array();
+		for ( $i = 0; $i < $enum_res_count; $i++ ) {
+			$t_res_s = explode_enum_arr( $t_res_arr[$i] );
+			$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
+		}
+
+		# Checking if it's a per project statistic or all projects
+		if ( 0 == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
+
+		$specific_where .= ' AND handler_id > 0';
+		# Get all of the bugs and split them up into an array
+		$query = "SELECT handler_id, resolution
+				FROM $t_mantis_bug_table
+				WHERE $specific_where";
+		$result = db_query( $query );
+
+		$t_handler_res_arr = array();
+		$t_arr = db_fetch_array( $result );
+		while ( $t_arr ) {
+			if ( ! isset( $t_handler_res_arr[ $t_arr[ 'handler_id' ] ] ) ) {
+				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ] = array();
+				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ 'total' ] = 0;
+			}
+			if ( ! isset( $t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ] ) ) {
+				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			}
+			$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ]++;
+			$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ 'total' ]++;
+
+			$t_arr = db_fetch_array( $result );
+		}
+
+		$t_row_count = 0;
+		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
+		foreach( $t_handler_res_arr as $t_handler_id => $t_arr2 ) {
+			# Only print developers who have had at least one bug assigned to them. This helps
+			# prevent divide by zeroes, showing developers not on this project, and showing 
+			# users that aren't actually developers...
+
+			if ( $t_arr2[ 'total' ] > 0 ) {
+				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+				$t_row_count++;
+				print '<td>';
+				print user_get_name( $t_handler_id );
+				print '</td>';
+				
+				# We need to track the percentage of bugs that are considered fix, as well as
+				# those that aren't considered bugs to begin with (when looking at %age)
+				$t_bugs_fixed = 0;
+				$t_bugs_notbugs = 0;
+				for ( $j = 0; $j < $enum_res_count; $j++ ) {
+					$res_bug_count = 0;
+					
+					if ( isset( $t_arr2[ $c_res_s[ $j ] ] ) ) {
+						$res_bug_count = $t_arr2[ $c_res_s[ $j ] ];
+					}
+					
+					print '<td>';
+					print $res_bug_count;
+					print '</td>';
+
+					# These resolutions are considered fixed
+					if ( FIXED == $c_res_s[$j] ) {
+						$t_bugs_fixed += $res_bug_count;
+					}
+					# These are not counted as bugs
+					else if ( (WONT_FIX == $c_res_s[$j] )  ||
+							  (SUSPENDED == $c_res_s[$j] ) ||
+							  (DUPLICATE == $c_res_s[$j] ) ||
+							  (NOT_A_BUG == $c_res_s[$j] ) ) {
+						$t_bugs_notbugs += $res_bug_count;
+					}
+				}
+
+				$t_percent_fixed = 0;
+				if ( ( $t_arr2[ 'total' ] - $t_bugs_notbugs ) > 0 ) {
+					$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2[ 'total' ] - $t_bugs_notbugs ) );
+				}
+				print '<td>';
+				printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
+				print '</td>';
+			}
+		}		
+	}
+	# --------------------
+	# Print reporter / resolution report
+	function summary_print_reporter_resolution( $p_resolution_enum_string ) {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
+		
+		$t_project_id = helper_get_current_project();
+
+		# Organise an array of resolution values to be used later
+		$t_res_arr = explode_enum_string( $p_resolution_enum_string );
+		$enum_res_count = count( $t_res_arr );
+		$c_res_s = array();
+		for ( $i = 0; $i < $enum_res_count; $i++ ) {
+			$t_res_s = explode_enum_arr( $t_res_arr[$i] );
+			$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
+		}
+
+		# Checking if it's a per project statistic or all projects
+		if ( 0 == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
+
+		# Get all of the bugs and split them up into an array
+		$query = "SELECT reporter_id, resolution
+				FROM $t_mantis_bug_table
+				WHERE $specific_where";
+		$result = db_query( $query );
+
+		$t_reporter_res_arr = array();
+		$t_reporter_bugcount_arr = array();
+		$t_arr = db_fetch_array( $result );
+		while ( $t_arr ) {
+			if ( ! isset( $t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ] ) ) {
+				$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ] = array();
+				$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ] = 0;
+			}
+			if ( ! isset( $t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ] ) ) {
+				$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			}
+			$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ]++;
+			$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ]++;
+
+			$t_arr = db_fetch_array( $result );
+		}
+
+		# Sort our total bug count array so that the reporters with the highest number of bugs are listed first,
+		arsort( $t_reporter_bugcount_arr );
+		
+		$t_row_count = 0;
+		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
+		foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
+			# Limit the number of reporters listed
+			if ( $t_row_count > $t_reporter_summary_limit ) {
+				break;
+			}
+			
+			# Only print reporters who have reported at least one bug. This helps
+			# prevent divide by zeroes, showing reporters not on this project, and showing 
+			# users that aren't actually reporters...
+			if ( $t_total_user_bugs > 0 ) {
+				$t_arr2 = $t_reporter_res_arr[ $t_reporter_id ];
+
+				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+				$t_row_count++;
+				print '<td>';
+				print user_get_name( $t_reporter_id );
+				print '</td>';
+				
+				# We need to track the percentage of bugs that are considered fix, as well as
+				# those that aren't considered bugs to begin with (when looking at %age)
+				$t_bugs_fixed = 0;
+				$t_bugs_notbugs = 0;
+				for ( $j = 0; $j < $enum_res_count; $j++ ) {
+					$res_bug_count = 0;
+					
+					if ( isset( $t_arr2[ $c_res_s[ $j ] ] ) ) {
+						$res_bug_count = $t_arr2[ $c_res_s[ $j ] ];
+					}
+					
+					print '<td>';
+					print $res_bug_count;
+					print '</td>';
+
+					# These resolutions are considered fixed
+					if ( FIXED == $c_res_s[$j] ) {
+						$t_bugs_fixed += $res_bug_count;
+					}
+					# These are not counted as bugs
+					else if ( (UNABLE_TO_DUPLICATE == $c_res_s[$j] ) ||
+							  (DUPLICATE == $c_res_s[$j] ) ||
+							  (NOT_A_BUG == $c_res_s[$j] ) ) {
+						$t_bugs_notbugs += $res_bug_count;
+					}
+				}
+
+				$t_percent_errors = 0;
+				if ( $t_total_user_bugs > 0 ) {
+					$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
+				}
+				print '<td>';
+				printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
+				print '</td>';
+			}
+		}		
+	}	# --------------------
+	# Print reporter effectiveness report
+	function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
+		
+		$t_project_id = helper_get_current_project();
+
+		# These are our overall "values" for severities and non-bug results
+		$t_severity_multiplier[FEATURE] = 1;
+		$t_severity_multiplier[TRIVIAL] = 2;
+		$t_severity_multiplier[TEXT] = 3;
+		$t_severity_multiplier[TWEAK] = 2;
+		$t_severity_multiplier[MINOR] = 5;
+		$t_severity_multiplier[MAJOR] = 8;
+		$t_severity_multiplier[CRASH] = 8;
+		$t_severity_multiplier[BLOCK] = 10;
+		$t_severity_multiplier['average'] = 5;
+
+		$t_notbug_multiplier[UNABLE_TO_DUPLICATE] = 2;
+		$t_notbug_multiplier[DUPLICATE] = 3;
+		$t_notbug_multiplier[NOT_A_BUG] = 5;
+
+		$t_sev_arr = explode_enum_string( $p_severity_enum_string );
+		$enum_sev_count = count( $t_sev_arr );
+		$c_sev_s = array();
+		for ( $i = 0; $i < $enum_sev_count; $i++ ) {
+			$t_sev_s = explode_enum_arr( $t_sev_arr[$i] );
+			$c_sev_s[$i] = db_prepare_string( $t_sev_s[0] );
+		}
+
+		$t_res_arr = explode_enum_string( $p_resolution_enum_string );
+		$enum_res_count = count( $t_res_arr );
+		$c_res_s = array();
+		for ( $i = 0; $i < $enum_res_count; $i++ ) {
+			$t_res_s = explode_enum_arr( $t_res_arr[$i] );
+			$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
+		}
+
+		# Checking if it's a per project statistic or all projects
+		if ( 0 == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
+
+		# Get all of the bugs and split them up into an array
+		$query = "SELECT reporter_id, resolution, severity
+				FROM $t_mantis_bug_table
+				WHERE $specific_where";
+		$result = db_query( $query );
+
+		$t_reporter_ressev_arr = array();
+		$t_reporter_bugcount_arr = array();
+		$t_arr = db_fetch_array( $result );
+		while ( $t_arr ) {
+			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ] ) ) {
+				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ] = array();
+				$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ] = 0;
+			}
+			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ] ) ) {
+				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ] = array();
+				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ 'total' ] = 0;
+			}
+			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ] ) ) {
+				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			}
+			$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ]++;
+			$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ 'total' ]++;
+			$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ]++;
+
+			$t_arr = db_fetch_array( $result );
+		}
+
+		# Sort our total bug count array so that the reporters with the highest number of bugs are listed first,
+		arsort( $t_reporter_bugcount_arr );
+
+		$t_row_count = 0;
+		# We now have a multi dimensional array of users, resolutions and severities, with the 
+		# value of each resolution and severity for each user
+		foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
+			# Limit the number of reporters listed
+			if ( $t_row_count > $t_reporter_summary_limit ) {
+				break;
+			}
+			
+			# Only print reporters who have reported at least one bug. This helps
+			# prevent divide by zeroes, showing reporters not on this project, and showing 
+			# users that aren't actually reporters...
+			if ( $t_total_user_bugs > 0 ) {
+				$t_arr2 = $t_reporter_ressev_arr[ $t_reporter_id ];
+
+				print '<tr ' . helper_alternate_class( $t_row_count ) . '>';
+				$t_row_count++;
+				print '<td>';
+				print user_get_name( $t_reporter_id );
+				print '</td>';
+
+				$t_total_severity = 0;
+				$t_total_errors = 0;
+				for ( $j = 0; $j < $enum_sev_count; $j++ ) {
+					if ( ! isset( $t_arr2[ $c_sev_s[$j] ] ) ) {
+						continue;
+					}
+				
+					$sev_bug_count = $t_arr2[ $c_sev_s[$j] ][ 'total' ];
+					$t_sev_mult = $t_severity_multiplier['average'];
+					if ( $t_severity_multiplier[ $c_sev_s[$j] ] ) {
+						$t_sev_mult = $t_severity_multiplier[ $c_sev_s[$j] ];
+					}
+
+					if ( $sev_bug_count > 0 ) {
+						$t_total_severity += ( $sev_bug_count * $t_sev_mult );
+					}
+
+					# Calculate the "error value" of bugs reported
+					$t_notbug_res_arr = array( UNABLE_TO_DUPLICATE, DUPLICATE, NOT_A_BUG );
+
+					foreach ( $t_notbug_res_arr as $t_notbug_res ) {
+						if ( isset( $t_arr2[ $c_sev_s[$j] ][ $t_notbug_res ] ) ) {
+							$t_notbug_mult = 1;
+							if ( $t_notbug_multiplier[ $t_notbug_res ] ) {
+								$t_notbug_mult = $t_notbug_multiplier[ $t_notbug_res ];
+							}
+
+							$t_total_errors += ( $t_sev_mult * $t_notbug_mult );
+						}
+					}
+				}
+				print '<td>';
+				print $t_total_severity;
+				print '</td>';
+				print '<td>';
+				print $t_total_errors;
+				print '</td>';
+				print '<td>';
+				print ( $t_total_severity - $t_total_errors );
+				print '</td>';
+			}
+		}
+	}
 ?>

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.151 $
-	# $Author: vboctor $
-	# $Date: 2004-02-10 11:37:42 $
+	# $Revision: 1.152 $
+	# $Author: jlatour $
+	# $Date: 2004-02-10 22:33:48 $
 	#
-	# $Id: strings_english.txt,v 1.151 2004-02-10 11:37:42 vboctor Exp $
+	# $Id: strings_english.txt,v 1.152 2004-02-10 22:33:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -784,6 +784,13 @@ $s_by_category = 'By Category';
 $s_by_priority = 'By Priority';
 $s_by_developer = 'By Developer';
 $s_by_reporter = 'By Reporter';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'Time Stats For Resolved Bugs (days)';
 $s_longest_open_bug = 'Longest open bug';
 $s_longest_open = 'Longest open';

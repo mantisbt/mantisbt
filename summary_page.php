@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.36 2004-02-10 11:07:47 jlatour Exp $
+	# $Id: summary_page.php,v 1.37 2004-02-10 22:33:47 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -255,6 +255,87 @@
 			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_reporter() ?>
+		</table>
+
+		<br />
+
+		<?php # REPORTER EFFECTIVENESS # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="1">
+				<?php echo lang_get( 'reporter_effectiveness' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'severity' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'errors' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'total' ) ?>
+			</td>
+		</tr>
+		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
+		</table>
+	</td>
+</tr>
+
+<tr valign="top">
+	<td colspan="2">
+		<?php # REPORTER / RESOLUTION # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="1">
+				<?php echo lang_get( 'reporter_by_resolution' ) ?>
+			</td>
+			<?php
+			$t_arr = explode_enum_string( config_get( 'resolution_enum_string' ) );
+			$enum_count = count( $t_arr );
+
+			for ($i=0;$i<$enum_count;$i++) {
+				print '<td>';
+				$t_s = explode_enum_arr( $t_arr[$i] );
+				$c_s[0] = db_prepare_string( $t_s[0] );
+				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
+				print '</td>';
+			}
+			
+			print '<td>';
+			print lang_get( 'percentage_errors' );
+			print '</td>';
+			?>
+		</tr>
+		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
+		</table>
+	</td>
+</tr>
+
+<tr valign="top">
+	<td colspan="2">
+		<?php # DEVELOPER / RESOLUTION # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="1">
+				<?php echo lang_get( 'developer_by_resolution' ) ?>
+			</td>
+			<?php
+			$t_arr = explode_enum_string( config_get( 'resolution_enum_string' ) );
+			$enum_count = count( $t_arr );
+
+			for ($i=0;$i<$enum_count;$i++) {
+				print '<td>';
+				$t_s = explode_enum_arr( $t_arr[$i] );
+				$c_s[0] = db_prepare_string( $t_s[0] );
+				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
+				print '</td>';
+			}
+			
+			print '<td>';
+			print lang_get( 'percentage_fixed' );
+			print '</td>';
+			?>
+		</tr>
+		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>
 		</table>
 	</td>
 </tr>
