@@ -67,7 +67,7 @@
 		<?php echo lang_get( 'filename' ) ?>
 	</td>
 	<td>
-		<?php echo $v_filename ?>
+		<?php echo file_get_display_name( $v_filename ) ?>
 	</td>
 </tr>
 <tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.27 2003-02-23 04:26:19 vboctor Exp $
+	# $Id: file_api.php,v 1.28 2003-02-25 10:11:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -21,8 +21,8 @@
 	# --------------------
 	# Gets the filename without the bug id prefix.
 	function file_get_display_name( $p_filename ) {
-		$t_array = explode ('-', $p_filename, 2);
-		return $t_array[1];
+		$t_array = explode ('-', $p_filename, 3);
+		return $t_array[count( $t_array ) - 1];
 	}
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within
