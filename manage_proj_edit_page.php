@@ -145,7 +145,11 @@
 				<?php echo $t_category ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
-				<?php print_bracket_link( $g_manage_project_category_edit_page.'?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_edit_link ) ?>
+				<?php
+					print_bracket_link( $g_manage_project_category_edit_page.'?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_edit_link );
+					PRINT '&nbsp;';
+					print_bracket_link( $g_manage_project_category_delete_page.'?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_remove_link );
+				?>
 			</td>
 		</tr>
 		<?php 	} # end for loop ?>
@@ -207,7 +211,11 @@
 				<?php echo $t_date_order ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
-				<?php print_bracket_link( $g_manage_project_version_edit_page.'?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_edit_link ) ?>
+				<?php 
+					print_bracket_link( $g_manage_project_version_edit_page.'?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_edit_link );
+					PRINT '&nbsp;';
+					print_bracket_link( $g_manage_project_version_delete_page.'?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_remove_link );
+				?>
 			</td>
 		</tr>
 		<?php } # end for loop ?>
