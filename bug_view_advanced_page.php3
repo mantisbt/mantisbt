@@ -57,9 +57,9 @@
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
 	$v_summary = string_unsafe( $v_summary );
-	$v_description = string_unsafe( $v_description );
-	$v_steps_to_reproduce = string_unsafe( $v_steps_to_reproduce );
-	$v_additional_information = string_unsafe( $v_additional_information );
+	$v2_description = string_unsafe( $v2_description );
+	$v2_steps_to_reproduce = string_unsafe( $v2_steps_to_reproduce );
+	$v2_additional_information = string_unsafe( $v2_additional_information );
 	$v_date_submitted = date( "m-d H:i", $v_date_submitted );
 	$v_last_updated = date( "m-d H:i", $v_last_updated );
 ?>
