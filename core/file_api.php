@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.51 2004-07-23 23:20:16 vboctor Exp $
+	# $Id: file_api.php,v 1.52 2004-08-21 00:13:52 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -427,6 +427,10 @@
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_file_type	= db_prepare_string( $p_file_type );
 
+		if ( !is_readable( $p_tmp_file ) && DISK != config_get( 'file_upload_method' ) ) {
+			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+		}
+
 		if ( !file_type_check( $p_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 		} else if ( is_uploaded_file( $p_tmp_file ) ) {
@@ -440,7 +444,14 @@
 			$t_new_file_name = $t_bug_id . '-' . $p_file_name;
 			$c_new_file_name = db_prepare_string( $t_new_file_name );
 
-			$t_file_size = filesize( $p_tmp_file );
+			if ( is_readable ( $p_tmp_file ) ) { 
+				$t_file_size = filesize( $p_tmp_file );
+			} else {
+				//try to get filesize from 'post' data
+				//@@@ fixme - this should support >1 file ? 
+				global $HTTP_POST_FILES;
+				$t_file_size = $HTTP_POST_FILES['file']['size'];
+			}
 			$c_file_size = db_prepare_int( $t_file_size );
 
 			$t_method			= config_get( 'file_upload_method' );
@@ -459,7 +470,7 @@
 						}
 
 						umask( 0333 );  # make read only
-						copy( $p_tmp_file, $t_file_path . $t_new_file_name );
+						move_uploaded_file( $p_tmp_file, $t_file_path . $t_new_file_name );
 
 						$c_content = '';
 					} else {
