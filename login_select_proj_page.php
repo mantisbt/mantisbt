@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	$f_ref	= gpc_get_string( 'f_ref', '' );
+	$f_ref  = gpc_get_string( 'ref', '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>

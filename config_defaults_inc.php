@@ -43,7 +43,7 @@
 	# requires trailing /
 	if ( isset( $_SERVER['SERVER_NAME'] ) && isset ( $_SERVER['PHP_SELF'] ) ) {
 		$t_protocol = 'http';
-		if ( isset( $_SERVER['HTTPS'] ) ) {
+		if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) ) {
 			$t_protocol = 'https';
 		}
 

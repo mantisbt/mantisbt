@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.16 2002-10-15 19:58:28 jfitzell Exp $
+	# $Id: project_api.php,v 1.17 2002-11-12 12:08:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -33,11 +33,11 @@
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_project_table = config_get( 'mantis_project_table' );
-
 		if ( isset ( $g_cache_project[$c_project_id] ) ) {
 			return $g_cache_project[$c_project_id];
 		}
+
+		$t_project_table = config_get( 'mantis_project_table' );
 
 		$query = "SELECT * 
 				  FROM $t_project_table 

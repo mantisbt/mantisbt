@@ -32,7 +32,7 @@ Mantis ChangeLog
  * Added new localization strings.
  * Added notifications when a bug is deleted.
  * Added option to allow reporters to close the bugs they reported.
- * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
+ * Added support for "[product] category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
  * Added support for adding multiple categories in one step, this is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
  * Added support for allowing managers to update project information, change project user list, add/edit/delete categories and versions.
  * Added support for auto-assigning of bugs when a default user is specified for the category and if bug is not pre-assigned.
@@ -53,7 +53,7 @@ Mantis ChangeLog
  * Fixed defects with updating project categories and versions.
  * Fixed problem deleting bugnotes.
  * Fixed problem in core_API.php where constants were used before declaration
- * Fixed problem in core_email_API.php where an email could be send to noone at all, in rare cases.
+ * Fixed problem in core_email_API.php where an email could be send to none at all, in rare cases.
  * Fixed problem in manage_proj_update.php which gave a warning when editing projects with empty upload file paths.
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
