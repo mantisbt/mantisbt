@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.37 2004-08-06 15:38:38 jlatour Exp $
+	# $Id: view_all_set.php,v 1.38 2004-10-28 00:31:05 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -98,6 +98,15 @@
 		$f_fixed_in_version = gpc_get_string( 'fixed_in_version', 'any' );
 		$f_fixed_in_version = array( $f_fixed_in_version );
 	}
+
+	$f_show_priority = array();
+        if ( is_array( gpc_get( 'show_priority', null ) ) ) {
+                $f_show_priority = gpc_get_string_array( 'show_priority', 'any' );
+        } else {
+                $f_show_priority = gpc_get_string( 'show_priority', 'any' );
+                $f_show_priority = array( $f_show_priority );
+        }
+
 
 	$f_user_monitor = array();
 	if ( is_array( gpc_get( 'user_monitor', null ) ) ) {
@@ -257,6 +266,7 @@
 				$t_setting_arr['show_version'] = $f_show_version;
 				$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
 				$t_setting_arr['fixed_in_version'] = $f_fixed_in_version;
+				$t_setting_arr['show_priority'] = $f_show_priority;
 				$t_setting_arr['user_monitor'] = $f_user_monitor;
 				$t_setting_arr['view_state'] = $f_view_state;
 				$t_setting_arr['custom_fields'] = $f_custom_fields_data;
@@ -289,6 +299,7 @@
 				$t_setting_arr['handler_id'] 	= array( "any" );
 				$t_setting_arr['show_build'] 	= array( "any" );
 				$t_setting_arr['show_version'] 	= array( "any" );
+				$t_setting_arr['show_priority']	= array( "any" );
 				$t_setting_arr['fixed_in_version']	= array( "any" );
 				$t_setting_arr['user_monitor'] 		= array( "any" );
 

@@ -263,7 +263,8 @@
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
 </tr>
 <tr class="row-1">
 	<!-- Status -->
@@ -307,13 +308,21 @@
 		</select>
 	</td>
 	<!-- Fixed in Version -->
-	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
 			<option value="any" <?php check_selected( $t_filter['fixed_in_version'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
 		</select>
 	</td>
+	<!-- Priority -->
+        <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+                <select <?php PRINT $t_select_modifier;?> name="show_priority[]">
+                        <option value="any" <?php check_selected( $t_filter['show_priority'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
+                        <option value="any"></option>
+			<?php print_enum_string_option_list( 'priority', $t_filter['show_priority'] ) ?>
+                </select>
+        </td>
 </tr>
 
 <tr class="row-category2">

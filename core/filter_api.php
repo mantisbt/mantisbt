@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.61 2004-10-25 19:55:29 marcelloscata Exp $
+	# $Id: filter_api.php,v 1.62 2004-10-28 00:31:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -292,6 +292,27 @@
 			}
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
 		}
+
+		# priority 
+                $t_any_found = false;
+                foreach( $t_filter['show_priority'] as $t_filter_member ) {
+                        if ( 'any' == $t_filter_member ) {
+                                $t_any_found = true;
+                        }
+                }
+                if ( count( $t_filter['show_priority'] ) == 0 ) {
+                        $t_any_found = true;
+                }
+                if ( !$t_any_found ) {
+                        $t_clauses = array();
+
+                        foreach( $t_filter['show_priority'] as $t_filter_member ) {
+                                $c_show_priority = db_prepare_int( $t_filter_member );
+                                array_push( $t_clauses, "($t_bug_table.priority='$c_show_priority')" );
+                        }
+                        array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+                }
+
 
 		# product build
 		$t_any_found = false;
@@ -696,13 +717,14 @@
 		$t_tdclass = 'small-caption';
 		$t_trclass = 'row-category2';
 		$t_action  = 'view_all_set.php?f=3';
-
+		
 		if ( $p_for_screen == false ) {
 			$t_tdclass = 'print';
 			$t_trclass = '';
 			$t_action  = 'view_all_set.php';
 		}
-?>
+?> 
+
 		<br />
 		<form method="post" name="filters" action="<?php PRINT $t_action; ?>">
 		<input type="hidden" name="type" value="5" />
@@ -717,7 +739,7 @@
 		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
 		<table class="width100" cellspacing="1">
-
+		
 		<?php
 		if ( $p_expanded ) {
 			$t_filter_cols = 7;
@@ -1009,9 +1031,12 @@
 			<td colspan="2" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
 			</td>
-			<td colspan="2" class="small-caption" valign="top">
+			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'fixed_in_version[]'; ?>"><?php PRINT lang_get( 'fixed_in_version' ) ?>:</a>
 			</td>
+			<td colspan="1" class="small-caption" valign="top">
+                                <a href="<?php PRINT $t_filters_url . 'show_priority[]'; ?>"><?php PRINT lang_get( 'priority' ) ?>:</a>
+                        </td>
 		</tr>
 
 		<tr class="row-1">
@@ -1139,7 +1164,7 @@
 								}
 							?>
 			</td>
-			<td colspan="2" class="small-caption" valign="top">
+			<td colspan="1" class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
@@ -1169,6 +1194,36 @@
 								}
 							?>
 			</td>
+			<td colspan="1" class="small-caption" valign="top">
+                                                        <?php
+							        $t_output = '';
+                                                                $t_any_found = false;
+                                                                if ( count( $t_filter['show_priority'] ) == 0 ) {
+                                                                        PRINT lang_get( 'any' );
+                                                                } else {
+                                                                        $t_first_flag = true;
+                                                                        foreach( $t_filter['show_priority'] as $t_current ) {
+                                                                                $t_this_string = '';
+                                                                                if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+                                                                                        $t_any_found = true;
+                                                                                } else {
+                                                                                        $t_this_string = get_enum_element( 'priority', $t_current );
+                                                                                }
+                                                                                if ( $t_first_flag != true ) {
+                                                                                        $t_output = $t_output . '<br>';
+                                                                                } else {
+                                                                                        $t_first_flag = false;
+                                                                                }
+                                                                                $t_output = $t_output . $t_this_string;
+                                                                        }
+                                                                        if ( true == $t_any_found ) {
+                                                                                PRINT lang_get( 'any' );
+                                                                        } else {
+                                                                                PRINT $t_output;
+                                                                        }
+                                                                }
+                                                        ?>
+                        </td>
 		</tr>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
@@ -1751,6 +1806,7 @@
 									  'reporter_id' => 'int',
 									  'handler_id' => 'string',
 									  'show_resolution' => 'int',
+									  'show_priority' => 'int',
 									  'show_build' => 'string',
 									  'show_version' => 'string',
 									  'hide_status' => 'int',
