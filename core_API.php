@@ -934,12 +934,17 @@
 	### if the user is and the account is enabled then let them pass
 	### otherwise redirect them to the login page
 	function login_cookie_check( $p_redirect_url="" ) {
-		global 	$g_string_cookie_val, $g_project_cookie_val, $g_login_page,
+		global 	$g_string_cookie_val, $g_project_cookie_val, 
+				$g_login_page, $g_logout_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
+			if ( empty( $g_project_cookie_val ) ) {
+				header( "Location: $g_logout_page" );
+				exit;
+			}	
 
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -985,29 +990,42 @@
 	### also sets the last time they visited
 	### otherwise redirects to the login page
 	function index_login_cookie_check( $p_redirect_url="" ) {
-		global 	$g_string_cookie_val, $g_login_page,
+		global 	$g_string_cookie_val, $g_project_cookie_val,
+				$g_login_page, $g_logout_page, 
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
+			if ( empty( $g_project_cookie_val ) ) {
+				header( "Location: $g_logout_page" );
+				exit;
+			}	
+
 			### set last visit cookie
 
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+			echo "PPP";
+
 			### get user info
 			$t_enabled = get_current_user_field( "enabled" );
 
+			echo "OOO";
+			
 			### check for acess enabled
 			if ( $t_enabled!="on" ) {
 				header( "Location: $g_logout_page" );
 			}
 
+			echo "III";exit;
+
 			$t_last_access = get_current_user_field( "last_visit" );
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
-				header( "Location: $p_redirect_url" );
+				#header( "Location: $p_redirect_url" );
+				header( "Location: $p_logout_page" );
 				exit;
 			}
 			### continue with current page
