@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.87 2004-06-11 02:00:01 narcissus Exp $
+	# $Id: print_api.php,v 1.88 2004-06-26 12:30:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1074,7 +1074,8 @@
 	# This prints the little [?] link for user help
 	# The $p_a_name is a link into the documentation.html file
 	function print_documentation_link( $p_a_name='' ) {
-		PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
+		# @@@ Disable documentation links for now.  May be re-enabled if linked to new manual.
+		# PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 	}
  	# --------------------
 	# print the hr
