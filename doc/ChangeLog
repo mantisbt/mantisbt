@@ -11,6 +11,7 @@ Mantis ChangeLog
  * Fix #3020: Error when deleting a bug with bugnotes.
  * Fix #3021: Error when using phpMailer.
  * Fix #3022: Add user to project form lists disabled users.
+ * Fix #2839: 'Join incorrect in print_reporter_options and print_assign_to_option_list'
 
 2003.02.26  -  0.18.0a3
 

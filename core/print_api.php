@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.57 2003-03-03 23:29:30 int2str Exp $
+	# $Id: print_api.php,v 1.58 2003-03-05 02:46:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -196,11 +196,12 @@
 					FROM 	$t_user_table u,
 							$t_project_user_list_table l,
 							$t_project_table p
-					WHERE	(p.view_state='$t_pub' AND
-							u.access_level>='$t_rep') OR
-							(l.access_level>='$t_rep' AND
-							l.user_id=u.id) OR
-							u.access_level>='$t_adm'
+					WHERE	((p.view_state='$t_pub'
+							  AND u.access_level>='$t_rep') OR
+							 (l.access_level>='$t_rep' AND
+							  l.user_id=u.id) OR
+							 u.access_level>='$t_adm') AND
+							p.id=l.project_id
 					ORDER BY u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
@@ -309,11 +310,12 @@
 					FROM 	$t_user_table u,
 							$t_project_user_list_table l,
 							$t_project_table p
-					WHERE	(p.view_state='$t_pub' AND
-							u.access_level>='$t_dev') OR
-							(l.access_level>='$t_dev' AND
-							l.user_id=u.id) OR
-							u.access_level>='$t_adm'
+					WHERE	((p.view_state='$t_pub' AND
+							  u.access_level>='$t_dev') OR
+							 (l.access_level>='$t_dev' AND
+							  l.user_id=u.id) OR
+							 u.access_level>='$t_adm') AND
+							p.id = l.project_id
 					ORDER BY u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
