@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.19 2003-01-11 01:07:00 jfitzell Exp $
+	# $Id: string_api.php,v 1.20 2003-01-11 02:05:13 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -144,24 +144,42 @@
 			$t_page_name = 'bug_view_page.php';
 		}
 
+		preg_match_all('/(^|.+?)(?:(?<=^|\s)' . preg_quote($t_tag) . '(\d+)|$)/s',
+								$p_string, $t_matches, PREG_SET_ORDER );
+
+		$t_result = '';
+
 		if ( $p_include_anchor ) {
-			$t_replace_with = <<< EOT
-bug_exists( \\2 ) ?
-	'\\1<a href="$t_page_name?bug_id=\\2" title="' .
-	bug_get_field( \\2, 'summary' ) .
-	'">#\\2</a>'
-:
-	'\\1#\\2'
-EOT;
-			$t_modifier = 'e';
+			foreach ( $t_matches as $t_match ) {
+				$t_result .= $t_match[1];
+
+				if ( isset( $t_match[2] ) ) {
+					$t_bug_id = $t_match[2];
+					if ( bug_exists( $t_bug_id ) ) {
+						$t_result .= '<a href="' . $t_page_name . '?bug_id=' . $t_bug_id . 
+									'" title="' . bug_get_field( $t_bug_id, 'summary' ) .
+									'">#' . $t_bug_id . '</a>';
+					} else {
+						$t_result .= $t_tag . $t_bug_id;
+					}
+				}
+			}
 		} else {
-			$t_replace_with = $t_path . $t_page_name . '?bug_id=\2';
-			$t_modifier = '';
+			foreach ( $t_matches as $t_match ) {
+				$t_result .= $t_match[1];
+				
+				if ( isset( $t_match[2] ) ) {
+					# We might as well create the link here even if the bug
+					#  doesn't exist.  In the case above we don't want to do
+					#  the summary lookup on a non-existant bug.  But here, we
+					#  can create the link and by the time it is clicked on, the
+					#  bug may exist.
+					$t_result .= $t_path . $t_page_name . '?bug_id=' . $t_match[2];
+				}
+			}
 		}
 
-		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/' . $t_modifier,
-								$t_replace_with,
-								$p_string);
+		return $t_result;
 	}
 
 	#===================================
