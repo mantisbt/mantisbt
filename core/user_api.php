@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.28 2002-09-16 10:07:37 jfitzell Exp $
+	# $Id: user_api.php,v 1.29 2002-09-17 23:32:36 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -519,7 +519,7 @@
 	# --------------------
 	# return the user's access level
 	#  account for private project and the project user lists
-	function user_get_access_level( $p_user_id, $p_project_id ) {
+	function user_get_access_level( $p_user_id, $p_project_id = 0 ) {
 		$t_access_level  = user_get_field( $p_user_id, 'access_level' );
 
 		if ( $t_access_level >= ADMINISTRATOR ) {
