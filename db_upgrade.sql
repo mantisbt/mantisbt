@@ -80,7 +80,7 @@ CREATE TABLE mantis_project_table (
    UNIQUE name (name)
 );
 
-INSERT INTO mantis_project_table VALUES ( '0000001', 'mantis', 'development', 'on', 'public', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
+INSERT INTO mantis_project_table VALUES ( '0000001', 'mantis', 'development', 'on', 'public', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled or private if you do not wish to see it)');
 
 #
 # Table structure for table 'mantis_project_category_table'
