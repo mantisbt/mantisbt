@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.11 2003-03-12 17:39:47 jfitzell Exp $
+	# $Id: bug_reminder.php,v 1.12 2003-09-21 10:46:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,8 +45,11 @@
 	# Add reminder as bugnote if store reminders option is ON.
 	if ( ON == config_get( 'store_reminders' ) ) {
 		$t_body = lang_get( 'reminder_sent_to' ) . ' ' .
-					( implode( ', ', $result ) ) . 
-					"\n\n" . $f_body;
+					( implode( ', ', $result ) );
+		if ( !is_blank( $f_body ) ) {
+			$t_body .= "\n\n" . $f_body;
+		}
+
 		bugnote_add( $f_bug_id, $t_body );
 	}
 
