@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.16 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: config_api.php,v 1.17 2005-02-27 14:45:00 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	# cache for config variables
@@ -38,7 +38,8 @@
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
-		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() ) ) {
+		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() ) 
+				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
 			$t_config_table = config_get_global( 'mantis_config_table' );
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
 			# @@ debug @@ error_print_stack_trace();
