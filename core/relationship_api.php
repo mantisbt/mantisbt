@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.28 2004-12-17 02:54:50 thraxisp Exp $
+	# $Id: relationship_api.php,v 1.29 2004-12-18 09:35:21 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -501,6 +501,7 @@
 	# return formatted string with all the details on the requested relationship
 	function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
 		$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
+		$t_icon_path = config_get( 'icon_path' );
 
 		$p_user_id = auth_get_current_user_id();
 
@@ -566,6 +567,9 @@
 
 		# add summary
 		$t_relationship_info_html .= $t_td . string_attribute( $t_bug->summary );
+		if ( VS_PRIVATE == $t_bug->view_state ) {
+			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+		}
 		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 			$t_relationship_info_text .= $t_bug->summary;
 		}
