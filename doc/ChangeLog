@@ -8,6 +8,8 @@ Mantis ChangeLog
  * Enhancement: implemented parameterized error messages.  Error strings are passed through sprintf() and are parameterized with the values given to error_parameters()
  * Fix: Improved adherance to the XHTML standard.
  * Fix: Allow spaces and hyphens in emails
+ * Fix: Sometimes users are denied to access private projects although they should have access to it.
+ * Fix: A bug in the handling of the case where a user who does not have access to a private project, but has access level >= private_project_threshold.
  * Fix #2992: Unable to attach files to bugs on Windows servers with magic quotes ON.
  * Fix #3027: History summary a little bit too wide in emails.
  * Fix #3064: view bug buttons in vertical column
@@ -20,6 +22,7 @@ Mantis ChangeLog
  * Fix #3109: Error when adding protected users.
  * Fix #3111: Bug links in bugnotes do not contain the FQDN as they do in the full reference.
  * Fix #3115: manage_proj_cat_edit_page.php uses the wrong project id.
+ * Fix #3120: Missing "Assign To" field on "Report Bug" screen.
  * Fix #3121: When creating a bug that has custom fields, the values for the custom fields are not sent out in the email.
  * Fix #3124: view_bugs: a reporter has the drop-down box of actions, but doesn't have the checkboxes.
  * Fix #3132: Email for feedback does not contain the last bugnote

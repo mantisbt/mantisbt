@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_proj_add.php,v 1.19 2003-02-26 08:48:42 jfitzell Exp $
+	# $Id: manage_user_proj_add.php,v 1.20 2003-04-24 04:00:41 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -15,11 +15,10 @@
 	$f_user_id		= gpc_get_int( 'user_id' );
 	$f_access_level	= gpc_get_int( 'access_level' );
 	$f_project_id	= gpc_get_int_array( 'project_id', array() );
-
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+	$t_manage_user_threshold = config_get( 'manage_user_threshold' );
 
 	foreach ( $f_project_id as $t_proj_id ) {
-		if ( access_has_project_level( config_get( 'project_user_threshold' ), $t_proj_id ) ) {
+		if ( access_has_project_level( $t_manage_user_threshold, $t_proj_id ) ) {
 			project_add_user( $t_proj_id, $f_user_id, $f_access_level );
 		}
 	}

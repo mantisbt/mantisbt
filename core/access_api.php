@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.21 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: access_api.php,v 1.22 2003-04-24 04:00:44 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -77,7 +77,7 @@
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				
-				$g_cache_access_matrix[$row['user_id']][(int)$p_project_id] = $row['access_level'];
+				$g_cache_access_matrix[(int)$row['user_id']][(int)$p_project_id] = (int)$row['access_level'];
 			}
 
 			$g_cache_access_matrix_project_ids[] = (int)$p_project_id;
@@ -114,18 +114,13 @@
 
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
-				
-				$g_cache_access_matrix[(int)$p_user_id][$row['project_id']] = $row['access_level'];
+				$g_cache_access_matrix[(int)$p_user_id][(int)$row['project_id']] = (int)$row['access_level'];
 			}
 
 			$g_cache_access_matrix_user_ids[] = (int)$p_user_id;
 		}
 
 		return $g_cache_access_matrix[(int)$p_user_id];
-	}
-
-	function access_cache_matrix() {
-
 	}
 
 	#===================================
@@ -199,27 +194,23 @@
 
 		$t_access_level = access_get_local_level( auth_get_current_user_id(),
 													$p_project_id );
-		
+
 		# Try to use the project access level.
 		# If the user is not listed in the project, then try to fall back
 		#  to the global access level
 		if ( false === $t_access_level ) {
 			$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
-			$t_access_level = current_user_get_field( 'access_level' );
-			
+
 			# If the project is private and the user isn't listed, then they
-			#  must be an administrator to get in
-			if ( VS_PRIVATE == $t_project_view_state &&
-				 $t_access_level < ADMINISTRATOR ) {
-				return false;
+			# must have the private_project_threshold access level to get in.
+			if ( VS_PRIVATE == $t_project_view_state ) {
+				return ( access_has_global_level( config_get( 'private_project_threshold' ) ) );
+			} else {
+				$t_access_level = current_user_get_field( 'access_level' );
 			}
 		}
 
-		if ( $t_access_level >= $p_access_level ) {
-			return true;
-		} else {
-			return false;
-		}
+		return ( $t_access_level >= $p_access_level );
 	}
  	
 	# --------------------
@@ -344,6 +335,8 @@
 	#===================================
 
 	function access_get_local_level( $p_user_id, $p_project_id ) {
+		$p_project_id = (int)$p_project_id; // 000001 is different from 1.
+
 		$t_project_level = access_cache_matrix_user( $p_user_id );
 
 		if ( isset( $t_project_level[$p_project_id] ) ) {

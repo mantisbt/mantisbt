@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.18 2003-04-06 03:18:19 vboctor Exp $
+	# $Id: gpc_api.php,v 1.19 2003-04-24 04:00:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -187,7 +187,7 @@
 	# If $p_expire is false instead of a number, the cookie will expire when
 	#  the browser is closed; if it is true, the default time from the config
 	#  file will be used
-	# If $p_path or $p_domaain are omitted, defaults are used
+	# If $p_path or $p_domain are omitted, defaults are used
 	#
 	# @@@ this function is to be modified by Victor to add CRC... for now it
 	#  just passes the parameters through to setcookie()
@@ -210,11 +210,14 @@
 
 	# ------------------
 	# Clear a cookie variable
-	function gpc_clear_cookie( $p_name, $p_path=null ) {
+	function gpc_clear_cookie( $p_name, $p_path=null, $p_domain=null ) {
 		if ( null === $p_path ) {
 			$p_path = config_get( 'cookie_path' );
 		}
-		return setcookie( $p_name, '', -1, $p_path );
+		if ( null === $p_domain ) {
+			$p_domain = config_get( 'cookie_domain' );
+		}
+		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	}
 
 	#===================================

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.29 2003-04-09 11:07:47 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.30 2003-04-24 04:00:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -222,14 +222,12 @@
 </tr>
 
 
+<!-- Handler (if permissions allow) -->
+<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
-
-
-<!-- Handler (if permissions allow) -->
-<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assign_to' ) ?>

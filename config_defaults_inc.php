@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.118 2003-04-23 19:32:39 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.119 2003-04-24 04:00:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -760,7 +760,6 @@
 	# set this to something more restrictive if needed
 	# http://www.php.net/manual/en/function.setcookie.php
 	$g_cookie_path			= '/';
-	# unused
 	$g_cookie_domain		= '';
 	# cookie version for view_all_page
 	$g_cookie_version		= 'v4';
