@@ -25,8 +25,35 @@
 			WHERE id='$f_id'";
 	$result = db_query($query);
 
+	# get user information
+	$u_id = get_current_user_field( "id " );
+
+	$f_bugnote_text = trim( $f_bugnote_text );
+	# check for blank bugnote
+	if ( !empty( $f_bugnote_text ) ) {
+		$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+		# insert bugnote text
+		$query = "INSERT
+				INTO $g_mantis_bugnote_text_table
+				( id, note )
+				VALUES
+				( null, '$f_bugnote_text' )";
+		$result = db_query( $query );
+
+		# retrieve bugnote text id number
+		$t_bugnote_text_id = db_insert_id();
+
+		# insert bugnote info
+		$query = "INSERT
+				INTO $g_mantis_bugnote_table
+				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
+				VALUES
+				( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+		$result = db_query( $query );
+	}
+
 	# updated the last_updated date
-	bug_date_update( $f_id );
+	$result = bug_date_update( $f_id );
 
 	email_close( $f_id );
 
