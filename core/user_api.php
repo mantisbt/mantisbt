@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.27 2002-09-16 02:36:33 jfitzell Exp $
+	# $Id: user_api.php,v 1.28 2002-09-16 10:07:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -626,6 +626,28 @@
 		$result = db_query( $query );
 
 		return db_result( $result );
+	}
+	# --------------------
+	# return a profile row
+	function user_get_profile_row( $p_user_id, $p_profile_id ) {
+		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_profile_id	= db_prepare_int( $p_profile_id );
+
+		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
+
+		$query = "SELECT *
+				  FROM $t_user_profile_table
+				  WHERE id='$c_profile_id'
+				    AND user_id='$c_user_id'";
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) < 1 ) {
+			trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
+		}
+
+		$row = db_fetch_array( $result );
+
+		return $row;
 	}
 
 	#===================================
