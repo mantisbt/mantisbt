@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.65 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.66 2003-02-19 01:04:19 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -439,7 +439,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 				</td>
 				<td>
 					<select name="user_id[]" multiple size="10">
-						<?php print_project_user_list_option_list() ?>
+						<?php print_project_user_list_option_list( $f_project_id ) ?>
 					</select>
 				</td>
 				<td class="category">
