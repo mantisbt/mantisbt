@@ -10,13 +10,13 @@
 	# French: Samuel Tardieu, sam@rfc1149.net
 	# French: Quentin Delance, quentin.delance@insalien.org
 	# French: Roland Meyer, Daniel Coquette
-	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
+	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.50 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-17 17:56:57 $
+	# $Revision: 1.51 $
+	# $Author: jlatour $
+	# $Date: 2003-02-18 16:33:18 $
 	#
-	# $Id: strings_french.txt,v 1.50 2003-02-17 17:56:57 jfitzell Exp $
+	# $Id: strings_french.txt,v 1.51 2003-02-18 16:33:18 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,7 +36,7 @@
 	$s_all_projects = 'Tous les projets';
 	$s_move_bugs = 'Déplacer les bugs';
 	$s_operation_successful = 'Opération réussie';
-	$s_date_order = 'Par Date';
+	$s_date_order = 'Par date';
 	$s_print_all_bug_page_link = 'Rapport imprimable';
 	$s_csv_export = 'Export CSV';
 	$s_login_anonymously = 'Se logger anonymement';
@@ -67,8 +67,8 @@
 	$s_delete_bugnote_button = 'Supprimer la note';
 	$s_delete_bugnote_sure_msg = 'Etes vous sûr de vouloir supprimer cette note ?';
 	$s_bug_relationships = 'Relations';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
+	$s_empty_password_sure_msg = 'L\'utilisateur a un mot de passe vide.  Est ce bien ce que vous voulez ?';
+	$s_empty_password_button = 'Utiliser un mot de passe vide';
 
 	$s_duplicate_of = 'doublon de %id';
 	$s_has_duplicate = 'a pour doublon %id';
@@ -90,10 +90,11 @@
 	$s_make_private = 'Rendre privé';
 	$s_make_public = 'Rendre public';
 
-	$s_create_new_project_link = 'Create New Project';
+	$s_create_new_project_link = 'Créer un nouveau projet';
+	$s_login_link = 'Connexion';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+	$s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bugs suivants : ';
 	$s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 	$s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
 	$s_move_bugs_conf_msg = 'Déplacer vers';
@@ -106,8 +107,8 @@
 	$s_move_group_bugs_button = 'Déplacer les bugs' ;
 	$s_assign_group_bugs_button = 'Assigner les bugs' ;
 	$s_resolve_group_bugs_button = 'Résoudre les bugs' ;
-	$s_priority_group_bugs_button = 'Màj priorité' ;
-	$s_status_group_bugs_button = 'Màj statut' ;
+	$s_priority_group_bugs_button = 'Mettre à jour la priorité' ;
+	$s_status_group_bugs_button = 'Mettre à jour le statut' ;
 
 	# improved JPgraphs strings
 	$s_graph_imp_status_title = 'Graphiques par états' ;
@@ -123,15 +124,15 @@
 	$s_by_severity_mix = 'par sévérité et état';
 	$s_by_priority_mix = 'par priorité et état';
 	$s_by_resolution_mix = 'par résolution et état';
-        $s_synthesis_link = 'Synthese';
-        $s_status_link = 'Par état';
+	$s_synthesis_link = 'Synthèse';
+	$s_status_link = 'Par état';
 	$s_priority_link = 'Par priorité';
 	$s_severity_link = 'Par sévérité';
 	$s_category_link = 'Par catégorie';
 	$s_resolution_link = 'Par résolution';
 
 	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Afficher bugs sélectionnés';
+	$s_hide_button = 'Afficher le bugs sélectionnés';
 
 	# print_all_bug_options.php : printing preferences
 	$s_printing_preferences_title = 'Choisir les champs à imprimer';
@@ -192,12 +193,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERREUR: Echec de connexion à la base de données.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERREUR: Echec de la requête de base de données.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERREUR: Echec de la sélection de la base de données.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERREUR: Catégorie dupliquée.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERREUR: Aucune copie spécifiée.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERREUR: Catégorie non trouvée.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERREUR: Version dupliquée.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERREUR: Version non trouvée.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERREUR: Nom d\'utilisateur invalide.';
 
 	$s_login_error = 'ERREUR: Votre compte est peut être désactivé ou alors l\'utilisateur/le mot de passe que vous avez saisi est incorrect.';
 	$s_login_cookies_disabled = 'ERREUR: Votre navigateur ne sait pas gérer les cookies ou refuse de les gérer.';
@@ -214,12 +215,12 @@
 	$s_administrator = 'administrateur';
 
 	# Enum Strings
-	$s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:dévelopeur,70:chef de projet,90:administrateur';
+	$s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:chef de projet,90:administrateur';
 	$s_project_status_enum_string     = '10:développement,30:livré,50:stable,70:obsolète';
 	$s_project_view_state_enum_string = '10:public,50:privé';
 	$s_view_state_enum_string         = '10:public,50:privé';
 
-	$s_priority_enum_string           = '10:aucune,20:basse,30:normale,40:élevée,50:urgent,60:immédiate';
+	$s_priority_enum_string           = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
 	$s_severity_enum_string           = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:crash,80:bloquant';
 	$s_reproducibility_enum_string    = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:N/A';
 	$s_status_enum_string             = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
@@ -230,7 +231,7 @@
 	# Email Strings
 	$s_new_account_subject = 'Votre compte utilisateur';
 	$s_new_account_greeting = 'Bienvenue sur le gestionnaire de bugs.  Voici les informations nécessaires pour vous identifier' . "\n\n";
-	$s_new_account_url = 'vous pouvez vous identifier ici : ';
+	$s_new_account_url = 'Vous pouvez vous identifier ici : ';
 	$s_new_account_username = 'Utilisateur : ';
 	$s_new_account_password = 'Mot de passe : ';
 	$s_new_account_message = 'Après votre identification, veuillez changer votre mot de passe. Celui-ci est stocké crypté aussi l\'équipe d\'administration du système ne pourra pas vous le transmettre si vous le perdez : il devra être réinitialisé.' . "\n\n";
@@ -301,7 +302,7 @@
 	$s_email_on_bugnote_added = 'Email en cas de nouvelle note';
 	$s_email_on_status_change = 'Email en cas de modification d\'état';
 	$s_email_on_priority_change = 'Email en cas de modification de priorité';
-	$s_language = 'Langage';
+	$s_language = 'Language';
 	$s_update_prefs_button = 'Mettre à jour les préférences';
 	$s_reset_prefs_button = 'Réinitialiser les préférences';
 
@@ -382,13 +383,13 @@
 	$s_bugnote_add_reopen_button = 'Ajouter une note et réouvrir le bug';
 
 	# bug_resolve_page.php
-	$s_resolve_bug_title = 'Résolution de bug';
+	$s_resolve_bug_title = 'Résolution d\'un bug';
 	$s_resolve_bug_button = 'Résoudre le bug';
 
 	# bug_resolve_page2.php
 	$s_bug_resolved_msg = 'Le bug a été résolu. Entrez une note ci-dessous...';
 	$s_resolve_add_bugnote_title = 'Ajouter une note pour la résolution du bug';
-	$s_bugnote_add_resolve_button = 'Ajouter une note';
+	$s_bugnote_add_resolve_button = 'Ajouter la note';
 
 	# bug_reminder_page.php
 	$s_from = 'De';
@@ -544,7 +545,7 @@
 	$s_project_deleted_msg = 'Le projet a été supprimé...';
 
 	# manage_proj_delete_page.php
-	$s_project_delete_msg = 'Voulez-vous vraiment supprimer ce projet et tous les rapports de bugs associés ?';
+	$s_project_delete_msg = 'Voulez-vous vraiment supprimer ce projet et tous les rapports de bug associés ?';
 	$s_project_delete_button = 'Supprimer le projet';
 
 	# manage_proj_edit_page.php
@@ -557,14 +558,14 @@
 	$s_delete_project_button = 'Supprimer le projet';
 	$s_categories_and_version_title = 'Catégories et versions';
 	$s_categories = 'Catégories';
-	$s_add_category_button = 'Ajout de catégories';
+	$s_add_category_button = 'Ajouter la catégorie';
 	$s_versions = 'Versions';
-	$s_add_version_button = 'Ajouter de versions';
+	$s_add_version_button = 'Ajouter la version';
 	$s_edit_link = 'Modifier';
 	$s_actions = 'Actions';
 	$s_version = 'Version/Build';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
+	$s_timestamp = 'Compteur de temps';
+	$s_update = 'Mettre à jour';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Ajouter un projet';
@@ -602,8 +603,8 @@
 
 	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Tous les comptes de plus d\'une semaine et qui ne se sont jamais connectés ont été effacés.';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+	$s_prune_accounts_button = 'Supprimer';
+	$s_confirm_account_pruning = 'Etes vous sûr de vouloir supprimer les comptes qui ne se sont jamais connectés ?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Modifier un utilisateur';
@@ -830,7 +831,7 @@
 	$s_update_custom_field_button = 'Mettre à jour le champ personnalisé';
 	$s_add_existing_custom_field = 'Ajouter ce champ personnalisé existant';
 	$s_edit_custom_field_title = 'Modifier un champ personnalisé';
-	$s_custom_field = 'Field';
+	$s_custom_field = 'Champ';
 	$s_custom_fields_setup = 'Champs personnalisés';
 	$s_custom_field_name = 'Nom';
 	$s_custom_field_project_count = 'Nombre de projets';

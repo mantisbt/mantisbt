@@ -12,7 +12,7 @@ Mantis ChangeLog
  * Fix: obscure error when database connect failed
  * New config option (mail_priority): if use_x_priority is set to ON, what should the value of X-Priority be? The default is 3 (instead of 0 in previous version, which was misinterpreted by some MTAs)
  * Removed config option (mail_send_crlf): having this option off (default) violated RFC 822bis and there shouldn't be any server which required it to be set to off
- * Languages: Updated Dutch, German and Italian localisations.
+ * Languages: Updated Dutch, French, German and Italian localisations.
  * Languages: Synchronized localisation files with the English localisation.
  * Security enhancement: it is now impossible to 'fill in' forgotten language strings using GET/POST/COOKIE variables
 
