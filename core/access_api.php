@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.4 2002-09-01 21:45:59 prescience Exp $
+	# $Id: access_api.php,v 1.5 2002-09-03 02:21:01 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,7 +18,7 @@
 	function access_denied() {
 		global $MANTIS_ERROR;
 		print '<center>';
-		print '<p />' . $MANTIS_ERROR[ERROR_ACCESS_DENIED] . '<p />';
+		print '<br />'.$MANTIS_ERROR[ERROR_ACCESS_DENIED].'<br />';
 		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
 		print '</center>';
 		exit;

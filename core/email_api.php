@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.11 2002-09-01 21:45:59 prescience Exp $
+	# $Id: email_api.php,v 1.12 2002-09-03 02:21:01 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -607,11 +607,11 @@
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
-				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p />";
+				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
 				PRINT htmlspecialchars($t_recipient).'<br />';
-				PRINT htmlspecialchars($t_subject).'<p />';
+				PRINT htmlspecialchars($t_subject).'<br />';
 				PRINT nl2br(htmlspecialchars($t_headers)).'<br />';
-				PRINT nl2br(htmlspecialchars($t_message)).'<p />';
+				PRINT nl2br(htmlspecialchars($t_message)).'<br />';
 				exit;
 			}
 		}

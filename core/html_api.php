@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.10 2002-09-02 01:11:54 prescience Exp $
+	# $Id: html_api.php,v 1.11 2002-09-03 02:21:01 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -59,8 +59,9 @@
 	# --------------------
 	# (1) this is the first text sent by the page
 	function print_html_top() {
-		PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-		#PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
+		# @@@ NOTE make this a configurable global.
+		#PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+		PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
 
 		PRINT '<html>';
 	}
@@ -176,14 +177,14 @@
 		# @@@
 		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
-				PRINT '<p />';
+				PRINT '<br />';
 				print_menu();
 			}
 		}
 
 		print_source_link( $p_file );
 
-		PRINT '<p />';
+		PRINT '<br />';
 		PRINT '<hr size="1" />';
 		if ( ON == $g_show_version ) {
 			PRINT "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
@@ -281,7 +282,7 @@
 
 		if (( ON == $g_show_source )&&
 			( access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
-				PRINT '<p />';
+				PRINT '<br />';
 				PRINT '<div align="center">';
 				PRINT "<a href=\"show_source_page.php?f_url=$p_file\">Show Source</a>";
 				PRINT '</div>';
@@ -402,7 +403,7 @@
 			case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
 
-		PRINT '<p /><div align="center">';
+		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_manage_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
 			print_bracket_link( $t_manage_user_create_page, lang_get( 'create_new_account_link' ) );
@@ -462,7 +463,7 @@
 			case $t_documentation_page: $t_documentation_page = ''; break;
 		}
 
-		PRINT '<p /><div align="center">';
+		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_documentation_page, lang_get( 'system_info_link' ) );
 			print_bracket_link( $g_path.'ChangeLog', 'ChangeLog' );
 			print_bracket_link( $g_path.'README', 'README' );
@@ -476,7 +477,7 @@
 	function print_summary_menu( $p_page='' ) {
 		global $g_use_jpgraph;
 
-		PRINT '<p /><div align="center">';
+		PRINT '<div align="center">';
 		print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 
 		if ( $g_use_jpgraph != 0 ) {
@@ -499,17 +500,17 @@
 		global $g_allow_signup;
 
 		if ( $g_allow_signup != 0 ) {
-			PRINT '<p /><div align="center">';
+			PRINT '<br /><div align="center">';
 			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 			PRINT '</div>';
 		}
 	}
 	# --------------------
 	function print_proceed( $p_result, $p_query, $p_link ) {
-		PRINT '<p />';
+		PRINT '<br />';
 		PRINT '<div align="center">';
 		if ( $p_result ) {						# SUCCESS
-			PRINT lang_get( 'operation_successful' ) . '<p />';
+			PRINT lang_get( 'operation_successful' ) . '<br />';
 		} else {								# FAILURE
 			print_sql_error( $p_query );
 		}
@@ -532,7 +533,7 @@
 	function print_status_colors() {
 		global	$g_status_enum_string;
 
-		PRINT '<p />';
+		PRINT '<br />';
 		PRINT '<table class="width100" cellspacing="1">';
 		PRINT '<tr>';
 		$t_arr  = explode_enum_string( $g_status_enum_string );

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.7 2002-09-01 21:45:59 prescience Exp $
+	# $Id: database_api.php,v 1.8 2002-09-03 02:21:01 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -138,7 +138,7 @@
 	# --------------------
 	# display both the error num and error msg
 	function db_error() {
-		return '<p />'.db_error_num().': '.db_error_msg().'<p />';
+		return '<br />'.db_error_num().': '.db_error_msg().'<br />';
 	}
 	# --------------------
 	# close the connection.

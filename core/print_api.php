@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.10 2002-09-01 21:45:59 prescience Exp $
+	# $Id: print_api.php,v 1.11 2002-09-03 02:21:01 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -1048,7 +1048,7 @@
 
 		PRINT $MANTIS_ERROR[ERROR_SQL];
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
-		PRINT "<p />$p_query;<p />";
+		PRINT "<br />$p_query;<br />";
 	}
 	# --------------------
 	###########################################################################
