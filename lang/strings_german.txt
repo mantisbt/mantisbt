@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: vboctor $
-	# $Date: 2004-02-19 12:50:46 $
+	# $Date: 2004-02-19 13:19:42 $
 	#
-	# $Id: strings_german.txt,v 1.84 2004-02-19 12:50:46 vboctor Exp $
+	# $Id: strings_german.txt,v 1.85 2004-02-19 13:19:42 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -252,7 +252,7 @@ $s_email_resolved_msg = 'Der folgende Fehler wurde behoben.';
 $s_email_close_msg = 'Der folgende Fehler wurde geschlossen';
 $s_email_feedback_msg = 'Der folgende Fehler benötigt Ihr Feedback.';
 $s_email_reopen_msg = 'Der folgende Fehler wurde wiedereröffnet.';
-$s_email_assigned_msg = 'The following bug has been ASSIGNED.';
+$s_email_assigned_msg = 'Der folgende Fehler wurde zugewiesen.';
 $s_email_bug_deleted_msg = 'Dieser Fehler wurde gelöscht.';
 
 $s_email_reporter = 'Reporter';
