@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.142 2004-12-17 15:21:23 bpfennigschmidt Exp $
+	# $Id: html_api.php,v 1.143 2004-12-18 12:23:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -697,54 +697,62 @@
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
-		
+
 		#checking if it's a per project statistic or all projects
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
 			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+				$t_specific_where = 'WHERE (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 			} else {
-				$specific_where = '1=1';
+				$t_specific_where = '';
 			}
 		} else {
-			$specific_where = " project_id='$t_project_id'";
+			$t_specific_where = "WHERE project_id='$t_project_id'";
 		}
-		
+
+		# Can't we use a more efficient query that is based on DISTINCT statuses + COUNT?
 		$query = "SELECT status
 				FROM $t_mantis_bug_table
-				WHERE $specific_where
-				ORDER BY status";
+				$t_specific_where";
 		$result = db_query( $query );
-		
-		$bug_count = db_num_rows( $result );
-		$t_status_array = array();
+
+		$t_bug_count = db_num_rows( $result );
+		$t_status_count_array = array();
 
 		while ( $row = db_fetch_array( $result ) ) {
-			$t_status_array[] = $row[status];
+			$t_current_status = $row['status'];
+
+			if ( isset( $t_status_count_array[$t_current_status] ) ) {
+				$t_status_count_array[$t_current_status]++;
+			} else {
+				$t_status_count_array[$t_current_status] = 1;
+			}
 		}
 
-		$t_status_count_array = array_count_values( $t_status_array );
-
-		PRINT '<br />';
-		PRINT '<table class="width100" cellspacing="0">';
-		PRINT '<tr>';
-
+		echo '<table class="width100" cellspacing="0">';
+		echo '<tr>';
 
 		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
 		$enum_count	= count( $t_arr );
 		for ( $i=0; $i < $enum_count; $i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
 			$t_color = get_status_color( $t_s[0] );
-			$width = round( ( $t_status_count_array[ $t_s[0] ] / $bug_count ) * 100 );
-			
+			$t_status = $t_s[0];
+
+			if ( !isset( $t_status_count_array[ $t_status ] ) ) {
+				$t_status_count_array[ $t_status ] = 0;
+			}
+
+			$width = round( ( $t_status_count_array[ $t_status ] / $t_bug_count ) * 100 );
+
 			if ($width > 0) {
 				PRINT "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
 			}
 		}
 
-		PRINT '</tr>';
-		PRINT '</table>';
+		echo '</tr>';
+		echo '</table>';
 	}
 
 	# --------------------
