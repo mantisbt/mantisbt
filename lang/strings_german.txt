@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.75 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.76 $
+	# $Author: vboctor $
+	# $Date: 2003-08-02 04:28:37 $
 	#
-	# $Id: strings_german.txt,v 1.75 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_german.txt,v 1.76 2003-08-02 04:28:37 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -124,12 +124,12 @@ $s_by_resolution_pct = 'by resolution percentage';
 $s_by_severity_mix = 'by severity and status';
 $s_by_priority_mix = 'by priority and status';
 $s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_synthesis_link = 'Zusammenstellung';
+$s_status_link = 'nach Status';
+$s_priority_link = 'nach Priorität';
+$s_severity_link = 'nach Schwere';
+$s_category_link = 'nach Kategorie';
+$s_resolution_link = nach Lösung';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Nur ausgewählte anzeigen';
@@ -400,7 +400,7 @@ $s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung gesendet, bezüglic
 $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an';
 $s_bug_send_button = 'Absenden';
-$s_reminder = 'Reminder';
+$s_reminder = 'Erinnerung';
 
 # bug_update.php
 $s_bug_updated_msg = 'Fehlereintrag erfolgreich aktualisiert...';
@@ -566,8 +566,8 @@ $s_add_version_button = 'Version hinzufügen';
 $s_edit_link = 'Bearbeiten';
 $s_actions = 'Aktionen';
 $s_version = 'Version/Build';
-$s_timestamp = 'Timestamp';
-$s_update = 'Update';
+$s_timestamp = 'Datumsstempel';
+$s_update = 'Aktualisierung';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Projekt hinzufügen';
