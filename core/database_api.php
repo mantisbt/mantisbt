@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.8 2002-09-03 02:21:01 prescience Exp $
+	# $Id: database_api.php,v 1.9 2002-10-15 23:46:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -61,15 +61,20 @@
 		}
 	}
 	# --------------------
-	# execute query, requires connection to be opened,
-	function db_query( $p_query ) {
+	# execute query, requires connection to be opened
+	# If $p_error_on_failure is true (default) an error will be triggered
+	#  if there is a problem executing the query.
+	# If $p_error_on_failure is false, false will be returned if there is a
+	#  problem.  This should be used very infrequently.  It was added to allow
+	#  the admin script to check whether a table exists.
+	function db_query( $p_query, $p_error_on_failure=true ) {
 		global $g_queries_array;
 
 		array_push ( $g_queries_array, $p_query );
 
 		$t_result = mysql_query( $p_query );
 
-		if ( !$t_result ) {
+		if ( !$t_result && $p_error_on_failure ) {
 			echo 'ERROR: FAILED QUERY: '.$p_query.' : ';
 			echo db_error();
 			exit;
