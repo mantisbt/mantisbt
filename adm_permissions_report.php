@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.1 2004-10-14 17:34:13 marcelloscata Exp $
+	# $Id: adm_permissions_report.php,v 1.2 2004-10-15 20:50:11 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -210,9 +210,12 @@
 		echo get_capability_row_for_email( lang_get( 'email_on_reopened' ), 'reopen' );
 		echo get_capability_row_for_email( lang_get( 'email_on_deleted' ), 'deleted' );
 		echo get_capability_row_for_email( lang_get( 'email_on_bugnote_added' ), 'bugnote' );
-		echo get_capability_row_for_email( lang_get( 'email_on_sponsorship_changed' ), 'sponsor' );
-		echo get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
-
+		if( config_get( 'enable_sponsorship' ) == ON ) {
+			echo get_capability_row_for_email( lang_get( 'email_on_sponsorship_changed' ), 'sponsor' );
+		}
+		if( config_get( 'enable_relationship' ) == ON ) {
+			echo get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relationship' );
+		}
 		$t_statuses = explode_enum_string( config_get( 'status_enum_string' ) );
 		foreach( $t_statuses as $t_status ) {
 			list( $t_state, $t_label ) = explode_enum_arr( $t_status );
