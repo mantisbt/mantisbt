@@ -8,13 +8,12 @@
 	### INCLUDES                                                            ###
 	###########################################################################
 
-	# prevent caching
   	require( "constant_inc.php" );
 	require( "config_inc.php" );
 
 	require( "core_database_API.php" );
 
-	### Evil code to select the proper language file
+	### Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
 		$t_language = "";
 		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
