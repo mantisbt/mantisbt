@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.95 2004-08-04 16:25:58 thraxisp Exp $
+	# $Id: print_api.php,v 1.96 2004-08-07 14:15:50 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,9 +31,6 @@
 			return false;
 		}
 
-		if ( OFF == $t_use_iis ) {
-			header( 'Status: 302' );
-		}
 		header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 
 		if ( ON == $t_use_iis ) {
