@@ -17,7 +17,8 @@ Mantis
  * Fixed potential variable warning in main_page.
  * Fixed signup to detect empty usernames.
  * Fixed user creation to detect empty usernames.
- * Fixed file upload error.  Error message was misreported.
+ * Fixed bug file upload error.  Error message was misreported.
+ * Fixed project doc upload error.  Error message was misreported.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.
