@@ -12,8 +12,8 @@ instructions may seem unix-centric but should work fine on Windows systems.
 Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using Mantis.
 
-Amandeep Jawa has provided an alternative and more detailed installation
-document.  Use a browser and open doc/installation.html.
+These instructions are also available at:
+http://manual.mantisbt.org/manual.installation.php
 
 # --- Requirements ----------
 
