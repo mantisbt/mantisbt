@@ -2,7 +2,7 @@
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
-	<form method="post" action="<? echo $link_page ?>">
+	<form method="post" action="<? echo $link_page ?>?f=3">
 	<input type="hidden" name="f_offset" value="0">
 	<input type="hidden" name="f_save" value="1">
 	<input type="hidden" name="f_sort" value="<? echo $f_sort ?>">

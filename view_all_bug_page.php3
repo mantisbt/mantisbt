@@ -14,7 +14,7 @@
 		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
 							$g_default_show_changed."#0#any#any#last_updated#DESC";
 		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
-		print_header_redirect( $g_view_all_bug_page );
+		print_header_redirect( $g_view_all_bug_page."?f=2" );
 	}
 
 	# Check to see if new cookie is needed
@@ -34,6 +34,10 @@
 		$f_offset = 0;
 	}
 
+	if ( !isset( $f_hide_closed ) ) {
+		$f_hide_closed = "";
+	}
+
 	if ( isset( $f_save ) ) {
 		if ( $f_save == 1 ) {
 			# We came here via the FILTER form button click
@@ -49,7 +53,6 @@
 								$f_assign_id."#".
 								$f_sort."#".
 								$f_dir;
-
 			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
 		} else if ( $f_save == 2 ) {
 			# We came here via clicking a sort link
