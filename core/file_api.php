@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.52 2004-08-21 00:13:52 prichards Exp $
+	# $Id: file_api.php,v 1.53 2004-08-27 00:47:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -423,6 +423,47 @@
 	}
 
 	# --------------------
+	# Generate a string to use as the identifier for the file
+	# It is not guaranteed to be unique and should be checked
+	# The string returned should be 32 characters in length
+	function file_generate_name( $p_seed ) {
+		$t_val = md5( $p_seed . time() );
+
+		return substr( $t_val, 0, 32 );
+	}
+
+	# --------------------
+	# Generate a UNIQUE string to use as the identifier for the file
+	# The string returned should be 64 characters in length
+	function file_generate_unique_name( $p_seed , $p_filepath ) {
+		do {
+			$t_string = file_generate_name( $p_seed );
+		} while ( !file_is_name_unique( $t_string , $p_filepath ) );
+
+		return $t_string;
+	}
+
+	# --------------------
+	# Return true if the file name identifier is unique, false otherwise
+	function file_is_name_unique( $p_name , $p_filepath ) {
+		$t_file_table = config_get( 'mantis_bug_file_table' );
+
+		$c_name = db_prepare_string( $p_filepath . $p_name );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_file_table
+				  WHERE diskfile='$c_name'";
+		$result = db_query( $query );
+		$t_count = db_result( $result );
+
+		if ( $t_count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	# --------------------
 	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='' ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_file_type	= db_prepare_string( $p_file_type );
@@ -440,9 +481,10 @@
 			# prepare variables for insertion
 			$t_file_path = project_get_field( $t_project_id, 'file_path' );
 			$c_file_path = db_prepare_string( $t_file_path );
+			$c_new_file_name = db_prepare_string( $p_file_name );
 
-			$t_new_file_name = $t_bug_id . '-' . $p_file_name;
-			$c_new_file_name = db_prepare_string( $t_new_file_name );
+			$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_bug_id . '-' . $p_file_name, $t_file_path );
+			$c_disk_file_name = db_prepare_string( $t_disk_file_name );
 
 			if ( is_readable ( $p_tmp_file ) ) { 
 				$t_file_size = filesize( $p_tmp_file );
@@ -462,15 +504,15 @@
 				case DISK:
 					file_ensure_valid_upload_path( $t_file_path );
 
-					if ( !file_exists( $t_file_path . $t_new_file_name ) ) {
+					if ( !file_exists( $t_disk_file_name ) ) {
 						if ( FTP == $t_method ) {
 							$conn_id = file_ftp_connect();
-							file_ftp_put ( $conn_id, $t_new_file_name, $p_tmp_file );
+							file_ftp_put ( $conn_id, $t_disk_file_name, $p_tmp_file );
 							file_ftp_disconnect ( $conn_id );
 						}
 
 						umask( 0333 );  # make read only
-						move_uploaded_file( $p_tmp_file, $t_file_path . $t_new_file_name );
+						move_uploaded_file( $p_tmp_file, $t_disk_file_name );
 
 						$c_content = '';
 					} else {
@@ -487,7 +529,7 @@
 			$query = "INSERT INTO $t_bug_file_table
 						(bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 					  VALUES
-						($c_bug_id, '', '', '$c_file_path$c_new_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
+						($c_bug_id, '', '', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
 			db_query( $query );
 
 			# updated the last_updated date

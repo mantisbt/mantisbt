@@ -12,6 +12,7 @@ Mantis ChangeLog
 - 0003942: [bugtracker] print_options_page doesn't show real data about selected fields (jlatour)
 - 0004193: [bugtracker] Broaden the ldap features to work with Active Directory (alf)
 - 0004133: [filters] "Summary stats are links to filters for view_all_bugs" feature is broken (jlatour)
+- 0003540: [security] Arbitrary code execution through uploads (thraxisp)
 - 0004268: [security] cross site scripting issue (jlatour)
 - 0004267: [security] cross site scripting issue (jlatour)
 - 0004266: [feature] Update project documentation file (Bastian Pfenningschmidt)
