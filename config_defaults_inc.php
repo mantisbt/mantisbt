@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.101 2003-02-25 08:50:42 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.102 2003-02-25 14:42:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -507,6 +507,11 @@
 	# prefix to be used for the file system names of files uploaded to projects.
 	# Eg: doc-001-myprojdoc.zip
 	$g_document_files_prefix = 'doc';
+
+	# Specifies the maximum size below which an attachment is previewed in the bug
+	# view pages.  To disable this feature, set max size to 0.
+	# This feature applies to: bmp, png, gif, jpg
+	$g_preview_attachments_inline_max_size = 0;
 
 	############################
 	# Mantis HTML Settings

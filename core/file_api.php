@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.29 2003-02-25 14:02:26 vboctor Exp $
+	# $Id: file_api.php,v 1.30 2003-02-25 14:42:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -43,19 +43,25 @@
 				access_has_project_level( config_get( 'handle_bug_threshold' ) );
 
 		$num_files = db_num_rows( $result );
+		$image_previewed = false;
 		for ( $i = 0 ; $i < $num_files ; $i++ ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$v_filesize = number_format( $v_filesize );
-			$v_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
+			$t_filesize = number_format( $v_filesize );
+			$t_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
+
+			if ( $image_previewed ) {
+				$image_previewed = false;
+				echo '<br />';
+			}
 
 			$t_href = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">";
 
 			echo $t_href;
 			print_file_icon ( file_get_display_name( $v_filename ) );
 			echo '</a>&nbsp;' . $t_href . file_get_display_name( $v_filename ) . 
-				"</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
+				"</a> ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
@@ -63,6 +69,13 @@
 			
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
 				echo ' (' . lang_get( 'cached' ) . ')';
+			}
+
+			if ( ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+				( $v_filesize != 0 ) && 
+				( in_array( strtolower( file_get_extension( $v_diskfile ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
+				echo "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
+				$image_previewed = true;
 			}
 
 			if ( $i != ($num_files - 1) ) {
