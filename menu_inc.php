@@ -17,7 +17,7 @@
 				$g_report_bug_page, $g_report_bug_advanced_page,
 				$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
 				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
-				$g_proj_user_menu_page,
+				$g_proj_user_menu_page, $g_login_select_proj_page,
 
 				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
 				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
@@ -34,17 +34,25 @@
 	<a href="<? echo $g_main_page ?>"><? echo $s_main_link ?></a> |
 	<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
-	if ( ( access_level_check_greater_or_equal( REPORTER ) ) && ( "0000000" != $g_project_cookie_val ) ) {
-		$t_report_url = get_report_redirect_url( 1 );
-		PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+	if ( access_level_check_greater_or_equal( REPORTER ) ) {
+		if ( "0000000" != $g_project_cookie_val ) {
+			$t_report_url = get_report_redirect_url( 1 );
+			PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+		} else {
+			PRINT "<a href=\"$g_login_select_proj_page\">$s_report_bug_link</a> | ";
+		}
 	}
 ?>
 	<a href="<? echo $g_summary_page ?>"><? echo $s_summary_link ?></a> |
 	<a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> |
-<? if ( ( access_level_check_greater_or_equal( MANAGER ) ) && ( "0000000" != $g_project_cookie_val ) ) { ?>
-	<a href="<? echo $g_proj_user_menu_page ?>"><? echo $s_users_link ?></a> |
-<?	} ?>
-
+<? if ( access_level_check_greater_or_equal( MANAGER ) ) {
+		if ( "0000000" != $g_project_cookie_val ) {
+			PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
+		} else {
+			PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
+		}
+	}
+?>
 <? if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) { ?>
 	<a href="<? echo $g_manage_page ?>"><? echo $s_manage_link ?></a> |
 <? } ?>

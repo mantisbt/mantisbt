@@ -304,16 +304,12 @@
 		global	$g_project_cookie, $g_project_cookie_val, $g_cookie_time_length;
 
 		$t_project_id = get_bug_field( "project_id", $p_bug_id );
-		if ( $t_project_id != $g_project_cookie_val ) {
+		if ( ( $t_project_id != $g_project_cookie_val ) &&
+			 ( $g_project_cookie_val != "0000000" ) ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length );
 			$t_redirect_url = get_view_redirect_url( $p_bug_id );
 			print_header_redirect( $t_redirect_url );
 		}
-	}
-	### --------------------
-	# translate the access level number to a name
-	# @@@ UNUSED
-	function trans_access_level( $p_num ) {
 	}
 	### --------------------
 	# return the project access level for the current user/project key pair.
