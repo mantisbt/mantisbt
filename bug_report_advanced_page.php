@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.32 2004-03-17 12:42:26 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.33 2004-03-17 13:58:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,8 +42,8 @@
 
 	$f_category				= gpc_get_string( 'category', '' );
 	$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
-	$f_severity				= gpc_get_int( 'severity', 0 );
-	$f_priority				= gpc_get_int( 'priority', NORMAL );
+	$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
+	$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 	$f_summary				= gpc_get_string( 'summary', '' );
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );

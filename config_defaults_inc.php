@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.150 2004-03-17 12:42:28 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.151 2004-03-17 13:58:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -418,6 +418,12 @@
 
         # Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
         $g_default_bugnote_view_status = VS_PUBLIC;
+
+	# Default bug severity when reporting a new bug
+	$g_default_bug_severity = MINOR;
+
+	# Default bug priority when reporting a new bug
+	$g_default_bug_priority = NORMAL;
 
 	# --- viewing defaults ------------
 	# site defaults for viewing preferences
