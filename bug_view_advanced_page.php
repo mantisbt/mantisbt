@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.66 2004-10-17 00:14:27 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.67 2004-10-25 19:59:12 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 	
 	$t_core_path = config_get( 'core_path' );
@@ -20,8 +19,7 @@
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'relationship_api.php' );
-?>
-<?php
+
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
@@ -94,7 +92,7 @@
 
 	<?php if ( $t_can_view_history ) { ?>
 		<!-- History -->
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id=' . $f_bug_id . '&amp;history=1#history', lang_get( 'bug_history' ) ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id . '&amp;history=1#history', lang_get( 'bug_history' ) ) ?></span>
 	<?php } ?>
 
 		<!-- Print Bug -->
