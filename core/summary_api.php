@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.16 2003-03-10 11:51:29 int2str Exp $
+	# $Id: summary_api.php,v 1.17 2003-03-10 19:45:17 int2str Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -14,13 +14,13 @@
 	#######################################################################
 
 	function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
-		printf( "<tr %s>",  helper_alternate_class() );
-		printf( "<td width=\"50%%\">%s</td>", $p_label );
-		printf( "<td width=\"12%%\" class=\"right\">%d</td>", $p_open );
-		printf( "<td width=\"12%%\" class=\"right\">%d</td>", $p_resolved );
-		printf( "<td width=\"12%%\" class=\"right\">%d</td>", $p_closed );
-		printf( "<td width=\"12%%\" class=\"right\">%d</td>", $p_total );
-		print( "</tr>\n" );
+		printf( '<tr %s>', helper_alternate_class() );
+		printf( '<td width="50%%">%s</td>', $p_label );
+		printf( '<td width="12%%" class="right">%d</td>', $p_open );
+		printf( '<td width="12%%" class="right">%d</td>', $p_resolved );
+		printf( '<td width="12%%" class="right">%d</td>', $p_closed );
+		printf( '<td width="12%%" class="right">%d</td>', $p_total );
+		print( '</tr>' );
 	}
 	# --------------------
 	# Used in summary reports
@@ -41,8 +41,8 @@
 		else 
 			$t_project_filter = " project_id='$t_project_id'";
 
-		$query = "SELECT status, $p_enum FROM $t_mantis_bug_table"
-			. " WHERE $t_project_filter ORDER BY $p_enum";
+		$query = "SELECT status, $p_enum FROM $t_mantis_bug_table
+				WHERE $t_project_filter ORDER BY $p_enum";
 
 		$result = db_query( $query );
 
@@ -121,10 +121,10 @@
 		for ($i=0;$i<$arr_count;$i++) {
 			$t_enum_count = summary_bug_count_by_date( $p_date_array[$i] );
 
-			printf( "<tr %s>",  helper_alternate_class() );
-			printf( "<td width=\"50%%\">%s</td>", $p_date_array[$i] );
-			printf( "<td class=\"right\">%s</td>", $t_enum_count );
-			print(  "</tr>\n" );
+			printf( '<tr %s>', helper_alternate_class() );
+			printf( '<td width="50%%">%s</td>', $p_date_array[$i] );
+			printf( '<td class="right">%s</td>', $t_enum_count );
+			print(  '</tr>' );
 		} # end for
 	}
 	# --------------------
@@ -140,9 +140,9 @@
 		else 
 			$specific_where = " project_id='$t_project_id'";
 
-		$query = "SELECT handler_id, status FROM $t_mantis_bug_table"
-			. " WHERE handler_id>0 AND $specific_where"
-			. " ORDER BY handler_id";
+		$query = "SELECT handler_id, status FROM $t_mantis_bug_table
+				WHERE handler_id>0 AND $specific_where
+				ORDER BY handler_id";
 
 		$result = db_query( $query );
 
@@ -160,9 +160,9 @@
 
 			if ( $v_handler_id != $t_last_handler 
 			  && $t_last_handler != -1 ) {
-				$query = "SELECT username"
-					. " FROM $t_mantis_user_table"
-					. " WHERE id=$t_last_handler";
+				$query = "SELECT username
+						FROM $t_mantis_user_table
+						WHERE id=$t_last_handler";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
 				summary_helper_print_row( 
@@ -194,9 +194,9 @@
 		}
 
 		if ( 0 < $t_bugs_total ) {
-			$query = "SELECT username"
-				. " FROM $t_mantis_user_table"
-				. " WHERE id=$t_last_handler";
+			$query = "SELECT username
+					FROM $t_mantis_user_table
+					WHERE id=$t_last_handler";
 			$result2 = db_query( $query );
 			$row2 = db_fetch_array( $result2 );
 			summary_helper_print_row(
@@ -219,18 +219,18 @@
 		else 
 			$specific_where = " project_id='$t_project_id'";
 
-		$query = "SELECT reporter_id, COUNT(*) as num"
-			. " FROM $t_mantis_bug_table"
-			. " WHERE $specific_where"
-			. " GROUP BY reporter_id"
-			. " ORDER BY num DESC"
-			. " LIMIT $t_reporter_summary_limit";
+		$query = "SELECT reporter_id, COUNT(*) as num
+				FROM $t_mantis_bug_table
+				WHERE $specific_where
+				GROUP BY reporter_id
+				ORDER BY num DESC
+				LIMIT $t_reporter_summary_limit";
 		$result = db_query( $query );
 		while ( $row = db_fetch_array( $result ) ) {
 			$v_reporter_id = $row['reporter_id'];
-			$query = "SELECT status FROM $t_mantis_bug_table"
-				. " WHERE reporter_id=$v_reporter_id"
-				. " AND $specific_where";
+			$query = "SELECT status FROM $t_mantis_bug_table
+					WHERE reporter_id=$v_reporter_id
+					AND $specific_where";
 			$result2 = db_query( $query );
 
 			$last_reporter = -1;
@@ -259,9 +259,9 @@
 			}
 
 			if ( 0 < $t_bugs_total ) {
-				$query = "SELECT username"
-					. " FROM $t_mantis_user_table"
-					. " WHERE id=$v_reporter_id";
+				$query = "SELECT username
+						FROM $t_mantis_user_table
+						WHERE id=$v_reporter_id";
 				$result3 = db_query( $query );
 				$row3 = db_fetch_array( $result3 );
 				summary_helper_print_row(
@@ -286,9 +286,9 @@
 		else 
 			$specific_where = " project_id='$t_project_id'";
 
-		$query = "SELECT project_id, category, status FROM $t_mantis_bug_table"
-			. " WHERE category>'' AND $specific_where"
-			. " ORDER BY project_id, category, status";
+		$query = "SELECT project_id, category, status FROM $t_mantis_bug_table
+				WHERE category>'' AND $specific_where
+				ORDER BY project_id, category, status";
 
 		$result = db_query( $query );
 
@@ -310,13 +310,13 @@
 			$label = $last_category;
 				if ( ( ON == $t_summary_category_include_project ) 
 				  && ( ALL_PROJECTS == $t_project_id ) ) {
-					$query = "SELECT name"
-						. " FROM $t_mantis_project_table"
-						. " WHERE id=$last_project";
+					$query = "SELECT name
+							FROM $t_mantis_project_table
+							WHERE id=$last_project";
 					$result2 = db_query( $query );
 					$row2 = db_fetch_array( $result2 );
 
-					$label = sprintf( "[%s] %s", $row2['name'], $label );
+					$label = sprintf( '[%s] %s', $row2['name'], $label );
 				}
 				summary_helper_print_row(
 				$label
@@ -351,13 +351,13 @@
 			$label = $last_category;
 			if ( ( ON == $t_summary_category_include_project ) 
 			  && ( ALL_PROJECTS == $t_project_id ) ) {
-				$query = "SELECT name"
-					. " FROM $t_mantis_project_table"
-					. " WHERE id=$last_project";
+				$query = "SELECT name
+						FROM $t_mantis_project_table
+						WHERE id=$last_project";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
 				
-				$label = sprintf( "[%s] %s", $row2['name'], $label );
+				$label = sprintf( '[%s] %s', $row2['name'], $label );
 			}
 			summary_helper_print_row( 
 			  $label
@@ -377,8 +377,8 @@
 		if ( ALL_PROJECTS != $t_project_id ) 
 			return;
 
-		$query = "SELECT project_id, status FROM $t_mantis_bug_table"
-			. " ORDER BY project_id";
+		$query = "SELECT project_id, status FROM $t_mantis_bug_table
+			ORDER BY project_id";
 
 		$result = db_query( $query );
 
@@ -396,9 +396,9 @@
 
 			if ( $v_project_id != $t_last_project 
 			  && $t_last_project != -1 ) {
-				$query = "SELECT name"
-					. " FROM $t_mantis_project_table"
-					. " WHERE id=$t_last_project";
+				$query = "SELECT name
+						FROM $t_mantis_project_table
+						WHERE id=$t_last_project";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
 				summary_helper_print_row( 
@@ -430,9 +430,9 @@
 		}
 
 		if ( 0 < $t_bugs_total ) {
-			$query = "SELECT name"
-				. " FROM $t_mantis_project_table"
-				. " WHERE id=$t_last_project";
+			$query = "SELECT name
+					FROM $t_mantis_project_table
+					WHERE id=$t_last_project";
 			$result2 = db_query( $query );
 			$row2 = db_fetch_array( $result2 );
 			summary_helper_print_row(
