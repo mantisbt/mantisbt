@@ -30,8 +30,9 @@
 	}*/
 
 	include( 'core_timer_API.php' );
+
+	# initialize our timer
 	$g_timer = new BC_Timer;
-	$g_timer->start_time();
 
 	# seed random number generator
 	list($usec,$sec)=explode(' ',microtime());

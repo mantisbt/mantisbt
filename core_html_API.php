@@ -74,7 +74,7 @@
 
 		PRINT '<META HTTP-EQUIV="Content-type" CONTENT="text/html;charset=' . $s_charset . '">';
 	}
-	
+
 	# --------------------
 	# (4) Prints the <TITLE> tag
 	function print_title( $p_title ) {
@@ -192,8 +192,7 @@
 		PRINT '<address>Copyright (C) 2000 - 2002</address>';
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 		if ( ON == $g_show_timer ) {
-			$g_timer->end_time();
-			PRINT '<span class="italic">Time: '.$g_timer->elapsed_time().' seconds</span><br />';
+			$g_timer->print_times();
 		}
 	}
 	# --------------------

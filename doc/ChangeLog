@@ -28,6 +28,7 @@ Mantis
  * Removed special status of 'closed' concerning colors. 'View all bugs' will use the configured background color.
  * Reworked code formatting for $c_ variables.
  * Reworked !isset() checks to use check_varset().
+ * Reworked BCTimer class to be more useful for debugging.
  * Modified input checked variables to be prefixed by $c_.
  * Modified form elements to be standards compliant.
  * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
