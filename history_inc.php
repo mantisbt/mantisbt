@@ -37,7 +37,7 @@
 		<?php echo $s_field ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $s_old_value ?> => <?php echo $s_new_value ?>
+		<?php echo $s_change ?>
 	</td>
 </tr>
 <?php
@@ -88,11 +88,11 @@
 			switch ( $v_type ) {
 			case NEW_BUG:					$t_note = $s_new_bug;
 											break;
-			case BUGNOTE_ADDED:				$t_note = $s_bugnote_added;
+			case BUGNOTE_ADDED:				$t_note = $s_bugnote_added.": ".$v_old_value;
 											break;
-			case BUGNOTE_UPDATED:			$t_note = $s_bugnote_edited;
+			case BUGNOTE_UPDATED:			$t_note = $s_bugnote_edited.": ".$v_old_value;
 											break;
-			case BUGNOTE_DELETED:			$t_note = $s_bugnote_deleted;
+			case BUGNOTE_DELETED:			$t_note = $s_bugnote_deleted.": ".$v_old_value;
 											break;
 			case SUMMARY_UPDATED:			$t_note = $s_summary_updated;
 											break;
@@ -102,12 +102,23 @@
 											break;
 			case STEP_TO_REPRODUCE_UPDATED:	$t_note = $s_steps_to_reproduce_updated;
 											break;
-			case FILE_ADDED:				$t_note = $s_file_added.$v_old_value;
+			case FILE_ADDED:				$t_note = $s_file_added.": ".$v_old_value;
 											break;
-			case FILE_DELETED:				$t_note = $s_file_deleted.$v_old_value;
+			case FILE_DELETED:				$t_note = $s_file_deleted.": ".$v_old_value;
+											break;
+			case BUGNOTE_STATE_CHANGED:		$v_old_value = get_enum_element( 'view_state', $v_old_value );
+											$t_note = $s_bugnote_view_state.": ".$v_old_value.": ".$v_new_value;
+											break;
+			case BUG_MONITOR:				$v_old_value = get_user_info( $v_old_value, 'username' );
+											$t_note = $s_bug_monitor.": ".$v_old_value;
+											break;
+			case BUG_UNMONITOR:				$v_old_value = get_user_info( $v_old_value, 'username' );
+											$t_note = $s_bug_end_monitor.": ".$v_old_value;
 											break;
 			}
 		}
+
+		# output special cases
 		if ( NORMAL_TYPE != $v_type ) {
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
@@ -125,7 +136,7 @@
 	</td>
 </tr>
 <?php
-		} else {
+		} else {   # output normal changes
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
 	<td class="small-caption">

@@ -54,8 +54,11 @@
 		# update bug last updated
 	   	$result = bug_date_update( $f_id );
 
+		# get bugnote id
+		$t_bugnote_id = db_insert_id();
+
 		# log new bug
-		history_log_event_special( $f_id, BUGNOTE_ADDED );
+		history_log_event_special( $f_id, BUGNOTE_ADDED , $t_bugnote_id );
 
 	   	# notify reporter and handler
 	   	if ( get_bug_field( $f_id, 'status' ) == FEEDBACK ) {

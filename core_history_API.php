@@ -29,16 +29,16 @@
 	# log the changes
 	# events should be logged *after* the modification
 	# These are special case logs (new bug, deleted bugnote, etc.)
-	function history_log_event_special( $p_bug_id, $p_type, $p_optional="" ) {
+	function history_log_event_special( $p_bug_id, $p_type, $p_optional="",  $p_optional2="" ) {
 		global $g_mantis_bug_history_table;
 
 		$p_optional = string_prepare_text( $p_optional );
 
 		$t_user_id   = get_current_user_field( "id" );
 		$query = "INSERT INTO $g_mantis_bug_history_table
-				( user_id, bug_id, date_modified, type, old_value )
+				( user_id, bug_id, date_modified, type, old_value, new_value )
 				VALUES
-				( '$t_user_id', '$p_bug_id', NOW(), '$p_type', '$p_optional' )";
+				( '$t_user_id', '$p_bug_id', NOW(), '$p_type', '$p_optional', '$p_optional2' )";
 		$result = db_query( $query );
 	}
 	# --------------------

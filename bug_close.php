@@ -60,8 +60,11 @@
 		# updated the last_updated date
 		$result = bug_date_update( $c_id );
 
+		# get bugnote id
+		$t_bugnote_id = db_insert_id();
+
 		# log new bugnote
-		history_log_event_special( $c_id, BUGNOTE_ADDED );
+		history_log_event_special( $c_id, BUGNOTE_ADDED, $t_bugnote_id );
 
 		email_close( $c_id );
 	}

@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
  	# -------------------------------------------------
-	# $Revision: 1.19 $
+	# $Revision: 1.20 $
 	# $Author: prescience $
-	# $Date: 2002-06-07 03:58:40 $
+	# $Date: 2002-06-08 04:11:02 $
 	#
-	# $Id: strings_hungarian.txt,v 1.19 2002-06-07 03:58:40 prescience Exp $
+	# $Id: strings_hungarian.txt,v 1.20 2002-06-08 04:11:02 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -44,6 +44,10 @@
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
 	$s_bugnote = 'Bugnote';
+	$s_change = 'Change';
+	$s_bugnote_view_state = 'Bugnote View State';
+	$s_bug_monitor = 'Bug Monitored';
+	$s_bug_end_monitor = 'Bug End Monitor';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

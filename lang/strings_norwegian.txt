@@ -6,11 +6,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.26 $
+	# $Revision: 1.27 $
 	# $Author: prescience $
-	# $Date: 2002-06-07 03:58:40 $
+	# $Date: 2002-06-08 04:11:02 $
 	#
-	# $Id: strings_norwegian.txt,v 1.26 2002-06-07 03:58:40 prescience Exp $
+	# $Id: strings_norwegian.txt,v 1.27 2002-06-08 04:11:02 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -43,6 +43,10 @@
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
 	$s_bugnote = 'Bugnote';
+	$s_change = 'Change';
+	$s_bugnote_view_state = 'Bugnote View State';
+	$s_bug_monitor = 'Bug Monitored';
+	$s_bug_end_monitor = 'Bug End Monitor';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

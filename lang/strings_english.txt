@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: prescience $
-	# $Date: 2002-06-07 03:58:40 $
+	# $Date: 2002-06-08 04:11:02 $
 	#
-	# $Id: strings_english.txt,v 1.48 2002-06-07 03:58:40 prescience Exp $
+	# $Id: strings_english.txt,v 1.49 2002-06-08 04:11:02 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -45,6 +45,10 @@
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
 	$s_bugnote = 'Bugnote';
+	$s_change = 'Change';
+	$s_bugnote_view_state = 'Bugnote View State';
+	$s_bug_monitor = 'Bug Monitored';
+	$s_bug_end_monitor = 'Bug End Monitor';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';
@@ -54,8 +58,8 @@
 	$s_description_updated = 'Description Updated';
 	$s_additional_information_updated = 'Additional Information Updated';
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_file_added = 'File Added';
+	$s_file_deleted = 'File Deleted';
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';

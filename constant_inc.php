@@ -118,6 +118,9 @@
 	define( 'STEP_TO_REPRODUCE_UPDATED', 8 );
 	define( 'FILE_ADDED',                9 );
 	define( 'FILE_DELETED',             10 );
+	define( 'BUGNOTE_STATE_CHANGED',    11 );
+	define( 'BUG_MONITOR',              12 );
+	define( 'BUG_UNMONITOR',            13 );
 
 	# error messages
 	define( 'ERROR_GENERIC',              0 );

@@ -33,7 +33,7 @@
 	$u_id = get_current_user_field( 'id' );
 
 	if ( 'add' == $f_action ) {
-	# Make sure we aren't already monitoring this bug
+		# Make sure we aren't already monitoring this bug
  		$query = "SELECT *
  		   	FROM $g_mantis_bug_monitor_table
  		   	WHERE bug_id='$c_id' AND user_id='$u_id'";
@@ -42,21 +42,29 @@
 
 		if ( $t_num_rows == 0 ) {
 			# Insert monitoring record
-   		 $query = "INSERT
+			$query = "INSERT
 					INTO $g_mantis_bug_monitor_table
 					( user_id, bug_id )
 					VALUES
 					( '$u_id', '$c_id' )";
-   			$result = db_query($query);
+			$result = db_query($query);
+
+			# log new bugnote
+			history_log_event_special( $f_id, BUG_MONITOR, $u_id );
 		}
 
 	} elseif ( 'delete' == $f_action ) {
-
 		# Delete monitoring record
-   	 $query = "DELETE
+		$query = "DELETE
 				FROM $g_mantis_bug_monitor_table
 				WHERE user_id = '$u_id' AND bug_id = '$c_id'";
-   		$result = db_query($query);
+		$result = db_query($query);
+
+		# get bugnote id
+		$t_bugnote_id = db_insert_id();
+
+		# log new bugnote
+		history_log_event_special( $f_id, BUG_UNMONITOR, $u_id );
 	}
 
 	# Determine which view page to redirect back to.

@@ -37,7 +37,7 @@
 	$result = db_query( $query );
 
 	# log new bug
-	history_log_event_special( $f_id, BUGNOTE_DELETED );
+	history_log_event_special( $f_id, BUGNOTE_DELETED, $f_bugnote_id );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );

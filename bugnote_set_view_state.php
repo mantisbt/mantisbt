@@ -45,6 +45,8 @@
 				WHERE id='$c_bugnote_id'";
 	$result = db_query( $query );
 
+	history_log_event_special( $t_id, BUGNOTE_STATE_CHANGED, $c_view_state, $c_bugnote_id );
+
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $t_id, 1 ) . '#bugnotes';
 	if ( $result ) {
