@@ -1,0 +1,657 @@
+<?
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Norwegian version by Espen Holje, espen.holje@auto-net.no
+?>
+<?
+	# This file is to aid in localization
+
+	### General Strings
+	$s_go_back = "Tilbake";
+	$s_proceed = "Klikk for å fortsette";
+	$s_sql_error_detected = "FEIL: SQL feil. Vennligst gi melding til ";
+
+	$s_switch = "Bytte";
+	$s_logged_in_as = "Logget inn som";
+
+	### Email Strings
+	$s_new_account_subject = "Din nye brukerkonto";
+	$s_new_account_greeting = "Velkommen til bugtracker. Her er informasjonen du behøver for å logge deg inn.\n\n";
+	$s_new_account_url = "Du kan logge deg inn på den nye siten her: ";
+	$s_new_account_username = "Brukernavn: ";
+	$s_new_account_password = "Passord: ";
+	$s_new_account_message = "Etter du har logget inn, vennligst bytt passord. Passordet ditt lagres med enveis kryptering. Administrator kan ikke dekryptere passordet ditt. Dersom du glemmer passordet, må passordet genereres på nytt.\n\n";
+	$s_new_account_do_not_reply = "Ikke svar på denne meldingen.\n";
+
+	$s_reset_request_msg = "TDet har kommet en forespørsel om å nullstille passordet ditt.".
+	$s_account_name_msg = "Kontonavnet ditt er";
+	$s_news_password_msg = "Her er ditt nye passord";
+	$s_new_bug_msg = "Følgende NYE feil har blitt LAGT til.";
+	$s_email_bugnote_msg = "En MELDING har blitt lagt til denne feilen.";
+	$s_email_resolved_msg = "Følgende feil har blitt LØST.";
+	$s_email_feedback_msg = "Følgende feil krever din TILBAKEMELDING.";
+	$s_email_reopen_msg = "Følgende feil har blitt GJENÅPNET.";
+	$s_email_assigned_msg = "Følgende feil har blitt DELEGERT.";
+
+	$s_email_reporter = "Rapportert av";
+	$s_email_handler = "Ansvarlig";
+	$s_email_project = "Prosjekt";
+	$s_email_bug = "Feil ID";
+	$s_email_category = "Kategori";
+	$s_email_reproducibility = "Reproduserbarhet";
+	$s_email_severity = "Alvorlighetsgrad";
+	$s_email_priority = "Prioritet";
+	$s_email_status = "Status";
+	$s_email_resolution = "Løsning";
+	$s_email_duplicate = "Duplikat";
+	$s_email_date_submitted = "Dato lagt inn";
+	$s_email_last_modified = "Dato sist endret";
+	$s_email_summary =  "Oppsummering";
+	$s_email_description = "Beskrivelse";
+
+	### account_delete.php3
+	$s_account_protected_msg = "Kontoen er beskyttet. Kan ikke endre innstillinger..";
+	$s_account_removed_msg = "Din konto har blitt fjernet ..";
+
+	### account_delete_page.php3
+	$s_confirm_delete_msg = "Er du sikker på at du vil slette kontoen din?";
+	$s_delete_account_button = "Slette konto";
+
+	### account_page.php3
+	$s_manage_profiles_link = "Administrere profiler";
+	$s_change_preferences_link = "Endre innstillinger";
+	$s_edit_account_title = "Endre konto";
+	$s_username = "Brukernavn";
+	$s_email = "Epost";
+	$s_password = "Passord";
+	$s_confirm_password  = "Bekreft passord";
+	$s_access_level = "Tilgangsnivå";
+	$s_update_user_button = "Oppdater bruker";
+	### $s_delete_account_button # defined above
+
+	### account_prefs_page.php3
+	$s_default_account_preferences_title = "Standard konto innstillinger";
+	$s_advanced_report = "Avansert rapport";
+	$s_advanced_view = "Avansert visning";
+	$s_default_project = "Standard prosjekt";
+	$s_update_prefs_button = "Oppdatere preferanser";
+	$s_reset_prefs_button = "Nullstill preferanser";
+
+	### account_prefs_reset.php3
+	$s_prefs_reset_msg = "Innstillingene har blitt nullstilt...";
+
+	### account_prefs_update.php3
+	$s_prefs_updated_msg = "Innstillingene har blitt oppdatert...";
+
+	### account_profile_add.php3
+	$s_profile_added_msg = "Profilen er lagt til...";
+
+	### account_profile_delete.php3
+	$s_profile_deleted_msg = "Profilen er slettet...";
+
+	### account_profile_edit_page.php3
+	$s_edit_profile_title = "Rediger profil";
+	$s_platform = "Plattform";
+	$s_operating_system = "Operativsystem";
+	$s_version = "Versjon/build";
+	$s_additional_description = "Tilleggsinformasjon";
+	$s_update_profile_button = "Oppdater profilen";
+
+	### account_profile_make_default.php3
+	$s_profile_defaulted_msg = "Standard profil har blitt oppdatert...";
+
+	### account_profile_manage_page.php3
+	$s_add_profile_title = "Legg til profil";
+	### $s_platform # defined above
+	### $s_operating_system # defined above
+	### $s_version # defined above
+	### $s_additional_description # defined above
+	$s_add_profile_button = "Legg til profil";
+	$s_edit_or_delete_profiles_title = "Rediger eller slett profiler";
+	$s_edit_profile = "Rediger profil";
+	$s_make_default = "Opprett standard";
+	$s_delete_profile = "Slett profil";
+	$s_select_profile = "Velg profil";
+	$s_submit_button = "OK";
+
+	### account_profile_update.php3
+	$s_profile_updated_msg = "Profilen har blitt oppdatert...";
+
+	### account_update.php3
+	### $s_account_protected_msg # defined above
+	$s_account_updated_msg = "Kontoen din har blitt oppdatert...";
+
+	### bug_assign.php3
+	$s_bug_assign_msg       = "Feilen har blitt delegert...";
+
+	### bug_delete.php3
+	$s_bug_deleted_msg = "Feilen er slettet...";
+
+	### bug_delete_page.php3
+	$s_delete_bug_sure_msg = "Er du sikker på at du ønsker å slette feilen?";
+	$s_delete_bug_button = "Slett feil";
+
+	### bug_reopen_page.php3
+	$s_bug_reopened_msg = "Feilen har blitt gjenåpnet...";
+	$s_reopen_add_bugnote_title = "Legg til beskjed om årsaken til gjenåpning";
+	$s_bugnote_add_reopen_button = "Legg til beskjed og gjenåpne feil";
+
+	### bug_resolve_page.php3
+	$s_resolve_bug_title = "Løse feil";
+	### $s_resolution # defined above
+	### $s_duplicate_id # defined above
+	$s_resolve_bug_button = "Løse feil";
+
+	### bug_resolve_page2.php3
+	$s_bug_resolved_msg = "Feilen har blitt utbedret. Legg til kommentar nedenfor...";
+	$s_resolve_add_bugnote_title = "Legg til melding om feilårsak";
+	$s_bugnote_add_resolve_button = "Legg til feilmelding";
+
+	### bug_update.php3
+	$s_bug_updated_msg = "Feilen har blitt oppdatert...";
+
+	### bug_update_advanced_page.php3
+	$s_back_to_bug_link = "Tilbake til feilen";
+	$s_update_simple_link = "Oppdater Enkel";
+	$s_updating_bug_advanced_title = "Oppdater feilinformasjon";
+	$s_id = "ID";
+	$s_category = "Kategori";
+	$s_severity = "Alvorlighetsgrad";
+	$s_reproducibility = "Mulighet for å reprodusere";
+	$s_date_submitted = "Dato lagt inn";
+	$s_last_update = "Siste oppdatering";
+	$s_reporter = "Rapportert av";
+	$s_assigned_to = "Delegert til";
+	$s_priority = "Prioritet";
+	$s_resolution = "Status";
+	### $s_platform # defined above
+	$s_status = "Status";
+	$s_duplicate_id = "Duplikere ID";
+	$s_os = "OS";
+	$s_projection = "Projection";
+	$s_os_version = "Versjon";
+	$s_eta = "ETA";
+	$s_product_version = "Produktversjon";
+	$s_build = "Build";
+	$s_votes = "Stemmer";
+	$s_summary = "Oppsummering";
+	$s_description = "Beskrivelse";
+	$s_steps_to = "Skritt til";
+	$s_reproduce = "Reproduser";
+	$s_additional = "Tillegg";
+	$s_information = "Informasjon";
+	$s_update_information_button = "Oppdater informasjon";
+
+	### bug_update_page.php3
+	### $s_back_to_bug_link # defined above
+	$s_update_advanced_link = "Oppdater Avansert";
+	$s_updating_bug_simple_title = "Oppdaterer feilinformasjon";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
+	### $s_update_information_button # defined above
+
+	### bug_vote_add.php3
+	$s_vote_added_msg = "Stemmen er registrert...";
+
+	### bugnote_add.php3
+	$s_bugnote_added_msg = "Melding lagt til...";
+
+	### bugnote_add_inc.php
+	$s_add_bugnote_button = "Legg til beskjed";
+
+	### bugnote_add_page.php3
+	$s_add_bugnote_title = "Ny beskjed";
+	### $s_add_bugnote_button # defined above
+
+	### bugnote_delete.php3
+	$s_bugnote_deleted_msg = "Meldinger har blitt slettet...";
+	$s_bug_notes_title = "Meldinger";
+
+	### bugnote_inc.php
+	$s_no_bugnotes_msg = "Det er ingen beskjeder på denne feilen.";
+	### $s_bug_notes_title # defined above
+	$s_delete_link = "Slett";
+
+	### choose_project_page.php3
+	$s_choose_project_title = "Velg prosjekt";
+	$s_projects = "Prosjekter";
+	$s_select_project_button = "Velg prosjekt";
+
+	### index.php3
+	$s_click_to_login = "Klikk her for å logge inn";
+
+	### login.php3
+
+	### login_error_page.php3
+	$s_login_error_msg = "Det oppstod en feil: kontoen din kan være midlertidig stengt eller du har angitt brukernavn/passord som ikke er gyldig.";
+	$s_login_title = "Login";
+	### $s_username # defined above
+	### $s_password # defined above
+	$s_save_login = "Lagre innlogging";
+	### $s_choose_project # defined above
+	$s_login_button = "Login";
+
+	### login_page.php3
+	$s_login_page_info = "Velkommen til bugtracker.";
+	### $s_login_title # defined above
+	### $s_username # defined above
+	### $s_password # defined above
+	### $s_save_login # defined above
+	$s_choose_project = "Velg prosjekt";
+	### $s_login_button # defined above
+	$s_signup_link = "registrere deg som ny bruker";
+
+	### logout_page.php3
+	$s_logged_out_title = "Logget ut...";
+	$s_redirecting = "...redirrigerer";
+	$s_here = "Here";
+
+	### main_page.php3
+	$s_newer_news_link = "Nyere nyheter";
+	$s_older_news_link = "Eldre nyheter";
+
+	### manage_create_new_user.php3
+	$s_created_user_part1 = "Bruker opprettet";
+	$s_created_user_part2 = "med tilgangsnivå";
+
+	### manage_create_user_page.php3
+	$s_create_new_account_title = "Opprette ny konto";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_password # defined above
+	$s_verify_password = "Bekrefte passord";
+	### $s_access_level # defined above
+	$s_enabled = "Enabled";
+	$s_protected = "Beskyttet";
+	$s_create_user_button = "Opprette bruker";
+
+	### manage_project_add.php3
+	$s_project_added_msg = "Prosjektet har blitt lagt til...";
+
+	### manage_project_category_add.php3
+	$s_category_added_msg = "Kategorien har blitt lagt til...";
+
+	### manage_project_category_delete.php3
+	$s_category_deleted_msg = "Kategorien har blitt slettet...";
+
+	### manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "Er du sikker på at du ønsker å slette denne kategorien? Alle tilknyttede feil vil bli slettet.";
+	$s_delete_category_button = "Slette kategori";
+
+	### manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "Redigere prosjekt kategorier";
+	$s_update_category_button = "Oppdatere kategori";
+	### $s_delete_category_button # defined above
+
+	### manage_project_category_update.php3
+	$s_category_updated_msg = "Kategorien har blitt oppdatert...";
+
+	### manage_page.php3
+	$s_create_new_account_link = "Opprette konto";
+	$s_projects_link = "Prosjekter";
+	$s_documentation_link = "Dokumentasjon";
+	$s_new_accounts_title = "Nye kontoer";
+	$s_1_week_title = "1 uke";
+	$s_never_logged_in_title = "Aldri logget inn";
+	$s_manage_accounts_title = "Administrere kontoer";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	$s_p = "p";
+	$s_date_created = "Dato opprettet";
+	$s_last_visit = "Siste pålogging";
+	$s_edit_user_link = "Redigere bruker";
+
+	### manage_project_delete.php3
+	$s_project_deleted_msg = "Prosjektet er slettet...";
+
+	### manage_project_delete_page.php3
+	$s_project_delete_msg = "Er du sikker på at du ønsker å slette dette prosjektet og alle tilknyttede feilrapproteringer?";
+	$s_project_delete_button = "Slette prosjekt";
+
+	### manage_project_edit_page.php3
+	$s_edit_project_title = "Redigere prosjekt";
+	$s_project_name = "Prosjektnavn";
+	### $s_status # defined above
+	### $s_enbaled # defined above
+	$s_view_status = "Se på status";
+	$s_public = "offentlig";
+	$s_private = "privat";
+	### $s_description # defined above;
+	$s_update_project_button = "Oppdatere prosjekt";
+	$s_delete_project_button = "Slette prosjekt";
+	$s_categories_and_version_title = "Kategorier og versjoner";
+	$s_categories = "Kategorier";
+	$s_add_category_button = "Ny kategori";
+	$s_versions = "Versjoner";
+	$s_add_version_button = "Legg til versjon";
+	$s_edit_link = "redigere";
+
+	### manage_project_menu_page.php3
+	$s_add_project_title = "Nytt prosjekt";
+	### $s_project_name # defined above;
+	### $s_status # defined above;
+	### $s_view_status # defined above;
+	### $s_public # defined above;
+	### $s_private # defined above;
+	### $s_description # defined above;
+	$s_add_project_button = "Nytt prosjekt";
+	$s_projects_title = "Prosjekter";
+	$s_name = "Navn";
+	### $s_status # defined above;
+	### $s_enabed # defined above;
+	### $s_view_status # defined above;
+	### $s_description # defined above;
+	### $s_edit_link # defined above;
+
+	### manage_project_update.php3
+	$s_project_updated_msg = "Prosjektet er oppdatert...";
+
+	### manage_project_version_add.php3
+	$s_version_added_msg = "Versjonsnummeret er lagt til...";
+
+	### manage_project_version_delete.php3
+	$s_version_deleted_msg = "Versjonsnummeret er slettet...";
+
+	### manage_project_version_delete_page.php3
+	$s_version_delete_sure = "Er du sikker på at du ønsker å slette dette versjonsnummeret? Alle tilknyttede feil vil bli slettet.";
+	$s_delete_version_button = "Slette versjon";
+
+	### manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "Redigere prosjekt versjon";
+	$s_update_version_button = "Oppdatere versjon";
+	### $s_delete_version_button # defined above;
+
+	### manage_project_version_update.php3
+	$s_version_updated_msg = "Versjonen har blitt oppdatert...";
+
+	### manage_user_delete.php3
+	$s_account_delete_protected_msg = "Kontoen er beskyttet. Kan ikke slette kontoen.";
+	$s_account_deleted_msg = "Kontoen er slettet...";
+
+	### manage_user_delete_page.php3
+	$s_delete_account_sure_msg = "Er du sikker på at du ønsker å slette denne kontoen?";
+	### $s_delete_account_button # defined above
+
+	### manage_user_page.php3
+	$s_edit_user_title = "Redigere bruker";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	### $s_protected # defined above
+	### $s_update_user_button # defined above
+	$s_reset_password_button = "Nullstille passord";
+	$s_delete_user_button = "Slette bruker";
+	$s_reset_password_msg = "Nullstille passord setter passordet til blank.";
+
+	### manage_user_reset.php3
+	$s_account_reset_protected_msg = "Kontoen er beskyttet. Kan ikke nullstille passord.";
+	$s_account_reset_msg = "Passordet er nullstilt...";
+
+	### manage_user_update.php3
+	$s_manage_user_protected_msg = "Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert...";
+	$s_manage_user_updated_msg = "Kontoen er oppdatert...";
+
+	### menu_inc.php
+	$s_main_link = "Hovedmeny";
+	$s_view_bugs_link = "Vis feilmeldinger";
+	$s_report_bug_link = "Rapportere feil";
+	$s_summary_link = "Oppsummering";
+	$s_account_link = "Konto";
+	$s_manage_link = "Administrere";
+	$s_edit_news_link = "Redigere nyheter";
+	$s_docs_link = "Dokumentasjon";
+	$s_logout_link = "Logg ut";
+
+	### meta_inc.php
+	### news_add.php3
+	$s_news_added_msg = "Nyhet lagt til...";
+
+	### news_delete.php3
+	$s_news_deleted_msg = "Slettet nyhet...";
+
+	### news_delete_page.php3
+	$s_delete_news_sure_msg = "Er du sikker på at du vil slette nyheten?";
+	$s_delete_news_item_button = "Slette nyhet";
+
+	### news_edit_page.php3
+	$s_edit_news_title = "Redigere nyheter";
+	$s_headline = "Overskrift";
+	$s_body = "Innhold";
+	$s_update_news_button = "Oppdatere nyheter";
+
+	### news_menu_page.php3
+	$s_add_news_title = "Ny nyhet";
+	### $s_headline # defined above
+	$s_do_not_use = "Ikke bruk";
+	### $s_body # defined above
+	$s_post_to = "Poste til";
+	$s_post_news_button = "Poste nyheter";
+	$s_edit_or_delete_news_title = "Redigere eller slette nyheter";
+	$s_edit_post = "Redigere nyhet";
+	$s_delete_post = "Slette nyhet";
+	$s_select_post = "Velge nyhet";
+	### $s_submit_button # defined above
+
+	### news_update.php3
+	$s_news_updated_msg = "Nyhet oppdatert...";
+
+	### project_menu_page.php3
+	$s_project_selection_title = "Prosjektvalg";
+	### $s_projects # defined above
+	### $s_select_project_button # defined above
+
+	### report_add.php3
+	$s_report_add_error_msg = "FEIL: Det var en feil i rapporten din.";
+	$s_must_enter_category = "Du må velge en kategori";
+	$s_must_enter_severity = "Du må velge konsekvensegrad";
+	$s_must_enter_reproducibility = "Du må velge reproduserbarhet";
+	$s_must_enter_summary = "Du må angi oppsummering";
+	$s_must_enter_description = "Du må angi beskrivelse";
+	#$s_hit_back_msg = "Trykk på tilbake og legg inn manglende felter."; ### obsoleted
+	$s_submission_thanks_msg = "Takk for ditt bidrag.";
+
+	### report_bug_advanced_page.php3
+	$s_simple_report_link = "Enkel rapport";
+	$s_enter_report_details_title = "Legg inn rapport detaljer";
+	### $s_category
+	$s_required = "påkrevd";
+	$s_select_category = "Velg kategori";
+	$s_select_reproducibility = "Velg reproduserbarhet";
+	$s_select_severity = "Velg alvorlighetsgrad";
+	### $s_reproducibility
+	### $s_severity
+	### $s_select_profile # defined above
+	$s_or_fill_in = "ELLER angi";
+	### $s_platform # defined above
+	### $s_os # defined above
+	### $s_os_version # defined above
+	### $s_product_version # defined above
+	### $s_product_build # defined above
+	$s_assign_to = "Deleger til";
+	### $s_summary # defined above
+	### $s_description # defined above
+	$s_steps_to_reproduce = "Skritt for å reprodusere";
+	$s_additional_information = "Tilleggsinformasjon";
+	$s_submit_report_button = "Legg inn rapport";
+
+	### report_bug_page.php3
+	$s_advanced_report_link = "Avansert rapport";
+	### $s_enter_report_details_title # defined above
+	### $s_category # defined above
+	### $s_required # defined above
+	### $s_select_category # defined above
+	### $s_select_reproducibility # defined above
+	### $s_select_severity # defined above
+	### $s_reproducibility
+	### $s_severity
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional_information # defined above
+	### $s_submit_report_button # defined above
+
+	### show_source_page.php3
+	$s_show_source_for_msg = "Viser kilden for";
+	$s_not_supported_part1 = "Denne versjonen";
+	$s_not_supported_part2 = "av PHP støtter ikke";
+
+	### signup.php3
+	$s_invalid_email = "ER EN UGYLDIG EPOST-ADRESSE";
+	$s_duplicate_username = "EKSISTERER FRA FØR.  VELG ET ANNET BRUKERNAVN";
+	$s_account_create_fail = "FEIL VED OPPRETTELSE AV KONTO";
+
+	### signup_page.php3
+	$s_signup_info = "Velg brukernavn og angi gyldig epost-adresse. Et tilfeldig generert passord vil bli sendt deg pr epost.";
+	$s_signup_title = "Registrering";
+	### $s_username = ""; # defined above
+	### $s_email = ""; # defined above
+	$s_signup_button = "Registrere";
+
+	### summary_page.php3
+	$s_summary_title = "Oppsummering";
+	$s_by_status = "pr status";
+	$s_by_date = "pr dato";
+	$s_by_severity = "pr alvorlighetsgrad";
+	$s_by_resolution = "pr løsning";
+	$s_by_category = "pr kategori";
+	$s_by_priority = "pr prioritet";
+	$s_time_stats = "tidsstatistikk for løste feil (dager)";
+	$s_longest_open_bug = "lengste åpne feil";
+	$s_longest_open = "lengste åpne";
+	$s_average_time = "gjennomsnittlig tid";
+	$s_total_time = "total tid";
+	$s_developer_stats = "utvikler statistikk (åpen/løst/totalt)";
+
+	### view_bug_advanced_page.php3
+	$s_view_simple_link = "Vis enkel";
+	$s_viewing_bug_advanced_details_title = "Vis avanserte detaljer for feil";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_platform # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_os # defined above
+	### $s_projection # defined above
+	### $s_os_version # defined above
+	### $s_eta # defined above
+	### $s_product_version # defined above
+	$s_product_build = "Produkt Build";
+	### $s_votes # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_steps_to # defined above
+	### $s_reproduce # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	$s_system_profile = "Systembeskrivelse";
+	$s_update_bug_button = "Oppdatere feil";
+	$s_bug_assign_button    = "Delegere til meg";
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	$s_reopen_bug_button = "Gjenåpne feil";
+
+	### view_bug_all_page.php3
+	$s_all_bugs_link = "Alle feil";
+	$s_reported_bugs_link = "Rapporterte feil";
+	$s_assigned_bugs_link = "Delegerte feil";
+	$s_any = "alle";
+	$s_show = "Vis";
+	$s_changed = "Endret(timer)";
+	$s_hide_resolved = "Skjule løste";
+	$s_filter_button = "Filter";
+	$s_viewing_bugs_title = "Feiloversikt";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	$s_updated = "Oppdatert";
+	### $s_summary # defined above
+
+	### view_bug_page.php3
+	$s_view_advanced_link = "Vis Avansert";
+	$s_viewing_bug_simple_details_title = "Oversikt over feil - enkel";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_bug_assign_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
+
+	### view_user_assigned_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_reported_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+
+	### view_user_reported_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_assigned_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+?>
