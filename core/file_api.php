@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.48 2004-05-23 13:50:44 vboctor Exp $
+	# $Id: file_api.php,v 1.49 2004-05-26 20:20:52 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -62,6 +62,12 @@
 			$g_cache_file_count[ $row['bug_id'] ] = $row['attachments'];
 			if ( $p_bug_id == $row['bug_id'] )
 				$t_file_count = $row['attachments'];
+		}
+
+		# If no attachments are present, mark the cache to avoid
+		#   repeated queries for this.
+		if ( count( $g_cache_file_count ) == 0 ) {
+			$g_cache_file_count[ '_no_files_' ] = -1;
 		}
 
 		return $t_file_count;
