@@ -547,7 +547,7 @@
 
 			$t_headers .= $p_header;
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
-			if ( !$result ) {
+			if ( TRUE != $result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
 				PRINT htmlspecialchars($t_recipient)."<br>";
 				PRINT htmlspecialchars($t_subject)."<p>";
