@@ -132,7 +132,6 @@
 
 		$t_rep = REPORTER;
 	    # checking if it's a per project statistic or all projects
-		# checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') {
 			$specific_where = " ";
 		} else {
