@@ -67,6 +67,8 @@
 	### Mantis LDAP Settings  ###
 	#############################
 
+	# look in README.LDAP for details
+
 	# --- using openldap -------------
 	$g_ldap_server       = "192.168.192.38";
 	$g_ldap_root_dn      = "dc=traffic,dc=redflex,dc=com,dc=au";
