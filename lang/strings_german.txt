@@ -4,29 +4,15 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# German: Hermann-Josef Beckers, hjb-rheine@t-online.de,
+	# German: Hermann-Josef Beckers, hjb-rheine@t-online.de
 	# German: Heiko Gierer, gierer@rittershaus.de
+	# German: Stefan Meier, Stefan.Meier@cimsource.com
 ?>
 <?
-	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
-
-	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-
 	# General Strings
 	$s_go_back = "Zurück";
 	$s_proceed = "Weiter: hier klicken";
+	$s_sql_error_detected = "Fehler: SQL-Fehler entdeckt, Bitte melden an: ";
 
 	$s_switch = "Wechsel";
 	$s_logged_in_as = "angemeldet als";
@@ -41,7 +27,7 @@
 	$s_project_view_state_enum_string = "10:öffentlich,50:privat";
 
 	$s_priority_enum_string = "10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort";
-	$s_severity_enum_string = "10:feature,20:trivial,30:textual,40:minimal,50:klein,60:groß,70:crash,80:block";
+	$s_severity_enum_string = "10:Feature,20:trivial,30:textuell,40:minimal,50:klein,60:groß,70:crash,80:block";
 	$s_reproducibility_enum_string = "10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A";
 	$s_status_enum_string = "10:neu,20:feedback,30:anerkannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen";
 	$s_resolution_enum_string = "10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:won't fix";
@@ -57,7 +43,7 @@
 	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
 	$s_new_account_do_not_reply = "Bitte beantworten Sie diese Nachricht nicht.\n";
 
-	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zurückzusetzen";
+	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zurückzusetzen".
 	$s_account_name_msg = "Ihr Bnutzername ist";
 	$s_news_password_msg = "Hier ist Ihr neues Passwort";
 
@@ -75,7 +61,7 @@
 	$s_email_bug = "Fehler ID";
 	$s_email_category = "Kategorie";
 	$s_email_reproducibility = "Reproduzierbarkeit";
-	$s_email_severity = "Schwere";
+	$s_email_severity = "Auswirkung";
 	$s_email_priority = "Priorität";
 	$s_email_status = "Status";
 	$s_email_resolution = "Lösung";
@@ -139,7 +125,7 @@
 
 	# account_profile_edit_page.php3
 	$s_edit_profile_title = "Profil editieren";
-	$s_platform = "Rechnerebene";
+	$s_platform = "Rechner";
 	$s_operating_system = "Betriebs-System";
 	$s_version = "Version/Build";
 	$s_additional_description = "Zusätzliche Beschreibung";
@@ -169,7 +155,7 @@
 
 	# bug_close.php3
 	$s_bug_close_msg = "Der Fehler wurde geschlossen...";
-	$s_close_immediately   = "Close immediately:";
+	$s_close_immediately   = "Sofort schließen:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Fehlermeldung wurde gelöscht...";
@@ -186,7 +172,7 @@
 	$s_select_file = "Datei wählen";
 	$s_upload_file_button = "Datei übertragen";
 
-	# bug_reopen.php3
+	# bug_reopen_page.php3
 	$s_bug_reopened_msg = "Fehlermeldung reaktiviert...";
 	$s_reopen_add_bugnote_title = "Notiz für Fehlerreaktivierung hinzufügen";
 	$s_bugnote_add_reopen_button = "Notiz hinzufügen und Fehler reaktivieren";
@@ -209,7 +195,7 @@
 	$s_updating_bug_advanced_title = "Fehlerinformation aktualisieren";
 	$s_id = "ID";
 	$s_category = "Kategorie";
-	$s_severity = "Schwere";
+	$s_severity = "Auswirkung";
 	$s_reproducibility = "reproduzierbar";
 	$s_date_submitted = "Meldungsdatum";
 	$s_last_update = "Letzte Aktualisierung";
@@ -222,7 +208,7 @@
 	$s_os = "Betriebssystem";
 	$s_projection = "Projektion";
 	$s_os_version = "Version";
-	$s_eta = "ETA";
+	$s_eta = "Aufwand";
 	$s_product_version = "Produkt-Version";
 	$s_build = "Build";
 	$s_votes = "Stimmen";
@@ -248,27 +234,28 @@
 	$s_bug_notes_title = "Fehlernotiz";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Notiz bearbeiten";
 
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Zu diesem Fehler gibt es keine Notizen.";
 	$s_delete_link = "Löschen";
 	$s_add_bugnote_title = "Fehlernotiz hinzufügen";
 	$s_add_bugnote_button = "Fehlernotiz hinzufügen";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_bugnote_edit_link = "Bearbeiten";
+	$s_close_bug_button = "Bug schließen";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "Bug Notiz wurde erfolgreich geändert...";
+	$s_edited_on = "bearbeitet am: ";
 
 	# index.php3
 	$s_click_to_login = "Anmeldung: bitte hier klicken";
 
 	# login.php3
+	$s_login_error_msg = "Es ist ein Fehler aufgetreten: Ihr Konto ist gesperrt oder Benutzer/Passwort wurde falsch eingegben.";
 
 	# login_page.php3
-	$s_login_page_info = "Willkommen zum Bugtracker.";
+	$s_login_page_info = "<B>BUG TRACKING SYSTEM</B>";
 	$s_login_title = "Anmeldung";
 	$s_save_login = "Anmeldung speichern";
 	$s_choose_project = "Projekt wählen";
@@ -288,7 +275,7 @@
 	$s_open_and_reported_to_me = "Offen und von mir berichtet";
 	$s_newer_news_link = "Neuere Nachrichten";
 	$s_older_news_link = "Ältere Nachrichten";
-	$s_archives = "Archives";
+	$s_archives = "Archive";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Benutzer angelegt";
@@ -304,18 +291,18 @@
 	# manage_page.php3
 	$s_hide_disabled = "verstecke Ausgeschaltete";
 	$s_filter_button = "Filter";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_manage_users_link = "Benutzer verwalten";
+	$s_manage_projects_link = "Projekte verwalten";
 	$s_create_new_account_link = "Neues Konto erstellen";
 	$s_projects_link = "Projekte";
 	$s_documentation_link = "Dokumentation";
 	$s_new_accounts_title = "Neue Konten";
 	$s_1_week_title = "1 Woche";
 	$s_never_logged_in_title = "Noch nie angemeldet";
-	$s_prune_accounts = "Prune Accounts";
-	$s_hide_inactive = "Hide Inactive";
+	$s_prune_accounts = "Konten löschen";
+	$s_hide_inactive = "Inaktive verstecken";
 	$s_manage_accounts_title = "Konten verwalten";
-	$s_p = "p";
+	$s_p = "g";
 	$s_date_created = "Erstellungsdatum";
 	$s_last_visit = "Letzter Besuch";
 	$s_edit_user_link = "Benutzer editieren";
@@ -324,6 +311,7 @@
 	$s_project_added_msg = "Projekt wurde hinzugefügt...";
 
 	# manage_project_category_add.php3
+	$s_duplicate_category = "FEHLER: Doppelte Kategorie.";
 	$s_category_added_msg = "Kategorie wurde hinzugefügt...";
 
 	# manage_project_category_delete.php3
@@ -374,6 +362,7 @@
 	$s_project_updated_msg = "Projekt wurde aktualisiert...";
 
 	# manage_project_version_add.php3
+	$s_duplicate_version = "FEHLER: Doppelte Version.";
 	$s_version_added_msg = "Version wurde hinzugefügt...";
 
 	# manage_project_version_delete.php3
@@ -387,7 +376,7 @@
 	$s_edit_project_version_title = "Projekt-Version editieren";
 	$s_update_version_button = "Version aktualisieren";
 
-	# manage_project_version_update.php3
+	# manage_product_versions_update.php3
 	$s_version_updated_msg = "Produkt-Versionen aktualisiert...";
 
 	# manage_user_delete.php3
@@ -404,16 +393,15 @@
 	$s_edit_user_title = "Benutzer ändern";
 	$s_reset_password_button = "Passwort zurücksetzen";
 	$s_delete_user_button = "Benutzer löschen";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
-	$s_reset_password_msg2 = "Passwort zurücksetzen löscht das Passwort.";
+	$s_reset_password_msg = "Passwort zurücksetzen löscht das Passwort.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Konto geschützt. Passwort-Löschung nicht möglich.";
 	$s_account_reset_msg = "Passwort zurückgesetzt...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_msg2 = "Passwort wurde auf 'leer' gesetzt...";
 
 	# manage_user_update.php3
-	$s_manage_user_protected_msg = "Konto geschützt. Access level and enabled protected. Otherwise, account has been updated...";
+	$s_manage_user_protected_msg = "Konto geschützt. Zugriffsrechte und Aktivitätsflag sind geschützt. Andere Optionen wurden geändert...";
 	$s_manage_user_updated_msg = "Konto aktualisiert...";
 
 	# menu_inc.php
@@ -422,7 +410,7 @@
 	$s_report_bug_link = "Fehler eintragen";
 	$s_summary_link = "Zusammenfassung";
 	$s_account_link = "Konto";
-	$s_users_link = "Users";
+	$s_users_link = "Benutzer";
 	$s_manage_link = "Verwaltung";
 	$s_edit_news_link = "Nachrichten ändern";
 	$s_docs_link = "Dokumentation";
@@ -468,6 +456,8 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Datei hochladen";
 	$s_title = "Titel";
+	$s_select_file = "Datei auswählen";
+	$s_upload_file_button = "Datei hochladen";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Projekt-Datei gelöscht";
@@ -476,6 +466,7 @@
 	$s_confirm_file_delete_msg = "Soll diese Datei wirklich gelöscht werden?";
 
 	# proj_doc_edit_page.php3
+	$s_upload_file_title = "Datei hochladen";
 	$s_filename = "Dateiname";
 	$s_file_update_button = "Datei aktualisieren";
 	$s_file_delete_button = "Datei löschen";
@@ -499,20 +490,21 @@
 	$s_remove_user_sure_msg = "Soll dieser Benutzer aus dem Projekt wirklich entfernt werden?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
+	$s_create_user_message = "Wichtig: Der Benutzer muß existieren, bevor er zu einem Projekt hinzugefügt werden kann!";
+	$s_automatic_access_level = "Zugriff erfolgt automatisch für Kategorie ";
 	$s_add_user_title = "Benutzer zum Projekt hinzugefügt";
 	$s_add_user_button = "Benutzer hinzufügen";
 	$s_project_selection_title = "Projektauswahl";
 	$s_remove_link = "löschen";
-	$s_automatic_access = "Users With Automatic Access";
+	$s_automatic_access = "Benutzer mit automatischem Zugriff";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";
 
 	# report_add.php3
+	$s_report_add_error_msg = "FEHLER: Ihr Eintrag enthält (1) Fehler.";
 	$s_must_enter_category = "Sie müssen eine Kategorie wählen";
-	$s_must_enter_severity = "Wert für Schwere muss eingegeben werden";
+	$s_must_enter_severity = "Wert für Auswirkung muss eingegeben werden";
 	$s_must_enter_reproducibility = "Wert für reproduzierbar eingeben";
 	$s_must_enter_summary = "Sie müssen eine Zusammenfassung eingeben";
 	$s_must_enter_description = "Sie müssen eine Beschreibung eingeben";
@@ -528,13 +520,15 @@
 	$s_select_severity = "Schwere wählen";
 	$s_or_fill_in = "ODER ausfüllen";
 	$s_assign_to = "Zuordnung an ";
+	$s_steps_to_reproduce = "Schritte zur Reproduzierung";
 	$s_additional_information = "Zusätzliche Information";
 	$s_submit_report_button = "Bericht absenden";
 	$s_check_report_more_bugs = "weitere Fehler eintragen";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Erweiterter Bericht";
-	$s_report_stay = "Report Stay";
+	$s_upload_file = "Datei übertragen";
+	$s_report_stay = "Im Eingabemodus bleiben";
 
 	# set_project.php3
 	$s_selected_project = "Gewähltes Projekt";
@@ -570,7 +564,7 @@
 	# site_settings_update.php3
 	$s_site_settings_updated_msg = "Eigenschaften wurden aktualisiert";
 
-	# summary_page.php3
+	# summary_page.php3 & summary_page_jpgraph.php3
 	$s_summary_title = "Zusammenfassung";
 	$s_summary_jpgraph_link = "Erweiterte Zusammenfassung";
 	$s_by_status = "nach Status";
@@ -587,22 +581,24 @@
 	$s_average_time = "durchschnittlich";
 	$s_total_time = "insgesamt";
 	$s_developer_stats = "Entwicklerstatistik";
-	$s_reporter_stats = "reporter stats";
-	$s_orct = "(open/resolved/closed/total)";
+	$s_reporter_stats = "Reporter Statistiken";
+	$s_orct = "(offen/erledigt/geschlossen/gesamt)";
+    $s_summary_prefix="nach";
 
 	# view_all_bug_page.php3
 	$s_any = "alle";
 	$s_show = "Zeige";
 	$s_changed = "geändert (Std.)";
 	$s_hide_closed = "bereinigte ausblenden";
+	$s_filter_button = "filtern";
 	$s_viewing_bugs_title = "Fehler anzeigen";
 	$s_updated = "aktualisiert";
 
 	# view_all_inc.php
-	$s_none = "none";
+	$s_none = "keine";
 	$s_search ="Suche";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_view_prev_link = "Zeige vorherige";
+	$s_view_next_link = "Zeige nächste";
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "einfache Anzeige";
@@ -612,7 +608,7 @@
 	$s_update_bug_button = "Fehlereintrag aktualisieren";
     $s_bug_assign_button    = "mir zuordnen";
 	$s_reopen_bug_button = "Fehler wiederöffnen";
-	$s_attached_files = "Attached Files";
+	$s_attached_files = "Angehängte Dateien";
 
 	# view_bug_inc.php
 

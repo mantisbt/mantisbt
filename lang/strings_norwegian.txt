@@ -8,20 +8,20 @@
 ?>
 <?
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
+	$s_all_projects = "Alle prosjekter";
+	$s_move_bugs = "Flytte bugs";
+	$s_operation_successful = "Operasjonen var vellykket.";
+	$s_date_order = "Dato sortering";
+	$s_print_all_bug_page_link = "Utskrift rapporter";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_SQL] = "FEIL: SQL feil oppdagedet. Vennligst rapporter til  ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "FEIL: din konto kan være utilgjengelig eller brukernavn/passord var ugyldig.";
+	$MANTIS_ERROR[ERROR_REPORT] = "FEIL: Det oppstod en feil i rapporten.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FEIL: Ingen fil angitt";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FEIL: Katalogen eksisterer ikke. Vennligst sjekk prosjekt innstillinger.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FEIL: Kategorien finnes fra før.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FEIL: Versjonen finnes fra før.";
 
 	# General Strings
 	$s_go_back = "Tilbake";
@@ -56,7 +56,7 @@
 	$s_new_account_message = "Etter du har logget inn, vennligst bytt passord. Passordet ditt lagres med enveis kryptering. Administrator kan ikke dekryptere passordet ditt. Dersom du glemmer passordet, må passordet genereres på nytt.\n\n";
 	$s_new_account_do_not_reply = "Ikke svar på denne meldingen.\n";
 
-	$s_reset_request_msg = "Det har kommet en forespørsel om å nullstille passordet ditt.";
+	$s_reset_request_msg = "Det har kommet en forespørsel om å nullstille passordet ditt.".
 	$s_account_name_msg = "Kontonavnet ditt er";
 	$s_news_password_msg = "Her er ditt nye passord";
 
@@ -227,7 +227,7 @@
 	$s_votes = "Stemmer";
 	$s_summary = "Oppsummering";
 	$s_description = "Beskrivelse";
-	$s_steps_to_reproduce  = "Skritt til Reproduser";
+	$s_steps_to_reproduce  = "Steg for å reprodusere";
 	$s_additional = "Tillegg";
 	$s_information = "Informasjon";
 	$s_update_information_button = "Oppdater informasjon";
@@ -252,14 +252,14 @@
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Det er ingen beskjeder på denne feilen.";
 	$s_delete_link = "Slett";
-	$s_add_bugnote_title = "Ny beskjed";
-	$s_add_bugnote_button = "Legg til beskjed";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_add_bugnote_title = "Nytt notat";
+	$s_add_bugnote_button = "Legg til notat";
+	$s_bugnote_edit_link = "Redigere";
+	$s_close_bug_button = "Avslutte bug";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "Notat har blitt oppdatert...";
+	$s_edited_on = "redigert: ";
 
 	# index.php3
 	$s_click_to_login = "Klikk her for å logge inn";
@@ -268,14 +268,14 @@
 
 	# login_page.php3
 	$s_login_page_info = "Velkommen til bugtracker.";
-	$s_login_title = "Login";
+	$s_login_title = "Innlogging";
 	$s_save_login = "Lagre innlogging";
 	$s_choose_project = "Velg prosjekt";
-	$s_login_button = "Login";
+	$s_login_button = "Logg inn";
 	$s_signup_link = "registrere deg som ny bruker";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Select Project";
+	$s_select_project_button = "Velg prosjekt";
 
 	# logout_page.php3
 	$s_logged_out_title = "Logget ut...";
@@ -287,7 +287,7 @@
 	$s_open_and_reported_to_me = "Åpne og rapportert av meg";
 	$s_newer_news_link = "Nyere nyheter";
 	$s_older_news_link = "Eldre nyheter";
-	$s_archives = "Archives";
+	$s_archives = "Arkiv";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Bruker opprettet";
@@ -303,8 +303,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Skjul deaktiverte";
 	$s_filter_button = "Filtrere";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_manage_users_link = "Vedlikehold brukere";
+	$s_manage_projects_link = "Vedlikehold prosjekter";
 	$s_create_new_account_link = "Opprette konto";
 	$s_projects_link = "Prosjekter";
 	$s_documentation_link = "Dokumentasjon";
@@ -363,8 +363,8 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Nytt prosjekt";
-	$s_access_threshold = "Access Threshold";
-	$s_upload_file_path = "Upload File Path";
+	$s_access_threshold = "Tilgang begynnelse";
+	$s_upload_file_path = "Katalog opplastede filer";
 	$s_add_project_button = "Nytt prosjekt";
 	$s_projects_title = "Prosjekter";
 	$s_name = "Navn";
@@ -397,19 +397,19 @@
 	$s_delete_account_sure_msg = "Er du sikker på at du ønsker å slette denne kontoen?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = "Alle kontoer som ikke har vært benyttet og som er eldre enn 1 uke har blitt slettet";
 
 	# manage_user_page.php3
 	$s_edit_user_title = "Redigere bruker";
 	$s_reset_password_button = "Nullstille passord";
 	$s_delete_user_button = "Slette bruker";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg = "Nullstille passord setter et tilfeldig generert passord.";
 	$s_reset_password_msg2 = "Nullstille passord setter passordet til blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Kontoen er beskyttet. Kan ikke nullstille passord.";
 	$s_account_reset_msg = "Passordet er nullstilt...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_msg2 = "Konto passord satt til blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert...";
@@ -422,7 +422,7 @@
 	$s_summary_link = "Oppsummering";
 	$s_account_link = "Konto";
 	$s_users_link = "Brukere";
-	$s_manage_link = "Administrere";
+	$s_manage_link = "Administrasjon";
 	$s_edit_news_link = "Redigere nyheter";
 	$s_docs_link = "Dokumentasjon";
 	$s_logout_link = "Logg ut";
@@ -459,7 +459,7 @@
 	$s_news_updated_msg = "Nyhet oppdatert...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "Tilbake";
 
 	# proj_doc_add.php3
 	$s_file_uploaded_msg = "Opplasting av fil OK";
@@ -498,13 +498,13 @@
 	$s_remove_user_sure_msg = "Er du sikker på at du ønsker å fjerne brukeren?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
+	$s_create_user_message = "MERK: Brukeren må eksistere i systemet før han/hun kan legges til som bruker på prosjektet.";
+	$s_automatic_access_level = "Automatisk tilgangsnivå";
 	$s_add_user_title = "Legg bruker til prosjekt";
 	$s_add_user_button = "Legg til bruker";
 	$s_project_selection_title = "Prosjektvalg";
 	$s_remove_link = "fjerne";
-	$s_automatic_access = "Users With Automatic Access";
+	$s_automatic_access = "Brukere med automatisk tilgang";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Oppdatert bruker OK";
@@ -529,11 +529,11 @@
 	$s_assign_to = "Deleger til";
 	$s_additional_information = "Tilleggsinformasjon";
 	$s_submit_report_button = "Legg inn rapport";
-	$s_check_report_more_bugs = "kryss av for å legge inn flere feil";
+	$s_check_report_more_bugs = "kryss av for å legge inn flere feil fortløpende";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Avansert rapport";
-	$s_report_stay = "Report Stay";
+	$s_report_stay = "Rapportere flere feil";
 
 	# set_project.php3
 	$s_selected_project = "Valgt prosjekt";
@@ -586,7 +586,7 @@
 	$s_average_time = "gjennomsnittlig tid";
 	$s_total_time = "total tid";
 	$s_developer_stats = "utvikler statistikk";
-	$s_reporter_stats = "reporter stats";
+	$s_reporter_stats = "reporter statistikk";
 	$s_orct = "(åpne/løst/lukket/totalt)";
 
 	# view_all_bug_page.php3
@@ -598,10 +598,10 @@
 	$s_updated = "Oppdatert";
 
 	# view_all_inc.php
-	$s_none = "none";
+	$s_none = "ingen";
 	$s_search ="Søk";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_view_prev_link = "Vis forrige";
+	$s_view_next_link = "Vis neste";
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Vis enkel";
@@ -611,7 +611,7 @@
 	$s_update_bug_button = "Oppdatere feil";
 	$s_bug_assign_button    = "Delegere til meg";
 	$s_reopen_bug_button = "Gjenåpne feil";
-	$s_attached_files = "Attached Files";
+	$s_attached_files = "Fil vedlegg";
 
 	# view_bug_inc.php
 
