@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.48 2004-05-17 13:06:06 vboctor Exp $
+	# $Id: string_api.php,v 1.49 2004-05-23 13:50:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -197,8 +197,9 @@
 
 		# This is based on the description in RFC 2396 which specifies how
 		#  to match URLs generically without knowing their type
-		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$,[:alnum:]])+)/s',
-								'<a href="\1">\1</a>',
+		# vboctor: I added # to hyperlink bookmarks.
+		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$#,[:alnum:]])+)/s',
+								'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',
 								$p_string);
 
 		# Set up a simple subset of RFC 822 email address parsing

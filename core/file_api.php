@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.47 2004-05-21 21:42:51 int2str Exp $
+	# $Id: file_api.php,v 1.48 2004-05-23 13:50:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -152,17 +152,21 @@
 			}
 
 			if ( $t_can_download ) {
-				$t_href_start	= "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
+				$t_href_start	= "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">";
 				$t_href_end		= '</a>';
+
+				$t_href_clicket = " [<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">^</a>]";
 			} else {
 				$t_href_start	= '';
 				$t_href_end		= '';
+
+				$t_href_clicket = '';
 			}
 
 			PRINT $t_href_start;
 			print_file_icon ( file_get_display_name( $v_filename ) );
 			PRINT $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) .
-				$t_href_end . " ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
+				$t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
 				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';

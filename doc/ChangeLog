@@ -22,6 +22,7 @@ Mantis ChangeLog
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.
+ * Enh #3867: Give the user control whether to open hyperlink in new or current window.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
  * Fix #3397: Delete notification should be off when deleting a project.
@@ -40,6 +41,7 @@ Mantis ChangeLog
  * Fix #3851: Ability to change the view status for a group of bugs
  * Fix #3852: OK button in View Issues page is not localised
  * Fix #3853: Filters sometime generate an invalid query (partial fix).
+ * Fix #3866: URLs that include bookmark are not hyperlinked correctly.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
