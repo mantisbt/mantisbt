@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.75 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: print_all_bug_page.php,v 1.76 2004-03-18 23:40:35 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,7 +32,8 @@
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );
 
-	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
 
 	# check to see if the cookie does not exist
 	if ( is_blank( $t_cookie_value ) ) {

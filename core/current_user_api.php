@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.13 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: current_user_api.php,v 1.14 2004-03-18 23:40:35 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -97,7 +97,8 @@
 			return false;
 		}
 
-		$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+		$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+		$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 		$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
 		$t_filter = unserialize( $t_cookie_detail[1] );
 		

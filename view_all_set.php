@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.20 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: view_all_set.php,v 1.21 2004-03-18 23:40:35 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type					= gpc_get_int( 'type', -1 );
+	$f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 	$f_print				= gpc_get_bool( 'print' );
 
 	$f_show_category		= gpc_get_string( 'show_category', '' );
@@ -110,7 +111,8 @@
 	24: $f_custom_field
 */
 	# Set new filter values.  These are stored in a cookie
-	$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 	$t_old_setting_arr	= explode( '#', $t_view_all_cookie, 2 );
 	
 	$t_setting_arr = array();
@@ -204,6 +206,20 @@
 				$t_setting_arr['dir'] = $f_dir;
 
 				break;
+		# This is when we want to copy another query from the
+		# database over the top of our current one
+		case '3':
+			$t_filter_string = filter_db_get_filter( $f_source_query_id );
+			# If we can use the query that we've requested,
+			# grab it. We will overwrite the current one at the
+			# bottom of this page
+			if ( $t_filter_string != null ) {
+				$t_cookie_detail = explode( '#', $t_filter_string, 2 );
+				$t_setting_arr = unserialize( $t_cookie_detail[1] );
+
+				break;
+			}
+			
 		# does nothing. catch all case
 		default:
 				break;
@@ -212,8 +228,11 @@
 	$t_settings_serialized = serialize( $t_setting_arr );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
+	# Store the filter string in the database: its the current filter, so some values won't change
+	$t_row_id = filter_db_set_for_current_user( -1, false, '', $t_settings_string );
+
 	# set cookie values
-	setcookie( config_get( 'view_all_cookie' ), $t_settings_string, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
+	setcookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 
 	# redirect to print_all or view_all page
 	if ( $f_print ) {

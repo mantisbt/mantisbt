@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.19 2004-03-05 02:27:52 jlatour Exp $
+	# $Id: filter_api.php,v 1.20 2004-03-18 23:40:35 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -327,7 +327,8 @@
 	# return true if the filter cookie exists and is of the correct version,
 	#  false otherwise
 	function filter_is_cookie_valid() {
-		$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+		$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+		$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 
 		# check to see if the cookie does not exist
 		if ( is_blank( $t_view_all_cookie ) ) {
@@ -663,10 +664,210 @@
 			<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<input type="submit" name="filter" value="<?php echo lang_get( 'search' ) ?>" />
 			</td>
-			<td colspan="<?php echo ( 6 * $t_custom_cols ); ?>"></td>
+			</form>
+			<td colspan="<?php echo ( 4 * $t_custom_cols ); ?>"></td>
+			<?php
+			$t_stored_queries_arr = array();
+			$t_stored_queries_arr = filter_db_get_available_queries();
+
+			if ( sizeof( $t_stored_queries_arr ) > 0 ) {
+				?>
+				<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+					<form method="post" name="open_queries" action="query_view_page.php">
+					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'open_queries' ) ?>" />
+					</form>
+				</td>
+				<?php
+			} else {
+				?>
+				<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+				<?php
+			}
+			?>
+			
+			<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+				<form method="post" name="save_query" action="query_store_page.php">
+				<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'save_query' ) ?>" />
+				</form>
+			</td>
 		</tr>
 		</table>
-		</form>
 <?php
+	}
+
+	# Add a filter to the database for the current user
+	function filter_db_set_for_current_user( $p_project_id, $p_is_public, 
+										$p_name, $p_filter_string ) {
+		$t_user_id = auth_get_current_user_id();
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_is_public = db_prepare_bool( $p_is_public );
+		$c_name = db_prepare_string( $p_name );
+		$c_filter_string = db_prepare_string( $p_filter_string );
+
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		
+		# Do I need to update or insert this value?
+		$query = "SELECT id FROM $t_filters_table
+					WHERE user_id='$t_user_id'
+					AND project_id='$c_project_id'
+					AND name='$c_name'";
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+
+			$query = "UPDATE $t_filters_table
+					  SET is_public='$c_is_public',
+					  	filter_string='$c_filter_string'
+					  WHERE id='" . $row['id'] . "'";
+			db_query( $query );
+			
+			return $row['id'];
+		} else {
+			$query = "INSERT INTO $t_filters_table
+						( user_id, project_id, is_public, name, filter_string )
+					  VALUES
+						( '$t_user_id', '$c_project_id', '$c_is_public', '$c_name', '$c_filter_string' )";
+			db_query( $query );
+			
+			# Recall the query, we want the filter ID
+			$query = "SELECT id
+						FROM $t_filters_table
+						WHERE user_id='$t_user_id'
+						AND project_id='$c_project_id'
+						AND name='$c_name'";
+			$result = db_query( $query );
+
+			if ( db_num_rows( $result ) > 0 ) {
+				$row = db_fetch_array( $result );
+				return $row['id'];
+			}
+			
+			return -1;
+		}
+	}
+
+	# This function will return the filter string that is
+	# tied to the unique id parameter. If the user doesn't
+	# have permission to see this filter, the function will
+	# return null 
+	function filter_db_get_filter( $p_filter_id ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE id='$c_filter_id'";
+		$result = db_query( $query );
+		
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+			
+			if ( $row['user_id'] != auth_get_current_user_id() ) {
+				if ( $row['is_public'] != true ) {
+					return null;
+				}
+			}
+			
+			return $row['filter_string'];
+		}
+		
+		return null;
+	}
+
+	function filter_db_get_name( $p_filter_id ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE id='$c_filter_id'";
+		$result = db_query( $query );
+		
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+			
+			if ( $row['user_id'] != auth_get_current_user_id() ) {
+				if ( $row['is_public'] != true ) {
+					return null;
+				}
+			}
+			
+			return $row['name'];
+		}
+		
+		return null;
+	}
+
+	# Will return true if the user can delete this query
+	function filter_db_can_delete_filter( $p_filter_id ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+		$t_user_id = auth_get_current_user_id();
+
+		$query = "SELECT id
+				  FROM $t_filters_table
+				  WHERE id='$c_filter_id'
+				  AND user_id='$t_user_id'
+				  AND project_id!='-1'";
+
+		$result = db_query( $query );
+		
+		if ( db_num_rows( $result ) > 0 ) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	function filter_db_delete_filter( $p_filter_id ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$c_filter_id = db_prepare_int( $p_filter_id );
+		$t_user_id = auth_get_current_user_id();
+
+		if ( ! filter_db_can_delete_filter( $c_filter_id ) ) {
+			return false;
+		}
+		
+		$query = "DELETE FROM $t_filters_table
+				  WHERE id='$c_filter_id'";
+		$result = db_query( $query );
+
+		if ( db_affected_rows( $result ) > 0 ) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	function filter_db_get_available_queries( ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$t_overall_query_arr = array();
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+
+		# Get the list of available queries. By sorting such that public queries are
+		# first, we can override any query that has the same name as a private query
+		# with that private one
+		$query = "SELECT * FROM $t_filters_table
+					WHERE (project_id='$t_project_id'
+					OR project_id='0')
+					AND name!=''
+					AND filter_string!=''
+					ORDER BY is_public DESC, name ASC";
+		$result = db_query( $query );
+		$query_count = db_num_rows( $result );
+		
+		for ( $i = 0; $i < $query_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+				$t_overall_query_arr[ $row['id'] ] = $row['name'];
+			}
+		}
+		
+		$t_overall_query_arr = array_unique( $t_overall_query_arr );
+		asort( $t_overall_query_arr );
+
+		return $t_overall_query_arr;
 	}
 ?>

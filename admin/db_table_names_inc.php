@@ -24,4 +24,5 @@
 	$t_custom_field_table      		= config_get( 'mantis_custom_field_table' );
 	$t_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
 	$t_upgrade_table				= config_get( 'mantis_upgrade_table' );
+	$t_filters_table				= config_get( 'mantis_filters_table' );
 ?>
