@@ -5,7 +5,12 @@ Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
 
 INSTALLATION
 
+The following details the basic steps for installation on any system.  The
+instructions may seem unix-centric but will work fine on Windows systems
+(and I hope elsewhere).
 
+Barring complications, it should take you about 10-20 minutes to install,
+configure, and be using Mantis.
 
 *** REQUIREMENTS: mysql database, php 3.0.13+, a webserver (tested on Apache
 and BadBlue, should work with IIS or anything else php will run with).
@@ -22,6 +27,9 @@ OR  (2 steps):
 
 	gunzip <filename.tar.gz>
 	tar xvf <filename.tar>
+
+Winzip, Stuffit, and other programs should also be able to handle
+decompression of the archive.
 
 At this point you may want to rename the directory to something simpler like
 'mantis'.  You will use the mv command to rename a directory.
