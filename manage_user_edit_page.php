@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.11 2004-05-26 03:22:16 int2str Exp $
+	# $Id: manage_user_edit_page.php,v 1.12 2005-03-21 20:48:55 vwegert Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -129,7 +129,7 @@
 <br />
 <div align="center">
 <?php
-	if ( ON == config_get( 'send_reset_password' ) ) {
+	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
 		echo lang_get( 'reset_password_msg2' );

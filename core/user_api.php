@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.88 2005-02-27 21:02:01 prichards Exp $
+	# $Id: user_api.php,v 1.89 2005-03-21 20:48:57 vwegert Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1097,7 +1097,7 @@
 		#     Should we just have two functions? (user_reset_password_random()
 		#     and user_reset_password() )?
 
-		if ( ON == config_get( 'send_reset_password' ) ) {
+		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# Create random password
 			$t_email		= user_get_field( $p_user_id, 'email' );
 			$t_password		= auth_generate_random_password( $t_email );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.18 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: manage_user_create_page.php,v 1.19 2005-03-21 20:48:55 vwegert Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -52,7 +52,7 @@
 	</td>
 </tr>
 <?php
-	if ( OFF == config_get( 'send_reset_password' ) ) {
+	if ( OFF == config_get( 'send_reset_password' ) )  {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.110 2005-03-21 02:03:12 thraxisp Exp $
+	# $Id: email_api.php,v 1.111 2005-03-21 20:48:56 vwegert Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -318,8 +318,8 @@
 	# Send password to user
 	function email_signup( $p_user_id, $p_password, $p_confirm_hash ) {
 
-		if ( OFF == config_get( 'send_reset_password' ) ) {
-			return;
+		if ( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
+					return;
 		}
 
 		lang_push( user_pref_get_language( $p_user_id ) );
@@ -350,7 +350,7 @@
 	# Send confirm_hash url to user forgets the password
 	function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 
-		if ( OFF == config_get( 'send_reset_password' ) ) {
+		if ( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 			return;
 		}
 

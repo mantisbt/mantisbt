@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.4 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: lost_pwd_page.php,v 1.5 2005-03-21 20:48:55 vwegert Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
@@ -16,7 +16,8 @@
 
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if( OFF == config_get( 'lost_password_feature' ) ||
-		OFF == config_get( 'send_reset_password' ) ) {
+		OFF == config_get( 'send_reset_password' )  ||
+	 	OFF == config_get( 'enable_email_notification' ) ) {
 		trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.21 2004-12-08 12:52:59 vboctor Exp $
+	# $Id: manage_user_create.php,v 1.22 2005-03-21 20:48:55 vwegert Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -43,7 +43,7 @@
 
 	$f_email = email_append_domain( $f_email );
 
-	if ( ON == config_get( 'send_reset_password' ) ) {
+	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		# Check code will be sent to the user directly via email. Dummy password set to random
 		# Create random password
 		$t_seed = $f_email . $f_username;

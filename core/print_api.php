@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.118 2005-03-21 12:09:31 vboctor Exp $
+	# $Id: print_api.php,v 1.119 2005-03-21 20:48:57 vwegert Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1170,7 +1170,8 @@
 	# --------------------
 	# prints the signup link
 	function print_signup_link() {
-		if( ON == config_get( 'allow_signup' ) ) {
+		if( ( ON == config_get( 'allow_signup' ) ) && 
+		    ( ON == config_get( 'enable_email_notification' ) ) ) {
 			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 		}
 	}
@@ -1184,7 +1185,8 @@
 	function print_lost_password_link() {
 		# lost password feature disabled or reset password via email disabled -> stop here!
 		if( ( ON == config_get( 'lost_password_feature' ) ) &&
-			( ON == config_get( 'send_reset_password' ) ) ) {
+			( ON == config_get( 'send_reset_password' ) ) &&
+			( ON == config_get( 'enable_email_notification' ) ) ) {
 			print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 		}
 	}

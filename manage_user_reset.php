@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_reset.php,v 1.29 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: manage_user_reset.php,v 1.30 2005-03-21 20:48:55 vwegert Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -31,7 +31,7 @@
 		echo lang_get( 'account_reset_protected_msg' ) . '<br />';
 	} else {
 		# SUCCESS
-		if ( ON == config_get( 'send_reset_password' ) ) {
+		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
 			echo lang_get( 'account_reset_msg' ) . '<br />';
 		} else {
