@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.40 2003-02-09 10:30:07 jfitzell Exp $
+	# $Id: html_api.php,v 1.41 2003-02-09 22:30:10 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -185,7 +185,7 @@
 					break;
 		}
 
-		PRINT "<div class=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
+		echo '<div class="center"><span class="pagetitle">' . string_display( $t_title ) . '</span></div>';
 	}
 	# --------------------
 	# (10) $p_page is included.  This allows for the admin to have a nice banner or
@@ -320,10 +320,10 @@
  	# --------------------
 	# print the hr
 	function print_hr( $p_hr_size=null, $p_hr_width=null ) {
-		if ( $p_hr_size === null ) {
+		if ( null === $p_hr_size ) {
 			$p_hr_size = config_get( 'hr_size' );
 		}
-		if ( $p_hr_width === null ) {
+		if ( null === $p_hr_width ) {
 			$p_hr_width = config_get( 'hr_width' );
 		}
 		echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
@@ -354,10 +354,7 @@
 					PRINT '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
 				}
 
-				# only show accounts that are NOT protected
-				if ( OFF == $t_protected ) {
-					PRINT '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
-				}
+				PRINT '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
 
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
@@ -376,7 +373,11 @@
 					}
 				}
 
-				PRINT '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
+				# only show accounts that are NOT protected
+				if ( OFF == $t_protected ) {
+					PRINT '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
+				}
+
 				PRINT '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
 				PRINT '</td>';
 				PRINT '<td class="right" style="white-space: nowrap;">';
@@ -427,7 +428,7 @@
 			for ( $i=0 ; $i < $project_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				PRINT " | <a href=\"set_project.php?project_id=$v_id\">$v_name</a>";
+				PRINT " | <a href=\"set_project.php?project_id=$v_id\">" . string_display( $v_name ) . '</a>';
 			}
 			PRINT '</td>';
 		PRINT '</tr>';

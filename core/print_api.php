@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.39 2003-02-09 22:15:17 jfitzell Exp $
+	# $Id: print_api.php,v 1.40 2003-02-09 22:30:10 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -451,7 +451,7 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			echo "<option value=\"$v_id\"";
 			check_selected( $p_project_id, $v_id );
-			echo ">$v_name</option>";
+			echo '>' . string_display( $v_name ) . '</option>';
 		}
 	}
 	# --------------------
