@@ -3,6 +3,14 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.19 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:18:14 $
+	#
+	# $Id: view_bug_inc.php,v 1.19 2002-06-13 10:18:14 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug information
@@ -10,18 +18,20 @@
 ?>
 <?php
 	$c_id = (integer)$f_id;
-    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-    		UNIX_TIMESTAMP(last_updated) as last_updated
-    		FROM $g_mantis_bug_table
-    		WHERE id='$c_id'";
-    $result = db_query( $query );
+	$query ="SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted, ".
+			"UNIX_TIMESTAMP(last_updated) as last_updated ".
+			"FROM $g_mantis_bug_table ".
+			"WHERE id='$c_id' ".
+			"LIMIT 1";
+	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-    $query = "SELECT *
-    		FROM $g_mantis_bug_text_table
-    		WHERE id='$v_bug_text_id'";
-    $result = db_query( $query );
+	$query ="SELECT * ".
+			"FROM $g_mantis_bug_text_table ".
+			"WHERE id='$v_bug_text_id' ".
+			"LIMIT 1";
+	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v2' );
 

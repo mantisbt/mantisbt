@@ -3,6 +3,14 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.31 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:18:14 $
+	#
+	# $Id: view_all_bug_page.php,v 1.31 2002-06-13 10:18:14 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
@@ -27,8 +35,6 @@
 
 	check_varset( $f_search, false );
 	check_varset( $f_page_number, 1 );
-
-	start_compression();
 
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];
@@ -58,12 +64,6 @@
 	$c_sort					= addslashes($f_sort);
 	$c_per_page				= (integer)$f_per_page;
 
-	if ( 'DESC' == $f_dir ) {
-		$c_dir = 'DESC';
-	} else {
-		$c_dir = 'ASC';
-	}
-
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
@@ -85,19 +85,19 @@
 	if ( '0' == $g_project_cookie_val ) { # ALL projects
 		$t_access_level = get_current_user_field( 'access_level' );
 		if ( ADMINISTRATOR == $t_access_level ) {
-			$query2 = "SELECT DISTINCT( id )
-					FROM $g_mantis_project_table
-					WHERE enabled=1
-					ORDER BY id";
+			$query2 =	"SELECT DISTINCT( id ) ".
+					"FROM $g_mantis_project_table ".
+					"WHERE enabled=1 ".
+					"ORDER BY id";
 		} else {
-			$query2 = "SELECT DISTINCT( p.id )
-					FROM $g_mantis_project_table p
-					LEFT JOIN $g_mantis_project_user_list_table u
-					ON p.id=u.project_id AND p.enabled=1
-					WHERE p.view_state='$t_pub' OR
-						(p.view_state='$t_prv' AND
-						u.user_id='$t_user_id')
-					ORDER BY p.id";
+			$query2 =	"SELECT DISTINCT( p.id ) ".
+					"FROM $g_mantis_project_table p ".
+					"LEFT JOIN $g_mantis_project_user_list_table u ".
+					"ON p.id=u.project_id AND p.enabled=1 ".
+					"WHERE p.view_state='$t_pub' OR ".
+					"(p.view_state='$t_prv' AND ".
+					"u.user_id='$t_user_id') ".
+					"ORDER BY p.id";
 		}
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
@@ -155,17 +155,17 @@
 	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
-		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
-							OR ($g_mantis_bug_text_table.description LIKE '%$c_search%')
-							OR ($g_mantis_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
-							OR ($g_mantis_bug_text_table.additional_information LIKE '%$c_search%')
-							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
-							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
-							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
+		$t_where_clause .=	" AND ((summary LIKE '%$c_search%')".
+					" OR ($g_mantis_bug_text_table.description LIKE '%$c_search%')".
+					" OR ($g_mantis_bug_text_table.steps_to_reproduce LIKE '%$c_search%')".
+					" OR ($g_mantis_bug_text_table.additional_information LIKE '%$c_search%')".
+					" OR ($g_mantis_bug_table.id LIKE '%$c_search%')".
+					" OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))".
+					" AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 
-		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
-							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
-							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
+		$t_from_clause =	" FROM $g_mantis_bug_table, $g_mantis_bug_text_table".
+					" LEFT JOIN $g_mantis_bugnote_table ON $g_mantis_bugnote_table.bug_id = $g_mantis_bug_table.id".
+					" LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
 	} else {
 		$t_columns_clause = ' *';
 		$t_from_clause = " FROM $g_mantis_bug_table";
@@ -254,6 +254,8 @@
 	}
 	# END CSV export feature
 	# ------------------------
+
+	start_compression();
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -4,12 +4,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-    # This module is based on bug_update.php3 and provides a quick method
-    # for assigning a call to the currently signed on user.
-    # Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
+	# This module is based on bug_update.php and provides a quick method
+	# for assigning a call to the currently signed on user.
+	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
-?>
-<?php
+	# --------------------------------------------------------
+	# $Revision: 1.14 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:18:14 $
+	#
+	# $Id: bug_assign.php,v 1.14 2002-06-13 10:18:14 vboctor Exp $
+	# --------------------------------------------------------
+
 	# Assign bug to user then redirect to viewing page
 ?>
 <?php include( 'core_API.php' ) ?>
@@ -22,17 +28,17 @@
 
 	$c_id = (integer)$f_id;
 
-    $t_ass_val = ASSIGNED;
+	$t_ass_val = ASSIGNED;
 
-	$h_status		= get_bug_field( $c_id, 'status' );
-	$h_handler_id	= get_bug_field( $c_id, 'handler_id' );
+	$h_status = get_bug_field( $c_id, 'status' );
+	$h_handler_id = get_bug_field( $c_id, 'handler_id' );
 
-    # get user id
-    $t_handler_id = get_current_user_field( 'id' );
-    $query = "UPDATE $g_mantis_bug_table
-            SET handler_id='$t_handler_id', status='$t_ass_val'
-			WHERE id='$c_id'";
-    $result = db_query($query);
+	# get user id
+	$t_handler_id = get_current_user_field( 'id' );
+	$query ="UPDATE $g_mantis_bug_table ".
+			"SET handler_id='$t_handler_id', status='$t_ass_val' ".
+			"WHERE id='$c_id'";
+	$result = db_query($query);
 
 	# updated the last_updated date
 	$result = bug_date_update( $f_id );

@@ -1,7 +1,7 @@
 <p>
 <table class="width100" cellspacing="0">
 <tr class="row-category2">
-    <td class="small-caption">
+	<td class="small-caption">
 		<form method="post" action="view_all_set.php?f=3">
 		<input type="hidden" name="f_type" value="1">
 		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
@@ -10,25 +10,25 @@
 		<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
 		<?php echo $s_reporter ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_assigned_to ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_category ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_severity ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_status ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_show ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_changed ?>
 	</td>
-    <td class="small-caption">
+	<td class="small-caption">
 		<?php echo $s_hide_closed ?>
 	</td>
 </tr>
@@ -81,9 +81,9 @@
 	</td>
 </tr>
 <tr class="row-category2">
-    <td class="small-caption">
-        <?php echo $s_search ?>
-    </td>
+	<td class="small-caption">
+		<?php echo $s_search ?>
+	</td>
 	<td class="small-caption" colspan="2"><!--Start Date--></td>
 	<td class="small-caption" colspan="2"><!--End Date--></td>
 	<td class="small-caption" colspan="7">

@@ -3,6 +3,14 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.7 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:18:14 $
+	#
+	# $Id: account_delete.php,v 1.7 2002-06-13 10:18:14 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# Delete account, remove cookies, and redirect user to logout redirect page
@@ -34,28 +42,28 @@
 		# get user id
 		$t_user_id = get_current_user_field( 'id' );
 
-	    # Remove account
-    	$query = "DELETE
-    			FROM $g_mantis_user_table
-    			WHERE id='$t_user_id'";
-	    $result = db_query( $query );
+		# Remove account
+		$query ="DELETE ".
+				"FROM $g_mantis_user_table ".
+				"WHERE id='$t_user_id'";
+		$result = db_query( $query );
 
-	    # Remove associated profiles
-	    $query = "DELETE
-	    		FROM $g_mantis_user_profile_table
-	    		WHERE user_id='$t_user_id'";
-	    $result = db_query( $query );
+		# Remove associated profiles
+		$query ="DELETE ".
+				"FROM $g_mantis_user_profile_table ".
+				"WHERE user_id='$t_user_id'";
+		$result = db_query( $query );
 
 		# Remove associated preferences
-    	$query = "DELETE
-    			FROM $g_mantis_user_pref_table
-    			WHERE user_id='$t_user_id'";
-    	$result = db_query( $query );
+		$query ="DELETE ".
+				"FROM $g_mantis_user_pref_table ".
+				"WHERE user_id='$t_user_id'";
+		$result = db_query( $query );
 
-    	$query = "DELETE
-    			FROM $g_mantis_project_user_list_table
-	    		WHERE user_id='$f_id'";
-	    $result = db_query( $query );
+		$query ="DELETE ".
+				"FROM $g_mantis_project_user_list_table ".
+				"WHERE user_id='$f_id'";
+		$result = db_query( $query );
 
 		# delete cookies
 		setcookie( $g_string_cookie );
