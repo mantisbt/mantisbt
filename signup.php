@@ -9,7 +9,6 @@
 <?php
 	$f_username		= gpc_get_string( 'f_username' );
 	$f_email		= gpc_get_string( 'f_email' );
-	$f_email_domain	= gpc_get_string( 'f_email_domain', false );
 
 	# Check to see if signup is allowed
 	if ( OFF == config_get( 'allow_signup' ) ) {
@@ -23,21 +22,18 @@
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
-	if ( !empty( $f_email_domain ) ) {
-		$f_email = "$f_email@$f_email_domain";
+	$t_limit_email_domain = config_get( 'limit_email_domain' );
+	if ( $t_limit_email_domain ) {
+		$f_email = "$f_email@$t_limit_email_domain";
 	}
 
 	# Check for a properly formatted email with valid MX record
-	if ( !email_is_valid( $f_email ) ) {
+	#  Don't allow blank emails when signing up though, no matter what.
+	if ( !email_is_valid( $f_email ) || empty( $f_email ) ) {
 		echo $f_email.' '.lang_get( 'invalid_email' ).'<br />';
 		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;
 	}
-
-	# Check for duplicate username
-    if ( ! user_is_name_unique( $f_username ) ) {
-		print_mantis_error( ERROR_USER_NAME_NOT_UNIQUE );
-    }
 
 	# Passed our checks.  Insert into DB then send email.
 	if ( !user_signup( $f_username, $f_email ) ) {
