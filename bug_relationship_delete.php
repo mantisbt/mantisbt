@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.2 2004-08-01 22:31:48 prichards Exp $
+	# $Id: bug_relationship_delete.php,v 1.3 2004-09-12 00:17:56 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# --------------------------------------------------------
 	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
 	# --------------------------------------------------------
@@ -56,22 +55,70 @@
 
 	helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete_relationship_button' ) );
 
+	$t_bug_relationship_data = relationship_get( $f_rel_id );
+	$t_rel_type = $t_bug_relationship_data->type;
+
 	# delete relationship from the DB
 	relationship_delete( $f_rel_id );
 
 	# update bug last updated (just for the src bug)
 	bug_update_date( $f_bug_id );
 
-	# Add log line to the history of both bugs
-	# Send email notification to the users addressed by both the bugs
-	history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, '', $t_dest_bug_id );
-	email_relationship_deleted( $f_bug_id );
+	# Add log lines to both the histories
+	switch ( $t_rel_type ) {
+		case BUG_BLOCKS:
+			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_BLOCKS, $t_dest_bug_id );
+			email_relationship_deleted( $f_bug_id );
 
-	# Add log line to the history of both bugs
-	# Send email notification to the users addressed by both the bugs
 	if ( bug_exists( $t_dest_bug_id )) {
-		history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, '', $f_bug_id );
-		email_relationship_deleted( $t_dest_bug_id );
+				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_DEPENDANT, $f_bug_id );
+				email_relationship_deleted( $t_dest_bug_id );
+			}
+			break;
+
+		case BUG_DEPENDANT:
+			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_DEPENDANT, $t_dest_bug_id );
+			email_relationship_deleted( $f_bug_id );
+
+			if ( bug_exists( $t_dest_bug_id )) {
+				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_BLOCKS, $f_bug_id );
+				email_relationship_deleted( $t_dest_bug_id );
+			}
+			break;
+
+		case BUG_HAS_DUPLICATE:
+			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_HAS_DUPLICATE, $t_dest_bug_id );
+			email_relationship_deleted( $f_bug_id );
+
+			if ( bug_exists( $t_dest_bug_id )) {
+				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_DUPLICATE, $f_bug_id );
+				email_relationship_deleted( $t_dest_bug_id );
+			}
+			break;
+
+		case BUG_DUPLICATE:
+			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_DUPLICATE, $t_dest_bug_id );
+			email_relationship_deleted( $f_bug_id );
+
+			if ( bug_exists( $t_dest_bug_id )) {
+				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_bug_id );
+				email_relationship_deleted( $t_dest_bug_id );
+			}
+			break;
+
+		case BUG_RELATED:
+			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_RELATED, $t_dest_bug_id );
+			email_relationship_deleted( $f_bug_id );
+
+			if ( bug_exists( $t_dest_bug_id )) {
+				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_RELATED, $f_bug_id );
+				email_relationship_deleted( $t_dest_bug_id );
+			}
+			break;
+
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
+			break;
 	}
 
 	print_header_redirect_view( $f_bug_id );
