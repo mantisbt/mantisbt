@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.100 2004-09-06 00:33:38 thraxisp Exp $
+	# $Id: email_api.php,v 1.101 2004-09-26 02:05:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -766,11 +766,7 @@
 		}
 
 		# load (push) user language
-		$t_lang = user_pref_get_language( $p_user_id, $p_project_id );
-		if ( 'auto' == $t_lang ) {
-			$t_lang = config_get( 'default_language' );
-		}
-		lang_push( $t_lang );
+		lang_push( user_pref_get_language( $p_user_id, $p_project_id ) );
 
 		# build subject
 		$t_subject = '['.$p_visible_bug_data['email_project'].' '
