@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.74 2003-03-27 00:55:25 int2str Exp $
+	# $Id: html_api.php,v 1.75 2003-07-06 05:20:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -399,41 +399,16 @@
 	# --------------------
 	# Print the menu bar with a list of projects to which the user has access
 	function print_project_menu_bar() {
-		$t_user_id = auth_get_current_user_id();
-		$t_access_level = current_user_get_field( 'access_level' );
-
-		$t_pub = VS_PUBLIC;
-		$t_prv = VS_PRIVATE;
-
-		$t_project_table = config_get( 'mantis_project_table' );
-		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-
-		if ( ADMINISTRATOR == $t_access_level ) {
-			$query = "SELECT p.id, p.name
-						FROM $t_project_table p
-						WHERE p.enabled=1
-						ORDER BY p.name";
-		} else {
-			$query = "SELECT DISTINCT(p.id), p.name
-						FROM $t_project_table p, $t_project_user_list_table u
-						WHERE p.enabled=1
-						  AND p.id=u.project_id
-						  AND ((p.view_state=$t_pub) OR
-							   (p.view_state=$t_prv AND u.user_id=$t_user_id))
-						ORDER BY p.name";
-		}
-
-		$result = db_query( $query );
-		$project_count = db_num_rows( $result );
+		$t_project_ids = current_user_get_accessible_projects(); 
 
 		echo '<table class="width100" cellspacing="0">';
 		echo '<tr>';
 			echo '<td class="menu">';
 			echo '<a href="set_project.php?project_id=' . ALL_PROJECTS . '">' . lang_get( 'all_projects' ) . '</a>';
-			for ( $i=0 ; $i < $project_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				echo " | <a href=\"set_project.php?project_id=$v_id\">" . string_display( $v_name ) . '</a>';
+			$t_project_count = count( $t_project_ids );
+			for ( $i=0 ; $i < $t_project_count ; $i++ ) {
+				$t_id = $t_project_ids[$i];
+				echo " | <a href=\"set_project.php?project_id=$t_id\">" . string_display( project_get_field( $t_id, 'name' ) ) . '</a>';
 			}
 			echo '</td>';
 		echo '</tr>';

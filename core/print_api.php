@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.67 2003-05-01 18:29:54 jfitzell Exp $
+	# $Id: print_api.php,v 1.68 2003-07-06 05:20:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -343,45 +343,19 @@
 	# --------------------
 	# List projects that the current user has access to
 	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
-		global $g_mantis_project_table, $g_mantis_project_user_list_table;
-
-		$t_user_id = auth_get_current_user_id();
-		$t_access_level = current_user_get_field( 'access_level' );
-
-		$t_pub = VS_PUBLIC;
-		$t_prv = VS_PRIVATE;
-
-		if ( ADMINISTRATOR == $t_access_level ) {
-			$query = "SELECT DISTINCT( p.id ), p.name
-						FROM $g_mantis_project_table p
-						WHERE p.enabled=1
-						ORDER BY p.name";
-		} else {
-			$query = "SELECT DISTINCT( p.id ), p.name
-						FROM $g_mantis_project_table p
-						LEFT JOIN $g_mantis_project_user_list_table u
-						ON p.id=u.project_id
-						WHERE p.enabled=1 AND
-						((p.view_state=$t_pub) OR
-						 (p.view_state=$t_prv AND u.user_id=$t_user_id))
-						ORDER BY p.name";
-		}
-
-		$result = db_query( $query );
-		$project_count = db_num_rows( $result );
-
+		$t_project_ids = current_user_get_accessible_projects();
 		if ( $p_include_all_projects ) {
 			echo '<option value="' . ALL_PROJECTS . '"';
 			check_selected( $p_project_id, ALL_PROJECTS );
 			echo '>' . lang_get( 'all_projects' ) . '</option>';
 		}
 
-		for ($i=0;$i<$project_count;$i++) {
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			echo "<option value=\"$v_id\"";
-			check_selected( $p_project_id, $v_id );
-			echo '>' . string_display( $v_name ) . '</option>';
+		$t_project_count = count( $t_project_ids );
+		for ($i=0;$i<$t_project_count;$i++) {
+			$t_id = $t_project_ids[$i];
+			echo "<option value=\"$t_id\"";
+			check_selected( $p_project_id, $t_id );
+                        echo '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>';
 		}
 	}
 	# --------------------
