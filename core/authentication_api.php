@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.17 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.18 2003-01-23 06:11:46 robertjf Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -112,13 +112,12 @@
 		if ( OFF == $t_user['enabled'] ) {
 			return false;
 		}
-
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
 		# check for anonymous login
 		if ( ! ( ON == $t_anon_allowed && $t_anon_account == $p_username ) ) {
 			# anonymous login didn't work, so check the password
-			
+
 			if ( ! auth_does_password_match( $t_user_id, $p_password ) ) {
 				return false;
 			}
@@ -157,8 +156,7 @@
 		$t_login_method = config_get( 'login_method' );
 
 		if ( LDAP == $t_login_method ) {
- 			$t_username = user_get_field( $p_user_id, 'username' );
-			return ldap_authenticate( $t_username, $p_test_password );
+			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
 
 		$t_password = user_get_field( $p_user_id, 'password' );
