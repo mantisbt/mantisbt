@@ -64,8 +64,9 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input type="radio" name="f_view_state" value="10" CHECKED> <?php echo $s_public ?>
-		<input type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
+		<select name="f_view_state">
+			<?php print_enum_string_option_list( 'view_state' ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-2">
