@@ -529,7 +529,9 @@
 			# add to the BCC list
 			$t_bcc_list = split(",", $p_header);
 			while(list(, $t_bcc) = each($t_bcc_list)) {
-				$mail->AddBCC($t_bcc, "");
+				if ( !empty( $t_bcc ) ) {
+					$mail->AddBCC($t_bcc, "");
+				}
 			}
 
 			$mail->Subject = $t_subject;
