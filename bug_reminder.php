@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.10 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_reminder.php,v 1.11 2003-03-12 17:39:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 	foreach ( $f_to as $t_recipient )
 	{
 		if ( ON == config_get( 'reminder_recipents_monitor_bug' ) &&
-			access_has_project_level( config_get( 'monitor_bug_threshold' ) ) &&
+			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) &&
 			!bug_is_user_handler( $f_bug_id, $t_recipient ) && 
 			!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
 			bug_monitor( $f_bug_id, $t_recipient );

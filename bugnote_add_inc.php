@@ -6,12 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.13 2003-02-27 08:14:44 jfitzell Exp $
+	# $Id: bugnote_add_inc.php,v 1.14 2003-03-12 17:39:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
-<?php if ( ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) ||
-		  ( isset( $f_resolve_note ) ) ) &&
-		( access_has_project_level( config_get( 'add_bugnote_threshold' ) ) ) ) { ?>
+<?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
+		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <br />
 <form method="post" action="bugnote_add.php">
@@ -30,7 +29,7 @@
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
-<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>

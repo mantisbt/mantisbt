@@ -164,11 +164,7 @@
 
 <!-- ====================== BUG LIST ========================= -->
 <?php
-	$col_count = 8;
-
-	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
-		$col_count++;
-	}
+	$col_count = 9;
 
 	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
@@ -213,11 +209,7 @@
 </tr>
 <!-- Bug list column header row -->
 <tr class="row-category">
-<?php
-	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
-		echo '<td class="center" width="2%">&nbsp;</td>';
-	}
-?>
+	<td class="center" width="2%">&nbsp;</td>
 
 	<td class="center" width="2%">&nbsp;</td>
 
@@ -300,15 +292,17 @@
 <tr bgcolor="<?php echo $status_color ?>">
 	<!-- Checkbox -->
 <?php
-	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
+	if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $v_id ) ) {
 ?>
 	<td>
 		<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
 	</td>
 <?php
-	}
+	} else {
+		echo '<td>&nbsp;</td>';
+}
 ?>
-
+	
 	<!-- Pencil shortcut -->
 	<td class="center">
 	<?php
@@ -410,20 +404,14 @@
 <!-- ====================== end of BUG LIST ========================= -->
 
 <!-- ====================== MASS BUG MANIPULATION ========================= -->
-<?php
-if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
-?>
-	<tr>
-		<td colspan="<?php echo $col_count ?>">
-			<select name="action">
-				<?php print_all_bug_action_option_list() ?>
-			</select>
-			<input type="submit" value="<?php echo 'OK';  ?>" />
-		</td>
-	</tr>
-<?php
-}
-?>
+<tr>
+	<td colspan="<?php echo $col_count ?>">
+		<select name="action">
+			<?php print_all_bug_action_option_list() ?>
+		</select>
+		<input type="submit" value="<?php echo 'OK';  ?>" />
+	</td>
+</tr>
 <!-- ====================== end of MASS BUG MANIPULATION ========================= -->
 </table>
 </form>

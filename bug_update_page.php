@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.57 2003-02-23 14:18:00 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.58 2003-03-12 17:39:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -311,7 +311,7 @@
 
 
 <!-- Bugnote Private Checkbox (if permitted) -->
-<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>
