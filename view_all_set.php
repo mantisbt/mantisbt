@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.46 2005-02-18 17:58:15 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.47 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -151,7 +151,7 @@
 			}
 		}
 	}
-	
+
 	$f_relationship_type = gpc_get_string( 'relationship_type', -1 );
 	$f_relationship_bug = gpc_get_string( 'relationship_bug', 0 );
 
@@ -223,7 +223,7 @@
 	24: $f_custom_field
 	25: $f_relationship_type
 	26: $f_relationship_bug
-	
+
 */
 	# Set new filter values.  These are stored in a cookie
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );

@@ -69,7 +69,7 @@
 	}
 
 	# @@@ thraxisp - could this be replaced by a call to filter_draw_selection_area2
-	
+
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
@@ -244,7 +244,7 @@
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
  		<?php if ( $t_show_version ) {
  			print_filter_show_version();
- 		} else { 
+ 		} else {
  			echo "&nbsp;";
  		} ?>
 	</td>
@@ -252,7 +252,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
  		<?php if ( $t_show_version ) {
  			print_filter_show_fixed_in_version();
- 		} else { 
+ 		} else {
  			echo "&nbsp;";
  		} ?>
  	</td>

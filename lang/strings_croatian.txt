@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.25 $
+	# $Revision: 1.26 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:50 $
 	#
-	# $Id: strings_croatian.txt,v 1.25 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_croatian.txt,v 1.26 2005-02-25 00:23:50 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -620,6 +620,7 @@ $s_filter_button = "Primjeni filter";
 $s_manage_users_link = "Administriraj korisnike";
 $s_manage_projects_link = "Administriraj projekte";
 $s_manage_custom_field_link = 'Manage Custom Fields';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = "Kreiraj korisnièki raèun";
 $s_projects_link = "Projekti";

@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:53 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.69 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.70 2005-02-25 00:23:53 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -620,6 +620,7 @@ $s_filter_button = '表示';
 $s_manage_users_link = 'ユーザー管理';
 $s_manage_projects_link = 'プロジェクト管理';
 $s_manage_custom_field_link = 'カスタム項目管理';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = '権限一覧';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';

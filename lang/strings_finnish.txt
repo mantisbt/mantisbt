@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.27 $
+	# $Revision: 1.28 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:51 $
 	#
-	# $Id: strings_finnish.txt,v 1.27 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_finnish.txt,v 1.28 2005-02-25 00:23:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -622,6 +622,7 @@ $s_filter_button = 'Sovella suodinta';
 $s_manage_users_link = 'Käyttäjähallinta';
 $s_manage_projects_link = 'Projektinhallinta';
 $s_manage_custom_field_link = 'Muokkaa mukautettuja kenttiä';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Käyttöoikeusraportti';
 $s_create_new_account_link = 'Luo uusi käyttäjätunnus';
 $s_projects_link = 'Projektit';

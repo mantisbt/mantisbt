@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.123 $
+	# $Revision: 1.124 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:52 $
 	#
-	# $Id: strings_german.txt,v 1.123 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_german.txt,v 1.124 2005-02-25 00:23:52 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -623,6 +623,7 @@ $s_filter_button = 'Filter';
 $s_manage_users_link = 'Benutzer verwalten';
 $s_manage_projects_link = 'Projekte verwalten';
 $s_manage_custom_field_link = 'Benutzerdefinierte Felder';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Rechte-Bericht';
 $s_create_new_account_link = 'Neues Konto erstellen';
 $s_projects_link = 'Projekte';

@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.93 $
+	# $Revision: 1.94 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:51 $
 	#
-	# $Id: strings_french.txt,v 1.93 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_french.txt,v 1.94 2005-02-25 00:23:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -625,6 +625,7 @@ $s_filter_button = 'Filtrer';
 $s_manage_users_link = 'Gérer les utilisateurs';
 $s_manage_projects_link = 'Gérer les projets';
 $s_manage_custom_field_link = 'Gérer les champs personnalisés';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Créer un compte';
 $s_projects_link = 'Projets';

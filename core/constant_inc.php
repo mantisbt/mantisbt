@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.39 2005-02-25 00:18:39 jlatour Exp $
+	# $Id: constant_inc.php,v 1.40 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -114,7 +114,7 @@
 
 	# all projects
 	define( 'ALL_PROJECTS',	0 );
-	
+
 	# all users
 	define( 'ALL_USERS',    0 );
 

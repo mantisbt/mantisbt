@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:50 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.72 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.73 2005-02-25 00:23:50 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -618,6 +618,7 @@ $s_filter_button = 'Filter';
 $s_manage_users_link = 'Manage Users';
 $s_manage_projects_link = 'Manage Projects';
 $s_manage_custom_field_link = 'Manage Custom Fields';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = '建立帳號';
 $s_projects_link = '建立專案';

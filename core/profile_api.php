@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.9 2005-02-25 00:18:40 jlatour Exp $
+	# $Id: profile_api.php,v 1.10 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -149,7 +149,7 @@
 
 		return $t_rows;
 	}
-	
+
 	# --------------------
 	# Return an array containing all profiles for a given user,
 	# including global profiles
@@ -161,7 +161,7 @@
 		                    profile_get_all_rows( $p_user_id ) );
 		}
 	}
-	
+
 	# --------------------
 	# Return an array containing all global profiles
 	function profile_get_global() {
@@ -178,9 +178,9 @@
 			FROM $g_mantis_user_pref_table
 			WHERE user_id='$c_user_id'";
 		$result = db_query( $query );
-		
+
 	    $t_default_profile = db_result( $result, 0, 0 );
-	   	
+
 	    return $t_default_profile;
 	}
 	# --------------------

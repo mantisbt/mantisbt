@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.6 $
+	# $Revision: 1.7 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:58 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.6 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_ukrainian.txt,v 1.7 2005-02-25 00:23:58 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -619,6 +619,7 @@ $s_filter_button = 'Застосувати фільтр';
 $s_manage_users_link = 'Користувачі';
 $s_manage_projects_link = 'Проекти';
 $s_manage_custom_field_link = 'Власні поля';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Новий запис';
 $s_projects_link = 'Проекти';

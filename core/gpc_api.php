@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.33 2005-02-20 21:12:07 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.34 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -264,7 +264,7 @@
 		# dont try to send cookie if headers are send (guideweb)
 		if ( !headers_sent() ) {
 			return setcookie( $p_name, '', -1, $p_path, $p_domain );
-		} else { 
+		} else {
 			return false;
 		}
 	}

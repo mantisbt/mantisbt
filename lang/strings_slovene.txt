@@ -616,6 +616,7 @@ $s_filter_button = 'Vklopi filter';
 $s_manage_users_link = 'Uporabniki';
 $s_manage_projects_link = 'Projekti';
 $s_manage_custom_field_link = 'Uporabniško določena polja';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Ustvari nov račun';
 $s_projects_link = 'Projekti';

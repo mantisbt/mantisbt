@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:55 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.22 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.23 2005-02-25 00:23:55 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -631,6 +631,7 @@ $s_filter_button = 'Pritaikyti filtrà';
 $s_manage_users_link = 'Tvarkyti vartotojus';
 $s_manage_projects_link = 'Tvarkyti projektus';
 $s_manage_custom_field_link = 'Tvarkyti papildomus laukus';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Sukurti naujà vartotojà';
 $s_projects_link = 'Projektai';

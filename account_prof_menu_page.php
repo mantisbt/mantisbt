@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.35 2005-02-25 00:18:38 jlatour Exp $
+	# $Id: account_prof_menu_page.php,v 1.36 2005-02-25 00:23:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,7 @@
 <?php html_page_top1( lang_get( 'manage_profiles_link' ) ) ?>
 <?php html_page_top2() ?>
 
-<?php 
+<?php
 	if ( $g_global_profiles ) {
 		print_manage_menu( 'manage_prof_menu_page.php' );
 	}

@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:51 $
 	#
-	# $Id: strings_estonian.txt,v 1.24 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.25 2005-02-25 00:23:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -621,6 +621,7 @@ $s_filter_button = 'Rakenda filter';
 $s_manage_users_link = 'Kasutajate haldus';
 $s_manage_projects_link = 'Projektide haldus';
 $s_manage_custom_field_link = 'Kohandatud vdljade haldus';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Kasutajauiguste raport';
 $s_create_new_account_link = 'Loo uus kasutaja';
 $s_projects_link = 'Projektid';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.41 2005-02-20 21:12:07 thraxisp Exp $
+	# $Id: error_api.php,v 1.42 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -102,7 +102,7 @@
 			}
 
 			# don't send the page header information if it has already been sent
-			if ( ! headers_sent() ) { 
+			if ( ! headers_sent() ) {
 				html_page_top1();
 				html_page_top2();
 			}

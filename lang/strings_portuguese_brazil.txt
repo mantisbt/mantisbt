@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.82 $
+	# $Revision: 1.83 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:55 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.82 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.83 2005-02-25 00:23:55 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
 	###########################################################################
@@ -622,6 +622,7 @@ $s_filter_button = 'Aplicar Filtro';
 $s_manage_users_link = 'Gerenciar Usuários';
 $s_manage_projects_link = 'Gerenciar Projetos';
 $s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Criar Nova Conta';
 $s_projects_link = 'Projetos';

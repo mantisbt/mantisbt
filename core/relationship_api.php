@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.30 2005-02-18 17:58:16 thraxisp Exp $
+	# $Id: relationship_api.php,v 1.31 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -687,8 +687,8 @@
 <select name="<?php echo $p_select_name?>">
 <?php if ($p_include_any) { ?>
 <option value="any" <?php echo ( $p_default_rel_type == -1 ? ' selected' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-<?php 
-    } 
+<?php
+    }
 ?>
 <select name="rel_type">
 <option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>

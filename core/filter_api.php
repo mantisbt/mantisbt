@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.86 2005-02-19 18:23:20 thraxisp Exp $
+	# $Id: filter_api.php,v 1.87 2005-02-25 00:23:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -915,7 +915,7 @@
 				$t_filters_url = $t_filters_url . '&amp;view_type=advanced';
 			}
 			$t_filters_url = $t_filters_url . '&amp;target_field=';
-			
+
 			$t_show_version = ( ON == config_get( 'show_product_version' ) )
 					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
@@ -1535,7 +1535,7 @@
 
 
 
-			<?php 
+			<?php
 				if ( $t_custom_cols > $t_filter_cols ) {
 					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
 				}

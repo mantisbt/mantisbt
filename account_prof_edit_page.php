@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.36 2005-02-25 00:18:38 jlatour Exp $
+	# $Id: account_prof_edit_page.php,v 1.37 2005-02-25 00:23:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
 
-<?php 
+<?php
 	if ( profile_is_global( $f_profile_id ) ) {
 		print_manage_menu();
 	}

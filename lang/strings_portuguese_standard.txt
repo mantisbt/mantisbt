@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.76 $
+	# $Revision: 1.77 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:55 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.76 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.77 2005-02-25 00:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -619,6 +619,7 @@ $s_filter_button = 'Filtro';
 $s_manage_users_link = 'Gestão de Utilizadores';
 $s_manage_projects_link = 'Gestão de Projectos';
 $s_manage_custom_field_link = 'Manage Custom Fields';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Criar Conta';
 $s_projects_link = 'Projectos';

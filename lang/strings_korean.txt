@@ -10,11 +10,11 @@
 	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	#             miren.info@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:54 $
 	#
-	# $Id: strings_korean.txt,v 1.81 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.82 2005-02-25 00:23:54 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -621,6 +621,7 @@ $s_filter_button = '필터';
 $s_manage_users_link = '사용자 관리';
 $s_manage_projects_link = '프로젝트 관리';
 $s_manage_custom_field_link = '커스텀 필드 관리';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = '계정 생성';
 $s_projects_link = '프로젝트';

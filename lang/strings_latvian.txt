@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.26 $
+	# $Revision: 1.27 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:54 $
 	#
-	# $Id: strings_latvian.txt,v 1.26 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_latvian.txt,v 1.27 2005-02-25 00:23:54 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -620,6 +620,7 @@ $s_filter_button = "Atlasît";
 $s_manage_users_link = "Lietotâju vadîba";
 $s_manage_projects_link = "Projektu vadîba";
 $s_manage_custom_field_link = 'Custom lauku noteikðana';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = "Izveidot jaunu lietotâju";
 $s_projects_link = "Projekti";

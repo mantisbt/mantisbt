@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.23 $
+	# $Revision: 1.24 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:56 $
 	#
-	# $Id: strings_serbian.txt,v 1.23 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.24 2005-02-25 00:23:56 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -620,6 +620,7 @@ $s_filter_button = 'Primena filtera';
 $s_manage_users_link = 'ažuriranje Korisnika';
 $s_manage_projects_link = 'ažuriranje projekata';
 $s_manage_custom_field_link = 'ažuriranje korisnickih polja';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'kreiranje novog naloga';
 $s_projects_link = 'Projekti';

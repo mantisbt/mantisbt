@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.26 2005-02-25 00:18:38 jlatour Exp $
+	# $Id: account_prof_add.php,v 1.27 2005-02-25 00:23:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,7 @@
 	$f_os			= gpc_get_string( 'os' );
 	$f_os_build		= gpc_get_string( 'os_build' );
 	$f_description	= gpc_get_string( 'description' );
-	
+
 	$t_user_id		= gpc_get_int( 'user_id' );
 	if ( ALL_USERS != $t_user_id ) {
 		$t_user_id = auth_get_current_user_id();

@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:58:09 $
+	# $Date: 2005-02-25 00:23:50 $
 	#
-	# $Id: strings_danish.txt,v 1.79 2005-02-13 21:58:09 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.80 2005-02-25 00:23:50 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -620,6 +620,7 @@ $s_filter_button = 'Filter';
 $s_manage_users_link = 'Bruger-administration';
 $s_manage_projects_link = 'Projekt-administration';
 $s_manage_custom_field_link = 'Administrer brugerdefinerede felter';
+$s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Rapport over rettigheder';
 $s_create_new_account_link = 'Opret konto';
 $s_projects_link = 'Projekter';
