@@ -54,6 +54,7 @@
 	require_once( $t_core_dir . 'bugnote_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'project_api.php' );
+	require_once( $t_core_dir . 'filter_api.php' );
 
 	# Include LDAP only if needed.
 	if ( ( ON == config_get( 'use_ldap_email' ) ) || ( LDAP == config_get ( 'login_method' ) ) ) {
