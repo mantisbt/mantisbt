@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.19 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: current_user_api.php,v 1.20 2004-08-01 03:29:25 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -103,7 +103,7 @@
 		if ( !is_blank( $f_filter_string ) ) {
 			$t_filter = unserialize( $f_filter_string );
 		} else {
-			$t_view_all_cookie_id	= gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+			$t_view_all_cookie_id	= filter_db_get_project_current( helper_get_current_project() );
 			$t_view_all_cookie		= filter_db_get_filter( $t_view_all_cookie_id );
 			$t_cookie_detail		= explode( '#', $t_view_all_cookie, 2 );
 			$t_filter				= unserialize( $t_cookie_detail[1] );

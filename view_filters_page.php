@@ -99,8 +99,6 @@
 		}
 	}		
 
-	$t_filter = current_user_get_bug_filter();
-	$t_project_id = helper_get_current_project();
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
 	$t_sort = $t_filter['sort'];
