@@ -1,6 +1,6 @@
 -- Just Ideas (feel free to modify) --
 -- david ulevitch <davidu@everydns.net> --
--- $id --
+-- $Id --
 
 Mantis rewrite.
 
@@ -17,12 +17,4 @@ Primary:
 Secondary:
 -o	Source documentation via phpdoc (or similar)
 
-Tertiary:
--o email2mantis gateway to append to bugs.
-
-
-
-
-
-
-
+What else?
