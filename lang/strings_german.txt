@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: int2str $
-	# $Date: 2003-03-12 19:30:26 $
+	# $Date: 2003-03-18 21:33:51 $
 	#
-	# $Id: strings_german.txt,v 1.67 2003-03-12 19:30:26 int2str Exp $
+	# $Id: strings_german.txt,v 1.68 2003-03-18 21:33:51 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -562,7 +562,7 @@
 	$s_add_category_button = 'Kategorie hinzufügen';
 	$s_versions = 'Versionen';
 	$s_add_version_button = 'Version hinzufügen';
-	$s_edit_link = 'bearbeiten';
+	$s_edit_link = 'Bearbeiten';
 	$s_actions = 'Actions';
 	$s_version = 'Version/Build';
 	$s_timestamp = 'Timestamp';
