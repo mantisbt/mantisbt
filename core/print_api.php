@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.22 2002-10-20 08:37:28 vboctor Exp $
+	# $Id: print_api.php,v 1.23 2002-10-20 22:13:10 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -1046,56 +1046,5 @@
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
 		PRINT "<br />$p_query;<br />";
 	}
-	# --------------------
-	###########################################################################
-	# Filter API
-	###########################################################################
-	# --------------------
-	# make http and mailto link urls
-	function filter_href_tags( $p_string ) {
-    	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])",
-    							"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
-    							$p_string);
-        $p_string = eregi_replace( "(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))",
-        						"<a href=\"mailto:\\1\" target=\"_new\">\\1</a>",
-        						$p_string);
-		return $p_string;
-	}
-	# --------------------
-	# undo http and mailto link urls for editing purposes
-	function unfilter_href_tags( $p_string ) {
-    	$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([^[:space:]]*)([[:alnum:]#?/&=])</a>",
-    							"\\1://\\2\\3",
-    							$p_string);
-        $p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
-        						"\\1",
-        						$p_string);
-		return $p_string;
-	}
-	# --------------------
-	# @@@ currently does nothing
-	function filter_img_tags( $p_string ) {
-		return $p_string;
-	}
-	# --------------------
-	# process $g_html_tags to be treated as html
-	function filter_html_tags( $p_string ) {
-		global $g_html_tags;
-
-		$t_filter_from 	= @array( "/\//", "/</", "/>/" );
-		$t_filter_to 	= @array( "\/", "", "" );
-		//$t_filter_from 	= @array( "\/", "<", ">" );
-		//$t_filter_to 	= @array( "\/", "", "" );
-
-		$t_tag_count = count( $g_html_tags );
-		for ($i=0;$i<$t_tag_count;$i++) {
-			$tag = preg_replace( $t_filter_from, $t_filter_to, $g_html_tags[$i] );
-
-			$p_string = preg_replace( "/&lt;($tag)&gt;/i", "<\\1>", $p_string );
-		}
-
-		return $p_string;
-	}
-	# --------------------
 
 ?>
