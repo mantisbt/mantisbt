@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 08:24:05 $
+	# $Date: 2004-10-25 16:30:26 $
 	#
-	# $Id: strings_norwegian.txt,v 1.80 2004-10-15 08:24:05 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.81 2004-10-25 16:30:26 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,25 +22,25 @@ $s_charset = 'iso-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Flytt til annet prosjekt';
-$s_actiongroup_menu_copy = 'Kopiere';
+$s_actiongroup_menu_copy = 'Kopier til annet prosjekt';
 $s_actiongroup_menu_assign = 'Deleger til';
 $s_actiongroup_menu_close = 'Sett status til lukket';
 $s_actiongroup_menu_delete = 'Slett';
 $s_actiongroup_menu_resolve = 'Sett status til løst';
-$s_actiongroup_menu_update_priority = 'Endre prioritet';
-$s_actiongroup_menu_update_status = 'Endre status';
-$s_actiongroup_menu_update_view_status = 'Oppdatere Se på status';
+$s_actiongroup_menu_update_priority = 'Endr prioritet';
+$s_actiongroup_menu_update_status = 'Endr status';
+$s_actiongroup_menu_update_view_status = 'Endr visningsstatus';
 $s_actiongroup_bugs = 'Valgte saker';
 
 # new strings:
 $s_all_projects = 'Alle prosjekter';
 $s_move_bugs = 'Flytte saker';
 $s_operation_successful = 'Operasjonen var vellykket.';
-$s_date_order = 'Dato sortering';
+$s_date_order = 'Datosortering';
 $s_print_all_bug_page_link = 'Skriv ut rapporter';
 $s_csv_export = 'CSV-eksport';
 $s_login_anonymously = 'Anonym innlogging';
-$s_anonymous = 'Anonymous';
+$s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Gå til notat';
 $s_public_project_msg = 'Dette prosjektet er OFFENTLIG. Alle brukere har tilgang til dette prosjektet.';
 $s_private_project_msg = 'Dette prosjektet er PRIVAT.  Kun administratorer og brukere som har blitt gitt tilgang manuelt har tilgang.';
@@ -60,7 +60,7 @@ $s_new_value = 'Ny verdi';
 $s_date_modified = 'Dato endret';
 $s_bugnote = 'Notat';
 $s_change = 'Endring';
-$s_bugnote_view_state = 'Meldingstatus';
+$s_bugnote_view_state = 'Notatstatus';
 $s_bug_monitor = 'Saken overvåkes';
 $s_bug_end_monitor = 'Avslutt overvåkning av saken';
 $s_announcement = 'Annonsering';
@@ -69,12 +69,12 @@ $s_delete_bugnote_button = 'Slett notat';
 $s_delete_bugnote_sure_msg = 'Er du sikker på at du vil slette dette notatet?';
 $s_bug_relationships = 'Relasjoner';
 $s_empty_password_sure_msg = 'Brukeren har et blankt passord. Er du sikker på at du ønsker dette?';
-$s_empty_password_button = 'Brukt blankt passord';
+$s_empty_password_button = 'Bruk blankt passord';
 
-$s_duplicate_of = 'duplikat av';
-$s_has_duplicate = 'har duplikat ';
-$s_related_to = 'relatert til';
-$s_dependant_on = 'avhengig av';
+$s_duplicate_of = 'er duplikat av';
+$s_has_duplicate = 'har duplikat';
+$s_related_to = 'er relatert til';
+$s_dependant_on = 'er avhengig av';
 $s_blocks = 'blokkerer';
 
 $s_new_bug = 'Ny sak';
@@ -97,8 +97,8 @@ $s_create_new_project_link = 'Lag nytt prosjekt';
 $s_login_link = 'Logg inn';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Du hadde ikke rettighet til å utføre den handlinga på de følgende sakene: ';
-$s_bug_actiongroup_access = 'Du har ikke tilstrekkelig med rettigheter for å utføre handlingen.';
+$s_bug_actiongroup_failed = 'Du hadde ikke rettighet til å utføre den handlingen på de følgende sakene: ';
+$s_bug_actiongroup_access = 'Du hadde ikke rettighet til å utføre den handlingen.';
 $s_bug_actiongroup_status = 'Status kan ikke endres til den forespurte statusen';
 $s_close_bugs_conf_msg = 'Er du sikker på at du vil lukke disse sakene?';
 $s_delete_bugs_conf_msg = 'Er du sikker på at du vil slette disse sakene?';
@@ -108,46 +108,46 @@ $s_assign_bugs_conf_msg = 'Deleger saker til';
 $s_resolve_bugs_conf_msg = 'Velg løsningsstatus';
 $s_priority_bugs_conf_msg = 'Velg saksprioritet';
 $s_status_bugs_conf_msg = 'Velg saksstatus';
-$s_view_status_bugs_conf_msg = 'Velg saker for å vise status';
-$s_close_group_bugs_button = 'Lukke saker' ;
-$s_delete_group_bugs_button = 'Slette saker' ;
-$s_move_group_bugs_button = 'Flytte saker' ;
-$s_copy_group_bugs_button = 'Kopiere saker' ;
-$s_assign_group_bugs_button = 'Tilordne saker' ;
-$s_resolve_group_bugs_button = 'Lagre løsningsstatus' ;
-$s_priority_group_bugs_button = 'Oppdater prioritet' ;
-$s_status_group_bugs_button = 'Oppdater status' ;
-$s_view_status_group_bugs_button = 'Update View Status';
+$s_view_status_bugs_conf_msg = 'Velg sakenes visningsstatus';
+$s_close_group_bugs_button = 'Lukk saker';
+$s_delete_group_bugs_button = 'Slett saker';
+$s_move_group_bugs_button = 'Flytt saker';
+$s_copy_group_bugs_button = 'Kopier saker';
+$s_assign_group_bugs_button = 'Tilordn saker';
+$s_resolve_group_bugs_button = 'Lagr løsningsstatus';
+$s_priority_group_bugs_button = 'Endr prioritet';
+$s_status_group_bugs_button = 'Endr status';
+$s_view_status_group_bugs_button = 'Endr visningsstatus';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'graf eter status' ;
 $s_graph_imp_priority_title = 'graf etter prioritet' ;
 $s_graph_imp_severity_title = 'graf etter vanskelighetsgrad';
 $s_graph_imp_category_title = 'grad etter kategori';
-$s_graph_imp_resolution_title = 'graf etter løsning';
+$s_graph_imp_resolution_title = 'graf etter løsningsstatus';
 $s_by_status_pct = 'etter status prosentdel';
 $s_by_priority_pct = 'etter prioritet prosentdel';
 $s_by_severity_pct = 'etter vanskelighetsgrad prosentdel';
 $s_by_category_pct = 'etter kategori prosentdel';
-$s_by_resolution_pct = 'etter løsning prosentdel';
+$s_by_resolution_pct = 'etter løsningsstatus prosentdel';
 $s_by_severity_mix = 'etter vanskelighetsgrad og status';
 $s_by_priority_mix = 'etter prioritet og status';
-$s_by_resolution_mix = 'etter løsning og status';
+$s_by_resolution_mix = 'etter løsningsstatus og status';
 $s_synthesis_link = 'Syntese';
 $s_status_link = 'Per tilstand';
 $s_priority_link = 'Per prioritet';
 $s_severity_link = 'Per vanskelighetsgrad';
 $s_category_link = 'Per kategori';
-$s_resolution_link = 'Per løsning';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
-$s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_resolution_link = 'Per løsningsstatus';
+$s_legend_still_open = 'Fortsatt åpne';
+$s_legend_resolved = 'Løste';
+$s_legend_assigned = 'Delegerte';
+$s_legend_total = 'Totalt';
+$s_legend_opened = 'Åpne';
+$s_legend_closed = 'Lukkede';
+$s_legend_reported = 'Rapporterte';
+$s_cumulative = 'Kumulativt';
+$s_not_enough_data = 'Har ikke nok data til å vise grafen';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Vis kun valgte';
@@ -157,9 +157,9 @@ $s_printing_preferences_title = 'Velg felter for utskrift';
 $s_printing_options_link = 'Utskriftsalternativer';
 
 # word and excel export
-$s_bugnote_title = 'Meldingshåndterer' ;
-$s_bugnote_date = 'Meldingsdato';
-$s_bugnote_description = 'Melding beskrivelse';
+$s_bugnote_title = 'Notathåndterer' ;
+$s_bugnote_date = 'Notatdato';
+$s_bugnote_description = 'Notatbeskrivelse';
 
 $s_error_no_proceed = 'Vennligst bruk "TILBAKE"-knappen i nettleseren din for å gå tilbake til forrige side. Du kan da korrigere valgene dine som forårsaket denne feilen.  Du kan også velge fra nedtrekksmenyen for å gå direkte til en ny seksjon.';
 
@@ -180,31 +180,31 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Mislykket filopplasting.  Dette er sa
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'En påkrevd parameter til denne siden ble ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Det brukernavnet er allerede i bruk.  Vennligst gå tilbake og velg et annet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurasjonsopsjon \'%s\' ikke funnet.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Streng \'%s\' ikke funnet.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengen \'%s\' ikke funnet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Finner ikke prosjektet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Finner ikke database-feltet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Kan ikke koble til FTP-server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Delegert saksbehandler har ikke rettighet til å behandle saker med denne statusen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt ugyldig prosjektnavn.  Prosjektnavn kan ikke være tomt.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt et ugyldig prosjektnavn.  Prosjektnavnet kan ikke være blankt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Finner ikke bruker.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Logginninformasjonen som er lagret i vevleseren din er feil.  Kanskje kontoen din ble slettet?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferanser for denne brukeren ble ikke funnet.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Innloggingsinformasjonen som er lagret i nettleseren din er feil.  Kanskje kontoen din har blitt slettet?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Finner ikke innstillingene til denne brukeren.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Finner ikke nyhetssak.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Passord stemmer ikke med verifiseringa.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Forventa en tabell, men mottok en streng.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventa, men en array ble mottatt.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Passordet kan ikke verifiseres.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Forventet en tabell, men mottok en streng.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men mottok en array.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Finner ikke saken.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ugyldig epost.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ikke funnet.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ble ikke funnet.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Ikke tillatt filtype.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Dette er en duplikatfil. Vennligst slett filen først.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ugyldig bane til opplastingskatalog. Enten eksisterer ikke katalogen eller så er den ikke overskrivbar for webserveren';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'En sak kan ikke være et duplikat av seg selv.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Brukerdefinert felt ikke funnet.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Det brukerdefinert navnet finnes fra før.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Minst ett prosjekt bruker fortsatt dette feltet.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Brukerdefinert felt ble ikke funnet.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Det brukerdefinerte navnet finnes fra før.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Minst ett prosjekt bruker dette feltet.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ugyldig verdi for feltet';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ugyldig definisjon på skreddersydd felt.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP-autentisering feilet';
@@ -230,20 +230,20 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Tilgang nektet
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angitt epost-adresse. Vennligst oppdater profilen din.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurasjonsinnstillingen \'%s\' har en ugyldig verdi \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke utføres pga at saken \'%d\' er kun lesbar';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FEIL: Det finnes allerede en relasjon mellom disse sakene.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FEIL: Finner ikke relasjonen.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Tilgang nektet: Saken %d krever høyere tilgangsnivå.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "En sak kan ikke være relatert til seg selv.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bekreftelsesstrengen stemmer ikke. Vennligst forsøk på nytt.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funksjonen for \'Glemt passord\' er ikke tilgjengelig.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Det finnes allerede en relasjon mellom disse sakene.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relasjonen ble ikke funnet.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Tilgang nektet: Saken %d krever høyere tilgangsnivå.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En sak kan ikke være relatert til seg selv.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bekreftelseskodeen stemmer ikke. Vennligst forsøk på nytt.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Glemt passord\'-funksjonen er ikke tilgjengelig.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du må angi en epost-adresse for å nullstille passordet';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Informasjonen du har angitt stemmer ikke med noen registrert konto!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekreftelsesadressen er ikke gyldig eller har allerede være i bruk. Vennligst registrer deg på nytt.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks antall forsøk har blitt nådd. Vennligst kontakt systemadministrator';
 
-#$s_login_error = 'Din konto har blitt deaktivert eller blokkert (pga for mange innloggingsforsøk) eller brukernavn/passordet du har angitt er ikke korrekt.';
-$s_login_error = 'FEIL: Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
-$s_login_cookies_disabled = 'FEIL: Nettleseren din er ikke konfigurert til å støtte \'cookies\'.';
+#$s_login_error = 'Din konto har blitt deaktivert eller blokkert (pga for mange innloggingsforsøk) eller brukernavnet/passordet du har angitt er ikke korrekt.';
+$s_login_error = 'Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
+$s_login_cookies_disabled = 'Nettleseren din er ikke konfigurert til å støtte \'cookies\'.';
 
 # General Strings
 $s_go_back = 'Tilbake';
@@ -252,7 +252,7 @@ $s_proceed = 'Klikk for å fortsette';
 $s_switch = 'Bytt';
 $s_logged_in_as = 'Logget inn som';
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = 'bruker';
 
 $s_administrator = 'administrator';
 $s_myself = "Meg selv";
@@ -274,8 +274,8 @@ $s_eta_enum_string                = '10:Ikke angitt,20:< 1 dag,30:2-3 dager,40:<
 
 # Email Strings
 $s_new_account_subject = 'Kontoregistrering';
-$s_new_account_greeting = 'Takk for at du registrerte deg. Det har blitt opprettet en konto med brukernavnet \'';
-$s_new_account_greeting2 = '\'. For å fullføre registreringen, vennligst åpne følgende URL i nettleseren din (NB! Hele URLen skal være på en linje) og angi ditt passord:';
+$s_new_account_greeting = 'Takk for at du registrerte deg. Det har blitt opprettet en konto med brukernavn \'';
+$s_new_account_greeting2 = '\'. For å fullføre registreringen, vennligst åpne følgende URL i nettleseren din (NB! Hele URLen skal være på en linje) og angi passordet ditt:';
 $s_new_account_username = 'Brukernavn: ';
 $s_new_account_message = 'Hvis du ikke har forsøkt å registrere deg, vennligst se bort fra denne meldingen.' . "\n\n";
 $s_new_account_do_not_reply = 'IKKE SVAR PÅ DENNE MELDINGEN';
@@ -283,12 +283,12 @@ $s_new_account_email = 'Epost: ';
 $s_new_account_IP = 'IP-adresse: ';
 $s_new_account_signup_msg = 'Følgende konto har blitt opprettet:';
 
-$s_reset_request_msg = 'Noen (antakelig deg)) har forespurt et passordbytte med verifisering per epost. Dersom du ikke har forespurt dette, vennligst se bort fra denne meldingen.' . "\n\n" . 'Hvis du forespurte denne verifiseringen, vennligst åpne følgende URL i nettleseren din for å endre passordet:';
-$s_reset_request_in_progress_msg = 'Dersom du tastet inn korrekt brukernavn og epost-adresse for din konto skal det nå ha blitt sendt deg en bekreftelses-epost. Følg nærmere instruksjoner i denne eposten for å endre passordet på kontoen.';
+$s_reset_request_msg = 'Noen (antakelig du) har bedt om passordbytte med epostbekreftelse.  Hvis dette ikke var deg, vennligst se bort fra denne meldingen.' . "\n\n" . 'Hvis du ba om denne bekreftelsen, gå til følgende  URL for å forandre passordet:';
+$s_reset_request_in_progress_msg = 'Hvis du oppga korrekt brukernavn og epostadresse for kontoen din har det nå blitt sendt en bekreftelsesepost. Når eposten er mottatt, følg instruksjonene for å forandre kontopassordet ditt.';
 
-$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_new = 'Følgende sak har nå status NY (igjen)';
 $s_email_notification_title_for_status_bug_feedback = 'Følgende sak krever din TILBAKEMELDING.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Følgende sak har blitt BEKREFTET.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Følgende sak har blitt GODKJENT.';
 $s_email_notification_title_for_status_bug_confirmed = 'Følgende sak har blitt BEKREFTET.';
 $s_email_notification_title_for_status_bug_assigned = 'Følgende sak har blitt DELEGERT.';
 $s_email_notification_title_for_status_bug_resolved = 'Følgende sak har blitt LØST.';
@@ -300,33 +300,34 @@ $s_email_notification_title_for_action_bug_reopened = 'Følgende sak har blitt GJ
 $s_email_notification_title_for_action_bug_deleted = 'Følgende sak har blitt SLETTET.';
 $s_email_notification_title_for_action_bug_updated = 'Følgende sak har blitt OPPDATERT.';
 $s_email_notification_title_for_action_sponsorship_added = 'Følgende sak har blitt SPONSET.';
-$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Sponsingen av følgende sak har blitt endret.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Sponsingen av følgende sak har blitt trukket tilbake.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'En MELDING har blitt lagt til saken.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Et NOTAT har blitt lagt til saken.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Følgende sak har blitt satt som duplikat av sak %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Sak %s har blitt satt som duplikat av følgende sak.";
+
+$s_email_notification_title_for_action_related_to_relationship_added = "Følgende sak har blitt satt som relatert til sak %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Følgende sak har blitt satt som overordent sak for sak %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Følgende sak har blitt satt som undersak til sak %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Følgende sak er ikke lenger duplikat av sak %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Sak %s er ikke lenger duplikat av følgende sak.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Følgende sak er ikke lenger relatert til sak %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Følgende sak er ikke lenger overordnet sak for sak %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Følgende sak er ikke lenger undersak til sak %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Den relaterte saken %s har blitt LØST.";
+$s_email_notification_title_for_action_relationship_child_closed = "Den relaterte saken %s har blitt LUKKET.";
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
 $s_email_project = 'Prosjekt';
-$s_email_bug = 'Sak ID';
+$s_email_bug = 'SaksID';
 $s_email_category = 'Kategori';
 $s_email_reproducibility = 'Reproduserbarhet';
 $s_email_severity = 'Alvorlighetsgrad';
 $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
-$s_email_resolution = 'Løsning';
+$s_email_resolution = 'Løsningsstatus';
 $s_email_duplicate = 'Duplikat';
 $s_email_fixed_in_version = 'Fikset i versjon';
 $s_email_date_submitted = 'Dato lagt inn';
@@ -343,29 +344,29 @@ $s_confirm_delete_msg = 'Er du sikker på at du vil slette kontoen din?';
 $s_delete_account_button = 'Slett konto';
 
 # account_page.php
-$s_manage_profiles_link = 'Administrere profiler';
-$s_change_preferences_link = 'Endre innstillinger';
+$s_manage_profiles_link = 'Administrer profiler';
+$s_change_preferences_link = 'Endr innstillinger';
 $s_edit_account_title = 'Endre konto';
 $s_username = 'Brukernavn';
 $s_realname = 'Fullt navn';
 $s_email = 'Epost';
 $s_password = 'Passord';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = 'Passordet er kontrollert av et annet system, det kan derfor ikke endres her.';
 $s_confirm_password  = 'Bekreft passord';
 $s_access_level = 'Tilgangsnivå';
 $s_update_user_button = 'Oppdater bruker';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Standard konto innstillinger';
-$s_default_project = 'Standard prosjekt';
+$s_default_account_preferences_title = 'Standard kontoinnstillinger';
+$s_default_project = 'Standardprosjekt';
 $s_advanced_report = 'Avansert rapport';
 $s_advanced_view = 'Avansert visning';
 $s_advanced_update = 'Avansert oppdatering';
 $s_refresh_delay = 'Forsinkelse på oppfriskning';
 $s_redirect_delay = 'Forsinkelse på redirrigering';
 $s_with_minimum_severity = 'Med minimum alvorlighetsgrad';
-$s_bugnote_order = 'Saksmeldinger sorteringsrekkefølge';
-$s_bugnote_order_asc = 'Stigende';
+$s_bugnote_order = 'Sortering av notat';
+$s_bugnote_order_asc = 'Økende';
 $s_bugnote_order_desc = 'Synkende';
 $s_email_on_new = 'Epost ved ny sak';
 $s_email_on_assigned = 'Epost ved delegering';
@@ -373,13 +374,13 @@ $s_email_on_feedback = 'Epost ved tilbakemelding';
 $s_email_on_resolved = 'Epost når løst';
 $s_email_on_closed = 'Epost når lukket';
 $s_email_on_reopened = 'Epost når åpnet på nytt';
-$s_email_on_bugnote_added = 'Epost ved ny saksmelding';
+$s_email_on_bugnote_added = 'Epost ved nytt saksnotat';
 $s_email_on_status_change = 'Epost ved statusendring';
 $s_email_on_priority_change = 'Epost ved endring av pri';
-$s_email_bugnote_limit = 'Epost saksmeldinger, maks grense';
+$s_email_bugnote_limit = 'Epost notatgrense';
 $s_language = 'Språk';
-$s_update_prefs_button = 'Oppdatere preferanser';
-$s_reset_prefs_button = 'Nullstille preferanser';
+$s_update_prefs_button = 'Oppdater preferanser';
+$s_reset_prefs_button = 'Nullstill preferanser';
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = 'Innstillingene har blitt nullstilt ...';
@@ -428,15 +429,15 @@ $s_bug_assign_msg       = 'Saken har blitt delegert ...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Ny sak';
-$s_feedback_bug_title = 'Gi tilbakemelding på saken';
-$s_acknowledged_bug_title = 'Bekrefte saken';
-$s_confirmed_bug_title = 'Godkjenne saken';
+$s_feedback_bug_title = 'Be om tilbakemelding på sak';
+$s_acknowledged_bug_title = 'Godkjenne sak';
+$s_confirmed_bug_title = 'Bekrefte sak';
 $s_assigned_bug_title = 'Tilordne sak';
 $s_new_bug_button = 'Ny sak';
-$s_feedback_bug_button = 'Gi tilbakemelding';
-$s_acknowledged_bug_button = 'Bekrefte sak';
-$s_confirmed_bug_button = 'Godkjenne sak';
-$s_assigned_bug_button = 'Delegere sak';
+$s_feedback_bug_button = 'Be om tilbakemelding';
+$s_acknowledged_bug_button = 'Godkjenn sak';
+$s_confirmed_bug_button = 'Bekreft sak';
+$s_assigned_bug_button = 'Tilordn sak';
 
 # bug_close.php
 $s_bug_close_msg       = 'Saken har blitt lukket ...';
@@ -453,8 +454,8 @@ $s_delete_bug_sure_msg = 'Er du sikker på at du ønsker å slette saken?';
 $s_delete_bug_button = 'Slett sak';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Overvåke sak';
-$s_unmonitor_bug_button = 'Avslutte overvåking';
+$s_monitor_bug_button = 'Overvåk sak';
+$s_unmonitor_bug_button = 'Avslutt overvåking';
 
 # bug_file_add.php
 $s_file_upload_msg = 'Fil lastet opp OK';
@@ -462,7 +463,7 @@ $s_file_upload_msg = 'Fil lastet opp OK';
 # bug_file_upload_inc.php
 $s_upload_file = 'Laste opp fil';
 $s_select_file = 'Velg fil';
-$s_upload_file_button = 'Laste opp fil';
+$s_upload_file_button = 'Last opp fil';
 $s_max_file_size = 'Maks størrelse';
 
 # bug_reopen.php
@@ -476,8 +477,8 @@ $s_resolved_bug_button = 'Sett status til løst';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Saken har blitt utbedret. Legg til kommentar nedenfor ...';
-$s_resolve_add_bugnote_title = 'Legg til melding om feilårsak';
-$s_bugnote_add_resolve_button = 'Legg til feilmelding';
+$s_resolve_add_bugnote_title = 'Legg til notat om feilårsak';
+$s_bugnote_add_resolve_button = 'Legg til feilnotat';
 
 # bug_reminder_page.php
 $s_from = 'Fra';
@@ -488,9 +489,9 @@ $s_bug_reminder = 'Send en påminnelse';
 $s_reminder_sent_to = 'Påminnelse sendt til';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Påminnelse';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Denne meldingen vil bli sendt til dem som har bedt om tilbakemelding på denne saken.';
+$s_reminder_monitor = 'Disse mottagerne vil også begynne å overvåke denne saken. De kan fjerne seg fra listen ved å bruke Avslutt overvåking-knappen.';
+$s_reminder_store = 'Denne meldingen vil bli lagret sammen med saken.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Saken har blitt oppdatert ...';
@@ -508,7 +509,7 @@ $s_last_update = 'Siste oppdatering';
 $s_reporter = 'Rapportert av';
 $s_assigned_to = 'Delegert til';
 $s_priority = 'Prioritet';
-$s_resolution = 'Status';
+$s_resolution = 'Løsningsstatus';
 $s_status = 'Status';
 $s_duplicate_id = 'Duplikere ID';
 $s_os = 'OS';
@@ -532,21 +533,21 @@ $s_updating_bug_simple_title = 'Oppdaterer saksinformasjon';
 $s_vote_added_msg = 'Stemmen er registrert ...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Melding lagt til ...';
+$s_bugnote_added_msg = 'Notat lagt til ...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Meldinger har blitt slettet ...';
-$s_bug_notes_title = 'Meldinger';
+$s_bugnote_deleted_msg = 'Notater har blitt slettet ...';
+$s_bug_notes_title = 'Notater';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Redigere saksmelding';
+$s_edit_bugnote_title = 'Redigere saksnotat';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Ingen meldinger på saken.';
-$s_delete_link = 'Slette';
+$s_no_bugnotes_msg = 'Ingen notater på saken.';
+$s_delete_link = 'Slett';
 $s_add_bugnote_title = 'Nytt notat';
 $s_add_bugnote_button = 'Legg til notat';
-$s_bugnote_edit_link = 'Redigere';
+$s_bugnote_edit_link = 'Rediger';
 $s_closed_bug_button = 'Avslutt sak';
 
 # bugnote_update.php
@@ -565,7 +566,7 @@ $s_login_title = 'Innlogging';
 $s_save_login = 'Lagre innlogging';
 $s_choose_project = 'Velg prosjekt';
 $s_login_button = 'Logg inn';
-$s_signup_link = 'Registrere deg som ny bruker';
+$s_signup_link = 'Registrer deg som ny bruker';
 $s_lost_password_link = 'Glemt passordet?';
 
 # login_select_proj_page.php
@@ -576,11 +577,11 @@ $s_logged_out_title = 'Logget ut ...';
 $s_redirecting = '... omdirigerer';
 $s_here = 'Her';
 # lost_pwd_page.php
-$s_lost_password_title = "Nullstille passord";
-$s_lost_password_done_title = "Passord melding sendt";
-$s_lost_password_subject = "Nullstille passord";
-$s_lost_password_info = "For å nullstille passordet, vennligst angi brukernavn og epost-adresse for kontoen.<br/><br/>Dersom kontonavn/epost passer med en gyldig konto vil du få tilsendt en URL via epost for å bekrefte endring av passord. Vennligst bruk linken i eposten for å endre passordet ditt.";
-$s_lost_password_confirm_hash_OK = "Din bekreftelse har blitt akseptert. Vennligst angitt nytt passord.";
+$s_lost_password_title = "Passord nullstilt";
+$s_lost_password_done_title = "Passordepost er sendt";
+$s_lost_password_subject = "Passord nullstilt";
+$s_lost_password_info = "For å få ditt nytt passord, vennligst angi kontoens navn og epostadresse.<br/><br/>Hvis dataene stemmer med en gyldig konto vil du bli tilsendt en spesiell URL i en epost som inneholder en valideringskode for kontoen din. Vennligst følg den lenka for å endre passordet ditt.";
+$s_lost_password_confirm_hash_OK = "Bekreftelsen din har blitt godtatt. Vennligst oppdater passordet ditt.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Åpne og delegert til meg';
@@ -599,16 +600,15 @@ $s_create_new_account_title = 'Opprette ny konto';
 $s_verify_password = 'Bekrefte passord';
 $s_enabled = 'Aktivert';
 $s_protected = 'Beskyttet';
-$s_create_user_button = 'Opprette bruker';
+$s_create_user_button = 'Opprett bruker';
 
 # manage_page.php
 $s_hide_disabled = 'Skjul deaktiverte';
 $s_filter_button = 'Filtrer';
 $s_manage_users_link = 'Vedlikehold brukere';
 $s_manage_projects_link = 'Vedlikehold prosjekter';
-$s_manage_custom_field_link = 'Administrere brukerdefinerte felter';
-$s_permissions_summary_report = 'Permissions Report';
-$s_create_new_account_link = 'Opprette konto';
+$s_manage_custom_field_link = 'Administrer brukerdefinerte felter';
+$s_create_new_account_link = 'Opprett konto';
 $s_projects_link = 'Prosjekter';
 $s_documentation_link = 'Dokumentasjon';
 $s_new_accounts_title = 'Nye kontoer';
@@ -620,7 +620,7 @@ $s_manage_accounts_title = 'Administrere kontoer';
 $s_p = 'p';
 $s_date_created = 'Dato opprettet';
 $s_last_visit = 'Siste pålogging';
-$s_edit_user_link = 'Redigere bruker';
+$s_edit_user_link = 'Rediger bruker';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
@@ -636,7 +636,7 @@ $s_category_delete_sure_msg = 'Er du sikker på at du ønsker å slette denne kateg
 $s_delete_category_button = 'Slett kategori';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Redigere prosjekt kategorier';
+$s_edit_project_category_title = 'Redigere prosjektkategorier';
 $s_update_category_button = 'Oppdater kategori';
 
 # manage_proj_category_update.php
@@ -652,7 +652,7 @@ $s_project_delete_button = 'Slett prosjekt';
 # manage_proj_edit_page.php
 $s_edit_project_title = 'Redigere prosjekt';
 $s_project_name = 'Prosjektnavn';
-$s_view_status = 'Se på-status';
+$s_view_status = 'Visningsstatus';
 $s_public = 'Offentlig';
 $s_private = 'Privat';
 $s_update_project_button = 'Oppdater prosjekt';
@@ -663,7 +663,7 @@ $s_add_category_button = 'Ny kategori';
 $s_versions = 'Versjoner';
 $s_add_version_button = 'Legg til versjon';
 $s_add_and_edit_version_button = 'Legg til og endr versjon';
-$s_edit_link = 'Redigere';
+$s_edit_link = 'Rediger';
 $s_actions = 'Valg';
 $s_version = 'Versjon';
 $s_timestamp = 'Tidsstempel';
@@ -690,7 +690,7 @@ $s_version_delete_sure = 'Er du sikker på at du ønsker å slette dette versjonsnu
 $s_delete_version_button = 'Slett versjon';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Redigere prosjekt versjon';
+$s_edit_project_version_title = 'Redigere prosjektversjon';
 $s_update_version_button = 'Oppdater versjon';
 $s_released = 'Released';
 
@@ -711,26 +711,26 @@ $s_confirm_account_pruning = 'Er du sikker på at du vil slette gamle kontoer som
 
 # manage_user_page.php
 $s_edit_user_title = 'Redigere bruker';
-$s_reset_password_button = 'Nullstille passord';
+$s_reset_password_button = 'Nullstill passord';
 $s_delete_user_button = 'Slett bruker';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL-en URL via epost.';
 $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
 $s_show_all_users = 'ALLE';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';
-$s_account_reset_msg = 'Bekreftelsesmelding har blitt sendt til din epost-adresse...';
-$s_account_reset_msg2 = 'Passordet er satt til blank ...';
+$s_account_reset_msg = 'En bekreftelse har blitt sendt til epostadressen din ...';
+$s_account_reset_msg2 = 'Kontopassordet er satt til blank ...';
 
 # manage_user_update.php
 $s_manage_user_protected_msg = 'Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert ...';
 $s_manage_user_updated_msg = 'Kontoen er oppdatert ...';
 
 # menu_inc.php
-$s_main_link = 'Hovedmeny';
+$s_main_link = 'Hovedside';
 $s_view_bugs_link = 'Vis saker';
 $s_report_bug_link = 'Ny sak';
-$s_changelog_link = 'Endringshistorikk';
+$s_changelog_link = 'Endringslogg';
 $s_summary_link = 'Oppsummering';
 $s_account_link = 'Konto';
 $s_users_link = 'Brukere';
@@ -743,11 +743,11 @@ $s_my_view_link = 'Min oversikt';
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Ikke delegert';
-$s_my_view_title_recent_mod = 'Nylig endret';
+$s_my_view_title_unassigned = 'Ikke delegerte';
+$s_my_view_title_recent_mod = 'Nylig modifiserte';
 $s_my_view_title_reported = 'Rapportert av meg';
-$s_my_view_title_assigned = 'Delegert til meg (uløste)';
-$s_my_view_title_resolved = 'Løst';
+$s_my_view_title_assigned = 'Delegert til meg (Uløste)';
+$s_my_view_title_resolved = 'Løste';
 $s_my_view_title_monitored = 'Overvåkes av meg';
 
 # news_add.php
@@ -821,7 +821,7 @@ $s_remove_user_sure_msg = 'Er du sikker på at du ønsker å fjerne brukeren?';
 $s_add_user_title = 'Legg bruker til prosjekt';
 $s_add_user_button = 'Legg til bruker';
 $s_project_selection_title = 'Prosjektvalg';
-$s_remove_link = 'fjerne';
+$s_remove_link = 'Fjern';
 $s_remove_all_link = 'Fjern alle';
 
 # proj_user_update.php
@@ -859,18 +859,18 @@ $s_valid_project_msg = 'Du må velge et gyldig prosjekt';
 
 # signup.php
 $s_signup_done_title = 'Fullført registrering av ny konto';
-$s_password_emailed_msg = 'Gratulerer! Du har nå blitt en registrert bruker. Du vil nå motta en epost med en link du må åpne for å bekrefte epost-adressen din. Når du har åpnet denne linken vil kontoen bli aktivert.';
-$s_no_reponse_msg = 'Du må fullføre bekreftelsen innen 7 dager. Dersom du ikke åpner linken i eposten du mottar innen 7 dager vil denne kontoen automatisk bli slettet.';
+$s_password_emailed_msg = 'Gratulerer! Du har nå blitt en registrert bruker. Du vil nå motta en epost med en lenke du må åpne for å bekrefte epost-adressen din. Når du har åpnet denne lenken vil kontoen bli aktivert.';
+$s_no_reponse_msg = 'Du må fullføre bekreftelsen innen sju dager. Dersom du ikke åpner lenken i eposten du mottar innen sju dager vil denne kontoen automatisk bli slettet.';
 
 # signup_page.php
 $s_signup_captcha_request = 'Angi koden som vises i boksen på høyre side';
-$s_signup_info = 'Etter du har sendt inn dette skjemaet og data er kontrollert, vil du motta en bekreftelse per epost.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_info = 'Etter du har sendt inn dette skjemaet og data er kontrollert, vil du motta en bekreftelse per epost.</br>Ved å bruke bekreftelseseposten kan du aktivisere kontoen din. Hvis du ikke aktiviserer kontoen innen sju dager, vil den bli slettet.</br>Du må oppgi en gyldig epostadresse for å kunne motta kontobekreftelseseposten.';
 $s_signup_title = 'Registrering';
-$s_signup_button = 'Registrere';
+$s_signup_button = 'Registrer';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'Redigere innstillinger for nettsted';
-$s_save_settings_button = 'Lagre innstillinger';
+$s_edit_site_settings_title = 'Redigere nettstedinnstillinger';
+$s_save_settings_button = 'Lagr innstillinger';
 
 # site_settings_page.php
 $s_site_settings_title = 'Nettstedsinnstillinger';
@@ -887,14 +887,14 @@ $s_by_project = 'For prosjekt';
 $s_by_status = 'Per status';
 $s_by_date = 'Per dato';
 $s_by_severity = 'Per alvorlighetsgrad';
-$s_by_resolution = 'Per løsning';
+$s_by_resolution = 'Per løsningsstatus';
 $s_by_category = 'Per kategori';
 $s_by_priority = 'Per prioritet';
 $s_by_developer = 'Per utvikler';
 $s_by_reporter ='Per reporter';
-$s_reporter_by_resolution = 'Reporter etter status';
-$s_reporter_effectiveness = 'Reporter effektivitet';
-$s_developer_by_resolution = 'Utvikler etter status';
+$s_reporter_by_resolution = 'Rapportør etter løsningsstatus';
+$s_reporter_effectiveness = 'Rapportøreffektivitet';
+$s_developer_by_resolution = 'Utvikler etter løsningsstatus';
 $s_percentage_fixed = '% løst';
 $s_percentage_errors = '% feil';
 $s_errors = 'Feil';
@@ -905,13 +905,13 @@ $s_longest_open = 'Lengste åpne';
 $s_average_time = 'Gjennomsnittlig tid';
 $s_total_time = 'Total tid';
 $s_developer_stats = 'Utviklerstatistikk';
-$s_reporter_stats = 'Reporterstatistikk';
+$s_reporter_stats = 'Raportørstatistikk';
 $s_orct = '(Åpne/Løst/Lukket/Totalt)';
 
 # view_all_bug_page.php
 $s_any = 'Alle';
 $s_show = 'Vis';
-$s_changed = 'Endret (timer)';
+$s_changed = 'Endret sist (timer)';
 $s_viewing_bugs_title = 'Oversikt over saker';
 $s_updated = 'Oppdatert';
 
@@ -924,40 +924,40 @@ $s_prev = 'Forrige';
 $s_next = 'Neste';
 $s_first = 'Første';
 $s_last = 'Siste';
-$s_start_date = 'Start dato';
-$s_end_date = 'Slutt dato';
+$s_start_date = 'Startdato';
+$s_end_date = 'Sluttdato';
 $s_use_date_filters = 'Bruk datoavgrensing';
 $s_yes = 'Ja';
 $s_no = 'Nei';
-$s_open_filters = 'Endre filter';
-$s_or_unassigned = 'Eller ikke delegert';
+$s_open_filters = 'Endr filter';
+$s_or_unassigned = 'eller ikke delegert';
 $s_ok = 'OK';
 $s_select_all = 'Velg alle';
 
 # stored query strings
 $s_use_query = 'Bruk filter';
-$s_delete_query = 'Slette filter';
-$s_query_deleted = 'Filteret er slettet';
-$s_save_query = 'Lagre gjeldende filter';
-$s_reset_query = 'Nullstille filter';
+$s_delete_query = 'Slett filter';
+$s_query_deleted = 'Filter slettet';
+$s_save_query = 'Lagr dette filteret';
+$s_reset_query = 'Nullstill filter';
 $s_query_name = 'Filternavn';
-$s_query_exists = 'Spørringen for filteret eksisterer fra før.';
-$s_query_dupe_name = 'Det finnes en lik spørring med likt navn. Vennligst velg et nytt navn for spørringen.';
-$s_query_blank_name = 'Du kan ikke lagre et filter uten navn. Vannligst angi navn før du lagrer.';
-$s_query_store_error = 'Det oppstod en feil under lagring av spørringen.';
-$s_open_queries = 'Administrere filtre';
-$s_query_delete_msg = 'Er du sikker på at du ønsker å slette denne spørringen?';
+$s_query_exists = 'Dette søket ser ut til å eksistere allerede.';
+$s_query_dupe_name = 'Et annet søk har allerede dette navnet. Vennligst velg et nytt navn for dette søket!';
+$s_query_blank_name = 'Du kan ikke lagre et filter uten et navn. Vennligst gi dette filteret et navn før du lagrer det!';
+$s_query_store_error = 'Det oppstod en feil under lagring av dette søket.';
+$s_open_queries = 'Administrer filtre';
+$s_query_delete_msg = 'Er du sikker på at du vil slette dette søket?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Vis enkel';
 $s_viewing_bug_advanced_details_title = 'Vis avanserte detaljer for sak';
 $s_product_build = 'Underversjon';
 $s_system_profile = 'Systembeskrivelse';
-$s_update_bug_button = 'Oppdatere sak';
+$s_update_bug_button = 'Oppdater sak';
 $s_bug_assign_to_button = 'Deleger til:';
-$s_bug_status_to_button = 'Endre status til:';
-$s_reopen_bug_button = 'Gjenåpne sak';
-$s_move_bug_button = 'Flytte sak';
+$s_bug_status_to_button = 'Endr status til:';
+$s_reopen_bug_button = 'Gjenåpn sak';
+$s_move_bug_button = 'Flytt sak';
 $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publisere';
 $s_cached = 'Midlertidig lagret';
@@ -965,13 +965,13 @@ $s_cached = 'Midlertidig lagret';
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Vis Avansert';
+$s_view_advanced_link = 'Vis avansert';
 $s_viewing_bug_simple_details_title = 'Oversikt over saker - enkel';
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'Ingen brukere overvåker denne saken.';
 $s_users_monitoring_bug = 'Brukere som overvåker denne saken';
-$s_monitoring_user_list = 'Oversikt over brukere';
+$s_monitoring_user_list = 'Brukerliste';
 
 # bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'Ingen brukere sponser denne saken.';
@@ -988,7 +988,7 @@ $s_update_custom_field_button = 'Oppdater brukderdefinert felt';
 $s_add_existing_custom_field = 'Legg til dette eksisterende brukderdefinerte feltet';
 $s_edit_custom_field_title = 'Editer brukderdefinert felt';
 $s_custom_field = 'Felt';
-$s_custom_fields_setup = 'Brukderdefinerte felter';
+$s_custom_fields_setup = 'Brukderdefinerte felt';
 $s_custom_field_name = 'Navn';
 $s_custom_field_project_count = 'Prosjektteller';
 $s_custom_field_type = 'Type';
@@ -1004,19 +1004,19 @@ $s_custom_field_display_report = 'Vis ved rapportering av saker';
 $s_custom_field_display_update = 'Vis ved oppdatering av saker';
 $s_custom_field_display_resolved = 'Vis ved løsning av saker';
 $s_custom_field_display_closed = 'Vis ved lukking av saker';
-$s_custom_field_require_report = 'Påkrevd ved innleggelse';
-$s_custom_field_require_update = 'Påkrevd ved oppdatering';
-$s_custom_field_require_resolved = 'Påkrevd ved løsning';
-$s_custom_field_require_closed = 'Påkrevd ved lukking';
+$s_custom_field_require_report = 'Påkreves ved rapportering';
+$s_custom_field_require_update = 'Påkreves ved oppdatering';
+$s_custom_field_require_resolved = 'Påkreves ved løsning';
+$s_custom_field_require_closed = 'Påkreves ved lukking';
 
 $s_custom_field_sequence = 'Sekvens';
-$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Email,5:Avkrysningsboks,6:List,7:Flervalgsliste list';
+$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Epost,5:Sjekkboks,6:Liste,7:Flervalgsliste';
 
 $s_confirm_used_custom_field_deletion = 'Dette feltet brukes nå av minst ett annet prosjekt.  Hvis du fortsetter vil alle verdier for dette feltet bli sletta.  Det er ikke mulig å gå tilbake på dette valget.  Hvis du ikke vil slette dette feltet, trykk Tilbake-knappen i vevleseren din.  For å fortsette, trykk knappen under.';
 $s_confirm_custom_field_deletion = 'Er du sikker på at du vil slette dette feltet og alle dets tilkoblede verdier?';
-$s_field_delete_button = 'Slette felt';
+$s_field_delete_button = 'Slett felt';
 
-$s_hide_status = 'Skjule status';
+$s_hide_status = 'Skjul status';
 $s_filter_closed = "Lukket";
 $s_filter_resolved = "Løst";
 $s_hide_closed = "Skjul lukkede";
@@ -1034,10 +1034,10 @@ $s_phpmailer_language = 'no';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(er)';
-$s_sponsorship_added = 'Sponsorskap lagt til';
-$s_sponsorship_updated = 'Sponsorskap oppdatert';
-$s_sponsorship_deleted = 'Sponsorskap slettet';
-$s_sponsorship_more_info = 'Mer informasjon om sponsorskap';
+$s_sponsorship_added = 'Sponsing lagt til';
+$s_sponsorship_updated = 'Sponsing oppdatert';
+$s_sponsorship_deleted = 'Sponsing slettet';
+$s_sponsorship_more_info = 'Mer informasjon om sponsing';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1045,103 +1045,103 @@ $s_sponsorship_more_info = 'Mer informasjon om sponsorskap';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Endringshistorikk';
+$s_changelog = 'Endringslogg';
 
 # Http auth
-$s_http_auth_realm = "Mantis Innlogging";
+$s_http_auth_realm = "Mantisinnlogging";
 
 $s_bug = "sak";
 $s_add_new_relationship = "Ny relasjon";
 $s_add_new_relationship_button = "Legg til";
-$s_this_bug = "Gjeldende sak";
+$s_this_bug = "Denne saken";
 $s_relationship_added = "Relasjon lagt til";
 $s_relationship_deleted = "Relasjon slettet";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Slette";
-$s_delete_relationship_sure_msg = "Er du sikker på at du ønsker å slette denne relasjonen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Alle undersaker til denne saken er ikke løst eller lukket.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>OBS</b>. Ikke alle undersakene til denne saken er løst eller lukket. <br>Før du <b>løser/lukker</b> en overordnet sak bør alle underordnede saker løses eller lukkes.";
+$s_no_relationship = "ingen relasjon";
+$s_relationship_replaced = "Relasjonen er byttet ut";
+$s_replace_relationship_button = "Bytt ut";
+$s_replace_relationship_sure_msg = "Det er allerede en relasjon mellom disse to sakene. Er du sikker på at du vil bytte den ut?";
+$s_relationship_with_parent = "Relasjon med overordnet sak";
+$s_delete_relationship_button = "Slett";
+$s_delete_relationship_sure_msg = "Er du sikker på at du vil slette denne relasjonen?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Ikke alle undersaker til denne saken er løst eller lukket ennå.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<strong>MERK</strong>. Ikke alle undersaker til denne saken er løst eller lukket. Før <strong>løsning/lukking</strong> av overordnet sak må alle undersakene løses eller lukkes.";
 $s_create_child_bug_button = "Lag undersak";
-$s_bug_cloned_to = "Saken er duplisert";
-$s_bug_created_from = "Sak generert fra";
+$s_bug_cloned_to = "Sak klonet";
+$s_bug_created_from = "Sak klonet fra";
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = "Relasjonsgraf";
+$s_relation_graph = "Relasjonsgraf";
+$s_dependency_graph = "Avhengighetsgraf";
+$s_vertical = "Vertikal";
+$s_horizontal = "Horisontal";
+$s_view_issue = "Vis sak";
 
 # Source Control Integration
 $s_checkin = 'Sjekk inn';
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'Rettighet';
+$s_view = 'Se';
+$s_issues = 'SAKER';
+$s_report_issue = 'Leggd inn en sak';
+$s_update_issue = 'Oppdatere en sak';
+$s_monitor_issue = 'Overvåke en sak';
+$s_handle_issue = 'Behandle en sak';
+$s_move_issue = 'Flytte en sak';
+$s_delete_issue = 'Slette en sak';
+$s_reopen_issue = 'Gjenåpne en sak';
+$s_view_private_issues = 'Se private saker';
+$s_update_readonly_issues = 'Oppdatere skrivebskyttede saker';
+$s_update_issue_status = 'Oppdatere saksstatus';
+$s_set_view_status = 'Endre visningsstatus (offentlig eller privat)';
+$s_update_view_status = 'Oppdatere visningsstatus (offentlig eller privat)';
+$s_show_list_of_users_monitoring_issue = 'Se overvåkerliste';
+$s_notes = 'NOTATER';
+$s_add_notes = 'Legge til notat';
+$s_update_notes = 'Oppdatere notat';
+$s_delete_note = 'Slette notat';
+$s_view_private_notes = 'Se privat notat';
+$s_news = 'NYHETER';
+$s_view_private_news = 'Se private nyheter';
+$s_manage_news = 'Administrere nyheter';
+$s_view_list_of_attachments = 'Se vedleggsliste';
+$s_download_attachments = 'Laste ned vedlegg';
+$s_delete_attachments = 'Slette vedlegg';
+$s_upload_issue_attachments = 'Laste opp saksvedlegg';
+$s_filters = 'FILTRE';
+$s_save_filters = 'Lagre filtre';
+$s_save_filters_as_shared = 'Lagre filtre som felles';
+$s_use_saved_filters = 'Bruke lagrede filtre';
+$s_create_project = 'Lage prosjekt';
+$s_delete_project = 'Slette prosjekt';
+$s_manage_project = 'Administrere prosjekt';
+$s_manage_user_access_to_project = 'Administrere brukertilgang til et prosjekt';
+$s_automatically_included_in_private_projects = 'Automatisk inkludert i private prosjekter';
+$s_project_documents = 'PROSJEKTDOKUMENTER';
+$s_view_project_documents = 'Se prosjektdokumenter';
+$s_upload_project_documents = 'Laste opp prosjektdokumenter';
+$s_link_custom_fields_to_projects = 'Lenke brukerdefinerte felter til prosjekter';
+$s_sponsorships = 'SPONSING';
+$s_view_sponsorship_details = 'Se sponsingsdetaljer';
+$s_view_sponsorship_total = 'Se totalt sponset beløp';
+$s_sponsor_issue = 'Sponset sak';
+$s_assign_sponsored_issue = 'Tilordne sponset sak';
+$s_handle_sponsored_issue = 'Behandle sponset sak';
+$s_others = 'ANNET';
+$s_see_email_addresses_of_other_users = 'Se epostadresser til andre brukere';
+$s_send_reminders = 'Sende påminnelse';
+$s_add_profiles = 'Legge til profiler';
+$s_notify_of_new_user_created = 'Gi melding ved ny bruker';
+$s_email_notification = 'EPOSTMELDINGER';
+$s_status_changed_to = 'Status endret til';
+$s_email_on_deleted = 'Epost ved sletting';
+$s_email_on_sponsorship_changed = 'Epost ved sponsingsendring';
+$s_email_on_relationship_changed = 'Epost ved relasjonsendring';
 
 # Timetracking
-$s_tt_header = "Time used";
-$s_tt_checkout_linktext = "Check out";
-$s_tt_checkin_linktext = "Check in";
-$s_tt_timeusage = "Time used";
+$s_tt_header = "Tidsforbruk";
+$s_tt_checkout_linktext = "Sjekk ut";
+$s_tt_checkin_linktext = "Sjekk inn";
+$s_tt_timeusage = "Tidsforbruk";
 $s_tt_starting_time = "Start";
-$s_tt_ending_time = "End";
+$s_tt_ending_time = "Slutt";
 ?>
