@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.41 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: proj_doc_add.php,v 1.42 2004-08-02 19:06:26 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -89,8 +89,9 @@
 				# @@@ Such errors should be checked in the admin checks
 				trigger_error( ERROR_GENERIC, ERROR );
 		}
-
-		$query = "INSERT INTO mantis_project_file_table
+		
+		$t_project_file_table = config_get( 'mantis_project_file_table' );
+		$query = "INSERT INTO $t_project_file_table
 				(project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 				VALUES
 				($t_project_id, '$c_title', '$c_description', '$c_file_path$c_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
