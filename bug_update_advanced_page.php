@@ -52,7 +52,6 @@
 <input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 <input type="hidden" name="f_old_status" value="<?php echo $v_status ?>">
 <input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>">
-<input type="hidden" name="f_resolution" value="<?php echo $v_resolution ?>">
 <tr>
 	<td class="form-title" colspan="3">
 		<?php echo $s_updating_bug_advanced_title ?>

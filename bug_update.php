@@ -28,20 +28,34 @@
     $t_bug_text_id = db_result( $result, 0, 0 );
 
 	# prevent warnings
-	if (!isset( $f_os )) {
-		$f_os = "";
+	if ( !isset( $f_os ) ) {
+		$f_os = get_bug_field( $f_id, "os" );
 	}
-	if (!isset( $f_os_build )) {
-		$f_os_build = "";
+	if ( !isset( $f_os_build ) ) {
+		$f_os_build = get_bug_field( $f_id, "os_build" );
 	}
-	if (!isset( $f_platform )) {
-		$f_platform = "";
+	if ( !isset( $f_platform ) ) {
+		$f_platform = get_bug_field( $f_id, "platform" );
 	}
-	if (!isset( $f_version )) {
-		$f_version = "";
+	if ( !isset( $f_version ) ) {
+		$f_version = get_bug_field( $f_id, "version" );
 	}
-	if (!isset( $f_build )) {
-		$f_build = "";
+	if ( !isset( $f_build ) ) {
+		$f_build = get_bug_field( $f_id, "build" );
+	}
+	if ( !isset( $f_eta ) ) {
+		$f_eta = get_bug_field( $f_id, "eta" );
+	}
+	if ( !isset( $f_projection ) ) {
+		$f_projection = get_bug_field( $f_id, "projection" );
+	}
+	if ( !isset( $f_resolution ) ) {
+		$f_resolution = get_bug_field( $f_id, "resolution" );
+	}
+	if ( !isset( $f_steps_to_reproduce ) ) {
+		$f_steps_to_reproduce = get_bug_text_field( $f_id, "steps_to_reproduce" );
+	} else {
+		$f_steps_to_reproduce = string_prepare_textarea( $f_steps_to_reproduce );
 	}
 
 	# prepare strings
@@ -52,7 +66,6 @@
 	$f_build 					= string_prepare_text( $f_build );
 	$f_summary					= string_prepare_text( $f_summary );
 	$f_description 				= string_prepare_textarea( $f_description );
-	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
     if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {

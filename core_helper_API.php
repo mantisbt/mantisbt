@@ -44,6 +44,20 @@
 		return db_result( $result, 0 );
 	}
 	# --------------------
+	# Returns the specified field value of the specified bug text
+	function get_bug_text_field( $p_bug_id, $p_field_name ) {
+		global 	$g_string_cookie_val,
+				$g_mantis_bug_text_table;
+
+		$t_bug_text_id = get_bug_field( $p_bug_id, "bug_text_id" );
+		# get info
+		$query = "SELECT $p_field_name
+				FROM $g_mantis_bug_text_table
+				WHERE id='$t_bug_text_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+	# --------------------
 	# checks to see if the category is a duplicate
 	# we do it this way because each different project can have the same category names
 	function is_duplicate_category( $p_category, $p_project_id ) {

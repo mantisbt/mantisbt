@@ -36,13 +36,8 @@
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
 	# prepare strings for display
-	$v_os 						= string_display( $v_os );
-	$v_os_build 				= string_display( $v_os_build );
-	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
 	$v_summary					= string_edit_text( $v_summary );
 	$v2_description 			= string_edit_textarea( $v2_description );
-	$v2_steps_to_reproduce 		= string_edit_textarea( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_edit_textarea( $v2_additional_information );
 ?>
 <?php print_page_top1() ?>
@@ -54,15 +49,6 @@
 <input type="hidden" name="f_id"                 value="<?php echo $v_id ?>">
 <input type="hidden" name="f_old_status"         value="<?php echo $v_status ?>">
 <input type="hidden" name="f_old_handler_id"     value="<?php echo $v_handler_id ?>">
-<input type="hidden" name="f_resolution"         value="<?php echo $v_resolution ?>">
-<input type="hidden" name="f_projection"         value="<?php echo $v_projection ?>">
-<input type="hidden" name="f_eta"                value="<?php echo $v_eta ?>">
-<input type="hidden" name="f_os"                 value="<?php echo $v_os ?>">
-<input type="hidden" name="f_os_build"           value="<?php echo $v_os_build ?>">
-<input type="hidden" name="f_platform"           value="<?php echo $v_platform ?>">
-<input type="hidden" name="f_version"            value="<?php echo $v_version ?>">
-<input type="hidden" name="f_build"              value="<?php echo $v_build ?>">
-<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $v2_steps_to_reproduce ?>">
 <tr>
 	<td class="form-title" colspan="3">
 		<?php echo $s_updating_bug_simple_title ?>
