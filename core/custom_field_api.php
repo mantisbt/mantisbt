@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.15 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: custom_field_api.php,v 1.16 2003-02-11 05:41:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -706,7 +706,7 @@ CREATE TABLE mantis_custom_field_project_table (
 			db_query( $query );
 
 			$row = db_fetch_array( $result );
-			history_log_event_direct( $c_bug_id, $t_name, $row['value'], $c_value);
+			history_log_event_direct( $c_bug_id, $t_name, $row['value'], $p_value);
 		} else {
 			# Always store the value, even if it's the dafault value
 			# This is important, as the definitions might change but the
@@ -744,6 +744,9 @@ CREATE TABLE mantis_custom_field_project_table (
 		} else {
 			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
 		}
+
+		$t_custom_field_value = string_attribute( $t_custom_field_value );
+
 		switch ($p_field_def['type']) {
 		case CUSTOM_FIELD_TYPE_ENUM:
 			echo "<select name=\"custom_field_$t_id\">";
