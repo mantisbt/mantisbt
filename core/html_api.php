@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.68 2003-03-10 18:14:11 jfitzell Exp $
+	# $Id: html_api.php,v 1.69 2003-03-10 21:22:35 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -446,6 +446,7 @@
 		if ( config_get( 'use_jpgraph' ) ) {
 			$t_icon_path = config_get( 'icon_path' );
 
+			echo '<br />';
 			echo '<a href="summary_page.php"><img src="' . $t_icon_path.'synthese.gif" border="0" align="center" />' . lang_get( 'synthesis_link' ) . '</a> | ';
 			echo '<a href="summary_graph_imp_status.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'status_link' ) . '</a> | ';
 			echo '<a href="summary_graph_imp_priority.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'priority_link' ) . '</a> | ';
