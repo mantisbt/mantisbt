@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.9 2004-07-18 13:22:28 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.10 2004-07-21 12:38:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -146,15 +146,7 @@
 	</tr>
 </table>
 
-<?php collapse_end( 'sponsorship' ); ?>
-<?php } ?>
-
-
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
-	SetDiv( "sponsorship", g_div_sponsorship );
-</script>
-
 <?php
+	collapse_end( 'sponsorship' );
 } # If sponsorship enabled
 ?>
