@@ -60,6 +60,7 @@ Mantis
  * Moved admin_* scripts into admin/ folder.
  * Added view_state to news.  News can now be made private.
  * Added announcement flag to news.  Announcements are always kept at the top of the news page.
+ * Added $g_view_summary_threshold to configure the access level required for viewing summary page.
 
 2002.05.19  -  0.17.3
 

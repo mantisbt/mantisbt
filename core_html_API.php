@@ -282,13 +282,11 @@
 	# also prints the login info, time, and project select form
 	function print_menu() {
 		global	$g_string_cookie_val, $g_project_cookie_val,
-				$g_show_report,
+				$g_show_report, $g_view_summary_threshold,
 				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
 				$s_summary_link, $s_account_link,
 				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
-				$s_jump,
-
-				$s_logout_link;
+				$s_jump, $s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
 		    $t_protected = get_current_user_field( 'protected' );
@@ -307,7 +305,9 @@
 					}
 				}
 
-				PRINT "<a href=\"summary_page.php\">$s_summary_link</a> | ";
+				if ( access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
+					PRINT "<a href=\"summary_page.php\">$s_summary_link</a> | ";
+				}
 
 				# only show accounts that are NOT protected
 				if ( OFF == $t_protected ) {

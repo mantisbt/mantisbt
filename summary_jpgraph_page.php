@@ -12,6 +12,11 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# if user below view summary threshold, then re-direct to mainpage.
+	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
+		print_header_redirect( 'main_page.php' );
+	}
+
 	$t_res_val = RESOLVED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 			UNIX_TIMESTAMP(last_updated) as last_updated

@@ -7,6 +7,10 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# if user below view summary threshold, then re-direct to mainpage.
+	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
+		print_header_redirect( 'main_page.php' );
+	}
 
 #############################################################
 
