@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.3 2002-10-27 22:53:40 jfitzell Exp $
+	# $Id: bug_report.php,v 1.4 2002-11-16 16:06:04 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -85,7 +85,7 @@
 					$f_description, $f_steps_to_reproduce, $f_additional_info );
 
 	# File Uploaded
-	if ( '' != $f_file['tmp_name'] ) {
+	if ( is_uploaded_file( $f_file['tmp_name'] ) && 0 != $f_file['size'] ) {
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
 	}
 
