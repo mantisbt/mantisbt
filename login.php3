@@ -1,3 +1,4 @@
+<?php_track_vars?>
 <?
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
@@ -8,11 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### shows all variables and values; for debug
-    #while (list($var, $value) = each($HTTP_POST_VARS)) {
-        #echo "$var = $value<br>\n";
-    #}
-    	### get user info
+   	### get user info
 	$query = "SELECT *
 			FROM $g_mantis_user_table
 			WHERE username='$f_username'";
