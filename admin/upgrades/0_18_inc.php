@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.10 2004-07-11 07:09:51 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.11 2004-07-13 12:53:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -239,22 +239,22 @@
 			"ALTER TABLE mantis_project_version_table DROP PRIMARY KEY" );
 
 	$upgrades[] = new SQLUpgrade(
-			'version_add_version_id_pk',
+			'version_add_version_',
 			'Add id to version table and use it as primary key',
 			"ALTER TABLE mantis_project_version_table ADD id INT( 7 ) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
 
 	$upgrades[] = new SQLUpgrade(
-			'version_add_project_version_index',
+			'version_add_project_',
 			'Add a unique index for project_id + version combination.',
 			"ALTER TABLE mantis_project_version_table ADD UNIQUE project_version ( project_id , version )" );
 
 	$upgrades[] = new SQLUpgrade(
-			'version_add_description',
+			'version_add_descript',
 			'Add description field to versions.',
 			"ALTER TABLE mantis_project_version_table ADD description TEXT NOT NULL" );
 
 	$upgrades[] = new SQLUpgrade(
-			'version_add_released_flag',
+			'version_add_released',
 			'Add released flag to determine whether the version was released or still a future release.',
 			"ALTER TABLE mantis_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
 

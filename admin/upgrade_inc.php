@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.11 2004-03-19 08:40:27 vboctor Exp $
+	# $Id: upgrade_inc.php,v 1.12 2004-07-13 12:53:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -84,6 +84,11 @@
 		var $description;
 
 		function Upgrade( $p_id, $p_description ) {
+			if ( strlen( $p_id ) > 20 ) {
+				echo "Upgrade Id '$p_id' too long.  Maximum length is 20 characters";
+				exit;
+			}
+
 			$this->id = $p_id;
 			$this->description = $p_description;
 			$this->error = '';
