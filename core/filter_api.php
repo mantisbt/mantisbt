@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.74 2005-01-15 21:51:09 thraxisp Exp $
+	# $Id: filter_api.php,v 1.75 2005-01-15 23:19:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1187,6 +1187,7 @@
 								} else {
 									$t_first_flag = true;
 									foreach( $t_filter['show_build'] as $t_current ) {
+										$t_current = stripslashes( $t_current );
 										?>
 										<input type="hidden" name="show_build[]" value="<?php echo $t_current;?>" />
 										<?php
@@ -1222,6 +1223,7 @@
 								} else {
 									$t_first_flag = true;
 									foreach( $t_filter['show_version'] as $t_current ) {
+										$t_current = stripslashes( $t_current );
 										?>
 										<input type="hidden" name="show_version[]" value="<?php echo $t_current;?>" />
 										<?php
@@ -1257,6 +1259,7 @@
 								} else {
 									$t_first_flag = true;
 									foreach( $t_filter['fixed_in_version'] as $t_current ) {
+										$t_current = stripslashes( $t_current );
 										?>
 										<input type="hidden" name="fixed_in_version[]" value="<?php echo $t_current;?>" />
 										<?php
@@ -1446,6 +1449,7 @@
 					} else {
 						$t_first_flag = true;
 						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
+							$t_current = stripslashes( $t_current );
 							$t_this_string = '';
 							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 								$t_any_found = true;
