@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.214 $
+	# $Revision: 1.215 $
 	# $Author: thraxisp $
-	# $Date: 2004-09-28 13:57:38 $
+	# $Date: 2004-09-28 14:09:40 $
 	#
-	# $Id: strings_english.txt,v 1.214 2004-09-28 13:57:38 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.215 2004-09-28 14:09:40 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -185,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';

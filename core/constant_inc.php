@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.30 2004-09-22 10:03:42 bpfennigschmidt Exp $
+	# $Id: constant_inc.php,v 1.31 2004-09-28 14:09:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -163,6 +163,7 @@
 	define( 'ERROR_ACCESS_DENIED',					13 );
 	define( 'ERROR_UPLOAD_FAILURE',					15 );
 	define( 'ERROR_FTP_CONNECT_ERROR',				16 );
+	define( 'ERROR_HANDLER_ACCESS_TOO_LOW',				17 );
 
 	# ERROR_CONFIG_*
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',			100 );
