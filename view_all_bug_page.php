@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.59 $
-	# $Author: vboctor $
-	# $Date: 2005-01-28 21:58:17 $
+	# $Revision: 1.60 $
+	# $Author: thraxisp $
+	# $Date: 2005-01-29 02:26:48 $
 	#
-	# $Id: view_all_bug_page.php,v 1.59 2005-01-28 21:58:17 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.60 2005-01-29 02:26:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,15 +29,7 @@
 	$t_bug_count = null;
 	$t_page_count = null;
 
-	# @@@ It should be possible to have more sticky pages than the number of issues per page.
-	if ( 1 == $f_page_number ) {
-		$sticky_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
-		if ( $sticky_rows === false ) {
-			print_header_redirect( 'view_all_set.php?type=0' );
-		}
-	}
-
-	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
 	if ( $rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}

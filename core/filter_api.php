@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.76 2005-01-28 21:58:16 vboctor Exp $
+	# $Id: filter_api.php,v 1.77 2005-01-29 02:26:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -103,15 +103,11 @@
 
 				if ( 0 == count( $t_projects ) ) {
 					return array();  # no accessible projects, return an empty array
+				} else if ( 1 == count( $t_projects ) ) {
+					$t_project = $t_projects[0];
+					array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
 				} else {
-					$t_clauses = array();
-
-					#@@@ use project_id IN (1,2,3,4) syntax if we can
-					for ( $i=0 ; $i < count( $t_projects ) ; $i++) {
-						array_push( $t_clauses, "($t_bug_table.project_id='$t_projects[$i]')" );
-					}
-
-					array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+					array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
 				}
 			}
 		} else {
@@ -147,20 +143,24 @@
 
 			foreach( $t_filter['reporter_id'] as $t_filter_member ) {
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "($t_bug_table.reporter_id=0)" );
+					array_push( $t_clauses, "0" );
 				} else {
 					$c_reporter_id = db_prepare_int( $t_filter_member );
 					if ( META_FILTER_MYSELF == $c_reporter_id ) {
 						if ( access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
 							$c_reporter_id = $c_user_id;
-							array_push( $t_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+							array_push( $t_clauses, $c_reporter_id );
 						}
 					} else {
-						array_push( $t_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+						array_push( $t_clauses, $c_reporter_id );
 					}
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.reporter_id in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.reporter_id=$t_clauses[0] )" );
+			}
 		}
 
 		# limit reporter
@@ -185,20 +185,24 @@
 
 			foreach( $t_filter['handler_id'] as $t_filter_member ) {
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "$t_bug_table.handler_id=0" );
+					array_push( $t_clauses, 0 );
 				} else {
 					$c_handler_id = db_prepare_int( $t_filter_member );
 					if ( META_FILTER_MYSELF == $c_handler_id ) {
 						if ( access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_user_id ) ) {
 							$c_handler_id = $c_user_id;
-							array_push( $t_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
+							array_push( $t_clauses, $c_handler_id );
 						}
 					} else {
-						array_push( $t_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
+						array_push( $t_clauses, $c_handler_id );
 					}
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.handler_id in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.handler_id=$t_clauses[0] )" );
+			}
 		}
 
 		# category
@@ -218,13 +222,17 @@
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "$t_bug_table.category=''" );
+					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_category = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "($t_bug_table.category='$c_show_category')" );
+					array_push( $t_clauses, "'$c_show_category'" );
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.category in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.category=$t_clauses[0] )" );
+			}
 		}
 
 		# severity
@@ -242,9 +250,13 @@
 
 			foreach( $t_filter['show_severity'] as $t_filter_member ) {
 				$c_show_severity = db_prepare_int( $t_filter_member );
-				array_push( $t_clauses, "($t_bug_table.severity='$c_show_severity')" );
+				array_push( $t_clauses, $c_show_severity );
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.severity in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.severity=$t_clauses[0] )" );
+			}
 		}
 
 		# show / hide status
@@ -295,9 +307,13 @@
 
 			foreach( $t_desired_statuses as $t_filter_member ) {
 				$c_show_status = db_prepare_int( $t_filter_member );
-				array_push( $t_clauses, "($t_bug_table.status='$c_show_status')" );
+				array_push( $t_clauses, $c_show_status );
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.status in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.status=$t_clauses[0] )" );
+			}
 		}
 
 		# resolution
@@ -315,9 +331,13 @@
 
 			foreach( $t_filter['show_resolution'] as $t_filter_member ) {
 				$c_show_resolution = db_prepare_int( $t_filter_member );
-				array_push( $t_clauses, "($t_bug_table.resolution='$c_show_resolution')" );
+				array_push( $t_clauses, $c_show_resolution );
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.resolution in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.resolution=$t_clauses[0] )" );
+			}
 		}
 
 		# priority
@@ -335,9 +355,13 @@
 
 				foreach( $t_filter['show_priority'] as $t_filter_member ) {
 						$c_show_priority = db_prepare_int( $t_filter_member );
-						array_push( $t_clauses, "($t_bug_table.priority='$c_show_priority')" );
+						array_push( $t_clauses, $c_show_priority );
 				}
-				array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.priority in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.priority=$t_clauses[0] )" );
+			}
 		}
 
 
@@ -357,13 +381,17 @@
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "($t_bug_table.build='')" );
+					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_build = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "($t_bug_table.build='$c_show_build')" );
+					array_push( $t_clauses, "'$c_show_build'" );
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.build in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.build=$t_clauses[0] )" );
+			}
 		}
 
 		# product version
@@ -382,13 +410,17 @@
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "($t_bug_table.version='')" );
+					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_version = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "($t_bug_table.version='$c_show_version')" );
+					array_push( $t_clauses, "'$c_show_version'" );
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.version in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.version=$t_clauses[0] )" );
+			}
 		}
 
 		# date filter
@@ -423,13 +455,17 @@
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
-					array_push( $t_clauses, "($t_bug_table.fixed_in_version='')" );
+					array_push( $t_clauses, "''" );
 				} else {
 					$c_fixed_in_version = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "($t_bug_table.fixed_in_version='$c_fixed_in_version')" );
+					array_push( $t_clauses, "'$c_fixed_in_version'" );
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version=$t_clauses[0] )" );
+			}
 		}
 
 		# users monitoring a bug
@@ -453,13 +489,17 @@
 				if ( META_FILTER_MYSELF == $c_user_monitor ) {
 					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_user_id ) ) {
 						$c_user_monitor = $c_user_id;
-						array_push( $t_clauses, "($t_table_name.user_id='$c_user_monitor')" );
+						array_push( $t_clauses, $c_user_id );
 					}
 				} else {
-					array_push( $t_clauses, "($t_table_name.user_id='$c_user_monitor')" );
+					array_push( $t_clauses, $c_user_monitor );
 				}
 			}
-			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_table_name.user_id in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_table_name.user_id=$t_clauses[0] )" );
+			}
 		}
 
 		# custom field filters
@@ -559,15 +599,10 @@
 			$t_where	= '';
 		}
 
-		if ( null === $p_show_sticky ) {
-			$t_where .= " AND $t_bug_table.sticky = 0";
-		}
-		else {
-			$t_where .= " AND $t_bug_table.sticky = 1";
-		}
-
-		if ( false === $t_filter['sticky_issues'] && true === $p_show_sticky ) {
-			$t_where .= " AND 1 = 0";
+		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
+			$t_sticky_order = " sticky DESC, ";
+		} else {
+			$t_sticky_order = "";
 		}
 
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
@@ -602,7 +637,7 @@
 
 		$t_id_array = array_unique( $t_id_array );
 		if ( count( $t_id_array ) > 0 ) {
-			$t_where = "WHERE $t_bug_table.id = " . implode( " OR $t_bug_table.id = ", $t_id_array );
+			$t_where = "WHERE $t_bug_table.id in (" . implode( ", ", $t_id_array ) . ")";
 		} else {
 			$t_where = "WHERE 1 != 1";
 		}
@@ -675,7 +710,8 @@
 			$c_dir = 'ASC';
 		}
 
-		$t_order = " ORDER BY $c_sort $c_dir";
+		$t_order = " ORDER BY $t_sticky_order $c_sort $c_dir";
+
 		if ( $c_sort != 'last_updated' ) {
             $t_order .= ', last_updated DESC, date_submitted DESC';
         } else {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.2 2005-01-28 21:58:16 vboctor Exp $
+	# $Id: columns_api.php,v 1.3 2005-01-29 02:26:49 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,6 +34,8 @@
 	}
 
 	function print_column_title_attachment( $p_sort, $p_dir, $p_print = false  ) {
+		global $t_icon_path;
+		
 		$t_show_attachments = config_get( 'show_attachment_indicator' );
 
 		if ( ON == $t_show_attachments ) {
@@ -181,6 +183,8 @@
 	}
 
 	function print_column_attachment( $p_row, $p_print = false ) {
+		global $t_icon_path;
+
 		$t_show_attachments = config_get( 'show_attachment_indicator' );
 
 		# Check for attachments

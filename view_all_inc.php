@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.153 2005-01-27 12:45:59 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.154 2005-01-29 02:26:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -111,13 +111,27 @@
 	{
 		global $t_columns;
 
+		$t_in_stickies = true;
+		
 		mark_time( 'begin loop' );
-
-		# -- Loop over bug rows and create $v_* variables --
-
-		for ( $i = 0; $i < sizeof( $p_rows ); $i++ ) {
+	
+		# -- Loop over bug rows -- 
+	
+		for( $i=0; $i < sizeof( $p_rows ); $i++ ) {
 			$t_row = $p_rows[$i];
-
+	
+			if ( ( 0 == $t_row['sticky'] ) && ( 0 == $i ) ) {
+				$t_in_stickies = false;
+			}
+			if ( ( 0 == $t_row['sticky'] ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
+?>			
+               <tr>
+                       <td class="left" colspan="<?php echo sizeof( $t_columns ); ?>" bgcolor="#999999">&nbsp;</td>
+               </tr>
+<?php
+				$t_in_stickies = false;
+			}
+	
 			# choose color based on status
 			$status_color = get_status_color( $t_row['status'] );
 
@@ -132,16 +146,7 @@
 		}
 	}
 
-	write_bug_rows( $sticky_rows );
 
-	# -- ====================== end of STICKY BUG LIST ========================= --
-	if ( ( sizeof( $sticky_rows ) > 0 ) && ( sizeof( $rows ) > 0 ) ) {
-?>
-		<tr>
-			<td class="left" colspan="<?php echo $col_count; ?>" bgcolor="#999999">&nbsp;</td>
-		</tr>
-<?php
-	}
 	write_bug_rows($rows);
 	# -- ====================== end of BUG LIST ========================= --
 
