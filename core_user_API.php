@@ -322,7 +322,10 @@
 		$t_access_level = get_current_user_field( "access_level" );
 		$t_access_level2 = get_project_access_level();
 
-		if ( ( $t_access_level == $p_access_level ) || ( $t_access_level2 == $p_access_level ) ) {
+		if ( $t_access_level2 == $p_access_level ) {
+			return true;
+		} else if ( ( $t_access_level == $p_access_level ) &&
+					( -1 == $t_access_level2 ) ) {
 			return true;
 		} else {
 			return false;
@@ -343,9 +346,7 @@
 
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
-		if ( -1 == $t_access_level2 ) {
-			# do nothing
-		} else if ( $t_access_level2 > $t_access_level ) {
+		if ( -1 != $t_access_level2 ) {
 			$t_access_level = $t_access_level2;
 		}
 

@@ -23,6 +23,7 @@ Mantis
  * Fixed file upload switch with break statements.
  * Fixed print_assign_to_option_list() to accurately reflect settings.
  * Fixed print_reporter_option_list() to accurately reflect settings.
+ * Fixed the access level checks to be more accurate.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
