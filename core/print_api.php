@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.100 2004-09-22 10:03:42 bpfennigschmidt Exp $
+	# $Id: print_api.php,v 1.101 2004-09-23 21:22:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -592,10 +592,9 @@
 	# or the input parameter if workflows are not used
 	# $p_enum_name : name of enumeration (eg: status)
 	# $p_current_value : current value
-	function print_status_option_list( $p_select_label, $p_current_value = 0 ) {
+	function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show_current = true, $p_add_close = false ) {
 		$t_config_var_value = config_get( 'status_enum_string' );
 		$t_enum_workflow = config_get( 'status_enum_workflow' );
-		$t_current_auth = access_get_project_level();
 
 		if ( count( $t_enum_workflow ) < 1 ) {
 			# workflow not defined, use default enum
@@ -607,19 +606,29 @@
 
 		$t_enum_count = count( $t_arr );
 		$t_enum_list = array();
-		$t_current_state = '';
 
 		for ( $i = 0; $i < $t_enum_count; $i++ ) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
-			$t_elem2 = get_enum_element( 'status', $t_elem[0] );
-			$t_status = $t_elem[0];
-			if ( $t_status == $p_current_value ) {
-				$t_current_state = $t_elem2;
-			}
-			if ( $t_current_auth >= access_get_status_threshold( $t_status ) ) {
-				$t_enum_list[$t_status] = $t_elem2;
+			if ( $p_user_auth >= access_get_status_threshold( $t_elem[0] ) ) {
+				$t_enum_list[$t_elem[0]] = get_enum_element( 'status', $t_elem[0] );
 			}
 		} # end for
+		if ( true == $p_show_current ) {
+				$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
+			}
+		if ( ( true == $p_add_close ) && ( $p_current_value >= config_get( 'bug_resolved_status_threshold' ) ) ) {
+				$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
+			}
+		ksort( $t_enum_list );
+		reset ( $t_enum_list );
+		return $t_enum_list;
+	}
+	# --------------------
+	# print the status option list for the bug_update pages
+	function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false ) {
+		$t_current_auth = access_get_project_level();
+
+		$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close );
 
 		if ( count( $t_enum_list ) > 0 ) {
 			echo '<select name="' . $p_select_label . '">';
@@ -630,7 +639,7 @@
 			}
 			echo '</select>';
 		} else {
-			echo $t_current_state;
+			echo get_enum_to_string( 'status_enum_string', $p_current_value );
 		}
 
 	}
@@ -662,7 +671,7 @@
 		# with his default access level.
 		PRINT "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
 		PRINT ">[" . lang_get( 'default_access_level' ) . "]</option>";
-		
+
 		$t_arr = explode_enum_string( $g_access_levels_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.210 2004-09-22 08:58:04 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.211 2004-09-23 21:22:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -908,6 +908,9 @@
 
 	# status change thresholds
 	$g_update_bug_status_threshold = DEVELOPER;
+	
+	# access level needed to re-open bugs
+	$g_reopen_bug_threshold			= DEVELOPER;
 
 	# this array sets the access thresholds needed to enter each status listed.
 	# if a status is not listed, it falls back to $g_update_bug_status_threshold

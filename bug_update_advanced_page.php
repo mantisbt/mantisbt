@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.78 2004-09-22 08:52:37 bpfennigschmidt Exp $
+	# $Id: bug_update_advanced_page.php,v 1.79 2004-09-23 21:22:11 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -221,7 +221,9 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
-		<?php print_status_option_list( 'status', $t_bug->status ) ?>
+		<?php print_status_option_list( 'status', $t_bug->status, true,
+						( $t_bug->reporter_id == auth_get_current_user_id() && 
+								( ON == config_get( 'allow_reporter_close' ) ) ) ) ?>
 	</td>
 
 	<?php
