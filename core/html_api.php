@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.133 2004-09-28 15:03:31 thraxisp Exp $
+	# $Id: html_api.php,v 1.134 2004-09-30 20:35:34 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -437,12 +437,17 @@
 					$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
 				}
 
-				# Manage Users (admins) or Manage Project (managers)
-				if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
+				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
+				$t_show_access = min( config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ), ADMINISTRATOR );
+				if ( access_has_project_level( $t_show_access ) ) {
 					if ( access_has_project_level( ADMINISTRATOR ) ) {
 						$t_link = 'manage_user_page.php';
 					} else {
-						$t_link = 'manage_proj_page.php';
+						if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
+							$t_link = 'manage_proj_page.php';
+						} else {
+							$t_link = 'manage_custom_field_page.php';
+						}
 					}
 					$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
 				}
@@ -524,10 +529,6 @@
 	# Print the menu for the manage section
 	# $p_page specifies the current page name so it's link can be disabled
 	function print_manage_menu( $p_page='' ) {
-		if ( !access_has_project_level( ADMINISTRATOR ) ) {
-			return;
-		}
-
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
@@ -541,9 +542,15 @@
 		}
 
 		PRINT '<br /><div align="center">';
+		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
+		}
+		if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
+		}
+		if ( access_has_project_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
+		}
 			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
 	}
