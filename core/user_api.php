@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.12 2002-08-27 21:57:14 jlatour Exp $
+	# $Id: user_api.php,v 1.13 2002-08-28 09:30:41 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -543,7 +543,7 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( '0000000' == $g_project_cookie_val ) {
+		if ( '0000000' == helper_get_current_project() ) {
 			$t_where_prj = '';
 		} else {
 			$t_where_prj = "project_id='$c_project_id' AND";
@@ -573,7 +573,7 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( '0000000' == $g_project_cookie_val ) {
+		if ( '0000000' == helper_get_current_project() ) {
 			$t_where_prj = '';
 		} else {
 			$t_where_prj = "project_id='$c_project_id' AND";
