@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: jctrosset $
-	# $Date: 2002-06-24 10:04:09 $
+	# $Date: 2002-07-04 09:18:35 $
 	#
-	# $Id: strings_english.txt,v 1.55 2002-06-24 10:04:09 jctrosset Exp $
+	# $Id: strings_english.txt,v 1.56 2002-07-04 09:18:35 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -74,7 +74,8 @@
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
-
+	
+	$s_hide_button = 'Hide Selected';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';

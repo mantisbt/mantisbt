@@ -7,11 +7,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.32 $
 	# $Author: jctrosset $
-	# $Date: 2002-06-24 10:04:09 $
+	# $Date: 2002-07-04 09:18:35 $
 	#
-	# $Id: strings_russian.txt,v 1.31 2002-06-24 10:04:09 jctrosset Exp $
+	# $Id: strings_russian.txt,v 1.32 2002-07-04 09:18:35 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -73,6 +73,8 @@
 
 	$s_make_private = 'Сделать частным';
 	$s_make_public = 'Сделать общедоступным';
+
+	$s_hide_button = 'Hide Selected';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';

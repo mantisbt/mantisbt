@@ -7,11 +7,11 @@
 	# Dutch: Jan-Bart de Vreede, jvreede@outdare.nl
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# -------------------------------------------------
-	# $Revision: 1.29 $
-	# $Author: prescience $
-	# $Date: 2002-06-12 01:03:18 $
+	# $Revision: 1.30 $
+	# $Author: jctrosset $
+	# $Date: 2002-07-04 09:18:35 $
 	#
-	# $Id: strings_dutch.txt,v 1.29 2002-06-12 01:03:18 prescience Exp $
+	# $Id: strings_dutch.txt,v 1.30 2002-07-04 09:18:35 jctrosset Exp $
 	###########################################################################
 
 ?>
@@ -74,6 +74,45 @@
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
+
+	$s_hide_button = 'Hide Selected';
+
+	# bug_actiongroup_page.php : mass treatment
+	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
+	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
+	$s_move_bugs_conf_msg = 'Move bugs to';
+	$s_assign_bugs_conf_msg = 'Assign bugs to';
+	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
+	$s_priority_bugs_conf_msg = 'Choose bugs priority';
+	$s_status_bugs_conf_msg = 'Choose bugs status';
+	$s_close_group_bugs_button = 'Close Bugs' ;
+	$s_delete_group_bugs_button = 'Delete Bugs' ;
+	$s_move_group_bugs_button = 'Move Bugs' ;
+	$s_assign_group_bugs_button = 'Assign Bugs' ;
+	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
+	$s_priority_group_bugs_button = 'Update Priority' ;
+	$s_status_group_bugs_button = 'Update Status' ;
+
+	# improved JPgraphs strings
+	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+	$s_graph_imp_category_title = 'Synthesis graphs by category';
+	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+	$s_by_status_pct = 'by status percentage';
+	$s_by_priority_pct = 'by priority percentage';
+	$s_by_severity_pct = 'by severity percentage';
+	$s_by_category_pct = 'by category percentage';
+	$s_by_resolution_pct = 'by resolution percentage';
+	$s_by_severity_mix = 'by severity and status';
+	$s_by_priority_mix = 'by priority and status';
+	$s_by_resolution_mix = 'by resolution and status';
+        $s_synthesis_link = 'Synthesis';
+        $s_status_link = 'Per state';
+	$s_priority_link = 'Per priority';
+	$s_severity_link = 'Per severity';
+	$s_category_link = 'Per category';
+	$s_resolution_link = 'Per resolution';
 
 
 	# ERROR strings

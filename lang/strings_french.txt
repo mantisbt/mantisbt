@@ -9,12 +9,13 @@
 	# French: Samuel Tardieu, sam@rfc1149.net
 	# French: Quentin Delance, quentin.delance@insalien.org
 	# French: Roland Meyer, Daniel Coquette
+	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.30 $
+	# $Revision: 1.31 $
 	# $Author: jctrosset $
-	# $Date: 2002-06-24 10:04:09 $
+	# $Date: 2002-07-04 09:18:35 $
 	#
-	# $Id: strings_french.txt,v 1.30 2002-06-24 10:04:09 jctrosset Exp $
+	# $Id: strings_french.txt,v 1.31 2002-07-04 09:18:35 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -28,10 +29,10 @@
 	$s_date_order = 'Date Order';
 	$s_print_all_bug_page_link = 'Rapport imprimable';
 	$s_csv_export = 'CSV Export';
-	$s_login_anonymously = 'Login Anonymously';
-	$s_jump_to_bugnotes = 'Jump to Bugnotes';
-	$s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
-	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
+	$s_login_anonymously = 'Se logger anonymememnt';
+	$s_jump_to_bugnotes = 'Aller aux Bugnotes';
+	$s_public_project_msg = 'Ce projet est PUBLIC.  Tous les utilisateurs y ont accès.';
+	$s_private_project_msg = 'Ce projet est PRIVE.  Seuls les administrateurs et les utilisateurs ajoutés manuellement y ont accès';
 	$s_access_level_project = 'Project Access Level';
 	$s_view_submitted_bug_link = 'View Submitted Bug';
 	$s_assigned_projects = 'Assigned Projects';
@@ -57,7 +58,7 @@
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bug?';
 	$s_bug_relationships = 'Relationships';
 
-	$s_duplicate_of = 'duplicate of %id';
+	$s_duplicate_of = 'doublon de %id';
 	$s_has_duplicate = 'has duplicate %id';
 	$s_related_to = 'related to %id';
 	$s_dependant_on = 'dependant on %id';
@@ -74,8 +75,10 @@
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Rendre Privé';
+	$s_make_public = 'Rendre Public';
+
+	$s_hide_button = 'Cacher sélection';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
