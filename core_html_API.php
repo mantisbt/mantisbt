@@ -145,7 +145,7 @@
 		$t_now = date($g_complete_date_format);
 
 		PRINT "<table width=\"100%\">";
-		PRINT "<form method=post action=$g_set_project>";
+		PRINT "<form method=post action=\"$g_set_project\">";
 		PRINT "<tr>";
 			PRINT "<td align=left width=\"33%\">";
 				PRINT "$s_logged_in_as: <i>$t_username</i>";
