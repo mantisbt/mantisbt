@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-05 20:32:51 $
+	# $Date: 2004-10-14 18:57:09 $
 	#
-	# $Id: strings_slovak.txt,v 1.29 2004-10-05 20:32:51 bigbadger Exp $
+	# $Id: strings_slovak.txt,v 1.30 2004-10-14 18:57:09 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,15 @@ $s_priority_link = 'podµa priority';
 $s_severity_link = 'podµa dôle¾itosti';
 $s_category_link = 'podµa kategórie';
 $s_resolution_link = 'podµa rie¹enia';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Zobrazi» iba oznaèené';
@@ -211,6 +220,7 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verzia nenájdená.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Pou¾ívateµské meno je neplatné.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'U¾ívateµ nemá potrebnú prístupovú úroveò';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Zvolené "Skutoèné meno" sa zhoduje s menom iného u¾ívateµa. Zvolte si prosím iné.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Podpora sponzoringu nieje dostupná.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzor (%s) sa nachádza pod minimálnou èiastkou (%s).';
@@ -274,6 +284,7 @@ $s_new_account_signup_msg = 'Bol vytvorný nasledujúci úèet:';
 $s_reset_request_msg = 'Niekdo (dúfam ¾e vy) po¾iadal o zmenu hesla s overeným dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a niè sa nestane.' . "\n\n" . 'Pokud jste si skuteèn¹ pøáli tuto zmìnu, nav¹tivte Nasledujúci stránku a dokonèete zmìnu pøístupového hesla:';
 $s_reset_request_in_progress_msg = 'Pokiad bola zadaná správna kombinácia u¾ivateµského mena a elektronickej adresy pre Vá¹ úèet, odo¹leme vám na túto adresu potvrdzovací dopis. Keï tento dopis dostanete, riadte sa pokynmy v òom pre dokonèenie zmeny prístupového hesla.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Nasledujúci problém vy¾aduje va¹u ODOZVU';
 $s_email_notification_title_for_status_bug_acknowledged = 'Nasledujúci problém bol PRIJATÝ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Nasledujúci problém bol POTVRDENÝ';
@@ -291,10 +302,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Sponzoring tohoto 
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponzoring tohoto problému byl uzavrený.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'K problému bola pridána poznámka.';
-$s_email_notification_title_for_action_relationship_added = "K následujúcemu problému bol pridáný nový VZ«AH.";
-$s_email_notification_title_for_action_relationship_deleted = "Od následujúceho problému bol odobraný VZ«AH.";
-$s_email_notification_title_for_action_relationship_child_resolved = "VZ«AHOVANÝ problém bol VYRIE©ENÝ.";
-$s_email_notification_title_for_action_relationship_child_closed = "VZ«AHOVANÝ problém bol UZAVRENÝ.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
@@ -329,6 +348,7 @@ $s_username = 'Pou¾ívateµské meno';
 $s_realname = 'Skutoèné meno';
 $s_email = 'Elektronická adresa';
 $s_password = 'Heslo';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Heslo znovu';
 $s_access_level = 'Úroveò prístupu';
 $s_update_user_button = 'Aktualizova» pou¾ívateµa';
@@ -466,6 +486,9 @@ $s_bug_reminder = 'Odosla» upozornenie';
 $s_reminder_sent_to = 'Odosla» upozornenie';
 $s_bug_send_button = 'Odosla»';
 $s_reminder = 'Upozornenie';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Bug bol úspe¹ne aktualizovaný...';
@@ -636,6 +659,7 @@ $s_categories = 'Kategória';
 $s_add_category_button = 'Prida» kategóriu';
 $s_versions = 'Verzia';
 $s_add_version_button = 'Prida» verziu';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'upravi»';
 $s_actions = 'Akcie';
 $s_version = 'Verzia/Build';
@@ -795,6 +819,7 @@ $s_add_user_title = 'Prida» pou¾ívateµa k projektu';
 $s_add_user_button = 'Pridaj pou¾ívateµa';
 $s_project_selection_title = 'Výber projektu';
 $s_remove_link = 'odstráni»';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Aktualizácia pou¾ívateµa prebehla úspe¹ne.';
@@ -839,6 +864,7 @@ $s_signup_captcha_request = 'Zadajte kód ktorý vidíte v rámiku na pravej strane'
 $s_signup_info = 'Po dokonèení tejto kontroly va¹ich odpovedí Vám po¹leme kontrolný elektronický dopis.<br/>Pou¾itím tohoto kontrolného dopisu budete môc» aktivova» Vá¹ úèet. Nepodarí sa Vám aktivova» úèet v priebehu siedmych dní, bude úèet zmazaný.<br/>Abyste dostali tento kontrolní dopis, musí být vámi zadaná elektronická adresa platná.';
 $s_signup_title = 'Vytvorenie pou¾ívateµa';
 $s_signup_button = 'Vytvori»';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Nastavenie stránky';
@@ -1028,6 +1054,11 @@ $s_add_new_relationship_button = "Prida»";
 $s_this_bug = "Aktuálny problém";
 $s_relationship_added = "Vz»ah pridaný";
 $s_relationship_deleted = "Vz»ah odobraný";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Odobra»";
 $s_delete_relationship_sure_msg = "Naozaj chcete odobra» tento vz»ah_";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nie v¹etci potomkovia tohoto problému sú vyrie¹ený alebo uzavretí ";
@@ -1035,6 +1066,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie v¹
 $s_create_child_bug_button = "Vytvori» potomka";
 $s_bug_cloned_to = "Problém je klonovaný";
 $s_bug_created_from = "Problém generovaný z";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

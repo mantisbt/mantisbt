@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-04 22:15:17 $
+	# $Date: 2004-10-14 18:57:07 $
 	#
-	# $Id: strings_norwegian.txt,v 1.77 2004-10-04 22:15:17 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.78 2004-10-14 18:57:07 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -304,10 +304,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Sponsingen av følg
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponsingen av følgende sak har blitt trukket tilbake.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Et NOTAT har blitt lagt til saken.';
-$s_email_notification_title_for_action_relationship_added = "En ny RELASJON har blitt lagt til følgende sak.";
-$s_email_notification_title_for_action_relationship_deleted = "En RELASJON har blitt slettet fra følgende sak.";
-$s_email_notification_title_for_action_relationship_child_resolved = "En relatert sak har blitt LØST.";
-$s_email_notification_title_for_action_relationship_child_closed = "En relatert sak har blitt LUKKET.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
@@ -480,6 +488,9 @@ $s_bug_reminder = 'Send en påminnelse';
 $s_reminder_sent_to = 'Påminnelse sendt til';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Påminnelse';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Saken har blitt oppdatert ...';
@@ -1045,11 +1056,16 @@ $s_add_new_relationship_button = "Legg til";
 $s_this_bug = "Denne saken";
 $s_relationship_added = "Relasjon lagt til";
 $s_relationship_deleted = "Relasjon slettet";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Slett";
 $s_delete_relationship_sure_msg = "Er du sikker på at du vil slette denne relasjonen?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Ikke alle barna til denne saken er løst eller lukket ennå.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<strong>MERK</strong>. Ikke alle barna til denne saken er løst eller lukket ennå. Før <strong>løsning/lukking</strong> av foreldresak, alle barnesakene til denne bør løses eller lukkes.";
-$s_create_child_bug_button = "Lag barn";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Sak klonet";
 $s_bug_created_from = "Sak klonet fra";
 # Relationship Graphs

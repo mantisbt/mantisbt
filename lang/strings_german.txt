@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. J¸rgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.114 $
+	# $Revision: 1.115 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:36 $
+	# $Date: 2004-10-14 18:56:47 $
 	#
-	# $Id: strings_german.txt,v 1.114 2004-10-01 23:03:36 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.115 2004-10-14 18:56:47 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -188,6 +188,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Keine Verbindung zum FTP-Server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zur¸ck und w‰hlen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ung¸ltiger Projektname.  Projektnamen kˆnnen nicht leer sein.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Benutzer nicht gefunden.';
@@ -306,10 +307,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Die Sponsorenschaf
 $s_email_notification_title_for_action_sponsorship_deleted = 'Die Sponsorenschaft des folgenden Problems wurde zur¸ckgezogen.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Eine Notiz wurde zu diesem Problem hinzugef¸gt.';
-$s_email_notification_title_for_action_relationship_added = "Eine neue BEZIEHUNG wurde dem folgenden Problem hinzugef¸gt.";
-$s_email_notification_title_for_action_relationship_deleted = "Eine BEZIEHUNG des folgenden Problems wurde gelˆscht.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Ein VERWANDTES Problem wurde behoben.";
-$s_email_notification_title_for_action_relationship_child_closed = "Ein VERWANDTES Problem wurde geschlossen.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';
@@ -344,10 +353,10 @@ $s_username = 'Benutzername';
 $s_realname = 'Wirklicher Name';
 $s_email = 'E-Mail';
 $s_password = 'Passwort';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Best‰tige Passwort';
 $s_access_level = 'Zugangsberechtigung';
 $s_update_user_button = 'Benutzer aktualisieren';
-$s_update_user_button = 'Update User';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kontoeinstellungen';
@@ -482,6 +491,9 @@ $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an';
 $s_bug_send_button = 'Absenden';
 $s_reminder = 'Erinnerung';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Problemeintrag erfolgreich aktualisiert...';
@@ -1047,11 +1059,16 @@ $s_add_new_relationship_button = "Hinzuf¸gen";
 $s_this_bug = "Aktuelles Problem";
 $s_relationship_added = "Beziehung hinzugef¸gt";
 $s_relationship_deleted = "Beziehung gelˆscht";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Lˆschen";
 $s_delete_relationship_sure_msg = "Sind Sie sicher, dass Sie diese Beziehung lˆschen wollen?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schlieﬂen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.";
-$s_create_child_bug_button = "Nachkomme erstellen";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Problem dupliziert";
 $s_bug_created_from = "Problem angelegt von";
 # Relationship Graphs

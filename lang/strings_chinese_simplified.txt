@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:35 $
+	# $Date: 2004-10-14 18:56:46 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.54 2004-10-01 23:03:35 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.55 2004-10-14 18:56:46 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -320,10 +320,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = '这个 Issue 中新增加了一个注释。';
-$s_email_notification_title_for_action_relationship_added = "下列 Issue 添加了一个新的关联。";
-$s_email_notification_title_for_action_relationship_deleted = "下列 Issue 删除了一个关联。";
-$s_email_notification_title_for_action_relationship_child_resolved = "一个相关联的 Issue 已经解决。";
-$s_email_notification_title_for_action_relationship_child_closed = "一个相关联的 Issue 已经关闭。";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = "报告人";
 $s_email_handler = "处理人";
@@ -496,6 +504,9 @@ $s_bug_reminder = 'Issue 提醒';
 $s_reminder_sent_to = '发送提醒';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = "Issue 已经被成功更新...";
@@ -871,6 +882,7 @@ $s_signup_captcha_request = '请输入右边的字符串';
 $s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br/>通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br/>为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
 $s_signup_title = "注册";
 $s_signup_button = "注册";
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = "编辑站点设置";
@@ -1060,6 +1072,11 @@ $s_add_new_relationship_button = "添加";
 $s_this_bug = "当前 Issue";
 $s_relationship_added = "关联已添加";
 $s_relationship_deleted = "关联已删除";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "删除";
 $s_delete_relationship_sure_msg = "你确定要删除该关联吗？";
 $s_relationship_warning_blocking_bugs_not_resolved = "当前 Issue 的部分子项还没有解决或关闭。";

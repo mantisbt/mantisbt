@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:48 $
+	# $Date: 2004-10-14 18:57:10 $
 	#
-	# $Id: strings_spanish.txt,v 1.75 2004-10-01 23:03:48 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.76 2004-10-14 18:57:10 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -307,10 +307,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Se ha modificado u
 $s_email_notification_title_for_action_sponsorship_deleted = 'Se ha retirado un patrocinio del siguiente bug.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Se ha añadido una NOTA a este bug.';
-$s_email_notification_title_for_action_relationship_added = "Se ha añadido una nueva RELACIÓN al siguiente bug.";
-$s_email_notification_title_for_action_relationship_deleted = "Se ha borrado una RELACIÓN del siguiente bug.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Se ha RESUELTO un bug RELACIONADO.";
-$s_email_notification_title_for_action_relationship_child_closed = "Se ha CERRADO un bug RELACIONADO.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Informador';
 $s_email_handler = 'Encargado';
@@ -483,6 +491,9 @@ $s_bug_reminder = 'Enviar un recordatorio';
 $s_reminder_sent_to = 'Recordatorio enviado a';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Recordatorio';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'El bug ha sido exitosamente actualizado...';
@@ -1048,11 +1059,16 @@ $s_add_new_relationship_button = "Añadir";
 $s_this_bug = "Bug actual";
 $s_relationship_added = "Relación añadida";
 $s_relationship_deleted = "Relación borrada";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Borrar";
 $s_delete_relationship_sure_msg = "¿Seguro que desea borrar esta relación?";
 $s_relationship_warning_blocking_bugs_not_resolved = "No todos los hijos de este bug están resueltos o cerrados.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIÓN</b>. No todos los hijos de este bug están resueltos o cerrados.<br>Antes de <b>cerrar/resolver</b> un bug padre, todos sus bugs hijos deben estar resueltos o cerrados.";
-$s_create_child_bug_button = "Crear hijo";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Bug clonado";
 $s_bug_created_from = "Bug generado desde";
 # Relationship Graphs

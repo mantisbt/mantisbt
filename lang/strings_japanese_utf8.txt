@@ -10,11 +10,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:37 $
+	# $Date: 2004-10-14 18:56:48 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.10 2004-10-01 23:03:37 bigbadger Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.11 2004-10-14 18:56:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -305,10 +305,18 @@ $s_email_notification_title_for_action_sponsorship_updated = '下記改善要求
 $s_email_notification_title_for_action_sponsorship_deleted = '下記改善要求の後援は世間離れしています。';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
-$s_email_notification_title_for_action_relationship_added = "新しい関連は下記改善要求に加えられました。";
-$s_email_notification_title_for_action_relationship_deleted = "関連は下記改善要求から削除されました。";
-$s_email_notification_title_for_action_relationship_child_resolved = "関連改善要求は解決しました。";
-$s_email_notification_title_for_action_relationship_child_closed = "関連改善要求は閉じました。";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = '登録者';
 $s_email_handler = '担当者';
@@ -481,6 +489,9 @@ $s_bug_reminder = 'リマインダーを送る';
 $s_reminder_sent_to = 'リマインダーの送信';
 $s_bug_send_button = '送信';
 $s_reminder = '送信内容';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = '改善要求が正常に更新されました。';
@@ -1047,6 +1058,11 @@ $s_add_new_relationship_button = "追加";
 $s_this_bug = "現在の改善要求";
 $s_relationship_added = "関連を追加しました。";
 $s_relationship_deleted = "関連を削除しました。";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "削除";
 $s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
 $s_relationship_warning_blocking_bugs_not_resolved = "この改善要求のすべての子はまだ解決か閉じられているとは限りません。";

@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.20 $
+	# $Revision: 1.21 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-05 20:32:51 $
+	# $Date: 2004-10-14 18:56:47 $
 	#
-	# $Id: strings_finnish.txt,v 1.20 2004-10-05 20:32:51 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.21 2004-10-14 18:56:47 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -306,10 +306,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Seuraavan tapahtum
 $s_email_notification_title_for_action_sponsorship_deleted = 'Seuraavan tapahtuman sponsorointi on peruttu.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Tähän tapahtumaan on lisätty muistiinpano.';
-$s_email_notification_title_for_action_relationship_added = "Seuraavaan tapahtumaan on lisätty uusi relaatio.";
-$s_email_notification_title_for_action_relationship_deleted = "Relaatio on poistettu seuraavasta tapahtumasta.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Tapahtumaan liittyvä tapahtuma on ratkaistu.";
-$s_email_notification_title_for_action_relationship_child_closed = "Tapahtumaan liittyvä tapahtuma on suljettu.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
@@ -482,6 +490,9 @@ $s_bug_reminder = 'Lähetä muistutus';
 $s_reminder_sent_to = 'Muistutus lähetetty';
 $s_bug_send_button = 'Lähetä';
 $s_reminder = 'Muistutus';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Tapahtuma on onnistuneesti päivitetty...';
@@ -1048,11 +1059,16 @@ $s_add_new_relationship_button = "Lisää";
 $s_this_bug = "Nykyinen tapahtuma";
 $s_relationship_added = "Relaatio lisätty";
 $s_relationship_deleted = "Relaatio poistettu";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Poista";
 $s_delete_relationship_sure_msg = "Oletko varma, että haluat poistaa tämän relaation?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.";
-$s_create_child_bug_button = "Luo lapsitapahtuma";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Tapahtuma kloonattu";
 $s_bug_created_from = "Tapahtuma luotu tapahtumasta";
 # Relationship Graphs

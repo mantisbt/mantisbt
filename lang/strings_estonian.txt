@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:36 $
+	# $Date: 2004-10-14 18:56:47 $
 	#
-	# $Id: strings_estonian.txt,v 1.18 2004-10-01 23:03:36 bigbadger Exp $
+	# $Id: strings_estonian.txt,v 1.19 2004-10-14 18:56:47 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -304,10 +304,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Järgmise kande spo
 $s_email_notification_title_for_action_sponsorship_deleted = 'Järgmise kande sponsorlus on KUSTUTATUD.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele kandele.';
-$s_email_notification_title_for_action_relationship_added = "Uus SEOS on järgmisele kandele lisatud.";
-$s_email_notification_title_for_action_relationship_deleted = "Selle kande SEOS on kustutatud.";
-$s_email_notification_title_for_action_relationship_child_resolved = "SEOTUD kanne on LAHENDATUD.";
-$s_email_notification_title_for_action_relationship_child_closed = "SEOTUD kanne on SULETUD.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';
@@ -480,6 +488,9 @@ $s_bug_reminder = 'Saada meeldetuletus';
 $s_reminder_sent_to = 'Meeldetuletus saadetud';
 $s_bug_send_button = 'Saada';
 $s_reminder = 'Meeldetuletus';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Kanne on uuendatud...';
@@ -1045,6 +1056,11 @@ $s_add_new_relationship_button = "Lisa";
 $s_this_bug = "Jooksev kanne";
 $s_relationship_added = "seos lisatud";
 $s_relationship_deleted = "seos kustutatud";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Oled kindel, et soovid seda seost kustutada?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Mitte kõik selle kande lapsed pole lahendatud või suletud.";

@@ -9,11 +9,11 @@
 	# 추가 번역   torija@users.sourceforge.net
 	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:37 $
+	# $Date: 2004-10-14 18:56:48 $
 	#
-	# $Id: strings_korean.txt,v 1.75 2004-10-01 23:03:37 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.76 2004-10-14 18:56:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -76,7 +76,6 @@ $s_has_duplicate = "다음 이슈는 이 이슈와 동일함";
 $s_related_to = "다음 이슈와 관련됨";
 $s_dependant_on = "다음 이슈의 원인";
 $s_blocks = "다음 이슈때문에 발생";
-
 
 $s_new_bug = '새 이슈';
 $s_bugnote_added = '이슈노트 추가됨';
@@ -257,6 +256,7 @@ $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
 $s_myself = "나";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -304,10 +304,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = '이 이슈에 노트가 추가 되었습니다.';
-$s_email_notification_title_for_action_relationship_added = "다음 이슈에 [관계]가 추가 되었습니다.";
-$s_email_notification_title_for_action_relationship_deleted = "다음 이슈에서 [관계]가 삭제 되었습니다.";
-$s_email_notification_title_for_action_relationship_child_resolved = "관계된 이슈가 해결 되었습니다.";
-$s_email_notification_title_for_action_relationship_child_closed = "관계된 이슈가 폐쇄 되었습니다.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = '보고자';
 $s_email_handler = '조작자';
@@ -480,6 +488,9 @@ $s_bug_reminder = '알림 메일 보내기';
 $s_reminder_sent_to = '알림 메일이 다음 사람에게 발송 되었습니다 : ';
 $s_bug_send_button = '전송';
 $s_reminder = '요청자';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = '이슈정보가 갱신되었습니다....';
@@ -651,6 +662,7 @@ $s_categories = '분류';
 $s_add_category_button = '분류 추가';
 $s_versions = '버전';
 $s_add_version_button = '버전 추가';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = '편집';
 $s_actions = '실행';
 $s_version = '버전/빌드번호';
@@ -810,6 +822,7 @@ $s_add_user_title = '프로젝트에 사용자 추가';
 $s_add_user_button = '사용자 추가';
 $s_project_selection_title = '프로젝트 선택';
 $s_remove_link = '삭제';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
@@ -1044,11 +1057,16 @@ $s_add_new_relationship_button = "추가";
 $s_this_bug = "현재 이슈";
 $s_relationship_added = "관계 추가됨";
 $s_relationship_deleted = "관계 삭제됨";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "삭제";
 $s_delete_relationship_sure_msg = "이 관계를 삭제합니까?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "추가 정보 입력";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
 
