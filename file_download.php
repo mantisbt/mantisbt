@@ -11,7 +11,7 @@
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 	#check_access( DEVELOPER );
 
 	# we handle the case where the file is attached to a bug
@@ -19,11 +19,11 @@
 	switch ( $f_type ) {
 		case "bug":	$query = "SELECT *
 							FROM $g_mantis_bug_file_table
-							WHERE id='$f_id'";
+							WHERE id='$c_id'";
 					break;
 		case "doc":	$query = "SELECT *
 							FROM $g_mantis_project_file_table
-							WHERE id='$f_id'";
+							WHERE id='$c_id'";
 					break;
 	}
 	$result = db_query( $query );

@@ -21,19 +21,13 @@
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$f_user_id = get_current_user_field( "id" );
-	$f_id = (integer)$f_id;
-
-	# Clear Defaults
-	$query = "UPDATE $g_mantis_user_pref_table
-    		SET default_profile='0000000'
-    		WHERE user_id='$f_user_id'";
-    $result = db_query( $query );
+	$c_user_id = (integer)get_current_user_field( "id" );
+	$c_id = (integer)$f_id;
 
     # Set Defaults
 	$query = "UPDATE $g_mantis_user_pref_table
-    		SET default_profile='$f_id'
-    		WHERE user_id='$f_user_id'";
+    		SET default_profile='$c_id'
+    		WHERE user_id='$c_user_id'";
     $result = db_query( $query );
 
     $t_redirect_url = $g_account_profile_menu_page;

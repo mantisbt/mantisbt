@@ -16,9 +16,9 @@
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
 
-	$f_id = (integer)$f_id;
-	$f_resolution = (integer)$f_resolution;
-	$f_duplicate_id = (integer)$f_duplicate_id;
+	$c_id = (integer)$f_id;
+	$c_resolution = (integer)$f_resolution;
+	$c_duplicate_id = (integer)$f_duplicate_id;
 
 	$t_handler_id = get_current_user_field( "id" );
 
@@ -30,9 +30,9 @@
     $query = "UPDATE $g_mantis_bug_table
     		SET handler_id='$t_handler_id',
     			status='$t_res_val',
-    			resolution='$f_resolution',
-    			duplicate_id='$f_duplicate_id'
-    		WHERE id='$f_id'";
+    			resolution='$c_resolution',
+    			duplicate_id='$c_duplicate_id'
+    		WHERE id='$c_id'";
    	$result = db_query($query);
 
 	# get user information
@@ -41,13 +41,13 @@
 	$f_bugnote_text = trim( $f_bugnote_text );
 	# check for blank bugnote
 	if ( !empty( $f_bugnote_text ) ) {
-		$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+		$c_bugnote_text = string_prepare_textarea( $f_bugnote_text );
 		# insert bugnote text
 		$query = "INSERT
 				INTO $g_mantis_bugnote_text_table
 				( id, note )
 				VALUES
-				( null, '$f_bugnote_text' )";
+				( null, '$c_bugnote_text' )";
 		$result = db_query( $query );
 
 		# retrieve bugnote text id number
@@ -58,7 +58,7 @@
 				INTO $g_mantis_bugnote_table
 				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
 				VALUES
-				( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
 	}
 	# update bug last updated

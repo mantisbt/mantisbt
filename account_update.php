@@ -26,14 +26,14 @@
 	$result = 0;
 	if ( OFF == $f_protected ) {
 
-	$f_username = addslashes($f_username);
-	$f_email = addslashes($f_email);
-	$f_id = (integer)$f_id;
+	$c_username = addslashes($f_username);
+	$c_email = addslashes($f_email);
+	$c_id = (integer)$f_id;
 
 		# Update everything except password
 	    $query = "UPDATE $g_mantis_user_table
-	    		SET username='$f_username', email='$f_email'
-	    		WHERE id='$f_id'";
+	    		SET username='$c_username', email='$c_email'
+	    		WHERE id='$c_id'";
 		$result = db_query( $query );
 
 		# Update password if the two match and are not empty
@@ -41,7 +41,7 @@
 			$t_password = process_plain_password( $f_password );
 			$query = "UPDATE $g_mantis_user_table
 					SET password='$t_password'
-					WHERE id='$f_id'";
+					WHERE id='$c_id'";
 			$result = db_query( $query );
 		}
 	} # end if protected

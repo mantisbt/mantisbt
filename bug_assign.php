@@ -19,7 +19,7 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
     $t_ass_val = ASSIGNED;
 
@@ -27,7 +27,7 @@
     $t_handler_id = get_current_user_field( "id" );
     $query = "UPDATE $g_mantis_bug_table
             SET handler_id='$t_handler_id', status='$t_ass_val'
-			WHERE id='$f_id'";
+			WHERE id='$c_id'";
     $result = db_query($query);
 
 	# updated the last_updated date

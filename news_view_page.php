@@ -13,10 +13,10 @@
 <?php print_page_top2() ?>
 <?php
 	# Select the news posts
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 			FROM $g_mantis_news_table
-			WHERE (project_id='$g_project_cookie_val' OR project_id='0000000') AND id='$f_id'";
+			WHERE (project_id='$g_project_cookie_val' OR project_id='0000000') AND id='$c_id'";
 	$result = db_query( $query );
     $news_count = db_num_rows( $result );
 

@@ -70,7 +70,7 @@
 				$g_notify_developers_on_new,
 				$g_use_bcc, $g_use_phpMailer,
 				$g_mantis_bug_monitor_table;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		# setup the array of email entries
 		$send_arr = array();
@@ -219,7 +219,7 @@
 		$query = "SELECT DISTINCT m.user_id, u.email
 				FROM $g_mantis_bug_monitor_table m,
 					$g_mantis_user_table u
-				WHERE m.bug_id=$p_bug_id AND
+				WHERE m.bug_id=$c_bug_id AND
 						m.user_id=u.id";
 		$result = db_query( $query );
 		$monitor_user_count = db_num_rows( $result );
@@ -256,11 +256,11 @@
 			$s_new_account_greeting, $s_new_account_url,
 			$s_new_account_username, $s_new_account_password,
 			$s_new_account_message, $s_new_account_do_not_reply;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -282,11 +282,11 @@
 		global 	$g_mantis_user_table, $g_path,
 				$s_reset_request_msg, $s_account_name_msg,
 				$s_news_password_msg;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -373,12 +373,12 @@
 				$s_email_description,
 				$g_email_separator1,
 				$g_email_padding_length;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 				UNIX_TIMESTAMP(last_updated) as last_updated
 				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'
+				WHERE id='$c_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
@@ -451,13 +451,13 @@
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
 				$g_mantis_user_table, $g_complete_date_format,
 				$g_bugnote_order, $g_email_separator2;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$t_message = "";
 
 		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$p_bug_id'
+				WHERE bug_id='$c_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
 		$result = db_query( $query );
 		$bugnote_count = db_num_rows( $result );
@@ -623,10 +623,11 @@
 	# helper function
 	function get_bug_summary( $p_bug_id ) {
 		global $g_mantis_bug_table;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT summary
 				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
+				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}

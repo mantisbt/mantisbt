@@ -14,13 +14,13 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
   
-	$f_file_id = (integer)$f_file_id;
+	$c_file_id = (integer)$f_file_id;
 
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name
 		$query = "SELECT diskfile
 				FROM $g_mantis_bug_file_table
-				WHERE id='$f_file_id'";
+				WHERE id='$c_file_id'";
 		$result = db_query( $query );
 		$t_diskfile = db_result( $result );
 
@@ -30,7 +30,7 @@
 	}
 
 	$query = "DELETE FROM $g_mantis_bug_file_table
-			WHERE id='$f_file_id'";
+			WHERE id='$c_file_id'";
 	$result = db_query( $query );
 
 	# Determine which view page to redirect back to.

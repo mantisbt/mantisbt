@@ -9,11 +9,11 @@
 	# $f_id MUST be specified before the file is included
 ?>
 <?php
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
+    		WHERE id='$c_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );

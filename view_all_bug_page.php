@@ -32,31 +32,40 @@
 	if ( !isset( $f_page_number ) ) {
 		$f_page_number = 1;
 	}
-	$f_page_number = (integer)$f_page_number;
 
 	# Load preferences
-	$f_show_category 		= addslashes($t_setting_arr[1]);
-	$f_show_severity	 	= addslashes($t_setting_arr[2]);
-	$f_show_status 			= addslashes($t_setting_arr[3]);
-	$f_per_page 			= (integer)$t_setting_arr[4];
-	$f_highlight_changed 	= (integer)$t_setting_arr[5];
-	$f_hide_closed 			= addslashes($t_setting_arr[6]);
-	$f_user_id 				= addslashes($t_setting_arr[7]);
-	$f_assign_id 			= addslashes($t_setting_arr[8]);
-	$f_sort 				= addslashes($t_setting_arr[9]);
+	$f_show_category 		= $t_setting_arr[1];
+	$f_show_severity	 	= $t_setting_arr[2];
+	$f_show_status 			= $t_setting_arr[3];
+	$f_per_page 			= $t_setting_arr[4];
+	$f_highlight_changed 	= $t_setting_arr[5];
+	$f_hide_closed 			= $t_setting_arr[6];
+	$f_user_id 				= $t_setting_arr[7];
+	$f_assign_id 			= $t_setting_arr[8];
+	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
-	if ($f_dir != 'ASC' && $f_dir != 'DESC') $f_dir = 'ASC';
-	$f_start_month			= (integer)$t_setting_arr[11];
-	$f_start_day 			= (integer)$t_setting_arr[12];
-	$f_start_year 			= (integer)$t_setting_arr[13];
-	$f_end_month 			= (integer)$t_setting_arr[14];
-	$f_end_day				= (integer)$t_setting_arr[15];
-	$f_end_year				= (integer)$t_setting_arr[16];
+	$f_start_month			= $t_setting_arr[11];
+	$f_start_day 			= $t_setting_arr[12];
+	$f_start_year 			= $t_setting_arr[13];
+	$f_end_month 			= $t_setting_arr[14];
+	$f_end_day				= $t_setting_arr[15];
+	$f_end_year				= $t_setting_arr[16];
+	
+	# Clean input
+	$c_user_id				= (integer)$f_user_id;
+	$c_assign_id			= (integer)$f_assign_id;
+	$c_show_category		= addslashes($f_show_category);
+	$c_show_severity		= addslashes($f_show_severity);
+	$c_show_status			= addslashes($f_show_status);
+	$c_search				= addslashes($f_search);
+	$c_sort					= addslashes($f_sort);
+	$c_per_page				= (integer)$f_per_page;
+	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
-		$f_user_id = get_current_user_field( "id" );
+		$c_user_id = get_current_user_field( "id" );
 	}
 
 	# Build the query string based on the user's viewing criteria.
@@ -115,14 +124,14 @@
 		$t_where_clause .= " AND ($g_mantis_bug_table.view_state='$t_pub' OR ($g_mantis_bug_table.view_state='$t_prv' AND $g_mantis_bug_table.reporter_id='$t_user_id'))";
 	}
 
-	if ( $f_user_id != "any" ) {
-		$t_where_clause .= " AND $g_mantis_bug_table.reporter_id='$f_user_id'";
+	if ( $c_user_id != "any" ) {
+		$t_where_clause .= " AND $g_mantis_bug_table.reporter_id='$c_user_id'";
 	}
 
 	if ( "none" == $f_assign_id ) {
 		$t_where_clause .= " AND $g_mantis_bug_table.handler_id=0";
 	} else if ( $f_assign_id != "any" ) {
-		$t_where_clause .= " AND $g_mantis_bug_table.handler_id='$f_assign_id'";
+		$t_where_clause .= " AND $g_mantis_bug_table.handler_id='$c_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
@@ -131,25 +140,25 @@
 	}
 
 	if ( $f_show_category != "any" ) {
-		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.category='$f_show_category'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.category='$c_show_category'";
 	}
 	if ( $f_show_severity != "any" ) {
-		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.severity='$f_show_severity'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.severity='$c_show_severity'";
 	}
 	if ( $f_show_status != "any" ) {
-		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status='$f_show_status'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status='$c_show_status'";
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
 	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bug_text_table.description LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bug_text_table.steps_to_reproduce LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bug_text_table.additional_information LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
+		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
+							OR ($g_mantis_bug_text_table.description LIKE '%$c_search%')
+							OR ($g_mantis_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
+							OR ($g_mantis_bug_text_table.additional_information LIKE '%$c_search%')
+							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
+							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 
 		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
@@ -206,7 +215,7 @@
 	#     t_offset = 5
 	$t_offset = ( ( $f_page_number - 1 ) * $f_per_page );
 	if ( isset( $f_per_page ) ) {
-		$query = $query." LIMIT $t_offset, $f_per_page";
+		$query = $query." LIMIT $t_offset, $c_per_page";
 	}
 
 	# perform query

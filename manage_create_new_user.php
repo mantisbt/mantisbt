@@ -15,12 +15,12 @@
 	if ( empty( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-  $f_username = addslashes($f_username);
+	$c_username = addslashes($f_username);
 
 	# Check for duplicate username
 	$query = "SELECT username
 		FROM $g_mantis_user_table
-		WHERE username='$f_username'";
+		WHERE username='$c_username'";
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
     	PRINT "$f_username $s_duplicate_username<p>";
@@ -34,30 +34,30 @@
 	}
 
 	if ( !isset( $f_protected ) ) {
-		$f_protected = 0;
+		$c_protected = 0;
 	} else {
-		$f_protected = 1;
+		$c_protected = 1;
 	}
 
 	if ( !isset( $f_enabled ) ) {
-		$f_enabled = 0;
+		$c_enabled = 0;
 	} else {
-		$f_enabled = 1;
+		$c_enabled = 1;
 	}
 
 	# create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string();
 	$t_password = process_plain_password( $f_password );
-  $f_email = addslashes($f_email);
-  $f_access_level = (integer)$f_access_level;
+	$c_email = addslashes($f_email);
+	$c_access_level = (integer)$f_access_level;
 
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,
     		access_level, enabled, protected, cookie_string )
 			VALUES
-			( null, '$f_username', '$f_email', '$t_password', NOW(), NOW(),
-			'$f_access_level', '$f_enabled', '$f_protected', '$t_cookie_string')";
+			( null, '$c_username', '$c_email', '$t_password', NOW(), NOW(),
+			'$c_access_level', '$c_enabled', '$c_protected', '$t_cookie_string')";
     $result = db_query( $query );
 
    	# Use this for MS SQL: SELECT @@IDENTITY AS 'id'

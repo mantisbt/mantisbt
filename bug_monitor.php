@@ -13,11 +13,11 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
 	$query = "SELECT view_state
 				FROM $g_mantis_bug_table
-				WHERE id='$f_id'";
+				WHERE id='$c_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -36,7 +36,7 @@
 	# Make sure we aren't already monitoring this bug
  		$query = "SELECT *
  		   	FROM $g_mantis_bug_monitor_table
- 		   	WHERE bug_id='$f_id' AND user_id='$u_id'";
+ 		   	WHERE bug_id='$c_id' AND user_id='$u_id'";
  		$result = db_query( $query );
 		$t_num_rows = db_num_rows( $result );
 
@@ -46,7 +46,7 @@
 					INTO $g_mantis_bug_monitor_table
 					( user_id, bug_id )
 					VALUES
-					( '$u_id', '$f_id' )";
+					( '$u_id', '$c_id' )";
    			$result = db_query($query);
 		}
 
@@ -55,7 +55,7 @@
 		# Delete monitoring record
    	 $query = "DELETE
 				FROM $g_mantis_bug_monitor_table
-				WHERE user_id = '$u_id' AND bug_id = '$f_id'";
+				WHERE user_id = '$u_id' AND bug_id = '$c_id'";
    		$result = db_query($query);
 	}
 

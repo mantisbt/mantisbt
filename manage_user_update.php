@@ -12,35 +12,36 @@
 	check_access( ADMINISTRATOR );
 
 	if ( isset( $f_protected ) ) {
-		$f_protected = 1;
+		$c_protected = 1;
 	} else {
-		$f_protected = 0;
+		$c_protected = 0;
 	}
 
 	if ( isset( $f_enabled ) ) {
-		$f_enabled = 1;
+		$c_enabled = 1;
 	} else {
-		$f_enabled = 0;
+		$c_enabled = 0;
 	}
 
-	$f_username = addslashes($f_username);
-	$f_email = addslashes($f_email);
-	$f_protected = (integer)$f_protected;
+	$c_username 	= addslashes($f_username);
+	$c_email 		= addslashes($f_email);
+	$c_protected 	= (integer)$f_protected;
+	$c_access_level = (integer)$f_access_level;
 
 	# update action
 	# administrator is not allowed to change access level or enabled
 	# this is to prevent screwing your own account
 	if ( ON == $f_protected ) {
 	    $query = "UPDATE $g_mantis_user_table
-	    		SET username='$f_username', email='$f_email',
-	    			protected='$f_protected'
-	    		WHERE id='$f_id'";
+	    		SET username='$c_username', email='$c_email',
+	    			protected='$c_protected'
+	    		WHERE id='$c_id'";
 	} else {
 	    $query = "UPDATE $g_mantis_user_table
-	    		SET username='$f_username', email='$f_email',
-	    			access_level='$f_access_level', enabled='$f_enabled',
-	    			protected='$f_protected'
-	    		WHERE id='$f_id'";
+	    		SET username='$c_username', email='$c_email',
+	    			access_level='$c_access_level', enabled='$c_enabled',
+	    			protected='$c_protected'
+	    		WHERE id='$c_id'";
 	}
 
     $result = db_query( $query );

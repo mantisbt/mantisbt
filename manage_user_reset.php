@@ -9,6 +9,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
+	$c_id = (integer)$f_id;
 
 	# Either generate a random password and email it if emailing is enabled.
 	# Otherwise make a blank one.
@@ -23,7 +24,7 @@
 			$t_password2 = process_plain_password( $t_password );
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='$t_password2'
-		    		WHERE id='$f_id'";
+		    		WHERE id='$c_id'";
 		    $result = db_query( $query );
 
 			# Send notification email
@@ -41,7 +42,7 @@
 			# password is blank password
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='$t_password'
-		    		WHERE id='$f_id'";
+		    		WHERE id='$c_id'";
 		    $result = db_query( $query );
 		}
 	}

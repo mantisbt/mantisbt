@@ -77,31 +77,31 @@
 		$u_id = get_current_user_field( "id" );
 
 		# Make strings safe for database
-		$f_summary 				= string_prepare_text( $f_summary );
-		$f_description 			= string_prepare_textarea( $f_description );
-		$f_additional_info 		= string_prepare_textarea( $f_additional_info );
-		$f_steps_to_reproduce 	= string_prepare_textarea( $f_steps_to_reproduce );
+		$c_summary 				= string_prepare_text( $f_summary );
+		$c_description 			= string_prepare_textarea( $f_description );
+		$c_additional_info 		= string_prepare_textarea( $f_additional_info );
+		$c_steps_to_reproduce 	= string_prepare_textarea( $f_steps_to_reproduce );
 
-		$f_build 				= string_prepare_text( $f_build );
-		$f_platform 			= string_prepare_text( $f_platform );
-		$f_os 					= string_prepare_text( $f_os );
-		$f_os_build 			= string_prepare_text( $f_os_build );
+		$c_build 				= string_prepare_text( $f_build );
+		$c_platform 			= string_prepare_text( $f_platform );
+		$c_os 					= string_prepare_text( $f_os );
+		$c_os_build 			= string_prepare_text( $f_os_build );
 
 		# if a profile was selected then let's use that information
 		if ( !empty( $f_profile_id ) ) {
 			# Get profile data and prefix with v_
-			$f_profile_id = (integer)$f_profile_id;
+			$c_profile_id = (integer)$f_profile_id;
 			$query = "SELECT *
 				FROM $g_mantis_user_profile_table
-				WHERE id='$f_profile_id'";
+				WHERE id='$c_profile_id'";
 		    $result = db_query( $query );
 		    $profile_count = db_num_rows( $result );
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			$f_platform	= string_prepare_text( $v_platform );
-			$f_os		= string_prepare_text( $v_os );
-			$f_os_build	= string_prepare_text( $v_os_build );
+			$c_platform	= string_prepare_text( $v_platform );
+			$c_os		= string_prepare_text( $v_os );
+			$c_os_build	= string_prepare_text( $v_os_build );
 		}
 
 		# Insert text information
@@ -109,8 +109,8 @@
 				INTO $g_mantis_bug_text_table
 				( id, description, steps_to_reproduce, additional_information )
 				VALUES
-				( null, '$f_description', '$f_steps_to_reproduce',
-				'$f_additional_info' )";
+				( null, '$c_description', '$c_steps_to_reproduce',
+				'$c_additional_info' )";
 		$result = db_query( $query );
 
 		# Get the id of the text information we just inserted
@@ -119,11 +119,18 @@
 
 		$t_id = db_insert_id();
 
-		$f_assign_id = (integer)$f_assign_id;
-		$f_severity = (integer)$f_severity;
-		$f_reproducibility = (integer)$f_reproducibility;
-		$f_category = addslashes($f_category);
-		$f_view_state = (integer)$f_view_state;
+		if ( !isset( $f_priority ) ) {
+			$f_priority = NORMAL;
+		}
+
+		$c_assign_id 		= (integer)$f_assign_id;
+		$c_severity 		= (integer)$f_severity;
+		$c_reproducibility 	= (integer)$f_reproducibility;
+		$c_category 		= addslashes($f_category);
+		$c_view_state 		= (integer)$f_view_state;
+		$c_product_version 	= addslashes($f_product_version);
+		$c_profile_id		= (integer)$f_profile_id;
+		$c_priority 		= (integer)$f_priority;
 
 		# check to see if we want to assign this right off
 		$t_status = NEW_;
@@ -134,10 +141,6 @@
 		# Insert the rest of the data
 		$t_open = OPEN;
 
-		if ( !isset( $f_priority ) ) {
-			$f_priority = NORMAL;
-		}
-		$f_priority = (integer)$f_priority;
 		$query = "INSERT
 				INTO $g_mantis_bug_table
 				( id, project_id,
@@ -154,17 +157,17 @@
 				profile_id, summary, view_state )
 				VALUES
 				( null, '$g_project_cookie_val',
-				'$u_id', '$f_assign_id',
-				'0000000', '$f_priority',
-				'$f_severity', '$f_reproducibility',
+				'$u_id', '$c_assign_id',
+				'0000000', '$c_priority',
+				'$c_severity', '$c_reproducibility',
 				'$t_status', '$t_open',
 				10, '$f_category',
 				NOW(), NOW(),
 				10, '$t_id',
-				'$f_os', '$f_os_build',
-				'$f_platform', '$f_product_version',
-				'$f_build',	1,
-				'$f_profile_id', '$f_summary', '$f_view_state' )";
+				'$c_os', '$c_os_build',
+				'$c_platform', '$c_product_version',
+				'$c_build',	1,
+				'$c_profile_id', '$c_summary', '$c_view_state' )";
 		$result = db_query( $query );
 
 		$t_bug_id = db_insert_id();

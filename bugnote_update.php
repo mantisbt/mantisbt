@@ -16,11 +16,11 @@
 
 	$f_bugnote_text = $f_bugnote_text."\n\n";
 	$f_bugnote_text = $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
-	$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
-	$f_bugnote_text_id = (integer)$f_bugnote_text_id;
+	$c_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+	$c_bugnote_text_id = (integer)$f_bugnote_text_id;
     $query = "UPDATE $g_mantis_bugnote_text_table
-    		SET note='$f_bugnote_text'
-    		WHERE id='$f_bugnote_text_id'";
+    		SET note='$c_bugnote_text'
+    		WHERE id='$c_bugnote_text_id'";
    	$result = db_query( $query );
 
 	# updated the last_updated date

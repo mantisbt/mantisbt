@@ -178,10 +178,11 @@
 	# This function is only called from the login.php3 script
 	function increment_login_count( $p_id ) {
 		global $g_mantis_user_table;
+		$c_id = (integer)$p_id;
 
 		$query = "UPDATE $g_mantis_user_table
 				SET login_count=login_count+1
-				WHERE id='$p_id'";
+				WHERE id='$c_id'";
 		$result = db_query( $query );
 	}
 	# --------------------
@@ -243,10 +244,11 @@
 	# Check to see that the unique identifier is really unique
 	function check_cookie_string_duplicate( $p_cookie_string ) {
 		global $g_mantis_user_table;
+		$c_cookie_string = addslashes($p_cookie_string);
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_user_table
-				WHERE cookie_string='$p_cookie_string'";
+				WHERE cookie_string='$c_cookie_string'";
 		$result = db_query( $query );
 		$t_count = db_result( $result, 0, 0 );
 		if ( $t_count > 0 ) {
@@ -285,13 +287,13 @@
 		# create the almost unique string for each user then insert into the table
 		$t_cookie_string = create_cookie_string( $t_seed );
 		$t_password2 = process_plain_password( $t_password );
-		$p_username = addslashes($p_username);
-		$p_email = addslashes($p_email);
+		$c_username = addslashes($p_username);
+		$c_email = addslashes($p_email);
 		$query = "INSERT INTO $g_mantis_user_table
 				( id, username, email, password, date_created, last_visit,
 				enabled, protected, access_level, login_count, cookie_string )
 				VALUES
-				( null, '$p_username', '$p_email', '$t_password2', NOW(), NOW(),
+				( null, '$c_username', '$c_email', '$t_password2', NOW(), NOW(),
 				1, 0, $g_default_new_account_access_level, 0, '$t_cookie_string')";
 		$result = db_query( $query );
 
@@ -498,7 +500,7 @@
 	function get_project_access_level( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 		if ( 0 == $p_project_id ) {
@@ -508,7 +510,7 @@
 		} else {
 			$query = "SELECT access_level
 					FROM $g_mantis_project_user_list_table
-					WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+					WHERE user_id='$t_user_id' AND project_id='$c_project_id'";
 		}
 		$result = db_query( $query );
 		if ( db_num_rows( $result ) > 0 ) {
@@ -523,14 +525,13 @@
 	function get_effective_access_level( $p_user_id=0, $p_project_id=-1 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
-		$p_user_id = (integer)$p_user_id;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		# use the current user unless otherwise specified
 		if ( 0 == $p_user_id ) {
 			$t_user_id = get_current_user_field( "id" );
 		} else {
-			$t_user_id = $p_user_id;
+			$t_user_id = (integer)$p_user_id;
 		}
 
 		# all projects
@@ -546,7 +547,7 @@
 		} else {
 			$query = "SELECT access_level
 					FROM $g_mantis_project_user_list_table
-					WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+					WHERE user_id='$t_user_id' AND project_id='$c_project_id'";
 		}
 
 		$result = db_query( $query );
@@ -601,11 +602,11 @@
 	# return all data associated with a particular user id
 	function get_user_info_by_id_arr( $p_user_id ) {
 		global $g_mantis_user_table;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_table
-	    		WHERE id='$p_user_id'";
+	    		WHERE id='$c_user_id'";
 	    $result =  db_query( $query );
 	    return db_fetch_array( $result );
 	}
@@ -613,11 +614,11 @@
 	# return all data associated with a particular user name
 	function get_user_info_by_name_arr( $p_username ) {
 		global $g_mantis_user_table;
-		$p_username = addslashes($p_username);
+		$c_username = addslashes($p_username);
 
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_table
-	    		WHERE username='$p_username'";
+	    		WHERE username='$c_username'";
 	    $result =  db_query( $query );
 	    return db_fetch_array( $result );
 	}
@@ -625,11 +626,11 @@
 	# return the specified preference field for the user id
 	function get_user_pref_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_pref_table;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 	    $query = "SELECT $p_field
 	    		FROM $g_mantis_user_pref_table
-	    		WHERE user_id='$p_user_id'";
+	    		WHERE user_id='$c_user_id'";
 	    $result =  db_query( $query );
 	    if ( $result ) {
 	    	return db_result( $result, 0, 0 );
@@ -646,11 +647,11 @@
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
 		}
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 
 
 		$result =  db_query( $query );
@@ -661,12 +662,12 @@
 	# return whether user is monitoring bug for the user id and bug id
 	function check_bug_monitoring( $p_user_id, $p_bug_id ) {
 		global $g_mantis_bug_monitor_table;
-		$p_user_id = (integer)$p_user_id;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_user_id = (integer)$p_user_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT user_id
 				FROM $g_mantis_bug_monitor_table
-				WHERE user_id='$p_user_id' AND bug_id='$p_bug_id'";
+				WHERE user_id='$c_user_id' AND bug_id='$c_bug_id'";
 
 
 		$result =  db_query( $query );
@@ -682,11 +683,11 @@
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
 		}
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 
 
 		$result =  db_query( $query );
@@ -701,21 +702,22 @@
 	# Update the last_visited field to be NOW()
 	function login_update_last_visit( $p_string_cookie_val ) {
 		global $g_mantis_user_table;
+		$c_string_cookie_val = addslashes($p_string_cookie_val);
 
 		$query = "UPDATE $g_mantis_user_table
 				SET last_visit=NOW()
-				WHERE cookie_string='$p_string_cookie_val'";
+				WHERE cookie_string='$c_string_cookie_val'";
 		$result = db_query( $query );
 	}
 	# --------------------
 	function check_user_pref_exists( $p_project_id ) {
 		global $g_mantis_user_pref_table;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 	    $query = "SELECT COUNT(*)
 	    		FROM $g_mantis_user_pref_table
-	    		WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+	    		WHERE user_id='$t_user_id' AND project_id='$c_project_id'";
 	    $result = db_query($query);
 		$t_count =  db_result( $result, 0, 0 );
 		if ( $t_count > 0 ) {
@@ -727,7 +729,7 @@
 	# --------------------
 	function create_project_user_prefs( $p_project_id ) {
 		global $g_mantis_user_pref_table;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 	    $query = "INSERT
@@ -741,7 +743,7 @@
 	    		email_on_bugnote, email_on_status,
 	    		email_on_priority, language)
 	    		VALUES
-	    		(null, '$t_user_id', '$p_project_id',
+	    		(null, '$t_user_id', '$c_project_id',
 	    		'$g_default_advanced_report', '$g_default_advanced_view', '$g_default_advanced_update',
 	    		'$g_default_refresh_delay', '$g_default_redirect_delay',
 	    		'$g_default_email_on_new', '$g_default_email_on_assigned',

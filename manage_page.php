@@ -133,18 +133,19 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php # Manage Form BEGIN ?>
 <?php
 	# Get the user data in $f_sort order
-	$f_sort = addslashes($f_sort);
+	$c_sort = addslashes($f_sort);
+	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 	if ( 0 == $f_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
-				ORDER BY '$f_sort' $f_dir";
+				ORDER BY '$c_sort' $c_dir";
 	} else {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
 				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
-				ORDER BY '$f_sort' $f_dir";
+				ORDER BY '$c_sort' $c_dir";
 	}
 
     $result = db_query($query);

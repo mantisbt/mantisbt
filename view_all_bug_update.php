@@ -12,7 +12,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( UPDATER );
-	$f_project_id = (integer)$f_project_id;
+	$c_project_id = (integer)$f_project_id;
 
 	# We check to see if the variable exists to avoid warnings
 	$result = 1;
@@ -21,7 +21,7 @@
 		for ( $i=0; $i < $t_count; $i++ ) {
 			$t_new_id = $f_bug_arr[$i];
 			$query = "UPDATE $g_mantis_bug_table
-					SET project_id='$f_project_id'
+					SET project_id='$c_project_id'
 					WHERE id='$t_new_id'";
 			$result = db_query( $query );
 

@@ -15,19 +15,19 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 	check_bugnote_exists( $f_bugnote_id );
-	$f_bugnote_id = (integer)$f_bugnote_id;
+	$c_bugnote_id = (integer)$f_bugnote_id;
 
 	# grab the bugnote text id
 	$query = "SELECT bugnote_text_id
 			FROM $g_mantis_bugnote_table
-			WHERE id='$f_bugnote_id'";
+			WHERE id='$c_bugnote_id'";
 	$result = db_query( $query );
 	$t_bugnote_text_id = db_result( $result, 0, 0 );
 
 	# Remove the bugnote
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
-			WHERE id='$f_bugnote_id'";
+			WHERE id='$c_bugnote_id'";
 	$result = db_query( $query );
 
 	# Remove the bugnote text

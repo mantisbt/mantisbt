@@ -36,20 +36,20 @@
 	} else {
 		# required fields ok, proceeding
 		# " character poses problem when editting so let's just convert them
-		$f_platform		= string_prepare_text( $f_platform );
-		$f_os			= string_prepare_text( $f_os );
-		$f_os_build		= string_prepare_text( $f_os_build );
-		$f_description	= string_prepare_textarea( $f_description );
+		$c_platform		= string_prepare_text( $f_platform );
+		$c_os			= string_prepare_text( $f_os );
+		$c_os_build		= string_prepare_text( $f_os_build );
+		$c_description	= string_prepare_textarea( $f_description );
 
 		# get user id
-		$t_user_id = get_current_user_field( "id" );
+		$c_user_id = (integer)get_current_user_field( "id" );
 
 		# Add profile
 		$query = "INSERT
 				INTO $g_mantis_user_profile_table
 	    		( id, user_id, platform, os, os_build, description )
 				VALUES
-				( null, '$t_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description' )";
+				( null, '$c_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
 	    $result = db_query( $query );
 	}
 

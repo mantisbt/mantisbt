@@ -13,7 +13,7 @@
 	if ( !isset( $f_sort ) ) {
 		$f_sort = "name";
 	}
-	$f_sort = addslashes($f_sort);
+	$c_sort = addslashes($f_sort);
 
 	# basically we toggle between ASC and DESC if the user clicks the
 	# same sort order
@@ -128,9 +128,10 @@
 	</td>
 </tr>
 <?php
+	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 	$query = "SELECT *
 			FROM $g_mantis_project_table
-			ORDER BY '$f_sort' $f_dir";
+			ORDER BY '$c_sort' $c_dir";
 	$result = db_query( $query );
 	$project_count = db_num_rows( $result );
 	for ($i=0;$i<$project_count;$i++) {

@@ -79,7 +79,7 @@
 	# current project
 	function get_bug_count_by_date( $p_time_length=1 ) {
 		global $g_mantis_bug_table, $g_project_cookie_val;
-		$p_time_length = (integer)$p_time_length;
+		$c_time_length = (integer)$p_time_length;
 
 		#checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
@@ -87,7 +87,7 @@
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE TO_DAYS(NOW()) - TO_DAYS(date_submitted) <= '$p_time_length' AND $specific_where";
+				WHERE TO_DAYS(NOW()) - TO_DAYS(date_submitted) <= '$c_time_length' AND $specific_where";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}

@@ -27,12 +27,12 @@
 	} else {
 		print_header_redirect( $g_logout_page );
 	}
-	$f_bugnote_text_id = (integer)$f_bugnote_text_id;
+	$c_bugnote_text_id = (integer)$f_bugnote_text_id;
 
 	# grab the bugnote text
   	$query = "SELECT note
 			FROM $g_mantis_bugnote_text_table
-			WHERE id='$f_bugnote_text_id'";
+			WHERE id='$c_bugnote_text_id'";
 	$result = db_query( $query );
 	$f_bugnote_text = db_result( $result, 0, 0 );
 	$f_bugnote_text = string_edit_textarea( $f_bugnote_text );

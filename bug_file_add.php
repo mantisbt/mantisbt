@@ -14,8 +14,8 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 
-	$f_id = (integer)$f_id;
-	$f_file_type = addslashes($f_file_type);
+	$c_id = (integer)$f_id;
+	$c_file_type = addslashes($f_file_type);
 
 	$result = 0;
 	$good_upload = 0;
@@ -41,7 +41,7 @@
 							$query = "INSERT INTO $g_mantis_bug_file_table
 									(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
-									(null, $f_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
+									(null, $c_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '')";
 						} else {
 							print_mantis_error( ERROR_DUPLICATE_FILE );
 						}
@@ -51,7 +51,7 @@
 						$query = "INSERT INTO $g_mantis_bug_file_table
 								(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
-								(null, $f_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '$t_content')";
+								(null, $c_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '$t_content')";
 						break;
 		}
 		$result = db_query( $query );

@@ -11,12 +11,12 @@
 <?php
 	# grab the user id currently logged in
 	$t_user_id = get_current_user_field( "id " );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id'
+			WHERE bug_id='$c_id'
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
 	$num_notes = db_num_rows($result);

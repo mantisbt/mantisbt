@@ -15,7 +15,7 @@
 	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
 	$t_handler_id = get_current_user_field( "id " );
 
@@ -32,13 +32,13 @@
 	$f_bugnote_text = trim( $f_bugnote_text );
 	# check for blank bugnote
 	if ( !empty( $f_bugnote_text ) ) {
-		$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+		$c_bugnote_text = string_prepare_textarea( $f_bugnote_text );
 		# insert bugnote text
 		$query = "INSERT
 				INTO $g_mantis_bugnote_text_table
 				( id, note )
 				VALUES
-				( null, '$f_bugnote_text' )";
+				( null, '$c_bugnote_text' )";
 		$result = db_query( $query );
 
 		# retrieve bugnote text id number
@@ -49,7 +49,7 @@
 				INTO $g_mantis_bugnote_table
 				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
 				VALUES
-				( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
 	}
 

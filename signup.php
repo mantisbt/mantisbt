@@ -19,7 +19,7 @@
 	if ( empty( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-	$f_username = addslashes($f_username);
+	$c_username = addslashes($f_username);
 
 	# Check for a properly formatted email with valid MX record
 	$result = 0;
@@ -32,7 +32,7 @@
 	# Check for duplicate username
 	$query = "SELECT username
 		FROM $g_mantis_user_table
-		WHERE username='$f_username'";
+		WHERE username='$c_username'";
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
     	PRINT "$f_username $s_duplicate_username<p>";

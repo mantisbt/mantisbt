@@ -14,20 +14,23 @@
 	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
 	# set variable to be valid if necessary
 	if ( !isset( $f_duplicate_id ) ) {
 		$f_duplicate_id = "";
 	}
-	$f_duplicate_id = (integer)$f_duplicate_id;
 
 	# grab the bug_text_id
 	$query = "SELECT bug_text_id
 				FROM $g_mantis_bug_table
-				WHERE id='$f_id'";
+				WHERE id='$c_id'";
 	$result = db_query( $query );
 	$t_bug_text_id = db_result( $result, 0, 0 );
+	
+    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
+        $f_status = ASSIGNED;
+    }
 
 	# prevent warnings
 	if ( !isset( $f_os ) ) {
@@ -55,56 +58,52 @@
 		$f_resolution = get_bug_field( $f_id, "resolution" );
 	}
 	if ( !isset( $f_steps_to_reproduce ) ) {
-		$f_steps_to_reproduce = get_bug_text_field( $f_id, "steps_to_reproduce" );
+		$c_steps_to_reproduce = get_bug_text_field( $f_id, "steps_to_reproduce" );
 	} else {
-		$f_steps_to_reproduce = string_prepare_textarea( $f_steps_to_reproduce );
+		$c_steps_to_reproduce = string_prepare_textarea( $f_steps_to_reproduce );
 	}
 
 	# prepare strings
-	$f_os 						= string_prepare_text( $f_os );
-	$f_os_build 				= string_prepare_text( $f_os_build );
-	$f_platform					= string_prepare_text( $f_platform );
-	$f_version 					= string_prepare_text( $f_version );
-	$f_build 					= string_prepare_text( $f_build );
-	$f_summary					= string_prepare_text( $f_summary );
-	$f_description 				= string_prepare_textarea( $f_description );
-	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
+	$c_os 						= string_prepare_text( $f_os );
+	$c_os_build 				= string_prepare_text( $f_os_build );
+	$c_platform					= string_prepare_text( $f_platform );
+	$c_version 					= string_prepare_text( $f_version );
+	$c_build 					= string_prepare_text( $f_build );
+	$c_summary					= string_prepare_text( $f_summary );
+	$c_description 				= string_prepare_textarea( $f_description );
+	$c_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-	$f_status = (integer)$f_status;
-	$f_category = addslashes($f_category);
-	$f_severity = (integer)$f_severity;
-	$f_resolution = (integer)$f_resolution;
-	$f_projection = (integer)$f_projection;
-	$f_eta = (integer)$f_eta;
-	$f_priority = (integer)$f_priority;
-	$f_reproducibility = (integer)$f_reproducibility;
-	$f_status = (integer)$f_status;
-	$f_duplicate_id = (integer)$f_duplicate_id;
-	$f_handler_id = (integer)$f_handler_id;
-	$f_view_state = (integer)$f_view_state;
-
-    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
-        $f_status = ASSIGNED;
-    }
+	$c_status = (integer)$f_status;
+	$c_category = addslashes($f_category);
+	$c_severity = (integer)$f_severity;
+	$c_resolution = (integer)$f_resolution;
+	$c_projection = (integer)$f_projection;
+	$c_eta = (integer)$f_eta;
+	$c_priority = (integer)$f_priority;
+	$c_reproducibility = (integer)$f_reproducibility;
+	$c_status = (integer)$f_status;
+	$c_duplicate_id = (integer)$f_duplicate_id;
+	$c_handler_id = (integer)$f_handler_id;
+	$c_view_state = (integer)$f_view_state;
 
 	# Update all fields
     $query = "UPDATE $g_mantis_bug_table
-    		SET category='$f_category', severity='$f_severity',
-    			reproducibility='$f_reproducibility',
-				priority='$f_priority', status='$f_status',
-				projection='$f_projection', duplicate_id='$f_duplicate_id',
-				resolution='$f_resolution', handler_id='$f_handler_id',
-				eta='$f_eta', summary='$f_summary',
-				os='$f_os', os_build='$f_os_build',
-				platform='$f_platform', build='$f_build',
-				version='$f_version', view_state='$f_view_state'
-    		WHERE id='$f_id'";
+    		SET category='$c_category', severity='$c_severity',
+    			reproducibility='$c_reproducibility',
+				priority='$c_priority', status='$c_status',
+				projection='$c_projection', duplicate_id='$c_duplicate_id',
+				resolution='$c_resolution', handler_id='$c_handler_id',
+				eta='$c_eta', summary='$c_summary',
+				os='$c_os', os_build='$c_os_build',
+				platform='$c_platform', build='$c_build',
+				version='$c_version', view_state='$c_view_state'
+    		WHERE id='$c_id'";
    	$result = db_query($query);
 
     $query = "UPDATE $g_mantis_bug_text_table
-    		SET description='$f_description',
-				steps_to_reproduce='$f_steps_to_reproduce',
-				additional_information='$f_additional_information'
+    		SET description='$c_description',
+				steps_to_reproduce='$c_steps_to_reproduce',
+				additional_information='$c_additional_information'
     		WHERE id='$t_bug_text_id'";
    	$result = db_query($query);
 

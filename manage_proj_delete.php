@@ -9,13 +9,13 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-	$f_project_id = (integer)$f_project_id;
+	$c_project_id = (integer)$f_project_id;
 
 	# Delete the bugs, bug text, bugnotes, and bugnote text
 	# first select the bug ids
 	$query = "SELECT id, bug_text_id
 			FROM $g_mantis_bug_table
-    		WHERE project_id='$f_project_id'";
+    		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
     $bug_count = db_num_rows( $result );
 
@@ -59,25 +59,25 @@
 	# now finally remove all bugs that are part of the project
 	$query = "DELETE
 			FROM $g_mantis_bug_table
-    		WHERE project_id='$f_project_id'";
+    		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
 
 	# Delete the project entry
 	$query = "DELETE
 			FROM $g_mantis_project_table
-    		WHERE id='$f_project_id'";
+    		WHERE id='$c_project_id'";
     $result = db_query( $query );
 
 	# Delete the project categories
 	$query = "DELETE
 			FROM $g_mantis_project_category_table
-    		WHERE project_id='$f_project_id'";
+    		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
 
 	# Delete the project versions
 	$query = "DELETE
 			FROM $g_mantis_project_version_table
-    		WHERE project_id='$f_project_id'";
+    		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
 
     $t_redirect_url = $g_manage_project_menu_page;

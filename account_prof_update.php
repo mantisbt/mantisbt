@@ -21,20 +21,20 @@
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$f_user_id = get_current_user_field( "id" );
-	$f_id = (integer)$f_id;
+	$c_user_id = (integer)get_current_user_field( "id" );
+	$c_id = (integer)$f_id;
 
 	# " character poses problem when editting so let's just convert them
-	$f_platform		= string_prepare_text( $f_platform );
-	$f_os			= string_prepare_text( $f_os );
-	$f_os_build		= string_prepare_text( $f_os_build );
-	$f_description	= string_prepare_textarea( $f_description );
+	$c_platform		= string_prepare_text( $f_platform );
+	$c_os			= string_prepare_text( $f_os );
+	$c_os_build		= string_prepare_text( $f_os_build );
+	$c_description	= string_prepare_textarea( $f_description );
 
 	# Add item
 	$query = "UPDATE $g_mantis_user_profile_table
-    		SET platform='$f_platform', os='$f_os',
-    			os_build='$f_os_build', description='$f_description'
-    		WHERE id='$f_id' AND user_id='$f_user_id'";
+    		SET platform='$c_platform', os='$c_os',
+    			os_build='$c_os_build', description='$c_description'
+    		WHERE id='$c_id' AND user_id='$c_user_id'";
     $result = db_query( $query );
 
     $t_redirect_url = $g_account_profile_menu_page;

@@ -9,9 +9,9 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-	$f_version 		= addslashes( urldecode( $f_version ) );
-	$f_orig_version = addslashes ( urldecode( $f_orig_version ) );
-	$f_date_order   = addslashes ( urldecode( $f_date_order ) );
+	$f_version 		= urldecode( $f_version );
+	$f_orig_version = urldecode( $f_orig_version );
+	$f_date_order   = urldecode( $f_date_order );
 
 	$result = 0;
 	$query = "";
@@ -21,6 +21,9 @@
 		if ( !$result ) {
 			break;
 		}
+
+		$c_version = addslashes($f_version);
+		$c_orig_version = addslashes($f_orig_version);
 
 		$query2 = "UPDATE $g_mantis_bug_table
 				SET version='$f_version'

@@ -32,7 +32,7 @@
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
-	$f_offset = (integer)$f_offset;
+	$c_offset = (integer)$f_offset;
 
 	# get news count (project plus sitewide posts)
     $total_news_count = news_count_query( $g_project_cookie_val );
@@ -44,7 +44,7 @@
 					FROM $g_mantis_news_table
 					WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
 					ORDER BY id DESC
-					LIMIT $f_offset, $g_news_view_limit";
+					LIMIT $c_offset, $g_news_view_limit";
 			break;
 		case 1 :
 			# Select the news posts

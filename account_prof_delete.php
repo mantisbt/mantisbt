@@ -21,13 +21,13 @@
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$f_user_id = get_current_user_field( "id" );
-	$f_id = (integer)$f_id;
+	$c_user_id = (integer)get_current_user_field( "id" );
+	$c_id = (integer)$f_id;
 
 	# Delete the profile
 	$query = "DELETE
 			FROM $g_mantis_user_profile_table
-    		WHERE id='$f_id' AND user_id='$f_user_id'";
+    		WHERE id='$c_id' AND user_id='$c_user_id'";
     $result = db_query( $query );
 
     $t_redirect_url = $g_account_profile_menu_page;

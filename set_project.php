@@ -11,7 +11,7 @@
 
 	$valid_project = 1;
 	# Check for invalid project_id selection
-	$f_project_id = (integer)$f_project_id;
+	$c_project_id = (integer)$f_project_id;
 	if ( empty( $f_project_id ) ) {
 		$valid_project = 0;
 	}
@@ -24,7 +24,7 @@
 	if ( isset( $f_make_default ) ) {
 		$t_user_id = get_current_user_field( "id" );
 		$query = "UPDATE $g_mantis_user_pref_table
-				SET default_project='$f_project_id'
+				SET default_project='$c_project_id'
 				WHERE user_id='$t_user_id'";
 		$result = db_query( $query );
 	}

@@ -10,11 +10,11 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	$f_name 		= string_prepare_textarea( $f_name );
-	$f_description 	= string_prepare_textarea( $f_description );
-	$f_view_state = (integer)$f_view_state;
-	$f_file_path = addslashes($f_file_path);
-	$f_status = (integer)$f_status;
+	$c_name 		= string_prepare_textarea( $f_name );
+	$c_description 	= string_prepare_textarea( $f_description );
+	$c_view_state	= (integer)$f_view_state;
+	$c_file_path	= addslashes($f_file_path);
+	$c_status		= (integer)$f_status;
 
 	$result = 0;
 	$duplicate = is_duplicate_project( $f_name );
@@ -24,7 +24,7 @@
 				INTO $g_mantis_project_table
 				( id, name, status, enabled, view_state, file_path, description )
 				VALUES
-				( null, '$f_name', '$f_status', '1', '$f_view_state', '$f_file_path', '$f_description' )";
+				( null, '$c_name', '$c_status', '1', '$c_view_state', '$c_file_path', '$c_description' )";
 	    $result = db_query( $query );
 	}
 

@@ -14,22 +14,22 @@
 	# updates the last_updated field
 	function bug_date_update( $p_bug_id ) {
 		global $g_mantis_bug_table;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "UPDATE $g_mantis_bug_table
 				SET last_updated=NOW()
-				WHERE id='$p_bug_id'";
+				WHERE id='$c_bug_id'";
 		return db_query( $query );
 	}
 	# --------------------
 	# updates the last_modified field
 	function bugnote_date_update( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table;
-		$p_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "UPDATE $g_mantis_bugnote_table
 				SET last_modified=NOW()
-				WHERE id='$p_bugnote_id'";
+				WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
 	}
 	# --------------------
@@ -37,12 +37,12 @@
 	function get_bug_field( $p_bug_id, $p_field_name ) {
 		global 	$g_string_cookie_val,
 				$g_mantis_bug_table;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		# get info
 		$query = "SELECT $p_field_name
 				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
+				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
@@ -76,11 +76,11 @@
 	# otherwise let execution continue undisturbed
 	function check_bug_exists( $p_bug_id ) {
 		global $g_mantis_bug_table, $g_main_page;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
+				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
 			print_header_redirect( $g_main_page );
@@ -92,11 +92,11 @@
 	# otherwise let execution continue undisturbed
 	function check_bugnote_exists( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table, $g_main_page;
-		$p_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "SELECT *
 				FROM $g_mantis_bugnote_table
-				WHERE id='$p_bugnote_id'";
+				WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
 			print_header_redirect( $g_main_page );
@@ -108,11 +108,11 @@
 	# otherwise let execution continue undisturbed
 	function check_user_exists( $p_user_id ) {
 		global $g_mantis_user_table, $g_main_page;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT *
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
 			print_header_redirect( $g_main_page );
@@ -124,11 +124,11 @@
 	# otherwise let execution continue undisturbed
 	function check_project_exists( $p_project_id ) {
 		global $g_mantis_project_table, $g_main_page;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_table
-				WHERE id='$p_project_id'";
+				WHERE id='$c_project_id'";
 		$result = db_query( $query );
 		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( $g_main_page );
@@ -155,17 +155,17 @@
 	# retrieve the number of open assigned bugs to a user in a project
 	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
 		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-		$p_project_id = (integer)$p_project_id;
-		$p_cookie_str = addslashes($p_cookie_str);
+		$c_project_id = (integer)$p_project_id;
+		$c_cookie_str = addslashes($p_cookie_str);
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
-				WHERE cookie_string='$p_cookie_str'";
+				WHERE cookie_string='$c_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
 		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
-		else $t_where_prj = "project_id='$p_project_id'";
+		else $t_where_prj = "project_id='$c_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
@@ -180,17 +180,17 @@
 	# retrieve the number of open reported bugs by a user in a project
 	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
 		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-		$p_project_id = (integer)$p_project_id;
-		$p_cookie_str = addslashes($p_cookie_str);
+		$c_project_id = (integer)$p_project_id;
+		$c_cookie_str = addslashes($p_cookie_str);
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
-				WHERE cookie_string='$p_cookie_str'";
+				WHERE cookie_string='$c_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
 		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
-		else $t_where_prj = "project_id='$p_project_id'";
+		else $t_where_prj = "project_id='$c_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
@@ -311,11 +311,11 @@
 	# Get the default project of a user
 	function get_default_project( $p_user_id ) {
 		global $g_mantis_user_pref_table;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT default_project
 				FROM $g_mantis_user_pref_table
-				WHERE user_id='$p_user_id'";
+				WHERE user_id='$c_user_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}
@@ -366,10 +366,11 @@
 	# Returns the number of bugntoes for the given bug_id
 	function get_bugnote_count( $p_id ) {
 		global $g_mantis_bugnote_table;
+		$c_id = (integer)$p_id;
 
 		$query = "SELECT COUNT(*)
 					FROM $g_mantis_bugnote_table
-					WHERE bug_id ='$p_id'";
+					WHERE bug_id ='$c_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
@@ -377,11 +378,11 @@
 	# Returns the number of bugntoes for the given bug_id
 	function get_bugnote_field( $p_bugnote_id, $p_field_name ) {
 		global $g_mantis_bugnote_table;
-		$p_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "SELECT $p_field_name
 					FROM $g_mantis_bugnote_table
-					WHERE id ='$p_bugnote_id'";
+					WHERE id ='$c_bugnote_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
@@ -400,11 +401,11 @@
 	# Returns the specified field of the project
 	function get_project_field( $p_project_id, $p_field_name ) {
 		global $g_mantis_project_table;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT $p_field_name
 				FROM $g_mantis_project_table
-				WHERE id='$p_project_id'";
+				WHERE id='$c_project_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}

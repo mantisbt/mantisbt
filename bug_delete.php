@@ -15,25 +15,25 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
-	$f_bug_text_id = (integer)$f_bug_text_id;
+	$c_id = (integer)$f_id;
+	$c_bug_text_id = (integer)$f_bug_text_id;
 
 	# Delete the bug entry
 	$query = "DELETE
 			FROM $g_mantis_bug_table
-			WHERE id='$f_id'";
+			WHERE id='$c_id'";
 	$result = db_query($query);
 
 	# Delete the corresponding bug text
 	$query = "DELETE
 			FROM $g_mantis_bug_text_table
-			WHERE id='$f_bug_text_id'";
+			WHERE id='$c_bug_text_id'";
 	$result = db_query($query);
 
 	# Delete the bugnote text items
 	$query = "SELECT bugnote_text_id
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id'";
+			WHERE bug_id='$c_id'";
 	$result = db_query($query);
 	$bugnote_count = db_num_rows( $result );
 	for ($i=0;$i<$bugnote_count;$i++){
@@ -50,14 +50,14 @@
 	# Delete the corresponding bugnotes
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id'";
+			WHERE bug_id='$c_id'";
 	$result = db_query($query);
 
 	if ( DISK == $g_file_upload_method ) {
 		# Delete files from disk
 		$query = "SELECT diskfile
 			FROM $g_mantis_bug_file_table
-			WHERE bug_id='$f_id'";
+			WHERE bug_id='$c_id'";
 		$result = db_query($query);
 		$file_count = db_num_rows( $result );
 
@@ -76,7 +76,7 @@
 	# Delete the corresponding files
 	$query = "DELETE
 		FROM $g_mantis_bug_file_table
-		WHERE bug_id='$f_id'";
+		WHERE bug_id='$c_id'";
 	$result = db_query($query);
 
 	$t_redirect_url = $g_view_all_bug_page;

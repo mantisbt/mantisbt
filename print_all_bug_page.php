@@ -27,26 +27,36 @@
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
-	$f_offset = (integer)$f_offset;
 
 	# Load preferences
-	$f_show_category 		= addslashes($t_setting_arr[1]);
-	$f_show_severity	 	= addslashes($t_setting_arr[2]);
-	$f_show_status 			= addslashes($t_setting_arr[3]);
-	$f_per_page 			= (integer)$t_setting_arr[4];
-	$f_highlight_changed 	= (integer)$t_setting_arr[5];
-	$f_hide_closed 			= addslashes($t_setting_arr[6]);
-	$f_user_id 				= addslashes($t_setting_arr[7]);
-	$f_assign_id 			= addslashes($t_setting_arr[8]);
-	$f_sort 				= addslashes($t_setting_arr[9]);
+	$f_show_category 		= $t_setting_arr[1];
+	$f_show_severity	 	= $t_setting_arr[2];
+	$f_show_status 			= $t_setting_arr[3];
+	$f_per_page 			= $t_setting_arr[4];
+	$f_highlight_changed 	= $t_setting_arr[5];
+	$f_hide_closed 			= $t_setting_arr[6];
+	$f_user_id 				= $t_setting_arr[7];
+	$f_assign_id 			= $t_setting_arr[8];
+	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
-	if ($f_dir != 'ASC' && $f_dir != 'DESC') $f_dir = 'ASC';
-	$f_start_month			= (integer)$t_setting_arr[11];
-	$f_start_day 			= (integer)$t_setting_arr[12];
-	$f_start_year 			= (integer)$t_setting_arr[13];
-	$f_end_month 			= (integer)$t_setting_arr[14];
-	$f_end_day				= (integer)$t_setting_arr[15];
-	$f_end_year				= (integer)$t_setting_arr[16];
+	$f_start_month			= $t_setting_arr[11];
+	$f_start_day 			= $t_setting_arr[12];
+	$f_start_year 			= $t_setting_arr[13];
+	$f_end_month 			= $t_setting_arr[14];
+	$f_end_day				= $t_setting_arr[15];
+	$f_end_year				= $t_setting_arr[16];
+	
+	# Clean input
+	$c_offset 				= (integer)$f_offset;
+	$c_user_id				= (integer)$f_user_id;
+	$c_assign_id			= (integer)$f_assign_id;
+	$c_show_category		= addslashes($f_show_category);
+	$c_show_severity		= addslashes($f_show_severity);
+	$c_show_status			= addslashes($f_show_status);
+	$c_search				= addslashes($f_search);
+	$c_sort					= addslashes($f_sort);
+	$c_limit_view			= (integer)$f_limit_view;
+	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 
 	# Build our query string based on our viewing criteria
 
@@ -93,13 +103,13 @@
 	# end project selection
 
 	if ( $f_user_id != "any" ) {
-		$t_where_clause .= " AND reporter_id='$f_user_id'";
+		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 
 	if ( "none" == $f_assign_id ) {
 		$t_where_clause .= " AND handler_id=0";
 	} else if ( $f_assign_id != "any" ) {
-		$t_where_clause .= " AND handler_id='$f_assign_id'";
+		$t_where_clause .= " AND handler_id='$c_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
@@ -108,25 +118,25 @@
 	}
 
 	if ( $f_show_category != "any" ) {
-		$t_where_clause = $t_where_clause." AND category='$f_show_category'";
+		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
 	}
 	if ( $f_show_severity != "any" ) {
-		$t_where_clause = $t_where_clause." AND severity='$f_show_severity'";
+		$t_where_clause = $t_where_clause." AND severity='$c_show_severity'";
 	}
 	if ( $f_show_status != "any" ) {
-		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
+		$t_where_clause = $t_where_clause." AND status='$c_show_status'";
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
 	if ($f_search) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
-							OR (description LIKE '%".addslashes($f_search)."%')
-							OR (steps_to_reproduce LIKE '%".addslashes($f_search)."%')
-							OR (additional_information LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')
-							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
+		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
+							OR (description LIKE '%$c_search%')
+							OR (steps_to_reproduce LIKE '%$c_search%')
+							OR (additional_information LIKE '%$c_search%')
+							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
+							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 
 		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
@@ -137,20 +147,20 @@
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
-	if ( !isset( $f_sort ) ) {
-		$f_sort="last_updated";
+	if ( empty($c_sort) ) {
+		$c_sort="last_updated";
 	}
 	$query  = "SELECT DISTINCT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
 	$query .= $t_from_clause;
 	$query .= $t_where_clause;
 
-	$query = $query." ORDER BY '$f_sort' $f_dir";
+	$query = $query." ORDER BY '$c_sort' $c_dir";
 	if ( $f_sort != "priority" ) {
 		$query = $query.", priority DESC";
 	}
 
 	if ( isset( $f_limit_view ) ) {
-		$query = $query." LIMIT $f_offset, $f_limit_view";
+		$query = $query." LIMIT $c_offset, $c_limit_view";
 	}
 
 	# perform query

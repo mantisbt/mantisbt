@@ -32,7 +32,7 @@
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		# invalid user
 		if ( "0000000" == $p_user_id ) {
@@ -40,7 +40,7 @@
 		}
 	    $query = "SELECT username, email
 	    		FROM $g_mantis_user_table
-	    		WHERE id='$p_user_id'";
+	    		WHERE id='$c_user_id'";
 	    $result = db_query( $query );
 	    if ( db_num_rows( $result ) > 0 ) {
 			$t_username	= db_result( $result, 0, 0 );
@@ -55,15 +55,14 @@
 	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-		$p_user_id = (integer)$p_user_id;
-		$p_bug_id = (integer)$p_bug_id;
+		$c_user_id = (integer)$p_user_id;
 
 		if ( "0000000" == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
 	    		FROM $g_mantis_user_table
-	    		WHERE id='$p_user_id'";
+	    		WHERE id='$c_user_id'";
 	    $result = db_query( $query );
 	    if ( db_num_rows( $result ) > 0 ) {
 			$t_username	= db_result( $result, 0, 0 );
@@ -78,14 +77,14 @@
 	# returns username if account
 	function get_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		if ( "0000000" == $p_user_id ) {
 			return "";
 		}
 		$query = "SELECT username
 				FROM $g_mantis_user_table
-				WHERE id='$p_user_id'";
+				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		if ( db_num_rows( $result )>0 ) {
 			return db_result( $result, 0, 0 );
@@ -128,7 +127,6 @@
 	function print_reporter_option_list( $p_user_id ) {
 		global	$g_mantis_user_table, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_project_cookie_val;
-		$p_user_id = (integer)$p_user_id;
 
 		$t_adm = ADMINISTRATOR;
 		$t_rep = REPORTER;
@@ -438,18 +436,18 @@
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_id, $p_select_id="" ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
-		$p_user_id = (integer)$p_user_id;
+		$c_id = (integer)$p_id;
 
 		$query = "SELECT default_profile
 			FROM $g_mantis_user_pref_table
-			WHERE user_id='$p_id'";
+			WHERE user_id='$c_id'";
 	    $result = db_query( $query );
 	    $v_default_profile = db_result( $result, 0, 0 );
 
 		# Get profiles
 		$query = "SELECT id, platform, os, os_build
 			FROM $g_mantis_user_profile_table
-			WHERE user_id='$p_id'
+			WHERE user_id='$c_id'
 			ORDER BY id";
 	    $result = db_query( $query );
 	    $profile_count = db_num_rows( $result );
@@ -699,16 +697,17 @@
 	function print_project_user_list_option_list( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_user_table,
 				$g_project_cookie_val;
-		$p_project_id = (integer)$p_project_id;
 
 		if ( 0 == $p_project_id ) {
 			$p_project_id = $g_project_cookie_val;
 		}
+		$c_project_id = (integer)$p_project_id;
+		
 		$t_adm = ADMINISTRATOR;
 		$query = "SELECT DISTINCT u.id, u.username
 				FROM $g_mantis_user_table u
 				LEFT JOIN $g_mantis_project_user_list_table p
-				ON p.user_id=u.id AND p.project_id='$p_project_id'
+				ON p.user_id=u.id AND p.project_id='$c_project_id'
 				WHERE u.access_level<$t_adm AND
 					p.user_id IS NULL AND
 					u.access_level<'$t_adm'
@@ -726,13 +725,13 @@
 	# list of projects that a user is NOT in
 	function print_project_user_list_option_list2( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$t_prv = PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
 				FROM $g_mantis_project_table p
 				LEFT JOIN $g_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id='$p_user_id'
+				ON p.id=u.project_id AND u.user_id='$c_user_id'
 				WHERE p.enabled=1 AND
 					p.view_state='$t_prv' AND
 					u.user_id IS NULL
@@ -751,14 +750,14 @@
 	function print_project_user_list( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table,
 				$s_remove_link, $g_manage_user_proj_delete;
-		$p_user_id = (integer)$p_user_id;
+		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM $g_mantis_project_table p
 				LEFT JOIN $g_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled=1 AND
-					u.user_id='$p_user_id'
+					u.user_id='$c_user_id'
 				ORDER BY p.name";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -882,11 +881,11 @@
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
 		global $g_mantis_project_category_table, $g_mantis_project_table;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$p_project_id'
+				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -908,11 +907,11 @@
 	# --------------------
 	function print_project_version_string( $p_project_id ) {
 		global $g_mantis_project_version_table, $g_mantis_project_table;
-		$p_project_id = (integer)$p_project_id;
+		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT version
 				FROM $g_mantis_project_version_table
-				WHERE project_id='$p_project_id'";
+				WHERE project_id='$c_project_id'";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
 		$t_string = "";
@@ -1045,7 +1044,7 @@
 	# --------------------
 	# print our standard mysql query error
 	# this function should rarely (if ever) be reached.  instead the db_()
-	# functions should trap (altough inelegantly).
+	# functions should trap (although inelegantly).
 	function print_sql_error( $p_query ) {
 		global $MANTIS_ERROR, $g_administrator_email, $s_administrator;
 

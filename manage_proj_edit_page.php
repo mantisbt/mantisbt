@@ -20,9 +20,11 @@
 		exit;
 	}
 
+	$c_project_id = (integer)$f_project_id;
+
 	$query = "SELECT *
 			FROM $g_mantis_project_table
-			WHERE id='$f_project_id'";
+			WHERE id='$c_project_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );

@@ -14,12 +14,12 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
+    		WHERE id='$c_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );

@@ -15,7 +15,7 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
-	$f_id = (integer)$f_id;
+	$c_id = (integer)$f_id;
 
 	$t_handler_id = get_current_user_field( "id" );
 
@@ -25,7 +25,7 @@
     $query = "UPDATE $g_mantis_bug_table
     		SET status='$t_fee_val',
 				resolution='$t_reop'
-    		WHERE id='$f_id'";
+    		WHERE id='$c_id'";
    	$result = db_query($query);
 
 	# get user information
@@ -51,7 +51,7 @@
 				INTO $g_mantis_bugnote_table
 				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
 				VALUES
-				( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
 	}
 	# update bug last updated
