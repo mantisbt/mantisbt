@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.3 2002-08-27 10:08:08 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.4 2002-12-04 03:16:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -14,89 +14,121 @@
 	###########################################################################
 
 	# Some simple LDAP stuff that makes the work go 'round
-	# Leigh Morresi <leighm@linuxbandwagon.com>
 
  	# --------------------
-	# Find someone email address based on their login name
-	function ldap_email($worker) {
-	    global $g_ldap_organisation,$g_ldap_server,$g_ldap_root_dn;
+	# Connect and bind to the LDAP directory
+	function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
+		$t_ldap_server	= config_get( 'ldap_server' );
+		$t_ldap_port	= config_get( 'ldap_port' );
 
-	    $search_dn = "(&$g_ldap_organisation(uid=$worker))";
-	    $ds        = ldap_connect( "$g_ldap_server" );
+		$t_ds = @ldap_connect ( $t_ldap_server, $t_ldap_port );
+		if ( $t_ds > 0 ) {
+			# If no Bind DN and Password is set, attempt to login as the configured
+			#  Bind DN.
+			if ( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
+				$p_binddn	= config_get( 'ldap_bind_passwd', '' );
+				$p_password	= config_get( 'ldap_bind_dn', '' );
+			}
 
-		if ( $ds ) {
-			$r    = ldap_bind( $ds );
-			$sr   = ldap_search( $ds, $g_ldap_root_dn, $search_dn );
-			$info = ldap_get_entries( $ds, $sr );
-			ldap_close( $ds );
-			return ($info[0]["mail"][0]);
+			if ( ! is_blank( $p_binddn ) && ! is_blank( $p_password ) ) {
+				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
+			} else {
+				# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
+				$t_br = @ldap_bind( $t_ds );
+			}
+			if ( ! $t_br ) {
+				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			}		
 		} else {
-			echo "<h4>Unable to connect to LDAP server</h4>";
-			die;
+			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 		}
+
+		return $t_ds;
+	}
+
+ 	# --------------------
+	# Find an email address from LDAP, given a username
+	function ldap_email( $p_username ) {
+		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
+
+	    $t_search_filter	= "(&$t_ldap_organisation(uid=$p_username))";
+		$t_search_attrs		= array( 'uid', 'email', 'dn' );
+	    $t_ds				= ldap_connect_bind();
+
+		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+		$t_info	= ldap_get_entries( $t_ds, $t_sr );
+		ldap_free_result( $t_sr );
+		ldap_unbind( $t_ds );
+
+		return $t_info[0]['mail'][0];
 	}
 
 	# --------------------
-	# Return true if the $uid has an assigngroup=$group tag
-	function ldap_has_group($uid,$group) {
-	    global $g_ldap_organisation,$g_ldap_server,$g_ldap_root_dn;
+	# Return true if the $uid has an assigngroup=$p_group tag, false otherwise
+	function ldap_has_group( $p_username, $p_group ) {
+		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$search_dn = "(&$g_ldap_organisation(uid=$uid)(assignedgroup=$group))";
-		$ds        = ldap_connect( "$g_ldap_server" );
+		$t_search_filter	= "(&$t_ldap_organisation(uid=$p_username)(assignedgroup=$p_group))";
+		$t_search_attrs		= array( "uid", "dn", "assignedgroup" );
+	    $t_ds				= ldap_connect_bind();
 
-		if ( $ds ) {
-			$r       = ldap_bind( $ds ); # bind to server
-			$sr      = ldap_search( $ds, $g_ldap_root_dn, $search_dn ); # query
-			$entries = ldap_count_entries( $ds, $sr );
-	        ldap_close( $ds ); # clean up
-	        return $entries;
-		} else {
-			echo "<h4>Unable to connect to LDAP server</h4>";
-			die;
-		}
-	}
-	# --------------------
-	# Return true if the $uid has $password (salt soon!)
-	function ldap_uid_pass($login, $pass) {
-	global $g_ldap_organisation,$g_ldap_server,$g_ldap_root_dn,$g_ldapauth_type;
+		$t_sr		= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+		$t_entries	= ldap_count_entries( $t_ds, $t_sr );
+		ldap_free_result( $t_sr );
+		ldap_unbind( $t_ds );
 
-	$search_dn = "(&$g_ldap_organisation(uid=$login))";
-	$ds        = ldap_connect( "$g_ldap_server" );
-
-	if ( $ds ) {
-		$r       = ldap_bind( $ds ); # bind to server
-
-		if ("CLEAR" == $g_ldapauth_type)
-		{
-			$crypted_pass = $pass;
-		}
-		elseif ("CRYPT" == $g_ldapauth_type)
-		{
-			$sr	= ldap_search( $ds, $g_ldap_root_dn, $search_dn ); # query without password
-			$entry	= ldap_first_entry($ds, $sr);
-			if (!($entry)) return false;
-			$values	= ldap_get_values($ds, $entry,"userpassword");
-			$salt	= $values[0][0].$values[0][1];
-			$crypted_pass=crypt($pass,$salt);
-		}
-		else
-		{
-			die ("wrong LDAP parameter g_ldapauth_type : [$g_ldapauth_type]");
-		}
-
-		$search_dn = "(&$g_ldap_organisation(uid=$login)(userpassword=$crypted_pass))";
-		$sr      = ldap_search( $ds, $g_ldap_root_dn, $search_dn ); # query with password matching
-		#---------------------------
-		$entries = ldap_count_entries( $ds, $sr );
-		ldap_close( $ds ); # clean up
-		if ( $entries >= 1 ) {
+		if ( $t_entries > 0 ) {
 			return true;
 		} else {
 			return false;
 		}
-	} else {
-		die ("Unable to connect to LDAP server");
 	}
-}
+	
 	# --------------------
+	# Attempt to authenticate the a username against the LDAP directory
+	#  return true on successful authentication, false otherwise
+	function ldap_authenticate( $p_username, $p_password ) {
+		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
+
+		$t_search_filter	= "(&$t_ldap_organisation(uid=$p_username))";
+		$t_search_attrs		= array( 'uid', 'dn' );
+	    $t_ds				= ldap_connect_bind();
+		
+		# Search for the user id
+		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+		$t_info	= ldap_get_entries( $t_ds, $t_sr );
+
+		$t_authenticated = false;
+
+		if ( $t_info ) {
+			# Try to authenticate to each until we get a match
+			for ( $i = 0 ; $i < $t_info['count'] ; $i++ ) {
+				$t_dn = $t_info[$i]['dn'];
+
+				# Attempt to bind with the DN and password
+				if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+					$t_authenticated = true;
+					break; # Don't need to go any further
+				} 
+			}
+		}
+		ldap_free_result( $t_sr );
+		ldap_unbind( $t_ds );
+
+		return $t_authenticated;
+	}
+	
+	# --------------------
+	# Create a new user account in the LDAP Directory.
+	
+	# --------------------
+	# Update the user's account in the LDAP Directory
+	
+	# --------------------
+	# Change the user's password in the LDAP Directory
+	
+	
 ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.14 2002-09-22 05:24:52 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.15 2002-12-04 03:16:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -157,7 +157,8 @@
 		$t_login_method = config_get( 'login_method' );
 
 		if ( LDAP == $t_login_method ) {
-			return ldap_uid_pass( $p_username, $p_test_password );
+ 			$t_username = user_get_field( $p_user_id, 'username' );
+			return ldap_authenticate( $t_username, $p_test_password );
 		}
 
 		$t_password = user_get_field( $p_user_id, 'password' );

@@ -3,6 +3,8 @@
    Original by leighm@linuxbandwagon.com
    Updated by Adrian Spinei aspinei@yahoo.com - currently the maintaner of
    the LDAP capabilities of mantis, please direct all questions to me
+   20 Nov 2002: Updated by Robert Foster <rfoster@mountainvisions.com.au>
+                to allow for 'closed' LDAP Directories and/or Anonymous Logins
 -------------------------------------------------------------------------------
 
 Here is my attempt at providing Mantis with LDAP capabilities.
@@ -33,14 +35,13 @@ uid: tests
 userPassword: password
 objectclass: testPerson
 
-Note : the password may be in clear or taken from the /etc/passwd or /etc/shadow file
-if you prefer to keep the password in clear (very insecure !) yop should use the
-configuration option $g_ldapauth_type = 'CLEAR';
-otherwise $g_ldapauth_type = 'CRYPT'; (and the password should match /etc/passwd)
+Note : the password may be in clear, taken from the /etc/passwd or /etc/shadow file,
+or simply encrypted and added using current LDAP tools.
+
 There are some specialized software for replicating passwd to LDAP and inversely
 (eg. http://freshmeat.net/projects/cpu/)
 
-It is also required to set the following configuration items in default/config_inc1.php
+It is also required to set the following configuration items in config_inc.php
 
 
 	#############################
@@ -48,12 +49,14 @@ It is also required to set the following configuration items in default/config_i
 	#############################
 
 	# --- using openldap -------------
-	$g_ldap_server="127.0.0.1";
-	$g_ldap_root_dn="dc=test,dc=com,dc=au";
-	$g_use_ldap_email=1;    ## Should we send to the LDAP email address or what MySql tells us
-	# $g_ldap_organisation="(organizationname=*Traffic)";     ## optional
-	$g_ldapauth_type = 'CLEAR';
-
+	$g_ldap_server         = "ldaps://ldap.example.com/";
+	$g_ldap_port           = "636";
+	$g_ldap_root_dn        = "dc=example, dc=com";
+	#$g_ldap_organisation  = "(organizationname=*Example)"; # optional
+	#$g_ldap_auth_type 	   = "CRYPT"; # NO LONGER USED
+	$g_use_ldap_email      = ON; # Should we send to the LDAP email address or what MySql tells us
+	$t_ldap_bind_dn        = "cn=Manager, dc=example, dc=com";
+	$t_ldap_bind_passwd    = "secret";
 
 Dont forget to change your $g_login_method to $g_login_method = LDAP;
 
@@ -68,7 +71,6 @@ will proceed.
 
 Email address is queried from the LDAP database if the authentication is set
 to use LDAP instead of the mySql entry.
-
 
 Hope it works as good for you as it does for me.
 

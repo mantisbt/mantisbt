@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: jfitzell $
-	# $Date: 2002-11-25 08:06:00 $
+	# $Date: 2002-12-04 03:16:33 $
 	#
-	# $Id: strings_english.txt,v 1.90 2002-11-25 08:06:00 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.91 2002-12-04 03:16:33 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -187,6 +187,10 @@
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE]= 'ERROR: This is a duplicate caption.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field!';
+	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
 
 	# General Strings
 	$s_go_back = 'Go Back';
