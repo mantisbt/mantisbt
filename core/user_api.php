@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.32 2002-09-22 05:26:33 jfitzell Exp $
+	# $Id: user_api.php,v 1.33 2002-09-22 05:28:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -329,7 +329,7 @@
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
 
 	    if ( ON == user_get_field( $p_user_id, 'protected' ) ) {
-			return false;
+			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 		}
 
 		# Remove account
