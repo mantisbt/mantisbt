@@ -171,6 +171,9 @@
 
 	# bug view/update
 	$g_view_bug_all_page           = "view_bug_all_page".$g_php;
+	$g_view_user_assigned_bug_page = "view_user_assigned_bug_page".$g_php;
+	$g_view_user_reported_bug_page = "view_user_reported_bug_page".$g_php;
+
 	$g_view_bug_page               = "view_bug_page".$g_php;
 	$g_view_bug_advanced_page      = "view_bug_advanced_page".$g_php;
 

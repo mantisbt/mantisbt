@@ -199,8 +199,8 @@
 
 	### manage_page.php3
 	$s_create_new_account_link = "Create New Account";
-	$s_manage_categories_link = "Manage Categories";
-	$s_manage_product_versions_link = "Manage Product Versions";
+	$s_manage_categories_link = "Categories";
+	$s_manage_product_versions_link = "Product Versions";
 	$s_documentation = "Documentation";
 	$s_manage_accounts_title = "Manage Accounts";
 	$s_date_created = "Date Created";
@@ -319,13 +319,30 @@
 	$s_total_time = "total time";
 
 	### view_bug_advanced_page.php3
+	$s_view_simple_link = "View Simple";
 	$s_viewing_bug_advanced_details_title = "Viewing Bug Advanced Details";
+	$s_product_build = "Product Build";
+	$s_update_bug_button = "Update Bug";
+	$s_reopen_bug_button = "Reopen Bug";
 
 	### view_bug_all_page.php3
+	$s_reported_bugs_link = "Reported Bugs";
+	$s_assigned_bugs_link = "Assigned Bugs";
+	$s_any = "any";
 	$s_viewing_bug_details_title = "Viewing Bug Details";
+	$s_show = "Show";
+	$s_changed = "Changed(hrs)";
+	$s_hide_resolved = "Hide Resolved";
+	$s_filter_button = "Filter";
+	$s_viewing_bugs_title = "Viewing Bugs";
+	$s_updated = "Updated";
 
 	### view_bug_page.php3
+	$s_view_advanced_link = "View Advanced";
+
 	### view_user_assigned_bug_page.php3
+	$s_all_bugs_link = "All Bugs";
+
 	### view_user_reported_bug_page.php3
 
 	### General Strings

@@ -98,8 +98,8 @@
 
 <p>
 <div align=center>
-	[ <a href="<? echo $g_view_user_reported_bug_page ?>">Reported Bugs</a> ]
-	[ <a href="<? echo $g_view_user_assigned_bug_page ?>">Assigned Bugs</a> ]
+	[ <a href="<? echo $g_view_user_reported_bug_page ?>"><? echo $s_reported_bugs_link ?></a> ]
+	[ <a href="<? echo $g_view_user_assigned_bug_page ?>"><? echo $s_assigned_bugs_link ?></a> ]
 </div>
 
 <p>
@@ -112,24 +112,24 @@
 		<input type=hidden name=f_offset value="0">
 		<td align=center>
 		<select name=f_show_category>
-			<option value="any">any
+			<option value="any"><? echo $s_any ?>
 			<option value="any">
 			<? print_field_option_list( "category", $f_show_category ) ?>
 		</select>
 		<select name=f_show_severity>
-			<option value="any">any
+			<option value="any"><? echo $s_any ?>
 			<option value="any">
 			<? print_field_option_list( "severity", $f_show_severity ) ?>
 		</select>
 		<select name=f_show_status>
-			<option value="any">any
+			<option value="any"><? echo $s_any ?>
 			<option value="any">
 			<? print_field_option_list( "status", $f_show_status ) ?>
 		</select>
-		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
-		Changed(hrs): <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
-		Hide Resolved: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
-		<input type=submit value=" Filter ">
+		<? echo $s_show ?>: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
+		<? echo $s_changed ?>: <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
+		<? echo $s_hide_resolved ?>: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
+		<input type=submit value="<? echo $s_filter_button ?>">
 		</td>
 		</form>
 	</tr>
@@ -144,13 +144,13 @@
 	<table width=100% cols=7>
 	<tr>
 		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bugs</b>
+			<b><? echo $s_viewing_bugs_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
 		<td width=8%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">ID</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
 			</b>
 		</td>
 		<td width=3%>
@@ -160,27 +160,27 @@
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Category</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_category ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Severity</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_severity ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Status</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_status ?></a>
 			</b>
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Updated</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_updated ?></a>
 			</b>
 		</td>
 		<td width=45%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Summary</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_summary ?></a>
 			</b>
 		</td>
 	</tr>
@@ -262,6 +262,7 @@
 </tr>
 </table>
 
+<div align=center>
 <?
 	$f_offset_next = $f_offset + $f_limit_view;
 	$f_offset_prev = $f_offset - $f_limit_view;
@@ -269,15 +270,14 @@
 	if ( $f_offset_prev < 0 ) {
 		$f_offset_prev = -1;
 	}
-?>
 
-<div align=center>
-<? if ( $f_offset_prev >= 0 ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Prev <? echo $f_limit_view ?></a> ]
-<? } ?>
-<? if ( $row_count == $f_limit_view ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Next <? echo $f_limit_view ?></a> ]
-<? } ?>
+	if ( $f_offset_prev >= 0 ) {
+ 		PRINT "[ <a href=\"$g_view_bug_all_page?f_offset=$f_offset_prev&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Prev $f_limit_view</a> ] ";
+	}
+	if ( $row_count == $f_limit_view ) {
+ 		PRINT "[ <a href=\"$g_view_bug_all_page?f_offset=$f_offset_next&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Next $f_limit_view</a> ]";
+	}
+?>
 </div>
 
 <? print_footer(__FILE__) ?>

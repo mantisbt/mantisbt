@@ -44,7 +44,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id?>">Advanced View</a> ]
+[ <a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id?>"><? echo $s_view_advanced_link ?></a> ]
 </div>
 
 <p>
@@ -59,22 +59,22 @@
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
 		<td width=15%>
-			<b>ID</b>
+			<b><? echo $s_id ?></b>
 		</td>
 		<td width=20%>
-			<b>Category</b>
+			<b><? echo $s_category ?></b>
 		</td>
 		<td width=15%>
-			<b>Severity</b>
+			<b><? echo $s_severity ?></b>
 		</td>
 		<td width=20%>
-			<b>Reproducibility</b>
+			<b><? echo $s_reproducibility ?></b>
 		</td>
 		<td width=15%>
-			<b>Date Submitted</b>
+			<b><? echo $s_date_submitted ?></b>
 		</td>
 		<td width=15%>
-			<b>Last Update</b>
+			<b><? echo $s_last_update ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
@@ -103,7 +103,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b>Reporter</b>
+			<b><? echo $s_reporter ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<? print_user( $v_reporter_id ) ?>
@@ -111,7 +111,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b>Assigned To</b>
+			<b><? echo $s_assigned_to ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<? print_user( $v_handler_id ) ?>
@@ -119,13 +119,13 @@
 	</tr>
 	<tr align=center>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Priority</b>
+			<b><? echo $s_priority ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_priority ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Resolution</b>
+			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_resolution ?>
@@ -136,13 +136,13 @@
 	</tr>
 	<tr align=center>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Status</b>
+			<b><? echo $s_status ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? echo $v_status ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Duplicate ID</b>
+			<b><? echo $s_duplicate_id ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? print_duplicate_id( $v_duplicate_id ) ?>
@@ -157,7 +157,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b>Summary</b>
+			<b><? echo $s_summary ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<? echo $v_summary ?>
@@ -165,7 +165,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b>Description</b>
+			<b><? echo $s_description ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<? echo $v2_description ?>
@@ -173,7 +173,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b>Additional<br>Information</b>
+			<b><? echo $s_additional ?><br><? echo $s_information ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<? echo $v2_additional_information ?>
@@ -191,14 +191,14 @@
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 			<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
-			<input type=submit value=" Update Bug ">
+			<input type=submit value="<? echo $s_update_bug_button ?>">
 		</td>
 		</form>
 <?	if ($v_status!='resolved') { ?>
 		<form method=post action="<? echo $g_bug_resolve_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
-			<input type=submit value=" Resolve Bug ">
+			<input type=submit value="<? echo $s_resolve_bug_button ?>">
 		</td>
 		</form>
 <?	} else { ?>
@@ -208,7 +208,7 @@
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
-			<input type=submit value=" Delete Bug ">
+			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>
 	</form>
 	</tr>
@@ -229,7 +229,7 @@
 		PRINT "<div align=center>";
 		PRINT "<form method=post action=\"$g_bug_reopen_page\">";
 			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
-			PRINT "<input type=submit value=\" Reopen Bug \">";
+			PRINT "<input type=submit value=\"$s_reopen_bug_button\">";
 		PRINT "</form>";
 		PRINT "</div>";
 	} else {
