@@ -12,7 +12,7 @@
 
 	### If deleting item redirect to delete script
 	if ( $f_action=="delete" ) {
-		header( "Location: $g_news_delete_page?f_id=$f_id" );
+		print_header_redirect( "$g_news_delete_page?f_id=$f_id" );
 		exit;
 	}
 

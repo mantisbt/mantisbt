@@ -10,8 +10,7 @@
 
 	### Check to see if signup is allowed
 	if ( $g_allow_signup == 0 ) {
-		header( "Status: 302 moved" );
-		header( "Location: $g_login_page" );
+		print_header_redirect( $g_login_page );
 		exit;
 	}
 

@@ -10,7 +10,7 @@
 
 	### Check for invalid access to signup page
 	if ( $g_allow_signup == 0 ) {
-		header( "Location: $g_login_page" );
+		print_header_redirect( $g_login_page );
 		exit;
 	}
 ?>

@@ -26,7 +26,6 @@
 		### prepare variables for insertion
 		$f_file_name = $f_id."-".$f_file_name;
 
-
 		copy($f_file, $t_file_path.$f_file_name);
 		$t_file_size = filesize( $f_file );
 		$t_content = addslashes(fread(fopen($f_file, "r"), filesize($f_file)));

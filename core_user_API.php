@@ -26,7 +26,7 @@
 			$t_enabled = get_current_user_field( "enabled" );
 			### check for acess enabled
 			if ( $t_enabled==0 ) {
-				header( "Location: $g_logout_page" );
+				print_header_redirect( $g_logout_page );
 			}
 
 			### update last_visit date
@@ -35,19 +35,19 @@
 
 			### if no project is selected then go to the project selection page
 			if ( empty( $g_project_cookie_val ) ) {
-				header( "Location: $g_login_select_proj_page" );
+				print_header_redirect( $g_login_select_proj_page );
 				exit;
 			}
 
 			### go to redirect if set
 			if ( !empty( $p_redirect_url ) ) {
-				header( "Location: $p_redirect_url" );
+				print_header_redirect( $p_redirect_url );
 				exit;
 			} else {			### continue with current page
 				return;
 			}
 		} else {				### not logged in
-			header( "Location: $g_login_page" );
+			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
@@ -64,7 +64,7 @@
 		### if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			if ( empty( $g_project_cookie_val ) ) {
-				header( "Location: $g_login_select_proj_page" );
+				print_header_redirect( $g_login_select_proj_page );
 				exit;
 			}
 
@@ -77,7 +77,7 @@
 
 			### check for acess enabled
 			if ( $t_enabled==0 ) {
-				header( "Location: $g_login_page" );
+				print_header_redirect( $g_login_page );
 			}
 
 			### update last_visit date
@@ -86,13 +86,13 @@
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
-				header( "Location: $p_redirect_url" );
+				print_header_redirect( $p_redirect_url );
 				exit;
 			} else {			### continue with current page
 				return;
 			}
 		} else {				### not logged in
-			header( "Location: $g_login_page" );
+			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
@@ -113,11 +113,11 @@
 			$t_enabled = get_current_user_field( "enabled" );
 			### check for acess enabled
 			if ( $t_enabled==0 ) {
-				header( "Location: $g_logout_page" );
+				print_header_redirect( $g_logout_page );
 			}
 			db_close();
 		} else {				### not logged in
-			header( "Location: $g_login_page" );
+			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
@@ -251,7 +251,7 @@
 
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
 			### need to replace with access error page
-			header( "Location: $g_logout_page" );
+			print_header_redirect( $g_logout_page );
 			exit;
 		}
 	}

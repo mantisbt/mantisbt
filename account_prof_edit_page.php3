@@ -16,12 +16,12 @@
 
 	### If deleteing profile redirect to delete script
 	if ( $f_action=="delete") {
-		header( "Location: $g_account_profile_delete?f_id=$f_id" );
+		print_header_redirect( "$g_account_profile_delete?f_id=$f_id" );
 		exit;
 	}
 	### If Defaulting profile redirect to make default script
 	else if ( $f_action=="make default") {
-		header( "Location: $g_account_profile_make_default?f_id=$f_id&f_user_id=$f_user_id" );
+		print_header_redirect( "$g_account_profile_make_default?f_id=$f_id&f_user_id=$f_user_id" );
 		exit;
 	}
 

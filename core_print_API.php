@@ -11,6 +11,15 @@
 	# this file handles printing and string manipulation functions
 
 	### --------------------
+	function print_header_redirect( $p_url ) {
+		header( "Status: 302" );
+		header( "Content-Type: text/html" );
+		header( "Pragma: no-cache" );
+		header( "Expires: Fri, 01 Jan 1999 00:00:00 GMT" );
+		header( "Cache-control: no-cache, no-cache=\"Set-Cookie\", private" );
+		header( "Location: $p_url" );
+	}
+	### --------------------
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 

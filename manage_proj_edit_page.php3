@@ -16,7 +16,7 @@
 
 	### If Deleteing item redirect to delete script
 	if ( $f_action=="delete" ) {
-		header( "Location: $g_project_delete_page?f_project_id=$f_project_id" );
+		print_header_redirect( "$g_project_delete_page?f_project_id=$f_project_id" );
 		exit;
 	}
 

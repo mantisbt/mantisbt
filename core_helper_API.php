@@ -81,7 +81,7 @@
 				WHERE id='$p_bug_id'";
 		$result = db_query( $query );
 		if ( db_num_rows( $result )==0 ) {
-			header( "Location: $g_main_page" );
+			print_header_redirect( $g_main_page );
 		}
 	}
 	### --------------------
@@ -96,7 +96,7 @@
 				WHERE id='$p_bugnote_id'";
 		$result = db_query( $query );
 		if ( db_num_rows( $result )==0 ) {
-			header( "Location: $g_main_page" );
+			print_header_redirect( $g_main_page );
 		}
 	}
 	### --------------------
@@ -111,7 +111,7 @@
 				WHERE id='$p_user_id'";
 		$result = db_query( $query );
 		if ( db_num_rows( $result )==0 ) {
-			header( "Location: $g_main_page" );
+			print_header_redirect( $g_main_page );
 		}
 	}
 	### --------------------
@@ -126,7 +126,7 @@
 				WHERE id='$p_project_id'";
 		$result = db_query( $query );
 		if ( db_result( $result, 0, 0 )==0 ) {
-			header( "Location: $g_main_page" );
+			print_header_redirect( $g_main_page );
 		}
 	}
 	### --------------------
