@@ -12,33 +12,36 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	if ( current_user_is_protected() ) {
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	$c_user_id	= (integer)current_user_get_field( 'id' );
-	$c_id		= (integer)$f_id;
+	$f_id			= gpc_get_int( 'f_id' );
+	$f_platform		= gpc_get_string( 'f_platform' );
+	$f_os			= gpc_get_string( 'f_os' );
+	$f_os_build		= gpc_get_string( 'f_os_build' );
+	$f_description	= gpc_get_string( 'f_description' );
 
-	# " character poses problem when editting so let's just convert them
-	$c_platform		= string_prepare_text( $f_platform );
-	$c_os			= string_prepare_text( $f_os );
-	$c_os_build		= string_prepare_text( $f_os_build );
-	$c_description	= string_prepare_textarea( $f_description );
+	$c_id			= db_prepare_int( $f_id );
+	$c_platform		= db_prepare_string( $f_platform );
+	$c_os			= db_prepare_string( $f_os );
+	$c_os_build		= db_prepare_string( $f_os_build );
+	$c_description	= db_prepare_string( $f_description );
+
+	$t_user_id	= auth_get_current_user_id();
+
+	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 	# Add item
-	$query = "UPDATE $g_mantis_user_profile_table
+	$query = "UPDATE $t_user_profile_table
     		SET platform='$c_platform', os='$c_os',
     			os_build='$c_os_build', description='$c_description'
-    		WHERE id='$c_id' AND user_id='$c_user_id'";
+    		WHERE id='$c_id' AND user_id='$t_user_id'";
     $result = db_query( $query );
 
-    $t_redirect_url = 'account_prof_menu_page.php';
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( 'account_prof_menu_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}

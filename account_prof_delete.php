@@ -12,26 +12,27 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	if ( current_user_is_protected() ) {
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	$c_user_id = (integer)current_user_get_field( 'id' );
-	$c_id = (integer)$f_id;
+	$f_id	= gpc_get_int( 'f_id' );
+
+	$c_id = db_prepare_int( $f_id );
+
+	$t_user_id = auth_get_current_user_id();
+
+	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 	# Delete the profile
 	$query = "DELETE
-			FROM $g_mantis_user_profile_table
-			WHERE id='$c_id' AND user_id='$c_user_id'";
+			FROM $t_user_profile_table
+			WHERE id='$c_id' AND user_id='$t_user_id'";
 	$result = db_query( $query );
 
-	$t_redirect_url = 'account_prof_menu_page.php';
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( 'account_prof_menu_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.25 2002-09-16 00:05:45 jfitzell Exp $
+	# $Id: user_api.php,v 1.26 2002-09-16 00:50:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -238,7 +238,11 @@
 			return false;
 		}
 	}
-
+	# --------------------
+	# return true is the user account is protected, false otherwise
+	function user_is_protected( $p_user_id ) {
+		return ( ON == user_get_field( $p_user_id, 'protected' ) );
+	}
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================

@@ -13,49 +13,36 @@
 <?php
 	check_access( REPORTER );
 
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	if ( current_user_is_protected() ) {
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	# validating input
-	$check_failed = false;
-	if ( ( empty( $f_platform ) ) ||
-		 ( empty( $f_os ) ) ||
-		 ( empty( $f_os_build ) ) ||
-		 ( empty( $f_description ) ) ) {
-		$check_failed = true;
-	}
+	$f_platform		= gpc_get_string( 'f_platform' );
+	$f_os			= gpc_get_string( 'f_os' );
+	$f_os_build		= gpc_get_string( 'f_os_build' );
+	$f_description	= gpc_get_string( 'f_description' );
 
-	$result = 0;
-	if ( $check_failed ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	} else {
-		# required fields ok, proceeding
-		# " character poses problem when editting so let's just convert them
-		$c_platform		= string_prepare_text( $f_platform );
-		$c_os			= string_prepare_text( $f_os );
-		$c_os_build		= string_prepare_text( $f_os_build );
-		$c_description	= string_prepare_textarea( $f_description );
+	$c_platform		= db_prepare_string( $f_platform );
+	$c_os			= db_prepare_string( $f_os );
+	$c_os_build		= db_prepare_string( $f_os_build );
+	$c_description	= db_prepare_string( $f_description );
 
-		# get user id
-		$c_user_id = (integer)current_user_get_field( 'id' );
+	# get user id
+	$t_user_id = auth_get_current_user_id();
 
-		# Add profile
-		$query = "INSERT
-				INTO $g_mantis_user_profile_table
-	    		( id, user_id, platform, os, os_build, description )
-				VALUES
-				( null, '$c_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
-	    $result = db_query( $query );
-	}
+	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
-    $t_redirect_url = 'account_prof_menu_page.php';
+	# Add profile
+	$query = "INSERT
+			INTO $t_user_profile_table
+			( id, user_id, platform, os, os_build, description )
+			VALUES
+			( null, '$t_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
+	$result = db_query( $query );
+
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( 'account_prof_menu_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}

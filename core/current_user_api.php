@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.3 2002-09-07 08:39:21 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.4 2002-09-16 00:50:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -48,6 +48,11 @@
 	}
 	# --------------------
 	# Return the specified field of the currently logged in user
+	function current_user_set_pref( $p_user_id, $p_pref_name, $p_pref_value ) {
+		return user_get_pref( auth_get_current_user_id(), $p_pref_name, $p_pref_value );
+	}
+	# --------------------
+	# Return the specified field of the currently logged in user
 	function current_user_set_default_project( $p_project_id ) {
 		return user_set_default_project( auth_get_current_user_id(), $p_project_id );
 	}
@@ -62,6 +67,11 @@
 	#  or higher, false otherwise
 	function current_user_is_administrator() {
 		return user_is_administrator( auth_get_current_user_id() );
+	}
+	# --------------------
+	# Return true if the currently logged in user protected, false otherwise
+	function current_user_is_protected() {
+		return user_is_protected( auth_get_current_user_id() );
 	}
 	# --------------------
 	# return the bug filter parameters for the current user
