@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.63 2004-12-15 23:07:34 bpfennigschmidt Exp $
+	# $Id: string_api.php,v 1.64 2005-01-28 17:30:41 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -284,38 +284,27 @@
 	# Tag Processing
 	#===================================
 
-	function parseurl($proto='', $url='', $xtra='')
-	{
-		# find wired characters at the end of the string
-		preg_match("/(.+)(|[^\w]+|&quot;|&amp;|&#039;|&lt;|&gt;)$/Uis", $url, $match);
-		# Add protocol if needed
-		$url = ($proto == '') ? 'http://'. $match[1] : $match[1];
-		# add wired characters at the end
-		$rest = ( isset($match[2]) ) ? $match[2] : '';
-		# return
-		return($xtra .'<a href="'. $url .'" target="_blank">'. $match[1] .'</a>'. $rest);
-	}
-
 	# --------------------
 	# Detect URLs and email addresses in the string and replace them with href anchors
 	function string_insert_hrefs( $p_string ) {
 		if ( !config_get( 'html_make_links' ) ) {
 			return $p_string;
 		}
-		# Find any URL in a string and replace it by a clickable link		
-		
-		$expression = array(
-			"/([^]\w\-=\"\'\/])?((https?|ftps?|edk|gopher|news|telnet|ssh):\/\/[^\s\W]|www\.[^\s\W])([^ \r\n\(\)\^\$!`\"'\|\[\]\{\}<>]*)/esi",
-			"/^((https?|ftps?|edk|gopher|news|telnet|ssh):\/\/[^\s\W]|www\.[^\s\W])([^ \r\n\(\)\^\$!`\"'\|\[\]\{\}<>]*)/esi"
-		);
 
-		$replacement = array(
-			"parseurl('\\3','\\2\\4','\\1')",
-			"parseurl('\\2','\\1\\3')"
-		);
+		$t_change_quotes = false;
+		if( ini_get_bool( 'magic_quotes_sybase' ) ) {
+			$t_change_quotes = true;
+			ini_set( 'magic_quotes_sybase', false );
+		}
 		
-		$p_string = preg_replace($expression, $replacement, $p_string);
-	
+		# Find any URL in a string and replace it by a clickable link
+		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])+)/se',   
+                                                                 "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"blank\">^</a>]'",   
+                                                                 $p_string); 
+		if( $t_change_quotes ) {
+			ini_set( 'magic_quotes_sybase', true );
+		}
+
 		# Set up a simple subset of RFC 822 email address parsing
 		#  We don't allow domain literals or quoted strings
 		#  We also don't allow the & character in domains even though the RFC
