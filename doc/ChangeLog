@@ -2,6 +2,10 @@ Mantis ChangeLog
 
 2005.01.xx  -  0.19.3
 
+- New Config: $g_graph_font - truetype font for graphs(thraxisp)
+- New Config: $g_graph_window_width - window width is used to scale the graphs(thraxisp)
+- New Config: $g_graph_bar_aspect - bar graph aspect ration (height / width)(thraxisp)
+- New Config: $g_graph_summary_graphs_per_row - graphs to put in each row in the advanced summary page (thraxisp)
 
 
 2004.12.11  -  0.19.2
@@ -39,7 +43,7 @@ Mantis ChangeLog
 - 0004961: [graphs] Wrong cumulative by date graph (thraxisp)
 - 0004909: [printing] Printing bugnotes regardless of user rigth and bugnote status (thraxisp)
 - 0004958: [printing] print_all_bug_page_word.php -> date displayed wrong (thraxisp)
-- 0004450: [localization] Real name was changed to "¹ÜÀíÔ±" (jlatour)
+- 0004450: [localization] Real name was changed to "Ï€â€¹Â¿ÃŒâ€˜Â±" (jlatour)
 - 0004954: [localization] $s_delete_attachment_sure_msg missing from strings_english.txt (masc)
 - 0004910: [sql] Upgrade ADODB from v3.50 to v4.54 (jlatour)
 - 0004911: [sql] db_prepare_string() doesn't work with mysqli (vboctor)

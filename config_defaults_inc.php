@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.229 2004-12-15 17:02:55 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.230 2004-12-16 22:41:26 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -450,6 +450,19 @@
 
 	$g_use_jpgraph			= OFF;
 	$g_jpgraph_path			= '.' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;   # dont forget the ending slash!
+
+	# what truetype font will the graphs use. Allowed values are 'arial', 'verdana', 'courier', 'book', 'comic', 'times',
+	#  'georgia', 'trebuche', 'vera', 'veramono', or 'veraserif'. Refer to the jpgraph manual for details.
+	# NOTE: these fonts need to be installed in the TTF_DIR as specified to jpgraph
+	$g_graph_font = '';
+
+	# what width is used to scale the graphs. 
+	$g_graph_window_width = 800;
+	# bar graph aspect ration (height / width)
+	$g_graph_bar_aspect = 0.9;
+
+	# how many graphs to put in each row in the advanced summary page
+	$g_graph_summary_graphs_per_row = 2;
 
 	############################
 	# Mantis Time Settings

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.34 2004-12-11 20:20:12 prichards Exp $
+	# $Id: constant_inc.php,v 1.35 2004-12-16 22:41:27 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -306,5 +306,6 @@
 	# token types
 	define( 'TOKEN_UNKNOWN',	0 );
 	define( 'TOKEN_FILTER',		1 );
+	define( 'TOKEN_GRAPH',		2 );
 
 ?>
