@@ -24,7 +24,7 @@ Mantis ChangeLog
  * Fix #3575: Missing german translation for $s_email_assigned_msg.
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.
  * Fix #3579: in the german language file strings_german.txt $s_reset_request_msg has a little problem.
- * Fix #3590: New displayed wrong in Firebird/Firefox
+ * Fix #3590: News displayed wrong in Firebird/Firefox
  * Fix #3594: Incorrect encoding for Turkish localization.
  * Fix #3597: custom fields names are not translaten in email (thanks to yarik123).
  * Fix #3598: bug history: consuming custom fields or not?
