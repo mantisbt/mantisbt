@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.101 2004-05-27 16:28:18 int2str Exp $
+	# $Id: html_api.php,v 1.102 2004-05-27 23:33:06 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -735,7 +735,7 @@
 	function html_button_bug_move( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
-		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
+		if ( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_actiongroup_page.php',
 						 lang_get( 'move_bug_button' ),
 						 array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
