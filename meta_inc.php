@@ -5,6 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# prevent caching
+	global $g_content_expire;
 ?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
