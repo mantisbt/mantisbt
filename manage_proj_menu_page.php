@@ -57,7 +57,7 @@
 	</td>
 	<td>
 		<select name="f_status">
-		<?php print_enum_string_option_list( $s_project_status_enum_string ) ?>
+		<?php print_enum_string_option_list( "project_status" ) ?>
 		</select>
 	</td>
 </tr>

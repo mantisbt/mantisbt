@@ -55,7 +55,7 @@
 	</td>
 	<td colspan="2">
 		<select name="f_access_level">
-			<?php print_enum_string_option_list( $s_access_levels_enum_string, $u_access_level ) ?>
+			<?php print_enum_string_option_list( "access_levels", $u_access_level ) ?>
 		</select>
 	</td>
 </tr>

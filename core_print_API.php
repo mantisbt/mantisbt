@@ -407,15 +407,22 @@
 		}
 	}
 	# --------------------
-	function print_enum_string_option_list( $p_enum_string, $p_val=0 ) {
-		$t_arr = explode_enum_string( $p_enum_string);
+	# select the proper enum values based on the input parameter
+	# we use variable variables in order to achieve this
+	function print_enum_string_option_list( $p_enum_name, $p_val=0 ) {
+		$g_var = "g_".$p_enum_name."_enum_string";
+		$s_var = "s_".$p_enum_name."_enum_string";
+		global $$g_var, $$s_var;
+
+		$t_arr  = explode_enum_string( $$g_var );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			$t_elem = explode_enum_arr( $t_arr[$i] );
+			$t_elem  = explode_enum_arr( $t_arr[$i] );
+			$t_elem2 = get_enum_element( $$s_var, $t_elem[0] );
 			if ( $t_elem[0] == $p_val ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
+				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem2</option>";
 			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
+				PRINT "<option value=\"$t_elem[0]\">$t_elem2</option>";
 			}
 		} # end for
 	}

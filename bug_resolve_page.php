@@ -32,7 +32,7 @@
 	</td>
 	<td>
 		<select name="f_resolution">
-			<?php print_enum_string_option_list( $s_resolution_enum_string, FIXED ) ?>
+			<?php print_enum_string_option_list( "resolution", FIXED ) ?>
 		</select>
 	</td>
 </tr>

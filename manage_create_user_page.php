@@ -62,7 +62,7 @@
 	</td>
 	<td>
 		<select name="f_access_level">
-			<?php print_enum_string_option_list( $s_access_levels_enum_string, REPORTER ) ?>
+			<?php print_enum_string_option_list( "access_levels", REPORTER ) ?>
 		</select>
 	</td>
 </tr>

@@ -282,14 +282,14 @@
 		<select name="f_show_severity">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
+			<?php print_enum_string_option_list( "severity", $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_status">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
+			<?php print_enum_string_option_list( "status", $f_show_status ) ?>
 		</select>
 	</td>
 	<td>

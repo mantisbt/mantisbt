@@ -120,7 +120,7 @@
 	<td>
 		<select name="f_reproducibility">
 			<option value="" SELECTED><?php echo $s_select_reproducibility ?></option>
-			<?php print_enum_string_option_list( $s_reproducibility_enum_string, $f_reproducibility ) ?>
+			<?php print_enum_string_option_list( "reproducibility", $f_reproducibility ) ?>
 		</select>
 	</td>
 </tr>
@@ -132,7 +132,7 @@
 	<td>
 		<select name="f_severity">
 			<option value="" SELECTED><?php echo $s_select_severity ?></option>
-			<?php print_enum_string_option_list( $s_severity_enum_string, $f_severity ) ?>
+			<?php print_enum_string_option_list( "severity", $f_severity ) ?>
 		</select>
 	</td>
 </tr>

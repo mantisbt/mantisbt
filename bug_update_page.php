@@ -114,12 +114,12 @@
 	</td>
 	<td>
 		<select name="f_severity">
-			<?php print_enum_string_option_list( $s_severity_enum_string, $v_severity ) ?>
+			<?php print_enum_string_option_list( "severity", $v_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<?php print_enum_string_option_list( $s_reproducibility_enum_string, $v_reproducibility ) ?>
+			<?php print_enum_string_option_list( "reproducibility", $v_reproducibility ) ?>
 		</select>
 	</td>
 	<td>
@@ -159,7 +159,7 @@
 	</td>
 	<td>
 		<select name="f_priority">
-			<?php print_enum_string_option_list( $s_priority_enum_string, $v_priority ) ?>
+			<?php print_enum_string_option_list( "priority", $v_priority ) ?>
 		</select>
 	</td>
 	<td class="category">
@@ -178,7 +178,7 @@
 	</td>
 	<td>
 		<select name="f_status">
-			<?php print_enum_string_option_list( $s_status_enum_string, $v_status ) ?>
+			<?php print_enum_string_option_list( "status", $v_status ) ?>
 		</select>
 	</td>
 	<td class="category">
