@@ -172,6 +172,265 @@
 		'Drop votes column of mantis_bug_table',
 		"ALTER TABLE $t_bug_table DROP COLUMN votes" );
 
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-9',
+		'Add primary key on mantis_project_version_table',
+		"ALTER TABLE $t_project_version_table ADD PRIMARY KEY (project_id,version)" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-10',
+		'Add primary key on mantis_project_user_list_table',
+		"ALTER TABLE $t_project_user_list_table ADD PRIMARY KEY (project_id,user_id)" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-11',
+		'Add primary key on mantis_project_category_table',
+		"ALTER TABLE $t_project_category_table ADD PRIMARY KEY (project_id,category)" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-12',
+		'Add primary key on mantis_bug_monitor_table',
+		"ALTER TABLE $t_bug_monitor_table ADD PRIMARY KEY (user_id,bug_id)" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-13',
+		'Remove zerofill on mantis_bug_file_table.id',
+		"ALTER TABLE $t_bug_file_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-14',
+		'Remove zerofill on mantis_bug_file_table.bug_id',
+		"ALTER TABLE $t_bug_file_table
+			MODIFY bug_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-15',
+		'Remove zerofill on mantis_bug_history_table.user_id',
+		"ALTER TABLE $t_bug_history_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-16',
+		'Remove zerofill on mantis_bug_history_table.bug_id',
+		"ALTER TABLE $t_bug_history_table
+			MODIFY bug_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-17',
+		'Remove zerofill on mantis_bug_monitor_table.user_id',
+		"ALTER TABLE $t_bug_monitor_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-18',
+		'Remove zerofill on mantis_bug_relationship_table.id',
+		"ALTER TABLE $t_bug_relationship_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-19',
+		'Remove zerofill on mantis_bug_relationship_table.source_bug_id',
+		"ALTER TABLE $t_bug_relationship_table
+			MODIFY source_bug_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-20',
+		'Remove zerofill on mantis_bug_relationship_table.destination_bug_id',
+		"ALTER TABLE $t_bug_relationship_table
+			MODIFY destination_bug_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-21',
+		'Remove zerofill on mantis_bug_table.id',
+		"ALTER TABLE $t_bug_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-22',
+		'Remove zerofill on mantis_bug_table.project_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY project_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-23',
+		'Remove zerofill on mantis_bug_table.reporter_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY reporter_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-24',
+		'Remove zerofill on mantis_bug_table.handler_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY handler_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-25',
+		'Remove zerofill on mantis_bug_table.duplicate_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY duplicate_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-26',
+		'Remove zerofill on mantis_bug_table.bug_text_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY bug_text_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-27',
+		'Remove zerofill on mantis_bug_table.profile_id',
+		"ALTER TABLE $t_bug_table
+			MODIFY profile_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-28',
+		'Remove zerofill on mantis_bug_text_table.id',
+		"ALTER TABLE $t_bug_text_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-29',
+		'Remove zerofill on mantis_bugnote_table.id',
+		"ALTER TABLE $t_bugnote_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-30',
+		'Remove zerofill on mantis_bugnote_table.bug_id',
+		"ALTER TABLE $t_bugnote_table
+			MODIFY bug_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-31',
+		'Remove zerofill on mantis_bugnote_table.reporter_id',
+		"ALTER TABLE $t_bugnote_table
+			MODIFY reporter_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-32',
+		'Remove zerofill on mantis_bugnote_table.bugnote_text_id',
+		"ALTER TABLE $t_bugnote_table
+			MODIFY bugnote_text_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-33',
+		'Remove zerofill on mantis_bugnote_text_table.id',
+		"ALTER TABLE $t_bugnote_text_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-34',
+		'Remove zerofill on mantis_news_table.id',
+		"ALTER TABLE $t_news_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-35',
+		'Remove zerofill on mantis_news_table.project_id',
+		"ALTER TABLE $t_news_table
+			MODIFY project_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-36',
+		'Remove zerofill on mantis_news_table.poster_id',
+		"ALTER TABLE $t_news_table
+			MODIFY poster_id int(7) unsigned zerofill NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-37',
+		'Remove zerofill on mantis_project_category_table.project_id',
+		"ALTER TABLE $t_project_category_table
+			MODIFY project_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-38',
+		'Remove zerofill on mantis_project_file_table.id',
+		"ALTER TABLE $t_project_file_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-39',
+		'Remove zerofill on mantis_project_file_table.project_id',
+		"ALTER TABLE $t_project_file_table
+			MODIFY project_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-40',
+		'Remove zerofill on mantis_project_table.id',
+		"ALTER TABLE $t_project_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-41',
+		'Remove zerofill on mantis_project_user_list_table.project_id',
+		"ALTER TABLE $t_project_user_list_table
+			MODIFY project_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-42',
+		'Remove zerofill on mantis_project_user_list_table.user_id',
+		"ALTER TABLE $t_project_user_list_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-43',
+		'Remove zerofill on mantis_project_version_table.project_id',
+		"ALTER TABLE $t_project_version_table
+			MODIFY project_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-44',
+		'Remove zerofill on mantis_user_pref_table.id',
+		"ALTER TABLE $t_user_pref_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-45',
+		'Remove zerofill on mantis_user_pref_table.user_id',
+		"ALTER TABLE $t_user_pref_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-46',
+		'Remove zerofill on mantis_user_pref_table.project_id',
+		"ALTER TABLE $t_user_pref_table
+			MODIFY project_id int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-47',
+		'Remove zerofill on mantis_user_pref_table.default_profile',
+		"ALTER TABLE $t_user_pref_table
+			MODIFY default_profile int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-48',
+		'Remove zerofill on mantis_user_pref_table.default_project',
+		"ALTER TABLE $t_user_pref_table
+			MODIFY default_project int(7) unsigned NOT NULL default 0" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-49',
+		'Remove zerofill on mantis_user_print_pref_table.user_id',
+		"ALTER TABLE $t_user_print_pref_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-50',
+		'Remove zerofill on mantis_user_profile_table.id',
+		"ALTER TABLE $t_user_profile_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-51',
+		'Remove zerofill on mantis_user_profile_table.user_id',
+		"ALTER TABLE $t_user_profile_table
+			MODIFY user_id int(7) unsigned NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-52',
+		'Remove zerofill on mantis_user_table.id',
+		"ALTER TABLE $t_user_table
+			MODIFY id int(7) unsigned NOT NULL auto_increment" );
 
 	# The following are all changes that were goofed somewhere between 0.13 and here
 	# In some cases, changes were made in db_upgrade scripts but not applied to the
