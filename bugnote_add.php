@@ -35,7 +35,7 @@
 		$t_bugnote_text_id = db_insert_id();
 
 		# Check for private bugnotes.
-		if ($f_private) {
+		if ( $f_private && access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
 			$c_view_state = PRIVATE;
 		} else {
 			$c_view_state = PUBLIC;

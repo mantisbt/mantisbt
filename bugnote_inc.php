@@ -128,7 +128,7 @@
 	</td>
 </tr>
 <tr>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
 	<td class="right">
 		<input type="checkbox" name="f_private"> <?php echo $s_private; ?>
 	</td>
