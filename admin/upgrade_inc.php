@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.9 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: upgrade_inc.php,v 1.10 2004-03-05 18:54:13 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,8 +20,9 @@
 				  description char(255) NOT NULL,
 				  PRIMARY KEY (upgrade_id))";
 
-		db_query( $query );
+	$result = db_query( $query );
 
+	if ( false === $result ) {
 		# 0.14.0 upgrades (applied to 0.13 db)
 		if ( admin_check_applied( $t_project_table ) ) {
 			$t_upgrades = include( 'upgrades/0_13_inc.php' );
@@ -57,6 +58,7 @@
 				$t_item->set_applied();
 			}
 		}
+	}
 
 	# Compatibility function
 	#
