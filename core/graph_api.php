@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.16 2004-06-10 06:51:57 narcissus Exp $
+	# $Id: graph_api.php,v 1.17 2004-06-10 23:54:51 narcissus Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -459,10 +459,43 @@
 
 		$t_project_id = helper_get_current_project();
 
-		# selecting all users, some of them might not have a proper default access
-		# but be assigned on some particular projects
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = '';
+		} else {
+			$specific_where = " AND project_id='$t_project_id'";
+		}
+
+		$t_res_val = RESOLVED;
+		$t_clo_val = CLOSED;
+
+		$query = "SELECT handler_id, status 
+				 FROM $g_mantis_bug_table 
+				 WHERE handler_id != '' $specific_where";
+		$result = db_query( $query );
+		$t_total_handled = db_num_rows( $result );
+
+		$t_handler_arr = array();
+		for ( $i = 0; $i < $t_total_handled; $i++ ) {
+			$row = db_fetch_array( $result );
+			if ( !isset( $t_handler_arr[$row['handler_id']] ) ) {
+				$t_handler_arr[$row['handler_id']]['res'] = 0;
+				$t_handler_arr[$row['handler_id']]['open'] = 0;
+			}
+			if ( ( $row['status'] == $t_res_val ) || ( $row['status'] == $t_clo_val ) ){
+				$t_handler_arr[$row['handler_id']]['res']++;
+			} else {
+				$t_handler_arr[$row['handler_id']]['open']++;
+			}
+		}
+
+		if ( count( $t_handler_arr ) == 0 ) {
+			return;
+		}
+
+		$t_imploded_handlers = implode( ',', array_keys( $t_handler_arr ) );
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
+				WHERE id IN ($t_imploded_handlers)
 				ORDER BY username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
@@ -471,39 +504,13 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( ALL_PROJECTS == $t_project_id ) {
-				$specific_where = '';
-			} else {
-				$specific_where = " AND project_id='$t_project_id'";
-			}
+			$open_buff = $t_handler_arr[$v_id]['open'];
+			$resolved_buff = $t_handler_arr[$v_id]['res'];
 
-			$query = "SELECT COUNT(*)
-					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' $specific_where";
-			$result2 = db_query( $query );
-			$total_buff = db_result( $result2, 0, 0 );
-
-			$t_res_val = RESOLVED;
-			$t_clo_val = CLOSED;
-			$query = "SELECT COUNT(*)
-					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND
-						status<>'$t_res_val' AND
-						status<>'$t_clo_val' $specific_where";
-			$result2 = db_query( $query );
-			$open_buff = db_result( $result2, 0, 0 );
-
-			$query = "SELECT COUNT(*)
-					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND
-						(status='$t_res_val' OR status='$t_clo_val' ) $specific_where";
-			$result2 = db_query( $query );
-			$resolved_buff = db_result( $result2, 0, 0 );
-
-			if (($total_buff+$resolved_buff+$open_buff)>0) {
+			if (($resolved_buff+$open_buff)>0) {
 				$open_bug_count[]=$open_buff;
 				$resolved_bug_count[]=$resolved_buff;
-				$total_bug_count[]=$total_buff;
+				$total_bug_count[]=$resolved_buff+$open_buff;
 				$developer_name[]=$v_username;
 			}
 		} # end for
@@ -556,8 +563,37 @@
 
 		$t_project_id = helper_get_current_project();
 
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = '';
+		} else {
+			$specific_where = " AND project_id='$t_project_id'";
+		}
+
+		$query = "SELECT reporter_id 
+				 FROM $g_mantis_bug_table 
+				 WHERE id != '' $specific_where";
+		$result = db_query( $query );
+		$t_total_reported = db_num_rows( $result );
+
+		$t_reporter_arr = array();
+		for ( $i = 0; $i < $t_total_reported; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			if ( isset( $t_reporter_arr[$row['reporter_id']] ) ) {
+				$t_reporter_arr[$row['reporter_id']]++;
+			} else {
+				$t_reporter_arr[$row['reporter_id']] = 1;
+			}
+		}
+
+		if ( count( $t_reporter_arr ) == 0 ) {
+			return;
+		}
+
+		$t_imploded_reporters = implode( ',', array_keys( $t_reporter_arr ) );
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
+				WHERE id IN ($t_imploded_reporters)
 				ORDER BY username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
@@ -566,22 +602,10 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( ALL_PROJECTS == $t_project_id ) {
-				$specific_where = '';
-			} else {
-				$specific_where = " AND project_id='$t_project_id'";
-			}
-
-			$query = "SELECT COUNT(*)
-					FROM $g_mantis_bug_table
-					WHERE reporter_id ='$v_id' $specific_where";
-			$result2 = db_query( $query );
-			$t_count =  db_result( $result2, 0, 0 );
-			if ( $t_count > 0){
+			if ( $t_reporter_arr[$v_id] > 0){
 				$reporter_name[] = $v_username;
-				$reporter_count[] = $t_count;
+				$reporter_count[] = $t_reporter_arr[$v_id];
 			}
-
 		} # end for
 	}
 
