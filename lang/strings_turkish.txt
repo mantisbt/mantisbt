@@ -9,15 +9,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Geri Git";
 	$s_proceed = "Devam etmek için buraya týklayýnýz";
-	$s_sql_error_detected = "HATA: SQL hatasý meydana geldi. Lütfen buraya rapor edin ";
 
 	$s_switch = "Deðiþtir";
 	$s_logged_in_as = "Þu anki kullanýcý";
@@ -257,7 +266,6 @@
 	$s_click_to_login = "Sisteme Girmek Ýçin Týklayýnýz";
 
 	# login.php3
-	$s_login_error_msg = "Bir hata meydana geldi: Hesabýnýz kullanýma kapalý veya girdiðiniz kullanýcý adý ve/veya þifre hatalý.";
 
 	# login_page.php3
 	$s_login_page_info = "Bug Takip Sistemine hoþgeldiniz.";
@@ -316,7 +324,6 @@
 	$s_project_added_msg = "Proje baþarýyla eklendi...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "HATA: Bu kategori adý daha önce kullanýldý.";
 	$s_category_added_msg = "Kategori baþarýyla eklendi...";
 
 	# manage_project_category_delete.php3
@@ -367,7 +374,6 @@
 	$s_project_updated_msg = "Proje baþarýyla güncellendi...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "HATA: Bu versiyon daha önce kullanýldý.";
 	$s_version_added_msg = "Versiyon baþarýyla eklendi...";
 
 	# manage_project_version_delete.php3
@@ -505,7 +511,6 @@
 	$s_updated_user_msg = "Kullanýcý baþarýyla güncellendi";
 
 	# report_add.php3
-	$s_report_add_error_msg = "HATA: Raporunuzda bir hataya rastlandý.";
 	$s_must_enter_category = "Bir 'kategori' seçmelisiniz";
 	$s_must_enter_severity = "Bir 'þiddet' seviyesi seçmelisiniz";
 	$s_must_enter_reproducibility = "Bir 'tekrarlanabilirlik' eklemelisiniz";

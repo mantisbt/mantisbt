@@ -8,15 +8,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Gå tillbaks";
 	$s_proceed = "Klicka här för att fortsätta";
-	$s_sql_error_detected = "FEL: SQL fel. Var vänlig rapportera det till ";
 
 	$s_switch = "Byt";
 	$s_logged_in_as = "Inloggad som";
@@ -256,7 +265,6 @@
 	$s_click_to_login = "Klicka här för att logga in";
 
 	# login.php3
-	$s_login_error_msg = "Ett fel uppstod: ditt konto kan vara inaktiverat eller så har du angett ett felaktigt användarnamn/lösenord.";
 
 	# login_page.php3
 	$s_login_page_info = "Välkommen till bug-hanteraren.";
@@ -315,7 +323,6 @@
 	$s_project_added_msg = "Projektet har lagts till...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "FEL: Kategorin finns redan.";
 	$s_category_added_msg = "Kategorin har lagts till...";
 
 	# manage_project_category_delete.php3
@@ -366,7 +373,6 @@
 	$s_project_updated_msg = "Projektet har uppdaterats...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "FEL: Versionen finns redan.";
 	$s_version_added_msg = "Lade till version...";
 
 	# manage_project_version_delete.php3
@@ -504,7 +510,6 @@
 	$s_updated_user_msg = "Uppdaterade användaren";
 
 	# report_add.php3
-	$s_report_add_error_msg = "FEL: Det fanns ett fel i din rapport.";
 	$s_must_enter_category = "Du måste välja en kategori";
 	$s_must_enter_severity = "Du måste välja allvarlighetsgrad";
 	$s_must_enter_reproducibility = "Du måste välja reproducerbarhet";

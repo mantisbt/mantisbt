@@ -7,10 +7,25 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 ?>
 <?
+	# new strings:
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+
 	# General Strings
 	$s_go_back = "Intoarcere";
 	$s_proceed = "Apasa aici pentru a continua";
-	$s_sql_error_detected = "ERROR: eroare SQL detectata. Eroarea poate fi raportata la ";
 
 	$s_switch = "Schimba";
 	$s_logged_in_as = "Logat ca";
@@ -250,7 +265,6 @@
 	$s_click_to_login = "Click aici pentru autentificare";
 
 	# login.php3
-	$s_login_error_msg = "A aparut o eroare: contul ar putea fi dezactivat sau numele de utilizator si si/sau parola sunt incorecte.";
 
 	# login_page.php3
 	$s_login_page_info = "Bine ati venit pe sistemul de urmarire de bug-uri.";
@@ -309,7 +323,6 @@
 	$s_project_added_msg = "Proiectul a fost adaugat cu succes...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "EROARE: Aceasta categorie exista deja.";
 	$s_category_added_msg = "Categorie adaugata cu succes...";
 
 	# manage_project_category_delete.php3
@@ -360,7 +373,6 @@
 	$s_project_updated_msg = "Proiectul a fost modificat cu succes...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "EROARE: Aceasta este o versiune deja existenta.";
 	$s_version_added_msg = "Versiune adaugata cu succes...";
 
 	# manage_project_version_delete.php3
@@ -392,6 +404,7 @@
 	$s_reset_password_button = "Reset parola";
 	$s_delete_user_button = "Sterge utilizator";
 	$s_reset_password_msg = "Resetarea parolei face parola vida.";
+	$s_reset_password_msg2 = "Reset Password sets the password to be blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Cont protejat. Parola nu poate fi resetata.";
@@ -454,8 +467,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Incarca fisier";
 	$s_title = "Titlu";
-	$s_select_file = "Selecteaza fisier";
-	$s_upload_file_button = "Incarca fisier";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Fisier asociat proiectului sters.";
@@ -464,7 +475,6 @@
 	$s_confirm_file_delete_msg = "Sunteti sigur(a) ca doriti sa stergeti acest fisier ?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Incarca fisier";
 	$s_filename = "Nume fisier";
 	$s_file_update_button = "Modifica fisier";
 	$s_file_delete_button = "Sterge fisier";
@@ -500,7 +510,6 @@
 	$s_updated_user_msg = "Utilizator modificat cu succes";
 
 	# report_add.php3
-	$s_report_add_error_msg = "EROARE: S-a constatat o eroare in semnalarea unui bug.";
 	$s_must_enter_category = "Categoria trebuie selectata";
 	$s_must_enter_severity = "Severitatea trebuie selectata";
 	$s_must_enter_reproducibility = "Reproductibilitatea trebuie selectata";
@@ -518,14 +527,12 @@
 	$s_select_severity = "Severitate";
 	$s_or_fill_in = "SAU precizati";
 	$s_assign_to = "Asigneaza lui";
-	$s_steps_to_reproduce = "Pasi de reprodus";
 	$s_additional_information = "Informatie aditionala";
 	$s_submit_report_button = "Semnaleaza";
 	$s_check_report_more_bugs = "bifati pentru a semnala bug-uri in continuare";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Semnalare avansata";
-	$s_upload_file = "Incarca fisier";
 	$s_report_stay = "Stationare";
 
 	# set_project.php3
@@ -566,13 +573,13 @@
 	$s_summary_title = "Sumar";
 	$s_summary_jpgraph_link = "Sumar avansat";
 	$s_by_status = "dupa stare";
-	$s_dupa_date = "dupa data (zile)";
-	$s_dupa_severity = "dupa severitate";
-	$s_dupa_resolution = "dupa rezolvare";
-	$s_dupa_category = "dupa categorie";
-	$s_dupa_priority = "dupa prioritate";
-	$s_dupa_developer = "dupa dezvoltator";
-	$s_dupa_reporter ="dupa reporter";
+	$s_by_date = "by date (days)";
+	$s_by_severity = "by severity";
+	$s_by_resolution = "by resolution";
+	$s_by_category = "by category";
+	$s_by_priority = "by priority";
+	$s_by_developer = "by developer";
+	$s_by_reporter ="by reporter";
 	$s_time_stats = "statistici cronologice pentru bug-uri rezolvate (zile)";
 	$s_longest_open_bug = "bug-ul deschis pentru cel mai mult timp";
 	$s_longest_open = "cel mai mult";
@@ -587,7 +594,6 @@
 	$s_show = "Arata";
 	$s_changed = "Modificate(ore)";
 	$s_hide_closed = "Ascunde inchise";
-	$s_filter_button = "Filtrt";
 	$s_viewing_bugs_title = "Lista de bug-uri";
 	$s_updated = "Modificat";
 
@@ -612,4 +618,4 @@
 	# view_bug_page.php3
 	$s_view_advanced_link = "Vedere Avansata";
 	$s_viewing_bug_simple_details_title = "Vizualizare de bug cu detalii simple";
-?> 
+?>

@@ -8,15 +8,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Назад";
 	$s_proceed = "Нажмите, чтобы продолжить";
-	$s_sql_error_detected = "Ошибка SQL сервера.  Пожалуйста, сообщите ";
 
 	$s_switch = "Переключиться";
 	$s_logged_in_as = "В системе как";
@@ -256,7 +265,6 @@
 	$s_click_to_login = "Нажмите, чтобы войти в систему";
 
 	# login.php3
-	$s_login_error_msg = "ОШИБКА: Ваш аккаунт выл выключен или Вы ошиблись с именем или паролем.";
 
 	# login_page.php3
 	$s_login_page_info = "Добро пожаловать в службу технической поддержки";
@@ -315,7 +323,6 @@
 	$s_project_added_msg = "Проект был успешно добавлен...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "Ошибка: повтор категории.";
 	$s_category_added_msg = "Категория была успешно добавлена...";
 
 	# manage_project_category_delete.php3
@@ -366,7 +373,6 @@
 	$s_project_updated_msg = "Проект был успешно обновлен...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "Ошибка: Версия повторяется.";
 	$s_version_added_msg = "Версия была успешно добавлена...";
 
 	# manage_project_version_delete.php3
@@ -504,7 +510,6 @@
 	$s_updated_user_msg = "Пользователь успешно обновлен";
 
 	# report_add.php3
-	$s_report_add_error_msg = "Ошибка: Допущены следующие ошибки.";
 	$s_must_enter_category = "Вы должны выбрать категорию";
 	$s_must_enter_severity = "Вы должны ввести критичность";
 	$s_must_enter_reproducibility = "Вы полжны ввести повторяемость";

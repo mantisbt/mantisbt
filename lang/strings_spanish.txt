@@ -9,15 +9,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Volver";
 	$s_proceed = "Click aqui para continuar";
-	$s_sql_error_detected = "ERROR: SQL error detectado.  Por favor reportelo a ";
 
 	$s_switch = "Cambiar";
 	$s_logged_in_as = "Conectado como";
@@ -257,7 +266,6 @@
 	$s_click_to_login = "Click aqui para conectarse";
 
 	# login.php3
-	$s_login_error_msg = "Ocurrio un error con su cuenta, su usuario/clave debe ser incorrecto.";
 
 	# login_page.php3
 	$s_login_page_info = "Bienvenido a BugTracker.";
@@ -316,7 +324,6 @@
 	$s_project_added_msg = "El proyecto fue agregado exitosamente...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERROR: La Categoria esta duplicada.";
 	$s_category_added_msg = "La Categoria fue agregada exitosamente...";
 
 	# manage_project_category_delete.php3
@@ -367,7 +374,6 @@
 	$s_project_updated_msg = "El proyecto ha sido exitosamente actualizado...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: Esta es una version duplicada.";
 	$s_version_added_msg = "La Version ha sido exitosamente agregada...";
 
 	# manage_project_version_delete.php3
@@ -505,7 +511,6 @@
 	$s_updated_user_msg = "Usuario actualizado exitosamente";
 
 	# report_add.php3
-	$s_report_add_error_msg = "ERROR: Ocurrio un error en su reporte.";
 	$s_must_enter_category = "Debe seleccionar una categoria";
 	$s_must_enter_severity = "Debe seleccionar un nivel de severidad";
 	$s_must_enter_reproducibility = "Debe seleccionar un nivel de ocurrencia";

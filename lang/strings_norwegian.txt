@@ -8,15 +8,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Tilbake";
 	$s_proceed = "Klikk for å fortsette";
-	$s_sql_error_detected = "FEIL: SQL feil. Vennligst gi melding til ";
 
 	$s_switch = "Bytte";
 	$s_logged_in_as = "Logget inn som";
@@ -256,7 +265,6 @@
 	$s_click_to_login = "Klikk her for å logge inn";
 
 	# login.php3
-	$s_login_error_msg = "Det oppstod en feil: kontoen din kan være midlertidig stengt eller du har angitt brukernavn/passord som ikke er gyldig.";
 
 	# login_page.php3
 	$s_login_page_info = "Velkommen til bugtracker.";
@@ -315,7 +323,6 @@
 	$s_project_added_msg = "Prosjektet har blitt lagt til...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "FEIL: Det finnes en liknende kategori.";
 	$s_category_added_msg = "Kategorien har blitt lagt til...";
 
 	# manage_project_category_delete.php3
@@ -366,7 +373,6 @@
 	$s_project_updated_msg = "Prosjektet er oppdatert...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: This is a duplicate version.";
 	$s_version_added_msg = "Versjonsnummeret er lagt til...";
 
 	# manage_project_version_delete.php3
@@ -504,7 +510,6 @@
 	$s_updated_user_msg = "Oppdatert bruker OK";
 
 	# report_add.php3
-	$s_report_add_error_msg = "FEIL: Det var en feil i rapporten din.";
 	$s_must_enter_category = "Du må velge en kategori";
 	$s_must_enter_severity = "Du må velge konsekvensegrad";
 	$s_must_enter_reproducibility = "Du må velge reproduserbarhet";

@@ -10,15 +10,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Indietro";
 	$s_proceed = "Clicca qui per continuare";
-	$s_sql_error_detected = "ERRORE: Errore SQL.  Riporta questo errore a : ";
 
 	$s_switch = "Cambia";
 	$s_logged_in_as = "Autenticato come ";
@@ -258,7 +267,6 @@
 	$s_click_to_login = "Login";
 
 	# login.php3
-	$s_login_error_msg = "Si e' riscontrato un errore: L'account potrebbe essere disabilitato oppure la coppia username/password inserita non e' corretta.";
 
 	# login_page.php3
 	$s_login_page_info = "Benvenuti nel software di gestione problematiche e progetti.";
@@ -317,7 +325,6 @@
 	$s_project_added_msg = "Il Progetto e' stato inserito...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERRORE: Questa e' una categoria duplicata.";
 	$s_category_added_msg = "La Categoria e' stata inserita...";
 
 	# manage_project_category_delete.php3
@@ -368,7 +375,6 @@
 	$s_project_updated_msg = "Il Progetto e' stato correttamente aggiornato...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERRORE: Questa e' una versione duplicata.";
 	$s_version_added_msg = "La Versione e' stata inserita...";
 
 	# manage_project_version_delete.php3
@@ -506,7 +512,6 @@
 	$s_updated_user_msg = "Utente aggiornato con successo";
 
 	# report_add.php3
-	$s_report_add_error_msg = "ERRORE: Nel tuo Report e' presente un errore.";
 	$s_must_enter_category = "Devi selezionare una categoria";
 	$s_must_enter_severity = "Devi selezionare un livello di problematica";
 	$s_must_enter_reproducibility = "Devi selezionare la riproducibilita'";

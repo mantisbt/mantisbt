@@ -9,15 +9,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "뒤로";
 	$s_proceed = "계속 진행";
-	$s_sql_error_detected = "에러: SQL 에러 발생. 이 에러를 보고해 주세요. ";
 
 	$s_switch = "이동";
 	$s_logged_in_as = "로그인한 ID :";
@@ -257,7 +266,6 @@
 	$s_click_to_login = "로그인";
 
 	# login.php3
-	$s_login_error_msg = "에러: 이 계정은 사용할수 없거나 사용자이름/패스워드가 잘못 입력되었습니다.";
 
 	# login_page.php3
 	$s_login_page_info = "버그 관리시스템입니다.";
@@ -316,7 +324,6 @@
 	$s_project_added_msg = "프로젝트가 추가되었습니다....";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "오류: 중복된 카테고리입니다.";
 	$s_category_added_msg = "카테고리가 추가되었습니다...";
 
 	# manage_project_category_delete.php3
@@ -367,7 +374,6 @@
 	$s_project_updated_msg = "프로젝트가 갱신되었습니다....";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "오류: 버전이 중복되었습니다.";
 	$s_version_added_msg = "버전 정보가 추가되었습니다....";
 
 	# manage_project_version_delete.php3
@@ -505,7 +511,6 @@
 	$s_updated_user_msg = "사용자 정보가 갱신되었습니다.";
 
 	# report_add.php3
-	$s_report_add_error_msg = "에러: 리포트에 잘못된 내용이 있습니다.";
 	$s_must_enter_category = "카테고리를 선택해야 합니다.";
 	$s_must_enter_severity = "중요도를 선택해야 합니다.";
 	$s_must_enter_reproducibility = "재발생가능성을 선택해야 합니다.";

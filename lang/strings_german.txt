@@ -9,15 +9,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Zurück";
 	$s_proceed = "Weiter: hier klicken";
-	$s_sql_error_detected = "Fehler: SQL-Fehler entdeckt, Bitte melden an: ";
 
 	$s_switch = "Wechsel";
 	$s_logged_in_as = "angemeldet als";
@@ -257,7 +266,6 @@
 	$s_click_to_login = "Anmeldung: bitte hier klicken";
 
 	# login.php3
-	$s_login_error_msg = "Es ist ein Fehler aufgetreten: Ihr Konto ist gesperrt oder Benutzer/Passwort wurde falsch eingegben.";
 
 	# login_page.php3
 	$s_login_page_info = "Willkommen zum Bugtracker.";
@@ -316,7 +324,6 @@
 	$s_project_added_msg = "Projekt wurde hinzugefügt...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "FEHLER: Doppelte Kategorie.";
 	$s_category_added_msg = "Kategorie wurde hinzugefügt...";
 
 	# manage_project_category_delete.php3
@@ -367,7 +374,6 @@
 	$s_project_updated_msg = "Projekt wurde aktualisiert...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "FEHLER: Doppelte Version.";
 	$s_version_added_msg = "Version wurde hinzugefügt...";
 
 	# manage_project_version_delete.php3
@@ -505,7 +511,6 @@
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";
 
 	# report_add.php3
-	$s_report_add_error_msg = "FEHLER: Ihr Eintrag enthält (1) Fehler.";
 	$s_must_enter_category = "Sie müssen eine Kategorie wählen";
 	$s_must_enter_severity = "Wert für Schwere muss eingegeben werden";
 	$s_must_enter_reproducibility = "Wert für reproduzierbar eingeben";

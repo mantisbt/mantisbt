@@ -8,15 +8,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Anterior";
 	$s_proceed = "Clique para continuar";
-	$s_sql_error_detected = "ERRO: erro no SQL detectado. Alertar ";
 
 	$s_switch = "Selecionar";
 	$s_logged_in_as = "Registado Como";
@@ -256,7 +265,6 @@
 	$s_click_to_login = "Clique aqui para entrar";
 
 	# login.php3
-	$s_login_error_msg = "Existe um erro: a sua conta foi desabilitada ou seu utilizador/senha estão incorretos.";
 
 	# login_page.php3
 	$s_login_page_info = "Bem-vindo ao bugtracker.";
@@ -315,7 +323,6 @@
 	$s_project_added_msg = "O Projecto foi adicionado com sucesso...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERRO: Categoria Duplicada.";
 	$s_category_added_msg = "A Categoria foi adicionada com sucesso...";
 
 	# manage_project_category_delete.php3
@@ -366,7 +373,6 @@
 	$s_project_updated_msg = "Projecto Actualizado com Sucesso...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERRO: Versão Duplicada";
 	$s_version_added_msg = "Versão actualizada com sucesso...";
 
 	# manage_project_version_delete.php3
@@ -504,7 +510,6 @@
 	$s_updated_user_msg = "Utilizador Actualizado com Sucesso";
 
 	# report_add.php3
-	$s_report_add_error_msg = "ERRO: Existe um erro no seu relatório .";
 	$s_must_enter_category = "Deve seleccionar uma categoria";
 	$s_must_enter_severity = "Deve seleccionar uma causa";
 	$s_must_enter_reproducibility = "Deve seleccionar uma frequência";

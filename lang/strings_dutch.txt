@@ -8,15 +8,24 @@
 ?>
 <?
 	# new strings:
-	$s_no_file_specified = "ERROR: No file specified";
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 
 	# General Strings
 	$s_go_back = "Ga terug";
 	$s_proceed = "Klik hier om verder te gaan";
-	$s_sql_error_detected = "FOUT: SQL fout gevonden.  Rapporteer dit alstublieft aan ";
 
 	$s_switch = "Verander";
 	$s_logged_in_as = "Ingelogd als";
@@ -256,7 +265,6 @@
 	$s_click_to_login = "Klik hier om in te loggen";
 
 	# login.php3
-	$s_login_error_msg = "Een fout: uw account kan buiten werking zijn gesteld of de gebruikersnaam/wachtwoord die u heeft ingevoegd is niet correct.";
 
 	# login_page.php3
 	$s_login_page_info = "Welkom op de opdracht tracker.";
@@ -315,7 +323,6 @@
 	$s_project_added_msg = "Project is succesvol toegevoegd...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERROR: This is a duplicate category.";
 	$s_category_added_msg = "Categorie is succesvol aangemaakt...";
 
 	# manage_project_category_delete.php3
@@ -366,7 +373,6 @@
 	$s_project_updated_msg = "Project is succesvol ge-updated...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: This is a duplicate version.";
 	$s_version_added_msg = "Versie is succesvol toegevoegd...";
 
 	# manage_project_version_delete.php3
@@ -504,7 +510,6 @@
 	$s_updated_user_msg = "Successfully updated user";
 
 	# report_add.php3
-	$s_report_add_error_msg = "FOUT: Er is een fout opgetreden in uw rapport.";
 	$s_must_enter_category = "U moet een categorie selecteren";
 	$s_must_enter_severity = "U moet een serieusheid selecteren";
 	$s_must_enter_reproducibility = "U moet een reproduceerbaarheid selecteren";
