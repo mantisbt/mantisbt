@@ -6,18 +6,39 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_proj_delete.php,v 1.18 2004-05-06 13:09:35 vboctor Exp $
+	# $Id: manage_user_proj_delete.php,v 1.19 2004-12-14 20:37:07 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_user_id		= gpc_get_int( 'user_id' );
+
+	require_once( 'core.php' );
+
+	auth_ensure_user_authenticated();
+
+	$f_project_id = gpc_get_int( 'project_id' );
+	$f_user_id = gpc_get_int( 'user_id' );
 
 	access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
+	$t_project_name = project_get_name( $f_project_id );
+
+	# Confirm with the user
+	helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
+		'<br/>' . lang_get( 'project_name' ) . ': ' . $t_project_name,
+		lang_get( 'remove_user_button' ) );
+
 	$result = project_remove_user( $f_project_id, $f_user_id );
 
-	print_header_redirect( 'manage_user_edit_page.php?user_id=' .$f_user_id );
+	$t_redirect_url = 'manage_user_edit_page.php?user_id=' .$f_user_id;
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
 ?>
+<br />
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+?>
+</div>
+
+<?php html_page_bottom1( __FILE__ ) ?>

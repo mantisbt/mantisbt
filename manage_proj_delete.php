@@ -6,21 +6,24 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_delete.php,v 1.27 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_delete.php,v 1.28 2004-12-14 20:37:07 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
 	$f_project_id = gpc_get_int( 'project_id' );
-	
+
 	access_ensure_project_level( config_get( 'delete_project_threshold' ), $f_project_id );
 
-	helper_ensure_confirmed( lang_get( 'project_delete_msg' ),
-							 lang_get( 'project_delete_button' ) );
+	$t_project_name = project_get_name( $f_project_id );
+
+	helper_ensure_confirmed( lang_get( 'project_delete_msg' ) .
+			'<br/>' . lang_get( 'project_name' ) . ': ' . $t_project_name,
+			lang_get( 'project_delete_button' ) );
 
 	project_delete( $f_project_id );
 
-	# Don't leave the current project set to a deleted project - 
+	# Don't leave the current project set to a deleted project -
 	#  set it to All Projects
 	if ( helper_get_current_project() == $f_project_id ) {
 		helper_set_current_project( ALL_PROJECTS );

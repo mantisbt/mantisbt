@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_user_remove.php,v 1.5 2004-09-21 07:39:39 jlatour Exp $
+	# $Id: manage_proj_user_remove.php,v 1.6 2004-12-14 20:37:07 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_user_id		= gpc_get_int( 'user_id', null );
+
+	require_once( 'core.php' );
+
+	$f_project_id = gpc_get_int( 'project_id' );
+	$f_user_id = gpc_get_int( 'user_id', null );
 
 	# We should check both since we are in the project section and an
 	#  admin might raise the first threshold and not realize they need
@@ -21,11 +21,33 @@
 	access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
 	if ( null == $f_user_id ) {
+		# Confirm with the user
+		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
+
 		project_remove_all_users( $f_project_id );
 	}
 	else {
+		$t_user = user_get_row( $f_user_id );
+		# Confirm with the user
+		helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
+			'<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
+			lang_get( 'remove_user_button' ) );
+
 		project_remove_user( $f_project_id, $f_user_id );
 	}
 
-	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
 ?>
+<br />
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+?>
+</div>
+
+<?php html_page_bottom1( __FILE__ ) ?>

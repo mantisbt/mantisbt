@@ -6,27 +6,39 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_delete.php,v 1.21 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_cat_delete.php,v 1.22 2004-12-14 20:37:07 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'category_api.php' );
-?>
-<?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_category		= gpc_get_string( 'category' );
+
+	$f_project_id = gpc_get_int( 'project_id' );
+	$f_category = gpc_get_string( 'category' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ),
-							 lang_get( 'delete_category_button' ) );
+	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ) .
+		'<br/>' . lang_get( 'category' ) . ': ' . $f_category,
+		lang_get( 'delete_category_button' ) );
 
 	category_remove( $f_project_id, $f_category );
 
-	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
 ?>
+<br />
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+?>
+</div>
+
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.223 $
-	# $Author: bpfennigschmidt $
-	# $Date: 2004-12-12 20:34:29 $
+	# $Revision: 1.224 $
+	# $Author: marcelloscata $
+	# $Date: 2004-12-14 20:37:07 $
 	#
-	# $Id: strings_english.txt,v 1.223 2004-12-12 20:34:29 bpfennigschmidt Exp $
+	# $Id: strings_english.txt,v 1.224 2004-12-14 20:37:07 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -819,6 +819,9 @@ $s_project_removed_user_msg = 'Successfully removed user from project';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Are you sure you wish to remove this user?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Add user to project';
@@ -1019,6 +1022,9 @@ $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
 $s_field_delete_button = 'Delete Field';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Hide Status';
 $s_filter_closed = "Closed";

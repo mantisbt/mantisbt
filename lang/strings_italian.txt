@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.87 $
+	# $Revision: 1.88 $
 	# $Author: marcelloscata $
-	# $Date: 2004-12-06 20:23:33 $
+	# $Date: 2004-12-14 20:37:07 $
 	#
-	# $Id: strings_italian.txt,v 1.87 2004-12-06 20:23:33 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.88 2004-12-14 20:37:07 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -65,10 +65,10 @@ $s_bug_monitor = "Anomalia monitorata";
 $s_bug_end_monitor = "Anomalia non più monitorata";
 $s_announcement = "Annuncio";
 $s_stays_on_top = "Rimani in Primo Piano";
-$s_delete_bugnote_button = "Elimina la Nota alla anomalia";
-$s_delete_bugnote_sure_msg = "Sei sicuro di voler eliminare questa Nota?";
+$s_delete_bugnote_button = "Elimina nota dalla anomalia";
+$s_delete_bugnote_sure_msg = "Eliminare questa nota?";
 $s_bug_relationships = "Relazioni";
-$s_empty_password_sure_msg = "L'utente ha una password vuota. Sicuro di procedere?";
+$s_empty_password_sure_msg = "L'utente ha una password vuota. Procedere?";
 $s_empty_password_button = "Conferma password vuota";
 
 $s_duplicate_of = "duplicato di";
@@ -109,6 +109,7 @@ $s_resolve_bugs_conf_msg = "Scegli la risoluzione";
 $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
 $s_view_status_bugs_conf_msg = "seleziona vista priv/pubbl";
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = "Chiudi anomalia";
 $s_delete_group_bugs_button = "Elimina anomalia";
 $s_move_group_bugs_button = "Sposta anomalia";
@@ -118,6 +119,7 @@ $s_resolve_group_bugs_button = "Risolvi anomalia";
 $s_priority_group_bugs_button = "Aggiorna priorità";
 $s_status_group_bugs_button = "Aggiorna stato";
 $s_view_status_group_bugs_button = "Cambia priv/pubbl";
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "Grafico di sintesi per stato";
@@ -339,8 +341,8 @@ $s_account_protected_msg = "Il tuo Account è protetto, non puoi modificarne le i
 $s_account_removed_msg = "Il tuo Account è stato rimosso...";
 
 # account_delete_page.php
-$s_confirm_delete_msg = "Sei sicuro di voler eliminare il tuo Account?";
-$s_delete_account_button = "Elimina Account";
+$s_confirm_delete_msg = "Eliminare il tuo account?";
+$s_delete_account_button = "Elimina account";
 
 # account_page.php
 $s_manage_profiles_link = "Modifica Profili";
@@ -353,7 +355,7 @@ $s_password = "Password";
 $s_no_password_change = 'La password é gestita da un altro sistema, non può quindi essere modificata da questa applicazione.';
 $s_confirm_password  = "Conferma Password";
 $s_access_level = "Livello di Accesso";
-$s_update_user_button = "Aggiorna Account";
+$s_update_user_button = "Aggiorna account";
 
 # account_prefs_page.php
 $s_default_account_preferences_title = "Preferenze Utente";
@@ -378,8 +380,8 @@ $s_email_on_status_change = "Email su 'Cambio Stato'";
 $s_email_on_priority_change = "Email su 'Cambio Priorità'";
 $s_email_bugnote_limit = "Email su 'Nota aggiunta' fino al limite di note";
 $s_language = "Lingua";
-$s_update_prefs_button = "Aggiorna le Preferenze";
-$s_reset_prefs_button = "Resetta le Preferenze";
+$s_update_prefs_button = "Aggiorna le preferenze";
+$s_reset_prefs_button = "Resetta le preferenze";
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = "Le Preferenze sono state Resettate...";
@@ -398,14 +400,14 @@ $s_edit_profile_title = "Modifica Profilo";
 $s_platform = "Piattaforma";
 $s_operating_system = "Sistema Operativo";
 $s_additional_description = "Descrizione Aggiuntiva";
-$s_update_profile_button = "Aggiorna il Profilo";
+$s_update_profile_button = "Aggiorna il profilo";
 
 # account_profile_make_default.php
 $s_profile_defaulted_msg = "Profilo di Default Aggiornato...";
 
 # account_profile_manage_page.php
 $s_add_profile_title = "Nuovo Profilo";
-$s_add_profile_button = "Inserisci Profilo";
+$s_add_profile_button = "Inserisci profilo";
 $s_edit_or_delete_profiles_title = "Modifica o Elimina i Profili";
 $s_edit_profile = "Modifica i Profili";
 $s_make_default = "Imposta come Default";
@@ -449,7 +451,7 @@ $s_closed_bug_title = "Chiusura anomalia";
 $s_bug_deleted_msg = "L'anomalia è stata eliminata...";
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "Sei sicuro di voler eliminare questa anomalia?";
+$s_delete_bug_sure_msg = "Eliminare questa anomalia?";
 $s_delete_bug_button = "Elimina";
 
 # bug_monitor.php
@@ -462,7 +464,7 @@ $s_file_upload_msg = "File caricato con successo";
 # bug_file_upload_inc.php
 $s_upload_file = "Carica File";
 $s_select_file = "Seleziona File";
-$s_upload_file_button = "Carica File";
+$s_upload_file_button = "Carica file";
 $s_max_file_size = "Dimensione massima";
 
 # bug_reopen.php
@@ -477,7 +479,7 @@ $s_resolved_bug_button = "Risolvi";
 # bug_resolve_page2.php
 $s_bug_resolved_msg = "L'anomalia è stata risolta. Inserisci nota...";
 $s_resolve_add_bugnote_title = "Aggiungi una nota con le ragioni per la risoluzione dell'anomalia";
-$s_bugnote_add_resolve_button = "Inserisci Nota";
+$s_bugnote_add_resolve_button = "Inserisci nota";
 
 # bug_reminder_page.php
 $s_from = "Da";
@@ -522,7 +524,7 @@ $s_votes = "Voti";
 $s_summary = "Riassunto";
 $s_description = "Descrizione";
 $s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
-$s_update_information_button = "Aggiorna Informazione";
+$s_update_information_button = "Aggiorna informazione";
 
 # bug_update_page.php
 $s_update_advanced_link = "Aggiornamento dettagliato";
@@ -545,7 +547,7 @@ $s_edit_bugnote_title = "Aggiorna la Nota";
 $s_no_bugnotes_msg = "Non ci sono Note relative a questa anomalia.";
 $s_delete_link = "Elimina";
 $s_add_bugnote_title = "Inserisci nota";
-$s_add_bugnote_button = "Inserisci Nota";
+$s_add_bugnote_button = "Inserisci nota";
 $s_bugnote_edit_link = "Modifica";
 $s_closed_bug_button = "Chiudi";
 
@@ -569,7 +571,7 @@ $s_signup_link = "Registrati come Nuovo Utente";
 $s_lost_password_link = "Password dimenticata?";
 
 # login_select_proj_page.php
-$s_select_project_button = "Seleziona Progetto";
+$s_select_project_button = "Seleziona progetto";
 
 # logout_page.php
 $s_logged_out_title = "Esci...";
@@ -600,11 +602,11 @@ $s_create_new_account_title = "Crea nuovo Account";
 $s_verify_password = "Verifica Password";
 $s_enabled = "Abilitato";
 $s_protected = "Protetto";
-$s_create_user_button = "Crea Utente";
+$s_create_user_button = "Crea utente";
 
 # manage_page.php
 $s_hide_disabled = "Nascondi Disabilitati";
-$s_filter_button = "Applica il Filtro";
+$s_filter_button = "Applica il filtro";
 $s_manage_users_link = "Gestione Utenti";
 $s_manage_projects_link = "Gestione Progetti";
 $s_manage_custom_field_link = "Gestione Campi Personalizzati";
@@ -633,12 +635,12 @@ $s_category_added_msg = "La Categoria è stata inserita...";
 $s_category_deleted_msg = "La Categoria è stata eliminata...";
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "Sei sicuro di voler eliminare questa Categoria? Tutte le anomalie associate verranno eliminate.";
-$s_delete_category_button = "Elimina Categoria";
+$s_category_delete_sure_msg = "Eliminare questa categoria?";
+$s_delete_category_button = "Elimina categoria";
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = "Modifica le proprietà di questa Categoria del Progetto";
-$s_update_category_button = "Aggiorna Categoria";
+$s_update_category_button = "Aggiorna categoria";
 
 # manage_proj_category_update.php
 $s_category_updated_msg = "La Categoria è stata aggiornata correttamente...";
@@ -647,8 +649,8 @@ $s_category_updated_msg = "La Categoria è stata aggiornata correttamente...";
 $s_project_deleted_msg = "Il progetto è stato rimosso correttamente...";
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "Sei sicuro di voler eliminare questo progetto e tutte le anomalie associate?";
-$s_project_delete_button = "Elimina Progetto";
+$s_project_delete_msg = "Eliminare questo progetto e tutte le anomalie associate?";
+$s_project_delete_button = "Elimina progetto";
 
 # manage_proj_edit_page.php
 $s_edit_project_title = "Modifica Progetto";
@@ -656,13 +658,13 @@ $s_project_name = "Nome Progetto";
 $s_view_status = "Visibilità";
 $s_public = "pubblico";
 $s_private = "Privato";
-$s_update_project_button = "Aggiorna Progetto";
-$s_delete_project_button = "Elimina Progetto";
+$s_update_project_button = "Aggiorna progetto";
+$s_delete_project_button = "Elimina progetto";
 $s_categories_and_version_title = "Categorie e Versioni";
 $s_categories = "Categorie";
-$s_add_category_button = "Nuova Categoria";
+$s_add_category_button = "Nuova categoria";
 $s_versions = "Versioni";
-$s_add_version_button = "Nuova Versione";
+$s_add_version_button = "Nuova versione";
 $s_add_and_edit_version_button = "Aggiunge o modifica versione";
 $s_edit_link = "modifica";
 $s_actions = "Azioni";
@@ -673,7 +675,7 @@ $s_update = "Aggiorna";
 # manage_proj_menu_page.php
 $s_add_project_title = "Inserisci Progetto";
 $s_upload_file_path = "Percorso di upload dei file";
-$s_add_project_button = "Inserisci Progetto";
+$s_add_project_button = "Inserisci progetto";
 $s_projects_title = "Progetti";
 $s_name = "Nome";
 
@@ -687,12 +689,12 @@ $s_version_added_msg = "La Versione è stata inserita...";
 $s_version_deleted_msg = "La Versione è stata eliminata correttamente...";
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "Sei sicuro di voler eliminare questa versione? Tutte le anomalie associate verranno eliminate.";
-$s_delete_version_button = "Elimina Versione";
+$s_version_delete_sure = "Eliminare questa versione?";
+$s_delete_version_button = "Elimina versione";
 
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = "Modifica la Versione del Progetto";
-$s_update_version_button = "Aggiorna la Versione";
+$s_update_version_button = "Aggiorna versione";
 $s_released = "Rilasciata";
 
 # manage_proj_version_update.php
@@ -703,17 +705,17 @@ $s_account_delete_protected_msg = "Account Protetto. Non è possibile eliminarlo.
 $s_account_deleted_msg = "L'Account è stato eliminato...";
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "Sei sicuro di voler eliminare questo Account?";
+$s_delete_account_sure_msg = "Eliminare questo account?";
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = "Tutti gli Account che non hanno mai effettuato il login e sono più vecchi di 1 settimana sono stati rimossi";
-$s_prune_accounts_button = "Rimuovi";
-$s_confirm_account_pruning = "Sei sicuro di voler eliminare i vecchi account che non sono mai stati utilizzati?";
+$s_prune_accounts_button = "Elimina";
+$s_confirm_account_pruning = "Eliminare i vecchi account che non sono mai stati utilizzati?";
 
 # manage_user_page.php
 $s_edit_user_title = "Elimina Utente";
-$s_reset_password_button = "Resetta Password";
-$s_delete_user_button = "Elimina Utente";
+$s_reset_password_button = "Resetta password";
+$s_delete_user_button = "Elimina utente";
 $s_reset_password_msg = "Resettando la password, verrà inviata all'utente una email di verifica con il codice di convalida.";
 $s_reset_password_msg2 = "Resettando la password, questa verrà impostata come vuota.";
 $s_show_all_users = "TUTTI";
@@ -758,19 +760,19 @@ $s_news_added_msg = "Notizia Inserita...";
 $s_news_deleted_msg = "Notizia Eliminata...";
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "Sei sicuro di voler eliminare questa Notizia?";
-$s_delete_news_item_button = "Elimina Notizia";
+$s_delete_news_sure_msg = "Eliminare questa notizia?";
+$s_delete_news_item_button = "Elimina notizia";
 
 # news_edit_page.php
 $s_edit_news_title = "Modifica Notizia";
 $s_headline = "Titolo";
 $s_body = "Testo";
-$s_update_news_button = "Aggiorna Notizia";
+$s_update_news_button = "Aggiorna notizia";
 
 # news_menu_page.php
 $s_add_news_title = "Nuova Notizia";
 $s_post_to = "Invia in";
-$s_post_news_button = "Inserisci Notizia";
+$s_post_news_button = "Inserisci notizia";
 $s_edit_or_delete_news_title = "Elimina o modifica la Notizia";
 $s_edit_post = "Modifica il Post";
 $s_delete_post = "Elimina il Post";
@@ -793,12 +795,12 @@ $s_title = "Titolo";
 $s_project_file_deleted_msg = "File del progetto eliminato";
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "Sicuro di voler eliminare questo file?";
+$s_confirm_file_delete_msg = "Eliminare questo file?";
 
 # proj_doc_edit_page.php
 $s_filename = "Filename";
-$s_file_update_button = "Aggiorna File";
-$s_file_delete_button = "Eliminazione File";
+$s_file_update_button = "Aggiorna file";
+$s_file_delete_button = "Eliminae file";
 
 # proj_doc_page.php
 $s_project_documentation_title = "Documentazione Progetto";
@@ -816,11 +818,14 @@ $s_project_user_added_msg = "Utente aggiunto al progetto con successo";
 $s_project_removed_user_msg = "Utente eliminato dal progetto con successo";
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "Sicuro di voler eliminare questo utente?";
+$s_remove_user_sure_msg = "Rimuovere questo utente dal progetto?";
+$s_remove_user_button = 'Rimuovi utente';
+$s_remove_all_users_sure_msg = 'Rimuovere tutti gli utenti associati con questo progetto?';
+$s_remove_all_users_button = 'Rimuove tutti gli utenti';
 
 # proj_user_menu_page.php
 $s_add_user_title = "Aggiungi utente al progetto";
-$s_add_user_button = "Aggiungi Utente";
+$s_add_user_button = "Aggiungi utente";
 $s_project_selection_title = "Selezione Progetto";
 $s_remove_link = "Rimuove";
 $s_remove_all_link = "Rimuove tutti";
@@ -872,7 +877,7 @@ $s_no_password_request = "La password é gestita da un altro sistema. Contattare 
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = "Modifica Impostazioni Sito";
-$s_save_settings_button = "Salva Impostazioni";
+$s_save_settings_button = "Salva impostazioni";
 
 # site_settings_page.php
 $s_site_settings_title = "Impostazioni Sito";
@@ -948,7 +953,7 @@ $s_query_dupe_name = "Esiste un'altra query con questo nome. Indicare un nome di
 $s_query_blank_name = "Non é possibile memorizzare un filtro senza nome. Indicare un nome";
 $s_query_store_error = "C'é stato un errore durante la memorizzazione del filtro";
 $s_open_queries = "Gestione filtri";
-$s_query_delete_msg = "Sicuro di voler eliminare questo filtro?";
+$s_query_delete_msg = "Eliminare questo filtro?";
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "Scheda normale";
@@ -983,10 +988,10 @@ $s_total_sponsorship_amount = "Total Sponsorizzazione = %s";
 $s_sponsor_issue = "Sponsor Issue";
 
 # custom field strings
-$s_add_custom_field_button = "Nuovo Campo Personalizzato";
-$s_delete_custom_field_button = "Elimina Campo Personalizzato";
+$s_add_custom_field_button = "Nuovo campo personalizzato";
+$s_delete_custom_field_button = "Elimina campo personalizzato";
 $s_delete_custom_field_everywhere = "Elimina tutti i Campi Personalizzati";
-$s_update_custom_field_button = "Aggiorna Campo Personalizzato";
+$s_update_custom_field_button = "Aggiorna campo personalizzato";
 $s_add_existing_custom_field = "Aggiungi questo Campo Personalizzato";
 $s_edit_custom_field_title = "Modifica Campo Personalizzato";
 $s_custom_field = "Campo";
@@ -1015,8 +1020,11 @@ $s_custom_field_sequence = "Sequenza";
 $s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email,5:Checkbox,6:Lista,7:Lista a scelta multipla";
 
 $s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante Indietro del tuo browser.  Per procedere, clicca sul pulsante qui sotto";
-$s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo Campo Personalizzato e tutti i valori associati?";
-$s_field_delete_button = "Elimina Campo";
+$s_confirm_custom_field_deletion = "Eliminare questo campo personalizzato?";
+$s_field_delete_button = "Elimina campo personalizzato";
+
+$s_confirm_custom_field_unlinking = 'Rimuovere questo campo personalizzato dal presente progetto?';
+$s_field_remove_button = 'Rimuove campo personalizzato';
 
 $s_hide_status = "Non mostrare quelli";
 $s_filter_closed = "Chiusi";
@@ -1027,6 +1035,9 @@ $s_and_above = "e sopra";
 $s_advanced_filters = "Filtro avanzato";
 $s_simple_filters = "Filtro semplice";
 $s_monitored_by = "Monitorato da";
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
+$s_monitored_by = 'Monitored By';
 
 $s_attachments = "Allegati";
 $s_attachment_alt = "A";
@@ -1061,10 +1072,10 @@ $s_relationship_deleted = "Relazione eliminata";
 $s_no_relationship = "nessuna relazione";
 $s_relationship_replaced = "Relazione aggiornata";
 $s_replace_relationship_button = "Sostituisci";
-$s_replace_relationship_sure_msg = "Esiste già una relazione tra queste anomalie. Confermare la sostituzione?";
+$s_replace_relationship_sure_msg = "Esiste già una relazione tra queste anomalie. Procedere con la sostituzione?";
 $s_relationship_with_parent = "Relazione con l'anomalia padre";
-$s_delete_relationship_button = "Eliminare";
-$s_delete_relationship_sure_msg = "Confermare l'eliminazione di questa relazione?";
+$s_delete_relationship_button = "Elimina";
+$s_delete_relationship_sure_msg = "Eliminare questa relazione?";
 $s_relationship_warning_blocking_bugs_not_resolved = "NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.<br>Prima di <b>risolvere/chiudere</b> una anomalia padre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
 $s_create_child_bug_button = "Genera clone";
@@ -1110,8 +1121,8 @@ $s_manage_news = 'Gestire le news';
 $s_view_list_of_attachments = 'Visualizzare gli allegare';
 $s_download_attachments = 'Scaricare gli allegati';
 $s_delete_attachments = 'Eliminare gli allegati';
-$s_delete_attachment_button = "Eliminare";
-$s_delete_attachment_sure_msg = "Confermare l'eliminazione di questo allegato?";
+$s_delete_attachment_button = "Elimina allegato";
+$s_delete_attachment_sure_msg = "Eliminare questo allegato?";
 $s_upload_issue_attachments = 'Aggiungere allegati ad una anomalia';
 $s_filters = 'filtri';
 $s_save_filters = 'Salvare nuovi filtri';
@@ -1142,4 +1153,9 @@ $s_status_changed_to = 'Email su stato cambiato in';
 $s_email_on_deleted = 'Email su \'Eliminazione\'';
 $s_email_on_sponsorship_changed = 'Email su variazione di sponsorizzazione';
 $s_email_on_relationship_changed = 'Email su variazione delle relazioni';
+
+
+# DHTML filters
+$s_loading = 'Loading...';
+
 ?>
