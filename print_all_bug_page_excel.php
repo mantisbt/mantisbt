@@ -17,8 +17,9 @@
 	# excel or html export
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_excel";
+		$t_export_title = ereg_replace('[\/:*?"<>|]', '', $t_export_title);
 		header('Content-Type: application/vnd.ms-excel');
-		header( "Content-Disposition: attachment; filename=$t_export_title.xls" );
+		header('Content-Disposition: attachment; filename="' . $t_export_title . '.xls"');
 	}
 
 	# check to see if the cookie does not exist

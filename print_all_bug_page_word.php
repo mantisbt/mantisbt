@@ -12,14 +12,14 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-
 	# word or html export
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_word";
+		$t_export_title = ereg_replace('[\/:*?"<>|]', '', $t_export_title);
 		header('Content-Type: application/msword');
-		header( "Content-Disposition: attachment; filename=$t_export_title.doc" );
+		header('Content-Disposition: attachment; filename="' . $t_export_title . '.doc"');
 	}
-
+	
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
 		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
@@ -311,8 +311,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_platform ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -328,8 +328,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_os ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -345,8 +345,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_os_build ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -362,8 +362,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_version ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -379,8 +379,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -396,8 +396,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -407,8 +407,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print" colspan="4">
-		&nbsp;
+	<td class="print" colspan="4">&nbsp;
+		
 	</td>
 </tr>
 <tr>
