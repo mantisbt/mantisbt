@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.23 2004-06-29 08:38:43 int2str Exp $
+	# $Id: history_inc.php,v 1.24 2004-09-22 08:55:35 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,7 @@
 		<?php echo lang_get( 'bug_history' ) ?>
 	</td>
 </tr>
-<tr class="row-category">
+<tr class="row-category-history">
 	<td class="small-caption">
 		<?php echo lang_get( 'date_modified' ) ?>
 	</td>
