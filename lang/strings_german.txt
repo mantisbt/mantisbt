@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: vboctor $
-	# $Date: 2004-02-25 11:54:11 $
+	# $Date: 2004-02-26 13:07:15 $
 	#
-	# $Id: strings_german.txt,v 1.86 2004-02-25 11:54:11 vboctor Exp $
+	# $Id: strings_german.txt,v 1.87 2004-02-26 13:07:15 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -28,7 +28,7 @@ $s_actiongroup_menu_move = 'Verschieben';
 $s_actiongroup_menu_assign = 'Zuordnen';
 $s_actiongroup_menu_close = 'Schließen';
 $s_actiongroup_menu_delete = 'Löschen';
-$s_actiongroup_menu_resolve = 'Bereinigen';
+$s_actiongroup_menu_resolve = 'Beheben';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 
@@ -102,14 +102,14 @@ $s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich schliess
 $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich löschen?';
 $s_move_bugs_conf_msg = 'Fehler verschieben zu Projekt:';
 $s_assign_bugs_conf_msg = 'Fehler zuordnen zu:';
-$s_resolve_bugs_conf_msg = 'Bereiningungsgrund auswählen:';
+$s_resolve_bugs_conf_msg = 'Grund für Behebung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Fehlerpriorität:';
 $s_status_bugs_conf_msg = 'Neuer Fehlerstatus:';
 $s_close_group_bugs_button = 'Fehler schliessen' ;
 $s_delete_group_bugs_button = 'Fehler löschen' ;
 $s_move_group_bugs_button = 'Fehler verschieben' ;
 $s_assign_group_bugs_button = 'Fehler zuordnen' ;
-$s_resolve_group_bugs_button = 'Fehler bereinigen' ;
+$s_resolve_group_bugs_button = 'Fehler beheben' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
 
@@ -231,8 +231,8 @@ $s_view_state_enum_string = '10:öffentlich,50:privat';
 $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort';
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:BLOCKER';
 $s_reproducibility_enum_string = '10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A';
-$s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen';
-$s_resolution_enum_string = '10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
+$s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:behoben,90:geschlossen';
+$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
 $s_projection_enum_string = '10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Neuentwicklung';
 $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat';
 
@@ -249,14 +249,19 @@ $s_reset_request_msg = 'Es gab eine Anfrage, Ihr Passwort zurückzusetzen';
 $s_account_name_msg = 'Ihr Benutzername ist';
 $s_news_password_msg = 'Hier ist Ihr neues Passwort';
 
-$s_new_bug_msg = 'Der folgende Fehler wurde hinzugefügt.';
-$s_email_bugnote_msg = 'Eine Fehlernotiz wurde zu diesem Fehler hinzugefügt';
-$s_email_resolved_msg = 'Der folgende Fehler wurde behoben.';
-$s_email_close_msg = 'Der folgende Fehler wurde geschlossen';
-$s_email_feedback_msg = 'Der folgende Fehler benötigt Ihre Rückmeldung.';
-$s_email_reopen_msg = 'Der folgende Fehler wurde wiedereröffnet.';
-$s_email_assigned_msg = 'Der folgende Fehler wurde zugewiesen.';
-$s_email_bug_deleted_msg = 'Der folgende Fehler wurde gelöscht.';
+$s_email_notification_title_for_status_bug_feedback = 'Der folgende Fehler benötigt Ihre Rückmeldung.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Der folgende Fehler wurde anerkannt.';
+$s_email_notification_title_for_status_bug_confirmed = 'Der folgende Fehler wurde bestätigt.';
+$s_email_notification_title_for_status_bug_assigned = 'Der folgende Fehler wurde zugewiesen.';
+$s_email_notification_title_for_status_bug_resolved = 'Der folgende Fehler wurde behoben.';
+$s_email_notification_title_for_status_bug_closed = 'Der folgende Fehler wurde geschlossen.';
+
+$s_email_notification_title_for_action_bug_submitted = 'Der folgende Fehler wurde mitgeteilt.';
+$s_email_notification_title_for_action_bug_assigned = 'Der folgende Fehler wurde zugewiesen.';
+$s_email_notification_title_for_action_bug_reopened = 'Der folgende Fehler wurde wiedereröffnet.';
+$s_email_notification_title_for_action_bug_deleted = 'Der folgende Fehler wurde gelöscht.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'Eine Fehlernotiz wurde zu diesem Fehler hinzugefügt.';
 
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';
@@ -390,12 +395,12 @@ $s_reopen_add_bugnote_title = 'Notiz für Fehlerreaktivierung hinzufügen';
 $s_bugnote_add_reopen_button = 'Notiz hinzufügen und Fehler reaktivieren';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Fehler bereinigt';
-$s_resolve_bug_button = 'Fehler bereinigen';
+$s_resolve_bug_title = 'Fehler behoben';
+$s_resolve_bug_button = 'Fehler beheben';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Fehler bereinigt. Bitte Notiz eingeben...';
-$s_resolve_add_bugnote_title = 'Notiz zur Fehlerbereinigung eingeben';
+$s_bug_resolved_msg = 'Fehler behoben. Bitte Notiz eingeben...';
+$s_resolve_add_bugnote_title = 'Notiz zur Fehlerbehebung eingeben';
 $s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 
 # bug_reminder_page.php
@@ -612,7 +617,7 @@ $s_delete_account_sure_msg = 'Wollen Sie dieses Konto wirklich löschen?';
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = 'Alle Konten, die niemals benutzt wurden und älter als 1 Woche sind, wurden entfernt';
-$s_prune_accounts_button = 'Bereinigen';
+$s_prune_accounts_button = 'Endgültig löschen';
 $s_confirm_account_pruning = 'Möchten Sie alte Benutzer löschen, die sich nie angemeldet haben?';
 
 # manage_user_page.php
@@ -658,7 +663,7 @@ $s_delete_news_item_button = 'Nachricht löschen';
 
 # news_edit_page.php
 $s_edit_news_title = 'Nachricht bearbeiten';
-$s_headline = 'überschrift';
+$s_headline = 'Überschrift';
 $s_body = 'Text';
 $s_update_news_button = 'Nachrichten aktualisieren';
 
@@ -784,7 +789,7 @@ $s_by_project = 'Nach Projekt';
 $s_by_status = 'Nach Status';
 $s_by_date = 'Nach Datum';
 $s_by_severity = 'Nach Schweregrad';
-$s_by_resolution = 'Nach Bereinigung';
+$s_by_resolution = 'Nach Behebung';
 $s_by_category = 'Nach Kategorie';
 $s_by_priority = 'Nach Priorität';
 $s_by_developer = 'Nach Entwickler';
@@ -796,14 +801,14 @@ $s_percentage_fixed = '% repariert';
 $s_percentage_errors = '% fehlerhaft';
 $s_errors = 'Fehlerhaft';
 $s_total = 'Gesamt';
-$s_time_stats = 'Zeitwerte für Fehlerbereinigung (Tage)';
+$s_time_stats = 'Zeitwerte für Fehlerbehebung (Tage)';
 $s_longest_open_bug = 'am längsten offener Fehler';
 $s_longest_open = 'am längsten geöffnet';
 $s_average_time = 'durchschnittlich';
 $s_total_time = 'insgesamt';
 $s_developer_stats = 'Entwicklerstatistik';
 $s_reporter_stats = 'Reporter Statistiken';
-$s_orct = '(offen/erledigt/geschlossen/gesamt)';
+$s_orct = '(offen/behoben/geschlossen/gesamt)';
 
 # view_all_bug_page.php
 $s_any = 'alle';
@@ -828,8 +833,7 @@ $s_viewing_bug_advanced_details_title = 'Erweiterte Fehleranzeige';
 $s_product_build = 'Produktversion';
 $s_system_profile = 'Systembeschreibung';
 $s_update_bug_button = 'Fehler aktualisieren';
-$s_bug_assign_button = 'Zuordnen zu';
-$s_bug_assign_reporter_button = 'Reporter zuordnen';
+$s_bug_assign_to_button = 'Zuordnen zu';
 $s_reopen_bug_button = 'Fehler wiedereröffnen';
 $s_attached_files = 'Angehängte Dateien';
 $s_publish = 'Publizieren';
@@ -875,7 +879,7 @@ $s_field_delete_button = 'Feld löschen';
 
 $s_hide_status = 'Status ausblenden';
 $s_filter_closed = 'Geschlossen';
-$s_filter_resolved = 'Erledigt';
+$s_filter_resolved = 'Behoben';
 
 $s_attachments = 'Angehängte Datei(en)';
 $s_attachment_alt = 'D';
