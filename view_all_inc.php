@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.152 2005-01-25 13:57:29 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.153 2005-01-27 12:45:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'string_api.php' );
@@ -37,7 +37,7 @@
 	# -- ====================== end of FILTER FORM ================== --
 
 
-	# -- ====================== BUG LIST ============================ -- 
+	# -- ====================== BUG LIST ============================ --
 
 	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
@@ -60,7 +60,7 @@
 <table id="buglist" class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
-		<?php 
+		<?php
 			# -- Viewing range info --
 
 			$v_start = 0;
@@ -85,10 +85,10 @@
 	</td>
 
 	<td class="right" colspan="2">
-		<span class="small"> <?php 
-			# -- Page number links -- 
+		<span class="small"> <?php
+			# -- Page number links --
 
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ); 
+			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number );
 		?> </span>
 	</td>
 </tr>
@@ -106,21 +106,21 @@
 <tr>
 	<td class="spacer" colspan="<?php echo $col_count; ?>"> &nbsp; </td>
 </tr>
-<?php 
+<?php
 	function write_bug_rows ( $p_rows )
 	{
 		global $t_columns;
-		
+
 		mark_time( 'begin loop' );
-	
-		# -- Loop over bug rows and create $v_* variables -- 
-	
+
+		# -- Loop over bug rows and create $v_* variables --
+
 		for ( $i = 0; $i < sizeof( $p_rows ); $i++ ) {
 			$t_row = $p_rows[$i];
-	
+
 			# choose color based on status
 			$status_color = get_status_color( $t_row['status'] );
-	
+
 			echo '<tr bgcolor="', $status_color, '" border="1">';
 
 			foreach( $t_columns as $t_column ) {
@@ -135,7 +135,7 @@
 	write_bug_rows( $sticky_rows );
 
 	# -- ====================== end of STICKY BUG LIST ========================= --
-	if ( 0 < sizeof($sticky_rows) ) {
+	if ( ( sizeof( $sticky_rows ) > 0 ) && ( sizeof( $rows ) > 0 ) ) {
 ?>
 		<tr>
 			<td class="left" colspan="<?php echo $col_count; ?>" bgcolor="#999999">&nbsp;</td>
@@ -145,7 +145,7 @@
 	write_bug_rows($rows);
 	# -- ====================== end of BUG LIST ========================= --
 
-	# -- ====================== MASS BUG MANIPULATION =================== -- 
+	# -- ====================== MASS BUG MANIPULATION =================== --
 ?>
 	<tr>
 		<td class="left" colspan="<?php echo $col_count-2; ?>">
@@ -177,9 +177,9 @@
 </table>
 </form>
 
-<?php 
+<?php
 
-	mark_time( 'end loop' ); 
+	mark_time( 'end loop' );
 
 	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
