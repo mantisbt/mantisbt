@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.95 2004-08-16 00:24:30 thraxisp Exp $
+	# $Id: email_api.php,v 1.96 2004-08-16 00:40:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -357,6 +357,7 @@
 	# --------------------
 	# notify the selected group a new user has signup
 	function email_notify_new_account( $p_username, $p_email ) {
+		global $g_path;
 
 		$t_threshold_min = config_get( 'notify_new_user_created_threshold_min' );
 		$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
