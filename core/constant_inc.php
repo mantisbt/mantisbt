@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.8 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: constant_inc.php,v 1.9 2004-02-03 13:06:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -212,6 +212,7 @@
 	define( 'ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE',   1301 );
 	define( 'ERROR_CUSTOM_FIELD_IN_USE',			1302 );
 	define( 'ERROR_CUSTOM_FIELD_INVALID_VALUE',		1303 );
+	define( 'ERROR_CUSTOM_FIELD_INVALID_DEFINITION',	1304 );
 
 	# ERROR_LDAP_*
 	define( 'ERROR_LDAP_AUTH_FAILED',				1400 );

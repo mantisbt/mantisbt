@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.21 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.22 2004-02-03 13:06:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -140,13 +140,19 @@
 	# --------------------
 	# Check to see whether the name is unique
 	#  return false if a field with the name already exists, true otherwise
-	function custom_field_is_name_unique( $p_name ) {
+	#  if an id is specified, then the corresponding record is excluded from the
+	#  uniqueness test.
+	function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 		$c_name		= db_prepare_string( $p_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "SELECT COUNT(*) FROM
 				  $t_custom_field_table
 				  WHERE name='$c_name'";
+		if ( $p_custom_field_id !== null ) {
+			$c_id = db_prepare_int( $p_custom_field_id );
+			$query .= " AND (id <> $c_id)";
+		}
 		$result = db_query( $query );
 
 		$count = db_result( $result );
@@ -226,7 +232,7 @@
 	# the definition are the default values and can be changes later
 	# return the ID of the new definition
 	function custom_field_create( $p_name ) {
-		$c_name = db_prepare_string( $p_name );
+		$c_name = db_prepare_string( trim( $p_name ) );
 
 		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -251,7 +257,7 @@
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
 		$c_field_id			= db_prepare_int( $p_field_id );
-		$c_name				= db_prepare_string( $p_def_array['name']         );
+		$c_name				= db_prepare_string( trim( $p_def_array['name'] ) );
 		$c_type				= db_prepare_int(    $p_def_array['type']            );
 		$c_possible_values	= db_prepare_string( $p_def_array['possible_values'] );
 		$c_default_value	= db_prepare_string( $p_def_array['default_value']   );
@@ -261,6 +267,17 @@
 		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
+
+		if (	( is_blank( $c_name ) ) || 
+			( $c_access_level_rw < $c_access_level_r ) ||
+			( $c_length_min < 0 ) ||
+			( ( $c_length_max != 0 ) && ( $c_length_min > $c_length_max ) ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
+		}
+
+		if ( !custom_field_is_name_unique( $c_name, $c_field_id ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+		}
 
 		$query = "UPDATE " .
 				 config_get( 'mantis_custom_field_table' ).
