@@ -152,7 +152,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <p>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="6">
+	<td class="form-title" colspan="5">
 		<?php echo $s_manage_accounts_title ?> [<?php echo $user_count ?>]
 	</td>
 	<form method="post" action="<?php echo $g_manage_page ?>">
@@ -192,8 +192,6 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php print_manage_user_sort_link(  $g_manage_page, $s_last_visit, "last_visit", $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "last_visit" ) ?>
 	</td>
-	<td>
-	</td>
 </tr>
 <?php
 	for ($i=0;$i<$user_count;$i++) {
@@ -209,7 +207,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr bgcolor="<?php echo $t_bgcolor ?>">
 	<td>
-		<?php echo $u_username ?>
+		<a href="<?php echo $g_manage_user_page."?f_id=".$u_id ?>"><?php echo $u_username ?></a>
 	</td>
 	<td>
 		<?php print_email_link( $u_email, $u_email ) ?>
@@ -228,9 +226,6 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 	<td align="center">
 		<?php echo $u_last_visit ?>
-	</td>
-	<td align="center">
-		<?php print_bracket_link( $g_manage_user_page."?f_id=".$u_id, $s_edit_user_link ) ?>
 	</td>
 </tr>
 <?php
