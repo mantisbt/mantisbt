@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.27 2002-12-30 10:46:25 jfitzell Exp $
+	# $Id: bugnote_update.php,v 1.28 2003-01-02 05:47:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 	bug_ensure_exists( $t_bug_id );
 
 	# Check if the bug has been resolved
-	if ( bug_get_field( $t_bug_id, 'status' ) >= RESOLVED ) {
+	if ( bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' ) ) {
 		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
 	}
 	

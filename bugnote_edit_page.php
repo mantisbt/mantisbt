@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.31 2002-12-30 10:46:24 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.32 2003-01-02 05:47:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -31,10 +31,11 @@
 	bug_ensure_exists( $t_bug_id );
 
 	# Check if the bug has been resolved
-	if ( bug_get_field( $t_bug_id, 'status' ) >= RESOLVED ) {
+	if ( bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' ) ) {
+		# @@@ The error should be more generic.
 		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
 	}
-	
+
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.74 2002-12-30 10:46:24 jfitzell Exp $
+	# $Id: bugnote_inc.php,v 1.75 2003-01-02 05:47:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,7 +87,7 @@
 		<?php
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
-			if ( bug_get_field( $f_bug_id, 'status' ) < RESOLVED ) {
+			if ( bug_get_field( $f_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) ) {
 				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, $s_bugnote_edit_link );
@@ -120,9 +120,9 @@
 </table>
 <?php # Bugnotes END ?>
 
-<?php if ( ( ( $t_bug->status < RESOLVED ) ||
+<?php if ( ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) ||
 		  ( isset( $f_resolve_note ) ) ) &&
-		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
+		( access_level_check_greater_or_equal( config_get( 'add_bugnote_threshold' ) ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <br />
 <form method="post" action="bugnote_add.php">

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.34 2002-12-30 08:11:31 jfitzell Exp $
+	# $Id: email_api.php,v 1.35 2003-01-02 05:47:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -298,12 +298,11 @@
 
 		# Build Welcome Message
 		$t_message = lang_get( 'reset_request_msg' ) . "\n\n".
-					lang_get( 'account_name_msg' ) . ': '.$v_username."\n".
-					lang_get( 'news_password_msg' ) . ': '.$p_password."\n\n".
+					lang_get( 'new_account_username' ) . $v_username."\n".
+					lang_get( 'new_account_password' ) . $p_password."\n\n".
 					$g_path."\n\n";
 
-		# @@@ Localise
-		email_send( $v_email, 'New Password', $t_message );
+		email_send( $v_email, lang_get( 'news_password_msg' ), $t_message );
 	}
 	# --------------------
 	# send notices when a new bug is added

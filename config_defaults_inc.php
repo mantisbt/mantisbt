@@ -485,7 +485,13 @@
 	# Mantis Misc Settings
 	############################
 
-	# --- threshold -------------------
+	# --- status thresholds (*_status_threshold) ---
+
+	# Bug is resolved, ready to be closed or reopened.  In some custom installations a bug
+	# maybe considered as resolved when it is moved to a custom (FIXED OR TESTED) status.
+	$g_bug_resolved_status_threshold = RESOLVED;
+
+	# --- access level thresholds (*_threshold) ---
 
 	# access level needed to report a bug
 	$g_report_bug_threshold			= REPORTER;
@@ -615,7 +621,7 @@
 
 	# Automatically set status to ASSIGNED whenever a bug is assigned to a person.
 	# This is useful for installations where assigned status is to be used when
-	# the defect is in progress, rather than just put in a person's queue.
+	# the bug is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
 
 	################################

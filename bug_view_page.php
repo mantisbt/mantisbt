@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.22 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.23 2003-01-02 05:47:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -391,36 +391,38 @@
 		<table width="100%">
 			<tr align="center">
 <?php
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
 	# UPDATE button
-	if ( $t_bug->status < RESOLVED ) {
+	if ( $t_bug->status < $t_resolved ) {
 		echo '<td class="center">';
 		html_button_bug_update( $f_bug_id );
 		echo '</td>';
 	}
 
 	# ASSIGN button
-	if ( $t_bug->status < RESOLVED ) {
+	if ( $t_bug->status < $t_resolved ) {
 		echo '<td class="center">';
 		html_button_bug_assign( $f_bug_id );
 		echo '</td>';
 	}
 
 	# RESOLVE button
-	if ( $t_bug->status < RESOLVED ) {
+	if ( $t_bug->status < $t_resolved ) {
 		echo '<td class="center">';
 		html_button_bug_resolve( $f_bug_id );
 		echo '</td>';
 	}
 
 	# REOPEN button
-	if ( $t_bug->status >= RESOLVED ) {
+	if ( $t_bug->status >= $t_resolved ) {
 		echo '<td class="center">';
 		html_button_bug_reopen( $f_bug_id );
 		echo '</td>';
 	}
 
 	# CLOSE button
-	if ( $t_bug->status == RESOLVED ) {
+	if ( $t_bug->status == $t_resolved ) {
 		echo '<td class="center">';
 		html_button_bug_close( $f_bug_id );
 		echo '</td>';
@@ -452,7 +454,7 @@
 
 <?php
 	# File upload box
-	if ( $t_bug->status < RESOLVED ) {
+	if ( $t_bug->status < $t_resolved ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

@@ -148,7 +148,7 @@
 	<td>
 		<select name="access_level">
 			<?php # No administrator choice ?>
-			<?php print_project_access_levels_option_list( REPORTER ) ?>
+			<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 		</select>
 	</td>
 </tr>
