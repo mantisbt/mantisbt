@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.22 2003-04-24 04:00:44 vboctor Exp $
+	# $Id: access_api.php,v 1.23 2003-07-13 13:29:54 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -30,15 +30,15 @@
 			global $_SERVER;
 		}
 
-		print '<center>';
-		print '<br />'.error_string(ERROR_ACCESS_DENIED).'<br />';
 		if ( ! auth_is_user_authenticated() ) {
 			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
 			print_header_redirect( 'login_page.php?return=' . $p_return_page );
 		} else {
+			print '<center>';
+			print '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
 			print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+			print '</center>';
 		}
-		print '</center>';
 		exit;
 	}
 
