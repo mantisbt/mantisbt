@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.37 2003-07-28 16:26:24 beerfrick Exp $
+	# $Id: string_api.php,v 1.38 2003-07-30 02:18:30 beerfrick Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -282,7 +282,7 @@
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
-		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) ;
+		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 		$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
 		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="[' . $t_status . '] ' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
