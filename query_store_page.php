@@ -49,7 +49,7 @@
 	<input type="text" name="query_name"><br />
 	<?php
 	if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-		print '<input type="checkbox" name="is_public" value="on">';
+		print '<input type="checkbox" name="is_public" value="on"> ';
 		print lang_get( 'make_public' );
 		print '<br />';
 	}

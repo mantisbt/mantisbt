@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.13 2004-07-18 13:22:29 vboctor Exp $
+	# $Id: relationship_api.php,v 1.14 2004-07-18 13:40:30 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -548,7 +548,7 @@
 
 <?php collapse_open( 'relationships' ); ?>
 <table class="width100" cellspacing="1">
-<tr class="row-2">
+<tr class="row-2" valign="top">
 	<td width="15%" class="form-title">
 		<?php
 			collapse_icon( 'relationships' );
