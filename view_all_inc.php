@@ -21,6 +21,8 @@
 	$t_dir = $t_filter['dir'];
 
 	$t_checkboxes_exist = false;
+
+	$t_icon_path = config_get( 'icon_path' );
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
 <br />
@@ -242,7 +244,7 @@
 	<?php # -- Attachment indicator --
 		if ( ON == $t_show_attachments ) {
 		  echo '<td class="center">';
-			echo '<img src="' . config_get( 'icon_path' ) . 'attachment.png' . '" alt="" />';
+			echo '<img src="' . $t_icon_path . 'attachment.png' . '" alt="" />';
 			echo '</td>';
 		}
 	?>
@@ -332,7 +334,7 @@
 	<td class="center">
 	<?php
 		if ( access_has_bug_level( UPDATER, $v_id ) ) {
-			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . config_get( 'icon_path' ) . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
 			echo '&nbsp;';
 		}
@@ -378,7 +380,7 @@
 		  echo '<td class="center">';
 			if ( 0 < $t_attachment_count ) {
 				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
-				echo '<img border="0" src="' . config_get( 'icon_path' ) . 'attachment.png' . '"';
+				echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
 				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
 				echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
 				echo ' />';
@@ -435,7 +437,7 @@
 		<?php
 			echo $v_summary;
 			if ( VS_PRIVATE == $v_view_state ) {
-			  echo '  ['.lang_get( 'private' ).']';
+				echo ' <img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 			}
 		 ?>
 	</td>

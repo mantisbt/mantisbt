@@ -19,6 +19,7 @@ Mantis ChangeLog
  * Fix #3124: view_bugs: a reporter has the drop-down box of actions, but doesn't have the checkboxes.
  * Fix #3132: Email for feedback does not contain the last bugnote
  * Fix #3140: attachment.png is corrupt in CVS.
+ * Fix #3143: Show a padlock instead of "p".
  * Languages: Updated Italian, Slovak and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
 

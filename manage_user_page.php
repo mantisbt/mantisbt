@@ -21,6 +21,7 @@
 	$f_save = gpc_get_bool( 'save' );
 
 	$t_cookie_name = config_get( 'manage_cookie' );
+	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
 
 	# set cookie values for hide, sort by, and dir
 	if ( $f_save ) {
@@ -182,7 +183,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'p' ), 'protected', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_user_page.php', $t_lock_image, 'protected', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'protected' ) ?>
 	</td>
 	<td>
@@ -210,7 +211,15 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>
 	<td><?php echo get_enum_element( 'access_levels', $u_access_level ) ?></td>
 	<td><?php echo trans_bool( $u_enabled ) ?></td>
-	<td><?php echo trans_bool( $u_protected ) ?></td>
+	<td class="center">
+          <?php
+		if ( $u_protected ) {
+			echo " $t_lock_image";
+		} else {
+			echo '&nbsp;';
+		}
+          ?>
+        </td>
 	<td><?php echo $u_date_created ?></td>
 	<td><?php echo $u_last_visit ?></td>
 </tr>
