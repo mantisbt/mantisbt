@@ -12,7 +12,7 @@
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
+	project_access_check( $f_id );
 	check_bug_exists( $f_id );
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
@@ -64,22 +64,22 @@
 	</td>
 </tr>
 <tr class="row-category">
-	<td width="15%">
+	<td width="16%">
 		<? echo $s_id ?>
 	</td>
-	<td width="20%">
+	<td width="16%">
 		<? echo $s_category ?>
 	</td>
-	<td width="15%">
+	<td width="16%">
 		<? echo $s_severity ?>
 	</td>
-	<td width="20%">
+	<td width="16%">
 		<? echo $s_reproducibility ?>
 	</td>
-	<td width="15%">
+	<td width="16%">
 		<? echo $s_date_submitted ?>
 	</td>
-	<td width="15%">
+	<td width="16%">
 		<? echo $s_last_update ?>
 	</td>
 </tr>
@@ -218,66 +218,82 @@
 ?>
 	</td>
 </tr>
-<?
-	if ( access_level_check_greater_or_equal( UPDATER ) ) {
-?>
 <tr align="center">
+<?	# UPDATE form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<? echo $g_bug_update_page ?>">
-		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-		<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
-	<td valign="top" colspan="2" bgcolor="<? echo $g_white_color ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
+	<td class="center">
 		<input type="submit" value="<? echo $s_update_bug_button ?>">
 	</td>
 	</form>
-<?
-		if ($v_status!=RESOLVED) {
-			if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
-?>
+<?	} else { ?>
+	<td>&nbsp;</td>
+<?	} # UPDATE form END ?>
+<?	# ASSIGN form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<? echo $g_bug_assign ?>">
-		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-		<input type="hidden" name="f_date_submitted" value="<? echo $v_date_submitted ?>">
-	<td valign="top" bgcolor="<? echo $g_white_color ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<input type="hidden" name="f_date_submitted" value="<? echo $v_date_submitted ?>">
+	<td class="center">
 		<input type="submit" value="<? echo $s_bug_assign_button ?>">
 	</td>
-<?			} else { ?>
-	<td valign="top" colspan="2" bgcolor="<? echo $g_white_color ?>">
-	</td>
-<?		} # endif DEVELOPER ?>
 	</form>
+<?	} else { ?>
+	<td>&nbsp;</td>
+<?	} # ASSIGN form END ?>
+<?	# RESOLVE form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<? echo $g_bug_resolve_page ?>">
-		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<td valign="top" bgcolor="<? echo $g_white_color ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<td class="center">
 		<input type="submit" value="<? echo $s_resolve_bug_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
-	<td valign="top" colspan="2" bgcolor="<? echo $g_white_color ?>">
-		&nbsp;
+	<td>&nbsp;</td>
+<?	} # RESOLVE form END ?>
+<?	# REOPEN form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status >= RESOLVED ) &&
+		(( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) ||
+		( $v_reporter_id == $t_user_id )) ) { ?>
+	<form method="post" action="<? echo $g_bug_reopen_page ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_reopen_bug_button ?>">
 	</td>
-<?	} #endif RESOLVED ?>
-<?
-		if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
-?>
+	</form>
+<?	} else { ?>
+	<td>&nbsp;</td>
+<?	} # REOPEN form END ?>
+<?	# CLOSE form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( RESOLVED == $v_status ) ) { ?>
+	<form method="post" action="<? echo $g_bug_close ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_close_bug_button ?>">
+	</td>
+	</form>
+<?	} else { ?>
+	<td>&nbsp;</td>
+<?	} # CLOSE form END ?>
+<?	# DELETE form BEGIN ?>
+<?	if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
 	<form method="post" action="<? echo $g_bug_delete_page ?>">
-		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-		<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
-	<td valign="top" colspan="2" bgcolor="<? echo $g_white_color ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
+	<td class="center">
 		<input type="submit" value="<? echo $s_delete_bug_button ?>">
 	</td>
 	</form>
-<?		} else { ?>
-	<td colspan="2">
-		&nbsp;
-	</td>
-<?		} #endif DEVELOPER ?>
+<?	} else {
+	PRINT "<td>&nbsp;</td>";
+	} # DELETE form END ?>
 </tr>
-<?
-	} # endif UPDATER
-?>
 </table>
 
 <? include( $g_bug_file_upload_inc ) ?>
-
 <? include( $g_bugnote_include_file ) ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

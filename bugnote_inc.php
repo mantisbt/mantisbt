@@ -135,28 +135,4 @@
 </form>
 </table>
 <? ### Bugnote Add Form END ?>
-<?
-	} else if (( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) )||
-		( $v_reporter_id == $t_user_id )) {
-?>
-<? ### Bugnote Reopen Form BEGIN ?>
-<p>
-<table class="width100" cellspacing="0">
-<form method="post" action="<? echo $g_bug_reopen_page ?>">
-<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-<tr>
-	<td class="center">
-		<input type="submit" value="<? echo $s_reopen_bug_button ?>">
-	</td>
-</form>
-<? if ( $v_status != CLOSED ) { ?>
-<form method="post" action="<? echo $g_bug_close ?>">
-<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<td class="center">
-		<input type="submit" value="<? echo $s_close_bug_button ?>">
-	</td>
-</tr>
-</form>
-<? } ?>
-</table>
-<? } ?>
+<?	} ?>

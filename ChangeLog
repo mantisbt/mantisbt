@@ -13,6 +13,7 @@ Mantis
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Renamed g_store_file_to to g_file_upload_method.
+ * Modified bug action buttons to be more consistent.
 
 12.01.2001  -   0.16.1
 
