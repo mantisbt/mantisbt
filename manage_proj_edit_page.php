@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.70 2003-03-19 07:26:42 int2str Exp $
+	# $Id: manage_proj_edit_page.php,v 1.71 2003-03-22 16:30:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -439,7 +439,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 					<?php echo lang_get( 'username' ) ?>
 				</td>
 				<td>
-					<select name="user_id[]" multiple size="10">
+					<select name="user_id[]" multiple="multiple" size="10">
 						<?php print_project_user_list_option_list( $f_project_id ) ?>
 					</select>
 				</td>

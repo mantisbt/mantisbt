@@ -307,7 +307,7 @@
 	<td class="center">
 	<?php
 		if ( access_has_bug_level( UPDATER, $v_id ) ) {
-			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . config_get( 'icon_path' ) . 'update.png' . '" /></a>';
+			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . config_get( 'icon_path' ) . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
 			echo '&nbsp;';
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.5 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: manage_user_edit_page.php,v 1.6 2003-03-22 16:30:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -159,7 +159,7 @@
 		<?php echo lang_get( 'unassigned_projects' ) ?>:
 	</td>
 	<td>
-		<select name="project_id[]" multiple size="5">
+		<select name="project_id[]" multiple="multiple" size="5">
 			<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
 		</select>
 	</td>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.7 2003-03-12 17:39:48 jfitzell Exp $
+	# $Id: bugnote_view_inc.php,v 1.8 2003-03-22 16:30:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<a name="bugnotes"><br />
+<a name="bugnotes"></a><br />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -103,9 +103,9 @@
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
 					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
 						if ( VS_PRIVATE == $v3_view_state ) {
-							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, lang_get( 'make_public' ));
+							print_bracket_link('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {
-							print_bracket_link('bugnote_set_view_state.php?private=1&bugnote_id='.$v3_id, lang_get( 'make_private' ));
+							print_bracket_link('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
 						}
 					}
 				}

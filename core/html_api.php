@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.70 2003-03-13 00:10:07 jfitzell Exp $
+	# $Id: html_api.php,v 1.71 2003-03-22 16:30:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -297,7 +297,7 @@
 		echo '<br />';
 		echo '<hr size="1" />';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis " . config_get( 'mantis_version' ) . "</a></span>";
+			echo '<span class="timer"><a href="http://mantisbt.sourceforge.net/">Mantis ' . config_get( 'mantis_version' ) . '</a></span>';
 		}
 		echo '<address>Copyright &copy; 2000 - 2003</address>';
 		echo '<address><a href="mailto:' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
@@ -306,17 +306,17 @@
 		}
 		if ( ON == config_get( 'show_queries_count' ) ) {
 			$t_count = count( $g_queries_array );
-			echo "$t_count total queries executed.<br />";
-			echo count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
+			echo $t_count.' total queries executed.<br />';
+			echo count( array_unique ( $g_queries_array ) ).' unique queries executed.<br />';
 			if ( ON == config_get( 'show_queries_list' ) ) {
 				echo '<table>';
 				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
 					if ( in_array( $g_queries_array[$i], $t_shown_queries ) ) {
-						echo '<tr><td style="color: red">'. ($i+1) ."</td><td style=\"color: red\">$g_queries_array[$i]</td></tr>";
+						echo '<tr><td style="color: red">'.($i+1).'</td><td style="color: red">'.htmlspecialchars($g_queries_array[$i]).'</td></tr>';
 					} else {
 						array_push( $t_shown_queries, $g_queries_array[$i] );
-						echo '<tr><td>'. ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
+						echo '<tr><td>'.($i+1).'</td><td>'.htmlspecialchars($g_queries_array[$i]) . '</td></tr>';
 					}
 				}
 				echo '</table>';

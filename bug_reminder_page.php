@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.13 2003-02-26 13:05:40 vboctor Exp $
+	# $Id: bug_reminder_page.php,v 1.14 2003-03-22 16:30:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,7 +45,7 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
-		<select name="to[]" multiple size="10">
+		<select name="to[]" multiple="multiple" size="10">
 			<?php echo print_project_user_option_list() ?>
 		</select>
 	</td>

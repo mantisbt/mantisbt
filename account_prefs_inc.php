@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.23 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prefs_inc.php,v 1.24 2003-03-22 16:30:35 jlatour Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -65,7 +65,7 @@
 	</td>
 	<td width="50%">
 		<select name="default_project">
-			<?php print_project_option_list( $u_default_project ) ?></option>
+			<?php print_project_option_list( $u_default_project ) ?>
 		</select>
 	</td>
 </tr>
@@ -200,7 +200,7 @@
 		<?php echo lang_get( 'language' ) ?>
 	</td>
 	<td>
-		<select name=language>
+		<select name="language">
 			<?php print_language_option_list( $u_language ) ?>
 		</select>
 	</td>
