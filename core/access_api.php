@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.10 2003-01-24 00:09:06 vboctor Exp $
+	# $Id: access_api.php,v 1.11 2003-01-24 00:31:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -67,13 +67,17 @@
 	function access_level_check_greater_or_equal( $p_access_level, $p_project_id=0 ) {
 		global $g_string_cookie_val;
 
+		if ( NOBODY == $p_access_level ) {
+			return false;
+		}
+
 		# user isn't logged in
 		if (( !isset( $g_string_cookie_val ) )||( is_blank( $g_string_cookie_val ) )) {
 			return false;
 		}
 
 		# Administrators ALWAYS pass.
-		if ( (NOBODY != $p_access_level) && current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
@@ -99,13 +103,17 @@
 	function access_level_ge_no_default_for_private ( $p_access_level, $p_project_id ) {
 		global $g_string_cookie_val;
 
+		if ( NOBODY == $p_access_level ) {
+			return false;
+		}
+
 		# user isn't logged in
 		if (( !isset( $g_string_cookie_val ) )||( is_blank( $g_string_cookie_val ) )) {
 			return false;
 		}
 
 		# Administrators ALWAYS pass.
-		if ( (NOBODY != $p_access_level) && current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
@@ -159,6 +167,10 @@
 	# --------------------
 	# Checks to see if the user should be here.  If not then log the user out.
 	function check_access( $p_access_level ) {
+		if ( NOBODY == $p_access_level ) {
+			return false;
+		}
+
 		# Administrators ALWAYS pass.
 		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
