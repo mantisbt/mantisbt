@@ -4,42 +4,42 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Norwegian: Espen Holje, espen.holje@auto-net.no
+	# Norwegian: Espen Holje, eh@escio.no
 ?>
 <?php
 	# new strings:
 	$s_all_projects = "Alle prosjekter";
-	$s_move_bugs = "Flytte bugs";
+	$s_move_bugs = "Flytte saker";
 	$s_operation_successful = "Operasjonen var vellykket.";
 	$s_date_order = "Dato sortering";
 	$s_print_all_bug_page_link = "Utskrift rapporter";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
+	$s_csv_export = "CSV eksport";
+	$s_login_anonymously = "Anonym innlogging";
 	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
-	$s_print = "Print";
-	$s_jump = "Jump";
-	$s_copy_users = "Copy Users";
-	$s_copy_categories = "Copy Categories";
+	$s_public_project_msg = "Dette prosjektet er OFFENTLIG. Alle brukere har tilgang til dette prosjektet.";
+	$s_private_project_msg = "Dette prosjektet er PRIVAT.  Kun administratorer og brukere som har blitt gitt tilgang manuelt har tilgang.";
+	$s_access_level_project = "Tilgangsnivå prosjekt";
+	$s_view_submitted_bug_link = "Vis innlagt sak";
+	$s_assigned_projects = "Delegerte prosjekter";
+	$s_unassigned_projects = "Ikke-delegerte prosjekter";
+	$s_print = "Utskrift";
+	$s_jump = "Hopp";
+	$s_copy_users = "Kopiere brukere";
+	$s_copy_categories = "Kopiere kategorier";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_GENERIC]            = "FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.";
+	$MANTIS_ERROR[ERROR_SQL] = "FEIL: SQL feil.  Vennligst rapporter dette til ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "FEIL: kontoen kan ha blitt stengt eller ditt brukernavn/passordet du oppga var ikke riktig.";
+	$MANTIS_ERROR[ERROR_REPORT] = "FEIL: Det var en feil i rapporten din.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FEIL: Ingen fil spesifisert";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "FEIL: Ulovlig filtype";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FEIL: Mappen eksisterer ikke. Vennligst sjekk prosjektinnstillingene.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FEIL: Kategorien eksisterer fra før.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FEIL: Versjonen eksisterer fra før.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "FEIL: Filen eksisterer fra før. Vennligst slett filen først.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.";
 
 	# General Strings
 	$s_go_back = "Tilbake";
@@ -61,7 +61,7 @@
 	$s_severity_enum_string           = "10:funksjonalitet,20:triviell,30:tekst,40:kan omgås,50:mindre,60:alvorlig,70:krasj,80:blokkering";
 	$s_reproducibility_enum_string    = "10:alltid,30:noen ganger,50:tilfeldig,70:har ikke forsøkt,90:kan ikke reprodusere,100:ingen";
 	$s_status_enum_string             = "10:ny,20:tilbakemelding,30:godkjent,40:bekreftet,50:delegert,80:løst,90:lukket";
-	$s_resolution_enum_string         = "10:åpne,20:fikset,30:åpnet på nytt,40:kan ikke reprodusere,50:kan ikke ordnes,60:kopi,70:ikke bug,80:utsatt,90:vil ikke fikse";
+	$s_resolution_enum_string         = "10:åpne,20:fikset,30:åpnet på nytt,40:kan ikke reprodusere,50:kan ikke ordnes,60:kopi,70:ikke feil,80:utsatt,90:vil ikke fikse";
 	$s_projection_enum_string         = "10:ingen,30:kan omgås,50:mindre fiks,70:omfattende rekoding,90:redesign";
 	$s_eta_enum_string                = "10:ikke angitt,20:< 1 dag,30:2-3 dager,40:< 1 uke,50:< 1 mnd,60:> 1 mnd";
 
@@ -78,18 +78,18 @@
 	$s_account_name_msg = "Kontonavnet ditt er";
 	$s_news_password_msg = "Her er ditt nye passord";
 
-	$s_new_bug_msg = "Følgende NYE feil har blitt LAGT til.";
-	$s_email_bugnote_msg = "En MELDING har blitt lagt til denne feilen.";
-	$s_email_resolved_msg = "Følgende feil har blitt LØST.";
-	$s_email_close_msg = "The following bug has beeen CLOSED";
-	$s_email_feedback_msg = "Følgende feil krever din TILBAKEMELDING.";
-	$s_email_reopen_msg = "Følgende feil har blitt GJENÅPNET.";
-	$s_email_assigned_msg = "Følgende feil har blitt DELEGERT.";
+	$s_new_bug_msg = "Følgende NYE saker har blitt LAGT til.";
+	$s_email_bugnote_msg = "En MELDING har blitt lagt til denne saken.";
+	$s_email_resolved_msg = "Følgende sak har blitt LØST.";
+	$s_email_close_msg = "Følgende sak har blitt LUKKET";
+	$s_email_feedback_msg = "Følgende sak krever din TILBAKEMELDING.";
+	$s_email_reopen_msg = "Følgende sak har blitt ÅPNET PÅ NYTT.";
+	$s_email_assigned_msg = "Følgende sak har blitt DELEGERT.";
 
 	$s_email_reporter = "Rapportert av";
 	$s_email_handler = "Ansvarlig";
 	$s_email_project = "Prosjekt";
-	$s_email_bug = "Feil ID";
+	$s_email_bug = "Sak ID";
 	$s_email_category = "Kategori";
 	$s_email_reproducibility = "Reproduserbarhet";
 	$s_email_severity = "Alvorlighetsgrad";
@@ -129,13 +129,13 @@
 	$s_advanced_update = "Avansert oppdatering";
 	$s_refresh_delay = "Forsinkelse på oppfriskning";
 	$s_redirect_delay = "Forsinkelse på redirrigering";
-	$s_email_on_new = "Epost ved ny feil";
+	$s_email_on_new = "Epost ved ny sak";
 	$s_email_on_assigned = "Epost ved delegering";
 	$s_email_on_feedback = "Epost ved tilbakemelding";
 	$s_email_on_resolved = "Epost når løst";
 	$s_email_on_closed = "Epost når lukket";
 	$s_email_on_reopened = "Epost når åpnet på nytt";
-	$s_email_on_bugnote_added = "Epost ved ny bugnote";
+	$s_email_on_bugnote_added = "Epost ved ny saksmelding";
 	$s_email_on_status_change = "Epost ved statusendring";
 	$s_email_on_priority_change = "Epost ved endring av pri";
 	$s_language = "Språk";
@@ -182,25 +182,21 @@
 	$s_account_updated_msg = "Kontoen din har blitt oppdatert...";
 
 	# bug_assign.php3
-	$s_bug_assign_msg       = "Feilen har blitt delegert...";
+	$s_bug_assign_msg       = "Saken har blitt delegert...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Feilen har blitt lukket...";
-	$s_close_immediately   = "Close immediately:";
+	$s_bug_close_msg       = "Saken har blitt lukket...";
+	$s_close_immediately   = "Lukke umiddelbart:";
 
 	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_bug_title = "Lukke sak";
 
 	# bug_delete.php3
-	$s_bug_deleted_msg = "Feilen er slettet...";
+	$s_bug_deleted_msg = "Saken er slettet...";
 
 	# bug_delete_page.php3
-	$s_delete_bug_sure_msg = "Er du sikker på at du ønsker å slette feilen?";
-	$s_delete_bug_button = "Slett feil";
-
-	# bug_monitor.php3
-	$s_monitor_bug_button = "Monitor Bug";
-	$s_unmonitor_bug_button = "End Monitoring";
+	$s_delete_bug_sure_msg = "Er du sikker på at du ønsker å slette saken?";
+	$s_delete_bug_button = "Slette sak";
 
 	# bug_file_add.php3
 	$s_file_upload_msg = "Fil lastet opp OK";
@@ -211,25 +207,25 @@
 	$s_upload_file_button = "Laste opp fil";
 
 	# bug_reopen.php3
-	$s_bug_reopened_msg = "Feilen har blitt gjenåpnet...";
+	$s_bug_reopened_msg = "Saken har blitt gjenåpnet...";
 	$s_reopen_add_bugnote_title = "Legg til beskjed om årsaken til gjenåpning";
-	$s_bugnote_add_reopen_button = "Legg til beskjed og gjenåpne feil";
+	$s_bugnote_add_reopen_button = "Legg til beskjed og gjenåpne saken";
 
 	# bug_resolve_page.php3
-	$s_resolve_bug_title = "Løse feil";
-	$s_resolve_bug_button = "Løse feil";
+	$s_resolve_bug_title = "Løse sak";
+	$s_resolve_bug_button = "Løse sak";
 
 	# bug_resolve_page2.php3
-	$s_bug_resolved_msg = "Feilen har blitt utbedret. Legg til kommentar nedenfor...";
+	$s_bug_resolved_msg = "Saken har blitt utbedret. Legg til kommentar nedenfor...";
 	$s_resolve_add_bugnote_title = "Legg til melding om feilårsak";
 	$s_bugnote_add_resolve_button = "Legg til feilmelding";
 
 	# bug_update.php3
-	$s_bug_updated_msg = "Feilen har blitt oppdatert...";
+	$s_bug_updated_msg = "Saken har blitt oppdatert...";
 
 	# bug_update_advanced_page.php3
-	$s_back_to_bug_link = "Tilbake til feilen";
-	$s_update_simple_link = "Oppdater Enkel";
+	$s_back_to_bug_link = "Tilbake til saken";
+	$s_update_simple_link = "Oppdater enkel";
 	$s_updating_bug_advanced_title = "Oppdater feilinformasjon";
 	$s_id = "ID";
 	$s_category = "Kategori";
@@ -258,8 +254,8 @@
 	$s_update_information_button = "Oppdater informasjon";
 
 	# bug_update_page.php3
-	$s_update_advanced_link = "Oppdater Avansert";
-	$s_updating_bug_simple_title = "Oppdaterer feilinformasjon";
+	$s_update_advanced_link = "Oppdater avansert";
+	$s_updating_bug_simple_title = "Oppdaterer saksinformasjon";
 
 	# bug_vote_add.php3
 	$s_vote_added_msg = "Stemmen er registrert...";
@@ -272,15 +268,15 @@
 	$s_bug_notes_title = "Meldinger";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Redigere saksmelding";
 
 	# bugnote_inc.php
-	$s_no_bugnotes_msg = "Det er ingen beskjeder på denne feilen.";
+	$s_no_bugnotes_msg = "Ingen meldinger på saken.";
 	$s_delete_link = "Slett";
 	$s_add_bugnote_title = "Nytt notat";
 	$s_add_bugnote_button = "Legg til notat";
 	$s_bugnote_edit_link = "Redigere";
-	$s_close_bug_button = "Avslutte bug";
+	$s_close_bug_button = "Avslutte sak";
 
 	# bugnote_update.php3
 	$s_bugnote_updated_msg = "Notat har blitt oppdatert...";
@@ -354,7 +350,7 @@
 	$s_category_deleted_msg = "Kategorien har blitt slettet...";
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Er du sikker på at du ønsker å slette denne kategorien? Alle tilknyttede feil vil bli slettet.";
+	$s_category_delete_sure_msg = "Er du sikker på at du ønsker å slette denne kategorien? Alle tilknyttede saker vil bli slettet.";
 	$s_delete_category_button = "Slette kategori";
 
 	# manage_project_category_edit_page.php3
@@ -368,7 +364,7 @@
 	$s_project_deleted_msg = "Prosjektet er slettet...";
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "Er du sikker på at du ønsker å slette dette prosjektet og alle tilknyttede feilrapproteringer?";
+	$s_project_delete_msg = "Er du sikker på at du ønsker å slette dette prosjektet og alle tilknyttede saker?";
 	$s_project_delete_button = "Slette prosjekt";
 
 	# manage_project_edit_page.php3
@@ -403,7 +399,7 @@
 	$s_version_deleted_msg = "Versjonsnummeret er slettet...";
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Er du sikker på at du ønsker å slette dette versjonsnummeret? Alle tilknyttede feil vil bli slettet.";
+	$s_version_delete_sure = "Er du sikker på at du ønsker å slette dette versjonsnummeret? Alle tilknyttede saker vil bli slettet.";
 	$s_delete_version_button = "Slette versjon";
 
 	# manage_project_version_edit_page.php3
@@ -441,8 +437,8 @@
 
 	# menu_inc.php
 	$s_main_link = "Hovedmeny";
-	$s_view_bugs_link = "Vis feilmeldinger";
-	$s_report_bug_link = "Rapportere feil";
+	$s_view_bugs_link = "Vis saker";
+	$s_report_bug_link = "Ny sak";
 	$s_summary_link = "Oppsummering";
 	$s_account_link = "Konto";
 	$s_users_link = "Brukere";
@@ -536,12 +532,12 @@
 	$s_must_enter_reproducibility = "Du må velge reproduserbarhet";
 	$s_must_enter_summary = "Du må angi oppsummering";
 	$s_must_enter_description = "Du må angi beskrivelse";
-	$s_report_more_bugs = "Rapportere flere feil";
+	$s_report_more_bugs = "Rapportere flere saker";
 	$s_submission_thanks_msg = "Takk for ditt bidrag.";
 
 	# report_bug_advanced_page.php3
 	$s_simple_report_link = "Enkel rapport";
-	$s_enter_report_details_title = "Legg inn rapport detaljer";
+	$s_enter_report_details_title = "Legg inn detaljer om saken";
 	$s_required = "påkrevd";
 	$s_select_category = "Velg kategori";
 	$s_select_reproducibility = "Velg reproduserbarhet";
@@ -550,11 +546,11 @@
 	$s_assign_to = "Deleger til";
 	$s_additional_information = "Tilleggsinformasjon";
 	$s_submit_report_button = "Legg inn rapport";
-	$s_check_report_more_bugs = "kryss av for å legge inn flere feil fortløpende";
+	$s_check_report_more_bugs = "kryss av for å legge inn flere saker fortløpende";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Avansert rapport";
-	$s_report_stay = "Rapportere flere feil";
+	$s_report_stay = "Rapportere flere saker";
 
 	# set_project.php3
 	$s_selected_project = "Valgt prosjekt";
@@ -601,8 +597,8 @@
 	$s_by_priority = "pr prioritet";
 	$s_by_developer = "pr utvikler";
 	$s_by_reporter ="pr reporter";
-	$s_time_stats = "tidsstatistikk for løste feil (dager)";
-	$s_longest_open_bug = "lengste åpne feil";
+	$s_time_stats = "tidsstatistikk for løste saker (dager)";
+	$s_longest_open_bug = "lengste åpne sak";
 	$s_longest_open = "lengste åpne";
 	$s_average_time = "gjennomsnittlig tid";
 	$s_total_time = "total tid";
@@ -615,7 +611,7 @@
 	$s_show = "Vis";
 	$s_changed = "Endret(timer)";
 	$s_hide_closed = "Skjule løste";
-	$s_viewing_bugs_title = "Oversikt over feil";
+	$s_viewing_bugs_title = "Oversikt over saker";
 	$s_updated = "Oppdatert";
 
 	# view_all_inc.php
@@ -626,17 +622,17 @@
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Vis enkel";
-	$s_viewing_bug_advanced_details_title = "Vis avanserte detaljer for feil";
+	$s_viewing_bug_advanced_details_title = "Vis avanserte detaljer for sak";
 	$s_product_build = "Produkt versjon";
 	$s_system_profile = "Systembeskrivelse";
-	$s_update_bug_button = "Oppdatere feil";
+	$s_update_bug_button = "Oppdatere sak";
 	$s_bug_assign_button    = "Delegere til meg";
-	$s_reopen_bug_button = "Gjenåpne feil";
+	$s_reopen_bug_button = "Gjenåpne sak";
 	$s_attached_files = "Fil vedlegg";
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
 	$s_view_advanced_link = "Vis Avansert";
-	$s_viewing_bug_simple_details_title = "Oversikt over feil - enkel";
+	$s_viewing_bug_simple_details_title = "Oversikt over saker - enkel";
 ?>

@@ -4,146 +4,147 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
+	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 ?>
 <?php
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
-	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
-	$s_print = "Print";
-	$s_jump = "Jump";
-	$s_copy_users = "Copy Users";
-	$s_copy_categories = "Copy Categories";
+	$s_all_projects = "Все проекты";
+	$s_move_bugs = "Переместить баги";
+	$s_operation_successful = "Операция успешна.";
+	$s_date_order = "Порядок дат";
+	$s_print_all_bug_page_link = "Печать отчетов";
+	$s_csv_export = "Экспорт в CSV";
+	$s_login_anonymously = "Анонимный вход";
+	$s_jump_to_bugnotes = "Перейти к заметкам";
+	$s_public_project_msg = "Этот проект ОБЩЕДОСТУПНЫЙ. Все пользователи имеют доступ к этому проекту.";
+	$s_private_project_msg = "Этот проект ЧАСТНЫЙ. Только Администраторы и добавленные вручную пользователи имеют доступ.";
+	$s_access_level_project = "Уровень доступа к проекту";
+	$s_view_submitted_bug_link = "Просмотреть зарегистрированный баг";
+	$s_assigned_projects = "Назначенные проекты";
+	$s_unassigned_projects = "Неназначенные проекты";
+	$s_print = "Печать";
+	$s_jump = "Перейти";
+	$s_copy_users = "Копировать пользователей";
+	$s_copy_categories = "Копировать категории";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ОШИБКА: в процессе выполнения операции произошла ошибка.  Вы может быть захотите сообщить об этом вашему локальному администратору.";
+	$MANTIS_ERROR[ERROR_SQL] = "ОШИБКА: Обнаружена ошибка SQL . Пожалуйста, сообщите об этом ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ОШИБКА: В вашем рапорте обнаружены ошибки.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ОШИБКА: Нет описанного файла";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ОШИБКА: Этот тип файлов запрещен";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ОШИБКА: Каталога не существует. Проверьте настройки проекта.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ОШИБКА: Дубликат категории.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ОШИБКА: Дубликат версии.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ОШИБКА: Дубликат файла. Сначала удалите старый файл.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ОШИБКА: Необходимые поля не заполнены.  Проверьте правильность ввода.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.";
 
 	# General Strings
 	$s_go_back = "Назад";
 	$s_proceed = "Нажмите, чтобы продолжить";
 
 	$s_switch = "Переключиться";
-	$s_logged_in_as = "В системе как";
+	$s_logged_in_as = "Зарегистрирован как";
 
 	$s_user_no_longer_exists = "пользователь не существует";
 
-	$s_administrator = "administrator";
+	$s_administrator = "Администратор";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:просмотр,25:посетитель,40:суппорт,55:разработчик,70:менеджер,90:администратор";
-	$s_project_status_enum_string     = "10:бета,30:релиз,50:стабильно,70:идеально";
-	$s_project_view_state_enum_string = "10:публичный,50:частный";
+	$s_access_levels_enum_string      = "10:зритель,25:репортер,40:редактор,55:разработчик,70:менеджер,90:администратор";
+	$s_project_status_enum_string     = "10:бета,30:релиз,50:стабильный,70:устаревший";
+	$s_project_view_state_enum_string = "10:общедоступный,50:частный";
 
-	$s_priority_enum_string           = "10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:моментально";
-	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-	$s_reproducibility_enum_string    = "10:всегда,30:иногда,50:random,70:have not tried,90:unable to duplicate,100:N/A";
-	$s_status_enum_string             = "10:новый,20:принято,30:понято,40:подтверждено,50:назначено,80:решено,90:закрыто";
-	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-	$s_eta_enum_string                = "10:не нужно,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца";
+	$s_priority_enum_string           = "10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:безотлагательный";
+	$s_severity_enum_string           = "10:дополнение,20:тривиально,30:текст,40:минимально,50:незначительный,60:значительный,70:авария,80:блокировка";
+	$s_reproducibility_enum_string    = "10:всегда,30:иногда,50:случайно,70:попыток не было,90:невоспроизводимо,100:недоступно";
+	$s_status_enum_string             = "10:новый,20:информация,30:признан,40:подтвержден,50:назначен,80:решен,90:закрыт";
+	$s_resolution_enum_string         = "10:открыт,20:исправлен,30:открыт снова,40:невоспроизводим,50:неисправим,60:дубликат,70:не баг,80:приостановлен,90:не будет исправлен";
+	$s_projection_enum_string         = "10:нет,30:мелкие изменения,50:небольшие исправления,70:большая переработка,90:перепроектирование";
+	$s_eta_enum_string                = "10:нет,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца";
 
 	# Email Strings
-	$s_new_account_subject = "Ваш новый аккаунт";
-	$s_new_account_greeting = "Поздравляем и добро пожаловать в систему технической поддержки.  Ниже приводится информация, которая полезная для работы. Пожалуйста, сохраните это письмо.\n\n";
+	$s_new_account_subject = "Ваш новый бюджет";
+	$s_new_account_greeting = "Приветствуем, добро пожаловать в систему Bugtracker. Информация, которая необходима Вам для прохождения авторизации.\n\n";
 	$s_new_account_url = "Вы можете зайти в систему по следующему адресу: ";
-	$s_new_account_username = "Логин: ";
+	$s_new_account_username = "Пользователь: ";
 	$s_new_account_password = "Пароль: ";
-	$s_new_account_message = "После первого входа в систему, пожалуйста смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее криптование.  Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.\n\n";
+	$s_new_account_message = "После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.\n\n";
 	$s_new_account_do_not_reply = "Это сообщение создано автоматически, не нужно на него отвечать.\n";
 
 	$s_reset_request_msg = "Был получен запрос на изменение пароля";
-	$s_account_name_msg = "Ваш логин:";
+	$s_account_name_msg = "Ваше имя пользователя:";
 	$s_news_password_msg = "Ваш новый пароль:";
 
-	$s_new_bug_msg = "Только что было добавлено новое обращение в систему.";
-	$s_email_bugnote_msg = "Следующее сопроводительное сообщение было добавлено к обращению.";
-	$s_email_resolved_msg = "Следующее обращение было успешно решено.";
-	$s_email_close_msg = "Следующее обращение было закрыто.";
-	$s_email_feedback_msg = "Следующее обращение требует Вашей обратной связи.";
-	$s_email_reopen_msg = "Следующее обращение было открыто повторно.";
-	$s_email_assigned_msg = "Вам назначено следующее задание.";
+	$s_new_bug_msg = "Следующий НОВЫЙ баг ДОБАВЛЕН.";
+	$s_email_bugnote_msg = "ЗАМЕТКА была добавлена к следующему багу.";
+	$s_email_resolved_msg = "Следующий баг РЕШЕН.";
+	$s_email_close_msg = "Следующий баг ЗАКРЫТ.";
+	$s_email_feedback_msg = "Следующий баг требует Вашей ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ.";
+	$s_email_reopen_msg = "Следующий баг был ОТКРЫТ ПОВТОРНО.";
+	$s_email_assigned_msg = "Следующий баг НАЗНАЧЕН.";
 
 	$s_email_reporter = "Пользователь";
-	$s_email_handler = "Handler";
+	$s_email_handler = "Ответственный";
 	$s_email_project = "Проект";
-	$s_email_bug = "Bug ID";
+	$s_email_bug = "ID бага";
 	$s_email_category = "Категория";
 	$s_email_reproducibility = "Повторяемость";
 	$s_email_severity = "Критичность";
 	$s_email_priority = "Приоритет";
 	$s_email_status = "Статус";
 	$s_email_resolution = "Решение";
-	$s_email_duplicate = "Повторы";
-	$s_email_date_submitted = "Дата отправки";
-	$s_email_last_modified = "Последний раз обновлено";
-	$s_email_summary =  "Заголовок";
+	$s_email_duplicate = "Дубликаты";
+	$s_email_date_submitted = "Дата создания";
+	$s_email_last_modified = "Последнее обновление";
+	$s_email_summary =  "Сводка";
 	$s_email_description = "Описание";
 
 	# account_delete.php3
-	$s_account_protected_msg = "Аккаунт защищен. Невозможно изменить настройки...";
-	$s_account_removed_msg = "Ваш аккаунт был удален...";
+	$s_account_protected_msg = "Бюджет защищен. Невозможно изменить настройки...";
+	$s_account_removed_msg = "Ваш бюждет был удален...";
 
 	# account_delete_page.php3
-	$s_confirm_delete_msg = "Вы уверены, что желаете удалить Ваш аккаунт?";
-	$s_delete_account_button = "Удаление аккаунта";
+	$s_confirm_delete_msg = "Вы уверены, что желаете удалить Ваш бюджет?";
+	$s_delete_account_button = "Удаление бюджета";
 
 	# account_page.php3
-	$s_manage_profiles_link = "Управление профайлами";
-	$s_change_preferences_link = "Изменить настройки";
-	$s_edit_account_title = "Редактирование аккаунта";
-	$s_username = "Логин";
+	$s_manage_profiles_link = "Управление профилями";
+	$s_change_preferences_link = "Предпочтения";
+	$s_edit_account_title = "Редактирование бюджета";
+	$s_username = "Пользователь";
 	$s_email = "Email";
 	$s_password = "Пароль";
 	$s_confirm_password  = "Подтвердите пароль";
 	$s_access_level = "Уровень доступа";
-	$s_update_user_button = "Изменить информацию";
+	$s_update_user_button = "Обновить информацию";
 
 	# account_prefs_page.php3
-	$s_default_account_preferences_title = "Настройки профайла по умолчанию";
+	$s_default_account_preferences_title = "Предпочтения бюджета";
 	$s_default_project = "Проект по умолчанию";
-	$s_advanced_report = "Подробная форма обращения";
-	$s_advanced_view = "Подробный просмотр";
-	$s_advanced_update = "Подробное обновление";
+	$s_advanced_report = "Расширенный рапорт";
+	$s_advanced_view = "Расширенный просмотр";
+	$s_advanced_update = "Расширенное редактирование";
 	$s_refresh_delay = "Задержка при обновлении";
 	$s_redirect_delay = "Задержка при переходе";
-	$s_email_on_new = "Email при новом обращении";
-	$s_email_on_assigned = "Email при назначении";
-	$s_email_on_feedback = "Email при обратной связи";
-	$s_email_on_resolved = "email при решении?";
-	$s_email_on_closed = "email при закрытии?";
-	$s_email_on_reopened = "email при повторном открытии";
-	$s_email_on_bugnote_added = "email при новом сообщении";
-	$s_email_on_status_change = "Email при изменении статуса";
-	$s_email_on_priority_change = "email при измении приоритета";
+	$s_email_on_new = "Уведомлять о новых";
+	$s_email_on_assigned = "Уведомлять при назначении";
+	$s_email_on_feedback = "Уведомлять при статусе Доп. информация";
+	$s_email_on_resolved = "Уведомлять при решении?";
+	$s_email_on_closed = "Уведомлять при закрытии?";
+	$s_email_on_reopened = "Уведомлять при повторном открытии";
+	$s_email_on_bugnote_added = "Уведомлять при новом комментарии";
+	$s_email_on_status_change = "Уведомлять при изменении статуса";
+	$s_email_on_priority_change = "Уведомлять при измении приоритета";
 	$s_language = "Язык";
 	$s_update_prefs_button = "Обновить настройки";
-	$s_reset_prefs_button = "Обнулить настройки";
+	$s_reset_prefs_button = "Сбросить настройки";
 
 	# account_prefs_reset.php3
-	$s_prefs_reset_msg = "Настройки были обнулены...";
+	$s_prefs_reset_msg = "Настройки были сброшены к стандартным...";
 
 	# account_prefs_update.php3
 	$s_prefs_updated_msg = "Настойки обновлены...";
@@ -152,58 +153,54 @@
 	$s_profile_added_msg = "Профиль добавлен...";
 
 	# account_profile_delete.php3
-	$s_profile_deleted_msg = "Профайл удален...";
+	$s_profile_deleted_msg = "Профиль удален...";
 
 	# account_profile_edit_page.php3
-	$s_edit_profile_title = "Редактирование профайла";
+	$s_edit_profile_title = "Редактирование профиля";
 	$s_platform = "Платформа";
 	$s_operating_system = "Операционная система";
 	$s_version = "Версия";
 	$s_additional_description = "Дополнительное описание";
-	$s_update_profile_button = "Обновить профайл";
+	$s_update_profile_button = "Обновить профиль";
 
 	# account_profile_make_default.php3
-	$s_profile_defaulted_msg = "Профайл по умолчанию обновлен...";
+	$s_profile_defaulted_msg = "Профиль по умолчанию обновлен...";
 
 	# account_profile_manage_page.php3
-	$s_add_profile_title = "Добавление профайла";
-	$s_add_profile_button = "Добавить профайл";
-	$s_edit_or_delete_profiles_title = "Редактирование или удаление провайлов";
-	$s_edit_profile = "Редактировать профайл";
-	$s_make_default = "Создать профайл";
-	$s_delete_profile = "Удалить профайл";
-	$s_select_profile = "Выбрать профайл";
+	$s_add_profile_title = "Добавление профиля";
+	$s_add_profile_button = "Добавить профиль";
+	$s_edit_or_delete_profiles_title = "Редактирование или удаление профилей";
+	$s_edit_profile = "Редактировать профиль";
+	$s_make_default = "Создать профиль";
+	$s_delete_profile = "Удалить профиль";
+	$s_select_profile = "Выбрать профиль";
 	$s_submit_button = "Отправить";
 
 	# account_profile_update.php3
-	$s_profile_updated_msg = "Профайл обновлен...";
+	$s_profile_updated_msg = "Профиль обновлен...";
 
 	# account_update.php3
-	$s_account_updated_msg = "Ваш аккаунт был удачно обновлен...";
+	$s_account_updated_msg = "Ваш бюджет обновлен...";
 
 	# bug_assign.php3
-	$s_bug_assign_msg       = "Обращению был успешно назначен ответственный...";
+	$s_bug_assign_msg       = "Баг был  назначен...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Обращение было закрыто...";
-	$s_close_immediately   = "Close immediately:";
+	$s_bug_close_msg       = "Баг закрыт...";
+	$s_close_immediately   = "Закрыть немедленно:";
 
 	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_bug_title = "Закрыть баг";
 
 	# bug_delete.php3
-	$s_bug_deleted_msg = "Обращение было удалено...";
+	$s_bug_deleted_msg = "Баг удален...";
 
 	# bug_delete_page.php3
-	$s_delete_bug_sure_msg = "Вы уверены, что желаете обновить это обращение?";
-	$s_delete_bug_button = "Удалить обращение";
-
-	# bug_monitor.php3
-	$s_monitor_bug_button = "Monitor Bug";
-	$s_unmonitor_bug_button = "End Monitoring";
+	$s_delete_bug_sure_msg = "Вы уверены, что желаете обновить баг?";
+	$s_delete_bug_button = "Удалить баг";
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "Файл был загружен удачно";
+	$s_file_upload_msg = "Файл загружен";
 
 	# bug_file_upload_inc.php3
 	$s_upload_file = "Загрузка файла";
@@ -211,93 +208,93 @@
 	$s_upload_file_button = "Загрузить файл";
 
 	# bug_reopen.php3
-	$s_bug_reopened_msg = "Обращение было открыто повторно...";
-	$s_reopen_add_bugnote_title = "Добавить сообщение и повторно открыть обращение";
-	$s_bugnote_add_reopen_button = "Добавить сообщение и повторно открыть обращение";
+	$s_bug_reopened_msg = "Баг открыт повторно...";
+	$s_reopen_add_bugnote_title = "Добавить причину повторного открытия";
+	$s_bugnote_add_reopen_button = "Добавить комментарий и повторно открыть";
 
 	# bug_resolve_page.php3
-	$s_resolve_bug_title = "Решить проблему";
-	$s_resolve_bug_button = "Решить проблему";
+	$s_resolve_bug_title = "Решить баг";
+	$s_resolve_bug_button = "Решить баг";
 
 	# bug_resolve_page2.php3
-	$s_bug_resolved_msg = "Проблема была решена. Добавьте описание решения...";
-	$s_resolve_add_bugnote_title = "Добавьте описания решения проблемы";
-	$s_bugnote_add_resolve_button = "Добавить сообщение";
+	$s_bug_resolved_msg = "Баг разрешен. Добавьте комментарий...";
+	$s_resolve_add_bugnote_title = "Добавьте причину решения";
+	$s_bugnote_add_resolve_button = "Добавить комментарий";
 
 	# bug_update.php3
-	$s_bug_updated_msg = "Информация об обращении была успешно обновлена...";
+	$s_bug_updated_msg = "Информация о баге обновлена...";
 
 	# bug_update_advanced_page.php3
-	$s_back_to_bug_link = "Назад к обращению";
-	$s_update_simple_link = "Простое обновление";
-	$s_updating_bug_advanced_title = "Обновление информации об обращении";
+	$s_back_to_bug_link = "Назад к багу";
+	$s_update_simple_link = "Простое редактирование";
+	$s_updating_bug_advanced_title = "Обновление информации о баге";
 	$s_id = "ID";
 	$s_category = "Категория";
 	$s_severity = "Критичность";
-	$s_reproducibility = "Периодичность";
-	$s_date_submitted = "Заполнен";
-	$s_last_update = "Был обновлен";
-	$s_reporter = "Пользователь";
+	$s_reproducibility = "Воспроизводимость";
+	$s_date_submitted = "Зарегистрирован";
+	$s_last_update = "Обновлен";
+	$s_reporter = "Репортер";
 	$s_assigned_to = "Ответственный";
 	$s_priority = "Приоритет";
 	$s_resolution = "Решение";
 	$s_status = "Cтатус";
-	$s_duplicate_id = "Аналогичные ID";
+	$s_duplicate_id = "Дубликаты";
 	$s_os = "ОС";
-	$s_projection = "Projection";
+	$s_projection = "Прогноз";
 	$s_os_version = "Версия";
 	$s_eta = "ETA";
-	$s_product_version = "Версия продукта";
-	$s_build = "Билд";
+	$s_product_version = "Версия";
+	$s_build = "Подверсия";
 	$s_votes = "Голосов";
-	$s_summary = "Кратко";
+	$s_summary = "Сводка";
 	$s_description = "Описание";
-	$s_steps_to_reproduce = "Steps To Reproduce";
+	$s_steps_to_reproduce = "Операции для воспроизведения";
 	$s_additional = "Дополнительная";
 	$s_information = "информация";
-	$s_update_information_button = "Обновить информация";
+	$s_update_information_button = "Обновить информацию";
 
 	# bug_update_page.php3
-	$s_update_advanced_link = "Подробное обновление";
-	$s_updating_bug_simple_title = "Изменение информации об обращении";
+	$s_update_advanced_link = "Расширенное редактирование";
+	$s_updating_bug_simple_title = "Изменение информации о баге";
 
 	# bug_vote_add.php3
 	$s_vote_added_msg = "Голос был добавлен...";
 
 	# bugnote_add.php3
-	$s_bugnote_added_msg = "Cообщение было добавлено...";
+	$s_bugnote_added_msg = "Комментарий добавлен...";
 
 	# bugnote_delete.php3
-	$s_bugnote_deleted_msg = "Сообщение было усмешно удалено...";
-	$s_bug_notes_title = "Заметки об обращении";
+	$s_bugnote_deleted_msg = "Комментарий удален...";
+	$s_bug_notes_title = "Комментарии к багу";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Редактировать комментарий";
 
 	# bugnote_inc.php
-	$s_no_bugnotes_msg = "Нет дополнительной информации к обращению.";
-	$s_delete_link = "Delete";
-	$s_add_bugnote_title = "Добавление информации";
+	$s_no_bugnotes_msg = "Нет комментариев к багу";
+	$s_delete_link = "Удалить";
+	$s_add_bugnote_title = "Добавление комментария";
 	$s_add_bugnote_button = "Добавить";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_bugnote_edit_link = "Редактировать";
+	$s_close_bug_button = "Закрыть баг";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "Комментарий обновлен...";
+	$s_edited_on = "редактирован: ";
 
 	# index.php3
-	$s_click_to_login = "Нажмите, чтобы войти в систему";
+	$s_click_to_login = "Нажмите, чтобы войти";
 
 	# login.php3
 
 	# login_page.php3
-	$s_login_page_info = "Добро пожаловать в службу технической поддержки";
+	$s_login_page_info = "Добро пожаловать в Bugtracker";
 	$s_login_title = "Вход";
-	$s_save_login = "Сохранить логин и пароль";
+	$s_save_login = "Запомнить данные";
 	$s_choose_project = "Выберите проект";
 	$s_login_button = "Войти";
-	$s_signup_link = "Зарегистрироваться";
+	$s_signup_link = "Зарегистрировать новый бюджет";
 
 	# login_select_proj_page.php3
 	$s_select_project_button = "Выберите проект";
@@ -305,56 +302,56 @@
 	# logout_page.php3
 	$s_logged_out_title = "Отключение...";
 	$s_redirecting = "...Переадресация";
-	$s_here = "сюда";
+	$s_here = "здесь";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Обращений, за которые ответственны Вы";
-	$s_open_and_reported_to_me = "Еще не решенных моих обращений";
+	$s_open_and_assigned_to_me = "Открытых и назначенных мне";
+	$s_open_and_reported_to_me = "Открытых и зарегистрированных мной";
 	$s_newer_news_link = "Свежие новости";
-	$s_older_news_link = "Более старые новости";
-	$s_archives = "Archives";
+	$s_older_news_link = "Старые новости";
+	$s_archives = "Архивы";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Создан пользователь";
 	$s_created_user_part2 = "с уровнем доступа";
 
 	# manage_create_user_page.php3
-	$s_create_new_account_title = "Cоздание новый аккаунт";
+	$s_create_new_account_title = "Cоздать новый бюджет";
 	$s_verify_password = "Подтверждение пароля";
 	$s_enabled = "Разрешен";
-	$s_protected = "Защищенный";
-	$s_create_user_button = "Создать пользователя";
+	$s_protected = "Защищен";
+	$s_create_user_button = "Создать";
 
 	# manage_page.php3
-	$s_hide_disabled = "Убрать выключенных";
-	$s_filter_button = "Фильтр";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
-	$s_create_new_account_link = "Cоздать аккаунт";
+	$s_hide_disabled = "Спрятать заблокированных";
+	$s_filter_button = "Фильтровать";
+	$s_manage_users_link = "Управление пользователями";
+	$s_manage_projects_link = "Управление проектами";
+	$s_create_new_account_link = "Cоздать бюджет";
 	$s_projects_link = "Проекты";
 	$s_documentation_link = "Документация";
-	$s_new_accounts_title = "Новые аккаунты";
+	$s_new_accounts_title = "Новые бюджеты";
 	$s_1_week_title = "За неделю";
 	$s_never_logged_in_title = "Никогда не входившие в систему";
-	$s_prune_accounts = "Очистить";
-	$s_hide_inactive = "Убрать неактивных";
-	$s_manage_accounts_title = "Управление аккаунтами";
+	$s_prune_accounts = "Удалить бюджеты";
+	$s_hide_inactive = "Скрыть неактивных";
+	$s_manage_accounts_title = "Управление бюджетами";
 	$s_p = "З";
 	$s_date_created = "Создан";
-	$s_last_visit = "Последний заход";
-	$s_edit_user_link = "Редактировать";
+	$s_last_visit = "Последнее посещение";
+	$s_edit_user_link = "Редактировать пользователя";
 
 	# manage_project_add.php3
-	$s_project_added_msg = "Проект был успешно добавлен...";
+	$s_project_added_msg = "Проект добавлен...";
 
 	# manage_project_category_add.php3
-	$s_category_added_msg = "Категория была успешно добавлена...";
+	$s_category_added_msg = "Категория добавлена...";
 
 	# manage_project_category_delete.php3
-	$s_category_deleted_msg = "Категория была успешно удалена...";
+	$s_category_deleted_msg = "Категория удалена...";
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Вы уверены, что желаете удалить соответствующую категорию? Все соответсвующие обращения будут удалены.";
+	$s_category_delete_sure_msg = "Вы уверены, что желаете удалить соответствующую категорию? Все соответсвующие категории баги будут удалены.";
 	$s_delete_category_button = "Удалить категорию";
 
 	# manage_project_category_edit_page.php3
@@ -362,20 +359,20 @@
 	$s_update_category_button = "Обновить категорию";
 
 	# manage_project_category_update.php3
-	$s_category_updated_msg = "Категория была успешно обновлена...";
+	$s_category_updated_msg = "Категория обновлена...";
 
 	# manage_project_delete.php3
 	$s_project_deleted_msg = "Проект успешно удален...";
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "Вы уверены, что желаете удалить это проект и соответсвующие обращения?";
+	$s_project_delete_msg = "Вы уверены, что желаете удалить это проект и соответсвующие проекту баги?";
 	$s_project_delete_button = "Удалить проект";
 
 	# manage_project_edit_page.php3
 	$s_edit_project_title = "Редактирование проекта";
 	$s_project_name = "Название проекта";
-	$s_view_status = "Режим";
-	$s_public = "Публичный";
+	$s_view_status = "Режим доступа";
+	$s_public = "Общедоступный";
 	$s_private = "Частный";;
 	$s_update_project_button = "Обновить проект";
 	$s_delete_project_button = "Удалить проект";
@@ -384,7 +381,7 @@
 	$s_add_category_button = "Добавить категорию";
 	$s_versions = "Версии";
 	$s_add_version_button = "Добавить версию";
-	$s_edit_link = "редакт";
+	$s_edit_link = "редакт.";
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Добавить проект";
@@ -394,16 +391,16 @@
 	$s_name = "Название";
 
 	# manage_project_update.php3
-	$s_project_updated_msg = "Проект был успешно обновлен...";
+	$s_project_updated_msg = "Проект обновлен...";
 
 	# manage_project_version_add.php3
-	$s_version_added_msg = "Версия была успешно добавлена...";
+	$s_version_added_msg = "Версия  добавлена...";
 
 	# manage_project_version_delete.php3
-	$s_version_deleted_msg = "Версия была успешно удалена...";
+	$s_version_deleted_msg = "Версия удалена...";
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Вы уверены, что желаете удалить эту версию? Все соответсвующие обращения будут удалены.";
+	$s_version_delete_sure = "Вы уверены, что желаете удалить эту версию?";
 	$s_delete_version_button = "Удалить версию";
 
 	# manage_project_version_edit_page.php3
@@ -411,45 +408,45 @@
 	$s_update_version_button = "Обновить версию";
 
 	# manage_project_version_update.php3
-	$s_version_updated_msg = "Версия была успешно обновлена...";
+	$s_version_updated_msg = "Версия обновлена...";
 
 	# manage_user_delete.php3
-	$s_account_delete_protected_msg = "Аккаунт защищен. Удалить аккаунт невозможно.";
-	$s_account_deleted_msg = "Аккаунт удален...";
+	$s_account_delete_protected_msg = "Бюджет защищен. Удаление невозможно.";
+	$s_account_deleted_msg = "Бюджет удален...";
 
 	# manage_user_delete_page.php3
-	$s_delete_account_sure_msg = "Вы уверены, что желаете удалить этот аккаунт?";
+	$s_delete_account_sure_msg = "Вы уверены, что желаете удалить этот бюджет?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "Все аккаунты, которые ни разу не входили в систему и были заведены более недели назад были удалены";
+	$s_accounts_pruned_msg = "Все пользователи, которые ни разу не входили в систему и бюджеты заведены более недели назад были удалены";
 
 	# manage_user_page.php3
 	$s_edit_user_title = "Редактирование пользователя";
-	$s_reset_password_button = "Обнулить пароль";
+	$s_reset_password_button = "Сбросить пароль";
 	$s_delete_user_button = "Удалить пользователя";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
-	$s_reset_password_msg2 = "Обнуление пароле привело к тому, что сейчас пароль равен пустой строке.";
+	$s_reset_password_msg = "Сброс пароля устанавливает случайно сгенерированный пароль.";
+	$s_reset_password_msg2 = "сброс пароля привел к тому, что сейчас пароль - пустая строка.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Аккаунт защищен. невозможно обнулить пароль.";
-	$s_account_reset_msg = "Account password reset...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_msg = "Пароль бюджета сброшен...";
+	$s_account_reset_msg2 = "Пароль бюджета установлен пустым...";
 
 	# manage_user_update.php3
-	$s_manage_user_protected_msg = "Аккаунт защищен. Access level and enabled protected. Otherwise, account has been updated...";
-	$s_manage_user_updated_msg = "Аккаунт успешно обновлен ...";
+	$s_manage_user_protected_msg = "Бюджет защищен. Уровень доступа и разрешение заблокировано. Все остальные данные обновлены...";
+	$s_manage_user_updated_msg = "Бюджет обновлен ...";
 
 	# menu_inc.php
-	$s_main_link = "Начальная";
-	$s_view_bugs_link = "Просмотреть обращения";
-	$s_report_bug_link = "Добавить обращение";
+	$s_main_link = "Основная";
+	$s_view_bugs_link = "Просмотреть баги";
+	$s_report_bug_link = "Добавить баг";
 	$s_summary_link = "Статистика";
 	$s_account_link = "Мои настройки";
 	$s_users_link = "Пользователи";
 	$s_manage_link = "Управление";
 	$s_edit_news_link = "Редактировать новости";
 	$s_docs_link = "Документация";
-	$s_logout_link = "Выйти";
+	$s_logout_link = "Выход";
 
 	# meta_inc.php
 
@@ -466,7 +463,7 @@
 	# news_edit_page.php3
 	$s_edit_news_title = "Редактирование новостей";
 	$s_headline = "Заголовок";
-	$s_body = "Само сообщение";
+	$s_body = "Сообщение";
 	$s_update_news_button = "Обновить новости";
 
 	# news_menu_page.php3
@@ -480,17 +477,17 @@
 	$s_select_post = "Выбрать новость";
 
 	# news_update.php3
-	$s_news_updated_msg = "Новость была обновлена...";
+	$s_news_updated_msg = "Новость обновлена...";
 
 	# news_view_page.php3
 	$s_back_link = "Назад";
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "Файл загружен успешно";
+	$s_file_uploaded_msg = "Файл загружен";
 
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Загрузить файл";
-	$s_title = "Title";
+	$s_title = "Название";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Файл проекта был удален";
@@ -499,7 +496,7 @@
 	$s_confirm_file_delete_msg = "Вы уверены, что желаете удалить это файл?";
 
 	# proj_doc_edit_page.php3
-	$s_filename = "Filename";
+	$s_filename = "Имя файла";
 	$s_file_update_button = "Обновить файл";
 	$s_file_delete_button = "Удалить файл";
 
@@ -510,13 +507,13 @@
 	$s_add_file = "Добавить файл";
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "Проект был успешно обновлен";
+	$s_project_document_updated = "Проект обновлен";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Пользователь успешно добавлен к проекту";
+	$s_project_user_added_msg = "Пользователь успешно добавлен в проект";
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "Успешно удалили пользователя из проекта";
+	$s_project_removed_user_msg = "Пользователь удален из проекта";
 
 	# proj_user_delete_page.php3
 	$s_remove_user_sure_msg = "Вы уверены, что хотите удалить этого пользователя?";
@@ -528,53 +525,53 @@
 	$s_remove_link = "удалить";
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "Пользователь успешно обновлен";
+	$s_updated_user_msg = "Пользователь обновлен";
 
 	# report_add.php3
 	$s_must_enter_category = "Вы должны выбрать категорию";
 	$s_must_enter_severity = "Вы должны ввести критичность";
 	$s_must_enter_reproducibility = "Вы полжны ввести повторяемость";
-	$s_must_enter_summary = "You must enter a summary";
+	$s_must_enter_summary = "Вы должны ввести краткую сводку";
 	$s_must_enter_description = "Вы должны ввести описание";
 	$s_report_more_bugs = "Добавлять еще обращения?";
-	$s_submission_thanks_msg = "Большое спасибо за Ваше обращение";
+	$s_submission_thanks_msg = "Спасибо за Ваш рапорт";
 
 	# report_bug_advanced_page.php3
-	$s_simple_report_link = "Простая форма обращения";
-	$s_enter_report_details_title = "Введите информацию об обращении";
-	$s_required = "обязательно";
+	$s_simple_report_link = "Простая форма ввода бага";
+	$s_enter_report_details_title = "Введите информацию о баге";
+	$s_required = "обязательное поле";
 	$s_select_category = "Выберите категорию";
 	$s_select_reproducibility = "Выберите периодичность";
 	$s_select_severity = "Выберите критичность";
 	$s_or_fill_in = "или заполните";
 	$s_assign_to = "Назначить";
 	$s_additional_information = "Дополнительная информация";
-	$s_submit_report_button = "Отправить обращение";
-	$s_check_report_more_bugs = "отметьте, если будете вводить несколько обращений";
+	$s_submit_report_button = "Отправить баг";
+	$s_check_report_more_bugs = "отметьте, если будете вводить несколько рапортов";
 
 	# report_bug_page.php3
-	$s_advanced_report_link = "Подробная форма обращения";
-	$s_report_stay = "Вернуться на эту форму";
+	$s_advanced_report_link = "Расширенная форма обращения";
+	$s_report_stay = "Пролжить ввод следующих багов";
 
 	# set_project.php3
 	$s_selected_project = "Выбранный проект";
 	$s_valid_project_msg = "Вы должны выбрать правильный проект";
 
 	# show_source_page.php3
-	$s_show_source_for_msg = "Показать исходные файлы";
+	$s_show_source_for_msg = "Показ кода ";
 	$s_not_supported_part1 = "Эта версия";
-	$s_not_supported_part2 = "php не поддерживает";
+	$s_not_supported_part2 = "PHP не поддерживает";
 
 	# signup.php3
-	$s_invalid_email = "НЕ ПРАВИЛЬНЫЙ EMAIL";
-	$s_duplicate_username = "ТАКОЙ ЛОГИН УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЙ ЛОГИН";
-	$s_account_create_fail = "НЕ УДАЛОСЬ СОЗДАТЬ АККАУНТ";
-	$s_account_added = "Аккаунт был успешно добавлен.";
+	$s_invalid_email = "НЕПРАВИЛЬНЫЙ E-MAIL адрес";
+	$s_duplicate_username = "ТАКОЙ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ";
+	$s_account_create_fail = "НЕ УДАЛОСЬ СОЗДАТЬ БЮДЖЕТ";
+	$s_account_added = "Бюджет добавлен.";
 	$s_password_emailed_msg = "Ваш пароль будет отправлен Вам по email.";
 	$s_no_reponse_msg = "Если Вы не войдете в систему в течении недели, то Ваша регистрационная запись будет удалена.";
 
 	# signup_page.php3
-	$s_signup_info = "Выберите Ваш логин и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.";
+	$s_signup_info = "Выберите Ваше имя пользователя и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.";
 	$s_signup_title = "Регистрация";
 	$s_signup_button = "Зарегистрироваться";
 
@@ -599,44 +596,44 @@
 	$s_by_resolution = "по решению";
 	$s_by_category = "По категориям";
 	$s_by_priority = "По приоритету";
-	$s_by_developer = "по разработчику";
-	$s_by_reporter ="по пользователя";
-	$s_time_stats = "Статистика продолжительности решения обращений(в днях)";
-	$s_longest_open_bug = "Наиболее продолжительное обращение";
+	$s_by_developer = "по разработчикам";
+	$s_by_reporter ="по пользователям";
+	$s_time_stats = "Статистика продолжительности решения багов (в днях)";
+	$s_longest_open_bug = "Наиболее долгий баг";
 	$s_longest_open = "Максимальное время";
 	$s_average_time = "Среднее время";
 	$s_total_time = "Сумманое время";
 	$s_developer_stats = "статистика разработчика";
-	$s_reporter_stats = "reporter stats";
-	$s_orct = "открытых/решеных/закрытых/всего)";
+	$s_reporter_stats = "статистика репортера";
+	$s_orct = "открытых/решенных/закрытых/всего)";
 
 	# view_all_bug_page.php3
 	$s_any = "любой";
 	$s_show = "Показать";
 	$s_changed = "Изменены за (час)";
-	$s_hide_closed = "Убрать закрытые";
-	$s_viewing_bugs_title = "Просмотр обращений";
+	$s_hide_closed = "Скрыть закрытые";
+	$s_viewing_bugs_title = "Просмотр багов";
 	$s_updated = "Обновлен";
 
 	# view_all_inc.php
-	$s_none = "none";
+	$s_none = "нет";
 	$s_search ="Поиск";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_view_prev_link = "Предыдущих";
+	$s_view_next_link = "Следующих";
 
 	# view_bug_advanced_page.php3
-	$s_view_simple_link = "Упрощенный просмотр";
-	$s_viewing_bug_advanced_details_title = "Детальный просмотр информации об обращении";
-	$s_product_build = "Билд продукта";
-	$s_system_profile = "Системное описание";
+	$s_view_simple_link = "Простой просмотр";
+	$s_viewing_bug_advanced_details_title = "Расширенный просмотр информации об обращении";
+	$s_product_build = "Подверсия продукта";
+	$s_system_profile = "Описание системы";
 	$s_update_bug_button = "Обновить информацию";
-	$s_bug_assign_button    = "Назначить себя ответственным";
-	$s_reopen_bug_button = "Повторно открыть обращение";
-	$s_attached_files = "Attached Files";
+	$s_bug_assign_button    = "Назначить себе";
+	$s_reopen_bug_button = "Открыть повторно";
+	$s_attached_files = "Присоединенные файлы";
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
-	$s_view_advanced_link = "Посмотреть детальную информацию";
-	$s_viewing_bug_simple_details_title = "Упрощенный просмотр информации об обращении";
+	$s_view_advanced_link = "Посмотреть расширенную информацию";
+	$s_viewing_bug_simple_details_title = "Простой просмотр информации";
 ?>
