@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.43 2003-03-09 03:08:57 jfitzell Exp $
+	# $Id: main_page.php,v 1.44 2003-07-24 16:08:43 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,7 @@
 	
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
+	require_once( $t_core_path.'date_api.php' );
 ?>
 <?php
 	access_ensure_project_level( VIEWER );
@@ -41,9 +42,15 @@
 		echo lang_get( 'open_and_reported_to_me' ) . ':';
 		echo '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on&amp;hide_resolved=on">' . current_user_get_reported_open_bug_count() . '</a>';
 		echo '</div>';
+
+		echo '<div class="quick-summary-left">';
+		echo lang_get( 'last_visit' ) . ': ';
+		echo print_date( config_get( 'normal_date_format' ), strtotime(current_user_get_field( 'last_visit' )));
+		echo '</div>';
 	}
 ?>
 
+<br />
 <br />
 
 <?php
