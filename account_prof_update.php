@@ -22,7 +22,7 @@
 	}
 
 	$f_user_id = get_current_user_field( "id" );
-  $f_id = (integer)$f_id;
+	$f_id = (integer)$f_id;
 
 	# " character poses problem when editting so let's just convert them
 	$f_platform		= string_prepare_text( $f_platform );

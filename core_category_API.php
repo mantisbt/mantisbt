@@ -12,8 +12,8 @@
 	# we do it this way because each different project can have the same category names
 	function is_duplicate_category( $p_project_id, $p_category ) {
 		global $g_mantis_project_category_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_category = addslashes($p_category);
+		$p_project_id = (integer)$p_project_id;
+		$p_category = addslashes($p_category);
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_category_table
@@ -30,8 +30,8 @@
 	# --------------------
 	function category_add( $p_project_id, $p_category ) {
 		global $g_mantis_project_category_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_category = addslashes($p_category);
+		$p_project_id = (integer)$p_project_id;
+		$p_category = addslashes($p_category);
 
 		$query = "INSERT
 				INTO $g_mantis_project_category_table
@@ -43,9 +43,9 @@
 	# --------------------
 	function category_update( $p_project_id, $p_category, $p_orig_category ) {
 		global $g_mantis_project_category_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_category = addslashes($p_category);
-    $p_orig_category = addslashes($p_orig_category);
+		$p_project_id = (integer)$p_project_id;
+		$p_category = addslashes($p_category);
+		$p_orig_category = addslashes($p_orig_category);
 
 		$query = "UPDATE $g_mantis_project_category_table
 				SET category='$p_category'
@@ -56,8 +56,8 @@
 	# --------------------
 	function category_delete( $p_project_id, $p_category ) {
 		global $g_mantis_project_category_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_category = addslashes($p_category);
+		$p_project_id = (integer)$p_project_id;
+		$p_category = addslashes($p_category);
 
 		$query = "DELETE
 				FROM $g_mantis_project_category_table
@@ -69,7 +69,7 @@
 	# return all categories for the specified project id
 	function category_get_all( $p_project_id ) {
 		global $g_mantis_project_category_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table

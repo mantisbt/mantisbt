@@ -10,8 +10,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( REPORTER );
-  $f_id = (integer)$f_id;
-  $f_vote = (integer)$f_vote;
+	$f_id = (integer)$f_id;
+	$f_vote = (integer)$f_vote;
 
 	# increase vote count and update in table
 	$f_vote++;

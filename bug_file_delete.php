@@ -14,7 +14,7 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
   
-  $f_file_id = (integer)$f_file_id;
+	$f_file_id = (integer)$f_file_id;
 
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name

@@ -93,13 +93,13 @@
 	} else {
 		$f_email_on_priority = 1;
 	}
-  
-  $f_project_id = (integer)$f_project_id;
-  $f_language = addslashes($f_language);
-  $f_redirect_delay = (integer)$f_redirect_delay;
+
+	$f_project_id = (integer)$f_project_id;
+	$f_language = addslashes($f_language);
+	$f_redirect_delay = (integer)$f_redirect_delay;
 
 	# make sure the delay isn't too low
-  $f_refresh_delay = (integer)$f_refresh_delay;
+	$f_refresh_delay = (integer)$f_refresh_delay;
 	if (( $g_min_refresh_delay > $f_refresh_delay )&&
 		( $f_refresh_delay != 0 )) {
 		$f_refresh_delay = $g_min_refresh_delay;

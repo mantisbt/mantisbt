@@ -15,7 +15,7 @@
 	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
-  $f_id = (integer)$f_id;
+	$f_id = (integer)$f_id;
 
 	$t_handler_id = get_current_user_field( "id " );
 

@@ -22,7 +22,7 @@
 	}
 
 	$f_user_id = get_current_user_field( "id" );
-  $f_id = (integer)$f_id;
+	$f_id = (integer)$f_id;
 
 	# Clear Defaults
 	$query = "UPDATE $g_mantis_user_pref_table

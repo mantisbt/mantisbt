@@ -32,7 +32,7 @@
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		# invalid user
 		if ( "0000000" == $p_user_id ) {
@@ -55,8 +55,8 @@
 	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-    $p_user_id = (integer)$p_user_id;
-    $p_bug_id = (integer)$p_bug_id;
+		$p_user_id = (integer)$p_user_id;
+		$p_bug_id = (integer)$p_bug_id;
 
 		if ( "0000000" == $p_user_id ) {
 			return;
@@ -78,7 +78,7 @@
 	# returns username if account
 	function get_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		if ( "0000000" == $p_user_id ) {
 			return "";
@@ -128,7 +128,7 @@
 	function print_reporter_option_list( $p_user_id ) {
 		global	$g_mantis_user_table, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_project_cookie_val;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$t_adm = ADMINISTRATOR;
 		$t_rep = REPORTER;
@@ -438,7 +438,7 @@
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_id, $p_select_id="" ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT default_profile
 			FROM $g_mantis_user_pref_table
@@ -699,7 +699,7 @@
 	function print_project_user_list_option_list( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_user_table,
 				$g_project_cookie_val;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		if ( 0 == $p_project_id ) {
 			$p_project_id = $g_project_cookie_val;
@@ -726,7 +726,7 @@
 	# list of projects that a user is NOT in
 	function print_project_user_list_option_list2( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$t_prv = PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
@@ -751,7 +751,7 @@
 	function print_project_user_list( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table,
 				$s_remove_link, $g_manage_user_proj_delete;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM $g_mantis_project_table p
@@ -882,7 +882,7 @@
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
 		global $g_mantis_project_category_table, $g_mantis_project_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table
@@ -908,7 +908,7 @@
 	# --------------------
 	function print_project_version_string( $p_project_id ) {
 		global $g_mantis_project_version_table, $g_mantis_project_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$query = "SELECT version
 				FROM $g_mantis_project_version_table

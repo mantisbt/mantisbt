@@ -14,20 +14,20 @@
 	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
-  $f_id = (integer)$f_id;
+	$f_id = (integer)$f_id;
 
 	# set variable to be valid if necessary
 	if ( !isset( $f_duplicate_id ) ) {
 		$f_duplicate_id = "";
 	}
-  $f_duplicate_id = (integer)$f_duplicate_id;
+	$f_duplicate_id = (integer)$f_duplicate_id;
 
 	# grab the bug_text_id
-  $query = "SELECT bug_text_id
-            FROM $g_mantis_bug_table
-            WHERE id='$f_id'";
-  $result = db_query( $query );
-  $t_bug_text_id = db_result( $result, 0, 0 );
+	$query = "SELECT bug_text_id
+				FROM $g_mantis_bug_table
+				WHERE id='$f_id'";
+	$result = db_query( $query );
+	$t_bug_text_id = db_result( $result, 0, 0 );
 
 	# prevent warnings
 	if ( !isset( $f_os ) ) {
@@ -69,19 +69,19 @@
 	$f_summary					= string_prepare_text( $f_summary );
 	$f_description 				= string_prepare_textarea( $f_description );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
-  
-  $f_status = (integer)$f_status;
-  $f_category = addslashes($f_category);
-  $f_severity = (integer)$f_severity;
-  $f_resolution = (integer)$f_resolution;
-  $f_projection = (integer)$f_projection;
-  $f_eta = (integer)$f_eta;
-  $f_priority = (integer)$f_priority;
-  $f_reproducibility = (integer)$f_reproducibility;
-  $f_status = (integer)$f_status;
-  $f_duplicate_id = (integer)$f_duplicate_id;
-  $f_handler_id = (integer)$f_handler_id;
-  $f_view_state = (integer)$f_view_state;
+
+	$f_status = (integer)$f_status;
+	$f_category = addslashes($f_category);
+	$f_severity = (integer)$f_severity;
+	$f_resolution = (integer)$f_resolution;
+	$f_projection = (integer)$f_projection;
+	$f_eta = (integer)$f_eta;
+	$f_priority = (integer)$f_priority;
+	$f_reproducibility = (integer)$f_reproducibility;
+	$f_status = (integer)$f_status;
+	$f_duplicate_id = (integer)$f_duplicate_id;
+	$f_handler_id = (integer)$f_handler_id;
+	$f_view_state = (integer)$f_view_state;
 
     if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
         $f_status = ASSIGNED;

@@ -18,11 +18,11 @@
 
 	$f_name 		= string_prepare_textarea( $f_name );
 	$f_description 	= string_prepare_textarea( $f_description );
-  $f_status = (integer)$f_status;
-  $f_enabled = (integer)$f_enabled;
-  $f_view_state = (integer)$f_view_state;
-  $f_project_id = (integer)$f_project_id;
-  $f_file_path = addslashes($f_file_path);
+	$f_status = (integer)$f_status;
+	$f_enabled = (integer)$f_enabled;
+	$f_view_state = (integer)$f_view_state;
+	$f_project_id = (integer)$f_project_id;
+	$f_file_path = addslashes($f_file_path);
 
 	# Make sure file path has trailing slash
 	if ( $f_file_path[strlen($f_file_path)-1] != "/" ) {

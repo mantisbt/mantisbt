@@ -12,8 +12,8 @@
 	# returns true is duplicate is found, otherwise false
 	function proj_user_is_duplicate( $p_project_id, $p_user_id ) {
 		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_user_id = (integer)$p_user_id;
+		$p_project_id = (integer)$p_project_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_user_list_table
@@ -31,9 +31,9 @@
 	# add user with the specified access level to a project
 	function proj_user_add( $p_project_id, $p_user_id, $p_access_level ) {
 		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_user_id = (integer)$p_user_id;
-    $p_access_level = (integer)$p_access_level;
+		$p_project_id = (integer)$p_project_id;
+		$p_user_id = (integer)$p_user_id;
+		$p_access_level = (integer)$p_access_level;
 
 		$query = "INSERT
 				INTO $g_mantis_project_user_list_table
@@ -47,9 +47,9 @@
 	# must make sure entry exists beforehand
 	function proj_user_update( $p_project_id, $p_user_id, $p_access_level ) {
 		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_user_id = (integer)$p_user_id;
-    $p_access_level = (integer)$p_access_level;
+		$p_project_id = (integer)$p_project_id;
+		$p_user_id = (integer)$p_user_id;
+		$p_access_level = (integer)$p_access_level;
 
 		$query = "UPDATE $g_mantis_project_user_list_table
 				SET		access_level='$p_access_level'
@@ -61,8 +61,8 @@
 	# remove user from project
 	function proj_user_delete( $p_project_id, $p_user_id ) {
 		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
-    $p_user_id = (integer)$p_user_id;
+		$p_project_id = (integer)$p_project_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "DELETE FROM $g_mantis_project_user_list_table
 				WHERE	project_id='$p_project_id' AND
@@ -74,7 +74,7 @@
 	# this is useful when deleting or closing a project
 	function proj_user_delete_all_users( $p_project_id ) {
 		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$query = "DELETE FROM $g_mantis_project_user_list_table
 				WHERE project_id='$p_project_id'";
@@ -84,8 +84,7 @@
 	# returns the descriptor holding all the info from the project user list
 	# for the specified project
 	function proj_user_get_all_users( $p_project_id ) {
-		global $g_mantis_project_user_list_table;
-    $p_project_id = (integer)$p_project_id;
+		global $g_mantis_project_user_list_table;$p_project_id = (integer)$p_project_id;
 
 		$query = "SELECT *
 				FROM $g_mantis_project_user_list_table
@@ -96,7 +95,7 @@
 	# returns true if the user exists in the project user list.
 	function is_removable_proj_user( $p_user_id ) {
 		global $g_mantis_project_user_list_table, $g_project_cookie_val;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_user_list_table p

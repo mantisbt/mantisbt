@@ -25,10 +25,10 @@
 	# This is useful for shared accounts or for demo purposes
 	$result = 0;
 	if ( OFF == $f_protected ) {
-    
-    $f_username = addslashes($f_username);
-    $f_email = addslashes($f_email);
-    $f_id = (integer)$f_id;
+
+	$f_username = addslashes($f_username);
+	$f_email = addslashes($f_email);
+	$f_id = (integer)$f_id;
 
 		# Update everything except password
 	    $query = "UPDATE $g_mantis_user_table

@@ -14,7 +14,7 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 	check_bug_exists( $f_id );
-  $f_id = (integer)$f_id;
+	$f_id = (integer)$f_id;
 
 	# get user information
 	$u_id = get_current_user_field( "id " );

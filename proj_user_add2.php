@@ -9,8 +9,8 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-  $f_user_id = (integer)$f_user_id;
-  $f_access_level = (integer)$f_access_level;
+	$f_user_id = (integer)$f_user_id;
+	$f_access_level = (integer)$f_access_level;
 
 	# check for no projects
 	if ( !isset( $f_project_id ) ) {

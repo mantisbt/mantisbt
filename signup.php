@@ -19,7 +19,7 @@
 	if ( empty( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-  $f_username = addslashes($f_username);
+	$f_username = addslashes($f_username);
 
 	# Check for a properly formatted email with valid MX record
 	$result = 0;

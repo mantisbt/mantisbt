@@ -14,8 +14,8 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 
-  $f_id = (integer)$f_id;
-  $f_file_type = addslashes($f_file_type);
+	$f_id = (integer)$f_id;
+	$f_file_type = addslashes($f_file_type);
 
 	$result = 0;
 	$good_upload = 0;

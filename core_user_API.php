@@ -285,8 +285,8 @@
 		# create the almost unique string for each user then insert into the table
 		$t_cookie_string = create_cookie_string( $t_seed );
 		$t_password2 = process_plain_password( $t_password );
-    $p_username = addslashes($p_username);
-    $p_email = addslashes($p_email);
+		$p_username = addslashes($p_username);
+		$p_email = addslashes($p_email);
 		$query = "INSERT INTO $g_mantis_user_table
 				( id, username, email, password, date_created, last_visit,
 				enabled, protected, access_level, login_count, cookie_string )
@@ -498,7 +498,7 @@
 	function get_project_access_level( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 		if ( 0 == $p_project_id ) {
@@ -523,8 +523,8 @@
 	function get_effective_access_level( $p_user_id=0, $p_project_id=-1 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
-    $p_user_id = (integer)$p_user_id;
-    $p_project_id = (integer)$p_project_id;
+		$p_user_id = (integer)$p_user_id;
+		$p_project_id = (integer)$p_project_id;
 
 		# use the current user unless otherwise specified
 		if ( 0 == $p_user_id ) {
@@ -601,7 +601,7 @@
 	# return all data associated with a particular user id
 	function get_user_info_by_id_arr( $p_user_id ) {
 		global $g_mantis_user_table;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_table
@@ -613,7 +613,7 @@
 	# return all data associated with a particular user name
 	function get_user_info_by_name_arr( $p_username ) {
 		global $g_mantis_user_table;
-    $p_username = addslashes($p_username);
+		$p_username = addslashes($p_username);
 
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_table
@@ -625,7 +625,7 @@
 	# return the specified preference field for the user id
 	function get_user_pref_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_pref_table;
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 	    $query = "SELECT $p_field
 	    		FROM $g_mantis_user_pref_table
@@ -646,7 +646,7 @@
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
 		}
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
@@ -661,8 +661,8 @@
 	# return whether user is monitoring bug for the user id and bug id
 	function check_bug_monitoring( $p_user_id, $p_bug_id ) {
 		global $g_mantis_bug_monitor_table;
-    $p_user_id = (integer)$p_user_id;
-    $p_bug_id = (integer)$p_bug_id;
+		$p_user_id = (integer)$p_user_id;
+		$p_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT user_id
 				FROM $g_mantis_bug_monitor_table
@@ -682,7 +682,7 @@
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
 		}
-    $p_user_id = (integer)$p_user_id;
+		$p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
@@ -710,7 +710,7 @@
 	# --------------------
 	function check_user_pref_exists( $p_project_id ) {
 		global $g_mantis_user_pref_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 	    $query = "SELECT COUNT(*)
@@ -727,7 +727,7 @@
 	# --------------------
 	function create_project_user_prefs( $p_project_id ) {
 		global $g_mantis_user_pref_table;
-    $p_project_id = (integer)$p_project_id;
+		$p_project_id = (integer)$p_project_id;
 
 		$t_user_id = get_current_user_field( "id" );
 	    $query = "INSERT

@@ -27,7 +27,7 @@
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
-  $f_offset = (integer)$f_offset;
+	$f_offset = (integer)$f_offset;
 
 	# Load preferences
 	$f_show_category 		= addslashes($t_setting_arr[1]);
@@ -40,7 +40,7 @@
 	$f_assign_id 			= addslashes($t_setting_arr[8]);
 	$f_sort 				= addslashes($t_setting_arr[9]);
 	$f_dir		 			= $t_setting_arr[10];
-  if ($f_dir != 'ASC' && $f_dir != 'DESC') $f_dir = 'ASC';
+	if ($f_dir != 'ASC' && $f_dir != 'DESC') $f_dir = 'ASC';
 	$f_start_month			= (integer)$t_setting_arr[11];
 	$f_start_day 			= (integer)$t_setting_arr[12];
 	$f_start_year 			= (integer)$t_setting_arr[13];

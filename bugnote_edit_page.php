@@ -27,7 +27,7 @@
 	} else {
 		print_header_redirect( $g_logout_page );
 	}
-  $f_bugnote_text_id = (integer)$f_bugnote_text_id;
+	$f_bugnote_text_id = (integer)$f_bugnote_text_id;
 
 	# grab the bugnote text
   	$query = "SELECT note
