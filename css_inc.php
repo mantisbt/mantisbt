@@ -66,9 +66,9 @@ tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; colo
 tr.print			{ vertical-align: top; }
 tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
 
-td.bugnote				{ background-color: <?php echo $g_background_color ?>; width: 100%; padding: 0px; padding-bottom: 4px;}
-td.bugnote-public		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; }
-td.bugnote-private		{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; }
+tr.bugnote				{ vertical-align: top; }
+td.bugnote-public		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; line-height: 1.4; }
+td.bugnote-private		{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; line-height: 1.4; }
 td.bugnote-note-public	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
 td.bugnote-note-private	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
 

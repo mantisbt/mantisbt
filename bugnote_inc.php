@@ -70,43 +70,42 @@
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 ?>
-<tr>
-	<td class="bugnote" valign="top" width="100%">
-		<table class="hide" cellspacing="0">
-		<tr valign="top">
-			<td class="<?php echo $t_bugnote_css ?>">
-				<?php print_user( $v3_reporter_id ) ?>
-				<?php if ( PRIVATE == $v3_view_state ) { ?>
-				<span class="small">[ <?php echo $s_private ?> ]</span>
-				<?php } ?>
-				<br />
-				<span class="small"><?php echo $v3_date_submitted ?></span><br /><br />
-				<span class="small">
-				<?php
-					# only admins and the bugnote creator can edit/delete this bugnote
-					# bug must be open to be editable
-					if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
-						if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-							( $v3_reporter_id == $t_user_id )) {
-							print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
-							print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
-							if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-								if ( PRIVATE == $v3_view_state ) {
-									print_bracket_link('bugnote_set_view_state.php?f_private=0&f_bugnote_id='.$v3_id, $s_make_public);
-								} else {
-									print_bracket_link('bugnote_set_view_state.php?f_private=1&f_bugnote_id='.$v3_id, $s_make_private);
-								}
-							}
+<tr class="bugnote">
+	<td class="<?php echo $t_bugnote_css ?>">
+		<?php print_user( $v3_reporter_id ) ?>
+		<?php if ( PRIVATE == $v3_view_state ) { ?>
+		<span class="small">[ <?php echo $s_private ?> ]</span>
+		<?php } ?>
+		<br />
+		<span class="small"><?php echo $v3_date_submitted ?></span><br /><br />
+		<span class="small">
+		<?php
+			# only admins and the bugnote creator can edit/delete this bugnote
+			# bug must be open to be editable
+			if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
+				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
+					( $v3_reporter_id == $t_user_id )) {
+					print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
+					print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
+					if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+						if ( PRIVATE == $v3_view_state ) {
+							print_bracket_link('bugnote_set_view_state.php?f_private=0&f_bugnote_id='.$v3_id, $s_make_public);
+						} else {
+							print_bracket_link('bugnote_set_view_state.php?f_private=1&f_bugnote_id='.$v3_id, $s_make_private);
 						}
 					}
-				?>
-				</span>
-			</td>
-			<td class="<?php echo $t_bugnote_note_css ?>">
-				<?php echo $v3_note ?>
-			</td>
-		</tr>
-		</table>
+				}
+			}
+		?>
+		</span>
+	</td>
+	<td class="<?php echo $t_bugnote_note_css ?>">
+		<?php echo $v3_note ?>
+	</td>
+</tr>
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <?php
