@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.32 2004-02-05 00:34:37 jlatour Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.33 2004-02-19 13:36:43 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -90,7 +90,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <style id="Classeur1_16681_Styles">
 </style>
 
-
 <?php html_head_end() ?>
 <?php html_body_begin() ?>
 
@@ -172,163 +171,163 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_id;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
-
+	
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_category;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'severity', $v_severity );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'reproducibility', $v_reproducibility );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
-	<?php echo date( config_get( 'normal_date_format' ),$v_date_submitted );
+	<?php echo date( config_get( 'normal_date_format' ), strtotime($v_date_submitted) );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo date( config_get( 'normal_date_format' ),$v_last_updated );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php print_user_with_subject( $v_reporter_id, $v_id ) ;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php print_user_with_subject( $v_handler_id, $v_id ) ;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'priority', $v_priority );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'status', $v_status );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_build;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'projection', $v_projection );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'eta', $v_eta );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_platform;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_os;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_os_build;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_version;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo get_enum_element( 'resolution', $v_resolution );
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_duplicate_id;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_summary;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v2_description ;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v2_steps_to_reproduce;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v2_additional_information;
+		  echo "</td>";
 			}
 	$name_index++;  ?>
-	</td>
 
 <?php
 	if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
@@ -357,10 +356,11 @@ xmlns="http://www.w3.org/TR/REC-html40">
 					PRINT '&nbsp';
 				} #if
 			} #for loop
+			
+			echo "</td>";
 		}# if index
 	$name_index++;
 ?>
-	</td>
 <?php # Bugnotes BEGIN (3 rows) ?>
 <td colspan=3>
 <?php  # print bugnotes
@@ -401,23 +401,23 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<?php if ( ( $bugnote_index < $field_name_count ) && ( !isset( $t_prefs[$bugnote_index] )||( 1 == $t_prefs[$bugnote_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php print_user( $v3_reporter_id ) ;
+		  echo "</td>";
 			}
 	$bugnote_index++;  ?>
-	</td>
 
 	<?php if ( ( $bugnote_index < $field_name_count ) && ( !isset( $t_prefs[$bugnote_index] )||( 1 == $t_prefs[$bugnote_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v3_date_submitted;
+		  echo "</td>";
 			}
 	$bugnote_index++;  ?>
-	</td>
 
 	<?php if ( ( $bugnote_index < $field_name_count ) && ( !isset( $t_prefs[$bugnote_index] )||( 1 == $t_prefs[$bugnote_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v3_note;
+		  echo "</td>";
 			}
 	$bugnote_index++;  ?>
-	</td>
 </tr>
 </table>
 	<?php
