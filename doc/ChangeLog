@@ -53,20 +53,15 @@ Mantis ChangeLog
  * Fix #3840: Why strip the leading spaces from Description? (applied to all multi-line fields in issue + issue notes).
  * Fix #3851: Ability to change the view status for a group of bugs
  * Fix #3852: OK button in View Issues page is not localised
- * Fix #3853: Filters sometime generate an invalid query (partial fix).
  * Fix #3866: URLs that include bookmark are not hyperlinked correctly.
- * Fix #3873: Invalid queries being generated from old filters.
  * Fix #3879: Empty entry in project select field can cause bugs to be moved to non-existing project.
  * Fix #3886: Custom HTML page title not displayed.
  * Fix #3920: Two missing graphs in advanced summary.
  * Fix #3923: "By Developer" and "By Reporter" graphs rewritten to reduce SQL impact.
  * Fix #3924: Graphs did not show query counts when flag was set.
- * Fix #3926: "Copy Issue" reset date submitted.
- * Fix #3928: "Copy Issue" did not copy attachments (plus other values).
  * Fix #3937: Custom field filters now only show those values relevant to the selected project.
  * Fix #3951: Add Bugnote - Link.
  * Fix #3957: IIS had issues with serialised filters in redirects.
- * Fix #3976: Missing filter values in My View page.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
