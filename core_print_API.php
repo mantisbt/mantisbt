@@ -219,7 +219,8 @@
 				WHERE ((t1.access_level>=$t_dev) OR
 						(t2.user_id=t1.id AND
 						t2.project_id=$g_project_cookie_val AND
-						t2.access_level>=$t_dev))";
+						t2.access_level>=$t_dev))
+				ORDER BY t1.username";
 
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );

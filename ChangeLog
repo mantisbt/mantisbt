@@ -1,5 +1,9 @@
 Mantis
 
+10.xx.2001  -   0.15.11
+
+ * Modified advacned report's "assign to" drop down to sort alphabetically
+
 10.28.2001  -   0.15.10
 
  * Fixed problem with not being able to uncheck "hide closed" bugs filter checkbox
