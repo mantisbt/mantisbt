@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.27 2004-11-30 12:17:04 vboctor Exp $
+	# $Id: relationship_api.php,v 1.28 2004-12-17 02:54:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -565,7 +565,7 @@
 		}
 
 		# add summary
-		$t_relationship_info_html .= $t_td . $t_bug->summary;
+		$t_relationship_info_html .= $t_td . string_attribute( $t_bug->summary );
 		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 			$t_relationship_info_text .= $t_bug->summary;
 		}
