@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.51 $
-	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:14 $
+	# $Revision: 1.52 $
+	# $Author: vboctor $
+	# $Date: 2003-07-06 05:42:35 $
 	#
-	# $Id: strings_swedish.txt,v 1.51 2003-06-25 21:43:14 prescience Exp $
+	# $Id: strings_swedish.txt,v 1.52 2003-07-06 05:42:35 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,7 +139,7 @@ $s_bugnote_title = 'Hanterare för buggmeddelande' ;
 $s_bugnote_date = 'Datum för buggmeddelande';
 $s_bugnote_description = 'Beskrivning av buggmeddelande';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Använd "back"-knappen i din webbläsare för att återgå till föregående sida. Där kan du rätta de fel som uppstått. Du kan också välja att gå direkt till en annan sida via någon av länkarna i menyn.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = 'FEL: Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
@@ -216,7 +216,7 @@ $s_administrator = 'administratör';
 $s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
 $s_project_status_enum_string     = '10:utveckling,30:release,50:stabil,70:inaktuell';
 $s_project_view_state_enum_string = '10:publik,50:privat';
-$s_view_state_enum_string         = '10:public,50:private';
+$s_view_state_enum_string         = '10:publik,50:privat';
 
 $s_priority_enum_string           = '10:ingen,20:låg,30:normal,40:hög,50:bråttom,60:omedelbart';
 $s_severity_enum_string           = '10:funktion,20:trivial,30:text,40:tweak,50:mindre,60:allvarlig,70:krash,80:blockerare';
@@ -551,7 +551,7 @@ $s_edit_project_title = 'Redigera projekt';
 $s_project_name = 'Projektnamn';
 $s_view_status = 'Visa status';
 $s_public = 'publik';
-$s_private = 'privat';;
+$s_private = 'privat';
 $s_update_project_button = 'Uppdatera projekt';
 $s_delete_project_button = 'Ta bort projekt';
 $s_categories_and_version_title = 'Kategorier och versioner';
@@ -768,7 +768,7 @@ $s_site_settings_updated_msg = 'Uppdaterade globala inställningar';
 # summary_page.php
 $s_summary_title = 'Sammanfattning';
 $s_summary_jpgraph_link = 'Avancerad sammanfattning';
-$s_by_project = 'by project';
+$s_by_project = 'projekt';
 $s_by_status = 'status';
 $s_by_date = 'datum (dagar)';
 $s_by_severity = 'allvarlighetsgrad';
@@ -798,15 +798,15 @@ $s_none = 'ingen';
 $s_search ='Sök';
 $s_view_prev_link = 'Visa föregående';
 $s_view_next_link = 'Visa nästa';
-$s_prev = 'Prev';
-$s_next = 'Next';
-$s_first = 'First';
-$s_last = 'Last';
+$s_prev = 'Föregående';
+$s_next = 'Nästa';
+$s_first = 'Första';
+$s_last = 'Sista';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Visa enkel';
 $s_viewing_bug_advanced_details_title = 'Visar bugg, avancerad';
-$s_product_build = 'Produkt build';
+$s_product_build = 'Produktbygge';
 $s_system_profile = 'Systembeskrivning';
 $s_update_bug_button = 'Uppdatera bugg';
 $s_bug_assign_button    = 'Tilldela till mig';
@@ -857,6 +857,6 @@ $s_hide_status = 'Göm status';
 $s_filter_closed = "stängda";
 $s_filter_resolved = "lösta";
 
-$s_attachments = "attachment(s)";
+$s_attachments = "bilagor";
 $s_attachment_alt = "A";
 ?>
