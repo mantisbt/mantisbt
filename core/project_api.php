@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.51 2004-04-21 14:16:01 vboctor Exp $
+	# $Id: project_api.php,v 1.52 2004-04-21 14:35:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -236,6 +236,9 @@
 	# --------------------
 	# Delete a project
 	function project_delete( $p_project_id ) {
+		$t_email_notifications = config_get( 'enable_email_notification' );
+		config_set( 'enable_email_notification', OFF );
+
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_project_table = config_get( 'mantis_project_table' );
@@ -266,6 +269,8 @@
 				  WHERE id='$c_project_id'";
 
 		db_query( $query );
+
+		config_set( 'enable_email_notification', $t_email_notifications );
 
 		project_clear_cache( $p_project_id );
 
