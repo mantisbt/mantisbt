@@ -55,10 +55,10 @@
 <div align=center>
 <?
 	if ( $f_protected=="on" ) {
-		PRINT "Account protected. Access level and enabled protected. Otherwise, account has been updated...<p>";
+		PRINT "$s_manage_user_protected<p>";
 	}
 	else if ( $result ) {
-		PRINT "Account successfully updated...<p>";
+		PRINT "$s_manage_user_updated<p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
@@ -66,7 +66,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

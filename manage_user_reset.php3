@@ -15,11 +15,13 @@
 		exit;
 	}
 
-	### password is blank password
-    $query = "UPDATE $g_mantis_user_table
-    		SET password='4nPtPLdAFdoxA'
-    		WHERE id='$f_id'";
-    $result = mysql_query( $query );
+    if ( $f_protected!="on" ) {
+		### password is blank password
+	    $query = "UPDATE $g_mantis_user_table
+	    		SET password='4nPtPLdAFdoxA'
+	    		WHERE id='$f_id'";
+	    $result = mysql_query( $query );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -41,8 +43,11 @@
 <p>
 <div align=center>
 <?
-	if ( $result ) {
-		PRINT "Account password reset...<p>";
+	if ( $f_protected=="on" ) {
+		PRINT "$s_account_reset_protected<p>";
+	}
+	else if ( $result ) {
+		PRINT "$s_account_reset<p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
@@ -50,7 +55,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

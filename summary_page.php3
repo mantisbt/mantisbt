@@ -54,7 +54,6 @@
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>
-
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
@@ -62,15 +61,15 @@
 	<table width=100% cols=2>
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Summary</b>
+			<b><? echo $s_summary_title ?></b>
 		</td>
 	</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
-			<b>by status:</b>
+			<b><? echo $s_by_status ?>:</b>
 		</td>
 		<td width=50%>
-			<b>by date:</b>
+			<b><? echo $s_by_date ?>:</b>
 		</td>
 	</tr>
 	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
@@ -91,10 +90,10 @@
 	</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
-			<b>by severity:</b>
+			<b><? echo $s_by_severity ?>:</b>
 		</td>
 		<td width=50%>
-			<b>by resolution:</b>
+			<b><? echo $s_by_resolution ?>:</b>
 		</td>
 	</tr>
 	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
@@ -113,10 +112,10 @@
 	</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
-			<b>by category:</b>
+			<b><? echo $s_by_category ?>:</b>
 		</td>
 		<td>
-			<b>by priority:</b>
+			<b><? echo $s_by_priority ?>:</b>
 		</td>
 	</tr>
 	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
@@ -135,7 +134,7 @@
 	</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
-			<b>time stats(days):</b>
+			<b><? echo $s_time_stats ?>:</b>
 		</td>
 		<td>
 		</td>
@@ -146,11 +145,11 @@
 			<table width=97%>
 			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
 				<td width=50%>
-					longest open bug
+					<? echo $s_longest_open_bug ?>
 				</td>
 				<td width=50%>
 					<? if ($t_bug_id>0) { ?>
-						<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
+						<? if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" ) ) { ?>
 							<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
 						<? } else {?>
 							<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
@@ -160,7 +159,7 @@
 			</tr>
 			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
 				<td>
-					longest open
+					<? echo $s_longest_open ?>
 				</td>
 				<td>
 					<? echo $t_largest_diff ?>
@@ -168,7 +167,7 @@
 			</tr>
 			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
 				<td>
-					average time
+					<? echo $s_average_time ?>
 				</td>
 				<td>
 					<? echo $t_average_time ?>
@@ -176,7 +175,7 @@
 			</tr>
 			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
 				<td>
-					total time
+					<? echo $s_total_time ?>
 				</td>
 				<td>
 					<? echo $t_total_time ?>

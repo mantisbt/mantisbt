@@ -77,7 +77,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_news_menu_page ?>">Click here to proceed</a>
+<a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -56,10 +56,10 @@
 
 <p>
 <div align=center>
-	[ <a href="<? echo $g_manage_create_user_page ?>">Create New Account</a> ]
-	[ <a href="<? echo $g_manage_category_page ?>">Manage Categories</a> ]
-	[ <a href="<? echo $g_manage_product_versions_page ?>">Manage Product Versions</a> ]
-	[ <a href="<? echo $g_documentation_page ?>">Documentation</a> ]
+	[ <a href="<? echo $g_manage_create_user_page ?>"><? echo $s_create_new_account_link ?></a> ]
+	[ <a href="<? echo $g_manage_category_page ?>"><? echo $s_manage_categories_link ?></a> ]
+	[ <a href="<? echo $g_manage_product_versions_page ?>"><? echo $s_manage_product_versions_link ?></a> ]
+	[ <a href="<? echo $g_documentation_page ?>"><? echo $s_documentation ?></a> ]
 </div>
 
 <p>
@@ -70,28 +70,28 @@
 	<table cols=8 width=100%>
 	<tr>
 		<td colspan=8 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Manage Accounts</b>
+			<b><? echo $s_manage_accounts_title ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<?echo $g_category_title_color2 ?>>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=username&f_dir=<? echo $f_dir?>">username</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=username&f_dir=<? echo $f_dir?>"><? echo $s_username ?></a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=email&f_dir=<? echo $f_dir?>">email</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=email&f_dir=<? echo $f_dir?>"><? echo $s_email ?></a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=access_level&f_dir=<? echo $f_dir?>">access level</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=access_level&f_dir=<? echo $f_dir?>"><? echo $s_access_level ?></a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=enabled&f_dir=<? echo $f_dir?>">enabled</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=enabled&f_dir=<? echo $f_dir?>"><? echo $s_enabled ?></a>
 			</b>
 		</td>
 		<td>
@@ -101,12 +101,12 @@
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=date_created&f_dir=<? echo $f_dir?>">date created</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=date_created&f_dir=<? echo $f_dir?>"><? echo $s_date_created ?></a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=last_visit&f_dir=<? echo $f_dir?>">last visit</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=last_visit&f_dir=<? echo $f_dir?>"><? echo $s_last_visit ?></a>
 			</b>
 		</td>
 		<td>
@@ -156,7 +156,7 @@
 			<? echo $u_last_visit ?>
 		</td>
 		<td align=center>
-			<a href="<? echo $g_manage_user_page ?>?f_id=<? echo $u_id ?>">edit user</a>
+			<a href="<? echo $g_manage_user_page ?>?f_id=<? echo $u_id ?>"><? echo $s_edit_user_link ?></a>
 		</td>
 	</tr>
 <?

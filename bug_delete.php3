@@ -50,7 +50,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Bug has been deleted...<p>";
+		PRINT "$s_bug_deleted<p>";
 	}
 	### FAILURE
 	else {
@@ -59,7 +59,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_all_page ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_all_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

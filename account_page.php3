@@ -37,8 +37,8 @@
 ?>
 <p>
 <div align=center>
-	[ <a href="<? echo $g_account_profile_manage_page ?>">Manage Profiles</a> ]
-	[ <a href="<? echo $g_account_prefs_page ?>">Change Preferences</a> ]
+	[ <a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_manage_profiles_link ?></a> ]
+	[ <a href="<? echo $g_account_prefs_page ?>"><? echo $s_change_preferences_link ?></a> ]
 </div>
 <?
 	}
@@ -54,12 +54,12 @@
 	<input type=hidden name=f_protected value="<? echo $u_protected ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Account</b>
+			<b><? echo $s_edit_account_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=40%>
-			Username:
+			<? echo $s_username ?>:
 		</td>
 		<td width=60%>
 			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
@@ -67,7 +67,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Email:
+			<? echo $s_email ?>:
 		</td>
 		<td>
 			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
@@ -75,7 +75,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Password:
+			<? echo $s_password ?>:
 		</td>
 		<td>
 			<input type=password size=32 name=f_password>
@@ -83,7 +83,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Confirm Password:
+			<? echo $s_confirm_password ?>:
 		</td>
 		<td>
 			<input type=password size=32 name=f_password_confirm>
@@ -91,7 +91,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Access Level:
+			<? echo $s_access_level ?>:
 		</td>
 		<td>
 			<? echo $u_access_level ?>
@@ -99,14 +99,14 @@
 	</tr>
 	<tr align=center>
 		<td align=left>
-			<input type=submit value=" Update User ">
+			<input type=submit value="<? echo $s_update_user_button ?>">
 		</td>
 			</form>
 		<td align=right>
 			<form method=post action="<? echo $g_account_delete_page ?>">
 				<input type=hidden name=f_id value="<? echo $u_id ?>">
 				<input type=hidden name=f_protected value="<? echo $u_protected ?>">
-				<input type=submit value="Delete Account">
+				<input type=submit value="<? echo $s_delete_account_button ?>">
 		</td>
 			</form>
 	</tr>

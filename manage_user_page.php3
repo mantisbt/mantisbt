@@ -45,12 +45,12 @@
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=3 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit User</b>
+			<b><? echo $s_edit_user_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Username:
+			<? echo $s_username ?>:
 		</td>
 		<td colspan=2>
 			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
@@ -58,7 +58,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Email:
+			<? echo $s_email ?>:
 		</td>
 		<td colspan=2>
 			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
@@ -66,7 +66,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Access Level:
+			<? echo $s_access_level ?>:
 		</td>
 		<td colspan=2>
 			<select name=f_access_level>
@@ -80,7 +80,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Enabled
+			<? echo $s_enabled ?>
 		</td>
 		<td colspan=2>
 			<input type=checkbox name=f_enabled <? if ( $u_enabled=="on" ) echo "CHECKED" ?>>
@@ -88,7 +88,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Protected
+			<? echo $s_protected ?>
 		</td>
 		<td colspan=2>
 			<input type=checkbox name=f_protected <? if ( $u_protected=="on" ) echo "CHECKED" ?>>
@@ -96,19 +96,21 @@
 	</tr>
 	<tr align=center>
 		<td>
-			<input type=submit value="  Update User  ">
+			<input type=submit value="<? echo $s_update_user_button ?>">
 		</td>
 			</form>
 			<form method=post action="<? echo $g_manage_user_reset ?>">
 		<td>
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
-			<input type=submit value=" Reset Password ">
+			<input type=hidden name=f_protected value="<? echo $u_protected ?>">
+			<input type=submit value="<? echo $s_reset_password_button ?>">
 		</td>
 			</form>
 			<form method=post action="<? echo $g_manage_user_delete_page ?>">
 		<td>
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
-			<input type=submit value="  Delete User  ">
+			<input type=hidden name=f_protected value="<? echo $u_protected ?>">
+			<input type=submit value="<? echo $s_delete_user_button ?>">
 		</td>
 			</form>
 	</tr>
@@ -120,7 +122,7 @@
 
 <p>
 <div align=center>
-Reset Password sets the password to be blank.
+<? echo $s_reset_password_msg ?>
 </div>
 
 <? print_footer() ?>

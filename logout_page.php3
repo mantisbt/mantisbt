@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
+<? include( "core_API.php" ); ?>
 <?
 	### delete cookies
 	setcookie( $g_string_cookie );
@@ -28,12 +28,12 @@
 	<table width=100%>
 	<tr>
 		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b>Logged Out...</b>
+			<b><? echo $s_logged_out ?></b>
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_primary_color_dark ?>>
-			<b>...Redirecting <a href="<? echo $g_index ?>">Here</a></b>
+		<td align=right bgcolor=<? echo $g_primary_color_dark ?>>
+			<b><? echo $s_redirecting ?> <a href="<? echo $g_index ?>"><? echo $s_here ?></a></b>
 		</td>
 	</tr>
 	</table>

@@ -44,12 +44,12 @@
 	<input type=hidden name=f_user_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Add Profile</b>
+			<b><? echo $s_add_profile ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Platform
+			<? echo $s_platform ?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_platform size=32 maxlength=32>
@@ -57,7 +57,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Operating System
+			<? echo $s_operating_system ?>
 		</td>
 		<td>
 			<input type=text name=f_os size=32 maxlength=32>
@@ -65,7 +65,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Version/Build
+			<? echo $s_version ?>
 		</td>
 		<td>
 			<input type=text name=f_os_build size=16 maxlength=16>
@@ -73,7 +73,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Additional Description
+			<? echo $s_additional_description ?>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=8></textarea>
@@ -81,7 +81,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value=" Add Profile ">
+			<input type=submit value="<? echo $s_add_profile_button ?>">
 		</td>
 	</tr>
 	</form>
@@ -101,19 +101,19 @@
 	<input type=hidden name=f_user_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit or Delete Profiles</b>
+			<b><? echo $s_edit_or_delete_profiles ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td align=center colspan=2>
-			<input type=radio name=f_action value="edit" CHECKED> Edit Profile
-			<input type=radio name=f_action value="make default"> Make Default
-			<input type=radio name=f_action value="delete"> Delete Profile
+			<input type=radio name=f_action value="edit" CHECKED> <? echo $s_edit_profile ?>
+			<input type=radio name=f_action value="make default"> <? echo $s_make_default ?>
+			<input type=radio name=f_action value="delete"> <? echo $s_delete_profile ?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
 		<td valign=top width=25%>
-			Select Profile
+			<? echo $s_select_profile ?>
 		</td>
 		<td width=75%>
 			<select name=f_id>
@@ -123,7 +123,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value=" Submit ">
+			<input type=submit value="<? echo $s_submit ?>">
 		</td>
 		</form>
 	</tr>

@@ -24,11 +24,11 @@
 <hr size=1 width=50%>
 <p>
 <div align=center>
-Are you sure you wish to delete this bug?
+<? echo $s_delete_bug_sure ?>
 <p>
 <form method=post action="<? echo $g_bug_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=submit value=" Delete Bug ">
+	<input type=submit value="<? echo $s_delete_bug_button ?>">
 </form>
 </div>
 <hr size=1 width=50%>

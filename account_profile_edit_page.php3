@@ -63,12 +63,12 @@
 	<input type=hidden name=f_id value="<? echo $v_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Profile</b>
+			<b><? echo $s_edit_profile_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Platform
+			<? echo $s_platform ?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_platform size=32 maxlength=32 value="<? echo $v_platform ?>">
@@ -76,7 +76,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Operating System
+			<? echo $s_operating_system ?>
 		</td>
 		<td>
 			<input type=text name=f_os size=32 maxlength=32 value="<? echo $v_os ?>">
@@ -84,7 +84,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Version/Build
+			<? echo $s_version ?>
 		</td>
 		<td>
 			<input type=text name=f_os_build size=16 maxlength=16 value="<? echo $v_os_build ?>">
@@ -92,7 +92,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Additional Description
+			<? echo $s_additional_description ?>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=8><? echo $v_description ?></textarea>
@@ -100,7 +100,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value=" Update Profile ">
+			<input type=submit value="<? echo $s_update_profile_button ?>">
 		</td>
 	</tr>
 	</form>

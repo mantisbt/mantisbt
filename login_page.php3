@@ -22,12 +22,12 @@
 	<form action="<? echo $g_login ?>" method=post>
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Login</b>
+			<b><? echo $s_login_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Username :
+			<? echo $s_username ?>:
 		</td>
 		<td width=75%>
 			<input type=text name=f_username size=32>
@@ -35,7 +35,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Password :
+			<? echo $s_password ?>:
 		</td>
 		<td>
 			<input type=password name=f_password size=16>
@@ -43,7 +43,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Save Login :
+			<? echo $s_save_login ?>:
 		</td>
 		<td>
 			<input type=checkbox name=f_perm_login size=16>
@@ -51,7 +51,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Login  ">
+			<input type=submit value="<? echo $s_login_button ?>">
 		</td>
 	</tr>
 	</form>

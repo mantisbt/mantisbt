@@ -30,7 +30,7 @@
 ?>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?> align=center colspan=2>
-		There are no notes attached to this bug
+		<? echo $s_no_bugnotes ?>
 	</td>
 </tr>
 <?
@@ -40,7 +40,7 @@
 ?>
 <tr>
 	<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-		<b>Bug Notes</b>
+		<b><? echo $s_bug_notes_title ?></b>
 	</td>
 </tr>
 <?

@@ -48,7 +48,7 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Created user: $f_username with an access level of $f_access_level.<p>";
+		PRINT "$s_created_user_part1 <b>$f_username</b> $s_created_user_part2 <b>$f_access_level</b><p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
@@ -56,7 +56,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_manage_page ?>"><? $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -36,12 +36,12 @@
 	<form method=post action="<? echo $g_manage_create_new_user ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Create New Account</b>
+			<b><? echo $s_create_new_account_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Username
+			<? echo $s_username ?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_username size=32 maxlength=32>
@@ -49,7 +49,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Email
+			<? echo $s_email ?>
 		</td>
 		<td>
 			<input type=text name=f_email size=32 maxlength=64>
@@ -57,7 +57,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Password
+			<? echo $s_password ?>
 		</td>
 		<td>
 			<input type=password name=f_password size=32 maxlength=32>
@@ -65,7 +65,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Verify Password
+			<? echo $s_verify_password ?>
 		</td>
 		<td>
 			<input type=password name=f_password_verify size=32 maxlength=32>
@@ -73,7 +73,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Access Level
+			<? echo $s_access_level ?>
 		</td>
 		<td>
 			<select name=f_access_level>
@@ -87,7 +87,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Enabled
+			<? echo $s_enabled ?>
 		</td>
 		<td>
 			<input type=checkbox name=f_enabled CHECKED>
@@ -95,7 +95,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Protected
+			<? echo $s_protected ?>
 		</td>
 		<td colspan=2>
 			<input type=checkbox name=f_protected>
@@ -103,7 +103,7 @@
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-			<input type=submit value="Create User">
+			<input type=submit value="<? echo $s_create_user_button ?>">
 		</td>
 	</tr>
 	</form>

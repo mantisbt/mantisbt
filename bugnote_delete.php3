@@ -15,7 +15,7 @@
 			WHERE id='$f_bug_id'";
 	$result = mysql_query($query);
 
-	header( "Location: $g_view_bug_page?f_id=$f_id" );
+	#header( "Location: $g_view_bug_page?f_id=$f_id" );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -24,10 +24,10 @@
 <?
 	if ( $result ) {
 		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_bug_id", $g_wait_time );
+			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
 		}
 		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_bug_id", $g_wait_time );
+			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
 		}
 	}
 ?>
@@ -43,7 +43,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Bug has been successfully deleted...<p>";
+		PRINT "$s_bugnote_deleted<p>";
 	}
 	### FAILURE
 	else {
@@ -54,9 +54,9 @@
 
 <p>
 <? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
-<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 <? } else { ?>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 <? } ?>
 </div>
 

@@ -11,16 +11,21 @@ To Do:
  * Force some sort of dialog when reopening a bug
  * Search bugs capability
  * Add glyphs and icons as optional display feature
- * More documentation on installtion, configuration, and customization
+ * More documentation on installation, configuration, and customization
  * Multiple project support with userland partitioning
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
+ * Localization
 
-12.XX.2000	-	0.12.0
+12.XX.2000	-	0.12.1
+
+ * Fixed bug in vote adding with inccorect variable name.
+
+12.20.2000	-	0.12.0
 
  * Fixed problem with viewing filters not working with Netscape
  * Tweaked the string_edit() function
- * Added $g_show_login_date_info adn the ability to show who is logged in and
+ * Added $g_show_login_date_info and the ability to show who is logged in and
    the current time
  * Modified bugnotes to be ordered by date_submitted
  * Added protection to prevent anyone from deleting bugnotes
@@ -28,8 +33,8 @@ To Do:
  * Reporting a bug now stores a link to the account profile (if chosen)
  * The information from the profile is displayed (if chosen at report time) in
    the advanced bug view
- * Added a hide fixed viewing filter option
- * Summary shows time statistics
+ * Added a hide resolved viewing filter option
+ * Summary shows time statistics for resolved bugs
  * Added support to show bugs reported by and assigned to the logged in user.
  * Added view_user_assigned_bug_page.php3 and view_user_reported_bug_page.php3
    and the corresponding global variables

@@ -69,12 +69,12 @@
 	<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Default Account Preferences</b>
+			<b><? echo $s_default_account_preferences ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Advanced report
+			<? echo $s_advanced_report ?>
 		</td>
 		<td>
 			<input type=checkbox name=f_advanced_report size=4 maxlength=4 <? if ( $u_advanced_report=="on" ) echo "CHECKED"?>
@@ -82,7 +82,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Advanced view
+			<? echo $s_advanced_report ?>
 		</td>
 		<td>
 			<input type=checkbox name=f_advanced_view size=4 maxlength=4 <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
@@ -90,14 +90,14 @@
 	</tr>
 	<tr align=center>
 		<td>
-			<input type=submit value=" Update Prefs ">
+			<input type=submit value="<? echo $s_update_prefs ?>">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_account_prefs_update ?>">
 			<input type=hidden name=f_action value="reset">
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
 		<td>
-			<input type=submit value=" Reset Prefs ">
+			<input type=submit value="<? echo $s_reset_prefs ?>">
 		</td>
 		</form>
 	</tr>

@@ -52,11 +52,11 @@
 <?
 	### PROTECTED
 	if ( $f_protected=="on" ) {
-		PRINT "Account protected. Cannot change settings...<p>";
+		PRINT "$s_account_protected<p>";
 	}
 	### SUCCESS
 	else if ( $result ) {
-		PRINT "Your account has been removed...<p>";
+		PRINT "$s_account_removed<p>";
 	}
 	### FAILURE
 	else {
@@ -67,9 +67,9 @@
 <p>
 
 <? if ( $f_protected=="on" ) { ?>
-<a href="<? echo $g_account_page ?>">Go back</a>
+<a href="<? echo $g_account_page ?>"><? echo $s_go_back ?></a>
 <? } else { ?>
-<a href="<? echo $g_logout_page ?>">Click here to proceed</a>
+<a href="<? echo $g_logout_page ?>"><? echo $s_proceed ?></a>
 <? } ?>
 </div>
 

@@ -56,12 +56,12 @@
 	<input type=hidden name=f_id value="<? echo $v_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit News</b>
+			<b><? echo $s_edit_news_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Headline
+			<? echo $s_headline ?>
 		</td>
 		<td>
 			<input type=text name=f_headline size=64 maxlength=64 value="<? echo $v_headline ?>">
@@ -69,7 +69,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td width=75%>
-			Body
+			<? echo $s_body ?>
 		</td>
 		<td>
 			<textarea name=f_body cols=60 rows=10><? echo $v_body ?></textarea>
@@ -77,7 +77,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Update News  ">
+			<input type=submit value="<? echo $s_update_news_button ?>">
 		</td>
 	</tr>
 	</form>

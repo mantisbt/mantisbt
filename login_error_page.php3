@@ -15,8 +15,7 @@
 
 <p>
 <div align=center>
-There was an error: your acount may be disabled or the username/password
-you entered is incorrect.
+<? echo $s_login_error ?>
 </div>
 
 <p>
@@ -28,12 +27,12 @@ you entered is incorrect.
 	<form method=post action="<? echo $g_login ?>">
 	<tr>
 		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b>Login</b>
+			<b><? echo $s_login_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Username :
+			<? echo $s_username ?>:
 		</td>
 		<td width=75%>
 			<input type=text name=f_username size=32>
@@ -41,7 +40,7 @@ you entered is incorrect.
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Password :
+			<? echo $s_password ?>:
 		</td>
 		<td>
 			<input type=password name=f_password size=16>
@@ -49,7 +48,7 @@ you entered is incorrect.
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Save Login :
+			<? echo $s_save_login ?>:
 		</td>
 		<td>
 			<input type=checkbox name=f_perm_login size=16>
@@ -57,7 +56,7 @@ you entered is incorrect.
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Login  ">
+			<input type=submit value="<? echo $s_login_button ?>">
 		</td>
 	</tr>
 	</form>

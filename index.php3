@@ -21,7 +21,7 @@
 
 <p>
 <div align=center>
-<a href="<? echo $g_login_page ?>">Click here to login</a>
+<a href="<? echo $g_login_page ?>"><? echo $s_click_to_login ?></a>
 </div>
 <? print_footer() ?>
 <? print_body_bottom() ?>

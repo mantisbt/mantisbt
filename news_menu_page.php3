@@ -47,13 +47,13 @@
 	<input type=hidden name=f_poster_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Add News</b>
+			<b><? echo $s_add_news_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Headline<br>
-			Do not use "
+			<? echo $s_headline ?><br>
+			<? echo $s_do_not_use ?> "
 		</td>
 		<td width=75%>
 			<input type=text name=f_headline size=64 maxlength=64>
@@ -61,7 +61,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Body
+			<? echo $s_body ?>
 		</td>
 		<td>
 			<textarea name=f_body cols=60 rows=8></textarea>
@@ -69,7 +69,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Post News  ">
+			<input type=submit value="<? echo $s_post_news_button ?>">
 		</td>
 	</tr>
 	</form>
@@ -88,18 +88,18 @@
 	<form method=post action="<? echo $g_news_edit_page ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit or Delete News</b>
+			<b><? echo $s_edit_or_delete_news_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td align=center colspan=2>
-			<input type=radio name=f_action value="edit" CHECKED> Edit Post
-			<input type=radio name=f_action value="delete"> Delete Post
+			<input type=radio name=f_action value="edit" CHECKED> <? echo $s_edit_post ?>
+			<input type=radio name=f_action value="delete"> <? echo $s_delete_post ?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
 		<td valign=top width=25%>
-			Select Post
+			<? echo $s_select_post ?>
 		</td>
 		<td width=75%>
 			<select name=f_id>
@@ -124,7 +124,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value=" Submit ">
+			<input type=submit value="<? echo $s_submit ?>">
 		</td>
 		</form>
 	</tr>

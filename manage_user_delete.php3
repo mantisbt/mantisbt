@@ -57,10 +57,10 @@
 <div align=center>
 <?
 	if ( $f_protected=="on" ) {
-		PRINT "Account protected. Cannot delete.<p>";
+		PRINT "$s_account_delete_protected<p>";
 	}
 	else if ( $result ) {
-		PRINT "Account deleted...<p>";
+		PRINT "$s_account_deleted<p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
@@ -68,7 +68,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -51,7 +51,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Profile added...<p>";
+		PRINT "$s_profile_added<p>";
 	}
 	### FAILURE
 	else {
@@ -59,7 +59,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_account_profile_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

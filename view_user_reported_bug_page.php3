@@ -98,7 +98,7 @@
 		</select>
 		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
 		Changed(hrs): <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
-		Hide Fixed: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
+		Hide Resolved: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
 		<input type=submit value=" Filter ">
 		</td>
 		</form>
@@ -183,7 +183,7 @@
 
 		if ( !empty( $t_where_clause ) ) {
 			$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-			$t_where_clause = " WHERE  reporter_id='$t_user_id' AND ".$t_where_clause;
+			$t_where_clause = " WHERE reporter_id='$t_user_id' AND ".$t_where_clause;
 		}
 		else {
 			$t_where_clause = " WHERE reporter_id='$t_user_id'";

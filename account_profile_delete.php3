@@ -42,14 +42,14 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Deleted profile...<p>";
+		PRINT "$s_profile_deleted<p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}
 ?>
 <p>
-<a href="<? echo $g_account_profile_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -88,10 +88,10 @@
 	PRINT "<p>";
 	PRINT "<div align=center>";
 	if ( $f_offset_prev >= 0) {
-		PRINT "[ <a href=\"$g_main_page?f_offset=$f_offset_prev\">newer news</a> ]";
+		PRINT "[ <a href=\"$g_main_page?f_offset=$f_offset_prev\">$s_newer_news</a> ]";
 	}
 	if ( $news_count==$g_news_view_limit ) {
-		PRINT " [ <a href=\"$g_main_page?f_offset=$f_offset_next\">older news</a> ]";
+		PRINT " [ <a href=\"$g_main_page?f_offset=$f_offset_next\">$s_older_news</a> ]";
 	}
 	PRINT "</div>";
 ?>

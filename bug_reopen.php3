@@ -38,7 +38,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Bug has been reopened...<p>";
+		PRINT "$s_bug_reopened<p>";
 	}
 	### FAILURE
 	else {
@@ -47,7 +47,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

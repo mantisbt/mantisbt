@@ -13,7 +13,11 @@
 				$g_main_page, $g_view_bug_all_page,
 				$g_report_bug_page, $g_report_bug_advanced_page,
 				$g_summary_page, $g_account_page, $g_manage_page,
-				$g_news_menu_page, $g_usage_doc_page, $g_logout_page;
+				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
+				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
+				$s_summary_link, $s_account_link,
+				$s_manage_link, $s_edit_news_link, $s_docs_link,
+				$s_logout_link;
 	}
 
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -29,27 +33,26 @@
 ?>
 <div align=center>
 <font face=Verdana size=-1>
-	<a href="<? echo $g_path.$g_main_page ?>">Main</a> |
-	<a href="<? echo $g_path.$g_view_bug_all_page ?>">View Bugs</a> |
+	<a href="<? echo $g_path.$g_main_page ?>"><? echo $s_main_link ?></a> |
+	<a href="<? echo $g_path.$g_view_bug_all_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
 	if ( $t_access_level!="viewer" ) {
 		if ( get_user_value( $g_mantis_user_pref_table, "advanced_report" )=="on" ) {
 ?>
-	<a href="<? echo $g_path.$g_report_bug_advanced_page ?>">Report Bug</a> |
-	<? } else { ?>
-	<a href="<? echo $g_path.$g_report_bug_page ?>">Report Bug</a> |
+			<a href="<? echo $g_path.$g_report_bug_advanced_page ?>"><? echo $s_report_bug_link ?></a> |
+<? 		} else { ?>
+			<a href="<? echo $g_path.$g_report_bug_page ?>"><? echo $s_report_bug_link ?></a> |
 <?
 		}
 	}  # end report/viewer if
 ?>
-	<a href="<? echo $g_path.$g_summary_page ?>">Summary</a> |
-	<a href="<? echo $g_path.$g_account_page ?>">Account</a> |
+	<a href="<? echo $g_path.$g_summary_page ?>"><? echo $s_summary_link ?></a> |
+	<a href="<? echo $g_path.$g_account_page ?>"><? echo $s_account_link ?></a> |
 <? if ( $t_access_level=="administrator" ) { ?>
-	<a href="<? echo $g_path.$g_manage_page ?>">Manage</a> |
-	<a href="<? echo $g_path.$g_news_menu_page ?>">Edit News</a> |
+	<a href="<? echo $g_path.$g_manage_page ?>"><? echo $s_manage_link ?></a> |
+	<a href="<? echo $g_path.$g_news_menu_page ?>"><? echo $s_edit_news_link ?></a> |
 <? } ?>
-	<a href="<? echo $g_path.$g_usage_doc_page ?>">Docs</a> |
-	<a href="<? echo $g_path.$g_logout_page ?>">Logout</a>
-
+	<a href="<? echo $g_path.$g_usage_doc_page ?>"><? echo $s_docs_link ?></a> |
+	<a href="<? echo $g_path.$g_logout_page ?>"><? echo $s_logout_link ?></a>
 </font>
 </div>

@@ -44,7 +44,7 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Cateogries successfully updated...<p>";
+		PRINT "$s_categories_updated<p>";
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
@@ -52,7 +52,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_category_page ?>">Click here to proceed</a>
+<a href="<? echo $g_manage_category_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -50,7 +50,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Profile updated...<p>";
+		PRINT "$s_profile_updated<p>";
 	}
 	### FAILURE
 	else {
@@ -58,7 +58,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_account_profile_manage_page ?>">Click here to proceed</a>
+<a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -54,7 +54,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Bug has been successfully updated...<p>";
+		PRINT "$s_bug_updated<p>";
 	}
 	### FAILURE
 	else {
@@ -64,9 +64,9 @@
 ?>
 <p>
 <? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
-<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 <? } else { ?>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 <? } ?>
 </div>
 

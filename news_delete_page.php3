@@ -25,12 +25,11 @@
 <div align=center>
 <hr size=1 width=50%>
 
-Are you sure you wish to delete this news item?
+<? echo $s_delete_news_sure ?>
 
 <form method=post action="<? echo $g_news_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=hidden name=f_action value="delete">
-	<input type=submit value=" Delete News Item ">
+	<input type=submit value="<? echo $s_delete_news_item_button ?>">
 </form>
 
 <hr size=1 width=50%>

@@ -25,11 +25,12 @@
 <div align=center>
 <hr size=1 width=50%>
 
-Are you sure you wish to delete this account?
+<? echo $s_delete_account_sure ?>
 
 <form method=post action="<? echo $g_manage_user_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=submit value=" Delete Account ">
+	<input type=hidden name=f_protected value="<? echo $f_protected ?>">
+	<input type=submit value="<? echo $s_delete_account_button ?>">
 </form>
 
 <hr size=1 width=50%>

@@ -17,7 +17,7 @@
 	<form method=post action="<? echo $g_bugnote_add_page ?>">
 		<td align=center bgcolor=<? echo $g_white_color ?> colspan=2>
 		<input type=hidden name=f_id value="<? echo $v_id ?>">
-		<input type=submit value="Add Bugnote">
+		<input type=submit value="<? echo $s_add_bugnote_button ?>">
 		</td>
 	</form>
 	</tr>

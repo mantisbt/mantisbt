@@ -40,14 +40,14 @@
 <p>
 <div align=center>
 <?
-	PRINT "Showing source for: $f_url<p>";
+	PRINT "$s_show_source_for: $f_url<p>";
 	### Print source
 	$t_ver = phpversion();
 	if ( floor( $t_ver )>=4 ) {
 		show_source( $DOCUMENT_ROOT.$f_url );
 	}
 	else {
-		PRINT "This version ($t_ver) of php does not support show_source()";
+		PRINT "$s_not_supported_part1 ($t_ver) $s_not_supported_part2 show_source()";
 	}
 ?>
 </div>

@@ -121,7 +121,7 @@
 	### FORM ERROR
 	### required fields not entered
 	if ( $check_failed ) {
-		PRINT "<b>ERROR: There was an error in your report</b><br>";
+		PRINT "<b>$s_report_add_error</b><br>";
 		if ( $f_category=="" ) {
 			PRINT "You must select a category<br>";
 		}
@@ -138,7 +138,7 @@
 			PRINT "You must enter a description<br>";
 		}
 		PRINT "<p>";
-		PRINT "Please hit back and renter the required fields.";
+		PRINT "$s_hit_back";
 	}
 	### MYSQL ERROR
 	else if ( !$result ) {
@@ -147,11 +147,11 @@
 	}
 	### OK!!!
 	else {
-		PRINT "Thank you for your submission.<p>";
+		PRINT "$s_submission_thanks<p>";
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_all_page ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_all_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

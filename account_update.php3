@@ -51,11 +51,11 @@
 <?
 	### PROTECTED
 	if ( $f_protected=="on" ) {
-		PRINT "Account protected. Cannot change settings.<p>";
+		PRINT "$s_account_protected<p>";
 	}
 	### SUCCESS
 	else if ( $result ) {
-		PRINT "Your account has been successfully updated...<p>";
+		PRINT "$s_account_updated<p>";
 	}
 	### FAILURE
 	else {
@@ -64,7 +64,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_account_page ?>">Click here to proceed</a>
+<a href="<? echo $g_account_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

@@ -45,9 +45,9 @@
 
 <p>
 <div align=center>
-Preferences have been successfully updated...
+<? echo $s_prefs_updated ?>
 <p>
-<a href="<? echo $g_account_prefs_page ?>">Click here to proceed</a>
+<a href="<? echo $g_account_prefs_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer() ?>

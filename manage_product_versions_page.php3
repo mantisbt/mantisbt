@@ -36,12 +36,12 @@
 	<form method=post action="<? echo $g_manage_product_versions_update ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Product Versions</b>
+			<b><? echo $s_edit_product_versions_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Versions
+			<? echo $s_versions ?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_category size=48 maxlength=255 value="<? echo get_enum_string( "version" ) ?>">
@@ -49,7 +49,7 @@
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-			<input type=submit value="Update Categories">
+			<input type=submit value="<? echo $s_update_versions_button ?>">
 		</td>
 	</tr>
 	</form>

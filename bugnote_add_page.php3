@@ -38,7 +38,7 @@
 	<input type=hidden name=f_bug_id value="<? echo $f_id ?>">
 	<tr>
 		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b>Add Bugnote</b>
+			<b><? echo $s_add_bugnote_title ?></b>
 		</td>
 	</tr>
 	<tr>
@@ -48,7 +48,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
-			<input type=submit value="    Add Note    ">
+			<input type=submit value="<? echo $s_add_note_button ?>">
 		</td>
 	</tr>
 	</form>
