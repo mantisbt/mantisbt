@@ -23,6 +23,9 @@ XX.XX.2000	-	0.10.2
  * Added documentation section
  * Summary is now useful
  * Fixed a few issues with the Advanced bug view
+ * Tidied up most of the code
+ * Temporarily 'solved' (mostly) a serious issue with consistency on
+   bugnote and bug report additions
 
 12.03.2000	-	0.10.1
 
