@@ -1,5 +1,9 @@
 Mantis
 
+01.XX.2002  -   0.17.1
+
+ * Fixed missing closing span tag in view_bug_*page.php
+
 01.23.2002  -   0.17.0
 
  * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
