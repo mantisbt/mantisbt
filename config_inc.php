@@ -57,7 +57,7 @@
 	$g_show_advanced_report      = 1;
 	$g_show_advanced_update      = 1;
 
-	$g_show_version              = 1;
+	$g_show_version              = 0;
 
 	# requires PHP4
 	# 0 = disabled; 1 = admin only; 2 = anyone
@@ -177,10 +177,6 @@
 	$g_login_success_page          = "index".$g_php;
 	$g_logout_page                 = "logout_page".$g_php;
 
-	# view prefs
-	$g_view_prefs_page             = "view_prefs_page".$g_php;
-	$g_view_prefs_update           = "view_prefs_update".$g_php;
-
 	# debug only
 	$g_show_source_page            = "show_source_page".$g_php;
 
@@ -193,14 +189,10 @@
 	# cookie names
 	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";
 	$g_last_access_cookie       = $g_cookie_prefix."_LAST_ACCESS_COOKIE";
-	$g_hide_resolved_cookie     = $g_cookie_prefix."_HIDE_RESOLVED";
-	$g_view_limit_cookie        = $g_cookie_prefix."_VIEW_LIMIT";
 
 	# cookie values
 	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
 	$g_last_access_cookie_val   = $HTTP_COOKIE_VARS[$g_last_access_cookie];
-	$g_hide_resolved_val        = $HTTP_COOKIE_VARS[$g_hide_resolved_cookie];
-	$g_view_limit_val           = $HTTP_COOKIE_VARS[$g_view_limit_cookie];
 	#--------------------
 
 	#--------------------

@@ -33,9 +33,11 @@ To Do:
  * Added changed in last X hours option
  * Added show source debug capability - requires PHP4
  * Added 'feedback' status - indicates that it requires more information
+ * Added show Mantis version capability
  * Fixed bug with Bugnote Add button showing up in the wrong places
  * Modified version to be an enum.
  * Modified ordering methods in manage account
+ * Modified viewing preferences
  * Made enum displays (category, status, etc) easier to maintain via print_lists();
  * Renamed access_level_check_greater() to access_level_check_greater_or_equal()
  * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
@@ -43,6 +45,8 @@ To Do:
  * Renamed corresponding .php3 files
  * Split manage user actions into separate files
  * Removed the destructive DROP table in db_generate.sql
+ * Removed view_prefs_page.php3 and view_prefs_update.php3 and corresponding
+   cookie variables
 
 12.06.2000	-	0.10.2
 
