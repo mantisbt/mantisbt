@@ -20,6 +20,7 @@ Mantis
  * Modified default/config_inc1.php to have more more css global variables.
  * Added project name as supplementary info next to bug id in buglist for "All projects" option
  * Added Basic Authentication patch.
+ * Added CSV Export patch.
 
 01.23.2002  -   0.17.0
 

@@ -19,7 +19,7 @@
 
 		# Use a regular expression to check to see if the email is in valid format
 		#  x-xx.xxx@yyy.zzz.abc etc.
-		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,3}$)", $p_email, $check)) {
+		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,6}$)", $p_email, $check)) {
 			# passed format check. see if we should check the mx records
 			if ( ON == $g_check_mx_record ) {	# Check for valid mx records
 				if (getmxrr($check[1].".".$check[2], $temp)) {

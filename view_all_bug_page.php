@@ -26,6 +26,10 @@
 		print_header_redirect( $g_view_all_bug_page."?f=1" );
 	}
 
+	if ( isset( $f_print ) ) {
+		print_header_redirect( $g_print_all_bug_page );
+	}
+
 	if( !isset( $f_search_text ) ) {
 		$f_search_text = false;
 	}
@@ -190,30 +194,27 @@
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
-	if ($f_search_text) {
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%')
-							OR (description LIKE '%".addslashes($f_search_text)."%')
-							OR (steps_to_reproduce LIKE '%".addslashes($f_search_text)."%')
-							OR (additional_information LIKE '%".addslashes($f_search_text)."%')
-							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
-							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-
+	if ( $f_search_text ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table";
+		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%') OR
+							(description LIKE '%".addslashes($f_search_text)."%') OR
+							(steps_to_reproduce LIKE '%".addslashes($f_search_text)."%') OR
+							(additional_information LIKE '%".addslashes($f_search_text)."%') OR
+							($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%')) AND
+							$g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 	} else {
 		$t_columns_clause = " *";
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
 	# Get the total number of bugs that meet the criteria.
-	#
-	$query = "SELECT count(*) " . $t_from_clause . $t_where_clause;
-	$result = db_query( $query );
-	$row = db_fetch_array($result);
+	$query3 = "SELECT count(*) " . $t_from_clause . $t_where_clause;
+	$result3 = db_query( $query3 );
+	$row = db_fetch_array( $result3 );
 	$t_query_count = $row['count(*)'];
 
 	# Guard against silly values of $f_per_page.
-	#
 	if ( 0 == $f_per_page ) {
 		$f_per_page = 1;
 	}
@@ -224,31 +225,25 @@
 	# to split this list up into.
 	# For the sake of consistency have at least one page, even if it
 	# is empty.
-	#
 	$t_page_count = ceil($t_query_count / $f_per_page);
 	if ($t_page_count < 1) {
 		$t_page_count = 1;
 	}
 
 	# Make sure f_page_number isn't past the last page.
-	#
 	if ($f_page_number > $t_page_count) {
 		$f_page_number = $t_page_count;
 	}
 
-	# Now add the rest of the criteria i.e. sorting, limit.
-	#
 	$query  = "SELECT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
 	$query .= $t_from_clause;
 	$query .= $t_where_clause;
 
+	# Now add the rest of the criteria i.e. sorting, limit.
 	if ( !isset( $f_sort ) ) {
 		$f_sort="last_updated";
 	}
 	$query = $query." ORDER BY '$f_sort' $f_dir";
-	if ( $f_sort != "priority" ) {
-		$query = $query.", priority DESC";
-	}
 
 	# t_offset = ((f_page_number - 1) * f_per_page)
 	# f_per_page = f_per_page
@@ -270,10 +265,35 @@
 	$link_page = $g_view_all_bug_page;
 	$page_type = "all";
 
-    /*if ( isset( $f_export_csv )&&( $f_export_csv=="on" ) ) {
-    	include( $g_csv_export_inc );
-		die;
-    }*/
+	# BEGIN CSV export feature
+	if ( isset( $f_csv ) ) {
+		# Do we want this parsed to the browser as a csv attachment (also changes the viewing parameters below)
+		# Send headers to browser to active mime loading
+		# Leigh Morresi <leighm@linuxbandwagon.com>
+
+		header( "Content-Type: plain/text; name=$g_page_title.csv" );
+		header( "Content-Transfer-Encoding: BASE64;" );
+		header( "Content-Disposition: attachment; filename=$g_page_title.csv" );
+
+		echo "$s_email_project,$g_page_title \n\n";
+		echo "$s_priority,$s_id,$s_severity,$s_status,$s_version,$s_assigned_to,$s_reporter,$s_updated,$s_summary\n";
+
+		for ( $i=0; $i < $row_count; $i++ ) {
+			$row = db_fetch_array($result);
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			$t_last_updated		= date( $g_short_date_format, $v_last_updated );
+			$t_priority			= get_enum_element($s_priority_enum_string, $v_priority);
+			$t_status			= get_enum_element( $s_status_enum_string, $v_status );
+			$t_hander_name		= get_user_info( $v_handler_id, "username" );
+			$t_reporter_name	= get_user_info( $v_reporter_id, "username" );
+			$v_summary			= string_display( $v_summary );
+
+			echo "$t_priority,$v_id,",print_formatted_severity_string( $v_status, $v_severity ),",$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
+		}
+		die; #end here, maybe redirect back to the current page?
+	}
+	# END CSV export feature
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -1,5 +1,5 @@
 <p>
-<table class="width100" cellspacing="1">
+<table class="width100" cellspacing="0">
 <form method="post" action="<?php echo $link_page ?>?f=3">
 <input type="hidden" name="f_offset" value="0">
 <input type="hidden" name="f_save" value="1">
@@ -7,10 +7,7 @@
 <input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
 <input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
 <input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
-<tr>
-    <td class="small-caption">
-        <?php echo $s_search ?>
-    </td>
+<tr class="row-category2">
     <td class="small-caption">
 		<?php echo $s_reporter ?>
 	</td>
@@ -35,14 +32,8 @@
     <td class="small-caption">
 		<?php echo $s_hide_closed ?>
 	</td>
-    <td class="small-caption">
-		&nbsp;
-	</td>
 </tr>
 <tr>
-	<td>
-	    <input type="text" name="f_search_text" value="<?php echo $f_search_text; ?>">
-	</td>
 	<td>
 		<select name="f_user_id">
 			<option value="any"><?php echo $s_any ?></option>
@@ -88,12 +79,22 @@
 	<td>
 		<input type="checkbox" name="f_hide_closed" <?php if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
 	</td>
-<!--
-		<td>
-		<input type="checkbox" name="f_export_csv">
-	</td>-->
+</tr>
+<tr class="row-category2">
+    <td class="small-caption">
+        <?php echo $s_search ?>
+    </td>
+	<td colspan="7">
+		&nbsp;
+	</td>
+</tr>
+<tr>
 	<td>
-		<input type="submit" value="<?php echo $s_filter_button ?>">
+	    <input type="text" size="16" name="f_search_text" value="<?php echo $f_search_text; ?>">
+	</td>
+	<td class="right" colspan="7">
+		<input type="submit" name="f_filter" value="<?php echo $s_filter_button ?>">
+		<input type="submit" name="f_csv" value="<?php echo $s_csv_export ?>">
 	</td>
 </tr>
 </form>
@@ -201,10 +202,10 @@
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
-		
+
 		# grab the project name
 		$project_name = get_project_field($v_project_id,"NAME");
-		
+
 		$query = "SELECT MAX(last_modified)
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'";

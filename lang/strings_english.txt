@@ -13,6 +13,7 @@
 	$s_operation_successful = "Operation successful.";
 	$s_date_order = "Date Order";
 	$s_print_all_bug_page_link = "Print Reports";
+	$s_csv_export = "CSV Export";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
@@ -302,7 +303,7 @@
 
 	# manage_page.php3
 	$s_hide_disabled = "Hide Disabled";
-	$s_filter_button = "Filter";
+	$s_filter_button = "Apply Filter";
 	$s_manage_users_link = "Manage Users";
 	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Create Account";

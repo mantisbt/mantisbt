@@ -52,7 +52,7 @@ tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; }
 tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; }
 tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; }
 tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; font-weight: bold; }
-
+tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; }
 /* Login Info */
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
