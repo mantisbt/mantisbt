@@ -38,18 +38,18 @@
 	$s_new_account_url = "Sie können sich hier anmelden: ";
 	$s_new_account_username = "Benutzername: ";
 	$s_new_account_password = "Passwort: ";
-	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. tion. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
+	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
 	$s_new_account_do_not_reply = "Bitte beantworten Sie diese Nachricht nicht.\n";
 
-	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zuruckzusetzen".
+	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zurückzusetzen".
 	$s_account_name_msg = "Ihr Bnutzername ist";
 	$s_news_password_msg = "Hier ist Ihr neues Passwort";
 
-	$s_new_bug_msg = "Der folgende neue Fehler wurde hinzugefugt.";
-	$s_email_bugnote_msg = "Eine Fehlernotiz wurde zu diesem Fehler hinzugefugt";
+	$s_new_bug_msg = "Der folgende Fehler wurde hinzugefügt.";
+	$s_email_bugnote_msg = "Eine Fehlernotiz wurde zu diesem Fehler hinzugefügt";
 	$s_email_resolved_msg = "Der folgende Fehler wurde behoben.";
 	$s_email_close_msg = "Der folgende Fehler wurde geschlossen";
-	$s_email_feedback_msg = "Der folgende Fehler benotigt Ihr Feedback.";
+	$s_email_feedback_msg = "Der folgende Fehler benötigt Ihr Feedback.";
 	$s_email_reopen_msg = "Der folgende Fehler wurde reaktiviert.";
 	$s_email_assigned_msg = "Der folgende Fehler wurde zugewiesen.";
 
@@ -60,9 +60,9 @@
 	$s_email_category = "Kategorie";
 	$s_email_reproducibility = "Reproduzierbarkeit";
 	$s_email_severity = "Schwere";
-	$s_email_priority = "Prioritat";
+	$s_email_priority = "Priorität";
 	$s_email_status = "Status";
-	$s_email_resolution = "Losung";
+	$s_email_resolution = "Lösung";
 	$s_email_duplicate = "Duplikat";
 	$s_email_date_submitted = "erstellt am";
 	$s_email_last_modified = "letzte Aktualisierung";
@@ -86,7 +86,7 @@
 	$s_password = "Passwort";
 	$s_confirm_password  = "Passwort bestätigen";
 	$s_access_level = "Zugangsberechtigung";
-	$s_update_user_button = "Benuzterin aktualisieren";
+	$s_update_user_button = "Benuzterzin aktualisieren";
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Fehlwert-Konto-Einstellungen";
@@ -134,14 +134,14 @@
 	$s_profile_defaulted_msg = "Standardprofil aktualisiert...";
 
 	# account_profile_manage_page.php3
-	$s_add_profile_title = "Adicionar Perfil";
-	$s_add_profile_button = "Adicionar Perfil";
-	$s_edit_or_delete_profiles_title = "Editar ou Apagar Perfil";
-	$s_edit_profile = "Editar Perfil";
-	$s_make_default = "Tornar Padr&atilde;";
-	$s_delete_profile = "Apagar Perfil";
-	$s_select_profile = "Selecionar Perfil";
-	$s_submit_button = "Enviar";
+	$s_add_profile_title = "Profil hinzufügen";
+	$s_add_profile_button = "Profil hinzufügen";
+	$s_edit_or_delete_profiles_title = "Profile editieren/löschen";
+	$s_edit_profile = "Profil editieren";
+	$s_make_default = "Profil als Standard setzen";
+	$s_delete_profile = "Profil löschen";
+	$s_select_profile = "Profil wählen";
+	$s_submit_button = "Absenden";
 
 	# account_profile_update.php3
 	$s_profile_updated_msg = "Profil aktualisiert...";
@@ -260,7 +260,7 @@
 	$s_here = "hier klicken";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Offen und mir zuweisen";
+	$s_open_and_assigned_to_me = "Öffnen und mir zuweisen";
 	$s_open_and_reported_to_me = "Offen und von mir berichtet";
 	$s_newer_news_link = "Neuere Nachrichten";
 	$s_older_news_link = "Ältere Nachrichten";
@@ -438,32 +438,32 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Datei hochladen";
 	$s_title = "Titel";
-	$s_select_file = "Datei auswahlen";
+	$s_select_file = "Datei auswählen";
 	$s_upload_file_button = "Datei hochladen";
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "Projekt-Datei geloscht";
+	$s_project_file_deleted_msg = "Projekt-Datei gelöscht";
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "Soll diese Datei wirklich geloscht werden?";
+	$s_confirm_file_delete_msg = "Soll diese Datei wirklich gelöscht werden?";
 
 	# proj_doc_edit_page.php3
 	$s_upload_file_title = "Datei hochladen";
 	$s_filename = "Dateiname";
 	$s_file_update_button = "Datei aktualisieren";
-	$s_file_delete_button = "Datei loschen";
+	$s_file_delete_button = "Datei löschen";
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "Projekt Dokumentation";
-	$s_user_documentation = "Benutzer Dokumentation";
-	$s_project_documentation = "Projekt Dokumentation";
-	$s_add_file = "Datei hinzufugen";
+	$s_project_documentation_title = "Projekt-Dokumentation";
+	$s_user_documentation = "Benutzer-Dokumentation";
+	$s_project_documentation = "Projekt-Dokumentation";
+	$s_add_file = "Datei hinzufügen";
 
 	# proj_doc_update.php3
 	$s_project_document_updated = "Projekt erfolgreich aktualisiert";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Benutzer zum Projekt hinzugefugt";
+	$s_project_user_added_msg = "Benutzer zum Projekt hinzugefügt";
 
 	# proj_user_delete.php3
 	$s_project_removed_user_msg = "Benutzer aus Projekt entfernt";
@@ -472,10 +472,10 @@
 	$s_remove_user_sure_msg = "Soll dieser Benutzer aus dem Projekt wirklich entfernt werden?";
 
 	# proj_user_menu_page.php3
-	$s_add_user_title = "Benutzer zum Projekt hinzugefugt";
-	$s_add_user_button = "Benutzer hinzufugen";
+	$s_add_user_title = "Benutzer zum Projekt hinzugefügt";
+	$s_add_user_button = "Benutzer hinzufügen";
 	$s_project_selection_title = "Projektauswahl";
-	$s_remove_link = "loschen";
+	$s_remove_link = "löschen";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";
@@ -488,7 +488,7 @@
 	$s_must_enter_summary = "Sie müssen eine Zusammenfassung eingeben";
 	$s_must_enter_description = "Sie müssen eine Beschreibung eingeben";
 	$s_report_more_bugs = "Weitere Fehler eintragen";
-	$s_submission_thanks_msg = "Vielen Dank fur den Eintrag.";
+	$s_submission_thanks_msg = "Vielen Dank für den Eintrag.";
 
 	# report_bug_advanced_page.php3
 	$s_simple_report_link = "Einfacher Bericht";
@@ -510,8 +510,8 @@
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
-	$s_selected_project = "Gewahltes Projekt";
-	$s_valid_project_msg = "Es mu? ein Projekt ausgewahlt werden";
+	$s_selected_project = "Gewähltes Projekt";
+	$s_valid_project_msg = "Es muss ein Projekt ausgewählt werden";
 
 	# show_source_page.php3
 	$s_show_source_for_msg = "Quellcode anzeigen für";
@@ -522,9 +522,9 @@
 	$s_invalid_email = "IST EINE UNGÜLTIGE EMAIL-ADRESSE";
 	$s_duplicate_username = "IST EIN DOPPELTER BENUTZERNAME. BITTE ANDEREN WÄHLEN";
 	$s_account_create_fail = "KONNTE KONTO NICHT ANLEGEN";
-	$s_account_added = "Konto erfolgreich hinzugefugt.";
+	$s_account_added = "Konto erfolgreich hinzugefügt.";
 	$s_password_emailed_msg = "Ihr Passwort wird per eMail versandt.";
-	$s_no_reponse_msg = "Wenn Sie nicht innerhalb einer Woche reagieren konnte der Zugang geloscht werden.";
+	$s_no_reponse_msg = "Wenn Sie nicht innerhalb einer Woche reagieren könnte der Zugang gelöscht werden.";
 
 	# signup_page.php3
 	$s_signup_info = "Wählen Sie einen Anmeldenamen und eine gültige E-Mail-Adresse. Ein zufallserzeugtes Passwort wird an diese Adresse gesendet.";

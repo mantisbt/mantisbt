@@ -101,7 +101,7 @@
 		}
 
 		# chop off the last comma and add a \n
-		if ( strlen( $t_bcc )>4 ) {
+		if ( strlen( $t_bcc )>5 ) {
 			return substr( $t_bcc, 0, strlen( $t_bcc )-2 )."\n";
 		} else {
 			return "";
@@ -469,10 +469,10 @@
 			# @@@ for debugging only
 			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 			#exit;
-			echo $t_recipient."<br>";
-			echo nl2br($t_headers)."<br>";
-			echo $t_subject."<br>";
-			echo nl2br($t_message)."<br>";
+			#echo $t_recipient."<br>";
+			#echo nl2br($t_headers)."<br>";
+			#echo $t_subject."<br>";
+			#echo nl2br($t_message)."<br>";
 			#exit;
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );

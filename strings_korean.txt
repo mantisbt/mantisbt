@@ -97,14 +97,14 @@
 	$s_refresh_delay = "리플레시 하지 않음 ";
 	$s_redirect_delay = "리다이렉트 하지 않음";
 	$s_email_on_new = "Email on New";
-	$s_email_on_assigned = "Email on Assigned";
-	$s_email_on_feedback = "Email on Feedback";
-	$s_email_on_resolved = "Email on Resolved";
-	$s_email_on_closed = "Email on Closed";
-	$s_email_on_reopened = "Email on Reopened";
-	$s_email_on_bugnote_added = "Email on Bugnote Added";
-	$s_email_on_status_change = "Email on Status Change";
-	$s_email_on_priority_change = "Email on Priority Change";
+	$s_email_on_assigned = "할당(Assign)에 대한 이메일";
+	$s_email_on_feedback = "피드백(Feedback)에 대한 이메일";
+	$s_email_on_resolved = "해결된 버그에 대한 이메일";
+	$s_email_on_closed = "클로즈시 이메일";
+	$s_email_on_reopened = "재발생시 이메일";
+	$s_email_on_bugnote_added = "버그노트 추가시 이메일";
+	$s_email_on_status_change = "상태 변경시 이메일";
+	$s_email_on_priority_change = "우선순위 변경시 이메일";
 	$s_language = "언어";
 	$s_default_project = "기본 프로젝트";
 	$s_update_prefs_button = "설정상태 갱신";
@@ -346,7 +346,7 @@
 	$s_project_updated_msg = "프로젝트가 갱신되었습니다....";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: This is a duplicate version.";
+	$s_duplicate_version = "오류: 버전이 중복되었습니다.";
 	$s_version_added_msg = "버전 정보가 추가되었습니다....";
 
 	# manage_project_version_delete.php3
@@ -487,7 +487,7 @@
 	$s_must_enter_reproducibility = "재발생가능성을 선택해야 합니다.";
 	$s_must_enter_summary = "요약된 내용을 입력해야 합니다.";
 	$s_must_enter_description = "설명을 입력해야 합니다.";
-	$s_report_more_bugs = "Report More Bugs";
+	$s_report_more_bugs = "또다른 버그 보고";
 	$s_submission_thanks_msg = "버그 리포팅을 해주셔서 감사합니다.";
 
 	# report_bug_advanced_page.php3
@@ -502,12 +502,12 @@
 	$s_steps_to_reproduce = "재발생 스탭";
 	$s_additional_information = "추가 정보사항";
 	$s_submit_report_button = "보고서 제출";
-	$s_check_report_more_bugs = "check to report more bugs";
+	$s_check_report_more_bugs = "또다른 버그 보고 확인";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "상세 보고";
 	$s_upload_file = "파일 업로드";
-	$s_report_stay = "Report Stay";
+	$s_report_stay = "Stay 리포트";
 
 	# set_project.php3
 	$s_selected_project = "현재 프로젝트";
@@ -528,8 +528,8 @@
 
 	# signup_page.php3
 	$s_signup_info = "로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.";
-	$s_signup_title = "Signup";
-	$s_signup_button = "Signup";
+	$s_signup_title = "사인업";
+	$s_signup_button = "사인업";
 
 	# site_settings_edit_page.php3
 	$s_edit_site_settings_title = "사이트 설정 수정";
@@ -556,7 +556,7 @@
 	$s_longest_open = "가장 오래된";
 	$s_average_time = "평균 시간";
 	$s_total_time = "전체 시간";
-	$s_developer_stats = "개발자 통계(open/resolved/total)";
+	$s_developer_stats = "개발자 통계(개설/해결/전체)";
 
 	# view_all_assign_bug_page.php3
 
