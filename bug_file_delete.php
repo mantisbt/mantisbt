@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_delete.php,v 1.25 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_file_delete.php,v 1.26 2003-02-24 08:45:29 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 
 	$t_bug_id = file_get_field( $f_file_id, 'bug_id' );
 
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id );
 
 	file_delete( $f_file_id );
 
