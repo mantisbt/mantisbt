@@ -1,3 +1,4 @@
+
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -6,7 +7,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.11 2003-01-25 21:29:20 jlatour Exp $
+	# $Id: core.php,v 1.12 2003-01-28 04:11:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,6 +17,9 @@
 	# Before doing anything else, start output buffering so we don't prevent
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
+
+        # Include compatibility file before anything else
+        require_once( 'core/php_api.php' );
 
 	# Load constants and configuration files
   	require_once( 'constant_inc.php' );
@@ -54,9 +58,6 @@
 	}
 
 	# Load rest of core in seperate directory.
-
-	# Include compatibility file before anything else
-	require_once( $t_core_path.'php_api.php' );
 
 	require_once( $t_core_path.'config_api.php' );
 	require_once( $t_core_path.'timer_api.php' );
