@@ -31,6 +31,9 @@
 	email_close( $f_id );
 
 	$t_redirect_url = $g_view_all_bug_page;
+	if (( ON == $g_quick_proceed )&&( $result )) {
+		print_header_redirect( $t_redirect_url );
+	}
 ?>
 <?php print_page_top1() ?>
 <?php

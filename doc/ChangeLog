@@ -27,6 +27,7 @@ Mantis
  * Modified edit project links to use the project name instead of the [edit] link.
  * Modified default/config_inc1.php to have more more css global variables.
  * Modified wordwrap to use built-in php function if available.
+ * Modified bug_assign and bug_close to use g_quick_proceed.
  * Added project name as supplementary info next to bug id in buglist for "All projects" option
  * Added Basic Authentication patch.
  * Added CSV Export patch.
