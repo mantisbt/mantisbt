@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.39 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:04 $
+	# $Revision: 1.40 $
+	# $Author: vboctor $
+	# $Date: 2002-08-17 02:46:01 $
 	#
-	# $Id: strings_german.txt,v 1.39 2002-08-15 20:35:04 jlatour Exp $
+	# $Id: strings_german.txt,v 1.40 2002-08-17 02:46:01 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -107,8 +107,8 @@
 	$s_by_severity_mix = 'by severity and status';
 	$s_by_priority_mix = 'by priority and status';
 	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
+	$s_synthesis_link = 'Synthesis';
+	$s_status_link = 'Per state';
 	$s_priority_link = 'Per priority';
 	$s_severity_link = 'Per severity';
 	$s_category_link = 'Per category';
@@ -140,6 +140,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEHLER: Ein benötigtes Feld wurde nicht ausgefüllt. Bitte übrprüfen Sie Ihre Eingaben.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 
 	# General Strings
 	$s_go_back = 'Zurück';

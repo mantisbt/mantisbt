@@ -365,6 +365,17 @@
 	###########################################################################
 	# Access Control API
 	###########################################################################
+	# function to be called when a user is attempting to access a page that 
+	# he/she is not authorised to.  This outputs an access denied message then
+	# re-directs to the mainpage.
+	function access_denied() {
+		global $MANTIS_ERROR, $s_proceed;
+		print '<center>';
+		print '<p>' . $MANTIS_ERROR[ERROR_ACCESS_DENIED] . '<p>';
+		print_bracket_link( 'main_page.php', $s_proceed );
+		print '</center>';
+		exit;
+	}
 	# --------------------
 	# check to see if the access level is strictly equal
 	function access_level_check_equal( $p_access_level, $p_project_id=0 ) {
@@ -386,6 +397,23 @@
 			return false;
 		}
 	}
+	# --------------------
+	# check to see if the current user has access to the specified bug.  This assume that the bug exists and 
+	# that the user has access to the project (check_bug_exists() and project_access_check()).
+	function access_bug_check( $p_bug_id, $p_view_state='' ) {
+		global $g_private_bug_threshold;
+
+		if ( empty ( $p_view_state ) ) {
+			$t_view_state = get_bug_field( $p_bug_id, 'view_state' );
+		} else {
+			$t_view_state = (integer)$p_view_state;
+		}
+
+		# Make sure if the bug is private, the logged in user has access to it.
+		if ( ( $t_view_state == PRIVATE ) && !access_level_check_greater_or_equal( $g_private_bug_threshold ) ) {
+			access_denied();
+		}
+ 	}
 	# --------------------
 	# check to see if the access level is equal or greater
 	# this checks to see if the user has a higher access level for the current project
@@ -489,8 +517,7 @@
 			return;
 		}
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
-			# need to replace with access error page
-			print_header_redirect( 'logout_page.php' );
+			access_denied();
 		}
 	}
 	# --------------------

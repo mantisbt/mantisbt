@@ -144,6 +144,7 @@
 	define( 'ERROR_DUPLICATE_PROJECT',   10 );
 	define( 'ERROR_EMPTY_FIELD',         11 );
 	define( 'ERROR_PROTECTED_ACCOUNT',   12 );
+	define( 'ERROR_ACCESS_DENIED',       13 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

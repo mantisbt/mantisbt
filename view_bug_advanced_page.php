@@ -30,6 +30,9 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+	# if bug is private, make sure user can view private bugs
+	access_bug_check( $f_id, $v_view_state );
+
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
     		WHERE id='$v_bug_text_id'";

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.21 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-16 09:26:15 $
+	# $Revision: 1.22 $
+	# $Author: vboctor $
+	# $Date: 2002-08-17 02:46:01 $
 	#
-	# $Id: bug_update_page.php,v 1.21 2002-08-16 09:26:15 jfitzell Exp $
+	# $Id: bug_update_page.php,v 1.22 2002-08-17 02:46:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,6 +37,9 @@
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
+	
+	# if bug is private, make sure user can view private bugs
+	access_bug_check( $f_id, $v_view_state );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
