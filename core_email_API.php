@@ -98,6 +98,66 @@
 			$t_adm = ADMINISTRATOR;
 			$t_public = PUBLIC;
 
+			#@@@@@@@
+			$temp_arr = array();
+			# grab the administrators
+			$query = "SELECT id, email
+					FROM $g_mantis_user_table
+					ORDER BY username";
+			$result = db_query( $query );
+			$user_count = db_num_rows( $result );
+			for ($i=0;$i<$user_count;$i++) {
+				$row = db_fetch_array( $result );
+				extract( $row, EXTR_PREFIX_ALL, "v" );
+				$temp_arr[$v_email] = array( $v_email, $v_id );
+			}
+
+			foreach ( $temp_arr as $key => $val ) {
+				$v_id = $val[1];
+				$v_email = $val[0];
+
+				# always add all administrators
+				$t_access_level = get_user_field( $v_id, "access_level" );
+				if ( ADMINISTRATOR == $t_access_level ) {
+					$send_arr[] = $v_email;
+					continue;
+				}
+
+				# see if users belong
+				$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+				if ( PUBLIC == $t_project_view_state ) {
+					$query = "SELECT l.access_level
+							FROM	$g_mantis_project_user_list_table l,
+									$g_mantis_project_table p
+							WHERE	l.project_id='$t_project_id' AND
+									p.id=l.project_id AND
+									l.user_id='$v_id'";
+					$result = db_query( $query );
+					$count = db_num_rows( $result );
+					if ( $count > 0 ){
+						$t_access_level = db_result( $result );
+					}
+					if ( $t_access_level >= DEVELOPER ) {
+						$send_arr[] = $v_email;
+					}
+
+				} else {
+					$query = "SELECT COUNT(*)
+							FROM	$g_mantis_project_user_list_table l,
+									$g_mantis_project_table p
+							WHERE	l.project_id='$t_project_id' AND
+									p.id=l.project_id AND
+									l.user_id='$v_id' AND
+									l.access_level>='$t_dev'";
+					$result = db_query( $query );
+					$count = db_result( $result, 0, 0 );
+					if ( $count > 0 ) {
+						$send_arr[] = $v_email;
+						continue;
+					}
+				}
+			}
+			/*#@@@@@@@@@@@@
 			# grab all the ADMINISTRATORS
 			$query = "SELECT DISTINCT id, email
 					FROM $g_mantis_user_table
@@ -151,7 +211,7 @@
 				if ( ON == $t_notify ) {
 					$send_arr[] = $row["email"];
 				}
-			} # end DEVELOPERS
+			} # end DEVELOPERS*/
 		} # end NEW bug developer section
 
 		# grab all users MONITORING bug
@@ -179,6 +239,7 @@
 		foreach ( $send_arr as $send_val ) {
 			$t_bcc .= $send_val.", ";
 		}
+
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc ) > 5 ) {
 			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : "");  ## win-bcc-bug

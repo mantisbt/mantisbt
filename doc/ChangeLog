@@ -15,6 +15,7 @@ Mantis
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
  * Modified disk uploads to use the file_download.php script.
  * Modified bugnote last_modified query slightly.
+ * Modified reporter and assign_to option lists.
  * Updated PHP and MySQL requirements.
  * Updated Norwegian, Russian, Danish and Dutch translations.
  * Added die to print_header_redirect().
