@@ -125,7 +125,7 @@
 	$s_update_user_button = "Benutzer aktualisieren";
 
 	# account_prefs_page.php3
-	$s_default_account_preferences_title = "Fehlwert-Konto-Einstellungen";
+	$s_default_account_preferences_title = "Kontopr&auml;ferenzen";
 	$s_default_project = "Standard-Projekt";
 	$s_advanced_report = "Erweiterter Bericht";
 	$s_advanced_view = "Erweiterte Darstellung";
