@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.69 2003-03-10 21:22:35 int2str Exp $
+	# $Id: html_api.php,v 1.70 2003-03-13 00:10:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -299,7 +299,7 @@
 		if ( ON == config_get( 'show_version' ) ) {
 			echo "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis " . config_get( 'mantis_version' ) . "</a></span>";
 		}
-		echo '<address>Copyright (C) 2000 - 2003</address>';
+		echo '<address>Copyright &copy; 2000 - 2003</address>';
 		echo '<address><a href="mailto:' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
 		if ( ON == config_get( 'show_timer' ) ) {
 			$g_timer->print_times();
