@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.31 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: core.php,v 1.32 2004-02-05 01:17:13 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -85,6 +85,12 @@
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_path.'database_api.php' );
+
+	# Headers to prevent caching
+	header( 'Pragma: no-cache' );
+	header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
+	header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+	header( 'Cache-Control: post-check=0, pre-check=0', false );
 
 	# SEND USER-DEFINED HEADERS
 	foreach( config_get( 'custom_headers' ) as $t_header ) {

@@ -2,6 +2,8 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.1
 
+ * Fix #2668: Proxy incorrectly presents cached output to other users
+ * Fix #3069: Proxy server incorrectly caches output of 'View All Bugs'
  * Sec #3137: By default, every installation has an admin account with a known login cookie value. This value is now generated at installation time.
  * Fix #3177: Switching project in advanced summary changes current page.
  * Fix #3324: Win32: Call to undefined function: getmxrr() [default to OFF].

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.71 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: print_api.php,v 1.72 2004-02-05 01:17:13 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -37,9 +37,7 @@
 			header( 'Status: 302' );
 		}
 		header( 'Content-Type: text/html' );
-		header( 'Pragma: no-cache' );
-		header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
-		header( 'Cache-control: no-cache, no-cache="Set-Cookie", private' );
+
 		if ( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$p_url" );
 		} else {
