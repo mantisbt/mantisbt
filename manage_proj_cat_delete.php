@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_cat_delete.php,v 1.17 2003-02-08 22:47:00 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -19,17 +23,16 @@
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
 
-	$f_category = urldecode( $f_category );
+	# Make sure the category exists
+	if ( category_is_unique( $f_project_id, $f_category ) ) {
+		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+	}
 
+	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ),
 							 lang_get( 'delete_category_button' ) );
 
-	$result = category_delete( $f_project_id, $f_category );
+	category_remove( $f_project_id, $f_category );
 
-    $t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
 ?>

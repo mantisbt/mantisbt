@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_update.php,v 1.22 2003-01-30 09:41:24 jfitzell Exp $
+	# $Id: manage_proj_update.php,v 1.23 2003-02-08 22:47:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -24,6 +24,5 @@
 
 	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled );
 
-    $t_redirect_url = 'manage_proj_page.php';
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( 'manage_proj_page.php' );
 ?>

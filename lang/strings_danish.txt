@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.39 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:07 $
+	# $Revision: 1.40 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:02 $
 	#
-	# $Id: strings_danish.txt,v 1.39 2003-01-29 22:19:07 beerfrick Exp $
+	# $Id: strings_danish.txt,v 1.40 2003-02-08 22:47:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,7 +139,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'FEJL: Der er ikke valgt en fil';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEJL: Denne fil-type er ikke tilladt';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'FEJL: Denne mappe findes ikke. Undersøg venligst projekts indstillinger.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FEJL: Denne kategori findes allerede.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEJL: Denne kategori findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION]  = 'FEJL: Denne version findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'FEJL: Denne fil findes allerede. Slet den gamle fil først.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.31 $
-  # $Author: beerfrick $
-  # $Date: 2003-01-29 22:19:09 $
+  # $Revision: 1.32 $
+  # $Author: jfitzell $
+  # $Date: 2003-02-08 22:47:02 $
   #
-  # $Id: strings_hungarian.txt,v 1.31 2003-01-29 22:19:09 beerfrick Exp $
+  # $Id: strings_hungarian.txt,v 1.32 2003-02-08 22:47:02 jfitzell Exp $
   ###########################################################################
 ?>
 <?php
@@ -139,7 +139,7 @@
   $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HIBA: Nincs megadva file';
   $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HIBA: A érvénytelen file típus.';
   $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HIBA: A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.';
-  $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'HIBA: Ez a kategória már létezik.';
+  $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'HIBA: Ez a kategória már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'HIBA: Ez a verzió már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
   $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-03 23:37:58 $
+	# $Date: 2003-02-08 22:47:02 $
 	#
-	# $Id: strings_french.txt,v 1.45 2003-02-03 23:37:58 jfitzell Exp $
+	# $Id: strings_french.txt,v 1.46 2003-02-08 22:47:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -144,7 +144,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ERROR: This is a duplicate category.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

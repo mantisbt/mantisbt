@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:16 $
+	# $Revision: 1.43 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:03 $
 	#
-	# $Id: strings_spanish.txt,v 1.42 2003-01-29 22:19:16 beerfrick Exp $
+	# $Id: strings_spanish.txt,v 1.43 2003-02-08 22:47:03 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: Archivo no especificado';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: Este tipo de archivo no esta permitido';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: El directorio no existe. Por favor revise la configuracion del proyecto.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ERROR: Esta es una categoria duplicada.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: Esta es una categoria duplicada.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: Esta es una version duplicada.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Este es un archivo duplicado. Por favor borre el archivo primero.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.40 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:08 $
+	# $Revision: 1.41 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:02 $
 	#
-	# $Id: strings_dutch.txt,v 1.40 2003-01-29 22:19:08 beerfrick Exp $
+	# $Id: strings_dutch.txt,v 1.41 2003-02-08 22:47:02 jfitzell Exp $
 	###########################################################################
 
 ?>
@@ -142,7 +142,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FOUT: Geen bestand opgegeven.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FOUT: Het bestandstype is niet toegestaan';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FOUT: De folder bestaat niet.  Controleer de project instellingen.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FOUT: Deze categorie bestaat al.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FOUT: Deze categorie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'FOUT: Deze versie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FOUT: Dit project bestaat al.';

@@ -4,8 +4,18 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_cat_edit_page.php,v 1.23 2003-02-08 22:47:00 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path.'category_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
@@ -13,8 +23,8 @@
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
 
-	# @@@ we should optain this by looking it up
-	$f_assigned_to	= gpc_get_int( 'assigned_to', 0 );
+	$t_row = category_get_row( $f_project_id, $f_category );
+	$t_assigned_to = $t_row['user_id'];
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -32,24 +42,24 @@
 		<?php echo lang_get( 'edit_project_category_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<input type="hidden" name="orig_category" value="<?php echo $f_category ?>" />
+		<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
+		<input type="hidden" name="category" value="<?php echo string_edit_text( $f_category ) ?>" />
 		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td>
-		<input type="text" name="category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>" />
+		<input type="text" name="new_category" size="32" maxlength="64" value="<?php echo string_edit_text( $f_category ) ?>" />
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td>
 		<select name="assigned_to">
 			<option value="0"></option>
-			<?php print_assign_to_option_list($f_assigned_to) ?>
+			<?php print_assign_to_option_list( $t_assigned_to ) ?>
 		</select>
 	</td>
 </tr>
@@ -69,9 +79,9 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
-	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-	<input type="hidden" name="category" value="<?php echo $f_category ?>" />
-	<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
+		<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
+		<input type="hidden" name="category" value="<?php echo string_edit_text( $f_category ) ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 </div>
 

@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.51 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:09 $
+	# $Revision: 1.52 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:02 $
 	#
-	# $Id: strings_german.txt,v 1.51 2003-01-29 22:19:09 beerfrick Exp $
+	# $Id: strings_german.txt,v 1.52 2003-02-08 22:47:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,7 +142,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEHLER: Keine Datei angegeben.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEHLER: Das Verzeichnis existiert nicht. überprüfen Sie die Einstellungen des Projekts.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FEHLER: Kategorie bereits vorhanden.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEHLER: Kategorie bereits vorhanden.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'FEHLER: Version bereits vorhanden.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEHLER: Datei bereits vorhanden. Löschen Sie zuerst die alte Datei';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

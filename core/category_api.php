@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.5 2003-01-30 09:41:31 jfitzell Exp $
+	# $Id: category_api.php,v 1.6 2003-02-08 22:47:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -14,80 +14,122 @@
 	###########################################################################
 
 	# --------------------
-	# checks to see if the category is a duplicate
-	# we do it this way because each different project can have the same category names
-	# The old category name is excluded from the search for duplicate since a category
-	# can re-take its name.  It is also useful when changing the case of a category name.
-	# For example, "category" -> "Category".
-	function is_duplicate_category( $p_project_id, $p_category , $p_old_category = '' ) {
-		global $g_mantis_project_category_table;
-
-		$c_project_id	= (integer)$p_project_id;
-		$c_category		= addslashes($p_category);
+	# Check whether the category is unique within a project
+	# Returns true if the category is unique, false otherwise
+	function category_is_unique( $p_project_id, $p_category ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_category		= db_prepare_string( $p_category );
+		
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$query = "SELECT COUNT(*)
-				FROM $g_mantis_project_category_table
+				FROM $t_project_category_table
 				WHERE project_id='$c_project_id' AND
 				category='$c_category'";
 
-		if (strlen($p_old_category) != 0) {
-			$c_old_category = addslashes($p_old_category);
-			$query = $query . " AND category <> '$c_old_category'";
-		}
-
 		$result = db_query( $query );
-		$category_count =  db_result( $result, 0, 0 );
+		$category_count =  db_result( $result );
 
-		return ( $category_count > 0 );
+		if ( 0 == $category_count ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-	# --------------------
-	function category_add( $p_project_id, $p_category ) {
-		global $g_mantis_project_category_table;
 
-		$c_project_id	= (integer)$p_project_id;
-		$c_category		= addslashes($p_category);
+	# --------------------
+	# Add a new category to the project
+	function category_add( $p_project_id, $p_category ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_category		= db_prepare_string( $p_category );
+
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$query = "INSERT
-				INTO $g_mantis_project_category_table
+				INTO $t_project_category_table
 				( project_id, category )
 				VALUES
 				( '$c_project_id', '$c_category' )";
-		return db_query( $query );
+		db_query( $query );
+
+		# db_query() errors on failure so:
+		return true;
 	}
+
 	# --------------------
-	function category_update( $p_project_id, $p_category, $p_orig_category, $p_assigned_to ) {
-		global $g_mantis_project_category_table;
+	# Update the name and user associated with the category
+	function category_update( $p_project_id, $p_category, $p_new_category, $p_assigned_to ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_category		= db_prepare_string( $p_category );
+		$c_new_category	= db_prepare_string( $p_new_category );
+		$c_assigned_to	= db_prepare_int( $p_assigned_to );
 
-		$c_project_id		= (integer)$p_project_id;
-		$c_category			= addslashes($p_category);
-		$c_orig_category	= addslashes($p_orig_category);
-		$c_assigned_to		= (integer)$p_assigned_to;
+		$t_project_category_table	= config_get( 'mantis_project_category_table' );
+		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "UPDATE $g_mantis_project_category_table
-				SET category='$c_category', user_id=$c_assigned_to
-				WHERE category='$c_orig_category' AND
+		$query = "UPDATE $t_project_category_table
+				SET category='$c_new_category', user_id=$c_assigned_to
+				WHERE category='$c_category' AND
 					  project_id='$c_project_id'";
-		return db_query( $query );
-	}
-	# --------------------
-	function category_delete( $p_project_id, $p_category ) {
-		global $g_mantis_project_category_table;
+		db_query( $query );
 
-		$c_project_id	= (integer)$p_project_id;
-		$c_category		= addslashes($p_category);
+		if ( $p_category != $p_new_category ) {
+			$query = "UPDATE $t_bug_table
+					SET category='$c_new_category'
+					WHERE category='$c_category'
+					  AND project_id='$c_project_id'";
+			db_query( $query );
+		}
+
+		# db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# Remove a category from the project
+	function category_remove( $p_project_id, $p_category ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_category		= db_prepare_string( $p_category );
+
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$query = "DELETE
-				FROM $g_mantis_project_category_table
+				FROM $t_project_category_table
 				WHERE project_id='$c_project_id' AND
 					  category='$c_category'";
-		return db_query( $query );
-	}
-	# --------------------
-	# return all categories for the specified project id
-	function category_get_all_rows( $p_project_id ) {
-		global $g_mantis_project_category_table;
+		db_query( $query );
 
-		$c_project_id = db_prepare_int( $p_project_id );
+		# db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# Return the definition row for the category
+	function category_get_row( $p_project_id, $p_category ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_category		= db_prepare_string( $p_category );
+
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
+
+		$query = "SELECT category, user_id
+				FROM $t_project_category_table
+				WHERE project_id='$c_project_id'
+				  AND category='$c_category'";
+		$result = db_query( $query );
+
+		$count = db_num_rows( $result );
+
+		if ( 0 == $count ) {
+			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		}
+
+		return db_fetch_array( $result );
+	}
+
+	# --------------------
+	# Return all categories for the specified project id
+	function category_get_all_rows( $p_project_id ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
 
 		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
@@ -109,8 +151,9 @@
 
 		return $rows;
 	}
+
 	# --------------------
-	# delete all categories associated with a project
+	# Delete all categories associated with a project
 	function category_delete_all( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 

@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_cat_copy.php,v 1.16 2003-02-08 22:47:00 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -28,25 +32,18 @@
 	  $t_src_project_id = $f_project_id;
 	  $t_dst_project_id = $f_other_project_id;
 	} else {
-		trigger_error( ERROR_GENERIC, ERROR );
+		trigger_error( ERROR_CATEGORY_NO_ACTION, ERROR );
 	}
 
 	$rows = category_get_all_rows( $t_src_project_id );
 
 	foreach ( $rows as $row ) {
 		$t_category = $row['category'];
-		$t_category = addslashes( $t_category );
 
-		if ( !is_duplicate_category( $t_dst_project_id, $t_category ) ) {
+		if ( category_is_unique( $t_dst_project_id, $t_category ) ) {
 			category_add( $t_dst_project_id, $t_category );
 		}
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
-
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.52 2003-01-30 09:41:21 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.53 2003-02-08 22:47:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -175,7 +175,7 @@
 		?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td width="50%">
-				<?php echo $t_category ?>
+				<?php echo string_display( $t_category ) ?>
 			</td>
 			<td width="25%">
 				<?php echo $t_user_name ?>

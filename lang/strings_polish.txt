@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.43 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:12 $
+	# $Revision: 1.44 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:03 $
 	#
-	# $Id: strings_polish.txt,v 1.43 2003-01-29 22:19:12 beerfrick Exp $
+	# $Id: strings_polish.txt,v 1.44 2003-02-08 22:47:03 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'B£¡D: Nie zosta³ podany ¿aden plik.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'B£¡D: Typ przesy³anego pliku nie jest dozwolony.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'B£¡D: Podany katalog nie istnieje. Sprawd¼ ustawienia projektu.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'B£¡D: Podana kategoria ju¿ istnieje.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'B£¡D: Podana kategoria ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'B£¡D: Podana wersja ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';

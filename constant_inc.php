@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.70 2003-01-24 00:09:05 vboctor Exp $
+	# $Id: constant_inc.php,v 1.71 2003-02-08 22:46:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -139,7 +139,6 @@
 	define( 'ERROR_NO_FILE_SPECIFIED',				4 );
 	define( 'ERROR_FILE_DISALLOWED',				5 );
 	define( 'ERROR_NO_DIRECTORY',					6 );
-	define( 'ERROR_DUPLICATE_CATEGORY',				7 );
 	define( 'ERROR_DUPLICATE_VERSION',				8 );
 	define( 'ERROR_DUPLICATE_FILE',					9 );
 	define( 'ERROR_DUPLICATE_PROJECT',				10 );
@@ -212,6 +211,11 @@
 	define( 'ERROR_LDAP_UPDATE_FAILED',				1402 );
 	define( 'ERROR_LDAP_USER_NOT_FOUND',			1402 );
 	
+	# ERROR_CATEGORY_*
+	define( 'ERROR_CATEGORY_DUPLICATE',				1500 );
+	define( 'ERROR_CATEGORY_NO_ACTION',				1501 );
+	define( 'ERROR_CATEGORY_NOT_FOUND',				1502 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);

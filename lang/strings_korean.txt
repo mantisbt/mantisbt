@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:11 $
+	# $Revision: 1.43 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:03 $
 	#
-	# $Id: strings_korean.txt,v 1.42 2003-01-29 22:19:11 beerfrick Exp $
+	# $Id: strings_korean.txt,v 1.43 2003-02-08 22:47:03 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = '오류: 카테고리 중복.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = '오류: 버전 중복.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';

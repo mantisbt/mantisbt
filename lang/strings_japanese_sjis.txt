@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.31 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:11 $
+	# $Revision: 1.32 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-08 22:47:02 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.31 2003-01-29 22:19:11 beerfrick Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.32 2003-02-08 22:47:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,7 +139,7 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "エラー：ファイルが選択されていません。";
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "エラー：ファイル種別が間違えています。";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "エラー：カテゴリが重複しています。";
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "エラー：カテゴリが重複しています。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "エラー：バージョンが重複しています。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "エラー：ファイルが重複しています。先にファイルを削除して下さい。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
