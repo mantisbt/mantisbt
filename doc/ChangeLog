@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Fix: reduced the executed number of queries throughout the interface
  * Fix: improved handling of bad cookies (you now get a chance to log in again)
+ * Fix #2944: Project files are not deleted when project is deleted.
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
  * Fix #2956: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
