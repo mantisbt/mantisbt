@@ -217,7 +217,8 @@
 				$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format,
 				$s_switch, $s_logged_in_as, $s_all_projects,
-				$s_access_levels_enum_string;
+				$s_access_levels_enum_string,
+				$g_use_javascript;
 
 		$t_username = get_current_user_field( 'username' );
 		$t_access_level = get_enum_element( 'access_levels', get_current_user_access_level() );
@@ -232,8 +233,13 @@
 				PRINT "<span class=\"login-time\">$t_now</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-right">';
-				PRINT '<form method="post" action="set_project.php">';
-				PRINT '<select name="f_project_id" class="small">';
+				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
+
+				if ( ON == $g_use_javascript) { // use javascript auto-submit -SC 2002.Jun.21
+                    PRINT '<select name="f_project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+				} else {
+                    PRINT '<select name="f_project_id" class="small">';
+				}
 					PRINT "<option value=\"0000000\">$s_all_projects</option>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT '</select>';
@@ -289,7 +295,7 @@
 				$s_jump, $s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
-		    $t_protected = get_current_user_field( 'protected' );
+			$t_protected = get_current_user_field( 'protected' );
 			PRINT '<table class="width100" cellspacing="0">';
 			PRINT '<tr>';
 				PRINT '<td class="menu">';
@@ -464,7 +470,7 @@
 		PRINT '<p><div align="center">';
 		print_bracket_link( 'print_all_bug_page.php', $s_print_all_bug_page_link );
 
-        if ( $g_use_jpgraph != 0 ) {
+		if ( $g_use_jpgraph != 0 ) {
 			$t_summary_page 		= 'summary_page.php';
 			$t_summary_jpgraph_page = 'summary_jpgraph_page.php';
 
