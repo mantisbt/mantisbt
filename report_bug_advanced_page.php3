@@ -262,7 +262,7 @@
 		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><? echo $f_additional_info ?></textarea>
 	</td>
 </tr>
-<? if ( ON = $g_allow_file_upload ) { ?>
+<? if ( ON == $g_allow_file_upload ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<? echo $s_upload_file ?>

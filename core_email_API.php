@@ -400,7 +400,7 @@
 
 		$t_message = "";
 
-		$query = "SELECT *, UNIX_TIMESTAMP(last_updated) as last_updated
+		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$p_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
