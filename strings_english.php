@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -11,6 +11,18 @@
 	$s_go_back = "Go Back";
 	$s_proceed = "Click here to proceed";
 	$s_sql_error_detected = "ERROR: SQL error detected.  Please report this to ";
+
+	$s_switch = "Switch";
+	$s_logged_in_as = "Logged in as";
+
+	### Email Strings
+	$s_new_account_subject = "Your new user account";
+	$s_new_account_greeting = "Greetings and welcome to the bugtracker.  Here is the information you need to login\n\n";
+	$s_new_account_url = "You can login to the site here: ";
+	$s_new_account_username = "Username: ";
+	$s_new_account_password = "Password: ";
+	$s_new_account_message = "After logging into the site please change your password.  Also note that your password is stored via one way encryption.  The staff cannot retrieve your password.  If you forget your password it will have to be reset.\n\n";
+	$s_new_account_do_not_reply = "Do not reply to this message.\n";
 
 	### account_delete.php3
 	$s_account_protected_msg = "Account protected. Cannot change settings...";
@@ -82,6 +94,9 @@
 	### account_update.php3
 	### $s_account_protected_msg # defined above
 	$s_account_updated_msg = "Your account has been successfully updated...";
+
+    ### bug_assign.php3
+    $s_bug_assign_msg       = "Bug has been successfully assigned...";
 
 	### bug_delete.php3
 	$s_bug_deleted_msg = "Bug has been deleted...";
@@ -203,11 +218,13 @@
 	$s_login_button = "Login";
 
 	### login_page.php3
+	$s_login_page_info = "Welcome to the bugtracker.";
 	### $s_login_title # defined above
 	### $s_username # defined above
 	### $s_password # defined above
 	### $s_save_login # defined above
 	### $s_login_button # defined above
+	$s_signup_link = "signup for a new account";
 
 	### logout_page.php3
 	$s_logged_out_title = "Logged Out...";
@@ -242,7 +259,7 @@
 	$s_create_user_button = "Create User";
 
 	### manage_page.php3
-	$s_create_new_account_link = "Create New Account";
+	$s_create_new_account_link = "Create Account";
 	$s_manage_categories_link = "Categories";
 	$s_manage_product_versions_link = "Product Versions";
 	$s_documentation_link = "Documentation";
@@ -304,7 +321,6 @@
 	$s_logout_link = "Logout";
 
 	### meta_inc.php
-	### mysql_error_page.php3
 	### news_add.php3
 
 	### news_delete.php3
@@ -325,6 +341,7 @@
 	### $s_headline # defined above
 	$s_do_not_use = "Do not use";
 	### $s_body # defined above
+	$s_post_to = "Post to";
 	$s_post_news_button = "Post News";
 	$s_edit_or_delete_news_title = "Edit or Delete News";
 	$s_edit_post = "Edit Post";
@@ -334,6 +351,11 @@
 
 	### news_update.php3
 	$s_news_updated_msg = "News item updated...";
+
+	### project_menu_page.php3
+	$s_project_selection_title = "Project Selection";
+	$s_projects = "Projects";
+	$s_select_project_button = "Select Project";
 
 	### report_add.php3
 	$s_report_add_error_msg = "ERROR: There was an error in your report.";
@@ -350,6 +372,9 @@
 	$s_enter_report_details_title = "Enter Report Details";
 	### $s_category
 	$s_required = "required";
+	$s_select_category = "Select Category";
+	$s_select_reproducibility = "Select Reproducibility";
+	$s_select_severity = "Select Severity";
 	### $s_reproducibility
 	### $s_severity
 	### $s_select_profile # defined above
@@ -359,6 +384,7 @@
 	### $s_os_version # defined above
 	### $s_product_version # defined above
 	### $s_product_build # defined above
+	$s_assign_to = "Assign To";
 	### $s_summary # defined above
 	### $s_description # defined above
 	$s_steps_to_reproduce = "Steps To Reproduce";
@@ -370,6 +396,9 @@
 	### $s_enter_report_details_title # defined above
 	### $s_category # defined above
 	### $s_required # defined above
+	### $s_select_category # defined above
+	### $s_select_reproducibility # defined above
+	### $s_select_severity # defined above
 	### $s_reproducibility
 	### $s_severity
 	### $s_summary # defined above
@@ -381,6 +410,18 @@
 	$s_show_source_for_msg = "Showing source for";
 	$s_not_supported_part1 = "This version";
 	$s_not_supported_part2 = "of php does not support";
+
+	### signup.php3
+	$s_invalid_email = "IS AN INVALID EMAIL ADDRESS";
+	$s_duplicate_username = "IS A DUPLICATE USERNAME.  CHOOSE ANOTHER USERNAME";
+	$s_account_create_fail = "FAILED TO CREATE USER ACCOUNT";
+
+	### signup_page.php3
+	$s_signup_info = "Choose your login name and enter a valid email address.  A randomnly generated address will be send to your address.";
+	$s_signup_title = "Signup";
+	### $s_username = ""; # defined above
+	### $s_email = ""; # defined above
+	$s_signup_button = "Signup";
 
 	### summary_page.php3
 	$s_summary_title = "Summary";
@@ -395,6 +436,7 @@
 	$s_longest_open = "longest open";
 	$s_average_time = "average time";
 	$s_total_time = "total time";
+	$s_developer_stats = "developer stats (open/resolved/total)";
 
 	### view_bug_advanced_page.php3
 	$s_view_simple_link = "View Simple";
@@ -427,11 +469,13 @@
 	### $s_information # defined above
 	$s_system_profile = "System Description";
 	$s_update_bug_button = "Update Bug";
+    $s_bug_assign_button    = "Assign to Me";
 	### $s_resolve_bug_button # defined above
 	### $s_delete_bug_button # defined above
 	$s_reopen_bug_button = "Reopen Bug";
 
 	### view_bug_all_page.php3
+	$s_all_bugs_link = "All Bugs";
 	$s_reported_bugs_link = "Reported Bugs";
 	$s_assigned_bugs_link = "Assigned Bugs";
 	$s_any = "any";
@@ -467,12 +511,13 @@
 	### $s_additional # defined above
 	### $s_information # defined above
 	### $s_update_bug_button # defined above
+	### $s_bug_assign_button # defined above
 	### $s_resolve_bug_button # defined above
 	### $s_delete_bug_button # defined above
 	### $s_reopen_bug_button # defined above
 
 	### view_user_assigned_bug_page.php3
-	$s_all_bugs_link = "All Bugs";
+	### $s_all_bugs_link # defined above
 	### $s_reported_bugs_link # defined above
 	### $s_any # defined above
 	### $s_show # defined above
