@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.32 2003-02-24 10:51:04 jfitzell Exp $
+	# $Id: string_api.php,v 1.33 2003-03-14 18:54:32 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -165,12 +165,15 @@
 			return $p_string;
 		}
 
-    	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]<]*)([[:alnum:]#?/&=])",
-    							"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
-    							$p_string);
-        $p_string = eregi_replace( "(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
-        						"<a href=\"mailto:\\1\" target=\"_new\">\\1</a>",
-        						$p_string);
+		$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]<]*)([[:alnum:]#?/&=@])",
+								"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
+								$p_string);
+		$p_string = eregi_replace( "^(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
+								"<a href=\"mailto:\\1\" target=\"_new\">\\1</a>",
+								$p_string);
+		$p_string = eregi_replace( "( )(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
+								"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
+								$p_string);
 		return $p_string;
 	}
 
