@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.105 2004-06-29 08:23:05 int2str Exp $
+	# $Id: html_api.php,v 1.106 2004-07-05 13:52:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -380,7 +380,9 @@
 				$t_menu_options[] = '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a>';
 
 				# My View
-				$t_menu_options[] = '<a href="my_view_page.php">' . lang_get( 'my_view_link' ) . '</a>';
+				if ( !current_user_is_anonymous() ) {
+					$t_menu_options[] = '<a href="my_view_page.php">' . lang_get( 'my_view_link' ) . '</a>';
+				}
 
 				# View Bugs
 				$t_menu_options[] = '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a>';
