@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.48 2003-01-25 19:10:41 jlatour Exp $
+	# $Id: bug_update_page.php,v 1.49 2003-01-25 20:50:22 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,6 +19,7 @@
 	
 	require_once( $t_core_path . 'bug_api.php' );
 	require_once( $t_core_path . 'custom_field_api.php' );
+	require_once( $t_core_path . 'date_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

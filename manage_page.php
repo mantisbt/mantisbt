@@ -5,7 +5,13 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	$t_core_path = config_get( 'core_path' );
+
+	require_once( $t_core_path . 'icon_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( ADMINISTRATOR );

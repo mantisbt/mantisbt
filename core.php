@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.9 2003-01-23 23:03:03 jlatour Exp $
+	# $Id: core.php,v 1.10 2003-01-25 20:50:23 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,14 +16,6 @@
 	# Before doing anything else, start output buffering so we don't prevent
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
-
-	# we change dirs (and restore below) to compensate for scripts that may
-	# include by relative paths
-	$t_cwd = getcwd();
-	chdir( dirname( __FILE__ ) );
-
-	$t_core_path = dirname( __FILE__ ) . '/core/';
-	require_once( $t_core_path . 'php_api.php' );
 
 	# Load constants and configuration files
   	require_once( 'constant_inc.php' );
@@ -46,9 +38,49 @@
 		require_once( $t_local_config );
 	}
 
+	# Attempt to find the location of the core files.
+	$t_core_path = dirname(__FILE__).DIRECTORY_SEPERATOR.'core';
+	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
+		$t_core_path = $g_core_path;
+	}
 
 	# Load rest of core in seperate directory.
-	require_once( $g_core_path . 'API.php' );
 
-	chdir( $t_cwd );
+	# Include compatibility file before anything else
+	require_once( $t_core_path.'php_api.php' );
+
+	require_once( $t_core_path.'config_api.php' );
+	require_once( $t_core_path.'timer_api.php' );
+
+	# load utility functions used by everything else
+	require_once( $t_core_path.'utility_api.php' );
+	
+	# error functions should be loaded to allow database to print errors
+	require_once( $t_core_path.'html_api.php' );
+	require_once( $t_core_path.'lang_api.php' );
+	require_once( $t_core_path.'error_api.php' );
+
+	# initialize our timer
+	$g_timer = new BC_Timer;
+
+	# seed random number generator
+	list( $usec, $sec ) = explode( ' ', microtime() );
+	mt_srand( $sec*$usec );
+
+	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
+	# OPENED ANYWHERE ELSE.
+	require_once( $t_core_path.'database_api.php' );
+
+	# SEND USER-DEFINED HEADERS
+	foreach( config_get( 'custom_headers' ) as $t_header ) {
+		header( $t_header );
+	}
+
+	require_once( $t_core_path.'project_api.php' );
+	require_once( $t_core_path.'gpc_api.php' );
+	require_once( $t_core_path.'authentication_api.php' );
+	require_once( $t_core_path.'access_api.php' );
+	require_once( $t_core_path.'print_api.php' );
+	require_once( $t_core_path.'helper_api.php' );
+	require_once( $t_core_path.'user_api.php' );
 ?>
