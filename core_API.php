@@ -13,6 +13,7 @@
 	if ( file_exists( "config_inc.php" ) ) {
 		include( "config_inc.php" );
 	}
+	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
 	require( "./default/config_inc2.php" );
 
 	require( "core_database_API.php" );

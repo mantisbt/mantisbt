@@ -1,6 +1,6 @@
 Mantis
 
-01.13.2002  -   0.17.0
+01.23.2002  -   0.17.0
 
  * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
  * Fixed bugnote editing to be unavailable when bug is resolved or closed.
@@ -22,6 +22,8 @@ Mantis
  * Modified all files to use <?php instead of <?
  * Modified error messages to use $MANTIS_ERROR array.
  * Modified code to update last_updated/last_modified fields for bugs, bugnotes, and news.
+ * Modified core_API.php and config_inc.php to use a default/ directory in
+   addition to a config_inc.php placed in the root directory.
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.

@@ -31,7 +31,8 @@ doc/CREDITS             - List of contributors
 doc/Changelog           - List of fixes, additions, and todo items
 doc/documentation.html  - Help on general use
 doc/configuration.html  - Help on configuration options for config_inc.php
-default/config_inc.php  - Configuration file
+default/config_inc1.php - Configuration file - part 1
+default/config_inc2.php - Configuration file - part 2
 core_*_API.php          - Core functions
 sql/db_generate.sql     - SQL table statements
 sql/db_upgrade.sql      - SQL upgrade statements

@@ -29,7 +29,8 @@ or messages.
 	http://www.php.net/manual/en/configuration.php#ini.register-globals
 
 	SOLUTION 4: You do not have cookies enablewd in your browser.  You must
-	have cookies enabled.
+	have cookies enabled.  Sometimes, especially after an upgrade, you may
+	have to delete your previous cookies.
 
 	SOLUTION 5: You are using crypt() but your operating system is really
 	calling MD5 instead.  Set the config_inc.php variable $g_login_method to

@@ -17,7 +17,8 @@
 # see if there is a config_inc.php file located there.
 #
 # mantis/config_inc.php           (your old config_inc.php)
-# mantis/default/config_inc.php   (the new defaults)
+# mantis/default/config_inc1.php  (the new defaults - part 1)
+# mantis/default/config_inc2.php  (the new defaults - part 2)
 #
 # Mantis will first pull the default values, then pull the site specific values.
 # This way you will gain the new global variables but not have to continually
