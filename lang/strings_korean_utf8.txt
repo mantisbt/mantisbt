@@ -1,0 +1,1142 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# 한글 번역   aporie@kornet.net
+	# 추가 번역   torija@users.sourceforge.net
+	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
+	#             miren.info@gmail.com
+	# -------------------------------------------------
+	# $Revision: 1.1 $
+	# $Author: bigbadger $
+	# $Date: 2004-10-20 11:43:18 $
+	#
+	# $Id: strings_korean_utf8.txt,v 1.1 2004-10-20 11:43:18 bigbadger Exp $
+	###########################################################################
+?>
+<?php
+# Charset
+$s_charset = 'utf-8';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = '이동';
+$s_actiongroup_menu_copy = '복사';
+$s_actiongroup_menu_assign = '할당';
+$s_actiongroup_menu_close = '폐쇄';
+$s_actiongroup_menu_delete = '삭제';
+$s_actiongroup_menu_resolve = '해결';
+$s_actiongroup_menu_update_priority = '우선순위 갱신';
+$s_actiongroup_menu_update_status = '상태 갱신';
+$s_actiongroup_menu_update_view_status = '보기 상태 갱신';
+$s_actiongroup_bugs = '선택된 이슈';
+
+# new strings:
+$s_all_projects = '모든 프로젝트';
+$s_move_bugs = '이슈 이동';
+$s_operation_successful = '실행 완료.';
+$s_date_order = '날짜순 정렬';
+$s_print_all_bug_page_link = '보고서 출력';
+$s_csv_export = 'CSV 내보내기';
+$s_login_anonymously = '익명 로그인';
+$s_anonymous = '익명';
+$s_jump_to_bugnotes = '이슈노트로 이동';
+$s_public_project_msg = '이 프로젝트는 모두에게 공개되었습니다.';
+$s_private_project_msg = '이 프로젝트는 관리자와 허용된 사용자만 접근 가능합니다.';
+$s_access_level_project = '프로젝트 접근 권한';
+$s_view_submitted_bug_link = '보고된 이슈 보기';
+$s_assigned_projects = '할당된 프로젝트';
+$s_unassigned_projects = '할당되지 않은 프로젝트';
+$s_print = '출력';
+$s_jump = '이동';
+$s_copy_users = '사용자 복제';
+$s_copy_categories_from = '카테고리 복사(From)';
+$s_copy_categories_to = '카테고리 복사(To)';
+$s_bug_history = '이슈 히스토리';
+$s_field = '필드';
+$s_old_value = '이전 값';
+$s_new_value = '새로운 값';
+$s_date_modified = '수정일';
+$s_bugnote = '이슈노트';
+$s_change = '수정';
+$s_bugnote_view_state = '이슈노트 보기 상태';
+$s_bug_monitor = '감시중인 이슈';
+$s_bug_end_monitor = '이슈 감시 끝';
+$s_announcement = '알림';
+$s_stays_on_top = '맨 위로';
+$s_delete_bugnote_button = '이슈노트 삭제';
+$s_delete_bugnote_sure_msg = '이 이슈노트를 삭제하겠습니까?';
+$s_bug_relationships = '관계';
+$s_empty_password_sure_msg = '비밀번호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
+$s_empty_password_button = '비밀번호 없이 사용';
+
+$s_duplicate_of = "다음 이슈와 동일함";
+$s_has_duplicate = "다음 이슈와 동일한 것으로 지정됨";
+$s_related_to = "다음 이슈와 관련됨";
+$s_dependant_on = "다음 이슈의 원인";
+$s_blocks = "다음 이슈 때문에 발생";
+
+$s_new_bug = '새 이슈';
+$s_bugnote_added = '이슈노트 추가됨';
+$s_bugnote_edited = '이슈노트 수정됨';
+$s_bugnote_deleted = '이슈노트 삭제됨';
+$s_summary_updated = '요약 갱신됨';
+$s_description_updated = '설명 갱신됨';
+$s_additional_information_updated = '추가 정보 갱신됨';
+$s_steps_to_reproduce_updated = '재발생 단계 갱신됨';
+$s_file_added = '파일 추가됨: ';
+$s_file_deleted = '파일 삭제됨: ';
+$s_bug_deleted = '이슈가 삭제되었습니다.';
+
+$s_make_private = '보호하기';
+$s_make_public = '공개하기';
+
+$s_create_new_project_link = '새로운 프로젝트 생성';
+
+$s_login_link = '로그인';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = '이 동작을 실행할 권한이 없습니다. 오류는 다음과 같습니다: ';
+$s_bug_actiongroup_access = '이 동작을 실행할 권한이 없습니다.';
+$s_bug_actiongroup_status = '이 이슈의 상태를 바꿀 수 없습니다.';
+$s_close_bugs_conf_msg = '이 이슈를 폐쇄하시겠습니까 ?';
+$s_delete_bugs_conf_msg = '이 이슈를 삭제하시겠습니까 ?';
+$s_move_bugs_conf_msg = '이슈 이동: ';
+$s_copy_bugs_conf_msg = '이슈 복사: ';
+$s_assign_bugs_conf_msg = '이슈 할당: ';
+$s_resolve_bugs_conf_msg = '이슈 해결도 선택';
+$s_priority_bugs_conf_msg = '이슈 우선순위 선택';
+$s_status_bugs_conf_msg = '이슈 상태 선택';
+$s_view_status_bugs_conf_msg = '이슈 보기 상태 선택';
+$s_close_group_bugs_button = '이슈 폐쇄' ;
+$s_delete_group_bugs_button = '이슈 삭제' ;
+$s_move_group_bugs_button = '이슈 이동' ;
+$s_copy_group_bugs_button = '이슈 복사' ;
+$s_assign_group_bugs_button = '이슈 할당' ;
+$s_resolve_group_bugs_button = '이슈 해결' ;
+$s_priority_group_bugs_button = '우선 순위 갱신' ;
+$s_status_group_bugs_button = '상태 갱신' ;
+$s_view_status_group_bugs_button = '보기 상태 갱신';
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = '상태 종합 그래프' ;
+$s_graph_imp_priority_title = '우선순위 종합 그래프' ;
+$s_graph_imp_severity_title = '심각성 종합 그래프';
+$s_graph_imp_category_title = '카테고리 종합 그래프';
+$s_graph_imp_resolution_title = '해결도 종합 그래프';
+$s_by_status_pct = '상태 백분율';
+$s_by_priority_pct = '우선 순위 백분율';
+$s_by_severity_pct = '심각성 백분율';
+$s_by_category_pct = '카테고리 백분율';
+$s_by_resolution_pct = '해결도 백분율';
+$s_by_severity_mix = '심각성 및 상태 백분율';
+$s_by_priority_mix = '우선 순위 및 상태 백분율';
+$s_by_resolution_mix = '해결도 및 상태 백분율';
+$s_synthesis_link = '종합';
+$s_status_link = '상태별';
+$s_priority_link = '우선순위';
+$s_severity_link = '심각성';
+$s_category_link = '카테고리';
+$s_resolution_link = '해결도';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = '선택된 것만 표시';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = '인쇄할 필드 선택';
+$s_printing_options_link = '인쇄 옵션';
+
+# word and excel export
+$s_bugnote_title = '이슈노트 조작자' ;
+$s_bugnote_date = '이슈노트 날짜';
+$s_bugnote_description = '이슈노트 설명';
+
+$s_error_no_proceed = '이전 페이지로 돌아가려면 웹 브라우저에서 "뒤로" 버튼을 사용하세요. 이 오류에 대한 문제를 수정하거나 다른 동작을 선택하세요. 새로운 영역으로 이동하기 위해서는 메뉴의 옵션을 클릭하시면 됩니다.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = '오류: 이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
+$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 문제를 보고해 주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = '오류: 접근이 거부되었습니다.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = '오류: 파일 올리기 실패.  현재 PHP 설치시 허용된 파일 크기보다 업로드하려는 파일이 큰 것 같습니다.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = '오류: 이 페이지에 필요한 인자를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '오류: 이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '오류: \'%s\' 설정 옵션이 없습니다.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '오류: \'%s\' 문자열이 없습니다.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = '오류: 이슈노트를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = '오류: 프로젝트를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '오류: 데이타베이스 필드를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= '오류: FTP 서버에 연결할 수 없습니다.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '오류: 이미 사용중인 프로젝트 이름입니다.  다른 이름을 사용하세요.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '오류: 올바르지 않은 프로젝트 이름입니다. 프로젝트 이름은 비워둘 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= '오류: 사용자를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '오류: 브라우저에 저장된 로그인 정보는 유효하지 않습니다. 계정이 삭제됐습니까?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '오류: 이 사용자는 설정 화면이 없습니다.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= '오류: 뉴스를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '오류: 비밀번호가 일치하지 않습니다.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= '오류: 문자열이 아닌 배열이 입력되어야 합니다.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '오류: 배열이 아닌 문자열이 입력되어야 합니다.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '오류: 이슈를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '오류: 잘못된 이메일.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '오류: 업로드 금지된 파일 형식입니다.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= '오류: 중복된 파일입니다. 먼저 이 파일을 삭제하세요.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '오류: 잘못된 업로드 경로. 디렉토리가 존재하지 않거나 웹서버에서 쓰기 권한이 없습니다.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= '오류: 중복으로 이슈를 설정할 수 없습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '오류: 커스텀 필드를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '오류: 중복된 필드 이름 입니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '오류: 적어도 한 프로젝트에서는 여전히 이 필드를 사용하고 있습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '오류: 잘못된 필드 값';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '오류: 잘못된 커그텀 필드 정의';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= '오류: LDAP 인증 실패';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '오류: LDAP 서버 연결 실패';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= '오류: LDAP 사용자 갱신 오류.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '오류: 데이타베이스 연결 오류.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '오류: 복사 실행이 명시되지 않음.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '오류: 카테고리를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '오류: 버전정보를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '오류: 사용자 이름 오류.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '오류: 접근 권한이 없는 사용자입니다.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '오류: 이 별명은 다른 사용자의 아이디로 사용되고 있습니다. 다른걸로 바꿔주세요.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '오류: 비밀번호를 초기화하려면 이메일을 적어야 합니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '오류: 입력된 정보가 바르지 않습니다. 해당 계정으로 등록된 적이 없습니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '오류: 이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '오류: 요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
+
+#$s_login_error = '오류: (너무 많은 로그인 실패로) 계정이 사용 정지됐거나 사용자이름/비밀번호가 올바르지 않습니다.';
+$s_login_error = '오류: 계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
+$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
+
+# General Strings
+$s_go_back = '뒤로';
+$s_proceed = '계속 진행';
+
+$s_switch = '이동';
+$s_logged_in_as = '로그인한 ID :';
+
+$s_prefix_for_deleted_users = '사용자';
+
+$s_administrator = '관리자';
+$s_myself = "나";
+$s_default_access_level = '기본 접근 권한';
+
+# Enum Strings
+$s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
+$s_project_status_enum_string     = '10:개발버전,30:배포판,50:안정버전,70:구버전';
+$s_project_view_state_enum_string = '10:공개,50:비공개';
+$s_view_state_enum_string         = '10:공개,50:비공개';
+
+$s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
+$s_severity_enum_string           = '10:새 기능 요구,20:사소함,30:오타,40:기능 개선,50:보통,60:중요함,70:충돌,80:장애';
+$s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않음,90:다시 만들수 없음,100:N/A';
+$s_status_enum_string             = '10:새로운 이슈,20:정보 부족,30:이슈 검토,40:확인된 이슈,50:할당된 이슈,80:해결된 이슈,90:폐쇄된 이슈';
+$s_resolution_enum_string         = '10:개설,20:수정됨,30:문제 제기,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:수정 계획 없음';
+$s_projection_enum_string         = '10:없음,30:조정,50:작은 수정,70:새로 작성,90:재설계';
+$s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
+
+# Email Strings
+$s_new_account_subject = '계정 등록';
+$s_new_account_greeting = '등록해 주셔서 감사합니다. 등록하신 아이디는 \'';
+$s_new_account_greeting2 = '\' 입니다. 등록을 완료하기 위해서 아래 링크를 방문하셔서 비밀번호를 설정하시기 바랍니다.';
+$s_new_account_username = '사용자 ID: ';
+$s_new_account_message = '만일 사용자 등록을 하신적이 없으시다면, 그냥 무시하시면 됩니다.' . "\n\n";
+$s_new_account_do_not_reply = '이 메일에 대한 답장을 보내지 마세요. - DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = '접속 IP : ';
+$s_new_account_signup_msg = '다음 계정이 생성 되었습니다 :';
+
+$s_reset_request_msg = '비밀번호 변경을 요청하셨습니다. 만일 본인이 요청하신 적이 없다면 이 메일을 무시하시기 바랍니다.' .  "\n\n"  . '만일 본인이 요청하셨다면 아래 링크를 클릭하셔서 비밀번호를 변경하시기 바랍니다. ';
+$s_reset_request_in_progress_msg = '입력하신 메일 내용을 확인하셔서 비밀번호를 변경하시면 됩니다.';
+
+$s_email_notification_title_for_status_bug_new = '다음 이슈가 [(재)발생] 했습니다.';
+$s_email_notification_title_for_status_bug_feedback = '다음 이슈는 [추가 정보]가 필요합니다.';
+$s_email_notification_title_for_status_bug_acknowledged = '다음 이슈는 [검토] 중 입니다.';
+$s_email_notification_title_for_status_bug_confirmed = '다음 이슈가 [확인] 되었습니다.';
+$s_email_notification_title_for_status_bug_assigned = '다음 이슈는 [할당] 되었습니다.';
+$s_email_notification_title_for_status_bug_resolved = '다음 이슈는 [해결] 되었습니다.';
+$s_email_notification_title_for_status_bug_closed = '다음 이슈는 [폐쇄] 되었습니다.';
+
+$s_email_notification_title_for_action_bug_submitted = '다음 이슈가 [보고] 되었습니다.';
+$s_email_notification_title_for_action_bug_assigned = '다음 이슈가 [할당] 되었습니다.';
+$s_email_notification_title_for_action_bug_reopened = '다음 이슈가 [문제 제기] 되었습니다.';
+$s_email_notification_title_for_action_bug_deleted = '다음 이슈가 [삭제] 되었습니다.';
+$s_email_notification_title_for_action_bug_updated = '다음 이슈가 [갱신] 되었습니다.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+
+$s_email_notification_title_for_action_bugnote_submitted = '이 이슈에 노트가 추가 되었습니다.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "다음 이슈는 %s 이슈와 동일한 것으로 설정됐습니다.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "%s 이슈는 다음 이슈와 동일한 것으로 설정됐습니다.";
+$s_email_notification_title_for_action_related_to_relationship_added = "다음 이슈는 %s 이슈와 관련 있는 것으로 설정됐습니다.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "다음 이슈는 %s 이슈의 원인으로 설정됐습니다.";
+$s_email_notification_title_for_action_blocks_relationship_added = "다음 이슈는 %s 이슈 때문에 발생한 것으로 설정됐습니다.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "다음 이슈는 %s 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "%s 이슈는 다음 이슈와 동일한 것으로 설정된 관계가 해제됐습니다.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "다음 이슈는 %s 이슈와 관련 있는 것으로 설정된 관계가 해제됐습니다.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "다음 이슈는 %s 이슈의 원인으로 설정된 관계가 해제됐습니다.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "다음 이슈는 %s 이슈 때문에 발생한 것으로 설정된 관계가 해제됐습니다.";
+$s_email_notification_title_for_action_relationship_child_resolved = "관련된 %s 이슈가 해결됐습니다.";
+$s_email_notification_title_for_action_relationship_child_closed = "관련된 %s 이슈가 폐쇄됐습니다.";
+
+$s_email_reporter = '보고자';
+$s_email_handler = '조작자';
+$s_email_project = '프로젝트';
+$s_email_bug = '이슈 번호';
+$s_email_category = '분류';
+$s_email_reproducibility = '재발생 가능성';
+$s_email_severity = '심각성';
+$s_email_priority = '우선순위';
+$s_email_status = '상태';
+$s_email_resolution = '처리상태';
+$s_email_duplicate = '중복';
+$s_email_fixed_in_version = '해결된 버전';
+$s_email_date_submitted = '보고 날짜';
+$s_email_last_modified = '최종 갱신';
+$s_email_summary =  '요약';
+$s_email_description = '설명';
+
+# account_delete.php
+$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다...';
+$s_account_removed_msg = '당신의 계정이 삭제되었습니다...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = '계정을 삭제하시기를 원하십니까?';
+$s_delete_account_button = '계정 삭제';
+
+# account_page.php
+$s_manage_profiles_link = '프로파일 관리';
+$s_change_preferences_link = '설정상태 변경';
+$s_edit_account_title = '계정 편집';
+$s_username = '사용자 ID';
+$s_realname = '별명';
+$s_email = '이메일';
+$s_password = '비밀번호';
+$s_no_password_change = '비밀번호는 다른 시스템에서 관리하므로 여기서 바꿀 수 없습니다.';
+$s_confirm_password  = '비밀번호 확인';
+$s_access_level = '접근 레벨';
+$s_update_user_button = '정보 갱신';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = '기본 계정 설정상태';
+$s_default_project = '기본 프로젝트';
+$s_advanced_report = '상세 보고';
+$s_advanced_view = '자세히 보기';
+$s_advanced_update = '상세한 업데이트';
+$s_refresh_delay = '새로 고침 간격';
+$s_redirect_delay = '리다이렉트 간격';
+$s_with_minimum_severity = '최소한 다음의 경우에 :';
+$s_bugnote_order = '이슈노트의 정렬 방식';
+$s_bugnote_order_asc = '오름차순';
+$s_bugnote_order_desc = '내림차순';
+$s_email_on_new = '새로운 이슈에 대한 이메일';
+$s_email_on_assigned = '할당된 이슈에 대한 이메일';
+$s_email_on_feedback = '정보 부족(Feedback)에 대한 이메일';
+$s_email_on_resolved = '해결된 이슈에 대한 이메일';
+$s_email_on_closed = '이슈 폐쇄시 이메일';
+$s_email_on_reopened = '이슈 재발생시 이메일';
+$s_email_on_bugnote_added = '이슈노트 추가시 이메일';
+$s_email_on_status_change = '상태 변경시 이메일';
+$s_email_on_priority_change = '우선 순위 변경시 이메일';
+$s_email_bugnote_limit = 'Email Notes Limit';
+$s_language = '언어';
+$s_update_prefs_button = '설정 상태 갱신';
+$s_reset_prefs_button = '설정 상태 초기화';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = '설정 상태가 초기화되었습니다....';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = '설정 상태가 갱신되었습니다...';
+
+# account_profile_add.php
+$s_profile_added_msg = '프로파일 추가...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = '프로파일 삭제...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = '프로파일 편집';
+$s_platform = '플랫폼';
+$s_operating_system = '운영 체제';
+$s_additional_description = '부연 설명';
+$s_update_profile_button = '프로파일 갱신';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = '기본 프로파일 갱신...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = '프로파일 추가';
+$s_add_profile_button = '프로파일 추가';
+$s_edit_or_delete_profiles_title = '프로파일 편집/삭제';
+$s_edit_profile = '프로파일 편집';
+$s_make_default = '디폴트 만들기';
+$s_delete_profile = '프로파일 삭제';
+$s_select_profile = '프로파일 편집';
+$s_submit_button = '확인';
+
+# account_profile_update.php
+$s_profile_updated_msg = '프로파일 갱신....';
+
+# account_update.php
+$s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
+$s_email_updated = '이메일 주소가 변경되었습니다...';
+$s_realname_duplicated = '이 별명은 다른 사용자가 쓰고 있습니다.';
+$s_realname_updated = '별명이 수정 되었습니다.';
+$s_password_updated = '비밀번호가 변경되었습니다...';
+
+# bug_assign.php
+$s_bug_assign_msg = '이슈가 할당되었습니다...';
+
+# bug_change_status_page.php
+$s_new_bug_title = '새로운 이슈';
+$s_feedback_bug_title = '정보 부족';
+$s_acknowledged_bug_title = '이슈 검토';
+$s_confirmed_bug_title = '확인된 이슈';
+$s_assigned_bug_title = '할당된 이슈';
+$s_new_bug_button = '새로운 이슈';
+$s_feedback_bug_button = '정보 부족';
+$s_acknowledged_bug_button = '이슈 검토';
+$s_confirmed_bug_button = '확인된 이슈';
+$s_assigned_bug_button = '할당된 이슈';
+
+# bug_close.php
+$s_bug_close_msg = '이슈가 폐쇄(close)되었습니다...';
+$s_close_immediately = '지금 폐쇄:';
+
+# bug_close_page.php
+$s_closed_bug_title = '이슈 폐쇄';
+
+# bug_delete.php
+$s_bug_deleted_msg = '이슈가 삭제되었습니다...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = '이 이슈를 삭제하시겠습니까?';
+$s_delete_bug_button = '이슈 삭제';
+
+# bug_monitor.php
+$s_monitor_bug_button = '이슈 감시하기';
+$s_unmonitor_bug_button = '이슈 감시 끝내기';
+
+# bug_file_add.php
+$s_file_upload_msg = '파일이 업로드되었습니다.';
+
+# bug_file_upload_inc.php
+$s_upload_file = '파일 업로드';
+$s_select_file = '파일 선택';
+$s_upload_file_button = '파일 업로드';
+$s_max_file_size = '최대 크기';
+
+# bug_reopen.php
+$s_bug_reopened_msg = '이슈가 다시 발생했습니다...';
+$s_reopen_add_bugnote_title = '재발생한 이슈에 대하여 이슈노트에 사유 추가';
+$s_bugnote_add_reopen_button = '재발생한 이슈와 이슈노트 추가';
+
+# bug_resolve_page.php
+$s_resolved_bug_title = '이슈 해결';
+$s_resolved_bug_button = '이슈 해결';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = '이슈가 해결되었습니다. 아래 이슈노트에 입력하세요.';
+$s_resolve_add_bugnote_title = '해결된 이슈에 대한 이슈노트 사유 추가';
+$s_bugnote_add_resolve_button = '이슈노트 추가';
+
+# bug_reminder_page.php
+$s_from = '보낸 사람';
+$s_to = '받는 사람';
+$s_on = '발송일 : ';
+$s_sent_you_this_reminder_about = ' 당신에게 아래와 같은 알림 메일이 발송 되었습니다.';
+$s_bug_reminder = '알림 메일 보내기';
+$s_reminder_sent_to = '알림 메일이 다음 사람에게 발송 되었습니다 : ';
+$s_bug_send_button = '전송';
+$s_reminder = '요청자';
+$s_reminder_explain = '이 이슈노트는 이 이슈에 대해 추가 정보를 요청한 목록에 있는 수신자에게 전달됩니다.';
+$s_reminder_monitor = '또한 이 수신자들은 해당 이슈를 감시하게 되며 이슈 감시 끝내기 버튼으로 메일을 받지 않을 수도 있습니다.';
+$s_reminder_store = '이 이슈노트는 해당 이슈에 저장됩니다.';
+
+# bug_update.php
+$s_bug_updated_msg = '이슈정보가 갱신되었습니다....';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = '이슈정보로 돌아가기';
+$s_update_simple_link = '정보사항 갱신';
+$s_updating_bug_advanced_title = '벌레 정보 갱신';
+$s_id = '이슈 번호';
+$s_category = '분류';
+$s_severity = '중요도(심각성)';
+$s_reproducibility = '재발생 가능성';
+$s_date_submitted = '보고 날짜';
+$s_last_update = '최종 갱신';
+$s_reporter = '보고자';
+$s_assigned_to = '이슈 할당';
+$s_priority = '우선 순위';
+$s_resolution = '해결 상태';
+$s_status = '상태';
+$s_duplicate_id = '중복된 이슈 번호';
+$s_os = '운영체제';
+$s_projection = '예상 작업량';
+$s_os_version = '버전';
+$s_eta = '처리예정시간';
+$s_product_version = '제품 번호';
+$s_build = '빌드번호';
+$s_fixed_in_version = '해결된 버전';
+$s_votes = '투표수';
+$s_summary = '요약';
+$s_description = '설 명';
+$s_steps_to_reproduce = '재발생 단계';
+$s_update_information_button = '정보사항 변경';
+
+# bug_update_page.php
+$s_update_advanced_link = '정보사항 갱신';
+$s_updating_bug_simple_title = '벌레 정보 갱신';
+
+# bug_vote_add.php
+$s_vote_added_msg = '투표수 추가...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = '이슈노트 추가...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = '이슈노트가 삭제되었습니다....';
+$s_bug_notes_title = '이슈 노트';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = '이슈노트 수정';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = '이 이슈에 첨부된 노트가 없습니다.';
+$s_delete_link = '삭제';
+$s_add_bugnote_title = '이슈노트 추가';
+$s_add_bugnote_button = '이슈노트 추가';
+$s_bugnote_edit_link = '수정';
+$s_closed_bug_button = '이슈 폐쇄';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = '이슈노트가 수정되었습니다....';
+$s_edited_on = '수정날짜: ';
+
+# index.php
+$s_click_to_login = '로그인';
+
+# login.php
+
+# login_page.php
+#@@@ should the following string be related to $g_window_title?
+$s_login_page_info = '이슈 추적 시스템입니다.';
+$s_login_title = '로그인';
+$s_save_login = '로그인 정보 저장';
+$s_choose_project = '프로젝트 선택';
+$s_login_button = '로그인';
+$s_signup_link = '사용자 신규 등록';
+$s_lost_password_link = '비밀번호 찾기';
+
+# login_select_proj_page.php
+$s_select_project_button = '프로젝트 선택';
+
+# logout_page.php
+$s_logged_out_title = '로그 아웃...';
+$s_redirecting = '...리다이렉팅';
+$s_here = '여기';
+
+# lost_pwd_page.php
+$s_lost_password_title = "비밀번호 초기화";
+$s_lost_password_done_title = "비밀번호 변경 메일이 보내졌습니다.";
+$s_lost_password_subject = "비밀번호 변경 확인 메일입니다.";
+$s_lost_password_info = "비밀번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br/><br/>메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ";
+$s_lost_password_confirm_hash_OK = "요청이 수락 되었습니다. 비밀번호를 변경하시기 바랍니다.";
+
+# main_page.php
+$s_open_and_assigned_to_me = '나에게 할당되고 진행중인 이슈';
+$s_open_and_reported_to_me = '내가 보고하고 진행중인 이슈';
+$s_newer_news_link = '새로운 뉴스';
+$s_older_news_link = '이전 뉴스';
+$s_archives = '뉴스 목록';
+$s_rss = 'RSS';
+
+# manage_create_new_user.php
+$s_created_user_part1 = '사용자가 ';
+$s_created_user_part2 = '접근 레벨로 생성되었습니다.';
+
+# manage_create_user_page.php
+$s_create_new_account_title = '새로운 계정 생성';
+$s_verify_password = '비밀번호 확인';
+$s_enabled = '사용가능';
+$s_protected = '계정 보호';
+$s_create_user_button = '사용자 생성';
+
+# manage_page.php
+$s_hide_disabled = '비활성화 숨기기';
+$s_filter_button = '필터';
+$s_manage_users_link = '사용자 관리';
+$s_manage_projects_link = '프로젝트 관리';
+$s_manage_custom_field_link = '커스텀 필드 관리';
+$s_permissions_summary_report = 'Permissions Report';
+$s_create_new_account_link = '계정 생성';
+$s_projects_link = '프로젝트';
+$s_documentation_link = '문서';
+$s_new_accounts_title = '새로운 계정';
+$s_1_week_title = '1 주';
+$s_never_logged_in_title = '한번도 로그인하지 않은 사용자';
+$s_prune_accounts = '계정 지우기';
+$s_hide_inactive = '활동하지 않는 사람 숨기기';
+$s_manage_accounts_title = '계정 관리';
+$s_p = 'p';
+$s_date_created = '생성된 일자';
+$s_last_visit = '마지막 로그인';
+$s_edit_user_link = '사용자 편집';
+
+# manage_proj_add.php
+$s_project_added_msg = '프로젝트가 추가되었습니다....';
+
+# manage_proj_category_add.php
+$s_category_added_msg = '분류가 추가되었습니다...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = '분류가 삭제되었습니다...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = '이 분류를 삭제하시겠습니까? 이 분류와 관련된 모든 이슈가 삭제될것입니다.';
+$s_delete_category_button = '분류 삭제';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = '프로젝트 분류 편집';
+$s_update_category_button = '분류 갱신';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = '분류가 갱신되었습니다....';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = '프로젝트가 삭제되었습니다...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = '이 프로젝트와 관련된 모든 이슈를 삭제하시겠습니까?';
+$s_project_delete_button = '프로젝트 삭제';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = '프로젝트 편집';
+$s_project_name = '프로젝트 이름';
+$s_view_status = '상태 보기';
+$s_public = '공개';
+$s_private = '비공개';
+$s_update_project_button = '프로젝트 갱신';
+$s_delete_project_button = '프로젝트 삭제';
+$s_categories_and_version_title = '분류와 버전';
+$s_categories = '분류';
+$s_add_category_button = '분류 추가';
+$s_versions = '버전';
+$s_add_version_button = '버전 추가';
+$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_edit_link = '편집';
+$s_actions = '실행';
+$s_version = '버전/빌드번호';
+$s_timestamp = '시간';
+$s_update = '갱신';
+
+# manage_proj_menu_page.php
+$s_add_project_title = '프로젝트 추가';
+$s_upload_file_path = '업로드 파일 경로';
+$s_add_project_button = '프로젝트 추가';
+$s_projects_title = '프로젝트';
+$s_name = '이름';
+
+# manage_proj_update.php
+$s_project_updated_msg = '프로젝트가 갱신되었습니다....';
+
+# manage_proj_version_add.php
+$s_version_added_msg = '버전 정보가 추가되었습니다....';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = '버전 정보가 삭제되었습니다....';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = '이 버전을 삭제하시겠습니까? 관련된 모든 이슈정보가 삭제됩니다.';
+$s_delete_version_button = '버전 삭제';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = '프로젝트 버전 편집';
+$s_update_version_button = '버전 갱신';
+$s_released = 'Released';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = '버전정보가 갱신되었습니다...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.';
+$s_account_deleted_msg = '계정이 삭제되었습니다....';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = '한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.';
+$s_prune_accounts_button = '삭제';
+$s_confirm_account_pruning = '한번도 로그인하지 않은 계정을 삭제하시겠습니까?';
+
+# manage_user_page.php
+$s_edit_user_title = '사용자 편집';
+$s_reset_password_button = '비밀번호 초기화';
+$s_delete_user_button = '사용자 삭제';
+$s_reset_password_msg = '비밀번호를 변경할경우 사용자에게 확인 메일이 보내지게 됩니다.';
+$s_reset_password_msg2 = '비밀번호 초기화는 비밀번호를 공백으로 만듭니다.';
+$s_show_all_users = '모두';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = '보호된 계정입니다. 비밀번호를 초기화 할 수 없습니다.';
+$s_account_reset_msg = '비밀번호 변경 메일이 발송 되었습니다...';
+$s_account_reset_msg2 = '계정을 비밀번호가 없는 상태로 초기화합니다...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호상태 이거나 현재 계정상태가 변경중입니다.....';
+$s_manage_user_updated_msg = '계정이 갱신되었습니다...';
+
+# menu_inc.php
+$s_main_link = '첫화면';
+$s_view_bugs_link = '이슈 보기';
+$s_report_bug_link = '이슈 보고하기';
+$s_changelog_link = '변경 기록';
+$s_summary_link = '요약';
+$s_account_link = '계정 관리';
+$s_users_link = '사용자';
+$s_manage_link = '관리';
+$s_edit_news_link = '뉴스 편집';
+$s_docs_link = '문서';
+$s_logout_link = '로그아웃';
+$s_my_view_link = '내 페이지';
+
+# meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = '할당되지 않음';
+$s_my_view_title_recent_mod = '최근에 변경됨';
+$s_my_view_title_reported = '내가 보고함';
+$s_my_view_title_assigned = '나에게 할당됨 (해결되지 않음)';
+$s_my_view_title_resolved = '해결됨';
+$s_my_view_title_monitored = '내가 감시 중';
+
+# news_add.php
+$s_news_added_msg = '뉴스가 추가됩니다...';
+
+# news_delete.php
+$s_news_deleted_msg = '뉴스 삭제......';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = '이 뉴스를 삭제하시겠습니까?';
+$s_delete_news_item_button = '뉴스 삭제';
+
+# news_edit_page.php
+$s_edit_news_title = '뉴스 편집';
+$s_headline = '헤드라인';
+$s_body = '본문';
+$s_update_news_button = '뉴스 갱신';
+
+# news_menu_page.php
+$s_add_news_title = '뉴스 추가';
+$s_post_to = '포스팅 대상';
+$s_post_news_button = '뉴스 게시';
+$s_edit_or_delete_news_title = '뉴스 편집 또는 삭제';
+$s_edit_post = '뉴스 편집';
+$s_delete_post = '뉴스 삭제';
+$s_select_post = '뉴스 선택';
+
+# news_update.php
+$s_news_updated_msg = '새로운 뉴스가 갱신되었습니다...';
+
+# news_view_page.php
+$s_back_link = '뒤로';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = '파일이 업로드되었습니다.';
+
+# proj_doc_add_page.php
+$s_upload_file_title = '파일 업로드';
+$s_title = '제목';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = '프로제트 파일 삭제됨';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = '이 파일을 삭제하시겠습니까?';
+
+# proj_doc_edit_page.php
+$s_filename = '파일 이름';
+$s_file_update_button = '파일 갱신';
+$s_file_delete_button = '파일 삭제';
+
+# proj_doc_page.php
+$s_project_documentation_title = '프로젝트 문서화';
+$s_user_documentation = '사용자 문서';
+$s_project_documentation = '프로젝트 문서';
+$s_add_file = '파일 추가';
+
+# proj_doc_update.php
+$s_project_document_updated = '프로젝트가 갱신되었습니다.';
+
+# proj_user_add.php
+$s_project_user_added_msg = '프로젝트에 사용자가 추가되었습니다.';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
+
+# proj_user_menu_page.php
+$s_add_user_title = '프로젝트에 사용자 추가';
+$s_add_user_button = '사용자 추가';
+$s_project_selection_title = '프로젝트 선택';
+$s_remove_link = '삭제';
+$s_remove_all_link = '모두 삭제';
+
+# proj_user_update.php
+$s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
+
+# report_add.php
+$s_must_enter_category = '분류를 선택해야 합니다.';
+$s_must_enter_severity = '중요도(심각성)를 선택해야 합니다.';
+$s_must_enter_reproducibility = '재발생 가능성을 선택해야 합니다.';
+$s_must_enter_summary = '요약된 내용을 입력해야 합니다.';
+$s_must_enter_description = '설명을 입력해야 합니다.';
+$s_report_more_bugs = '또 다른 이슈 보고';
+$s_submission_thanks_msg = '이슈 보고를 해주셔서 감사합니다.';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = '간단한 보고서';
+$s_enter_report_details_title = '상세 보고 내역을 입력하세요';
+$s_required = '필수';
+$s_select_category = '분류 선택';
+$s_select_reproducibility = '재발생 가능성 선택';
+$s_select_severity = '중요도(심각성) 선택';
+$s_or_fill_in = '또는 다음 내용을 채웁니다.';
+$s_assign_to = '할당하기';
+$s_additional_information = '추가 정보 사항';
+$s_submit_report_button = '보고서 제출';
+$s_check_report_more_bugs = '이슈 보고를 계속 하려면 선택';
+
+# report_bug_page.php
+$s_advanced_report_link = '상세 보고';
+$s_report_stay = '계속 보고';
+
+# set_project.php
+$s_selected_project = '현재 프로젝트';
+$s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
+
+# signup.php
+$s_signup_done_title = '계정이 등록 되었습니다.';
+$s_password_emailed_msg = '축하합니다. 계정이 성공적으로 등록되었습니다. 확인 메일이 발송되었으므로, 메일을 확인하여서 계정 등록을 마무리 하시기 바랍니다. ';
+$s_no_reponse_msg = '일주일이 지나도 등록을 하지 않으시면 등록된 계정 정보는 자동으로 지워 집니다.';
+
+# signup_page.php
+$s_signup_captcha_request = '오른쪽 상자에 보이는 내용을 입력합니다.';
+$s_signup_info = '위 사항을 입력후 등록을 하시면 확인 메시지를 메일로 받게 됩니다. <br>확인메일을 통해서 계정을 등록할 수 있으므로, 반드시 정확한 메일 주소를 입력해 주셔야 합니다. <br>만일, 일주일이 지나도 확인이 되지 않으면 등록된 정보는 자동으로 사라집니다.';
+$s_signup_title = '신규등록';
+$s_signup_button = '신규등록';
+$s_no_password_request = '비밀번호는 다른 시스템에서 관리합니다. 시스템 관리자에게 확인하세요.';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = '사이트 설정 수정';
+$s_save_settings_button = '변경 상태 저장';
+
+# site_settings_page.php
+$s_site_settings_title = '사이트 설정';
+$s_system_info_link = '시스템 정보';
+$s_site_settings_link = '사이트 설정';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = '사이트 설정 상태가 변경되었습니다.';
+
+# summary_page.php
+$s_summary_title = '요약';
+$s_summary_jpgraph_link = '자세한 요약';
+$s_by_project = '프로젝트별';
+$s_by_status = '상태별';
+$s_by_date = '날짜별';
+$s_by_severity = '중요도별';
+$s_by_resolution = '해결상태별';
+$s_by_category = '카테고리별';
+$s_by_priority = '우선순위';
+$s_by_developer = '개발자별';
+$s_by_reporter ='보고자별';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '수정됨 %';
+$s_percentage_errors = '수정안됨 %';
+$s_errors = '실패';
+$s_total = '전부';
+$s_time_stats = '시간 통계';
+$s_longest_open_bug = '가장 오래 해결되지 않은 이슈';
+$s_longest_open = '가장 오래된 시간';
+$s_average_time = '평균 시간';
+$s_total_time = '전체 시간';
+$s_developer_stats = '개발자 통계';
+$s_reporter_stats = '보고자 통계';
+$s_orct = '(신규/해결/폐쇄/전체)';
+
+# view_all_bug_page.php
+$s_any = '모두';
+$s_show = '갯수';
+$s_changed = '변경된(시간)';
+$s_viewing_bugs_title = '이슈 보기';
+$s_updated = '최종 갱신';
+
+# view_all_inc.php
+$s_none = '없음';
+$s_search ='검색';
+$s_view_prev_link = '이전';
+$s_view_next_link = '다음';
+$s_prev = '이전';
+$s_next = '다음';
+$s_first = '처음';
+$s_last = '마지막';
+$s_start_date = '시작 날짜';
+$s_end_date = '끝 날짜';
+$s_use_date_filters = '날짜 필터 사용';
+$s_yes = '예';
+$s_no = '아니요';
+$s_open_filters = '필터 바꾸기';
+$s_or_unassigned = '혹은 할당되지 않은 이슈';
+$s_ok = '확인';
+$s_select_all = '전부 선택';
+
+# stored query strings
+$s_use_query = '필터 사용';
+$s_delete_query = '필터 삭제';
+$s_query_deleted = '필터 삭제됨';
+$s_save_query = '현재 필터 저장';
+$s_reset_query = '필터 초기화';
+$s_query_name = '필터 이름';
+$s_query_exists = '이 특정 질의문은 이미 존재합니다.';
+$s_query_dupe_name = '이 이름의 다른 질의문이 있습니다. 다른 이름을 선택해 주세요.';
+$s_query_blank_name = '필터를 저장하려면 이름을 지정해야 합니다. 저장하기 전에 이름을 지정해 주세요.';
+$s_query_store_error = '질의문을 저장하는 도중에 에러가 발생했습니다.';
+$s_open_queries = 'Manage Filters';
+$s_query_delete_msg = '이 질의문을 삭제합니까?';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = '간략히 보기';
+$s_viewing_bug_advanced_details_title = '이슈 자세히 보기';
+$s_product_build = '제품 빌드 번호';
+$s_system_profile = '시스템 설명';
+$s_update_bug_button = '이슈 갱신';
+$s_bug_assign_to_button = '할당:';
+$s_bug_status_to_button = '상태 변경:';
+$s_reopen_bug_button = '재발생 이슈';
+$s_move_bug_button = '이슈 이동';
+$s_attached_files = '첨부 파일';
+$s_publish = 'Publish';
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = '자세히 보기';
+$s_viewing_bug_simple_details_title = '간략히 보기';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = '이 이슈를 감시하는 사용자가 없습니다.';
+$s_users_monitoring_bug = '이 이슈를 감시하는 사용자들';
+$s_monitoring_user_list = '사용자 목록';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
+
+# custom field strings
+$s_add_custom_field_button = '새로운 커스텀 필드';
+$s_delete_custom_field_button = '커스텀 필드 삭제';
+$s_delete_custom_field_everywhere = '모든 커스텀 필드 삭제';
+$s_update_custom_field_button = '커스텀 필드 갱신';
+$s_add_existing_custom_field = '기존 커스텀 필드에 추가';
+$s_edit_custom_field_title = '커스텀 필드 수정';
+$s_custom_field = '필드';
+$s_custom_fields_setup = '커스텀 필드';
+$s_custom_field_name = '이름';
+$s_custom_field_project_count = '프로젝트 수';
+$s_custom_field_type = '형식';
+$s_custom_field_possible_values = '사용 가능한 값';
+$s_custom_field_default_value = '기본 값';
+$s_custom_field_valid_regexp = '정규 표현식';
+$s_custom_field_access_level_r = '읽기 권한';
+$s_custom_field_access_level_rw = '쓰기 권한';
+$s_custom_field_length_min = '최소 길이';
+$s_custom_field_length_max = '최대 길이';
+$s_custom_field_advanced = 'Advanced';
+$s_custom_field_display_report = '이슈 보고할 때 표시';
+$s_custom_field_display_update = '이슈 갱신할 때 표시';
+$s_custom_field_display_resolved = '이슈 해결될 때 표시';
+$s_custom_field_display_closed = '이슈 폐쇄할 때 표시';
+$s_custom_field_require_report = '이슈 보고할 때 필요함';
+$s_custom_field_require_update = '이슈 갱신할 때 필요함';
+$s_custom_field_require_resolved = '이슈 해결될 때 필요함';
+$s_custom_field_require_closed = '이슈 폐쇄할 때 필요함';
+
+$s_custom_field_sequence = '시퀀스';
+$s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일,5:체크 박스,6:리스트,7:다중선택 리스트';
+
+$s_confirm_used_custom_field_deletion = '이 필드는 적어도 하나의 프로젝트에 링크되어 있습니다.  이 필드와 관련된 모든 값은 삭제될 것입니다. 이 필드를 삭제하지 않으려면, 브라우저에서 뒤로 버튼을 누르시기 바랍니다. 삭제를 계속 진행하기 위해서는 아래의 버튼을 누르세요';
+$s_confirm_custom_field_deletion = '커스텀 필드와 모든 관련된 값을 삭제하시겠습니까?';
+$s_field_delete_button = '필드 삭제';
+
+$s_hide_status = '상태 숨김';
+$s_filter_closed = "폐쇄됨";
+$s_filter_resolved = "해결됨";
+$s_hide_closed = "폐쇄된 것 숨김";
+$s_hide_resolved = "해결된 것 숨김";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
+$s_monitored_by = '감시자';
+
+$s_attachments = "첨부파일";
+$s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'ko';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = '변경 기록';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
+
+$s_bug = "이슈";
+$s_add_new_relationship = "새로운 관계";
+$s_add_new_relationship_button = "추가";
+$s_this_bug = "현재 이슈";
+$s_relationship_added = "관계 추가됨";
+$s_relationship_deleted = "관계 삭제됨";
+$s_no_relationship = "관계 없음";
+$s_relationship_replaced = "관계 교체됨";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "이 두 이슈는 서로 관계가 있습니다. 이 관계를 정말 바꾸려 합니까?";
+$s_relationship_with_parent = "원인이 되는 이슈와의 관계";
+$s_delete_relationship_button = "삭제";
+$s_delete_relationship_sure_msg = "이 관계를 삭제합니까?";
+$s_relationship_warning_blocking_bugs_not_resolved = "이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>주의</b>. 이 이슈 때문에 발생한 이슈가 아직 모두 해결되거나 폐쇄되지 않았습니다.<br>원인이 되는 이슈를 <b>해결/폐쇄</b>하기 전에, 이 이슈 때문에 발생한 모든 이슈를 해결 또는 폐쇄해야 합니다.";
+$s_create_child_bug_button = "이슈 내용 복사 후 보고";
+$s_bug_cloned_to = "이슈 복사됨";
+$s_bug_created_from = "Issue generated from";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "관계 그래프";
+$s_relation_graph = "관계 그래프";
+$s_dependency_graph = "의존 그래프";
+$s_vertical = "수직";
+$s_horizontal = "수평";
+$s_view_issue = "이슈 보기";
+# Source Control Integration
+$s_checkin = '체크인';
+# Pemissions report
+$s_perm_rpt_capability = 'Capability';
+$s_view = 'View';
+$s_issues = '이슈';
+$s_report_issue = '이슈 보고';
+$s_update_issue = '이슈 갱신';
+$s_monitor_issue = '이슈 감시';
+$s_handle_issue = 'Handle an issue';
+$s_move_issue = '이슈 이동';
+$s_delete_issue = '이슈 삭제';
+$s_reopen_issue = '이슈 재발생';
+$s_view_private_issues = '보호된 이슈 보기';
+$s_update_readonly_issues = '읽기 전용 이슈 갱신';
+$s_update_issue_status = '이슈 상태 갱신';
+$s_set_view_status = '보기 상태 설정 (공개 vs 보호)';
+$s_update_view_status = '보기 상태 갱신 (공개 vs 보호)';
+$s_show_list_of_users_monitoring_issue = '이슈를 감시 중인 사용자 목록 보기';
+$s_notes = '이슈노트';
+$s_add_notes = '이슈노트 추가';
+$s_update_notes = '이슈노트 갱신';
+$s_delete_note = '이슈노트 삭제';
+$s_view_private_notes = '보호된 이슈노트 보기';
+$s_news = '뉴스';
+$s_view_private_news = '보호된 뉴스 보기';
+$s_manage_news = '뉴스 관리';
+$s_view_list_of_attachments = '첨부 파일 목록 보기';
+$s_download_attachments = '첨부 파일 받기';
+$s_delete_attachments = '첨부 파일 삭제';
+$s_upload_issue_attachments = '첨부 파일 올리기';
+$s_filters = '필터';
+$s_save_filters = '필터 저장';
+$s_save_filters_as_shared = 'Save filters as shared';
+$s_use_saved_filters = 'Use saved filters';
+$s_create_project = '프로젝트 생성';
+$s_delete_project = '프로젝트 삭제';
+$s_manage_project = '프로젝트 관리';
+$s_manage_user_access_to_project = '프로젝트에 대한 사용자 접근 권한 관리';
+$s_automatically_included_in_private_projects = '자동으로 보호된 프로젝트를 포함합니다.';
+$s_project_documents = '프로젝트 문서';
+$s_view_project_documents = '프로젝트 문서 보기';
+$s_upload_project_documents = '프로젝트 문서 올리기';
+$s_link_custom_fields_to_projects = '프로젝트에 커스텀 필드 연결하기';
+$s_sponsorships = 'SPONSORSHIPS';
+$s_view_sponsorship_details = 'View sponsorship details';
+$s_view_sponsorship_total = 'View sponsorship total';
+$s_sponsor_issue = 'Sponsor issue';
+$s_assign_sponsored_issue = 'Assign sponsored issue';
+$s_handle_sponsored_issue = 'Handle sponsored issue';
+$s_others = '그 외';
+$s_see_email_addresses_of_other_users = '다른 사용자의 이메일 주소 보기';
+$s_send_reminders = 'Send reminders';
+$s_add_profiles = '프로파일 추가';
+$s_notify_of_new_user_created = '새로운 사용자 생성 알림';
+$s_email_notification = '이메일 알림';
+$s_status_changed_to = 'Status changes to';
+$s_email_on_deleted = 'Email on Deleted';
+$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
+$s_email_on_relationship_changed = 'Email on Relationship changed';
+?>
