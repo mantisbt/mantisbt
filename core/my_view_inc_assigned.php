@@ -6,24 +6,24 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc_assigned.php,v 1.1 2004-06-28 10:13:23 vboctor Exp $
+	# $Id: my_view_inc_assigned.php,v 1.2 2004-06-28 13:04:32 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 
 	$c_filter_assigned = array(
-		'_version'		=> 'v5',			'show_category'		=> Array ( '0' => any ),
-		'show_severity'		=> Array ( '0' => any ),	'show_status'		=> Array ( '0' => any ),
+		'_version'		=> 'v5',			'show_category'		=> Array ( '0' => 'any' ),
+		'show_severity'		=> Array ( '0' => 'any' ),	'show_status'		=> Array ( '0' => 'any' ),
 		'per_page'		=> '50',			'highlight_changed'	=> '6',
-		'hide_closed'		=> 'on',			'reporter_id'		=> Array ( '0' => any ),
+		'hide_closed'		=> 'on',			'reporter_id'		=> Array ( '0' => 'any' ),
 		'handler_id'		=> Array ( '0' => $t_current_user_id ),		'sort'	=> 'last_updated',
 		'dir'			=> 'DESC',			'start_month'		=> '',
 		'start_day'		=> '',				'start_year'		=> '',
 		'end_month'		=> '',				'end_day'		=> '',
 		'end_year'		=> '',				'search'		=> '',
 		'hide_resolved'		=> 'on',			'and_not_assigned'	=> '',
-		'show_resolution'	=> Array ( '0' => any ),	'show_build'		=> Array ( '0' => any ),
-		'show_version'		=> Array ( '0' => any ),	'do_filter_by_date'	=> '',
+		'show_resolution'	=> Array ( '0' => 'any' ),	'show_build'		=> Array ( '0' => 'any' ),
+		'show_version'		=> Array ( '0' => 'any' ),	'do_filter_by_date'	=> '',
 		'custom_fields'		=> Array ( ),			'_view_type'		=> 'simple',
 		'hide_status'		=> Array ( '0' => 80 )
 	);
