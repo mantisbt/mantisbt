@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.89 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:42 $
+	# $Revision: 1.90 $
+	# $Author: vboctor $
+	# $Date: 2004-05-11 22:14:59 $
 	#
-	# $Id: strings_german.txt,v 1.89 2004-03-14 20:10:42 jlatour Exp $
+	# $Id: strings_german.txt,v 1.90 2004-05-11 22:14:59 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -28,46 +28,46 @@ $s_actiongroup_menu_move = 'Verschieben';
 $s_actiongroup_menu_assign = 'Zuordnen';
 $s_actiongroup_menu_close = 'Schließen';
 $s_actiongroup_menu_delete = 'Löschen';
-$s_actiongroup_menu_resolve = 'Beheben';
+$s_actiongroup_menu_resolve = 'Gelöst';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 
 # new strings:
 $s_all_projects = 'Alle Projekte';
-$s_move_bugs = 'Fehler verschieben';
+$s_move_bugs = 'Report verschieben';
 $s_operation_successful = 'Aktion erfolgreich.';
 $s_date_order = 'Sortieren nach Datum';
 $s_print_all_bug_page_link = 'Berichte drucken';
 $s_csv_export = 'CSV-Export';
 $s_login_anonymously = 'Anonym anmelden';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = 'Zu Fehlernotizen springen';
+$s_jump_to_bugnotes = 'Zu Notizen wechseln';
 $s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH.  Alle Benutzer haben Zugang zu diesem Projekt.';
-$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und manuell hinzugefügte Benutzer haben Zugang.';
+$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und berechtigte Benutzer haben Zugang.';
 $s_access_level_project = 'Projekt Zugangsstufe';
-$s_view_submitted_bug_link = 'Zeige eingetragenen Fehler';
+$s_view_submitted_bug_link = 'Zeige eingetragenen Report';
 $s_assigned_projects = 'Zugewiesene Projekte';
 $s_unassigned_projects = 'Nicht zugewiesene Projekte';
 $s_print = 'Drucken';
-$s_jump = 'Zu Fehler springen';
+$s_jump = 'Zu Report springen';
 $s_copy_users = 'Benutzer kopieren';
 $s_copy_categories_from = 'Kategorien kopieren von';
 $s_copy_categories_to = 'Kategorien kopieren nach';
-$s_bug_history = 'Fehlerhistorie';
+$s_bug_history = 'Report-Historie';
 $s_field = 'Feld';
 $s_old_value = 'Alter Wert';
 $s_new_value = 'Neuer Wert';
 $s_date_modified = 'Änderungsdatum';
-$s_bugnote = 'Fehlernotiz';
+$s_bugnote = 'Reportnotiz';
 $s_change = 'Änderung';
-$s_bugnote_view_state = 'Fehlernotiz Anzeigestatus';
-$s_bug_monitor = 'Fehler beobachten';
-$s_bug_end_monitor = 'Fehlerbeobachtung beendet';
+$s_bugnote_view_state = 'Reportnotiz Anzeigestatus';
+$s_bug_monitor = 'Report beobachten';
+$s_bug_end_monitor = 'Reportbeobachtung beendet';
 $s_announcement = 'Ankündigung';
-$s_stays_on_top = 'Oben bleiben';
-$s_delete_bugnote_button = 'Fehlernotiz löschen';
-$s_delete_bugnote_sure_msg = 'Möchten Sie diese Fehlernotiz wirklich löschen?';
-$s_bug_relationships = 'Fehler-Beziehungen';
+$s_stays_on_top = 'Im Vordergrund bleiben';
+$s_delete_bugnote_button = 'Reportnotiz löschen';
+$s_delete_bugnote_sure_msg = 'Möchten Sie diese Reportnotiz wirklich löschen?';
+$s_bug_relationships = 'Report-Beziehungen';
 $s_empty_password_sure_msg = 'Der Benutzer hat ein leeres Passwort. Möchten Sie trotzdem fortfahren?';
 $s_empty_password_button = 'Leeres Kennwort benutzen';
 
@@ -77,17 +77,17 @@ $s_related_to = 'verwandt mit %id';
 $s_dependant_on = 'abhängig von %id';
 $s_blocks = 'blockiert %id';
 
-$s_new_bug = 'Neuer Fehler';
-$s_bugnote_added = 'Fehlernotiz hinzugefügt';
-$s_bugnote_edited = 'Fehlernotiz bearbeitet';
-$s_bugnote_deleted = 'Fehlernotiz gelöscht';
+$s_new_bug = 'Neuer Report';
+$s_bugnote_added = 'Reportnotiz hinzugefügt';
+$s_bugnote_edited = 'Reportnotiz bearbeitet';
+$s_bugnote_deleted = 'Reportnotiz gelöscht';
 $s_summary_updated = 'Zusammenfassung aktualisiert';
 $s_description_updated = 'Beschreibung aktualisiert';
 $s_additional_information_updated = 'Zusätzliche Informationen aktualisiert';
 $s_steps_to_reproduce_updated = 'Schritte zur Reproduzierung aktualisiert';
 $s_file_added = 'Datei hinzugefügt: ';
 $s_file_deleted = 'Datei gelöscht: ';
-$s_bug_deleted = 'Fehler gelöscht';
+$s_bug_deleted = 'Report gelöscht';
 
 $s_make_private = 'Privat machen';
 $s_make_public = 'Öffentlich machen';
@@ -97,19 +97,19 @@ $s_create_new_project_link = 'Neues Projekt erstellen';
 $s_login_link = 'Anmelden';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Fehlern auszuführen: ';
-$s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich schliessen?';
-$s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich löschen?';
-$s_move_bugs_conf_msg = 'Fehler verschieben zu Projekt:';
-$s_assign_bugs_conf_msg = 'Fehler zuordnen zu:';
+$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Reports auszuführen: ';
+$s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Reports wirklich schliessen?';
+$s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Reports wirklich löschen?';
+$s_move_bugs_conf_msg = 'Reports verschieben zu Projekt:';
+$s_assign_bugs_conf_msg = 'Reports zuordnen zu:';
 $s_resolve_bugs_conf_msg = 'Grund für Behebung auswählen:';
-$s_priority_bugs_conf_msg = 'Neue Fehlerpriorität:';
-$s_status_bugs_conf_msg = 'Neuer Fehlerstatus:';
-$s_close_group_bugs_button = 'Fehler schliessen' ;
-$s_delete_group_bugs_button = 'Fehler löschen' ;
-$s_move_group_bugs_button = 'Fehler verschieben' ;
-$s_assign_group_bugs_button = 'Fehler zuordnen' ;
-$s_resolve_group_bugs_button = 'Fehler beheben' ;
+$s_priority_bugs_conf_msg = 'Neue Reportpriorität:';
+$s_status_bugs_conf_msg = 'Neuer Reportstatus:';
+$s_close_group_bugs_button = 'Reports schliessen' ;
+$s_delete_group_bugs_button = 'Reports löschen' ;
+$s_move_group_bugs_button = 'Reports verschieben' ;
+$s_assign_group_bugs_button = 'Reports zuordnen' ;
+$s_resolve_group_bugs_button = 'Reports beheben' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
 
@@ -142,19 +142,19 @@ $s_printing_preferences_title = 'Felder zum Drucken auswählen';
 $s_printing_options_link = 'Druckoptionen';
 
 # word and excel export
-$s_bugnote_title = 'Fehlernotiz Benutzer' ;
-$s_bugnote_date = 'Datum der Fehlernotiz';
-$s_bugnote_description = 'Fehlernotiz Beschreibung';
+$s_bugnote_title = 'Reportnotiz Benutzer' ;
+$s_bugnote_date = 'Datum der Reportnotiz';
+$s_bugnote_description = 'Reportnotiz Beschreibung';
 
-$s_error_no_proceed = 'Bitte benutzen Sie die "Zurück"-Taste Ihres Browsers, um auf die vorhergehende Seite zurückzukehren. Dort können Sie den hier   angezeigten Fehler korrigieren oder eine andere Aktion ausführen. Über das Menü können Sie auch direkt in eine neue Abteilung   wechseln.';
+$s_error_no_proceed = 'Bitte benutzen Sie die "Zurück"-Taste Ihres Browsers, um auf die vorhergehende Seite zurückzukehren. Dort können Sie den hier angezeigten Report korrigieren oder eine andere Aktion ausführen. Über das Menü können Sie auch direkt in eine neue Abteilung   wechseln.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies Ihrem örtlichen Adminstrator mitteilen.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies dem Ihnen zugeordnetem Adminstrator mitteilen.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL Fehler entdeckt. Melden Sie dieses an ';
 $MANTIS_ERROR[ERROR_REPORT] = 'Während des Reports trat ein Fehler auf.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Keine Datei angegeben';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dieser Dateityp ist nicht erlaubt';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis exisitiert nicht. Überprüfen Sie die Projekteinstellungen.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis exisitiert nicht. Überprüfen Sie die Einstellungen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ein Projekt mit diesem Namen ist bereits vorhanden.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ein notwendiges Feld war leer. Überprüfen Sie Ihre Eingabe.';
@@ -166,7 +166,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption \'%s\' nicht gefunden.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette nicht gefunden.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Fehlernotiz nicht gefunden.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Reportnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Keine Verbindung zum FTP-Serverr.';
@@ -179,13 +179,13 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Nachricht nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Eingegebene Passwörter stimmen nicht überein.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Ein Feld wurde erwartet, aber eine Zeichenkette übergeben.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eine Zeichenkette wurde erwartet, aber ein Feld übergeben.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Fehler %d nicht gefunden.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Report %d nicht gefunden.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ungültige  Email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Dateityp für Uploads nicht erlaubt.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dateiübertragung nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht beschrieben werden.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Sie können keinen Fehler als Duplikat von sich selbst anlegen.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Sie können keinen Report als Duplikat von sich selbst anlegen.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ein Projekt benutzt noch dieses Feld.';
@@ -195,10 +195,10 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentifizierung fehlgeschlagen'
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindung zum LDAP Server fehlgeschlagen';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Aktualisierung des LDAP Eintrags fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Benutzereintrag nicht gefunden.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'Die Aktion kann nicht durchgeführt werden, weil der Fehler schon behoben wurde';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Verbindung zur Datenbank fehlgeschlagen. Fehlermeldung lautet #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Datenbankabfrage fehlgeschlagen. Die Fehlermeldung lautet #%d: %s für die Abfrage: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Datenbankauswahl fehlgeschlagen. Fehlermeldung der Datenbank lautet #%d: %s';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'Die Aktion kann nicht durchgeführt werden, weil der Fehler-Report schon gelöst wurde';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Verbindung zur Datenbank fehlgeschlagen. Reportmeldung lautet #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Datenbankabfrage fehlgeschlagen. Die Reportmeldung lautet #%d: %s für die Abfrage: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Datenbankauswahl fehlgeschlagen. Reportmeldung der Datenbank lautet #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Eine Kategorie mit diesem Namen existiert bereits.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kein Kopiervorgang angegeben.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nicht gefunden.';
@@ -229,7 +229,7 @@ $s_project_view_state_enum_string = '10:öffentlich,50:privat';
 $s_view_state_enum_string = '10:öffentlich,50:privat';
 
 $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort';
-$s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:BLOCKER';
+$s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:Blocking';
 $s_reproducibility_enum_string = '10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A';
 $s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:behoben,90:geschlossen';
 $s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
@@ -238,7 +238,7 @@ $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,
 
 # Email Strings
 $s_new_account_subject = 'Ihr neues Benutzerkonto';
-$s_new_account_greeting = 'Willkommen beim Bugtracker.  Hier sind die zur Anmeldung erforderlichen Informationen.' . "\n\n";
+$s_new_account_greeting = 'Willkommen beim Tracking-System.  Hier sind die zur Anmeldung erforderlichen Informationen.' . "\n\n";
 $s_new_account_url = 'Sie können sich hier anmelden: ';
 $s_new_account_username = 'Benutzername: ';
 $s_new_account_password = 'Passwort: ';
@@ -249,24 +249,24 @@ $s_reset_request_msg = 'Es gab eine Anfrage, Ihr Passwort zurückzusetzen';
 $s_account_name_msg = 'Ihr Benutzername ist';
 $s_news_password_msg = 'Hier ist Ihr neues Passwort';
 
-$s_email_notification_title_for_status_bug_feedback = 'Der folgende Fehler benötigt Ihre Rückmeldung.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Der folgende Fehler wurde anerkannt.';
-$s_email_notification_title_for_status_bug_confirmed = 'Der folgende Fehler wurde bestätigt.';
-$s_email_notification_title_for_status_bug_assigned = 'Der folgende Fehler wurde zugewiesen.';
-$s_email_notification_title_for_status_bug_resolved = 'Der folgende Fehler wurde behoben.';
-$s_email_notification_title_for_status_bug_closed = 'Der folgende Fehler wurde geschlossen.';
+$s_email_notification_title_for_status_bug_feedback = 'Der folgende Report benötigt Ihre Rückmeldung.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Der folgende Report wurde anerkannt.';
+$s_email_notification_title_for_status_bug_confirmed = 'Der folgende Report wurde bestätigt.';
+$s_email_notification_title_for_status_bug_assigned = 'Der folgende Report wurde zugewiesen.';
+$s_email_notification_title_for_status_bug_resolved = 'Der folgende Report wurde behoben.';
+$s_email_notification_title_for_status_bug_closed = 'Der folgende Report wurde geschlossen.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Der folgende Fehler wurde mitgeteilt.';
-$s_email_notification_title_for_action_bug_assigned = 'Der folgende Fehler wurde zugewiesen.';
-$s_email_notification_title_for_action_bug_reopened = 'Der folgende Fehler wurde wiedereröffnet.';
-$s_email_notification_title_for_action_bug_deleted = 'Der folgende Fehler wurde gelöscht.';
+$s_email_notification_title_for_action_bug_submitted = 'Der folgende Report wurde mitgeteilt.';
+$s_email_notification_title_for_action_bug_assigned = 'Der folgende Report wurde zugewiesen.';
+$s_email_notification_title_for_action_bug_reopened = 'Der folgende Report wurde wiedereröffnet.';
+$s_email_notification_title_for_action_bug_deleted = 'Der folgende Report wurde gelöscht.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Eine Fehlernotiz wurde zu diesem Fehler hinzugefügt.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Eine Notiz wurde zu diesem Report hinzugefügt.';
 
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';
 $s_email_project = 'Projekt';
-$s_email_bug = 'Fehler ID';
+$s_email_bug = 'Report ID';
 $s_email_category = 'Kategorie';
 $s_email_reproducibility = 'Reproduzierbarkeit';
 $s_email_severity = 'Auswirkung';
@@ -299,7 +299,7 @@ $s_access_level = 'Zugangsberechtigung';
 $s_update_user_button = 'Benutzer aktualisieren';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Kontopräferenzen';
+$s_default_account_preferences_title = 'Kontoeinstellungen';
 $s_default_project = 'Standard-Projekt';
 $s_advanced_report = 'Erweiterter Bericht';
 $s_advanced_view = 'Erweiterte Darstellung';
@@ -312,7 +312,7 @@ $s_email_on_feedback = 'Email bei Aktualisierung';
 $s_email_on_resolved = 'Email bei Lösung';
 $s_email_on_closed = 'Email bei Abschluss';
 $s_email_on_reopened = 'Email zur Wiedereröffnung';
-$s_email_on_bugnote_added = 'Email bei Fehlerergänzung';
+$s_email_on_bugnote_added = 'Email bei Reportergänzung';
 $s_email_on_status_change = 'Email bei Statuswechsel';
 $s_email_on_priority_change = 'Email bei Prioritätswechsel';
 $s_language = 'Sprache';
@@ -360,24 +360,24 @@ $s_email_updated = 'Email-Adresse erfolgreich aktualisiert.';
 $s_password_updated = 'Passwort erfolgreich aktualisiert.';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Der Fehler wurde zugewiesen...';
+$s_bug_assign_msg = 'Der Report wurde zugewiesen...';
 
 # bug_close.php
-$s_bug_close_msg = 'Der Fehler wurde geschlossen...';
+$s_bug_close_msg = 'Der Report wurde geschlossen...';
 $s_close_immediately   = 'Sofort schließen:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Fehler schliessen';
+$s_close_bug_title = 'Report schliessen';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Fehlermeldung wurde gelöscht...';
+$s_bug_deleted_msg = 'Reportmeldung wurde gelöscht...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Soll diese Fehlermeldung wirklich gelöscht werden?';
-$s_delete_bug_button = 'Fehler löschen';
+$s_delete_bug_sure_msg = 'Soll diese Reportmeldung wirklich gelöscht werden?';
+$s_delete_bug_button = 'Report löschen';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Fehler beobachten';
+$s_monitor_bug_button = 'Report beobachten';
 $s_unmonitor_bug_button = 'Beobachtung beenden';
 
 # bug_file_add.php
@@ -390,36 +390,36 @@ $s_upload_file_button = 'Datei übertragen';
 $s_max_file_size = 'Max. Grösse';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Fehlermeldung reaktiviert...';
-$s_reopen_add_bugnote_title = 'Notiz für Fehlerreaktivierung hinzufügen';
-$s_bugnote_add_reopen_button = 'Notiz hinzufügen und Fehler reaktivieren';
+$s_bug_reopened_msg = 'Reportmeldung reaktiviert...';
+$s_reopen_add_bugnote_title = 'Notiz für Reportreaktivierung hinzufügen';
+$s_bugnote_add_reopen_button = 'Notiz hinzufügen und Report reaktivieren';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Fehler behoben';
-$s_resolve_bug_button = 'Fehler beheben';
+$s_resolve_bug_title = 'Report behoben';
+$s_resolve_bug_button = 'Report beheben';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Fehler behoben. Bitte Notiz eingeben...';
-$s_resolve_add_bugnote_title = 'Notiz zur Fehlerbehebung eingeben';
+$s_bug_resolved_msg = 'Report behoben. Bitte Notiz eingeben...';
+$s_resolve_add_bugnote_title = 'Notiz zur Reportbehebung eingeben';
 $s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 
 # bug_reminder_page.php
 $s_from = 'Von:';
 $s_to = 'An:';
 $s_on = 'Am';
-$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung bezüglich des folgenden Fehlers gesendet:';
+$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung bezüglich des folgenden Reports gesendet:';
 $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an';
 $s_bug_send_button = 'Absenden';
 $s_reminder = 'Erinnerung';
 
 # bug_update.php
-$s_bug_updated_msg = 'Fehlereintrag erfolgreich aktualisiert...';
+$s_bug_updated_msg = 'Reporteintrag erfolgreich aktualisiert...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'zurück zum Fehlereintrag';
+$s_back_to_bug_link = 'zurück zum Reporteintrag';
 $s_update_simple_link = 'einfache Aktualisierung';
-$s_updating_bug_advanced_title = 'Fehlerinformation aktualisieren';
+$s_updating_bug_advanced_title = 'Reportinformation aktualisieren';
 $s_id = 'ID';
 $s_category = 'Kategorie';
 $s_severity = 'Auswirkung';
@@ -448,31 +448,31 @@ $s_update_information_button = 'Information aktualisieren';
 
 # bug_update_page.php
 $s_update_advanced_link = 'erweiterte Aktualisierung';
-$s_updating_bug_simple_title = 'Fehlerinformation aktualisieren';
+$s_updating_bug_simple_title = 'Reportinformation aktualisieren';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Stimme hinzugefügt...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Fehlernotiz hinzugefügt...';
+$s_bugnote_added_msg = 'Notiz hinzugefügt...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Fehlernotiz erfolgreich gelöscht...';
-$s_bug_notes_title = 'Fehlernotiz';
+$s_bugnote_deleted_msg = 'Notiz erfolgreich gelöscht...';
+$s_bug_notes_title = 'Notiz';
 
 # bugnote_edit_page.php
 $s_edit_bugnote_title = 'Notiz bearbeiten';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Zu diesem Fehler gibt es keine Notizen.';
+$s_no_bugnotes_msg = 'Zu diesem Report gibt es keine Notizen.';
 $s_delete_link = 'Löschen';
-$s_add_bugnote_title = 'Fehlernotiz hinzufügen';
-$s_add_bugnote_button = 'Fehlernotiz hinzufügen';
+$s_add_bugnote_title = 'Notiz hinzufügen';
+$s_add_bugnote_button = 'Notiz hinzufügen';
 $s_bugnote_edit_link = 'Bearbeiten';
-$s_close_bug_button = 'Fehler schließen';
+$s_close_bug_button = 'Report schließen';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Fehlernotiz wurde erfolgreich geändert...';
+$s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
 $s_edited_on = 'bearbeitet am: ';
 
 # index.php
@@ -545,7 +545,7 @@ $s_category_added_msg = 'Kategorie wurde hinzugefügt...';
 $s_category_deleted_msg = 'Kategorie wurde gelöscht...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Soll diese Kategorie gelöscht werden? Alle enthaltenen Fehler werden gelöscht.';
+$s_category_delete_sure_msg = 'Soll diese Kategorie gelöscht werden? Alle enthaltenen Report werden gelöscht.';
 $s_delete_category_button = 'Kategorie löschen';
 
 # manage_proj_category_edit_page.php
@@ -639,8 +639,8 @@ $s_manage_user_updated_msg = 'Konto aktualisiert...';
 
 # menu_inc.php
 $s_main_link = 'Startseite';
-$s_view_bugs_link = 'Fehler anzeigen';
-$s_report_bug_link = 'Fehler eintragen';
+$s_view_bugs_link = 'Report anzeigen';
+$s_report_bug_link = 'Report eintragen';
 $s_summary_link = 'Zusammenfassung';
 $s_account_link = 'Konto';
 $s_users_link = 'Benutzer';
@@ -733,7 +733,7 @@ $s_must_enter_severity = 'Wert für Auswirkung muss eingegeben werden';
 $s_must_enter_reproducibility = 'Wert für Reproduzierbarkeit muss eingegeben werden';
 $s_must_enter_summary = 'Sie müssen eine Zusammenfassung eingeben';
 $s_must_enter_description = 'Sie müssen eine Beschreibung eingeben';
-$s_report_more_bugs = 'Weitere Fehler melden';
+$s_report_more_bugs = 'Weitere Report melden';
 $s_submission_thanks_msg = 'Vielen Dank für den Eintrag.';
 
 # report_bug_advanced_page.php
@@ -747,7 +747,7 @@ $s_or_fill_in = 'ODER ausfüllen';
 $s_assign_to = 'Zuordnung an ';
 $s_additional_information = 'Zusätzliche Information';
 $s_submit_report_button = 'Bericht absenden';
-$s_check_report_more_bugs = 'auswählen, um weitere Fehler zu melden';
+$s_check_report_more_bugs = 'auswählen, um weitere Report zu melden';
 
 # report_bug_page.php
 $s_advanced_report_link = 'Erweiterter Bericht';
@@ -794,15 +794,15 @@ $s_by_category = 'Nach Kategorie';
 $s_by_priority = 'Nach Priorität';
 $s_by_developer = 'Nach Entwickler';
 $s_by_reporter ='Nach Reporter';
-$s_reporter_by_resolution = 'Reporter nach Lösungen';
-$s_reporter_effectiveness = 'Reporter Effektivität';
+$s_reporter_by_resolution = 'Fehler nach Lösungen';
+$s_reporter_effectiveness = 'Fehler Auswirkung';
 $s_developer_by_resolution = 'Entwickler nach Lösungen';
 $s_percentage_fixed = '% repariert';
-$s_percentage_errors = '% fehlerhaft';
-$s_errors = 'Fehlerhaft';
+$s_percentage_errors = '% fehlerhafthaft';
+$s_errors = 'Reporthaft';
 $s_total = 'Gesamt';
 $s_time_stats = 'Zeitwerte für Fehlerbehebung (Tage)';
-$s_longest_open_bug = 'am längsten offener Fehler';
+$s_longest_open_bug = 'am längsten offener Report';
 $s_longest_open = 'am längsten geöffnet';
 $s_average_time = 'durchschnittlich';
 $s_total_time = 'insgesamt';
@@ -814,7 +814,7 @@ $s_orct = '(offen/behoben/geschlossen/gesamt)';
 $s_any = 'alle';
 $s_show = 'Zeige';
 $s_changed = 'geändert (Std.)';
-$s_viewing_bugs_title = 'Fehler anzeigen';
+$s_viewing_bugs_title = 'Report anzeigen';
 $s_updated = 'Aktualisiert';
 
 # view_all_inc.php
@@ -826,35 +826,35 @@ $s_prev = 'Zurück';
 $s_next = 'Vor';
 $s_first = 'Erste';
 $s_last = 'Letzte';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_start_date = 'Von';
+$s_end_date = 'Bis';
+$s_use_date_filters = 'Verwende Datum als Filter';
+$s_yes = 'Ja';
+$s_no = 'Nein';
+$s_open_filters = 'Ändere Filter';
+$s_or_unassigned = 'Oder nicht zugeordnet';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'einfache Anzeige';
-$s_viewing_bug_advanced_details_title = 'Erweiterte Fehleranzeige';
+$s_viewing_bug_advanced_details_title = 'Erweiterte Reportanzeige';
 $s_product_build = 'Produktversion';
 $s_system_profile = 'Systembeschreibung';
-$s_update_bug_button = 'Fehler aktualisieren';
+$s_update_bug_button = 'Report aktualisieren';
 $s_bug_assign_to_button = 'Zuordnen zu';
-$s_reopen_bug_button = 'Fehler wiedereröffnen';
+$s_reopen_bug_button = 'Report wiedereröffnen';
 $s_attached_files = 'Angehängte Dateien';
-$s_publish = 'Publizieren';
+$s_publish = 'Veröffentlichen';
 $s_cached = 'Zwischengespeichert';
 
 # view_bug_inc.php
 
 # view_bug_page.php
 $s_view_advanced_link = 'erweiterte Anzeige';
-$s_viewing_bug_simple_details_title = 'Einfache Fehleransicht anzeigen';
+$s_viewing_bug_simple_details_title = 'Einfache Reportansicht anzeigen';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Keine Benutzer beobachten diesen Fehler.';
-$s_users_monitoring_bug = 'Benutzer, die diesen Fehler beobachten';
+$s_no_users_monitoring_bug = 'Keine Benutzer beobachten diesen Report.';
+$s_users_monitoring_bug = 'Benutzer, die diesen Report beobachten';
 $s_monitoring_user_list = 'Benutzer';
 
 # custom field strings
@@ -875,7 +875,7 @@ $s_custom_field_valid_regexp = 'Regulärer Ausdruck';
 $s_custom_field_access_level_r = 'Berechtigung Lesen';
 $s_custom_field_access_level_rw = 'Berechtigung Schreiben';
 $s_custom_field_length_min = 'Mindestlänge';
-$s_custom_field_length_max = 'Maximale Länge';
+$s_custom_field_length_max = 'Maximallänge';
 $s_custom_field_advanced = 'Erweitert';
 $s_custom_field_sequence = 'Reihenfolge';
 $s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufzählung,4:Email';
@@ -886,9 +886,9 @@ $s_field_delete_button = 'Feld löschen';
 
 $s_hide_status = 'Status ausblenden';
 $s_filter_closed = 'Geschlossen';
-$s_filter_resolved = 'Behoben';
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_filter_resolved = 'Gelöst';
+$s_hide_closed = "Geschlossene Reports ausblenden";
+$s_hide_resolved = "Gelöste Reports ausblenden";
 
 $s_attachments = 'Angehängte Datei(en)';
 $s_attachment_alt = 'D';
