@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.8 2002-09-18 05:32:50 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.9 2002-09-18 07:15:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -21,6 +21,10 @@
 	# @@@ backwards compatibility function... remove me later
 	function login_cookie_check( $p_return_page='' ) {
 		auth_ensure_user_authenticated( $p_return_page );
+
+		# update last_visit date
+		$t_user_id = auth_get_current_user_id();
+		user_update_last_visit( $t_user_id );
 	}
 
 	# --------------------
@@ -41,11 +45,6 @@
 			if ( OFF == current_user_get_field( 'enabled' ) ) {
 				print_header_redirect( 'logout_page.php' );
 			}
-
-			$t_user_id = auth_get_current_user_id();
-
-			# update last_visit date
-			user_update_last_visit( $t_user_id );
 		} else {				# not logged in
 			if ( '' == $p_return_page ) {
 				$p_return_page = $_SERVER['REQUEST_URI'];
