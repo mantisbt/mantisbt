@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.13 2002-10-20 23:59:49 jfitzell Exp $
+	# $Id: file_api.php,v 1.14 2002-10-23 04:54:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,7 +43,7 @@
 			echo "<a href=\"file_download.php?f_file_id=$v_id&amp;f_type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
 			if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?f_bug_id=$p_bug_id&amp;f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 			
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
@@ -162,6 +162,40 @@
 		return db_result( $result );
 	}
 	# --------------------
+	function file_delete( $p_file_id ) {
+		$c_file_id = db_prepare_int( $p_file_id );
+		
+		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+		$t_upload_method = config_get( 'file_upload_method' );
+		$t_filename = file_get_field( $p_file_id, 'filename' );
+		$t_bug_id = file_get_field( $p_file_id, 'bug_id' );
+
+		if ( ( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
+			$t_diskfile = file_get_field( $p_file_id, 'diskfile' );
+
+			if ( FTP == $t_upload_method ) {
+				$ftp = file_ftp_connect();
+				file_ftp_delete ( $ftp, $t_filename );
+				file_ftp_disconnect( $ftp );
+			}
+
+			if ( file_exists( $t_diskfile ) ) {
+				file_delete_local ( $t_diskfile );
+			}
+		}
+
+		$query = "DELETE FROM $t_bug_file_table
+				WHERE id='$c_file_id'";
+		db_query( $query );
+
+		# log file deletion
+		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name ( $t_filename ) );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
 	# File type check
 	function file_type_check( $p_file_name ) {
 		$t_allowed_files = config_get( 'allowed_files' );
@@ -248,6 +282,9 @@
 					db_query( $query );
 					break;
 			}
+
+			# updated the last_updated date
+			$result = bug_update_date( $p_bug_id );
 
 			# log new bug
 			history_log_event_special( $p_bug_id, FILE_ADDED, $p_file_name );

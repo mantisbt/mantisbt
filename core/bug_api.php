@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.14 2002-10-10 12:42:23 vboctor Exp $
+	# $Id: bug_api.php,v 1.15 2002-10-23 04:54:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -556,6 +556,23 @@
 		return true;
 	}
 	# --------------------
+	# reopen the given bug
+	function bug_reopen( $p_bug_id, $p_bugnote_text='' ) {
+		$p_bugnote_text = trim( $p_bugnote_text );
+
+		bug_set_field( $p_bug_id, 'status', FEEDBACK );
+		bug_set_field( $p_bug_id, 'resolution', REOPENED );
+
+		# Add bugnote if supplied
+		if ( $p_bugnote_text != '' ) {
+			bugnote_add( $p_bug_id, $p_bugnote_text );
+		}
+
+		email_reopen( $p_bug_id );
+
+		return true;
+	}
+	# --------------------
 	# updates the last_updated field
 	function bug_update_date( $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
@@ -566,6 +583,53 @@
 				  SET last_updated=NOW()
 				  WHERE id='$c_bug_id'";
 		db_query( $query );
+
+		return true;
+	}
+
+	# --------------------
+	# 
+	function bug_monitor( $p_bug_id, $p_user_id ) {
+		$c_bug_id	= db_prepare_int( $p_bug_id );
+		$c_user_id	= db_prepare_int( $p_user_id );
+
+		# Make sure we aren't already monitoring this bug
+		if ( user_is_monitoring_bug( $p_user_id, $p_bug_id ) ) {
+			return true;
+		}
+
+		$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
+
+		# Insert monitoring record
+		$query ="INSERT ".
+				"INTO $t_bug_monitor_table ".
+				"( user_id, bug_id ) ".
+				"VALUES ".
+				"( '$c_user_id', '$c_bug_id' )";
+		db_query($query);
+
+		# log new monitoring action
+		history_log_event_special( $p_bug_id, BUG_MONITOR, $c_user_id );	
+		
+		return true;
+	}
+
+	# --------------------
+	# 
+	function bug_unmonitor( $p_bug_id, $p_user_id ) {
+		$c_bug_id	= db_prepare_int( $p_bug_id );
+		$c_user_id	= db_prepare_int( $p_user_id );
+
+		$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
+
+		# Delete monitoring record
+		$query ="DELETE ".
+				"FROM $t_bug_monitor_table ".
+				"WHERE user_id = '$c_user_id' AND bug_id = '$c_bug_id'";
+		db_query($query);
+
+		# log new un-monitor action
+		history_log_event_special( $p_bug_id, BUG_UNMONITOR, $p_user_id );
 
 		return true;
 	}
