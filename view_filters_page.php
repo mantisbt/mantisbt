@@ -83,7 +83,7 @@
 			if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
 				$t_accessible_custom_fields_ids[] = $t_cfid;
 				$t_accessible_custom_fields_names[] = $t_field_info['name'];
-				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid );
+				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid, $t_project_id );
 			}
 		}
 
