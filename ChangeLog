@@ -12,36 +12,37 @@ To Do:
  * Refine viewing news archives
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)
- * Search bugs
+ * Search bugs capability
  * Complex bug criteria searching
  * Add glyphs and icons as optional display feature
- * Add changed in last X hours option
  * More documentation on installtion, configuration, and customization
  * Further document core_API.php
 
 12.10.2000	-	0.11.0
 
- * Added summary by date
- * Fixed bug with Bugnote Add button showing up i the wrong places
- * Added priority on the summary page
- * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
-   to      $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
- * Renamed corresponding .php3 files
- * Added profile management
  * Profiles can be used for advanced bug submission
- * Made enum displays (category, status, etc) easier to maintain via print_lists();
- * Removed the destructive DROP table in db_generate.sql
- * Added 'feedback' status - indicates that it requires more information
+ * Added summary by date
+ * Added priority on the summary page
+ * Added profile management
  * Added a confirmation before an admin can delete an account
- * Split manage user actions into separate files
  * Added several ; in core_API.php that caused errors on some servers
  * Added view next/prev XYZ bugs on bug viewing page
  * Added a string_display() function to prevent HTML tags from screwing up display
- * Modified version to be an enum.
  * Added version editing capability
  * Added account preferences
+ * Added changed in last X hours option
  * Added show source debug capability - requires PHP4
+ * Added 'feedback' status - indicates that it requires more information
+ * Fixed bug with Bugnote Add button showing up in the wrong places
+ * Modified version to be an enum.
+ * Modified ordering methods in manage account
+ * Made enum displays (category, status, etc) easier to maintain via print_lists();
  * Renamed access_level_check_greater() to access_level_check_greater_or_equal()
+ * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
+   to      $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
+ * Renamed corresponding .php3 files
+ * Split manage user actions into separate files
+ * Removed the destructive DROP table in db_generate.sql
 
 12.06.2000	-	0.10.2
 

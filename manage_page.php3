@@ -28,10 +28,24 @@
 		$f_sort = "username";
 	}
 
+	### basically we toggle between ASC and DESC if the user clicks the
+	### same sort order
+	if ( isset( $f_dir ) ) {
+		if ( $f_dir=="ASC" ) {
+			$f_dir = "DESC";
+		}
+		else {
+			$f_dir = "ASC";
+		}
+	}
+	else {
+		$f_dir = "ASC";
+	}
+
 	### Get the user data in $f_sort order
     $query = "SELECT *
     		FROM $g_mantis_user_table
-			ORDER BY '$f_sort' ASC";
+			ORDER BY '$f_sort' $f_dir";
 
     $result = db_mysql_query($query);
 	$user_count = mysql_num_rows($result);
@@ -62,37 +76,37 @@
 	<tr align=center bgcolor=<?echo $g_category_title_color2 ?>>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=username">username</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=username&f_dir=<? echo $f_dir?>">username</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=email">email</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=email&f_dir=<? echo $f_dir?>">email</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=access_level">access level</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=access_level&f_dir=<? echo $f_dir?>">access level</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=enabled">enabled</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=enabled&f_dir=<? echo $f_dir?>">enabled</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>">p</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=protected&f_dir=<? echo $f_dir?>">p</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=date_created">date created</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=date_created&f_dir=<? echo $f_dir?>">date created</a>
 			</b>
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=last_visit">last visit</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=last_visit&f_dir=<? echo $f_dir?>">last visit</a>
 			</b>
 		</td>
 		<td>
