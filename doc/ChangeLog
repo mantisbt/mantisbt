@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a3
 
+ * Fix: META redirects were not XHTML-compliant
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2
