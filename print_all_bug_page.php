@@ -58,6 +58,12 @@
 	$c_limit_view			= (integer)$f_limit_view;
 	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 
+	# Limit reporters to only see their reported bugs
+	if (( ON == $g_limit_reporters ) &&
+		( !access_level_check_greater_or_equal( UPDATER  ) )) {
+		$c_user_id = get_current_user_field( "id" );
+	}
+
 	# Build our query string based on our viewing criteria
 
 	$query = "SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
@@ -102,7 +108,7 @@
 	}
 	# end project selection
 
-	if ( $f_user_id != "any" ) {
+	if ( $c_user_id != "any" ) {
 		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 
