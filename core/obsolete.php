@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.1 2002-08-27 13:55:20 vboctor Exp $
+	# $Id: obsolete.php,v 1.2 2002-08-29 09:46:16 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -16,7 +16,7 @@
 	###########################################################################
 
 	# Check for obsolete variables
-	config_obsolete( 'g_notify_developers_on_new', 'g_notify_flags' );
-	config_obsolete( 'g_notify_on_new_threshold', 'g_notify_flags' );
-	config_obsolete( 'g_notify_admin_on_new', 'g_notify_flags' );
+	config_obsolete( 'notify_developers_on_new', 'notify_flags' );
+	config_obsolete( 'notify_on_new_threshold', 'notify_flags' );
+	config_obsolete( 'notify_admin_on_new', 'notify_flags' );
 ?>
