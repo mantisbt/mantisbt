@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.50 $
-	# $Author: jctrosset $
-	# $Date: 2002-06-24 10:06:18 $
+	# $Revision: 1.51 $
+	# $Author: vboctor $
+	# $Date: 2002-07-04 10:00:59 $
 	#
-	# $Id: core_helper_API.php,v 1.50 2002-06-24 10:06:18 jctrosset Exp $
+	# $Id: core_helper_API.php,v 1.51 2002-07-04 10:00:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -146,18 +146,17 @@
 			print_header_redirect( 'main_page.php' );
 		}
 	}
-
-	
 	# --------------------
-	# 
 	# allows bug deletion :
 	# delete the bug, bugtext, bugnote, and bugtexts selected
 	# used in bug_delete.php & mass treatments
-	function deleteBug( $p_id, $p_bug_text_id ) {
+	function delete_bug( $p_id, $p_bug_text_id ) {
 		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
 			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
 			   $g_file_upload_method ;
 	
+	email_bug_deleted($p_id);
+
 	$c_id			= (integer)$p_id;
 	$c_bug_text_id	= (integer)$p_bug_text_id;
 
@@ -228,9 +227,6 @@
 		WHERE bug_id='$c_id'";
 	$result = db_query($query);
 	}
-
-
-
 	# --------------------
 	# check to see if bugnote exists
 	# if it doesn't exist then redirect to the main page

@@ -7,11 +7,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: vboctor $
-	# $Date: 2002-07-02 12:48:52 $
+	# $Date: 2002-07-04 10:00:59 $
 	#
-	# $Id: core_email_API.php,v 1.64 2002-07-02 12:48:52 vboctor Exp $
+	# $Id: core_email_API.php,v 1.65 2002-07-04 10:00:59 vboctor Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -343,9 +343,17 @@
 		email_bug_info( $p_bug_id, $s_email_assigned_msg, $t_bcc );
 	}
 	# --------------------
+	# send notices when a bug is DELETED
+	function email_bug_deleted( $p_bug_id ) {
+		global $s_email_bug_deleted_msg;
+
+		$t_bcc = build_bcc_list( $p_bug_id, 'deleted' );
+		email_bug_info( $p_bug_id, $s_email_bug_deleted_msg, $t_bcc );
+	}
+	# --------------------
 	# messages are in two parts, the bug info and the bugnotes
 	# Build the bug info part of the message
-	function email_build_bug_message( $p_bug_id ) {
+	function email_build_bug_message( $p_bug_id, $p_message ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
@@ -357,7 +365,7 @@
 				$s_email_duplicate, $s_email_date_submitted,
 				$s_email_last_modified, $s_email_summary,
 				$s_email_description,
-				$g_email_separator1,
+				$g_email_separator1, $s_email_bug_deleted_msg,
 				$g_email_padding_length;
 
 		$c_bug_id = (integer)$p_bug_id;
@@ -397,14 +405,16 @@
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
-		$t_message .= $g_path;
-		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
-			$t_message .= 'view_bug_advanced_page.php';
-		} else {
-			$t_message .= 'view_bug_page.php';
+		if ( $p_message != $s_email_bug_deleted_msg) {
+			$t_message .= $g_path;
+			if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
+				$t_message .= 'view_bug_advanced_page.php';
+			} else {
+				$t_message .= 'view_bug_page.php';
+			}
+			$t_message .= '?f_id='.$p_bug_id."\n";
+			$t_message .= $g_email_separator1."\n";
 		}
-		$t_message .= '?f_id='.$p_bug_id."\n";
-		$t_message .= $g_email_separator1."\n";
 		$t_message .= str_pd( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
 		$t_message .= str_pd( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
 		$t_message .= $g_email_separator1."\n";
@@ -484,7 +494,7 @@
 
 		# build message
 		$t_message = $p_message."\n";
-		$t_message .= email_build_bug_message( $p_bug_id );
+		$t_message .= email_build_bug_message( $p_bug_id, $p_message );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
 		# send mail

@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.56 $
-	# $Author: jctrosset $
-	# $Date: 2002-07-04 09:18:35 $
+	# $Revision: 1.57 $
+	# $Author: vboctor $
+	# $Date: 2002-07-04 10:01:12 $
 	#
-	# $Id: strings_english.txt,v 1.56 2002-07-04 09:18:35 jctrosset Exp $
+	# $Id: strings_english.txt,v 1.57 2002-07-04 10:01:12 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -174,6 +174,7 @@
 	$s_email_feedback_msg = 'The following bug requires your FEEDBACK.';
 	$s_email_reopen_msg = 'The following bug has been REOPENED.';
 	$s_email_assigned_msg = 'The following bug has been ASSIGNED.';
+	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
 
 	$s_email_reporter = 'Reporter';
 	$s_email_handler = 'Handler';
