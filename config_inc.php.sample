@@ -60,4 +60,12 @@
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	$g_login_method = MD5;
+
+	# --- using MS IIS ----------------
+	# set to ON if you use IIS
+	$g_use_iis = ON;
+
+	# set to OFF to disable email check
+	$g_validate_email            = OFF;
+	$g_check_mx_record           = OFF;
 ?>
