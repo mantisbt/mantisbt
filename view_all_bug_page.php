@@ -9,145 +9,54 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( ON == $g_hide_closed_default ) {
-		$g_hide_closed_default = "on";
-	} else {
-		$g_hide_closed_default = "";
-	}
-
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#".$g_hide_closed_default.
-							"#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		print_header_redirect( $g_view_all_bug_page."?f=2" );
+		print_header_redirect( $g_view_all_set."?f_type=0" );
 	}
 
-	# Check to see if new cookie is needed
+	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-	if ( $t_setting_arr[0] != "v1" ) {
-		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#".$g_hide_closed_default.
-							"#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		print_header_redirect( $g_view_all_bug_page."?f=1" );
+	if ( $t_setting_arr[0] != "v3" ) {
+		print_header_redirect( $g_view_all_set."?f_type=0" );
 	}
 
+	# go to the print page instead.
 	if ( isset( $f_print ) ) {
 		print_header_redirect( $g_print_all_bug_page );
 	}
 
-	if( !isset( $f_search_text ) ) {
-		$f_search_text = false;
+	if( !isset( $f_search ) ) {
+		$f_search = false;
 	}
 
 	if ( !isset( $f_page_number ) ) {
 		$f_page_number = 1;
 	}
 
-	if ( !isset( $f_per_page ) ) {
-		$f_per_page = 4;
-	}
-
-	if ( !isset( $f_hide_closed ) ) {
-		$f_hide_closed = "";
-	}
-
-	if ( isset( $f_save ) ) {
-		if ( 1 == $f_save ) {
-			# We came here via the FILTER form button click
-			# Save preferences
-			$t_settings_string = "v1#".
-								$f_show_category."#".
-								$f_show_severity."#".
-								$f_show_status."#".
-								$f_per_page."#".
-								$f_highlight_changed."#".
-								$f_hide_closed."#".
-								$f_user_id."#".
-								$f_assign_id."#".
-								$f_sort."#".
-								$f_dir;
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		} else if ( 2 == $f_save ) {
-			# We came here via clicking a sort link
-			# Load pre-existing preferences
-			$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-			$f_show_category 		= $t_setting_arr[1];
-			$f_show_severity	 	= $t_setting_arr[2];
-			$f_show_status 			= $t_setting_arr[3];
-			$f_per_page 			= $t_setting_arr[4];
-			$f_highlight_changed 	= $t_setting_arr[5];
-			$f_hide_closed 			= $t_setting_arr[6];
-			$f_user_id 				= $t_setting_arr[7];
-			$f_assign_id 			= $t_setting_arr[8];
-
-			if ( !isset( $f_sort ) ) {
-				$f_sort		 			= $t_setting_arr[9];
-			}
-			if ( !isset( $f_dir ) ) {
-				$f_dir		 			= $t_setting_arr[10];
-			}
-			# Save new preferences
-			$t_settings_string = "v1#".
-								$f_show_category."#".
-								$f_show_severity."#".
-								$f_show_status."#".
-								$f_per_page."#".
-								$f_highlight_changed."#".
-								$f_hide_closed."#".
-								$f_user_id."#".
-								$f_assign_id."#".
-								$f_sort."#".
-								$f_dir;
-
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		}
-	} else {
-		# Load preferences
-		$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-		$f_show_category 		= $t_setting_arr[1];
-		$f_show_severity	 	= $t_setting_arr[2];
-		$f_show_status 			= $t_setting_arr[3];
-		$f_per_page 			= $t_setting_arr[4];
-		$f_highlight_changed 	= $t_setting_arr[5];
-		$f_hide_closed 			= $t_setting_arr[6];
-		$f_user_id 				= $t_setting_arr[7];
-		$f_assign_id 			= $t_setting_arr[8];
-		$f_sort 				= $t_setting_arr[9];
-		$f_dir		 			= $t_setting_arr[10];
-	}
+	# Load preferences
+	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+	$f_show_category 		= $t_setting_arr[1];
+	$f_show_severity	 	= $t_setting_arr[2];
+	$f_show_status 			= $t_setting_arr[3];
+	$f_per_page 			= $t_setting_arr[4];
+	$f_highlight_changed 	= $t_setting_arr[5];
+	$f_hide_closed 			= $t_setting_arr[6];
+	$f_user_id 				= $t_setting_arr[7];
+	$f_assign_id 			= $t_setting_arr[8];
+	$f_sort 				= $t_setting_arr[9];
+	$f_dir		 			= $t_setting_arr[10];
+	$f_start_month			= $t_setting_arr[11];
+	$f_start_day 			= $t_setting_arr[12];
+	$f_start_year 			= $t_setting_arr[13];
+	$f_end_month 			= $t_setting_arr[14];
+	$f_end_day				= $t_setting_arr[15];
+	$f_end_year				= $t_setting_arr[16];
 
 	# Limit reporters to only see their reported bugs
-	if ( ON == $g_limit_reporters ) {
-		if ( get_current_user_field( "access_level" ) <= REPORTER ) {
-			$f_user_id = get_current_user_field( "id" );
-		}
+	if (( ON == $g_limit_reporters ) &&
+		( get_current_user_field( "access_level" ) <= REPORTER )) {
+		$f_user_id = get_current_user_field( "id" );
 	}
-
-	# date values
-	/*if ( !isset( $f_start_month ) ) {
-		$f_start_month = date( "m" );
-	}
-	if ( !isset( $f_end_month ) ) {
-		$f_end_month = date( "m" );
-	}
-	if ( !isset( $f_start_day ) ) {
-		$f_start_day = 1;
-	}
-	if ( !isset( $f_end_day ) ) {
-		$f_end_day = date( "d" );
-	}
-	if ( !isset( $f_start_year ) ) {
-		$f_start_year = date( "Y" );
-	}
-	if ( !isset( $f_end_year ) ) {
-		$f_end_year = date( "Y" );
-	}
-	if ( !isset( $f_status ) ) {
-		$f_status = "open";
-	}*/
 
 	# Build the query string based on the user's viewing criteria.
 	# Build the query up in sections, because two queries need to
@@ -155,10 +64,9 @@
 	#
 	# 1) count of all the rows
 	# 2) listing of the current page of rows, ordered appropriately
-	#
 
 	# project selection
-	if ( "0000000" == $g_project_cookie_val ) { # ALL projects
+	if ( "0" == $g_project_cookie_val ) { # ALL projects
 		$t_access_level = get_current_user_field( "access_level" );
 		$t_user_id = get_current_user_field( "id" );
 
@@ -222,14 +130,14 @@
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
-	if ( $f_search_text ) {
+	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table";
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%') OR
-							(description LIKE '%".addslashes($f_search_text)."%') OR
-							(steps_to_reproduce LIKE '%".addslashes($f_search_text)."%') OR
-							(additional_information LIKE '%".addslashes($f_search_text)."%') OR
-							($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%')) AND
+		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%') OR
+							(description LIKE '%".addslashes($f_search)."%') OR
+							(steps_to_reproduce LIKE '%".addslashes($f_search)."%') OR
+							(additional_information LIKE '%".addslashes($f_search)."%') OR
+							($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')) AND
 							$g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 	} else {
 		$t_columns_clause = " *";
@@ -290,9 +198,7 @@
 	$result = db_query( $query );
 	$row_count = db_num_rows( $result );
 
-	$link_page = $g_view_all_bug_page;
-	$page_type = "all";
-
+	# ------------------------
 	# BEGIN CSV export feature
 	if ( isset( $f_csv ) ) {
 		# Do we want this parsed to the browser as a csv attachment (also changes the viewing parameters below)
@@ -323,11 +229,12 @@
 		die; #end here, maybe redirect back to the current page?
 	}
 	# END CSV export feature
+	# ------------------------
 ?>
 <?php print_page_top1() ?>
 <?php
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
-		print_meta_redirect( $PHP_SELF."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
+		print_meta_redirect( $g_view_all_bug_page."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
 <?php print_page_top2() ?>

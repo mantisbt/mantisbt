@@ -11,19 +11,13 @@
 
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#0#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		print_header_redirect( $g_print_all_bug_page."?f=2" );
+		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
 	}
 
-	# Check to see if new cookie is needed
+	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-	if ( $t_setting_arr[0] != "v1" ) {
-		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#0#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		print_header_redirect( $g_print_all_bug_page."?f=1" );
+	if ( $t_setting_arr[0] != "v3" ) {
+		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
 	}
 
 	if( !isset( $f_search_text ) ) {
@@ -38,70 +32,24 @@
 		$f_hide_closed = "";
 	}
 
-	if ( isset( $f_save ) ) {
-		if ( 1 == $f_save ) {
-			# We came here via the FILTER form button click
-			# Save preferences
-			$t_settings_string = "v1#".
-								$f_show_category."#".
-								$f_show_severity."#".
-								$f_show_status."#".
-								$f_limit_view."#".
-								$f_highlight_changed."#".
-								$f_hide_closed."#".
-								$f_user_id."#".
-								$f_assign_id."#".
-								$f_sort."#".
-								$f_dir;
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		} else if ( 2 == $f_save ) {
-			# We came here via clicking a sort link
-			# Load pre-existing preferences
-			$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-			$f_show_category 		= $t_setting_arr[1];
-			$f_show_severity	 	= $t_setting_arr[2];
-			$f_show_status 			= $t_setting_arr[3];
-			$f_limit_view 			= $t_setting_arr[4];
-			$f_highlight_changed 	= $t_setting_arr[5];
-			$f_hide_closed 			= $t_setting_arr[6];
-			$f_user_id 				= $t_setting_arr[7];
-			$f_assign_id 			= $t_setting_arr[8];
-
-			if ( !isset( $f_sort ) ) {
-				$f_sort		 			= $t_setting_arr[9];
-			}
-			if ( !isset( $f_dir ) ) {
-				$f_dir		 			= $t_setting_arr[10];
-			}
-			# Save new preferences
-			$t_settings_string = "v1#".
-								$f_show_category."#".
-								$f_show_severity."#".
-								$f_show_status."#".
-								$f_limit_view."#".
-								$f_highlight_changed."#".
-								$f_hide_closed."#".
-								$f_user_id."#".
-								$f_assign_id."#".
-								$f_sort."#".
-								$f_dir;
-
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
-		}
-	} else {
-		# Load preferences
-		$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-		$f_show_category 		= $t_setting_arr[1];
-		$f_show_severity	 	= $t_setting_arr[2];
-		$f_show_status 			= $t_setting_arr[3];
-		$f_limit_view 			= $t_setting_arr[4];
-		$f_highlight_changed 	= $t_setting_arr[5];
-		$f_hide_closed 			= $t_setting_arr[6];
-		$f_user_id 				= $t_setting_arr[7];
-		$f_assign_id 			= $t_setting_arr[8];
-		$f_sort 				= $t_setting_arr[9];
-		$f_dir		 			= $t_setting_arr[10];
-	}
+	# Load preferences
+	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+	$f_show_category 		= $t_setting_arr[1];
+	$f_show_severity	 	= $t_setting_arr[2];
+	$f_show_status 			= $t_setting_arr[3];
+	$f_limit_view 			= $t_setting_arr[4];
+	$f_highlight_changed 	= $t_setting_arr[5];
+	$f_hide_closed 			= $t_setting_arr[6];
+	$f_user_id 				= $t_setting_arr[7];
+	$f_assign_id 			= $t_setting_arr[8];
+	$f_sort 				= $t_setting_arr[9];
+	$f_dir		 			= $t_setting_arr[10];
+	$f_start_month			= $t_setting_arr[11];
+	$f_start_day 			= $t_setting_arr[12];
+	$f_start_year 			= $t_setting_arr[13];
+	$f_end_month 			= $t_setting_arr[14];
+	$f_end_day				= $t_setting_arr[15];
+	$f_end_year				= $t_setting_arr[16];
 
 	# Build our query string based on our viewing criteria
 
@@ -201,9 +149,6 @@
 	# perform query
     $result = db_query( $query );
 	$row_count = db_num_rows( $result );
-
-	$link_page = $g_print_all_bug_page;
-	$page_type = "all";
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -214,9 +159,10 @@
 <?php print_head_bottom() ?>
 <?php print_body_top() ?>
 
-<form method="post" action="<?php echo $link_page ?>?f=3">
+<form method="post" action="<?php echo $g_view_all_set ?>">
+<input type="hidden" name="f_type" value="1">
+<input type="hidden" name="f_print" value="1">
 <input type="hidden" name="f_offset" value="0">
-<input type="hidden" name="f_save" value="1">
 <input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
 <input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
 <table class="width100">
@@ -293,7 +239,7 @@
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_limit_view" size="3" maxlength="7" value="<?php echo $f_limit_view ?>">
+		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_limit_view ?>">
 	</td>
 	<td>
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
@@ -324,40 +270,40 @@
 		?>
 	</td>
 	<td class="right">
-		<a href="<?php echo $g_summary_page ?>">Back to Summary</a>
+		<a href="<?php echo $g_summary_page ?>"><?php echo $s_summary ?></a>
 	</td>
 <p>
 </tr>
 <tr class="row-category">
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( "P", "priority", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 	</td>
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_id, "id", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_category, "category", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_severity, "severity", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_status, "status", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
 	<td class="center" width="37%">
-		<?php print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( $s_summary, "summary", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>

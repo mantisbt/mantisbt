@@ -1,8 +1,7 @@
 <p>
 <table class="width100" cellspacing="0">
-<form method="post" action="<?php echo $link_page ?>?f=3">
-<input type="hidden" name="f_offset" value="0">
-<input type="hidden" name="f_save" value="1">
+<form method="post" action="<?php echo $g_view_all_set ?>?f=3">
+<input type="hidden" name="f_type" value="1">
 <input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
 <input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
 <input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
@@ -92,7 +91,7 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" size="16" name="f_search_text" value="<?php echo $f_search_text; ?>">
+	    <input type="text" size="16" name="f_search" value="<?php echo $f_search; ?>">
 	</td>
 <!--	<td class="left" colspan="2">
 		<select name="f_start_month">
@@ -151,16 +150,12 @@
 	<td class="right">
 		[
 		<?php
-			# print out a link for each page i.e.
-			#     [ 1 2 3 ]
-			#
+			# print out a link for each page eg. [ 1 2 3 ]
 			for ( $i = 1; $i <= $t_page_count; $i++ ) {
 				if ( $i == $f_page_number ) {
-					echo $i;
+					PRINT "$i&nbsp;";
 				} else {
-		?>
-				<a href="<?php echo $g_view_all_bug_page ?>?f_page_number=<?php echo $i ?>"><?php echo $i ?></a>
-		<?php
+					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i\">$i</a>&nbsp;";
 				}
 			}
 		?>
@@ -174,34 +169,34 @@
 	</td>
 <?php	} ?>
 	<td class="center" width="5%">
-		<?php print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( "P", "priority", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 	</td>
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_id, "id", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_category, "category", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_severity, "severity", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_status, "status", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
 	<td class="center" width="38%">
-		<?php print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link( $s_summary, "summary", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>
@@ -262,7 +257,7 @@
 			# type project name if viewing 'all projects'
 			if (( ON == $g_show_bug_project_links )&&( "0000000" == $g_project_cookie_val )) {
 				echo "<br />[";
-				print_view_bug_sort_link( $link_page, "$project_name", "project_id", $f_sort, $f_dir );
+				print_view_bug_sort_link( "$project_name", "project_id", $f_sort, $f_dir );
 				echo "]";
 			}
 		?>
@@ -341,7 +336,7 @@
 	# print the [ prev ] link
 	if ($f_page_number > 1) {
 		$t_prev_page_number = $f_page_number - 1;
-		print_bracket_link( $link_page."?f_page_number=".$t_prev_page_number, $s_view_prev_link." ".$f_per_page );
+		print_bracket_link( $g_view_all_bug_page."?f_page_number=".$t_prev_page_number, $s_view_prev_link." ".$f_per_page );
 	} else {
 		print_bracket_link( "", $s_view_prev_link." ".$f_per_page );
 	}
@@ -349,7 +344,7 @@
 	# print the [ next ] link
 	if ($f_page_number < $t_page_count) {
 		$t_next_page_number = $f_page_number + 1;
-		print_bracket_link( $link_page."?f_page_number=".$t_next_page_number, $s_view_next_link." ".$f_per_page );
+		print_bracket_link( $g_view_all_bug_page."?f_page_number=".$t_next_page_number, $s_view_next_link." ".$f_per_page );
 	} else {
 		print_bracket_link( "", $s_view_next_link." ".$f_per_page );
 	}

@@ -657,9 +657,10 @@
 	# Link Printing API
 	###########################################################################
 	# --------------------
-	function print_view_bug_sort_link(  $p_page, $p_string, $p_sort_field, $p_sort, $p_dir ) {
-		if ( $p_sort_field == $p_sort ) {
+	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir ) {
+		global $g_view_all_set;
 
+		if ( $p_sort_field == $p_sort ) {
 			# we toggle between ASC and DESC if the user clicks the same sort order
 			if ( "ASC" == $p_dir ) {
 				$p_dir = "DESC";
@@ -667,9 +668,26 @@
 				$p_dir = "ASC";
 			}
 
-			PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=2\">$p_string</a>";
+			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2\">$p_string</a>";
 		} else {
-			PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_save=2\">$p_string</a>";
+			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2\">$p_string</a>";
+		}
+	}
+	# --------------------
+	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
+		global $g_view_all_set;
+
+		if ( $p_sort_field == $p_sort ) {
+			# we toggle between ASC and DESC if the user clicks the same sort order
+			if ( "ASC" == $p_dir ) {
+				$p_dir = "DESC";
+			} else {
+				$p_dir = "ASC";
+			}
+
+			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2&f_print=1\">$p_string</a>";
+		} else {
+			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2&f_print=1\">$p_string</a>";
 		}
 	}
 	# --------------------

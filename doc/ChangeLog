@@ -32,6 +32,7 @@ Mantis
  * Modified fopen() to open with rb instead of r.
  * Modified language files to use long php tags.
  * Modified tr bgcolor elements and moved them into td bgcolor blocks to help MacOS IE color table cells properly.
+ * Modified view_all_bug_page to use view_all_set as a pure script to set cookies.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
