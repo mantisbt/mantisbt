@@ -3,3 +3,5 @@ custom_strings_inc.php
 custom_functions_inc.php
 config_inc.php
 .#*
+.project
+project.index
