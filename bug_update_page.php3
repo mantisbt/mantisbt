@@ -10,6 +10,10 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	if ( 2 == $g_show_update ) {
+		print_header_redirect ( $g_bug_update_advanced_page."?f_id=".$f_id );
+	}
+
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );

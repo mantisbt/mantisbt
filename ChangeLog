@@ -3,7 +3,15 @@ Mantis
 11.xx.2001  -   0.16.0
 
  * Fixed minor HTML errors in core_html_API.php
+ * Fixed the view, report, and update pages to honor the forces advanced/simple modes
+ * Modified the mantis_bug_table.build field to be a VARCHAR
+ * Modified the mantis_bug_table.votes field to be an INT
+ * Modified the mantis_bug_table.os_build field to be longer
+ * Modified the mantis_user_profile_table.os_build field to be longer
+ * Modified the mantis_user_pref_table.language field to be longer
  * Updated Korean localization
+ * Updated Polish localization
+ * Added file_type field to mantis_bug_file_table and mantis_project_file_table
  * Added LDAP login support
 
 11.04.2001  -   0.15.12

@@ -7,6 +7,10 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	if ( 2 == $g_show_view ) {
+		print_header_redirect ( $g_view_bug_advanced_page."?f_id=".$f_id );
+	}
+
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	check_bug_exists( $f_id );

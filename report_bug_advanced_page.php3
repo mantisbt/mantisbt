@@ -205,7 +205,7 @@
 			<? echo $s_product_build ?>
 		</td>
 		<td>
-			<input type="text" name="f_build" size="4" maxlength="4" value="<? echo $f_build ?>">
+			<input type="text" name="f_build" size="32" maxlength="32" value="<? echo $f_build ?>">
 		</td>
 	</tr>
 	<tr height="10" bgcolor="<? echo $g_white_color ?>">
