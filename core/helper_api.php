@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.12 2002-08-30 09:02:37 jfitzell Exp $
+	# $Id: helper_api.php,v 1.13 2002-08-30 09:37:41 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,9 +18,8 @@
 	# --------------------
 	# Calculates the CRC given bug id and calling file name (use __FILE__).
 	# It uses a configuration variable as a seed.
-	function calc_crc ( $p_bug_id, $p_file ) {
-		global $g_admin_crypt_word;
-		$t_crc_str = sprintf("%s%s%07d", $g_admin_crypt_word, basename($p_file), (integer)$p_bug_id);
+	function helper_calc_crc ( $p_bug_id, $p_file ) {
+		$t_crc_str = sprintf("%s%s%07d", config_get( 'admin_crypt_word' ), basename($p_file), (integer)$p_bug_id);
 		return crc32($t_crc_str);
 	}
 	# --------------------
@@ -36,13 +35,11 @@
 	# --------------------
 	# alternate color function
 	function alternate_colors( $p_num, $p_color1='', $p_color2='' ) {
-		global $g_primary_color1, $g_primary_color2;
-
 		if ( empty( $p_color1 ) ) {
-			$p_color1 = $g_primary_color1;
+			$p_color1 = config_get( 'primary_color1' );
 		}
 		if ( empty( $p_color2 ) ) {
-			$p_color2 = $g_primary_color2;
+			$p_color2 = config_get( 'primary_color2' );
 		}
 
 		if ( 1 == $p_num % 2 ) {
@@ -54,15 +51,18 @@
 	# --------------------
 	# get the color string for the given status
 	function get_status_color( $p_status ) {
-		global $g_status_enum_string, $g_status_colors, $g_custom_status_slot, $g_customize_attributes;
-
+		$t_status_enum_string = config_get( 'status_enum_string' );
+		$t_status_colors = config_get( 'status_colors' );
+		$t_custom_status_slot = config_get( 'custom_status_slot' );
+		$t_customize_attributes = config_get( 'customize_attributes' );
+		
 
 		# This code creates the appropriate variable name
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
 
-		if ($g_customize_attributes) {
+		if ($t_customize_attributes) {
 			# custom colors : to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
@@ -72,7 +72,7 @@
 		}
 
 		$t_color_str = 'closed';
-		$t_arr = explode_enum_string( $g_status_enum_string );
+		$t_arr = explode_enum_string( $t_status_enum_string );
 		$t_arr_count = count( $t_arr );
 		for ( $i=0;$i<$t_arr_count;$i++ ) {
 			$elem_arr = explode_enum_arr( $t_arr[$i] );
@@ -83,16 +83,15 @@
 			}
 		}
 
-		$t_color_variable_name = 'g_'.$t_color_str.'_color';
-		global $$t_color_variable_name;
-		if ( isset( $$t_color_variable_name ) ) {
-			return $$t_color_variable_name;
-		} elseif ( isset ( $g_status_colors[$t_color_str] ) ) {
-			return $g_status_colors[$t_color_str];
-		} elseif ($g_customize_attributes) {   // custom attributes
+		$t_color_variable_name = $t_color_str.'_color';
+		if ( config_is_set( $t_color_variable_name ) ) {
+			return config_get( $t_color_variable_name );
+		} elseif ( isset ( $t_status_colors[$t_color_str] ) ) {
+			return $t_status_colors[$t_color_str];
+		} elseif ($t_customize_attributes) {   // custom attributes
 				# if not found before, look into custom status colors
 				$t_colors_arr = attribute_get_all('colors', $t_project_id);
-				$t_offset = ( $p_status-( $g_custom_status_slot[0]+1 ) );
+				$t_offset = ( $p_status-( $t_custom_status_slot[0]+1 ) );
 				if ( isset( $t_colors_arr[$t_offset ]) ) {
 					return $t_colors_arr[$t_offset];
 				}
@@ -126,12 +125,12 @@
 	# --------------------
 	# Given a enum string and num, return the appropriate string
 	function get_enum_element( $p_enum_name, $p_val ) {
-		$g_var = 'g_'.$p_enum_name.'_enum_string';
-		$s_var = 's_'.$p_enum_name.'_enum_string';
-		global $$g_var, $$s_var, $g_customize_attributes;
+		$config_var = config_get( $p_enum_name.'_enum_string' );
+		$string_var = lang_get(  $p_enum_name.'_enum_string' );
+		$t_customize_attributes = config_get( 'customize_attributes' );
 
 		# custom attributes
-		if ($g_customize_attributes) {
+		if ($t_customize_attributes) {
 			# to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
@@ -140,35 +139,32 @@
 			insert_attributes( $p_enum_name, $t_project_id, 'str' ) ;
 		}
 		# use the global enum string to search
-		$t_arr = explode_enum_string( $$g_var );
+		$t_arr = explode_enum_string( $config_var );
 		$t_arr_count = count( $t_arr );
 		for ( $i=0;$i<$t_arr_count;$i++ ) {
 			$elem_arr = explode_enum_arr( $t_arr[$i] );
 			if ( $elem_arr[0] == $p_val ) {
 				# now get the appropriate translation
-				return get_enum_to_string( $$s_var, $p_val );
+				return get_enum_to_string( $string_var, $p_val );
 			}
 		}
 		return '@null@';
 	}
 	# --------------------
-	# Returns the specified field of the current project
-	function get_current_project_field( $p_field_name ) {
-		global $g_project_cookie_val;
-
-		return project_get_field ( $g_project_cookie_val, $p_field_name );
-	}
-	# --------------------
 	# Some proxies strip out HTTP_REFERER.
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
-	function get_view_redirect_url( $p_bug_id, $p_no_referer=0 ) {
-		global $HTTP_REFERER, $g_show_view;
+	function get_view_redirect_url( $p_bug_id, $p_no_referer=false ) {
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_SERVER;
+		}
 
-		if ( ( !isset( $HTTP_REFERER ) ) ||
-			 ( empty( $HTTP_REFERER ) ) ||
-			 ( 1 == $p_no_referer ) ) {
-			switch ( $g_show_view ) {
+		$t_show_view = config_get( 'show_view' );
+
+		if ( ( !isset( $_SERVER['HTTP_REFERER'] ) ) ||
+			 ( empty( $_SERVER['HTTP_REFERER'] ) ) ||
+			 ( true == $p_no_referer ) ) {
+			switch ( $t_show_view ) {
 				case BOTH:
 						if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 							return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
@@ -182,20 +178,24 @@
 				default:return 'view_bug_page.php?f_id='.$p_bug_id;
 			}
 		} else {
-			return $HTTP_REFERER;
+			return $_SERVER['HTTP_REFERER'];
 		}
 	}
 	# --------------------
 	# Some proxies strip out HTTP_REFERER.
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
-	function get_report_redirect_url( $p_no_referer=0 ) {
-		global $HTTP_REFERER, $g_show_report;
+	function get_report_redirect_url( $p_no_referer=false ) {
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_SERVER;
+		}
 
-		if ( ( !isset( $HTTP_REFERER ) ) ||
-			 ( empty( $HTTP_REFERER ) ) ||
-			 ( 1 == $p_no_referer ) ) {
-			switch( $g_show_report ) {
+		$t_show_report = config_get( 'show_report' );
+
+		if ( ( !isset( $_SERVER['HTTP_REFERER'] ) ) ||
+			 ( empty( $_SERVER['HTTP_REFERER'] ) ) ||
+			 ( true == $p_no_referer ) ) {
+			switch( $t_show_report ) {
 				case BOTH:
 						if ( ON == current_user_get_pref( 'advanced_report' ) ) {
 							return 'bug_add_advanced_page.php';
@@ -209,7 +209,7 @@
 				default:return 'bug_add_page.php';
 			}
 		} else {
-			return $HTTP_REFERER;
+			return $_SERVER['HTTP_REFERER'];
 		}
 	}
 	# --------------------
