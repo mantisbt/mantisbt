@@ -249,16 +249,16 @@
 				$g_manage_project_menu_page, $s_projects,
 				$g_documentation_page, $s_documentation_link;
 
-		$t_manage_page = $g_manage_page;
+		$t_manage_page 				= $g_manage_page;
 		$t_manage_project_menu_page = $g_manage_project_menu_page;
-		$t_manage_create_user_page = $g_manage_create_user_page;
-		$t_documentation_page = $g_documentation_page;
+		$t_manage_create_user_page 	= $g_manage_create_user_page;
+		$t_documentation_page 		= $g_documentation_page;
 
 		switch ( $p_page ) {
-			case $t_manage_page: $t_manage_page="";break;
-			case $t_manage_project_menu_page: $t_manage_project_menu_page="";break;
-			case $t_manage_create_user_page: $t_manage_create_user_page="";break;
-			case $t_documentation_page: $t_documentation_page="";break;
+			case $t_manage_page				: $t_manage_page 				= ""; break;
+			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ""; break;
+			case $t_manage_create_user_page	: $t_manage_create_user_page 	= ""; break;
+			case $t_documentation_page		: $t_documentation_page 		= ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
@@ -276,14 +276,14 @@
 				$g_account_profile_menu_page, $s_manage_profiles_link,
 				$g_account_prefs_page, $s_change_preferences_link;
 
-		$t_account_page = $g_account_page;
-		$t_account_prefs_page = $g_account_prefs_page;
-		$t_account_profile_menu_page = $g_account_profile_menu_page;
+		$t_account_page 				= $g_account_page;
+		$t_account_prefs_page 			= $g_account_prefs_page;
+		$t_account_profile_menu_page 	= $g_account_profile_menu_page;
 
 		switch ( $p_page ) {
-			case $t_account_page: $t_account_page="";break;
-			case $t_account_prefs_page: $t_account_prefs_page="";break;
-			case $t_account_profile_menu_page: $t_account_profile_menu_page="";break;
+			case $t_account_page				: $t_account_page 				= ""; break;
+			case $t_account_prefs_page			: $t_account_prefs_page 		= ""; break;
+			case $t_account_profile_menu_page	: $t_account_profile_menu_page 	= ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
@@ -301,14 +301,14 @@
 				$g_proj_doc_add_page, $s_add_file,
 				$g_allow_file_upload;
 
-		$t_documentation_html = $g_documentation_html;
-		$t_proj_doc_page = $g_proj_doc_page;
-		$t_proj_doc_add_page = $g_proj_doc_add_page;
+		$t_documentation_html 	= $g_documentation_html;
+		$t_proj_doc_page 		= $g_proj_doc_page;
+		$t_proj_doc_add_page 	= $g_proj_doc_add_page;
 
 		switch ( $p_page ) {
-			case $t_documentation_html: $t_documentation_html="";break;
-			case $t_proj_doc_page: $t_proj_doc_page="";break;
-			case $t_proj_doc_add_page: $t_proj_doc_add_page="";break;
+			case $t_documentation_html	: $t_documentation_html	= ""; break;
+			case $t_proj_doc_page		: $t_proj_doc_page		= ""; break;
+			case $t_proj_doc_add_page	: $t_proj_doc_add_page	= ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
@@ -328,16 +328,16 @@
 				$g_view_all_assigned_bug_page, $s_assigned_bugs_link,
 				$g_view_all_unassign_bug_page, $s_unassigned_bugs_link;
 
-		$t_view_all_bug_page = $g_view_all_bug_page;
-		$t_view_all_reported_bug_page = $g_view_all_reported_bug_page;
-		$t_view_all_assigned_bug_page = $g_view_all_assigned_bug_page;
-		$t_view_all_unassign_bug_page = $g_view_all_unassign_bug_page;
+		$t_view_all_bug_page 			= $g_view_all_bug_page;
+		$t_view_all_reported_bug_page 	= $g_view_all_reported_bug_page;
+		$t_view_all_assigned_bug_page 	= $g_view_all_assigned_bug_page;
+		$t_view_all_unassign_bug_page 	= $g_view_all_unassign_bug_page;
 
 		switch ( $p_page ) {
-			case $t_view_all_bug_page: $t_view_all_bug_page="";break;
-			case $t_view_all_reported_bug_page: $t_view_all_reported_bug_page="";break;
-			case $t_view_all_assigned_bug_page: $t_view_all_assigned_bug_page="";break;
-			case $t_view_all_unassign_bug_page: $t_view_all_unassign_bug_page="";break;
+			case $t_view_all_bug_page			: $t_view_all_bug_page			= ""; break;
+			case $t_view_all_reported_bug_page	: $t_view_all_reported_bug_page	= ""; break;
+			case $t_view_all_assigned_bug_page	: $t_view_all_assigned_bug_page	= ""; break;
+			case $t_view_all_unassign_bug_page	: $t_view_all_unassign_bug_page	= ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
@@ -358,8 +358,8 @@
 		$t_site_settings_page = $g_site_settings_page;
 
 		switch ( $p_page ) {
-			case $t_documentation_page: $t_documentation_page="";break;
-			case $t_site_settings_page: $t_site_settings_page="";break;
+			case $t_documentation_page: $t_documentation_page = ""; break;
+			case $t_site_settings_page: $t_site_settings_page = ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
@@ -383,12 +383,12 @@
             return;
         }
 
-		$t_summary_page = $g_summary_page;
+		$t_summary_page 		= $g_summary_page;
 		$t_summary_jpgraph_page = $g_summary_jpgraph_page;
 
 		switch ( $p_page ) {
-			case $t_summary_page: $t_summary_page="";break;
-			case $t_summary_jpgraph_page: $t_summary_jpgraph_page="";break;
+			case $t_summary_page		: $t_summary_page			= ""; break;
+			case $t_summary_jpgraph_page: $t_summary_jpgraph_page	= ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
