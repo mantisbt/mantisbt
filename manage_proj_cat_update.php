@@ -10,14 +10,10 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_category ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
-	
-	check_varset( $f_assigned_to, '0' );
-
-	$f_category = urldecode( $f_category );
-	$f_orig_category = urldecode( stripslashes( $f_orig_category ) );
+	$f_project_id		= gpc_get_int( 'f_project_id' );
+	$f_category			= gpc_get_string( 'f_category' );
+	$f_orig_category	= gpc_get_string( 'f_orig_category' );
+	$f_assigned_to		= gpc_get_int( 'f_assigned_to', 0 );
 
 	$result = 0;
 	$query = '';
@@ -29,12 +25,14 @@
 			break;
 		}
 
-		$c_category			= addslashes($f_category);
-		$c_orig_category	= addslashes($f_orig_category);
+		$c_category			= db_prepare_string( $f_category );
+		$c_orig_category	= db_prepare_string( $f_orig_category );
+		$c_project_id		= db_prepare_int( $f_project_id );
 
 		$query = "UPDATE $g_mantis_bug_table
 				SET category='$c_category'
-				WHERE category='$c_orig_category'";
+				WHERE category='$c_orig_category'
+				  AND project_id='$c_project_id'";
 	   	$result = db_query( $query );
 	}
 
