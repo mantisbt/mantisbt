@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.30 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bug_report.php,v 1.31 2004-05-17 13:02:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,6 +49,8 @@
 
 	$t_reporter_id		= auth_get_current_user_id();
 	$t_upload_method	= config_get( 'file_upload_method' );
+
+	$f_summary			= trim( $f_summary );
 
 	# If a file was uploaded, and we need to store it on disk, let's make
 	#  sure that the file path for this project exists
