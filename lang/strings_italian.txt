@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.89 $
+	# $Revision: 1.90 $
 	# $Author: marcelloscata $
-	# $Date: 2004-12-15 21:54:24 $
+	# $Date: 2004-12-15 22:11:26 $
 	#
-	# $Id: strings_italian.txt,v 1.89 2004-12-15 21:54:24 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.90 2004-12-15 22:11:26 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -29,7 +29,8 @@ $s_actiongroup_menu_delete = "Elimina";
 $s_actiongroup_menu_resolve = "Risolvi";
 $s_actiongroup_menu_update_priority = "Cambia priorità";
 $s_actiongroup_menu_update_status = "Cambia stato";
-$s_actiongroup_menu_update_view_status = "Cambio priv/pubbl";
+$s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
+$s_actiongroup_menu_set_sticky = 'Imposta/resetta sticky';
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -921,6 +922,7 @@ $s_show = "Quante anomalie";
 $s_changed = "Modificato (ore)";
 $s_viewing_bugs_title = "Elenco delle anomalie";
 $s_updated = "Aggiornato";
+$s_sticky = 'Visualizza anomalie sticky';
 
 # view_all_inc.php
 $s_none = "nessuno";
