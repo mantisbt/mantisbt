@@ -79,6 +79,7 @@
 	}
 
 	### build our query string based on our viewing criteria
+	#$query = "SELECT $g_mantis_bug_table.*, $g_mantis_bug_text_table.description FROM $g_mantis_bug_table, $g_mantis_bug_text_table ";
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
