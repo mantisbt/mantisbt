@@ -775,7 +775,7 @@
 			$t_access_level	= $row['access_level'];
 			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
 			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
-			PRINT "$t_project_name [$t_access_level] ($t_view_state) [<a class=\"small\" href=\"$g_manage_user_proj_delete?f_project_id=$t_project_id&f_user_id=$p_user_id\">$s_remove_link</a>]<br />";
+			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="'.$g_manage_user_proj_delete.'?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'.$s_remove_link.'</a>]<br />';
 		}
 	}
 	# --------------------
@@ -952,11 +952,8 @@
 			} else {
 				$p_dir = 'ASC';
 			}
-
-			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2\">$p_string</a>";
-		} else {
-			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2\">$p_string</a>";
 		}
+		PRINT '<a href="'.$g_view_all_set.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
@@ -969,19 +966,16 @@
 			} else {
 				$p_dir = 'ASC';
 			}
-
-			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2&f_print=1\">$p_string</a>";
-		} else {
-			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2&f_print=1\">$p_string</a>";
 		}
+		PRINT '<a href="'.$g_view_all_set.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2&amp;f_print=1">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
-		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1&f_hide=$p_hide\">$p_string</a>";
+		PRINT '<a href="'.$p_page.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_save=1&amp;f_hide='.$p_hide.'">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_project_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
-		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a>";
+		PRINT '<a href="'.$p_page.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'">'.$p_string.'</a>';
 	}
 	# --------------------
 	# print the bracketed links used near the top

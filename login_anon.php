@@ -23,5 +23,5 @@
  */
 	include('core_API.php');
 
-	print_header_redirect( "$g_login?f_username=$g_anonymous_account&f_perm_login=false" );
+	print_header_redirect( $g_login.'?f_username='.$g_anonymous_account.'&amp;f_perm_login=false' );
 ?>

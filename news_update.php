@@ -43,7 +43,7 @@
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_news_edit_page.'?f_id='.$f_id.'&f_action=edit', $s_edit_link );
+	print_bracket_link( $g_news_edit_page.'?f_id='.$f_id.'&amp;f_action=edit', $s_edit_link );
 	print_bracket_link( $g_news_menu_page, $s_proceed );
 ?>
 </div>

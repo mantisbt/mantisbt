@@ -31,7 +31,7 @@
 	}
 	# If Defaulting profile redirect to make default script
 	else if ( 'make default' == $f_action ) {
-		print_header_redirect( "$g_account_profile_make_default?f_id=$f_id&f_user_id=$f_user_id" );
+		print_header_redirect( $g_account_profile_make_default.'?f_id='.$f_id.'&amp;f_user_id='.$f_user_id );
 		exit;
 	}
 

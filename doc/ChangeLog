@@ -42,6 +42,7 @@ Mantis
  * Modified core_html_API.php to print a META-tag defining the charset.
  * Modified core_email_API.php to send a content-type header in emails.
  * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
+ * Modified & in URLs &amp; to conform with standards.
  * Made 'light grey' the default color for 'closed'.
 
 2002.05.19  -  0.17.3
