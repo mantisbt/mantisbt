@@ -362,8 +362,8 @@
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
-				$g_complete_date_format,
-				$g_bugnote_order, $g_view_bug_page,
+				$g_complete_date_format, $g_show_view,
+				$g_bugnote_order, $g_view_bug_page, $g_view_bug_advanced_page,
 				$s_email_reporter, $s_email_handler,
 				$s_email_project, $s_email_bug, $s_email_category,
 				$s_email_reproducibility, $s_email_severity,
@@ -410,7 +410,12 @@
 		$t_sta_str = get_enum_element( "status", $v_status );
 		$t_rep_str = get_enum_element( "reproducibility", $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
-		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
+    if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( "advanced_view" ) ) ) {
+      $t_message .= $g_view_bug_advanced_page;
+    } else {
+      $t_message .= $g_view_bug_page;
+    }
+		$t_message .= "?f_id=".$p_bug_id."\n";
 		$t_message .= $g_email_separator1."\n";
 		$t_message .= str_pd( $s_email_reporter.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
 		$t_message .= str_pd( $s_email_handler.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
