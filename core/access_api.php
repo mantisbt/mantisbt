@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.37 2005-03-19 16:25:59 thraxisp Exp $
+	# $Id: access_api.php,v 1.38 2005-03-19 22:59:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -274,6 +274,7 @@
 	# Check whether the user has the specified access level for any project project
 	function access_has_any_project( $p_access_level, $p_user_id = null ) {
 		# Short circuit the check in this case
+
 		if ( NOBODY == $p_access_level ) {
 			return false;
 		}
@@ -285,7 +286,7 @@
 		$t_access = false;
 		$t_projects = project_get_all_rows();
 		foreach ( $t_projects as $t_project ) {
-			$t_access = $t_access || access_has_project_level( $p_access_level, $t_project[id], $p_user_id );
+			$t_access = $t_access || access_has_project_level( $p_access_level, $t_project['id'], $p_user_id );
 		}
 
 		return ( $t_access );
