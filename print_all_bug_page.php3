@@ -295,34 +295,34 @@
 <p>
 </tr>
 <tr class="row-category">
-	<td width="8%">
+	<td class="center" width="8%">
 		<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 	</td>
-	<td width="8%">
+	<td class="center" width="8%">
 		<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
-	<td width="3%">
+	<td class="center" width="3%">
 		#
 	</td>
-	<td width="12%">
+	<td class="center" width="12%">
 		<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 	</td>
-	<td width="10%">
+	<td class="center" width="10%">
 		<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 	</td>
-	<td width="10%">
+	<td class="center" width="10%">
 		<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
-	<td width="12%">
+	<td class="center" width="12%">
 		<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
-	<td width="37%">
+	<td class="center" width="37%">
 		<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
@@ -402,8 +402,8 @@
 			}
 		?>
 	</td>
-	<td class="print">
-		<? echo $v_summary ?>
+	<td class="left">
+		<span class="print"><? echo $v_summary ?></a>
 	</td>
 </tr>
 <?

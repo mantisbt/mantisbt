@@ -17,6 +17,7 @@ span				{ font-family: Verdana, Arial, Helvetica; font-size: 10pt; }
 table				{}
 td 					{ font-family: Verdana, Arial, Helvetica; font-size: 10pt; padding: 4px; text-align: left }
 a					{}
+span.print			{ font-size: 8pt; }
 
 span.required 		{ font-size: 8pt; color: #aa0000 }
 span.small 			{ font-size: 8pt }
@@ -39,8 +40,8 @@ td.col-2			{ background-color: <? echo $g_primary_color_light ?>; }
 td.form-title		{ background-color: <? echo $g_white_color ?>; font-weight: bold; }
 td.nopad			{ padding: 0px; }
 td.spacer			{ font-size: 1pt; line-height: 0.1; }
-td.small-caption	{ font-size: 8pt }
-td.print			{ font-size: 8pt }
+td.small-caption	{ font-size: 8pt; }
+td.print			{ font-size: 8pt; text-align: center; }
 
 tr.center			{ text-align: center; }
 tr.row-1			{ background-color: <? echo $g_primary_color_dark ?>; }
