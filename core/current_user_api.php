@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.2 2002-09-05 23:44:35 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.3 2002-09-07 08:39:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -50,5 +50,54 @@
 	# Return the specified field of the currently logged in user
 	function current_user_set_default_project( $p_project_id ) {
 		return user_set_default_project( auth_get_current_user_id(), $p_project_id );
+	}
+	# --------------------
+	# Return the an array of projects to which the currently logged in user
+	#  has access
+	function current_user_get_accessible_projects() {
+		return user_get_accessible_projects( auth_get_current_user_id() );
+	}
+	# --------------------
+	# Return true if the currently logged in user is has a role of administrator
+	#  or higher, false otherwise
+	function current_user_is_administrator() {
+		return user_is_administrator( auth_get_current_user_id() );
+	}
+	# --------------------
+	# return the bug filter parameters for the current user
+	#  this could be modified to call a user_api function to get the
+	#  filter out of a db or whatever
+	function current_user_get_bug_filter() {
+		# check to see if new cookie is needed
+		if ( !filter_is_cookie_valid() ) {
+			return false;
+		}
+
+		$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+
+		$t_setting_arr = explode( '#', $t_view_all_cookie );
+	
+		$t_filter = array();
+
+		# Assign each value to a named key
+		$t_filter['show_category'] 		= $t_setting_arr[1];
+		$t_filter['show_severity']	 	= $t_setting_arr[2];
+		$t_filter['show_status'] 		= $t_setting_arr[3];
+		$t_filter['per_page'] 			= $t_setting_arr[4];
+		$t_filter['highlight_changed'] 	= $t_setting_arr[5];
+		$t_filter['hide_closed'] 		= $t_setting_arr[6];
+		$t_filter['reporter_id']		= $t_setting_arr[7];
+		$t_filter['handler_id'] 		= $t_setting_arr[8];
+		$t_filter['sort'] 				= $t_setting_arr[9];
+		$t_filter['dir']		 		= $t_setting_arr[10];
+		$t_filter['start_month']		= $t_setting_arr[11];
+		$t_filter['start_day'] 			= $t_setting_arr[12];
+		$t_filter['start_year'] 		= $t_setting_arr[13];
+		$t_filter['end_month'] 			= $t_setting_arr[14];
+		$t_filter['end_day']			= $t_setting_arr[15];
+		$t_filter['end_year']			= $t_setting_arr[16];
+		$t_filter['search']				= $t_setting_arr[17];
+
+		return $t_filter;
 	}
 ?>

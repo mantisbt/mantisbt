@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.23 2002-09-06 06:11:52 jfitzell Exp $
+	# $Id: user_api.php,v 1.24 2002-09-07 08:39:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -221,6 +221,17 @@
 	    $result = db_query($query);
 		$t_count =  db_result( $result );
 		if ( $t_count > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	# return true if the user has access of ADMINISTRATOR or higher, false otherwise
+	function user_is_administrator( $p_user_id ) {
+		$t_access_level = user_get_field( $p_user_id, 'access_level' );
+
+		if ( $t_access_level >= ADMINISTRATOR ) {
 			return true;
 		} else {
 			return false;
@@ -525,6 +536,47 @@
 		} else {
 			return $t_project_access_level;
 		}
+	}
+	# --------------------
+	# retun an array of project IDs to which the user has access
+	function user_get_accessible_projects( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$t_project_table = config_get( 'mantis_project_table' );
+		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+		$t_pub = PUBLIC;
+		$t_private = PRIVATE;
+
+		if ( user_is_administrator( $p_user_id ) ) {
+			$query = "SELECT DISTINCT( id )
+					  FROM $t_project_table
+					  WHERE enabled=1
+					  ORDER BY id";
+		} else {
+			$query = "SELECT DISTINCT( p.id )
+					  FROM $t_project_table p
+					  LEFT JOIN $t_project_user_list_table u
+					    ON p.id=u.project_id AND p.enabled=1
+					  WHERE p.view_state='$t_pub'
+					    OR (p.view_state='$t_private'
+						    AND
+					        u.user_id='$c_user_id')
+					  ORDER BY p.id";
+		}
+
+		$result = db_query( $query );
+		$row_count = db_num_rows( $result );
+
+		$t_projects = array();
+
+		for ( $i=0 ; $i < $row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			array_push( $t_projects, $row['id'] );
+		}
+
+		return $t_projects;
 	}
 	# --------------------
 	# return the number of open assigned bugs to a user in a project
