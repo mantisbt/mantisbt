@@ -231,10 +231,11 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$category_name[] = $row['category'];
+			$c_category_name = addslashes($category_name[$i]);
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$category_name[$i]' AND $specific_where";
+					WHERE category='$c_category_name' AND $specific_where";
 			$result2 = db_query( $query );
 			$category_bug_count[] = db_result( $result2, 0, 0 );
 
