@@ -160,7 +160,6 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 <?php
 	$t_vars = array( 'magic_quotes_gpc',
 					'gpc_order',
-					'variables_order',
 					'include_path',
 					'short_open_tag');
 
