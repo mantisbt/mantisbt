@@ -41,10 +41,10 @@
 
 	# path to your installation as seen from the web browser
 	# requires trailing /
-	if ( isset( $SERVER_NAME ) && isset ( $PHP_SELF ) ) {
-		$g_path = 'http://' . $SERVER_NAME . dirname( $PHP_SELF ) . '/';
-	} else {
-		$g_path = 'http://yourhostnamehere/mantis/';
+	if ( isset( $_SERVER['SERVER_NAME'] ) && isset ( $_SERVER['PHP_SELF'] ) ) {
+		$g_path = 'http://' . $_SERVER['SERVER_NAME'] . dirname( $_SERVER['PHP_SELF'] ) . '/';
+	} else { 
+		$g_path = 'http://yourhostnamehere/mantis/'; 
 	}
 
 	# path to your images directory (for icons)
@@ -117,6 +117,11 @@
 	# set to OFF to disable email check
 	$g_validate_email            = ON;
 	$g_check_mx_record           = ON;
+
+	# Only allow and send email to addresses in the given domain
+	# For example:
+	# $g_limit_email_domain		 = 'users.sourceforge.net';
+	$g_limit_email_domain		 = OFF;
 
 	# This disables the automatic generation of mailto: links
 	# Valid values: NONE, ALL, NO_ANONYMOUS, ADMIN_ONLY
