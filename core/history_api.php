@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.13 2003-02-23 11:53:55 vboctor Exp $
+	# $Id: history_api.php,v 1.14 2003-03-03 18:33:38 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -103,44 +103,60 @@
 			$v_date_modified = date( config_get( 'normal_date_format' ), $v_date_modified );
 
 			switch ( $v_field_name ) {
+			case 'category':
+				$t_field_localized = lang_get( 'category' );
+				break;
 			case 'status':
 				$v_old_value = get_enum_element( 'status', $v_old_value );
 				$v_new_value = get_enum_element( 'status', $v_new_value );
+				$t_field_localized = lang_get( 'status' );
 				break;
 			case 'severity':
 				$v_old_value = get_enum_element( 'severity', $v_old_value );
 				$v_new_value = get_enum_element( 'severity', $v_new_value );
+				$t_field_localized = lang_get( 'severity' );
 				break;
 			case 'reproducibility':
 				$v_old_value = get_enum_element( 'reproducibility', $v_old_value );
 				$v_new_value = get_enum_element( 'reproducibility', $v_new_value );
+				$t_field_localized = lang_get( 'reproducibility' );
 				break;
 			case 'resolution':
 				$v_old_value = get_enum_element( 'resolution', $v_old_value );
 				$v_new_value = get_enum_element( 'resolution', $v_new_value );
+				$t_field_localized = lang_get( 'resolution' );
 				break;
 			case 'priority':
 				$v_old_value = get_enum_element( 'priority', $v_old_value );
 				$v_new_value = get_enum_element( 'priority', $v_new_value );
+				$t_field_localized = lang_get( 'priority' );
 				break;
 			case 'eta':
 				$v_old_value = get_enum_element( 'eta', $v_old_value );
 				$v_new_value = get_enum_element( 'eta', $v_new_value );
+				$t_field_localized = lang_get( 'eta' );
 				break;
 			case 'view_state':
 				$v_old_value = get_enum_element( 'view_state', $v_old_value );
 				$v_new_value = get_enum_element( 'view_state', $v_new_value );
+				$t_field_localized = lang_get( 'view_status' );
 				break;
 			case 'projection':
 				$v_old_value = get_enum_element( 'projection', $v_old_value );
 				$v_new_value = get_enum_element( 'projection', $v_new_value );
+				$t_field_localized = lang_get( 'projection' );
 				break;
 			case 'project_id':
 				$v_old_value = project_get_field( $v_old_value, 'name' );
 				$v_new_value = project_get_field( $v_new_value, 'name' );
+				$t_field_localized = lang_get( 'email_project' );
 				break;
 			case 'handler_id':
+				$t_field_localized = lang_get( 'assigned_to' );
 			case 'reporter_id':
+				if ( 'reporter_id' == $v_field_name ) {
+					$t_field_localized = lang_get( 'reporter' );
+				}
 				if ( 0 == $v_old_value ) {
 					$v_old_value = '';
 				} else {
@@ -153,39 +169,55 @@
 					$v_new_value = user_get_name( $v_new_value );
 				}
 				break;
+			default:
+				$t_field_localized = $v_field_name;
+				break;
 			}
 
 			if ( NORMAL_TYPE != $v_type ) {
 				switch ( $v_type ) {
-				case NEW_BUG:					$t_note = lang_get( 'new_bug' );
-												break;
-				case BUGNOTE_ADDED:				$t_note = lang_get( 'bugnote_added' ) . ": " . $v_old_value;
-												break;
-				case BUGNOTE_UPDATED:			$t_note = lang_get( 'bugnote_edited' ) . ": " . $v_old_value;
-												break;
-				case BUGNOTE_DELETED:			$t_note = lang_get( 'bugnote_deleted' ) . ": " . $v_old_value;
-												break;
-				case SUMMARY_UPDATED:			$t_note = lang_get( 'summary_updated' );
-												break;
-				case DESCRIPTION_UPDATED:		$t_note = lang_get( 'description_updated' );
-												break;
-				case ADDITIONAL_INFO_UPDATED:	$t_note = lang_get( 'additional_information_updated' );
-												break;
-				case STEP_TO_REPRODUCE_UPDATED:	$t_note = lang_get( 'steps_to_reproduce_updated' );
-												break;
-				case FILE_ADDED:				$t_note = lang_get( 'file_added' ) . ": " . $v_old_value;
-												break;
-				case FILE_DELETED:				$t_note = lang_get( 'file_deleted' ) . ": " . $v_old_value;
-												break;
-				case BUGNOTE_STATE_CHANGED:		$v_old_value = get_enum_element( 'view_state', $v_old_value );
-												$t_note = lang_get( 'bugnote_view_state' ) . ": " . $v_old_value . ": " . $v_new_value;
-												break;
-				case BUG_MONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
-												$t_note = lang_get( 'bug_monitor' ) . ": " . $v_old_value;
-												break;
-				case BUG_UNMONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
-												$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
-												break;
+				case NEW_BUG:
+					$t_note = lang_get( 'new_bug' );
+					break;
+				case BUGNOTE_ADDED:
+					$t_note = lang_get( 'bugnote_added' ) . ": " . $v_old_value;
+					break;
+				case BUGNOTE_UPDATED:
+					$t_note = lang_get( 'bugnote_edited' ) . ": " . $v_old_value;
+					break;
+				case BUGNOTE_DELETED:
+					$t_note = lang_get( 'bugnote_deleted' ) . ": " . $v_old_value;
+					break;
+				case SUMMARY_UPDATED:
+					$t_note = lang_get( 'summary_updated' );
+					break;
+				case DESCRIPTION_UPDATED:
+					$t_note = lang_get( 'description_updated' );
+					break;
+				case ADDITIONAL_INFO_UPDATED:	
+					$t_note = lang_get( 'additional_information_updated' );
+					break;
+				case STEP_TO_REPRODUCE_UPDATED:	
+					$t_note = lang_get( 'steps_to_reproduce_updated' );
+					break;
+				case FILE_ADDED:
+					$t_note = lang_get( 'file_added' ) . ": " . $v_old_value;
+					break;
+				case FILE_DELETED:
+					$t_note = lang_get( 'file_deleted' ) . ": " . $v_old_value;
+					break;
+				case BUGNOTE_STATE_CHANGED:
+					$v_old_value = get_enum_element( 'view_state', $v_old_value );
+					$t_note = lang_get( 'bugnote_view_state' ) . ": " . $v_old_value . ": " . $v_new_value;
+					break;
+				case BUG_MONITOR:
+					$v_old_value = user_get_field( $v_old_value, 'username' );
+					$t_note = lang_get( 'bug_monitor' ) . ": " . $v_old_value;
+					break;
+				case BUG_UNMONITOR:
+					$v_old_value = user_get_field( $v_old_value, 'username' );
+					$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
+					break;
 				}
 			}
 
@@ -204,7 +236,7 @@
 				$history[$i]['note'] = $t_note;
 				$history[$i]['change'] = '';
 			} else {   # output normal changes
-				$history[$i]['note'] = $v_field_name;
+				$history[$i]['note'] = $t_field_localized;
 				$history[$i]['change'] = $v_old_value . ' => ' . $v_new_value;
 			} # end if DEFAULT
 		} # end for loop
