@@ -48,7 +48,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="report_add.php">
+		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="report_add.php">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
@@ -64,7 +64,7 @@
 		<?php echo $s_category ?> <?php print_documentation_link( 'category' ) ?>:
 	</td>
 	<td width="70%">
-		<select name="f_category">
+		<select tabindex="1" name="f_category">
 			<?php print_category_option_list( $f_category ) ?>
 		</select>
 	</td>
@@ -74,7 +74,7 @@
 		<?php echo $s_reproducibility ?> <?php print_documentation_link( 'reproducibility' ) ?>:
 	</td>
 	<td>
-		<select name="f_reproducibility">
+		<select tabindex="2" name="f_reproducibility">
 			<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
 		</select>
 	</td>
@@ -84,7 +84,7 @@
 		<?php echo $s_severity ?> <?php print_documentation_link( 'severity' ) ?>:
 	</td>
 	<td>
-		<select name="f_severity">
+		<select tabindex="3" name="f_severity">
 			<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
 		</select>
 	</td>
@@ -95,7 +95,7 @@
 		<?php echo $s_priority ?> <?php print_documentation_link( 'priority' ) ?>:
 	</td>
 	<td>
-		<select name="f_priority">
+		<select tabindex="4" name="f_priority">
 			<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
 		</select>
 	</td>
@@ -111,7 +111,7 @@
 		<?php echo $s_select_profile ?>:
 	</td>
 	<td>
-		<select name="f_profile_id">
+		<select tabindex="5" name="f_profile_id">
 			<?php print_profile_option_list( get_current_user_field( 'id' ), $f_profile_id ) ?>
 		</select>
 	</td>
@@ -126,7 +126,7 @@
 		<?php echo $s_platform ?>:
 	</td>
 	<td>
-		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $f_platform ?>">
+		<input tabindex="6" type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $f_platform ?>">
 	</td>
 </tr>
 <tr class="row-1">
@@ -134,7 +134,7 @@
 		<?php echo $s_os ?>:
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo $f_os ?>">
+		<input tabindex="7" type="text" name="f_os" size="32" maxlength="32" value="<?php echo $f_os ?>">
 	</td>
 </tr>
 <tr class="row-2">
@@ -142,7 +142,7 @@
 		<?php echo $s_os_version ?>:
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
+		<input tabindex="8" type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
 	</td>
 </tr>
 <tr>
@@ -155,7 +155,7 @@
 		<?php echo $s_product_version ?>
 	</td>
 	<td>
-		<select name="f_product_version">
+		<select tabindex="9" name="f_product_version">
 			<?php print_version_option_list( $f_product_version ) ?>
 		</select>
 	</td>
@@ -165,7 +165,7 @@
 		<?php echo $s_product_build ?>
 	</td>
 	<td>
-		<input type="text" name="f_build" size="32" maxlength="32" value="<?php echo $f_build ?>">
+		<input tabindex="10" type="text" name="f_build" size="32" maxlength="32" value="<?php echo $f_build ?>">
 	</td>
 </tr>
 <tr>
@@ -180,7 +180,7 @@
 		<?php echo $s_assign_to ?>
 	</td>
 	<td>
-		<select name="f_assign_id">
+		<select tabindex="11" name="f_assign_id">
 			<option value="0000000" selected="selected"></option>
 			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
@@ -199,7 +199,7 @@
 		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( 'summary' ) ?>:
 	</td>
 	<td>
-		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
+		<input tabindex="12" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
 	</td>
 </tr>
 <tr class="row-2">
@@ -207,7 +207,7 @@
 		<span class="required">*</span><?php echo $s_description ?> <?php print_documentation_link( 'description' ) ?>:
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
+		<textarea tabindex="13" name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -215,7 +215,7 @@
 		<?php echo $s_steps_to_reproduce ?> <?php print_documentation_link( 'steps_to_reproduce' ) ?>:
 	</td>
 	<td>
-		<textarea name="f_steps_to_reproduce" cols="60" rows="5" wrap="virtual"><?php echo $f_steps_to_reproduce ?></textarea>
+		<textarea tabindex="14" name="f_steps_to_reproduce" cols="60" rows="5" wrap="virtual"><?php echo $f_steps_to_reproduce ?></textarea>
 	</td>
 </tr>
 <tr class="row-2">
@@ -223,7 +223,7 @@
 		<?php echo $s_additional_information ?> <?php print_documentation_link( 'additional_information' ) ?>:
 	</td>
 	<td>
-		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
+		<textarea tabindex="15" name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
 	</td>
 </tr>
 <?php if ( ( ON == $g_allow_file_upload ) &&
@@ -234,7 +234,7 @@
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>">
-		<input name="f_file" type="file" size="60">
+		<input tabindex="16" name="f_file" type="file" size="60">
 	</td>
 </tr>
 <?php } ?>
@@ -243,8 +243,8 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input type="radio" name="f_view_state" value="10" checked="checked"> <?php echo $s_public ?>
-		<input type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
+		<input tabindex="17" type="radio" name="f_view_state" value="10" checked="checked"> <?php echo $s_public ?>
+		<input tabindex="18" type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -252,7 +252,7 @@
 		<?php echo $s_report_stay ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?>> (<?php echo $s_check_report_more_bugs ?>)
+		<input tabindex="19" type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?>> (<?php echo $s_check_report_more_bugs ?>)
 	</td>
 </tr>
 <tr>
@@ -260,11 +260,17 @@
 		<span class="required"> * <?php echo $s_required ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_submit_report_button ?>">
+		<input tabindex="20" type="submit" value="<?php echo $s_submit_report_button ?>">
 		</form>
 	</td>
 </tr>
 </table>
 </div>
+
+<script language="JavaScript">
+<!--
+	window.document.f_report_bug_form.f_category.focus();
+//-->
+</script>
 
 <?php print_page_bot1( __FILE__ ) ?>
