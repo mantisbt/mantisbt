@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: workflow.php,v 1.1 2004-09-23 21:22:12 thraxisp Exp $
+	# $Id: workflow.php,v 1.2 2004-09-30 18:31:24 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,10 +53,12 @@
 	if ( true == is_array( $t_submit_status_array ) ) {
 		foreach ($t_submit_status_array as $t_access => $t_status ) {
 			$t_entry[$t_status][0] = 'new'; 
+			$t_exit[0][$t_status] = 'new'; 
 		}
 	}else{
 			$t_status = $t_submit_status_array;
 			$t_entry[$t_status][0] = 'new'; 
+			$t_exit[0][$t_status] = 'new'; 
 	}
 
   # add user defined arcs and implicit reopen arcs
@@ -130,8 +132,52 @@
 		echo '</td></tr>';
 	}
 	echo '</table></center>';
+	echo '<br />';
+	echo '<br />';
 	
-	echo '<p> Completed...<p>';
+	# display the graph as a matrix
+	$t_all_status = explode( ',', $t_extra_enum_status);
+	$t_status_count = count( $t_all_status);
+	
+	echo '<center><table class="width100" cellspacing="1">';
+	echo '<tr><th width="25%">Current Status</th><th colspan="' . $t_status_count . '" class="center">Next Status</th></tr>';
+	echo '<tr><th></th>';
+	foreach ( $t_all_status as $t_status ) {
+		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
+		echo '<th>' . $t_status_label . '</th>';
+	}
+	echo '</tr>';
+
+	echo '<tr bgcolor="#326EFF"><td>Minumum Access Level to Change to Next Status</td>';
+	echo '<td></td>'; # no path into non-existent
+	foreach ( $t_status_arr as $t_status ) {
+		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
+		if ( NEW_ == $t_status_id ) {
+			$t_access = config_get( 'report_bug_threshold' );
+		}else{
+			$t_access = access_get_status_threshold( $t_status_id );
+		}
+		echo '<td class="center">' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_access ) . '</td>';
+	}
+	echo '</tr>';
+		
+	foreach ( $t_all_status as $t_from_status ) {
+		list( $t_from_status_id, $t_from_status_label ) = explode_enum_arr( $t_from_status );
+		echo '<tr ' . helper_alternate_class() . '><td>' . $t_from_status_label . '</td>';
+		foreach ( $t_all_status as $t_to_status) {
+			list( $t_to_status_id, $t_to_status_label ) = explode_enum_arr( $t_to_status );
+			if ( isset( $t_exit[$t_from_status_id][$t_to_status_id] ) ) {
+				$t_label = $t_exit[$t_from_status_id][$t_to_status_id];
+				echo '<td class="center">' . ( '' != $t_label ? '(' . $t_label . ')' : 'x' ) . '</td>';
+			}else{
+				echo '<td>&nbsp;</td>';
+			}
+		}
+		echo '</tr>';
+	}
+	echo '</table></center>';
+
+		echo '<p> Completed...<p>';
 ?>
 </body>
 </html>
