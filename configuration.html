@@ -1023,6 +1023,27 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_quick_proceed
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See fewer confirmation screens between actions.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_login_method
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		<ul>
+			<li>PLAIN
+			<li>CRYPT
+			<li>MD5
+		</ul>
+		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT is the default.
+	</td>
+</tr>
+<tr>
 	<td colspan=2 bgcolor="#eeeeee">
 		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.
 	</td>
