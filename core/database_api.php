@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.12 2003-01-04 09:27:38 jfitzell Exp $
+	# $Id: database_api.php,v 1.13 2003-01-04 09:30:41 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -168,41 +168,6 @@
 		return (int)(bool)$p_bool;
 	}
 
-	# --------------------
-	# generic unprepare if type is unknown
-	function db_unprepare( $p_string ) {
-		return stripslashes( $p_string );
-	}
-	# --------------------
-	# unprepare a string after taking it out of the DB
-	function db_unprepare_string( $p_string ) {
-		return db_unprepare( $p_string );
-	}
-	# --------------------
-	# unprepare an integer after taking it out of the DB
-	function db_unprepare_int( $p_int ) {
-		return (integer)db_unprepare( $p_int );
-	}
-	# --------------------
-	# unprepare a boolean after taking it out of the DB
-	function db_unprepare_bool( $p_bool ) {
-		return (bool)db_unprepare( $p_bool );
-	}
-	# --------------------
-	# calls db_unprepare() on every item in a row
-	function db_unprepare_row( $p_row ) {
-		if ( false == $p_row ) {
-			return false;
-		}
-
-		$t_new_row = array();
-
-		while ( list( $t_key, $t_val ) = each( $p_row ) ) {
-			$t_new_row[$t_key] = db_unprepare( $t_val );
-		}
-
-		return $t_new_row;
-	}
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
