@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.3 2004-08-03 22:34:35 thraxisp Exp $
+	# $Id: move_db2disk.php,v 1.4 2005-01-06 23:16:16 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 			# Windows absolute
 			return '';
 		}
-		if ( substr($file_path, 1, 2) == '\\:' ) {
+		if ( substr($file_path, 1, 2) == ':\\' ) {
 			# Windows absolute
 			return '';
 		}
