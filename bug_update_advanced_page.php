@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.59 2003-03-21 05:55:52 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.60 2003-07-26 12:49:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -407,7 +407,7 @@
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>
 	</td>
-	<td>
+	<td colspan="5">
 		<input type="checkbox" name="private" />
 	</td>
 </tr>
