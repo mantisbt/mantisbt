@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.34 2003-02-14 02:45:28 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.35 2003-02-14 02:58:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
-	$f_history	= gpc_get_bool( 'history' );
+	$f_history	= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
 	if ( ADVANCED_ONLY == config_get( 'show_view' ) ) {
 		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );

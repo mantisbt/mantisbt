@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.71 2003-02-11 08:59:32 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.72 2003-02-14 02:58:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -405,7 +405,15 @@
 	# change to ASC or DESC
 	$g_bugnote_order		= 'ASC';
 
-	# --- bugnote history ordering ----
+	################################
+	# Mantis Bug History Settings
+	################################
+
+	# --- bug history visible by default when you view a bug ----
+	# change to ON or OFF
+	$g_history_default_visible	= ON;
+
+	# --- bug history ordering ----
 	# change to ASC or DESC
 	$g_history_order		= 'ASC';
 
