@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.12 2003-02-20 13:19:29 vboctor Exp $
+	# $Id: lang_api.php,v 1.13 2003-02-24 09:52:05 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -57,17 +57,17 @@
 	# ------------------
 	# Loads the user's language or, if the database is unavailable, the default language
 	function lang_load_default() {
-		global $g_string_cookie_val;
-		
+		$t_user_language = gpc_get_cookie( config_get( 'string_cookie' ) );
+
 		# Confirm that the user's language can be determined
-		if ( db_is_connected() && !is_blank( $g_string_cookie_val ) ) {
+		if ( db_is_connected() && !is_blank( $t_user_language ) ) {
 			
 			$t_mantis_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 			$t_mantis_user_table		= config_get( 'mantis_user_table' );
 			
 			$query = "SELECT DISTINCT language
 					FROM $t_mantis_user_pref_table p, $t_mantis_user_table u
-					WHERE u.cookie_string='$g_string_cookie_val' AND
+					WHERE u.cookie_string='$t_user_language' AND
 							u.id=p.user_id";
 
 			$result = db_query( $query );
