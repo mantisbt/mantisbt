@@ -76,7 +76,7 @@
 		PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED]."<p>";
 	} else if ( 0 == $good_upload ) {
 		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
-	} else {
+	} else if ( !$result ) {
 		print_sql_error( $query );
 	}
 
