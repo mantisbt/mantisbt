@@ -99,6 +99,7 @@
 				$t_custom_id = substr($filter, 13,-7);
 				print_filter_custom_field($t_custom_id);
 			}else {
+				# error - no function to populate the target (e.g., print_filter_foo)
 				?>
 				<span style="color:red;weight:bold;">
 					unknown filter (<?php echo $filter; ?>)
