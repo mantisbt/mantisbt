@@ -288,6 +288,7 @@
 				} else {  # not applied but not executing
 					$t_color	= '#ff0088';
 					$t_message	= 'Not Applied';
+					$t_state	= 'checked="checked"';
 				}
 
 				echo '<tr bgcolor="#ffffff"><td>';
