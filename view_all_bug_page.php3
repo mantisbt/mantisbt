@@ -103,6 +103,11 @@
 		$f_dir		 			= $t_setting_arr[10];
 	}
 
+	# Limit reporters to only see their reported bugs
+	if ( 1 == $g_limit_reporters ) {
+		$f_user_id = get_current_user_field( "id" );
+	}
+
 	# Build our query string based on our viewing criteria
 
 	$query = "SELECT * FROM $g_mantis_bug_table";

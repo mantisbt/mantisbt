@@ -372,6 +372,10 @@
 	# CRYPT or PLAIN or MD5 or LDAP
 	$g_login_method = CRYPT;
 
+	# --- limit reporters -------------
+	# Set to 1 if you wish to limit reporters to only viewing bugs that they report.
+	$g_limit_reporters = 1;
+
 	##############################
 	### Mantis Color Variables ###
 	##############################
