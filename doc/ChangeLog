@@ -63,7 +63,7 @@ Mantis ChangeLog
  * Added $g_view_summary_threshold to configure the access level required for viewing summary page.
  * Added bugnote_dlete_page.php for bugnote delete confirmation.
  * Added $g_auto_set_status_to_assigned to allow enabling/disabling of automatically setting the status to ASSIGNED when the defect is assigned.  Default is ON.
-
+ * Added support for strings_inc.php, if this file is found in main directory it gets included after strings_xxxx.php to allow overriding of strings without modifying the language files.  $g_active_language can be used to check the active language.
 
 2002.05.19  -  0.17.3
 

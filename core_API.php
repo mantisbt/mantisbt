@@ -53,22 +53,28 @@
 
 	# Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
-		$t_language = '';
 		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		$query = "SELECT DISTINCT language
 				FROM $g_mantis_user_pref_table pref, $g_mantis_user_table user
 				WHERE user.cookie_string='$g_string_cookie_val' AND
 						user.id=pref.user_id";
 		$result = db_query( $query );
-		$t_language = db_result( $result, 0 , 0 );
-		if (!empty( $t_language )) {
-			include( 'lang/strings_'.$t_language.'.txt' );
-		} else {
-			include( 'lang/strings_'.$g_default_language.'.txt' );
+		$g_active_language = db_result( $result, 0 , 0 );
+		if (empty( $g_active_language )) {
+			$g_active_language = $g_default_language;
 		}
+
 		db_close();
 	} else {
-		include( 'lang/strings_'.$g_default_language.'.txt' );
+		$g_active_language = $g_default_language;
+	}
+
+	include( 'lang/strings_'.$g_active_language.'.txt' );
+	
+	# Allow overriding strings declared in the language file
+	# strings_inc.php can use $g_active_language
+	if ( file_exists( 'strings_inc.php' ) ) {
+		include ( 'strings_inc.php' );
 	}
 
 	require( 'core_html_API.php' );
