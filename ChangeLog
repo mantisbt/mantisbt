@@ -24,6 +24,7 @@ To Do:
 
  * Wrapped the global cookie _val variables in if (isset)) blocks.
  * Fixed a missing </TD> tag on the report bug pages.
+ * Added projection and eta to be passed as hidden info by the simple update page.
 
 12.12.2000	-	0.11.0
 

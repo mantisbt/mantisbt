@@ -92,6 +92,9 @@
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <form method=post action="<? echo $g_bug_update ?>">
 <input type=hidden name=f_id value="<? echo $v_id ?>">
+<input type=hidden name=f_projection value="<? echo $v_projection ?>">
+<input type=hidden name=f_eta value="<? echo $v_eta ?>">
+
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
