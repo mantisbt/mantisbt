@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.20 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.21 2002-12-30 08:44:37 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -47,6 +47,7 @@
 </form>
 </div>
 
+<br />
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.23 2002-12-30 08:12:11 jfitzell Exp $
+	# $Id: bug_resolve_page.php,v 1.24 2002-12-30 08:44:37 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -98,6 +98,7 @@
 </form>
 </div>
 
+<br />
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

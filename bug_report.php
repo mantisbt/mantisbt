@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.11 2002-12-30 05:38:39 jfitzell Exp $
+	# $Id: bug_report.php,v 1.12 2002-12-30 08:44:37 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -97,15 +97,15 @@
 
 
 	# Handle custom field submission
-	if( ON == config_get( 'use_experimental_custom_fields' ) ) {
-		$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
-		foreach( $t_related_custom_field_ids as $id ) {
-			$t_def = custom_field_get_definition($id);
-			if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "custom_field_$id", $t_def['default_value'] ) ) ) {
-				trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
-			}
+if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+	foreach( $t_related_custom_field_ids as $id ) {
+		$t_def = custom_field_get_definition($id);
+		if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "custom_field_$id", $t_def['default_value'] ) ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}
+}
 
 	print_page_top1();
 

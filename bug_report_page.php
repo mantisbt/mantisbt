@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.12 2002-12-30 05:47:05 jfitzell Exp $
+	# $Id: bug_report_page.php,v 1.13 2002-12-30 08:44:37 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -158,7 +158,8 @@
 
 
 <!-- Custom Fields -->
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
+<?php
 	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 
 	# insert a spacer as long as we actually have some custom fields
@@ -187,8 +188,8 @@
 <?php
 		} # if (!$t_def['advanced'])
 	} # foreach( $t_related_custom_field_ids as $id )
-} # if( ON == config_get( 'use_experimental_custom_fields' ) )
 ?>
+<?php } # if( ON == config_get( 'use_experimental_custom_fields' ) ) ?>
 
 
 <!-- spacer -->

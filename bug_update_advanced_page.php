@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.40 2002-12-30 08:12:11 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.41 2002-12-30 08:44:38 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -386,8 +386,8 @@
 <?php
 		} # !$t_def['advanced']
 	} # foreach( $t_related_custom_field_ids as $t_id )
-} # ON = config_get( 'use_experimental_custom_fields' )
 ?>
+<?php } # ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 
 <!-- spacer -->
