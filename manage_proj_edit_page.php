@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.79 2004-07-14 22:16:34 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.80 2004-09-21 07:39:39 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -531,6 +531,22 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 <?php
 	}  # end for
 ?>
+	<tr>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td class="center">
+	<?php
+		# You need global or project-specific permissions to remove users
+		#  from this project
+		if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+			if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
+				print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
+			}
+		}
+	?>
+	</td>
+	</tr>
 	</table>
 </div>
 

@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004394: [feature] Add link to remove all users from project (bpfennig)
 - 0002091: [bugtracker] Bugnotes containing urls with the '@' sign in them get mangled (bpfennig)
 - 0004326: [bugtracker] Links protected by brackets are not processed properly (bpfennig)
 - 0003276: [feature] Add bugnote numbering and bugnote links. (bpfennig)

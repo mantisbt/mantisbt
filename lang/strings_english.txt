@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.206 $
-	# $Author: thraxisp $
-	# $Date: 2004-09-09 23:14:25 $
+	# $Revision: 1.207 $
+	# $Author: jlatour $
+	# $Date: 2004-09-21 07:39:40 $
 	#
-	# $Id: strings_english.txt,v 1.206 2004-09-09 23:14:25 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.207 2004-09-21 07:39:40 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,7 @@ $s_add_user_title = 'Add user to project';
 $s_add_user_button = 'Add User';
 $s_project_selection_title = 'Project Selection';
 $s_remove_link = 'Remove';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Successfully updated user';
