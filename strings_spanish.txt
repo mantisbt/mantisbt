@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
-			 Ariel Arjona - beerfrick@users.sf.net
+	#          Ariel Arjona - beerfrick@users.sf.net
 ?>
 <?
 	# General Strings
@@ -614,4 +614,3 @@
 	$s_view_advanced_link = "Cambiar a Vista Avanzada";
 	$s_viewing_bug_simple_details_title = "Vista Simple.";
 ?>
-
