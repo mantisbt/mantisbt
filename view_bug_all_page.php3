@@ -17,11 +17,6 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### check whether the user wanted to hide the results
-#	if ( !isset( $f_show_status ) ) {
-#		$f_hide_resolved = $g_default_hide_resolved;
-#	}
-
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
 	}
