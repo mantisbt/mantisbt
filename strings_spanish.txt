@@ -283,7 +283,7 @@
 	# manage_create_user_page.php3
 	$s_create_new_account_title = "Crear nueva cuenta";
 	$s_verify_password = "Verificar Contraseña";
-	$s_enabled = "Activada";
+	$s_enabled = "Activado";
 	$s_protected = "Protegida";
 	$s_create_user_button = "Crear usuario";
 
