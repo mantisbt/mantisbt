@@ -155,6 +155,24 @@
 			email_new_bug( $t_bug_id );
 		}
 	}
+
+	# for proxies that clear out HTTP_REFERER
+	if ( ( !isset( $HTTP_REFERER ) ) OR ( empty( $HTTP_REFERER )) ) {
+		switch( $g_show_report ) {
+		case 0: if ( get_current_user_pref_field( "advanced_report" )==1 ) {
+					$t_redirect_url = $g_report_bug_advanced_page;
+ 				} else {
+					$t_redirect_url = $g_report_bug_page;
+				}
+				break;
+		case 1: $t_redirect_url = $g_report_bug_page;
+				break;
+		case 2: $t_redirect_url = $g_report_bug_advanced_page;
+				break;
+		}
+	} else {
+		$t_redirect_url = $HTTP_REFERER;
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -198,24 +216,22 @@
 		}
 ?>
 		<p>
-		<form method="post" action="<? echo $HTTP_REFERER ?>">
-		<input type="hidden" name="f_category" value="<? echo $f_category ?>">
-		<input type="hidden" name="f_severity" value="<? echo $f_severity ?>">
-		<input type="hidden" name="f_reproducibility" value="<? echo $f_reproducibility ?>">
-
-		<input type="hidden" name="f_profile_id" value="<? echo $f_profile_id ?>">
-		<input type="hidden" name="f_platform" value="<? echo $f_platform ?>">
-		<input type="hidden" name="f_os" value="<? echo $f_os ?>">
-		<input type="hidden" name="f_osbuild" value="<? echo $f_osbuild ?>">
-		<input type="hidden" name="f_product_version" value="<? echo $f_product_version ?>">
-		<input type="hidden" name="f_build" value="<? echo $f_build ?>">
-		<input type="hidden" name="f_assign_id" value="<? echo $f_assign_id ?>">
-
-		<input type="hidden" name="f_summary" value="<? echo $f_summary ?>">
-		<input type="hidden" name="f_description" value="<? echo $f_description ?>">
-		<input type="hidden" name="f_steps_to_reproduce" value="<? echo $f_steps_to_reproduce ?>">
-		<input type="hidden" name="f_additional_info" value="<? echo $f_additional_info ?>">
-		<input type="submit" value="<? echo $s_go_back ?>">
+		<form method="post" action="<? echo $t_redirect_url ?>">
+			<input type="hidden" name="f_category" 			value="<? echo $f_category ?>">
+			<input type="hidden" name="f_severity" 			value="<? echo $f_severity ?>">
+			<input type="hidden" name="f_reproducibility" 	value="<? echo $f_reproducibility ?>">
+			<input type="hidden" name="f_profile_id" 		value="<? echo $f_profile_id ?>">
+			<input type="hidden" name="f_platform" 			value="<? echo $f_platform ?>">
+			<input type="hidden" name="f_os" 				value="<? echo $f_os ?>">
+			<input type="hidden" name="f_osbuild" 			value="<? echo $f_osbuild ?>">
+			<input type="hidden" name="f_product_version" 	value="<? echo $f_product_version ?>">
+			<input type="hidden" name="f_build" 			value="<? echo $f_build ?>">
+			<input type="hidden" name="f_assign_id" 		value="<? echo $f_assign_id ?>">
+			<input type="hidden" name="f_summary" 			value="<? echo $f_summary ?>">
+			<input type="hidden" name="f_description" 		value="<? echo $f_description ?>">
+			<input type="hidden" name="f_steps_to_reproduce" value="<? echo $f_steps_to_reproduce ?>">
+			<input type="hidden" name="f_additional_info" 	value="<? echo $f_additional_info ?>">
+			<input type="submit" 							value="<? echo $s_go_back ?>">
 		</form>
 <?
 	} else if ( !$result ) {		### MYSQL ERROR
@@ -224,19 +240,21 @@
 		PRINT "$s_submission_thanks_msg<p>";
 
 		if ( isset( $f_report_stay )) {
-			PRINT "<form method=post action=\"$HTTP_REFERER\">";
-			PRINT "<input type=hidden name=\"f_category\" value=\"$f_category\">";
-			PRINT "<input type=hidden name=\"f_severity\" value=\"$f_severity\">";
-			PRINT "<input type=hidden name=\"f_reproducibility\" value=\"$f_reproducibility\">";
-			PRINT "<input type=hidden name=\"f_profile_id\" value=\"$f_profile_id\">";
-			PRINT "<input type=hidden name=\"f_platform\" value=\"$f_platform\">";
-			PRINT "<input type=hidden name=\"f_os\" value=\"$f_os\">";
-			PRINT "<input type=hidden name=\"f_osbuild\" value=\"$f_osbuild\">";
-			PRINT "<input type=hidden name=\"f_product_version\" value=\"$f_product_version\">";
-			PRINT "<input type=hidden name=\"f_build\" value=\"$f_build\">";
-			PRINT "<input type=hidden name=\"f_report_stay\" value=\"$f_report_stay\">";
-			PRINT "<input type=submit value=\"$s_report_more_bugs\">";
-			PRINT "</form>";
+?>
+			<form method="post" action="<? echo $t_redirect_url ?>">
+				<input type="hidden" name="f_category" 			value="<? echo $f_category ?>">
+				<input type="hidden" name="f_severity" 			value="<? echo $f_severity ?>">
+				<input type="hidden" name="f_reproducibility" 	value="<? echo $f_reproducibility ?>">
+				<input type="hidden" name="f_profile_id" 		value="<? echo $f_profile_id ?>">
+				<input type="hidden" name="f_platform" 			value="<? echo $f_platform ?>">
+				<input type="hidden" name="f_os" 				value="<? echo $f_os ?>">
+				<input type="hidden" name="f_osbuild" 			value="<? echo $f_osbuild ?>">
+				<input type="hidden" name="f_product_version" 	value="<? echo $f_product_version ?>">
+				<input type="hidden" name="f_build" 			value="<? echo $f_build ?>">
+				<input type="hidden" name="f_report_stay" 		value="<? echo $f_report_stay ?>">
+				<input type="submit" 							value="<? echo $s_report_more_bugs ?>">
+			</form>
+<?
 		} else {
 			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
 		}
