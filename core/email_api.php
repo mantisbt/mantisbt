@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.109 2005-03-04 13:34:56 vboctor Exp $
+	# $Id: email_api.php,v 1.110 2005-03-21 02:03:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -230,7 +230,7 @@
 		$t_threshold_users = project_get_all_user_rows( $t_project_id, $t_threshold_min );
 		foreach( $t_threshold_users as $t_user ) {
 			if ( $t_user['access_level'] <= $t_threshold_max ) {
-				if ( !$t_bug_is_private || $t_user['access_level'] >= config_get( 'private_bug_threshold' ) ) {
+				if ( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
 					$t_recipients[$t_user['id']] = true;
 				}
 			}
@@ -1019,7 +1019,7 @@
 			$t_bug_data['email_bug_view_url'] = string_get_bug_view_url_with_fqdn( $p_bug_id );
 		}
 
-		if ( $t_user_access_level >= config_get( 'view_handler_threshold' ) ) {
+		if ( access_compare_level( $t_user_access_level, config_get( 'view_handler_threshold' ) ) ) {
 			if ( 0 != $row['handler_id'] ) {
 				$t_bug_data['email_handler'] = user_get_name( $row['handler_id'] );
 			} else {
@@ -1056,7 +1056,7 @@
 		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level, $t_user_bugnote_order, $t_user_bugnote_limit );
 
 		# put history data
-		if ( ON == config_get( 'history_default_visible' )  &&  $t_user_access_level >= config_get( 'view_history_threshold' ) ) {
+		if ( ( ON == config_get( 'history_default_visible' ) ) &&  access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ) {
 			$t_bug_data['history']  = history_get_raw_events_array( $p_bug_id );
 		}
 

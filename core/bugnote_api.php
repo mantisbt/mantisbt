@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.33 2005-03-04 13:41:03 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.34 2005-03-21 02:03:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -252,11 +252,7 @@
 		$t_all_bugnotes	            	= bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit );
 		$t_private_bugnote_threshold	= config_get( 'private_bugnote_threshold' );
 
-		if ( $p_user_access_level >= $t_private_bugnote_threshold ) {
-			$t_private_bugnote_visible = true;
-		} else {
-			$t_private_bugnote_visible = false ;
-		}
+		$t_private_bugnote_visible = access_compare_level( $p_user_access_level, config_get( 'private_bugnote_threshold' ) );
 
 		$t_bugnotes = array();
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.49 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: custom_field_api.php,v 1.50 2005-03-21 02:03:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -202,11 +202,7 @@
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-		if ( user_get_access_level( $p_user_id, $t_project_id ) >= $t_access_level_r ) {
-			return true;
-		} else {
-			return false;
-		}
+        return access_has_project_level( $t_access_level_r, $t_project_id, $p_user_id );
 	}
 
 	# --------------------
@@ -221,11 +217,7 @@
 
 		$t_access_level_rw = custom_field_get_field( $p_field_id, 'access_level_rw' );
 
-		if ( user_get_access_level( $p_user_id, $p_project_id ) >= $t_access_level_rw ) {
-			return true;
-		} else {
-			return false;
-		}
+        return access_has_project_level( $t_access_level_rw, $p_project_id, $p_user_id );
 	}
 
 	# --------------------

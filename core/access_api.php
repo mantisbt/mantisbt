@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.38 2005-03-19 22:59:31 thraxisp Exp $
+	# $Id: access_api.php,v 1.39 2005-03-21 02:03:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -131,6 +131,20 @@
 	#===================================
 
 	# --------------------
+	# Check the a user's access against the given "threshold" and return true
+	#  if the user can access, false otherwise.
+    # $p_access_level may be a single value, or an array. If it is a single
+	# value, treat it as a threshold so return true if user is >= threshold.
+	# If it is an array, look for exact matches to one of the values
+	function access_compare_level( $p_user_access_level, $p_threshold=NOBODY ) {
+		if ( is_array( $p_threshold ) ) {
+		    return ( in_array( $p_user_access_level, $p_threshold ) );
+		} else {
+		    return ( $p_user_access_level >= $p_threshold );
+		}
+	}
+	
+	# --------------------
 	# Get the current user's access
 	#
 	# This function only checks the user's global access level, ignoring any
@@ -166,14 +180,7 @@
 
 		$t_access_level = access_get_global_level( $p_user_id );
 
-		# $p_access_level may be a single value, or an array. If it is a single
-		# value, treat it as a threshold so return true if user is >= threshold.
-		# If it is an array, look for exact matches to one of the values
-		if ( is_array( $p_access_level ) ) {
-		    return ( in_array( $t_access_level, $p_access_level ) );
-		} else {
-		    return ( $t_access_level >= $p_access_level );
-		}
+		return access_compare_level( $t_access_level, $p_access_level ) ;
 	}
 
 	# --------------------
@@ -251,14 +258,7 @@
 
 		$t_access_level = access_get_project_level( $p_project_id, $p_user_id );
 		
-		# $p_access_level may be a single value, or an array. If it is a single
-		# value, treat it as a threshold so return true if user is >= threshold.
-		# If it is an array, look for exact matches to one of the values
-		if ( is_array( $p_access_level ) ) {
-		    return ( in_array( $t_access_level, $p_access_level ) );
-		} else {
-		    return ( $t_access_level >= $p_access_level );
-		}
+		return access_compare_level( $t_access_level, $p_access_level ) ;
 	}
 
 	# --------------------

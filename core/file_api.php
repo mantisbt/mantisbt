@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.64 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: file_api.php,v 1.65 2005-03-21 02:03:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -664,15 +664,8 @@
 			return true;
 		}
 
-		# Get the user's access level
-		$t_access = user_get_access_level( $p_user_id, $t_project_id );
-
 		# Check the access level against the config setting
-		if ( $t_access >= config_get( 'upload_bug_file_threshold' ) ) {
-			return true;
-		} else {
-			return false;
-		}
+        return access_has_project_level( config_get( 'upload_bug_file_threshold' ), $t_project_id, $p_user_id );
 	}
 
 	# --------------------
