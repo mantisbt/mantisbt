@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.17 2003-02-15 14:13:54 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.18 2003-02-23 13:16:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -18,49 +18,11 @@
 	###########################################################################
 
 #*******************************************
-#	NOTE
-#
-#	This API is in progress and will likely not be completed for 0.18
-#
 #	TODO
 #	- add an object to store field data like BugData and UserPrefs ?
 #	- add caching functions like user, bug, etc
 #	- make existing api functions use caching functions
 #	- add functions to return individual db columns for a field definition
-#
-#	DB SCHEMA
-#	The following is the current proposed DB schema to go with this API
-/*
-CREATE TABLE mantis_custom_field_table (
-  id int(3) NOT NULL auto_increment,
-  name varchar(64) NOT NULL default '',
-  type int(2) NOT NULL default '0',
-  possible_values varchar(255) NOT NULL default '',
-  default_value varchar(255) NOT NULL default '',
-  valid_regexp varchar(255) NOT NULL default '',
-  access_level_r int(2) NOT NULL default '0',
-  access_level_rw int(2) NOT NULL default '0',
-  length_min int(3) NOT NULL default '0',
-  length_max int(3) NOT NULL default '0',
-  advanced int(1) NOT NULL default '0',
-  PRIMARY KEY (id),
-  KEY name (name)
-) TYPE=MyISAM COMMENT='Field definitions';
-
-CREATE TABLE mantis_custom_field_string_table (
-  field_id int(3) NOT NULL,
-  bug_id int(7) NOT NULL,
-  value varchar(255) NOT NULL default '',
-  PRIMARY KEY (field_id,bug_id)
-) TYPE=MyISAM COMMENT='Field values of type string';
-
-CREATE TABLE mantis_custom_field_project_table (
-  field_id int(3) NOT NULL,
-  project_id int(7) unsigned NOT NULL,
-  sequence int(2) NOT NULL default '0',
-  PRIMARY KEY (field_id,project_id)
-) TYPE=MyISAM COMMENT='Definitions of which fields are available in each project';
-*/
 #*******************************************
 
 	#===================================
