@@ -6,19 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# Slovak: Jan Urbancik (Yano) <yano@yano.sk>
-	# Code page: ISO-8259-2
+	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:22 $
+	# $Date: 2003-03-15 20:45:34 $
 	#
-	# $Id: strings_slovak.txt,v 1.3 2003-03-12 18:58:22 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.4 2003-03-15 20:45:34 jlatour Exp $
 	###########################################################################
 ?>
 <?php
 	# Charset
-	$s_charset = 'iso-8259-2';
+	$s_charset = 'iso-8859-2';
 
 	# Group commands menuitems
 	$s_actiongroup_menu_move = 'Move';

@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Languages: Updated Italian and Dutch localisations.
  * Languages: Added Slovak localisation.
  * Languages: Synchronised localisation files with English localisation.
+ * Languages: Changed code page of Czech translation.
  * Enhancement: Added bug summary by project on summary page (#1759).
  * Enhancement: Reduced number of SQL queries on summary page (#3046).
  * Enhancement: Field names in bug history are now localized.
