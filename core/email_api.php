@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.66 2004-02-22 04:26:47 vboctor Exp $
+	# $Id: email_api.php,v 1.67 2004-02-24 13:58:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -434,7 +434,7 @@
 		foreach( $t_related_custom_field_ids as $t_id ) {
 			$t_def = custom_field_get_definition( $t_id );
 
-			$t_message .= str_pad( $t_def['name'] . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT );
+			$t_message .= str_pad( lang_get_defaulted( $t_def['name'] ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT );
 
 			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
 			if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {

@@ -24,6 +24,7 @@ Mantis ChangeLog
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.
  * Fix #3579: in the german language file strings_german.txt $s_reset_request_msg has a little problem.
  * Fix #3594: Incorrect encoding for Turkish localization.
+ * Fix #3597: custom fields names are not translaten in email (thanks to yarik123).
  * Languages: Updated Norwegian localisation.
  * Mantis website moved to http://www.mantisbt.org
 
