@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.76 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: user_api.php,v 1.77 2004-08-14 16:46:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -661,7 +661,7 @@
 		$t_max_failed_login_count = config_get( 'max_failed_login_count' );
 		$t_failed_login_count = user_get_field( $p_user_id, 'failed_login_count' );
 		return ( $t_failed_login_count < $t_max_failed_login_count 
-							|| OFF == $max_failed_login_count);
+							|| OFF == $t_max_failed_login_count);
 	}
 
 	# --------------------
