@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.36 2004-05-27 22:09:22 int2str Exp $
+	# $Id: filter_api.php,v 1.37 2004-05-28 06:11:58 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -683,7 +683,7 @@
 												$t_any_found = true;
 											}
 										} else {
-											$t_this_name = user_get_field( $t_current, 'username' );
+											$t_this_name = user_get_name( $t_current );
 										}
 										if ( $t_first_flag != true ) {
 											$t_output = $t_output . '<br>';
@@ -719,7 +719,7 @@
 												$t_any_found = true;
 											}
 										} else {
-											$t_this_name = user_get_field( $t_current, 'username' );
+											$t_this_name = user_get_name( $t_current );
 										}
 										if ( $t_first_flag != true ) {
 											$t_output = $t_output . '<br>';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.56 2004-05-28 00:21:02 int2str Exp $
+	# $Id: project_api.php,v 1.57 2004-05-28 06:11:58 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -486,7 +486,7 @@
 			}
 		}
 
-		return multi_sort( array_values($t_users), 'username' );
+		return array_values($t_users);
 	}
 
 
