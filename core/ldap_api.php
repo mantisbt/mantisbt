@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.9 2003-01-23 06:05:21 robertjf Exp $
+	# $Id: ldap_api.php,v 1.10 2003-01-23 09:16:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -47,11 +47,13 @@
  	# --------------------
 	# Return an email address from LDAP, given a userid
 	function ldap_email( $p_user_id ) {
-		$t_username 	= user_get_field( $p_user_id, 'username' );
+		$t_username = user_get_field( $p_user_id, 'username' );
 		return ldap_email_from_username($t_username)
 		
 	}
 
+ 	# --------------------
+	# Return an email address from LDAP, given a username
 	function ldap_email_from_username( $p_username ) {
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
