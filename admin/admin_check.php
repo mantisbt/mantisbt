@@ -7,7 +7,7 @@
 
 	# mail test
 	if ( isset( $f_mail_test ) ) {
-		$result = mail( $f_to_email, "Testing PHP mail() function", $f_message, "From: $f_to_email\n" );
+		$result = mail( $g_administrator_email, "Testing PHP mail() function", $f_message, "From: $g_administrator_email\n" );
 	}
 
 	define( "CRYPT2", 10 );
@@ -73,7 +73,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		<span class="title">Version</span>
 		<p>
 		Mantis requires at least <b>PHP 4.0.3</b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  I recommend 4.0.6 or 4.1.2 at the moment.
-		<p />
+		<p />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		You are running <b>PHP <?php echo $version ?></b>
 	</td>
 </tr>
@@ -204,26 +204,27 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 
 
 <p>
+<a name="email">
 <?php # ---- Email testing ---- ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4f4f4">
 		<span class="title">Testing Email</span>
 		<p>
-		You can test the mail() function with this form.  Just fill in the adddress and submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
+		You can test the mail() function with this form.  Just fill in a message and submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
 		<p>
 		<?php if ( isset( $f_mail_test ) ) { ?>
 		<b><font color="#ff0000">Mail sent</font></b> -
 		<?php
 				if ( !$result ) {
-					PRINT " PROBLEMS SENDING MAIL TO: $f_to_email. Please check your php/mail server settings.<p>";
+					PRINT " PROBLEMS SENDING MAIL TO: $g_administrator_email. Please check your php/mail server settings.<p>";
 				} else {
 					PRINT " mail() send successful.<p>";
 				}
 			}
 		?>
-		<form method="post" action="<?php echo $PHP_SELF ?>">
-		Email Address: <input type="text" size="32" name="f_to_email" value="<?php if ( isset( $f_to_email ) ) echo $f_to_email ?>"><br>
+		<form method="post" action="<?php echo $PHP_SELF ?>#email">
+		Email Address: <?php echo $g_administrator_email; ?><br>
 		<textarea name="f_message" cols="60" rows="5">Test message text</textarea><br>
 		<input type="submit" value="Send Mail" name="f_mail_test">
 		</form>
