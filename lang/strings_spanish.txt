@@ -13,20 +13,20 @@
 	$s_move_bugs = "Mover Bugs";
 	$s_operation_successful = "Operacion Exitosa.";
 	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
+	$s_print_all_bug_page_link = "Imprimir Reportes";
 	$s_csv_export = "Exportar a CSV";
 	$s_login_anonymously = "Conectarse Anonimamente";
 	$s_jump_to_bugnotes = "Saltar a Notas";
 	$s_public_project_msg = "Este proyecto es PUBLICO.  Todos los usuarios tienen acceso a este proyecto.";
-	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
+	$s_private_project_msg = "Este proyecto es PRIVADO. Solo los administradores y usuarios agregados manualmente tienen acceso.";
 	$s_access_level_project = "Nivel de Acceso de Proyecto";
 	$s_view_submitted_bug_link = "Ver Bug Enviado";
 	$s_assigned_projects = "Proyectos Asignados";
 	$s_unassigned_projects = "Proyectos No Asignados";
-	$s_print = "Print";
-	$s_jump = "Jump";
-	$s_copy_users = "Copy Users";
-	$s_copy_categories = "Copy Categories";
+	$s_print = "Imprimir";
+	$s_jump = "Saltar a Bug";
+	$s_copy_users = "Copiar Usuarios";
+	$s_copy_categories = "Copiar Categorias";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
@@ -200,8 +200,8 @@
 	$s_delete_bug_button = "Eliminar Bug";
 
 	# bug_monitor.php3
-	$s_monitor_bug_button = "Monitor Bug";
-	$s_unmonitor_bug_button = "End Monitoring";
+	$s_monitor_bug_button = "Monitorear Bug";
+	$s_unmonitor_bug_button = "Detener Monitoreo";
 
 	# bug_file_add.php3
 	$s_file_upload_msg = "Archivo subido exitosamente";
