@@ -9,12 +9,13 @@
 	# German: Heiko Gierer, gierer@rittershaus.de
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
+	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-09 00:51:02 $
+	# $Revision: 1.54 $
+	# $Author: int2str $
+	# $Date: 2003-02-17 08:59:01 $
 	#
-	# $Id: strings_german.txt,v 1.53 2003-02-09 00:51:02 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.54 2003-02-17 08:59:01 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,13 +23,13 @@
 	$s_charset = 'iso-8859-15';
 
 	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
+	$s_actiongroup_menu_move = 'Verschieben';
+	$s_actiongroup_menu_assign = 'Zuordnen';
+	$s_actiongroup_menu_close = 'Schlie&szlig;en';
+	$s_actiongroup_menu_delete = 'L&ouml;schen';
+	$s_actiongroup_menu_resolve = 'Bereinigen';
+	$s_actiongroup_menu_update_priority = 'Priorit&auml;t &auml;ndern';
+	$s_actiongroup_menu_update_status = 'Status &auml;ndern';
 
 	# new strings:
 	$s_all_projects = 'Alle Projekte';
@@ -38,69 +39,69 @@
 	$s_print_all_bug_page_link = 'Berichte drucken';
 	$s_csv_export = 'CSV-Export';
 	$s_login_anonymously = 'Anonym einloggen';
-	$s_jump_to_bugnotes = 'Jump to Bugnotes';
-	$s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
-	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
-	$s_access_level_project = 'Project Access Level';
-	$s_view_submitted_bug_link = 'View Submitted Bug';
-	$s_assigned_projects = 'Assigned Projects';
-	$s_unassigned_projects = 'Unassigned Projects';
-	$s_print = 'Print';
-	$s_jump = 'Jump';
-	$s_copy_users = 'Copy Users';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
+	$s_jump_to_bugnotes = 'Zu Fehlernotizen springen';
+	$s_public_project_msg = 'Dieses Projekt ist &Ouml;FFENTLICH.  Alle Benutzer haben Zugang zu diesem Projekt.';
+	$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und manuell hinzugef&uuml;gte Benutzer haben Zugang.';
+	$s_access_level_project = 'Projekt Zugangs Stufe';
+	$s_view_submitted_bug_link = 'Zeige eingetragenen Fehler';
+	$s_assigned_projects = 'Zugewiesene Projekte';
+	$s_unassigned_projects = 'Nicht zugewiesene Projekte';
+	$s_print = 'Drucken';
+	$s_jump = 'Zu Fehler springen';
+	$s_copy_users = 'Benutzer kopieren';
+	$s_copy_categories_from = 'Kategorien kopieren von';
+	$s_copy_categories_to = 'Kategorien kopieren nach';
+	$s_bug_history = 'Fehler Historie';
+	$s_field = 'Feld';
+	$s_old_value = 'Alter Wert';
+	$s_new_value = 'Neuer Wert';
+	$s_date_modified = '&Auml;derungsdatum';
+	$s_bugnote = 'Fehlernotiz';
+	$s_change = '&Auml;derung';
+	$s_bugnote_view_state = 'Fehlernotiz Anzeigestatus';
+	$s_bug_monitor = 'Fehler beobachten';
+	$s_bug_end_monitor = 'Fehler Beobachtung beendet';
+	$s_announcement = 'Ank&uuml;ndigung';
+	$s_stays_on_top = 'Bleibt open';
+	$s_delete_bugnote_button = 'Fehlernotiz l&ouml;schen';
+	$s_delete_bugnote_sure_msg = 'M&ouml;chten Sie diese Fehlernotiz wirklich l&ouml;schen?';
+	$s_bug_relationships = 'Fehler-Beziehungen';
 
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
+	$s_duplicate_of = 'Duplikat von %id';
+	$s_has_duplicate = 'Hat Duplicat %id';
+	$s_related_to = 'Verwandt mit %id';
+	$s_dependant_on = 'Abh&auml;ngig von %id';
+	$s_blocks = 'Blockt %id';
 
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_new_bug = 'Neuer Fehler';
+	$s_bugnote_added = 'Fehlernotiz hinzugef&uuml;gt';
+	$s_bugnote_edited = 'Fehlernotiz editiert';
+	$s_bugnote_deleted = 'Fehlernotiz gel&ouml;scht';
+	$s_summary_updated = 'Zusammenfassung aktualisiert';
+	$s_description_updated = 'Beschreibung aktualisiert';
+	$s_additional_information_updated = 'Zus&auml;tzliche Informationen aktualisiert';
+	$s_steps_to_reproduce_updated = 'Schritte zur Reproduzierung aktualisiert';
+	$s_file_added = 'Datei hinzugef&uuml;gt: ';
+	$s_file_deleted = 'Datei gel&ouml;scht: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Privat machen';
+	$s_make_public = '&Ouml;ffentlich machen';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
+	$s_close_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich schliessen?';
+	$s_delete_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich l&ouml;schen?';
+	$s_move_bugs_conf_msg = 'Fehler verschieben zu Projekt:';
+	$s_assign_bugs_conf_msg = 'Fehler Zuordnen zu:';
+	$s_resolve_bugs_conf_msg = 'Bereiningungsgrund ausw&auml;hlen:';
+	$s_priority_bugs_conf_msg = 'Neue Fehler Priorit&auml;t:';
+	$s_status_bugs_conf_msg = 'Neuer Fehler Status:';
+	$s_close_group_bugs_button = 'Fehler schliessen' ;
+	$s_delete_group_bugs_button = 'Fehler l&ouml;schen' ;
+	$s_move_group_bugs_button = 'Fehler verschieben' ;
+	$s_assign_group_bugs_button = 'Fehler zuordnen' ;
+	$s_resolve_group_bugs_button = 'Fehler bereinigen' ;
+	$s_priority_group_bugs_button = 'Priorit &auml;ndern' ;
+	$s_status_group_bugs_button = 'Status &auml;ndern' ;
 
 	# improved JPgraphs strings
 	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
@@ -124,34 +125,50 @@
 	$s_resolution_link = 'Per resolution';
 
 	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
+	$s_hide_button = 'Nur ausgew&auml;hlte anzeigen';
 
 	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
+	$s_printing_preferences_title = 'Felder zum Drucken ausw&auml;hlen';
+	$s_printing_options_link = 'Druckoptionen';
 
 	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
+	$s_bugnote_title = 'Fehlnernotiz Benutzer' ;
+	$s_bugnote_date = 'Datum der Fehlernotiz';
+	$s_bugnote_description = 'Fehlernotiz Beschreibung';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
-	$MANTIS_ERROR[ERROR_SQL] = 'FEHLER: SQL-Fehler gefunden. Bitte melden Sie diesen Fehler an ';
-	$MANTIS_ERROR[ERROR_REPORT] = 'FEHLER: Ihr Fehlerbericht enthielt ungültige Daten.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEHLER: Keine Datei angegeben.';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEHLER: Das Verzeichnis existiert nicht. überprüfen Sie die Einstellungen des Projekts.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEHLER: Kategorie bereits vorhanden.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEHLER: Version bereits vorhanden.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEHLER: Datei bereits vorhanden. Löschen Sie zuerst die alte Datei';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEHLER: Ein benötigtes Feld wurde nicht ausgefüllt. Bitte übrprüfen Sie Ihre Eingaben.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = 
+          'FEHLER: Ein Fehler ist w&auml;hrend dieses Vorganges aufgetreten. Bitte benachrichtigen Sie den lokalen Administrator von diesem Fehler.';
+	$MANTIS_ERROR[ERROR_SQL] = 
+          'FEHLER: SQL-Fehler gefunden. Bitte melden Sie diesen Fehler an ';
+	$MANTIS_ERROR[ERROR_REPORT] = 
+          'FEHLER: Ihr Fehlerbericht enthielt ungültige Daten.';
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 
+          'FEHLER: Keine Datei angegeben.';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 
+          'FEHLER: Diser Dateityp ist nich erlaubt.';
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 
+          'FEHLER: Das Verzeichnis existiert nicht. überprüfen Sie die Einstellungen des Projekts.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 
+          'FEHLER: Kategorie bereits vorhanden.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 
+          'FEHLER: Version bereits vorhanden.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 
+          'FEHLER: Datei bereits vorhanden. Löschen Sie zuerst die alte Datei';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 
+          'FEHLER: Ein Projekt mit diesem Namen existiert bereits.';
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 
+          'FEHLER: Ein benötigtes Feld wurde nicht ausgefüllt. Bitte übrprüfen Sie Ihre Eingaben.';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 
+          'FEHLER: Dieser Benutzername ist gesch&uuml;tzt.  Sie k&ouml;nnen sich nicht mehr anmelden bis der Schutz aufgehoben wurde.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 
+          'FEHLER: Zugriff verweigert.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 
+          'FEHLER: Datei&uuml;bertragung unerfolgreich. Ihr Administrator sollte das admin_check Programm zum Beheben dieses Problems benutzen.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 
+          'FEHLER: Datei&uuml;bertragung unerfolgreich.  Die Datei ist gr&ouml;sser als erlaubt.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 
+          'FEHLER: Ein f&uuml;r diese Seite notwendiger Parameter wurde nicht gefunden.';
 	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
 	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
@@ -192,12 +209,12 @@
 
 	# General Strings
 	$s_go_back = 'Zurück';
-	$s_proceed = 'Weiter: hier klicken';
+	$s_proceed = 'Weiter: Hier klicken';
 
 	$s_switch = 'Wechseln';
-	$s_logged_in_as = 'angemeldet als';
+	$s_logged_in_as = 'Angemeldet als';
 
-	$s_prefix_for_deleted_users = 'user';
+	$s_prefix_for_deleted_users = 'Benutzer';
 
 	$s_administrator = 'Administrator';
 
@@ -342,7 +359,7 @@
 	$s_close_immediately   = 'Sofort schließen:';
 
 	# bug_close_page.php
-	$s_close_bug_title = 'Close Bug';
+	$s_close_bug_title = 'Fehler schliessen';
 
 	# bug_delete.php
 	$s_bug_deleted_msg = 'Fehlermeldung wurde gelöscht...';
@@ -352,7 +369,7 @@
 	$s_delete_bug_button = 'Fehlermeldung löschen';
 
 	# bug_monitor.php
-	$s_monitor_bug_button = 'Monitor Bug';
+	$s_monitor_bug_button = 'Fehler beobachten';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
 	# bug_file_add.php
@@ -379,13 +396,13 @@
 	$s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 
 	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
+	$s_from = 'Von:';
+	$s_to = 'An:';
+	$s_on = 'Am';
+	$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung gesendet, bez&uuml;glich diesen Fehlers:';
+	$s_bug_reminder = 'Erinnerung senden';
+	$s_reminder_sent_to = 'Erinnerung gesendet an';
+	$s_bug_send_button = 'Absenden';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Fehlereintrag erfolgreich aktualisiert...';
@@ -397,7 +414,7 @@
 	$s_id = 'ID';
 	$s_category = 'Kategorie';
 	$s_severity = 'Auswirkung';
-	$s_reproducibility = 'reproduzierbar';
+	$s_reproducibility = 'Reproduzierbar';
 	$s_date_submitted = 'Meldungsdatum';
 	$s_last_update = 'Letzte Aktualisierung';
 	$s_reporter = 'Reporter';
@@ -443,10 +460,10 @@
 	$s_add_bugnote_title = 'Fehlernotiz hinzufügen';
 	$s_add_bugnote_button = 'Fehlernotiz hinzufügen';
 	$s_bugnote_edit_link = 'Bearbeiten';
-	$s_close_bug_button = 'Bug schließen';
+	$s_close_bug_button = 'Fehler schließen';
 
 	# bugnote_update.php
-	$s_bugnote_updated_msg = 'Bug Notiz wurde erfolgreich geändert...';
+	$s_bugnote_updated_msg = 'Fehlernotiz wurde erfolgreich geändert...';
 	$s_edited_on = 'bearbeitet am: ';
 
 	# index.php
@@ -474,7 +491,7 @@
 	$s_open_and_assigned_to_me = 'Offen und mir zugewiesen';
 	$s_open_and_reported_to_me = 'Offen und von mir berichtet';
 	$s_newer_news_link = 'Neuere Nachrichten';
-	$s_older_news_link = 'ältere Nachrichten';
+	$s_older_news_link = '&Auml;ltere Nachrichten';
 	$s_archives = 'Archive';
 
 	# manage_create_new_user.php
@@ -484,7 +501,7 @@
 	# manage_create_user_page.php
 	$s_create_new_account_title = 'Neues Konto erstellen';
 	$s_verify_password = 'Passwort verifizieren';
-	$s_enabled = 'aktiviert';
+	$s_enabled = 'Aktiv';
 	$s_protected = 'geschützt';
 	$s_create_user_button = 'Benutzer anlegen';
 
@@ -493,7 +510,7 @@
 	$s_filter_button = 'Filter';
 	$s_manage_users_link = 'Benutzer verwalten';
 	$s_manage_projects_link = 'Projekte verwalten';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
+	$s_manage_custom_field_link = 'Benutzerdefinierte Felder';
 	$s_create_new_account_link = 'Neues Konto erstellen';
 	$s_projects_link = 'Projekte';
 	$s_documentation_link = 'Dokumentation';
@@ -780,7 +797,7 @@
 	$s_changed = 'geändert (Std.)';
 	$s_hide_closed = 'bereinigte ausblenden';
 	$s_viewing_bugs_title = 'Fehler anzeigen';
-	$s_updated = 'aktualisiert';
+	$s_updated = 'Aktualisiert';
 
 	# view_all_inc.php
 	$s_none = 'keine';
@@ -790,7 +807,7 @@
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'einfache Anzeige';
-	$s_viewing_bug_advanced_details_title = 'erweiterte Fehler-Anzeige';
+	$s_viewing_bug_advanced_details_title = 'Erweiterte Fehler-Anzeige';
 	$s_product_build = 'Produkt-Version';
 	$s_system_profile = 'System-Beschreibung';
 	$s_update_bug_button = 'Fehlereintrag aktualisieren';
@@ -816,10 +833,10 @@
 	$s_custom_fields = 'Felder';
 	$s_custom_fields_setup = 'Benutzerdefinierte Felder';
 	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
+	$s_custom_field_project_count = 'In Projekten';
 	$s_custom_field_type = 'Typ';
-	$s_custom_field_possible_values = 'm&ouml;gliche Werte';
-	$s_custom_field_default_value = 'Default Wert';
+	$s_custom_field_possible_values = 'M&ouml;gliche Werte';
+	$s_custom_field_default_value = 'Standard Wert';
 	$s_custom_field_valid_regexp = 'Regul&auml;rer Ausdruck';
 	$s_custom_field_access_level_r = 'Berechtigung Lesen';
 	$s_custom_field_access_level_rw = 'Berechtigung Schreiben';
@@ -829,7 +846,7 @@
 	$s_custom_field_sequence = 'Reihenfolge';
 	$s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufz&auml;hlung,4:EMail';
 
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
+	$s_confirm_used_custom_field_deletion = 'Dieses Feld wird derzeit von mindestens einem Projekt verwendet. Wenn Sie fortfahren werden alle Werte f&uuml;r dieses Feld permanent gel&ouml;scht. Dieser Vorgang kann nicht r&uuml;ckg&auml;ngig gemacht werden. Um das Feld nicht zu l&ouml;schen, klicken Sie bitten den &quot;Zur&uuml;ck&quot; Knopf in Ihrem Web-Browser. Um fortzufahren, klicken Sie bitten den &quot;Feld l&ouml;schen&quot; Knopf.';
+	$s_confirm_custom_field_deletion = 'M&ouml;chten Sie dieses Benutzerdefinierte Feld und alle zugeh&ouml;rigen Werte wirklich l&ouml;schen?';
+	$s_field_delete_button = 'Feld l&ouml;schen';
 ?>
