@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.58 2003-04-24 02:24:13 vboctor Exp $
+	# $Id: email_api.php,v 1.59 2003-05-01 18:09:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -606,7 +606,7 @@
 			}
 			$mail->IsHTML(false);              # set email format to plain text
 			$mail->WordWrap = 80;              # set word wrap to 50 characters
-			$mail->Priority = 0;               # Urgent = 1, Not Urgent = 5, Disable = 0
+			$mail->Priority = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
 			$mail->CharSet = lang_get( 'charset' );
 			$mail->Host     = $g_smtp_host;
 			$mail->From     = $g_from_email;
