@@ -12,6 +12,7 @@
 	extract( $HTTP_POST_VARS );
 	extract( $HTTP_GET_VARS );
 	extract( $HTTP_SERVER_VARS );
+	extract( $HTTP_POST_FILES );
 	/*foreach ( $HTTP_POST_VARS as $key => $value) {
 		$$key = $value;
 	}
