@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.31 2004-05-26 00:59:27 int2str Exp $
+	# $Id: login.php,v 1.32 2004-05-26 01:06:35 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,6 +35,8 @@
 				$f_password = $_SERVER['PHP_AUTH_PW'];
 		} else {
 			auth_http_set_logout_pending( false );
+			auth_http_prompt();
+			break;
 		}
 	}
 
