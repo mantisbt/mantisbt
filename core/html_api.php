@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.127 2004-08-27 17:19:15 thraxisp Exp $
+	# $Id: html_api.php,v 1.128 2004-08-28 12:35:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -935,43 +935,28 @@
 	function html_buttons_view_bug_page( $p_bug_id ) {
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_status = bug_get_field( $p_bug_id, 'status' );
+		$t_readonly = bug_is_readonly( $p_bug_id );
 
 		PRINT '<table><tr class="vcenter">';
-		if ( !bug_is_readonly( $p_bug_id ) ) {
-			PRINT '<td class="center">';
+		if ( !$t_readonly ) {
 			# UPDATE button
+			echo '<td class="center">';
 			html_button_bug_update( $p_bug_id );
-
-			PRINT '</td><td class="center">';
+			echo '</td>';
 
 			# ASSIGN button
+			echo '<td class="center">';
 			html_button_bug_assign_to( $p_bug_id );
+			echo '</td>';
 
-			PRINT '</td><td class="center">';
-
-			# MOVE button
-			html_button_bug_move( $p_bug_id );
-
-			# CREATE CHILD button
-			PRINT '</td><td class="center">';
-			html_button_bug_create_child( $p_bug_id );
-
-			PRINT '</td>';
-		} 
-		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
-			PRINT '<td class="center">';
-			# REOPEN button
-			html_button_bug_reopen( $p_bug_id );
-			PRINT '</td>';
+			# Change State button
+			echo '<td class="center">';
+			html_button_bug_change_status( $p_bug_id );
+			echo '</td>';
 		}
 		
-		PRINT '<td class="center">';
-		# Change State button
-		html_button_bug_change_status( $p_bug_id );
-		PRINT '</td>';
-
 		# MONITOR/UNMONITOR button
-		PRINT '<td class="center">';
+		echo '<td class="center">';
 		if ( !current_user_is_anonymous() ) {
 			if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 				html_button_bug_unmonitor( $p_bug_id );
@@ -979,11 +964,34 @@
 				html_button_bug_monitor( $p_bug_id );
 			}
 		}
-		PRINT '</td>';
+		echo '</td>';
+
+		if ( !$t_readonly ) {
+			# CREATE CHILD button
+			echo '<td class="center">';
+			html_button_bug_create_child( $p_bug_id );
+			echo '</td>';
+		} 
+
+		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
+			PRINT '<td class="center">';
+			# REOPEN button
+			html_button_bug_reopen( $p_bug_id );
+			PRINT '</td>';
+		}
+
+		if ( !$t_readonly ) {
+			# MOVE button
+			echo '<td class="center">';
+			html_button_bug_move( $p_bug_id );
+			echo '</td>';
+		}
 
 		# DELETE button
-		PRINT '<td class="center">';
+		echo '<td class="center">';
 		html_button_bug_delete( $p_bug_id );
-		PRINT '</td></tr></table>';
+		echo '</td>';
+
+		echo '</tr></table>';
 	}
 ?>
