@@ -110,5 +110,6 @@
 	require( 'core_relationship_API.php' );
 	require( 'core_file_API.php' );
 	require( 'core_custom_attribute_API.php' );
+	require( 'core_bugnote_API.php' );
 	# --------------------
 ?>

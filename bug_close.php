@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 09:26:15 $
+	# $Date: 2002-08-16 10:16:25 $
 	#
-	# $Id: bug_close.php,v 1.18 2002-08-16 09:26:15 jfitzell Exp $
+	# $Id: bug_close.php,v 1.19 2002-08-16 10:16:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,7 +49,7 @@
 	if ( !empty( $f_bugnote_text ) ) {
 		# insert bugnote text
 #@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
-		$result = add_bugnote( $f_id, $f_bugnote_text );
+		$result = bugnote_add( $f_id, $f_bugnote_text );
 
 		email_close( $f_id );
 	}

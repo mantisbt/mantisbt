@@ -86,7 +86,8 @@ Mantis ChangeLog
  * Reworked code formatting for $c_ variables.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
- * Add the ability to enter a bugnote when you update a bug
+ * Added the ability to enter a bugnote when you update a bug
+ * Added core_bugnote_API.php
 
 2002.05.19  -  0.17.3
 

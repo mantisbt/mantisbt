@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 09:26:15 $
+	# $Date: 2002-08-16 10:16:25 $
 	#
-	# $Id: core_helper_API.php,v 1.57 2002-08-16 09:26:15 jfitzell Exp $
+	# $Id: core_helper_API.php,v 1.58 2002-08-16 10:16:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -29,18 +29,6 @@
 		$query ="UPDATE $g_mantis_bug_table ".
 				"SET last_updated=NOW() ".
 				"WHERE id='$c_bug_id'";
-		return db_query( $query );
-	}
-	# --------------------
-	# updates the last_modified field
-	function bugnote_date_update( $p_bugnote_id ) {
-		global $g_mantis_bugnote_table;
-
-		$c_bugnote_id = (integer)$p_bugnote_id;
-
-		$query ="UPDATE $g_mantis_bugnote_table ".
-				"SET last_modified=NOW() ".
-				"WHERE id='$c_bugnote_id'";
 		return db_query( $query );
 	}
 	# --------------------
@@ -229,73 +217,6 @@
 		FROM $g_mantis_bug_history_table
 		WHERE bug_id='$c_id'";
 	$result = db_query($query);
-	}
-	# --------------------
-	# check to see if bugnote exists
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function check_bugnote_exists( $p_bugnote_id ) {
-		global $g_mantis_bugnote_table;
-
-		$c_bugnote_id = (integer)$p_bugnote_id;
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bugnote_table ".
-				"WHERE id='$c_bugnote_id'";
-		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( 'main_page.php' );
-		}
-	}
-	# --------------------
-	# add a bugnote to a bug
-	function add_bugnote ( $p_bug_id, $p_bugnote_text, $p_private=false )
-	{
-		global $g_mantis_bugnote_text_table, $g_mantis_bugnote_table;
-
-		$c_bug_id = (integer)$p_bug_id;
-		$c_bugnote_text = addslashes( $p_bugnote_text );
-		$c_private = (bool)$p_private;
-
-		# insert bugnote text
-		$query = "INSERT
-				INTO $g_mantis_bugnote_text_table
-				( id, note )
-				VALUES
-				( null, '$c_bugnote_text' )";
-		$result = db_query( $query );
-
-		# retrieve bugnote text id number
-		$t_bugnote_text_id = db_insert_id();
-
-		# Check for private bugnotes.
-		if ( $c_private && access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-			$t_view_state = PRIVATE;
-		} else {
-			$t_view_state = PUBLIC;
-		}
-
-		# get user information
-		$u_id = get_current_user_field( 'id' );
-
-		# insert bugnote info
-		$query = "INSERT
-				INTO $g_mantis_bugnote_table
-				( id, bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
-				VALUES
-				( null, '$c_bug_id', '$u_id','$t_bugnote_text_id', '$t_view_state', NOW(), NOW() )";
-		$result = db_query( $query );
-
-		# get bugnote id
-		$t_bugnote_id = str_pd( db_insert_id(), '0', 7, STR_PAD_LEFT );
-
-		# log new bug
-		history_log_event_special( $f_bug_id, BUGNOTE_ADDED , $t_bugnote_id );
-
-		# update bug last updated
-	   	$result = bug_date_update( $f_bug_id );
-
-		return $result;
 	}
 	# --------------------
 	# check to see if user exists
@@ -586,39 +507,6 @@
 			}
 		}
 		return '@null@';
-	}
-	# --------------------
-	# Returns the number of bugntoes for the given bug_id
-	function get_bugnote_count( $p_id ) {
-		global $g_mantis_bugnote_table, $g_private_bugnote_threshold;
-
-		$c_id = (integer)$p_id;
-
-		if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-			$t_restriction = 'AND view_state=' . PUBLIC;
-		} else {
-			$t_restriction = '';
-		}
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bugnote_table ".
-				"WHERE bug_id ='$c_id' $t_restriction";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	# --------------------
-	# Returns the number of bugntoes for the given bug_id
-	function get_bugnote_field( $p_bugnote_id, $p_field_name ) {
-		global $g_mantis_bugnote_table;
-
-		$c_bugnote_id = (integer)$p_bugnote_id;
-
-		$query ="SELECT $p_field_name ".
-				"FROM $g_mantis_bugnote_table ".
-				"WHERE id ='$c_bugnote_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
 	}
 	# --------------------
 	# Returns the specified field of the specified project

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.26 $
+	# $Revision: 1.27 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 09:26:15 $
+	# $Date: 2002-08-16 10:16:25 $
 	#
-	# $Id: bug_update.php,v 1.26 2002-08-16 09:26:15 jfitzell Exp $
+	# $Id: bug_update.php,v 1.27 2002-08-16 10:16:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -158,7 +158,7 @@
 	$f_bugnote_text = trim( $f_bugnote_text );
 	if ( !empty( $f_bugnote_text ) ) {
 #@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
-		$result = add_bugnote( $f_id, $f_bugnote_text, (bool)$f_private );
+		$result = bugnote_add( $f_id, $f_bugnote_text, (bool)$f_private );
 	}
 
 	# updated the last_updated date
