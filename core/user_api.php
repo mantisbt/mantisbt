@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.90 2005-03-22 19:08:56 thraxisp Exp $
+	# $Id: user_api.php,v 1.91 2005-03-23 23:25:03 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -627,24 +627,18 @@
 			return $g_user_accessible_projects_cache;
 		}
 
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		$t_project_table			= config_get( 'mantis_project_table' );
-		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
-		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
-
-		$t_public	= VS_PUBLIC;
-		$t_private	= VS_PRIVATE;
-
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$query = "SELECT DISTINCT( p.id ), p.name
-					  FROM $t_project_table p
-					  LEFT JOIN $t_project_hierarchy_table ph
-					    ON ph.child_id = p.id
-					  WHERE p.enabled = 1
-					    AND ph.child_id IS NULL
-					  ORDER BY p.name";
+			$t_projects = project_hierarchy_get_all_subprojects( ALL_PROJECTS );
 		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+	
+			$t_project_table			= config_get( 'mantis_project_table' );
+			$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
+			$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
+	
+			$t_public	= VS_PUBLIC;
+			$t_private	= VS_PRIVATE;
+		
 			$query = "SELECT DISTINCT( p.id ), p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
@@ -659,17 +653,17 @@
 						)
 					    AND ph.child_id IS NULL
 					  ORDER BY p.name";
-		}
 
-		$result = db_query( $query );
-		$row_count = db_num_rows( $result );
-
-		$t_projects = array();
-
-		for ( $i=0 ; $i < $row_count ; $i++ ) {
-			$row = db_fetch_array( $result );
-
-			array_push( $t_projects, $row['id'] );
+			$result = db_query( $query );
+			$row_count = db_num_rows( $result );
+	
+			$t_projects = array();
+	
+			for ( $i=0 ; $i < $row_count ; $i++ ) {
+				$row = db_fetch_array( $result );
+	
+				array_push( $t_projects, $row['id'] );
+			}
 		}
 
 		if ( auth_get_current_user_id() == $p_user_id ) {
