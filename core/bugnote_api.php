@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.27 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: bugnote_api.php,v 1.28 2004-08-08 20:30:19 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -226,8 +226,8 @@
 	#
 	# Return BugnoteData class object with raw values from the tables except the field
 	# last_modified - it is UNIX_TIMESTAMP.
-	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_access_level ) {
-		$t_all_bugnotes	            	= bugnote_get_all_bugnotes( $p_bug_id );
+	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_access_level, $p_user_bugnote_order, $p_user_bugnote_limit ) {
+		$t_all_bugnotes	            	= bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit );
 		$t_private_bugnote_threshold	= config_get( 'private_bugnote_threshold' );
 
 		if ( $p_user_access_level >= $t_private_bugnote_threshold ) {
@@ -252,7 +252,7 @@
 	# Return BugnoteData class object with raw values from the tables except the field
 	# last_modified - it is UNIX_TIMESTAMP.
 	# The data is not filtered by VIEW_STATE !!
-	function bugnote_get_all_bugnotes( $p_bug_id ) {
+	function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit ) {
 		global $g_cache_bugnotes;
 
 		if ( !isset( $g_cache_bugnotes ) )  {
@@ -263,32 +263,30 @@
 			$c_bug_id            	= db_prepare_int( $p_bug_id );
 			$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
 			$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
-			$t_bugnote_order     	= current_user_get_pref( 'bugnote_order' );
-			$t_email_bugnote_limit	= current_user_get_pref( 'email_bugnote_limit' );
 			
-			if ( 0 == $t_email_bugnote_limit ) {
+			if ( 0 == $p_user_bugnote_limit ) {
 				## Show all bugnotes
 				$t_bugnote_limit = -1;
 				$t_bugnote_offset = -1;
 			} else {
 				## Use offset only if order is ASC to get the last bugnotes
-				if ( 'ASC' == $t_bugnote_order ) {
+				if ( 'ASC' == $p_user_bugnote_order ) {
 					$result = db_query( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id = '$c_bug_id'" );
 					$row    = db_fetch_array( $result );
 					
-					$t_bugnote_offset = $row['row_count'] - $t_email_bugnote_limit;				
+					$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;				
 				} else {
 					$t_bugnote_offset = -1;
 				}
 					
-				$t_bugnote_limit = $t_email_bugnote_limit;
+				$t_bugnote_limit = $p_user_bugnote_limit;
 			}
 
 			$query = "SELECT b.*, t.note
 			          	FROM      $t_bugnote_table AS b
 			          	LEFT JOIN $t_bugnote_text_table AS t ON b.bugnote_text_id = t.id
 			          	WHERE b.bug_id = '$c_bug_id'
-			          	ORDER BY b.date_submitted $t_bugnote_order";
+			          	ORDER BY b.date_submitted $p_user_bugnote_order";
 			$t_bugnotes = array();
 
 			# BUILD bugnotes array

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.90 2004-07-29 10:51:30 thraxisp Exp $
+	# $Id: email_api.php,v 1.91 2004-08-08 20:30:19 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -911,6 +911,8 @@
 	function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_user_access_level = user_get_access_level( $p_user_id, $t_project_id );
+		$t_user_bugnote_order = user_pref_get_pref ( $p_user_id, 'bugnote_order' );
+		$t_user_bugnote_limit = user_pref_get_pref ( $p_user_id, 'email_bugnote_limit' );
 
 		$row = bug_get_extended_row( $p_bug_id );
 		$t_bug_data = array();
@@ -955,7 +957,7 @@
 		$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $row['category'];
 
 		$t_bug_data['custom_fields'] = custom_field_get_linked_fields( $p_bug_id, $t_user_access_level );
-		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level );
+		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level, $t_user_bugnote_order, $t_user_bugnote_limit );
 
 		# put history data
 		if ( ON == config_get( 'history_default_visible' )  &&  $t_user_access_level >= config_get( 'view_history_threshold' ) ) {
