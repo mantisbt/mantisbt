@@ -1,41 +1,31 @@
-<?php
+<?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# 한글 번역   aporie@kornet.net
-	# 번역 수정   yjseo@mizi.com
 ?>
-<?php
+<?
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
-	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
+	$s_all_projects = "모든 프로젝트";
+	$s_move_bugs = "버그 이동";
+	$s_operation_successful = "실행 완료.";
+	$s_date_order = "일자 정렬";
+	$s_print_all_bug_page_link = "리포트 출력";
+	$s_csv_export = "CSV 엑스포트";
+	$s_login_anonymously = "익명 로그인";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_SQL] = "오류: SQL 오류 발생. 버그 리포트해주시기 바랍니다.";
+	$MANTIS_ERROR[ERROR_LOGIN] = "오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.";
+	$MANTIS_ERROR[ERROR_REPORT] = "오류: 입력내용에 오류가 발생했습니다.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "오류: 파일이 없습니다.";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "오류: 카테고리 중복.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "오류: 버전 중복.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "오류: 파일 중복. 먼저 파일을 삭제하세요.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "오류: 필수 입력 필드 누락, 입력사항을 확인하세요.";
 
 	# General Strings
 	$s_go_back = "뒤로";
@@ -67,12 +57,12 @@
 	$s_new_account_url = "이 사이트에 로그인 할수 있습니다: ";
 	$s_new_account_username = "사용자 ID: ";
 	$s_new_account_password = "패스 워드: ";
-	$s_new_account_message = "로그인 하신후 패스워드를 변경하십시요. 패스워드는 단방향암호화됩니다. 시스템 관리자도 패스워드를 알수 없습니다. 패스워드를 분실하게 되면,다시 설정되어야 합니다.\n\n";
+	$s_new_account_message = "로그인 하신후 암호를 변경하십시요. 암호는 단방향암호화됩니다. 시스템 관리자도 암호를 알수 없습니다. 암호를 분실하게 되면,다시 설정되어야 합니다.\n\n";
 	$s_new_account_do_not_reply = "이 메세지에 대한 응답을 하지 마십시요.\n";
 
-	$s_reset_request_msg = "패스워드 초기화에 대한 요청이 있습니다.";
+	$s_reset_request_msg = "암호 초기화에 대한 요청이 있습니다.";
 	$s_account_name_msg = "당신의 계정은 ";
-	$s_news_password_msg = "당신의 새로운 패스워드입니다. ";
+	$s_news_password_msg = "당신의 새로운 암호입니다. ";
 
 	$s_new_bug_msg = "다음의 새로운 버그가 추가되었습니다.";
 	$s_email_bugnote_msg = "이버그에 대하여 <b>버그노트</b>가 추가되었습니다.";
@@ -112,8 +102,8 @@
 	$s_edit_account_title = "계정 편집";
 	$s_username = "사용자 ID";
 	$s_email = "이메일";
-	$s_password = "패스워드";
-	$s_confirm_password  = "패스워드 확인";
+	$s_password = "암호";
+	$s_confirm_password  = "암호 확인";
 	$s_access_level = "접근 레벨";
 	$s_update_user_button = "사용자 갱신";
 
@@ -182,10 +172,7 @@
 
 	# bug_close.php3
 	$s_bug_close_msg       = "버그가 해결(close)되었습니다...";
-	$s_close_immediately   = "Close immediately:";
-
-	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_immediately   = "지금 폐쇄:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "버그정보가 삭제되었습니다...";
@@ -271,12 +258,12 @@
 	$s_delete_link = "삭제";
 	$s_add_bugnote_title = "버그노트 추가";
 	$s_add_bugnote_button = "버그노트 추가";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_bugnote_edit_link = "수정";
+	$s_close_bug_button = "버그 폐쇄";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "버그노트가 수정되었습니다....";
+	$s_edited_on = "수정일자: ";
 
 	# index.php3
 	$s_click_to_login = "로그인";
@@ -304,7 +291,7 @@
 	$s_open_and_reported_to_me = "내가 보고한 버그";
 	$s_newer_news_link = "새로운 뉴스";
 	$s_older_news_link = "이전 뉴스";
-	$s_archives = "Archives";
+	$s_archives = "아카이브";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "사용자가 ";
@@ -312,7 +299,7 @@
 
 	# manage_create_user_page.php3
 	$s_create_new_account_title = "새로운 계정 생성";
-	$s_verify_password = "패스워드 검증";
+	$s_verify_password = "암호 검증";
 	$s_enabled = "사용가능";
 	$s_protected = "계정 보호";
 	$s_create_user_button = "사용자 생성";
@@ -320,8 +307,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Disabled 숨기기";
 	$s_filter_button = "필터";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_manage_users_link = "사용자 관리";
+	$s_manage_projects_link = "프로젝트 관리";
 	$s_create_new_account_link = "계정 생성";
 	$s_projects_link = "프로젝트";
 	$s_documentation_link = "문서";
@@ -380,6 +367,7 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "프로젝트 추가";
+	$s_access_threshold = "접근 Threshold";
 	$s_upload_file_path = "업르드 파일 경로";
 	$s_add_project_button = "프로젝트 추가";
 	$s_projects_title = "프로젝트";
@@ -417,15 +405,15 @@
 
 	# manage_user_page.php3
 	$s_edit_user_title = "사용자 편집";
-	$s_reset_password_button = "패스워드 초기화";
+	$s_reset_password_button = "암호 초기화";
 	$s_delete_user_button = "사용자 삭제";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
-	$s_reset_password_msg2 = "패스워드 초기화는 패스워드를 공백으로 만듭니다.";
+	$s_reset_password_msg = "임의로 생성된 암호로 암호를 초기화합니다.";
+	$s_reset_password_msg2 = "암호 초기화는 암호를 공백으로 만듭니다.";
 
 	# manage_user_reset.php3
-	$s_account_reset_protected_msg = "보호된 계정입니다. 패스워드를 초기화할수 없습니다.";
-	$s_account_reset_msg = "계정 패스워드 초기화...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_protected_msg = "보호된 계정입니다. 암호를 초기화할수 없습니다.";
+	$s_account_reset_msg = "계정 암호 초기화...";
+	$s_account_reset_msg2 = "계정 암호가 없는 상태로 초기화합니다...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....";
@@ -514,10 +502,13 @@
 	$s_remove_user_sure_msg = "현재 사용자를 제거하시겠습니까?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "참조: 프로젝트에 추가하기전에 사용자가 존재해야 합니다.";
+	$s_automatic_access_level = "자동 접근 레벨";
 	$s_add_user_title = "프로젝트에 사용자 추가";
 	$s_add_user_button = "사용자 추가";
 	$s_project_selection_title = "프로젝트 선택";
 	$s_remove_link = "삭제";
+	$s_automatic_access = "자동 접근 설정 사용자";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "사용자 정보가 갱신되었습니다.";
@@ -562,7 +553,7 @@
 	$s_duplicate_username = "중복된 사용자입니다. 다른 이름을 선택하세요";
 	$s_account_create_fail = "사용자 계정생성에 실패했습니다.";
 	$s_account_added = "새로운 계정이 추가되었습니다.";
-	$s_password_emailed_msg = "패스워드가 메일로 전송될 것입니다.";
+	$s_password_emailed_msg = "암호가 메일로 전송될 것입니다.";
 	$s_no_reponse_msg = "만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.";
 
 	# signup_page.php3
@@ -599,7 +590,7 @@
 	$s_average_time = "평균 시간";
 	$s_total_time = "전체 시간";
 	$s_developer_stats = "개발자 통계";
-	$s_reporter_stats = "reporter stats";
+	$s_reporter_stats = "보고자 통계";
 	$s_orct = "(신규/해결/폐쇄/전체)";
 
 	# view_all_bug_page.php3
@@ -611,10 +602,10 @@
 	$s_updated = "최종 갱신";
 
 	# view_all_inc.php
-	$s_none = "none";
+	$s_none = "없슴";
 	$s_search ="검색";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_view_prev_link = "이전";
+	$s_view_next_link = "다음";
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "간략히 보기";
@@ -624,7 +615,7 @@
 	$s_update_bug_button = "버그 갱신";
 	$s_bug_assign_button    = "내게 할당된 버그";
 	$s_reopen_bug_button = "재발생 버그";
-	$s_attached_files = "Attached Files";
+	$s_attached_files = "첨부 파일";
 
 	# view_bug_inc.php
 
