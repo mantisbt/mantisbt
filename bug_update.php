@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.44 2002-12-30 08:44:37 jfitzell Exp $
+	# $Id: bug_update.php,v 1.45 2002-12-30 08:49:51 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,7 +68,7 @@ if( ON == config_get( 'use_experimental_custom_fields' ) ) {
 	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
-		$t_def = custom_field_get_definition($t_id);
+		$t_def = custom_field_get_definition( $t_id );
 		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}

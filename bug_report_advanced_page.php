@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.14 2002-12-30 08:44:37 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.15 2002-12-30 08:49:51 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -309,8 +309,8 @@
 <?php
 	} # if ( size( $t_related_custom_field_ids ) > 0 )
 
-	foreach( $t_related_custom_field_ids as $id ) {
-		$t_def = custom_field_get_definition($id);
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition( $t_id );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -321,7 +321,7 @@
 	</td>
 </tr>
 <?php
-	} # foreach( $t_related_custom_field_ids as $id )
+	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
 <?php } # if( ON == config_get( 'use_experimental_custom_fields' ) ) ?>
 

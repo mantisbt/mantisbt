@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.41 2002-12-30 08:44:38 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.42 2002-12-30 08:49:51 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -370,7 +370,7 @@
 <?php
 	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $t_id ) {
-		$t_def = custom_field_get_definition($t_id);
+		$t_def = custom_field_get_definition( $t_id );
 		if( !$t_def['advanced'] ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
