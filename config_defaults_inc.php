@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.221 2004-11-06 12:34:47 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.222 2004-11-16 20:47:05 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -548,15 +548,15 @@
 	$g_default_email_on_bugnote		= ON;
 	$g_default_email_on_status		= 0; # @@@ Unused
 	$g_default_email_on_priority	= 0; # @@@ Unused
-	$g_default_email_on_new_minimum_severity		= 'any';
-	$g_default_email_on_assigned_minimum_severity	= 'any';
-	$g_default_email_on_feedback_minimum_severity	= 'any';
-	$g_default_email_on_resolved_minimum_severity	= 'any';
-	$g_default_email_on_closed_minimum_severity		= 'any';
-	$g_default_email_on_reopened_minimum_severity	= 'any';
-	$g_default_email_on_bugnote_minimum_severity	= 'any';
-	$g_default_email_on_status_minimum_severity		= 'any'; # @@@ Unused
-	$g_default_email_on_priority_minimum_severity	= 'any'; # @@@ Unused
+	$g_default_email_on_new_minimum_severity		= OFF; # 'any'
+	$g_default_email_on_assigned_minimum_severity	= OFF; # 'any'
+	$g_default_email_on_feedback_minimum_severity	= OFF; # 'any'
+	$g_default_email_on_resolved_minimum_severity	= OFF; # 'any'
+	$g_default_email_on_closed_minimum_severity		= OFF; # 'any'
+	$g_default_email_on_reopened_minimum_severity	= OFF; # 'any'
+	$g_default_email_on_bugnote_minimum_severity	= OFF; # 'any'
+	$g_default_email_on_status_minimum_severity		= OFF; # @@@ Unused
+	$g_default_email_on_priority_minimum_severity	= OFF; # @@@ Unused
 	$g_default_email_bugnote_limit					= 0;
 	# default_language - is set to site language
 
