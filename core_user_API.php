@@ -131,11 +131,9 @@
 		global $g_login_method, $g_allow_anonymous_login, $g_anonymous_account;
 
 		# allow anonymous logins
-		if ( ON == $g_allow_anonymous_login ) {
-			if ( $g_anonymous_account == $f_username ) {
+		if ( $g_anonymous_account == $f_username ) {
+			if ( ON == $g_allow_anonymous_login ) {
 				return true;
-			} else {
-				return false;
 			}
 		}
 

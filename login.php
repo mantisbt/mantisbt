@@ -27,7 +27,7 @@
 		$login_result = 0;
 	}
 
-	if ( ON == $g_allow_anonymous_login ) {
+	if (( $g_anonymous_account == $f_username ) && ( ON == $g_allow_anonymous_login )) {
 		$f_password = "";
 	}
 
