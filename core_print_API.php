@@ -830,7 +830,7 @@
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
 		$p_string = str_replace( "&quot;", "\"",  $p_string );
-		$p_string = str_replace( "&amp;", "\"",  $p_string );
+		$p_string = str_replace( "&amp;", "&",  $p_string );
 
 		return $p_string;
 	}
