@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.48 2003-04-04 00:02:59 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.49 2003-07-25 17:34:47 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -416,8 +416,8 @@
 	include( $t_mantis_dir . 'bug_monitor_list_view_inc.php' );
 
 	# Bugnotes
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
 	include( $t_mantis_dir . 'bugnote_add_inc.php' );
+	include( $t_mantis_dir . 'bugnote_view_inc.php' );
 
 	# History
 	if ( $f_history ) {
