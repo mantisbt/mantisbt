@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.10 2002-08-27 10:08:08 jfitzell Exp $
+	# $Id: user_api.php,v 1.11 2002-08-27 21:51:35 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -202,18 +202,26 @@
 	# $p_email may be empty, but the user wont get any emails.
 	# returns false if error, the generated cookie string if ok
 	function user_signup( $p_username, $p_email=false ) {
-		global $g_use_ldap_email,
-		$g_mantis_user_table,
-		$g_default_new_account_access_level,
-		$g_mantis_user_pref_table,
-		$g_default_advanced_report,
-		$g_default_advanced_view, $g_default_advanced_update,
-		$g_default_refresh_delay, $g_default_redirect_delay,
-		$g_default_email_on_new, $g_default_email_on_assigned,
-		$g_default_email_on_feedback, $g_default_email_on_resolved,
-		$g_default_email_on_closed, $g_default_email_on_reopened,
-		$g_default_email_on_bugnote, $g_default_email_on_status,
-		$g_default_email_on_priority, $g_default_language;
+		$t_use_ldap_email 					= config_get('use_ldap_email');
+		$t_default_new_account_access_level = config_get('default_new_account_access_level');
+		$t_default_advanced_report			= config_get('default_advanced_report');
+		$t_default_advanced_view			= config_get('default_advanced_view');
+		$t_default_advanced_update			= config_get('default_advanced_update');
+		$t_default_refresh_delay			= config_get('default_refresh_delay');
+		$t_default_redirect_delay			= config_get('default_redirect_delay');
+		$t_default_email_on_new				= config_get('default_email_on_new');
+		$t_default_email_on_assigned		= config_get('default_email_on_assigned');
+		$t_default_email_on_feedback		= config_get('default_email_on_feedback');
+		$t_default_email_on_resolved		= config_get('default_email_on_resolved');
+		$t_default_email_on_closed			= config_get('default_email_on_closed');
+		$t_default_email_on_reopened		= config_get('default_email_on_reopened');
+		$t_default_email_on_bugnote			= config_get('default_email_on_bugnote');
+		$t_default_email_on_status			= config_get('default_email_on_status');
+		$t_default_email_on_priority		= config_get('default_email_on_priority');
+		$t_default_language					= config_get('default_language');
+
+		$t_user_table 						= config_get('mantis_user_table');
+		$t_user_pref_table 					= config_get('mantis_user_pref_table');
 
 		if ( ( false == $p_email ) && ( ON == $g_use_ldap_email ) ) {
 			$p_email = get_user_info( $p_username,'email' );
@@ -226,10 +234,10 @@
 		# create the almost unique string for each user then insert into the table
 		$t_cookie_string	= create_cookie_string( $t_seed );
 		$t_password2		= process_plain_password( $t_password );
-		$c_username			= addslashes($p_username);
-		$c_email			= addslashes($p_email);
+		$c_username			= db_prepare_string($p_username);
+		$c_email			= db_prepare_string($p_email);
 
-		$query = "INSERT INTO $g_mantis_user_table
+		$query = "INSERT INTO $t_user_table
 				( id, username, email, password, date_created, last_visit,
 				enabled, protected, access_level, login_count, cookie_string )
 				VALUES
@@ -243,7 +251,7 @@
 
 		# Create preferences for the user
 		$t_user_id = db_insert_id();
-		$query = "INSERT INTO $g_mantis_user_pref_table
+		$query = "INSERT INTO $t_user_pref_table
 				(id, user_id, advanced_report, advanced_view, advanced_update,
 				refresh_delay, redirect_delay,
 				email_on_new, email_on_assigned,
@@ -252,14 +260,14 @@
 				email_on_bugnote, email_on_status,
 				email_on_priority, language)
 				VALUES
-				(null, '$t_user_id', '$g_default_advanced_report',
-				'$g_default_advanced_view', '$g_default_advanced_update',
-				'$g_default_refresh_delay', '$g_default_redirect_delay',
-				'$g_default_email_on_new', '$g_default_email_on_assigned',
-				'$g_default_email_on_feedback', '$g_default_email_on_resolved',
-				'$g_default_email_on_closed', '$g_default_email_on_reopened',
-				'$g_default_email_on_bugnote', '$g_default_email_on_status',
-				'$g_default_email_on_priority', '$g_default_language')";
+				(null, '$t_user_id', '$t_default_advanced_report',
+				'$t_default_advanced_view', '$t_default_advanced_update',
+				'$t_default_refresh_delay', '$t_default_redirect_delay',
+				'$t_default_email_on_new', '$t_default_email_on_assigned',
+				'$t_default_email_on_feedback', '$t_default_email_on_resolved',
+				'$t_default_email_on_closed', '$t_default_email_on_reopened',
+				'$t_default_email_on_bugnote', '$t_default_email_on_status',
+				'$t_default_email_on_priority', '$t_default_language')";
 		$result = db_query($query);
 
 		if ( !$result ) {
@@ -277,33 +285,35 @@
 	# delete an account
 	# returns true when the account was successfully deleted
 	function user_delete( $p_user_id ) {
-		global $g_mantis_user_table, $g_mantis_user_profile_table,
-		       $g_mantis_user_pref_table, $g_mantis_project_user_list_table;
-
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id 					= db_prepare_int($p_user_id);
+		
+		$t_user_table 				= config_get('mantis_user_table');
+		$t_user_profile_table 		= config_get('mantis_user_profile_table');
+		$t_user_pref_table 			= config_get('mantis_user_pref_table');
+		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
 
 	    if ( !user_get_field( $p_user_id, 'protected' ) ) {
 		    # Remove account
 	    	$query = "DELETE
-    				FROM $g_mantis_user_table
+    				FROM $t_user_table
     				WHERE id='$c_user_id'";
 	    	$result = db_query( $query );
 			$success = db_affected_rows();
 
 		    # Remove associated profiles
 		    $query = "DELETE
-	    			FROM $g_mantis_user_profile_table
+	    			FROM $t_user_profile_table
 	    			WHERE user_id='$c_user_id'";
 		    $result = db_query( $query );
 	
 			# Remove associated preferences
     		$query = "DELETE
-    				FROM $g_mantis_user_pref_table
+    				FROM $t_user_pref_table
     				WHERE user_id='$c_user_id'";
     		$result = db_query( $query );
 
 	    	$query = "DELETE
-    				FROM $g_mantis_project_user_list_table
+    				FROM $t_project_user_list_table
 	    			WHERE user_id='$c_user_id'";
 		    $result = db_query( $query );
 
@@ -473,13 +483,13 @@
 	# --------------------
 	# @@@ unused
 	function user_create_project_prefs( $p_project_id ) {
-		global $g_mantis_user_pref_table;
-
-		$c_project_id = (integer)$p_project_id;
+		$c_project_id 		= db_prepare_int($p_project_id);
+		
+		$t_user_pref_table 	= config_get('mantis_user_pref_table');
 
 		$t_user_id = get_current_user_field( 'id' );
 	    $query = "INSERT
-	    		INTO $g_mantis_user_pref_table
+	    		INTO $t_user_pref_table
 	    		(id, user_id, project_id,
 	    		advanced_report, advanced_view, advanced_update,
 	    		refresh_delay, redirect_delay,
@@ -521,13 +531,14 @@
 	# --------------------
 	# retrieve the number of open assigned bugs to a user in a project
 	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-
-		$c_project_id	= (integer)$p_project_id;
-		$c_cookie_str	= addslashes($p_cookie_str);
+		$c_project_id	= db_prepare_int($p_project_id);
+		$c_cookie_str	= db_prepare_string($p_cookie_str);
+		
+		$t_bug_table	= config_get('mantis_bug_table');
+		$t_user_table	= config_get('mantis_user_table');
 
 		$query ="SELECT id ".
-				"FROM $g_mantis_user_table ".
+				"FROM $t_user_table ".
 				"WHERE cookie_string='$c_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
@@ -540,7 +551,7 @@
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bug_table ".
+				"FROM $t_bug_table ".
 				"WHERE $t_where_prj ".
 				"status<>'$t_res' AND status<>'$t_clo' AND ".
 				"handler_id='$t_id'";
@@ -550,10 +561,11 @@
 	# --------------------
 	# retrieve the number of open reported bugs by a user in a project
 	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-
-		$c_project_id	= (integer)$p_project_id;
-		$c_cookie_str	= addslashes($p_cookie_str);
+		$c_project_id	= db_prepare_int($p_project_id);
+		$c_cookie_str	= db_prepare_string($p_cookie_str);
+		
+		$t_bug_table	= config_get('mantis_bug_table');
+		$t_user_table	= config_get('mantis_user_table');
 
 		$query ="SELECT id ".
 				"FROM $g_mantis_user_table ".
@@ -569,7 +581,7 @@
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bug_table ".
+				"FROM $t_bug_table ".
 				"WHERE $t_where_prj ".
 				"status<>'$t_res' AND status<>'$t_clo' AND ".
 				"reporter_id='$t_id'";
@@ -579,14 +591,16 @@
 	# --------------------
 	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_table, $g_current_user_info;
+		global 	$g_string_cookie_val, $g_current_user_info;
+		
+		$t_user_table	= config_get('mantis_user_table');
 
 		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 			if ( !isset ( $g_current_user_info[ $p_field_name ] ) ) {
 				# get user info
 				$query = "SELECT * ".
-						"FROM $g_mantis_user_table ".
+						"FROM $t_user_table ".
 						"WHERE cookie_string='$g_string_cookie_val' ".
 						"LIMIT 1";
 				$result = db_query( $query );
@@ -600,7 +614,9 @@
 	# --------------------
 	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_pref_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_pref_table, $g_cache_user_pref;
+		global 	$g_string_cookie_val, $g_cache_user_pref;
+		
+		$t_user_pref_table	= config_get('mantis_user_pref_table');
 
 		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
@@ -609,7 +625,7 @@
 			if ( !isset( $g_cache_user_pref[$t_id] ) ) {
 				# get user info
 				$query = "SELECT *
-						FROM $g_mantis_user_pref_table
+						FROM $t_user_pref_table
 						WHERE user_id='$t_id'";
 				$result = db_query( $query );
 				$row = db_fetch_array( $result );
