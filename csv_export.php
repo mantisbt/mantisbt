@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-07 08:44:11 $
+	# $Date: 2002-09-20 19:42:52 $
 	#
-	# $Id: csv_export.php,v 1.1 2002-09-07 08:44:11 jfitzell Exp $
+	# $Id: csv_export.php,v 1.2 2002-09-20 19:42:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -43,8 +43,8 @@
 		$t_priority			= get_enum_element( 'priority', $v_priority );
 		$t_severity			= get_enum_element( 'severity', $v_severity );
 		$t_status			= get_enum_element( 'status', $v_status );
-		$t_hander_name		= user_get_field( $v_handler_id, 'username' );
-		$t_reporter_name	= user_get_field( $v_reporter_id, 'username' );
+		$t_hander_name		= user_get_name( $v_handler_id );
+		$t_reporter_name	= user_get_name( $v_reporter_id );
 		$v_summary			= string_display( $v_summary );
 
 		echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
