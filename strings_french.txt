@@ -29,7 +29,7 @@
 	$s_priority_enum_string           = "10:aucune,20:basse,30:normale,40:élevée,50:urgent,60:immédiate";
 	$s_severity_enum_string           = "10:fonctionnalité,20:simple,30:texte,40:tweak,50:mineur,60:majeur,70:crash,80:bloquant";
 	$s_reproducibility_enum_string    = "10:toujours,30:quelques fois,50:aléatoire,70:n'a pas essayé,90:impossible à reproduire,100:N/A";
-	$s_status_enum_string             = "10:nouveau,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
+	$s_status_enum_string             = "10:nouveau,20:re-qualifier,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé";
 	$s_resolution_enum_string         = "10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corrigé,60:doublon,70:pas un bug,80:suspendu,90:ne sera pas résolu";
 	$s_projection_enum_string         = "10:aucun,30:tweak,50:correction mineur,70:correction majeur,90:Redisign";
 	$s_eta_enum_string                = "10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois";

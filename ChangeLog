@@ -6,6 +6,7 @@ Mantis
  * Fixed problem where upgrade scripts were not executed for 0.16.0 upgrade.
  * Fixed problem with $g_limit_reporters limiting all users instead of just reporters and below
  * Modified admin_check.php3 to be more informative and useful.
+ * Updated French localization.
 
 11.27.2001  -   0.16.0
 
