@@ -8,14 +8,9 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( ADMINISTRATOR );
-	$c_id = (integer)$f_id;
 
 	# grab user data and prefix with u_
-    $query = "SELECT *
-    		FROM $g_mantis_user_table
-			WHERE id='$c_id'";
-    $result = db_query($query);
-	$row = db_fetch_array($result);
+	$row = get_user_info_by_id_arr( $f_id );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>

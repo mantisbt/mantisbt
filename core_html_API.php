@@ -226,8 +226,7 @@
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
 	function print_login_info() {
-		global 	$g_mantis_user_table,
-				$g_string_cookie_val, $g_project_cookie_val,
+		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format,
 				$s_switch, $s_logged_in_as, $s_all_projects,
 				$s_access_levels_enum_string,

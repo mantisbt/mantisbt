@@ -14,8 +14,7 @@
 	# if $p_redirect_url is specifed then redirect them to that page
 	function login_cookie_check( $p_redirect_url='', $p_return_page='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_mantis_user_table, $REQUEST_URI;
+				$REQUEST_URI;
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
@@ -53,9 +52,7 @@
 	# also sets the last time they visited
 	# otherwise redirects to the login page
 	function index_login_cookie_check( $p_redirect_url='' ) {
-		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_mantis_user_table;
+		global 	$g_string_cookie_val, $g_project_cookie_val;
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
@@ -90,9 +87,7 @@
 	# Only check to see if the user is logged in
 	# redirect to logout_page if fail
 	function login_user_check_only() {
-		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_mantis_user_table;
+		global 	$g_string_cookie_val;
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
@@ -163,6 +158,8 @@
 	# This function is only called from the login.php3 script
 	function increment_login_count( $p_id ) {
 		global $g_mantis_user_table;
+
+		drop_user_info_cache();
 
 		$c_id = (integer)$p_id;
 
@@ -570,22 +567,32 @@
 		}
 	}
 	# --------------------
+	# Flush user information cache.  Should be called when the user information
+	# is changed.
+	function drop_user_info_cache( ) {
+		global $g_current_user_info;
+		unset ( $g_current_user_info );
+	}
+	# --------------------
 	###########################################################################
 	# User Information API
 	###########################################################################
 	# --------------------
 	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_table;
+		global 	$g_string_cookie_val, $g_mantis_user_table, $g_current_user_info;
 
 		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
-			# get user info
-			$query = "SELECT $p_field_name
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_query( $query );
-			return db_result( $result, 0 );
+			if ( !isset ( $g_current_user_info[ $p_field_name ] ) ) {
+				# get user info
+				$query = "SELECT *
+						FROM $g_mantis_user_table
+						WHERE cookie_string='$g_string_cookie_val'";
+				$result = db_query( $query );
+				$g_current_user_info = db_fetch_array ( $result );
+			}
+			return $g_current_user_info [ $p_field_name ];
 		} else {
 			return 0;
 		}
@@ -616,10 +623,10 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-	    $query = "SELECT *
-	    		FROM $g_mantis_user_table
-	    		WHERE id='$c_user_id'";
-	    $result =  db_query( $query );
+		$query = "SELECT * " .
+				"FROM $g_mantis_user_table " .
+				"WHERE id='$c_user_id'";
+		$result = db_query( $query );
 	    return db_fetch_array( $result );
 	}
 	# --------------------
@@ -713,6 +720,8 @@
 	# Update the last_visited field to be NOW()
 	function login_update_last_visit( $p_string_cookie_val ) {
 		global $g_mantis_user_table;
+		
+		drop_user_info_cache();
 
 		$c_string_cookie_val = addslashes($p_string_cookie_val);
 

@@ -43,6 +43,8 @@
 					WHERE id='$c_id'";
 			$result = db_query( $query );
 		}
+
+		drop_user_info_cache();
 	} # end if protected
 
 	$t_redirect_url = 'account_page.php';

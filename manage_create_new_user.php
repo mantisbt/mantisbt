@@ -85,6 +85,8 @@
     		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
 
+	drop_user_info_cache();
+
     $t_redirect_url = 'manage_page.php';
 ?>
 <?php print_page_top1() ?>

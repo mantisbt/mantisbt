@@ -193,7 +193,7 @@
 	# --------------------
 	# print bug counts by reporter id
 	function print_reporter_summary() {
-		global 	$g_mantis_bug_table, $g_mantis_user_table,
+		global 	$g_mantis_bug_table, 
 				$g_primary_color1, $g_primary_color2,
 				$g_reporter_summary_limit,
 				$g_project_cookie_val,
@@ -267,7 +267,7 @@
 	# --------------------
 	# print a bug count per category
 	function print_category_summary() {
-		global 	$g_mantis_bug_table, $g_mantis_user_table, $g_mantis_project_table,
+		global 	$g_mantis_bug_table, $g_mantis_project_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
 				$g_primary_color1, $g_primary_color1,
 				$g_summary_pad, $g_summary_product_colon_category;

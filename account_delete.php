@@ -5,11 +5,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.8 $
+	# $Revision: 1.9 $
 	# $Author: vboctor $
-	# $Date: 2002-06-14 05:36:48 $
+	# $Date: 2002-06-25 14:23:57 $
 	#
-	# $Id: account_delete.php,v 1.8 2002-06-14 05:36:48 vboctor Exp $
+	# $Id: account_delete.php,v 1.9 2002-06-25 14:23:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -67,6 +67,8 @@
 		setcookie( $g_string_cookie );
 		setcookie( $g_project_cookie );
 		setcookie( $g_view_all_cookie );
+
+		drop_user_info_cache();
 	} # end if protected
 ?>
 <?php print_page_top1() ?>

@@ -7,11 +7,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: jctrosset $
-	# $Date: 2002-06-24 10:06:18 $
+	# $Revision: 1.63 $
+	# $Author: vboctor $
+	# $Date: 2002-06-25 14:23:57 $
 	#
-	# $Id: core_email_API.php,v 1.62 2002-06-24 10:06:18 jctrosset Exp $
+	# $Id: core_email_API.php,v 1.63 2002-06-25 14:23:57 vboctor Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -263,8 +263,7 @@
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		global 	$g_mantis_user_table, $s_new_bug_msg,
-				$g_project_cookie_val;
+		global 	$s_new_bug_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_new' );
 		email_bug_info( $p_bug_id, $s_new_bug_msg, $t_bcc );
@@ -322,7 +321,7 @@
 	# Build the bug info part of the message
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
-				$g_mantis_user_table, $g_mantis_project_table,
+				$g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
 				$g_bugnote_order, $g_path,
 				$s_email_reporter, $s_email_handler,
@@ -412,7 +411,7 @@
 	# Build the bugnotes part of the message
 	function email_build_bugnote_message( $p_bug_id ) {
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
-				$g_mantis_user_table, $g_complete_date_format,
+				$g_complete_date_format,
 				$g_bugnote_order, $g_email_separator2;
 
 		$c_bug_id = (integer)$p_bug_id;
@@ -452,8 +451,7 @@
 	# --------------------
 	# Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers='' ) {
-		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table,
-				$g_to_email, $g_use_bcc;
+		global $g_to_email, $g_use_bcc;
 
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );

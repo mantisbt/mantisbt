@@ -218,7 +218,7 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 
 
 	function create_category_summary() {
-		global 	$g_mantis_bug_table, $g_mantis_user_table,
+		global 	$g_mantis_bug_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
 				$category_name, $category_bug_count;
 
