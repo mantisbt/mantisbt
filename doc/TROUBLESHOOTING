@@ -23,11 +23,6 @@ or messages.
 	either reinstall or manually convert passwords over to another supported
 	encryption system.
 
-	SOLUTION 3: You do not have register_globals enabled. Set this to On in
-	your php.ini file.
-
-	http://www.php.net/manual/en/configuration.php#ini.register-globals
-
 	SOLUTION 4: You do not have cookies enablewd in your browser.  You must
 	have cookies enabled.  Sometimes, especially after an upgrade, you may
 	have to delete your previous cookies.

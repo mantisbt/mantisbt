@@ -126,20 +126,6 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		}
 	?>
 </tr>
-<!-- PHP Setup check -->
-<tr>
-	<td bgcolor="#ffffff">
-		register_globals should be set to On or 1
-	</td>
-	<?php
-		$test_val = ini_get( "register_globals" );
-		if ( ( 1 == $test_val ) || ( "On" == $test_val ) ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD );
-		}
-	?>
-</tr>
 <?php # ---- Windows ? ---- 
 if (substr(php_uname(), 0, 7) == 'Windows') {
 ?>
@@ -193,6 +179,27 @@ if (substr(php_uname(), 0, 7) == 'Windows') {
 </table>
 
 </p>
+
+<!-- register_globals check -->
+<?php
+	$t_register_globals = ini_get( 'register_globals' );
+	if ( 'off' != $t_register_globals || $t_register_globals ) { ?>
+		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
+		<tr>
+			<td bgcolor="#ffcc22">
+				<span class="title">WARNING - register_globals - WARNING</span><br /><br />
+
+				You have register_globals enabled in PHP, which is considered a security risk.  Since version 0.18, Mantis has no longer relied on register_globals being enabled.  PHP versions later that 4.2.0 have this option disabled by default.  For more information on the security issues associated with enabling register_globals, see <a href="http://www.php.net/manual/en/security.registerglobals.php">this page</a>.
+
+				If you have no other PHP applications that rely on register_globals, you should add the line <pre>register_globals = Off</pre> to your php.ini file;  if you do have other applications that require register_globals, you could consider disabling it for your Mantis installation by adding the line <pre>php_value register_globals off</pre> to a <tt>.htaccess</tt> file or a <tt>&lt;Directory&gt;</tt> or <tt>&lt;Location&gt;</tt> block in your apache configuration file.  See the apache documentation if you require more information.
+			</td>
+		</tr>
+		</table>
+
+		<br /><?php
+	}
+?>
+
 <?php # ---- Uploads ? ---- ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>

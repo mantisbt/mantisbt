@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.4 2002-09-17 20:12:29 jfitzell Exp $
+	# $Id: php_api.php,v 1.5 2002-12-29 10:58:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -65,16 +65,6 @@
 		foreach ($HTTP_GET_VARS as $key => $value) {
 			$_REQUEST[$key] = $value;
 		}
-	}
-
-	# @@@ Experimental
-	# deal with register_globals being Off
-	# @@@ NOTE we want to get rid of this once we start getting all
-	#      our GPC variables with functions.  In fact we may want to
-	#      turn off register_global_variables if we can
-	if ( false == ini_get( 'register_globals' ) ) {
-		extract( $_REQUEST );
-		extract( $_SERVER );
 	}
 
 	########################
