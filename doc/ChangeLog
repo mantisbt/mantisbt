@@ -32,7 +32,7 @@ Mantis ChangeLog
 - 0002220: [installation] usage of consistent naming schema for images (vboctor)
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)
-- Updated German, French and Brazilian Portuguese language.
+- Updated German, French, Brazilian Portuguese, japanese_euc, japanese_sjis, and japanese_utf8 language.
 
 2004.07.20  -  0.19.0a2
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.186 2004-07-30 21:13:31 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.187 2004-08-01 12:34:18 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -272,7 +272,7 @@
 	$g_language_choices_arr	= array(
 		'auto', 'english', 'chinese_simplified', 'chinese_traditional', 'czech',
 		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian',
-		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian',
+		'italian', 'japanese_euc', 'japanese_sjis', 'japanese_utf8', 'korean', 'lithuanian',
 		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
 		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish',
 		'swedish', 'turkish' );

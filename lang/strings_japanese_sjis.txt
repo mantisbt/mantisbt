@@ -8,975 +8,977 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Date: 2004-08-01 12:34:19 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.52 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.53 2004-08-01 12:34:19 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = "Shift_JIS";
+$s_charset = 'SHIFT_JIS';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = "移動";
-$s_actiongroup_menu_copy = 'Copy';
-$s_actiongroup_menu_assign = "担当者決定";
-$s_actiongroup_menu_close = "完了";
-$s_actiongroup_menu_delete = "削除";
-$s_actiongroup_menu_resolve = "実装済";
-$s_actiongroup_menu_update_priority = "重要度更新";
-$s_actiongroup_menu_update_status = "ステータス更新";
-$s_actiongroup_menu_update_view_status = 'Update View Status';
-$s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_menu_move = '移動';
+$s_actiongroup_menu_copy = 'コピー';
+$s_actiongroup_menu_assign = '担当者決定';
+$s_actiongroup_menu_close = '完了';
+$s_actiongroup_menu_delete = '削除';
+$s_actiongroup_menu_resolve = '実装済';
+$s_actiongroup_menu_update_priority = '重要度更新';
+$s_actiongroup_menu_update_status = 'ステータス更新';
+$s_actiongroup_menu_update_view_status = '閲覧ステータスを更新';
+$s_actiongroup_bugs = '選択された改善要求';
 
 # new strings:
-$s_all_projects = "全プロジェクト";
-$s_move_bugs = "項目の移動";
-$s_operation_successful = "成功しました";
-$s_date_order = "リリース日付";
-$s_print_all_bug_page_link = "一覧印刷";
-$s_csv_export = "CSVエクスポート";
-$s_login_anonymously = "ゲストログイン";
-$s_anonymous = "Anonymous";
-$s_jump_to_bugnotes = "コメント追加";
-$s_public_project_msg = "公開プロジェクトです。全ユーザのアクセスが可能です。";
-$s_private_project_msg = "非公開プロジェクトです。管理者・プロジェクト参加者のアクセスが可能です。";
-$s_access_level_project = "アクセス権(プロジェクト)";
-$s_view_submitted_bug_link = "登録した改修要望の表示";
-$s_assigned_projects = "参加プロジェクト";
-$s_unassigned_projects = "非参加プロジェクト";
-$s_print = "印刷";
-$s_jump = "ID指定";
-$s_copy_users = "ユーザのコピー";
-$s_copy_categories_from = "カテゴリコピー元";
-$s_copy_categories_to = "カテゴリコピー先";
-$s_bug_history = "履歴";
-$s_field = "項目";
-$s_old_value = "Old Value";
-$s_new_value = "New Value";
-$s_date_modified = "変更年月日";
-$s_bugnote = "コメント";
-$s_change = "変更内容";
-$s_bugnote_view_state = "コメントの公開/非公開";
-$s_bug_monitor = "モニター開始";
-$s_bug_end_monitor = "モニター終了";
-$s_announcement = "周知";
-$s_stays_on_top = "常に先頭に表示";
-$s_delete_bugnote_button = "コメントの削除";
-$s_delete_bugnote_sure_msg = "コメントを削除してよろしいですか。";
-$s_bug_relationships = "Relationships";
-$s_empty_password_sure_msg = "ユーザのパスワードが空ですがよろしいですか。";
-$s_empty_password_button = "空のパスワードの使用";
+$s_all_projects = '全プロジェクト';
+$s_move_bugs = '項目の移動';
+$s_operation_successful = '成功しました';
+$s_date_order = 'リリース日付';
+$s_print_all_bug_page_link = '一覧印刷';
+$s_csv_export = 'CSV エクスポート';
+$s_login_anonymously = 'ゲストログイン';
+$s_anonymous = '匿名';
+$s_jump_to_bugnotes = 'コメント追加';
+$s_public_project_msg = '公開プロジェクトです。全ユーザーのアクセスが可能です。';
+$s_private_project_msg = '非公開プロジェクトです。管理者・プロジェクト参加者のアクセスが可能です。';
+$s_access_level_project = 'アクセス権(プロジェクト)';
+$s_view_submitted_bug_link = '登録した改善要求の表示';
+$s_assigned_projects = '参加プロジェクト';
+$s_unassigned_projects = '非参加プロジェクト';
+$s_print = '印刷';
+$s_jump = 'ID 指定';
+$s_copy_users = 'ユーザーのコピー';
+$s_copy_categories_from = 'カテゴリコピー元';
+$s_copy_categories_to = 'カテゴリコピー先';
+$s_bug_history = '履歴';
+$s_field = '項目';
+$s_old_value = '古い値';
+$s_new_value = '新しい値';
+$s_date_modified = '変更年月日';
+$s_bugnote = 'コメント';
+$s_change = '変更内容';
+$s_bugnote_view_state = 'コメントの公開/非公開';
+$s_bug_monitor = '監視開始';
+$s_bug_end_monitor = '監視終了';
+$s_announcement = '周知';
+$s_stays_on_top = '常に先頭に表示';
+$s_delete_bugnote_button = 'コメントの削除';
+$s_delete_bugnote_sure_msg = 'コメントを削除してよろしいですか。';
+$s_bug_relationships = '関連';
+$s_empty_password_sure_msg = 'ユーザーのパスワードが空ですがよろしいですか。';
+$s_empty_password_button = '空のパスワードの使用';
 
-$s_duplicate_of = "duplicate of %id";
-$s_has_duplicate = "has duplicate %id";
-$s_related_to = "related to %id";
-$s_dependant_on = "dependant on %id";
-$s_blocks = "blocks %id";
+$s_duplicate_of = "複製";
+$s_has_duplicate = "複製所持";
+$s_related_to = "関連番号";
+$s_dependant_on = "親番号";
+$s_blocks = "子番号";
 
-$s_new_bug = "新規改修要望";
-$s_bugnote_added = "コメント追加";
-$s_bugnote_edited = "コメント編集";
-$s_bugnote_deleted = "コメント削除";
-$s_summary_updated = "一覧更新";
-$s_description_updated = "詳細更新";
-$s_additional_information_updated = "追加情報更新";
-$s_steps_to_reproduce_updated = "Steps to Reproduce Updated";
-$s_file_added = "ファイル追加: ";
-$s_file_deleted = "ファイル削除: ";
-$s_bug_deleted = "改修要望削除";
+$s_new_bug = '新規改善要求';
+$s_bugnote_added = 'コメント追加';
+$s_bugnote_edited = 'コメント編集';
+$s_bugnote_deleted = 'コメント削除';
+$s_summary_updated = '一覧更新';
+$s_description_updated = '詳細更新';
+$s_additional_information_updated = '追加情報更新';
+$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+$s_file_added = 'ファイル追加: ';
+$s_file_deleted = 'ファイル削除: ';
+$s_bug_deleted = '改善要求削除';
 
-$s_make_private = "非公開にする";
-$s_make_public = "公開する";
+$s_make_private = '非公開にする';
+$s_make_public = '公開する';
 
-$s_create_new_project_link = "新しいプロジェクトを作成する";
+$s_create_new_project_link = '新しいプロジェクトを作成する';
 
-$s_login_link = "Login";
+$s_login_link = 'ログイン';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = "改修要望に該当のアクションを行う適切な権限がありません。";
-$s_close_bugs_conf_msg = "改修要望を完了してよろしいですか。";
-$s_delete_bugs_conf_msg = "改修要望を削除してよろしいですか。";
-$s_move_bugs_conf_msg = "改修要望の移動先を選択して下さい。";
-$s_copy_bugs_conf_msg = 'Copy issues to';
-$s_assign_bugs_conf_msg = "担当者を選択して下さい。";
-$s_resolve_bugs_conf_msg = "分析状況を選択して下さい。";
-$s_priority_bugs_conf_msg = "重要度を選択して下さい。";
-$s_status_bugs_conf_msg = "ステータスを選択して下さい。";
-$s_view_status_bugs_conf_msg = 'Choose issues view status';
-$s_close_group_bugs_button = "改修要望の完了" ;
-$s_delete_group_bugs_button = "改修要望の削除" ;
-$s_move_group_bugs_button = "改修要望の移動";
+$s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
+
+$s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
+$s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
+$s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
+$s_copy_bugs_conf_msg = '改善要求コピー先';
+$s_assign_bugs_conf_msg = '担当者を選択して下さい。';
+$s_resolve_bugs_conf_msg = '分析状況を選択して下さい。';
+$s_priority_bugs_conf_msg = '重要度を選択して下さい。';
+$s_status_bugs_conf_msg = 'ステータスを選択して下さい。';
+$s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
+$s_close_group_bugs_button = '改善要求の完了';
+$s_delete_group_bugs_button = '改善要求の削除' ;
+$s_move_group_bugs_button = '改善要求の移動';
 $s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = "改修要望の割り当て";
-$s_resolve_group_bugs_button = "改修要望の実装";
-$s_priority_group_bugs_button = "重要度の更新" ;
-$s_status_group_bugs_button = "ステータスの更新" ;
-$s_view_status_group_bugs_button = 'Update View Status';
+$s_assign_group_bugs_button = '改善要求の割り当て';
+$s_resolve_group_bugs_button = '改善要求の実装';
+$s_priority_group_bugs_button = '重要度の更新' ;
+$s_status_group_bugs_button = 'ステータスの更新' ;
+$s_view_status_group_bugs_button = '閲覧ステータス更新';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = "ステータスによるグラフ";
-$s_graph_imp_priority_title = "優先度によるグラフ";
-$s_graph_imp_severity_title = "重要度によるグラフ";
-$s_graph_imp_category_title = "カテゴリによるグラフ";
-$s_graph_imp_resolution_title = "分析状況によるグラフ";
-$s_by_status_pct = "by status percentage";
-$s_by_priority_pct = "by priority percentage";
-$s_by_severity_pct = "by severity percentage";
-$s_by_category_pct = "by category percentage";
-$s_by_resolution_pct = "by resolution percentage";
-$s_by_severity_mix = "by severity and status";
-$s_by_priority_mix = "by priority and status";
-$s_by_resolution_mix = "by resolution and status";
-$s_synthesis_link = "総合";
-$s_status_link = "ステータスによる";
-$s_priority_link = "優先度による";
-$s_severity_link = "重要度による";
-$s_category_link = "カテゴリによる";
-$s_resolution_link = "分析状況による";
+$s_graph_imp_status_title = 'ステータスによるグラフ';
+$s_graph_imp_priority_title = '優先度によるグラフ';
+$s_graph_imp_severity_title = '重要度によるグラフ';
+$s_graph_imp_category_title = 'カテゴリによるグラフ';
+$s_graph_imp_resolution_title = '分析状況によるグラフ';
+$s_by_status_pct = 'ステータスパーセンテージ';
+$s_by_priority_pct = '優先パーセンテージ';
+$s_by_severity_pct = '重要度パーセンテージ';
+$s_by_category_pct = 'カテゴリパーセンテージ';
+$s_by_resolution_pct = '解決パーセンテージ';
+$s_by_severity_mix = '重要度とステータス';
+$s_by_priority_mix = '優先度とステータス';
+$s_by_resolution_mix = '解決とステータス';
+$s_synthesis_link = '総合';
+$s_status_link = 'ステータスによる';
+$s_priority_link = '優先度による';
+$s_severity_link = '重要度による';
+$s_category_link = 'カテゴリによる';
+$s_resolution_link = '分析状況による';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = "選択項目のみ表示する";
+$s_hide_button = '選択項目のみ表示する';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = "印刷する項目を選択して下さい。";
-$s_printing_options_link = "印刷オプション";
+$s_printing_preferences_title = '印刷する項目を選択して下さい。';
+$s_printing_options_link = '印刷オプション';
 
 # word and excel export
-$s_bugnote_title = "コメント登録者" ;
-$s_bugnote_date = "コメント登録年月日";
-$s_bugnote_description = "コメント内容";
+$s_bugnote_title = 'コメント登録者' ;
+$s_bugnote_date = 'コメント登録年月日';
+$s_bugnote_description = 'コメント内容';
 
-$s_error_no_proceed = "ブラウザの戻るボタンを使用して前のページに戻って下さい。そこで、エラーで判明した問題を直すか他のアクションを選択して下さい。もしくは、メニューバーからオプションで選択して、新しいセクションに直に進んで下さい。";
+$s_error_no_proceed = 'ブラウザの戻るボタンを使用して前のページに戻って下さい。そこで、エラーで判明した改善要求を直すか他のアクションを選択して下さい。もしくは、メニューバーからオプションで選択して、新しいセクションに直に進んで下さい。';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "エラー：エラーが発生しました。システム管理者までお知らせ下さい。";
-$MANTIS_ERROR[ERROR_SQL] = "エラー：SQLにエラーがあります。システム管理者までお知らせ下さい→";
-$MANTIS_ERROR[ERROR_REPORT] = "エラー：改修要望に間違いがあります。";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "エラー：ファイルが選択されていません。";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "エラー：ファイル種別が間違えています。";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "エラー：ファイルが重複しています。先にファイルを削除して下さい。";
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = "エラー：プロジェクトは既に登録されています。";
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "エラー：権限がありません。アクセスする為には、権限を上げて下さい。";
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "エラー：アクセスが拒否されました。";
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "エラー：ファイルのアップロードに失敗しました。管理者にこの問題をデバッグするためにadmin_checkスクリプトを実行するよう依頼して下さい。";
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "エラー：ファイルのアップロードに失敗しました。PHPで設定されているファイルサイズより大きいことが問題です。設定を確認して下さい。";
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "エラー：このページで必須なパラメータがありません。";
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "エラー：コメントがありません。";
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "エラー：プロジェクトがありません。";
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "エラー：データベースの項目がありません。";
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= "エラー：FTPサーバに接続できません。";
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "エラー：プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力して下さい。";
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = "エラー：プロジェクト名が無効です。プロジェクト名はブランクではいけません。";
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= "ユーザがありません。";
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= "エラー：ニュースがありません。";
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= "エラー：arrayを期待しましたが、stringを取得しました。";
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= "エラー：改修要望がありません。";
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= "エラー：無効なメールアドレスです。";
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= "エラー：このファイル種別はアップロードできません。";
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= "エラー：ファイルが重複しています。まず、ファイルを削除して下さい。";
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "エラー：無効なアップロードパスです。ディレクトリが存在しないか書き込みできません。";
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= "エラー：重複しているIDに当該改修要望を設定できません。";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "エラー：無効な値です。";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "エラー：スタム項目定義が無効です。";
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= "エラー：LDAP認証に失敗しました。";
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= "エラー：LDAPレコードの更新に失敗しました。";
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= "エラー：データベースとの接続に失敗しました。";
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= "エラー：データベースの検索に失敗しました。";
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= "エラー：データベースの選択に失敗しました。";
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "エラー：カテゴリが重複しています。";
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "エラー：コピー元、コピー先が指定されていません。";
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "エラー：カテゴリがありません。";
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "エラー：バージョンが重複しています。";
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = "エラー：バージョンがありません。";
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = "エラー：ユーザ名が無効です。";
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "ユーザが必要なアクセス権限を持っていません。";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+$MANTIS_ERROR[ERROR_GENERIC] = 'エラーが発生しました。システム管理者までお知らせ下さい。';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL のエラーを検知しました。システム管理者までお知らせ下さい→';
+$MANTIS_ERROR[ERROR_REPORT] = 'レポートに間違いがあります。';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ファイルが選択されていません。';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ファイル種別は許可されていません。';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ディレクトリが存在しません。プロジェクトの設定を確認して下さい。';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ファイルが重複しています。先にファイルを削除して下さい。';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'プロジェクトは既に登録されています。';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必須フィールド「%s」が入力されていません。入力を確認して下さい。';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '権限がありません。アクセスする為には、権限を上げて下さい。';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'アクセスが拒否されました。';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。管理者にこの問題をデバッグするために admin_check スクリプトを実行するよう依頼して下さい。';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認して下さい。';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータがありません。';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択して下さい。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='設定項目「%s」がありません。';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='文字列「%s」がありません。';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません。';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'データベースの項目「%s」がありません。';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTP サーバに接続できません。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力して下さい。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'プロジェクト名が無効です。プロジェクト名はブランクではいけません。';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ユーザーがありません。';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ブラウザから送信されたログイン情報は無効です。おそらく、あなたのアカウントは削除されています。';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ユーザーの表示設定がありません。';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'ニュースがありません。';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='パスワードが一致しません。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '配列を期待しましたが、文字列を取得しました。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='文字列を期待しましたが、配列を取得しました。';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '改善要求はありません。';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無効なメールアドレスです。';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'このファイル種別はアップロードできません。';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ファイルが重複しています。まず、ファイルを削除して下さい。';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '無効なアップロードパスです。ディレクトリが存在しないか書き込みできません。';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '重複している ID に当該改善要求を設定できません。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'カスタム項目がありません。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'カスタム項目名が重複しています。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '少なくとも 1 つのプロジェクトがこのカスタム項目を使用しています。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '無効な値です。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'スタム項目定義が無効です。';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 認証に失敗しました。';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'LDAP サーバとの接続に失敗しました。';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP レコードの更新に失敗しました。';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'LDAP のユーザーレコードがありません。';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'データベースとの接続に失敗しました。';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'データベースの検索に失敗しました。';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'データベースの選択に失敗しました。';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'カテゴリが重複しています。';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'コピー元、コピー先が指定されていません。';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'カテゴリがありません。';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'バージョンが重複しています。';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョンがありません。';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ユーザー名が無効です。';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ユーザーが必要なアクセス権限を持っていません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '後援機能が有効ではありません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '後援 %d が見つかりません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '後援(%s)は 最低額(%s)以下です。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ハンドラーは、後援済みの改善要求を扱うために必要なアクセスレベルを持っていません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 改善要求への後援の割り当てにはより高いアクセスレベルを要求します。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 後援済みの改善要求を割り当てることは、より高いアクセスレベルを要求します。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
 # MASC RELATIONSHIP
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "後援が見つかりません。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルを要求します。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付け出来ません。";
 # MASC RELATIONSHIP
 
-$s_login_error = "エラー：ユーザ名／パスワードが間違えています。";
-$s_login_cookies_disabled = "エラー：使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。";
+$s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
+$s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
 
 # General Strings
-$s_go_back = "戻る";
-$s_proceed = "次へ";
+$s_go_back = '戻る';
+$s_proceed = '次へ';
 
-$s_switch = "変更";
-$s_logged_in_as = "ユーザ名";
+$s_switch = '変更';
+$s_logged_in_as = 'ユーザー名';
 
-$s_prefix_for_deleted_users = "user";
+$s_prefix_for_deleted_users = 'user';
 
-$s_administrator = "管理者";
-$s_myself = "自身";
+$s_administrator = '管理者';
+$s_myself = '自身';
 
 # Enum Strings
-$s_access_levels_enum_string      = "10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者";
-$s_project_status_enum_string     = "10:開発,30:リリース,50:安定,70:完了";
-$s_project_view_state_enum_string = "10:公開,50:非公開";
-$s_view_state_enum_string         = "10:公開,50:非公開";
+$s_access_levels_enum_string = '10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者';
+$s_project_status_enum_string = '10:開発,30:リリース,50:安定,70:完了';
+$s_project_view_state_enum_string = '10:公開,50:非公開';
+$s_view_state_enum_string = '10:公開,50:非公開';
 
-$s_priority_enum_string           = "10:未定,20:低,30:中,40:高,50:緊急,60:即時";
-$s_severity_enum_string           = "10:機能,20:しょうもない,30:表示,40:些細,50:マイナー,60:メジャー,70:アプリケーションエラー,80:システム停止";
-$s_reproducibility_enum_string    = "10:毎回,30:時々,50:不定,70:未実施,90:再現不可,100:不明";
-$s_status_enum_string             = "10:新規,20:要追加情報,30:内容確認済,40:再現済,50:担当者決定,80:解決済,90:完了";
-$s_resolution_enum_string         = "10:不明,20:実装済,30:差戻し,40:再現不可,50:修正不可,60:2重登録,70:バグではない,80:保留,90:後回し";
-$s_projection_enum_string         = "10:未定,30:些細な修正,50:小さな修正,70:大きな修正,90:再設計";
-$s_eta_enum_string                = "10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上";
+$s_priority_enum_string = '10:未定,20:低,30:中,40:高,50:緊急,60:即時';
+$s_severity_enum_string = '10:機能,20:重要ではない,30:表示,40:微調整,50:マイナー,60:メジャー,70:クラッシュ,80:システム停止';
+$s_reproducibility_enum_string = '10:毎回,30:時々,50:不定,70:未試験,90:再現不可,100:不明';
+$s_status_enum_string = '10:新規,20:要追加情報,30:内容確認済,40:再現済,50:担当者決定,80:解決済,90:完了';
+$s_resolution_enum_string = '10:不明,20:実装済,30:差戻し,40:再現不可,50:修正不可,60:二重登録,70:改善要求ではない,80:保留,90:後回し';
+$s_projection_enum_string = '10:未定,30:些細な修正,50:小さな修正,70:大きな修正,90:再設計';
+$s_eta_enum_string = '10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
 
 # Email Strings
-$s_new_account_subject = "[mantis] アカウント登録通知";
-$s_new_account_greeting = "改修要望管理システム Mantis にようこそ！次のアカウントを用いてログインして下さい。\n\n";
-$s_new_account_url = "URL：";
-$s_new_account_username = "ユーザ名：";
-$s_new_account_password = "パスワード：";
-$s_new_account_message = "ログイン後、すぐにパスワードを変更して下さい。パスワードは、暗号化して記録していますので、スタッフが見る事も出来ません。パスワードを忘れた場合には、リセットするしかありませんので予めご了承下さい。\n\n";
-$s_new_account_do_not_reply = "このメールにはリプライしないで下さい。\n";
+$s_new_account_subject = '[mantis] アカウント登録通知';
+$s_new_account_greeting = '改善要求管理システム Mantis にようこそ!次のアカウントを用いてログインして下さい。\n\n';
+$s_new_account_url = 'URL:';
+$s_new_account_username = 'ユーザー名:';
+$s_new_account_password = 'パスワード:';
+$s_new_account_message = 'ログイン後、すぐにパスワードを変更して下さい。パスワードは、暗号化して記録していますので、スタッフが見る事も出来ません。パスワードを忘れた場合には、リセットするしかありませんので予めご了承下さい。\n\n';
+$s_new_account_do_not_reply = 'このメールにはリプライしないで下さい。\n';
 
-$s_reset_request_msg = "パスワードリセットの要求を受け付けました。";
-$s_account_name_msg = "ユーザ名：";
-$s_news_password_msg = "新しいパスワード：";
+$s_reset_request_msg = 'パスワードリセットの要求を受け付けました。';
+$s_account_name_msg = 'ユーザー名:';
+$s_news_password_msg = '新しいパスワード:';
 
-$s_email_notification_title_for_status_bug_feedback = "次の改修要望について、もっと情報が必要です。";
-$s_email_notification_title_for_status_bug_acknowledged = "次の改修要望の内容が確認されました。";
-$s_email_notification_title_for_status_bug_confirmed = "次の改修要望の再現を確認しました。";
-$s_email_notification_title_for_status_bug_assigned = "次の改修要望の担当が割り当てられました。";
-$s_email_notification_title_for_status_bug_resolved = "次の改修要望が実装されました。";
-$s_email_notification_title_for_status_bug_closed = "次の改修要望が完了しました。";
+$s_email_notification_title_for_status_bug_feedback = '次の改善要求について、もっと情報が必要です。';
+$s_email_notification_title_for_status_bug_acknowledged = '次の改善要求の内容が確認されました。';
+$s_email_notification_title_for_status_bug_confirmed = '次の改善要求の再現を確認しました。';
+$s_email_notification_title_for_status_bug_assigned = '次の改善要求の担当が割り当てられました。';
+$s_email_notification_title_for_status_bug_resolved = '次の改善要求が実装されました。';
+$s_email_notification_title_for_status_bug_closed = '次の改善要求が完了しました。';
 
-$s_email_notification_title_for_action_bug_submitted = "次の改修要望が登録されました。";
-$s_email_notification_title_for_action_bug_assigned = "次の改修要望の担当が割り当てられました。";
-$s_email_notification_title_for_action_bug_reopened = "次の改修要望が差戻されました。";
-$s_email_notification_title_for_action_bug_deleted = "次の改修要望が削除されました。";
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
-$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
-$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_bug_submitted = '次の改善要求が登録されました。';
+$s_email_notification_title_for_action_bug_assigned = '次の改善要求の担当が割り当てられました。';
+$s_email_notification_title_for_action_bug_reopened = '次の改善要求が差戻されました。';
+$s_email_notification_title_for_action_bug_deleted = '次の改善要求が削除されました。';
+$s_email_notification_title_for_action_bug_updated = '次の改善要求が更新されました。';
+$s_email_notification_title_for_action_sponsorship_added = '次の改善要求が後援されました。';
+$s_email_notification_title_for_action_sponsorship_updated = '下記改善要求の後援が修正されました。';
+$s_email_notification_title_for_action_sponsorship_deleted = '下記改善要求の後援は世間離れしています。';
 
-$s_email_notification_title_for_action_bugnote_submitted = "コメントが追加されました。";
+$s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
 # MASC RELATIONSHIP
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_relationship_added = "新しい関連は下記改善要求に加えられました。";
+$s_email_notification_title_for_action_relationship_deleted = "関連は下記改善要求から削除されました。";
+$s_email_notification_title_for_action_relationship_child_resolved = "関連改善要求は解決しました。";
+$s_email_notification_title_for_action_relationship_child_closed = "関連改善要求は閉じました。";
 # MASC RELATIONSHIP
 
-$s_email_reporter = "登録者";
-$s_email_handler = "担当者";
-$s_email_project = "プロジェクト";
-$s_email_bug = "要望番号(ID)";
-$s_email_category = "カテゴリ";
-$s_email_reproducibility = "再現性";
-$s_email_severity = "重要度";
-$s_email_priority = "優先度";
-$s_email_status = "ステータス";
-$s_email_resolution = "分析状況";
-$s_email_duplicate = "2重登録";
-$s_email_fixed_in_version = 'Fixed in Version';
-$s_email_date_submitted = "登録日";
-$s_email_last_modified = "最終更新日";
-$s_email_summary =  "要約";
-$s_email_description = "詳細";
+$s_email_reporter = '登録者';
+$s_email_handler = '担当者';
+$s_email_project = 'プロジェクト';
+$s_email_bug = '要望番号(ID)';
+$s_email_category = 'カテゴリ';
+$s_email_reproducibility = '再現性';
+$s_email_severity = '重要度';
+$s_email_priority = '優先度';
+$s_email_status = 'ステータス';
+$s_email_resolution = '解決状況';
+$s_email_duplicate = '二重登録';
+$s_email_fixed_in_version = '修正済みバージョン';
+$s_email_date_submitted = '登録日';
+$s_email_last_modified = '最終更新日';
+$s_email_summary =  '要約';
+$s_email_description = '詳細';
 
 # account_delete.php
-$s_account_protected_msg = "アカウントが保護されています。設定を変更できません。";
-$s_account_removed_msg = "アカウントが削除されています。";
+$s_account_protected_msg = 'アカウントが保護されています。設定を変更できません。';
+$s_account_removed_msg = 'アカウントが削除されています。';
 
 # account_delete_page.php
-$s_confirm_delete_msg = "アカウントを削除しても良いですか？";
-$s_delete_account_button = "アカウントの削除";
+$s_confirm_delete_msg = 'アカウントを削除しても良いですか?';
+$s_delete_account_button = 'アカウントの削除';
 
 # account_page.php
-$s_manage_profiles_link = "プロフィール";
-$s_change_preferences_link = "表示設定";
-$s_edit_account_title = "アカウントの編集";
-$s_username = "ユーザ名";
-$s_realname = 'Real Name';
-$s_email = "E-mail";
-$s_password = "パスワード";
-$s_confirm_password  = "パスワード(確認)";
-$s_access_level = "アクセス権";
-$s_update_user_button = "更新";
+$s_manage_profiles_link = 'プロフィール';
+$s_change_preferences_link = '表示設定';
+$s_edit_account_title = 'アカウントの編集';
+$s_username = 'ユーザー名';
+$s_realname = '本名';
+$s_email = '電子メール';
+$s_password = 'パスワード';
+$s_confirm_password  = 'パスワード(確認)';
+$s_access_level = 'アクセス権';
+$s_update_user_button = '更新';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = "表示設定";
-$s_default_project = "デフォルトプロジェクト";
-$s_advanced_report = "高度な改修要望";
-$s_advanced_view = "高度な表示";
-$s_advanced_update = "高度な更新";
-$s_refresh_delay = "再表示時間";
-$s_redirect_delay = "リダイレクト時間";
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_email_on_new = "新規要望通知メール";
-$s_email_on_assigned = "担当者決定通知メール";
-$s_email_on_feedback = "フィードバック通知メール";
-$s_email_on_resolved = "実装通知メール";
-$s_email_on_closed = "完了通知メール";
-$s_email_on_reopened = "差戻し通知メール";
-$s_email_on_bugnote_added = "コメント追加通知メール";
-$s_email_on_status_change = "ステータス変更通知メール";
-$s_email_on_priority_change = "優先度変更通知メール";
-$s_language = "言語";
-$s_update_prefs_button = "更新";
-$s_reset_prefs_button = "リセット";
+$s_default_account_preferences_title = '表示設定';
+$s_default_project = 'デフォルトプロジェクト';
+$s_advanced_report = '高度な改善要求';
+$s_advanced_view = '高度な表示';
+$s_advanced_update = '高度な更新';
+$s_refresh_delay = '再表示時間';
+$s_redirect_delay = 'リダイレクト時間';
+$s_with_minimum_severity = '対象の最小重要度';
+$s_email_on_new = '新規要望通知メール';
+$s_email_on_assigned = '担当者決定通知メール';
+$s_email_on_feedback = 'フィードバック通知メール';
+$s_email_on_resolved = '実装通知メール';
+$s_email_on_closed = '完了通知メール';
+$s_email_on_reopened = '差戻し通知メール';
+$s_email_on_bugnote_added = 'コメント追加通知メール';
+$s_email_on_status_change = 'ステータス変更通知メール';
+$s_email_on_priority_change = '優先度変更通知メール';
+$s_language = '言語';
+$s_update_prefs_button = '更新';
+$s_reset_prefs_button = 'リセット';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = "設定がリセットされました。";
+$s_prefs_reset_msg = '設定がリセットされました。';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = "設定が更新されました。";
+$s_prefs_updated_msg = '設定が更新されました。';
 
 # account_profile_add.php
-$s_profile_added_msg = "プロフィールが追加されました。";
+$s_profile_added_msg = 'プロフィールが追加されました。';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = "プロフィールが削除されました。";
+$s_profile_deleted_msg = 'プロフィールが削除されました。';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = "プロフィールの編集";
-$s_platform = "プラットフォーム";
-$s_operating_system = "OS";
-$s_additional_description = "コメント";
-$s_update_profile_button = "更新";
+$s_edit_profile_title = 'プロフィールの編集';
+$s_platform = 'プラットフォーム';
+$s_operating_system = 'OS';
+$s_additional_description = 'コメント';
+$s_update_profile_button = '更新';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = "デフォルトプロフィールが更新されました。";
+$s_profile_defaulted_msg = 'デフォルトプロフィールが更新されました。';
 
 # account_profile_manage_page.php
-$s_add_profile_title = "プロフィールの追加";
-$s_add_profile_button = "プロフィール追加";
-$s_edit_or_delete_profiles_title = "プロフィールの追加／削除";
-$s_edit_profile = "編集";
-$s_make_default = "デフォルトにする";
-$s_delete_profile = "削除";
-$s_select_profile = "プロフィール選択";
-$s_submit_button = "次へ";
+$s_add_profile_title = 'プロフィールの追加';
+$s_add_profile_button = 'プロフィール追加';
+$s_edit_or_delete_profiles_title = 'プロフィールの追加/削除';
+$s_edit_profile = '編集';
+$s_make_default = 'デフォルトにする';
+$s_delete_profile = '削除';
+$s_select_profile = 'プロフィール選択';
+$s_submit_button = '次へ';
 
 # account_profile_update.php
-$s_profile_updated_msg = "プロフィールが更新されました。";
+$s_profile_updated_msg = 'プロフィールが更新されました。';
 
 # account_update.php
-$s_account_updated_msg = "アカウントが正常に更新されました。";
-$s_email_updated = "Emailアドレスが正常に更新されました。";
-$s_realname_updated = 'Real name successfully updated';
-$s_password_updated = "パスワードが正常に更新されました。";
+$s_account_updated_msg = 'アカウントが正常に更新されました。';
+$s_email_updated = 'Emailアドレスが正常に更新されました。';
+$s_realname_updated = '本名の更新に成功しました。';
+$s_password_updated = 'パスワードが正常に更新されました。';
 
 # bug_assign.php
-$s_bug_assign_msg       = "改修要望が担当者に割り当てられました。";
+$s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
 
 # bug_close.php
-$s_bug_close_msg       = "改修要望が完了しました。";
-$s_close_immediately   = "すぐに完了：";
+$s_bug_close_msg       = '改善要求が完了しました。';
+$s_close_immediately   = 'すぐに完了:';
 
 # bug_close_page.php
-$s_close_bug_title = "改修要望の完了";
+$s_close_bug_title = '改善要求の完了';
 
 # bug_delete.php
-$s_bug_deleted_msg = "改修要望が削除されました。";
+$s_bug_deleted_msg = '改善要求が削除されました。';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "本当にこの改修要望を削除しても良いですか？";
-$s_delete_bug_button = "削除";
+$s_delete_bug_sure_msg = '本当にこの改善要求を削除しても良いですか?';
+$s_delete_bug_button = '削除';
 
 # bug_monitor.php
-$s_monitor_bug_button = "モニタの開始";
-$s_unmonitor_bug_button = "モニタの終了";
+$s_monitor_bug_button = '改善要求を監視';
+$s_unmonitor_bug_button = '監視終了';
 
 # bug_file_add.php
-$s_file_upload_msg = "ファイルが登録されました。";
+$s_file_upload_msg = 'ファイルが登録されました。';
 
 # bug_file_upload_inc.php
-$s_upload_file = "ファイル登録";
-$s_select_file = "ファイル名";
-$s_upload_file_button = "登録";
-$s_max_file_size = "最大ファイルサイズ";
+$s_upload_file = 'ファイル登録';
+$s_select_file = 'ファイル名';
+$s_upload_file_button = '登録';
+$s_max_file_size = '最大ファイルサイズ';
 
 # bug_reopen.php
-$s_bug_reopened_msg = "改修要望が差し戻されました。";
-$s_reopen_add_bugnote_title = "差戻しの理由";
-$s_bugnote_add_reopen_button = "コメントの追加";
+$s_bug_reopened_msg = '改善要求が差し戻されました。';
+$s_reopen_add_bugnote_title = '差戻しの理由';
+$s_bugnote_add_reopen_button = 'コメントの追加';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = "分析状況の入力";
-$s_resolve_bug_button = "分析状況の更新";
+$s_resolve_bug_title = '解決状況の入力';
+$s_resolve_bug_button = '解決状況の更新';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "改修要望が実装されました。↓コメントを記述して下さい。";
-$s_resolve_add_bugnote_title = "実装のコメント";
-$s_bugnote_add_resolve_button = "コメントの追加";
+$s_bug_resolved_msg = '改善要求が実装されました。↓コメントを記述して下さい。';
+$s_resolve_add_bugnote_title = '実装のコメント';
+$s_bugnote_add_resolve_button = 'コメントの追加';
 
 # bug_reminder_page.php
-$s_from = "From";
-$s_to = "宛先";
-$s_on = "On";
-$s_sent_you_this_reminder_about = "が、次のリマインダーをあなたに送信しました。";
-$s_bug_reminder = "リマインダーを送る";
-$s_reminder_sent_to = "リマインダーの送信";
-$s_bug_send_button = "送信";
-$s_reminder = "送信内容";
+$s_from = '差出人';
+$s_to = '宛先';
+$s_on = '日時';
+$s_sent_you_this_reminder_about = 'が、次のリマインダーをあなたに送信しました。';
+$s_bug_reminder = 'リマインダーを送る';
+$s_reminder_sent_to = 'リマインダーの送信';
+$s_bug_send_button = '送信';
+$s_reminder = '送信内容';
 
 # bug_update.php
-$s_bug_updated_msg = "改修要望が正常に更新されました。";
+$s_bug_updated_msg = '改善要求が正常に更新されました。';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = "改修要望の内容へ";
-$s_update_simple_link = "簡単な表示";
-$s_updating_bug_advanced_title = "改修要望の変更(高度な表示)";
-$s_id = "ID";
-$s_category = "カテゴリ";
-$s_severity = "重要度";
-$s_reproducibility = "再現性";
-$s_date_submitted = "登録日";
-$s_last_update = "最終更新日";
-$s_reporter = "登録者";
-$s_assigned_to = "担当者";
-$s_priority = "優先度";
-$s_resolution = "分析状況";
-$s_status = "ステータス";
-$s_duplicate_id = "重複しているID";
-$s_os = "OS";
-$s_projection = "修正方法";
-$s_os_version = "バージョン";
-$s_eta = "予定工数";
-$s_product_version = "製品バージョン";
-$s_build = "ビルド";
-$s_fixed_in_version = 'Fixed in Version';
-$s_votes = "実装希望得票数";
-$s_summary = "要約";
-$s_description = "詳細";
-$s_steps_to_reproduce = "再現方法";
-$s_additional = "追加";
-$s_information = "情報";
-$s_update_information_button = "更新";
+$s_back_to_bug_link = '改善要求の内容へ';
+$s_update_simple_link = '簡単な表示';
+$s_updating_bug_advanced_title = '改善要求の変更(高度な表示)';
+$s_id = 'ID';
+$s_category = 'カテゴリ';
+$s_severity = '重要度';
+$s_reproducibility = '再現性';
+$s_date_submitted = '登録日';
+$s_last_update = '最終更新日';
+$s_reporter = '登録者';
+$s_assigned_to = '担当者';
+$s_priority = '優先度';
+$s_resolution = '解決状況';
+$s_status = 'ステータス';
+$s_duplicate_id = '重複しているID';
+$s_os = 'OS';
+$s_projection = '修正方法';
+$s_os_version = 'バージョン';
+$s_eta = '予定工数';
+$s_product_version = '製品バージョン';
+$s_build = 'ビルド';
+$s_fixed_in_version = '修正済みバージョン';
+$s_votes = '実装希望得票数';
+$s_summary = '要約';
+$s_description = '詳細';
+$s_steps_to_reproduce = '再現方法';
+$s_additional = '追加';
+$s_information = '情報';
+$s_update_information_button = '更新';
 
 # bug_update_page.php
-$s_update_advanced_link = "高度な表示";
-$s_updating_bug_simple_title = "改修要望の変更(簡単な表示)";
+$s_update_advanced_link = '高度な表示';
+$s_updating_bug_simple_title = '改善要求の変更(簡単な表示)';
 
 # bug_vote_add.php
-$s_vote_added_msg = "実装希望が投票されました。";
+$s_vote_added_msg = '実装希望が投票されました。';
 
 # bugnote_add.php
-$s_bugnote_added_msg = "コメントが追加されました。";
+$s_bugnote_added_msg = 'コメントが追加されました。';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = "コメントが削除されました。";
-$s_bug_notes_title = "コメント";
+$s_bugnote_deleted_msg = 'コメントが削除されました。';
+$s_bug_notes_title = 'コメント';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = "コメントの編集";
+$s_edit_bugnote_title = 'コメントの編集';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = "この改修要望に対するコメントはありません。";
-$s_delete_link = "削除";
-$s_add_bugnote_title = "コメント追加";
-$s_add_bugnote_button = "追加";
-$s_bugnote_edit_link = "編集";
-$s_close_bug_button = "完了";
+$s_no_bugnotes_msg = 'この改善要求に対するコメントはありません。';
+$s_delete_link = '削除';
+$s_add_bugnote_title = 'コメント追加';
+$s_add_bugnote_button = '追加';
+$s_bugnote_edit_link = '編集';
+$s_close_bug_button = '完了';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = "コメントが更新されました。";
-$s_edited_on = "更新日時：";
+$s_bugnote_updated_msg = 'コメントが更新されました。';
+$s_edited_on = '更新日時:';
 
 # index.php
-$s_click_to_login = "ログイン→";
+$s_click_to_login = 'ログイン→';
 
 # login.php
 
 # login_page.php
-$s_login_page_info = "Mantis にようこそ！";
-$s_login_title = "ログイン";
-$s_save_login = "パスワードの保存";
-$s_choose_project = "プロジェクト選択";
-$s_login_button = "ログイン";
-$s_signup_link = "新しいユーザの作成";
+$s_login_page_info = 'Mantis にようこそ!';
+$s_login_title = 'ログイン';
+$s_save_login = 'パスワードの保存';
+$s_choose_project = 'プロジェクト選択';
+$s_login_button = 'ログイン';
+$s_signup_link = '新しいユーザーの作成';
 
 # login_select_proj_page.php
-$s_select_project_button = "選択";
+$s_select_project_button = '選択';
 
 # logout_page.php
-$s_logged_out_title = "ログアウト中...";
-$s_redirecting = "...次のページ→";
-$s_here = "Here";
+$s_logged_out_title = 'ログアウト中...';
+$s_redirecting = '...次のページ→';
+$s_here = 'Here';
 
 # main_page.php
-$s_open_and_assigned_to_me = "私が担当する改修要望";
-$s_open_and_reported_to_me = "私が登録した改修要望";
-$s_newer_news_link = "新しいニュース";
-$s_older_news_link = "過去のニュース";
-$s_archives = "履歴";
-$s_rss = "RSS";
+$s_open_and_assigned_to_me = '私が担当する改善要求';
+$s_open_and_reported_to_me = '私が登録した改善要求';
+$s_newer_news_link = '新しいニュース';
+$s_older_news_link = '過去のニュース';
+$s_archives = '履歴';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = "ユーザを作成しました。アカウント：";
-$s_created_user_part2 = "アクセス権：";
+$s_created_user_part1 = 'ユーザーを作成しました。アカウント:';
+$s_created_user_part2 = 'アクセス権:';
 
 # manage_create_user_page.php
-$s_create_new_account_title = "新規アカウント作成";
-$s_verify_password = "パスワード(確認)";
-$s_enabled = "有効";
-$s_protected = "保護";
-$s_create_user_button = "登録";
+$s_create_new_account_title = '新規アカウント作成';
+$s_verify_password = 'パスワード(確認)';
+$s_enabled = '有効';
+$s_protected = '保護';
+$s_create_user_button = '登録';
 
 # manage_page.php
-$s_hide_disabled = "無効なユーザを隠す";
-$s_filter_button = "表示";
-$s_manage_users_link = "ユーザ管理";
-$s_manage_projects_link = "プロジェクト管理";
-$s_manage_custom_field_link = "カスタム項目管理";
-$s_create_new_account_link = "アカウント作成";
-$s_projects_link = "プロジェクト";
-$s_documentation_link = "ドキュメント";
-$s_new_accounts_title = "新規アカウント";
-$s_1_week_title = "過去1週間";
-$s_never_logged_in_title = "未ログイン";
-$s_prune_accounts = "アカウント削除";
-$s_hide_inactive = "休止ユーザを隠す";
-$s_manage_accounts_title = "アカウント管理";
-$s_p = "保護";
-$s_date_created = "作成日時";
-$s_last_visit = "最終訪問日時";
-$s_edit_user_link = "ユーザ編集";
+$s_hide_disabled = '無効なユーザーを隠す';
+$s_filter_button = '表示';
+$s_manage_users_link = 'ユーザー管理';
+$s_manage_projects_link = 'プロジェクト管理';
+$s_manage_custom_field_link = 'カスタム項目管理';
+$s_create_new_account_link = 'アカウント作成';
+$s_projects_link = 'プロジェクト';
+$s_documentation_link = 'ドキュメント';
+$s_new_accounts_title = '新規アカウント';
+$s_1_week_title = '過去1週間';
+$s_never_logged_in_title = '未ログイン';
+$s_prune_accounts = 'アカウント削除';
+$s_hide_inactive = '休止ユーザーを隠す';
+$s_manage_accounts_title = 'アカウント管理';
+$s_p = '保護';
+$s_date_created = '作成日時';
+$s_last_visit = '最終訪問日時';
+$s_edit_user_link = 'ユーザー編集';
 
 # manage_proj_add.php
-$s_project_added_msg = "プロジェクトが追加されました。";
+$s_project_added_msg = 'プロジェクトが追加されました。';
 
 # manage_proj_category_add.php
-$s_category_added_msg = "カテゴリが追加されました。";
+$s_category_added_msg = 'カテゴリが追加されました。';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "カテゴリが削除されました。";
+$s_category_deleted_msg = 'カテゴリが削除されました。';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "本当にこのカテゴリを削除しますか？関連する全ての改修要望が削除されます。";
-$s_delete_category_button = "削除";
+$s_category_delete_sure_msg = '本当にこのカテゴリを削除しますか?関連する全ての改善要求が削除されます。';
+$s_delete_category_button = '削除';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = "プロジェクトカテゴリの編集";
-$s_update_category_button = "更新";
+$s_edit_project_category_title = 'プロジェクトカテゴリの編集';
+$s_update_category_button = '更新';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = "カテゴリが更新されました。";
+$s_category_updated_msg = 'カテゴリが更新されました。';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = "プロジェクトが削除されました。";
+$s_project_deleted_msg = 'プロジェクトが削除されました。';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "本当にこのプロジェクトを削除しますか？関連する全ての改修要望が削除されます。";
-$s_project_delete_button = "削除";
+$s_project_delete_msg = '本当にこのプロジェクトを削除しますか?関連する全ての改善要求が削除されます。';
+$s_project_delete_button = '削除';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = "プロジェクト情報の編集";
-$s_project_name = "プロジェクト名";
-$s_view_status = "外部からの参照";
-$s_public = "公開";
-$s_private = "非公開";
-$s_update_project_button = "更新";
-$s_delete_project_button = "削除";
-$s_categories_and_version_title = "カテゴリ／バージョン";
-$s_categories = "カテゴリ";
-$s_add_category_button = "カテゴリの追加";
-$s_versions = "バージョン";
-$s_add_version_button = "バージョンの追加";
-$s_edit_link = "編集";
-$s_actions = "Actions";
-$s_version = "バージョン／ビルド";
-$s_timestamp = "Timestamp";
-$s_update = "更新";
+$s_edit_project_title = 'プロジェクト情報の編集';
+$s_project_name = 'プロジェクト名';
+$s_view_status = '外部からの参照';
+$s_public = '公開';
+$s_private = '非公開';
+$s_update_project_button = '更新';
+$s_delete_project_button = '削除';
+$s_categories_and_version_title = 'カテゴリ/バージョン';
+$s_categories = 'カテゴリ';
+$s_add_category_button = 'カテゴリの追加';
+$s_versions = 'バージョン';
+$s_add_version_button = 'バージョンの追加';
+$s_edit_link = '編集';
+$s_actions = '操作';
+$s_version = 'バージョン/ビルド';
+$s_timestamp = 'タイムスタンプ';
+$s_update = '更新';
 
 # manage_proj_menu_page.php
-$s_add_project_title = "プロジェクト追加";
-$s_upload_file_path = "ファイルの登録場所";
-$s_add_project_button = "追加";
-$s_projects_title = "プロジェクト";
-$s_name = "名称";
+$s_add_project_title = 'プロジェクト追加';
+$s_upload_file_path = 'ファイルの登録場所';
+$s_add_project_button = '追加';
+$s_projects_title = 'プロジェクト';
+$s_name = '名称';
 
 # manage_proj_update.php
-$s_project_updated_msg = "プロジェクト情報が更新されました。";
+$s_project_updated_msg = 'プロジェクト情報が更新されました。';
 
 # manage_proj_version_add.php
-$s_version_added_msg = "バージョンが追加されました。";
+$s_version_added_msg = 'バージョンが追加されました。';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "バージョンが削除されました。";
+$s_version_deleted_msg = 'バージョンが削除されました。';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "本当にこのバージョンを削除しますか？関連する改修要望が全て削除されます。";
-$s_delete_version_button = "削除";
+$s_version_delete_sure = '本当にこのバージョンを削除しますか? 関連する改善要求が全て削除されます。';
+$s_delete_version_button = '削除';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = "プロジェクトバージョンの編集";
-$s_update_version_button = "更新";
+$s_edit_project_version_title = 'プロジェクトバージョンの編集';
+$s_update_version_button = '更新';
 $s_released = 'Released';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = "バージョンが更新されました。";
+$s_version_updated_msg = 'バージョンが更新されました。';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "アカウントが保護されています。削除できません。";
-$s_account_deleted_msg = "アカウントを削除しました。";
+$s_account_delete_protected_msg = 'アカウントが保護されています。削除できません。';
+$s_account_deleted_msg = 'アカウントを削除しました。';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "本当にこのアカウントを削除しますか？";
+$s_delete_account_sure_msg = '本当にこのアカウントを削除しますか?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = "1週間以上「未ログイン」状態のユーザを削除します。";
-$s_prune_accounts_button = "削除";
-$s_confirm_account_pruning = "ログインされたことのない古いアカウントを削除してもよろしいですか。";
+$s_accounts_pruned_msg = '1週間以上「未ログイン」状態のユーザーを削除します。';
+$s_prune_accounts_button = '削除';
+$s_confirm_account_pruning = 'ログインされたことのない古いアカウントを削除してもよろしいですか。';
 
 # manage_user_page.php
-$s_edit_user_title = "ユーザ情報の編集";
-$s_reset_password_button = "パスワードのリセット";
-$s_delete_user_button = "アカウント削除";
-$s_reset_password_msg = "パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。";
-$s_reset_password_msg2 = "パスワードのリセットを行うと、パスワードが無しに設定されます。";
-$s_show_all_users = "ALL";
+$s_edit_user_title = 'ユーザー情報の編集';
+$s_reset_password_button = 'パスワードのリセット';
+$s_delete_user_button = 'アカウント削除';
+$s_reset_password_msg = 'パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。';
+$s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードが無しに設定されます。';
+$s_show_all_users = '全て';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = "アカウントが保護されています。パスワードをリセットできません。";
-$s_account_reset_msg = "パスワードがリセットされました。";
-$s_account_reset_msg2 = "パスワードが無しに設定されました。";
+$s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
+$s_account_reset_msg = 'パスワードがリセットされました。';
+$s_account_reset_msg2 = 'パスワードが無しに設定されました。';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "アカウントが保護されています。アクセス権と有効／無効の設定は変更できません。その他の情報は更新されます。";
-$s_manage_user_updated_msg = "アカウントが更新されました。";
+$s_manage_user_protected_msg = 'アカウントが保護されています。アクセス権と有効/無効の設定は変更できません。その他の情報は更新されます。';
+$s_manage_user_updated_msg = 'アカウントが更新されました。';
 
 # menu_inc.php
-$s_main_link = "メイン";
-$s_view_bugs_link = "検索";
-$s_report_bug_link = "登録";
-$s_changelog_link = 'Change Log';
-$s_summary_link = "サマリ";
-$s_account_link = "アカウント設定";
-$s_users_link = "プロジェクト設定";
-$s_manage_link = "システム管理";
-$s_edit_news_link = "ニュース編集";
-$s_docs_link = "ドキュメント";
-$s_logout_link = "ログアウト";
-$s_my_view_link = 'My View';
+$s_main_link = 'メイン';
+$s_view_bugs_link = '検索';
+$s_report_bug_link = '登録';
+$s_changelog_link = '変更履歴';
+$s_summary_link = '要約';
+$s_account_link = 'アカウント設定';
+$s_users_link = 'プロジェクト設定';
+$s_manage_link = 'システム管理';
+$s_edit_news_link = 'ニュース編集';
+$s_docs_link = 'ドキュメント';
+$s_logout_link = 'ログアウト';
+$s_my_view_link = '自分のを見る';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = '担当不在';
+$s_my_view_title_recent_mod = '最近修正';
+$s_my_view_title_reported = '自分がレポート';
+$s_my_view_title_assigned = '自分が担当 (未解決)';
+$s_my_view_title_resolved = '解決済み';
+$s_my_view_title_monitored = '自分が監視';
 
 # news_add.php
-$s_news_added_msg = "ニュースが追加されました。";
+$s_news_added_msg = 'ニュースが追加されました。';
 
 # news_delete.php
-$s_news_deleted_msg = "ニュースが削除されました。";
+$s_news_deleted_msg = 'ニュースが削除されました。';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "本当にこのニュースを削除しますか？";
-$s_delete_news_item_button = "削除";
+$s_delete_news_sure_msg = '本当にこのニュースを削除しますか?';
+$s_delete_news_item_button = '削除';
 
 # news_edit_page.php
-$s_edit_news_title = "ニュース編集";
-$s_headline = "見出し";
-$s_body = "本文";
-$s_update_news_button = "更新";
+$s_edit_news_title = 'ニュース編集';
+$s_headline = '見出し';
+$s_body = '本文';
+$s_update_news_button = '更新';
 
 # news_menu_page.php
-$s_add_news_title = "ニュース追加";
-$s_post_to = "投稿先";
-$s_post_news_button = "投稿";
-$s_edit_or_delete_news_title = "ニュース編集／削除";
-$s_edit_post = "編集";
-$s_delete_post = "削除";
-$s_select_post = "選択";
+$s_add_news_title = 'ニュース追加';
+$s_post_to = '投稿先';
+$s_post_news_button = '投稿';
+$s_edit_or_delete_news_title = 'ニュース編集/削除';
+$s_edit_post = '編集';
+$s_delete_post = '削除';
+$s_select_post = '選択';
 
 # news_update.php
-$s_news_updated_msg = "ニュースが更新されました。";
+$s_news_updated_msg = 'ニュースが更新されました。';
 
 # news_view_page.php
-$s_back_link = "戻る";
+$s_back_link = '戻る';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = "ファイル登録が完了しました。";
+$s_file_uploaded_msg = 'ファイル登録が完了しました。';
 
 # proj_doc_add_page.php
-$s_upload_file_title = "ファイル登録";
-$s_title = "タイトル";
+$s_upload_file_title = 'ファイル登録';
+$s_title = 'タイトル';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = "ファイルが削除されました。";
+$s_project_file_deleted_msg = 'ファイルが削除されました。';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "本当にこのファイルを削除しても良いですか？";
+$s_confirm_file_delete_msg = '本当にこのファイルを削除しても良いですか?';
 
 # proj_doc_edit_page.php
-$s_filename = "ファイル名";
-$s_file_update_button = "更新";
-$s_file_delete_button = "削除";
+$s_filename = 'ファイル名';
+$s_file_update_button = '更新';
+$s_file_delete_button = '削除';
 
 # proj_doc_page.php
-$s_project_documentation_title = "プロジェクトドキュメント";
-$s_user_documentation = "Mantisユーザマニュアル";
-$s_project_documentation = "プロジェクトドキュメント";
-$s_add_file = "ファイル登録";
+$s_project_documentation_title = 'プロジェクトドキュメント';
+$s_user_documentation = 'Mantisユーザーマニュアル';
+$s_project_documentation = 'プロジェクトドキュメント';
+$s_add_file = 'ファイル登録';
 
 # proj_doc_update.php
-$s_project_document_updated = "更新されました。";
+$s_project_document_updated = '更新されました。';
 
 # proj_user_add.php
-$s_project_user_added_msg = "プロジェクトにユーザを追加しました。";
+$s_project_user_added_msg = 'プロジェクトにユーザーを追加しました。';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = "プロジェクトからユーザを削除しました。";
+$s_project_removed_user_msg = 'プロジェクトからユーザーを削除しました。';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "ユーザをプロジェクトから削除しますか？";
+$s_remove_user_sure_msg = 'ユーザーをプロジェクトから削除しますか?';
 
 # proj_user_menu_page.php
-$s_add_user_title = "プロジェクトへのユーザ追加";
-$s_add_user_button = "追加";
-$s_project_selection_title = "プロジェクト選択";
-$s_remove_link = "プロジェクトから削除";
+$s_add_user_title = 'プロジェクトへのユーザーを追加';
+$s_add_user_button = '追加';
+$s_project_selection_title = 'プロジェクトを選択';
+$s_remove_link = 'プロジェクトから削除';
 
 # proj_user_update.php
-$s_updated_user_msg = "ユーザが更新されました。";
+$s_updated_user_msg = 'ユーザーが更新されました。';
 
 # report_add.php
-$s_must_enter_category = "カテゴリを選択して下さい。";
-$s_must_enter_severity = "重要度を選択して下さい。";
-$s_must_enter_reproducibility = "再現性を選択して下さい。";
-$s_must_enter_summary = "要約を記入して下さい。";
-$s_must_enter_description = "詳細を記入して下さい。";
-$s_report_more_bugs = "次の改修要望";
-$s_submission_thanks_msg = "登録、有難うございました。";
+$s_must_enter_category = 'カテゴリを選択して下さい。';
+$s_must_enter_severity = '重要度を選択して下さい。';
+$s_must_enter_reproducibility = '再現性を選択して下さい。';
+$s_must_enter_summary = '要約を記入して下さい。';
+$s_must_enter_description = '詳細を記入して下さい。';
+$s_report_more_bugs = '次の改善要求';
+$s_submission_thanks_msg = '登録、有難うございました。';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = "簡単な改修要望";
-$s_enter_report_details_title = "改修要望の登録";
-$s_required = "必須";
-$s_select_category = "＊カテゴリを選択＊";
-$s_select_reproducibility = "＊再現性を選択＊";
-$s_select_severity = "＊重要度を選択＊";
-$s_or_fill_in = "↑選択 or 記入↓";
-$s_assign_to = "担当者";
-$s_additional_information = "追加情報";
-$s_submit_report_button = "登録";
-$s_check_report_more_bugs = "続けて登録する場合にはチェックして下さい。";
+$s_simple_report_link = '簡単な改善要求';
+$s_enter_report_details_title = '改善要求の登録';
+$s_required = '必須';
+$s_select_category = '*カテゴリを選択*';
+$s_select_reproducibility = '*再現性を選択*';
+$s_select_severity = '*重要度を選択*';
+$s_or_fill_in = '↑選択 or 記入↓';
+$s_assign_to = '担当者';
+$s_additional_information = '追加情報';
+$s_submit_report_button = '登録';
+$s_check_report_more_bugs = '続けて登録する場合にはチェックして下さい。';
 
 # report_bug_page.php
-$s_advanced_report_link = "高度な改修要望";
-$s_report_stay = "次の改修要望";
+$s_advanced_report_link = '高度な改善要求';
+$s_report_stay = '次の改善要求';
 
 # set_project.php
-$s_selected_project = "選択したプロジェクト";
-$s_valid_project_msg = "プロジェクトを正しく選択して下さい。";
+$s_selected_project = '選択したプロジェクト';
+$s_valid_project_msg = 'プロジェクトを正しく選択して下さい。';
 
 # signup.php
-$s_invalid_email = "メールアドレスが正しく入力されていません。";
-$s_duplicate_username = "ユーザ名が重複しています。他のユーザ名を入力して下さい。";
-$s_account_create_fail = "アカウントの作成に失敗しました。";
-$s_account_added = "アカウントの作成に成功しました。";
-$s_password_emailed_msg = "パスワードを、メールで送信しました。";
-$s_no_reponse_msg = "1週間以内にログインしなければ、アカウントが削除されます。";
+$s_invalid_email = 'メールアドレスが正しく入力されていません。';
+$s_duplicate_username = 'ユーザー名が重複しています。他のユーザー名を入力して下さい。';
+$s_account_create_fail = 'アカウントの作成に失敗しました。';
+$s_account_added = 'アカウントの作成に成功しました。';
+$s_password_emailed_msg = 'パスワードを、メールで送信しました。';
+$s_no_reponse_msg = '1週間以内にログインしなければ、アカウントが削除されます。';
 
 # signup_page.php
-$s_signup_info = "希望するユーザ名と正しいメールアドレスを入力して下さい。パスワードは、入力されたメールアドレスに送信されます。";
-$s_signup_title = "ユーザ登録";
-$s_signup_button = "登録";
+$s_signup_info = '希望するユーザー名と正しいメールアドレスを入力して下さい。パスワードは、入力されたメールアドレスに送信されます。';
+$s_signup_title = 'ユーザー登録';
+$s_signup_button = '登録';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = "サイト設定の編集";
-$s_save_settings_button = "保存";
+$s_edit_site_settings_title = 'サイト設定の編集';
+$s_save_settings_button = '保存';
 
 # site_settings_page.php
-$s_site_settings_title = "サイト設定";
-$s_system_info_link = "システム情報";
-$s_site_settings_link = "サイト設定";
+$s_site_settings_title = 'サイト設定';
+$s_system_info_link = 'システム情報';
+$s_site_settings_link = 'サイト設定';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = "サイト設定が更新されました。";
+$s_site_settings_updated_msg = 'サイト設定が更新されました。';
 
 # summary_page.php
-$s_summary_title = "改修要望のサマリ";
-$s_summary_jpgraph_link = "高度なサマリ";
-$s_by_project = "プロジェクトによる";
-$s_by_status = "ステータスによる";
-$s_by_date = "日数による";
-$s_by_severity = "重要度による";
-$s_by_resolution = "分析状況による";
-$s_by_category = "カテゴリによる";
-$s_by_priority = "優先度による";
-$s_by_developer = "開発者による";
-$s_by_reporter ="登録者による";
-$s_reporter_by_resolution = "登録者毎の分析状況";
-$s_reporter_effectiveness = "登録者毎の有効度";
-$s_developer_by_resolution = "開発者毎の分析状況";
-$s_percentage_fixed = "% 実装済";
-$s_percentage_errors = "% 無効";
-$s_errors = "無効";
-$s_total = "合計";
-$s_time_stats = "完了にかかる時間";
-$s_longest_open_bug = "最大放置ID";
-$s_longest_open = "最大放置日数";
-$s_average_time = "平均完了日数";
-$s_total_time = "合計完了日数";
-$s_developer_stats = "開発者による";
-$s_reporter_stats = "登録者による";
-$s_orct = "(新規/実装済/完了/合計)";
+$s_summary_title = '改善要求の要約';
+$s_summary_jpgraph_link = '高度な要約';
+$s_by_project = 'プロジェクトによる';
+$s_by_status = 'ステータスによる';
+$s_by_date = '日数による';
+$s_by_severity = '重要度による';
+$s_by_resolution = '解決状況による';
+$s_by_category = 'カテゴリによる';
+$s_by_priority = '優先度による';
+$s_by_developer = '開発者による';
+$s_by_reporter ='登録者による';
+$s_reporter_by_resolution = '登録者毎の解決状況';
+$s_reporter_effectiveness = '登録者毎の有効度';
+$s_developer_by_resolution = '開発者毎の解決状況';
+$s_percentage_fixed = '% 実装済';
+$s_percentage_errors = '% 無効';
+$s_errors = '無効';
+$s_total = '合計';
+$s_time_stats = '完了にかかる時間';
+$s_longest_open_bug = '最大放置 ID';
+$s_longest_open = '最大放置日数';
+$s_average_time = '平均完了日数';
+$s_total_time = '合計完了日数';
+$s_developer_stats = '開発者による';
+$s_reporter_stats = '登録者による';
+$s_orct = '(新規/実装済/完了/合計)';
 
 # view_all_bug_page.php
-$s_any = "全て";
-$s_show = "表示数";
-$s_changed = "変更(時間)";
-$s_viewing_bugs_title = "改修要望一覧";
-$s_updated = "最終更新日時";
+$s_any = '全て';
+$s_show = '表示数';
+$s_changed = '変更(時間)';
+$s_viewing_bugs_title = '改善要求一覧';
+$s_updated = '最終更新日時';
 
 # view_all_inc.php
-$s_none = "無し";
-$s_search ="検索";
-$s_view_prev_link = "↑";
-$s_view_next_link = "↓";
-$s_prev = "前";
-$s_next = "次";
-$s_first = "先頭";
-$s_last = "最終";
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_none = '無し';
+$s_search ='検索';
+$s_view_prev_link = '↑';
+$s_view_next_link = '↓';
+$s_prev = '前';
+$s_next = '次';
+$s_first = '先頭';
+$s_last = '最終';
+$s_start_date = '開始日';
+$s_end_date = '終了日';
+$s_use_date_filters = 'フィルターデータを使う';
+$s_yes = 'はい';
+$s_no = 'いいえ';
+$s_open_filters = 'フィルター変更';
+$s_or_unassigned = 'もしくは未アサイン';
 $s_ok = 'OK';
 
 # stored query strings
-$s_use_query = 'Use Filter';
-$s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
-$s_save_query = 'Save Current Filter';
-$s_reset_query = 'Reset Filter';
-$s_query_name = 'Filter Name';
-$s_query_exists = 'This particular query appears to already exist.';
-$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
-$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
-$s_query_store_error = 'There was an error saving this query.';
-$s_open_queries = 'Manage Filters';
-$s_query_delete_msg = 'Are you sure you wish to delete this query?';
+$s_use_query = 'フィルター使用';
+$s_delete_query = 'フィルター削除';
+$s_query_deleted = 'フィルターを削除しました。';
+$s_save_query = '現在のフィルターを保存';
+$s_reset_query = 'フィルターリセット';
+$s_query_name = 'フィルター名';
+$s_query_exists = 'この詳細照会は既に存在するように見えます。';
+$s_query_dupe_name = '別の照会が既にこの名前を持っています。この照会に別の名前を選んでください。';
+$s_query_blank_name = '名前のないフィルターを保管することができません。それを保存する前にこのフィルターに名前を与えてください。';
+$s_query_store_error = 'この紹介の保存に失敗しました。';
+$s_open_queries = 'フィルター管理';
+$s_query_delete_msg = 'この照会を本当に削除しますか?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = "簡単な表示";
-$s_viewing_bug_advanced_details_title = "改修要望の内容(高度な表示)";
-$s_product_build = "製品ビルド";
-$s_system_profile = "システムの詳細説明";
-$s_update_bug_button = "更新";
-$s_bug_assign_to_button = "担当者の割り当て";
-$s_reopen_bug_button = "差戻し";
-$s_move_bug_button = 'Move Issue';
-$s_attached_files = "添付ファイル";
-$s_publish = "Publish";
-$s_cached = "Cached";
+$s_view_simple_link = '簡単な表示';
+$s_viewing_bug_advanced_details_title = '改善要求の内容(高度な表示)';
+$s_product_build = '製品ビルド';
+$s_system_profile = 'システムの詳細説明';
+$s_update_bug_button = '更新';
+$s_bug_assign_to_button = '担当者の割り当て';
+$s_reopen_bug_button = '差戻し';
+$s_move_bug_button = '改善要求の移動';
+$s_attached_files = '添付ファイル';
+$s_publish = 'Publish';
+$s_cached = 'Cached';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = "高度な表示";
-$s_viewing_bug_simple_details_title = "改修要望の内容(簡単な表示)";
+$s_view_advanced_link = '高度な表示';
+$s_viewing_bug_simple_details_title = '改善要求の内容(簡単な表示)';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = "この改修要望をモニターしているユーザはいません。";
-$s_users_monitoring_bug = "この改修要望をモニターしているユーザ";
-$s_monitoring_user_list = "ユーザ一覧";
+$s_no_users_monitoring_bug = 'この改善要求を監視しているユーザーはいません。';
+$s_users_monitoring_bug = 'この改善要求を監視しているユーザー';
+$s_monitoring_user_list = 'ユーザー一覧';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
-$s_users_sponsoring_bug = 'Users sponsoring this issue';
-$s_sponsors_list = 'Sponsors List';
-$s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
+$s_no_users_sponsoring_bug = 'この改善要求を支持するユーザはいません。';
+$s_users_sponsoring_bug = 'この改善要求の後援ユーザー一覧';
+$s_sponsors_list = '後援一覧';
+$s_total_sponsorship_amount = '総後援数 = %s';
+$s_sponsor_issue = '後援改善要求';
 
 # custom field strings
-$s_add_custom_field_button = "カスタム項目の登録";
-$s_delete_custom_field_button = "カスタム項目の削除";
-$s_delete_custom_field_everywhere = "すべてのカスタム項目を削除する。";
-$s_update_custom_field_button = "カスタム項目の更新";
-$s_add_existing_custom_field = "カスタム項目の追加";
-$s_edit_custom_field_title = "カスタム項目の編集";
-$s_custom_field = "項目";
-$s_custom_fields_setup = "カスタム項目";
-$s_custom_field_name = "項目名";
-$s_custom_field_project_count = "プロジェクト数";
-$s_custom_field_type = "型";
-$s_custom_field_possible_values = "取り得る値";
-$s_custom_field_default_value = "デフォルト値";
-$s_custom_field_valid_regexp = "正規表現";
-$s_custom_field_access_level_r = "読み取り権限";
-$s_custom_field_access_level_rw = "読み書き権限";
-$s_custom_field_length_min = "項目長(最小値)";
-$s_custom_field_length_max = "項目長(最大値)";
-$s_custom_field_advanced = "高度な画面で表示";
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_add_custom_field_button = 'カスタム項目の登録';
+$s_delete_custom_field_button = 'カスタム項目の削除';
+$s_delete_custom_field_everywhere = 'すべてのカスタム項目を削除する。';
+$s_update_custom_field_button = 'カスタム項目の更新';
+$s_add_existing_custom_field = 'カスタム項目の追加';
+$s_edit_custom_field_title = 'カスタム項目の編集';
+$s_custom_field = '項目';
+$s_custom_fields_setup = 'カスタム項目';
+$s_custom_field_name = '項目名';
+$s_custom_field_project_count = 'プロジェクト数';
+$s_custom_field_type = '型';
+$s_custom_field_possible_values = '取りうる値';
+$s_custom_field_default_value = 'デフォルト値';
+$s_custom_field_valid_regexp = '正規表現';
+$s_custom_field_access_level_r = '読み取り権限';
+$s_custom_field_access_level_rw = '読み書き権限';
+$s_custom_field_length_min = '項目長(最小値)';
+$s_custom_field_length_max = '項目長(最大値)';
+$s_custom_field_advanced = '高度な画面で表示';
+$s_custom_field_display_resolve = '改善要求を解決する場合表示';
+$s_custom_field_display_close = '改善要求を閉じる場合表示';
+$s_custom_field_require_report = 'レポートで要求';
+$s_custom_field_require_update = '更新で要求';
+$s_custom_field_require_resolve = '解決で要求';
+$s_custom_field_require_close = 'クローズで要求';
 
-$s_custom_field_sequence = "表示順";
-$s_custom_field_type_enum_string = "0:String,1:Numeric,2:Float,3:Enumeration,4:Email";
+$s_custom_field_sequence = '表示順';
+$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール';
 
-$s_confirm_used_custom_field_deletion = "このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。";
-$s_confirm_custom_field_deletion = "このカスタム項目とすべての設定した値を削除してよろしいですか。";
-$s_field_delete_button = "項目の削除";
+$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
+$s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
+$s_field_delete_button = '項目の削除';
 
-$s_hide_status = "非表示にするステータス";
-$s_filter_closed = "完了";
-$s_filter_resolved = "解決済";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_hide_status = '非表示にするステータス';
+$s_filter_closed = '完了';
+$s_filter_resolved = '解決済';
+$s_hide_closed = '閉じたものを隠す';
+$s_hide_resolved = '解決を隠す';
 $s_and_above = 'And Above';
-$s_advanced_filters = 'Advanced Filters';
-$s_simple_filters = 'Simple Filters';
-$s_monitored_by = 'Monitored By';
+$s_advanced_filters = '高度なフィルター';
+$s_simple_filters = '簡単なフィルター';
+$s_monitored_by = '監視者';
 
-$s_attachments = "attachment(s)";
-$s_attachment_alt = "A";
+$s_attachments = '添付';
+$s_attachment_alt = 'A';
 
 # PHPMailer
-$s_phpmailer_language = "en";
+$s_phpmailer_language = 'ja';
 
 # Sponsorship Strings
-$s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = 'Sponsorship Added';
-$s_sponsorship_updated = 'Sponsorship Updated';
-$s_sponsorship_deleted = 'Sponsorship Deleted';
-$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsors = '%d 個の後援';
+$s_sponsorship_added = '後援を追加しました。';
+$s_sponsorship_updated = '後援を更新しました。';
+$s_sponsorship_deleted = '後援を削除しました。';
+$s_sponsorship_more_info = '後援についてもっと情報を見る';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -984,24 +986,23 @@ $s_sponsorship_more_info = 'More information about sponsorship';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Change Log';
+$s_changelog = '変更履歴';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = "Mantis ログイン";
 
-# MASC RELATIONSHIP
-$s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+# Issue Relationships
+$s_bug = "改善要求";
+$s_add_new_relationship = "新規関連";
+$s_add_new_relationship_button = "追加";
+$s_this_bug = "現在の改善要求";
+$s_relationship_added = "関連を追加しました。";
+$s_relationship_deleted = "関連を削除しました。";
+$s_delete_relationship_button = "削除";
+$s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
+$s_relationship_warning_blocking_bugs_not_resolved = "この改善要求のすべての子はまだ解決か閉じられているとは限りません。";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求のすべての子はまだ解決か閉じられているとは限りません。<br>親改善要求を<b>解決/閉じる</b>前に、子として関連した改善要求はすべて解決されるか閉じられるべきです。";
+$s_create_child_bug_button = "子の作成";
+$s_bug_cloned_to = "改善要求を複製しました";
+$s_bug_created_from = "改善要求を生成しました。 対象";
 ?>
