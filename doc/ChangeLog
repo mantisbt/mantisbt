@@ -20,6 +20,7 @@ Mantis
  * Fixed bug file upload error.  Error message was misreported.
  * Fixed project doc upload error.  Error message was misreported.
  * Fixed problem with bottom page menu not displaying when turned on.
+ * Fixed warning message on report. Warning: Undefined variable: f_file_name ...
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

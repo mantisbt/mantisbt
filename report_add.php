@@ -150,6 +150,9 @@
 		}
 		$f_file = trim( $f_file );
 		$disallowed = 0;
+		if ( !isset( $f_file_name ) ) {
+			$f_file_name = "";
+		}
 		if ( !file_type_check( $f_file_name ) ) {
 			$disallowed = 1;
 		} else if ( is_uploaded_file( $f_file ) ) {
