@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.81 2004-05-26 03:22:16 int2str Exp $
+	# $Id: print_api.php,v 1.82 2004-05-26 05:03:53 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -361,7 +361,7 @@
 		if ( $p_include_all_projects ) {
 			PRINT '<option value="' . ALL_PROJECTS . '"';
 			check_selected( $p_project_id, ALL_PROJECTS );
-			PRINT '>' . lang_get( 'all_projects' ) . '</option>';
+			PRINT '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 		}
 
 		$t_project_count = count( $t_project_ids );
@@ -369,7 +369,7 @@
 			$t_id = $t_project_ids[$i];
 			PRINT "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-                        PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>';
+			PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 		}
 	}
 	# --------------------

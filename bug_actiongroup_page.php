@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.36 2004-05-26 04:44:58 int2str Exp $
+	# $Id: bug_actiongroup_page.php,v 1.37 2004-05-26 05:03:51 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,6 +25,7 @@
 	}
 
 	$t_finished = false;
+	$t_request = '';
 	switch ( $f_action )  {
 		# Use a simple confirmation page, if close or delete...
 		case 'CLOSE' :
@@ -131,7 +132,9 @@ if ( !$t_finished ) {
 				}
 
 				#other forms use the same function to display the list
-				print_enum_string_option_list( $t_request, FIXED );
+				if ( $t_request > '' ) {
+					print_enum_string_option_list( $t_request, FIXED );
+				}
 			?>
 		</select>
 	</td>
