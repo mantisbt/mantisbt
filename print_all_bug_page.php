@@ -390,17 +390,17 @@
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 ?>
-<tr bgcolor="<?php echo $status_color ?>">
-	<td class="print">
+<tr>
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo get_enum_element($s_priority_enum_string, $v_priority) ?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
 		<?php # type project name if viewing 'all projects'?>
 		<?php if ( "0000000" == $g_project_cookie_val ) {?>
 		<BR><?php print "[$project_name]"; }?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ($bugnote_count > 0){
 				if ( $v_bugnote_updated >
@@ -414,13 +414,13 @@
 			}
 		?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_category ?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
 			# print username instead of status
 			if (( ON == $g_show_assigned_names )&&( $v_handler_id > 0 )&&
@@ -431,7 +431,7 @@
 			}
 		?>
 	</td>
-	<td class="print">
+	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
@@ -442,7 +442,7 @@
 			}
 		?>
 	</td>
-	<td class="left">
+	<td class="left" bgcolor="<?php echo $status_color ?>">
 		<span class="print"><?php echo $v_summary ?></a>
 	</td>
 </tr>

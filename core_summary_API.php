@@ -63,11 +63,11 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
-				PRINT "<td width=\"50%\">";
+			PRINT "<tr align=\"center\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo get_enum_to_string( $p_enum_string, $t_s[0] );
 				PRINT "</td>";
-				PRINT "<td width=\"50%\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					#PRINT "$open_bug_count $resolved_bug_count $closed_bug_count $t_enum_count";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $t_enum_count";
 				PRINT "</td>";
@@ -103,11 +103,11 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
-				PRINT "<td width=\"50%\">";
+			PRINT "<tr align=\"center\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $p_date_array[$i];
 				PRINT "</td>";
-				PRINT "<td width=\"50%\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $t_enum_count;
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -177,11 +177,11 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
-				PRINT "<td width=\"50%\">";
+			PRINT "<tr align=\"center\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $v_username;
 				PRINT "</td>";
-				PRINT "<td width=\"50%\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -252,11 +252,11 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
-				PRINT "<td width=\"50%\">";
+			PRINT "<tr align=\"center\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $v_username;
 				PRINT "</td>";
-				PRINT "<td width=\"50%\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -323,11 +323,11 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
-				PRINT "<td width=\"50%\">";
+			PRINT "<tr align=\"center\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $t_category;
 				PRINT "</td>";
-				PRINT "<td width=\"50%\">";
+				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";

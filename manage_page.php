@@ -205,26 +205,26 @@ for ($i=0;$i<$new_user_count;$i++) {
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr bgcolor="<?php echo $t_bgcolor ?>">
-	<td>
+<tr>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<a href="<?php echo $g_manage_user_page."?f_id=".$u_id ?>"><?php echo $u_username ?></a>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
-	<td align="center">
+	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 	</td>
-	<td align="center">
+	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $u_enabled ) ?>
 	</td>
-	<td align="center">
+	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $u_protected ) ?>
 	</td>
-	<td align="center">
+	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $u_date_created ?>
 	</td>
-	<td align="center">
+	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $u_last_visit ?>
 	</td>
 </tr>

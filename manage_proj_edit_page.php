@@ -142,11 +142,11 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<? echo $t_bgcolor ?>">
-			<td width="75%">
+		<tr>
+			<td width="75%" bgcolor="<? echo $t_bgcolor ?>">
 				<?php echo $t_category ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center" width="25%" bgcolor="<? echo $t_bgcolor ?>">
 				<?php print_bracket_link( $g_manage_project_category_edit_page."?f_project_id=".$f_project_id."&f_category=".$t2_category, $s_edit_link ) ?>
 			</td>
 		</tr>
@@ -193,14 +193,14 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<? echo $t_bgcolor ?>">
-			<td width="50%">
+		<tr>
+			<td width="50%" bgcolor="<? echo $t_bgcolor ?>">
 				<?php echo $t_version ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center" width="25%" bgcolor="<? echo $t_bgcolor ?>">
 				<?php echo $t_date_order ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center" width="25%" bgcolor="<? echo $t_bgcolor ?>">
 				<?php print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
 			</td>
 		</tr>

@@ -142,20 +142,20 @@
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr bgcolor="<?php echo $t_bgcolor ?>">
-	<td>
+<tr>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<a href="<?php echo $g_manage_project_edit_page."?f_project_id=".$v_id ?>"><?php echo $v_name ?></a>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo get_enum_element( $s_project_status_enum_string, $v_status ) ?>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $v_enabled ) ?>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo get_enum_element( $s_project_view_state_enum_string, $v_view_state ) ?>
 	</td>
-	<td align="left">
+	<td align="left" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $v_description ?>
 	</td>
 </tr>

@@ -138,17 +138,17 @@
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr bgcolor="<?php echo $t_bgcolor ?>">
-	<td>
+<tr>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $u_username ?>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
 			if ( isset( $u_user_id ) ) {
 				print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$t_user_id, $s_remove_link );

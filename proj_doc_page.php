@@ -44,8 +44,8 @@
 		# alternate row colors
 		$status_color = alternate_colors( $i );
 ?>
-<tr valign="top" bgcolor="<?php echo $status_color ?>">
-	<td>
+<tr valign="top">
+	<td bgcolor="<?php echo $status_color ?>">
 <?php
 		switch ( $g_file_upload_method ) {
 			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize bytes)";
@@ -61,7 +61,7 @@
 		<br>
 		<span class="small">(<?php echo $v_filesize ?> bytes)</span>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_description ?>
 	</td>
 </tr>

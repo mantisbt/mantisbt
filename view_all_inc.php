@@ -241,13 +241,13 @@
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 
 ?>
-<tr bgcolor="<?php echo $status_color ?>">
+<tr>
 	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
-	<td>
+	<td bgcolor="<?php echo $status_color ?>">
 			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $v_id ?>">
 	</td>
 	<?php	} ?>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == $g_show_priority_text ) {
 				echo get_enum_element($s_priority_enum_string, $v_priority);
@@ -256,7 +256,7 @@
 			}
 		?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			print_bug_link( $v_id );
 			# type project name if viewing 'all projects'
@@ -267,7 +267,7 @@
 			}
 		?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ($bugnote_count > 0){
 				if ( $v_bugnote_updated >
@@ -281,13 +281,13 @@
 			}
 		?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_category ?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			# print username instead of status
 			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
@@ -297,7 +297,7 @@
 			}
 		?>
 	</td>
-	<td class="center">
+	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
@@ -308,7 +308,7 @@
 			}
 		?>
 	</td>
-	<td class="left">
+	<td class="left" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_summary ?>
 	</td>
 </tr>
