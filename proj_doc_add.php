@@ -26,9 +26,9 @@
 	$disallowed = 0;
 	extract( $HTTP_POST_FILES['file'], EXTR_PREFIX_ALL, 'f' );
 
-	if ( !file_type_check( $f_file_name ) ) {
+	if ( !file_type_check( $f_name ) ) {
 		$disallowed = 1;
-	} else if ( is_uploaded_file( $f_file ) ) {
+	} else if ( is_uploaded_file( $f_tmp_name ) ) {
 		$good_upload = 1;
 
 		# grab the file path
@@ -38,17 +38,17 @@
 		$f_title 	= db_prepare_string( $f_title );
 		$f_description 	= db_prepare_string( $f_description );
 
-		$f_file_name = $g_project_cookie_val.'-'.$f_file_name;
-		$t_file_size = filesize( $f_file );
+		$f_file_name = $g_project_cookie_val.'-'.$f_name;
+		$t_file_size = $f_size;
 
 		switch ( $g_file_upload_method ) {
 			case DISK:	if ( !file_exists( $t_file_path.$f_file_name ) ) {
 							umask( 0333 );  # make read only
-							copy($f_file, $t_file_path.$f_file_name);
+							copy($f_tmp_name, $t_file_path.$f_file_name);
 							$query = "INSERT INTO mantis_project_file_table
 									(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
-									(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
+									(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '')";
 						} else {
 							print_mantis_error( ERROR_DUPLICATE_FILE );
 						}
@@ -58,7 +58,7 @@
 						$query = "INSERT INTO mantis_project_file_table
 								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
-								(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '$t_content')";
+								(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '$t_content')";
 						break;
 		}
 		$result = db_query( $query );
