@@ -17,7 +17,7 @@
 	$result = 0;
 	$duplicate = is_duplicate_category( $f_project_id, $f_category );
 	# check for empty case or duplicate
-	if ( !empty( $f_category )&& !$duplicate ) {
+	if ( !$duplicate ) {
 		$result = category_add( $f_project_id, $f_category );
 	}
 

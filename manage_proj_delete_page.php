@@ -8,7 +8,7 @@
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-	check_access( MANAGER );
+	check_access( ADMINISTRATOR );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

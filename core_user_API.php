@@ -396,6 +396,34 @@
 			return false;
 		}
 	}
+    # Checks if the access level is greater than or equal the specified access level
+	# The return will be true for administrators, will be the project-specific access 
+	# right if found, or the default if project is PUBLIC and no specific access right
+	# found, otherwise, (private/not found) will return false
+	function access_level_ge_no_default_for_private ( $p_access_level, $p_project_id ) {
+		global $g_string_cookie_val;
+
+		# user isn't logged in
+		if (( !isset( $g_string_cookie_val ) )||( empty( $g_string_cookie_val ) )) {
+			return false;
+		}
+
+		# Administrators ALWAYS pass.
+		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+			return true;
+		}
+
+		$t_access_level = get_project_access_level( $p_project_id );
+		$t_project_view_state = get_project_field( $p_project_id, 'view_state' );
+
+		# use the project level access level instead of the global access level
+		# if the project level is not specified then use the global access level
+		if ( ( -1 == $t_access_level ) && ( PUBLIC == $t_project_view_state ) ) {
+			$t_access_level = get_current_user_field( 'access_level' );
+		}
+
+		return ( $t_access_level >= $p_access_level );
+	}
 	# --------------------
 	# check to see if the access level is strictly equal
 	function absolute_access_level_check_equal( $p_access_level ) {

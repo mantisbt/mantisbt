@@ -332,8 +332,13 @@
 					}
 				}
 
-				if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-					PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
+				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+					  $t_link = $g_manage_page;
+					} else {
+					  $t_link = $g_manage_project_menu_page;
+					}
+					PRINT "<a href=\"$t_link\">$s_manage_link</a> | ";
 				}
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
@@ -365,6 +370,10 @@
 				$g_manage_create_user_page, $s_create_new_account_link,
 				$g_manage_project_menu_page, $s_projects,
 				$g_documentation_page, $s_documentation_link;
+
+		if ( !access_level_check_greater_or_equal ( ADMINISTRATOR ) ) {
+			return;
+		}
 
 		$t_manage_page 				= $g_manage_page;
 		$t_manage_project_menu_page = $g_manage_project_menu_page;

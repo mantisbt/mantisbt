@@ -102,10 +102,12 @@
 		</form>
 	</td>
 	<td class="right">
+       <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
 		<form method="post" action="<?php echo $g_manage_project_delete_page?>">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="submit" value="<?php echo $s_delete_project_button ?>">
 		</form>
+	   <?php } ?>
 	</td>
 </tr>
 </table>

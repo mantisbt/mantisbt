@@ -31,7 +31,7 @@
 
 <?php print_manage_menu( $g_manage_project_menu_page ) ?>
 
-<?php # Add Project Form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -92,7 +92,7 @@
 </tr>
 </table>
 </div>
-<?php # Add Project Form END ?>
+<?php } # Add Project Form END ?>
 
 <?php # Project Menu Form BEGIN ?>
 <p>
@@ -134,6 +134,10 @@
 	for ($i=0;$i<$project_count;$i++) {
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+        if ( !access_level_ge_no_default_for_private ( MANAGER, $v_id ) ) {
+		  continue;
+		}
 
 		$v_name 		= string_display( $v_name );
 		$v_description 	= string_display( $v_description );

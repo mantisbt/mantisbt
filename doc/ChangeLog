@@ -19,6 +19,7 @@ Mantis
  * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
  * Added button to copy categories from another project, in addition to the current 'copy to'.
  * Added new localization strings.
+ * Added support for allowing managers to update project information, change project user list, add/edit/delete categories and versions.
  * Quoted various text values retrieved from a database and used in a database query.
  * Updated Hungarian localization.
  * Updated Russian localizations.
