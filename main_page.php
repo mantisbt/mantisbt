@@ -19,12 +19,20 @@
 <?php print_page_top2() ?>
 
 <div class="quick-summary-left">
-		<?php echo lang_get( 'open_and_assigned_to_me' ) ?>:
-		<?php echo '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
+		<?php 
+        	if ( !current_user_is_anonymous() ) {
+            	echo lang_get( 'open_and_assigned_to_me' ) . ':';
+		    	echo '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>';
+			}
+		?>
 </div>
 <div class="quick-summary-right">
-		<?php echo lang_get( 'open_and_reported_to_me' ) ?>:
-		<?php PRINT '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>' ?>
+		<?php 
+        	if ( !current_user_is_anonymous() ) {
+				echo lang_get( 'open_and_reported_to_me' ) . ':';
+				echo '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>';
+			}
+		?>
 </div>
 <br />
 
