@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.14 2003-02-20 08:11:26 jfitzell Exp $
+	# $Id: csv_export.php,v 1.15 2003-08-20 14:00:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,6 +22,11 @@
 	if ( !filter_is_cookie_valid() ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
+
+	# Send headers to browser to activate mime loading
+	header( 'Content-Type: text/plain; name=' . config_get( 'page_title' ) . '.csv' );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename=' . config_get( 'page_title' ) . '.csv' );
 
 	$t_page_number = 1;
 	$t_per_page = -1;
@@ -54,11 +59,6 @@
 
 		echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
 	}
-
-	# Send headers to browser to active mime loading
-	header( 'Content-Type: text/plain; name=' . config_get( 'page_title' ) . '.csv' );
-	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename=' . config_get( 'page_title' ) . '.csv' );
 	
 	exit; 
 

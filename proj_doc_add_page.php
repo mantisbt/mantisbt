@@ -51,10 +51,9 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'select_file' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'select_file' ) ?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
 		<input name="file" type="file" size="70" />
 	</td>
 </tr>

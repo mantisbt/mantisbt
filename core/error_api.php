@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.25 2003-04-23 23:03:25 jfitzell Exp $
+	# $Id: error_api.php,v 1.26 2003-08-20 14:00:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -95,7 +95,10 @@
 			#  PHP > 4.2.0 we could use ob_clean() instead but as it is
 			#  we need to disable compression.
 			compress_disable();
-			ob_end_clean();
+
+			if ( ob_get_length() ) { 
+				ob_end_clean();
+			}
 
 			html_page_top1();
 			html_page_top2();
@@ -203,10 +206,19 @@
 
 			echo '<center><table class="width75">';
 
-			for ( $i = 0 ; $i < sizeof( $t_stack ) ; $i = $i + 1 ) {
-				echo '<tr ' . helper_alternate_class( $i ) . '"><td>' . htmlentities( $t_stack[$i] ) . '</td></tr>';
-			}
+			foreach ( $t_stack as $t_frame ) {
+				echo '<tr ' . helper_alternate_class() . '>';
+				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame['line']</td><td>$t_frame['function']</td>";
 
+				$t_args = array();
+				if ( isset( $t_frame['params'] ) ) {
+					foreach( $t_frame['params'] as $t_value ) {
+						$t_args[] = error_build_parameter_string( $t_value );
+					}
+				}
+
+				echo '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+			}
 			echo '</table></center>';
 		} else if ( php_version_at_least( '4.3' ) ) {
 			$t_stack = debug_backtrace();
@@ -218,8 +230,8 @@
 			echo '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
 
 			foreach ( $t_stack as $t_frame ) {
-				echo '<tr ' . helper_alternate_class() . '">';
-				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
+				echo '<tr ' . helper_alternate_class() . '>';
+				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame['line']</td><td>$t_frame['function']</td>";
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
