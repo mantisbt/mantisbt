@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.30 2003-03-06 21:13:16 vboctor Exp $
+	# $Id: login_page.php,v 1.31 2003-08-17 14:28:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -96,7 +96,38 @@
 </form>
 </div>
 
-<?php print_signup_link() ?>
+<?php
+	print_signup_link();
+
+	#
+	# Do some checks to warn administrators of possible security holes.
+	# Since this is considered part of the admin-checks, the strings are not translated.
+	#
+
+	# Warning, if plain passwords are selected
+	if ( config_get( 'login_method' ) == AUTH_PLAIN ) {
+		echo '<div class="warning" align="center">';
+		echo '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>';
+		echo '</div>';
+	}
+
+	# Generate a warning if administrator/root is valid.
+	if ( user_get_id_by_name( 'administrator' ) !== false ) {
+		if ( auth_does_password_match( user_get_id_by_name( 'administrator' ), 'root' ) ) {
+			echo '<div class="warning" align="center">';
+			echo '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>';
+			echo '</div>';
+		}
+	}
+
+	# Check if the admin directory is available and is readable.
+	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
+	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
+			echo '<div class="warning" align="center">';
+			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>';
+			echo '</div>';
+	}
+?>
 
 <script type="text/javascript" language="JavaScript">
 <!--
