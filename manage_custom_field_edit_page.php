@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.20 2004-08-02 18:16:20 prichards Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.21 2004-08-03 23:43:49 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -147,18 +147,18 @@
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category">
-				<?php echo lang_get( 'custom_field_display_resolve' ) ?>
+				<?php echo lang_get( 'custom_field_display_resolved' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_resolve" value="1" <?php check_checked( $t_definition['display_resolve'] ) ?>>
+				<input type="checkbox" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?>>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td class="category">
-				<?php echo lang_get( 'custom_field_display_close' ) ?>
+				<?php echo lang_get( 'custom_field_display_closed' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_close" value="1" <?php check_checked( $t_definition['display_close'] ) ?>>
+				<input type="checkbox" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?>>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -182,7 +182,7 @@
 				<?php echo lang_get( 'custom_field_require_resolve' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_resolve" value="1" <?php check_checked( $t_definition['require_resolve'] ) ?>>
+				<input type="checkbox" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?>>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -190,7 +190,7 @@
 				<?php echo lang_get( 'custom_field_require_close' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_close" value="1" <?php check_checked( $t_definition['require_close'] ) ?>>
+				<input type="checkbox" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?>>
 			</td>
 		</tr>
 		<tr>
