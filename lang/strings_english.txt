@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.148 $
-	# $Author: jlatour $
-	# $Date: 2004-02-08 15:56:35 $
+	# $Revision: 1.149 $
+	# $Author: vboctor $
+	# $Date: 2004-02-08 21:26:45 $
 	#
-	# $Id: strings_english.txt,v 1.148 2004-02-08 15:56:35 jlatour Exp $
+	# $Id: strings_english.txt,v 1.149 2004-02-08 21:26:45 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -253,8 +253,8 @@ $s_email_reopen_msg = 'The following bug has been REOPENED.';
 $s_email_assigned_msg = 'The following bug has been ASSIGNED.';
 $s_email_bug_deleted_msg = 'The following bug has been DELETED.';
 
-$s_email_reporter = 'Reporter';
-$s_email_handler = 'Handler';
+$s_email_reporter = 'Reported By';
+$s_email_handler = 'Assigned To';
 $s_email_project = 'Project';
 $s_email_bug = 'Bug ID';
 $s_email_category = 'Category';
