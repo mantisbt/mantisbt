@@ -17,7 +17,7 @@ document.  Use a browser and open doc/installation.html.
 # --- Requirements ----------
 
 * MySQL 3.23.2 and higher
-* PHP 4.0.3 and higher
+* PHP 4.0.4 and higher
 * a webserver
 
 # --- Summary ---------------

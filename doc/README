@@ -54,7 +54,7 @@ Security exists though I'm not really in a position to judge how secure.  So,
 if you're going to use this try to use it in a semi-private area until this
 package has been looked through a few times.
 
-You will need to have php 4.0.3 or higher, mysql 3.23.2 and higher, and a webserver.  You don't
+You will need to have php 4.0.4 or higher, mysql 3.23.2 and higher, and a webserver.  You don't
 need to know too much about any of them other than how to set them up and some
 basic administraton commands.
 
