@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.82 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: user_api.php,v 1.83 2005-02-13 12:52:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -593,7 +593,7 @@
 		$t_public	= VS_PUBLIC;
 		$t_private	= VS_PRIVATE;
 
-		if ( user_is_administrator( $p_user_id ) ) {
+		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 			$query = "SELECT DISTINCT( id ), name
 					  FROM $t_project_table
 					  WHERE enabled=1
