@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.27 2004-07-10 15:38:07 vboctor Exp $
+	# $Id: lang_api.php,v 1.28 2004-07-10 15:40:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -133,7 +133,7 @@
 	#  This function will return one of (in order of preference):
 	#    1. The string in the current user's preferred language (if defined)
 	#    2. The string in English
-	function lang_get( $p_string, $p_lang = NULL ) {
+	function lang_get( $p_string, $p_lang = null ) {
 		global $g_lang_strings;
 
 		# If no specific language is requested, we'll
@@ -142,7 +142,7 @@
 
 		$t_lang = $p_lang;
 
-		if ( NULL == $t_lang ) {
+		if ( null === $t_lang ) {
 			$t_lang = lang_get_default();
 		}
 
@@ -185,7 +185,7 @@
 	function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 		$t_lang = $p_lang;
 
-		if ( NULL == $t_lang ) {
+		if ( null === $t_lang ) {
 			$t_lang = lang_get_default();
 		}
 
