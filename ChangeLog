@@ -2,7 +2,8 @@ Mantis
 
 10.xx.2001  -   0.15.11
 
- * Modified advacned report's "assign to" drop down to sort alphabetically
+ * Modified advanced report's "assign to" drop down to sort alphabetically
+ * Modified bug_update script to send emails and behave better
 
 10.28.2001  -   0.15.10
 

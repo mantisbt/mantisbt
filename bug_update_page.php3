@@ -71,6 +71,7 @@
 <form method="post" action="<? echo $g_bug_update ?>">
 	<input type="hidden" name="f_id" value="<? echo $v_id ?>">
 	<input type="hidden" name="f_old_status" value="<? echo $v_status ?>">
+	<input type="hidden" name="f_old_handler_id" value="<? echo $v_handler_id ?>">
 	<input type="hidden" name="f_resolution" value="<? echo $v_resolution ?>">
 	<input type="hidden" name="f_projection" value="<? echo $v_projection ?>">
 	<input type="hidden" name="f_eta" value="<? echo $v_eta ?>">
@@ -153,7 +154,7 @@
 		</td>
 		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
 			<select name="f_handler_id">
-				<option value=""></option>
+				<option value="0"></option>
 				<? print_assign_to_option_list( $v_handler_id ) ?>
 			</select>
 		</td>

@@ -50,11 +50,12 @@
 	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-        # when assigned-to is explicit choosen, then no
-        # manually status change is needed, when the bug has status=NEW_
-        if($f_handler_id AND $f_status==NEW_){
-            $f_status=ASSIGNED;
-        }
+    if( ( $f_handler_id != 0 ) AND ( $f_status < ASSIGNED ) ){
+        $f_status=ASSIGNED;
+    }
+	if (( $f_handler_id == 0 ) AND ( $f_status >= ASSIGNED ) ) {
+        $f_status = ACKNOWLEDGED;
+	}
 
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table
@@ -75,13 +76,20 @@
    	$result = db_query($query);
 
 	### If we should notify and it's in feedback state then send an email
-   	if (( $f_status==FEEDBACK )&&( $f_status!= $f_old_status )) {
-   		email_feedback( $f_id );
-   	}
-
-   	if (( $f_status==ASSIGNED )&&( $f_status!= $f_old_status )) {
-   		email_assign( $f_id );
-   	}
+	switch ( $f_status ) {
+		case FEEDBACK:	if ( $f_status!= $f_old_status ) {
+   							email_feedback( $f_id );
+   						}
+						break;
+		case ASSIGNED:	if ( ( $f_handler_id != $f_old_handler_id ) OR ( $f_status!= $f_old_status ) ) {
+			   				email_assign( $f_id );
+			   			}
+						break;
+		case RESOLVED:	email_resolved( $f_id );
+						break;
+		case CLOSED:	email_close( $f_id );
+						break;
+	}
 
 	switch ( $g_show_view ) {
 		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
