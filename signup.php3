@@ -84,7 +84,7 @@
 <div align="center">
 <?
 	if ( $result ) {						### SUCCESS
-		PRINT "[$f_username - $f_email] $$s_password_emailed_msg<p>$s_no_reponse_msg<p>";
+		PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
 	} else {								### FAILURE
 		print_sql_error( $query );
 	}

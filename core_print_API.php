@@ -32,6 +32,7 @@
 		}
 	}
 	### --------------------
+	# returns username if account
 	function get_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
@@ -486,7 +487,8 @@
 		}
 	}
 	### --------------------
-	### formats the severity given the status
+	# formats the severity given the status
+	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
 		global $g_severity_enum_string;
 
@@ -494,7 +496,7 @@
 		if ( ( ( $p_severity==MAJOR ) ||
 			 ( $p_severity==CRASH ) ||
 			 ( $p_severity==BLOCK ) )&&
-			 ( $p_status!=RESOLVED ) ) {
+			 ( $p_status!=CLOSED ) ) {
 			PRINT "<b>$t_sev_str</b>";
 		}
 		else {
@@ -613,6 +615,17 @@
 		return $p_string;
 	}
 	### --------------------
+	# undo http and mailto link urls for editing purposes
+	function unfilter_href_tags( $p_string ) {
+    	$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([^[:space:]]*)([[:alnum:]#?/&=])</a>",
+    							"\\1://\\2\\3",
+    							$p_string);
+        $p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
+        						"\\1",
+        						$p_string);
+		return $p_string;
+	}
+	### --------------------
 	# @@@ does nothing
 	function filter_img_tags( $p_string ) {
 		return $p_string;
@@ -707,6 +720,7 @@
 	function string_edit_textarea( $p_string ) {
 		$p_string = stripslashes( $p_string );
 		#@@@$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( "<br />", "\n",  $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
@@ -718,6 +732,7 @@
 	function string_edit_text( $p_string ) {
 		$p_string = stripslashes( $p_string );
 		#@@@$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
 		$p_string = str_replace( "&quot;", "'",  $p_string );
@@ -731,7 +746,8 @@
 	# duplicates str_pad() from PHP4
 	# left pad $p_string with $p_pad until we reach $p_length
 	function str_pd( $p_string, $p_pad, $p_length ) {
-		while ( strlen( $p_string ) < $p_length ) {
+		$t_num = $p_length - strlen( $p_string );
+		for ($i=0;$i<$t_num;$i++) {
 			$p_string = $p_pad.$p_string;
 		}
 		return $p_string;

@@ -35,7 +35,7 @@
 
 	# path to your installation as seen from the web browser
 	# requires trailing /
-	$g_path          = "http://192.168.1.1/mantis/";
+	$g_path          = "http://192.168.7.7/mantis/";
 
 	# path to your images directory (for icons)
 	# requires trailing /
@@ -102,8 +102,7 @@
 	### Mantis Show Settings ###
 	############################
 
-	# --- sitewide varaibles ----------
-
+	# --- sitewide variables ----------
 	$g_window_title = "Mantis";     # browser window title
 	$g_page_title   = "Mantis";     # title at top of html page
 
@@ -130,6 +129,9 @@
 	# 1 : project name and any additional
 	# 2 : only project name
 	$g_show_project_in_title = 1;
+
+	# --- show assigned to names ------
+	$g_show_assigned_names = 1;
 
 	############################
 	### Mantis Time Settings ###
@@ -192,7 +194,10 @@
 
 	# how many reporters to show
 	# this is useful when there are hundreds of reporters
-	$g_reporter_summary_limit = 25;
+	$g_reporter_summary_limit = 10;
+
+	# default space padding (increase when bug count goes over 100,000)
+	$g_summary_pad = 5;
 
 	###############################
 	### Mantis Bugnote Settings ###

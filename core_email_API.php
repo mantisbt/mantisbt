@@ -36,32 +36,50 @@
 		return false;
 	}
 	### --------------------
+	# return true if a duplicate entry exists
+	# return false if entry does not already exist
+	function check_duplicate( $p_arr, $p_str ) {
+		$arr_count = count( $p_arr );
+		for ($i=0; $i<$arr_count; $i++) {
+			if ( $p_str == $p_arr[$i] ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	### --------------------
 	# build the bcc list
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_user_table, $g_mantis_project_user_list_table;
 
 		$p_project_id = get_bug_project_id( $p_bug_id );
 
+		$send_arr = array();
+		$send_counter = 0;
+
 		$t_dev = DEVELOPER;
 		$query = "SELECT id, email
 				FROM $g_mantis_user_table
-				WHERE access_level>=$t_dev";
+				WHERE access_level>=$t_dev AND
+					enabled='1'";
 		$result = db_query( $query );
 
-		$t_bcc = "bcc:";
 		$user_count = db_num_rows( $result );
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 
 			$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
 			if ( $t_notify==1 ) {
-				$t_bcc .= $row["email"].", ";
+				if ( !check_duplicate($send_arr,$row["email"]) ) {
+					$send_arr[$send_counter++] = $row["email"];
+				}
 			}
 		}
 
 		$query = "SELECT DISTINCT user_id
 				FROM $g_mantis_project_user_list_table
-				WHERE project_id=$p_project_id AND access_level>=$t_dev";
+				WHERE project_id=$p_project_id AND
+					access_level>=$t_dev";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 		for ($i=0;$i<$user_count;$i++) {
@@ -70,14 +88,20 @@
 			$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
 
 			if ( $t_notify==1 ) {
-				$t_bcc .= get_user_info( $row["user_id"], "email" ).", ";
+				if ( !check_duplicate($send_arr,get_user_info( $row["user_id"], "email" )) ) {
+					$send_arr[$send_counter++] = get_user_info( $row["user_id"], "email" );
+				}
 			}
 		}
 
+		# Switch to Bcc if on windows  @@@ need elegant solution
+		$t_bcc = "bcc: ";
+		for ($i=0; $i<count($send_arr); $i++) {
+			$t_bcc .= $send_arr[$i].", ";
+		}
 
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc )>4 ) {
-			#echo $t_bcc."$$$<p>";
 			return substr( $t_bcc, 0, strlen( $t_bcc )-2 )."\n";
 		} else {
 			return "";
@@ -320,11 +344,7 @@
 					WHERE id='$t_bugnote_text_id'";
 			$result2 = db_query( $query );
 
-			$query = "SELECT username
-					FROM $g_mantis_user_table
-					WHERE id='$t_reporter_id'";
-			$result3 = db_query( $query );
-			$t_username = db_result( $result3, 0, 0 );
+			$t_username = get_user( $t_reporter_id );
 
 			$t_note = db_result( $result2, 0, 0 );
 			$t_note = string_email( $t_note );
@@ -394,7 +414,7 @@
 		$t_message .= email_build_bug_message( $p_bug_id );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
-		$p_user_email = get_user_info( $p_user_id );
+		$p_user_email = get_user_info( $p_user_id, "email" );
 
 		### send mail
 		$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
@@ -446,14 +466,14 @@
 
 			$t_headers .= $p_header;
 
+			# @@@ for debugging only
 			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 			#exit;
-
-			/*echo $t_recipient."<br>";
+			echo $t_recipient."<br>";
 			echo nl2br($t_headers)."<br>";
 			echo $t_subject."<br>";
 			echo nl2br($t_message)."<br>";
-			exit;*/
+			#exit;
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {

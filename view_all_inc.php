@@ -211,7 +211,15 @@
 			<? print_formatted_severity_string( $v_status, $v_severity ) ?>
 		</td>
 		<td>
-			<? echo get_enum_element( $g_status_enum_string, $v_status ) ?>
+			<?
+				# print username instead of status
+				if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )&&
+					( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
+					echo "(".get_user_info( $v_handler_id, "username" ).")";
+				} else {
+					echo get_enum_element( $g_status_enum_string, $v_status );
+				}
+			?>
 		</td>
 		<td>
 			<?

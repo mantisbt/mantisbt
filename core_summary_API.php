@@ -13,7 +13,8 @@
 	# The enum field name is passed in through $p_enum
 	function print_bug_enum_summary( $p_enum_string, $p_enum ) {
 		global 	$g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark,
-				$g_project_cookie_val;
+				$g_project_cookie_val,
+				$g_summary_pad;
 
 		$t_arr = explode( ",", $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -24,19 +25,40 @@
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s[0]' AND
 						project_id='$g_project_cookie_val'";
-			if ( !empty( $p_status ) ) {
-				if ( $p_status==OPEN ) {
-					$t_res_val = RESOLVED;
-					$query = $query." AND status<>'$t_res_val'";
-				} else if ( $p_status==OPEN ) { # @@@ ????? Duplicate
-					$t_res_val = RESOLVED;
-					$query = $query." AND status='$t_res_val'";
-				} else {
-					$query = $query." AND status='$p_status'";
-				}
-			}
 			$result = db_query( $query );
 			$t_enum_count = db_result( $result, 0 );
+
+			$t_res_val = RESOLVED;
+			$t_clo_val = CLOSED;
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status<>'$t_res_val' AND
+						status<>'$t_clo_val' AND
+						project_id='$g_project_cookie_val'";
+			$result2 = db_query( $query );
+			$open_bug_count = db_result( $result2, 0, 0 );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_clo_val' AND
+						project_id='$g_project_cookie_val'";
+			$result2 = db_query( $query );
+			$closed_bug_count = db_result( $result2, 0, 0 );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_res_val' AND
+						project_id='$g_project_cookie_val'";
+			$result2 = db_query( $query );
+			$resolved_bug_count = db_result( $result2, 0, 0 );
+
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
+			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -46,7 +68,8 @@
 					echo get_enum_to_string( $p_enum_string, $t_s[0] );
 				PRINT "</td>";
 				PRINT "<td width=\"50%\">";
-					echo $t_enum_count;
+					#PRINT "$open_bug_count $resolved_bug_count $closed_bug_count $t_enum_count";
+					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $t_enum_count";
 				PRINT "</td>";
 			PRINT "</tr>";
 		} ### end for
@@ -92,7 +115,8 @@
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_primary_color_light, $g_primary_color_dark,
-				$g_project_cookie_val;
+				$g_project_cookie_val,
+				$g_summary_pad;
 
 		$t_dev = DEVELOPER;
 		$t_man = MANAGER;
@@ -119,14 +143,16 @@
 			$total_bug_count = db_result( $result2, 0, 0 );
 
 			$t_res_val = RESOLVED;
+			$t_clo_val = CLOSED;
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND status<>'$t_res_val' AND
+					WHERE handler_id='$v_id' AND
+						status<>'$t_res_val' AND
+						status<>'$t_clo_val' AND
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
-			$t_clo_val = CLOSED;
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' AND status='$t_clo_val' AND
@@ -140,6 +166,11 @@
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
+
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -160,11 +191,13 @@
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_primary_color_light, $g_primary_color_dark,
 				$g_reporter_summary_limit,
-				$g_project_cookie_val;
+				$g_project_cookie_val,
+				$g_summary_pad;
 
 		$t_view = VIEWER;
 		$query = "SELECT reporter_id, COUNT(*) as num
 				FROM $g_mantis_bug_table
+				WHERE project_id='$g_project_cookie_val'
 				GROUP BY reporter_id
 				ORDER BY num DESC
 				LIMIT $g_reporter_summary_limit";
@@ -176,15 +209,21 @@
 			$v_id = $row["reporter_id"];
 			$v_username = get_user_info( $v_id, "username" );
 
-			$total_bug_count = $row["num"];
-
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
+			$query = "SELECT COUNT(*)
+				FROM $g_mantis_bug_table
+				WHERE reporter_id='$v_id' AND
+					project_id='$g_project_cookie_val'";
+			$result2 = db_query( $query );
+			$total_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE reporter_id='$v_id' AND status<>'$t_res_val' AND
-						status<>'$t_clo_val' AND project_id='$g_project_cookie_val'";
+					WHERE reporter_id='$v_id' AND
+						status<>'$t_res_val' AND
+						status<>'$t_clo_val' AND
+						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
@@ -201,6 +240,11 @@
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
+
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -220,7 +264,8 @@
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
-				$g_primary_color_light, $g_primary_color_dark;
+				$g_primary_color_light, $g_primary_color_dark,
+				$g_summary_pad;
 
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table
@@ -240,14 +285,14 @@
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
-			$t_ope_val = OPEN;
 			$t_clo_val = CLOSED;
 			$t_res_val = RESOLVED;
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category' AND status='$t_clo_val' AND
-						status='$t_res_val'AND
+					WHERE category='$t_category' AND
+						status<>'$t_clo_val' AND
+						status<>'$t_res_val'AND
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
@@ -266,6 +311,11 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
+
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
@@ -280,6 +330,7 @@
 		} ### end for
 	}
 	### --------------------
+
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################

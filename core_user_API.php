@@ -139,9 +139,6 @@
 		}
 	}
 	### --------------------
-	function check_project() {
-	}
-	### --------------------
 	# This function is only called from the login.php3 script
 	function increment_login_count( $p_id ) {
 		global $g_mantis_user_table;
@@ -210,8 +207,11 @@
 		$t_access_level = get_current_user_field( "access_level" );
 		$t_access_level2 = get_project_access_level();
 
-		### if the project level access is higher then use it
-		if ( $t_access_level2 > $t_access_level ) {
+		# use the project level access level instead of the global access level
+		# if the project level is not specified then use the global access level
+		if ( $t_access_level2 == -1 ) {
+			# do nothing
+		} else if ( $t_access_level2 > $t_access_level ) {
 			$t_access_level = $t_access_level2;
 		}
 
@@ -274,7 +274,7 @@
 		if ( db_num_rows( $result )>0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
-			return 0;
+			return -1;
 		}
 	}
 	### --------------------

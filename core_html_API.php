@@ -353,6 +353,20 @@
 		PRINT "</div>";
 	}
 	### --------------------
+	# prints the summary menu
+	function print_summary_menu( $p_page="" ) {
+		global	$g_summary_page, $s_summary_link;
+
+		switch ( $p_page ) {
+		case $g_summary_page: $g_summary_page="";break;
+		}
+
+		PRINT "<p><div align=\"center\">";
+			print_bracket_link( $g_summary_page, $s_summary_link );
+			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
+		PRINT "</div>";
+	}
+	### --------------------
 	# prints the signup link
 	function print_signup_link() {
 		global $g_allow_signup, $g_signup_page, $s_signup_link;
