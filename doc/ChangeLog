@@ -37,6 +37,7 @@ Mantis ChangeLog
  * Fix #3218: Version vs. Product version confusing (renamed Version to OS Version in advanced pages - English language).
  * Fix #3214: Private projects links get replaced by public project links.
  * Fix #3231: Redirect problem when user clicks on a bug link while not logged in.
+ * Fix #3230: German translation [corrections].
  * Languages: Updated Italian, German, Spanish, Slovak, Swedish and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
 

@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.72 $
-	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:12 $
+	# $Revision: 1.73 $
+	# $Author: vboctor $
+	# $Date: 2003-07-13 13:39:22 $
 	#
-	# $Id: strings_german.txt,v 1.72 2003-06-25 21:43:12 prescience Exp $
+	# $Id: strings_german.txt,v 1.73 2003-07-13 13:39:22 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -62,7 +62,7 @@ $s_bugnote_view_state = 'Fehlernotiz Anzeigestatus';
 $s_bug_monitor = 'Fehler beobachten';
 $s_bug_end_monitor = 'Fehler Beobachtung beendet';
 $s_announcement = 'Ankündigung';
-$s_stays_on_top = 'Bleibt open';
+$s_stays_on_top = 'Bleibt oben';
 $s_delete_bugnote_button = 'Fehlernotiz löschen';
 $s_delete_bugnote_sure_msg = 'Möchten Sie diese Fehlernotiz wirklich löschen?';
 $s_bug_relationships = 'Fehler-Beziehungen';
@@ -220,7 +220,7 @@ $s_administrator = 'Administrator';
 $s_access_levels_enum_string = '10:Betrachter,25:Reporter,40:Tester,55:Entwickler,70:Manager,90:Administrator';
 $s_project_status_enum_string = '10:Entwicklung,30:Freigabe,50:stabil,70:veraltet';
 $s_project_view_state_enum_string = '10:öffentlich,50:privat';
-$s_view_state_enum_string         = '10:public,50:private';
+$s_view_state_enum_string = '10:öffentlich,50:privat'; 
 
 $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort';
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:BLOCKER';
@@ -323,7 +323,7 @@ $s_profile_deleted_msg = 'Profil gelöscht...';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Profil bearbeiten';
 $s_platform = 'Rechner';
-$s_operating_system = 'Betriebs-System';
+$s_operating_system = 'Betriebssystem';
 $s_additional_description = 'Zusätzliche Beschreibung';
 $s_update_profile_button = 'Profil aktualisieren';
 
@@ -423,7 +423,7 @@ $s_status = 'Status';
 $s_duplicate_id = 'ID doppelt';
 $s_os = 'Betriebssystem';
 $s_projection = 'Projektion';
-$s_os_version = 'Version';
+$s_os_version = $s_os.'-Version'; 
 $s_eta = 'Aufwand';
 $s_product_version = 'Produkt-Version';
 $s_build = 'Build';
@@ -500,7 +500,7 @@ $s_created_user_part2 = 'mit Zugriffsberechtigung ';
 $s_create_new_account_title = 'Neues Konto erstellen';
 $s_verify_password = 'Passwort verifizieren';
 $s_enabled = 'Aktiv';
-$s_protected = 'geschützt';
+$s_protected = 'lösch-geschützt';
 $s_create_user_button = 'Benutzer anlegen';
 
 # manage_page.php
@@ -518,7 +518,7 @@ $s_never_logged_in_title = 'Noch nie angemeldet';
 $s_prune_accounts = 'Konten löschen';
 $s_hide_inactive = 'Inaktive verstecken';
 $s_manage_accounts_title = 'Konten verwalten';
-$s_p = 'g';  # _p_rotected
+$s_p = 'lösch-geschützt'; # _p_rotected 
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_edit_user_link = 'Benutzer bearbeiten';
@@ -831,7 +831,7 @@ $s_users_monitoring_bug = 'Benutzer, die diesen Fehler beobachten';
 $s_monitoring_user_list = 'Benutzer';
 
 # custom field strings
-$s_add_custom_field_button = 'Neues Benutzerdefiniertes Feld';
+$s_add_custom_field_button = 'Neues benutzerdefiniertes Feld';
 $s_delete_custom_field_button = 'Benutzerdefiniertes Feld löschen';
 $s_delete_custom_field_everywhere = 'dieses benutzerdefinierte Feld überall löschen';
 $s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
