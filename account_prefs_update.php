@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.29 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.30 2003-02-25 17:46:09 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,12 +21,21 @@
 ?>
 <?php 
 	auth_ensure_user_authenticated();
-	
-	current_user_ensure_unprotected();
 ?>
 <?php
 	$f_user_id					= gpc_get_int( 'user_id' );
 	$f_redirect_url				= gpc_get_string( 'redirect_url' );
+
+	# If the user is trying to modify an account other than their own
+	#  they must have high enough permissions to do so
+	# @@@ should we really be sharing this file between the manage section
+	#  and the account section.  The account section should always be operating
+	#  on the current user, so passing in a user ID here is a little odd.
+	if ( auth_get_current_user_id() !== $f_user_id ) {
+		access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+	}
+
+	user_ensure_unprotected( $f_user_id );
 
 	$t_prefs = user_pref_get( $f_user_id );
 
