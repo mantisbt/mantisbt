@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.3 2003-02-26 08:23:57 int2str Exp $
+	# $Id: bugnote_view_inc.php,v 1.4 2003-02-27 07:04:57 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 ?>
 <?php
 	# grab the user id currently logged in
-	$t_user_id = current_user_get_field( 'id' );
+	$t_user_id = auth_get_current_user_id();
 
 	if ( !access_has_project_level( $g_private_bugnote_threshold ) ) {
 		$t_restriction = 'AND view_state=' . PUBLIC;

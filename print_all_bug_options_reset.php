@@ -22,7 +22,7 @@
 	current_user_ensure_unprotected();
 
 	# get user id
-	$t_user_id = current_user_get_field( 'id' );
+	$t_user_id = auth_get_current_user_id();
 
 	# get the fields list
 	$t_field_name_arr = get_field_names();

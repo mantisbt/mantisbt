@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.53 2003-02-24 10:32:32 jfitzell Exp $
+	# $Id: print_api.php,v 1.54 2003-02-27 07:04:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -339,7 +339,7 @@
 	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table;
 
-		$t_user_id = current_user_get_field( 'id' );
+		$t_user_id = auth_get_current_user_id();
 		$t_access_level = current_user_get_field( 'access_level' );
 
 		$t_pub = PUBLIC;
@@ -423,7 +423,7 @@
 					FROM $g_mantis_project_table
 					ORDER BY name";
 		} else {
-			$t_user_id = current_user_get_field( 'id' );
+			$t_user_id = auth_get_current_user_id();
 			$query = "SELECT p.id, p.name
 					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND

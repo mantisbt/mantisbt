@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.40 2003-02-18 02:53:55 vboctor Exp $
+	# $Id: account_page.php,v 1.41 2003-02-27 07:04:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -183,7 +183,7 @@
 			<?php echo lang_get( 'assigned_projects' ) ?>
 		</td>
 		<td>
-			<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
+			<?php print_project_user_list( auth_get_current_user_id() ) ?>
 		</td>
 	</tr>
 

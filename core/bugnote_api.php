@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.16 2003-02-22 18:49:43 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.17 2003-02-27 07:04:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -102,7 +102,7 @@
 		}
 
 		# get user information
-		$t_user_id = current_user_get_field( 'id' );
+		$t_user_id = auth_get_current_user_id();
 
 		# insert bugnote info
 		$query = "INSERT

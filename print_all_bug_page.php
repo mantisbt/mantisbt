@@ -80,7 +80,7 @@
 	# Limit reporters to only see their reported bugs
 	if ( ( ON == $g_limit_reporters ) &&
 		( !access_has_project_level( UPDATER ) ) ) {
-		$c_user_id = current_user_get_field( 'id' );
+		$c_user_id = auth_get_current_user_id();
 	}
 
 	# Build our query string based on our viewing criteria
@@ -93,7 +93,7 @@
 	# project selection
 	if ( 0 == $t_project_id ) { # ALL projects
 		$t_access_level = current_user_get_field( 'access_level' );
-		$t_user_id = current_user_get_field( 'id' );
+		$t_user_id = auth_get_current_user_id();
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.63 2003-02-25 15:50:11 int2str Exp $
+	# $Id: html_api.php,v 1.64 2003-02-27 07:04:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -401,7 +401,7 @@
 	# --------------------
 	# Print the menu bar with a list of projects to which the user has access
 	function print_project_menu_bar() {
-		$t_user_id = current_user_get_field( 'id' );
+		$t_user_id = auth_get_current_user_id();
 		$t_access_level = current_user_get_field( 'access_level' );
 
 		$t_pub = PUBLIC;
