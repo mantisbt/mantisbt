@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.108 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: email_api.php,v 1.109 2005-03-04 13:34:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -953,7 +953,7 @@
 		# format bugnotes
 		foreach ( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
 			$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
-			$t_string = ' '.$t_bugnote->reporter_name.' - '.$t_last_modified.' ';
+			$t_string = ' '. user_get_name( $t_bugnote->reporter_id ) . ' - ' . $t_last_modified . ' ';
 
 			$t_message .= $t_email_separator2 . " \n";
 			$t_message .= $t_string . " \n";

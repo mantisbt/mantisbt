@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.31 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: bugnote_api.php,v 1.32 2005-03-04 13:34:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -22,12 +22,15 @@
 	# Bugnote Data Structure Definition
 	#===================================
 	class BugnoteData {
+		var $id;
+		var $bug_id;
+		var $reporter_id;
 		var $note;
 		var $view_state;
-		var $type;
-		var $attr;
-		var $reporter_name;
+		var $date_submitted;
 		var $last_modified;
+		var $note_type;
+		var $note_attr;
 	}
 
 	#===================================
@@ -316,12 +319,13 @@
 
 				$t_bugnote = new BugnoteData;
 
+				$t_bugnote->id            = $row['id'];
 				$t_bugnote->note          = $row['note'];
 				$t_bugnote->view_state    = $row['view_state'];
-				$t_bugnote->reporter_name = user_get_name( $row['reporter_id'] );
+				$t_bugnote->reporter_id   = $row['reporter_id'];
 				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
-				$t_bugnote->type          = $row['note_type'];
-				$t_bugnote->attr          = $row['note_attr'];
+				$t_bugnote->note_type     = $row['note_type'];
+				$t_bugnote->note_attr     = $row['note_attr'];
 
 				$t_bugnotes[] = $t_bugnote;
 			}
