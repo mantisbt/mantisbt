@@ -81,6 +81,7 @@ Mantis
  * Added CRYPT_FULL_SALT authentication.
  * Added page timer.
  * Added mt_srand() call in core_API.php.
+ * Added g_register_globals global for installations where register_globals is Off.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.
