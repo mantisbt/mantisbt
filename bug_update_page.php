@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: vboctor $
-	# $Date: 2002-08-17 02:46:01 $
+	# $Date: 2002-08-23 13:16:51 $
 	#
-	# $Id: bug_update_page.php,v 1.22 2002-08-17 02:46:01 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.23 2002-08-23 13:16:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 	}
 
 	project_access_check( $f_id );
-	check_access( UPDATER );
+	check_access( $g_update_bug_threshold );
 	check_bug_exists( $f_id );
 
 	$c_id = (integer)$f_id;

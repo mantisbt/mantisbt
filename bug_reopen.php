@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.15 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-16 10:16:25 $
+	# $Revision: 1.16 $
+	# $Author: vboctor $
+	# $Date: 2002-08-23 13:16:51 $
 	#
-	# $Id: bug_reopen.php,v 1.15 2002-08-16 10:16:25 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.16 2002-08-23 13:16:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( $g_handle_bug_threshold );
+	check_access( $g_reopen_bug_threshold );
 	check_bug_exists( $f_id );
 
 	#check variables

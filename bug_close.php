@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
-	# $Author: prescience $
-	# $Date: 2002-08-19 02:54:09 $
+	# $Revision: 1.21 $
+	# $Author: vboctor $
+	# $Date: 2002-08-23 13:16:51 $
 	#
-	# $Id: bug_close.php,v 1.20 2002-08-19 02:54:09 prescience Exp $
+	# $Id: bug_close.php,v 1.21 2002-08-23 13:16:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( UPDATER );
+	check_access( $g_close_bug_threshold );
 	check_bug_exists( $f_id );
 
 	# check variables

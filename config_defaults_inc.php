@@ -424,6 +424,10 @@
 	############################
 
 	# --- threshold -------------------
+
+	# access level needed to update bugs
+	$g_update_bug_threshold = UPDATER;
+
 	# access level needed to re-open bugs
 	# Look in the constant_inc.php file if you want to set a different value
 	$g_reopen_bug_threshold = DEVELOPER;
@@ -470,6 +474,10 @@
 	# --- bug delete -----------
 	# Allow the specified access level and higher to delete bugs
 	$g_allow_bug_delete_access_level = DEVELOPER;
+
+	# --- bug note delete ------
+	# Specify the required access level to delete bug notes.
+	$g_delete_bugnote_threshold = $g_allow_bug_delete_access_level;
 
 	# --- move bugs -----------
 	# Allow the specified access level and higher to move bugs between projects

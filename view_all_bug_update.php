@@ -34,27 +34,34 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	switch ($p_status) {
 
 		case 'MOVED' :
+			check_access( $g_bug_move_access_level );
 			$t_query = "project_id='$p_request'";
 			break;
 
 		case CLOSED :
+			check_access( $g_close_bug_threshold );
 			$t_query="status='$p_status'";
 			break ;
 
 		case ASSIGNED :
+			check_access( $g_update_bug_threshold );
+			// @@@ Check that $p_request has access to handle a bug.
 			$t_handler_id = $p_request ;
 			$t_query="handler_id='$t_handler_id', status='$p_status'";
 			break ;
 
 		case RESOLVED :
+			check_access( $g_handle_bug_threshold );
 			$t_query=" status='$p_status', resolution='$p_request'";
 			break ;
 
 		case 'UP_PRIOR' :
+			check_access( $g_update_bug_threshold );
 			$t_query="priority='$p_request'";
 			break ;
 
 		case 'UP_STATUS' :
+			check_access( $g_update_bug_threshold );
 			$t_query="handler_id='$t_handler_id', status='$p_request'";
 			break ;
 	}
@@ -114,11 +121,6 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	}
 
 }//updateBug
-
-
-
-	# main
-	check_access( UPDATER );
 
 	# We check to see if the variable exists to avoid warnings
 	if ( ( $f_actionconfirmed=='1' )&&( isset( $f_bug_arr ) ) )  {

@@ -27,24 +27,29 @@
 
 		$c_id			= (integer)$p_id;
 		$c_bug_text_id	= (integer)$p_bug_text_id;
+		
+		$retval = true;
 
 		# Delete the bug entry
 		$query = "DELETE
 				FROM $g_mantis_bug_table
 				WHERE id='$c_id'";
 		$result = db_query( $query );
+		$retval = $retval && $result;
 
 		# Delete the corresponding bug text
 		$query = "DELETE
 				FROM $g_mantis_bug_text_table
 				WHERE id='$c_bug_text_id'";
 		$result = db_query( $query );
+		$retval = $retval && $result;
 
 		# Delete the bugnote text items
 		$query = "SELECT bugnote_text_id
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$c_id'";
 		$result = db_query($query);
+		$retval = $retval && $result;
 		$bugnote_count = db_num_rows( $result );
 		for ($i=0;$i<$bugnote_count;$i++){
 			$row = db_fetch_array( $result );
@@ -54,7 +59,8 @@
 			$query = "DELETE
 					FROM $g_mantis_bugnote_text_table
 					WHERE id='$t_bugnote_text_id'";
-			$result2 = db_query( $query );
+			$result = db_query( $query );
+			$retval = $retval && $result;
 		}
 
 		# Delete the corresponding bugnotes
@@ -62,6 +68,7 @@
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$c_id'";
 		$result = db_query($query);
+		$retval = $retval && $result;
 
 		if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
 			# Delete files from disk
@@ -69,6 +76,7 @@
 				FROM $g_mantis_bug_file_table
 				WHERE bug_id='$c_id'";
 			$result = db_query( $query );
+			$retval = $retval && $result;
 			$file_count = db_num_rows( $result );
 
 			# there may be more than one file
@@ -90,12 +98,16 @@
 			FROM $g_mantis_bug_file_table
 			WHERE bug_id='$c_id'";
 		$result = db_query($query);
+		$retval = $retval && $result;
 
 		# Delete the bug history
 		$query = "DELETE
 			FROM $g_mantis_bug_history_table
 			WHERE bug_id='$c_id'";
 		$result = db_query($query);
+		$retval = $retval && $result;
+
+		return ($retval);
 	}
 	# --------------------
 	# This function assigns the bug to the current user
@@ -246,13 +258,4 @@
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
-	# --------------------
 ?>

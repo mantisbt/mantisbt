@@ -7,13 +7,12 @@
 ?>
 <?php
 	# Bug delete confirmation page
-	# Page contiues to bug_delete.php3
+	# Page contiues to bug_delete.php
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( $g_handle_bug_threshold );
 	check_access( $g_allow_bug_delete_access_level );
 	check_bug_exists( $f_id );
 ?>

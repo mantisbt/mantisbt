@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.27 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-16 10:16:25 $
+	# $Revision: 1.28 $
+	# $Author: vboctor $
+	# $Date: 2002-08-23 13:16:51 $
 	#
-	# $Id: bug_update.php,v 1.27 2002-08-16 10:16:25 jfitzell Exp $
+	# $Id: bug_update.php,v 1.28 2002-08-23 13:16:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( UPDATER );
+	check_access( $g_update_bug_threshold );
 
 	$c_id = (integer)$f_id;
 
@@ -34,6 +34,9 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
+	# if bug is private, make sure user can view private bugs
+	# use the db view state rather than the new one to check
+	access_bug_check( $f_id, $h_view_state );
 
 	# set variable to be valid if necessary
 	check_varset( $f_duplicate_id, '' );

@@ -13,9 +13,6 @@
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
 
-	# constant for our minimum required PHP version
-	define( 'PHP_MIN_VERSION', '4.0.3' );
-
 	# Include compatibility file before anything else
 	include( 'core_php_API.php' );
 

@@ -9,7 +9,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( UPDATER );
+	check_access( $g_reopen_bug_threshold  );
 	check_bug_exists( $f_id );
 ?>
 <?php print_page_top1() ?>

@@ -9,8 +9,10 @@
 	# PHP Compatibility API
 	#
 	# Methods to help in backwards compatibility of PHP versions, etc.
-	#
 	###########################################################################
+
+	# Constant for our minimum required PHP version
+	define( 'PHP_MIN_VERSION', '4.0.3' );
 
 	# --------------------
 	# Returns true if the current PHP version is higher than the one
@@ -35,28 +37,13 @@
 	# Enforce our minimum requirements
 	if ( ! php_version_at_least( PHP_MIN_VERSION ) ) {
 		ob_end_clean();
-		echo "<b>Your version of PHP is too old.  Mantis requires PHP version 4.0.3 or newer to operate</b>";
+		echo '<b>Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b>';
+		phpinfo();
 		die();
 	}
 
 	ini_set('magic_quotes_runtime', 0);
 
-	# @@@ Experimental
-	# deal with register_globals being Off
-	# @@@ NOTE we want to get rid of this once we start getting all
-	#      our GPC variables with functions.  In fact we may want to
-	#      turn off register_global_variables if we can
-	if ( false == ini_get( 'register_globals' ) ) {
-		if ( php_version_at_least( '4.1.0' ) ) {
-			extract( $_REQUEST );
-			extract( $_SERVER );
-		} else {
-			extract( $HTTP_POST_VARS );
-			extract( $HTTP_GET_VARS );
-			extract( $HTTP_SERVER_VARS );
-		}
-	}
-	
 	# Experimental support for $_* auto-global variables in PHP < 4.1.0
 	if ( ! php_version_at_least( '4.1.0' ) ) {
 		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER;
@@ -75,6 +62,16 @@
 		}
 	}
 
+	# @@@ Experimental
+	# deal with register_globals being Off
+	# @@@ NOTE we want to get rid of this once we start getting all
+	#      our GPC variables with functions.  In fact we may want to
+	#      turn off register_global_variables if we can
+	if ( false == ini_get( 'register_globals' ) ) {
+		extract( $_REQUEST );
+		extract( $_SERVER );
+	}
+
 	########################
 	# PHP Constants
 	########################
@@ -87,5 +84,4 @@
 			define('DIRECTORY_SEPARATOR', '/');
 		}
 	}
-
 ?>
