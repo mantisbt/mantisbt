@@ -6,11 +6,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.23 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:11:43 $
+	# $Revision: 1.24 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_danish.txt,v 1.23 2002-06-06 17:11:43 jhuggins Exp $
+	# $Id: strings_danish.txt,v 1.24 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -42,6 +42,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

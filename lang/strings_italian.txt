@@ -8,11 +8,11 @@
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
 	# -------------------------------------------------
-	# $Revision: 1.24 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:11:45 $
+	# $Revision: 1.25 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_italian.txt,v 1.24 2002-06-06 17:11:45 jhuggins Exp $
+	# $Id: strings_italian.txt,v 1.25 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -44,6 +44,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

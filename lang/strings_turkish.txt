@@ -7,11 +7,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.22 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:12:08 $
+	# $Revision: 1.23 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_turkish.txt,v 1.22 2002-06-06 17:12:08 jhuggins Exp $
+	# $Id: strings_turkish.txt,v 1.23 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -43,6 +43,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

@@ -7,11 +7,11 @@
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Code page: ISO-8259-2
 	# -------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:11:43 $
+	# $Revision: 1.15 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_czech.txt,v 1.14 2002-06-06 17:11:43 jhuggins Exp $
+	# $Id: strings_czech.txt,v 1.15 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -43,6 +43,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

@@ -6,11 +6,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.21 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:12:04 $
+	# $Revision: 1.22 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_romanian.txt,v 1.21 2002-06-06 17:12:04 jhuggins Exp $
+	# $Id: strings_romanian.txt,v 1.22 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -42,6 +42,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

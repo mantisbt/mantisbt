@@ -6,11 +6,11 @@
 
 	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.13 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:12:06 $
+	# $Revision: 1.14 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.13 2002-06-06 17:12:06 jhuggins Exp $
+	# $Id: strings_russian_koi8.txt,v 1.14 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -42,6 +42,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';

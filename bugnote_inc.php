@@ -128,20 +128,26 @@
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
-<tr class="row-1">
-	<td class="center" colspan="2">
+<tr class="row-2">
+	<td class="category" width="25%">
+		<?php echo $s_bugnote ?>
+	</td>
+	<td width="75%">
 		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
-<tr>
 <?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
-	<td class="right">
-		<input type="checkbox" name="f_private"> <?php echo $s_private; ?>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_private ?>
 	</td>
-	<td class="center">
-<?php } else { ?>
-	<td class="center" colspan="2">
+	<td>
+		<input type="checkbox" name="f_private">
+	</td>
+</tr>
 <?php } ?>
+<tr>
+	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_add_bugnote_button ?>">
 		</form>
 	</td>

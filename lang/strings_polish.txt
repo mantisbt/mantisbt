@@ -7,11 +7,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.28 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-06 17:11:48 $
+	# $Revision: 1.29 $
+	# $Author: prescience $
+	# $Date: 2002-06-07 03:58:40 $
 	#
-	# $Id: strings_polish.txt,v 1.28 2002-06-06 17:11:48 jhuggins Exp $
+	# $Id: strings_polish.txt,v 1.29 2002-06-07 03:58:40 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -43,6 +43,7 @@
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
 	$s_date_modified = 'Date Modified';
+	$s_bugnote = 'Bugnote';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';
