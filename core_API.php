@@ -79,7 +79,7 @@
 	}
 	### --------------------
 	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
-		if ( $p_result ) {
+		if ( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
 			return mysql_result( $p_result, $p_index1, $p_index2 );
 		}
 		else {
@@ -216,7 +216,11 @@
 	### --------------------
 	### checks to see whether we need to be displaying the source link
 	function print_source_link( $p_file ) {
-		global $g_show_source, $g_show_source_page;
+		global $g_show_source, $g_show_source_page, $g_string_cookie_val;
+
+		if (!isset($g_string_cookie_val)) {
+			return;
+		}
 
 		if ( $g_show_source==1 ) {
 			if ( access_level_check_greater_or_equal( "administrator" ) ) {
@@ -245,16 +249,14 @@
 	### --------------------
 	function print_manage_menu() {
 		global 	$g_path, $g_manage_create_user_page, $g_manage_project_menu_page,
-				$g_manage_category_page, $g_manage_product_versions_page,
 				$g_documentation_page,
 				$s_create_new_account_link, $s_manage_categories_link,
-				$s_manage_product_versions_link, $s_documentation_link;
+				$s_manage_product_versions_link, $s_documentation_link,
+				$s_projects;
 
 		PRINT "<div align=center>";
 			PRINT "[ <a href=\"$g_path.$g_manage_create_user_page\">$s_create_new_account_link</a> ] ";
-			PRINT "[ <a href=\"$g_path.$g_manage_project_menu_page\">Projects</a> ] ";
-			PRINT "[ <a href=\"$g_path.$g_manage_category_page\">$s_manage_categories_link</a> ] ";
-			PRINT "[ <a href=\"$g_path.$g_manage_product_versions_page\">$s_manage_product_versions_link</a> ] ";
+			PRINT "[ <a href=\"$g_path.$g_manage_project_menu_page\">$s_projects</a> ] ";
 			PRINT "[ <a href=\"$g_path.$g_documentation_page\">$s_documentation_link</a> ]";
 		PRINT "</div>";
 	}
@@ -1401,7 +1403,8 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v2" );
 
-		$v2_description = str_replace( "<br>", "", $v2_description );
+		$v2_description = stripslashes( str_replace( "<br>", "", $v2_description ) );
+		$v_summary = stripslashes( $v_summary );
 		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
 		$v_last_updated = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
 
@@ -1422,7 +1425,7 @@
 		$t_message .= "Date Submitted:   $v_date_submitted\n";
 		$t_message .= "Last Modified:    $v_last_updated\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "Summary:  $v_summary\n";
+		$t_message .= "Summary:  $v_summary\n\n";
 		$t_message .= "Description: $v2_description\n";
 		$t_message .= "=======================================================================\n\n";
 
@@ -1460,7 +1463,7 @@
 			$t_username = db_result( $result3, 0, 0 );
 
 			$t_note = db_result( $result2, 0, 0 );
-			$t_note = str_replace( "<br>", "", $t_note );
+			$t_note = stripslashes( str_replace( "<br>", "", $t_note ) );
 			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
@@ -1584,7 +1587,7 @@
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################
-	function is_not_duplicate_category( $p_category ) {
+	function is_duplicate_category( $p_category ) {
 		global $g_mantis_project_category_table, $g_project_cookie_val;
 
 		$query = "SELECT COUNT(*)
@@ -1594,12 +1597,13 @@
 		$result = db_query( $query );
 		$category_count =  db_result( $result, 0, 0 );
 		if ( $category_count > 0 ) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
-	function is_not_duplicate_version( $p_version ) {
+	### --------------------
+	function is_duplicate_version( $p_version ) {
 		global $g_mantis_project_version_table, $g_project_cookie_val;
 
 		$query = "SELECT COUNT(*)
@@ -1609,9 +1613,10 @@
 		$result = db_query( $query );
 		$version_count =  db_result( $result, 0, 0 );
 		if ( $version_count > 0 ) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
+	### --------------------
 ?>

@@ -38,7 +38,7 @@
 	# email variables
 	$g_administrator_email  = "administrator@mydomain.com";   # set this
 	$g_webmaster_email      = "webmaster@mydomain.com";       # set this
-	$g_from_email           = "nobody@300baud.org";
+	$g_from_email           = "nobody@mydomain.com";          # set this
 	#--------------------
 
 	#--------------------
@@ -117,8 +117,10 @@
 
 	#--------------------
 	# date format strings
-	$g_short_date_format = "m-d";
-	$g_normal_date_format = "m-d H:i";
+	# go to http://www.php.net/manual/en/function.date.php
+	# for detailed instructions on date formatting
+	$g_short_date_format    = "m-d";
+	$g_normal_date_format   = "m-d H:i";
 	$g_complete_date_format = "m-d-y H:i T";
 	#--------------------
 
@@ -280,14 +282,6 @@
 
 	$g_documentation_page             = "documentation_page".$g_php;
 
-	# category management
-	#$g_manage_category_page           = "manage_category_page".$g_php;
-	#$g_manage_category_update         = "manage_category_update".$g_php;
-
-	# product versions
-	#$g_manage_product_versions_page   = "manage_product_versions_page".$g_php;
-	#$g_manage_product_versions_update = "manage_product_versions_update".$g_php;
-
 	# multiple projects
 	$g_manage_project_menu_page       = "manage_project_menu_page".$g_php;
 	$g_manage_project_add             = "manage_project_add".$g_php;
@@ -297,7 +291,9 @@
 	$g_manage_project_delete_page     = "manage_project_delete_page".$g_php;
 
 	$g_set_project                    = "set_project".$g_php;
-	$g_choose_project_page            = "choose_project_page".$g_php;
+
+	# unused
+	#$g_choose_project_page            = "choose_project_page".$g_php;
 
 	# manage multiple project users
 	$g_manage_project_user_menu_page    = "manage_project_user_menu_page".$g_php;
