@@ -264,12 +264,12 @@
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>
+		</form>
 <?		} else { ?>
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			&nbsp;
 		</td>
 <?		} #endif DEVELOPER ?>
-	</form>
 	</tr>
 <?
 	} # endif UPDATER
