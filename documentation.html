@@ -31,15 +31,17 @@ Each major section is partitioned via the menu.  Every section is treated as a p
 	<ul>
 	<li><a href="#view_bug_simple">View Bug Simple</a>
 	<li><a href="#view_bug_advanced">View Bug Advanced</a>
+		<ul>
+		<li><a href="#add_vote">Add Vote</a>
+		</ul>
+	<li><a href="#view_reported_bugs">View Bugs Reported by Logged in User</a>
+	<li><a href="#view_assigned_bugs">View Bugs Assigned to Logged in User</a>
 	</ul>
 <li><a href="#editing_bugs">Editing Bugs</a>
 	<ul>
 	<li><a href="#delete_bug">Delete Bug</a>
 	<li><a href="#update_bug_simple">Update Bug Simple</a>
 	<li><a href="#update_bug_advanced">Update Bug Advanced</a>
-		<ul>
-		<li><a href="#add_vote">Add Vote</a>
-		</ul>
 	</ul>
 <li><a href="#bugnotes">Bugnotes</a>
 	<ul>
@@ -210,6 +212,15 @@ The Advanced View is much the same as the Simple View with a few additional fiel
 	This increases the vote tally.  There is currently no IP spam protection for vote adding.  The idea behind the vote counter is to have duplicate reports instead increase the vote count.  As the number of reports increase the relative importance of the bug becomes clear.  This is somewhat useful in prioritizing the order in which to give attention to bugs.  NOTE: currently there is very little feedback given to developers about vote count.
 	<p>
 	</blockquote>
+<p>
+<h4><a name=view_reported_bugs>[ View Bugs Reported by Logged in User ]</a></h4>
+<p>
+This page shows looks just like the previous view all bugs page except that it only shows bugs that the logged in user has reported.
+<p>
+<h4><a name=view_assigned_bugs>[ View Bugs Assigned to Logged in User ]</a></h4>
+<p>
+This page is similar to the reported bugs page but only shows bugs that the logged in user is assigned to.
+<p>
 </blockquote>
 
 <!-- ---------------------------------------------------------------------- -->
