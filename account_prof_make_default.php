@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_make_default.php,v 1.24 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_prof_make_default.php,v 1.25 2004-01-11 07:16:05 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php

@@ -1,18 +1,18 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.56 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:33 $
+	# $Revision: 1.57 $
+	# $Author: vboctor $
+	# $Date: 2004-01-11 07:16:12 $
 	#
-	# $Id: strings_korean.txt,v 1.56 2003-08-24 10:02:33 beerfrick Exp $
+	# $Id: strings_korean.txt,v 1.57 2004-01-11 07:16:12 vboctor Exp $
 	###########################################################################
 ?>
 <?php

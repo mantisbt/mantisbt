@@ -1,17 +1,17 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt  V0.1
 	# -------------------------------------------------
-	# $Revision: 1.53 $
+	# $Revision: 1.54 $
 	# $Author: vboctor $
-	# $Date: 2003-08-31 11:32:21 $
+	# $Date: 2004-01-11 07:16:12 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.53 2003-08-31 11:32:21 vboctor Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.54 2004-01-11 07:16:12 vboctor Exp $
 	###########################################################################
 ?>
 <?php

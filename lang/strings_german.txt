@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: vboctor $
-	# $Date: 2003-08-31 11:32:20 $
+	# $Date: 2004-01-11 07:16:12 $
 	#
-	# $Id: strings_german.txt,v 1.80 2003-08-31 11:32:20 vboctor Exp $
+	# $Id: strings_german.txt,v 1.81 2004-01-11 07:16:12 vboctor Exp $
 	###########################################################################
 ?>
 <?php

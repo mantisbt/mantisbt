@@ -1,18 +1,18 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:34 $
+	# $Revision: 1.53 $
+	# $Author: vboctor $
+	# $Date: 2004-01-11 07:16:13 $
 	#
-	# $Id: strings_turkish.txt,v 1.52 2003-08-24 10:02:34 beerfrick Exp $
+	# $Id: strings_turkish.txt,v 1.53 2004-01-11 07:16:13 vboctor Exp $
 	###########################################################################
 ?>
 <?php

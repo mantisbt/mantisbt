@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.78 2003-11-12 20:40:08 vboctor Exp $
+	# $Id: html_api.php,v 1.79 2004-01-11 07:16:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -308,7 +308,7 @@
 		if ( ON == config_get( 'show_version' ) ) {
 			echo '<span class="timer"><a href="http://mantisbt.sourceforge.net/">Mantis ' . config_get( 'mantis_version' ) . '</a></span>';
 		}
-		echo '<address>Copyright &copy; 2000 - 2003</address>';
+		echo '<address>Copyright &copy; 2000 - 2004</address>';
 		echo '<address><a href="mailto:' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
 		if ( ON == config_get( 'show_timer' ) ) {
 			$g_timer->print_times();

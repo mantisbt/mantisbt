@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.15 2003-08-22 05:53:42 beerfrick Exp $
+	# $Id: bugnote_add_inc.php,v 1.16 2004-01-11 07:16:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&

@@ -1,13 +1,17 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# These upgrades fix the double escaped data that was put into the database
 	#  in every version up 0.17.x.  We pull out the data, unescape it, remove
 	#  entities and then insert the data back in.
+
+	# --------------------------------------------------------
+	# $Id: 0_17_escaping_fixes_inc.php,v 1.3 2004-01-11 07:16:09 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'db_table_names_inc.php' );
