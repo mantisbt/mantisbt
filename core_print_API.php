@@ -222,7 +222,7 @@
 			$v_id = $val[1];
 			$v_username = $val[0];
 			if ( $v_id == $p_user_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
+				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_username</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_username</option>";
 			}
@@ -294,7 +294,7 @@
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( '\'', '', $t_arr[$i] );
 			if ( $p_item == $t_s ) {
-				PRINT "<option value=\"$t_s\" SELECTED>$t_s</option>";
+				PRINT "<option value=\"$t_s\" selected=\"selected\">$t_s</option>";
 			}
 			else {
 				PRINT "<option value=\"$t_s\">$t_s</option>";
@@ -399,7 +399,7 @@
 			$v_id = $val[1];
 			$v_username = $val[0];
 			if ( $v_id == $p_user_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
+				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_username</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_username</option>";
 			}
@@ -440,7 +440,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			if ( $p_project_id == $v_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
+				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_name</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
@@ -477,7 +477,7 @@
 			$v_os_build	= string_display( $v_os_build );
 
 			if ( $v_id == $v_default_profile ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build</option>";
+				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_platform $v_os $v_os_build</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build</option>";
 			}
@@ -507,7 +507,7 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			if ( $v_id == $p_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
+				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_name</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
@@ -537,7 +537,7 @@
 
 		foreach( $cat_arr as $t_category ) {
 			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
+				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
 			} else {
 				PRINT "<option value=\"$t_category\">$t_category</option>";
 			}
@@ -580,7 +580,7 @@
 
 		foreach( $cat_arr as $t_category ) {
 			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
+				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
 			} else {
 				PRINT "<option value=\"$t_category\">$t_category</option>";
 			}
@@ -610,7 +610,7 @@
 			$row = db_fetch_array( $result );
 			$t_category = $row['category'];
 			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
+				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
 			} else {
 				PRINT "<option value=\"$t_category\">$t_category</option>";
 			}
@@ -630,7 +630,7 @@
 			$row = db_fetch_array( $result );
 			$t_version = $row['version'];
 			if ( $t_version == $p_version ) {
-				PRINT "<option value=\"$t_version\" SELECTED>$t_version</option>";
+				PRINT "<option value=\"$t_version\" selected=\"selected\">$t_version</option>";
 			} else {
 				PRINT "<option value=\"$t_version\">$t_version</option>";
 			}
@@ -645,7 +645,7 @@
 
 		# custom attributes
 		if ($g_customize_attributes) {
-			# to be deleted when moving to manage_project_page.php	
+			# to be deleted when moving to manage_project_page.php
 			$f_project_id = '0000000';
 
 			# custom attributes insertion
@@ -657,7 +657,7 @@
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
 			if ( $t_elem[0] == $p_val ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem2</option>";
+				PRINT "<option value=\"$t_elem[0]\" selected=\"selected\">$t_elem2</option>";
 			} else {
 				PRINT "<option value=\"$t_elem[0]\">$t_elem2</option>";
 			}
@@ -680,7 +680,7 @@
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
 			if ( $p_val == $t_elem[0] ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_access_level</option>";
+				PRINT "<option value=\"$t_elem[0]\" selected=\"selected\">$t_access_level</option>";
 			} else {
 				PRINT "<option value=\"$t_elem[0]\">$t_access_level</option>";
 			}
@@ -694,7 +694,7 @@
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			if ( $t_arr[$i] == $p_language ) {
-				PRINT "<option value=\"$t_arr[$i]\" SELECTED>$t_arr[$i]</option>";
+				PRINT "<option value=\"$t_arr[$i]\" selected=\"selected\">$t_arr[$i]</option>";
 			} else {
 				PRINT "<option value=\"$t_arr[$i]\">$t_arr[$i]</option>";
 			}
@@ -1002,11 +1002,11 @@
 				$t_dir = 'DESC';
 			} else {
 				$t_dir = 'ASC';
-			}       
+			}
 		} else {                        # Otherwise always start with ASCending
 				$t_dir = 'ASC';
 		}
-		
+
 		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'&amp;f_save=1&amp;f_hide='.$p_hide.'">'.$p_string.'</a>';
 	}
 	# --------------------
@@ -1016,11 +1016,11 @@
 				$t_dir = 'DESC';
 			} else {
 				$t_dir = 'ASC';
-			}       
+			}
 		} else {                        # Otherwise always start with ASCending
 			$t_dir = 'ASC';
 		}
-		
+
 		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'">'.$p_string.'</a>';
 	}
 	# --------------------

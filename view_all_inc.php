@@ -43,9 +43,9 @@
 	<td>
 		<select name="f_assign_id">
 			<option value="any"><?php echo $s_any ?></option>
-			<option value="none" <?php if ( 'none' == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
+			<option value="none" <?php check_selected( $f_assign_id, 'none' ); ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
-			<?php print_assign_to_option_list( $f_assign_id ) ?>
+			<?php #print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 	</td>
 	<td>
@@ -127,7 +127,6 @@
 	</td>
 </tr>
 </table>
-
 <?php
 	$col_count = 7;
 	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) {
@@ -160,9 +159,9 @@
 <?php if ($g_project_cookie_val!='0000000') {
 			if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td class="center" width="5%">
-	&nbsp;		
+	&nbsp;
 	</td>
-<?php		} 
+<?php		}
 		}?>
 	<td class="right">
 		[
@@ -230,11 +229,12 @@
 		&nbsp;
 	</td>
 </tr>
+<?php mark_time( 'begin loop' ); ?>
 <?php
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
-		
+
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display( $v_summary );
@@ -263,20 +263,20 @@
 	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
 			<?php $t_transf="$v_id".','."$v_bug_text_id"; ?>
-			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $t_transf ?>">  
+			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $t_transf ?>">
 	</td>
 	<?php	} ?>
 
-	<?php # the pencil shortcut 
+	<?php # the pencil shortcut
 			#only for a per project basis
 			if ($g_project_cookie_val!='0000000') {
 				if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
 			<?php print " <input type=\"image\" name=\"update_$v_id\" src=\"images/update.png\" width=\"11\" height=\"11\">"; ?>
 	</td>
-	<?php		} 
+	<?php		}
 			}?>
-	
+
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == $g_show_priority_text ) {
@@ -306,7 +306,7 @@
 		?>
 	</td>
 	<td class="center" bgcolor="<?php echo $status_color ?>">
-		<?php 
+		<?php
 			# type project name if viewing 'all projects'
 			if (( ON == $g_show_bug_project_links )&&( '0000000' == $g_project_cookie_val )) {
 				echo '<small>[';
@@ -342,7 +342,7 @@
 		?>
 	</td>
 	<td class="left" bgcolor="<?php echo $status_color ?>">
-		<?php 
+		<?php
 			PRINT $v_summary;
 			if ( PRIVATE == $v_view_state ) {
 			  PRINT "  [$s_private]";
@@ -357,7 +357,7 @@
 <?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 <tr>
 	<td colspan="9">
-	
+
 		<!--
 		<select name="f_project_id">
 		<?php print_project_option_list() ?>
@@ -367,10 +367,11 @@
 		<select name="f_action">
 		<?php print_all_bug_action_option_list() ?>
 		</select>
-		<input type="submit" value="<?php echo 'OK';  ?>" > 
+		<input type="submit" value="<?php echo 'OK';  ?>" >
 	</td>
 </tr>
 <?php } ?>
+<?php mark_time( 'end loop' ); ?>
 </table>
 
 <?php # Show NEXT and PREV links as needed ?>

@@ -181,7 +181,7 @@
 	</td>
 	<td>
 		<select name="f_assign_id">
-			<option value="0000000" SELECTED></option>
+			<option value="0000000" selected="selected"></option>
 			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 	</td>
