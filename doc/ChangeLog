@@ -36,6 +36,7 @@ Mantis ChangeLog
  * Fix #3840: Why strip the leading spaces from Description? (applied to all multi-line fields in issue + issue notes).
  * Fix #3851: Ability to change the view status for a group of bugs
  * Fix #3852: OK button in View Issues page is not localised
+ * Fix #3853: Filters sometime generate an invalid query (partial fix).
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

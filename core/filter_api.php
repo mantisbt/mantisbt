@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.32 2004-05-08 23:25:12 narcissus Exp $
+	# $Id: filter_api.php,v 1.33 2004-05-18 12:52:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -304,6 +304,14 @@
 
 		# Now add the rest of the criteria i.e. sorting, limit.
 		$c_sort = db_prepare_string( $t_filter['sort'] );
+
+		# if sort is blank then default the sort and direction.  This is to fix the
+		# symptoms of #3953.  Note that even if the main problem is fixed, we may
+		# have to keep this code for a while to handle filters saved with this blank field.
+		if ( is_blank( $c_sort ) ) {
+			$c_sort = 'last_updated';
+			$t_filter['dir'] = 'DESC';
+		}
 
 		if ( 'DESC' == $t_filter['dir'] ) {
 			$c_dir = 'DESC';
