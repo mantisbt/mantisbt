@@ -7,12 +7,13 @@
 
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
+	#             hardkoder@gmail.com - 2004/09 현재 수정중 입니다. 중복 수정을 피하기 위해서 수정시 연락 바랍니다.
 	# -------------------------------------------------
-	# $Revision: 1.71 $
+	# $Revision: 1.72 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:58 $
+	# $Date: 2004-09-06 12:24:59 $
 	#
-	# $Id: strings_korean.txt,v 1.71 2004-08-26 17:40:58 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.72 2004-09-06 12:24:59 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -201,7 +202,7 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP 서버 연결 실패';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= '오류: LDAP 사용자 갱신 오류.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '오류: 데이타베이스 연결 오류.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= '오류: 데이타베이스 선택 오류.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '오류: 복사 실행이 명시되지 않음.';
@@ -253,7 +254,7 @@ $s_project_view_state_enum_string = '10:공개,50:비공개';
 $s_view_state_enum_string         = '10:공개,50:비공개';
 
 $s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
-$s_severity_enum_string           = '10:새 기능 요구,20:사소한 벌레,30:문자열 오류,40:기능 개선,50:덜 중요한 벌레,60:중요한 벌레,70:충돌,80:장애';
+$s_severity_enum_string           = '10:새 기능 요구,20:사소함,30:오타,40:기능 개선,50:덜 중요함,60:중요함,70:충돌,80:장애';
 $s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않음,90:다시 만들수 없음,100:N/A';
 $s_status_enum_string             = '10:새로운 이슈,20:추가정보(필요),30:이슈 인정,40:이슈 확인,50:할당된 이슈,80:해결된 이슈,90:폐쇄된 이슈';
 $s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:해결할 수 없음';
@@ -274,12 +275,12 @@ $s_new_account_signup_msg = 'The following account has been created:';
 $s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following isse has been CLOSED';
 
 $s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
@@ -290,7 +291,7 @@ $s_email_notification_title_for_action_sponsorship_added = 'The following issue 
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
@@ -460,7 +461,7 @@ $s_bugnote_add_resolve_button = '이슈노트 추가';
 # bug_reminder_page.php
 $s_from = '보낸 사람';
 $s_to = '받는 사람';
-$s_on = ' - ';
+$s_on = 'On';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Send a reminder';
 $s_reminder_sent_to = 'Reminder sent to';
@@ -550,6 +551,7 @@ $s_select_project_button = '프로젝트 선택';
 $s_logged_out_title = '로그 아웃...';
 $s_redirecting = '...리다이렉팅';
 $s_here = '여기';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
 $s_lost_password_done_title = "Password Message Sent";
@@ -703,7 +705,7 @@ $s_manage_user_updated_msg = '계정이 갱신되었습니다...';
 $s_main_link = '첫화면';
 $s_view_bugs_link = '이슈 보기';
 $s_report_bug_link = '이슈 보고하기';
-$s_changelog_link = 'Change Log';
+$s_changelog_link = '변경 기록';
 $s_summary_link = '요약';
 $s_account_link = '계정 관리';
 $s_users_link = '사용자';
@@ -711,7 +713,7 @@ $s_manage_link = '관리';
 $s_edit_news_link = '뉴스 편집';
 $s_docs_link = '문서';
 $s_logout_link = '로그아웃';
-$s_my_view_link = 'My View';
+$s_my_view_link = '내 페이지';
 
 # meta_inc.php
 
@@ -823,22 +825,22 @@ $s_check_report_more_bugs = '또 다른 이슈 보고 확인';
 
 # report_bug_page.php
 $s_advanced_report_link = '상세 보고';
-$s_report_stay = 'Stay 리포트';
+$s_report_stay = '계속 보고';
 
 # set_project.php
 $s_selected_project = '현재 프로젝트';
 $s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
+$s_signup_done_title = '계정이 등록 되었습니다.';
 $s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
 $s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
 $s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
-$s_signup_title = '사인업';
-$s_signup_button = '사인업';
+$s_signup_title = '신규등록';
+$s_signup_button = '신규등록';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = '사이트 설정 수정';
@@ -901,10 +903,10 @@ $s_end_date = '끝 날짜';
 $s_use_date_filters = '날짜 필터 사용';
 $s_yes = 'Yes';
 $s_no = 'No';
-$s_open_filters = 'Change Filter';
+$s_open_filters = '필터 바꾸기';
 $s_or_unassigned = 'Or Unassigned';
-$s_ok = 'OK';
-$s_select_all = 'Select All';
+$s_ok = '확인';
+$s_select_all = '전부 선택';
 
 # stored query strings
 $s_use_query = '필터 사용';
@@ -982,7 +984,7 @@ $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = '시퀀스';
-$s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일,5:체크 박스,6:리스트,7:다중선택 리스트';
 
 $s_confirm_used_custom_field_deletion = '이 필드는 적어도 하나의 프로젝트에 링크되어 있습니다.  이 필드와 관련된 모든 값은 삭제될 것입니다. 이 필드를 삭제하지 않으려면, 브라우저에서 뒤로 버튼을 누르시기 바랍니다. 삭제를 계속 진행하기 위해서는 아래의 버튼을 누르세요';
 $s_confirm_custom_field_deletion = '커스텀 필드와 모든 관련된 값을 삭제하시겠습니까?';
@@ -996,7 +998,7 @@ $s_hide_resolved = "해결된 것 숨김";
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
-$s_monitored_by = 'Monitored By';
+$s_monitored_by = '모니터 대상';
 
 $s_attachments = "첨부파일";
 $s_attachment_alt = "A";
@@ -1017,7 +1019,7 @@ $s_sponsorship_more_info = 'More information about sponsorship';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Change Log';
+$s_changelog = '변경 기록';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
