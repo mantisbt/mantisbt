@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.71 2004-07-18 00:07:44 vboctor Exp $
+	# $Id: bug_api.php,v 1.72 2004-07-18 13:59:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1108,7 +1108,7 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		if( !is_blank( $p_duplicate_id ) ) {
+		if( !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 ) ) {
 			# MASC RELATIONSHIP
 
 			# the related bug exists...
