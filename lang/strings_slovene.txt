@@ -242,6 +242,7 @@ $s_prefix_for_deleted_users = 'uporabnik';
 
 $s_administrator = 'Administrator';
 $s_myself = 'Jaz';
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:pregledovalec,25:poročevalec,40:posodobljevalec,55:razvijalec,70:menedžer,90:administrator';
@@ -634,6 +635,7 @@ $s_categories = 'Kategorije';
 $s_add_category_button = 'Dodaj kategorije';
 $s_versions = 'Verzije';
 $s_add_version_button = 'Dodaj verzijo';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Uredi';
 $s_actions = 'Dejanja';
 $s_version = 'Verzije';
@@ -793,6 +795,7 @@ $s_add_user_title = 'Dodajanje uporabnika k projektu';
 $s_add_user_button = 'Dodaj uporabnika';
 $s_project_selection_title = 'Izbira projekta';
 $s_remove_link = 'Odstrani';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Uspešno posodobil uporabnika';

@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-21 19:31:15 $
+	# $Date: 2004-09-22 16:08:22 $
 	#
-	# $Id: strings_norwegian.txt,v 1.74 2004-09-21 19:31:15 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.75 2004-09-22 16:08:22 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'bruker';
 
 $s_administrator = 'administrator';
 $s_myself = "Meg selv";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:Leser,25:Raportør,40:Superbruker,55:Utvikler,70:Prosjektleder,90:Administrator';
@@ -637,6 +638,7 @@ $s_categories = 'Kategorier';
 $s_add_category_button = 'Ny kategori';
 $s_versions = 'Versjoner';
 $s_add_version_button = 'Legg til versjon';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Rediger';
 $s_actions = 'Valg';
 $s_version = 'Versjon';
@@ -796,6 +798,7 @@ $s_add_user_title = 'Legg bruker til prosjekt';
 $s_add_user_button = 'Legg til bruker';
 $s_project_selection_title = 'Prosjektvalg';
 $s_remove_link = 'Fjern';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Oppdatert bruker OK';

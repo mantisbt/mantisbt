@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-11 02:55:16 $
+	# $Date: 2004-09-22 16:08:22 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.72 2004-09-11 02:55:16 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.73 2004-09-22 16:08:22 bigbadger Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.206 -- jferraz 2004/08/23
 	###########################################################################
@@ -248,6 +248,7 @@ $s_prefix_for_deleted_users = 'usuário';
 
 $s_administrator = 'administrador';
 $s_myself = "Eu mesmo";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:visualizador,25:relator,40:atualizador,55:desenvolvedor,70:gerente,90:administrador';
@@ -640,6 +641,7 @@ $s_categories = 'Categorias';
 $s_add_category_button = 'Adicionar Categoria';
 $s_versions = 'Versões';
 $s_add_version_button = 'Adicionar Versão';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Alterar';
 $s_actions = 'Ações';
 $s_version = 'Versão';
@@ -799,6 +801,7 @@ $s_add_user_title = 'Adicionar usuário ao projeto';
 $s_add_user_button = 'Adicionar Usuário';
 $s_project_selection_title = 'Seleção de Projeto';
 $s_remove_link = 'Remover';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Usuário atualizado com sucesso';

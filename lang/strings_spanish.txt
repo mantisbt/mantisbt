@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-31 15:33:53 $
+	# $Date: 2004-09-22 16:08:24 $
 	#
-	# $Id: strings_spanish.txt,v 1.73 2004-08-31 15:33:53 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.74 2004-09-22 16:08:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -249,6 +249,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrador';
 $s_myself = "Mí";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:espectador,25:informador,40:actualizador,55:desarrollador,70:manager,90:administrador';
@@ -640,6 +641,7 @@ $s_categories = 'Categorías';
 $s_add_category_button = 'Agregar Categoría';
 $s_versions = 'Versiones';
 $s_add_version_button = 'Agregar Versiones';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Editar';
 $s_actions = 'Acciones';
 $s_version = 'Versión/Build';
@@ -799,6 +801,7 @@ $s_add_user_title = 'Agregar usuario al proyecto';
 $s_add_user_button = 'Agregar usuario';
 $s_project_selection_title = 'Selección de Proyecto';
 $s_remove_link = 'eliminar';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Usuario actualizado';

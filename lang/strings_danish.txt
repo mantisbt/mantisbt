@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_danish.txt,v 1.69 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_danish.txt,v 1.70 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -244,6 +244,7 @@ $s_prefix_for_deleted_users = 'bruger';
 
 $s_administrator = 'administrator';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
@@ -635,6 +636,7 @@ $s_categories = 'Kategorier';
 $s_add_category_button = 'Tilføj Kategori';
 $s_versions = 'Versioner';
 $s_add_version_button = 'Tilføj Version';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'rediger';
 $s_actions = 'Handlinger';
 $s_version = 'Version/Udgave';
@@ -794,6 +796,7 @@ $s_add_user_title = 'Tilføj bruger til Projekt';
 $s_add_user_button = 'Tilføj bruger';
 $s_project_selection_title = 'Projekt Valg';
 $s_remove_link = 'fjern';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Bruger opdateret';

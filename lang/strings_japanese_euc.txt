@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-22 16:08:20 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.60 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_japanese_euc.txt,v 1.61 2004-09-22 16:08:20 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = '管理者';
 $s_myself = '自身';
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者';
@@ -638,6 +639,7 @@ $s_categories = 'カテゴリ';
 $s_add_category_button = 'カテゴリの追加';
 $s_versions = 'バージョン';
 $s_add_version_button = 'バージョンの追加';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = '編集';
 $s_actions = '操作';
 $s_version = 'バージョン/ビルド';
@@ -797,6 +799,7 @@ $s_add_user_title = 'プロジェクトへのユーザーを追加';
 $s_add_user_button = '追加';
 $s_project_selection_title = 'プロジェクトを選択';
 $s_remove_link = 'プロジェクトから削除';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'ユーザーが更新されました。';

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:58 $
+	# $Date: 2004-09-22 16:08:21 $
 	#
-	# $Id: strings_latvian.txt,v 1.18 2004-08-26 17:40:58 bigbadger Exp $
+	# $Id: strings_latvian.txt,v 1.19 2004-09-22 16:08:21 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = "Administrâtors";
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:skatîtâjs,25:ziòotâjs,40:redaktors,55:izstrâdâtâjs,70:vadîtâjs,90:administrâtors";
@@ -637,6 +638,7 @@ $s_categories = "Kategorijas";
 $s_add_category_button = "Pielikt kategoriju";
 $s_versions = "Versijas";
 $s_add_version_button = "Pielikt versiju";
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = "labot";
 $s_actions = 'Darbîbas';
 $s_version = 'Versija';
@@ -796,6 +798,7 @@ $s_add_user_title = "Lietotâja pievienoðana projektam";
 $s_add_user_button = "Pievienot";
 $s_project_selection_title = "Projekta izvçle";
 $s_remove_link = "dzçst";
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = "Lietotâjs pievienots";

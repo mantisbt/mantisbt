@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-03 08:12:49 $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_dutch.txt,v 1.73 2004-09-03 08:12:49 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.74 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'Beheerder';
 $s_myself = "Mijzelf";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder';
@@ -637,6 +638,7 @@ $s_categories = 'Categorie&euml;n';
 $s_add_category_button = 'Toevoegen categorie';
 $s_versions = 'Versies';
 $s_add_version_button = 'Toevoegen versie';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Aanpassen';
 $s_actions = 'Acties';
 $s_version = 'Versie/Fabrikant';
@@ -796,6 +798,7 @@ $s_add_user_title = 'Toevoegen gebruiker aan project';
 $s_add_user_button = 'Toevoegen gebruiker';
 $s_project_selection_title = 'Project selectie';
 $s_remove_link = 'Verwijderen';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Gebruiker gegevens zijn bijgewerkt';

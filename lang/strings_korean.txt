@@ -9,11 +9,11 @@
 	# 추가 번역   torija@users.sourceforge.net
 	#             hardkoder@gmail.com - 2004/09 현재 수정중 입니다. 중복 수정을 피하기 위해서 수정시 연락 바랍니다.
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-06 12:29:30 $
+	# $Date: 2004-09-22 16:08:21 $
 	#
-	# $Id: strings_korean.txt,v 1.73 2004-09-06 12:29:30 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.74 2004-09-22 16:08:21 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
 $s_myself = "나";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -638,6 +639,7 @@ $s_categories = '분류';
 $s_add_category_button = '분류 추가';
 $s_versions = '버전';
 $s_add_version_button = '버전 추가';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = '편집';
 $s_actions = '실행';
 $s_version = '버전/빌드번호';
@@ -797,6 +799,7 @@ $s_add_user_title = '프로젝트에 사용자 추가';
 $s_add_user_button = '사용자 추가';
 $s_project_selection_title = '프로젝트 선택';
 $s_remove_link = '삭제';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = '사용자 정보가 갱신되었습니다.';

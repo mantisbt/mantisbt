@@ -10,11 +10,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.17 $
+	# $Revision: 1.18 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_finnish.txt,v 1.17 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.18 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -247,6 +247,7 @@ $s_prefix_for_deleted_users = 'käyttäjä';
 
 $s_administrator = 'pääkäyttäjä';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -639,6 +640,7 @@ $s_categories = 'Kategoriat';
 $s_add_category_button = 'Lisää Kategoria';
 $s_versions = 'Versiot';
 $s_add_version_button = 'Lisää Versio';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Muokkaa';
 $s_actions = 'Toimet';
 $s_version = 'Versio';
@@ -798,6 +800,7 @@ $s_add_user_title = 'Lisää käyttäjä projektiin';
 $s_add_user_button = 'Lisää Käyttäjätunnus';
 $s_project_selection_title = 'Projektin Valinta';
 $s_remove_link = 'Poista';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Käyttäjätunnus päivitetty';

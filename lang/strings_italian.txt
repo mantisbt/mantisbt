@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-11 04:05:11 $
+	# $Date: 2004-09-22 16:08:20 $
 	#
-	# $Id: strings_italian.txt,v 1.79 2004-09-11 04:05:11 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.80 2004-09-22 16:08:20 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = "utente";
 
 $s_administrator = "Amministratore";
 $s_myself = "Me stesso";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore";
@@ -637,6 +638,7 @@ $s_categories = "Categorie";
 $s_add_category_button = "Nuova Categoria";
 $s_versions = "Versioni";
 $s_add_version_button = "Nuova Versione";
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = "modifica";
 $s_actions = "Azioni";
 $s_version = "Versione";
@@ -796,6 +798,7 @@ $s_add_user_title = "Aggiungi utente al progetto";
 $s_add_user_button = "Aggiungi Utente";
 $s_project_selection_title = "Selezione Progetto";
 $s_remove_link = "Rimuovi";
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = "Utente aggiornato con successo";

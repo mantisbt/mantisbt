@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.26 $
+	# $Revision: 1.27 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:59 $
+	# $Date: 2004-09-22 16:08:24 $
 	#
-	# $Id: strings_slovak.txt,v 1.26 2004-08-26 17:40:59 bigbadger Exp $
+	# $Id: strings_slovak.txt,v 1.27 2004-09-22 16:08:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrátor';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojár,70:vedúci,90:administrátor';
@@ -637,6 +638,7 @@ $s_categories = 'Kategória';
 $s_add_category_button = 'Prida» kategóriu';
 $s_versions = 'Verzia';
 $s_add_version_button = 'Prida» verziu';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'upravi»';
 $s_actions = 'Actions';
 $s_version = 'Verzia/Build';
@@ -796,6 +798,7 @@ $s_add_user_title = 'Prida» pou¾ívateµa k projektu';
 $s_add_user_button = 'Pridaj pou¾ívateµa';
 $s_project_selection_title = 'Výber projektu';
 $s_remove_link = 'odstráni»';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Aktualizácia pou¾ívateµa prebehla úspe¹ne.';

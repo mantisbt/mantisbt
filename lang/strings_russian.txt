@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:58 $
+	# $Date: 2004-09-22 16:08:23 $
 	#
-	# $Id: strings_russian.txt,v 1.69 2004-08-26 17:40:58 bigbadger Exp $
+	# $Id: strings_russian.txt,v 1.70 2004-09-22 16:08:23 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $s_prefix_for_deleted_users = 'пользователь';
 
 $s_administrator = 'администратор';
 $s_myself = "Себе";
+$s_default_access_level = 'Стандартный уровень доступа';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:зритель,25:автор,40:редактор,55:разработчик,70:менеджер,90:администратор';
@@ -636,6 +637,7 @@ $s_categories = 'Категории';
 $s_add_category_button = 'Добавить категорию';
 $s_versions = 'Версии';
 $s_add_version_button = 'Добавить версию';
+$s_add_and_edit_version_button = 'Добавить и редактировать версию';
 $s_edit_link = 'Править';
 $s_actions = 'Действия';
 $s_version = 'Версия';
@@ -795,6 +797,7 @@ $s_add_user_title = 'Добавление пользователя к проекту';
 $s_add_user_button = 'Добавить';
 $s_project_selection_title = 'Выбор проекта';
 $s_remove_link = 'Удалить';
+$s_remove_all_link = 'Удалить всех';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Пользователь обновлен';

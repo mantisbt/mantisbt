@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-14 04:59:16 $
+	# $Date: 2004-09-22 16:08:18 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.52 2004-09-14 04:59:16 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.53 2004-09-22 16:08:18 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -262,6 +262,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = "管理员";
 $s_myself = "自身";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:查看人员,25:报告人员,40:修改人员,55:开发人员,70:经理,90:管理员";
@@ -653,6 +654,7 @@ $s_categories = "分类";
 $s_add_category_button = "添加分类";
 $s_versions = "版本";
 $s_add_version_button = "添加版本";
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = "编辑";
 $s_actions = '操作';
 $s_version = "版本";
@@ -812,6 +814,7 @@ $s_add_user_title = "添加用户至项目";
 $s_add_user_button = "添加用户";
 $s_project_selection_title = "项目选择";
 $s_remove_link = "删除";
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = "用户更新成功";

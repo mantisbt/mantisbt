@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.16 $
+	# $Revision: 1.17 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-14 04:59:16 $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_estonian.txt,v 1.16 2004-09-14 04:59:16 bigbadger Exp $
+	# $Id: strings_estonian.txt,v 1.17 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'kasutaja';
 
 $s_administrator = 'administraator';
 $s_myself = "Minule";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:vaatleja,25:teataja,40:uuendaja,55:arendaja,70:mänedzher,90:administraator';
@@ -637,6 +638,7 @@ $s_categories = 'Kategooriad';
 $s_add_category_button = 'Lisa kategooria';
 $s_versions = 'Versioonid';
 $s_add_version_button = 'Lisa versioon';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Redigeeri';
 $s_actions = 'Toimingud';
 $s_version = 'Versioon';
@@ -796,6 +798,7 @@ $s_add_user_title = 'Kasutaja lisamine projektile';
 $s_add_user_button = 'Lisa kasutaja';
 $s_project_selection_title = 'Projekti valik';
 $s_remove_link = 'Eemalda';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Kasutaja uuendatud';

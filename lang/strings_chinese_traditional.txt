@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:56 $
+	# $Date: 2004-09-22 16:08:18 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.64 2004-08-26 17:40:56 bigbadger Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.65 2004-09-22 16:08:18 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -244,6 +244,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -635,6 +636,7 @@ $s_categories = 'Categories';
 $s_add_category_button = '新增類別';
 $s_versions = '版本';
 $s_add_version_button = '新增版本';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = '編輯';
 $s_actions = 'Actions';
 $s_version = '版本/建立';
@@ -794,6 +796,7 @@ $s_add_user_title = 'Add user to project';
 $s_add_user_button = 'Add User';
 $s_project_selection_title = 'Project Selection';
 $s_remove_link = 'Remove';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Successfully updated user';

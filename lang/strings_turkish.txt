@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:59 $
+	# $Date: 2004-09-22 16:08:24 $
 	#
-	# $Id: strings_turkish.txt,v 1.67 2004-08-26 17:40:59 bigbadger Exp $
+	# $Id: strings_turkish.txt,v 1.68 2004-09-22 16:08:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'yönetici';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:izleyici,25:bildirici,40:güncelleyici,55:programcý,70:menejer,90:yönetici';
@@ -636,6 +637,7 @@ $s_categories = 'Kategoriler';
 $s_add_category_button = 'Kategori Ekle';
 $s_versions = 'Versiyonlar';
 $s_add_version_button = 'Versiyon Ekle';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Düzenle';
 $s_actions = 'Actions';
 $s_version = 'Versiyon/Alt Versiyon';
@@ -795,6 +797,7 @@ $s_add_user_title = 'Kullanýcýyý projeye ekle';
 $s_add_user_button = 'Kullanýcý Ekle';
 $s_project_selection_title = 'Proje Seçimi';
 $s_remove_link = 'sil';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Kullanýcý baþarýyla güncellendi';

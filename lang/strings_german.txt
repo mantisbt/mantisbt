@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.111 $
+	# $Revision: 1.112 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-01 18:32:54 $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_german.txt,v 1.111 2004-09-01 18:32:54 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.112 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -249,6 +249,7 @@ $s_prefix_for_deleted_users = 'Benutzer';
 
 $s_administrator = 'Administrator';
 $s_myself = 'Ich selbst';
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:Betrachter,25:Reporter,40:Tester,55:Entwickler,70:Manager,90:Administrator';
@@ -640,6 +641,7 @@ $s_categories = 'Kategorien';
 $s_add_category_button = 'Kategorie hinzufügen';
 $s_versions = 'Versionen';
 $s_add_version_button = 'Version hinzufügen';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Bearbeiten';
 $s_actions = 'Aktionen';
 $s_version = 'Version/Build';
@@ -799,6 +801,7 @@ $s_add_user_title = 'Benutzer zum Projekt hinzugefügt';
 $s_add_user_button = 'Benutzer hinzufügen';
 $s_project_selection_title = 'Projektauswahl';
 $s_remove_link = 'entfernen';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Benutzer erfolgreich aktualisiert';

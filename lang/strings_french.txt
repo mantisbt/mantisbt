@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.83 $
-	# $Author: vboctor $
-	# $Date: 2004-09-12 11:37:07 $
+	# $Revision: 1.84 $
+	# $Author: bigbadger $
+	# $Date: 2004-09-22 16:08:19 $
 	#
-	# $Id: strings_french.txt,v 1.83 2004-09-12 11:37:07 vboctor Exp $
+	# $Id: strings_french.txt,v 1.84 2004-09-22 16:08:19 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -251,6 +251,7 @@ $s_prefix_for_deleted_users = 'utilisateur';
 
 $s_administrator = 'administrateur';
 $s_myself = "Moi";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:manageur,90:administrateur';
@@ -642,6 +643,7 @@ $s_categories = 'Catégories';
 $s_add_category_button = 'Ajouter la catégorie';
 $s_versions = 'Versions';
 $s_add_version_button = 'Ajouter la version';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Modifier';
 $s_actions = 'Actions';
 $s_version = 'Version';
@@ -801,6 +803,7 @@ $s_add_user_title = 'Ajouter un utilisateur au projet';
 $s_add_user_button = 'Ajouter l\'utilisateur';
 $s_project_selection_title = 'Choix du projet';
 $s_remove_link = 'Supprimer';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Utilisateur modifié avec succès';

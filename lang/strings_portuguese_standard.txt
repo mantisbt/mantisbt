@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:58 $
+	# $Date: 2004-09-22 16:08:22 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.68 2004-08-26 17:40:58 bigbadger Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.69 2004-09-22 16:08:22 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrador';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:Visualizador,25:Notificador,40:Actualizador,55:Eng. de Desenvolvimento,70:Gestor,90:Administrador';
@@ -636,6 +637,7 @@ $s_categories = 'Categorias';
 $s_add_category_button = 'Adicionar Categoria';
 $s_versions = 'Versão';
 $s_add_version_button = 'Adicionar Versão';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Alterar';
 $s_actions = 'Acções';
 $s_version = 'Versão';
@@ -795,6 +797,7 @@ $s_add_user_title = 'Adicionar Utilizador ao Projecto';
 $s_add_user_button = 'Adicionar Utilizador';
 $s_project_selection_title = 'Selecionar Projecto';
 $s_remove_link = 'Remover';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Utilizador Actualizado com Sucesso';

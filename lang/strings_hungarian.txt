@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.58 $
-  # $Author: vboctor $
-  # $Date: 2004-08-29 07:59:56 $
+  # $Revision: 1.59 $
+  # $Author: bigbadger $
+  # $Date: 2004-09-22 16:08:20 $
   #
-  # $Id: strings_hungarian.txt,v 1.58 2004-08-29 07:59:56 vboctor Exp $
+  # $Id: strings_hungarian.txt,v 1.59 2004-09-22 16:08:20 bigbadger Exp $
   ###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $s_prefix_for_deleted_users = 'felhasználó';
 
 $s_administrator = 'rendszergazda';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:olvasó,25:bejelentõ,40:módosító,55:fejlesztõ,70:vezetõ,90:rendszergazda';
@@ -636,6 +637,7 @@ $s_categories = 'Kategóriák';
 $s_add_category_button = 'Új kategória';
 $s_versions = 'Verziók';
 $s_add_version_button = 'Új verzió';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'szerkesztés';
 $s_actions = 'Cselekvés';
 $s_version = 'Verzió/Nyomat';
@@ -795,6 +797,7 @@ $s_add_user_title = 'Felhasználó felvétele a projektbe';
 $s_add_user_button = 'Felhasználó felvétele';
 $s_project_selection_title = 'Projekt kiválasztása';
 $s_remove_link = 'eltávolítás';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'A felhasználót sikerült módosítani';

@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-11 03:10:39 $
+	# $Date: 2004-09-22 16:08:24 $
 	#
-	# $Id: strings_swedish.txt,v 1.74 2004-09-11 03:10:39 bigbadger Exp $
+	# $Id: strings_swedish.txt,v 1.75 2004-09-22 16:08:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -244,6 +244,7 @@ $s_prefix_for_deleted_users = 'användare';
 
 $s_administrator = 'administratör';
 $s_myself = "Mig själv";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
@@ -635,6 +636,7 @@ $s_categories = 'Kategorier';
 $s_add_category_button = 'Lägg till kategori';
 $s_versions = 'Versioner';
 $s_add_version_button = 'Lägg till version';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'redigera';
 $s_actions = 'Ändringar';
 $s_version = 'Version/bygge';
@@ -794,6 +796,7 @@ $s_add_user_title = 'Lägg till användare till projektet';
 $s_add_user_button = 'Lägg till användarkonto';
 $s_project_selection_title = 'Välj projekt';
 $s_remove_link = 'ta bort';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Uppdaterade användaren';

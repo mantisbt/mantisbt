@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-14 16:46:38 $
+	# $Date: 2004-09-22 16:08:23 $
 	#
-	# $Id: strings_serbian.txt,v 1.15 2004-09-14 16:46:38 bigbadger Exp $
+	# $Id: strings_serbian.txt,v 1.16 2004-09-22 16:08:23 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'korisnik';
 
 $s_administrator = 'administrator';
 $s_myself = "Sebi samom";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:gledalac,25:reporter,40:updater,55:razvoj,70:menadzer,90:administrator';
@@ -637,6 +638,7 @@ $s_categories = 'Kategorije';
 $s_add_category_button = 'Dodavanje kategorije';
 $s_versions = 'Verzije';
 $s_add_version_button = 'Dodavanje verzije';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Izmena';
 $s_actions = 'Akcije';
 $s_version = 'Verzija';
@@ -796,6 +798,7 @@ $s_add_user_title = 'Dodavanje korisnika u projekat';
 $s_add_user_button = 'Dodavanje korisnika';
 $s_project_selection_title = 'Izbor projekta';
 $s_remove_link = 'Ukloni';
+$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Korisnik uspesno ažuriran';
