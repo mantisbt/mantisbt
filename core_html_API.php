@@ -73,7 +73,7 @@
 	function print_content_type() {
 		global $s_charset;
 
-		PRINT '<META HTTP-EQUIV="Content-type" CONTENT="text/html;charset=' . $s_charset . '">';
+		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . $s_charset . '">';
 	}
 
 	# --------------------
