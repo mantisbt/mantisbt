@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.5 2003-02-09 10:30:07 jfitzell Exp $
+	# $Id: utility_api.php,v 1.6 2003-02-09 21:53:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -140,10 +140,17 @@
 
 	# --------------------
 	# Sort a multi-dimensional array by one of its keys
-	function multi_sort( $p_array, $p_key )
+	function multi_sort( $p_array, $p_key, $p_direction=ASC )
 	{
+		if ( DESC == $p_direction ) {
+			$t_factor = -1;
+		} else {
+			# might as well allow everything else to mean ASC rather than erroring
+			$t_factor = 1;
+		}
+
 		$t_function = create_function( '$a, $b',
-						"return strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
+						"return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
 		uasort( $p_array, $t_function );
 		return $p_array;
 	}
