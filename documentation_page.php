@@ -13,6 +13,8 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
+<?php print_manage_menu( $g_documentation_page ) ?>
+
 <?php print_manage_doc_menu( $g_documentation_page ) ?>
 <p>
 <?php phpinfo() ?>
