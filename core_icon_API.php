@@ -13,9 +13,9 @@
 	# --------------------
 	# Status to icon mapping
 	$g_status_icon_arr = array (
-		NONE      => "blank.gif",
-		LOW       => "blank.gif",
-		NORMAL    => "blank.gif",
+		NONE      => "mantis-space.gif",
+		LOW       => "mantis-space.gif",
+		NORMAL    => "mantis-space.gif",
 		HIGH      => "priority_1.gif",
 		URGENT    => "priority_2.gif",
 		IMMEDIATE => "priority_3.gif"
@@ -29,7 +29,7 @@
 	# --------------------
 	# Read status to icon mapping
 	$g_unread_icon_arr = array (
-		READ         => "blank.gif",
+		READ         => "mantis-space.gif",
 		UNREAD       => "unread.gif"
 	);
 	# --------------------
