@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.3 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: filter_api.php,v 1.4 2003-01-21 07:33:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,6 +18,7 @@
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
+		$t_project_table		= config_get( 'mantis_project_table' );
 
 		$t_filter = current_user_get_bug_filter();
 
@@ -29,9 +30,9 @@
 		$t_project_id	= helper_get_current_project();
 		$t_user_id		= auth_get_current_user_id();
 
-		$t_where_clauses = array();
+		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
-		$t_from_clauses = array( $t_bug_table );
+		$t_from_clauses = array( $t_bug_table, $t_project_table );
 		$t_join_clauses = array();
 
 		if ( 0 == $t_project_id ) { # all projects
