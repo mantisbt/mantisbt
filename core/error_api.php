@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.38 2005-01-11 00:47:55 thraxisp Exp $
+	# $Id: error_api.php,v 1.39 2005-01-27 11:55:11 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -40,8 +40,15 @@
 			return;
 		}
 
+		$t_lang_pushed = false;
+
 		# flush any language overrides to return to user's natural default
-		lang_push( lang_get_default() );
+		if ( function_exists( 'db_is_connected' ) ) {
+			if ( db_is_connected() ) {
+				lang_push( lang_get_default() );
+				$t_lang_pushed = true;
+			}
+		}
 
 		$t_short_file	= basename( $p_file );
 		$t_method_array = config_get( 'display_errors' );
@@ -135,7 +142,10 @@
 			# do nothing
 		}
 
-		lang_pop();
+		if ( $t_lang_pushed ) {
+			lang_pop();
+		}
+
 		$g_error_parameters = array();
 		$g_error_handled = true;
 		$g_error_proceed_url = null;
