@@ -6,858 +6,858 @@
 
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
+  # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.41 $
-  # $Author: jlatour $
-  # $Date: 2003-05-07 15:48:27 $
+  # $Revision: 1.42 $
+  # $Author: prescience $
+  # $Date: 2003-06-25 21:43:12 $
   #
-  # $Id: strings_hungarian.txt,v 1.41 2003-05-07 15:48:27 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.42 2003-06-25 21:43:12 prescience Exp $
   ###########################################################################
 ?>
 <?php
-	# Charset
-  $s_charset = 'iso-8859-2';
-
-	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
-
-	# new strings:
-  $s_all_projects = 'Összes projekt';
-  $s_move_bugs = 'Hibák áthelyezése';
-  $s_operation_successful = 'A mûvelet sikeresen befejezõdött.';
-  $s_date_order = 'Dátumsorrend';
-  $s_print_all_bug_page_link = 'Hibák nyomtatása';
-  $s_csv_export = 'CSV exportálása';
-  $s_login_anonymously = 'Bejelentkezés név nélkül';
-  $s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
-  $s_public_project_msg = 'Ez egy nyilvános projekt.  Minden felhasználónak van hozzáférése a projekthez.';
-  $s_private_project_msg = 'Ez egy privát projekt.  Csak az administrátorok és a hozzárendelt felhasználóknak van hozzáférése a projekthez.';
-  $s_access_level_project = 'Projekt hozzáférési szint';
-  $s_view_submitted_bug_link = 'Elküldött hibajelentések megtekintése';
-  $s_assigned_projects = 'Hozzárendelt projektek';
-  $s_unassigned_projects = 'Hozzárendeletlen projektek';
-  $s_print = 'Nyomtatás';
-  $s_jump = 'Ugrás';
-  $s_copy_users = 'Felhasználók másolása';
-  $s_copy_categories_from = 'Copy Categories From';
-  $s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
-
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
-
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
-
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
-
-	$s_create_new_project_link = 'Create New Project';
-
-	$s_login_link = 'Login';
-
-	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
-
-	# improved JPgraphs strings
-	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-	$s_graph_imp_category_title = 'Synthesis graphs by category';
-	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-	$s_by_status_pct = 'by status percentage';
-	$s_by_priority_pct = 'by priority percentage';
-	$s_by_severity_pct = 'by severity percentage';
-	$s_by_category_pct = 'by category percentage';
-	$s_by_resolution_pct = 'by resolution percentage';
-	$s_by_severity_mix = 'by severity and status';
-	$s_by_priority_mix = 'by priority and status';
-	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
-	$s_priority_link = 'Per priority';
-	$s_severity_link = 'Per severity';
-	$s_category_link = 'Per category';
-	$s_resolution_link = 'Per resolution';
-
-	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
-
-	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
-
-	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
-
-	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
-
-	# ERROR strings
-  $MANTIS_ERROR[ERROR_GENERIC] = 'HIBA: Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
-  $MANTIS_ERROR[ERROR_SQL] = 'HIBA: SQL hibát találtam.  Kérem jelentse a hibát itt: ';
-  $MANTIS_ERROR[ERROR_REPORT] = 'HIBA: A bejelentés feldolgozásakor hiba történt.';
-  $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HIBA: Nincs megadva file';
-  $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HIBA: A érvénytelen file típus.';
-  $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HIBA: A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.';
-  $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
-  $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-  $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
-  $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-  $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-  $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'HIBA: Ez a kategória már létezik.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-  $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'HIBA: Ez a verzió már létezik.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-
-  $s_login_error = 'HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
-  $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
-
-	# General Strings
-  $s_go_back = 'Visszatérés';
-  $s_proceed = 'A folytatáshoz kattintson ide';
-
-  $s_switch = 'Váltás';
-  $s_logged_in_as = 'Felhasználónév';
-
-	$s_prefix_for_deleted_users = 'user';
-
-  $s_administrator = 'rendszergazda';
-
-	# Enum Strings
-  $s_access_levels_enum_string      = '10:olvasó,25:bejelentõ,40:módosító,55:fejlesztõ,70:vezetõ,90:rendszergazda';
-  $s_project_status_enum_string     = '10:fejlesztés alatt,30:elsõ kiadás,50:stabil,70:elavult';
-  $s_project_view_state_enum_string = '10:nyilvános,50:privát';
-	$s_view_state_enum_string         = '10:public,50:private';
-
-  $s_priority_enum_string           = '10:nincs,20:alacsony,30:átlagos,40:magas,50:sürgõs,60:azonnali';
-  $s_severity_enum_string           = '10:funkció,20:nyilvánvaló,30:szöveg,40:trükk,50:nem súlyos, 60:súlyos,70:összeomlás,80:akadály';
-  $s_reproducibility_enum_string    = '10:mindig,30:néha,50:véletlenszerû,70:nem próbáltam,90:nem ismételhetõ,100:nincs adat';
-  $s_status_enum_string             = '10:új,20:visszajelezve,30:jóváhagyva,40:megerõsítve,50:kiosztva,80:megoldva,90:lezárva';
-  $s_resolution_enum_string         = '10:nyitva,20:javítva,30:újra megnyitva,40:nem ismételhetõ,50:nem javítható,60:már ismert,70:nem hiba,80:felfüggesztve,90:nem lesz javítva';
-  $s_projection_enum_string         = '10:nincs,30:trükk,50:kisebb javítás,70:nagyobb átalakítás,90:újratervezés';
-  $s_eta_enum_string                = '10:ismeretlen,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,60:> 1 hónap';
-
-	# Email Strings
-  $s_new_account_subject = 'Új felhasználói fiók';
-  $s_new_account_greeting = 'Üdvözöljük a hibakövetô rendszerben.  Az alábbiakban megtalálja a bejelentkezéshez szükséges információkat.' . "\n\n";
-  $s_new_account_url = 'A rendszert a következõ címen éri el: ';
-  $s_new_account_username = 'Felhasználónév: ';
-  $s_new_account_password = 'Jelszó: ';
-  $s_new_account_message = 'A rendszerbe való bejelentkezés után változtassa meg a jelszavát.  Jelszavát egyirányú titkosítással tároljuk, így a rendszergazdák sem képesek azt elolvasni.  Ha elfelejti jelszavát, törölnünk kell.' . "\n\n";
-  $s_new_account_do_not_reply = 'Kérjük ne válaszoljon erre az üzenetre.' . "\n";
-
-  $s_reset_request_msg = 'Kérés érkezett hozzánk, hogy jelszavát töröljük';
-  $s_account_name_msg = 'A felhasználónév:';
-  $s_news_password_msg = 'Az új jelszó:';
-
-  $s_new_bug_msg = 'A következõ ÚJ hibát rögzítettük.';
-  $s_email_bugnote_msg = 'A hibához MEGJEGYZÉST fûztek.';
-  $s_email_resolved_msg = 'A következõ hibát MEGOLDOTTÁK.';
-  $s_email_close_msg = 'A következõ hibát LEZÁRTÁK.';
-  $s_email_feedback_msg = 'A következõ hibát VISSZA kell JELEZNIE.';
-  $s_email_reopen_msg = 'A következõ hibát ÚJRA MEGNYITOTTÁK.';
-  $s_email_assigned_msg = 'A következõ hibát KIOSZTOTTÁK.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
-
-  $s_email_reporter = 'Bejelentõ';
-  $s_email_handler = 'Kezelõ';
-  $s_email_project = 'Projekt';
-  $s_email_bug = 'Hiba száma';
-  $s_email_category = 'Kategória';
-  $s_email_reproducibility = 'Reprodukálhatóság';
-  $s_email_severity = 'Súlyosság';
-  $s_email_priority = 'Prioritás';
-  $s_email_status = 'Állapot';
-  $s_email_resolution = 'Megoldás';
-  $s_email_duplicate = 'Már létezik';
-  $s_email_date_submitted = 'Bejelentés dátuma';
-  $s_email_last_modified = 'Utolsó módosítás';
-  $s_email_summary =  'Összegzés';
-  $s_email_description = 'Leírás';
-
-	# account_delete.php
-  $s_account_protected_msg = 'Védett fiók. A beállítások nem módosíthatók...';
-  $s_account_removed_msg = 'Fiókját törölték...';
-
-	# account_delete_page.php
-  $s_confirm_delete_msg = 'Biztos benne, hogy törli fiókját?';
-  $s_delete_account_button = 'Fiók törlése';
-
-	# account_page.php
-  $s_manage_profiles_link = 'Profilok';
-  $s_change_preferences_link = 'Beállítások';
-  $s_edit_account_title = 'Fiók szerkesztése';
-  $s_username = 'Felhasználónév';
-  $s_email = 'E-mail';
-  $s_password = 'Jelszó';
-  $s_confirm_password  = 'Jelszó megerõsítése';
-  $s_access_level = 'Hozzáférési szint';
-  $s_update_user_button = 'Adatok mentése';
-
-	# account_prefs_page.php
-  $s_default_account_preferences_title = 'Fiók beállításai';
-  $s_default_project = 'Alapértelmezett projekt';
-  $s_advanced_report = 'Részletes bejelentõ';
-  $s_advanced_view = 'Részletes nézet';
-  $s_advanced_update = 'Részletes módosítás';
-  $s_refresh_delay = 'Frissítési késleltetés';
-  $s_redirect_delay = 'Átirányítási késleltetés';
-  $s_email_on_new = 'E-mail küldése új hiba esetén';
-  $s_email_on_assigned = 'E-mail küldése hiba kiosztása esetén';
-  $s_email_on_feedback = 'E-mail küldése hiba visszajelzése esetén';
-  $s_email_on_resolved = 'E-mail küldése hiba megoldása esetén';
-  $s_email_on_closed = 'E-mail küldése hiba lezárása esetén';
-  $s_email_on_reopened = 'E-mail küldése hiba újra megnyitása esetén';
-  $s_email_on_bugnote_added = 'E-mail küldése megjegyzés hozzáadása esetén';
-  $s_email_on_status_change = 'E-mail küldése állapot változása esetén';
-  $s_email_on_priority_change = 'E-mail küldése prioritás változása esetén';
-  $s_language = 'Nyelv';
-  $s_update_prefs_button = 'Beállítások mentése';
-  $s_reset_prefs_button = 'Beállítások visszaállítása';
-
-	# account_prefs_reset.php
-  $s_prefs_reset_msg = 'Beállítások visszaállítva...';
-
-	# account_prefs_update.php
-  $s_prefs_updated_msg = 'Beállítások elmentve...';
-
-	# account_profile_add.php
-  $s_profile_added_msg = 'Profil felvéve...';
-
-	# account_profile_delete.php
-  $s_profile_deleted_msg = 'Profilt törölve...';
-
-	# account_profile_edit_page.php
-  $s_edit_profile_title = 'Profil szerkesztése';
-  $s_platform = 'Platform';
-  $s_operating_system = 'Operációs rendszer';
-  $s_version = 'Verzió/Nyomat';
-  $s_additional_description = 'További leírás';
-  $s_update_profile_button = 'Profil mentése';
-
-	# account_profile_make_default.php
-  $s_profile_defaulted_msg = 'Alapértelmezett profil elmentve...';
-
-	# account_profile_manage_page.php
-  $s_add_profile_title = 'Új profil';
-  $s_add_profile_button = 'Új profil';
-  $s_edit_or_delete_profiles_title = 'Profilok szerkesztése vagy törlése';
-  $s_edit_profile = 'Profil szerkesztése';
-  $s_make_default = 'Legyen alapértelmezett';
-  $s_delete_profile = 'Profil törlése';
-  $s_select_profile = 'Profil kiválasztása';
-  $s_submit_button = 'Végrehajt';
-
-	# account_profile_update.php
-  $s_profile_updated_msg = 'Profil módosítva...';
-
-	# account_update.php
-  $s_account_updated_msg = 'A fiók adatait sikerült módosítani...';
-	$s_email_updated = 'Email address successfully updated';
-	$s_password_updated = 'Password successfully updated';
-
-	# bug_assign.php
-  $s_bug_assign_msg       = 'A hibát sikerült kiosztani...';
-
-	# bug_close.php
-  $s_bug_close_msg       = 'Hiba lezárva...';
-  $s_close_immediately   = 'Azonnali lezárás:';
-
-	# bug_close_page.php
-  $s_close_bug_title = 'Close Bug';
-
-	# bug_delete.php
-  $s_bug_deleted_msg = 'Hiba törölve...';
-
-	# bug_delete_page.php
-  $s_delete_bug_sure_msg = 'Biztos benne, hogy törli ezt a hibát?';
-  $s_delete_bug_button = 'Hiba törlése';
-
-	# bug_monitor.php
-  $s_monitor_bug_button = 'Hiba nyomkövetése';
-  $s_unmonitor_bug_button = 'Nyomkövetés befejezése';
-
-	# bug_file_add.php
-  $s_file_upload_msg = 'A fileátvitel sikerült';
-
-	# bug_file_upload_inc.php
-  $s_upload_file = 'File feltöltése';
-  $s_select_file = 'File kiválasztása';
-  $s_upload_file_button = 'File feltöltése';
-	$s_max_file_size = 'Max size';
-
-	# bug_reopen.php
-  $s_bug_reopened_msg = 'Hiba újra megnyitva...';
-  $s_reopen_add_bugnote_title = 'A hiba újbóli megnyitásának magyarázata';
-  $s_bugnote_add_reopen_button = 'Megjegyzés felvétele és a hiba újra megnyitása';
-
-	# bug_resolve_page.php
-  $s_resolve_bug_title = 'Hiba megoldása';
-  $s_resolve_bug_button = 'Hiba megoldása';
-
-	# bug_resolve_page2.php
-  $s_bug_resolved_msg = 'Hiba megoldva. Adja meg a magyarázatot...';
-  $s_resolve_add_bugnote_title = 'A hiba megoldásának magyarázata';
-  $s_bugnote_add_resolve_button = 'Új megjegyzés';
-
-	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
-
-	# bug_update.php
-  $s_bug_updated_msg = 'A hibát sikerült módosítani...';
-
-	# bug_update_advanced_page.php
-  $s_back_to_bug_link = 'Vissza a hibához';
-  $s_update_simple_link = 'Egyszerû módosítás';
-  $s_updating_bug_advanced_title = 'Hibainformációk módosítása';
-  $s_id = 'azonosító';
-  $s_category = 'Kategória';
-  $s_severity = 'Súlyosság';
-  $s_reproducibility = 'Reprodukálhatóság';
-  $s_date_submitted = 'Bejelentés dátuma';
-  $s_last_update = 'Utolsó módosítás';
-  $s_reporter = 'Bejelentõ';
-  $s_assigned_to = 'Felelõs';
-  $s_priority = 'Prioritás';
-  $s_resolution = 'Megoldás';
-  $s_status = 'Állapot';
-  $s_duplicate_id = 'Másolat azonosítója';
-  $s_os = 'Oprendszer';
-  $s_projection = 'Elõrejelzés';
-  $s_os_version = 'Verzió (op.r.)';
-  $s_eta = 'Várható javítás';
-  $s_product_version = 'Termékverzió';
-  $s_build = 'Nyomat';
-  $s_votes = 'Szavazatok';
-  $s_summary = 'Összegzés';
-  $s_description = 'Leírás';
-  $s_steps_to_reproduce = 'Reprodukálás lépései';
-  $s_additional = 'Egyéb';
-  $s_information = 'Információ';
-  $s_update_information_button = 'Információ mentése';
-
-	# bug_update_page.php
-  $s_update_advanced_link = 'Részletes módosítás';
-  $s_updating_bug_simple_title = 'Hibainformációk módosítása';
-
-	# bug_vote_add.php
-  $s_vote_added_msg = 'Szavazatát rögzítettük...';
-
-	# bugnote_add.php
-  $s_bugnote_added_msg = 'Megjegyzés tárolva...';
-
-	# bugnote_delete.php
-  $s_bugnote_deleted_msg = 'A hibát sikerült törölni...';
-  $s_bug_notes_title = 'Megjegyzések';
-
-	# bugnote_edit_page.php
-  $s_edit_bugnote_title = 'Megjegyzés szerkesztése';
-
-	# bugnote_inc.php
-  $s_no_bugnotes_msg = 'Ehhez a hibához nem tartozik megjegyzés.';
-  $s_delete_link = 'Törlés';
-  $s_add_bugnote_title = 'Új megjegyzés';
-  $s_add_bugnote_button = 'Új megjegyzés';
-  $s_bugnote_edit_link = 'Szerkesztés';
-  $s_close_bug_button = 'Hiba lezárása';
-
-	# bugnote_update.php
-  $s_bugnote_updated_msg = 'A megjegyzést sikerült módosítani...';
-  $s_edited_on = 'módosítva ekkor: ';
-
-	# index.php
-  $s_click_to_login = 'A bejelentkezéshez kattintson ide';
-
-	# login.php
-
-	# login_page.php
-  $s_login_page_info = 'Üdvözöljük a hibakövetõ rendszerben.';
-  $s_login_title = 'Bejelentkezés';
-  $s_save_login = 'Bejelentkezés mentése';
-  $s_choose_project = 'Projekt kiválasztása';
-  $s_login_button = 'Bejelentkezés';
-  $s_signup_link = 'új fiók létrehozása';
-
-	# login_select_proj_page.php
-  $s_select_project_button = 'Projekt kiválasztása';
-
-	# logout_page.php
-  $s_logged_out_title = 'A kijelentkezés megtörtént...';
-  $s_redirecting = '...átirányítás';
-  $s_here = 'ide';
-
-	# main_page.php
-  $s_open_and_assigned_to_me = 'Nyitott és hozzám tartozik';
-  $s_open_and_reported_to_me = 'Nyitott és én találtam';
-  $s_newer_news_link = 'Újabb hírek';
-  $s_older_news_link = 'Régebbi hírek';
-  $s_archives = 'Archívum';
-
-	# manage_create_new_user.php
-  $s_created_user_part1 = 'Felhasználó létrehozva,';
-  $s_created_user_part2 = 'hozzáférési szintje:';
-
-	# manage_create_user_page.php
-  $s_create_new_account_title = 'Új fiók létrehozása';
-  $s_verify_password = 'Jelszó megerõsítése';
-  $s_enabled = 'Engedélyezett';
-  $s_protected = 'Védett';
-  $s_create_user_button = 'Felhasználó létrehozása';
-
-	# manage_page.php
-  $s_hide_disabled = 'Letiltottak elrejtése';
-  $s_filter_button = 'Szûrõ alkalmazása';
-  $s_manage_users_link = 'Felhasználók karbantartása';
-  $s_manage_projects_link = 'Projektek karbantartása';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
-  $s_create_new_account_link = 'Fiók létrehozása';
-  $s_projects_link = 'Projektek';
-  $s_documentation_link = 'Dokumentáció';
-  $s_new_accounts_title = 'Új fiókok';
-  $s_1_week_title = '1 hét';
-  $s_never_logged_in_title = 'Még nem jelentkezett be';
-  $s_prune_accounts = 'Fiókok eltávolítása';
-  $s_hide_inactive = 'Inaktívak elrejtése';
-  $s_manage_accounts_title = 'Fiókok karbantartása';
-  $s_p = 'v';
-  $s_date_created = 'Létrehozás dátuma';
-  $s_last_visit = 'Utolsó látogatás';
-  $s_edit_user_link = 'Felhasználó szerkesztése';
-
-	# manage_proj_add.php
-  $s_project_added_msg = 'A projektet sikerült felvenni...';
-
-	# manage_proj_category_add.php
-  $s_category_added_msg = 'A kategóriát sikerült felvenni...';
-
-	# manage_proj_category_delete.php
-  $s_category_deleted_msg = 'A kategóriát sikerült törölni...';
-
-	# manage_proj_category_delete_page.php
-  $s_category_delete_sure_msg = 'Biztos benne, hogy törli ezt a kategóriát? Minden ebbe tartozó hiba törlõdni fog.';
-  $s_delete_category_button = 'Kategória törlése';
-
-	# manage_proj_category_edit_page.php
-  $s_edit_project_category_title = 'Kategória szerkesztése';
-  $s_update_category_button = 'Kategória mentése';
-
-	# manage_proj_category_update.php
-  $s_category_updated_msg = 'A kategóriát sikerült elmenteni...';
-
-	# manage_proj_delete.php
-  $s_project_deleted_msg = 'A projektet sikerült eltávolítani...';
-
-	# manage_proj_delete_page.php
-  $s_project_delete_msg = 'Biztos benne, hogy törli ezt a projektet az összes hozzá tartozó hibabejelentéssel?';
-  $s_project_delete_button = 'Projekt törlése';
-
-	# manage_proj_edit_page.php
-  $s_edit_project_title = 'Projekt szerkesztése';
-  $s_project_name = 'Projekt neve';
-  $s_view_status = 'Betekintés jellege';
-  $s_public = 'nyilvános';
-  $s_private = 'privát';
-  $s_update_project_button = 'Projekt mentése';
-  $s_delete_project_button = 'Projekt törlése';
-  $s_categories_and_version_title = 'Kategóriák és verziók';
-  $s_categories = 'Kategóriák';
-  $s_add_category_button = 'Új kategória';
-  $s_versions = 'Verziók';
-  $s_add_version_button = 'Új verzió';
-  $s_edit_link = 'szerkesztés';
-	$s_actions = 'Actions';
-  $s_version = 'Verzió/Nyomat';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
-
-	# manage_proj_menu_page.php
-  $s_add_project_title = 'Új projekt';
-  $s_upload_file_path = 'Feltöltött fileok helye';
-  $s_add_project_button = 'Új projekt';
-  $s_projects_title = 'Projektek';
-  $s_name = 'Név';
-
-	# manage_proj_update.php
-  $s_project_updated_msg = 'A projektet sikerült módosítani...';
-
-	# manage_proj_version_add.php
-  $s_version_added_msg = 'A verziót sikerült felvenni...';
-
-	# manage_proj_version_delete.php
-  $s_version_deleted_msg = 'A verziót sikerült törölni...';
-
-	# manage_proj_version_delete_page.php
-  $s_version_delete_sure = 'Biztos benne, hogy törli ezt a verziót? Minden hozzá tartozó hiba törlõdni fog.';
-  $s_delete_version_button = 'Verzió törlése';
-
-	# manage_proj_version_edit_page.php
-  $s_edit_project_version_title = 'Verzió módosítása';
-  $s_update_version_button = 'Verzió mentése';
-
-	# manage_proj_version_update.php
-  $s_version_updated_msg = 'A verziót sikerült elmenteni...';
-
-	# manage_user_delete.php
-  $s_account_delete_protected_msg = 'A fiók védett, ezért nem törölhetõ.';
-  $s_account_deleted_msg = 'Fiók törölve...';
-
-	# manage_user_delete_page.php
-  $s_delete_account_sure_msg = 'Biztos benne, hogy törli ezt a fiókot?';
-
-	# manage_user_prune.php
-  $s_accounts_pruned_msg = 'Minden fiók törölve, melyet még soha nem használtak és 1 hétnél régebbi.';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
-
-	# manage_user_page.php
-  $s_edit_user_title = 'Felhasználó szerkesztése';
-  $s_reset_password_button = 'Jelszó törlése';
-  $s_delete_user_button = 'Felhasználó törlése';
-  $s_reset_password_msg = 'A jelszó törlésekor véletlen jelszó generálódik.';
-  $s_reset_password_msg2 = 'A jelszó törlése után a jelszó üres lesz.';
-
-	# manage_user_reset.php
-  $s_account_reset_protected_msg = 'Védett fiók, a jelszó nem törölhetõ.';
-  $s_account_reset_msg = 'A fiókhoz tartozó jelszó újragenerálva...';
-  $s_account_reset_msg2 = 'A fiókhoz tartozó jelszó törölve...';
-
-	# manage_user_update.php
-  $s_manage_user_protected_msg = 'A fiók védett, így a hozzáférési szint és az engedélyezettségi beállítás nem módosítható. A fiók többi adata módosítva...';
-  $s_manage_user_updated_msg = 'A fiókot sikerült módosítani...';
-
-	# menu_inc.php
-  $s_main_link = 'Fõoldal';
-  $s_view_bugs_link = 'Hibák listája';
-  $s_report_bug_link = 'Hiba bejelentése';
-  $s_summary_link = 'Összegzés';
-  $s_account_link = 'Fiók';
-  $s_users_link = 'Felhasználók';
-  $s_manage_link = 'Karbantartás';
-  $s_edit_news_link = 'Hírek';
-  $s_docs_link = 'Dokumentáció';
-  $s_logout_link = 'Kijelentkezés';
-
-	# meta_inc.php
-
-	# news_add.php
-  $s_news_added_msg = 'Hír tárolva...';
-
-	# news_delete.php
-  $s_news_deleted_msg = 'Hír törölve...';
-
-	# news_delete_page.php
-  $s_delete_news_sure_msg = 'Biztos benne, hogy törli ezt a hírt?';
-  $s_delete_news_item_button = 'Hír törlése';
-
-	# news_edit_page.php
-  $s_edit_news_title = 'Hír szerkesztése';
-  $s_headline = 'Fõcím';
-  $s_body = 'Szöveg';
-  $s_update_news_button = 'Hír módosítása';
-
-	# news_menu_page.php
-  $s_add_news_title = 'Új hír';
-  $s_post_to = 'Küldés ide:';
-  $s_post_news_button = 'Hír elküldése';
-  $s_edit_or_delete_news_title = 'Hírek szerkesztése vagy törlése';
-  $s_edit_post = 'Hír szerkesztése';
-  $s_delete_post = 'Hír törlése';
-  $s_select_post = 'Hír kiválasztása';
-
-	# news_update.php
-  $s_news_updated_msg = 'Hír módosítva...';
-
-	# news_view_page.php
-  $s_back_link = 'Vissza';
-
-	# proj_doc_add.php
-  $s_file_uploaded_msg = 'A file átvitel sikerült';
-
-	# proj_doc_add_page.php
-  $s_upload_file_title = 'File feltöltése';
-  $s_title = 'Cím';
-
-	# proj_doc_delete.php
-  $s_project_file_deleted_msg = 'File törölve';
-
-	# proj_doc_delete_page.php
-  $s_confirm_file_delete_msg = 'Biztos benne, hogy törli ezt a filet?';
-
-	# proj_doc_edit_page.php
-  $s_filename = 'Filenév';
-  $s_file_update_button = 'File módosítása';
-  $s_file_delete_button = 'File törlése';
-
-	# proj_doc_page.php
-  $s_project_documentation_title = 'Projektdokumentáció';
-  $s_user_documentation = 'Felhasználói dokumentáció';
-  $s_project_documentation = 'Projektdokumentáció';
-  $s_add_file = 'Új file';
-
-	# proj_doc_update.php
-  $s_project_document_updated = 'A projekt frissítése sikerült';
-
-	# proj_user_add.php
-  $s_project_user_added_msg = 'A felhasználót sikerült felvenni a projektbe';
-
-	# proj_user_delete.php
-  $s_project_removed_user_msg = 'A felhasználót sikerült eltávolítani a projektbõl';
-
-	# proj_user_delete_page.php
-  $s_remove_user_sure_msg = 'Biztos benne, hogy törli ezt a felhasználót?';
-
-	# proj_user_menu_page.php
-  $s_add_user_title = 'Felhasználó felvétele a projektbe';
-  $s_add_user_button = 'Felhasználó felvétele';
-  $s_project_selection_title = 'Projekt kiválasztása';
-  $s_remove_link = 'eltávolítás';
-
-	# proj_user_update.php
-  $s_updated_user_msg = 'A felhasználót sikerült módosítani';
-
-	# report_add.php
-  $s_must_enter_category = 'Meg kell adni egy kategóriát';
-  $s_must_enter_severity = 'Meg kell adni a súlyosságot';
-  $s_must_enter_reproducibility = 'Meg kell adni a reprodukálhatóságot';
-  $s_must_enter_summary = 'Meg kell adni az összegzést';
-  $s_must_enter_description = 'Meg kell adni a leírást';
-  $s_report_more_bugs = 'További hiba bejelentése';
-  $s_submission_thanks_msg = 'Köszönjük a bejelentést';
-
-	# report_bug_advanced_page.php
-  $s_simple_report_link = 'Egyszerû bejelentõ';
-  $s_enter_report_details_title = 'Adja meg a hiba adatait';
-  $s_required = 'kitöltendõ';
-  $s_select_category = 'Kategória megadása';
-  $s_select_reproducibility = 'Reprodukálhatóság megadása';
-  $s_select_severity = 'Súlyosság megadása';
-  $s_or_fill_in = 'VAGY töltse ki:';
-  $s_assign_to = 'Felelõs';
-  $s_additional_information = 'További információ';
-  $s_submit_report_button = 'Bejelentõ elküldése';
-  $s_check_report_more_bugs = 'további hiba bejelentéséhez jelölje be';
-
-	# report_bug_page.php
-  $s_advanced_report_link = 'Részletes bejelentõ';
-  $s_report_stay = 'Új bejelentõ';
-
-	# set_project.php
-  $s_selected_project = 'Kiválasztott projekt';
-  $s_valid_project_msg = 'Ki kell választania egy érvényes projektet';
-
-	# signup.php
-  $s_invalid_email = 'ÉRVÉNYTELEN E-MAILCÍM';
-  $s_duplicate_username = 'FELHASTNÁLÓNÉV MÁR LÉTEZIK.  VÁLASSZON MÁSIKAT';
-  $s_account_create_fail = 'A FIÓKOT NEM SIKERÜLT LÉTRE HOZNI';
-  $s_account_added = 'A fiókot sikerült felvenni.';
-  $s_password_emailed_msg = 'A jelszót e-mailben elküldjük.';
-  $s_no_reponse_msg = 'Ha egy héten belül nem jelentkezik, akkor fiókját törölhetik.';
-
-	# signup_page.php
-  $s_signup_info = 'Válasszon felhasználónevet és adjon meg egy érvényes e-mailcímet.  Ezután e-mailben elküldjük véletlenszerûen generált jelszavát.';
-  $s_signup_title = 'Feliratkozás';
-  $s_signup_button = 'Feliratkozás';
-
-	# site_settings_edit_page.php
-  $s_edit_site_settings_title = 'A rendszer beállításainak módosítása';
-  $s_save_settings_button = 'Beállítások mentése';
-
-	# site_settings_page.php
-  $s_site_settings_title = 'Rendszerbeállítások';
-  $s_system_info_link = 'Rendszerinformációk';
-  $s_site_settings_link = 'Rendszerbeállítások';
-
-	# site_settings_update.php
-  $s_site_settings_updated_msg = 'Rendszerbeállítások elmentve';
-
-	# summary_page.php
-  $s_summary_title = 'Összegzés';
-  $s_summary_jpgraph_link = 'Részletes összegzés';
-	$s_by_project = 'by project';
-  $s_by_status = 'állapot szerint';
-  $s_by_date = 'dátum (napok) szerint';
-  $s_by_severity = 'súlyosság szerint';
-  $s_by_resolution = 'megoldás szerint';
-  $s_by_category = 'kategória szerint';
-  $s_by_priority = 'prioritás szerint';
-  $s_by_developer = 'fejlesztõ szerint';
-  $s_by_reporter ='bejelentõ szerint';
-  $s_time_stats = 'a megoldott hibák idõadatai (napok)';
-  $s_longest_open_bug = 'legtovább nyitott hiba';
-  $s_longest_open = 'legtovább nyitott';
-  $s_average_time = 'átlagos idõ';
-  $s_total_time = 'teljes idõ';
-  $s_developer_stats = 'fejlesztõi statisztikák';
-  $s_reporter_stats = 'bejelentõi statisztikák';
-  $s_orct = '(nyitott/megoldott/lezárt/összes)';
-
-	# view_all_bug_page.php
-  $s_any = 'összes';
-  $s_show = 'Darab';
-  $s_changed = 'Módosítva(óra)';
-  $s_viewing_bugs_title = 'Hibák listája';
-  $s_updated = 'Módosítva';
-
-	# view_all_inc.php
-  $s_none = 'nincs';
-  $s_search ='Keresés';
-  $s_view_prev_link = 'Elõzõ';
-  $s_view_next_link = 'Következõ';
-	$s_prev = 'Prev';
-	$s_next = 'Next';
-	$s_first = 'First';
-	$s_last = 'Last';
-
-	# view_bug_advanced_page.php
-  $s_view_simple_link = 'Egyszerû nézet';
-  $s_viewing_bug_advanced_details_title = 'Hiba részletes adatai';
-  $s_product_build = 'Nyomat';
-  $s_system_profile = 'Rendszer leírása';
-  $s_update_bug_button = 'Hiba módosítása';
-  $s_bug_assign_button    = 'Átveszem';
-  $s_reopen_bug_button = 'Hiba újramegnyitása';
-  $s_attached_files = 'Csatolt fileok';
-	$s_publish = 'Publish';
-	$s_cached = 'Cached';
-
-	# view_bug_inc.php
-
-	# view_bug_page.php
-  $s_view_advanced_link = 'Részletes nézet';
-  $s_viewing_bug_simple_details_title = 'Hiba egyszerû adatai';
-
-	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
-
-	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
-	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
-
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
-
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
-
-	$s_attachments = "attachment(s)";
-	$s_attachment_alt = "A";
+# Charset
+$s_charset = 'iso-8859-2';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Mozgat';
+$s_actiongroup_menu_assign = 'Átruház';
+$s_actiongroup_menu_close = 'Bezár';
+$s_actiongroup_menu_delete = 'Töröl';
+$s_actiongroup_menu_resolve = 'Felold';
+$s_actiongroup_menu_update_priority = 'Súlyosság változás';
+$s_actiongroup_menu_update_status = 'Státusz Változás';
+
+# new strings:
+$s_all_projects = 'Összes projekt';
+$s_move_bugs = 'Hibák áthelyezése';
+$s_operation_successful = 'A mûvelet sikeresen befejezõdött.';
+$s_date_order = 'Dátumsorrend';
+$s_print_all_bug_page_link = 'Hibák nyomtatása';
+$s_csv_export = 'CSV exportálása';
+$s_login_anonymously = 'Bejelentkezés név nélkül';
+$s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
+$s_public_project_msg = 'Ez egy nyilvános projekt.  Minden felhasználónak van hozzáférése a projekthez.';
+$s_private_project_msg = 'Ez egy privát projekt.  Csak az administrátorok és a hozzárendelt felhasználóknak van hozzáférése a projekthez.';
+$s_access_level_project = 'Projekt hozzáférési szint';
+$s_view_submitted_bug_link = 'Elküldött hibajelentések megtekintése';
+$s_assigned_projects = 'Hozzárendelt projektek';
+$s_unassigned_projects = 'Hozzárendeletlen projektek';
+$s_print = 'Nyomtatás';
+$s_jump = 'Ugrás';
+$s_copy_users = 'Felhasználók másolása';
+$s_copy_categories_from = 'Katefóri máolás Innen';
+$s_copy_categories_to = 'Katefóri máolás Ide';
+$s_bug_history = 'Hiba Történet';
+$s_field = 'Mezõ';
+$s_old_value = 'Régi érték';
+$s_new_value = 'Új Érték';
+$s_date_modified = 'Módosítás dátuma';
+$s_bugnote = 'Hiba megjegyzés';
+$s_change = 'Változás';
+$s_bugnote_view_state = 'Hiba megjegyzések megtekintése';
+$s_bug_monitor = 'Hiba Nyomonkövetve';
+$s_bug_end_monitor = 'Hiba nyomkövetés vége';
+$s_announcement = 'Közlemény';
+$s_stays_on_top = 'Kezdõlapon tart';
+$s_delete_bugnote_button = 'Hiba Megjegyzés törlése';
+$s_delete_bugnote_sure_msg = 'Biztos törölni akarja a Hiba Megjegyzést?';
+$s_bug_relationships = 'Kapcsolatok';
+$s_empty_password_sure_msg = 'Nem adott meg jelszót.  Biztos nem akar jelszót megadni?';
+$s_empty_password_button = 'Nem használ jelszót';
+
+$s_duplicate_of = '%id duplikálódott';
+$s_has_duplicate = 'az %id duplikált';
+$s_related_to = '%id függ';
+$s_dependant_on = 'függ az %id-tõl';
+$s_blocks = 'blokkolva az %id';
+
+$s_new_bug = 'Új Hiba';
+$s_bugnote_added = 'Hiba Megjegyzés hozzáadva';
+$s_bugnote_edited = 'Hiba Megjegyzés Szerkesztve';
+$s_bugnote_deleted = 'Hiba Megjegyzés Törölve';
+$s_summary_updated = 'Összegzés Frissítve';
+$s_description_updated = 'Leírás Frissítve';
+$s_additional_information_updated = 'További Információ Frissítve';
+$s_steps_to_reproduce_updated = 'Reprodukálhatóság Frissítve';
+$s_file_added = 'File Feltöltve: ';
+$s_file_deleted = 'File Törölve: ';
+
+$s_make_private = 'Priváttá nyilvánítva';
+$s_make_public = 'Nyilvánossá nyilvánítva';
+
+$s_create_new_project_link = 'Új Projekt';
+
+$s_login_link = 'Belépés';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'Önnek nincs elegendõ jogosultsága megtenni a kért módosítást a következõ hibán: ';
+$s_close_bugs_conf_msg = 'Biztos be akarja zárni ezeket a hibákat ?';
+$s_delete_bugs_conf_msg = 'Biztos törölni akarja ezeket a hibákat ?';
+$s_move_bugs_conf_msg = 'Hibák Mozgatása ide:';
+$s_assign_bugs_conf_msg = 'Hibákat hozzárendeli a:';
+$s_resolve_bugs_conf_msg = 'Megoldás választása';
+$s_priority_bugs_conf_msg = 'Prioritás választása';
+$s_status_bugs_conf_msg = 'Hibák Státuszának választása';
+$s_close_group_bugs_button = 'Hibák Bezárása' ;
+$s_delete_group_bugs_button = 'Hibák Törlése' ;
+$s_move_group_bugs_button = 'Hibák Mozgatása' ;
+$s_assign_group_bugs_button = 'Hibákhoz Megbízza:' ;
+$s_resolve_group_bugs_button = 'Hibák Megoldása' ;
+$s_priority_group_bugs_button = 'Prioritás Frissítése' ;
+$s_status_group_bugs_button = 'Státusz Frissítése' ;
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Összefoglaló grafikon státusz alapján' ;
+$s_graph_imp_priority_title = 'Összefoglaló grafikon prioritás alapján' ;
+$s_graph_imp_severity_title = 'Összefoglaló grafikon súlyosság alapján';
+$s_graph_imp_category_title = 'Összefoglaló grafikon kategória alapján';
+$s_graph_imp_resolution_title = 'Összefoglaló grafikon megoldás alapján';
+$s_by_status_pct = 'státusz százalék';
+$s_by_priority_pct = 'prioritás százalék';
+$s_by_severity_pct = 'súlyosság százalék';
+$s_by_category_pct = 'kategória százalék';
+$s_by_resolution_pct = 'megoldás százalék';
+$s_by_severity_mix = 'súlyosság és státusz';
+$s_by_priority_mix = 'prioritás és státusz';
+$s_by_resolution_mix = 'megoldás és státusz';
+$s_synthesis_link = 'Összefoglalás';
+$s_status_link = 'Per állapot';
+$s_priority_link = 'Per prioritás';
+$s_severity_link = 'Per súlyosság';
+$s_category_link = 'Per kategória';
+$s_resolution_link = 'Per megoldás';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Csak a kiválasztottak mutatása';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Válasszon mezõt a nyoltatáshoz.';
+$s_printing_options_link = 'Nyomtatási beállítások';
+
+# word and excel export
+$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_date = 'Hiba Megjegyzés dátuma';
+$s_bugnote_description = 'Hiba Megjegyzés leírása';
+
+$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'HIBA: Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
+$MANTIS_ERROR[ERROR_SQL] = 'HIBA: SQL hibát találtam.  Kérem jelentse a hibát itt: ';
+$MANTIS_ERROR[ERROR_REPORT] = 'HIBA: A bejelentés feldolgozásakor hiba történt.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HIBA: Nincs megadva file';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HIBA: A érvénytelen file típus.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HIBA: A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'HIBA: Már létezik ilyen néven projekt.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'HIBA: Hozzáférés megtagadva.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'HIBA: File feltöltés sikertelen.  Ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'HIBA: File feltöltés sikertelen.  File méret probléma is lehet.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'HIBA: A kért paramétert nem találom a laphoz.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'HIBA: A felhasználónév már használt.  Nyomja meg a vissza gombot és válasszon másikat.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='HIBA: Konfigurációs opciót nem találom.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='HIBA: Szöveget nem találom.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'HIBA: Hiba megjegyzést nem találom.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'HIBA: Projektet nem találom.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'HIBA: Adatbázis mezõt nem találom.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'HIBA: Nem tud csatlakozni az FTP szerverhez.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'HIBA: Ezen a néven már létezik projekt.  Nyomja meg a vissza gombot és írjon be egy másik nevet.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='HIBA: Ilyen néven nem lehet Projektet létrehozni.  Nem lehet üres a Projekt neve.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'HIBA: Ilyen felhasználót nem találtam.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'HIBA: A Böngészõben tárolt Felhasználó információ nem helyes.  Lehetséges hogy törlõdtek az adatai ?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='HIBA: A Beállításokat nem találom a Felhasználóhoz.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'HIBA: Újabb adatot nem találok.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='HIBA: A Jelszó nem lett megerõsítve.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'HIBA: Listát vártam de szöveget kaptam.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='HIBA: Szöveget vártam de listát kaptam.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'HIBA: Nem találtam a hibát.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'HIBA: Nem jó az e-mail.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'HIBA: Profilt nem találom.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'HIBA: A File Típus nincs engedélyezve a feltöltéshez.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'HIBA: Ez a file már létezik.  Elõször törölje le.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'HIBA: Nincs ilyen könyvtár.  Lehet , hogy nincs ilyen vagy nincs írási joga a webszervernek.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'HIBA: Nem lehet önbagába duplikálni egy hibát.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'HIBA: Nem találom a hozzáadott mezõt';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'HIBA: Ez egy duplikált név.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'HIBA: Legalább egy projekt használja az egyedi mezõt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'HIBA: Érvénytelen érték a mezõben';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'HIBA: LDAP Hitelesítés Megtagadva';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'HIBA: LDAP Szerver Konnekció Nem sikeres';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'HIBA: LDAP Rekord felülírás megtagadva.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'HIBA: LDAP Felhasználót nem találom.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'HIBA: A Hiba már meg lett oldva így nem tudja a módosítást elvégezni.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'HIBA: Adatbázis konnekció hibás.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'HIBA: Adatbázis lekérdeés hibás.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'HIBA: Adatbázis kijelölés hibás.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'HIBA: Ez a kategória már létezik.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'HIBA: Nincs másolás metódus definiálva.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'HIBA: A Kategóriát nem találom.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'HIBA: Ez a verzió már létezik.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'HIBA: Verziót nem találom.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'HIBA: A Felhasználónén nem érvényes.';
+
+$s_login_error = 'HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
+$s_login_cookies_disabled = 'HIBA: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+
+# General Strings
+$s_go_back = 'Visszatérés';
+$s_proceed = 'A folytatáshoz kattintson ide';
+
+$s_switch = 'Váltás';
+$s_logged_in_as = 'Felhasználónév';
+
+$s_prefix_for_deleted_users = 'felhasználó';
+
+$s_administrator = 'rendszergazda';
+
+# Enum Strings
+$s_access_levels_enum_string      = '10:olvasó,25:bejelentõ,40:módosító,55:fejlesztõ,70:vezetõ,90:rendszergazda';
+$s_project_status_enum_string     = '10:fejlesztés alatt,30:elsõ kiadás,50:stabil,70:elavult';
+$s_project_view_state_enum_string = '10:nyilvános,50:privát';
+$s_view_state_enum_string         = '10:publikus,50:privát';
+
+$s_priority_enum_string           = '10:nincs,20:alacsony,30:átlagos,40:magas,50:sürgõs,60:azonnali';
+$s_severity_enum_string           = '10:funkció,20:nyilvánvaló,30:szöveg,40:trükk,50:nem súlyos, 60:súlyos,70:összeomlás,80:akadály';
+$s_reproducibility_enum_string    = '10:mindig,30:néha,50:véletlenszerû,70:nem próbáltam,90:nem ismételhetõ,100:nincs adat';
+$s_status_enum_string             = '10:új,20:visszajelezve,30:jóváhagyva,40:megerõsítve,50:kiosztva,80:megoldva,90:lezárva';
+$s_resolution_enum_string         = '10:nyitva,20:javítva,30:újra megnyitva,40:nem ismételhetõ,50:nem javítható,60:már ismert,70:nem hiba,80:felfüggesztve,90:nem lesz javítva';
+$s_projection_enum_string         = '10:nincs,30:trükk,50:kisebb javítás,70:nagyobb átalakítás,90:újratervezés';
+$s_eta_enum_string                = '10:ismeretlen,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,60:> 1 hónap';
+
+# Email Strings
+$s_new_account_subject = 'Új felhasználói fiók';
+$s_new_account_greeting = 'Üdvözöljük a hibakövetô rendszerben.  Az alábbiakban megtalálja a bejelentkezéshez szükséges információkat.' . "\n\n";
+$s_new_account_url = 'A rendszert a következõ címen éri el: ';
+$s_new_account_username = 'Felhasználónév: ';
+$s_new_account_password = 'Jelszó: ';
+$s_new_account_message = 'A rendszerbe való bejelentkezés után változtassa meg a jelszavát.  Jelszavát egyirányú titkosítással tároljuk, így a rendszergazdák sem képesek azt elolvasni.  Ha elfelejti jelszavát, törölnünk kell.' . "\n\n";
+$s_new_account_do_not_reply = 'Kérjük ne válaszoljon erre az üzenetre.' . "\n";
+
+$s_reset_request_msg = 'Kérés érkezett hozzánk, hogy jelszavát töröljük';
+$s_account_name_msg = 'A felhasználónév:';
+$s_news_password_msg = 'Az új jelszó:';
+
+$s_new_bug_msg = 'A következõ ÚJ hibát rögzítettük.';
+$s_email_bugnote_msg = 'A hibához MEGJEGYZÉST fûztek.';
+$s_email_resolved_msg = 'A következõ hibát MEGOLDOTTÁK.';
+$s_email_close_msg = 'A következõ hibát LEZÁRTÁK.';
+$s_email_feedback_msg = 'A következõ hibát VISSZA kell JELEZNIE.';
+$s_email_reopen_msg = 'A következõ hibát ÚJRA MEGNYITOTTÁK.';
+$s_email_assigned_msg = 'A következõ hibát KIOSZTOTTÁK.';
+$s_email_bug_deleted_msg = 'Az alábbi hiba nem lett TÖRÖLVE.';
+
+$s_email_reporter = 'Bejelentõ';
+$s_email_handler = 'Kezelõ';
+$s_email_project = 'Projekt';
+$s_email_bug = 'Hiba száma';
+$s_email_category = 'Kategória';
+$s_email_reproducibility = 'Reprodukálhatóság';
+$s_email_severity = 'Súlyosság';
+$s_email_priority = 'Prioritás';
+$s_email_status = 'Állapot';
+$s_email_resolution = 'Megoldás';
+$s_email_duplicate = 'Már létezik';
+$s_email_date_submitted = 'Bejelentés dátuma';
+$s_email_last_modified = 'Utolsó módosítás';
+$s_email_summary =  'Összegzés';
+$s_email_description = 'Leírás';
+
+# account_delete.php
+$s_account_protected_msg = 'Védett fiók. A beállítások nem módosíthatók...';
+$s_account_removed_msg = 'Fiókját törölték...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Biztos benne, hogy törli fiókját?';
+$s_delete_account_button = 'Fiók törlése';
+
+# account_page.php
+$s_manage_profiles_link = 'Profilok';
+$s_change_preferences_link = 'Beállítások';
+$s_edit_account_title = 'Fiók szerkesztése';
+$s_username = 'Felhasználónév';
+$s_email = 'E-mail';
+$s_password = 'Jelszó';
+$s_confirm_password  = 'Jelszó megerõsítése';
+$s_access_level = 'Hozzáférési szint';
+$s_update_user_button = 'Adatok mentése';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Fiók beállításai';
+$s_default_project = 'Alapértelmezett projekt';
+$s_advanced_report = 'Részletes bejelentõ';
+$s_advanced_view = 'Részletes nézet';
+$s_advanced_update = 'Részletes módosítás';
+$s_refresh_delay = 'Frissítési késleltetés';
+$s_redirect_delay = 'Átirányítási késleltetés';
+$s_email_on_new = 'E-mail küldése új hiba esetén';
+$s_email_on_assigned = 'E-mail küldése hiba kiosztása esetén';
+$s_email_on_feedback = 'E-mail küldése hiba visszajelzése esetén';
+$s_email_on_resolved = 'E-mail küldése hiba megoldása esetén';
+$s_email_on_closed = 'E-mail küldése hiba lezárása esetén';
+$s_email_on_reopened = 'E-mail küldése hiba újra megnyitása esetén';
+$s_email_on_bugnote_added = 'E-mail küldése megjegyzés hozzáadása esetén';
+$s_email_on_status_change = 'E-mail küldése állapot változása esetén';
+$s_email_on_priority_change = 'E-mail küldése prioritás változása esetén';
+$s_language = 'Nyelv';
+$s_update_prefs_button = 'Beállítások mentése';
+$s_reset_prefs_button = 'Beállítások visszaállítása';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Beállítások visszaállítva...';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Beállítások elmentve...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Profil felvéve...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Profilt törölve...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Profil szerkesztése';
+$s_platform = 'Platform';
+$s_operating_system = 'Operációs rendszer';
+$s_additional_description = 'További leírás';
+$s_update_profile_button = 'Profil mentése';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Alapértelmezett profil elmentve...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Új profil';
+$s_add_profile_button = 'Új profil';
+$s_edit_or_delete_profiles_title = 'Profilok szerkesztése vagy törlése';
+$s_edit_profile = 'Profil szerkesztése';
+$s_make_default = 'Legyen alapértelmezett';
+$s_delete_profile = 'Profil törlése';
+$s_select_profile = 'Profil kiválasztása';
+$s_submit_button = 'Végrehajt';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Profil módosítva...';
+
+# account_update.php
+$s_account_updated_msg = 'A fiók adatait sikerült módosítani...';
+$s_email_updated = 'Email cím sikeresen frissült';
+$s_password_updated = 'Jelszó sikeresen frissült';
+
+# bug_assign.php
+$s_bug_assign_msg       = 'A hibát sikerült kiosztani...';
+
+# bug_close.php
+$s_bug_close_msg       = 'Hiba lezárva...';
+$s_close_immediately   = 'Azonnali lezárás:';
+
+# bug_close_page.php
+$s_close_bug_title = 'Close Bug';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Hiba törölve...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Biztos benne, hogy törli ezt a hibát?';
+$s_delete_bug_button = 'Hiba törlése';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Hiba nyomkövetése';
+$s_unmonitor_bug_button = 'Nyomkövetés befejezése';
+
+# bug_file_add.php
+$s_file_upload_msg = 'A fileátvitel sikerült';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'File feltöltése';
+$s_select_file = 'File kiválasztása';
+$s_upload_file_button = 'File feltöltése';
+$s_max_file_size = 'Maximális méret';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Hiba újra megnyitva...';
+$s_reopen_add_bugnote_title = 'A hiba újbóli megnyitásának magyarázata';
+$s_bugnote_add_reopen_button = 'Megjegyzés felvétele és a hiba újra megnyitása';
+
+# bug_resolve_page.php
+$s_resolve_bug_title = 'Hiba megoldása';
+$s_resolve_bug_button = 'Hiba megoldása';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Hiba megoldva. Adja meg a magyarázatot...';
+$s_resolve_add_bugnote_title = 'A hiba megoldásának magyarázata';
+$s_bugnote_add_resolve_button = 'Új megjegyzés';
+
+# bug_reminder_page.php
+$s_from = 'Feladó';
+$s_to = 'Címzett';
+$s_on = 'On';
+$s_sent_you_this_reminder_about = 'sent you this reminder about';
+$s_bug_reminder = 'Emlékeztetõ küldése';
+$s_reminder_sent_to = 'Emlékeztetõt küld ';
+$s_bug_send_button = 'Küld';
+$s_reminder = 'Emlékeztetõ';
+
+# bug_update.php
+$s_bug_updated_msg = 'A hibát sikerült módosítani...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Vissza a hibához';
+$s_update_simple_link = 'Egyszerû módosítás';
+$s_updating_bug_advanced_title = 'Hibainformációk módosítása';
+$s_id = 'azonosító';
+$s_category = 'Kategória';
+$s_severity = 'Súlyosság';
+$s_reproducibility = 'Reprodukálhatóság';
+$s_date_submitted = 'Bejelentés dátuma';
+$s_last_update = 'Utolsó módosítás';
+$s_reporter = 'Bejelentõ';
+$s_assigned_to = 'Felelõs';
+$s_priority = 'Prioritás';
+$s_resolution = 'Megoldás';
+$s_status = 'Állapot';
+$s_duplicate_id = 'Másolat azonosítója';
+$s_os = 'Oprendszer';
+$s_projection = 'Elõrejelzés';
+$s_os_version = 'Verzió (op.r.)';
+$s_eta = 'Várható javítás';
+$s_product_version = 'Termékverzió';
+$s_build = 'Nyomat';
+$s_votes = 'Szavazatok';
+$s_summary = 'Összegzés';
+$s_description = 'Leírás';
+$s_steps_to_reproduce = 'Reprodukálás lépései';
+$s_additional = 'Egyéb';
+$s_information = 'Információ';
+$s_update_information_button = 'Információ mentése';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Részletes módosítás';
+$s_updating_bug_simple_title = 'Hibainformációk módosítása';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Szavazatát rögzítettük...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Megjegyzés tárolva...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'A hibát sikerült törölni...';
+$s_bug_notes_title = 'Megjegyzések';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Megjegyzés szerkesztése';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Ehhez a hibához nem tartozik megjegyzés.';
+$s_delete_link = 'Törlés';
+$s_add_bugnote_title = 'Új megjegyzés';
+$s_add_bugnote_button = 'Új megjegyzés';
+$s_bugnote_edit_link = 'Szerkesztés';
+$s_close_bug_button = 'Hiba lezárása';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'A megjegyzést sikerült módosítani...';
+$s_edited_on = 'módosítva ekkor: ';
+
+# index.php
+$s_click_to_login = 'A bejelentkezéshez kattintson ide';
+
+# login.php
+
+# login_page.php
+$s_login_page_info = 'Üdvözöljük a hibakövetõ rendszerben.';
+$s_login_title = 'Bejelentkezés';
+$s_save_login = 'Bejelentkezés mentése';
+$s_choose_project = 'Projekt kiválasztása';
+$s_login_button = 'Bejelentkezés';
+$s_signup_link = 'új fiók létrehozása';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Projekt kiválasztása';
+
+# logout_page.php
+$s_logged_out_title = 'A kijelentkezés megtörtént...';
+$s_redirecting = '...átirányítás';
+$s_here = 'ide';
+
+# main_page.php
+$s_open_and_assigned_to_me = 'Nyitott és hozzám tartozik';
+$s_open_and_reported_to_me = 'Nyitott és én találtam';
+$s_newer_news_link = 'Újabb hírek';
+$s_older_news_link = 'Régebbi hírek';
+$s_archives = 'Archívum';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Felhasználó létrehozva,';
+$s_created_user_part2 = 'hozzáférési szintje:';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Új fiók létrehozása';
+$s_verify_password = 'Jelszó megerõsítése';
+$s_enabled = 'Engedélyezett';
+$s_protected = 'Védett';
+$s_create_user_button = 'Felhasználó létrehozása';
+
+# manage_page.php
+$s_hide_disabled = 'Letiltottak elrejtése';
+$s_filter_button = 'Szûrõ alkalmazása';
+$s_manage_users_link = 'Felhasználók karbantartása';
+$s_manage_projects_link = 'Projektek karbantartása';
+$s_manage_custom_field_link = 'Egyéni Mezõk';
+$s_create_new_account_link = 'Fiók létrehozása';
+$s_projects_link = 'Projektek';
+$s_documentation_link = 'Dokumentáció';
+$s_new_accounts_title = 'Új fiókok';
+$s_1_week_title = '1 hét';
+$s_never_logged_in_title = 'Még nem jelentkezett be';
+$s_prune_accounts = 'Fiókok eltávolítása';
+$s_hide_inactive = 'Inaktívak elrejtése';
+$s_manage_accounts_title = 'Fiókok karbantartása';
+$s_p = 'v';
+$s_date_created = 'Létrehozás dátuma';
+$s_last_visit = 'Utolsó látogatás';
+$s_edit_user_link = 'Felhasználó szerkesztése';
+
+# manage_proj_add.php
+$s_project_added_msg = 'A projektet sikerült felvenni...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'A kategóriát sikerült felvenni...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'A kategóriát sikerült törölni...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Biztos benne, hogy törli ezt a kategóriát? Minden ebbe tartozó hiba törlõdni fog.';
+$s_delete_category_button = 'Kategória törlése';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Kategória szerkesztése';
+$s_update_category_button = 'Kategória mentése';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'A kategóriát sikerült elmenteni...';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'A projektet sikerült eltávolítani...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Biztos benne, hogy törli ezt a projektet az összes hozzá tartozó hibabejelentéssel?';
+$s_project_delete_button = 'Projekt törlése';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Projekt szerkesztése';
+$s_project_name = 'Projekt neve';
+$s_view_status = 'Betekintés jellege';
+$s_public = 'nyilvános';
+$s_private = 'privát';
+$s_update_project_button = 'Projekt mentése';
+$s_delete_project_button = 'Projekt törlése';
+$s_categories_and_version_title = 'Kategóriák és verziók';
+$s_categories = 'Kategóriák';
+$s_add_category_button = 'Új kategória';
+$s_versions = 'Verziók';
+$s_add_version_button = 'Új verzió';
+$s_edit_link = 'szerkesztés';
+$s_actions = 'Cselekvés';
+$s_version = 'Verzió/Nyomat';
+$s_timestamp = 'Idõbélyeg';
+$s_update = 'Frissít';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Új projekt';
+$s_upload_file_path = 'Feltöltött fileok helye';
+$s_add_project_button = 'Új projekt';
+$s_projects_title = 'Projektek';
+$s_name = 'Név';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'A projektet sikerült módosítani...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'A verziót sikerült felvenni...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'A verziót sikerült törölni...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Biztos benne, hogy törli ezt a verziót? Minden hozzá tartozó hiba törlõdni fog.';
+$s_delete_version_button = 'Verzió törlése';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Verzió módosítása';
+$s_update_version_button = 'Verzió mentése';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'A verziót sikerült elmenteni...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'A fiók védett, ezért nem törölhetõ.';
+$s_account_deleted_msg = 'Fiók törölve...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Biztos benne, hogy törli ezt a fiókot?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'Minden fiók törölve, melyet még soha nem használtak és 1 hétnél régebbi.';
+$s_prune_accounts_button = 'Tisztít';
+$s_confirm_account_pruning = 'Biztos törölni akarja a régi Felhasználk adatait, akik nem léptek be a megadott idõn belül?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Felhasználó szerkesztése';
+$s_reset_password_button = 'Jelszó törlése';
+$s_delete_user_button = 'Felhasználó törlése';
+$s_reset_password_msg = 'A jelszó törlésekor véletlen jelszó generálódik.';
+$s_reset_password_msg2 = 'A jelszó törlése után a jelszó üres lesz.';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Védett fiók, a jelszó nem törölhetõ.';
+$s_account_reset_msg = 'A fiókhoz tartozó jelszó újragenerálva...';
+$s_account_reset_msg2 = 'A fiókhoz tartozó jelszó törölve...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'A fiók védett, így a hozzáférési szint és az engedélyezettségi beállítás nem módosítható. A fiók többi adata módosítva...';
+$s_manage_user_updated_msg = 'A fiókot sikerült módosítani...';
+
+# menu_inc.php
+$s_main_link = 'Fõoldal';
+$s_view_bugs_link = 'Hibák listája';
+$s_report_bug_link = 'Hiba bejelentése';
+$s_summary_link = 'Összegzés';
+$s_account_link = 'Fiók';
+$s_users_link = 'Felhasználók';
+$s_manage_link = 'Karbantartás';
+$s_edit_news_link = 'Hírek';
+$s_docs_link = 'Dokumentáció';
+$s_logout_link = 'Kijelentkezés';
+
+# meta_inc.php
+
+# news_add.php
+$s_news_added_msg = 'Hír tárolva...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Hír törölve...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Biztos benne, hogy törli ezt a hírt?';
+$s_delete_news_item_button = 'Hír törlése';
+
+# news_edit_page.php
+$s_edit_news_title = 'Hír szerkesztése';
+$s_headline = 'Fõcím';
+$s_body = 'Szöveg';
+$s_update_news_button = 'Hír módosítása';
+
+# news_menu_page.php
+$s_add_news_title = 'Új hír';
+$s_post_to = 'Küldés ide:';
+$s_post_news_button = 'Hír elküldése';
+$s_edit_or_delete_news_title = 'Hírek szerkesztése vagy törlése';
+$s_edit_post = 'Hír szerkesztése';
+$s_delete_post = 'Hír törlése';
+$s_select_post = 'Hír kiválasztása';
+
+# news_update.php
+$s_news_updated_msg = 'Hír módosítva...';
+
+# news_view_page.php
+$s_back_link = 'Vissza';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'A file átvitel sikerült';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'File feltöltése';
+$s_title = 'Cím';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'File törölve';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Biztos benne, hogy törli ezt a filet?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Filenév';
+$s_file_update_button = 'File módosítása';
+$s_file_delete_button = 'File törlése';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Projektdokumentáció';
+$s_user_documentation = 'Felhasználói dokumentáció';
+$s_project_documentation = 'Projektdokumentáció';
+$s_add_file = 'Új file';
+
+# proj_doc_update.php
+$s_project_document_updated = 'A projekt frissítése sikerült';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'A felhasználót sikerült felvenni a projektbe';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'A felhasználót sikerült eltávolítani a projektbõl';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Biztos benne, hogy törli ezt a felhasználót?';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Felhasználó felvétele a projektbe';
+$s_add_user_button = 'Felhasználó felvétele';
+$s_project_selection_title = 'Projekt kiválasztása';
+$s_remove_link = 'eltávolítás';
+
+# proj_user_update.php
+$s_updated_user_msg = 'A felhasználót sikerült módosítani';
+
+# report_add.php
+$s_must_enter_category = 'Meg kell adni egy kategóriát';
+$s_must_enter_severity = 'Meg kell adni a súlyosságot';
+$s_must_enter_reproducibility = 'Meg kell adni a reprodukálhatóságot';
+$s_must_enter_summary = 'Meg kell adni az összegzést';
+$s_must_enter_description = 'Meg kell adni a leírást';
+$s_report_more_bugs = 'További hiba bejelentése';
+$s_submission_thanks_msg = 'Köszönjük a bejelentést';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Egyszerû bejelentõ';
+$s_enter_report_details_title = 'Adja meg a hiba adatait';
+$s_required = 'kitöltendõ';
+$s_select_category = 'Kategória megadása';
+$s_select_reproducibility = 'Reprodukálhatóság megadása';
+$s_select_severity = 'Súlyosság megadása';
+$s_or_fill_in = 'VAGY töltse ki:';
+$s_assign_to = 'Felelõs';
+$s_additional_information = 'További információ';
+$s_submit_report_button = 'Bejelentõ elküldése';
+$s_check_report_more_bugs = 'további hiba bejelentéséhez jelölje be';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Részletes bejelentõ';
+$s_report_stay = 'Új bejelentõ';
+
+# set_project.php
+$s_selected_project = 'Kiválasztott projekt';
+$s_valid_project_msg = 'Ki kell választania egy érvényes projektet';
+
+# signup.php
+$s_invalid_email = 'ÉRVÉNYTELEN E-MAILCÍM';
+$s_duplicate_username = 'FELHASTNÁLÓNÉV MÁR LÉTEZIK.  VÁLASSZON MÁSIKAT';
+$s_account_create_fail = 'A FIÓKOT NEM SIKERÜLT LÉTRE HOZNI';
+$s_account_added = 'A fiókot sikerült felvenni.';
+$s_password_emailed_msg = 'A jelszót e-mailben elküldjük.';
+$s_no_reponse_msg = 'Ha egy héten belül nem jelentkezik, akkor fiókját törölhetik.';
+
+# signup_page.php
+$s_signup_info = 'Válasszon felhasználónevet és adjon meg egy érvényes e-mailcímet.  Ezután e-mailben elküldjük véletlenszerûen generált jelszavát.';
+$s_signup_title = 'Feliratkozás';
+$s_signup_button = 'Feliratkozás';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'A rendszer beállításainak módosítása';
+$s_save_settings_button = 'Beállítások mentése';
+
+# site_settings_page.php
+$s_site_settings_title = 'Rendszerbeállítások';
+$s_system_info_link = 'Rendszerinformációk';
+$s_site_settings_link = 'Rendszerbeállítások';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Rendszerbeállítások elmentve';
+
+# summary_page.php
+$s_summary_title = 'Összegzés';
+$s_summary_jpgraph_link = 'Részletes összegzés';
+$s_by_project = 'projekt által';
+$s_by_status = 'állapot szerint';
+$s_by_date = 'dátum (napok) szerint';
+$s_by_severity = 'súlyosság szerint';
+$s_by_resolution = 'megoldás szerint';
+$s_by_category = 'kategória szerint';
+$s_by_priority = 'prioritás szerint';
+$s_by_developer = 'fejlesztõ szerint';
+$s_by_reporter ='bejelentõ szerint';
+$s_time_stats = 'a megoldott hibák idõadatai (napok)';
+$s_longest_open_bug = 'legtovább nyitott hiba';
+$s_longest_open = 'legtovább nyitott';
+$s_average_time = 'átlagos idõ';
+$s_total_time = 'teljes idõ';
+$s_developer_stats = 'fejlesztõi statisztikák';
+$s_reporter_stats = 'bejelentõi statisztikák';
+$s_orct = '(nyitott/megoldott/lezárt/összes)';
+
+# view_all_bug_page.php
+$s_any = 'összes';
+$s_show = 'Darab';
+$s_changed = 'Módosítva(óra)';
+$s_viewing_bugs_title = 'Hibák listája';
+$s_updated = 'Módosítva';
+
+# view_all_inc.php
+$s_none = 'nincs';
+$s_search ='Keresés';
+$s_view_prev_link = 'Elõzõ';
+$s_view_next_link = 'Következõ';
+$s_prev = 'Elõzõ';
+$s_next = 'Következõ';
+$s_first = 'Elsõ';
+$s_last = 'Utolsó';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Egyszerû nézet';
+$s_viewing_bug_advanced_details_title = 'Hiba részletes adatai';
+$s_product_build = 'Nyomat';
+$s_system_profile = 'Rendszer leírása';
+$s_update_bug_button = 'Hiba módosítása';
+$s_bug_assign_button    = 'Átveszem';
+$s_reopen_bug_button = 'Hiba újramegnyitása';
+$s_attached_files = 'Csatolt fileok';
+$s_publish = 'Publikál';
+$s_cached = 'Elrejt';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Részletes nézet';
+$s_viewing_bug_simple_details_title = 'Hiba egyszerû adatai';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'Nyincs felhasználó aki nyomonköveti a hibát.';
+$s_users_monitoring_bug = 'Felhasználó nyomonköveti a hibát';
+$s_monitoring_user_list = 'Felhasználó Lista';
+
+# custom field strings
+$s_add_custom_field_button = 'Új egyéni mezõ';
+$s_delete_custom_field_button = 'Egyedi mezõ törlése';
+$s_delete_custom_field_everywhere = 'Egyedi mezõ törlése Mindenhol';
+$s_update_custom_field_button = 'Egyéni mezõ frissítése';
+$s_add_existing_custom_field = 'Hozzáadja Ezt a létezõ egyedi mezõt';
+$s_edit_custom_field_title = 'Egyéni mezõ szerkesztése';
+$s_custom_field = 'Mezõ';
+$s_custom_fields_setup = 'Egyéni Mezõk';
+$s_custom_field_name = 'Név';
+$s_custom_field_project_count = 'Projekt Db';
+$s_custom_field_type = 'Típus';
+$s_custom_field_possible_values = 'Lehetséges Értékek';
+$s_custom_field_default_value = 'Alapértelmezett Érték';
+$s_custom_field_valid_regexp = 'Szabályos Kifejezés';
+$s_custom_field_access_level_r = 'olvasási Jog';
+$s_custom_field_access_level_rw = 'Írási Jog';
+$s_custom_field_length_min = 'Min. Hossz';
+$s_custom_field_length_max = 'Max. Hossz';
+$s_custom_field_advanced = 'Kiterjesztett';
+$s_custom_field_sequence = 'Folyatatás';
+$s_custom_field_type_enum_string = '0:Szöveg,1:Szám,2:Float,3:Enumeration,4:Email';
+
+$s_confirm_used_custom_field_deletion = 'A Mezõ legalább egy projekthez kell hogy tartozzon.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Biztos akarja törölni ezt a mezõt és az összes hozzá tartozó értéket?';
+$s_field_delete_button = 'Mezõ Törlése';
+
+$s_hide_status = 'Státusz Elrejtés';
+$s_filter_closed = "Zárva";
+$s_filter_resolved = "Megoldva";
+
+$s_attachments = "attachment(s)";
+$s_attachment_alt = "A";
 ?>

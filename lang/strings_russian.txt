@@ -8,857 +8,856 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.49 $
-	# $Author: jlatour $
-	# $Date: 2003-05-07 15:48:28 $
+	# $Revision: 1.50 $
+	# $Author: prescience $
+	# $Date: 2003-06-25 21:43:14 $
 	#
-	# $Id: strings_russian.txt,v 1.49 2003-05-07 15:48:28 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.50 2003-06-25 21:43:14 prescience Exp $
 	###########################################################################
 ?>
 <?php
-	# Charset
-	$s_charset = 'Windows-1251';
-
-	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
-
-	# new strings:
-	$s_all_projects = 'Все проекты';
-	$s_move_bugs = 'Переместить баги';
-	$s_operation_successful = 'Операция успешна.';
-	$s_date_order = 'Порядок дат';
-	$s_print_all_bug_page_link = 'Печать отчетов';
-	$s_csv_export = 'Экспорт в CSV';
-	$s_login_anonymously = 'Анонимный вход';
-	$s_jump_to_bugnotes = 'Перейти к заметкам';
-	$s_public_project_msg = 'Этот проект ОБЩЕДОСТУПНЫЙ. Все пользователи имеют доступ к этому проекту.';
-	$s_private_project_msg = 'Этот проект ЧАСТНЫЙ. Только Администраторы и добавленные вручную пользователи имеют доступ.';
-	$s_access_level_project = 'Уровень доступа к проекту';
-	$s_view_submitted_bug_link = 'Просмотреть зарегистрированный баг';
-	$s_assigned_projects = 'Назначенные проекты';
-	$s_unassigned_projects = 'Неназначенные проекты';
-	$s_print = 'Печать';
-	$s_jump = 'Перейти';
-	$s_copy_users = 'Копировать пользователей';
-	$s_copy_categories_from = 'Копировать категории из';
-	$s_copy_categories_to = 'Копировать категории в';
-	$s_bug_history = 'История бага';
-	$s_field = 'Поле';
-	$s_old_value = 'Старое значение';
-	$s_new_value = 'Новое значение';
-	$s_date_modified = 'Дата изменения';
-	$s_bugnote = 'Заметка';
-	$s_change = 'Изменить';
-	$s_bugnote_view_state = 'Состояние просмотра заметок';
-	$s_bug_monitor = 'Баг отслеживается';
-	$s_bug_end_monitor = 'Закрытие бага отслеживается';
-	$s_announcement = 'Анонс';
-	$s_stays_on_top = 'Поверх всех';
-	$s_delete_bugnote_button = 'Удалить заметку';
-	$s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить баг?';
-	$s_bug_relationships = 'Связи';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
-
-	$s_duplicate_of = 'дубликат %id';
-	$s_has_duplicate = 'имеет дубликат %id';
-	$s_related_to = 'связан с %id';
-	$s_dependant_on = 'зависит от %id';
-	$s_blocks = 'блокирует %id';
-
-	$s_new_bug = 'Новый баг';
-	$s_bugnote_added = 'Заметка добавлена';
-	$s_bugnote_edited = 'Заметка отредактирована';
-	$s_bugnote_deleted = 'Заметка удалена';
-	$s_summary_updated = 'Сводка обновлена';
-	$s_description_updated = 'Описание обновлено';
-	$s_additional_information_updated = 'Дополнительная информация обновлена';
-	$s_steps_to_reproduce_updated = 'Шаги по воспроизведению обновлены';
-	$s_file_added = 'Файл добавлен: ';
-	$s_file_deleted = 'Файл удален: ';
-
-	$s_make_private = 'Сделать частным';
-	$s_make_public = 'Сделать общедоступным';
-
-	$s_create_new_project_link = 'Create New Project';
-
-	$s_login_link = 'Login';
-
-	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';
-	$s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти баги ?';
-	$s_move_bugs_conf_msg = 'Перенести баги в';
-	$s_assign_bugs_conf_msg = 'Назначить баги';
-	$s_resolve_bugs_conf_msg = 'Выберите состояние багов';
-	$s_priority_bugs_conf_msg = 'Выберите приоритет багов';
-	$s_status_bugs_conf_msg = 'Выберите статус багов';
-	$s_close_group_bugs_button = 'Закрыть баги' ;
-	$s_delete_group_bugs_button = 'Удалить баги' ;
-	$s_move_group_bugs_button = 'Перенести баги' ;
-	$s_assign_group_bugs_button = 'Назначить баги' ;
-	$s_resolve_group_bugs_button = 'Разрешить баги' ;
-	$s_priority_group_bugs_button = 'Обновить приоритет' ;
-	$s_status_group_bugs_button = 'Обновить статус' ;
-
-	# improved JPgraphs strings
-	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-	$s_graph_imp_category_title = 'Synthesis graphs by category';
-	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-	$s_by_status_pct = 'by status percentage';
-	$s_by_priority_pct = 'by priority percentage';
-	$s_by_severity_pct = 'by severity percentage';
-	$s_by_category_pct = 'by category percentage';
-	$s_by_resolution_pct = 'by resolution percentage';
-	$s_by_severity_mix = 'by severity and status';
-	$s_by_priority_mix = 'by priority and status';
-	$s_by_resolution_mix = 'by resolution and status';
-	$s_synthesis_link = 'Synthesis';
-	$s_status_link = 'Per state';
-	$s_priority_link = 'Per priority';
-	$s_severity_link = 'Per severity';
-	$s_category_link = 'Per category';
-	$s_resolution_link = 'Per resolution';
-
-	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
-
-	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
-
-	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
-
-	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
-
-	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';
-	$MANTIS_ERROR[ERROR_SQL] = 'ОШИБКА: Обнаружена ошибка SQL . Пожалуйста, сообщите об этом ';
-	$MANTIS_ERROR[ERROR_REPORT] = 'ОШИБКА: В вашем рапорте обнаружены ошибки.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ОШИБКА: Нет описанного файла';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ОШИБКА: Этот тип файлов запрещен';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ОШИБКА: Каталога не существует. Проверьте настройки проекта.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ОШИБКА: Дубликат категории.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ОШИБКА: Дубликат версии.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-
-	$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
-	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
-
-	# General Strings
-	$s_go_back = 'Назад';
-	$s_proceed = 'Нажмите, чтобы продолжить';
-
-	$s_switch = 'Переключиться';
-	$s_logged_in_as = 'Зарегистрирован как';
-
-	$s_prefix_for_deleted_users = 'user';
-
-	$s_administrator = 'Администратор';
-
-	# Enum Strings
-	$s_access_levels_enum_string      = '10:зритель,25:репортер,40:редактор,55:разработчик,70:менеджер,90:администратор';
-	$s_project_status_enum_string     = '10:бета,30:релиз,50:стабильный,70:устаревший';
-	$s_project_view_state_enum_string = '10:общедоступный,50:частный';
-	$s_view_state_enum_string         = '10:общедоступный,50:частный';
-
-	$s_priority_enum_string           = '10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:безотлагательный';
-	$s_severity_enum_string           = '10:дополнение,20:тривиально,30:текст,40:минимально,50:незначительный,60:значительный,70:авария,80:блокировка';
-	$s_reproducibility_enum_string    = '10:всегда,30:иногда,50:случайно,70:попыток не было,90:невоспроизводимо,100:недоступно';
-	$s_status_enum_string             = '10:новый,20:информация,30:признан,40:подтвержден,50:назначен,80:решен,90:закрыт';
-	$s_resolution_enum_string         = '10:открыт,20:исправлен,30:открыт снова,40:невоспроизводим,50:неисправим,60:дубликат,70:не баг,80:приостановлен,90:не будет исправлен';
-	$s_projection_enum_string         = '10:нет,30:мелкие изменения,50:небольшие исправления,70:большая переработка,90:перепроектирование';
-	$s_eta_enum_string                = '10:нет,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца';
-
-	# Email Strings
-	$s_new_account_subject = 'Ваш новый бюджет';
-	$s_new_account_greeting = 'Приветствуем, добро пожаловать в систему Bugtracker. Информация, которая необходима Вам для прохождения авторизации.' . "\n\n";
-	$s_new_account_url = 'Вы можете зайти в систему по следующему адресу: ';
-	$s_new_account_username = 'Пользователь: ';
-	$s_new_account_password = 'Пароль: ';
-	$s_new_account_message = 'После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.' . "\n\n";
-	$s_new_account_do_not_reply = 'Это сообщение создано автоматически, не нужно на него отвечать.' . "\n";
-
-	$s_reset_request_msg = 'Был получен запрос на изменение пароля';
-	$s_account_name_msg = 'Ваше имя пользователя:';
-	$s_news_password_msg = 'Ваш новый пароль:';
-
-	$s_new_bug_msg = 'Следующий НОВЫЙ баг ДОБАВЛЕН.';
-	$s_email_bugnote_msg = 'ЗАМЕТКА была добавлена к следующему багу.';
-	$s_email_resolved_msg = 'Следующий баг РЕШЕН.';
-	$s_email_close_msg = 'Следующий баг ЗАКРЫТ.';
-	$s_email_feedback_msg = 'Следующий баг требует Вашей ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ.';
-	$s_email_reopen_msg = 'Следующий баг был ОТКРЫТ ПОВТОРНО.';
-	$s_email_assigned_msg = 'Следующий баг НАЗНАЧЕН.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
-
-	$s_email_reporter = 'Пользователь';
-	$s_email_handler = 'Ответственный';
-	$s_email_project = 'Проект';
-	$s_email_bug = 'ID бага';
-	$s_email_category = 'Категория';
-	$s_email_reproducibility = 'Повторяемость';
-	$s_email_severity = 'Критичность';
-	$s_email_priority = 'Приоритет';
-	$s_email_status = 'Статус';
-	$s_email_resolution = 'Состояние';
-	$s_email_duplicate = 'Дубликаты';
-	$s_email_date_submitted = 'Дата создания';
-	$s_email_last_modified = 'Последнее обновление';
-	$s_email_summary =  'Сводка';
-	$s_email_description = 'Описание';
-
-	# account_delete.php
-	$s_account_protected_msg = 'Бюджет защищен. Невозможно изменить настройки...';
-	$s_account_removed_msg = 'Ваш бюждет был удален...';
-
-	# account_delete_page.php
-	$s_confirm_delete_msg = 'Вы уверены, что желаете удалить Ваш бюджет?';
-	$s_delete_account_button = 'Удаление бюджета';
-
-	# account_page.php
-	$s_manage_profiles_link = 'Управление профилями';
-	$s_change_preferences_link = 'Предпочтения';
-	$s_edit_account_title = 'Редактирование бюджета';
-	$s_username = 'Пользователь';
-	$s_email = 'Email';
-	$s_password = 'Пароль';
-	$s_confirm_password  = 'Подтвердите пароль';
-	$s_access_level = 'Уровень доступа';
-	$s_update_user_button = 'Обновить информацию';
-
-	# account_prefs_page.php
-	$s_default_account_preferences_title = 'Предпочтения бюджета';
-	$s_default_project = 'Проект по умолчанию';
-	$s_advanced_report = 'Расширенный рапорт';
-	$s_advanced_view = 'Расширенный просмотр';
-	$s_advanced_update = 'Расширенное редактирование';
-	$s_refresh_delay = 'Задержка при обновлении';
-	$s_redirect_delay = 'Задержка при переходе';
-	$s_email_on_new = 'Уведомлять о новых';
-	$s_email_on_assigned = 'Уведомлять при назначении';
-	$s_email_on_feedback = 'Уведомлять при статусе Доп. информация';
-	$s_email_on_resolved = 'Уведомлять при решении';
-	$s_email_on_closed = 'Уведомлять при закрытии';
-	$s_email_on_reopened = 'Уведомлять при повторном открытии';
-	$s_email_on_bugnote_added = 'Уведомлять при новой заметке';
-	$s_email_on_status_change = 'Уведомлять при изменении статуса';
-	$s_email_on_priority_change = 'Уведомлять при измении приоритета';
-	$s_language = 'Язык';
-	$s_update_prefs_button = 'Обновить настройки';
-	$s_reset_prefs_button = 'Сбросить настройки';
-
-	# account_prefs_reset.php
-	$s_prefs_reset_msg = 'Настройки были сброшены к стандартным...';
-
-	# account_prefs_update.php
-	$s_prefs_updated_msg = 'Настойки обновлены...';
-
-	# account_profile_add.php
-	$s_profile_added_msg = 'Профиль добавлен...';
-
-	# account_profile_delete.php
-	$s_profile_deleted_msg = 'Профиль удален...';
-
-	# account_profile_edit_page.php
-	$s_edit_profile_title = 'Редактирование профиля';
-	$s_platform = 'Платформа';
-	$s_operating_system = 'Операционная система';
-	$s_version = 'Версия';
-	$s_additional_description = 'Дополнительное описание';
-	$s_update_profile_button = 'Обновить профиль';
-
-	# account_profile_make_default.php
-	$s_profile_defaulted_msg = 'Профиль по умолчанию обновлен...';
-
-	# account_profile_manage_page.php
-	$s_add_profile_title = 'Добавление профиля';
-	$s_add_profile_button = 'Добавить профиль';
-	$s_edit_or_delete_profiles_title = 'Редактирование или удаление профилей';
-	$s_edit_profile = 'Редактировать профиль';
-	$s_make_default = 'Создать профиль';
-	$s_delete_profile = 'Удалить профиль';
-	$s_select_profile = 'Выбрать профиль';
-	$s_submit_button = 'Отправить';
-
-	# account_profile_update.php
-	$s_profile_updated_msg = 'Профиль обновлен...';
-
-	# account_update.php
-	$s_account_updated_msg = 'Ваш бюджет обновлен...';
-	$s_email_updated = 'Email address successfully updated';
-	$s_password_updated = 'Password successfully updated';
-
-	# bug_assign.php
-	$s_bug_assign_msg       = 'Баг был  назначен...';
-
-	# bug_close.php
-	$s_bug_close_msg       = 'Баг закрыт...';
-	$s_close_immediately   = 'Закрыть немедленно:';
-
-	# bug_close_page.php
-	$s_close_bug_title = 'Закрыть баг';
-
-	# bug_delete.php
-	$s_bug_deleted_msg = 'Баг удален...';
-
-	# bug_delete_page.php
-	$s_delete_bug_sure_msg = 'Вы уверены, что желаете обновить баг?';
-	$s_delete_bug_button = 'Удалить баг';
-
-	# bug_monitor.php
-	$s_monitor_bug_button = 'Следить';
-	$s_unmonitor_bug_button = 'Не следить';
-
-	# bug_file_add.php
-	$s_file_upload_msg = 'Файл загружен';
-
-	# bug_file_upload_inc.php
-	$s_upload_file = 'Загрузка файла';
-	$s_select_file = 'Выбрать файл';
-	$s_upload_file_button = 'Загрузить файл';
-	$s_max_file_size = 'Max size';
-
-	# bug_reopen.php
-	$s_bug_reopened_msg = 'Баг открыт повторно...';
-	$s_reopen_add_bugnote_title = 'Добавление причины повторного открытия';
-	$s_bugnote_add_reopen_button = 'Прокомментировать и переоткрыть';
-
-	# bug_resolve_page.php
-	$s_resolve_bug_title = 'Решить баг';
-	$s_resolve_bug_button = 'Решить баг';
-
-	# bug_resolve_page2.php
-	$s_bug_resolved_msg = 'Баг разрешен. Добавьте комментарий...';
-	$s_resolve_add_bugnote_title = 'Добавьте комментарий к решению';
-	$s_bugnote_add_resolve_button = 'Добавить комментарий';
-
-	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
-
-	# bug_update.php
-	$s_bug_updated_msg = 'Информация о баге обновлена...';
-
-	# bug_update_advanced_page.php
-	$s_back_to_bug_link = 'Назад к багу';
-	$s_update_simple_link = 'Простое редактирование';
-	$s_updating_bug_advanced_title = 'Обновление информации о баге';
-	$s_id = 'ID';
-	$s_category = 'Категория';
-	$s_severity = 'Критичность';
-	$s_reproducibility = 'Воспроизводимость';
-	$s_date_submitted = 'Зарегистрирован';
-	$s_last_update = 'Обновлен';
-	$s_reporter = 'Репортер';
-	$s_assigned_to = 'Ответственный';
-	$s_priority = 'Приоритет';
-	$s_resolution = 'Состояние';
-	$s_status = 'Cтатус';
-	$s_duplicate_id = 'Дубликаты';
-	$s_os = 'ОС';
-	$s_projection = 'Прогноз';
-	$s_os_version = 'Версия';
-	$s_eta = 'ETA';
-	$s_product_version = 'Версия';
-	$s_build = 'Подверсия';
-	$s_votes = 'Голосов';
-	$s_summary = 'Сводка';
-	$s_description = 'Описание';
-	$s_steps_to_reproduce = 'Операции для воспроизведения';
-	$s_additional = 'Дополнительная';
-	$s_information = 'информация';
-	$s_update_information_button = 'Обновить информацию';
-
-	# bug_update_page.php
-	$s_update_advanced_link = 'Расширенное редактирование';
-	$s_updating_bug_simple_title = 'Изменение информации о баге';
-
-	# bug_vote_add.php
-	$s_vote_added_msg = 'Голос был добавлен...';
-
-	# bugnote_add.php
-	$s_bugnote_added_msg = 'Комментарий добавлен...';
-
-	# bugnote_delete.php
-	$s_bugnote_deleted_msg = 'Комментарий удален...';
-	$s_bug_notes_title = 'Комментарии к багу';
-
-	# bugnote_edit_page.php
-	$s_edit_bugnote_title = 'Редактировать комментарий';
-
-	# bugnote_inc.php
-	$s_no_bugnotes_msg = 'Нет комментариев к багу';
-	$s_delete_link = 'Удалить';
-	$s_add_bugnote_title = 'Добавление комментария';
-	$s_add_bugnote_button = 'Добавить';
-	$s_bugnote_edit_link = 'Редактировать';
-	$s_close_bug_button = 'Закрыть баг';
-
-	# bugnote_update.php
-	$s_bugnote_updated_msg = 'Комментарий обновлен...';
-	$s_edited_on = 'редактирован: ';
-
-	# index.php
-	$s_click_to_login = 'Нажмите, чтобы войти';
-
-	# login.php
-
-	# login_page.php
-	$s_login_page_info = 'Добро пожаловать в Bugtracker';
-	$s_login_title = 'Вход';
-	$s_save_login = 'Запомнить данные';
-	$s_choose_project = 'Выберите проект';
-	$s_login_button = 'Войти';
-	$s_signup_link = 'Зарегистрировать новый бюджет';
-
-	# login_select_proj_page.php
-	$s_select_project_button = 'Выберите проект';
-
-	# logout_page.php
-	$s_logged_out_title = 'Отключение...';
-	$s_redirecting = '...Переадресация';
-	$s_here = 'здесь';
-
-	# main_page.php
-	$s_open_and_assigned_to_me = 'Открытых и назначенных мне';
-	$s_open_and_reported_to_me = 'Открытых и зарегистрированных мной';
-	$s_newer_news_link = 'Свежие новости';
-	$s_older_news_link = 'Старые новости';
-	$s_archives = 'Архивы';
-
-	# manage_create_new_user.php
-	$s_created_user_part1 = 'Создан пользователь';
-	$s_created_user_part2 = 'с уровнем доступа';
-
-	# manage_create_user_page.php
-	$s_create_new_account_title = 'Cоздать новый бюджет';
-	$s_verify_password = 'Подтверждение пароля';
-	$s_enabled = 'Разрешен';
-	$s_protected = 'Защищен';
-	$s_create_user_button = 'Создать';
-
-	# manage_page.php
-	$s_hide_disabled = 'Спрятать заблокированных';
-	$s_filter_button = 'Фильтровать';
-	$s_manage_users_link = 'Управление пользователями';
-	$s_manage_projects_link = 'Управление проектами';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
-	$s_create_new_account_link = 'Cоздать бюджет';
-	$s_projects_link = 'Проекты';
-	$s_documentation_link = 'Документация';
-	$s_new_accounts_title = 'Новые бюджеты';
-	$s_1_week_title = 'За неделю';
-	$s_never_logged_in_title = 'Никогда не входившие в систему';
-	$s_prune_accounts = 'Удалить бюджеты';
-	$s_hide_inactive = 'Скрыть неактивных';
-	$s_manage_accounts_title = 'Управление бюджетами';
-	$s_p = 'З';
-	$s_date_created = 'Создан';
-	$s_last_visit = 'Последнее посещение';
-	$s_edit_user_link = 'Редактировать пользователя';
-
-	# manage_proj_add.php
-	$s_project_added_msg = 'Проект добавлен...';
-
-	# manage_proj_category_add.php
-	$s_category_added_msg = 'Категория добавлена...';
-
-	# manage_proj_category_delete.php
-	$s_category_deleted_msg = 'Категория удалена...';
-
-	# manage_proj_category_delete_page.php
-	$s_category_delete_sure_msg = 'Вы уверены, что желаете удалить категорию? Все соответствующие категории баги будут удалены.';
-	$s_delete_category_button = 'Удалить категорию';
-
-	# manage_proj_category_edit_page.php
-	$s_edit_project_category_title = 'Редактирование категорий проекта';
-	$s_update_category_button = 'Обновить категорию';
-
-	# manage_proj_category_update.php
-	$s_category_updated_msg = 'Категория обновлена...';
-
-	# manage_proj_delete.php
-	$s_project_deleted_msg = 'Проект успешно удален...';
-
-	# manage_proj_delete_page.php
-	$s_project_delete_msg = 'Вы уверены, что желаете удалить это проект и соответствующие проекту баги?';
-	$s_project_delete_button = 'Удалить проект';
-
-	# manage_proj_edit_page.php
-	$s_edit_project_title = 'Редактирование проекта';
-	$s_project_name = 'Название проекта';
-	$s_view_status = 'Режим доступа';
-	$s_public = 'Общедоступный';
-	$s_private = 'Частный';;
-	$s_update_project_button = 'Обновить проект';
-	$s_delete_project_button = 'Удалить проект';
-	$s_categories_and_version_title = 'Категории и версии';
-	$s_categories = 'Категории';
-	$s_add_category_button = 'Добавить категорию';
-	$s_versions = 'Версии';
-	$s_add_version_button = 'Добавить версию';
-	$s_edit_link = 'редакт.';
-	$s_actions = 'Actions';
-	$s_version = 'Версия';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
-
-	# manage_proj_menu_page.php
-	$s_add_project_title = 'Добавить проект';
-	$s_upload_file_path = 'Путь для загружаемых файлов';
-	$s_add_project_button = 'Добавить проект';
-	$s_projects_title = 'Проекты';
-	$s_name = 'Название';
-
-	# manage_proj_update.php
-	$s_project_updated_msg = 'Проект обновлен...';
-
-	# manage_proj_version_add.php
-	$s_version_added_msg = 'Версия  добавлена...';
-
-	# manage_proj_version_delete.php
-	$s_version_deleted_msg = 'Версия удалена...';
-
-	# manage_proj_version_delete_page.php
-	$s_version_delete_sure = 'Вы уверены, что желаете удалить эту версию?';
-	$s_delete_version_button = 'Удалить версию';
-
-	# manage_proj_version_edit_page.php
-	$s_edit_project_version_title = 'Редактирование версий проекта';
-	$s_update_version_button = 'Обновить версию';
-
-	# manage_proj_version_update.php
-	$s_version_updated_msg = 'Версия обновлена...';
-
-	# manage_user_delete.php
-	$s_account_delete_protected_msg = 'Бюджет защищен. Удаление невозможно.';
-	$s_account_deleted_msg = 'Бюджет удален...';
-
-	# manage_user_delete_page.php
-	$s_delete_account_sure_msg = 'Вы уверены, что желаете удалить этот бюджет?';
-
-	# manage_user_prune.php
-	$s_accounts_pruned_msg = 'Все пользователи, которые ни разу не входили в систему и бюджеты заведены более недели назад были удалены';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
-
-	# manage_user_page.php
-	$s_edit_user_title = 'Редактирование пользователя';
-	$s_reset_password_button = 'Сбросить пароль';
-	$s_delete_user_button = 'Удалить пользователя';
-	$s_reset_password_msg = 'Сброс пароля устанавливает случайно сгенерированный пароль.';
-	$s_reset_password_msg2 = 'сброс пароля привел к тому, что сейчас пароль - пустая строка.';
-
-	# manage_user_reset.php
-	$s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';
-	$s_account_reset_msg = 'Пароль бюджета сброшен...';
-	$s_account_reset_msg2 = 'Пароль бюджета установлен пустым...';
-
-	# manage_user_update.php
-	$s_manage_user_protected_msg = 'Бюджет защищен. Уровень доступа и разрешение заблокировано. Все остальные данные обновлены...';
-	$s_manage_user_updated_msg = 'Бюджет обновлен ...';
-
-	# menu_inc.php
-	$s_main_link = 'Основная';
-	$s_view_bugs_link = 'Просмотреть баги';
-	$s_report_bug_link = 'Добавить баг';
-	$s_summary_link = 'Статистика';
-	$s_account_link = 'Мои настройки';
-	$s_users_link = 'Пользователи';
-	$s_manage_link = 'Управление';
-	$s_edit_news_link = 'Редактировать новости';
-	$s_docs_link = 'Документация';
-	$s_logout_link = 'Выход';
-
-	# meta_inc.php
-
-	# news_add.php
-	$s_news_added_msg = 'Новость была добавлена...';
-
-	# news_delete.php
-	$s_news_deleted_msg = 'Удаление новости...';
-
-	# news_delete_page.php
-	$s_delete_news_sure_msg = 'Вы уверены, что желаете удалить эту новость?';
-	$s_delete_news_item_button = 'Удалить новость';
-
-	# news_edit_page.php
-	$s_edit_news_title = 'Редактирование новостей';
-	$s_headline = 'Заголовок';
-	$s_body = 'Сообщение';
-	$s_update_news_button = 'Обновить новости';
-
-	# news_menu_page.php
-	$s_add_news_title = 'Добавить новости';
-	$s_post_to = 'Разместить в ';
-	$s_post_news_button = 'Разместить новость';
-	$s_edit_or_delete_news_title = 'Редактирование или удаление новостей';
-	$s_edit_post = 'Редактировать новость';
-	$s_delete_post = 'Удалить новость';
-	$s_select_post = 'Выбрать новость';
-
-	# news_update.php
-	$s_news_updated_msg = 'Новость обновлена...';
-
-	# news_view_page.php
-	$s_back_link = 'Назад';
-
-	# proj_doc_add.php
-	$s_file_uploaded_msg = 'Файл загружен';
-
-	# proj_doc_add_page.php
-	$s_upload_file_title = 'Загрузить файл';
-	$s_title = 'Название';
-
-	# proj_doc_delete.php
-	$s_project_file_deleted_msg = 'Файл проекта был удален';
-
-	# proj_doc_delete_page.php
-	$s_confirm_file_delete_msg = 'Вы уверены, что желаете удалить это файл?';
-
-	# proj_doc_edit_page.php
-	$s_filename = 'Имя файла';
-	$s_file_update_button = 'Обновить файл';
-	$s_file_delete_button = 'Удалить файл';
-
-	# proj_doc_page.php
-	$s_project_documentation_title = 'Документация проекта';
-	$s_user_documentation = 'Руководство пользователя';
-	$s_project_documentation = 'Документация проекта';
-	$s_add_file = 'Добавить файл';
-
-	# proj_doc_update.php
-	$s_project_document_updated = 'Проект обновлен';
-
-	# proj_user_add.php
-	$s_project_user_added_msg = 'Пользователь успешно добавлен в проект';
-
-	# proj_user_delete.php
-	$s_project_removed_user_msg = 'Пользователь удален из проекта';
-
-	# proj_user_delete_page.php
-	$s_remove_user_sure_msg = 'Вы уверены, что хотите удалить этого пользователя?';
-
-	# proj_user_menu_page.php
-	$s_add_user_title = 'Добавление пользователя к проекту';
-	$s_add_user_button = 'Добавить';
-	$s_project_selection_title = 'Выбор проекта';
-	$s_remove_link = 'удалить';
-
-	# proj_user_update.php
-	$s_updated_user_msg = 'Пользователь обновлен';
-
-	# report_add.php
-	$s_must_enter_category = 'Вы должны выбрать категорию';
-	$s_must_enter_severity = 'Вы должны ввести критичность';
-	$s_must_enter_reproducibility = 'Вы полжны ввести повторяемость';
-	$s_must_enter_summary = 'Вы должны ввести краткую сводку';
-	$s_must_enter_description = 'Вы должны ввести описание';
-	$s_report_more_bugs = 'Добавлять еще рапорты?';
-	$s_submission_thanks_msg = 'Спасибо за Ваш рапорт';
-
-	# report_bug_advanced_page.php
-	$s_simple_report_link = 'Простая форма ввода бага';
-	$s_enter_report_details_title = 'Введите информацию о баге';
-	$s_required = 'обязательное поле';
-	$s_select_category = 'Выберите категорию';
-	$s_select_reproducibility = 'Выберите периодичность';
-	$s_select_severity = 'Выберите критичность';
-	$s_or_fill_in = 'или заполните';
-	$s_assign_to = 'Назначить';
-	$s_additional_information = 'Дополнительная информация';
-	$s_submit_report_button = 'Отправить баг';
-	$s_check_report_more_bugs = 'отметьте, если будете вводить несколько рапортов';
-
-	# report_bug_page.php
-	$s_advanced_report_link = 'Расширенная форма рапорта';
-	$s_report_stay = 'Пролжить ввод следующих багов';
-
-	# set_project.php
-	$s_selected_project = 'Выбранный проект';
-	$s_valid_project_msg = 'Вы должны выбрать правильный проект';
-
-	# signup.php
-	$s_invalid_email = 'НЕПРАВИЛЬНЫЙ E-MAIL адрес';
-	$s_duplicate_username = 'ТАКОЕ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ';
-	$s_account_create_fail = 'НЕ УДАЛОСЬ СОЗДАТЬ БЮДЖЕТ';
-	$s_account_added = 'Бюджет добавлен.';
-	$s_password_emailed_msg = 'Ваш пароль будет отправлен Вам по email.';
-	$s_no_reponse_msg = 'Если Вы не войдете в систему в течении недели, то Ваш бюджет будет удален.';
-
-	# signup_page.php
-	$s_signup_info = 'Выберите Ваше имя пользователя и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.';
-	$s_signup_title = 'Регистрация';
-	$s_signup_button = 'Зарегистрироваться';
-
-	# site_settings_edit_page.php
-	$s_edit_site_settings_title = 'Редактировать настройки сервера';
-	$s_save_settings_button = 'Сохранить настройки';
-
-	# site_settings_page.php
-	$s_site_settings_title = 'Настройки сервера';
-	$s_system_info_link = 'Системная информация';
-	$s_site_settings_link = 'Настройки сервера';
-
-	# site_settings_update.php
-	$s_site_settings_updated_msg = 'Установки сайта были успешно обновлены';
-
-	# summary_page.php
-	$s_summary_title = 'Статистика';
-	$s_summary_jpgraph_link = 'Графическая статистика';
-	$s_by_project = 'by project';
-	$s_by_status = 'По статусу';
-	$s_by_date = 'По дате (дням)';
-	$s_by_severity = 'По критичности';
-	$s_by_resolution = 'По решению';
-	$s_by_category = 'По категориям';
-	$s_by_priority = 'По приоритету';
-	$s_by_developer = 'По разработчикам';
-	$s_by_reporter ='По пользователям';
-	$s_time_stats = 'Статистика продолжительности решения багов (в днях)';
-	$s_longest_open_bug = 'Наиболее долгий баг';
-	$s_longest_open = 'Максимальное время';
-	$s_average_time = 'Среднее время';
-	$s_total_time = 'Суммарное время';
-	$s_developer_stats = 'Статистика разработчика';
-	$s_reporter_stats = 'Статистика репортера';
-	$s_orct = 'открытых/решенных/закрытых/всего)';
-
-	# view_all_bug_page.php
-	$s_any = 'любой';
-	$s_show = 'Показать';
-	$s_changed = 'Изменены за (час)';
-	$s_viewing_bugs_title = 'Просмотр багов';
-	$s_updated = 'Обновлен';
-
-	# view_all_inc.php
-	$s_none = 'нет';
-	$s_search ='Поиск';
-	$s_view_prev_link = 'Предыдущих';
-	$s_view_next_link = 'Следующих';
-	$s_prev = 'Prev';
-	$s_next = 'Next';
-	$s_first = 'First';
-	$s_last = 'Last';
-
-	# view_bug_advanced_page.php
-	$s_view_simple_link = 'Простой просмотр';
-	$s_viewing_bug_advanced_details_title = 'Расширенный просмотр информации о баге';
-	$s_product_build = 'Подверсия продукта';
-	$s_system_profile = 'Описание системы';
-	$s_update_bug_button = 'Обновить информацию';
-	$s_bug_assign_button    = 'Назначить себе';
-	$s_reopen_bug_button = 'Открыть повторно';
-	$s_attached_files = 'Присоединенные файлы';
-	$s_publish = 'Publish';
-	$s_cached = 'Cached';
-
-	# view_bug_inc.php
-
-	# view_bug_page.php
-	$s_view_advanced_link = 'Расширенный просмотр';
-	$s_viewing_bug_simple_details_title = 'Простой просмотр';
-
-	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
-
-	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
-	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
-
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
-
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
-
-	$s_attachments = "attachment(s)";
-	$s_attachment_alt = "A";
+# Charset
+$s_charset = 'Windows-1251';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Move';
+$s_actiongroup_menu_assign = 'Assign';
+$s_actiongroup_menu_close = 'Close';
+$s_actiongroup_menu_delete = 'Delete';
+$s_actiongroup_menu_resolve = 'Resolve';
+$s_actiongroup_menu_update_priority = 'Update Priority';
+$s_actiongroup_menu_update_status = 'Update Status';
+
+# new strings:
+$s_all_projects = 'Все проекты';
+$s_move_bugs = 'Переместить баги';
+$s_operation_successful = 'Операция успешна.';
+$s_date_order = 'Порядок дат';
+$s_print_all_bug_page_link = 'Печать отчетов';
+$s_csv_export = 'Экспорт в CSV';
+$s_login_anonymously = 'Анонимный вход';
+$s_jump_to_bugnotes = 'Перейти к заметкам';
+$s_public_project_msg = 'Этот проект ОБЩЕДОСТУПНЫЙ. Все пользователи имеют доступ к этому проекту.';
+$s_private_project_msg = 'Этот проект ЧАСТНЫЙ. Только Администраторы и добавленные вручную пользователи имеют доступ.';
+$s_access_level_project = 'Уровень доступа к проекту';
+$s_view_submitted_bug_link = 'Просмотреть зарегистрированный баг';
+$s_assigned_projects = 'Назначенные проекты';
+$s_unassigned_projects = 'Неназначенные проекты';
+$s_print = 'Печать';
+$s_jump = 'Перейти';
+$s_copy_users = 'Копировать пользователей';
+$s_copy_categories_from = 'Копировать категории из';
+$s_copy_categories_to = 'Копировать категории в';
+$s_bug_history = 'История бага';
+$s_field = 'Поле';
+$s_old_value = 'Старое значение';
+$s_new_value = 'Новое значение';
+$s_date_modified = 'Дата изменения';
+$s_bugnote = 'Заметка';
+$s_change = 'Изменить';
+$s_bugnote_view_state = 'Состояние просмотра заметок';
+$s_bug_monitor = 'Баг отслеживается';
+$s_bug_end_monitor = 'Закрытие бага отслеживается';
+$s_announcement = 'Анонс';
+$s_stays_on_top = 'Поверх всех';
+$s_delete_bugnote_button = 'Удалить заметку';
+$s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить баг?';
+$s_bug_relationships = 'Связи';
+$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+$s_empty_password_button = 'Use Empty Password';
+
+$s_duplicate_of = 'дубликат %id';
+$s_has_duplicate = 'имеет дубликат %id';
+$s_related_to = 'связан с %id';
+$s_dependant_on = 'зависит от %id';
+$s_blocks = 'блокирует %id';
+
+$s_new_bug = 'Новый баг';
+$s_bugnote_added = 'Заметка добавлена';
+$s_bugnote_edited = 'Заметка отредактирована';
+$s_bugnote_deleted = 'Заметка удалена';
+$s_summary_updated = 'Сводка обновлена';
+$s_description_updated = 'Описание обновлено';
+$s_additional_information_updated = 'Дополнительная информация обновлена';
+$s_steps_to_reproduce_updated = 'Шаги по воспроизведению обновлены';
+$s_file_added = 'Файл добавлен: ';
+$s_file_deleted = 'Файл удален: ';
+
+$s_make_private = 'Сделать частным';
+$s_make_public = 'Сделать общедоступным';
+
+$s_create_new_project_link = 'Create New Project';
+
+$s_login_link = 'Login';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';
+$s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти баги ?';
+$s_move_bugs_conf_msg = 'Перенести баги в';
+$s_assign_bugs_conf_msg = 'Назначить баги';
+$s_resolve_bugs_conf_msg = 'Выберите состояние багов';
+$s_priority_bugs_conf_msg = 'Выберите приоритет багов';
+$s_status_bugs_conf_msg = 'Выберите статус багов';
+$s_close_group_bugs_button = 'Закрыть баги' ;
+$s_delete_group_bugs_button = 'Удалить баги' ;
+$s_move_group_bugs_button = 'Перенести баги' ;
+$s_assign_group_bugs_button = 'Назначить баги' ;
+$s_resolve_group_bugs_button = 'Разрешить баги' ;
+$s_priority_group_bugs_button = 'Обновить приоритет' ;
+$s_status_group_bugs_button = 'Обновить статус' ;
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+$s_graph_imp_category_title = 'Synthesis graphs by category';
+$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+$s_by_status_pct = 'by status percentage';
+$s_by_priority_pct = 'by priority percentage';
+$s_by_severity_pct = 'by severity percentage';
+$s_by_category_pct = 'by category percentage';
+$s_by_resolution_pct = 'by resolution percentage';
+$s_by_severity_mix = 'by severity and status';
+$s_by_priority_mix = 'by priority and status';
+$s_by_resolution_mix = 'by resolution and status';
+$s_synthesis_link = 'Synthesis';
+$s_status_link = 'Per state';
+$s_priority_link = 'Per priority';
+$s_severity_link = 'Per severity';
+$s_category_link = 'Per category';
+$s_resolution_link = 'Per resolution';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Display selected only';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Choose fields to print';
+$s_printing_options_link = 'Printing Options';
+
+# word and excel export
+$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_date = 'Date of bugnote';
+$s_bugnote_description = 'Bugnote description';
+
+$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';
+$MANTIS_ERROR[ERROR_SQL] = 'ОШИБКА: Обнаружена ошибка SQL . Пожалуйста, сообщите об этом ';
+$MANTIS_ERROR[ERROR_REPORT] = 'ОШИБКА: В вашем рапорте обнаружены ошибки.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ОШИБКА: Нет описанного файла';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ОШИБКА: Этот тип файлов запрещен';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ОШИБКА: Каталога не существует. Проверьте настройки проекта.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ОШИБКА: Дубликат категории.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ОШИБКА: Дубликат версии.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+
+$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
+$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+
+# General Strings
+$s_go_back = 'Назад';
+$s_proceed = 'Нажмите, чтобы продолжить';
+
+$s_switch = 'Переключиться';
+$s_logged_in_as = 'Зарегистрирован как';
+
+$s_prefix_for_deleted_users = 'user';
+
+$s_administrator = 'Администратор';
+
+# Enum Strings
+$s_access_levels_enum_string      = '10:зритель,25:репортер,40:редактор,55:разработчик,70:менеджер,90:администратор';
+$s_project_status_enum_string     = '10:бета,30:релиз,50:стабильный,70:устаревший';
+$s_project_view_state_enum_string = '10:общедоступный,50:частный';
+$s_view_state_enum_string         = '10:общедоступный,50:частный';
+
+$s_priority_enum_string           = '10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:безотлагательный';
+$s_severity_enum_string           = '10:дополнение,20:тривиально,30:текст,40:минимально,50:незначительный,60:значительный,70:авария,80:блокировка';
+$s_reproducibility_enum_string    = '10:всегда,30:иногда,50:случайно,70:попыток не было,90:невоспроизводимо,100:недоступно';
+$s_status_enum_string             = '10:новый,20:информация,30:признан,40:подтвержден,50:назначен,80:решен,90:закрыт';
+$s_resolution_enum_string         = '10:открыт,20:исправлен,30:открыт снова,40:невоспроизводим,50:неисправим,60:дубликат,70:не баг,80:приостановлен,90:не будет исправлен';
+$s_projection_enum_string         = '10:нет,30:мелкие изменения,50:небольшие исправления,70:большая переработка,90:перепроектирование';
+$s_eta_enum_string                = '10:нет,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца';
+
+# Email Strings
+$s_new_account_subject = 'Ваш новый бюджет';
+$s_new_account_greeting = 'Приветствуем, добро пожаловать в систему Bugtracker. Информация, которая необходима Вам для прохождения авторизации.' . "\n\n";
+$s_new_account_url = 'Вы можете зайти в систему по следующему адресу: ';
+$s_new_account_username = 'Пользователь: ';
+$s_new_account_password = 'Пароль: ';
+$s_new_account_message = 'После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.' . "\n\n";
+$s_new_account_do_not_reply = 'Это сообщение создано автоматически, не нужно на него отвечать.' . "\n";
+
+$s_reset_request_msg = 'Был получен запрос на изменение пароля';
+$s_account_name_msg = 'Ваше имя пользователя:';
+$s_news_password_msg = 'Ваш новый пароль:';
+
+$s_new_bug_msg = 'Следующий НОВЫЙ баг ДОБАВЛЕН.';
+$s_email_bugnote_msg = 'ЗАМЕТКА была добавлена к следующему багу.';
+$s_email_resolved_msg = 'Следующий баг РЕШЕН.';
+$s_email_close_msg = 'Следующий баг ЗАКРЫТ.';
+$s_email_feedback_msg = 'Следующий баг требует Вашей ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ.';
+$s_email_reopen_msg = 'Следующий баг был ОТКРЫТ ПОВТОРНО.';
+$s_email_assigned_msg = 'Следующий баг НАЗНАЧЕН.';
+$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+
+$s_email_reporter = 'Пользователь';
+$s_email_handler = 'Ответственный';
+$s_email_project = 'Проект';
+$s_email_bug = 'ID бага';
+$s_email_category = 'Категория';
+$s_email_reproducibility = 'Повторяемость';
+$s_email_severity = 'Критичность';
+$s_email_priority = 'Приоритет';
+$s_email_status = 'Статус';
+$s_email_resolution = 'Состояние';
+$s_email_duplicate = 'Дубликаты';
+$s_email_date_submitted = 'Дата создания';
+$s_email_last_modified = 'Последнее обновление';
+$s_email_summary =  'Сводка';
+$s_email_description = 'Описание';
+
+# account_delete.php
+$s_account_protected_msg = 'Бюджет защищен. Невозможно изменить настройки...';
+$s_account_removed_msg = 'Ваш бюждет был удален...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Вы уверены, что желаете удалить Ваш бюджет?';
+$s_delete_account_button = 'Удаление бюджета';
+
+# account_page.php
+$s_manage_profiles_link = 'Управление профилями';
+$s_change_preferences_link = 'Предпочтения';
+$s_edit_account_title = 'Редактирование бюджета';
+$s_username = 'Пользователь';
+$s_email = 'Email';
+$s_password = 'Пароль';
+$s_confirm_password  = 'Подтвердите пароль';
+$s_access_level = 'Уровень доступа';
+$s_update_user_button = 'Обновить информацию';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Предпочтения бюджета';
+$s_default_project = 'Проект по умолчанию';
+$s_advanced_report = 'Расширенный рапорт';
+$s_advanced_view = 'Расширенный просмотр';
+$s_advanced_update = 'Расширенное редактирование';
+$s_refresh_delay = 'Задержка при обновлении';
+$s_redirect_delay = 'Задержка при переходе';
+$s_email_on_new = 'Уведомлять о новых';
+$s_email_on_assigned = 'Уведомлять при назначении';
+$s_email_on_feedback = 'Уведомлять при статусе Доп. информация';
+$s_email_on_resolved = 'Уведомлять при решении';
+$s_email_on_closed = 'Уведомлять при закрытии';
+$s_email_on_reopened = 'Уведомлять при повторном открытии';
+$s_email_on_bugnote_added = 'Уведомлять при новой заметке';
+$s_email_on_status_change = 'Уведомлять при изменении статуса';
+$s_email_on_priority_change = 'Уведомлять при измении приоритета';
+$s_language = 'Язык';
+$s_update_prefs_button = 'Обновить настройки';
+$s_reset_prefs_button = 'Сбросить настройки';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Настройки были сброшены к стандартным...';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Настойки обновлены...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Профиль добавлен...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Профиль удален...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Редактирование профиля';
+$s_platform = 'Платформа';
+$s_operating_system = 'Операционная система';
+$s_additional_description = 'Дополнительное описание';
+$s_update_profile_button = 'Обновить профиль';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Профиль по умолчанию обновлен...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Добавление профиля';
+$s_add_profile_button = 'Добавить профиль';
+$s_edit_or_delete_profiles_title = 'Редактирование или удаление профилей';
+$s_edit_profile = 'Редактировать профиль';
+$s_make_default = 'Создать профиль';
+$s_delete_profile = 'Удалить профиль';
+$s_select_profile = 'Выбрать профиль';
+$s_submit_button = 'Отправить';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Профиль обновлен...';
+
+# account_update.php
+$s_account_updated_msg = 'Ваш бюджет обновлен...';
+$s_email_updated = 'Email address successfully updated';
+$s_password_updated = 'Password successfully updated';
+
+# bug_assign.php
+$s_bug_assign_msg       = 'Баг был  назначен...';
+
+# bug_close.php
+$s_bug_close_msg       = 'Баг закрыт...';
+$s_close_immediately   = 'Закрыть немедленно:';
+
+# bug_close_page.php
+$s_close_bug_title = 'Закрыть баг';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Баг удален...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Вы уверены, что желаете обновить баг?';
+$s_delete_bug_button = 'Удалить баг';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Следить';
+$s_unmonitor_bug_button = 'Не следить';
+
+# bug_file_add.php
+$s_file_upload_msg = 'Файл загружен';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'Загрузка файла';
+$s_select_file = 'Выбрать файл';
+$s_upload_file_button = 'Загрузить файл';
+$s_max_file_size = 'Max size';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Баг открыт повторно...';
+$s_reopen_add_bugnote_title = 'Добавление причины повторного открытия';
+$s_bugnote_add_reopen_button = 'Прокомментировать и переоткрыть';
+
+# bug_resolve_page.php
+$s_resolve_bug_title = 'Решить баг';
+$s_resolve_bug_button = 'Решить баг';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Баг разрешен. Добавьте комментарий...';
+$s_resolve_add_bugnote_title = 'Добавьте комментарий к решению';
+$s_bugnote_add_resolve_button = 'Добавить комментарий';
+
+# bug_reminder_page.php
+$s_from = 'From';
+$s_to = 'To';
+$s_on = 'On';
+$s_sent_you_this_reminder_about = 'sent you this reminder about';
+$s_bug_reminder = 'Send a reminder';
+$s_reminder_sent_to = 'Reminder sent to';
+$s_bug_send_button = 'Send';
+$s_reminder = 'Reminder';
+
+# bug_update.php
+$s_bug_updated_msg = 'Информация о баге обновлена...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Назад к багу';
+$s_update_simple_link = 'Простое редактирование';
+$s_updating_bug_advanced_title = 'Обновление информации о баге';
+$s_id = 'ID';
+$s_category = 'Категория';
+$s_severity = 'Критичность';
+$s_reproducibility = 'Воспроизводимость';
+$s_date_submitted = 'Зарегистрирован';
+$s_last_update = 'Обновлен';
+$s_reporter = 'Репортер';
+$s_assigned_to = 'Ответственный';
+$s_priority = 'Приоритет';
+$s_resolution = 'Состояние';
+$s_status = 'Cтатус';
+$s_duplicate_id = 'Дубликаты';
+$s_os = 'ОС';
+$s_projection = 'Прогноз';
+$s_os_version = 'Версия';
+$s_eta = 'ETA';
+$s_product_version = 'Версия';
+$s_build = 'Подверсия';
+$s_votes = 'Голосов';
+$s_summary = 'Сводка';
+$s_description = 'Описание';
+$s_steps_to_reproduce = 'Операции для воспроизведения';
+$s_additional = 'Дополнительная';
+$s_information = 'информация';
+$s_update_information_button = 'Обновить информацию';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Расширенное редактирование';
+$s_updating_bug_simple_title = 'Изменение информации о баге';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Голос был добавлен...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Комментарий добавлен...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'Комментарий удален...';
+$s_bug_notes_title = 'Комментарии к багу';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Редактировать комментарий';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Нет комментариев к багу';
+$s_delete_link = 'Удалить';
+$s_add_bugnote_title = 'Добавление комментария';
+$s_add_bugnote_button = 'Добавить';
+$s_bugnote_edit_link = 'Редактировать';
+$s_close_bug_button = 'Закрыть баг';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'Комментарий обновлен...';
+$s_edited_on = 'редактирован: ';
+
+# index.php
+$s_click_to_login = 'Нажмите, чтобы войти';
+
+# login.php
+
+# login_page.php
+$s_login_page_info = 'Добро пожаловать в Bugtracker';
+$s_login_title = 'Вход';
+$s_save_login = 'Запомнить данные';
+$s_choose_project = 'Выберите проект';
+$s_login_button = 'Войти';
+$s_signup_link = 'Зарегистрировать новый бюджет';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Выберите проект';
+
+# logout_page.php
+$s_logged_out_title = 'Отключение...';
+$s_redirecting = '...Переадресация';
+$s_here = 'здесь';
+
+# main_page.php
+$s_open_and_assigned_to_me = 'Открытых и назначенных мне';
+$s_open_and_reported_to_me = 'Открытых и зарегистрированных мной';
+$s_newer_news_link = 'Свежие новости';
+$s_older_news_link = 'Старые новости';
+$s_archives = 'Архивы';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Создан пользователь';
+$s_created_user_part2 = 'с уровнем доступа';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Cоздать новый бюджет';
+$s_verify_password = 'Подтверждение пароля';
+$s_enabled = 'Разрешен';
+$s_protected = 'Защищен';
+$s_create_user_button = 'Создать';
+
+# manage_page.php
+$s_hide_disabled = 'Спрятать заблокированных';
+$s_filter_button = 'Фильтровать';
+$s_manage_users_link = 'Управление пользователями';
+$s_manage_projects_link = 'Управление проектами';
+$s_manage_custom_field_link = 'Manage Custom Fields';
+$s_create_new_account_link = 'Cоздать бюджет';
+$s_projects_link = 'Проекты';
+$s_documentation_link = 'Документация';
+$s_new_accounts_title = 'Новые бюджеты';
+$s_1_week_title = 'За неделю';
+$s_never_logged_in_title = 'Никогда не входившие в систему';
+$s_prune_accounts = 'Удалить бюджеты';
+$s_hide_inactive = 'Скрыть неактивных';
+$s_manage_accounts_title = 'Управление бюджетами';
+$s_p = 'З';
+$s_date_created = 'Создан';
+$s_last_visit = 'Последнее посещение';
+$s_edit_user_link = 'Редактировать пользователя';
+
+# manage_proj_add.php
+$s_project_added_msg = 'Проект добавлен...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'Категория добавлена...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'Категория удалена...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Вы уверены, что желаете удалить категорию? Все соответствующие категории баги будут удалены.';
+$s_delete_category_button = 'Удалить категорию';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Редактирование категорий проекта';
+$s_update_category_button = 'Обновить категорию';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'Категория обновлена...';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'Проект успешно удален...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Вы уверены, что желаете удалить это проект и соответствующие проекту баги?';
+$s_project_delete_button = 'Удалить проект';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Редактирование проекта';
+$s_project_name = 'Название проекта';
+$s_view_status = 'Режим доступа';
+$s_public = 'Общедоступный';
+$s_private = 'Частный';;
+$s_update_project_button = 'Обновить проект';
+$s_delete_project_button = 'Удалить проект';
+$s_categories_and_version_title = 'Категории и версии';
+$s_categories = 'Категории';
+$s_add_category_button = 'Добавить категорию';
+$s_versions = 'Версии';
+$s_add_version_button = 'Добавить версию';
+$s_edit_link = 'редакт.';
+$s_actions = 'Actions';
+$s_version = 'Версия';
+$s_timestamp = 'Timestamp';
+$s_update = 'Update';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Добавить проект';
+$s_upload_file_path = 'Путь для загружаемых файлов';
+$s_add_project_button = 'Добавить проект';
+$s_projects_title = 'Проекты';
+$s_name = 'Название';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'Проект обновлен...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'Версия  добавлена...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'Версия удалена...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Вы уверены, что желаете удалить эту версию?';
+$s_delete_version_button = 'Удалить версию';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Редактирование версий проекта';
+$s_update_version_button = 'Обновить версию';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'Версия обновлена...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'Бюджет защищен. Удаление невозможно.';
+$s_account_deleted_msg = 'Бюджет удален...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Вы уверены, что желаете удалить этот бюджет?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'Все пользователи, которые ни разу не входили в систему и бюджеты заведены более недели назад были удалены';
+$s_prune_accounts_button = 'Prune';
+$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Редактирование пользователя';
+$s_reset_password_button = 'Сбросить пароль';
+$s_delete_user_button = 'Удалить пользователя';
+$s_reset_password_msg = 'Сброс пароля устанавливает случайно сгенерированный пароль.';
+$s_reset_password_msg2 = 'сброс пароля привел к тому, что сейчас пароль - пустая строка.';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';
+$s_account_reset_msg = 'Пароль бюджета сброшен...';
+$s_account_reset_msg2 = 'Пароль бюджета установлен пустым...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'Бюджет защищен. Уровень доступа и разрешение заблокировано. Все остальные данные обновлены...';
+$s_manage_user_updated_msg = 'Бюджет обновлен ...';
+
+# menu_inc.php
+$s_main_link = 'Основная';
+$s_view_bugs_link = 'Просмотреть баги';
+$s_report_bug_link = 'Добавить баг';
+$s_summary_link = 'Статистика';
+$s_account_link = 'Мои настройки';
+$s_users_link = 'Пользователи';
+$s_manage_link = 'Управление';
+$s_edit_news_link = 'Редактировать новости';
+$s_docs_link = 'Документация';
+$s_logout_link = 'Выход';
+
+# meta_inc.php
+
+# news_add.php
+$s_news_added_msg = 'Новость была добавлена...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Удаление новости...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Вы уверены, что желаете удалить эту новость?';
+$s_delete_news_item_button = 'Удалить новость';
+
+# news_edit_page.php
+$s_edit_news_title = 'Редактирование новостей';
+$s_headline = 'Заголовок';
+$s_body = 'Сообщение';
+$s_update_news_button = 'Обновить новости';
+
+# news_menu_page.php
+$s_add_news_title = 'Добавить новости';
+$s_post_to = 'Разместить в ';
+$s_post_news_button = 'Разместить новость';
+$s_edit_or_delete_news_title = 'Редактирование или удаление новостей';
+$s_edit_post = 'Редактировать новость';
+$s_delete_post = 'Удалить новость';
+$s_select_post = 'Выбрать новость';
+
+# news_update.php
+$s_news_updated_msg = 'Новость обновлена...';
+
+# news_view_page.php
+$s_back_link = 'Назад';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'Файл загружен';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'Загрузить файл';
+$s_title = 'Название';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'Файл проекта был удален';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Вы уверены, что желаете удалить это файл?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Имя файла';
+$s_file_update_button = 'Обновить файл';
+$s_file_delete_button = 'Удалить файл';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Документация проекта';
+$s_user_documentation = 'Руководство пользователя';
+$s_project_documentation = 'Документация проекта';
+$s_add_file = 'Добавить файл';
+
+# proj_doc_update.php
+$s_project_document_updated = 'Проект обновлен';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'Пользователь успешно добавлен в проект';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'Пользователь удален из проекта';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Вы уверены, что хотите удалить этого пользователя?';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Добавление пользователя к проекту';
+$s_add_user_button = 'Добавить';
+$s_project_selection_title = 'Выбор проекта';
+$s_remove_link = 'удалить';
+
+# proj_user_update.php
+$s_updated_user_msg = 'Пользователь обновлен';
+
+# report_add.php
+$s_must_enter_category = 'Вы должны выбрать категорию';
+$s_must_enter_severity = 'Вы должны ввести критичность';
+$s_must_enter_reproducibility = 'Вы полжны ввести повторяемость';
+$s_must_enter_summary = 'Вы должны ввести краткую сводку';
+$s_must_enter_description = 'Вы должны ввести описание';
+$s_report_more_bugs = 'Добавлять еще рапорты?';
+$s_submission_thanks_msg = 'Спасибо за Ваш рапорт';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Простая форма ввода бага';
+$s_enter_report_details_title = 'Введите информацию о баге';
+$s_required = 'обязательное поле';
+$s_select_category = 'Выберите категорию';
+$s_select_reproducibility = 'Выберите периодичность';
+$s_select_severity = 'Выберите критичность';
+$s_or_fill_in = 'или заполните';
+$s_assign_to = 'Назначить';
+$s_additional_information = 'Дополнительная информация';
+$s_submit_report_button = 'Отправить баг';
+$s_check_report_more_bugs = 'отметьте, если будете вводить несколько рапортов';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Расширенная форма рапорта';
+$s_report_stay = 'Пролжить ввод следующих багов';
+
+# set_project.php
+$s_selected_project = 'Выбранный проект';
+$s_valid_project_msg = 'Вы должны выбрать правильный проект';
+
+# signup.php
+$s_invalid_email = 'НЕПРАВИЛЬНЫЙ E-MAIL адрес';
+$s_duplicate_username = 'ТАКОЕ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ';
+$s_account_create_fail = 'НЕ УДАЛОСЬ СОЗДАТЬ БЮДЖЕТ';
+$s_account_added = 'Бюджет добавлен.';
+$s_password_emailed_msg = 'Ваш пароль будет отправлен Вам по email.';
+$s_no_reponse_msg = 'Если Вы не войдете в систему в течении недели, то Ваш бюджет будет удален.';
+
+# signup_page.php
+$s_signup_info = 'Выберите Ваше имя пользователя и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.';
+$s_signup_title = 'Регистрация';
+$s_signup_button = 'Зарегистрироваться';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Редактировать настройки сервера';
+$s_save_settings_button = 'Сохранить настройки';
+
+# site_settings_page.php
+$s_site_settings_title = 'Настройки сервера';
+$s_system_info_link = 'Системная информация';
+$s_site_settings_link = 'Настройки сервера';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Установки сайта были успешно обновлены';
+
+# summary_page.php
+$s_summary_title = 'Статистика';
+$s_summary_jpgraph_link = 'Графическая статистика';
+$s_by_project = 'by project';
+$s_by_status = 'По статусу';
+$s_by_date = 'По дате (дням)';
+$s_by_severity = 'По критичности';
+$s_by_resolution = 'По решению';
+$s_by_category = 'По категориям';
+$s_by_priority = 'По приоритету';
+$s_by_developer = 'По разработчикам';
+$s_by_reporter ='По пользователям';
+$s_time_stats = 'Статистика продолжительности решения багов (в днях)';
+$s_longest_open_bug = 'Наиболее долгий баг';
+$s_longest_open = 'Максимальное время';
+$s_average_time = 'Среднее время';
+$s_total_time = 'Суммарное время';
+$s_developer_stats = 'Статистика разработчика';
+$s_reporter_stats = 'Статистика репортера';
+$s_orct = 'открытых/решенных/закрытых/всего)';
+
+# view_all_bug_page.php
+$s_any = 'любой';
+$s_show = 'Показать';
+$s_changed = 'Изменены за (час)';
+$s_viewing_bugs_title = 'Просмотр багов';
+$s_updated = 'Обновлен';
+
+# view_all_inc.php
+$s_none = 'нет';
+$s_search ='Поиск';
+$s_view_prev_link = 'Предыдущих';
+$s_view_next_link = 'Следующих';
+$s_prev = 'Prev';
+$s_next = 'Next';
+$s_first = 'First';
+$s_last = 'Last';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Простой просмотр';
+$s_viewing_bug_advanced_details_title = 'Расширенный просмотр информации о баге';
+$s_product_build = 'Подверсия продукта';
+$s_system_profile = 'Описание системы';
+$s_update_bug_button = 'Обновить информацию';
+$s_bug_assign_button    = 'Назначить себе';
+$s_reopen_bug_button = 'Открыть повторно';
+$s_attached_files = 'Присоединенные файлы';
+$s_publish = 'Publish';
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Расширенный просмотр';
+$s_viewing_bug_simple_details_title = 'Простой просмотр';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_monitoring_user_list = 'User List';
+
+# custom field strings
+$s_add_custom_field_button = 'New Custom Field';
+$s_delete_custom_field_button = 'Delete Custom Field';
+$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
+$s_update_custom_field_button = 'Update Custom Field';
+$s_add_existing_custom_field = 'Add This Existing Custom Field';
+$s_edit_custom_field_title = 'Edit custom field';
+$s_custom_field = 'Field';
+$s_custom_fields_setup = 'Custom Fields';
+$s_custom_field_name = 'Name';
+$s_custom_field_project_count = 'Project Count';
+$s_custom_field_type = 'Type';
+$s_custom_field_possible_values = 'Possible Values';
+$s_custom_field_default_value = 'Default Value';
+$s_custom_field_valid_regexp = 'Regular Expression';
+$s_custom_field_access_level_r = 'Read Access';
+$s_custom_field_access_level_rw = 'Write Access';
+$s_custom_field_length_min = 'Min. Length';
+$s_custom_field_length_max = 'Max. Length';
+$s_custom_field_advanced = 'Advanced';
+$s_custom_field_sequence = 'Sequence';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+
+$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+$s_field_delete_button = 'Delete Field';
+
+$s_hide_status = 'Hide Status';
+$s_filter_closed = "Closed";
+$s_filter_resolved = "Resolved";
+
+$s_attachments = "attachment(s)";
+$s_attachment_alt = "A";
 ?>

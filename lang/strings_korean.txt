@@ -8,857 +8,856 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: jlatour $
-	# $Date: 2003-05-07 15:48:28 $
+	# $Revision: 1.53 $
+	# $Author: prescience $
+	# $Date: 2003-06-25 21:43:13 $
 	#
-	# $Id: strings_korean.txt,v 1.52 2003-05-07 15:48:28 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.53 2003-06-25 21:43:13 prescience Exp $
 	###########################################################################
 ?>
 <?php
-	# Charset
-	$s_charset = 'euc-kr';
-
-	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
-
-	# new strings:
-	$s_all_projects = '모든 프로젝트';
-	$s_move_bugs = '벌레 이동';
-	$s_operation_successful = '실행 완료.';
-	$s_date_order = '일자 정렬';
-	$s_print_all_bug_page_link = '리포트 출력';
-	$s_csv_export = 'CSV 엑스포트';
-	$s_login_anonymously = '익명 로그인';
-	$s_jump_to_bugnotes = '버그노트로 이동';
-	$s_public_project_msg = '이 프로젝트는 모두에게 공개되었습니다.';
-	$s_private_project_msg = '이 프로젝트는 관리자와 허용된 사용자만 접근 가능합니다.';
-	$s_access_level_project = '프로젝트 접근 권한';
-	$s_view_submitted_bug_link = '보고된 버그 보기';
-	$s_assigned_projects = '할당된 프로젝트';
-	$s_unassigned_projects = '할당되지 않은 프로젝트';
-	$s_print = '출력';
-	$s_jump = '이동';
-	$s_copy_users = '사용자 복제';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = '벌레 히스토리';
-	$s_field = '필드';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = '수정일';
-	$s_bugnote = '벌레노트';
-	$s_change = '수정';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = '감시중인 벌레';
-	$s_bug_end_monitor = '벌레 감시 끝';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = '맨 위로';
-	$s_delete_bugnote_button = '벌레노트 삭제';
-	$s_delete_bugnote_sure_msg = '벌레노트를 삭제하겠습니까?';
-	$s_bug_relationships = 'Relationships';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
-
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
-
-	$s_new_bug = '새 벌레';
-	$s_bugnote_added = '벌레노트 추가됨';
-	$s_bugnote_edited = '벌레노트 수정됨';
-	$s_bugnote_deleted = '벌레노트 삭제됨';
-	$s_summary_updated = '요약 업데이트됨';
-	$s_description_updated = '설명 업데이트됨';
-	$s_additional_information_updated = '추가 정보 업데이트됨';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = '파일 추가됨: ';
-	$s_file_deleted = '파일 삭제됨: ';
-
-	$s_make_private = '보호하기';
-	$s_make_public = '공개하기';
-
-	$s_create_new_project_link = 'Create New Project';
-
-	$s_login_link = 'Login';
-
-	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = '이 벌레를 끝내시겠습니까 ?';
-	$s_delete_bugs_conf_msg = '이 벌레를 삭제하시겠습니까 ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = '벌레 해결' ;
-	$s_delete_group_bugs_button = '벌레 삭제' ;
-	$s_move_group_bugs_button = '벌레 이동' ;
-	$s_assign_group_bugs_button = '벌레 할당' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
-
-	# improved JPgraphs strings
-	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-	$s_graph_imp_category_title = 'Synthesis graphs by category';
-	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-	$s_by_status_pct = 'by status percentage';
-	$s_by_priority_pct = 'by priority percentage';
-	$s_by_severity_pct = 'by severity percentage';
-	$s_by_category_pct = 'by category percentage';
-	$s_by_resolution_pct = 'by resolution percentage';
-	$s_by_severity_mix = 'by severity and status';
-	$s_by_priority_mix = 'by priority and status';
-	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
-	$s_priority_link = 'Per priority';
-	$s_severity_link = 'Per severity';
-	$s_category_link = 'Per category';
-	$s_resolution_link = 'Per resolution';
-
-	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
-
-	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
-
-	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
-
-	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
-
-	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = '오류: An error occurred during this action.  You may wish to report this error to your local administrator.';
-	$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 벌레 리포트해주시기 바랍니다.';
-	$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-
-	$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
-	$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
-
-	# General Strings
-	$s_go_back = '뒤로';
-	$s_proceed = '계속 진행';
-
-	$s_switch = '이동';
-	$s_logged_in_as = '로그인한 ID :';
-
-	$s_prefix_for_deleted_users = 'user';
-
-	$s_administrator = '관리자';
-
-	# Enum Strings
-	$s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
-	$s_project_status_enum_string     = '10:개발버전,30:배포판,50:안정버전,70:구버전';
-	$s_project_view_state_enum_string = '10:공개,50:비공개';
-	$s_view_state_enum_string         = '10:public,50:private';
-
-	$s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
-	$s_severity_enum_string           = '10:눈에 띄는 벌레,20:사소한 벌레,30:문자열 오류,40:기능개선,50:중요하지 않은 벌레,60:중요한 벌레,70:프로그램 크래시,80:프로그램에 큰 장애';
-	$s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않은 기능,90:다시 만들수 없음';
-	$s_status_enum_string             = '10:새로운 벌레,20:피드백,30:벌레 인정,40:벌레 확인,50:할당된 벌레,80:해결된 벌레,90:폐쇄된 벌레';
-	$s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:다시 만들 수 없음,50:수정할수 없음,60:중복,70:벌레 아님,80:중지(suspended),90:수정될수 없음';
-	$s_projection_enum_string         = '10:없음,30:트윅,50:사소한 수정,70:새로 작성,90:재 디자인';
-	$s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
-
-	# Email Strings
-	$s_new_account_subject = '당신의 새로운 계정 ';
-	$s_new_account_greeting = '벌레 추적시스템에 오신것을 환영합니다. 아래에 당신이 로그인하는데 필요한 몇가지 정보가 있습니다. ' . "\n\n";
-	$s_new_account_url = '이 사이트에 로그인 할수 있습니다: ';
-	$s_new_account_username = '사용자 ID: ';
-	$s_new_account_password = '패스 워드: ';
-	$s_new_account_message = '로그인 하신후 암호를 변경하십시요. 암호는 단방향암호화됩니다. 시스템 관리자도 암호를 알수 없습니다. 암호를 분실하게 되면,다시 설정되어야 합니다.' . "\n\n";
-	$s_new_account_do_not_reply = '이 메세지에 대한 응답을 하지 마십시요.' . "\n";
-
-	$s_reset_request_msg = '암호 초기화에 대한 요청이 있습니다.';
-	$s_account_name_msg = '당신의 계정은 ';
-	$s_news_password_msg = '당신의 새로운 암호입니다. ';
-
-	$s_new_bug_msg = '다음의 새로운 벌레가 추가되었습니다.';
-	$s_email_bugnote_msg = '이벌레에 대하여 <b>벌레노트</b>가 추가되었습니다.';
-	$s_email_resolved_msg = '아래의 벌레가 <b>해결</b>되었습니다.';
-	$s_email_close_msg = '아래의 벌레가 <b>폐쇄</b>되었습니다.';
-	$s_email_feedback_msg = '아래의 벌레가 <b>반영</b>되었습니다.';
-	$s_email_reopen_msg = '아래의 벌레가 <b>다시 발생</b>되었습니다.';
-	$s_email_assigned_msg = '아래의 벌레가 개발자에게 <b>할당</b>되었습니다.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
-
-	$s_email_reporter = '보고자';
-	$s_email_handler = '조작자';
-	$s_email_project = '프로젝트';
-	$s_email_bug = '벌레 번호';
-	$s_email_category = '구분';
-	$s_email_reproducibility = '재발생 가능성';
-	$s_email_severity = '심각성';
-	$s_email_priority = '우선순위';
-	$s_email_status = '상태';
-	$s_email_resolution = '처리상태';
-	$s_email_duplicate = '중복';
-	$s_email_date_submitted = '보고 일자';
-	$s_email_last_modified = '최종 갱신';
-	$s_email_summary =  '요약';
-	$s_email_description = '설명';
-
-	# account_delete.php
-	$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다....';
-	$s_account_removed_msg = '당신의 계정이 삭제되었습니다...';
-
-	# account_delete_page.php
-	$s_confirm_delete_msg = '계정을 삭제하시기를 원하십니까?';
-	$s_delete_account_button = '계정 삭제';
-
-	# account_page.php
-	$s_manage_profiles_link = '프로파일 관리';
-	$s_change_preferences_link = '설정상태 변경';
-	$s_edit_account_title = '계정 편집';
-	$s_username = '사용자 ID';
-	$s_email = '이메일';
-	$s_password = '암호';
-	$s_confirm_password  = '암호 확인';
-	$s_access_level = '접근 레벨';
-	$s_update_user_button = '사용자 갱신';
-
-	# account_prefs_page.php
-	$s_default_account_preferences_title = '기본 계정 설정상태';
-	$s_default_project = '기본 프로젝트';
-	$s_advanced_report = '상세 보고';
-	$s_advanced_view = '자세히 보기';
-	$s_advanced_update = '상세한 업데이트';
-	$s_refresh_delay = '리플레시 하지 않음 ';
-	$s_redirect_delay = '리다이렉트 하지 않음';
-	$s_email_on_new = '새로운 벌레 이메일';
-	$s_email_on_assigned = '할당(Assign)에 대한 이메일';
-	$s_email_on_feedback = '반영(Feedback)에 대한 이메일';
-	$s_email_on_resolved = '해결된 벌레에 대한 이메일';
-	$s_email_on_closed = '폐쇄시 이메일';
-	$s_email_on_reopened = '재발생시 이메일';
-	$s_email_on_bugnote_added = '벌레노트 추가시 이메일';
-	$s_email_on_status_change = '상태 변경시 이메일';
-	$s_email_on_priority_change = '우선순위 변경시 이메일';
-	$s_language = '언어';
-	$s_update_prefs_button = '설정상태 갱신';
-	$s_reset_prefs_button = '설정상태 초기화';
-
-	# account_prefs_reset.php
-	$s_prefs_reset_msg = '설정상태가 초기화되었습니다....';
-
-	# account_prefs_update.php
-	$s_prefs_updated_msg = '설정상태가 갱신되었습니다...';
-
-	# account_profile_add.php
-	$s_profile_added_msg = '프로파일 추가...';
-
-	# account_profile_delete.php
-	$s_profile_deleted_msg = '프로파일 삭제...';
-
-	# account_profile_edit_page.php
-	$s_edit_profile_title = '프로파일 편집';
-	$s_platform = '플랫폼';
-	$s_operating_system = '운영 체제';
-	$s_version = '버전/빌드번호';
-	$s_additional_description = '부연 설명';
-	$s_update_profile_button = '프로파일 갱신';
-
-	# account_profile_make_default.php
-	$s_profile_defaulted_msg = '기본 프로파일 갱신...';
-
-	# account_profile_manage_page.php
-	$s_add_profile_title = '프로파일 추가';
-	$s_add_profile_button = '프로파일 추가';
-	$s_edit_or_delete_profiles_title = '프로파일 편집/삭제';
-	$s_edit_profile = '프로파일 편집';
-	$s_make_default = '디폴트 만들기';
-	$s_delete_profile = '프로파일 삭제';
-	$s_select_profile = '프로파일 편집';
-	$s_submit_button = '확인';
-
-	# account_profile_update.php
-	$s_profile_updated_msg = '프로파일 갱신....';
-
-	# account_update.php
-	$s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
-	$s_email_updated = 'Email address successfully updated';
-	$s_password_updated = 'Password successfully updated';
-
-	# bug_assign.php
-	$s_bug_assign_msg       = '벌레가 할당되었습니다...';
-
-	# bug_close.php
-	$s_bug_close_msg       = '벌레가 해결(close)되었습니다...';
-	$s_close_immediately   = '지금 폐쇄:';
-
-	# bug_close_page.php
-	$s_close_bug_title = '벌레 해결';
-
-	# bug_delete.php
-	$s_bug_deleted_msg = '벌레정보가 삭제되었습니다...';
-
-	# bug_delete_page.php
-	$s_delete_bug_sure_msg = '이 벌레정보를 삭제하시겠습니까?';
-	$s_delete_bug_button = '벌레 삭제';
-
-	# bug_monitor.php
-	$s_monitor_bug_button = '벌레 감시하기';
-	$s_unmonitor_bug_button = '벌레 감시 끝내기';
-
-	# bug_file_add.php
-	$s_file_upload_msg = '파일이 업로드되었습니다.';
-
-	# bug_file_upload_inc.php
-	$s_upload_file = '파일 업로드';
-	$s_select_file = '파일 선택';
-	$s_upload_file_button = '파일 업로드';
-	$s_max_file_size = 'Max size';
-
-	# bug_reopen.php
-	$s_bug_reopened_msg = '벌레가 다시 발생했습니다...';
-	$s_reopen_add_bugnote_title = '재발생한 벌레에 대하여 벌레노트에 사유 추가';
-	$s_bugnote_add_reopen_button = '재발생한 벌레와 벌레 노트 추가';
-
-	# bug_resolve_page.php
-	$s_resolve_bug_title = '벌레 해결';
-	$s_resolve_bug_button = '벌레 해결';
-
-	# bug_resolve_page2.php
-	$s_bug_resolved_msg = '벌레가 해결되었습니다. 아래의 벌레노트를 입력하세요.';
-	$s_resolve_add_bugnote_title = '벌레 해결을 위한 벌레노트 사유 추가';
-	$s_bugnote_add_resolve_button = '벌레노트 추가';
-
-	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
-
-	# bug_update.php
-	$s_bug_updated_msg = '벌레정보가 갱신되었습니다....';
-
-	# bug_update_advanced_page.php
-	$s_back_to_bug_link = '벌레정보로 돌아가기';
-	$s_update_simple_link = '정보사항 갱신';
-	$s_updating_bug_advanced_title = '벌레 정보 갱신';
-	$s_id = '벌레 번호';
-	$s_category = '카테고리';
-	$s_severity = '중요도(심각성)';
-	$s_reproducibility = '재발생 가능성';
-	$s_date_submitted = '보고 일자';
-	$s_last_update = '최종 갱신';
-	$s_reporter = '보고자';
-	$s_assigned_to = '벌레 할당';
-	$s_priority = '우선 순위';
-	$s_resolution = '해결 상태';
-	$s_status = '상태';
-	$s_duplicate_id = '중복된 벌레 번호';
-	$s_os = '운영체제';
-	$s_projection = '프로젝션';
-	$s_os_version = '버전';
-	$s_eta = '처리예정시간';
-	$s_product_version = '제품 번호';
-	$s_build = '빌드번호';
-	$s_votes = '투표수';
-	$s_summary = '요약';
-	$s_description = '설 명';
-	$s_steps_to_reproduce = '재발생 스탭';
-	$s_additional = '부가 ';
-	$s_information = '정보';
-	$s_update_information_button = '정보사항 변경';
-
-	# bug_update_page.php
-	$s_update_advanced_link = '정보사항 갱신';
-	$s_updating_bug_simple_title = '벌레 정보 갱신';
-
-	# bug_vote_add.php
-	$s_vote_added_msg = '투표수 추가...';
-
-	# bugnote_add.php
-	$s_bugnote_added_msg = '벌레노트 추가...';
-
-	# bugnote_delete.php
-	$s_bugnote_deleted_msg = '벌레노트가 삭제되었습니다....';
-	$s_bug_notes_title = '벌레 노트';
-
-	# bugnote_edit_page.php
-	$s_edit_bugnote_title = 'Edit Bugnote';
-
-	# bugnote_inc.php
-	$s_no_bugnotes_msg = '이 벌레에 첨부된 노트가 없습니다.';
-	$s_delete_link = '삭제';
-	$s_add_bugnote_title = '벌레노트 추가';
-	$s_add_bugnote_button = '벌레노트 추가';
-	$s_bugnote_edit_link = '수정';
-	$s_close_bug_button = '벌레 폐쇄';
-
-	# bugnote_update.php
-	$s_bugnote_updated_msg = '벌레노트가 수정되었습니다....';
-	$s_edited_on = '수정일자: ';
-
-	# index.php
-	$s_click_to_login = '로그인';
-
-	# login.php
-
-	# login_page.php
-	$s_login_page_info = '벌레 관리시스템입니다.';
-	$s_login_title = '로그인';
-	$s_save_login = '로그인 정보 저장';
-	$s_choose_project = '프로젝트 선택';
-	$s_login_button = '로그인';
-	$s_signup_link = '사용자 신규 등록';
-
-	# login_select_proj_page.php
-	$s_select_project_button = '프로젝트 선택';
-
-	# logout_page.php
-	$s_logged_out_title = '로그 아웃...';
-	$s_redirecting = '...리다이렉팅';
-	$s_here = '여기';
-
-	# main_page.php
-	$s_open_and_assigned_to_me = '나에게 할당된 벌레';
-	$s_open_and_reported_to_me = '내가 보고한 벌레';
-	$s_newer_news_link = '새로운 뉴스';
-	$s_older_news_link = '이전 뉴스';
-	$s_archives = '아카이브';
-
-	# manage_create_new_user.php
-	$s_created_user_part1 = '사용자가 ';
-	$s_created_user_part2 = '접근 레벨로 생성되었습니다.';
-
-	# manage_create_user_page.php
-	$s_create_new_account_title = '새로운 계정 생성';
-	$s_verify_password = '암호 검증';
-	$s_enabled = '사용가능';
-	$s_protected = '계정 보호';
-	$s_create_user_button = '사용자 생성';
-
-	# manage_page.php
-	$s_hide_disabled = 'Disabled 숨기기';
-	$s_filter_button = '필터';
-	$s_manage_users_link = '사용자 관리';
-	$s_manage_projects_link = '프로젝트 관리';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
-	$s_create_new_account_link = '계정 생성';
-	$s_projects_link = '프로젝트';
-	$s_documentation_link = '문서';
-	$s_new_accounts_title = '새로운 계정';
-	$s_1_week_title = '1 주';
-	$s_never_logged_in_title = '한번도 로그인하지 않은 사용자';
-	$s_prune_accounts = '계정 지우기';
-	$s_hide_inactive = '활동하지 않는 사람 숨기기';
-	$s_manage_accounts_title = '계정 관리';
-	$s_p = 'p';
-	$s_date_created = '생성된 일자';
-	$s_last_visit = '마지막 로그인';
-	$s_edit_user_link = '사용자 편집';
-
-	# manage_proj_add.php
-	$s_project_added_msg = '프로젝트가 추가되었습니다....';
-
-	# manage_proj_category_add.php
-	$s_category_added_msg = '카테고리가 추가되었습니다...';
-
-	# manage_proj_category_delete.php
-	$s_category_deleted_msg = '카테고리가 삭제되었습니다...';
-
-	# manage_proj_category_delete_page.php
-	$s_category_delete_sure_msg = '이 카테고리를 삭제하시겠습니까? 이 카테고리와 관련된 모든 벌레가 삭제될것입니다.';
-	$s_delete_category_button = '카테고리 삭제';
-
-	# manage_proj_category_edit_page.php
-	$s_edit_project_category_title = '프로젝트 카테고리 편집';
-	$s_update_category_button = '카테고리 갱신';
-
-	# manage_proj_category_update.php
-	$s_category_updated_msg = '카테고리가 갱신되었습니다....';
-
-	# manage_proj_delete.php
-	$s_project_deleted_msg = '프로젝트가 삭제되었습니다...';
-
-	# manage_proj_delete_page.php
-	$s_project_delete_msg = '이 프로젝트와 관련된 모든 벌레를 삭제하시겠습니까?';
-	$s_project_delete_button = '프로젝트 삭제';
-
-	# manage_proj_edit_page.php
-	$s_edit_project_title = '프로젝트 편집';
-	$s_project_name = '프로젝트 이름';
-	$s_view_status = '상태 보기';
-	$s_public = '공개';
-	$s_private = '비공개';
-	$s_update_project_button = '프로젝트 갱신';
-	$s_delete_project_button = '프로젝트 삭제';
-	$s_categories_and_version_title = '카테고리와 버전';
-	$s_categories = '카테고리';
-	$s_add_category_button = '카테고리 추가';
-	$s_versions = '버전';
-	$s_add_version_button = '버전 추가';
-	$s_edit_link = '편집';
-	$s_actions = 'Actions';
-	$s_version = '버전/빌드번호';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
-
-	# manage_proj_menu_page.php
-	$s_add_project_title = '프로젝트 추가';
-	$s_upload_file_path = '업르드 파일 경로';
-	$s_add_project_button = '프로젝트 추가';
-	$s_projects_title = '프로젝트';
-	$s_name = '이름';
-
-	# manage_proj_update.php
-	$s_project_updated_msg = '프로젝트가 갱신되었습니다....';
-
-	# manage_proj_version_add.php
-	$s_version_added_msg = '버전 정보가 추가되었습니다....';
-
-	# manage_proj_version_delete.php
-	$s_version_deleted_msg = '버전 정보가 삭제되었습니다....';
-
-	# manage_proj_version_delete_page.php
-	$s_version_delete_sure = '이 버전을 삭제하시겠습니까? 관련된 모든 벌레정보가 삭제됩니다.';
-	$s_delete_version_button = '버전 삭제';
-
-	# manage_proj_version_edit_page.php
-	$s_edit_project_version_title = '프로젝트 버전 편집';
-	$s_update_version_button = '버전 갱신';
-
-	# manage_proj_version_update.php
-	$s_version_updated_msg = '버전정보가 갱신되었습니다...';
-
-	# manage_user_delete.php
-	$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.';
-	$s_account_deleted_msg = '계정이 삭제되었습니다....';
-
-	# manage_user_delete_page.php
-	$s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
-
-	# manage_user_prune.php
-	$s_accounts_pruned_msg = '한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
-
-	# manage_user_page.php
-	$s_edit_user_title = '사용자 편집';
-	$s_reset_password_button = '암호 초기화';
-	$s_delete_user_button = '사용자 삭제';
-	$s_reset_password_msg = '임의로 생성된 암호로 암호를 초기화합니다.';
-	$s_reset_password_msg2 = '암호 초기화는 암호를 공백으로 만듭니다.';
-
-	# manage_user_reset.php
-	$s_account_reset_protected_msg = '보호된 계정입니다. 암호를 초기화할수 없습니다.';
-	$s_account_reset_msg = '계정 암호 초기화...';
-	$s_account_reset_msg2 = '계정 암호가 없는 상태로 초기화합니다...';
-
-	# manage_user_update.php
-	$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....';
-	$s_manage_user_updated_msg = '계정이 갱신되었습니다...';
-
-	# menu_inc.php
-	$s_main_link = '첫화면';
-	$s_view_bugs_link = '벌레 보기';
-	$s_report_bug_link = '벌레 보고하기';
-	$s_summary_link = '요약';
-	$s_account_link = '계정 관리';
-	$s_users_link = '사용자';
-	$s_manage_link = '관리';
-	$s_edit_news_link = '뉴스 편집';
-	$s_docs_link = '문서';
-	$s_logout_link = '로그아웃';
-
-	# meta_inc.php
-
-	# news_add.php
-	$s_news_added_msg = '뉴스가 추가됩니다...';
-
-	# news_delete.php
-	$s_news_deleted_msg = '뉴스 기사 삭제......';
-
-	# news_delete_page.php
-	$s_delete_news_sure_msg = '이 뉴스 기사를 삭제하시겠습니까?';
-	$s_delete_news_item_button = '뉴스 기사 삭제';
-
-	# news_edit_page.php
-	$s_edit_news_title = '뉴스 편집';
-	$s_headline = '헤드라인';
-	$s_body = '본문';
-	$s_update_news_button = '뉴스 갱신';
-
-	# news_menu_page.php
-	$s_add_news_title = '뉴스 추가';
-	$s_post_to = '포스팅 대상';
-	$s_post_news_button = '뉴스 게시';
-	$s_edit_or_delete_news_title = '뉴스 편집 또는 삭제';
-	$s_edit_post = '뉴스 편집';
-	$s_delete_post = '뉴스 삭제';
-	$s_select_post = '뉴스 선택';
-
-	# news_update.php
-	$s_news_updated_msg = '새로운 기사가 갱신되었습니다...';
-
-	# news_view_page.php
-	$s_back_link = '뒤로';
-
-	# proj_doc_add.php
-	$s_file_uploaded_msg = '파일이 업로드되었습니다.';
-
-	# proj_doc_add_page.php
-	$s_upload_file_title = '파일 업로드';
-	$s_title = '제목';
-
-	# proj_doc_delete.php
-	$s_project_file_deleted_msg = '프로제트 파일 삭제됨';
-
-	# proj_doc_delete_page.php
-	$s_confirm_file_delete_msg = '이 파일을 삭제하시겠습니까?';
-
-	# proj_doc_edit_page.php
-	$s_filename = '파일 이름';
-	$s_file_update_button = '파일 갱신';
-	$s_file_delete_button = '파일 삭제';
-
-	# proj_doc_page.php
-	$s_project_documentation_title = '프로젝트 문서화';
-	$s_user_documentation = '사용자 문서';
-	$s_project_documentation = '프로젝트 문서';
-	$s_add_file = '파일 추가';
-
-	# proj_doc_update.php
-	$s_project_document_updated = '프로젝트가 갱신되었습니다.';
-
-	# proj_user_add.php
-	$s_project_user_added_msg = '프로젝트에 사용자가 추가되었습니다.';
-
-	# proj_user_delete.php
-	$s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
-
-	# proj_user_delete_page.php
-	$s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
-
-	# proj_user_menu_page.php
-	$s_add_user_title = '프로젝트에 사용자 추가';
-	$s_add_user_button = '사용자 추가';
-	$s_project_selection_title = '프로젝트 선택';
-	$s_remove_link = '삭제';
-
-	# proj_user_update.php
-	$s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
-
-	# report_add.php
-	$s_must_enter_category = '카테고리를 선택해야 합니다.';
-	$s_must_enter_severity = '중요도를 선택해야 합니다.';
-	$s_must_enter_reproducibility = '재발생가능성을 선택해야 합니다.';
-	$s_must_enter_summary = '요약된 내용을 입력해야 합니다.';
-	$s_must_enter_description = '설명을 입력해야 합니다.';
-	$s_report_more_bugs = '또다른 벌레 보고';
-	$s_submission_thanks_msg = '벌레 리포팅을 해주셔서 감사합니다.';
-
-	# report_bug_advanced_page.php
-	$s_simple_report_link = '간단한 보고서';
-	$s_enter_report_details_title = '상세 보고내역을 입력하세요';
-	$s_required = '필수';
-	$s_select_category = '카테고리 선택';
-	$s_select_reproducibility = '재발생 가능성 선택';
-	$s_select_severity = '중요도(심각성) 선택';
-	$s_or_fill_in = 'OR Fill In';
-	$s_assign_to = '할당하기';
-	$s_additional_information = '추가 정보사항';
-	$s_submit_report_button = '보고서 제출';
-	$s_check_report_more_bugs = '또다른 벌레 보고 확인';
-
-	# report_bug_page.php
-	$s_advanced_report_link = '상세 보고';
-	$s_report_stay = 'Stay 리포트';
-
-	# set_project.php
-	$s_selected_project = '현재 프로젝트';
-	$s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
-
-	# signup.php
-	$s_invalid_email = '이메일 주소가 올바릅니까';
-	$s_duplicate_username = '중복된 사용자입니다. 다른 이름을 선택하세요';
-	$s_account_create_fail = '사용자 계정생성에 실패했습니다.';
-	$s_account_added = '새로운 계정이 추가되었습니다.';
-	$s_password_emailed_msg = '암호가 메일로 전송될 것입니다.';
-	$s_no_reponse_msg = '만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.';
-
-	# signup_page.php
-	$s_signup_info = '로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.';
-	$s_signup_title = '사인업';
-	$s_signup_button = '사인업';
-
-	# site_settings_edit_page.php
-	$s_edit_site_settings_title = '사이트 설정 수정';
-	$s_save_settings_button = '변경상태 저장';
-
-	# site_settings_page.php
-	$s_site_settings_title = '사이트 설정';
-	$s_system_info_link = '시스템 정보';
-	$s_site_settings_link = '사이트 설정';
-
-	# site_settings_update.php
-	$s_site_settings_updated_msg = '사이트 설정상태가 변경되었습니다.';
-
-	# summary_page.php
-	$s_summary_title = '요약';
-	$s_summary_jpgraph_link = '자세한 요약';
-	$s_by_project = 'by project';
-	$s_by_status = '상태별';
-	$s_by_date = '일자별';
-	$s_by_severity = '중요도별';
-	$s_by_resolution = '해결상태별';
-	$s_by_category = '카테고리별';
-	$s_by_priority = '우선순위';
-	$s_by_developer = '개발자별';
-	$s_by_reporter ='보고자별';
-	$s_time_stats = '시간 통계';
-	$s_longest_open_bug = '가장 오래 해결되지 않은 벌레';
-	$s_longest_open = '가장 오래된 시간';
-	$s_average_time = '평균 시간';
-	$s_total_time = '전체 시간';
-	$s_developer_stats = '개발자 통계';
-	$s_reporter_stats = '보고자 통계';
-	$s_orct = '(신규/해결/폐쇄/전체)';
-
-	# view_all_bug_page.php
-	$s_any = '모두';
-	$s_show = '갯수';
-	$s_changed = '변경된(시간)';
-	$s_viewing_bugs_title = '벌레 보기';
-	$s_updated = '최종 갱신';
-
-	# view_all_inc.php
-	$s_none = '없슴';
-	$s_search ='검색';
-	$s_view_prev_link = '이전';
-	$s_view_next_link = '다음';
-	$s_prev = 'Prev';
-	$s_next = 'Next';
-	$s_first = 'First';
-	$s_last = 'Last';
-
-	# view_bug_advanced_page.php
-	$s_view_simple_link = '간략히 보기';
-	$s_viewing_bug_advanced_details_title = '벌레 자세히 보기';
-	$s_product_build = '제품 빌드번호';
-	$s_system_profile = '시스템 설명';
-	$s_update_bug_button = '벌레 갱신';
-	$s_bug_assign_button    = '내게 할당된 벌레';
-	$s_reopen_bug_button = '재발생 벌레';
-	$s_attached_files = '첨부 파일';
-	$s_publish = 'Publish';
-	$s_cached = 'Cached';
-
-	# view_bug_inc.php
-
-	# view_bug_page.php
-	$s_view_advanced_link = '자세히 보기';
-	$s_viewing_bug_simple_details_title = '간략히 보기';
-
-	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
-
-	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
-	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
-
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
-
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
-
-	$s_attachments = "attachment(s)";
-	$s_attachment_alt = "A";
+# Charset
+$s_charset = 'euc-kr';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Move';
+$s_actiongroup_menu_assign = 'Assign';
+$s_actiongroup_menu_close = 'Close';
+$s_actiongroup_menu_delete = 'Delete';
+$s_actiongroup_menu_resolve = 'Resolve';
+$s_actiongroup_menu_update_priority = 'Update Priority';
+$s_actiongroup_menu_update_status = 'Update Status';
+
+# new strings:
+$s_all_projects = '모든 프로젝트';
+$s_move_bugs = '벌레 이동';
+$s_operation_successful = '실행 완료.';
+$s_date_order = '일자 정렬';
+$s_print_all_bug_page_link = '리포트 출력';
+$s_csv_export = 'CSV 엑스포트';
+$s_login_anonymously = '익명 로그인';
+$s_jump_to_bugnotes = '버그노트로 이동';
+$s_public_project_msg = '이 프로젝트는 모두에게 공개되었습니다.';
+$s_private_project_msg = '이 프로젝트는 관리자와 허용된 사용자만 접근 가능합니다.';
+$s_access_level_project = '프로젝트 접근 권한';
+$s_view_submitted_bug_link = '보고된 버그 보기';
+$s_assigned_projects = '할당된 프로젝트';
+$s_unassigned_projects = '할당되지 않은 프로젝트';
+$s_print = '출력';
+$s_jump = '이동';
+$s_copy_users = '사용자 복제';
+$s_copy_categories_from = 'Copy Categories From';
+$s_copy_categories_to = 'Copy Categories To';
+$s_bug_history = '벌레 히스토리';
+$s_field = '필드';
+$s_old_value = 'Old Value';
+$s_new_value = 'New Value';
+$s_date_modified = '수정일';
+$s_bugnote = '벌레노트';
+$s_change = '수정';
+$s_bugnote_view_state = 'Bugnote View State';
+$s_bug_monitor = '감시중인 벌레';
+$s_bug_end_monitor = '벌레 감시 끝';
+$s_announcement = 'Announcement';
+$s_stays_on_top = '맨 위로';
+$s_delete_bugnote_button = '벌레노트 삭제';
+$s_delete_bugnote_sure_msg = '벌레노트를 삭제하겠습니까?';
+$s_bug_relationships = 'Relationships';
+$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+$s_empty_password_button = 'Use Empty Password';
+
+$s_duplicate_of = 'duplicate of %id';
+$s_has_duplicate = 'has duplicate %id';
+$s_related_to = 'related to %id';
+$s_dependant_on = 'dependant on %id';
+$s_blocks = 'blocks %id';
+
+$s_new_bug = '새 벌레';
+$s_bugnote_added = '벌레노트 추가됨';
+$s_bugnote_edited = '벌레노트 수정됨';
+$s_bugnote_deleted = '벌레노트 삭제됨';
+$s_summary_updated = '요약 업데이트됨';
+$s_description_updated = '설명 업데이트됨';
+$s_additional_information_updated = '추가 정보 업데이트됨';
+$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+$s_file_added = '파일 추가됨: ';
+$s_file_deleted = '파일 삭제됨: ';
+
+$s_make_private = '보호하기';
+$s_make_public = '공개하기';
+
+$s_create_new_project_link = 'Create New Project';
+
+$s_login_link = 'Login';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+$s_close_bugs_conf_msg = '이 벌레를 끝내시겠습니까 ?';
+$s_delete_bugs_conf_msg = '이 벌레를 삭제하시겠습니까 ?';
+$s_move_bugs_conf_msg = 'Move bugs to';
+$s_assign_bugs_conf_msg = 'Assign bugs to';
+$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
+$s_priority_bugs_conf_msg = 'Choose bugs priority';
+$s_status_bugs_conf_msg = 'Choose bugs status';
+$s_close_group_bugs_button = '벌레 해결' ;
+$s_delete_group_bugs_button = '벌레 삭제' ;
+$s_move_group_bugs_button = '벌레 이동' ;
+$s_assign_group_bugs_button = '벌레 할당' ;
+$s_resolve_group_bugs_button = 'Resolve Bugs' ;
+$s_priority_group_bugs_button = 'Update Priority' ;
+$s_status_group_bugs_button = 'Update Status' ;
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+$s_graph_imp_category_title = 'Synthesis graphs by category';
+$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+$s_by_status_pct = 'by status percentage';
+$s_by_priority_pct = 'by priority percentage';
+$s_by_severity_pct = 'by severity percentage';
+$s_by_category_pct = 'by category percentage';
+$s_by_resolution_pct = 'by resolution percentage';
+$s_by_severity_mix = 'by severity and status';
+$s_by_priority_mix = 'by priority and status';
+$s_by_resolution_mix = 'by resolution and status';
+$s_synthesis_link = 'Synthesis';
+$s_status_link = 'Per state';
+$s_priority_link = 'Per priority';
+$s_severity_link = 'Per severity';
+$s_category_link = 'Per category';
+$s_resolution_link = 'Per resolution';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Display selected only';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Choose fields to print';
+$s_printing_options_link = 'Printing Options';
+
+# word and excel export
+$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_date = 'Date of bugnote';
+$s_bugnote_description = 'Bugnote description';
+
+$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC]            = '오류: An error occurred during this action.  You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 벌레 리포트해주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+
+$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
+$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
+
+# General Strings
+$s_go_back = '뒤로';
+$s_proceed = '계속 진행';
+
+$s_switch = '이동';
+$s_logged_in_as = '로그인한 ID :';
+
+$s_prefix_for_deleted_users = 'user';
+
+$s_administrator = '관리자';
+
+# Enum Strings
+$s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
+$s_project_status_enum_string     = '10:개발버전,30:배포판,50:안정버전,70:구버전';
+$s_project_view_state_enum_string = '10:공개,50:비공개';
+$s_view_state_enum_string         = '10:public,50:private';
+
+$s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
+$s_severity_enum_string           = '10:눈에 띄는 벌레,20:사소한 벌레,30:문자열 오류,40:기능개선,50:중요하지 않은 벌레,60:중요한 벌레,70:프로그램 크래시,80:프로그램에 큰 장애';
+$s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않은 기능,90:다시 만들수 없음';
+$s_status_enum_string             = '10:새로운 벌레,20:피드백,30:벌레 인정,40:벌레 확인,50:할당된 벌레,80:해결된 벌레,90:폐쇄된 벌레';
+$s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:다시 만들 수 없음,50:수정할수 없음,60:중복,70:벌레 아님,80:중지(suspended),90:수정될수 없음';
+$s_projection_enum_string         = '10:없음,30:트윅,50:사소한 수정,70:새로 작성,90:재 디자인';
+$s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
+
+# Email Strings
+$s_new_account_subject = '당신의 새로운 계정 ';
+$s_new_account_greeting = '벌레 추적시스템에 오신것을 환영합니다. 아래에 당신이 로그인하는데 필요한 몇가지 정보가 있습니다. ' . "\n\n";
+$s_new_account_url = '이 사이트에 로그인 할수 있습니다: ';
+$s_new_account_username = '사용자 ID: ';
+$s_new_account_password = '패스 워드: ';
+$s_new_account_message = '로그인 하신후 암호를 변경하십시요. 암호는 단방향암호화됩니다. 시스템 관리자도 암호를 알수 없습니다. 암호를 분실하게 되면,다시 설정되어야 합니다.' . "\n\n";
+$s_new_account_do_not_reply = '이 메세지에 대한 응답을 하지 마십시요.' . "\n";
+
+$s_reset_request_msg = '암호 초기화에 대한 요청이 있습니다.';
+$s_account_name_msg = '당신의 계정은 ';
+$s_news_password_msg = '당신의 새로운 암호입니다. ';
+
+$s_new_bug_msg = '다음의 새로운 벌레가 추가되었습니다.';
+$s_email_bugnote_msg = '이벌레에 대하여 <b>벌레노트</b>가 추가되었습니다.';
+$s_email_resolved_msg = '아래의 벌레가 <b>해결</b>되었습니다.';
+$s_email_close_msg = '아래의 벌레가 <b>폐쇄</b>되었습니다.';
+$s_email_feedback_msg = '아래의 벌레가 <b>반영</b>되었습니다.';
+$s_email_reopen_msg = '아래의 벌레가 <b>다시 발생</b>되었습니다.';
+$s_email_assigned_msg = '아래의 벌레가 개발자에게 <b>할당</b>되었습니다.';
+$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+
+$s_email_reporter = '보고자';
+$s_email_handler = '조작자';
+$s_email_project = '프로젝트';
+$s_email_bug = '벌레 번호';
+$s_email_category = '구분';
+$s_email_reproducibility = '재발생 가능성';
+$s_email_severity = '심각성';
+$s_email_priority = '우선순위';
+$s_email_status = '상태';
+$s_email_resolution = '처리상태';
+$s_email_duplicate = '중복';
+$s_email_date_submitted = '보고 일자';
+$s_email_last_modified = '최종 갱신';
+$s_email_summary =  '요약';
+$s_email_description = '설명';
+
+# account_delete.php
+$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다....';
+$s_account_removed_msg = '당신의 계정이 삭제되었습니다...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = '계정을 삭제하시기를 원하십니까?';
+$s_delete_account_button = '계정 삭제';
+
+# account_page.php
+$s_manage_profiles_link = '프로파일 관리';
+$s_change_preferences_link = '설정상태 변경';
+$s_edit_account_title = '계정 편집';
+$s_username = '사용자 ID';
+$s_email = '이메일';
+$s_password = '암호';
+$s_confirm_password  = '암호 확인';
+$s_access_level = '접근 레벨';
+$s_update_user_button = '사용자 갱신';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = '기본 계정 설정상태';
+$s_default_project = '기본 프로젝트';
+$s_advanced_report = '상세 보고';
+$s_advanced_view = '자세히 보기';
+$s_advanced_update = '상세한 업데이트';
+$s_refresh_delay = '리플레시 하지 않음 ';
+$s_redirect_delay = '리다이렉트 하지 않음';
+$s_email_on_new = '새로운 벌레 이메일';
+$s_email_on_assigned = '할당(Assign)에 대한 이메일';
+$s_email_on_feedback = '반영(Feedback)에 대한 이메일';
+$s_email_on_resolved = '해결된 벌레에 대한 이메일';
+$s_email_on_closed = '폐쇄시 이메일';
+$s_email_on_reopened = '재발생시 이메일';
+$s_email_on_bugnote_added = '벌레노트 추가시 이메일';
+$s_email_on_status_change = '상태 변경시 이메일';
+$s_email_on_priority_change = '우선순위 변경시 이메일';
+$s_language = '언어';
+$s_update_prefs_button = '설정상태 갱신';
+$s_reset_prefs_button = '설정상태 초기화';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = '설정상태가 초기화되었습니다....';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = '설정상태가 갱신되었습니다...';
+
+# account_profile_add.php
+$s_profile_added_msg = '프로파일 추가...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = '프로파일 삭제...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = '프로파일 편집';
+$s_platform = '플랫폼';
+$s_operating_system = '운영 체제';
+$s_additional_description = '부연 설명';
+$s_update_profile_button = '프로파일 갱신';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = '기본 프로파일 갱신...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = '프로파일 추가';
+$s_add_profile_button = '프로파일 추가';
+$s_edit_or_delete_profiles_title = '프로파일 편집/삭제';
+$s_edit_profile = '프로파일 편집';
+$s_make_default = '디폴트 만들기';
+$s_delete_profile = '프로파일 삭제';
+$s_select_profile = '프로파일 편집';
+$s_submit_button = '확인';
+
+# account_profile_update.php
+$s_profile_updated_msg = '프로파일 갱신....';
+
+# account_update.php
+$s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
+$s_email_updated = 'Email address successfully updated';
+$s_password_updated = 'Password successfully updated';
+
+# bug_assign.php
+$s_bug_assign_msg       = '벌레가 할당되었습니다...';
+
+# bug_close.php
+$s_bug_close_msg       = '벌레가 해결(close)되었습니다...';
+$s_close_immediately   = '지금 폐쇄:';
+
+# bug_close_page.php
+$s_close_bug_title = '벌레 해결';
+
+# bug_delete.php
+$s_bug_deleted_msg = '벌레정보가 삭제되었습니다...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = '이 벌레정보를 삭제하시겠습니까?';
+$s_delete_bug_button = '벌레 삭제';
+
+# bug_monitor.php
+$s_monitor_bug_button = '벌레 감시하기';
+$s_unmonitor_bug_button = '벌레 감시 끝내기';
+
+# bug_file_add.php
+$s_file_upload_msg = '파일이 업로드되었습니다.';
+
+# bug_file_upload_inc.php
+$s_upload_file = '파일 업로드';
+$s_select_file = '파일 선택';
+$s_upload_file_button = '파일 업로드';
+$s_max_file_size = 'Max size';
+
+# bug_reopen.php
+$s_bug_reopened_msg = '벌레가 다시 발생했습니다...';
+$s_reopen_add_bugnote_title = '재발생한 벌레에 대하여 벌레노트에 사유 추가';
+$s_bugnote_add_reopen_button = '재발생한 벌레와 벌레 노트 추가';
+
+# bug_resolve_page.php
+$s_resolve_bug_title = '벌레 해결';
+$s_resolve_bug_button = '벌레 해결';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = '벌레가 해결되었습니다. 아래의 벌레노트를 입력하세요.';
+$s_resolve_add_bugnote_title = '벌레 해결을 위한 벌레노트 사유 추가';
+$s_bugnote_add_resolve_button = '벌레노트 추가';
+
+# bug_reminder_page.php
+$s_from = 'From';
+$s_to = 'To';
+$s_on = 'On';
+$s_sent_you_this_reminder_about = 'sent you this reminder about';
+$s_bug_reminder = 'Send a reminder';
+$s_reminder_sent_to = 'Reminder sent to';
+$s_bug_send_button = 'Send';
+$s_reminder = 'Reminder';
+
+# bug_update.php
+$s_bug_updated_msg = '벌레정보가 갱신되었습니다....';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = '벌레정보로 돌아가기';
+$s_update_simple_link = '정보사항 갱신';
+$s_updating_bug_advanced_title = '벌레 정보 갱신';
+$s_id = '벌레 번호';
+$s_category = '카테고리';
+$s_severity = '중요도(심각성)';
+$s_reproducibility = '재발생 가능성';
+$s_date_submitted = '보고 일자';
+$s_last_update = '최종 갱신';
+$s_reporter = '보고자';
+$s_assigned_to = '벌레 할당';
+$s_priority = '우선 순위';
+$s_resolution = '해결 상태';
+$s_status = '상태';
+$s_duplicate_id = '중복된 벌레 번호';
+$s_os = '운영체제';
+$s_projection = '프로젝션';
+$s_os_version = '버전';
+$s_eta = '처리예정시간';
+$s_product_version = '제품 번호';
+$s_build = '빌드번호';
+$s_votes = '투표수';
+$s_summary = '요약';
+$s_description = '설 명';
+$s_steps_to_reproduce = '재발생 스탭';
+$s_additional = '부가 ';
+$s_information = '정보';
+$s_update_information_button = '정보사항 변경';
+
+# bug_update_page.php
+$s_update_advanced_link = '정보사항 갱신';
+$s_updating_bug_simple_title = '벌레 정보 갱신';
+
+# bug_vote_add.php
+$s_vote_added_msg = '투표수 추가...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = '벌레노트 추가...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = '벌레노트가 삭제되었습니다....';
+$s_bug_notes_title = '벌레 노트';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Edit Bugnote';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = '이 벌레에 첨부된 노트가 없습니다.';
+$s_delete_link = '삭제';
+$s_add_bugnote_title = '벌레노트 추가';
+$s_add_bugnote_button = '벌레노트 추가';
+$s_bugnote_edit_link = '수정';
+$s_close_bug_button = '벌레 폐쇄';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = '벌레노트가 수정되었습니다....';
+$s_edited_on = '수정일자: ';
+
+# index.php
+$s_click_to_login = '로그인';
+
+# login.php
+
+# login_page.php
+$s_login_page_info = '벌레 관리시스템입니다.';
+$s_login_title = '로그인';
+$s_save_login = '로그인 정보 저장';
+$s_choose_project = '프로젝트 선택';
+$s_login_button = '로그인';
+$s_signup_link = '사용자 신규 등록';
+
+# login_select_proj_page.php
+$s_select_project_button = '프로젝트 선택';
+
+# logout_page.php
+$s_logged_out_title = '로그 아웃...';
+$s_redirecting = '...리다이렉팅';
+$s_here = '여기';
+
+# main_page.php
+$s_open_and_assigned_to_me = '나에게 할당된 벌레';
+$s_open_and_reported_to_me = '내가 보고한 벌레';
+$s_newer_news_link = '새로운 뉴스';
+$s_older_news_link = '이전 뉴스';
+$s_archives = '아카이브';
+
+# manage_create_new_user.php
+$s_created_user_part1 = '사용자가 ';
+$s_created_user_part2 = '접근 레벨로 생성되었습니다.';
+
+# manage_create_user_page.php
+$s_create_new_account_title = '새로운 계정 생성';
+$s_verify_password = '암호 검증';
+$s_enabled = '사용가능';
+$s_protected = '계정 보호';
+$s_create_user_button = '사용자 생성';
+
+# manage_page.php
+$s_hide_disabled = 'Disabled 숨기기';
+$s_filter_button = '필터';
+$s_manage_users_link = '사용자 관리';
+$s_manage_projects_link = '프로젝트 관리';
+$s_manage_custom_field_link = 'Manage Custom Fields';
+$s_create_new_account_link = '계정 생성';
+$s_projects_link = '프로젝트';
+$s_documentation_link = '문서';
+$s_new_accounts_title = '새로운 계정';
+$s_1_week_title = '1 주';
+$s_never_logged_in_title = '한번도 로그인하지 않은 사용자';
+$s_prune_accounts = '계정 지우기';
+$s_hide_inactive = '활동하지 않는 사람 숨기기';
+$s_manage_accounts_title = '계정 관리';
+$s_p = 'p';
+$s_date_created = '생성된 일자';
+$s_last_visit = '마지막 로그인';
+$s_edit_user_link = '사용자 편집';
+
+# manage_proj_add.php
+$s_project_added_msg = '프로젝트가 추가되었습니다....';
+
+# manage_proj_category_add.php
+$s_category_added_msg = '카테고리가 추가되었습니다...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = '카테고리가 삭제되었습니다...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = '이 카테고리를 삭제하시겠습니까? 이 카테고리와 관련된 모든 벌레가 삭제될것입니다.';
+$s_delete_category_button = '카테고리 삭제';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = '프로젝트 카테고리 편집';
+$s_update_category_button = '카테고리 갱신';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = '카테고리가 갱신되었습니다....';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = '프로젝트가 삭제되었습니다...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = '이 프로젝트와 관련된 모든 벌레를 삭제하시겠습니까?';
+$s_project_delete_button = '프로젝트 삭제';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = '프로젝트 편집';
+$s_project_name = '프로젝트 이름';
+$s_view_status = '상태 보기';
+$s_public = '공개';
+$s_private = '비공개';
+$s_update_project_button = '프로젝트 갱신';
+$s_delete_project_button = '프로젝트 삭제';
+$s_categories_and_version_title = '카테고리와 버전';
+$s_categories = '카테고리';
+$s_add_category_button = '카테고리 추가';
+$s_versions = '버전';
+$s_add_version_button = '버전 추가';
+$s_edit_link = '편집';
+$s_actions = 'Actions';
+$s_version = '버전/빌드번호';
+$s_timestamp = 'Timestamp';
+$s_update = 'Update';
+
+# manage_proj_menu_page.php
+$s_add_project_title = '프로젝트 추가';
+$s_upload_file_path = '업르드 파일 경로';
+$s_add_project_button = '프로젝트 추가';
+$s_projects_title = '프로젝트';
+$s_name = '이름';
+
+# manage_proj_update.php
+$s_project_updated_msg = '프로젝트가 갱신되었습니다....';
+
+# manage_proj_version_add.php
+$s_version_added_msg = '버전 정보가 추가되었습니다....';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = '버전 정보가 삭제되었습니다....';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = '이 버전을 삭제하시겠습니까? 관련된 모든 벌레정보가 삭제됩니다.';
+$s_delete_version_button = '버전 삭제';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = '프로젝트 버전 편집';
+$s_update_version_button = '버전 갱신';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = '버전정보가 갱신되었습니다...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.';
+$s_account_deleted_msg = '계정이 삭제되었습니다....';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = '한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.';
+$s_prune_accounts_button = 'Prune';
+$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+
+# manage_user_page.php
+$s_edit_user_title = '사용자 편집';
+$s_reset_password_button = '암호 초기화';
+$s_delete_user_button = '사용자 삭제';
+$s_reset_password_msg = '임의로 생성된 암호로 암호를 초기화합니다.';
+$s_reset_password_msg2 = '암호 초기화는 암호를 공백으로 만듭니다.';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = '보호된 계정입니다. 암호를 초기화할수 없습니다.';
+$s_account_reset_msg = '계정 암호 초기화...';
+$s_account_reset_msg2 = '계정 암호가 없는 상태로 초기화합니다...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....';
+$s_manage_user_updated_msg = '계정이 갱신되었습니다...';
+
+# menu_inc.php
+$s_main_link = '첫화면';
+$s_view_bugs_link = '벌레 보기';
+$s_report_bug_link = '벌레 보고하기';
+$s_summary_link = '요약';
+$s_account_link = '계정 관리';
+$s_users_link = '사용자';
+$s_manage_link = '관리';
+$s_edit_news_link = '뉴스 편집';
+$s_docs_link = '문서';
+$s_logout_link = '로그아웃';
+
+# meta_inc.php
+
+# news_add.php
+$s_news_added_msg = '뉴스가 추가됩니다...';
+
+# news_delete.php
+$s_news_deleted_msg = '뉴스 기사 삭제......';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = '이 뉴스 기사를 삭제하시겠습니까?';
+$s_delete_news_item_button = '뉴스 기사 삭제';
+
+# news_edit_page.php
+$s_edit_news_title = '뉴스 편집';
+$s_headline = '헤드라인';
+$s_body = '본문';
+$s_update_news_button = '뉴스 갱신';
+
+# news_menu_page.php
+$s_add_news_title = '뉴스 추가';
+$s_post_to = '포스팅 대상';
+$s_post_news_button = '뉴스 게시';
+$s_edit_or_delete_news_title = '뉴스 편집 또는 삭제';
+$s_edit_post = '뉴스 편집';
+$s_delete_post = '뉴스 삭제';
+$s_select_post = '뉴스 선택';
+
+# news_update.php
+$s_news_updated_msg = '새로운 기사가 갱신되었습니다...';
+
+# news_view_page.php
+$s_back_link = '뒤로';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = '파일이 업로드되었습니다.';
+
+# proj_doc_add_page.php
+$s_upload_file_title = '파일 업로드';
+$s_title = '제목';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = '프로제트 파일 삭제됨';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = '이 파일을 삭제하시겠습니까?';
+
+# proj_doc_edit_page.php
+$s_filename = '파일 이름';
+$s_file_update_button = '파일 갱신';
+$s_file_delete_button = '파일 삭제';
+
+# proj_doc_page.php
+$s_project_documentation_title = '프로젝트 문서화';
+$s_user_documentation = '사용자 문서';
+$s_project_documentation = '프로젝트 문서';
+$s_add_file = '파일 추가';
+
+# proj_doc_update.php
+$s_project_document_updated = '프로젝트가 갱신되었습니다.';
+
+# proj_user_add.php
+$s_project_user_added_msg = '프로젝트에 사용자가 추가되었습니다.';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
+
+# proj_user_menu_page.php
+$s_add_user_title = '프로젝트에 사용자 추가';
+$s_add_user_button = '사용자 추가';
+$s_project_selection_title = '프로젝트 선택';
+$s_remove_link = '삭제';
+
+# proj_user_update.php
+$s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
+
+# report_add.php
+$s_must_enter_category = '카테고리를 선택해야 합니다.';
+$s_must_enter_severity = '중요도를 선택해야 합니다.';
+$s_must_enter_reproducibility = '재발생가능성을 선택해야 합니다.';
+$s_must_enter_summary = '요약된 내용을 입력해야 합니다.';
+$s_must_enter_description = '설명을 입력해야 합니다.';
+$s_report_more_bugs = '또다른 벌레 보고';
+$s_submission_thanks_msg = '벌레 리포팅을 해주셔서 감사합니다.';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = '간단한 보고서';
+$s_enter_report_details_title = '상세 보고내역을 입력하세요';
+$s_required = '필수';
+$s_select_category = '카테고리 선택';
+$s_select_reproducibility = '재발생 가능성 선택';
+$s_select_severity = '중요도(심각성) 선택';
+$s_or_fill_in = 'OR Fill In';
+$s_assign_to = '할당하기';
+$s_additional_information = '추가 정보사항';
+$s_submit_report_button = '보고서 제출';
+$s_check_report_more_bugs = '또다른 벌레 보고 확인';
+
+# report_bug_page.php
+$s_advanced_report_link = '상세 보고';
+$s_report_stay = 'Stay 리포트';
+
+# set_project.php
+$s_selected_project = '현재 프로젝트';
+$s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
+
+# signup.php
+$s_invalid_email = '이메일 주소가 올바릅니까';
+$s_duplicate_username = '중복된 사용자입니다. 다른 이름을 선택하세요';
+$s_account_create_fail = '사용자 계정생성에 실패했습니다.';
+$s_account_added = '새로운 계정이 추가되었습니다.';
+$s_password_emailed_msg = '암호가 메일로 전송될 것입니다.';
+$s_no_reponse_msg = '만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.';
+
+# signup_page.php
+$s_signup_info = '로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.';
+$s_signup_title = '사인업';
+$s_signup_button = '사인업';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = '사이트 설정 수정';
+$s_save_settings_button = '변경상태 저장';
+
+# site_settings_page.php
+$s_site_settings_title = '사이트 설정';
+$s_system_info_link = '시스템 정보';
+$s_site_settings_link = '사이트 설정';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = '사이트 설정상태가 변경되었습니다.';
+
+# summary_page.php
+$s_summary_title = '요약';
+$s_summary_jpgraph_link = '자세한 요약';
+$s_by_project = 'by project';
+$s_by_status = '상태별';
+$s_by_date = '일자별';
+$s_by_severity = '중요도별';
+$s_by_resolution = '해결상태별';
+$s_by_category = '카테고리별';
+$s_by_priority = '우선순위';
+$s_by_developer = '개발자별';
+$s_by_reporter ='보고자별';
+$s_time_stats = '시간 통계';
+$s_longest_open_bug = '가장 오래 해결되지 않은 벌레';
+$s_longest_open = '가장 오래된 시간';
+$s_average_time = '평균 시간';
+$s_total_time = '전체 시간';
+$s_developer_stats = '개발자 통계';
+$s_reporter_stats = '보고자 통계';
+$s_orct = '(신규/해결/폐쇄/전체)';
+
+# view_all_bug_page.php
+$s_any = '모두';
+$s_show = '갯수';
+$s_changed = '변경된(시간)';
+$s_viewing_bugs_title = '벌레 보기';
+$s_updated = '최종 갱신';
+
+# view_all_inc.php
+$s_none = '없슴';
+$s_search ='검색';
+$s_view_prev_link = '이전';
+$s_view_next_link = '다음';
+$s_prev = 'Prev';
+$s_next = 'Next';
+$s_first = 'First';
+$s_last = 'Last';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = '간략히 보기';
+$s_viewing_bug_advanced_details_title = '벌레 자세히 보기';
+$s_product_build = '제품 빌드번호';
+$s_system_profile = '시스템 설명';
+$s_update_bug_button = '벌레 갱신';
+$s_bug_assign_button    = '내게 할당된 벌레';
+$s_reopen_bug_button = '재발생 벌레';
+$s_attached_files = '첨부 파일';
+$s_publish = 'Publish';
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = '자세히 보기';
+$s_viewing_bug_simple_details_title = '간략히 보기';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_monitoring_user_list = 'User List';
+
+# custom field strings
+$s_add_custom_field_button = 'New Custom Field';
+$s_delete_custom_field_button = 'Delete Custom Field';
+$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
+$s_update_custom_field_button = 'Update Custom Field';
+$s_add_existing_custom_field = 'Add This Existing Custom Field';
+$s_edit_custom_field_title = 'Edit custom field';
+$s_custom_field = 'Field';
+$s_custom_fields_setup = 'Custom Fields';
+$s_custom_field_name = 'Name';
+$s_custom_field_project_count = 'Project Count';
+$s_custom_field_type = 'Type';
+$s_custom_field_possible_values = 'Possible Values';
+$s_custom_field_default_value = 'Default Value';
+$s_custom_field_valid_regexp = 'Regular Expression';
+$s_custom_field_access_level_r = 'Read Access';
+$s_custom_field_access_level_rw = 'Write Access';
+$s_custom_field_length_min = 'Min. Length';
+$s_custom_field_length_max = 'Max. Length';
+$s_custom_field_advanced = 'Advanced';
+$s_custom_field_sequence = 'Sequence';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+
+$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+$s_field_delete_button = 'Delete Field';
+
+$s_hide_status = 'Hide Status';
+$s_filter_closed = "Closed";
+$s_filter_resolved = "Resolved";
+
+$s_attachments = "attachment(s)";
+$s_attachment_alt = "A";
 ?>

@@ -7,857 +7,856 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: jlatour $
-	# $Date: 2003-05-07 15:48:28 $
+	# $Revision: 1.47 $
+	# $Author: prescience $
+	# $Date: 2003-06-25 21:43:14 $
 	#
-	# $Id: strings_romanian.txt,v 1.46 2003-05-07 15:48:28 jlatour Exp $
+	# $Id: strings_romanian.txt,v 1.47 2003-06-25 21:43:14 prescience Exp $
 	###########################################################################
 ?>
 <?php
-	# Charset
-	$s_charset = 'iso-8859-2';
-
-	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
-
-	# new strings:
-	$s_all_projects = 'Toate proiectele';
-	$s_move_bugs = 'Muta bug-urile';
-	$s_operation_successful = 'Operatiune reusita.';
-	$s_date_order = 'Ordonare dupa data';
-	$s_print_all_bug_page_link = 'Tipareste rapoarte';
-	$s_csv_export = 'Export CSV';
-	$s_login_anonymously = 'Conectare anonima';
-	$s_jump_to_bugnotes = 'Salt la comentarii de bug';
-	$s_public_project_msg = 'Acest proiect este PUBLIC.  Toti utilizatorii au acces la acest proiect.';
-	$s_private_project_msg = 'Acest proiect este PRIVAT. Numai administratorii si utilizatorii adaugati explicit pot sa-l acceseze.';
-	$s_access_level_project = 'Nivel de acces la proiect';
-	$s_view_submitted_bug_link = 'Vizualizare bug ';
-	$s_assigned_projects = 'Proiecte alocate';
-	$s_unassigned_projects = 'Proiecte nealocate';
-	$s_print = 'Tiparire';
-	$s_jump = 'Salt';
-	$s_copy_users = 'Copiere utilizatori';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
-
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
-
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
-
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
-
-	$s_create_new_project_link = 'Create New Project';
-
-	$s_login_link = 'Login';
-
-	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
-
-	# improved JPgraphs strings
-	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-	$s_graph_imp_category_title = 'Synthesis graphs by category';
-	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-	$s_by_status_pct = 'by status percentage';
-	$s_by_priority_pct = 'by priority percentage';
-	$s_by_severity_pct = 'by severity percentage';
-	$s_by_category_pct = 'by category percentage';
-	$s_by_resolution_pct = 'by resolution percentage';
-	$s_by_severity_mix = 'by severity and status';
-	$s_by_priority_mix = 'by priority and status';
-	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
-	$s_priority_link = 'Per priority';
-	$s_severity_link = 'Per severity';
-	$s_category_link = 'Per category';
-	$s_resolution_link = 'Per resolution';
-
-	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
-
-	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
-
-	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
-
-	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
-
-	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'EROARE: O eroare a aparut in timpul acestei operatiuni. Probabil ca este important sa raportati eroarea administratorului aplicatiei.';
-	$MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
-	$MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu ati specificat un fisier.';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'EROARE: Acest tip de fisier nu este permis';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'EROARE: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana in momentul in care protectia este ridicata.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-
-	$s_login_error = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
-	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
-
-	# General Strings
-	$s_go_back = 'Intoarcere';
-	$s_proceed = 'Apasa aici pentru a continua';
-
-	$s_switch = 'Schimba';
-	$s_logged_in_as = 'Logat ca';
-
-	$s_prefix_for_deleted_users = 'user';
-
-	$s_administrator = 'administrator';
-
-	# Enum Strings
-	$s_access_levels_enum_string      = '10:spectator,25:reporter,40:modificator,55:dezvoltator,70:manager,90:administrator';
-	$s_project_status_enum_string     = '10:dezvoltare,30:release,50:stabila,70:invechita';
-	$s_project_view_state_enum_string = '10:public,50:privat';
-	$s_view_state_enum_string         = '10:public,50:private';
-
-	$s_priority_enum_string           = '10:fara,20:scazuta,30:normala,40:mare,50:urgenta,60:imediata';
-	$s_severity_enum_string           = '10:noutate,20:trivial,30:text,40:optimizare,50:minor,60:major,70:fatal,80:blocant';
-	$s_reproducibility_enum_string    = '10:totdeauna,30:uneori,50:aleator,70:nu am incercat,90:nu am reusit sa duplic,100:N/A';
-	$s_status_enum_string             = '10:nou,20:feedback,30:vazut,40:confirmat,50:asignat,80:rezolvat,90:inchis';
-	$s_resolution_enum_string         = '10:deschis,20:ok,30:redeschis,40:imposibil de duplicat,50:nu se poate rezolva,60:duplicat,70:nu este bug,80:suspendat,90:nu se va corecta';
-	$s_projection_enum_string         = '10:fara,30:optimizare,50:minor,70:major,90:redesign';
-	$s_eta_enum_string                = '10:fara,20:< 1 zi,30:2-3 zile,40:< 1 saptamana,50:< 1 luna,60:> 1 luna';
-
-	# Email Strings
-	$s_new_account_subject = 'Noul dumneavoastra cont';
-	$s_new_account_greeting = 'Bine ati venit pe sistemul de urmarire de buguri. Aceasta este informatia de care aveti nevoie pentru a va autentifica' . "\n\n";
-	$s_new_account_url = 'Va puteti conecta pe site aici: ';
-	$s_new_account_username = 'Utilizator: ';
-	$s_new_account_password = 'Parola: ';
-	$s_new_account_message = 'Dupa conectarea pe site va rugam sa va schimbati parola. De remarcat ca parola este stocata cu criptare one way, deci nu poate fi extrasa. Daca o pierdeti, ea va trebui anulata.' . "\n\n";
-	$s_new_account_do_not_reply = 'Va rugam sa nu raspundeti la acest mesaj.' . "\n";
-
-	$s_reset_request_msg = 'Ati cerut ca parola sa fie anulata';
-	$s_account_name_msg = 'Numele de cont este';
-	$s_news_password_msg = 'Noua parola este';
-
-	$s_new_bug_msg = 'Acest bug NOU a fost ADAUGAT.';
-	$s_email_bugnote_msg = 'Un COMENTARIU a fost adaugat acestui bug.';
-	$s_email_resolved_msg = 'Acest bug a fost REZOLVAT.';
-	$s_email_close_msg = 'Acest bug a fost INCHIS.';
-	$s_email_feedback_msg = 'Acest bug necesita FEEDBACK.';
-	$s_email_reopen_msg = 'Acest bug a fost REDESCHIS.';
-	$s_email_assigned_msg = 'Acest bug a fost ASIGNAT.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
-
-	$s_email_reporter = 'Reporter';
-	$s_email_handler = 'Tratat de';
-	$s_email_project = 'Proiect';
-	$s_email_bug = 'ID bug';
-	$s_email_category = 'Categorie';
-	$s_email_reproducibility = 'Reproductibilitate';
-	$s_email_severity = 'Severitate';
-	$s_email_priority = 'Prioritate';
-	$s_email_status = 'Stare';
-	$s_email_resolution = 'Rezolvare';
-	$s_email_duplicate = 'Duplicat';
-	$s_email_date_submitted = 'Data Creatie';
-	$s_email_last_modified = 'Modificat';
-	$s_email_summary =  'Sumar';
-	$s_email_description = 'Descriere';
-
-	# account_delete.php
-	$s_account_protected_msg = 'Cont protejat. Nu poate fi modificat...';
-	$s_account_removed_msg = 'Contul a fost sters...';
-
-	# account_delete_page.php
-	$s_confirm_delete_msg = 'Sunteti sigur ca doriti sa stergeti contul ?';
-	$s_delete_account_button = 'Stergere cont';
-
-	# account_page.php
-	$s_manage_profiles_link = 'Modificare profile';
-	$s_change_preferences_link = 'Schimbare preferinte';
-	$s_edit_account_title = 'Modificare cont';
-	$s_username = 'Utilizator';
-	$s_email = 'Email';
-	$s_password = 'Parola';
-	$s_confirm_password  = 'Confirma parola';
-	$s_access_level = 'Nivel de acces';
-	$s_update_user_button = 'Modifica';
-
-	# account_prefs_page.php
-	$s_default_account_preferences_title = 'Preferinte implicite';
-	$s_default_project = 'Proiect implicit';
-	$s_advanced_report = 'Raport avansat';
-	$s_advanced_view = 'Vizualizare avansata';
-	$s_advanced_update = 'Modificare avansata';
-	$s_refresh_delay = 'Interval de refresh';
-	$s_redirect_delay = 'Interval de redirectionare';
-	$s_email_on_new = 'Email la nou';
-	$s_email_on_assigned = 'Email la asignat';
-	$s_email_on_feedback = 'Email la feedback';
-	$s_email_on_resolved = 'Email la rezolvat';
-	$s_email_on_closed = 'Email la inchis';
-	$s_email_on_reopened = 'Email la redeschis';
-	$s_email_on_bugnote_added = 'Email la adaugare comentariu';
-	$s_email_on_status_change = 'Email la schimbare de stare';
-	$s_email_on_priority_change = 'Email on schimbare de prioritate';
-	$s_language = 'Limba';
-	$s_update_prefs_button = 'Modificare';
-	$s_reset_prefs_button = 'Reset';
-
-	# account_prefs_reset.php
-	$s_prefs_reset_msg = 'Preferintele au fost resetate...';
-
-	# account_prefs_update.php
-	$s_prefs_updated_msg = 'Preferentele au fost modificate...';
-
-	# account_profile_add.php
-	$s_profile_added_msg = 'Profil adaugat...';
-
-	# account_profile_delete.php
-	$s_profile_deleted_msg = 'Profil sters...';
-
-	# account_profile_edit_page.php
-	$s_edit_profile_title = 'Modifica profil';
-	$s_platform = 'Platforma';
-	$s_operating_system = 'Sistem de operare';
-	$s_version = 'Versiune/Build';
-	$s_additional_description = 'Descriere aditionala';
-	$s_update_profile_button = 'Modifica profilul';
-
-	# account_profile_make_default.php
-	$s_profile_defaulted_msg = 'Profil implicit modificat...';
-
-	# account_profile_manage_page.php
-	$s_add_profile_title = 'Adauga profilul';
-	$s_add_profile_button = 'Adauga profilul';
-	$s_edit_or_delete_profiles_title = 'Modifica sau sterge profile';
-	$s_edit_profile = 'Modifica profilul';
-	$s_make_default = 'Implicit';
-	$s_delete_profile = 'Sterge profilul';
-	$s_select_profile = 'Select profilul';
-	$s_submit_button = 'OK';
-
-	# account_profile_update.php
-	$s_profile_updated_msg = 'Profil modificat...';
-
-	# account_update.php
-	$s_account_updated_msg = 'Contul dumneavoastra a fost modificat cu succes...';
-	$s_email_updated = 'Email address successfully updated';
-	$s_password_updated = 'Password successfully updated';
-
-	# bug_assign.php
-	$s_bug_assign_msg       = 'Bug-ul a fost asignat cu succes...';
-
-	# bug_close.php
-	$s_bug_close_msg       = 'Bug-ul a fost inchis...';
-	$s_close_immediately   = 'Inchide imediat:';
-
-	# bug_close_page.php
-	$s_close_bug_title = 'Close Bug';
-
-	# bug_delete.php
-	$s_bug_deleted_msg = 'Bug-ul a fost sters...';
-
-	# bug_delete_page.php
-	$s_delete_bug_sure_msg = 'Sunteti sigur ca doriti sa stergeti acest bug?';
-	$s_delete_bug_button = 'Sterge bug-ul';
-
-	# bug_monitor.php
-	$s_monitor_bug_button = 'Monitor Bug';
-	$s_unmonitor_bug_button = 'End Monitoring';
-
-	# bug_file_add.php
-	$s_file_upload_msg = 'Incarcare de fisier terminata cu succes.';
-
-	# bug_file_upload_inc.php
-	$s_upload_file = 'Incarca fisier';
-	$s_select_file = 'Selecteaza fisier';
-	$s_upload_file_button = 'Incarca';
-	$s_max_file_size = 'Max size';
-
-	# bug_reopen.php
-	$s_bug_reopened_msg = 'Bug-ul a fost redeschis...';
-	$s_reopen_add_bugnote_title = 'Adaugati motivul redeschiderii';
-	$s_bugnote_add_reopen_button = 'Adauga comentariu si redeschide';
-
-	# bug_resolve_page.php
-	$s_resolve_bug_title = 'Rezolvare bug';
-	$s_resolve_bug_button = 'Rezolvat';
-
-	# bug_resolve_page2.php
-	$s_bug_resolved_msg = 'Bug-ul a fost rezolvat. Adaugati un comentariu...';
-	$s_resolve_add_bugnote_title = 'Adaugati un comentariu explicativ pentru rezolvarea bug-ului';
-	$s_bugnote_add_resolve_button = 'Adauga comentariu';
-
-	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
-
-	# bug_update.php
-	$s_bug_updated_msg = 'Bug-ul a fost modificat cu succes...';
-
-	# bug_update_advanced_page.php
-	$s_back_to_bug_link = 'Inapoi la bug';
-	$s_update_simple_link = 'Modificare simpla';
-	$s_updating_bug_advanced_title = 'Modificarea informatiei de bug';
-	$s_id = 'ID';
-	$s_category = 'Categorie';
-	$s_severity = 'Severitare';
-	$s_reproducibility = 'Reproductibilitate';
-	$s_date_submitted = 'Data creare';
-	$s_last_update = 'Modificat la';
-	$s_reporter = 'Reporter';
-	$s_assigned_to = 'Asignat';
-	$s_priority = 'Prioritate';
-	$s_resolution = 'Rezolvare';
-	$s_status = 'Stare';
-	$s_duplicate_id = 'ID duplicat';
-	$s_os = 'OS';
-	$s_projection = 'Estimare';
-	$s_os_version = 'Versiune';
-	$s_eta = 'ETA';
-	$s_product_version = 'Versiune produs';
-	$s_build = 'Build';
-	$s_votes = 'Voturi';
-	$s_summary = 'Sumar';
-	$s_description = 'Descriere';
-	$s_steps_to_reproduce = 'Pasi de reprodus';
-	$s_additional = 'Aditional';
-	$s_information = 'Informatie';
-	$s_update_information_button = 'Modifica informatia';
-
-	# bug_update_page.php
-	$s_update_advanced_link = 'Modificare avansata';
-	$s_updating_bug_simple_title = 'Modificarea informatiei bug-ului';
-
-	# bug_vote_add.php
-	$s_vote_added_msg = 'Votul a fost adaugat...';
-
-	# bugnote_add.php
-	$s_bugnote_added_msg = 'Comentariu adaugat...';
-
-	# bugnote_delete.php
-	$s_bugnote_deleted_msg = 'Comentariul a fost sters cu succes...';
-	$s_bug_notes_title = 'Comentarii';
-
-	# bugnote_edit_page.php
-	$s_edit_bugnote_title = 'Modifica comentarii';
-
-	# bugnote_inc.php
-	$s_no_bugnotes_msg = 'Nu exista comentarii atasate acestui bug.';
-	$s_delete_link = 'Sterge';
-	$s_add_bugnote_title = 'Adauga comentariu';
-	$s_add_bugnote_button = 'Adauga';
-	$s_bugnote_edit_link = 'Modifica';
-	$s_close_bug_button = 'Inchide bug-ul';
-
-	# bugnote_update.php
-	$s_bugnote_updated_msg = 'Comentariul a fost modificat cu succes...';
-	$s_edited_on = 'modificat la: ';
-
-	# index.php
-	$s_click_to_login = 'Click aici pentru autentificare';
-
-	# login.php
-
-	# login_page.php
-	$s_login_page_info = 'Bine ati venit pe sistemul de urmarire de bug-uri.';
-	$s_login_title = 'Autentificare';
-	$s_save_login = 'Autentificare persistenta';
-	$s_choose_project = 'Alegeti proiectul';
-	$s_login_button = 'Autentificare';
-	$s_signup_link = 'solicitati un cont nou';
-
-	# login_select_proj_page.php
-	$s_select_project_button = 'Alegeti proiectul';
-
-	# logout_page.php
-	$s_logged_out_title = 'Deconectat...';
-	$s_redirecting = '...redirectare';
-	$s_here = 'Aici';
-
-	# main_page.php
-	$s_open_and_assigned_to_me = 'Deschise si asignate mie';
-	$s_open_and_reported_to_me = 'Deschise si raportate de mine';
-	$s_newer_news_link = 'Stirile mai noi';
-	$s_older_news_link = 'Stirile mai vechi';
-	$s_archives = 'Arhive';
-
-	# manage_create_new_user.php
-	$s_created_user_part1 = 'Utilizator creat';
-	$s_created_user_part2 = 'cu un nivel de acces ca si';
-
-	# manage_create_user_page.php
-	$s_create_new_account_title = 'Creeaza un nou cont utilizator';
-	$s_verify_password = 'Verifica parola';
-	$s_enabled = 'Activat';
-	$s_protected = 'Protejat';
-	$s_create_user_button = 'Creeaza cont';
-
-	# manage_page.php
-	$s_hide_disabled = 'Ascunde dezactivati';
-	$s_filter_button = 'Filtru';
-	$s_manage_users_link = 'Gestioneaza conturile';
-	$s_manage_projects_link = 'Gestioneaza proiectele';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
-	$s_create_new_account_link = 'Creeaza cont';
-	$s_projects_link = 'Proiecte';
-	$s_documentation_link = 'Documentatie';
-	$s_new_accounts_title = 'Conturi noi';
-	$s_1_week_title = '1 saptamana';
-	$s_never_logged_in_title = 'Nu s-a(u) conectat pana acum';
-	$s_prune_accounts = 'Distruge conturile';
-	$s_hide_inactive = 'Ascunde inactivi';
-	$s_manage_accounts_title = 'Gestionare conturi utilizator';
-	$s_p = 'p';
-	$s_date_created = 'Data creatiei';
-	$s_last_visit = 'Ultima conectare';
-	$s_edit_user_link = 'Modifica utilizator';
-
-	# manage_proj_add.php
-	$s_project_added_msg = 'Proiectul a fost adaugat cu succes...';
-
-	# manage_proj_category_add.php
-	$s_category_added_msg = 'Categorie adaugata cu succes...';
-
-	# manage_proj_category_delete.php
-	$s_category_deleted_msg = 'Categorie stearsa cu succes...';
-
-	# manage_proj_category_delete_page.php
-	$s_category_delete_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti categoria ? Toate bug-urile asociate vor fi sterse.';
-	$s_delete_category_button = 'Sterge categoria';
-
-	# manage_proj_category_edit_page.php
-	$s_edit_project_category_title = 'Modificarea categoriei unui proiect';
-	$s_update_category_button = 'Modificare categorie';
-
-	# manage_proj_category_update.php
-	$s_category_updated_msg = 'Categoria a fost modificata cu succes...';
-
-	# manage_proj_delete.php
-	$s_project_deleted_msg = 'Proiect sters cu succes...';
-
-	# manage_proj_delete_page.php
-	$s_project_delete_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest proiect si toate bug-urile asociate ? ';
-	$s_project_delete_button = 'Sterge proiectul';
-
-	# manage_proj_edit_page.php
-	$s_edit_project_title = 'Modificare proiect';
-	$s_project_name = 'Nume proiect';
-	$s_view_status = 'Status';
-	$s_public = 'public';
-	$s_private = 'privat';
-	$s_update_project_button = 'Actualizeaza proiectul';
-	$s_delete_project_button = 'Sterge proiectul';
-	$s_categories_and_version_title = 'Categorii si versiuni';
-	$s_categories = 'Categorii';
-	$s_add_category_button = 'Adauga o categorie';
-	$s_versions = 'Versiuni';
-	$s_add_version_button = 'Adauga o versiune';
-	$s_edit_link = 'modifica';
-	$s_actions = 'Actions';
-	$s_version = 'Versiune/Build';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
-
-	# manage_proj_menu_page.php
-	$s_add_project_title = 'Adauga proiect';
-	$s_upload_file_path = 'Calea spre directorul de incarcare fisiere';
-	$s_add_project_button = 'Adauga proiectul';
-	$s_projects_title = 'Proiecte';
-	$s_name = 'Nume';
-
-	# manage_proj_update.php
-	$s_project_updated_msg = 'Proiectul a fost modificat cu succes...';
-
-	# manage_proj_version_add.php
-	$s_version_added_msg = 'Versiune adaugata cu succes...';
-
-	# manage_proj_version_delete.php
-	$s_version_deleted_msg = 'Versiunea a fost stearsa cu succes...';
-
-	# manage_proj_version_delete_page.php
-	$s_version_delete_sure = 'Sunteti sigur(a) ca doriti sa stergeti aceasta versiune ? Toate bug-urile asociate vor fi sterse.';
-	$s_delete_version_button = 'Sterge versiunea';
-
-	# manage_proj_version_edit_page.php
-	$s_edit_project_version_title = 'Modifica versiunea proiectului';
-	$s_update_version_button = 'Modifica versiunea';
-
-	# manage_proj_version_update.php
-	$s_version_updated_msg = 'Versiunea a fost modificata cu succes...';
-
-	# manage_user_delete.php
-	$s_account_delete_protected_msg = 'Cont protejat. Nu se poate sterge acest cont.';
-	$s_account_deleted_msg = 'Cont sters...';
-
-	# manage_user_delete_page.php
-	$s_delete_account_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest cont?';
-
-	# manage_user_prune.php
-	$s_accounts_pruned_msg = 'Toate conturile care nu au inregistrat conectari de la creare si care sunt mai vechi de o saptamana au fost sterse.';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
-
-	# manage_user_page.php
-	$s_edit_user_title = 'Modificare cont utilizator';
-	$s_reset_password_button = 'Reset parola';
-	$s_delete_user_button = 'Sterge utilizator';
-	$s_reset_password_msg = 'Resetarea parolei face parola vida.';
-	$s_reset_password_msg2 = 'Reset Password sets the password to be blank.';
-
-	# manage_user_reset.php
-	$s_account_reset_protected_msg = 'Cont protejat. Parola nu poate fi resetata.';
-	$s_account_reset_msg = 'Parola a fost resetata...';
-	$s_account_reset_msg2 = 'Noua parola este vida...';
-
-	# manage_user_update.php
-	$s_manage_user_protected_msg = 'Cont protejat. Nivelul de acces si starea de activare sunt protejate. In afara de acestea, contul a fost modificat...';
-	$s_manage_user_updated_msg = 'Cont modificat cu succes...';
-
-	# menu_inc.php
-	$s_main_link = 'Tablou de bord';
-	$s_view_bugs_link = 'Lista de bug-uri';
-	$s_report_bug_link = 'Semnalare bug';
-	$s_summary_link = 'Sumar';
-	$s_account_link = 'Cont';
-	$s_users_link = 'Utilizatori';
-	$s_manage_link = 'Gestiune';
-	$s_edit_news_link = 'Modifica stirile';
-	$s_docs_link = 'Documentatie';
-	$s_logout_link = 'Deconectare';
-
-	# meta_inc.php
-
-	# news_add.php
-	$s_news_added_msg = 'Stire noua adaugata...';
-
-	# news_delete.php
-	$s_news_deleted_msg = 'Stire stearsa...';
-
-	# news_delete_page.php
-	$s_delete_news_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti aceasta stire ?';
-	$s_delete_news_item_button = 'Sterge stirea';
-
-	# news_edit_page.php
-	$s_edit_news_title = 'Modificare de stire';
-	$s_headline = 'Titlu';
-	$s_body = 'Corp';
-	$s_update_news_button = 'Modifica stirea';
-
-	# news_menu_page.php
-	$s_add_news_title = 'Adaugare de stire';
-	$s_post_to = 'Publica la';
-	$s_post_news_button = 'Publica stirea';
-	$s_edit_or_delete_news_title = 'Modificare sau stergere de stire';
-	$s_edit_post = 'Modifica stires';
-	$s_delete_post = 'Sterge stirea';
-	$s_select_post = 'Selecteaza stirea';
-
-	# news_update.php
-	$s_news_updated_msg = 'Stire modificata...';
-
-	# news_view_page.php
-	$s_back_link = 'Inapoi';
-
-	# proj_doc_add.php
-	$s_file_uploaded_msg = 'Fisier incarcat cu succes';
-
-	# proj_doc_add_page.php
-	$s_upload_file_title = 'Incarca fisier';
-	$s_title = 'Titlu';
-
-	# proj_doc_delete.php
-	$s_project_file_deleted_msg = 'Fisier asociat proiectului sters.';
-
-	# proj_doc_delete_page.php
-	$s_confirm_file_delete_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest fisier ?';
-
-	# proj_doc_edit_page.php
-	$s_filename = 'Nume fisier';
-	$s_file_update_button = 'Modifica fisier';
-	$s_file_delete_button = 'Sterge fisier';
-
-	# proj_doc_page.php
-	$s_project_documentation_title = 'Documentatia proiectului';
-	$s_user_documentation = 'Documentatie utilizator';
-	$s_project_documentation = 'Documentatie de proiect';
-	$s_add_file = 'Adauga fisier';
-
-	# proj_doc_update.php
-	$s_project_document_updated = 'Proiect modificat cu succes';
-
-	# proj_user_add.php
-	$s_project_user_added_msg = 'Utilizator adaugat cu succes proiectului';
-
-	# proj_user_delete.php
-	$s_project_removed_user_msg = 'Utilizator sters din proiect';
-
-	# proj_user_delete_page.php
-	$s_remove_user_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest utilizator ?';
-
-	# proj_user_menu_page.php
-	$s_add_user_title = 'Adauga utilizator la proiect';
-	$s_add_user_button = 'Adauga utilizator';
-	$s_project_selection_title = 'Selectare de proiect';
-	$s_remove_link = 'sterge';
-
-	# proj_user_update.php
-	$s_updated_user_msg = 'Utilizator modificat cu succes';
-
-	# report_add.php
-	$s_must_enter_category = 'Categoria trebuie selectata';
-	$s_must_enter_severity = 'Severitatea trebuie selectata';
-	$s_must_enter_reproducibility = 'Reproductibilitatea trebuie selectata';
-	$s_must_enter_summary = 'Sumarul este obligatoriu';
-	$s_must_enter_description = 'Descrierea este obligatorie';
-	$s_report_more_bugs = 'Semnaleaza si alte bug-uri';
-	$s_submission_thanks_msg = 'Va multumim';
-
-	# report_bug_advanced_page.php
-	$s_simple_report_link = 'Semnalare simpla';
-	$s_enter_report_details_title = 'Introduceti detaliile';
-	$s_required = 'obligatoriu';
-	$s_select_category = 'Categorie';
-	$s_select_reproducibility = 'Reproductibilitate';
-	$s_select_severity = 'Severitate';
-	$s_or_fill_in = 'SAU precizati';
-	$s_assign_to = 'Asigneaza lui';
-	$s_additional_information = 'Informatie aditionala';
-	$s_submit_report_button = 'Semnaleaza';
-	$s_check_report_more_bugs = 'bifati pentru a semnala bug-uri in continuare';
-
-	# report_bug_page.php
-	$s_advanced_report_link = 'Semnalare avansata';
-	$s_report_stay = 'Stationare';
-
-	# set_project.php
-	$s_selected_project = 'Proiect selectat';
-	$s_valid_project_msg = 'Trebuie sa alegeti un proiect valid';
-
-	# signup.php
-	$s_invalid_email = 'este o adresa de e-mail invalida';
-	$s_duplicate_username = 'este un nume de utilizator duplicat. Va rugam sa alegeti altul.';
-	$s_account_create_fail = 'Esuare la creare unui cont utilizator';
-	$s_account_added = 'Contul a fost adaugat cu succes.';
-	$s_password_emailed_msg = 'parola va fi trimisa prin e-mail.';
-	$s_no_reponse_msg = 'Daca nu raspundeti intr-o saptamana contul ar putea fi sters.';
-
-	# signup_page.php
-	$s_signup_info = 'Alageti-va numele de login si precizati o adresa de e-mail valida. O parola generata aleator va fi trimisa pe adresa dumneavoastra.';
-	$s_signup_title = 'Inscriere utilizator';
-	$s_signup_button = 'Inscriere';
-
-	# site_settings_edit_page.php
-	$s_edit_site_settings_title = 'Modificare parametri site';
-	$s_save_settings_button = 'Salveaza';
-
-	# site_settings_page.php
-	$s_site_settings_title = 'Parametri site';
-	$s_system_info_link = 'Informatii de sistem';
-	$s_site_settings_link = 'Parametri';
-
-	# site_settings_update.php
-	$s_site_settings_updated_msg = 'Parametrii de site au fost modificati';
-
-	# summary_page.php
-	$s_summary_title = 'Sumar';
-	$s_summary_jpgraph_link = 'Sumar avansat';
-	$s_by_project = 'by project';
-	$s_by_status = 'dupa stare';
-	$s_by_date = 'by date (days)';
-	$s_by_severity = 'by severity';
-	$s_by_resolution = 'by resolution';
-	$s_by_category = 'by category';
-	$s_by_priority = 'by priority';
-	$s_by_developer = 'by developer';
-	$s_by_reporter ='by reporter';
-	$s_time_stats = 'statistici cronologice pentru bug-uri rezolvate (zile)';
-	$s_longest_open_bug = 'bug-ul deschis pentru cel mai mult timp';
-	$s_longest_open = 'cel mai mult';
-	$s_average_time = 'mediu';
-	$s_total_time = 'total';
-	$s_developer_stats = 'statistici dezvoltator';
-	$s_reporter_stats = 'statistici reporter';
-	$s_orct = '(deschis/rezolvat/inchis/total)';
-
-	# view_all_bug_page.php
-	$s_any = 'orice';
-	$s_show = 'Arata';
-	$s_changed = 'Modificate(ore)';
-	$s_viewing_bugs_title = 'Lista de bug-uri';
-	$s_updated = 'Modificat';
-
-	# view_all_inc.php
-	$s_none = 'nimic';
-	$s_search ='Cauta';
-	$s_view_prev_link = 'Precedent';
-	$s_view_next_link = 'Urmator';
-	$s_prev = 'Prev';
-	$s_next = 'Next';
-	$s_first = 'First';
-	$s_last = 'Last';
-
-	# view_bug_advanced_page.php
-	$s_view_simple_link = 'Vedere simpla';
-	$s_viewing_bug_advanced_details_title = 'Vizualizare de bug cu detalii avansate';
-	$s_product_build = 'Versiune produs';
-	$s_system_profile = 'Descriere sistem';
-	$s_update_bug_button = 'Modifica bug';
-	$s_bug_assign_button    = 'Asigneaza-mi mie';
-	$s_reopen_bug_button = 'Redeschide bug';
-	$s_attached_files = 'Fisiere atasate';
-	$s_publish = 'Publish';
-	$s_cached = 'Cached';
-
-	# view_bug_inc.php
-
-	# view_bug_page.php
-	$s_view_advanced_link = 'Vedere Avansata';
-	$s_viewing_bug_simple_details_title = 'Vizualizare de bug cu detalii simple';
-
-	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
-
-	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
-	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
-
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
-
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
-
-	$s_attachments = "attachment(s)";
-	$s_attachment_alt = "A";
+# Charset
+$s_charset = 'iso-8859-2';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Move';
+$s_actiongroup_menu_assign = 'Assign';
+$s_actiongroup_menu_close = 'Close';
+$s_actiongroup_menu_delete = 'Delete';
+$s_actiongroup_menu_resolve = 'Resolve';
+$s_actiongroup_menu_update_priority = 'Update Priority';
+$s_actiongroup_menu_update_status = 'Update Status';
+
+# new strings:
+$s_all_projects = 'Toate proiectele';
+$s_move_bugs = 'Muta bug-urile';
+$s_operation_successful = 'Operatiune reusita.';
+$s_date_order = 'Ordonare dupa data';
+$s_print_all_bug_page_link = 'Tipareste rapoarte';
+$s_csv_export = 'Export CSV';
+$s_login_anonymously = 'Conectare anonima';
+$s_jump_to_bugnotes = 'Spre notele bugului';
+$s_public_project_msg = 'Acest proiect este PUBLIC.  Toti utilizatorii au acces la proiect.';
+$s_private_project_msg = 'Acest proiect este PRIVAT.  Numai administratorii si utilizatorii adaugati in mod explicit au acces.';
+$s_access_level_project = 'Nivel de acces la proiect';
+$s_view_submitted_bug_link = 'Vezi bug-ul';
+$s_assigned_projects = 'Proiecte alocate';
+$s_unassigned_projects = 'Proiecte nealocate';
+$s_print = 'Tipareste';
+$s_jump = 'Salt';
+$s_copy_users = 'Copiaza utilizatori';
+$s_copy_categories_from = 'Copy Categories From';
+$s_copy_categories_to = 'Copy Categories To';
+$s_bug_history = 'Bug History';
+$s_field = 'Field';
+$s_old_value = 'Old Value';
+$s_new_value = 'New Value';
+$s_date_modified = 'Date Modified';
+$s_bugnote = 'Bugnote';
+$s_change = 'Change';
+$s_bugnote_view_state = 'Bugnote View State';
+$s_bug_monitor = 'Bug Monitored';
+$s_bug_end_monitor = 'Bug End Monitor';
+$s_announcement = 'Announcement';
+$s_stays_on_top = 'Stays on Top';
+$s_delete_bugnote_button = 'Delete Bugnote';
+$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
+$s_bug_relationships = 'Relationships';
+$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+$s_empty_password_button = 'Use Empty Password';
+
+$s_duplicate_of = 'duplicate of %id';
+$s_has_duplicate = 'has duplicate %id';
+$s_related_to = 'related to %id';
+$s_dependant_on = 'dependant on %id';
+$s_blocks = 'blocks %id';
+
+$s_new_bug = 'New Bug';
+$s_bugnote_added = 'Bugnote Added';
+$s_bugnote_edited = 'Bugnote Edited';
+$s_bugnote_deleted = 'Bugnote Deleted';
+$s_summary_updated = 'Summary Updated';
+$s_description_updated = 'Description Updated';
+$s_additional_information_updated = 'Additional Information Updated';
+$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+$s_file_added = 'File Added: ';
+$s_file_deleted = 'File Deleted: ';
+
+$s_make_private = 'Make Private';
+$s_make_public = 'Make Public';
+
+$s_create_new_project_link = 'Create New Project';
+
+$s_login_link = 'Login';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
+$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
+$s_move_bugs_conf_msg = 'Move bugs to';
+$s_assign_bugs_conf_msg = 'Assign bugs to';
+$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
+$s_priority_bugs_conf_msg = 'Choose bugs priority';
+$s_status_bugs_conf_msg = 'Choose bugs status';
+$s_close_group_bugs_button = 'Close Bugs' ;
+$s_delete_group_bugs_button = 'Delete Bugs' ;
+$s_move_group_bugs_button = 'Move Bugs' ;
+$s_assign_group_bugs_button = 'Assign Bugs' ;
+$s_resolve_group_bugs_button = 'Resolve Bugs' ;
+$s_priority_group_bugs_button = 'Update Priority' ;
+$s_status_group_bugs_button = 'Update Status' ;
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+$s_graph_imp_category_title = 'Synthesis graphs by category';
+$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+$s_by_status_pct = 'by status percentage';
+$s_by_priority_pct = 'by priority percentage';
+$s_by_severity_pct = 'by severity percentage';
+$s_by_category_pct = 'by category percentage';
+$s_by_resolution_pct = 'by resolution percentage';
+$s_by_severity_mix = 'by severity and status';
+$s_by_priority_mix = 'by priority and status';
+$s_by_resolution_mix = 'by resolution and status';
+$s_synthesis_link = 'Synthesis';
+$s_status_link = 'Per state';
+$s_priority_link = 'Per priority';
+$s_severity_link = 'Per severity';
+$s_category_link = 'Per category';
+$s_resolution_link = 'Per resolution';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Display selected only';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Choose fields to print';
+$s_printing_options_link = 'Printing Options';
+
+# word and excel export
+$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_date = 'Date of bugnote';
+$s_bugnote_description = 'Bugnote description';
+
+$s_error_no_proceed = 'Please use the 'Back' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'EROARE: O eroare a aparut in timpul aceste actiuni.  Sunteti rugat sa semnalati acest lucru administratorului local.';
+$MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
+$MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu ati specificat un fisier.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: Acest tip de fisier este interzis.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Acest cont este protejat si nu poate fi accesat pana cand protectia nu este anulata.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+
+$s_login_error = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
+$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+
+# General Strings
+$s_go_back = 'Intoarcere';
+$s_proceed = 'Apasa aici pentru a continua';
+
+$s_switch = 'Schimba';
+$s_logged_in_as = 'Logat ca';
+
+$s_prefix_for_deleted_users = 'user';
+
+$s_administrator = 'administrator';
+
+# Enum Strings
+$s_access_levels_enum_string      = '10:spectator,25:reporter,40:modificator,55:dezvoltator,70:manager,90:administrator';
+$s_project_status_enum_string     = '10:dezvoltare,30:release,50:stabila,70:invechita';
+$s_project_view_state_enum_string = '10:public,50:privat';
+$s_view_state_enum_string         = '10:public,50:private';
+
+$s_priority_enum_string           = '10:fara,20:scazuta,30:normala,40:mare,50:urgenta,60:imediata';
+$s_severity_enum_string           = '10:noutate,20:trivial,30:text,40:optimizare,50:minor,60:major,70:fatal,80:blocant';
+$s_reproducibility_enum_string    = '10:totdeauna,30:uneori,50:aleator,70:nu am incercat,90:nu am reusit sa duplic,100:N/A';
+$s_status_enum_string             = '10:nou,20:feedback,30:vazut,40:confirmat,50:asignat,80:rezolvat,90:inchis';
+$s_resolution_enum_string         = '10:deschis,20:ok,30:redeschis,40:imposibil de duplicat,50:nu se poate rezolva,60:duplicat,70:nu este bug,80:suspendat,90:nu se va corecta';
+$s_projection_enum_string         = '10:fara,30:optimizare,50:minor,70:major,90:redesign';
+$s_eta_enum_string                = '10:fara,20:< 1 zi,30:2-3 zile,40:< 1 saptamana,50:< 1 luna,60:> 1 luna';
+
+# Email Strings
+$s_new_account_subject = 'Noul dumneavoastra cont';
+$s_new_account_greeting = "Bine ati venit pe sistemul de urmarire de buguri. Aceasta este informatia de care aveti nevoie pentru a va autentifica\n\n";
+$s_new_account_url = 'Va puteti conecta pe site aici: ';
+$s_new_account_username = 'Utilizator: ';
+$s_new_account_password = 'Parola: ';
+$s_new_account_message = "Dupa conectarea pe site va rugam sa va schimbati parola. De remarcat ca parola este stocata cu criptare one way, deci nu poate fi extrasa. Daca o pierdeti, ea va trebui anulata.\n\n";
+$s_new_account_do_not_reply = "Va rugam sa nu raspundeti la acest mesaj.\n";
+
+$s_reset_request_msg = 'Ati cerut ca parola sa fie anulata';
+$s_account_name_msg = 'Numele de cont este';
+$s_news_password_msg = 'Noua parola este';
+
+$s_new_bug_msg = 'Acest bug NOU a fost ADAUGAT.';
+$s_email_bugnote_msg = 'Un COMENTARIU a fost adaugat acestui bug.';
+$s_email_resolved_msg = 'Acest bug a fost REZOLVAT.';
+$s_email_close_msg = 'Acest bug a fost INCHIS.';
+$s_email_feedback_msg = 'Acest bug necesita FEEDBACK.';
+$s_email_reopen_msg = 'Acest bug a fost REDESCHIS.';
+$s_email_assigned_msg = 'Acest bug a fost ASIGNAT.';
+$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+
+$s_email_reporter = 'Reporter';
+$s_email_handler = 'Tratat de';
+$s_email_project = 'Proiect';
+$s_email_bug = 'ID bug';
+$s_email_category = 'Categorie';
+$s_email_reproducibility = 'Reproductibilitate';
+$s_email_severity = 'Severitate';
+$s_email_priority = 'Prioritate';
+$s_email_status = 'Stare';
+$s_email_resolution = 'Rezolvare';
+$s_email_duplicate = 'Duplicat';
+$s_email_date_submitted = 'Data Creatie';
+$s_email_last_modified = 'Modificat';
+$s_email_summary =  'Sumar';
+$s_email_description = 'Descriere';
+
+# account_delete.php
+$s_account_protected_msg = 'Cont protejat. Nu poate fi modificat...';
+$s_account_removed_msg = 'Contul a fost sters...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Sunteti sigur ca doriti sa stergeti contul ?';
+$s_delete_account_button = 'Stergere cont';
+
+# account_page.php
+$s_manage_profiles_link = 'Modificare profile';
+$s_change_preferences_link = 'Schimbare preferinte';
+$s_edit_account_title = 'Modificare cont';
+$s_username = 'Utilizator';
+$s_email = 'Email';
+$s_password = 'Parola';
+$s_confirm_password  = 'Confirma parola';
+$s_access_level = 'Nivel de acces';
+$s_update_user_button = 'Modifica';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Preferinte implicite';
+$s_default_project = 'Proiect implicit';
+$s_advanced_report = 'Raport avansat';
+$s_advanced_view = 'Vizualizare avansata';
+$s_advanced_update = 'Modificare avansata';
+$s_refresh_delay = 'Interval de refresh';
+$s_redirect_delay = 'Interval de redirectionare';
+$s_email_on_new = 'Email la nou';
+$s_email_on_assigned = 'Email la asignat';
+$s_email_on_feedback = 'Email la feedback';
+$s_email_on_resolved = 'Email la rezolvat';
+$s_email_on_closed = 'Email la inchis';
+$s_email_on_reopened = 'Email la redeschis';
+$s_email_on_bugnote_added = 'Email la adaugare comentariu';
+$s_email_on_status_change = 'Email la schimbare de stare';
+$s_email_on_priority_change = 'Email on schimbare de prioritate';
+$s_language = 'Limba';
+$s_update_prefs_button = 'Modificare';
+$s_reset_prefs_button = 'Reset';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Preferintele au fost resetate...';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Preferentele au fost modificate...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Profil adaugat...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Profil sters...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Modifica profil';
+$s_platform = 'Platforma';
+$s_operating_system = 'Sistem de operare';
+$s_additional_description = 'Descriere aditionala';
+$s_update_profile_button = 'Modifica profilul';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Profil implicit modificat...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Adauga profilul';
+$s_add_profile_button = 'Adauga profilul';
+$s_edit_or_delete_profiles_title = 'Modifica sau sterge profile';
+$s_edit_profile = 'Modifica profilul';
+$s_make_default = 'Implicit';
+$s_delete_profile = 'Sterge profilul';
+$s_select_profile = 'Select profilul';
+$s_submit_button = 'OK';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Profil modificat...';
+
+# account_update.php
+$s_account_updated_msg = 'Contul dumneavoastra a fost modificat cu succes...';
+$s_email_updated = 'Email address successfully updated';
+$s_password_updated = 'Password successfully updated';
+
+# bug_assign.php
+$s_bug_assign_msg       = 'Bug-ul a fost asignat cu succes...';
+
+# bug_close.php
+$s_bug_close_msg       = 'Bug-ul a fost inchis...';
+$s_close_immediately   = 'Inchide imediat:';
+
+# bug_close_page.php
+$s_close_bug_title = 'Close Bug';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Bug-ul a fost sters...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Sunteti sigur ca doriti sa stergeti acest bug?';
+$s_delete_bug_button = 'Sterge bug-ul';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Monitor Bug';
+$s_unmonitor_bug_button = 'End Monitoring';
+
+# bug_file_add.php
+$s_file_upload_msg = 'Incarcare de fisier terminata cu succes.';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'Incarca fisier';
+$s_select_file = 'Selecteaza fisier';
+$s_upload_file_button = 'Incarca';
+$s_max_file_size = 'Max size';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Bug-ul a fost redeschis...';
+$s_reopen_add_bugnote_title = 'Adaugati motivul redeschiderii';
+$s_bugnote_add_reopen_button = 'Adauga comentariu si redeschide';
+
+# bug_resolve_page.php
+$s_resolve_bug_title = 'Rezolvare bug';
+$s_resolve_bug_button = 'Rezolvat';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Bug-ul a fost rezolvat. Adaugati un comentariu...';
+$s_resolve_add_bugnote_title = 'Adaugati un comentariu explicativ pentru rezolvarea bug-ului';
+$s_bugnote_add_resolve_button = 'Adauga comentariu';
+
+# bug_reminder_page.php
+$s_from = 'From';
+$s_to = 'To';
+$s_on = 'On';
+$s_sent_you_this_reminder_about = 'sent you this reminder about';
+$s_bug_reminder = 'Send a reminder';
+$s_reminder_sent_to = 'Reminder sent to';
+$s_bug_send_button = 'Send';
+$s_reminder = 'Reminder';
+
+# bug_update.php
+$s_bug_updated_msg = 'Bug-ul a fost modificat cu succes...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Inapoi la bug';
+$s_update_simple_link = 'Modificare simpla';
+$s_updating_bug_advanced_title = 'Modificarea informatiei de bug';
+$s_id = 'ID';
+$s_category = 'Categorie';
+$s_severity = 'Severitare';
+$s_reproducibility = 'Reproductibilitate';
+$s_date_submitted = 'Data creare';
+$s_last_update = 'Modificat la';
+$s_reporter = 'Reporter';
+$s_assigned_to = 'Asignat';
+$s_priority = 'Prioritate';
+$s_resolution = 'Rezolvare';
+$s_status = 'Stare';
+$s_duplicate_id = 'ID duplicat';
+$s_os = 'OS';
+$s_projection = 'Estimare';
+$s_os_version = 'Versiune';
+$s_eta = 'ETA';
+$s_product_version = 'Versiune produs';
+$s_build = 'Build';
+$s_votes = 'Voturi';
+$s_summary = 'Sumar';
+$s_description = 'Descriere';
+$s_steps_to_reproduce = 'Pasi de reprodus';
+$s_additional = 'Aditional';
+$s_information = 'Informatie';
+$s_update_information_button = 'Modifica informatia';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Modificare avansata';
+$s_updating_bug_simple_title = 'Modificarea informatiei bug-ului';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Votul a fost adaugat...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Comentariu adaugat...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'Comentariul a fost sters cu succes...';
+$s_bug_notes_title = 'Comentarii';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Modifica comentarii';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Nu exista comentarii atasate acestui bug.';
+$s_delete_link = 'Sterge';
+$s_add_bugnote_title = 'Adauga comentariu';
+$s_add_bugnote_button = 'Adauga';
+$s_bugnote_edit_link = 'Modifica';
+$s_close_bug_button = 'Inchide bug-ul';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'Comentariul a fost modificat cu succes...';
+$s_edited_on = 'modificat la: ';
+
+# index.php
+$s_click_to_login = 'Click aici pentru autentificare';
+
+# login.php
+
+# login_page.php
+$s_login_page_info = 'Bine ati venit pe sistemul de urmarire de bug-uri.';
+$s_login_title = 'Autentificare';
+$s_save_login = 'Autentificare persistenta';
+$s_choose_project = 'Alegeti proiectul';
+$s_login_button = 'Autentificare';
+$s_signup_link = 'solicitati un cont nou';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Alegeti proiectul';
+
+# logout_page.php
+$s_logged_out_title = 'Deconectat...';
+$s_redirecting = '...redirectare';
+$s_here = 'Aici';
+
+# main_page.php
+$s_open_and_assigned_to_me = 'Deschise si asignate mie';
+$s_open_and_reported_to_me = 'Deschise si raportate de mine';
+$s_newer_news_link = 'Stirile mai noi';
+$s_older_news_link = 'Stirile mai vechi';
+$s_archives = 'Arhive';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Utilizator creat';
+$s_created_user_part2 = 'cu un nivel de acces ca si';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Creeaza un nou cont utilizator';
+$s_verify_password = 'Verifica parola';
+$s_enabled = 'Activat';
+$s_protected = 'Protejat';
+$s_create_user_button = 'Creeaza cont';
+
+# manage_page.php
+$s_hide_disabled = 'Ascunde dezactivati';
+$s_filter_button = 'Filtru';
+$s_manage_users_link = 'Gestioneaza conturile';
+$s_manage_projects_link = 'Gestioneaza proiectele';
+$s_manage_custom_field_link = 'Manage Custom Fields';
+$s_create_new_account_link = 'Creeaza cont';
+$s_projects_link = 'Proiecte';
+$s_documentation_link = 'Documentatie';
+$s_new_accounts_title = 'Conturi noi';
+$s_1_week_title = '1 saptamana';
+$s_never_logged_in_title = 'Nu s-a(u) conectat pana acum';
+$s_prune_accounts = 'Distruge conturile';
+$s_hide_inactive = 'Ascunde inactivi';
+$s_manage_accounts_title = 'Gestionare conturi utilizator';
+$s_p = 'p';
+$s_date_created = 'Data creatiei';
+$s_last_visit = 'Ultima conectare';
+$s_edit_user_link = 'Modifica utilizator';
+
+# manage_proj_add.php
+$s_project_added_msg = 'Proiectul a fost adaugat cu succes...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'Categorie adaugata cu succes...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'Categorie stearsa cu succes...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti categoria ? Toate bug-urile asociate vor fi sterse.';
+$s_delete_category_button = 'Sterge categoria';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Modificarea categoriei unui proiect';
+$s_update_category_button = 'Modificare categorie';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'Categoria a fost modificata cu succes...';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'Proiect sters cu succes...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest proiect si toate bug-urile asociate ? ';
+$s_project_delete_button = 'Sterge proiectul';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Modificare proiect';
+$s_project_name = 'Nume proiect';
+$s_view_status = 'Status';
+$s_public = 'public';
+$s_private = 'privat';
+$s_update_project_button = 'Actualizeaza proiectul';
+$s_delete_project_button = 'Sterge proiectul';
+$s_categories_and_version_title = 'Categorii si versiuni';
+$s_categories = 'Categorii';
+$s_add_category_button = 'Adauga o categorie';
+$s_versions = 'Versiuni';
+$s_add_version_button = 'Adauga o versiune';
+$s_edit_link = 'modifica';
+$s_actions = 'Actions';
+$s_version = 'Versiune/Build';
+$s_timestamp = 'Timestamp';
+$s_update = 'Update';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Adauga proiect';
+$s_upload_file_path = 'Calea spre directorul de incarcare fisiere';
+$s_add_project_button = 'Adauga proiectul';
+$s_projects_title = 'Proiecte';
+$s_name = 'Nume';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'Proiectul a fost modificat cu succes...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'Versiune adaugata cu succes...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'Versiunea a fost stearsa cu succes...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Sunteti sigur(a) ca doriti sa stergeti aceasta versiune ? Toate bug-urile asociate vor fi sterse.';
+$s_delete_version_button = 'Sterge versiunea';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Modifica versiunea proiectului';
+$s_update_version_button = 'Modifica versiunea';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'Versiunea a fost modificata cu succes...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'Cont protejat. Nu se poate sterge acest cont.';
+$s_account_deleted_msg = 'Cont sters...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest cont?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'Toate conturile care nu au inregistrat conectari de la creare si care sunt mai vechi de o saptamana au fost sterse.';
+$s_prune_accounts_button = 'Prune';
+$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Modificare cont utilizator';
+$s_reset_password_button = 'Reset parola';
+$s_delete_user_button = 'Sterge utilizator';
+$s_reset_password_msg = 'Resetarea parolei face parola vida.';
+$s_reset_password_msg2 = 'Reset Password sets the password to be blank.';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Cont protejat. Parola nu poate fi resetata.';
+$s_account_reset_msg = 'Parola a fost resetata...';
+$s_account_reset_msg2 = 'Noua parola este vida...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'Cont protejat. Nivelul de acces si starea de activare sunt protejate. In afara de acestea, contul a fost modificat...';
+$s_manage_user_updated_msg = 'Cont modificat cu succes...';
+
+# menu_inc.php
+$s_main_link = 'Tablou de bord';
+$s_view_bugs_link = 'Lista de bug-uri';
+$s_report_bug_link = 'Semnalare bug';
+$s_summary_link = 'Sumar';
+$s_account_link = 'Cont';
+$s_users_link = 'Utilizatori';
+$s_manage_link = 'Gestiune';
+$s_edit_news_link = 'Modifica stirile';
+$s_docs_link = 'Documentatie';
+$s_logout_link = 'Deconectare';
+
+# meta_inc.php
+
+# news_add.php
+$s_news_added_msg = 'Stire noua adaugata...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Stire stearsa...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti aceasta stire ?';
+$s_delete_news_item_button = 'Sterge stirea';
+
+# news_edit_page.php
+$s_edit_news_title = 'Modificare de stire';
+$s_headline = 'Titlu';
+$s_body = 'Corp';
+$s_update_news_button = 'Modifica stirea';
+
+# news_menu_page.php
+$s_add_news_title = 'Adaugare de stire';
+$s_post_to = 'Publica la';
+$s_post_news_button = 'Publica stirea';
+$s_edit_or_delete_news_title = 'Modificare sau stergere de stire';
+$s_edit_post = 'Modifica stires';
+$s_delete_post = 'Sterge stirea';
+$s_select_post = 'Selecteaza stirea';
+
+# news_update.php
+$s_news_updated_msg = 'Stire modificata...';
+
+# news_view_page.php
+$s_back_link = 'Inapoi';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'Fisier incarcat cu succes';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'Incarca fisier';
+$s_title = 'Titlu';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'Fisier asociat proiectului sters.';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest fisier ?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Nume fisier';
+$s_file_update_button = 'Modifica fisier';
+$s_file_delete_button = 'Sterge fisier';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Documentatia proiectului';
+$s_user_documentation = 'Documentatie utilizator';
+$s_project_documentation = 'Documentatie de proiect';
+$s_add_file = 'Adauga fisier';
+
+# proj_doc_update.php
+$s_project_document_updated = 'Proiect modificat cu succes';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'Utilizator adaugat cu succes proiectului';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'Utilizator sters din proiect';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest utilizator ?';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Adauga utilizator la proiect';
+$s_add_user_button = 'Adauga utilizator';
+$s_project_selection_title = 'Selectare de proiect';
+$s_remove_link = 'sterge';
+
+# proj_user_update.php
+$s_updated_user_msg = 'Utilizator modificat cu succes';
+
+# report_add.php
+$s_must_enter_category = 'Categoria trebuie selectata';
+$s_must_enter_severity = 'Severitatea trebuie selectata';
+$s_must_enter_reproducibility = 'Reproductibilitatea trebuie selectata';
+$s_must_enter_summary = 'Sumarul este obligatoriu';
+$s_must_enter_description = 'Descrierea este obligatorie';
+$s_report_more_bugs = 'Semnaleaza si alte bug-uri';
+$s_submission_thanks_msg = 'Va multumim';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Semnalare simpla';
+$s_enter_report_details_title = 'Introduceti detaliile';
+$s_required = 'obligatoriu';
+$s_select_category = 'Categorie';
+$s_select_reproducibility = 'Reproductibilitate';
+$s_select_severity = 'Severitate';
+$s_or_fill_in = 'SAU precizati';
+$s_assign_to = 'Asigneaza lui';
+$s_additional_information = 'Informatie aditionala';
+$s_submit_report_button = 'Semnaleaza';
+$s_check_report_more_bugs = 'bifati pentru a semnala bug-uri in continuare';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Semnalare avansata';
+$s_report_stay = 'Stationare';
+
+# set_project.php
+$s_selected_project = 'Proiect selectat';
+$s_valid_project_msg = 'Trebuie sa alegeti un proiect valid';
+
+# signup.php
+$s_invalid_email = 'este o adresa de e-mail invalida';
+$s_duplicate_username = 'este un nume de utilizator duplicat. Va rugam sa alegeti altul.';
+$s_account_create_fail = 'Esuare la creare unui cont utilizator';
+$s_account_added = 'Contul a fost adaugat cu succes.';
+$s_password_emailed_msg = 'parola va fi trimisa prin e-mail.';
+$s_no_reponse_msg = 'Daca nu raspundeti intr-o saptamana contul ar putea fi sters.';
+
+# signup_page.php
+$s_signup_info = 'Alageti-va numele de login si precizati o adresa de e-mail valida. O parola generata aleator va fi trimisa pe adresa dumneavoastra.';
+$s_signup_title = 'Inscriere utilizator';
+$s_signup_button = 'Inscriere';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Modificare parametri site';
+$s_save_settings_button = 'Salveaza';
+
+# site_settings_page.php
+$s_site_settings_title = 'Parametri site';
+$s_system_info_link = 'Informatii de sistem';
+$s_site_settings_link = 'Parametri';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Parametrii de site au fost modificati';
+
+# summary_page.php
+$s_summary_title = 'Sumar';
+$s_summary_jpgraph_link = 'Sumar avansat';
+$s_by_project = 'by project';
+$s_by_status = 'dupa stare';
+$s_by_date = 'dupa data (zile)';
+$s_by_severity = 'dupa severitate';
+$s_by_resolution = 'dupa rezolvare';
+$s_by_category = 'dupa categorie';
+$s_by_priority = 'dupa prioritate';
+$s_by_developer = 'dupa dezvoltator';
+$s_by_reporter ='dupa reporter';
+$s_time_stats = 'statistici cronologice pentru bug-uri rezolvate (zile)';
+$s_longest_open_bug = 'bug-ul deschis pentru cel mai mult timp';
+$s_longest_open = 'cel mai mult';
+$s_average_time = 'mediu';
+$s_total_time = 'total';
+$s_developer_stats = 'statistici dezvoltator';
+$s_reporter_stats = 'statistici reporter';
+$s_orct = '(deschis/rezolvat/inchis/total)';
+
+# view_all_bug_page.php
+$s_any = 'orice';
+$s_show = 'Arata';
+$s_changed = 'Modificate(ore)';
+$s_viewing_bugs_title = 'Lista de bug-uri';
+$s_updated = 'Modificat';
+
+# view_all_inc.php
+$s_none = 'nimic';
+$s_search ='Cauta';
+$s_view_prev_link = 'Precedent';
+$s_view_next_link = 'Urmator';
+$s_prev = 'Prev';
+$s_next = 'Next';
+$s_first = 'First';
+$s_last = 'Last';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Vedere simpla';
+$s_viewing_bug_advanced_details_title = 'Vizualizare de bug cu detalii avansate';
+$s_product_build = 'Versiune produs';
+$s_system_profile = 'Descriere sistem';
+$s_update_bug_button = 'Modifica bug';
+$s_bug_assign_button    = 'Asigneaza-mi mie';
+$s_reopen_bug_button = 'Redeschide bug';
+$s_attached_files = 'Fisiere atasate';
+$s_publish = 'Publish';
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Vedere Avansata';
+$s_viewing_bug_simple_details_title = 'Vizualizare de bug cu detalii simple';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_monitoring_user_list = 'User List';
+
+# custom field strings
+$s_add_custom_field_button = 'New Custom Field';
+$s_delete_custom_field_button = 'Delete Custom Field';
+$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
+$s_update_custom_field_button = 'Update Custom Field';
+$s_add_existing_custom_field = 'Add This Existing Custom Field';
+$s_edit_custom_field_title = 'Edit custom field';
+$s_custom_field = 'Field';
+$s_custom_fields_setup = 'Custom Fields';
+$s_custom_field_name = 'Name';
+$s_custom_field_project_count = 'Project Count';
+$s_custom_field_type = 'Type';
+$s_custom_field_possible_values = 'Possible Values';
+$s_custom_field_default_value = 'Default Value';
+$s_custom_field_valid_regexp = 'Regular Expression';
+$s_custom_field_access_level_r = 'Read Access';
+$s_custom_field_access_level_rw = 'Write Access';
+$s_custom_field_length_min = 'Min. Length';
+$s_custom_field_length_max = 'Max. Length';
+$s_custom_field_advanced = 'Advanced';
+$s_custom_field_sequence = 'Sequence';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+
+$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+$s_field_delete_button = 'Delete Field';
+
+$s_hide_status = 'Hide Status';
+$s_filter_closed = 'Closed';
+$s_filter_resolved = 'Resolved';
+
+$s_attachments = 'attachment(s)';
+$s_attachment_alt = 'A';
 ?>
