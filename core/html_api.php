@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.52 2003-02-18 01:58:29 jfitzell Exp $
+	# $Id: html_api.php,v 1.53 2003-02-18 01:59:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -87,21 +87,21 @@
 	# (1) this is the first text sent by the page
 	function print_html_top() {
 		# @@@ NOTE make this a configurable global.
-		#PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-		PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-		#PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
+		#echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+		#echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
 
-		PRINT '<html>';
+		echo '<html>';
 	}
 	# --------------------
 	# (2) Opens the <HEAD> section
 	function print_head_top() {
-	   PRINT '<head>';
+	   echo '<head>';
 	}
 	# --------------------
 	# (3) Prints the content-type
 	function print_content_type() {
-		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
+		echo '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
 	}
 
 	# --------------------
@@ -123,12 +123,12 @@
 	# --------------------
 	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
 	function print_css( $p_css ) {
-		PRINT '<link rel="stylesheet" type="text/css" href="'.$p_css.'" />';
-		PRINT '<script language="JavaScript" type="text/javascript">';
-		PRINT '<!--';
-		PRINT 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
-		PRINT '//-->';
-		PRINT '</script>';
+		echo '<link rel="stylesheet" type="text/css" href="'.$p_css.'" />';
+		echo '<script language="JavaScript" type="text/javascript">';
+		echo '<!--';
+		echo 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
+		echo '//-->';
+		echo '</script>';
 	}
 	# --------------------
 	# (6) OPTIONAL: for pages that require a redirect
@@ -151,12 +151,12 @@
 	# --------------------
 	# (7) Ends the <HEAD> section
 	function print_head_bottom() {
-		PRINT '</head>';
+		echo '</head>';
 	}
 	# --------------------
 	# (8) Starts the <BODY> of the page
 	function print_body_top() {
-		PRINT '<body>';
+		echo '<body>';
 	}
 	# --------------------
 	# (9) Prints the title that is visible in the main panel of the browser
@@ -210,44 +210,44 @@
 			user_update_last_visit( $t_user_id );
 		}
 
-		PRINT '<br />';
-		PRINT '<hr size="1" />';
+		echo '<br />';
+		echo '<hr size="1" />';
 		if ( ON == $g_show_version ) {
-			PRINT "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
+			echo "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
-		PRINT '<address>Copyright (C) 2000 - 2003</address>';
-		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
+		echo '<address>Copyright (C) 2000 - 2003</address>';
+		echo "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 		if ( ON == $g_show_timer ) {
 			$g_timer->print_times();
 		}
 		if ( ON == $g_show_queries_count ) {
 			$t_count = count( $g_queries_array );
-			PRINT "$t_count total queries executed.<br />";
-			PRINT count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
+			echo "$t_count total queries executed.<br />";
+			echo count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
 			if ( ON == $g_show_queries_list ) {
-				PRINT '<table>';
+				echo '<table>';
 				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
 					if ( in_array( $g_queries_array[$i], $t_shown_queries ) ) {
-						PRINT '<tr><td style="color: red">'. ($i+1) ."</td><td style=\"color: red\">$g_queries_array[$i]</td></tr>";
+						echo '<tr><td style="color: red">'. ($i+1) ."</td><td style=\"color: red\">$g_queries_array[$i]</td></tr>";
 					} else {
 						array_push( $t_shown_queries, $g_queries_array[$i] );
-						PRINT '<tr><td>'. ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
+						echo '<tr><td>'. ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
 					}
 				}
-				PRINT '</table>';
+				echo '</table>';
 			}
 		}
 	}
 	# --------------------
 	# (13) Ends the <BODY> section.
 	function print_body_bottom() {
-		PRINT '</body>';
+		echo '</body>';
 	}
 	# --------------------
 	# (14) The very last text that is sent in a html page.
 	function print_html_bottom() {
-		PRINT '</html>';
+		echo '</html>';
 	}
 	# --------------------
 	###########################################################################
@@ -264,29 +264,29 @@
 		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
 		$t_now = date( $g_complete_date_format );
 
-		PRINT '<table class="hide">';
-		PRINT '<tr>';
-			PRINT '<td class="login-info-left">';
-				PRINT lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
-			PRINT '</td>';
-			PRINT '<td class="login-info-middle">';
-				PRINT "<span class=\"italic\">$t_now</span>";
-			PRINT '</td>';
-			PRINT '<td class="login-info-right">';
-				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
+		echo '<table class="hide">';
+		echo '<tr>';
+			echo '<td class="login-info-left">';
+				echo lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+			echo '</td>';
+			echo '<td class="login-info-middle">';
+				echo "<span class=\"italic\">$t_now</span>";
+			echo '</td>';
+			echo '<td class="login-info-right">';
+				echo '<form method="post" name="form_set_project" action="set_project.php">';
 
 				if ( ON == $g_use_javascript) { // use javascript auto-submit -SC 2002.Jun.21
-					PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+					echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
-					PRINT '<select name="project_id" class="small">';
+					echo '<select name="project_id" class="small">';
 				}
 				print_project_option_list( helper_get_current_project() );
-				PRINT '</select>';
-				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
-				PRINT '</form>';
-			PRINT '</td>';
-		PRINT '</tr>';
-		PRINT '</table>';
+				echo '</select>';
+				echo '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
+				echo '</form>';
+			echo '</td>';
+		echo '</tr>';
+		echo '</table>';
 	}
 
 
@@ -302,20 +302,20 @@
 
 		if ( isset( $g_string_cookie_val ) ) {
 			$t_protected = current_user_get_field( 'protected' );
-			PRINT '<table class="width100" cellspacing="0">';
-			PRINT '<tr>';
-				PRINT '<td class="menu">';
-				PRINT '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
-				PRINT '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
+			echo '<table class="width100" cellspacing="0">';
+			echo '<tr>';
+				echo '<td class="menu">';
+				echo '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
+				echo '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
 				if ( access_has_project_level( REPORTER ) ) {
-					PRINT string_get_bug_report_link() . ' | ';
+					echo string_get_bug_report_link() . ' | ';
 				}
 
 				if ( access_has_project_level( $g_view_summary_threshold ) ) {
-					PRINT '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
+					echo '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
 				}
 
-				PRINT '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
+				echo '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
 
 				if ( access_has_project_level( MANAGER ) ) {
 					if ( access_has_project_level( ADMINISTRATOR ) ) {
@@ -323,32 +323,32 @@
 					} else {
 					  $t_link = 'manage_proj_page.php';
 					}
-					PRINT "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
+					echo "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
 				}
 				if ( access_has_project_level( MANAGER ) ) {
 					# Admin can edit news for All Projects (site-wide)
 					if ( ( "0000000" != $g_project_cookie_val ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
-						PRINT '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
+						echo '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					} else {
-						PRINT '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
+						echo '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					}
 				}
 
 				# only show accounts that are NOT protected
 				if ( OFF == $t_protected ) {
-					PRINT '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
+					echo '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
 				}
 
-				PRINT '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
-				PRINT '</td>';
-				PRINT '<td class="right" style="white-space: nowrap;">';
-					PRINT '<form method="post" action="jump_to_bug.php">';
-					PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
-					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
-					PRINT '</form>';
-				PRINT '</td>';
-			PRINT '</tr>';
-			PRINT '</table>';
+				echo '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
+				echo '</td>';
+				echo '<td class="right" style="white-space: nowrap;">';
+					echo '<form method="post" action="jump_to_bug.php">';
+					echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+					echo '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
+					echo '</form>';
+				echo '</td>';
+			echo '</tr>';
+			echo '</table>';
 		}
 	}
 
@@ -382,18 +382,18 @@
 		$result = db_query( $query );
 		$project_count = db_num_rows( $result );
 
-		PRINT '<table class="width100" cellspacing="0">';
-		PRINT '<tr>';
-			PRINT '<td class="menu">';
-			PRINT '<a href="set_project.php?project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
+		echo '<table class="width100" cellspacing="0">';
+		echo '<tr>';
+			echo '<td class="menu">';
+			echo '<a href="set_project.php?project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
 			for ( $i=0 ; $i < $project_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				PRINT " | <a href=\"set_project.php?project_id=$v_id\">" . string_display( $v_name ) . '</a>';
+				echo " | <a href=\"set_project.php?project_id=$v_id\">" . string_display( $v_name ) . '</a>';
 			}
-			PRINT '</td>';
-		PRINT '</tr>';
-		PRINT '</table>';
+			echo '</td>';
+		echo '</tr>';
+		echo '</table>';
 	}
 
 	### --------------------
@@ -431,12 +431,12 @@
 			case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
 
-		PRINT '<br /><div align="center">';
+		echo '<br /><div align="center">';
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
 			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
-		PRINT '</div>';
+		echo '</div>';
 	}
 	# --------------------
 	# prints the account menu
@@ -489,21 +489,21 @@
 			case $t_documentation_page: $t_documentation_page = ''; break;
 		}
 
-		PRINT '<br /><div align="center">';
+		echo '<br /><div align="center">';
 			print_bracket_link( $t_documentation_page, lang_get( 'system_info_link' ) );
 			print_bracket_link( $g_path.'ChangeLog', 'ChangeLog' );
 			print_bracket_link( $g_path.'README', 'README' );
 			print_bracket_link( $g_path.'INSTALL', 'INSTALL' );
 			print_bracket_link( $g_path.'UPGRADING', 'UPGRADING' );
 			print_bracket_link( $g_path.'CUSTOMIZATION', 'CUSTOMIZATION' );
-		PRINT '</div>';
+		echo '</div>';
 	}
 	# --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page='' ) {
 		global $g_use_jpgraph;
 
-		PRINT '<div align="center">';
+		echo '<div align="center">';
 		print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 
 		if ( $g_use_jpgraph != 0 ) {
@@ -518,16 +518,16 @@
 			print_bracket_link( $t_summary_page, lang_get( 'summary_link' ) );
 			print_bracket_link( $t_summary_jpgraph_page, lang_get( 'summary_jpgraph_link' ) );
 		}
-		PRINT '</div>';
+		echo '</div>';
 	}
 	# --------------------
 	# Print the color legend for the colors
 	function print_status_colors() {
 		global	$g_status_enum_string;
 
-		PRINT '<br />';
-		PRINT '<table class="width100" cellspacing="1">';
-		PRINT '<tr>';
+		echo '<br />';
+		echo '<table class="width100" cellspacing="1">';
+		echo '<tr>';
 		$t_arr  = explode_enum_string( $g_status_enum_string );
 		$enum_count = count( $t_arr );
 		$width = (integer) (100 / $enum_count);
@@ -536,10 +536,10 @@
 			$t_val = get_enum_element( 'status', $t_s[0] );
 
 			$t_color = get_status_color( $t_s[0] );
-			PRINT "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
+			echo "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
 		}
-		PRINT '</tr>';
-		PRINT '</table>';
+		echo '</tr>';
+		echo '</table>';
 	}
 
 	# --------------------
