@@ -21,6 +21,7 @@ Mantis
  * Added HTTP_POST_FILES to core_API.php.
  * Added check for empty bugnotes.
  * Removed view_csv_export_inc.php (unused).
+ * Removed print_user_option_list() (unused).
 
 05.12.2002  -   0.17.2
 

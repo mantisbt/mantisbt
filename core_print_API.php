@@ -106,28 +106,6 @@
 	# Option List Printing API
 	###########################################################################
 	# --------------------
-	function print_user_option_list( $p_user_id ) {
-		global $g_mantis_user_table;
-
-	    $query = "SELECT id, username
-	    		FROM $g_mantis_user_table
-	    		ORDER BY username";
-	    $result = db_query( $query );
-	    $user_count = db_num_rows( $result );
-	    for ($i=0;$i<$user_count;$i++) {
-	    	$row = db_fetch_array( $result );
-	    	$t_user_id   = $row["id"];
-	    	$t_user_name = $row["username"];
-
-	    	if ( $t_user_id == $p_user_id ) {
-				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
-			}
-			else {
-				PRINT "<option value=\"$t_user_id\">".$t_user_name."</option>";
-			}
-		}
-	}
-	# --------------------
 	function print_reporter_option_list( $p_user_id ) {
 		global	$g_mantis_user_table, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_project_cookie_val;
