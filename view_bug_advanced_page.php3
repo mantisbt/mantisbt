@@ -303,13 +303,18 @@
 				extract( $row, EXTR_PREFIX_ALL, "v2" );
 				$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
 				$v2_filesize = round( $v2_filesize / 1024 );
+				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
 				switch ( $g_file_upload_method ) {
-					case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB)";
+					case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
 								break;
 					case DATABASE:
-								PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize KB)";
+								PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize KB) <span class=\"italic\">$v2_date_added</a>";
 								break;
+				}
+
+				if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
+					PRINT " [<a class=\"small-link\" href=\"$g_bug_file_delete?f_id=$f_id&f_file_id=$v2_id\">$s_delete_link</a>]";
 				}
 				if ( $i != ($num_files - 1) ) {
 					PRINT "<br>";

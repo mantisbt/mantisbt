@@ -17,6 +17,7 @@ span				{ font-family: Verdana, Arial, Helvetica; font-size: 10pt; }
 table				{}
 td 					{ font-family: Verdana, Arial, Helvetica; font-size: 10pt; padding: 4px; text-align: left }
 a					{}
+a.small-link		{ font-size: 8pt; }
 span.print			{ font-size: 8pt; }
 
 span.required 		{ font-size: 8pt; color: #aa0000 }

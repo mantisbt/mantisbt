@@ -8,16 +8,17 @@ Mantis
  * Fixed file uploads to report an error when a blank file is uploaded.
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
+ * Modified bug action buttons to be more consistent.
+ * Modified version string to be longer.
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.
  * Added a link to Mantis at the bottom of the pages.
  * Added support for date_order field for version.
+ * Added delete file capability.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Renamed g_store_file_to to g_file_upload_method.
- * Modified bug action buttons to be more consistent.
- * Modified version string to be longer.
 
 12.01.2001  -   0.16.1
 

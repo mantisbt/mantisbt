@@ -308,7 +308,7 @@
 
 	# Upload destination: specify actual location in project settings
 	# DISK or DATABASE
-	$g_file_upload_method   = DATABASE;
+	$g_file_upload_method   = DISK;
 
 	$g_max_file_size = 5000000; # 5 MB
 
@@ -751,7 +751,9 @@
 	$g_file_download                  = $g_path."file_download".$g_php;
 
 	$g_print_all_bug_page             = $g_path."print_all_bug_page".$g_php;
-
-	$g_csv_export_inc                 = $g_path."view_csv_export_inc.php";
 	#----------------------------------
+	#----------------------------------
+	# New files
+	$g_bug_file_delete                = $g_path."bug_file_delete".$g_php;
+	$g_csv_export_inc                 = $g_path."view_csv_export_inc".$g_php;
 ?>
