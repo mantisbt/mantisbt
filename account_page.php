@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.39 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: account_page.php,v 1.40 2003-02-18 02:53:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -82,7 +82,7 @@
 	<!-- Username -->
 	<tr class="row-1">
 		<td class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>:
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
 			<?php echo $u_username ?>
@@ -102,7 +102,7 @@
 	<!-- Username -->
 	<tr class="row-1">
 		<td class="category" width="25%">
-			<?php echo lang_get( 'username' ) ?>:
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
 			<?php echo $u_username ?>
@@ -112,7 +112,7 @@
 	<!-- Password -->
 	<tr class="row-2">
 		<td class="category">
-			<?php echo lang_get( 'password' ) ?>:
+			<?php echo lang_get( 'password' ) ?>
 		</td>
 		<td>
 			<input type="password" size="32" maxlength="32" name="password" />
@@ -122,7 +122,7 @@
 	<!-- Password confirmation -->
 	<tr class="row-2">
 		<td class="category">
-			<?php echo lang_get( 'confirm_password' ) ?>:
+			<?php echo lang_get( 'confirm_password' ) ?>
 		</td>
 		<td>
 			<input type="password" size="32" maxlength="32" name="password_confirm" />
@@ -136,7 +136,7 @@
 	<!-- Email -->
 	<tr class="row-1">
 		<td class="category">
-			<?php echo lang_get( 'email' ) ?>:
+			<?php echo lang_get( 'email' ) ?>
 		</td>
 		<td>
 			<?php echo $u_email ?>
@@ -148,7 +148,7 @@
 	<!-- Email -->
 	<tr class="row-1">
 		<td class="category">
-			<?php echo lang_get( 'email' ) ?>:
+			<?php echo lang_get( 'email' ) ?>
 		</td>
 		<td>
 			<?php print_email_input( 'email', $u_email ) ?>
@@ -160,7 +160,7 @@
 	<!-- Access level -->
 	<tr class="row-2">
 		<td class="category">
-			<?php echo lang_get( 'access_level' ) ?>:
+			<?php echo lang_get( 'access_level' ) ?>
 		</td>
 		<td>
 			<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
@@ -170,7 +170,7 @@
 	<!-- Project access level -->
 	<tr class="row-1">
 		<td class="category">
-			<?php echo lang_get( 'access_level_project' ) ?>:
+			<?php echo lang_get( 'access_level_project' ) ?>
 		</td>
 		<td>
 			<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
@@ -180,7 +180,7 @@
 	<!-- Assigned project list -->
 	<tr class="row-2" valign="top">
 		<td class="category">
-			<?php echo lang_get( 'assigned_projects' ) ?>:
+			<?php echo lang_get( 'assigned_projects' ) ?>
 		</td>
 		<td>
 			<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
