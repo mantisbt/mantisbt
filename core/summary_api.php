@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.29 2004-05-08 23:25:12 narcissus Exp $
+	# $Id: summary_api.php,v 1.30 2004-05-26 02:41:27 int2str Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -228,11 +228,7 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			if ( ($v_handler_id != $t_last_handler) && (-1 != $t_last_handler) ) {
-				$query = "SELECT username
-						FROM $t_mantis_user_table
-						WHERE id=$t_last_handler";
-				$result2 = db_query( $query );
-				$row2 = db_fetch_array( $result2 );
+				$t_user = user_get_name( $t_last_handler );
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_last_handler;
 				if ( 0 < $t_bugs_open ) {
@@ -248,7 +244,7 @@
 					$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
 				}
 
-				summary_helper_print_row( $row2['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -271,11 +267,7 @@
 		}
 
 		if ( 0 < $t_bugs_total ) {
-			$query = "SELECT username
-					FROM $t_mantis_user_table
-					WHERE id=$t_last_handler";
-			$result2 = db_query( $query );
-			$row2 = db_fetch_array( $result2 );
+			$t_user = user_get_name( $t_last_handler );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_last_handler;
 			if ( 0 < $t_bugs_open ) {
@@ -291,7 +283,7 @@
 				$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
 			}
 
-			summary_helper_print_row( $row2['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
@@ -346,9 +338,8 @@
 			}
 
 			if ( 0 < $t_bugs_total ) {
-				$query = "SELECT username
-						FROM $t_mantis_user_table
-						WHERE id=$v_reporter_id";
+				$t_user = user_get_name( $v_reporter_id );
+
 				$result3 = db_query( $query );
 				$row3 = db_fetch_array( $result3 );
 
@@ -366,7 +357,7 @@
 					$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
 				}
 
-				summary_helper_print_row( $row3['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 			}
 		}
 	}
