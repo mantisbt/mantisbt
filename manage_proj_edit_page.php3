@@ -177,16 +177,18 @@
 	<td width="50%">
 		<table width="100%">
 		<?
-			$query = "SELECT version
+			$query = "SELECT version, date_order
 					FROM $g_mantis_project_version_table
 					WHERE project_id='$f_project_id'
-					ORDER BY version";
+					ORDER BY date_order DESC";
 			$result = db_query( $query );
 			$version_count = db_num_rows( $result );
 			for ($i=0;$i<$version_count;$i++) {
 				$row = db_fetch_array( $result );
 				$t_version = $row["version"];
 				$t2_version = urlencode( $t_version );
+				$t_date_order = $row["date_order"];
+				$t2_date_order = urlencode( $t_date_order );
 
 				### alternate row colors
 				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -196,7 +198,7 @@
 				<? echo $t_version ?>
 			</td>
 			<td class="center" width="25%">
-				<? print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version, $s_edit_link ) ?>
+				<? print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
 			</td>
 		</tr>
 		<?	} ### end for loop ?>
@@ -207,14 +209,14 @@
 <form method="post" action="<? echo $g_manage_project_category_add ?>">
 <input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
 	<td align="center" bgcolor="<? echo $g_white_color ?>">
-		<input type="text" name="f_category" size="32" maxlength="32">
+		<input type="text" name="f_category" size="32" maxlength="64">
 		<input type="submit" value="<? echo $s_add_category_button ?>">
 	</td>
 </form>
 <form method="post" action="<? echo $g_manage_project_version_add ?>">
 <input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
 	<td align="center" bgcolor="<? echo $g_white_color ?>">
-		<input type="text" name="f_version" size="32" maxlength="32">
+		<input type="text" name="f_version" size="32" maxlength="64">
 		<input type="submit" value="<? echo $s_add_version_button ?>">
 	</td>
 </form>
