@@ -130,15 +130,12 @@
 	</td>
 </tr>
 <tr class="row-category">
-	<td width="50%">
+	<td width="100%">
 		<?php echo $s_categories ?>
-	</td>
-	<td width="50%">
-		<?php echo $s_versions ?>
 	</td>
 </tr>
 <tr>
-	<td width="50%">
+	<td width="100%">
 		<table width="100%" cellspacing="1">
 		<?php
 			$query = "SELECT category
@@ -155,7 +152,7 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<?php echo $t_bgcolor ?>">
+		<tr bgcolor="<? echo $t_bgcolor ?>">
 			<td width="75%">
 				<?php echo $t_category ?>
 			</td>
@@ -166,7 +163,28 @@
 		<?php 	} # end for loop ?>
 		</table>
 	</td>
-	<td width="50%">
+</tr>
+<tr>
+<form method="post" action="<?php echo $g_manage_project_category_add ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+	<td class="center">
+		<input type="text" name="f_category" size="32" maxlength="64">
+		<input type="submit" value="<?php echo $s_add_category_button ?>">
+	</td>
+</form>
+</tr>
+<tr>
+	<td>
+		<hr>
+	</td>
+</tr>
+<tr class="row-category">
+	<td width="100%">
+		<?php echo $s_versions ?>
+	</td>
+</tr>
+<tr>
+	<td width="100%">
 		<table width="100%">
 		<?php
 			$query = "SELECT version, date_order
@@ -185,9 +203,12 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<?php echo $t_bgcolor ?>">
-			<td width="75%">
+		<tr bgcolor="<? echo $t_bgcolor ?>">
+			<td width="50%">
 				<?php echo $t_version ?>
+			</td>
+			<td class="center" width="25%">
+				<?php echo $t_date_order ?>
 			</td>
 			<td class="center" width="25%">
 				<?php print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
@@ -198,13 +219,6 @@
 	</td>
 </tr>
 <tr>
-<form method="post" action="<?php echo $g_manage_project_category_add ?>">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<td class="center">
-		<input type="text" name="f_category" size="32" maxlength="64">
-		<input type="submit" value="<?php echo $s_add_category_button ?>">
-	</td>
-</form>
 <form method="post" action="<?php echo $g_manage_project_version_add ?>">
 <input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="center">
