@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.36 2005-02-13 21:36:38 jlatour Exp $
+	# $Id: summary_api.php,v 1.37 2005-02-27 23:14:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -535,7 +535,7 @@
 										$p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
 										break;
 					default:
-										$p_cache[ $v_project_id ][ 'open'     ] += $v_count;
+										$p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
 										break;
 				}
 			}
@@ -544,11 +544,12 @@
 		foreach ( $p_projects as $t_project ) {
 			$t_name = str_repeat( "» ", $p_level ) . project_get_name( $t_project );
 
-			$t_pdata = $p_cache[ $t_project ];
+			$t_pdata = isset( $p_cache[ $t_project ] ) ? $p_cache[ $t_project ]
+			             : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
 
-			$t_bugs_open     = $t_pdata['open'];
-			$t_bugs_resolved = $t_pdata['resolved'];
-			$t_bugs_closed   = $t_pdata['closed'];
+			$t_bugs_open     = isset( $t_pdata['open'] ) ? $t_pdata['open'] : 0;
+			$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
+			$t_bugs_closed   = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 			$t_bugs_total    = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 
 			summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
