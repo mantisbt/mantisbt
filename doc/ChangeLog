@@ -12,6 +12,7 @@ Mantis ChangeLog
 - 0004538: [bugtracker] $g_bug_resolved_status_threshold doesn't work correctly with additional status (thraxisp)
 - 0004440: [bugtracker] It should be possible to define an assigned to at "Change Status To" (thraxisp)
 - 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
+- 0004646: [bugtracker] Notes always added as private, if default_bugnote_view_status = VS_PRIVATE (vboctor)
 - 0004576: [administration] Simplify display options for error handler (thraxisp)
 - 0004394: [feature] Add link to remove all users from project (bpfennig)
 - 0002091: [bugtracker] Bugnotes containing urls with the '@' sign in them get mangled (bpfennig)
