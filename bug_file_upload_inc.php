@@ -10,9 +10,11 @@
 	# It POSTs to bug_file_add.php3
 ?>
 <?php # Upload File Form BEGIN ?>
-<?php if ( ( ON == $g_allow_file_upload )&&
+<?php
+	if ( ( ON == $g_allow_file_upload )&&
 		( $v_status < RESOLVED )&&
-		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
+		( access_level_check_greater_or_equal( REPORTER ) ) ) {
+?>
 <p>
 <div align="center">
 <table class="width100" cellspacing="1">
