@@ -159,7 +159,7 @@
 	define( 'ERROR_DB_FIELD_NOT_FOUND',			23 );
 	define( 'ERROR_FTP_CONNECT_ERROR',          24 );
 	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',	25 );
-	define( 'ERROR_PROJECT_NAME_INVALID',		25 );
+	define( 'ERROR_PROJECT_NAME_INVALID',		26 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);
