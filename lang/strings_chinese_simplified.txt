@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.38 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:39 $
+	# $Revision: 1.39 $
+	# $Author: vboctor $
+	# $Date: 2004-06-21 21:22:47 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.38 2004-03-14 20:10:39 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.39 2004-06-21 21:22:47 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -282,7 +282,7 @@ $s_account_protected_msg = "帐号被保护，无法更改设置...";
 $s_account_removed_msg = "你的帐号已经被删除...";
 
 # account_delete_page.php
-$s_confirm_delete_msg = "您确定要.h除你的帐号？";
+$s_confirm_delete_msg = "您确定要删除你的帐号？";
 $s_delete_account_button = "删除帐号";
 
 # account_page.php
@@ -327,7 +327,7 @@ $s_prefs_updated_msg = "个人设置已经更改...";
 $s_profile_added_msg = "个人设置已添加...";
 
 # account_profile_delete.php
-$s_profile_deleted_msg = ".h除个人设置...";
+$s_profile_deleted_msg = "删除个人设置...";
 
 # account_profile_edit_page.php
 $s_edit_profile_title = "编辑个人设置";
@@ -342,10 +342,10 @@ $s_profile_defaulted_msg = "预设Profile更新...";
 # account_profile_manage_page.php
 $s_add_profile_title = "添加个人设置";
 $s_add_profile_button = "添加个人设置";
-$s_edit_or_delete_profiles_title = "编辑或.h除个人设置";
+$s_edit_or_delete_profiles_title = "编辑或删除个人设置";
 $s_edit_profile = "编辑个人设置";
 $s_make_default = "指定预设值";
-$s_delete_profile = ".h除个人设置";
+$s_delete_profile = "删除个人设置";
 $s_select_profile = "选择个人设置";
 $s_submit_button = "提交";
 
@@ -371,8 +371,8 @@ $s_close_bug_title = "关闭Bug";
 $s_bug_deleted_msg = "Bug已经被删除...";
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "你确定要.h除此Bug？";
-$s_delete_bug_button = ".h除Bug";
+$s_delete_bug_sure_msg = "你确定要删除此Bug？";
+$s_delete_bug_button = "删除Bug";
 
 # bug_monitor.php
 $s_monitor_bug_button = "跟踪Bug";
@@ -455,7 +455,7 @@ $s_vote_added_msg = "投票已添加...";
 $s_bugnote_added_msg = "Bug注解已添加...";
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = "Bug注解已.h除...";
+$s_bugnote_deleted_msg = "Bug注解已删除...";
 $s_bug_notes_title = "Bug注解";
 
 # bugnote_edit_page.php
@@ -463,7 +463,7 @@ $s_edit_bugnote_title = "Edit Bugnote";
 
 # bugnote_inc.php
 $s_no_bugnotes_msg = "这个Bug没有注解信息";
-$s_delete_link = ".h除";
+$s_delete_link = "删除";
 $s_add_bugnote_title = "添加Bug注解";
 $s_add_bugnote_button = "添加Bug注解";
 $s_bugnote_edit_link = "编辑";
@@ -540,11 +540,11 @@ $s_project_added_msg = "项目已添加...";
 $s_category_added_msg = "类别已添加...";
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "类别已.h除...";
+$s_category_deleted_msg = "类别已删除...";
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "你确定要.h除此类别? 所有相关联的Bug将会被.h除!!";
-$s_delete_category_button = ".h除类别";
+$s_category_delete_sure_msg = "你确定要删除此类别? 所有相关联的Bug将会被删除!!";
+$s_delete_category_button = "删除类别";
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = "编辑项目 类别";
@@ -554,11 +554,11 @@ $s_update_category_button = "更新类别";
 $s_category_updated_msg = "类别已经成功更新...";
 
 # manage_proj_delete.php
-$s_project_deleted_msg = "项目已经成功.h除...";
+$s_project_deleted_msg = "项目已经成功删除...";
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "你确定要.h除此项目和所有附属的Bug?";
-$s_project_delete_button = ".h除项目";
+$s_project_delete_msg = "你确定要删除此项目和所有附属的Bug?";
+$s_project_delete_button = "删除项目";
 
 # manage_proj_edit_page.php
 $s_edit_project_title = "编辑项目";
@@ -567,7 +567,7 @@ $s_view_status = "检查状态";
 $s_public = "公共的";
 $s_private = "私有的";
 $s_update_project_button = "更新项目";
-$s_delete_project_button = ".h除项目";
+$s_delete_project_button = "删除项目";
 $s_categories_and_version_title = "类别与版本信息";
 $s_categories = "Categories";
 $s_add_category_button = "添加类别";
@@ -593,11 +593,11 @@ $s_project_updated_msg = "项目已经成功更新...";
 $s_version_added_msg = "版本已经成功已添加...";
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "版本已经成功已.h除...";
+$s_version_deleted_msg = "版本已经成功已删除...";
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "你确定要.h除此版本? 所有相关联的Bug将会被.h除!!";
-$s_delete_version_button = ".h除版本";
+$s_version_delete_sure = "你确定要删除此版本? 所有相关联的Bug将会被删除!!";
+$s_delete_version_button = "删除版本";
 
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = "编辑项目 版本";
@@ -607,11 +607,11 @@ $s_update_version_button = "更新版本";
 $s_version_updated_msg = "版本已经成功更新...";
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "帐号受保护，无法.h除此帐号";
-$s_account_deleted_msg = "帐号已.h除...";
+$s_account_delete_protected_msg = "帐号受保护，无法删除此帐号";
+$s_account_deleted_msg = "帐号已删除...";
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "你确定要.h除此一帐号?";
+$s_delete_account_sure_msg = "你确定要删除此一帐号?";
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
@@ -621,7 +621,7 @@ $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that 
 # manage_user_page.php
 $s_edit_user_title = "编辑使用者";
 $s_reset_password_button = "重设密码";
-$s_delete_user_button = ".h除使用者";
+$s_delete_user_button = "删除使用者";
 $s_reset_password_msg = "Reset Password sets the randomly generated password.";
 $s_reset_password_msg2 = "重设密码 sets the password to be blank.";
 $s_show_all_users = 'ALL';
@@ -653,11 +653,11 @@ $s_logout_link = "注销";
 $s_news_added_msg = "新闻项目已添加...";
 
 # news_delete.php
-$s_news_deleted_msg = "已.h除新闻项目...";
+$s_news_deleted_msg = "已删除新闻项目...";
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "你确定要.h除此新闻项目?";
-$s_delete_news_item_button = ".h除新闻项目";
+$s_delete_news_sure_msg = "你确定要删除此新闻项目?";
+$s_delete_news_item_button = "删除新闻项目";
 
 # news_edit_page.php
 $s_edit_news_title = "编辑新闻";
@@ -669,9 +669,9 @@ $s_update_news_button = "更新新闻";
 $s_add_news_title = "添加新闻";
 $s_post_to = "发表到";
 $s_post_news_button = "发表新闻";
-$s_edit_or_delete_news_title = "编辑或.h除新闻";
+$s_edit_or_delete_news_title = "编辑或删除新闻";
 $s_edit_post = "编辑发表";
-$s_delete_post = ".h除发表";
+$s_delete_post = "删除发表";
 $s_select_post = "选择发表";
 
 # news_update.php
