@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.83 2004-09-22 08:59:33 bpfennigschmidt Exp $
+	# $Id: bug_api.php,v 1.84 2004-09-24 08:42:08 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -347,29 +347,8 @@
 		$t_text_id = db_insert_id($t_bug_text_table);
 
 		# check to see if we want to assign this right off
-		$t_submit_status_array = config_get( 'bug_submit_status' );
+		$t_status = config_get( 'bug_submit_status' );
 		
-		if ( true == is_array( $t_submit_status_array ) ) {
-		
-			$t_reporter_access_level = user_get_access_level( $c_reporter_id, $c_project_id );
-			
-			$t_submit_status_access_level = array_keys( $t_submit_status_array );
-			if ( true == in_array( $t_reporter_access_level, $t_submit_status_access_level ) ) {
-				# Submit status defined for this access level
-				$t_status = $t_submit_status_array[$t_reporter_access_level];
-			}
-			else {
-				# No submit status defined for this access level use default status
-				$t_status = config_get( 'bug_submit_default_status' );
-			}
-		}
-		else {
-			# If the user still use the old 'bug_submit_status' config
-			# variable, which it's not an array
-			$t_status = $t_submit_status_array;
-		}
-
-
 		# if not assigned, check if it should auto-assigned.
 		if ( 0 == $c_handler_id ) {
 			# if a default user is associated with the category and we know at this point

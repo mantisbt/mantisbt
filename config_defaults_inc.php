@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.211 2004-09-23 21:22:11 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.212 2004-09-24 08:39:44 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -691,19 +691,7 @@
 	############################
 
 	# Status to assign to the bug when submitted.
-	#
-	# You are able to define a submit status for each access level of the reporter
-	#
-	# $g_bug_submit_status = array( REPORTER => NEW_, UPDATER => ACKNOWLEGDED, DEVELOPER => CONFIRMED );
-	#
-	# If the access level of the reporter is REPORTER the bug status is set to NEW_
-	# If the access level of the reporter is UPDATER the bug status is set to ACKNOWLEGDED
-	# If the access level of the reporter is DEVELOPER the bug status is set to CONFIRMED
-	#
-	# $g_status_submit_default_status set the default status which is used if no status
-	# is defined for the reporters access level or if you need only one submit status
-	$g_bug_submit_status = array();
-	$g_bug_submit_default_status = NEW_;
+	$g_bug_submit_status = NEW_;
 
 	# Status to assign to the bug when assigned.
 	$g_bug_assigned_status = ASSIGNED;
