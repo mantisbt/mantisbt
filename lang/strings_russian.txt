@@ -7,11 +7,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jctrosset $
-	# $Date: 2002-07-04 09:18:35 $
+	# $Date: 2002-07-17 15:53:51 $
 	#
-	# $Id: strings_russian.txt,v 1.32 2002-07-04 09:18:35 jctrosset Exp $
+	# $Id: strings_russian.txt,v 1.33 2002-07-17 15:53:51 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -74,8 +74,6 @@
 	$s_make_private = 'Сделать частным';
 	$s_make_public = 'Сделать общедоступным';
 
-	$s_hide_button = 'Hide Selected';
-
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';
 	$s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти баги ?';
@@ -91,6 +89,18 @@
 	$s_resolve_group_bugs_button = 'Разрешить баги' ;
 	$s_priority_group_bugs_button = 'Обновить приоритет' ;
 	$s_status_group_bugs_button = 'Обновить статус' ;
+
+	#print_all_bug_page.php : display selected bugs
+	$s_hide_button = 'Display selected only';
+
+	# print_all_bug_options.php : printing preferences
+	$s_printing_preferences_title = 'Choose fields to print';
+	$s_printing_options_link = 'Printing Options';
+
+	# word and excel export
+	$s_bugnote_title = 'Bugnote handler' ;
+	$s_bugnote_date = 'Date of bugnote';
+	$s_bugnote_description = 'Bugnote description';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';

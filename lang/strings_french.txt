@@ -11,11 +11,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.32 $
 	# $Author: jctrosset $
-	# $Date: 2002-07-04 09:18:35 $
+	# $Date: 2002-07-17 15:53:49 $
 	#
-	# $Id: strings_french.txt,v 1.31 2002-07-04 09:18:35 jctrosset Exp $
+	# $Id: strings_french.txt,v 1.32 2002-07-17 15:53:49 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,7 +29,7 @@
 	$s_date_order = 'Date Order';
 	$s_print_all_bug_page_link = 'Rapport imprimable';
 	$s_csv_export = 'CSV Export';
-	$s_login_anonymously = 'Se logger anonymememnt';
+	$s_login_anonymously = 'Se logger anonymement';
 	$s_jump_to_bugnotes = 'Aller aux Bugnotes';
 	$s_public_project_msg = 'Ce projet est PUBLIC.  Tous les utilisateurs y ont accès.';
 	$s_private_project_msg = 'Ce projet est PRIVE.  Seuls les administrateurs et les utilisateurs ajoutés manuellement y ont accès';
@@ -78,8 +78,6 @@
 	$s_make_private = 'Rendre Privé';
 	$s_make_public = 'Rendre Public';
 
-	$s_hide_button = 'Cacher sélection';
-
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 	$s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
@@ -116,6 +114,18 @@
 	$s_severity_link = 'Par sévérité';
 	$s_category_link = 'Par catégorie';
 	$s_resolution_link = 'Par résolution';
+
+	#print_all_bug_page.php : display selected bugs
+	$s_hide_button = 'Display selected only';
+
+	# print_all_bug_options.php : printing preferences
+	$s_printing_preferences_title = 'Choose fields to print';
+	$s_printing_options_link = 'Printing Options';
+
+	# word and excel export
+	$s_bugnote_title = 'Bugnote handler' ;
+	$s_bugnote_date = 'Date of bugnote';
+	$s_bugnote_description = 'Bugnote description';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';

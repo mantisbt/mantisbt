@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.57 $
-	# $Author: vboctor $
-	# $Date: 2002-07-04 10:01:12 $
+	# $Revision: 1.58 $
+	# $Author: jctrosset $
+	# $Date: 2002-07-17 15:53:49 $
 	#
-	# $Id: strings_english.txt,v 1.57 2002-07-04 10:01:12 vboctor Exp $
+	# $Id: strings_english.txt,v 1.58 2002-07-17 15:53:49 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -75,8 +75,6 @@
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 	
-	$s_hide_button = 'Hide Selected';
-
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
@@ -113,6 +111,20 @@
 	$s_severity_link = 'Per severity';
 	$s_category_link = 'Per category';
 	$s_resolution_link = 'Per resolution';
+
+	#print_all_bug_page.php : display selected bugs
+	$s_hide_button = 'Display selected only';
+
+	# print_all_bug_options.php : printing preferences
+	$s_printing_preferences_title = 'Choose fields to print';
+	$s_printing_options_link = 'Printing Options';
+
+	# word and excel export
+	$s_bugnote_title = 'Bugnote handler' ;
+	$s_bugnote_date = 'Date of bugnote';
+	$s_bugnote_description = 'Bugnote description';
+
+
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';

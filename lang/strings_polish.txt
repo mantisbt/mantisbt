@@ -7,11 +7,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jctrosset $
-	# $Date: 2002-07-04 09:18:35 $
+	# $Date: 2002-07-17 15:53:51 $
 	#
-	# $Id: strings_polish.txt,v 1.33 2002-07-04 09:18:35 jctrosset Exp $
+	# $Id: strings_polish.txt,v 1.34 2002-07-17 15:53:51 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -74,8 +74,6 @@
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
-	$s_hide_button = 'Hide Selected';
-
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
@@ -113,6 +111,17 @@
 	$s_category_link = 'Per category';
 	$s_resolution_link = 'Per resolution';
 
+	#print_all_bug_page.php : display selected bugs
+	$s_hide_button = 'Display selected only';
+
+	# print_all_bug_options.php : printing preferences
+	$s_printing_preferences_title = 'Choose fields to print';
+	$s_printing_options_link = 'Printing Options';
+
+	# word and excel export
+	$s_bugnote_title = 'Bugnote handler' ;
+	$s_bugnote_date = 'Date of bugnote';
+	$s_bugnote_description = 'Bugnote description';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC] = 'B£¡D: Wyst±pi³ b³±d podczas wykonywanej operacji.  Mo¿esz zg³osciæ ten b³±d Twojemu administratorowi.';
