@@ -38,6 +38,7 @@ Mantis ChangeLog
  * Fix #3175: login fails when saved password is PLAIN and login_method is not PLAIN.
  * Fix #3186: $t_protocol not set right  (PHP 4.3.0/Netscape Enterprise 6.1/Linux installation with Mozilla client).
  * Fix #3218: Version vs. Product version confusing (renamed Version to OS Version in advanced pages - English language).
+ * Fix #3219: Unnecesary DISTINCT SQL function call made the view_all_bugs query fail with older MySQL releases.
  * Fix #3214: Private projects links get replaced by public project links.
  * Fix #3225: Row with the "private" checkbox hasn't got a colspan of 6.
  * Fix #3231: Redirect problem when user clicks on a bug link while not logged in.

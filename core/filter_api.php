@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.12 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: filter_api.php,v 1.13 2003-08-05 16:41:16 beerfrick Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -160,7 +160,7 @@
 		}
 
 		# Get the total number of bugs that meet the criteria.
-		$query = "SELECT COUNT( DISTINCT ( $t_bug_table.id ) ) as count $t_from $t_join $t_where";
+		$query = "SELECT COUNT( $t_bug_table.id ) as count $t_from $t_join $t_where";
 		$result = db_query( $query );
 		$bug_count = db_result( $result );
 
