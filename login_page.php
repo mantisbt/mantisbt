@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.32 2003-08-21 14:31:42 vboctor Exp $
+	# $Id: login_page.php,v 1.33 2004-01-08 14:26:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -112,8 +112,9 @@
 	}
 
 	# Generate a warning if administrator/root is valid.
-	if ( user_get_id_by_name( 'administrator' ) !== false ) {
-		if ( auth_does_password_match( user_get_id_by_name( 'administrator' ), 'root' ) ) {
+	$t_admin_user_id = user_get_id_by_name( 'administrator' );
+	if ( $t_admin_user_id !== false ) {
+		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 			echo '<div class="warning" align="center">';
 			echo '<p><font color="red"><strong>WARNING:</strong> You should disable the default "administrator" account or change its password.</font></p>';
 			echo '</div>';
