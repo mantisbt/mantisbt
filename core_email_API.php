@@ -206,87 +206,59 @@
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		global 	$g_mantis_user_table, $s_new_bug_msg, $g_email_new_address,
+		global 	$g_mantis_user_table, $s_new_bug_msg,
 				$g_project_cookie_val;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_new" );
 		email_bug_info( $p_bug_id, $s_new_bug_msg, $t_bcc );
-
-		if ( !empty($g_email_new_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_new_bug_msg, $g_email_new_address );
-		}
 	}
 	# --------------------
 	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
-		global $s_email_bugnote_msg, $g_email_update_address;
+		global $s_email_bugnote_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_bugnote" );
 		email_bug_info( $p_bug_id, $s_email_bugnote_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_bugnote_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		global $s_email_resolved_msg, $g_email_update_address;
+		global $s_email_resolved_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_resolved" );
 		email_bug_info( $p_bug_id, $s_email_resolved_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		global $s_email_close_msg, $g_email_update_address;
+		global $s_email_close_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_closed" );
 		email_bug_info( $p_bug_id, $s_email_close_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# send notices when a bug is set to FEEDBACK
 	function email_feedback( $p_bug_id ) {
-		global $s_email_feedback_msg, $g_email_update_address;
+		global $s_email_feedback_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_feedback" );
 		email_bug_info( $p_bug_id, $s_email_feedback_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_feedback_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
-		global $s_email_reopen_msg, $g_email_update_address;
+		global $s_email_reopen_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_reopened" );
 		email_bug_info( $p_bug_id, $s_email_reopen_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_reopen_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		global $s_email_assigned_msg, $g_email_update_address;
+		global $s_email_assigned_msg;
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_assigned" );
 		email_bug_info( $p_bug_id, $s_email_assigned_msg, $t_bcc );
-
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info_to_address( $p_bug_id, $s_email_assigned_msg, $g_email_update_address );
-		}
 	}
 	# --------------------
 	# messages are in two parts, the bug info and the bugnotes
@@ -461,20 +433,6 @@
 		$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
 	}
 	# --------------------
-	# Send to only the address
-	function email_bug_info_to_address( $p_bug_id, $p_message, $p_email_address ) {
-		# build subject
-		$p_subject = email_build_subject( $p_bug_id );
-
-		### build message
-		$t_message = $p_message."\n";
-		$t_message .= email_build_bug_message( $p_bug_id );
-		$t_message .= email_build_bugnote_message( $p_bug_id );
-
-		### send mail
-		$res = email_send( $p_email_address, $p_subject, $t_message );
-	}
-	# --------------------
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification,
@@ -555,9 +513,14 @@
 			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
 			$t_headers .= $p_header;
+			#mail( "kenito@300baud.org", "test", "message" );
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {
-				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient";
+				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
+				PRINT htmlspecialchars($t_recipient)."<br>";
+				PRINT htmlspecialchars($t_subject)."<p>";
+				PRINT nl2br(htmlspecialchars($t_headers))."<br>";
+				PRINT nl2br(htmlspecialchars($t_message))."<p>";
 				exit;
 			}
 		}
