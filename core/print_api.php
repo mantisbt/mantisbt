@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.108 2004-12-12 20:33:26 bpfennigschmidt Exp $
+	# $Id: print_api.php,v 1.109 2005-01-25 13:57:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -911,34 +911,34 @@
 	# Link Printing API
 	###########################################################################
 	# --------------------
-	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir ) {
-		if ( $p_sort_field == $p_sort ) {
-			# we toggle between ASC and DESC if the user clicks the same sort order
-			if ( 'ASC' == $p_dir ) {
-				$p_dir = 'DESC';
-			} else {
-				$p_dir = 'ASC';
+	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_print = false ) {
+		if ( $p_print ) {
+			if ( $p_sort_field == $p_sort ) {
+				# We toggle between ASC and DESC if the user clicks the same sort order
+				if ( 'ASC' == $p_dir ) {
+					$p_dir = 'DESC';
+				} else {
+					$p_dir = 'ASC';
+				}
+			} else {                        # Otherwise always start with ASCending
+				$t_dir = 'ASC';
 			}
-		} else {                        # Otherwise always start with ASCending
-			$t_dir = 'ASC';
-		}
 
-		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
-	}
-	# --------------------
-	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
-		if ( $p_sort_field == $p_sort ) {
-			# We toggle between ASC and DESC if the user clicks the same sort order
-			if ( 'ASC' == $p_dir ) {
-				$p_dir = 'DESC';
-			} else {
-				$p_dir = 'ASC';
+			PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
+		} else {
+			if ( $p_sort_field == $p_sort ) {
+				# we toggle between ASC and DESC if the user clicks the same sort order
+				if ( 'ASC' == $p_dir ) {
+					$p_dir = 'DESC';
+				} else {
+					$p_dir = 'ASC';
+				}
+			} else {                        # Otherwise always start with ASCending
+				$t_dir = 'ASC';
 			}
-		} else {                        # Otherwise always start with ASCending
-			$t_dir = 'ASC';
-		}
 
-		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
+			PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
+		}
 	}
 	# --------------------
 	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {

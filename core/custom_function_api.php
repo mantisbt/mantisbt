@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.13 2005-01-25 12:44:13 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.14 2005-01-25 13:57:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -145,10 +145,34 @@
 	# - "custom_xxxx" were xxxx is the name of the custom field that is valid for the
 	#   current project.  In case of "All Projects, the field will be empty where it is
 	#   not applicable.
-	function custom_function_default_get_columns_to_view() {
-		$t_columns = array( 'selection', 'edit', 'priority', 'bug_id', 'sponsorship',
-				'bugnotes_count', 'attachment', 'category', 'severity',
-				'status', 'last_updated', 'summary' );
+	function custom_function_default_get_columns_to_view( $p_print = false ) {
+		$t_columns = array();
+		$t_columns[] = 'selection';
+
+		if ( !$p_print ) {
+			$t_columns[] = 'edit';
+		}
+
+		$t_columns[] = 'priority';
+		$t_columns[] = 'bug_id';
+
+		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
+		if ( ON == $t_enable_sponsorship ) {
+			$t_columns[] = 'sponsorship';
+		}
+
+		$t_columns[] = 'bugnotes_count';
+
+		$t_show_attachments = config_get( 'show_attachment_indicator' );
+		if ( ON == $t_show_attachments ) {
+			$t_columns[] = 'attachment';
+		}
+
+		$t_columns[] = 'category';
+		$t_columns[] = 'severity';
+		$t_columns[] = 'status';
+		$t_columns[] = 'last_updated';
+		$t_columns[] = 'summary';
 
 		return $t_columns;
 	}
@@ -156,7 +180,7 @@
 	# --------------------
 	# Print the title of a column given its name.
 	# $p_column: custom_xxx for custom field xxx, or otherwise field name as in bug table.
-	function custom_function_default_print_column_title( $p_column ) {
+	function custom_function_default_print_column_title( $p_column, $p_print = false ) {
 		if ( strpos( $p_column, 'custom_' ) === 0 ) {
 			$t_custom_field = substr( $p_column, 7 );
 
@@ -181,7 +205,7 @@
 	# see custom_function_default_print_column_title() for rules about column names.
 	# $p_column: name of field to show in the column.
 	# $p_row: the row from the bug table that belongs to the issue that we should print the values for.
-	function custom_function_default_print_column_value( $p_column, $p_issue_row ) {
+	function custom_function_default_print_column_value( $p_column, $p_issue_row, $p_print = false ) {
 		if ( strpos( $p_column, 'custom_' ) === 0 ) {
 			echo '<td>';
 			$t_custom_field = substr( $p_column, 7 );
