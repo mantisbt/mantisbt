@@ -150,7 +150,9 @@ Mantis ChangeLog
  * Fix: when viewing all bugs for all projects you no longer see bugs from disabled projects
  * New config option (create_project_threshold): provide a threshold for users who can create projects
  * New config option (delete_project_threshold): provide a threshold for users who can delete projects
- 
+ * New config option (smtp_username): username to use when connection to an smtp server with phpMailer
+ * New config option (smtp_password): password to use when connection to an smtp server with phpMailer
+
 
 2002.08.23  -  0.17.5
  * Corrected bug_delete.php and bug_delete_page.php, which ignored the $g_allow_bug_delete_access_level setting.
