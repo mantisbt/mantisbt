@@ -16,7 +16,7 @@
 	}
 
 	# Make sure file path has trailing slash
-	if ( $f_file_path[strlen($f_file_path)-1] != '/' ) {
+	if ( $f_file_path && $f_file_path[strlen($f_file_path)-1] != '/' ) {
 		$f_file_path = $f_file_path.'/';
 	}
 
