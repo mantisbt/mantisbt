@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graphviz_api.php,v 1.1 2004-09-25 14:16:08 prichards Exp $
+	# $Id: graphviz_api.php,v 1.2 2004-10-14 17:24:28 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	### GraphViz API ###
@@ -269,6 +269,12 @@
 			if ( 'WIN' == substr( PHP_OS, 0, 3 ) ) {
 				# If we are under Windows, we use the COM interface provided
 				# by WinGraphviz. Thanks Paul!
+				# Issue #4625: Work around WinGraphviz bug that fails with
+				# graphs with zero or one node. It is probably too much to
+				# generate a graphic output just to explain it to the user,
+				# so we just return a null content.
+				if ( count( $this->nodes ) <= 1 )
+					return;
 
 				$t_graphviz = new COM( $this->graphviz_com_module );
 
