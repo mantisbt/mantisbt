@@ -31,7 +31,7 @@
 		print_body_top();
 		print_header( $g_page_title );
 		print_top_page( $g_top_include_page );
-		print_top_menu();
+		print_menu();
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
@@ -201,8 +201,7 @@
 		global 	$g_mantis_user_table,
 				$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format, $g_set_project,
-				$s_switch, $s_logged_in_as, $s_all_projects,
-				$s_projects_title;
+				$s_switch, $s_logged_in_as, $s_all_projects;
 
 		$t_username = get_current_user_field( "username" );
 		$t_now = date( $g_complete_date_format );
@@ -217,7 +216,7 @@
 				PRINT "<span class=\"login-time\">$t_now</span>";
 			PRINT "</td>";
 			PRINT "<td class=\"login-info-right\">";
-				PRINT "$s_projects_title: <select name=f_project_id>";
+				PRINT "<select name=f_project_id>";
 					PRINT "<option value=\"0000000\">$s_all_projects</option>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT "</select>";
@@ -266,60 +265,49 @@
 	# --------------------
 	# print the standard command menu at the top of the pages
 	# also prints the login info, time, and project select form
-	function print_top_menu() {
+	function print_menu() {
+		global	$g_string_cookie_val, $g_project_cookie_val,
 
-		global	$g_string_cookie_val;
+				$g_show_report,
+
+				$g_main_page, $g_view_all_bug_page,
+				$g_report_bug_page, $g_report_bug_advanced_page,
+				$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
+				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
+				$g_proj_user_menu_page, $g_login_select_proj_page,
+
+				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
+				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
+				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
+				$s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
 			print_login_info();
-			print_menu();
-		}
-	}
 
-	# --------------------
-	# print the standard command menu
-	# called from the top_menu and also from the bottom_menu functions
-	function print_menu() {
-
-		global	$g_string_cookie_val, $g_project_cookie_val,
-			$g_show_report,$g_main_page, $g_view_all_bug_page,
-			$g_report_bug_page, $g_report_bug_advanced_page,
-			$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
-			$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
-			$g_proj_user_menu_page, $g_login_select_proj_page,
-
-			$s_main_link, $s_view_bugs_link, $s_report_bug_link,
-			$s_summary_link, $s_account_link, $g_manage_project_menu_page,
-			$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
-			$s_logout_link;
-
-		if ( isset( $g_string_cookie_val ) ) {
-			$t_protected = get_current_user_field( "protected" );
+		    $t_protected = get_current_user_field( "protected" );
 			PRINT "<table class=\"width100\" cellspacing=\"0\">";
 			PRINT "<tr>";
-			PRINT "<td class=\"menu\">";
-			PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
-			PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
-			if ( access_level_check_greater_or_equal( REPORTER ) ) {
-				if ( "0000000" != $g_project_cookie_val ) {
-					$t_report_url = get_report_redirect_url( 1 );
-					PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
-				} else {
-					PRINT "<a href=\"$g_login_select_proj_page\">$s_report_bug_link</a> | ";
+				PRINT "<td class=\"menu\">";
+				PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
+				PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
+				if ( access_level_check_greater_or_equal( REPORTER ) ) {
+					if ( "0000000" != $g_project_cookie_val ) {
+						$t_report_url = get_report_redirect_url( 1 );
+						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+					} else {
+						PRINT "<a href=\"$g_login_select_proj_page?ref=".get_report_redirect_url( 1 )."\">$s_report_bug_link</a> | ";
+					}
 				}
-			}#end if reporter
 
-			PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
-			PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
-			if (( access_level_check_greater_or_equal( MANAGER ) ) ||
-				( absolute_access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
-				if ( "0000000" != $g_project_cookie_val ) {
-					PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
-				} else {
-					PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
+				PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
+				PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
+				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+					if ( "0000000" != $g_project_cookie_val ) {
+						PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
+					} else {
+						PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
+					}
 				}
-			}#end if manager
-
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
 				PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
 			}
@@ -327,24 +315,25 @@
 				PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
 			}
 
-			PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
-			PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
+				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
+				PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
 			PRINT "</td>";
 			PRINT "</tr>";
 			PRINT "</table>";
-		}#if isset($g_string_cookie_val)
+		}
 	}
-
 	# --------------------
-	# bottom menu is printed by this function
-	# basically the same as print_menu except without the login info
+	# this is the same as print_menu except without the login info
 	# this is set by setting $g_show_footer_menu to 1
 	function print_bottom_menu( $p_menu_file="" ) {
-		global	$g_string_cookie_val;
-		if ( isset( $g_string_cookie_val ) ) {
-			PRINT "<BR>"; #small cosmetic change
-			print_menu();
-		}
+		PRINT "<p>";
+		PRINT "<table class=\"menu\" cellspacing=\"0\">";
+		PRINT "<tr>";
+			PRINT "<td class=\"menu\">";
+				include( $p_menu_file );
+			PRINT "</td>";
+		PRINT "</tr>";
+		PRINT "</table>";
 	}
 	# --------------------
 	# prints the manage menu
@@ -426,21 +415,25 @@
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page="" ) {
-		global	$g_documentation_page, $s_system_info_link;
+		global	$g_site_settings_page, $s_site_settings_link,
+				$g_documentation_page, $s_system_info_link;
 
 		$t_documentation_page = $g_documentation_page;
+		$t_site_settings_page = $g_site_settings_page;
 
 		switch ( $p_page ) {
 			case $t_documentation_page: $t_documentation_page = ""; break;
+			case $t_site_settings_page: $t_site_settings_page = ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $t_documentation_page, $s_system_info_link );
-			print_bracket_link( "doc/ChangeLog", "ChangeLog" );
-			print_bracket_link( "doc/README", "README" );
-			print_bracket_link( "doc/INSTALL", "INSTALL" );
-			print_bracket_link( "doc/UPGRADING", "UPGRADING" );
-			print_bracket_link( "doc/CONFIGURATION", "CONFIGURATION" );
+			print_bracket_link( $t_site_settings_page, $s_site_settings_link );
+			print_bracket_link( "ChangeLog", "ChangeLog" );
+			print_bracket_link( "README", "README" );
+			print_bracket_link( "INSTALL", "INSTALL" );
+			print_bracket_link( "UPGRADING", "UPGRADING" );
+			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
 		PRINT "</div>";
 	}
 	# --------------------

@@ -44,6 +44,11 @@
 		}
 	}
 
+	if($ref > "")
+		{
+			$t_redirect_url = $ref;
+		}
+
 	# clear view filter between projects
 	setcookie( $g_view_all_cookie );
 
