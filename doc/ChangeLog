@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2004.xx.xx  -  0.18.1
+2004.02.xx  -  0.18.1
 
  * Fix #2668: Proxy incorrectly presents cached output to other users.
  * Enh #2811: Anonymous mode issues (auto login for anonymous users + other issues).
@@ -20,6 +20,7 @@ Mantis ChangeLog
  * Fix #3501: No output for print_all_bug_page.php when status=closed, and Hide Status Closed is selected.
  * Fix #3506: PHP error if "duplicate id" refers to a bug that does not exist.
  * Fix #3525: Priority field incorrectly shown on Simple Report page.
+ * Fix #3526: Custom field regular expression doesn't prevent invalid bug entry.
  * Fix #3530: Custom fields definitions are not validated.
  * Opt #0000: Added an index on bug_id field in the mantis_bug_file_table.
  * Opt #0000: Removed filtering code redundancy in print report pages (thanks to Lincoln Maskey)

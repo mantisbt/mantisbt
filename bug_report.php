@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.27 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_report.php,v 1.28 2004-02-06 10:05:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -78,6 +78,16 @@
 		}
 	}
 
+	# Validate the custom fields before adding the bug.
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $f_project_id );
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition( $t_id );
+		if ( !custom_field_validate( $t_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+		}
+	}
+
+	# Create the bug
 	$t_bug_id = bug_create( $f_project_id,
 					$t_reporter_id, $f_handler_id,
 					$f_priority,
@@ -99,7 +109,6 @@
 
 
 	# Handle custom field submission
-	$t_related_custom_field_ids = custom_field_get_linked_ids( $f_project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $t_bug_id ) ) {

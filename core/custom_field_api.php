@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.22 2004-02-03 13:06:14 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.23 2004-02-06 10:05:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -654,6 +654,49 @@
 		$t_row = db_fetch_array( $result );
 
 		return $t_row['sequence'];
+	}
+
+	# --------------------
+	# Allows the validation of a custom field value without setting it
+	# or needing a bug to exist.
+	function custom_field_validate( $p_field_id, $p_value ) {
+		$c_field_id	= db_prepare_int( $p_field_id );
+		$c_value	= db_prepare_string( $p_value );
+
+		custom_field_ensure_exists( $p_field_id );
+
+		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
+		$query = "SELECT name, type, possible_values, valid_regexp,
+				  access_level_rw, length_min, length_max, default_value
+				  FROM $t_custom_field_table
+				  WHERE id='$c_field_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+
+		$t_name			= $row['name'];
+		$t_type			= $row['type'];
+		$t_possible_values	= $row['possible_values'];
+		$t_valid_regexp		= $row['valid_regexp'];
+		$t_length_min		= $row['length_min'];
+		$t_length_max		= $row['length_max'];
+		$t_default_value	= $row['default_value'];
+
+		# check for valid value
+		if ( !is_blank( $t_valid_regexp ) ) {
+			if ( !ereg( $t_valid_regexp, $p_value ) ) {
+				return false;
+			}
+		}
+
+		if ( strlen( $p_value ) < $t_length_min ) {
+			return false;
+		}
+
+		if ( ( 0 != $t_length_max ) && ( strlen( $p_value ) > $t_length_max ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	#===================================
