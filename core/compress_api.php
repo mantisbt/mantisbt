@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.3 2002-08-26 13:28:34 vboctor Exp $
+	# $Id: compress_api.php,v 1.4 2002-08-26 19:57:55 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -20,8 +20,7 @@
 	# ----------------
 	# Check if compression should be enabled.
 	function compress_is_enabled() {
-		global $g_compress_html;
-		return ( ( ON == $g_compress_html ) && php_version_at_least('4.0.4') );
+		return ( ( ON == config_get( 'compress_html' ) ) && php_version_at_least('4.0.4') );
 	}
 	# ----------------
 	# Start output buffering with compression.
