@@ -12,6 +12,9 @@
 		print_header_redirect ( 'view_bug_advanced_page.php?f_id='.$f_id );
 	}
 
+	$f_id		= gpc_get_int( 'f_id' );
+	$f_history	= gpc_get_bool( 'f_history' );
+
 	$c_id = (integer)$f_id;
 	project_access_check( $f_id );
 
@@ -389,7 +392,7 @@
 
 	include( $g_bugnote_include_file );
 
-	if ( isset( $f_history ) ) {
+	if ( $f_history ) {
 		include( $g_history_include_file );
 	}
 ?>

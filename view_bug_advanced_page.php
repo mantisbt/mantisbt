@@ -12,17 +12,21 @@
 	# @@@@ Simple - still needs to be implemented for published defects
 	# @@@@ Bug History - consider logging the fact that defect was published and by who.
 
+	$f_id		= gpc_get_int( 'f_id' );
+	$f_check	= gpc_get_string( 'f_check', '' );
+	$f_history	= gpc_get_bool( 'f_history' );
+
 	if ( SIMPLE_ONLY == $g_show_view ) {
 		$t_simple_url = 'view_bug_page.php?f_id=' . $f_id;
 
-		if ( isset ( $f_check ) ) {
+		if ( !empty( $f_check ) ) {
 			$t_simple_url .= '&amp;f_check=' . $f_check;
 		}
 
 		print_header_redirect ( $t_simple_url );
 	}
 
-	if ( isset( $f_check ) ) {
+	if ( !empty( $f_check ) ) {
 		if ( $f_check != helper_calc_crc( $f_id, __FILE__ ) ) {
 		  access_denied();
 		}
@@ -50,7 +54,7 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	if ( !isset ( $f_check ) ) {
+	if ( empty ( $f_check ) ) {
 		# if bug is private, make sure user can view private bugs
 		access_bug_check( $f_id, $v_view_state );
 	}
@@ -75,7 +79,7 @@
 
 	print_page_top1();
 
-	if ( !isset ( $f_check ) ) {
+	if ( empty ( $f_check ) ) {
 		print_page_top2();
 	} else {
 		print_page_top2a();
@@ -91,15 +95,15 @@
 	</td>
 	<td class="right" colspan="2">
 
-<?php if ( !isset( $f_check ) ) { ?>
+<?php if ( empty( $f_check ) ) { ?>
 	<span class="small"><?php print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id.'&amp;f_check=' . helper_calc_crc( $f_id, __FILE__ ), $s_publish )?></span>
 <?php }?>
 
-<?php if ( !isset( $f_check ) && ( BOTH == $g_show_view ) ) { ?>
+<?php if ( empty( $f_check ) && ( BOTH == $g_show_view ) ) { ?>
 		<span class="small"><?php print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_view_simple_link )?></span>
 <?php }?>
 <?php
-	if ( isset ( $f_check ) ) {
+	if ( !empty ( $f_check ) ) {
 		$t_check = '&amp;f_check=' . $f_check;
 	} else {
 		$t_check = '';
@@ -342,7 +346,7 @@
 <?php
 	}
 
-	if ( isset( $f_check ) ) {
+	if ( !empty( $f_check ) ) {
 		$t_show_attachments = true;
 	} else {
 		$t_user_id = current_user_get_field ( 'id' );
@@ -378,7 +382,7 @@
 	# UPDATE form END
 ?>
 <?php # ASSIGN form BEGIN ?>
-<?php if ( !isset( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
 		<?php if ( $t_user_id != $v_handler_id ) { ?>
@@ -393,7 +397,7 @@
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
-<?php if ( !isset( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_resolve_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -404,7 +408,7 @@
 	} # RESOLVE form END
 ?>
 <?php # REOPEN form BEGIN ?>
-<?php if ( !isset( $f_check ) && ( $v_status >= RESOLVED ) &&
+<?php if ( empty( $f_check ) && ( $v_status >= RESOLVED ) &&
 		( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ||
 		( $v_reporter_id == $t_user_id )) ) { ?>
 	<td class="center">
@@ -417,7 +421,7 @@
 	} # REOPEN form END
 ?>
 <?php # CLOSE form BEGIN ?>
-<?php if ( !isset( $f_check ) && ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
+<?php if ( empty( $f_check ) && ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
 		( ON == $g_allow_reporter_close &&
 		  $v_reporter_id == $t_user_id ) ) &&
 		( RESOLVED == $v_status ) ) { ?>
@@ -432,7 +436,7 @@
 ?>
 <?php # MONITOR form BEGIN ?>
 <?php
- if ( !isset( $f_check ) && (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
+ if ( empty( $f_check ) && (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
 ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
@@ -446,7 +450,7 @@
 	# MONITOR form END
 ?>
 <?php # UNMONITOR form BEGIN ?>
-<?php if ( !isset( $f_check ) && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -459,7 +463,7 @@
 	# MONITOR form END
 ?>
 <?php # DELETE form BEGIN ?>
-<?php if ( !isset( $f_check ) && access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -477,13 +481,13 @@
 </table>
 
 <?php
-	if ( !isset( $f_check) && $t_show_attachments ) {
+	if ( empty( $f_check) && $t_show_attachments ) {
 		include( $g_bug_file_upload_inc );
 	}
 
 	include( $g_bugnote_include_file );
 
-	if ( isset( $f_history ) ) {
+	if ( $f_history ) {
 		include( $g_history_include_file );
 	}
 

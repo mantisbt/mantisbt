@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.29 $
-	# $Author: prescience $
-	# $Date: 2002-09-03 02:41:50 $
+	# $Revision: 1.30 $
+	# $Author: jfitzell $
+	# $Date: 2002-09-07 10:06:53 $
 	#
-	# $Id: bug_update_page.php,v 1.29 2002-09-03 02:41:50 prescience Exp $
+	# $Id: bug_update_page.php,v 1.30 2002-09-07 10:06:53 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,6 +22,8 @@
 	if ( ADVANCED_ONLY == $g_show_update ) {
 		print_header_redirect ( 'bug_update_advanced_page.php?f_id='.$f_id );
 	}
+
+	$f_id		= gpc_get_int( 'f_id' );
 
 	project_access_check( $f_id );
 	check_access( $g_update_bug_threshold );
