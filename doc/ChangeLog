@@ -23,6 +23,7 @@ Mantis ChangeLog
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.
  * Fix #3646: Error in core/obsolete.php.
  * Fix #3691: Parse error in Romanian localisation.
+ * Fix #3728: CSV export shows &quot; instead of real quotes in bug title.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

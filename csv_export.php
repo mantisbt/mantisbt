@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.17 2004-03-23 14:00:35 vboctor Exp $
+	# $Id: csv_export.php,v 1.18 2004-04-08 11:05:11 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,19 @@
 	foreach ( $t_columns as $column => $title ) {
 		$t_titles[] = lang_get( $title );
 	}
-	echo implode( $t_sep, $t_titles ) . $t_nl;
+
+	$t_header = implode( $t_sep, $t_titles ) . $t_nl;
+
+        # Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
+        # See Microsoft Knowledge Base Article - 323626
+	# http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
+        $t_first_two_chars = substr( $t_header, 0, 2 );
+        if ( strcmp( $t_first_two_chars, 'ID' ) == 0 ) {
+		$t_header = str_replace( 'ID,', 'Id,', $t_header );
+	}
+	# end of fix
+
+        echo $t_header;
 
 	# export the rows
 	foreach ( $rows as $row ) {
