@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.39 2004-07-10 00:29:14 int2str Exp $
+	# $Id: login_page.php,v 1.40 2004-08-05 17:58:47 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
-	$f_return		= strip_tags( gpc_get_string( 'return', '' ) );
+	$f_return		= gpc_get_string( 'return', '' );
 
 	# Check for HTTP_AUTH. HTTP_AUTH is handled in login.php
 
@@ -29,7 +29,7 @@
 		}
 
 		if ( $f_return ) {
-			$t_uri .= "?return=" . $f_return;
+			$t_uri .= "?return=" . urlencode( $f_return );
 		}
 
 		print_header_redirect( $t_uri );
@@ -66,7 +66,7 @@
 		<?php
 			if ( !is_blank( $f_return ) ) {
 			?>
-				<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+				<input type="hidden" name="return" value="<?php echo urlencode( $f_return ) ?>" />
 				<?php
 			}
 			echo lang_get( 'login_title' ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.34 2004-07-10 00:29:14 int2str Exp $
+	# $Id: login.php,v 1.35 2004-08-05 17:58:47 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,8 +18,8 @@
 	$f_username		= gpc_get_string( 'username', '' );
 	$f_password		= gpc_get_string( 'password', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
-	$f_return		= strip_tags( gpc_get_string( 'return', config_get( 'default_home_page' ) ) );
-	$f_from			= strip_tags( gpc_get_string( 'from', '' ) );
+	$f_return		= gpc_get_string( 'return', config_get( 'default_home_page' ) );
+	$f_from			= gpc_get_string( 'from', '' );
 
 	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
 		$f_username = $_SERVER['REMOTE_USER'];
@@ -41,7 +41,7 @@
 	}
 
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
-		$t_redirect_url = 'login_cookie_test.php?return=' . $f_return;
+		$t_redirect_url = 'login_cookie_test.php?return=' . urlencode( $f_return );
 	} else {
 		$t_redirect_url = 'login_page.php?error=1';
 
