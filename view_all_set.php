@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.26 2004-03-29 13:26:17 vboctor Exp $
+	# $Id: view_all_set.php,v 1.27 2004-04-03 20:18:42 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -86,7 +86,11 @@
 		$f_per_page = config_get( 'default_limit_view' );
 	}
 
-
+	# -1 is a special case stored query: it means we want to reset our filter
+	if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
+		$f_type = 0;
+	} 
+	
 /*   array contents
      --------------
 	 0: version
@@ -154,7 +158,7 @@
 				$t_setting_arr['show_status'] = "any";
 				$t_setting_arr['per_page'] = $f_per_page;
 				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-				$t_setting_arr['hide_closed'] = $f_hide_closed;
+				$t_setting_arr['hide_closed'] = $t_hide_closed_default;
 				$t_setting_arr['reporter_id'] = "any";
 				$t_setting_arr['handler_id'] = "any";
 				$t_setting_arr['sort'] = "last_updated";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.23 2004-04-01 11:40:25 vboctor Exp $
+	# $Id: filter_api.php,v 1.24 2004-04-03 20:18:42 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -665,14 +665,28 @@
 				<input type="submit" name="filter" value="<?php echo lang_get( 'search' ) ?>" />
 			</td>
 			</form>
-			<td colspan="<?php echo ( 4 * $t_custom_cols ); ?>"></td>
+			<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>"></td>
+
 			<?php
 			$t_stored_queries_arr = array();
 			$t_stored_queries_arr = filter_db_get_available_queries();
 
 			if ( sizeof( $t_stored_queries_arr ) > 0 ) {
 				?>
-				<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+				<td class="right" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+					<form method="get" name="list_queries" action="view_all_set.php">
+					<input type="hidden" name="type" value="3" />
+					<select name="source_query_id">
+					<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']' ?></option>
+					<option value="-1"></option>
+					<?php
+					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
+						print '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
+					}
+					?>	
+					</select>
+					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'use_query' ) ?>" />
+					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
 					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'open_queries' ) ?>" />
 					</form>
@@ -680,16 +694,31 @@
 				<?php
 			} else {
 				?>
-				<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+				<td class="right" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+					<form method="get" name="reset_query" action="view_all_set.php">
+					<input type="hidden" name="type" value="3" />
+					<input type="hidden" name="source_query_id" value="-1" />
+					<input type="submit" name="reset_query_button" value="<?php echo lang_get( 'reset_query' ) ?>" />
+					</form>
+				</td>
 				<?php
+			}
+			
+			if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
+			?>
+				<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+					<form method="post" name="save_query" action="query_store_page.php">
+					<input type="submit" name="save_query_button" value="<?php echo lang_get( 'save_query' ) ?>" />
+					</form>
+				</td>
+			<?php
+			} else {
+			?>
+				<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+			<?php
 			}
 			?>
 			
-			<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<form method="post" name="save_query" action="query_store_page.php">
-				<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'save_query' ) ?>" />
-				</form>
-			</td>
 		</tr>
 		</table>
 <?php
@@ -700,12 +729,22 @@
 										$p_name, $p_filter_string ) {
 		$t_user_id = auth_get_current_user_id();
 		$c_project_id = db_prepare_int( $p_project_id );
-		$c_is_public = db_prepare_bool( $p_is_public );
+		$c_is_public = db_prepare_bool( $p_is_public, false );
 		$c_name = db_prepare_string( $p_name );
 		$c_filter_string = db_prepare_string( $p_filter_string );
 
 		$t_filters_table = config_get( 'mantis_filters_table' );
+
+		# check that the user can save non current filters (if required)
+		if ( ( -1 != $c_project_id ) && ( ! access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
+			return -1;
+		}
 		
+		# ensure that we're not making this filter public if we're not allowed
+		if ( ! access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+			$c_is_public = db_prepare_bool( false );
+		}
+
 		# Do I need to update or insert this value?
 		$query = "SELECT id FROM $t_filters_table
 					WHERE user_id='$t_user_id'
@@ -777,6 +816,11 @@
 				}
 			}
 			
+			# check that the user has access to non current filters
+			if ( ( -1 != $row['project_id'] ) && ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
+				return null;
+			}
+		
 			$g_cache_filter_db_filters[ $p_filter_id ] = $row['filter_string'];
 			return $row['filter_string'];
 		}
@@ -814,6 +858,11 @@
 		$c_filter_id = db_prepare_int( $p_filter_id );
 		$t_user_id = auth_get_current_user_id();
 
+		# Administrators can delete any filter
+		if ( access_has_global_level( ADMINISTRATOR ) ) {
+			return true;
+		}
+		
 		$query = "SELECT id
 				  FROM $t_filters_table
 				  WHERE id='$c_filter_id'
@@ -855,6 +904,11 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
+		# If the user doesn't have access rights to stored queries, just return
+		if ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) { 
+			return $t_overall_query_arr;
+		}
+		
 		# Get the list of available queries. By sorting such that public queries are
 		# first, we can override any query that has the same name as a private query
 		# with that private one

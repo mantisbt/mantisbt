@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.160 2004-04-02 11:22:05 yarick123 Exp $
+	# $Id: config_defaults_inc.php,v 1.161 2004-04-03 20:18:42 narcissus Exp $
 	# --------------------------------------------------------
 
 	
@@ -738,6 +738,15 @@
 
 	# --- Threshold needed to show the list of users montoring a bug on the bug view pages.
 	$g_show_monitor_list_threshold = DEVELOPER;
+
+	# Threshold needed to be able to use stored queries
+	$g_stored_query_use_threshold = REPORTER;
+
+	# Threshold needed to be able to create stored queries
+	$g_stored_query_create_threshold = DEVELOPER;
+	
+	# Threshold needed to be able to create shared stored queries
+	$g_stored_query_create_shared_threshold = MANAGER;
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH

@@ -47,8 +47,13 @@
 ?>
 	<form method="POST" action="query_store.php">
 	<input type="text" name="query_name"><br />
-	<input type="checkbox" name="is_public" value="on">
-	<?php print lang_get( 'make_public' ); ?><br />
+	<?php
+	if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+		print '<input type="checkbox" name="is_public" value="on">';
+		print lang_get( 'make_public' );
+		print '<br />';
+	}
+	?>
 	<input type="checkbox" name="all_projects" value="on">
 	<?php print lang_get( 'all_projects' ); ?><br /><br />
 	<input type="submit" value="<?php print lang_get( 'save_query' ); ?>">
