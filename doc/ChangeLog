@@ -47,6 +47,7 @@ Mantis ChangeLog
  * Enh #3240: Show last login date in the main page.
  * Enh #3242: Show bugnote add form before bugnotes to minimize the scroll needed to add a note.
  * Optimized the database query in file_list_attachments() to improve performance of viewing bugs with large attachments.
+ * Added Mantis FAQ to documentation folder.
 
 2003.03.22  -  0.18.0a4
 
