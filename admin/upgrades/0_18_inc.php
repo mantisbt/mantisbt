@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.24 2004-09-04 10:21:03 jlatour Exp $
+	# $Id: 0_18_inc.php,v 1.25 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -258,10 +258,9 @@
 			'Add released flag to determine whether the version was released or still a future release.',
 			"ALTER TABLE $t_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
 
-	# MASC RELATIONSHIP
-
-	# --------------------------------------------------------
-	# Author: Marcello Scata'° marcello@marcelloscata.com
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
 	# UPGRADE THE DATABASE TO IMPLEMENT THE RELATIONSHIPS
 	# --------------------------------------------------------
 	# The script executes the following steps:
@@ -437,7 +436,6 @@
 
 		return true;
 	}
-	# MASC RELATIONSHIP
 
 		if ( config_get( 'differentiate_duplicates' ) ) {
 			$upgrades[] = new SQLUpgrade( 

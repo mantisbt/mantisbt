@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: marcelloscata $
-	# $Date: 2004-10-14 17:34:14 $
+	# $Date: 2004-10-25 19:45:05 $
 	#
-	# $Id: strings_italian.txt,v 1.84 2004-10-14 17:34:14 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.85 2004-10-25 19:45:05 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -730,7 +730,7 @@ $s_manage_user_updated_msg = "Account aggiornato correttamente...";
 # menu_inc.php
 $s_main_link = "Principale";
 $s_view_bugs_link = "Visualizza anomalie";
-$s_report_bug_link = "Inserisci nuova anomalia";
+$s_report_bug_link = "Nuova anomalia";
 $s_changelog_link = "Change Log";
 $s_summary_link = "Statistiche";
 $s_account_link = "Account";

@@ -6,15 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_add.php,v 1.3 2004-10-05 21:12:41 prichards Exp $
-	# --------------------------------------------------------
-?>
-<?php
-	# --------------------------------------------------------
-	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
+	# $Id: bug_relationship_add.php,v 1.4 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 
-	# MASC RELATIONSHIP
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
 
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
@@ -86,6 +83,4 @@
 	email_relationship_added( $f_dest_bug_id, $f_src_bug_id, relationship_get_complementary_type( $f_rel_type ) );
 
 	print_header_redirect_view( $f_src_bug_id );
-
-	# MASC RELATIONSHIP
 ?>

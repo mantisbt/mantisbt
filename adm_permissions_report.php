@@ -6,10 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.2 2004-10-15 20:50:11 marcelloscata Exp $
+	# $Id: adm_permissions_report.php,v 1.3 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
+
 	require_once( 'core.php' );
+
+	access_ensure_global_level( ADMINISTRATOR );
 
 	$t_core_path = config_get( 'core_path' );
 

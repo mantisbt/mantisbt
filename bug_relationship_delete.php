@@ -6,20 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.5 2004-10-05 21:12:41 prichards Exp $
+	# $Id: bug_relationship_delete.php,v 1.6 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 
-	# --------------------------------------------------------
-	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
-	# --------------------------------------------------------
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
 	# To delete a relationship we need to ensure that:
 	# - User not anomymous
 	# - Source bug exists and is not in read-only state (peer bug could not exist...)
 	# - User that update the source bug and at least view the destination bug
 	# - Relationship must exist
-	# --------------------------------------------------------
-
-	# MASC RELATIONSHIP
+	# ----------------------------------------------------------------------
 
 	require_once( 'core.php' );
 
@@ -75,6 +73,4 @@
 	}
 
 	print_header_redirect_view( $f_bug_id );
-
-	# MASC RELATIONSHIP
 ?>

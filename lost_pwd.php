@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd.php,v 1.2 2004-08-15 22:21:53 thraxisp Exp $
+	# $Id: lost_pwd.php,v 1.3 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 
-	# --------------------------------------------------------
-	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
-	# --------------------------------------------------------
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
 
 	require_once( 'core.php' );
 

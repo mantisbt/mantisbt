@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.5 2004-08-27 23:34:16 prichards Exp $
+	# $Id: make_captcha_img.php,v 1.6 2004-10-25 19:45:04 marcelloscata Exp $
 	# --------------------------------------------------------
 
-	# --------------------------------------------------------
-	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
-	# --------------------------------------------------------
+	# ======================================================================
+	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
+	# ======================================================================
 
 #	ob_start();
 	require_once( 'core.php' );
