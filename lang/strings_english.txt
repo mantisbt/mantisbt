@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.133 $
+	# $Revision: 1.134 $
 	# $Author: jfitzell $
-	# $Date: 2003-04-23 19:32:42 $
+	# $Date: 2003-04-23 22:17:23 $
 	#
-	# $Id: strings_english.txt,v 1.133 2003-04-23 19:32:42 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.134 2003-04-23 22:17:23 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -141,62 +141,64 @@
 	$s_bugnote_date = 'Date of bugnote';
 	$s_bugnote_description = 'Bugnote description';
 
+	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
-	$MANTIS_ERROR[ERROR_SQL]                = 'ERROR: SQL error detected.  Please report this to ';
-	$MANTIS_ERROR[ERROR_REPORT]             = 'ERROR: There was an error in your report.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'ERROR: No file specified';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'ERROR: The directory does not exist. Please check the project settings.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: A category with that name already exists.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'ERROR: A version with that name already exists.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
+	$MANTIS_ERROR[ERROR_SQL]                = 'SQL error detected.  Please report this to ';
+	$MANTIS_ERROR[ERROR_REPORT]             = 'There was an error in your report.';
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'No file specified';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'The file type is disallowed';
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'The directory does not exist. Please check the project settings.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'This is a duplicate file.  Please delete the file first.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'A project with that name already exists.';
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'A necessary field was empty.  Please recheck your inputs.';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Access Denied.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'A required parameter to this page was not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'That username is already being used.  Please go back and select another one.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='Configuration option not found.';
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='String not found.';
+	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Bugnote not found.';
+	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Project not found.';
+	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field not found.';
+	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Unable to connect to FTP server.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'User not found.';
+	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='Preferences could not be found for this user.';
+	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'News item not found.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='Password does not match verification.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'An array was expected but a string was received.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='A string was expected but an array was received.';
+	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug not found.';
+	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Invalid email.';
+	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'Profile not found.';
+	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'File type not allowed for uploads.';
+	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'This is a duplicate file.  Please delete the file first.';
+	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
+	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'You cannot set a bug as a duplicate of itself.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'Custom field not found';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'This is a duplicate name.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'At least one project still uses this field.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Authentication Failed';
+	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'LDAP Server Connection Failed';
+	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP Record Update has failed.';
+	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'LDAP User Record Not Found.';
+	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'The action cannot be performed because the bug has been resolved';
+	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Database connection failed.';
+	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Database query failed.';
+	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'A version with that name already exists.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 
 	$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';

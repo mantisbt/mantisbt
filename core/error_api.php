@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.22 2003-03-05 19:59:26 jfitzell Exp $
+	# $Id: error_api.php,v 1.23 2003-04-23 22:17:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,6 +22,7 @@
 	#
 	$g_error_parameters = array();
 	$g_error_handled = false;
+	$g_error_proceed_url = null;
 
 	# ---------------
 	# Default error handler
@@ -33,7 +34,7 @@
 	# The others, being system errors, will come with a string in $p_error
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-		global $g_error_parameters, $g_error_handled;
+		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 		
 		# check if errors were disabled with @ somewhere in this call chain
 		if ( 0 == error_reporting() ) {
@@ -46,45 +47,46 @@
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
-				$t_string = "SYSTEM WARNING: $p_error\n($t_short_file: line $p_line)";
+				$t_error_type = 'SYSTEM WARNING';
+				$t_error_description = $p_error;
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_NOTICE:
-				$t_string = "SYSTEM WARNING: $p_error\n($t_short_file: line $p_line)";
+				$t_error_type = 'SYSTEM NOTICE';
+				$t_error_description = $p_error;
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_USER_ERROR:
-				$t_string = "APPLICATION ERROR #$p_error: " .
-							error_string( $p_error ) .
-							"\n($t_short_file: line $p_line)";
+				$t_error_type = "APPLICATION ERROR #$p_error";
+				$t_error_description = error_string( $p_error );
 				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
-				$t_string = "APPLICATION WARNING #$p_error: " .
-							error_string( $p_error ) .
-							"\n($t_short_file: line $p_line)";
+				$t_error_type = "APPLICATION WARNING #$p_error";
+				$t_error_description = error_string( $p_error );
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_USER_NOTICE:
 				# used for debugging
-				$t_string = $p_error;
-
+				$t_error_type = 'DEBUG';
+				$t_error_description = $p_error;
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			default:
 				#shouldn't happen, just display the error just in case
-				$t_string = $p_error;
+				$t_error_type = '';
+				$t_error_description = $p_error;
 		}
 
-		$t_string = nl2br( htmlentities( $t_string ) );
+		$t_error_description = nl2br( htmlentities( $t_error_description ) );
 
 		if ( 'halt' == $t_method ) {
 			$t_old_contents = ob_get_contents();
@@ -96,20 +98,36 @@
 			ob_end_clean();
 
 			html_page_top1();
-			html_page_top2a();
+			html_page_top2();
 
-			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
-
+			echo '<br /><div align="center"><table class="width50" cellspacing="1">';
+			echo "<tr><td class=\"form-title\">$t_error_type</td></tr>";
+			echo "<tr><td><p class=\"center\" style=\"color:red\">$t_error_description</p></td></tr>";
+			
+			echo '<tr><td><p class="center">';
+			if ( null === $g_error_proceed_url ) {
+				echo lang_get( 'error_no_proceed' );
+			} else {
+				echo "<a href=\"$g_error_proceed_url\">" . lang_get( 'proceed' ) . '</a>';
+			}
+			echo '</p></td></tr>';
+			
 			# @@@ temp until we get parameterized errors
+			echo '<tr><td>';
 			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
 				echo $g_error_parameters[$i].'<br />';
 			}
+			echo '</td></tr>';
 
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
+				echo '<tr><td>';
 				error_print_details( $p_file, $p_line, $p_context );
-				echo '<br />';
+				echo '</td></tr>';
+				echo '<tr><td>';
 				error_print_stack_trace();
+				echo '</td></tr>';
 			}
+			echo '</table></div>';
 
 			if ( $g_error_handled ) {
 				echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
@@ -119,9 +137,10 @@
 				echo '</div>';
 			}
 
-			die();
+			html_page_bottom1();
+			exit();
 		} else if ( 'inline' == $t_method ) {
-			echo "<p style=\"color:red\">$t_string</p>";
+			echo "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
 			# @@@ temp until we get parameterized errors
 			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
 				echo $g_error_parameters[$i].'<br />';
@@ -132,6 +151,7 @@
 
 		$g_error_parameters = array();
 		$g_error_handled = true;
+		$g_error_proceed_url = null;
 	}
 
 	# ---------------
@@ -289,5 +309,13 @@
 		global $g_error_parameters;
 
 		$g_error_parameters = func_get_args();
+	}
+	
+	# ---------------
+	# Set a url to give to the user to proceed after viewing the error
+	function error_proceed_url( $p_url ) {
+		global $g_error_proceed_url;
+		
+		$g_error_proceed_url = $p_url;
 	}
 ?>
