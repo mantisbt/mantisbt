@@ -1,0 +1,63 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the files README and LICENSE for details
+
+	# This sample file contains the essential files that you MUST
+	# configure to your specific settings.  You may override settings
+	# from default/config_inc1.php by assigning new values in this file
+
+	# Rename this file to config_inc.php after configuration.
+
+	###########################################################################
+	# CONFIGURATION VARIABLES
+	###########################################################################
+
+	# In general a value of 0 means the feature is disabled and 1 means the
+	# feature is enabled.  Any other cases will have an explanation.
+
+	# Look in configuration.html or default/config_inc1.php for more
+	# detailed comments.
+
+	# --- database variables ---------
+
+	# set these values to match your setup
+	$g_hostname      = "localhost";
+	$g_port          = 3306;         # 3306 is default
+	$g_db_username   = "root";
+	$g_db_password   = "";
+	$g_database_name = "bugtracker";
+
+	# --- path variables --------------
+
+	# path to your installation as seen from the web browser
+	# requires trailing /
+	$g_path          = "http://yourhostnamehere/mantis/";
+
+	# path to your images directory (for icons)
+	# requires trailing /
+	$g_icon_path     = $g_path."images/";
+
+	# absolute path to your installation.  *NO* symlinks allowed
+	# requires trailing /
+	$g_absolute_path = "/usr/local/www/data/mantis/";
+
+	# --- email variables -------------
+	$g_administrator_email  = "administrator@nowhere";
+	$g_webmaster_email      = "webmaster@nowhere";
+
+	# the "From: " field in emails
+	$g_from_email           = "noreply@nowhere";
+
+	# the "To: " address all emails are sent.  This can be a mailing list or archive address.
+	# Actual users are emailed via the bcc: fields
+	$g_to_email             = "nobody@nowhere";
+
+	# the return address for bounced mail
+	$g_return_path_email    = "admin@nowhere";
+
+	# --- login method ----------------
+	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
+	$g_login_method = MD5;
+?>
