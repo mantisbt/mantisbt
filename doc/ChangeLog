@@ -19,7 +19,7 @@ Mantis
  * Modified confirm messages to consolidate localization strings.
  * Modified comments to use one # instead of ### (save space)
  * Modified alternate_colors() to have default parameters.
- * Modified all files to use <?php instead of <?
+ * Modified all files to use < ? p h p instead of < ?
  * Modified error messages to use $MANTIS_ERROR array.
  * Modified code to update last_updated/last_modified fields for bugs, bugnotes, and news.
  * Modified core_API.php and config_inc.php to use a default/ directory in

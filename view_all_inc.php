@@ -277,6 +277,7 @@
 	}
 ?>
 </table>
+<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 <select name="f_project_id">
 <?php print_project_option_list() ?>
 </select>
@@ -288,6 +289,7 @@
 -->
 <input type="submit" value="<?php echo $s_move_bugs ?>">
 </form>
+<?php } ?>
 
 <?php # Show NEXT and PREV links as needed ?>
 <p>
