@@ -1,5 +1,12 @@
 Mantis
 
+08.27.2001  -   0.15.6
+
+ * Fixed potential security hole with file uploads.  Users can potentially
+   copy files on server to be available via the browser.  This requires
+   PHP 3.0.17 and higher.  Please consider disabling file uploads to disk
+   if you cannot upgrade versions.
+
 08.26.2001  -   0.15.5
 
  * Fixed sort problems on view_all_bugs_page.php3

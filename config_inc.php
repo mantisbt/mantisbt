@@ -52,7 +52,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.15.5";
+	$g_mantis_version = "0.15.6";
 	$g_show_version   = 1;
 
 	#############################
@@ -226,7 +226,16 @@
 	############################
 
 	# --- Limit News Items ------------
+	# limit by entry count or date
+	# 0 - entry limit
+	# 1 - by date
+	$g_news_limit_method = 0;
+
+	# limit by last X entries
 	$g_news_view_limit = 7;
+
+	# limit by days
+	$g_news_view_limit_days = 30;
 
 	##################################
 	### Mantis Default Preferences ###

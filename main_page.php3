@@ -50,12 +50,24 @@
 	### get news count (project plus sitewide posts)
     $total_news_count = news_count_query( $g_project_cookie_val );
 
-	### Select the news posts
-	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-			FROM $g_mantis_news_table
-			WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
-			ORDER BY id DESC
-			LIMIT $f_offset, $g_news_view_limit";
+	switch ( $g_news_limit_method ) {
+		case 0 :
+			# Select the news posts
+			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+					FROM $g_mantis_news_table
+					WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
+					ORDER BY id DESC
+					LIMIT $f_offset, $g_news_view_limit";
+			break;
+		case 1 :
+			# Select the news posts
+			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+					FROM $g_mantis_news_table
+					WHERE ( project_id='$g_project_cookie_val' OR project_id='0000000' ) AND
+						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$g_news_view_limit_days')
+					ORDER BY id DESC";
+			break;
+	} # end switch
 	$result = db_query( $query );
     $news_count = db_num_rows( $result );
 
