@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: jlatour $
-	# $Date: 2005-02-25 00:23:50 $
+	# $Date: 2005-02-28 07:18:22 $
 	#
-	# $Id: strings_czech.txt,v 1.73 2005-02-25 00:23:50 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.74 2005-02-28 07:18:22 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -58,6 +58,8 @@ $s_jump = 'Pøechod na problém';
 $s_copy_users = 'Kopírovat u¾ivatele';
 $s_copy_categories_from = 'Kopírovat kategorie z';
 $s_copy_categories_to = 'Kopírovat kategorie do';
+$s_copy_users_from = 'Copy Users From';
+$s_copy_users_to = 'Copy Users To';
 $s_bug_history = 'Historie problému';
 $s_field = 'Pole';
 $s_old_value = 'Stará hodnota';
@@ -625,6 +627,9 @@ $s_manage_projects_link = 'Správa projektù';
 $s_manage_custom_field_link = 'Správa u¾ivatelských polí';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
+$s_manage_config_link = 'Manage Configuration';
+$s_manage_email_config = 'Email Notifications';
+$s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Vytvoøit úèet';
 $s_projects_link = 'Projekty';
 $s_documentation_link = 'Dokumentace';
@@ -638,6 +643,35 @@ $s_p = 'nesmazatelné';
 $s_date_created = 'Datum vytvoøení';
 $s_last_visit = 'Poslední náv¹tìva';
 $s_edit_user_link = 'Upravit';
+
+# manage_config_email_page
+$s_change_configuration = 'Update Configuration';
+$s_default_notify = 'Setting default notification flags to';
+$s_action_notify = 'Setting action notification flags to';
+$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
+$s_notify_actions_change_access = 'Change users who can change notifications to';
+
+# manage_config_workflow_page
+$s_non_existent = 'non-existent';
+$s_current_status = 'Current Status';
+$s_next_status = 'Next Status';
+$s_workflow = 'Workflow';
+$s_workflow_thresholds = 'Thresholds that Affect Workflow';
+$s_threshold = 'Threshold';
+$s_status_level = 'Status';
+$s_alter_level = 'Who can alter this value';
+$s_validation = 'Workflow Validation';
+$s_comment = 'Validation Comment';
+$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_unreachable = 'You cannot move an issue into this status';
+$s_no_exit = 'You cannot move an issue out of this status';
+$s_access_levels = 'Access Levels';
+$s_access_change = 'Minimum Access Level to Change to this Status';
+$s_desc_bug_submit_status = 'Status to which a new issue is set';
+$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
+$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_workflow_change_access = 'Change users who can change workflow to';
+$s_access_change_access = 'Change users who can change status change access level to';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt byl úspì¹nì pøidán...';
@@ -1175,4 +1209,13 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 
 # DHTML filters
 $s_loading = 'Loading...';
+
+# filter_api.php
+$s_between = 'Between' ;
+$s_on_or_before = 'On Or Before' ;
+$s_before = 'Before' ;
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'After' ;
+$s_on_or_after = 'On Or After' ;
+
 ?>

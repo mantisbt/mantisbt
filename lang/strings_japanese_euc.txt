@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.70 $
+	# $Revision: 1.71 $
 	# $Author: jlatour $
-	# $Date: 2005-02-25 00:23:53 $
+	# $Date: 2005-02-28 07:18:25 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.70 2005-02-25 00:23:53 jlatour Exp $
+	# $Id: strings_japanese_euc.txt,v 1.71 2005-02-28 07:18:25 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -55,6 +55,8 @@ $s_jump = 'ID 指定';
 $s_copy_users = 'ユーザーのコピー';
 $s_copy_categories_from = 'カテゴリコピー元';
 $s_copy_categories_to = 'カテゴリコピー先';
+$s_copy_users_from = 'Copy Users From';
+$s_copy_users_to = 'Copy Users To';
 $s_bug_history = '履歴';
 $s_field = '項目';
 $s_old_value = '古い値';
@@ -622,6 +624,9 @@ $s_manage_projects_link = 'プロジェクト管理';
 $s_manage_custom_field_link = 'カスタム項目管理';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = '権限一覧';
+$s_manage_config_link = 'Manage Configuration';
+$s_manage_email_config = 'Email Notifications';
+$s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = 'ドキュメント';
@@ -635,6 +640,35 @@ $s_p = '保護';
 $s_date_created = '作成日時';
 $s_last_visit = '最終訪問日時';
 $s_edit_user_link = 'ユーザー編集';
+
+# manage_config_email_page
+$s_change_configuration = 'Update Configuration';
+$s_default_notify = 'Setting default notification flags to';
+$s_action_notify = 'Setting action notification flags to';
+$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
+$s_notify_actions_change_access = 'Change users who can change notifications to';
+
+# manage_config_workflow_page
+$s_non_existent = 'non-existent';
+$s_current_status = 'Current Status';
+$s_next_status = 'Next Status';
+$s_workflow = 'Workflow';
+$s_workflow_thresholds = 'Thresholds that Affect Workflow';
+$s_threshold = 'Threshold';
+$s_status_level = 'Status';
+$s_alter_level = 'Who can alter this value';
+$s_validation = 'Workflow Validation';
+$s_comment = 'Validation Comment';
+$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_unreachable = 'You cannot move an issue into this status';
+$s_no_exit = 'You cannot move an issue out of this status';
+$s_access_levels = 'Access Levels';
+$s_access_change = 'Minimum Access Level to Change to this Status';
+$s_desc_bug_submit_status = 'Status to which a new issue is set';
+$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
+$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_workflow_change_access = 'Change users who can change workflow to';
+$s_access_change_access = 'Change users who can change status change access level to';
 
 # manage_proj_add.php
 $s_project_added_msg = 'プロジェクトが追加されました。';
@@ -1172,4 +1206,13 @@ $s_email_on_relationship_changed = '関連の変更通知メール';
 
 # DHTML filters
 $s_loading = 'Loading...';
+
+# filter_api.php
+$s_between = 'Between' ;
+$s_on_or_before = 'On Or Before' ;
+$s_before = 'Before' ;
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'After' ;
+$s_on_or_after = 'On Or After' ;
+
 ?>

@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.25 $
+	# $Revision: 1.26 $
 	# $Author: jlatour $
-	# $Date: 2005-02-25 00:23:51 $
+	# $Date: 2005-02-28 07:18:23 $
 	#
-	# $Id: strings_estonian.txt,v 1.25 2005-02-25 00:23:51 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.26 2005-02-28 07:18:23 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -56,6 +56,8 @@ $s_jump = 'Mine';
 $s_copy_users = 'Kopeeri kasutajad';
 $s_copy_categories_from = 'Kopeeri kategooriad siit';
 $s_copy_categories_to = 'Kopeeri kategooriad sinna';
+$s_copy_users_from = 'Copy Users From';
+$s_copy_users_to = 'Copy Users To';
 $s_bug_history = 'Kande ajalugu';
 $s_field = 'Vdli';
 $s_old_value = 'Vana vddrtus';
@@ -623,6 +625,9 @@ $s_manage_projects_link = 'Projektide haldus';
 $s_manage_custom_field_link = 'Kohandatud vdljade haldus';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Kasutajauiguste raport';
+$s_manage_config_link = 'Manage Configuration';
+$s_manage_email_config = 'Email Notifications';
+$s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Loo uus kasutaja';
 $s_projects_link = 'Projektid';
 $s_documentation_link = 'Dokumendid';
@@ -636,6 +641,35 @@ $s_p = 'p';
 $s_date_created = 'Loomiskuupdev';
 $s_last_visit = 'Viimane k|lastus';
 $s_edit_user_link = 'Redigeeri kasutajat';
+
+# manage_config_email_page
+$s_change_configuration = 'Update Configuration';
+$s_default_notify = 'Setting default notification flags to';
+$s_action_notify = 'Setting action notification flags to';
+$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
+$s_notify_actions_change_access = 'Change users who can change notifications to';
+
+# manage_config_workflow_page
+$s_non_existent = 'non-existent';
+$s_current_status = 'Current Status';
+$s_next_status = 'Next Status';
+$s_workflow = 'Workflow';
+$s_workflow_thresholds = 'Thresholds that Affect Workflow';
+$s_threshold = 'Threshold';
+$s_status_level = 'Status';
+$s_alter_level = 'Who can alter this value';
+$s_validation = 'Workflow Validation';
+$s_comment = 'Validation Comment';
+$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_unreachable = 'You cannot move an issue into this status';
+$s_no_exit = 'You cannot move an issue out of this status';
+$s_access_levels = 'Access Levels';
+$s_access_change = 'Minimum Access Level to Change to this Status';
+$s_desc_bug_submit_status = 'Status to which a new issue is set';
+$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
+$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_workflow_change_access = 'Change users who can change workflow to';
+$s_access_change_access = 'Change users who can change status change access level to';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt lisatud...';
@@ -1173,4 +1207,13 @@ $s_email_on_relationship_changed = 'E-post suguluse muutmisel';
 
 # DHTML filters
 $s_loading = 'Loading...';
+
+# filter_api.php
+$s_between = 'Between' ;
+$s_on_or_before = 'On Or Before' ;
+$s_before = 'Before' ;
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'After' ;
+$s_on_or_after = 'On Or After' ;
+
 ?>
