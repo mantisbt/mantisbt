@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.39 2002-10-20 20:37:11 jfitzell Exp $
+	# $Id: user_api.php,v 1.40 2002-10-20 22:14:36 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -348,7 +348,8 @@
 	# return the specified user field for the user id
 	function user_get_field( $p_user_id, $p_field_name ) {
 		if ( 0 == $p_user_id ) {
-		    return "@null@";
+			trigger_error( 'user-id of 0', WARNING );
+			return "@null@";
 		}
 
 		$row = user_get_row( $p_user_id );
@@ -375,12 +376,10 @@
 	# return the username or a string saying "user no longer exists"
 	#  if the user does not exist
 	function user_get_name( $p_user_id ) {
-		$t_string = lang_get( 'user_no_longer_exists' );
-
-		$row = user_get_row( $p_user_id, false );
+		$row = user_cache_row( $p_user_id, false );
 
 		if ( false == $row ) {
-			return $t_string;
+			return lang_get( 'user_no_longer_exists' );
 		} else {
 			return $row['username'];
 		}
