@@ -68,10 +68,11 @@
 	<td>
 		<select name="f_project_id">
 		<?php
+			$t_sitewide = false;
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-				PRINT '<option value="0000000">Sitewide</option>';
+				$t_sitewide = true;
 			}
-			print_project_option_list( $v_project_id );
+			print_project_option_list( $v_project_id, $t_sitewide );
 		?>
 		</select>
 	</td>

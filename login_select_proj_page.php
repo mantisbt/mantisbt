@@ -33,8 +33,7 @@
 	</td>
 	<td width="60%">
 		<select name="f_project_id">
-		<option value="00000000"><?php echo lang_get( 'all_projects' ) ?></option>
-		<?php print_project_option_list() ?>
+		<?php print_project_option_list( 0 ) ?>
 		</select>
 	</td>
 </tr>

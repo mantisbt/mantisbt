@@ -194,7 +194,7 @@
 		<form method="post" action="manage_proj_cat_copy.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<select name="f_other_project_id">
-			<?php print_project_option_list() ?>
+			<?php print_project_option_list( null, false ) ?>
 		</select>
 		<input type="submit" name="f_copy_from" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
 		<input type="submit" name="f_copy_to" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.18 2002-10-19 04:11:23 jfitzell Exp $
+	# $Id: html_api.php,v 1.19 2002-10-19 04:43:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -264,8 +264,7 @@
 				} else {
 					PRINT '<select name="f_project_id" class="small">';
 				}
-					PRINT '<option value="0000000">' . lang_get( 'all_projects' ) . '</option>';
-					print_project_option_list( $g_project_cookie_val );
+				print_project_option_list( helper_get_current_project() );
 				PRINT '</select>';
 				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
 				PRINT '</form>';

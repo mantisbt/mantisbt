@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.20 2002-10-15 20:32:54 jfitzell Exp $
+	# $Id: print_api.php,v 1.21 2002-10-19 04:43:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -414,7 +414,7 @@
 	}
 	# --------------------
 	# List projects that the current user has access to
-	function print_project_option_list( $p_project_id='' ) {
+	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
@@ -442,6 +442,12 @@
 
 		$result = db_query( $query );
 		$project_count = db_num_rows( $result );
+
+		if ( $p_include_all_projects ) {
+			echo '<option value="0"';
+			check_selected( $p_project_id, 0 );
+			echo '>' . lang_get( 'all_projects' ) . '</option>';
+		}
 
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );

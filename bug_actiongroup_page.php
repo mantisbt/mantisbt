@@ -87,7 +87,7 @@
 			<?php
 				switch ( $f_action ) {
 					case 'MOVE':
-						print_project_option_list();
+						print_project_option_list( null, false );
 						break;
 					case 'ASSIGN':
 						print_assign_to_option_list();

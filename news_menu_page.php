@@ -48,10 +48,11 @@
 	<td>
 		<select name="f_project_id">
 		<?php
+			$t_sitewide = false;
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-				PRINT '<option value="0000000">Sitewide</option>';
+				$t_sitewide = true;
 			}
-			print_project_option_list( $g_project_cookie_val );
+			print_project_option_list( helper_get_current_project(), $t_sitewide );
 		?>
 		</select>
 	</td>
