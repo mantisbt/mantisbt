@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.18 2002-12-21 10:07:16 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.19 2002-12-21 13:33:43 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -34,7 +34,7 @@
 <br />
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="4">
 		<?php echo lang_get( 'viewing_bug_simple_details_title' ) ?>
 		<span class="small"><?php print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) ) ?></span>
 <?php	if ( ( current_user_get_field( 'username' ) != config_get( 'anonymous_account' ) )
@@ -44,7 +44,7 @@
 			</span>
 <?php }?>
 	</td>
-	<td class="right" colspan="3">
+	<td class="right" colspan="2">
 <?php if ( BOTH == config_get( 'show_view' ) ) { ?>
 		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id, lang_get( 'view_advanced_link' ) )?></span>
 <?php }?>
