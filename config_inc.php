@@ -48,6 +48,14 @@
 	$g_absolute_path = "/usr/local/www/data/mantis/";
 
 	#############################
+	### Web Server            ###
+	#############################
+
+	# --- using MS IIS ----------------
+	# set to 1 if you use IIS
+	$g_use_iis = 0;
+
+	#############################
 	### Mantis Version String ###
 	#############################
 

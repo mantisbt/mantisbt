@@ -7,7 +7,7 @@ Mantis
  * Modified file upload size to 60 to help out Netscape
  * Modified view_all_bug_page refresh to include offset
  * Fixed the post-report forms to redirect properly even if a proxy clears the HTTP_REFERER
-
+ * Added g_use_iis global to workaround an IIS bug with header/Location calls
 
 10.28.2001  -   0.15.10
 

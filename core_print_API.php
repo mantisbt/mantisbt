@@ -12,12 +12,18 @@
 
 	### --------------------
 	function print_header_redirect( $p_url ) {
+		global $g_use_iis;
+
 		header( "Status: 302" );
 		header( "Content-Type: text/html" );
 		header( "Pragma: no-cache" );
 		header( "Expires: Fri, 01 Jan 1999 00:00:00 GMT" );
 		header( "Cache-control: no-cache, no-cache=\"Set-Cookie\", private" );
-		header( "Location: $p_url" );
+		if ( $g_use_iis == 1 ) {
+			header( "Refresh: 0;url=$p_url" );
+		} else {
+			header( "Location: $p_url" );
+		}
 	}
 	### --------------------
 	# prints the name of the user given the id.  also makes it an email link.
