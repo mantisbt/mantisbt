@@ -37,6 +37,8 @@ Mantis
  * Modified core_email_API.php to send a content-type header in emails.
  * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
  * Made 'light grey' the default color for 'closed'.
+ * Added $g_notify_admin_on_new to allow enabling/disable of notifications to admins on arrival of new bugs.
+ * Added $g_notify_on_new_threshold to allow controlling the threshold of notification on arrival of new bugs.
 
 2002.05.19  -  0.17.3
 

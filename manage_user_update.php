@@ -12,21 +12,23 @@
 	check_access( ADMINISTRATOR );
 
 	if ( isset( $f_protected ) ) {
-		$c_protected = 1;
+		$f_protected = 1;
 	} else {
-		$c_protected = 0;
+		$f_protected = 0;
 	}
 
 	if ( isset( $f_enabled ) ) {
-		$c_enabled = 1;
+		$f_enabled = 1;
 	} else {
-		$c_enabled = 0;
+		$f_enabled = 0;
 	}
 
 	$c_username 	= addslashes($f_username);
-	$c_email 		= addslashes($f_email);
-	$c_protected 	= (integer)$f_protected;
-	$c_access_level = (integer)$f_access_level;
+	$c_email		= addslashes($f_email);
+	$c_protected	= (integer)$f_protected;
+	$c_enabled		= (integer)$f_enabled;
+	$c_id			= (integer)$f_id;
+	$c_access_level	= (integer)$f_access_level;
 
 	# update action
 	# administrator is not allowed to change access level or enabled

@@ -68,6 +68,8 @@
 				$g_project_cookie_val,
 				$g_mantis_project_user_list_table,
 				$g_notify_developers_on_new,
+ 				$g_notify_on_new_threshold,
+				$g_notify_admin_on_new,
 				$g_use_bcc, $g_use_phpMailer,
 				$g_mantis_bug_monitor_table;
 
@@ -82,7 +84,7 @@
 		if ( ON == $t_notify_reporter ) {
 			$send_arr[] = get_user_info( $v_reporter_id, 'email' );
 		}
-
+		
 		# Get Handler Email
 		$v_handler_id = get_bug_field( $p_bug_id, 'handler_id' );
 		if ( $v_handler_id > 0 ) {
@@ -96,9 +98,6 @@
 		if ( ( ON == $g_notify_developers_on_new )&&( 'email_on_new' == $p_notify_type ) ) {
 			$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
 			$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
-			$t_dev = DEVELOPER;
-			$t_adm = ADMINISTRATOR;
-			$t_public = PUBLIC;
 
 			#@@@@@@@
 			$temp_arr = array();
@@ -120,7 +119,7 @@
 
 				# always add all administrators
 				$t_access_level = get_user_field( $v_id, 'access_level' );
-				if ( ADMINISTRATOR == $t_access_level ) {
+				if ( ( ADMINISTRATOR == $t_access_level ) && ( ON == $g_notify_admin_on_new ) ) {
 					$send_arr[] = $v_email;
 					continue;
 				}
@@ -139,7 +138,7 @@
 					if ( $count > 0 ){
 						$t_access_level = db_result( $result );
 					}
-					if ( $t_access_level >= DEVELOPER ) {
+					if ( $t_access_level >= $g_notify_on_new_threshold ) {
 						$send_arr[] = $v_email;
 					}
 
@@ -150,7 +149,7 @@
 							WHERE	l.project_id='$t_project_id' AND
 									p.id=l.project_id AND
 									l.user_id='$v_id' AND
-									l.access_level>='$t_dev'";
+									l.access_level>='$g_notify_on_new_threshold'";
 					$result = db_query( $query );
 					$count = db_result( $result, 0, 0 );
 					if ( $count > 0 ) {
@@ -190,7 +189,9 @@
 
 		$send_arr = array_unique( $send_arr );
 		foreach ( $send_arr as $send_val ) {
-			$t_bcc .= $send_val.', ';
+			if (strlen($send_val) != 0) {
+				$t_bcc .= $send_val.', ';
+			}
 		}
 
 		# chop off the last comma and add a \n
@@ -563,6 +564,7 @@
 			$t_subject = make_lf_crlf( $t_subject );
 			$t_message = make_lf_crlf( $t_message );
 			$t_headers = make_lf_crlf( $t_headers );
+
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
