@@ -330,16 +330,4 @@
 ?>
 </div>
 
-<?php # print a legend for the status color coding ?>
-<p>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_new_color?>"><?php echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_feedback_color?>"><?php echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_acknowledged_color?>"><?php echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_confirmed_color?>"><?php echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_assigned_color?>"><?php echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_resolved_color?>"><?php echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<?php echo $g_closed_color?>"><?php echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
-</tr>
-</table>
+<?php print_status_colors() ?>

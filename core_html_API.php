@@ -506,4 +506,32 @@
 		exit;
 	}
 	# --------------------
+	# Print the color legend for the colors
+	function print_status_colors() {
+		global $g_status_enum_string, $s_status_enum_string,
+				$g_new_color, $g_feedback_color,
+				$g_acknowledged_color, $g_confirmed_color,
+				$g_assigned_color, $g_resolved_color,
+				$g_closed_color;
+
+		PRINT "<p>";
+		PRINT "<table class=\"width100\" cellspacing=\"1\">";
+		PRINT "<tr>";
+		$t_arr  = explode( ",", $g_status_enum_string );
+		$enum_count = count( $t_arr );
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = explode( ":", $t_arr[$i] );
+			$t_val = get_enum_element( $s_status_enum_string, $t_s[0] );
+
+			$t_color = "#ffffff";
+			$t_color_variable_name = "g_".$t_s[1]."_color";
+			if ( isset( $$t_color_variable_name ) ) {
+				$t_color = $$t_color_variable_name;
+			}
+			PRINT "<td class=\"small-caption\" bgcolor=\"$t_color\">$t_val</td>";
+		}
+		PRINT "</tr>";
+		PRINT "</table>";
+	}
+	# --------------------
 ?>
