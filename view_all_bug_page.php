@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: vboctor $
-	# $Date: 2004-05-30 01:49:31 $
+	# $Revision: 1.53 $
+	# $Author: int2str $
+	# $Date: 2004-07-08 03:50:15 $
 	#
-	# $Id: view_all_bug_page.php,v 1.52 2004-05-30 01:49:31 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.53 2004-07-08 03:50:15 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,11 +24,6 @@
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
-
-	# check to see if the cookie does not exist
-	if ( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0' );
-	}
 
 	$t_per_page = null;
 	$t_bug_count = null;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.77 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: print_all_bug_page.php,v 1.78 2004-07-08 03:50:15 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,22 +35,27 @@
 	$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 	$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
 
-	# check to see if the cookie does not exist
-	if ( is_blank( $t_cookie_value ) ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
-	}
+	$f_highlight_changed 	= 0;
+	$f_sort 				= null;
+	$f_dir		 			= null;
+	$t_project_id 			= 0;
 
-	# check to see if new cookie is needed
-	if ( ! filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
-	}
-	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
-	$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+	# check to see if the cookie exists
+	if ( ! is_blank( $t_cookie_value ) ) {
+
+		# check to see if new cookie is needed
+		if ( ! filter_is_cookie_valid() ) {
+			print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
+		}
+
+		$t_setting_arr = explode( '#', $t_cookie_value, 2 );
+		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
 	
-	$f_highlight_changed 	= $t_filter_cookie_arr['highlight_changed'];
-	$f_sort 				= $t_filter_cookie_arr['sort'];
-	$f_dir		 			= $t_filter_cookie_arr['dir'];
-	$t_project_id 			= helper_get_current_project( );
+		$f_highlight_changed 	= $t_filter_cookie_arr['highlight_changed'];
+		$f_sort 				= $t_filter_cookie_arr['sort'];
+		$f_dir		 			= $t_filter_cookie_arr['dir'];
+		$t_project_id 			= helper_get_current_project( );
+	}
 
 	# This replaces the actual search that used to be here
 	$f_page_number = gpc_get_int( 'page_number', 1 );

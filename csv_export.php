@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.20 2004-06-16 04:28:29 robertjf Exp $
+	# $Id: csv_export.php,v 1.21 2004-07-08 03:50:15 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,18 +19,14 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	# check to see if the cookie does not exist
-	if ( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0' );
-	}
 
 	$t_page_number = 1;
 	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
-        $t_nl = csv_get_newline();
-        $t_sep = csv_get_separator();
+	$t_nl = csv_get_newline();
+ 	$t_sep = csv_get_separator();
 
 	# Get bug rows according to the current filter
 	$rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );

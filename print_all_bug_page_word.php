@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.48 2004-07-07 11:44:03 vboctor Exp $
+	# $Id: print_all_bug_page_word.php,v 1.49 2004-07-08 03:50:15 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,13 +43,6 @@
 		
 		header( 'Content-Type: application/msword' );
 		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
-	}
-
-	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-
-	# check to see if new cookie is needed
-	if ( ! filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
 	# This is where we used to do the entire actual filter ourselves
