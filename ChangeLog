@@ -4,8 +4,12 @@ Mantis
 
  * Fixed problem with $g_manage_cookie not being unset on logout
  * Fixed error in db_upgrade.sql ( nul; should be null; )
+ * Fixed serveral localization errors
  * Added Russian localization
+ * Added edit bugnote capability
  * Updated Italian localization
+ * Updated Korean localization
+ * Modified User section so users with automatic access are listed.
 
 08.28.2001  -   0.15.7
 
