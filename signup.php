@@ -8,7 +8,9 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'email_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'email_api.php' );
 ?>
 <?php
 	$f_username		= gpc_get_string( 'username' );

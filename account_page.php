@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.35 2003-01-25 13:52:41 jlatour Exp $
+	# $Id: account_page.php,v 1.36 2003-01-25 19:10:39 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -32,7 +32,9 @@
 
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'current_user_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'current_user_api.php' );
 
 	#============ Parameters ============
 	# (none)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.19 2003-01-23 23:02:50 jlatour Exp $
+	# $Id: bug_actiongroup.php,v 1.20 2003-01-25 19:10:40 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,9 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'bug_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'bug_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

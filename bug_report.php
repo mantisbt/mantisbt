@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.15 2003-01-23 23:02:55 jlatour Exp $
+	# $Id: bug_report.php,v 1.16 2003-01-25 19:10:40 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,10 +15,12 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'string_api.php' );
-	require_once( $g_core_path . 'file_api.php' );
-	require_once( $g_core_path . 'bug_api.php' );
-	require_once( $g_core_path . 'custom_field_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'string_api.php' );
+	require_once( $t_core_path . 'file_api.php' );
+	require_once( $t_core_path . 'bug_api.php' );
+	require_once( $t_core_path . 'custom_field_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

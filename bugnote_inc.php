@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.77 2003-01-25 13:52:42 jlatour Exp $
+	# $Id: bugnote_inc.php,v 1.78 2003-01-25 19:10:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 	# $f_bug_id must be set and be set to the bug id
 ?>
 <?php
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $t_core_path . 'current_user_api.php' );
 ?>
 <?php
 	# grab the user id currently logged in

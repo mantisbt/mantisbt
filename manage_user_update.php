@@ -8,7 +8,9 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'email_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'email_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
@@ -19,7 +21,7 @@
 	$f_email		= gpc_get_string( 'email', '' );
 	$f_username		= gpc_get_string( 'username', '' );
 	$f_access_level	= gpc_get_int( 'access_level' );
-	$f_user_id			= gpc_get_int( 'user_id' );
+	$f_user_id		= gpc_get_int( 'user_id' );
 
 	$t_old_username = user_get_field( $f_user_id, 'username' );
 

@@ -8,7 +8,9 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'news_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'news_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

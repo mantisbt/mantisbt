@@ -6,13 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_create.php,v 1.7 2003-01-24 14:59:36 jlatour Exp $
+	# $Id: manage_custom_field_create.php,v 1.8 2003-01-25 19:10:42 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'custom_field_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'custom_field_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

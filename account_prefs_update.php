@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.24 2003-01-23 23:02:47 jlatour Exp $
+	# $Id: account_prefs_update.php,v 1.25 2003-01-25 19:10:39 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,9 @@
 <?php 
 	require_once( 'core.php' );
 		
-	require_once( $g_core_path . 'user_pref_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'user_pref_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_delete.php,v 1.20 2003-01-23 23:02:48 jlatour Exp $
+	# $Id: account_prof_delete.php,v 1.21 2003-01-25 19:10:39 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,9 @@
 <?php 
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'profile_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'profile_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

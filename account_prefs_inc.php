@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.21 2003-01-25 18:24:30 jlatour Exp $
+	# $Id: account_prefs_inc.php,v 1.22 2003-01-25 19:10:39 jlatour Exp $
 	# --------------------------------------------------------
 	
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'user_pref_api.php' );
+	require_once( $t_core_path . 'user_pref_api.php' );
 
 	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
 		if ( null === $p_user_id ) {

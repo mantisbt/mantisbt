@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.16 2003-01-24 14:59:30 jlatour Exp $
+	# $Id: history_inc.php,v 1.17 2003-01-25 19:10:42 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,9 +15,9 @@
 	# $f_bug_id must already be defined
 ?>
 <?php
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'history_api.php' );
+	require_once( $t_core_path . 'history_api.php' );
 ?>
 
 <a name="history"><br /></a>

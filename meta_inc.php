@@ -5,13 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	require_once( 'core.php' );
-
 	# prevent caching
-	global $g_content_expire;
+	$t_content_expire = config_get('content_expire');
 ?>
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Pragma-directive" content="no-cache" />
 <meta http-equiv="Cache-Directive" content="no-cache" />
-<meta http-equiv="Expires" content="<?php echo $g_content_expire ?>" />
+<meta http-equiv="Expires" content="<?php echo $t_content_expire ?>" />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.8 2003-01-25 13:52:41 jlatour Exp $
+	# $Id: bug_view_inc.php,v 1.9 2003-01-25 19:10:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 	# $f_bug_id MUST be specified before the file is included
 ?>
 <?php
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $t_core_path . 'bug_api.php' );
 ?>
 <?php
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );

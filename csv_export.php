@@ -6,13 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.8 2003-01-24 14:59:27 jlatour Exp $
+	# $Id: csv_export.php,v 1.9 2003-01-25 19:10:42 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'filter_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'filter_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

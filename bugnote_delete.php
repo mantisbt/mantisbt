@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.27 2003-01-24 14:59:21 jlatour Exp $
+	# $Id: bugnote_delete.php,v 1.28 2003-01-25 19:10:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,9 +16,10 @@
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'bug_api.php' );
-	require_once( $g_core_path . 'project_api.php' );
-	require_once( $g_core_path . 'bugnote_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'bug_api.php' );
+	require_once( $t_core_path . 'bugnote_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

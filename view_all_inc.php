@@ -6,12 +6,11 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'current_user_api.php' );
-	require_once( $g_core_path . 'bug_api.php' );
-	require_once( $g_core_path . 'project_api.php' );
-	require_once( $g_core_path . 'string_api.php' );
+	require_once( $t_core_path . 'current_user_api.php' );
+	require_once( $t_core_path . 'bug_api.php' );
+	require_once( $t_core_path . 'string_api.php' );
 ?>
 <?php
 	$t_filter = current_user_get_bug_filter();

@@ -6,9 +6,9 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	require_once( 'core.php' );
+	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $t_core_path . 'current_user_api.php' );
 ?>
 <?php
 # this function only gets the field names, by appending strings

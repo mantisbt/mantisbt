@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.19 2003-01-23 23:02:47 jlatour Exp $
+	# $Id: account_prefs_reset.php,v 1.20 2003-01-25 19:10:39 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -25,7 +25,9 @@
 
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'user_pref_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'user_pref_api.php' );
 
 	#============ Parameters ============
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );

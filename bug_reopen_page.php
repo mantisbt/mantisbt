@@ -6,14 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.23 2003-01-23 23:02:55 jlatour Exp $
+	# $Id: bug_reopen_page.php,v 1.24 2003-01-25 19:10:40 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
 	
-	require_once( $g_core_path . 'bug_api.php' );
-	require_once( $g_core_path . 'project_api.php' );
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'bug_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
