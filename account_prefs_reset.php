@@ -14,11 +14,8 @@
 	$f_user_id				= gpc_get_int( 'f_user_id' );
 	$f_redirect_url			= gpc_get_string( 'f_redirect_url', 'account_prefs_page.php' );
 
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
+	if ( user_is_protected( $f_user_id ) ) {
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 

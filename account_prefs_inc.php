@@ -11,11 +11,8 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 		$t_redirect_url = 'account_prefs_page.php';
 	}
 
-	# get protected state
-	$t_protected = user_get_field( $p_user_id, 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
+	if ( user_is_protected( $p_user_id ) ) {
 		if ( $p_error_if_protected ) {
 			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 		} else {

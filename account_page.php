@@ -12,11 +12,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
+	if ( current_user_is_protected() ) {
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 

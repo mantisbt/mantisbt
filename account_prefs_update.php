@@ -32,7 +32,7 @@
 	$f_email_on_priority	= gpc_get_bool( 'f_email_on_priority' );
 
 	# protected account check
-	if ( ON == user_get_field( $f_user_id, 'protected' ) ) {
+	if ( user_is_protected( $f_user_id ) ) {
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
