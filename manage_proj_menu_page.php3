@@ -153,7 +153,7 @@
 		$v_description 	= string_display( $v_description );
 
 		# alternate row colors
-		$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+		$t_bgcolor = alternate_colors( $i );
 ?>
 <tr bgcolor="<? echo $t_bgcolor ?>">
 	<td>

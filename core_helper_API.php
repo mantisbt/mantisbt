@@ -221,7 +221,16 @@
 	}
 	# --------------------
 	# alternate color function
-	function alternate_colors( $p_num, $p_color1, $p_color2 ) {
+	function alternate_colors( $p_num, $p_color1="", $p_color2="" ) {
+		global $g_primary_color1, $g_primary_color2;
+
+		if ( empty( $p_color1 ) ) {
+			$p_color1 = $g_primary_color1;
+		}
+		if ( empty( $p_color2 ) ) {
+			$p_color2 = $g_primary_color2;
+		}
+
 		if ( 1 == $p_num % 2 ) {
 			return $p_color1;
 		} else {

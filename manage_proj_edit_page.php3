@@ -153,7 +153,7 @@
 				$t2_category = urlencode( $t_category );
 
 				# alternate row colors
-				$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+				$t_bgcolor = alternate_colors( $i );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
 			<td width="75%">
@@ -183,7 +183,7 @@
 				$t2_date_order = urlencode( $t_date_order );
 
 				# alternate row colors
-				$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+				$t_bgcolor = alternate_colors( $i );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
 			<td width="75%">

@@ -60,7 +60,7 @@
 			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+			$t_bgcolor = alternate_colors( $i );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -97,7 +97,7 @@
 			$t_enum_count = get_bug_count_by_date( $p_date_array[$i] );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+			$t_bgcolor = alternate_colors( $i );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -172,7 +172,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+			$t_bgcolor = alternate_colors( $i );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -246,7 +246,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+			$t_bgcolor = alternate_colors( $i );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -316,7 +316,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
+			$t_bgcolor = alternate_colors( $i );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
