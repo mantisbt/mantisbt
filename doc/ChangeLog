@@ -8,6 +8,7 @@ Mantis ChangeLog
  * Enh #3564: In annonymous mode, login should remember the current page.
  * Fix #3077: Inconsistency: "Assigned To" versus "Handler".
  * Fix #3118: My Account: after update of password, wrong information is given.
+ * Fix #3135: Changing Print-Options does not work.
  * Fix #3440: "Allowed File Types" is case sensitive (also applies to disallowed file types).
  * Fix #3522: /news_update.php looks different from /main_page.php.
  * Fix #3537: Rewriting custom values with 0 when updating a bug.

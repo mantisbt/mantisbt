@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.19 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.20 2004-02-16 12:49:25 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -129,8 +129,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 <?php # display the checkboxes
 for ($i=0 ; $i <$field_name_count ; $i++) {
 
-	$row_color = $i%2+1;
-	PRINT "<tr class=\"row-($row_color)\">";
+	printf ( '<tr %s>', helper_alternate_class( $i ) );
 ?>
 
 	<td class="category">

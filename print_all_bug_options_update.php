@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_update.php,v 1.14 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: print_all_bug_options_update.php,v 1.15 2004-02-16 12:49:25 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,9 @@
 	# check the checkboxes
 	for ($i=0 ; $i <$field_name_count ; $i++) {
 		$t_name='print_'.strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
-		if ( !isset( $$t_name ) || ( 1 == ($$t_name) ) ) {
+		$t_flag = gpc_get( $t_name, null );
+
+		if ( $t_flag === null ) {
 			$t_prefs_arr[$i] = 0;
 		}
 		else {
