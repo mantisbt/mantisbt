@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.40 2002-10-20 22:14:36 jfitzell Exp $
+	# $Id: user_api.php,v 1.41 2002-10-20 22:19:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -81,20 +81,16 @@
 	# --------------------
 	# check to see if user exists by id
 	# return true if it does, false otherwise
+	#
+	# Use user_cache_row() to benefit from caching if called multiple times
+	#  and because if the user does exist the data may well be wanted
 	function user_exists( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
+		$row = user_cache_row( $p_user_id, false );
 
-		$t_user_table = config_get( 'mantis_user_table' );
-
-		$query = "SELECT COUNT(*)
-				  FROM $t_user_table
-				  WHERE id='$c_user_id'";
-		$result = db_query( $query );
-
-		if ( db_result( $result ) > 0 ) {
-			return true;
-		} else {
+		if ( false === $row ) {
 			return false;
+		} else {
+			return true;
 		}
 	}
 
