@@ -17,11 +17,13 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### extracts the user information for the currently logged in user
+	### and prefixes it with u_
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-	$row = mysql_fetch_array($result);
+    $result = db_mysql_query( $query );
+	$row = mysql_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
 
