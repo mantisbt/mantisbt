@@ -245,6 +245,7 @@
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_menu( $p_page="" ) {
 		global 	$g_manage_page,
+				$s_manage_users_link, $s_manage_projects_link
 				$g_manage_create_user_page, $s_create_new_account_link,
 				$g_manage_project_menu_page, $s_projects,
 				$g_documentation_page, $s_documentation_link;
@@ -262,8 +263,8 @@
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $t_manage_page, "Manage Users" );
-			print_bracket_link( $t_manage_project_menu_page, "Manage Projects");
+			print_bracket_link( $t_manage_page, $s_manage_users_link );
+			print_bracket_link( $t_manage_project_menu_page, $s_manage_projects_link );
 			print_bracket_link( $t_manage_create_user_page, $s_create_new_account_link );
 			print_bracket_link( $t_documentation_page, $s_documentation_link );
 		PRINT "</div>";

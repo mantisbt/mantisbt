@@ -115,7 +115,7 @@
 <p>
 <div align="center">
 <?
-	print_bracket_link( $g_news_list_page, "Archives" );
+	print_bracket_link( $g_news_list_page, $s_archives );
 	$f_offset_next = $f_offset + $g_news_view_limit;
 	$f_offset_prev = $f_offset - $g_news_view_limit;
 

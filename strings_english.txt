@@ -274,6 +274,7 @@
 	$s_open_and_reported_to_me = "Open and reported by me";
 	$s_newer_news_link = "Newer News";
 	$s_older_news_link = "Older News";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Created user";
@@ -289,6 +290,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Hide Disabled";
 	$s_filter_button = "Filter";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Create Account";
 	$s_projects_link = "Projects";
 	$s_documentation_link = "Documentation";
