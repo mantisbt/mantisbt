@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.39 2004-06-11 02:00:00 narcissus Exp $
+	# $Id: bug_actiongroup_page.php,v 1.40 2004-07-24 11:48:33 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,6 +64,11 @@
 			$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
 			$t_form 				= 'resolution';
 			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
+			$c_project_id = helper_get_current_project();
+			if ( ALL_PROJECTS != $c_project_id ) {
+				$t_question_title2 = lang_get( 'fixed_in_version' );
+				$t_form2 = 'fixed_in_version';
+			}
 			break;
 
 		case 'UP_PRIOR' :
@@ -146,6 +151,28 @@ if ( !$t_finished ) {
 		</select>
 	</td>
 </tr>
+	<?php
+	if ( isset( $t_question_title2 ) ) {
+	?>
+		<tr class="row-2">
+			<td class="category">
+				<?php echo $t_question_title2 ?>
+			</td>
+			<td>
+				<select name="<?php echo $t_form2 ?>">
+					<?php
+						switch ( $f_action ) {
+							case 'RESOLVE':
+								print_version_option_list( '', null, VERSION_ALL );
+								break;
+						}
+					?>
+				</select>
+			</td>
+		</tr>
+	<?php
+	}
+	?>
 <?php
 } else {
 ?>

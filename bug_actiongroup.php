@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.31 2004-06-15 02:54:39 narcissus Exp $
+	# $Id: bug_actiongroup.php,v 1.32 2004-07-24 11:48:33 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,7 +80,8 @@
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) &&
 				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id )) {
 				$f_resolution = gpc_get_int( 'resolution' );
-				bug_resolve( $t_bug_id, $f_resolution );
+				$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
+				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version );
 			} else {
 				$t_failed_ids[] = $t_bug_id;
 			}
