@@ -57,6 +57,7 @@ Mantis
  * Removed proj_user_delete_page.php.
  * Removed dependency on s_ enum strings.  Use g_ enum strings instead.
  * Updated Copyright to 2002.
+ * Added $g_use_javascript to default/config_inc1.php (SC)
 
 03.15.2002  -   0.17.1
 
