@@ -317,7 +317,7 @@
 	###########################################################################
 	# --------------------
 	# check to see if the access level is strictly equal
-	function access_level_check_equal( $p_access_level ) {
+	function access_level_check_equal( $p_access_level, $p_project_id=0 ) {
 		global $g_string_cookie_val;
 
 		if ( !isset( $g_string_cookie_val ) ) {
@@ -325,7 +325,7 @@
 		}
 
 		$t_access_level = get_current_user_field( "access_level" );
-		$t_access_level2 = get_project_access_level();
+		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		if ( $t_access_level2 == $p_access_level ) {
 			return true;
@@ -339,7 +339,7 @@
 	# --------------------
 	# check to see if the access level is equal or greater
 	# this checks to see if the user has a higher access level for the current project
-	function access_level_check_greater_or_equal( $p_access_level ) {
+	function access_level_check_greater_or_equal( $p_access_level, $p_project_id=0 ) {
 		global $g_string_cookie_val;
 
 		# user isn't logged in
@@ -353,7 +353,7 @@
 		}
 
 		$t_access_level = get_current_user_field( "access_level" );
-		$t_access_level2 = get_project_access_level();
+		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
@@ -422,7 +422,9 @@
 		}
 	}
 	# --------------------
-	# Checks to see if the user has access to this project.  If not then log the user out.
+	# Checks to see if the user has access to this project
+	# If not then log the user out
+	# If not logged into the project it attempts to log you into that project
 	function project_access_check( $p_bug_id, $p_project_id="0" ) {
 		global	$g_logout_page, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_mantis_bug_table,
@@ -458,12 +460,14 @@
 	# If there is no match then the project cookie will be set to the bug project id
 	# No access check is done.  It is expected to be checked afterwards.
 	function project_check( $p_bug_id ) {
-		global	$g_project_cookie, $g_project_cookie_val,
+		global	$g_project_cookie, $g_project_cookie_val, $g_view_all_cookie,
 				$g_cookie_time_length, $g_cookie_path;
 
 		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
 		if ( $t_project_id != $g_project_cookie_val ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length, $g_cookie_path );
+			setcookie( $g_view_all_cookie );
+
 			$t_redirect_url = get_view_redirect_url( $p_bug_id, 1 );
 			print_header_redirect( $t_redirect_url );
 		}
