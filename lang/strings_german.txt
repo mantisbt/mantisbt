@@ -10,15 +10,15 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-21 22:46:29 $
+	# $Date: 2002-11-25 08:06:01 $
 	#
-	# $Id: strings_german.txt,v 1.43 2002-08-21 22:46:29 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.44 2002-11-25 08:06:01 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
-    # Charset
+	# Charset
 	$s_charset = 'iso-8859-15';
 
 	# new strings:
@@ -143,6 +143,9 @@
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE] = 'ERROR: Das ist ein doppelter Name.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'ERROR: Mindestens ein Projekt benutzt noch dieses Feld!';
 
 	# General Strings
 	$s_go_back = 'Zurück';
@@ -629,7 +632,7 @@
 	$s_add_user_title = 'Benutzer zum Projekt hinzugefügt';
 	$s_add_user_button = 'Benutzer hinzufügen';
 	$s_project_selection_title = 'Projektauswahl';
-	$s_remove_link = 'löschen';
+	$s_remove_link = 'entfernen';
 
 	# proj_user_update.php
 	$s_updated_user_msg = 'Benutzer erfolgreich aktualisiert';
@@ -743,4 +746,25 @@
 	# view_bug_page.php
 	$s_view_advanced_link = 'erweiterte Anzeige';
 	$s_viewing_bug_simple_details_title = 'Einfache Fehleransicht anzeigen';
+
+	# custom field string
+	$s_add_custom_field_button = 'Neues Benutzerdefiniertes Feld';
+	$s_delete_custom_field_button = 'Benutzerdefiniertes Feld l&ouml;schen';
+	$s_delete_custom_field_everywhere = 'dieses benutzerdefinierte Feld &uuml;berall l&ouml;schen';
+	$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
+	$s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzuf&uuml;gen';
+	$s_edit_custom_field_title = 'Benutzerdefiniertes Feld editieren';
+	$s_custom_fields = 'Felder:';
+	$s_custom_fields_setup = 'Benutzerdefinierte Felder:';
+	$s_custom_field_caption = 'Name';
+	$s_custom_field_type = 'Typ';
+	$s_custom_field_possible_values = 'm&ouml;gliche Werte';
+	$s_custom_field_default_value = 'Default Wert';
+	$s_custom_field_valid_regexp = 'Regul&auml;rer Ausdruck';
+	$s_custom_field_access_level_r = 'Berechtigung Lesen';
+	$s_custom_field_access_level_rw = 'Berechtigung Schreiben';
+	$s_custom_field_length_min = 'Mindestl&auml;nge';
+	$s_custom_field_length_max = 'Maximale L&auml;nge';
+	$s_custom_field_advanced = 'Erweitert';
+	$s_custom_field_seqence = 'Reihenfolge';
 ?>

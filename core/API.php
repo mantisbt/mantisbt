@@ -64,6 +64,11 @@
 	require_once( $t_core_dir.'project_api.php' );
 	require_once( $t_core_dir.'filter_api.php' );
 
+	# include the custom_field stuff if the config value is set to ON
+	if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
+		require_once( $t_core_dir.'custom_field_api.php' );
+	}
+
 	# Include LDAP only if needed.
 	if ( ( ON == config_get( 'use_ldap_email' ) ) || ( LDAP == config_get ( 'login_method' ) ) ) {
 		require_once( $t_core_dir.'ldap_api.php' );

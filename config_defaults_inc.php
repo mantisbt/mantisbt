@@ -572,8 +572,8 @@
 									'closed'		=> '#e8e8e8'); # light gray
 	# --- custom status color codes ----------
 	# array for colors assoociated with custom attributes
- 	# @@@@ Consider changing the values in this array to point to $s_color_<xxxx>.  For example,
- 	#	  lang_get('color_antique_white') should return 'Antique White' for English language.
+	# @@@@ Consider changing the values in this array to point to $s_color_<xxxx>.  For example,
+	#	  lang_get('color_antique_white') should return 'Antique White' for English language.
 	$g_custom_colors		= array('#FAEBD7' => 'ANTIQUEWHITE',
 									'#F5DEB3' => 'WHEAT',
 									'#FFD700' => 'GOLD',
@@ -672,6 +672,9 @@
 	$g_mantis_user_pref_table				= $g_db_table_prefix.'_user_pref_table';
 	$g_mantis_user_print_pref_table			= $g_db_table_prefix.'_user_print_pref_table';
 	$g_mantis_project_customization_table	= $g_db_table_prefix.'_project_customization_table';
+	$g_mantis_custom_field_project_table	= $g_db_table_prefix.'_custom_field_project_table';
+	$g_mantis_custom_field_table      	    = $g_db_table_prefix.'_custom_field_table';
+	$g_mantis_custom_field_string_table     = $g_db_table_prefix.'_custom_field_string_table';
 
 	###########################
 	# Mantis Enum Strings
@@ -821,4 +824,14 @@
 	# Assign to this variable a keyword that won't change.  If this value changes
 	# all hyper links to defects will be not work.
 	$g_admin_crypt_word		= $g_path;
+
+	###########################
+	# Experimental features
+	###########################
+	# --- custom fields ---------
+	# allow the user / administrator to create custom fields for each project
+	# WARNING: this feature is in heavy development and is subject to change.
+	#   There will be no upgrade path for this stuff as it is being developed.
+	#   So don't enable it now unless you're developing on it.
+	$g_use_experimental_custom_fields = OFF;
 ?>

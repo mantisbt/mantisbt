@@ -254,4 +254,99 @@
 </table>
 </div>
 
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
+<br />
+<div align="center">
+<table class="width75" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+		<?php echo lang_get( 'custom_fields_setup' ) ?>
+	</td>
+</tr>
+<tr class="row-category">
+	<td width="100%">
+		<?php echo lang_get( 'custom_fields' ) ?>
+	</td>
+</tr>
+<tr>
+	<td width="100%">
+		<table width="100%" cellspacing="1">
+		<?php
+			$t_custom_fields = custom_field_get_ids( $f_project_id );
+
+			foreach( $t_custom_fields as $t_this_field_id ) {
+				$t_desc = custom_field_get_definition( $t_this_field_id );
+		?>
+		<tr <?php echo helper_alternate_class( $i ) ?>>
+			<td width="50%">
+				<?php echo $t_desc['caption'] ?>
+			</td>
+			<td width="25%">
+				<?php echo $t_this_field_id ?>
+			</td>
+			<td class="center" width="25%">
+				<?php
+					print_bracket_link( 'manage_proj_custom_field_edit_page.php?f_field_id='.$t_this_field_id.'&amp;f_project_id='.$f_project_id, lang_get( 'edit_link' ) );
+					PRINT '&nbsp;';
+					print_bracket_link( 'manage_proj_custom_field_remove.php?f_field_id='.$t_this_field_id.'&amp;f_project_id='.$f_project_id, lang_get( 'remove_link' ) );
+				?>
+			</td>
+		</tr>
+		<?php 	} # end for loop ?>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td class="left">
+		<form method="post" action="manage_proj_custom_field_add_new.php">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="text" name="f_caption" size="32" maxlength="64" />
+		<input type="submit" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
+		</form>
+	</td>
+</tr>
+<tr>
+	<td class="left">
+		<form method="post" action="manage_proj_custom_field_add_existing.php">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<select name="f_field_id">
+			<?php
+				$t_custom_fields = custom_field_get_ids();
+
+				foreach( $t_custom_fields as $t_this_field_id )
+				{
+					if( !custom_field_in_project( $t_this_field_id, $f_project_id ) ) {
+						$t_desc = custom_field_get_definition( $t_this_field_id );
+						echo "<option value=\"$t_this_field_id\">" . $t_desc['caption'] . '</option>' ;
+					}
+				}
+			?>
+		</select>
+		<input type="submit" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
+		</form>
+	</td>
+</tr>
+<tr>
+	<td class="left">
+		<form method="post" action="manage_proj_custom_field_delete.php">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<select name="f_field_id">
+			<?php
+				$t_custom_fields = custom_field_get_ids();
+
+				foreach( $t_custom_fields as $t_this_field_id )
+				{
+					$t_desc = custom_field_get_definition( $t_this_field_id );
+					echo "<option value=\"$t_this_field_id\">" . $t_desc['caption'] . '</option>' ;
+				}
+			?>
+		</select>
+		<input type="submit" value="<?php echo lang_get( 'delete_custom_field_everywhere' ) ?>" />
+		</form>
+	</td>
+</tr>
+</table>
+</div>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
 <?php print_page_bot1( __FILE__ ) ?>

@@ -202,6 +202,8 @@
 
 	# ERROR_CUSTOM_FIELD_*
 	define( 'ERROR_CUSTOM_FIELD_NOT_FOUND',			1300 );
+	define( 'ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE',1301 );
+	define( 'ERROR_CUSTOM_FIELD_IN_USE',			1302 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);

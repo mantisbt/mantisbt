@@ -9,15 +9,15 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.89 $
+	# $Revision: 1.90 $
 	# $Author: jfitzell $
-	# $Date: 2002-11-13 03:58:40 $
+	# $Date: 2002-11-25 08:06:00 $
 	#
-	# $Id: strings_english.txt,v 1.89 2002-11-13 03:58:40 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.90 2002-11-25 08:06:00 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
-    # Charset
+	# Charset
 	$s_charset = 'iso-8859-15';
 
 	# new strings:
@@ -75,7 +75,7 @@
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
-	
+
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
@@ -106,8 +106,8 @@
 	$s_by_severity_mix = 'by severity and status';
 	$s_by_priority_mix = 'by priority and status';
 	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
+	$s_synthesis_link = 'Synthesis';
+	$s_status_link = 'Per state';
 	$s_priority_link = 'Per priority';
 	$s_severity_link = 'Per severity';
 	$s_category_link = 'Per category';
@@ -185,6 +185,8 @@
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE]= 'ERROR: This is a duplicate caption.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field!';
 
 	# General Strings
 	$s_go_back = 'Go Back';
@@ -791,4 +793,25 @@
 	# view_bug_page.php
 	$s_view_advanced_link = 'View Advanced';
 	$s_viewing_bug_simple_details_title = 'Viewing Bug Simple Details';
+
+	# custom field strings
+	$s_add_custom_field_button = 'New Custom Field';
+	$s_delete_custom_field_button = 'Delete Custom Field';
+	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
+	$s_update_custom_field_button = 'Update Custom Field';
+	$s_add_existing_custom_field = 'Add This Existing Custom Field';
+	$s_edit_custom_field_title = 'Edit custom field';
+	$s_custom_fields = 'Fields:';
+	$s_custom_fields_setup = 'Custom Fields:';
+	$s_custom_field_caption = 'caption';
+	$s_custom_field_type = 'type';
+	$s_custom_field_possible_values = 'possible values';
+	$s_custom_field_default_value = 'default value';
+	$s_custom_field_valid_regexp = 'regular expression';
+	$s_custom_field_access_level_r = 'read access';
+	$s_custom_field_access_level_rw = 'write access';
+	$s_custom_field_length_min = 'min. length';
+	$s_custom_field_length_max = 'max. length';
+	$s_custom_field_advanced = 'advanced';
+	$s_custom_field_seqence = 'seqence';
 ?>

@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.2 2002-11-18 21:24:52 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.3 2002-11-25 08:06:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -30,9 +30,9 @@ CREATE TABLE mantis_custom_field_table (
   id int(3) NOT NULL auto_increment,
   caption varchar(64) NOT NULL default '',
   type int(2) NOT NULL default '0',
-  values varchar(255) NOT NULL default '',
-  default varchar(255) NOT NULL default '',
-  regexp varchar(255) NOT NULL default '',
+  possible_values varchar(255) NOT NULL default '',
+  default_value varchar(255) NOT NULL default '',
+  valid_regexp varchar(255) NOT NULL default '',
   access_level_r int(2) NOT NULL default '0',
   access_level_rw int(2) NOT NULL default '0',
   length_min int(3) NOT NULL default '0',
@@ -120,11 +120,32 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
+	# Check to see whether the caption is unique
+	#  return false if a field with the caption already exists, true otherwise
+	function custom_field_is_caption_unique( $p_caption ) {
+		$c_caption		= db_prepare_string( $p_caption );
+
+		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
+		$query = "SELECT COUNT(*) FROM
+				  $t_custom_field_table
+				  WHERE caption='$c_caption'";
+		$result = db_query( $query );
+
+		$count = db_result( $result );
+
+		if ( $count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	# --------------------
 	# Return true if the user can read the value of the field for the given bug,
-	#  false otherwise.  
+	#  false otherwise.
 	function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id ) {
 		custom_field_ensure_exists( $p_field_id );
-	
+
 		#@@@ get the read access level for the field - we need a function to get fields
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -138,7 +159,7 @@ CREATE TABLE mantis_custom_field_project_table (
 
 	# --------------------
 	# Return true if the user can modify the value of the field for the given bug,
-	#  false otherwise.  
+	#  false otherwise.
 	function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id ) {
 		custom_field_ensure_exists( $p_field_id );
 
@@ -158,64 +179,18 @@ CREATE TABLE mantis_custom_field_project_table (
 	#===================================
 
 	# --------------------
-	# Look in an array for the given key.  If it is found, return the value
-	#  otherwise return the given default
-	function helper_array_key_default( $p_key, $p_array, $p_default ) {
-		if( array_key_exists( $p_key, $p_array ) ) {
-			return $p_array[$p_key];
-		} else {
-			return $p_default;
-		}
-	}
-
-	# --------------------
-	# $p_def_array is an associative array that contains the following
-	# information: 'caption', 'type', 'values', 'default', 'regexp',
-	#              'access_level_r', 'access_level_rw', 'length_min',
-	#              'length_max', 'advanced'
-	# should add the value with the default id for this field for all existing
-	# bugs belonging to the project. What will happen if the default was changed
-	# later? Should the bug fields change? (i.e. save actual default value or
-	# --flag--default), ideas?
+	# create a new custom field with the caption $p_caption
+	# the definition are the default values and can be changes later
 	# return the ID of the new definition
-	function custom_field_create( $p_def_array ) {
-		if( array_key_exists( 'caption', $p_def_array ) ) {
-			$c_caption = db_prepare_string( $p_def_array['caption'] );
-		} else {
-			return false;
-		}
-
-		$c_type				= db_prepare_int ( 
-								helper_array_key_default ( 'type', $p_def_array, 0 ) );
-		$c_values			= db_prepare_string ( 
-								helper_array_key_default ( 'values', $p_def_array, '' );
-		$c_default			= db_prepare_string ( 
-								helper_array_key_default ( 'default', $p_def_array, '' );
-		$c_regexp			= db_prepare_string ( 
-								helper_array_key_default ( 'regexp', $p_def_array, '' );
-		$c_access_level_r	= db_prepare_int ( 
-								helper_array_key_default ( 'access_level_r', $p_def_array, 0 );
-		$c_access_level_rw	= db_prepare_int ( 
-								helper_array_key_default ( 'access_level_rw', $p_def_array, 0 );
-		$c_length_min		= db_prepare_int ( 
-								helper_array_key_default ( 'length_min', $p_def_array, 0 );
-		$c_length_max		= db_prepare_int ( 
-								helper_array_key_default ( 'length_max', $p_def_array, 0 );
-		$c_advanced			= db_prepare_int ( 
-								helper_array_key_default ( 'advanced', $p_def_array, 0 );
-		$c_sequence			= db_prepare_int ( 
-								helper_array_key_default ( 'sequence', $p_def_array, 0 );
+	function custom_field_create( $p_caption ) {
+		$c_caption = db_prepare_string( $p_caption );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "INSERT INTO
 				  $t_custom_field_table
-				  ( caption, type, values, default, regexp,
-					access_level_r, access_level_rw, length_min,
-					length_max, advanced, sequence )
+					( caption )
 				  VALUES
-				  ( '$c_caption', '$c_type', 'c_values', '$c_default', '$c_regexp',
-					'$c_access_level_r', '$c_access_level_rw', '$c_length_min',
-					'$c_length_max', '$c_advanced', '$c_sequence' )";
+					( '$c_caption' )";
 
 		db_query( $query );
 
@@ -223,62 +198,151 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
+	# bind a custom field with the id $p_field_id to the
+	# project $p_project_id
+	# return true on success
+	# return false if an error occures (e.g. non existing id)
+	function custom_field_bind( $p_field_id, $p_project_id ) {
+		custom_field_ensure_exists( $p_field_id );
+		project_ensure_exists( $p_project_id );
+
+		if( custom_field_in_project( $p_field_id, $p_project_id ) ) {
+			return false;
+		}
+		$c_field_id   = db_prepare_int( $p_field_id );
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+		$query = "INSERT INTO
+				  $t_custom_field_project_table
+					( field_id, project_id )
+				  VALUES
+					( '$c_field_id', '$c_project_id' )";
+
+		db_query( $query );
+		# db_qery returns false if there's a problem
+
+		return true;
+	}
+
+	# --------------------
 	# Update the field definition
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
-		$c_field_id        = db_prepare_int( $p_field_id );
-		$c_caption         = db_prepare_string( $p_def_array['caption']         );
-		$c_type            = db_prepare_int(    $p_def_array['type']            );
-		$c_values          = db_prepare_string( $p_def_array['values']          );
-		$c_default         = db_prepare_string( $p_def_array['default']         );
-		$c_regexp          = db_prepare_string( $p_def_array['regexp']          );
-		$c_access_level_r  = db_prepare_int(    $p_def_array['access_level_r']  );
-		$c_access_level_rw = db_prepare_int(    $p_def_array['access_level_rw'] );
-		$c_length_min      = db_prepare_int(    $p_def_array['length_min']      );
-		$c_length_max      = db_prepare_int(    $p_def_array['length_max']      );
-		$c_advanced        = db_prepare_int(    $p_def_array['advanced']        );
-		$c_sequence        = db_prepare_int(    $p_def_array['sequence']        );
+		$c_field_id			= db_prepare_int( $p_field_id );
+		$c_caption			= db_prepare_string( $p_def_array['caption']         );
+		$c_type				= db_prepare_int(    $p_def_array['type']            );
+		$c_possible_values	= db_prepare_string( $p_def_array['possible_values'] );
+		$c_default_value	= db_prepare_string( $p_def_array['default_value']   );
+		$c_valid_regexp		= db_prepare_string( $p_def_array['valid_regexp']      );
+		$c_access_level_r	= db_prepare_int(    $p_def_array['access_level_r']  );
+		$c_access_level_rw	= db_prepare_int(    $p_def_array['access_level_rw'] );
+		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
+		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
+		$c_advanced			= db_prepare_int(    $p_def_array['advanced']        );
+		$c_sequence			= db_prepare_int(    $p_def_array['sequence']        );
 
 		$query = "UPDATE " .
-				 config_get( 'mantis_custom_field_table' );
+				 config_get( 'mantis_custom_field_table' ).
+				 " SET ";
+		$t_update_something = false;
 
 		if( array_key_exists( 'caption', $p_def_array ) ) {
-			$query .= " SET caption='$c_caption',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "caption='$c_caption'";
 		}
 		if( array_key_exists( 'type', $p_def_array ) ) {
-			$query .= " SET type='$c_type',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "type='$c_type'";
 		}
-		if( array_key_exists( 'values', $p_def_array ) ) {
-			$query .= " SET values='$c_values',";
+		if( array_key_exists( 'possible_values', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "possible_values='$c_possible_values'";
 		}
-		if( array_key_exists( 'default', $p_def_array ) ) {
-			$query .= " SET default='$c_default',";
+		if( array_key_exists( 'default_value', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "default_value='$c_default_value'";
 		}
-		if( array_key_exists( 'regexp', $p_def_array ) ) {
-			$query .= " SET regexp='$c_regexp',";
+		if( array_key_exists( 'valid_regexp', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "valid_regexp='$c_valid_regexp'";
 		}
 		if( array_key_exists( 'access_level_r', $p_def_array ) ) {
-			$query .= " SET access_level_r='$c_access_level_r',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "access_level_r='$c_access_level_r'";
 		}
 		if( array_key_exists( 'access_level_rw', $p_def_array ) ) {
-			$query .= " SET access_level_rw='$c_access_level_rw',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "access_level_rw='$c_access_level_rw'";
 		}
 		if( array_key_exists( 'length_min', $p_def_array ) ) {
-			$query .= " SET length_min='$c_length_min',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "length_min='$c_length_min'";
 		}
 		if( array_key_exists( 'length_max', $p_def_array ) ) {
-			$query .= " SET length_max='$c_length_max',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "length_max='$c_length_max'";
 		}
 		if( array_key_exists( 'advanced', $p_def_array ) ) {
-			$query .= " SET advanced='$c_advanced',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "advanced='$c_advanced'";
 		}
 		if( array_key_exists( 'sequence', $p_def_array ) ) {
-			$query .= " SET sequence='$c_sequence',";
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "sequence='$c_sequence'";
 		}
 
 		$query .= " WHERE id='$c_field_id'";
 
-		db_query( $query );
+		if( $t_update_something ) {
+			db_query( $query );
+		} else {
+			return false;   # there is nothing to update...
+		}
 
 		# db_query() errors on failure so:
 		return true;
@@ -290,8 +354,8 @@ CREATE TABLE mantis_custom_field_project_table (
 	function custom_field_add( $p_field_id, $p_project_id ) {
 		$c_field_id		= db_prepare_int( $p_field_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
-		
-		if ( custom_field_in_project( $p_field_id, $p_project_id ) {
+
+		if ( custom_field_in_project( $p_field_id, $p_project_id ) ) {
 			return true;
 		}
 
@@ -312,7 +376,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	function custom_field_remove( $p_field_id, $p_project_id ) {
 		$c_field_id		= db_prepare_int( $p_field_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
-		
+
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE field_id = '$c_field_id'
@@ -324,7 +388,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
-	# Delete the field definition and all associated values and project 
+	# Delete the field definition and all associated values and project
 	#  associations
 	#  return true on success, false on failure
 	function custom_field_delete( $p_field_id ) {
@@ -397,17 +461,23 @@ CREATE TABLE mantis_custom_field_project_table (
 
 	# --------------------
 	# Return an array of ids of custom fields related to the specified project
-	#  (the array may be empty)
-	function custom_field_get_ids( $p_project_id ) {
+	# if the project_id parameter is empty (or 0) return all existing custom
+	# field ids  (the array may be empty)
+	function custom_field_get_ids( $p_project_id = 0 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT field_id FROM
-				  $t_custom_field_project_table p, $t_custom_field_table f
-				  WHERE p.project_id='$c_project_id'
-					AND p.field_id = f.id
-				  ORDER BY f.sequence ASC";
+		if( 0 == $p_project_id ) {
+			$query = "SELECT id as field_id FROM
+					  $t_custom_field_table";
+		} else {
+			$query = "SELECT field_id FROM
+					  $t_custom_field_project_table p, $t_custom_field_table f
+					  WHERE p.project_id='$c_project_id'
+						AND p.field_id = f.id
+					  ORDER BY f.sequence ASC";
+		}
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
@@ -417,6 +487,30 @@ CREATE TABLE mantis_custom_field_project_table (
 			$row = db_fetch_array( $result );
 
 			array_push( $t_ids, $row['field_id'] );
+		}
+
+		return $t_ids;
+	}
+
+	# --------------------
+	# Return an array of ids of projects related to the specified custom field
+	# (the array may be empty)
+	function custom_field_get_project_ids( $p_field_id ) {
+		$c_field_id = db_prepare_int( $p_field_id );
+
+		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+		$query = "SELECT project_id FROM
+					  $t_custom_field_project_table
+				  WHERE field_id = '$c_field_id'";
+		$result = db_query( $query );
+
+		$t_row_count = db_num_rows( $result );
+		$t_ids = array();
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			array_push( $t_ids, $row['project_id'] );
 		}
 
 		return $t_ids;
@@ -443,7 +537,7 @@ CREATE TABLE mantis_custom_field_project_table (
 
 	# --------------------
 	# Get the value of a custom field for the given bug
-	# 
+	#
 	# @@@ return values are unclear... should we error when access is denied
 	#   and provide an api to check whether it will be?
 	function custom_field_get_value( $p_field_id, $p_bug_id ) {
@@ -453,14 +547,14 @@ CREATE TABLE mantis_custom_field_project_table (
 		ensure_field_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT access_level_r, default FROM
+		$query = "SELECT access_level_r, default_value FROM
 				  $t_custom_field_table
 				  WHERE field_id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 
 		$t_access_level_r	= $row['access_level_r'];
-		$t_default			= $row['default'];
+		$t_default_value	= $row['default_value'];
 
 		if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 			return false;
@@ -468,7 +562,7 @@ CREATE TABLE mantis_custom_field_project_table (
 
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
 		$query = "SELECT value FROM
-				  $t_mantis_custom_field_string
+				  $t_custom_field_string_table
 				  WHERE bug_id='$c_bug_id'
 					AND field_id='$c_field_id'";
 		$result = db_query( $query );
@@ -476,7 +570,7 @@ CREATE TABLE mantis_custom_field_project_table (
 		if( db_num_rows( $result ) > 0 ) {
 			return db_result( $result );
 		} else {
-			return $t_default;
+			return $t_default_value;
 		}
 	}
 
@@ -495,23 +589,23 @@ CREATE TABLE mantis_custom_field_project_table (
 		ensure_field_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT type, values, regexp, access_level_rw,
-				  length_min, length_max, default
+		$query = "SELECT type, possible_values, valid_regexp, access_level_rw,
+				  length_min, length_max, default_value
 				  FROM $t_custom_field_table
 				  WHERE field_id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 
 		$t_type				= $row['type'];
-		$t_values			= $row['values'];
-		$t_regexp			= $row['regexp'];
+		$t_possible_values	= $row['possible_values'];
+		$t_valid_regexp		= $row['valid_regexp'];
 		$t_access_level_rw	= $row['access_level_rw'];
 		$t_length_min		= $row['length_min'];
 		$t_length_max		= $row['length_max'];
-		$t_default			= $row['default'];
+		$t_default_value	= $row['default_value'];
 
 		# check for valid value
-		if ( !ereg( $t_regexp, $p_value ) ) {
+		if ( !ereg( $t_valid_regexp, $p_value ) ) {
 			return false;
 		}
 
@@ -547,7 +641,7 @@ CREATE TABLE mantis_custom_field_project_table (
 			#  the default, don't set it.  This prevents looping forms
 			#  from hardcoding all the defaults into the bug whenever it gets
 			#  updated
-			if ( $t_default != $p_value ) { 
+			if ( $t_default_value != $p_value ) {
 				$query = "INSERT INTO $t_custom_field_string_table
 							( field_id, bug_id, value )
 						  VALUES
