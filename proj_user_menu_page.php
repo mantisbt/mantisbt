@@ -131,7 +131,7 @@
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_access_level = get_effective_access_level( $u_id );
+		$u_access_level = user_get_access_level( $u_id, helper_get_current_project() );
 
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );

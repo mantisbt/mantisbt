@@ -10,12 +10,9 @@
 <?php
 	check_access( MANAGER );
 
-	$result = project_remove_user( $g_project_cookie_val, $f_user_id );
+	$f_user_id = gpc_get_int( 'f_user_id' );
 
-    $t_redirect_url = 'proj_user_menu_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	project_remove_user( helper_get_current_project(), $f_user_id );
+
+	print_header_redirect( 'proj_user_menu_page.php' );
 ?>
