@@ -5,8 +5,8 @@ Mantis ChangeLog
  * Behaviour change: made 'normal' the default priority for new bugs
  * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
  * Behaviour change: Removed f_ prefix from POST and GET field names
- * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)
  * Changed config options (*_color): now use $g_status_colors['<status color>'] array. For example, $g_new_color is replaced with $g_status_colors['new'].
+ * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)
  * Code cleanup: added validation checks for all inputs that are passed on to database queries
  * Code cleanup: db_prepare_string(), db_prepare_int(), and db_prepare_bool() to be called on data before it goes into the database
  * Code cleanup: modified input-checked variables to be prefixed by $c_
@@ -51,10 +51,12 @@ Mantis ChangeLog
  * Enhancement: offer multiple bug actions in view_all_bug_page.php
  * Enhancement: private bugnotes. At present these bugnotes are omitted from sent emails, a future release will put private bugnotes in emails to those who should see them.
  * Enhancement: provide a notification when a bug is deleted
+ * Enhancement: reminder feature to let you send a message about a bug to a list of users
  * Enhancement: reworked BCTimer class to be more useful for debugging
  * Enhancement: send Bug History in e-mails
  * Enhancement: support auto-generation of SQL files.
  * Enhancement: support uploading attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
+ * Enhancement: User names are now auto-generated for accounts that no longer exists.  The user names are prefixed by the string (prefix_for_deleted_users).
  * Enhancement: user_api.php, login.php and login_page.php send the user back to the referring page after login
  * Enhancement: warn the user if his browser does not support cookies, either because it's too old or because it was disabled
  * Enhancement: you can add multiple categories in one step. This is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
@@ -65,6 +67,8 @@ Mantis ChangeLog
  * Fix: bug where upload paths with \'s in them kept getting escaped over and over
  * Fix: db_result() and db_fetch_array() return data with slashes stripped
  * Fix: defects with updating project categories and versions
+ * Fix: deleting the current project no longer gives an error (#2808)
+ * Fix: email address validation should be much more RFC 822 compliant (#2819)
  * Fix: Made 'light grey' the default color for 'closed'
  * Fix: make form elements standards compliant
  * Fix: prevent an unauthorized user from deleting a bug by modifying the URL
@@ -81,6 +85,7 @@ Mantis ChangeLog
  * Fix: replace & in URLs with &amp; to conform with standards
  * Fix: use single quotes whenever possible if double quotes were unnecessary
  * Fix: Use supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables are deprecated
+ * Fix: when viewing all bugs for all projects you no longer see bugs from disabled projects
  * Languages: Added $s_charset to all localization files.
  * Languages: Added Chinese Simplified translation.
  * Languages: Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
@@ -103,26 +108,42 @@ Mantis ChangeLog
  * New config option (allow_reporter_close): allow reporters to close the bugs they reported
  * New config option (allow_reporter_reopen): allows reporters to reopen closed bugs that they reported if they are unhappy with the resolution (defaults to ON) (see issue #2108)
  * New config option (auto_set_status_to_assigned): automatically set the status to ASSIGNED when an issue is assigned.  Default is ON.
+ * New config option (bug_reminder_threshold): the access level required to send reminders
+ * New config option (bug_resolved_status_threshold): To mark the status threshold for marking bugs as readonly.  Default is RESOLVED.
  * New config option (compress_html): optional compression of html output
+ * New config option (create_project_threshold): provide a threshold for users who can create projects
+ * New config option (custom_field_edit_after_create): new option to control whether a user is directed to edit a custom field after creating it
+ * New config option (custom_field_link_threshold): provide a threshold for users who can link and unlink custom fields but not delte, create, or modify them
  * New config option (custom_headers): contains a list of headers to prepend to each outgoing HTTP response.  This can be used for P3P policy headers among other things (see issue #2649)
  * New config option (debug_email): allows debugging e-mail messages during development by only sending them to the specified e-mail while including the original to, cc, bcc in the message body (currently supported only when phpmailer is used).
  * New config option (default_notify_flags and notify_flags): these replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
  * New config option (delete_bugnote_threshold): the access level required to delete a bug
+ * New config option (delete_project_threshold): provide a threshold for users who can delete projects
  * New config option (email_set_category): make Mantis set the category of the e-mail sent (via mail()/phpMailer).  This is useful in organising e-mails better using clients like Microsoft Outlook.
  * New config option (handle_bug_threshold): the access level required for a user to appear in the assign to list and be able to handle bugs
+ * New config option (html_make_links): Replaces allow_href_tags. When true, convert text links in strings into actual anchor tags.
+ * New config option (html_valid_tags): Replaces allow_html_tags and html_tags.  Set it to a string containing a comma-separated list of tag names that should be allowed in messages.
  * New config option (limit_email_domain): only allow emails in the given domain
  * New config option (notify_admin_on_new): enable/disable notifications to admins on arrival of new bugs
  * New config option (notify_on_new_threshold): the access level above which users will be notified of new bugs
+ * New config option (reminder_recipents_monitor_bug): To automatically add recipients of bug reminders to the monitor list of the defect.  This is done if the access level is greater than or equal to monitor threshold and the recipient is not the handler or the reporter.
  * New config option (show_detailed_errors):
  * New config option (show_notices):
  * New config option (show_project_menu_bar): adds a menu bar with all the projects as links
  * New config option (show_queries_count and show_queries_list): track the executed queries and display their total count, unique queries count, and the actual list of queries executed
  * New config option (show_warnings): 
+ * New config option (smtp_password): password to use when connection to an smtp server with phpMailer
+ * New config option (smtp_username): username to use when connection to an smtp server with phpMailer
+ * New config option (store_reminders): controls whether to store sent reminders as a bugnote
  * New config option (summary_category_include_project): display "[project] category" rather than "category" only in summary for "All Projects"
  * New config option (update_bug_threshold): the access level required to update a bug
+ * New config option (upload_project_file_threshold, upload_bug_file_threshold, allow_reporter_upload): control what users may upload what kinds of files
  * New config option (view_attachments_threshold): the access level required to view attachments.  This is useful when there is a need to share the knowledge about the defects, but to secure customer data.
  * New config option (view_summary_threshold): the access level required for viewing the summary page
  * New file (obsolete.php): checks for obsolete variables and tells the operator
+ * Removed config option (allow_href_tags): see new option html_make_links
+ * Removed config option (allow_html_tags): see new option html_valid_tags
+ * Removed config option (html_tags): see new option html_valid_tags
  * Removed config option (register_globals): just check the actual value of the PHP config variable
  * Removed file: proj_user_api.php
  * Renamed file: manage_create_new_user.php to manage_user_create.php
@@ -130,28 +151,7 @@ Mantis ChangeLog
  * Renamed file: report_add.php to bug_add.php
  * Renamed file: report_bug_advanced_page.php to bug_add_advanced_page.php
  * Renamed file: report_bug_page.php to bug_add_page.php
- * New config option (upload_project_file_threshold, upload_bug_file_threshold, allow_reporter_upload): control what users may upload what kinds of files
- * Enhancement: reminder feature to let you send a message about a bug to a list of users
- * New config option (store_reminders): controls whether to store sent reminders as a bugnote
- * New config option (bug_reminder_threshold): the access level required to send reminders
- * New config option (reminder_recipents_monitor_bug): To automatically add recipients of bug reminders to the monitor list of the defect.  This is done if the access level is greater than or equal to monitor threshold and the recipient is not the handler or the reporter.
  * Security fix: Mantis no longer relies on register_globals being turned on
- * New config option (bug_resolved_status_threshold): To mark the status threshold for marking bugs as readonly.  Default is RESOLVED.
- * Fix: deleting the current project no longer gives an error (#2808)
- * Fix: email address validation should be much more RFC 822 compliant (#2819)
- * Removed config option (allow_href_tags): see new option html_make_links
- * Removed config option (allow_html_tags): see new option html_valid_tags
- * Removed config option (html_tags): see new option html_valid_tags
- * New config option (html_make_links): Replaces allow_href_tags. When true, convert text links in strings into actual anchor tags.
- * New config option (html_valid_tags): Replaces allow_html_tags and html_tags.  Set it to a string containing a comma-separated list of tag names that should be allowed in messages.
- * New config option (custom_field_link_threshold): provide a threshold for users who can link and unlink custom fields but not delte, create, or modify them
- * New config option (custom_field_edit_after_create): new option to control whether a user is directed to edit a custom field after creating it
- * Enhancement: User names are now auto-generated for accounts that no longer exists.  The user names are prefixed by the string (prefix_for_deleted_users).
- * Fix: when viewing all bugs for all projects you no longer see bugs from disabled projects
- * New config option (create_project_threshold): provide a threshold for users who can create projects
- * New config option (delete_project_threshold): provide a threshold for users who can delete projects
- * New config option (smtp_username): username to use when connection to an smtp server with phpMailer
- * New config option (smtp_password): password to use when connection to an smtp server with phpMailer
 
 
 2002.08.23  -  0.17.5
