@@ -3,6 +3,7 @@ Mantis ChangeLog
 2004.09.xx  -  0.19.0
 
 - 0004425: [bugtracker] Action group page exceeds max execution time (Victor Boctor)
+- 0004426: [email] Email notifications to users with language set to "auto" causes errors (thraxisp)
 - 0004429: [localization] Slovene national characters not displayed correctly (Jeroen Latour)
 - 0004423: [localization] Parse error in strings_hungarian.txt line 974 (Victor Boctor)
 - 0004435: [other] Auto-preview of attached images is broken (Victor Boctor)
@@ -88,7 +89,7 @@ This is the first release candidate for 0.19.0, it requires database upgrade.  W
 - 0004317: [bugtracker] "Report stay" should print out the submitted bug number together with the "report more bugs" (Bastian Pfennigschmidt)
 - 0004342: [bugtracker] Developers unable to submit bugs (thraxisp)
 - 0004376: [bugtracker]  "assigned to" buttons don't obey $g_set_status_threshold (thraxisp)
-- 0004386: [bugtracker] Changelog doesn´t respect user rights (Victor Boctor)
+- 0004386: [bugtracker] Changelog doesn't respect user rights (Victor Boctor)
 - 0004397: [bugtracker] broken captcha if ttf not available (Paul)
 - 0004348: [performance] Show queries with runtime (thraxisp)
 - 0003938: [localization] Untranslatable string (jlatour)

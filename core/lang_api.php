@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.30 2004-08-15 22:21:53 thraxisp Exp $
+	# $Id: lang_api.php,v 1.31 2004-08-31 03:54:47 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -64,13 +64,13 @@
 			$t_lang = user_pref_get_language( auth_get_current_user_id() );
 		}
 
+		if ( 'auto' == $t_lang ) {
+			$t_lang = lang_map_auto();
+		}
+
 		# Otherwise fall back to default
 		if ( false === $t_lang ) {
 			$t_lang = config_get( 'default_language' );
-		}
-
-		if ( 'auto' == $t_lang ) {
-			$t_lang = lang_map_auto();
 		}
 
 		# Remember the language
