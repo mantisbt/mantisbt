@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.20 2005-02-12 20:01:19 jlatour Exp $
+	# $Id: version_api.php,v 1.21 2005-03-08 13:41:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -257,7 +257,7 @@
 
 		$t_project_version_table = config_get( 'mantis_project_version_table' );
 
-		$query = "SELECT version, date_order, released
+		$query = "SELECT *
 				  FROM $t_project_version_table
 				  WHERE project_id='$c_project_id' $t_released_where
 				  ORDER BY date_order DESC";
