@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.78 2004-11-22 13:25:45 vboctor Exp $
+	# $Id: bug_update.php,v 1.79 2004-11-30 14:56:24 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -151,6 +151,7 @@
 
 			case config_get( 'bug_reopen_status' ):
 				if ( $t_old_bug_status >= $t_resolved ) {
+					bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
 					# bug_reopen updates the status and bugnote and sends message
 					bug_reopen( $f_bug_id, $f_bugnote_text );
 					$t_notify = false;
