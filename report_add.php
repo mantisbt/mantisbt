@@ -263,6 +263,8 @@
 			</form>
 <?php
 		} else {
+			$t_view_bug_url = get_view_redirect_url( $t_bug_id, 1 );
+			print_bracket_link( $t_view_bug_url, $s_view_submitted_bug_link." ".$t_bug_id );
 			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
 		}
 	}

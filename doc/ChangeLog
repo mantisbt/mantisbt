@@ -32,6 +32,7 @@ Mantis
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
  * Added a global option to control what access levels can delete bugs.
  * Added g_bug_move_access_level to control what access level can move bugs to other projects.
+ * Added extra link after a bug report to go directly to the new bug.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
 
