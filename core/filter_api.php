@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.51 2004-07-21 12:48:00 vboctor Exp $
+	# $Id: filter_api.php,v 1.52 2004-07-27 11:44:26 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1306,7 +1306,7 @@
 					collapse_icon( 'filter' );
 					echo lang_get( 'search' );
 				?>: 
-				<input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" />
+				<input type="text" size="16" name="search" value="<?php PRINT htmlspecialchars( $t_filter['search'] ); ?>" />
 
 				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'search' ) ?>" />
 			</td>
