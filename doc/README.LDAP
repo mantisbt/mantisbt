@@ -1,5 +1,8 @@
 -------------------------------------------------------------------------------
-   Mantis - LDAP capabilities documentation        leighm@linuxbandwagon.com
+   Mantis - LDAP capabilities documentation
+   Original by leighm@linuxbandwagon.com
+   Updated by Adrian Spinei aspinei@yahoo.com - currently the maintaner of
+   the LDAP capabilities of mantis, please direct all questions to me
 -------------------------------------------------------------------------------
 
 Here is my attempt at providing Mantis with LDAP capabilities.
@@ -30,8 +33,14 @@ uid: tests
 userPassword: password
 objectclass: testPerson
 
-It is also required to add the following configuration items to the
-config_inc.php
+Note : the password may be in clear or taken from the /etc/passwd or /etc/shadow file
+if you prefer to keep the password in clear (very insecure !) yop should use the
+configuration option $g_ldapauth_type = 'CLEAR';
+otherwise $g_ldapauth_type = 'CRYPT'; (and the password should match /etc/passwd)
+There are some specialized software for replicating passwd to LDAP and inversely
+(eg. http://freshmeat.net/projects/cpu/)
+
+It is also required to set the following configuration items in default/config_inc1.php
 
 
 	#############################
@@ -43,6 +52,7 @@ config_inc.php
 	$g_ldap_root_dn="dc=test,dc=com,dc=au";
 	$g_use_ldap_email=1;    ## Should we send to the LDAP email address or what MySql tells us
 	# $g_ldap_organisation="(organizationname=*Traffic)";     ## optional
+	$g_ldapauth_type = 'CLEAR';
 
 
 Dont forget to change your $g_login_method to $g_login_method = LDAP;
