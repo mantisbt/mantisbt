@@ -5,10 +5,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: compress_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
+	###########################################################################
+	# Compression API
+	#
 	# Starts the buffering/compression (only if the compression option is ON)
 	# This method should be called after all possible re-directs and access
 	# level checks.
-	# ----------------
+	###########################################################################
+
 	function start_compression() {
 		global $g_compress_html;
 

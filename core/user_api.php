@@ -5,9 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: user_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Cookie API
 	###########################################################################
+
 	# --------------------
 	# checks to see that a user is logged in
 	# if the user is and the account is enabled then let them pass

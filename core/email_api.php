@@ -5,15 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: email_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Email API
-	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-25 07:04:40 $
-	#
-	# $Id: email_api.php,v 1.1 2002-08-25 07:04:40 jfitzell Exp $
 	###########################################################################
+
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
 	function is_valid_email( $p_email ) {

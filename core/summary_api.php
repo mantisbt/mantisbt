@@ -5,9 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: summary_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Summary printing API
 	###########################################################################
+
 	# --------------------
 	# Used in summary reports
 	# Given the enum string this function prints out the summary for each enum setting

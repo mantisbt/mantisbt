@@ -5,9 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: version_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
-	# version API
+	# Version API
 	###########################################################################
+
 	# --------------------
 	# checks to see if the version is a duplicate
 	# we do it this way because each different project can have the same category names

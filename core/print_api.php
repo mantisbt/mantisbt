@@ -5,11 +5,15 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: print_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Basic Print API
-	###########################################################################
-
+	#
 	# this file handles printing and string manipulation functions
+	###########################################################################
 
 	# --------------------
 	function print_header_redirect( $p_url ) {

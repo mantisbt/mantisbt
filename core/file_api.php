@@ -4,19 +4,15 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-25 07:04:40 $
-	#
-	# $Id: file_api.php,v 1.1 2002-08-25 07:04:40 jfitzell Exp $
+	# $Id: file_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# File API
 	###########################################################################
-?>
-<?php
+
 	# --------------------
 	# Gets the filename without the bug id prefix.
 	function file_get_display_name( $p_filename ) {

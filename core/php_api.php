@@ -5,10 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: php_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# PHP Compatibility API
 	#
-	# Methods to help in backwards compatibility of PHP versions, etc.
+	# Functions to help in backwards compatibility of PHP versions, etc.
 	###########################################################################
 
 	# Constant for our minimum required PHP version

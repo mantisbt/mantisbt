@@ -5,12 +5,16 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
-	###########################################################################
-	# Core HTML API
-	###########################################################################
+	# --------------------------------------------------------
+	# $Id: html_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
 
+	###########################################################################
+	# HTML API
+	#
 	# These functions control the display of each page
 	# I've numbered the functions in the order they should appear
+	###########################################################################
 
 	# --------------------
 	# first part of the html followed by meta tags then the second part

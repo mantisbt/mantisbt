@@ -5,9 +5,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Id: graph_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Graph API
 	###########################################################################
+
 	# Function which gives the absolute values according to the status (opened/closed/resolved)
 	function enum_bug_group( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
