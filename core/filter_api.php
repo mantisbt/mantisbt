@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.9 2003-02-25 15:48:07 int2str Exp $
+	# $Id: filter_api.php,v 1.10 2003-02-25 18:15:59 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -102,13 +102,13 @@
 		}
 
 		# hide closed
-		if (( 'on' == $t_filter['hide_closed'] )&&( CLOSED != $t_filter['show_status'] )) {
+		if ( ( 'on' == $t_filter['hide_closed'] ) && ( CLOSED != $t_filter['show_status'] ) ) {
 			$t_closed = CLOSED;
 			array_push( $t_where_clauses, "($t_bug_table.status<>'$t_closed')" );
 		}
 
 		# hide resolved
-		if (( 'on' == $t_filter['hide_resolved'] )&&( RESOLVED != $t_filter['show_status'] )) {
+		if ( ( 'on' == $t_filter['hide_resolved'] ) && ( RESOLVED != $t_filter['show_status'] ) ) {
 			$t_resolved = RESOLVED;
 			array_push( $t_where_clauses, "($t_bug_table.status<>'$t_resolved')" );
 		}
