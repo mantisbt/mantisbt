@@ -53,7 +53,7 @@
 ?>
 <p>
 <div align=center>
-<table width=75% bgcolor=<? echo $g_primary_border_color ?>>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_primary_color_dark ?>>
 		<b><? echo string_unsafe( $t_headline ) ?></b>

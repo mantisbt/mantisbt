@@ -39,14 +39,14 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=75%>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_news_add ?>">
 	<input type=hidden name=f_poster_id value="<? echo $u_id ?>">
 	<tr>
-		<td colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Add News</b>
 		</td>
 	</tr>
@@ -81,13 +81,13 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=75%>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_news_edit_page ?>">
 	<tr>
-		<td colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Edit or Delete News</b>
 		</td>
 	</tr>
@@ -109,7 +109,7 @@
 					FROM $g_mantis_news_table
 					ORDER BY id DESC";
 			    $result = db_mysql_query( $query );
-			    $news_count = mysql_num_rows( $ result );
+			    $news_count = mysql_num_rows( $result );
 
 				for ($i=0;$i<$news_count;$i++) {
 					$row = mysql_fetch_array( $result );

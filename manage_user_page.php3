@@ -37,14 +37,14 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=50%>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_manage_user_update ?>?f_action=update">
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
 	<tr>
-		<td colspan=3 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=3 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Edit User</b>
 		</td>
 	</tr>

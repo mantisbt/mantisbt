@@ -43,12 +43,12 @@
 </div>
 
 <p>
-<table bgcolor=<? echo $g_primary_border_color ?> width=100%>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=7>
 	<tr>
-		<td colspan=7>
+		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Viewing Bugs</b>
 		</td>
 	</tr>

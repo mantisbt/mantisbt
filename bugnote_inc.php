@@ -15,7 +15,7 @@
 	$num_notes = mysql_num_rows($result);
 ?>
 
-<table width=100% cols=2 bgcolor=<? echo $g_primary_border_color ?>>
+<table width=100% cols=2 bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <?
 	### no bugnotes
 	if ( $num_notes==0 ) {
@@ -30,8 +30,8 @@
 	### print bugnotes
 	else {
 ?>
-<tr bgcolor=<? echo $g_white_color ?>>
-	<td colspan=2>
+<tr>
+	<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 		<b>Bug Notes</b>
 	</td>
 </tr>

@@ -16,6 +16,13 @@
 <? print_header( $g_page_title ) ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	### Get user information and prefix with u_
+	$query = "SELECT id
+		FROM $g_mantis_user_table
+		WHERE cookie_string='$g_string_cookie_val'";
+    $result = db_mysql_query($query);
+    $u_id = mysql_result( $result, 0 );
 ?>
 
 <p>
@@ -28,13 +35,13 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=75%>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_report_add ?>">
 	<tr>
-		<td colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Enter Report Details</b>
 		</td>
 	</tr>
@@ -84,6 +91,51 @@
 			</select>
 		</td>
 	</tr>
+	<tr height=10 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=2>
+		</td>
+	</tr>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
+		<td>
+			Select Profile:
+		</td>
+		<td>
+			<select name=f_id>
+				<option value="">
+			<?
+				### Get profiles
+				$query = "SELECT id, platform, os, os_build, default_profile
+					FROM $g_mantis_user_profile_table
+					WHERE user_id='$u_id'
+					ORDER BY id DESC";
+			    $result = db_mysql_query( $query );
+			    $profile_count = mysql_num_rows( $result );
+
+				for ($i=0;$i<$profile_count;$i++) {
+					### prefix data with v_
+					$row = mysql_fetch_array( $result );
+					extract( $row, EXTR_PREFIX_ALL, "v" );
+					$v_platform	= string_unsafe( $v_platform );
+					$v_os		= string_unsafe( $v_os );
+					$v_os_build	= string_unsafe( $v_os_build );
+
+					if ( $v_default_profile=="on" ) {
+						PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+					}
+					else {
+						PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+					}
+				}
+
+			?>
+			</select>
+		</td>
+	</tr>
+	<tr height=10 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=2>
+		<b>OR</b> Fill in
+		</td>
+	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
 			Platform:
@@ -100,12 +152,16 @@
 			<input type=text name=f_os size=32 maxlength=32>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
+	<tr bgcolor=<? echo $g_primary_color_dlight ?>>
 		<td>
 			OS Build:
 		</td>
 		<td>
 			<input type=text name=f_osbuild size=16 maxlength=16>
+		</td>
+	</tr>
+	<tr height=10 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=2>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>

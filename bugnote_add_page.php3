@@ -30,14 +30,14 @@
 
 <p>
 <div align=center>
-<table width=100% bgcolor=<? echo $g_primary_border_color ?>aa>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_bugnote_add ?>">
 	<input type=hidden name=f_bug_id value="<? echo $f_id ?>">
 	<tr>
-		<td>
+		<td bgcolor=<? echo $g_table_title_color ?>>
 			<b>Add Bugnote</b>
 		</td>
 	</tr>

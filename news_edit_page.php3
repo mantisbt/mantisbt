@@ -30,6 +30,7 @@
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, "v" );
     }
+
    	$v_headline = string_edit( $v_headline );
    	$v_body = string_edit( $v_body );
 ?>
@@ -47,14 +48,14 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=75%>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_news_update ?>">
 	<input type=hidden name=f_id value="<? echo $v_id ?>">
 	<tr>
-		<td colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Edit News</b>
 		</td>
 	</tr>

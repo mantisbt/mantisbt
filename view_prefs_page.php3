@@ -35,14 +35,14 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=50%>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=2>
 	<form method=post action="<? echo $g_view_prefs_update ?>">
 	<input type=hidden name=f_action value="update">
 	<tr>
-		<td>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Viewing Preferences</b>
 		</td>
 	</tr>

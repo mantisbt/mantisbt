@@ -49,12 +49,12 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=100%>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
+	<table cols=8 width=100%>
 	<tr>
-		<td>
+		<td colspan=8 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Manage Accounts</b>
 		</td>
 	</tr>

@@ -21,13 +21,13 @@ you entered is incorrect.
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=50%>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=2 width=100%>
-	<form action="<? echo $g_login ?>" method=post>
+	<form method=post action="<? echo $g_login ?>">
 	<tr>
-		<td>
+		<td bgcolor=<? echo $g_table_title_color ?>>
 			<b>Login</b>
 		</td>
 	</tr>

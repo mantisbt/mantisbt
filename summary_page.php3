@@ -22,16 +22,16 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<table width=100% bgcolor=<? echo $g_primary_border_color ?>>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=2>
 	<tr>
-		<td bgcolor=<? echo $g_white_color ?> colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Summary</b>
 		</td>
 	</tr>
-	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
 			<b>by status:</b>
 		</td>
@@ -39,7 +39,7 @@
 			<b>by date:</b>
 		</td>
 	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
 			<? ### STATUS ### ?>
 			<table width=97%>
@@ -55,7 +55,7 @@
 			</table>
 		</td>
 	</tr>
-	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
 			<b>by severity:</b>
 		</td>
@@ -63,7 +63,7 @@
 			<b>by resolution:</b>
 		</td>
 	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
 			<? ### SEVERITY ### ?>
 			<table width=97%>
@@ -77,7 +77,7 @@
 			</table>
 		</td>
 		</tr>
-	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
 			<b>by category:</b>
 		</td>
@@ -85,7 +85,7 @@
 			<b>by priority:</b>
 		</td>
 	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
 			<? ### CATEGORY ### ?>
 			<table width=97%>

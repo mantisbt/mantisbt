@@ -22,17 +22,17 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=50%>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<tr>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor=<? echo $g_table_title_color ?>>
 			<b>Logged Out...</b>
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
+		<td align=center bgcolor=<? echo $g_primary_color_dark ?>>
 			<b>...Redirecting <a href="<? echo $g_index ?>">Here</a></b>
 		</td>
 	</tr>

@@ -44,14 +44,14 @@
 ?>
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=50%>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=3>
+	<table cols=2 width=100%>
 	<form method=post action="<? echo $g_account_update ?>">
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
 	<tr>
-		<td>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Edit Account</b>
 		</td>
 	</tr>

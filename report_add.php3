@@ -40,11 +40,28 @@
 		$f_description = string_safe( $f_description );
 		$f_additional_info = string_safe( $f_additional_info );
 		$f_steps_to_reproduce = string_safe( $f_steps_to_reproduce );
-		$f_os = string_safe( $f_os );
-		$f_osbuild = string_safe( $f_osbuild );
-		$f_platform = string_safe( $f_platform );
 		$f_version = string_safe( $f_version );
 		$f_build = string_safe( $f_build );
+
+		$f_platform = string_safe( $f_platform );
+		$f_os = string_safe( $f_os );
+		$f_osbuild = string_safe( $f_osbuild );
+
+		### if a profile was selected then let's use that information
+		if ( !empty( $f_id ) ) {
+			### Get profile data and prefix with v_
+			$query = "SELECT id, platform, os, os_build, default_profile
+				FROM $g_mantis_user_profile_table
+				WHERE id='$f_id'";
+		    $result = db_mysql_query( $query );
+		    $profile_count = mysql_num_rows( $result );
+
+			$row = mysql_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			$f_platform	= string_unsafe( $v_platform );
+			$f_os		= string_unsafe( $v_os );
+			$f_osbuild	= string_unsafe( $v_os_build );
+		}
 
 		### Insert text information
 		$query = "INSERT

@@ -34,13 +34,13 @@
 
 <p>
 <div align=center>
-<table bgcolor=<? echo $g_primary_border_color ?> width=75%>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_report_add ?>">
 	<tr>
-		<td colspan=2>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Enter Report Details</b>
 		</td>
 	</tr>

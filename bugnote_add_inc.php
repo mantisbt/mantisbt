@@ -9,10 +9,10 @@
 	### check access level
 	if ( access_level_check_greater( "reporter" ) ) {
 ?>
-<table width=100% cols=2 bgcolor=<? echo $g_primary_border_color ?>>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
-	<td valign=top width=25% bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=2 bgcolor=<? echo $g_white_color ?>>
+	<td valign=top width=100% bgcolor=<? echo $g_white_color ?>>
+	<table width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 	<form method=post action="<? echo $g_bugnote_add_page ?>">
 		<td align=center bgcolor=<? echo $g_white_color ?> colspan=2>

@@ -172,13 +172,21 @@
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
 
 	#--------------------
+	# html table appearance variables
+	$g_primary_table_tags        = "";
+
+
+	#--------------------
 	# color values
+	$g_white_color           = "#ffffff";    # white
+
 	$g_primary_color_dark    = "#d8d8d8";    # gray
 	$g_primary_color_light   = "#e8e8e8";    # light gray
 	$g_primary_border_color  = "#aaaaaa";    # dark gray
 	$g_category_title_color	 = "#c8c8e8";    # bluish
 	$g_category_title_color2 = "#c0c0c8";    # gray bluish
-	$g_white_color           = "#ffffff";    # white
+
+	$g_table_title_color     = "#ffffff";    # white
 
 	$g_required_field_color  = "#aa0000";    # redish
 

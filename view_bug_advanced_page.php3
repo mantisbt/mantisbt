@@ -81,12 +81,12 @@
 </div>
 
 <p>
-<table width=100% bgcolor=<? echo $g_primary_border_color ?>aa>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% bgcolor=<? echo $g_white_color ?>>
+	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
-		<td bgcolor=<? echo $g_white_color ?> colspan=2>
+		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Viewing Bug Details</b>
 		</td>
 	</tr>
@@ -307,13 +307,15 @@
 		 ( $u_access_level=="updater" ) ) {
 ?>
 	<tr align=center>
-	<form method=post action="<? echo $g_bug_vote_add ?>">
+
+		<form method=post action="<? echo $g_bug_vote_add ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<input type=hidden name=f_vote value="<? echo $v_votes ?>">
 		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value=" Add Vote ">
 		</td>
 		</form>
+
 		<form method=post action="<? echo $g_bug_update_advanced_page ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
@@ -321,11 +323,13 @@
 			<input type=submit value=" Update Bug Information ">
 		</td>
 		</form>
+
 		<form method=post action="<? echo $g_bug_delete ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value=" Delete Bug ">
 		</td>
+
 	</form>
 	</tr>
 <?
