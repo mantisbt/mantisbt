@@ -9,11 +9,11 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: vboctor $
-	# $Date: 2002-06-13 13:16:59 $
+	# $Date: 2002-06-14 05:36:48 $
 	#
-	# $Id: bug_assign.php,v 1.15 2002-06-13 13:16:59 vboctor Exp $
+	# $Id: bug_assign.php,v 1.16 2002-06-14 05:36:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
@@ -21,7 +21,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 

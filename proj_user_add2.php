@@ -7,7 +7,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 	$c_user_id		= (integer)$f_user_id;
 	$c_access_level	= (integer)$f_access_level;

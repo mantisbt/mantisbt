@@ -15,7 +15,6 @@
 		print_header_redirect( 'login_select_proj_page.php' );
 	}
 
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
 	if ( ( DISK == $g_file_upload_method ) && isset( $f_file ) && is_uploaded_file( $f_file ) ) {

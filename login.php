@@ -9,8 +9,6 @@
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	if ( BASIC_AUTH == $g_login_method ) {
 		check_varset( $f_username, $REMOTE_USER );
 		$f_password = $PHP_AUTH_PW;

@@ -7,8 +7,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	if ( isset( $f_csv ) ) {
 		print_header_redirect( 'view_all_bug_page.php?f_csv=1' );
 		die;

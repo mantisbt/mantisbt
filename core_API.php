@@ -49,11 +49,12 @@
 		}
 	}
 
+	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
+	# OPENED ANYWHERE ELSE.
 	require( 'core_database_API.php' );
 
 	# Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
-		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		$query = "SELECT DISTINCT language
 				FROM $g_mantis_user_pref_table pref, $g_mantis_user_table user
 				WHERE user.cookie_string='$g_string_cookie_val' AND
@@ -63,8 +64,6 @@
 		if (empty( $g_active_language )) {
 			$g_active_language = $g_default_language;
 		}
-
-		db_close();
 	} else {
 		$g_active_language = $g_default_language;
 	}

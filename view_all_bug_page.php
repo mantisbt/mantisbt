@@ -5,18 +5,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.32 $
 	# $Author: vboctor $
-	# $Date: 2002-06-13 10:18:14 $
+	# $Date: 2002-06-14 05:36:48 $
 	#
-	# $Id: view_all_bug_page.php,v 1.31 2002-06-13 10:18:14 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.32 2002-06-14 05:36:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
 		print_header_redirect( 'view_all_set.php?f_type=0' );

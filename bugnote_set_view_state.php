@@ -10,8 +10,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= get_bugnote_field( $f_bugnote_id, 'reporter_id' );
 	$t_id				= get_bugnote_field( $f_bugnote_id, 'bug_id' );

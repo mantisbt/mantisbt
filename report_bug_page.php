@@ -19,7 +19,6 @@
 		print_header_redirect ( 'report_bug_advanced_page.php' );
 	}
 
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
 	# We check to see if the variable exists to avoid warnings

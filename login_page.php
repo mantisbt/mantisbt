@@ -10,8 +10,6 @@
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# Check to see if the user is logged in and then validate the cookie value
 	if ( !empty( $g_string_cookie_val ) ) {
 		login_cookie_check( 'main_page.php' );

@@ -5,11 +5,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.7 $
+	# $Revision: 1.8 $
 	# $Author: vboctor $
-	# $Date: 2002-06-13 10:18:14 $
+	# $Date: 2002-06-14 05:36:48 $
 	#
-	# $Id: account_delete.php,v 1.7 2002-06-13 10:18:14 vboctor Exp $
+	# $Id: account_delete.php,v 1.8 2002-06-14 05:36:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,8 +19,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# check if users can't delete their own accounts
 	if ( OFF == $g_allow_account_delete ) {
 		print_header_redirect( 'account_page.php' );

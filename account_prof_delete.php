@@ -11,8 +11,6 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# get protected state
 	$t_protected = get_current_user_field( 'protected' );
 
@@ -27,10 +25,10 @@
 	# Delete the profile
 	$query = "DELETE
 			FROM $g_mantis_user_profile_table
-    		WHERE id='$c_id' AND user_id='$c_user_id'";
-    $result = db_query( $query );
+			WHERE id='$c_id' AND user_id='$c_user_id'";
+	$result = db_query( $query );
 
-    $t_redirect_url = 'account_prof_menu_page.php';
+	$t_redirect_url = 'account_prof_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

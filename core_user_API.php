@@ -19,8 +19,6 @@
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
-			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 			# get user info
 			$t_enabled = get_current_user_field( 'enabled' );
 			# check for access enabled
@@ -30,7 +28,6 @@
 
 			# update last_visit date
 			login_update_last_visit( $g_string_cookie_val );
-			db_close();
 
 			# if no project is selected then go to the project selection page
 			if ( empty( $g_project_cookie_val ) ) {
@@ -68,8 +65,6 @@
 
 			# set last visit cookie
 
-			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 			# get user info
 			$t_enabled = get_current_user_field( 'enabled' );
 
@@ -80,7 +75,6 @@
 
 			# update last_visit date
 			login_update_last_visit( $g_string_cookie_val );
-			db_close();
 
 			# go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -102,15 +96,12 @@
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
-			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 			# get user info
 			$t_enabled = get_current_user_field( 'enabled' );
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( 'logout_page.php' );
 			}
-			db_close();
 		} else {				# not logged in
 			print_header_redirect( 'login_page.php' );
 		}

@@ -13,8 +13,7 @@
 <?php require( 'account_prefs_inc.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-    print_page_top1();
+	print_page_top1();
 	print_page_top2();
 	edit_account_prefs();
 	print_page_bot1( __FILE__ );

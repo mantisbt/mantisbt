@@ -4,8 +4,6 @@
 	require( "../core_database_API.php" );
 ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	class UpgradeItem {
 		var $item_count;
 		var $query_arr;

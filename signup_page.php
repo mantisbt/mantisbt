@@ -6,8 +6,6 @@
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	# Check for invalid access to signup page
 	if ( OFF == $g_allow_signup ) {
 		print_header_redirect( 'login_page.php' );

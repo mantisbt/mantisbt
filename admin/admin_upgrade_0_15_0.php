@@ -4,9 +4,6 @@
 	require( "../core_database_API.php" );
 ?>
 <?php
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-?>
-<?php
 # =================
 # 0.14.x to 0.15.0
 # =================
