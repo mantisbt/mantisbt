@@ -6,8 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.14 2003-01-16 10:36:20 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.15 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# Custom Fields API

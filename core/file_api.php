@@ -6,8 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.19 2003-01-04 09:10:50 jfitzell Exp $
+	# $Id: file_api.php,v 1.20 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'history_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# File API

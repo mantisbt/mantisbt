@@ -6,8 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.36 2003-01-24 00:09:06 vboctor Exp $
+	# $Id: print_api.php,v 1.37 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
 
 	###########################################################################
 	# Basic Print API

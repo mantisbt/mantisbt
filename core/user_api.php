@@ -6,8 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.47 2003-01-23 06:30:11 robertjf Exp $
+	# $Id: user_api.php,v 1.48 2003-01-25 18:21:11 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'email_api.php' );
+	require_once( $t_core_dir . 'ldap_api.php' );
 
 	###########################################################################
 	# User API

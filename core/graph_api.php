@@ -6,8 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.4 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: graph_api.php,v 1.5 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	if ( ON == config_get( 'use_jpgraph' ) ) {
+		$t_jpgraph_dir = config_get( 'jpgraph_path' );
+		
+		require_once( $t_jpgraph_path . 'jpgraph.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_line.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_bar.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_pie.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_pie3d.php' );
+	}
 
 	###########################################################################
 	# Graph API

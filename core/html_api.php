@@ -6,8 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.35 2003-01-23 21:50:32 jlatour Exp $
+	# $Id: html_api.php,v 1.36 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# HTML API

@@ -6,8 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.9 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.10 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'filter_api.php' );
 
 	###########################################################################
 	# Current User API

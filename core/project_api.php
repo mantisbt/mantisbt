@@ -6,8 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.24 2003-01-09 03:59:17 vboctor Exp $
+	# $Id: project_api.php,v 1.25 2003-01-25 18:21:09 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'category_api.php' );
+	require_once( $t_core_dir . 'version_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# Project API

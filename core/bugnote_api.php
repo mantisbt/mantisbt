@@ -6,9 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.12 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.13 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
 
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'email_api.php' );
+	require_once( $t_core_dir . 'history_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
+	
 	###########################################################################
 	# Bugnote API
 	###########################################################################

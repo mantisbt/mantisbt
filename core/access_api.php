@@ -6,8 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.11 2003-01-24 00:31:41 vboctor Exp $
+	# $Id: access_api.php,v 1.12 2003-01-25 18:21:07 jlatour Exp $
 	# --------------------------------------------------------
+	
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# Access Control API

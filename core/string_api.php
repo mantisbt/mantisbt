@@ -6,8 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.22 2003-01-12 08:18:20 jfitzell Exp $
+	# $Id: string_api.php,v 1.23 2003-01-25 18:21:10 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# String Processing API

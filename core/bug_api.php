@@ -6,8 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.30 2003-01-12 05:42:49 jfitzell Exp $
+	# $Id: bug_api.php,v 1.31 2003-01-25 18:21:07 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'history_api.php' );
+	require_once( $t_core_dir . 'email_api.php' );
+	require_once( $t_core_dir . 'bugnote_api.php' );
+	require_once( $t_core_dir . 'file_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
 
 	###########################################################################
 	# Bug API

@@ -6,8 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.38 2003-01-09 03:59:17 vboctor Exp $
+	# $Id: email_api.php,v 1.39 2003-01-25 18:21:08 jlatour Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'custom_field_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
+	require_once( $t_core_dir . 'history_api.php' );
 
 	###########################################################################
 	# Email API
