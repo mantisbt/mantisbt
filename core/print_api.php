@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.24 2002-10-20 23:59:49 jfitzell Exp $
+	# $Id: print_api.php,v 1.25 2002-10-22 04:28:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -233,7 +233,7 @@
 			}
 		}
 
-		asort( $user_arr );
+		asort( $user_arr, SORT_STRING );
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
@@ -403,7 +403,7 @@
 			}
 		}
 
-		asort( $user_arr );
+		asort( $user_arr, SORT_STRING );
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
