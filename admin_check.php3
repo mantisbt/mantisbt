@@ -80,6 +80,19 @@ span.smallcaption { font-family:Verdana, Arial; font-size: 8pt }
 <!-- Function check -->
 <tr>
 	<td bgcolor="#ffffff">
+		Checking to see if function crypt() exists
+	</td>
+	<?
+		if ( function_exists( "crypt" ) ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD );
+		}
+	?>
+</tr>
+<!-- Function check -->
+<tr>
+	<td bgcolor="#ffffff">
 		Checking to see if function getmxrr() exists
 	</td>
 	<?
