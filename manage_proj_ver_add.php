@@ -10,6 +10,11 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
+	if ( empty( $f_version ) ) {
+		echo $MANTIS_ERROR[ERROR_EMPTY_FIELD];
+		exit;
+	}
+
 	$result = 0;
 	# check for empty case or duplicate
 	if ( !empty( $f_version )&&( !is_duplicate_version( $f_version, $f_project_id ) ) ) {

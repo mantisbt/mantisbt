@@ -36,6 +36,7 @@ Mantis
  * Added g_show_bug_project_links to toggle project links in All Project mode.
  * Added mime_encode() to process the email subject text.
  * Added blank category check when adding project category.
+ * Added blank version check when adding project version.
 
 01.23.2002  -   0.17.0
 
