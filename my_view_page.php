@@ -6,24 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: prichards $
-	# $Date: 2004-06-28 13:05:37 $
-	#
-	# $Id: my_view_page.php,v 1.2 2004-06-28 13:05:37 prichards Exp $
+	# $Id: my_view_page.php,v 1.3 2004-07-05 13:50:53 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-
-	$t_core_path = config_get( 'core_path' );
-
+	
 	require_once( $t_core_path . 'compress_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );
 
-	$t_current_user_id = auth_get_current_user_id();
-
 	auth_ensure_user_authenticated();
+
+	if ( current_user_is_anonymous() ) {
+		access_denied();
+	}
 
 	compress_enable();
 
@@ -100,4 +96,3 @@
 <?php
 	html_page_bottom1( __FILE__ );
 ?>
-
