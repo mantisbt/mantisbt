@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.1 2002-12-21 10:07:15 jfitzell Exp $
+	# $Id: bug_reminder.php,v 1.2 2002-12-22 21:47:20 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,21 @@
 	check_access( config_get( 'bug_reminder_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
+	# Automically add recipients to monitor list if they are above the monitor
+	# threshold, option is enabled, and not reporter or handler.
+	foreach ( $f_to as $t_recipient )
+	{
+		if ( ON == config_get( 'reminder_recipents_monitor_bug' ) &&
+			access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) &&
+			!bug_is_user_handler( $f_bug_id, $t_recipient ) && 
+			!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
+			bug_monitor( $f_bug_id, $t_recipient );
+		}
+	}
+
 	$result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
+
+	# Add reminder as bugnote if store reminders option is ON.
 	if ( ON == config_get( 'store_reminders' ) ) {
 		$t_body = lang_get( 'reminder_sent_to' ) . ' ' .
 					( implode( ', ', $result ) ) . 
