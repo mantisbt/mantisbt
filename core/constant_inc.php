@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.10 2004-02-11 22:16:29 vboctor Exp $
+	# $Id: constant_inc.php,v 1.11 2004-03-03 13:31:40 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -203,7 +203,7 @@
 	# ERROR_BUG_*
 	define( 'ERROR_BUG_NOT_FOUND',					1100 );
 	define( 'ERROR_BUG_DUPLICATE_SELF',				1101 );
-	define( 'ERROR_BUG_RESOLVED_ACTION_DENIED',		1101 );
+	define( 'ERROR_BUG_RESOLVED_ACTION_DENIED',		1102 );
 
 	# ERROR_EMAIL_*
 	define( 'ERROR_EMAIL_INVALID',					1200 );
@@ -219,7 +219,7 @@
 	define( 'ERROR_LDAP_AUTH_FAILED',				1400 );
 	define( 'ERROR_LDAP_SERVER_CONNECT_FAILED',		1401 );
 	define( 'ERROR_LDAP_UPDATE_FAILED',				1402 );
-	define( 'ERROR_LDAP_USER_NOT_FOUND',			1402 );
+	define( 'ERROR_LDAP_USER_NOT_FOUND',			1403 );
 	
 	# ERROR_CATEGORY_*
 	define( 'ERROR_CATEGORY_DUPLICATE',				1500 );
