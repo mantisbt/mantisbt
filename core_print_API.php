@@ -228,16 +228,19 @@
 		$t_man = MANAGER;
 		$t_adm = ADMINISTRATOR;
 
-		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
-		else $specific_where = " t2.project_id='$g_project_cookie_val'";
+		# checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') {
+			$specific_where = " ";
+		} else {
+			$specific_where = " t2.project_id='$g_project_cookie_val' AND ";
+		}
 
 		$query = "SELECT DISTINCT t1.id, t1.username
-				FROM $g_mantis_user_table as t1,
-				$g_mantis_project_user_list_table as t2
-				WHERE ((t1.access_level>=$t_dev) OR
-						(t2.user_id=t1.id AND $specific_where AND
-						t2.access_level>=$t_dev))
+				FROM $g_mantis_user_table as t1
+				LEFT JOIN $g_mantis_project_user_list_table as t2
+				ON t1.id=t2.user_id
+				WHERE (t2.access_level>=55 AND t2.project_id=2) OR
+					  (t1.access_level>=55 AND t2.access_level IS NULL)
 				ORDER BY t1.username";
 
 		$result = db_query( $query );
