@@ -876,4 +876,4 @@ CREATE TABLE mantis_user_table (
 # Dumping data for table `mantis_user_table`
 #
 
-INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, 'f9ff5de2bf76f2e03048c10eba8c7e121c5561c0af7d8b162f9457f17f96d027');
+INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, CONCAT(MD5(RAND()),MD5(NOW())));
