@@ -9,11 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: vboctor $
-	# $Date: 2004-07-07 12:48:58 $
+	# $Date: 2004-07-09 11:55:10 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.60 2004-07-07 12:48:58 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.61 2004-07-09 11:55:10 vboctor Exp $
+	# -------------------------------------------------
+	# Up-to-date with strings_english.txt revision 1.179 -- jferraz 2004/06/29
 	###########################################################################
 ?>
 <?php
@@ -59,7 +61,7 @@ $s_old_value = 'Valor Antigo';
 $s_new_value = 'Novo Valor';
 $s_date_modified = 'Data da Mudança';
 $s_bugnote = 'Anotação';
-$s_change = 'Alterar';
+$s_change = 'AlteraÃ§Ã£o';
 $s_bugnote_view_state = 'Visibilidade da Anotação';
 $s_bug_monitor = 'Monitorado por';
 $s_bug_end_monitor = 'Parou de monitorar';
@@ -161,7 +163,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de arquivo não é permitido';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O diretório não existe. Por favor, verifique as configurações do projeto.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário estava vazio.  Por favor, verifique novamente suas entradas.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessÃ¡rio \'%s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  Os carregamentos de arquivos do PHP podem estar desabilitados.  Por favor, peça ao seu administrador executar o script admin_check para depurar este problema.';
@@ -224,7 +226,7 @@ $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se
 $s_go_back = 'Voltar';
 $s_proceed = 'Clique aqui para prosseguir';
 
-$s_switch = 'Switch';
+$s_switch = 'Mudar';
 $s_logged_in_as = 'Acessando como';
 
 $s_prefix_for_deleted_users = 'user';
@@ -321,7 +323,7 @@ $s_advanced_view = 'Visualização Avançada';
 $s_advanced_update = 'Atualização Avançada';
 $s_refresh_delay = 'Tempo de Renovação';
 $s_redirect_delay = 'Tempo de Redirecionamento';
-$s_with_minimum_severity = 'Com a Gravidade Mínima';
+$s_with_minimum_severity = 'Com a gravidade mÃ­nima';
 $s_email_on_new = 'Enviar e-mail para Novos Casos';
 $s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
 $s_email_on_feedback = 'Enviar e-mail para Retornos';
@@ -460,8 +462,8 @@ $s_votes = 'Votos';
 $s_summary = 'Resumo';
 $s_description = 'Descrição';
 $s_steps_to_reproduce = 'Passos para Reproduzir';
-$s_additional = 'Informações';		# sim... tá correto!
-$s_information = 'Adicionais';		# sim... tá correto!
+$s_additional = 'InformaÃ§Ãµes';		# @@@ check bug 3938 @@@
+$s_information = 'Adicionais';		# @@@ check bug 3938 @@@
 $s_update_information_button = 'Atualizar Informação';
 
 # bug_update_page.php
@@ -667,17 +669,17 @@ $s_manage_link = 'Gerenciar';
 $s_edit_news_link = 'Alterar Notícias';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Sair';
-$s_my_view_link = 'My View';
+$s_my_view_link = 'Minha visÃ£o';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = 'NÃ£o atribuÃ­dos';
+$s_my_view_title_recent_mod = 'Modificados Recentemente';
+$s_my_view_title_reported = 'Relatados por Mim';
+$s_my_view_title_assigned = 'AtribuÃ­dos a Mim (nÃ£o resolvidos)';
+$s_my_view_title_resolved = 'Resolvidos';
+$s_my_view_title_monitored = 'Monitorado por Mim';
 
 # news_add.php
 $s_news_added_msg = 'Notícia adicionada...';
@@ -698,11 +700,11 @@ $s_update_news_button = 'Atualizar Notícia';
 # news_menu_page.php
 $s_add_news_title = 'Adicionar Notícia';
 $s_post_to = 'Anunciar em';
-$s_post_news_button = 'Anunciar Notícia';
+$s_post_news_button = 'Publicar NotÃ­cia';
 $s_edit_or_delete_news_title = 'Alterar ou Apagar Notícia';
-$s_edit_post = 'Alterar Anúncio';
-$s_delete_post = 'Apagar Anúncio';
-$s_select_post = 'Selecionar Anúncio';
+$s_edit_post = 'Alterar NotÃ­cia';
+$s_delete_post = 'Apagar NotÃ­cia';
+$s_select_post = 'Selecionar NotÃ­cia';
 
 # news_update.php
 $s_news_updated_msg = 'Notícia atualizada...';
@@ -860,7 +862,7 @@ $s_use_date_filters = 'Usar Filtros de Data';
 $s_yes = 'Sim';
 $s_no = 'Não';
 $s_open_filters = 'Alterar Filtro';
-$s_or_unassigned = 'Ou Não Atribuído';
+$s_or_unassigned = 'ou nÃ£o atribuÃ­do';
 $s_ok = 'OK';
 
 # stored query strings
@@ -927,13 +929,13 @@ $s_custom_field_access_level_r = 'Acesso de Leitura';
 $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Tamanho Mínimo';
 $s_custom_field_length_max = 'Tamanho Máximo';
-$s_custom_field_advanced = 'Avançado';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_advanced = 'Mostrar somente na pÃ¡gina avanÃ§ada';
+$s_custom_field_display_resolve = 'Mostrar ao resolver casos';
+$s_custom_field_display_close = 'Mostrar ao fechar casos';
+$s_custom_field_require_report = 'Requerido no relato';
+$s_custom_field_require_update = 'Requerido na atualizaÃ§Ã£o';
+$s_custom_field_require_resolve = 'Requerido na resoluÃ§Ã£o';
+$s_custom_field_require_close = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
 $s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail';
@@ -947,7 +949,7 @@ $s_filter_closed = "Fechado";
 $s_filter_resolved = "Resolvido";
 $s_hide_closed = "Ocultar Fechados";
 $s_hide_resolved = "Ocultar Resolvidos";
-$s_and_above = 'E Acima';
+$s_and_above = 'e acima';
 $s_advanced_filters = 'Filtros Avançados';
 $s_simple_filters = 'Filtros Simples';
 
