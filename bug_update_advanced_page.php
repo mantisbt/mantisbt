@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.39 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.40 2002-12-30 08:12:11 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,7 +18,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
-		print_header_redirect ( 'bug_update_page.php?bug_id='.$f_bug_id );
+		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
 
 	project_access_check( $f_bug_id );
@@ -39,8 +39,6 @@
 <tr>
 	<td class="form-title" colspan="3">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="old_status" value="<?php echo $t_bug->status ?>" />
-		<input type="hidden" name="old_handler_id" value="<?php echo $t_bug->handler_id ?>" />
 		<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 	</td>
 	<td class="right" colspan="3">
@@ -53,6 +51,8 @@
 ?>
 	</td>
 </tr>
+
+
 <tr class="row-category">
 	<td width="15%">
 		<?php echo lang_get( 'id' ) ?>
@@ -73,38 +73,61 @@
 		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+	
+	<!-- Bug ID -->
 	<td>
 		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
+
+	<!-- Category -->
 	<td>
 		<select name="category">
 			<?php print_category_option_list( $t_bug->category ) ?>
 		</select>
 	</td>
+
+	<!-- Severity -->
 	<td>
 		<select name="severity">
 			<?php print_enum_string_option_list( 'severity', $t_bug->severity ) ?>
 		</select>
 	</td>
+
+	<!-- Reproducibility -->
 	<td>
 		<select name="reproducibility">
 			<?php print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility ) ?>
 		</select>
 	</td>
+
+	<!-- Date Submitted -->
 	<td>
 		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
+
+	<!-- Date Updated -->
 	<td>
 		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
+
 </tr>
+
+
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="6">
 		&nbsp;
 	</td>
 </tr>
+
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- Reporter -->
 	<td class="category">
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
@@ -113,6 +136,8 @@
 			<?php print_reporter_option_list( $t_bug->reporter_id ) ?>
 		</select>
 	</td>
+
+	<!-- View Status -->
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
@@ -121,11 +146,17 @@
 			<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
 		</select>
 	</td>
+
+	<!-- spacer -->
 	<td colspan="2">
 		&nbsp;
 	</td>
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- Assigned To -->
 	<td class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
@@ -135,8 +166,13 @@
 			<?php print_assign_to_option_list( $t_bug->handler_id ) ?>
 		</select>
 	</td>
+
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- Priority -->
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
@@ -145,20 +181,29 @@
 			<?php print_enum_string_option_list( 'priority', $t_bug->priority ) ?>
 		</select>
 	</td>
+
+	<!-- Resolution -->
 	<td class="category">
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
+
+	<!-- Platform -->
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
 		<input type="text" name="platform" size="16" maxlength="32" value="<?php echo $t_bug->platform ?>" />
 	</td>
+
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- Status -->
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
@@ -167,20 +212,29 @@
 			<?php print_enum_string_option_list( 'status', $t_bug->status ) ?>
 		</select>
 	</td>
+
+	<!-- Duplicate ID -->
 	<td class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
 		<?php echo $t_bug->duplicate_id ?>
 	</td>
+
+	<!-- Operating System -->
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os" size="16" maxlength="32" value="<?php echo $t_bug->os ?>" />
 	</td>
+
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- Projection -->
 	<td class="category">
 		<?php echo lang_get( 'projection' ) ?>
 	</td>
@@ -189,17 +243,26 @@
 			<?php print_enum_string_option_list( 'projection', $t_bug->projection ) ?>
 		</select>
 	</td>
+
+	<!-- spacer -->
 	<td colspan="2">
 		&nbsp;
 	</td>
+
+	<!-- OS Version -->
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo $t_bug->os_build ?>" />
 	</td>
+
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- ETA -->
 	<td class="category">
 		<?php echo lang_get( 'eta' ) ?>
 	</td>
@@ -208,9 +271,13 @@
 			<?php print_enum_string_option_list( 'eta', $t_bug->eta ) ?>
 		</select>
 	</td>
+
+	<!-- spacer -->
 	<td colspan="2">
 		&nbsp;
 	</td>
+
+	<!-- Product Version -->
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
@@ -219,30 +286,81 @@
 			<?php print_version_option_list( $t_bug->version ) ?>
 		</select>
 	</td>
+
 </tr>
+
+
 <tr <?php echo helper_alternate_class() ?>>
+
+	<!-- spacer -->
 	<td colspan="4">
 		&nbsp;
 	</td>
+
+	<!-- Build -->
 	<td class="category">
 		<?php echo lang_get( 'build' ) ?>
 	</td>
 	<td>
 		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
 	</td>
+
 </tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td colspan="4">
+
+
+<!-- spacer -->
+<tr>
+	<td class="spacer" colspan="6">
 		&nbsp;
-	</td>
-	<td class="category">
-		<?php echo lang_get( 'votes' ) ?>
-	</td>
-	<td>
-		<?php echo $t_bug->votes ?>
 	</td>
 </tr>
 
+
+<!-- Summary -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'summary' ) ?>
+	</td>
+	<td colspan="5">
+		<input type="text" name="summary" size="80" maxlength="128" value="<?php echo $t_bug->summary ?>" />
+	</td>
+</tr>
+
+
+<!-- Description -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'description' ) ?>
+	</td>
+	<td colspan="5">
+		<textarea cols="60" rows="5" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
+	</td>
+</tr>
+
+
+<!-- Steps to Reproduce -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'steps_to_reproduce' ) ?>
+	</td>
+	<td colspan="5">
+		<textarea cols="60" rows="5" name="steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
+	</td>
+</tr>
+
+
+<!-- Additional Information -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'additional_information' ) ?>
+	</td>
+	<td colspan="5">
+		<textarea cols="60" rows="5" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
+	</td>
+</tr>
+
+
+<!-- Custom Fields -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
 	<td class="spacer" colspan="6">
@@ -250,9 +368,10 @@
 	</td>
 </tr>
 <?php
-$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
-foreach( $t_related_custom_field_ids as $id ) {
-	$t_def = custom_field_get_definition($id);
+	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition($t_id);
+		if( !$t_def['advanced'] ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -265,52 +384,21 @@ foreach( $t_related_custom_field_ids as $id ) {
 	</td>
 </tr>
 <?php
-}   // foreach
+		} # !$t_def['advanced']
+	} # foreach( $t_related_custom_field_ids as $t_id )
+} # ON = config_get( 'use_experimental_custom_fields' )
 ?>
-<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 
+
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="6">
 		&nbsp;
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'summary' ) ?>
-	</td>
-	<td colspan="5">
-		<input type="text" name="summary" size="80" maxlength="128" value="<?php echo $t_bug->summary ?>" />
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'description' ) ?>
-	</td>
-	<td colspan="5">
-		<textarea cols="60" rows="5" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'steps_to_reproduce' ) ?>
-	</td>
-	<td colspan="5">
-		<textarea cols="60" rows="5" name="steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
-	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'additional_information' ) ?>
-	</td>
-	<td colspan="5">
-		<textarea cols="60" rows="5" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
-	</td>
-</tr>
-<tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
-	</td>
-</tr>
+
+
+<!-- Bugnote Text Box -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
@@ -320,6 +408,8 @@ foreach( $t_related_custom_field_ids as $id ) {
 	</td>
 </tr>
 
+
+<!-- Bugnote Private Checkbox (if permitted) -->
 <?php if ( access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -331,11 +421,15 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <?php } ?>
 
+
+<!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
 		<input type="submit" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>
+
+
 </table>
 </form>
 

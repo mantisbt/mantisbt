@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.27 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.28 2002-12-30 08:12:11 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,9 +26,9 @@
 	check_access( config_get( 'handle_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
-	# make sure it is not market as duplicate to itself
-	if ( $f_duplicate_id == $f_bug_id ) {
-		print_mantis_error( ERROR_BUG_DUPLICATE_SELF );
+	# make sure the bug is not being marked as a duplicate of itself
+	if ( $f_duplicate_id === $f_bug_id ) {
+		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 	}
 
 	bug_resolve( $f_bug_id, $f_resolution, $f_bugnote_text, $f_duplicate_id );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.12 2002-12-30 05:47:05 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.13 2002-12-30 08:12:11 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -226,7 +226,7 @@
 
 
 <!-- Handler (if permissions allow) -->
-<?php if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assign_to' ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.22 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_resolve_page.php,v 1.23 2002-12-30 08:12:11 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -21,18 +21,23 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php # Resolve Form BEGIN ?>
 <br />
 <div align="center">
 <form method="post" action="bug_resolve.php">
 <table class="width75" cellspacing="1">
+
+
+<!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo lang_get( 'resolve_bug_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Resolution -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
@@ -42,7 +47,10 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Duplicate ID -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
@@ -51,8 +59,10 @@
 	</td>
 </tr>
 
+
+<!-- Close Immediately (if enabled) -->
 <?php if ( ON == config_get( 'allow_close_immediately' ) ) { ?>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>
 	</td>
@@ -62,25 +72,31 @@
 </tr>
 <?php } ?>
 
-<tr class="row-1">
+
+<!-- Bugnote -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category" colspan="2">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="center" colspan="2">
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
+
+
+<!-- Submit Button -->
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'resolve_bug_button' ) ?>" />
 	</td>
 </tr>
+
+
 </table>
 </form>
 </div>
-<?php # Resolve Form END ?>
 
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
