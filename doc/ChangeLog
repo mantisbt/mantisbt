@@ -11,6 +11,7 @@ Mantis
  * Modified file size reports to show up as bytes.
  * Modified email string padding and line separation characters.
  * Modified account page to show default and current project access levels.
+ * Modified news posting to allow sitewide and project select posting only for Administrators.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.

@@ -46,14 +46,15 @@
 		<?php echo $s_post_to ?>
 	</td>
 	<td>
+		<?php	if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) { ?>
 		<select name="f_project_id">
-			<?php
-				if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-					PRINT "<option value=\"0000000\">Sitewide</option>";
-				}
-			?>
+			<option value="0000000">Sitewide</option>
 			<?php print_news_project_option_list( $g_project_cookie_val ) ?>
 		</select>
+		<?php	} else { ?>
+		<input type="hidden" name="f_project_id" value="<?php echo $g_project_cookie_val ?>">
+		<?php echo get_project_field( $g_project_cookie_val, "name" ) ?>
+		<?php	} ?>
 	</td>
 </tr>
 <tr>
