@@ -13,6 +13,11 @@
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
 
+	# we change dirs (and restore below) to compensate for scripts that may
+	# include by relative paths
+	$t_cwd = getcwd();
+	chdir( dirname( __FILE__ ) );
+
 	$t_core_path = dirname( __FILE__ ).'/core/';
 	require_once( $t_core_path.'php_api.php' );
 
@@ -40,5 +45,7 @@
 
 	# Load rest of core in seperate directory.
 	require_once( $g_core_path.'API.php');
+
+	chdir( $t_cwd );
 	# --------------------
 ?>
