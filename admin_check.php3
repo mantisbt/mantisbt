@@ -11,7 +11,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 </head>
 <body>
 <?php include( "core_API.php" ) ?>
-<?
+<?php
 	define( "BAD", 0 );
 	define( "GOOD", 1 );
 
@@ -38,7 +38,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Opening connection to database on host [<?php echo $g_hostname ?>] with username [<?php echo $g_db_username ?>]
 	</td>
-	<?
+	<?php
 		$result = mysql_connect( $g_hostname, $g_db_username, $g_db_password );
 		if ( false == $result ) {
 			print_test_result( BAD );
@@ -52,7 +52,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Selecting database [<?php echo $g_database_name ?>]
 	</td>
-	<?
+	<?php
 		$result = mysql_select_db( $g_database_name );
 		if ( false == $result ) {
 			print_test_result( BAD );
@@ -66,7 +66,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if your $g_absolute_path variable has a trailing /
 	</td>
-	<?
+	<?php
 		if ( "/" == $g_absolute_path[strlen($g_absolute_path)-1] ) {
 			print_test_result( GOOD );
 		} else {
@@ -79,7 +79,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function crypt() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "crypt" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -92,7 +92,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function getmxrr() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "getmxrr" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -105,7 +105,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function checkdnsrr() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "checkdnsrr" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -118,7 +118,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function wordwrap() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "wordwrap" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -131,7 +131,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function str_pad() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "str_pad" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -144,7 +144,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		Checking to see if function is_uploaded_file() exists
 	</td>
-	<?
+	<?php
 		if ( function_exists( "is_uploaded_file" ) ) {
 			print_test_result( GOOD );
 		} else {
@@ -157,7 +157,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	<td bgcolor="#ffffff">
 		register_globals should be set to On or 1
 	</td>
-	<?
+	<?php
 		$test_val = get_cfg_var( "register_globals" );
 		#echo $test_val;
 		if ( ( 1 == $test_val ) || ( "On" === $test_val ) ) {

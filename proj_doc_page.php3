@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( VIEWER );
 
@@ -31,7 +31,7 @@
 		<?php print_doc_menu( $g_proj_doc_page ) ?>
 	</td>
 </tr>
-<?
+<?php
 	for ($i=0;$i<$num_files;$i++) {
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -45,7 +45,7 @@
 ?>
 <tr valign="top" bgcolor="<?php echo $status_color ?>">
 	<td>
-<?
+<?php
 		switch ( $g_file_upload_method ) {
 			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize KB)";
 						break;

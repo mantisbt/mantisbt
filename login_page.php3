@@ -1,15 +1,15 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in via login_cookie_check()
 ?>
 <?php include( "core_API.php" ) ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# Check to see if the user is logged in and then validate the cookie value
@@ -22,7 +22,7 @@
 
 <p>
 <div align="center">
-<?
+<?php
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
 		PRINT "$s_login_error_msg<p>";
@@ -37,9 +37,9 @@
 <p>
 <div align="center">
 <form method="post" action="<?php echo $g_login ?>">
-<?	if (isset($f_project_id)) { ?>
+<?php	if (isset($f_project_id)) { ?>
 <input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-<?	} ?>
+<?php } ?>
 <table class="width50" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="2">

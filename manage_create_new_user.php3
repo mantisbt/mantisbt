@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
@@ -67,7 +67,7 @@
     $t_redirect_url = $g_manage_page;
 ?>
 <?php print_page_top1() ?>
-<?
+<?php
 	if ( $result ) {
 		print_meta_redirect( $t_redirect_url );
 	}
@@ -76,7 +76,7 @@
 
 <p>
 <div align="center">
-<?
+<?php
 	if ( $result ) {				# SUCCESS
 		$f_access_level = get_enum_element( $s_access_levels_enum_string, $f_access_level );
 		PRINT "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><p>";

@@ -1,16 +1,16 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# Users may change their user information from this page.
 	# The data is POSTed to account_update.php3
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# extracts the user information for the currently logged in user
@@ -38,7 +38,7 @@
 		<?php print_account_menu( $g_account_page ) ?>
 	</td>
 </tr>
-<?	# using LDAP accounts
+<?php # using LDAP accounts
 	if ( LDAP == $g_login_method ) {
 ?>
 <tr class="row-2">
@@ -55,7 +55,7 @@
 	    <?php echo $u_username ?>
 	</td>
 </tr>
-<?
+<?php
 	if ( ON == $g_use_ldap_email ) {
     	$u_email = get_user_info( "$u_username","email" );
 ?>
@@ -67,7 +67,7 @@
 	    <?php echo $u_email ?>
 	</td>
 </tr>
-<?	} else { ?>
+<?php } else { ?>
 <tr class="row-2">
 	<td class="category">
 	    <?php echo $s_email ?>:
@@ -76,7 +76,7 @@
 	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>">
 	</td>
 </tr>
-<?	} ?>
+<?php } ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo $s_access_level ?>:
@@ -150,7 +150,7 @@
 	</td>
 </form>
 </tr>
-<?	} ?>
+<?php } ?>
 </table>
 </div>
 <?php # Edit Account Form END ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
@@ -139,7 +139,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 	$query = "SELECT *
 			FROM $g_mantis_project_table
 			ORDER BY '$f_sort' $f_dir";
@@ -175,7 +175,7 @@
 		<?php print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$v_id,  $s_edit_link ) ?>
 	</td>
 </tr>
-<?
+<?php
 	}
 ?>
 </table>

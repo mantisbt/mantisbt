@@ -1,14 +1,14 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# Check login then redirect to main_page.php3 or to login_page.php3
 ?>
 <?php include( "core_API.php" ) ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
    	# get user info
@@ -71,7 +71,7 @@
 	}
 ?>
 <?php print_page_top1() ?>
-<?
+<?php
 	# goto main_page or back to login_page
 	if ( $t_project_id > 0 ) {
 		print_meta_redirect( $g_main_page, 0 );
@@ -89,7 +89,7 @@
 
 <p>
 <div align="center">
-<?
+<?php
 	if ( $t_project_id > 0 ) {							# SUCCESS
 		print_bracket_link( $g_main_page, $s_proceed );
 	} else if ( $login_result ) {						# SUCCESS

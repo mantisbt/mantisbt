@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,12 +6,12 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
-<?
+<?php
 	# Select the news posts
 	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 			FROM $g_mantis_news_table
@@ -52,7 +52,7 @@
 </tr>
 </table>
 </div>
-<?
+<?php
 	}  # end for loop
 ?>
 

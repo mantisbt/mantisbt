@@ -1,9 +1,9 @@
-<?
+<?php
 	require( "constant_inc.php" );
 	require( "config_inc.php" );
 	require( "core_database_API.php" );
 ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	class UpgradeItem {
@@ -34,7 +34,7 @@
 		}
 	}
 ?>
-<?
+<?php
 	# save timestamps
 	$query = "SELECT id, last_updated
 			FROM mantis_bug_table";

@@ -1,15 +1,15 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# This file POSTs data to report_bug.php3
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	# these pages are invalid for the "All Project" selection
 	if ( "0000000" == $g_project_cookie_val ) {
 		print_header_redirect( $g_login_select_proj_page );
@@ -61,7 +61,7 @@
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
-		<?
+		<?php
 			if ( BOTH == $g_show_report ) {
 				print_bracket_link( $g_report_bug_advanced_page, $s_advanced_report_link );
 			}

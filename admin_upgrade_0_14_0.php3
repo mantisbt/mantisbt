@@ -1,8 +1,8 @@
 <?php include( "core_API.php" ) ?>
-<?
+<?php
         db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
-<?
+<?php
 	if ( $f_action=="upgrade" ) {
 
 $query3 = "CREATE TABLE mantis_project_table (

@@ -1,5 +1,5 @@
 <?php include( "core_API.php" ) ?>
-<?
+<?php
 	if ( !isset( $f_action ) ) {
 		$res = setcookie( "testcookie", "blah" );
 	} else if ( $f_action=="test" ) {
@@ -14,7 +14,7 @@
 	The value is :<b><?php echo $cookieval ?></b>:.  Should be :<b>blah</b>:.
 	<p>
 	Result is:
-	<?
+	<?php
 		if ($cookieval=="blah") {
 			PRINT "<b>PASSED</b>";
 		} else {

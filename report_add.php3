@@ -1,15 +1,15 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	# these pages are invalid for the "All Project" selection
 	if ( "0000000" == $g_project_cookie_val ) {
 		print_header_redirect( $g_login_select_proj_page );
@@ -165,7 +165,7 @@
 	$t_redirect_url = get_report_redirect_url();
 ?>
 <?php print_page_top1() ?>
-<?
+<?php
 	if ( ( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) ) ) {
 		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
@@ -174,7 +174,7 @@
 
 <p>
 <div align="center">
-<?
+<?php
 	# FORM ERROR
 	# required fields not entered
 	if ( $check_failed ) {
@@ -213,7 +213,7 @@
 			<input type="hidden" name="f_additional_info" 	value="<?php echo $f_additional_info ?>">
 			<input type="submit" 							value="<?php echo $s_go_back ?>">
 		</form>
-<?
+<?php
 	} else if ( !$result ) {		# MYSQL ERROR
 		print_sql_error( $query );
 	} else {						# SUCCESS
@@ -234,7 +234,7 @@
 				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>">
 				<input type="submit" 							value="<?php echo $s_report_more_bugs ?>">
 			</form>
-<?
+<?php
 		} else {
 			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
 		}

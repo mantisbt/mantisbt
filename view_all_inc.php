@@ -105,7 +105,7 @@
 <tr>
 	<td class="form-title" colspan="8">
 		<?php echo $s_viewing_bugs_title ?>
-		<?
+		<?php
 			if ( $row_count > 0 ) {
 				$v_start = $t_offset+1;
 				$v_end   = $t_offset+$row_count;
@@ -118,7 +118,7 @@
 	</td>
 	<td class="right">
 		[
-		<?
+		<?php
 			# print out a link for each page i.e.
 			#     [ 1 2 3 ]
 			#
@@ -128,7 +128,7 @@
 				} else {
 		?>
 				<a href="<?php echo $g_view_all_bug_page ?>?f_page_number=<?php echo $i ?>"><?php echo $i ?></a>
-		<?
+		<?php
 				}
 			}
 		?>
@@ -176,7 +176,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
@@ -210,14 +210,14 @@
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
 	<td>
-		<?	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+		<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $v_id ?>">
-		<?	} else { ?>
+		<?php } else { ?>
 			&nbsp;
-		<?	} ?>
+		<?php } ?>
 	</td>
 	<td class="center">
-		<?
+		<?php
 			if ( ON == $g_show_priority_text ) {
 				echo get_enum_element($s_priority_enum_string, $v_priority);
 			} else {
@@ -229,7 +229,7 @@
 		<?php print_bug_link( $v_id ) ?>
 	</td>
 	<td class="center">
-		<?
+		<?php
 			if ($bugnote_count > 0){
 				if ( $v_bugnote_updated >
 					strtotime( "-$f_highlight_changed hours" ) ) {
@@ -249,7 +249,7 @@
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
 	<td class="center">
-		<?
+		<?php
 			# print username instead of status
 			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
@@ -259,7 +259,7 @@
 		?>
 	</td>
 	<td class="center">
-		<?
+		<?php
 			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
 
@@ -273,7 +273,7 @@
 		<?php echo $v_summary ?>
 	</td>
 </tr>
-<?
+<?php
 	}
 ?>
 </table>
@@ -286,7 +286,7 @@
 <?php # Show NEXT and PREV links as needed ?>
 <p>
 <div align="center">
-<?
+<?php
 	# print the [ prev ] link
 	if ($f_page_number > 1) {
 		$t_prev_page_number = $f_page_number - 1;

@@ -1,14 +1,14 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 ?>
-<?
+<?php
 	# This include file prints out the list of bugnotes attached to the bug
 	# $f_id must be set and be set to the bug id
 ?>
-<?
+<?php
 	# @@@ uneeded? 
 	#db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -27,7 +27,7 @@
 <?php # Bugnotes BEGIN ?>
 <p>
 <table class="width100" cellspacing="0">
-<?
+<?php
 	# no bugnotes
 	if ( 0 == $num_notes ) {
 ?>
@@ -36,13 +36,13 @@
 		<?php echo $s_no_bugnotes_msg ?>
 	</td>
 </tr>
-<?	} else { # print bugnotes ?>
+<?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_bug_notes_title ?>
 	</td>
 </tr>
-<?
+<?php
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
@@ -72,7 +72,7 @@
 				<?php echo $v3_date_submitted ?>
 			</td>
 			<td class="small-caption">
-			<?
+			<?php
 				# check access level
 				# only admins and the bugnote creator can delete this bugnote
 				# bug must be open to be editable
@@ -103,7 +103,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 		} # end for loop
 	} # end else
 ?>
@@ -136,4 +136,4 @@
 </form>
 </table>
 <?php # Bugnote Add Form END ?>
-<?	} ?>
+<?php } ?>

@@ -1,15 +1,15 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# Show the simple update bug options
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	if ( ADVANCED_ONLY == $g_show_update ) {
 		print_header_redirect ( $g_bug_update_advanced_page."?f_id=".$f_id );
 	}
@@ -67,7 +67,7 @@
 		<?php echo $s_updating_bug_simple_title ?>
 	</td>
 	<td class="right" colspan="3">
-<?
+<?php
 	switch ( $g_show_view ) {
 		case 0: print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_back_to_bug_link );
 				break;

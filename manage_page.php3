@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
@@ -66,7 +66,7 @@
 <?php print_manage_menu( $g_manage_page ) ?>
 
 <?php # New Accounts Form BEGIN ?>
-<?
+<?php
 	# Get the user data in $f_sort order
 	$days_old = 7;
 	$query = "SELECT *
@@ -85,7 +85,7 @@
 </tr>
 <tr class="row-2">
 	<td>
-<?
+<?php
 for ($i=0;$i<$new_user_count;$i++) {
 	$row = db_fetch_array( $result );
 	$t_username = $row["username"];
@@ -99,7 +99,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php # New Accounts Form END ?>
 
 <?php # Never Logged In Form BEGIN ?>
-<?
+<?php
 	# Get the user data in $f_sort order
 	$query = "SELECT *
 		FROM $g_mantis_user_table
@@ -117,7 +117,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 </tr>
 <tr class="row-2">
 	<td>
-<?
+<?php
 	for ($i=0;$i<$user_count;$i++) {
 		$row = db_fetch_array( $result );
 		$t_username = $row["username"];
@@ -131,7 +131,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php # Never Logged In Form END ?>
 
 <?php # Manage Form BEGIN ?>
-<?
+<?php
 	# Get the user data in $f_sort order
 	if ( 0 == $f_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
@@ -195,7 +195,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td>
 	</td>
 </tr>
-<?
+<?php
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
@@ -233,7 +233,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php print_bracket_link( $g_manage_user_page."?f_id=".$u_id, $s_edit_user_link ) ?>
 	</td>
 </tr>
-<?
+<?php
 	}  # end for
 ?>
 </table>

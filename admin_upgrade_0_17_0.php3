@@ -1,9 +1,9 @@
-<?
+<?php
 	require( "constant_inc.php" );
 	require( "config_inc.php" );
 	require( "core_database_API.php" );
 ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	class UpgradeItem {
@@ -34,7 +34,7 @@
 		}
 	}
 ?>
-<?
+<?php
 	$upgrade_obj = new UpgradeItem();
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_table CHANGE last_updated last_updated DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL" );
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bugnote_table CHANGE last_modified last_modified DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL" );

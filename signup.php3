@@ -1,11 +1,11 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
 <?php include( "core_API.php" ) ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# Check to see if signup is allowed
@@ -87,7 +87,7 @@
 
 <p>
 <div align="center">
-<?
+<?php
 	if ( $result ) {						# SUCCESS
 		PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
 	} else {								# FAILURE

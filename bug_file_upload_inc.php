@@ -1,10 +1,10 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 ?>
-<?
+<?php
 	# This include file prints out the bug file upload form
 	# It POSTs to bug_file_add.php3
 ?>

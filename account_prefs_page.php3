@@ -1,17 +1,17 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# This page allows the user to set his/her preferences
 	# Update is POSTed to acount_prefs_update.php3
 	# Reset is POSTed to acount_prefs_reset.php3
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# grab the user id
@@ -114,7 +114,7 @@
 		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>">
 	</td>
 </tr>
-<?
+<?php
 	if ( ON == $g_enable_email_notification ) {
 ?>
 <tr class="row-1">
@@ -189,7 +189,7 @@
 		<input type="checkbox" name="f_email_on_priority" <?php if ( ON == $u_email_on_priority ) echo "CHECKED" ?>>
 	</td>
 </tr>
-<?	} else { ?>
+<?php } else { ?>
 		<input type="hidden" name="f_email_on_new"      value="<?php echo $u_email_on_new ?>">
 		<input type="hidden" name="f_email_on_assigned" value="<?php echo $u_email_on_assigned ?>">
 		<input type="hidden" name="f_email_on_feedback" value="<?php echo $u_email_on_feedback ?>">
@@ -199,7 +199,7 @@
 		<input type="hidden" name="f_email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>">
 		<input type="hidden" name="f_email_on_status"   value="<?php echo $u_email_on_status ?>">
 		<input type="hidden" name="f_email_on_priority" value="<?php echo $u_email_on_priority ?>">
-<?	} ?>
+<?php } ?>
 <tr class="row-2">
 	<td class="category">
 		<?php echo $s_language ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	if ( ADVANCED_ONLY == $g_show_view ) {
 		print_header_redirect ( $g_view_bug_advanced_page."?f_id=".$f_id );
 	}
@@ -49,7 +49,7 @@
 		<?php echo $s_viewing_bug_simple_details_title ?>
 	</td>
 	<td class="right" colspan="3">
-<?
+<?php
 	if ( BOTH == $g_show_view ) {
 		print_bracket_link( $g_view_bug_advanced_page."?f_id=".$f_id, $s_view_advanced_link );
 	}
@@ -185,7 +185,7 @@
 		<?php echo $s_attached_files ?>
 	</td>
 	<td colspan="5">
-<?
+<?php
 		$query = "SELECT *
 				FROM $g_mantis_bug_file_table
 				WHERE bug_id='$f_id'";
@@ -218,8 +218,8 @@
 	</td>
 </tr>
 <tr align="center">
-<?	# UPDATE form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php # UPDATE form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_update_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
@@ -227,11 +227,11 @@
 		<input type="submit" value="<?php echo $s_update_bug_button ?>">
 	</td>
 	</form>
-<?	} else { ?>
+<?php } else { ?>
 	<td>&nbsp;</td>
-<?	} # UPDATE form END ?>
-<?	# ASSIGN form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php } # UPDATE form END ?>
+<?php # ASSIGN form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_assign ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>">
@@ -239,22 +239,22 @@
 		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 	</td>
 	</form>
-<?	} else { ?>
+<?php } else { ?>
 	<td>&nbsp;</td>
-<?	} # ASSIGN form END ?>
-<?	# RESOLVE form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php } # ASSIGN form END ?>
+<?php # RESOLVE form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_resolve_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
 		<input type="submit" value="<?php echo $s_resolve_bug_button ?>">
 	</td>
 	</form>
-<?	} else { ?>
+<?php } else { ?>
 	<td>&nbsp;</td>
-<?	} # RESOLVE form END ?>
-<?	# REOPEN form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status >= RESOLVED ) &&
+<?php } # RESOLVE form END ?>
+<?php # REOPEN form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status >= RESOLVED ) &&
 		(( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) ||
 		( $v_reporter_id == $t_user_id )) ) { ?>
 	<form method="post" action="<?php echo $g_bug_reopen_page ?>">
@@ -263,22 +263,22 @@
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
 	</td>
 	</form>
-<?	} else { ?>
+<?php } else { ?>
 	<td>&nbsp;</td>
-<?	} # REOPEN form END ?>
-<?	# CLOSE form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( RESOLVED == $v_status ) ) { ?>
+<?php } # REOPEN form END ?>
+<?php # CLOSE form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( RESOLVED == $v_status ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_close ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
 		<input type="submit" value="<?php echo $s_close_bug_button ?>">
 	</td>
 	</form>
-<?	} else { ?>
+<?php } else { ?>
 	<td>&nbsp;</td>
-<?	} # CLOSE form END ?>
-<?	# DELETE form BEGIN ?>
-<?	if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
+<?php } # CLOSE form END ?>
+<?php # DELETE form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_delete_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
@@ -286,9 +286,10 @@
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>">
 	</td>
 	</form>
-<?	} else {
+<?php } else {
 	PRINT "<td>&nbsp;</td>";
-	} # DELETE form END ?>
+	} # DELETE form END
+?>
 </tr>
 </table>
 

@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
@@ -109,7 +109,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 	# Get the user data in $f_sort order
     $query = "SELECT *
     		FROM $g_mantis_project_user_list_table
@@ -147,7 +147,7 @@
 		<?php print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>
 	</td>
 </tr>
-<?
+<?php
 	}  # end for
 ?>
 </table>
@@ -178,7 +178,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 	# Get the user data in $f_sort order
     $query = "SELECT DISTINCT u.id
 				FROM $g_mantis_user_table u, $g_mantis_project_user_list_table ul
@@ -215,7 +215,7 @@
 		<?php print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_id, $s_remove_link ) ?>
 	</td>
 </tr>
-<?
+<?php
 	}  # end for
 ?>
 </table>

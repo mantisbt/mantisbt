@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -9,12 +9,12 @@
     # Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 ?>
-<?
+<?php
 	# Assign bug to user then redirect to viewing page
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
@@ -36,7 +36,7 @@
 	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
 <?php print_page_top1() ?>
-<?
+<?php
 	if ( $result ) {
 		print_meta_redirect( $t_redirect_url );
 	}

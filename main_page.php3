@@ -1,10 +1,10 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?
+<?php
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
 ?>
@@ -27,7 +27,7 @@
 </tr>
 </table>
 
-<?
+<?php
 	# Check to see if variable is set
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
@@ -90,14 +90,14 @@
 </tr>
 </table>
 </div>
-<?
+<?php
 	}  # end for loop
 ?>
 
 <?php # Print NEXT and PREV links if necessary ?>
 <p>
 <div align="center">
-<?
+<?php
 	print_bracket_link( $g_news_list_page, $s_archives );
 	$f_offset_next = $f_offset + $g_news_view_limit;
 	$f_offset_prev = $f_offset - $g_news_view_limit;

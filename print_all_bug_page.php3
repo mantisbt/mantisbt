@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php login_cookie_check() ?>
-<?
+<?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# check to see if the cookie does not exist
@@ -169,7 +169,7 @@
 	$page_type = "all";
 ?>
 <?php print_page_top1() ?>
-<?
+<?php
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
 		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
@@ -275,7 +275,7 @@
 <tr>
 	<td class="form-title" colspan="7">
 		<?php echo $s_viewing_bugs_title ?>
-		<?
+		<?php
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
 				$v_end   = $f_offset+$row_count;
@@ -329,7 +329,7 @@
 		&nbsp;
 	</td>
 </tr>
-<?
+<?php
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
@@ -358,7 +358,7 @@
 		<?php echo $v_id ?>
 	</td>
 	<td class="print">
-		<?
+		<?php
 			if ($bugnote_count > 0){
 				if ( $v_bugnote_updated >
 					strtotime( "-$f_highlight_changed hours" ) ) {
@@ -378,7 +378,7 @@
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
 	<td class="print">
-		<?
+		<?php
 			# print username instead of status
 			if (( ON == $g_show_assigned_names )&&( $v_handler_id > 0 )&&
 				( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
@@ -389,7 +389,7 @@
 		?>
 	</td>
 	<td class="print">
-		<?
+		<?php
 			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
 
@@ -403,7 +403,7 @@
 		<span class="print"><?php echo $v_summary ?></a>
 	</td>
 </tr>
-<?
+<?php
 	}
 ?>
 </table>
