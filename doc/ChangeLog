@@ -24,6 +24,7 @@ Mantis ChangeLog
  * Added Chinese Simplified translation.
  * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
+ * Added db_clean_string(), db_clean_int(), and db_clean_bool() to be called on data before it goes into the database
  * Added delete_user() function to core_user_API.php and replaced this functionality in other files with a call to this function.
  * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
  * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.

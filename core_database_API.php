@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 22:21:11 $
+	# $Revision: 1.17 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-20 19:55:26 $
 	#
-	# $Id: core_database_API.php,v 1.16 2002-08-15 22:21:11 jlatour Exp $
+	# $Id: core_database_API.php,v 1.17 2002-08-20 19:55:26 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -150,6 +150,23 @@
 	# automatically closed when a page finishes loading.
 	function db_close() {
 		$t_result = mysql_close();
+	}
+	# --------------------
+	# clean a string before putting it in the DB
+	function db_clean_string( $p_string ) {
+		$c_string = addslashes( $p_string );
+
+		return $c_string;
+	}
+	# --------------------
+	# clean an integer before putting it in the DB
+	function db_clean_int( $p_int ) {
+		return (integer)$p_int;
+	}
+	# --------------------
+	# clean a boolean before putting it in the DB
+	function db_clean_bool( $p_bool ) {
+		return (bool)$p_bool;
 	}
 	# --------------------
 
