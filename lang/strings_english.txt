@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.129 $
-	# $Author: jfitzell $
-	# $Date: 2003-03-05 21:37:32 $
+	# $Revision: 1.130 $
+	# $Author: int2str $
+	# $Date: 2003-03-10 11:51:30 $
 	#
-	# $Id: strings_english.txt,v 1.129 2003-03-05 21:37:32 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.130 2003-03-10 11:51:30 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -769,6 +769,7 @@
 	# summary_page.php
 	$s_summary_title = 'Summary';
 	$s_summary_jpgraph_link = 'Advanced summary';
+	$s_by_project = 'by project';
 	$s_by_status = 'by status';
 	$s_by_date = 'by date (days)';
 	$s_by_severity = 'by severity';

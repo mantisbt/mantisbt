@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.15 2003-03-10 11:00:06 int2str Exp $
+	# $Id: summary_api.php,v 1.16 2003-03-10 11:51:29 int2str Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -146,7 +146,7 @@
 
 		$result = db_query( $query );
 
-		$last_handler = -1;
+		$t_last_handler = -1;
 		$t_bugs_open = 0;
 		$t_bugs_resolved = 0;
 		$t_bugs_closed = 0;
@@ -158,11 +158,11 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( $v_handler_id != $last_handler 
-			  && $last_handler != -1 ) {
+			if ( $v_handler_id != $t_last_handler 
+			  && $t_last_handler != -1 ) {
 				$query = "SELECT username"
 					. " FROM $t_mantis_user_table"
-					. " WHERE id=$last_handler";
+					. " WHERE id=$t_last_handler";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
 				summary_helper_print_row( 
@@ -190,13 +190,13 @@
 					break;
 			}
 
-			$last_handler = $v_handler_id;
+			$t_last_handler = $v_handler_id;
 		}
 
 		if ( 0 < $t_bugs_total ) {
 			$query = "SELECT username"
 				. " FROM $t_mantis_user_table"
-				. " WHERE id=$last_handler";
+				. " WHERE id=$t_last_handler";
 			$result2 = db_query( $query );
 			$row2 = db_fetch_array( $result2 );
 			summary_helper_print_row(
@@ -361,6 +361,82 @@
 			}
 			summary_helper_print_row( 
 			  $label
+			  , $t_bugs_open, $t_bugs_resolved
+			  , $t_bugs_closed, $t_bugs_total );
+		}
+	}
+	# --------------------
+	# print bug counts by project
+	function summary_print_by_project() {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		
+		$t_project_id = helper_get_current_project();
+
+		# This function only works when "all projects" is selected
+		if ( ALL_PROJECTS != $t_project_id ) 
+			return;
+
+		$query = "SELECT project_id, status FROM $t_mantis_bug_table"
+			. " ORDER BY project_id";
+
+		$result = db_query( $query );
+
+		$t_last_project = -1;
+		$t_bugs_open = 0;
+		$t_bugs_resolved = 0;
+		$t_bugs_closed = 0;
+		$t_bugs_total = 0;
+
+		$t_resolved_val = RESOLVED;
+		$t_closed_val = CLOSED;
+
+		while ( $row = db_fetch_array( $result ) ) {
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+			if ( $v_project_id != $t_last_project 
+			  && $t_last_project != -1 ) {
+				$query = "SELECT name"
+					. " FROM $t_mantis_project_table"
+					. " WHERE id=$t_last_project";
+				$result2 = db_query( $query );
+				$row2 = db_fetch_array( $result2 );
+				summary_helper_print_row( 
+				  $row2['name']
+			  	  , $t_bugs_open, $t_bugs_resolved
+				  , $t_bugs_closed, $t_bugs_total );
+
+				$t_bugs_open = 0;
+				$t_bugs_resolved = 0;
+				$t_bugs_closed = 0;
+				$t_bugs_total = 0;
+			}
+
+			$t_bugs_total++;
+
+			switch( $v_status ) {
+				case $t_resolved_val:
+					$t_bugs_resolved++;
+					break;
+				case $t_closed_val:
+					$t_bugs_closed++;
+					break;
+				default:
+					$t_bugs_open++;
+					break;
+			}
+
+			$t_last_project = $v_project_id;
+		}
+
+		if ( 0 < $t_bugs_total ) {
+			$query = "SELECT name"
+				. " FROM $t_mantis_project_table"
+				. " WHERE id=$t_last_project";
+			$result2 = db_query( $query );
+			$row2 = db_fetch_array( $result2 );
+			summary_helper_print_row(
+			  $row2['name']
 			  , $t_bugs_open, $t_bugs_resolved
 			  , $t_bugs_closed, $t_bugs_total );
 		}

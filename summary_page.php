@@ -79,6 +79,20 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
+		<?php # PROJECT # ?>
+		<?php if ( ALL_PROJECTS == $t_project_id ) { ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo lang_get( 'by_project' ) ?>:
+			</td>
+		</tr>
+		<?php summary_print_by_project(); ?>
+		</table>
+
+		<br />
+		<?php } ?>
+
 		<?php # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>

@@ -4,6 +4,8 @@ Mantis ChangeLog
  * Remove "show source" functionality which was a security hole and of little use
  * Languages: Updated Italian localisation.
  * Languages: Added Slovak localisation.
+ * Enhancement: Added bug summary by project on summary page (#1759).
+ * Enhancement: Reduced number of SQL queries on summary page (#3046).
  * Enhancement: Field names in bug history are now localized.
  * Enhancement: g_use_iis default value is now based on auto-detection of IIS servers.  Before it was defaulted to OFF.
  * Fix: 'Display selected only' on print bugs page fixed.

@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:33 $
+	# $Revision: 1.63 $
+	# $Author: int2str $
+	# $Date: 2003-03-10 11:51:30 $
 	#
-	# $Id: strings_german.txt,v 1.62 2003-02-26 14:25:33 jlatour Exp $
+	# $Id: strings_german.txt,v 1.63 2003-03-10 11:51:30 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -776,6 +776,7 @@
 	# summary_page.php
 	$s_summary_title = 'Zusammenfassung';
 	$s_summary_jpgraph_link = 'Erweiterte Zusammenfassung';
+	$s_by_project = 'nach Projekt';
 	$s_by_status = 'nach Status';
 	$s_by_date = 'nach Datum';
 	$s_by_severity = 'nach Schwere';
