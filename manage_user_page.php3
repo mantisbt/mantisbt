@@ -23,12 +23,13 @@
 		exit;
 	}
 
+	### grab user data and prefix with u_
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE id='$f_id'";
     $result = db_mysql_query($query);
 	$row = mysql_fetch_array($result);
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
 
 <p>
@@ -41,7 +42,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_manage_user_update ?>?f_action=update">
-	<input type=hidden name=f_id value="<? echo $v_id ?>">
+	<input type=hidden name=f_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=3 bgcolor=<? echo $g_white_color ?>>
 			<b>Edit User</b>
@@ -52,7 +53,7 @@
 			Username:
 		</td>
 		<td colspan=2>
-			<input type=text size=16 name=f_username value="<? echo $v_username ?>">
+			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
@@ -60,7 +61,7 @@
 			Email:
 		</td>
 		<td colspan=2>
-			<input type=text size=32 name=f_email value="<? echo $v_email ?>">
+			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -69,11 +70,11 @@
 		</td>
 		<td colspan=2>
 			<select name=f_access_level>
-				<option value="viewer" <? if ( $v_access_level=="viewer" ) echo "SELECTED" ?>>viewer
-				<option value="reporter" <? if ( $v_access_level=="reporter" ) echo "SELECTED" ?>>reporter
-				<option value="updater" <? if ( $v_access_level=="updater" ) echo "SELECTED" ?>>updater
-				<option value="developer" <? if ( $v_access_level=="developer" ) echo "SELECTED" ?>>developer
-				<option value="administrator" <? if ( $v_access_level=="administrator" ) echo "SELECTED" ?>>administrator
+				<option value="viewer" <? if ( $u_access_level=="viewer" ) echo "SELECTED" ?>>viewer
+				<option value="reporter" <? if ( $u_access_level=="reporter" ) echo "SELECTED" ?>>reporter
+				<option value="updater" <? if ( $u_access_level=="updater" ) echo "SELECTED" ?>>updater
+				<option value="developer" <? if ( $u_access_level=="developer" ) echo "SELECTED" ?>>developer
+				<option value="administrator" <? if ( $u_access_level=="administrator" ) echo "SELECTED" ?>>administrator
 			</select>
 		</td>
 	</tr>
@@ -82,7 +83,7 @@
 			Enabled
 		</td>
 		<td colspan=2>
-			<input type=checkbox name=f_enabled <? if ( $v_enabled=="on" ) echo "CHECKED" ?>>
+			<input type=checkbox name=f_enabled <? if ( $u_enabled=="on" ) echo "CHECKED" ?>>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -90,7 +91,7 @@
 			Protected
 		</td>
 		<td colspan=2>
-			<input type=checkbox name=f_protected <? if ( $v_protected=="on" ) echo "CHECKED" ?>>
+			<input type=checkbox name=f_protected <? if ( $u_protected=="on" ) echo "CHECKED" ?>>
 		</td>
 	</tr>
 	<tr align=center>
@@ -100,13 +101,13 @@
 			</form>
 			<form method=post action="<? echo $g_manage_user_update ?>?f_action=reset">
 		<td>
-			<input type=hidden name=f_id value="<? echo $v_id ?>">
+			<input type=hidden name=f_id value="<? echo $u_id ?>">
 			<input type=submit value=" Reset Password ">
 		</td>
 			</form>
 			<form method=post action="<? echo $g_manage_user_update ?>?f_action=delete">
 		<td>
-			<input type=hidden name=f_id value="<? echo $v_id ?>">
+			<input type=hidden name=f_id value="<? echo $u_id ?>">
 			<input type=submit value="  Delete User  ">
 		</td>
 			</form>

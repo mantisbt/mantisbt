@@ -17,16 +17,19 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### get news count
 	$query = "SELECT COUNT(id)
 			FROM $g_mantis_news_table";
 	$result = mysql_query( $query );
     $total_news_count = mysql_result( $result, 0 );
 
+	### Show all news items
 	if ( isset( $f_show ) ) {
 		$query = "SELECT *
 				FROM $g_mantis_news_table
 				ORDER BY id DESC";
 	}
+	### Show only $g_limit items
 	else {
 		$query = "SELECT *
 				FROM $g_mantis_news_table
@@ -48,6 +51,7 @@
 		$v_body = string_unsafe( $v_body );
 		$v_date_posted = date( "m-d H:i", sql_to_unix_time( $v_date_posted ) );
 
+		## grab the username and email of the poster
 	    $query = "SELECT username, email
 	    		FROM $g_mantis_user_table
 	    		WHERE id='$v_poster_id'";
@@ -82,14 +86,14 @@
 	}
 ?>
 
-<p>
-<div align=center>
 <?
 	if ( $total_news_count > $news_count ) {
+		PRINT "<p>";
+		PRINT "<div align=center>";
 		PRINT "<a href=\"$g_main_page?f_show=all\">more news</a>";
+		PRINT "</div>";
 	}
 ?>
-</div>
 
 <? print_footer() ?>
 <? print_body_bottom() ?>

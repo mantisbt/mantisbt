@@ -172,7 +172,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<select name=f_handler_id>
-				<option value=""></option>
+				<option value="">
 			<?
 			    $query = "SELECT id, username
 			    		FROM $g_mantis_user_table

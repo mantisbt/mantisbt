@@ -28,6 +28,7 @@
 		$f_sort = "username";
 	}
 
+	### Get the user data in $f_sort order
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			ORDER BY '$f_sort' ASC";
@@ -98,10 +99,14 @@
 	</tr>
 <?
 	for ($i=0;$i<$user_count;$i++) {
+		### prefix user data with u_
 		$row = mysql_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "v" );
-		$v_date_created  = date( "m-d H:i", sql_to_unix_time( $v_date_created ) );
-		$v_last_visit    = date( "m-d H:i", sql_to_unix_time( $v_last_visit ) );
+		extract( $row, EXTR_PREFIX_ALL, "u" );
+
+		$u_date_created  = date( "m-d H:i", sql_to_unix_time( $u_date_created ) );
+		$u_last_visit    = date( "m-d H:i", sql_to_unix_time( $u_last_visit ) );
+
+		### alternate row colors
 		if ( $i % 2 == 1) {
 			$bgcolor=$g_primary_color_dark;
 		}
@@ -111,38 +116,36 @@
 ?>
 	<tr bgcolor=<? echo $bgcolor ?>>
 		<td>
-			<? echo $v_username ?>
+			<? echo $u_username ?>
 		</td>
 		<td>
-			<a href="mailto:<? echo $v_email ?>"><? echo $v_email ?></a>
+			<a href="mailto:<? echo $u_email ?>"><? echo $u_email ?></a>
+		</td>
+		<td align=center>
+			<? echo $u_access_level ?>
+		</td>
+		<td align=center>
+			<? echo $u_enabled ?>
 		</td>
 		<td align=center>
 			<?
-				echo $v_access_level;
-			?>
-		</td>
-		<td align=center>
-			<? echo $v_enabled ?>
-		</td>
-		<td align=center>
-			<?
-				if ( $v_protected=="on" ) {
+				if ( $u_protected=="on" ) {
 					echo "x";
 				}
 			?>
 		</td>
 		<td align=center>
-			<? echo $v_date_created ?>
+			<? echo $u_date_created ?>
 		</td>
 		<td align=center>
-			<? echo $v_last_visit ?>
+			<? echo $u_last_visit ?>
 		</td>
 		<td align=center>
-			<a href="<? echo $g_manage_user_page ?>?f_id=<? echo $v_id ?>">edit user</a>
+			<a href="<? echo $g_manage_user_page ?>?f_id=<? echo $u_id ?>">edit user</a>
 		</td>
 	</tr>
 <?
-	}
+	}  ### end for
 ?>
 	</table>
 	</td>

@@ -15,7 +15,8 @@
 		exit;
 	}
 
-	$f_category = stripslashes( $f_category );
+	### remove \ from string
+	$f_category = string_unsafe( $f_category );
 	$query = "ALTER TABLE $g_mantis_bug_table
 			CHANGE category
 			category ENUM ($f_category)

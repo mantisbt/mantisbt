@@ -15,6 +15,7 @@
 		exit;
 	}
 
+	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password = crypt( $f_password );
     $query = "INSERT

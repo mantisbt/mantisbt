@@ -114,6 +114,7 @@
 			$v_summary = string_unsafe( $v_summary );
 			$lastupdated = date( "m-d", sql_to_unix_time( $v_last_updated ) );
 
+			### alternate row colors
 			if ($i % 2== 0) {
 				$status_color=$g_primary_color_light;
 			}

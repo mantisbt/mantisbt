@@ -22,12 +22,6 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
-    $query = "SELECT *
-    		FROM $g_mantis_user_table
-			ORDER BY username";
-    $result = db_mysql_query($query);
-	$row_count = mysql_num_rows($result);
 ?>
 
 <p>
