@@ -10,12 +10,13 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	$valid_project = 1;
-	### Check for invalid project_id selection
-	if ( empty( $f_project_id ) || ( $f_project_id=="0000000" ) ) {
+	# Check for invalid project_id selection
+#	if ( empty( $f_project_id ) || ( $f_project_id=="0000000" ) ) {
+	if ( empty( $f_project_id ) ) {
 		$valid_project = 0;
 	}
 
-	### Set default project
+	# Set default project
 	if ( isset( $f_make_default ) ) {
 		$t_user_id = get_current_user_field( "id" );
 		$query = "UPDATE $g_mantis_user_pref_table
@@ -24,7 +25,7 @@
 		$result = db_query( $query );
 	}
 
-	### Add item
+	# Add item
 	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
 
 	# redirect to 'same page' when switching projects.

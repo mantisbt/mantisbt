@@ -10,6 +10,7 @@
 	# new strings:
 	$s_no_file_specified = "ERROR: No file specified";
 	$s_file_deleted_msg = "File deletion successful";
+	$s_all_projects = "All Projects";
 
 	# General Strings
 	$s_go_back = "Go Back";

@@ -16,6 +16,7 @@ Mantis
  * Added a link to Mantis at the bottom of the pages.
  * Added support for date_order field for version.
  * Added delete file capability.
+ * Added view all projects capability.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Renamed g_store_file_to to g_file_upload_method.

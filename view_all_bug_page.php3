@@ -123,7 +123,43 @@
 	# 2) listing of the current page of rows, ordered appropriately
 	#
 
-	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+	# project selection
+	if ( "0000000" == $g_project_cookie_val ) { # ALL projects
+		$t_access_level = get_current_user_field( "access_level" );
+		$t_user_id = get_current_user_field( "id" );
+
+		$t_pub = PUBLIC;
+		$t_prv = PRIVATE;
+		$query2 = "SELECT DISTINCT( p.id )
+			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
+			WHERE (p.enabled=1 AND
+				p.view_state='$t_pub') OR
+				(p.enabled=1 AND
+				p.view_state='$t_prv' AND
+				p.access_min<='$t_access_level') OR
+				(p.enabled=1 AND
+				p.view_state='$t_prv' AND
+				u.user_id='$t_user_id'  AND
+                            u.project_id=p.id)
+			ORDER BY p.name";
+		$result2 = db_query( $query2 );
+		$project_count = db_num_rows( $result2 );
+
+		$t_where_clause = " WHERE (";
+		for ($i=0;$i<$project_count;$i++) {
+			$row = db_fetch_array( $result2 );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			$t_where_clause .= "(project_id='$v_id')";
+			if ( $i < $project_count - 1 ) {
+				$t_where_clause .= " OR ";
+			}
+		} # end for
+		$t_where_clause .= ")";
+	} else {
+		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+	}
+	# end project selection
 
 	if ( $f_user_id != "any" ) {
 		$t_where_clause .= " AND reporter_id='$f_user_id'";
@@ -172,7 +208,6 @@
 	$result = db_query( $query );
 	$row = db_fetch_array($result);
 	$t_query_count = $row['count(*)'];
-
 
 	# Guard against silly values of $f_per_page.
 	#

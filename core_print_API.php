@@ -244,7 +244,7 @@
 		} ### end for
 	}
 	### --------------------
-	### Only list the PUBLIC and ENABLED projects
+	# Only list the PUBLIC and ENABLED projects
 	function print_project_option_list( $p_project_id="" ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
