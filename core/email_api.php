@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.102 2004-10-05 21:10:14 prichards Exp $
+	# $Id: email_api.php,v 1.103 2005-01-05 20:57:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -173,13 +173,13 @@
 
 		$t_recipients = array();
 
-		# Reporter
+		# add Reporter
 		if ( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
 			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 			$t_recipients[$t_reporter_id] = true;
 		}
 
-		# Handler
+		# add Handler
 		if ( ON == email_notify_flag( $p_notify_type, 'handler' )) {
 			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 			$t_recipients[$t_handler_id] = true;
@@ -187,7 +187,7 @@
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-		# monitor
+		# add users monitoring the bug
 		$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
 		if ( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
 			$query = "SELECT DISTINCT user_id
@@ -202,7 +202,12 @@
 			}
 		}
 
-		# bugnotes
+		# add users who contributed bugnotes
+		$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
+		$t_bugnote_view = bugnote_get_field( $t_bugnote_id, 'view_state' );
+		$t_bugnote_date = db_unixtimestamp( bugnote_get_field( $t_bugnote_id, 'last_modified' ) );
+		$t_bug_date = bug_get_field( $p_bug_id, 'last_updated' );
+
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 		if ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
 			$query = "SELECT DISTINCT reporter_id
@@ -213,12 +218,11 @@
 			$count = db_num_rows( $result );
 			for( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
-				# @@@ (thraxisp) check that user can see bugnotes here
 				$t_recipients[$t_user_id] = true;
 			}
 		}
 
-		# threshold
+		# add project users who meet the thresholds
 		$t_bug_is_private = bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE;
 		$t_threshold_min = email_notify_flag( $p_notify_type, 'threshold_min' );
 		$t_threshold_max = email_notify_flag( $p_notify_type, 'threshold_max' );
@@ -231,7 +235,15 @@
 			}
 		}
 
-		$t_pref_field = 'email_on_' . $p_notify_type;
+		# set up to eliminate unwanted users
+		$t_status_change = get_enum_to_array( config_get( 'status_enum_string' ) );
+		unset( $t_status_change[RESOLVED] );
+		unset( $t_status_change[CLOSED] );
+		if ( in_array( $p_notify_type, $t_status_change ) ) {
+			$t_pref_field = 'email_on_status';
+		} else {
+			$t_pref_field = 'email_on_' . $p_notify_type;
+		}
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 		if ( !db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
 			$t_pref_field = false;
@@ -239,21 +251,20 @@
 
 		# @@@ we could optimize by modifiying user_cache() to take an array
 		#  of user ids so we could pull them all in.  We'll see if it's necessary
-
+		$t_final_recipients = array();
 		# Check whether users should receive the emails
 		# and put email address to $t_recipients[user_id]
 		foreach ( $t_recipients as $t_id => $t_ignore ) {
+
 			# Possibly eliminate the current user
 			if ( ( auth_get_current_user_id() == $t_id ) &&
 				 ( OFF == config_get( 'email_receive_own' ) ) ) {
-				unset( $t_recipients[$t_id] );
 				continue;
 			}
 
 			# Eliminate users who don't exist anymore or who are disabled
 			if ( !user_exists( $t_id ) ||
 				 !user_is_enabled( $t_id ) ) {
-				unset( $t_recipients[$t_id] );
 				continue;
 			}
 
@@ -261,7 +272,6 @@
 			if ( $t_pref_field ) {
 				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 				if ( OFF == $t_notify ) {
-					unset( $t_recipients[$t_id] );
 					continue;
 				} else {
 					# Users can define the severity of an issue before they are emailed for
@@ -271,24 +281,28 @@
 					$t_bug_severity       = bug_get_field( $p_bug_id, 'severity' );
 
 					if ( $t_bug_severity < $t_min_sev_notify ) {
-						unset( $t_recipients[$t_id] );
 						continue;
 					}
+				}
+			}
+			
+			# check that user can see bugnotes if the last update included a bugnote
+			if ( $t_bug_date == $t_bugnote_date ) {
+				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
+					continue;
 				}
 			}
 
 			# Finally, let's get their emails, if they've set one
 			$t_email = user_get_email( $t_id );
 			if ( is_blank( $t_email ) ) {
-				unset( $t_recipients[$t_id] );
 			} else {
 				# @@@ we could check the emails for validity again but I think
 				#   it would be too slow
-				$t_recipients[$t_id] = $t_email;
+				$t_final_recipients[$t_id] = $t_email;
 			}
 		}
-
-		return $t_recipients;
+		return $t_final_recipients;
 	}
 
 	# --------------------

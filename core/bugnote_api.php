@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.29 2004-10-05 17:20:33 thraxisp Exp $
+	# $Id: bugnote_api.php,v 1.30 2005-01-05 20:57:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -219,6 +219,21 @@
 		$query = "SELECT $c_field_name
 		          	FROM $t_bugnote_table
 		          	WHERE id='$c_bugnote_id' ";
+		$result = db_query( $query, 1 );
+
+		return db_result( $result );
+	}
+
+	# --------------------
+	# Get latest bugnote id
+	function bugnote_get_latest_id( $p_bug_id ) {
+		$c_bug_id   	= db_prepare_int( $p_bug_id );
+		$t_bugnote_table 	= config_get( 'mantis_bugnote_table' );
+
+		$query = "SELECT id
+		          	FROM $t_bugnote_table
+		          	WHERE bug_id='$c_bug_id' 
+		          	ORDER by last_modified DESC";
 		$result = db_query( $query, 1 );
 
 		return db_result( $result );
