@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.2 2004-07-25 20:56:34 thraxisp Exp $
+	# $Id: move_db2disk.php,v 1.3 2004-08-03 22:34:35 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -102,7 +102,7 @@
 			$t_real_file_path = $prefix . $t_file_path;
 			$c_filename = file_clean_name($v_filename); 
 			
-			echof("\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename);
+			printf("\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename);
 
 			if ( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
 				echo 'Destination '. $t_real_file_path . ' not writable';
