@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.4 2003-02-09 22:15:52 jfitzell Exp $
+	# $Id: manage_proj_page.php,v 1.5 2003-02-10 21:59:36 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -82,8 +82,6 @@
 		  continue;
 		}
 
-		$v_description 	= string_display( $v_description );
-
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
@@ -99,7 +97,7 @@
 		<?php echo get_enum_element( 'project_view_state', $t_project['view_state'] ) ?>
 	</td>
 	<td>
-		<?php echo string_display( $t_project['description'] ) ?>
+		<?php echo string_display_links( $t_project['description'] ) ?>
 	</td>
 </tr>
 <?php

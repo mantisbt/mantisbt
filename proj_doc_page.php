@@ -43,7 +43,7 @@
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
-		$v_description 	= string_display( $v_description );
+		$v_description 	= string_display_links( $v_description );
 		$v_date_added = date( $g_complete_date_format, $v_date_added );
 
 ?>

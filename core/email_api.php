@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.41 2003-02-09 01:19:14 jfitzell Exp $
+	# $Id: email_api.php,v 1.42 2003-02-10 21:59:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -470,8 +470,6 @@
 			$t_handler_name  = '';
 		}
 
-		$v2_description   = string_email( $v2_description );
-		$v_summary        = string_email( $v_summary );
 		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
 		$v_last_updated   = date( $g_complete_date_format, $v_last_updated );
 
@@ -569,7 +567,6 @@
 			$t_username = user_get_name( $t_reporter_id );
 
 			$t_note = db_result( $result2, 0, 0 );
-			$t_note = string_email( $t_note );
 			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
 			$t_string = ' '.$t_username.' - '.$t_last_modified.' ';
 			$t_message = $t_message.$g_email_separator2."\n";
@@ -605,7 +602,7 @@
 		global $g_to_email, $g_use_bcc;
 
 		# build subject
-		$p_subject = email_build_subject( $p_bug_id );
+		$t_subject = email_build_subject( $p_bug_id );
 
 		# build message
 		$t_category = '';
@@ -621,11 +618,11 @@
 			## list of receivers
 			$to = $g_to_email.( ( is_blank( $p_headers ) || is_blank( $g_to_email ) ) ? '' : ', ').$p_headers;
 			# echo '<br />email_bug_info::Sending email to :'.$to;
-			$res1 = email_send( $to, $p_subject, $t_message, '', $t_category );
+			$res1 = email_send( $to, $t_subject, $t_message, '', $t_category );
 		} else {
 			# Send Email
 			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
-			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers, $t_category );
+			$res1 = email_send( $g_to_email, $t_subject, $t_message, $p_headers, $t_category );
 		}
 	}
 	# --------------------
@@ -642,8 +639,8 @@
 		}
 
 		$t_recipient = trim( $p_recipient );
-		$t_subject   = trim( $p_subject );
-		$t_message   = trim( $p_message );
+		$t_subject   = string_email( trim( $p_subject ) );
+		$t_message   = string_email_links( trim( $p_message ) );
 
 		# short-circuit if no recipient is defined
 		if ( is_blank( $p_recipient ) && ( OFF == config_get('use_bcc') ) ) {
@@ -812,7 +809,7 @@
 		$p_project_name = project_get_field( $g_project_cookie_val, 'name' );
 
 		# grab the subject (summary)
-		$p_subject = string_email( get_bug_summary( $p_bug_id ) );
+		$p_subject = get_bug_summary( $p_bug_id );
 
 		# padd the bug id with zeros
 		$p_bug_id = bug_format_id( $p_bug_id );
@@ -868,6 +865,7 @@
 			$t_contents = $t_header .
 							string_get_bug_view_url( $p_bug_id, $t_recipient ) .
 							"\n\n$p_message";
+							
 			email_send( $t_email, $t_subject, $t_contents );
 		}
 		return $result;

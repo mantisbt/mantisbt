@@ -27,8 +27,8 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	$v_title		= string_edit_text( $v_title );
-	$v_description 	= string_edit_textarea( $v_description );
+	$v_title		= string_attribute( $v_title );
+	$v_description 	= string_textarea( $v_description );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

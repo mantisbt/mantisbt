@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.41 2003-02-09 22:30:10 jfitzell Exp $
+	# $Id: html_api.php,v 1.42 2003-02-10 21:59:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -621,7 +621,7 @@
 	# Print an html button inside a form
 	function html_button ( $p_action, $p_button_text, $p_fields = null ) {
 		$p_action = urlencode( $p_action );
-		$p_button_text = string_edit_text( $p_button_text );
+		$p_button_text = string_attribute( $p_button_text );
 		if ( null === $p_fields ) {
 			$p_fields = array();
 		}
@@ -629,8 +629,8 @@
 		echo "<form method=\"post\" action=\"$p_action\">\n";
 
 		foreach ( $p_fields as $key => $val ) {
-			$key = string_edit_text( $key );
-			$val = string_edit_text( $val );
+			$key = string_attribute( $key );
+			$val = string_attribute( $val );
 
 			echo "	<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 		}

@@ -224,7 +224,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$row = db_fetch_array($result);
 
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
-		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# grab the bugnote count
@@ -245,10 +244,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$v_os_build					= string_display( $v_os_build );
 		$v_platform					= string_display( $v_platform );
 		$v_version 					= string_display( $v_version );
-		$v_summary 					= string_display( $v_summary );
-		$v2_description 			= string_display( $v2_description );
-		$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-		$v2_additional_information 	= string_display( $v2_additional_information );
+		$v_summary 					= string_display_links( $v_summary );
+		$v2_description 			= string_display_links( $v2_description );
+		$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
+		$v2_additional_information 	= string_display_links( $v2_additional_information );
 
 		# display the available and selected bugs
 		if (isset($t_bug_arr_sort[$j])||($f_show_flag==0)) {
@@ -566,7 +565,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			$v3_note = db_result( $result7, 0, 0 );
 			$v3_bugnote_text_id = db_result( $result7, 0, 1 );
 
-			$v3_note = string_display( $v3_note );
+			$v3_note = string_display_links( $v3_note );
 	?>
 <tr>
 	<td class="print-spacer" colspan="2">

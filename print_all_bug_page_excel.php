@@ -260,7 +260,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# grab the bugnote count
@@ -280,7 +279,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$v_os_build					= string_display( $v_os_build );
 		$v_platform					= string_display( $v_platform );
 		$v_version 					= string_display( $v_version );
-		$v_summary 					= string_display( $v_summary );
+		$v_summary 					= string_display_links( $v_summary );
 
 		# line feeds are desactivated in case of excel export, to avoid multiple lines
 		if ($f_type_page != 'html' ) {
@@ -289,9 +288,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				$v2_additional_information = stripslashes(str_replace('\n',' ',$v2_additional_information));
 		}
 		else {
-			$v2_description 			= string_display( $v2_description );
-			$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-			$v2_additional_information 	= string_display( $v2_additional_information );
+			$v2_description 			= string_display_links( $v2_description );
+			$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
+			$v2_additional_information 	= string_display_links( $v2_additional_information );
 		}
 
 		# an index for incrementing the array position
@@ -524,7 +523,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				$v3_note = stripslashes(str_replace('\n','|',$v3_note));
 				}
 			else {
-					$v3_note = string_display( $v3_note );
+					$v3_note = string_display_links( $v3_note );
 				}
 	?>
 <table>

@@ -46,10 +46,10 @@
 	$v_os_build					= string_display( $v_os_build );
 	$v_platform					= string_display( $v_platform );
 	$v_version 					= string_display( $v_version );
-	$v_summary 					= string_display( $v_summary );
-	$v2_description 			= string_display( $v2_description );
-	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-	$v2_additional_information 	= string_display( $v2_additional_information );
+	$v_summary 					= string_display_links( $v_summary );
+	$v2_description 			= string_display_links( $v2_description );
+	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
+	$v2_additional_information 	= string_display_links( $v2_additional_information );
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -286,7 +286,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		if ( db_num_rows( $result ) > 0 ) {
 			$t_profile_description = db_result( $result, 0 );
 		}
-		$t_profile_description = string_display( $t_profile_description );
+		$t_profile_description = string_display_links( $t_profile_description );
 
 ?>
 <tr class="print">

@@ -63,7 +63,7 @@
 		$v3_note = db_result( $result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
 
-		$v3_note = string_display( $v3_note );
+		$v3_note = string_display_links( $v3_note );
 ?>
 <tr>
 	<td class="print-spacer" colspan="2">

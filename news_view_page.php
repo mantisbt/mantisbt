@@ -24,7 +24,7 @@
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	$v_headline 	= string_display( $v_headline );
-	$v_body 		= string_display( $v_body );
+	$v_body 		= string_display_links( $v_body );
 	$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
 	## grab the username and email of the poster

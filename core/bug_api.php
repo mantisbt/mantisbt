@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.31 2003-01-25 18:21:07 jlatour Exp $
+	# $Id: bug_api.php,v 1.32 2003-02-10 21:59:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -972,19 +972,19 @@
 	# Return a copy of the bug structure with all the instvars prepared for editing
 	#  in an HTML form
 	function bug_prepare_edit( $p_bug_data ) {
-		$p_bug_data->category			= string_edit_text( $p_bug_data->category );
-		$p_bug_data->date_submitted		= string_edit_text( $p_bug_data->date_submitted );
-		$p_bug_data->last_updated		= string_edit_text( $p_bug_data->last_updated );
-		$p_bug_data->os					= string_edit_text( $p_bug_data->os );
-		$p_bug_data->os_build			= string_edit_text( $p_bug_data->os_build );
-		$p_bug_data->platform			= string_edit_text( $p_bug_data->platform );
-		$p_bug_data->version			= string_edit_text( $p_bug_data->version );
-		$p_bug_data->build				= string_edit_text( $p_bug_data->build );
-		$p_bug_data->summary			= string_edit_text( $p_bug_data->summary );
+		$p_bug_data->category			= string_attribute( $p_bug_data->category );
+		$p_bug_data->date_submitted		= string_attribute( $p_bug_data->date_submitted );
+		$p_bug_data->last_updated		= string_attribute( $p_bug_data->last_updated );
+		$p_bug_data->os					= string_attribute( $p_bug_data->os );
+		$p_bug_data->os_build			= string_attribute( $p_bug_data->os_build );
+		$p_bug_data->platform			= string_attribute( $p_bug_data->platform );
+		$p_bug_data->version			= string_attribute( $p_bug_data->version );
+		$p_bug_data->build				= string_attribute( $p_bug_data->build );
+		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
 
-		$p_bug_data->description		= string_edit_textarea( $p_bug_data->description );
-		$p_bug_data->steps_to_reproduce	= string_edit_textarea( $p_bug_data->steps_to_reproduce );
-		$p_bug_data->additional_information	= string_edit_textarea( $p_bug_data->additional_information );
+		$p_bug_data->description		= string_textarea( $p_bug_data->description );
+		$p_bug_data->steps_to_reproduce	= string_textarea( $p_bug_data->steps_to_reproduce );
+		$p_bug_data->additional_information	= string_textarea( $p_bug_data->additional_information );
 
 		return $p_bug_data;
 	}
@@ -1001,11 +1001,11 @@
 		$p_bug_data->platform			= string_display( $p_bug_data->platform );
 		$p_bug_data->version			= string_display( $p_bug_data->version );
 		$p_bug_data->build				= string_display( $p_bug_data->build );
-		$p_bug_data->summary			= string_display( $p_bug_data->summary );
+		$p_bug_data->summary			= string_display_links( $p_bug_data->summary );
 
-		$p_bug_data->description		= string_display( $p_bug_data->description );
-		$p_bug_data->steps_to_reproduce	= string_display( $p_bug_data->steps_to_reproduce );
-		$p_bug_data->additional_information	= string_display( $p_bug_data->additional_information );
+		$p_bug_data->description		= string_display_links( $p_bug_data->description );
+		$p_bug_data->steps_to_reproduce	= string_display_links( $p_bug_data->steps_to_reproduce );
+		$p_bug_data->additional_information	= string_display_links( $p_bug_data->additional_information );
 
 		return $p_bug_data;
 	}

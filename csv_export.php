@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.11 2003-01-29 18:19:14 beerfrick Exp $
+	# $Id: csv_export.php,v 1.12 2003-02-10 21:59:35 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -48,7 +48,7 @@
 		$t_status			= get_enum_element( 'status', $v_status );
 		$t_hander_name		= user_get_name( $v_handler_id );
 		$t_reporter_name	= user_get_name( $v_reporter_id );
-		$v_summary			= string_display( $v_summary );
+		$v_summary			= string_display_links( $v_summary );
 
 		echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.55 2003-02-09 10:30:06 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.56 2003-02-10 21:59:36 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 		<?php echo lang_get( 'project_name' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="name" size="64" maxlength="128" value="<?php echo string_edit_text( $row['name'] ) ?>" />
+		<input type="text" name="name" size="64" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" />
 	</td>
 </tr>
 
@@ -99,7 +99,7 @@
 		<?php echo lang_get( 'upload_file_path' ) ?>
 	</td>
 	<td>
-		<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo string_edit_text( $row['file_path'] ) ?>" />
+		<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" />
 	</td>
 </tr>
 <?php } ?>
@@ -110,7 +110,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_edit_textarea( $row['description'] ) ?></textarea>
+		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_textarea( $row['description'] ) ?></textarea>
 	</td>
 </tr>
 

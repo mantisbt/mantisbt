@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.34 2003-01-25 21:13:17 jlatour Exp $
+	# $Id: main_page.php,v 1.35 2003-02-10 21:59:36 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -83,8 +83,8 @@
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$v_headline 	= string_display( $v_headline );
-		$v_body 		= string_display( $v_body );
+		$v_headline 	= string_display_links( $v_headline );
+		$v_body 		= string_display_links( $v_body );
 		$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
 		# only show PRIVATE posts to configured threshold and above

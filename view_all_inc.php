@@ -284,7 +284,7 @@
 
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 
-		$v_summary = string_display( $v_summary );
+		$v_summary = string_display_links( $v_summary );
 		$t_last_updated = date( config_get( 'short_date_format' ), $v_last_updated );
 
 		# choose color based on status

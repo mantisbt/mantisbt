@@ -26,7 +26,7 @@
 
     news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headline, $f_body );
     $f_headline 	= string_display( $f_headline );
-    $f_body 		= string_display( $f_body );
+    $f_body 		= string_display_links( $f_body );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

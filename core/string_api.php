@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.24 2003-01-25 20:50:25 jlatour Exp $
+	# $Id: string_api.php,v 1.25 2003-02-10 21:59:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -19,43 +19,59 @@
 	###########################################################################
 
 	# --------------------
-	# Use this to prepare a string for display to HTML
+	# Prepare a string for display to HTML
 	function string_display( $p_string ) {
-		$p_string = unfilter_href_tags( $p_string );
+		$p_string = string_strip_hrefs( $p_string );
 		$p_string = htmlentities( $p_string );
-		$p_string = string_process_bug_link( $p_string );
-		$p_string = string_process_cvs_link( $p_string );
-		$p_string = filter_href_tags( $p_string );
-		$p_string = filter_html_tags( $p_string );
+		$p_string = string_restore_valid_html_tags( $p_string );
 		$p_string = nl2br( $p_string );
 
+		return $p_string;
+	}
+	
+	# --------------------
+	# Prepare a string for display to HTML and add href anchors for URLs, emails,
+	#  bug references, and cvs references
+	function string_display_links( $p_string ) {
+		$p_string = string_display( $p_string );
+		
+		$p_string = string_insert_hrefs( $p_string );
+		$p_string = string_process_bug_link( $p_string );
+		$p_string = string_process_cvs_link( $p_string );
+		
 		return $p_string;
 	}
 
 	# --------------------
 	# Prepare a string for plain text display in email
 	function string_email( $p_string ) {
-		$p_string = unfilter_href_tags( $p_string );
+		$p_string = string_strip_hrefs( $p_string );
+
+		return $p_string;
+	}
+	
+	# --------------------
+	# Prepare a string for plain text display in email and add URLs for bug
+	#  links and cvs links
+	function string_email_links( $p_string ) {
+		$p_string = string_email( $p_string );
+		
 		$p_string = string_process_bug_link( $p_string, false );
 		$p_string = string_process_cvs_link( $p_string, false );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '"',  $p_string );
-		$p_string = str_replace( '&amp;', '&',  $p_string );
-
+		
 		return $p_string;
 	}
 
 	# --------------------
 	# Process a string for display in a textarea box
-	function string_edit_textarea( $p_string ) {
+	function string_textarea( $p_string ) {
 		$p_string = htmlentities( $p_string );
 		return $p_string;
 	}
 
 	# --------------------
 	# Process a string for display in a text box
-	function string_edit_text( $p_string ) {
+	function string_attribute( $p_string ) {
 		$p_string = htmlentities( $p_string );
 		return $p_string;
 	}
@@ -141,7 +157,7 @@
 
 	# --------------------
 	# Detect URLs and email addresses in the string and replace them with href anchors
-	function filter_href_tags( $p_string ) {
+	function string_insert_hrefs( $p_string ) {
 		if ( ! config_get( 'html_make_links' ) ) {
 			return $p_string;
 		}
@@ -157,7 +173,7 @@
 
 	# --------------------
 	# Detect href anchors in the string and replace them with URLs and email addresses
-	function unfilter_href_tags( $p_string ) {
+	function string_strip_hrefs( $p_string ) {
 		$p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
 								"\\1",
 								$p_string);
@@ -168,16 +184,10 @@
 	}
 
 	# --------------------
-	# @@@ currently does nothing
-	function filter_img_tags( $p_string ) {
-		return $p_string;
-	}
-
-	# --------------------
 	# This function looks for text with htmlentities
 	# like &lt;b&gt; and converts is into corresponding
 	# html <b> based on the configuration presets
-	function filter_html_tags( $p_string ) {
+	function string_restore_valid_html_tags( $p_string ) {
 		$t_html_valid_tags = config_get( 'html_valid_tags' );
 
 		if ( OFF === $t_html_valid_tags ||
@@ -236,7 +246,7 @@
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
-		$t_summary = bug_get_field( $p_bug_id, 'summary' );
+		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 
@@ -258,7 +268,7 @@
 	# return an href anchor that links to a bug UPDATE page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_update_link( $p_bug_id, $p_user_id=null ) {
-		$t_summary = bug_get_field( $p_bug_id, 'summary' );
+		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 

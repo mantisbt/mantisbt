@@ -407,7 +407,7 @@
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$v_summary = string_display( $v_summary );
+		$v_summary = string_display_links( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_edit_page.php,v 1.23 2003-02-08 22:47:00 jfitzell Exp $
+	# $Id: manage_proj_cat_edit_page.php,v 1.24 2003-02-10 21:59:36 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,12 +44,12 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
-		<input type="hidden" name="category" value="<?php echo string_edit_text( $f_category ) ?>" />
+		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
+		<input type="hidden" name="category" value="<?php echo string_attribute( $f_category ) ?>" />
 		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td>
-		<input type="text" name="new_category" size="32" maxlength="64" value="<?php echo string_edit_text( $f_category ) ?>" />
+		<input type="text" name="new_category" size="32" maxlength="64" value="<?php echo string_attribute( $f_category ) ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -79,8 +79,8 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
-		<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
-		<input type="hidden" name="category" value="<?php echo string_edit_text( $f_category ) ?>" />
+		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
+		<input type="hidden" name="category" value="<?php echo string_attribute( $f_category ) ?>" />
 		<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 </div>

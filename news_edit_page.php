@@ -31,8 +31,8 @@
     	extract( $row, EXTR_PREFIX_ALL, 'v' );
     }
 
-   	$v_headline = string_edit_text( $v_headline );
-   	$v_body 	= string_edit_textarea( $v_body );
+   	$v_headline = string_attribute( $v_headline );
+   	$v_body 	= string_textarea( $v_body );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

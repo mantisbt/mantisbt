@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.27 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prof_edit_page.php,v 1.28 2003-02-10 21:59:32 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_edit_text( $v_platform ) ?>" />
+		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -73,7 +73,7 @@
 		<?php echo lang_get( 'operating_system' ) ?>
 	</td>
 	<td>
-		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_edit_text( $v_os ) ?>" />
+		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -81,7 +81,7 @@
 		<?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_edit_text( $v_os_build ) ?>" />
+		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -89,7 +89,7 @@
 		<?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="8" wrap="virtual"><?php echo string_edit_textarea( $v_description ) ?></textarea>
+		<textarea name="description" cols="60" rows="8" wrap="virtual"><?php echo string_textarea( $v_description ) ?></textarea>
 	</td>
 </tr>
 <tr>

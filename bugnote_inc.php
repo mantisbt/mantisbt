@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.79 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: bugnote_inc.php,v 1.80 2003-02-10 21:59:34 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -70,7 +70,7 @@
 		$row = db_fetch_array( $result2 );
 
 		$v3_note = $row['note'];
-		$v3_note = string_display( $v3_note );
+		$v3_note = string_display_links( $v3_note );
 
 		if ( PRIVATE == $v3_view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
