@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.27 2003-03-12 08:45:03 int2str Exp $
+	# $Id: bug_report_page.php,v 1.28 2003-03-19 11:18:36 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -134,7 +134,7 @@
 		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
 	</td>
 	<td>
-		<input tabindex="5" type="text" name="summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
+		<input tabindex="5" type="text" name="summary" size="60" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
 
