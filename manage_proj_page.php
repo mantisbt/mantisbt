@@ -31,7 +31,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( 'manage_proj_menu_page.php' ) ?>
+<?php print_manage_menu( 'manage_proj_page.php' ) ?>
 
 <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
 <br />
@@ -113,23 +113,23 @@
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'name' ), 'name', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'name' ), 'name', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'status' ), 'status', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'status' ), 'status', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'view_status' ), 'view_state', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'description' ), 'description', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'description' ), 'description', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'description' ) ?>
 	</td>
 </tr>

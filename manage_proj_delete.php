@@ -23,6 +23,6 @@
 		helper_set_current_project( 0 );
 	}
 
-    $t_redirect_url = 'manage_proj_menu_page.php';
+    $t_redirect_url = 'manage_proj_page.php';
 	print_header_redirect( $t_redirect_url );
 ?>

@@ -18,7 +18,7 @@
 
 	project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
 
-	$t_redirect_url = 'manage_proj_menu_page.php';
+	$t_redirect_url = 'manage_proj_page.php';
 
 	print_page_top1();
 

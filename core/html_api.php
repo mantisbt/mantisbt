@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.38 2003-01-30 06:32:51 jfitzell Exp $
+	# $Id: html_api.php,v 1.39 2003-01-30 07:51:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -371,7 +371,7 @@
 					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
 					  $t_link = 'manage_user_page.php';
 					} else {
-					  $t_link = 'manage_proj_menu_page.php';
+					  $t_link = 'manage_proj_page.php';
 					}
 					PRINT "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
 				}
@@ -466,7 +466,7 @@
 		}
 
 		$t_manage_user_page 				= 'manage_user_page.php';
-		$t_manage_project_menu_page = 'manage_proj_menu_page.php';
+		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
 		$t_documentation_page 		= 'documentation_page.php';
 
