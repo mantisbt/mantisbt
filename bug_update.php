@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.64 2004-08-01 22:24:58 prichards Exp $
+	# $Id: bug_update.php,v 1.65 2004-08-02 19:40:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -78,7 +78,7 @@
 			continue;
 		}
 
-		if ( $t_def['require_update'] && ( gpc_get_custom_field( "custom_field_$t_id", '' ) == '' ) ) {
+		if ( $t_def['require_update'] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
