@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.27 2003-02-20 16:48:22 jlatour Exp $
+	# $Id: authentication_api.php,v 1.28 2003-02-26 09:11:19 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -337,7 +337,7 @@
 			return false;
 		}
 
-		$t_user_id = db_result( $result );
+		$t_user_id = (int)db_result( $result );
 
 		$g_cache_current_user_id = $t_user_id;
 
