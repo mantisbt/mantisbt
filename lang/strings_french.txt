@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:12 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_french.txt,v 1.59 2003-06-25 21:43:12 prescience Exp $
+	# $Id: strings_french.txt,v 1.60 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -617,6 +617,7 @@ $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l\'utilisateur';
 $s_reset_password_msg = 'Réinitialiser le mot de passe le remplace par un mot de passe généré aléatoirement';
 $s_reset_password_msg2 = 'Réinitialiser le mot de passe le remplace par \'\' (vide)).';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:13 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_latvian.txt,v 1.1 2003-06-25 21:43:13 prescience Exp $
+	# $Id: strings_latvian.txt,v 1.2 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = "Atcelt paroli";
 $s_delete_user_button = "Dzçst lietotâju";
 $s_reset_password_msg = "Paroles atcelðâna nozîmç jaunas paroles ìenerâciju.";
 $s_reset_password_msg2 = "ðobrîd lietotâjam nav paroles (tukða).";
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Lietotâja konts ir aizsargâts. Paroli nevar atcelt.";

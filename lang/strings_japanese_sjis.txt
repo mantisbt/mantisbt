@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.42 $
+	# $Revision: 1.43 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:12 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.42 2003-06-25 21:43:12 prescience Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.43 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -610,6 +610,7 @@ $s_reset_password_button = "パスワードのリセット";
 $s_delete_user_button = "アカウント削除";
 $s_reset_password_msg = "パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。";
 $s_reset_password_msg2 = "パスワードのリセットを行うと、パスワードが無しに設定されます。";
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "アカウントが保護されています。パスワードをリセットできません。";

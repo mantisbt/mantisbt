@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:11 $
+	# $Date: 2003-07-31 14:41:48 $
 	#
-	# $Id: strings_croatian.txt,v 1.1 2003-06-25 21:43:11 prescience Exp $
+	# $Id: strings_croatian.txt,v 1.2 2003-07-31 14:41:48 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = "Resetiraj zaporku";
 $s_delete_user_button = "Obri¹i korisnika";
 $s_reset_password_msg = "Reset zaporke postavlja sluèajno generiranu zaporku.";
 $s_reset_password_msg2 = "Reset postavlja praznu zaporku.";
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Korisnièki raèun za¹tiæen. Ne mogu resetirati zaporku.";

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.42 $
+  # $Revision: 1.43 $
   # $Author: prescience $
-  # $Date: 2003-06-25 21:43:12 $
+  # $Date: 2003-07-31 14:41:49 $
   #
-  # $Id: strings_hungarian.txt,v 1.42 2003-06-25 21:43:12 prescience Exp $
+  # $Id: strings_hungarian.txt,v 1.43 2003-07-31 14:41:49 prescience Exp $
   ###########################################################################
 ?>
 <?php
@@ -611,6 +611,7 @@ $s_reset_password_button = 'Jelszó törlése';
 $s_delete_user_button = 'Felhasználó törlése';
 $s_reset_password_msg = 'A jelszó törlésekor véletlen jelszó generálódik.';
 $s_reset_password_msg2 = 'A jelszó törlése után a jelszó üres lesz.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Védett fiók, a jelszó nem törölhetõ.';

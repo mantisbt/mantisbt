@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:14 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_romanian.txt,v 1.47 2003-06-25 21:43:14 prescience Exp $
+	# $Id: strings_romanian.txt,v 1.48 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -610,6 +610,7 @@ $s_reset_password_button = 'Reset parola';
 $s_delete_user_button = 'Sterge utilizator';
 $s_reset_password_msg = 'Resetarea parolei face parola vida.';
 $s_reset_password_msg2 = 'Reset Password sets the password to be blank.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Cont protejat. Parola nu poate fi resetata.';

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:11 $
+	# $Date: 2003-07-31 14:41:48 $
 	#
-	# $Id: strings_danish.txt,v 1.50 2003-06-25 21:43:11 prescience Exp $
+	# $Id: strings_danish.txt,v 1.51 2003-07-31 14:41:48 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -610,6 +610,7 @@ $s_reset_password_button = 'Nulstil Adgangskode';
 $s_delete_user_button = 'Slet Bruger';
 $s_reset_password_msg = 'Nulstil Adgangskode stiller adgangskoden til at være tom.';
 $s_reset_password_msg2 = 'Nulstil Adgangskode stiller adgangskoden til at være tom.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Konto beskyttet. Kan ikke nulstille adgangskode.';

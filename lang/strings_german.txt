@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.74 $
-	# $Author: vboctor $
-	# $Date: 2003-07-26 12:47:37 $
+	# $Revision: 1.75 $
+	# $Author: prescience $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_german.txt,v 1.74 2003-07-26 12:47:37 vboctor Exp $
+	# $Id: strings_german.txt,v 1.75 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -220,7 +220,7 @@ $s_administrator = 'Administrator';
 $s_access_levels_enum_string = '10:Betrachter,25:Reporter,40:Tester,55:Entwickler,70:Manager,90:Administrator';
 $s_project_status_enum_string = '10:Entwicklung,30:Freigabe,50:stabil,70:veraltet';
 $s_project_view_state_enum_string = '10:öffentlich,50:privat';
-$s_view_state_enum_string = '10:öffentlich,50:privat'; 
+$s_view_state_enum_string = '10:öffentlich,50:privat';
 
 $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort';
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:BLOCKER';
@@ -423,7 +423,7 @@ $s_status = 'Status';
 $s_duplicate_id = 'ID doppelt';
 $s_os = 'Betriebssystem';
 $s_projection = 'Projektion';
-$s_os_version = $s_os.'-Version'; 
+$s_os_version = $s_os.'-Version';
 $s_eta = 'Aufwand';
 $s_product_version = 'Produkt-Version';
 $s_build = 'Build';
@@ -518,7 +518,7 @@ $s_never_logged_in_title = 'Noch nie angemeldet';
 $s_prune_accounts = 'Konten löschen';
 $s_hide_inactive = 'Inaktive verstecken';
 $s_manage_accounts_title = 'Konten verwalten';
-$s_p = 'lösch-geschützt'; # _p_rotected 
+$s_p = 'lösch-geschützt'; # _p_rotected
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_edit_user_link = 'Benutzer bearbeiten';
@@ -614,6 +614,7 @@ $s_reset_password_button = 'Passwort zurücksetzen';
 $s_delete_user_button = 'Benutzer löschen';
 $s_reset_password_msg = 'Passwort zurücksetzen setzt ein zufällig generiertes Passwort.';
 $s_reset_password_msg2 = 'Passwort zurücksetzen setzt ein leeres Passwort.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Konto geschützt. Passwort-Löschung nicht möglich.';

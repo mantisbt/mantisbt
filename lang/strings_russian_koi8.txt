@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:14 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.38 2003-06-25 21:43:14 prescience Exp $
+	# $Id: strings_russian_koi8.txt,v 1.39 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -610,6 +610,7 @@ $s_reset_password_button = 'Сбросить пароль';
 $s_delete_user_button = 'Удалить пользователя';
 $s_reset_password_msg = 'Сброс пароля устанавливает случайно сгенерированный пароль.';
 $s_reset_password_msg2 = 'сброс пароля привел к тому, что сейчас пароль - пустая строка.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';

@@ -9,11 +9,11 @@
 	#          Ariel Arjona - beerfrick@users.sf.net
 	#          Luis Miguel Cruz Miranda - luismi@b2bi.es
 	# -------------------------------------------------
-	# $Revision: 1.53 $
+	# $Revision: 1.54 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:14 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_spanish.txt,v 1.53 2003-06-25 21:43:14 prescience Exp $
+	# $Id: strings_spanish.txt,v 1.54 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = 'Restear Contraseña';
 $s_delete_user_button = 'Eliminar Usuario';
 $s_reset_password_msg = 'Resetear la contraseña significa generar una nueva clave al azar.';
 $s_reset_password_msg2 = 'Resetar la contraseña significa blanquear clave.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Cuenta Protegida. Imposible resetear la clave.';

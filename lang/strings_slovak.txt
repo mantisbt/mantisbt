@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:14 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_slovak.txt,v 1.10 2003-06-25 21:43:14 prescience Exp $
+	# $Id: strings_slovak.txt,v 1.11 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = 'Vynulova» heslo';
 $s_delete_user_button = 'Zmaza» pou¾ívateµa';
 $s_reset_password_msg = 'Nastavi» heslo na náhodne vygenerovanú hodnotu.';
 $s_reset_password_msg2 = 'Nastavi» heslo na prázdne.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Úèet je chránený. Nie je mo¾né vynulova» heslo.';

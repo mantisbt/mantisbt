@@ -10,11 +10,11 @@
 	# Italian: Stefano Mazzocchi, stefano@apache.org
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:12 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_italian.txt,v 1.54 2003-06-25 21:43:12 prescience Exp $
+	# $Id: strings_italian.txt,v 1.55 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -613,6 +613,7 @@ $s_reset_password_button = "Resetta Password";
 $s_delete_user_button = "Elimina Utente";
 $s_reset_password_msg = "Resettandola, la Password verrà rigenerata a caso.";
 $s_reset_password_msg2 = "Resettando la Password se ne imposterà il valore a 'nullo'.";
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Account Protetto. Non è possibile resettare la password.";

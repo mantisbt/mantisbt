@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:11 $
+	# $Date: 2003-07-31 14:41:48 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.29 2003-06-25 21:43:11 prescience Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.30 2003-07-31 14:41:48 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -613,6 +613,7 @@ $s_reset_password_button = "重设密码";
 $s_delete_user_button = "刪除使用者";
 $s_reset_password_msg = "Reset Password sets the randomly generated password.";
 $s_reset_password_msg2 = "重设密码 sets the password to be blank.";
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "帐号受保护，不能重置密码。";

@@ -9,11 +9,11 @@
 	# Norwegian: Morten Lunde, morten.lunde@observer.no
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: prescience $
-	# $Date: 2003-06-25 21:43:13 $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_norwegian.txt,v 1.52 2003-06-25 21:43:13 prescience Exp $
+	# $Id: strings_norwegian.txt,v 1.53 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = 'Nullstille passord';
 $s_delete_user_button = 'Slette bruker';
 $s_reset_password_msg = 'Nullstille passord setter et tilfeldig generert passord.';
 $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';

@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: vboctor $
-	# $Date: 2003-07-06 05:42:35 $
+	# $Revision: 1.53 $
+	# $Author: prescience $
+	# $Date: 2003-07-31 14:41:49 $
 	#
-	# $Id: strings_swedish.txt,v 1.52 2003-07-06 05:42:35 vboctor Exp $
+	# $Id: strings_swedish.txt,v 1.53 2003-07-31 14:41:49 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -610,6 +610,7 @@ $s_reset_password_button = 'Nollställ lösenord';
 $s_delete_user_button = 'Ta bort kontot';
 $s_reset_password_msg = 'Nollställ lösenord sätter ett slumpgenererat lösenord.';
 $s_reset_password_msg2 = 'Nollställ lösenordet sätter ett tomt lösenord.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Kontot skyddat. Kan inte nollställa lösenordet.';
