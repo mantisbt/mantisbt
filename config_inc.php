@@ -191,10 +191,10 @@
 	#--------------------
 	# cookies
 	# cookie names
-	$g_string_cookie        = $g_cookie_prefix."_STRING_COOKIE";
-	$g_last_access_cookie   = $g_cookie_prefix."_LAST_ACCESS_COOKIE";
-	$g_hide_resolved_cookie = $g_cookie_prefix."_HIDE_RESOLVED";
-	$g_view_limit_cookie    = $g_cookie_prefix."_VIEW_LIMIT";
+	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";
+	$g_last_access_cookie       = $g_cookie_prefix."_LAST_ACCESS_COOKIE";
+	$g_hide_resolved_cookie     = $g_cookie_prefix."_HIDE_RESOLVED";
+	$g_view_limit_cookie        = $g_cookie_prefix."_VIEW_LIMIT";
 
 	# cookie values
 	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
@@ -213,7 +213,7 @@
 	#--------------------
 	# defaults for viewing preferences
 	$g_default_limit_view       = 50;
-	$g_default_show_last        = 1;
+	$g_default_show_changed     = 1;
 	$g_default_hide_resolved    = "";  # set to on to enable
 	$g_default_advanced_report  = "";  # set to on to enable
 	$g_default_advanced_view    = "";  # set to on to enable
@@ -224,8 +224,6 @@
 	# folows the english required by strtotime()
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
 	#--------------------
-
-	$g_product_versions = "0.9.0,0.9.1,0.10.0,0.10.1,0.10.2,0.10.3";
 
 	#--------------------
 	# html table appearance variables

@@ -18,19 +18,28 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### check whether the user wanted to hide the results
-	$f_hide_resolved = get_user_value( $g_mantis_user_pref_table, "hide_resolved" );
-	$f_limit_view = get_user_value( $g_mantis_user_pref_table, "limit_view" );
-
-	if ( isset( $g_hide_resolved_val ) ) {
-		$f_hide_resolved = $g_hide_resolved_val;
-	}
-	if ( isset( $g_view_limit_val ) ) {
-		$f_limit_view = $g_view_limit_val;
+	if ( !isset( $f_show_status ) ) {
+		$f_hide_resolved = $g_default_hide_resolved;
 	}
 
-	if ( empty( $f_limit_view )) {
-		$f_limit_view = $g_default_view_limit;
+	if ( !isset( $f_limit_view ) ) {
+		$f_limit_view = $g_default_limit_view;
 	}
+
+	if ( !isset( $f_show_changed ) ) {
+		$f_show_changed = $g_default_show_changed;
+	}
+
+	if ( !isset( $f_show_category ) ) {
+		$f_show_category = "any";
+	}
+	if ( !isset( $f_show_severity ) ) {
+		$f_show_severity = "any";
+	}
+	if ( !isset( $f_show_status ) ) {
+		$f_show_status = "any";
+	}
+	#$f_limit_view
 
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
@@ -46,13 +55,43 @@
 		$f_dir = "DESC";
 	}
 ?>
+
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
-[ <a href="<? echo $g_account_prefs_page ?>">Viewing Preferences</a> ]
-</div>
+<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<tr>
+	<td bgcolor=<? echo $g_white_color ?>>
+	<table width=100% cols=7>
+	<tr>
+		<form method=post action="<? echo $g_view_bug_add_page ?>">
+		<input type=hidden name=f_offset value="0">
+		<td align=center>
+		<select name=f_show_category>
+			<option value="any">any
+			<option value="any">
+			<? print_list( "category", $f_show_category ) ?>
+		</select>
+		<select name=f_show_severity>
+			<option value="any">any
+			<option value="any">
+			<? print_list( "severity", $f_show_severity ) ?>
+		</select>
+		<select name=f_show_status>
+			<option value="any">any
+			<option value="any">
+			<? print_list( "status", $f_show_status ) ?>
+		</select>
+		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
+		Changed: <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
+		<input type=submit value=" Filter ">
+		</td>
+		</form>
+	</tr>
+	</table>
+</tr>
+</table>
 
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -111,9 +150,30 @@
 		}
 		### build our query string based on our viewing criteria
 		$query = "SELECT * FROM $g_mantis_bug_table";
-		if ( $f_hide_resolved=="on"  ) {
-			$query = $query." WHERE status<>'resolved'";
+
+		$t_where_clause = "";
+
+		if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
+			$t_where_clause = $t_where_clause." AND status<>'resolved'";
 		}
+
+		if ( $f_show_category != "any" ) {
+			$t_where_clause = $t_where_clause." AND category='$f_show_category'";
+		}
+		if ( $f_show_severity != "any" ) {
+			$t_where_clause = $t_where_clause." AND severity='$f_show_severity'";
+		}
+		if ( $f_show_status != "any" ) {
+			$t_where_clause = $t_where_clause." AND status='$f_show_status'";
+		}
+
+		if ( !empty( $t_where_clause ) ) {
+			$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
+			$t_where_clause = " WHERE ".$t_where_clause;
+		}
+
+		$query = $query.$t_where_clause;
+
 		if ( !isset( $f_sort ) ) {
 				$f_sort="id";
 		}
@@ -146,7 +206,7 @@
 			### The code creates the appropriate variable name
 			### then references that color variable
 			### You could replace this with a bunch of if... then... else
-			#### statments
+			### statements
 			if ( $v_status!="resolved" ) {
 				$t = "g_".$v_status."_color";
 				$status_color = $$t;
@@ -204,8 +264,12 @@
 		<td>
 			<?
 				if ( isset( $g_last_access_cookie_val ) ) {
-					if ( $v_last_updated >
-						$g_last_access_cookie_val ) {
+#					if ( $v_last_updated >
+#						$g_last_access_cookie_val ) {
+					if ( sql_to_unix_time( $v_last_updated ) >
+						strtotime( "-$f_show_changed hours" ) ) {
+
+
 						PRINT "<b>";
 						echo $lastupdated;
 						PRINT "</b>";
@@ -242,10 +306,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>">View Prev <? echo $f_limit_view ?></a>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>">View Prev <? echo $f_limit_view ?></a>
 <? } ?>
 <? if ( $row_count == $f_limit_view ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>">View Next <? echo $f_limit_view ?></a>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>">View Next <? echo $f_limit_view ?></a>
 <? } ?>
 </div>
 

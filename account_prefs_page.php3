@@ -36,11 +36,9 @@
 		### Create row
 	    $query = "INSERT
 	    		INTO $g_mantis_user_pref_table
-	    		(id, user_id, hide_resolved, limit_view,
-	    		show_last, advanced_report, advanced_view)
+	    		(id, user_id, advanced_report, advanced_view)
 	    		VALUES
-	    		(null, '$u_id', '$g_default_hide_resolved',
-	    		'$g_default_limit_view', '$g_default_show_last',
+	    		(null, '$u_id',
 	    		'$g_default_advanced_report', '$g_default_advanced_view')";
 	    $result = db_mysql_query($query);
 
@@ -72,30 +70,6 @@
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Default Account Preferences</b>
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td width=40%>
-			Hide Resolved
-		</td>
-		<td width=60%>
-			<input type=checkbox name=f_hide_resolved <? if ( $u_hide_resolved=="on" ) echo "CHECKED"?>>
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
-		<td>
-			Limit to
-		</td>
-		<td>
-			<input type=text name=f_limit_view size=7 maxlength=7 value="<? echo $u_limit_view ?>">
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td>
-			Show changed since
-		</td>
-		<td>
-			<input type=text name=f_show_last size=4 maxlength=4 value="<? echo $u_show_last ?>"> hours ago
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>

@@ -31,6 +31,8 @@
 	# goes to error page if error occurs
 	# Use this when you don't want to handler an error yourself
 	function db_mysql_query( $p_query ) {
+		global $g_mysql_error_page;
+
 		$t_result = mysql_query( $p_query );
 		if ( !$t_result ) {
 			header( "Location: $g_mysql_error_page?f_message=$p_query" );

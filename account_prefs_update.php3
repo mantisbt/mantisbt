@@ -20,8 +20,7 @@
 	if ( $f_action="update" ) {
 		## update preferences
 		$query = "UPDATE $g_mantis_user_pref_table
-				SET hide_resolved='$f_hide_resolved', limit_view='$f_limit_view',
-					show_last='$f_show_last', advanced_report='$f_advanced_report',
+				SET advanced_report='$f_advanced_report',
 					advanced_view='$f_advanced_view'
 				WHERE id='$f_id'";
 		$result = mysql_query( $query );
@@ -29,9 +28,7 @@
 	else if ( $f_action="reset" ) {
 		## reset to defaults
 		$query = "UPDATE $g_mantis_user_pref_table
-				SET hide_resolved='$g_default_hide_resolved', limit_view='$g_default_limit_view',
-					show_last='$g_default_show_last',
-					advanced_report='$g_default_advanced_report',
+				SET advanced_report='$g_default_advanced_report',
 					advanced_view='$g_default_advanced_view'
 				WHERE id='$f_id'";
 		$result = mysql_query( $query );
