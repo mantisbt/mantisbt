@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-23 09:52:34 $
+	# $Date: 2002-08-24 08:08:03 $
 	#
-	# $Id: core_error_API.php,v 1.2 2002-08-23 09:52:34 jfitzell Exp $
+	# $Id: core_error_API.php,v 1.3 2002-08-24 08:08:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -30,46 +30,60 @@
 	# The others, being system errors, will come with a string in $p_error
 	# 
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-		global $g_display_errors, $g_show_detailed_errors;
+		global $g_show_warnings, $g_show_notices, $g_show_detailed_errors;
 
 		$t_short_file = basename( $p_file );
+		$t_method = 'none';
 
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
-				$t_display = "SYSTEM WARNING: $p_error <br> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error <br> ($t_short_file: line $p_line)";
+				if ( $g_show_warnings ) {
+					$t_method = 'inline';
+				}
 				break;
 			case E_NOTICE:
-				$t_display = "SYSTEM NOTICE: $p_error <br> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM NOTICE: $p_error <br> ($t_short_file: line $p_line)";
+				if ( $g_show_notices ) {
+					$t_method = 'inline';
+				}
 				break;
 			case E_USER_ERROR:
-				$t_display = "MANTIS ERROR #$p_error: " .
+				$t_string = "MANTIS ERROR #$p_error: " .
 							error_string( $p_error ) .
 							"<br>($t_short_file: line $p_line)";
+				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
-				$t_display = "MANTIS WARNING #$p_error: " .
+				$t_string = "MANTIS WARNING #$p_error: " .
 							error_string( $p_error ) .
 							"<br>($t_short_file: line $p_line)";
+				if ( $g_show_warnings ) {
+					$t_method = 'inline';
+				}
 				break;
 			case E_USER_NOTICE:
-				$t_display = "MANTIS NOTICE #$p_error: " .
+				$t_string = "MANTIS NOTICE #$p_error: " .
 							error_string( $p_error ) .
 							"<br>($t_short_file: line $p_line)";
+				if ( $g_show_notices ) {
+					$t_method = 'inline';
+				}
 				break;
 			default:
 				#shouldn't happen, just display the error just in case
-				$t_display = $p_error;
+				$t_string = $p_error;
 		}
 
-		if ( 'halt' == $g_display_errors[$p_type] ) {
+		if ( 'halt' == $t_method ) {
 			# clear the output buffer so we can start from scratch
 			ob_end_clean();
 
 			print_page_top1();
 			print_page_top2a();
 
-			echo "<p class=\"center\" style=\"color:red\">$t_display</p>";
+			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
 
 			if ( $g_show_detailed_errors ) {
 			?>
@@ -103,8 +117,8 @@
 			}
 
 			die();
-		} else if ( 'inline' == $g_display_errors[$p_type] ) {
-			echo "<p style=\"color:red\">$t_display</p>";
+		} else if ( 'inline' == $t_method ) {
+			echo "<p style=\"color:red\">$t_string</p>";
 		} else {
 			# do nothing
 		}

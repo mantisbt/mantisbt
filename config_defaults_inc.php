@@ -757,16 +757,18 @@
 	# need it for debugging
 	$g_show_detailed_errors = OFF;
 
-	# --- error dsiplay configuration ---
-	# Control which errors are ignored ('none'), which are displayed
-	#  in the middle of the page ('inline'), and which cause execution
-	#  to be halted ('halt')
-	$g_display_errors = array();
-	$g_display_errors[E_NOTICE] = 'none';
-	$g_display_errors[E_WARNING] = 'inline';
-	$g_display_errors[E_USER_NOTICE] = 'none';
-	$g_display_errors[E_USER_WARNING] = 'inline';
-	$g_display_errors[E_USER_ERROR] = 'halt';
+	# --- notice display ---
+	# Control whether errors of level NOTICE, the lowest level of error,
+	#  are displayed to the user.  Default is OFF, but turning it ON may
+	#  be useful while debugging
+	$g_show_notices = OFF;
+
+	# --- warning display ---
+	# Control whether errors of level WARNING, the middle level of error,
+	#  are displayed to the user.  Default is ON.  Turning it OFF may
+	#  hide useful information from the user.
+	$g_show_warnings = ON;
+
 	
 	# seed to be used to generate CRC checksums for view-only-defects
 	# Assign to this variable a keyword that won't change.  If this value changes
