@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.6 2002-12-17 08:32:58 jfitzell Exp $
+	# $Id: obsolete.php,v 1.7 2002-12-17 11:00:45 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -16,6 +16,9 @@
 	###########################################################################
 
 	# Check for obsolete variables
+
+	# ==== Changes after 0.17.5 ====
+
 	config_obsolete( 'new_color', 'status_colors' );
 	config_obsolete( 'feedback_color', 'status_colors' );
 	config_obsolete( 'acknowledged_color', 'status_colors' );
