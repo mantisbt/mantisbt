@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.37 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: proj_doc_edit_page.php,v 1.38 2005-02-28 00:30:40 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -29,8 +29,9 @@
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
+	$t_proj_file_table = config_get( 'mantis_project_file_table' );
 	$query = "SELECT *
-			FROM $g_mantis_project_file_table
+			FROM $t_proj_file_table
 			WHERE id='$c_file_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );

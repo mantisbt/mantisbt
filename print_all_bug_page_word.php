@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.56 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: print_all_bug_page_word.php,v 1.57 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -91,8 +91,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$t_project_name = project_get_field( $v_project_id, 'name' );
 
 		# bug text infos
+	    $t_bug_text_table = config_get( 'mantis_bug_text_table' );
 		$query3 = "SELECT *
-			FROM $g_mantis_bug_text_table
+			FROM $t_bug_text_table
 			WHERE id='$v_bug_text_id'";
 		$result3 = db_query( $query3 );
 		$row = db_fetch_array( $result3 );
@@ -331,8 +332,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 	# account profile description
 	if ( $v_profile_id > 0 ) {
+	   $t_user_prof_table = config_get( 'mantis_user_profile_table' );
 		$query4 = "SELECT description
-				FROM $g_mantis_user_profile_table
+				FROM $t_user_prof_table
 				WHERE id='$v_profile_id'";
 		$result4 = db_query( $query4 );
 		$t_profile_description = '';
@@ -359,8 +361,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
+	        $t_bug_file_table = config_get( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
-					FROM $g_mantis_bug_file_table
+					FROM $t_bug_file_table
 					WHERE bug_id='$v_id'";
 			$result5 = db_query( $query5 );
 			$num_files = db_num_rows( $result5 );
@@ -430,7 +433,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			$row = db_fetch_array( $result6 );
 			extract( $row, EXTR_PREFIX_ALL, 'v3' );
 			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
-			$v3_date_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_modified ) ) );
+			$v3_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_last_modified ) ) );
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.43 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.44 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -67,8 +67,9 @@
 
 	# get printing preferences
 	$t_user_id = auth_get_current_user_id();
+	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
 	$query3 ="SELECT print_pref ".
-			"FROM $g_mantis_user_print_pref_table ".
+			"FROM $t_user_print_pref_table ".
 			"WHERE user_id='$t_user_id' ";
 
 	$result3 = db_query( $query3 );
@@ -131,8 +132,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
 
+	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
 		$query4 = "SELECT *
-			FROM $g_mantis_bug_text_table
+			FROM $t_bug_text_table
 			WHERE id='$v_bug_text_id'";
 		$result4 = db_query( $query4 );
 		$row = db_fetch_array( $result4 );
@@ -327,8 +329,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 <?php
+        	$t_file_table = config_get( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
-					FROM $g_mantis_bug_file_table
+					FROM $t_file_table
 					WHERE bug_id='$v_id'";
 			$result5 = db_query( $query5 );
 			$num_files = db_num_rows( $result5 );

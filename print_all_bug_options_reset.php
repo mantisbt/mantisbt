@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_reset.php,v 1.13 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: print_all_bug_options_reset.php,v 1.14 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,7 +39,8 @@
 	$t_default = implode('',$t_default_arr) ;
 
 	# reset to defaults
-	$query = "UPDATE $g_mantis_user_print_pref_table
+	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
+	$query = "UPDATE $t_user_print_pref_table
 			SET print_pref='$t_default'
 			WHERE user_id='$t_user_id'";
 

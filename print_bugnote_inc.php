@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.32 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: print_bugnote_inc.php,v 1.33 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -69,7 +69,7 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
-		$v3_date_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_modified ) ) );
+		$v3_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_last_modified ) ) );
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.53 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: print_bug_page.php,v 1.54 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,15 +30,17 @@
 
 	$c_bug_id = (integer)$f_bug_id;
 
+	$t_bug_table = config_get( 'mantis_bug_table' );
 	$query = "SELECT *, date_submitted, last_updated
-			FROM $g_mantis_bug_table
+			FROM $t_bug_table
 			WHERE id='$c_bug_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
 	$query = "SELECT *
-			FROM $g_mantis_bug_text_table
+			FROM $t_bug_text_table
 			WHERE id='$v_bug_text_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
@@ -292,8 +294,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 	# account profile description
 	if ( $v_profile_id > 0 ) {
+	    $t_user_prof_table = config_get( 'mantis_user_profile_table' );
 		$query = "SELECT description
-				FROM $g_mantis_user_profile_table
+				FROM $t_user_prof_table
 				WHERE id='$v_profile_id'";
 		$result = db_query( $query );
 		$t_profile_description = '';

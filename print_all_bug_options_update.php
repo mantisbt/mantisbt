@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_update.php,v 1.15 2004-02-16 12:49:25 vboctor Exp $
+	# $Id: print_all_bug_options_update.php,v 1.16 2005-02-28 00:30:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,8 @@
 	$c_export = implode('',$t_prefs_arr);
 
 	# update preferences
-	$query = "UPDATE $g_mantis_user_print_pref_table
+	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
+	$query = "UPDATE $t_user_print_pref_table
 			SET print_pref='$c_export'
 			WHERE user_id='$t_user_id'";
 
