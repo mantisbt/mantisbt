@@ -366,7 +366,9 @@
 			echo get_enum_element( 'status', $v_status );
 			# print username instead of status
 			if ( $v_handler_id > 0 && ON == config_get( 'show_assigned_names' ) ) {
-				echo ' (' . user_get_name( $v_handler_id ) . ')';
+				echo ' (';
+				print_user( $v_handler_id );
+				echo ')';
 			}
 		?>
 	</td>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.44 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: user_api.php,v 1.45 2003-01-19 23:56:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -375,7 +375,12 @@
 		$row = user_cache_row( $p_user_id, false );
 
 		if ( false == $row ) {
-			return lang_get( 'user_no_longer_exists' );
+			$t_prefix = config_get( 'prefix_for_deleted_users' );
+			if ( OFF === $t_prefix ) {
+				return lang_get ( 'user_no_longer_exists' );
+			} else {
+				return $t_prefix . (integer)$p_user_id;
+			}
 		} else {
 			return $row['username'];
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.34 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: print_api.php,v 1.35 2003-01-19 23:56:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -71,14 +71,13 @@
 		if ( 0 == $p_user_id ) {
 			return;
 		}
-		
-		if ( user_exists( $p_user_id ) ) {
-			$t_username	= user_get_name( $p_user_id );
-			$t_email	= user_get_field( $p_user_id, 'email' );
 
+		$t_username = user_get_name( $p_user_id );
+		if ( user_exists( $p_user_id ) ) {
+			$t_email	= user_get_field( $p_user_id, 'email' );
 			print_email_link( $t_email, $t_username );
 		} else {
-			echo lang_get ( 'user_no_longer_exists' );
+			echo $t_username;
 		}
 	}
 	# --------------------
@@ -90,13 +89,12 @@
 			return;
 		}
 		
+		$t_username = user_get_name( $p_user_id );
 		if ( user_exists( $p_user_id ) ) {
-			$t_username	= user_get_name( $p_user_id );
-			$t_email	= user_get_field( $p_user_id, 'email' );
-
+			$t_email = user_get_field( $p_user_id, 'email' );
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
-			echo lang_get( 'user_no_longer_exists' );
+			echo $t_username;
 		}
 	}
 	# --------------------

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.14 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: history_inc.php,v 1.15 2003-01-19 23:56:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,7 @@
 		<?php echo $t_item['date'] ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $t_item['username'] ?>
+		<?php print_user( $t_item['userid'] ) ?>
 	</td>
 	<td class="small-caption">
 		<?php echo $t_item['note'] ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.11 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: history_api.php,v 1.12 2003-01-19 23:56:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -189,15 +189,21 @@
 				}
 			}
 
+			$history[$i]['date'] = $v_date_modified;
+			$history[$i]['userid'] = $v_user_id;
+
+			# $v_username will be empty, if user no longer exists.
+			if ( '' == $v_username ) {
+				$history[$i]['username'] = user_get_name( $v_user_id );
+			} else {
+				$history[$i]['username'] = $v_username;
+			}
+
 			# output special cases
 			if ( NORMAL_TYPE != $v_type ) {
-				$history[$i]['date'] = $v_date_modified;
-				$history[$i]['username'] = $v_username;
 				$history[$i]['note'] = $t_note;
 				$history[$i]['change'] = '';
 			} else {   # output normal changes
-				$history[$i]['date'] = $v_date_modified;
-				$history[$i]['username'] = $v_username;
 				$history[$i]['note'] = $v_field_name;
 				$history[$i]['change'] = $v_old_value . ' => ' . $v_new_value;
 			} # end if DEFAULT
