@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:12 $
+	# $Date: 2005-02-13 21:04:38 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.79 2005-02-12 20:04:12 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.80 2005-02-13 21:04:38 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
 	###########################################################################
@@ -32,6 +32,8 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Atualizar Prioridade';
 $s_actiongroup_menu_update_status = 'Atualizar Status';
 $s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Casos Selecionados';
 
 # new strings:
@@ -111,6 +113,7 @@ $s_resolve_bugs_conf_msg = 'Escolher resolução dos casos';
 $s_priority_bugs_conf_msg = 'Escolher prioridade dos casos';
 $s_status_bugs_conf_msg = 'Escolher status dos casos';
 $s_view_status_bugs_conf_msg = 'Escolher visibilidade dos casos';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fechar Casos' ;
 $s_delete_group_bugs_button = 'Apagar Casos' ;
 $s_move_group_bugs_button = 'Mover Casos' ;
@@ -120,6 +123,7 @@ $s_resolve_group_bugs_button = 'Resolver Casos' ;
 $s_priority_group_bugs_button = 'Atualizar Prioridade' ;
 $s_status_group_bugs_button = 'Atualizar Status' ;
 $s_view_status_group_bugs_button = 'Atualizar Visibilidade';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráfico de síntese por status' ;
@@ -197,6 +201,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Notícia não encontrada.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'A senha não combina com a verificação.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'string\' foi recebido.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
@@ -243,7 +248,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A informação fornecida n
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O endereço de confirmação é inválido ou já foi usado. Por favor, registre-se novamente.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número máximo de solicitações em progresso foi atingido. Por favor, contate o administrador do sistema.';
 
-#$s_login_error = 'Sua conta pode estar desativada ou bloqueada (devido a um número excessivo de tentativas falhas de login) ou o nome de usuário e a senha que você entrou não estão corretos.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você entrou não estão corretos.';
 $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
@@ -259,6 +264,8 @@ $s_prefix_for_deleted_users = 'usuário';
 $s_administrator = 'administrador';
 $s_myself = "Eu mesmo";
 $s_default_access_level = 'Nível de acesso padrão';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:visualizador,25:relator,40:atualizador,55:desenvolvedor,70:gerente,90:administrador';
@@ -424,6 +431,10 @@ $s_email_updated = 'Endereço de email atualizado com sucesso';
 $s_realname_duplicated = 'O nome verdadeiro é usado por outro usuário';
 $s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
 $s_password_updated = 'Senha atualizada com sucesso';
+
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
@@ -819,6 +830,9 @@ $s_project_removed_user_msg = 'Usuário removido com sucesso do projeto';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Você tem certeza que deseja remover este usuário?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Adicionar usuário ao projeto';
@@ -918,6 +932,8 @@ $s_show = 'Mostrar';
 $s_changed = 'Alterado(hrs)';
 $s_viewing_bugs_title = 'Visualizando Casos';
 $s_updated = 'Atualizado';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nenhum';
@@ -982,7 +998,6 @@ $s_no_users_sponsoring_bug = 'Não há usuários patrocinando este caso.';
 $s_users_sponsoring_bug = 'Usuários patrocinando este caso';
 $s_sponsors_list = 'Lista de Patrocinadores';
 $s_total_sponsorship_amount = 'Patrocínio Total = %s';
-$s_sponsor_issue = 'Patrocinar Caso';
 
 # custom field strings
 $s_add_custom_field_button = 'Novo Campo Personalizado';
@@ -1019,6 +1034,9 @@ $s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enum
 $s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
 $s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';
 $s_field_delete_button = 'Apagar Campo';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Ocultar Status';
 $s_filter_closed = "Fechado";
@@ -1083,6 +1101,7 @@ $s_view_issue = "Ver Caso";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1111,6 +1130,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1141,4 +1162,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

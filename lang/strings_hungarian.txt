@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.63 $
-  # $Author: bigbadger $
-  # $Date: 2004-12-23 02:26:57 $
+  # $Revision: 1.64 $
+  # $Author: jlatour $
+  # $Date: 2005-02-13 21:04:34 $
   #
-  # $Id: strings_hungarian.txt,v 1.63 2004-12-23 02:26:57 bigbadger Exp $
+  # $Id: strings_hungarian.txt,v 1.64 2005-02-13 21:04:34 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -29,6 +29,8 @@ $s_actiongroup_menu_resolve = 'Felold';
 $s_actiongroup_menu_update_priority = 'Súlyosság változás';
 $s_actiongroup_menu_update_status = 'Státusz változás';
 $s_actiongroup_menu_update_view_status = 'Láthatóság módosítása';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Kiválasztott hibák';
 
 # new strings:
@@ -108,6 +110,7 @@ $s_resolve_bugs_conf_msg = 'Megoldás választása';
 $s_priority_bugs_conf_msg = 'Prioritás választása';
 $s_status_bugs_conf_msg = 'Hibák Státuszának választása';
 $s_view_status_bugs_conf_msg = 'Állítsa be az hibák láthatóságát';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Hibák Bezárása' ;
 $s_delete_group_bugs_button = 'Hibák Törlése' ;
 $s_move_group_bugs_button = 'Hibák Mozgatása' ;
@@ -117,6 +120,7 @@ $s_resolve_group_bugs_button = 'Hibák Megoldása' ;
 $s_priority_group_bugs_button = 'Prioritás Frissítése' ;
 $s_status_group_bugs_button = 'Státusz Frissítése' ;
 $s_view_status_group_bugs_button = 'Láthatóság módosítása';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Összefoglaló grafikon státusz alapján' ;
@@ -140,7 +144,6 @@ $s_category_link = 'Per kategória';
 $s_resolution_link = 'Per megoldás';
 $s_legend_still_open = 'Még mindig nyitva';
 $s_legend_resolved = 'Feloldva';
-
 $s_legend_assigned = 'Hozzárendelve';
 $s_legend_total = 'Teljes';
 $s_legend_opened = 'Nyitott';
@@ -195,6 +198,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'HIBA: Újabb adatot nem találok.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'HIBA: A jelszó és a jelszó megerõsítés nem egyezik meg.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'HIBA: Listát vártam de szöveget kaptam.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'HIBA: Szöveget vártam, de listát kaptam.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'HIBA: Nem találtam a hibát.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'HIBA: Nem jó az e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'HIBA: Nem találom a profilt.';
@@ -258,6 +262,8 @@ $s_administrator = 'rendszergazda';
 $s_myself = "saját magam";
 $s_default_access_level = 'Alapértelmezett szint';
 
+$s_issue_status_percentage = 'Issue Status Percentage';
+
 # Enum Strings
 $s_access_levels_enum_string      = '10:olvasó,25:bejelentõ,40:módosító,55:fejlesztõ,70:vezetõ,90:rendszergazda';
 $s_project_status_enum_string     = '10:fejlesztés alatt,30:elsõ kiadás,50:stabil,70:elavult';
@@ -273,7 +279,6 @@ $s_projection_enum_string         = '10:nincs,30:trükk,50:kisebb javítás,70:nagy
 $s_eta_enum_string                = '10:ismeretlen,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,60:> 1 hónap';
 
 # Email Strings
-
 $s_new_account_subject = 'Fiók regisztrálás';
 $s_new_account_greeting = 'Köszönjük a regisztrációt. Az ön felhasználói azonosítója: \'';
 $s_new_account_greeting2 = '\'. Ahhoz, hogy sikeresen befejezze a regisztrációt, látogasson el a következõ URL-re és állítsa be a jelszavát:';
@@ -423,6 +428,10 @@ $s_email_updated = 'Email cím sikeresen frissült';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Jelszó sikeresen frissült';
+
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'A hibát sikerült kiosztani...';
@@ -576,6 +585,7 @@ $s_select_project_button = 'Projekt kiválasztása';
 $s_logged_out_title = 'A kijelentkezés megtörtént...';
 $s_redirecting = '...átirányítás';
 $s_here = 'ide';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
 $s_lost_password_done_title = "Password Message Sent";
@@ -817,6 +827,9 @@ $s_project_removed_user_msg = 'A felhasználót sikerült eltávolítani a projektbõl
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Biztos benne, hogy törli ezt a felhasználót?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Felhasználó felvétele a projektbe';
@@ -916,6 +929,8 @@ $s_show = 'Darab';
 $s_changed = 'Módosítva(óra)';
 $s_viewing_bugs_title = 'Hibák listája';
 $s_updated = 'Módosítva';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nincs';
@@ -980,7 +995,6 @@ $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
 $s_users_sponsoring_bug = 'Users sponsoring this issue';
 $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'Új egyéni mezõ';
@@ -1017,6 +1031,9 @@ $s_custom_field_type_enum_string = '0:Szöveg,1:Szám,2:Float,3:Enumeration,4:Emai
 $s_confirm_used_custom_field_deletion = 'A Mezõ legalább egy projekthez kell hogy tartozzon.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Biztos akarja törölni ezt a mezõt és az összes hozzá tartozó értéket?';
 $s_field_delete_button = 'Mezõ Törlése';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Státusz Elrejtés';
 $s_filter_closed = "Zárva";
@@ -1058,7 +1075,11 @@ $s_add_new_relationship_button = "Hozzáad";
 $s_this_bug = "Jelenlegi hiba";
 $s_relationship_added = "Kapcsolat hozzáadva";
 $s_relationship_deleted = "Kapcsolat törölve";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
 $s_replace_relationship_button = "Csere";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Törlés";
 $s_delete_relationship_sure_msg = "Biztos, hogy törölni akarja ezt a kapcsolatot?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Ennek a hibának nincs megoldva, vagy lezárva az összes gyermeke.";
@@ -1066,6 +1087,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>FIGYELEM</b>! Ennek a
 $s_create_child_bug_button = "Klón készítése";
 $s_bug_cloned_to = "Hiba klónozódott";
 $s_bug_created_from = "A hiba eredete";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Kapcsolat gráf";
 $s_relation_graph = "Kapcsolatii gráf";
@@ -1076,6 +1098,7 @@ $s_view_issue = "Hiba megtekintése";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Képességek';
 $s_view = 'Nézet';
@@ -1104,6 +1127,8 @@ $s_manage_news = 'Hírek kezelése';
 $s_view_list_of_attachments = 'Csatolmánylisták megtekintése';
 $s_download_attachments = 'Csatolmányok letöltése';
 $s_delete_attachments = 'Csatolmányok törlése';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Hibához tartozó csatolmány feltöltése';
 $s_filters = 'szûrõk';
 $s_save_filters = 'Szûrõk mentése';
@@ -1134,4 +1159,7 @@ $s_status_changed_to = 'Státuszváltás';
 $s_email_on_deleted = 'E-mail törléskor';
 $s_email_on_sponsorship_changed = 'E-mail szponzorálás változáskor';
 $s_email_on_relationship_changed = 'E-mail kapcsolat változáskor';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

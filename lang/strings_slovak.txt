@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:14 $
+	# $Date: 2005-02-13 21:04:39 $
 	#
-	# $Id: strings_slovak.txt,v 1.32 2005-02-12 20:04:14 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.33 2005-02-13 21:04:39 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,8 @@ $s_actiongroup_menu_resolve = 'Vyrie¹i»';
 $s_actiongroup_menu_update_priority = 'Aktualizova» prioritu';
 $s_actiongroup_menu_update_status = 'Aktualizova» status';
 $s_actiongroup_menu_update_view_status = 'Aktualizova» stav';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Vybrané problémy';
 
 # new strings:
@@ -108,6 +110,7 @@ $s_resolve_bugs_conf_msg = 'Vybra» rozlí¹enie bugov';
 $s_priority_bugs_conf_msg = 'Vybra» prioritu bugov';
 $s_status_bugs_conf_msg = 'Vybra» status bugov';
 $s_view_status_bugs_conf_msg = 'Vybrat stav zobrazenia problému';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Zatvori» bugy' ;
 $s_delete_group_bugs_button = 'Zmaza» bugy' ;
 $s_move_group_bugs_button = 'Presunú» bugy' ;
@@ -117,6 +120,7 @@ $s_resolve_group_bugs_button = 'Vysvetli» bugy' ;
 $s_priority_group_bugs_button = 'Priorita aktualizácie' ;
 $s_status_group_bugs_button = 'Status aktualizácie' ;
 $s_view_status_group_bugs_button = 'Obnovi» zobrazenie problému';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graf podµa stavu' ;
@@ -184,6 +188,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'CHYBA: Poznámka k bugu nenájdená.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'CHYBA: Projekt nenájdený.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'CHYBA: Databázový ståpec nenájdený.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'CHYBA: Nedá sa pripoji» na FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'CHYBA: Projekt s vybraným menom u¾ existuje.  Prosím choïte spä» a vyberte si iné meno.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadané neprípustné méno projektu. Meno projektu nesmie by» prázdne.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'CHYBA: U¾ívateµ nenájdený.';
@@ -193,6 +198,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'CHYBA: Správa nenájdená.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Heslá niesu zhodné.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'CHYBA: Pole bolo oèakávané, ale re»azec bol obdr¾aný.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Oèakával sa re»azec, ale bolo prijaté pole.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'CHYBA: Bug nenájdený.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'CHYBA: Neplatná e-mailová adresa.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nena¹iel.';
@@ -219,7 +225,6 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'CHYBA: Verzia s týmyo menom u¾ existu
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verzia nenájdená.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Pou¾ívateµské meno je neplatné.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'U¾ívateµ nemá potrebnú prístupovú úroveò';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Zvolené "Skutoèné meno" sa zhoduje s menom iného u¾ívateµa. Zvolte si prosím iné.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Podpora sponzoringu nieje dostupná.';
@@ -240,7 +245,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'CHYBA: Udané informacie 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrdzovacia URL je chybná alebo bola u¾ pou¾ita. Prosím prihláste sa znova.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosiahnete maximum vnútorných procesov. Obra»te sa na správcu systému.';
 
-#$s_login_error = 'CHYBA: Vá¹ úèet je vyrazdený alebo blokováný, alebo je zadána chybná kombinacia u¾ivatelské méno/heslo.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ browser nepodporuje cookies, alebo ich zamietol.';
 
@@ -255,6 +260,9 @@ $s_prefix_for_deleted_users = 'u¾ívateµ';
 
 $s_administrator = 'administrátor';
 $s_myself = "Ja sám";
+$s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojár,70:vedúci,90:administrátor';
@@ -421,6 +429,10 @@ $s_realname_duplicated = 'Skutoèné meno je pou¾ité iným u¾ívateµom';
 $s_realname_updated = 'Skutoèné meno bolo úspe¹ne aktualizováné';
 $s_password_updated = 'Heslo bolo úspe¹ne aktualizováné';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Bug bol úspe¹ne priradený...';
 
@@ -573,6 +585,7 @@ $s_select_project_button = 'Vyber projekt';
 $s_logged_out_title = 'Odhlásenie...';
 $s_redirecting = '...presmerovanie';
 $s_here = 'tu';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Zmena hesla";
 $s_lost_password_done_title = "Odoslaný dopis o zmene hesla";
@@ -814,6 +827,9 @@ $s_project_removed_user_msg = 'Pou¾ívateµ bol úspe¹ne odobratý z projektu';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Naozaj odobra» tohto pou¾ívateµa?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Prida» pou¾ívateµa k projektu';
@@ -913,6 +929,8 @@ $s_show = 'Ukáza»';
 $s_changed = 'Zmenené(h)';
 $s_viewing_bugs_title = 'Prehladanie bugov';
 $s_updated = 'Aktualizácia';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '¾iadny';
@@ -977,7 +995,6 @@ $s_no_users_sponsoring_bug = '¾iadny u¾ívatel nesponzoruje tento problém';
 $s_users_sponsoring_bug = 'U¾ívateliasponzorujú tento problém';
 $s_sponsors_list = 'Zoznam sponzorov';
 $s_total_sponsorship_amount = 'Celkom sponzorované = %s';
-$s_sponsor_issue = 'Sponzorovaný problém';
 
 # custom field strings
 $s_add_custom_field_button = 'Nové u¾ivateµské pole';
@@ -1014,6 +1031,9 @@ $s_custom_field_type_enum_string = '0:Text,1:Celé èíslo,2:Reálné èíslo,3:Výraz,4
 $s_confirm_used_custom_field_deletion = 'Toto pole je momentálne prepojené aspoò k jednému projektu. Ak budete pokraèovat, v¹etky hodnoty tohoto pola budú trvale znièené. Táto akcia nemô¾e být vrátená. Ak si neprajete zru¹it toto pole, stlaète tlaèítko "Spe»" va¹eho prehliadaèa.  Pokraèovat mô¾ete tlaèítkom ni¾¹ie';
 $s_confirm_custom_field_deletion = 'Naozaj si prajete zru¹it toto u¾ivatelské pole a v¹etky k nemu pripadajúce hodnoty?';
 $s_field_delete_button = 'Zru¹i» pole';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Skry» status';
 $s_filter_closed = "Uzavreté";
@@ -1067,6 +1087,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie v¹
 $s_create_child_bug_button = "Vytvori» potomka";
 $s_bug_cloned_to = "Problém je klonovaný";
 $s_bug_created_from = "Problém generovaný z";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1077,6 +1098,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1105,6 +1127,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1135,4 +1159,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

@@ -10,11 +10,11 @@
 	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	#             miren.info@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.78 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-20 11:43:17 $
+	# $Revision: 1.79 $
+	# $Author: jlatour $
+	# $Date: 2005-02-13 21:04:37 $
 	#
-	# $Id: strings_korean.txt,v 1.78 2004-10-20 11:43:17 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.79 2005-02-13 21:04:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,6 +31,8 @@ $s_actiongroup_menu_resolve = '해결';
 $s_actiongroup_menu_update_priority = '우선순위 갱신';
 $s_actiongroup_menu_update_status = '상태 갱신';
 $s_actiongroup_menu_update_view_status = '보기 상태 갱신';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '선택된 이슈';
 
 # new strings:
@@ -110,6 +112,7 @@ $s_resolve_bugs_conf_msg = '이슈 해결도 선택';
 $s_priority_bugs_conf_msg = '이슈 우선순위 선택';
 $s_status_bugs_conf_msg = '이슈 상태 선택';
 $s_view_status_bugs_conf_msg = '이슈 보기 상태 선택';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '이슈 폐쇄' ;
 $s_delete_group_bugs_button = '이슈 삭제' ;
 $s_move_group_bugs_button = '이슈 이동' ;
@@ -119,6 +122,7 @@ $s_resolve_group_bugs_button = '이슈 해결' ;
 $s_priority_group_bugs_button = '우선 순위 갱신' ;
 $s_status_group_bugs_button = '상태 갱신' ;
 $s_view_status_group_bugs_button = '보기 상태 갱신';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '상태 종합 그래프' ;
@@ -196,6 +200,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= '오류: 뉴스를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '오류: 비밀번호가 일치하지 않습니다.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= '오류: 문자열이 아닌 배열이 입력되어야 합니다.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '오류: 배열이 아닌 문자열이 입력되어야 합니다.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '오류: 이슈를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '오류: 잘못된 이메일.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
@@ -242,7 +247,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '오류: 입력된 정보가 바르
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '오류: 이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '오류: 요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
 
-#$s_login_error = '오류: (너무 많은 로그인 실패로) 계정이 사용 정지됐거나 사용자이름/비밀번호가 올바르지 않습니다.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '오류: 계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
@@ -258,6 +263,8 @@ $s_prefix_for_deleted_users = '사용자';
 $s_administrator = '관리자';
 $s_myself = "나";
 $s_default_access_level = '기본 접근 권한';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -423,6 +430,10 @@ $s_email_updated = '이메일 주소가 변경되었습니다...';
 $s_realname_duplicated = '이 별명은 다른 사용자가 쓰고 있습니다.';
 $s_realname_updated = '별명이 수정 되었습니다.';
 $s_password_updated = '비밀번호가 변경되었습니다...';
+
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = '이슈가 할당되었습니다...';
@@ -818,6 +829,9 @@ $s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = '프로젝트에 사용자 추가';
@@ -917,6 +931,8 @@ $s_show = '갯수';
 $s_changed = '변경된(시간)';
 $s_viewing_bugs_title = '이슈 보기';
 $s_updated = '최종 갱신';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '없음';
@@ -981,7 +997,6 @@ $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
 $s_users_sponsoring_bug = 'Users sponsoring this issue';
 $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = '새로운 커스텀 필드';
@@ -1018,6 +1033,9 @@ $s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일,5:�
 $s_confirm_used_custom_field_deletion = '이 필드는 적어도 하나의 프로젝트에 링크되어 있습니다.  이 필드와 관련된 모든 값은 삭제될 것입니다. 이 필드를 삭제하지 않으려면, 브라우저에서 뒤로 버튼을 누르시기 바랍니다. 삭제를 계속 진행하기 위해서는 아래의 버튼을 누르세요';
 $s_confirm_custom_field_deletion = '커스텀 필드와 모든 관련된 값을 삭제하시겠습니까?';
 $s_field_delete_button = '필드 삭제';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = '상태 숨김';
 $s_filter_closed = "폐쇄됨";
@@ -1079,8 +1097,10 @@ $s_dependency_graph = "의존 그래프";
 $s_vertical = "수직";
 $s_horizontal = "수평";
 $s_view_issue = "이슈 보기";
+
 # Source Control Integration
 $s_checkin = '체크인';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1109,6 +1129,8 @@ $s_manage_news = '뉴스 관리';
 $s_view_list_of_attachments = '첨부 파일 목록 보기';
 $s_download_attachments = '첨부 파일 받기';
 $s_delete_attachments = '첨부 파일 삭제';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = '첨부 파일 올리기';
 $s_filters = '필터';
 $s_save_filters = '필터 저장';
@@ -1139,4 +1161,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

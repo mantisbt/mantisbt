@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:10 $
+	# $Date: 2005-02-13 21:04:33 $
 	#
-	# $Id: strings_french.txt,v 1.90 2005-02-12 20:04:10 jlatour Exp $
+	# $Id: strings_french.txt,v 1.91 2005-02-13 21:04:33 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,6 +35,8 @@ $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
 $s_actiongroup_menu_update_status = 'Mettre à jour l\'état';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour Afficher l\'état';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Bugs sélectionnés';
 
 # new strings:
@@ -114,6 +116,7 @@ $s_resolve_bugs_conf_msg = 'Choisir la résultion des bugs';
 $s_priority_bugs_conf_msg = 'Choisir la priorité des bugs';
 $s_status_bugs_conf_msg = 'Choisir l\'état des bugs';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bugs';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fermer les bugs' ;
 $s_delete_group_bugs_button = 'Supprimer les bugs' ;
 $s_move_group_bugs_button = 'Déplacer les bugs' ;
@@ -123,6 +126,7 @@ $s_resolve_group_bugs_button = 'Résoudre les bugs' ;
 $s_priority_group_bugs_button = 'Mettre à jour la priorité' ;
 $s_status_group_bugs_button = 'Mettre à jour le statut' ;
 $s_view_status_group_bugs_button = 'Mettre à jour Afficher le statut';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graphiques de synthèse par état' ;
@@ -200,6 +204,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERREUR : Nouvelle non trouvée.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'ERREUR : Le mot de passe ne correspond pas à la vérification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERREUR : Tableau attendu mais chaîne reçue.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais tableau reçu.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERREUR : Bug non trouvé.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERREUR : Email invalide.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
@@ -262,6 +267,8 @@ $s_prefix_for_deleted_users = 'utilisateur';
 $s_administrator = 'administrateur';
 $s_myself = "Moi";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:manageur,90:administrateur';
@@ -428,6 +435,10 @@ $s_realname_duplicated = 'Ce nom réel est utilisé par un autre utilisateur';
 $s_realname_updated = 'Nom réel mis à jour avec succès';
 $s_password_updated = 'Mot de passe mis à jour avec succès';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Le bug a été assigné avec succès...';
 
@@ -580,6 +591,7 @@ $s_select_project_button = 'Choisir un projet';
 $s_logged_out_title = 'Déconnexion...';
 $s_redirecting = '... Redirection en cours';
 $s_here = 'Ici';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Réinitialisation de mot de passe";
 $s_lost_password_done_title = "Message de mot de passe envoyé";
@@ -821,6 +833,9 @@ $s_project_removed_user_msg = 'L\'utilisateur a été supprimé du projet';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Voulez-vous vraiment enlever cet utilisateur du projet ?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Ajouter un utilisateur au projet';
@@ -920,6 +935,8 @@ $s_show = 'Afficher';
 $s_changed = 'Modifiés (heures)';
 $s_viewing_bugs_title = 'Liste des bugs';
 $s_updated = 'Mis à jour';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'aucun';
@@ -984,7 +1001,6 @@ $s_no_users_sponsoring_bug = 'Il n\'y a aucun utilisateur sponsorisant ce bug.';
 $s_users_sponsoring_bug = 'Utilisateurs sponsorisant ce bug';
 $s_sponsors_list = 'Liste des sponsors';
 $s_total_sponsorship_amount = 'Sponsoring total = %s';
-$s_sponsor_issue = 'Sponsoriser le bug';
 
 # custom field strings
 $s_add_custom_field_button = 'Ajouter un champ personnalisé';
@@ -1021,6 +1037,9 @@ $s_custom_field_type_enum_string = '0:Chaîne,1:Entier,2:Décimal,3:Enumération,4:
 $s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moins un projet.  Si vous continuez, toutes les valeurs de ce champ seront supprimées.  Cette action ne peut être annulée.  Si vous ne voulez pas supprimer ce champ, cliquer sur le bouton Retour de votre navigateur.  Sinon pour supprimer ce champ, cliquer sur le bouton ci dessous';
 $s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';
 $s_field_delete_button = 'Supprimer le champ';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Cacher le statut';
 $s_filter_closed = 'Fermé';
@@ -1085,6 +1104,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Control';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'Voi';
@@ -1113,6 +1133,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Télécharger les pièces jointes';
 $s_delete_attachments = 'Supprimer les pièces jointes';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Mettre à jour les pièces jointes d\'un bug';
 $s_filters = 'filtres';
 $s_save_filters = 'Enregistrer les filtres';
@@ -1143,4 +1165,7 @@ $s_status_changed_to = 'Changer le status à';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

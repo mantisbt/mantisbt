@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:15 $
+	# $Date: 2005-02-13 21:04:40 $
 	#
-	# $Id: strings_swedish.txt,v 1.79 2005-02-12 20:04:15 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.80 2005-02-13 21:04:40 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -28,6 +28,8 @@ $s_actiongroup_menu_resolve = 'Lös';
 $s_actiongroup_menu_update_priority = 'Uppdatera prioritet';
 $s_actiongroup_menu_update_status = 'Uppdatera status';
 $s_actiongroup_menu_update_view_status = 'Uppdatera vy-status';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Valda ärenden';
 
 # new strings:
@@ -107,6 +109,7 @@ $s_resolve_bugs_conf_msg = 'Välj hur ärendena har lösts';
 $s_priority_bugs_conf_msg = 'Välj prioritet för ärendena';
 $s_status_bugs_conf_msg = 'Välj status för ärendena';
 $s_view_status_bugs_conf_msg = 'Välj vy-status för ärenden';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Stäng ärenden' ;
 $s_delete_group_bugs_button = 'Ta bort ärenden' ;
 $s_move_group_bugs_button = 'Flytta ärenden' ;
@@ -116,6 +119,7 @@ $s_resolve_group_bugs_button = 'Lös ärenden' ;
 $s_priority_group_bugs_button = 'Uppdatera prioritet' ;
 $s_status_group_bugs_button = 'Uppdatera status' ;
 $s_view_status_group_bugs_button = 'Uppdatera vy-status';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sammanfattningsgraf - status' ;
@@ -193,6 +197,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEL: Hittar inte nyheten.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lösenordet stämmer inte med verifikationen.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEL: En array förväntades men en sträng mottogs.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades med en array mottogs.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Ärendet kan inte hittas.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEL: Ogiltig e-postadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
@@ -239,7 +244,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Den angivna informatione
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för verfiering eller används redan. Var vänlig och ansök igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
 
-#$s_login_error = 'Ditt konto kan ha blivit avstängt (p.g.a. för många misslyckade inloggningsförsök) eller så stämmer inte det angivna användarnamnet/lösenordet.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FEL: ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
 $s_login_cookies_disabled = 'FEL: Din webb-läsare kan inte hantera cookies eller vägrar använda dem (det kan vara avstängt).';
 
@@ -255,6 +260,8 @@ $s_prefix_for_deleted_users = 'användare';
 $s_administrator = 'administratör';
 $s_myself = "Mig själv";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
@@ -421,6 +428,10 @@ $s_realname_duplicated = 'Riktigt namn används av en annan användare';
 $s_realname_updated = 'Riktigt namn har uppdaterats';
 $s_password_updated = 'Lösenordet har uppdaterats';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Ärendet har tilldelats...';
 
@@ -573,6 +584,7 @@ $s_select_project_button = 'Välj projekt';
 $s_logged_out_title = 'Utloggad...';
 $s_redirecting = '...Omdirigerar';
 $s_here = 'Här';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Återställning av lösenord";
 $s_lost_password_done_title = "E-post med lösenord har skickats";
@@ -814,6 +826,9 @@ $s_project_removed_user_msg = 'Tog bort användaren från projektet';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Är du säker på att du vill ta bort användaren?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Lägg till användare till projektet';
@@ -913,6 +928,8 @@ $s_show = 'Visa';
 $s_changed = 'Ändrad(timmar)';
 $s_viewing_bugs_title = 'Visa ärenden';
 $s_updated = 'Uppdaterad';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'ingen';
@@ -977,7 +994,6 @@ $s_no_users_sponsoring_bug = 'Inga användare sponsrar detta ärende.';
 $s_users_sponsoring_bug = 'Användare som sponsrar detta ärende';
 $s_sponsors_list = 'Sponsorlista';
 $s_total_sponsorship_amount = 'Total sponsorsumma = %s';
-$s_sponsor_issue = 'Sponsorärende';
 
 # custom field strings
 $s_add_custom_field_button = 'Nytt skräddarsytt fält';
@@ -1014,6 +1030,9 @@ $s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4
 $s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck \'Bakåt\' i din webbläsare.  För att fortsätta, tryck på knappen nedan';
 $s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla associerade värden?';
 $s_field_delete_button = 'Ta bort fält';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Dölj status';
 $s_filter_closed = "stängda";
@@ -1078,6 +1097,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Incheckning';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1106,6 +1126,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1136,4 +1158,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

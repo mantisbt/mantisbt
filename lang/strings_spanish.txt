@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.78 $
+	# $Revision: 1.79 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:14 $
+	# $Date: 2005-02-13 21:04:39 $
 	#
-	# $Id: strings_spanish.txt,v 1.78 2005-02-12 20:04:14 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.79 2005-02-13 21:04:39 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,6 +33,8 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Cambiar Prioridad';
 $s_actiongroup_menu_update_status = 'Cambiar Estado';
 $s_actiongroup_menu_update_view_status = 'Actualizar vista de estado';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Bugs seleccionados';
 
 # new strings:
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Cambiar resolucion bug';
 $s_priority_bugs_conf_msg = 'Cambiar resolucion bug';
 $s_status_bugs_conf_msg = 'Cambiar estado bug';
 $s_view_status_bugs_conf_msg = 'Escoger vista de estado de bugs';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Cerrar Bugs';
 $s_delete_group_bugs_button = 'Eliminar Bugs';
 $s_move_group_bugs_button = 'Mover Bugs';
@@ -121,6 +124,7 @@ $s_resolve_group_bugs_button = 'Resolver Bugs';
 $s_priority_group_bugs_button = 'Actualizar Prioridad';
 $s_status_group_bugs_button = 'Actualizar Estado';
 $s_view_status_group_bugs_button = 'Actualizar vista de estado';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráficos por estado';
@@ -198,6 +202,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'No se ha encontrado la noticia.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'La contraseña no ha superado la verificación.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Se esperaba un array y se ha recibido una cadena.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena y se ha recibido un array.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'No se encuentra el bug %d.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Email incorrecto.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';
@@ -244,7 +249,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'La información proporcio
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'La URL de confirmación es inválida o está en uso. Por favor vuelva a intentar acceder.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Número máximo de peticiones alcanzado. Por favor contacte con el administrador del sistema';
 
-#$s_login_error = 'Su cuenta ha sido deshabilitada o bloqueada (debido a demasiados intentos de acceso fallidos) o el usuario/contraseña introducidos no son correctos.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña introducidos son incorrectos.';
 $s_login_cookies_disabled = 'ERROR: Su navegador o no soporta cookies, o las ha rechazado.';
 
@@ -260,6 +265,8 @@ $s_prefix_for_deleted_users = 'user';
 $s_administrator = 'administrador';
 $s_myself = "Mí";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:espectador,25:informador,40:actualizador,55:desarrollador,70:manager,90:administrador';
@@ -426,6 +433,10 @@ $s_realname_duplicated = 'Ese nombre real está siendo utilizado por otro usuario
 $s_realname_updated = 'Nombre real actualizado correctamente';
 $s_password_updated = 'Contraseña actualizada';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'El Bug ha sido exitosamente asignado...';
 
@@ -578,6 +589,7 @@ $s_select_project_button = 'Seleccione Proyecto';
 $s_logged_out_title = 'Sesión cerrada...';
 $s_redirecting = '...Redireccionando';
 $s_here = 'Aquí';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Restaurar contraseña";
 $s_lost_password_done_title = "Mensaje de contraseña enviado";
@@ -819,6 +831,9 @@ $s_project_removed_user_msg = 'Usuario desvinculado del proyecto';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = '¿Seguro que desea desvincular este usuario?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Agregar usuario al proyecto';
@@ -918,6 +933,8 @@ $s_show = 'Ver';
 $s_changed = 'Cambiado(hrs)';
 $s_viewing_bugs_title = 'Bugs';
 $s_updated = 'Actualizado';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'ninguno';
@@ -982,7 +999,6 @@ $s_no_users_sponsoring_bug = 'No hay usuarios patrocinando este bug.';
 $s_users_sponsoring_bug = 'Usuarios patrocinando este bug.';
 $s_sponsors_list = 'Lista de patrocinadores';
 $s_total_sponsorship_amount = 'Patrocinio total = %s';
-$s_sponsor_issue = 'Patrocinar bug';
 
 # custom field strings
 $s_add_custom_field_button = 'Nuevo campo personalizado';
@@ -1019,6 +1035,9 @@ $s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración
 $s_confirm_used_custom_field_deletion = 'Este campo está vinculado al menos a un proyecto.  Si continúa todos los valores para este campo serán borrados permanentemente.  Esta acción no puede volverse atrás.  Si no desea eliminar el campo, haga click sobre el botón Atrás de su navegador.  Para proceder, haga click sobre el botón que aparece abajo';
 $s_confirm_custom_field_deletion = '¿Seguro que desea eliminar este campo y todos los valores asociados?';
 $s_field_delete_button = 'Eliminar campo';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Ocultar con Estado';
 $s_filter_closed = "Cerrado";
@@ -1072,6 +1091,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIÓN</b>. No todo
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Bug clonado";
 $s_bug_created_from = "Bug generado desde";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1082,6 +1102,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1110,6 +1131,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1140,4 +1163,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

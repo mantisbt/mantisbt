@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.78 $
+	# $Revision: 1.79 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:09 $
+	# $Date: 2005-02-13 21:04:32 $
 	#
-	# $Id: strings_dutch.txt,v 1.78 2005-02-12 20:04:09 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.79 2005-02-13 21:04:32 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -32,6 +32,8 @@ $s_actiongroup_menu_resolve = 'Afronden';
 $s_actiongroup_menu_update_priority = 'Aanpassen prioriteit';
 $s_actiongroup_menu_update_status = 'Aanpassen status';
 $s_actiongroup_menu_update_view_status = 'Aanpassen bekijk status';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Geselecteerde bugs';
 
 # new strings:
@@ -111,6 +113,7 @@ $s_resolve_bugs_conf_msg = 'Kies afhandeling van bugs';
 $s_priority_bugs_conf_msg = 'Kies prioriteit van bugs';
 $s_status_bugs_conf_msg = 'Kies status van bugs';
 $s_view_status_bugs_conf_msg = 'Kies bug bekijk status';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Sluit bugs' ;
 $s_delete_group_bugs_button = 'Verwijder bugs' ;
 $s_move_group_bugs_button = 'Verplaats bugs' ;
@@ -120,6 +123,7 @@ $s_resolve_group_bugs_button = 'Afhandelen bugs' ;
 $s_priority_group_bugs_button = 'Aanpassen prioriteit' ;
 $s_status_group_bugs_button = 'Aanpassen status' ;
 $s_view_status_group_bugs_button = 'Aanpassen bekijk status';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Overzicht grafieken: Status' ;
@@ -197,6 +201,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Nieuws niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Wachtwoord komt niet overeen met verificatie.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FOUT: Een array werd verwacht, maar een string werd ontvangen.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een array ontvangen.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d niet gevonden.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
@@ -243,6 +248,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De opgegeven informatie 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings URL is foutief of is al gebruikt. Meld u nogmaals aan.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
 
@@ -257,6 +263,9 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'Beheerder';
 $s_myself = "Mijzelf";
+$s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder';
@@ -423,6 +432,10 @@ $s_realname_duplicated = 'Echte naam wordt al gebruikt.';
 $s_realname_updated = 'Echte naam is aangepast.';
 $s_password_updated = 'Wachtwoord is aangepast.';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Bug is toegewezen.';
 
@@ -575,6 +588,7 @@ $s_select_project_button = 'Selecteer project';
 $s_logged_out_title = 'Uitgelogd.';
 $s_redirecting = '...moment';
 $s_here = 'Hier';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Wachtwoord reset";
 $s_lost_password_done_title = "Wachtwoord bericht verstuurd";
@@ -816,6 +830,9 @@ $s_project_removed_user_msg = 'Gebruiker van project afgehaald';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Weet u zeker dat u deze gebruiker van het project af wil halen?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Toevoegen gebruiker aan project';
@@ -915,6 +932,8 @@ $s_show = 'Laat zien';
 $s_changed = 'Aangepast (uren)';
 $s_viewing_bugs_title = 'Bekijken bugs';
 $s_updated = 'Aangepast';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'geen';
@@ -979,7 +998,6 @@ $s_no_users_sponsoring_bug = 'Er zijn geen sponsoren voor deze bug.';
 $s_users_sponsoring_bug = 'Gebruikers die deze bug sponsoren';
 $s_sponsors_list = 'Sponsors lijst';
 $s_total_sponsorship_amount = 'Totaal sponsoren = %s';
-$s_sponsor_issue = 'Sponsor bug';
 
 # custom field strings
 $s_add_custom_field_button = 'Nieuw gebruikersveld';
@@ -1016,6 +1034,9 @@ $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enum
 $s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';
 $s_field_delete_button = 'Verwijder gebruikersveld';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Verberg status';
 $s_filter_closed = 'Gesloten';
@@ -1069,6 +1090,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog nie
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Bug gekloond";
 $s_bug_created_from = "Bug gegenereerd van";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1079,6 +1101,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1107,6 +1130,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1137,4 +1162,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

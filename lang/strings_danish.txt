@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.76 $
+	# $Revision: 1.77 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:09 $
+	# $Date: 2005-02-13 21:04:32 $
 	#
-	# $Id: strings_danish.txt,v 1.76 2005-02-12 20:04:09 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.77 2005-02-13 21:04:32 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,8 @@ $s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdater prioritering';
 $s_actiongroup_menu_update_status = 'Opdater status';
 $s_actiongroup_menu_update_view_status = 'Opdater vis-status';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Markerede fejl';
 
 # new strings:
@@ -109,6 +111,7 @@ $s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
 $s_view_status_bugs_conf_msg = 'Vælg fejlenes visningsstatus';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Luk fejlene' ;
 $s_delete_group_bugs_button = 'Slet fejlene' ;
 $s_move_group_bugs_button = 'Flyt fejlene' ;
@@ -118,6 +121,7 @@ $s_resolve_group_bugs_button = 'Løs fejlene' ;
 $s_priority_group_bugs_button = 'Opdater prioritering' ;
 $s_status_group_bugs_button = 'Opdater status' ;
 $s_view_status_group_bugs_button = 'Opdater visningsstatus';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sammenfattende grafik efter status' ;
@@ -195,6 +199,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'FEJL: Nye elementer ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'FEJL: Adgangskode passer ikke til verificeringen.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'FEJL: En tabel var forventet, men en streng modtaget.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'FEJL: En streng var forventet, men en tabel modtaget.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'FEJL: Fejl ikke fundet.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'FEJL: Ugyldig e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'FEJL: Profil ikke fundet.';
@@ -241,7 +246,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De angivne oplysninger s
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen er ugyldig eller har allerede været brugt. Registrer dig igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. antal samtidige handlinger nået. Kontakt systemadministratoren';
 
-#$s_login_error = 'Din konto er enten deaktiveret eller blokkeret (pga for mange forkerte forsøg på log ind) eller det brugernavn/adgangskode du skrev er forkert.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
 
@@ -257,6 +262,8 @@ $s_prefix_for_deleted_users = 'bruger';
 $s_administrator = 'administrator';
 $s_myself = "Mig selv";
 $s_default_access_level = 'Standardadgangsniveau';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
@@ -423,6 +430,10 @@ $s_realname_duplicated = 'Det rigtige navn bruges af en anden bruger';
 $s_realname_updated = 'Vellykket opdatering af rigtigt navn';
 $s_password_updated = 'Vellykket opdatering af adgangskode';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg = 'Fejlen er blevet tildelt...';
 
@@ -575,6 +586,7 @@ $s_select_project_button = 'Vælg projekt';
 $s_logged_out_title = 'Logget af...';
 $s_redirecting = '...omadressering';
 $s_here = 'Her';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Adgangskoden nulstillet";
 $s_lost_password_done_title = "Adgangskodemeddelelse sendt";
@@ -816,6 +828,9 @@ $s_project_removed_user_msg = 'Bruger fjernet fra projektet';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Er du sikker på at du vil fjerne denne bruger?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Tilføj bruger til projekt';
@@ -915,6 +930,8 @@ $s_show = 'Vis';
 $s_changed = 'Ændret (time)';
 $s_viewing_bugs_title = 'Vis fejl';
 $s_updated = 'Opdateret';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'ingen';
@@ -979,7 +996,6 @@ $s_no_users_sponsoring_bug = 'Der er ikke nogen brugere der sponsorerer denne fe
 $s_users_sponsoring_bug = 'Brugere der sponsorerer denne fejl';
 $s_sponsors_list = 'Sponsorliste';
 $s_total_sponsorship_amount = 'Totalt sponsorat = %s';
-$s_sponsor_issue = 'Sponsoreret fejl';
 
 # custom field strings
 $s_add_custom_field_button = 'Nyt brugerdefineret felt';
@@ -1016,6 +1032,9 @@ $s_custom_field_type_enum_string = '0:Streng,1:Nummerisk,2:Kommatal,3:Optælling,
 $s_confirm_used_custom_field_deletion = 'Dette felt er i øjeblikket knyttet til mindst et projekt. Hvis du fortsætter vil alle værdier for dette felt blive slette permanent. Denne handling kan ikke fortrydes. Hvis du ikke ønsker at slette dette felt, klik på Tilbage knappen i din browser. Klik på knappen herunder for at fortsætte.';
 $s_confirm_custom_field_deletion = 'Ønsker du at slette dette brugerdefinerede felt og alle tilknyttede værdier?';
 $s_field_delete_button = 'Slet felt';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Skjul status';
 $s_filter_closed = "Lukkede";
@@ -1069,6 +1088,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>BEMÆRK</b>. Ikke alle
 $s_create_child_bug_button = "Opret klon";
 $s_bug_cloned_to = "Fejl klonet";
 $s_bug_created_from = "Fejl genereret fra";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Afhængighedsgraf";
 $s_relation_graph = "Afhængighedsgraf";
@@ -1077,8 +1097,9 @@ $s_vertical = "Lodret";
 $s_horizontal = "Vandret";
 $s_view_issue = "Vis fejl";
 
-# Source Control integration
+# Source Control Integration
 $s_checkin = 'Check ind';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'Vis';
@@ -1107,6 +1128,8 @@ $s_manage_news = 'Håndter nyheder';
 $s_view_list_of_attachments = 'Vis listen over vedhæftede filer';
 $s_download_attachments = 'Hent vedhæftede filer';
 $s_delete_attachments = 'Slet vedhæftede filer';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Overfør fejlens vedhæftede filer';
 $s_filters = 'filtre';
 $s_save_filters = 'Gem filtre';
@@ -1137,4 +1160,7 @@ $s_status_changed_to = 'Status over ændringer af';
 $s_email_on_deleted = 'E-mail ved sletning';
 $s_email_on_sponsorship_changed = 'E-mail når sponsorat ændres';
 $s_email_on_relationship_changed = 'E-mail når afhængigheder ændres';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

@@ -10,11 +10,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.14 $
+	# $Revision: 1.15 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:11 $
+	# $Date: 2005-02-13 21:04:36 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.14 2005-02-12 20:04:11 jlatour Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.15 2005-02-13 21:04:36 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,6 +31,8 @@ $s_actiongroup_menu_resolve = '実装済';
 $s_actiongroup_menu_update_priority = '重要度更新';
 $s_actiongroup_menu_update_status = 'ステータス更新';
 $s_actiongroup_menu_update_view_status = '閲覧ステータスを更新';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '選択された改善要求';
 
 # new strings:
@@ -110,6 +112,7 @@ $s_resolve_bugs_conf_msg = '分析状況を選択して下さい。';
 $s_priority_bugs_conf_msg = '重要度を選択して下さい。';
 $s_status_bugs_conf_msg = 'ステータスを選択して下さい。';
 $s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '改善要求の完了';
 $s_delete_group_bugs_button = '改善要求の削除' ;
 $s_move_group_bugs_button = '改善要求の移動';
@@ -119,6 +122,7 @@ $s_resolve_group_bugs_button = '改善要求の実装';
 $s_priority_group_bugs_button = '重要度の更新' ;
 $s_status_group_bugs_button = 'ステータスの更新' ;
 $s_view_status_group_bugs_button = '閲覧ステータス更新';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'ステータスによるグラフ';
@@ -196,6 +200,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'ニュースがありません。';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='パスワードが一致しません。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '配列を期待しましたが、文字列を取得しました。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='文字列を期待しましたが、配列を取得しました。';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '改善要求はありません。';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無効なメールアドレスです。';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
@@ -242,7 +247,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '入力された情報は
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。もう一度サインアップしてください。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '最大回数のリクエストを実行しました。システム管理者に連絡してください。';
 
-#$s_login_error = 'あなたのアカウントは無効かブロックされている(多数のログインの試みに失敗があった)かもしれませんまたは、入力したユーザー名とパスワードが正しくありません。';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
 
@@ -258,6 +263,8 @@ $s_prefix_for_deleted_users = 'user';
 $s_administrator = '管理者';
 $s_myself = '自身';
 $s_default_access_level = 'デフォルトのアクセス権';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者';
@@ -423,6 +430,10 @@ $s_email_updated = 'Emailアドレスが正常に更新されました。';
 $s_realname_duplicated = 'その本名は他のユーザーが使用しています。';
 $s_realname_updated = '本名の更新に成功しました。';
 $s_password_updated = 'パスワードが正常に更新されました。';
+
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
@@ -818,6 +829,9 @@ $s_project_removed_user_msg = 'プロジェクトからユーザーを削除し�
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'ユーザーをプロジェクトから削除しますか?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'プロジェクトへのユーザーを追加';
@@ -917,6 +931,8 @@ $s_show = '表示数';
 $s_changed = '変更(時間)';
 $s_viewing_bugs_title = '改善要求一覧';
 $s_updated = '最終更新日時';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '無し';
@@ -981,7 +997,6 @@ $s_no_users_sponsoring_bug = 'この改善要求を支持するユーザはい�
 $s_users_sponsoring_bug = 'この改善要求の後援ユーザー一覧';
 $s_sponsors_list = '後援一覧';
 $s_total_sponsorship_amount = '総後援数 = %s';
-$s_sponsor_issue = '後援改善要求';
 
 # custom field strings
 $s_add_custom_field_button = 'カスタム項目の登録';
@@ -1018,6 +1033,9 @@ $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列
 $s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
 $s_field_delete_button = '項目の削除';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = '非表示にするステータス';
 $s_filter_closed = '完了';
@@ -1071,6 +1089,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改�
 $s_create_child_bug_button = "複製する";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "関連/依存グラフ";
 $s_relation_graph = "関連グラフ";
@@ -1081,6 +1100,7 @@ $s_view_issue = "改善要求を見る";
 
 # Source Control Integration
 $s_checkin = 'チェックイン';
+
 # Pemissions report
 $s_perm_rpt_capability = '機能';
 $s_view = '参照';
@@ -1109,6 +1129,8 @@ $s_manage_news = 'ニュースの管理';
 $s_view_list_of_attachments = '添付一覧の参照';
 $s_download_attachments = '添付のダウンロード';
 $s_delete_attachments = '添付の削除';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = '添付のアップロード';
 $s_filters = 'フィルター';
 $s_save_filters = 'フィルターの保存';
@@ -1139,4 +1161,7 @@ $s_status_changed_to = 'ステータス変更';
 $s_email_on_deleted = '削除通知メール';
 $s_email_on_sponsorship_changed = '後援の変更通知メール';
 $s_email_on_relationship_changed = '関連の変更通知メール';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

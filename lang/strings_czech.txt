@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:03:51 $
+	# $Date: 2005-02-13 21:04:31 $
 	#
-	# $Id: strings_czech.txt,v 1.69 2005-02-12 20:03:51 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.70 2005-02-13 21:04:31 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,6 +33,8 @@ $s_actiongroup_menu_resolve = 'Vyøe¹it';
 $s_actiongroup_menu_update_priority = 'Aktualizovat prioritu';
 $s_actiongroup_menu_update_status = 'Aktualizovat stav';
 $s_actiongroup_menu_update_view_status = 'Aktualizovat stav';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Vybrané problémy';
 
 # new strings:
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Vybrat resolution problému';
 $s_priority_bugs_conf_msg = 'Vybrat prioritu problému';
 $s_status_bugs_conf_msg = 'Vybrat stav problému';
 $s_view_status_bugs_conf_msg = 'Vybrat stav zobrazení problému';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Uzavøít problém' ;
 $s_delete_group_bugs_button = 'Zru¹it problém' ;
 $s_move_group_bugs_button = 'Pøesunout problém' ;
@@ -121,6 +124,7 @@ $s_resolve_group_bugs_button = 'Vyøe¹it problém' ;
 $s_priority_group_bugs_button = 'Zmìnit prioritu' ;
 $s_status_group_bugs_button = 'Zmìnit stav' ;
 $s_view_status_group_bugs_button = 'Obnovit zobrazení problému';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graf podle stavu' ;
@@ -198,6 +202,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'CHYBA: Novinka nenalezena.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'CHYBA: Hesla nejsou shodná.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'CHYBA: Oèekávalo se pole, ale byl pøijat øetìzec.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'CHYBA: Oèekával se øetìzec, ale bylo pøijato pole.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'CHYBA: Problém nenalezen.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'CHYBA: Chybná elektronická adresa.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'CHYBA: Profil nenalezen.';
@@ -244,6 +249,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'CHYBA: Udané informace n
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrzovací URL je chybné nebo bylo ji¾ pou¾ito. Prosím pøihlaste se znovu.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosa¾eno maximum vnitøních procesù. Obra»te se na správce systému.';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'CHYBA: Vá¹ úèet je vyøazen nebo blokován, nebo je zadána chybná kombinace u¾ivatelské jméno/heslo.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè neumí nebo odmítá pracovat s koláèky (cookies).';
 
@@ -259,6 +265,8 @@ $s_prefix_for_deleted_users = 'u¾ivatel';
 $s_administrator = 'správce';
 $s_myself = "Já sám";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojáø,70:vedoucí,90:správce';
@@ -425,6 +433,10 @@ $s_realname_duplicated = 'Skuteèné jméno je pou¾ito jiným u¾ivatelem';
 $s_realname_updated = 'Skuteèné jméno bylo úspì¹nì aktualizováno';
 $s_password_updated = 'Heslo bylo úspì¹nì aktualizováno';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Problém byl úspì¹nì pøiøazen...';
 
@@ -577,6 +589,7 @@ $s_select_project_button = 'Vyberte projekt';
 $s_logged_out_title = 'Odhlá¹ení...';
 $s_redirecting = '...pøesmìrování';
 $s_here = 'zde';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Zmìna hesla";
 $s_lost_password_done_title = "Odeslán dopis o zmìnì hesla";
@@ -818,6 +831,9 @@ $s_project_removed_user_msg = 'U¾ivatel byl úspì¹nì odebrán z projektu';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Skuteènì odebrat tohoto u¾ivatele?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Pøidat u¾ivatele k projektu';
@@ -917,6 +933,8 @@ $s_show = 'Ukázat';
 $s_changed = 'Zmìnìné(h)';
 $s_viewing_bugs_title = 'Prohlí¾ení problémù';
 $s_updated = 'Aktualizace';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '¾ádný';
@@ -981,7 +999,6 @@ $s_no_users_sponsoring_bug = '®ádný u¾ivatel nesponzoruje tento problém';
 $s_users_sponsoring_bug = 'U¾ivatelé sponzorující tento problém';
 $s_sponsors_list = 'Seznam sponzorù';
 $s_total_sponsorship_amount = 'Celkem sponzorováno = %s';
-$s_sponsor_issue = 'Sponzorovaný problém';
 
 # custom field strings
 $s_add_custom_field_button = 'Nové u¾ivatelské pole';
@@ -1018,6 +1035,9 @@ $s_custom_field_type_enum_string = '0:Text,1:Celé èíslo,2:Reálné èíslo,3:Výraz,4
 $s_confirm_used_custom_field_deletion = 'Toto pole je momentálnì propojen alespoò k jednomu projektu. Budete-li pokraèovat, v¹echny hodnoty tohot pole budou trvale znièeny. Tato akce nemù¾e být vrácena. Nepøejete-li si zru¹it toto pole, stizknìte tlaèítko "Zpìt" va¹eho prohlí¾eèe.  Pokraèovat mù¾ete tlaèítkem ní¾e';
 $s_confirm_custom_field_deletion = 'Opravdu si pøejete zru¹it toto u¾ivatelské pole a v¹echny k nìmu nále¾ející hodnoty?';
 $s_field_delete_button = 'Zru¹it pole';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Skrýt stav';
 $s_filter_closed = "Uzavøeno";
@@ -1071,6 +1091,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>P O Z O R</b>. Ne v¹e
 $s_create_child_bug_button = "Vytvoøit potomka";
 $s_bug_cloned_to = "Problém je klonován";
 $s_bug_created_from = "Problém generován z";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1081,6 +1102,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1109,6 +1131,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1139,4 +1163,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

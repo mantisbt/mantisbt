@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:03:51 $
+	# $Date: 2005-02-13 21:04:31 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.57 2005-02-12 20:03:51 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.58 2005-02-13 21:04:31 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -46,6 +46,8 @@ $s_actiongroup_menu_resolve = '解决';
 $s_actiongroup_menu_update_priority = '更新优先级';
 $s_actiongroup_menu_update_status = '更新状态';
 $s_actiongroup_menu_update_view_status = '更新视图状态';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '选择 Issue';
 
 # new strings:
@@ -125,6 +127,7 @@ $s_resolve_bugs_conf_msg = '选择相关 Issue';
 $s_priority_bugs_conf_msg = '选择 Issue 优先级别';
 $s_status_bugs_conf_msg = '选择 Issue 状态';
 $s_view_status_bugs_conf_msg = '选择 Issue 浏览状态';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '关闭 Issue' ;
 $s_delete_group_bugs_button = '删除 Issue' ;
 $s_move_group_bugs_button = '移动 Issue' ;
@@ -134,6 +137,7 @@ $s_resolve_group_bugs_button = '解决 Issue' ;
 $s_priority_group_bugs_button = '修改优先级别' ;
 $s_status_group_bugs_button = '修改状态' ;
 $s_view_status_group_bugs_button = '修改浏览状态';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '综合报表（按 Issue 状态）' ;
@@ -165,7 +169,7 @@ $s_legend_reported = 'Reported';
 $s_cumulative = 'Cumulative';
 $s_not_enough_data = 'Not enough data to create graph';
 
-# print_all_bug_page.php : display selected Issues
+# print_all_bug_page.php : display selected bugs
 $s_hide_button = '只显示选中内容';
 
 # print_all_bug_options.php : printing preferences
@@ -211,6 +215,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: bug not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -273,6 +278,8 @@ $s_prefix_for_deleted_users = 'user';
 $s_administrator = "管理员";
 $s_myself = "自身";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:查看人员,25:报告人员,40:修改人员,55:开发人员,70:经理,90:管理员";
@@ -439,6 +446,10 @@ $s_realname_duplicated = '真实姓名已被其他人所使用';
 $s_realname_updated = '真实姓名已经成功修改';
 $s_password_updated = '密码更新成功';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = "已成功指派 Issue...";
 
@@ -591,6 +602,7 @@ $s_select_project_button = "选择项目";
 $s_logged_out_title = "正在注销登录...";
 $s_redirecting = "...重定向到...";
 $s_here = "到这里";
+
 # lost_pwd_page.php
 $s_lost_password_title = "重置密码";
 $s_lost_password_done_title = "密码邮件已发出";
@@ -623,7 +635,7 @@ $s_filter_button = "筛选";
 $s_manage_users_link = "用户管理";
 $s_manage_projects_link = "项目管理";
 $s_manage_custom_field_link = '自定义字段管理';
-
+$s_permissions_summary_report = 'Permissions Report';
 $s_create_new_account_link = 'Create New Account';
 $s_projects_link = "创建项目";
 $s_documentation_link = "说明";
@@ -832,6 +844,9 @@ $s_project_removed_user_msg = "从项目删除用户成功";
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = "确定要删除该用户吗？";
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = "添加用户至项目";
@@ -931,6 +946,8 @@ $s_show = "显示";
 $s_changed = "已变更(小时)";
 $s_viewing_bugs_title = "查看 Issue";
 $s_updated = "最后更新";
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = "无";
@@ -995,7 +1012,6 @@ $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
 $s_users_sponsoring_bug = 'Users sponsoring this issue';
 $s_sponsors_list = 'Sponsors 列表';
 $s_total_sponsorship_amount = '合计 Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = '新建自定义字段';
@@ -1032,6 +1048,9 @@ $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
 $s_field_delete_button = '删除字段';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = '隐藏状态';
 $s_filter_closed = "已关闭";
@@ -1085,6 +1104,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b>. 当前 Issue 
 $s_create_child_bug_button = "创建子项 Issue";
 $s_bug_cloned_to = "Issue 已复制";
 $s_bug_created_from = "Issue 产生于";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1095,6 +1115,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1123,6 +1144,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1153,4 +1176,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.92 $
+	# $Revision: 1.93 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:01:49 $
+	# $Date: 2005-02-13 21:04:34 $
 	#
-	# $Id: strings_italian.txt,v 1.92 2005-02-13 21:01:49 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.93 2005-02-13 21:04:34 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -32,6 +32,7 @@ $s_actiongroup_menu_update_priority = "Cambia priorità";
 $s_actiongroup_menu_update_status = "Cambia stato";
 $s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
 $s_actiongroup_menu_set_sticky = 'Imposta/resetta sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -199,6 +200,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -428,6 +430,10 @@ $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
 $s_realname_duplicated = "Nominativo già in uso da un altro utente";
 $s_realname_updated = "Nominativo aggiornato con successo";
 $s_password_updated = "La password è stata aggiornata correttamente";
+
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = "L'anomalia è stato assegnato correttamente...";
@@ -926,6 +932,7 @@ $s_changed = "Modificato (ore)";
 $s_viewing_bugs_title = "Elenco delle anomalie";
 $s_updated = "Aggiornato";
 $s_sticky = 'Visualizza anomalie sticky';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = "nessuno";
@@ -990,7 +997,6 @@ $s_no_users_sponsoring_bug = "Non ci sono utenti che sponsorizzano questa anomal
 $s_users_sponsoring_bug = "Utenti che sponsorizzano questa anomalia";
 $s_sponsors_list = "Lista degli sponsorizzatore";
 $s_total_sponsorship_amount = "Total Sponsorizzazione = %s";
-$s_sponsor_issue = "Sponsor Issue";
 
 # custom field strings
 $s_add_custom_field_button = "Nuovo campo personalizzato";
@@ -1156,8 +1162,6 @@ $s_email_on_deleted = 'Email su \'Eliminazione\'';
 $s_email_on_sponsorship_changed = 'Email su variazione di sponsorizzazione';
 $s_email_on_relationship_changed = 'Email su variazione delle relazioni';
 
-
 # DHTML filters
 $s_loading = 'In caricamento...';
-
 ?>

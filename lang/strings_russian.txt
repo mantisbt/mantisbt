@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:13 $
+	# $Date: 2005-02-13 21:04:38 $
 	#
-	# $Id: strings_russian.txt,v 1.75 2005-02-12 20:04:13 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.76 2005-02-13 21:04:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,8 @@ $s_actiongroup_menu_resolve = 'Решить';
 $s_actiongroup_menu_update_priority = 'Обн. приоритет';
 $s_actiongroup_menu_update_status = 'Обн. статус';
 $s_actiongroup_menu_update_view_status = 'Обн. режим доступа';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Выбранные обращения';
 
 # new strings:
@@ -108,6 +110,7 @@ $s_resolve_bugs_conf_msg = 'Выберите результат для обращений';
 $s_priority_bugs_conf_msg = 'Выберите приоритет обращений';
 $s_status_bugs_conf_msg = 'Выберите статус обращений';
 $s_view_status_bugs_conf_msg = 'Выберите режим доступа к обращениям';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Закрыть обращения' ;
 $s_delete_group_bugs_button = 'Удалить обращения' ;
 $s_move_group_bugs_button = 'Перенести обращения' ;
@@ -117,6 +120,7 @@ $s_resolve_group_bugs_button = 'Решить обращения' ;
 $s_priority_group_bugs_button = 'Обновить приоритет' ;
 $s_status_group_bugs_button = 'Обновить статус' ;
 $s_view_status_group_bugs_button = 'Обновить режим доступа';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Суммарный график по состоянию' ;
@@ -194,6 +198,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Новость на найдена.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Пароли не совпадают.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Ожидается массив, но получена строка.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Ожидается строка, но получен массив.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Обращение %d не найдено.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Неправильный e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Профиль не найден.';
@@ -256,6 +261,8 @@ $s_prefix_for_deleted_users = 'пользователь';
 $s_administrator = 'администратор';
 $s_myself = "Себе";
 $s_default_access_level = 'Стандартный уровень доступа';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:зритель,25:автор,40:редактор,55:разработчик,70:менеджер,90:администратор';
@@ -422,6 +429,10 @@ $s_realname_duplicated = 'Реальное имя используется другим пользователем';
 $s_realname_updated = 'Настоящее имя успешно обновлено';
 $s_password_updated = 'Пароль успешно обновлен';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg = 'Обращение было успешно назначено...';
 
@@ -574,6 +585,7 @@ $s_select_project_button = 'Выберите проект';
 $s_logged_out_title = 'Выход...';
 $s_redirecting = '...Переадресация';
 $s_here = 'здесь';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Сброс пароля";
 $s_lost_password_done_title = "Сообщение выслано";
@@ -815,6 +827,9 @@ $s_project_removed_user_msg = 'Пользователь удален из проекта';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Вы уверены, что хотите удалить этого пользователя?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Добавление пользователя к проекту';
@@ -914,6 +929,8 @@ $s_show = 'Показать';
 $s_changed = 'Изменены (часов)';
 $s_viewing_bugs_title = 'Просмотр обращений';
 $s_updated = 'Обновлено';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'нет';
@@ -978,7 +995,6 @@ $s_no_users_sponsoring_bug = 'Нет пользователей, финансирующих обращение.';
 $s_users_sponsoring_bug = 'Пользователи, финансирующие обращение';
 $s_sponsors_list = 'Список финансирующих';
 $s_total_sponsorship_amount = 'Общая сумма финансирования = %s';
-$s_sponsor_issue = 'Финансировать обращение';
 
 # custom field strings
 $s_add_custom_field_button = 'Новое пользовательское поле';
@@ -1015,6 +1031,9 @@ $s_custom_field_type_enum_string = '0:Строка,1:Целое,2:Плавающее,3:Перечисление,
 $s_confirm_used_custom_field_deletion = 'Это поле связано как минимум с одним проектом.  Если Вы продолжите, все значения для этого поля будут безвозвратно удалены.  Это действие невозможно откатить.  Если Вы не хотите удалять это поле, нажмите кнопку Back в Вашем браузере.  Для удаления - нажмите кнопку ниже';
 $s_confirm_custom_field_deletion = 'Вы уверены, что хотите удалить это поле и все связанные с ним значения?';
 $s_field_delete_button = 'Удалить поле';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Статус скрытия';
 $s_filter_closed = "Закрытые";
@@ -1068,6 +1087,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не все 
 $s_create_child_bug_button = "Создать клон";
 $s_bug_cloned_to = "Обращение клонировано";
 $s_bug_created_from = "Обращение создано из";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Граф связей";
 $s_relation_graph = "Граф связей";
@@ -1078,6 +1098,7 @@ $s_view_issue = "Просмотр обращения";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1106,6 +1127,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1136,4 +1159,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

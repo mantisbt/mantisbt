@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.19 $
+	# $Revision: 1.20 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:12 $
+	# $Date: 2005-02-13 21:04:37 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.19 2005-02-12 20:04:12 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.20 2005-02-13 21:04:37 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -41,6 +41,8 @@ $s_actiongroup_menu_resolve = 'Iðspræsti';
 $s_actiongroup_menu_update_priority = 'Pakeisti prioritetà';
 $s_actiongroup_menu_update_status = 'Pakeisti bûsenà';
 $s_actiongroup_menu_update_view_status = 'Pakeisti perþiûros bûsena';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Pasirinktos klaidos';
 
 # new strings:
@@ -120,6 +122,7 @@ $s_resolve_bugs_conf_msg = 'Pasirinkti klaidø sprendimà';
 $s_priority_bugs_conf_msg = 'Pasirinkti klaidø prioritetà';
 $s_status_bugs_conf_msg = 'Pasirinkti klaidø bûsenà';
 $s_view_status_bugs_conf_msg = 'Pasirinkti klaidos perþiûros bûsenà';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Uþdaryti klaidas';
 $s_delete_group_bugs_button = 'Iðtrinti klaidas';
 $s_move_group_bugs_button = 'Perkelti klaidas';
@@ -129,6 +132,7 @@ $s_resolve_group_bugs_button = 'Iðspræsti klaidas';
 $s_priority_group_bugs_button = 'Keisti prioritetà';
 $s_status_group_bugs_button = 'Keisti bûsenà';
 $s_view_status_group_bugs_button = 'Keisti perþiûros bûsenà';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sukurti grafikà pagal bûsenà';
@@ -206,6 +210,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Naujiena nerasta.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Slaptaþodþiai nesutampa.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Vietoj masyvo buvo gauta eilutë.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Vietoj eilutës buvo gautas masyvas.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Klaida nerasta.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Neteisingas elektroninio paðto adresas.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Apraðymas nerastas.';
@@ -268,6 +273,8 @@ $s_prefix_for_deleted_users = 'vartotojas';
 $s_administrator = 'administratorius';
 $s_myself = "Að pats";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:stebëtojas,25:praneðëjas,40:atnaujintojas,55:sprendëjas,70:vadovas,90:administratorius';
@@ -434,6 +441,10 @@ $s_realname_duplicated = 'Tikrasis vardas naudojamas kito vartotojo';
 $s_realname_updated = 'Tikrasis vardas sëkmingai pakeistas';
 $s_password_updated = 'Slaptaþodis sëkmingai pakeistas';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg       = 'Klaida sëkmingai priskirta...';
 
@@ -586,6 +597,7 @@ $s_select_project_button = 'Pasirinkti projektà';
 $s_logged_out_title = 'Atsijungimas...';
 $s_redirecting = '...Nukreipiu';
 $s_here = 'Èia';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Slaptaþodþio keitimas";
 $s_lost_password_done_title = "Laiðkas apie slaptaþodþio pakeitimà iðsiøstas";
@@ -827,6 +839,9 @@ $s_project_removed_user_msg = 'Vartotojas sëkmingai paðalintas ið projekto';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Ar tikrai norite paðalinti ðá vartotojà?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Vartotojo átraukimas á projektà';
@@ -926,6 +941,8 @@ $s_show = 'Rodyti';
 $s_changed = 'Pakeista(val)';
 $s_viewing_bugs_title = 'Klaidø perþiûra';
 $s_updated = 'Atnaujinta';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nëra';
@@ -990,7 +1007,6 @@ $s_no_users_sponsoring_bug = 'Vartotojø, remianèiø ðià klaidà, nëra.';
 $s_users_sponsoring_bug = 'Vartotojai remiantys ðià klaidà';
 $s_sponsors_list = 'Rëmëjø sàraðas';
 $s_total_sponsorship_amount = 'Bendra suma = %s';
-$s_sponsor_issue = 'Remti klaidà';
 
 # custom field strings
 $s_add_custom_field_button = 'Naujas papildomas laukas';
@@ -1027,6 +1043,9 @@ $s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis ska
 $s_confirm_used_custom_field_deletion = 'Ðis laukas susietas bent su vienu projektu.  Jei pratæsite, visos ðio lauko reikðmës bus iðtrintos.  Veiksmo nebus galima atðaukti.  Jeigu nenorite iðtrinti ðio lauko, paspauskite mygtukà "Atgal" savo narðyklëje.  Jei norite tæsti, spauskite mygtukà apaèioje';
 $s_confirm_custom_field_deletion = 'Ar tikrai norite iðtrinti ðá papildomà laukà ir visas susijusias reikðmes?';
 $s_field_delete_button = 'Iðtrinti laukà';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Paslëpti bûsenà';
 $s_filter_closed = 'Uþdaryta';
@@ -1080,6 +1099,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos
 $s_create_child_bug_button = "Sukurti sàryðá";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Klaida sukurta ið";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1090,6 +1110,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Patikrinimas';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1118,6 +1139,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1148,4 +1171,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

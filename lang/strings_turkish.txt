@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:15 $
+	# $Date: 2005-02-13 21:04:40 $
 	#
-	# $Id: strings_turkish.txt,v 1.72 2005-02-12 20:04:15 jlatour Exp $
+	# $Id: strings_turkish.txt,v 1.73 2005-02-13 21:04:40 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,8 @@ $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
@@ -108,6 +110,7 @@ $s_resolve_bugs_conf_msg = 'Choose bugs resolution';
 $s_priority_bugs_conf_msg = 'Choose bugs priority';
 $s_status_bugs_conf_msg = 'Choose bugs status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Close Bugs' ;
 $s_delete_group_bugs_button = 'Delete Bugs' ;
 $s_move_group_bugs_button = 'Move Bugs' ;
@@ -117,6 +120,7 @@ $s_resolve_group_bugs_button = 'Resolve Bugs' ;
 $s_priority_group_bugs_button = 'Update Priority' ;
 $s_status_group_bugs_button = 'Update Status' ;
 $s_view_status_group_bugs_button = 'Update View Status';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Synthesis graphs by status' ;
@@ -194,6 +198,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -256,6 +261,8 @@ $s_prefix_for_deleted_users = 'user';
 $s_administrator = 'yönetici';
 $s_myself = "Myself";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:izleyici,25:bildirici,40:güncelleyici,55:programcý,70:menejer,90:yönetici';
@@ -422,6 +429,10 @@ $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg = 'Bug baþarýyla atandý...';
 
@@ -574,6 +585,7 @@ $s_select_project_button = 'Proje Seç';
 $s_logged_out_title = 'Sistemden çýkýldý...';
 $s_redirecting = '...Giriþ Sayfasýna';
 $s_here = 'Yönlendir';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
 $s_lost_password_done_title = "Password Message Sent";
@@ -815,6 +827,9 @@ $s_project_removed_user_msg = 'Kullanýcý projeden baþarýyla silindi';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Bu kullanýcýyý silmek istediðinizden emin misiniz?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Kullanýcýyý projeye ekle';
@@ -914,6 +929,8 @@ $s_show = 'Göster';
 $s_changed = 'Deðiþme(saat)';
 $s_viewing_bugs_title = 'Buglar Ýzleniyor';
 $s_updated = 'Son Güncelleme';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'hiçbiri';
@@ -978,7 +995,6 @@ $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
 $s_users_sponsoring_bug = 'Users sponsoring this issue';
 $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'New Custom Field';
@@ -1015,6 +1031,9 @@ $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
 $s_field_delete_button = 'Delete Field';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Hide Status';
 $s_filter_closed = 'Closed';
@@ -1068,6 +1087,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1078,6 +1098,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1106,6 +1127,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1136,4 +1159,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>

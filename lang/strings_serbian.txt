@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.20 $
+	# $Revision: 1.21 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:13 $
+	# $Date: 2005-02-13 21:04:39 $
 	#
-	# $Id: strings_serbian.txt,v 1.20 2005-02-12 20:04:13 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.21 2005-02-13 21:04:39 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,8 @@ $s_actiongroup_menu_resolve = 'Reši';
 $s_actiongroup_menu_update_priority = 'Izmena prioriteta';
 $s_actiongroup_menu_update_status = 'Izmena statusa';
 $s_actiongroup_menu_update_view_status = 'Izmena statusa pogleda';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Izabrane greske';
 
 # new strings:
@@ -109,6 +111,7 @@ $s_resolve_bugs_conf_msg = 'Izaberite rešenje greške';
 $s_priority_bugs_conf_msg = 'Izaberite prioritet greske';
 $s_status_bugs_conf_msg = 'Izaberite status greske';
 $s_view_status_bugs_conf_msg = 'Izaberite status pregleda gresaka';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Zatvaranje grešaka' ;
 $s_delete_group_bugs_button = 'Brisanje grešaka' ;
 $s_move_group_bugs_button = 'Premeštanje grešaka' ;
@@ -118,6 +121,7 @@ $s_resolve_group_bugs_button = 'Razlucivanje grešaka' ;
 $s_priority_group_bugs_button = 'Prioritet ažuriranja' ;
 $s_status_group_bugs_button = 'Status ažuriranja' ;
 $s_view_status_group_bugs_button = 'Izmena statusa pregleda';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Synthesis graphs by status' ;
@@ -195,6 +199,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Stavka Vesti nije pronadjena.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lozinka se ne slaže.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'String je poslat umesto niza.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Niz je poslat umesto stringa.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Greška %d nije pronadjena.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'pogresan email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'profil nije pronadjen.';
@@ -257,6 +262,8 @@ $s_prefix_for_deleted_users = 'korisnik';
 $s_administrator = 'administrator';
 $s_myself = "Sebi samom";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:gledalac,25:reporter,40:updater,55:razvoj,70:menadzer,90:administrator';
@@ -423,6 +430,10 @@ $s_realname_duplicated = 'Pravo ime je korisceno od strane drugog korisnika';
 $s_realname_updated = 'Pravo ime je uspesno izmenjeno';
 $s_password_updated = 'Lozinka je uspesno ažurirana';
 
+# adm_permission_report.php
+$s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
+
 # bug_assign.php
 $s_bug_assign_msg = 'Greška je uspesno dodeljena...';
 
@@ -575,6 +586,7 @@ $s_select_project_button = 'Izbor projekta';
 $s_logged_out_title = 'Odjavljen...';
 $s_redirecting = '...Redirekcija';
 $s_here = 'Ovde';
+
 # lost_pwd_page.php
 $s_lost_password_title = "Lozinka Resetovana";
 $s_lost_password_done_title = "Poruka o lozinki poslata";
@@ -816,6 +828,9 @@ $s_project_removed_user_msg = 'Korisnik je uspesno uklonjen iz projekta';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Da li ste sigurni da zelite da uklonite ovog korisnika?';
+$s_remove_user_button = 'Remove User';
+$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
+$s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Dodavanje korisnika u projekat';
@@ -915,6 +930,8 @@ $s_show = 'Prikazi';
 $s_changed = 'Izmenjeni(casovi)';
 $s_viewing_bugs_title = 'Pregled grešaka';
 $s_updated = 'ažuriran';
+$s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nijedan';
@@ -979,7 +996,6 @@ $s_no_users_sponsoring_bug = 'Nema korisnika koji sponzorisu ovu gresku.';
 $s_users_sponsoring_bug = 'Korisnici koji sponzorisu ovu gresku';
 $s_sponsors_list = 'Lista sponzora';
 $s_total_sponsorship_amount = 'Ukupno sponzorstvo = %s';
-$s_sponsor_issue = 'Sponzorisanje greske';
 
 # custom field strings
 $s_add_custom_field_button = 'Novo korisnicko polje';
@@ -1016,6 +1032,9 @@ $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E
 $s_confirm_used_custom_field_deletion = 'Ovo polje je trenutno povezano sa bar jednim projektom.  Ukoliko nastavite, sve vrednosti ovog polja ce permanentno biti izbrisane.  Ovo je nepovratna akcija.  Ako ne želite da izbrišete ovo polje kliknite na "Back" polje u vašem internet pretraživacu. Da bi ste nastavili kliknite na dugme ispod.';
 $s_confirm_custom_field_deletion = 'Da li ste sigurni da želite da izbrisete ovo korisnicko polje i sve njemu pridružene vrednosti?';
 $s_field_delete_button = 'Brisanje polja';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Skrivanje statusa';
 $s_filter_closed = "Zatvoren";
@@ -1069,6 +1088,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UPOZORENJE</b>. Nisu 
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Greska generisana iz";
+
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
 $s_relation_graph = "Relation Graph";
@@ -1079,6 +1099,7 @@ $s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
@@ -1107,6 +1128,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_attachment_button = "Delete";
+$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
@@ -1137,4 +1160,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Loading...';
 ?>
