@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.96 $
+	# $Revision: 1.97 $
 	# $Author: int2str $
-	# $Date: 2004-07-07 20:45:09 $
+	# $Date: 2004-07-08 10:47:16 $
 	#
-	# $Id: strings_german.txt,v 1.96 2004-07-07 20:45:09 int2str Exp $
+	# $Id: strings_german.txt,v 1.97 2004-07-08 10:47:16 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,7 +33,7 @@ $s_actiongroup_menu_resolve = 'Gelöst';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
-$s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_bugs = 'Ausgew&auml;hlte Reports';
 
 # new strings:
 $s_all_projects = 'Alle Projekte';
@@ -394,10 +394,10 @@ $s_bug_deleted_msg = 'Reportmeldung wurde gelöscht...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Soll diese Reportmeldung wirklich gelöscht werden?';
-$s_delete_bug_button = 'Report löschen';
+$s_delete_bug_button = 'Löschen';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Report beobachten';
+$s_monitor_bug_button = 'Beobachten';
 $s_unmonitor_bug_button = 'Beobachtung beenden';
 
 # bug_file_add.php
@@ -416,7 +416,7 @@ $s_bugnote_add_reopen_button = 'Notiz hinzufügen und Report reaktivieren';
 
 # bug_resolve_page.php
 $s_resolve_bug_title = 'Report behoben';
-$s_resolve_bug_button = 'Report beheben';
+$s_resolve_bug_button = 'Beheben';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Report behoben. Bitte Notiz eingeben...';
@@ -490,7 +490,7 @@ $s_delete_link = 'Löschen';
 $s_add_bugnote_title = 'Notiz hinzufügen';
 $s_add_bugnote_button = 'Notiz hinzufügen';
 $s_bugnote_edit_link = 'Bearbeiten';
-$s_close_bug_button = 'Report schließen';
+$s_close_bug_button = 'Schließen';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
@@ -522,7 +522,7 @@ $s_open_and_assigned_to_me = 'Offen und mir zugewiesen';
 $s_open_and_reported_to_me = 'Offen und von mir berichtet';
 $s_newer_news_link = 'Neuere Nachrichten';
 $s_older_news_link = 'Ältere Nachrichten';
-$s_archives = 'Archive';
+$s_archives = 'Archiv';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
@@ -660,8 +660,8 @@ $s_manage_user_updated_msg = 'Konto aktualisiert...';
 
 # menu_inc.php
 $s_main_link = 'Startseite';
-$s_view_bugs_link = 'Report anzeigen';
-$s_report_bug_link = 'Report eintragen';
+$s_view_bugs_link = 'Reports anzeigen';
+$s_report_bug_link = 'Report eingeben';
 $s_changelog_link = 'Change Log';
 $s_summary_link = 'Zusammenfassung';
 $s_account_link = 'Konto';
@@ -885,10 +885,10 @@ $s_view_simple_link = 'einfache Anzeige';
 $s_viewing_bug_advanced_details_title = 'Erweiterte Reportanzeige';
 $s_product_build = 'Produktversion';
 $s_system_profile = 'Systembeschreibung';
-$s_update_bug_button = 'Report aktualisieren';
+$s_update_bug_button = 'Bearbeiten';
 $s_bug_assign_to_button = 'Zuordnen zu';
-$s_reopen_bug_button = 'Report wiedereröffnen';
-$s_move_bug_button = 'Move Issue';
+$s_reopen_bug_button = 'Wied ereröffnen';
+$s_move_bug_button = 'Verschieben';
 $s_attached_files = 'Angehängte Dateien';
 $s_publish = 'Veröffentlichen';
 $s_cached = 'Zwischengespeichert';
@@ -931,12 +931,12 @@ $s_custom_field_access_level_rw = 'Berechtigung Schreiben';
 $s_custom_field_length_min = 'Mindestlänge';
 $s_custom_field_length_max = 'Maximallänge';
 $s_custom_field_advanced = 'Erweitert';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_display_resolve = 'Beim Beheben anzeigen';
+$s_custom_field_display_close = 'Beim Schlie&szlig;en anzeigen';
+$s_custom_field_require_report = 'Erforderlich f&uuml;r neue Reports';
+$s_custom_field_require_update = 'Erforderlich beim Aktualisieren';
+$s_custom_field_require_resolve = 'Erforderlich beim Beheben';
+$s_custom_field_require_close = 'Erforderlich Beim Schlie&szlig;en';
 
 $s_custom_field_sequence = 'Reihenfolge';
 $s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufzählung,4:Email';
