@@ -29,7 +29,7 @@
 	}
 
 	# Add item
-	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
+	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length, $g_cookie_path );
 
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary

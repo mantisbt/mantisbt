@@ -13,7 +13,7 @@
 	if ( empty( $g_view_all_cookie_val ) ) {
 		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
 							$g_default_show_changed."#0#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
 		print_header_redirect( $g_print_all_bug_page."?f=2" );
 	}
 
@@ -22,7 +22,7 @@
 	if ( $t_setting_arr[0] != "v1" ) {
 		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
 							$g_default_show_changed."#0#any#any#last_updated#DESC";
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
 		print_header_redirect( $g_print_all_bug_page."?f=1" );
 	}
 
@@ -53,7 +53,7 @@
 								$f_assign_id."#".
 								$f_sort."#".
 								$f_dir;
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
 		} else if ( 2 == $f_save ) {
 			# We came here via clicking a sort link
 			# Load pre-existing preferences
@@ -86,7 +86,7 @@
 								$f_sort."#".
 								$f_dir;
 
-			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
 		}
 	} else {
 		# Load preferences
