@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2003.09.??  -  0.18.0??
+2003.10.??  -  0.18.0??
 
  * Enh #3335: Added Estonian Language (thanks to Villem Vannas)
  * Fix #3310: Sorting of projects in menu bar.
@@ -8,6 +8,7 @@ Mantis ChangeLog
  * Fix #3333: Support PHPMailer v1.7x.
  * Fix #3334: Invalid links in bug reminder emails.
  * Fix #3353: History not updated in bug deletion email.
+ * Languages: Updated French localisation.
 
 2003.08.24  -  0.18.0rc1
 

@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:33 $
+	# $Revision: 1.64 $
+	# $Author: vboctor $
+	# $Date: 2003-09-20 00:25:35 $
 	#
-	# $Id: strings_french.txt,v 1.63 2003-08-24 10:02:33 beerfrick Exp $
+	# $Id: strings_french.txt,v 1.64 2003-09-20 00:25:35 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -114,10 +114,10 @@ $s_priority_group_bugs_button = 'Mettre à jour la priorité' ;
 $s_status_group_bugs_button = 'Mettre à jour le statut' ;
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Graphiques par états' ;
-$s_graph_imp_priority_title = 'Graphiques par priorités' ;
+$s_graph_imp_status_title = 'Graphiques par état' ;
+$s_graph_imp_priority_title = 'Graphiques par priorité' ;
 $s_graph_imp_severity_title = 'Graphiques par sévérité';
-$s_graph_imp_category_title = 'Graphiques par catégories';
+$s_graph_imp_category_title = 'Graphiques par catégorie';
 $s_graph_imp_resolution_title = 'Graphiques par résolution';
 $s_by_status_pct = 'pourcentage par état';
 $s_by_priority_pct = 'pourcentage par priorité';
@@ -135,7 +135,7 @@ $s_category_link = 'Par catégorie';
 $s_resolution_link = 'Par résolution';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Afficher le bugs sélectionnés';
+$s_hide_button = 'Afficher les bugs sélectionnés';
 
 # print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Choisir les champs à imprimer';
@@ -146,7 +146,7 @@ $s_bugnote_title = 'Auteur de la note' ;
 $s_bugnote_date = 'Date de la note';
 $s_bugnote_description = 'Description de la note';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Merci d\'utiliser le bouton "Précédent" de votre navigateur web pour retourner à la page précédente. Vous pourrez y corriger les problèmes identifiés par cette erreur ou choisir une autre action. Vous pouvez aussi choisir une option de la barre de menu pour aller directement dans une nouvelle section.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = 'ERREUR: Une erreur s\'est produite.  Merci de contacter votre administrateur.';
@@ -184,7 +184,7 @@ $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERREUR: Email invalide.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERREUR: Profil non trouvé.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERREUR: Type de fichier non autorisé pour les dépôts de fichier.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERREUR: Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERREUR: Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERREUR: Impossible de marquer ce bug comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERREUR: Champ personnalisé non trouvé.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERREUR: Nom dupliqué.';
@@ -285,7 +285,7 @@ $s_change_preferences_link = 'Préférences';
 $s_edit_account_title = 'Modifier un compte';
 $s_username = 'Utilisateur';
 $s_email = 'Email'; // 'Mél' pour les puristes
-$s_password = 'Mot de Passe';
+$s_password = 'Mot de passe';
 $s_confirm_password  = 'Confirmation du mot de passe';
 $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
@@ -307,7 +307,7 @@ $s_email_on_reopened = 'Email en cas de réouverture';
 $s_email_on_bugnote_added = 'Email en cas de nouvelle note';
 $s_email_on_status_change = 'Email en cas de modification d\'état';
 $s_email_on_priority_change = 'Email en cas de modification de priorité';
-$s_language = 'Language';
+$s_language = 'Langage';
 $s_update_prefs_button = 'Mettre à jour les préférences';
 $s_reset_prefs_button = 'Réinitialiser les préférences';
 
@@ -403,7 +403,7 @@ $s_sent_you_this_reminder_about = 'vous a envoyé un rappel à propos de';
 $s_bug_reminder = 'Envoyer un rappel';
 $s_reminder_sent_to = 'Rappel envoyé à';
 $s_bug_send_button = 'Envoyer';
-$s_reminder = 'Reminder';
+$s_reminder = 'Rappel';
 
 # bug_update.php
 $s_bug_updated_msg = 'Le bug a été mis à jour...';
@@ -489,7 +489,7 @@ $s_redirecting = '... Redirection en cours';
 $s_here = 'Ici';
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Bug ouverts et qui me sont assignés';
+$s_open_and_assigned_to_me = 'Bug ouverts qui me sont assignés';
 $s_open_and_reported_to_me = 'Bug ouverts dont je suis le rapporteur';
 $s_newer_news_link = 'Nouvelles récentes';
 $s_older_news_link = 'Anciennes nouvelles';
@@ -625,7 +625,7 @@ $s_account_reset_msg = 'Le mot de passe est réinitialisé...';
 $s_account_reset_msg2 = 'Mot de passe mis à \'\' (vide)...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Compte protégé. Accréditation et activation protégés. Autrement, le compte a été mis à jour...';
+$s_manage_user_protected_msg = 'Compte protégé. Accréditation et activation protégées. Autrement, le compte a été mis à jour...';
 $s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 
 # menu_inc.php
@@ -776,7 +776,7 @@ $s_site_settings_updated_msg = 'Les modifications ont bien été prises en compte.
 # summary_page.php
 $s_summary_title = 'Synthèse';
 $s_summary_jpgraph_link = 'Synthèse avancée';
-$s_by_project = 'by project';
+$s_by_project = 'par projet';
 $s_by_status = 'par état';
 $s_by_date = 'par date';
 $s_by_severity = 'par sévérité';
@@ -806,10 +806,10 @@ $s_none = 'aucun';
 $s_search ='Chercher';
 $s_view_prev_link = 'Voir les précédents';
 $s_view_next_link = 'Voir les suivants';
-$s_prev = 'Prev';
-$s_next = 'Next';
-$s_first = 'First';
-$s_last = 'Last';
+$s_prev = 'Précédent';
+$s_next = 'Suivant';
+$s_first = 'Premier';
+$s_last = 'Dernier';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Rapport simplifié';
@@ -865,6 +865,6 @@ $s_hide_status = 'Cacher le statut';
 $s_filter_closed = 'Fermé';
 $s_filter_resolved = 'Résolu';
 
-$s_attachments = 'attachment(s)';
+$s_attachments = 'attachement(s)';
 $s_attachment_alt = 'A';
 ?>
