@@ -149,7 +149,7 @@
 	$g_default_language     = "english";
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr = array( "english", "chinese_traditional", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "russian", "polish", "portuguese", "spanish", "swedish", "turkish" );
+	$g_language_choices_arr = array( "english", "chinese_traditional", "danish", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "polish", "portuguese_brazilian", "portuguese_standard", "russian", "spanish", "swedish", "turkish" );
 
 	###############################
 	### Mantis Display Settings ###
