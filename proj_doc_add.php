@@ -29,8 +29,8 @@
 		$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
 
 		# prepare variables for insertion
-		$f_title 		= string_prepare_text( $f_title );
-		$f_description 	= string_prepare_textarea( $f_description );
+		$f_title 	= db_prepare_string( $f_title );
+		$f_description 	= db_prepare_string( $f_description );
 
 		$f_file_name = $g_project_cookie_val.'-'.$f_file_name;
 		$t_file_size = filesize( $f_file );

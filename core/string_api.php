@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.20 2003-01-11 02:05:13 jfitzell Exp $
+	# $Id: string_api.php,v 1.21 2003-01-12 07:13:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -14,59 +14,16 @@
 	###########################################################################
 
 	# --------------------
-	# every string that comes from a textarea should be processed through this
-	# function *before* insertion into the database.
-	#
-	# @@@ Old function.  Use db_prepare_string() now.  Delete this at some point
-	#
-	function string_prepare_textarea( $p_string ) {
-		global $g_allow_href_tags, $g_allow_html_tags;
-
-		$p_string = htmlspecialchars( $p_string );
-
-		if ( ON == $g_allow_html_tags ) {
-			$p_string = filter_html_tags( $p_string );
-		}
-
-		if ( ON == $g_allow_href_tags ) {
-			$p_string = filter_href_tags( $p_string );
-		}
-
-		$p_string = filter_img_tags( $p_string );
-		$p_string = addslashes( $p_string );
-		return $p_string;
-	}
-
-	# --------------------
-	# every string that comes from a text field should be processed through this
-	# function *before* insertion into the database.
-	#
-	# @@@ Old function.  Use db_prepare_string() now.  Delete this at some point
-	#
-	function string_prepare_text( $p_string ) {
-		global $g_allow_href_tags, $g_allow_html_tags;
-
-		$p_string = htmlspecialchars( $p_string );
-
-		if ( ON == $g_allow_html_tags ) {
-			$p_string = filter_html_tags( $p_string );
-		}
-
-		if ( ON == $g_allow_href_tags ) {
-			$p_string = filter_href_tags( $p_string );
-		}
-
-		$p_string = filter_img_tags( $p_string );
-		$p_string = addslashes( $p_string );
-		return $p_string;
-	}
-
-	# --------------------
 	# Use this to prepare a string for display to HTML
 	function string_display( $p_string ) {
+		$p_string = unfilter_href_tags( $p_string );
+		$p_string = htmlentities( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
+		$p_string = filter_href_tags( $p_string );
+		$p_string = filter_html_tags( $p_string );
 		$p_string = nl2br( $p_string );
+
 		return $p_string;
 	}
 
@@ -87,23 +44,14 @@
 	# --------------------
 	# Process a string for display in a textarea box
 	function string_edit_textarea( $p_string ) {
-		$p_string = str_replace( '<br>', '',  $p_string );
-		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( '<br />', '\n',  $p_string );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '"',  $p_string );
+		$p_string = htmlentities( $p_string );
 		return $p_string;
 	}
 
 	# --------------------
 	# Process a string for display in a text box
 	function string_edit_text( $p_string ) {
-		$p_string = str_replace( '<br>', '',  $p_string );
-		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '\'',  $p_string );
+		$p_string = htmlentities( $p_string );
 		return $p_string;
 	}
 
@@ -189,6 +137,10 @@
 	# --------------------
 	# Detect URLs and email addresses in the string and replace them with href anchors
 	function filter_href_tags( $p_string ) {
+		if ( ! config_get( 'html_make_links' ) ) {
+			return $p_string;
+		}
+
     	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])",
     							"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
     							$p_string);
@@ -204,7 +156,7 @@
 		$p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
 								"\\1",
 								$p_string);
-		$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([^[:space:]]*)([[:alnum:]#?/&=])</a>",
+		$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([[:alnum:][:space:]]*)([[:alnum:]#?/&=])</a>",
 								"\\1://\\2\\3",
 								$p_string);
 		return $p_string;
@@ -217,25 +169,30 @@
 	}
 
 	# --------------------
-	# process $g_html_tags to be treated as html
+	# This function looks for text with htmlentities
+	# like &lt;b&gt; and converts is into corresponding
+	# html <b> based on the configuration presets
 	function filter_html_tags( $p_string ) {
-		global $g_html_tags;
+		$t_html_valid_tags = config_get( 'html_valid_tags' );
 
-		$t_filter_from 	= @array( "/\//", "/</", "/>/" );
-		$t_filter_to 	= @array( "\/", "", "" );
-		//$t_filter_from 	= @array( "\/", "<", ">" );
-		//$t_filter_to 	= @array( "\/", "", "" );
+		if ( OFF == $t_html_valid_tags ||
+			 is_blank( $t_html_valid_tags ) ) {
+			return $p_string;
+		}
 
-		$t_tag_count = count( $g_html_tags );
-		for ($i=0;$i<$t_tag_count;$i++) {
-			$tag = preg_replace( $t_filter_from, $t_filter_to, $g_html_tags[$i] );
+		$tags = explode( ',', $t_html_valid_tags );
 
-			$p_string = preg_replace( "/&lt;($tag)&gt;/i", "<\\1>", $p_string );
+		foreach ( $tags as $tag ) {
+			if ( !is_blank( $tag ) ) {
+				$tag = trim( $tag );
+				$p_string = eregi_replace( "&lt;($tag)[[:space:]]*&gt;", "<\\1>", $p_string );
+				$p_string = eregi_replace( "&lt;\/($tag)[[:space:]]*&gt;", "</\\1>", $p_string );
+				$p_string = eregi_replace( "&lt;($tag)[[:space:]]*\/&gt;", "<\\1 />", $p_string );
+			}
 		}
 
 		return $p_string;
 	}
-
 
 
 	#===================================

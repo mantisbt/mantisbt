@@ -450,15 +450,14 @@
 	############################
 
 	# --- html tags -------------------
-	$g_allow_html_tags		= ON;
+
+	# Set this flag to automatically convert www URLs and
+	# email adresses into clickable links
+	$g_html_make_links		= ON;
 
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
-	$g_html_tags			= array('<p />','<p>','</p>','<li>','</li>','<ul>','</ul>',
-									'<ol>','</ol>','<br />','<br>','<pre>','</pre>',
-									'<i>','</i>','<b>','</b>','<u>','</u>');
-
-	$g_allow_href_tags		= ON;
+	$g_html_valid_tags		= "p, li, ul, ol, br, pre, i, b, u";
 
 	# --- table tags ------------------
 	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)

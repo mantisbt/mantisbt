@@ -14,9 +14,9 @@
 	$f_title		= gpc_get_string( 'title' );
 	$f_description	= gpc_get_string( 'description' );
 
-	$c_file_id		= (integer)$f_file_id;
-	$c_title 		= string_prepare_text( $f_title );
-	$c_description 	= string_prepare_textarea( $f_description );
+	$c_file_id		= db_prepare_int( $f_file_id );
+	$c_title 		= db_prepare_string( $f_title );
+	$c_description 	= db_prepare_string( $f_description );
 
 	$query = "UPDATE $g_mantis_project_file_table
 			SET title='$c_title', description='$c_description'
