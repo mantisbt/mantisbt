@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.33 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bugnote_update.php,v 1.34 2003-02-20 02:49:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,5 +37,5 @@
 
 	bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 
-	print_header_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+	print_success_and_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>

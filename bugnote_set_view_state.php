@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_set_view_state.php,v 1.20 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bugnote_set_view_state.php,v 1.21 2003-02-20 02:49:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,5 +34,5 @@
 
 	bugnote_set_view_state( $f_bugnote_id, $f_private );
 
-	print_header_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+	print_success_and_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>

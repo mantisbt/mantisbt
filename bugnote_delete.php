@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.31 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bugnote_delete.php,v 1.32 2003-02-20 02:49:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,9 +29,9 @@
 	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
 							 lang_get( 'delete_bugnote_button' ) );
 
-	bugnote_delete( $f_bugnote_id );
-
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
-	print_header_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+	bugnote_delete( $f_bugnote_id );
+
+	print_success_and_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>

@@ -9,6 +9,7 @@ Mantis ChangeLog
  * Fix #2964: proj_doc_add.php is empty if document file already exists
  * Fix #2967: Make bugnotes visible while updating bugs (updating, resolving, and closing)
  * Fix #2968: Add query counts to action pages.
+ * Fix #2969: Bug not found error when deleting a bugnote.
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2
