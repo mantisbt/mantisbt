@@ -4,6 +4,10 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: account_prof_delete.php,v 1.16 2002-10-20 20:42:57 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# The specified profile is deleted and the user is redirected to
