@@ -1,4 +1,14 @@
 <?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: account_prefs_inc.php,v 1.19 2002-12-30 09:44:44 jfitzell Exp $
+	# --------------------------------------------------------
+
 	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
 		if ( null === $p_user_id ) {
 			$p_user_id = auth_get_current_user_id();
