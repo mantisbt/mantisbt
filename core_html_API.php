@@ -517,10 +517,10 @@
 		PRINT "<p>";
 		PRINT "<table class=\"width100\" cellspacing=\"1\">";
 		PRINT "<tr>";
-		$t_arr  = explode( ",", $g_status_enum_string );
+		$t_arr  = explode_enum_string( $g_status_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			$t_s = explode( ":", $t_arr[$i] );
+			$t_s = explode_enum_arr( $t_arr[$i] );
 			$t_val = get_enum_element( "status", $t_s[0] );
 
 			$t_color = "#ffffff";

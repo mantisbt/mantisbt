@@ -336,10 +336,10 @@
 	# --------------------
 	# Get the string associated with the $p_enum value
 	function get_enum_to_string( $p_enum_string, $p_num ) {
-		$t_arr = explode( ",", $p_enum_string );
+		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			$t_s = explode( ":", $t_arr[$i] );
+			$t_s = explode_enum_arr( $t_arr[$i] );
 			if ( $t_s[0] == $p_num ) {
 				return $t_s[1];
 			}
@@ -489,7 +489,7 @@
 		$t_extension = $t_ext_array[$last_position];
 
 		# check against disallowed files
-		$t_disallowed_arr =  explode( ",", $g_disallowed_files );
+		$t_disallowed_arr =  explode_enum_string( $g_disallowed_files );
 		foreach ( $t_disallowed_arr as $t_val ) {
 		    if ( $t_val == $t_extension ) {
 		    	return false;
@@ -497,7 +497,7 @@
 		}
 
 		# check against allowed files
-		$t_allowed_arr = explode( ",", $g_allowed_files );
+		$t_allowed_arr = explode_enum_string( $g_allowed_files );
 		# if the allowed list is populated then the file must be in the list.
 		if ( empty( $g_allowed_files ) ) {
 			return true;

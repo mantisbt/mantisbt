@@ -209,7 +209,7 @@
 		global $g_mantis_bug_table;
 
 		$t_category_string = get_enum_string( $g_mantis_bug_table, $p_list );
-	    $t_arr = explode( ",", $t_category_string );
+	    $t_arr = explode_enum_string( $t_category_string );
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( "'", "", $t_arr[$i] );

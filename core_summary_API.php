@@ -15,7 +15,7 @@
 		global 	$g_mantis_bug_table, $g_primary_color1, $g_primary_color2,
 				$g_project_cookie_val, $g_summary_pad;
 
-		$t_arr = explode( ",", $p_enum_string );
+		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
 
 		#checking if it's a per project statistic or all projects
@@ -23,7 +23,7 @@
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		for ($i=0;$i<$enum_count;$i++) {
-			$t_s = explode( ":", $t_arr[$i] );
+			$t_s = explode_enum_arr( $t_arr[$i] );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
