@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.84 2004-02-11 22:16:29 vboctor Exp $
+	# $Id: html_api.php,v 1.85 2004-02-14 01:10:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -236,7 +236,17 @@
 		echo '<tr>';
 			echo '<td class="login-info-left">';
 				if ( current_user_is_anonymous() ) {
-					echo lang_get( 'anonymous' ) . ' | <a href="login_page.php">' . lang_get( 'login_link' ) . '</a>';
+					if ( ! php_version_at_least( '4.1.0' ) ) {
+						global $_SERVER;
+					}
+
+					$t_return_page = $_SERVER['PHP_SELF'];
+					if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+						$t_return_page .=  '?' . $_SERVER['QUERY_STRING'];
+					}
+
+					$t_return_page = string_url(  $t_return_page );
+					echo lang_get( 'anonymous' ) . ' | <a href="login_page.php?return=' . $t_return_page . '">' . lang_get( 'login_link' ) . '</a>';
 					if ( config_get( 'allow_signup' ) == ON ) {
 						echo ' | <a href="signup_page.php">' . lang_get( 'signup_link' ) . '</a>';
 					}
