@@ -6,15 +6,15 @@
 
 	# Italian: Luca Pescatore, l.pescatore@network.it
 	#          Marco Vassura,  m.vassura@itools.it
-
+	#          Stefano Mazzocchi, stefano@apache.org
 ?>
 <?
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
+	$s_all_projects = "Progetti";
+	$s_move_bugs = "Sposta Bugs";
+	$s_operation_successful = "Operazione completata con successo.";
+	$s_date_order = "Formato delle date";
+	$s_print_all_bug_page_link = "Stampa il report";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
@@ -58,11 +58,11 @@
 	$s_new_account_message = "Dopo il login si prega di cambiare la password. Da notare che la password e' salvata in maniera cifrata e neppure lo staff non puo' recuperarla. Nel caso la si dimentichi, e' necessario resettarla.\n\n";
 	$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
 
-	$s_reset_request_msg = "E' stato richiesto un reset della tua password";
-	$s_account_name_msg = "Il Nome del tuo Acount e'";
+	$s_reset_request_msg = "E' stato richiesto un reset della tua password".
+	$s_account_name_msg = "Il Nome del tuo Account e'";
 	$s_news_password_msg = "La tua nuova password";
 
-	$s_new_bug_msg = "Questo nuovo BUG e' stato INSERITO.";
+	$s_new_bug_msg = "Questo nuovo bug e' stato INSERITO.";
 	$s_email_bugnote_msg = "Una nota e' stata inserita a questo bug.";
 	$s_email_resolved_msg = "Il seguente bug e' stato RISOLTO.";
 	$s_email_close_msg = "Il seguente bug e' stato CHIUSO";
@@ -76,7 +76,7 @@
 	$s_email_bug = "ID Bug";
 	$s_email_category = "Categoria";
 	$s_email_reproducibility = "Riproducibilita'";
-	$s_email_severity = "Livello Problematica";
+	$s_email_severity = "Livello di Severita'";
 	$s_email_priority = "Priorita'";
 	$s_email_status = "Stato";
 	$s_email_resolution = "Risoluzione";
@@ -170,7 +170,7 @@
 
 	# bug_close.php3
 	$s_bug_close_msg       = "Il Bug e' stato chiuso...";
-	$s_close_immediately   = "Close immediately:";
+	$s_close_immediately   = "Chiudi immediatamente:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Il Bug e' stato inserito...";
@@ -210,7 +210,7 @@
 	$s_updating_bug_advanced_title = "Aggiorna l'informazione sul Bug";
 	$s_id = "ID";
 	$s_category = "Categoria";
-	$s_severity = "Livello Problematica";
+	$s_severity = "Livello di Severita'";
 	$s_reproducibility = "Riproducibilita'";
 	$s_date_submitted = "Data Inserimento";
 	$s_last_update = "Ultimo Aggiornamento";
@@ -249,19 +249,19 @@
 	$s_bug_notes_title = "Note per i Bug";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Aggiorna la nota sul Bug";
 
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Non sono collegate note a questo Bug.";
 	$s_delete_link = "Elimina";
 	$s_add_bugnote_title = "Inserisci una Nota";
 	$s_add_bugnote_button = "Inserisci Nota";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_bugnote_edit_link = "Modifica";
+	$s_close_bug_button = "Chiudi il Bug";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "La nota sul Bug e' stata aggiornata con successo...";
+	$s_edited_on = "modificata il: ";
 
 	# index.php3
 	$s_click_to_login = "Login";
@@ -289,7 +289,7 @@
 	$s_open_and_reported_to_me = "Aperti e Segnalati a me";
 	$s_newer_news_link = "Nuove News";
 	$s_older_news_link = "Vecchie News";
-	$s_archives = "Archives";
+	$s_archives = "Archivi";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Utente Creato";
@@ -305,8 +305,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Nascondi Disabilitati";
 	$s_filter_button = "Filtro";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_manage_users_link = "Gestisci Utenti";
+	$s_manage_projects_link = "Gestisci Progeti";
 	$s_create_new_account_link = "Crea Utente";
 	$s_projects_link = "Progetti";
 	$s_documentation_link = "Documentazione";
@@ -366,7 +366,7 @@
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Inserisci Progetto";
 	$s_access_threshold = "Livello di Accesso";
-	$s_upload_file_path = "Percorso di Upload File";
+	$s_upload_file_path = "Percorso di upload dei file";
 	$s_add_project_button = "Inserisci Progetto";
 	$s_projects_title = "Progetti";
 	$s_name = "Nome";
@@ -461,14 +461,14 @@
 	$s_news_updated_msg = "News Aggiornata...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "Indietro";
 
 	# proj_doc_add.php3
 	$s_file_uploaded_msg = "File uploadato con successo";
 
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Upload File";
-	$s_title = "Title";
+	$s_title = "Titolo";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "File del progetto eliminato";
@@ -478,7 +478,7 @@
 
 	# proj_doc_edit_page.php3
 	$s_filename = "Filename";
-	$s_file_update_button = "Update File";
+	$s_file_update_button = "Aggiorna File";
 	$s_file_delete_button = "Eliminazione File";
 
 	# proj_doc_page.php3
@@ -500,13 +500,13 @@
 	$s_remove_user_sure_msg = "Sicuro di voler eliminare questo utente?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
+	$s_create_user_message = "NOTA: L'utente deve essere gia' stato inserito prima di poter essere aggiunto al progetto";
+	$s_automatic_access_level = "Livello di accesso automatico";
 	$s_add_user_title = "Aggiungi utente al progetto";
 	$s_add_user_button = "Aggiungi Utente";
 	$s_project_selection_title = "Selezione Progetto";
 	$s_remove_link = "Rimuovi";
-	$s_automatic_access = "Users With Automatic Access";
+	$s_automatic_access = "Utenti con acceso automatico";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Utente aggiornato con successo";
@@ -602,8 +602,8 @@
 	# view_all_inc.php
 	$s_none = "none";
 	$s_search ="Ricerca";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_view_prev_link = "Guarda Successivo";
+	$s_view_next_link = "Guarda Precedente";
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Visualizzazione Semplice";
@@ -613,7 +613,7 @@
 	$s_update_bug_button = "Aggiorna il Bug";
 	$s_bug_assign_button    = "Assegnami il lavoro";
 	$s_reopen_bug_button = "Riapri il Bug";
-	$s_attached_files = "Attached Files";
+	$s_attached_files = "File in attachment";
 
 	# view_bug_inc.php
 
