@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.94 2004-08-03 13:47:49 vboctor Exp $
+	# $Id: print_api.php,v 1.95 2004-08-04 16:25:58 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -620,7 +620,7 @@
 			echo '<select name="' . $p_select_label . '">';
 			foreach ( $t_enum_list as $key => $val ) {
 				echo "<option value=\"$key\"";
-				check_selected( $val, $p_current_value );
+				check_selected( $key, $p_current_value );
 				echo ">$val</option>";
 			}
 			echo '</select>';
