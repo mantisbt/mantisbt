@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.16 2005-01-29 13:56:18 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.17 2005-02-08 16:11:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -154,7 +154,7 @@
 		}
 
 		$t_columns[] = 'priority';
-		$t_columns[] = 'bug_id';
+		$t_columns[] = 'id';
 
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 		if ( ON == $t_enable_sponsorship ) {

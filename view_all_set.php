@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.43 2005-02-07 22:04:10 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.44 2005-02-08 16:11:19 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -120,8 +120,8 @@
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
 	$f_sticky_issues		= gpc_get_bool( 'sticky_issues' );
 	# sort direction
-	$f_sort					= gpc_get_string( 'sort', '' );
-	$f_dir					= gpc_get_string( 'dir', '' );
+	$f_sort_d					= gpc_get_string( 'sort', '' );
+	$f_dir_d					= gpc_get_string( 'dir', '' );
 	$f_sort_1				= gpc_get_string( 'sort_1', 'last_updated' );
 	$f_dir_1				= gpc_get_string( 'dir_1', 'DESC' );
 	$f_sort_2				= gpc_get_string( 'sort_2', '' );
@@ -166,6 +166,8 @@
 	
 	if ( $f_sticky_issues ) {
 		$f_sticky_issues = 'on';
+	} else {
+		$f_sticky_issues = 'off';
 	}
 
 	if ( $f_type < 0 ) {
@@ -181,8 +183,8 @@
 	
 	# combine sort settings 
 	#  (f_sort overrides f_sort_1 if set to keep old sorting code working in view_all_bug_inc)
-	$f_sort = ( ( $f_sort != "" ) ? $f_sort : $f_sort_1 ) . ( ( $f_sort_2 != "" ) ? "," . $f_sort_2 : "" );
-	$f_dir = ( ( $f_dir != "" ) ? $f_dir : $f_dir_1 ) . ( ( $f_dir_2 != "" ) ? "," . $f_dir_2 : "" );
+	$f_sort = ( ( $f_sort_d != "" ) ? $f_sort_d : $f_sort_1 ) . ( ( $f_sort_2 != "" ) ? "," . $f_sort_2 : "" );
+	$f_dir = ( ( $f_dir_d != "" ) ? $f_dir_d : $f_dir_1 ) . ( ( $f_dir_2 != "" ) ? "," . $f_dir_2 : "" );
 
 	# -1 is a special case stored query: it means we want to reset our filter
 	if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {

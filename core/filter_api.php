@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.80 2005-02-07 22:04:10 thraxisp Exp $
+	# $Id: filter_api.php,v 1.81 2005-02-08 16:11:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -147,10 +147,7 @@
 				} else {
 					$c_reporter_id = db_prepare_int( $t_filter_member );
 					if ( META_FILTER_MYSELF == $c_reporter_id ) {
-						if ( access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-							$c_reporter_id = $c_user_id;
-							array_push( $t_clauses, $c_reporter_id );
-						}
+						array_push( $t_clauses, $c_user_id );
 					} else {
 						array_push( $t_clauses, $c_reporter_id );
 					}
@@ -189,10 +186,7 @@
 				} else {
 					$c_handler_id = db_prepare_int( $t_filter_member );
 					if ( META_FILTER_MYSELF == $c_handler_id ) {
-						if ( access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-							$c_handler_id = $c_user_id;
-							array_push( $t_clauses, $c_handler_id );
-						}
+						array_push( $t_clauses, $c_user_id );
 					} else {
 						array_push( $t_clauses, $c_handler_id );
 					}
@@ -487,10 +481,7 @@
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
 				$c_user_monitor = db_prepare_int( $t_filter_member );
 				if ( META_FILTER_MYSELF == $c_user_monitor ) {
-					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-						$c_user_monitor = $c_user_id;
-						array_push( $t_clauses, $c_user_id );
-					}
+					array_push( $t_clauses, $c_user_id );
 				} else {
 					array_push( $t_clauses, $c_user_monitor );
 				}
@@ -1406,10 +1397,12 @@
 				<input type="hidden" name="view_state" value="<?php echo $t_filter['view_state'];?>" />
 			</td>
 			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
-				<?php PRINT $t_filter['sticky_issues']; ?>
+				<?php PRINT ($t_filter['sticky_issues'] ? 'on' : 'off' ) ?>
+				<input type="hidden" name="sticky_issues" value="<?php echo ($t_filter['sticky_issues'] ? 'on' : 'off' );?>" />
 			</td>
 			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
 				<?php PRINT $t_filter['highlight_changed']; ?>
+				<input type="hidden" name="highlight_changed" value="<?php echo $t_filter['highlight_changed'];?>" />
 			</td>
 			<td class="small-caption" valign="top" colspan="4" id="do_filter_by_date_filter_target">
 							<?php
@@ -1582,8 +1575,8 @@
 
 					if ( isset( $t_sort_fields[1] ) ) {
 						echo ", " . string_get_field_name( $t_sort_fields[1] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[1] ) );
-						echo "<input type=\"hidden\" name=\"sort_1\" value=\"$t_sort_fields[1]\" />";
-						echo "<input type=\"hidden\" name=\"dir_1\" value=\"$t_dir_fields[1]\" />";
+						echo "<input type=\"hidden\" name=\"sort_2\" value=\"$t_sort_fields[1]\" />";
+						echo "<input type=\"hidden\" name=\"dir_2\" value=\"$t_dir_fields[1]\" />";
 					}
 				?>
 			</td>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.3 2005-01-29 02:26:49 thraxisp Exp $
+	# $Id: columns_api.php,v 1.4 2005-02-08 16:11:21 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 		echo '<td> &nbsp; </td>';
 	}
 
-	function print_column_title_bug_id( $p_sort, $p_dir, $p_print = false ) {
+	function print_column_title_id( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
 		print_view_bug_sort_link( lang_get( 'id' ), 'id', $p_sort, $p_dir, $p_print );
 		print_sort_icon( $p_dir, $p_sort, 'id' );
@@ -134,7 +134,7 @@
 		echo '</td>';
 	}
 
-	function print_column_bug_id( $p_row, $p_print = false ) {
+	function print_column_id( $p_row, $p_print = false ) {
 		echo '<td>';
 		print_bug_link( $p_row['id'], false );
 		echo '</td>';

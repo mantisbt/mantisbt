@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.66 2005-02-07 22:04:18 thraxisp Exp $
+	# $Id: string_api.php,v 1.67 2005-02-08 16:11:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -594,7 +594,8 @@
 	function string_get_field_name( $p_string ) {
 	
 		$t_map = array(
-				'last_updated' => 'last_update'
+				'last_updated' => 'last_update',
+				'id' => 'email_bug'
 				);
 				
 		$t_string = $p_string;
