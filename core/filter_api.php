@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.45 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: filter_api.php,v 1.46 2004-07-11 05:43:38 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -213,7 +213,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_severity'] as $t_filter_member ) {
-				$c_show_severity = db_prepare_string( $t_filter_member );
+				$c_show_severity = db_prepare_int( $t_filter_member );
 				array_push( $t_clauses, "($t_bug_table.severity='$c_show_severity')" );
 			}
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
@@ -266,7 +266,7 @@
 			$t_clauses = array();
 
 			foreach( $t_desired_statuses as $t_filter_member ) {
-				$c_show_status = db_prepare_string( $t_filter_member );
+				$c_show_status = db_prepare_int( $t_filter_member );
 				array_push( $t_clauses, "($t_bug_table.status='$c_show_status')" );
 			}
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
@@ -286,7 +286,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_resolution'] as $t_filter_member ) {
-				$c_show_resolution = db_prepare_string( $t_filter_member );
+				$c_show_resolution = db_prepare_int( $t_filter_member );
 				array_push( $t_clauses, "($t_bug_table.resolution='$c_show_resolution')" );
 			}
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
@@ -385,7 +385,7 @@
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
-				$c_user_monitor = db_prepare_string( $t_filter_member );
+				$c_user_monitor = db_prepare_int( $t_filter_member );
 				if ( META_FILTER_MYSELF == $c_user_monitor ) {
 					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 						$c_user_monitor = auth_get_current_user_id();
@@ -1626,7 +1626,7 @@
 			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date' );
 		}
 		if ( !isset( $p_filter_arr['view_state'] ) ) {
-			$p_filter_arr['view_state'] = gpc_get_string( 'view_state', 'any' );
+			$p_filter_arr['view_state'] = gpc_get_int( 'view_state', '' );
 		}
 
 		$t_custom_fields 		= custom_field_get_ids();
@@ -1642,21 +1642,41 @@
 			}
 		}
 
-		$t_multi_select_list = array( 'show_category', 'show_severity', 'show_status', 'reporter_id',
-										'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields',
-										'fixed_in_version', 'user_monitor' );
-		foreach( $t_multi_select_list as $t_multi_field_name ) {
+		$t_multi_select_list = array( 'show_category' => 'string',
+									  'show_severity' => 'int',
+									  'show_status' => 'int',
+									  'reporter_id' => 'int',
+									  'handler_id' => 'int',
+									  'show_resolution' => 'int',
+									  'show_build' => 'string',
+									  'show_version' => 'string',
+									  'hide_status' => 'int',
+									  'fixed_in_version' => 'string',
+									  'user_monitor' => 'int' );
+		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
 				if ( 'hide_status' == $t_multi_field_name ) {
-					$p_filter_arr[$t_multi_field_name] = config_get( 'hide_status_default' );
+					$p_filter_arr[$t_multi_field_name] = array( config_get( 'hide_status_default' ) );
 				} else if ( 'custom_fields' == $t_multi_field_name ) {
-					$p_filter_arr[$t_multi_field_name] = $f_custom_fields_data;
+					$p_filter_arr[$t_multi_field_name] = array( $f_custom_fields_data );
 				} else {
 					$p_filter_arr[$t_multi_field_name] = array( "any" );
 				}
-			}
-			if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
-				$p_filter_arr[$t_multi_field_name] = array( $p_filter_arr[$t_multi_field_name] );
+			} else {
+				if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
+					$p_filter_arr[$t_multi_field_name] = array( $p_filter_arr[$t_multi_field_name] );
+				}
+				$t_checked_array = array();
+				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
+					if ( 'string' == $t_multi_field_type ) {
+						$t_checked_array[] = db_prepare_string( $t_filter_value );
+					} else if ( 'int' == $t_multi_field_type ) {
+						$t_checked_array[] = db_prepare_int( $t_filter_value );
+					} else if ( 'array' == $t_multi_field_type ) {
+						$t_checked_array[] = $t_filter_value;
+					}
+				}
+				$p_filter_arr[$t_multi_field_name] = $t_checked_array;
 			}
 		}
 
@@ -1664,9 +1684,15 @@
 			foreach( $t_custom_fields as $t_cfid ) {
 				if ( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 					$p_filter_arr['custom_fields'][$t_cfid] = array( "any" );
-				}
-				if ( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
-					$p_filter_arr['custom_fields'][$t_cfid] = array( $p_filter_arr['custom_fields'][$t_cfid] );
+				} else {
+					if ( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+						$p_filter_arr['custom_fields'][$t_cfid] = array( $p_filter_arr['custom_fields'][$t_cfid] );
+					}
+					$t_checked_array = array();
+					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
+						$t_checked_array[] = db_prepare_string( $t_filter_value );
+					}
+					$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;
 				}
 			}
 		}
