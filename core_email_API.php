@@ -449,11 +449,11 @@
 			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 			#exit;
 
-			echo $t_recipient."<br>";
+			/*echo $t_recipient."<br>";
 			echo nl2br($t_headers)."<br>";
 			echo $t_subject."<br>";
 			echo nl2br($t_message)."<br>";
-			exit;
+			exit;*/
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {
