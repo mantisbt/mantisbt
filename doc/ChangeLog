@@ -99,6 +99,9 @@ Mantis ChangeLog
  * Replaced '/' with DIRECTORY_SEPARATOR throughout to make things cross-platform
  * Prevent an unauthorized user from deleting a bug by modifying the URL
  * Fixed bug where upload paths with \'s in them kept getting escaped over and over
+ * Pulled PHP compatibility code out into core_php_API.php
+ * Removed $g_register_globals variable and just check the actual value of the PHP config variable
+ * Added core_error_API.php with a new pretty error handler and error_string() to obtain internationalized error strings
 
 2002.08.19  -  0.17.4a
  * Fixed the fix of the ambigious column problem
