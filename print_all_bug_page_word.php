@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.47 2004-06-30 22:30:01 prichards Exp $
+	# $Id: print_all_bug_page_word.php,v 1.48 2004-07-07 11:44:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,7 +32,6 @@
 	$f_offset		= gpc_get_int( 'offset', 0 );
 	$f_export		= gpc_get_string( 'export' );
 	$f_show_flag	= gpc_get_bool( 'show_flag' );
-	$t_project_id 	= helper_get_current_project( );
 
 	# word or html export
 	if ( $f_type_page != 'html' ) {
@@ -96,7 +95,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$bugnote_count = bug_get_bugnote_count( $v_id );
 
 		# grab the project name
-		$project_name = project_get_field( $v_project_id, 'name' );
+		$t_project_name = project_get_field( $v_project_id, 'name' );
 
 		# bug text infos
 		$query3 = "SELECT *
@@ -155,7 +154,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_id ?>
 	</td>
 	<td class="print">
-		<?php echo $v_category ?>
+		<?php echo "[$t_project_name] $v_category" ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'severity', $v_severity ) ?>
@@ -275,7 +274,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print" colspan="4">&nbsp;</td>
 </tr>
 <?php
-$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+$t_related_custom_field_ids = custom_field_get_linked_ids( $v_project_id );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 ?>
