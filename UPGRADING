@@ -19,9 +19,12 @@ and bugs are associated with the first project_id (0000001).  The first project
 defaults  to mantis but feel free to rename it.  DO NOT DELETE IT.  If you have 
 no projects in your database you will not be able to login.
 
-You will want to run the upgrade.php3 file. Just type it into the url field.
+You will want to run the upgrade.php3 (or upgrade.php file if you ran the php4 
+filename converter) file. Just type it into the url field.
+
 Hopefully everything goes well with no errors.  If you don't worry about the 
-date then you can just run the queries in db_upgrade.sql
+dates being preserved then you can just run the queries in db_upgrade.sql by 
+hand instead.
 
 If you have existing categories they will be converted to varchar(32) in each
 bug report.  To make sure that you can index these correctly you will need to
@@ -31,6 +34,9 @@ categories to your project.  You can access this from via
 Manage->Projects->Edit.  Same thing goes for versions.
 
 News posts with a project_id=0000000 are sitewide posts (and vice versa)
+
+If you experience problems with emailing you should take a look at this page:
+http://www.php.net/manual/en/function.mail.php
 
 # =================
 # 0.11.x to 0.12.0

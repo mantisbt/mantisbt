@@ -186,7 +186,7 @@ PRINT "UPGRADED USER";
 <p>
 Upgrading your Mantis version from 0.12.x and 0.13.x to 0.14.0
 <p>
-<a href="upgrade.php3?f_action=upgrade">Click here to upgrade</a>
+<a href="<? echo $PHP_SELF ?>?f_action=upgrade">Click here to upgrade</a>
 <? } else { ?>
 <p>**** Upgrade is complete.
 <? } ?>
