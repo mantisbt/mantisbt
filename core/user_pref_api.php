@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.3 2002-10-19 04:26:25 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.4 2002-10-20 22:15:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -276,11 +276,13 @@
 		$row = user_pref_cache_row( $p_user_id, $p_project_id, false );
 
 		# If the user has no preferences for the given project
-		if ( false === $row && 0 != $p_proect_id ) {
-			# Try to get the prefs for project 0 (the defaults)
-			$row = user_pref_cache_row( $p_user_id, 0, false );
+		if ( false === $row ) {
+			if ( 0 != $p_project_id ) {
+				# Try to get the prefs for project 0 (the defaults)
+				$row = user_pref_cache_row( $p_user_id, 0, false );
+			}
 
-			# If the user doesn't even have default preferences
+			# If $row is still false (the user doesn't have default preferences)
 			if ( false === $row ) {
 				# We use an empty array
 				$row = array(); 
