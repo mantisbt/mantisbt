@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.6 2002-08-29 09:47:17 jfitzell Exp $
+	# $Id: config_api.php,v 1.7 2002-10-18 21:04:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,10 +32,10 @@
 			return $GLOBALS['g_'.$p_option];
 		} else {
 			# unless we were allowing for the option not to exist by passing
-			#  a default, trigger a NOTICE
+			#  a default, trigger a WARNING
 			if ( null == $p_default ) { 
-				error_parameters($p_option);
-				trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, NOTICE );
+				error_parameters( $p_option );
+				trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
 			}
 			return $p_default;
 		}
