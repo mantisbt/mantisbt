@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.83 2004-05-24 12:45:40 vboctor Exp $
+	# $Id: email_api.php,v 1.84 2004-05-26 03:54:28 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -773,7 +773,7 @@
 
 			if ( isset( $p_visible_bug_data['sponsorships'] ) ) {
 				foreach ( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
-					$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_sponsorship->date_added ) );
+					$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_sponsorship->date_submitted ) );
 
 					$t_message .= $t_date_added . ': ';
 					$t_message .= user_get_name( $t_sponsorship->user_id );
@@ -881,9 +881,7 @@
 		$t_bug_data['email_summary'] = $row['summary'];
 		$t_bug_data['email_description'] = $row['description'];
 
-		if ( OFF != config_get( 'email_set_category' ) ) {
-			$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $row['category'];
-		}
+		$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $row['category'];
 
 		$t_bug_data['custom_fields'] = custom_field_get_linked_fields( $p_bug_id, $t_user_access_level );
 		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level );
