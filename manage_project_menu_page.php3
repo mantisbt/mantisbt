@@ -55,12 +55,12 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Add Project</b>
+			<b><? echo $s_add_project_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Project Name
+			<? echo $s_project_name?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_name size=64 maxlength=128>
@@ -68,7 +68,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Status
+			<? echo $s_status ?>
 		</td>
 		<td>
 			<select name=f_status>
@@ -78,16 +78,16 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			View Status
+			<? echo $s_view_status ?>
 		</td>
 		<td>
-			<input type=radio name=f_view_state value="public" CHECKED> public
-			<input type=radio name=f_view_state value="private"> private
+			<input type=radio name=f_view_state value="public" CHECKED> <? echo $s_public ?>
+			<input type=radio name=f_view_state value="private"> <? echo $s_private ?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Description
+			<? echo $s_description ?>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=5></textarea>
@@ -105,48 +105,6 @@
 </table>
 </div>
 
-<!--
-<p>
-<div align=center>
-<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
-	<form method=post action="<? echo $g_manage_project_edit_page ?>">
-	<tr>
-		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_project_selection_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td align=center colspan=2>
-			<input type=radio name=f_action value="edit" CHECKED> Edit Project
-			<input type=radio name=f_action value="delete"> Delete Project
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
-		<td width=25%>
-			<? echo $s_projects ?>
-		</td>
-		<td width=75%>
-			<select name=f_project_id>
-				<? print_projects_option_list() ?>
-			</select>
-		</td>
-	</tr>
-	</tr>
-	<tr>
-		<td align=center colspan=2>
-			<input type=submit value="Submit">
-		</td>
-	</tr>
-	</form>
-	</table>
-	</td>
-</tr>
-</table>
-</div>-->
-
 <p>
 <div align=center>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -155,24 +113,24 @@
 	<table width=100%>
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Projects</b>
+			<b><? echo $s_projects_title ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<?echo $g_category_title_color2 ?>>
 		<td width=15%>
-			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>">Name</a></b>
+			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>"><? echo $s_name ?></a></b>
 		</td>
 		<td width=10%>
-			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>">Status</a></b>
+			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>"><? echo $s_status ?></a></b>
 		</td>
 		<td width=8%>
-			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>">Enabled</a></b>
+			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>"><? echo $s_enabled ?></a></b>
 		</td>
 		<td width=10%>
-			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>">View State</a></b>
+			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>"><? echo $s_view_status ?></a></b>
 		</td>
 		<td width=42%>
-			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>">Description</a></b>
+			<b><a href="<? echo $g_project_menu_page ?>?f_sort=name&f_dir=<? echo $f_dir?>"><? echo $s_description ?></a></b>
 		</td>
 		<td width=4%>
 
@@ -216,7 +174,7 @@
 			<? echo $v_description ?>
 		</td>
 		<td>
-			<a href="<? echo $g_manage_project_edit_page?>?f_project_id=<? echo $v_id ?>">edit</a>
+			<a href="<? echo $g_manage_project_edit_page?>?f_project_id=<? echo $v_id ?>"><? echo $s_edit_link ?></a>
 		</td>
 	</tr>
 	<?

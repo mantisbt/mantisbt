@@ -15,13 +15,15 @@
 		exit;
 	}
 
-	### Add item
-	$query = "INSERT
-			INTO $g_mantis_project_table
-			( id, name, status, enabled, view_state, description )
-			VALUES
-			( null, '$f_name', '$f_status', 'on', '$f_view_state', '$f_description' )";
-    $result = db_query( $query );
+	if ( !empty( $f_name ) ) {
+		### Add item
+		$query = "INSERT
+				INTO $g_mantis_project_table
+				( id, name, status, enabled, view_state, description )
+				VALUES
+				( null, '$f_name', '$f_status', 'on', '$f_view_state', '$f_description' )";
+	    $result = db_query( $query );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -45,7 +47,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Project added...<p>";
+		PRINT "$s_project_added_msg<p>";
 	}
 	### FAILURE
 	else {

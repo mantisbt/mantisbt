@@ -15,7 +15,8 @@
 		exit;
 	}
 
-	if ( !empty( $f_category ) ) {
+	### check for empty case or duplicate
+	if ( !empty( $f_category )&&( is_not_duplicate_category( $f_category ) ) ) {
 		### insert category
 		$query = "INSERT
 				INTO $g_mantis_project_category_table
@@ -46,12 +47,12 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Category Added<p>";
+		PRINT "$s_category_added_msg<p>";
 	}
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

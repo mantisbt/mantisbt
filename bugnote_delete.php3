@@ -15,7 +15,6 @@
 			WHERE id='$f_bug_id'";
 	$result = db_query($query);
 
-	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";

@@ -10,7 +10,6 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### Update all fields
-	### BUG IN MYSQL (I think) makes me need to update the date submitted as well
     $query = "UPDATE $g_mantis_bug_table
     		SET category='$f_category', severity='$f_severity',
     			reproducibility='$f_reproducibility',

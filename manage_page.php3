@@ -48,7 +48,7 @@
 <p>
 <div align=center>
 	[ <a href="<? echo $g_path.$g_manage_create_user_page ?>"><? echo $s_create_new_account_link ?></a> ]
-	[ <a href="<? echo $g_path.$g_manage_project_menu_page ?>"><? echo "Projects" ?></a> ]
+	[ <a href="<? echo $g_path.$g_manage_project_menu_page ?>"><? echo $s_projects_link ?></a> ]
 <!--
 	[ <a href="<? echo $g_path.$g_manage_project_user_menu_page ?>"><? echo "Project Users" ?></a> ]
 -->
@@ -63,7 +63,7 @@
 	<table width=100%>
 	<tr>
 		<td colspan=8 bgcolor=<? echo $g_table_title_color ?>>
-			<b>New Accounts (1 Week)</b>
+			<b><? echo $s_new_accounts_title ?> (<? echo $s_1_week_title ?>)</b>
 		</td>
 	</tr>
 	<tr>
@@ -94,6 +94,7 @@
 	</td>
 </tr>
 </table>
+</div>
 
 <p>
 <div align=center>
@@ -103,7 +104,7 @@
 	<table width=100%>
 	<tr>
 		<td colspan=8 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Never Logged In</b>
+			<b><? echo $s_never_logged_in_title ?></b>
 		</td>
 	</tr>
 	<tr>
@@ -133,6 +134,7 @@
 	</td>
 </tr>
 </table>
+</div>
 
 <p>
 <div align=center>

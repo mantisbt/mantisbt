@@ -14,7 +14,6 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -36,7 +35,7 @@
 	<table width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Project Category</b>
+			<b><? echo $s_edit_project_category_title ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
@@ -49,14 +48,14 @@
 	</tr>
 	<tr align=center bgcolor=<? echo $g_white_color ?>>
 		<td width=50%>
-			<input type=submit value="Update Category">
+			<input type=submit value="<? echo $s_update_category_button ?>">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_manage_project_category_delete_page ?>">
 		<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 		<input type=hidden name=f_category value="<? echo $f_category ?>">
 		<td width=50%>
-			<input type=submit value="Delete Category">
+			<input type=submit value="<? echo $s_delete_category_button ?>">
 		</td>
 		</form>
 	</tr>

@@ -40,7 +40,6 @@
 			( null, '$f_id', '$u_id','$t_bugnote_text_id',NOW(), NOW() )";
 	$result = db_query( $query );
 
-	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
@@ -97,7 +96,7 @@
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

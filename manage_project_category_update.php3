@@ -15,11 +15,14 @@
 		exit;
 	}
 
-	### update category
-	$query = "UPDATE $g_mantis_project_category_table
-			SET category='$f_category'
-			WHERE category='$f_orig_category' AND project_id='$f_project_id'";
-	$result = db_query( $query );
+	### check for duplicate
+	if ( is_not_duplicate_category( $f_category ) ) {
+		### update category
+		$query = "UPDATE $g_mantis_project_category_table
+				SET category='$f_category'
+				WHERE category='$f_orig_category' AND project_id='$f_project_id'";
+		$result = db_query( $query );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -42,12 +45,12 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Category Updated<p>";
+		PRINT "$s_category_updated_msg<p>";
 	}
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

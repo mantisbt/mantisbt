@@ -15,7 +15,8 @@
 		exit;
 	}
 
-	if ( !empty( $f_version ) ) {
+	### check for empty case or duplicate
+	if ( !empty( $f_version )&&( is_not_duplicate_version( $f_version ) ) ) {
 		### insert version
 		$query = "INSERT
 				INTO $g_mantis_project_version_table
@@ -46,12 +47,12 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Version Added<p>";
+		PRINT "$s_version_added_msg<p>";
 	}
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

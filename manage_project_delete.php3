@@ -66,7 +66,7 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Project successfully removed...<p>";
+		PRINT "$s_project_deleted_msg<p>";
 	}
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";

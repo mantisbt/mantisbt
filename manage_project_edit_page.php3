@@ -42,6 +42,12 @@
 
 <p>
 <div align=center>
+	[ <a href="<? echo $g_path.$g_manage_project_menu_page ?>"><? echo $s_projects_link ?></a> ]
+</div>
+
+
+<p>
+<div align=center>
 <table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <form method=post action="<? echo $g_manage_project_update ?>">
 <input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
@@ -50,12 +56,12 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Project</b>
+			<b><? echo $s_edit_project_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			Project Name
+			<? echo $s_project_name ?>
 		</td>
 		<td width=75%>
 			<input type=text name=f_name size=64 maxlength=128 value="<? echo $v_name ?>">
@@ -63,7 +69,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Status
+			<? echo $s_status ?>
 		</td>
 		<td>
 			<select name=f_status>
@@ -73,7 +79,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Enabled
+			<? echo $s_enabled ?>
 		</td>
 		<td>
 			<input type=checkbox name=f_enabled <? if ( $v_enabled=="on" ) echo "CHECKED" ?>>
@@ -81,16 +87,16 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			View Status
+			<? echo $s_view_status ?>
 		</td>
 		<td>
-			<input type=radio name=f_view_state value="public" <? if ($v_view_state=="public") echo "CHECKED" ?>> public
-			<input type=radio name=f_view_state value="private" <? if ($v_view_state=="private") echo "CHECKED" ?>> private
+			<input type=radio name=f_view_state value="public" <? if ($v_view_state=="public") echo "CHECKED" ?>> <? echo $s_public ?>
+			<input type=radio name=f_view_state value="private" <? if ($v_view_state=="private") echo "CHECKED" ?>> <? echo $s_private ?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Description
+			<? echo $s_description ?>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=5><? echo $v_description ?></textarea>
@@ -98,7 +104,7 @@
 	</tr>
 	<tr>
 		<td align=center bgcolor=<? echo $g_white_color ?> colspan=6>
-			<input type=submit value="Update Project">
+			<input type=submit value="<? echo $s_update_project_button ?>">
 		</td>
 	</tr>
 	</table>
@@ -116,15 +122,15 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Categories and Versions</b>
+			<b><? echo $s_categories_and_versions ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<? echo $g_category_title_color2 ?>>
 		<td width=50%>
-			Category
+			<? echo $s_categories ?>
 		</td>
 		<td width=50%>
-			Versions
+			<? echo $s_versions ?>
 		</td>
 	</tr>
 	<tr valign=top>
@@ -153,7 +159,7 @@
 						echo $t_category;
 					PRINT "</td>";
 					PRINT "<td width=25% align=center>";
-						PRINT "<a href=\"$g_manage_project_category_edit_page?f_project_id=$f_project_id&f_category=$t_category\">Edit</a>";
+						PRINT "<a href=\"$g_manage_project_category_edit_page?f_project_id=$f_project_id&f_category=$t_category\">$s_edit_link</a>";
 					PRINT "</td>";
 				PRINT "</tr>";
 			}
@@ -185,7 +191,7 @@
 						echo $t_version;
 					PRINT "</td>";
 					PRINT "<td width=25% align=center>";
-						PRINT "<a href=\"$g_manage_project_version_edit_page?f_project_id=$f_project_id&f_version=$t_version\">Edit</a>";
+						PRINT "<a href=\"$g_manage_project_version_edit_page?f_project_id=$f_project_id&f_version=$t_version\">$s_edit_link</a>";
 					PRINT "</td>";
 				PRINT "</tr>";
 			}
@@ -197,13 +203,13 @@
 	<form method=post action="<? echo $g_manage_project_category_add ?>">
 	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 		<td align=center bgcolor=<? echo $g_white_color ?>>
-			<input type=text name=f_category size=32 maxlength=32><input type=submit value="Add Category">
+			<input type=text name=f_category size=32 maxlength=32><input type=submit value="<? echo $s_add_category_button ?>">
 		</td>
 	</form>
 	<form method=post action="<? echo $g_manage_project_version_add ?>">
 	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 		<td align=center bgcolor=<? echo $g_white_color ?>>
-			<input type=text name=f_version size=32 maxlength=32><input type=submit value="Add Version">
+			<input type=text name=f_version size=32 maxlength=32><input type=submit value="<? echo $s_add_version_button ?>">
 		</td>
 	</form>
 	</tr>

@@ -9,7 +9,6 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";

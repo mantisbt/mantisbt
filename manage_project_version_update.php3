@@ -15,11 +15,14 @@
 		exit;
 	}
 
-	### update version
-	$query = "UPDATE $g_mantis_project_version_table
-			SET version='$f_version'
-			WHERE version='$f_orig_version' AND project_id='$f_project_id'";
-	$result = db_query( $query );
+	### check for duplicate
+	if ( is_not_duplicate_version( $f_version ) ) {
+		### update version
+		$query = "UPDATE $g_mantis_project_version_table
+				SET version='$f_version'
+				WHERE version='$f_orig_version' AND project_id='$f_project_id'";
+		$result = db_query( $query );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -42,12 +45,12 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Version Updated<p>";
+		PRINT "$s_version_updated_msg<p>";
 	}
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

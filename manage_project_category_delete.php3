@@ -42,12 +42,12 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "Category Deleted<p>";
+		PRINT "$s_category_deleted_msg<p>";
 	}
 	### OK!!!
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		PRINT $query;
+		echo $query;
 	}
 ?>
 <p>

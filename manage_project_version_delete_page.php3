@@ -25,12 +25,12 @@
 <div align=center>
 <hr size=1 width=50%>
 
-Are you sure you want to delete this version?
+<? echo $s_version_delete_sure ?>
 
 <form method=post action="<? echo $g_manage_project_version_delete ?>">
 	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 	<input type=hidden name=f_version value="<? echo $f_version ?>">
-	<input type=submit value="Delete Version">
+	<input type=submit value="<? echo $s_delete_version_button ?>">
 </form>
 
 <hr size=1 width=50%>

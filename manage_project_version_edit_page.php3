@@ -35,7 +35,7 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Project Version</b>
+			<b><? echo $s_edit_project_version_title ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
@@ -48,14 +48,14 @@
 	</tr>
 	<tr>
 		<td align=center bgcolor=<? echo $g_white_color ?>>
-			<input type=submit value="Update Version">
+			<input type=submit value="<? echo $s_update_version_button ?>">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_manage_project_version_delete_page ?>">
 		<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 		<input type=hidden name=f_version value="<? echo $f_version ?>">
 		<td>
-			<input type=submit value="Delete Version">
+			<input type=submit value="<? echo $s_delete_version_button ?>">
 		</td>
 		</form>
 	</tr>
