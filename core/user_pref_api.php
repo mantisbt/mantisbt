@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.20 2004-08-13 02:03:53 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.21 2005-01-30 22:13:09 prichards Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -214,18 +214,24 @@
 
 		$t_user_pref_table	= config_get( 'mantis_user_pref_table' );
 		$t_vars				= get_object_vars( $p_prefs );
-
+		
 		$t_pairs = array();
 
 		foreach ( $t_vars as $var => $val ) {
-			array_push( $t_pairs, "$var = '" . db_prepare_string( $p_prefs->$var ) . '\'' );
+			if( is_bool( $p_prefs->$var ) ) {
+				array_push( $t_pairs, "$var = " . db_prepare_bool( $p_prefs->$var ) );
+			} else if( is_int( $p_prefs->$var ) ) {
+				array_push( $t_pairs, "$var = " . db_prepare_int( $p_prefs->$var ) );
+			} else {
+				array_push( $t_pairs, "$var = '" . db_prepare_string( $p_prefs->$var ) . '\'' );
+			}
 		}
 
 		$t_pairs_string = implode( ', ', $t_pairs );
 
 	    $query = "UPDATE $t_user_pref_table
 				  SET $t_pairs_string
-				  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
+				  WHERE user_id=$c_user_id AND project_id=$c_project_id";
 		db_query( $query );
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
