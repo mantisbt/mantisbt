@@ -66,6 +66,7 @@
 
 			# use this instead of delete;
 			# in windows replace with system("del $t_diskfile");
+			chmod( $t_diskfile, 0775 );
 			unlink( $t_diskfile );
 		}
 	}
