@@ -52,7 +52,15 @@
 		<?php echo $s_email ?>:
 	</td>
 	<td>
-		<input type="text" name="f_email" size="32" maxlength="64" />
+	<?php
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
+		if ( $t_limit_email_domain ) {
+			echo '<input type="text" name="f_email" size="20" maxlength="64" />'.'@'.$t_limit_email_domain;
+			echo '<input type="hidden" name="f_email_domain" value="'.$t_limit_email_domain.'" />';
+		} else {
+			echo '<input type="text" name="f_email" size="32" maxlength="64" />';
+		}
+	?>
 	</td>
 </tr>
 <tr>

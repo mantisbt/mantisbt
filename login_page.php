@@ -24,16 +24,21 @@
 <br />
 <div align="center">
 <?php
+	$f_error		= gpc_get_bool( 'f_error' );
+	$f_cookie_error	= gpc_get_bool( 'f_cookie_error' );
+	$f_return		= gpc_get_string( 'f_return', '' );
+	$f_project_id	= gpc_get_int( 'f_project_id', -1 );
+
 	# Only echo error message if error variable is set
-	if ( isset( $f_error ) ) {
-		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<br />';
+	if ( $f_error ) {
+		echo $MANTIS_ERROR[ERROR_LOGIN].'<br />';
 	}
-	if ( isset( $f_cookie_error ) ) {
-		PRINT $MANTIS_ERROR[ERROR_COOKIES_DISABLED] . '<br />';
+	if ( $f_cookie_error ) {
+		echo $MANTIS_ERROR[ERROR_COOKIES_DISABLED].'<br />';
 	}
 
 	# Display short greeting message
-	echo $s_login_page_info;
+	echo lang_get( 'login_page_info' );
 ?>
 </div>
 
@@ -44,25 +49,32 @@
 <tr>
 	<td class="form-title">
 		<form name="f_login_form" method="post" action="login.php">
-		<?php	if (isset($f_return)) { ?>
-		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>" />
-		<?php	} ?>
-		<?php	if (isset($f_project_id)) { ?>
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<?php } ?>
-		<?php echo $s_login_title ?>
+		<?php
+			if ( !empty($f_return) ) {
+			?>
+				<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>" />
+				<?php
+			}
+
+			if ( $f_project_id > -1 ) {
+			?>
+				<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+				<?php
+			}
+			?>
+		<?php echo lang_get( 'login_title' ) ?>
 	</td>
 	<td class="right">
 	<?php
-		if ( ON == $g_allow_anonymous_login ) {
-			print_bracket_link( 'login_anon.php', $s_login_anonymously );
+		if ( ON == config_get( 'allow_anonymous_login' ) ) {
+			print_bracket_link( 'login_anon.php', lang_get( 'login_anonymously' ) );
 		}
 	?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_username ?>:
+		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="75%">
 		<input type="text" name="f_username" size="32" maxlength="32" />
@@ -70,7 +82,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_password ?>:
+		<?php echo lang_get( 'password' ) ?>:
 	</td>
 	<td>
 		<input type="password" name="f_password" size="16" maxlength="32" />
@@ -78,7 +90,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_save_login ?>:
+		<?php echo lang_get( 'save_login' ) ?>:
 	</td>
 	<td>
 		<input type="checkbox" name="f_perm_login" />
@@ -86,7 +98,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_login_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'login_button' ) ?>" />
 		</form>
 	</td>
 </tr>

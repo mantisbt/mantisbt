@@ -7,8 +7,12 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
+	$f_username		= gpc_get_string( 'f_username' );
+	$f_email		= gpc_get_string( 'f_email' );
+	$f_email_domain	= gpc_get_string( 'f_email_domain', false );
+
 	# Check to see if signup is allowed
-	if ( OFF == $g_allow_signup ) {
+	if ( OFF == config_get( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );
 		exit;
 	}
@@ -18,24 +22,27 @@
 	if ( empty( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-	$c_username = addslashes($f_username);
+
+	if ( !empty( $f_email_domain ) ) {
+		$f_email = "$f_email@$f_email_domain";
+	}
 
 	# Check for a properly formatted email with valid MX record
 	if ( !is_valid_email( $f_email ) ) {
-		PRINT $f_email.' '.$s_invalid_email.'<br />';
-		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
+		echo $f_email.' '.lang_get( 'invalid_email' ).'<br />';
+		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;
 	}
 
 	# Check for duplicate username
     if ( ! user_is_name_unique( $f_username ) ) {
-		print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
+		print_mantis_error( ERROR_USER_NAME_NOT_UNIQUE );
     }
 
 	# Passed our checks.  Insert into DB then send email.
 	if ( !user_signup( $f_username, $f_email ) ) {
-		PRINT $s_account_create_fail.'<br />';
-		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
+		echo lang_get( 'account_create_fail' ).'<br />';
+		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;
 	}
 ?>
@@ -50,9 +57,9 @@
 <br />
 <div align="center">
 <?php
-	PRINT "[$f_username - $f_email] $s_password_emailed_msg<br />$s_no_reponse_msg<br />";
+	echo "[$f_username - $f_email] ".lang_get( 'password_emailed_msg' ).'<br />'.lang_get( 'no_reponse_msg').'<br />';
 
-	print_bracket_link( 'login_page.php', $s_proceed );
+	print_bracket_link( 'login_page.php', lang_get( 'proceed' ) );
 ?>
 </div>
 

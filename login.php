@@ -10,7 +10,14 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	if (isset($f_cookietest)) {
+	$f_cookietest	= gpc_get_bool( 'f_cookietest' );
+	$f_username		= gpc_get_string( 'f_username', '' );
+	$f_password		= gpc_get_string( 'f_password', '' );
+	$f_perm_login	= gpc_get_bool( 'f_perm_login' );
+	$f_return		= gpc_get_string( 'f_return', '' );
+	$f_project_id	= gpc_get_int( 'f_project_id', -1 );
+
+	if ( $f_cookietest ) {
 		if (!isset($$g_string_cookie)) {
 			print_meta_redirect( 'login_page.php?f_cookie_error=1', 0 );
 		} else {
@@ -20,8 +27,8 @@
 	}
 
 
-	if ( BASIC_AUTH == $g_login_method ) {
-		check_varset( $f_username, $REMOTE_USER );
+	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
+		$f_username = $REMOTE_USER;
 		$f_password = $PHP_AUTH_PW;
  	}
 
@@ -45,7 +52,7 @@
 		}
 	}
 
-	if (( $g_anonymous_account == $f_username ) && ( ON == $g_allow_anonymous_login )) {
+	if (( config_get( 'anonymous_account' ) == $f_username ) && ( ON == config_get( 'allow_anonymous_login' ) )) {
 		$f_password = '';
 	}
 
@@ -88,7 +95,7 @@
 			$t_redirect_url = 'main_page.php';
 		}
 	} else if ( $login_result ) {
-		if ( isset($f_project_id) ) {
+		if ( $f_project_id > -1 ) {
 			$t_redirect_url = 'set_project.php?f_project_id='.$f_project_id;
 		} else {
 			$t_redirect_url = 'login_select_proj_page.php';
@@ -96,8 +103,8 @@
 	} else {
 		$t_redirect_url = 'login_page.php?f_error=1';
 	}
-
-	if (!isset($f_cookietest)) {
+	
+	if (! $f_cookietest ) {
 		$t_redirect_url = 'login.php?f_cookietest=true&f_return=' . urlencode($t_redirect_url);
 	}
 
