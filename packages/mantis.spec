@@ -1,13 +1,13 @@
 BuildArchitectures: noarch
 Summary: Mantis Bug Tracker
 Name: mantis
-Version: 0.18.0-CVS
+Version: 0.18.1
 Release: 1
 License: GPL
 Group: Development/Tools
 Vendor: Mantis Team <mantisbt-dev@lists.sourceforge.net>
 Source: mantis-%{version}.tar.gz
-URL: http://mantisbt.sourceforge.net/
+URL: http://www.mantisbt.org/
 Buildroot: %{_tmppath}/%{name}-root
 Prefix: /var/www/mantis
 Requires: php >= 4.0.6
