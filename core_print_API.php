@@ -294,10 +294,12 @@
 				$project_id_arr[$v_id] = $v_name;
 			}
 		}
+
+		# sort the array
 		asort( $project_id_arr, SORT_STRING );
 		reset( $project_id_arr );
 
-		while (list ($t_id, $t_name) = each ($project_id_arr)) {
+		while ( list( $t_id, $t_name ) = each( $project_id_arr ) ) {
 			if ( $p_project_id == $t_id ) {
 				PRINT "<option value=\"$t_id\" SELECTED>$t_name</option>";
 			} else {
