@@ -70,7 +70,9 @@
 	# --------------------
 	# (3) Prints the content-type
 	function print_content_type() {
-	   PRINT '<META HTTP-EQUIV="Content-type" CONTENT="text/html;charset=' . $s_charset . '">';
+		global $s_charset;
+
+		PRINT '<META HTTP-EQUIV="Content-type" CONTENT="text/html;charset=' . $s_charset . '">';
 	}
 	
 	# --------------------
