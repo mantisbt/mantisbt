@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.10 2002-08-30 05:35:18 jfitzell Exp $
+	# $Id: project_api.php,v 1.11 2002-08-30 07:43:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -362,6 +362,17 @@
 
 		# db_query errors on failure so:
 		return true;
+	}
+	# --------------------
+	# update or add the entry as appropriate
+	#  This function involves one more db query than project_update_user_acces() 
+	#  or project_add_user()
+	function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
+		if ( project_includes_user( $p_project_id, $p_user_id ) ) {
+			return project_update_user_access( $p_project_id, $p_user_id, $p_access_level );
+		} else {
+			return project_add_user( $p_project_id, $p_user_id, $p_access_level );
+		}
 	}
 	# --------------------
 	# remove user from project
