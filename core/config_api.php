@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.13 2004-04-08 18:04:53 prescience Exp $
+	# $Id: config_api.php,v 1.14 2004-07-10 23:38:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Configuration API ###

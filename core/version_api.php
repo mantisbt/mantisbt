@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.15 2004-05-27 23:53:23 int2str Exp $
+	# $Id: version_api.php,v 1.16 2004-07-10 23:38:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###

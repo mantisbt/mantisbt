@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.2 2004-05-26 06:25:58 int2str Exp $
+	# $Id: sponsorship_api.php,v 1.3 2004-07-10 23:38:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.52 2004-07-10 23:02:38 vboctor Exp $
+	# $Id: string_api.php,v 1.53 2004-07-10 23:38:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -407,5 +407,4 @@
 		$t_timestamp = db_unixtimestamp( $p_date );
 		return date( config_get( 'complete_date_format' ), $t_timestamp );
 	}
-
 ?>

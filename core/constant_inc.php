@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.18 2004-06-08 06:47:13 narcissus Exp $
+	# $Id: constant_inc.php,v 1.19 2004-07-10 23:38:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###

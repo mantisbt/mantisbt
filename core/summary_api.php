@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.30 2004-05-26 02:41:27 int2str Exp $
+	# $Id: summary_api.php,v 1.31 2004-07-10 23:38:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
