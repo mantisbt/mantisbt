@@ -6,14 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.62 2004-12-11 03:57:02 thraxisp Exp $
+	# $Id: string_api.php,v 1.63 2004-12-15 23:07:34 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'user_pref_api.php' );
-	require_once( $t_core_dir . 'class.urlmatch.php' );
 
 	### String Processing API ###
 
@@ -91,12 +90,12 @@
 	# Prepare a string for display to HTML and add href anchors for URLs, emails,
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
-		$p_string = string_display( $p_string );
+		$p_string = string_display( $p_string );		
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
-
+	
 		return $p_string;
 	}
 
@@ -285,6 +284,18 @@
 	# Tag Processing
 	#===================================
 
+	function parseurl($proto='', $url='', $xtra='')
+	{
+		# find wired characters at the end of the string
+		preg_match("/(.+)(|[^\w]+|&quot;|&amp;|&#039;|&lt;|&gt;)$/Uis", $url, $match);
+		# Add protocol if needed
+		$url = ($proto == '') ? 'http://'. $match[1] : $match[1];
+		# add wired characters at the end
+		$rest = ( isset($match[2]) ) ? $match[2] : '';
+		# return
+		return($xtra .'<a href="'. $url .'" target="_blank">'. $match[1] .'</a>'. $rest);
+	}
+
 	# --------------------
 	# Detect URLs and email addresses in the string and replace them with href anchors
 	function string_insert_hrefs( $p_string ) {
@@ -292,10 +303,19 @@
 			return $p_string;
 		}
 		# Find any URL in a string and replace it by a clickable link		
-		$p_string = preg_replace( '/([http|irc|ftp|https]{2,}:\/\/([a-z0-9_-]|\/|\@|:{0,1}\.{0,1}){1,})/',
-									'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',   
-									$p_string);
+		
+		$expression = array(
+			"/([^]\w\-=\"\'\/])?((https?|ftps?|edk|gopher|news|telnet|ssh):\/\/[^\s\W]|www\.[^\s\W])([^ \r\n\(\)\^\$!`\"'\|\[\]\{\}<>]*)/esi",
+			"/^((https?|ftps?|edk|gopher|news|telnet|ssh):\/\/[^\s\W]|www\.[^\s\W])([^ \r\n\(\)\^\$!`\"'\|\[\]\{\}<>]*)/esi"
+		);
 
+		$replacement = array(
+			"parseurl('\\3','\\2\\4','\\1')",
+			"parseurl('\\2','\\1\\3')"
+		);
+		
+		$p_string = preg_replace($expression, $replacement, $p_string);
+	
 		# Set up a simple subset of RFC 822 email address parsing
 		#  We don't allow domain literals or quoted strings
 		#  We also don't allow the & character in domains even though the RFC
@@ -321,10 +341,11 @@
 		#  * whitespace
 		#  * a , character (allowing 'email foo@bar.baz, or ...')
 		#  * a \n, \r, or <
-		$p_string = preg_replace( '/(?<=^|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&gt;|[\s\,\<\n\r])/s',
+		
+		$p_string = preg_replace( '/(?<=^|&quot;|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&quot;|&gt;|[\s\,\<\n\r])/s',
 								'<a href="mailto:\1" target="_new">\1</a>',
 								$p_string);
-
+		
 		return $p_string;
 	}
 
