@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.4 2002-12-04 08:05:48 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.5 2002-12-05 07:23:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -40,7 +40,7 @@ CREATE TABLE mantis_custom_field_table (
   advanced int(1) NOT NULL default '0',
   sequence int(2) NOT NULL default '0',
   PRIMARY KEY (id),
-  KEY project_id (project_id)
+  KEY name (name)
 ) TYPE=MyISAM COMMENT='Field definitions';
 
 CREATE TABLE mantis_custom_field_string_table (
