@@ -371,7 +371,7 @@
 <?php # UPDATE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( $g_update_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
-		<form method="post" action="<?php echo get_bug_update_page() ?>">
+		<form method="post" action="<?php echo string_get_bug_update_page() ?>">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>" />
 		<input type="submit" value="<?php echo $s_update_bug_button ?>" />

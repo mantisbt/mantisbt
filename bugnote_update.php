@@ -20,11 +20,10 @@
 	$f_bugnote_text		= $f_bugnote_text."\n\n";
 	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( config_get( 'normal_date_format' ) );
 
-#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
 	$result = bugnote_update_text( $f_bugnote_id, $f_bugnote_text );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_bug_link_plain( $t_bug_id );
+	$t_redirect_url = string_get_bug_link_plain( $t_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.15 2002-09-16 10:09:40 jfitzell Exp $
+	# $Id: print_api.php,v 1.16 2002-09-20 21:07:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -776,79 +776,17 @@
 	# --------------------
 	# prints a link to VIEW a bug given an ID
 	#  account for the user preference and site override
-	function print_bug_link( $p_id ) {
-		echo get_bug_link( $p_id );
+	function print_bug_link( $p_bug_id ) {
+		echo string_get_bug_link( $p_bug_id );
 	}
-	# --------------------
-	# return an href anchor that links to a bug VIEW page for the given bug
-	#  account for the user preference and site override
-	function get_bug_link( $p_id ) {
-		return '<a href="'.get_bug_link_plain( $p_id ).'">'.$p_id.'</a>';
-	}
-	# --------------------
-	# return the name and GET parameters of a bug VIEW page for the given bug
-	#  account for the user preference and site override
-	function get_bug_link_plain( $p_id ) {
-		return get_bug_view_page().'?f_id='.$p_id;
-	}
-	# --------------------
-	# return the name of a bug VIEW page for the user
-	#  account for the user preference and site override
-	function get_bug_view_page() {
-		switch ( config_get( 'show_view' ) ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				return 'view_bug_advanced_page.php';
-			} else {
-				return 'view_bug_page.php';
-			}
-			break;
-		case SIMPLE_ONLY:
-				return 'view_bug_page.php';
-			break;
-		case ADVANCED_ONLY:
-				return 'view_bug_advanced_page.php';
-			break;
-		}
-	}
+
 	# --------------------
 	# prints a link to UPDATE a bug given an ID
 	#  account for the user preference and site override
-	function print_bug_update_link( $p_id ) {
-		echo get_bug_update_link( $p_id );
+	function print_bug_update_link( $p_bug_id ) {
+		echo string_get_bug_update_link( $p_bug_id );
 	}
-	# --------------------
-	# return an href anchor that links to a bug UPDATE page for the given bug
-	#  account for the user preference and site override
-	function get_bug_update_link( $p_id ) {
-		return '<a href="'.get_bug_update_link_plain( $p_id ).'">'.$p_id.'</a>';
-	}
-	# --------------------
-	# return the name and GET parameters of a bug UPDATE page for the given bug
-	#  account for the user preference and site override
-	function get_bug_update_link_plain( $p_id ) {
-		return get_bug_update_page().'?f_id='.$p_id;
-	}
-	# --------------------
-	# return the name of a bug UPDATE page for the user
-	#  account for the user preference and site override
-	function get_bug_update_page() {
-		switch ( config_get( 'show_update' ) ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_update' ) ) {
-				return 'bug_update_advanced_page.php';
-			} else {
-				return 'bug_update_page.php';
-			}
-			break;
-		case SIMPLE_ONLY:
-				return 'bug_update_page.php';
-			break;
-		case ADVANCED_ONLY:
-				return 'bug_update_advanced_page.php';
-			break;
-		}
-	}
+
 	# --------------------
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
