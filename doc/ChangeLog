@@ -1,16 +1,12 @@
 Mantis ChangeLog
 
-2004.xx.xx  -  0.19.0
+2004.06.xx  -  0.19.0
  * Enh #0000: Change of terminology, replaced "bug" with "issue" [first step in #2710].
  * Enh #0000: Generate one email per user. Stage #2 (minor send mail optimization - used kept alive SMTP connection).
  * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
  * Enh #2200: Add Version to simple bug pages.
- * Enh #3262: CSV export does not export the category column.
- * Enh #3264: CSV export should export the resolution.
- * Enh #3287: Projectname on CSV export.
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
- * Enh #3346: CSV extract should output more data, e.g., Date Submitted, other data that would allow better analysis of data trends.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
@@ -23,17 +19,11 @@ Mantis ChangeLog
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Fix #3094: Switching projects clears filter values.
- * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3397: Delete notification should be off when deleting a project.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
- * Fix #3635: status_resolved in email_api should be resolved.
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.
- * Fix #3646: Error in core/obsolete.php.
- * Fix #3691: Parse error in Romanian localisation.
  * Fix #3723: No ability to edit or even delete news is associated project was deleted.
- * Fix #3728: CSV export shows &quot; instead of real quotes in bug title.
- * Fix #3795: Resolve should not overwrite handler, if already set.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
@@ -66,10 +56,21 @@ Mantis ChangeLog
  * Removed config option (hide_closed_default): Replaced by hide_status_default
  * Languages: Updated German, Polish, Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
-2004.04.??  -  0.18.3
+2004.05.12  -  0.18.3
 
  * Sec #3660: Ability to execute arbitrary SQL statement if register_globals = ON.
  * Sec #3661: A logged in user can download any bug attachment or project document.
+ * Enh #3262: CSV export does not export the category column.
+ * Enh #3264: CSV export should export the resolution.
+ * Enh #3287: Projectname on CSV export.
+ * Enh #3346: CSV extract should output more data, e.g., Date Submitted, other data that would allow better analysis of data trends.
+ * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
+ * Fix #3635: status_resolved in email_api should be resolved.
+ * Fix #3646: Error in core/obsolete.php.
+ * Fix #3691: Parse error in Romanian localisation.
+ * Fix #3728: CSV export shows &quot; instead of real quotes in bug title.
+ * Fix #3795: Resolve should not overwrite handler, if already set.
+ * Fix #0000: Re-generated the FAQ and fixed the hyperlinks (the contents of the FAQ may not be up to date)
 
 2004.02.29  -  0.18.2
 
