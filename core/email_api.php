@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.18 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: email_api.php,v 1.19 2002-09-27 00:01:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -619,6 +619,9 @@
 			$t_subject = make_lf_crlf( $t_subject );
 			$t_message = make_lf_crlf( $t_message );
 			$t_headers = make_lf_crlf( $t_headers );
+
+			# set the SMTP host... only used on window though
+			ini_set( 'SMTP', config_get( 'smtp_host', 'localhost' ) );
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
