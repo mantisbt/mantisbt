@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.42 2004-08-24 01:44:17 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.43 2004-09-08 02:13:58 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -160,7 +160,7 @@ if ( !$t_finished ) {
 			case 'RESOLVE':
 				$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
 					|| ( ( AUTO == config_get( 'show_product_version' ) ) 
-								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+								&& ( count( version_get_all_rows( $c_project_id ) ) > 0 ) );
 				if ( $t_show_version ) { 
 	?>
 		<tr class="row-2">
