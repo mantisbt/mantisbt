@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.124 2003-08-17 22:29:52 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.125 2003-08-21 23:00:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -89,6 +89,9 @@
 	# absolute patch to your core files. The default is usually OK,
 	# unless you moved the 'core' directory out of your webroot (recommended).
 	$g_core_path			= $g_absolute_path.'core' . DIRECTORY_SEPARATOR;
+
+	# Used to link to manual for User Documentation.
+	$g_manual_url = 'http://mantisbt.sourceforge.net/manual/';
 
 	#############################
 	# Web Server

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.75 2003-07-06 05:20:58 vboctor Exp $
+	# $Id: html_api.php,v 1.76 2003-08-21 23:00:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -484,7 +484,7 @@
 	# Print the menu for the docs section
 	# $p_page specifies the current page name so it's link can be disabled
 	function print_doc_menu( $p_page='' ) {
-		$t_documentation_html 	= 'doc/documentation.html';
+		$t_documentation_html 	= config_get( 'manual_url' );
 		$t_proj_doc_page 		= 'proj_doc_page.php';
 		$t_proj_doc_add_page 	= 'proj_doc_add_page.php';
 
