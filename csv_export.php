@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.10 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: csv_export.php,v 1.11 2003-01-29 18:19:14 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 
 	$rows = filter_get_bug_rows( 1, -1, &$t_page_count, &$t_bug_count );
 
-	echo lang_get('email_project') . ',' . config_get('page_title') . "\n\n";
+	echo lang_get('email_project') . ',' . config_get('page_title') . "\r\n\r\n";
 	echo lang_get( 'priority' ) . ',' .
 			lang_get( 'id' ) . ',' .
 			lang_get( 'severity' ) . ',' .
@@ -37,7 +37,7 @@
 			lang_get( 'assigned_to' ) . ',' .
 			lang_get( 'reporter' ) . ',' .
 			lang_get( 'updated' ) . ',' .
-			lang_get( 'summary' ) . "\n";
+			lang_get( 'summary' ) . "\r\n";
 
 	for ( $i=0 ; $i < sizeof($rows) ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
