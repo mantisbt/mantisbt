@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.53 2004-08-14 18:25:56 thraxisp Exp $
+	# $Id: main_page.php,v 1.54 2004-09-13 12:17:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This is the first page a user sees when they login to the bugtracker
@@ -30,12 +30,12 @@
 
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
-		echo lang_get( 'open_and_assigned_to_me' ) . ':';
+		echo lang_get( 'open_and_assigned_to_me' ) . ': ';
 		echo '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_status=' . RESOLVED . '">' . current_user_get_assigned_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-right">';
-		echo lang_get( 'open_and_reported_to_me' ) . ':';
+		echo lang_get( 'open_and_reported_to_me' ) . ': ';
 		echo '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;hide_status=' . RESOLVED . '">' . current_user_get_reported_open_bug_count() . '</a>';
 		echo '</div>';
 
