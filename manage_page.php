@@ -148,7 +148,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<input type="hidden" name="f_sort" value="<?php echo $c_sort ?>">
 		<input type="hidden" name="f_dir" value="<?php echo $c_dir ?>">
 		<input type="hidden" name="f_save" value="1">
-		<input type="checkbox" name="f_hide" value="1" <?php echk_checked( $c_hide, 1 ); ?>> <?php echo $s_hide_inactive ?>
+		<input type="checkbox" name="f_hide" value="1" <?php check_checked( $c_hide, 1 ); ?>> <?php echo $s_hide_inactive ?>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
 		</form>
 	</td>
