@@ -13,7 +13,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	$t_res_val = RESOLVED;
-	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted, last_updated
+	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+			UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM $g_mantis_bug_table
 			WHERE project_id='$g_project_cookie_val' AND status='$t_res_val'";
 	$result = db_query( $query );
@@ -25,7 +26,7 @@
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
 		$t_date_submitted = ($row["date_submitted"]);
-		$t_last_updated = sql_to_unix_time($row["last_updated"]);
+		$t_last_updated = $row["last_updated"];
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated = 0;

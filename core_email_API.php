@@ -326,7 +326,8 @@
 				$s_status_enum_string,
 				$s_reproducibility_enum_string;
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
+		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+				UNIX_TIMESTAMP(last_updated) as last_updated
 				FROM $g_mantis_bug_table
 				WHERE id='$p_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
@@ -353,7 +354,7 @@
 		$v2_description   = string_email( $v2_description );
 		$v_summary        = string_email( $v_summary );
 		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
-		$v_last_updated   = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
+		$v_last_updated   = date( $g_complete_date_format, $v_last_updated );
 
 		$t_sev_str = get_enum_element( $s_severity_enum_string, $v_severity );
 		$t_pri_str = get_enum_element( $s_priority_enum_string, $v_priority );
@@ -399,7 +400,7 @@
 
 		$t_message = "";
 
-		$query = "SELECT *
+		$query = "SELECT *, UNIX_TIMESTAMP(last_updated) as last_updated
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$p_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
@@ -420,7 +421,7 @@
 
 			$t_note = db_result( $result2, 0, 0 );
 			$t_note = string_email( $t_note );
-			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
+			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
 			$t_message = $t_message.$t_string."\n";

@@ -20,6 +20,7 @@ Mantis
  * Added support to move bugs from one project to another.
  * Removed site_settings pages.
  * Removed unused cookie variables.
+ * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.
  * Renamed g_store_file_to to g_file_upload_method.
 
 12.01.2001  -   0.16.1

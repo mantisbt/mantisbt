@@ -8,17 +8,6 @@
 	# Date API
 	###########################################################################
 	### --------------------
-	# converts the mysql TIMESTAMP field to a unix timestamp
-	# it may be possible to replace this with a UNIX_TIMESTAMP() call in the SQL query
-	function sql_to_unix_time( $p_timeString ) {
-		return mktime( substr( $p_timeString, 8, 2 ),
-					   substr( $p_timeString, 10, 2 ),
-					   substr( $p_timeString, 12, 2 ),
-					   substr( $p_timeString, 4, 2 ),
-					   substr( $p_timeString, 6, 2 ),
-					   substr( $p_timeString, 0, 4 ) );
-	}
-	### --------------------
 	# prints the date given the formating string
 	function print_date( $p_format, $p_date ) {
 		echo date( $p_format, $p_date );

@@ -9,7 +9,8 @@
 	### $f_id MUST be specified before the file is included
 ?>
 <?
-    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
+    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+    		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_query( $query );
@@ -76,7 +77,7 @@
 		<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
+		<? print_date( $g_normal_date_format, $v_last_updated ) ?>
 	</td>
 </tr>
 <tr height="5" class="white">

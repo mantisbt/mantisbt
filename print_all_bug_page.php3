@@ -105,7 +105,8 @@
 
 	# Build our query string based on our viewing criteria
 
-	$query = "SELECT * FROM $g_mantis_bug_table";
+	$query = "SELECT *, UNIX_TIMESTAMP(last_updated) as last_updated
+			 FROM $g_mantis_bug_table";
 
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 
@@ -339,7 +340,7 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
 		$v_summary = string_display( $v_summary );
-		$t_last_updated = date( $g_short_date_format, sql_to_unix_time( $v_last_updated ) );
+		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors
 		$status_color = alternate_colors( $i, "#ffffff", $g_primary_color_light );
@@ -363,7 +364,7 @@
 	<td class="print">
 		<?
 			if ($bugnote_count > 0){
-				if ( sql_to_unix_time( $v_bugnote_updated ) >
+				if ( $v_bugnote_updated >
 					strtotime( "-$f_highlight_changed hours" ) ) {
 					PRINT "<span class=\"bold\">$bugnote_count</span>";
 				} else {
@@ -393,7 +394,7 @@
 	</td>
 	<td class="print">
 		<?
-			if ( sql_to_unix_time( $v_last_updated ) >
+			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
 
 				PRINT "<span class=\"bold\">$t_last_updated</span>";

@@ -183,7 +183,7 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
 		$v_summary = string_display( $v_summary );
-		$t_last_updated = date( $g_short_date_format, sql_to_unix_time( $v_last_updated ) );
+		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors
 		$status_color = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -231,7 +231,7 @@
 	<td class="center">
 		<?
 			if ($bugnote_count > 0){
-				if ( sql_to_unix_time( $v_bugnote_updated ) >
+				if ( $v_bugnote_updated >
 					strtotime( "-$f_highlight_changed hours" ) ) {
 					PRINT "<span class=\"bold\">$bugnote_count</span>";
 				} else {
@@ -260,7 +260,7 @@
 	</td>
 	<td class="center">
 		<?
-			if ( sql_to_unix_time( $v_last_updated ) >
+			if ( $v_last_updated >
 				strtotime( "-$f_highlight_changed hours" ) ) {
 
 				PRINT "<span class=\"bold\">$t_last_updated</span>";

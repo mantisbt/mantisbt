@@ -235,7 +235,10 @@
 
 	# Now add the rest of the criteria i.e. sorting, limit.
 	#
-	$query = "SELECT " . $t_columns_clause . $t_from_clause . $t_where_clause;
+	$query  = "SELECT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
+	$query .= $t_from_clause;
+	$query .= $t_where_clause;
+
 	if ( !isset( $f_sort ) ) {
 		$f_sort="last_updated";
 	}
@@ -252,7 +255,7 @@
 	# for example page number 2, per page 5:
 	#     t_offset = 5
 	#
-	$t_offset = (($f_page_number - 1) * $f_per_page);
+	$t_offset = ( ( $f_page_number - 1 ) * $f_per_page );
 	if ( isset( $f_per_page ) ) {
 		$query = $query." LIMIT $t_offset, $f_per_page";
 	}

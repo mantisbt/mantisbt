@@ -143,11 +143,13 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?
 	### Get the user data in $f_sort order
 	if ( $f_hide==0 ) {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
+				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
 				ORDER BY '$f_sort' $f_dir";
 	} else {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
+				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
 				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
 				ORDER BY '$f_sort' $f_dir";
@@ -209,7 +211,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 
 		$u_date_created  = date( $g_normal_date_format, $u_date_created );
-		$u_last_visit    = date( $g_normal_date_format, sql_to_unix_time( $u_last_visit ) );
+		$u_last_visit    = date( $g_normal_date_format, $u_last_visit );
 
 		### alternate row colors
 		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
