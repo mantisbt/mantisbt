@@ -8,11 +8,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.70 $
-	# $Author: jlatour $
-	# $Date: 2002-08-17 14:44:14 $
+	# $Revision: 1.71 $
+	# $Author: prescience $
+	# $Date: 2002-08-19 02:52:17 $
 	#
-	# $Id: core_email_API.php,v 1.70 2002-08-17 14:44:14 jlatour Exp $
+	# $Id: core_email_API.php,v 1.71 2002-08-19 02:52:17 prescience Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -48,7 +48,7 @@
 	}
 	# --------------------
 	# get_notify_flag
-	# Get the value associated with the specific action and flag. 
+	# Get the value associated with the specific action and flag.
 	# For example, you can get the value associated with notifying "admin"
 	# on action "new", i.e. notify administrators on new bugs which can be
 	# ON or OFF.
@@ -115,7 +115,7 @@
 				}
 			}
 		}
-		
+
 		# Check if we want to broadcast to all developers on a NEW bug
 		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
 		$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
@@ -454,7 +454,7 @@
 		$c_bug_id = (integer)$p_bug_id;
 
 		$t_message = '';
-		
+
 		$t_state = PUBLIC;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
@@ -529,7 +529,7 @@
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = trim( $p_subject );
 		$t_message   = trim( $p_message );
-		
+
 		# short-circuit if no recipient is defined
 		if (!$p_recipient) {
 			return;
@@ -547,9 +547,9 @@
 		if ( ON == $g_use_phpMailer )  {
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
-			
+
 			include_once('class.phpmailer.php');
-			$mail = new phpmailer; 
+			$mail = new phpmailer;
 
 			# Select the method to send mail
 			switch ( $g_phpMailer_method ) {
