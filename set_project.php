@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.46 2004-04-27 00:54:33 narcissus Exp $
+	# $Id: set_project.php,v 1.47 2004-05-24 13:50:53 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,6 +51,8 @@
 		if ( $t_source_filter_id != null ) {
 			$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
 		} 
+	} else if ( eregi( 'changelog_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url =  'changelog_page.php';
 	} else if ( eregi( 'summary_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url =  'summary_page.php';
 	} else if ( eregi( 'proj_user_menu_page.php', $_SERVER['HTTP_REFERER'] ) ){

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.165 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.166 2004-05-24 13:50:47 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -785,6 +785,9 @@
 	# Threshold needed to update readonly bugs.  Readonly bugs are identified via 
 	# $g_bug_readonly_status_threshold.
 	$g_update_readonly_bug_threshold = MANAGER;
+
+	# threshold for viewing changelog
+	$g_view_changelog_threshold = VIEWER;
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH

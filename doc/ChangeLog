@@ -13,6 +13,7 @@ Mantis ChangeLog
  * Enh #3519: Advanced filtering with multiple selections.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
+ * Enh #3638: The bugtracker should be able to produce a changelog.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
  * Enh #3663: Remember filter settings for each project.
  * Enh #3676: Use status threshold rather than hide resolved/closed in filter.
@@ -72,6 +73,7 @@ Mantis ChangeLog
  * New Config: mantis_sponsorship_table (default mantis_sponsorship_table).  Name of table containing issue sponsorship information.
  * New Config: bug_readonly_status_threshold (default RESOLVED).  Status threshold after which the issue is considered readonly.
  * New Config: update_readonly_bug_threshold (default MANAGER).  Status threshold after which the user is allowed to edit readonly issues.
+ * New Config: view_changelog_threshold (default VIEWER).  Status threshold after which the user is allowed to view the changelog.  The changelog will include private issues only if user has the approach access level.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.171 $
+	# $Revision: 1.172 $
 	# $Author: vboctor $
-	# $Date: 2004-05-24 12:45:40 $
+	# $Date: 2004-05-24 13:50:55 $
 	#
-	# $Id: strings_english.txt,v 1.171 2004-05-24 12:45:40 vboctor Exp $
+	# $Id: strings_english.txt,v 1.172 2004-05-24 13:50:55 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -653,6 +653,7 @@ $s_manage_user_updated_msg = 'Account successfully updated...';
 $s_main_link = 'Main';
 $s_view_bugs_link = 'View Issues';
 $s_report_bug_link = 'Report Issue';
+$s_changelog_link = 'Change Log';
 $s_summary_link = 'Summary';
 $s_account_link = 'My Account';
 $s_users_link = 'Users';
@@ -944,4 +945,7 @@ $s_sponsorship_more_info = 'More information about sponsorship';
 # in the config to allow for a URL per language.  This can be set to an empty string if there
 # is not need to provide such process information.
 $s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
 ?>

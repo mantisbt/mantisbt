@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.97 2004-05-23 14:13:47 vboctor Exp $
+	# $Id: html_api.php,v 1.98 2004-05-24 13:50:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -372,6 +372,11 @@
 				# Report Bugs
 				if ( access_has_project_level( REPORTER ) ) {
 					$t_menu_options[] = string_get_bug_report_link();
+				}
+
+				# Changelog Page
+				if ( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
+					$t_menu_options[] = '<a href="changelog_page.php">' . lang_get( 'changelog_link' ) . '</a>';
 				}
 
 				# Summary Page
