@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.247 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.248 2005-02-27 20:56:35 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -1188,7 +1188,7 @@
 	$g_mantis_filters_table					= '%db_table_prefix%_filters_table';
 	$g_mantis_sponsorship_table				= '%db_table_prefix%_sponsorship_table';
 	$g_mantis_tokens_table					= '%db_table_prefix%_tokens_table';
-	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierachy_table';
+	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierarchy_table';
 	$g_mantis_config_table					= '%db_table_prefix%_config_table';
 
 	###########################
