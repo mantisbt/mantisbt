@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.102 2004-09-23 22:04:51 thraxisp Exp $
+	# $Id: print_api.php,v 1.103 2004-09-27 01:17:59 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -222,15 +222,19 @@
 			$t_users = project_get_all_user_rows( $p_project_id );
 		}
 
+		$t_display = array();
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
-			if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
+			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 				$t_user_name = string_attribute( $t_user['realname'] );
 			}
-
-			PRINT '<option value="' . $t_user['id'] . '" ';
-			check_selected( $p_user_id, $t_user['id'] );
-			PRINT '>' . $t_user_name . '</option>';
+			$t_display[$t_user['id']] = $t_user_name;
+		}
+		natcasesort( $t_display );
+		foreach ($t_display as $t_id => $t_name ) {
+			PRINT '<option value="' . $t_id . '" ';
+			check_selected( $p_user_id, $t_id );
+			PRINT '>' . $t_name . '</option>';
 		}
 	}
 
@@ -348,15 +352,19 @@
 			$t_users = project_get_all_user_rows( $p_project_id, $p_threshold );
 		}
 
+		$t_display = array();
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
-			if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
+			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 				$t_user_name = string_attribute( $t_user['realname'] );
 			}
-
-			PRINT '<option value="' . $t_user['id'] . '" ';
-			check_selected( $p_user_id, $t_user['id'] );
-			PRINT '>' . $t_user_name . '</option>';
+			$t_display[$t_user['id']] = $t_user_name;
+		}
+		natcasesort( $t_display );
+		foreach ($t_display as $t_id => $t_name ) {
+			PRINT '<option value="' . $t_id . '" ';
+			check_selected( $p_user_id, $t_id );
+			PRINT '>' . $t_name . '</option>';
 		}
 	}
 	# --------------------
