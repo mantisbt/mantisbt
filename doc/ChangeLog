@@ -10,7 +10,7 @@ Mantis ChangeLog
  * Fix #3177: Switching project in advanced summary changes current page.
  * Fix #3210: bug_view_advanced_page.php (and simple) doesn't show the project name.
  * Fix #3324: Win32: Call to undefined function: getmxrr() [default to OFF].
- * Fix #3396: Database upgrade 0.17-jf-10 failed to upgrade.
+ * Fix #3396: Database upgrade scripts that tried to add a unique key failed if duplicate entries existed.
  * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
  * Sec #3445: User see all information from all projects (if user has access to 0 projects)
  * Fix #3449: Database upgrade script fails to detect some existing columns.
