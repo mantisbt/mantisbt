@@ -9,11 +9,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 08:18:50 $
+	# $Date: 2002-08-15 19:22:10 $
 	#
-	# $Id: strings_german.txt,v 1.37 2002-08-15 08:18:50 jlatour Exp $
+	# $Id: strings_german.txt,v 1.38 2002-08-15 19:22:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -52,7 +52,7 @@
 	$s_bug_end_monitor = 'Bug End Monitor';
 	$s_announcement = 'Announcement';
 	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
 

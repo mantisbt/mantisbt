@@ -11,11 +11,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 08:18:50 $
+	# $Date: 2002-08-15 19:22:10 $
 	#
-	# $Id: strings_french.txt,v 1.35 2002-08-15 08:18:50 jlatour Exp $
+	# $Id: strings_french.txt,v 1.36 2002-08-15 19:22:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -54,7 +54,7 @@
 	$s_bug_end_monitor = 'Bug End Monitor';
 	$s_announcement = 'Announcement';
 	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
 

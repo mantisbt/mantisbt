@@ -7,11 +7,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.34 $
+	# $Revision: 1.35 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 08:18:51 $
+	# $Date: 2002-08-15 19:22:10 $
 	#
-	# $Id: strings_spanish.txt,v 1.34 2002-08-15 08:18:51 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.35 2002-08-15 19:22:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -50,7 +50,7 @@
 	$s_bug_end_monitor = 'Bug End Monitor';
 	$s_announcement = 'Anuncio';
 	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
 

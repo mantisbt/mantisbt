@@ -8,11 +8,11 @@
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 08:18:50 $
+	# $Date: 2002-08-15 19:22:10 $
 	#
-	# $Id: strings_italian.txt,v 1.32 2002-08-15 08:18:50 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.33 2002-08-15 19:22:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -51,7 +51,7 @@
 	$s_bug_end_monitor = 'Bug End Monitor';
 	$s_announcement = 'Announcement';
 	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
 

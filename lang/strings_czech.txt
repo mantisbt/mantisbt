@@ -7,11 +7,11 @@
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Code page: ISO-8259-2
 	# -------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 08:18:49 $
+	# $Date: 2002-08-15 19:22:09 $
 	#
-	# $Id: strings_czech.txt,v 1.22 2002-08-15 08:18:49 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.23 2002-08-15 19:22:09 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -50,7 +50,7 @@
 	$s_bug_end_monitor = 'Bug End Monitor';
 	$s_announcement = 'Announcement';
 	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
 
