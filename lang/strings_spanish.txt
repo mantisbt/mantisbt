@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.36 $
+	# $Revision: 1.37 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:07 $
+	# $Date: 2002-08-17 15:22:38 $
 	#
-	# $Id: strings_spanish.txt,v 1.36 2002-08-15 20:35:07 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.37 2002-08-17 15:22:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Volver';

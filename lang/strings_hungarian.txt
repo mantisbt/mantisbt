@@ -6,13 +6,13 @@
 
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
- 	# -------------------------------------------------
-	# $Revision: 1.27 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 19:22:10 $
-	#
-	# $Id: strings_hungarian.txt,v 1.27 2002-08-15 19:22:10 jlatour Exp $
-	###########################################################################
+  # -------------------------------------------------
+  # $Revision: 1.28 $
+  # $Author: jlatour $
+  # $Date: 2002-08-17 15:22:37 $
+  #
+  # $Id: strings_hungarian.txt,v 1.28 2002-08-17 15:22:37 jlatour Exp $
+  ###########################################################################
 ?>
 <?php
     # Charset
@@ -134,9 +134,10 @@
   $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'HIBA: Ez a kategória már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'HIBA: Ez a verzió már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
+  $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
   $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
   $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
+  $MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
   $s_go_back = 'Visszatérés';

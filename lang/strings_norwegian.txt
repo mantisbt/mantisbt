@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:05 $
+	# $Date: 2002-08-17 15:22:37 $
 	#
-	# $Id: strings_norwegian.txt,v 1.35 2002-08-15 20:35:05 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.36 2002-08-17 15:22:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Tilbake';

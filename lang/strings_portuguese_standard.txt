@@ -7,11 +7,11 @@
 
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt  V0.1
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:07 $
+	# $Date: 2002-08-17 15:22:38 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.32 2002-08-15 20:35:07 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.33 2002-08-17 15:22:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Anterior';

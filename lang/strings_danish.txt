@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:04 $
+	# $Date: 2002-08-17 15:22:36 $
 	#
-	# $Id: strings_danish.txt,v 1.33 2002-08-15 20:35:04 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.34 2002-08-17 15:22:36 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEJL: Et påkrævert felt er ikke udfyldt.  Ret venligst dette.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEJL: Denne konto er beskyttet.  Du har ikke adgang før kontoens beskyttelse er ophævet.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Tilbage';

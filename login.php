@@ -10,6 +10,16 @@
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php
+	if (isset($f_cookietest)) {
+		if (!isset($$g_string_cookie)) {
+			print_meta_redirect( 'login_page.php?f_cookie_error=1', 0 );
+		} else {
+			print_meta_redirect( $f_return );
+		}
+		exit;
+	}
+		
+
 	if ( BASIC_AUTH == $g_login_method ) {
 		check_varset( $f_username, $REMOTE_USER );
 		$f_password = $PHP_AUTH_PW;
@@ -85,6 +95,10 @@
 		}
 	} else {
 		$t_redirect_url = 'login_page.php?f_error=1';
+	}
+	
+	if (!isset($f_cookietest)) {
+		$t_redirect_url = 'login.php?f_cookietest=true&f_return=' . urlencode($t_redirect_url);
 	}
 
 	if ( $login_result ) {

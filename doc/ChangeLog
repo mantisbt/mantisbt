@@ -66,6 +66,7 @@ Mantis ChangeLog
  * Made 'light grey' the default color for 'closed'.
  * Made 'normal' default priority for new bugs.
  * Made it impossible to (ab)use the admin_check.php script to send spam/email to anyone except the server administrator.
+ * Mantis will now warn the user if his browser does not support cookies, either because it's too old or because it was disabled.
  * Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
  * Modified & in URLs &amp; to conform with standards.
  * Modified all php files to use single quotes where double quotes were unnecessary.

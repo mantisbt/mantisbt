@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.32 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:07 $
+	# $Date: 2002-08-17 15:22:38 $
 	#
-	# $Id: strings_romanian.txt,v 1.31 2002-08-15 20:35:07 jlatour Exp $
+	# $Id: strings_romanian.txt,v 1.32 2002-08-17 15:22:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana in momentul in care protectia este ridicata.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Intoarcere';

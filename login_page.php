@@ -25,6 +25,9 @@
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
 		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<p>';
+	} 
+	if ( isset( $f_cookie_error ) ) {
+		PRINT $MANTIS_ERROR[ERROR_COOKIES_DISABLED] . '<p>';
 	}
 
 	# Display short greeting message
