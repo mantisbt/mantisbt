@@ -11,6 +11,26 @@
 	# These are miscellaneous functions to help the package
 
 	# --------------------
+	# updates the last_updated field
+	function bug_date_update( $p_bug_id ) {
+		global $g_mantis_bug_table;
+
+		$query = "UPDATE last_updated
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+	}
+	# --------------------
+	# updates the last_modified field
+	function bugnote_date_update( $p_bugnote_id ) {
+		global $g_mantis_bugnote_table;
+
+		$query = "UPDATE last_modified
+				FROM $g_mantis_bugnote_table
+				WHERE id='$p_bugnote_id'";
+		$result = db_query( $query );
+	}
+	# --------------------
 	# Returns the specified field value of the specified bug
 	function get_bug_field( $p_field_name, $p_bug_id ) {
 		global 	$g_string_cookie_val,

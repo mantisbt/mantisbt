@@ -44,6 +44,9 @@
 								(null, $f_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '$t_content')";
 		}
 		$result = db_query( $query );
+
+		# updated the last_updated date
+		bug_date_update( $f_id );
 	}
 
 	# Determine which view page to redirect back to.

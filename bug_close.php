@@ -25,6 +25,9 @@
 			WHERE id='$f_id'";
 	$result = db_query($query);
 
+	# updated the last_updated date
+	bug_date_update( $f_id );
+
 	email_close( $f_id );
 
 	$t_redirect_url = $g_view_all_bug_page;

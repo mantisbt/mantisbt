@@ -22,6 +22,9 @@
     		WHERE id='$f_bugnote_text_id'";
    	$result = db_query( $query );
 
+	# updated the last_updated date
+	bugnote_date_update( $f_bugnote_id );
+
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
 	if ( ( ON == $g_quick_proceed )&&( $result ) ) {

@@ -35,6 +35,7 @@
 <form method="post" action="<?php echo $g_bugnote_update ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
+<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
 <tr>
 	<td class="form-title">
 		<?php echo $s_edit_bugnote_title ?>

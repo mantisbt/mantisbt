@@ -29,6 +29,9 @@
 			WHERE id='$f_id'";
     $result = db_query($query);
 
+	# updated the last_updated date
+	bug_date_update( $f_id );
+
 	# send assigned to email
 	email_assign( $f_id );
 

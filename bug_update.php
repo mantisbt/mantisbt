@@ -73,6 +73,9 @@
     		WHERE id='$t_bug_text_id'";
    	$result = db_query($query);
 
+	# updated the last_updated date
+	bug_date_update( $f_id );
+
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {
 		case FEEDBACK:	if ( $f_status!= $f_old_status ) {

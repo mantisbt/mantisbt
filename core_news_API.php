@@ -50,7 +50,8 @@
 
 		# Update entry
 		$query = "UPDATE $g_mantis_news_table
-				SET headline='$p_headline', body='$p_body', project_id='$p_project_id'
+				SET headline='$p_headline', body='$p_body',
+					project_id='$p_project_id', last_modified=NOW()
 	    		WHERE id='$p_id'";
 	    return db_query( $query );
 	}

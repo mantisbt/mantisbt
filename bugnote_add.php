@@ -35,7 +35,7 @@
 			INTO $g_mantis_bugnote_table
 			( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
 			VALUES
-			( null, '$f_id', '$u_id','$t_bugnote_text_id',NOW(), NOW() )";
+			( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 	$result = db_query( $query );
 
 	$query = "SELECT date_submitted
