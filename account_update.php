@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.24 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: account_update.php,v 1.25 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,9 +17,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_email			= gpc_get_string( 'f_email', '' );
-	$f_password			= gpc_get_string( 'f_password', '' );
-	$f_password_confirm	= gpc_get_string( 'f_password_confirm', '' );
+	$f_email			= gpc_get_string( 'email', '' );
+	$f_password			= gpc_get_string( 'password', '' );
+	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
 	$f_email = email_append_domain( $f_email );
 

@@ -10,12 +10,12 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id	= gpc_get_int( 'f_project_id' );
-	$f_user_id		= gpc_get_int( 'f_user_id' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_user_id		= gpc_get_int( 'user_id' );
 
 	$result = project_remove_user( $f_project_id, $f_user_id );
 
-    $t_redirect_url = 'manage_user_page.php?f_user_id='.$f_user_id;
+    $t_redirect_url = 'manage_user_page.php?user_id='.$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

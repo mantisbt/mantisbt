@@ -50,9 +50,9 @@
 			global $g_php;
 
 			PRINT "<tr><td nowrap>$this->upgrade_name</td><td>
-			       [ <a href='$this->upgrade_file$g_php?f_action=print'>Print</a> ]
-			       [ <a href='$this->upgrade_file$g_php?f_action=sql'>Download SQL</a> ]
-			       [ <a href='$this->upgrade_file$g_php?f_action=upgrade'>Upgrade Now</a> ]</td></tr>";
+			       [ <a href='$this->upgrade_file$g_php?action=print'>Print</a> ]
+			       [ <a href='$this->upgrade_file$g_php?action=sql'>Download SQL</a> ]
+			       [ <a href='$this->upgrade_file$g_php?action=upgrade'>Upgrade Now</a> ]</td></tr>";
 		}
 
 		function Execute( $p_action ) {

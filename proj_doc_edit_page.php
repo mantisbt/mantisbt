@@ -9,6 +9,9 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
+
+	$f_file_id = gpc_get_int( 'file_id' );
+
 	$c_file_id = (integer)$f_file_id;
 
 	$query = "SELECT *
@@ -30,7 +33,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
+		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -42,7 +45,7 @@
 		<?php echo $s_title ?>
 	</td>
 	<td width="80%">
-		<input type="text" name="f_title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
+		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -50,7 +53,7 @@
 		<?php echo $s_description ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="7" wrap="virtual"><?php echo $v_description ?></textarea>
+		<textarea name="description" cols="60" rows="7" wrap="virtual"><?php echo $v_description ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -75,7 +78,7 @@
 <br />
 
 		<form method="post" action="proj_doc_delete.php">
-		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
+		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 		</form>
 

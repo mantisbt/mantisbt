@@ -10,10 +10,10 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id		= gpc_get_int( 'f_project_id' );
-	$f_other_project_id	= gpc_get_int( 'f_other_project_id' );
-	$f_copy_from		= gpc_get_bool( 'f_copy_from' );
-	$f_copy_to			= gpc_get_bool( 'f_copy_to' );
+	$f_project_id		= gpc_get_int( 'project_id' );
+	$f_other_project_id	= gpc_get_int( 'other_project_id' );
+	$f_copy_from		= gpc_get_bool( 'copy_from' );
+	$f_copy_to			= gpc_get_bool( 'copy_to' );
 
 	if ( $f_copy_from ) {
 	  $t_src_project_id = $f_other_project_id;
@@ -37,7 +37,7 @@
 		}
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
 
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );

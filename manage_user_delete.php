@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 	
-	$f_user_id	= gpc_get_int( 'f_user_id' );
+	$f_user_id	= gpc_get_int( 'user_id' );
 
 	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ),
 							 lang_get( 'delete_account_button' ) );

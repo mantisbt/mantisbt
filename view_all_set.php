@@ -8,28 +8,28 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_type					= gpc_get_int( 'f_type', -1 );
-	$f_print				= gpc_get_bool( 'f_print' );
+	$f_type					= gpc_get_int( 'type', -1 );
+	$f_print				= gpc_get_bool( 'print' );
 
-	$f_show_category		= gpc_get_string( 'f_show_category', '' );
-	$f_show_severity		= gpc_get_string( 'f_show_severity', '' );
-	$f_show_status			= gpc_get_string( 'f_show_status', '' );
-	$f_per_page				= gpc_get_int( 'f_per_page', -1 );
-	$f_highlight_changed	= gpc_get_string( 'f_highlight_changed', config_get( 'default_show_changed' ) );
-	$f_hide_closed			= gpc_get_bool( 'f_hide_closed' );
-	$f_reporter_id			= gpc_get_string( 'f_reporter_id', '' );
-	$f_handler_id			= gpc_get_string( 'f_handler_id', '' );
+	$f_show_category		= gpc_get_string( 'show_category', '' );
+	$f_show_severity		= gpc_get_string( 'show_severity', '' );
+	$f_show_status			= gpc_get_string( 'show_status', '' );
+	$f_per_page				= gpc_get_int( 'per_page', -1 );
+	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
+	$f_hide_closed			= gpc_get_bool( 'hide_closed' );
+	$f_reporter_id			= gpc_get_string( 'reporter_id', '' );
+	$f_handler_id			= gpc_get_string( 'handler_id', '' );
 	# sort direction
-	$f_sort					= gpc_get_string( 'f_sort', 'last_updated' );
-	$f_dir					= gpc_get_string( 'f_dir', 'DESC' );
+	$f_sort					= gpc_get_string( 'sort', 'last_updated' );
+	$f_dir					= gpc_get_string( 'dir', 'DESC' );
 	# date values
-	$f_start_month			= gpc_get_string( 'f_start_month', date( 'm' ) );
-	$f_end_month			= gpc_get_string( 'f_end_month', date( 'm' ) );
-	$f_start_day			= gpc_get_string( 'f_start_day', 1 );
-	$f_end_day				= gpc_get_string( 'f_end_day', date( 'd' ) );
-	$f_start_year			= gpc_get_string( 'f_start_year', date( 'Y' ) );
-	$f_end_year				= gpc_get_string( 'f_end_year', date( 'Y' ) );
-	$f_search				= gpc_get_string( 'f_search', '' );
+	$f_start_month			= gpc_get_string( 'start_month', date( 'm' ) );
+	$f_end_month			= gpc_get_string( 'end_month', date( 'm' ) );
+	$f_start_day			= gpc_get_string( 'start_day', 1 );
+	$f_end_day				= gpc_get_string( 'end_day', date( 'd' ) );
+	$f_start_year			= gpc_get_string( 'start_year', date( 'Y' ) );
+	$f_end_year				= gpc_get_string( 'end_year', date( 'Y' ) );
+	$f_search				= gpc_get_string( 'search', '' );
 
 	if ( $f_hide_closed ) {
 		$f_hide_closed = 'on';

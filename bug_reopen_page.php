@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.19 2002-10-27 00:04:38 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.20 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
+	$f_bug_id		= gpc_get_int( 'bug_id' );
 
 	project_access_check( $f_bug_id );
 	if ( OFF == config_get( 'allow_reporter_reopen' )
@@ -29,13 +29,13 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo lang_get( 'reopen_add_bugnote_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>

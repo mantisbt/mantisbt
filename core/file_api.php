@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.16 2002-12-17 11:35:29 jfitzell Exp $
+	# $Id: file_api.php,v 1.17 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -40,10 +40,10 @@
 			$v_filesize = number_format( $v_filesize );
 			$v_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
 
-			echo "<a href=\"file_download.php?f_file_id=$v_id&amp;f_type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
+			echo "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
 			if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 			
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {

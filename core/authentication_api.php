@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.15 2002-12-04 03:16:33 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.16 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -50,7 +50,7 @@
 				$p_return_page = $_SERVER['REQUEST_URI'];
 			}
 			$p_return_page = htmlentities(urlencode($p_return_page));
-			print_header_redirect( 'login_page.php?f_return='.$p_return_page );
+			print_header_redirect( 'login_page.php?return='.$p_return_page );
 		}
 	}
 	

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen.php,v 1.23 2002-10-27 00:04:38 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.24 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,8 +15,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
+	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
 	project_access_check( $f_bug_id );
 	if ( OFF == config_get( 'allow_reporter_reopen' )

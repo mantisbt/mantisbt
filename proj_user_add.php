@@ -10,8 +10,8 @@
 <?php
 	check_access( MANAGER );
 
-	$f_user_id		= gpc_get_int_array( 'f_user_id', array() );
-	$f_access_level	= gpc_get_int( 'f_access_level' );
+	$f_user_id		= gpc_get_int_array( 'user_id', array() );
+	$f_access_level	= gpc_get_int( 'access_level' );
 
 	# Add user(s) to the current project
 	$count = count( $f_user_id );

@@ -47,6 +47,8 @@
 
 	# END OF UPGRADE SQL STATEMENTS
 
+	$f_action = $_REQUEST['action'];
+
 	if ( !isset ( $f_action ) ) {
 		$upgrade_obj->PrintActions();
 	} else {

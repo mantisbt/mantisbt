@@ -15,19 +15,19 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
+	$f_offset		= gpc_get_int( 'offset', 0 );
+
 	# check to see if the cookie does not exist
 	if ( is_blank( $g_view_all_cookie_val ) ) {
-		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
 	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
-
-	check_varset( $f_search, false );
-	check_varset( $f_offset, 0 );
 
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];
@@ -188,11 +188,11 @@
 <table class="width100">
 <tr>
     <td class="print">
-		<input type="hidden" name="f_type" value="1" />
-		<input type="hidden" name="f_print" value="1" />
-		<input type="hidden" name="f_offset" value="0" />
-		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>" />
-		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>" />
+		<input type="hidden" name="type" value="1" />
+		<input type="hidden" name="print" value="1" />
+		<input type="hidden" name="offset" value="0" />
+		<input type="hidden" name="sort" value="<?php echo $f_sort ?>" />
+		<input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
         <?php echo $s_search ?>
     </td>
     <td class="print">
@@ -225,17 +225,17 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="f_search" value="<?php echo $f_search; ?>" />
+	    <input type="text" name="search" value="<?php echo $f_search; ?>" />
 	</td>
 	<td>
-		<select name="f_reporter_id">
+		<select name="reporter_id">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
 			<?php print_reporter_option_list( $f_reporter_id ) ?>
 		</select>
 	</td>
 	<td>
-		<select name="f_handler_id">
+		<select name="handler_id">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="none" <?php check_selected( $f_handler_id, 'none' ); ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
@@ -243,34 +243,34 @@
 		</select>
 	</td>
 	<td>
-		<select name="f_show_category">
+		<select name="show_category">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
 			<?php print_category_option_list( $f_show_category ) ?>
 		</select>
 	</td>
 	<td>
-		<select name="f_show_severity">
+		<select name="show_severity">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'severity', $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
-		<select name="f_show_status">
+		<select name="show_status">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'status', $f_show_status ) ?>
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>" />
+		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>" />
 	</td>
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
+		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
+		<input type="checkbox" name="hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_filter_button ?>" />
@@ -297,9 +297,9 @@
 
 <tr>
 	<td>
-	<a href="<? echo "print_all_bug_page_excel.php"; ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=excel&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>"><img src="images/excelicon.gif" border="0" align="absmiddle" alt="Excel 2000"></a> <a href="<? echo "print_all_bug_page_excel.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=html&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Excel View" /></a>
-	- <a href="<? echo "print_all_bug_page_word.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=word&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>"><img src="images/wordicon.gif" border="0" align="absmiddle" alt="Word 2000" /></a>
-	<a href="<? echo "print_all_bug_page_word.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=html&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Word View" />
+	<a href="<? echo "print_all_bug_page_excel.php"; ?>?search=<? echo urlencode($f_search) ?>&amp;sort=<? echo $f_sort ?>&amp;dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;type_page=excel&amp;export=<? echo $f_export ?>&amp;show_flag=<? echo $t_show_flag ?>"><img src="images/excelicon.gif" border="0" align="absmiddle" alt="Excel 2000"></a> <a href="<? echo "print_all_bug_page_excel.php" ?>?search=<? echo urlencode($f_search) ?>&amp;sort=<? echo $f_sort ?>&amp;dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;type_page=html&amp;export=<? echo $f_export ?>&amp;show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Excel View" /></a>
+	- <a href="<? echo "print_all_bug_page_word.php" ?>?search=<? echo urlencode($f_search) ?>&amp;sort=<? echo $f_sort ?>&amp;dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;type_page=word&amp;export=<? echo $f_export ?>&amp;show_flag=<? echo $t_show_flag ?>"><img src="images/wordicon.gif" border="0" align="absmiddle" alt="Word 2000" /></a>
+	<a href="<? echo "print_all_bug_page_word.php" ?>?search=<? echo urlencode($f_search) ?>&amp;sort=<? echo $f_sort ?>&amp;dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;type_page=html&amp;export=<? echo $f_export ?>&amp;show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Word View" />
 	</td>
 </tr>
 <?php #<SQLI> ?>
@@ -400,7 +400,7 @@
 
 <tr>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<input type="checkbox" name="f_bug_arr[]" value="<?php echo $i ?>" />
+		<input type="checkbox" name="bug_arr[]" value="<?php echo $i ?>" />
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php print_formatted_priority_string( $v_status, $v_priority ) ?>

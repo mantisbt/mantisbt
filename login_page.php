@@ -24,10 +24,10 @@
 <br />
 <div align="center">
 <?php
-	$f_error		= gpc_get_bool( 'f_error' );
-	$f_cookie_error	= gpc_get_bool( 'f_cookie_error' );
-	$f_return		= gpc_get_string( 'f_return', '' );
-	$f_project_id	= gpc_get_int( 'f_project_id', -1 );
+	$f_error		= gpc_get_bool( 'error' );
+	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
+	$f_return		= gpc_get_string( 'return', '' );
+	$f_project_id	= gpc_get_int( 'project_id', -1 );
 
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
@@ -45,20 +45,20 @@
 <?php # Login Form BEGIN ?>
 <br />
 <div align="center">
-<form name="f_login_form" method="post" action="login.php">
+<form name="login_form" method="post" action="login.php">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php
 			if ( !is_blank($f_return) ) {
 			?>
-				<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>" />
+				<input type="hidden" name="return" value="<?php echo htmlentities($f_return) ?>" />
 				<?php
 			}
 
 			if ( $f_project_id > -1 ) {
 			?>
-				<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 				<?php
 			}
 			?>
@@ -77,7 +77,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="75%">
-		<input type="text" name="f_username" size="32" maxlength="32" />
+		<input type="text" name="username" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -85,7 +85,7 @@
 		<?php echo lang_get( 'password' ) ?>:
 	</td>
 	<td>
-		<input type="password" name="f_password" size="16" maxlength="32" />
+		<input type="password" name="password" size="16" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -93,7 +93,7 @@
 		<?php echo lang_get( 'save_login' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_perm_login" />
+		<input type="checkbox" name="perm_login" />
 	</td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@
 
 <script type="text/javascript" language="JavaScript">
 <!--
-	window.document.f_login_form.f_username.focus();
+	window.document.login_form.username.focus();
 //-->
 </script>
 

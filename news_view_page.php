@@ -10,7 +10,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 <?php
-	$f_news_id = gpc_get_int( 'f_news_id' );
+	$f_news_id = gpc_get_int( 'news_id' );
 
 	$row = news_get_row( $f_news_id );
 

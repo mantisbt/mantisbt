@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.29 2002-09-30 00:45:54 prescience Exp $
+	# $Id: bugnote_edit_page.php,v 1.30 2002-12-29 10:26:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -23,6 +23,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
+
 	bugnote_ensure_exists( $f_bugnote_id );
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
@@ -57,7 +59,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>" />
+		<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
 		<?php echo $s_edit_bugnote_title ?>
 	</td>
 	<td class="right">
@@ -66,7 +68,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><?php echo $t_bugnote_text ?></textarea>
+		<textarea cols="80" rows="10" name="bugnote_text" wrap="virtual"><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <tr>

@@ -10,10 +10,10 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	$f_username		= gpc_get_string( 'f_username', '' );
-	$f_password		= gpc_get_string( 'f_password', '' );
-	$f_perm_login	= gpc_get_bool( 'f_perm_login' );
-	$f_return		= gpc_get_string( 'f_return', 'main_page.php' );
+	$f_username		= gpc_get_string( 'username', '' );
+	$f_password		= gpc_get_string( 'password', '' );
+	$f_perm_login	= gpc_get_bool( 'perm_login' );
+	$f_return		= gpc_get_string( 'return', 'main_page.php' );
 
 	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
 		$f_username = $_SERVER['REMOTE_USER'];
@@ -21,9 +21,9 @@
  	}
 
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
-		$t_redirect_url = 'login_cookie_test.php?f_return=' . $f_return;
+		$t_redirect_url = 'login_cookie_test.php?return=' . $f_return;
 	} else {
-		$t_redirect_url = 'login_page.php?f_error=1';
+		$t_redirect_url = 'login_page.php?error=1';
 	}
 
 	print_header_redirect( $t_redirect_url );

@@ -10,9 +10,8 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	if ( is_blank( $f_category ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_category		= gpc_get_string( 'category' )
 
 	$t_categories_array = explode( '|', $f_category );
 	$t_count = count( $t_categories_array );
@@ -35,7 +34,7 @@
 		}
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -32,7 +32,7 @@
 		<?php echo $s_choose_project ?>:
 	</td>
 	<td width="60%">
-		<select name="f_project_id">
+		<select name="project_id">
 		<?php print_project_option_list( 0 ) ?>
 		</select>
 	</td>
@@ -42,7 +42,7 @@
 		<?php echo lang_get( 'make_default' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_make_default" />
+		<input type="checkbox" name="make_default" />
 	</td>
 </tr>
 <tr>

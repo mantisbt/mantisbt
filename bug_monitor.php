@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor.php,v 1.16 2002-10-23 04:54:44 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.17 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,8 +15,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id	= gpc_get_int( 'f_bug_id' );
-	$f_action	= gpc_get_string( 'f_action' );
+	$f_bug_id	= gpc_get_int( 'bug_id' );
+	$f_action	= gpc_get_string( 'action' );
 
 	project_access_check( $f_bug_id );
 	bug_ensure_exists( $f_bug_id );

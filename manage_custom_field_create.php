@@ -10,7 +10,7 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_name			= gpc_get_string( 'f_name' );
+	$f_name			= gpc_get_string( 'name' );
 
 	$t_names_array = explode( '|', $f_name );
 	$t_duplicate = false;

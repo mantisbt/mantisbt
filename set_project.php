@@ -8,8 +8,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php #login_cookie_check() ?>
 <?php
-	$f_project_id	= gpc_get_int( 'f_project_id' );
-	$f_make_default	= gpc_get_bool( 'f_make_default' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_make_default	= gpc_get_bool( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
 
 	# Set default project
@@ -33,7 +33,7 @@
 	} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 		$t_redirect_url = 'main_page.php';
 	} else if ( eregi( 'view_all_bug_page.php', $_SERVER['HTTP_REFERER'] ) ){
-		$t_redirect_url = 'view_all_set.php?f_type=0';
+		$t_redirect_url = 'view_all_set.php?type=0';
 	} else if ( eregi( 'summary_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url =  'summary_page.php';
 	} else if ( eregi( 'proj_user_menu_page.php', $_SERVER['HTTP_REFERER'] ) ){

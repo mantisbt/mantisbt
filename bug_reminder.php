@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.2 2002-12-22 21:47:20 vboctor Exp $
+	# $Id: bug_reminder.php,v 1.3 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,9 +15,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_to			= gpc_get_int_array( 'f_to' );
-	$f_body			= gpc_get_string( 'f_body' );
+	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_to			= gpc_get_int_array( 'to' );
+	$f_body			= gpc_get_string( 'body' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'bug_reminder_threshold' ) );

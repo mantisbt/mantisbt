@@ -32,7 +32,7 @@
 		<?php echo $s_title ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_title" size="70" maxlength="250" />
+		<input type="text" name="title" size="70" maxlength="250" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -40,7 +40,7 @@
 		<?php echo $s_description ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="7" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="7" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -49,7 +49,7 @@
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
-		<input name="f_file" type="file" size="70" />
+		<input name="file" type="file" size="70" />
 	</td>
 </tr>
 <tr>

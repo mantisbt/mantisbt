@@ -10,12 +10,12 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_news_id = gpc_get_int( 'f_news_id' );
-	$f_action = gpc_get_string( 'f_action', '' );
+	$f_news_id = gpc_get_int( 'news_id' );
+	$f_action = gpc_get_string( 'action', '' );
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( 'news_delete.php?f_news_id='.$f_news_id );
+		print_header_redirect( 'news_delete.php?news_id='.$f_news_id );
 	}
 
 	# Retrieve news item data and prefix with v_
@@ -37,7 +37,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_news_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
 		<?php echo $s_headline ?>
 	</td>
 	<td class="right">
@@ -50,7 +50,7 @@
 		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
+		<input type="text" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -58,7 +58,7 @@
 		<?php echo $s_body ?>
 	</td>
 	<td>
-		<textarea name="f_body" cols="60" rows="10" wrap="virtual"><?php echo $v_body ?></textarea>
+		<textarea name="body" cols="60" rows="10" wrap="virtual"><?php echo $v_body ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -66,7 +66,7 @@
 		<?php echo $s_post_to ?>
 	</td>
 	<td>
-		<select name="f_project_id">
+		<select name="project_id">
 		<?php
 			$t_sitewide = false;
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
@@ -83,7 +83,7 @@
 		<span class="small"><?php echo $s_stays_on_top ?></span>
 	</td>
 	<td>
-		<input type="checkbox" name="f_announcement" <?php check_checked( $v_announcement, 1 ); ?> />
+		<input type="checkbox" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -91,7 +91,7 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td width="75%">
-		<select name="f_view_state">
+		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
 		</select>
 	</td>

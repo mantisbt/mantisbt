@@ -20,7 +20,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_poster_id" value="<?php echo auth_get_current_user_id() ?>" />
+		<input type="hidden" name="poster_id" value="<?php echo auth_get_current_user_id() ?>" />
 		<?php echo $s_add_news_title ?>
 	</td>
 </tr>
@@ -30,7 +30,7 @@
 		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_headline" size="64" maxlength="64" />
+		<input type="text" name="headline" size="64" maxlength="64" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -38,7 +38,7 @@
 		<?php echo $s_body ?>
 	</td>
 	<td>
-		<textarea name="f_body" cols="60" rows="8" wrap="virtual"></textarea>
+		<textarea name="body" cols="60" rows="8" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -46,7 +46,7 @@
 		<?php echo $s_post_to ?>
 	</td>
 	<td>
-		<select name="f_project_id">
+		<select name="project_id">
 		<?php
 			$t_sitewide = false;
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
@@ -63,7 +63,7 @@
 		<span class="small"><?php echo $s_stays_on_top ?></span>
 	</td>
 	<td>
-		<input type="checkbox" name="f_announcement" />
+		<input type="checkbox" name="announcement" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -71,7 +71,7 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td width="75%">
-		<select name="f_view_state">
+		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state' ) ?>
 		</select>
 	</td>
@@ -98,8 +98,8 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" checked="checked" /> <?php echo $s_edit_post ?>
-		<input type="radio" name="f_action" value="delete" /> <?php echo $s_delete_post ?>
+		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo $s_edit_post ?>
+		<input type="radio" name="action" value="delete" /> <?php echo $s_delete_post ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -107,7 +107,7 @@
 		<?php echo $s_select_post ?>
 	</td>
 	<td width="75%">
-		<select name="f_news_id">
+		<select name="news_id">
 			<?php print_news_item_option_list() ?>
 		</select>
 	</td>

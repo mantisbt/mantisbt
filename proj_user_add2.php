@@ -9,11 +9,12 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
+	$f_project_id		= gpc_get_int( 'project_id' );
+	$f_user_id			= gpc_get_int( 'user_id' );
+	$f_access_level		= gpc_get_int( 'access_level' );
+
 	$c_user_id		= (integer)$f_user_id;
 	$c_access_level	= (integer)$f_access_level;
-
-	# check for no projects
-	check_varset( $f_project_id, '' );
 
 	# Add user to project(s)
 	$result = 0;
@@ -28,7 +29,7 @@
 		$result = db_query( $query );
 	}
 
-	$t_redirect_url = 'manage_user_page.php?f_user_id='.$f_user_id;
+	$t_redirect_url = 'manage_user_page.php?user_id='.$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

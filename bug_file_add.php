@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.34 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: bug_file_add.php,v 1.35 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,8 +15,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id	= gpc_get_int( 'f_bug_id' );
-	$f_file		= gpc_get_file( 'f_file' );
+	$f_bug_id	= gpc_get_int( 'bug_id' );
+	$f_file		= gpc_get_file( 'file' );
 	
 	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();

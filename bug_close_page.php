@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.17 2002-10-23 00:50:53 jfitzell Exp $
+	# $Id: bug_close_page.php,v 1.18 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
+	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'close_bug_threshold' ) );
@@ -29,13 +29,13 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo lang_get( 'close_bug_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>

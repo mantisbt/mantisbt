@@ -10,8 +10,8 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_user_id		= gpc_get_int( 'f_user_id' );
-	$f_access_level	= gpc_get_int( 'f_access_level' );
+	$f_user_id		= gpc_get_int( 'user_id' );
+	$f_access_level	= gpc_get_int( 'access_level' );
 	# check for no projects
 	check_varset( $f_project_id, array() );
 
@@ -23,7 +23,7 @@
 		$result = project_add_user( $t_project_id, $f_user_id, $f_access_level );
 	}
 
-	$t_redirect_url = 'manage_user_page.php?f_user_id='.$f_user_id;
+	$t_redirect_url = 'manage_user_page.php?user_id='.$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_delete.php,v 1.18 2002-10-23 04:54:44 jfitzell Exp $
+	# $Id: bug_file_delete.php,v 1.19 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_file_id = gpc_get_int( 'f_file_id' );
+	$f_file_id = gpc_get_int( 'file_id' );
 
 	$t_bug_id = file_get_field( $f_file_id, 'bug_id' );
 

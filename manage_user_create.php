@@ -10,13 +10,13 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_username			= gpc_get_string( 'f_username' );
-	$f_password			= gpc_get_string( 'f_password' );
-	$f_password_verify	= gpc_get_string( 'f_password_verify' );
-	$f_email			= gpc_get_string( 'f_email' );
-	$f_access_level		= gpc_get_string( 'f_access_level' );
-	$f_protected		= gpc_get_bool( 'f_protected' );
-	$f_enabled			= gpc_get_bool( 'f_enabled' );
+	$f_username			= gpc_get_string( 'username' );
+	$f_password			= gpc_get_string( 'password' );
+	$f_password_verify	= gpc_get_string( 'password_verify' );
+	$f_email			= gpc_get_string( 'email' );
+	$f_access_level		= gpc_get_string( 'access_level' );
+	$f_protected		= gpc_get_bool( 'protected' );
+	$f_enabled			= gpc_get_bool( 'enabled' );
 
 	# check for empty username
 	$f_username = trim( $f_username );

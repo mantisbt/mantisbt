@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.24 2002-10-23 00:50:53 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.25 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'handle_bug_threshold' ) );

@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.1 2002-12-21 10:07:15 jfitzell Exp $
+	# $Id: bug_reminder_page.php,v 1.2 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'bug_reminder_threshold' ) );
@@ -27,7 +27,7 @@
 <div align="center">
 <table class="width75" cellspacing="1">
 <form method="post" action="bug_reminder.php">
-<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>">
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'bug_reminder' ) ?>
@@ -38,14 +38,14 @@
 		<?php echo lang_get( 'to' ) ?>
 	</td>
 	<td>
-		<select name="f_to[]" multiple size="10">
+		<select name="to[]" multiple size="10">
 			<?php echo print_project_user_option_list() ?>
 		</select>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="center" colspan="2">
-		<textarea name="f_body" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="body" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>

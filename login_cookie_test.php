@@ -10,12 +10,12 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	$f_return = gpc_get_string( 'f_return', 'main_page.php' );
+	$f_return = gpc_get_string( 'return', 'main_page.php' );
 
 	if ( auth_is_user_authenticated() ) {
 		$t_redirect_url = $f_return;
 	} else {
-		$t_redirect_url = 'login_page.php?f_cookie_error=1';
+		$t_redirect_url = 'login_page.php?cookie_error=1';
 	}
 
 	print_header_redirect( $t_redirect_url );

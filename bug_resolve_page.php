@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.21 2002-10-27 22:53:40 jfitzell Exp $
+	# $Id: bug_resolve_page.php,v 1.22 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'handle_bug_threshold' ) );
@@ -28,7 +28,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo lang_get( 'resolve_bug_title' ) ?>
 	</td>
 </tr>
@@ -37,7 +37,7 @@
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<select name="f_resolution">
+		<select name="resolution">
 			<?php print_enum_string_option_list( "resolution", FIXED ) ?>
 		</select>
 	</td>
@@ -47,7 +47,7 @@
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_duplicate_id" maxlength="7" />
+		<input type="text" name="duplicate_id" maxlength="7" />
 	</td>
 </tr>
 
@@ -57,7 +57,7 @@
 		<?php echo lang_get( 'close_immediately' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_close_now" />
+		<input type="checkbox" name="close_now" />
 	</td>
 </tr>
 <?php } ?>
@@ -69,7 +69,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.21 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.22 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,29 +15,29 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_user_id					= gpc_get_int( 'f_user_id' );
-	$f_redirect_url				= gpc_get_string( 'f_redirect_url' );
+	$f_user_id					= gpc_get_int( 'user_id' );
+	$f_redirect_url				= gpc_get_string( 'redirect_url' );
 
 	$t_prefs = user_pref_get( $f_user_id );
 
-	$t_prefs->redirect_delay	= gpc_get_int( 'f_redirect_delay' );
-	$t_prefs->refresh_delay		= gpc_get_int( 'f_refresh_delay' );
-	$t_prefs->default_project	= gpc_get_int( 'f_default_project' );
+	$t_prefs->redirect_delay	= gpc_get_int( 'redirect_delay' );
+	$t_prefs->refresh_delay		= gpc_get_int( 'refresh_delay' );
+	$t_prefs->default_project	= gpc_get_int( 'default_project' );
 
-	$t_prefs->language			= gpc_get_string( 'f_language' );
+	$t_prefs->language			= gpc_get_string( 'language' );
 
-	$t_prefs->advanced_report	= gpc_get_bool( 'f_advanced_report' );
-	$t_prefs->advanced_view		= gpc_get_bool( 'f_advanced_view' );
-	$t_prefs->advanced_update	= gpc_get_bool( 'f_advanced_update' );
-	$t_prefs->email_on_new		= gpc_get_bool( 'f_email_on_new' );
-	$t_prefs->email_on_assigned	= gpc_get_bool( 'f_email_on_assigned' );
-	$t_prefs->email_on_feedback	= gpc_get_bool( 'f_email_on_feedback' );
-	$t_prefs->email_on_resolved	= gpc_get_bool( 'f_email_on_resolved' );
-	$t_prefs->email_on_closed	= gpc_get_bool( 'f_email_on_closed' );
-	$t_prefs->email_on_reopened	= gpc_get_bool( 'f_email_on_reopened' );
-	$t_prefs->email_on_bugnote	= gpc_get_bool( 'f_email_on_bugnote' );
-	$t_prefs->email_on_status	= gpc_get_bool( 'f_email_on_status' );
-	$t_prefs->email_on_priority	= gpc_get_bool( 'f_email_on_priority' );
+	$t_prefs->advanced_report	= gpc_get_bool( 'advanced_report' );
+	$t_prefs->advanced_view		= gpc_get_bool( 'advanced_view' );
+	$t_prefs->advanced_update	= gpc_get_bool( 'advanced_update' );
+	$t_prefs->email_on_new		= gpc_get_bool( 'email_on_new' );
+	$t_prefs->email_on_assigned	= gpc_get_bool( 'email_on_assigned' );
+	$t_prefs->email_on_feedback	= gpc_get_bool( 'email_on_feedback' );
+	$t_prefs->email_on_resolved	= gpc_get_bool( 'email_on_resolved' );
+	$t_prefs->email_on_closed	= gpc_get_bool( 'email_on_closed' );
+	$t_prefs->email_on_reopened	= gpc_get_bool( 'email_on_reopened' );
+	$t_prefs->email_on_bugnote	= gpc_get_bool( 'email_on_bugnote' );
+	$t_prefs->email_on_status	= gpc_get_bool( 'email_on_status' );
+	$t_prefs->email_on_priority	= gpc_get_bool( 'email_on_priority' );
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {

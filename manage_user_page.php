@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_user_id = gpc_get_int( 'f_user_id' );
+	$f_user_id = gpc_get_int( 'user_id' );
 
 	# grab user data and prefix with u_
 	$row = user_get_row( $f_user_id );
@@ -27,7 +27,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
+		<input type="hidden" name="user_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>
 </tr>
@@ -36,7 +36,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="70%">
-		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
+		<input type="text" size="16" maxlength="32" name="username" value="<?php echo $u_username ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -44,7 +44,7 @@
 		<?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
-		<?php print_email_input( 'f_email', $u_email ) ?>
+		<?php print_email_input( 'email', $u_email ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -52,7 +52,7 @@
 		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td>
-		<select name="f_access_level">
+		<select name="access_level">
 			<?php print_enum_string_option_list( 'access_levels', $u_access_level ) ?>
 		</select>
 	</td>
@@ -62,7 +62,7 @@
 		<?php echo lang_get( 'enabled' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?> />
+		<input type="checkbox" name="enabled" <?php check_checked( $u_enabled, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -70,7 +70,7 @@
 		<?php echo lang_get( 'protected' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?> />
+		<input type="checkbox" name="protected" <?php check_checked( $u_protected, ON ); ?> />
 	</td>
 </tr>
 <tr>
@@ -88,15 +88,15 @@
 
 <!-- Reset Button -->
 	<form method="post" action="manage_user_reset.php">
-	<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
-	<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
+	<input type="hidden" name="user_id" value="<?php echo $u_id ?>" />
+	<input type="hidden" name="email" value="<?php echo $u_email ?>" />
 	<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
 	</form>
 
 
 <!-- Delete Button -->
 	<form method="post" action="manage_user_delete.php">
-	<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
+	<input type="hidden" name="user_id" value="<?php echo $u_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
 </div>
@@ -119,7 +119,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
+		<input type="hidden" name="user_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'add_user_title' ) ?>
 	</td>
 </tr>
@@ -136,7 +136,7 @@
 		<?php echo lang_get( 'unassigned_projects' ) ?>:
 	</td>
 	<td>
-		<select name="f_project_id[]" multiple size="5">
+		<select name="project_id[]" multiple size="5">
 			<?php print_project_user_list_option_list2( $u_id ) ?>
 		</select>
 	</td>
@@ -146,7 +146,7 @@
 		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td>
-		<select name="f_access_level">
+		<select name="access_level">
 			<?php # No administrator choice ?>
 			<?php print_project_access_levels_option_list( REPORTER ) ?>
 		</select>

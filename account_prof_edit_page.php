@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.22 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prof_edit_page.php,v 1.23 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,16 +19,16 @@
 	# protected account check
 	current_user_ensure_unprotected();
 
-	$f_profile_id	= gpc_get_int( 'f_profile_id' );
-	$f_action		= gpc_get_string( 'f_action' );
+	$f_profile_id	= gpc_get_int( 'profile_id' );
+	$f_action		= gpc_get_string( 'action' );
 
 	# If deleteing profile redirect to delete script
 	if ( 'delete' == $f_action) {
-		print_header_redirect( 'account_prof_delete.php?f_profile_id=' . $f_profile_id );
+		print_header_redirect( 'account_prof_delete.php?profile_id=' . $f_profile_id );
 	}
 	# If Defaulting profile redirect to make default script
 	else if ( 'default' == $f_action ) {
-		print_header_redirect( 'account_prof_make_default.php?f_profile_id=' . $f_profile_id );
+		print_header_redirect( 'account_prof_make_default.php?profile_id=' . $f_profile_id );
 	}
 
 	$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
@@ -46,7 +46,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_profile_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
 		<?php echo lang_get( 'edit_profile_title' ) ?>
 	</td>
 	<td class="right">
@@ -58,7 +58,7 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo string_edit_text( $v_platform ) ?>" />
+		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_edit_text( $v_platform ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -66,7 +66,7 @@
 		<?php echo lang_get( 'operating_system' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo string_edit_text( $v_os ) ?>" />
+		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_edit_text( $v_os ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -74,7 +74,7 @@
 		<?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo string_edit_text( $v_os_build ) ?>" />
+		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_edit_text( $v_os_build ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -82,7 +82,7 @@
 		<?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="8" wrap="virtual"><?php echo string_edit_textarea( $v_description ) ?></textarea>
+		<textarea name="description" cols="60" rows="8" wrap="virtual"><?php echo string_edit_textarea( $v_description ) ?></textarea>
 	</td>
 </tr>
 <tr>

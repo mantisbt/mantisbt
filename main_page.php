@@ -10,23 +10,26 @@
 	# News is displayed which can notify users of any important changes
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php login_cookie_check();
+
+	$f_offset = gpc_get_int( 'offset', 0 );
+
+?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <div class="quick-summary-left">
 		<?php echo $s_open_and_assigned_to_me ?>:
-		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_reporter_id=any&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_handler_id=' .  auth_get_current_user_id() . '&amp;f_hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
+		<?php PRINT '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
 </div>
 <div class="quick-summary-right">
 		<?php echo $s_open_and_reported_to_me ?>:
-		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_reporter_id=' . auth_get_current_user_id() . '&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_handler_id=any&amp;f_hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>' ?>
+		<?php PRINT '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>' ?>
 </div>
 <br />
 
 <?php
 	# Check to see if variable is set
-	check_varset( $f_offset, 0 );
 	$c_offset = (integer)$f_offset;
 
 	# get news count (project plus sitewide posts)
@@ -120,10 +123,10 @@
 	$f_offset_prev = $f_offset - $g_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( 'main_page.php?f_offset='.$f_offset_prev, $s_newer_news_link );
+		print_bracket_link( 'main_page.php?offset='.$f_offset_prev, $s_newer_news_link );
 	}
 	if ( $news_count == $g_news_view_limit ) {
-		print_bracket_link( 'main_page.php?f_offset='.$f_offset_next, $s_older_news_link );
+		print_bracket_link( 'main_page.php?offset='.$f_offset_next, $s_older_news_link );
 	}
 ?>
 </div>

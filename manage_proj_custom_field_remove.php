@@ -10,12 +10,12 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_field_id		= gpc_get_int( 'f_field_id' );
-	$f_project_id	= gpc_get_int( 'f_project_id' );
+	$f_field_id		= gpc_get_int( 'field_id' );
+	$f_project_id	= gpc_get_int( 'project_id' );
 
 	custom_field_remove( $f_field_id, $f_project_id );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php

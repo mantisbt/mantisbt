@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.26 2002-10-27 22:53:40 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.27 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,11 +16,11 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
-	$f_resolution	= gpc_get_int( 'f_resolution', FIXED );
-	$f_duplicate_id	= gpc_get_int( 'f_duplicate_id', null );
-	$f_close_now	= gpc_get_bool( 'f_close_now' );
+	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
+	$f_resolution	= gpc_get_int( 'resolution', FIXED );
+	$f_duplicate_id	= gpc_get_int( 'duplicate_id', null );
+	$f_close_now	= gpc_get_bool( 'close_now' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'handle_bug_threshold' ) );

@@ -10,7 +10,7 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_field_id		= gpc_get_int( 'f_field_id' );
+	$f_field_id		= gpc_get_int( 'field_id' );
 
 	if( 0 == count( custom_field_get_project_ids( $f_field_id ) ) ) {
 		$result = custom_field_delete( $f_field_id );

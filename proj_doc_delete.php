@@ -9,6 +9,9 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );  # @@@ Need to check that the person is assigned to this project
+
+	$f_file_id = gpc_get_int( 'file_id' );
+
 	$c_file_id = (integer)$f_file_id;
 
 	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ),

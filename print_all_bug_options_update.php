@@ -13,6 +13,9 @@
 
 <?php login_cookie_check() ?>
 <?php
+	$f_user_id		= gpc_get_int( 'user_id' );
+	$f_redirect_url	= gpc_get_int( 'redirect_url' );
+
 	# the check for the protected state is already done in the form, there is
 	# no need to duplicate it here.
 
@@ -22,7 +25,7 @@
 
 	# check the checkboxes
 	for ($i=0 ; $i <$field_name_count ; $i++) {
-		$t_name='f_print_'.strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
+		$t_name='print_'.strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
 		if ( !isset( $$t_name ) || ( 1 == ($$t_name) ) ) {
 			$t_prefs_arr[$i] = 0;
 		}

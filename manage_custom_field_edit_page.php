@@ -10,7 +10,7 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_field_id		= gpc_get_int( 'f_field_id' );
+	$f_field_id		= gpc_get_int( 'field_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -26,7 +26,7 @@
 <br />
 <div align="center">
 <form method="post" action="manage_custom_field_update.php">
-<input type="hidden" name="f_field_id" value="<?php echo $f_field_id ?>" />
+<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -38,7 +38,7 @@
 		<?php echo lang_get( 'custom_field_name' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_name" size="32" maxlength="64" value="<?php echo $t_definition['name'] ?>" />
+		<input type="text" name="name" size="32" maxlength="64" value="<?php echo $t_definition['name'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -46,7 +46,7 @@
 		<?php echo lang_get( 'custom_field_type' ) ?>
 	</td>
 	<td>
-		<select name="f_type">
+		<select name="type">
 			<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
 		</select>
 	</td>
@@ -56,7 +56,7 @@
 		<?php echo lang_get( 'custom_field_possible_values' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_possible_values" size="32" maxlength="255" value="<?php echo $t_definition['possible_values'] ?>" />
+		<input type="text" name="possible_values" size="32" maxlength="255" value="<?php echo $t_definition['possible_values'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -64,7 +64,7 @@
 		<?php echo lang_get( 'custom_field_default_value' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_default_value" size="32" maxlength="255" value="<?php echo $t_definition['default_value'] ?>" />
+		<input type="text" name="default_value" size="32" maxlength="255" value="<?php echo $t_definition['default_value'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -72,7 +72,7 @@
 		<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_valid_regexp" size="32" maxlength="255" value="<?php echo $t_definition['valid_regexp'] ?>" />
+		<input type="text" name="valid_regexp" size="32" maxlength="255" value="<?php echo $t_definition['valid_regexp'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -80,7 +80,7 @@
 		<?php echo lang_get( 'custom_field_access_level_r' ) ?>
 	</td>
 	<td>
-		<select name="f_access_level_r">
+		<select name="access_level_r">
 			<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_r'] ) ?>
 		</select>
 	</td>
@@ -90,7 +90,7 @@
 		<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
 	</td>
 	<td>
-		<select name="f_access_level_rw">
+		<select name="access_level_rw">
 			<?php print_enum_string_option_list( 'access_levels', $t_definition['access_level_rw'] ) ?>
 		</select>
 	</td>
@@ -100,7 +100,7 @@
 		<?php echo lang_get( 'custom_field_length_min' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
+		<input type="text" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -108,7 +108,7 @@
 		<?php echo lang_get( 'custom_field_length_max' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
+		<input type="text" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -116,7 +116,7 @@
 		<?php echo lang_get( 'custom_field_advanced' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced" value="1" <?php if($t_definition['advanced']) echo 'checked'; ?>>
+		<input type="checkbox" name="advanced" value="1" <?php if($t_definition['advanced']) echo 'checked'; ?>>
 	</td>
 </tr>
 <tr>
@@ -135,7 +135,7 @@
 
 <div class="border-center">
 	<form method="post" action="manage_custom_field_delete.php">
-	<input type="hidden" name="f_field_id" value="<?php echo $f_field_id ?>" />
+	<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
 	</form>
 </div>

@@ -7,8 +7,8 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	$f_username		= gpc_get_string( 'f_username' );
-	$f_email		= gpc_get_string( 'f_email' );
+	$f_username		= gpc_get_string( 'username' );
+	$f_email		= gpc_get_string( 'email' );
 
 	# Check to see if signup is allowed
 	if ( OFF == config_get( 'allow_signup' ) ) {

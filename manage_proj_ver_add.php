@@ -10,8 +10,8 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id = gpc_get_int( 'f_project_id' );
-	$f_version = gpc_get_string( 'f_version' );
+	$f_project_id = gpc_get_int( 'project_id' );
+	$f_version = gpc_get_string( 'version' );
 
 	$result = 0;
 	# check for empty case or duplicate
@@ -19,7 +19,7 @@
 		$result = version_add( $f_project_id, $f_version );
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php

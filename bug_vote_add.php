@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_vote_add.php,v 1.16 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: bug_vote_add.php,v 1.17 2002-12-29 10:26:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php die('Not in use.'); ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'report_bug_threshold' ) );

@@ -10,7 +10,11 @@
 <?php
 	check_access( MANAGER );
 
-	$c_file_id			= (integer)$f_file_id;
+	$f_file_id		= gpc_get_int( 'file_id' );
+	$f_title		= gpc_get_string( 'title' );
+	$f_description	= gpc_get_string( 'description' );
+
+	$c_file_id		= (integer)$f_file_id;
 	$c_title 		= string_prepare_text( $f_title );
 	$c_description 	= string_prepare_textarea( $f_description );
 

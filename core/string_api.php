@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.16 2002-12-10 13:49:16 vboctor Exp $
+	# $Id: string_api.php,v 1.17 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -146,13 +146,13 @@
 
 		if ( $p_include_anchor ) {
 			$t_replace_with = <<< EOT
-'\\1<a href="$t_page_name?f_bug_id=\\2" title="' .
+'\\1<a href="$t_page_name?bug_id=\\2" title="' .
 bug_get_field( \\2, 'summary' ) .
 '">#\\2</a>'
 EOT;
 			$t_modifier = 'e';
 		} else {
-			$t_replace_with = $t_path . $t_page_name . '?f_bug_id=\2';
+			$t_replace_with = $t_path . $t_page_name . '?bug_id=\2';
 			$t_modifier = '';
 		}
 
@@ -261,7 +261,7 @@ EOT;
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
-		return string_get_bug_view_page( $p_user_id ) . '?f_bug_id=' . bug_format_id( $p_bug_id );
+		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
 	}
 
 	# --------------------
@@ -283,7 +283,7 @@ EOT;
 	# return the name and GET parameters of a bug UPDATE page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_update_url( $p_bug_id, $p_user_id=null ) {
-		return string_get_bug_update_page( $p_user_id ) . '?f_bug_id=' . bug_format_id( $p_bug_id );
+		return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
 	}
 
 	# --------------------

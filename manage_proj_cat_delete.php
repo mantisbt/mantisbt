@@ -9,6 +9,10 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
+
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_category		= gpc_get_int( 'category' );
+
 	$f_category = urldecode( $f_category );
 
 	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ),
@@ -16,7 +20,7 @@
 
 	$result = category_delete( $f_project_id, $f_category );
 
-    $t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+    $t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

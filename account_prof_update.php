@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.18 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prof_update.php,v 1.19 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,11 +16,11 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_profile_id	= gpc_get_int( 'f_profile_id' );
-	$f_platform		= gpc_get_string( 'f_platform' );
-	$f_os			= gpc_get_string( 'f_os' );
-	$f_os_build		= gpc_get_string( 'f_os_build' );
-	$f_description	= gpc_get_string( 'f_description' );
+	$f_profile_id	= gpc_get_int( 'profile_id' );
+	$f_platform		= gpc_get_string( 'platform' );
+	$f_os			= gpc_get_string( 'os' );
+	$f_os_build		= gpc_get_string( 'os_build' );
+	$f_description	= gpc_get_string( 'description' );
 
 	profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
 

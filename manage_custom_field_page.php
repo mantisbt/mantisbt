@@ -35,7 +35,7 @@
                 $t_desc = custom_field_get_definition( $t_field_id );
 ?><tr <?php echo helper_alternate_class() ?>>
         <td>
-                <a href="manage_custom_field_edit_page.php?f_field_id=<?php echo $t_field_id ?>"><?php echo $t_desc['name'] ?></a>
+                <a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo $t_desc['name'] ?></a>
         </td>
         <td> <?php echo get_enum_element('custom_field_type', $t_desc['type']); ?> </td>
 	<td> <?php echo $t_desc['possible_values']; ?> </td>
@@ -56,7 +56,7 @@
 
 <br />
 <form method="post" action="manage_custom_field_create.php">
-        <input type="text" name="f_name" size="32" maxlength="64" />
+        <input type="text" name="name" size="32" maxlength="64" />
         <input type="submit" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 </form>
 <?php } # Create Form END ?>

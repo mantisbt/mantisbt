@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 	project_access_check( $f_bug_id );
 	bug_ensure_exists( $f_bug_id );
 

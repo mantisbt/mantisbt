@@ -10,6 +10,8 @@
 	# $f_bug_id must be set and be set to the bug id
 ?>
 <?php
+	$f_bug_id = gpc_get_int( 'bug_id' );
+
 	# grab the user id currently logged in
 	$t_user_id	= auth_get_current_user_id();
 	$c_bug_id		= (integer)$f_bug_id;
@@ -94,8 +96,3 @@
 ?>
 </table>
 <?php # Bugnotes END ?>
-
-<?php if ( ( ( $v_status < RESOLVED ) ||
-		  ( isset( $f_resolve_note ) ) ) &&
-		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
-<?php } ?>

@@ -10,12 +10,12 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id	= gpc_get_int( 'f_project_id' );
-	$f_poster_id	= gpc_get_int( 'f_poster_id' );
-	$f_view_state	= gpc_get_int( 'f_view_state' );
-	$f_headline		= gpc_get_string( 'f_headline' );
-	$f_announcement	= gpc_get_string( 'f_announcement', '' );
-	$f_body			= gpc_get_string( 'f_body', '' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_poster_id	= gpc_get_int( 'poster_id' );
+	$f_view_state	= gpc_get_int( 'view_state' );
+	$f_headline		= gpc_get_string( 'headline' );
+	$f_announcement	= gpc_get_string( 'announcement', '' );
+	$f_body			= gpc_get_string( 'body', '' );
 
 	news_create( $f_project_id, $f_poster_id, $f_view_state, $f_announcement, $f_headline, $f_body );
     $f_headline = string_display( $f_headline );

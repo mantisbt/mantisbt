@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.17 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: account_prof_add.php,v 1.18 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,10 +17,10 @@
 <?php
 	check_access( config_get( 'add_profile_threshold' ) );
 
-	$f_platform		= gpc_get_string( 'f_platform' );
-	$f_os			= gpc_get_string( 'f_os' );
-	$f_os_build		= gpc_get_string( 'f_os_build' );
-	$f_description	= gpc_get_string( 'f_description' );
+	$f_platform		= gpc_get_string( 'platform' );
+	$f_os			= gpc_get_string( 'os' );
+	$f_os_build		= gpc_get_string( 'os_build' );
+	$f_description	= gpc_get_string( 'description' );
 
 	profile_create( auth_get_current_user_id(), $f_platform, $f_os, $f_os_build, $f_description );
 

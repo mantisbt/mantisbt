@@ -9,14 +9,14 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
+
+	$f_assigned_to = gpc_get_int( 'assigned_to', 0 );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <?php
 	print_manage_menu( 'manage_proj_cat_edit_page.php' );
-
-	check_varset( $f_assigned_to, '0' );
 ?>
 
 <br />
@@ -30,12 +30,12 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>" />
+		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="orig_category" value="<?php echo $f_category ?>" />
 		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>" />
+		<input type="text" name="category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -43,7 +43,7 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td>
-		<select name="f_assigned_to">
+		<select name="assigned_to">
 			<option value="0"></option>
 			<?php print_assign_to_option_list($f_assigned_to) ?>
 		</select>
@@ -65,8 +65,8 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-	<input type="hidden" name="f_category" value="<?php echo $f_category ?>" />
+	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+	<input type="hidden" name="category" value="<?php echo $f_category ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 </div>

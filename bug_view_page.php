@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.19 2002-12-21 13:33:43 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.20 2002-12-29 10:26:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_bug_id	= gpc_get_int( 'f_bug_id' );
-	$f_history	= gpc_get_bool( 'f_history' );
+	$f_bug_id	= gpc_get_int( 'bug_id' );
+	$f_history	= gpc_get_bool( 'history' );
 
 	if ( ADVANCED_ONLY == config_get( 'show_view' ) ) {
-		print_header_redirect ( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id );
+		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );
 	}
 
 	project_access_check( $f_bug_id );
@@ -40,16 +40,16 @@
 <?php	if ( ( current_user_get_field( 'username' ) != config_get( 'anonymous_account' ) )
 				&& access_level_check_greater_or_equal( config_get( 'bug_reminder_threshold' ) ) ) { ?>
 			<span class="small">
-				<?php print_bracket_link( 'bug_reminder_page.php?f_bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
+				<?php print_bracket_link( 'bug_reminder_page.php?bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
 			</span>
 <?php }?>
 	</td>
 	<td class="right" colspan="2">
 <?php if ( BOTH == config_get( 'show_view' ) ) { ?>
-		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id, lang_get( 'view_advanced_link' ) )?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id, lang_get( 'view_advanced_link' ) )?></span>
 <?php }?>
-	<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id=' . $f_bug_id . '&amp;f_history=1#history', lang_get( 'bug_history' ) ) ?></span>
-	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_bug_id=' . $f_bug_id, lang_get( 'print' ) ) ?></span>
+	<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id=' . $f_bug_id . '&amp;history=1#history', lang_get( 'bug_history' ) ) ?></span>
+	<span class="small"><?php print_bracket_link( 'print_bug_page.php?bug_id=' . $f_bug_id, lang_get( 'print' ) ) ?></span>
 	</td>
 </tr>
 <tr class="row-category">

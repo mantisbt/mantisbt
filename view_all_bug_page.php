@@ -6,21 +6,21 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.40 $
+	# $Revision: 1.41 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-07 08:44:12 $
+	# $Date: 2002-12-29 10:26:08 $
 	#
-	# $Id: view_all_bug_page.php,v 1.40 2002-09-07 08:44:12 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.41 2002-12-29 10:26:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_page_number		= gpc_get_int( 'f_page_number', 1 );
+	$f_page_number		= gpc_get_int( 'page_number', 1 );
 
 	# check to see if the cookie does not exist
 	if ( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?f_type=0' );
+		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
 	$t_bug_count = null;
@@ -33,7 +33,7 @@
 	print_page_top1();
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-		print_meta_redirect( 'view_all_bug_page.php?f_page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
+		print_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
 	}
 
 	print_page_top2();

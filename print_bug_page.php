@@ -8,8 +8,10 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id = gpc_get_int( 'bug_id' );
+
 	if ( SIMPLE_ONLY == $g_show_view ) {
-		print_header_redirect ( 'bug_view_page.php?f_bug_id='.$f_bug_id );
+		print_header_redirect ( 'bug_view_page.php?bug_id='.$f_bug_id );
 	}
 
 	project_access_check( $f_bug_id );
@@ -53,7 +55,7 @@
 		<?php echo $s_viewing_bug_advanced_details_title ?>
 	</td>
 	<td class="right" colspan="3">
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id='.$f_bug_id, $s_go_back ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id='.$f_bug_id, $s_go_back ) ?></span>
 	</td>
 </tr>
 <tr>

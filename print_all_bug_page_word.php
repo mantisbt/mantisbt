@@ -13,6 +13,11 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_type_page	= gpc_get_string( 'type_page', 'word' );
+	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
+	$f_offset		= gpc_get_int( 'offset', 0 );
+	$f_export		= gpc_get_string( 'export' );
+
 	# word or html export
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_word";
@@ -23,18 +28,14 @@
 
 	# check to see if the cookie does not exist
 	if ( is_blank( $g_view_all_cookie_val ) ) {
-		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
 	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
-
-	check_varset( $f_search, false );
-	check_varset( $f_offset, 0 );
-	check_varset( $f_type_page, 'word' );
 
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];

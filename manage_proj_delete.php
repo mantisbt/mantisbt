@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 	
-	$f_project_id = gpc_get_int( 'f_project_id' );
+	$f_project_id = gpc_get_int( 'project_id' );
 	
 	helper_ensure_confirmed( lang_get( 'project_delete_msg' ),
 							 lang_get( 'project_delete_button' ) );

@@ -10,6 +10,8 @@
 <?php
 	check_access( MANAGER );
 
+	$f_project_id = gpc_get_int( 'project_id' );
+
 	# @@@ check for current project being 0000000 just in case
 
 	project_copy_users( $f_project_id, helper_get_current_project() );

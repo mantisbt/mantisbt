@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-20 20:22:06 $
+	# $Date: 2002-12-29 10:26:08 $
 	#
-	# $Id: csv_export.php,v 1.3 2002-09-20 20:22:06 jfitzell Exp $
+	# $Id: csv_export.php,v 1.4 2002-12-29 10:26:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -18,7 +18,7 @@
 <?php
 	# check to see if the cookie does not exist
 	if ( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?f_type=0' );
+		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
 	$t_bug_count = null;

@@ -11,6 +11,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
+	$f_private		= gpc_get_bool( 'private' );
+
 	# make sure the user accessing the note is valid and has proper access
 	bugnote_ensure_exists( $f_bugnote_id );
 	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );

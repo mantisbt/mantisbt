@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 	
-	$f_user_id = gpc_get_int( 'f_user_id' );
+	$f_user_id = gpc_get_int( 'user_id' );
 
 	$t_result = user_reset_password( $f_user_id );
 

@@ -11,6 +11,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
+	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
+
 	bugnote_ensure_exists( $f_bugnote_id );
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );

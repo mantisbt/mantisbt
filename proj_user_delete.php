@@ -10,7 +10,7 @@
 <?php
 	check_access( MANAGER );
 
-	$f_user_id = gpc_get_int( 'f_user_id' );
+	$f_user_id = gpc_get_int( 'user_id' );
 
 	project_remove_user( helper_get_current_project(), $f_user_id );
 

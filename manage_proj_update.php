@@ -10,13 +10,13 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id 	= gpc_get_int( 'f_project_id' );
-	$f_name 		= gpc_get_string( 'f_name' );
-	$f_description 	= gpc_get_string( 'f_description' );
-	$f_status 		= gpc_get_int( 'f_status' );
-	$f_view_state 	= gpc_get_int( 'f_view_state' );
-	$f_file_path 	= gpc_get_string( 'f_file_path', '' );
-	$f_enabled	 	= gpc_get_bool( 'f_enabled' );
+	$f_project_id 	= gpc_get_int( 'project_id' );
+	$f_name 		= gpc_get_string( 'name' );
+	$f_description 	= gpc_get_string( 'description' );
+	$f_status 		= gpc_get_int( 'status' );
+	$f_view_state 	= gpc_get_int( 'view_state' );
+	$f_file_path 	= gpc_get_string( 'file_path', '' );
+	$f_enabled	 	= gpc_get_bool( 'enabled' );
 
 	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled );
 

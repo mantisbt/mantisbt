@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.16 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prefs_reset.php,v 1.17 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -26,7 +26,7 @@
 	require_once( 'core.php' );
 
 	#============ Parameters ============
-	$f_redirect_url	= gpc_get_string( 'f_redirect_url', 'account_prefs_page.php' );
+	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
 
 	#============ Permissions ============
 	login_cookie_check();

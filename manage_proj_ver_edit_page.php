@@ -10,9 +10,9 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id	= gpc_get_int( 'f_project_id' );
-	$f_version		= gpc_get_string( 'f_version' );
-	$f_date_order	= gpc_get_string( 'f_date_order' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_version		= gpc_get_string( 'version' );
+	$f_date_order	= gpc_get_string( 'date_order' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -22,8 +22,8 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_ver_update.php">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-<input type="hidden" name="f_orig_version" value="<?php echo $f_version ?>" />
+<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+<input type="hidden" name="orig_version" value="<?php echo $f_version ?>" />
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -35,7 +35,7 @@
 		<?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_version" size="32" maxlength="64" value="<?php echo urldecode( $f_version ) ?>" />
+		<input type="text" name="version" size="32" maxlength="64" value="<?php echo urldecode( $f_version ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -43,7 +43,7 @@
 		<?php echo lang_get( 'date_order' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_date_order" size="32" value="<?php echo urldecode( $f_date_order ) ?>" />
+		<input type="text" name="date_order" size="32" value="<?php echo urldecode( $f_date_order ) ?>" />
 	</td>
 </tr>
 <tr>
@@ -62,8 +62,8 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_ver_delete.php">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-	<input type="hidden" name="f_version" value="<?php echo $f_version ?>" />
+	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+	<input type="hidden" name="version" value="<?php echo $f_version ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
 	</form>
 </div>

@@ -10,8 +10,8 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_sort = gpc_get_string( 'f_sort', 'name' );
-	$f_dir = gpc_get_string( 'f_sort', 'ASC' );
+	$f_sort = gpc_get_string( 'sort', 'name' );
+	$f_dir = gpc_get_string( 'sort', 'ASC' );
 
 	$c_sort = db_prepare_string( $f_sort );
 
@@ -42,7 +42,7 @@
 		<?php echo lang_get( 'project_name' )?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_name" size="64" maxlength="128" />
+		<input type="text" name="name" size="64" maxlength="128" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -50,7 +50,7 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td>
-		<select name="f_status">
+		<select name="status">
 		<?php print_enum_string_option_list( 'project_status' ) ?>
 		</select>
 	</td>
@@ -60,7 +60,7 @@
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<select name="f_view_state">
+		<select name="view_state">
 			<?php print_enum_string_option_list( 'view_state' ) ?>
 		</select>
 	</td>
@@ -73,7 +73,7 @@
 				<?php echo lang_get( 'upload_file_path' ) ?>
 			</td>
 			<td>
-				<input type="text" name="f_file_path" size="70" maxlength="250" />
+				<input type="text" name="file_path" size="70" maxlength="250" />
 			</td>
 		</tr>
 		<?php
@@ -84,7 +84,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="5" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="5" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>
@@ -147,7 +147,7 @@
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
-		<a href="manage_proj_edit_page.php?f_project_id=<?php echo $v_id ?>"><?php echo $v_name ?></a>
+		<a href="manage_proj_edit_page.php?project_id=<?php echo $v_id ?>"><?php echo $v_name ?></a>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'project_status', $v_status ) ?>

@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.8 2002-12-06 18:48:21 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.9 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -699,7 +699,7 @@ CREATE TABLE mantis_custom_field_project_table (
 		}
 		switch ($p_field_def['type']) {
 		case CUSTOM_FIELD_TYPE_ENUM:
-			echo "<select name=\"f_custom_field_$t_id\">";
+			echo "<select name=\"custom_field_$t_id\">";
 			$t_values = explode('|', $p_field_def['possible_values']);
 			foreach( $t_values as $t_option ) {
 				if( $t_custom_field_value == $t_option ) {
@@ -715,7 +715,7 @@ CREATE TABLE mantis_custom_field_project_table (
 		case CUSTOM_FIELD_TYPE_EMAIL:
 		default:
 		case CUSTOM_FIELD_TYPE_STRING:
-			echo "<input type=\"text\" name=\"f_custom_field_$t_id\" size=\"80\"";
+			echo "<input type=\"text\" name=\"custom_field_$t_id\" size=\"80\"";
 			if( 0 < $p_field_def['length_max'] ) {
 				echo ' maxlength="' . $p_field_def['length_max'] . '"';
 			} else {

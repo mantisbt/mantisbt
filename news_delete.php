@@ -10,7 +10,7 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_news_id = gpc_get_int( 'f_news_id' );
+	$f_news_id = gpc_get_int( 'news_id' );
 
 	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
 							 lang_get( 'delete_news_item_button' ) );

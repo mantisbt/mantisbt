@@ -12,10 +12,13 @@
 		access_denied();
 	}
 
+	$f_title		= gpc_get_string( 'title' );
+	$f_description	= gpc_get_string( 'description' );
+
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
-	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, 'f' );
+	extract( $HTTP_POST_FILES['file'], EXTR_PREFIX_ALL, 'f' );
 
 	if ( !file_type_check( $f_file_name ) ) {
 		$disallowed = 1;

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.27 2002-12-17 11:35:29 jfitzell Exp $
+	# $Id: html_api.php,v 1.28 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -268,9 +268,9 @@
 				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
 
 				if ( ON == $g_use_javascript) { // use javascript auto-submit -SC 2002.Jun.21
-					PRINT '<select name="f_project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+					PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
-					PRINT '<select name="f_project_id" class="small">';
+					PRINT '<select name="project_id" class="small">';
 				}
 				print_project_option_list( helper_get_current_project() );
 				PRINT '</select>';
@@ -301,7 +301,7 @@
 			( access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
 				PRINT '<br />';
 				PRINT '<div align="center">';
-				PRINT "<a href=\"show_source_page.php?f_url=$p_file\">Show Source</a>";
+				PRINT "<a href=\"show_source_page.php?url=$p_file\">Show Source</a>";
 				PRINT '</div>';
 		}
 	}
@@ -377,7 +377,7 @@
 				PRINT '</td>';
 				PRINT '<td class="right" style="white-space: nowrap;">';
 					PRINT '<form method="post" action="jump_to_bug.php">';
-					PRINT "<input type=\"text\" name=\"f_bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+					PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
 					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
 					PRINT '</form>';
 				PRINT '</td>';
@@ -419,11 +419,11 @@
 		PRINT '<table class="width100" cellspacing="0">';
 		PRINT '<tr>';
 			PRINT '<td class="menu">';
-			PRINT '<a href="set_project.php?f_project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
+			PRINT '<a href="set_project.php?project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
 			for ( $i=0 ; $i < $project_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				PRINT " | <a href=\"set_project.php?f_project_id=$v_id\">$v_name</a>";
+				PRINT " | <a href=\"set_project.php?project_id=$v_id\">$v_name</a>";
 			}
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -643,7 +643,7 @@
 		if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) ) {
 			html_button( string_get_bug_update_page(),
 						 lang_get( 'update_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 	# --------------------
@@ -655,7 +655,7 @@
 			if ( $t_handler_id != auth_get_current_user_id() ) {
 				html_button( 'bug_assign.php',
 							 lang_get( 'bug_assign_button' ), 
-							 array( 'f_bug_id' => $p_bug_id ) );
+							 array( 'bug_id' => $p_bug_id ) );
 			}
 		}
 	}
@@ -665,7 +665,7 @@
 		if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
 			html_button( 'bug_resolve_page.php',
 						 lang_get( 'resolve_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 	# --------------------
@@ -676,7 +676,7 @@
 				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
 			html_button( 'bug_reopen_page.php',
 						 lang_get( 'reopen_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 	# --------------------
@@ -687,7 +687,7 @@
 				  && ON == config_get( 'allow_reporter_close' ) ) ) {
 			html_button( 'bug_close_page.php',
 						 lang_get( 'close_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 	# --------------------
@@ -702,7 +702,7 @@
 		if ( access_level_check_greater_or_equal( $t_threshold ) ) {
 			html_button( 'bug_monitor.php',
 						 lang_get( 'monitor_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id, 'f_action' => 'add' ) );
+						 array( 'bug_id' => $p_bug_id, 'action' => 'add' ) );
 		}
 	}
 	# --------------------
@@ -711,7 +711,7 @@
 	function html_button_bug_unmonitor( $p_bug_id ) {
 		html_button( 'bug_monitor.php',
 					 lang_get( 'unmonitor_bug_button' ), 
-					 array( 'f_bug_id' => $p_bug_id, 'f_action' => 'delete' ) );
+					 array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
 	}
 	# --------------------
 	# Print a button to delete the given bug
@@ -719,7 +719,7 @@
 		if ( access_level_check_greater_or_equal( config_get( 'allow_bug_delete_access_level' ) ) ) {
 			html_button( 'bug_delete.php',
 						 lang_get( 'delete_bug_button' ), 
-						 array( 'f_bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 ?>

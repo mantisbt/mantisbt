@@ -44,7 +44,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="70%">
-		<input type="text" name="f_username" size="32" maxlength="32" />
+		<input type="text" name="username" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -52,7 +52,7 @@
 		<?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
-		<?php print_email_input( 'f_email', '' ) ?>
+		<?php print_email_input( 'email', '' ) ?>
 	</td>
 </tr>
 <tr>

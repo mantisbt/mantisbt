@@ -11,6 +11,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_file_id	= gpc_get_int( 'file_id' );
+	$f_type		= gpc_get_string( 'type' );
+
 	$c_file_id = (integer)$f_file_id;
 	#check_access( $g_handle_bug_threshold );
 

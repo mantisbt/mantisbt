@@ -126,8 +126,8 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 <br />
 <div align="center">
 <form method="post" action="print_all_bug_options_update.php">
-<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>" />
-<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
+<input type="hidden" name="user_id" value="<?php echo $c_user_id ?>" />
+<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -150,8 +150,8 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	</td>
 	<td>
 		<?php # @@@ REWORK Code should not span two lines except in extreme cases.  Build this into a variable then print it out.  ?>
-		<?php //echo 'f_print_'.strtolower(str_replace(' ','_', $t_field_name_arr[$i])); ?>
-		<input type="checkbox" name="<?php echo 'f_print_'.strtolower(str_replace(' ','_', $t_field_name_arr[$i])); ?>"
+		<?php //echo 'print_'.strtolower(str_replace(' ','_', $t_field_name_arr[$i])); ?>
+		<input type="checkbox" name="<?php echo 'print_'.strtolower(str_replace(' ','_', $t_field_name_arr[$i])); ?>"
 		<?php if ( isset($t_prefs[$i])&&($t_prefs[$i]==1) ) echo 'checked="checked"' ?> />
 	</td>
 </tr>

@@ -14,11 +14,11 @@
 <!-- ====================== FILTER FORM ========================= -->
 <br />
 <form method="post" action="view_all_set.php?f=3">
-<input type="hidden" name="f_type" value="1" />
-<input type="hidden" name="f_sort" value="<?php echo $t_sort ?>" />
-<input type="hidden" name="f_dir" value="<?php echo $t_dir ?>" />
-<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>" />
-<input type="hidden" name="f_per_page" value="<?php echo $t_filter['per_page'] ?>" />
+<input type="hidden" name="type" value="1" />
+<input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
+<input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
+<input type="hidden" name="page_number" value="<?php echo $f_page_number ?>" />
+<input type="hidden" name="per_page" value="<?php echo $t_filter['per_page'] ?>" />
 <table class="width100" cellspacing="0">
 <!-- Filter Form Header Row -->
 <tr class="row-category2">
@@ -37,7 +37,7 @@
 <tr>
 	<!-- Reporter -->
 	<td>
-		<select name="f_reporter_id">
+		<select name="reporter_id">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
@@ -46,7 +46,7 @@
 
 	<!-- Handler -->
 	<td>
-		<select name="f_handler_id">
+		<select name="handler_id">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
 			<option value="any"></option>
@@ -56,7 +56,7 @@
 
 	<!-- Category -->
 	<td>
-		<select name="f_show_category">
+		<select name="show_category">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
@@ -66,7 +66,7 @@
 
 	<!-- Severity -->
 	<td>
-		<select name="f_show_severity">
+		<select name="show_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
@@ -75,7 +75,7 @@
 
 	<!-- Status -->
 	<td>
-		<select name="f_show_status">
+		<select name="show_status">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
@@ -84,17 +84,17 @@
 
 	<!-- Number of bugs per page -->
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
+		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
 	</td>
 
 	<!-- Highlight changed bugs -->
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
+		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
 	</td>
 
 	<!-- Hide closed bugs -->
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />
+		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />
 	</td>
 </tr>
 
@@ -112,19 +112,19 @@
 <tr>
 	<!-- Text search -->
 	<td>
-	    <input type="text" size="16" name="f_search" value="<?php echo $t_filter['search']; ?>" />
+	    <input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" />
 	</td>
 
 	<!-- Start date -->
 	<td class="left" colspan="2">
 	<!--
-		<select name="f_start_month">
+		<select name="start_month">
 			<?php print_month_option_list( $t_filter['start_month'] ) ?>
 		</select>
-		<select name="f_start_day">
+		<select name="start_day">
 			<?php print_day_option_list( $t_filter['start_day'] ) ?>
 		</select>
-		<select name="f_start_year">
+		<select name="start_year">
 			<?php print_year_option_list( $t_filter['start_year'] ) ?>
 		</select>
 	-->
@@ -133,13 +133,13 @@
 	<!-- End date -->
 	<td class="left" colspan="2">
 	<!--
-		<select name="f_end_month">
+		<select name="end_month">
 			<?php print_month_option_list( $t_filter['end_month'] ) ?>
 		</select>
-		<select name="f_end_day">
+		<select name="end_day">
 			<?php print_day_option_list( $t_filter['end_day'] ) ?>
 		</select>
-		<select name="f_end_year">
+		<select name="end_year">
 			<?php print_year_option_list( $t_filter['end_year'] ) ?>
 		</select>
 	-->
@@ -147,7 +147,7 @@
 
 	<!-- SUBMIT button -->
 	<td class="right" colspan="7">
-		<input type="submit" name="f_filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -297,7 +297,7 @@
 <tr> <?php
 	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
 		<td bgcolor="<?php echo $status_color ?>">
-			<input type="checkbox" name="f_bug_arr[]" value="<?php echo "$v_id" ?>" />
+			<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
 		</td> <?php
 	}
 
@@ -402,7 +402,7 @@ if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) 
 ?>
 	<tr>
 		<td colspan="<?php echo $col_count ?>">
-			<select name="f_action">
+			<select name="action">
 				<?php print_all_bug_action_option_list() ?>
 			</select>
 			<input type="submit" value="<?php echo 'OK';  ?>" />
@@ -424,7 +424,7 @@ if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) 
 	# print the [ prev ] link
 	if ($f_page_number > 1) {
 		$t_prev_page_number = $f_page_number - 1;
-		print_bracket_link( 'view_all_bug_page.php?f_page_number='.$t_prev_page_number, lang_get( 'view_prev_link' ).' '.$t_filter['per_page'] );
+		print_bracket_link( 'view_all_bug_page.php?page_number='.$t_prev_page_number, lang_get( 'view_prev_link' ).' '.$t_filter['per_page'] );
 	} else {
 		print_bracket_link( '', lang_get( 'view_prev_link' ).' '.$t_filter['per_page'] );
 	}
@@ -432,7 +432,7 @@ if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) 
 	# print the [ next ] link
 	if ($f_page_number < $t_page_count) {
 		$t_next_page_number = $f_page_number + 1;
-		print_bracket_link( 'view_all_bug_page.php?f_page_number='.$t_next_page_number, lang_get( 'view_next_link' ).' '.$t_filter['per_page'] );
+		print_bracket_link( 'view_all_bug_page.php?page_number='.$t_next_page_number, lang_get( 'view_next_link' ).' '.$t_filter['per_page'] );
 	} else {
 		print_bracket_link( '', lang_get( 'view_next_link' ).' '.$t_filter['per_page'] );
 	}

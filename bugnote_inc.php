@@ -86,13 +86,13 @@
 			if ( bug_get_field( $f_bug_id, 'status' ) < RESOLVED ) {
 				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
-					print_bracket_link( 'bugnote_edit_page.php?f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
-					print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id, $s_delete_link );
+					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, $s_bugnote_edit_link );
+					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, $s_delete_link );
 					if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
 						if ( PRIVATE == $v3_view_state ) {
-							print_bracket_link('bugnote_set_view_state.php?f_private=0&f_bugnote_id='.$v3_id, $s_make_public);
+							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, $s_make_public);
 						} else {
-							print_bracket_link('bugnote_set_view_state.php?f_private=1&f_bugnote_id='.$v3_id, $s_make_private);
+							print_bracket_link('bugnote_set_view_state.php?private=1&bugnote_id='.$v3_id, $s_make_private);
 						}
 					}
 				}
@@ -125,7 +125,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
@@ -134,7 +134,7 @@
 		<?php echo $s_bugnote ?>
 	</td>
 	<td width="75%">
-		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
@@ -143,7 +143,7 @@
 		<?php echo $s_private ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_private" />
+		<input type="checkbox" name="private" />
 	</td>
 </tr>
 <?php } ?>

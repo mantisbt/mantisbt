@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.31 2002-10-23 02:49:05 jfitzell Exp $
+	# $Id: account_page.php,v 1.32 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -111,7 +111,7 @@
 			<?php echo lang_get( 'password' ) ?>:
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="32" name="f_password" />
+			<input type="password" size="32" maxlength="32" name="password" />
 		</td>
 	</tr>
 
@@ -121,7 +121,7 @@
 			<?php echo lang_get( 'confirm_password' ) ?>:
 		</td>
 		<td>
-			<input type="password" size="32" maxlength="32" name="f_password_confirm" />
+			<input type="password" size="32" maxlength="32" name="password_confirm" />
 		</td>
 	</tr>
 
@@ -147,7 +147,7 @@
 			<?php echo lang_get( 'email' ) ?>:
 		</td>
 		<td>
-			<?php print_email_input( 'f_email', $u_email ) ?>
+			<?php print_email_input( 'email', $u_email ) ?>
 		</td>
 	</tr>
 

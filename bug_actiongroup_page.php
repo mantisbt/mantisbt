@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.24 2002-10-23 00:50:53 jfitzell Exp $
+	# $Id: bug_actiongroup_page.php,v 1.25 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,8 +15,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_action = gpc_get_string( 'f_action', '' );
-	$f_bug_arr = gpc_get_int_array( 'f_bug_arr', array() );
+	$f_action = gpc_get_string( 'action', '' );
+	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 	# redirects to all_bug_page if nothing is selected
 	if ( ( $f_action=='' ) || 0 == sizeof( $f_bug_arr ) ) {
@@ -41,30 +41,30 @@
 		case 'MOVE' :
 			$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'move_group_bugs_button' );
-			$t_form					= 'f_project_id';
+			$t_form					= 'project_id';
 			break;
 		case 'ASSIGN' :
 			$t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'assign_group_bugs_button' );
-			$t_form 				= 'f_assign';
+			$t_form 				= 'assign';
 			break;
 
 		case 'RESOLVE' :
 			$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
-			$t_form 				= 'f_resolution';
+			$t_form 				= 'resolution';
 			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
 			break;
 		case 'UP_PRIOR' :
 			$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'priority_group_bugs_button' );
-			$t_form 				= 'f_priority';
+			$t_form 				= 'priority';
 			$t_request 				= 'priority';
 			break;
 		case 'UP_STATUS' :
 			$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'status_group_bugs_button' );
-			$t_form 				= 'f_status';
+			$t_form 				= 'status';
 			$t_request 				= 'status';
 			break;
 	}
@@ -77,10 +77,10 @@
 <br />
 <div align="center">
 <form method="POST" action="bug_actiongroup.php">
-<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
+<input type="hidden" name="action" value="<?php echo $f_action ?>" />
 <table class="width75" cellspacing="1">
 <?php foreach( $f_bug_arr as $t_bug_id ) { ?>
-		<input type="hidden" name="f_bug_arr[]" value="<?php echo $t_bug_id ?>" />
+		<input type="hidden" name="bug_arr[]" value="<?php echo $t_bug_id ?>" />
 <?php } ?>
 <tr class="row-1">
 	<td class="category">
@@ -123,10 +123,10 @@
 	<?php echo $t_question_title ?>
 
 	<form method="post" action="bug_actiongroup.php">
-		<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
+		<input type="hidden" name="action" value="<?php echo $f_action ?>" />
 
 	<?php foreach( $f_bug_arr as $value ) { ?>
-		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>" />
+		<input type="hidden" name="bug_arr[]" value="<?php echo $value ?>" />
 	<?php } ?>
 
 		<input type="submit" value="<?php echo $t_button_title ?>" />

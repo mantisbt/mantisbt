@@ -10,6 +10,9 @@
 <?php
 	check_access( MANAGER );
 
+	$f_sort	= gpc_get_string( 'sort', 'username' );
+	$f_dir	= gpc_get_string( 'dir', 'DESC' );
+
 	# These pages are invalid for the 'All Project' selection
 	if ( '0000000' == $g_project_cookie_val ) {
 		print_header_redirect( 'login_select_proj_page.php' );
@@ -63,7 +66,7 @@
 		<?php echo $s_username ?>
 	</td>
 	<td>
-		<select name="f_user_id[]" multiple size="10">
+		<select name="user_id[]" multiple size="10">
 			<?php print_project_user_list_option_list() ?>
 		</select>
 	</td>
@@ -71,7 +74,7 @@
 		<?php echo $s_access_level ?>
 	</td>
 	<td>
-		<select name="f_access_level">
+		<select name="access_level">
 			<?php # No administrator choice ?>
 			<?php print_project_access_levels_option_list( REPORTER ) ?>
 		</select>
@@ -147,7 +150,7 @@
 	<td class="center">
 		<?php
 			if ( project_includes_user( helper_get_current_project(), $u_id )  ) {
-				print_bracket_link( 'proj_user_delete.php?f_user_id='.$u_id, $s_remove_link );
+				print_bracket_link( 'proj_user_delete.php?user_id='.$u_id, $s_remove_link );
 			}
 		?>
 	</td>

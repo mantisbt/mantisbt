@@ -10,17 +10,17 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_field_id		             = gpc_get_int(    'f_field_id' );
-	$t_values['name']            = gpc_get_string( 'f_name' );
-	$t_values['type']            = gpc_get_int(    'f_type' );
-	$t_values['possible_values'] = gpc_get_string( 'f_possible_values' );
-	$t_values['default_value']   = gpc_get_string( 'f_default_value' );
-	$t_values['valid_regexp']    = gpc_get_string( 'f_valid_regexp' );
-	$t_values['access_level_r']  = gpc_get_int(    'f_access_level_r' );
-	$t_values['access_level_rw'] = gpc_get_int(    'f_access_level_rw' );
-	$t_values['length_min']      = gpc_get_int(    'f_length_min' );
-	$t_values['length_max']      = gpc_get_int(    'f_length_max' );
-	$t_values['advanced']        = gpc_get_bool(   'f_advanced' );
+	$f_field_id		             = gpc_get_int(    'field_id' );
+	$t_values['name']            = gpc_get_string( 'name' );
+	$t_values['type']            = gpc_get_int(    'type' );
+	$t_values['possible_values'] = gpc_get_string( 'possible_values' );
+	$t_values['default_value']   = gpc_get_string( 'default_value' );
+	$t_values['valid_regexp']    = gpc_get_string( 'valid_regexp' );
+	$t_values['access_level_r']  = gpc_get_int(    'access_level_r' );
+	$t_values['access_level_rw'] = gpc_get_int(    'access_level_rw' );
+	$t_values['length_min']      = gpc_get_int(    'length_min' );
+	$t_values['length_max']      = gpc_get_int(    'length_max' );
+	$t_values['advanced']        = gpc_get_bool(   'advanced' );
 
 	custom_field_update( $f_field_id, $t_values );
 

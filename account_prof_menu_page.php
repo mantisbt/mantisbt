@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.22 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: account_prof_menu_page.php,v 1.23 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_user_id" value="<?php echo auth_get_current_user_id() ?>" />
+		<input type="hidden" name="user_id" value="<?php echo auth_get_current_user_id() ?>" />
 		<?php echo lang_get( 'add_profile_title' ) ?>
 	</td>
 	<td class="right">
@@ -45,7 +45,7 @@
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_platform" size="32" maxlength="32" />
+		<input type="text" name="platform" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -53,7 +53,7 @@
 		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32" />
+		<input type="text" name="os" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -61,7 +61,7 @@
 		<span class="required">*</span><?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" />
+		<input type="text" name="os_build" size="16" maxlength="16" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -69,7 +69,7 @@
 		<span class="required">*</span><?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="8" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="8" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>
@@ -97,9 +97,9 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_profile' ) ?>
-		<input type="radio" name="f_action" value="default" /> <?php echo lang_get( 'make_default' ) ?>
-		<input type="radio" name="f_action" value="delete" /> <?php echo lang_get( 'delete_profile' ) ?>
+		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_profile' ) ?>
+		<input type="radio" name="action" value="default" /> <?php echo lang_get( 'make_default' ) ?>
+		<input type="radio" name="action" value="delete" /> <?php echo lang_get( 'delete_profile' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -107,7 +107,7 @@
 		<?php echo lang_get( 'select_profile' ) ?>
 	</td>
 	<td width="75%">
-		<select name="f_profile_id">
+		<select name="profile_id">
 			<?php print_profile_option_list( auth_get_current_user_id() ) ?>
 		</select>
 	</td>

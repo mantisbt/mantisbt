@@ -10,6 +10,8 @@
 <?php
 	check_access( ADMINISTRATOR );
 
+	$f_url = gpc_get_string( 'url' );
+
 	# Check to make sure that the access is legal
 	# NOTE: enabling this could be a bad idea
 	if ( ON == $g_show_source ) {

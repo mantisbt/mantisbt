@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.32 2002-12-29 09:26:46 jfitzell Exp $
+	# $Id: print_api.php,v 1.33 2002-12-29 10:26:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -790,7 +790,7 @@
 			$t_access_level	= $row['access_level'];
 			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
 			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
-			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]<br />';
+			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?project_id='.$t_project_id.'&amp;user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]<br />';
 		}
 	}
 
@@ -906,7 +906,7 @@
 				$p_dir = 'ASC';
 			}
 		}
-		PRINT '<a href="view_all_set.php?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
@@ -918,7 +918,7 @@
 				$p_dir = 'ASC';
 			}
 		}
-		PRINT '<a href="view_all_set.php?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2&amp;f_print=1">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
@@ -932,7 +932,7 @@
 				$t_dir = 'ASC';
 		}
 
-		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'&amp;f_save=1&amp;f_hide='.$p_hide.'">'.$p_string.'</a>';
+		PRINT '<a href="'.$p_page.'?sort='.$p_field.'&amp;dir='.$t_dir.'&amp;save=1&amp;hide='.$p_hide.'">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_project_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -946,7 +946,7 @@
 			$t_dir = 'ASC';
 		}
 
-		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'">'.$p_string.'</a>';
+		PRINT '<a href="'.$p_page.'?sort='.$p_field.'&amp;dir='.$t_dir.'">'.$p_string.'</a>';
 	}
 	# --------------------
 	# print the bracketed links used near the top
@@ -967,7 +967,7 @@
 			if ( $i == $p_current ) {
 				array_push( $t_items, $i );
 			} else {
-				array_push( $t_items, "<a href=\"$p_page?f_page_number=$i\">$i</a>" );
+				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
 			}
 		}
 

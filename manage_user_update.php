@@ -10,12 +10,12 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_protected	= gpc_get_bool( 'f_protected' );
-	$f_enabled		= gpc_get_bool( 'f_enabled' );
-	$f_email		= gpc_get_string( 'f_email', '' );
-	$f_username		= gpc_get_string( 'f_username', '' );
-	$f_access_level	= gpc_get_int( 'f_access_level' );
-	$f_user_id			= gpc_get_int( 'f_user_id' );
+	$f_protected	= gpc_get_bool( 'protected' );
+	$f_enabled		= gpc_get_bool( 'enabled' );
+	$f_email		= gpc_get_string( 'email', '' );
+	$f_username		= gpc_get_string( 'username', '' );
+	$f_access_level	= gpc_get_int( 'access_level' );
+	$f_user_id			= gpc_get_int( 'user_id' );
 
 	$t_old_username = user_get_field( $f_user_id, 'username' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_make_default.php,v 1.17 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prof_make_default.php,v 1.18 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_profile_id	= gpc_get_int( 'f_profile_id' );
+	$f_profile_id	= gpc_get_int( 'profile_id' );
 
 	current_user_set_pref( 'default_profile', $f_profile_id );
 

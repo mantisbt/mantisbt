@@ -10,10 +10,10 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_sort	= gpc_get_string( 'f_sort', 'username' );
-	$f_dir	= gpc_get_string( 'f_dir', 'DESC' );
-	$f_hide = gpc_get_bool( 'f_hide' );
-	$f_save = gpc_get_bool( 'f_save' );
+	$f_sort	= gpc_get_string( 'sort', 'username' );
+	$f_dir	= gpc_get_string( 'dir', 'DESC' );
+	$f_hide = gpc_get_bool( 'hide' );
+	$f_save = gpc_get_bool( 'save' );
 
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {
@@ -146,10 +146,10 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 	<td class="center" colspan="2">
 		<form method="post" action="manage_page.php">
-		<input type="hidden" name="f_sort" value="<?php echo $c_sort ?>" />
-		<input type="hidden" name="f_dir" value="<?php echo $c_dir ?>" />
-		<input type="hidden" name="f_save" value="1" />
-		<input type="checkbox" name="f_hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
+		<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
+		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
+		<input type="hidden" name="save" value="1" />
+		<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
 		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</form>
 	</td>
@@ -195,7 +195,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
-		<a href="manage_user_page.php?f_user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
+		<a href="manage_user_page.php?user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
 	<td>
 		<?php print_email_link( $u_email, $u_email ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.9 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: bug_report.php,v 1.10 2002-12-29 10:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,26 +22,26 @@
 
 	check_access( config_get('report_bug_threshold' ) );
 
-	$f_build				= gpc_get_string( 'f_build', '' );
-	$f_platform				= gpc_get_string( 'f_platform', '' );
-	$f_os					= gpc_get_string( 'f_os', '' );
-	$f_os_build				= gpc_get_string( 'f_os_build', '' );
-	$f_product_version		= gpc_get_string( 'f_product_version', '' );
-	$f_profile_id			= gpc_get_int( 'f_profile_id', 0 );
-	$f_handler_id			= gpc_get_int( 'f_handler_id', 0 );
-	$f_view_state			= gpc_get_int( 'f_view_state', 0 );
+	$f_build				= gpc_get_string( 'build', '' );
+	$f_platform				= gpc_get_string( 'platform', '' );
+	$f_os					= gpc_get_string( 'os', '' );
+	$f_os_build				= gpc_get_string( 'os_build', '' );
+	$f_product_version		= gpc_get_string( 'product_version', '' );
+	$f_profile_id			= gpc_get_int( 'profile_id', 0 );
+	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
+	$f_view_state			= gpc_get_int( 'view_state', 0 );
 
-	$f_category				= gpc_get_string( 'f_category', '' );
-	$f_reproducibility		= gpc_get_int( 'f_reproducibility' );
-	$f_severity				= gpc_get_int( 'f_severity' );
-	$f_priority				= gpc_get_int( 'f_priority', NORMAL );
-	$f_summary				= gpc_get_string( 'f_summary' );
-	$f_description			= gpc_get_string( 'f_description' );
-	$f_steps_to_reproduce	= gpc_get_string( 'f_steps_to_reproduce', '' );
-	$f_additional_info		= gpc_get_string( 'f_additional_info', '' );
+	$f_category				= gpc_get_string( 'category', '' );
+	$f_reproducibility		= gpc_get_int( 'reproducibility' );
+	$f_severity				= gpc_get_int( 'severity' );
+	$f_priority				= gpc_get_int( 'priority', NORMAL );
+	$f_summary				= gpc_get_string( 'summary' );
+	$f_description			= gpc_get_string( 'description' );
+	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
+	$f_additional_info		= gpc_get_string( 'additional_info', '' );
 
-	$f_file					= gpc_get_file( 'f_file', null );
-	$f_report_stay			= gpc_get_bool( 'f_report_stay' );
+	$f_file					= gpc_get_file( 'file', null );
+	$f_report_stay			= gpc_get_bool( 'report_stay' );
 
 	$t_reporter_id		= auth_get_current_user_id();
 	$t_project_id		= helper_get_current_project();
@@ -95,7 +95,7 @@ if( ON == config_get( 'use_experimental_custom_fields' ) ) {
 	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $id ) {
 		$t_def = custom_field_get_definition($id);
-		if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "f_custom_field_$id", $t_def['default_value'] ) ) ) {
+		if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "custom_field_$id", $t_def['default_value'] ) ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_WRONG_VALUE, ERROR );
 		}
 	}
@@ -117,16 +117,16 @@ if( ON == config_get( 'use_experimental_custom_fields' ) ) {
 	if ( $f_report_stay ) {
 ?>
 			<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-				<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>" />
-				<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>" />
-				<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>" />
-				<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>" />
-				<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>" />
-				<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>" />
-				<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>" />
-				<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>" />
-				<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>" />
-				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>" />
+				<input type="hidden" name="category" 			value="<?php echo $f_category ?>" />
+				<input type="hidden" name="severity" 			value="<?php echo $f_severity ?>" />
+				<input type="hidden" name="reproducibility" 	value="<?php echo $f_reproducibility ?>" />
+				<input type="hidden" name="profile_id" 		value="<?php echo $f_profile_id ?>" />
+				<input type="hidden" name="platform" 			value="<?php echo $f_platform ?>" />
+				<input type="hidden" name="os" 				value="<?php echo $f_os ?>" />
+				<input type="hidden" name="os_build" 			value="<?php echo $f_os_build ?>" />
+				<input type="hidden" name="product_version" 	value="<?php echo $f_product_version ?>" />
+				<input type="hidden" name="build" 			value="<?php echo $f_build ?>" />
+				<input type="hidden" name="report_stay" 		value="<?php echo $f_report_stay ?>" />
 				<input type="submit" 							value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 			</form>
 <?php
