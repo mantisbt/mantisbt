@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_ver_edit_page.php,v 1.20 2003-02-09 00:50:59 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -22,28 +26,28 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_ver_update.php">
-<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-<input type="hidden" name="orig_version" value="<?php echo $f_version ?>" />
+<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
+<input type="hidden" name="version" value="<?php echo string_edit_text( $f_version ) ?>" />
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'edit_project_version_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="version" size="32" maxlength="64" value="<?php echo urldecode( $f_version ) ?>" />
+		<input type="text" name="new_version" size="32" maxlength="64" value="<?php echo string_edit_text( $f_version ) ?>" />
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'date_order' ) ?>
 	</td>
 	<td>
-		<input type="text" name="date_order" size="32" value="<?php echo urldecode( $f_date_order ) ?>" />
+		<input type="text" name="date_order" size="32" value="<?php echo string_edit_text( $f_date_order ) ?>" />
 	</td>
 </tr>
 <tr>
@@ -62,8 +66,8 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_ver_delete.php">
-	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-	<input type="hidden" name="version" value="<?php echo $f_version ?>" />
+	<input type="hidden" name="project_id" value="<?php echo string_edit_text( $f_project_id ) ?>" />
+	<input type="hidden" name="version" value="<?php echo string_edit_text( $f_version ) ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
 	</form>
 </div>

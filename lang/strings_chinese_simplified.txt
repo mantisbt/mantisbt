@@ -7,11 +7,11 @@
 
 	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
 	# -------------------------------------------------
-	# $Revision: 1.19 $
+	# $Revision: 1.20 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:01 $
+	# $Date: 2003-02-09 00:51:02 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.19 2003-02-08 22:47:01 jfitzell Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.20 2003-02-09 00:51:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";

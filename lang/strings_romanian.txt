@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:03 $
+	# $Date: 2003-02-09 00:51:04 $
 	#
-	# $Id: strings_romanian.txt,v 1.37 2003-02-08 22:47:03 jfitzell Exp $
+	# $Id: strings_romanian.txt,v 1.38 2003-02-09 00:51:04 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'EROARE: Acest tip de fisier nu este permis';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'EROARE: Aceasta versiune exista deja.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'EROARE: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';

@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:03 $
+	# $Date: 2003-02-09 00:51:04 $
 	#
-	# $Id: strings_polish.txt,v 1.44 2003-02-08 22:47:03 jfitzell Exp $
+	# $Id: strings_polish.txt,v 1.45 2003-02-09 00:51:04 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -141,7 +141,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'B£¡D: Typ przesy³anego pliku nie jest dozwolony.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'B£¡D: Podany katalog nie istnieje. Sprawd¼ ustawienia projektu.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'B£¡D: Podana kategoria ju¿ istnieje.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'B£¡D: Podana wersja ju¿ istnieje.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'B£¡D: Podana wersja ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.';

@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_ver_update.php,v 1.24 2003-02-09 00:50:59 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -19,48 +23,31 @@
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_version		= gpc_get_string( 'version' );
 	$f_date_order	= gpc_get_string( 'date_order' );
-	$f_orig_version	= gpc_get_string( 'orig_version' );
+	$f_new_version	= gpc_get_string( 'new_version' );
 
-	$result = 0;
-	$query = '';
-
-	# check for duplicate (don't care for date_order at this stage, because no two versions should
-	# have the same name even if they have different time stamps.
-	if ( !version_is_duplicate( $f_project_id, $f_version, '0', $f_orig_version ) ) {
-		$result = version_update( $f_project_id, $f_version, $f_date_order, $f_orig_version );
-		if ( !$result ) {
-			break;
-		}
-
-		$c_version		= db_prepare_string( $f_version );
-		$c_orig_version	= db_prepare_string( $f_orig_version );
-
-		$query = "UPDATE $g_mantis_bug_table
-				SET version='$f_version'
-				WHERE version='$f_orig_version'";
-		$result = db_query( $query );
+	if ( is_blank( $f_new_version ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
+	$f_version		= trim( $f_version );
+	$f_new_version	= trim( $f_new_version );
+
+	version_update( $f_project_id, $f_version, $f_new_version, $f_date_order );
+
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 ?>
-<?php print_page_top1() ?>
 <?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
+	print_page_top1();
+
+	print_meta_redirect( $t_redirect_url );
+
+	print_page_top2();
 ?>
-<?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $result ) {				# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
-	} else if ( version_is_duplicate( $f_project_id, $f_version, '0', $f_orig_version )) {
-		echo $MANTIS_ERROR[ERROR_DUPLICATE_VERSION].'<br />';
-	} else {						# FAILURE
-		print_sql_error( $query );
-	}
+	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

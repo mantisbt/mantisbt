@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:02 $
+	# $Date: 2003-02-09 00:51:03 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.32 2003-02-08 22:47:02 jfitzell Exp $
+	# $Id: strings_japanese_euc.txt,v 1.33 2003-02-09 00:51:03 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "エラー：ファイル種別が間違えています。";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。";
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "エラー：カテゴリが重複しています。";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "エラー：バージョンが重複しています。";
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "エラー：バージョンが重複しています。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "エラー：ファイルが重複しています。先にファイルを削除して下さい。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";

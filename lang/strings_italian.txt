@@ -9,11 +9,11 @@
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
 	# -------------------------------------------------
-	# $Revision: 1.41 $
+	# $Revision: 1.42 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:02 $
+	# $Date: 2003-02-09 00:51:03 $
 	#
-	# $Id: strings_italian.txt,v 1.41 2003-02-08 22:47:02 jfitzell Exp $
+	# $Id: strings_italian.txt,v 1.42 2003-02-09 00:51:03 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,7 +142,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: This is a duplicate version.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';

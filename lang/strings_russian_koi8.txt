@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.28 $
+	# $Revision: 1.29 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-08 22:47:03 $
+	# $Date: 2003-02-09 00:51:05 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.28 2003-02-08 22:47:03 jfitzell Exp $
+	# $Id: strings_russian_koi8.txt,v 1.29 2003-02-09 00:51:05 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,7 +140,7 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ОШИБКА: Этот тип файлов запрещен';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ОШИБКА: Каталога не существует. Проверьте настройки проекта.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ОШИБКА: Дубликат категории.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ОШИБКА: Дубликат версии.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ОШИБКА: Дубликат версии.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';

@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_ver_delete.php,v 1.17 2003-02-09 00:50:59 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -16,19 +20,13 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_version = gpc_get_string( 'version' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_version		= gpc_get_string( 'version' );
 
 	helper_ensure_confirmed( lang_get( 'version_delete_sure' ),
 							 lang_get( 'delete_version_button' ) );
 
-	# delete version
-	$result = version_delete( $f_project_id, $f_version );
+	version_remove( $f_project_id, $f_version );
 
-    $t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
 ?>

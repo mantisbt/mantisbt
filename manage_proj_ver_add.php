@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_ver_add.php,v 1.23 2003-02-09 00:50:59 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -16,35 +20,53 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_version = gpc_get_string( 'version' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_version		= gpc_get_string( 'version' );
 
-	$result = 0;
-	# check for empty case or duplicate
-	if ( !is_blank( $f_version )&&( !version_is_duplicate( $f_project_id, $f_version ) ) ) {
-		$result = version_add( $f_project_id, $f_version );
+	if ( is_blank( $f_version ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id='.$f_project_id;
+	# We reverse the array so that if the user enters multiple versions
+	#  they will likely appear with the last item entered at the top of the list
+	#  (i.e. in reverse chronological order).  Unless we find a way to make the
+	#  date_order fields different for each one, however, this is fragile, since
+	#  the DB may actually pull the rows out in any order
+	$t_versions = array_reverse( explode( '|', $f_version ) );
+	$t_version_count = count( $t_versions );
+
+	foreach ( $t_versions as $t_version ) {
+		if ( is_blank( $t_version ) ) {
+			continue;
+		}
+
+		$t_version = trim( $t_version );
+		if ( version_is_unique( $f_project_id, $t_version ) ) {
+			version_add( $f_project_id, $t_version );
+		} else if ( 1 == $t_version_count ) {
+			# We only error out on duplicates when a single value was
+			#  given.  If multiple values were given, we just add the
+			#  ones we can.  The others already exist so it isn't really
+			#  an error.
+
+			trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		}
+	}
+
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id='  .$f_project_id;
 ?>
-<?php print_page_top1() ?>
 <?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
+	print_page_top1();
+
+	print_meta_redirect( $t_redirect_url );
+
+	print_page_top2();
 ?>
-<?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $result ) {					# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
-	} else if ( version_is_duplicate( $f_project_id, $f_version )) {
-		echo $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] . '<br />';
-	} else {							# FAILURE
-		print_sql_error( $query );
-	}
+	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
