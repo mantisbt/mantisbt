@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.109 2003-03-06 12:20:13 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.110 2003-03-08 11:24:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -95,7 +95,7 @@
 	#############################
 
 	# Using Microsoft Internet Information Server (IIS)
-	$g_use_iis				= OFF;
+	$g_use_iis = ( strstr( $_SERVER['SERVER_SOFTWARE'], 'IIS' ) !== false ) ? ON : OFF;
 
 	#############################
 	# Mantis Email Settings
