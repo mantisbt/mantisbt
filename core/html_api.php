@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.13 2002-09-09 04:31:45 prescience Exp $
+	# $Id: html_api.php,v 1.14 2002-09-12 05:09:38 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -242,10 +242,10 @@
 		PRINT '<table class="hide">';
 		PRINT '<tr>';
 			PRINT '<td class="login-info-left">';
-				PRINT lang_get( 'logged_in_as' ) . ": <span class=\"login-username\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+				PRINT lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-middle">';
-				PRINT "<span class=\"login-time\">$t_now</span>";
+				PRINT "<span class=\"italic\">$t_now</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-right">';
 				PRINT '<form method="post" name="form_set_project" action="set_project.php">';

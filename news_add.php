@@ -30,7 +30,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
-		<span class="news-headline"><?php echo $f_headline ?></span>
+		<span class="bold"><?php echo $f_headline ?></span>
 	</td>
 </tr>
 <tr>

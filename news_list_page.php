@@ -38,7 +38,7 @@
 			$t_note_string = '['.implode( ' ', $t_notes ).']';
 		}
 
-		PRINT "<li><span class=\"news-date\">$v_date_posted</span> - <span class=\"news-headline\"><a href=\"news_view_page.php?f_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note_string</span> <a class=\"news-email\" href=\"mailto:$t_poster_email\">$t_poster_name</a></li>";
+		PRINT "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?f_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note_string</span> <a class=\"small\" href=\"mailto:$t_poster_email\">$t_poster_name</a></li>";
 	}  # end for loop
 ?>
 </ul>

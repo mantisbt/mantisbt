@@ -15,33 +15,31 @@
 <style type="text/css">
 body 				{ background-color: <?php echo $g_background_color ?>; color: <?php echo $g_font_color ?>; font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; margin-left: 4px; margin-right: 4px; margin-top: 6px; margin-bottom: 6px; }
 p 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; }
-p.center			{ text-align: center }
 address 			{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_small ?> }
-span				{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; }
-form				{ margin: 0px; }
-table				{ }
+form				{ margin: 0px; display: inline; }
 td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; padding: 4px; text-align: left }
-a					{}
 
+a					{}
 a.small				{ font-size: <?php echo $g_font_small ?>; }
 
 input.small			{ font-size: <?php echo $g_font_small ?>; }
 select.small		{ font-size: <?php echo $g_font_small ?>; }
 
+span				{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; }
 span.print			{ font-size: <?php echo $g_font_small ?>; }
-
 span.required 		{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_required_color ?>; }
 span.small 			{ font-size: <?php echo $g_font_small ?>; font-weight: normal; }
 span.pagetitle		{ font-size: <?php echo $g_font_large ?>; font-weight: bold; text-align: center }
 span.bold			{ font-weight: bold; }
 span.italic			{ font-style: italic; }
-span.italic			{ font-style: italic; font-size: 8pt; }
+span.italic-small	{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
 
-table.hide			{ width: 100%; border-color: <?php echo $g_background_color ?>; }
-table.width100		{ width: 100%; border-color: <?php echo $g_table_border_color ?>; border-style: solid; border-width: 1px; }
-table.width75		{ width: 75%;  border-color: <?php echo $g_table_border_color ?>; border-style: solid; border-width: 1px; }
-table.width60		{ width: 60%;  border-color: <?php echo $g_table_border_color ?>; border-style: solid; border-width: 1px; }
-table.width50		{ width: 50%;  border-color: <?php echo $g_table_border_color ?>; border-style: solid; border-width: 1px; }
+table				{ }
+table.hide			{ width: 100%; border: solid 0px <?php echo $g_background_color ?>; }
+table.width100		{ width: 100%; border: solid 1px <?php echo $g_table_border_color ?>; }
+table.width75		{ width: 75%;  border: solid 1px <?php echo $g_table_border_color ?>; }
+table.width60		{ width: 60%;  border: solid 1px <?php echo $g_table_border_color ?>; }
+table.width50		{ width: 50%;  border: solid 1px <?php echo $g_table_border_color ?>; }
 
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
@@ -58,10 +56,8 @@ td.print-category	{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g
 td.print-bottom		{ border-bottom: 1px solid #000000; }
 td.print-spacer		{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; font-size: 1pt; line-height: 0.1; padding: 0px;}
 
-tr.center			{ text-align: center; }
 tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }
 tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; }
-tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; }
 tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
 tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
 tr.print			{ vertical-align: top; }
@@ -73,11 +69,9 @@ td.bugnote-private		{ background-color: <?php echo $g_primary_color2 ?>; color: 
 td.bugnote-note-public	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
 td.bugnote-note-private	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
 
-td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
-td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
-td.login-info-right	{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
-span.login-username	{ font-style: italic; }
-span.login-time		{ font-size: <?php echo $g_font_small ?>; font-style: italic; }
+td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
+td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
+td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
 td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g_font_color ?>; text-align: center; width: 100%; padding: 1px; }
 
@@ -85,11 +79,8 @@ td.quick-summary-left	{ width: 50%; text-align: left; }
 td.quick-summary-right	{ width: 50%; text-align: right; }
 
 td.news-heading-public	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
-td.news-heading-private	{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
-td.news-body			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; padding: 16px; }
-span.news-headline		{ font-weight: bold; }
-span.news-date			{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
-a.news-email			{ font-size: <?php echo $g_font_small ?>; }
+td.news-heading-private	{ background-color: <?php echo $g_primary_color1 ?>;       color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
+td.news-body			{ background-color: <?php echo $g_spacer_color ?>;         color: <?php echo $g_font_color ?>; padding: 16px; }
 
 img						{}
 img.icon				{ width: 11px; height: 11px; }

@@ -87,9 +87,9 @@
 <table class="width75" cellspacing="0">
 <tr>
 	<td class="<?php echo $t_news_css ?>">
-		<span class="news-headline"><?php echo $v_headline ?></span> -
-		<span class="news-date"><?php echo $v_date_posted ?></span> -
-		<a class="news-email" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
+		<span class="bold"><?php echo $v_headline ?></span> -
+		<span class="italic-small"><?php echo $v_date_posted ?></span> -
+		<a class="small" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
 		<span class='small'>
 		<?php
 			if ( 1 == $v_announcement ) {

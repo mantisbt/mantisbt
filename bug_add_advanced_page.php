@@ -116,7 +116,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="spacer">
+<tr>
 	<td colspan="2">
 		<?php echo $s_or_fill_in ?>
 	</td>
