@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.86 2004-05-30 01:49:31 vboctor Exp $
+	# $Id: print_api.php,v 1.87 2004-06-11 02:00:01 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -641,6 +641,7 @@
 	# @@@ preliminary support for multiple bug actions.
 	function print_all_bug_action_option_list() {
 		$commands = array(  'MOVE' => lang_get('actiongroup_menu_move'),
+							'COPY' => lang_get('actiongroup_menu_copy'),
 							'ASSIGN' => lang_get('actiongroup_menu_assign'),
 							'CLOSE' => lang_get('actiongroup_menu_close'),
 							'DELETE' => lang_get('actiongroup_menu_delete'),

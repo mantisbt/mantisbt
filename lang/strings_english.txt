@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.176 $
-	# $Author: int2str $
-	# $Date: 2004-05-26 04:45:08 $
+	# $Revision: 1.177 $
+	# $Author: narcissus $
+	# $Date: 2004-06-11 02:00:01 $
 	#
-	# $Id: strings_english.txt,v 1.176 2004-05-26 04:45:08 int2str Exp $
+	# $Id: strings_english.txt,v 1.177 2004-06-11 02:00:01 narcissus Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,6 +22,7 @@ $s_charset = 'windows-1252';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Assign';
 $s_actiongroup_menu_close = 'Close';
 $s_actiongroup_menu_delete = 'Delete';
@@ -100,6 +101,7 @@ $s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform
 $s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
 $s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
 $s_move_bugs_conf_msg = 'Move issues to';
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = 'Assign issues to';
 $s_resolve_bugs_conf_msg = 'Choose issues resolution';
 $s_priority_bugs_conf_msg = 'Choose issues priority';
@@ -108,6 +110,7 @@ $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = 'Close Issues' ;
 $s_delete_group_bugs_button = 'Delete Issues' ;
 $s_move_group_bugs_button = 'Move Issues' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = 'Assign Issues' ;
 $s_resolve_group_bugs_button = 'Resolve Issues' ;
 $s_priority_group_bugs_button = 'Update Priority' ;

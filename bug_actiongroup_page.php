@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.38 2004-05-27 23:11:00 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.39 2004-06-11 02:00:00 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,6 +44,12 @@
 		case 'MOVE' :
 			$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'move_group_bugs_button' );
+			$t_form					= 'project_id';
+			break;
+
+		case 'COPY' :
+			$t_question_title 		= lang_get( 'copy_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'copy_group_bugs_button' );
 			$t_form					= 'project_id';
 			break;
 
@@ -120,6 +126,7 @@ if ( !$t_finished ) {
 		<select name="<?php echo $t_form ?>">
 			<?php
 				switch ( $f_action ) {
+					case 'COPY':
 					case 'MOVE':
 						print_project_option_list( null, false );
 						break;
