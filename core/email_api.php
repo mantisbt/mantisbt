@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.57 2003-04-17 06:25:42 vboctor Exp $
+	# $Id: email_api.php,v 1.58 2003-04-24 02:24:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -388,7 +388,7 @@
 	# Build the bug info part of the message
 	function email_build_bug_message( $p_bug_id, $p_message, &$p_category ) {
 		global 	$g_complete_date_format, $g_show_view,
-				$g_bugnote_order, $g_path,
+				$g_bugnote_order,
 				$g_email_separator1, $g_email_padding_length;
 
 		$row = bug_get_extended_row( $p_bug_id );
@@ -412,8 +412,7 @@
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
 		if ( $p_message != lang_get( 'email_bug_deleted_msg' ) ) {
-			$t_message .= $g_path;
-			$t_message .= string_get_bug_view_url( $p_bug_id ) . "\n";
+			$t_message .= string_get_bug_view_url_with_fqdn( $p_bug_id ) . "\n";
 			$t_message .= $g_email_separator1."\n";
 		}
 		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_reporter_name."\n";
@@ -773,7 +772,7 @@
 			$t_email = user_get_email( $t_recipient );
 			$result[] = user_get_name( $t_recipient );
 			$t_contents = $t_header .
-							string_get_bug_view_url( $p_bug_id, $t_recipient ) .
+							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
 							"\n\n$p_message";
 							
 			email_send( $t_email, $t_subject, $t_contents );

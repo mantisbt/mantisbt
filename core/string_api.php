@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.35 2003-04-22 15:42:03 jfitzell Exp $
+	# $Id: string_api.php,v 1.36 2003-04-24 02:24:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -146,7 +146,7 @@
 					#  the summary lookup on a non-existant bug.  But here, we
 					#  can create the link and by the time it is clicked on, the
 					#  bug may exist.
-					$t_result .= string_get_bug_view_url( $t_bug_id );
+					$t_result .= string_get_bug_view_url_with_fqdn( $t_bug_id );
 				}
 			}
 		}
@@ -291,6 +291,15 @@
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
 		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
+	}
+
+	# --------------------
+	# return the name and GET parameters of a bug VIEW page for the given bug
+	#  account for the user preference and site override
+	# The returned url includes the fully qualified domain, hence it is suitable to be included
+	# in emails.
+	function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id=null ) {
+		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
 	}
 
 	# --------------------
