@@ -129,7 +129,7 @@
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
 									"#$t_setting_arr[15]#$t_setting_arr[16]".
-									"#$t_setting_arr[17]#$t_settings_arr[18]";
+									"#$t_setting_arr[17]#$t_setting_arr[18]";
 				break;
 		# does nothing. catch all case
 		default:
@@ -142,7 +142,7 @@
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
 									"#$t_setting_arr[15]#$t_setting_arr[16]".
-									"#$t_setting_arr[17]#$t_settings_arr[18]";
+									"#$t_setting_arr[17]#$t_setting_arr[18]";
 	}
 
 	# set cookie values
