@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.34 2003-02-16 10:55:04 jfitzell Exp $
+	# $Id: project_api.php,v 1.35 2003-02-17 03:56:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -174,6 +174,17 @@
 	}
 
 	# --------------------
+	# checks whether the specified upload path exists and is writable
+	function project_ensure_valid_upload_path( $p_upload_path ) {
+		$c_upload_path	= db_prepare_string( $p_upload_path );
+		if ( !is_blank( $c_upload_path ) ) {
+			if ( !file_exists( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
+				trigger_error( ERROR_PROJECT_INVALID_UPLOAD_PATH, ERROR );
+			}
+		}
+	}
+
+	# --------------------
 	# check to see if the user/project combo already exists
 	# returns true is duplicate is found, otherwise false
 	function project_includes_user( $p_project_id, $p_user_id ) {
@@ -217,6 +228,8 @@
 		}
 
 		project_ensure_name_unique( $p_name );
+
+		project_ensure_valid_upload_path( $p_file_path );
 
 		$t_project_table = config_get( 'mantis_project_table' );
 
@@ -293,6 +306,8 @@
 		if ( $p_name != $t_old_name ) {
 			project_ensure_name_unique( $p_name );
 		}
+
+		project_ensure_valid_upload_path( $p_file_path );
 
 		$t_project_table = config_get( 'mantis_project_table' );
 

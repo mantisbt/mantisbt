@@ -6,6 +6,7 @@ Mantis ChangeLog
  * Fix: handle special characters correctly in the rest of the manage_custom_field_* pages
  * Fix: #2937: 'Double quotes not handled correctly in version names'
  * Fix: #2936: 'SYSTEM WARNING: ob_gzhandler() used twice'
+ * Fix: #2941: Checking that project upload path exists and is writable to webserver
 
 2003.02.16  -  0.18.0a1
 
