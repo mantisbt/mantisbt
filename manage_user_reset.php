@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 	$c_id = (integer)$f_id;
-	$f_protected = get_user_field( $p_user_id, 'protected' );
+	$f_protected = get_user_field( $f_id, 'protected' );
 
 	# Either generate a random password and email it if emailing is enabled.
 	# Otherwise make a blank one.
