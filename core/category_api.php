@@ -6,12 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.7 2003-02-08 23:33:00 jfitzell Exp $
+	# $Id: category_api.php,v 1.8 2003-02-08 23:34:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Category API
 	###########################################################################
+
+	#===================================
+	# Boolean queries and ensures
+	#===================================
 
 	# --------------------
 	# Check whether the category exists in the project
@@ -61,6 +65,11 @@
 			trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 		}
 	}
+
+
+	#===================================
+	# Creation / Deletion / Updating
+	#===================================
 
 	# --------------------
 	# Add a new category to the project
@@ -146,6 +155,35 @@
 	}
 
 	# --------------------
+	# Remove all categories associated with a project
+	function category_remove_all( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		project_ensure_exists( $p_project_id );
+
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_bug_table				= config_get( 'mantis_bug_table' );
+
+		$query = "DELETE
+				  FROM $t_project_category_table
+				  WHERE project_id='$c_project_id'";
+		db_query( $query );
+
+		$query = "UPDATE $t_bug_table
+				  SET category=''
+				  WHERE project_id='$c_project_id'
+		db_query( $query );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+
+
+	#===================================
+	# Data Access
+	#===================================
+
+	# --------------------
 	# Return the definition row for the category
 	function category_get_row( $p_project_id, $p_category ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
@@ -192,29 +230,5 @@
 		}
 
 		return $rows;
-	}
-
-	# --------------------
-	# Remove all categories associated with a project
-	function category_remove_all( $p_project_id ) {
-		$c_project_id = db_prepare_int( $p_project_id );
-
-		project_ensure_exists( $p_project_id );
-
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
-
-		$query = "DELETE
-				  FROM $t_project_category_table
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
-
-		$query = "UPDATE $t_bug_table
-				  SET category=''
-				  WHERE project_id='$c_project_id'
-		db_query( $query );
-
-		# db_query() errors on failure so:
-		return true;
 	}
 ?>
