@@ -3,29 +3,42 @@
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-        # Korean Translated by aporie@linux.ne.kr
+
+	# KKorean: aporie@linux.ne.kr
 ?>
 <?
-	# This file is to aid in localization
-
-	### General Strings
+	# General Strings
 	$s_go_back = "뒤로";
 	$s_proceed = "계속 진행";
 	$s_sql_error_detected = "에러: SQL 에러 발생. 이 에러를 보고해 주세요. ";
 
 	$s_switch = "이동";
 	$s_logged_in_as = "로그인한 ID :";
-        $s_user_no_longer_exists = "사용자가 더이상 존재하지 않습니다.";
 
-	### Email Strings
+	$s_user_no_longer_exists = "사용자가 더이상 존재하지 않습니다.";
+
+	$s_administrator = "administrator";
+
+	# Enum Strings
+	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
+	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
+	$s_project_view_state_enum_string = "10:public,50:private";
+
+	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
+	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
+	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate";
+	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
+	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
+	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
+	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+
+	# Email Strings
 	$s_new_account_subject = "당신의 새로운 계정 ";
 	$s_new_account_greeting = "버그 추적시스템에 오신것을 환영합니다. 아래에 당신이 로그인하는데 필요한 몇가지 정보가 있습니다. \n\n";
 	$s_new_account_url = "이 사이트에 로그인 할수 있습니다: ";
 	$s_new_account_username = "사용자 ID: ";
 	$s_new_account_password = "패스 워드: ";
-	$s_new_account_message = "로그인 하신후 패스워드를 변경하십시요. 패스워드는 단방향
-        암호화됩니다. 시스템 관리자도 패스워드를 알수 없습니다. 패스워드를 분실하게 되면,
-        다시 설정되어야 합니다.\n\n";
+	$s_new_account_message = "로그인 하신후 패스워드를 변경하십시요. 패스워드는 단방향암호화됩니다. 시스템 관리자도 패스워드를 알수 없습니다. 패스워드를 분실하게 되면,다시 설정되어야 합니다.\n\n";
 	$s_new_account_do_not_reply = "이 메세지에 대한 응답을 하지 마십시요.\n";
 
 	$s_reset_request_msg = "패스워드 초기화에 대한 요청이 있습니다.".
@@ -35,6 +48,7 @@
 	$s_new_bug_msg = "다음의 새로운 버그가 추가되었습니다.";
 	$s_email_bugnote_msg = "이버그에 대하여 <b>버그노트</b>가 추가되었습니다.";
 	$s_email_resolved_msg = "아래의 버그가 <b>해결</b>되었습니다.";
+	$s_email_close_msg = "The following bug has beeen CLOSED";
 	$s_email_feedback_msg = "아래의 버그가 <b>FEEDBACK</b>되었습니다.";
 	$s_email_reopen_msg = "아래의 버그가 <b>다시 발생</b>되었습니다.";
 	$s_email_assigned_msg = "아래의 버그가 개발자에게 <b>할당</b>되었습니다.";
@@ -55,15 +69,15 @@
 	$s_email_summary =  "요약";
 	$s_email_description = "설명";
 
-	### account_delete.php3
+	# account_delete.php3
 	$s_account_protected_msg = "계정이 보호되었습니다. 정보를 변경할수 없습니다....";
 	$s_account_removed_msg = "당신의 계정이 삭제되었습니다...";
 
-	### account_delete_page.php3
+	# account_delete_page.php3
 	$s_confirm_delete_msg = "계정을 삭제하시기를 원하십니까?";
 	$s_delete_account_button = "계정 삭제";
 
-	### account_page.php3
+	# account_page.php3
 	$s_manage_profiles_link = "프로파일 관리";
 	$s_change_preferences_link = "설정상태 변경";
 	$s_edit_account_title = "계정 편집";
@@ -73,29 +87,42 @@
 	$s_confirm_password  = "패스워드 확인";
 	$s_access_level = "접근 레벨";
 	$s_update_user_button = "사용자 갱신";
-	### $s_delete_account_button # defined above
 
-	### account_prefs_page.php3
+	# account_prefs_page.php3
 	$s_default_account_preferences_title = "기본 계정 설정상태";
+	$s_default_project = "Default Project";
 	$s_advanced_report = "상세 보고";
 	$s_advanced_view = "자세히 보기";
+	$s_advanced_update = "Advanced Update";
+	$s_refresh_delay = "Refresh Delay";
+	$s_redirect_delay = "Redirect Delay";
+	$s_email_on_new = "Email on New";
+	$s_email_on_assigned = "Email on Assigned";
+	$s_email_on_feedback = "Email on Feedback";
+	$s_email_on_resolved = "Email on Resolved";
+	$s_email_on_closed = "Email on Closed";
+	$s_email_on_reopened = "Email on Reopened";
+	$s_email_on_bugnote_added = "Email on Bugnote Added";
+	$s_email_on_status_change = "Email on Status Change";
+	$s_email_on_priority_change = "Email on Priority Change";
+	$s_language = "Language";
 	$s_default_project = "기본 프로젝트";
 	$s_update_prefs_button = "설정상태 갱신";
 	$s_reset_prefs_button = "설정상태 초기화";
 
-	### account_prefs_reset.php3
+	# account_prefs_reset.php3
 	$s_prefs_reset_msg = "설정상태가 초기화되었습니다....";
 
-	### account_prefs_update.php3
+	# account_prefs_update.php3
 	$s_prefs_updated_msg = "설정상태가 갱신되었습니다...";
 
-	### account_profile_add.php3
+	# account_profile_add.php3
 	$s_profile_added_msg = "프로파일 추가...";
 
-	### account_profile_delete.php3
+	# account_profile_delete.php3
 	$s_profile_deleted_msg = "프로파일 삭제...";
 
-	### account_profile_edit_page.php3
+	# account_profile_edit_page.php3
 	$s_edit_profile_title = "프로파일 편집";
 	$s_platform = "플랫폼";
 	$s_operating_system = "운영 체제";
@@ -103,15 +130,11 @@
 	$s_additional_description = "부연 설명";
 	$s_update_profile_button = "프로파일 갱신";
 
-	### account_profile_make_default.php3
+	# account_profile_make_default.php3
 	$s_profile_defaulted_msg = "기본 프로파일 갱신...";
 
-	### account_profile_manage_page.php3
+	# account_profile_manage_page.php3
 	$s_add_profile_title = "프로파일 추가";
-	### $s_platform # defined above
-	### $s_operating_system # defined above
-	### $s_version # defined above
-	### $s_additional_description # defined above
 	$s_add_profile_button = "프로파일 추가";
 	$s_edit_or_delete_profiles_title = "프로파일 편집/삭제";
 	$s_edit_profile = "프로파일 편집";
@@ -120,43 +143,51 @@
 	$s_select_profile = "프로파일 편집";
 	$s_submit_button = "확인";
 
-	### account_profile_update.php3
+	# account_profile_update.php3
 	$s_profile_updated_msg = "프로파일 갱신....";
 
-	### account_update.php3
-	### $s_account_protected_msg # defined above
+	# account_update.php3
 	$s_account_updated_msg = "당신의 계정 정보가  변경되었습니다...";
 
-	### bug_assign.php3
-        $s_bug_assign_msg       = "버그가 할당되었습니다...";
+	# bug_assign.php3
+	$s_bug_assign_msg       = "버그가 할당되었습니다...";
 
-	### bug_delete.php3
+	# bug_close.php3
+	$s_bug_close_msg       = "Bug has been closed...";
+
+	# bug_delete.php3
 	$s_bug_deleted_msg = "버그정보가 삭제되었습니다...";
 
-	### bug_delete_page.php3
+	# bug_delete_page.php3
 	$s_delete_bug_sure_msg = "이 버그정보를 삭제하시겠습니까?";
 	$s_delete_bug_button = "버그 삭제";
 
-	### bug_reopen_page.php3
+	# bug_file_add.php3
+	$s_file_upload_msg = "File upload successful";
+
+	# bug_file_upload_inc.php3
+	$s_upload_file = "Upload File";
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
+
+	# bug_reopen_page.php3
 	$s_bug_reopened_msg = "버그가 다시 발생했습니다...";
 	$s_reopen_add_bugnote_title = "재발생한 버그에 대하여 버그노트에 사유 추가";
 	$s_bugnote_add_reopen_button = "재발생한 버그와 버그 노트 추가";
 
-	### bug_resolve_page.php3
+	# bug_resolve_page.php3
 	$s_resolve_bug_title = "버그 해결";
-	### $s_resolution # defined above
-	### $s_duplicate_id # defined above
 	$s_resolve_bug_button = "버그 해결";
 
-	### bug_resolve_page2.php3
+	# bug_resolve_page2.php3
 	$s_bug_resolved_msg = "버그가 해결되었습니다. 아래의 버그노트를 입력하세요.";
 	$s_resolve_add_bugnote_title = "버그 해결을 위한 버그노트 사유 추가";
 	$s_bugnote_add_resolve_button = "버그노트 추가";
 
-	### bug_update.php3
+	# bug_update.php3
 	$s_bug_updated_msg = "버그정보가 갱신되었습니다....";
 
-	### bug_update_advanced_page.php3
+	# bug_update_advanced_page.php3
 	$s_back_to_bug_link = "버그정보로 돌아가기";
 	$s_update_simple_link = "정보사항 갱신";
 	$s_updating_bug_advanced_title = "버그 정보 갱신";
@@ -170,7 +201,6 @@
 	$s_assigned_to = "버그 할당";
 	$s_priority = "우선 순위";
 	$s_resolution = "해결 상태";
-	### $s_platform # defined above
 	$s_status = "상태";
 	$s_duplicate_id = "중복된 버그 번호";
 	$s_os = "운영체제";
@@ -182,135 +212,73 @@
 	$s_votes = "투표수";
 	$s_summary = "요약";
 	$s_description = "설 명";
-	$s_steps_to = "재발생 ";
-	$s_reproduce = " 스탭";
+	$s_steps_to_reproduce = "재발생 스탭";
 	$s_additional = "부가 ";
 	$s_information = "정보";
 	$s_update_information_button = "정보사항 변경";
 
-	### bug_update_page.php3
-	### $s_back_to_bug_link # defined above
+	# bug_update_page.php3
 	$s_update_advanced_link = "정보사항 갱신";
 	$s_updating_bug_simple_title = "버그 정보 갱신";
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_reproducibility # defined above
-	### $s_date_submitted # defined above
-	### $s_last_update # defined above
-	### $s_reporter # defined above
-	### $s_assigned_to # defined above
-	### $s_priority # defined above
-	### $s_resolution # defined above
-	### $s_status # defined above
-	### $s_duplicate_id # defined above
-	### $s_summary # defined above
-	### $s_description # defined above
-	### $s_additional # defined above
-	### $s_information # defined above
-	### $s_update_bug_button # defined above
-	### $s_resolve_bug_button # defined above
-	### $s_delete_bug_button # defined above
-	### $s_reopen_bug_button # defined above
-	### $s_update_information_button # defined above
 
-	### bug_vote_add.php3
+	# bug_vote_add.php3
 	$s_vote_added_msg = "투표수 추가...";
 
-	### bugnote_add.php3
+	# bugnote_add.php3
 	$s_bugnote_added_msg = "버그노트 추가...";
 
-	### bugnote_add_inc.php
-	$s_add_bugnote_button = "버그노트 추가";
-
-	### bugnote_add_page.php3
-	$s_add_bugnote_title = "버그노트 추가";
-	### $s_add_bugnote_button # defined above
-
-	### bugnote_delete.php3
+	# bugnote_delete.php3
 	$s_bugnote_deleted_msg = "버그노트가 삭제되었습니다....";
 	$s_bug_notes_title = "버그 노트";
 
-	### bugnote_inc.php
+	# bugnote_inc.php
 	$s_no_bugnotes_msg = "이 버그에 첨부된 노트가 없습니다.";
-	### $s_bug_notes_title # defined above
 	$s_delete_link = "삭제";
+	$s_add_bugnote_title = "버그노트 추가";
+	$s_add_bugnote_button = "버그노트 추가";
 
-	### choose_project_page.php3
-	$s_choose_project_title = "프로젝트 선택";
-	$s_projects = "프로젝트";
-	$s_select_project_button = "프로젝트 선택";
-
-	### index.php3
+	# index.php3
 	$s_click_to_login = "로그인";
 
-	### login.php3
-
-	### login_error_page.php3
+	# login.php3
 	$s_login_error_msg = "에러: 이 계정은 사용할수 없거나 사용자이름/패스워드가 잘못 입력되었습니다.";
-	$s_login_title = "로그인";
-	### $s_username # defined above
-	### $s_password # defined above
-	$s_save_login = "로그인 정보 저장";
-	### $s_choose_project # defined above
-	$s_login_button = "로그인";
 
-	### login_page.php3
+	# login_page.php3
 	$s_login_page_info = "버그 관리시스템입니다.";
-	### $s_login_title # defined above
-	### $s_username # defined above
-	### $s_password # defined above
-	### $s_save_login # defined above
+	$s_login_title = "로그인";
+	$s_save_login = "로그인 정보 저장";
 	$s_choose_project = "프로젝트 선택";
-	### $s_login_button # defined above
+	$s_login_button = "로그인";
 	$s_signup_link = "사용자 신규 등록";
 
-	### logout_page.php3
+	# login_select_proj_page.php3
+	$s_select_project_button = "Select Project";
+
+	# logout_page.php3
 	$s_logged_out_title = "로그 아웃...";
 	$s_redirecting = "...리다이렉팅";
 	$s_here = "여기";
 
-	### main_page.php3
+	# main_page.php3
+	$s_open_and_assigned_to_me = "Open and assigned to me";
+	$s_open_and_reported_to_me = "Open and reported by me";
 	$s_newer_news_link = "새로운 뉴스";
 	$s_older_news_link = "이전 뉴스";
 
-	### manage_create_new_user.php3
+	# manage_create_new_user.php3
 	$s_created_user_part1 = "사용자가 ";
 	$s_created_user_part2 = "접근 레벨로 생성되었습니다.";
 
-	### manage_create_user_page.php3
+	# manage_create_user_page.php3
 	$s_create_new_account_title = "새로운 계정 생성";
-	### $s_username # defined above
-	### $s_email # defined above
-	### $s_password # defined above
 	$s_verify_password = "패스워드 검증";
-	### $s_access_level # defined above
 	$s_enabled = "사용가능";
 	$s_protected = "계정 보호";
 	$s_create_user_button = "사용자 생성";
 
-	### manage_project_add.php3
-	$s_project_added_msg = "프로젝트가 추가되었습니다....";
-
-	### manage_project_category_add.php3
-	$s_category_added_msg = "카테고리가 추가되었습니다...";
-
-	### manage_project_category_delete.php3
-	$s_category_deleted_msg = "카테고리가 삭제되었습니다...";
-
-	### manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "이 카테고리를 삭제하시겠습니까? 이 카테고리와 관련된 모든 버그가 삭제될것입니다.";
-	$s_delete_category_button = "카테고리 삭제";
-
-	### manage_project_category_edit_page.php3
-	$s_edit_project_category_title = "프로젝트 카테고리 편집";
-	$s_update_category_button = "카테고리 갱신";
-	### $s_delete_category_button # defined above
-
-	### manage_project_category_update.php3
-	$s_category_updated_msg = "카테고리가 갱신되었습니다....";
-
-	### manage_page.php3
+	# manage_page.php3
+	$s_hide_disabled = "Hide Disabled";
+	$s_filter_button = "Filter";
 	$s_create_new_account_link = "계정 생성";
 	$s_projects_link = "프로젝트";
 	$s_documentation_link = "문서";
@@ -318,31 +286,45 @@
 	$s_1_week_title = "1 주";
 	$s_never_logged_in_title = "한번도 로그인하지 않은 사용자";
 	$s_manage_accounts_title = "계정 관리";
-	### $s_username # defined above
-	### $s_email # defined above
-	### $s_access_level # defined above
-	### $s_enabled # defined above
 	$s_p = "p";
 	$s_date_created = "생성된 일자";
 	$s_last_visit = "마지막 로그인";
 	$s_edit_user_link = "사용자 편집";
 
-	### manage_project_delete.php3
+	# manage_project_add.php3
+	$s_project_added_msg = "프로젝트가 추가되었습니다....";
+
+	# manage_project_category_add.php3
+	$s_duplicate_category = "ERROR: This is a duplicate category.";
+	$s_category_added_msg = "카테고리가 추가되었습니다...";
+
+	# manage_project_category_delete.php3
+	$s_category_deleted_msg = "카테고리가 삭제되었습니다...";
+
+	# manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "이 카테고리를 삭제하시겠습니까? 이 카테고리와 관련된 모든 버그가 삭제될것입니다.";
+	$s_delete_category_button = "카테고리 삭제";
+
+	# manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "프로젝트 카테고리 편집";
+	$s_update_category_button = "카테고리 갱신";
+
+	# manage_project_category_update.php3
+	$s_category_updated_msg = "카테고리가 갱신되었습니다....";
+
+	# manage_project_delete.php3
 	$s_project_deleted_msg = "프로젝트가 삭제되었습니다...";
 
-	### manage_project_delete_page.php3
+	# manage_project_delete_page.php3
 	$s_project_delete_msg = "이 프로젝트와 관련된 모든 버그를 삭제하시겠습니까?";
 	$s_project_delete_button = "프로젝트 삭제";
 
-	### manage_project_edit_page.php3
+	# manage_project_edit_page.php3
 	$s_edit_project_title = "프로젝트 편집";
 	$s_project_name = "프로젝트 이름";
-	### $s_status # defined above
-	### $s_enbaled # defined above
 	$s_view_status = "상태 보기";
 	$s_public = "공개";
 	$s_private = "비공개";
-	### $s_description # defined above;
 	$s_update_project_button = "프로젝트 갱신";
 	$s_delete_project_button = "프로젝트 삭제";
 	$s_categories_and_version_title = "카테고리와 버전";
@@ -352,73 +334,60 @@
 	$s_add_version_button = "버전 추가";
 	$s_edit_link = "편집";
 
-	### manage_project_menu_page.php3
+	# manage_project_menu_page.php3
 	$s_add_project_title = "프로젝트 추가";
-	### $s_project_name # defined above;
-	### $s_status # defined above;
-	### $s_view_status # defined above;
-	### $s_public # defined above;
-	### $s_private # defined above;
-	### $s_description # defined above;
+	$s_access_threshold = "Access Threshold";
+	$s_upload_file_path = "Upload File Path";
 	$s_add_project_button = "프로젝트 추가";
 	$s_projects_title = "프로젝트";
 	$s_name = "이름";
-	### $s_status # defined above;
-	### $s_enabed # defined above;
-	### $s_view_status # defined above;
-	### $s_description # defined above;
-	### $s_edit_link # defined above;
 
-	### manage_project_update.php3
+	# manage_project_update.php3
 	$s_project_updated_msg = "프로젝트가 갱신되었습니다....";
 
-	### manage_project_version_add.php3
+	# manage_project_version_add.php3
+	$s_duplicate_version = "ERROR: This is a duplicate version.";
 	$s_version_added_msg = "버전 정보가 추가되었습니다....";
 
-	### manage_project_version_delete.php3
+	# manage_project_version_delete.php3
 	$s_version_deleted_msg = "버전 정보가 삭제되었습니다....";
 
-	### manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php3
 	$s_version_delete_sure = "이 버전을 삭제하시겠습니까? 관련된 모든 버그정보가 삭제됩니다.";
 	$s_delete_version_button = "버전 삭제";
 
-	### manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php3
 	$s_edit_project_version_title = "프로젝트 버전 편집";
 	$s_update_version_button = "버전 갱신";
-	### $s_delete_version_button # defined above;
 
-	### manage_project_version_update.php3
+	# manage_project_version_update.php3
 	$s_version_updated_msg = "버전정보가 갱신되었습니다...";
 
-	### manage_user_delete.php3
+	# manage_user_delete.php3
 	$s_account_delete_protected_msg = "계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.";
 	$s_account_deleted_msg = "계정이 삭제되었습니다....";
 
-	### manage_user_delete_page.php3
+	# manage_user_delete_page.php3
 	$s_delete_account_sure_msg = "이 계정을 삭제하시겠습니까?";
-	### $s_delete_account_button # defined above
 
-	### manage_user_page.php3
+	# manage_prune.php3
+	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+
+	# manage_user_page.php3
 	$s_edit_user_title = "사용자 편집";
-	### $s_username # defined above
-	### $s_email # defined above
-	### $s_access_level # defined above
-	### $s_enabled # defined above
-	### $s_protected # defined above
-	### $s_update_user_button # defined above
 	$s_reset_password_button = "패스워드 초기화";
 	$s_delete_user_button = "사용자 삭제";
 	$s_reset_password_msg = "패스워드 초기화는 패스워드를 공백으로 만듭니다.";
 
-	### manage_user_reset.php3
+	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "보호된 계정입니다. 패스워드를 초기화할수 없습니다.";
 	$s_account_reset_msg = "계정 패스워드 초기화...";
 
-	### manage_user_update.php3
+	# manage_user_update.php3
 	$s_manage_user_protected_msg = "보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....";
 	$s_manage_user_updated_msg = "계정이 갱신되었습니다...";
 
-	### menu_inc.php
+	# menu_inc.php
 	$s_main_link = "첫화면";
 	$s_view_bugs_link = "버그 보기";
 	$s_report_bug_link = "버그 보고하기";
@@ -429,111 +398,152 @@
 	$s_docs_link = "문서";
 	$s_logout_link = "로그아웃";
 
-	### meta_inc.php
-	### news_add.php3
+	# meta_inc.php
+
+	# news_add.php3
 	$s_news_added_msg = "뉴스가 추가됩니다...";
 
-	### news_delete.php3
+	# news_delete.php3
 	$s_news_deleted_msg = "뉴스 기사 삭제......";
 
-	### news_delete_page.php3
+	# news_delete_page.php3
 	$s_delete_news_sure_msg = "이 뉴스 기사를 삭제하시겠습니까?";
 	$s_delete_news_item_button = "뉴스 기사 삭제";
 
-	### news_edit_page.php3
+	# news_edit_page.php3
 	$s_edit_news_title = "뉴스 편집";
 	$s_headline = "헤드라인";
 	$s_body = "본문";
 	$s_update_news_button = "뉴스 갱신";
 
-	### news_menu_page.php3
+	# news_menu_page.php3
 	$s_add_news_title = "뉴스 추가";
-	### $s_headline # defined above
 	$s_do_not_use = "사용금지 문자: ";
-	### $s_body # defined above
 	$s_post_to = "포스팅 대상";
 	$s_post_news_button = "뉴스 게시";
 	$s_edit_or_delete_news_title = "뉴스 편집 또는 삭제";
 	$s_edit_post = "뉴스 편집";
 	$s_delete_post = "뉴스 삭제";
 	$s_select_post = "뉴스 선택";
-	### $s_submit_button # defined above
 
-	### news_update.php3
+	# news_update.php3
 	$s_news_updated_msg = "새로운 기사가 갱신되었습니다...";
 
-	### project_menu_page.php3
-	$s_project_selection_title = "프로젝트 선택";
-	### $s_projects # defined above
-	### $s_select_project_button # defined above
+	# news_view_page.php3
+	$s_back_link = "Back";
 
-	### report_add.php3
+	# proj_doc_add.php3
+	$s_file_uploaded_msg = "File upload successful";
+
+	# proj_doc_add_page.php3
+	$s_upload_file_title = "Upload File";
+	$s_title = "Title";
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
+
+	# proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Project file deleted";
+
+	# proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+
+	# proj_doc_edit_page.php3
+	$s_upload_file_title = "Upload File";
+	$s_filename = "Filename";
+	$s_file_update_button = "Update File";
+	$s_file_delete_button = "Delete File";
+
+	# proj_doc_page.php3
+	$s_project_documentation_title = "Project Documentation";
+	$s_user_documentation = "User Documentation";
+	$s_project_documentation = "Project Documentation";
+	$s_add_file = "Add File";
+
+	# proj_doc_update.php3
+	$s_project_document_updated = "Project update successful";
+
+	# proj_user_add.php3
+	$s_project_user_added_msg = "Successfully added user to project";
+
+	# proj_user_delete.php3
+	$s_project_removed_user_msg = "Successfully removed user from project";
+
+	# proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+
+	# proj_user_menu_page.php3
+	$s_add_user_title = "Add user to project";
+	$s_add_user_button = "Add User";
+	$s_project_selection_title = "Project Selection";
+	$s_remove_link = "remove";
+
+	# proj_user_update.php3
+	$s_updated_user_msg = "Successfully updated user";
+
+	# report_add.php3
 	$s_report_add_error_msg = "에러: 리포트에 잘못된 내용이 있습니다.";
 	$s_must_enter_category = "카테고리를 선택해야 합니다.";
 	$s_must_enter_severity = "중요도를 선택해야 합니다.";
 	$s_must_enter_reproducibility = "재발생가능성을 선택해야 합니다.";
 	$s_must_enter_summary = "요약된 내용을 입력해야 합니다.";
 	$s_must_enter_description = "설명을 입력해야 합니다.";
-	#$s_hit_back_msg = "뒤로 돌아가서 필요한 필드를 다시 입력하세요.";
+	$s_report_more_bugs = "Report More Bugs";
 	$s_submission_thanks_msg = "버그 리포팅을 해주셔서 감사합니다.";
 
-	### report_bug_advanced_page.php3
+	# report_bug_advanced_page.php3
 	$s_simple_report_link = "간단한 보고서";
 	$s_enter_report_details_title = "상세 보고내역을 입력하세요";
-	### $s_category
 	$s_required = "필수";
 	$s_select_category = "카테고리 선택";
 	$s_select_reproducibility = "재발생 가능성 선택";
 	$s_select_severity = "중요도(심각성) 선택";
-	### $s_reproducibility
-	### $s_severity
-	### $s_select_profile # defined above
 	$s_or_fill_in = "OR Fill In";
-	### $s_platform # defined above
-	### $s_os # defined above
-	### $s_os_version # defined above
-	### $s_product_version # defined above
-	### $s_product_build # defined above
 	$s_assign_to = "할당하기";
-	### $s_summary # defined above
-	### $s_description # defined above
 	$s_steps_to_reproduce = "재발생 스탭";
 	$s_additional_information = "추가 정보사항";
 	$s_submit_report_button = "보고서 제출";
+	$s_check_report_more_bugs = "check to report more bugs";
 
-	### report_bug_page.php3
+	# report_bug_page.php3
 	$s_advanced_report_link = "상세 보고";
-	### $s_enter_report_details_title # defined above
-	### $s_category # defined above
-	### $s_required # defined above
-	### $s_select_category # defined above
-	### $s_select_reproducibility # defined above
-	### $s_select_severity # defined above
-	### $s_reproducibility
-	### $s_severity
-	### $s_summary # defined above
-	### $s_description # defined above
-	### $s_additional_information # defined above
-	### $s_submit_report_button # defined above
+	$s_upload_file = "Upload File";
+	$s_report_stay = "Report Stay";
 
-	### show_source_page.php3
+	# set_project.php3
+	$s_selected_project = "Selected project";
+	$s_valid_project_msg = "You must choose a valid project";
+
+	# show_source_page.php3
 	$s_show_source_for_msg = "소스를 보는기능은 ";
 	$s_not_supported_part1 = "php의 이버전에서는 ";
 	$s_not_supported_part2 = "지원되지 않습니다.";
 
-	### signup.php3
+	# signup.php3
 	$s_invalid_email = "이메일 주소가 올바릅니까";
 	$s_duplicate_username = "중복된 사용자입니다. 다른 이름을 선택하세요";
 	$s_account_create_fail = "사용자 계정생성에 실패했습니다.";
+	$s_account_added = "Account was successfully added.";
+	$s_password_emailed_msg = "Your password will be emailed to you.";
+	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
 
-	### signup_page.php3
+	# signup_page.php3
 	$s_signup_info = "로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.";
 	$s_signup_title = "Signup";
-	### $s_username = ""; # defined above
-	### $s_email = ""; # defined above
 	$s_signup_button = "Signup";
 
-	### summary_page.php3
+	# site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Edit Site Settings";
+	$s_save_settings_button = "Save Settings";
+
+	# site_settings_page.php3
+	$s_site_settings_title = "Site Settings";
+	$s_system_info_link = "System Info";
+	$s_site_settings_link = "Site Settings";
+
+	# site_settings_update.php3
+	$s_site_settings_updated_msg = "Site settings have been updated";
+
+	# summary_page.php3
 	$s_summary_title = "요약";
 	$s_by_status = "상태별";
 	$s_by_date = "일자별";
@@ -548,114 +558,39 @@
 	$s_total_time = "전체 시간";
 	$s_developer_stats = "개발자 통계(open/resolved/total)";
 
-	### view_bug_advanced_page.php3
-	$s_view_simple_link = "간략히 보기";
-	$s_viewing_bug_advanced_details_title = "버그 자세히 보기";
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_reproducibility # defined above
-	### $s_date_submitted # defined above
-	### $s_last_update # defined above
-	### $s_reporter # defined above
-	### $s_assigned_to # defined above
-	### $s_priority # defined above
-	### $s_resolution # defined above
-	### $s_platform # defined above
-	### $s_status # defined above
-	### $s_duplicate_id # defined above
-	### $s_os # defined above
-	### $s_projection # defined above
-	### $s_os_version # defined above
-	### $s_eta # defined above
-	### $s_product_version # defined above
-	$s_product_build = "제품 빌드번호";
-	### $s_votes # defined above
-	### $s_summary # defined above
-	### $s_description # defined above
-	### $s_steps_to # defined above
-	### $s_reproduce # defined above
-	### $s_additional # defined above
-	### $s_information # defined above
-	$s_system_profile = "시스템 설명";
-	$s_update_bug_button = "버그 갱신";
-        $s_bug_assign_button    = "내게 할당된 버그";
-	### $s_resolve_bug_button # defined above
-	### $s_delete_bug_button # defined above
-	$s_reopen_bug_button = "재발생 버그";
+	# view_all_assign_bug_page.php3
 
-	### view_bug_all_page.php3
+	# view_all_bug_page.php3
 	$s_all_bugs_link = "전체 버그";
 	$s_reported_bugs_link = "보고된 버그";
 	$s_assigned_bugs_link = "할당된 버그";
+	$s_unassigned_bugs_link = "Unassigned Bugs";
 	$s_any = "모두";
 	$s_show = "갯수";
 	$s_changed = "변경된(시간)";
 	$s_hide_closed = "해결된 버그 숨김";
 	$s_filter_button = "필터";
 	$s_viewing_bugs_title = "버그 보기";
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
 	$s_updated = "최종 갱신";
-	### $s_summary # defined above
 
-	### view_bug_page.php3
+	# view_all_inc.php
+
+	# view_user_reported_bug_page.php3
+
+	# view_all_unassign_bug_page.php3
+
+	# view_bug_advanced_page.php3
+	$s_view_simple_link = "간략히 보기";
+	$s_viewing_bug_advanced_details_title = "버그 자세히 보기";
+	$s_product_build = "제품 빌드번호";
+	$s_system_profile = "시스템 설명";
+	$s_update_bug_button = "버그 갱신";
+	$s_bug_assign_button    = "내게 할당된 버그";
+	$s_reopen_bug_button = "재발생 버그";
+
+	# view_bug_inc.php
+
+	# view_bug_page.php3
 	$s_view_advanced_link = "자세히 보기";
 	$s_viewing_bug_simple_details_title = "간략히 보기";
-	### $s_viewing_bug_details_title # defined above
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_reproducibility # defined above
-	### $s_date_submitted # defined above
-	### $s_last_update # defined above
-	### $s_reporter # defined above
-	### $s_assigned_to # defined above
-	### $s_priority # defined above
-	### $s_resolution # defined above
-	### $s_status # defined above
-	### $s_duplicate_id # defined above
-	### $s_summary # defined above
-	### $s_description # defined above
-	### $s_additional # defined above
-	### $s_information # defined above
-	### $s_update_bug_button # defined above
-	### $s_bug_assign_button # defined above
-	### $s_resolve_bug_button # defined above
-	### $s_delete_bug_button # defined above
-	### $s_reopen_bug_button # defined above
-
-	### view_user_assigned_bug_page.php3
-	### $s_all_bugs_link # defined above
-	### $s_reported_bugs_link # defined above
-	### $s_any # defined above
-	### $s_show # defined above
-	### $s_changed # defined above
-	### $s_hide_closed # defined above
-	### $s_filter_button # defined above
-	### $s_viewing_bugs_title # defined above
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
-	### $s_updated # defined above
-	### $s_summary # defined above
-
-	### view_user_reported_bug_page.php3
-	### $s_all_bugs_link # defined above
-	### $s_assigned_bugs_link # defined above
-	### $s_any # defined above
-	### $s_show # defined above
-	### $s_changed # defined above
-	### $s_hide_closed # defined above
-	### $s_filter_button # defined above
-	### $s_viewing_bugs_title # defined above
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
-	### $s_updated # defined above
-	### $s_summary # defined above
 ?>
