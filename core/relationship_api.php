@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.32 2005-03-03 02:17:47 thraxisp Exp $
+	# $Id: relationship_api.php,v 1.33 2005-03-21 20:14:58 vwegert Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -566,7 +566,7 @@
 		}
 
 		# add summary
-		$t_relationship_info_html .= $t_td . string_attribute( $t_bug->summary );
+		$t_relationship_info_html .= $t_td . $t_bug->summary;
 		if ( VS_PRIVATE == $t_bug->view_state ) {
 			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 		}
