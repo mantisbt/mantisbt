@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.113 2003-03-15 22:09:54 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.114 2003-03-19 07:59:19 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -833,7 +833,14 @@
 	# Use compression of generated html if browser supports it
 	# If you already have compression enabled in your php.ini file
 	#  (either with zlib.output_compression or 
-	#  output_handler=ob_gzhandler) this option will have no effect either way.
+	#  output_handler=ob_gzhandler) this option will be ignored.
+	#
+	# If you do not have zlib enabled in your PHP installation
+	#  this option will also be ignored.  PHP 4.3.0 and later have
+	#  zlib included by default.  Windows users should uncomment
+	#  the appropriate line in their php.ini files to load
+	#  the zlib DLL.  You can check what extensions are loaded
+	#  by running "php -m" at the command line (look for 'zlib')
 	$g_compress_html		= ON;
 	#----------------------------------
 
