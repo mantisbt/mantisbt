@@ -79,11 +79,6 @@
     $t_redirect_url = $g_manage_page;
 ?>
 <?php print_page_top1() ?>
-<?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
-?>
 <?php print_page_top2() ?>
 
 <p>
