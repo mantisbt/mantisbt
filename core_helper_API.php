@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.61 $
+	# $Revision: 1.62 $
 	# $Author: prescience $
-	# $Date: 2002-08-19 02:05:13 $
+	# $Date: 2002-08-19 02:55:55 $
 	#
-	# $Id: core_helper_API.php,v 1.61 2002-08-19 02:05:13 prescience Exp $
+	# $Id: core_helper_API.php,v 1.62 2002-08-19 02:55:55 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -478,6 +478,12 @@
 	     if ( !isset( $p_var ) ) {
 	         $p_var = $p_default_value;
 	     }
+	}
+	# --------------------
+	function check_selected( $p_var, $p_val ) {
+		if ( $p_var == $p_val ) {
+			echo 'selected="selected"';
+		}
 	}
 	# --------------------
 ?>
