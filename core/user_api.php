@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.41 2002-10-20 22:19:58 jfitzell Exp $
+	# $Id: user_api.php,v 1.42 2002-10-20 23:51:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -147,7 +147,7 @@
 
 		$result = db_query( $query );
 
-		if ( 0 == db_num_rows( $result ) ) {
+		if ( 0 == db_result( $result ) ) {
 			return false;
 		} else {
 			return true;
