@@ -110,7 +110,7 @@
 	$s_email = "Email";
 	$s_password = "Password";
 	$s_confirm_password  = "Confirm Password";
-	$s_access_level = "Default Access Level";
+	$s_access_level = "Access Level";
 	$s_update_user_button = "Update User";
 
 	# account_prefs_page.php3
