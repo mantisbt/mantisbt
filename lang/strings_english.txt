@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.161 $
+	# $Revision: 1.162 $
 	# $Author: narcissus $
-	# $Date: 2004-04-27 00:54:33 $
+	# $Date: 2004-05-01 00:16:18 $
 	#
-	# $Id: strings_english.txt,v 1.161 2004-04-27 00:54:33 narcissus Exp $
+	# $Id: strings_english.txt,v 1.162 2004-05-01 00:16:18 narcissus Exp $
 	###########################################################################
 ?>
 <?php
@@ -843,7 +843,7 @@ $s_query_exists = 'This particular query appears to already exist.';
 $s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
 $s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
 $s_query_store_error = 'There was an error saving this query.';
-$s_open_queries = 'Open Saved Filters';
+$s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
