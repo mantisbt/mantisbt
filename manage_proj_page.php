@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.14 2005-03-02 00:14:49 jlatour Exp $
+	# $Id: manage_proj_page.php,v 1.15 2005-03-22 19:13:54 vwegert Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -70,6 +70,7 @@
 	</td>
 </tr>
 <?php
+	$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 	$t_projects = current_user_get_accessible_projects();
 	$t_projects = multi_sort( $t_projects, $f_sort, $t_direction );
 
@@ -86,6 +87,10 @@
 		$t_level      = count( $t_stack );
 
 		$t_project = project_get_row( $t_project_id );
+
+		# only print row if user has project management privileges
+		if (access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) {
+		
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
@@ -105,8 +110,9 @@
 	</td>
 </tr>
 <?php
+		}
 		$t_subprojects = project_hierarchy_get_subprojects( $t_project_id );
-
+	
 		if ( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
 			array_unshift( $t_stack, $t_projects );
 		}
