@@ -117,7 +117,7 @@
 	}
 	#--------------------
 	function get_enum_string( $p_field_name ) {
-		global $g_mantis_bug_table
+		global $g_mantis_bug_table;
 
 		$query = "SHOW FIELDS
 				FROM $g_mantis_bug_table";
@@ -139,7 +139,7 @@
 	#--------------------
 	### Used for update pages
 	function print_categories( $p_category="" ) {
-		global $g_mantis_bug_table
+		global $g_mantis_bug_table;
 
 		$t_category_string = get_enum_string( "category" );
 	    $t_str = $t_category_string.",";
@@ -158,7 +158,7 @@
 	#--------------------
 	### Used for update pages
 	function print_list( $p_list,  $p_item="" ) {
-		global $g_mantis_bug_table
+		global $g_mantis_bug_table;
 
 		$t_category_string = get_enum_string( $p_list );
 	    $t_str = $t_category_string.",";

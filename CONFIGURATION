@@ -7,6 +7,9 @@ whatever you need.
   way you can easily upgrade your installations while not having
   to re-enter all your configuration settings.
 
+  NOTE: since the package is still being changed a fair amount I suggest
+  the following
+
 * core_API.php - this file contains all the critical functions
 
 * To add more categories just edit through the manage area.  The format must

@@ -70,7 +70,7 @@
 			Advanced report
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_report size=4 maxlength=4 value="<? echo $v_hour_count ?>"> hours ago
+			<input type=checkbox name=f_advanced_report size=4 maxlength=4 value="<? echo $v_hour_count ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -78,7 +78,7 @@
 			Advanced view
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_view size=4 maxlength=4 value="<? echo $v_hour_count ?>"> hours ago
+			<input type=checkbox name=f_advanced_view size=4 maxlength=4 value="<? echo $v_hour_count ?>">
 		</td>
 	</tr>
 	<tr align=center>

@@ -7,7 +7,6 @@
 # Table structure for table 'mantis_bug_table'
 #
 
-DROP TABLE IF EXISTS mantis_bug_table;
 CREATE TABLE mantis_bug_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    reporter_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
@@ -39,7 +38,6 @@ CREATE TABLE mantis_bug_table (
 # Table structure for table 'mantis_bug_text_table'
 #
 
-DROP TABLE IF EXISTS mantis_bug_text_table;
 CREATE TABLE mantis_bug_text_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    description text NOT NULL,
@@ -53,7 +51,6 @@ CREATE TABLE mantis_bug_text_table (
 # Table structure for table 'mantis_bugnote_table'
 #
 
-DROP TABLE IF EXISTS mantis_bugnote_table;
 CREATE TABLE mantis_bugnote_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    bug_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
@@ -69,7 +66,6 @@ CREATE TABLE mantis_bugnote_table (
 # Table structure for table 'mantis_bugnote_text_table'
 #
 
-DROP TABLE IF EXISTS mantis_bugnote_text_table;
 CREATE TABLE mantis_bugnote_text_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    note text NOT NULL,
@@ -81,7 +77,6 @@ CREATE TABLE mantis_bugnote_text_table (
 # Table structure for table 'mantis_news_table'
 #
 
-DROP TABLE IF EXISTS mantis_news_table;
 CREATE TABLE mantis_news_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    poster_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
@@ -98,7 +93,6 @@ CREATE TABLE mantis_news_table (
 # Table structure for table 'mantis_user_table'
 #
 
-DROP TABLE IF EXISTS mantis_user_table;
 CREATE TABLE mantis_user_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    username varchar(32) NOT NULL,
