@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.46 2003-01-23 00:33:15 vboctor Exp $
+	# $Id: user_api.php,v 1.47 2003-01-23 06:30:11 robertjf Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -242,19 +242,28 @@
 			#  Shouldn't we override an email that is passed in here?
 			#  If the user doesn't exist in ldap, is the account created?
 			#  If so, there password won't get set anywhere...  (etc)
+			#  RJF: I was going to check for the existence of an LDAP email.
+			#  however, since we can't create an LDAP account at the moment,
+			#  and we don't know the user password in advance, we may not be able 
+			#  to retrieve it anyway.  
+			#  I'll re-enable this once a plan has been properly formulated for LDAP
+			#  account management and creation.
 
-			if ( ON == config_get( 'use_ldap_email' ) ) {
-				$p_email = ldap_email( $p_username );
-			} else {
-				$p_email = '';
+			$t_email = "";
+/*			if ( ON == config_get( 'use_ldap_email' ) ) {
+				$t_email = ldap_email_from_username( $p_username );
+			} 
+*/
+			if ( is_blank($t_email) ) {
+				$t_email = $p_email;
 			}
 		}
 
-		$t_seed = $p_email.$p_username;
+		$t_seed = $t_email.$p_username;
 		# Create random password
 		$t_password	= auth_generate_random_password( $t_seed );
 
-		return user_create( $p_username, $t_password, $p_email );
+		return user_create( $p_username, $t_password, $t_email );
 	}
 
 	# --------------------
@@ -361,11 +370,14 @@
 	# --------------------
 	# lookup the user's email in LDAP or the db as appropriate
 	function user_get_email( $p_user_id ) {
+		$t_email = "";
 		if ( ON == config_get( 'use_ldap_email' ) ) {
-		    return ldap_email( user_get_name( $p_user_id ) );
-		} else {
-			return user_get_field( $p_user_id, 'email' );
+		    $t_email = ldap_email( $p_user_id );
 		}
+		if ( is_blank( $t_email ) ) {
+			$t_email =  user_get_field( $p_user_id, 'email' );
+		}
+		return $t_email;
 	}
 
 	# --------------------
