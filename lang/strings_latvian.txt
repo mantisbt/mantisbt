@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.5 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.6 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_latvian.txt,v 1.5 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_latvian.txt,v 1.6 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = "Datumu kârtîba";
 $s_print_all_bug_page_link = "Atskaites izdruka";
 $s_csv_export = "Eksports uz CSV";
 $s_login_anonymously = "Anonîmais lietotâjs";
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = "Pârlekt uz komentâriem";
 $s_public_project_msg = "Ðis projekts ir PUBLISKI pieejams. Visi lietotâji piekïûst ðim projektam.";
 $s_private_project_msg = "Ðis projekts publiski nav pieejams. Tikai administrâtori un speciâli pieliktiem lietotâjiem ir pieeja.";
@@ -83,6 +84,7 @@ $s_additional_information_updated = 'Labota papildinformâcija';
 $s_steps_to_reproduce_updated = 'Laboti atkârtojamîbas soïi';
 $s_file_added = 'Pielikts fails';
 $s_file_deleted = 'Nodzçsts fails';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Padarît par privâtu';
 $s_make_public = 'Padarît par publisku';
@@ -185,6 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
@@ -862,4 +865,7 @@ $s_filter_resolved = "Atrisinâtie";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.57 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.58 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_korean.txt,v 1.57 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_korean.txt,v 1.58 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,6 +36,7 @@ $s_date_order = '일자 정렬';
 $s_print_all_bug_page_link = '리포트 출력';
 $s_csv_export = 'CSV 엑스포트';
 $s_login_anonymously = '익명 로그인';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = '버그노트로 이동';
 $s_public_project_msg = '이 프로젝트는 모두에게 공개되었습니다.';
 $s_private_project_msg = '이 프로젝트는 관리자와 허용된 사용자만 접근 가능합니다.';
@@ -82,6 +83,7 @@ $s_additional_information_updated = '추가 정보 업데이트됨';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = '파일 추가됨: ';
 $s_file_deleted = '파일 삭제됨: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = '보호하기';
 $s_make_public = '공개하기';
@@ -184,6 +186,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
@@ -861,4 +864,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

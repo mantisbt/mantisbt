@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.5 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:11 $
+	# $Revision: 1.6 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:43 $
 	#
-	# $Id: strings_croatian.txt,v 1.5 2004-01-11 07:16:11 vboctor Exp $
+	# $Id: strings_croatian.txt,v 1.6 2004-02-05 15:10:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = "Redoslijed datuma";
 $s_print_all_bug_page_link = "Ispi¹i izvje¹æa";
 $s_csv_export = "CSV Export";
 $s_login_anonymously = "Prijaci se anonimno";
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = "Skoèi na Bug bilje¹ke";
 $s_public_project_msg = "Ovaj projekt je JAVAN.  Svi korisnici imaju pristup.";
 $s_private_project_msg = "Ovaj projekt je PRIVATAN.  Samo administratori i ruèno dodani korisnici imaju pristup.";
@@ -83,6 +84,7 @@ $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added';
 $s_file_deleted = 'File Deleted';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -185,6 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP Record Update has failed.';
@@ -862,4 +865,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:13 $
+	# $Revision: 1.54 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:47 $
 	#
-	# $Id: strings_turkish.txt,v 1.53 2004-01-11 07:16:13 vboctor Exp $
+	# $Id: strings_turkish.txt,v 1.54 2004-02-05 15:10:47 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,6 +36,7 @@ $s_date_order = 'Tarih Sýralamasý';
 $s_print_all_bug_page_link = 'Raporlarý Yazdýr';
 $s_csv_export = 'CSV Çýktý';
 $s_login_anonymously = 'Anonim Giriþ';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Bug Notlarýna Git';
 $s_public_project_msg = 'Bu proje bütün kullanýcýlarýn eriþimine açýktýr.';
 $s_private_project_msg = 'Bu projeye sadece yöneticiler ve yöneticiler tarafýndan eklenmiþ kullanýcýlar eriþebilir.';
@@ -82,6 +83,7 @@ $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added';
 $s_file_deleted = 'File Deleted';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -184,6 +186,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
@@ -861,4 +864,7 @@ $s_filter_resolved = 'Resolved';
 
 $s_attachments = 'attachment(s)';
 $s_attachment_alt = 'A';
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

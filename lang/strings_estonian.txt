@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.3 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:44 $
 	#
-	# $Id: strings_estonian.txt,v 1.2 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_estonian.txt,v 1.3 2004-02-05 15:10:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = 'Kuupäeva järgi';
 $s_print_all_bug_page_link = 'Trüki teated';
 $s_csv_export = 'CSV Eksport';
 $s_login_anonymously = 'Logi sisse anonüümselt';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Mine bugi märkustesse';
 $s_public_project_msg = 'See projekt on AVALIK.  Kõik kasutajad omavad sellele juurdepääsu.';
 $s_private_project_msg = 'See projekt on PRIVAATNE.  Ainult administraator ja eraldi lisatud kasutajad omavad sellele juurdepääsu.';
@@ -83,6 +84,7 @@ $s_additional_information_updated = 'Lisainformatsioon uuendatud';
 $s_steps_to_reproduce_updated = 'Bugi kordamise sammud uuendatud';
 $s_file_added = 'Fail lisatud';
 $s_file_deleted = 'Fail kustutatud';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Tee privaateseks';
 $s_make_public = 'Tee avalikuks';
@@ -185,6 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Kasutaja välja ei leitud';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'See on duplikaatne kasutaja väli.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Vähemalt üks projekt kasutab seda välja.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Lubamatu väärtus sellele väljale';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Kirje uuendamine ebaõnnestus.';
@@ -862,4 +865,7 @@ $s_filter_resolved = "Lahendatud";
 
 $s_attachments = "Lisa(d)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

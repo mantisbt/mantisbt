@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.81 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.82 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:44 $
 	#
-	# $Id: strings_german.txt,v 1.81 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_german.txt,v 1.82 2004-02-05 15:10:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -39,6 +39,7 @@ $s_date_order = 'Sortieren nach Datum';
 $s_print_all_bug_page_link = 'Berichte drucken';
 $s_csv_export = 'CSV-Export';
 $s_login_anonymously = 'Anonym einloggen';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Zu Fehlernotizen springen';
 $s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH.  Alle Benutzer haben Zugang zu diesem Projekt.';
 $s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und manuell hinzugefügte Benutzer haben Zugang.';
@@ -85,6 +86,7 @@ $s_additional_information_updated = 'Zusätzliche Informationen aktualisiert';
 $s_steps_to_reproduce_updated = 'Schritte zur Reproduzierung aktualisiert';
 $s_file_added = 'Datei hinzugefügt: ';
 $s_file_deleted = 'Datei gelöscht: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Privat machen';
 $s_make_public = 'Öffentlich machen';
@@ -187,6 +189,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FEHLER: Benutzerdefiniertes Feld n
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FEHLER:  Feld name bereits vorhanden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'FEHLER: Mindestens ein Projekt benutzt dieses Feld noch.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEHLER: Feld-Eintrag entspricht nicht der Definition!';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEHLER: LDAP Authentifizierung fehlgeschlagen';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'FEHLER: LDAP Server Verbindung fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEHLER: LDAP Datensatz kann nicht aktualisiert werden.';

@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.33 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:11 $
+	# $Revision: 1.34 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:43 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.33 2004-01-11 07:16:11 vboctor Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.34 2004-02-05 15:10:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -38,6 +38,7 @@ $s_date_order = "日期顺序";
 $s_print_all_bug_page_link = "打印报告";
 $s_csv_export = "CSV导出";
 $s_login_anonymously = "匿名登录";
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = "跳转至Bug注解";
 $s_public_project_msg = "这个项目是公共的，所有用户都可以访问该项目。";
 $s_private_project_msg = "这个项目是私有的，只有管理员和授权用户才能访问。";
@@ -84,6 +85,7 @@ $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added: ';
 $s_file_deleted = 'File Deleted: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = '标记为私有';
 $s_make_public = '标记为公有';
@@ -186,6 +188,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
@@ -863,4 +866,7 @@ $s_filter_resolved = "已解决";
 
 $s_attachments = "附件";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

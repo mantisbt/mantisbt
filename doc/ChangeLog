@@ -22,6 +22,7 @@ Mantis ChangeLog
  * Fix #3530: Custom fields definitions are not validated.
  * Opt #0000: Added an index on bug_id field in the mantis_bug_file_table.
  * Opt #0000: Removed filtering code redundancy in print report pages (thanks to Lincoln Maskey)
+ * Languages: Updated Dutch localisation.
  * Updated copyright to include 2004
 
 2003.12.08  -  0.18.0

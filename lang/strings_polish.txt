@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.59 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.60 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_polish.txt,v 1.59 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_polish.txt,v 1.60 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,6 +36,7 @@ $s_date_order = 'Sortowanie wg Daty';
 $s_print_all_bug_page_link = 'Drukuj Zg³oszenia';
 $s_csv_export = 'Eksport CSV';
 $s_login_anonymously = 'Logowanie Anonimowe';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Przejd¼ do komentarzy';
 $s_public_project_msg = 'Ten projekt jest PUBLICZNY. Wszyscy u¿ytkownicy posiadaj± dostêp do tego projektu.';
 $s_private_project_msg = 'Ten projekt jest PRYWATNY.  Jedynie administratorzy i rêcznie dodani u¿ytkownicy maj± do niego dostêp.';
@@ -82,6 +83,7 @@ $s_additional_information_updated = 'Zaktualizowane dodatkowe informacje';
 $s_steps_to_reproduce_updated = 'Zaktualizowane kroki, by powtórzyæ b³±d';
 $s_file_added = 'Dodany plik ';
 $s_file_deleted = 'Usuniêty plik: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Zmieñ status na prywatny';
 $s_make_public = 'Zmieñ status na publiczny';
@@ -184,6 +186,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'B£¡D: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'B£¡D: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'B£¡D: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'B£¡D: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'B£¡D: Autentykacja LDAP nie powiod³a siê.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'B£¡D: Nie mo¿na nawi±zaæ po³±czenia z serwerm LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'B£¡D: LDAP Record Update has failed.';
@@ -861,4 +864,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -7,11 +7,11 @@
 
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt  V0.1
 	# -------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.55 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.54 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.55 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,6 +35,7 @@ $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Login Anonymously';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Jump to Bugnotes';
 $s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
 $s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
@@ -81,6 +82,7 @@ $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added: ';
 $s_file_deleted = 'File Deleted: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -183,6 +185,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';

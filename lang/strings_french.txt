@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.65 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.66 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:44 $
 	#
-	# $Id: strings_french.txt,v 1.65 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_french.txt,v 1.66 2004-02-05 15:10:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -42,6 +42,7 @@ $s_date_order = 'Par date';
 $s_print_all_bug_page_link = 'Rapport imprimable';
 $s_csv_export = 'Export CSV';
 $s_login_anonymously = 'Se logger anonymement';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Aller aux notes';
 $s_public_project_msg = 'Ce projet est PUBLIC.  Tous les utilisateurs y ont accès.';
 $s_private_project_msg = 'Ce projet est PRIVE.  Seuls les administrateurs et les utilisateurs ajoutés manuellement au projet y ont accès';
@@ -88,6 +89,7 @@ $s_additional_information_updated = 'Information complémentaire mise à jour';
 $s_steps_to_reproduce_updated = 'Etapes pour reproduire mises à jour';
 $s_file_added = 'Fichier ajouté : ';
 $s_file_deleted = 'Fichier supprimé : ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Rendre privé';
 $s_make_public = 'Rendre public';
@@ -190,6 +192,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERREUR: Champ personnalisé non tro
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERREUR: Nom dupliqué.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERREUR: Au moins un projet utilise encore ce champ.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERREUR: Valeur invalide pour ce champ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERREUR: Echec d\'indentification par LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERREUR: Echec de connexion au serveur LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERREUR: Echec de mise à jour de l\'enregistrement LDAP.';
@@ -867,4 +870,7 @@ $s_filter_resolved = 'Résolu';
 
 $s_attachments = 'attachement(s)';
 $s_attachment_alt = 'A';
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.45 $
-  # $Author: beerfrick $
-  # $Date: 2003-08-24 10:02:33 $
+  # $Revision: 1.46 $
+  # $Author: jlatour $
+  # $Date: 2004-02-05 15:10:44 $
   #
-  # $Id: strings_hungarian.txt,v 1.45 2003-08-24 10:02:33 beerfrick Exp $
+  # $Id: strings_hungarian.txt,v 1.46 2004-02-05 15:10:44 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -36,6 +36,7 @@ $s_date_order = 'Dátumsorrend';
 $s_print_all_bug_page_link = 'Hibák nyomtatása';
 $s_csv_export = 'CSV exportálása';
 $s_login_anonymously = 'Bejelentkezés név nélkül';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
 $s_public_project_msg = 'Ez egy nyilvános projekt.  Minden felhasználónak van hozzáférése a projekthez.';
 $s_private_project_msg = 'Ez egy privát projekt.  Csak az administrátorok és a hozzárendelt felhasználóknak van hozzáférése a projekthez.';
@@ -82,6 +83,7 @@ $s_additional_information_updated = 'További Információ Frissítve';
 $s_steps_to_reproduce_updated = 'Reprodukálhatóság Frissítve';
 $s_file_added = 'File Feltöltve: ';
 $s_file_deleted = 'File Törölve: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Priváttá nyilvánítva';
 $s_make_public = 'Nyilvánossá nyilvánítva';
@@ -184,6 +186,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'HIBA: Nem találom a hozzáadott mez
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'HIBA: Ez egy duplikált név.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'HIBA: Legalább egy projekt használja az egyedi mezõt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'HIBA: Érvénytelen érték a mezõben';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'HIBA: LDAP Hitelesítés Megtagadva';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'HIBA: LDAP Szerver Konnekció Nem sikeres';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'HIBA: LDAP Rekord felülírás megtagadva.';
@@ -861,4 +864,7 @@ $s_filter_resolved = "Megoldva";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -11,11 +11,11 @@
   	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:11 $
+	# $Revision: 1.47 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:43 $
 	#
-	# $Id: strings_czech.txt,v 1.46 2004-01-11 07:16:11 vboctor Exp $
+	# $Id: strings_czech.txt,v 1.47 2004-02-05 15:10:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -39,6 +39,7 @@ $s_date_order = 'Øadit dle data';
 $s_print_all_bug_page_link = 'Vytisknout reporty';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Pøihlásit se anonymnì';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Pøechod na reporty';
 $s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
 $s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
@@ -85,6 +86,7 @@ $s_additional_information_updated = 'Doplòující informace aktualizována';
 $s_steps_to_reproduce_updated = 'Postup reprodukce aktualizován';
 $s_file_added = 'Pøidán soubor: ';
 $s_file_deleted = 'Zru¹en soubor: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Uèinit privátní';
 $s_make_public = 'Uèinit veøejný';
@@ -187,6 +189,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'CHYBA: U¾ivatelské pole tohoto jmé
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'CHYBA: Toto jméno ji¾ existuje.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'CHYBA: Minimálnì jeden projekt vyu¾ívá toto pole.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'CHYBA: Tato hodnota není pøípustná pro toto pole';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'CHYBA: LDAP Autentizace se nezdaøila';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'CHYBA: LDAP Chyba spojení se serverem';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'CHYBA: LDAP Chyba pøi aktualizaci záznamu.';
@@ -864,4 +867,7 @@ $s_filter_resolved = "Vyøízeno";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

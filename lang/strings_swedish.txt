@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.56 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:13 $
+	# $Revision: 1.57 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:46 $
 	#
-	# $Id: strings_swedish.txt,v 1.56 2004-01-11 07:16:13 vboctor Exp $
+	# $Id: strings_swedish.txt,v 1.57 2004-02-05 15:10:46 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,6 +35,7 @@ $s_date_order = 'Datumordning';
 $s_print_all_bug_page_link = 'Skriv ut rapporter';
 $s_csv_export = 'CSV export';
 $s_login_anonymously = 'Logga in anonymt';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Hoppa till buggmeddelanden';
 $s_public_project_msg = 'Det här projektet är PUBLIKT.  Alla användare har tillgång till det här projektet.';
 $s_private_project_msg = 'Det här projektet är PRIVAT.  Endast administratörer och manuellt tillagda användare har tillgång.';
@@ -81,6 +82,7 @@ $s_additional_information_updated = 'Ytterligare information ändrad';
 $s_steps_to_reproduce_updated = 'Steg för att reproducera ändrad';
 $s_file_added = 'La till fil: ';
 $s_file_deleted = 'Raderade fil: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Gör privat';
 $s_make_public = 'Gör publik';
@@ -183,6 +185,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FEL: Skräddarsytt fält kan inte hi
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FEL: Namnet finns redan.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'FEL: Fältet används av åtminstone ett projekt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEL: Ogiltigt fältvärde';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEL: LDAP Autentisiering Misslyckades,';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'FEL: LDAP Kan inte ansluta till servern';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEL: LDAP Uppdatering misslyckades.';
@@ -860,4 +863,7 @@ $s_filter_resolved = "lösta";
 
 $s_attachments = "bilagor";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

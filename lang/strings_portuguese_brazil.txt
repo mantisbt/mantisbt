@@ -8,11 +8,11 @@
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br
 	# Portuguese Brazil: Fernando Machado, fm-nospam@fmachado.com
 	# -------------------------------------------------
-	# $Revision: 1.55 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.56 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.55 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.56 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,6 +36,7 @@ $s_date_order              = "Ordem por data";
 $s_print_all_bug_page_link = "Imprimir lista de bugs";
 $s_csv_export              = "Exportar CSV";
 $s_login_anonymously       = "Login an&ocirc;nimo";
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes        = "Ir para 'Bugnotes'";
 $s_public_project_msg      = "Este &eacute; um projeto p&uacute;blico. ".
 $s_private_project_msg     = "Este &eacute; um projeto reservado. ".
@@ -82,6 +83,7 @@ $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added: ';
 $s_file_deleted = 'File Deleted: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -184,6 +186,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';

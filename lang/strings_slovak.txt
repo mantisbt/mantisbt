@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:13 $
+	# $Revision: 1.15 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:46 $
 	#
-	# $Id: strings_slovak.txt,v 1.14 2004-01-11 07:16:13 vboctor Exp $
+	# $Id: strings_slovak.txt,v 1.15 2004-02-05 15:10:46 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = 'Usporiada» podµa dátumu';
 $s_print_all_bug_page_link = 'Vytlaèi» reporty';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Prihlási» sa anonymne';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Preskoèi» na poznámky k bugom';
 $s_public_project_msg = 'Tento projekt je VEREJNÝ.  V¹etci pou¾ívatelia majú prístup k tomuto projektu..';
 $s_private_project_msg = 'Tento projekt je PRIVÁTNY.  Iba administrátori a manuálne pridaní pou¾ívatelia majú prístup k tomuto projektu.';
@@ -83,6 +84,7 @@ $s_additional_information_updated = 'Dodatoèné informácie aktualizované';
 $s_steps_to_reproduce_updated = 'Kroky k opätovnému vyvolaniu aktualizované';
 $s_file_added = 'Pridaný súbor: ';
 $s_file_deleted = 'Zmazaný súbor: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Zmeni» na PRIVÁTNE';
 $s_make_public = 'Zmeni» na VEREJNÉ';
@@ -185,6 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'CHYBA: ©peciálne pole nenájdené';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'CHYBA: Toto je duplikátne meno';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'CHYBA: aspoò jeden projekt stále pou¾íva toto ¹peciálne pole.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'CHYBA: Nesprávna hodnota pre pole';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'CHYBA: Zlyhalo overenie toto¾nosti cez LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'CHYBA: Zlyhalo pripojenie na LDAP server';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'CHYBA: Zlyhalo aktualizovanie záznamu cez LDAP.';
@@ -862,4 +865,7 @@ $s_filter_resolved = "Vyrie¹ené";
 
 $s_attachments = "prílohy";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

@@ -10,11 +10,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.5 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.6 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:44 $
 	#
-	# $Id: strings_finnish.txt,v 1.5 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_finnish.txt,v 1.6 2004-02-05 15:10:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -38,6 +38,7 @@ $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Tulosta Raportit';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Sisäänkirjoittaudu nimettömänä';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Mene Muistiinpanoihin';
 $s_public_project_msg = 'Tämä projekti on JULKINEN.  Kaikilla käyttäjillä on pääsy.';
 $s_private_project_msg = 'Tämä projekti on YKSITYINEN.  Vain pääkäyttäjillä ja erikseen lisätyillä käyttäjillä on pääsy.';
@@ -84,6 +85,7 @@ $s_additional_information_updated = 'Lisätiedot Päivitetty';
 $s_steps_to_reproduce_updated = 'Toisto-ohjeet Päivitetty';
 $s_file_added = 'Tiedosto Lisätty';
 $s_file_deleted = 'Tiedosto Poistettu';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Tee Yksityinen';
 $s_make_public = 'Tee Julkinen';
@@ -186,6 +188,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'VIRHE: Mukautettua kenttää ei löyd
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'VIRHE: Tällainen nimi on jo olemassa.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'VIRHE: Ainakin vielä yksi projekti käyttää tätä kenttää.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'VIRHE: Kentällä on virheellinen arvo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'VIRHE: LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'VIRHE: Yhteydenotto LDAP-palvelimeen epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'VIRHE: LDAP Record Update epäonnistui.';
@@ -863,4 +866,7 @@ $s_filter_resolved = "Ratkaistu";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

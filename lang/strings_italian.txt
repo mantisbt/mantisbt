@@ -10,11 +10,11 @@
 	# Italian: Stefano Mazzocchi, stefano@apache.org
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.59 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:12 $
+	# $Revision: 1.60 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:45 $
 	#
-	# $Id: strings_italian.txt,v 1.59 2004-01-11 07:16:12 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.60 2004-02-05 15:10:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -38,6 +38,7 @@ $s_date_order = "Ordina per Data";
 $s_print_all_bug_page_link = "Stampa il report";
 $s_csv_export = "Esporta in formato CSV";
 $s_login_anonymously = "Accedi anonimamente";
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = "Vai alle Note";
 $s_public_project_msg = "Questo progetto è PUBBLICO. Tutti gli utenti possono accedervi.";
 $s_private_project_msg = "Questo progetto è PRIVATO. Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.";
@@ -84,6 +85,7 @@ $s_additional_information_updated = "Modificate le Informazioni Addizionali";
 $s_steps_to_reproduce_updated = "Modificati i Passi per Riprodurlo";
 $s_file_added = "Allegato il File";
 $s_file_deleted = "Eliminato l'Allegato";
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = "Rendi Privato";
 $s_make_public = "Rendi Pubblico";
@@ -186,6 +188,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';

@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:13 $
+	# $Revision: 1.43 $
+	# $Author: jlatour $
+	# $Date: 2004-02-05 15:10:46 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.42 2004-01-11 07:16:13 vboctor Exp $
+	# $Id: strings_russian_koi8.txt,v 1.43 2004-02-05 15:10:46 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,6 +35,7 @@ $s_date_order = 'Порядок дат';
 $s_print_all_bug_page_link = 'Печать отчетов';
 $s_csv_export = 'Экспорт в CSV';
 $s_login_anonymously = 'Анонимный вход';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Перейти к заметкам';
 $s_public_project_msg = 'Этот проект ОБЩЕДОСТУПНЫЙ. Все пользователи имеют доступ к этому проекту.';
 $s_private_project_msg = 'Этот проект ЧАСТНЫЙ. Только Администраторы и добавленные вручную пользователи имеют доступ.';
@@ -81,6 +82,7 @@ $s_additional_information_updated = 'Дополнительная информация обновлена';
 $s_steps_to_reproduce_updated = 'Шаги по воспроизведению обновлены';
 $s_file_added = 'Файл добавлен: ';
 $s_file_deleted = 'Файл удален: ';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Сделать частным';
 $s_make_public = 'Сделать общедоступным';
@@ -183,6 +185,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
@@ -860,4 +863,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>
