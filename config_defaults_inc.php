@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.231 2004-12-17 15:20:59 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.232 2004-12-17 23:43:18 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -148,7 +148,7 @@
 	$g_signup_use_captcha	= ON;
 
 	# absolute path (with trailing slash!) to folder which contains your TrueType-Font files
-	# used to create the captcha image
+	# used to create the captcha image and since 0.19.3 for the Relationship Graphs
 	$g_system_font_folder	= 'c:/winnt/fonts/';
 
 	# font name used to create the captcha image. i.e. arial.ttf
@@ -1451,7 +1451,7 @@
 	# core/relationship_graph_api.php for more information.
 
 	# Enable relationship graphs support.
-	$g_relationship_graph_enable		= OFF;
+	$g_relationship_graph_enable		= ON;
 
 	# Font name and size, as required by Graphviz. If Graphviz fails to run
 	# for you, you are probably using a font name that gd can't find. On
@@ -1459,8 +1459,7 @@
 	$g_relationship_graph_fontname		= 'Arial';
 	$g_relationship_graph_fontsize		= 8;
 
-	# Local path where the above font is found on your system.
-	#
+	# Local path where the above font is found on your system for Relationship Graphs
 	# You shouldn't care about this on Windows since there is only one system
 	# folder where fonts are installed and Graphviz already knows where it
 	# is. On Linux and other unices, the default font search path is defined
@@ -1473,7 +1472,8 @@
 	# the DOTFONTPATH environment variable in your webserver startup script
 	# or (2) use this config option conveniently available here. If you need
 	# to list more than one directory, use colons to separate them.
-	$g_relationship_graph_fontpath		= '';
+	
+	# Since 0.19.3 we use the $g_system_font_folder variable to define the font folder
 
 	# Default dependency orientation. If you have issues with lots of childs
 	# or parents, leave as 'horizontal', otherwise, if you have lots of

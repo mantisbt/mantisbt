@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_graph_api.php,v 1.1 2004-09-25 14:16:08 prichards Exp $
+	# $Id: relationship_graph_api.php,v 1.2 2004-12-17 23:42:51 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	### Relationship Graph API ###
@@ -106,7 +106,7 @@
 		$t_id_string		= bug_format_id( $p_bug_id );
 		$t_graph_fontname	= config_get( 'relationship_graph_fontname' );
 		$t_graph_fontsize	= config_get( 'relationship_graph_fontsize' );
-		$t_graph_fontpath	= config_get( 'relationship_graph_fontpath' );
+		$t_graph_fontpath	= config_get( 'system_font_folder' );
 		$t_view_on_click	= config_get( 'relationship_graph_view_on_click' );
 		$t_neato_tool		= config_get( 'neato_tool' );
 
@@ -242,7 +242,7 @@
 		$t_id_string		= bug_format_id( $p_bug_id );
 		$t_graph_fontname	= config_get( 'relationship_graph_fontname' );
 		$t_graph_fontsize	= config_get( 'relationship_graph_fontsize' );
-		$t_graph_fontpath	= config_get( 'relationship_graph_fontpath' );
+		$t_graph_fontpath	= config_get( 'system_font_folder' );
 		$t_view_on_click	= config_get( 'relationship_graph_view_on_click' );
 		$t_dot_tool			= config_get( 'dot_tool' );
 
