@@ -41,8 +41,6 @@ Each major section is partitioned via the menu.  Every section is treated as a p
 		<ul>
 		<li><a href="#add_vote">Add Vote</a>
 		</ul>
-	<li><a href="#view_reported_bugs">View Bugs Reported by Logged in User</a>
-	<li><a href="#view_assigned_bugs">View Bugs Assigned to Logged in User</a>
 	</ul>
 <li><a href="#editing_bugs">Editing Bugs</a>
 	<ul>
@@ -161,21 +159,25 @@ Here we can view the bug listings.  The page has a set of viewing filters at the
 The filters control the behavior of the Bug List.  The filters are saved between browsing sessions but do not currently save sort order or direction.  In order from left to right is:
 
 <ul>
-	<li>category
-	<li>severity
-	<li>status
-	<li>show - show only XYZ bugs
-	<li>changed(hrs) - highlight threshold for updated column.  6 means highlight (in bold) all bugs updated within the last 6 hours.
+	<li>Search
+	<li>Reporter
+	<li>Handler
+	<li>Category
+	<li>Severity
+	<li>Status
+	<li>Show - show only XYZ bugs
+	<li>Changed(hrs) - highlight threshold for updated column.  6 means highlight (in bold) all bugs updated within the last 6 hours.
 	<li>Hide Closed
 </ul>
 
 <p>
 If the number of bugs exceeds the "Show" count in the filter a link for the "Next XYZ" bugs will be displayed at the bottom.  Appropriate "Prev XYZ" bug links will also be displayed.
-
+<p>
+The Search field will look for simple keyword matches in the summary, description, steps_to_reproduce, additional_information, bug id, or bug text id fields.  It does not currently search through bugnotes.
 <p>
 <h5>Bug List</h5>
 <p>
-The bugs are listed in a table and the attributes are listed in the following order: id, number of bugnotes, category, severity, status, last updated, and summary.  Each (except for number of bugnotes) can be clicked on to sort by that column.  Clicking again will reverse the direction of the sort.  The default is to sort by id in descending order.
+The bugs are listed in a table and the attributes are listed in the following order: priority, id, number of bugnotes, category, severity, status, last updated, and summary.  Each (except for number of bugnotes) can be clicked on to sort by that column.  Clicking again will reverse the direction of the sort.  The default is to sort by id in descending order.
 
 <p>
 The bug id is a link that leads to a more detailed report about the bug.  Depending on what you have set in your <a href="#change_preferences">Account Preferences</a> you will be sent to the simple or advanced view.  You can also <a href="#add_bugnote">add bugnotes</a> here.
@@ -261,14 +263,6 @@ The Advanced View is much the same as the Simple View with a few additional fiel
 	This increases the vote tally.  There is currently no IP spam protection for vote adding.  The idea behind the vote counter is to have duplicate reports instead increase the vote count.  As the number of reports increase the relative importance of the bug becomes clear.  This is somewhat useful in prioritizing the order in which to give attention to bugs.  NOTE: currently voting is disabled while I figure out how to better utilize this feature.
 	<p>
 	</blockquote>
-<p>
-<h4><a name=view_reported_bugs>[ View Bugs Reported by Logged in User ]</a></h4>
-<p>
-This page shows looks just like the previous view all bugs page except that it only shows bugs that the logged in user has reported.  Clicking on the first drop down will allow you to sort by other users.
-<p>
-<h4><a name=view_assigned_bugs>[ View Bugs Assigned to Logged in User ]</a></h4>
-<p>
-This page is similar to the reported bugs page but only shows bugs that the logged in user is assigned to.  Clicking on the first drop down will allow you to sort by other users.
 </blockquote>
 <p>
 
@@ -474,6 +468,12 @@ You can also edit, set different profiles to be defaults and delete profiles.  T
 <h2><a name=users>[ Users ]</a></h2>
 <p>
 This section is reserved for Managers and Administrators.
+<p>
+Here a manager or administrator can specifically assign a user to a project.  They can be assigned at an arbitrary access level so a developer could be 'demoted' to a updater for this specific project.
+<p>
+Conversely a reporter could be 'promoted' to be a developer.
+<p>
+To limit access to a project to all users you should make the project private and then raise the access threshold to administrators.  You can do this via the Manage | Manage Projects subsection.  You will then have to manually assign users to be added to the project.
 <p>
 
 <!-- --- MANAGE ---------------------------------------------------------- -->
