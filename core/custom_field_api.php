@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.32 2004-04-08 22:44:59 prescience Exp $
+	# $Id: custom_field_api.php,v 1.33 2004-06-15 07:27:15 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -774,10 +774,12 @@
 
 	# --------------------
 	# Get All Possible Values for a Field.
-	function custom_field_distinct_values( $p_field_id ) {
+	function custom_field_distinct_values( $p_field_id, $p_project_id = ALL_PROJECTS ) {
 		$c_field_id						= db_prepare_int( $p_field_id );
+		$c_project_id					= db_prepare_int( $p_project_id );
 		$t_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
 		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+		$t_mantis_bug_table				= config_get( 'mantis_bug_table' );
 		$t_return_arr					= array();
 
 		$query = "SELECT type, possible_values
@@ -799,9 +801,14 @@
 				array_push( $t_return_arr, $t_option );
 			}
 		} else {
-			$query2 = "SELECT value FROM $t_custom_field_string_table
-						WHERE field_id='$c_field_id'
-						GROUP BY value";
+			$t_where = '';
+			if ( ALL_PROJECTS != $p_project_id ) {
+				$t_where = " AND $t_mantis_bug_table.id = $t_custom_field_string_table.bug_id AND 
+							$t_mantis_bug_table.project_id = '$p_project_id'";
+			}
+			$query2 = "SELECT $t_custom_field_string_table.value FROM $t_custom_field_string_table, $t_mantis_bug_table
+						WHERE $t_custom_field_string_table.field_id='$c_field_id' $t_where
+						GROUP BY $t_custom_field_string_table.value";
 			$result2 = db_query( $query2 );
 			$t_row_count = db_num_rows( $result2 );
 			if ( 0 == $t_row_count ) {
