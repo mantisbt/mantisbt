@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.96 2004-08-16 00:40:04 thraxisp Exp $
+	# $Id: email_api.php,v 1.97 2004-08-21 13:07:14 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -827,20 +827,12 @@
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
 
-
 		# custom fields formatting
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
-
 			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
-
-			if ( CUSTOM_FIELD_TYPE_EMAIL === $t_custom_field_data['type'] ) {
-				$t_message .= 'mailto:'.$t_custom_field_data['value'];
-			} else {
-				$t_message .= $t_custom_field_data['value'];
-			}
+			$t_message .= string_custom_field_value_for_email ( $t_custom_field_data['value'], $t_custom_field_data['type'] );
 			$t_message .= "\n";
 		} # end foreach custom field
-
 
 		if ( config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
 			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );

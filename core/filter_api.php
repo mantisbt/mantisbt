@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.56 2004-08-20 23:10:21 prichards Exp $
+	# $Id: filter_api.php,v 1.57 2004-08-21 13:07:14 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -437,8 +437,8 @@
 							switch( $t_def['type'] ) {
 							case CUSTOM_FIELD_TYPE_MULTILIST:
 							case CUSTOM_FIELD_TYPE_CHECKBOX:
-								$t_custom_where_clause .= "LIKE '%";
-								$t_custom_where_clause_closing = "%' )";
+								$t_custom_where_clause .= "LIKE '%|";
+								$t_custom_where_clause_closing = "|%' )";
 								break;
 							default:
 								$t_custom_where_clause .= "= '";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.39 2004-08-20 23:00:39 prichards Exp $
+	# $Id: custom_field_api.php,v 1.40 2004-08-21 13:07:14 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1163,6 +1163,27 @@
 	function print_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 		echo string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
 	}
-	
+
+	# --------------------
+	# Prepare a string containing a custom field value for email
+	# $p_value		value of custom field
+	# $p_type		type of custom field
+	# NOTE: This probably belongs in the string_api.php
+	function string_custom_field_value_for_email( $p_value, $p_type ) {
+		switch( $p_type ) {
+			case CUSTOM_FIELD_TYPE_EMAIL:
+				return 'mailto:'.$p_value;
+				break;
+			case CUSTOM_FIELD_TYPE_ENUM:
+			case CUSTOM_FIELD_TYPE_LIST:
+			case CUSTOM_FIELD_TYPE_MULTILIST:
+			case CUSTOM_FIELD_TYPE_CHECKBOX:
+				return str_replace( '|', ', ', $p_value );
+				break;
+			default:
+				return $p_value;
+		}	
+		return $p_value;
+	}
 	
 ?>
