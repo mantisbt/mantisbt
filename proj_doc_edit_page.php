@@ -48,7 +48,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="20%">
-		<?php echo lang_get( 'title' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
 	</td>
 	<td width="80%">
 		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
@@ -71,7 +71,9 @@
 	</td>
 </tr>
 <tr>
-	<td>&nbsp;</td>
+	<td class="left">
+		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
+	</td>
 	<td>
 		<input type="submit" value="<?php echo lang_get( 'file_update_button' ) ?>" />
 	</td>

@@ -12,6 +12,10 @@
 
 	$f_file_id		= gpc_get_int( 'file_id' );
 	$f_title		= gpc_get_string( 'title' );
+	if ( is_blank( $f_title ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
 	$f_description	= gpc_get_string( 'description' );
 
 	$c_file_id		= db_prepare_int( $f_file_id );

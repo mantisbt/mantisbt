@@ -19,6 +19,10 @@
 	}
 
 	$f_title		= gpc_get_string( 'title' );
+	if ( is_blank( $f_title ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
 	$f_description	= gpc_get_string( 'description' );
 
 	$result = 0;
@@ -78,7 +82,7 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		print lang_get( 'operation_succesful' ) . '<br />';
+		print lang_get( 'operation_successful' ) . '<br />';
 	} else {						# FAILURE
 		if ( 1 == $disallowed ) {
 			print error_string( ERROR_FILE_DISALLOWED ).'<br />';
