@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2004.06.xx  -  0.19.0
+2004.07.07  -  0.19.0a1
  * Enh #0000: Change of terminology, replaced "bug" with "issue" [first step in #2710].
  * Enh #0000: Generate one email per user. Stage #2 (minor send mail optimization - used kept alive SMTP connection).
  * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
