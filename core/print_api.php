@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.91 2004-07-13 12:16:11 vboctor Exp $
+	# $Id: print_api.php,v 1.92 2004-07-15 11:21:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -529,6 +529,7 @@
 
 		$versions = version_get_all_rows( $c_project_id, $p_released );
 
+		echo '<option value=""></option>';
 		foreach( $versions as $version ) {
 			$t_version = string_attribute( $version['version'] );
 			echo "<option value=\"$t_version\"";
