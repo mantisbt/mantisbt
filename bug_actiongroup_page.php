@@ -30,7 +30,7 @@
 	}
 
 	# redirects to all_bug_page if nothing is selected
-	if (( $f_action=='') or count($f_bug_arr)==0 ) {
+	if ( ( $f_action=='' ) || !isset( $f_bug_arr ) || count( $f_bug_arr ) == 0 ) {
 		print_meta_redirect( 'view_all_bug_page.php',0);
 		exit;
 	}
