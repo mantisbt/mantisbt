@@ -4,7 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Korean: aporie@linux.ne.kr
+	# 한글 번역   aporie@kornet.net
+        # 번역 수정   yjseo@mizi.com
 ?>
 <?
 	# General Strings
@@ -48,7 +49,7 @@
 	$s_new_bug_msg = "다음의 새로운 버그가 추가되었습니다.";
 	$s_email_bugnote_msg = "이버그에 대하여 <b>버그노트</b>가 추가되었습니다.";
 	$s_email_resolved_msg = "아래의 버그가 <b>해결</b>되었습니다.";
-	$s_email_close_msg = "The following bug has beeen CLOSED";
+	$s_email_close_msg = "아래의 버그가 <b>폐쇄</b>되었습니다.";
 	$s_email_feedback_msg = "아래의 버그가 <b>FEEDBACK</b>되었습니다.";
 	$s_email_reopen_msg = "아래의 버그가 <b>다시 발생</b>되었습니다.";
 	$s_email_assigned_msg = "아래의 버그가 개발자에게 <b>할당</b>되었습니다.";
@@ -96,11 +97,11 @@
 	$s_advanced_update = "상세한 업데이트";
 	$s_refresh_delay = "리플레시 하지 않음 ";
 	$s_redirect_delay = "리다이렉트 하지 않음";
-	$s_email_on_new = "Email on New";
+	$s_email_on_new = "새로운 버그 이메일";
 	$s_email_on_assigned = "할당(Assign)에 대한 이메일";
 	$s_email_on_feedback = "피드백(Feedback)에 대한 이메일";
 	$s_email_on_resolved = "해결된 버그에 대한 이메일";
-	$s_email_on_closed = "클로즈시 이메일";
+	$s_email_on_closed = "폐쇄시 이메일";
 	$s_email_on_reopened = "재발생시 이메일";
 	$s_email_on_bugnote_added = "버그노트 추가시 이메일";
 	$s_email_on_status_change = "상태 변경시 이메일";
@@ -285,8 +286,8 @@
 	$s_new_accounts_title = "새로운 계정";
 	$s_1_week_title = "1 주";
 	$s_never_logged_in_title = "한번도 로그인하지 않은 사용자";
-	$s_prune_accounts = "Prune Accounts";
-	$s_hide_inactive = "Hide Inactive";
+	$s_prune_accounts = "계정 지우기";
+	$s_hide_inactive = "활동하지 않는 사람 숨기기";
 	$s_manage_accounts_title = "계정 관리";
 	$s_p = "p";
 	$s_date_created = "생성된 일자";
@@ -338,7 +339,7 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "프로젝트 추가";
-	$s_access_threshold = "Access Threshold";
+	$s_access_threshold = "접근 Threshold";
 	$s_upload_file_path = "업르드 파일 경로";
 	$s_add_project_button = "프로젝트 추가";
 	$s_projects_title = "프로젝트";
@@ -394,9 +395,9 @@
 	$s_view_bugs_link = "버그 보기";
 	$s_report_bug_link = "버그 보고하기";
 	$s_summary_link = "요약";
-	$s_account_link = "계정 편집";
-	$s_users_link = "Users";
-	$s_manage_link = "사용자 관리";
+	$s_account_link = "계정 관리";
+	$s_users_link = "사용자";
+	$s_manage_link = "관리";
 	$s_edit_news_link = "뉴스 편집";
 	$s_docs_link = "문서";
 	$s_logout_link = "로그아웃";
@@ -433,7 +434,7 @@
 	$s_news_updated_msg = "새로운 기사가 갱신되었습니다...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "뒤로";
 
 	# proj_doc_add.php3
 	$s_file_uploaded_msg = "파일이 업로드되었습니다.";
@@ -549,21 +550,21 @@
 	# summary_page.php3
 	$s_summary_title = "요약";
 	$s_by_status = "상태별";
-              $s_summary_jpgraph_link = "Advanced summary";
+              $s_summary_jpgraph_link = "자세한 요약";
               $s_by_date = "일자별";
 	$s_by_severity = "중요도별";
 	$s_by_resolution = "해결상태별";
 	$s_by_category = "카테고리별";
 	$s_by_priority = "우선순위";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
-              $s_time_stats = "해결된 버그들의 시간 통계";
+              $s_by_developer = "개발자별";
+              $s_by_reporter ="보고자별";
+              $s_time_stats = "시간 통계";
 	$s_longest_open_bug = "가장 오래 해결되지 않은 버그";
-	$s_longest_open = "가장 오래된";
+	$s_longest_open = "가장 오래된 시간";
 	$s_average_time = "평균 시간";
 	$s_total_time = "전체 시간";
 	$s_developer_stats = "개발자 통계";
-	$s_orct = "(open/resolved/closed/total)";
+	$s_orct = "(신규/해결/폐쇄/전체)";
 
 	# view_all_assign_bug_page.php3
 
@@ -581,7 +582,7 @@
 	$s_updated = "최종 갱신";
 
 	# view_all_inc.php
-        $s_search ="Search";
+        $s_search ="검색";
 
 	# view_user_reported_bug_page.php3
 
