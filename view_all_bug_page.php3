@@ -105,7 +105,7 @@
                                                OR (steps_to_reproduce LIKE '%".addslashes($f_search_text)."%')
                                                OR (additional_information LIKE '%".addslashes($f_search_text)."%')
                                                OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
-                                               AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.id";
+                                               AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
              $query .= ", $g_mantis_bug_text_table " . $t_where_clause;
        } else {
              $query = $query.$t_where_clause;
