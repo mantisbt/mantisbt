@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.15 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.16 2003-01-05 23:43:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -103,7 +103,9 @@
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
 		
-		if ( ! is_array( $t_result ) ) {
+		# If we the result isn't the default we were given or an array, error
+		if ( ! ( 1 < func_num_args() && $t_result === $p_default ) ||
+			   is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
 		
@@ -119,7 +121,9 @@
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
 		
-		if ( ! is_array( $t_result ) ) {
+		# If we the result isn't the default we were given or an array, error
+		if ( ! ( 1 < func_num_args() && $t_result === $p_default ) ||
+			   is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		} 
 
@@ -139,7 +143,9 @@
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
 		
-		if ( ! is_array( $t_result ) ) {
+		# If we the result isn't the default we were given or an array, error
+		if ( ! ( 1 < func_num_args() && $t_result === $p_default ) ||
+			   is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
 
