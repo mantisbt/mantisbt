@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Fix #2668: Proxy incorrectly presents cached output to other users.
  * Enh #2811: Anonymous mode issues (auto login for anonymous users + other issues).
+ * Fix #3028: Mailer produces errors if there are no recipients, and use_bcc is set to ON.
  * Fix #3069: Proxy server incorrectly caches output of 'View All Bugs'
  * Sec #3137: By default, every installation has an admin account with a known login cookie value. This value is now generated at installation time.
  * Fix #3177: Switching project in advanced summary changes current page.

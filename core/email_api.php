@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.64 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: email_api.php,v 1.65 2004-02-05 21:10:46 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -271,6 +271,10 @@
 	# Build the bcc list
 	function email_build_bcc_list( $p_bug_id, $p_notify_type ) {
 		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
+		
+		if ( !$t_recipients ) {
+			return '';
+		}
 
 		$t_use_bcc			= config_get( 'use_bcc' );
 		$t_use_phpMailer	= config_get( 'use_phpMailer' );
