@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.118 2004-08-05 01:25:09 thraxisp Exp $
+	# $Id: html_api.php,v 1.119 2004-08-05 17:27:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -862,7 +862,7 @@
 		$t_project = bug_get_field( $p_bug_id, 'project_id' );
 
 		if ( bug_check_workflow( $t_status, $t_reopen_status ) &&
-			( access_has_bug_level( access_get_status_threshold( $t_reopen_status, $p_project ), $p_bug_id ) ||
+			( access_has_bug_level( access_get_status_threshold( $t_reopen_status, $t_project ), $p_bug_id ) ||
 			( ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 	 		  ( ON == config_get( 'allow_reporter_reopen' ) ) 
 			 	) )
