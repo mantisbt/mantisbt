@@ -173,7 +173,7 @@
 	<!-- Reporter -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['reporter_id'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php
 				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
@@ -188,7 +188,7 @@
 	<!-- Monitored by -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="user_monitor[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['user_monitor'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php
 				if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -203,7 +203,7 @@
 	<!-- Handler -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['handler_id'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
 			<option value="any"></option>
 			<?php
@@ -226,7 +226,7 @@
 	<!-- Category -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_category'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
 			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
@@ -235,7 +235,7 @@
     <!-- Severity -->
     <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
         <select <?php PRINT $t_select_modifier;?> name="show_severity[]">
-            <option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_severity'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
             <option value="any"></option>
             <?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
         </select>
@@ -243,7 +243,7 @@
 	<!-- Resolution -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_resolution'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
 		</select>
@@ -269,7 +269,7 @@
 	<!-- Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_status[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_status'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
 		</select>
@@ -293,7 +293,7 @@
 	<!-- Build -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_build'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_build_option_list( $t_filter['show_build'] ) ?>
 		</select>
@@ -301,7 +301,7 @@
 	<!-- Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['show_version'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED ) ?>
 		</select>
@@ -309,7 +309,7 @@
 	<!-- Fixed in Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any" <?php check_selected( $t_filter['fixed_in_version'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
 		</select>
@@ -447,7 +447,9 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
 				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
 					echo '<select ' . $t_select_modifier . ' name="custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] .'[]">';
-					echo '<option value="any">' . lang_get( 'any' ) .'</option>';
+					echo '<option value="any" ';
+					check_selected( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ], 'any' );
+					echo '>' . lang_get( 'any' ) .'</option>';
 					echo '<option value=""></option>';
 					foreach( $t_accessible_custom_fields_values[$t_base + $j] as $t_item ) {
 						if ( ( strtolower( $t_item ) != "any" ) && ( trim( $t_item ) != "" ) ) {

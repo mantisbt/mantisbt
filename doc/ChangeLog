@@ -11,6 +11,7 @@ Mantis ChangeLog
 - 0004093: [filters] Custom field values are a larger type size in view_all_bug_page (narcissus)
 - 0004108: [filters] "Use Date Filters" in advanced filters (narcissus)
 - 0004121: [filters] Filters saved while "All Projects" is the active project (narcissus)
+- 0004125: [filters] In the advanced page, "any" should be selected by default for all search criteria (narcissus)
 - 0004150: [filters] Custom field names are not localised in filters (vboctor)
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - 0004083: [sponsorships] Users without email address must not be able to sponsor issues (thraxisp)
