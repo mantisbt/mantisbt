@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.72 2005-01-13 22:16:48 thraxisp Exp $
+	# $Id: filter_api.php,v 1.73 2005-01-14 00:36:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -869,7 +869,7 @@
 										?>
 										<input type="hidden" name="reporter_id[]" value="<?php echo $t_current;?>" />
 										<?php
-										if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
@@ -910,7 +910,7 @@
 										<input type="hidden" name="user_monitor[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_name = '';
-										if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -951,7 +951,7 @@
 										$t_this_name = '';
 										if ( '[none]' == $t_current ) {
 											$t_this_name = lang_get( 'none' );
-										} else if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										} else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -1058,7 +1058,7 @@
 										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'resolution', $t_current );
@@ -1115,7 +1115,7 @@
 										<input type="hidden" name="show_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1148,7 +1148,7 @@
 										<input type="hidden" name="hide_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == 'none' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == 'none' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_none_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1290,7 +1290,7 @@
 										<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
 										<?php
                   	$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
                   		$t_any_found = true;
 	                  } else {
 	                  	$t_this_string = get_enum_element( 'priority', $t_current );
@@ -1441,7 +1441,7 @@
 						$t_first_flag = true;
 						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 							$t_this_string = '';
-							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 								$t_any_found = true;
 							} else if ( '[none]' == $t_current ) {
 								$t_this_string = lang_get( 'none' );

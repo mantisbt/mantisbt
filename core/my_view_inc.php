@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.6 2004-12-18 01:44:26 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.7 2005-01-14 00:36:57 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,91 +35,91 @@
 
 <?php
 	$c_filter['assigned'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
+		'show_status'		=> Array ( '0' => '[any]' ),
 		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => 'any' ),
+		'reporter_id'		=> Array ( '0' => '[any]' ),
 		'handler_id'		=> Array ( '0' => $t_current_user_id ),
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
-		'user_monitor'		=> Array ( '0' => 'any' )
+		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&hide_status=' . $t_bug_resolved_status_threshold;
 	
 	$c_filter['recent_mod'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
+		'show_status'		=> Array ( '0' => '[any]' ),
 		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => 'any' ),
-		'handler_id'		=> Array ( '0' => 'any' ),
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'reporter_id'		=> Array ( '0' => '[any]' ),
+		'handler_id'		=> Array ( '0' => '[any]' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => 'none' ),
-		'user_monitor'		=> Array ( '0' => 'any' )
+		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['recent_mod'] = 'hide_status=none';
 	
 	$c_filter['reported'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
+		'show_status'		=> Array ( '0' => '[any]' ),
 		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
-		'handler_id'		=> Array ( '0' => 'any' ),
+		'handler_id'		=> Array ( '0' => '[any]' ),
 		'sort'			=> 'last_updated',
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => 'any' )
+		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
 	
 	$c_filter['resolved'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
 		'show_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
 		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => 'any' ),
-		'handler_id'		=> Array ( '0' => 'any' ),
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'reporter_id'		=> Array ( '0' => '[any]' ),
+		'handler_id'		=> Array ( '0' => '[any]' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => 'any' )
+		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&hide_status=' . $t_bug_resolved_status_threshold;
 	
 	$c_filter['unassigned'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
+		'show_status'		=> Array ( '0' => '[any]' ),
 		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => 'any' ),
-		'handler_id'		=> Array ( '0' => 'none' ),
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'reporter_id'		=> Array ( '0' => '[any]' ),
+		'handler_id'		=> Array ( '0' => '[none]' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
-		'user_monitor'		=> Array ( '0' => 'any' )
+		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
-	$url_link_parameters['unassigned'] = 'handler_id=none' . '&hide_status=' . $t_hide_status_default;
+	$url_link_parameters['unassigned'] = 'handler_id=[none]' . '&hide_status=' . $t_hide_status_default;
 	
 	$c_filter['monitored'] = array(
-		'show_category'		=> Array ( '0' => 'any' ),
-		'show_severity'		=> Array ( '0' => 'any' ),
-		'show_status'		=> Array ( '0' => 'any' ),
+		'show_category'		=> Array ( '0' => '[any]' ),
+		'show_severity'		=> Array ( '0' => '[any]' ),
+		'show_status'		=> Array ( '0' => '[any]' ),
 		'highlight_changed'	=> $t_default_show_changed,
-		'reporter_id'		=> Array ( '0' => 'any' ),
-		'handler_id'		=> Array ( '0' => 'any' ),
-		'show_resolution'	=> Array ( '0' => 'any' ),
-		'show_build'		=> Array ( '0' => 'any' ),
-		'show_version'		=> Array ( '0' => 'any' ),
+		'reporter_id'		=> Array ( '0' => '[any]' ),
+		'handler_id'		=> Array ( '0' => '[any]' ),
+		'show_resolution'	=> Array ( '0' => '[any]' ),
+		'show_build'		=> Array ( '0' => '[any]' ),
+		'show_version'		=> Array ( '0' => '[any]' ),
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
