@@ -670,7 +670,7 @@
 			return $t_access_level;
 		}
 
-		if ( $t_access_level2 > -1 ) {
+		if ( -1 == $t_access_level2 ) {
 			return $t_access_level;
 		} else {
 			return $t_access_level2;
