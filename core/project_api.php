@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.35 2003-02-17 03:56:34 vboctor Exp $
+	# $Id: project_api.php,v 1.36 2003-02-17 04:12:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,7 +178,7 @@
 	function project_ensure_valid_upload_path( $p_upload_path ) {
 		$c_upload_path	= db_prepare_string( $p_upload_path );
 		if ( !is_blank( $c_upload_path ) ) {
-			if ( !file_exists( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
+			if ( !file_exists( $c_upload_path ) || !is_dir( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
 				trigger_error( ERROR_PROJECT_INVALID_UPLOAD_PATH, ERROR );
 			}
 		}
