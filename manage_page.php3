@@ -10,13 +10,26 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
+	if ( !isset( $f_sort ) ) {
+		$f_sort = "";
+	}
+	if ( !isset( $f_dir ) ) {
+		$f_dir = "";
+	}
+
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {
+		#echo $f_hide.$f_sort;
 		if ( isset( $f_hide ) ) {
-			$f_hide = 1;
+			if (( $f_hide=="on" )||( $f_hide==1 )) {
+				$f_hide = 1;
+			} else {
+				$f_hide = 0;
+			}
 		} else {
 			$f_hide = 0;
 		}
+
 		$t_manage_string = $f_hide.":".$f_sort.":".$f_dir;
 		setcookie( $g_manage_cookie, $t_manage_string, time()+$g_cookie_time_length );
 	} else if ( !empty( $g_manage_cookie_val ) ) {
@@ -142,23 +155,23 @@
 
 <p>
 <div align="center">
-<form method="post" action="<? echo $g_manage_page ?>">
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
+	<form method="post" action="<? echo $g_manage_page ?>">
 	<table width="100%">
 	<tr align="right">
 		<td bgcolor="<? echo $g_table_title_color ?>">
 			<input type="hidden" name="f_save" value="1">
-			<input type=checkbox name=f_hide <? if ( $f_hide==1 ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
-			<input type=submit value="<? echo $s_filter_button ?>">
+			<input type="checkbox" name="f_hide" <? if ( $f_hide==1 ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
+			<input type="submit" value="<? echo $s_filter_button ?>">
 		</td>
 	</tr>
 	</table>
+	</form>
 	</td>
 </tr>
 </table>
-</form>
 </div>
 <?
 	### Get the user data in $f_sort order

@@ -3,6 +3,8 @@ Mantis
 08.XX.2001  -   0.15.5
 
  * Fixed sort problems on view_all_bugs_page.php3
+ * Fixed hide inactive problem in manage_page.php3
+ * Fixed mysterious problem with global variables being set to ""
 
 08.19.2001  -   0.15.4
 
