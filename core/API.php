@@ -10,7 +10,7 @@
 	###########################################################################
 
 	# Include compatibility file before anything else
-	include( 'php_API.php' );
+	include( dirname(__FILE__) . '/php_API.php' );
 
 	# Should be eventually moved to the admin scripts, but keep it here for a while
 	# to make sure people don't miss it.
@@ -30,7 +30,7 @@
 	obsolete_config_variable('g_notify_on_new_threshold', 'g_notify_flags');
 	obsolete_config_variable('g_notify_admin_on_new', 'g_notify_flags');
 
-	include( 'timer_API.php' );
+	include( dirname(__FILE__) . '/timer_API.php' );
 
 	# initialize our timer
 	$g_timer = new BC_Timer;
@@ -41,7 +41,7 @@
 
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
-	require( 'database_API.php' );
+	require( dirname(__FILE__) . '/database_API.php' );
 
 	# Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
@@ -66,33 +66,34 @@
 		include ( 'custom_strings_inc.php' );
 	}
 
-	require( 'config_API.php' );
-	require( 'gpc_API.php' );
-	require( 'error_API.php' );
-	require( 'security_API.php' );
-	require( 'html_API.php' );
-	require( 'print_API.php' );
-	require( 'helper_API.php' );
-	require( 'summary_API.php' );
-	require( 'date_API.php' );
-	require( 'user_API.php' );
-	require( 'email_API.php' );
-	require( 'news_API.php' );
-	require( 'icon_API.php' );
-	require( 'ldap_API.php' );
-	require( 'history_API.php' );
-	require( 'proj_user_API.php' );
-	require( 'category_API.php' );
-	require( 'version_API.php' );
-	require( 'compress_API.php' );
-	require( 'relationship_API.php' );
-	require( 'file_API.php' );
-	require( 'custom_attribute_API.php' );
-	require( 'bugnote_API.php' );
-	require( 'bug_API.php' );
+	$t_dir = dirname(__FILE__) . '/';
+	require( $t_dir . 'config_API.php' );
+	require( $t_dir . 'gpc_API.php' );
+	require( $t_dir . 'error_API.php' );
+	require( $t_dir . 'security_API.php' );
+	require( $t_dir . 'html_API.php' );
+	require( $t_dir . 'print_API.php' );
+	require( $t_dir . 'helper_API.php' );
+	require( $t_dir . 'summary_API.php' );
+	require( $t_dir . 'date_API.php' );
+	require( $t_dir . 'user_API.php' );
+	require( $t_dir . 'email_API.php' );
+	require( $t_dir . 'news_API.php' );
+	require( $t_dir . 'icon_API.php' );
+	require( $t_dir . 'ldap_API.php' );
+	require( $t_dir . 'history_API.php' );
+	require( $t_dir . 'proj_user_API.php' );
+	require( $t_dir . 'category_API.php' );
+	require( $t_dir . 'version_API.php' );
+	require( $t_dir . 'compress_API.php' );
+	require( $t_dir . 'relationship_API.php' );
+	require( $t_dir . 'file_API.php' );
+	require( $t_dir . 'custom_attribute_API.php' );
+	require( $t_dir . 'bugnote_API.php' );
+	require( $t_dir . 'bug_API.php' );
 
 	if (ON == $g_use_jpgraph) {
-		require( 'graph_API.php' );
+		require( $t_dir . 'graph_API.php' );
 		require( $g_jpgraph_path . 'jpgraph.php' );
 		require( $g_jpgraph_path . 'jpgraph_line.php' );
 		require( $g_jpgraph_path . 'jpgraph_bar.php' );

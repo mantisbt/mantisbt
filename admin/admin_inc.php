@@ -19,7 +19,7 @@
 		include ( $t_custom_config );
 	}
 
-	require $t_mantis_path . 'core_database_API.php';
+	require $t_mantis_path . 'core/database_API.php';
 	
 	# Checks whether the specified field in the specified database exists. 
 	# If not, a message is displayed and the script exits.

@@ -4,6 +4,7 @@
 ?>
 <?php
 	error_reporting( E_ALL );
+	include '../core/php_API.PHP';
 
 	# mail test
 	if ( isset( $f_mail_test ) ) {
@@ -72,7 +73,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 	<td bgcolor="#f0f0ff">
 		<span class="title">Version</span>
 		<p>
-		Mantis requires at least <b>PHP 4.0.3</b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  I recommend 4.0.6 or 4.1.2 at the moment.
+		Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  We recommend 4.0.6 or 4.1.2 at the moment.
 		<p />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		You are running <b>PHP <?php echo $version ?></b>
 	</td>
