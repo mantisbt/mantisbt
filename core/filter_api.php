@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.68 2004-12-15 17:04:20 bpfennigschmidt Exp $
+	# $Id: filter_api.php,v 1.69 2004-12-23 16:40:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2185,9 +2185,12 @@
 		<?php
 	}
 
-	function print_filter_do_filter_by_date(){
+	function print_filter_do_filter_by_date( $p_hide_checkbox=false ){
 		global $t_filter;
-		?><table cellspacing="0" cellpadding="0">
+		?>
+		<table cellspacing="0" cellpadding="0">
+		<?php if ( ! $p_hide_checkbox ) {
+		?>
 		<tr>
 			<input type="checkbox" name="do_filter_by_date" <?php 
 				check_checked( $t_filter['do_filter_by_date'], 'on' ); 
@@ -2195,6 +2198,8 @@
 					print "onclick=\"SwitchDateFields();\""; } ?> />
 			<?php echo lang_get( 'use_date_filters' ) ?>			
 		</tr>
+		<?php }
+		?>
 
 		<!-- Start date -->
 		<tr>

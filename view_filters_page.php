@@ -276,7 +276,7 @@
 		<?php print_filter_highlight_changed(); ?>
 	</td>
 	<td valign="top" class="left" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
-		<?php print_filter_do_filter_by_date(); ?>
+		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
 	</td>
 </tr>
 
