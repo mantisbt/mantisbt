@@ -59,6 +59,8 @@
 <?php print_page_top2() ?>
 
 <?php print_summary_menu( 'summary_page.php' ) ?>
+<p>
+<? print_menu_graph() ?>
 
 <p>
 <table class="width100" cellspacing="1">

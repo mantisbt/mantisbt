@@ -2,6 +2,8 @@
 include ($g_jpgraph_path.'jpgraph.php');
 include ($g_jpgraph_path.'jpgraph_line.php');
 include ($g_jpgraph_path.'jpgraph_bar.php');
+include( $g_jpgraph_path.'jpgraph_pie.php');
+include( $g_jpgraph_path.'jpgraph_pie3d.php');
 ?>
 <?php login_cookie_check() ?>
 <?php
@@ -9,6 +11,370 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
 		print_header_redirect( 'main_page.php' );
 	}
+##########################################################################
+
+	#functions which gives the absolute values according to the status (opened/closed/resolved) 
+	function enum_bug_group( $p_enum_string, $p_enum ) {
+		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
+		#these vars are set global so that the other functions can use them  
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
+		
+		$enum_name = Null;
+		$enum_name_count = Null;
+
+		$t_arr = explode_enum_string( $p_enum_string );
+		$enum_count = count( $t_arr );
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = explode( ':', $t_arr[$i] );
+			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
+
+			if ($g_project_cookie_val=='0000000') $specific_where = '';
+			else $specific_where = " AND project_id='$g_project_cookie_val'";
+
+			# Calculates the number of bugs with $p_enum and puts the results in a table
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+						WHERE $p_enum='$t_s[0]' $specific_where";
+			$result = db_query( $query );
+			$enum_name_count[]= db_result( $result, 0);
+
+			$t_res_val = RESOLVED;
+			$t_clo_val = CLOSED;
+			
+			
+			# Calculates the number of bugs opened and puts the results in a table
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status<>'$t_res_val' AND
+						status<>'$t_clo_val' $specific_where";
+			$result2 = db_query( $query );
+			$open_bug_count[] = db_result( $result2, 0, 0);
+
+			# Calculates the number of bugs closed and puts the results in a table
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_clo_val' $specific_where";
+			$result2 = db_query( $query );
+
+			$closed_bug_count[] = db_result( $result2, 0, 0);
+
+
+			# Calculates the number of bugs resolved and puts the results in a table
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_res_val' $specific_where";
+			$result2 = db_query( $query );
+			$resolved_bug_count[] = db_result( $result2, 0, 0);
+			
+		
+		} ### end for
+	} 
+	
+		
+	#functions which displays the charts using the absolute values according to the status (opened/closed/resolved) 	
+	function graph_group( $p_title='' ){
+		global $enum_name, $enum_name_count;
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count,$height;
+
+		#defines margin according to height
+		$graph = new Graph(350,400);
+		$graph->img->SetMargin(35,35,35,$height);	
+		$graph->img->SetAntiAliasing();
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
+		$graph->SetFrame(false);
+		$graph->title->Set($p_title);
+		$graph->xaxis->SetTickLabels($enum_name);
+		$graph->xaxis->SetLabelAngle(90);
+		$graph->legend->Pos(0.05, 0.08);
+
+		$graph->yaxis->scale->ticks->SetDirection(-1);
+		$graph->yscale->SetGrace(10);
+		
+		#adds on the same graph
+		$tot = new LinePlot($enum_name_count);
+        $tot->SetColor('black');
+        $tot->SetWeight(2);
+        $tot->mark->SetType(MARK_DIAMOND);
+                
+		$tot->SetLegend('Total');
+		$graph->Add($tot);
+			
+		$p1 = new BarPlot($open_bug_count);
+		$p1->SetFillColor('yellow');
+		$p1->SetWidth(0.8);
+		$p1->SetLegend('Opened');
+
+		$p2 = new BarPlot($closed_bug_count);  
+		$p2->SetFillColor('blue');
+		$p2->SetWidth(0.8); 
+		$p2->SetLegend('Closed');
+
+		$p3 = new BarPlot($resolved_bug_count);  
+		$p3->SetFillColor('red');    
+		$p3->SetWidth(0.8);
+		$p3->SetLegend('Resolved');
+	   
+	    $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
+        $graph->Add($gbplot);     
+		$graph->Stroke();
+	      
+	} 
+	
+	
+	#function which finds the % according to the status
+	function enum_bug_group_pct( $p_enum_string, $p_enum ) {
+		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
+		$enum_name = Null;
+		$enum_name_count = Null;
+
+		 #calculation per status
+		 $t_res_val = RESOLVED;
+		 $t_clo_val = CLOSED;
+
+		if ($g_project_cookie_val=='0000000') $specific_where = '';
+		else $specific_where = " AND project_id='$g_project_cookie_val'";
+
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_bug_table
+				WHERE   status<>'$t_res_val' AND
+					status<>'$t_clo_val' $specific_where";
+		$result = db_query( $query );
+		$total_open = db_result( $result, 0);
+
+
+		# Bugs closed
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_bug_table
+				WHERE   status='$t_clo_val' $specific_where";
+		$result = db_query( $query );
+		$total_close= db_result( $result, 0);
+
+
+		# Bugs resolved
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_bug_table
+				WHERE   status='$t_res_val' $specific_where";
+		$result = db_query( $query );
+		$total_resolved = db_result( $result, 0);
+
+
+		$t_arr = explode_enum_string( $p_enum_string );
+		$enum_count = count( $t_arr );
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = explode( ':', $t_arr[$i] );
+			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' $specific_where";
+			$result = db_query( $query );
+			$t_enum_count[]= db_result( $result, 0 );
+			
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status<>'$t_res_val' AND
+						status<>'$t_clo_val' $specific_where";
+			$result2 = db_query( $query );
+			$open_bug_count[] = db_result( $result2, 0, 0) / $total_open * 100;
+			
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_clo_val' $specific_where";
+			$result2 = db_query( $query );
+			$closed_bug_count[] = db_result( $result2, 0, 0) / $total_close * 100;
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND
+						status='$t_res_val' $specific_where";
+			$result2 = db_query( $query );
+			$resolved_bug_count[] = db_result( $result2, 0, 0) / $total_resolved * 100;
+	
+		} ### end for
+	}
+	
+	
+	#function that displays charts in %	according to the status
+	function graph_group_pct( $p_title='' ){
+		global $enum_name, $enum_name_count;
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
+
+		$graph = new Graph(250,400);
+		$graph->img->SetMargin(35,35,35,150);	
+		$graph->img->SetAntiAliasing();
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
+		$graph->SetFrame(false);
+		$graph->title->Set($p_title);
+		$graph->xaxis->SetTickLabels($enum_name);
+		$graph->xaxis->SetLabelAngle(90);
+
+		$graph->yaxis->scale->ticks->SetDirection(-1);
+
+		$p1 = new BarPlot($open_bug_count);
+		$p1->SetFillColor('yellow');
+		$p1->SetWidth(0.8);
+		$p1->SetLegend('Opened');
+
+		$p2 = new BarPlot($closed_bug_count);  
+		$p2->SetFillColor('blue');
+		$p2->SetWidth(0.8); 
+		$p2->SetLegend('Closed');
+
+		$p3 = new BarPlot($resolved_bug_count);  
+		$p3->SetFillColor('red');    
+		$p3->SetWidth(0.8);
+		$p3->SetLegend('Resolved');
+	   
+        $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
+	        
+        $graph->Add($gbplot);
+		$graph->Stroke();
+} 
+	
+	
+	###########################################################################	
+
+	#function which gets the values in %
+	function create_bug_enum_summary_pct( $p_enum_string, $p_enum ) {
+		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count, $total;
+		$enum_name = Null;
+		$enum_name_count = Null;
+
+		if ($g_project_cookie_val=='0000000') $specific_where = '1=1';
+		else $specific_where = " project_id='$g_project_cookie_val'";
+
+		$query = "SELECT COUNT(*)
+	                      FROM $g_mantis_bug_table
+	                      WHERE $specific_where";
+		$result = db_query( $query );
+		$total = db_result( $result, 0 );
+		
+		$t_arr = explode_enum_string( $p_enum_string );
+		$enum_count = count( $t_arr );
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = explode( ':', $t_arr[$i] );
+			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s[0]' AND $specific_where";
+			
+			$result = db_query( $query );
+			if ($total > 0){
+			$enum_name_count[] = db_result( $result, 0 ) / $total * 100;
+			}
+			else{$enum_name_count[] = db_result( $result, 0 )*0;
+			
+			}
+		} ### end for
+	} 	
+
+
+	#function that displays pie charts
+	function graph_bug_enum_summary_pct( $p_title=''){
+		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical;
+
+		$graph = new PieGraph(500,350);
+		$graph->img->SetMargin(40,40,40,100);	
+		$graph->title->Set($p_title);
+		
+		$graph->SetMarginColor('white');
+		$graph->SetFrame(false);
+
+		$graph->legend->Pos($poshorizontal, $posvertical);
+                               
+		$p1 = new PiePlot3d($enum_name_count);
+		$p1->SetTheme('earth');
+		//$p1->SetTheme("sand");
+		$p1->SetCenter($center);
+		$p1->SetAngle(60);
+		$p1->SetLegends($enum_name);
+
+		# Label format
+		$p1->value->SetFormat('%2.0f');
+		$p1->value->Show();
+		
+		$graph->Add($p1);
+		$graph->Stroke();
+
+}
+
+################################################################
+
+	function create_category_summary_pct() {
+		global 	$g_mantis_bug_table, $g_mantis_user_table,
+				$g_mantis_project_category_table, $g_project_cookie_val,
+				$category_name, $category_bug_count;
+
+		if ($g_project_cookie_val=='0000000') $specific_where = '1=1';
+		else $specific_where = " project_id='$g_project_cookie_val'";
+
+		$query = "SELECT COUNT(*)
+	                      FROM $g_mantis_bug_table
+	                      WHERE $specific_where";
+		$result = db_query( $query );
+		$total = db_result( $result, 0 );
+
+
+		$query = "SELECT category
+				FROM $g_mantis_project_category_table
+				WHERE $specific_where
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$category_name[] = $row['category'];
+			$c_category_name = addslashes($category_name[$i]);
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE category='$c_category_name' AND $specific_where";
+
+			$result2 = db_query( $query );
+			
+			$category_bug_count[] = db_result( $result2, 0 ) / $total * 100;
+		
+		} ### end for
+	}
+
+	# pie chart which dispays by categories
+	function graph_category_summary_pct( $p_title=''){
+		global $category_name, $category_bug_count, $s_by_category;
+		
+		$graph = new PieGraph(600,450);
+		$graph->img->SetMargin(40,40,40,100);	
+		$graph->title->Set($p_title);
+
+		$graph->SetMarginColor('white');
+		$graph->SetFrame(false);
+		$graph->legend->Pos(0.10,0.09);
+									   
+		$p1 = new PiePlot3d($category_bug_count);
+		$p1->SetTheme('earth');
+		$p1->SetCenter(0.3);
+		$p1->SetAngle(60);
+		$p1->SetLegends($category_name);
+		$p1->SetSize(0.27);
+		
+		# Label format
+		$p1->value->SetFormat('%2.0f');
+		$p1->value->Show();
+		
+		$graph->Add($p1); 
+		$graph->Stroke();
+
+	}
+# End of improved charts functions
 
 #############################################################
 

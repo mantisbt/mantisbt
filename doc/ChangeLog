@@ -73,6 +73,7 @@ Mantis ChangeLog
  * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the bug_update_advanced_page. 
  * Added automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in custom_config_inc.php and also support multiple domains.
  * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
+ * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
 
 2002.05.19  -  0.17.3
 
