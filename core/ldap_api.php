@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.15 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: ldap_api.php,v 1.16 2004-08-06 17:17:06 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -55,11 +55,12 @@
 	# Return an email address from LDAP, given a username
 	function ldap_email_from_username( $p_username ) {
 		$t_ldap_organization	= config_get( 'ldap_organization' );
-		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
+		$t_ldap_root_dn	    	= config_get( 'ldap_root_dn' );
 
-	    $t_search_filter	= "(&$t_ldap_organization(uid=$p_username))";
-		$t_search_attrs		= array( 'uid', 'mail', 'dn' );
-	    $t_ds				= ldap_connect_bind();
+		$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' ) ;
+		$t_search_filter	= "(&$t_ldap_organization($t_ldap_uid_field=$p_username))";
+		$t_search_attrs		= array( $t_ldap_uid_field, 'mail', 'dn' );
+		$t_ds           	= ldap_connect_bind();
 
 		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 		$t_info	= ldap_get_entries( $t_ds, $t_sr );
@@ -75,12 +76,13 @@
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_username 		= user_get_field( $p_user_id, 'username' );
-		$t_search_filter	= "(&$t_ldap_organization(uid=$t_username)(assignedgroup=$p_group))";
-		$t_search_attrs		= array( 'uid', 'dn', 'assignedgroup' );
-	    $t_ds				= ldap_connect_bind();
+		$t_username      	= user_get_field( $p_user_id, 'username' );
+		$t_ldap_uid_field	= config_get( 'ldap_uid_field', 'uid' ) ;
+		$t_search_filter 	= "(&$t_ldap_organization($t_ldap_uid_field=$t_username)(assignedgroup=$p_group))";
+		$t_search_attrs	 	= array( $t_ldap_uid_field, 'dn', 'assignedgroup' );
+		$t_ds            	= ldap_connect_bind();
 
-		$t_sr		= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+		$t_sr     	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 		$t_entries	= ldap_count_entries( $t_ds, $t_sr );
 		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
@@ -99,10 +101,11 @@
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_username 		= user_get_field( $p_user_id, 'username' );
-		$t_search_filter	= "(&$t_ldap_organization(uid=$t_username))";
-		$t_search_attrs		= array( 'uid', 'dn' );
-	    $t_ds				= ldap_connect_bind();
+		$t_username      	= user_get_field( $p_user_id, 'username' );
+		$t_ldap_uid_field	= config_get( 'ldap_uid_field', 'uid' ) ;
+		$t_search_filter 	= "(&$t_ldap_organization($t_ldap_uid_field=$t_username))";
+		$t_search_attrs  	= array( $t_ldap_uid_field, 'dn' );
+		$t_ds            	= ldap_connect_bind();
 		
 		# Search for the user id
 		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );

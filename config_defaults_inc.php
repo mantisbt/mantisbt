@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.190 2004-08-03 22:59:53 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.191 2004-08-06 17:17:05 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -637,7 +637,8 @@
 	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
 	$g_ldap_port			= '636';
 	$g_ldap_root_dn			= 'dc=example,dc=com,dc=au';
-	#$g_ldap_organization	= '(organizationname=*Traffic)'; # optional
+	$g_ldap_organization		= '';    # e.g. '(organizationname=*Traffic)'
+	$g_ldap_uid_field		= 'uid'; # Use 'sAMAccountName' for Active Directory
 	$g_ldap_bind_dn			= '';
 	$g_ldap_bind_passwd		= '';
 	$g_use_ldap_email		= OFF; # Should we send to the LDAP email address or what MySql tells us
