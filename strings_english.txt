@@ -598,6 +598,7 @@
 	$s_updated = "Updated";
 
 	# view_all_inc.php
+	$s_none = "none";
 	$s_search ="Search";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";

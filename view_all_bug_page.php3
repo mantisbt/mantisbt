@@ -24,18 +24,22 @@
 							$f_show_status."#".
 							$f_limit_view."#".
 							$f_highlight_changed."#".
-							$f_hide_closed;
+							$f_hide_closed."#".
+							$f_user_id."#".
+							$f_assign_id;
 		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
 	}
 	else if ( strlen($g_view_all_cookie_val)>6 ) {
 		### Load preferences
-		$t_setting_arr 		= explode( "#", $g_view_all_cookie_val );
-		$f_show_category 	= $t_setting_arr[0];
-		$f_show_severity 	= $t_setting_arr[1];
-		$f_show_status 		= $t_setting_arr[2];
-		$f_limit_view 		= $t_setting_arr[3];
+		$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+		$f_show_category 		= $t_setting_arr[0];
+		$f_show_severity	 	= $t_setting_arr[1];
+		$f_show_status 			= $t_setting_arr[2];
+		$f_limit_view 			= $t_setting_arr[3];
 		$f_highlight_changed 	= $t_setting_arr[4];
-		$f_hide_closed 	= $t_setting_arr[5];
+		$f_hide_closed 			= $t_setting_arr[5];
+		$f_user_id 				= $t_setting_arr[6];
+		$f_assign_id 			= $t_setting_arr[7];
 	}
 
 
@@ -63,6 +67,14 @@
 		$f_offset = 0;
 	}
 
+	if ( !isset( $f_user_id ) ) {
+		$f_user_id = "any";
+	}
+
+	if ( !isset( $f_assign_id ) ) {
+		$f_assign_id = "any";
+	}
+
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
 	if ( isset( $f_dir ) ) {
@@ -82,6 +94,16 @@
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+
+	if ( $f_user_id != "any" ) {
+		$t_where_clause .= " AND reporter_id='$f_user_id'";
+	}
+
+	if ( $f_assign_id == "none" ) {
+		$t_where_clause .= " AND handler_id=0";
+	} else if ( $f_assign_id != "any" ) {
+		$t_where_clause .= " AND handler_id='$f_assign_id'";
+	}
 
 	$t_clo_val = CLOSED;
 	if (( $f_hide_closed=="on"  )&&( $f_show_status!="closed" )) {
@@ -117,7 +139,7 @@
 	if ( !isset( $f_sort ) ) {
 		$f_sort="last_updated";
 	}
-	$query = $query." ORDER BY priority desc, '$f_sort' $f_dir";
+	$query = $query." ORDER BY '$f_sort' $f_dir";
 	if ( isset( $f_limit_view ) ) {
 		$query = $query." LIMIT $f_offset, $f_limit_view";
 	}
@@ -145,7 +167,7 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
-<? print_view_all_bugs_menu( $g_view_all_bug_page ) ?>
+<? #print_view_all_bugs_menu( $g_view_all_bug_page ) ?>
 
 <? include( $g_view_all_include_file ) ?>
 

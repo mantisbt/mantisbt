@@ -10,15 +10,12 @@
         <td>
             <span class="smallcaption"><? echo $s_search; ?></span>
         </td>
-		<? if ( $page_type=="reported" ) { ?>
 		<td>
 			<span class="smallcaption"><? echo $s_reporter ?></span>
 		</td>
-		<? } else if ( $page_type=="assigned" ) { ?>
 		<td>
 			<span class="smallcaption"><? echo $s_assigned_to ?></span>
 		</td>
-		<? } ?>
 		<td>
 			<span class="smallcaption"><? echo $s_category ?></span>
 		</td>
@@ -42,25 +39,24 @@
 		</td>
 	</tr>
 	<tr align="center">
-      <td>
-            <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
-      </td>
-<? # view mode specific options ?>
-<? if ( $page_type=="all" ) { ?>
-<? # do nothing ?>
-<? } else if ( $page_type=="reported" ) { ?>
+		<td>
+		    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
+		</td>
 		<td>
 			<select name="f_user_id">
+				<option value="any"><? echo $s_any ?></option>
+				<option value="any"></option>
 				<? print_reporter_option_list( $f_user_id ) ?>
 			</select>
 		</td>
-<? } else if ( $page_type=="assigned" ) { ?>
 		<td>
 			<select name="f_assign_id">
+				<option value="any"><? echo $s_any ?></option>
+				<option value="none" <? if ( $f_assign_id=="none" ) echo "SELECTED" ?>><? echo $s_none ?></option>
+				<option value="any"></option>
 				<? print_assign_to_option_list( $f_assign_id ) ?>
 			</select>
 		</td>
-<? } ?>
 		<td>
 			<select name="f_show_category">
 				<option value="any"><? echo $s_any ?></option>
