@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.59 2003-01-19 23:56:08 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.60 2003-01-21 06:10:37 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -646,12 +646,12 @@
 
 	# --- status color codes ----------
 	#
-	$g_status_colors		= array('new'			=> '#ffffff', # red,
+	$g_status_colors		= array('new'			=> '#ffffff', # white
 									'feedback'		=> '#ffc0cc', # purple
 									'acknowledged'	=> '#ff6600', # orange
 									'confirmed'		=> '#ffd850', # yellow
 									'assigned'		=> '#c8c8ff', # blue
-									'resolved'		=> '#cceedd', # buish-green
+									'resolved'		=> '#cceedd', # blueish-green
 									'closed'		=> '#e8e8e8'); # light gray
 
 	###############################
