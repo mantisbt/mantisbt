@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.16 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: csv_export.php,v 1.17 2004-03-23 14:00:35 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,7 +14,8 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path.'filter_api.php' );
+	require_once( $t_core_path . 'filter_api.php' );
+	require_once( $t_core_path . 'csv_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
@@ -23,43 +24,48 @@
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
+        $t_filename = csv_get_default_filename();
+
 	# Send headers to browser to activate mime loading
-	header( 'Content-Type: text/plain; name=' . config_get( 'page_title' ) . '.csv' );
+	header( 'Content-Type: text/plain; name=' . $t_filename );
 	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename=' . config_get( 'page_title' ) . '.csv' );
+	header( 'Content-Disposition: attachment; filename=' . $t_filename );
 
 	$t_page_number = 1;
 	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
+        $t_nl = csv_get_newline();
+        $t_sep = csv_get_separator();
+
+	# Get bug rows according to the current filter
 	$rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 
-	echo lang_get('email_project') . ',' . config_get('page_title') . "\r\n\r\n";
-	echo lang_get( 'priority' ) . ',' .
-			lang_get( 'id' ) . ',' .
-			lang_get( 'severity' ) . ',' .
-			lang_get( 'status' ) . ',' .
-			lang_get( 'version' ) . ',' .
-			lang_get( 'assigned_to' ) . ',' .
-			lang_get( 'reporter' ) . ',' .
-			lang_get( 'updated' ) . ',' .
-			lang_get( 'summary' ) . "\r\n";
+	# Get columns to be exported
+	$t_columns = csv_get_columns();
 
-	for ( $i=0 ; $i < sizeof($rows) ; $i++ ) {
-		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-
-		$t_last_updated		= date( config_get( 'short_date_format' ), $v_last_updated );
-		$t_priority			= get_enum_element( 'priority', $v_priority );
-		$t_severity			= get_enum_element( 'severity', $v_severity );
-		$t_status			= get_enum_element( 'status', $v_status );
-		$t_hander_name		= user_get_name( $v_handler_id );
-		$t_reporter_name	= user_get_name( $v_reporter_id );
-		$v_summary			= string_display_links( $v_summary );
-
-		echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
+	# export the titles
+	$t_titles = array();
+	foreach ( $t_columns as $column => $title ) {
+		$t_titles[] = lang_get( $title );
 	}
-	
-	exit; 
+	echo implode( $t_sep, $t_titles ) . $t_nl;
 
+	# export the rows
+	foreach ( $rows as $row ) {
+		$t_values = array();
+		foreach ( $t_columns as $key => $title ) {
+			# check if column should be visible
+			if ( !isset( $row[$key] ) ) {
+				$t_values[] = '';
+				continue;
+			}
+
+			$t_function = 'csv_format_' . $key;
+			$t_values[] = $t_function( $row[ $key ] );
+		}
+
+		echo implode( $t_sep, $t_values ) . $t_nl;
+	}
 ?>

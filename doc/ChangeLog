@@ -3,11 +3,16 @@ Mantis ChangeLog
 2004.xx.xx  -  0.19.0
 
  * Enh #0000: Generate one email per user. Stage #1 (no send mail optimization).
+ * Enh #3262: CSV export does not export the category column.
+ * Enh #3264: CSV export should export the resolution.
+ * Enh #3287: Projectname on CSV export.
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
+ * Enh #3346: CSV extract should output more data, e.g., Date Submitted, other data that would allow better analysis of data trends. 
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
+ * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Fix #3635: status_resolved in email_api should be resolved.
