@@ -118,6 +118,12 @@
 	$g_validate_email            = ON;
 	$g_check_mx_record           = ON;
 
+	# if ON, allow the user to omit an email field
+	# note if you allow users to create their own accounts, they
+	#  must specify an email at that point, no matter what the value
+	#  of this option is.  Otherwise they wouldn't get their passwords.
+	$g_allow_blank_email		 = ON;
+
 	# Only allow and send email to addresses in the given domain
 	# For example:
 	# $g_limit_email_domain		 = 'users.sourceforge.net';
