@@ -10,28 +10,42 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	if ( !isset( $f_sort ) ) {
-		$f_sort = "username";
-	}
+	# set cookie values for hide, sort by, and dir
+	if ( isset( $f_save ) ) {
+		if ( isset( $f_hide ) ) {
+			$f_hide = 1;
+		} else {
+			$f_hide = 0;
+		}
+		$t_manage_string = $f_hide.":".$f_sort.":".$f_dir;
+		setcookie( $g_manage_cookie, $t_manage_string, time()+$g_cookie_time_length );
+	} else if ( !empty( $g_manage_cookie_val ) ) {
+		$t_manage_arr = explode( ":", $g_manage_cookie_val );
+		$f_hide = $t_manage_arr[0];
 
-	### basically we toggle between ASC and DESC if the user clicks the
-	### same sort order
-	if ( isset( $f_dir ) ) {
-		if ( $f_dir=="ASC" ) {
+		if ( isset( $t_manage_arr[1] ) ) {
+			$f_sort = $t_manage_arr[1];
+		} else {
+			$f_sort = "username";
+		}
+
+		if ( isset( $t_manage_arr[2] ) ) {
+			$f_dir  = $t_manage_arr[2];
+		} else {
 			$f_dir = "DESC";
 		}
-		else {
-			$f_dir = "ASC";
-		}
+	} else {
+		$f_hide = 0;
+		$f_sort = "username";
+		$f_dir  = "DESC";
+	}
+
+	# we toggle between ASC and DESC if the user clicks the same sort order
+	if ( $f_dir=="ASC" ) {
+		$f_dir = "DESC";
 	}
 	else {
 		$f_dir = "ASC";
-	}
-
-	if ( !isset( $f_hide ) ) {
-		$f_hide = 0;
-	} else if ( $f_hide=="on" ) {
-		$f_hide = 1;
 	}
 ?>
 <? print_html_top() ?>
@@ -128,13 +142,14 @@
 
 <p>
 <div align="center">
-<form method="post" action="<? echo $g_manage_page ?>?f_hide=<?$f_hide ?>">
+<form method="post" action="<? echo $g_manage_page ?>">
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
 	<table width="100%">
 	<tr align="right">
 		<td bgcolor="<? echo $g_table_title_color ?>">
+			<input type="hidden" name="f_save" value="1">
 			<input type=checkbox name=f_hide <? if ( $f_hide==1 ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
 			<input type=submit value="<? echo $s_filter_button ?>">
 		</td>
