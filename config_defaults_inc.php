@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.238 2005-01-12 23:23:11 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.239 2005-01-29 03:10:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -717,6 +717,10 @@
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
 	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u';
+	
+	# maximum length of the description in a dropdown menu (for search)
+	# set to 0 to disable truncations
+	$g_max_dropdown_length = 40;
 
 	##########################
 	# Mantis HR Settings

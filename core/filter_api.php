@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.77 2005-01-29 02:26:49 thraxisp Exp $
+	# $Id: filter_api.php,v 1.78 2005-01-29 03:10:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2363,7 +2363,7 @@
 					if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
 						check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
 					}
-					echo '>' . $t_item  . '</option>' . "\n";
+					echo '>' . string_shorten( $t_item )  . '</option>' . "\n";
 				}
 			}
 			echo '</select>';

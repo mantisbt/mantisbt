@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.64 2005-01-28 17:30:41 prichards Exp $
+	# $Id: string_api.php,v 1.65 2005-01-29 03:10:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -558,4 +558,34 @@
 		$t_timestamp = db_unixtimestamp( $p_date );
 		return date( config_get( 'complete_date_format' ), $t_timestamp );
 	}
+	
+	# --------------------
+	# Shorten a string for display on a dropdown to prevent the page rendering too wide
+	#  ref issues #4630, #5072, #5131
+	
+	function string_shorten( $p_string ) {
+		$t_max = config_get( 'max_dropdown_length' );
+		if ( ( strlen( $p_string ) > $t_max ) && ( $t_max > 0 ) ){
+			$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
+			$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
+		
+			$t_string = '';
+			$t_last = $t_bits[ count( $t_bits ) - 1 ];
+			$t_last_len = strlen( $t_last );
+		
+			foreach ( $t_bits as $t_bit ) {
+				if ( ( strlen( $t_string ) + strlen( $t_bit ) + $t_last_len + 3 <= $t_max )
+					|| ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+					$t_string .= $t_bit;
+				} else {
+					break;
+				}
+			}
+			$t_string .= '...' . $t_last;
+			return $t_string;
+		} else {
+			return $p_string;
+		}
+	}
+
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.109 2005-01-25 13:57:28 vboctor Exp $
+	# $Id: print_api.php,v 1.110 2005-01-29 03:10:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -531,7 +531,7 @@
 
 		echo '<option value=""></option>';
 		foreach( $versions as $version ) {
-			$t_version = string_attribute( $version['version'] );
+			$t_version = string_shorten( string_attribute( $version['version'] ) );
 			echo "<option value=\"$t_version\"";
 			check_selected( $p_version, $t_version );
 			echo ">$t_version</option>";
@@ -560,7 +560,7 @@
 		foreach( $t_overall_build_arr as $t_build ) {
 			PRINT "<option value=\"$t_build\"";
 			check_selected( $p_build, $t_build );
-			PRINT ">$t_build</option>";
+			PRINT ">" . string_shorten( $t_build ) . "</option>";
 		}
 	}
 
