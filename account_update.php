@@ -20,7 +20,6 @@
 	$f_email = email_append_domain( $f_email );
 
 	$t_id 			= auth_get_current_user_id();
-	$t_protected 	= current_user_get_field( 'protected' );
 
 	$t_user_table	= config_get( 'mantis_user_table' );
 
@@ -28,7 +27,7 @@
 	# protected account check
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
-	if ( ON == $t_protected ) {
+	if ( current_user_is_protected() ) {
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	} else {
 		email_ensure_valid( $f_email );
