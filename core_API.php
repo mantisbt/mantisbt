@@ -13,7 +13,7 @@
 	if ( file_exists( 'custom_constant_inc.php' ) ) {
 		include( 'custom_constant_inc.php' );
 	}
-	require( './default/config_inc1.php' );
+	require( 'config_defaults_inc.php' );
 	if ( file_exists( 'custom_config_inc.php' ) ) {
 		include( 'custom_config_inc.php' );
 	}
@@ -21,8 +21,6 @@
 	if ( file_exists( 'config_inc.php' ) ) {
 		include( 'config_inc.php' );
 	}
-	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
-	require( './default/config_inc2.php' );
 	
 	# Should be eventually moved to the admin scripts, but keep it here for a while
 	# to make sure people don't miss it.

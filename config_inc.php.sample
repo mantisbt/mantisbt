@@ -7,7 +7,7 @@
 
 	# This sample file contains the essential files that you MUST
 	# configure to your specific settings.  You may override settings
-	# from default/config_inc1.php by assigning new values in this file
+	# from config_defaults_inc.php by assigning new values in this file
 
 	# Rename this file to config_inc.php after configuration.
 
@@ -18,7 +18,7 @@
 	# In general a value of 0 means the feature is disabled and 1 means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# Look in configuration.html or default/config_inc1.php for more
+	# Look in configuration.html or config_defaults_inc.php for more
 	# detailed comments.
 
 	# --- database variables ---------
