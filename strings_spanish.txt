@@ -8,29 +8,29 @@
 ?>
 <?
 	# General Strings
-	$s_go_back = "Atras";
+	$s_go_back = "Volver";
 	$s_proceed = "Click aqui para continuar";
 	$s_sql_error_detected = "ERROR: SQL error detectado.  Por favor reportelo a ";
 
 	$s_switch = "Cambiar";
 	$s_logged_in_as = "Conectado como";
 
-	$s_user_no_longer_exists = "user no longer exists";
+	$s_user_no_longer_exists = "Usuario ya no existe";
 
-	$s_administrator = "administrator";
+	$s_administrator = "administrador";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
-	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
-	$s_project_view_state_enum_string = "10:public,50:private";
+	$s_access_levels_enum_string      = "10:espectador,25:reportero,40:actualizador,55:desarrollador,70:administrador,90:administrador del sistema";
+	$s_project_status_enum_string     = "10:en desarrollo,30:release,50:estable,70:obsoleto";
+	$s_project_view_state_enum_string = "10:publico,50:privado";
 
-	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
-	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A";
-	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
-	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+	$s_priority_enum_string           = "10:ninguna,20:baja,30:normal,40:alta,50:urgente,60:inmediata";
+	$s_severity_enum_string           = "10:funcionalidad,20:trivial,30:texto,40:cambio minimo,50:menor,60:mayor,70:interrupcion subita,80:bloqueo";
+	$s_reproducibility_enum_string    = "10:siempre,30:a veces,50:aleatorio,70:no he intentado,90:no es posible duplicar,100:no se sabe";
+	$s_status_enum_string             = "10:nuevo,20:se necesitan mas datos,30:aceptado,40:confirmado,50:asignado,80:resuelto,90:cerrado";
+	$s_resolution_enum_string         = "10:abierto,20:arreglado,30:reabierto,40:no se pudo duplicar,50:no es corregible,60:duplicado,70:no es un bug,80:suspendido,90:no se arreglara";
+	$s_projection_enum_string         = "10:ninguna,30:cambio pequeño,50:cambio menor,70:cambio importante,90:rediseño";
+	$s_eta_enum_string                = "10:ninguno,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mes,60:> 1 mes";
 
 	# Email Strings
 	$s_new_account_subject = "BugTracker - Nuevo Usuario!";
@@ -46,15 +46,15 @@
     $s_news_password_msg = "Aqui esta su nueva clave";
 
 	$s_new_bug_msg = "El siguiente NUEVO bug ha sido AGREGADO.";
-    $s_email_bugnote_msg = "Una nota ha sido agregada a este bug.";
-    $s_email_resolved_msg = "El siguinte BUG ha sido RESUELTO.";
+    $s_email_bugnote_msg = "Una NOTA ha sido agregada a este bug.";
+    $s_email_resolved_msg = "El siguinte bug ha sido RESUELTO.";
 	$s_email_close_msg = "The following bug has beeen CLOSED";
-    $s_email_feedback_msg = "El siguiente BUG requiere su FEEDBACK.";
-    $s_email_reopen_msg = "El siguiente BUG ha sido RE-ABIERTO.";
-    $s_email_assigned_msg = "El siguiente BUG ha sido ASIGNADO.";
+    $s_email_feedback_msg = "El siguiente bug requiere su FEEDBACK.";
+    $s_email_reopen_msg = "El siguiente bug ha sido RE-ABIERTO.";
+    $s_email_assigned_msg = "El siguiente bug ha sido ASIGNADO.";
 
     $s_email_reporter = "Reportero";
-    $s_email_handler = "Manejador";
+    $s_email_handler = "Encargado";
     $s_email_project = "Proyecto";
     $s_email_bug = "Bug ID";
     $s_email_category = "Categoria";
@@ -63,18 +63,18 @@
     $s_email_priority = "Prioridad";
     $s_email_status = "Status";
     $s_email_resolution = "Resolucion";
-    $s_email_duplicate = "Duplicar";
-    $s_email_date_submitted = "Fecha de Envio";
+    $s_email_duplicate = "Duplicado de";
+    $s_email_date_submitted = "Fecha de Reporte";
     $s_email_last_modified = "Ultima Modificacion";
-    $s_email_summary =  "Sumario";
+    $s_email_summary =  "Resumen";
     $s_email_description = "Descripcion";
 
 	# account_delete.php3
-	$s_account_protected_msg = "Cuenta Protegida. No es posible cambiar los seteos...";
+	$s_account_protected_msg = "Cuenta Protegida. No es posible cambiar la configuracion...";
 	$s_account_removed_msg = "Su cuenta ha sido eliminada...";
 
 	# account_delete_page.php3
-	$s_confirm_delete_msg = "Esta ud. seguro de que desea eliminar la cuenta?";
+	$s_confirm_delete_msg = "Esta Ud. seguro de que desea eliminar la cuenta?";
 	$s_delete_account_button = "Eliminar cuenta";
 
 	# account_page.php3
@@ -83,7 +83,7 @@
 	$s_edit_account_title = "Editar Cuenta";
 	$s_username = "Usuario";
 	$s_email = "Email";
-	$s_password = "Clave";
+	$s_password = "Contraseña";
 	$s_confirm_password  = "Confirmar clave";
 	$s_access_level = "Nivel de Acceso";
 	$s_update_user_button = "Actualizar Usuario";
@@ -93,19 +93,19 @@
 	$s_default_project = "Proyecto por defecto";
 	$s_advanced_report = "Reporte Avanzado";
 	$s_advanced_view = "Vista Avanzada";
-	$s_advanced_update = "Advanced Update";
-	$s_refresh_delay = "Refresh Delay";
-	$s_redirect_delay = "Redirect Delay";
-	$s_email_on_new = "Email on New";
-	$s_email_on_assigned = "Email on Assigned";
-	$s_email_on_feedback = "Email on Feedback";
-	$s_email_on_resolved = "Email on Resolved";
-	$s_email_on_closed = "Email on Closed";
-	$s_email_on_reopened = "Email on Reopened";
-	$s_email_on_bugnote_added = "Email on Bugnote Added";
-	$s_email_on_status_change = "Email on Status Change";
-	$s_email_on_priority_change = "Email on Priority Change";
-	$s_language = "Language";
+	$s_advanced_update = "Actualizacion Avanzada";
+	$s_refresh_delay = "Demora de Recarga";
+	$s_redirect_delay = "Demora de Redireccion";
+	$s_email_on_new = "Enviar Email en bugs Nuevos";
+	$s_email_on_assigned = "Enviar Email en bugs Asignados";
+	$s_email_on_feedback = "Enviar Email en bugs que requieren Feedback";
+	$s_email_on_resolved = "Enviar Email en bugs Resueltos";
+	$s_email_on_closed = "Enviar Email en bugs Cerrados";
+	$s_email_on_reopened = "Enviar Email en bugs Reabiertos";
+	$s_email_on_bugnote_added = "Enviar Email en Notas agregadas al bug";
+	$s_email_on_status_change = "Enviar Email en cambios de Status";
+	$s_email_on_priority_change = "Enviar Email en cambios de Prioridad";
+	$s_language = "Idioma";
 	$s_update_prefs_button = "Actualizar Preferencias";
 	$s_reset_prefs_button = "Resetear Preferencias";
 
@@ -152,23 +152,23 @@
     $s_bug_assign_msg       = "El Bug ha sido exitosamente asignado...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Bug has been closed...";
-	$s_close_immediately   = "Close immediately:";
+	$s_bug_close_msg       = "El bug ha sido cerrado...";
+	$s_close_immediately   = "Cerrar inmediatamente:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "El Bug ha sido eliminado...";
 
 	# bug_delete_page.php3
-	$s_delete_bug_sure_msg = "Esta ud. seguro de que desea eliminar este bug?";
+	$s_delete_bug_sure_msg = "Esta Ud. seguro de que desea eliminar este bug?";
 	$s_delete_bug_button = "Eliminar Bug";
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "File upload successful";
+	$s_file_upload_msg = "Archivo subido exitosamente";
 
 	# bug_file_upload_inc.php3
-	$s_upload_file = "Upload File";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file = "Subir Archivo";
+	$s_select_file = "Seleccionar Archivo";
+	$s_upload_file_button = "Subir Archivo";
 
 	# bug_reopen_page.php3
 	$s_bug_reopened_msg = "El bug ha sido re-abierto...";
@@ -182,14 +182,14 @@
 	# bug_resolve_page2.php3
 	$s_bug_resolved_msg = "El bug ha sido resuelto. Ingrese una nota...";
 	$s_resolve_add_bugnote_title = "Agregar un motivo por el cual resolver el bug";
-	$s_bugnote_add_resolve_button = "Add Bugnote";
+	$s_bugnote_add_resolve_button = "Agregar Nota";
 
 	# bug_update.php3
 	$s_bug_updated_msg = "El bug ha sido exitosamente actualizado...";
 
 	# bug_update_advanced_page.php3
 	$s_back_to_bug_link = "Volver a Bug";
-	$s_update_simple_link = "Actualizar Simple";
+	$s_update_simple_link = "Cambiar a forma de Actualizacion Simple";
 	$s_updating_bug_advanced_title = "Actualizando informacion del Bug";
 	$s_id = "ID";
 	$s_category = "Categoria";
@@ -203,14 +203,14 @@
 	$s_resolution = "Resolucion";
 	$s_status = "Status";
 	$s_duplicate_id = "ID Duplicada";
-	$s_os = "OS";
+	$s_os = "Sistema Operativo";
 	$s_projection = "Proyeccion";
 	$s_os_version = "Version";
-	$s_eta = "ETA";
+	$s_eta = "Tiempo Estimado";
 	$s_product_version = "Version de Producto";
 	$s_build = "Build";
 	$s_votes = "Votos";
-	$s_summary = "Sumario";
+	$s_summary = "Resumen";
 	$s_description = "Descripcion";
 	$s_steps_to_reproduce = "Pasos para reproducirlo";
 	$s_additional = "Informacion";
@@ -218,7 +218,7 @@
 	$s_update_information_button = "Actualizar Informacion";
 
 	# bug_update_page.php3
-	$s_update_advanced_link = "Actualizar-Avanzado";
+	$s_update_advanced_link = "Cambiar a forma de Actualizacion Avanzada";
 	$s_updating_bug_simple_title = "Actualizando informacion del Bug";
 
 	# bug_vote_add.php3
@@ -232,19 +232,19 @@
 	$s_bug_notes_title = "Notas";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Editar Nota";
 
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "No hay notas asociadas a este bug.";
 	$s_delete_link = "Eliminar";
 	$s_add_bugnote_title = "Agregar Nota";
 	$s_add_bugnote_button = "Agregar Nota";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_bugnote_edit_link = "Editar";
+	$s_close_bug_button = "Cerrar Bug";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "La nota ha sido exitosamente actualizada...";
+	$s_edited_on = "editada el: ";
 
 	# index.php3
 	$s_click_to_login = "Click aqui para conectarse";
@@ -255,13 +255,13 @@
 	# login_page.php3
 	$s_login_page_info = "Bienvenido a BugTracker.";
 	$s_login_title = "Login";
-	$s_save_login = "Save Login";
+	$s_save_login = "Grabar Login";
 	$s_choose_project = "Seleccione Proyecto";
 	$s_login_button = "Login";
-	$s_signup_link = "signup for a new account";
+	$s_signup_link = "Solicitar una Cuenta Nueva";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Select Project";
+	$s_select_project_button = "Seleccione Proyecto";
 
 	# logout_page.php3
 	$s_logged_out_title = "Desconectado...";
@@ -269,11 +269,11 @@
 	$s_here = "Aqui";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Open and assigned to me";
-	$s_open_and_reported_to_me = "Open and reported by me";
+	$s_open_and_assigned_to_me = "Bugs Abiertos y Asignados a mi";
+	$s_open_and_reported_to_me = "Bugs Abiertos y Reportados por mi";
 	$s_newer_news_link = "Nuevas Noticias";
 	$s_older_news_link = "Noticias Anteriores";
-	$s_archives = "Archives";
+	$s_archives = "Noticias Archivadas";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Usuario Creado";
@@ -281,35 +281,35 @@
 
 	# manage_create_user_page.php3
 	$s_create_new_account_title = "Crear nueva cuenta";
-	$s_verify_password = "Verify Password";
-	$s_enabled = "Activado";
-	$s_protected = "Protegido";
+	$s_verify_password = "Verificar Contraseña";
+	$s_enabled = "Activada";
+	$s_protected = "Protegida";
 	$s_create_user_button = "Crear usuario";
 
 	# manage_page.php3
-	$s_hide_disabled = "Hide Disabled";
-	$s_filter_button = "Filter";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_hide_disabled = "Ocultar Desactivados";
+	$s_filter_button = "Filtrar";
+	$s_manage_users_link = "Administrar Usuarios";
+	$s_manage_projects_link = "Administrar Proyectos";
 	$s_create_new_account_link = "Crear cuenta";
 	$s_projects_link = "Proyectos";
 	$s_documentation_link = "Documentacion";
 	$s_new_accounts_title = "Nuevas Cuentas";
 	$s_1_week_title = "1 semana";
-	$s_never_logged_in_title = "Nunca conectado";
-	$s_prune_accounts = "Prune Accounts";
-	$s_hide_inactive = "Hide Inactive";
-	$s_manage_accounts_title = "Cuentas Adminsitradas";
-	$s_p = "p";
+	$s_never_logged_in_title = "Nunca se ha conectado";
+	$s_prune_accounts = "Podar Cuentas";
+	$s_hide_inactive = "Ocultar Inactivas";
+	$s_manage_accounts_title = "Cuentas";
+	$s_p = "P";
 	$s_date_created = "Fecha de Creacion";
 	$s_last_visit = "Ultima Visita";
-	$s_edit_user_link = "Actualizar Usuario";
+	$s_edit_user_link = "Editar Usuario";
 
 	# manage_project_add.php3
-	$s_project_added_msg = "El projecto fue agregado exitosamente...";
+	$s_project_added_msg = "El proyecto fue agregado exitosamente...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERROR: This is a duplicate category.";
+	$s_duplicate_category = "ERROR: La Categoria esta duplicada.";
 	$s_category_added_msg = "La Categoria fue agregada exitosamente...";
 
 	# manage_project_category_delete.php3
@@ -330,29 +330,29 @@
 	$s_project_deleted_msg = "Proyecto eliminado exitosamente...";
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "Esta seguro de que desea eliminar est proyecto y todos los bugs asociados?";
+	$s_project_delete_msg = "Esta seguro de que desea eliminar este proyecto y todos los bugs asociados?";
 	$s_project_delete_button = "Eliminar Proyecto";
 
 	# manage_project_edit_page.php3
-	$s_edit_project_title = "Eliminar Proyecto";
+	$s_edit_project_title = "Editar Proyecto";
 	$s_project_name = "Nombre del Proyecto";
-	$s_view_status = "View Status";
+	$s_view_status = "Acceso";
 	$s_public = "Publico";
 	$s_private = "Privado";
 	$s_update_project_button = "Actualizar Proyecto";
 	$s_delete_project_button = "Eliminar Proyecto";
 	$s_categories_and_version_title = "Categorias y Versiones";
 	$s_categories = "Categorias";
-	$s_add_category_button = "Agregar Proyecto";
+	$s_add_category_button = "Agregar Categoria";
 	$s_versions = "Versiones";
 	$s_add_version_button = "Agregar Versiones";
 	$s_edit_link = "editar";
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Agregar proyecto";
-	$s_access_threshold = "Access Threshold";
-	$s_upload_file_path = "Upload File Path";
-	$s_add_project_button = "Adicionar Projeto";
+	$s_access_threshold = "Acceso minimo";
+	$s_upload_file_path = "Ruta a archivos subidos";
+	$s_add_project_button = "Adicionar Proyeto";
 	$s_projects_title = "Proyectos";
 	$s_name = "Nombre";
 
@@ -360,7 +360,7 @@
 	$s_project_updated_msg = "El proyecto ha sido exitosamente actualizado...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: This is a duplicate version.";
+	$s_duplicate_version = "ERROR: Esta es una version duplicada.";
 	$s_version_added_msg = "La Version ha sido exitosamente agregada...";
 
 	# manage_project_version_delete.php3
@@ -385,39 +385,39 @@
 	$s_delete_account_sure_msg = "Esta seguro de que desea eliminar esta cuenta?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = "Todas las cuentas que nunca se han conectado y tienen mas de 1 semana han sido eliminadas";
 
 	# manage_user_page.php3
 	$s_edit_user_title = "Editar Usuario";
 	$s_reset_password_button = "Restear Clave";
 	$s_delete_user_button = "Eliminar Usuario";
-	$s_reset_password_msg = "Resetar el clave significa blanquear clave.";
+	$s_reset_password_msg = "Resetar la clave significa blanquear clave.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Cuenta Protegida. Imposible resetear la clave.";
 	$s_account_reset_msg = "Restear clave de cuenta...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_msg2 = "Clave de cuenta blanqueada...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Cuenta Protegida. Nivel de acceso y Activacion Protegida. La cuenta ha sido actualizada...";
 	$s_manage_user_updated_msg = "La cuenta ha sido actualizada...";
 
 	# menu_inc.php
-	$s_main_link = "Home";
-	$s_view_bugs_link = "Ver Bug";
+	$s_main_link = "Principal";
+	$s_view_bugs_link = "Ver Bugs";
 	$s_report_bug_link = "Reportar Bug";
-	$s_summary_link = "Sumario";
-	$s_account_link = "Cuenta";
-	$s_users_link = "Users";
-	$s_manage_link = "Administrar";
+	$s_summary_link = "Reporte General";
+	$s_account_link = "Mi Cuenta";
+	$s_users_link = "Usuarios del Proyecto";
+	$s_manage_link = "Administracion";
 	$s_edit_news_link = "Noticias";
 	$s_docs_link = "Documentos";
-	$s_logout_link = "Logout";
+	$s_logout_link = "Desconectarse";
 
 	# meta_inc.php
 
 	# news_add.php3
-	$s_news_added_msg = "News item added...";
+	$s_news_added_msg = "Noticia agregada...";
 
 	# news_delete.php3
 	$s_news_deleted_msg = "Noticia Eliminada...";
@@ -446,68 +446,68 @@
 	$s_news_updated_msg = "Noticia actualizada...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "Regresar";
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "File upload successful";
+	$s_file_uploaded_msg = "Archivo subido exitosamente";
 
 	# proj_doc_add_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_title = "Title";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file_title = "Subir Archivo";
+	$s_title = "Titulo";
+	$s_select_file = "Seleccione Archivo";
+	$s_upload_file_button = "Subir Archivo";
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "Project file deleted";
+	$s_project_file_deleted_msg = "Archivo de Proyecto borrado...";
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+	$s_confirm_file_delete_msg = "Esta seguro que desea eliminar este archivo?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_filename = "Filename";
-	$s_file_update_button = "Update File";
-	$s_file_delete_button = "Delete File";
+	$s_upload_file_title = "Subir Archivo";
+	$s_filename = "Nombre de Archivo";
+	$s_file_update_button = "Actualizar Archivo";
+	$s_file_delete_button = "Borrar Archivo";
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "Project Documentation";
-	$s_user_documentation = "User Documentation";
-	$s_project_documentation = "Project Documentation";
-	$s_add_file = "Add File";
+	$s_project_documentation_title = "Documentacion del Proyecto";
+	$s_user_documentation = "Documentacion del Usuario";
+	$s_project_documentation = "Documentacion del Proyecto";
+	$s_add_file = "Agregar Archivo";
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "Project update successful";
+	$s_project_document_updated = "Actualizacion del proyecto exitosa";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Successfully added user to project";
+	$s_project_user_added_msg = "Usuario agregado al proyecto exitosamente";
 
 	# proj_user_delete.php3
 	$s_project_removed_user_msg = "Successfully removed user from project";
 
 	# proj_user_delete_page.php3
-	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+	$s_remove_user_sure_msg = "Esta seguro que desea remover este usuario?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
-	$s_add_user_title = "Add user to project";
-	$s_add_user_button = "Add User";
-	$s_project_selection_title = "Project Selection";
-	$s_remove_link = "remove";
-	$s_automatic_access = "Users With Automatic Access";
+	$s_create_user_message = "NOTE: El usuario debe existir antes de poder agregarlo al proyecto";
+	$s_automatic_access_level = "Nivel de acceso automatico";
+	$s_add_user_title = "Agregar usuario al proyecto";
+	$s_add_user_button = "Agregar usuario";
+	$s_project_selection_title = "Seleccion de Proyecto";
+	$s_remove_link = "remover";
+	$s_automatic_access = "Usuarios con acceso automatico";
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "Successfully updated user";
+	$s_updated_user_msg = "Usuario actualizado exitosamente";
 
 	# report_add.php3
 	$s_report_add_error_msg = "ERROR: Ocurrio un error en su reporte.";
 	$s_must_enter_category = "Debe seleccionar una categoria";
 	$s_must_enter_severity = "Debe seleccionar un nivel de severidad";
 	$s_must_enter_reproducibility = "Debe seleccionar un nivel de ocurrencia";
-	$s_must_enter_summary = "Debe ingresar un sumario";
-	$s_must_enter_description = "Debe ingresar descripcion";
-	$s_report_more_bugs = "Report More Bugs";
-	$s_submission_thanks_msg = "Thank you for your submission";
+	$s_must_enter_summary = "Debe ingresar un resumen";
+	$s_must_enter_description = "Debe ingresar una descripcion";
+	$s_report_more_bugs = "Reportar mas bugs";
+	$s_submission_thanks_msg = "Gracias por su reporte";
 
 	# report_bug_advanced_page.php3
 	$s_simple_report_link = "Reporte Simple";
@@ -516,21 +516,21 @@
 	$s_select_category = "Seleccione Categoria";
 	$s_select_reproducibility = "Seleccione Ocurrencia";
 	$s_select_severity = "Seleccione Severidad";
-	$s_or_fill_in = "OR Fill In";
+	$s_or_fill_in = "O llene los siguientes campos";
 	$s_assign_to = "Asignar a";
 	$s_steps_to_reproduce = "Pasos para reproducirlo";
 	$s_additional_information = "Informacion Adicional";
 	$s_submit_report_button = "Enviar Reporte";
-	$s_check_report_more_bugs = "check to report more bugs";
+	$s_check_report_more_bugs = "seleccione para reportar mas bugs";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Reporte Avanzado";
-	$s_upload_file = "Upload File";
-	$s_report_stay = "Report Stay";
+	$s_upload_file = "Subir Archivo";
+	$s_report_stay = "Permanecer en Reporte";
 
 	# set_project.php3
-	$s_selected_project = "Selected project";
-	$s_valid_project_msg = "You must choose a valid project";
+	$s_selected_project = "Proyecto Seleccionado";
+	$s_valid_project_msg = "Debe seleccionar un proyecto valido";
 
 	# show_source_page.php3
 	$s_show_source_for_msg = "Showing source for";
@@ -540,76 +540,77 @@
 	# signup.php3
 	$s_invalid_email = "ES UNA DIRECCION DE CORREO INVALIDA";
 	$s_duplicate_username = "ES UN USUARIO DUPLICADO.  SELECCIONE OTRO NOMBRE DE USUARIO";
-	$s_account_create_fail = "FALLA AL CREAR LA CUENT";
-	$s_account_added = "Account was successfully added.";
-	$s_password_emailed_msg = "Your password will be emailed to you.";
-	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
+	$s_account_create_fail = "FALLA AL CREAR LA CUENTA";
+	$s_account_added = "Cuenta exitosamente agregada.";
+	$s_password_emailed_msg = "Se le enviara su contraseña por correo.";
+	$s_no_reponse_msg = "Si no responde en 1 semana, su cuenta sera borrada.";
 
 	# signup_page.php3
 	$s_signup_info = "Ingrese su usuario y un email vaildo.  Una clave generada al azar sera enviada por email.";
-	$s_signup_title = "Signup";
-	$s_signup_button = "Signup";
+	$s_signup_title = "Suscribirse";
+	$s_signup_button = "Suscribirse";
 
 	# site_settings_edit_page.php3
-	$s_edit_site_settings_title = "Edit Site Settings";
-	$s_save_settings_button = "Save Settings";
+	$s_edit_site_settings_title = "Editar configuracion del sitio";
+	$s_save_settings_button = "Grabar Configuracion";
 
 	# site_settings_page.php3
-	$s_site_settings_title = "Site Settings";
-	$s_system_info_link = "System Info";
-	$s_site_settings_link = "Site Settings";
+	$s_site_settings_title = "Configuracion del Sitio";
+	$s_system_info_link = "Informacion del Sistema";
+	$s_site_settings_link = "Configuracion del Sitio";
 
 	# site_settings_update.php3
-	$s_site_settings_updated_msg = "Site settings have been updated";
+	$s_site_settings_updated_msg = "Configuracion del sitio actualizada";
 
 	# summary_page.php3
-	$s_summary_title = "Sumario";
-	$s_summary_jpgraph_link = "Advanced summary";
+	$s_summary_title = "Reporte General";
+	$s_summary_jpgraph_link = "Reporte General Avanzado";
 	$s_by_status = "por Status";
 	$s_by_date = "por fecha";
 	$s_by_severity = "por severidad";
 	$s_by_resolution = "por resolucion";
 	$s_by_category = "por categoria";
 	$s_by_priority = "por prioridad";
-	$s_by_developer = "by developer";
-	$s_by_reporter ="by reporter";
+	$s_by_developer = "por desarrollador";
+	$s_by_reporter ="por reportero";
 	$s_time_stats = "estadisticas de bugs resueltos (dias)";
-	$s_longest_open_bug = "mayor tiempo abierto";
+	$s_longest_open_bug = "bug abierto por mayor tiempo";
 	$s_longest_open = "mayor tiempo abierto";
 	$s_average_time = "tiempo promedio";
 	$s_total_time = "tiempo total";
 	$s_developer_stats = "estadisticas de desarrolladores";
-	$s_reporter_stats = "reporter stats";
-	$s_orct = "(open/resolved/closed/total)";
+	$s_reporter_stats = "estadisticas de reporteros";
+	$s_orct = "(abiertos/resueltos/cerrados/total)";
 
 	# view_all_bug_page.php3
 	$s_any = "cualquiera";
-	$s_show = "ver";
+	$s_show = "Ver";
 	$s_changed = "Cambiado(hrs)";
 	$s_hide_closed = "Ocultar Resueltos";
-	$s_filter_button = "Filtro";
+	$s_filter_button = "Filtrar";
 	$s_viewing_bugs_title = "Bugs";
 	$s_updated = "Actualizado";
 
 	# view_all_inc.php
-	$s_none = "none";
-	$s_search ="Search";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_none = "ninguno";
+	$s_search ="Buscar";
+	$s_view_prev_link = "Ver Previos";
+	$s_view_next_link = "Ver Siguientes";
 
 	# view_bug_advanced_page.php3
-	$s_view_simple_link = "Vista Simple";
+	$s_view_simple_link = "Cambiar a Vista Simple";
 	$s_viewing_bug_advanced_details_title = "Vista Avanzada";
-	$s_product_build = "Product Build";
+	$s_product_build = "Build de Producto";
 	$s_system_profile = "Descripcion del Sistema";
 	$s_update_bug_button = "Actualizar Bug";
-    $s_bug_assign_button    = "Asignar a mi";
+    $s_bug_assign_button    = "Asignar a Mi";
 	$s_reopen_bug_button = "Reabrir Bug";
-	$s_attached_files = "Attached Files";
+	$s_attached_files = "Archivos Adjuntos";
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
-	$s_view_advanced_link = "Vista Avanzada";
-	$s_viewing_bug_simple_details_title = "Mostrando en modo detallado simple.";
+	$s_view_advanced_link = "Cambiar a Vista Avanzada";
+	$s_viewing_bug_simple_details_title = "Vista Simple.";
 ?>
+
