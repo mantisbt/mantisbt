@@ -320,10 +320,9 @@
 	$g_min_refresh_delay	= 10;    # in minutes
 
 	# --- account pref defaults -------
-	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
-	$g_default_advanced_report		= BOTH;
-	$g_default_advanced_view		= BOTH;
-	$g_default_advanced_update		= BOTH;
+	$g_default_advanced_report		= OFF;
+	$g_default_advanced_view		= OFF;
+	$g_default_advanced_update		= OFF;
 	$g_default_refresh_delay		= 30;    # in minutes
 	$g_default_redirect_delay		= 2;     # in seconds
 	$g_default_email_on_new			= ON;
