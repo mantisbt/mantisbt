@@ -18,7 +18,8 @@
 						$p_password='', $p_database='',
 						$p_port='' ) {
 
-		global $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port;
+		global $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port,
+			$g_use_persistent_connections;
 
 		if ( empty( $p_hostname ) ) {
 			$p_hostname = $g_hostname;
@@ -36,8 +37,15 @@
 			$p_port = $g_port;
 		}
 
-		$t_result = mysql_connect(  $p_hostname.':'.$p_port,
+		# @@@ Will change this hack, when I combine all database opens
+		#     in one place.
+		if ( OFF == $g_use_persistent_connections ) {
+			$t_result = mysql_connect(  $p_hostname.':'.$p_port,
 									$p_username, $p_password );
+		} else {
+			$t_result = mysql_pconnect(  $p_hostname.':'.$p_port,
+									$p_username, $p_password );
+		}
 
 		if ( !$t_result ) {
 			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
