@@ -244,7 +244,7 @@
 		$status_color = get_status_color( $v_status );
 
 		# grab the bugnote count
-		$bugnote_count = get_bugnote_count( $v_id );
+		$bugnote_count = bug_bugnote_count( $v_id );
 
 		# grab the project name
 		$project_name = get_project_field( $v_project_id, 'name' );

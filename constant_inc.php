@@ -156,6 +156,7 @@
 	define( 'ERROR_USERNAME_NOT_UNIQUE',		18 );
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		19 );
 	define( 'ERROR_LANG_STRING_NOT_FOUND',		20 );
+	define( 'ERROR_BUGNOTE_NOT_FOUND',			21 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

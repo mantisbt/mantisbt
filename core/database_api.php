@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: database_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -147,22 +147,42 @@
 	function db_close() {
 		$t_result = mysql_close();
 	}
-	# --------------------
-	# clean a string before putting it in the DB
-	function db_clean_string( $p_string ) {
-		$c_string = addslashes( $p_string );
 
-		return $c_string;
+	# --------------------
+	# prepare a string before DB insertion
+	function db_prepare_string( $p_string ) {
+		return mysql_escape_string( $p_string );
 	}
 	# --------------------
-	# clean an integer before putting it in the DB
-	function db_clean_int( $p_int ) {
+	# prepare an integer before DB insertion
+	function db_prepare_int( $p_int ) {
 		return (integer)$p_int;
 	}
 	# --------------------
-	# clean a boolean before putting it in the DB
-	function db_clean_bool( $p_bool ) {
+	# prepare a boolean before DB insertion
+	function db_prepare_bool( $p_bool ) {
 		return (bool)$p_bool;
+	}
+
+	# --------------------
+	# generic unprepare if type is unknown
+	function db_unprepare( $p_string ) {
+		return stripslashes( $p_string );
+	}
+	# --------------------
+	# unprepare a string after taking it out of the DB
+	function db_unprepare_string( $p_string ) {
+		return db_unprepare( $p_string );
+	}
+	# --------------------
+	# unprepare an integer after taking it out of the DB
+	function db_unprepare_int( $p_int ) {
+		return (integer)db_unprepare( $p_int );
+	}
+	# --------------------
+	# unprepare a boolean after taking it out of the DB
+	function db_unprepare_bool( $p_bool ) {
+		return (bool)db_unprepare( $p_bool );
 	}
 	# --------------------
 

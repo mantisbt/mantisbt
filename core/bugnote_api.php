@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,7 +18,7 @@
 	function bugnote_date_update( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table;
 
-		$c_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		$query ="UPDATE $g_mantis_bugnote_table ".
 				"SET last_modified=NOW() ".
@@ -26,20 +26,29 @@
 		return db_query( $query );
 	}
 	# --------------------
-	# check to see if bugnote exists
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function check_bugnote_exists( $p_bugnote_id ) {
+	# returns true if the bugnote exists, false otherwise
+	function bugnote_exists( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table;
 
-		$c_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		$query ="SELECT COUNT(*) ".
 				"FROM $g_mantis_bugnote_table ".
 				"WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( 'main_page.php' );
+		if ( 0 == db_result( $result ) ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	# --------------------
+	# check to see if bugnote exists
+	# if it doesn't exist then redirect to the main page
+	# otherwise let execution continue undisturbed
+	function bugnote_ensure_exists( $p_bugnote_id ) {
+		if ( ! bugnote_exists( $p_bugnote_id ) ) {
+			trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 		}
 	}
 	# --------------------
@@ -48,9 +57,9 @@
 	{
 		global $g_mantis_bugnote_text_table, $g_mantis_bugnote_table;
 
-		$c_bug_id = (integer)$p_bug_id;
-		$c_bugnote_text = addslashes( $p_bugnote_text );
-		$c_private = (bool)$p_private;
+		$c_bug_id = db_prepare_int( $p_bug_id );
+		$c_bugnote_text = db_prepare_string( $p_bugnote_text );
+		$c_private = db_prepare_bool( $p_private );
 
 		# insert bugnote text
 		$query = "INSERT
@@ -105,11 +114,11 @@
 	function bugnote_delete( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table, $g_mantis_bugnote_text_table;
 
-		$t_bug_id = get_bugnote_field( $p_bugnote_id, 'bug_id' );
-		$c_bugnote_id = (integer)$p_bugnote_id;
+		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
+		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		# grab the bugnote text id
-		$t_bugnote_text_id = get_bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
 
 		# Remove the bugnote
 		$query = "DELETE
@@ -139,10 +148,10 @@
 	function bugnote_update_text( $p_bugnote_id, $p_bugnote_text ) {
 		global $g_mantis_bugnote_text_table;
 
-		$t_bug_id = get_bugnote_field( $p_bugnote_id, 'bug_id' );
-		$t_bugnote_text_id = get_bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
+		$t_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
 
-		$c_bugnote_text		= addslashes( $p_bugnote_text );
+		$c_bugnote_text		= db_prepare_string( $p_bugnote_text );
 
 		$query = "UPDATE $g_mantis_bugnote_text_table
 				SET note='$c_bugnote_text'
@@ -168,9 +177,9 @@
 	function bugnote_update_view_state( $p_bugnote_id, $p_private ) {
 		global $g_mantis_bugnote_table;
 
-		$t_bug_id = get_bugnote_field( $p_bugnote_id, 'bug_id' );
+		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
 
-		$c_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		if ( $p_private ) {
 			$t_view_state = PRIVATE;
@@ -193,10 +202,10 @@
 	}
 	# --------------------
 	# Returns the text associated with the bugnote
-	function get_bugnote_text( $p_bugnote_id ) {
+	function bugnote_text( $p_bugnote_id ) {
 		global $g_mantis_bugnote_text_table;
 
-		$c_bugnote_text_id = get_bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$c_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
 
 		# grab the bugnote text
 		$query = "SELECT note
@@ -210,40 +219,24 @@
 
 		$f_bugnote_text = db_result( $result, 0, 0 );
 		
-		return $f_bugnote_text;
-	}
-	# --------------------
-	# Returns the number of bugnotes for the given bug_id
-	function get_bugnote_count( $p_bug_id ) {
-		global $g_mantis_bugnote_table, $g_private_bugnote_threshold;
-
-		$c_bug_id = (integer)$p_bug_id;
-
-		if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-			$t_restriction = 'AND view_state=' . PUBLIC;
-		} else {
-			$t_restriction = '';
-		}
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bugnote_table ".
-				"WHERE bug_id ='$c_bug_id' $t_restriction";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
+		return db_unprepare_string( $f_bugnote_text );
 	}
 	# --------------------
 	# Returns a field for the given bugnote
-	function get_bugnote_field( $p_bugnote_id, $p_field_name ) {
+	function bugnote_field( $p_bugnote_id, $p_field_name ) {
 		global $g_mantis_bugnote_table;
 
-		$c_bugnote_id = (integer)$p_bugnote_id;
+		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		$query ="SELECT $p_field_name ".
 				"FROM $g_mantis_bugnote_table ".
 				"WHERE id ='$c_bugnote_id' ".
 				"LIMIT 1";
 		$result = db_query( $query );
-		return db_result( $result, 0 );
+
+		# @@@ check $result and error or something
+
+		return db_unprepare( db_result( $result ) );
 	}
 
 ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: bug_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -263,4 +263,27 @@
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
+	# --------------------
+	# Returns the number of bugnotes for the given bug_id
+	function bug_bugnote_count( $p_bug_id ) {
+		global $g_mantis_bugnote_table, $g_private_bugnote_threshold;
+
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+			$t_restriction = 'AND view_state=' . PUBLIC;
+		} else {
+			$t_restriction = '';
+		}
+
+		$query ="SELECT COUNT(*) ".
+				"FROM $g_mantis_bugnote_table ".
+				"WHERE bug_id ='$c_bug_id' $t_restriction";
+		$result = db_query( $query );
+
+		# @@@ check $result and error or something
+
+		return db_result( $result, 0 );
+	}
+
 ?>

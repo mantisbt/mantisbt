@@ -12,8 +12,8 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_bugnote_exists( $f_bugnote_id );
-	$t_bug_id = get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	bugnote_ensure_exists( $f_bugnote_id );
+	$t_bug_id = bugnote_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
 	check_access( $g_delete_bugnote_threshold );
 	check_bug_exists( $t_bug_id );
