@@ -6,7 +6,7 @@
 
 	# Japanese: Takeshi Hachikawa, hachikawa@sesys.co.jp
 ?>
-<?
+<?php
 	# new strings:
 	$s_all_projects = "全プロジェクト";
 	$s_move_bugs = "バグの移動";
@@ -15,17 +15,26 @@
 	$s_print_all_bug_page_link = "レポート表示";
 	$s_csv_export = "CSVエクスポート";
 	$s_login_anonymously = "ゲストログオン";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "エラー：SQLでエラーが起こりました。レポートをお願いします→";
 	$MANTIS_ERROR[ERROR_LOGIN] = "エラー：ユーザ名／パスワードが間違えています。";
 	$MANTIS_ERROR[ERROR_REPORT] = "エラー：レポートに間違いがあります。";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "エラー：ファイルが選択されていません。";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "エラー：カテゴリが重複しています。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "エラー：バージョンが重複しています。";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "エラー：ファイルが重複しています。先にファイルを削除して下さい。";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "戻る";
@@ -173,6 +182,9 @@
 	# bug_close.php3
 	$s_bug_close_msg       = "バグが終了しました。";
 	$s_close_immediately   = "すぐに閉じる：";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "バグが削除されました。";
@@ -367,7 +379,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "プロジェクト追加";
-	$s_access_threshold = "最低アクセス権限";
 	$s_upload_file_path = "ファイルの登録場所";
 	$s_add_project_button = "追加";
 	$s_projects_title = "プロジェクト";
@@ -502,13 +513,10 @@
 	$s_remove_user_sure_msg = "ユーザをプロジェクトから削除しますか？";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "注意：プロジェクトには既存のユーザしか追加できません。";
-	$s_automatic_access_level = "自動アクセス可能な権限";
 	$s_add_user_title = "プロジェクトへのユーザ追加";
 	$s_add_user_button = "追加";
 	$s_project_selection_title = "プロジェクト選択";
 	$s_remove_link = "プロジェクトから削除";
-	$s_automatic_access = "自動アクセスユーザ";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "ユーザが更新されました。";

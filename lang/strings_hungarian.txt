@@ -15,17 +15,26 @@
 	$s_print_all_bug_page_link = "Hibák nyomtatása";
 	$s_csv_export = "CSV exportálása";
 	$s_login_anonymously = "Bejelentkezés név nélkül";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "HIBA: SQL hibát találtam.  Kérem jelentse a hibát itt: ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.";
 	$MANTIS_ERROR[ERROR_REPORT] = "HIBA: A bejelentés feldolgozásakor hiba történt.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "HIBA: Nincs megadva fájl";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "HIBA: A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "HIBA: Ez a kategória már létezik.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "HIBA: Ez a verzió már létezik.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "HIBA: Ez a fájl már létezik, elõször törölni kell.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "Visszatérés";
@@ -173,6 +182,9 @@
 	# bug_close.php3
 	$s_bug_close_msg       = "Hiba lezárva...";
 	$s_close_immediately   = "Azonnali lezárás:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Hiba törölve...";
@@ -367,7 +379,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Új projekt";
-	$s_access_threshold = "Hozzáférési küszöb";
 	$s_upload_file_path = "Feltöltött fájlok helye";
 	$s_add_project_button = "Új projekt";
 	$s_projects_title = "Projektek";
@@ -502,13 +513,10 @@
 	$s_remove_user_sure_msg = "Biztos benne, hogy törli ezt a felhasználót?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "MEGJEGYZÉS: A projekthez csak létezõ felhasználó adható hozzá";
-	$s_automatic_access_level = "Alapértelmezett hozzáférési szint";
 	$s_add_user_title = "Felhasználó felvétele a projektbe";
 	$s_add_user_button = "Felhasználó felvétele";
 	$s_project_selection_title = "Projekt kiválasztása";
 	$s_remove_link = "eltávolítás";
-	$s_automatic_access = "Automatikus hozzáférésû felhasználók";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "A felhasználót sikerült módosítani";

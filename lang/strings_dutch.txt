@@ -8,7 +8,7 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 
 ?>
-<?
+<?php
 	# new strings:
 	$s_all_projects = "Alle projecten";
 	$s_move_bugs = "Verplaats bugs";
@@ -17,17 +17,26 @@
 	$s_print_all_bug_page_link = "Print rapporten";
 	$s_csv_export = "CSV exporteren";
 	$s_login_anonymously = "Anoniem inloggen";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "FOUT: SQL fout gevonden.  Zou u dit willen melden aan ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.";
 	$MANTIS_ERROR[ERROR_REPORT] = "FOUT: Er is een fout in uw rapport.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FOUT: Geen bestand opgegeven.";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FOUT: De folder bestaat niet.  Controleer de project instellingen.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FOUT: Deze categorie bestaat al.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FOUT: Deze versie bestaat al.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "Ga terug";
@@ -175,6 +184,9 @@
 	# bug_close.php3
 	$s_bug_close_msg       = "Bug is afgesloten...";
 	$s_close_immediately   = "Sluit direct:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug is verwijderd...";
@@ -369,7 +381,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Voeg project toe";
-	$s_access_threshold = "Minimum toegangsnivo";
 	$s_upload_file_path = "Upload pad voor bestanden";
 	$s_add_project_button = "Toevoegen project";
 	$s_projects_title = "Projecten";
@@ -504,13 +515,10 @@
 	$s_remove_user_sure_msg = "Weet u zeker dat u deze gebruiker wil verwijderen?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "Let op: Een gebruiker moet bestaan voordat deze aan het project toegevoegd kan worden";
-	$s_automatic_access_level = "Automatisch toegangs nivo";
 	$s_add_user_title = "Toevoegen gebruiker aan project";
 	$s_add_user_button = "Toevoegen gebruiker";
 	$s_project_selection_title = "Project selectie";
 	$s_remove_link = "verwijder";
-	$s_automatic_access = "Gebruikers met automatische toegang";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Gebruiker gegevens zijn bijgewerkt";

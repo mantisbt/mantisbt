@@ -9,8 +9,8 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 ?>
-<?
-	# new strings
+<?php
+	# new strings:
 	$s_all_projects = "Alle Projekte";
 	$s_move_bugs = "Bugs verschieben";
 	$s_operation_successful = "Aktion erfolgreich.";
@@ -18,17 +18,26 @@
 	$s_print_all_bug_page_link = "Berichte drucken";
 	$s_csv_export = "CSV-Export";
 	$s_login_anonymously = "Anonym einloggen";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "FEHLER: SQL-Fehler gefunden. Bitte melden Sie diesen Fehler an ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "FEHLER: Benutzername oder Passwort falsch.";
 	$MANTIS_ERROR[ERROR_REPORT] = "FEHLER: Ihr Fehlerbericht enthielt ung&uuml;ltige Daten.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FEHLER: Keine Datei angegeben.";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FEHLER: Das Verzeichnis existiert nicht. &Uuml;berpr&uuml;fen Sie die Einstellungen des Projekts.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FEHLER: Kategorie bereits vorhanden.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FEHLER: Version bereits vorhanden.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "FEHLER: Datei bereits vorhanden. L&ouml;schen Sie zuerst die alte Datei";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "FEHLER: Ein ben&ouml;tigtes Feld wurde nicht ausgef&uuml;llt. Bitte &uuml;brpr&uuml;fen Sie Ihre Eingaben.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "Zur&uuml;ck";
@@ -54,7 +63,7 @@
 	$s_projection_enum_string = "10:keine,30:Kleinigkeit,50:kleinere &Auml;nderung,70:gr&ouml;&szlig;ere &Auml;nderung,90:Redesign";
 	$s_eta_enum_string = "10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat";
 
-	# E-Mail Strings
+	# Email Strings
 	$s_new_account_subject = "Ihr neues Benutzerkonto";
 	$s_new_account_greeting = "Willkommen zum Bugtracker.  Hier sind die zur Anmeldung erforderlichen Informationen.\n\n";
 	$s_new_account_url = "Sie k&ouml;nnen sich hier anmelden: ";
@@ -176,6 +185,9 @@
 	# bug_close.php3
 	$s_bug_close_msg = "Der Fehler wurde geschlossen...";
 	$s_close_immediately   = "Sofort schlie&szlig;en:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Fehlermeldung wurde gel&ouml;scht...";
@@ -370,7 +382,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Projekt hinzuf&uuml;gen";
-	$s_access_threshold = "Zugriffsschwelle";
 	$s_upload_file_path = "Upload Pfad";
 	$s_add_project_button = "Projekt hinzuf&uuml;gen";
 	$s_projects_title = "Projekte";
@@ -505,13 +516,10 @@
 	$s_remove_user_sure_msg = "Soll dieser Benutzer wirklich aus dem Projekt entfernt werden?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "Wichtig: Der Benutzer muss existieren, bevor er zu einem Projekt hinzugef&uuml;gt werden kann!";
-	$s_automatic_access_level = "Zugriff erfolgt automatisch f&uuml;r Kategorie ";
 	$s_add_user_title = "Benutzer zum Projekt hinzugef&uuml;gt";
 	$s_add_user_button = "Benutzer hinzuf&uuml;gen";
 	$s_project_selection_title = "Projektauswahl";
 	$s_remove_link = "l&ouml;schen";
-	$s_automatic_access = "Benutzer mit automatischem Zugriff";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";

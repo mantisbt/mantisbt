@@ -15,17 +15,26 @@
 	$s_print_all_bug_page_link = "Tipareste rapoarte";
 	$s_csv_export = "Export CSV";
 	$s_login_anonymously = "Conectare anonima";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.";
 	$MANTIS_ERROR[ERROR_REPORT] = "EROARE: Ati omis un detaliu obligatoriu din raport.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "EROARE: Nu ati specificat un fisier.";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "EROARE: Aceasta categorie exista deja.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "EROARE: Aceasta versiune exista deja.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "Intoarcere";
@@ -173,6 +182,9 @@
 	# bug_close.php3
 	$s_bug_close_msg       = "Bug-ul a fost inchis...";
 	$s_close_immediately   = "Inchide imediat:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug-ul a fost sters...";
@@ -367,7 +379,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Adauga proiect";
-	$s_access_threshold = "Prag de acces";
 	$s_upload_file_path = "Calea spre directorul de incarcare fisiere";
 	$s_add_project_button = "Adauga proiectul";
 	$s_projects_title = "Proiecte";
@@ -502,13 +513,10 @@
 	$s_remove_user_sure_msg = "Sunteti sigur(a) ca doriti sa stergeti acest utilizator ?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTA: Trebuie sa adaugati la proiect unul dintre utilizatorii existenti.";
-	$s_automatic_access_level = "Nivel de acces automat";
 	$s_add_user_title = "Adauga utilizator la proiect";
 	$s_add_user_button = "Adauga utilizator";
 	$s_project_selection_title = "Selectare de proiect";
 	$s_remove_link = "sterge";
-	$s_automatic_access = "Utilizatori cu acces automat";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Utilizator modificat cu succes";

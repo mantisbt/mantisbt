@@ -15,17 +15,26 @@
 	$s_print_all_bug_page_link = "Imprimir lista de bugs";
 	$s_csv_export = "CSV Export";
 	$s_login_anonymously = "Login Anonymously";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
 	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "Voltar";
@@ -173,6 +182,9 @@
 	# bug_close.php3
 	$s_bug_close_msg = "O Bug foi Encerrado...";
 	$s_close_immediately   = "Encerrar imediatamente:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "O Bug Foi Removido...";
@@ -367,7 +379,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Adicionar Projeto";
-	$s_access_threshold = "N&iacute;vel M&iacute;nimo de Acesso";
 	$s_upload_file_path = "Caminho do Arquivo para Upload";
 	$s_add_project_button = "Adicionar Projeto";
 	$s_projects_title = "Projetos";
@@ -502,13 +513,10 @@
 	$s_remove_user_sure_msg = "Tem Certeza que Deseja Remover Esse Usu&aacute;rio ?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTA: Usu&aacute;rio deve existir antes de ser adicionado ao projeto.";
-	$s_automatic_access_level = "N&iacute;vel de acesso autom&aacute;tico";
 	$s_add_user_title = "Adicionar Usu&aacute;rio ao Projeto";
 	$s_add_user_button = "Adicionar Usu&aacute;rio";
 	$s_project_selection_title = "Selecionar Projeto";
 	$s_remove_link = "Remover";
-	$s_automatic_access = "Usu&aacute;rios com acesso autom&aacute;tico";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Usu&aacute;rio Atualizado com Sucesso";
