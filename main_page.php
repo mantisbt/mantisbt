@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.40 2003-02-20 11:50:30 vboctor Exp $
+	# $Id: main_page.php,v 1.41 2003-02-25 21:23:26 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,12 +34,12 @@
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
 		echo lang_get( 'open_and_assigned_to_me' ) . ':';
-		echo '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>';
+		echo '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on&amp;hide_resolved=on">' . current_user_get_assigned_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-right">';
 		echo lang_get( 'open_and_reported_to_me' ) . ':';
-		echo '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>';
+		echo '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on&amp;hide_resolved=on">' . current_user_get_reported_open_bug_count() . '</a>';
 		echo '</div>';
 	}
 ?>
