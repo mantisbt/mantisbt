@@ -348,34 +348,34 @@
 	$s_last_visit = '最後一次瀏覽';
 	$s_edit_user_link = '編輯使用者';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = '專案已新增...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = '類別已新增...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = '類別已刪除...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = '你確定要刪除此類別? 所有相關連的臭蟲將會被刪除!!';
 	$s_delete_category_button = '刪除類別';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = '編輯專案 類別';
 	$s_update_category_button = '更新類別';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = '類別已經成功更新...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = '專案已經成功刪除...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = '你確定要刪除此專案和所有附屬的臭蟲?';
 	$s_project_delete_button = '刪除專案';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = '編輯專案';
 	$s_project_name = '專案名稱';
 	$s_view_status = '檢視狀態';
@@ -390,31 +390,31 @@
 	$s_add_version_button = '新增版本';
 	$s_edit_link = '編輯';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = '新增專案';
 	$s_upload_file_path = 'Upload File Path';
 	$s_add_project_button = '新增專案';
 	$s_projects_title = '所有專案';
 	$s_name = '名稱';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = '專案已經成功更新...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = '版本已經成功已新增...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = '版本已經成功已刪除...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = '你確定要刪除此版本? 所有相關連的臭蟲將會被刪除!!';
 	$s_delete_version_button = '刪除版本';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = '編輯專案 版本';
 	$s_update_version_button = '更新版本';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = '版本已經成功更新...';
 
 	# manage_user_delete.php

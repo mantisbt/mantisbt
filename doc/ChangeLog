@@ -14,6 +14,11 @@ Mantis
  * Added check_varset() function to replace if isset() else checks.
  * Added $s_charset to all localization files.
  * Added option to allow reporters to close the bugs they reported.
+ * Added $g_notify_admin_on_new to allow enabling/disable of notifications to admins on arrival of new bugs.
+ * Added $g_notify_on_new_threshold to allow controlling the threshold of notification on arrival of new bugs.
+ * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
+ * Added button to copy categories from another project, in addition to the current 'copy to'.
+ * Added new localization strings.
  * Quoted various text values retrieved from a database and used in a database query.
  * Updated Hungarian localization.
  * Updated Russian localizations.
@@ -21,7 +26,7 @@ Mantis
  * Updated German localization.
  * Updated Danish lozalization.
  * Updated Norwegian localization.
- * Updated comments in all localization files to list correct file names with the .php suffix.
+ * Updated comments in all localization files to point to correct file names.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Removed HTML entities from all localization files.
  * Removed get_status_bgcolor from core_helper_API.php and all files using it, in favor of get_status_color.
@@ -38,9 +43,6 @@ Mantis
  * Modified core_email_API.php to send a content-type header in emails.
  * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
  * Made 'light grey' the default color for 'closed'.
- * Added $g_notify_admin_on_new to allow enabling/disable of notifications to admins on arrival of new bugs.
- * Added $g_notify_on_new_threshold to allow controlling the threshold of notification on arrival of new bugs.
- * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
 
 2002.05.19  -  0.17.3
 

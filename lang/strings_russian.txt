@@ -345,34 +345,34 @@
 	$s_last_visit = 'Последнее посещение';
 	$s_edit_user_link = 'Редактировать пользователя';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Проект добавлен...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Категория добавлена...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Категория удалена...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Вы уверены, что желаете удалить категорию? Все соответствующие категории баги будут удалены.';
 	$s_delete_category_button = 'Удалить категорию';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Редактирование категорий проекта';
 	$s_update_category_button = 'Обновить категорию';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Категория обновлена...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Проект успешно удален...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Вы уверены, что желаете удалить это проект и соответствующие проекту баги?';
 	$s_project_delete_button = 'Удалить проект';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Редактирование проекта';
 	$s_project_name = 'Название проекта';
 	$s_view_status = 'Режим доступа';
@@ -387,31 +387,31 @@
 	$s_add_version_button = 'Добавить версию';
 	$s_edit_link = 'редакт.';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Добавить проект';
 	$s_upload_file_path = 'Путь для загружаемых файлов';
 	$s_add_project_button = 'Добавить проект';
 	$s_projects_title = 'Проекты';
 	$s_name = 'Название';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Проект обновлен...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Версия  добавлена...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Версия удалена...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Вы уверены, что желаете удалить эту версию?';
 	$s_delete_version_button = 'Удалить версию';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Редактирование версий проекта';
 	$s_update_version_button = 'Обновить версию';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Версия обновлена...';
 
 	# manage_user_delete.php

@@ -348,34 +348,34 @@
 	$s_last_visit = '最終訪問日時';
 	$s_edit_user_link = 'ユーザ編集';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'プロジェクトが追加されました。';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'カテゴリが追加されました。';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'カテゴリが削除されました。';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = '本当にこのカテゴリを削除しますか？関連する全てのバグが削除されます。';
 	$s_delete_category_button = '削除';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'プロジェクトカテゴリの編集';
 	$s_update_category_button = '更新';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'カテゴリが更新されました。';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'プロジェクトが削除されました。';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = '本当にこのプロジェクトを削除しますか？関連する全てのバグが削除されます。';
 	$s_project_delete_button = '削除';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'プロジェクト情報の編集';
 	$s_project_name = 'プロジェクト名';
 	$s_view_status = '外部からの参照';
@@ -390,31 +390,31 @@
 	$s_add_version_button = 'バージョン追加';
 	$s_edit_link = '編集';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'プロジェクト追加';
 	$s_upload_file_path = 'ファイルの登録場所';
 	$s_add_project_button = '追加';
 	$s_projects_title = 'プロジェクト';
 	$s_name = '名称';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'プロジェクト情報が更新されました。';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'バージョンが追加されました。';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'バージョンが削除されました。';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = '本当にこのバージョンを削除しますか？関連するバグが全て削除されます。';
 	$s_delete_version_button = '削除';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'プロジェクトバージョンの編集';
 	$s_update_version_button = '更新';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'バージョンが更新されました。';
 
 	# manage_user_delete.php

@@ -348,34 +348,34 @@
 	$s_last_visit = 'Siste pålogging';
 	$s_edit_user_link = 'Redigere bruker';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Prosjektet har blitt lagt til...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Kategorien har blitt lagt til...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Kategorien har blitt slettet...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Er du sikker på at du ønsker å slette denne kategorien? Alle tilknyttede saker vil bli slettet.';
 	$s_delete_category_button = 'Slette kategori';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Redigere prosjekt kategorier';
 	$s_update_category_button = 'Oppdatere kategori';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategorien har blitt oppdatert...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Prosjektet er slettet...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Er du sikker på at du ønsker å slette dette prosjektet og alle tilknyttede saker?';
 	$s_project_delete_button = 'Slette prosjekt';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Redigere prosjekt';
 	$s_project_name = 'Prosjektnavn';
 	$s_view_status = 'Se på status';
@@ -390,31 +390,31 @@
 	$s_add_version_button = 'Legg til versjon';
 	$s_edit_link = 'redigere';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Nytt prosjekt';
 	$s_upload_file_path = 'Katalog opplastede filer';
 	$s_add_project_button = 'Nytt prosjekt';
 	$s_projects_title = 'Prosjekter';
 	$s_name = 'Navn';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Prosjektet er oppdatert...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versjonsnummeret er lagt til...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Versjonsnummeret er slettet...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Er du sikker på at du ønsker å slette dette versjonsnummeret? Alle tilknyttede saker vil bli slettet.';
 	$s_delete_version_button = 'Slette versjon';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Redigere prosjekt versjon';
 	$s_update_version_button = 'Oppdatere versjon';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Versjonen har blitt oppdatert...';
 
 	# manage_user_delete.php

@@ -348,34 +348,34 @@
 	$s_last_visit = 'Senast inloggad';
 	$s_edit_user_link = 'Redigera';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Projektet har lagts till...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Kategorin har lagts till...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Katergorin har tagits bort...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade bugrapporter kommer att tas bort.';
 	$s_delete_category_button = 'Ta bort kategori';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Redigera projekt-kategori';
 	$s_update_category_button = 'Uppdatera kategori';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategorin har uppdaterats...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Projektet har tagits bort...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess bugrapporter?';
 	$s_project_delete_button = 'Ta bort projektet';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Redigera projekt';
 	$s_project_name = 'Projektnamn';
 	$s_view_status = 'Visa status';
@@ -390,31 +390,31 @@
 	$s_add_version_button = 'Lägg till version';
 	$s_edit_link = 'redigera';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Lägg till projekt';
 	$s_upload_file_path = 'KAtalog för uppskickade filer';
 	$s_add_project_button = 'Lägg till projekt';
 	$s_projects_title = 'Projekt';
 	$s_name = 'Namn';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Projektet har uppdaterats...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Lade till version...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Tog bort version...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade bugrapporter kommer att tas bort.';
 	$s_delete_version_button = 'Ta bort versionen';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Redigera projekt-version';
 	$s_update_version_button = 'Uppdatera version';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Uppdaterade version...';
 
 	# manage_user_delete.php

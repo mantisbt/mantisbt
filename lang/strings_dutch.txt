@@ -350,34 +350,34 @@
 	$s_last_visit = 'Laatste bezoek';
 	$s_edit_user_link = 'Aanpassen gebruiker';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Project is succesvol toegevoegd...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Categorie is succesvol aangemaakt...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Categorie is succesvol verwijderd...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Weet u zeker dat u deze categorie wilt verwijderen? Alle gerelateerde bugs worden verwijderd.';
 	$s_delete_category_button = 'Verwijder categorie';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Aanpassen project categorie';
 	$s_update_category_button = 'Update categorie';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Categorie is ge-updated...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Project succesvol verwijderd...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Weet u zeker dat u dit project en alle bijbehorende bug rapporten wilt verwijderen?';
 	$s_project_delete_button = 'Verwijder project';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Aanpassen project';
 	$s_project_name = 'Project naam';
 	$s_view_status = 'Bekijk status';
@@ -392,31 +392,31 @@
 	$s_add_version_button = 'Voeg versie toe';
 	$s_edit_link = 'Aanpassen';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Voeg project toe';
 	$s_upload_file_path = 'Upload pad voor bestanden';
 	$s_add_project_button = 'Toevoegen project';
 	$s_projects_title = 'Projecten';
 	$s_name = 'Naam';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Project is succesvol ge-updated...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versie is succesvol toegevoegd...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Versie is succesvol verwijderd...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Weet u zeker dat u deze versie wilt verwijderen? Alle gerelateerde bug rapporten zullen worden verwijderd.';
 	$s_delete_version_button = 'Verwijder versie';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Pas project versie aan';
 	$s_update_version_button = 'Update versie';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Versie is succesvol ge-updated...';
 
 	# manage_user_delete.php

@@ -348,35 +348,35 @@
 	$s_last_visit = 'Sidste Besøg';
 	$s_edit_user_link = 'Ret Bruger';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Projektet er tilføjet...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_duplicate_category = 'FEJL: Denne kategori findes allerede.';
 	$s_category_added_msg = 'Kategorien er blevet tilføjet...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Kategorien er blevet slettet...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Er du sikker på du vil slette denne kategori? Alle tilknyttede fejl vil også blive slettet.';
 	$s_delete_category_button = 'Slet Kategori';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Ret Projekt Kategori';
 	$s_update_category_button = 'Ajourfør Kategori';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategorien er blevet ajourført...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Projektet er fjernet...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Er du sikker på at du vil slette dette projekt og alle tilknyttede fejl-rapporteringer?';
 	$s_project_delete_button = 'Slet Projekt';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Ret Projekt';
 	$s_project_name = 'Projekt Start';
 	$s_view_status = 'Vis Status';
@@ -391,7 +391,7 @@
 	$s_add_version_button = 'Tilføj Version';
 	$s_edit_link = 'ret';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Tilføj Projekt';
 	$s_access_threshold = 'Adgangsbegrænsning';
 	$s_upload_file_path = 'Upload Fil Sti';
@@ -399,25 +399,25 @@
 	$s_projects_title = 'Projekter';
 	$s_name = 'Navn';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Projektet er blevet ajourført...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_duplicate_version = 'FEJL: Dette er en duplikat version.';
 	$s_version_added_msg = 'Version er blevet tilføjet...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Version er blevet slettet...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Er du sikker på du vil slette denne version? Alle tilknyttede fejl vil også blive slettet.';
 	$s_delete_version_button = 'Slet Version';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Ret Projekt Version';
 	$s_update_version_button = 'Ajourfør Version';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Version er blevet ajourført...';
 
 	# manage_user_delete.php

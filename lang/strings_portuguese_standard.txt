@@ -348,34 +348,34 @@
 	$s_last_visit = 'Ultima Visita';
 	$s_edit_user_link = 'Editar Utilizador';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'O Projecto foi adicionado com sucesso...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'A Categoria foi adicionada com sucesso...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'A Categoria foi apagada com sucesso...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Você tem certeza que deseja Remover essa categoria ? Todos os Bugs Associados Serão Removidos.';
 	$s_delete_category_button = 'Remover Categoria';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Editar Categoria de Projecto';
 	$s_update_category_button = 'Actualizar Categoria';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'A Categoria Foi Actualizada com Sucesso...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'O Projecto foi Removido com Sucesso...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Você tem certeza que deseja Remover o projecto e todos os relatórios em anexo?';
 	$s_project_delete_button = 'Remover Projecto';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Editar Projecto';
 	$s_project_name = 'Nome do Projecto';
 	$s_view_status = 'Visualização';
@@ -390,31 +390,31 @@
 	$s_add_version_button = 'Adicionar Versão';
 	$s_edit_link = 'editar';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Adicionar Projecto';
 	$s_upload_file_path = 'Caminho do Ficheiro para Upload';
 	$s_add_project_button = 'Adicionar Projecto';
 	$s_projects_title = 'Projectos';
 	$s_name = 'Nome';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Projecto Actualizado com Sucesso...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versão actualizada com sucesso...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Versão apagada com sucesso...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Tem certeza que deseja Remover esta versão?';
 	$s_delete_version_button = 'Remover Versão';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Editar Versão do Projecto';
 	$s_update_version_button = 'Actualizar Versão';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Versão actualizada com sucesso...';
 
 	# manage_user_delete.php

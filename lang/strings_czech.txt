@@ -349,34 +349,34 @@
 	$s_last_visit = 'Poslední náv±tìva';
 	$s_edit_user_link = 'Upravit';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Projekt byl úspì±nì pøidán...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Kategorie byla úspì±nì pøidána...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Kategorie byla úspì±nì smazána...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Skuteènì chcete smazat tuto kategorii? V±echny pøiøazené bugy budou smazány.';
 	$s_delete_category_button = 'Smazat kategorii';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Aktualizace kategorií projektu';
 	$s_update_category_button = 'Aktualizovat kategorii';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategorie byla úspì±nì aktualizována...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Projekt byl úspì±nì odstranìn...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Skuteènì chcete smazat tento projekt a v±echny pøiøazené bugy?';
 	$s_project_delete_button = 'Smazat projekt';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Editovat projekt';
 	$s_project_name = 'Jméno projektu';
 	$s_view_status = 'View Status';
@@ -391,31 +391,31 @@
 	$s_add_version_button = 'Pøidat verzi';
 	$s_edit_link = 'upravit';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Pøidat projekt';
 	$s_upload_file_path = 'Cesta pro ukládání souborù';
 	$s_add_project_button = 'Pøidat projekt';
 	$s_projects_title = 'Projekty';
 	$s_name = 'Jméno';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Projekt byl úspì±nì aktualizován...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Verze byla úspì±nì pøidána...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Verze byla úspì±nì smazána...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Skuteènì chcete smazat tuto verzi? V±echny související bugy budou vymazány.';
 	$s_delete_version_button = 'Smazat verzi';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Upravit verzi projektu';
 	$s_update_version_button = 'Aktualizovat verzi';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Verze byla úspì±nì upravena...';
 
 	# manage_user_delete.php

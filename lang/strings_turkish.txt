@@ -349,34 +349,34 @@
 	$s_last_visit = 'Son Ziyaret';
 	$s_edit_user_link = 'Kullanýcý Düzenle';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Proje baþarýyla eklendi...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Kategori baþarýyla eklendi...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Kategori baþarýyla eklendi silindi...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Bu kategoriyi silmek istediðinizden emin misiniz? Bu kategoriye ait bütün buglar silinecek.';
 	$s_delete_category_button = 'Kategori Sil';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Proje Kategorisi Düzenle';
 	$s_update_category_button = 'Kategori Güncelle';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategori baþarýyla güncellendi...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Proje baþarýyla silindi...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Projeyi ve projeye ait bütün buglarý silmek istediginizden emin misiniz?';
 	$s_project_delete_button = 'Proje Sil';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Proje Düzenle';
 	$s_project_name = 'Proje Adý';
 	$s_view_status = 'Statü Ýzle';
@@ -391,31 +391,31 @@
 	$s_add_version_button = 'Versiyon Ekle';
 	$s_edit_link = 'Düzenle';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Proje Ekle';
 	$s_upload_file_path = 'Gönderilecek dosyanýn yolu';
 	$s_add_project_button = 'Proje Ekle';
 	$s_projects_title = 'Projeler';
 	$s_name = 'Ýsim';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Proje baþarýyla güncellendi...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versiyon baþarýyla eklendi...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Versiyon baþarýyla silindi...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Bu versiyonu silmek istediginizden emin misiniz? Bu versiyona iliþkin bütün buglar da silinecektir.';
 	$s_delete_version_button = 'Versiyon Sil';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Proje Versiyonu Düzenle';
 	$s_update_version_button = 'Versiyon Güncelle';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Versiyon baþarýyla güncellendi...';
 
 	# manage_user_delete.php

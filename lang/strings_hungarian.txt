@@ -349,34 +349,34 @@
   $s_last_visit = 'Utolsó látogatás';
   $s_edit_user_link = 'Felhasználó szerkesztése';
 
-  # manage_project_add.php
+  # manage_proj_add.php
   $s_project_added_msg = 'A projektet sikerült felvenni...';
 
-  # manage_project_category_add.php
+  # manage_proj_category_add.php
   $s_category_added_msg = 'A kategóriát sikerült felvenni...';
 
-  # manage_project_category_delete.php
+  # manage_proj_category_delete.php
   $s_category_deleted_msg = 'A kategóriát sikerült törölni...';
 
-  # manage_project_category_delete_page.php
+  # manage_proj_category_delete_page.php
   $s_category_delete_sure_msg = 'Biztos benne, hogy törli ezt a kategóriát? Minden ebbe tartozó hiba törlõdni fog.';
   $s_delete_category_button = 'Kategória törlése';
 
-  # manage_project_category_edit_page.php
+  # manage_proj_category_edit_page.php
   $s_edit_project_category_title = 'Kategória szerkesztése';
   $s_update_category_button = 'Kategória mentése';
 
-  # manage_project_category_update.php
+  # manage_proj_category_update.php
   $s_category_updated_msg = 'A kategóriát sikerült elmenteni...';
 
-  # manage_project_delete.php
+  # manage_proj_delete.php
   $s_project_deleted_msg = 'A projektet sikerült eltávolítani...';
 
-  # manage_project_delete_page.php
+  # manage_proj_delete_page.php
   $s_project_delete_msg = 'Biztos benne, hogy törli ezt a projektet az összes hozzá tartozó hibabejelentéssel?';
   $s_project_delete_button = 'Projekt törlése';
 
-  # manage_project_edit_page.php
+  # manage_proj_edit_page.php
   $s_edit_project_title = 'Projekt szerkesztése';
   $s_project_name = 'Projekt neve';
   $s_view_status = 'Betekintés jellege';
@@ -391,31 +391,31 @@
   $s_add_version_button = 'Új verzió';
   $s_edit_link = 'szerkesztés';
 
-  # manage_project_menu_page.php
+  # manage_proj_menu_page.php
   $s_add_project_title = 'Új projekt';
   $s_upload_file_path = 'Feltöltött fileok helye';
   $s_add_project_button = 'Új projekt';
   $s_projects_title = 'Projektek';
   $s_name = 'Név';
 
-  # manage_project_update.php
+  # manage_proj_update.php
   $s_project_updated_msg = 'A projektet sikerült módosítani...';
 
-  # manage_project_version_add.php
+  # manage_proj_version_add.php
   $s_version_added_msg = 'A verziót sikerült felvenni...';
 
-  # manage_project_version_delete.php
+  # manage_proj_version_delete.php
   $s_version_deleted_msg = 'A verziót sikerült törölni...';
 
-  # manage_project_version_delete_page.php
+  # manage_proj_version_delete_page.php
   $s_version_delete_sure = 'Biztos benne, hogy törli ezt a verziót? Minden hozzá tartozó hiba törlõdni fog.';
   $s_delete_version_button = 'Verzió törlése';
 
-  # manage_project_version_edit_page.php
+  # manage_proj_version_edit_page.php
   $s_edit_project_version_title = 'Verzió módosítása';
   $s_update_version_button = 'Verzió mentése';
 
-  # manage_project_version_update.php
+  # manage_proj_version_update.php
   $s_version_updated_msg = 'A verziót sikerült elmenteni...';
 
   # manage_user_delete.php

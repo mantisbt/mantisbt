@@ -348,34 +348,34 @@
 	$s_last_visit = 'Ultima conectare';
 	$s_edit_user_link = 'Modifica utilizator';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Proiectul a fost adaugat cu succes...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Categorie adaugata cu succes...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Categorie stearsa cu succes...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Sunteti sigur(a) ca doriti sa stergeti categoria ? Toate bug-urile asociate vor fi sterse.';
 	$s_delete_category_button = 'Sterge categoria';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Modificarea categoriei unui proiect';
 	$s_update_category_button = 'Modificare categorie';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Categoria a fost modificata cu succes...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Proiect sters cu succes...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Sunteti sigur(a) ca doriti sa stergeti acest proiect si toate bug-urile asociate ? ';
 	$s_project_delete_button = 'Sterge proiectul';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Modificare proiect';
 	$s_project_name = 'Nume proiect';
 	$s_view_status = 'Status';
@@ -390,31 +390,31 @@
 	$s_add_version_button = 'Adauga o versiune';
 	$s_edit_link = 'modifica';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Adauga proiect';
 	$s_upload_file_path = 'Calea spre directorul de incarcare fisiere';
 	$s_add_project_button = 'Adauga proiectul';
 	$s_projects_title = 'Proiecte';
 	$s_name = 'Nume';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Proiectul a fost modificat cu succes...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versiune adaugata cu succes...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Versiunea a fost stearsa cu succes...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Sunteti sigur(a) ca doriti sa stergeti aceasta versiune ? Toate bug-urile asociate vor fi sterse.';
 	$s_delete_version_button = 'Sterge versiunea';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Modifica versiunea proiectului';
 	$s_update_version_button = 'Modifica versiunea';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Versiunea a fost modificata cu succes...';
 
 	# manage_user_delete.php

@@ -349,34 +349,34 @@
 	$s_last_visit = 'Ostatnia wizyta';
 	$s_edit_user_link = 'Edytuj dane';
 
-	# manage_project_add.php
+	# manage_proj_add.php
 	$s_project_added_msg = 'Projekt zosta³ pomy¶lnie dodany...';
 
-	# manage_project_category_add.php
+	# manage_proj_category_add.php
 	$s_category_added_msg = 'Kategoria zosta³a pomy¶lnie dodana...';
 
-	# manage_project_category_delete.php
+	# manage_proj_category_delete.php
 	$s_category_deleted_msg = 'Kategoria zosta³a pomy¶lnie usuniêta...';
 
-	# manage_project_category_delete_page.php
+	# manage_proj_category_delete_page.php
 	$s_category_delete_sure_msg = 'Czy napewno chcesz usun±æ t± kategoriê ? Wszystkie przypisane do niej b³êdy zostan± usuniête.';
 	$s_delete_category_button = 'Usuñ kategoriê';
 
-	# manage_project_category_edit_page.php
+	# manage_proj_category_edit_page.php
 	$s_edit_project_category_title = 'Edycja kategorii';
 	$s_update_category_button = 'Aktualizuj Kategoriê';
 
-	# manage_project_category_update.php
+	# manage_proj_category_update.php
 	$s_category_updated_msg = 'Kategoria zosta³a pomy¶lnie zaktualizowana...';
 
-	# manage_project_delete.php
+	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Projekt zosta³ usuniêty...';
 
-	# manage_project_delete_page.php
+	# manage_proj_delete_page.php
 	$s_project_delete_msg = 'Czy na pewno chcesz usun±æ ten projekt i wszystkie zg³oszone do tego projektu b³êdy?';
 	$s_project_delete_button = 'Usuñ projekt';
 
-	# manage_project_edit_page.php
+	# manage_proj_edit_page.php
 	$s_edit_project_title = 'Edycja projektu';
 	$s_project_name = 'Nazwa projektu';
 	$s_view_status = 'Status';
@@ -391,31 +391,31 @@
 	$s_add_version_button = 'Dodaj wersjê';
 	$s_edit_link = 'edytuj';
 
-	# manage_project_menu_page.php
+	# manage_proj_menu_page.php
 	$s_add_project_title = 'Dodawanie projektu';
 	$s_upload_file_path = 'Katalog dla przesy³anych plików';
 	$s_add_project_button = 'Dodaj projekt';
 	$s_projects_title = 'Projekty';
 	$s_name = 'Nazwa';
 
-	# manage_project_update.php
+	# manage_proj_update.php
 	$s_project_updated_msg = 'Projekt zosta³ zaktualizowany...';
 
-	# manage_project_version_add.php
+	# manage_proj_version_add.php
 	$s_version_added_msg = 'Nowa wersja zosta³a pomy¶lnie dodana...';
 
-	# manage_project_version_delete.php
+	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Wersja zosta³a pomy¶lnie usuniêta...';
 
-	# manage_project_version_delete_page.php
+	# manage_proj_version_delete_page.php
 	$s_version_delete_sure = 'Czy na pewno chcesz usun±æ t± wersjê ? Wszystkie zg³oszone do tej wersji b³êdy zostan± usuniête.';
 	$s_delete_version_button = 'Usuñ wersjê';
 
-	# manage_project_version_edit_page.php
+	# manage_proj_version_edit_page.php
 	$s_edit_project_version_title = 'Edycja wersji projektu';
 	$s_update_version_button = 'Aktualizuj wersjê';
 
-	# manage_project_version_update.php
+	# manage_proj_version_update.php
 	$s_version_updated_msg = 'Wersja zosta³a pomy¶lnie zaktualizowana...';
 
 	# manage_user_delete.php
