@@ -214,9 +214,7 @@
 		}
 
 		# Notify users of new bug report
-		if ( ON == $g_notify_developers_on_new ) {
-			email_new_bug( $t_bug_id );
-		}
+		email_new_bug( $t_bug_id );
 	} # end if !check_failed
 
 	# Determine which report page to redirect back to.
