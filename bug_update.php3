@@ -22,6 +22,10 @@
 				handler_id='$f_handler_id'
     		WHERE id='$f_id'";
    	$result = db_query($query);
+
+   	if ( $f_status=="feedback" ) {
+   		email_feedback( $f_id );
+   	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

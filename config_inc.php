@@ -58,6 +58,7 @@
 	$g_show_advanced_report      = 1;
 	$g_show_advanced_update      = 1;
 
+	### allow users to signup for their own accounts
 	$g_allow_signup              = 1;
 
 	$g_show_version              = 0;
@@ -67,8 +68,10 @@
 	# 0 = disabled; 1 = admin only; 2 = anyone
 	$g_show_source               = 0;
 
-	# set to 0 to disable the logged in user and time info
-	$g_show_login_date_info      = 1;
+	# Footer Menu
+	# 0 = disabled
+	# 1 = show menu at bottom
+	$g_show_footer_menu          = 0;
 
 	# change to language you want... choices are:
 	# english

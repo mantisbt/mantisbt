@@ -52,6 +52,19 @@
     		SET date_submitted='$t_date_submitted', last_updated=NOW()
     		WHERE id='$f_id'";
    	$result = db_query($query);
+
+   	### notify reporter and handler
+   	if ( get_bug_field( "status", $f_id )=="feedback" ) {
+   		if ( get_bug_field( "resolution", $f_id )=="reopened" ) {
+   			email_reopen( $f_id );
+   		} else {
+   			email_feedback( $f_id );
+   		}
+   	} else if ( get_bug_field( "status", $f_id )=="resolved" ) {
+   		email_resolved( $f_id );
+   	} else {
+   		email_bugnote_add( $f_id );
+   	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

@@ -55,11 +55,10 @@
 	# goes to error page if error occurs
 	# Use this when you don't want to handler an error yourself
 	function db_query( $p_query ) {
-		global $g_mysql_error_page;
 
 		$t_result = mysql_query( $p_query );
 		if ( !$t_result ) {
-			header( "Location: $g_mysql_error_page?f_message=$p_query" );
+			echo "ERROR: FAILED QUERY";
 			exit;
 		}
 		else {
@@ -131,7 +130,14 @@
 	}
 	### --------------------
 	function print_footer( $p_file ) {
-		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source;
+		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source,
+				$g_menu_include_file, $g_show_footer_menu;
+
+		if (isset($g_string_cookie_val)) {
+			if ( $g_show_footer_menu ) {
+				print_bottom_menu( $g_menu_include_file );
+			}
+		}
 
 		print_source_link( $p_file );
 
@@ -155,7 +161,8 @@
 	### --------------------
 	# prints the user that is logged in and the date/time
 	function print_login_info() {
-		global 	$g_mantis_user_table, $g_string_cookie_val, $g_complete_date_format;
+		global 	$g_mantis_user_table, $g_string_cookie_val,
+				$g_complete_date_format;
 
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
@@ -178,13 +185,23 @@
 	}
 	### --------------------
 	function print_menu( $p_menu_file="" ) {
-		global 	$g_primary_border_color, $g_primary_color_light,
-				$g_show_login_date_info;
+		global 	$g_primary_border_color, $g_primary_color_light;
 
-		if ($g_show_login_date_info==1) {
-			print_login_info();
-		}
+		print_login_info();
 
+		PRINT "<table width=100% bgcolor=$g_primary_border_color>";
+		PRINT "<tr align=center height=20>";
+			PRINT "<td align=center bgcolor=$g_primary_color_light>";
+				include( $p_menu_file );
+			PRINT "</td>";
+		PRINT "</tr>";
+		PRINT "</table>";
+	}
+	### --------------------
+	function print_bottom_menu( $p_menu_file="" ) {
+		global 	$g_primary_border_color, $g_primary_color_light;
+
+		PRINT "<p>";
 		PRINT "<table width=100% bgcolor=$g_primary_border_color>";
 		PRINT "<tr align=center height=20>";
 			PRINT "<td align=center bgcolor=$g_primary_color_light>";
@@ -499,6 +516,42 @@
 		else {
 			PRINT "$p_severity";
 		}
+	}
+	### --------------------
+	###########################################################################
+	# Helper API
+	###########################################################################
+	### --------------------
+	### Returns the specified field of the specified bug
+	function get_bug_field( $p_field_name, $p_bug_id ) {
+		global 	$g_string_cookie_val,
+				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
+				$g_mantis_bug_table;
+
+		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+		### get info
+		$query = "SELECT $p_field_name
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+	### --------------------
+	### Returns the specified field of the specified bug_text
+	function get_bug_text_field( $p_field_name ) {
+		global 	$g_string_cookie_val,
+				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
+				$g_mantis_bug_text_table;
+
+		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+		### get info
+		$query = "SELECT $p_field_name
+				FROM $g_mantis_bug_text_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
 	}
 	### --------------------
 	###########################################################################
@@ -889,6 +942,56 @@
 		return str_replace( "<br>", "",  stripslashes( $p_string ) );
 	}
 	### --------------------
+	/* word_wrap($string, $cols, $prefix)
+	 *
+	 * Takes $string, and wraps it on a per-word boundary (does not clip
+	 * words UNLESS the word is more than $cols long), no more than $cols per
+	 * line. Allows for optional prefix string for each line. (Was written to
+	 * easily format replies to e-mails, prefixing each line with "> ".
+	 *
+	 * Copyright 1999 Dominic J. Eidson, use as you wish, but give credit
+	 * where credit due.
+	 */
+	function word_wrap ($string, $cols = 80, $prefix = "") {
+
+		$t_lines = split( "\n", $string);
+		$outlines = "";
+
+		while(list(, $thisline) = each($t_lines)) {
+		    if(strlen($thisline) > $cols) {
+
+				$newline = "";
+				$t_l_lines = split(" ", $thisline);
+
+				while(list(, $thisword) = each($t_l_lines)) {
+				    while((strlen($thisword) + strlen($prefix)) > $cols) {
+						$cur_pos = 0;
+						$outlines .= $prefix;
+
+						for($num=0; $num < $cols-1; $num++) {
+						    $outlines .= $thisword[$num];
+						    $cur_pos++;
+						} ### end for
+
+						$outlines .= "\n";
+						$thisword = substr($thisword, $cur_pos, (strlen($thisword)-$cur_pos));
+				    } ### end innermost while
+
+				    if((strlen($newline) + strlen($thisword)) > $cols) {
+						$outlines .= $prefix.$newline."\n";
+						$newline = $thisword." ";
+				    } else {
+						$newline .= $thisword." ";
+				    }
+				}  ### end while
+
+				$outlines .= $prefix.$newline."\n";
+		    } else {
+				$outlines .= $prefix.$thisline."\n";
+		    }
+		} ### end outermost while
+		return $outlines;
+    }
 	###########################################################################
 	# Access Control API
 	###########################################################################
@@ -954,71 +1057,263 @@
 	# Email API
 	###########################################################################
 	### --------------------
-	function email_notify_users( $p_bug_id ) {
-		### build message
+	### Send password to user
+	function email_signup( $p_user_id, $p_password ) {
+		global $g_mantis_user_table, $g_login_url,
+			$s_new_account_subject,
+			$s_new_account_greeting, $s_new_account_url,
+			$s_new_account_username, $s_new_account_password,
+			$s_new_account_message, $s_new_account_do_not_reply;
 
-		### Get notify list
+		$query = "SELECT username, email
+				FROM $g_mantis_user_table
+				WHERE id='$p_user_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v" );
 
-		### send mail
+		### Build Welcome Message
+		$t_message = $s_new_account_greeting.
+						$s_new_account_url.$g_login_url."\n".
+						$s_new_account_username.$v_username."\n".
+						$s_new_account_password.$p_password."\n\n".
+						$s_new_account_message.
+						$s_new_account_do_not_reply;
+
+		if ( !email_send( $v_email, $s_new_account_subject, $t_message, $t_headers ) ) {
+			echo "FAILED SENDING MAIL TO: $v_username - $v_email";
+		}
 	}
 	### --------------------
-	function email_build_message( $p_bug_id ) {
-		$t_message = "";
+	### Send new password when user forgets
+	function email_reset( $p_user_id, $p_password ) {
+		global $g_mantis_user_table;
+
+		$query = "SELECT username, email
+				FROM $g_mantis_user_table
+				WHERE id='$p_user_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v" );
+
+		### Build Welcome Message
+		$t_message = "There was a request to have your password reset\n\n".
+					"Your account name is: ".$v_username."\n".
+					"Here is your new password: ".$p_password."\n\n";
+
+		email_send( $v_email, "New Password", $t_message );
+	}
+	### --------------------
+	### Notify reporter and handler when new bugnote is added
+	function email_bugnote_add( $p_bug_id ) {
+		global $g_mantis_user_table, $g_mantis_bug_table;
+
+		email_bug_info( $p_bug_id, "A BUGNOTE has been added to this bug." );
+	}
+	### --------------------
+	function email_resolved( $p_bug_id ) {
+		global $g_mantis_user_table, $g_mantis_bug_table;
+
+		email_bug_info( $p_bug_id, "The following bug has been RESOLVED." );
+	}
+	### --------------------
+	function email_feedback( $p_bug_id ) {
+		global $g_mantis_user_table, $g_mantis_bug_table;
+
+		email_bug_info( $p_bug_id, "The following bug requires your FEEDBACK." );
+	}
+	### --------------------
+	function email_reopen( $p_bug_id ) {
+		global $g_mantis_user_table, $g_mantis_bug_table;
+
+		email_bug_info( $p_bug_id, "The following bug has been REOPENED." );
+	}
+	### --------------------
+	function email_build_bug_message( $p_bug_id ) {
+		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
+				$g_mantis_user_table, $g_complete_date_format,
+				$g_bugnote_order;
 
 		$query = "SELECT *
-				FROM $g_bugnote_table
-				WHERE bug_id='$p_bug_id'
-				ORDER BY date_submitted";
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'
+				ORDER BY date_submitted $g_bugnote_order";
 		$result = db_query( $query );
-		$bugnote_count = db_num_rows( $result );
-		for ( $i=0; $i<$bugnote_count; $i++ ) {
-			$row = db_fetch_array( $result );
-			$t_reporter_id = $row["reporter_id"];
-			$t_bugnote_text_id = $row["bugnote_text_id "];
-			$t_date_submitted  = $row["date_submitted "];
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			$query2 = "SELECT note
-					FROM $g_bugnote_text_table
-					WHERE id='$t_bugnote_text_id'";
-			$result2 = db_query( $query2 );
-			$t_note = db_result( $result2, 0, 0 );
-			$t_message = $t_message.$t_note;
-			$t_message = $t_message."-----------------------------------------------------------------------\n";
+		$query = "SELECT *
+				FROM $g_mantis_bug_text_table
+				WHERE id='$v_bug_text_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v2" );
+
+		$v2_description = str_replace( "<br>", "", $v2_description );
+		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
+		$v_last_updated = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
+
+		$t_message = "=======================================================================\n";
+		$t_message .= "Bug:             $v_id\n";
+		$t_message .= "Category:        $v_category\n";
+		$t_message .= "Reproducibility: $v_reproducibility\n";
+		$t_message .= "Severity:        $v_severity\n";
+		$t_message .= "Priority:        $v_priority\n";
+		$t_message .= "Status:          $v_status\n";
+		if ( $v_status=="resolved" ) {
+			$t_message .= "Resolution:      $v_resolution\n";
+			if ( $v_resolution=="duplicate" ) {
+				$t_message .= "Duplicate:      $v_duplicate_id\n";
+			}
 		}
-
-		### BUILD IT
+		$t_message .= "=======================================================================\n";
+		$t_message .= "Date Submitted:   $v_date_submitted\n";
+		$t_message .= "Last Modified:    $v_last_updated\n";
+		$t_message .= "=======================================================================\n";
+		$t_message .= "Summary:  $v_summary\n";
+		$t_message .= "Description: $v2_description\n";
+		$t_message .= "=======================================================================\n\n";
 
 		return $t_message;
 	}
 	### --------------------
-	function email_send( $p_recipient, $p_subject,
-						$p_cc_list, $p_bcc_list,
-						$p_priority, $p_reply_path,
-						$p_message, $p_headers ) {
+	function email_build_bugnote_message( $p_bug_id ) {
+		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
+				$g_mantis_user_table, $g_complete_date_format,
+				$g_bugnote_order;
+
+		$t_message = "";
+
+		$query = "SELECT *
+				FROM $g_mantis_bugnote_table
+				WHERE bug_id='$p_bug_id'
+				ORDER BY date_submitted $g_bugnote_order";
+		$result = db_query( $query );
+		$bugnote_count = db_num_rows( $result );
+
+		### BUILT MESSAGE
+		for ( $i=0; $i<$bugnote_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "t" );
+
+			$query = "SELECT note
+					FROM $g_mantis_bugnote_text_table
+					WHERE id='$t_bugnote_text_id'";
+			$result2 = db_query( $query );
+
+			$query = "SELECT username
+					FROM $g_mantis_user_table
+					WHERE id='$t_reporter_id'";
+			$result3 = db_query( $query );
+			$t_username = db_result( $result3, 0, 0 );
+
+			$t_note = db_result( $result2, 0, 0 );
+			$t_note = str_replace( "<br>", "", $t_note );
+			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
+			$t_string = " ".$t_username." - ".$t_last_modified." ";
+			$t_message = $t_message."-----------------------------------------------------------------------\n";
+			$t_message = $t_message.$t_string."\n";
+			$t_message = $t_message."-----------------------------------------------------------------------\n";
+			$t_message = $t_message.$t_note."\n\n";
+		}
+		$t_message = $t_message."-----------------------------------------------------------------------\n";
+
+		$t_message = stripslashes( $t_message );
+		return $t_message;
+	}
+	### --------------------
+	### Send bug info to reporter and handler
+	function email_bug_info( $p_bug_id, $p_message ) {
+		global $g_mantis_user_table, $g_mantis_bug_table;
+
+		### Get Subject
+		$query = "SELECT summary
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$p_subject = db_result( $result, 0, 0 );
+
+		### Get Reporter and Handler IDs
+		$query = "SELECT reporter_id, handler_id
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v" );
+
+		### Get Reporter Email
+		$query = "SELECT email
+				FROM $g_mantis_user_table
+				WHERE id='$v_reporter_id'";
+		$result = db_query( $query );
+		$t_reporter_email = db_result( $result, 0, 0 );
+
+		### Get Handler Email
+		if ( $v_handler_id > 0 ) {
+			$query = "SELECT email
+					FROM $g_mantis_user_table
+					WHERE id='$v_handler_id'";
+			$result = db_query( $query );
+			$t_handler_email = db_result( $result, 0, 0 );
+		}
+
+		### build message
+		$t_message = $p_message."\n";
+		$t_message .= email_build_bug_message( $p_bug_id );
+		$t_message .= email_build_bugnote_message( $p_bug_id );
+
+		### send mail
+		$res1 = 1;
+		$res2 = 1;
+
+		### Send to reporter if valid
+		if ((!empty($t_reporter_email))&&(is_valid_email($t_reporter_email))) {
+			$res1 = email_send( $t_reporter_email, $p_subject, $t_message );
+		}
+
+		### Send to handler if valid
+		if ((!empty($t_handler_email))&&
+			($t_handler_email!=$t_reporter_email)&&
+			(is_valid_email($t_handler_email))) {
+			$res2 = email_send( $t_handler_email, $p_subject, $t_message );
+		}
+	}
+	### --------------------
+	function email_send( $p_recipient, $p_subject, $p_message ) {
+		global $g_from_email;
 
 		### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
 
 		### Visit http://www.php.net/manual/function.mail.php
 		### if you have problems with mailing
 
-		$p_recipient = $p_recipient_name." <".$p_recipient_email.">";
-		$p_recipient = trim( $p_recipient );
-		$p_message = trim( wordwrap( $p_message, 72 ) );
+		$t_recipient = trim( $p_recipient );
 
-		$p_headers .= "From: $p_sender_name <$p_sender_email>\n";
-		$p_headers .= "Reply-To: $p_reply_to_email\n";
-		$p_headers .= "X-Sender: <$p_sender_email>\n";
-		$p_headers .= "X-Mailer: PHP/".$phpversion()."\n";
+		$t_subject = trim( $p_subject );
 
-		### $p_headers .= "X-Priority: 1\n"; ### Urgent = 1
-		### $p_headers .= "Return-Path: <$p_return_path_email>\n"; ### return if error
+		$t_message = trim( $p_message );
+		/*if ( floor( phpversion() )>=4 ) {
+			$t_message = trim( wordwrap( $t_message, 72 ) );
+		} else {
+			$t_message = trim( word_wrap( $t_message, 72 ) );
+		}*/
 
+		$t_headers = "From: $g_from_email\n";
+		#$t_headers .= "Reply-To: $p_reply_to_email\n";
+		$t_headers .= "X-Sender: <$g_from_email>\n";
+		$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
+		#$t_headers .= "X-Priority: 1\n"; ### Urgent = 1
+		#$t_headers .= "Return-Path: <$g_return_path_email>\n"; ### return if error
 		### If you want to send foreign charsets
-		### $p_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
-		$p_headers .= "cc:$p_cc_list\n";
-		$p_headers .= "bcc:$p_bcc_list\n";
+		#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
-		return mail( $p_recipient, $p_subject, $p_message, $p_headers );
+		#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
+		#exit;
+
+		$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
+		if ( !$result ) {
+			PRINT "PROBLEMS SENDING MAIL TO: $t_recipient";
+		}
 	}
 	### --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -1032,25 +1327,6 @@
 		} else {
 			return false;
 		}
-	}
-	### --------------------
-	# send the new users password
-	function send_new_user_password( $p_username, $p_email, $p_password ) {
-		global $g_from_email,$g_login_url,
-			$s_new_account_subject,
-			$s_new_account_greeting,$s_new_account_url,
-			$s_new_account_username,$s_new_account_password,
-			$s_new_account_message,$s_new_account_do_not_reply;
-
-
-		return mail($p_email, $s_new_account_subject,
-			$s_new_account_greeting.
-			$s_new_account_url.$g_login_url."\n".
-			$s_new_account_username.$p_username."\n".
-			$s_new_account_password.$p_password."\n\n".
-			$s_new_account_message.
-			$s_new_account_do_not_reply,
-     		"From: $g_from_email\nX-Mailer: PHP/".phpversion());
 	}
 	### --------------------
 	###########################################################################
