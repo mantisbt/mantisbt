@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.89 2005-03-21 20:48:57 vwegert Exp $
+	# $Id: user_api.php,v 1.90 2005-03-22 19:08:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -863,7 +863,7 @@
 			return false;
 		}
 		$t_max_lost_password_in_progress_count = config_get( 'max_lost_password_in_progress_count' );
-		$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_in_progress_count' );
+		$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_request_count' );
 		return ( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count
 							|| OFF == $t_max_lost_password_in_progress_count );
 	}
@@ -974,7 +974,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
-				SET lost_password_in_progress_count=0
+				SET lost_password_request_count=0
 				WHERE id='$c_user_id'";
 		db_query( $query );
 
@@ -990,7 +990,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
-				SET lost_password_in_progress_count=lost_password_in_progress_count+1
+				SET lost_password_request_count=lost_password_request_count+1
 				WHERE id='$c_user_id'";
 		db_query( $query );
 
