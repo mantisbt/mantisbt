@@ -20,12 +20,10 @@
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
-    $result = mysql_query($query);
-    if ( $result ) {
-		$row = mysql_fetch_array($result);
-		if ( $row ) {
-			extract( $row, EXTR_PREFIX_ALL, "u" );
-		}
+    $result = db_mysql_query($query);
+	$row = mysql_fetch_array($result);
+	if ( $row ) {
+		extract( $row, EXTR_PREFIX_ALL, "u" );
 	}
 
     $query = "SELECT *

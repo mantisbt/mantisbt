@@ -314,15 +314,6 @@
 </form>
 </table>
 
-
-<?
-		$id = $v_id;
-		$handler = $row["handler"];
-		$reproducibility = $row["reproducibility"];
-		$severity = $row["severity"];
-		$status = $row["status"];
-?>
-
 <? print_footer() ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

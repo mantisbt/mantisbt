@@ -18,11 +18,13 @@ To Do:
  * Complex bug criteria searching
  * More documentation on installtion, configuration, and customization
  * Add glyphs and icons as optional display feature
+ * Further document core_API.php
 
 12.XX.2000	-	1.0.0
 
  * Added summary by date
  * Fixed bug with Bugnote Add button showing up i the wrong places
+ * Added priority on the summary page
 
 12.06.2000	-	0.10.2
 

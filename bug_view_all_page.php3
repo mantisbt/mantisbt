@@ -17,7 +17,11 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### check whether the user wanted to hide the results
 	$f_hide_resolved = $g_hide_resolved_val;
+
+	### basically we toggle between ASC and DESC if the user clicks the
+	### same sort order
 	if ( isset( $f_dir ) ) {
 		if ( $f_dir=="ASC" ) {
 			$f_dir = "DESC";
@@ -90,7 +94,7 @@
 		</td>
 	</tr>
 	<?
-		### $g_view_limit_cookie
+		### build our query string based on our viewing criteria
 		$query = "SELECT * FROM $g_mantis_bug_table";
 		if ( $g_hide_resolved_val=="on"  ) {
 			$query = $query." WHERE status<>'resolved'";
@@ -103,11 +107,12 @@
 			$query = $query." LIMIT $g_view_limit_val";
 		}
 
-
+		### perform query
 	    $result = db_mysql_query( $query );
 		$row_count = mysql_num_rows( $result );
 
 		for($i=0; $i < $row_count; $i++) {
+			### prefix bug data with v_
 			$row = mysql_fetch_array($result);
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
@@ -122,19 +127,17 @@
 				$status_color=$g_primary_color_dark;
 			}
 
-			if ( $v_status=="new" ) {
-				$status_color=$g_new_color;
-			}
-			if ( $v_status=="acknowledged" ) {
-				$status_color=$g_acknowledged_color;
-			}
-			if ( $v_status=="confirmed" ) {
-				$status_color=$g_confirmed_color;
-			}
-			if ( $v_status=="assigned" ) {
-				$status_color=$g_assigned_color;
+			### choose color based on status only if not resolved
+			### The code creates the appropriate variable name
+			### then references that color variable
+			### You could replace this with a bunch of if... then... else
+			#### statments
+			if ( $v_status!="resolved" ) {
+				$t = "g_".$v_status."_color";
+				$status_color = $$t;
 			}
 
+			### grab the bugnote count
 			$query2 = "SELECT COUNT(id)
 						FROM $g_mantis_bugnote_table
 						WHERE bug_id ='$v_id'";
