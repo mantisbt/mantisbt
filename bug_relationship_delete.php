@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.1 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: bug_relationship_delete.php,v 1.2 2004-08-01 22:31:48 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,13 +65,13 @@
 	# Add log line to the history of both bugs
 	# Send email notification to the users addressed by both the bugs
 	history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, '', $t_dest_bug_id );
-	email_relationship_added( $f_bug_id );
+	email_relationship_deleted( $f_bug_id );
 
 	# Add log line to the history of both bugs
 	# Send email notification to the users addressed by both the bugs
 	if ( bug_exists( $t_dest_bug_id )) {
 		history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, '', $f_bug_id );
-		email_relationship_added( $t_dest_bug_id );
+		email_relationship_deleted( $t_dest_bug_id );
 	}
 
 	print_header_redirect_view( $f_bug_id );
