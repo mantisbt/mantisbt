@@ -207,24 +207,12 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td>
 		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
-	<td>
-		<?php print_email_link( $u_email, $u_email ) ?>
-	</td>
-	<td align="center">
-		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
-	</td>
-	<td align="center">
-		<?php echo trans_bool( $u_enabled ) ?>
-	</td>
-	<td align="center">
-		<?php echo trans_bool( $u_protected ) ?>
-	</td>
-	<td align="center">
-		<?php echo $u_date_created ?>
-	</td>
-	<td align="center">
-		<?php echo $u_last_visit ?>
-	</td>
+	<td><?php print_email_link( $u_email, $u_email ) ?></td>
+	<td><?php echo get_enum_element( 'access_levels', $u_access_level ) ?></td>
+	<td><?php echo trans_bool( $u_enabled ) ?></td>
+	<td><?php echo trans_bool( $u_protected ) ?></td>
+	<td><?php echo $u_date_created ?></td>
+	<td><?php echo $u_last_visit ?></td>
 </tr>
 <?php
 	}  # end for
