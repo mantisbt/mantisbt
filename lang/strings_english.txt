@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.226 $
-	# $Author: thraxisp $
-	# $Date: 2004-12-18 02:02:29 $
+	# $Revision: 1.227 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-12-18 19:32:28 $
 	#
-	# $Id: strings_english.txt,v 1.226 2004-12-18 02:02:29 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.227 2004-12-18 19:32:28 bpfennigschmidt Exp $
 	###########################################################################
 
 # Charset
@@ -259,6 +259,8 @@ $s_prefix_for_deleted_users = 'user';
 $s_administrator = 'administrator';
 $s_myself = "Myself";
 $s_default_access_level = 'Default access level';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';

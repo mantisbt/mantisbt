@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.143 2004-12-18 12:23:57 vboctor Exp $
+	# $Id: html_api.php,v 1.144 2004-12-18 19:32:03 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -694,6 +694,7 @@
  	# --------------------
 	# Print the legend for the status percentage
 	function html_status_percentage_legend() {
+
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -711,35 +712,37 @@
 			$t_specific_where = "WHERE project_id='$t_project_id'";
 		}
 
-		# Can't we use a more efficient query that is based on DISTINCT statuses + COUNT?
-		$query = "SELECT status
+		$query = "SELECT status, COUNT(*) AS number
 				FROM $t_mantis_bug_table
-				$t_specific_where";
+				$t_specific_where
+				GROUP BY status";
 		$result = db_query( $query );
-
-		$t_bug_count = db_num_rows( $result );
+		
+		$t_bug_count = 0;
 		$t_status_count_array = array();
 
 		while ( $row = db_fetch_array( $result ) ) {
-			$t_current_status = $row['status'];
-
-			if ( isset( $t_status_count_array[$t_current_status] ) ) {
-				$t_status_count_array[$t_current_status]++;
-			} else {
-				$t_status_count_array[$t_current_status] = 1;
-			}
+			
+			$t_status_count_array[ $row['status'] ] = $row['number']; 
+			$t_bug_count += $row['number'];
 		}
-
-		echo '<table class="width100" cellspacing="0">';
-		echo '<tr>';
-
+		
 		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
 		$enum_count	= count( $t_arr );
+		
+		echo '<br />';
+		echo '<table class="width100" cellspacing="1">';
+		echo '<tr colspan="'.$enum_count.'">';
+		echo '<td><strong>'.lang_get( 'issue_status_percentage' ).'</strong></td>';
+		echo '</tr>';
+		echo '<tr>';
+
 		for ( $i=0; $i < $enum_count; $i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
 			$t_color = get_status_color( $t_s[0] );
 			$t_status = $t_s[0];
 
+		
 			if ( !isset( $t_status_count_array[ $t_status ] ) ) {
 				$t_status_count_array[ $t_status ] = 0;
 			}
@@ -747,7 +750,7 @@
 			$width = round( ( $t_status_count_array[ $t_status ] / $t_bug_count ) * 100 );
 
 			if ($width > 0) {
-				PRINT "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
+				echo "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
 			}
 		}
 
