@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.153 2005-03-02 00:14:59 jlatour Exp $
+	# $Id: html_api.php,v 1.154 2005-03-18 03:40:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -1006,7 +1006,8 @@
 			html_button( 'bug_change_status_page.php',
 						 lang_get( 'reopen_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ,
-						 				'new_status' => $t_reopen_status ) );
+						 				'new_status' => $t_reopen_status,
+						 				'reopen_flag' => ON ) );
 		}
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.18 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: bug_change_status_page.php,v 1.19 2005-03-18 03:40:19 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,11 +22,14 @@
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_new_status = gpc_get_int( 'new_status' );
-
+	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
+	
 	if ( ! ( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
-								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
+								( ON == config_get( 'allow_reporter_close' ) ) ) ) ||
+				( ( ON == $f_reopen_flag ) && ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $f_bug_id ) ) )
+			) ) {
 		access_denied();
 	}
 
@@ -42,7 +45,9 @@
 		}
 
 		if ( $f_handler_id != NO_USER ) {
-			access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
+            if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+				trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			}
 
 			if ( $t_bug_sponsored ) {
 				if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
@@ -222,8 +227,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 <?php } ?>
 
 <?php
-	if ( ( bug_get_field( $f_bug_id, 'status' ) == $t_resolved )
-			&& ( $f_new_status == config_get( 'bug_reopen_status' ) ) ) {
+	if ( ON == $f_reopen_flag ) {
 		# bug was re-opened
 		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
 	}
