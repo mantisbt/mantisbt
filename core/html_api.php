@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.49 2003-02-16 13:37:00 jlatour Exp $
+	# $Id: html_api.php,v 1.50 2003-02-17 11:09:26 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -213,7 +213,7 @@
 		if ( ON == $g_show_version ) {
 			PRINT "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
-		PRINT '<address>Copyright (C) 2000 - 2002</address>';
+		PRINT '<address>Copyright (C) 2000 - 2003</address>';
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 		if ( ON == $g_show_timer ) {
 			$g_timer->print_times();
