@@ -19,12 +19,10 @@
 	if ( isset( $f_dir ) ) {
 		if ( $f_dir=="ASC" ) {
 			$f_dir = "DESC";
-		}
-		else {
+		} else {
 			$f_dir = "ASC";
 		}
-	}
-	else {
+	} else {
 		$f_dir = "ASC";
 	}
 
