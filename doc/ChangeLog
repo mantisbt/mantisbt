@@ -56,6 +56,7 @@ Mantis ChangeLog
 - 0004078: [upgrade] Script to import the value of a custom field to a native field (thraxisp) 
 - 0003483: [upgrade] some admin users permissions not completly upgraded from 0.17.5 to 0.18.0 (thraxisp)
 - 0003877: [email] Upgrade to PHPMailer 1.72 (vboctor)
+- 0003344: [email] New Account Emails are being sent even when email notification is off (thraxisp)
 - 0004147: [email] Receiving emails in foreign languages (thraxisp)
 - 0004107: [email] email w/o recipient sent (thraxisp)
 - 0002220: [installation] usage of consistent naming schema for images (vboctor)

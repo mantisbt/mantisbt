@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.198 2004-08-15 23:13:01 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.199 2004-08-16 00:24:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -176,6 +176,8 @@
 	$g_return_path_email	= 'admin@example.com';
 
 	# allow email notification
+	#  note that if this is disabled, sign-up and password reset messages will
+	#  not be sent.  
 	$g_enable_email_notification	= ON;
 
 	# The following two config options allow you to control who should get email

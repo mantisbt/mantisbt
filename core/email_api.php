@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.94 2004-08-15 23:13:02 thraxisp Exp $
+	# $Id: email_api.php,v 1.95 2004-08-16 00:24:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -527,8 +527,10 @@
 		$t_subject   = string_email( trim( $p_subject ) );
 		$t_message   = string_email_links( trim( $p_message ) );
 
-		# short-circuit if no recipient is defined
-		if ( is_blank( $p_recipient ) ) {
+		# short-circuit if no recipient is defined, or email disabled
+		# note that this may cause signup messages not to be sent
+		
+		if ( is_blank( $p_recipient ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 			return;
 		}
 
