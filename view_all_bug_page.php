@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: vboctor $
-	# $Date: 2004-07-20 15:51:50 $
+	# $Revision: 1.55 $
+	# $Author: prichards $
+	# $Date: 2004-09-25 13:34:25 $
 	#
-	# $Id: view_all_bug_page.php,v 1.54 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.55 2004-09-25 13:34:25 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,6 +33,13 @@
 	if ( $rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
+
+	$t_bugslist = Array();
+	for($i=0; $i < sizeof( $rows ); $i++) {
+		array_push($t_bugslist, $rows[$i]["id"] );
+	}
+
+	gpc_set_cookie( 'bugslist', implode( ',', $t_bugslist ) );
 
 	compress_enable();
 

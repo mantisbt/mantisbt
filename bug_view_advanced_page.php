@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.61 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.62 2004-09-25 13:34:25 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,7 +63,17 @@
 	<?php
 		}
 	?>
-
+		<!-- prev/next links -->
+		<?php if( $t_bugslist = gpc_get_cookie( 'bugslist', false ) ) { ?>
+		<span class="small"> 			
+			<?php 
+				$t_bugslist = explode( ',', $t_bugslist );
+				$t_index = array_search( $f_bug_id, $t_bugslist );
+				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '<<' ); 
+				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '>>' ); 
+			?>
+		</span>
+		<?php } ?>
 	</td>
 
 	<!-- Links -->
