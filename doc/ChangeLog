@@ -30,6 +30,7 @@ Mantis ChangeLog
  * Enh #3841: Add real name ability to mantis.
  * Enh #3867: Give the user control whether to open hyperlink in new or current window.
  * Enh #3870: Support for custom functions which provides hooks for customizing behaviour.
+ * Enh #3918: Allow restricting filter views to advanced or simple.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
  * Fix #3397: Delete notification should be off when deleting a project.
@@ -82,6 +83,7 @@ Mantis ChangeLog
  * New Config: bug_readonly_status_threshold (default RESOLVED).  Status threshold after which the issue is considered readonly.
  * New Config: update_readonly_bug_threshold (default MANAGER).  Status threshold after which the user is allowed to edit readonly issues.
  * New Config: view_changelog_threshold (default VIEWER).  Status threshold after which the user is allowed to view the changelog.  The changelog will include private issues only if user has the approach access level.
+ * New Config: view_filters (default SIMPLE_DEFAULT) - Default filter view.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header

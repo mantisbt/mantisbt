@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.17 2004-05-25 23:43:48 int2str Exp $
+	# $Id: constant_inc.php,v 1.18 2004-06-08 06:47:13 narcissus Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -100,6 +100,8 @@
 	define( 'BOTH',				0 );
 	define( 'SIMPLE_ONLY',		1 );
 	define( 'ADVANCED_ONLY',	2 );
+	define( 'SIMPLE_DEFAULT',	3 );
+	define( 'ADVANCED_DEFAULT',	4 );
 
 	# news values
 	define( 'BY_LIMIT',		0 );

@@ -106,7 +106,19 @@
 		$t_action  = "view_all_set.php";
 	}
 
-	$f_view_type = gpc_get_string( 'view_type', 'simple' );
+	$f_default_view_type = 'simple';
+	if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+		$f_default_view_type = 'advanced';
+	}
+
+	$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
+	if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+		$f_view_type = 'advanced';
+	}
+	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+		$f_view_type = 'simple';
+	}
+
 	$t_select_modifier = '';
 	if ( 'advanced' == $f_view_type ) {
 		$t_select_modifier = 'multiple="multiple" size="10" ';
@@ -133,10 +145,12 @@
 	<?php
 		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&amp;view_type=';
 
-		if ( 'advanced' == $f_view_type ) {
-			print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-		} else {
-			print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+		if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+			if ( 'advanced' == $f_view_type ) {
+				print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+			} else {
+				print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+			}
 		}
 	?>
 	</td>
