@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.45 2003-02-16 14:47:04 jlatour Exp $
+	# $Id: email_api.php,v 1.46 2003-02-17 08:02:32 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -172,7 +172,6 @@
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_bug_table, $g_mantis_user_table, $g_mantis_bugnote_table,
 				$g_mantis_project_table, $g_mantis_user_pref_table,
-				$g_project_cookie_val,
 				$g_mantis_project_user_list_table,
 				$g_use_bcc, $g_use_phpMailer,
 				$g_mantis_bug_monitor_table;
@@ -259,7 +258,7 @@
 			}
 
 			# see if users belong
-			$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
+			$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
 			if ( PUBLIC == $t_project_view_state ) {
 				$query = "SELECT l.access_level
 						FROM	$g_mantis_project_user_list_table l,
