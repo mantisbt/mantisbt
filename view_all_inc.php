@@ -234,7 +234,7 @@
 		<?php
 			print_bug_link( $v_id );
 			# type project name if viewing 'all projects'
-			if ( "0000000" == $g_project_cookie_val ) {
+			if (( ON == $g_show_bug_project_links )&&( "0000000" == $g_project_cookie_val )) {
 				echo "<br />[";
 				print_view_bug_sort_link( $link_page, "$project_name", "project_id", $f_sort, $f_dir );
 				echo "]";
