@@ -25,6 +25,7 @@ Mantis
  * Modified all string files to use single quotes instead of double quotes.
  * Modified all php files to use single quotes where double quotes were unnecessary.
  * Modified core_html_API.php to print a META-tag defining the charset.
+ * Modified core_email_API.php to send a content-type header in emails.
 
 2002.05.19  -  0.17.3
 
