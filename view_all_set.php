@@ -131,7 +131,7 @@
 	}
 
 	# set cookie values
-	setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+	setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
 
 	# redirect to print_all or view_all page
 	if ( isset( $f_print ) ) {
