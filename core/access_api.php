@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.2 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: access_api.php,v 1.3 2002-08-31 01:59:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,10 +16,10 @@
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
-		global $MANTIS_ERROR, $s_proceed;
+		global $MANTIS_ERROR;
 		print '<center>';
 		print '<p>' . $MANTIS_ERROR[ERROR_ACCESS_DENIED] . '<p>';
-		print_bracket_link( 'main_page.php', $s_proceed );
+		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
 		print '</center>';
 		exit;
 	}

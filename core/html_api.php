@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.5 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: html_api.php,v 1.6 2002-08-31 01:59:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -70,19 +70,17 @@
 	# --------------------
 	# (3) Prints the content-type
 	function print_content_type() {
-		global $s_charset;
-
-		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . $s_charset . '">';
+		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '">';
 	}
 
 	# --------------------
 	# (4) Prints the <TITLE> tag
 	function print_title( $p_title ) {
 		global 	$g_show_project_in_title,
-				$g_project_cookie_val, $s_all_projects;
+				$g_project_cookie_val;
 
 		if ( 0 == $g_project_cookie_val ) {
-			$t_project_name = $s_all_projects;
+			$t_project_name = lang_get( 'all_projects' );
 		} else {
 			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
 		}
@@ -128,12 +126,10 @@
 	# (9) Prints the title that is visible in the main panel of the browser
 	# We use a temporary variable to create the title then print it.
 	function print_header( $p_title='Mantis' ) {
-		global 	$g_show_project_in_title,
-				$g_project_cookie_val,
-				$s_all_projects;
+		global 	$g_show_project_in_title, $g_project_cookie_val;
 
 		if ( 0 == $g_project_cookie_val ) {
-			$t_project_name = $s_all_projects;
+			$t_project_name = lang_get( 'all_projects' );
 		} else {
 			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
 		}
@@ -233,10 +229,7 @@
 	# it also creates the form where users can switch projects
 	function print_login_info() {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_complete_date_format,
-				$s_switch, $s_logged_in_as, $s_all_projects,
-				$s_access_levels_enum_string,
-				$g_use_javascript;
+				$g_complete_date_format, $g_use_javascript;
 
 		$t_username = current_user_get_field( 'username' );
 		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
@@ -245,7 +238,7 @@
 		PRINT '<table class="hide">';
 		PRINT '<tr>';
 			PRINT '<td class="login-info-left">';
-				PRINT "$s_logged_in_as: <span class=\"login-username\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+				PRINT lang_get( 'logged_in_as' ) . ": <span class=\"login-username\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
 			PRINT '</td>';
 			PRINT '<td class="login-info-middle">';
 				PRINT "<span class=\"login-time\">$t_now</span>";
@@ -258,10 +251,10 @@
 				} else {
 					PRINT '<select name="f_project_id" class="small">';
 				}
-					PRINT "<option value=\"0000000\">$s_all_projects</option>";
+					PRINT '<option value="0000000">' . lang_get( 'all_projects' ) . '</option>';
 					print_project_option_list( $g_project_cookie_val );
 				PRINT '</select>';
-				PRINT "<input type=\"submit\" value=\"$s_switch\" class=\"small\">";
+				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small">';
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -306,42 +299,38 @@
 	# also prints the login info, time, and project select form
 	function print_menu() {
 		global	$g_string_cookie_val, $g_project_cookie_val,
-				$g_show_report, $g_view_summary_threshold,
-				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
-				$s_summary_link, $s_account_link,
-				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
-				$s_jump, $s_logout_link;
+				$g_show_report, $g_view_summary_threshold;
 
 		if ( isset( $g_string_cookie_val ) ) {
 			$t_protected = current_user_get_field( 'protected' );
 			PRINT '<table class="width100" cellspacing="0">';
 			PRINT '<tr>';
 				PRINT '<td class="menu">';
-				PRINT "<a href=\"main_page.php\">$s_main_link</a> | ";
-				PRINT "<a href=\"view_all_bug_page.php\">$s_view_bugs_link</a> | ";
+				PRINT '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
+				PRINT '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
 				if ( access_level_check_greater_or_equal( REPORTER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
 						$t_report_url = get_report_redirect_url( 1 );
-						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+						PRINT '<a href="$t_report_url">' . lang_get( 'report_bug_link' ) . '</a> | ';
 					} else {
-						PRINT "<a href=\"login_select_proj_page.php?f_ref=".get_report_redirect_url( 1 )."\">$s_report_bug_link</a> | ";
+						PRINT '<a href="login_select_proj_page.php?f_ref=' . get_report_redirect_url( 1 ) . '">' . lang_get( 'report_bug_link' ) . '</a> | ';
 					}
 				}
 
 				if ( access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-					PRINT "<a href=\"summary_page.php\">$s_summary_link</a> | ";
+					PRINT '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
 				}
 
 				# only show accounts that are NOT protected
 				if ( OFF == $t_protected ) {
-					PRINT "<a href=\"account_page.php\">$s_account_link</a> | ";
+					PRINT '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
 				}
 
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
-						PRINT "<a href=\"proj_user_menu_page.php\">$s_users_link</a> | ";
+						PRINT '<a href="proj_user_menu_page.php">' . lang_get( 'users_link' ) . '</a> | ';
 					} else {
-						PRINT "<a href=\"login_select_proj_page.php\">$s_users_link</a> | ";
+						PRINT '<a href="login_select_proj_page.php">' . lang_get( 'users_link' ) . '</a> | ';
 					}
 				}
 
@@ -351,24 +340,24 @@
 					} else {
 					  $t_link = 'manage_proj_menu_page.php';
 					}
-					PRINT "<a href=\"$t_link\">$s_manage_link</a> | ";
+					PRINT "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
 				}
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					# Admin can edit news for All Projects (site-wide)
 					if ( ( "0000000" != $g_project_cookie_val ) || ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
-						PRINT "<a href=\"news_menu_page.php\">$s_edit_news_link</a> | ";
+						PRINT '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					} else {
-						PRINT "<a href=\"login_select_proj_page.php\">$s_edit_news_link</a> | ";
+						PRINT '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					}
 				}
 
-				PRINT "<a href=\"proj_doc_page.php\">$s_docs_link</a> | ";
-				PRINT "<a href=\"logout_page.php\">$s_logout_link</a>";
+				PRINT '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
+				PRINT '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
 				PRINT '</td>';
 				PRINT '<td class="right" style="white-space: nowrap;">';
 					PRINT '<form method="post" action="jump_to_bug.php">';
 					PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\">&nbsp;";
-					PRINT "<input type=\"submit\" value=\"$s_jump\" class=\"small\">&nbsp;";
+					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small">&nbsp;';
 					PRINT '</form>';
 				PRINT '</td>';
 			PRINT '</tr>';
@@ -379,15 +368,15 @@
 	### --------------------
 	# prints the links to the graphic pages, in summary_page.php
 	function print_menu_graph() {
-		global $s_synthesis_link, $s_status_link,$s_priority_link,$s_severity_link,$s_category_link,$s_resolution_link, $g_use_jpgraph  ;
+		global $g_use_jpgraph;
 
 		if ( $g_use_jpgraph != 0 ) {
-			PRINT '<a href="summary_page.php"><img src="images/synthese.gif" border="0" align="center" />$s_synthesis_link</a> | ';
-			PRINT '<a href="summary_graph_imp_status.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_status_link</a> | ';
-			PRINT '<a href="summary_graph_imp_priority.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_priority_link</a> | ';
-			PRINT '<a href="summary_graph_imp_severity.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_severity_link</a> | ';
-			PRINT '<a href="summary_graph_imp_category.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_category_link</a> | ';
-			PRINT '<a href="summary_graph_imp_resolution.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_resolution_link</a>';
+			PRINT '<a href="summary_page.php"><img src="images/synthese.gif" border="0" align="center" />' . lang_get( 'synthesis_link' ) . '</a> | ';
+			PRINT '<a href="summary_graph_imp_status.php"><img src="images/synthgraph.gif" border="0" align="center" />' . lang_get( 'status_link' ) . '</a> | ';
+			PRINT '<a href="summary_graph_imp_priority.php"><img src="images/synthgraph.gif" border="0" align="center" />' . lang_get( 'priority_link' ) . '</a> | ';
+			PRINT '<a href="summary_graph_imp_severity.php"><img src="images/synthgraph.gif" border="0" align="center" />' . lang_get( 'severity_link' ) . '</a> | ';
+			PRINT '<a href="summary_graph_imp_category.php"><img src="images/synthgraph.gif" border="0" align="center" />' . lang_get( 'category_link' ) . '</a> | ';
+			PRINT '<a href="summary_graph_imp_resolution.php"><img src="images/synthgraph.gif" border="0" align="center" />' . lang_get( 'resolution_link' ) . '</a>';
 		}
 	}
 
@@ -395,11 +384,6 @@
 	# prints the manage menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_menu( $p_page='' ) {
-		global 	$s_manage_users_link, $s_manage_projects_link,
-				$s_create_new_account_link,
-				$s_projects,
-				$s_documentation_link;
-
 		if ( !access_level_check_greater_or_equal ( ADMINISTRATOR ) ) {
 			return;
 		}
@@ -417,20 +401,16 @@
 		}
 
 		PRINT '<p><div align="center">';
-			print_bracket_link( $t_manage_page, $s_manage_users_link );
-			print_bracket_link( $t_manage_project_menu_page, $s_manage_projects_link );
-			print_bracket_link( $t_manage_user_create_page, $s_create_new_account_link );
-			print_bracket_link( $t_documentation_page, $s_documentation_link );
+			print_bracket_link( $t_manage_page, lang_get( 'manage_users_link' ) );
+			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
+			print_bracket_link( $t_manage_user_create_page, lang_get( 'create_new_account_link' ) );
+			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
 	}
 	# --------------------
 	# prints the account menu
 	# if the $p_page matches a url then don't make that a link
 	function print_account_menu( $p_page='' ) {
-		global 	$s_account_link,
-				$s_manage_profiles_link,
-				$s_change_preferences_link;
-
 		$t_account_page 				= 'account_page.php';
 		$t_account_prefs_page 			= 'account_prefs_page.php';
 		$t_account_profile_menu_page 	= 'account_prof_menu_page.php';
@@ -441,18 +421,15 @@
 			case $t_account_profile_menu_page	: $t_account_profile_menu_page 	= ''; break;
 		}
 
-		print_bracket_link( $t_account_page, $s_account_link );
-		print_bracket_link( $t_account_prefs_page, $s_change_preferences_link );
-		print_bracket_link( $t_account_profile_menu_page, $s_manage_profiles_link );
+		print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
+		print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
+		print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
 	}
 	# --------------------
 	# prints the doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_doc_menu( $p_page='' ) {
-		global	$s_user_documentation,
-				$s_project_documentation,
-				$s_add_file,
-				$g_allow_file_upload;
+		global $g_allow_file_upload;
 
 		$t_documentation_html 	= 'doc/documentation.html';
 		$t_proj_doc_page 		= 'proj_doc_page.php';
@@ -464,17 +441,17 @@
 			case $t_proj_doc_add_page	: $t_proj_doc_add_page	= ''; break;
 		}
 
-		print_bracket_link( $t_documentation_html, $s_user_documentation );
-		print_bracket_link( $t_proj_doc_page, $s_project_documentation );
+		print_bracket_link( $t_documentation_html, lang_get( 'user_documentation' ) );
+		print_bracket_link( $t_proj_doc_page, lang_get( 'project_documentation' ) );
 		if ( ( ON == $g_allow_file_upload )&&( access_level_check_greater_or_equal( MANAGER ) ) ) {
-			print_bracket_link( $t_proj_doc_add_page, $s_add_file );
+			print_bracket_link( $t_proj_doc_add_page, lang_get( 'add_file' ) );
 		}
 	}
 	# --------------------
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page='' ) {
-		global	$s_system_info_link, $g_path;
+		global $g_path;
 
 		$g_path = $g_path.'doc/';
 		$t_documentation_page = 'documentation_page.php';
@@ -484,7 +461,7 @@
 		}
 
 		PRINT '<p><div align="center">';
-			print_bracket_link( $t_documentation_page, $s_system_info_link );
+			print_bracket_link( $t_documentation_page, lang_get( 'system_info_link' ) );
 			print_bracket_link( $g_path.'ChangeLog', 'ChangeLog' );
 			print_bracket_link( $g_path.'README', 'README' );
 			print_bracket_link( $g_path.'INSTALL', 'INSTALL' );
@@ -495,13 +472,10 @@
 	# --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page='' ) {
-		global	$s_summary_link,
-				$g_use_jpgraph, $s_summary_jpgraph_link,
-				$s_print_all_bug_page_link,
-				$s_print_reports;
+		global $g_use_jpgraph;
 
 		PRINT '<p><div align="center">';
-		print_bracket_link( 'print_all_bug_page.php', $s_print_all_bug_page_link );
+		print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 
 		if ( $g_use_jpgraph != 0 ) {
 			$t_summary_page 		= 'summary_page.php';
@@ -512,34 +486,32 @@
 				case $t_summary_jpgraph_page: $t_summary_jpgraph_page	= ''; break;
 			}
 
-			print_bracket_link( $t_summary_page, $s_summary_link );
-			print_bracket_link( $t_summary_jpgraph_page, $s_summary_jpgraph_link );
+			print_bracket_link( $t_summary_page, lang_get( 'summary_link' ) );
+			print_bracket_link( $t_summary_jpgraph_page, lang_get( 'summary_jpgraph_link' ) );
 		}
 		PRINT '</div>';
 	}
 	# --------------------
 	# prints the signup link
 	function print_signup_link() {
-		global $g_allow_signup, $s_signup_link;
+		global $g_allow_signup;
 
 		if ( $g_allow_signup != 0 ) {
 			PRINT '<p><div align="center">';
-			print_bracket_link( 'signup_page.php', $s_signup_link );
+			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 			PRINT '</div>';
 		}
 	}
 	# --------------------
 	function print_proceed( $p_result, $p_query, $p_link ) {
-		global $s_operation_successful, $s_proceed;
-
 		PRINT '<p>';
 		PRINT '<div align="center">';
 		if ( $p_result ) {						# SUCCESS
-			PRINT $s_operation_successful.'<p>';
+			PRINT lang_get( 'operation_successful' ) . '<p>';
 		} else {								# FAILURE
 			print_sql_error( $p_query );
 		}
-		print_bracket_link( $p_link, $s_proceed );
+		print_bracket_link( $p_link, lang_get( 'proceed' ) );
 		PRINT '</div>';
 	}
 	# --------------------

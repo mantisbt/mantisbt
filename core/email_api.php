@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.8 2002-08-29 14:26:45 vboctor Exp $
+	# $Id: email_api.php,v 1.9 2002-08-31 01:59:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -236,13 +236,9 @@
 	# --------------------
 	# Send password to user
 	function email_signup( $p_user_id, $p_password ) {
-		global $g_mantis_user_table, $g_path,
-			$s_new_account_subject,
-			$s_new_account_greeting, $s_new_account_url,
-			$s_new_account_username, $s_new_account_password,
-			$s_new_account_message, $s_new_account_do_not_reply;
+		global $g_mantis_user_table, $g_path;
 
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
@@ -252,24 +248,22 @@
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# Build Welcome Message
-		$t_message = $s_new_account_greeting.
-						$s_new_account_url.$g_path."\n".
-						$s_new_account_username.$v_username."\n".
-						$s_new_account_password.$p_password."\n\n".
-						$s_new_account_message.
-						$s_new_account_do_not_reply;
+		$t_message = lang_get( 'new_account_greeting' ).
+						lang_get( 'new_account_url' ) . $g_path . "\n".
+						lang_get( 'new_account_username' ) . $v_username . "\n".
+						lang_get( 'new_account_password' ) . $p_password . "\n\n".
+						lang_get( 'new_account_message' ) .
+						lang_get( 'new_account_do_not_reply' );
 
 		$t_headers = '';
-		email_send( $v_email, $s_new_account_subject, $t_message, $t_headers );
+		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message, $t_headers );
 	}
 	# --------------------
 	# Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
-		global 	$g_mantis_user_table, $g_path,
-				$s_reset_request_msg, $s_account_name_msg,
-				$s_news_password_msg;
+		global 	$g_mantis_user_table, $g_path;
 
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
@@ -279,9 +273,9 @@
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# Build Welcome Message
-		$t_message = $s_reset_request_msg."\n\n".
-					$s_account_name_msg.': '.$v_username."\n".
-					$s_news_password_msg.': '.$p_password."\n\n".
+		$t_message = lang_get( 'reset_request_msg' ) . "\n\n".
+					lang_get( 'account_name_msg' ) . ': '.$v_username."\n".
+					lang_get( 'news_password_msg' ) . ': '.$p_password."\n\n".
 					$g_path."\n\n";
 
 		email_send( $v_email, 'New Password', $t_message );
@@ -289,66 +283,50 @@
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		global 	$s_new_bug_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'new' );
-		email_bug_info( $p_bug_id, $s_new_bug_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'new_bug_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
-		global $s_email_bugnote_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'bugnote' );
-		email_bug_info( $p_bug_id, $s_email_bugnote_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_bugnote_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		global $s_email_resolved_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'resolved' );
-		email_bug_info( $p_bug_id, $s_email_resolved_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_resolved_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		global $s_email_close_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'closed' );
-		email_bug_info( $p_bug_id, $s_email_close_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_close_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is set to FEEDBACK
 	function email_feedback( $p_bug_id ) {
-		global $s_email_feedback_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'feedback' );
-		email_bug_info( $p_bug_id, $s_email_feedback_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_feedback_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
-		global $s_email_reopen_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'reopened' );
-		email_bug_info( $p_bug_id, $s_email_reopen_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_reopen_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		global $s_email_assigned_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'assigned' );
-		email_bug_info( $p_bug_id, $s_email_assigned_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_assigned_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is DELETED
 	function email_bug_deleted( $p_bug_id ) {
-		global $s_email_bug_deleted_msg;
-
 		$t_bcc = build_bcc_list( $p_bug_id, 'deleted' );
-		email_bug_info( $p_bug_id, $s_email_bug_deleted_msg, $t_bcc );
+		email_bug_info( $p_bug_id, lang_get( 'email_bug_deleted_msg' ), $t_bcc );
 	}
 	# --------------------
 	# Build the bug info part of the message
@@ -357,17 +335,9 @@
 				$g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
 				$g_bugnote_order, $g_path,
-				$s_email_reporter, $s_email_handler,
-				$s_email_project, $s_email_bug, $s_email_category,
-				$s_email_reproducibility, $s_email_severity,
-				$s_email_priority, $s_email_status, $s_email_resolution,
-				$s_email_duplicate, $s_email_date_submitted,
-				$s_email_last_modified, $s_email_summary,
-				$s_email_description,
-				$g_email_separator1, $s_email_bug_deleted_msg,
-				$g_email_padding_length;
+				$g_email_separator1, $g_email_padding_length;
 
-		$c_bug_id = (integer)$p_bug_id;
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 				UNIX_TIMESTAMP(last_updated) as last_updated
@@ -405,7 +375,7 @@
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
-		if ( $p_message != $s_email_bug_deleted_msg) {
+		if ( $p_message != lang_get( 'email_bug_deleted_msg' ) ) {
 			$t_message .= $g_path;
 			if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == current_user_get_pref( 'advanced_view' ) ) ) {
 				$t_message .= 'view_bug_advanced_page.php';
@@ -415,29 +385,29 @@
 			$t_message .= '?f_id='.$p_bug_id."\n";
 			$t_message .= $g_email_separator1."\n";
 		}
-		$t_message .= str_pad( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pad( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
+		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pad( lang_get( 'email_handler' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pad( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pad( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pad( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pad( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pad( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pad( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
+		$t_message .= str_pad( lang_get( 'email_project' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pad( lang_get( 'email_bug' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pad( lang_get( 'email_category')  . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pad( lang_get( 'email_reproducibility' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pad( lang_get( 'email_severity' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pad( lang_get( 'email_priority' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pad( lang_get( 'email_status' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( 'resolution', $v_resolution );
-			$t_message .= str_pad( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
+			$t_message .= str_pad( lang_get( 'email_resolution' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pad( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
+				$t_message .= str_pad( lang_get( 'email_duplicate' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pad( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
+		$t_message .= str_pad( lang_get( 'email_date_submitted' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pad( lang_get( 'email_last_modified' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
-		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
+		$t_message .= str_pad( lang_get( 'email_summary' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
+		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v2_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
 		return $t_message;
@@ -537,7 +507,7 @@
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='' ) {
 		global $g_from_email, $g_enable_email_notification,
-				$g_return_path_email, $g_use_x_priority, $s_charset,
+				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
 
 		# short-circuit if no emails should be sent
@@ -622,7 +592,7 @@
 				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
-			$t_headers .= 'Content-Type: text/plain; charset=' . $s_charset . "\n";
+			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";
 
 			$t_headers .= $p_header;
 

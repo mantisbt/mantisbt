@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: graph_api.php,v 1.3 2002-08-31 01:59:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -339,7 +339,7 @@
 
 	# Pie chart which dispays by categories
 	function graph_category_summary_pct( $p_title=''){
-		global $category_name, $category_bug_count, $s_by_category;
+		global $category_name, $category_bug_count;
 
 		$graph = new PieGraph(600,450);
 		$graph->img->SetMargin(40,40,40,100);
@@ -465,7 +465,7 @@
 	}
 
 	function graph_developer_summary( ){
-		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count, $s_by_developer;
+		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -473,7 +473,7 @@
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set($s_by_developer);
+		$graph->title->Set( lang_get( 'by_developer' ) );
 		$graph->xaxis->SetTickLabels($developer_name);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
@@ -534,7 +534,7 @@
 	}
 
 	function graph_reporter_summary( ){
-		global $reporter_name, $reporter_count, $s_email_reporter, $s_by_reporter;
+		global $reporter_name, $reporter_count;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -542,7 +542,7 @@
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set($s_by_reporter);
+		$graph->title->Set( lang_get( 'by_reporter' ) );
 		$graph->xaxis->SetTickLabels($reporter_name);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
@@ -585,7 +585,7 @@
 	}
 
 	function graph_category_summary(){
-		global $category_name, $category_bug_count, $s_by_category;
+		global $category_name, $category_bug_count;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -593,7 +593,7 @@
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set($s_by_category);
+		$graph->title->Set( lang_get( 'by_category' ) );
 		$graph->xaxis->SetTickLabels($category_name);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
@@ -691,7 +691,7 @@
 	}
 
 	function graph_cumulative_bydate(){
-		global $metrics, $s_by_date;
+		global $metrics;
 
 		for ($i=0;$i<count($metrics);$i++) {
 			$plot_date[] = strtotime($metrics[$i][0]);
@@ -706,7 +706,7 @@
 		$graph->SetScale('linlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set("cumulative $s_by_date");
+		$graph->title->Set( 'cumulative ' . lang_get( 'by_date' ) );
 		$graph->legend->Pos(0.1,0.6,'right','top');
 		$graph->legend->SetShadow(false);
 		$graph->legend->SetFillColor('white');
