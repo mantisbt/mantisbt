@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.3 2002-09-16 10:08:14 jfitzell Exp $
+	# $Id: php_api.php,v 1.4 2002-09-17 20:12:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,7 +16,7 @@
 	###########################################################################
 
 	# Constant for our minimum required PHP version
-	define( 'PHP_MIN_VERSION', '4.0.3' );
+	define( 'PHP_MIN_VERSION', '4.0.4' );
 
 	# --------------------
 	# Returns true if the current PHP version is higher than the one
