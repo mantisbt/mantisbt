@@ -3,6 +3,7 @@ Mantis
 01.01.2001  -   0.17.0
 
  * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
+ * Fixed bugnote editing to be unavailable when bug is resolved or closed.
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Added view by page feature.

@@ -9,7 +9,7 @@
 	### $f_id must be set and be set to the bug id
 ?>
 <?
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+#	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id currently logged in
 	$t_user_id = get_current_user_field( "id " );
@@ -72,12 +72,15 @@
 			</td>
 			<td class="small-caption">
 			<?
-				### check access level
-				### only admins and the bugnote creator can delete this bug
-				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-					( $v3_reporter_id==$t_user_id )) {
-					print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link );
-					print_bracket_link( $g_bugnote_delete."?f_bug_id=".$v3_id, $s_delete_link );
+				# check access level
+				# only admins and the bugnote creator can delete this bugnote
+				# bug must be open to be editable
+				if ( get_bug_field( "status", $f_id ) < RESOLVED ) {
+					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
+						( $v3_reporter_id==$t_user_id )) {
+						print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link );
+						print_bracket_link( $g_bugnote_delete."?f_bugnote_id=".$v3_id."&f_id=".$f_id, $s_delete_link );
+					}
 				}
 			?>
 			</td>
