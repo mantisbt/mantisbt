@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.28 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: bug_api.php,v 1.29 2003-01-12 05:32:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -65,7 +65,7 @@
 	#  If the second parameter is true (default), trigger an error
 	#  if the bug can't be found.  If the second parameter is
 	#  false, return false if the bug can't be found.
-	function bug_cache_row( $p_bug_id, $p_trigger_errors=true) {
+	function bug_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug;
 
 		$c_bug_id = db_prepare_int( $p_bug_id );
@@ -117,7 +117,7 @@
 	#  If the second parameter is true (default), trigger an error
 	#  if the bug text can't be found.  If the second parameter is
 	#  false, return false if the bug text can't be found.
-	function bug_text_cache_row( $p_bug_id, $p_trigger_errors=true) {
+	function bug_text_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug_text;
 
 		$c_bug_id = db_prepare_int( $p_bug_id );
@@ -474,7 +474,7 @@
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary'
 				WHERE id='$c_bug_id'";
-		db_query($query);
+		db_query( $query );
 
 		bug_clear_cache( $p_bug_id );
 
@@ -532,7 +532,7 @@
 						"steps_to_reproduce='$c_bug_data->steps_to_reproduce', ".
 						"additional_information='$c_bug_data->additional_information' ".
 						"WHERE id='$t_bug_text_id'";
-			db_query($query);
+			db_query( $query );
 
 			bug_text_clear_cache( $p_bug_id );
 
@@ -734,7 +734,7 @@
 			return true;
 		}
 
-		$t_bug_table = config_get ( 'mantis_bug_table' );
+		$t_bug_table = config_get( 'mantis_bug_table' );
 
 		# Update fields
 		$query = "UPDATE $t_bug_table
@@ -760,8 +760,8 @@
 		$c_user_id	= db_prepare_int( $p_user_id );
 
 		# extract current information into history variables
-		$h_status		= bug_get_field ( $p_bug_id, 'status' );
-		$h_handler_id	= bug_get_field ( $p_bug_id, 'handler_id' );
+		$h_status		= bug_get_field( $p_bug_id, 'status' );
+		$h_handler_id	= bug_get_field( $p_bug_id, 'handler_id' );
 
 		if ( ON == config_get( 'auto_set_status_to_assigned' ) ) {
 			$t_ass_val = ASSIGNED;
@@ -898,7 +898,7 @@
 				"( user_id, bug_id ) ".
 				"VALUES ".
 				"( '$c_user_id', '$c_bug_id' )";
-		db_query($query);
+		db_query( $query );
 
 		# log new monitoring action
 		history_log_event_special( $p_bug_id, BUG_MONITOR, $c_user_id );	
@@ -918,7 +918,7 @@
 		$query ="DELETE ".
 				"FROM $t_bug_monitor_table ".
 				"WHERE user_id = '$c_user_id' AND bug_id = '$c_bug_id'";
-		db_query($query);
+		db_query( $query );
 
 		# log new un-monitor action
 		history_log_event_special( $p_bug_id, BUG_UNMONITOR, $p_user_id );
