@@ -217,11 +217,11 @@
 				PRINT "<span class=\"login-time\">$t_now</span>";
 			PRINT "</td>";
 			PRINT "<td class=\"login-info-right\">";
-				PRINT "<select name=f_project_id>";
+				PRINT "<select name=\"f_project_id\" class=\"small\">";
 					PRINT "<option value=\"0000000\">$s_all_projects</option>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT "</select>";
-				PRINT "<input type=\"submit\" value=\"$s_switch\">";
+				PRINT "<input type=\"submit\" value=\"$s_switch\" class=\"small\">";
 			PRINT "</td>";
 		PRINT "</tr>";
 		PRINT "</form>";
@@ -280,6 +280,8 @@
 				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
 				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
 				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
+				$s_jump, $g_jump_to_bug,
+
 				$s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
@@ -328,7 +330,13 @@
 
 				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
 				PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
-			PRINT "</td>";
+				PRINT "</td>";
+				PRINT "<form method=\"post\" action=\"$g_jump_to_bug\">";
+				PRINT "<td nowrap class=\"right\">";
+				PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\">&nbsp;";
+				PRINT "<input type=\"submit\" value=\"$s_jump\" class=\"small\">&nbsp;";
+				PRINT "</td>";
+				PRINT "</form>";
 			PRINT "</tr>";
 			PRINT "</table>";
 		}

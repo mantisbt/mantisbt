@@ -53,6 +53,7 @@ Mantis
  * Added user to project multi-select listbox in manage section.
  * Added list of projects  a user is assigned to to the account page.
  * Added print bug view.
+ * Added jump to bug form.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

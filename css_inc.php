@@ -22,6 +22,9 @@ td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_nor
 a					{}
 a.small-link		{ font-size: <?php echo $g_font_small ?>; }
 
+input.small			{ font-size: <?php echo $g_font_small ?>; }
+select.small			{ font-size: <?php echo $g_font_small ?>; }
+
 span.print			{ font-size: <?php echo $g_font_small ?>; }
 
 span.required 		{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_required_color ?>; }
@@ -67,7 +70,7 @@ span.login-username	{ font-style: italic; }
 span.login-time		{ font-size: <?php echo $g_font_small ?>; font-style: italic; }
 
 /* Menu */
-td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g_font_color ?>; text-align: center; }
+td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g_font_color ?>; text-align: center; width: 100%; padding: 1px; }
 
 /* Quick Summary */
 td.quick-summary-left	{ width: 50%; text-align: left; }
