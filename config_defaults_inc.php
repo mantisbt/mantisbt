@@ -42,7 +42,18 @@
 	# path to your installation as seen from the web browser
 	# requires trailing /
 	if ( isset( $_SERVER['SERVER_NAME'] ) && isset ( $_SERVER['PHP_SELF'] ) ) {
-		$g_path	= 'http://' . $_SERVER['SERVER_NAME'] . dirname( $_SERVER['PHP_SELF'] ) . '/';
+		$t_host = $_SERVER['SERVER_NAME'];
+		$t_port = ':' . $_SERVER['SERVER_PORT'];
+		if ( ':80' == $t_port ) {
+			$t_port = '';
+		}
+
+		$t_path = dirname( $_SERVER['PHP_SELF'] );
+		if ( '/' == $t_path || '\\' == $t_path ) {
+			$t_path = '';
+		}
+
+		$g_path	= 'http://' . $t_host . $t_port . $t_path . '/';
 	} else {
 		$g_path	= 'http://yourhostnamehere/mantis/';
 	}
