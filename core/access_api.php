@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.16 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: access_api.php,v 1.17 2003-02-18 01:03:35 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,9 +26,8 @@
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
-		global $MANTIS_ERROR;
 		print '<center>';
-		print '<br />'.$MANTIS_ERROR[ERROR_ACCESS_DENIED].'<br />';
+		print '<br />'.error_string(ERROR_ACCESS_DENIED).'<br />';
 		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
 		print '</center>';
 		exit;
