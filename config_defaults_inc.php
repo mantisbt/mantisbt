@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.143 2004-02-28 00:10:37 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.144 2004-02-29 09:07:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -23,7 +23,7 @@
 	# In general a value of OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# For more details see http://www.mantisbt.org/manual/
+	# For more details see http://manual.mantisbt.org/
 
 	################################
 	# Mantis Database Settings
@@ -91,7 +91,7 @@
 	$g_core_path			= $g_absolute_path.'core' . DIRECTORY_SEPARATOR;
 
 	# Used to link to manual for User Documentation.
-	$g_manual_url = 'http://www.mantisbt.org/manual/';
+	$g_manual_url = 'http://manual.mantisbt.org/';
 
 	#############################
 	# Web Server
@@ -302,8 +302,8 @@
 	$g_show_view			= BOTH;
 
 	# --- top menu items --------------
-	# Specifies whether to show the Doc menu item or not.
-	$g_show_documentation	= ON;
+	# Specifies whether to enable support for project documents or not.
+	$g_enable_project_documentation	= ON;
 
 	# --- footer menu -----------------
 	# Display another instance of the menu at the bottom.  The top menu will still remain.

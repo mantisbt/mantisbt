@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.38 2004-02-25 14:30:50 vboctor Exp $
+	# $Id: proj_doc_page.php,v 1.39 2004-02-29 09:07:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,11 @@
 ?>
 <?php
 	access_ensure_project_level( config_get( 'view_proj_doc_threshold' ) );
+
+	# Check if project documentation feature is enabled.
+	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+		access_denied();
+	}
 
 	$t_project_id = helper_get_current_project();
 

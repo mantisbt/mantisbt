@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.31 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: proj_doc_edit_page.php,v 1.32 2004-02-29 09:07:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,6 +17,11 @@
 	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php
+	# Check if project documentation feature is enabled.
+	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+		access_denied();
+	}
+
 	# @@@ Need to obtain the project_id from the file once we have an API for that	
 	access_ensure_project_level( MANAGER );
 

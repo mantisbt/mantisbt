@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.26 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: proj_doc_add_page.php,v 1.27 2004-02-29 09:07:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,11 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
+	# Check if project documentation feature is enabled.
+	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+		access_denied();
+	}
+
 	if ( ! file_allow_project_upload() ) {
 		access_denied();
 	}

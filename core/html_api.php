@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.87 2004-02-28 00:10:38 vboctor Exp $
+	# $Id: html_api.php,v 1.88 2004-02-29 09:07:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -373,8 +373,8 @@
 					$t_menu_options[] = '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a>';
 				}
 
-				# Documentation Page
-				if( ON == config_get( 'show_documentation' ) ) {
+				# Project Documentation Page
+				if( ON == config_get( 'enable_project_documentation' ) ) {
 					$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
 				}
 
