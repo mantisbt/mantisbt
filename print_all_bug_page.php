@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.71 2004-01-11 09:09:38 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.72 2004-01-25 10:34:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -114,7 +114,7 @@
 		$project_count = db_num_rows( $result2 );
 
 		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=1';
+			$t_where_clause = ' WHERE 1=0';
 		} else {
 			$t_where_clause = ' WHERE (';
 			for ( $i=0;$i<$project_count;$i++ ) {
