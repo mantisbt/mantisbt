@@ -14,16 +14,7 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<?
+
 	if ( !isset( $f_sort ) ) {
 		$f_sort = "username";
 	}
@@ -50,6 +41,14 @@
     $result = db_query($query);
 	$user_count = mysql_num_rows($result);
 ?>
+<? print_html_top() ?>
+<? print_head_top() ?>
+<? print_title( $g_window_title ) ?>
+<? print_css( $g_css_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
+<? print_head_bottom() ?>
+<? print_body_top() ?>
+<? print_header( $g_page_title ) ?>
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>

@@ -6,6 +6,9 @@
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
+<?
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
@@ -14,16 +17,6 @@
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
-<?
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	### Get user information and prefix with u_
-	$query = "SELECT id
-		FROM $g_mantis_user_table
-		WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_query($query);
-    $u_id = mysql_result( $result, 0 );
-?>
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>
@@ -91,7 +84,7 @@
 		</td>
 		<td>
 			<select name=f_profile_id>
-				<? print_profile_option_list( $u_id ) ?>
+				<? print_profile_option_list( get_current_user_field( "id " ) ) ?>
 			</select>
 		</td>
 	</tr>

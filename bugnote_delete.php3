@@ -64,11 +64,14 @@
 ?>
 
 <p>
-<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
-<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
-<? } else { ?>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
-<? } ?>
+<?
+	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
+		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
+	}
+	else {
+		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
+	}
+?>
 </div>
 
 <? print_footer(__FILE__) ?>

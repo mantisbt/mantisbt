@@ -6,25 +6,6 @@
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
-<?
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-/*	### get date submitted (weird bug in mysql)
-	$query = "SELECT date_submitted
-			FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-   	$result = mysql_query( $query );
-   	$t_date_submitted = mysql_result( $result, 0 );
-
-	### Update fields
-    $query = "UPDATE $g_mantis_bug_table
-    		SET status='feedback',
-				resolution='reopened',
-				date_submitted='$t_date_submitted',
-				last_updated=NOW()
-    		WHERE id='$f_id'";
-   	$result = mysql_query($query);*/
-?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>

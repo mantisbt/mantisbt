@@ -6,14 +6,6 @@
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -102,6 +94,14 @@
 		$query = $query." LIMIT $f_offset, $f_limit_view";
 	}
 ?>
+<? print_html_top() ?>
+<? print_head_top() ?>
+<? print_title( $g_window_title ) ?>
+<? print_css( $g_css_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
+<? print_head_bottom() ?>
+<? print_body_top() ?>
+<? print_header( $g_page_title ) ?>
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>
