@@ -49,6 +49,7 @@ Mantis
  * Modified set_project.php to avoid double refresh when using IIS.
  * Modified project user module behavior.
  * Modified delete file attachments to chmod( 0775 ) so write permissions are granted.
+ * Modified get_view_redirect_url() call on bug_assign.php to handle redirects better.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.
