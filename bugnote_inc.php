@@ -124,7 +124,7 @@
 	</tr>
 	<tr>
 		<td align="center" bgcolor="<? echo $g_primary_color_dark ?>">
-			<textarea name="f_bugnote_text" cols="80" rows="10"></textarea>
+			<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 		</td>
 	</tr>
 	<tr>

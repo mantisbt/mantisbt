@@ -233,7 +233,9 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 1;
+	$g_allow_file_upload    = 0;
+
+	# Upload destination: specify actual location in project settings
 	# 1 = "disk"
 	# 2 = "database" (currently only disk is supported)
 	$g_store_file_to        = 1;

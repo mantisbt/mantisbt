@@ -32,8 +32,24 @@
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
 <?
+	# redirect to 'same page' when switching projects.
+	# view_all_* pages, and summary
 	if ( $valid_project==1 ) {
-		print_meta_redirect( $g_main_page, $g_wait_time );
+		if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
+		} else if (eregi($g_view_all_assigned_bug_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_view_all_assigned_bug_page, $g_wait_time );
+		} else if (eregi($g_view_all_reported_bug_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_view_all_reported_bug_page, $g_wait_time );
+		} else if (eregi($g_view_all_unassign_bug_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_view_all_unassign_bug_page, $g_wait_time );
+		} else if (eregi($g_summary_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_summary_page, $g_wait_time );
+		} else if (eregi($g_summary_page,$HTTP_REFERER)){
+			print_meta_redirect( $g_summary_page, $g_wait_time );
+		} else {
+			print_meta_redirect( $g_main_page, $g_wait_time );
+		}
 	}
 ?>
 <? include( $g_meta_include_file ) ?>

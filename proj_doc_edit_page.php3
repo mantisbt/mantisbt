@@ -60,7 +60,7 @@
 			<b><? echo $s_description ?></b>
 		</td>
 		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<textarea name="f_description" cols="60" rows="7"><? echo $v_description ?></textarea>
+			<textarea name="f_description" cols="60" rows="7" wrap="virtual"><? echo $v_description ?></textarea>
 		</td>
 	</tr>
 	<tr>

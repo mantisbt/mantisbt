@@ -105,7 +105,7 @@
 			<? echo $s_description ?>
 		</td>
 		<td>
-			<textarea name="f_description" cols="60" rows="5"></textarea>
+			<textarea name="f_description" cols="60" rows="5" wrap="virtual"></textarea>
 		</td>
 	</tr>
 	<tr>

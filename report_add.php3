@@ -129,7 +129,8 @@
 		if ( !isset( $f_file ) ) {
 			$f_file = "none";
 		}
-		if ( $f_file != "none" ) {
+		$f_file = trim( $f_file );
+		if (( $f_file != "none" )&&( !empty( $f_file) )) {
 			$t_bug_id = str_pd( $t_bug_id, "0", 7 );
 
 			$query = "SELECT file_path

@@ -52,8 +52,8 @@
 
         ### Delete the corresponding files
        $query = "DELETE
-                        FROM $g_mantis_bug_file_table
-                        WHERE bug_id='$f_id'";
+				FROM $g_mantis_bug_file_table
+				WHERE bug_id='$f_id'";
        $result = db_query($query);
 
 ?>

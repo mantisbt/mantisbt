@@ -48,7 +48,7 @@
 	</tr>
 	<tr align="center">
 		<td bgcolor="<? echo $g_table_title_color ?>">
-			<textarea name="f_text" rows="30" cols="90"><? echo $buffer ?></textarea>
+			<textarea name="f_text" rows="30" cols="90" wrap="virtual"><? echo $buffer ?></textarea>
 		</td>
 	</tr>
 	<tr align="center">

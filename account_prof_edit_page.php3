@@ -98,7 +98,7 @@
 			<? echo $s_additional_description ?>
 		</td>
 		<td>
-			<textarea name="f_description" cols="60" rows="8"><? echo $v_description ?></textarea>
+			<textarea name="f_description" cols="60" rows="8" wrap="virtual"><? echo $v_description ?></textarea>
 		</td>
 	</tr>
 	<tr>

@@ -213,7 +213,7 @@
 			<b><? echo $s_description ?></b>
 		</td>
 		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
-			<textarea cols="60" rows="5" name="f_description"><? echo $v2_description ?></textarea>
+			<textarea cols="60" rows="5" name="f_description" wrap="virtual"><? echo $v2_description ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -221,7 +221,7 @@
 			<b><? echo $s_additional_information ?></b>
 		</td>
 		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
-			<textarea cols="60" rows="5" name="f_additional_information"><? echo $v2_additional_information ?></textarea>
+			<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><? echo $v2_additional_information ?></textarea>
 		</td>
 	</tr>
 	<tr>

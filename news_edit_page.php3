@@ -68,7 +68,7 @@
 			<? echo $s_body ?>
 		</td>
 		<td>
-			<textarea name="f_body" cols="60" rows="10"><? echo $v_body ?></textarea>
+			<textarea name="f_body" cols="60" rows="10" wrap="virtual"><? echo $v_body ?></textarea>
 		</td>
 	</tr>
 	<tr bgcolor="<? echo $g_primary_color_dark ?>">

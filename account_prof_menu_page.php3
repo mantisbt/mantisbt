@@ -73,7 +73,7 @@
 			<? echo $s_additional_description ?>
 		</td>
 		<td>
-			<textarea name="f_description" cols="60" rows="8"></textarea>
+			<textarea name="f_description" cols="60" rows="8" wrap="virtual"></textarea>
 		</td>
 	</tr>
 	<tr>

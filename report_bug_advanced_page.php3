@@ -238,7 +238,7 @@
 			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
-			<textarea name="f_description" cols="60" rows="5"><? echo $f_description ?></textarea>
+			<textarea name="f_description" cols="60" rows="5" wrap="virtual"><? echo $f_description ?></textarea>
 		</td>
 	</tr>
 	<tr bgcolor="<? echo $g_primary_color_dark ?>">
@@ -246,7 +246,7 @@
 			<? echo $s_steps_to_reproduce ?> <? print_documentaion_link( "steps_to_reproduce" ) ?>:
 		</td>
 		<td>
-			<textarea name="f_steps_to_reproduce" cols="60" rows="5"><? echo $f_steps_to_reproduce ?></textarea>
+			<textarea name="f_steps_to_reproduce" cols="60" rows="5" wrap="virtual"><? echo $f_steps_to_reproduce ?></textarea>
 		</td>
 	</tr>
 	<tr bgcolor="<? echo $g_primary_color_light ?>">
@@ -254,7 +254,7 @@
 			<? echo $s_additional_information ?> <? print_documentaion_link( "additional_information" ) ?>:
 		</td>
 		<td>
-			<textarea name="f_additional_info" cols="60" rows="5"><? echo $f_additional_info ?></textarea>
+			<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><? echo $f_additional_info ?></textarea>
 		</td>
 	</tr>
 <? if ( $g_allow_file_upload==1 ) { ?>
