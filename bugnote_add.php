@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.42 2004-04-13 09:46:09 vboctor Exp $
+	# $Id: bugnote_add.php,v 1.43 2004-05-17 11:39:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,6 +24,11 @@
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_private		= gpc_get_bool( 'private', config_get( 'default_bugnote_view_status' ) == VS_PRIVATE );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
+
+	if ( bug_is_readonly( $f_bug_id ) ) {
+		error_parameters( $f_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
 
 	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.80 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: email_api.php,v 1.81 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -747,7 +747,7 @@
 		} # end foreach custom field
 
 
-		if ( RESOLVED == $t_status ) {
+		if ( config_get( 'bug_resolved_status_threshold' ) == $t_status ) {
 			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_duplicate' );

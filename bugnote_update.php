@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.39 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bugnote_update.php,v 1.40 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,8 +35,9 @@
 	
 	# Check if the bug has been resolved
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	if ( bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' ) ) {
-		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
+	if ( bug_is_readonly( $t_bug_id ) ) {
+		error_parameters( $t_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 	
 	$f_bugnote_text = trim( $f_bugnote_text ) . "\n\n";

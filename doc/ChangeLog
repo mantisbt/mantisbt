@@ -5,8 +5,10 @@ Mantis ChangeLog
  * Enh #0000: Generate one email per user. Stage #2 (minor send mail optimization - used kept alive SMTP connection).
  * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
  * Enh #2200: Add Version to simple bug pages.
+ * Enh #3152: Adding notes and documents to resolved bugs.
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
+ * Enh #3505: Add a Bugnote to a resolved bug.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
@@ -18,12 +20,16 @@ Mantis ChangeLog
  * Enh #3735: New CSS class for HTML Form Buttons
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
+ * Enh #3811: Allow private flag to be unset on resolved bugs.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3397: Delete notification should be off when deleting a project.
+ * Fix #3473: g_bug_resolved_status_threshold variable ignored.
+ * Fix #3567: Reminders can be added for a readonly bug.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.
  * Fix #3723: No ability to edit or even delete news is associated project was deleted.
+ * Fix #3837: Bugs can be edited after being closed.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
@@ -50,6 +56,8 @@ Mantis ChangeLog
  * New Config: assign_sponsored_bugs_threshold (default MANAGER).  Access level required to be able to assign a sponsored issue to a user with access level greater or equal to 'handle_sponsored_bugs_threshold'.
  * New Config: minimum_sponsorship_amount (default 5).  Minimum sponsorship amount. If the user enters a value less than this, an error will be prompted.
  * New Config: mantis_sponsorship_table (default mantis_sponsorship_table).  Name of table containing issue sponsorship information.
+ * New Config: bug_readonly_status_threshold (default RESOLVED).  Status threshold after which the issue is considered readonly.
+ * New Config: update_readonly_bug_threshold (default MANAGER).  Status threshold after which the user is allowed to edit readonly issues.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header

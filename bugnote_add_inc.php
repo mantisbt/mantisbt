@@ -6,10 +6,10 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.19 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bugnote_add_inc.php,v 1.20 2004-05-17 11:39:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
-<?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
+<?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
 		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <br />

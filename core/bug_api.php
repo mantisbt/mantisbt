@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.58 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: bug_api.php,v 1.59 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -227,15 +227,19 @@
 
 	# --------------------
 	# Check if the bug is readonly and shouldn't be modified
-	# by default a bug becomes readonly when it is resolved, but this can be changed
-	# through the configuration file.
+	# For a bug to be readonly the status has to be >= bug_readonly_status_threshold and
+	# current user access level < update_readonly_bug_threshold.
 	function bug_is_readonly( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
-		if ( $t_status >= config_get( 'bug_resolved_status_threshold' ) ) {
-			return true;
-		} else {
+		if ( $t_status < config_get( 'bug_readonly_status_threshold' ) ) {
 			return false;
 		}
+
+		if ( access_has_bug_level( config_get( 'update_readonly_bug_threshold' ), $p_bug_id ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	#===================================
@@ -802,7 +806,7 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		bug_set_field( $p_bug_id, 'status', RESOLVED );
+		bug_set_field( $p_bug_id, 'status', config_get( 'bug_readonly_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
 
 		if ( null !== $p_duplicate_id ) {

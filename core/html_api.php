@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.94 2004-05-16 12:22:06 vboctor Exp $
+	# $Id: html_api.php,v 1.95 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -707,7 +707,9 @@
 	# --------------------
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
-		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+
+		if ( ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) && access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_resolve_page.php',
 						 lang_get( 'resolve_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
@@ -774,7 +776,7 @@
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
 		PRINT '<table><tr><td>';
-		if ( $t_status < $t_resolved ) {
+		if ( !bug_is_readonly( $p_bug_id ) ) {
 			# UPDATE button
 			html_button_bug_update( $p_bug_id );
 

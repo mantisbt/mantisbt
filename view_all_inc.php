@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.134 2004-05-09 02:24:18 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.135 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -210,7 +210,7 @@
 	<?php # -- Pencil shortcut -- ?>
 	<td class="center">
 	<?php
-		if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
+		if ( !bug_is_readonly( $v_id ) && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
 			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
 			echo '&nbsp;';

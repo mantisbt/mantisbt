@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.164 2004-05-09 02:24:18 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.165 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -605,6 +605,10 @@
 
 	# --- status thresholds (*_status_threshold) ---
 
+	# Bug becomes readonly if its status is >= this status.  The bug becomes read/write again if re-opened and its
+	# status becomes less than this threshold.
+	$g_bug_readonly_status_threshold = RESOLVED;
+
 	# Bug is resolved, ready to be closed or reopened.  In some custom installations a bug
 	# maybe considered as resolved when it is moved to a custom (FIXED OR TESTED) status.
 	$g_bug_resolved_status_threshold = RESOLVED;
@@ -777,6 +781,10 @@
 
 	# Threshold needed to be able to create shared stored queries
 	$g_stored_query_create_shared_threshold = MANAGER;
+
+	# Threshold needed to update readonly bugs.  Readonly bugs are identified via 
+	# $g_bug_readonly_status_threshold.
+	$g_update_readonly_bug_threshold = MANAGER;
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH

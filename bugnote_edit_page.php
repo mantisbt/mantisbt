@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.44 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bugnote_edit_page.php,v 1.45 2004-05-17 11:39:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -44,9 +44,9 @@
 
 	# Check if the bug has been resolved
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	if ( bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' ) ) {
-		# @@@ The error should be more generic.
-		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
+	if ( bug_is_readonly( $t_bug_id ) ) {
+		error_parameters( $t_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 
 	$t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.15 2004-05-10 12:33:42 vboctor Exp $
+	# $Id: constant_inc.php,v 1.16 2004-05-17 11:39:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -200,7 +200,8 @@
 	# ERROR_BUG_*
 	define( 'ERROR_BUG_NOT_FOUND',					1100 );
 	define( 'ERROR_BUG_DUPLICATE_SELF',				1101 );
-	define( 'ERROR_BUG_RESOLVED_ACTION_DENIED',		1102 );
+	define( 'ERROR_BUG_RESOLVED_ACTION_DENIED',			1102 );	// @@@ obsolete, remove after lang files are sync'd
+	define( 'ERROR_BUG_READ_ONLY_ACTION_DENIED',			1103 );
 
 	# ERROR_EMAIL_*
 	define( 'ERROR_EMAIL_INVALID',					1200 );

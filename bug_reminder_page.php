@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.16 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bug_reminder_page.php,v 1.17 2004-05-17 11:39:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,11 @@
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
+
+	if ( bug_is_readonly( $f_bug_id ) ) {
+		error_parameters( $f_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
 
 	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.51 2004-05-09 02:24:18 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.52 2004-05-17 11:39:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 
 		<!-- Send Bug Reminder -->
 	<?php
-		if ( !current_user_is_anonymous() &&
+		if ( !current_user_is_anonymous() && !bug_is_readonly( $f_bug_id ) &&
 			  access_has_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id ) ) {
 	?>
 		<span class="small">
@@ -499,7 +499,7 @@
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# File upload box
-	if ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) {
+	if ( !bug_is_readonly( $f_bug_id ) ) {
 		include( $t_mantis_dir . 'bug_file_upload_inc.php' );
 	}
 
