@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.44 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:09 $
+	# $Revision: 1.45 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-03 23:37:58 $
 	#
-	# $Id: strings_french.txt,v 1.44 2003-01-29 22:19:09 beerfrick Exp $
+	# $Id: strings_french.txt,v 1.45 2003-02-03 23:37:58 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,19 +36,19 @@
 	$s_all_projects = 'Tous les projets';
 	$s_move_bugs = 'Déplacer les bugs';
 	$s_operation_successful = 'Opération réussie';
-	$s_date_order = 'Date Order';
+	$s_date_order = 'Par Date';
 	$s_print_all_bug_page_link = 'Rapport imprimable';
-	$s_csv_export = 'CSV Export';
+	$s_csv_export = 'Export CSV';
 	$s_login_anonymously = 'Se logger anonymement';
 	$s_jump_to_bugnotes = 'Aller aux Bugnotes';
 	$s_public_project_msg = 'Ce projet est PUBLIC.  Tous les utilisateurs y ont accès.';
-	$s_private_project_msg = 'Ce projet est PRIVE.  Seuls les administrateurs et les utilisateurs ajoutés manuellement y ont accès';
+	$s_private_project_msg = 'Ce projet est PRIVE.  Seuls les administrateurs et les utilisateurs ajoutés manuellement au projet y ont accès';
 	$s_access_level_project = 'Project Access Level';
 	$s_view_submitted_bug_link = 'View Submitted Bug';
 	$s_assigned_projects = 'Assigned Projects';
 	$s_unassigned_projects = 'Unassigned Projects';
 	$s_print = 'Print';
-	$s_jump = 'Jump';
+	$s_jump = 'Chercher';
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
@@ -130,7 +130,7 @@
 
 	# print_all_bug_options.php : printing preferences
 	$s_printing_preferences_title = 'Choississez les champs à imprimer';
-	$s_printing_options_link = 'Options pour l'impression';
+	$s_printing_options_link = 'Options pour l\'impression';
 
 	# word and excel export
 	$s_bugnote_title = 'Bugnote handler' ;
@@ -610,7 +610,7 @@
 	$s_view_bugs_link = 'Afficher les bugs';
 	$s_report_bug_link = 'Rapporter un bug';
 	$s_summary_link = 'Synthèse';
-	$s_account_link = 'Comptes';
+	$s_account_link = 'Options';
 	$s_users_link = 'Utilisateurs';
 	$s_manage_link = 'Administration';
 	$s_edit_news_link = 'Editer les nouvelles';
@@ -785,7 +785,7 @@
 	$s_updated = 'Mis à jour';
 
 	# view_all_inc.php
-	$s_none = 'none';
+	$s_none = 'aucun';
 	$s_search ='Chercher';
 	$s_view_prev_link = 'Voir les précédents';
 	$s_view_next_link = 'Voir les suivants';
