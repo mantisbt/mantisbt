@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.54 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.55 2004-08-12 23:15:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -155,7 +155,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		}
 
 		if ( $t_prefix == $f_prefix ) {
-			$t_link = "<strong>$t_caption</string>";
+			$t_link = "<strong>$t_caption</strong>";
 		} else {
 			$t_link = '<a href="manage_user_page.php?prefix=' . $t_prefix .'">' . $t_caption . '</a>';
 		}
