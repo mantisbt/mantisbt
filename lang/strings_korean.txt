@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-01 14:19:19 $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_korean.txt,v 1.64 2004-08-01 14:19:19 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.65 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -71,7 +71,7 @@ $s_empty_password_sure_msg = '암호가 설정되지 않았습니다. 이대로 사용하시겠습니�
 $s_empty_password_button = '암호없이 사용';
 
 $s_duplicate_of = '%id의 중복';
-$s_has_duplicate = 'has duplicate %id';
+$s_has_duplicate = "has duplicate";
 $s_related_to = '%id 와 관련';
 $s_dependant_on = '%id 에 종속';
 $s_blocks = '%id 차단';
@@ -199,8 +199,7 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP 서버 연결 실패';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= '오류: LDAP 사용자 갱신 오류.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '오류: 데이타베이스 연결 오류.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= '오류: 데이타베이스 선택 오류.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= '오류: 데이타베이스 선택 오류.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '오류: 복사 실행이 명시되지 않음.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '오류: 카테고리를 찾을 수 없습니다.';
@@ -208,19 +207,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '오류: 버전정보를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '오류: 사용자 이름 오류.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '접근 권한이 없는 사용자입니다.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
@@ -281,12 +280,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = '보고자';
 $s_email_handler = '조작자';
@@ -385,18 +382,30 @@ $s_profile_updated_msg = '프로파일 갱신....';
 # account_update.php
 $s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 $s_email_updated = '이메일 주소가 변경되었습니다...';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = '암호가 변경되었습니다...';
 
 # bug_assign.php
 $s_bug_assign_msg       = '이슈가 할당되었습니다...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = '이슈가 폐쇄(close)되었습니다...';
 $s_close_immediately   = '지금 폐쇄:';
 
 # bug_close_page.php
-$s_close_bug_title = '이슈 폐쇄';
+$s_closed_bug_title = '이슈 폐쇄';
 
 # bug_delete.php
 $s_bug_deleted_msg = '이슈가 삭제되었습니다...';
@@ -424,8 +433,8 @@ $s_reopen_add_bugnote_title = '재발생한 이슈에 대하여 이슈노트에 사유 추가';
 $s_bugnote_add_reopen_button = '재발생한 이슈와 이슈노트 추가';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = '이슈 해결';
-$s_resolve_bug_button = '이슈 해결';
+$s_resolved_bug_title = '이슈 해결';
+$s_resolved_bug_button = '이슈 해결';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = '이슈가 해결되었습니다. 아래의 이슈노트를 입력하세요.';
@@ -499,7 +508,7 @@ $s_delete_link = '삭제';
 $s_add_bugnote_title = '이슈노트 추가';
 $s_add_bugnote_button = '이슈노트 추가';
 $s_bugnote_edit_link = '수정';
-$s_close_bug_button = '이슈 폐쇄';
+$s_closed_bug_button = '이슈 폐쇄';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = '이슈노트가 수정되었습니다....';
@@ -897,6 +906,7 @@ $s_product_build = '제품 빌드번호';
 $s_system_profile = '시스템 설명';
 $s_update_bug_button = '이슈 갱신';
 $s_bug_assign_to_button = '할당:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = '재발생 이슈';
 $s_move_bug_button = '이슈 이동';
 $s_attached_files = '첨부 파일';
@@ -941,15 +951,17 @@ $s_custom_field_access_level_rw = '쓰기 권한';
 $s_custom_field_length_min = '최소 길이';
 $s_custom_field_length_max = '최대 길이';
 $s_custom_field_advanced = 'Advanced';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = '시퀀스';
-$s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일';
+$s_custom_field_type_enum_string = '0:문자,1:숫자,2:부동형,3:열거형,4:이메일,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = '이 필드는 적어도 하나의 프로젝트에 링크되어 있습니다.  이 필드와 관련된 모든 값은 삭제될 것입니다. 이 필드를 삭제하지 않으려면, 브라우저에서 뒤로 버튼을 누르시기 바랍니다. 삭제를 계속 진행하기 위해서는 아래의 버튼을 누르세요';
 $s_confirm_custom_field_deletion = '커스텀 필드와 모든 관련된 값을 삭제하시겠습니까?';
@@ -989,7 +1001,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "이슈";
 $s_add_new_relationship = "새로운 관계";
 $s_add_new_relationship_button = "추가";
@@ -1003,5 +1014,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

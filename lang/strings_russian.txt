@@ -1,4 +1,21 @@
 <?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
+	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
+	# -------------------------------------------------
+	# $Revision: 1.62 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
+	#
+	# $Id: strings_russian.txt,v 1.62 2004-08-05 04:42:13 bigbadger Exp $
+	###########################################################################
+?>
+<?php
 # Charset
 $s_charset = 'windows-1251';
 
@@ -372,13 +389,24 @@ $s_password_updated = 'Пароль успешно обновлен';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Обращение было успешно назначено...';
+# bug_change_status_page.php
+$s_new_bug_title = 'Новое обращение';
+$s_feedback_bug_title = 'Запрос дополнительной информации';
+$s_acknowledged_bug_title = 'Признать обращение';
+$s_confirmed_bug_title = 'Подтвердить обращение';
+$s_assigned_bug_title = 'Назначить обращение';
+$s_new_bug_button = 'Новое';
+$s_feedback_bug_button = 'Доп. информ.';
+$s_acknowledged_bug_button = 'Признать';
+$s_confirmed_bug_button = 'Подтвердить';
+$s_assigned_bug_button = 'Назначить';
 
 # bug_close.php
 $s_bug_close_msg = 'Обращение было закрыто...';
 $s_close_immediately = 'Закрыть немедленно:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Закрытие обращение';
+$s_closed_bug_title = 'Закрытие обращение';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Обращение было удалено...';
@@ -406,8 +434,8 @@ $s_reopen_add_bugnote_title = 'Добавьтьте причину открытия обращения снова';
 $s_bugnote_add_reopen_button = 'Добавить комментарий и переоткрыть';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Решить обращение';
-$s_resolve_bug_button = 'Решить';
+$s_resolved_bug_title = 'Решить обращение';
+$s_resolved_bug_button = 'Решить';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Обращение было решено. Добавьте комментарий...';
@@ -481,7 +509,7 @@ $s_delete_link = 'Удалить';
 $s_add_bugnote_title = 'Добавление комментария';
 $s_add_bugnote_button = 'Добавить';
 $s_bugnote_edit_link = 'Редактировать';
-$s_close_bug_button = 'Закрыть обращение';
+$s_closed_bug_button = 'Закрыть обращение';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Комментарий был обновлен...';
@@ -616,6 +644,7 @@ $s_delete_version_button = 'Удалить версию';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Редактирование версий проекта';
 $s_update_version_button = 'Обновить версию';
+$s_released = 'Выпущена';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Версия обновлена...';
@@ -878,6 +907,7 @@ $s_product_build = 'Подверсия продукта';
 $s_system_profile = 'Профиль системы';
 $s_update_bug_button = 'Обновить информацию';
 $s_bug_assign_to_button = 'Назначить:';
+$s_bug_status_to_button = 'Изменить статус на:';
 $s_reopen_bug_button = 'Открыть повторно';
 $s_move_bug_button = 'Перенести обращение';
 $s_attached_files = 'Присоединенные файлы';
@@ -922,15 +952,17 @@ $s_custom_field_access_level_rw = 'Доступ для записи';
 $s_custom_field_length_min = 'Мин. длина';
 $s_custom_field_length_max = 'Макс. длина';
 $s_custom_field_advanced = 'Показывать только на странице \'Расширенная\'';
-$s_custom_field_display_resolve = 'Показывать при решении';
-$s_custom_field_display_close = 'Показывать при закрытии';
+$s_custom_field_display_report = 'показывать при регистрации обращения';
+$s_custom_field_display_update = 'Показывать при обновлении обращения';
+$s_custom_field_display_resolved = 'Показывать при решении';
+$s_custom_field_display_closed = 'Показывать при закрытии';
 $s_custom_field_require_report = 'Обязательное при вводе нового обращения';
 $s_custom_field_require_update = 'Обязательное при обновлении';
-$s_custom_field_require_resolve = 'Обязательное при решении';
-$s_custom_field_require_close = 'Обязательное при закрытии';
+$s_custom_field_require_resolved = 'Обязательное при решении';
+$s_custom_field_require_closed = 'Обязательное при закрытии';
 
 $s_custom_field_sequence = 'Последовательность';
-$s_custom_field_type_enum_string = '0:Строка,1:Целое,2:Плавающее,3:Перечисление,4:Email';
+$s_custom_field_type_enum_string = '0:Строка,1:Целое,2:Плавающее,3:Перечисление,4:Email,5:Чекбокс,6:Список,7:Список множественного выбора';
 
 $s_confirm_used_custom_field_deletion = 'Это поле связано как минимум с одним проектом.  Если Вы продолжите, все значения для этого поля будут безвозвратно удалены.  Это действие невозможно откатить.  Если Вы не хотите удалять это поле, нажмите кнопку Back в Вашем браузере.  Для удаления - нажмите кнопку ниже';
 $s_confirm_custom_field_deletion = 'Вы уверены, что хотите удалить это поле и все связанные с ним значения?';
@@ -946,7 +978,7 @@ $s_advanced_filters = 'Расширенные фильтры';
 $s_simple_filters = 'Простые фильтры';
 $s_monitored_by = 'Следящие';
 
-$s_attachments = "attachment(s)";
+$s_attachments = "Файл(ы)";
 $s_attachment_alt = "A";
 
 # PHPMailer

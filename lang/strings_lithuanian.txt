@@ -8,11 +8,11 @@
 	##########################################################################
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Revision: 1.7 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.6 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_lithuanian.txt,v 1.7 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -219,19 +219,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'KLAIDA: Versija tokiu pavadinimu jau 
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'KLAIDA: Versija nerasta.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'KLAIDA: Vartotojo vardas neteisingas.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Vartotojas neturi reikalingø teisiø (priëjimo lygio)';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'KLAIDA: Jûsø prisijungimas panaikintas arba neteisingas vartotojo vardas arba slaptaþodis.';
 $s_login_cookies_disabled = 'KLAIDA: Jûsø narðyklë nepalaiko slapukø (cookies) arba juos atmeta.';
@@ -292,12 +292,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'KOMENTARAS pridëtas ðiai problemai.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Praneðëjas';
 $s_email_handler = 'Patarëjas';
@@ -396,18 +394,30 @@ $s_profile_updated_msg = 'Profilis atnaujintas...';
 # account_update.php
 $s_account_updated_msg = 'Jûsø prisijungimas sëkmingai atnaujintas...';
 $s_email_updated = 'Elektroninio paðto adresas sëkmingai atnaujintas';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Slaptaþodis sëkmingai atnaujintas';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Problema sëkmingai paskirta...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = 'Problema uþdaryta...';
 $s_close_immediately   = 'Uþdaryti dabar:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Uþdaryti problemà';
+$s_closed_bug_title = 'Uþdaryti problemà';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Problema iðtrinta...';
@@ -435,8 +445,8 @@ $s_reopen_add_bugnote_title = 'Pakomentuoti prieþastá vël atidaromai problemai';
 $s_bugnote_add_reopen_button = 'Pridëti komentarà ir ið naujo atidaryti problemà';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Iðspræsti problemà';
-$s_resolve_bug_button = 'Iðspræsti problemà';
+$s_resolved_bug_title = 'Iðspræsti problemà';
+$s_resolved_bug_button = 'Iðspræsti problemà';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Problema iðspræsta. Áveskite komentarà...';
@@ -510,7 +520,7 @@ $s_delete_link = 'Iðtrinti';
 $s_add_bugnote_title = 'Pridëti komentarà';
 $s_add_bugnote_button = 'Pridëti komentarà';
 $s_bugnote_edit_link = 'Redaguoti';
-$s_close_bug_button = 'Uþdaryti problemà';
+$s_closed_bug_button = 'Uþdaryti problemà';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Komentaras sëkmingai atnaujintas...';
@@ -908,6 +918,7 @@ $s_product_build = 'Produkto trumpalaikë versija (build)';
 $s_system_profile = 'Sistemos apraðymas';
 $s_update_bug_button = 'Atnaujinti problemà';
 $s_bug_assign_to_button = 'Priskirti kam:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Vël atidaryti problemà';
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Pridëti failai';
@@ -952,15 +963,17 @@ $s_custom_field_access_level_rw = 'Priëjimas raðyti';
 $s_custom_field_length_min = 'Min. ilgis';
 $s_custom_field_length_max = 'Maks. ilgis';
 $s_custom_field_advanced = 'Papildomas';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Eilës tvarka';
-$s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis skaièius,3:Sàraðas,4:El.paðtas';
+$s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis skaièius,3:Sàraðas,4:El.paðtas,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'Ðis laukas susietas su bent vienu projektu.  Jei pratæsite, visos ðio lauko reikðmës bus iðtrintos.  Veiksmo nebus galima atðaukti.  Jeigu nenorite iðtrinti ðio lauko, paspauskite mygtukà "Atgal" savo narðyklëje.  Jei norite tæsti, spauskite ðá mygtukà';
 $s_confirm_custom_field_deletion = 'Ar tikrai norite iðtrinti ðá papildomà laukà ir visas susijusias reikðmes?';
@@ -1000,7 +1013,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1014,5 +1026,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.11 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Revision: 1.12 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_latvian.txt,v 1.11 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_latvian.txt,v 1.12 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,19 +209,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'KÏÛDA: Ðâda versija jau eksistç.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'KÏÛDA: Versija nav atrasta.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'KÏÛDA: The username is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Lieotâjam nav nepiecieðamâ pieejas lîmeòa';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'KÏÛDA: Jûsu pieeja ir atslçgta vai ievadîts nepareizs lietotâja vârds, parole.';
 $s_login_cookies_disabled = 'KÏÛDA: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -282,12 +282,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Buga pieteikumam pielikta piezîme.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = "Lietotâjs";
 $s_email_handler = "Atbildîgais";
@@ -386,18 +384,30 @@ $s_profile_updated_msg = "Profils saglabâts...";
 # account_update.php
 $s_account_updated_msg = "Lietotâja konts saglabâts...";
 $s_email_updated = 'Email address successfully updated';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
 $s_bug_assign_msg       = "Kïûdas atbildîgais tika noteikts...";
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = "Kïûda aizvçrta...";
 $s_close_immediately   = "Nekavçjoties aizvçrt:";
 
 # bug_close_page.php
-$s_close_bug_title = "Aizvçrt kïûdu";
+$s_closed_bug_title = "Aizvçrt kïûdu";
 
 # bug_delete.php
 $s_bug_deleted_msg = "Kïûda izdzçsta...";
@@ -425,8 +435,8 @@ $s_reopen_add_bugnote_title = "Pievienot atkârtotas atvçrðanas iemeslu";
 $s_bugnote_add_reopen_button = "Pielikt komentâru un atkârtoti atvçrt";
 
 # bug_resolve_page.php
-$s_resolve_bug_title = "Kïûdas atrisinâðana";
-$s_resolve_bug_button = "Kïûda atrisinâta";
+$s_resolved_bug_title = "Kïûdas atrisinâðana";
+$s_resolved_bug_button = "Kïûda atrisinâta";
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = "Kïûda atrisinâta. Pievienojiet komentâru...";
@@ -500,7 +510,7 @@ $s_delete_link = "Dzçst";
 $s_add_bugnote_title = "Komentâra pievienoðana";
 $s_add_bugnote_button = "Pievienot";
 $s_bugnote_edit_link = "Labot";
-$s_close_bug_button = "AIZVÇRT kïûdu";
+$s_closed_bug_button = "AIZVÇRT kïûdu";
 
 # bugnote_update.php
 $s_bugnote_updated_msg = "Komentârs saglabâts...";
@@ -898,6 +908,7 @@ $s_product_build = "produkta apakðversija";
 $s_system_profile = "Sistçmas (darba vides) apraksts";
 $s_update_bug_button = "Labot kïûdas informâciju";
 $s_bug_assign_to_button = 'Pieðíirts:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = "Atkârtoti atvçrt";
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = "Failu pievienoðana";
@@ -941,16 +952,18 @@ $s_custom_field_access_level_r = 'Lasîðanas tiesîbas';
 $s_custom_field_access_level_rw = 'Laboðanas tiesîbas';
 $s_custom_field_length_min = 'Min. garums';
 $s_custom_field_length_max = 'Max. garums';
-$s_custom_field_advanced = 'Advanced';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_advanced = 'Display Only On Advanced Page';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Secîba(n.p.k)';
-$s_custom_field_type_enum_string = '0:Teksts,1:Skaitlis,2:Float,3:Enumeration,4:E-pasts';
+$s_custom_field_type_enum_string = '0:Teksts,1:Skaitlis,2:Float,3:Enumeration,4:E-pasts,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'ðis lauks ir saistîts ar vismaz vienu projektu.  Ja turpinâsiet, visas vçrtîbas tiks izdzçstas.  Ðî darbîba ir neatceïama.  Lai atliktu, spiediet atgriezieties uz iepriekðçjo lapu.';
 $s_confirm_custom_field_deletion = 'Vai esat pârliecinâti ka jâdþçð Custum lauks un visas ar to saistîtâs vçrtîbas?';
@@ -990,7 +1003,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1004,5 +1016,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

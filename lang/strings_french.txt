@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.73 $
-	# $Author: vboctor $
-	# $Date: 2004-07-25 10:28:19 $
+	# $Revision: 1.74 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:12 $
 	#
-	# $Id: strings_french.txt,v 1.73 2004-07-25 10:28:19 vboctor Exp $
+	# $Id: strings_french.txt,v 1.74 2004-08-05 04:42:12 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -27,7 +27,7 @@ $s_charset = 'iso-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Déplacer';
-$s_actiongroup_menu_copy = 'Copy';
+$s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Assigner';
 $s_actiongroup_menu_close = 'Fermer';
 $s_actiongroup_menu_delete = 'Supprimer';
@@ -35,7 +35,7 @@ $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
 $s_actiongroup_menu_update_status = 'Mettre à jour l\'état';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour Afficher l\'état';
-$s_actiongroup_bugs = 'Bugs Séléctionés';
+$s_actiongroup_bugs = 'Bugs sélectionnés';
 
 # new strings:
 $s_all_projects = 'Tous les projets';
@@ -214,19 +214,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERREUR : Version dupliquée.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERREUR : Version non trouvée.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERREUR : Nom d\'utilisateur invalide.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ERREUR : L\'utilisateur n\'a pas le niveau d\'accès requis';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Le "Nom Réel" choisi correspond au nom de loggin d\'un autre utilisateur. Merci d\'en choisir un autre.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'ERREUR : Support de sponsor non activé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'ERREUR : Commanditaire %d non trouvé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'ERREUR : Sponsoriser (%s) est inférieur au montant minimum (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bugs sponsorisés.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Accès Refusé : Assigner des bugs sponsorisés requiert un niveau d\'accès plus élevé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Le sponsor n\'a pas fourni d\'adresse email. Merci de mettre à jour votre profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ERREUR : L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'ERREUR : L\'action ne peut être executée car le bug \'%d\' est en lecture-seule';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERREUR : Il existe déjà une relation entre ces deux bugs.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERREUR : Relation non trouvée.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "ERREUR : Accès Refusé : Le bug %d requiert un niveau d\'accès plus élevé.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERREUR :  Un bug ne peut pas être relié à lui-même.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors l\'utilisateur/le mot de passe que vous avez saisi est incorrect.';
 $s_login_cookies_disabled = 'ERREUR : Votre navigateur ne sait pas gérer les cookies ou refuse de les gérer.';
@@ -287,12 +287,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Un commanditaire d
 $s_email_notification_title_for_action_sponsorship_deleted = 'Un commanditaire du bug suivant a été retiré.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Une note de bug a été ajoutée à ce bug.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "Une nouvelle relation a été ajoutée au bug suivant.";
 $s_email_notification_title_for_action_relationship_deleted = "Une relation a été supprimée du bug suivant.";
 $s_email_notification_title_for_action_relationship_child_resolved = "Un bug relié a été résolu.";
 $s_email_notification_title_for_action_relationship_child_closed = "Un bug relié a été fermé.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Responsable';
@@ -391,18 +389,31 @@ $s_profile_updated_msg = 'Profil mis à jour...';
 # account_update.php
 $s_account_updated_msg = 'Votre compte a été mis à jour...';
 $s_email_updated = 'Adresse e-mail mise à jour avec succès';
+$s_realname_duplicated = 'Ce nom réel est utilisé par un autre utilisateur';
 $s_realname_updated = 'Nom réel mis à jour avec succès';
 $s_password_updated = 'Mot de passe mis à jour avec succès';
 
 # bug_assign.php
-$s_bug_assign_msg       = 'Le bug a été assigné...';
+$s_bug_assign_msg       = 'Le bug a été assigné avec succès...';
+
+# bug_change_status_page.php
+$s_new_bug_title = 'Nouveau bug';
+$s_feedback_bug_title = 'Fournir un commmentaire sur le bug';
+$s_acknowledged_bug_title = 'Accepter le bug';
+$s_confirmed_bug_title = 'Confirmer le bug';
+$s_assigned_bug_title = 'Assigner le bug';
+$s_new_bug_button = 'Nouveau bug';
+$s_feedback_bug_button = 'Fournir un commentaire';
+$s_acknowledged_bug_button = 'Accepter le bug';
+$s_confirmed_bug_button = 'Confirmer le bug';
+$s_assigned_bug_button = 'Assigner le bug';
 
 # bug_close.php
 $s_bug_close_msg       = 'Le bug a été fermé...';
 $s_close_immediately   = 'Fermer immédiatement';
 
 # bug_close_page.php
-$s_close_bug_title = 'Fermer un bug';
+$s_closed_bug_title = 'Fermer un bug';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Le bug a été supprimé...';
@@ -430,8 +441,8 @@ $s_reopen_add_bugnote_title = 'Ajouter une note pour la réouverture du bug';
 $s_bugnote_add_reopen_button = 'Ajouter une note et réouvrir le bug';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Résolution d\'un bug';
-$s_resolve_bug_button = 'Résoudre le bug';
+$s_resolved_bug_title = 'Résolution d\'un bug';
+$s_resolved_bug_button = 'Résoudre le bug';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Le bug a été résolu. Entrez une note ci-dessous...';
@@ -494,7 +505,7 @@ $s_bugnote_added_msg = 'Note ajoutée...';
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = 'Note supprimée...';
-$s_bug_notes_title = 'Notes d\'un bug';
+$s_bug_notes_title = 'Notes';
 
 # bugnote_edit_page.php
 $s_edit_bugnote_title = 'Modifier la note';
@@ -505,7 +516,7 @@ $s_delete_link = 'Supprimer';
 $s_add_bugnote_title = 'Ajouter une note';
 $s_add_bugnote_button = 'Ajouter la note';
 $s_bugnote_edit_link = 'Modifier';
-$s_close_bug_button = 'Fermer le bug';
+$s_closed_bug_button = 'Fermer le bug';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'La note a été mise à jour...';
@@ -640,7 +651,7 @@ $s_delete_version_button = 'Supprimer la version';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Modifier la version du projet';
 $s_update_version_button = 'Mettre à jour la version';
-$s_released = 'Released';
+$s_released = 'Publiée';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'La version a été mise à jour...';
@@ -903,6 +914,7 @@ $s_product_build = 'Build';
 $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Mettre à jour le bug';
 $s_bug_assign_to_button = 'Assigné à :';
+$s_bug_status_to_button = 'Changer le statut en :';
 $s_reopen_bug_button = 'Réouvrir un bug';
 $s_move_bug_button = 'Déplacer bug';
 $s_attached_files = 'Fichiers attachés';
@@ -924,8 +936,8 @@ $s_monitoring_user_list = 'Liste d\'utilisateurs';
 $s_no_users_sponsoring_bug = 'Il n\'y a aucun utilisateur sponsorisant ce bug.';
 $s_users_sponsoring_bug = 'Utilisateurs sponsorisant ce bug';
 $s_sponsors_list = 'Liste des sponsors';
-$s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
+$s_total_sponsorship_amount = 'Sponsoring total = %s';
+$s_sponsor_issue = 'Sponsoriser le bug';
 
 # custom field strings
 $s_add_custom_field_button = 'Ajouter un champ personnalisé';
@@ -946,16 +958,18 @@ $s_custom_field_access_level_r = 'Accès en lecture';
 $s_custom_field_access_level_rw = 'Accès en écriture';
 $s_custom_field_length_min = 'Taille min.';
 $s_custom_field_length_max = 'Taille max.';
-$s_custom_field_advanced = 'Avancé';
-$s_custom_field_display_resolve = 'Montrer lors de résolution de bugs';
-$s_custom_field_display_close = 'Montrer lors de fermeture de bugs';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_advanced = 'N\'afficher que sur la page avancée';
+$s_custom_field_display_report = 'Afficher lors de rapport de bugs';
+$s_custom_field_display_update = 'afficher lors de mise à jour de bugs';
+$s_custom_field_display_resolved = 'Montrer lors de résolution de bugs';
+$s_custom_field_display_closed = 'Montrer lors de fermeture de bugs';
+$s_custom_field_require_report = 'Nécessaire au rapport';
+$s_custom_field_require_update = 'Nécessaire à la mise à jour';
+$s_custom_field_require_resolved = 'Nécessaire à la résolution';
+$s_custom_field_require_closed = 'Nécessaire à la fermeture';
 
 $s_custom_field_sequence = 'Suite';
-$s_custom_field_type_enum_string = '0:Chaîne,1:Entier,2:Décimal,3:Enumération,4:Email';
+$s_custom_field_type_enum_string = '0:Chaîne,1:Entier,2:Décimal,3:Enumération,4:Email,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moins un projet.  Si vous continuez, toutes les valeurs de ce champ seront supprimées.  Cette action ne peut être annulée.  Si vous ne voulez pas supprimer ce champ, cliquer sur le bouton Retour de votre navigateur.  Sinon pour supprimer ce champ, cliquer sur le bouton ci dessous';
 $s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';
@@ -979,9 +993,9 @@ $s_phpmailer_language = 'fr';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = 'Sponsorship Added';
-$s_sponsorship_updated = 'Sponsorship Updated';
-$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_added = 'Sponsoring ajouté';
+$s_sponsorship_updated = 'Sponsoring mis à jour';
+$s_sponsorship_deleted = 'Sponsoring supprimé';
 $s_sponsorship_more_info = 'Plus d\'information sur le sponsoring';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -990,12 +1004,11 @@ $s_sponsorship_more_info = 'Plus d\'information sur le sponsoring';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Change Log';
+$s_changelog = 'Liste des changements';
 
 # Http auth
 $s_http_auth_realm = "Connexion Mantis";
 
-# MASC RELATIONSHIP
 $s_bug = "bug";
 $s_add_new_relationship = "Nouvelle relation";
 $s_add_new_relationship_button = "Ajouter";
@@ -1009,5 +1022,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Tous l
 $s_create_child_bug_button = "Créer un fils";
 $s_bug_cloned_to = "Bug cloné";
 $s_bug_created_from = "Bug généré depuis";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Control';
 ?>

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Revision: 1.63 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:12 $
 	#
-	# $Id: strings_danish.txt,v 1.62 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_danish.txt,v 1.63 2004-08-05 04:42:12 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,19 +207,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEJL: Denne version findes allerede.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'FEJL: Version ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'FEJL: Brugernavnet er ugyldigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
@@ -389,13 +389,24 @@ $s_password_updated = 'Vellykket opdatering af Adgangskode';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Fejlen er blevet tildelt...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg = 'Fejlen er blevet lukket...';
 $s_close_immediately = 'Luk straks:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Luk fejl';
+$s_closed_bug_title = 'Luk fejl';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Fejlen er blevet slettet...';
@@ -423,8 +434,8 @@ $s_reopen_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at Genåbne fejlen
 $s_bugnote_add_reopen_button = 'Tilføj Fejlnote og Genåbn fejlen';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Løs Fejl';
-$s_resolve_bug_button = 'Løs Fejl';
+$s_resolved_bug_title = 'Løs Fejl';
+$s_resolved_bug_button = 'Løs Fejl';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Fejlen er blevet løst. Skriv Fejlnote herunder...';
@@ -498,7 +509,7 @@ $s_delete_link = 'Slet';
 $s_add_bugnote_title = 'Tilføj Fejlnote';
 $s_add_bugnote_button = 'Tilføj Fejlnote';
 $s_bugnote_edit_link = 'Rediger';
-$s_close_bug_button = 'Luk Fejl';
+$s_closed_bug_button = 'Luk Fejl';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Fejlnoten er blevet opdateret ...';
@@ -896,6 +907,7 @@ $s_product_build = 'Produkt Udgave';
 $s_system_profile = 'System Beskrivelse';
 $s_update_bug_button = 'Opdater Fejl';
 $s_bug_assign_to_button = 'Tildel til:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Genåben Fejl';
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Vedhæftede Filer';
@@ -940,6 +952,8 @@ $s_custom_field_access_level_rw = 'Skrive Rettighed';
 $s_custom_field_length_min = 'Min. Længde';
 $s_custom_field_length_max = 'Max. Længde';
 $s_custom_field_advanced = 'Avanceret';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
 $s_custom_field_display_resolve = 'Display When Resolving Issues';
 $s_custom_field_display_close = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
@@ -948,7 +962,7 @@ $s_custom_field_require_resolve = 'Required On Resolve';
 $s_custom_field_require_close = 'Required On Close';
 
 $s_custom_field_sequence = 'Sekvens';
-$s_custom_field_type_enum_string = '0:Streng,1:Nummerisk,2:Kommatal,3:Optælling,4:E-mail';
+$s_custom_field_type_enum_string = '0:Streng,1:Nummerisk,2:Kommatal,3:Optælling,4:E-mail,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'Dette felt er i øjeblikket knyttet til mindst et projekt.  Hvis du fortsætter vil alle værdier for dette felt blive slette permanent.  Denne handling kan ikke fortrydes.  Hvis du ikke ønsker at slette dette felt, klik på Tilbage knappen i din browser.  Klik på knappen herunder for at fortsætte.';
 $s_confirm_custom_field_deletion = 'Ønsker du at slette dette brugerdefinerede felt og alle tilknyttede værdier?';
@@ -988,7 +1002,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1002,5 +1015,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

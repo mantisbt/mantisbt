@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.70 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Revision: 1.71 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_italian.txt,v 1.70 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.71 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,19 +209,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exist
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -282,12 +282,10 @@ $s_email_notification_title_for_action_sponsorship_updated = "Una sponsorizzazio
 $s_email_notification_title_for_action_sponsorship_deleted = "Una sponsorizzazione della seguente anomalia é stata eliminata.";
 
 $s_email_notification_title_for_action_bugnote_submitted = "Una NOTA é stata aggiunta a questa anomalia.";
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "E' stata aggiunta una RELAZIONE alla seguente anomalia.";
 $s_email_notification_title_for_action_relationship_deleted = "E' stata eliminata una RELAZIONE dalla seguente anomalia.";
 $s_email_notification_title_for_action_relationship_child_resolved = "E' stata RISOLTA una anomalia in RELAZIONE con l'anomalia seguente.";
 $s_email_notification_title_for_action_relationship_child_closed = "E' stata CHIUSA una anomalia in RELAZIONE con l'anomalia seguente.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = "Segnalato da";
 $s_email_handler = "In carico a";
@@ -386,18 +384,30 @@ $s_profile_updated_msg = "Profilo Aggiornato...";
 # account_update.php
 $s_account_updated_msg = "Il tuo Account è stato aggiornato con successo...";
 $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Nominativo aggiornato con successo';
 $s_password_updated = "La password è stata aggiornata correttamente";
 
 # bug_assign.php
 $s_bug_assign_msg = "L'anomalia è stato assegnato correttamente...";
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg = "L'anomalia è stata chiusa...";
 $s_close_immediately = "Chiudi immediatamente:";
 
 # bug_close_page.php
-$s_close_bug_title = "Chiusura anomalia";
+$s_closed_bug_title = "Chiusura anomalia";
 
 # bug_delete.php
 $s_bug_deleted_msg = "L'anomalia è stata eliminata...";
@@ -425,8 +435,8 @@ $s_reopen_add_bugnote_title = "Aggiungi una nota con le ragioni per la riapertur
 $s_bugnote_add_reopen_button = "Aggiungi una nota e riapri anomalia";
 
 # bug_resolve_page.php
-$s_resolve_bug_title = "Risolvi anomalia";
-$s_resolve_bug_button = "Risolvi";
+$s_resolved_bug_title = "Risolvi anomalia";
+$s_resolved_bug_button = "Risolvi";
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = "L'anomalia è stata risolta. Inserisci nota...";
@@ -500,7 +510,7 @@ $s_delete_link = "Elimina";
 $s_add_bugnote_title = "Inserisci nota";
 $s_add_bugnote_button = "Inserisci Nota";
 $s_bugnote_edit_link = "Modifica";
-$s_close_bug_button = "Chiudi";
+$s_closed_bug_button = "Chiudi";
 
 # bugnote_update.php
 $s_bugnote_updated_msg = "La nota sull'anomalia è stata aggiornata con successo...";
@@ -898,6 +908,7 @@ $s_product_build = "Release del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna";
 $s_bug_assign_to_button = "Assegna:";
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = "Riapre";
 $s_move_bug_button = "Muove";
 $s_attached_files = "File allegati";
@@ -942,15 +953,17 @@ $s_custom_field_access_level_rw = "Modificabile";
 $s_custom_field_length_min = "Lunghezza min.";
 $s_custom_field_length_max = "Lunghezza max.";
 $s_custom_field_advanced = "Avanzato";
-$s_custom_field_display_resolve = "Visualizza in 'Risolvi anomalia'";
-$s_custom_field_display_close = "Visualizza in 'Chiudi anomalia'";
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = "Visualizza in 'Risolvi anomalia'";
+$s_custom_field_display_closed = "Visualizza in 'Chiudi anomalia'";
 $s_custom_field_require_report = "Obbligatorio nei report";
 $s_custom_field_require_update = "Obbligatorio in 'Aggiorna anomalia'";
-$s_custom_field_require_resolve = "Obbligatorio in 'Risolvi anomalia'";
-$s_custom_field_require_close = "Obbligatorio in 'Chiudi anomalia'";
+$s_custom_field_require_resolved = "Obbligatorio in 'Risolvi anomalia'";
+$s_custom_field_require_closed = "Obbligatorio in 'Chiudi anomalia'";
 
 $s_custom_field_sequence = "Sequenza";
-$s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email";
+$s_custom_field_type_enum_string = '0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante Indietro del tuo browser.  Per procedere, clicca sul pulsante qui sotto";
 $s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo Campo Personalizzato e tutti i valori associati?";
@@ -990,7 +1003,6 @@ $s_changelog = "Change Log";
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "anomalia";
 $s_add_new_relationship = "Nuova relazione";
 $s_add_new_relationship_button = "Crea";
@@ -1004,5 +1016,6 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON a
 $s_create_child_bug_button = "Genera figlio";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
-# MASC RELATIONSHIP
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

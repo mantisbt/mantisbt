@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: vboctor $
-	# $Date: 2004-07-19 12:50:14 $
+	# $Revision: 1.64 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.63 2004-07-19 12:50:14 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.64 2004-08-05 04:42:13 bigbadger Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
@@ -211,19 +211,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é válido. Nomes de usuário podem conter apenas letras, números, espaços, hífens e sublinhados.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuário não possui o nível de acesso necessário';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'O suporte a patrocínio não está habilitado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Patrocínio %d não encontrado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'O patrocínio (%s) está abaixo da quantia mínima (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Esta pessoa não possui o nível de acesso necessário para tratar casos patrocinados.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado: Atribuir casos patrocinados requer um nível de acesso maior.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%s\' tem um valor inválido \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%d\' é somente-leitura';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERRO: Já existe uma relação entre estes dois casos.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERRO: Relação não encontrada.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acesso negado: O caso %d requer um nível de acesso maior.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERRO: um caso não pode se relacionar com si próprio.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'ERRO: Sua conta pode estar desativada ou o nome de usuário e a senha que você entrou não estão corretos.';
 $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
@@ -284,12 +284,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'O patrocínio do se
 $s_email_notification_title_for_action_sponsorship_deleted = 'O patrocínio do seguinte caso foi retirado.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Uma ANOTAÇÃO foi adicionada a este caso.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "Uma nova RELAÇÃO foi adicionada ao seguinte caso.";
 $s_email_notification_title_for_action_relationship_deleted = "Uma RELAÇÃO foi apagada do seguinte caso.";
 $s_email_notification_title_for_action_relationship_child_resolved = "Um caso RELACIONADO foi RESOLVIDO.";
 $s_email_notification_title_for_action_relationship_child_closed = "Um caso RELACIONADO foi FECHADO.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Relatado por';
 $s_email_handler = 'Atribuído a';
@@ -388,18 +386,30 @@ $s_profile_updated_msg = 'Perfil atualizado...';
 # account_update.php
 $s_account_updated_msg = 'Sua conta foi atualizada com sucesso...';
 $s_email_updated = 'Endereço de email atualizado com sucesso';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
 $s_password_updated = 'Senha atualizada com sucesso';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg = 'O caso foi fechado...';
 $s_close_immediately = 'Fechar imediatamente:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Fechar Caso';
+$s_closed_bug_title = 'Fechar Caso';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'O caso foi apagado...';
@@ -427,8 +437,8 @@ $s_reopen_add_bugnote_title = 'Adicionar Anotação do Motivo para a Reabertura do
 $s_bugnote_add_reopen_button = 'Adicionar Anotação e Reabrir Caso';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Resolver Caso';
-$s_resolve_bug_button = 'Resolver Caso';
+$s_resolved_bug_title = 'Resolver Caso';
+$s_resolved_bug_button = 'Resolver Caso';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'O caso foi resolvido. Digite a anotação abaixo...';
@@ -502,7 +512,7 @@ $s_delete_link = 'Apagar';
 $s_add_bugnote_title = 'Adicionar Anotação';
 $s_add_bugnote_button = 'Adicionar Anotação';
 $s_bugnote_edit_link = 'Alterar';
-$s_close_bug_button = 'Fechar Caso';
+$s_closed_bug_button = 'Fechar Caso';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
@@ -900,6 +910,7 @@ $s_product_build = 'Build do Produto';
 $s_system_profile = 'Descrição do Sistema';
 $s_update_bug_button = 'Atualizar Caso';
 $s_bug_assign_to_button = 'Atribuir a:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Reabrir Caso';
 $s_move_bug_button = 'Mover Caso';
 $s_attached_files = 'Arquivos Anexados';
@@ -944,15 +955,17 @@ $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Tamanho Mínimo';
 $s_custom_field_length_max = 'Tamanho Máximo';
 $s_custom_field_advanced = 'Mostrar somente na página avançada';
-$s_custom_field_display_resolve = 'Mostrar ao resolver casos';
-$s_custom_field_display_close = 'Mostrar ao fechar casos';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Mostrar ao resolver casos';
+$s_custom_field_display_closed = 'Mostrar ao fechar casos';
 $s_custom_field_require_report = 'Requerido no relato';
 $s_custom_field_require_update = 'Requerido na atualização';
-$s_custom_field_require_resolve = 'Requerido na resolução';
-$s_custom_field_require_close = 'Requerido no fechamento';
+$s_custom_field_require_resolved = 'Requerido na resolução';
+$s_custom_field_require_closed = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
-$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail';
+$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
 $s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';
@@ -992,7 +1005,6 @@ $s_changelog = 'Registro de Mudanças';
 # Http auth
 $s_http_auth_realm = "Login do Mantis";
 
-# MASC RELATIONSHIP
 $s_bug = "caso";
 $s_add_new_relationship = "Nova relação";
 $s_add_new_relationship_button = "Adicionar";
@@ -1006,5 +1018,6 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todo
 $s_create_child_bug_button = "Criar filho";
 $s_bug_cloned_to = "Caso clonado";
 $s_bug_created_from = "Caso gerado à partir de";
-# MASC RELATIONSHIP
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: vboctor $
-	# $Date: 2004-07-24 13:36:07 $
+	# $Revision: 1.67 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_norwegian.txt,v 1.66 2004-07-24 13:36:07 vboctor Exp $
+	# $Id: strings_norwegian.txt,v 1.67 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,19 +209,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEIL: Versjonen eksisterer fra før.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEIL: FIner ikke versjonen.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEIL: Ugyldig brukernavn.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brukeren har ikke påkrevd tilgangsnivå';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
 
 $s_login_error = 'FEIL: Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
 $s_login_cookies_disabled = 'FEIL: Nettleseren din er ikke konfigurert til å støtte \'cookies\'.';
@@ -282,12 +282,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'En MELDING har blitt lagt til saken.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
@@ -386,18 +384,30 @@ $s_profile_updated_msg = 'Profilen har blitt oppdatert ...';
 # account_update.php
 $s_account_updated_msg = 'Kontoen din har blitt oppdatert ...';
 $s_email_updated = 'Epost adressen har blitt oppdatert';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Passordet er oppdatert';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Saken har blitt delegert ...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = 'Saken har blitt lukket ...';
 $s_close_immediately   = 'Lukke umiddelbart:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Lukke sak';
+$s_closed_bug_title = 'Lukke sak';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Saken er slettet ...';
@@ -425,8 +435,8 @@ $s_reopen_add_bugnote_title = 'Legg til beskjed om årsaken til gjenåpning';
 $s_bugnote_add_reopen_button = 'Legg til beskjed og gjenåpne saken';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Sett saksstatus til løst';
-$s_resolve_bug_button = 'Sett status til løst';
+$s_resolved_bug_title = 'Sett saksstatus til løst';
+$s_resolved_bug_button = 'Sett status til løst';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Saken har blitt utbedret. Legg til kommentar nedenfor ...';
@@ -500,7 +510,7 @@ $s_delete_link = 'Slett';
 $s_add_bugnote_title = 'Nytt notat';
 $s_add_bugnote_button = 'Legg til notat';
 $s_bugnote_edit_link = 'Rediger';
-$s_close_bug_button = 'Avslutt sak';
+$s_closed_bug_button = 'Avslutt sak';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Notat har blitt oppdatert ...';
@@ -898,6 +908,7 @@ $s_product_build = 'Underversjon';
 $s_system_profile = 'Systembeskrivelse';
 $s_update_bug_button = 'Oppdater sak';
 $s_bug_assign_to_button = 'Deleger til:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Gjenåpne sak';
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Filvedlegg';
@@ -942,15 +953,17 @@ $s_custom_field_access_level_rw = 'Skrivetilgang';
 $s_custom_field_length_min = 'Min. lengde';
 $s_custom_field_length_max = 'Maks. lengde';
 $s_custom_field_advanced = 'Avansert';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Sekvens';
-$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Email';
+$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Email,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'Dette feltet brukes nå av minst ett annet prosjekt.  Hvis du fortsetter vil alle verdier for dette feltet bli sletta.  Det er ikke mulig å gå tilbake på dette valget.  Hvis du ikke vil slette dette feltet, trykk Tilbake-knappen i vevleseren din.  For å fortsette, trykk knappen under.';
 $s_confirm_custom_field_deletion = 'Er du sikker på at du vil slette dette feltet og alle dets tilkoblede verdier?';
@@ -990,7 +1003,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1004,5 +1016,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

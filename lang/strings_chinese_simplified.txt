@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-01 14:19:19 $
+	# $Date: 2004-08-05 04:42:12 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.44 2004-08-01 14:19:19 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.45 2004-08-05 04:42:12 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -224,19 +224,21 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
+
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
+
 
 $s_login_error = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -297,13 +299,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = '这个 Bug 中新增加了一个注解。';
-
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "下列 Bug 添加了一个新的关联。";
 $s_email_notification_title_for_action_relationship_deleted = "下列 Bug 删除了一个关联。";
 $s_email_notification_title_for_action_relationship_child_resolved = "一个相关联的 Bug 已经解决。";
 $s_email_notification_title_for_action_relationship_child_closed = "一个相关联的 Bug 已经关闭。";
-# MASC RELATIONSHIP
 
 $s_email_reporter = "报告人";
 $s_email_handler = "主持人(Handler)";
@@ -402,18 +401,30 @@ $s_profile_updated_msg = "平台配置更新...";
 # account_update.php
 $s_account_updated_msg = "帐号信息更新成功...";
 $s_email_updated = 'Email地址更新成功';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = '真实姓名已经成功修改';
 $s_password_updated = '密码更新成功';
 
 # bug_assign.php
 $s_bug_assign_msg       = "已成功指派 Bug...";
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = "Bug 已被关闭...";
 $s_close_immediately   = "立即关闭:";
 
 # bug_close_page.php
-$s_close_bug_title = "关闭 Bug";
+$s_closed_bug_title = "关闭 Bug";
 
 # bug_delete.php
 $s_bug_deleted_msg = "Bug 已经被删除...";
@@ -441,8 +452,8 @@ $s_reopen_add_bugnote_title = "重新打开 Bug 的原因...";
 $s_bugnote_add_reopen_button = "添加 Bug 注解并重新打开 Bug";
 
 # bug_resolve_page.php
-$s_resolve_bug_title = "解决 Bug";
-$s_resolve_bug_button = "解决 Bug";
+$s_resolved_bug_title = "解决 Bug";
+$s_resolved_bug_button = "解决 Bug";
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = "Bug 已经被解决，请在下面填入 Bug 注解...";
@@ -516,7 +527,7 @@ $s_delete_link = "删除";
 $s_add_bugnote_title = "添加 Bug 注解";
 $s_add_bugnote_button = "添加 Bug 注解";
 $s_bugnote_edit_link = "编辑";
-$s_close_bug_button = "关闭 Bug";
+$s_closed_bug_button = "关闭 Bug";
 
 # Bugnote_update.php
 $s_bugnote_updated_msg = "已经被成功更新 Bug 注解...";
@@ -914,6 +925,7 @@ $s_product_build = "产品构建号";
 $s_system_profile = "系统说明";
 $s_update_bug_button = "修改 Bug";
 $s_bug_assign_to_button = '指派给：';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = "重新打开 Bug";
 $s_move_bug_button = '移动 Bug';
 $s_attached_files = "附件";
@@ -958,15 +970,17 @@ $s_custom_field_access_level_rw = '写权限';
 $s_custom_field_length_min = '最小长度';
 $s_custom_field_length_max = '最大长度';
 $s_custom_field_advanced = '高级';
-$s_custom_field_display_resolve = '解决 Bug 时显示';
-$s_custom_field_display_close = '关闭 Bug 时显示';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = '解决 Bug 时显示';
+$s_custom_field_display_closed = '关闭 Bug 时显示';
 $s_custom_field_require_report = '报告 Bug 时必需';
 $s_custom_field_require_update = '修改 Bug 时必需';
-$s_custom_field_require_resolve = '解决 Bug 时必需';
-$s_custom_field_require_close = '关闭 Bug 时必需';
+$s_custom_field_require_resolved = '解决 Bug 时必需';
+$s_custom_field_require_closed = '关闭 Bug 时必需';
 
 $s_custom_field_sequence = '顺序';
-$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:Email';
+$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:Email,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
@@ -1006,7 +1020,6 @@ $s_changelog = '修改日志';
 # Http auth
 $s_http_auth_realm = "Mantis 登录";
 
-# MASC RELATIONSHIP
 $s_bug = "Bug";
 $s_add_new_relationship = "新建关联";
 $s_add_new_relationship_button = "添加";
@@ -1020,5 +1033,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b>. 当前 Bug 的
 $s_create_child_bug_button = "创建子项 Bug";
 $s_bug_cloned_to = "Bug 已复制";
 $s_bug_created_from = "Bug 产生于";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.60 $
-	# $Author: vboctor $
-	# $Date: 2004-07-24 13:36:07 $
+	# $Revision: 1.61 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:14 $
 	#
-	# $Id: strings_turkish.txt,v 1.60 2004-07-24 13:36:07 vboctor Exp $
+	# $Id: strings_turkish.txt,v 1.61 2004-08-05 04:42:14 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -208,19 +208,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exist
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "an issue can't be related to it self.";
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -281,12 +281,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Bildirici';
 $s_email_handler = 'Ýlgili';
@@ -385,18 +383,30 @@ $s_profile_updated_msg = 'Profil güncelle...';
 # account_update.php
 $s_account_updated_msg = 'Hesabýnýz baþarýyla güncellendi...';
 $s_email_updated = 'Email address successfully updated';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Bug baþarýyla atandý...';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg = 'Bug kapatýldý...';
 $s_close_immediately   = 'Hemen Kapat:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Bug Kapat';
+$s_closed_bug_title = 'Bug Kapat';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Bug silindi...';
@@ -424,8 +434,8 @@ $s_reopen_add_bugnote_title = 'Bug\'ý yeniden açma sebebini giriniz';
 $s_bugnote_add_reopen_button = 'Bug Notu ekle ve Bug\'ý yeniden aç';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Bug çözümle';
-$s_resolve_bug_button = 'Bug çözümle';
+$s_resolved_bug_title = 'Bug çözümle';
+$s_resolved_bug_button = 'Bug çözümle';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Bug çözümlendi. Bug Notu giriniz...';
@@ -499,7 +509,7 @@ $s_delete_link = 'Sil';
 $s_add_bugnote_title = 'Bug Notu Ekle';
 $s_add_bugnote_button = 'Bug Notu Ekle';
 $s_bugnote_edit_link = 'Güncelle';
-$s_close_bug_button = 'Bug Kapat';
+$s_closed_bug_button = 'Bug Kapat';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Bug notu baþarýyla güncellendi...';
@@ -897,6 +907,7 @@ $s_product_build = 'Ürün Alt Versiyonu';
 $s_system_profile = 'Sistem Özellikleri';
 $s_update_bug_button = 'Bug Güncelle';
 $s_bug_assign_to_button = 'Assign To:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Bug Yeniden Aç';
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Eklenen Dosyalar';
@@ -910,8 +921,8 @@ $s_view_advanced_link = 'Detaylý Link';
 $s_viewing_bug_simple_details_title = 'Basit Bug Detaylarý Ýzleniyor';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_no_users_monitoring_bug = 'There are no users monitoring this issue.';
+$s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
 
 # bug_sponsorship_list_view_inc.php
@@ -940,16 +951,18 @@ $s_custom_field_access_level_r = 'Read Access';
 $s_custom_field_access_level_rw = 'Write Access';
 $s_custom_field_length_min = 'Min. Length';
 $s_custom_field_length_max = 'Max. Length';
-$s_custom_field_advanced = 'Advanced';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_advanced = 'Display Only On Advanced Page';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
@@ -989,7 +1002,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1003,5 +1015,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2004-08-01 12:35:37 $
+	# $Revision: 1.2 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-05 04:42:13 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.1 2004-08-01 12:35:37 vboctor Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.2 2004-08-05 04:42:13 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,7 +98,6 @@ $s_login_link = 'ログイン';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
-
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
 $s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
@@ -210,20 +209,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'バージョンが重複していま�
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョンがありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ユーザー名が無効です。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ユーザーが必要なアクセス権限を持っていません。';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '後援機能が有効ではありません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '後援 %d が見つかりません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '後援(%s)は 最低額(%s)以下です。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ハンドラーは、後援済みの改善要求を扱うために必要なアクセスレベルを持っていません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 改善要求への後援の割り当てにはより高いアクセスレベルを要求します。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 後援済みの改善要求を割り当てることは、より高いアクセスレベルを要求します。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "後援が見つかりません。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルを要求します。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付け出来ません。";
-# MASC RELATIONSHIP
 
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
@@ -284,12 +282,10 @@ $s_email_notification_title_for_action_sponsorship_updated = '下記改善要求
 $s_email_notification_title_for_action_sponsorship_deleted = '下記改善要求の後援は世間離れしています。';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "新しい関連は下記改善要求に加えられました。";
 $s_email_notification_title_for_action_relationship_deleted = "関連は下記改善要求から削除されました。";
 $s_email_notification_title_for_action_relationship_child_resolved = "関連改善要求は解決しました。";
 $s_email_notification_title_for_action_relationship_child_closed = "関連改善要求は閉じました。";
-# MASC RELATIONSHIP
 
 $s_email_reporter = '登録者';
 $s_email_handler = '担当者';
@@ -388,18 +384,30 @@ $s_profile_updated_msg = 'プロフィールが更新されました。';
 # account_update.php
 $s_account_updated_msg = 'アカウントが正常に更新されました。';
 $s_email_updated = 'Emailアドレスが正常に更新されました。';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = '本名の更新に成功しました。';
 $s_password_updated = 'パスワードが正常に更新されました。';
 
 # bug_assign.php
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = '改善要求が完了しました。';
 $s_close_immediately   = 'すぐに完了:';
 
 # bug_close_page.php
-$s_close_bug_title = '改善要求の完了';
+$s_closed_bug_title = '改善要求の完了';
 
 # bug_delete.php
 $s_bug_deleted_msg = '改善要求が削除されました。';
@@ -427,8 +435,8 @@ $s_reopen_add_bugnote_title = '差戻しの理由';
 $s_bugnote_add_reopen_button = 'コメントの追加';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = '解決状況の入力';
-$s_resolve_bug_button = '解決状況の更新';
+$s_resolved_bug_title = '解決状況の入力';
+$s_resolved_bug_button = '解決状況の更新';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = '改善要求が実装されました。↓コメントを記述して下さい。';
@@ -502,7 +510,7 @@ $s_delete_link = '削除';
 $s_add_bugnote_title = 'コメント追加';
 $s_add_bugnote_button = '追加';
 $s_bugnote_edit_link = '編集';
-$s_close_bug_button = '完了';
+$s_closed_bug_button = '完了';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'コメントが更新されました。';
@@ -900,6 +908,7 @@ $s_product_build = '製品ビルド';
 $s_system_profile = 'システムの詳細説明';
 $s_update_bug_button = '更新';
 $s_bug_assign_to_button = '担当者の割り当て';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = '差戻し';
 $s_move_bug_button = '改善要求の移動';
 $s_attached_files = '添付ファイル';
@@ -944,15 +953,17 @@ $s_custom_field_access_level_rw = '読み書き権限';
 $s_custom_field_length_min = '項目長(最小値)';
 $s_custom_field_length_max = '項目長(最大値)';
 $s_custom_field_advanced = '高度な画面で表示';
-$s_custom_field_display_resolve = '改善要求を解決する場合表示';
-$s_custom_field_display_close = '改善要求を閉じる場合表示';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_resolved = '改善要求を解決する場合表示';
+$s_custom_field_display_closed = '改善要求を閉じる場合表示';
 $s_custom_field_require_report = 'レポートで要求';
 $s_custom_field_require_update = '更新で要求';
-$s_custom_field_require_resolve = '解決で要求';
-$s_custom_field_require_close = 'クローズで要求';
+$s_custom_field_require_resolved = '解決で要求';
+$s_custom_field_require_closed = 'クローズで要求';
 
 $s_custom_field_sequence = '表示順';
-$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール';
+$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:Checkbox,6:List,7:Multiselection list';
 
 $s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
@@ -992,7 +1003,6 @@ $s_changelog = '変更履歴';
 # Http auth
 $s_http_auth_realm = "Mantis ログイン";
 
-# Issue Relationships
 $s_bug = "改善要求";
 $s_add_new_relationship = "新規関連";
 $s_add_new_relationship_button = "追加";
@@ -1006,4 +1016,6 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改�
 $s_create_child_bug_button = "子の作成";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>
