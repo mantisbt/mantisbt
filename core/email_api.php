@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.21 2002-10-10 12:42:23 vboctor Exp $
+	# $Id: email_api.php,v 1.22 2002-10-10 13:33:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -350,7 +350,7 @@
 	}
 	# --------------------
 	# Build the bug info part of the message
-	function email_build_bug_message( $p_bug_id, $p_message, &$p_custom_header ) {
+	function email_build_bug_message( $p_bug_id, $p_message, &$p_category ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
@@ -429,9 +429,9 @@
 		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v2_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
-		$p_custom_headers = '';
+		$p_category = '';
 		if ( OFF != config_get( 'email_set_category' ) ) {
-			$p_custom_header = 'Keywords: [' . $t_project_name . '] ' . $v_category . "\n";
+			$p_category = '[' . $t_project_name . '] ' . $v_category;
 		}
 
 		return $t_message;
@@ -508,9 +508,9 @@
 		$p_subject = email_build_subject( $p_bug_id );
 
 		# build message
-		$t_custom_headers = '';
+		$t_category = '';
 		$t_message = $p_message."\n";
-		$t_message .= email_build_bug_message( $p_bug_id, $p_message, $t_custom_headers );
+		$t_message .= email_build_bug_message( $p_bug_id, $p_message, $t_category );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 		$t_message .= email_build_history_message( $p_bug_id );
 
@@ -521,16 +521,16 @@
 			## list of receivers
 			$to = $g_to_email.(($p_headers && $g_to_email) ? ', ' : '').$p_headers;
 			# echo '<br />email_bug_info::Sending email to :'.$to;
-			$res1 = email_send( $to, $p_subject, $t_message, $t_customer_headers );
+			$res1 = email_send( $to, $p_subject, $t_message, '', $t_category );
 		} else {
 			# Send Email
 			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
-			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers . $t_custom_headers );
+			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers, $t_category );
 		}
 	}
 	# --------------------
 	# this function sends the actual email
-	function email_send( $p_recipient, $p_subject, $p_message, $p_header='' ) {
+	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='' ) {
 		global $g_from_email, $g_enable_email_notification,
 				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
@@ -598,6 +598,10 @@
 
 			$mail->Subject = $t_subject;
 			$mail->Body    = make_lf_crlf( "\n".$t_message );
+			
+			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
+				$mail->AddCustomHeader( "Keywords: $p_category" );
+			}
 
 			if( !$mail->Send() ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
@@ -618,6 +622,10 @@
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";
+
+			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
+				$t_headers = "Keywords: $p_category\n";
+			}
 
 			$t_headers .= $p_header;
 
