@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.53 2004-07-10 23:38:02 vboctor Exp $
+	# $Id: string_api.php,v 1.54 2004-07-20 15:31:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -331,7 +331,7 @@
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id = null ) {
-		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
+		return 'view.php?id=' . $p_bug_id;
 	}
 
 	# --------------------
@@ -362,7 +362,7 @@
 	# return the name and GET parameters of a bug UPDATE page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
-		return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
+		return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . $p_bug_id;
 	}
 
 	# --------------------
