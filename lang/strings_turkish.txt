@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Date: 2003-07-31 15:53:41 $
 	#
-	# $Id: strings_turkish.txt,v 1.49 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_turkish.txt,v 1.50 2003-07-31 15:53:41 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -140,53 +140,53 @@ $s_bugnote_title = 'Bugnote handler' ;
 $s_bugnote_date = 'Date of bugnote';
 $s_bugnote_description = 'Bugnote description';
 
-$s_error_no_proceed = 'Please use the 'Back' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Please use the \'Back\' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'HATA: Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'HATA: Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
 $MANTIS_ERROR[ERROR_SQL] = 'HATA: SQL hatasý belirlendi. Lütfen hatayý bildiriniz ';
-$MANTIS_ERROR[ERROR_REPORT] = 'HATA: Raporunuzda bir hata tespit edildi.
+$MANTIS_ERROR[ERROR_REPORT] = 'HATA: Raporunuzda bir hata tespit edildi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HATA: Dosya adý belirtilmedi.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HATA: Bu dosya türüne izin verilmemektedir';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'HATA: Bu dosya türüne izin verilmemektedir';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HATA: Dizin bulunamadý. Lütfen proje ayarlarýnýzý kontrol ediniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HATA: Bu daha önce girilmiþ bir dosya adý. Lütfen önce dosyayý siliniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HATA: Gerekli bir girdi alaný boþ býrakýldý. Lütfen girdilerinizi kontrol ediniz.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HATA: Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'HATA: Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option '%s' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Bugnote not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'User not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set a bug as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'The action cannot be performed because the bug has been resolved';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
@@ -200,7 +200,7 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn't know how to handle cookies, or refuses to handle them.';
+$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Geri Git';
@@ -241,7 +241,7 @@ $s_account_name_msg = 'Kullanýcý adýnýz';
 $s_news_password_msg = 'Yeni Þifreniz';
 
 $s_new_bug_msg = 'Aþaðýdaki YENÝ bug EKLENDÝ.';
-$s_email_bugnote_msg = 'Bu bug'a bir bug notu eklendi.';
+$s_email_bugnote_msg = 'Bu bug\'a bir bug notu eklendi.';
 $s_email_resolved_msg = 'Aþaðýdaki bug ÇÖZÜMLENDÝ';
 $s_email_close_msg = 'Aþaðýdaki bug KAPATILDI';
 $s_email_feedback_msg = 'Aþaðýdaki bug ÝLAVE BÝLGÝ gerektiriyor.';
@@ -359,7 +359,7 @@ $s_close_bug_title = 'Bug Kapat';
 $s_bug_deleted_msg = 'Bug silindi...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Bu bug'ý silmek istediðinizden emin misiniz?';
+$s_delete_bug_sure_msg = 'Bu bug\'ý silmek istediðinizden emin misiniz?';
 $s_delete_bug_button = 'Bug Sil';
 
 # bug_monitor.php
@@ -377,8 +377,8 @@ $s_max_file_size = 'Max size';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Bug yeniden açýldý...';
-$s_reopen_add_bugnote_title = 'Bug'ý yeniden açma sebebini giriniz';
-$s_bugnote_add_reopen_button = 'Bug Notu ekle ve Bug'ý yeniden aç';
+$s_reopen_add_bugnote_title = 'Bug\'ý yeniden açma sebebini giriniz';
+$s_bugnote_add_reopen_button = 'Bug Notu ekle ve Bug\'ý yeniden aç';
 
 # bug_resolve_page.php
 $s_resolve_bug_title = 'Bug çözümle';
@@ -403,7 +403,7 @@ $s_reminder = 'Reminder';
 $s_bug_updated_msg = 'Bug baþarýyla güncellendi...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Bug'a Dön';
+$s_back_to_bug_link = 'Bug\'a Dön';
 $s_update_simple_link = 'Basit Güncelleme';
 $s_updating_bug_advanced_title = 'Bug Bilgileri Güncelleme';
 $s_id = 'NO';
@@ -713,11 +713,11 @@ $s_remove_link = 'sil';
 $s_updated_user_msg = 'Kullanýcý baþarýyla güncellendi';
 
 # report_add.php
-$s_must_enter_category = 'Bir 'kategori' seçmelisiniz';
-$s_must_enter_severity = 'Bir 'þiddet' seviyesi seçmelisiniz';
-$s_must_enter_reproducibility = 'Bir 'tekrarlanabilirlik' eklemelisiniz';
-$s_must_enter_summary = 'Bir 'özet' eklemelisiniz';
-$s_must_enter_description = 'Bir 'taným' eklemelisiniz';
+$s_must_enter_category = 'Bir \'kategori\' seçmelisiniz';
+$s_must_enter_severity = 'Bir \'þiddet\' seviyesi seçmelisiniz';
+$s_must_enter_reproducibility = 'Bir \'tekrarlanabilirlik\' eklemelisiniz';
+$s_must_enter_summary = 'Bir \'özet\' eklemelisiniz';
+$s_must_enter_description = 'Bir \'taným\' eklemelisiniz';
 $s_report_more_bugs = 'Daha bug bildir ';
 $s_submission_thanks_msg = 'Raporunuz için teþekkürler.';
 
@@ -778,7 +778,7 @@ $s_by_resolution = 'çözümlenmeye göre';
 $s_by_category = 'kategoriye göre';
 $s_by_priority = 'önceliðe göre';
 $s_by_developer = 'geliþtiriciye göre';
-$s_by_reporter ='bildirene göre';
+$s_by_reporter = 'bildirene göre';
 $s_time_stats = 'çözümlenmiþ buglar için süre istatistikleri (gün) ';
 $s_longest_open_bug = 'en uzun süredir açýk olan bug';
 $s_longest_open = 'en uzun süredir açýk olan';
@@ -797,7 +797,7 @@ $s_updated = 'Son Güncelleme';
 
 # view_all_inc.php
 $s_none = 'hiçbiri';
-$s_search ='Ara';
+$s_search = 'Ara';
 $s_view_prev_link = 'Öncekini Göster';
 $s_view_next_link = 'Sonrakini Göster';
 $s_prev = 'Prev';
@@ -811,7 +811,7 @@ $s_viewing_bug_advanced_details_title = 'Detaylý Bug Bilgileri Ýzleme';
 $s_product_build = 'Ürün Alt Versiyonu';
 $s_system_profile = 'Sistem Özellikleri';
 $s_update_bug_button = 'Bug Güncelle';
-$s_bug_assign_button    = 'Kendine Ata';
+$s_bug_assign_button = 'Kendine Ata';
 $s_reopen_bug_button = 'Bug Yeniden Aç';
 $s_attached_files = 'Eklenen Dosyalar';
 $s_publish = 'Publish';
