@@ -12,16 +12,16 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.90 $
-	# $Author: vboctor $
-	# $Date: 2004-05-11 22:14:59 $
+	# $Revision: 1.91 $
+	# $Author: int2str $
+	# $Date: 2004-05-21 18:46:02 $
 	#
-	# $Id: strings_german.txt,v 1.90 2004-05-11 22:14:59 vboctor Exp $
+	# $Id: strings_german.txt,v 1.91 2004-05-21 18:46:02 int2str Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'windows-1252';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Verschieben';

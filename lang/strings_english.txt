@@ -9,16 +9,16 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.168 $
-	# $Author: narcissus $
-	# $Date: 2004-05-18 19:32:58 $
+	# $Revision: 1.169 $
+	# $Author: int2str $
+	# $Date: 2004-05-21 18:46:02 $
 	#
-	# $Id: strings_english.txt,v 1.168 2004-05-18 19:32:58 narcissus Exp $
+	# $Id: strings_english.txt,v 1.169 2004-05-21 18:46:02 int2str Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-1';
+$s_charset = 'windows-1252';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
