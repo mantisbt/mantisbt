@@ -179,6 +179,9 @@
 	$s_bug_close_msg       = "Bug has been closed...";
 	$s_close_immediately   = "Close immediately:";
 
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
+
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug has been deleted...";
 

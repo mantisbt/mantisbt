@@ -15,15 +15,15 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php # Resolve Form BEGIN ?>
+<?php # Close Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_bug_reopen ?>">
+<form method="post" action="<?php echo $g_bug_close ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_reopen_add_bugnote_title ?>
+		<?php echo $s_close_bug_title ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -33,13 +33,13 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
+		<input type="submit" value="<?php echo $s_close_bug_button ?>">
 	</td>
 </tr>
 </form>
 </table>
 </div>
-<?php # Resolve Form END ?>
+<?php # Close Form END ?>
 </form>
 </table>
 

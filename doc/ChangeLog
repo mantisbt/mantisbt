@@ -68,6 +68,8 @@ Mantis
  * Modified wordwrap to use built-in php function if available.
  * Modified bug_assign and bug_close to use g_quick_proceed.
  * Modified bug_resolve to use only one form.
+ * Modified bug_close to allow a bugnote to be added when closing.
+ * Modified bug_reopen to allow a bugnote to be added when reopening.
  * Added project name as supplementary info next to bug id in buglist for "All projects" option
  * Added Basic Authentication patch.
  * Added CSV Export patch.
