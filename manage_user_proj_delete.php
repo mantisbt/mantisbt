@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_proj_delete.php,v 1.17 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_proj_delete.php,v 1.18 2004-05-06 13:09:35 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -15,7 +15,6 @@
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_user_id		= gpc_get_int( 'user_id' );
 
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
 	$result = project_remove_user( $f_project_id, $f_user_id );
