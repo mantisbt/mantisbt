@@ -72,6 +72,7 @@
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_bug_table, $g_mantis_user_table,
 				$g_mantis_project_table,
+				$g_project_cookie_val,
 				$g_mantis_project_user_list_table,
 				$g_notify_developers_on_new,
 				$g_use_bcc, $g_use_phpMailer;
