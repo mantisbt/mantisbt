@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.37 2005-02-27 23:14:19 thraxisp Exp $
+	# $Id: summary_api.php,v 1.38 2005-03-15 19:48:15 prichards Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -439,7 +439,7 @@
 					$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
 				}
 
-				summary_helper_print_row( string_attribute($label), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -493,7 +493,7 @@
 				}
 			}
 
-			summary_helper_print_row( string_attribute($label), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
