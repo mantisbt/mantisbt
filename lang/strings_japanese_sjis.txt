@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.72 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:20:57 $
+	# $Revision: 1.73 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-09 21:18:31 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.72 2005-02-28 07:20:57 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.73 2005-03-09 21:18:31 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1144,7 +1144,7 @@ $s_view_issue = "改善要求を見る";
 $s_checkin = 'チェックイン';
 
 # Pemissions report
-$s_perm_rpt_capability = '機能';
+$s_perm_rpt_capability = "機能'";
 $s_view = '参照';
 $s_issues = '改善要求';
 $s_report_issue = '改善要求の報告';
