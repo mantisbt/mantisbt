@@ -242,6 +242,9 @@
 	# Display another instance of the menu at the bottom.  The top menu will still remain.
 	$g_show_footer_menu		= OFF;
 
+	# --- show extra menu bar with all available projects ---
+	$g_show_project_menu_bar = OFF;
+
 	# --- show assigned to names ------
 	# This is in the view all pages
 	$g_show_assigned_names	= ON;

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.25 2002-12-10 21:02:56 jfitzell Exp $
+	# $Id: html_api.php,v 1.26 2002-12-17 06:53:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,6 +43,10 @@
 	function print_page_top2() {
 		print_page_top2a();
 		print_login_info();
+		if( ON == config_get( 'show_project_menu_bar' ) ) {
+			print_project_menu_bar();
+			echo '<br />';
+		}
 		print_menu();
 	}
 	# --------------------
@@ -380,6 +384,50 @@
 			PRINT '</tr>';
 			PRINT '</table>';
 		}
+	}
+
+	# --------------------
+	# Print the menu bar with a list of projects to which the user has access
+	function print_project_menu_bar() {
+		$t_user_id = current_user_get_field( 'id' );
+		$t_access_level = current_user_get_field( 'access_level' );
+
+		$t_pub = PUBLIC;
+		$t_prv = PRIVATE;
+
+		$t_project_table = config_get( 'mantis_project_table' );
+		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+		if ( ADMINISTRATOR == $t_access_level ) {
+			$query = "SELECT p.id, p.name
+						FROM $t_project_table p
+						WHERE p.enabled=1
+						ORDER BY p.name";
+		} else {
+			$query = "SELECT p.id, p.name
+						FROM $t_project_table p, $t_project_user_list_table u
+						WHERE p.enabled=1
+						  AND p.id=u.project_id
+						  AND ((p.view_state=$t_pub) OR
+							   (p.view_state=$t_prv AND u.user_id=$t_user_id))
+						ORDER BY p.name";
+		}
+
+		$result = db_query( $query );
+		$project_count = db_num_rows( $result );
+
+		PRINT '<table class="width100" cellspacing="0">';
+		PRINT '<tr>';
+			PRINT '<td class="menu">';
+			PRINT '<a href="set_project.php?f_project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
+			for ( $i=0 ; $i < $project_count ; $i++ ) {
+				$row = db_fetch_array( $result );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
+				PRINT " | <a href=\"set_project.php?f_project_id=$v_id\">$v_name</a>";
+			}
+			PRINT '</td>';
+		PRINT '</tr>';
+		PRINT '</table>';
 	}
 
 	### --------------------
