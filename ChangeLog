@@ -1,6 +1,16 @@
 Mantis
 
-10.24.2001  -   0.15.8
+10.28.2001  -   0.15.10
+
+ * Fixed problem with not being able to uncheck "hide closed" bugs filter checkbox
+ * Fixed error with warnings on sending email
+ * Fixed problem with being kicked out when editing bugnote
+
+10.27.2001  -   0.15.9
+
+ * Fixed problem with warning on view filters.
+
+10.26.2001  -   0.15.8
 
  * Fixed problem with $g_manage_cookie not being unset on logout
  * Fixed error in db_upgrade.sql ( nul; should be null; )
@@ -28,6 +38,7 @@ Mantis
  * Removed email_bug_info_to_address()
  * Removed print_handler_option_list()
  * Removed view_all_assigned/unassigned/report_bug_page and associated variables.
+
 08.28.2001  -   0.15.7
 
  * Fixed problem with account prefs not being updated.
