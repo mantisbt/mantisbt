@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.1 2005-03-19 16:25:59 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.2 2005-03-19 16:29:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -18,7 +18,7 @@
 	$t_project = helper_get_current_project();
 
 	html_page_top1( lang_get( 'manage_threshold_config' ) );
-#	html_meta_redirect( $t_redirect_url );
+	html_meta_redirect( $t_redirect_url );
 	html_page_top2();
 
 	$t_access = current_user_get_access_level();
