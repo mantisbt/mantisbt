@@ -22,17 +22,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 -------------------------------------------------------------------------------
 Important Files:
 
-INSTALL          - installation instructions
-UPGRADING        - upgrade instructions
-TROUBLESHOOTING  - solutions to common problems
-CONFIGURATION    - help on custom configuration
-LICENSE          - GPL license
-CREDITS          - list of contributors
-Changelog        - List of fixes, additions, and todo items
-config_inc.php   - global configuration options
-core_API.php     - core functions
-db_generate.sql  - SQL table statements
-db_upgrade.sql   - SQL upgrade statements
+doc/INSTALL             - Installation instructions
+doc/UPGRADING           - Upgrade instructions
+doc/TROUBLESHOOTING     - How to get help
+doc/CONFIGURATION       - Help on custom configuration
+doc/LICENSE             - GNU General Public License
+doc/CREDITS             - List of contributors
+doc/Changelog           - List of fixes, additions, and todo items
+doc/documentation.html  - Help on general use
+doc/configuration.html  - Help on configuration options for config_inc.php
+default/config_inc.php  - Configuration file
+core_*_API.php          - Core functions
+sql/db_generate.sql     - SQL table statements
+sql/db_upgrade.sql      - SQL upgrade statements
+admin_upgrade.php3      - SQL upgrade script (see doc/UPGRADING)
+lang/                   - Localization string files
 
 -------------------------------------------------------------------------------
 
@@ -40,7 +44,7 @@ Mantis grew out of my need for a simple and easily adaptable bugtracking
 system.  I took a look at Bugzilla but I didn't like the interface and
 complexity.  Also, I know php but barely know perl.
 
-Originally this was written by a friend of mine but he has let me take over the
+Originally this was written by a friend of mine but I have taken over the
 project entirely.  In any case I completely rewrote his code.  I attempted to
 make the HTML fairly modular so people could easily dive into customization.
 

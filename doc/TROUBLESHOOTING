@@ -2,12 +2,13 @@
 ### Troubleshooting ###
 -------------------------------------------------------------------------------
 
-Make sure you ran the upgrade steps (UPGRADING) if you run into new problems
-after installing a new version.
+Make sure you ran the upgrade steps in the UPGRADE file.
 
 For additional help please visit the website: http://mantisbt.sourceforge.net/
 
-FAQ: http://mantisbt.sourceforge.net/faq.php3
+FAQ:             http://mantisbt.sourceforge.net/faq.php3
+Forums:          http://mantisbt.sourceforge.net/forums.php3
+Mailing Lists:   http://mantisbt.sourceforge.net/mailinglists.php3
 
 * PROBLEM: Cannot login.  It just redirects me to the login page with no errors
 or messages.
@@ -20,7 +21,7 @@ or messages.
 	result the crypt() funtion may not work properly.  If possible install DES
 	encryption support for your operating system.  Otherwise you will need to
 	either reinstall or manually convert passwords over to another supported
-	encryption system
+	encryption system.
 
 	SOLUTION 3: You do not have register_globals enabled. Set this to On in
 	your php.ini file.
@@ -29,5 +30,10 @@ or messages.
 
 	SOLUTION 4: You do not have cookies enablewd in your browser.  You must
 	have cookies enabled.
+
+	SOLUTION 5: You are using crypt() but your operating system is really
+	calling MD5 instead.  Set the config_inc.php variable $g_login_method to
+	MD5.  You may also have to replace the database passwords with MD5
+	passwords.  See the bottom of sql/db_generate.sql for details.
 
 -------------------------------------------------------------------------------

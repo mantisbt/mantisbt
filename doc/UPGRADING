@@ -2,14 +2,44 @@
 #    Upgrading
 # -----------------------------------------------------------------------------
 
-
-# Here are the basic steps to upgrade the database tables
-# Take a look in db_upgrade.sql as well.
+# *********************************************
+# *** ALWAYS MAKE A BACKUP OF YOUR DATABASE ***
+# *********************************************
 
 # Generally, you can just copy over the current installation.  You may want to
 # backup up your current config_inc.php and any customizations that you may
 # have made.  Usually database modifications will occur only between
 # significant releases (like 0.14.x to 0.15.0).
+
+# *** NOTE *** : As of 0.17.0 the upgrading process is simplified.  The new
+# config_inc.php is stored in the default/ subdirectory.  You do not have to
+# modify this file.  Mantis will also look in the mantis root directory to
+# see if there is a config_inc.php file located there.
+#
+# mantis/config_inc.php           (your old config_inc.php)
+# mantis/default/config_inc.php   (the new defaults)
+#
+# Mantis will first pull the default values, then pull the site specific values.
+# This way you will gain the new global variables but not have to continually
+# reset your core settings.  It is best to leave the default file alone.
+#
+# I would advise you to take a few minutes and create a minimal config_inc.php
+# file that contains only values that are different from the
+# default/config_inc.php file.  Email values, database settings, path values,
+# and any settings different from the defaults should go in here.
+
+# Take a look in db_upgrade.sql to see the actual upgrade commands.
+# Running the admin_upgrade.php script will usually provide a nicer way
+# to upgrade.
+
+# =================
+# 0.16.x to 0.17.0
+# =================
+
+Please run the admin_upgrade.php3 script and click on the 0.17.0 upgrade.
+
+Several new tables were added along with modifications to several fields.
+TIMESTAMPS were removed and replaced with DATETIME fields.
 
 # =================
 # 0.15.x to 0.16.0

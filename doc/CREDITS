@@ -3,59 +3,64 @@ Mantis - a php based bugtracking system
 Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
 -------------------------------------------------------------------------------
 
-* If you feel that you have been wrongly left off this list then please
-contact me.
+*** Please contact me if you should be on this list.
 
 CREDITS
 
-Kenzaburo Ito - programming
-Hai Nguyen - original implementation
+Adminstrator:
+
+Kenzaburo Ito
 
 Developers:
 
+James Beard
 Ludwig Ruderstaller
 Niels Andersen
-James Beard
 
 Contributors:
 
-Sean Phelan
-Steve Davies
-Jason Stewart
-Helmut Franzke
-Scott Roberts
-Duncan Lisset
-Steve Kwee
-Griff Miller
-David Jeske
-Thaler Jörg
-Brett England
-Jan Derk
+Adrian Spinei
 Ariel Arjona
-Talal Nehme
-Leigh Morresi
+August Zajonc
+Brett England
+David Jeske
+Duncan Lisset
+Griff Miller
+Guy Brandt
+Hai Nguyen
+Helmut Franzke
+Jan Derk
 Jaroslaw Lewandowski
+Jason Stewart
+Leigh Morresi
+Sean Phelan
+Scott Roberts
+Steve Davies
+Steve Kwee
+Talal Nehme
+Thaler Jörg
+Thomas Fromm
 
 Translations:
 
+Adam Bienias
+Adrian Spinei
+Alex Volkov
+Daniel Coquette
+Eric Hartmann
+Espen Holje
+Felipe Tonioli
 Hermann-Josef Beckers
 Heiko Gierer
-Felipe Tonioli
-Pablo Corral
 Hellekin O. Wolf
-Luca Pescatore
-Oktay Altunergil
 Jan-Bart de Vreede
-Espen Holje
 J.I. Kim
-Roland Meyers
-Pao-Hsi Huang
-Eric Hartmann
-Daniel Coquette
-Søren Mortensen
-Alex Volkov
-Marco Vassura
-Adam Bienias
+Luca Pescatore
 Ludvig Omholt
 Luís Martins
-Adrian Spinei
+Oktay Altunergil
+Marco Vassura
+Pablo Corral
+Pao-Hsi Huang
+Roland Meyers
+Søren Mortensen
