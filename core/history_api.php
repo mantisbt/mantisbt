@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.12 2003-01-19 23:56:08 vboctor Exp $
+	# $Id: history_api.php,v 1.13 2003-02-23 11:53:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -100,7 +100,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$v_date_modified = date( config_get( 'complete_date_format' ), $v_date_modified );
+			$v_date_modified = date( config_get( 'normal_date_format' ), $v_date_modified );
 
 			switch ( $v_field_name ) {
 			case 'status':

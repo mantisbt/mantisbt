@@ -22,6 +22,7 @@ Mantis ChangeLog
  * Fix #2969: Bug not found error when deleting a bugnote.
  * Fix #2970: Sending a reminder sends two notifications.
  * Fix #2974: Message "APPLICATION WARNING #300" on main page.
+ * Fix #2975: 'date modified' column of bug history in email is to tight.
  * Fix #2976: Incorrect handling of URLs.
  * Fix #2978: URLs not hyperlinked in news_add page.
  * Fix #2980: Escaping fixes are not applied to the bug history table.
