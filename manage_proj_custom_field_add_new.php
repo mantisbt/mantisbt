@@ -10,17 +10,15 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_name ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
+	$f_name			= gpc_get_string( 'f_name' );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
 
 	$t_names_array = explode( '|', $f_name );
-	$t_count = count( $t_names_array );
-	$duplicate = false;
+	$t_duplicate = false;
 
 	foreach ( $t_names_array as $t_name ) {
 		$t_name = trim( $t_name );
-		if ( $t_name == '') {
+		if ( is_blank( $t_name ) ) {
 			continue;
 		}
 
@@ -28,11 +26,11 @@
 			$t_generated_id = custom_field_create( $t_name );
 			custom_field_bind( $t_generated_id, $f_project_id );
 		} else {
-			$duplicate = true;
+			$t_duplicate = true;
 		}
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -43,8 +41,8 @@
 <br />
 <div align="center">
 <?php
-	if ( $duplicate ) {		# DUPLICATE
-		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE].'<br />';
+	if ( $t_duplicate ) {		# DUPLICATE
+		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] . '<br />';
 	}
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );

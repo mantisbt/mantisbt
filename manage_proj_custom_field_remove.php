@@ -10,30 +10,23 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_field_id ) || empty( $f_project_id ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
+	$f_field_id		= gpc_get_int( 'f_field_id' );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
 
-	$result = custom_field_remove( $f_field_id, $f_project_id );
+	custom_field_remove( $f_field_id, $f_project_id );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
+	print_meta_redirect( $t_redirect_url );
 ?>
 <?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $result ) {				# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
-	} else {						# FAILURE
-		print_sql_error( $query );
-	}
+	echo lang_get( 'operation_successful' ).'<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

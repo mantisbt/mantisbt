@@ -9,6 +9,9 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
+
+	$f_field_id		= gpc_get_int( 'f_field_id' );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -120,10 +123,10 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'custom_field_seqence' ) ?>
+		<?php echo lang_get( 'custom_field_sequence' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_seqence" size="32" maxlength="64" value="<?php echo $t_definition['seqence'] ?>" />
+		<input type="text" name="f_sequence" size="32" maxlength="64" value="<?php echo $t_definition['sequence'] ?>" />
 	</td>
 </tr>
 <tr>

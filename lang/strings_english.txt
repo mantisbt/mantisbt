@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.92 $
+	# $Revision: 1.93 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-04 08:05:48 $
+	# $Date: 2002-12-05 09:07:43 $
 	#
-	# $Id: strings_english.txt,v 1.92 2002-12-04 08:05:48 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.93 2002-12-05 09:07:43 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -818,6 +818,6 @@
 	$s_custom_field_length_min = 'min. length';
 	$s_custom_field_length_max = 'max. length';
 	$s_custom_field_advanced = 'advanced';
-	$s_custom_field_seqence = 'seqence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enummeration,4:Email';
+	$s_custom_field_sequence = 'sequence';
+	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
 ?>

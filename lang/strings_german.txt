@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-04 08:05:48 $
+	# $Date: 2002-12-05 09:07:44 $
 	#
-	# $Id: strings_german.txt,v 1.45 2002-12-04 08:05:48 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.46 2002-12-05 09:07:44 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -767,6 +767,6 @@
 	$s_custom_field_length_min = 'Mindestl&auml;nge';
 	$s_custom_field_length_max = 'Maximale L&auml;nge';
 	$s_custom_field_advanced = 'Erweitert';
-	$s_custom_field_seqence = 'Reihenfolge';
+	$s_custom_field_sequence = 'Reihenfolge';
 	$s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufz&auml;hlung,4:EMail';
 ?>

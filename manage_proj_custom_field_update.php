@@ -21,29 +21,23 @@
 	$t_values['access_level_rw'] = gpc_get_int(    'f_access_level_rw' );
 	$t_values['length_min']      = gpc_get_int(    'f_length_min' );
 	$t_values['length_max']      = gpc_get_int(    'f_length_max' );
-	$t_values['advanced']        = gpc_get_int(    'f_advanced', 0 );
-	$t_values['seqence']         = gpc_get_int(    'f_seqence' );
+	$t_values['advanced']        = gpc_get_bool(   'f_advanced' );
+	$t_values['sequence']        = gpc_get_int(    'f_sequence' );
 
-	$result = custom_field_update( $f_field_id, $t_values );
+	custom_field_update( $f_field_id, $t_values );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
+	print_meta_redirect( $t_redirect_url );
 ?>
 <?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $result ) {					# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
-	} else {							# FAILURE
-		print_sql_error( $query );
-	}
+	echo lang_get( 'operation_successful' ).'<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

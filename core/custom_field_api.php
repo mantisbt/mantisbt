@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.5 2002-12-05 07:23:30 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.6 2002-12-05 09:07:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -141,6 +141,17 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
+	# Check to see whether the name is unique
+	#  return true if the name has not been used, error otherwise
+	function custom_field_ensure_name_unique( $p_name ) {
+		if ( custom_field_is_name_unique( $p_name ) ) {
+			return true;
+		} else {
+			trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+		}
+	}
+
+	# --------------------
 	# Return true if the user can read the value of the field for the given bug,
 	#  false otherwise.
 	function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id ) {
@@ -185,6 +196,8 @@ CREATE TABLE mantis_custom_field_project_table (
 	function custom_field_create( $p_name ) {
 		$c_name = db_prepare_string( $p_name );
 
+		custom_field_ensure_name_unique( $p_name );
+
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "INSERT INTO
 				  $t_custom_field_table
@@ -203,15 +216,15 @@ CREATE TABLE mantis_custom_field_project_table (
 	# return true on success
 	# return false if an error occures (e.g. non existing id)
 	function custom_field_bind( $p_field_id, $p_project_id ) {
+		$c_field_id   = db_prepare_int( $p_field_id );
+		$c_project_id = db_prepare_int( $p_project_id );
+
 		custom_field_ensure_exists( $p_field_id );
 		project_ensure_exists( $p_project_id );
 
 		if( custom_field_in_project( $p_field_id, $p_project_id ) ) {
 			return false;
 		}
-		$c_field_id   = db_prepare_int( $p_field_id );
-		$c_project_id = db_prepare_int( $p_project_id );
-
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$query = "INSERT INTO
 				  $t_custom_field_project_table
@@ -230,7 +243,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
 		$c_field_id			= db_prepare_int( $p_field_id );
-		$c_name			= db_prepare_string( $p_def_array['name']         );
+		$c_name				= db_prepare_string( $p_def_array['name']         );
 		$c_type				= db_prepare_int(    $p_def_array['type']            );
 		$c_possible_values	= db_prepare_string( $p_def_array['possible_values'] );
 		$c_default_value	= db_prepare_string( $p_def_array['default_value']   );
@@ -239,7 +252,7 @@ CREATE TABLE mantis_custom_field_project_table (
 		$c_access_level_rw	= db_prepare_int(    $p_def_array['access_level_rw'] );
 		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
-		$c_advanced			= db_prepare_int(    $p_def_array['advanced']        );
+		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
 		$c_sequence			= db_prepare_int(    $p_def_array['sequence']        );
 
 		$query = "UPDATE " .

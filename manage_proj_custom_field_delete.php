@@ -10,20 +10,16 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_field_id ) || empty( $f_project_id ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
-
-	$t_affected_projects = false;
+	$f_field_id		= gpc_get_int( 'f_field_id' );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
 
 	if( 0 == count( custom_field_get_project_ids( $f_field_id ) ) ) {
 		$result = custom_field_delete( $f_field_id );
 	} else {
 		$result = false;
-		$t_affected_projects = true;
 	}
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -37,11 +33,9 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
-	} else if ( $t_affected_projects ) {
-		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE].'<br />';
-	} else {						# FAILURE
-		print_sql_error( $query );
+		echo lang_get( 'operation_successful' ) . '<br />';
+	} else {
+		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] . '<br />';
 	}
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
