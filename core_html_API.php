@@ -311,7 +311,8 @@
 
 			PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
 			PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
-			if ( access_level_check_greater_or_equal( MANAGER ) ) {
+			if (( access_level_check_greater_or_equal( MANAGER ) ) ||
+				( absolute_access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
 				if ( "0000000" != $g_project_cookie_val ) {
 					PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
 				} else {

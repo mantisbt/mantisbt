@@ -315,7 +315,7 @@
 	function access_level_check_equal( $p_access_level ) {
 		global $g_string_cookie_val;
 
-		if ( !isset($g_string_cookie_val) ) {
+		if ( !isset( $g_string_cookie_val ) ) {
 			return false;
 		}
 
@@ -347,8 +347,46 @@
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
 		if ( -1 != $t_access_level2 ) {
+			#echo $t_access_level."=".$t_access_level2." ";
+			#echo $t_access_level."=".$t_access_level2." ";
 			$t_access_level = $t_access_level2;
+			#echo $t_access_level."=".$t_access_level2." ";
 		}
+
+		if ( $t_access_level >= $p_access_level ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	# check to see if the access level is strictly equal
+	function absolute_access_level_check_equal( $p_access_level ) {
+		global $g_string_cookie_val;
+
+		if ( !isset( $g_string_cookie_val ) ) {
+			return false;
+		}
+
+		$t_access_level = get_current_user_field( "access_level" );
+		if ( $t_access_level == $p_access_level ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	# check to see if the access level is equal or greater
+	# this checks to see if the user has a higher access level for the current project
+	function absolute_access_level_check_greater_or_equal( $p_access_level ) {
+		global $g_string_cookie_val;
+
+		if (( !isset( $g_string_cookie_val ) ) ||
+			( empty( $g_string_cookie_val ) )) {
+			return false;
+		}
+
+		$t_access_level = get_current_user_field( "access_level" );
 
 		if ( $t_access_level >= $p_access_level ) {
 			return true;

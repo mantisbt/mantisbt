@@ -157,7 +157,11 @@
 		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 	</td>
 	<td>
-		<?php print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$t_user_id, $s_remove_link ) ?>
+		<?php
+			if ( isset( $u_user_id ) ) {
+				print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$t_user_id, $s_remove_link );
+			}
+		?>
 	</td>
 </tr>
 <?php
