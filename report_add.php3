@@ -143,7 +143,7 @@
 			copy($f_file, $t_file_path.$f_file_name);
 			$t_file_size = filesize( $f_file );
 			$t_content = addslashes(fread(fopen($f_file, "r"), filesize($f_file)));
-			$query = "INSERT INTO mantis_bug_file_table
+			$query = "INSERT INTO $g_mantis_bug_file_table
 					(id, bug_id, title, description, diskfile, filename, folder, filesize, date_added, content)
 					VALUES
 					(null, $t_bug_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, NOW(), '')";

@@ -198,7 +198,7 @@
 		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
 			<?
 				$query = "SELECT *
-						FROM mantis_bug_file_table
+						FROM $g_mantis_bug_file_table
 						WHERE bug_id='$f_id'";
 				$result = db_query( $query );
 				$num_files = db_num_rows( $result );
