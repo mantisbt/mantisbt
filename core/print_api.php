@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.35 2003-01-19 23:56:08 vboctor Exp $
+	# $Id: print_api.php,v 1.36 2003-01-24 00:09:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -974,58 +974,32 @@
 	# --------------------
 	# print a mailto: href link
 	function print_email_link( $p_email, $p_text ) {
-		PRINT get_email_link($p_email,$p_text);
+		echo get_email_link($p_email, $p_text);
 	}
 	# --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
-		global $g_show_user_email, $g_anonymous_account;
-
-		switch ( $g_show_user_email ) {
-			case NONE:	return $p_text;
-			case ALL:	return "<a href=\"mailto:$p_email\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( current_user_get_field( 'username' ) != $g_anonymous_account ) {
-									return "<a href=\"mailto:$p_email\">$p_text</a>";
-								} else {
-									return $p_text;
-								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == current_user_get_field( 'access_level' ) ) {
-									return "<a href=\"mailto:$p_email\">$p_text</a>";
-								} else {
-									return $p_text;
-								}
-			default:	return $p_text;
+		if ( !access_level_check_greater_or_equal( config_get( 'show_user_email_threshold' ) ) ) {
+			return $p_text;
 		}
+
+		return "<a href=\"mailto:$p_email\">$p_text</a>";
 	}
 	# --------------------
 	# print a mailto: href link with subject
 	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
-		global $g_mantis_bug_table;
-
 		$t_subject = email_build_subject( $p_bug_id );
-		PRINT get_email_link_with_subject( $p_email, $p_text, $t_subject );
+		echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
 	}
 	# --------------------
 	# return the mailto: href string link instead of printing it
 	# add subject line
 	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
-		global $g_show_user_email, $g_anonymous_account;
-
-		switch ( $g_show_user_email ) {
-			case NONE:	return $p_text;
-			case ALL:	return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( current_user_get_field( 'username' ) != $g_anonymous_account ) {
-									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
-								} else {
-									return $p_text;
-								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == current_user_get_field( 'access_level' ) ) {
-									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
-								} else {
-									return $p_text;
-								}
-			default:	return $p_text;
+		if ( !access_level_check_greater_or_equal( config_get( 'show_user_email_threshold' ) ) ) {
+			return $p_text;
 		}
+
+		return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 	}
 	# --------------------
 	# print our standard mysql query error

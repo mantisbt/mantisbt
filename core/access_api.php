@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.9 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: access_api.php,v 1.10 2003-01-24 00:09:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -73,7 +73,7 @@
 		}
 
 		# Administrators ALWAYS pass.
-		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( (NOBODY != $p_access_level) && current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
@@ -105,7 +105,7 @@
 		}
 
 		# Administrators ALWAYS pass.
-		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( (NOBODY != $p_access_level) && current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.10 2003-01-23 06:24:55 robertjf Exp $
+	# $Id: obsolete.php,v 1.11 2003-01-24 00:09:06 vboctor Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -38,4 +38,5 @@
 	config_obsolete( 'allow_href_tags', 'html_make_links' );
 	config_obsolete( 'allow_html_tags', 'html_valid_tags' );
 	config_obsolete( 'html_tags', 'html_valid_tags' );
+	config_obsolete( 'show_user_email', 'show_user_email_threshold' );
 ?>

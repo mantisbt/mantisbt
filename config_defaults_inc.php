@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.63 2003-01-23 06:22:37 robertjf Exp $
+	# $Id: config_defaults_inc.php,v 1.64 2003-01-24 00:09:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -160,9 +160,8 @@
 	# $g_limit_email_domain		= 'users.sourceforge.net';
 	$g_limit_email_domain	= OFF;
 
-	# This disables the automatic generation of mailto: links
-	# Valid values: NONE, ALL, NO_ANONYMOUS, ADMIN_ONLY
-	$g_show_user_email		= NONE;
+	# This specifies the access level that is needed to get the mailto: links.
+	$g_show_user_email_threshold = NOBODY;
 
 	# Set to OFF to remove X-Priority header
 	$g_use_x_priority		= ON;

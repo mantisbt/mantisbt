@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.69 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: constant_inc.php,v 1.70 2003-01-24 00:09:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -110,12 +110,6 @@
 	# news values
 	define( 'BY_LIMIT',		0 );
 	define( 'BY_DATE',		1 );
-
-	# show email limits
-	#define( 'NONE',		0 );
-	define( 'ALL',			1 );
-	define( 'NO_ANONYMOUS',	2 );
-	define( 'ADMIN_ONLY',	3 );
 
 	# history constants
 	define( 'NORMAL_TYPE',					0 );
