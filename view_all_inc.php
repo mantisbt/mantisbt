@@ -221,7 +221,6 @@
 		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
-
 		# choose color based on status
 		$status_color = get_status_color( $v_status );
 
@@ -231,14 +230,15 @@
 		# grab the project name
 		$project_name = get_project_field( $v_project_id, 'name' );
 
-		$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
-				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$v_id'
-				ORDER BY last_modified DESC
-				LIMIT 1";
-		$res2 = db_query( $query );
-		$v_bugnote_updated = db_result( $res2, 0, 0 );
-
+		if ( $bugnote_count > 0 ) {
+			$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
+					FROM $g_mantis_bugnote_table
+					WHERE bug_id='$v_id'
+					ORDER BY last_modified DESC
+					LIMIT 1";
+			$res2 = db_query( $query );
+			$v_bugnote_updated = db_result( $res2, 0, 0 );
+		}
 ?>
 <tr>
 	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>

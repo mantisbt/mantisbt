@@ -28,6 +28,8 @@
 	check_varset( $f_search, false );
 	check_varset( $f_page_number, 1 );
 
+	start_compression();
+
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];
 	$f_show_severity	 	= $t_setting_arr[2];
@@ -264,3 +266,6 @@
 <?php include( $g_view_all_include_file ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>
+<?php
+	stop_compression();
+?>

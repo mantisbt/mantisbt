@@ -13,7 +13,7 @@
 	# Charles Killian, modified by Kenzaburo Ito
 
 	# set to ON if you want to see debug level timings
-	$g_debug_timer = ON;
+	$g_debug_timer = OFF;
 
 	# USAGE: set #debug_timer to ON and just call mark_time( 'token name' );
 	# where 'token name' is descriptive of what is happening at that point

@@ -85,5 +85,6 @@
 	require( 'core_proj_user_API.php' );
 	require( 'core_category_API.php' );
 	require( 'core_version_API.php' );
+	require( 'core_compress_API.php' );
 	# --------------------
 ?>
