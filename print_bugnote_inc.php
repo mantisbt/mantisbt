@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.24 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: print_bugnote_inc.php,v 1.25 2004-02-24 13:01:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,10 +25,16 @@
 	$t_user_id	= auth_get_current_user_id();
 	$c_bug_id		= (integer)$f_bug_id;
 
+ 	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
+ 		$t_restriction = 'AND view_state=' . VS_PUBLIC;
+ 	} else {
+ 		$t_restriction = '';
+ 	}
+
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$c_bug_id'
+			WHERE bug_id='$c_bug_id' $t_restriction
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
 	$num_notes = db_num_rows($result);
