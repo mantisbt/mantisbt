@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.139 2004-05-24 08:12:44 int2str Exp $
+	# $Id: view_all_inc.php,v 1.140 2004-05-24 08:20:34 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -55,7 +55,7 @@
 <form method="get" action="bug_actiongroup_page.php">
 <table id="buglist" class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="<?php print( $col_count - 2 ); ?>">
+	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
 		<?php 
 			# -- Viewing range info --
 
@@ -67,15 +67,15 @@
 				$v_end   = $v_start + sizeof( $rows ) -1;
 			}
 
-			print( lang_get( 'viewing_bugs_title' ) );
-			print( "($v_start - $v_end / $t_bug_count)" );
+			echo lang_get( 'viewing_bugs_title' );
+			echo "($v_start - $v_end / $t_bug_count)";
 		?>
 
 		<span class="small"> <?php
 				# -- Print and Export links --
 
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-				print( '&nbsp;' );
+				echo '&nbsp;';
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 		?> </span>
 	</td>
@@ -108,10 +108,10 @@
 		# -- Sponsorship Amount -- 
 
 		if ( ON == $t_enable_sponsorship ) {
-			print( "\t<td>" );
+			echo "\t<td>";
 			print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $t_sort, $t_dir );
 			print_sort_icon( $t_dir, $t_sort, 'sponsorship_total' );
-			print( "</td>\n" );
+			echo "</td>\n";
 		}
 	
 		# -- Bugnote count column -- 
@@ -121,9 +121,9 @@
 		# -- Attachment indicator --
 
 		if ( ON == $t_show_attachments ) {
-			print( "\t<td>" );
-			print( '<img src="' . $t_icon_path . 'attachment.png' . '" alt="" />' );
-			print( "</td>\n" );
+			echo "\t<td>";
+			echo '<img src="' . $t_icon_path . 'attachment.png' . '" alt="" />';
+			echo "</td>\n";
 		}
 ?>
 	<td> <?php 
@@ -160,7 +160,7 @@
 
 <?php # -- Spacer row -- ?>
 <tr>
-	<td class="spacer" colspan="<?php print( $col_count ); ?>"> &nbsp; </td>
+	<td class="spacer" colspan="<?php echo $col_count; ?>"> &nbsp; </td>
 </tr>
 
 <?php 
@@ -198,7 +198,7 @@
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
 ?>
-<tr bgcolor="<?php print( $status_color ); ?>">
+<tr bgcolor="<?php echo $status_color; ?>">
 	<td> <?php
 		# -- Checkbox -- 
 
@@ -206,7 +206,7 @@
 			$t_checkboxes_exist = true;
 			printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />" , $v_id );
 		} else {
-			print( "&nbsp;" );
+			echo "&nbsp;";
 		}
 	?> </td>
 	<td> <?php 
@@ -214,11 +214,11 @@
 
 		if ( !bug_is_readonly( $v_id ) 
 		  && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
-			print( '<a href="' . string_get_bug_update_url( $v_id ) . '">' );
-			print( '<img border="0" src="' . $t_icon_path . 'update.png' );
-			print( '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>' );
+			echo '<a href="' . string_get_bug_update_url( $v_id ) . '">';
+			echo '<img border="0" src="' . $t_icon_path . 'update.png';
+			echo '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
-			print( '&nbsp;' );
+			echo '&nbsp;';
 		}
 	?> </td>
 	<td> <?php
@@ -239,11 +239,11 @@
 		# -- Sponsorship Amount -- 
 
 		if ( $t_enable_sponsorship == ON ) {
-			print( "\t<td class=\"right\">" );
+			echo "\t<td class=\"right\">";
 			if ( $v_sponsorship_total > 0 ) {
-				print( sponsorship_format_amount( $v_sponsorship_total ) );
+				echo sponsorship_format_amount( $v_sponsorship_total );
 			}
-			print( "</td>\n" );
+			echo "</td>\n";
 		}
 ?>
 	<td> <?php
@@ -257,28 +257,28 @@
 			if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 				printf( '<span class="bold">%s</span>', $t_bugnote_link );
 			} else {
-				print( $t_bugnote_link );
+				echo $t_bugnote_link;
 				}
 		} else {
-			print( '&nbsp;' );
+			echo '&nbsp;';
 		}
 	?> </td>
 <?php 
 		# -- Attachment indicator --
 	  
 		if ( ON == $t_show_attachments ) {
-			print( "\t<td>" );
+			echo "\t<td>";
 			if ( 0 < $t_attachment_count ) {
-				print( '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">' );
-				print( '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"' );
-				print( ' alt="' . lang_get( 'attachment_alt' ) . '"' );
-				print( ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"' );
-				print( ' />' );
-				print( '</a>' );
+				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+				echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
+				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
+				echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
+				echo ' />';
+				echo '</a>';
 			} else {
-			  print( ' &nbsp; ' );
+				echo ' &nbsp; ';
 			}
-			print( "</td>\n" );
+			echo "</td>\n";
 		}
 ?>
 	<td> <?php 
@@ -287,12 +287,12 @@
 		# type project name if viewing 'all projects'
 		if ( ON == config_get( 'show_bug_project_links' ) 
 		  && helper_get_current_project() == ALL_PROJECTS ) {
-			print( '<small>[' );
+			echo '<small>[';
 			print_view_bug_sort_link( $project_name, 'project_id', $t_sort, $t_dir );
-			print( ']</small><br />' );
+			echo ']</small><br />';
 		}
 
-		print( string_display( $v_category ) );
+		echo string_display( $v_category );
 	?> </td>
 	<td> <?php 
 		# -- Severity --
@@ -310,9 +310,9 @@
 		# print username instead of status
 		if ( ON == config_get( 'show_assigned_names' ) 
 		  && $v_handler_id > 0 ) {
-			print( ' (' );
+			echo ' (';
 			print_user( $v_handler_id );
-			print( ')' );
+			echo ')';
 		}
 	?> </td>
 	<td> <?php 
@@ -321,13 +321,13 @@
 		if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 			printf( '<span class="bold">%s</span>', $t_last_updated );
 		} else {
-			print( $t_last_updated );
+			echo $t_last_updated;
 		}
 	?> </td>
 	<td class="left"> <?php 
 		# -- Summary --
 
-		print( $v_summary );
+		echo $v_summary;
 		if ( VS_PRIVATE == $v_view_state ) {
 			printf( ' <img src="%s" alt="(%s)" title="%s" />'
 				, $t_icon_path . 'protected.gif'
@@ -346,17 +346,17 @@
 	# -- ====================== MASS BUG MANIPULATION =================== -- 
 ?>
 	<tr>
-		<td class="left" colspan="<?php print( $col_count-2 ); ?>">
+		<td class="left" colspan="<?php echo $col_count-2; ?>">
 <?php
 		if ( $t_checkboxes_exist ) {
 ?>
 			<select name="action">
 				<?php print_all_bug_action_option_list() ?>
 			</select>
-			<input type="submit" class="button" value="<?php print( lang_get( 'ok' ) ); ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'ok' ); ?>" />
 <?php
 		} else {
-			print( '&nbsp;' );
+			echo '&nbsp;';
 		}
 ?>
 		</td>
