@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.42 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: set_project.php,v 1.43 2004-01-25 11:03:04 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -56,6 +56,8 @@
 		$t_redirect_url = 'bug_report_page.php';
 	} else if ( eregi( 'bug_report_advanced_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url = 'bug_report_advanced_page.php';
+	} else if ( eregi( 'summary_jpgraph_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url = 'summary_jpgraph_page.php';
 	} else {
 		$t_redirect_url = 'main_page.php';
 	}

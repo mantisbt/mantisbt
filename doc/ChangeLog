@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.1
 
+ * Fix #3177: Switching project in advanced summary changes current page.
  * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
  * Security Fix #3445: User see all information from all projects (if user has access to 0 projects)
  * Fix #3467: Delete user ends up at user not found error.
