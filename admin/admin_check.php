@@ -151,7 +151,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 					'variables_order',
 					'include_path',
 					'short_open_tag');
-	
+
 	while ( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 ?>
 <tr>
@@ -182,7 +182,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get( 'upload_max_filesize' ) ?><br />
 				PHP variable 'post_max_size': <?php echo ini_get( 'post_max_size' ) ?><br />
 				Mantis variable '$g_max_file_size': <?php echo $g_max_file_size ?> bytes</p>
-				
+
 				<p>There may also be settings in Apache (or MySQL if using the SQL upload method) that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.</p>
 		<?php
 			} else {
@@ -233,7 +233,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 			}
 		?>
 		<form method="post" action="<?php echo $PHP_SELF ?>#email">
-		Email Address: <?php echo $g_administrator_email; ?><br>
+		Email Address: <?php echo $g_administrator_email; ?><br />
 		<input type="submit" value="Send Mail" name="f_mail_test">
 		</form>
 	</td>
@@ -249,7 +249,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		<span class="title">Password Check:</span>
 		<p>
 		<form method="post" action="<?php echo $PHP_SELF ?>#password">
-		Password: <input type="text" size="32" name="f_password" value="<?php if ( isset( $f_password ) ) echo $f_password ?>"><br>
+		Password: <input type="text" size="32" name="f_password" value="<?php if ( isset( $f_password ) ) echo $f_password ?>"><br />
 		<input type="submit" name="f_password_test">
 		</form>
 		<?php

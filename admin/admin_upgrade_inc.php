@@ -81,15 +81,15 @@
 				return;
 			}
 
-			PRINT "<hr><big>$this->upgrade_name - $t_message</big><br><hr><code>";
+			PRINT "<hr /><big>$this->upgrade_name - $t_message</big><br /><hr /><code>";
 
 			$t_query_number = 0;
 			for ( $i=0; $i<$this->item_count; $i++ ) {
 				if ( $this->IsValidComment( $this->query_arr[$i] ) ) {
-					PRINT '<b>' . $this->query_arr[$i] . '</b><br>';
+					PRINT '<b>' . $this->query_arr[$i] . '</b><br />';
 				} else {
 					$t_query_number++;
-					PRINT $t_query_number  . ': '.$this->query_arr[$i].'<br>';
+					PRINT $t_query_number  . ': '.$this->query_arr[$i].'<br />';
 					flush();
 					if ( strcmp( $p_action, 'upgrade' ) == 0 ) {
 						$result = db_query( $this->query_arr[$i] );

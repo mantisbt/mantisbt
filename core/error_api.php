@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: error_api.php,v 1.3 2002-08-25 17:06:23 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,7 +24,7 @@
 	#
 	# E_USER_* are triggered by us and will contain an error constant in $p_error
 	# The others, being system errors, will come with a string in $p_error
-	# 
+	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		$t_short_file = basename( $p_file );
 		$t_method = 'none';
@@ -32,13 +32,13 @@
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
-				$t_string = "SYSTEM WARNING: $p_error <br> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error <br /> ($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_NOTICE:
-				$t_string = "SYSTEM NOTICE: $p_error <br> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM NOTICE: $p_error <br /> ($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
@@ -46,13 +46,13 @@
 			case E_USER_ERROR:
 				$t_string = "MANTIS ERROR #$p_error: " .
 							error_string( $p_error ) .
-							"<br>($t_short_file: line $p_line)";
+							"<br />($t_short_file: line $p_line)";
 				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
 				$t_string = "MANTIS WARNING #$p_error: " .
 							error_string( $p_error ) .
-							"<br>($t_short_file: line $p_line)";
+							"<br />($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
@@ -60,7 +60,7 @@
 			case E_USER_NOTICE:
 				$t_string = "MANTIS NOTICE #$p_error: " .
 							error_string( $p_error ) .
-							"<br>($t_short_file: line $p_line)";
+							"<br />($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
