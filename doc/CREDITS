@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact project administrators if you should be on this list!
@@ -53,6 +53,7 @@ Jean-Francois Travers
 Jon Maltz
 Laurent Petit
 Leigh Morresi
+Lincoln Maskey
 Ludwig Ruderstaller
 Martin Wickmann
 Matt Otto
