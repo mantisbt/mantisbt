@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.9 2004-10-25 19:51:02 marcelloscata Exp $
+	# $Id: changelog_page.php,v 1.10 2005-01-24 20:15:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -65,7 +65,7 @@
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
-		$t_version_id = version_get_id( $c_version, $f_project_id );
+		$t_version_id = version_get_id( $t_version, $f_project_id );
 
 		$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
