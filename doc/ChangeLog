@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Enh #3944: Add ability to filter on 'Fixed in Version'
  * Enh #3969: Relationship - Patch available (masc) - partial implementation - disabled by default.
  * Enh #3974: Make Mantis issues searchable by Search Engine
+ * Enh #3984: Support definining and enforcing custom workflow (thraxisp)
  * Enh #4016: Automatic language selection based on browser preferences
  * Enh #4036: Changelog should not display versions with no issues (vboctor)
  * Enh #4038: Add icon to sponsorships to attract attention (vboctor)
@@ -24,7 +25,8 @@ Mantis ChangeLog
  * Fix #4056: Displaying/Reporting Issue -> Application Warning - lang_exists() missing arg 2 (vboctor)
  * Fix #4064: Links are not hyperlinked property if containing () (vboctor)
  * Fix #4065: Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (vboctor).
- * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
+ * New Config: fallback_language (default 'english') - Fallback language for automatic language selection.
+ * New Config: status_enum_workflow (default disabled) - Defines the workflow to indicate what are the possible statuses based on the current one.
  * Updated German, Italian, Russian, and Brazilian Portuguese languages.
 
 2004.07.07  -  0.19.0a1

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.70 2004-07-11 07:09:51 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.71 2004-07-13 12:16:10 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -221,7 +221,7 @@
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
 		<select name="status">
-			<?php print_enum_string_option_list( 'status', $t_bug->status ) ?>
+			<?php print_enum_string_option_list_workflow( 'status', $t_bug->status ) ?>
 		</select>
 	</td>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.90 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: print_api.php,v 1.91 2004-07-13 12:16:11 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -565,19 +565,48 @@
 
 	# --------------------
 	# select the proper enum values based on the input parameter
-	# we use variable variables in order to achieve this
-	function print_enum_string_option_list( $p_enum_name, $p_val=0 ) {
-		$g_var = 'g_'.$p_enum_name.'_enum_string';
-		global $$g_var;
+	# $p_enum_name - name of enumeration (eg: status)
+	# $p_val: current value
+	function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
+		$t_config_var_name = $p_enum_name.'_enum_string';
+		$t_config_var_value = config_get( $t_config_var_name );
 
-		$t_arr  = explode_enum_string( $$g_var );
-		$enum_count = count( $t_arr );
-		for ($i=0;$i<$enum_count;$i++) {
+		$t_arr  = explode_enum_string( $t_config_var_value );
+		$t_enum_count = count( $t_arr );
+		for ( $i = 0; $i < $t_enum_count; $i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			PRINT "<option value=\"$t_elem[0]\"";
+			echo "<option value=\"$t_elem[0]\"";
 			check_selected( $p_val, $t_elem[0] );
-			PRINT ">$t_elem2</option>";
+			echo ">$t_elem2</option>";
+		} # end for
+	}
+	# --------------------
+	# Select the proper enum values for status based on workflow
+	# or the input parameter if workflows are not used
+	# $p_enum_name : name of enumeration (eg: status)
+	# $p_val : current value
+	function print_enum_string_option_list_workflow( $p_enum_name, $p_val = 0 ) {
+		$t_config_var_name = $p_enum_name . '_enum_string';
+		$t_config_var_value = config_get( $t_config_var_name );
+		$t_enum_workflow = config_get( $p_enum_name . '_enum_workflow' );
+
+		if ( count( $t_enum_workflow ) < 1 ) {
+			# workflow not defined, use default enum
+			$t_arr  = explode_enum_string( $t_config_var_value );
+		} else {
+			# workflow defined - find allowed states
+			$t_arr  = explode_enum_string( $t_enum_workflow[$p_val] );
+		}
+
+		$t_enum_count = count( $t_arr );
+
+		for ( $i = 0; $i < $t_enum_count; $i++ ) {
+			$t_elem  = explode_enum_arr( $t_arr[$i] );
+			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
+			echo "<option value=\"$t_elem[0]\"";
+			check_selected( $t_elem[0], $p_val );
+			echo ">$t_elem2</option>";
 		} # end for
 	}
 	# --------------------

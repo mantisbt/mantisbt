@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.68 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: bug_api.php,v 1.69 2004-07-13 12:16:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -260,7 +260,33 @@
 
 		return true;
 	}
+	# --------------------
+	# Validate workflow state to see if bug can be moved to requested state
+	function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
+		$t_status_enum_workflow = config_get( 'status_enum_workflow' );
 
+		if ( count( $t_status_enum_workflow ) < 1) {
+			# workflow not defined, use default enum
+			return true;
+		} else {
+			# workflow defined - find allowed states
+			$t_allowed_states = $t_status_enum_workflow[$p_bug_status];
+			$t_arr = explode_enum_string( $t_allowed_states );
+
+			$t_enum_count = count( $t_arr );
+
+			for ( $i = 0; $i < $t_enum_count; $i++ ) {
+				# check if wanted status is allowed
+				$t_elem  = explode_enum_arr( $t_arr[$i] );
+				if ( $p_wanted_status == $t_elem[0] ) {
+					return true;
+				}
+			} # end for
+		}
+
+		return false;
+	}
+	
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================

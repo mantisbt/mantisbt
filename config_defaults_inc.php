@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.174 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.175 2004-07-13 12:16:10 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -653,6 +653,20 @@
 	# This is useful for installations where assigned status is to be used when
 	# the bug is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
+
+	# 'status_enum_workflow' defines the workflow, and reflects a simple 
+	#  2-dimensional matrix. For each existing status, you define which
+	#  statuses you can go to from that status, e.g. from NEW_ you might list statuses 
+	#  '10:new,20:feedback,30:acknowledged' but not higher ones.
+	# The following example can be transferred to config_inc.php
+	# $g_status_enum_workflow[NEW_]='10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[FEEDBACK] ='10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[ACKNOWLEDGED] ='20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[CONFIRMED] ='20:feedback,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[ASSIGNED] ='20:feedback,50:assigned,80:resolved,90:closed';
+	# $g_status_enum_workflow[RESOLVED] ='50:assigned,80:resolved,90:closed';
+	# $g_status_enum_workflow[CLOSED] ='50:assigned';
+	$g_status_enum_workflow = array();
 
 	############################
 	# Bug Attachments Settings

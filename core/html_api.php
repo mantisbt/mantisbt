@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.109 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: html_api.php,v 1.110 2004-07-13 12:16:11 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -664,13 +664,21 @@
 	# --------------------
 	# Print Assign To: combo box of possible handlers
 	function html_button_bug_assign_to( $p_bug_id ) {
+		# make sure status is allowed of assign would cause auto-set-status
+		$t_status = bug_get_field( $p_bug_id, 'status' );     # workflow implementation
+
+		if ( ON == config_get( 'auto_set_status_to_assigned' ) &&
+			!bug_check_workflow( $t_status, config_get( 'bug_assigned_status' ) ) ) {  # workflow
+			return;
+		}
+
 		# make sure current user has access to modify bugs.
 		if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			return;
 		}
 
 		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-	    $t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+		$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 		$t_current_user_id = auth_get_current_user_id();
 
 		$t_options = array();
@@ -740,8 +748,11 @@
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
+		$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 
-		if ( ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) && access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
+		if ( ( $t_status < $t_resolved_status ) && 
+				access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) &&
+				bug_check_workflow($t_status, $t_resolved_status ) ) {
 			html_button( 'bug_resolve_page.php',
 						 lang_get( 'resolve_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
@@ -777,9 +788,14 @@
 	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
-		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
-			 ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() &&
-			 ( ON == config_get( 'allow_reporter_reopen' ) ) ) ) {
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+
+		if ( bug_check_workflow( $t_status, config_get( 'bug_reopen_status' ) ) &&
+			( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
+			( ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
+	 		  ( ON == config_get( 'allow_reporter_reopen' ) ) 
+			 	) )
+			 ) {
 			html_button( 'bug_reopen_page.php',
 						 lang_get( 'reopen_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
@@ -791,7 +807,9 @@
 	function html_button_bug_close( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
-		if ( access_can_close_bug ( $p_bug_id ) && ( $t_status < CLOSED ) ) {
+		if ( access_can_close_bug ( $p_bug_id ) && 
+				( $t_status < CLOSED ) && 
+				bug_check_workflow($t_status, CLOSED) ) {
 			html_button( 'bug_close_page.php',
 						 lang_get( 'close_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
