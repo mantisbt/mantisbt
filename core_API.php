@@ -42,17 +42,20 @@
 	obsolete_config_variable('g_notify_admin_on_new', 'g_notify_flags');
 
 	ini_set('magic_quotes_runtime', 0);
+
+	# @@@ Experimental
+	# deal with register_globals being Off
+	$t_phpversion = explode('.', phpversion()); 
 	if ( OFF == $g_register_globals ) {
-		extract( $HTTP_POST_VARS );
-		extract( $HTTP_GET_VARS );
-		extract( $HTTP_SERVER_VARS );
+		if ( $t_phpversion[0] == 4 && $t_phpversion[1] >= 1 ) { 
+			extract( $_REQUEST );
+			extract( $_SERVER );
+		} else {
+			extract( $HTTP_POST_VARS );
+			extract( $HTTP_GET_VARS );
+			extract( $HTTP_SERVER_VARS );
+		}
 	}
-	/*foreach ( $HTTP_POST_VARS as $key => $value) {
-		$$key = $value;
-	}
-	foreach ( $HTTP_GET_VARS as $key => $value) {
-		$$key = $value;
-	}*/
 
 	include( 'core_timer_API.php' );
 
@@ -62,17 +65,6 @@
 	# seed random number generator
 	list($usec,$sec)=explode(' ',microtime());
 	mt_srand($sec*$usec);
-
-	# @@@ Experimental
-	# deal with register_globals being Off
-	if ( OFF == $g_register_globals ) {
-		foreach ( $HTTP_POST_VARS as $key => $value) {
-			$$key = $value;
-		}
-		foreach ( $HTTP_GET_VARS as $key => $value) {
-			$$key = $value;
-		}
-	}
 
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
