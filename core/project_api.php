@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.39 2003-02-20 18:42:27 int2str Exp $
+	# $Id: project_api.php,v 1.40 2003-02-22 11:52:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -413,8 +413,13 @@
 	# For each user we have 'id', 'username', and 'access_level' (overall access level)
 	# If the second parameter is given, return only users with an access level
 	#  higher than the given value.
-	function project_get_all_user_rows( $p_project_id, $p_access_level=0 ) {
+	function project_get_all_user_rows( $p_project_id, $p_access_level=ANYBODY ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
+
+		# Optimization when access_level is NOBODY
+		if ( NOBODY == $p_access_level ) {
+			return array();
+		}
 
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
