@@ -73,7 +73,7 @@
 <br />
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="POST" action="view_all_bug_update.php">
+<form method="POST" action="bug_actiongroup.php">
 <input type="hidden" name="f_actionconfirmed" value="1" />
 <input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 <?php foreach( $f_bug_arr as $value ) { ?>
@@ -119,7 +119,7 @@
 	<?php print_hr() ?>
 	<?php echo $t_question_title ?>
 
-	<form method="post" action="view_all_bug_update.php">
+	<form method="post" action="bug_actiongroup.php">
 		<input type="hidden" name="f_actionconfirmed" value="1" />
 		<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 
