@@ -482,6 +482,7 @@
 	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
 	$s_remove_link = "remove";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Successfully updated user";
@@ -599,7 +600,7 @@
 	$s_update_bug_button = "Update Bug";
 	$s_bug_assign_button    = "Assign to Me";
 	$s_reopen_bug_button = "Reopen Bug";
-	$s_attatched_files = "Attached Files";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 
