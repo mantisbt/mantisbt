@@ -249,36 +249,61 @@
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
+		$project_id_arr = array();
+
 		$t_access_level = get_current_user_field( "access_level" );
 		$t_user_id = get_current_user_field( "id" );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
-		$query = "SELECT DISTINCT( p.id ), p.name
-			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
-			WHERE (p.enabled=1 AND
-				p.view_state='$t_pub') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
-				p.access_min<='$t_access_level') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
-				u.user_id='$t_user_id'  AND
-                            u.project_id=p.id)
-			ORDER BY p.name";
-		$result = db_query( $query );
-		$project_count = db_num_rows( $result );
 
-		for ($i=0;$i<$project_count;$i++) {
+		# grab projects that are enabled and are public or are private but
+		# the access threshold is met
+		$query = "SELECT DISTINCT( id ), name
+			FROM $g_mantis_project_table
+			WHERE enabled=1 AND
+				( (view_state='$t_pub') OR
+				  (view_state='$t_prv' AND
+				   access_min<='$t_access_level') )
+			ORDER BY name";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+		for ($i=0;$i<$t_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			if ( $p_project_id == $v_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_name</option>";
+			$project_id_arr[$v_id] = $v_name;
+		}
+
+		# grab projects that a user is assigned to
+		$query = "SELECT DISTINCT( p.id ), p.name
+			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
+			WHERE p.enabled=1 AND
+				(u.user_id='$t_user_id'  AND
+                 u.project_id=p.id)
+			ORDER BY p.name";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+		for ($i=0;$i<$t_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			$found = 0;
+
+			# check for duplicates
+			if ( !isset( $project_id_arr[$v_id] ) ) {
+				$project_id_arr[$v_id] = $v_name;
 			}
-		} # end for
+		}
+		asort( $project_id_arr, SORT_STRING );
+		reset( $project_id_arr );
+
+		while (list ($t_id, $t_name) = each ($project_id_arr)) {
+			if ( $p_project_id == $t_id ) {
+				PRINT "<option value=\"$t_id\" SELECTED>$t_name</option>";
+			} else {
+				PRINT "<option value=\"$t_id\">$t_name</option>";
+			}
+		}
 	}
 	# --------------------
 	# prints the profiles given the user id

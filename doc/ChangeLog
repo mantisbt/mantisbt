@@ -10,6 +10,7 @@ Mantis
  * Fixed password reset to blank to work for other encryption types.
  * Fixed admin_upgrade.php to honor the $g_php global.
  * Fixed access checks to see if viewer has permission to view the bug.
+ * Fixed project list drop down to work even if project user list is empty.
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Modified bug action buttons to be more consistent.
