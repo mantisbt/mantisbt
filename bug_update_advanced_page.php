@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.77 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bug_update_advanced_page.php,v 1.78 2004-09-22 08:52:37 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -376,7 +376,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<input type="text" name="summary" size="80" maxlength="128" value="<?php echo $t_bug->summary ?>" />
+		<input type="text" name="summary" size="105" maxlength="128" value="<?php echo $t_bug->summary ?>" />
 	</td>
 </tr>
 
@@ -387,7 +387,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
+		<textarea cols="80" rows="10" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
 	</td>
 </tr>
 
@@ -398,7 +398,7 @@
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
+		<textarea cols="80" rows="10" name="steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
 	</td>
 </tr>
 
@@ -409,7 +409,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
+		<textarea cols="80" rows="10" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
 	</td>
 </tr>
 

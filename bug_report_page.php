@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.44 2004-08-17 18:01:18 thraxisp Exp $
+	# $Id: bug_report_page.php,v 1.45 2004-09-22 08:52:37 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -204,7 +204,7 @@
 		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
 	</td>
 	<td>
-		<input tabindex="5" type="text" name="summary" size="60" maxlength="128" value="<?php echo $f_summary ?>" />
+		<input tabindex="5" type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
 
@@ -215,7 +215,7 @@
 		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
 	</td>
 	<td>
-		<textarea tabindex="6" name="description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
+		<textarea tabindex="6" name="description" cols="80" rows="10" wrap="virtual"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
 
@@ -226,7 +226,7 @@
 		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
 	</td>
 	<td>
-		<textarea tabindex="7" name="additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
+		<textarea tabindex="7" name="additional_info" cols="80" rows="10" wrap="virtual"><?php echo $f_additional_info ?></textarea>
 	</td>
 </tr>
 
