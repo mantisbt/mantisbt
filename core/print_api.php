@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.28 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: print_api.php,v 1.29 2002-11-30 21:27:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -68,16 +68,13 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		# invalid user
-		if ( '0000000' == $p_user_id ) {
+		if ( 0 == $p_user_id ) {
 			return;
 		}
-	    $query = "SELECT username, email
-	    		FROM " . config_get( 'mantis_user_table' ) . "
-	    		WHERE id='$c_user_id'";
-	    $result = db_query( $query );
-	    if ( db_num_rows( $result ) > 0 ) {
-			$t_username	= db_result( $result, 0, 0 );
-			$t_email	= db_result( $result, 0, 1 );
+		
+		if ( user_exists( $p_user_id ) ) {
+			$t_username	= user_get_name( $p_user_id );
+			$t_email	= user_get_field( $p_user_id, 'email' );
 
 			print_email_link( $t_email, $t_username );
 		} else {
@@ -89,16 +86,13 @@
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		if ( '0000000' == $p_user_id ) {
+		if ( 0 == $p_user_id ) {
 			return;
 		}
-	    $query = "SELECT username, email
-	    		FROM " . config_get( 'mantis_user_table' ) . "
-	    		WHERE id='$c_user_id'";
-	    $result = db_query( $query );
-	    if ( db_num_rows( $result ) > 0 ) {
-			$t_username	= db_result( $result, 0, 0 );
-			$t_email	= db_result( $result, 0, 1 );
+		
+		if ( user_exists( $p_user_id ) ) {
+			$t_username	= user_get_name( $p_user_id );
+			$t_email	= user_get_field( $p_user_id, 'email' );
 
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
