@@ -5,6 +5,7 @@ Mantis
  * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
  * Fixed bugnote editing to be unavailable when bug is resolved or closed.
  * Fixed viewing bugs to automatically switch projects if you view a bug from another project (often done through a link).
+ * Fixed file uploads to report an error when a blank file is uploaded.
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Added view by page feature.

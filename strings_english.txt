@@ -7,6 +7,9 @@
 	# English: Kenzaburo Ito, kenito@300baud.org
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+
 	# General Strings
 	$s_go_back = "Go Back";
 	$s_proceed = "Click here to proceed";

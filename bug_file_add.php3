@@ -15,15 +15,17 @@
 	check_access( REPORTER );
 
 	$result = 0;
+	$good_upload = 0;
 	if ( is_uploaded_file( $f_file ) ) {
-		### grab the file path
+		$good_upload = 1;
+		# grab the file path
 		$query = "SELECT file_path
 				FROM $g_mantis_project_table
 				WHERE id='$g_project_cookie_val'";
 		$result = db_query( $query );
 		$t_file_path = db_result( $result );
 
-		### prepare variables for insertion
+		# prepare variables for insertion
 		$f_file_name = $f_id."-".$f_file_name;
 		$t_file_size = filesize( $f_file );
 
@@ -66,10 +68,14 @@
 <p>
 <div align="center">
 <?
-	if ( $result ) {					### SUCCESS
+	if ( $result ) {					# SUCCESS
 		PRINT "$s_file_upload_msg<p>";
-	} else {							### FAILURE
-		print_sql_error( $query );
+	} else {							# FAILURE
+		if ( 0 == $good_upload ) {
+			PRINT "$s_no_file_specified<p>";
+		} else {
+			print_sql_error( $query );
+		}
 	}
 
 	print_bracket_link( $t_redirect_url, $s_proceed );
