@@ -19,10 +19,10 @@
     if ( OFF == $f_protected ) {
 		if ( ON == $g_send_reset_password ) {
 			# Create random password
-			$t_password = create_random_password( $f_email );
+			$t_password = auth_generate_random_password( $f_email );
 
 			# create the almost unique string for each user then insert into the table
-			$t_password2 = process_plain_password( $t_password );
+			$t_password2 = auth_process_plain_password( $t_password );
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='$t_password2'
 		    		WHERE id='$c_id'";

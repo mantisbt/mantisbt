@@ -11,7 +11,8 @@
 <?php require_once( 'core.php' ); ?>
 <?php
 	# delete cookies then redirect to $g_logout_redirect_page
-	setcookie( $g_string_cookie,	'', -1, $g_cookie_path );
+	auth_clear_cookies();
+
 	setcookie( $g_project_cookie,	'', -1, $g_cookie_path );
 	setcookie( $g_view_all_cookie,	'', -1, $g_cookie_path );
 	setcookie( $g_manage_cookie,	'', -1, $g_cookie_path );

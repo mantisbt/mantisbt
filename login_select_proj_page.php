@@ -9,7 +9,7 @@
 	# Allows the user to select a project that is visible to him
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_user_check_only() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_ref	= gpc_get_string( 'f_ref', '' );
 ?>

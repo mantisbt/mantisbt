@@ -43,7 +43,7 @@
 		# Update password if the two match and are not empty
 		#@@@ display an error if the passwords don't match?
 		if (( !empty( $f_password ) )&&( $f_password == $f_password_confirm )) {
-			$t_password = process_plain_password( $f_password );
+			$t_password = auth_process_plain_password( $f_password );
 			$query = "UPDATE $t_user_table
 					SET password='$t_password'
 					WHERE id='$t_id'";

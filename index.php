@@ -7,12 +7,10 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	if ( BASIC_AUTH == $g_login_method ) {
-		print_header_redirect( 'login.php' );
+	if ( auth_is_user_authenticated() ) {
+		print_header_redirect( 'main_page.php' );
 	} else {
-		# Only place this function is called
-		# Other pages use login_cookie_check()
-		index_login_cookie_check( 'main_page.php' );
+		print_header_redirect( 'login_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>

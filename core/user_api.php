@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.29 2002-09-17 23:32:36 jfitzell Exp $
+	# $Id: user_api.php,v 1.30 2002-09-18 05:32:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -255,7 +255,7 @@
 			$p_access_level = config_get( 'default_new_account_access_level');
 		}
 
-		$t_password = process_plain_password( $p_password );
+		$t_password = auth_process_plain_password( $p_password );
 
 		$c_username		= db_prepare_string( $p_username );
 		$c_password		= db_prepare_string( $t_password );
@@ -268,7 +268,7 @@
 		email_ensure_valid( $p_email );
 
 		$t_seed = $p_email.$p_username;
-		$t_cookie_string	= create_cookie_string( $t_seed );
+		$t_cookie_string	= auth_generate_unique_cookie_string( $t_seed );
 
 		$t_user_table 						= config_get( 'mantis_user_table' );
 
@@ -297,13 +297,23 @@
 	# ldap. $p_email may be empty, but the user wont get any emails.
 	# returns false if error, the generated cookie string if ok
 	function user_signup( $p_username, $p_email=null ) {
-		if ( ( null === $p_email ) && ( ON == config_get( 'use_ldap_email' ) ) ) {
-			$p_email = ldap_email( $p_username );
+		if ( null === $p_email ) {
+			# @@@ I think the ldap_email stuff is a bit borked
+			#  Where is it being set?  When is it being used?
+			#  Shouldn't we override an email that is passed in here?
+			#  If the user doesn't exist in ldap, is the account created?
+			#  If so, there password won't get set anywhere...  (etc)
+
+			if ( ON == config_get( 'use_ldap_email' ) ) {
+				$p_email = ldap_email( $p_username );
+			} else {
+				$p_email = '';
+			}
 		}
 
 		$t_seed = $p_email.$p_username;
 		# Create random password
-		$t_password	= create_random_password( $t_seed );
+		$t_password	= auth_generate_random_password( $t_seed );
 
 		return user_create( $p_username, $t_password, $p_email );
 	}
@@ -446,7 +456,7 @@
 	function user_get_row_by_name( $p_username ) {
 		$t_user_id = user_get_id_by_name( $p_username );
 
-		if ( false == $t_user_id ) {
+		if ( false === $t_user_id ) {
 			return false;
 		}
 
