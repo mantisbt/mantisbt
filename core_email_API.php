@@ -6,6 +6,12 @@
 
 	###########################################################################
 	# Email API
+	# -------------------------------------------------
+	# $Revision: 1.61 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-05 17:29:20 $
+	#
+	# $Id: core_email_API.php,v 1.61 2002-06-05 17:29:20 jhuggins Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -318,7 +324,7 @@
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
-				$g_bugnote_order,
+				$g_bugnote_order, $g_path,
 				$s_email_reporter, $s_email_handler,
 				$s_email_project, $s_email_bug, $s_email_category,
 				$s_email_reproducibility, $s_email_severity,
@@ -366,6 +372,7 @@
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
+		$t_message .= $g_path;
 		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
 			$t_message .= 'view_bug_advanced_page.php';
 		} else {
