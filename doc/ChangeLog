@@ -23,7 +23,6 @@ Mantis ChangeLog
  * Added check_varset() function to replace if isset() else checks.
  * Added Chinese Simplified translation.
  * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
- * Added core_bugnote_API.php
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
  * Added delete_user() function to core_user_API.php and replaced this functionality in other files with a call to this function.
  * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
@@ -43,17 +42,16 @@ Mantis ChangeLog
  * Added support for optional compression of html output ($g_compress_html).  This option is OFF by default since it requires PHP 4.04.
  * Added support for private bugnotes. At present these bugnotes are omitted from sent emails, a future release will put private bugnotes in emails to those who should see them.
  * Added support for supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables were deprecated. In the future the extract() call should be made obsolete by the use of $_GET and such throughout Mantis.
- * Added the ability to enter a bugnote when you update a bug
  * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
  * Added validation checks for all inputs that are passed on to database queries.
  * Added view_state to news.  News can now be made private.
  * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
  * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
  * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
+ * Database upgrade scripts can no longer be applied on an already upgraded database, either by accident or by a malicious user. It might still run for people who upgrade their database manually and partially (i.e. CVS users).
  * Early 2002, an extraordinary thing happened. While Kenzaburo Ito had been maintaining Mantis mostly on his own for years, suddenly others started to help with the development. To reflect/celebrate that, copyright on Mantis for the years 2002 and onward is transferred to the 'Mantis Group', consisting of all of Mantis' developers. All files have had their copyright notices changed to reflect this.
  * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
  * Fixed defects with updating project categories and versions.
- * Fixed deletion of user associations when deleting a project
  * Fixed problem deleting bugnotes.
  * Fixed problem in core_API.php where constants were used before declaration
  * Fixed problem in core_user_API.php which caused an infinite redirect in some browsers (such as Mozilla).
@@ -91,6 +89,8 @@ Mantis ChangeLog
  * Reworked code formatting for $c_ variables.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
+ * Added the ability to enter a bugnote when you update a bug
+ * Added core_bugnote_API.php
 
 2002.05.19  -  0.17.3
 

@@ -1,5 +1,7 @@
 <?php
 	require( "admin_inc.php" );
+	
+	check_applied('0.14.0', 'mantis_project_table');
 ?>
 <?php
 	if ( $f_action=="upgrade" ) {

@@ -1,5 +1,7 @@
 <?php
 	require( "admin_inc.php" );
+	
+	check_applied('0.17.0', 'mantis_bug_monitor_table');
 ?>
 <?php
 	class UpgradeItem {

@@ -1,5 +1,7 @@
 <?php
 	require_once ( 'admin_upgrade_inc.php' );
+	
+	check_applied('0.18.0', 'mantis_news_table', 'announcement');
 
 	$upgrade_obj = new UpgradeItem();
 	$upgrade_obj->SetUpgradeName ( 'Upgrade from 0.17.x to 0.18.x', 'admin_upgrade_0_18_0' );

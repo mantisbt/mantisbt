@@ -1,5 +1,7 @@
 <?php
 	require( "admin_inc.php" );
+	
+	check_applied('0.15.0', 'mantis_bug_file_table');
 ?>
 <?php
 # =================
