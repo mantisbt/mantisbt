@@ -4,6 +4,8 @@ Mantis ChangeLog
 
  * Fix: META redirects were not XHTML-compliant
  * Fix: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
+ * Fix: $g_lang_current was not available to custom_strings_inc.php
+ * Enhancement: When an enumeration is not found, display @<enumid>@ instead of @null@.
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
  * Fix #2964: proj_doc_add.php is empty if document file already exists

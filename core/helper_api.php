@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.38 2003-02-19 06:55:31 jfitzell Exp $
+	# $Id: helper_api.php,v 1.39 2003-02-20 13:19:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -95,7 +95,7 @@
 				return get_enum_to_string( $string_var, $p_val );
 			}
 		}
-		return '@null@';
+		return '@' . $p_val . '@';
 	}
 	# --------------------
 	# If $p_var and $p_val are euqal to each other then we echo SELECTED

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.11 2003-02-17 17:12:47 jlatour Exp $
+	# $Id: lang_api.php,v 1.12 2003-02-20 13:19:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,10 +26,14 @@
 	function lang_load( $p_lang ) {
 		global $g_lang_strings, $g_lang_current;
 		
-		if ($g_lang_current == $p_lang) {
+		if ( $g_lang_current == $p_lang ) {
 			return;
 		}
 		
+		// define current language here so that when custom_strings_inc is
+		// included it knows the current language
+		$g_lang_current = $p_lang;
+
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 		require_once( $t_lang_dir . 'strings_'.$p_lang.'.txt' );
 		
@@ -48,8 +52,6 @@
 				$g_lang_strings[$t_lang_var] = $$t_var;
 			}
 		}
-		
-		$g_lang_current = $p_lang;
 	}
 	
 	# ------------------
