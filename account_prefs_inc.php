@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.30 2004-08-17 12:08:37 thraxisp Exp $
+	# $Id: account_prefs_inc.php,v 1.31 2004-11-16 20:39:49 prichards Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -128,8 +128,8 @@
 		<input type="checkbox" name="email_on_new" <?php check_checked( $t_pref->email_on_new, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_new_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_new_minimum_severity ) ?>
 		</select>
 	</td>
@@ -142,8 +142,8 @@
 		<input type="checkbox" name="email_on_assigned" <?php check_checked( $t_pref->email_on_assigned, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_assigned_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_assigned_minimum_severity ) ?>
 		</select>
 	</td>
@@ -156,8 +156,8 @@
 		<input type="checkbox" name="email_on_feedback" <?php check_checked( $t_pref->email_on_feedback, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_feedback_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_feedback_minimum_severity ) ?>
 		</select>
 	</td>
@@ -170,8 +170,8 @@
 		<input type="checkbox" name="email_on_resolved" <?php check_checked( $t_pref->email_on_resolved, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_resolved_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_resolved_minimum_severity ) ?>
 		</select>
 	</td>
@@ -184,8 +184,8 @@
 		<input type="checkbox" name="email_on_closed" <?php check_checked( $t_pref->email_on_closed, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_closed_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_closed_minimum_severity ) ?>
 		</select>
 	</td>
@@ -198,8 +198,8 @@
 		<input type="checkbox" name="email_on_reopened" <?php check_checked( $t_pref->email_on_reopened, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_reopened_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_reopened_minimum_severity ) ?>
 		</select>
 	</td>
@@ -212,8 +212,8 @@
 		<input type="checkbox" name="email_on_bugnote" <?php check_checked( $t_pref->email_on_bugnote, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_bugnote_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_bugnote_minimum_severity ) ?>
 		</select>
 	</td>
@@ -226,8 +226,8 @@
 		<input type="checkbox" name="email_on_status" <?php check_checked( $t_pref->email_on_status, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_status_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_status_minimum_severity ) ?>
 		</select>
 	</td>
@@ -240,8 +240,8 @@
 		<input type="checkbox" name="email_on_priority" <?php check_checked( $t_pref->email_on_priority , ON); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_priority_minimum_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
+			<option value="<?php echo OFF ?>"><?php echo lang_get( 'any' ) ?></option>
+			<option value="<?php echo OFF ?>"></option>
 			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_priority_minimum_severity ) ?>
 		</select>
 	</td>
