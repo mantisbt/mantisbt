@@ -30,7 +30,7 @@
 		$v_date_posted 	= date( $g_complete_date_format, $v_date_posted );
 
 		# grab the username and email of the poster
-    	$row2 = get_user_info_by_id_arr( $v_poster_id );
+    	$row2 = user_cache_row( $v_poster_id );
 		if ( $row2 ) {
 			$t_poster_name	= $row2['username'];
 			$t_poster_email	= $row2['email'];

@@ -324,7 +324,7 @@
 		<?php
 			# print username instead of status
 			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
-				echo '('.get_user_info( $v_handler_id, 'username' ).')';
+				echo '('.user_get_field( $v_handler_id, 'username' ).')';
 			} else {
 				echo get_enum_element( 'status', $v_status );
 			}

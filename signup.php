@@ -33,7 +33,7 @@
     }
 
 	# Passed our checks.  Insert into DB then send email.
-	if ( !signup_user( $f_username, $f_email ) ) {
+	if ( !user_signup( $f_username, $f_email ) ) {
 		PRINT $s_account_create_fail.'<p>';
 		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
 		exit;

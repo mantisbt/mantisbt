@@ -11,7 +11,7 @@
 	check_access( ADMINISTRATOR );
     $t_redirect_url = 'manage_page.php';
 
-	$t_protected = !delete_user($f_id);
+	$t_protected = !user_delete($f_id);
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -6,15 +6,202 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.9 2002-08-26 22:35:05 jfitzell Exp $
+	# $Id: user_api.php,v 1.10 2002-08-27 10:08:08 jfitzell Exp $
 	# --------------------------------------------------------
+
+	###########################################################################
+	# User API
+	###########################################################################
+
+	#===================================
+	# Caching
+	#===================================
+
+	# --------------------
+	# Cache a user row if necessary and return the cached copy
+	#  If the second parameter is true (default), trigger an error
+	#  if the user can't be found.  If the second parameter is
+	#  false, return false if the user can't be found.
+	function user_cache_row( $p_user_id, $p_trigger_errors=true) {
+		global $g_cache_user;
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		if ( ! isset( $g_cache_user ) ) {
+			$g_cache_user = array();
+		}
+
+		if ( isset ( $g_cache_user[$c_user_id] ) ) {
+			return $g_cache_user[$c_user_id];
+		}
+
+		$query = "SELECT * 
+				  FROM $t_user_table 
+				  WHERE id='$c_user_id'";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_USER_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
+		}
+
+		$row = db_fetch_array( $result );
+
+		$g_cache_user[$c_user_id] = $row;
+
+		return $row;
+	}
+	# --------------------
+	# Clear the user cache (or just the given id if specified)
+	function user_clear_cache( $p_user_id = null ) {
+		global $g_cache_user;
+		
+		if ( $p_user_id === null ) {
+			$g_cache_user = array();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+			unset( $g_cache_user[$c_user_id] );
+		}
+
+		return true;
+	}
+	# --------------------
+	# Cache a user preferences row if necessary and return the cached copy
+	#  If the second parameter is true (default), trigger an error
+	#  if the preferences can't be found.  If the second parameter is
+	#  false, return false if the preferences can't be found.
+	#
+	# @@@ needs extension for per-project prefs
+	function user_pref_cache_row( $p_user_id, $p_trigger_errors=true) {
+		global $g_cache_user_pref;
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+
+		if ( ! isset( $g_cache_user_pref ) ) {
+			$g_cache_user_pref = array();
+		}
+
+		if ( isset ( $g_cache_user_pref[$c_user_id] ) ) {
+			return $g_cache_user_pref[$c_user_id];
+		}
+
+		$query = "SELECT * 
+				  FROM $t_user_pref_table 
+				  WHERE id='$c_user_id'";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
+		}
+
+		$row = db_fetch_array( $result );
+
+		$g_cache_user_pref[$c_user_id] = $row;
+
+		return $row;
+	}
+	# --------------------
+	# Clear the user preferences cache (or just the given id if specified)
+	#
+	# @@@ needs extension for per-project prefs
+	function user_pref_clear_cache( $p_user_id = null ) {
+		global $g_cache_user_pref;
+		
+		if ( $p_user_id === null ) {
+			$g_cache_user_pref = array();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+			unset( $g_cache_user_pref[$c_user_id] );
+		}
+
+		return true;
+	}
+
+	#===================================
+	# Boolean queries and ensures
+	#===================================
+
+	# --------------------
+	# returns true if the username is unique, false if there is already a user
+	#  with that username
+	function user_is_name_unique( $p_username ) {
+		$t_user_table = config_get( 'g_mantis_user_table' );
+
+		$c_username = db_prepare_string( $p_username );
+
+		$query = "COUNT(*)
+				  FROM $g_mantis_user_table
+				  WHERE username='$c_username'";
+
+	    $result = db_query( $query );
+
+	    if ( db_result( $result ) > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	# --------------------
+	# return whether user is monitoring bug for the user id and bug id
+	function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
+		$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
+
+		$c_user_id	= db_prepare_int( $p_user_id );
+		$c_bug_id	= db_prepare_int( $p_bug_id );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_bug_monitor_table
+				  WHERE user_id='$c_user_id' AND bug_id='$c_bug_id'";
+
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	# --------------------
+	# @@@ unused
+	function user_has_project_prefs( $p_user_id, $p_project_id ) {
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_user_id = db_prepare_int( $p_user_id );
+
+	    $query = "SELECT COUNT(*)
+	    		  FROM $t_user_pref_table
+	    		  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
+	    $result = db_query($query);
+		$t_count =  db_result( $result );
+		if ( $t_count > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	#===================================
+	# Creation / Deletion / Updating
+	#===================================
 
 	# --------------------
 	# Create a user.
 	# If $g_use_ldap_email then tries to find email using ldap
 	# $p_email may be empty, but the user wont get any emails.
 	# returns false if error, the generated cookie string if ok
-	function signup_user( $p_username, $p_email=false ) {
+	function user_signup( $p_username, $p_email=false ) {
 		global $g_use_ldap_email,
 		$g_mantis_user_table,
 		$g_default_new_account_access_level,
@@ -89,7 +276,7 @@
 	# --------------------
 	# delete an account
 	# returns true when the account was successfully deleted
-	function delete_user( $p_user_id ) {
+	function user_delete( $p_user_id ) {
 		global $g_mantis_user_table, $g_mantis_user_profile_table,
 		       $g_mantis_user_pref_table, $g_mantis_project_user_list_table;
 
@@ -128,6 +315,152 @@
 		}
     }
 
+	#===================================
+	# Data Access
+	#===================================
+	# --------------------
+	# get a user id from a username
+	#  return false if the username does not exist
+	function user_get_id_by_name( $p_username ) {
+		$t_user_table = config_get( 'mantis_user_table' );
+		
+		$c_username = db_prepare_string( $p_username );
+
+		$query = "SELECT id
+				  FROM $t_user_table
+				  WHERE username='$c_username'";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			return false;
+		} else {
+			return db_result( $result );
+		}
+	}
+	# --------------------
+	# return all data associated with a particular user name
+	#  return false if the username does not exist
+	function user_get_row_by_name( $p_username ) {
+		$t_user_id = user_get_id_by_name( $p_username );
+
+		if ( false == $t_user_id ) {
+			return false;
+		}
+
+		$row = user_cache_row( $t_user_id );
+
+		return $row;
+	}
+	# --------------------
+	# return the specified preference field for the user id
+	function user_get_pref( $p_user_id, $p_field_name ) {
+		$row = user_pref_cache_row( $p_user_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
+	}
+	# --------------------
+	# return the specified user field for the user id
+	function user_get_field( $p_user_id, $p_field_name ) {
+		$row = user_cache_row( $p_user_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
+	}
+	# --------------------
+	# lookup the user's email in LDAP or the db as appropriate
+	function user_get_email( $p_user_id ) {
+		if ( ON == config_get( 'use_ldap_email' ) ) {
+		    return ldap_email( $p_user_id );
+		} else {
+			return user_get_field( $p_user_id, 'email' );
+		}
+	}
+	# --------------------
+	# returns username
+	function user_get_name( $p_user_id ) {
+		$t_string = lang_get( 'user_no_longer_exists' );
+
+		$row = user_cache_row( $p_user_id, false );
+
+		if ( false == $row ) {
+			return $t_string;
+		} else {
+			return $row['username'];
+		}
+	}
+
+	#===================================
+	# Data Modification
+	#===================================
+
+	# --------------------
+	# Update the last_visited field to be NOW()
+	function user_update_last_visit( $p_user_id ) {
+		$t_user_table = config_get( 'mantis_user_table' );
+		
+		# @@@ remove this once old user caching is gotten rid of
+		drop_user_info_cache();
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$query = "UPDATE $t_user_table
+				  SET last_visit=NOW()
+				  WHERE id='$c_user_id'";
+		
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
+	# This function is only called from the login.php3 script
+	function user_increment_login_count( $p_user_id ) {
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$query = "UPDATE $t_user_table
+				SET login_count=login_count+1
+				WHERE id='$c_user_id'";
+
+		db_query( $query );
+
+		#db_query() errors on failure so:
+		return true;
+	}
+
+
+
+#########################################
+#
+# Current user functions
+#
+# These functions operate on the current user
+#
+# They should be refactored into functions that take a user
+#  with the current functions calling the new ones with the
+#  result of auth_get_current_user_id() as the first parameter
+#
+# The naming of these and whether they should be in another api
+#  file is also an issue.  The best I can think of is:
+#
+#   current_user_*() but I'm tempted to leave them in this file
+#
+# maybe they need to be user_current_*() or user_*_current() ??
+#
+##################################
+
 	# --------------------
 	# Flush user information cache.  Should be called when the user information
 	# is changed.
@@ -136,212 +469,10 @@
 		unset ( $g_current_user_info );
 	}
 	# --------------------
-	###########################################################################
-	# User Information API
-	###########################################################################
+
 	# --------------------
-	# Returns the specified field of the currently logged in user, otherwise 0
-	function get_current_user_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_table, $g_current_user_info;
-
-		# if logged in
-		if ( isset( $g_string_cookie_val ) ) {
-			if ( !isset ( $g_current_user_info[ $p_field_name ] ) ) {
-				# get user info
-				$query = "SELECT * ".
-						"FROM $g_mantis_user_table ".
-						"WHERE cookie_string='$g_string_cookie_val' ".
-						"LIMIT 1";
-				$result = db_query( $query );
-				$g_current_user_info = db_fetch_array ( $result );
-			}
-			return $g_current_user_info [ $p_field_name ];
-		} else {
-			return 0;
-		}
-	}
-	# --------------------
-	# Returns the specified field of the currently logged in user, otherwise 0
-	function get_current_user_pref_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_pref_table, $g_cache_user_pref;
-
-		# if logged in
-		if ( isset( $g_string_cookie_val ) ) {
-			$t_id = get_current_user_field( 'id' );
-
-			if ( !isset( $g_cache_user_pref[$t_id] ) ) {
-				# get user info
-				$query = "SELECT *
-						FROM $g_mantis_user_pref_table
-						WHERE user_id='$t_id'";
-				$result = db_query( $query );
-				$row = db_fetch_array( $result );
-				if ( false === $row ) {
-					return 0;
-				}
-				$g_cache_user_pref[$t_id] = $row;
-			}
-			return ( $g_cache_user_pref[$t_id][$p_field_name] );
-		} else {
-			return 0;
-		}
-	}
-	# --------------------
-	# return all data associated with a particular user id
-	function get_user_info_by_id_arr( $p_user_id ) {
-		global $g_mantis_user_table;
-
-		$c_user_id = (integer)$p_user_id;
-
-		$query = "SELECT * " .
-				"FROM $g_mantis_user_table " .
-				"WHERE id='$c_user_id'";
-		$result = db_query( $query );
-	    return db_fetch_array( $result );
-	}
-	# --------------------
-	# return all data associated with a particular user name
-	function get_user_info_by_name_arr( $p_username ) {
-		global $g_mantis_user_table;
-
-		$c_username = addslashes($p_username);
-
-	    $query = "SELECT *
-	    		FROM $g_mantis_user_table
-	    		WHERE username='$c_username'";
-	    $result =  db_query( $query );
-	    return db_fetch_array( $result );
-	}
-	# --------------------
-	# return the specified preference field for the user id
-	function get_user_pref_info( $p_user_id, $p_field ) {
-		global $g_mantis_user_pref_table;
-
-		$c_user_id = (integer)$p_user_id;
-
-	    $query = "SELECT $p_field
-	    		FROM $g_mantis_user_pref_table
-	    		WHERE user_id='$c_user_id'";
-	    $result =  db_query( $query );
-	    if ( $result ) {
-	    	return db_result( $result, 0, 0 );
-	    } else {
-	    	return 0;
-	    }
-	}
-	# --------------------
-	# return the specified user field for the user id
-	# exception for LDAP email
-	function get_user_info( $p_user_id, $p_field ) {
-		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
-		if ( ( ON == $g_use_ldap_email ) && ( 'email' == $p_field  ) ) {
-		    # Find out what username belongs to the p_user_id and ask ldap
-		    return ldap_emailaddy( $p_user_id );
-		}
-		$c_user_id = (integer)$p_user_id;
-
-		$query = "SELECT $p_field
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-		$result =  db_query( $query );
-		return db_result( $result, 0, 0 );
-
-	}
-	# --------------------
-	# return whether user is monitoring bug for the user id and bug id
-	function check_bug_monitoring( $p_user_id, $p_bug_id ) {
-		global $g_mantis_bug_monitor_table;
-
-		$c_user_id	= (integer)$p_user_id;
-		$c_bug_id	= (integer)$p_bug_id;
-
-		$query = "SELECT user_id
-				FROM $g_mantis_bug_monitor_table
-				WHERE user_id='$c_user_id' AND bug_id='$c_bug_id'";
-
-		$result =  db_query( $query );
-		return db_result( $result, 0, 0 );
-
-	}
-	# --------------------
-	# return the specified user field for the user id
-	# exception for LDAP email
-	function user_get_field( $p_user_id, $p_field ) {
-		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
-		if ( ( ON == $g_use_ldap_email ) && ( 'email' == $p_field  ) ) {
-		    # Find out what username belongs to the p_user_id and ask ldap
-		    return ldap_emailaddy( $p_user_id );
-		}
-		$c_user_id = (integer)$p_user_id;
-
-		$query = "SELECT $p_field
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-
-		$result =  db_query( $query );
-		return db_result( $result, 0, 0 );
-
-	}
-	# --------------------
-	# returns username
-	function user_get_name( $p_user_id ) {
-		global $g_mantis_user_table, $s_user_no_longer_exists;
-
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		if ( 0 == $p_user_id ) {
-			return '';
-		}
-
-		$query = "SELECT username
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-		$result = db_query( $query );
-
-		if ( db_num_rows( $result ) > 0 ) {
-			return db_result( $result );
-		} else {
-			return $s_user_no_longer_exists;
-		}
-	}
-	# --------------------
-	###########################################################################
-	# Miscellaneous User API
-	###########################################################################
-	# --------------------
-	# Update the last_visited field to be NOW()
-	function login_update_last_visit( $p_string_cookie_val ) {
-		global $g_mantis_user_table;
-		
-		drop_user_info_cache();
-
-		$c_string_cookie_val = addslashes($p_string_cookie_val);
-
-		$query = "UPDATE $g_mantis_user_table
-				SET last_visit=NOW()
-				WHERE cookie_string='$c_string_cookie_val'";
-		$result = db_query( $query );
-	}
-	# --------------------
-	function check_user_pref_exists( $p_project_id ) {
-		global $g_mantis_user_pref_table;
-
-		$c_project_id = (integer)$p_project_id;
-
-		$t_user_id = get_current_user_field( 'id' );
-	    $query = "SELECT COUNT(*)
-	    		FROM $g_mantis_user_pref_table
-	    		WHERE user_id='$t_user_id' AND project_id='$c_project_id'";
-	    $result = db_query($query);
-		$t_count =  db_result( $result, 0, 0 );
-		if ( $t_count > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	# --------------------
-	function create_project_user_prefs( $p_project_id ) {
+	# @@@ unused
+	function user_create_project_prefs( $p_project_id ) {
 		global $g_mantis_user_pref_table;
 
 		$c_project_id = (integer)$p_project_id;
@@ -446,23 +577,50 @@
 		return db_result( $result, 0, 0 );
 	}
 	# --------------------
-	# returns true if the username is unique, false if there is already a user
-	#  with that username
-	function user_is_name_unique( $p_username ) {
-		global $g_mantis_user_table;
+	# Returns the specified field of the currently logged in user, otherwise 0
+	function get_current_user_field( $p_field_name ) {
+		global 	$g_string_cookie_val, $g_mantis_user_table, $g_current_user_info;
 
-		$c_username = addslashes($p_username);
-
-		$query = "SELECT username
-			FROM $g_mantis_user_table
-			WHERE username='$c_username'";
-
-	    $result = db_query( $query );
-
-	    if ( db_num_rows( $result ) > 0 ) {
-			return false;
+		# if logged in
+		if ( isset( $g_string_cookie_val ) ) {
+			if ( !isset ( $g_current_user_info[ $p_field_name ] ) ) {
+				# get user info
+				$query = "SELECT * ".
+						"FROM $g_mantis_user_table ".
+						"WHERE cookie_string='$g_string_cookie_val' ".
+						"LIMIT 1";
+				$result = db_query( $query );
+				$g_current_user_info = db_fetch_array ( $result );
+			}
+			return $g_current_user_info [ $p_field_name ];
 		} else {
-			return true;
+			return 0;
+		}
+	}
+	# --------------------
+	# Returns the specified field of the currently logged in user, otherwise 0
+	function get_current_user_pref_field( $p_field_name ) {
+		global 	$g_string_cookie_val, $g_mantis_user_pref_table, $g_cache_user_pref;
+
+		# if logged in
+		if ( isset( $g_string_cookie_val ) ) {
+			$t_id = get_current_user_field( 'id' );
+
+			if ( !isset( $g_cache_user_pref[$t_id] ) ) {
+				# get user info
+				$query = "SELECT *
+						FROM $g_mantis_user_pref_table
+						WHERE user_id='$t_id'";
+				$result = db_query( $query );
+				$row = db_fetch_array( $result );
+				if ( false === $row ) {
+					return 0;
+				}
+				$g_cache_user_pref[$t_id] = $row;
+			}
+			return ( $g_cache_user_pref[$t_id][$p_field_name] );
+		} else {
+			return 0;
 		}
 	}
 ?>

@@ -26,7 +26,7 @@
  	}
 
    	# get user info
-	$row = get_user_info_by_name_arr( $f_username );
+	$row = user_get_row_by_name( $f_username );
 
 	$login_result = 1;
 	if ( $row ) {
@@ -37,8 +37,8 @@
 
 		# Login failed, create user if basic authentication
 		if ( BASIC_AUTH == $g_login_method ) {
-			if ( $t_cookie_string = signup_user( $f_username ) ) {
-				$row = get_user_info_by_name_arr( $f_username );
+			if ( $t_cookie_string = user_signup( $f_username ) ) {
+				$row = user_get_row_by_name( $f_username );
 				$login_result = 1;
 				extract( $row, EXTR_PREFIX_ALL, 'u' );
 			}
@@ -56,7 +56,7 @@
 		is_password_match( $f_username, $f_password, $u_password )) {
 
 		# increment login count
-		increment_login_count( $u_id );
+		user_increment_login_count( $u_id );
 
 		$t_project_id = get_default_project( $u_id );
 

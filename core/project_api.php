@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.7 2002-08-27 06:47:43 jfitzell Exp $
+	# $Id: project_api.php,v 1.8 2002-08-27 10:08:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -274,7 +274,8 @@
 		if ( isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];
 		} else {
-			trigger_error( ERROR_DB_FIELD_NOT_FOUND, NOTICE );
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
 		}
 	}
 	# --------------------

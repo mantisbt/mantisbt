@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.37 $
-	# $Author: vboctor $
-	# $Date: 2002-08-26 13:28:33 $
+	# $Revision: 1.38 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-27 10:08:07 $
 	#
-	# $Id: view_all_bug_page.php,v 1.37 2002-08-26 13:28:33 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.38 2002-08-27 10:08:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -247,8 +247,8 @@
 			$t_priority			= get_enum_element( 'priority', $v_priority );
 			$t_severity			= get_enum_element( 'severity', $v_severity );
 			$t_status			= get_enum_element( 'status', $v_status );
-			$t_hander_name		= get_user_info( $v_handler_id, 'username' );
-			$t_reporter_name	= get_user_info( $v_reporter_id, 'username' );
+			$t_hander_name		= user_get_field( $v_handler_id, 'username' );
+			$t_reporter_name	= user_get_field( $v_reporter_id, 'username' );
 			$v_summary			= string_display( $v_summary );
 
 			echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";

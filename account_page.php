@@ -64,7 +64,7 @@
 </tr>
 <?php
 	if ( ON == $g_use_ldap_email ) {
-    	$u_email = get_user_info( $u_username, 'email' );
+    	$u_email = user_get_email( $u_username );
 ?>
 <tr class="row-2">
 	<td class="category">

@@ -149,17 +149,37 @@
 	define( 'ERROR_ACCESS_DENIED',				13 );
 	define( 'ERROR_COOKIES_DISABLED',			14 );
 	define( 'ERROR_UPLOAD_FAILURE',				15 );
-	define( 'ERROR_FILE_TOO_BIG',				16 );
-	define( 'ERROR_GPC_VAR_NOT_FOUND',			17 );
-	define( 'ERROR_USERNAME_NOT_UNIQUE',		18 );
-	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		19 );
-	define( 'ERROR_LANG_STRING_NOT_FOUND',		20 );
-	define( 'ERROR_BUGNOTE_NOT_FOUND',			21 );
-	define( 'ERROR_PROJECT_NOT_FOUND',			22 );
-	define( 'ERROR_DB_FIELD_NOT_FOUND',			23 );
-	define( 'ERROR_FTP_CONNECT_ERROR',          24 );
-	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',	25 );
-	define( 'ERROR_PROJECT_NAME_INVALID',		26 );
+	define( 'ERROR_FTP_CONNECT_ERROR',          16 );
+
+	# ERROR_CONFIG_*
+	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		100 );
+
+	# ERROR_GPC_*
+	define( 'ERROR_GPC_VAR_NOT_FOUND',			200 );
+
+	# ERROR_LANG_*
+	define( 'ERROR_LANG_STRING_NOT_FOUND',		300 );
+
+	# ERROR_DB_*
+	define( 'ERROR_DB_FIELD_NOT_FOUND',			400 );
+
+	# ERROR_FILE_*
+	define( 'ERROR_FILE_TOO_BIG',				500 );
+
+	# ERROR_BUGNOTE_*
+	define( 'ERROR_BUGNOTE_NOT_FOUND',			600 );
+
+	# ERROR_PROJECT_*
+	define( 'ERROR_PROJECT_NOT_FOUND',			700 );
+	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',	701 );
+	define( 'ERROR_PROJECT_NAME_INVALID',		702 );
+
+	# ERROR_USER_*
+	define( 'ERROR_USER_NAME_NOT_UNIQUE',		800 );
+	define( 'ERROR_USER_NOT_FOUND',				801 );
+	define( 'ERROR_USER_PREFS_NOT_FOUND',		802 );
+	# ERROR_AUTH_*
+	define( 'ERROR_AUTH_INVALID_COOKIE',		800 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

@@ -20,7 +20,7 @@
 
 	for ($i=0; $i < db_num_rows( $result ); $i++) {
 		$row = db_fetch_array( $result );
-		delete_user($row['id']);
+		user_delete($row['id']);
 	}
 
 	$t_redirect_url = 'manage_page.php';

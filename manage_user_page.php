@@ -11,7 +11,7 @@
 	check_access( ADMINISTRATOR );
 
 	# grab user data and prefix with u_
-	$row = get_user_info_by_id_arr( $f_id );
+	$row = user_cache_row( $f_id );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>

@@ -73,7 +73,7 @@
 		}
 
 		## grab the username and email of the poster
-    	$row2 = get_user_info_by_id_arr( $v_poster_id );
+    	$row2 = user_cache_row( $v_poster_id );
 		$t_poster_name	= '';
 		$t_poster_email	= '';
 		if ( $row2 ) {

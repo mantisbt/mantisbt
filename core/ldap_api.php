@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.3 2002-08-27 10:08:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,7 +18,7 @@
 
  	# --------------------
 	# Find someone email address based on their login name
-	function ldap_emailaddy($worker) {
+	function ldap_email($worker) {
 	    global $g_ldap_organisation,$g_ldap_server,$g_ldap_root_dn;
 
 	    $search_dn = "(&$g_ldap_organisation(uid=$worker))";

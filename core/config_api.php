@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: config_api.php,v 1.3 2002-08-27 10:08:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -34,6 +34,7 @@
 			# unless we were allowing for the option not to exist by passing
 			#  a default, trigger a NOTICE
 			if ( null == $p_default ) { 
+				error_parameters($p_option);
 				trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, NOTICE );
 			}
 			return $p_default;

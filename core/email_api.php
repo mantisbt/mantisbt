@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: email_api.php,v 1.6 2002-08-27 10:08:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -90,12 +90,12 @@
 			$v_reporter_id = get_bug_field( $p_bug_id, 'reporter_id' );
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-				$t_notify_reporter = get_user_pref_info( $v_reporter_id, $t_pref_field );
+				$t_notify_reporter = user_get_pref( $v_reporter_id, $t_pref_field );
 				if ( ON == $t_notify_reporter ) {
-					$send_arr[] = get_user_info( $v_reporter_id, 'email' );
+					$send_arr[] = user_get_email( $v_reporter_id );
 				}
 			} else {
-				$send_arr[] = get_user_info( $v_reporter_id, 'email' );
+				$send_arr[] = user_get_email( $v_reporter_id );
 			}
 		}
 
@@ -105,12 +105,12 @@
 			if ( $v_handler_id > 0 ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-					$t_notify_handler = get_user_pref_info( $v_handler_id, $t_pref_field );
+					$t_notify_handler = user_get_pref( $v_handler_id, $t_pref_field );
 					if ( ON == $t_notify_handler ) {
-						$send_arr[] = get_user_info( $v_handler_id, 'email' );
+						$send_arr[] = user_get_email( $v_handler_id );
 					}
 				} else {
-					$send_arr[] = get_user_info( $v_handler_id, 'email' );
+					$send_arr[] = user_get_email( $v_handler_id );
 				}
 			}
 		}
@@ -208,7 +208,7 @@
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					# if the user's notification is on then add to the list
-					$t_notify = get_user_pref_info( $row['user_id'], $t_pref_field );
+					$t_notify = user_get_pref( $row['user_id'], $t_pref_field );
 					if ( ON == $t_notify ) {
 						$send_arr[] = $row['email'];
 					}

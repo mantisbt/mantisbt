@@ -79,8 +79,8 @@
 								$v_new_value = project_get_field( $v_new_value, 'name' );
 				break;
 		case 'handler_id':
-		case 'reporter_id':		$v_old_value = get_user_info( $v_old_value, 'username' );
-								$v_new_value = get_user_info( $v_new_value, 'username' );
+		case 'reporter_id':		$v_old_value = user_get_field( $v_old_value, 'username' );
+								$v_new_value = user_get_field( $v_new_value, 'username' );
 				break;
 		}
 
@@ -109,10 +109,10 @@
 			case BUGNOTE_STATE_CHANGED:		$v_old_value = get_enum_element( 'view_state', $v_old_value );
 											$t_note = $s_bugnote_view_state.": ".$v_old_value.": ".$v_new_value;
 											break;
-			case BUG_MONITOR:				$v_old_value = get_user_info( $v_old_value, 'username' );
+			case BUG_MONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
 											$t_note = $s_bug_monitor.": ".$v_old_value;
 											break;
-			case BUG_UNMONITOR:				$v_old_value = get_user_info( $v_old_value, 'username' );
+			case BUG_UNMONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
 											$t_note = $s_bug_end_monitor.": ".$v_old_value;
 											break;
 			}

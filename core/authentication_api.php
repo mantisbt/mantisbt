@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.1 2002-08-26 22:35:05 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.2 2002-08-27 10:08:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,6 +24,7 @@
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
+			$t_user_id = auth_get_current_user_id();
 			# get user info
 			$t_enabled = get_current_user_field( 'enabled' );
 			# check for access enabled
@@ -32,7 +33,7 @@
 			}
 
 			# update last_visit date
-			login_update_last_visit( $g_string_cookie_val );
+			user_update_last_visit( $t_user_id );
 
 			# if no project is selected then go to the project selection page
 			if ( empty( $g_project_cookie_val ) ) {
@@ -66,6 +67,8 @@
 				print_header_redirect( 'login_select_proj_page.php' );
 			}
 
+			$t_user_id = auth_get_current_user_id();
+
 			# set last visit cookie
 
 			# get user info
@@ -77,7 +80,7 @@
 			}
 
 			# update last_visit date
-			login_update_last_visit( $g_string_cookie_val );
+			user_update_last_visit( $g_string_cookie_val );
 
 			# go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -161,20 +164,6 @@
 		return false;
 	}
 	# --------------------
-	# This function is only called from the login.php3 script
-	function increment_login_count( $p_id ) {
-		global $g_mantis_user_table;
-
-		drop_user_info_cache();
-
-		$c_id = (integer)$p_id;
-
-		$query = "UPDATE $g_mantis_user_table
-				SET login_count=login_count+1
-				WHERE id='$c_id'";
-		$result = db_query( $query );
-	}
-	# --------------------
 	#
 	function process_plain_password( $p_password ) {
 		global $g_login_method;
@@ -248,4 +237,50 @@
 		}
 	}	
 
+	function auth_get_current_user_cookie() {
+		$t_cookie_name = config_get( 'string_cookie' );
+
+		$t_cookie = gpc_get_string( $t_cookie_name, '' );
+
+		return $t_cookie;
+	}
+
+	function auth_get_current_user_id() {
+# @@@ caching the current user id is a major security hole until we
+#     turn off register_globals so it's commented out
+/* (caching commented out)
+		global $g_cache_current_user_id;
+
+		if ( isset( $g_cache_current_user_id ) {
+			return $g_cache_current_user_id;
+		}
+*/
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$t_cookie_string = auth_get_current_user_cookie();
+		
+		# @@@ error with an error saying they aren't logged in?
+		#     Or redirect to the login page maybe?
+
+		$c_cookie_string = db_prepare_string( $t_cookie_string );
+
+		$query = "SELECT id
+				  FROM $t_user_table
+				  WHERE cookie_string='$c_cookie_string'";
+
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) < 1 ) {
+			trigger_error( ERROR_AUTH_INVALID_COOKIE, WARNING );
+			return false;
+		}
+
+		$t_user_id = db_result( $result );
+
+/* (caching commented out)
+		$g_cache_current_user_id = $t_user_id;
+*/
+
+		return $t_user_id;
+	}
 ?>

@@ -338,7 +338,7 @@
 ?>
 <?php # MONITOR form BEGIN ?>
 <?php
- if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! check_bug_monitoring( $t_user_id, $f_id ) ) {
+ if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
 ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
@@ -352,7 +352,7 @@
 	# MONITOR form END
 ?>
 <?php # UNMONITOR form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && check_bug_monitoring( $t_user_id, $f_id ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
