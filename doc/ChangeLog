@@ -13,6 +13,7 @@ Mantis
  * Fixed problem where portuguese_brazil localization did not appear correctly.
  * Fixed several minor CSS class consistency issues.
  * Fixed file download links to use rawurlencode().
+ * Fixed admin_check.php to check for Windows style \.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.

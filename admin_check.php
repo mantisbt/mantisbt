@@ -73,7 +73,8 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		Checking to see if your $g_absolute_path variable has a trailing /
 	</td>
 	<?php
-		if ( "/" == $g_absolute_path[strlen($g_absolute_path)-1] ) {
+		if (( "\\" == $g_absolute_path[strlen($g_absolute_path)-1] ) ||
+			( "/"  == $g_absolute_path[strlen($g_absolute_path)-1] )) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
