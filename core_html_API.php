@@ -154,7 +154,7 @@
 				PRINT "<i>$t_now</i>";
 			PRINT "</td>";
 			PRINT "<td align=\"right\" width=\"33%\">";
-				PRINT "<select name=f_project_id onchange=submit()>";
+				PRINT "<select name=f_project_id>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT "</select>";
 				PRINT "<input type=\"submit\" value=\"$s_switch\">";
