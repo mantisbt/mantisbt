@@ -1,4 +1,12 @@
 #
+# Database Upgrade SQL
+# -----------------------------------------------------------------
+# $Revision: 1.3 $
+# $Author: jhuggins $
+# $Date: 2002-06-07 14:21:27 $
+#
+# $Id: db_upgrade.sql,v 1.3 2002-06-07 14:21:27 jhuggins Exp $
+# -----------------------------------------------------------------
 #	Run these queries to upgrade your bugtracker
 #
 
