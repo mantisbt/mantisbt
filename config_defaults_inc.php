@@ -181,10 +181,17 @@
 	###############################
 	# Mantis Display Settings
 	###############################
-#MANUAL---------------------------------------STOPPED HERE-------------------------
+
 	# --- sitewide variables ----------
 	$g_window_title = 'Mantis';     # browser window title
 	$g_page_title   = 'Mantis';     # title at top of html page
+
+	# --- project name -----------------
+	# show the project name in the page title
+	# 0 / OFF : no project name
+	# 1 / ON : project name and any additional
+	# 2 : only project name
+	$g_show_project_in_title = ON;
 
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
@@ -193,22 +200,13 @@
 	$g_show_view   = BOTH;
 
 	# --- display source code ---------
-	# display a link at the bottom of the page to show the PHP source
-	# WARNING: Potential security hazard.  Only turn this on when you really
-	# need it (for debugging)
-	# ON = admin only; OFF = disabled
+	# Display a link at the bottom of the page to allow administrators to view the PHP source
+	# WARNING: Potential security hazard.  Only turn this on when you really need it (for debugging)
 	$g_show_source = OFF;
 
 	# --- footer menu -----------------
-	# Footer Menu
+	# Display another instance of the menu at the bottom.  The top menu will still remain.
 	$g_show_footer_menu = OFF;
-
-	# --- footer menu -----------------
-	# show the project name in the page title
-	# 0 : no project name
-	# 1 : project name and any additional
-	# 2 : only project name
-	$g_show_project_in_title = ON;
 
 	# --- show assigned to names ------
 	# This is in the view all pages
@@ -240,7 +238,7 @@
 	# (DEFINE('DIR_BASE','/www/mantisbt/jpgraph/');)
 
 	$g_use_jpgraph = OFF;
-	$g_jpgraph_path = '.' . DIRETORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;   # dont forget the ending slash!
+	$g_jpgraph_path = '.' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;   # dont forget the ending slash!
 
 	############################
 	# Mantis Time Settings
@@ -268,7 +266,7 @@
 	$g_short_date_format    = 'm-d';
 	$g_normal_date_format   = 'm-d H:i';
 	$g_complete_date_format = 'm-d-y H:i T';
-
+#MANUAL---------------------------------------STOPPED HERE-------------------------
 	############################
 	# Mantis News Settings
 	############################

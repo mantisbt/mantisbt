@@ -10,6 +10,19 @@
 	###########################################################################
 
 	########################
+	# PHP Constants
+	########################
+
+	# Directory separator was introduced in PHP 4.0.6
+	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
+		if (substr(php_uname(), 0, 7) == 'Windows') {
+			define('DIRECTORY_SEPARATOR', '\\');
+		} else {
+			define('DIRECTORY_SEPARATOR', '/');
+		}
+	}
+
+	########################
 	# Mantis Constants
 	########################
 
