@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.199 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:14 $
+	# $Revision: 1.200 $
+	# $Author: thraxisp $
+	# $Date: 2004-08-10 14:34:53 $
 	#
-	# $Id: strings_english.txt,v 1.199 2004-08-10 10:46:14 jlatour Exp $
+	# $Id: strings_english.txt,v 1.200 2004-08-10 14:34:53 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,6 +98,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
 $s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
 $s_move_bugs_conf_msg = 'Move issues to';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.40 2004-07-24 11:48:33 narcissus Exp $
+	# $Id: bug_actiongroup_page.php,v 1.41 2004-08-10 14:34:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -153,6 +153,12 @@ if ( !$t_finished ) {
 </tr>
 	<?php
 	if ( isset( $t_question_title2 ) ) {
+		switch ( $f_action ) {
+			case 'RESOLVE':
+				$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+					|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+				if ( $t_show_version ) { 
 	?>
 		<tr class="row-2">
 			<td class="category">
@@ -160,17 +166,14 @@ if ( !$t_finished ) {
 			</td>
 			<td>
 				<select name="<?php echo $t_form2 ?>">
-					<?php
-						switch ( $f_action ) {
-							case 'RESOLVE':
-								print_version_option_list( '', null, VERSION_ALL );
-								break;
-						}
-					?>
+					<?php print_version_option_list( '', null, VERSION_ALL );?>
 				</select>
 			</td>
 		</tr>
 	<?php
+				}
+				break;
+		}			
 	}
 	?>
 <?php
