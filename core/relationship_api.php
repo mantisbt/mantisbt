@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.31 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: relationship_api.php,v 1.32 2005-03-03 02:17:47 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -690,7 +690,6 @@
 <?php
     }
 ?>
-<select name="rel_type">
 <option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
 <option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
 <option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
