@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.66 $
+	# $Revision: 1.67 $
 	# $Author: int2str $
-	# $Date: 2003-03-12 19:07:37 $
+	# $Date: 2003-03-12 19:30:26 $
 	#
-	# $Id: strings_german.txt,v 1.66 2003-03-12 19:07:37 int2str Exp $
+	# $Id: strings_german.txt,v 1.67 2003-03-12 19:30:26 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -25,11 +25,11 @@
 	# Group commands menuitems
 	$s_actiongroup_menu_move = 'Verschieben';
 	$s_actiongroup_menu_assign = 'Zuordnen';
-	$s_actiongroup_menu_close = 'Schlie&szlig;en';
-	$s_actiongroup_menu_delete = 'L&ouml;schen';
+	$s_actiongroup_menu_close = 'Schließen';
+	$s_actiongroup_menu_delete = 'Löschen';
 	$s_actiongroup_menu_resolve = 'Bereinigen';
-	$s_actiongroup_menu_update_priority = 'Priorit&auml;t &auml;ndern';
-	$s_actiongroup_menu_update_status = 'Status &auml;ndern';
+	$s_actiongroup_menu_update_priority = 'Priorität ändern';
+	$s_actiongroup_menu_update_status = 'Status ändern';
 
 	# new strings:
 	$s_all_projects = 'Alle Projekte';
@@ -40,8 +40,8 @@
 	$s_csv_export = 'CSV-Export';
 	$s_login_anonymously = 'Anonym einloggen';
 	$s_jump_to_bugnotes = 'Zu Fehlernotizen springen';
-	$s_public_project_msg = 'Dieses Projekt ist &Ouml;FFENTLICH.  Alle Benutzer haben Zugang zu diesem Projekt.';
-	$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und manuell hinzugef&uuml;gte Benutzer haben Zugang.';
+	$s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH.  Alle Benutzer haben Zugang zu diesem Projekt.';
+	$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT.  Nur Administratoren und manuell hinzugefügte Benutzer haben Zugang.';
 	$s_access_level_project = 'Projekt Zugangs Stufe';
 	$s_view_submitted_bug_link = 'Zeige eingetragenen Fehler';
 	$s_assigned_projects = 'Zugewiesene Projekte';
@@ -55,60 +55,60 @@
 	$s_field = 'Feld';
 	$s_old_value = 'Alter Wert';
 	$s_new_value = 'Neuer Wert';
-	$s_date_modified = '&Auml;derungsdatum';
+	$s_date_modified = 'Äderungsdatum';
 	$s_bugnote = 'Fehlernotiz';
-	$s_change = '&Auml;derung';
+	$s_change = 'Äderung';
 	$s_bugnote_view_state = 'Fehlernotiz Anzeigestatus';
 	$s_bug_monitor = 'Fehler beobachten';
 	$s_bug_end_monitor = 'Fehler Beobachtung beendet';
-	$s_announcement = 'Ank&uuml;ndigung';
+	$s_announcement = 'Ankündigung';
 	$s_stays_on_top = 'Bleibt open';
-	$s_delete_bugnote_button = 'Fehlernotiz l&ouml;schen';
-	$s_delete_bugnote_sure_msg = 'M&ouml;chten Sie diese Fehlernotiz wirklich l&ouml;schen?';
+	$s_delete_bugnote_button = 'Fehlernotiz löschen';
+	$s_delete_bugnote_sure_msg = 'Möchten Sie diese Fehlernotiz wirklich löschen?';
 	$s_bug_relationships = 'Fehler-Beziehungen';
-	$s_empty_password_sure_msg = 'Der Benutzer hat eine leeres Kennwort. M&ouml;chten Sie trotzdem fortfahren?';
+	$s_empty_password_sure_msg = 'Der Benutzer hat eine leeres Kennwort. Möchten Sie trotzdem fortfahren?';
 	$s_empty_password_button = 'Leeres Kennwort benutzen';
 
 	$s_duplicate_of = 'Duplikat von %id';
 	$s_has_duplicate = 'Hat Duplicat %id';
 	$s_related_to = 'Verwandt mit %id';
-	$s_dependant_on = 'Abh&auml;ngig von %id';
+	$s_dependant_on = 'Abhängig von %id';
 	$s_blocks = 'Blockt %id';
 
 	$s_new_bug = 'Neuer Fehler';
-	$s_bugnote_added = 'Fehlernotiz hinzugef&uuml;gt';
+	$s_bugnote_added = 'Fehlernotiz hinzugefügt';
 	$s_bugnote_edited = 'Fehlernotiz editiert';
-	$s_bugnote_deleted = 'Fehlernotiz gel&ouml;scht';
+	$s_bugnote_deleted = 'Fehlernotiz gelöscht';
 	$s_summary_updated = 'Zusammenfassung aktualisiert';
 	$s_description_updated = 'Beschreibung aktualisiert';
-	$s_additional_information_updated = 'Zus&auml;tzliche Informationen aktualisiert';
+	$s_additional_information_updated = 'Zusätzliche Informationen aktualisiert';
 	$s_steps_to_reproduce_updated = 'Schritte zur Reproduzierung aktualisiert';
-	$s_file_added = 'Datei hinzugef&uuml;gt: ';
-	$s_file_deleted = 'Datei gel&ouml;scht: ';
+	$s_file_added = 'Datei hinzugefügt: ';
+	$s_file_deleted = 'Datei gelöscht: ';
 
 	$s_make_private = 'Privat machen';
-	$s_make_public = '&Ouml;ffentlich machen';
+	$s_make_public = 'Öffentlich machen';
 
 	$s_create_new_project_link = 'Neues Projekt erstellen';
 
 	$s_login_link = 'Anmelden';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen um die gew&auml;hlte Aktion mit den folgenden Fehlern auszuf&uuml;hren: ';
-	$s_close_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich schliessen?';
-	$s_delete_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich l&ouml;schen?';
+	$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen um die gewählte Aktion mit den folgenden Fehlern auszuführen: ';
+	$s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich schliessen?';
+	$s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Fehler wirklich löschen?';
 	$s_move_bugs_conf_msg = 'Fehler verschieben zu Projekt:';
 	$s_assign_bugs_conf_msg = 'Fehler Zuordnen zu:';
-	$s_resolve_bugs_conf_msg = 'Bereiningungsgrund ausw&auml;hlen:';
-	$s_priority_bugs_conf_msg = 'Neue Fehler Priorit&auml;t:';
+	$s_resolve_bugs_conf_msg = 'Bereiningungsgrund auswählen:';
+	$s_priority_bugs_conf_msg = 'Neue Fehler Priorität:';
 	$s_status_bugs_conf_msg = 'Neuer Fehler Status:';
 	$s_close_group_bugs_button = 'Fehler schliessen' ;
-	$s_delete_group_bugs_button = 'Fehler l&ouml;schen' ;
+	$s_delete_group_bugs_button = 'Fehler löschen' ;
 	$s_move_group_bugs_button = 'Fehler verschieben' ;
 	$s_assign_group_bugs_button = 'Fehler zuordnen' ;
 	$s_resolve_group_bugs_button = 'Fehler bereinigen' ;
-	$s_priority_group_bugs_button = 'Priorit &auml;ndern' ;
-	$s_status_group_bugs_button = 'Status &auml;ndern' ;
+	$s_priority_group_bugs_button = 'Priorit ändern' ;
+	$s_status_group_bugs_button = 'Status ändern' ;
 
 	# improved JPgraphs strings
 	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
@@ -132,10 +132,10 @@
 	$s_resolution_link = 'Per resolution';
 
 	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Nur ausgew&auml;hlte anzeigen';
+	$s_hide_button = 'Nur ausgewählte anzeigen';
 
 	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Felder zum Drucken ausw&auml;hlen';
+	$s_printing_preferences_title = 'Felder zum Drucken auswählen';
 	$s_printing_options_link = 'Druckoptionen';
 
 	# word and excel export
@@ -144,21 +144,21 @@
 	$s_bugnote_description = 'Fehlernotiz Beschreibung';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEHLER: Ein Fehler ist w&auml;hrend dieser Aktion aufgetreten. Bitte verst&auml;ndigen Sie den lokalen Administrator von dem Problem.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEHLER: Ein Fehler ist während dieser Aktion aufgetreten. Bitte verständigen Sie den lokalen Administrator von dem Problem.';
 	$MANTIS_ERROR[ERROR_SQL]                = 'FEHLER: Ein SQL fehler ist aufgetreten.';
 	$MANTIS_ERROR[ERROR_REPORT]             = 'FEHLER: Ein Fehler ist aufgetreten in dem Bericht.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'FEHLER: Keine Datei angegeben.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEHLER: Dateityp nicht erlaubt.';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'FEHLER: Das Verzeichnis existiert nicht. Bitte pr&uuml;fen Sie die Projekteinstellungen.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'FEHLER: Diese Datei existiert bereits. Bitte l&ouml;schen Sie die alte Datei zun&auml;chst.';
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'FEHLER: Das Verzeichnis existiert nicht. Bitte prüfen Sie die Projekteinstellungen.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'FEHLER: Diese Datei existiert bereits. Bitte löschen Sie die alte Datei zunächst.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FEHLER: Ein Projekt mit diesem Namen existiert bereits.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEHLER: Ein ben&ouml;tigtes Feld war leer. Bitte &uuml;berpr&uuml;fen Sir Ihre Angaben';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEHLER: Dieses Konto ist gesch&uuml;zt. Sie k&ouml;nnen sich erst wieder anmelden wenn der Schutz aufgehoben wurde.';
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEHLER: Ein benötigtes Feld war leer. Bitte überprüfen Sir Ihre Angaben';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEHLER: Dieses Konto ist geschüzt. Sie können sich erst wieder anmelden wenn der Schutz aufgehoben wurde.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'FEHLER: Zugriff verweigert.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEHLER: Datei&uuml;bertragung fehlgeschlagen. Datei Uploads sind m&ouml;glicherweise nicht erlaubt. Bitte kontaktieren Sie Ihren Administrator.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEHLER: Datei&uuml;bertragung fehlgeschlagen. Die Datei war h&ouml;chstwarscheinlich gr&ouml;sser als erlaubt.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEHLER: Ein notwendiger Parameter f&uuml;r diese Seite wurde nicht angegeben.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'FEHLER: Dieser Benutzername wird derzeit benutzt. Bitte w&auml;hlen Sie einen anderen Namen.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEHLER: Dateiübertragung fehlgeschlagen. Datei Uploads sind möglicherweise nicht erlaubt. Bitte kontaktieren Sie Ihren Administrator.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEHLER: Dateiübertragung fehlgeschlagen. Die Datei war höchstwarscheinlich grösser als erlaubt.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEHLER: Ein notwendiger Parameter für diese Seite wurde nicht angegeben.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'FEHLER: Dieser Benutzername wird derzeit benutzt. Bitte wählen Sie einen anderen Namen.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='FEHLER: Konfigurationsoption nicht gefunden.';
 	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='FEHLER: Textelement nicht gefunden.';
 	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEHLER: Fehlernotiz nicht gefunden.';
@@ -168,19 +168,19 @@
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEHLER: Ein Projekt mit diesem Namen ist bereits vorhanden.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='FEHLER: Projektname darf nicht leer sein.';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'FEHLER: Benutzer existiert nicht.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FEHLER: Logininformationen ung&uuml;ltig.';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='FEHLER: Benutzereinstellungen f&uuml;r diesen Benutzer nicht gefunden.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEHLER: Ank&uuml;ndigung nicht gefunden.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='FEHLER: Das Kennwort stimmt nicht mit dem Verifizierungskennwort &uuml;berein.';
+	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FEHLER: Logininformationen ungültig.';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='FEHLER: Benutzereinstellungen für diesen Benutzer nicht gefunden.';
+	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEHLER: Ankündigung nicht gefunden.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='FEHLER: Das Kennwort stimmt nicht mit dem Verifizierungskennwort überein.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEHLER: Ein Array wurde erwarted, aber eine Zeichenkette wurde empfangen....';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='FEHLER: Eine Zeichenkette wurde erwartet, aber ine Array wurd empfangen....';
 	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEHLE: Fehler nicht gefunden.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEHLER: Ung&uuml;ltige email Addresse';
+	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEHLER: Ungültige email Addresse';
 	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'FEHLER: Profil nicht gefunden.';
 	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEHLER: Dateityp nicht erlaubt.';
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'FEHLER: Diese Datei existiert bereits.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEHLER: Datei&uuml;bertragung nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht geschrieben werden.';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEHLER: Sie k&ouml;nnen diesen Fehler nicht als Duplikat von sich selbst angeben.';
+	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEHLER: Dateiübertragung nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht geschrieben werden.';
+	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEHLER: Sie können diesen Fehler nicht als Duplikat von sich selbst angeben.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FEHLER: Benutzerdefiniertes Feld nicht gefunden.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FEHLER:  Feld name bereits vorhanden.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'FEHLER: Mindestens ein Projekt benutzt dieses Feld noch.';
@@ -189,16 +189,16 @@
 	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'FEHLER: LDAP Server Verbindung fehlgeschlagen.';
 	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEHLER: LDAP Datensatz kann nicht aktualisiert werden.';
 	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'FEHLER: LDAP Benutzer nicht gefunden.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'FEHLER: Die Aktion kann nicht ausgef&uuml;hrt werden, da der Fehler bereinigt wurde.';
+	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'FEHLER: Die Aktion kann nicht ausgeführt werden, da der Fehler bereinigt wurde.';
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FEHLER: Datenbank verbindung fehlgeschlagen.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FEHLER: Datenbankabfrage fehlgeschlagen.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEHLER: Datenbank konnte nicht ausgew&auml;hlt werden.';
+	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEHLER: Datenbank konnte nicht ausgewählt werden.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEHLER: Eine Kategorie mit diesem Namen existiert bereits.';
 	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEHLER: Kein Kopiervorgang angegeben.';
 	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEHLER: Kategorie nicht gefunden.';
 	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEHLER: Eine Version mit diesem Namen existiert bereits.';
 	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEHLER: Version nicht gefunden.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEHLER: Benutzername ung&uuml;ltig."';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEHLER: Benutzername ungültig."';
 
 	$s_login_error = 'FEHLER: Benutzername oder Passwort falsch.';
 	$s_login_cookies_disabled = 'FEHLER: Ihr Web-Browser akzeptiert keine Cookies.';
@@ -259,7 +259,7 @@
 	$s_email_severity = 'Auswirkung';
 	$s_email_priority = 'Priorität';
 	$s_email_status = 'Status';
-	$s_email_resolution = 'L&ouml;sung';
+	$s_email_resolution = 'Lösung';
 	$s_email_duplicate = 'Duplikat';
 	$s_email_date_submitted = 'Erstellt am';
 	$s_email_last_modified = 'Letzte Aktualisierung';
@@ -358,10 +358,10 @@
 	$s_close_bug_title = 'Fehler schliessen';
 
 	# bug_delete.php
-	$s_bug_deleted_msg = 'Fehlermeldung wurde gel&ouml;scht...';
+	$s_bug_deleted_msg = 'Fehlermeldung wurde gelöscht...';
 
 	# bug_delete_page.php
-	$s_delete_bug_sure_msg = 'Soll diese Fehlermeldung wirklich gel&ouml;scht werden?';
+	$s_delete_bug_sure_msg = 'Soll diese Fehlermeldung wirklich gelöscht werden?';
 	$s_delete_bug_button = 'Fehler löschen';
 
 	# bug_monitor.php
@@ -375,7 +375,7 @@
 	$s_upload_file = 'Datei übertragen';
 	$s_select_file = 'Datei wählen';
 	$s_upload_file_button = 'Datei übertragen';
-	$s_max_file_size = 'Max. Gr&ouml;sse';
+	$s_max_file_size = 'Max. Grösse';
 
 	# bug_reopen.php
 	$s_bug_reopened_msg = 'Fehlermeldung reaktiviert...';
@@ -395,7 +395,7 @@
 	$s_from = 'Von:';
 	$s_to = 'An:';
 	$s_on = 'Am';
-	$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung gesendet, bez&uuml;glich diesen Fehlers:';
+	$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung gesendet, bezüglich diesen Fehlers:';
 	$s_bug_reminder = 'Erinnerung senden';
 	$s_reminder_sent_to = 'Erinnerung gesendet an';
 	$s_bug_send_button = 'Absenden';
@@ -488,7 +488,7 @@
 	$s_open_and_assigned_to_me = 'Offen und mir zugewiesen';
 	$s_open_and_reported_to_me = 'Offen und von mir berichtet';
 	$s_newer_news_link = 'Neuere Nachrichten';
-	$s_older_news_link = '&Auml;ltere Nachrichten';
+	$s_older_news_link = 'Ältere Nachrichten';
 	$s_archives = 'Archive';
 
 	# manage_create_new_user.php
@@ -605,7 +605,7 @@
 	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Alle Benutzer die niemals angemeldet waren und älter als 1 Woche sind wurden entfernt';
 	$s_prune_accounts_button = 'Bereinigen';
-	$s_confirm_account_pruning = 'M&ouml;chten Sie alte Benutzer l&ouml;schen, die sich nie angemeldet haben?';
+	$s_confirm_account_pruning = 'Möchten Sie alte Benutzer löschen, die sich nie angemeldet haben?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Benutzer ändern';
@@ -744,15 +744,15 @@
 	$s_valid_project_msg = 'Es muss ein Projekt ausgewählt werden';
 
 	# signup.php
-	$s_invalid_email = 'IST EINE UNG&Uuml;LTIGE EMAIL-ADRESSE';
-	$s_duplicate_username = 'IST EIN DOPPELTER BENUTZERNAME. BITTE ANDEREN W&Auml;HLEN';
+	$s_invalid_email = 'IST EINE UNGÜLTIGE EMAIL-ADRESSE';
+	$s_duplicate_username = 'IST EIN DOPPELTER BENUTZERNAME. BITTE ANDEREN WÄHLEN';
 	$s_account_create_fail = 'KONNTE KONTO NICHT ANLEGEN';
-	$s_account_added = 'Konto erfolgreich hinzugef&uuml;gt.';
+	$s_account_added = 'Konto erfolgreich hinzugefügt.';
 	$s_password_emailed_msg = 'Ihr Passwort wird per E-Mail versandt.';
-	$s_no_reponse_msg = 'Wenn Sie sich nicht innerhalb einer Woche einloggen, wird der Zugang gel&ouml;scht.';
+	$s_no_reponse_msg = 'Wenn Sie sich nicht innerhalb einer Woche einloggen, wird der Zugang gelöscht.';
 
 	# signup_page.php
-	$s_signup_info = 'W&auml;hlen Sie einen Anmeldenamen und eine g&uuml;ltige E-Mail-Adresse. Ein zufallserzeugtes Passwort wird an diese Adresse gesendet.';
+	$s_signup_info = 'Wählen Sie einen Anmeldenamen und eine gültige E-Mail-Adresse. Ein zufallserzeugtes Passwort wird an diese Adresse gesendet.';
 	$s_signup_title = 'Anmeldung';
 	$s_signup_button = 'Anmelden';
 
@@ -801,7 +801,7 @@
 	$s_search ='Suche';
 	$s_view_prev_link = 'Zeige vorherige';
 	$s_view_next_link = 'Zeige nächste';
-	$s_prev = 'Zur&uuml;ck';
+	$s_prev = 'Zurück';
 	$s_next = 'Vor';
 	$s_first = 'Erste';
 	$s_last = 'Letzte';
@@ -831,30 +831,30 @@
 
 	# custom field strings
 	$s_add_custom_field_button = 'Neues Benutzerdefiniertes Feld';
-	$s_delete_custom_field_button = 'Benutzerdefiniertes Feld l&ouml;schen';
-	$s_delete_custom_field_everywhere = 'dieses benutzerdefinierte Feld &uuml;berall l&ouml;schen';
+	$s_delete_custom_field_button = 'Benutzerdefiniertes Feld löschen';
+	$s_delete_custom_field_everywhere = 'dieses benutzerdefinierte Feld überall löschen';
 	$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
-	$s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzuf&uuml;gen';
+	$s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzufügen';
 	$s_edit_custom_field_title = 'Benutzerdefiniertes Feld editieren';
 	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Benutzerdefinierte Felder';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'In Projekten';
 	$s_custom_field_type = 'Typ';
-	$s_custom_field_possible_values = 'M&ouml;gliche Werte';
+	$s_custom_field_possible_values = 'Mögliche Werte';
 	$s_custom_field_default_value = 'Standard Wert';
-	$s_custom_field_valid_regexp = 'Regul&auml;rer Ausdruck';
+	$s_custom_field_valid_regexp = 'Regulärer Ausdruck';
 	$s_custom_field_access_level_r = 'Berechtigung Lesen';
 	$s_custom_field_access_level_rw = 'Berechtigung Schreiben';
-	$s_custom_field_length_min = 'Mindestl&auml;nge';
-	$s_custom_field_length_max = 'Maximale L&auml;nge';
+	$s_custom_field_length_min = 'Mindestlänge';
+	$s_custom_field_length_max = 'Maximale Länge';
 	$s_custom_field_advanced = 'Erweitert';
 	$s_custom_field_sequence = 'Reihenfolge';
-	$s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufz&auml;hlung,4:EMail';
+	$s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufzählung,4:EMail';
 
-	$s_confirm_used_custom_field_deletion = 'Dieses Feld wird derzeit von mindestens einem Projekt verwendet. Wenn Sie fortfahren werden alle Werte f&uuml;r dieses Feld permanent gel&ouml;scht. Dieser Vorgang kann nicht r&uuml;ckg&auml;ngig gemacht werden. Um das Feld nicht zu l&ouml;schen, klicken Sie bitten den &quot;Zur&uuml;ck&quot; Knopf in Ihrem Web-Browser. Um fortzufahren, klicken Sie bitten den &quot;Feld l&ouml;schen&quot; Knopf.';
-	$s_confirm_custom_field_deletion = 'M&ouml;chten Sie dieses Benutzerdefinierte Feld und alle zugeh&ouml;rigen Werte wirklich l&ouml;schen?';
-	$s_field_delete_button = 'Feld l&ouml;schen';
+	$s_confirm_used_custom_field_deletion = 'Dieses Feld wird derzeit von mindestens einem Projekt verwendet. Wenn Sie fortfahren werden alle Werte für dieses Feld permanent gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden. Um das Feld nicht zu löschen, klicken Sie bitten den "Zurück" Knopf in Ihrem Web-Browser. Um fortzufahren, klicken Sie bitten den "Feld löschen" Knopf.';
+	$s_confirm_custom_field_deletion = 'Möchten Sie dieses Benutzerdefinierte Feld und alle zugehörigen Werte wirklich löschen?';
+	$s_field_delete_button = 'Feld löschen';
 
 	$s_hide_status = "Status ausblenden";
 	$s_filter_closed = "Geschlossen";
