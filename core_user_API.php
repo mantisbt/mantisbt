@@ -337,8 +337,14 @@
 	function access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val;
 
+		# user isn't logged in
 		if (( !isset( $g_string_cookie_val ) )||( empty( $g_string_cookie_val ) )) {
 			return false;
+		}
+
+		# Administrators ALWAYS pass.
+		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+			return true;
 		}
 
 		$t_access_level = get_current_user_field( "access_level" );
@@ -381,6 +387,7 @@
 	function absolute_access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val;
 
+		# user isn't logged in
 		if (( !isset( $g_string_cookie_val ) ) ||
 			( empty( $g_string_cookie_val ) )) {
 			return false;
@@ -399,6 +406,10 @@
 	function check_access( $p_access_level ) {
 		global $g_logout_page;
 
+		# Administrators ALWAYS pass.
+		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+			return;
+		}
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
 			# need to replace with access error page
 			print_header_redirect( $g_logout_page );
@@ -414,6 +425,11 @@
 				$g_project_cookie_val;
 
 		project_check( $p_bug_id );
+
+		# Administrators ALWAYS pass.
+		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+			return;
+		}
 
 		# access_level check
 		$t_project_id = get_bug_field( "project_id", $p_bug_id );
