@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.47 2003-02-17 08:30:30 jlatour Exp $
+	# $Id: email_api.php,v 1.48 2003-02-17 13:35:50 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -751,7 +751,7 @@
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= 'X-Mailer: PHP/'.phpversion()."\n";
 			if ( ON == $g_use_x_priority ) {
-				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
+				$t_headers .= "X-Priority: $g_mail_priority\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";

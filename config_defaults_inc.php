@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.82 2003-02-17 08:30:29 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.83 2003-02-17 13:35:49 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -165,6 +165,11 @@
 
 	# Set to OFF to remove X-Priority header
 	$g_use_x_priority		= ON;
+	
+	# If use_x_priority is set to ON, what should the value be?
+	# Urgent = 1, Not Urgent = 5, Disable = 0
+	# Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
+	$g_mail_priority		= 3;
 
 	# Set to OFF on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.6)
 	$g_use_bcc				= ON;
