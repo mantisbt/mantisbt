@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.30 2003-02-11 14:08:45 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.31 2003-02-13 13:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -512,7 +512,7 @@
 	}
 
 	# CLOSE button
-	if ( $t_bug->status == $t_resolved ) {
+	if ( access_can_close_bug ( $f_bug_id ) ) {
 		echo '<td class="center">';
 		html_button_bug_close( $f_bug_id );
 		echo '</td>';

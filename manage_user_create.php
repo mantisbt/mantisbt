@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.13 2003-02-11 09:08:47 jfitzell Exp $
+	# $Id: manage_user_create.php,v 1.14 2003-02-13 13:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,8 +47,10 @@
 
 	# We've passed all the validation steps.  Now, if the password is empty,
 	#  confirm that that is what we wanted
-	helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
-							 lang_get( 'empty_password_button' ) );
+	if ( is_blank( $f_password ) ) {
+		helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
+				 lang_get( 'empty_password_button' ) );
+	}
 
 	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled );
 

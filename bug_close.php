@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close.php,v 1.32 2003-02-11 09:08:32 jfitzell Exp $
+	# $Id: bug_close.php,v 1.33 2003-02-13 13:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,8 +26,8 @@
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
 	project_access_check( $f_bug_id );
-	check_access( config_get( 'close_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
+	access_ensure_can_close_bug( $f_bug_id );
 
 	bug_close( $f_bug_id, $f_bugnote_text );
 
