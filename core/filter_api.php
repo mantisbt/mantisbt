@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.20 2004-03-18 23:40:35 narcissus Exp $
+	# $Id: filter_api.php,v 1.21 2004-03-19 23:14:18 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -747,14 +747,22 @@
 		}
 	}
 
+	# We cache filter requests to reduce the number of SQL queries
+	$g_cache_filter_db_filters = array();
+	
 	# This function will return the filter string that is
 	# tied to the unique id parameter. If the user doesn't
 	# have permission to see this filter, the function will
 	# return null 
 	function filter_db_get_filter( $p_filter_id ) {
+		global $g_cache_filter_db_filters;
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
+		if ( isset( $g_cache_filter_db_filters[ $p_filter_id ] ) ) {
+			return $g_cache_filter_db_filters[ $p_filter_id ];
+		}
+		
 		$query = "SELECT *
 				  FROM $t_filters_table
 				  WHERE id='$c_filter_id'";
@@ -769,6 +777,7 @@
 				}
 			}
 			
+			$g_cache_filter_db_filters[ $p_filter_id ] = $row['filter_string'];
 			return $row['filter_string'];
 		}
 		
