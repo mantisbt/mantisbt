@@ -198,12 +198,10 @@
 					if ( sql_to_unix_time( $v_bugnote_updated ) >
 						strtotime( "-$f_highlight_changed hours" ) ) {
 						PRINT "<b>$bugnote_count</b>";
-					}
-					else {
+					} else {
 						PRINT "$bugnote_count";
 					}
-				}
-				else {
+				} else {
 					echo "&nbsp;";
 				}
 			?>
@@ -232,8 +230,7 @@
 					strtotime( "-$f_highlight_changed hours" ) ) {
 
 					PRINT "<b>$t_last_updated</b>";
-				}
-				else {
+				} else {
 					PRINT "$t_last_updated";
 				}
 			?>
