@@ -9,13 +9,14 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.237 $
+	# $Revision: 1.238 $
 	# $Author: jlatour $
-	# $Date: 2005-02-12 20:04:09 $
+	# $Date: 2005-02-13 21:01:48 $
 	#
-	# $Id: strings_english.txt,v 1.237 2005-02-12 20:04:09 jlatour Exp $
+	# $Id: strings_english.txt,v 1.238 2005-02-13 21:01:48 jlatour Exp $
 	###########################################################################
-
+?>
+<?php
 # Charset
 $s_charset = 'windows-1252';
 
@@ -995,7 +996,6 @@ $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
 $s_users_sponsoring_bug = 'Users sponsoring this issue';
 $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'New Custom Field';

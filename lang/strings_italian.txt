@@ -10,13 +10,14 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: marcelloscata $
-	# $Date: 2004-12-22 20:26:42 $
+	# $Revision: 1.92 $
+	# $Author: jlatour $
+	# $Date: 2005-02-13 21:01:49 $
 	#
-	# $Id: strings_italian.txt,v 1.91 2004-12-22 20:26:42 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.92 2005-02-13 21:01:49 jlatour Exp $
 	###########################################################################
-
+?>
+<?php
 # Charset
 $s_charset = "windows-1252";
 
