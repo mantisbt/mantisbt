@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.12 2003-02-16 13:20:04 jlatour Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.13 2003-02-16 23:16:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,8 @@
 
 	print_manage_menu( 'manage_custom_field_edit_page.php' );
 
-	$t_definition = custom_field_get_definition( $f_field_id )
+	$t_definition = custom_field_get_definition( $f_field_id );
+	$t_definition['name'] = string_attribute( $t_definition['name'] );
 ?>
 <br />
 <div align="center">
