@@ -10,7 +10,14 @@
 	# The bugs displayed in print_all_bug_page.php are saved in a .xls file
 	# The IE icon allows to see or directly print the same result
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 <?php login_cookie_check() ?>
 <?php

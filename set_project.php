@@ -5,7 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+?>
 <?php #login_cookie_check() ?>
 <?php
 	$f_project_id	= gpc_get_int( 'project_id' );

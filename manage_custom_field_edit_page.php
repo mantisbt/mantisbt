@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.6 2003-01-24 14:59:38 jlatour Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.7 2003-01-25 13:52:42 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -129,9 +129,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>&nbsp;
-				
-			</td>
+			<td>&nbsp;</td>
 			<td>
 				<input type="submit" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 			</td>

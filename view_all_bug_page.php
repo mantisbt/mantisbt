@@ -6,14 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:24 $
+	# $Revision: 1.43 $
+	# $Author: jlatour $
+	# $Date: 2003-01-25 13:52:44 $
 	#
-	# $Id: view_all_bug_page.php,v 1.42 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.43 2003-01-25 13:52:44 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'compress_api.php' );
+	require_once( $g_core_path . 'filter_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_page_number		= gpc_get_int( 'page_number', 1 );

@@ -7,6 +7,8 @@
 ?>
 <?php
 	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'graph_api.php' );
 
 	login_cookie_check();
 

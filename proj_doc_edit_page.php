@@ -5,7 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
@@ -65,9 +69,7 @@
 	</td>
 </tr>
 <tr>
-	<td>
-		&nbsp;
-	</td>
+	<td>&nbsp;</td>
 	<td>
 		<input type="submit" value="<?php echo $s_file_update_button ?>" />
 	</td>

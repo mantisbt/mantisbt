@@ -5,7 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'email_api.php' );
+?>
 <?php
 	$f_username		= gpc_get_string( 'username' );
 	$f_email		= gpc_get_string( 'email' );

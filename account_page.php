@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.34 2003-01-23 23:02:45 jlatour Exp $
+	# $Id: account_page.php,v 1.35 2003-01-25 13:52:41 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -187,9 +187,7 @@
 
 	<!-- BUTTONS -->
 	<tr>
-		<td>&nbsp;
-			
-		</td>
+		<td>&nbsp;</td>
 		<!-- Update Button -->
 		<td>
 			<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />

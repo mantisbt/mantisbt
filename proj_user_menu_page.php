@@ -5,7 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'project_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
@@ -108,9 +112,7 @@
 		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_access_level, 'access_level', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
 	</td>
-	<td>&nbsp;
-
-	</td>
+	<td>&nbsp;</td>
 </tr>
 <?php
 	$t_adm = ADMINISTRATOR;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.17 2003-01-23 23:02:56 jlatour Exp $
+	# $Id: bug_report_advanced_page.php,v 1.18 2003-01-25 13:52:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -130,9 +130,7 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
 
@@ -192,9 +190,7 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
 
@@ -224,9 +220,7 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
 
@@ -248,9 +242,7 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
 
@@ -307,9 +299,7 @@
 	if ( count( $t_related_custom_field_ids ) > 0 ) {
 ?>
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 <?php
 	} # if ( size( $t_related_custom_field_ids ) > 0 )
@@ -333,9 +323,7 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
 

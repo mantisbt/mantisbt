@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.76 2003-01-24 14:59:24 jlatour Exp $
+	# $Id: bugnote_inc.php,v 1.77 2003-01-25 13:52:42 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -114,9 +114,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="2">&nbsp;
-		
-	</td>
+	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 <?php
 		} # end for loop

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.24 2003-01-23 23:02:59 jlatour Exp $
+	# $Id: bug_view_advanced_page.php,v 1.25 2003-01-25 13:52:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -169,9 +169,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 
 </tr>
 
@@ -256,9 +254,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 
 	<!-- OS Version -->
 	<td class="category">
@@ -282,9 +278,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 
 	<!-- Product Version -->
 	<td class="category">
@@ -300,9 +294,7 @@
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- spacer -->
-	<td colspan="4">&nbsp;
-		
-	</td>
+	<td colspan="4">&nbsp;</td>
 
 	<!-- Product Build -->
 	<td class="category">

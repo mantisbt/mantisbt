@@ -12,7 +12,14 @@
 	#	- the bugs displayed in print_all_bug_page.php are saved in a .doc or .xls file
 	#   - the IE icons allows to see or directly print the same result
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
@@ -36,7 +43,7 @@
 	$f_per_page 			= $t_setting_arr[4];
 	$f_highlight_changed 	= $t_setting_arr[5];
 	$f_hide_closed 			= $t_setting_arr[6];
-	$f_reporter_id 				= $t_setting_arr[7];
+	$f_reporter_id 			= $t_setting_arr[7];
 	$f_handler_id 			= $t_setting_arr[8];
 	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
@@ -219,9 +226,7 @@
     <td class="print">
 		<?php echo $s_hide_closed ?>
 	</td>
-    <td class="print">
-		&nbsp;
-	</td>
+    <td class="print">&nbsp;</td>
 </tr>
 <tr>
 	<td>
@@ -357,9 +362,7 @@
 <br />
 </tr>
 <tr class="row-category">
-	<td class="center" width="2%">
-		&nbsp;
-	</td>
+	<td class="center" width="2%">&nbsp;</td>
 	<td class="center" width="8%">
 		<?php print_view_bug_sort_link2( 'P', 'priority', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
@@ -393,9 +396,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="8">
-		&nbsp;
-	</td>
+	<td class="spacer" colspan="8">&nbsp;</td>
 </tr>
 <?php
 	for($i=0; $i < $row_count; $i++) {

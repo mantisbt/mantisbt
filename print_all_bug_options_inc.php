@@ -6,6 +6,11 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+?>
+<?php
 # this function only gets the field names, by appending strings
 function get_field_names()
 {
@@ -160,9 +165,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 }
 ?>
 <tr>
-	<td>
-		&nbsp;
-	</td>
+	<td>&nbsp;</td>
 	<td>
 		<input type="submit" value="<?php echo $s_update_prefs_button ?>" />
 	</td>

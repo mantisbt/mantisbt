@@ -111,9 +111,7 @@
 	</td>
 </tr>
 <tr>
-	<td>&nbsp;
-		
-	</td>
+	<td>&nbsp;</td>
 	<td>
 		<input type="submit" value="<?php echo lang_get( 'update_project_button' ) ?>" />
 	</td>

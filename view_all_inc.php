@@ -6,6 +6,14 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
+<?php
 	$t_filter = current_user_get_bug_filter();
 
 	$t_sort = $t_filter['sort'];
@@ -265,9 +273,7 @@
 </tr>
 <!-- Spacer row -->
 <tr>
-	<td class="spacer" colspan="<?php echo $col_count ?>">
-		&nbsp;
-	</td>
+	<td class="spacer" colspan="<?php echo $col_count ?>">&nbsp;</td>
 </tr>
 <?php mark_time( 'begin loop' ); ?>
 <!-- Loop over bug rows and create $v_* variables -->

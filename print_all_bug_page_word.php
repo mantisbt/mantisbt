@@ -10,7 +10,15 @@
 	# The bugs displayed in print_all_bug_page.php are saved in a .doc file
 	# The IE icon allows to see or directly print the same result
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_type_page	= gpc_get_string( 'type_page', 'word' );
@@ -313,9 +321,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_platform ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -330,9 +336,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_os ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -347,9 +351,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_os_build ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -364,9 +366,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo $v_version ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -381,9 +381,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -398,9 +396,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
-	<td class="print" colspan="2">&nbsp;
-
-	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -409,9 +405,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print" colspan="4">&nbsp;
-
-	</td>
+	<td class="print" colspan="4">&nbsp;</td>
 </tr>
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php

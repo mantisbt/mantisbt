@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.7 2003-01-23 23:03:00 jlatour Exp $
+	# $Id: bug_view_inc.php,v 1.8 2003-01-25 13:52:41 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -115,9 +115,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 
 </tr>
 
@@ -151,9 +149,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 </tr>
 
 
@@ -176,9 +172,7 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;
-		
-	</td>
+	<td colspan="2">&nbsp;</td>
 
 </tr>
 
