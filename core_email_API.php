@@ -381,7 +381,7 @@
 			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
-			$t_message = $t_message.word_wrap( $t_string )."\n";
+			$t_message = $t_message.$t_string."\n";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
 			$t_message = $t_message.word_wrap( $t_note )."\n\n";
 		}
