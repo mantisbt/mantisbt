@@ -54,6 +54,10 @@
 	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3
 	$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+	
+	# absolute patch to your core files. The default is usually OK, 
+	# unless you moved the 'core' directory out of your webroot (recommended).
+	$g_core_path = $g_absolute_path . 'core/';
 
 	#############################
 	# Web Server
