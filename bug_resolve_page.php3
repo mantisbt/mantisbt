@@ -12,16 +12,8 @@
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? ### Resolve Form BEGIN ?>
 <p>
@@ -52,7 +44,7 @@
 		<input type="text" name="f_duplicate_id" maxlength="7">
 	</td>
 </tr>
-<? if ( 1 == $g_allow_close_immediately ) { ?>
+<? if ( ON == $g_allow_close_immediately ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<? echo $s_close_immediately ?>
@@ -72,7 +64,4 @@
 </div>
 <? ### Resolve Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

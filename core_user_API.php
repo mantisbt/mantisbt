@@ -7,96 +7,96 @@
 	###########################################################################
 	# Cookie API
 	###########################################################################
-	### --------------------
-	### checks to see that a user is logged in
-	### if the user is and the account is enabled then let them pass
-	### otherwise redirect them to the login page
-	### if $p_redirect_url is specifed then redirect them to that page
+	# --------------------
+	# checks to see that a user is logged in
+	# if the user is and the account is enabled then let them pass
+	# otherwise redirect them to the login page
+	# if $p_redirect_url is specifed then redirect them to that page
 	function login_cookie_check( $p_redirect_url="" ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
-		### if logged in
+		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-			### get user info
+			# get user info
 			$t_enabled = get_current_user_field( "enabled" );
-			### check for acess enabled
-			if ( $t_enabled==0 ) {
+			# check for acess enabled
+			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_logout_page );
 			}
 
-			### update last_visit date
+			# update last_visit date
 			login_update_last_visit( $g_string_cookie_val );
 			db_close();
 
-			### if no project is selected then go to the project selection page
+			# if no project is selected then go to the project selection page
 			if ( empty( $g_project_cookie_val ) ) {
 				print_header_redirect( $g_login_select_proj_page );
 				exit;
 			}
 
-			### go to redirect if set
+			# go to redirect if set
 			if ( !empty( $p_redirect_url ) ) {
 				print_header_redirect( $p_redirect_url );
 				exit;
-			} else {			### continue with current page
+			} else {			# continue with current page
 				return;
 			}
-		} else {				### not logged in
+		} else {				# not logged in
 			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
-	### --------------------
-	### checks to see if a returning user is valid
-	### also sets the last time they visited
-	### otherwise redirects to the login page
+	# --------------------
+	# checks to see if a returning user is valid
+	# also sets the last time they visited
+	# otherwise redirects to the login page
 	function index_login_cookie_check( $p_redirect_url="" ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
-		### if logged in
+		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			if ( empty( $g_project_cookie_val ) ) {
 				print_header_redirect( $g_login_select_proj_page );
 				exit;
 			}
 
-			### set last visit cookie
+			# set last visit cookie
 
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-			### get user info
+			# get user info
 			$t_enabled = get_current_user_field( "enabled" );
 
-			### check for acess enabled
-			if ( $t_enabled==0 ) {
+			# check for acess enabled
+			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_login_page );
 			}
 
-			### update last_visit date
+			# update last_visit date
 			login_update_last_visit( $g_string_cookie_val );
 			db_close();
 
-			### go to redirect
+			# go to redirect
 			if ( !empty( $p_redirect_url ) ) {
 				print_header_redirect( $p_redirect_url );
 				exit;
-			} else {			### continue with current page
+			} else {			# continue with current page
 				return;
 			}
-		} else {				### not logged in
+		} else {				# not logged in
 			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
-	### --------------------
+	# --------------------
 	# Only check to see if the user is logged in
 	# redirect to logout_page if fail
 	function login_user_check_only() {
@@ -105,27 +105,27 @@
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
-		### if logged in
+		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-			### get user info
+			# get user info
 			$t_enabled = get_current_user_field( "enabled" );
-			### check for acess enabled
-			if ( $t_enabled==0 ) {
+			# check for acess enabled
+			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_logout_page );
 			}
 			db_close();
-		} else {				### not logged in
+		} else {				# not logged in
 			print_header_redirect( $g_login_page );
 			exit;
 		}
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Authentication API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# Checks for password match using the globally specified login method
 	function is_password_match( $f_username, $p_test_password, $p_password ) {
 		global $g_login_method;
@@ -156,7 +156,7 @@
 		}
 		return false;
 	}
-	### --------------------
+	# --------------------
 	# This function is only called from the login.php3 script
 	function increment_login_count( $p_id ) {
 		global $g_mantis_user_table;
@@ -166,7 +166,7 @@
 				WHERE id='$p_id'";
 		$result = db_query( $query );
 	}
-	### --------------------
+	# --------------------
 	#
 	function process_plain_password( $p_password ) {
 		global $g_login_method;
@@ -178,11 +178,11 @@
 			default:	return $p_password;
 		}
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# User Management API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# creates a random 12 character password
 	# p_email is unused
 	function create_random_password( $p_email ) {
@@ -191,7 +191,7 @@
 
 		return substr( $t_val, 0, 12 );
 	}
-	### --------------------
+	# --------------------
 	# This string is used to use as the login identified for the web cookie
 	# It is not guarranteed to be unique but should be good enough
 	# The string returned should be 64 characters in length
@@ -200,12 +200,12 @@
 		$t_val = md5( $t_val ).md5( time() );
 		return substr( $t_val, 0, 64 );
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Access Control API
 	###########################################################################
-	### --------------------
-	### check to see if the access level is strictly equal
+	# --------------------
+	# check to see if the access level is strictly equal
 	function access_level_check_equal( $p_access_level ) {
 		global $g_string_cookie_val;
 
@@ -216,13 +216,13 @@
 		$t_access_level = get_current_user_field( "access_level" );
 		$t_access_level2 = get_project_access_level();
 
-		if (( $t_access_level == $p_access_level )||( $t_access_level2 == $p_access_level )) {
+		if ( ( $t_access_level == $p_access_level ) || ( $t_access_level2 == $p_access_level ) ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	### --------------------
+	# --------------------
 	# check to see if the access level is equal or greater
 	# this checks to see if the user has a higher access level for the current project
 	function access_level_check_greater_or_equal( $p_access_level ) {
@@ -237,7 +237,7 @@
 
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
-		if ( $t_access_level2 == -1 ) {
+		if ( -1 == $t_access_level2 ) {
 			# do nothing
 		} else if ( $t_access_level2 > $t_access_level ) {
 			$t_access_level = $t_access_level2;
@@ -249,7 +249,7 @@
 			return false;
 		}
 	}
-	### --------------------
+	# --------------------
 	# @@@ UNUSED
 	function is_project_manager( $p_project_id ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table;
@@ -267,18 +267,18 @@
 			return false;
 		}
 	}
-	### --------------------
+	# --------------------
 	# Checks to see if the user should be here.  If not then log the user out.
 	function check_access( $p_access_level ) {
 		global $g_logout_page;
 
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
-			### need to replace with access error page
+			# need to replace with access error page
 			print_header_redirect( $g_logout_page );
 			exit;
 		}
 	}
-	### --------------------
+	# --------------------
 	# Checks to see if the user has access to this project.  If not then log the user out.
 	function project_access_check( $p_bug_id, $p_project_id="0" ) {
 		global	$g_logout_page, $g_mantis_project_user_list_table,
@@ -296,7 +296,7 @@
 			#print_header_redirect( $g_logout_page );
 		}
 	}
-	### --------------------
+	# --------------------
 	# Check to see if the currently logged in project and bug project id match
 	# If there is no match then the project cookie will be set to the bug project id
 	# No access check is done.  It is expected to be checked afterwards.
@@ -311,7 +311,7 @@
 			print_header_redirect( $t_redirect_url );
 		}
 	}
-	### --------------------
+	# --------------------
 	# return the project access level for the current user/project key pair.
 	# use the project_id if supplied.
 	function get_project_access_level( $p_project_id=0 ) {
@@ -319,7 +319,7 @@
 				$g_project_cookie_val;
 
 		$t_user_id = get_current_user_field( "id" );
-		if ( 0==$p_project_id ) {
+		if ( 0 == $p_project_id ) {
 			$query = "SELECT access_level
 					FROM $g_mantis_project_user_list_table
 					WHERE user_id='$t_user_id' AND project_id='$g_project_cookie_val'";
@@ -335,7 +335,7 @@
 			return -1;
 		}
 	}
-	### --------------------
+	# --------------------
 	# Return the project user list access level for the current user/project key pair if it exists.
 	# Otherwise return the default user access level.
 	function get_effective_access_level() {
@@ -353,18 +353,18 @@
 			return get_current_user_field( "access_level" );
 		}
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# User Information API
 	###########################################################################
-	### --------------------
-	### Returns the specified field of the currently logged in user, otherwise 0
+	# --------------------
+	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_field( $p_field_name ) {
 		global 	$g_string_cookie_val, $g_mantis_user_table;
 
-		### if logged in
+		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
-			### get user info
+			# get user info
 			$query = "SELECT $p_field_name
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
@@ -374,16 +374,16 @@
 			return 0;
 		}
 	}
-	### --------------------
-	### Returns the specified field of the currently logged in user, otherwise 0
+	# --------------------
+	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_pref_field( $p_field_name ) {
 		global 	$g_string_cookie_val, $g_mantis_user_pref_table;
 
-		### if logged in
+		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 
 			$t_id = get_current_user_field( "id" );
-			### get user info
+			# get user info
 			$query = "SELECT $p_field_name
 					FROM $g_mantis_user_pref_table
 					WHERE user_id='$t_id'";
@@ -393,7 +393,7 @@
 			return 0;
 		}
 	}
-	### --------------------
+	# --------------------
 	# return all data associated with a particular user id
 	function get_user_info_by_id_arr( $p_user_id ) {
 		global $g_mantis_user_table;
@@ -404,7 +404,7 @@
 	    $result =  db_query( $query );
 	    return db_fetch_array( $result );
 	}
-	### --------------------
+	# --------------------
 	# return all data associated with a particular user name
 	function get_user_info_by_name_arr( $p_username ) {
 		global $g_mantis_user_table;
@@ -415,7 +415,7 @@
 	    $result =  db_query( $query );
 	    return db_fetch_array( $result );
 	}
-	### --------------------
+	# --------------------
 	# return the specified preference field for the user id
 	function get_user_pref_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_pref_table;
@@ -430,13 +430,13 @@
 	    	return 0;
 	    }
 	}
-	### --------------------
+	# --------------------
 	# return the specified user field for the user id
 	# exception for LDAP email
 	function get_user_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
 
-		if ( ( $g_use_ldap_email == 1 ) && ( $p_field == "email" ) ) {
+		if ( ( ON == $g_use_ldap_email ) && ( "email" == $p_field  ) ) {
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
 		}
@@ -451,7 +451,7 @@
 	###########################################################################
 	# Miscellaneous User API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# Update the last_visited field to be NOW()
 	function login_update_last_visit( $p_string_cookie_val ) {
 		global $g_mantis_user_table;
@@ -461,8 +461,5 @@
 				WHERE cookie_string='$p_string_cookie_val'";
 		$result = db_query( $query );
 	}
-	### --------------------
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
 ?>

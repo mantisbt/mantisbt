@@ -23,10 +23,10 @@
 		$f_enabled = 0;
 	}
 
-	### update action
-	### administrator is not allowed to change access level or enabled
-	### this is to prevent screwing your own account
-	if ( $f_protected==1 ) {
+	# update action
+	# administrator is not allowed to change access level or enabled
+	# this is to prevent screwing your own account
+	if ( ON == $f_protected ) {
 	    $query = "UPDATE $g_mantis_user_table
 	    		SET username='$f_username', email='$f_email',
 	    			protected='$f_protected'
@@ -40,39 +40,29 @@
 	}
 
     $result = db_query( $query );
+    $t_redirect_url = $g_manage_page;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_manage_page, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $f_protected==1 ) {				### PROTECTED
+	if ( ON == $f_protected ) {				# PROTECTED
 		PRINT "$s_manage_user_protected_msg<p>";
-	} else if ( $result ) {					### SUCCESS
-		PRINT "$s_manage_user_updated_msg<p>";
-	} else {								### FAILURE
+	} else if ( $result ) {					# SUCCESS
+		PRINT "$s_operation_successful<p>";
+	} else {								# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_manage_page, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

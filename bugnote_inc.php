@@ -5,11 +5,12 @@
 	# See the files README and LICENSE for details
 ?>
 <?
-	### This include file prints out the list of bugnotes attached to the bug
-	### $f_id must be set and be set to the bug id
+	# This include file prints out the list of bugnotes attached to the bug
+	# $f_id must be set and be set to the bug id
 ?>
 <?
-#	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	# @@@ uneeded? 
+	#db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# grab the user id currently logged in
 	$t_user_id = get_current_user_field( "id " );
@@ -23,12 +24,12 @@
 	$num_notes = db_num_rows($result);
 ?>
 
-<? ### Bugnotes BEGIN ?>
+<? # Bugnotes BEGIN ?>
 <p>
 <table class="width100" cellspacing="0">
 <?
-	### no bugnotes
-	if ( $num_notes==0 ) {
+	# no bugnotes
+	if ( 0 == $num_notes ) {
 ?>
 <tr>
 	<td class="center" colspan="2">
@@ -42,7 +43,7 @@
 	</td>
 </tr>
 <?
-	for ($i=0; $i < $num_notes; $i++) {
+	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v3" );
@@ -77,7 +78,7 @@
 				# bug must be open to be editable
 				if ( get_bug_field( "status", $f_id ) < RESOLVED ) {
 					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-						( $v3_reporter_id==$t_user_id )) {
+						( $v3_reporter_id == $t_user_id )) {
 						print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link );
 						print_bracket_link( $g_bugnote_delete."?f_bugnote_id=".$v3_id."&f_id=".$f_id, $s_delete_link );
 					}
@@ -103,16 +104,16 @@
 	</td>
 </tr>
 <?
-		} ### end for loop
-	} ### end else
+		} # end for loop
+	} # end else
 ?>
 </table>
-<? ### Bugnotes END ?>
+<? # Bugnotes END ?>
 
 <? if ( ( ( $v_status < RESOLVED ) ||
 		  ( isset( $f_resolve_note ) ) ) &&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
-<? ### Bugnote Add Form BEGIN ?>
+<? # Bugnote Add Form BEGIN ?>
 <p>
 <table class="width100" cellspacing="0">
 <form method="post" action="<? echo $g_bugnote_add ?>">
@@ -134,5 +135,5 @@
 </tr>
 </form>
 </table>
-<? ### Bugnote Add Form END ?>
+<? # Bugnote Add Form END ?>
 <?	} ?>

@@ -53,7 +53,7 @@
 	<td>
 		<select name="f_assign_id">
 			<option value="any"><? echo $s_any ?></option>
-			<option value="none" <? if ( $f_assign_id=="none" ) echo "SELECTED" ?>><? echo $s_none ?></option>
+			<option value="none" <? if ( "none" == $f_assign_id ) echo "SELECTED" ?>><? echo $s_none ?></option>
 			<option value="any"></option>
 			<? print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
@@ -86,7 +86,7 @@
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <? if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
 	</td>
 <!--
 		<td>
@@ -122,8 +122,8 @@
 			# print out a link for each page i.e.
 			#     [ 1 2 3 ]
 			#
-			for ($i = 1; $i <= $t_page_count; $i ++) {
-				if ($i == $f_page_number) {
+			for ( $i = 0; $i < $t_page_count; $i++ ) {
+				if ( $i == $f_page_number ) {
 					echo $i;
 				} else {
 		?>
@@ -193,7 +193,7 @@
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
-		if ( !( $v_status==CLOSED ) ) {
+		if ( !( CLOSED == $v_status ) ) {
 			$t_color_str = get_enum_element( $g_status_enum_string, $v_status );
 			$t_color_variable_name = "g_".$t_color_str."_color";
 			$status_color = $$t_color_variable_name;
@@ -218,10 +218,10 @@
 	</td>
 	<td class="center">
 		<?
-			if ( $g_show_priority_text == 0 ) {
-				print_status_icon( $v_priority );
-			} else {
+			if ( ON == $g_show_priority_text ) {
 				echo get_enum_element($s_priority_enum_string, $v_priority);
+			} else {
+				print_status_icon( $v_priority );
 			}
 		?>
 	</td>
@@ -251,7 +251,7 @@
 	<td class="center">
 		<?
 			# print username instead of status
-			if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )) {
+			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
 			} else {
 				echo get_enum_element( $s_status_enum_string, $v_status );

@@ -27,7 +27,7 @@
 		$f_enabled = 1;
 	}
 
-	### create the almost unique string for each user then insert into the table
+	# create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password = process_plain_password( $f_password );
     $query = "INSERT
@@ -39,10 +39,10 @@
 			'$f_access_level', '$f_enabled', '$f_protected', '$t_cookie_string')";
     $result = db_query( $query );
 
-   	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
+   	# Use this for MS SQL: SELECT @@IDENTITY AS 'id'
 	$t_user_id = db_insert_id();
 
-	### Create preferences
+	# Create preferences
 
     $query = "INSERT
     		INTO $g_mantis_user_pref_table
@@ -63,38 +63,29 @@
     		'$g_default_email_on_bugnote', '$g_default_email_on_status',
     		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
+
+    $t_redirect_url = $g_manage_page;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_manage_page, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {				### SUCCESS
+	if ( $result ) {				# SUCCESS
 		$f_access_level = get_enum_element( $s_access_levels_enum_string, $f_access_level );
 		PRINT "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><p>";
-	} else {						### FAILURE
+	} else {						# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_manage_page, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

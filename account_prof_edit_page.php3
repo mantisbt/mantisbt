@@ -5,8 +5,8 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This page allows the user to edit his/her profile
-	### Changes get POSTed to account_prof_update.php3
+	# This page allows the user to edit his/her profile
+	# Changes get POSTed to account_prof_update.php3
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -14,18 +14,18 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	$f_user_id = get_current_user_field( "id" );
 
-	### If deleteing profile redirect to delete script
-	if ( $f_action=="delete") {
+	# If deleteing profile redirect to delete script
+	if ( "delete" == $f_action) {
 		print_header_redirect( "$g_account_profile_delete?f_id=$f_id" );
 		exit;
 	}
-	### If Defaulting profile redirect to make default script
-	else if ( $f_action=="make default") {
+	# If Defaulting profile redirect to make default script
+	else if ( "make default" == $f_action ) {
 		print_header_redirect( "$g_account_profile_make_default?f_id=$f_id&f_user_id=$f_user_id" );
 		exit;
 	}
 
-	### Retrieve new item data and prefix with v_
+	# Retrieve new item data and prefix with v_
 	$query = "SELECT *
 		FROM $g_mantis_user_profile_table
 		WHERE id='$f_id' AND user_id='$f_user_id'";
@@ -35,24 +35,16 @@
     	extract( $row, EXTR_PREFIX_ALL, "v" );
     }
 
-	### Prepare for edit display
+	# Prepare for edit display
    	$v_platform 	= string_edit_text( $v_platform );
    	$v_os 			= string_edit_text( $v_os );
    	$v_os_build 	= string_edit_text( $v_os_build );
    	$v_description  = string_edit_textarea( $v_description );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
-<? ### Edit Profile Form BEGIN ?>
+<? # Edit Profile Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -106,9 +98,6 @@
 </form>
 </table>
 </div>
-<? ### Edit Profile Form END ?>
+<? # Edit Profile Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -5,28 +5,28 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This page allows the user to set his/her preferences
-	### Update is POSTed to acount_prefs_update.php3
-	### Reset is POSTed to acount_prefs_reset.php3
+	# This page allows the user to set his/her preferences
+	# Update is POSTed to acount_prefs_update.php3
+	# Reset is POSTed to acount_prefs_reset.php3
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### grab the user id
+	# grab the user id
 	$u_id = get_current_user_field( "id " );
 
-	### Grab the data
+	# Grab the data
     $query = "SELECT *
     		FROM $g_mantis_user_pref_table
 			WHERE user_id='$u_id'";
     $result = db_query($query);
 
     ## OOPS, No entry in the database yet.  Lets make one
-    if ( db_num_rows( $result )==0 ) {
+    if ( 0 == db_num_rows( $result ) ) {
 
-		### Create row # @@@@@ Add the rest of the fields
+		# Create row # @@@@@ Add the rest of the fields
 	    $query = "INSERT
 	    		INTO $g_mantis_user_pref_table
 	    		(id, user_id, advanced_report, advanced_view, language)
@@ -35,29 +35,21 @@
 	    		'$g_default_advanced_report', '$g_default_advanced_view', 'english')";
 	    $result = db_query($query);
 
-		### Rerun select query
+		# Rerun select query
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_pref_table
 				WHERE user_id='$u_id'";
 	    $result = db_query($query);
     }
 
-    ### prefix data with u_
+    # prefix data with u_
 	$row = db_fetch_array($result);
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
-<? ### Account Preferences Form BEGIN ?>
+<? # Account Preferences Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -87,7 +79,7 @@
 		<? echo $s_advanced_report ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_report" <? if ( $u_advanced_report==1 ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_report" <? if ( ON == $u_advanced_report ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -95,7 +87,7 @@
 		<? echo $s_advanced_view ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_view" <? if ( $u_advanced_view=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_view" <? if ( ON == $u_advanced_view ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -103,7 +95,7 @@
 		<? echo $s_advanced_update ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_update" <? if ( $u_advanced_update=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_update" <? if ( ON == $u_advanced_update ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -123,14 +115,14 @@
 	</td>
 </tr>
 <?
-	if ( $g_enable_email_notification==1 ) {
+	if ( ON == $g_enable_email_notification ) {
 ?>
 <tr class="row-1">
 	<td class="category">
 		<? echo $s_email_on_new ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_new" <? if ( $u_email_on_new=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_new" <? if ( ON == $u_email_on_new ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -138,7 +130,7 @@
 		<? echo $s_email_on_assigned ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_assigned" <? if ( $u_email_on_assigned=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_assigned" <? if ( ON == $u_email_on_assigned ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -146,7 +138,7 @@
 		<? echo $s_email_on_feedback ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_feedback" <? if ( $u_email_on_feedback=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_feedback" <? if ( ON == $u_email_on_feedback ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -154,7 +146,7 @@
 		<? echo $s_email_on_resolved ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_resolved" <? if ( $u_email_on_resolved=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_resolved" <? if ( ON == $u_email_on_resolved ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -162,7 +154,7 @@
 		<? echo $s_email_on_closed ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_closed" <? if ( $u_email_on_closed=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_closed" <? if ( ON == $u_email_on_closed ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -170,7 +162,7 @@
 		<? echo $s_email_on_reopened ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_reopened" <? if ( $u_email_on_reopened=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_reopened" <? if ( ON == $u_email_on_reopened ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -178,7 +170,7 @@
 		<? echo $s_email_on_bugnote_added ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_bugnote" <? if ( $u_email_on_bugnote=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_bugnote" <? if ( ON == $u_email_on_bugnote ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -186,7 +178,7 @@
 		<? echo $s_email_on_status_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_status" <? if ( $u_email_on_status=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_status" <? if ( ON == $u_email_on_status ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -194,7 +186,7 @@
 		<? echo $s_email_on_priority_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_priority" <? if ( $u_email_on_priority=="1" ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_priority" <? if ( ON == $u_email_on_priority ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <?	} else { ?>
@@ -232,9 +224,6 @@
 </tr>
 </table>
 </div>
-<? ### Account Preferences Form END ?>
+<? # Account Preferences Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -46,17 +46,8 @@
 	$t_total_time		= number_format( $t_total_time / 86400, 2 );
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? print_summary_menu( $g_summary_page ) ?>
 
@@ -69,7 +60,7 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<? ### STATUS ### ?>
+		<? # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -80,7 +71,7 @@
 		</table>
 	</td>
 	<td width="50%">
-		<? ### DATE ### ?>
+		<? # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -93,7 +84,7 @@
 </tr>
 <tr valign="top">
 	<td>
-		<? ### SEVERITY ### ?>
+		<? # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -104,7 +95,7 @@
 		</table>
 	</td>
 	<td>
-		<? ### RESOLUTION ### ?>
+		<? # RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -117,7 +108,7 @@
 </tr>
 <tr valign="top">
 	<td>
-		<? ### CATEGORY ### ?>
+		<? # CATEGORY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -128,7 +119,7 @@
 		</table>
 	</td>
 	<td>
-		<? ### PRIORITY ### ?>
+		<? # PRIORITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -141,7 +132,7 @@
 </tr>
 <tr valign="top">
 	<td>
-		<? ### MISCELLANEOUS ### ?>
+		<? # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
 			<td class="form-title">
@@ -154,7 +145,7 @@
 			</td>
 			<td width="50%">
 				<? if ($t_bug_id>0) { ?>
-					<? if ( get_current_user_pref_field( "advanced_view" )==1 ) { ?>
+					<? if ( ON == get_current_user_pref_field( "advanced_view" ) ) { ?>
 						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
 					<? } else {?>
 						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
@@ -194,7 +185,7 @@
 </tr>
 <tr valign="top">
 	<td>
-		<? ### DEVELOPER ### ?>
+		<? # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -205,7 +196,7 @@
 		</table>
 	</td>
 	<td>
-		<? ### REPORTER ### ?>
+		<? # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
@@ -218,7 +209,4 @@
 </tr>
 </table>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

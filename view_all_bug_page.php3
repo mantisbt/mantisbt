@@ -43,7 +43,7 @@
 	}
 
 	if ( isset( $f_save ) ) {
-		if ( $f_save == 1 ) {
+		if ( 1== $f_save ) {
 			# We came here via the FILTER form button click
 			# Save preferences
 			$t_settings_string = "v1#".
@@ -58,7 +58,7 @@
 								$f_sort."#".
 								$f_dir;
 			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
-		} else if ( $f_save == 2 ) {
+		} else if ( 2 == $f_save ) {
 			# We came here via clicking a sort link
 			# Load pre-existing preferences
 			$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
@@ -108,7 +108,7 @@
 	}
 
 	# Limit reporters to only see their reported bugs
-	if ( 1 == $g_limit_reporters ) {
+	if ( ON == $g_limit_reporters ) {
 		if ( get_current_user_field( "access_level" ) <= REPORTER ) {
 			echo get_current_user_field( "access_level" )."AAAAAA";
 			$f_user_id = get_current_user_field( "id" );
@@ -165,14 +165,14 @@
 		$t_where_clause .= " AND reporter_id='$f_user_id'";
 	}
 
-	if ( $f_assign_id == "none" ) {
+	if ( "none" == $f_assign_id ) {
 		$t_where_clause .= " AND handler_id=0";
 	} else if ( $f_assign_id != "any" ) {
 		$t_where_clause .= " AND handler_id='$f_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
-	if (( $f_hide_closed=="on"  )&&( $f_show_status!="closed" )) {
+	if (( "on" == $f_hide_closed  )&&( $f_show_status!="closed" )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
@@ -211,10 +211,10 @@
 
 	# Guard against silly values of $f_per_page.
 	#
-	if ($f_per_page == 0) {
+	if ( 0 == $f_per_page ) {
 		$f_per_page = 1;
 	}
-	$f_per_page = (int) abs($f_per_page);
+	$f_per_page = (int)abs( $f_per_page );
 
 
 	# Use $t_query_count and $f_per_page to determine how many pages
@@ -272,26 +272,15 @@
 		die;
     }*/
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
 		print_meta_redirect( $PHP_SELF."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
+<? print_page_top2() ?>
 
-<? print_menu( $g_menu_include_file ) ?>
 
 <? include( $g_view_all_include_file ) ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

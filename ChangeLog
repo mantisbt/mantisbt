@@ -13,6 +13,8 @@ Mantis
  * Modified BLOB field to LONGBLOB.
  * Modified bug action buttons to be more consistent.
  * Modified version string to be longer.
+ * Modified html functions to consolidate code.
+ * Modified confirm messages to consolidate localization strings.
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.
@@ -24,6 +26,7 @@ Mantis
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.
+ * Removed menu_inc.php file and related variable.  Moved this into print_menu()
  * Renamed g_store_file_to to g_file_upload_method.
 
 12.01.2001  -   0.16.1

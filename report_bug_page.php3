@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This file POSTs data to report_bug.php3
+	# This file POSTs data to report_bug.php3
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -15,14 +15,14 @@
 		print_header_redirect( $g_login_select_proj_page );
 	}
 
-	if ( 2 == $g_show_report ) {
+	if ( ADVANCED_ONLY == $g_show_report ) {
 		print_header_redirect ( $g_report_bug_advanced_page );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
-	### We check to see if the variable exists to avoid warnings
+	# We check to see if the variable exists to avoid warnings
 
 	if ( !isset( $f_category ) ) {
 		$f_category = "";
@@ -48,16 +48,8 @@
 		$f_additional_info = "";
 	}
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
@@ -70,7 +62,7 @@
 	</td>
 	<td class="right">
 		<?
-			if ( $g_show_report==0 ) {
+			if ( BOTH == $g_show_report ) {
 				print_bracket_link( $g_report_bug_advanced_page, $s_advanced_report_link );
 			}
 		?>
@@ -138,7 +130,7 @@
 		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><? echo $f_additional_info ?></textarea>
 	</td>
 </tr>
-<? if ( $g_allow_file_upload==1 ) { ?>
+<? if ( ON == $g_allow_file_upload ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<? echo $s_upload_file ?>
@@ -166,7 +158,4 @@
 </table>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

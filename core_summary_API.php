@@ -7,7 +7,7 @@
 	###########################################################################
 	# Summary printing API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# Used in summary reports
 	# Given the enum string this function prints out the summary for each enum setting
 	# The enum field name is passed in through $p_enum
@@ -60,7 +60,7 @@
 			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
-			### alternate row colors
+			# alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
@@ -72,9 +72,9 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $t_enum_count";
 				PRINT "</td>";
 			PRINT "</tr>";
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# prints the bugs submitted in the last X days (default is 1 day) for the
 	# current project
 	function get_bug_count_by_date( $p_time_length=1 ) {
@@ -87,7 +87,7 @@
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
-	### --------------------
+	# --------------------
 	# This funciton shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	function print_bug_date_summary( $p_date_array ) {
@@ -97,7 +97,7 @@
 		for ($i=0;$i<$arr_count;$i++) {
 			$t_enum_count = get_bug_count_by_date( $p_date_array[$i] );
 
-			### alternate row colors
+			# alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
@@ -108,9 +108,9 @@
 					echo $t_enum_count;
 				PRINT "</td>";
 			PRINT "</tr>";
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# print bug counts by assigned to each developer
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
@@ -172,7 +172,7 @@
 			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
-			### alternate row colors
+			# alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
@@ -183,9 +183,9 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# print bug counts by reporter id
 	function print_reporter_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
@@ -246,7 +246,7 @@
 			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
-			### alternate row colors
+			# alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
@@ -257,9 +257,9 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# print a bug count per category
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
@@ -316,7 +316,7 @@
 			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
-			### alternate row colors
+			# alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
@@ -327,11 +327,7 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
-		} ### end for
+		} # end for
 	}
-	### --------------------
-
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
 ?>

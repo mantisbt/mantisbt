@@ -61,7 +61,7 @@
 
 	# --- version variables -----------
 	$g_mantis_version = "0.16.0";
-	$g_show_version   = 1;
+	$g_show_version   = ON;
 
 	#############################
 	### Mantis Email Settings ###
@@ -82,28 +82,28 @@
 	$g_return_path_email    = "admin@300baud.org";
 
 	# allow users to signup for their own accounts
-	$g_allow_signup              = 1;
+	$g_allow_signup              = ON;
 
 	# allow email notification
-	$g_enable_email_notification = 1;
+	$g_enable_email_notification = ON;
 
 	# notify developers and higher when a new bug comes in
 	# only if their preference is also set
-	$g_notify_developers_on_new  = 1;
+	$g_notify_developers_on_new  = ON;
 
 	# set to 0 to disable email check
-	$g_validate_email            = 1;
-	$g_check_mx_record           = 1;
+	$g_validate_email            = ON;
+	$g_check_mx_record           = ON;
 
 	# This disables the automatic generation of mailto: links
-	$g_hide_user_email           = 0;
+	$g_hide_user_email           = OFF;
 
 	# Set to 0 to remove X-Priority header
-	$g_use_x_priority            = 1;
+	$g_use_x_priority            = ON;
 
 	# Set to 0 as on Windows systems, as long as php-mail-function has its
 	# bcc-bug (~PHP 4.0.6)
-	$g_use_bcc                   = 1;
+	$g_use_bcc                   = ON;
 
 	# phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)
 	# Get the phpMailer-package from http://phpmailer.sourceforge.net
@@ -118,7 +118,7 @@
 	# example.
 	# PhpMailer comes with a detailed documentation in phpdoc format.
 
-	$g_use_phpMailer = 0;
+	$g_use_phpMailer = OFF;
 
 	# select the method to mail by:
 	# 0 - mail()
@@ -150,37 +150,37 @@
 	$g_page_title   = "Mantis";     # title at top of html page
 
 	# --- advanced views --------------
-	# 0 - both, 1 - only simple, 2 - only advanced
-	$g_show_report = 0;
-	$g_show_update = 0;
-	$g_show_view   = 0;
+	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
+	$g_show_report = BOTH;
+	$g_show_update = BOTH;
+	$g_show_view   = BOTH;
 
 	# --- display source code ---------
 	# display a link at the bottom of the page to show the PHP source
 	# WARNING: Potential security hazard.  Only turn this on when you really
 	# need it (for debugging)
-	# 0 = disabled; 1 = admin only
-	$g_show_source = 0;
+	# ON = admin only; OFF = disabled
+	$g_show_source = OFF;
 
 	# --- footer menu -----------------
 	# Footer Menu
-	$g_show_footer_menu = 0;
+	$g_show_footer_menu = OFF;
 
 	# --- footer menu -----------------
 	# show the project name in the page title
 	# 0 : no project name
 	# 1 : project name and any additional
 	# 2 : only project name
-	$g_show_project_in_title = 1;
+	$g_show_project_in_title = ON;
 
 	# --- show assigned to names ------
 	# This is in the view all pages
-	$g_show_assigned_names = 1;
+	$g_show_assigned_names = ON;
 
 	# --- show priority as icon ---
-	# 0: Shows priority as icon in view all bugs page
-	# 1: Shows priority as text in view all bugs page
-	$g_show_priority_text = 0;
+	# OFF: Shows priority as icon in view all bugs page
+	# ON:  Shows priority as text in view all bugs page
+	$g_show_priority_text = OFF;
 
 	############################
 	### Mantis JPGRAPH Addon ###
@@ -195,7 +195,7 @@
 	# to set the var in jpgraph.php eg.
 	# (DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");)
 
-	$g_use_jpgraph = 0;
+	$g_use_jpgraph = OFF;
 	$g_jpgraph_path = "./jpgraph/";   # dont forget the ending slash!
 
 	############################
@@ -258,18 +258,19 @@
 	$g_min_refresh_delay          = 10;    # in minutes
 
 	# --- account pref defaults -------
-	$g_default_advanced_report    = 0;
-	$g_default_advanced_view      = 0;
-	$g_default_advanced_update    = 0;
+	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
+	$g_default_advanced_report    = BOTH;
+	$g_default_advanced_view      = BOTH;
+	$g_default_advanced_update    = BOTH;
 	$g_default_refresh_delay      = 30;    # in minutes
 	$g_default_redirect_delay     = 2;     # in seconds
-	$g_default_email_on_new       = 1;
-	$g_default_email_on_assigned  = 1;
-	$g_default_email_on_feedback  = 1;
-	$g_default_email_on_resolved  = 1;
-	$g_default_email_on_closed    = 1;
-	$g_default_email_on_reopened  = 1;
-	$g_default_email_on_bugnote   = 1;
+	$g_default_email_on_new       = ON;
+	$g_default_email_on_assigned  = ON;
+	$g_default_email_on_feedback  = ON;
+	$g_default_email_on_resolved  = ON;
+	$g_default_email_on_closed    = ON;
+	$g_default_email_on_reopened  = ON;
+	$g_default_email_on_bugnote   = ON;
 	$g_default_email_on_status    = 0; # @@@ Unused
 	$g_default_email_on_priority  = 0; # @@@ Unused
 	# default_language - is set to site language
@@ -304,7 +305,7 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 1;
+	$g_allow_file_upload    = ON;
 
 	# Upload destination: specify actual location in project settings
 	# DISK or DATABASE
@@ -317,7 +318,7 @@
 	############################
 
 	# --- html tags -------------------
-	$g_allow_html_tags        = 1;
+	$g_allow_html_tags        = ON;
 
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
@@ -325,10 +326,10 @@
 									"<ol>","</ol>","<br />","<br>","<pre>","</pre>",
 									"<i>","</i>","<b>","</b>","<u>","</u>");
 
-	$g_allow_href_tags        = 1;
+	$g_allow_href_tags        = ON;
 
 	# @@@ Not functional
-	#$g_allow_img_tags         = 1;
+	#$g_allow_img_tags         = ON;
 
 	# --- table tags ------------------
 	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)
@@ -365,7 +366,7 @@
 
 	# --- quick proceed----------------
 	# see fewer confirmation screens between actions
-	$g_quick_proceed = 1;
+	$g_quick_proceed = ON;
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP
@@ -377,7 +378,7 @@
 
 	# --- close immediately -----------
 	# Allow develoeprs and above to close bugs immediately when resolving bugs
-	$g_allow_close_immediately = 0;
+	$g_allow_close_immediately = OFF;
 
 	##############################
 	### Mantis Color Variables ###
@@ -515,7 +516,6 @@
 	#----------------------------------
 	# core file variables
 	$g_core_API_file                  = $g_absolute_path."core_API.php";
-	$g_menu_include_file              = $g_absolute_path."menu_inc.php";
 	#----------------------------------
 
 	#----------------------------------

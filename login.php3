@@ -23,8 +23,8 @@
 	}
 
 	$t_project_id = 0;
-	if (( $login_result==1 )&&
-		( $u_enabled==1 )&&
+	if (( 1 == $login_result )&&
+		( ON == $u_enabled )&&
 		is_password_match( $f_username, $f_password, $u_password )) {
 
 		# increment login count
@@ -32,7 +32,7 @@
 
 		$t_project_id = get_default_project( $u_id );
 
-		if (( isset( $f_perm_login ) )&&( $f_perm_login=="on")) {
+		if ( ( isset( $f_perm_login ) )&&( "on" == $f_perm_login ) ) {
 			# set permanent cookie (1 year)
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
 			if ( $t_project_id > -1 ) {
@@ -66,14 +66,11 @@
 		$t_redirect_url = $g_login_page."?f_error=1";
 	}
 
-	if (( $g_quick_proceed == 1 )&&( $login_result )) {
+	if ( ( ON == $g_quick_proceed )&&( $login_result ) ) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	# goto main_page or back to login_page
 	if ( $t_project_id > 0 ) {
@@ -88,11 +85,7 @@
 		print_meta_redirect( $g_login_page."?f_error=1", 0 );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
+<? print_page_top2a() ?>
 
 <p>
 <div align="center">
@@ -109,7 +102,4 @@
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

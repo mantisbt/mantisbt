@@ -21,7 +21,7 @@
 	if ( isset( $f_save ) ) {
 		#echo $f_hide.$f_sort;
 		if ( isset( $f_hide ) ) {
-			if (( $f_hide=="on" )||( $f_hide==1 )) {
+			if ( ( "on" == $f_hide ) || ( 1 == $f_hide ) ) {
 				$f_hide = 1;
 			} else {
 				$f_hide = 0;
@@ -54,29 +54,20 @@
 	}
 
 	# we toggle between ASC and DESC if the user clicks the same sort order
-	if ( $f_dir=="ASC" ) {
+	if ( "ASC" == $f_dir ) {
 		$f_dir = "DESC";
-	}
-	else {
+	} else {
 		$f_dir = "ASC";
 	}
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? print_manage_menu( $g_manage_page ) ?>
 
-<? ### New Accounts Form BEGIN ?>
+<? # New Accounts Form BEGIN ?>
 <?
-	### Get the user data in $f_sort order
+	# Get the user data in $f_sort order
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $g_mantis_user_table
@@ -105,11 +96,11 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 </table>
-<? ### New Accounts Form END ?>
+<? # New Accounts Form END ?>
 
-<? ### Never Logged In Form BEGIN ?>
+<? # Never Logged In Form BEGIN ?>
 <?
-	### Get the user data in $f_sort order
+	# Get the user data in $f_sort order
 	$query = "SELECT *
 		FROM $g_mantis_user_table
 		WHERE login_count=0
@@ -137,12 +128,12 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 </table>
-<? ### Never Logged In Form END ?>
+<? # Never Logged In Form END ?>
 
-<? ### Manage Form BEGIN ?>
+<? # Manage Form BEGIN ?>
 <?
-	### Get the user data in $f_sort order
-	if ( $f_hide==0 ) {
+	# Get the user data in $f_sort order
+	if ( 0 == $f_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
@@ -167,7 +158,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<form method="post" action="<? echo $g_manage_page ?>">
 	<td class="center" colspan="2">
 		<input type="hidden" name="f_save" value="1">
-		<input type="checkbox" name="f_hide" <? if ( $f_hide==1 ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
+		<input type="checkbox" name="f_hide" <? if ( 1 == $f_hide ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
 		<input type="submit" value="<? echo $s_filter_button ?>">
 	</td>
 	</form>
@@ -206,14 +197,14 @@ for ($i=0;$i<$new_user_count;$i++) {
 </tr>
 <?
 	for ($i=0;$i<$user_count;$i++) {
-		### prefix user data with u_
+		# prefix user data with u_
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 
 		$u_date_created  = date( $g_normal_date_format, $u_date_created );
 		$u_last_visit    = date( $g_normal_date_format, $u_last_visit );
 
-		### alternate row colors
+		# alternate row colors
 		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 ?>
 <tr bgcolor="<? echo $t_bgcolor ?>">
@@ -243,12 +234,9 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 <?
-	}  ### end for
+	}  # end for
 ?>
 </table>
-<? ### Manage Form END ?>
+<? # Manage Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

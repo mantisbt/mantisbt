@@ -10,27 +10,19 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	### Add news
+	# Add news
     $result 	= news_add_query( $f_project_id, $f_poster_id, $f_headline, $f_body );
     $f_headline = string_display( $f_headline );
     $f_body 	= string_display( $f_body );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {			### SUCCESS
-		PRINT "$s_news_added_msg<p>";
+	if ( $result ) {			# SUCCESS
+		PRINT "$s_operation_successful<p>";
 ?>
 <table class="width75" cellspacing="0">
 <tr>
@@ -46,7 +38,7 @@
 </table>
 <p>
 <?
-	} else {					### FAILURE
+	} else {					# FAILURE
 		print_sql_error( $query );
 	}
 
@@ -54,7 +46,4 @@
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

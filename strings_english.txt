@@ -13,6 +13,7 @@
 	$s_all_projects = "All Projects";
 	$s_move_bugs = "Move Bugs";
 	$s_bugs_moved_msg = "Bugs have been successfully moved.";
+	$s_operation_successful = "Operation successful.";
 
 	# General Strings
 	$s_go_back = "Go Back";
@@ -55,7 +56,7 @@
 	$s_new_bug_msg = "The following NEW bug has been ADDED.";
 	$s_email_bugnote_msg = "A BUGNOTE has been added to this bug.";
 	$s_email_resolved_msg = "The following bug has been RESOLVED.";
-	$s_email_close_msg = "The following bug has beeen CLOSED";
+	$s_email_close_msg = "The following bug has been CLOSED";
 	$s_email_feedback_msg = "The following bug requires your FEEDBACK.";
 	$s_email_reopen_msg = "The following bug has been REOPENED.";
 	$s_email_assigned_msg = "The following bug has been ASSIGNED.";
@@ -553,7 +554,7 @@
 	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
 
 	# signup_page.php3
-	$s_signup_info = "Choose your login name and enter a valid email address.  A randomnly generated password will be sent to your address.";
+	$s_signup_info = "Choose your login name and enter a valid email address.  A randomly generated password will be sent to your address.";
 	$s_signup_title = "Signup";
 	$s_signup_button = "Signup";
 

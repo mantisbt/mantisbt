@@ -7,7 +7,7 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	if ( 1 == $g_show_view ) {
+	if ( SIMPLE_ONLY == $g_show_view ) {
 		print_header_redirect ( $g_view_bug_page."?f_id=".$f_id );
 	}
 
@@ -39,16 +39,8 @@
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <p>
 <table class="width100" cellspacing="1">
@@ -58,7 +50,7 @@
 	</td>
 	<td class="right" colspan="3">
 <?
-	if ( 0 == $g_show_view ) {
+	if ( BOTH == $g_show_view ) {
 		print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_view_simple_link );
 	}
 ?>
@@ -259,7 +251,7 @@
 	</td>
 </tr>
 <?
-	### account profile description
+	# account profile description
 	if ( $v_profile_id > 0 ) {
 		$query = "SELECT description
 				FROM $g_mantis_user_profile_table
@@ -407,7 +399,4 @@
 <? include( $g_bug_file_upload_inc ) ?>
 <? include( $g_bugnote_include_file ) ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

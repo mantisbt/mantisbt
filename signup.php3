@@ -8,13 +8,13 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### Check to see if signup is allowed
-	if ( $g_allow_signup == 0 ) {
+	# Check to see if signup is allowed
+	if ( OFF == $g_allow_signup ) {
 		print_header_redirect( $g_login_page );
 		exit;
 	}
 
-	### Check for a properly formatted email with valid MX record
+	# Check for a properly formatted email with valid MX record
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
 		PRINT "$f_email $s_invalid_email<p>";
@@ -22,7 +22,7 @@
 		exit;
 	}
 
-	### Check for duplicate username
+	# Check for duplicate username
 	$query = "SELECT username
 		FROM $g_mantis_user_table
 		WHERE username='$f_username'";
@@ -33,13 +33,13 @@
     	exit;
     }
 
-	### Passed our checks.  Insert into DB then send email.
+	# Passed our checks.  Insert into DB then send email.
 
-	### Create random password
+	# Create random password
 	$t_password = create_random_password( $f_email );
 
-	### Use a default access level
-	### create the almost unique string for each user then insert into the table
+	# Use a default access level
+	# create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password2 = process_plain_password( $t_password );
     $query = "INSERT
@@ -56,7 +56,7 @@
     	exit;
     }
 
-	### Create preferences for the user
+	# Create preferences for the user
 	$t_user_id = db_insert_id();
     $query = "INSERT
     		INTO $g_mantis_user_pref_table
@@ -78,25 +78,19 @@
     		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
 
-	### Send notification email
+	# Send notification email
 	email_signup( $t_user_id, $t_password );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
+
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {						### SUCCESS
+	if ( $result ) {						# SUCCESS
 		PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
-	} else {								### FAILURE
+	} else {								# FAILURE
 		print_sql_error( $query );
 	}
 
@@ -104,7 +98,4 @@
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Add file and redirect to the referring page
+	# Add file and redirect to the referring page
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -49,27 +49,19 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
 	if ( $result ) {					# SUCCESS
-		PRINT "$s_file_upload_msg<p>";
+		PRINT "$s_operation_successful<p>";
 	} else {							# FAILURE
 		if ( 0 == $good_upload ) {
 			PRINT "$s_no_file_specified<p>";
@@ -82,7 +74,4 @@
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -6,19 +6,13 @@
 ?>
 <? include( "core_API.php" ) ?>
 <?
-	### Only place this function is called
-	### Other pages use login_cookie_check()
+	# Only place this function is called
+	# Other pages use login_cookie_check()
 	index_login_cookie_check( $g_main_page );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <? print_meta_redirect( $g_login_page, $g_wait_time ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">

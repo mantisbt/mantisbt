@@ -39,7 +39,7 @@
 	}
 
 	if ( isset( $f_save ) ) {
-		if ( $f_save == 1 ) {
+		if ( 1 == $f_save ) {
 			# We came here via the FILTER form button click
 			# Save preferences
 			$t_settings_string = "v1#".
@@ -54,7 +54,7 @@
 								$f_sort."#".
 								$f_dir;
 			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
-		} else if ( $f_save == 2 ) {
+		} else if ( 2 == $f_save ) {
 			# We came here via clicking a sort link
 			# Load pre-existing preferences
 			$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
@@ -114,14 +114,14 @@
 		$t_where_clause .= " AND reporter_id='$f_user_id'";
 	}
 
-	if ( $f_assign_id == "none" ) {
+	if ( "none" == $f_assign_id ) {
 		$t_where_clause .= " AND handler_id=0";
 	} else if ( $f_assign_id != "any" ) {
 		$t_where_clause .= " AND handler_id='$f_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
-	if (( $f_hide_closed=="on"  )&&( $f_show_status!="closed" )) {
+	if ( ( "on" == $f_hide_closed  )&&( "closed" != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
@@ -168,11 +168,7 @@
 	$link_page = $g_print_all_bug_page;
 	$page_type = "all";
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
 		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
@@ -233,7 +229,7 @@
 	<td>
 		<select name="f_assign_id">
 			<option value="any"><? echo $s_any ?></option>
-			<option value="none" <? if ( $f_assign_id=="none" ) echo "SELECTED" ?>><? echo $s_none ?></option>
+			<option value="none" <? if ( "none" == $f_assign_id ) echo "SELECTED" ?>><? echo $s_none ?></option>
 			<option value="any"></option>
 			<? print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
@@ -266,7 +262,7 @@
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <? if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
 	</td>
 	<td>
 		<input type="submit" value="<? echo $s_filter_button ?>">
@@ -384,7 +380,7 @@
 	<td class="print">
 		<?
 			# print username instead of status
-			if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )&&
+			if (( ON == $g_show_assigned_names )&&( $v_handler_id > 0 )&&
 				( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
 			} else {
@@ -411,6 +407,3 @@
 	}
 ?>
 </table>
-
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>

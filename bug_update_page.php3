@@ -5,12 +5,12 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Show the simple update bug options
+	# Show the simple update bug options
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	if ( 2 == $g_show_update ) {
+	if ( ADVANCED_ONLY == $g_show_update ) {
 		print_header_redirect ( $g_bug_update_advanced_page."?f_id=".$f_id );
 	}
 
@@ -19,7 +19,7 @@
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 
-	### grab data
+	# grab data
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
@@ -35,7 +35,7 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
-	### prepare strings for display
+	# prepare strings for display
 	$v_os 						= string_display( $v_os );
 	$v_os_build 				= string_display( $v_os_build );
 	$v_platform					= string_display( $v_platform );
@@ -45,16 +45,8 @@
 	$v2_steps_to_reproduce 		= string_edit_textarea( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_edit_textarea( $v2_additional_information );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <p>
 <table class="width100" cellspacing="1">
@@ -85,7 +77,7 @@
 				break;
 	}
 
-	if ( 0 == $g_show_update ) {
+	if ( BOTH == $g_show_update ) {
 		print_bracket_link( $g_bug_update_advanced_page."?f_id=".$f_id, $s_update_advanced_link );
 	}
 ?>
@@ -236,7 +228,4 @@
 </form>
 </table>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

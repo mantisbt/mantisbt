@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This page stores the reported bug and then redirects to view_all_bug_page.php3
+	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -48,22 +48,22 @@
 		$f_profile_id = "";
 	}
 
-	### validating input
+	# validating input
 	$check_failed = false;
-	if ( ( $f_category=="" ) ||
-		 ( $f_severity=="" ) ||
-		 ( $f_reproducibility=="" ) ||
-		 ( $f_summary=="" ) ||
-		 ( $f_description=="" ) ) {
+	if ( ( empty( $f_category ) ) ||
+		 ( empty( $f_severity ) ) ||
+		 ( empty( $f_reproducibility ) ) ||
+		 ( empty( $f_summary ) ) ||
+		 ( empty( $f_description ) ) ) {
 		$check_failed = true;
 	}
 
-	### required fields ok, proceeding
+	# required fields ok, proceeding
 	if ( !$check_failed ) {
-		### Get user id
+		# Get user id
 		$u_id = get_current_user_field( "id" );
 
-		### Make strings safe for database
+		# Make strings safe for database
 		$f_summary 				= string_prepare_text( $f_summary );
 		$f_description 			= string_prepare_textarea( $f_description );
 		$f_additional_info 		= string_prepare_textarea( $f_additional_info );
@@ -74,9 +74,9 @@
 		$f_os 					= string_prepare_text( $f_os );
 		$f_osbuild 				= string_prepare_text( $f_osbuild );
 
-		### if a profile was selected then let's use that information
+		# if a profile was selected then let's use that information
 		if ( !empty( $f_profile_id ) ) {
-			### Get profile data and prefix with v_
+			# Get profile data and prefix with v_
 			$query = "SELECT *
 				FROM $g_mantis_user_profile_table
 				WHERE id='$f_profile_id'";
@@ -90,7 +90,7 @@
 			$f_osbuild	= string_prepare_text( $v_os_build );
 		}
 
-		### Insert text information
+		# Insert text information
 		$query = "INSERT
 				INTO $g_mantis_bug_text_table
 				( id, description, steps_to_reproduce, additional_information )
@@ -99,19 +99,19 @@
 				'$f_additional_info' )";
 		$result = db_query( $query );
 
-		### Get the id of the text information we just inserted
-		### NOTE: this is guarranteed to be the correct one.
-		### The value LAST_INSERT_ID is stored on a per connection basis.
+		# Get the id of the text information we just inserted
+		# NOTE: this is guarranteed to be the correct one.
+		# The value LAST_INSERT_ID is stored on a per connection basis.
 
 		$t_id = db_insert_id();
 
-		### check to see if we want to assign this right off
+		# check to see if we want to assign this right off
 		$t_status = NEW_;
 		if ( $f_assign_id != "0000000" ) {
 			$t_status = ASSIGNED;
 		}
 
-		### Insert the rest of the data
+		# Insert the rest of the data
 		$t_open = OPEN;
 		$t_nor = NORMAL;
 		$query = "INSERT
@@ -130,7 +130,7 @@
 
 		$t_bug_id = db_insert_id();
 
-		### File Uploaded
+		# File Uploaded
 		if ( !isset( $f_file ) ) {
 			$f_file = "none";
 		}
@@ -155,8 +155,8 @@
 			$result = db_query( $query );
 		}
 
-		### Notify users of new bug report
-		if ( $g_notify_developers_on_new == 1 ) {
+		# Notify users of new bug report
+		if ( ON == $g_notify_developers_on_new ) {
 			email_new_bug( $t_bug_id );
 		}
 	}
@@ -164,42 +164,34 @@
 	# Determine which report page to redirect back to.
 	$t_redirect_url = get_report_redirect_url();
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
+<? print_page_top1() ?>
 <?
-	if (( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) )) {
+	if ( ( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) ) ) {
 		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	### FORM ERROR
-	### required fields not entered
+	# FORM ERROR
+	# required fields not entered
 	if ( $check_failed ) {
 		PRINT "<span class=\"bold\">$s_report_add_error_msg</span><p>";
-		if ( $f_category=="" ) {
+		if ( empty( $f_category ) ) {
 			PRINT "$s_must_enter_category<br>";
 		}
-		if ( $f_severity=="" ) {
+		if ( empty( $f_severity ) ) {
 			PRINT "$s_must_enter_severity<br>";
 		}
-		if ( $f_reproducibility=="" ) {
+		if ( empty( $f_reproducibility ) ) {
 			PRINT "$s_must_enter_reproducibility<br>";
 		}
-		if ( $f_summary=="" ) {
+		if ( empty( $f_summary ) ) {
 			PRINT "$s_must_enter_summary<br>";
 		}
-		if ( $f_description=="" ) {
+		if ( empty( $f_description ) ) {
 			PRINT "$s_must_enter_description<br>";
 		}
 ?>
@@ -222,10 +214,10 @@
 			<input type="submit" 							value="<? echo $s_go_back ?>">
 		</form>
 <?
-	} else if ( !$result ) {		### MYSQL ERROR
+	} else if ( !$result ) {		# MYSQL ERROR
 		print_sql_error( $query );
-	} else {						### SUCCESS
-		PRINT "$s_submission_thanks_msg<p>";
+	} else {						# SUCCESS
+		PRINT "$s_operation_successful<p>";
 
 		if ( isset( $f_report_stay )) {
 ?>
@@ -250,7 +242,4 @@
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

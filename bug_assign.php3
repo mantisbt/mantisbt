@@ -10,7 +10,7 @@
 
 ?>
 <?
-	### Assign bug to user then redirect to viewing page
+	# Assign bug to user then redirect to viewing page
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -22,49 +22,27 @@
 
     $t_ass_val = ASSIGNED;
 
-    ### get user id
+    # get user id
     $t_handler_id = get_current_user_field( "id" );
     $query = "UPDATE $g_mantis_bug_table
             SET handler_id='$t_handler_id', status='$t_ass_val'
 			WHERE id='$f_id'";
     $result = db_query($query);
 
-	### send assigned to email
+	# send assigned to email
 	email_assign( $f_id );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
-<p>
-<div align="center">
-<?
-	if ( $result ) {					### SUCCESS
-        PRINT "$s_bug_assign_msg<p>";
-	} else {							### FAILURE
-		print_sql_error( $query );
-	}
+<? print_proceed( $result, $query, $t_redirect_url ) ?>
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
-?>
-</div>
-
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

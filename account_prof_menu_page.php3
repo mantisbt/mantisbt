@@ -5,10 +5,10 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This page allos users to add a new profile which is POSTed to
-	### account_prof_add.php3
+	# This page allos users to add a new profile which is POSTed to
+	# account_prof_add.php3
 
-	### Users can also manage their profiles
+	# Users can also manage their profiles
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -16,18 +16,10 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
-<? ### Add Profile Form BEGIN ?>
+<? # Add Profile Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -81,9 +73,9 @@
 </form>
 </table>
 </div>
-<? ### Add Profile Form END ?>
+<? # Add Profile Form END ?>
 
-<? ### Edit or Delete Profile Form BEGIN ?>
+<? # Edit or Delete Profile Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="0">
@@ -118,9 +110,6 @@
 </tr>
 </table>
 </div>
-<? ### Edit or Delete Profile Form END ?>
+<? # Edit or Delete Profile Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

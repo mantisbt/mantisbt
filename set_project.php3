@@ -11,7 +11,6 @@
 
 	$valid_project = 1;
 	# Check for invalid project_id selection
-#	if ( empty( $f_project_id ) || ( $f_project_id=="0000000" ) ) {
 	if ( empty( $f_project_id ) ) {
 		$valid_project = 0;
 	}
@@ -31,7 +30,7 @@
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
 	# for proxies that clear out HTTP_REFERER
-	if ( $valid_project==1 ) {
+	if ( 1 == $valid_project ) {
 		if ( !isset( $HTTP_REFERER ) || empty( $HTTP_REFERER ) ) {
 			$t_redirect_url = $g_main_page;
 		} else if ( eregi( $g_view_all_bug_page,$HTTP_REFERER ) ){
@@ -48,38 +47,27 @@
 	# clear view filter between projects
 	setcookie( $g_view_all_cookie );
 
-	if (( $g_quick_proceed == 1 )&&( $result )) {
+	if ( ( ON == $g_quick_proceed )&&( $result ) ) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
-	print_meta_redirect( $t_redirect_url, $g_wait_time );
+	print_meta_redirect( $t_redirect_url );
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $valid_project==1 ) {		### SUCCESS
-		PRINT "$s_selected_project<p>";
-	} else {						### FAILURE
+	if ( 1 == $valid_project ) {	# SUCCESS
+		PRINT "$s_operation_successful<p>";
+	} else {						# FAILURE
 		PRINT "$s_valid_project_msg";
 	}
 
-	print_bracket_link( $g_main_page, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -5,8 +5,8 @@
 	# See the files README and LICENSE for details
 ?>
 <?
-	### This include file prints out the bug information
-	### $f_id MUST be specified before the file is included
+	# This include file prints out the bug information
+	# $f_id MUST be specified before the file is included
 ?>
 <?
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,

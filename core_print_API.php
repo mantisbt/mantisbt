@@ -10,30 +10,30 @@
 
 	# this file handles printing and string manipulation functions
 
-	### --------------------
+	# --------------------
 	function print_header_redirect( $p_url ) {
 		global $g_use_iis;
 
-		if ( $g_use_iis == 0 ) {
+		if ( OFF == $g_use_iis ) {
 			header( "Status: 302" );
 		}
 		header( "Content-Type: text/html" );
 		header( "Pragma: no-cache" );
 		header( "Expires: Fri, 01 Jan 1999 00:00:00 GMT" );
 		header( "Cache-control: no-cache, no-cache=\"Set-Cookie\", private" );
-		if ( $g_use_iis == 1 ) {
+		if ( ON == $g_use_iis ) {
 			header( "Refresh: 0;url=$p_url" );
 		} else {
 			header( "Location: $p_url" );
 		}
 	}
-	### --------------------
+	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
 		# invalid user
-		if ( $p_user_id=="0000000" ) {
+		if ( "0000000" == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
@@ -49,12 +49,12 @@
 			PRINT $s_user_no_longer_exists;
 		}
 	}
-	### --------------------
+	# --------------------
 	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
-		if ( $p_user_id=="0000000" ) {
+		if ( "0000000" == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
@@ -70,12 +70,12 @@
 			PRINT $s_user_no_longer_exists;
 		}
 	}
-	### --------------------
+	# --------------------
 	# returns username if account
 	function get_user( $p_user_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
-		if ( $p_user_id=="0000000" ) {
+		if ( "0000000" == $p_user_id ) {
 			return "";
 		}
 		$query = "SELECT username
@@ -88,23 +88,23 @@
 			return $s_user_no_longer_exists;
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		global 	$g_view_bug_page, $g_view_bug_advanced_page;
 
 		if ( $p_duplicate_id!="0000000" ) {
-			if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
 				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			} else {
 				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Option List Printing API
 	###########################################################################
-	### --------------------
+	# --------------------
 	function print_user_option_list( $p_user_id ) {
 		global $g_mantis_user_table;
 
@@ -118,7 +118,7 @@
 	    	$t_user_id   = $row["id"];
 	    	$t_user_name = $row["username"];
 
-	    	if ( $t_user_id==$p_user_id ) {
+	    	if ( $t_user_id == $p_user_id ) {
 				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
 			}
 			else {
@@ -126,7 +126,7 @@
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_reporter_option_list( $p_user_id ) {
 		global $g_mantis_user_table;
 
@@ -142,7 +142,7 @@
 	    	$t_user_id   = $row["id"];
 	    	$t_user_name = $row["username"];
 
-	    	if ( $t_user_id==$p_user_id ) {
+	    	if ( $t_user_id == $p_user_id ) {
 				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
 			}
 			else {
@@ -150,7 +150,7 @@
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_duplicate_id_option_list() {
 		global $g_mantis_bug_table;
 
@@ -168,8 +168,8 @@
 			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id."</option>";
 		}
 	}
-	### --------------------
-	### Get current headlines and id  prefix with v_
+	# --------------------
+	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
 		global $g_mantis_news_table, $g_project_cookie_val;
 
@@ -194,8 +194,8 @@
 			PRINT "<option value=\"$v_id\">$v_headline</option>";
 		}
 	}
-	### --------------------
-	### Used for update pages
+	# --------------------
+	# Used for update pages
 	function print_field_option_list( $p_list, $p_item="" ) {
 		global $g_mantis_bug_table;
 
@@ -204,15 +204,15 @@
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( "'", "", $t_arr[$i] );
-			if ( $p_item==$t_s ) {
+			if ( $p_item == $t_s ) {
 				PRINT "<option value=\"$t_s\" SELECTED>$t_s</option>";
 			}
 			else {
 				PRINT "<option value=\"$t_s\">$t_s</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	function print_assign_to_option_list( $p_id="" ) {
 		global $g_mantis_user_table, $g_mantis_project_table,
 				$g_mantis_project_user_list_table, $g_project_cookie_val;
@@ -236,14 +236,14 @@
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			if ( $v_id==$p_id ) {
+			if ( $v_id == $p_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_username</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# Only list the PUBLIC and ENABLED projects
 	function print_project_option_list( $p_project_id="" ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
@@ -273,14 +273,14 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			if ( $p_project_id==$v_id ) {
+			if ( $p_project_id == $v_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_id, $p_select_id="" ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
@@ -291,7 +291,7 @@
 	    $result = db_query( $query );
 	    $v_default_profile = db_result( $result, 0, 0 );
 
-		### Get profiles
+		# Get profiles
 		$query = "SELECT id, platform, os, os_build
 			FROM $g_mantis_user_profile_table
 			WHERE user_id='$p_id'
@@ -301,21 +301,21 @@
 
 		PRINT "<option value=\"\"></option>";
 		for ($i=0;$i<$profile_count;$i++) {
-			### prefix data with v_
+			# prefix data with v_
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			$v_platform	= string_display( $v_platform );
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
-			if ( $v_id==$v_default_profile ) {
+			if ( $v_id == $v_default_profile ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build</option>";
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_news_project_option_list( $p_id ) {
 		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie;
@@ -338,14 +338,14 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			if ( $v_id==$p_id ) {
+			if ( $v_id == $p_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	function print_category_option_list( $p_category="" ) {
 		global $g_mantis_project_category_table, $g_project_cookie_val;
 
@@ -358,14 +358,14 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_category = $row["category"];
-			if ( $t_category==$p_category ) {
+			if ( $t_category == $p_category ) {
 				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
 			} else {
 				PRINT "<option value=\"$t_category\">$t_category</option>";
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_version_option_list( $p_version="" ) {
 		global $g_mantis_project_version_table, $g_project_cookie_val;
 
@@ -378,32 +378,32 @@
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = $row["version"];
-			if ( $t_version==$p_version ) {
+			if ( $t_version == $p_version ) {
 				PRINT "<option value=\"$t_version\" SELECTED>$t_version</option>";
 			} else {
 				PRINT "<option value=\"$t_version\">$t_version</option>";
 			}
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_enum_string_option_list( $p_enum_string, $p_val=0 ) {
 		$t_arr = explode_enum_string( $p_enum_string);
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
-			if ( $t_elem[0]==$p_val ) {
+			if ( $t_elem[0] == $p_val ) {
 				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
 			} else {
 				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	# @@@ Unused
 	function print_enum_string( $p_value, $p_string ) {
 		global $s_status_enum_string;
 	}
-	### --------------------
+	# --------------------
 	function print_project_user_option_list( $p_val=0 ) {
 		global $g_mantis_project_table, $s_access_levels_enum_string;
 
@@ -412,78 +412,78 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
 
-			if ( $t_elem[0]==ADMINISTRATOR ) { continue; }
+			if ( ADMINISTRATOR == $t_elem[0]  ) { continue; }
 
-			if ( $t_elem[0]==$p_val ) {
+			if ( $p_val == $t_elem[0] ) {
 				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
 			} else {
 				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	function print_language_option_list( $p_language ) {
 		global $g_language_choices_arr;
 
 		$t_arr = $g_language_choices_arr;
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			if ( $t_arr[$i]==$p_language ) {
+			if ( $t_arr[$i] == $p_language ) {
 				PRINT "<option value=\"$t_arr[$i]\" SELECTED>$t_arr[$i]</option>";
 			} else {
 				PRINT "<option value=\"$t_arr[$i]\">$t_arr[$i]</option>";
 			}
-		} ### end for
+		} # end for
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# String printing API
 	###########################################################################
-	### --------------------
-	### prints a link to a bug given an ID
-	### it accounts for the user preference and site override
+	# --------------------
+	# prints a link to a bug given an ID
+	# it accounts for the user preference and site override
 	function print_bug_link( $p_id ) {
 		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
 
 		switch ( $g_show_view ) {
-		case 0:
-			if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+		case BOTH:
+			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
 				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			} else {
 				PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
 			}
 			break;
-		case 1:
+		case SIMPLE_ONLY:
 			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
 			break;
-		case 2:
+		case ADVANCED_ONLY:
 			PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			break;
 		}
 	}
-	### --------------------
-	### returns a href link to a bug given an ID
-	### it accounts for the user preference and site override
+	# --------------------
+	# returns a href link to a bug given an ID
+	# it accounts for the user preference and site override
 	function get_bug_link( $p_id ) {
 		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
 
 		switch ( $g_show_view ) {
-		case 0:
-			if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+		case BOTH:
+			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
 				return "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			} else {
 				return "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
 			}
 			break;
-		case 1:
+		case SIMPLE_ONLY:
 			return "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
 			break;
-		case 2:
+		case ADVANCED_ONLY:
 			return "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			break;
 		}
 	}
-	### --------------------
+	# --------------------
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
@@ -491,17 +491,16 @@
 
 		#$t_sev_str = get_enum_element( $g_severity_enum_string, $p_severity );
 		$t_sev_str = get_enum_element( $s_severity_enum_string, $p_severity );
-		if ( ( ( $p_severity==MAJOR ) ||
-			 ( $p_severity==CRASH ) ||
-			 ( $p_severity==BLOCK ) )&&
-			 ( $p_status!=CLOSED ) ) {
+		if ( ( ( MAJOR == $p_severity ) ||
+			   ( CRASH == $p_severity ) ||
+			   ( BLOCK == $p_severity ) ) &&
+			 ( CLOSED != $p_status ) ) {
 			PRINT "<span class=\"bold\">$t_sev_str</span>";
-		}
-		else {
+		} else {
 			PRINT "$t_sev_str";
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_project_category_string( $p_project_id ) {
 		global $g_mantis_project_category_table, $g_mantis_project_table;
 
@@ -526,7 +525,7 @@
 
 		return $t_string;
 	}
-	### --------------------
+	# --------------------
 	function print_project_version_string( $p_project_id ) {
 		global $g_mantis_project_version_table, $g_mantis_project_table;
 
@@ -550,16 +549,16 @@
 
 		return $t_string;
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Link Printing API
 	###########################################################################
-	### --------------------
+	# --------------------
 	function print_view_bug_sort_link(  $p_page, $p_string, $p_sort_field, $p_sort, $p_dir ) {
 		if ( $p_sort_field == $p_sort ) {
 
 			# we toggle between ASC and DESC if the user clicks the same sort order
-			if ( $p_dir=="ASC" ) {
+			if ( "ASC" == $p_dir ) {
 				$p_dir = "DESC";
 			} else {
 				$p_dir = "ASC";
@@ -570,15 +569,15 @@
 			PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_save=2\">$p_string</a>";
 		}
 	}
-	### --------------------
+	# --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
 		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1&f_hide=$p_hide\">$p_string</a>";
 	}
-	### --------------------
+	# --------------------
 	function print_manage_project_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
 		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a>";
 	}
-	### --------------------
+	# --------------------
 	# print the bracketed links used near the top
 	# if the $p_link is blank then the text is printed but no link is created
 	function print_bracket_link( $p_link, $p_url_text ) {
@@ -588,23 +587,23 @@
 			PRINT "[ <a href=\"$p_link\">$p_url_text</a> ]";
 		}
 	}
-	### --------------------
+	# --------------------
 	# print a mailto: href link
 	function print_email_link( $p_email, $p_text ) {
 		PRINT get_email_link($p_email,$p_text);
 	}
-	### --------------------
+	# --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
 		global $g_hide_user_email;
 
-		if( $g_hide_user_email==1 ){
+		if( ON == $g_hide_user_email ){
 			return "$p_text";
 		} else {
 			return "<a href=\"mailto:$p_email\">$p_text</a>";
 		}
 	}
-	### --------------------
+	# --------------------
 	# print a mailto: href link with subject
 	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 		global $g_mantis_bug_table;
@@ -618,19 +617,19 @@
 
 		PRINT get_email_link_with_subject( $p_email, $p_text, $t_summary );
 	}
-	### --------------------
+	# --------------------
 	# return the mailto: href string link instead of printing it
 	# add subject line
 	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
 		global $g_hide_user_email;
 
-		if( $g_hide_user_email==1 ){
+		if ( ON == $g_hide_user_email ){
 			return "$p_text";
 		} else {
 			return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 		}
 	}
-	### --------------------
+	# --------------------
 	# print our standard mysql query error
 	# this function should rarely (if ever) be reached.  instead the db_()
 	# functions should trap (altough inelegantly).
@@ -641,11 +640,11 @@
 		print_email_link( $g_administrator_email, $s_administrator );
 		PRINT "<p>$p_query;<p>";
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Filter API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# make http and mailto link urls
 	function filter_href_tags( $p_string ) {
     	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])",
@@ -656,7 +655,7 @@
         						$p_string);
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# undo http and mailto link urls for editing purposes
 	function unfilter_href_tags( $p_string ) {
     	$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([^[:space:]]*)([[:alnum:]#?/&=])</a>",
@@ -667,12 +666,12 @@
         						$p_string);
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# @@@ does nothing
 	function filter_img_tags( $p_string ) {
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# process $g_html_tags to be treated as html
 	function filter_html_tags( $p_string ) {
 		global $g_html_tags;
@@ -691,11 +690,11 @@
 
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# String Processing API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# every string that comes form a textarea should be processed through this
 	# function *before* insertion into the database.
 	function string_prepare_textarea( $p_string ) {
@@ -703,11 +702,11 @@
 
 		$p_string = htmlspecialchars( $p_string );
 
-		if ( $g_allow_html_tags==1 ) {
+		if ( ON == $g_allow_html_tags ) {
 			$p_string = filter_html_tags( $p_string );
 		}
 
-		if ( $g_allow_href_tags==1 ) {
+		if ( ON == $g_allow_href_tags ) {
 			$p_string = filter_href_tags( $p_string );
 		}
 
@@ -715,7 +714,7 @@
 		$p_string = addslashes( $p_string );
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# every string that comes form a text field should be processed through this
 	# function *before* insertion into the database.
 	function string_prepare_text( $p_string ) {
@@ -725,11 +724,11 @@
 		$p_string = str_replace( "\"", "'", $p_string );
 		$p_string = htmlspecialchars( $p_string );
 
-		if ( $g_allow_html_tags==1 ) {
+		if ( ON == $g_allow_html_tags ) {
 			$p_string = filter_html_tags( $p_string );
 		}
 
-		if ( $g_allow_href_tags==1 ) {
+		if ( ON == $g_allow_href_tags ) {
 			$p_string = filter_href_tags( $p_string );
 		}
 
@@ -737,7 +736,7 @@
 		$p_string = addslashes( $p_string );
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# Use this to prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = stripslashes( $p_string );
@@ -745,7 +744,7 @@
 		$p_string = nl2br( $p_string );
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# Prepare a string for plain text display in email
 	function string_email( $p_string ) {
 		$p_string = stripslashes( $p_string );
@@ -758,7 +757,7 @@
 
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# Process a string for display in a textarea box
 	function string_edit_textarea( $p_string ) {
 		$p_string = stripslashes( $p_string );
@@ -770,7 +769,7 @@
 		$p_string = str_replace( "&quot;", "\"",  $p_string );
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	# Process a string for display in a text box
 	function string_edit_text( $p_string ) {
 		$p_string = stripslashes( $p_string );
@@ -781,11 +780,11 @@
 		$p_string = str_replace( "&quot;", "'",  $p_string );
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Miscellaneous String Functions API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# duplicates str_pad() from PHP4
 	# left pad $p_string with $p_pad until we reach $p_length
 	function str_pd( $p_string, $p_pad, $p_length, $p_dir=STR_PAD_RIGHT ) {
@@ -800,7 +799,7 @@
 		}
 		return $p_string;
 	}
-	### --------------------
+	# --------------------
 	/* word_wrap($string, $cols, $prefix)
 	 *
 	 * Takes $string, and wraps it on a per-word boundary (does not clip
@@ -830,11 +829,11 @@
 						for($num=0; $num < $cols-1; $num++) {
 						    $outlines .= $thisword[$num];
 						    $cur_pos++;
-						} ### end for
+						} # end for
 
 						$outlines .= "\n";
 						$thisword = substr($thisword, $cur_pos, (strlen($thisword)-$cur_pos));
-				    } ### end innermost while
+				    } # end innermost while
 
 				    if((strlen($newline) + strlen($thisword)) > $cols) {
 						$outlines .= $prefix.$newline."\n";
@@ -842,17 +841,14 @@
 				    } else {
 						$newline .= $thisword." ";
 				    }
-				}  ### end while
+				}  # end while
 
 				$outlines .= $prefix.$newline."\n";
 		    } else {
 				$outlines .= $prefix.$thisline."\n";
 		    }
-		} ### end outermost while
+		} # end outermost while
 		return $outlines;
     }
-	### --------------------
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
 ?>

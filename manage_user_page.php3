@@ -18,16 +18,8 @@
 	$row = db_fetch_array($result);
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? print_manage_menu() ?>
 
@@ -72,7 +64,7 @@
 		<? echo $s_enabled ?>
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_enabled" <? if ( $u_enabled==1 ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_enabled" <? if ( ON == $u_enabled ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -80,7 +72,7 @@
 		<? echo $s_protected ?>
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_protected" <? if ( $u_protected==1 ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_protected" <? if ( ON == $u_protected ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr>
@@ -112,7 +104,4 @@
 	<? echo $s_reset_password_msg ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -17,37 +17,17 @@
 			SET title='$f_title', description='$f_description'
 			WHERE id='$f_id'";
 	$result = db_query( $query );
+
+	$t_redirect_url = $g_proj_doc_page;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_proj_doc_page, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
-<p>
-<div align="center">
-<?
-	if ( $result ) {				### SUCCESS
-		PRINT "$s_project_document_updated<p>";
-	} else {						### FAILURE
-		print_sql_error( $query );
-	}
+<? print_proceed( $result, $query, $t_redirect_url ) ?>
 
-	print_bracket_link( $g_proj_doc_page, $s_proceed );
-?>
-</div>
-
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Add file and redirect to the referring page
+	# Add file and redirect to the referring page
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>

@@ -14,8 +14,8 @@
 			$f_action = "";
 	}
 
-	### If Deleteing item redirect to delete script
-	if ( $f_action=="delete" ) {
+	# If Deleteing item redirect to delete script
+	if ( "delete" == $f_action ) {
 		print_header_redirect( "$g_project_delete_page?f_project_id=$f_project_id" );
 		exit;
 	}
@@ -30,16 +30,8 @@
 	$v_name 		= string_edit_text( $v_name );
 	$v_description 	= string_edit_textarea( $v_description );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? print_manage_menu( $g_manage_project_edit_page ) ?>
 
@@ -76,7 +68,7 @@
 		<? echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <? if ( $v_enabled==1 ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_enabled" <? if ( ON == $v_enabled ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -84,8 +76,8 @@
 		<? echo $s_view_status ?>
 	</td>
 	<td>
-		<input type="radio" name="f_view_state" value="10" <? if ($v_view_state=="10") echo "CHECKED" ?>> <? echo $s_public ?>
-		<input type="radio" name="f_view_state" value="50" <? if ($v_view_state=="50") echo "CHECKED" ?>> <? echo $s_private ?>
+		<input type="radio" name="f_view_state" value="10" <? if ( PUBLIC == $v_view_state ) echo "CHECKED" ?>> <? echo $s_public ?>
+		<input type="radio" name="f_view_state" value="50" <? if ( PRIVATE == $v_view_state ) echo "CHECKED" ?>> <? echo $s_private ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -160,7 +152,7 @@
 				$t_category = $row["category"];
 				$t2_category = urlencode( $t_category );
 
-				### alternate row colors
+				# alternate row colors
 				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
@@ -171,7 +163,7 @@
 				<? print_bracket_link( $g_manage_project_category_edit_page."?f_project_id=".$f_project_id."&f_category=".$t2_category, $s_edit_link ) ?>
 			</td>
 		</tr>
-		<? 	} ### end for loop ?>
+		<? 	} # end for loop ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -190,7 +182,7 @@
 				$t_date_order = $row["date_order"];
 				$t2_date_order = urlencode( $t_date_order );
 
-				### alternate row colors
+				# alternate row colors
 				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
@@ -201,7 +193,7 @@
 				<? print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
 			</td>
 		</tr>
-		<?	} ### end for loop ?>
+		<?	} # end for loop ?>
 		</table>
 	</td>
 </tr>
@@ -224,7 +216,4 @@
 </table>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

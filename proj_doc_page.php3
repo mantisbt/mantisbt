@@ -10,25 +10,15 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( VIEWER );
 
-	### Select project files
+	# Select project files
 	$query = "SELECT *
 			FROM $g_mantis_project_file_table
 			WHERE project_id='$g_project_cookie_val'";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
-
-
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
@@ -50,7 +40,7 @@
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display( $v_description );
 
-		### alternate row colors
+		# alternate row colors
 		$status_color = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 ?>
 <tr valign="top" bgcolor="<? echo $status_color ?>">
@@ -78,7 +68,4 @@
 </table>
 </div>
 
-
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

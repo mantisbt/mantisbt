@@ -10,13 +10,13 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	### If deleting item redirect to delete script
-	if ( $f_action=="delete" ) {
+	# If deleting item redirect to delete script
+	if ( "delete" == $f_action ) {
 		print_header_redirect( "$g_news_delete_page?f_id=$f_id" );
 		exit;
 	}
 
-	### Retrieve news item data and prefix with v_
+	# Retrieve news item data and prefix with v_
 	$row = news_select_query( $f_id );
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -25,18 +25,10 @@
    	$v_headline = string_edit_text( $v_headline );
    	$v_body 	= string_edit_textarea( $v_body );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
-<? ### Edit News Form BEGIN ?>
+<? # Edit News Form BEGIN ?>
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_news_update ?>">
@@ -73,7 +65,7 @@
 	<td>
 		<select name="f_project_id">
 			<? if( ADMINISTRATOR == get_current_user_field( "access_level" ) ) { ?>
-				<option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide</option>
+				<option value="0000000" <? if ( "0000000" == $v_project_id ) echo "SELECTED"?>>Sitewide</option>
 			<? } ?>
 			<? print_news_project_option_list( $v_project_id ) ?>
 		</select>
@@ -87,9 +79,6 @@
 </table>
 </form>
 </div>
-<? ### Edit News Form END ?>
+<? # Edit News Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

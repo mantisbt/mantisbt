@@ -14,9 +14,9 @@
 
 	$result = 0;
 	$query = "";
-	### check for duplicate
+	# check for duplicate
 	if ( !is_duplicate_category( $f_category, $f_project_id ) ) {
-		### update category
+		# update category
 		$query = "UPDATE $g_mantis_project_category_table
 				SET category='$f_category'
 				WHERE category='$f_orig_category' AND project_id='$f_project_id'";
@@ -28,7 +28,7 @@
 	   	$result = db_query( $query );
 	   	$bug_count = db_num_rows( $result );
 
-		### update version in each corresponding bug
+		# update version in each corresponding bug
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_bug_id = $row["id"];
@@ -42,39 +42,30 @@
 			$result2 = db_query( $query2 );
 		}
 	}
+
+	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_manage_project_edit_page?f_project_id=$f_project_id", $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {					### SUCCESS
-		PRINT "$s_category_updated_msg<p>";
+	if ( $result ) {					# SUCCESS
+		PRINT "$s_operation_successful<p>";
 	} else if ( is_duplicate_category( $f_category, $f_project_id )) {
 		PRINT "$s_duplicate_category<p>";
-	} else {							### FAILURE
+	} else {							# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$f_project_id, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

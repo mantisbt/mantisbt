@@ -14,13 +14,12 @@
 		$f_sort = "name";
 	}
 
-	### basically we toggle between ASC and DESC if the user clicks the
-	### same sort order
+	# basically we toggle between ASC and DESC if the user clicks the
+	# same sort order
 	if ( isset( $f_dir ) ) {
-		if ( $f_dir=="ASC" ) {
+		if ( "ASC" == $f_dir ) {
 			$f_dir = "DESC";
-		}
-		else {
+		} else {
 			$f_dir = "ASC";
 		}
 	}
@@ -29,20 +28,12 @@
 	}
 
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <? print_manage_menu( $g_manage_project_menu_page ) ?>
 
-<? ### Add Project Form BEGIN ?>
+<? # Add Project Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -113,9 +104,9 @@
 </form>
 </table>
 </div>
-<? ### Add Project Form END ?>
+<? # Add Project Form END ?>
 
-<? ### Project Menu Form BEGIN ?>
+<? # Project Menu Form BEGIN ?>
 <p>
 <table class="width100" cellspacing="1">
 <tr>
@@ -161,7 +152,7 @@
 		$v_name 		= string_display( $v_name );
 		$v_description 	= string_display( $v_description );
 
-		### alternate row colors
+		# alternate row colors
 		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 ?>
 <tr bgcolor="<? echo $t_bgcolor ?>">
@@ -188,9 +179,6 @@
 	}
 ?>
 </table>
-<? ### Project Menu Form END ?>
+<? # Project Menu Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

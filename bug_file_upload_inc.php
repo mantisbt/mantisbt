@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 ?>
 <?
-	### This include file prints out the bug file upload form
-	### It POSTs to bug_file_add.php3
+	# This include file prints out the bug file upload form
+	# It POSTs to bug_file_add.php3
 ?>
-<? ### Upload File Form BEGIN ?>
-<? if ( ( $g_allow_file_upload==1 )&&
+<? # Upload File Form BEGIN ?>
+<? if ( ( ON == $g_allow_file_upload )&&
 		( $v_status < RESOLVED ) ) { ?>
 <p>
 <div align="center">
@@ -35,4 +35,4 @@
 </form>
 </div>
 <? } ?>
-<? ### Upload File Form END ?>
+<? # Upload File Form END ?>

@@ -5,8 +5,8 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Remove the bugnote and bugnote text and redirect back to
-	### the viewing page
+	# Remove the bugnote and bugnote text and redirect back to
+	# the viewing page
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -19,20 +19,20 @@
 	# @@@ WHat does this do?
 	check_bugnote_exists( $f_id );
 
-	### grab the bugnote text id
+	# grab the bugnote text id
 	$query = "SELECT bugnote_text_id
 			FROM $g_mantis_bugnote_table
 			WHERE id='$f_bugnote_id'";
 	$result = db_query( $query );
 	$t_bugnote_text_id = db_result( $result, 0, 0 );
 
-	### Remove the bugnote
+	# Remove the bugnote
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
 			WHERE id='$f_bugnote_id'";
 	$result = db_query($query);
 
-	### Remove the bugnote text
+	# Remove the bugnote text
 	$query = "DELETE
 			FROM $g_mantis_bugnote_text_table
 			WHERE id='$t_bugnote_text_id'";
@@ -41,36 +41,14 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
-<p>
-<div align="center">
-<?
-	if ( $result ) {					### SUCCESS
-		PRINT "$s_bugnote_deleted_msg<p>";
-	} else {							### FAILURE
-		print_sql_error( $query );
-	}
+<? print_proceed( $result, $query, $t_redirect_url ) ?>
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
-?>
-</div>
-
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

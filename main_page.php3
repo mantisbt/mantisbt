@@ -5,24 +5,14 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### This is the first page a user sees when they login to the bugtracker
-	### News is displayed which can notify users of any important changes
+	# This is the first page a user sees when they login to the bugtracker
+	# News is displayed which can notify users of any important changes
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
-<?
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
 <table class="hide">
 <tr>
@@ -38,12 +28,12 @@
 </table>
 
 <?
-	### Check to see if variable is set
+	# Check to see if variable is set
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
 
-	### get news count (project plus sitewide posts)
+	# get news count (project plus sitewide posts)
     $total_news_count = news_count_query( $g_project_cookie_val );
 
 	switch ( $g_news_limit_method ) {
@@ -67,7 +57,7 @@
 	$result = db_query( $query );
     $news_count = db_num_rows( $result );
 
-    ### Loop through results
+    # Loop through results
 	for ($i=0;$i<$news_count;$i++) {
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -101,10 +91,10 @@
 </table>
 </div>
 <?
-	}  ### end for loop
+	}  # end for loop
 ?>
 
-<? ### Print NEXT and PREV links if necessary ?>
+<? # Print NEXT and PREV links if necessary ?>
 <p>
 <div align="center">
 <?
@@ -115,13 +105,10 @@
 	if ( $f_offset_prev >= 0) {
 		print_bracket_link( $g_main_page."?f_offset=".$f_offset_prev, $s_newer_news_link );
 	}
-	if ( $news_count==$g_news_view_limit ) {
+	if ( $news_count == $g_news_view_limit ) {
 		print_bracket_link( $g_main_page."?f_offset=".$f_offset_next, $s_older_news_link );
 	}
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -13,7 +13,7 @@
 		global $g_validate_email, $g_check_mx_record;
 
 		# if we don't validate then just accept
-		if ( $g_validate_email==0 ) {
+		if ( OFF == $g_validate_email ) {
 			return true;
 		}
 
@@ -21,7 +21,7 @@
 		#  x-xx.xxx@yyy.zzz.abc etc.
 		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,3}$)", $p_email, $check)) {
 			# passed format check. see if we should check the mx records
-			if ( $g_check_mx_record == 1 ) {	# Check for valid mx records
+			if ( ON == $g_check_mx_record ) {	# Check for valid mx records
 				if (getmxrr($check[1].".".$check[2], $temp)) {
 					return true;
 				} else {
@@ -92,7 +92,7 @@
 		# Get Reporter Email
 		$t_notify_reporter = get_user_pref_info( $v_reporter_id, $p_notify_type );
 		$t_reporter_email = get_user_info( $v_reporter_id, "email" );
-		if ( $t_notify_reporter==1 ) {
+		if ( 1 == $t_notify_reporter ) {
 			$send_arr[$send_counter++] = $t_reporter_email;
 		}
 
@@ -101,7 +101,7 @@
 			$t_handler_email = get_user_info( $v_handler_id, "email" );
 			$t_notify_handler = get_user_pref_info( $v_handler_id, $p_notify_type );
 
-			if ( $t_notify_handler==1 ) {
+			if ( 1 == $t_notify_handler ) {
 				if (!check_duplicate($send_arr,$t_handler_email) ) {
 					$send_arr[$send_counter++] = $t_handler_email;
 				}
@@ -109,7 +109,7 @@
 		}
 
 		# Get Developer Email
-		if (( $g_notify_developers_on_new==1 )&&( $p_notify_type=="email_on_new")) {
+		if ( ( ON == $g_notify_developers_on_new )&&( "email_on_new" == $p_notify_type ) ) {
 			$user_id_arr = array();
 			$user_id_counter = 0;
 			$p_project_id = get_bug_project_id( $p_bug_id );
@@ -132,7 +132,7 @@
 				# if the user's notification is on then add to the list
 				$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
 
-				if ( $t_notify==1 ) {
+				if ( 1 == $t_notify ) {
 					$user_id_arr[$user_id_counter++] = $row["user_id"];
 
 					if ( !check_duplicate( $send_arr,get_user_info( $row["user_id"], "email" ) ) ) {
@@ -215,7 +215,7 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
-		### Build Welcome Message
+		# Build Welcome Message
 		$t_message = $s_new_account_greeting.
 						$s_new_account_url.$g_path."\n".
 						$s_new_account_username.$v_username."\n".
@@ -240,7 +240,7 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
-		### Build Welcome Message
+		# Build Welcome Message
 		$t_message = $s_reset_request_msg."\n\n".
 					$s_account_name_msg.": ".$v_username."\n".
 					$s_news_password_msg.": ".$p_password."\n\n".
@@ -373,10 +373,10 @@
 		$t_message .= str_pd( $s_email_severity.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sev_str."\n";
 		$t_message .= str_pd( $s_email_priority.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_pri_str."\n";
 		$t_message .= str_pd( $s_email_status.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sta_str."\n";
-		if ( $v_status==RESOLVED ) {
+		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( $s_resolution_enum_string, $v_resolution );
 			$t_message .= str_pd( $s_email_resolution.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_res_str."\n";
-			if ( $v_resolution==DUPLICATE ) {
+			if ( DUPLICATE == $v_resolution ) {
 				$t_message .= str_pd( $s_email_duplicate.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
@@ -407,7 +407,7 @@
 		$result = db_query( $query );
 		$bugnote_count = db_num_rows( $result );
 
-		### BUILT MESSAGE
+		# BUILT MESSAGE
 		for ( $i=0; $i<$bugnote_count; $i++ ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "t" );
@@ -432,7 +432,7 @@
 		return $t_message;
 	}
 	# --------------------
-	### Send bug info to reporter and handler
+	# Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
 		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table,
 				$g_to_email, $g_use_bcc;
@@ -440,23 +440,23 @@
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
 
-		### build message
+		# build message
 		$t_message = $p_message."\n";
 		$t_message .= email_build_bug_message( $p_bug_id );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
-		### send mail
+		# send mail
 		$res1 = 1;
 		$res2 = 1;
 
 		## win-bcc-bug
-		if ( $g_use_bcc==0 ) {
+		if ( OFF == $g_use_bcc ) {
 			## list of receivers
 			$to = $g_to_email.(($p_headers && $g_to_email) ? ", " : "").$p_headers;
 			# echo "<br>email_bug_info::Sending email to :" . $to;
 			$res1 = email_send( $to, $p_subject, $t_message, "" );
 		} else {
-			### Send Email
+			# Send Email
 			# echo "<br>email_bug_info::Sending email to : ".$g_to_email;
 			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
 		}
@@ -468,14 +468,14 @@
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
 
-		### build message
+		# build message
 		$t_message = $p_message."\n";
 		$t_message .= email_build_bug_message( $p_bug_id );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
 		$p_user_email = get_user_info( $p_user_id, "email" );
 
-		### send mail
+		# send mail
 		$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
 	}
 	# --------------------
@@ -486,7 +486,7 @@
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
 
 		# short-circuit if no emails should be sent
-		if ( $g_enable_email_notification == 0 ) {
+		if ( OFF ==$g_enable_email_notification ) {
 			return;
 		}
 
@@ -503,7 +503,7 @@
 		#echo nl2br($t_message)."<br>";
 		#exit;
 
-		if ( $g_use_phpMailer==1 )  {
+		if ( ON == $g_use_phpMailer )  {
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
 
@@ -553,7 +553,7 @@
 
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-			if ( $g_use_x_priority == 1 ) {
+			if ( ON == $g_use_x_priority ) {
 				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
@@ -610,7 +610,5 @@
 
 		return "[".$p_project_name." ".$p_bug_id."]: ".$p_subject;
 	}
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
 ?>

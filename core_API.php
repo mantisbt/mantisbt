@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	### INCLUDES                                                            ###
+	# INCLUDES
 	###########################################################################
 
   	require( "constant_inc.php" );
@@ -13,7 +13,7 @@
 
 	require( "core_database_API.php" );
 
-	### Nasty code to select the proper language file
+	# Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
 		$t_language = "";
 		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -43,8 +43,5 @@
 	require( "core_news_API.php" );
 	require( "core_icon_API.php" );
 	require( "core_ldap_API.php" );
-
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
 ?>

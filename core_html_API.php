@@ -11,24 +11,67 @@
 	# These functions control the display of each page
 	# I've numbered the functions in the order they should appear
 
-	### --------------------
+	# --------------------
+	# first part of the html followed by meta tags then the second part
+	function print_page_top1() {
+		global $g_window_title, $g_css_include_file, $g_meta_include_file;
+
+		print_html_top();
+		print_head_top();
+		print_title( $g_window_title );
+		print_css( $g_css_include_file );
+		include( $g_meta_include_file );
+	}
+	# --------------------
+	# second part of the html, comes after the meta tags
+	function print_page_top2() {
+		global $g_page_title, $g_top_include_page;
+
+		print_head_bottom();
+		print_body_top();
+		print_header( $g_page_title );
+		print_top_page( $g_top_include_page );
+		print_menu();
+	}
+	# --------------------
+	# second part of the html, comes after the meta tags
+	function print_page_top2a() {
+		global $g_page_title, $g_top_include_page;
+
+		print_head_bottom();
+		print_body_top();
+		print_header( $g_page_title );
+		print_top_page( $g_top_include_page );
+	}
+	# --------------------
+	# comes at the bottom of the html
+	# $p_file should always be the __FILE__ variable. This is passed to show source.
+	function print_page_bot1( $p_file ) {
+		global $g_bottom_include_page;
+
+		print_bottom_page( $g_bottom_include_page );
+		print_footer( $p_file );
+		print_body_bottom();
+		print_html_bottom();
+	}
+	# --------------------
 	# (1) this is the first text sent by the page
 	function print_html_top() {
 		PRINT "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
 		PRINT "<html>";
 	}
-	### --------------------
+	# --------------------
 	# (2)
 	function print_head_top() {
 	   PRINT "<head>";
 	}
-	### --------------------
+	# --------------------
 	# (3)
 	function print_title( $p_title ) {
 		global 	$g_show_project_in_title,
 				$g_project_cookie_val;
 
-		if ( $g_show_project_in_title==1 ) {
+		if ( 1 == $g_show_project_in_title ) {
 			$t_project_name = get_project_name($g_project_cookie_val);
 
 			if ( empty( $t_project_name ) ) {
@@ -36,7 +79,7 @@
 			} else {
 				PRINT "<title>$p_title - $t_project_name</title>";
 			}
-		} else if ( $g_show_project_in_title==2 ) {
+		} else if ( 2 == $g_show_project_in_title ) {
 			$t_project_name = get_project_name($g_project_cookie_val);
 
 			PRINT "<title>$t_project_name</title>";
@@ -44,30 +87,36 @@
 			PRINT "<title>$p_title</title>";
 		}
 	}
-	### --------------------
+	# --------------------
 	# (4) the css include file to use, is likely to be either empty or css_inc.php
 	function print_css( $p_css="" ) {
 		if ( !empty($p_css )) {
 			include( "$p_css" );
 		}
 	}
-	### --------------------
+	# --------------------
 	# (5) OPTIONAL: for pages that require a redirect
 	# The time field is the number of seconds to wait before redirecting
-	function print_meta_redirect( $p_url, $p_time ) {
-	   PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
+	function print_meta_redirect( $p_url, $p_time="" ) {
+		global $g_wait_time;
+
+		if ( empty( $p_time ) ) {
+			$p_time = $g_wait_time;
+		}
+
+		PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
 	}
-	### --------------------
+	# --------------------
 	# (6)
 	function print_head_bottom() {
 	   PRINT "</head>";
 	}
-	### --------------------
+	# --------------------
 	# (7)
 	function print_body_top() {
 		PRINT "<body>";
 	}
-	### --------------------
+	# --------------------
 	# (8) This prints the title that is visible in the main panel of the browser
 	# We use a temporary vairable to create the title then print it.
 	function print_header( $p_title="Mantis" ) {
@@ -91,7 +140,7 @@
 
 		PRINT "<div align=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
 	}
-	### --------------------
+	# --------------------
 	# (9) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the top of every page
 	function print_top_page( $p_page ) {
@@ -99,7 +148,7 @@
 			include( $p_page );
 		}
 	}
-	### --------------------
+	# --------------------
 	# (10) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
 	function print_bottom_page( $p_page ) {
@@ -107,7 +156,7 @@
 			include( $p_page );
 		}
 	}
-	### --------------------
+	# --------------------
 	# (11) Prints the bottom of page information
 	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email,
@@ -127,21 +176,21 @@
 		PRINT "<address>Copyright (C) 2000, 2001</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 	}
-	### --------------------
+	# --------------------
 	# (12)
 	function print_body_bottom() {
 		PRINT "</body>";
 	}
-	### --------------------
+	# --------------------
 	# (13)  The very last text that is sent in a html page
 	function print_html_bottom() {
 		PRINT "</html>";
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# HTML Appearance Helper API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
 	# this is used by print_menu()
@@ -152,7 +201,7 @@
 				$s_switch, $s_logged_in_as, $s_all_projects;
 
 		$t_username = get_current_user_field( "username" );
-		$t_now = date($g_complete_date_format);
+		$t_now = date( $g_complete_date_format );
 
 		PRINT "<table class=\"hide\">";
 		PRINT "<form method=\"post\" action=\"$g_set_project\">";
@@ -174,7 +223,7 @@
 		PRINT "</form>";
 		PRINT "</table>";
 	}
-	### --------------------
+	# --------------------
 	# This prints the little [?] link for user help
 	# The $p_a_name is a link into the documentation.html file
 	function print_documentaion_link( $p_a_name="" ) {
@@ -182,7 +231,7 @@
 
 		PRINT "<a href=\"$g_documentation_html#$p_a_name\" target=_info>[?]</a>";
 	}
-	### --------------------
+	# --------------------
 	# checks to see whether we need to be displaying the source link
 	# WARNING: displaying source (and the ability to do so) can be a security risk
 	# used in print_footer()
@@ -193,7 +242,7 @@
 			return;
 		}
 
-		if (( $g_show_source==1 )&&
+		if (( ON == $g_show_source )&&
 			( access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
 				PRINT "<p>";
 				PRINT "<div align=\"center\">";
@@ -201,42 +250,86 @@
 				PRINT "</div>";
 		}
 	}
-	### --------------------
+	# --------------------
 	# checks to see whether we need to be displaying the version number
 	# used in print_footer()
 	function print_mantis_version() {
 		global $g_mantis_version, $g_show_version;
 
-		if ( $g_show_version==1 ) {
+		if ( ON == $g_show_version ) {
 			PRINT "<span class=\"italic\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
 	}
-	### --------------------
+	# --------------------
 	# print the hr
 	function print_hr( $p_hr_size, $p_hr_width ) {
 		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\">";
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	# HTML Menu API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# print the standard command menu at the top of the pages
 	# also prints the login info, time, and project select form
-	function print_menu( $p_menu_file="" ) {
-		global 	$g_primary_border_color, $g_primary_color_light;
+	function print_menu() {
+		global	$g_string_cookie_val, $g_project_cookie_val,
 
-		print_login_info();
+				$g_show_report,
 
-		PRINT "<table class=\"width100\" cellspacing=\"0\">";
-		PRINT "<tr>";
-			PRINT "<td class=\"menu\">";
-				include( $p_menu_file );
+				$g_main_page, $g_view_all_bug_page,
+				$g_report_bug_page, $g_report_bug_advanced_page,
+				$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
+				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
+				$g_proj_user_menu_page, $g_login_select_proj_page,
+
+				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
+				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
+				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
+				$s_logout_link;
+
+		if ( isset( $g_string_cookie_val ) ) {
+			print_login_info();
+
+		    $t_protected = get_current_user_field( "protected" );
+			PRINT "<table class=\"width100\" cellspacing=\"0\">";
+			PRINT "<tr>";
+				PRINT "<td class=\"menu\">";
+				PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
+				PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
+				if ( access_level_check_greater_or_equal( REPORTER ) ) {
+					if ( "0000000" != $g_project_cookie_val ) {
+						$t_report_url = get_report_redirect_url( 1 );
+						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+					} else {
+						PRINT "<a href=\"$g_login_select_proj_page\">$s_report_bug_link</a> | ";
+					}
+				}
+
+				PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
+				PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
+				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+					if ( "0000000" != $g_project_cookie_val ) {
+						PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
+					} else {
+						PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
+					}
+				}
+			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+				PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
+			}
+			if ( access_level_check_greater_or_equal( MANAGER ) ) {
+				PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
+			}
+
+				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
+				PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
 			PRINT "</td>";
-		PRINT "</tr>";
-		PRINT "</table>";
+			PRINT "</tr>";
+			PRINT "</table>";
+		}
 	}
-	### --------------------
+	# --------------------
 	# this is the same as print_menu except without the login info
 	# this is set by setting $g_show_footer_menu to 1
 	function print_bottom_menu( $p_menu_file="" ) {
@@ -251,7 +344,7 @@
 		PRINT "</tr>";
 		PRINT "</table>";
 	}
-	### --------------------
+	# --------------------
 	# prints the manage menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_menu( $p_page="" ) {
@@ -280,7 +373,7 @@
 			print_bracket_link( $t_documentation_page, $s_documentation_link );
 		PRINT "</div>";
 	}
-	### --------------------
+	# --------------------
 	# prints the account menu
 	# if the $p_page matches a url then don't make that a link
 	function print_account_menu( $p_page="" ) {
@@ -302,7 +395,7 @@
 		print_bracket_link( $t_account_prefs_page, $s_change_preferences_link );
 		print_bracket_link( $t_account_profile_menu_page, $s_manage_profiles_link );
 	}
-	### --------------------
+	# --------------------
 	# prints the doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_doc_menu( $p_page="" ) {
@@ -323,11 +416,11 @@
 
 		print_bracket_link( $t_documentation_html, $s_user_documentation );
 		print_bracket_link( $t_proj_doc_page, $s_project_documentation );
-		if (( $g_allow_file_upload==1 )&&( access_level_check_greater_or_equal( MANAGER ) )) {
+		if ( ( ON == $g_allow_file_upload )&&( access_level_check_greater_or_equal( MANAGER ) ) ) {
 			print_bracket_link( $t_proj_doc_add_page, $s_add_file );
 		}
 	}
-	### --------------------
+	# --------------------
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page="" ) {
@@ -352,7 +445,7 @@
 			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
 		PRINT "</div>";
 	}
-	### --------------------
+	# --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page="" ) {
 		global	$g_summary_page, $s_summary_link,
@@ -380,7 +473,7 @@
 		}
 		PRINT "</div>";
 	}
-	### --------------------
+	# --------------------
 	# prints the signup link
 	function print_signup_link() {
 		global $g_allow_signup, $g_signup_page, $s_signup_link;
@@ -391,8 +484,19 @@
 			PRINT "</div>";
 		}
 	}
-	### --------------------
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
+	function print_proceed( $p_result, $p_query, $p_link ) {
+		global $s_operation_successful, $s_proceed;
+
+		PRINT "<p>";
+		PRINT "<div align=\"center\">";
+		if ( $p_result ) {						# SUCCESS
+			PRINT "$s_operation_successful<p>";
+		} else {								# FAILURE
+			print_sql_error( $p_query );
+		}
+		print_bracket_link( $p_link, $s_proceed );
+		PRINT "</div>";
+	}
+	# --------------------
 ?>

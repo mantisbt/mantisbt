@@ -44,39 +44,30 @@
 			$result2 = db_query( $query2 );
 		}
 	}
+
+	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_manage_project_edit_page?f_project_id=$f_project_id", $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {				### SUCCESS
-		PRINT "$s_version_updated_msg<p>";
+	if ( $result ) {				# SUCCESS
+		PRINT "$s_operation_successful<p>";
 	} else if ( is_duplicate_version( $f_version, $f_project_id, $f_date_order )) {
 		PRINT "$s_duplicate_version<p>";
-	} else {						### FAILURE
+	} else {						# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$f_project_id, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

@@ -14,6 +14,14 @@
 
 	# --- constants -------------------
 
+	# magic numbers
+	define( "ON",       1 );
+	define( "OFF",      0 );
+
+	#define( "SUCCESS", 1 );
+	#define( "NOERROR", 1 );
+	#define( "ERROR",   0 );
+
 	# access levels
 	define( "VIEWER",         10 );
 	define( "REPORTER",       25 );
@@ -84,4 +92,9 @@
 
 	# email padding
 	define( "EMAIL_PAD_LENGTH", 28 );
+	
+	# show variable values
+	define( "BOTH",            0 );
+	define( "SIMPLE_ONLY",      1 );
+	define( "ADVANCED_ONLY",    2 );
 ?>

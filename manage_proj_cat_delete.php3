@@ -11,7 +11,7 @@
 	check_access( MANAGER );
 	$f_category = urldecode( $f_category );
 
-	### delete category
+	# delete category
 	$query = "DELETE
 			FROM $g_mantis_project_category_table
 			WHERE project_id='$f_project_id' AND category='$f_category'";
@@ -28,13 +28,13 @@
 		$t_bug_id = $row["id"];
 		$t_bug_text_id = $row["bug_text_id"];
 
-		### Delete the bug text
+		# Delete the bug text
 		$query2 = "DELETE
 				FROM $g_mantis_bug_text_table
 	    		WHERE id='$t_bug_text_id'";
 	    $result2 = db_query( $query2 );
 
-		### select bugnotes to delete
+		# select bugnotes to delete
 		$query3 = "SELECT id, bugnote_text_id
 				FROM $g_mantis_bugnote_table
 	    		WHERE bug_id='$t_bug_id'";
@@ -46,13 +46,13 @@
 			$t_bugnote_id = $row2["id"];
 			$t_bugnote_text_id = $row2["bugnote_text_id"];
 
-			### Delete the bugnotes
+			# Delete the bugnotes
 			$query = "DELETE
 					FROM $g_mantis_bugnote_table
 		    		WHERE id='$t_bugnote_id'";
 		    $result = db_query( $query );
 
-			### Delete the bugnote texts
+			# Delete the bugnote texts
 			$query4 = "DELETE
 					FROM $g_mantis_bugnote_text_table
 		    		WHERE id='$t_bugnote_text_id'";
@@ -64,37 +64,17 @@
 			FROM $g_mantis_bug_table
 			WHERE project_id='$f_project_id' AND category='$f_category'";
     $result = db_query( $query );
+
+    $t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_manage_project_edit_page?f_project_id=$f_project_id", $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
-<p>
-<div align="center">
-<?
-	if ( $result ) {				### SUCCESS
-		PRINT "$s_category_deleted_msg<p>";
-	} else {						### FAILURE
-		print_sql_error( $query );
-	}
+<? print_proceed( $result, $query, $t_redirect_url ) ?>
 
-	print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$f_project_id, $s_proceed );
-?>
-</div>
-
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

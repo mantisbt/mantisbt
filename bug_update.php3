@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Update bug data then redirect to the appropriate viewing page
+	# Update bug data then redirect to the appropriate viewing page
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
@@ -15,19 +15,19 @@
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 
-	### set variable to be valid if necessary
+	# set variable to be valid if necessary
 	if ( !isset( $f_duplicate_id ) ) {
 		$f_duplicate_id = "";
 	}
 
-	### grab the bug_text_id
+	# grab the bug_text_id
     $query = "SELECT bug_text_id
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_query( $query );
     $t_bug_text_id = db_result( $result, 0, 0 );
 
-	### prevent warnings
+	# prevent warnings
 	if (!isset( $f_os )) {
 		$f_os = "";
 	}
@@ -41,7 +41,7 @@
 		$f_version = "";
 	}
 
-	### prepare strings
+	# prepare strings
 	$f_os 						= string_prepare_text( $f_os );
 	$f_os_build 				= string_prepare_text( $f_os_build );
 	$f_platform					= string_prepare_text( $f_platform );
@@ -51,11 +51,11 @@
 	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-    if ( ( $f_handler_id != 0 ) AND ( $f_status == NEW_ ) ) {
+    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
         $f_status = ASSIGNED;
     }
 
-	### Update all fields
+	# Update all fields
     $query = "UPDATE $g_mantis_bug_table
     		SET category='$f_category', severity='$f_severity',
     			reproducibility='$f_reproducibility',
@@ -73,7 +73,7 @@
     		WHERE id='$t_bug_text_id'";
    	$result = db_query($query);
 
-	### If we should notify and it's in feedback state then send an email
+	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {
 		case FEEDBACK:	if ( $f_status!= $f_old_status ) {
    							email_feedback( $f_id );
@@ -91,40 +91,18 @@
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
-	if (( 1 == $g_quick_proceed )&&( $result )) {
+	if (( ON == $g_quick_proceed )&&( $result )) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
+<? print_page_top1() ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url, $g_wait_time );
+		print_meta_redirect( $t_redirect_url );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top2() ?>
 
-<p>
-<div align="center">
-<?
-	if ( $result ) {					### SUCCESS
-		PRINT "$s_bug_updated_msg<p>";
-	} else {							### FAILURE
-		print_sql_error( $query );
-	}
+<? print_proceed( $result, $query, $t_redirect_url ) ?>
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
-?>
-</div>
-
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

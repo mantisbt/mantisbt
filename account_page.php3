@@ -5,16 +5,16 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Users may change their user information from this page.
-	### The data is POSTed to account_update.php3
+	# Users may change their user information from this page.
+	# The data is POSTed to account_update.php3
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### extracts the user information for the currently logged in user
-	### and prefixes it with u_
+	# extracts the user information for the currently logged in user
+	# and prefixes it with u_
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
@@ -22,18 +22,10 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
-<? print_menu( $g_menu_include_file ) ?>
+<? print_page_top1() ?>
+<? print_page_top2() ?>
 
-<? ### Edit Account Form BEGIN ?>
+<? # Edit Account Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -47,7 +39,7 @@
 	</td>
 </tr>
 <?	# using LDAP accounts
-	if ( $g_login_method == LDAP) {
+	if ( LDAP == $g_login_method ) {
 ?>
 <tr class="row-2">
 	<td colspan="2">
@@ -64,7 +56,7 @@
 	</td>
 </tr>
 <?
-	if ( $g_use_ldap_email == 1 ) {
+	if ( ON == $g_use_ldap_email ) {
     	$u_email = get_user_info( "$u_username","email" );
 ?>
 <tr class="row-2">
@@ -148,12 +140,12 @@
 	</td>
 </tr>
 <tr>
-	<td class="center">
+	<td class="left">
 		<input type="submit" value="<? echo $s_update_user_button ?>">
 	</td>
 </form>
 <form method="post" action="<? echo $g_account_delete_page ?>">
-	<td class="center">
+	<td class="right">
 		<input type="submit" value="<? echo $s_delete_account_button ?>">
 	</td>
 </form>
@@ -161,9 +153,6 @@
 <?	} ?>
 </table>
 </div>
-<? ### Edit Account Form END ?>
+<? # Edit Account Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>

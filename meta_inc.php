@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
-	#prevent caching
+	# prevent caching
 ?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">

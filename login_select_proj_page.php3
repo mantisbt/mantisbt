@@ -5,24 +5,17 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Allows the user to select a project that is visible to him
+	# Allows the user to select a project that is visible to him
 ?>
 <? include( "core_API.php" ) ?>
 <? login_user_check_only() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<? include( $g_meta_include_file ) ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
-<? print_header( $g_page_title ) ?>
-<? print_top_page( $g_top_include_page ) ?>
+<? print_page_top1() ?>
+<? print_page_top2a() ?>
 
-<? ### Project Select Form BEGIN ?>
+<? # Project Select Form BEGIN ?>
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_set_project ?>">
@@ -59,9 +52,6 @@
 </table>
 </form>
 </div>
-<? ### Project Select Form END ?>
+<? # Project Select Form END ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<? print_page_bot1( __FILE__ ) ?>
