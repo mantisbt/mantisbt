@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.18 2004-04-08 11:05:11 vboctor Exp $
+	# $Id: csv_export.php,v 1.19 2004-05-30 01:49:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,13 +24,6 @@
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
-        $t_filename = csv_get_default_filename();
-
-	# Send headers to browser to activate mime loading
-	header( 'Content-Type: text/plain; name=' . $t_filename );
-	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename=' . $t_filename );
-
 	$t_page_number = 1;
 	$t_per_page = -1;
 	$t_bug_count = null;
@@ -41,6 +34,16 @@
 
 	# Get bug rows according to the current filter
 	$rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	if ( $rows === false ) {
+		print_header_redirect( 'view_all_set.php?type=0' );
+	}
+
+        $t_filename = csv_get_default_filename();
+
+	# Send headers to browser to activate mime loading
+	header( 'Content-Type: text/plain; name=' . $t_filename );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename=' . $t_filename );
 
 	# Get columns to be exported
 	$t_columns = csv_get_columns();

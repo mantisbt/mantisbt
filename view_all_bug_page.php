@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: vboctor $
-	# $Date: 2004-01-11 07:16:08 $
+	# $Date: 2004-05-30 01:49:31 $
 	#
-	# $Id: view_all_bug_page.php,v 1.51 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.52 2004-05-30 01:49:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,6 +35,9 @@
 	$t_page_count = null;
 
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	if ( $rows === false ) {
+		print_header_redirect( 'view_all_set.php?type=0' );
+	}
 
 	compress_enable();
 

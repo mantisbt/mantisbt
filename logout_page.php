@@ -6,13 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: logout_page.php,v 1.16 2004-05-26 00:59:27 int2str Exp $
+	# $Id: logout_page.php,v 1.17 2004-05-30 01:49:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	# Removes all the cookies and then redirect to the page specified in
-	#  the config option logout_redirect_page
-
 	require_once( 'core.php' );
 
 	auth_logout();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.85 2004-05-28 00:21:02 int2str Exp $
+	# $Id: print_api.php,v 1.86 2004-05-30 01:49:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -409,8 +409,7 @@
 	}
 	# --------------------
 	function print_news_project_option_list( $p_project_id ) {
-		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
-				$g_project_cookie;
+		global 	$g_mantis_project_table, $g_mantis_project_user_list_table;
 
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT *

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.37 2004-04-15 09:27:30 yarick123 Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.38 2004-05-30 01:49:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,13 +40,6 @@
 		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.xls"' );
 	}
 
-	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-
-	# check to see if new cookie is needed
-	if ( ! filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
-	}
-
 	#settings for choosing the fields to print
 	# get the fields list
 	$t_field_name_arr = get_field_names();
@@ -58,6 +51,9 @@
 	$t_page_count = null;
 	
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	if ( $result === false ) {
+		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
+	}
 	$row_count = sizeof( $result );
 
 	#settings for choosing the fields to print
