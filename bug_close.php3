@@ -19,12 +19,12 @@
 
 	### Update fields
 	$t_clo_val = CLOSED;
-    $query = "UPDATE $g_mantis_bug_table
-    		SET status='$t_clo_val'
-    		WHERE id='$f_id'";
-   	$result = db_query($query);
+	$query = "UPDATE $g_mantis_bug_table
+			SET status='$t_clo_val'
+			WHERE id='$f_id'";
+	$result = db_query($query);
 
-   	email_close( $f_id );
+	email_close( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
