@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.16 2004-10-24 19:04:37 thraxisp Exp $
+	# $Id: check.php,v 1.17 2004-12-11 04:00:37 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -239,71 +239,24 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 
 	test_bug_download_threshold();
 	test_bug_attachments_allow_flags();
+
+		print_test_row( 'check mail configuration: send_reset_password = ON requires allow_blank_email = OFF', 
+				( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'allow_blank_email' ) ) ) );
+		print_test_row( 'check mail configuration: send_reset_password = ON requires enable_email_notification = ON', 
+				( OFF == config_get( 'send_reset_password' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
+		print_test_row( 'check mail configuration: allow_signup = ON requires enable_email_notification = ON', 
+				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
+		print_test_row( 'check mail configuration: allow_signup = ON requires send_reset_password = ON', 
+				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'send_reset_password' ) ) );
+		print_test_row( 'check language configuration: fallback_language is not \'auto\'', 
+				'auto' <> config_get( 'fallback_language' ) );
+				
+		print_test_row( '$g_bug_link_tag is not empty ("' . config_get( 'bug_link_tag' ) . '")', 
+				'' <> config_get( 'bug_link_tag' ) );
+		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get( 'bugnote_link_tag' ) . '")', 
+				'' <> config_get( 'bugnote_link_tag' ) );
 ?>
-<tr>
-	<td bgcolor="#ffffff">
-		check mail configuration: send_reset_password = ON requires allow_blank_email = OFF
-	</td>
-	<?php
-		if ( ( ON == config_get( 'send_reset_password' ) ) &&
-				( OFF != config_get( 'allow_blank_email' ) ) ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-<tr>
-	<td bgcolor="#ffffff">
-		check mail configuration: send_reset_password = ON requires enable_email_notification = ON
-	</td>
-	<?php
-		if ( ( ON == config_get( 'send_reset_password' ) ) &&
-				( ON != config_get( 'enable_email_notification' ) ) ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-<tr>
-	<td bgcolor="#ffffff">
-		check mail configuration: allow_signup = ON requires enable_email_notification = ON
-	</td>
-	<?php
-		if ( ( ON == config_get( 'allow_signup' ) ) &&
-				( ON != config_get( 'enable_email_notification' ) ) ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-<tr>
-	<td bgcolor="#ffffff">
-		check mail configuration: allow_signup = ON requires send_reset_password = ON
-	</td>
-	<?php
-		if ( ( ON == config_get( 'allow_signup' ) ) &&
-				( ON != config_get( 'send_reset_password' ) ) ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-</tr>
-<tr>
-	<td bgcolor="#ffffff">
-		check language configuration: fallback_language &lt;&gt; 'auto' </>
-	</td>
-	<?php
-		if ( 'auto' == config_get( 'fallback_language' ) ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-</tr>
-
 </table>
-
 
 <!-- register_globals check -->
 <?php
