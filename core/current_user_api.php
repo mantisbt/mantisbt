@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.1 2002-08-29 03:00:07 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.2 2002-09-05 23:44:35 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -45,5 +45,10 @@
 	# Return the specified field of the currently logged in user
 	function current_user_get_pref( $p_field_name ) {
 		return user_get_pref( auth_get_current_user_id(), $p_field_name );
+	}
+	# --------------------
+	# Return the specified field of the currently logged in user
+	function current_user_set_default_project( $p_project_id ) {
+		return user_set_default_project( auth_get_current_user_id(), $p_project_id );
 	}
 ?>

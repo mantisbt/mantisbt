@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.21 2002-09-03 00:54:20 prescience Exp $
+	# $Id: user_api.php,v 1.22 2002-09-05 23:44:35 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -601,7 +601,8 @@
 		return true;
 	}
 	# --------------------
-	# This function is only called from the login.php3 script
+	# Increment the number of times the user has logegd in
+	# This function is only called from the login.php script
 	function user_increment_login_count( $p_user_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 
@@ -618,4 +619,30 @@
 		#db_query() errors on failure so:
 		return true;
 	}
+	# --------------------
+	# Set a user preference
+	function user_set_pref( $p_user_id, $p_pref_name, $p_pref_value ) {
+		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_pref_name	= db_prepare_string( $p_pref_name );
+		$c_pref_value	= db_prepare_string( $p_pref_value );
+
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+
+		$query = "UPDATE $t_user_pref_table
+				SET $c_pref_name='$c_pref_value'
+				WHERE user_id='$c_user_id'";
+
+		db_query( $query );
+
+		user_pref_clear_cache( $p_user_id );
+
+		#db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
+	# Set the user's default project
+	function user_set_default_project( $p_user_id, $p_project_id ) {
+		return user_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
+	}
+	
 ?>
