@@ -8,16 +8,16 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:47 $
+	# $Revision: 1.55 $
+	# $Author: vboctor $
+	# $Date: 2004-02-24 12:55:40 $
 	#
-	# $Id: strings_turkish.txt,v 1.54 2004-02-05 15:10:47 jlatour Exp $
+	# $Id: strings_turkish.txt,v 1.55 2004-02-24 12:55:40 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'iso-8859-9';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
