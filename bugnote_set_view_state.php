@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_set_view_state.php,v 1.24 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: bugnote_set_view_state.php,v 1.25 2004-05-17 11:47:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 
 	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 
-	# Check if the bug has been resolved
+	# Check if the bug is readonly
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	if ( bug_is_readonly( $t_bug_id ) ) {
 		error_parameters( $t_bug_id );
