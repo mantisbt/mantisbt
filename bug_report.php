@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.23 2003-03-09 03:08:57 jfitzell Exp $
+	# $Id: bug_report.php,v 1.24 2003-03-20 07:09:36 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -149,7 +149,7 @@
 	</form>
 <?php
 	} else {
-		print_bracket_link( string_get_bug_view_url( $t_bug_id, 1 ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
+		print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
 		print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 	}
 ?>
