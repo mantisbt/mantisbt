@@ -3,8 +3,8 @@
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-	#
-	# Spanish Version by Pablo Corral (PabloCorral@ciudad.com.ar) - Buenos Aires, Argentina
+
+	# Pablo Corral (PabloCorral@ciudad.com.ar) - Buenos Aires, Argentina
 ?>
 <?
 	# This file is to aid in localization
