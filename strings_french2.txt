@@ -549,12 +549,15 @@
 	# summary_page.php3
 	$s_summary_title = "Synth&egrave;se";
 	$s_by_status = "par &eacute;tat";
-	$s_by_date = "par date";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_date = "par date";
 	$s_by_severity = "par s&eacute;v&eacute;rit&eacute;";
 	$s_by_resolution = "par r&eacute;solution";
 	$s_by_category = "par cat&eacute;gorie";
 	$s_by_priority = "par priorit&eacute;";
-	$s_time_stats = "statistiques (en jours) pour les r&eacute;solutions";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "statistiques (en jours) pour les r&eacute;solutions";
 	$s_longest_open_bug = "bug ouvert le plus longtemps";
 	$s_longest_open = "temps maximal";
 	$s_average_time = "temps moyen";

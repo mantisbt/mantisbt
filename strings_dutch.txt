@@ -549,13 +549,16 @@
 
 	# summary_page.php3
 	$s_summary_title = "Samenvatting";
-	$s_by_status = "naar status";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_status = "naar status";
 	$s_by_date = "naar datum";
 	$s_by_severity = "naar serieusheid";
 	$s_by_resolution = "naar resolutie";
 	$s_by_category = "naar categorie";
 	$s_by_priority = "naar prioriteit";
-	$s_time_stats = "tijd status voor afgeronde opdrachten (dagen)";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "tijd status voor afgeronde opdrachten (dagen)";
 	$s_longest_open_bug = "langst openstaande opdracht";
 	$s_longest_open = "langst openstaand";
 	$s_average_time = "gemiddelde tijd";

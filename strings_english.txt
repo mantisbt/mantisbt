@@ -548,12 +548,15 @@
 
 	# summary_page.php3
 	$s_summary_title = "Summary";
-	$s_by_status = "by status";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_status = "by status";
 	$s_by_date = "by date (days)";
 	$s_by_severity = "by severity";
 	$s_by_resolution = "by resolution";
 	$s_by_category = "by category";
 	$s_by_priority = "by priority";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
 	$s_time_stats = "time stats for resolved bugs(days)";
 	$s_longest_open_bug = "longest open bug";
 	$s_longest_open = "longest open";

@@ -146,6 +146,20 @@
 	# This is in the view all pages
 	$g_show_assigned_names = 0;
 
+             ############################
+             ### Mantis JPGRAPH Addon ###
+             ############################
+
+	# --- jpgraph settings --- #
+	# To use the Jpgraph addon you need the JPGRAPH package from
+	# http://www.aditus.nu/jpgraph/index.php
+	# You can place the package whereever you want, but you have
+	# to set the var in jpgraph.php eg.
+	# (DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");)
+
+	$g_use_jpgraph = 0;
+	$g_jpgraph_path = "./jpgraph/";   # dont forget the ending slash!
+
 	############################
 	### Mantis Time Settings ###
 	############################

@@ -549,21 +549,24 @@
 	$s_site_settings_updated_msg = "Les modifications ont bien été prises en compte.";
 
 	# summary_page.php3
-	$s_summary_title = "Synthèse";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_summary_title = "Synthèse";
 	$s_by_status = "par état";
 	$s_by_date = "par date";
 	$s_by_severity = "par sévérité";
 	$s_by_resolution = "par résolution";
 	$s_by_category = "par catégorie";
 	$s_by_priority = "par priorité";
-	$s_time_stats = "statistiques (en jours) pour les résolutions";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "statistiques (en jours) pour les résolutions";
 	$s_longest_open_bug = "bug ouvert le plus longtemps";
 	$s_longest_open = "temps maximal";
 	$s_average_time = "temps moyen";
 	$s_total_time = "temps total";
 	$s_developer_stats = "statistiques par développeur";
 	$s_orct = "(ouvert/résolu/fermé/total)";
-
+ 
 	# view_all_assign_bug_page.php3
 
 	# view_all_bug_page.php3

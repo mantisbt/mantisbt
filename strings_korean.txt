@@ -549,12 +549,15 @@
 	# summary_page.php3
 	$s_summary_title = "요약";
 	$s_by_status = "상태별";
-	$s_by_date = "일자별";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_date = "일자별";
 	$s_by_severity = "중요도별";
 	$s_by_resolution = "해결상태별";
 	$s_by_category = "카테고리별";
 	$s_by_priority = "우선순위";
-	$s_time_stats = "해결된 버그들의 시간 통계";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "해결된 버그들의 시간 통계";
 	$s_longest_open_bug = "가장 오래 해결되지 않은 버그";
 	$s_longest_open = "가장 오래된";
 	$s_average_time = "평균 시간";

@@ -355,15 +355,23 @@
 	### --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page="" ) {
-		global	$g_summary_page, $s_summary_link;
+		global	$g_summary_page, $s_summary_link,
+                                          $g_use_jpgraph, $s_summary_jpgraph_link,
+                                          $g_summary_jpgraph_page;
+
+                            if(!$g_use_jpgraph){
+                                return false;
+                            }
 
 		switch ( $p_page ) {
 		case $g_summary_page: $g_summary_page="";break;
+                            case $g_summary_jpgraph_page: $g_summary_jpgraph_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $g_summary_page, $s_summary_link );
-			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
+                                          print_bracket_link( $g_summary_jpgraph_page, $s_summary_jpgraph_link );
+                                          #print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
 		PRINT "</div>";
 	}
 	### --------------------

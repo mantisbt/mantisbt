@@ -548,13 +548,16 @@
 
 	# summary_page.php3
 	$s_summary_title = "Oppsummering";
-	$s_by_status = "pr status";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_status = "pr status";
 	$s_by_date = "pr dato";
 	$s_by_severity = "pr alvorlighetsgrad";
 	$s_by_resolution = "pr løsning";
 	$s_by_category = "pr kategori";
 	$s_by_priority = "pr prioritet";
-	$s_time_stats = "tidsstatistikk for løste feil (dager)";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "tidsstatistikk for løste feil (dager)";
 	$s_longest_open_bug = "lengste åpne feil";
 	$s_longest_open = "lengste åpne";
 	$s_average_time = "gjennomsnittlig tid";

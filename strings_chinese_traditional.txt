@@ -548,13 +548,16 @@
 
 	# summary_page.php3
 	$s_summary_title = "摘要";
-	$s_by_status = "依狀態";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_status = "依狀態";
 	$s_by_date = "依日期";
 	$s_by_severity = "依嚴重性";
 	$s_by_resolution = "依解析度";
 	$s_by_category = "依類別";
 	$s_by_priority = "依優先權";
-	$s_time_stats = "已解決臭蟲(天數)的時間狀態";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "已解決臭蟲(天數)的時間狀態";
 	$s_longest_open_bug = "最長的開啟臭蟲";
 	$s_longest_open = "最長的開啟時間";
 	$s_average_time = "平均時間";

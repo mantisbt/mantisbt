@@ -547,8 +547,9 @@
 	# site_settings_update.php3
 	$s_site_settings_updated_msg = "Eigenschaften wurden aktualisiert";
 
-	# summary_page.php3
+	# summary_page.php3 & summary_page_jpgraph.php3
 	$s_summary_title = "Zusammenfassung";
+              $s_summary_jpgraph_link = "Erweiterte Zusammenfassung";
 	$s_by_status = "nach Status";
 	$s_by_date = "nach Datum";
 	$s_by_severity = "nach Schwere";
@@ -562,6 +563,7 @@
 	$s_total_time = "insgesamt";
 	$s_developer_stats = "Entwicklerstatistik";
 	$s_orct = "(open/resolved/closed/total)";
+              $s_summary_prefix="nach";
 
 	# view_all_assign_bug_page.php3
 

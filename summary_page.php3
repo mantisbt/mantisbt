@@ -60,7 +60,7 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
-<? #print_summary_menu( $g_summary_page ) ?>
+<? print_summary_menu( $g_summary_page ) ?>
 
 <p>
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>

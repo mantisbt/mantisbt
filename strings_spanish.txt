@@ -548,13 +548,16 @@
 
 	# summary_page.php3
 	$s_summary_title = "Sumario";
-	$s_by_status = "por Status";
+              $s_summary_jpgraph_link = "Advanced summary";
+              $s_by_status = "por Status";
 	$s_by_date = "por fecha";
 	$s_by_severity = "por severidad";
 	$s_by_resolution = "por resolucion";
 	$s_by_category = "por categoria";
 	$s_by_priority = "por prioridad";
-	$s_time_stats = "estadisticas de bugs resueltos (dias)";
+              $s_by_developer = "by developer";
+              $s_by_reporter ="by reporter";
+              $s_time_stats = "estadisticas de bugs resueltos (dias)";
 	$s_longest_open_bug = "mayor tiempo abierto";
 	$s_longest_open = "mayor tiempo abierto";
 	$s_average_time = "tiempo promedio";
