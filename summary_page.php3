@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -122,7 +122,7 @@
 		<td>
 			<? ### CATEGORY ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary( "category" ) ?>
+				<? print_category_summary() ?>
 			</table>
 		</td>
 		<td>
