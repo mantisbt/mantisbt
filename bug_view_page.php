@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.15 2002-12-10 12:52:09 jlatour Exp $
+	# $Id: bug_view_page.php,v 1.16 2002-12-10 13:06:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -343,7 +343,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	if ( $f_history ) {
 		include( config_get( 'history_include_file' ) );
 	}
+	
+	print_page_bot1( __FILE__ );
+	compress_stop(); 
 ?>
-
-<?php print_page_bot1( __FILE__ ) ?>
-<?php compress_stop(); ?>
