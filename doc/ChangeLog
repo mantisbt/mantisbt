@@ -3,8 +3,9 @@ Mantis
 01.XX.2002  -   0.17.1
 
  * Fixed missing closing span tag in view_bug_*page.php.
+ * Fixed advanced summaries (jpgraph) for general statistics for all projects.
+ * Fixed small problem in all localization files (for $s_reset_request_msg).
  * Removed site_settings link in print_manage_doc_menu().
- * Fixed advanced summaries (jpgraph) for general statistics for all projects
 
 01.23.2002  -   0.17.0
 
