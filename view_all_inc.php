@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.142 2004-08-01 05:53:01 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.143 2004-08-21 15:49:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,7 +52,7 @@
 ?>
 
 <br />
-<form method="get" action="bug_actiongroup_page.php">
+<form name="bug_action" method="get" action="bug_actiongroup_page.php">
 <table id="buglist" class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
@@ -349,6 +349,12 @@
 	<tr>
 		<td class="left" colspan="<?php echo $col_count-2; ?>">
 <?php
+		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onClick=\"checkall('bug_action', this.form.all_bugs.checked)\"><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
+		} else {
+			echo '&nbsp;';
+		}
+
 		if ( $t_checkboxes_exist ) {
 ?>
 			<select name="action">
