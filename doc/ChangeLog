@@ -67,6 +67,7 @@ Mantis ChangeLog
  * Added $g_handle_bug_threshold to allow controlling the access level required for a user to appear in the assign to list and be able to handle bugs.
  * Added support for custom_constants_inc.php, if this file is found in main directory it gets included after constants_inc.php.  It is useful to define constants for custom enumerations.
  * Added support for custom_config_inc.php, this is to replace config_inc.php.  Although config_inc.php is still supported, it is recommended to use the new name.
+ * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new']. 
 
 2002.05.19  -  0.17.3
 

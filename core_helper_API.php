@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: vboctor $
-	# $Date: 2002-06-13 12:11:05 $
+	# $Date: 2002-06-17 22:40:53 $
 	#
-	# $Id: core_helper_API.php,v 1.47 2002-06-13 12:11:05 vboctor Exp $
+	# $Id: core_helper_API.php,v 1.48 2002-06-17 22:40:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -342,7 +342,7 @@
 	# --------------------
 	# get the color string for the given status
 	function get_status_color( $p_status ) {
-		global $g_status_enum_string;
+		global $g_status_enum_string, $g_status_colors;
 
 		# This code creates the appropriate variable name
 		# then references that color variable
@@ -362,7 +362,13 @@
 
 		$t_color_variable_name = 'g_'.$t_color_str.'_color';
 		global $$t_color_variable_name;
-		return $$t_color_variable_name;
+		if ( isset( $$t_color_variable_name ) ) {
+			return $$t_color_variable_name;
+		} elseif ( isset ( $g_status_colors[$t_color_str] ) ) {
+			return $g_status_colors[$t_color_str];
+		}
+
+		return '#ffffff';
 	}
 	# --------------------
 	# Get the default project of a user
