@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.13 2004-12-18 00:15:12 bpfennigschmidt Exp $
+	# $Id: bug_change_status_page.php,v 1.14 2005-01-08 15:50:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,10 +29,9 @@
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
 		access_denied();
 	}
-	
-	$f_handler_id = gpc_get_int( 'handler_id', auth_get_current_user_id() );
 
-	access_ensure_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id );
+	# get new issue handler if set, otherwise default to original handler	
+	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
 
 	if ( ASSIGNED == $f_new_status ) {
 		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
@@ -116,13 +115,14 @@ if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
 <?php } ?>
 
 <?php
-if ( $t_resolved > $f_new_status ) { ?>
+if ( ( $t_resolved > $f_new_status ) && 
+		access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold')), $f_bug_id) ) { ?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
-	<td colspan="5">
+	<td>
 		<select name="handler_id">
 			<option value="0"></option>
 			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
@@ -130,7 +130,6 @@ if ( $t_resolved > $f_new_status ) { ?>
 	</td>
 </tr>
 <?php } ?>
-
 
 <!-- Custom Fields -->
 <?php
@@ -178,7 +177,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 
 <?php
-if (  $f_new_status >= $t_resolved ) {
+if ( ( $f_new_status >= $t_resolved ) && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )
 		|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
