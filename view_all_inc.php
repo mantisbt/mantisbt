@@ -57,7 +57,7 @@
 <? } else if ( $page_type=="assigned" ) { ?>
 		<td>
 		<select name="f_assign_id">
-			<? print_handler_option_list( $f_assign_id ) ?>
+			<? print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 		</td>
 <? } ?>

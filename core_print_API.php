@@ -242,11 +242,14 @@
 		$t_man = MANAGER;
 		$t_adm = ADMINISTRATOR;
 
-		$query = "SELECT DISTINCT id, username
-			FROM $g_mantis_user_table
-				WHERE 	(access_level=$t_dev OR
-						access_level=$t_man OR
-						access_level=$t_adm)";
+		$query = "SELECT DISTINCT t1.id, t1.username
+				FROM $g_mantis_user_table as t1,
+				$g_mantis_project_user_list_table as t2
+				WHERE ((t1.access_level>=$t_dev) OR
+						(t2.user_id=t1.id AND
+						t2.project_id=$g_project_cookie_val AND
+						t2.access_level>=$t_dev))";
+
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 
