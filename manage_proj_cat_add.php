@@ -11,8 +11,7 @@
 	check_access( MANAGER );
 
 	if ( empty( $f_category ) ) {
-		echo $MANTIS_ERROR[ERROR_EMPTY_FIELD];
-		exit;
+		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
 	$result = 0;

@@ -26,8 +26,7 @@
 		$t_file_path = db_result( $result );
 
 		if ( !file_exists( $t_file_path ) ) {
-			echo $MANTIS_ERROR[ERROR_NO_DIRECTORY];
-			exit;
+			print_mantis_error( ERROR_NO_DIRECTORY );
 		}
 	}
 
