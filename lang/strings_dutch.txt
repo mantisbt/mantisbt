@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: jlatour $
-	# $Date: 2003-02-17 17:24:56 $
+	# $Revision: 1.46 $
+	# $Author: vboctor $
+	# $Date: 2003-02-19 01:37:23 $
 	#
-	# $Id: strings_dutch.txt,v 1.45 2003-02-17 17:24:56 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.46 2003-02-19 01:37:23 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -164,7 +164,6 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FOUT: Kan geen verbinding maken met de FTP server';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FOUT: Er bestaat al een project met die naam.  Ga alstublieft terug om terug om een nieuwe naam te kiezen.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='FOUT: Er is een ongeldige projectnaam opgegeven.  Projectnamen mogen niet leeg zijn.';
-	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'FOUT: Ongeldig upload pad.  De directory bestaat niet of is niet beschrijfbaar door de webserver.';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]		= 'FOUT: Gebruiker niet gevonden.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FOUT: De door uw browser opgeslagen login informatie is ongeldig. Misschien is uw account verwijderd?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -177,6 +176,7 @@
 	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'FOUT: Profiel niet gevonden.';
 	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FOUT: Dat file type mag niet geupload worden.';
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]		= 'FOUT: Dit bestand is al eens geupload. Verwijder het bestand eerst.';
+	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FOUT: Ongeldig upload pad.  De directory bestaat niet of is niet beschrijfbaar door de webserver.';
 	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FOUT: Een bug kan geen duplicaat van zichzelf zijn.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FOUT: Veld niet gevonden';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FOUT: Deze naam is al in gebruik.';

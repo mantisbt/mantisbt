@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.23 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: file_api.php,v 1.24 2003-02-19 01:37:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -382,4 +382,14 @@
 		}
 	}
 
+	# --------------------
+	# checks whether the specified upload path exists and is writable
+	function file_ensure_valid_upload_path( $p_upload_path ) {
+		$c_upload_path	= db_prepare_string( $p_upload_path );
+		if ( !is_blank( $c_upload_path ) ) {
+			if ( !file_exists( $c_upload_path ) || !is_dir( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
+				trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
+			}
+		}
+	}
 ?>

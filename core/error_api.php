@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.19 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: error_api.php,v 1.20 2003-02-19 01:37:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -58,13 +58,13 @@
 				}
 				break;
 			case E_USER_ERROR:
-				$t_string = "MANTIS ERROR #$p_error: " .
+				$t_string = "APPLICATION ERROR #$p_error: " .
 							error_string( $p_error ) .
 							"\n($t_short_file: line $p_line)";
 				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
-				$t_string = "MANTIS WARNING #$p_error: " .
+				$t_string = "APPLICATION WARNING #$p_error: " .
 							error_string( $p_error ) .
 							"\n($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {

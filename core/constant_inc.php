@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.2 2003-02-17 03:56:34 vboctor Exp $
+	# $Id: constant_inc.php,v 1.3 2003-02-19 01:37:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -168,6 +168,7 @@
 	define( 'ERROR_FILE_TOO_BIG',					500 );
 	define( 'ERROR_FILE_NOT_ALLOWED',				501 );
 	define( 'ERROR_FILE_DUPLICATE',					502 );
+	define( 'ERROR_FILE_INVALID_UPLOAD_PATH',			503 );
 
 	# ERROR_BUGNOTE_*
 	define( 'ERROR_BUGNOTE_NOT_FOUND',				600 );
@@ -176,7 +177,6 @@
 	define( 'ERROR_PROJECT_NOT_FOUND',				700 );
 	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',		701 );
 	define( 'ERROR_PROJECT_NAME_INVALID',			702 );
-	define( 'ERROR_PROJECT_INVALID_UPLOAD_PATH',			703 );
 
 	# ERROR_USER_*
 	define( 'ERROR_USER_NAME_NOT_UNIQUE',			800 );

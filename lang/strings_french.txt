@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.51 $
-	# $Author: jlatour $
-	# $Date: 2003-02-18 16:33:18 $
+	# $Revision: 1.52 $
+	# $Author: vboctor $
+	# $Date: 2003-02-19 01:37:23 $
 	#
-	# $Id: strings_french.txt,v 1.51 2003-02-18 16:33:18 jlatour Exp $
+	# $Id: strings_french.txt,v 1.52 2003-02-19 01:37:23 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -167,7 +167,6 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERREUR: Impossible de se connecter au serveur FTP.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERREUR: Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERREUR: Nom de projet invalide.  Les noms de projet ne peuvent être vides.';
-	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERREUR: Utilisateur non trouvé.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERREUR: L\'information de connexion stockée dans votre navigateur est invalide.  Peut être votre compte a t il été supprimé ?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERREUR: Les préférences de cet utilisateur ne peuvent être trouvées.';
@@ -180,6 +179,7 @@
 	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERREUR: Profil non trouvé.';
 	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERREUR: Type de fichier non autorisé pour les dépôts de fichier.';
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERREUR: Fichier dupliqué.  Supprimer d\'abord le premier.';
+	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERREUR: Impossible de marquer ce bug comme doublon de lui même.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERREUR: Champ personnalisé non trouvé.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERREUR: Nom dupliqué.';
