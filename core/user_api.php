@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.52 2003-02-15 22:45:15 jlatour Exp $
+	# $Id: user_api.php,v 1.53 2003-02-16 19:29:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -275,6 +275,8 @@
 	# returns false if error, the generated cookie string if ok
 	function user_signup( $p_username, $p_email=null ) {
 		if ( null === $p_email ) {
+			$p_email = '';
+
 			# @@@ I think the ldap_email stuff is a bit borked
 			#  Where is it being set?  When is it being used?
 			#  Shouldn't we override an email that is passed in here?
@@ -287,21 +289,24 @@
 			#  I'll re-enable this once a plan has been properly formulated for LDAP
 			#  account management and creation.
 
-			$t_email = "";
-/*			if ( ON == config_get( 'use_ldap_email' ) ) {
+/*			$t_email = '';
+			if ( ON == config_get( 'use_ldap_email' ) ) {
 				$t_email = ldap_email_from_username( $p_username );
 			} 
-*/
-			if ( is_blank($t_email) ) {
-				$t_email = $p_email;
+
+			if ( ! is_blank( $t_email ) ) {
+				$p_email = $t_email;
 			}
+*/
 		}
 
-		$t_seed = $t_email.$p_username;
+		$p_email = trim( $p_email );
+
+		$t_seed = $p_email.$p_username;
 		# Create random password
 		$t_password	= auth_generate_random_password( $t_seed );
 
-		return user_create( $p_username, $t_password, $t_email );
+		return user_create( $p_username, $t_password, $p_email );
 	}
 
 	# --------------------
