@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-16 10:12:04 $
+	# $Date: 2002-10-20 20:38:15 $
 	#
-	# $Id: strings_english.txt,v 1.86 2002-09-16 10:12:04 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.87 2002-10-20 20:38:15 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -325,6 +325,8 @@
 
 	# account_update.php
 	$s_account_updated_msg = 'Your account has been successfully updated...';
+	$s_email_updated = 'Email address successfully updated';
+	$s_password_updated = 'Password successfully updated';
 
 	# bug_assign.php
 	$s_bug_assign_msg       = 'Bug has been successfully assigned...';

@@ -8,7 +8,7 @@
 <?php
 	# This page updates a user's information
 	# If an account is protected then changes are forbidden
-	# The page gets redirected back to account_page.php3
+	# The page gets redirected back to account_page.php
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -19,42 +19,34 @@
 
 	$f_email = email_append_domain( $f_email );
 
-	$t_id 			= auth_get_current_user_id();
+	user_set_email( auth_get_current_user_id(), $f_email );
 
-	$t_user_table	= config_get( 'mantis_user_table' );
+	$t_redirect = 'account_page.php';
 
-	$result = 0;
-	# protected account check
-	# If an account is protected then no one can change the information
-	# This is useful for shared accounts or for demo purposes
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	} else {
-		email_ensure_valid( $f_email );
+	print_page_top1();
+	print_meta_redirect( $t_redirect );
+	print_page_top2();
 
-		$c_email	= db_prepare_string( $f_email );
+	echo '<br /><div align="center">';
 
-		# Update email
-	    $query = "UPDATE $t_user_table
-	    		SET email='$c_email'
-	    		WHERE id='$t_id'";
-		$result = db_query( $query );
+	echo lang_get( 'operation_successful' );
+	echo '<br /><ul>';
+	echo '<li>' . lang_get( 'email_updated' ) . '</li>';
 
-		# Update password if the two match and are not empty
-		#@@@ display an error if the passwords don't match?
-		if (( !empty( $f_password ) )&&( $f_password == $f_password_confirm )) {
-			$t_password = auth_process_plain_password( $f_password );
-			$query = "UPDATE $t_user_table
-					SET password='$t_password'
-					WHERE id='$t_id'";
-			$result = db_query( $query );
+	# Update password if the two match and are not empty
+	if ( !empty( $f_password ) ) {
+		if ( $f_password != $f_password_confirm ) {
+			trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+		} else {
+			user_set_password( auth_get_current_user_id(), $f_password );
+
+			echo '<li>' . lang_get( 'password_updated' ) . '</li>';
 		}
-
-	} # end if protected
-
-	if ( $result ) {
-		print_header_redirect( 'account_page.php' );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
 	}
+
+	echo '</ul>';
+
+	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+	echo '</div>';
+	print_page_bot1( __FILE__ );
 ?>
