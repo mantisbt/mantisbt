@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.111 2005-03-21 20:48:56 vwegert Exp $
+	# $Id: email_api.php,v 1.112 2005-04-06 01:24:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -791,20 +791,27 @@
 			$p_recipients = array( $p_recipients );
 		}
 
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_sender_id = auth_get_current_user_id();
+		$t_sender = user_get_name( $t_sender_id );
+
+		$t_subject = email_build_subject( $p_bug_id );
+		$t_date = date( config_get( 'normal_date_format' ) );
+		
 		$result = array();
 		foreach ( $p_recipients as $t_recipient ) {
-
-			lang_push( user_pref_get_language( $t_recipient, bug_get_field( $p_bug_id, 'project_id' ) ) );
-
-			$t_subject = email_build_subject( $p_bug_id );
-			$t_sender = current_user_get_field( 'username' ) . ' <' .
-						current_user_get_field( 'email' ) . '>' ;
-			$t_date = date( config_get( 'normal_date_format' ) );
-			$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
-						lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
+			lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
 			$t_email = user_get_email( $t_recipient );
 			$result[] = user_get_name( $t_recipient );
+
+			if ( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
+				$t_sender_email .= ' <' . current_user_get_field( 'email' ) . '>' ;
+			} else {
+				$t_sender_email = '';
+			}
+			$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender $t_sender_email " .
+						lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
 			$t_contents = $t_header .
 							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
 							" \n\n$p_message";
