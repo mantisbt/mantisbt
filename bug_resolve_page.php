@@ -18,8 +18,8 @@
 <?php # Resolve Form BEGIN ?>
 <p>
 <div align="center">
-<table class="width50" cellspacing="1">
-<form method="post" action="<?php echo $g_bug_resolve_page2 ?>">
+<table class="width75" cellspacing="1">
+<form method="post" action="<?php echo $g_bug_resolve ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
@@ -54,6 +54,16 @@
 	</td>
 </tr>
 <?php } ?>
+<tr class="row-1">
+	<td class="category" colspan="2">
+		<?php echo $s_add_bugnote_title ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="center" colspan="2">
+		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+	</td>
+</tr>
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_resolve_bug_button ?>">
@@ -63,5 +73,9 @@
 </table>
 </div>
 <?php # Resolve Form END ?>
+</form>
+</table>
+
+<?php include( $g_view_bug_inc ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>
