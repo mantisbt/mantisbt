@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: marcelloscata $
-	# $Date: 2004-11-02 19:54:01 $
+	# $Date: 2004-12-06 20:23:33 $
 	#
-	# $Id: strings_italian.txt,v 1.86 2004-11-02 19:54:01 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.87 2004-12-06 20:23:33 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -1110,6 +1110,8 @@ $s_manage_news = 'Gestire le news';
 $s_view_list_of_attachments = 'Visualizzare gli allegare';
 $s_download_attachments = 'Scaricare gli allegati';
 $s_delete_attachments = 'Eliminare gli allegati';
+$s_delete_attachment_button = "Eliminare";
+$s_delete_attachment_sure_msg = "Confermare l'eliminazione di questo allegato?";
 $s_upload_issue_attachments = 'Aggiungere allegati ad una anomalia';
 $s_filters = 'filtri';
 $s_save_filters = 'Salvare nuovi filtri';

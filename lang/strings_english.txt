@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.219 $
-	# $Author: thraxisp $
-	# $Date: 2004-11-30 00:08:05 $
+	# $Revision: 1.220 $
+	# $Author: marcelloscata $
+	# $Date: 2004-12-06 20:23:33 $
 	#
-	# $Id: strings_english.txt,v 1.219 2004-11-30 00:08:05 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.220 2004-12-06 20:23:33 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -1109,6 +1109,8 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
+$s_delete_relationship_button = "Delete";
+$s_delete_relationship_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'filters';
 $s_save_filters = 'Save filters';
