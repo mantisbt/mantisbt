@@ -6,31 +6,25 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.30 2004-10-24 19:28:46 thraxisp Exp $
+	# $Id: proj_doc_add_page.php,v 1.31 2004-12-15 21:40:44 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	require_once( 'core.php' );
-	
-	$t_core_path = config_get( 'core_path' );
-	
-	require_once( $t_core_path.'file_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
-	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
-		access_denied();
-	}
 
-	if ( ! file_allow_project_upload() ) {
+	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
+
+	require_once( $t_core_path.'file_api.php' );
+
+	# Check if project documentation feature is enabled.
+	if ( OFF == config_get( 'enable_project_documentation' ) ||
+		!file_is_uploading_enabled() ||
+		!file_allow_project_upload() ) {
 		access_denied();
 	}
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>

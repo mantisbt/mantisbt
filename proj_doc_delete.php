@@ -6,22 +6,42 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.22 2004-10-08 19:57:46 thraxisp Exp $
+	# $Id: proj_doc_delete.php,v 1.23 2004-12-15 21:40:44 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
 	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+	if ( OFF == config_get( 'enable_project_documentation' ) ||
+		!file_is_uploading_enabled() ||
+		!file_allow_project_upload() ) {
 		access_denied();
 	}
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
 	$f_file_id = gpc_get_int( 'file_id' );
+	$f_title = gpc_get_string( 'title', '' );
+
+	# Confirm with the user
+	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
+		'<br/>' . lang_get( 'filename' ) . ': ' . $f_title,
+		lang_get( 'remove_user_button' ) );
 
 	file_delete( $f_file_id, 'project' );
 
 	$t_redirect_url = 'proj_doc_page.php';
-	print_header_redirect( $t_redirect_url );
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
 ?>
+<br />
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+?>
+</div>
+
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -6,28 +6,27 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.35 2004-10-24 19:28:46 thraxisp Exp $
+	# $Id: proj_doc_edit_page.php,v 1.36 2004-12-15 21:40:44 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'string_api.php' );
-?>
-<?php
+
 	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+	if ( OFF == config_get( 'enable_project_documentation' ) ||
+		!file_is_uploading_enabled() ||
+		!file_allow_project_upload() ) {
 		access_denied();
 	}
 
-	# @@@ Need to obtain the project_id from the file once we have an API for that	
-	access_ensure_project_level( MANAGER );
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
 	$f_file_id = gpc_get_int( 'file_id' );
 
-	$c_file_id = (integer)$f_file_id;
+	$c_file_id = db_prepare_int( $f_file_id );
 
 	$query = "SELECT *
 			FROM $g_mantis_project_file_table
@@ -36,8 +35,8 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	$v_title		= string_attribute( $v_title );
-	$v_description 	= string_textarea( $v_description );
+	$v_title = string_attribute( $v_title );
+	$v_description = string_textarea( $v_description );
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 
@@ -96,7 +95,7 @@
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input name="file" type="file" size="70" />
 	</td>
-	
+
 <tr>
 <tr>
 	<td class="left">
@@ -113,6 +112,7 @@
 
 		<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
+		<input type="hidden" name="title" value="<?php echo $v_title ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
 		</form>
 

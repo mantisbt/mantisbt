@@ -6,23 +6,23 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.42 2004-10-08 19:57:46 thraxisp Exp $
+	# $Id: proj_doc_page.php,v 1.43 2004-12-15 21:40:44 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'string_api.php' );
-?>
-<?php
-	access_ensure_project_level( config_get( 'view_proj_doc_threshold' ) );
 
 	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ) {
+	if ( OFF == config_get( 'enable_project_documentation' ) ||
+		!file_is_uploading_enabled() ||
+		!file_allow_project_upload() ) {
 		access_denied();
 	}
+
+	access_ensure_project_level( config_get( 'view_proj_doc_threshold' ) );
 
 	$t_project_id = helper_get_current_project();
 
@@ -73,6 +73,8 @@
 			if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 				echo '&nbsp;';
 				print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+				echo '&nbsp;';
+				print_bracket_link( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
 			}
 		?>
 		</span>
