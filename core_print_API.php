@@ -14,7 +14,9 @@
 	function print_header_redirect( $p_url ) {
 		global $g_use_iis;
 
-		header( "Status: 302" );
+		if ( $g_use_iis == 0 ) {
+			header( "Status: 302" );
+		}
 		header( "Content-Type: text/html" );
 		header( "Pragma: no-cache" );
 		header( "Expires: Fri, 01 Jan 1999 00:00:00 GMT" );
