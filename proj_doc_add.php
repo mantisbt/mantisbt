@@ -32,18 +32,25 @@
 		$t_file_size = filesize( $f_file );
 
 		switch ( $g_file_upload_method ) {
-			case DISK:	umask( 0333 );  # make read only
-						copy($f_file, $t_file_path.$f_file_name);
-						$query = "INSERT INTO mantis_project_file_table
-								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-								VALUES
-								(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
+			case DISK:	if ( !file_exists( $t_file_path.$f_file_name ) ) {
+							umask( 0333 );  # make read only
+							copy($f_file, $t_file_path.$f_file_name);
+							$query = "INSERT INTO mantis_project_file_table
+									(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+									VALUES
+									(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
+						} else {
+							echo $MANTIS_ERROR[ERROR_DUPLICATE_FILE];
+							exit;
+						}
+						break;
 			case DATABASE:
 						$t_content = addslashes( fread ( fopen( $f_file, "r" ), $t_file_size ) );
 						$query = "INSERT INTO mantis_project_file_table
 								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
 								(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '$t_content')";
+						break;
 		}
 		$result = db_query( $query );
 	}

@@ -19,6 +19,8 @@ Mantis
  * Fixed a problem where users could not report bugs if uploading was disabled.
  * Fixed a minor problem in the print_reporters_option_list().
  * Fixed more CSS issues.
+ * Fixed file uploads to not allow duplicate files when using DISK.
+ * Fixed file upload switch with break statements.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
@@ -32,7 +34,6 @@ Mantis
  * Added CVS linking patch.
  * Added g_hide_closed_default for filter defaults.
  * Added g_show_bug_project_links to toggle project links in All Project mode.
-
 
 01.23.2002  -   0.17.0
 

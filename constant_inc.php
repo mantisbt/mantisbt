@@ -111,4 +111,5 @@
 	define( "ERROR_NO_DIRECTORY",         4 );
 	define( "ERROR_DUPLICATE_CATEGORY",   5 );
 	define( "ERROR_DUPLICATE_VERSION",    6 );
+	define( "ERROR_DUPLICATE_FILE",    7 );
 ?>
