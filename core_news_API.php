@@ -41,7 +41,7 @@
 	}
 	### --------------------
 	### Update news item
-	function news_update_query( $p_id, $p_headline, $p_body ) {
+	function news_update_query( $p_id, $p_headline, $p_body, $p_project_id ) {
 		global $g_mantis_news_table;
 
 		### " character poses problem when editting so let's just convert them to '
@@ -50,7 +50,7 @@
 
 		### Update entry
 		$query = "UPDATE $g_mantis_news_table
-				SET headline='$p_headline', body='$p_body'
+				SET headline='$p_headline', body='$p_body', project_id='$p_project_id'
 	    		WHERE id='$p_id'";
 	    return db_query( $query );
 	}
