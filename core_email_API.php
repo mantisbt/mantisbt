@@ -8,11 +8,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:02 $
+	# $Date: 2002-08-16 07:38:22 $
 	#
-	# $Id: core_email_API.php,v 1.67 2002-08-15 20:35:02 jlatour Exp $
+	# $Id: core_email_API.php,v 1.68 2002-08-16 07:38:22 jlatour Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -454,10 +454,12 @@
 		$c_bug_id = (integer)$p_bug_id;
 
 		$t_message = '';
+		
+		$t_state = PUBLIC;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$c_bug_id'
+				WHERE bug_id='$c_bug_id' AND view_state='$t_state'
 				ORDER BY date_submitted $g_bugnote_order";
 		$result = db_query( $query );
 		$bugnote_count = db_num_rows( $result );

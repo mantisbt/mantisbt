@@ -40,7 +40,7 @@ Mantis ChangeLog
  * Added support for custom_strings_inc.php, if this file is found in main directory it gets included after lang/strings_xxxx.php to allow overriding of strings without modifying the language files.  $g_active_language can be used to check the active language.
  * Added support for modifying the reporter of a bug.
  * Added support for optional compression of html output ($g_compress_html).  This option is OFF by default since it requires PHP 4.04.
- * Added support for private bugnotes.
+ * Added support for private bugnotes. At present these bugnotes are omitted from sent emails, a future release will put private bugnotes in emails to those who should see them.
  * Added support for supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables were deprecated. In the future the extract() call should be made obsolete by the use of $_GET and such throughout Mantis.
  * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
  * Added validation checks for all inputs that are passed on to database queries.
