@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.20 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: file_api.php,v 1.21 2003-01-29 00:53:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -37,6 +37,10 @@
 				  WHERE bug_id='$c_bug_id'";
 		$result = db_query( $query );
 
+		$t_bug = bug_get( $c_bug_id, false );
+		$t_can_delete = ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
+				access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) );
+
 		$num_files = db_num_rows( $result );
 		for ( $i = 0 ; $i < $num_files ; $i++ ) {
 			$row = db_fetch_array( $result );
@@ -47,7 +51,7 @@
 
 			echo "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
-			if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+			if ( $t_can_delete ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 			
