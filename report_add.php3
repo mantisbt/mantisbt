@@ -28,17 +28,25 @@
 
 	### required fields ok, proceeding
 	if ( !$check_failed ) {
-		$query = "SELECT *
+		### Get user id
+		$query = "SELECT id
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
-		$result = mysql_query( $query );
-		$row = mysql_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		$result = db_mysql_query( $query );
+		$u_id = mysql_result( $result, 0 );
 
+		### Make strings safe for database
 		$f_summary = string_safe( $f_summary );
 		$f_description = string_safe( $f_description );
 		$f_additional_info = string_safe( $f_additional_info );
+		$f_steps_to_reproduce = string_safe( $f_steps_to_reproduce );
+		$f_os = string_safe( $f_os );
+		$f_osbuild = string_safe( $f_osbuild );
+		$f_platform = string_safe( $f_platform );
+		$f_version = string_safe( $f_version );
+		$f_build = string_safe( $f_build );
 
+		### Insert text information
 		$query = "INSERT
 				INTO $g_mantis_bug_text_table
 				( id, description, steps_to_reproduce, additional_information )
@@ -47,14 +55,17 @@
 				'$f_additional_info' )";
 		$result = mysql_query( $query );
 
+		### MAJOR BUG!!! WHAT IF MULTIPLE REPORTS AT SAME TIMES?!?!?
+		### FIX ME### FIX ME### FIX ME### FIX ME### FIX ME### FIX ME
+		### Get the id of the text information we just inserted
 		$query = "SELECT id
 				FROM $g_mantis_bug_text_table
 				ORDER BY id DESC
 				LIMIT 1";
 		$result = mysql_query( $query );
-		$row = mysql_fetch_array( $result );
-		$id = $row["id"];
+		$t_id = mysql_result( $result, 0 );
 
+		### Insert the rest of the data
 		$query = "INSERT
 				INTO $g_mantis_bug_table
 				( id, reporter_id, handler_id, duplicate_id, priority, severity,
@@ -62,9 +73,9 @@
 				date_submitted, last_updated, eta, bug_text_id, os, os_build,
 				platform, version, build, votes, summary )
 				VALUES
-				( null, '$v_id', '0000000', '0000000', 'normal', '$f_severity',
+				( null, '$u_id', '0000000', '0000000', 'normal', '$f_severity',
 				'$f_reproducibility', 'new', 'open', 'minor fix', '$f_category',
-				NOW(), NOW(), NOW(), '$id', '$f_os', '$f_osbuild',
+				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',
 				1, '$f_summary' )";
 		$result = mysql_query( $query );
