@@ -3,11 +3,11 @@
 # http://www.phpmyadmin.net
 #
 # Host: localhost
-# Generation Time: Jul 11, 2004 at 04:45 PM
+# Generation Time: Jul 19, 2004 at 01:34 AM
 # Server version: 4.0.20
 # PHP Version: 4.3.7
 # 
-# Database : `mantisblank`
+# Database : `mantis`
 # 
 
 # --------------------------------------------------------
@@ -90,7 +90,9 @@ CREATE TABLE mantis_bug_relationship_table (
   source_bug_id int(7) unsigned NOT NULL default '0',
   destination_bug_id int(7) unsigned NOT NULL default '0',
   relationship_type int(2) NOT NULL default '0',
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  KEY source_bug_id (source_bug_id),
+  KEY destination_bug_id (destination_bug_id)
 ) TYPE=MyISAM;
 
 #
@@ -733,6 +735,9 @@ INSERT INTO mantis_upgrade_table VALUES ('version_add_version_', 'Add id to vers
 INSERT INTO mantis_upgrade_table VALUES ('version_add_project_', 'Add a unique index for project_id + version combination.');
 INSERT INTO mantis_upgrade_table VALUES ('version_add_descript', 'Add description field to versions.');
 INSERT INTO mantis_upgrade_table VALUES ('version_add_released', 'Add released flag to determine whether the version was released or still a future release.');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-1', 'Add index on source_bug_id field in mantis_bug_relationship_table');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-2', 'Add index on destination_bug_id field in mantis_bug_relationship_table');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-3', 'Translate duplicate id information in a new duplicate relationship');
 
 # --------------------------------------------------------
 
