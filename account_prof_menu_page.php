@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.36 2005-02-25 00:23:48 jlatour Exp $
+	# $Id: account_prof_menu_page.php,v 1.37 2005-03-21 12:44:20 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	# This page allos users to add a new profile which is POSTed to
+	# This page allows users to add a new profile which is POSTed to
 	# account_prof_add.php
 
 	# Users can also manage their profiles

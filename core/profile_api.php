@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.11 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: profile_api.php,v 1.12 2005-03-21 12:44:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -32,8 +32,21 @@
 			user_ensure_unprotected( $p_user_id );
 		}
 
-		# platform, os, os_build cannot be blank
-		if ( is_blank( $c_platform ) || is_blank( $c_os ) || is_blank( $c_os_build ) ) {
+		# platform cannot be blank
+		if ( is_blank( $c_platform ) ) {
+			error_parameters( lang_get( 'platform' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		# os cannot be blank
+		if ( is_blank( $c_os ) ) {
+			error_parameters( lang_get( 'operating_system' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		# os_build cannot be blank
+		if ( is_blank( $c_os_build ) ) {
+			error_parameters( lang_get( 'version' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
@@ -88,8 +101,21 @@
 			user_ensure_unprotected( $p_user_id );
 		}
 
-		# platform, os, os_build cannot be blank
-		if ( is_blank( $c_platform ) || is_blank( $c_os ) || is_blank( $c_os_build ) ) {
+		# platform cannot be blank
+		if ( is_blank( $c_platform ) ) {
+			error_parameters( lang_get( 'platform' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		# os cannot be blank
+		if ( is_blank( $c_os ) ) {
+			error_parameters( lang_get( 'operating_system' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		# os_build cannot be blank
+		if ( is_blank( $c_os_build ) ) {
+			error_parameters( lang_get( 'version' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
@@ -186,7 +212,8 @@
 	# --------------------
 	# Returns whether the specified profile is global
 	function profile_is_global( $p_profile_id ) {
-		return 0 < count( profile_get_row( ALL_USERS, $p_profile_id ) );
+		$t_row = profile_get_row( ALL_USERS, $p_profile_id );
+		return ( $t_row !== false );
 	}
 	#===================================
 	# Data Modification
