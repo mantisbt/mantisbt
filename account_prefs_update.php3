@@ -12,8 +12,7 @@
 	## update preferences
 	$query = "UPDATE $g_mantis_user_pref_table
 			SET advanced_report='$f_advanced_report',
-				advanced_view='$f_advanced_view',
-				default_project_id='$f_project_id'
+				advanced_view='$f_advanced_view'
 			WHERE id='$f_id'";
 	$result = db_query( $query );
 ?>
