@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.43 2003-02-18 02:18:02 jfitzell Exp $
+	# $Id: print_api.php,v 1.44 2003-02-19 07:36:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -198,11 +198,9 @@
 				$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
-							FROM	$g_mantis_project_user_list_table l,
-									$g_mantis_project_table p
-							WHERE	l.project_id='$g_project_cookie_val' AND
-									p.id=l.project_id AND
-									l.user_id='$v_id'";
+							FROM	$g_mantis_project_user_list_table
+							WHERE	project_id='$g_project_cookie_val' AND
+									user_id='$v_id'";
 					$result = db_query( $query );
 					$count = db_num_rows( $result );
 					if ( $count > 0 ){
@@ -214,12 +212,10 @@
 
 				} else {
 					$query = "SELECT COUNT(*)
-							FROM	$g_mantis_project_user_list_table l,
-									$g_mantis_project_table p
-							WHERE	l.project_id='$g_project_cookie_val' AND
-									p.id=l.project_id AND
-									l.user_id='$v_id' AND
-									l.access_level>='$t_rep'";
+							FROM	$g_mantis_project_user_list_table
+							WHERE	project_id='$g_project_cookie_val' AND
+									user_id='$v_id' AND
+									access_level>='$t_rep'";
 					$result = db_query( $query );
 					$count = db_result( $result, 0, 0 );
 					if ( $count > 0 ) {
