@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.22 2004-07-18 09:58:29 vboctor Exp $
+	# $Id: constant_inc.php,v 1.23 2004-07-20 11:11:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -246,6 +246,7 @@
 	define( 'ERROR_SPONSORSHIP_AMOUNT_TOO_LOW',			1702 );
 	define( 'ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW',	1703 );
 	define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW',	1704 );
+	define( 'ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL',	1705 );
 
 	# MASC RELATIONSHIP
 	# ERROR RELATIONSHIP

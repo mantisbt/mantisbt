@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_set_sponsorship.php,v 1.1 2004-05-09 02:24:18 vboctor Exp $
+	# $Id: bug_set_sponsorship.php,v 1.2 2004-07-20 11:11:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,12 +38,17 @@
 		}
 	} else {
 		# add sponsorship
-		$sponsorship = new SponsorshipData;
-		$sponsorship->bug_id = $f_bug_id;
-		$sponsorship->user_id = auth_get_current_user_id();
-		$sponsorship->amount = $f_amount;
+		$t_user = auth_get_current_user_id();
+		if ( is_blank( user_get_email( $t_user ) ) ) {
+			trigger_error( ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL, ERROR );
+		}else{
+			$sponsorship = new SponsorshipData;
+			$sponsorship->bug_id = $f_bug_id;
+			$sponsorship->user_id = $t_user;
+			$sponsorship->amount = $f_amount;
 
-		sponsorship_set( $sponsorship );
+			sponsorship_set( $sponsorship );
+		}
 	}
 
 	$t_referrer = $_SERVER['HTTP_REFERER'];
