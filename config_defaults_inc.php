@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.111 2003-03-10 04:03:58 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.112 2003-03-10 09:40:53 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -423,9 +423,6 @@
 	# how many reporters to show
 	# this is useful when there are hundreds of reporters
 	$g_reporter_summary_limit	= 10;
-
-	# default space padding (increase when bug count goes over 100,000)
-	$g_summary_pad				= 5;
 
 	# --- summary date displays -------
 	# date lengths to count bugs by (in days)

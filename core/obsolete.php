@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.18 2003-03-05 21:37:31 jfitzell Exp $
+	# $Id: obsolete.php,v 1.19 2003-03-10 09:40:55 int2str Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -74,4 +74,6 @@
 	config_obsolete( 'bug_file_upload_inc', '' );
 
 	config_obsolete( 'show_source', '' );
+
+	config_obsolete( 'summary_pad', '' );
 ?>
