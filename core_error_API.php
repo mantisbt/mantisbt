@@ -6,16 +6,19 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-23 07:08:40 $
+	# $Date: 2002-08-23 09:52:34 $
 	#
-	# $Id: core_error_API.php,v 1.1 2002-08-23 07:08:40 jfitzell Exp $
+	# $Id: core_error_API.php,v 1.2 2002-08-23 09:52:34 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Error API
 	###########################################################################
+
+	# set up error_handler() as the new default error handling function
+	set_error_handler( 'error_handler' );
 
 	# ---------------
 	# Default error handler
@@ -31,6 +34,7 @@
 
 		$t_short_file = basename( $p_file );
 
+		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
 				$t_display = "SYSTEM WARNING: $p_error <br> ($t_short_file: line $p_line)";
@@ -59,6 +63,7 @@
 		}
 
 		if ( 'halt' == $g_display_errors[$p_type] ) {
+			# clear the output buffer so we can start from scratch
 			ob_end_clean();
 
 			print_page_top1();
@@ -104,11 +109,8 @@
 			# do nothing
 		}
 	}
-
-	# set up our new error handler
-	set_error_handler( 'error_handler' );
-
-	# return an error string (in the current language) for the given error
+	# ---------------
+	# returns an error string (in the current language) for the given error
 	function error_string( $p_error ) {
 		global $MANTIS_ERROR;
 
