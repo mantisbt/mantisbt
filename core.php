@@ -30,6 +30,14 @@
 		require_once( 'config_inc.php' );
 	}
 
+	# Allow an environment variable (defined in an Apache vhost for example)
+	#  to specify a config file to load to override other local settings
+	$t_local_config = getenv( 'MANTIS_CONFIG' );
+	if( $t_local_config && file_exists( $t_local_config ) ){
+		require_once( $t_local_config );
+	}
+
+
 	# Load rest of core in seperate directory.
 	require_once( $g_core_path.'API.php');
 	# --------------------

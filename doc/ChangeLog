@@ -132,6 +132,7 @@ Mantis ChangeLog
  * Added limit_email_domain option to only allow emails in the given domain
  * Added allow_blank_email option to allow blank email addresses (ie none specified)
  * Renamed config_defaults_inc.php to config_defaults_inc.php.dist to protect CVS users.
+ * Look in environment variable MANTIS_CONFIG to find a config file to load after custom_config_inc.php (useful for vhosts)
 
 2002.08.23  -  0.17.5
  * Corrected bug_delete.php and bug_delete_page.php, which ignored the $g_allow_bug_delete_access_level setting.
