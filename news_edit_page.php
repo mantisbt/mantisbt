@@ -52,7 +52,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo lang_get( 'headline' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'headline' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
@@ -60,7 +60,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'body' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'body' ) ?>
 	</td>
 	<td>
 		<textarea name="body" cols="60" rows="10" wrap="virtual"><?php echo $v_body ?></textarea>
@@ -102,7 +102,10 @@
 	</td>
 </tr>
 <tr>
-	<td class="center" colspan="2">
+	<td>
+		<span class="required">* <?php echo lang_get( 'required' ) ?></span>
+	</td>
+	<td class="center">
 		<input type="submit" value="<?php echo lang_get( 'update_news_button' ) ?>" />
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.8 2003-01-08 02:42:48 jfitzell Exp $
+	# $Id: news_api.php,v 1.9 2003-02-19 13:14:37 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,6 +22,10 @@
 		$c_announcement	= db_prepare_bool( $p_announcement );
 		$c_headline		= db_prepare_string( $p_headline );
 		$c_body			= db_prepare_string( $p_body );
+
+		if ( is_blank( $c_headline ) || is_blank( $c_body ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
@@ -63,6 +67,10 @@
 		$c_announcement	= db_prepare_bool( $p_announcement );
 		$c_headline		= db_prepare_string( $p_headline );
 		$c_body			= db_prepare_string( $p_body );
+
+		if ( is_blank( $c_headline ) || is_blank( $c_body ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
