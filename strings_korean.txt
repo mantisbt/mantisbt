@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# KKorean: aporie@linux.ne.kr
+	# Korean: aporie@linux.ne.kr
 ?>
 <?
 	# General Strings
@@ -17,20 +17,20 @@
 
 	$s_user_no_longer_exists = "사용자가 더이상 존재하지 않습니다.";
 
-	$s_administrator = "administrator";
+	$s_administrator = "관리자";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
-	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
-	$s_project_view_state_enum_string = "10:public,50:private";
+	$s_access_levels_enum_string      = "10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자";
+	$s_project_status_enum_string     = "10:개발버전,30:배포판,50:안정버전,70:구버전";
+	$s_project_view_state_enum_string = "10:공개,50:비공개";
 
-	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
-	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate";
-	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
-	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+	$s_priority_enum_string           = "10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시";
+	$s_severity_enum_string           = "10:눈에 띄는 버그,20:사소한 버그,30:문자열 오류,40:트윅,50:중요하지 않은 버그,60:중요한 버그,70:프로그램 크래시,80:프로그램에 큰 장애";
+	$s_reproducibility_enum_string    = "10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않은 기능,90:다시 만들수 없음";
+	$s_status_enum_string             = "10:새로운 버그,20:피드백,30:버그 인정,40:버그 확인,50:할당된 버그,80:해결된 버그,90:폐쇄된 버그";
+	$s_resolution_enum_string         = "10:개설,20:수정됨,30:다시 발생,40:다시 만들 수 없음,50:수정할수 없음,60:중복,70:버그 아님,80:중지(suspended),90:수정될수 없음";
+	$s_projection_enum_string         = "10:없음,30:트윅,50:사소한 수정,70:새로 작성,90:재 디자인";
+	$s_eta_enum_string                = "10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달";
 
 	# Email Strings
 	$s_new_account_subject = "당신의 새로운 계정 ";
@@ -90,12 +90,12 @@
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "기본 계정 설정상태";
-	$s_default_project = "Default Project";
+	$s_default_project = "기본 프로젝트";
 	$s_advanced_report = "상세 보고";
 	$s_advanced_view = "자세히 보기";
-	$s_advanced_update = "Advanced Update";
-	$s_refresh_delay = "Refresh Delay";
-	$s_redirect_delay = "Redirect Delay";
+	$s_advanced_update = "상세한 업데이트";
+	$s_refresh_delay = "리플레시 하지 않음 ";
+	$s_redirect_delay = "리다이렉트 하지 않음";
 	$s_email_on_new = "Email on New";
 	$s_email_on_assigned = "Email on Assigned";
 	$s_email_on_feedback = "Email on Feedback";
@@ -105,7 +105,7 @@
 	$s_email_on_bugnote_added = "Email on Bugnote Added";
 	$s_email_on_status_change = "Email on Status Change";
 	$s_email_on_priority_change = "Email on Priority Change";
-	$s_language = "Language";
+	$s_language = "언어";
 	$s_default_project = "기본 프로젝트";
 	$s_update_prefs_button = "설정상태 갱신";
 	$s_reset_prefs_button = "설정상태 초기화";
@@ -153,7 +153,7 @@
 	$s_bug_assign_msg       = "버그가 할당되었습니다...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Bug has been closed...";
+	$s_bug_close_msg       = "버그가 해결(close)되었습니다...";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "버그정보가 삭제되었습니다...";
@@ -163,12 +163,12 @@
 	$s_delete_bug_button = "버그 삭제";
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "File upload successful";
+	$s_file_upload_msg = "파일이 업로드되었습니다.";
 
 	# bug_file_upload_inc.php3
-	$s_upload_file = "Upload File";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file = "파일 업로드";
+	$s_select_file = "파일 선택";
+	$s_upload_file_button = "파일 업로드";
 
 	# bug_reopen_page.php3
 	$s_bug_reopened_msg = "버그가 다시 발생했습니다...";
@@ -204,7 +204,7 @@
 	$s_status = "상태";
 	$s_duplicate_id = "중복된 버그 번호";
 	$s_os = "운영체제";
-	$s_projection = "Projection";
+	$s_projection = "프로젝션";
 	$s_os_version = "버전";
 	$s_eta = "처리예정시간";
 	$s_product_version = "제품 번호";
@@ -252,7 +252,7 @@
 	$s_signup_link = "사용자 신규 등록";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Select Project";
+	$s_select_project_button = "프로젝트 선택";
 
 	# logout_page.php3
 	$s_logged_out_title = "로그 아웃...";
@@ -260,8 +260,8 @@
 	$s_here = "여기";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Open and assigned to me";
-	$s_open_and_reported_to_me = "Open and reported by me";
+	$s_open_and_assigned_to_me = "나에게 할당된 버그";
+	$s_open_and_reported_to_me = "내가 보고한 버그";
 	$s_newer_news_link = "새로운 뉴스";
 	$s_older_news_link = "이전 뉴스";
 
@@ -277,8 +277,8 @@
 	$s_create_user_button = "사용자 생성";
 
 	# manage_page.php3
-	$s_hide_disabled = "Hide Disabled";
-	$s_filter_button = "Filter";
+	$s_hide_disabled = "Disabled 숨기기";
+	$s_filter_button = "필터";
 	$s_create_new_account_link = "계정 생성";
 	$s_projects_link = "프로젝트";
 	$s_documentation_link = "문서";
@@ -295,7 +295,7 @@
 	$s_project_added_msg = "프로젝트가 추가되었습니다....";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERROR: This is a duplicate category.";
+	$s_duplicate_category = "오류: 중복된 카테고리입니다.";
 	$s_category_added_msg = "카테고리가 추가되었습니다...";
 
 	# manage_project_category_delete.php3
@@ -337,7 +337,7 @@
 	# manage_project_menu_page.php3
 	$s_add_project_title = "프로젝트 추가";
 	$s_access_threshold = "Access Threshold";
-	$s_upload_file_path = "Upload File Path";
+	$s_upload_file_path = "업르드 파일 경로";
 	$s_add_project_button = "프로젝트 추가";
 	$s_projects_title = "프로젝트";
 	$s_name = "이름";
@@ -371,7 +371,7 @@
 	$s_delete_account_sure_msg = "이 계정을 삭제하시겠습니까?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = "한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.";
 
 	# manage_user_page.php3
 	$s_edit_user_title = "사용자 편집";
@@ -433,52 +433,52 @@
 	$s_back_link = "Back";
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "File upload successful";
+	$s_file_uploaded_msg = "파일이 업로드되었습니다.";
 
 	# proj_doc_add_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_title = "Title";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file_title = "파일 업로드";
+	$s_title = "제목";
+	$s_select_file = "파일 선택";
+	$s_upload_file_button = "파일 업로드";
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "Project file deleted";
+	$s_project_file_deleted_msg = "프로제트 파일 삭제됨";
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+	$s_confirm_file_delete_msg = "이 파일을 삭제하시겠습니까?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_filename = "Filename";
-	$s_file_update_button = "Update File";
-	$s_file_delete_button = "Delete File";
+	$s_upload_file_title = "파일 업로드";
+	$s_filename = "파일 이름";
+	$s_file_update_button = "파일 갱신";
+	$s_file_delete_button = "파일 삭제";
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "Project Documentation";
-	$s_user_documentation = "User Documentation";
-	$s_project_documentation = "Project Documentation";
-	$s_add_file = "Add File";
+	$s_project_documentation_title = "프로젝트 문서화";
+	$s_user_documentation = "사용자 문서";
+	$s_project_documentation = "프로젝트 문서";
+	$s_add_file = "파일 추가";
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "Project update successful";
+	$s_project_document_updated = "프로젝트가 갱신되었습니다.";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Successfully added user to project";
+	$s_project_user_added_msg = "프로젝트에 사용자가 추가되었습니다.";
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "Successfully removed user from project";
+	$s_project_removed_user_msg = "프로젝트에 사용자가 제거되었습니다.";
 
 	# proj_user_delete_page.php3
-	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+	$s_remove_user_sure_msg = "현재 사용자를 제거하시겠습니까?";
 
 	# proj_user_menu_page.php3
-	$s_add_user_title = "Add user to project";
-	$s_add_user_button = "Add User";
-	$s_project_selection_title = "Project Selection";
-	$s_remove_link = "remove";
+	$s_add_user_title = "프로젝트에 사용자 추가";
+	$s_add_user_button = "사용자 추가";
+	$s_project_selection_title = "프로젝트 선택";
+	$s_remove_link = "삭제";
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "Successfully updated user";
+	$s_updated_user_msg = "사용자 정보가 갱신되었습니다.";
 
 	# report_add.php3
 	$s_report_add_error_msg = "에러: 리포트에 잘못된 내용이 있습니다.";
@@ -506,12 +506,12 @@
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "상세 보고";
-	$s_upload_file = "Upload File";
+	$s_upload_file = "파일 업로드";
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
-	$s_selected_project = "Selected project";
-	$s_valid_project_msg = "You must choose a valid project";
+	$s_selected_project = "현재 프로젝트";
+	$s_valid_project_msg = "올바른 프로젝트를 선택해야 합니다.";
 
 	# show_source_page.php3
 	$s_show_source_for_msg = "소스를 보는기능은 ";
@@ -522,9 +522,9 @@
 	$s_invalid_email = "이메일 주소가 올바릅니까";
 	$s_duplicate_username = "중복된 사용자입니다. 다른 이름을 선택하세요";
 	$s_account_create_fail = "사용자 계정생성에 실패했습니다.";
-	$s_account_added = "Account was successfully added.";
-	$s_password_emailed_msg = "Your password will be emailed to you.";
-	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
+	$s_account_added = "새로운 계정이 추가되었습니다.";
+	$s_password_emailed_msg = "패스워드가 메일로 전송될 것입니다.";
+	$s_no_reponse_msg = "만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.";
 
 	# signup_page.php3
 	$s_signup_info = "로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.";
@@ -532,16 +532,16 @@
 	$s_signup_button = "Signup";
 
 	# site_settings_edit_page.php3
-	$s_edit_site_settings_title = "Edit Site Settings";
-	$s_save_settings_button = "Save Settings";
+	$s_edit_site_settings_title = "사이트 설정 수정";
+	$s_save_settings_button = "변경상태 저장";
 
 	# site_settings_page.php3
-	$s_site_settings_title = "Site Settings";
-	$s_system_info_link = "System Info";
-	$s_site_settings_link = "Site Settings";
+	$s_site_settings_title = "사이트 설정";
+	$s_system_info_link = "시스템 정보";
+	$s_site_settings_link = "사이트 설정";
 
 	# site_settings_update.php3
-	$s_site_settings_updated_msg = "Site settings have been updated";
+	$s_site_settings_updated_msg = "사이트 설정상태가 변경되었습니다.";
 
 	# summary_page.php3
 	$s_summary_title = "요약";
@@ -564,7 +564,7 @@
 	$s_all_bugs_link = "전체 버그";
 	$s_reported_bugs_link = "보고된 버그";
 	$s_assigned_bugs_link = "할당된 버그";
-	$s_unassigned_bugs_link = "Unassigned Bugs";
+	$s_unassigned_bugs_link = "할당되지 않은 버그";
 	$s_any = "모두";
 	$s_show = "갯수";
 	$s_changed = "변경된(시간)";
