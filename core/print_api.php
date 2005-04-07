@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.124 2005-04-04 21:09:46 jlatour Exp $
+	# $Id: print_api.php,v 1.125 2005-04-07 22:48:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -177,7 +177,7 @@
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
 			$t_sort_name = $t_user_name;
-			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
+			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] <> "" ) && ( ON == config_get( 'show_realname' ) ) ){
 				$t_user_name = string_attribute( $t_user['realname'] );
 				if ( ON == config_get( 'sort_by_last_name') ) {
 					$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
@@ -766,15 +766,30 @@
 					u.access_level<'$t_adm'
 				ORDER BY u.realname, u.username";
 		$result = db_query( $query );
+		$t_display = array();
+		$t_sort = array();
+		$t_users = array();
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_username = string_attribute(	$row['username'] );
-			if ( $row['realname'] > "" ) {
-				$t_username .= " (" . string_attribute( $row['realname'] ) . ")";
+			$t_users[] = $row['id'];
+			$t_user_name = string_attribute( $row['username'] );
+			$t_sort_name = $t_user_name;
+			if ( ( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && ( ON == config_get( 'show_realname' ) ) ){
+				$t_user_name = string_attribute( $row['realname'] );
+				if ( ON == config_get( 'sort_by_last_name') ) {
+					$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+					$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
+				} else {
+					$t_sort_name = strtolower( $t_user_name );
+				}
 			}
-			$t_user_id = $row['id'];
-			PRINT "<option value=\"$t_user_id\">$t_username</option>";
+			$t_display[] = $t_user_name;
+			$t_sort[] = $t_sort_name;
+		}
+		array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+		for ($i = 0; $i < count( $t_sort ); $i++ ) {
+			PRINT '<option value="' . $t_users[$i] . '">' . $t_display[$i] . '</option>';
 		}
 	}
 	# --------------------
@@ -802,7 +817,7 @@
 		}
 	}
 	# --------------------
-	# list of projects that a user is NOT in
+	# list of projects that a user is in
 	function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
 		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_mantis_project_table = config_get( 'mantis_project_table' );
