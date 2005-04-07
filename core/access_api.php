@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.41 2005-04-03 12:43:33 jlatour Exp $
+	# $Id: access_api.php,v 1.42 2005-04-07 22:44:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -215,7 +215,7 @@
 		}
 
 		$t_global_access_level = access_get_global_level( $p_user_id );
-		if ( ALL_PROJECTS == $p_project_id ) {
+		if ( ( ALL_PROJECTS == $p_project_id ) || ( ADMINISTRATOR == $t_global_access_level ) ) {
             return $t_global_access_level;
 		} else {
 			$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );
