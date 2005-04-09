@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.51 2005-04-01 02:43:15 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.52 2005-04-09 12:43:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -122,10 +122,10 @@
 	# sort direction
 	$f_sort_d					= gpc_get_string( 'sort', '' );
 	$f_dir_d					= gpc_get_string( 'dir', '' );
-	$f_sort_1				= gpc_get_string( 'sort_1', 'last_updated' );
-	$f_dir_1				= gpc_get_string( 'dir_1', 'DESC' );
-	$f_sort_2				= gpc_get_string( 'sort_2', '' );
-	$f_dir_2				= gpc_get_string( 'dir_2', '' );
+	$f_sort_1				= gpc_get_string( 'sort_0', 'last_updated' );
+	$f_dir_1				= gpc_get_string( 'dir_0', 'DESC' );
+	$f_sort_2				= gpc_get_string( 'sort_1', '' );
+	$f_dir_2				= gpc_get_string( 'dir_1', '' );
 
 	# date values
 	$f_start_month			= gpc_get_string( 'start_month', date( 'm' ) );

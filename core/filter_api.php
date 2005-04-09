@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.96 2005-04-05 17:10:54 thraxisp Exp $
+	# $Id: filter_api.php,v 1.97 2005-04-09 12:43:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -876,8 +876,6 @@
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		$t_project_id = helper_get_current_project();
 
-		$t_sort = $t_filter['sort'];
-		$t_dir = $t_filter['dir'];
 		$t_view_type = $t_filter['_view_type'];
 
 		$t_tdclass = 'small-caption';
