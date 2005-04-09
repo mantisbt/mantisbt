@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.93 2005-04-03 12:43:36 jlatour Exp $
+	# $Id: user_api.php,v 1.94 2005-04-09 22:01:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -145,6 +145,7 @@
 
 		$c_realname = db_prepare_string( $p_realname );
 		# allow realname to match username
+		$t_count = 0;
 		if ( $p_realname <> $p_username ) {
 			# check realname does not match an existing username
 			if ( user_get_id_by_name( $p_realname ) ) {
@@ -176,7 +177,7 @@
 	# Check if the realname is a unique
 	# Trigger an error if the username is not valid
 	function user_ensure_realname_unique( $p_username, $p_realname ) {
-		if ( 0 == user_is_name_valid( $p_username, $p_realname ) ) {
+		if ( 1 < user_is_realname_unique( $p_username, $p_realname ) ) {
 			trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
 		}
 	}
