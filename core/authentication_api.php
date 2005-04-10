@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.46 2005-01-28 21:56:56 vboctor Exp $
+	# $Id: authentication_api.php,v 1.47 2005-04-10 14:53:00 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -169,8 +169,15 @@
 	# Logout the current user and remove any remaining cookies from their browser
 	# Returns true on success, false otherwise
 	function auth_logout() {
-		auth_clear_cookies();
-		helper_clear_pref_cookies();
+        global $g_cache_current_user_id;
+        
+        # clear cached userid
+        $g_cache_current_user_id = null;
+        
+        # clear cookies, if they were set  
+        if (auth_clear_cookies()) {
+            helper_clear_pref_cookies();
+        }
 		return true;
 	}
 
@@ -286,16 +293,23 @@
 	}
 
 	# --------------------
-	# Clear login cookies
+	# Clear login cookies, return true if they were cleared
 	function auth_clear_cookies() {
 		global $g_script_login_cookie;
 
-		$g_script_login_cookie = null;
+        $t_cookies_cleared = false;
+        
+        # clear cookie, if not logged in from script
+        if ($g_script_login_cookie == null) {
+		    $t_cookie_name =  config_get( 'string_cookie' );
+		    $t_cookie_path = config_get( 'cookie_path' );
 
-		$t_cookie_name =  config_get( 'string_cookie' );
-		$t_cookie_path = config_get( 'cookie_path' );
-
-		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
+		    gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
+            $t_cookies_cleared = true;
+        } else {
+            $g_script_login_cookie = null;
+        }
+        return $t_cookies_cleared;
 	}
 
 	# --------------------
