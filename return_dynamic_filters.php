@@ -92,6 +92,9 @@
 	#
 	function act(){
 		if(isset($_GET['filter_target'])){
+		    if ( ! headers_sent() ) {
+			    header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
+			}
 			$filter = $_GET['filter_target'];
 			$t_functionName = 'print_filter_'. substr($filter,0,-7);
 			echo "<!-- $filter -->";
