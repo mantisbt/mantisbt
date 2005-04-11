@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.92 2005-01-09 18:56:56 thraxisp Exp $
+	# $Id: bug_api.php,v 1.93 2005-04-11 17:05:47 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -409,6 +409,10 @@
 
 		# log new bug
 		history_log_event_special( $t_bug_id, NEW_BUG );
+		
+		# log changes, if any (compare happens in history_log_event_direct)
+		history_log_event_direct( $t_bug_id, 'status', config_get( 'bug_submit_status' ), $t_status );
+		history_log_event_direct( $t_bug_id, 'handler_id', 0, $c_handler_id );
 
 		return $t_bug_id;
 	}
