@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.4 2005-04-03 12:43:31 jlatour Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.5 2005-04-11 17:08:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -126,11 +126,7 @@
 			echo '</select> </td>';
 		    $t_show_submit = true;
 		} else {
-		    if ( ON == config_get( $p_threshold ) ) {
-			    $t_value = '<td>' . get_enum_to_string( lang_get( $p_enum . '_enum_string' ), config_get_access( $p_threshold ) ) . '&nbsp;</td>';
-		    } else {
-			    $t_value = '&nbsp;';
-		    }
+			$t_value = get_enum_to_string( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;';
 		    echo '<td class="left" colspan="' . count( $t_access_levels ) . '">' . $t_value . '</td>';
         }
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.4 2005-03-23 23:57:51 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.5 2005-04-11 17:08:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -132,10 +132,10 @@
 			list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
 			if ( NEW_ == $t_status_id ) {
 				$t_level = config_get( 'report_bug_threshold' );
-				$t_can_change = ( $t_access <= config_get_access( 'report_bug_threshold' ) );
+				$t_can_change = ( $t_access >= config_get_access( 'report_bug_threshold' ) );
 			}else{
 				$t_level = access_get_status_threshold( $t_status_id );
-				$t_can_change = ( $t_access <= config_get_access( 'set_status_threshold' ) );
+				$t_can_change = ( $t_access >= config_get_access( 'set_status_threshold' ) );
 			}
 
 			if ( $t_can_change ) {
