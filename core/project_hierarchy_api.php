@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.4 2005-04-03 12:43:36 jlatour Exp $
+	# $Id: project_hierarchy_api.php,v 1.5 2005-04-11 02:21:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -83,7 +83,7 @@
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
 
-		$query = "SELECT DISTINCT( p.id ), ph.parent_id, p.name
+		$query = "SELECT DISTINCT p.id, ph.parent_id, p.name
 				  FROM $t_project_table p
 				  LEFT JOIN $t_project_hierarchy_table ph
 				    ON ph.child_id = p.id

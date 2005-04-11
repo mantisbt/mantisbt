@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.125 2005-04-07 22:48:04 thraxisp Exp $
+	# $Id: print_api.php,v 1.126 2005-04-11 02:21:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -461,7 +461,7 @@
 
 		# grab all categories in the project category table
 		$cat_arr = array();
-		$query = "SELECT DISTINCT( category ) as category
+		$query = "SELECT DISTINCT category
 				FROM $t_mantis_project_category_table
 				WHERE $t_project_where
 				ORDER BY category";
@@ -498,7 +498,7 @@
 
 		# grab all categories in the project category table
 		$cat_arr = array();
-		$query = "SELECT DISTINCT( category ) as category
+		$query = "SELECT DISTINCT category
 				FROM $t_mantis_project_category_table
 				WHERE $t_project_where
 				ORDER BY category";
@@ -510,7 +510,7 @@
 		}
 
 		# grab all categories in the bug table
-		$query = "SELECT DISTINCT( category ) as category
+		$query = "SELECT DISTINCT category
 				FROM $t_mantis_bug_table
 				WHERE $t_project_where
 				ORDER BY category";

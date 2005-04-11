@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_by_release_delta.php,v 1.8 2005-02-12 20:03:48 jlatour Exp $
+	# $Id: graph_by_release_delta.php,v 1.9 2005-04-11 02:21:55 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# Grab the Projections/Releases
-	$query = "SELECT DISTINCT( projection )
+	$query = "SELECT DISTINCT projection
 			FROM mantis_bug_table
 			WHERE project_id='$t_project_id'
 			ORDER BY projection";
