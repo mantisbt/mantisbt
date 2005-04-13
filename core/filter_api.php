@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.97 2005-04-09 12:43:48 thraxisp Exp $
+	# $Id: filter_api.php,v 1.98 2005-04-13 11:15:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -667,7 +667,7 @@
 				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id";
 				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id";
 			}
-			$query  = "SELECT DISTINCT $t_bug_table.id
+			$query  = "SELECT DISTINCT $t_bug_table.id AS id
 						$t_from
 						$t_id_join
 						$t_id_where";
