@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.95 2005-04-11 02:21:54 thraxisp Exp $
+	# $Id: user_api.php,v 1.96 2005-04-14 16:05:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -640,10 +640,10 @@
 			$t_public	= VS_PUBLIC;
 			$t_private	= VS_PRIVATE;
 
-			$query = "SELECT DISTINCT p.id, p.name
+			$query = "SELECT p.id, p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id=u.project_id
+					    ON p.id=u.project_id AND u.user_id=$c_user_id
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
 					  WHERE ( p.enabled = 1 ) AND
@@ -712,7 +712,7 @@
 			$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id = u.project_id
+					    ON p.id = u.project_id AND u.user_id='$c_user_id'
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
 					  WHERE ( p.enabled = 1 ) AND

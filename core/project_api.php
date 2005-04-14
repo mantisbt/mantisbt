@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.68 2005-03-31 02:32:32 thraxisp Exp $
+	# $Id: project_api.php,v 1.69 2005-04-14 16:05:00 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -476,13 +476,12 @@
 		$t_users = array();
 		$query = "SELECT DISTINCT u.id, u.username, u.realname
 					FROM 	$t_user_table u,
-							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id
+							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause
 					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_global_access_level )
 							OR ( l.access_level >= $t_project_access_level AND l.user_id=u.id )
 							OR u.access_level>='$t_adm' )
 							AND u.enabled = $t_on
-							$t_project_clause
-					ORDER BY u.realname, u.username";
+							$t_project_clause";
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
