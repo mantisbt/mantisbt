@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.49 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_report_page.php,v 1.50 2005-04-14 15:46:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -316,7 +316,7 @@
 		<?php echo lang_get( 'relationship_with_parent' ) ?>
 	</td>
 	<td>
-		<?php relationship_list_box_for_cloned_bug( BUG_BLOCKS ) ?>
+		<?php relationship_list_box( BUG_BLOCKS ) ?>
 		<?php PRINT '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
 	</td>
 </tr>
