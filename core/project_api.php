@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.69 2005-04-14 16:05:00 thraxisp Exp $
+	# $Id: project_api.php,v 1.70 2005-04-15 22:05:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -454,43 +454,97 @@
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_project_table = config_get( 'mantis_project_table' );
 
-		$t_on = ON;
-		$t_adm = ADMINISTRATOR;
-		$t_pub = VS_PUBLIC;
-
 		$t_project_access_level = $p_access_level;
-		$t_global_access_level = $p_access_level;
 
 		if( $c_project_id != ALL_PROJECTS ) {
+			# looking for specific project
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
-				# @@@ we need to get this logic out somewhere else.
-				#   I was getting access_min from the project but apparently we got
-				#   rid of that in 0.17.2.  The user docs claim developers and higher
-				#   get into private projects but the code seems to only allow administrators in
-				$t_global_access_level = max( $p_access_level, config_get( 'private_project_threshold' ) );
+				# @@@ (thraxisp) this is probably more complex than it needs to be
+				# When a new project is created, those who meet 'private_project_threshold' are added
+				#  automatically, but don't have an entry in project_user_list_table.
+				#  if they did, you would not have to add global levels.
+				
+				$t_private_project_threshold = config_get( 'private_project_threshold' );
+				if ( is_array( $t_private_project_threshold ) ) {
+					if ( is_array( $p_access_level ) ) {
+						# both private threshold and request are arrays, use intersection
+						$t_global_access_level = array_intersect( $p_access_level, $t_private_project_threshold );
+					} else {
+						# private threshold is an array, but request is a number, use values in threshold higher than request
+						$t_global_access_level = array();
+						foreach ( $t_private_project_threshold as $t_threshold ) {
+							if ( $p_access_level <= $t_threshold ) {
+								$t_global_access_level[] = $t_threshold;
+							}
+						}
+					}
+				} else {
+					if ( is_array( $p_access_level ) ) {
+						# private threshold is a number, but request is an array, use values in request higher than threshold
+						$t_global_access_level = array();
+						foreach ( $p_access_level as $t_threshold ) {
+							if ( $t_private_project_threshold >= $t_threshold ) {
+								$t_global_access_level[] = $t_threshold;
+							}
+						}
+					} else {
+						# both private threshold and request are numbers, use maximum
+						$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
+					}
+				}
+				$t_select_private = 'p.view_state=' . VS_PRIVATE . ' AND ';
+			} else {
+				$t_global_access_level = $p_access_level;
+				$t_select_private = '';
 			}
+		} else {
+			$t_global_access_level = $p_access_level;
+			$t_select_private = '';
 		}
 
 		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
+		if ( is_array( $t_project_access_level ) ) {
+			$t_project_access_clause = "IN (" . implode( ',', $t_project_access_level ) . ")";
+		} else {
+			$t_project_access_clause = ">= $t_project_access_level ";
+		}
+		
+		if ( is_array( $t_global_access_level ) ) {
+			if ( 0 == count( $t_global_access_level ) ) {
+				$t_global_access_clause = ">= " . NOBODY . " ";
+			} else if ( 1 == count( $t_global_access_level ) ) {
+				$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
+			} else {
+				$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
+			}
+		} else {
+			$t_global_access_clause = ">= $t_global_access_level ";
+		}			
+
+		$t_on = ON;
+		$t_adm = ADMINISTRATOR;
 
 		$t_users = array();
-		$query = "SELECT DISTINCT u.id, u.username, u.realname
-					FROM 	$t_user_table u,
-							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause
-					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_global_access_level )
-							OR ( l.access_level >= $t_project_access_level AND l.user_id=u.id )
-							OR u.access_level>='$t_adm' )
+		$query = "SELECT DISTINCT u.id, u.username, u.realname, u.access_level as access_level, l.access_level as override
+					FROM 	$t_user_table u LEFT JOIN
+							( $t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause )
+							ON l.user_id=u.id
+					WHERE	( ( $t_select_private u.access_level $t_global_access_clause )
+							OR ( l.access_level $t_project_access_clause AND l.user_id=u.id )
+							OR u.access_level>=$t_adm )
 							AND u.enabled = $t_on
 							$t_project_clause";
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
-			$row['access_level'] = access_get_project_level( $p_project_id, $row['id'] );
+			if ( NULL <> $row['override'] ) {
+				$row['access_level'] = $row['override'];
+			}
 			$t_users[] = $row;
 		}
 
-		return array_values($t_users);
+		return array_values( $t_users );
 	}
 
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.86 2005-03-31 02:32:30 thraxisp Exp $
+	# $Id: manage_proj_edit_page.php,v 1.87 2005-04-15 22:05:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -679,9 +679,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 		# You need global or project-specific permissions to remove users
 		#  from this project
 		if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
-			if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-				print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
-			}
+			print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
 		}
 	?>
 	</td>

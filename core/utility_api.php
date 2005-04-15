@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.18 2005-02-12 20:01:19 jlatour Exp $
+	# $Id: utility_api.php,v 1.19 2005-04-15 22:05:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -50,7 +50,8 @@
 		$enum_count = count( $t_arr );
 		for ($i=0; $i < $enum_count;$i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
-			$t_array[$t_s[0]] = $t_s[1];
+			$t_index = (int) $t_s[0];
+			$t_array[$t_index] = $t_s[1];
 		}
 		return $t_array;
 	}

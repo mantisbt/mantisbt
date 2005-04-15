@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.13 2005-02-13 21:36:16 jlatour Exp $
+	# $Id: changelog_page.php,v 1.14 2005-04-15 22:05:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -67,7 +67,7 @@
 		$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
 
 		$t_limit_reporters = config_get( 'limit_reporters' );
-		$t_user_access_level_is_reporter = ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) );
+		$t_user_access_level_is_reporter = access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id );
 
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_bug_table	= config_get( 'mantis_bug_table' );

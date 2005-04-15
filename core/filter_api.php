@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.98 2005-04-13 11:15:18 vboctor Exp $
+	# $Id: filter_api.php,v 1.99 2005-04-15 22:05:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,7 +178,7 @@
 		}
 
 		# limit reporter
-		if ( ( ON === $t_limit_reporters ) && ( user_get_access_level( $t_user_id ) <= $t_report_bug_threshold ) ) {
+		if ( ( ON === $t_limit_reporters ) && ( access_has_project_level( $t_report_bug_threshold, $t_project_id, $t_user_id ) ) ) {
 			$c_reporter_id = $c_user_id;
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
 		}
@@ -2273,7 +2273,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
 		<?php
 			# if current user is a reporter, and limited reports set to ON, only display that name
-			if ( ( ON == config_get( 'limit_reporters' ) ) && ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) ) ) {
+			if ( ( ON == config_get( 'limit_reporters' ) ) && ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) ) {
 				$t_id = auth_get_current_user_id();
 				$t_username = user_get_field( $t_id, 'username' );
 				$t_realname = user_get_field( $t_id, 'realname' );

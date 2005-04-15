@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.126 2005-04-11 02:21:54 thraxisp Exp $
+	# $Id: print_api.php,v 1.127 2005-04-15 22:05:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -683,9 +683,9 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
 
-			if ( $t_elem[0] >= ADMINISTRATOR ) {
-				continue;
-			}
+#			if ( $t_elem[0] >= ADMINISTRATOR ) {
+#				continue;
+#			}
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
 			PRINT "<option value=\"$t_elem[0]\"";
@@ -746,6 +746,7 @@
 	# --------------------
 	# list of users that are NOT in the specified project and that are enabled
 	# if no project is specified use the current project
+	# also exclude any administrators
 	function print_project_user_list_option_list( $p_project_id=null ) {
 		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
@@ -762,8 +763,7 @@
 				ON p.user_id=u.id AND p.project_id='$c_project_id'
 				WHERE u.access_level<$t_adm AND
 					u.enabled = 1 AND
-					p.user_id IS NULL AND
-					u.access_level<'$t_adm'
+					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
 		$result = db_query( $query );
 		$t_display = array();
