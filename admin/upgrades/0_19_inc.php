@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.10 2005-04-03 12:43:32 jlatour Exp $
+	# $Id: 0_19_inc.php,v 1.11 2005-04-16 12:21:25 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -76,6 +76,19 @@
 			'field_naming-1',
 			'DBMS compatibility: access is a reserved word',
 			"ALTER TABLE $t_config_table CHANGE access access_reqd INT DEFAULT '0'"
+		);
+
+	$upgrades[] = new SQLUpgrade(
+			'configdb-un',
+			'Drop mantis_config_table unique key',
+			"ALTER TABLE $t_config_table 
+			    DROP INDEX config"
+		);
+	$upgrades[] = new SQLUpgrade(
+			'configdb-pk',
+			'Add mantis_config_table primary key',
+			"ALTER TABLE $t_config_table 
+			    ADD PRIMARY KEY (config_id, project_id, user_id)"
 		);
 
 
