@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.35 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_user_update.php,v 1.36 2005-04-17 17:14:16 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,6 +52,12 @@
 	$t_user_table = config_get( 'mantis_user_table' );
 
 	$t_old_protected = user_get_field( $f_user_id, 'protected' );
+	
+	# check that we are not downgrading the last administrator
+	$t_old_access = user_get_field( $f_user_id, 'access_level' );
+	if ( ( ADMINISTRATOR == $t_old_access ) && ( $t_old_access <> $f_access_level ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) {
+		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	}	   
 
 	# Project specific access rights override global levels, hence, for users who are changed
 	# to be administrators, we have to remove project specific rights.

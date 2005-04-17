@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.45 2005-04-05 16:26:29 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.46 2005-04-17 17:14:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -214,6 +214,7 @@
 	define( 'ERROR_USER_NAME_INVALID',				805 );
 	define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS',		806 );
 	define( 'ERROR_USER_REAL_MATCH_USER',		807 );
+	define( 'ERROR_USER_CHANGE_LAST_ADMIN',		808 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.13 2005-04-07 22:44:53 thraxisp Exp $
+	# $Id: manage_user_edit_page.php,v 1.14 2005-04-17 17:14:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -121,10 +121,12 @@
 	</form>
 
 <!-- Delete Button -->
+<?php if ( !( ( ADMINISTRATOR <= $t_user['access_level'] ) && ( 1 >= user_count_level( ADMINISTRATOR ) ) ) ) { ?>
 	<form method="post" action="manage_user_delete.php">
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
+<?php } ?>
 </div>
 <br />
 <div align="center">

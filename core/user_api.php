@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.96 2005-04-14 16:05:01 thraxisp Exp $
+	# $Id: user_api.php,v 1.97 2005-04-17 17:14:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -271,6 +271,21 @@
 		}
 	}
 
+	# --------------------
+	# count the number of users at or greater than a specific level
+	function user_count_level( $p_level=ANYBODY ) {
+		$t_level = db_prepare_int( $p_level );
+		$t_user_table = config_get( 'mantis_user_table' );
+		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=$t_level";
+		$result = db_query( $query );
+
+		# Get the list of connected users
+		$t_users = db_result( $result );
+
+		return $t_users;
+	}
+	
+	
 	# --------------------
 	# Return an array of user ids that are logged in.
 	# A user is considered logged in if the last visit timestamp is within the
