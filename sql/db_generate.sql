@@ -1,20 +1,20 @@
-# phpMyAdmin SQL Dump
-# version 2.5.7
-# http://www.phpmyadmin.net
-#
-# Host: localhost
-# Generation Time: Nov 06, 2004 at 09:52 PM
-# Server version: 4.0.20
-# PHP Version: 4.3.8
-#
-# Database : `mantis`
-#
+-- phpMyAdmin SQL Dump
+-- version 2.6.0-pl3
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Apr 18, 2005 at 09:48 PM
+-- Server version: 4.1.9
+-- PHP Version: 4.3.10
+-- 
+-- Database: `mantis`
+-- 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_file_table`
-#
+-- 
+-- Table structure for table `mantis_bug_file_table`
+-- 
 
 CREATE TABLE mantis_bug_file_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -30,18 +30,18 @@ CREATE TABLE mantis_bug_file_table (
   content longblob NOT NULL,
   PRIMARY KEY  (id),
   KEY bug_id (bug_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_file_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_file_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_history_table`
-#
+-- 
+-- Table structure for table `mantis_bug_history_table`
+-- 
 
 CREATE TABLE mantis_bug_history_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -51,39 +51,39 @@ CREATE TABLE mantis_bug_history_table (
   field_name varchar(32) NOT NULL default '',
   old_value varchar(128) NOT NULL default '',
   new_value varchar(128) NOT NULL default '',
-  type int(2) NOT NULL default '0',
+  `type` int(2) NOT NULL default '0',
   PRIMARY KEY  (id),
   KEY bug_id (bug_id),
   KEY user_id (user_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_history_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_history_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_monitor_table`
-#
+-- 
+-- Table structure for table `mantis_bug_monitor_table`
+-- 
 
 CREATE TABLE mantis_bug_monitor_table (
   user_id int(7) unsigned NOT NULL default '0',
   bug_id int(7) unsigned NOT NULL default '0',
   PRIMARY KEY  (user_id,bug_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_monitor_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_monitor_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_relationship_table`
-#
+-- 
+-- Table structure for table `mantis_bug_relationship_table`
+-- 
 
 CREATE TABLE mantis_bug_relationship_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -93,18 +93,18 @@ CREATE TABLE mantis_bug_relationship_table (
   PRIMARY KEY  (id),
   KEY source_bug_id (source_bug_id),
   KEY destination_bug_id (destination_bug_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_relationship_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_relationship_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_table`
-#
+-- 
+-- Table structure for table `mantis_bug_table`
+-- 
 
 CREATE TABLE mantis_bug_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -115,7 +115,7 @@ CREATE TABLE mantis_bug_table (
   priority int(2) NOT NULL default '30',
   severity int(2) NOT NULL default '50',
   reproducibility int(2) NOT NULL default '10',
-  status int(2) NOT NULL default '10',
+  `status` int(2) NOT NULL default '10',
   resolution int(2) NOT NULL default '10',
   projection int(2) NOT NULL default '10',
   category varchar(64) NOT NULL default '',
@@ -133,21 +133,22 @@ CREATE TABLE mantis_bug_table (
   view_state int(2) NOT NULL default '10',
   summary varchar(128) NOT NULL default '',
   sponsorship_total int(7) NOT NULL default '0',
+  sticky tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id),
   KEY sponsorship_total (sponsorship_total),
   KEY fixed_in_version (fixed_in_version)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bug_text_table`
-#
+-- 
+-- Table structure for table `mantis_bug_text_table`
+-- 
 
 CREATE TABLE mantis_bug_text_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -155,18 +156,18 @@ CREATE TABLE mantis_bug_text_table (
   steps_to_reproduce text NOT NULL,
   additional_information text NOT NULL,
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bug_text_table`
-#
+-- 
+-- Dumping data for table `mantis_bug_text_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bugnote_table`
-#
+-- 
+-- Table structure for table `mantis_bugnote_table`
+-- 
 
 CREATE TABLE mantis_bugnote_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -179,76 +180,98 @@ CREATE TABLE mantis_bugnote_table (
   note_type int(7) default '0',
   note_attr varchar(250) default '',
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bugnote_table`
-#
+-- 
+-- Dumping data for table `mantis_bugnote_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_bugnote_text_table`
-#
+-- 
+-- Table structure for table `mantis_bugnote_text_table`
+-- 
 
 CREATE TABLE mantis_bugnote_text_table (
   id int(7) unsigned NOT NULL auto_increment,
   note text NOT NULL,
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_bugnote_text_table`
-#
+-- 
+-- Dumping data for table `mantis_bugnote_text_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_custom_field_project_table`
-#
+-- 
+-- Table structure for table `mantis_config_table`
+-- 
+
+CREATE TABLE mantis_config_table (
+  config_id varchar(64) NOT NULL default '',
+  project_id int(11) NOT NULL default '0',
+  user_id int(11) NOT NULL default '0',
+  access_reqd int(11) default '0',
+  `type` int(11) default '90',
+  `value` text NOT NULL,
+  PRIMARY KEY  (config_id,project_id,user_id),
+  KEY config_id (config_id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Dumping data for table `mantis_config_table`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `mantis_custom_field_project_table`
+-- 
 
 CREATE TABLE mantis_custom_field_project_table (
   field_id int(3) NOT NULL default '0',
   project_id int(7) unsigned NOT NULL default '0',
   sequence int(2) NOT NULL default '0',
   PRIMARY KEY  (field_id,project_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_custom_field_project_table`
-#
+-- 
+-- Dumping data for table `mantis_custom_field_project_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_custom_field_string_table`
-#
+-- 
+-- Table structure for table `mantis_custom_field_string_table`
+-- 
 
 CREATE TABLE mantis_custom_field_string_table (
   field_id int(3) NOT NULL default '0',
   bug_id int(7) NOT NULL default '0',
-  value varchar(255) NOT NULL default '',
+  `value` varchar(255) NOT NULL default '',
   PRIMARY KEY  (field_id,bug_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_custom_field_string_table`
-#
+-- 
+-- Dumping data for table `mantis_custom_field_string_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_custom_field_table`
-#
+-- 
+-- Table structure for table `mantis_custom_field_table`
+-- 
 
 CREATE TABLE mantis_custom_field_table (
   id int(3) NOT NULL auto_increment,
   name varchar(64) NOT NULL default '',
-  type int(2) NOT NULL default '0',
+  `type` int(2) NOT NULL default '0',
   possible_values varchar(255) NOT NULL default '',
   default_value varchar(255) NOT NULL default '',
   valid_regexp varchar(255) NOT NULL default '',
@@ -267,18 +290,18 @@ CREATE TABLE mantis_custom_field_table (
   require_closed tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id),
   KEY name (name)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_custom_field_table`
-#
+-- 
+-- Dumping data for table `mantis_custom_field_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_filters_table`
-#
+-- 
+-- Table structure for table `mantis_filters_table`
+-- 
 
 CREATE TABLE mantis_filters_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -288,18 +311,18 @@ CREATE TABLE mantis_filters_table (
   name varchar(64) NOT NULL default '',
   filter_string text NOT NULL,
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_filters_table`
-#
+-- 
+-- Dumping data for table `mantis_filters_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_news_table`
-#
+-- 
+-- Table structure for table `mantis_news_table`
+-- 
 
 CREATE TABLE mantis_news_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -313,36 +336,36 @@ CREATE TABLE mantis_news_table (
   body text NOT NULL,
   PRIMARY KEY  (id),
   KEY id (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_news_table`
-#
+-- 
+-- Dumping data for table `mantis_news_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_project_category_table`
-#
+-- 
+-- Table structure for table `mantis_project_category_table`
+-- 
 
 CREATE TABLE mantis_project_category_table (
   project_id int(7) unsigned NOT NULL default '0',
   category varchar(64) NOT NULL default '',
   user_id int(7) unsigned NOT NULL default '0',
   PRIMARY KEY  (project_id,category)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_project_category_table`
-#
+-- 
+-- Dumping data for table `mantis_project_category_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_project_file_table`
-#
+-- 
+-- Table structure for table `mantis_project_file_table`
+-- 
 
 CREATE TABLE mantis_project_file_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -357,23 +380,39 @@ CREATE TABLE mantis_project_file_table (
   date_added datetime NOT NULL default '1970-01-01 00:00:01',
   content longblob NOT NULL,
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_project_file_table`
-#
+-- 
+-- Dumping data for table `mantis_project_file_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_project_table`
-#
+-- 
+-- Table structure for table `mantis_project_hierarchy_table`
+-- 
+
+CREATE TABLE mantis_project_hierarchy_table (
+  child_id int(10) unsigned NOT NULL default '0',
+  parent_id int(10) unsigned NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Dumping data for table `mantis_project_hierarchy_table`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `mantis_project_table`
+-- 
 
 CREATE TABLE mantis_project_table (
   id int(7) unsigned NOT NULL auto_increment,
   name varchar(128) NOT NULL default '',
-  status int(2) NOT NULL default '10',
+  `status` int(2) NOT NULL default '10',
   enabled int(1) NOT NULL default '1',
   view_state int(2) NOT NULL default '10',
   access_min int(2) NOT NULL default '10',
@@ -382,36 +421,36 @@ CREATE TABLE mantis_project_table (
   PRIMARY KEY  (id),
   UNIQUE KEY name (name),
   KEY id (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_project_table`
-#
+-- 
+-- Dumping data for table `mantis_project_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_project_user_list_table`
-#
+-- 
+-- Table structure for table `mantis_project_user_list_table`
+-- 
 
 CREATE TABLE mantis_project_user_list_table (
   project_id int(7) unsigned NOT NULL default '0',
   user_id int(7) unsigned NOT NULL default '0',
   access_level int(2) NOT NULL default '10',
   PRIMARY KEY  (project_id,user_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_project_user_list_table`
-#
+-- 
+-- Dumping data for table `mantis_project_user_list_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_project_version_table`
-#
+-- 
+-- Table structure for table `mantis_project_version_table`
+-- 
 
 CREATE TABLE mantis_project_version_table (
   id int(7) NOT NULL auto_increment,
@@ -422,18 +461,18 @@ CREATE TABLE mantis_project_version_table (
   released tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (id),
   UNIQUE KEY project_version (project_id,version)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_project_version_table`
-#
+-- 
+-- Dumping data for table `mantis_project_version_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_sponsorship_table`
-#
+-- 
+-- Table structure for table `mantis_sponsorship_table`
+-- 
 
 CREATE TABLE mantis_sponsorship_table (
   id int(7) NOT NULL auto_increment,
@@ -448,28 +487,49 @@ CREATE TABLE mantis_sponsorship_table (
   PRIMARY KEY  (id),
   KEY bug_id (bug_id),
   KEY user_id (user_id)
-) TYPE=MyISAM COMMENT='A table for sponsorships';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='A table for sponsorships';
 
-#
-# Dumping data for table `mantis_sponsorship_table`
-#
+-- 
+-- Dumping data for table `mantis_sponsorship_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_upgrade_table`
-#
+-- 
+-- Table structure for table `mantis_tokens_table`
+-- 
+
+CREATE TABLE mantis_tokens_table (
+  id int(11) NOT NULL auto_increment,
+  owner int(11) NOT NULL default '0',
+  `type` int(11) NOT NULL default '0',
+  `timestamp` datetime NOT NULL default '0000-00-00 00:00:00',
+  expiry datetime NOT NULL default '0000-00-00 00:00:00',
+  `value` text NOT NULL,
+  PRIMARY KEY  (id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Dumping data for table `mantis_tokens_table`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `mantis_upgrade_table`
+-- 
 
 CREATE TABLE mantis_upgrade_table (
   upgrade_id char(20) NOT NULL default '',
   description char(255) NOT NULL default '',
   PRIMARY KEY  (upgrade_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_upgrade_table`
-#
+-- 
+-- Dumping data for table `mantis_upgrade_table`
+-- 
 
 INSERT INTO mantis_upgrade_table VALUES ('0.13-1', 'Add mantis_project_table');
 INSERT INTO mantis_upgrade_table VALUES ('0.13-2', 'Insert default project into mantis_project_table');
@@ -765,12 +825,20 @@ INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-order', 'Add bugnote_orde
 INSERT INTO mantis_upgrade_table VALUES ('cb_ml_upgrade', 'Upgrade custom field types (checkbox, list, multilist) to support advanced filtering');
 INSERT INTO mantis_upgrade_table VALUES ('bugnote-type', 'Add note type column to bugnote');
 INSERT INTO mantis_upgrade_table VALUES ('bugnote-attr', 'Add note_attr column to bugnote');
+INSERT INTO mantis_upgrade_table VALUES ('tokensdb-1', 'Add mantis_tokens_table');
+INSERT INTO mantis_upgrade_table VALUES ('sticky-issues', 'Add sticky column to bug table');
+INSERT INTO mantis_upgrade_table VALUES ('project-hierarchy', 'Add project hierarchy table');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-1', 'Add mantis_config_table');
+INSERT INTO mantis_upgrade_table VALUES ('field_shorten-1', 'shorten field names: lost_password_in_progress_count');
+INSERT INTO mantis_upgrade_table VALUES ('field_naming-1', 'DBMS compatibility: access is a reserved word');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-un', 'Drop mantis_config_table unique key');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-pk', 'Add mantis_config_table primary key');
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_user_pref_table`
-#
+-- 
+-- Table structure for table `mantis_user_pref_table`
+-- 
 
 CREATE TABLE mantis_user_pref_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -805,35 +873,35 @@ CREATE TABLE mantis_user_pref_table (
   email_bugnote_limit int(2) NOT NULL default '0',
   language varchar(32) NOT NULL default 'english',
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_user_pref_table`
-#
+-- 
+-- Dumping data for table `mantis_user_pref_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_user_print_pref_table`
-#
+-- 
+-- Table structure for table `mantis_user_print_pref_table`
+-- 
 
 CREATE TABLE mantis_user_print_pref_table (
   user_id int(7) unsigned NOT NULL default '0',
   print_pref varchar(27) NOT NULL default '',
   PRIMARY KEY  (user_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_user_print_pref_table`
-#
+-- 
+-- Dumping data for table `mantis_user_print_pref_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_user_profile_table`
-#
+-- 
+-- Table structure for table `mantis_user_profile_table`
+-- 
 
 CREATE TABLE mantis_user_profile_table (
   id int(7) unsigned NOT NULL auto_increment,
@@ -843,41 +911,41 @@ CREATE TABLE mantis_user_profile_table (
   os_build varchar(32) NOT NULL default '',
   description text NOT NULL,
   PRIMARY KEY  (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_user_profile_table`
-#
+-- 
+-- Dumping data for table `mantis_user_profile_table`
+-- 
 
 
-# --------------------------------------------------------
+-- --------------------------------------------------------
 
-#
-# Table structure for table `mantis_user_table`
-#
+-- 
+-- Table structure for table `mantis_user_table`
+-- 
 
 CREATE TABLE mantis_user_table (
   id int(7) unsigned NOT NULL auto_increment,
   username varchar(32) NOT NULL default '',
   realname varchar(64) NOT NULL default '',
   email varchar(64) NOT NULL default '',
-  password varchar(32) NOT NULL default '',
+  `password` varchar(32) NOT NULL default '',
   date_created datetime NOT NULL default '1970-01-01 00:00:01',
   last_visit datetime NOT NULL default '1970-01-01 00:00:01',
   enabled int(1) NOT NULL default '1',
   protected int(1) NOT NULL default '0',
   access_level int(2) NOT NULL default '10',
   login_count int(11) NOT NULL default '0',
-  lost_password_in_progress_count int(2) NOT NULL default '0',
+  lost_password_request_count int(2) NOT NULL default '0',
   failed_login_count int(2) NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
   UNIQUE KEY cookie_string (cookie_string),
   UNIQUE KEY username (username)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-#
-# Dumping data for table `mantis_user_table`
-#
+-- 
+-- Dumping data for table `mantis_user_table`
+-- 
 
 INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, CONCAT(MD5(RAND()),MD5(NOW())));
