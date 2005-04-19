@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.70 2005-04-15 22:05:17 thraxisp Exp $
+	# $Id: project_api.php,v 1.71 2005-04-19 14:20:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -525,6 +525,7 @@
 		$t_adm = ADMINISTRATOR;
 
 		$t_users = array();
+	/* this query requires mysql4.1, but will improve performance in future
 		$query = "SELECT DISTINCT u.id, u.username, u.realname, u.access_level as access_level, l.access_level as override
 					FROM 	$t_user_table u LEFT JOIN
 							( $t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause )
@@ -534,13 +535,26 @@
 							OR u.access_level>=$t_adm )
 							AND u.enabled = $t_on
 							$t_project_clause";
+	*/
+		$query = "SELECT DISTINCT u.id, u.username, u.realname
+					FROM 	$t_user_table u,
+							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause 
+					WHERE	( ( $t_select_private u.access_level $t_global_access_clause )
+							OR ( l.access_level $t_project_access_clause AND l.user_id=u.id )
+							OR u.access_level>=$t_adm )
+							AND u.enabled = $t_on
+							$t_project_clause";
+	
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
+	/* this query requires mysql4.1, but will improve performance in future
 			if ( NULL <> $row['override'] ) {
 				$row['access_level'] = $row['override'];
 			}
+	*/
+			$row['access_level'] = access_get_project_level( $p_project_id, $row['id'] );
 			$t_users[] = $row;
 		}
 
