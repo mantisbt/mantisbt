@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.11 2005-04-16 12:21:25 thraxisp Exp $
+	# $Id: 0_19_inc.php,v 1.12 2005-04-19 13:49:05 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -84,13 +84,6 @@
 			"ALTER TABLE $t_config_table 
 			    DROP INDEX config"
 		);
-	$upgrades[] = new SQLUpgrade(
-			'configdb-pk',
-			'Add mantis_config_table primary key',
-			"ALTER TABLE $t_config_table 
-			    ADD PRIMARY KEY (config_id, project_id, user_id)"
-		);
-
 
 	return $upgrades;
 ?>
