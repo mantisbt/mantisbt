@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.6 2005-02-17 21:33:44 jlatour Exp $
+	# $Id: columns_api.php,v 1.7 2005-04-19 00:52:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -145,8 +145,8 @@
 
 		if ( $t_enable_sponsorship == ON ) {
 			echo "\t<td class=\"right\">";
-			if ( $v_sponsorship_total > 0 ) {
-				$t_sponsorship_amount = sponsorship_format_amount( $v_sponsorship_total );
+			if ( $p_row['sponsorship_total'] > 0 ) {
+				$t_sponsorship_amount = sponsorship_format_amount( $p_row['sponsorship_total'] );
 				echo string_no_break( $t_sponsorship_amount );
 			}
 			echo "</td>\n";
