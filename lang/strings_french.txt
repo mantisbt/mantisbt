@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.99 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.100 $
+	# $Author: vboctor $
+	# $Date: 2005-04-20 14:33:49 $
 	#
-	# $Id: strings_french.txt,v 1.99 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_french.txt,v 1.100 2005-04-20 14:33:49 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -802,7 +802,7 @@ $s_show_all_users = 'TOUS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
-$s_account_reset_msg = 'LMe message de confirmation a été envoyé à votre adresse email...';
+$s_account_reset_msg = 'Le message de confirmation a été envoyé à votre adresse email...';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à vide...';
 
 # manage_user_update.php
