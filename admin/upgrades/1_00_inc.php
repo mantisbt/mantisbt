@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.1 2005-04-19 13:49:05 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.2 2005-04-20 13:54:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,10 +31,15 @@
 	$upgrades[] = new SQLUpgrade(
 			'configdb-pk',
 			'Add mantis_config_table primary key',
-			"ALTER TABLE $t_config_table 
+			"ALTER TABLE $t_config_table
 			    ADD PRIMARY KEY (config_id, project_id, user_id)"
 		);
 
+	$upgrades[] = new SQLUpgrade(
+			'note_bug_id_index',
+			'Add index on bug_id in bugnotes table',
+			"ALTER TABLE $t_bugnote_table ADD INDEX ( bug_id )"
+		);
 
 	return $upgrades;
 ?>
