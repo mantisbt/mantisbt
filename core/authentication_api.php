@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.48 2005-04-20 15:09:32 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.49 2005-04-20 15:22:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -401,10 +401,19 @@
 	# is cookie valid?
 
 	function auth_is_cookie_valid( $p_cookie_string ) {
+		global $g_cache_current_user_id;
 	
+	    # fail if DB isn't accessible
 	    if ( !db_is_connected() ) {
 			return false;
 		}
+
+        # succeeed if user has already been authenticated
+		if ( null !== $g_cache_current_user_id ) {
+			return true;
+		}
+		
+		# look up cookie in the database to see if it is valid
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$c_cookie_string = db_prepare_string( $p_cookie_string );
