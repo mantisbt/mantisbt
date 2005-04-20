@@ -6,13 +6,40 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.14 2005-02-28 14:42:53 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.15 2005-04-20 12:48:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( '../core.php' );
+	$g_skip_open_db = true;  # don't open the database in database_api.php
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 	require_once( 'db_table_names_inc.php' );
+
+	$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+	if ( false == $result ) {
+?>
+<html>
+<head>
+<title> Mantis Administration - Upgrade Installation </title>
+<link rel="stylesheet" type="text/css" href="admin.css" />
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+	<tr class="top-bar">
+		<td class="links">
+			[ <a href="index.php">Back to Administration</a> ]
+		</td>
+		<td class="title">
+			Upgrade Installation
+		</td>
+	</tr>
+</table>
+<br /><br />
+<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
+</body>
+<?php
+        exit();
+	}
 
 	# Create the upgrade table if it does not exist
 	$query = "CREATE TABLE IF NOT EXISTS $t_upgrade_table
