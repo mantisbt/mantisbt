@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.44 2005-03-02 00:14:59 jlatour Exp $
+	# $Id: error_api.php,v 1.45 2005-04-20 15:09:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -225,7 +225,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
+				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['params'] ) ) {

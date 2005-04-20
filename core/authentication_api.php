@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.47 2005-04-10 14:53:00 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.48 2005-04-20 15:09:32 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -52,7 +52,7 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
-		return ( !is_blank( auth_get_current_user_cookie() ) );
+		return ( auth_is_cookie_valid( auth_get_current_user_cookie() ) );
 	}
 
 
@@ -398,6 +398,27 @@
 	#===================================
 
 	#########################################
+	# is cookie valid?
+
+	function auth_is_cookie_valid( $p_cookie_string ) {
+	
+	    if ( !db_is_connected() ) {
+			return false;
+		}
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$c_cookie_string = db_prepare_string( $p_cookie_string );
+
+		$query = "SELECT id
+				  FROM $t_user_table
+				  WHERE cookie_string='$c_cookie_string'";
+		$result = db_query( $query );
+
+		# return true if a matching cookie was found
+		return ( 1 == db_num_rows( $result ) );
+	}
+	
+	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
 	#
@@ -428,7 +449,7 @@
 		# and give them an Access Denied message.
 		if ( db_num_rows( $result ) < 1 ) {
 			auth_clear_cookies();
-			access_denied();
+		    access_denied(); # never returns
 			return false;
 		}
 
