@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.92 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:44 $
 	#
-	# $Id: strings_norwegian.txt,v 1.91 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.92 2005-04-21 06:52:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -212,6 +212,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ble ikke funnet.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Ikke tillatt filtype.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Dette er en duplikatfil. Vennligst slett filen først.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ugyldig bane til opplastingskatalog. Enten eksisterer ikke katalogen eller så er den ikke overskrivbar for webserveren';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'En sak kan ikke være et duplikat av seg selv.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Brukerdefinert felt ble ikke funnet.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Det brukerdefinerte navnet finnes fra før.';
@@ -252,6 +254,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Informasjonen du har ang
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekreftelsesadressen er ikke gyldig eller har allerede være i bruk. Vennligst registrer deg på nytt.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks antall forsøk har blitt nådd. Vennligst kontakt systemadministrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';

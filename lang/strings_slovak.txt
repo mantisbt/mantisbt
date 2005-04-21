@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.41 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.42 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:46 $
 	#
-	# $Id: strings_slovak.txt,v 1.41 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.42 2005-04-21 06:52:46 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -211,6 +211,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nena¹iel.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'CHYBA: Súbor tohto typu nie je povolené uploadova».';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'CHYBA: Toto je duplikátny súbor.  Najskôr odstránte súbor.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'CHYBA: Neplatná cesta pre uploadovanie súborov.  Adresár buï neexistuje, alebo sa doò nedá zapisova» web serverom.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'CHYBA: Nie je mo¾né nastavi» bug ako svoj vlastný duplikát.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'U¾ívateµom definované pole sa nena¹lo';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitné meno.';
@@ -251,6 +253,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'CHYBA: Udané informacie 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrdzovacia URL je chybná alebo bola u¾ pou¾ita. Prosím prihláste sa znova.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosiahnete maximum vnútorných procesov. Obra»te sa na správcu systému.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';

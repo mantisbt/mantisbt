@@ -10,11 +10,11 @@
 	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	#             miren.info@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.87 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.88 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:44 $
 	#
-	# $Id: strings_korean.txt,v 1.87 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.88 2005-04-21 06:52:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -213,6 +213,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '오류: 업로드 금지된 파일 형식입니다.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= '오류: 중복된 파일입니다. 먼저 이 파일을 삭제하세요.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '오류: 잘못된 업로드 경로. 디렉토리가 존재하지 않거나 웹서버에서 쓰기 권한이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= '오류: 중복으로 이슈를 설정할 수 없습니다.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '오류: 커스텀 필드를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '오류: 중복된 필드 이름 입니다.';
@@ -253,6 +255,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '오류: 입력된 정보가 바르
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '오류: 이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '오류: 요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '오류: 계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';

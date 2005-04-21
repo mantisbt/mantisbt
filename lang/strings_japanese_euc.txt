@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.75 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.76 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:43 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.75 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_japanese_euc.txt,v 1.76 2005-04-21 06:52:43 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -212,6 +212,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'このファイル種別はアップロードできません。';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ファイルが重複しています。まず、ファイルを削除して下さい。';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '無効なアップロードパスです。ディレクトリが存在しないか書き込みできません。';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '重複している ID に当該改善要求を設定できません。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'カスタム項目がありません。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'カスタム項目名が重複しています。';
@@ -252,6 +254,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '入力された情報は登録済み
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。もう一度サインアップしてください。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '最大回数のリクエストを実行しました。システム管理者に連絡してください。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';

@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.101 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.102 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:43 $
 	#
-	# $Id: strings_italian.txt,v 1.101 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.102 2005-04-21 06:52:43 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -213,6 +213,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
@@ -230,7 +232,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exi
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
@@ -253,6 +255,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = "I dati inseriti e/o invi
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = "Codice di convalida (hash code) non valido.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Raggiunto il numero massimo di richieste di reset pendenti.";
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = "L'account potrebbe essere stato disabilitato o bloccato (per troppi tentativi falliti di accesso) oppure potreste aver immesso un nome e/o una password errata.";

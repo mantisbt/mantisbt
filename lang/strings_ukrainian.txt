@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.12 $
-	# $Author: jlatour $
-	# $Date: 2005-04-03 12:51:07 $
+	# $Revision: 1.13 $
+	# $Author: bigbadger $
+	# $Date: 2005-04-21 06:52:47 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.12 2005-04-03 12:51:07 jlatour Exp $
+	# $Id: strings_ukrainian.txt,v 1.13 2005-04-21 06:52:47 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -211,6 +211,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Не вдалось знайти профайл.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Цей тип файлів закачувати не дозволено.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Це дублікат файла. Спочатку видаліть попередній файл.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Неправильний шлях для закачуваних файлів.  Папка або не існує, або неможливо в неї що-небудь записати.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Ви не можете зробити проблему дублікатом неї ж.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Не можу знайти таке власне поле';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Таке ім\'я вже існує.';
@@ -251,6 +253,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Вказана інформація не пі
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL підтвердження або хибний, або вже використаний. Зареєструйтесь знову.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Досягнуто максимуму паралельних запитів. Зв\'яжіться з системним адміністратором';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Ви неправильно ввели ім\'я і пароль або ваш запис був заблокований.';
