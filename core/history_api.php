@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.30 2004-10-05 21:10:14 prichards Exp $
+	# $Id: history_api.php,v 1.31 2005-04-21 14:57:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -193,6 +193,11 @@
 				$p_old_value = get_enum_element( 'projection', $p_old_value );
 				$p_new_value = get_enum_element( 'projection', $p_new_value );
 				$t_field_localized = lang_get( 'projection' );
+				break;
+			case 'sticky':
+				$p_old_value = gpc_string_to_bool( $p_old_value ) ? lang_get( 'yes' ) : lang_get( 'no' ) ;
+				$p_new_value = gpc_string_to_bool( $p_new_value ) ? lang_get( 'yes' ) : lang_get( 'no' ) ;
+				$t_field_localized = lang_get( 'sticky_issue' );
 				break;
 			case 'project_id':
 				if ( project_exists( $p_old_value ) ) {

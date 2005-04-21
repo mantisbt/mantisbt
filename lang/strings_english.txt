@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.251 $
+	# $Revision: 1.252 $
 	# $Author: thraxisp $
-	# $Date: 2005-04-17 17:14:17 $
+	# $Date: 2005-04-21 14:57:03 $
 	#
-	# $Id: strings_english.txt,v 1.251 2005-04-17 17:14:17 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.252 2005-04-21 14:57:03 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -542,6 +542,7 @@ $s_summary = 'Summary';
 $s_description = 'Description';
 $s_steps_to_reproduce = 'Steps To Reproduce';
 $s_update_information_button = 'Update Information';
+$s_sticky_issue = 'Sticky Issue';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Update Advanced';
