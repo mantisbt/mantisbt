@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.155 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: view_all_inc.php,v 1.156 2005-04-21 14:42:40 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -109,9 +109,9 @@
 <?php
 	function write_bug_rows ( $p_rows )
 	{
-		global $t_columns;
+		global $t_columns, $t_filter;
 
-		$t_in_stickies = true;
+		$t_in_stickies = ( 'on' == $t_filter['sticky_issues'] );
 
 		mark_time( 'begin loop' );
 
