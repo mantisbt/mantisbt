@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.99 2005-04-15 22:05:16 thraxisp Exp $
+	# $Id: filter_api.php,v 1.100 2005-04-21 14:41:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,7 +178,10 @@
 		}
 
 		# limit reporter
-		if ( ( ON === $t_limit_reporters ) && ( access_has_project_level( $t_report_bug_threshold, $t_project_id, $t_user_id ) ) ) {
+		# @@@ thraxisp - access_has_project_level checks greater than or equal to, 
+		#   this assumed that there aren't any holes above REPORTER where the limit would apply
+		# 
+		if ( ( ON === $t_limit_reporters ) && ( ! access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 			$c_reporter_id = $c_user_id;
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
 		}
@@ -746,38 +749,41 @@
 		$t_sort_fields = split( ',', $t_filter['sort'] );
 		$t_dir_fields = split( ',', $t_filter['dir'] );
 
-		if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
-			$t_sort_fields[] = 'last_updated';
-			$t_dir_fields[] = 'DESC';
-        }
-		if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
-			$t_sort_fields[] = 'date_submitted';
-			$t_dir_fields[] = 'DESC';
-        }
-
 		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
 			$t_order_array[] = "sticky DESC";
 		}
 		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
 			$c_sort = db_prepare_string( $t_sort_fields[$i] );
+			
+			if ( ! in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1) ) ) {
 
-        	# if sorting by a custom field
-        	if ( strpos( $c_sort, 'custom_' ) === 0 ) {
-        		$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
-        		$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
-        		$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
-        		$c_sort = "$t_custom_field_string_table.value";
-        		$t_select_clauses[] = "$t_custom_field_string_table.value";
-        	}
+        		# if sorting by a custom field
+        		if ( strpos( $c_sort, 'custom_' ) === 0 ) {
+	        		$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
+        			$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
+    	    		$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
+        			$c_sort = "$t_custom_field_string_table.value";
+        			$t_select_clauses[] = "$t_custom_field_string_table.value";
+     		   	}
 
-			if ( 'DESC' == $t_dir_fields[$i] ) {
-				$c_dir = 'DESC';
-			} else {
-				$c_dir = 'ASC';
+				if ( 'DESC' == $t_dir_fields[$i] ) {
+					$c_dir = 'DESC';
+				} else {
+					$c_dir = 'ASC';
+				}
+
+				$t_order_array[] = "$c_sort $c_dir";
 			}
-
-			$t_order_array[] = "$c_sort $c_dir";
 		}
+		
+		# add basic sorting if necessary
+		if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
+			$t_order_array[] = 'last_updated DESC';
+        }
+		if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
+			$t_order_array[] = 'date_submitted DESC';
+        }
+
 		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 
@@ -1489,10 +1495,10 @@
 			</td>
 			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
 				<?php 
-					$t_sticky_filter_state = gpc_string_to_bool( $t_filter['sticky_issues'] ) ? 'on' : 'off' ;
-					PRINT $t_sticky_filter_state;
+					$t_sticky_filter_state = gpc_string_to_bool( $t_filter['sticky_issues'] )  ;
+					PRINT ( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 				?>
-				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state;?>" />
+				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
 			</td>
 			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
 				<?php PRINT $t_filter['highlight_changed']; ?>
@@ -1732,6 +1738,9 @@
 
 					for ( $i=0; $i<2; $i++ ) {
 						if ( isset( $t_sort_fields[$i] ) ) {
+							if ( 0 < $i ) {
+								echo ", ";
+							}
 							$t_sort = $t_sort_fields[$i];
         					if ( strpos( $t_sort, 'custom_' ) === 0 ) {
         						$t_field_name = string_display( lang_get_defaulted( substr( $t_sort, strlen( 'custom_' ) ) ) );
@@ -2273,7 +2282,10 @@
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
 		<?php
 			# if current user is a reporter, and limited reports set to ON, only display that name
-			if ( ( ON == config_get( 'limit_reporters' ) ) && ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) ) {
+		# @@@ thraxisp - access_has_project_level checks greater than or equal to, 
+		#   this assumed that there aren't any holes above REPORTER where the limit would apply
+		# 
+			if ( ( ON === config_get( 'limit_reporters' ) ) && ( ! access_has_project_level( REPORTER + 1 ) ) ) {
 				$t_id = auth_get_current_user_id();
 				$t_username = user_get_field( $t_id, 'username' );
 				$t_realname = user_get_field( $t_id, 'realname' );
@@ -2632,7 +2644,7 @@
 		# if there are fields to display, show the dropdowns
 		if ( count( $t_fields ) > 0 ) {
 			# display a primary and secondary sort fields
-			echo '<select name="sort_1">';
+			echo '<select name="sort_0">';
 			foreach ( $t_shown_fields as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $key, $t_sort_fields[0] );
@@ -2640,7 +2652,7 @@
 			}
 			echo '</select>';
 
-			echo '<select name="dir_1">';
+			echo '<select name="dir_0">';
 			foreach ( $t_shown_dirs as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $key, $t_dir_fields[0] );
@@ -2651,14 +2663,14 @@
 			echo ', ';
 
 			# for secondary sort
-			echo '<select name="sort_2">';
+			echo '<select name="sort_1">';
 			foreach ( $t_shown_fields as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $key, $t_sort_fields[1] );
 				echo ">$val</option>";
 			}
 			echo '</select>';
-			echo '<select name="dir_2">';
+			echo '<select name="dir_1">';
 			foreach ($t_shown_dirs as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $key, $t_dir_fields[1] );
