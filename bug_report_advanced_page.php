@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.47 2005-04-14 15:46:37 thraxisp Exp $
+	# $Id: bug_report_advanced_page.php,v 1.48 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -465,8 +465,12 @@
 </div>
 
 <!-- Autofocus JS -->
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
-window.document.report_bug_form.category.focus();
+<!--
+	window.document.report_bug_form.category.focus();
+-->
 </script>
+<?php } ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

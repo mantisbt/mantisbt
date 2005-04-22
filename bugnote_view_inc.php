@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.25 2005-03-26 18:27:18 thraxisp Exp $
+	# $Id: bugnote_view_inc.php,v 1.26 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -48,7 +48,7 @@
 <div id="bugnotes_closed" style="display: none;">
 <table class="width100" cellspacing="1">
 	<td class="form-title" colspan="2">
-		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
@@ -71,7 +71,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
 		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
@@ -176,7 +176,9 @@
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/JavaScript">
+<!--
 	SetDiv( "bugnotes", g_div_bugnotes );
+-->
 </script>
 <?php } ?>
 

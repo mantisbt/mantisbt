@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.5 2005-03-21 20:48:55 vwegert Exp $
+	# $Id: lost_pwd_page.php,v 1.6 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
@@ -95,9 +95,13 @@
 	if ( ON == config_get( 'use_javascript' ) ) {
 ?>
 <!-- Autofocus JS -->
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
-window.document.lost_password_form.username.focus();
+<!--
+	window.document.lost_password_form.username.focus();
+-->
 </script>
+<?php } ?>
 
 <?php
 	}

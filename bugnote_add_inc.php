@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.22 2004-06-29 08:38:43 int2str Exp $
+	# $Id: bugnote_add_inc.php,v 1.23 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -19,7 +19,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
@@ -35,7 +35,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
 		><img border="0" src="images/minus.png" alt="-" /></a>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 <?php } ?>
@@ -80,7 +80,9 @@
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/JavaScript">
+<!--
 	SetDiv( "bugnote_add", g_div_bugnote_add );
+-->
 </script>
 <?php } ?>
 

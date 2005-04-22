@@ -31,6 +31,7 @@
 		<body onload="SetInitialFocus();">
 
 		<script language="Javascript">
+		<!--
 		function SetInitialFocus() {
 			<?php
 			global $t_target_field;
@@ -63,6 +64,7 @@
 
 		    return true;
 		}
+		-->
 		</script>
 
 		<?php

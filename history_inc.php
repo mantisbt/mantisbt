@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.26 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: history_inc.php,v 1.27 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,7 +34,7 @@
 <table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
-		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
+		<a href="" onclick="ToggleDiv( 'history', g_div_history ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'bug_history' ) ?>
 	</td>
@@ -51,7 +51,7 @@
 <tr>
 	<td class="form-title" colspan="4">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
+		<a href="" onclick="ToggleDiv( 'history', g_div_history ); return false;"
 		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'bug_history' ) ?>
@@ -96,6 +96,8 @@
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/JavaScript">
+<!--
 	SetDiv( "history", g_div_history );
+-->
 </script>
 <?php } ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup_page.php,v 1.30 2004-09-28 13:57:37 thraxisp Exp $
+	# $Id: signup_page.php,v 1.31 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -104,9 +104,13 @@
 	if ( ON == config_get( 'use_javascript' ) ) {
 ?>
 <!-- Autofocus JS -->
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
-window.document.signup_form.username.focus();
+<!--
+	window.document.signup_form.username.focus();
+-->
 </script>
+<?php } ?>
 <?php
 	}
 

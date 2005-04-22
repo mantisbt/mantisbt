@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.42 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: login_page.php,v 1.43 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -149,8 +149,12 @@
 ?>
 
 <!-- Autofocus JS -->
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
-window.document.login_form.username.focus();
+<!--
+	window.document.login_form.username.focus();
+-->
 </script>
+<?php } ?>
 
 <?php html_page_bottom1a( __FILE__ ) ?>

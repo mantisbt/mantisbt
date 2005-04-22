@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.156 2005-04-21 14:42:40 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.157 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,9 @@
 	if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 		?>
 		<script type="text/javascript">
+		<!--
 			var string_loading = '<?php echo lang_get( 'loading' );?>';
+		-->
 		</script>
 		<script type="text/javascript" src="javascript/xmlhttprequest.js"></script>
 		<script type="text/javascript" src="javascript/addLoadEvent.js"></script>
@@ -156,7 +158,7 @@
 		<td class="left" colspan="<?php echo $col_count-2; ?>">
 <?php
 		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
-			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onClick=\"checkall('bug_action', this.form.all_bugs.checked)\"><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
+			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\"><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
 		}
 
 		if ( $t_checkboxes_exist ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.101 2005-04-22 21:26:21 prichards Exp $
+	# $Id: filter_api.php,v 1.102 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2693,6 +2693,7 @@
 ?>
 
 	<script language="Javascript">
+	<!--
 	function <?php echo $t_js_toggle_func . "_start" ; ?>(disable) {
 			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_year.disabled = disable ;
 			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_month.disabled = disable ;
@@ -2722,6 +2723,7 @@
 			break ;
 		}
 	}
+	-->
 	</script>
 
 <?php

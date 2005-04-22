@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.160 2005-04-22 10:31:03 vboctor Exp $
+	# $Id: html_api.php,v 1.161 2005-04-22 22:06:07 prichards Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -210,9 +210,9 @@
 		echo "\t", '<link rel="stylesheet" type="text/css" href="', $t_css_url, '" />', "\n";
 
 		# fix for NS 4.x css
-		echo "\t", '<script type="text/javascript" language="JavaScript">', "\n";
+		echo "\t", '<script type="text/javascript" language="JavaScript"><!--', "\n";
 		echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}</style>")}', "\n";
-		echo "\t", '</script>', "\n";
+		echo "\t", '--></script>', "\n";
 	}
 
 	# --------------------
