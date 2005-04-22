@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.11 2005-03-23 18:42:22 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.12 2005-04-22 21:26:22 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -139,11 +139,11 @@
 	<?php # -- Viewing range info -- ?>
 	<td class="form-title" colspan="2">
 		<?php
-			echo '<a class="subtle" href="view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title] . '">';
+			echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&&amp; . $url_link_parameters[$t_box_title] . '">';
 			echo $box_title;
 			echo '</a>';
 			echo ' [';
-			echo '<a class="subtle" href="view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title] . '" target="_blank">';
+			echo '<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;' . $url_link_parameters[$t_box_title] . '" target="_blank">';
 			echo '^';
 			echo '</a>]';
 		?>

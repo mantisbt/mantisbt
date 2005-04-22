@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.100 2005-04-21 14:41:09 thraxisp Exp $
+	# $Id: filter_api.php,v 1.101 2005-04-22 21:26:21 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1775,7 +1775,7 @@
 			<td class="center">
 				<?php
 					if ( ON == config_get( 'dhtml_filters' ) ) {
-						$f_switch_view_link = 'view_all_set.php?type=6&view_type=';
+						$f_switch_view_link = 'view_all_set.php?type=6&amp;view_type=';
 					} else {
 						$f_switch_view_link = 'view_filters_page.php?view_type=';
 					}
