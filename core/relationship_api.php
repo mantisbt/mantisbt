@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.33 2005-03-21 20:14:58 vwegert Exp $
+	# $Id: relationship_api.php,v 1.34 2005-04-22 21:34:04 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -727,8 +727,8 @@
 			echo lang_get( 'bug_relationships' );
 			if ( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) ) ?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&amp;graph=relation', lang_get( 'relation_graph' ) ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&amp;graph=dependency', lang_get( 'dependency_graph' ) ) ?></span>
 		<?php
 			}
 		?>

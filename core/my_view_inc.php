@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.13 2005-04-22 21:27:31 prichards Exp $
+	# $Id: my_view_inc.php,v 1.14 2005-04-22 21:34:04 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,7 @@
 		'hide_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
 		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&hide_status=' . $t_bug_resolved_status_threshold;
+	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&amp;hide_status=' . $t_bug_resolved_status_threshold;
 
 	$c_filter['recent_mod'] = array(
 		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
@@ -78,7 +78,7 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
+	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&amp;hide_status=' . $t_hide_status_default;
 
 	$c_filter['resolved'] = array(
 		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
@@ -93,7 +93,7 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&hide_status=' . $t_bug_resolved_status_threshold;
+	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&amp;hide_status=' . $t_bug_resolved_status_threshold;
 
 	$c_filter['unassigned'] = array(
 		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
@@ -108,7 +108,7 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
 	);
-	$url_link_parameters['unassigned'] = 'handler_id=[none]' . '&hide_status=' . $t_hide_status_default;
+	$url_link_parameters['unassigned'] = 'handler_id=[none]' . '&amp;hide_status=' . $t_hide_status_default;
 
 	$c_filter['monitored'] = array(
 		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
@@ -123,7 +123,7 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
-	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
+	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&amp;hide_status=' . $t_hide_status_default;
 
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
 

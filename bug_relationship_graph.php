@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_graph.php,v 1.2 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_relationship_graph.php,v 1.3 2005-04-22 21:34:03 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -73,9 +73,9 @@
 		<span class="small">
 <?php
 		if ( $t_graph_relation )
-			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) );
+			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency', lang_get( 'dependency_graph' ) );
 		else
-			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=relation', lang_get( 'relation_graph' ) );
+			print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=relation', lang_get( 'relation_graph' ) );
 ?>
 		</span>
 <?php
@@ -85,9 +85,9 @@
 		<span class="small">
 <?php
 			if ( $t_graph_horizontal )
-				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
+				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
 			else
-				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
+				print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&amp;graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
 ?>
 		</span>
 <?php
@@ -108,7 +108,7 @@
 	relgraph_output_map( $t_graph, 'relationship_graph_map' );
 ?>
 		<div class="center relationship-graph">
-			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&graph=<?php echo $t_graph_type ?>&orientation=<?php echo $t_graph_orientation ?>"
+			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&amp;graph=<?php echo $t_graph_type ?>&orientation=<?php echo $t_graph_orientation ?>"
 				border="0" usemap="#relationship_graph_map" />
 		</div>
 	</td>
