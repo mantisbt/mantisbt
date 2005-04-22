@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.52 2005-02-14 10:21:44 vboctor Exp $
+	# $Id: set_project.php,v 1.53 2005-04-22 21:26:22 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 		$t_redirect_url = 'view_all_set.php?type=4';
 
 		if ( $t_source_filter_id != null ) {
-			$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
+			$t_redirect_url = 'view_all_set.php?type=3&amp;source_query_id=' . $t_source_filter_id;
 		}
 	} else if ( eregi( 'changelog_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url =  'changelog_page.php';
