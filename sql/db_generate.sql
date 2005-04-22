@@ -948,4 +948,4 @@ CREATE TABLE mantis_user_table (
 -- Dumping data for table `mantis_user_table`
 -- 
 
-INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, CONCAT(MD5(RAND()),MD5(NOW())));
+INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, CONCAT(MD5(RAND()),MD5(NOW())));
