@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.13 2004-07-23 23:20:16 vboctor Exp $
+	# $Id: php_api.php,v 1.14 2005-04-22 18:44:57 prichards Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -80,7 +80,7 @@
 
 	# --------------------
 	# file_put_contents is normally in PEAR
-		if (!function_exists('file_put_contents')) {
+	if (!function_exists('file_put_contents')) {
 		function file_put_contents($filename, $data) {
 			if (($h = fopen($filename, 'w')) === false) {
 				return false;
@@ -90,6 +90,15 @@
 			}
 			fclose($h);
 			return $bytes;
+		}
+	}
+
+	# --------------------
+	# vsprintf is normally in PEAR
+	if ( !function_exists( 'vsprintf' ) ) {
+		function vsprintf( $format, $args ) {
+			array_unshift( $args, $format );
+			return call_user_func_array( 'sprintf', $args );
 		}
 	}
 
