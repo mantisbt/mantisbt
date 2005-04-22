@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.4 2005-03-21 23:19:04 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.5 2005-04-22 01:59:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -20,8 +20,8 @@
 	$t_redirect_url = 'manage_config_email_page.php';
 	$t_project = helper_get_current_project();
 
-	$f_flags			= gpc_get( 'flag' );
-	$f_thresholds		= gpc_get( 'flag_threshold' );
+	$f_flags			= gpc_get( 'flag', array() );
+	$f_thresholds		= gpc_get( 'flag_threshold', array() );
 	$f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
 	html_page_top1( lang_get( 'manage_email_config' ) );
@@ -40,9 +40,12 @@
 	if( config_get( 'enable_relationship' ) == ON ) {
 		$t_valid_actions[] = 'relationship';
 	}
-	$t_statuses = explode_enum_string( config_get( 'status_enum_string' ) );
-	foreach( $t_statuses as $t_status ) {
-		list( $t_state, $t_label ) = explode_enum_arr( $t_status );
+	
+	$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
+    ksort( $t_statuses );
+    reset( $t_statuses );
+
+	foreach( $t_statuses as $t_status => $t_label ) {
 		$t_valid_actions[] = $t_label;
 	}
 	$t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes' );
