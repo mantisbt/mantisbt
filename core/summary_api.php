@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.38 2005-03-15 19:48:15 prichards Exp $
+	# $Id: summary_api.php,v 1.39 2005-04-22 22:11:18 prichards Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -776,6 +776,7 @@
 				PRINT '<td>';
 				printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
 				PRINT '</td>';
+				PRINT '</tr>';
 			}
 		}
 	}	# --------------------
@@ -917,6 +918,7 @@
 				PRINT '<td>';
 				PRINT ( $t_total_severity - $t_total_errors );
 				PRINT '</td>';
+				PRINT '</tr>';
 			}
 		}
 	}
