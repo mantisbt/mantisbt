@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.159 2005-04-03 12:43:35 jlatour Exp $
+	# $Id: html_api.php,v 1.160 2005-04-22 10:31:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -355,7 +355,7 @@
 		if ( ON == config_get( 'show_version' ) ) {
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a></span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2004 Mantis Group</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
 		if ( isset( $_SERVER['PHP_SELF'] ) && ( false === strstr( "login_page.php", $_SERVER['PHP_SELF'] ) ) && !current_user_is_anonymous() ) {
