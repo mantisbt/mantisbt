@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.102 2005-04-22 22:06:07 prichards Exp $
+	# $Id: filter_api.php,v 1.103 2005-04-22 22:27:51 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1003,7 +1003,7 @@
 											$t_this_name = user_get_name( $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1042,7 +1042,7 @@
 											$t_this_name = user_get_name( $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1083,7 +1083,7 @@
 											$t_this_name = user_get_name( $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1117,7 +1117,7 @@
 											$t_this_string = $t_current;
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1150,7 +1150,7 @@
 											$t_this_string = get_enum_element( 'severity', $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1183,7 +1183,7 @@
 											$t_this_string = get_enum_element( 'resolution', $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1251,7 +1251,7 @@
 											$t_this_string = get_enum_element( 'status', $t_current );
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1285,7 +1285,7 @@
 												$t_this_string = get_enum_element( 'status', $t_current );
 											}
 											if ( $t_first_flag != true ) {
-												$t_output = $t_output . '<br>';
+												$t_output = $t_output . '<br />';
 											} else {
 												$t_first_flag = false;
 											}
@@ -1326,7 +1326,7 @@
 											$t_this_string = $t_current;
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1363,7 +1363,7 @@
 											$t_this_string = $t_current;
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1399,7 +1399,7 @@
 											$t_this_string = $t_current;
 										}
 										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
+											$t_output = $t_output . '<br />';
 										} else {
 											$t_first_flag = false;
 										}
@@ -1440,7 +1440,7 @@
 	                  	$t_this_string = get_enum_element( 'priority', $t_current );
 	                  }
 	                  if ( $t_first_flag != true ) {
-	                  	$t_output = $t_output . '<br>';
+	                  	$t_output = $t_output . '<br />';
 	                  } else {
 	                  	$t_first_flag = false;
 	                  }
@@ -1669,7 +1669,7 @@
 								}
 
 								if ( $t_first_flag != true ) {
-									$t_output = $t_output . '<br>';
+									$t_output = $t_output . '<br />';
 								} else {
 									$t_first_flag = false;
 								}

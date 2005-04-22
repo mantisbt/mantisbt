@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.5 2005-04-11 17:08:04 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.6 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -51,7 +51,7 @@
 	function section_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>'
+		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) ) . '">'
@@ -114,7 +114,7 @@
 	function access_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>'
+		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo "\n<tr><td>&nbsp;</td>";
 		foreach( $t_enum_status as $t_status ) {

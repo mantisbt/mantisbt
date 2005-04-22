@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.9 2005-03-27 19:39:50 thraxisp Exp $
+	# $Id: adm_permissions_report.php,v 1.10 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -28,7 +28,7 @@
 	function get_section_begin( $p_section_name ) {
 		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
 		$t_output = '<table class="width100">';
-		$t_output .= '<tr><td class="form-title" colspan=' . ( count( $t_access_levels ) + 1 ) . '>' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+		$t_output .= '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		$t_output .= '<tr><td class="form-title" width="40%">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 		foreach( $t_access_levels as $t_access_level ) {
 			$t_entry_array = explode_enum_arr( $t_access_level );
@@ -47,7 +47,7 @@
 			$t_entry_array = explode_enum_arr( $t_access_level );
 
 			if ( (int)$t_entry_array[0] >= (int)$p_access_level ) {
-				$t_value = '<img src="images/ok.gif" width=20 height=15 title="X">';
+				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			} else {
 				$t_value = '&nbsp;';
 			}
@@ -65,7 +65,7 @@
 		return $t_output;
 	}
 
-	echo '<br><br>';
+	echo '<br /><br />';
 
 	# News
 	echo get_section_begin( lang_get( 'news' ) );

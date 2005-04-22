@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.45 2005-03-26 18:27:18 thraxisp Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.46 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -359,7 +359,7 @@ var_dump($t_field_name_arr);
 	$name_index++;
 ?>
 <?php # Bugnotes BEGIN (3 rows) ?>
-<td colspan=3>
+<td colspan="3">
 <?php  # print bugnotes
 		# get the bugnote data
  		if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_id ) ) {

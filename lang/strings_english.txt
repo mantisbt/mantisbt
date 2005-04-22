@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.252 $
-	# $Author: thraxisp $
-	# $Date: 2005-04-21 14:57:03 $
+	# $Revision: 1.253 $
+	# $Author: prichards $
+	# $Date: 2005-04-22 22:27:51 $
 	#
-	# $Id: strings_english.txt,v 1.252 2005-04-21 14:57:03 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.253 2005-04-22 22:27:51 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -1154,7 +1154,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.5 2005-04-11 17:08:03 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.6 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -64,7 +64,7 @@
 			    $t_show_submit = true;
 			} else {
 			    if ( $t_set ) {
-				    $t_value = '<img src="images/ok.gif" width=20 height=15 title="X">';
+				    $t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			    } else {
 				    $t_value = '&nbsp;';
 			    }
@@ -95,7 +95,7 @@
 		    $t_show_submit = true;
 		} else {
 		    if ( ON == config_get( $p_threshold ) ) {
-			    $t_value = '<img src="images/ok.gif" width=20 height=15 title="X">';
+			    $t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
 		    } else {
 			    $t_value = '&nbsp;';
 		    }

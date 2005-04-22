@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.6 2005-04-22 22:06:07 prichards Exp $
+	# $Id: lost_pwd_page.php,v 1.7 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
@@ -31,7 +31,7 @@
 <form name="lost_password_form" method="post" action="lost_pwd.php">
 <table class="width50" cellspacing="1">
 <tr>
-	<td class="form-title" colspan=2>
+	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'lost_password_title' ) ?>
 	</td>
 </tr>

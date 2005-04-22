@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.7 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: make_captcha_img.php,v 1.8 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -87,12 +87,12 @@
 				// Test for GD-Library(-Version)
 				$this->gd_version = get_gd_version();
 				if($this->gd_version == 0) die("There is no GD-Library-Support enabled. The Captcha-Class cannot be used!");
-				if($this->debug) echo "\n<br>-Captcha-Debug: The available GD-Library has major version ".$this->gd_version;
+				if($this->debug) echo "\n<br />-Captcha-Debug: The available GD-Library has major version ".$this->gd_version;
 
 				// extracts config array
 				if(is_array($config))
 				{
-					if($this->debug) echo "\n<br>-Captcha-Debug: Extracts Config-Array in unsecure-mode!";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Extracts Config-Array in unsecure-mode!";
 					foreach($config as $k=>$v) $this->$k = $v;
 				}
 
@@ -102,45 +102,45 @@
 					$temp = $this->minsize;
 					$this->minsize = $this->maxsize;
 					$this->maxsize = $temp;
-					if($this->debug) echo "<br>-Captcha-Debug: Arrghh! What do you think I mean with min and max? Switch minsize with maxsize.";
+					if($this->debug) echo "<br />-Captcha-Debug: Arrghh! What do you think I mean with min and max? Switch minsize with maxsize.";
 				}
 
 				// check TrueTypeFonts
 				if(is_array($this->TTF_RANGE))
 				{
-					if($this->debug) echo "\n<br>-Captcha-Debug: Check given TrueType-Array! (".count($this->TTF_RANGE).")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Check given TrueType-Array! (".count($this->TTF_RANGE).")";
 					$temp = array();
 					foreach($this->TTF_RANGE as $k=>$v)
 					{
 						if(is_readable($this->TTF_folder.$v)) $temp[] = $v;
 					}
 					$this->TTF_RANGE = $temp;
-					if($this->debug) echo "\n<br>-Captcha-Debug: Valid TrueType-files: (".count($this->TTF_RANGE).")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Valid TrueType-files: (".count($this->TTF_RANGE).")";
 					//if(count($this->TTF_RANGE) < 1) die('No Truetypefont available for the CaptchaClass.');
 				}
 				else
 				{
-					if($this->debug) echo "\n<br>-Captcha-Debug: Check given TrueType-File! (".$this->TTF_RANGE.")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Check given TrueType-File! (".$this->TTF_RANGE.")";
 					if(!is_readable($this->TTF_folder.$this->TTF_RANGE)) die('No Truetypefont available for the CaptchaClass.');
 				}
 
 				// select first TrueTypeFont
 				$this->change_TTF();
-				if($this->debug) echo "\n<br>-Captcha-Debug: Set current TrueType-File: (".$this->TTF_file.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Set current TrueType-File: (".$this->TTF_file.")";
 
 				// get number of noise-chars for background if is enabled
 				$this->nb_noise = $this->noise ? ($this->chars * $this->noisefactor) : 0;
-				if($this->debug) echo "\n<br>-Captcha-Debug: Set number of noise characters to: (".$this->nb_noise.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Set number of noise characters to: (".$this->nb_noise.")";
 
 				// set dimension of image
 				$this->lx = ($this->chars + 1) * (int)(($this->maxsize + $this->minsize) / 1.5);
 				$this->ly = (int)(2.4 * $this->maxsize);
-				if($this->debug) echo "\n<br>-Captcha-Debug: Set image dimension to: (".$this->lx." x ".$this->ly.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Set image dimension to: (".$this->lx." x ".$this->ly.")";
 			}
 
 			function make_captcha( $private_key )
 			{
-				if($this->debug) echo "\n<br>-Captcha-Debug: Generate private key: ($private_key)";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Generate private key: ($private_key)";
 
 				// create Image and set the apropriate function depending on GD-Version & websafecolor-value
 				if($this->gd_version >= 2 && !$this->websafecolors)
@@ -154,15 +154,15 @@
 					$func2 = 'imagecolorclosest';
 				}
 				$image = $func1($this->lx,$this->ly);
-				if($this->debug) echo "\n<br>-Captcha-Debug: Generate ImageStream with: ($func1())";
-				if($this->debug) echo "\n<br>-Captcha-Debug: For colordefinitions we use: ($func2())";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Generate ImageStream with: ($func1())";
+				if($this->debug) echo "\n<br />-Captcha-Debug: For colordefinitions we use: ($func2())";
 
 
 				// Set Backgroundcolor
 				$this->random_color(224, 255);
 				$back =  @imagecolorallocate($image, $this->r, $this->g, $this->b);
 				@ImageFilledRectangle($image,0,0,$this->lx,$this->ly,$back);
-				if($this->debug) echo "\n<br>-Captcha-Debug: We allocate one color for Background: (".$this->r."-".$this->g."-".$this->b.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: We allocate one color for Background: (".$this->r."-".$this->g."-".$this->b.")";
 
 				// allocates the 216 websafe color palette to the image
 				if($this->gd_version < 2 || $this->websafecolors) $this->makeWebsafeColors($image);
@@ -172,7 +172,7 @@
 				if($this->nb_noise > 0)
 				{
 					// random characters in background with random position, angle, color
-					if($this->debug) echo "\n<br>-Captcha-Debug: Fill background with noise: (".$this->nb_noise.")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Fill background with noise: (".$this->nb_noise.")";
 					for($i=0; $i < $this->nb_noise; $i++)
 					{
 						srand((double)microtime()*1000000);
@@ -197,14 +197,14 @@
 				else
 				{
 					// generate grid
-					if($this->debug) echo "\n<br>-Captcha-Debug: Fill background with x-gridlines: (".(int)($this->lx / (int)($this->minsize / 1.5)).")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Fill background with x-gridlines: (".(int)($this->lx / (int)($this->minsize / 1.5)).")";
 					for($i=0; $i < $this->lx; $i += (int)($this->minsize / 1.5))
 					{
 						$this->random_color(160, 224);
 						$color	= $func2($image, $this->r, $this->g, $this->b);
 						@imageline($image, $i, 0, $i, $this->ly, $color);
 					}
-					if($this->debug) echo "\n<br>-Captcha-Debug: Fill background with y-gridlines: (".(int)($this->ly / (int)(($this->minsize / 1.8))).")";
+					if($this->debug) echo "\n<br />-Captcha-Debug: Fill background with y-gridlines: (".(int)($this->ly / (int)(($this->minsize / 1.8))).")";
 					for($i=0 ; $i < $this->ly; $i += (int)($this->minsize / 1.8))
 					{
 						$this->random_color(160, 224);
@@ -214,7 +214,7 @@
 				}
 
 				// generate Text
-				if($this->debug) echo "\n<br>-Captcha-Debug: Fill forground with chars and shadows: (".$this->chars.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Fill forground with chars and shadows: (".$this->chars.")";
 				for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 				{
 					$text	= strtoupper(substr($private_key, $i, 1));
@@ -241,7 +241,7 @@
 				header('Content-type: image/jpeg');
 				@ImageJPEG($image, '', $this->jpegquality);
 				@ImageDestroy($image);
-				if($this->debug) echo "\n<br>-Captcha-Debug: Destroy Imagestream.";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Destroy Imagestream.";
 			}
 
 			/** @private **/
@@ -258,7 +258,7 @@
 						}
 					}
 				}
-				if($this->debug) echo "\n<br>-Captcha-Debug: Allocate 216 websafe colors to image: (".imagecolorstotal($image).")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Allocate 216 websafe colors to image: (".imagecolorstotal($image).")";
 			}
 
 			function random_color($min,$max)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.10 2005-01-27 13:32:01 vboctor Exp $
+	# $Id: my_view_page.php,v 1.11 2005-04-22 22:27:50 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -127,7 +127,7 @@
 
 				# display the required box
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '<br>';
+				echo '<br />';
 
 				# close the first column for first half of boxes
 				if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
