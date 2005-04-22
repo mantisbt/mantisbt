@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.88 $
+	# $Revision: 1.89 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:41 $
+	# $Date: 2005-04-22 10:21:21 $
 	#
-	# $Id: strings_dutch.txt,v 1.88 2005-04-21 06:52:41 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.89 2005-04-22 10:21:21 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -32,9 +32,9 @@ $s_actiongroup_menu_resolve = 'Afronden';
 $s_actiongroup_menu_update_priority = 'Aanpassen prioriteit';
 $s_actiongroup_menu_update_status = 'Aanpassen status';
 $s_actiongroup_menu_update_view_status = 'Aanpassen bekijk status';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_category = 'Aanpassen categorie';
+$s_actiongroup_menu_set_sticky = 'Zet/verwijder bovenaan';
+$s_actiongroup_menu_update_field = 'vernieuw %s';
 $s_actiongroup_bugs = 'Geselecteerde bugs';
 
 # new strings:
@@ -58,8 +58,8 @@ $s_jump = 'Ga naar';
 $s_copy_users = 'Kopie&euml;er gebruikers';
 $s_copy_categories_from = 'Kopieer categorie&euml;n van';
 $s_copy_categories_to = 'Kopieer categorie&euml;n naar';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'Kopieer gebruikers van';
+$s_copy_users_to = 'Kopieer gebruikers naar';
 $s_bug_history = 'Bug geschiedenis';
 $s_field = 'Veld';
 $s_old_value = 'Oude waarde';
@@ -107,7 +107,7 @@ $s_login_link = 'Inloggen';
 $s_bug_actiongroup_failed = 'Bij de volgende bugs had u niet genoeg permissies om die actie uit te voeren: ';
 $s_bug_actiongroup_access = 'U heeft geen permissies om deze actie uit te voeren.';
 $s_bug_actiongroup_status = 'Deze bug kan niet op de gevraagde status gezet worden';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'Deze bug kan niet naar de gewenste categorie gewijzigd worden';
 $s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil sluiten?';
 $s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil verwijderen?';
 $s_move_bugs_conf_msg = 'Verplaats bugs naar';
@@ -117,8 +117,8 @@ $s_resolve_bugs_conf_msg = 'Kies afhandeling van bugs';
 $s_priority_bugs_conf_msg = 'Kies prioriteit van bugs';
 $s_status_bugs_conf_msg = 'Kies status van bugs';
 $s_view_status_bugs_conf_msg = 'Kies bug bekijk status';
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_category_bugs_conf_msg = 'Kies bug categorie';
+$s_set_sticky_bugs_conf_msg = 'Weet u zeker dat u deze bug bovenaan wilt zetten of verwijderen?';
 $s_close_group_bugs_button = 'Sluit bugs' ;
 $s_delete_group_bugs_button = 'Verwijder bugs' ;
 $s_move_group_bugs_button = 'Verplaats bugs' ;
@@ -127,9 +127,9 @@ $s_assign_group_bugs_button = 'Toewijzen bugs' ;
 $s_resolve_group_bugs_button = 'Afhandelen bugs' ;
 $s_priority_group_bugs_button = 'Aanpassen prioriteit' ;
 $s_status_group_bugs_button = 'Aanpassen status' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Wijzig categorie';
 $s_view_status_group_bugs_button = 'Aanpassen bekijk status';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Zet/verwijder bovenaan';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Overzicht grafieken: Status' ;
@@ -151,15 +151,15 @@ $s_priority_link = 'Per prioriteit';
 $s_severity_link = 'Per omvang';
 $s_category_link = 'Per categorie';
 $s_resolution_link = 'Per afhandeling';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
-$s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_legend_still_open = 'Nog open';
+$s_legend_resolved = 'Opgelost';
+$s_legend_assigned = 'Toegewezen';
+$s_legend_total = 'Totaal';
+$s_legend_opened = 'Geopened';
+$s_legend_closed = 'Gesloten';
+$s_legend_reported = 'Geraporteerd';
+$s_cumulative = 'Cumulatief';
+$s_not_enough_data = 'Niet genoeg data om een grafiek te genereren';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Toon alleen geselecteerde';
@@ -197,7 +197,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FOUT: Bug notitie niet gevonden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FOUT: Project niet gevonden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FOUT: Database veld niet gevonden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FOUT: Kan geen verbinding maken met de FTP server';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'FOUT: Bug behandelaar heeft niet voldoende rechten om de bug af te handelen in de huidige status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FOUT: Er bestaat al een project met die naam.  Ga alstublieft terug om terug om een nieuwe naam te kiezen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Foute project naam opgegeven. Deze naam kan niet blanco zijn.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Gebruiker niet gevonden.';
@@ -207,7 +207,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Nieuws niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Wachtwoord komt niet overeen met verificatie.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FOUT: Een array werd verwacht, maar een string werd ontvangen.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een array ontvangen.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Een nummer was verwacht voor %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d niet gevonden.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
@@ -255,7 +255,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'U moet een e-mail adres
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De opgegeven informatie komt niet overeen met een bekend account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings URL is foutief of is al gebruikt. Meld u nogmaals aan.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hierarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
@@ -273,9 +273,9 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'Beheerder';
 $s_myself = "Mijzelf";
-$s_default_access_level = 'Default access level';
+$s_default_access_level = 'Standaard toegangsniveau';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Bug status percentage';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder';
@@ -305,7 +305,7 @@ $s_new_account_signup_msg = 'Het volgende account is aangemaakt:';
 $s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoord wijziging aangevraagd met e-mail bevestiging. Als u dit niet was kan u dit bericht negeren.' . "\n\n" . 'Als u deze wijziging voort wil zetten, bezoekt u de volgende URL om uw wachtwoord te wijzigen:';
 $s_reset_request_in_progress_msg = 'Als u de juiste gebruikersnaam en e-mail adres gegevens heeft opgegeven, sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kunt aanpassen.';
 
-$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_new = 'De volgende bug status is NIEUW (opnieuw)';
 $s_email_notification_title_for_status_bug_feedback = 'De volgende bug wacht op uw feedback.';
 $s_email_notification_title_for_status_bug_acknowledged = 'De volgende bug is onderkend.';
 $s_email_notification_title_for_status_bug_confirmed = 'De volgende bug is bevestigd.';
@@ -323,18 +323,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Een sponsoring van
 $s_email_notification_title_for_action_sponsorship_deleted = 'Een sponsoring van de volgende bug is geannuleerd.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Aan deze bug is een aantekening toegevoegd.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "De volgende bug is een DUPLIKAAT van bug %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "De bug %s is een DUPLICAAT van de volgende bug.";
+$s_email_notification_title_for_action_related_to_relationship_added = "De volgende bug is GERELATEERD aan bug %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "De volgende bug BEVAT bug %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "De volgende bug MAAKT DEEL UIT van bug %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "De volgende bug is GEEN DUPLIKAAT van bug %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "De bug is %s is GEEN DUPLIKAAT van de volgende bug.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "De volgende bug is NIET GERELATEERD aan bug %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "De volgende bug BEVAT bug %s NIET.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "De volgende bug MAAKT GEEN DEEL UIT van bug %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "De GERELATEERDE bug %s is afgehandeld.";
+$s_email_notification_title_for_action_relationship_child_closed = "De GERELATEERDE bug %s is afgesloten.";
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Afgehandeld door:';
@@ -369,7 +369,7 @@ $s_username = 'Gebruikersnaam';
 $s_realname = 'Echte naam';
 $s_email = 'E-mail';
 $s_password = 'Wachtwoord';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = 'Het wachtwoord wordt bepaald door een ander systeem en kan hier dus niet worden gewijzigd.';
 $s_confirm_password  = 'Bevestig wachtwoord';
 $s_access_level = 'Toegangsniveau';
 $s_update_user_button = 'Aanpassen gebruiker';
@@ -415,7 +415,7 @@ $s_profile_deleted_msg = 'Verwijder profiel.';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Aanpassen profiel';
 $s_platform = 'Platform';
-$s_operating_system = 'Besturingssysteem';
+$s_operating_system = 'Besuringssysteem';
 $s_additional_description = 'Extra beschrijving';
 $s_update_profile_button = 'Aanpassen profiel';
 
@@ -509,9 +509,9 @@ $s_bug_reminder = 'Stuur een herinnering';
 $s_reminder_sent_to = 'Herinnering verstuurd aan';
 $s_bug_send_button = 'Verstuur';
 $s_reminder = 'Herinnering';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Deze herinnering wordt verstuurd naar de ontvangers welke feedback wensen op deze bug.';
+$s_reminder_monitor = 'Deze ontvangers zullen ook de bug bij gaan houden. Met de knop Stop Bijhouden kunnen ze dit stilzetten.';
+$s_reminder_store = 'Deze herinnering zal worden opgeslagen bij deze bug.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Bug succesvol aangepast.';
@@ -529,7 +529,7 @@ $s_last_update = 'Laatste aanpassing';
 $s_reporter = 'Rapporteur';
 $s_assigned_to = 'Toegewezen aan';
 $s_priority = 'Prioriteit';
-$s_resolution = 'Resolutie';
+$s_resolution = 'Afhandeling';
 $s_status = 'Status';
 $s_duplicate_id = 'Nummer van dubbel rapport';
 $s_os = 'OS';
@@ -629,12 +629,12 @@ $s_filter_button = 'Filter';
 $s_manage_users_link = 'Gebruikers beheer';
 $s_manage_projects_link = 'Projecten beheer';
 $s_manage_custom_field_link = 'Beheer gebruikersvelden';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_global_profiles_link = 'Beheer globale profielen';
+$s_permissions_summary_report = 'Toegangsrapport';
+$s_manage_config_link = 'Configuratie beheer';
+$s_manage_threshold_config = 'Werkwijze instellingen';
+$s_manage_email_config = 'Email meldingen';
+$s_manage_workflow_config = 'Werkwijze';
 $s_create_new_account_link = 'Aanmaken account';
 $s_projects_link = 'Projecten';
 $s_documentation_link = 'Documentatie';
@@ -650,53 +650,54 @@ $s_last_visit = 'Laatste bezoek';
 $s_edit_user_link = 'Aanpassen gebruiker';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_config_all_projects = 'LET OP: Deze configuratie is van toepassing op ALLE PROJECTEN.';
+$s_config_project = 'Let op: Deze configuratie heeft alleen invloer op het %s project.';
+$s_issue_reporter = 'Gebruiker die de bug meldde';
+$s_issue_handler = 'Gebruiker die de bug behandeld';
+$s_users_added_bugnote = 'Gebruiker voegt herinnering toe';
+$s_change_configuration = 'Configuratie bijgewerkt';
+$s_default_notify = 'Standaard meldings vlaggen gezet op';
+$s_action_notify = 'Zet actie meldingsvlaggen op';
+$s_notify_defaults_change_access = 'Verander gebruikers die de standaard meldingen kunnen zetten naar';
+$s_notify_actions_change_access = 'Verander gebruikers die de actie meldingen kunnen zetten naar';
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
+$s_non_existent = 'bestaat niet';
+$s_current_status = 'Huidige status';
+$s_next_status = 'Volgende status';
 $s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
+$s_workflow_thresholds = 'Instellingen die de werkwijze beinvloeden';
+$s_threshold = 'Instelling';
 $s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
+$s_alter_level = 'Wie kan dit wijzigen';
+$s_validation = 'Werkwijze validatie';
+$s_comment = 'Werkwijze commentaar';
+#@@@ (arno) could find this line in any php file, and i have no idea how to translate it correctly
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_unreachable = 'Een bug kan niet op deze status gezet worden';
+$s_no_exit = 'Een bug kan niet van deze status worden gehaald';
+$s_access_levels = 'Toegangs niveau\'s';
+$s_access_change = 'Minimale toegangsniveau om deze status te wijzigen';
+$s_desc_bug_submit_status = 'Status waar een nieuwe bug wordt gezet';
+$s_desc_bug_reopen_status = 'Status waar een heropende bug op wordt gezet';
+$s_desc_bug_resolved_status_threshold = 'Status waarbij een bug als afgehandeld wordt beschouwd';
+$s_workflow_change_access = 'Verander gebruikers die de werkwijze kunnen wijzigen naar';
+$s_access_change_access = 'Verander gebruiker die de status kunnen wijzigen naar';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = 'Wijs een bug toe';
+$s_allow_close_immediate = 'Sta het afsluiten van een bug bij afgehandeld toe';
+$s_allow_reporter_close = 'Sta een raporteur toe een bug te sluiten';
+$s_allow_reporter_reopen = 'Sta een raporteur toe een bug te her-openen';
+$s_set_status_assigned = 'Wijzig status bij toekennen van behandelaar';
+$s_allow_user_edit = 'Sta een gebruiker toe zijn/haar eigen herinneringen te bewerken';
+$s_limit_access = 'Beperk raporteur toegang tot zijn/haar eigen bugs';
+$s_submit_status = 'Status waar een nieuwe bug op wordt gezet';
+$s_assigned_status = 'Status waar een automatich toegewezen bug op wordt gezet';
+$s_resolved_status = 'Status waarbij een bug als afgehandeld wordt beschouwd';
+$s_readonly_status = 'Status waarbij een bug read-only wordt gezet';
+$s_reopen_status = 'Status waarop een her-opende bug wordt gezet';
+$s_reopen_resolution = 'Afhandeling waar een her-opende bug op wordt gezet';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project is succesvol toegevoegd.';
@@ -719,7 +720,7 @@ $s_update_category_button = 'Aanpassen categorie';
 $s_category_updated_msg = 'Categorie is aangepast.';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'Voeg subproject toe';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Project succesvol verwijderd.';
@@ -741,16 +742,16 @@ $s_categories = 'Categorie&euml;n';
 $s_add_category_button = 'Toevoegen categorie';
 $s_versions = 'Versies';
 $s_add_version_button = 'Toevoegen versie';
-$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_add_and_edit_version_button = 'Toevoegen en bewerken versie';
 $s_edit_link = 'Aanpassen';
 $s_actions = 'Acties';
 $s_version = 'Versie/Fabrikant';
 $s_timestamp = 'Tijdstip';
 $s_update = 'Aanpassen';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'Subprojecten';
+$s_add_subproject = 'Voeg toe als subproject';
+$s_create_new_subproject_link = 'Maak nieuw subproject';
+$s_unlink_link = 'Maak link ongedaan';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Toevoegen project';
@@ -815,7 +816,7 @@ $s_view_bugs_link = 'Bekijk bugs';
 $s_report_bug_link = 'Rapporteer bug';
 $s_changelog_link = 'Wijzigingen';
 $s_summary_link = 'Overzichten';
-$s_account_link = 'Accounts';
+$s_account_link = 'Account';
 $s_users_link = 'Gebruikers';
 $s_manage_link = 'Beheer';
 $s_edit_news_link = 'Nieuwsberichten';
@@ -899,16 +900,16 @@ $s_project_removed_user_msg = 'Gebruiker van project afgehaald';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Weet u zeker dat u deze gebruiker van het project af wil halen?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_button = 'Verwijder gebruiker';
+$s_remove_all_users_sure_msg = 'Weet u zeker dat u alle gebruiker van dit project wilt halen?';
+$s_remove_all_users_button = 'Verwijder alle gebruikers';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Toevoegen gebruiker aan project';
 $s_add_user_button = 'Toevoegen gebruiker';
 $s_project_selection_title = 'Project selectie';
 $s_remove_link = 'Verwijderen';
-$s_remove_all_link = 'Remove all';
+$s_remove_all_link = 'Alle verwijderen';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Gebruiker gegevens zijn bijgewerkt';
@@ -953,7 +954,7 @@ $s_signup_captcha_request = 'Vul de code in zoals deze rechts in beeld getoond w
 $s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestigings e-mail verstuurd naar het door u opgegeven e-mail adres.<br/>Door de instructies in deze mail te volgen, kunt u uw account activeren. U heeft zeven dagen om de bevestiging te versturen. Wanneer u dit niet doet binnen deze tijd, kan het nieuwe account verwijderd worden.<br/>U moet een geldig e-mail adres opgeven om de bevestiging te kunnen ontvangen.';
 $s_signup_title = 'Inschrijven';
 $s_signup_button = 'Inschrijven';
-$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
+$s_no_password_request = 'Uw wachtwoord wordt door een ander systeem beheerd. Neem contact op met de systeembeheerder.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Wijzig site instellingen';
@@ -1001,8 +1002,8 @@ $s_show = 'Laat zien';
 $s_changed = 'Aangepast (uren)';
 $s_viewing_bugs_title = 'Bekijken bugs';
 $s_updated = 'Aangepast';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Toon bugs die bovenaan geplaatst zijn';
+$s_sort = 'Sorteren op';
 
 # view_all_inc.php
 $s_none = 'geen';
@@ -1104,8 +1105,8 @@ $s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';
 $s_field_delete_button = 'Verwijder gebruikersveld';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'Weet u zeker dat u dit gebruikersveld wilt verwijderen (unlink) uit het project en de geaccocieerde waardes verwijderen?';
+$s_field_remove_button = 'Verwijder gebruikersveld';
 
 $s_hide_status = 'Verberg status';
 $s_filter_closed = 'Gesloten';
@@ -1147,100 +1148,100 @@ $s_add_new_relationship_button = "Toevoegen";
 $s_this_bug = "Huidige bug";
 $s_relationship_added = "Relatie toegevoegd";
 $s_relationship_deleted = "Relatie verwijderd";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "Geen relatie";
+$s_relationship_replaced = "Relatie vervangen";
+$s_replace_relationship_button = "Vervangen";
+$s_replace_relationship_sure_msg = "Er is al een relatie tussen de twee bugs. Weet u zeker dat u deze wilt vervangen?";
+$s_relationship_with_parent = "Relatie met de hoofd bug";
 $s_delete_relationship_button = "Verwijderen";
 $s_delete_relationship_sure_msg = "Weet u zeker dat u deze relatie wil verwijderen?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nog niet alle onderliggende bugs van deze bug zijn opgelost of gesloten.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende bugs van deze bug zijn opgelost of gesloten.<br/>Voordat een bovenliggende bug opgelost of gesloten kan worden, moeten alle onderliggende bugs opgelost of gesloten zijn.";
-$s_create_child_bug_button = "Create Clone";
+$s_create_child_bug_button = "Kloon bug";
 $s_bug_cloned_to = "Bug gekloond";
 $s_bug_created_from = "Bug gegenereerd van";
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = "Relatie grafiek";
+$s_relation_graph = "Relatie grafiek";
+$s_dependency_graph = "Afhankelijkheid grafiek";
+$s_vertical = "Verticaal";
+$s_horizontal = "Horizontaal";
+$s_view_issue = "Bug bekijken";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
+$s_perm_rpt_capability = 'Instelling';
 $s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
-$s_upload_issue_attachments = 'Upload issue attachments';
+$s_issues = 'BUGS';
+$s_report_issue = 'Bug rapporteren';
+$s_update_issue = 'Bug aanpassen';
+$s_monitor_issue = 'Bug monitoren';
+$s_handle_issue = 'Bug bewerken';
+$s_move_issue = 'Bug verplaatsen';
+$s_delete_issue = 'Bug verwijderen';
+$s_reopen_issue = 'Bug her-openen';
+$s_view_private_issues = 'Prive bugs inzien';
+$s_update_readonly_issues = 'Read-only bugs aanpassen';
+$s_update_issue_status = 'Bug status aanpassen';
+$s_set_view_status = 'View status aangeven (publiek/prive)';
+$s_update_view_status = 'View status wijzigen (publiek/private)';
+$s_show_list_of_users_monitoring_issue = 'Lijst tonen van monitorende gebruikers';
+$s_notes = 'AANTEKENINGEN';
+$s_add_notes = 'Aantekeningen toevoegen';
+$s_update_notes = 'Aantekeningen wijzigen';
+$s_delete_note = 'Aantekeningen verwijderen';
+$s_view_private_notes = 'Prive aantekeningen inzien';
+$s_news = 'NIEUWS';
+$s_view_private_news = 'Privee nieuws inzien';
+$s_manage_news = 'Nieuws beheren';
+$s_view_list_of_attachments = 'Lijst met bijlage(n) zien';
+$s_download_attachments = 'Bijlage(n) downloaden';
+$s_delete_attachments = 'Bijlage(n) verwijderen';
+$s_delete_attachment_button = "Verwijder";
+$s_delete_attachment_sure_msg = "Weet u zeker dat u deze bijlage wilt verwijderen?";
+$s_upload_issue_attachments = 'Upload bug bijlage';
 $s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_save_filters = 'Filters bewaren';
+$s_save_filters_as_shared = 'Filters voor iedereen bewaaren';
+$s_use_saved_filters = 'Gebruik bewaarde filters';
+$s_create_project = 'Maak project';
+$s_delete_project = 'Verwijdere project';
+$s_manage_project = 'Beheer project';
+$s_manage_user_access_to_project = 'Beheer toegang tot een project';
+$s_automatically_included_in_private_projects = 'Automatich toegevoegd aan prive projecten';
+$s_project_documents = 'PROJECT DOCUMENTEN';
+$s_view_project_documents = 'Bekijk project documenten';
+$s_upload_project_documents = 'Upload project documenten';
+$s_link_custom_fields_to_projects = 'Gebruikersvelden koppelen aan projecten';
+$s_sponsorships = 'SPONSORING';
+$s_view_sponsorship_details = 'Sponsoring details bekijken';
+$s_view_sponsorship_total = 'Sponsoring totaal bekijken';
+$s_sponsor_issue = 'Sponsor bug';
+$s_assign_sponsored_issue = 'Gesponsorde bugs toekennen';
+$s_handle_sponsored_issue = 'Gesponsorde bugs afhandelen';
+$s_others = 'OVERIGE';
+$s_see_email_addresses_of_other_users = 'Email adressen van andere gebruikers zien';
+$s_send_reminders = 'Herinneringen verzenden';
+$s_add_profiles = 'Profielen toevoegen';
+$s_notify_of_new_user_created = 'Melding van aanmaken nieuwe gebruiker';
+$s_email_notification = 'E-MAIL MELDINGEN';
+$s_status_changed_to = 'Status veranderen naar';
+$s_email_on_deleted = 'E-mail bij verwijderen';
+$s_email_on_sponsorship_changed = 'E-mail bij wijziging sponsoring';
+$s_email_on_relationship_changed = 'E-mail wijziging relaties';
 
 # DHTML filters
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between = 'Tussen' ;
+$s_on_or_before = 'Op of voor' ;
+$s_before = 'Voor' ;
+# $s_on = 'Op' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'Na' ;
+$s_on_or_after = 'Op of na' ;
 
 ?>
