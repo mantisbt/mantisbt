@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.113 2005-04-06 15:21:18 thraxisp Exp $
+	# $Id: email_api.php,v 1.114 2005-04-22 23:27:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -853,7 +853,7 @@
 		$t_message = lang_get_defaulted( $p_message_id, null );
 
 		if ( is_array( $p_header_optional_params ) ) {
-			$t_message .= vsprintf( $t_message, $p_header_optional_params );
+			$t_message = vsprintf( $t_message, $p_header_optional_params );
 		}
 
 		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
