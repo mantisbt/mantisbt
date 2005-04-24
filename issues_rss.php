@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.5 2005-04-24 13:22:21 vboctor Exp $
+	# $Id: issues_rss.php,v 1.1 2005-04-24 13:22:21 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,9 +15,8 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'class.RSSBuilder.inc.php' );
-	require_once( $t_core_path . 'news_api.php' );
-	require_once( $t_core_path . 'project_api.php' );
-	require_once( $t_core_path . 'print_api.php' );
+	require_once( $t_core_path . 'user_api.php' );
+	require_once( $t_core_path . 'filter_api.php' );
 
 	# only allow RSS generation of anonymous login is enabled.
 	# @@@ consider adding an explicit option to enable/disable RSS syndication.
@@ -25,25 +24,26 @@
 		access_denied();
 	}
 
-	# Make sure that the user selected either all projects or a public one.
 	$f_project_id = gpc_get_int( 'project_id', 0 );
-	if ( ( $f_project_id != 0 ) && ( VS_PRIVATE == project_get_field( $f_project_id, 'view_state' ) ) ) {
-		access_denied();
-	}
+
+	$t_path = config_get( 'path' );
 
 	# construct rss file
 
 	$encoding = lang_get( 'charset' );
-	$about = config_get( 'path' );
-	$title = config_get( 'window_title' ) . ' - ' . lang_get( 'news' );
-	$description = '';
-	$image_link = config_get( 'path' ) . 'images/mantis_logo_button.gif';
+	$about = $t_path;
+	$title = config_get( 'window_title' ) . ' - ' . lang_get( 'issues' );
+	$description = '';  // @@@ add a description
+	$image_link = $t_path . 'images/mantis_logo_button.gif';
 
 	# only rss 2.0
 	$category = project_get_name( $f_project_id );
+	if ( $f_project_id !== 0 ) {
+		$title .= ' - ' . $category;
+	}
 
 	# in minutes (only rss 2.0)
-	$cache = '60';
+	$cache = '10';
 
 	$rssfile = new RSSBuilder(	$encoding, $about, $title, $description,
 					$image_link, $category, $cache);
@@ -64,11 +64,10 @@
 	# person, an organization, or a service
 	$contributor = (string) '';
 
-	$rssfile->addDCdata(	$publisher, $creator, $date, $language, $rights, $coverage,
-				$contributor);
+	$rssfile->addDCdata( $publisher, $creator, $date, $language, $rights, $coverage, $contributor );
 
 	# hourly / daily / weekly / ...
-	$period = (string) 'daily';
+	$period = (string) 'hourly';
 
 	# every X hours/days/...
 	$frequency = (int) 1;
@@ -77,44 +76,45 @@
 
 	$rssfile->addSYdata( $period, $frequency, $base );
 
-	$news_rows = news_get_limited_rows( 0 /* offset */, $f_project_id );
+	$t_page_number = 1;
+	$t_issues_per_page = 25;
+	$t_page_count = 0;
+	$t_issues_count = 0;
+	$t_custom_filter = null;
+	$t_project_id = $f_project_id;
+	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
+	$t_show_sticky = null;
+
+	$t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,
+									 $t_custom_filter, $t_project_id, $t_user_id, $t_show_sticky );
 
 	# Loop through results
-	for ( $i = 0; $i < count( $news_rows ); $i++ ) {
-		$row = $news_rows[$i];
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	for ( $i = 0; $i < count( $t_issues ); $i++ ) {
+		$row = $t_issues[$i];
 
-		# skip news item if private, or
-		# belongs to a private project (will only happen
-		if ( VS_PRIVATE == $v_view_state ) {
-			continue;
-		}
+		$t_bug = bug_get( $row['id'], true );
 
-		$v_headline 	= string_display_links( $v_headline );
-		$v_body 	= string_display_links( $v_body );
-		$v_date_posted 	= date( 'Y-m-d\TH:i:sO', $v_date_posted );
-
-		$about = $link = config_get( 'path' ) . "news_view_page.php?news_id=$v_id";
-		$title = $v_headline;
-		$description = $v_body;
+		$about = $link = $t_path . "view.php?id=" . $row['id'];
+		$title = string_display_links( $t_bug->summary );
+		$description = string_display_links( $t_bug->description );
 
 		# optional DC value
 		$subject = $title;
 
 		# optional DC value
-		$date = $v_date_posted;
+		$date = date( 'Y-m-d\TH:i:sO', $t_bug->last_updated );
 
 		# author of item
-		$author = user_get_name( $v_poster_id );
+		$author = user_get_name( $t_bug->reporter_id );
 
 		# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
-		$comments = '';
+		$comments = $t_path . 'view.php?id=' . $row['id'] . '#bugnotes';
 
 		# optional mod_im value for dispaying a different pic for every item
 		$image = '';
 
-		$rssfile->addItem(	$about, $title, $link, $description, $subject, $date,
-					$author, $comments, $image);
+		$rssfile->addItem( $about, $title, $link, $description, $subject, $date,
+							$author, $comments, $image );
 	}
 
 	# @@@ consider making this a configuration option.
