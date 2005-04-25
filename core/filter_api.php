@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.103 2005-04-22 22:27:51 prichards Exp $
+	# $Id: filter_api.php,v 1.104 2005-04-25 02:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -896,6 +896,7 @@
 ?>
 
 		<br />
+		<table class="width100" cellspacing="1">
 		<form method="post" name="filters" id="filters_form" action="<?php PRINT $t_action; ?>">
 		<input type="hidden" name="type" value="1" />
 		<?php
@@ -906,7 +907,6 @@
 		?>
 		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
-		<table class="width100" cellspacing="1">
 
 		<?php
 		if ( $p_expanded ) {
@@ -1691,8 +1691,8 @@
 
 					if ( $t_col_idx == $t_per_row ) {
 						if ( $t_filter_cols > $t_per_row ) {
-							$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp</td> ';
-							$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp</td> ';
+							$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
+							$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp;</td> ';
 						}
 
 						$t_fields .= '</tr>' . "\n";
@@ -1709,13 +1709,13 @@
 
 				if ( $t_col_idx > 0 ) {
 					if ( $t_col_idx < $t_per_row ) {
-						$t_fields .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp</td> ';
-						$t_values .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp</td> ';
+						$t_fields .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp;</td> ';
+						$t_values .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp;</td> ';
 					}
 
 					if ( $t_filter_cols > $t_per_row ) {
-						$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp</td> ';
-						$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp</td> ';
+						$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp;</td> ';
+						$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp;</td> ';
 					}
 
 					$t_fields .= '</tr>' . "\n";
