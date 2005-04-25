@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.256 2005-04-25 12:50:15 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.257 2005-04-25 13:53:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -90,7 +90,7 @@
 
 	# path to your images directory (for icons)
 	# requires trailing /
-	$g_icon_path			= $g_path.'images/';
+	$g_icon_path			= '%path%images/';
 
 	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3
@@ -98,7 +98,7 @@
 
 	# absolute patch to your core files. The default is usually OK,
 	# unless you moved the 'core' directory out of your webroot (recommended).
-	$g_core_path			= $g_absolute_path.'core' . DIRECTORY_SEPARATOR;
+	$g_core_path			= $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
 	# Used to link to manual for User Documentation.
 	$g_manual_url = 'http://manual.mantisbt.org/';
@@ -1250,19 +1250,19 @@
 	###########################
 
 	# Specify your top/bottom include file (logos, banners, etc)
-	$g_bottom_include_page			= $g_absolute_path.'';
-	$g_top_include_page				= $g_absolute_path.'';
+	$g_bottom_include_page			= '%absolute_path%';
+	$g_top_include_page				= '%absolute_path%';
 	# CSS file
-	$g_css_include_file				= $g_path.'css/default.css';
+	$g_css_include_file				= '%path%css/default.css';
 	# meta tags
-	$g_meta_include_file			= $g_absolute_path.'meta_inc.php';
+	$g_meta_include_file			= '%absolute_path%meta_inc.php';
 
 	###########################
 	# Redirections
 	###########################
 
 	# Specify where the user should be sent after logging out.
-	$g_logout_redirect_page			= $g_path.'login_page.php';
+	$g_logout_redirect_page			= '%path%login_page.php';
 
 	###########################
 	# Headers
