@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Apr 18, 2005 at 09:48 PM
+-- Generation Time: Apr 25, 2005 at 08:53 PM
 -- Server version: 4.1.9
 -- PHP Version: 4.3.10
 -- 
@@ -179,7 +179,8 @@ CREATE TABLE mantis_bugnote_table (
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
   note_type int(7) default '0',
   note_attr varchar(250) default '',
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  KEY bug_id (bug_id)
 ) TYPE=MyISAM;
 
 -- 
@@ -833,6 +834,9 @@ INSERT INTO mantis_upgrade_table VALUES ('field_shorten-1', 'shorten field names
 INSERT INTO mantis_upgrade_table VALUES ('field_naming-1', 'DBMS compatibility: access is a reserved word');
 INSERT INTO mantis_upgrade_table VALUES ('configdb-un', 'Drop mantis_config_table unique key');
 INSERT INTO mantis_upgrade_table VALUES ('configdb-pk', 'Add mantis_config_table primary key');
+INSERT INTO mantis_upgrade_table VALUES ('config-key1', 'make mantis_config_table keys not null');
+INSERT INTO mantis_upgrade_table VALUES ('config-key2', 'make mantis_config_table keys not null');
+INSERT INTO mantis_upgrade_table VALUES ('note_bug_id_index', 'Add index on bug_id in bugnotes table');
 
 -- --------------------------------------------------------
 

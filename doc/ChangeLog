@@ -1,5 +1,25 @@
 Mantis ChangeLog
 
+2005.04.25  -  1.0.0a2
+
+- 0005470: [administration] Copyright date in footer incorrect (vboctor)
+- 0002686: [bugtracker] switch project often goes back to the main page (thraxisp)
+- 0005471: [bugtracker] view_all_bug_page.php not working (thraxisp)
+- 0005483: [bugtracker] Auto-linked URLs have target="blank", should have target="_blank" (thraxisp)
+- 0005485: [change log] Change log only shows users reported issues, even if user is an admin if limit_reporters is set (thraxisp)
+- 0005126: [email] Email notification about resolved related issue contains duplicated title (thraxisp)
+- 0005422: [email] Error when Update Configuration is pressed on Email Configuration Page (thraxisp)
+- 0004578: [installation] Can't delete administration account without email/name (thraxisp)
+- 0005457: [installation] At least MySQL 4.1.x for this version (thraxisp)
+- 0005461: [localization] lang directory / strings_french.txt : error in $s_account_reset_msg (vboctor)
+- 0005472: [localization] Some hardcoded text in 1.0.0a1 (thraxisp)
+- 0005207: [performance] Improve performance of "My View" (thraxisp)
+- 0005502: [rss] Implement an RSS feed for issues (vboctor)
+- 0005453: [sponsorships] Sponsorship total is missing from view all bugs (thraxisp)
+- 0005450: [sql] db_generate.sql gives syntax errors (thraxisp)
+- 0005456: [upgrade] PRIMARY KEY not null error on upgrade (thraxisp)
+
+
 2005.04.18  -  1.0.0a1
 
 - 0004589: [administration] Administrator cannot manage projects to which he/she is assigned. (thraxisp)
