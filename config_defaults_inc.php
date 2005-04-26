@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.257 2005-04-25 13:53:55 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.258 2005-04-26 01:49:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -739,6 +739,11 @@
 	# set to 0 to disable truncations
 	$g_max_dropdown_length = 40;
 
+	# This flag conntrolls whether pre-formatted text (delimited by <pre> tags
+	#  is wrapped to a maximum linelength (defaults to 100 chars in strings_api)
+	#  If turned off, the display may be wide when viewing the text
+	$g_wrap_in_preformatted_text = ON;
+	
 	##########################
 	# Mantis HR Settings
 	##########################

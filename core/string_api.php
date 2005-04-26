@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.69 2005-04-21 17:16:58 thraxisp Exp $
+	# $Id: string_api.php,v 1.70 2005-04-26 01:49:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -59,6 +59,7 @@
 	# --------------------
 	# Similar to nl2br, but fixes up a problem where new lines are doubled between
 	# <pre> tags.
+	# additionally, wrap the text an $p_wrap character intervals if the config is set
 	function string_nl2br( $p_string, $p_wrap = 100 ) {
 		$p_string = nl2br( $p_string );
 
@@ -67,7 +68,12 @@
 		preg_match_all("/<pre[^>]*?>(.|\n)*?<\/pre>/", $p_string, $pre1);
 		for ( $x = 0; $x < count($pre1[0]); $x++ ) {
 			$pre2[$x] = preg_replace("/<br[^>]*?>/", "", $pre1[0][$x]);
-			$pre2[$x] = preg_replace("/([^\n]{".$p_wrap."})(?!<\/pre>)/", "$1\n", $pre2[$x]);
+			# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
+			#     if other encoded characters are a problem
+			$pre2[$x] = preg_replace("/&nbsp;/", " ", $pre2[$x]);
+			if ( ON == config_get( 'wrap_in_preformatted_text' ) ) {
+				$pre2[$x] = preg_replace("/([^\n]{".$p_wrap."})(?!<\/pre>)/", "$1\n", $pre2[$x]);
+			}
 			$pre1[0][$x] = "/" . preg_quote($pre1[0][$x], "/") . "/";
 		}
 
