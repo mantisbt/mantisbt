@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.105 2005-04-26 01:17:52 thraxisp Exp $
+	# $Id: filter_api.php,v 1.106 2005-04-26 18:22:58 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1769,7 +1769,7 @@
 				?>:
 				<input type="text" size="16" name="search" value="<?php PRINT htmlspecialchars( $t_filter['search'] ); ?>" />
 
-				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'search' ) ?>" />
+				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
 			</td>
 			</form>
 			<td class="center">
@@ -2723,7 +2723,7 @@
 			break ;
 		}
 	}
-	\\ -->
+	// -->
 	</script>
 
 <?php

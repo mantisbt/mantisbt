@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.27 2005-04-26 01:17:50 thraxisp Exp $
+	# $Id: bugnote_view_inc.php,v 1.28 2005-04-26 18:22:58 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -178,7 +178,7 @@
 <script type="text/JavaScript">
 <!--
 	SetDiv( "bugnotes", g_div_bugnotes );
-\\ -->
+// -->
 </script>
 <?php } ?>
 

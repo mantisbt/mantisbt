@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.8 2005-04-26 01:17:50 thraxisp Exp $
+	# $Id: lost_pwd_page.php,v 1.9 2005-04-26 18:22:58 thraxisp Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
@@ -99,7 +99,7 @@
 <script type="text/javascript" language="JavaScript">
 <!--
 	window.document.lost_password_form.username.focus();
-\\ -->
+// -->
 </script>
 <?php } ?>
 

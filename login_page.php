@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.44 2005-04-26 01:17:50 thraxisp Exp $
+	# $Id: login_page.php,v 1.45 2005-04-26 18:22:58 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -153,7 +153,7 @@
 <script type="text/javascript" language="JavaScript">
 <!--
 	window.document.login_form.username.focus();
-\\ -->
+// -->
 </script>
 <?php } ?>
 
