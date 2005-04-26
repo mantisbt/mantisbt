@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.89 $
+	# $Revision: 1.90 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-22 10:21:21 $
+	# $Date: 2005-04-26 18:11:54 $
 	#
-	# $Id: strings_dutch.txt,v 1.89 2005-04-22 10:21:21 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.90 2005-04-26 18:11:54 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -214,8 +214,8 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FOUT: Dat file type mag niet geupload worden.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Dit bestand bestaat al.  Verwijder het bestaande bestand eerst.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FOUT: Ongeldig upload pad.  De directory bestaat niet of is niet beschrijfbaar door de webserver.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'FOUT: er is geen bestand geupload. Ga terug en kies een ander bestand';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'FOUT: geuploade bestand kan niet naar bestand opslag worden verplaatste. Direcory bestaat niet of is niet beschrijfbaar voor de webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FOUT: Een bug kan geen duplicaat van zichzelf zijn.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Gebruikers veld niet gevonden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Deze naam komt al voor.';
@@ -256,9 +256,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De opgegeven informatie 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings URL is foutief of is al gebruikt. Meld u nogmaals aan.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hierarchie.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt de rechten van de ENIGE BEHEERDER niet aanpassen.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
 
@@ -672,8 +671,7 @@ $s_status_level = 'Status';
 $s_alter_level = 'Wie kan dit wijzigen';
 $s_validation = 'Werkwijze validatie';
 $s_comment = 'Werkwijze commentaar';
-#@@@ (arno) could find this line in any php file, and i have no idea how to translate it correctly
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_superfluous = 'Een verandering van de status naar dezelfde status hoeft niet te worden gedefinieerd';
 $s_unreachable = 'Een bug kan niet op deze status gezet worden';
 $s_no_exit = 'Een bug kan niet van deze status worden gehaald';
 $s_access_levels = 'Toegangs niveau\'s';

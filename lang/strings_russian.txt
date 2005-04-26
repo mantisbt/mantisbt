@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.85 $
+	# $Revision: 1.86 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:46 $
+	# $Date: 2005-04-26 18:11:54 $
 	#
-	# $Id: strings_russian.txt,v 1.85 2005-04-21 06:52:46 bigbadger Exp $
+	# $Id: strings_russian.txt,v 1.86 2005-04-26 18:11:54 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -149,8 +149,8 @@ $s_severity_link = 'По критичности';
 $s_category_link = 'По категориям';
 $s_resolution_link = 'По результату';
 $s_legend_still_open = 'До сих пор открытые';
-$s_legend_resolved = 'Решенные;
-$s_legend_assigned = Назначенные';
+$s_legend_resolved = 'Решенные';
+$s_legend_assigned = 'Назначенные';
 $s_legend_total = 'Всего';
 $s_legend_opened = 'Открытых';
 $s_legend_closed = 'Закрытых';
