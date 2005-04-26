@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.253 $
-	# $Author: prichards $
-	# $Date: 2005-04-22 22:27:51 $
+	# $Revision: 1.254 $
+	# $Author: thraxisp $
+	# $Date: 2005-04-26 15:03:18 $
 	#
-	# $Id: strings_english.txt,v 1.253 2005-04-22 22:27:51 prichards Exp $
+	# $Id: strings_english.txt,v 1.254 2005-04-26 15:03:18 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -285,7 +285,7 @@ $s_priority_enum_string = '10:none,20:low,30:normal,40:high,50:urgent,60:immedia
 $s_severity_enum_string = '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';
 $s_reproducibility_enum_string = '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 $s_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
-$s_resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not an issue,80:suspended,90:won\'t fix';
+$s_resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to reproduce,50:not fixable,60:duplicate,70:no change required,80:suspended,90:won\'t fix';
 $s_projection_enum_string = '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 $s_eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
 
