@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.82 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_update.php,v 1.83 2005-04-26 14:35:21 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -127,7 +127,7 @@
 		# this does the minimum to act on the bug and sends a specific message
 		switch ( $t_bug_data->status ) {
 			case $t_resolved:
-				# bug_resolve updates the status and bugnote and sends message
+				# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
 				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
 						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
 				$t_notify = false;
@@ -148,11 +148,6 @@
 				bug_close( $f_bug_id, $f_bugnote_text );
 				$t_notify = false;
 				$t_bug_note_set = true;
-
-				// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
-				// in bug_update() call below.
-				$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
-				$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 				break;
 
 			case config_get( 'bug_reopen_status' ):
