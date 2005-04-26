@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.39 2005-03-31 01:08:36 thraxisp Exp $
+	# $Id: core.php,v 1.40 2005-04-26 17:35:08 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -41,7 +41,27 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
+	# config_inc may not be present if this is a new install
+	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
+	} else {
+		# if not found, redirect to the admin page to install the system
+/* @@@ commented out for now until installer works
+		if ( ! stristr ( $_SERVER['PHP_SELF'], 'admin' ) ) {
+			if ( OFF == $g_use_iis ) {
+				header( 'Status: 302' );
+			}
+			header( 'Content-Type: text/html' );
+
+			if ( ON == $g_use_iis ) {
+				header( "Refresh: 0;url=admin/" );
+			} else {
+				header( "Location: admin/" );
+			}
+		exit; # additional output can cause problems so let's just stop output here
+		}
+*/
+	}
 
 	# Allow an environment variable (defined in an Apache vhost for example)
 	#  to specify a config file to load to override other local settings

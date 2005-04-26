@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.258 2005-04-26 01:49:02 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.259 2005-04-26 17:35:08 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1196,6 +1196,7 @@
 	$g_mantis_tokens_table					= '%db_table_prefix%_tokens%db_table_suffix%';
 	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierarchy%db_table_suffix%';
 	$g_mantis_config_table					= '%db_table_prefix%_config%db_table_suffix%';
+	$g_mantis_database_table					= '%db_table_prefix%_database%db_table_suffix%';
 
 	###########################
 	# Mantis Enum Strings
