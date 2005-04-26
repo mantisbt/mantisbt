@@ -64,7 +64,7 @@
 
 		    return true;
 		}
-		-->
+		// -->
 		</script>
 
 		<?php

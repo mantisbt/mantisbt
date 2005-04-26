@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.27 2005-04-22 22:06:07 prichards Exp $
+	# $Id: history_inc.php,v 1.28 2005-04-26 01:17:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -98,6 +98,6 @@
 <script type="text/JavaScript">
 <!--
 	SetDiv( "history", g_div_history );
--->
+\\ -->
 </script>
 <?php } ?>

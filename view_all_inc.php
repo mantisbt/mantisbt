@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.157 2005-04-22 22:06:07 prichards Exp $
+	# $Id: view_all_inc.php,v 1.158 2005-04-26 01:17:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,7 +49,7 @@
 		<script type="text/javascript">
 		<!--
 			var string_loading = '<?php echo lang_get( 'loading' );?>';
-		-->
+		// -->
 		</script>
 		<script type="text/javascript" src="javascript/xmlhttprequest.js"></script>
 		<script type="text/javascript" src="javascript/addLoadEvent.js"></script>

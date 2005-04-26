@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.104 2005-04-25 02:42:53 thraxisp Exp $
+	# $Id: filter_api.php,v 1.105 2005-04-26 01:17:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -896,8 +896,8 @@
 ?>
 
 		<br />
+		<form method="post" name="filters<?php echo $t_form_name_suffix ?>" id="filters_form<?php echo $t_form_name_suffix ?>" action="<?php PRINT $t_action; ?>">
 		<table class="width100" cellspacing="1">
-		<form method="post" name="filters" id="filters_form" action="<?php PRINT $t_action; ?>">
 		<input type="hidden" name="type" value="1" />
 		<?php
 			if ( $p_for_screen == false ) {
@@ -2723,7 +2723,7 @@
 			break ;
 		}
 	}
-	-->
+	\\ -->
 	</script>
 
 <?php

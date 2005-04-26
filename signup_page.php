@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup_page.php,v 1.31 2005-04-22 22:06:07 prichards Exp $
+	# $Id: signup_page.php,v 1.32 2005-04-26 01:17:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -108,7 +108,7 @@
 <script type="text/javascript" language="JavaScript">
 <!--
 	window.document.signup_form.username.focus();
--->
+\\ -->
 </script>
 <?php } ?>
 <?php

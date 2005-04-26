@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: dynamic_filters.js,v 1.3 2005-02-12 20:03:50 jlatour Exp $
+ * $Id: dynamic_filters.js,v 1.4 2005-04-26 01:17:52 thraxisp Exp $
  * --------------------------------------------------------
  */
 /*
@@ -101,7 +101,7 @@ function liveReqDoReq() {
 
 	name = this.id;
 	liveReq.onreadystatechange = function(){liveReqProcessReqChange(name);};
-	t_view = document.getElementById('filters_form').elements['view_type'].value;
+	t_view = document.getElementById('filters_form_open').elements['view_type'].value;
 	liveReq.open("GET", processURI + "?view_type=" + t_view + "&filter_target=" + this.id);
 
 	// show "Loading..." while waiting
@@ -145,8 +145,9 @@ function labelInit(){
 	// XMLHttpRequest from getting in trouble
 	if (document.getElementById && 	(window.XMLHttpRequest || window.ActiveXObject)) {
 
-		t_form = document.getElementById("filters_form");
+		t_form = document.getElementById("filters_form_open");
 		if (!t_form) return false;
+
 		t_links = t_form.getElementsByTagName("a");
 		if (!t_links) return false;
 
