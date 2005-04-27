@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.70 2005-04-26 01:49:02 thraxisp Exp $
+	# $Id: string_api.php,v 1.71 2005-04-27 14:37:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -106,6 +106,25 @@
 	}
 
 	# --------------------
+	# Prepare a string for display in rss
+	function string_rss_links( $p_string ) {
+		# rss can not start with &nbsp; which spaces will be replaced into by string_display().
+		$t_string = trim( $p_string );
+
+		# same steps as string_display_links() without the preservation of spaces since &nbsp; is undefined in XML.
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = htmlspecialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string );
+		$t_string = string_nl2br( $t_string );
+		$t_string = string_insert_hrefs( $t_string );
+		$t_string = string_process_bug_link( $t_string );
+		$t_string = string_process_bugnote_link( $t_string );
+		$t_string = string_process_cvs_link( $t_string );
+
+		return $t_string;
+	}
+
+	# --------------------
 	# Prepare a string for plain text display in email
 	function string_email( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
@@ -124,6 +143,8 @@
 
 		return $p_string;
 	}
+
+
 
 	# --------------------
 	# Process a string for display in a textarea box

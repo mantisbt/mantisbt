@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.1 2005-04-24 13:22:21 vboctor Exp $
+	# $Id: issues_rss.php,v 1.2 2005-04-27 14:37:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -95,11 +95,11 @@
 		$t_bug = bug_get( $row['id'], true );
 
 		$about = $link = $t_path . "view.php?id=" . $row['id'];
-		$title = string_display_links( $t_bug->summary );
-		$description = string_display_links( $t_bug->description );
+		$title = string_rss_links( bug_format_id( $row['id'] ) . ': ' . $t_bug->summary );
+		$description = string_rss_links( $t_bug->description );
 
-		# optional DC value
-		$subject = $title;
+		# subject is category.
+		$subject = $t_bug->category;
 
 		# optional DC value
 		$date = date( 'Y-m-d\TH:i:sO', $t_bug->last_updated );

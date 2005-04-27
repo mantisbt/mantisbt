@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.5 2005-04-24 13:22:21 vboctor Exp $
+	# $Id: news_rss.php,v 1.6 2005-04-27 14:37:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -90,8 +90,8 @@
 			continue;
 		}
 
-		$v_headline 	= string_display_links( $v_headline );
-		$v_body 	= string_display_links( $v_body );
+		$v_headline 	= string_rss_links( $v_headline );
+		$v_body 	= string_rss_links( $v_body );
 		$v_date_posted 	= date( 'Y-m-d\TH:i:sO', $v_date_posted );
 
 		$about = $link = config_get( 'path' ) . "news_view_page.php?news_id=$v_id";
