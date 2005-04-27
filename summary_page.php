@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.44 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: summary_page.php,v 1.45 2005-04-27 02:20:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,6 @@
 
 		$t_project_ids = array_unique( $t_project_ids );
 	} else {
-		access_ensure_project_level( config_get( 'view_changelog_threshold' ), $t_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
 		array_unshift( $t_project_ids, $t_project_id );
 	}
