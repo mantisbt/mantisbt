@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.27 2005-02-13 21:36:37 jlatour Exp $
+	# $Id: current_user_api.php,v 1.28 2005-04-27 13:31:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -91,7 +91,8 @@
 	# Return true if the currently user is the anonymous user
 	function current_user_is_anonymous() {
 		if ( auth_is_user_authenticated() ) {
-		return current_user_get_field( 'username' ) == config_get( 'anonymous_account' );
+			return ( ( ON == config_get( 'allow_anonymous_login' ) ) &&
+			         ( current_user_get_field( 'username' ) == config_get( 'anonymous_account' ) ) );
 		}
 		else {
 			return false;
