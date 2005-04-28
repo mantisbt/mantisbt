@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.66 2005-04-05 16:26:29 thraxisp Exp $
+	# $Id: file_api.php,v 1.67 2005-04-28 14:05:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -495,16 +495,20 @@
 	}
 
 	# --------------------
-	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_error = 0, $p_title = '', $p_desc = '' ) {
+	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_file_error = 0, $p_title = '', $p_desc = '' ) {
 
 		if ( php_version_at_least( '4.2.0' ) ) {
-		    switch ( $p_error ) {
+		    switch ( (int) $p_file_error ) {
 		        case UPLOAD_ERR_INI_SIZE:
 		        case UPLOAD_ERR_FORM_SIZE:
                     trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+                    break;
 		        case UPLOAD_ERR_PARTIAL:
 		        case UPLOAD_ERR_NO_FILE:
                     trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+                    break;
+                default:
+                    break;
             }
         }
         

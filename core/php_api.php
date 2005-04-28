@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.14 2005-04-22 18:44:57 prichards Exp $
+	# $Id: php_api.php,v 1.15 2005-04-28 14:05:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -101,5 +101,18 @@
 			return call_user_func_array( 'sprintf', $args );
 		}
 	}
+	
+	# --------------------
+	# support for file upload error definitions
+	#  errors are defined in PHP 4.2.0, but the definition constants are not available
+	#   until 4.3.0
+	if ( !php_version_at_least( '4.2.999' ) ) {
+		define( 'UPLOAD_ERR_INI_SIZE', 1 );
+		define( 'UPLOAD_ERR_FORM_SIZE', 2 );
+		define( 'UPLOAD_ERR_PARTIAL', 3 );
+		define( 'UPLOAD_ERR_NO_FILE', 4 );
+	}
+
+
 
 ?>

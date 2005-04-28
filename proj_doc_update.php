@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.27 2005-04-05 16:26:29 thraxisp Exp $
+	# $Id: proj_doc_update.php,v 1.28 2005-04-28 14:05:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -48,13 +48,17 @@
 
 	if ( is_uploaded_file( $v_tmp_name ) ) {
 		if ( php_version_at_least( '4.2.0' ) ) {
-		    switch ( $v_error ) {
+		    switch ( (int) $v_error ) {
 		        case UPLOAD_ERR_INI_SIZE:
 		        case UPLOAD_ERR_FORM_SIZE:
                     trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+                    break;
 		        case UPLOAD_ERR_PARTIAL:
 		        case UPLOAD_ERR_NO_FILE:
                     trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+                    break;
+                default:
+                    break;
             }
         }
         
