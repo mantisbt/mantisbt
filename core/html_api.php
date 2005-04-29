@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.163 2005-04-29 03:36:34 vboctor Exp $
+	# $Id: html_api.php,v 1.164 2005-04-29 04:31:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -270,6 +270,16 @@
 
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
+		} else {
+			if ( strstr( $_SERVER['PHP_SELF'], 'login_page' ) !== false ) {
+				$t_align = 'center';
+			} else {
+				$t_align = 'left';
+			}
+
+			echo '<div align="', $t_align, '">';
+			echo '<a href="http://www.mantisbt.org" title="Mantis Bugtracker"><img border="0" width="238" height="78" alt="Mantis Bugtracker" src="images/mantis_logo.gif" /></a>';
+			echo '</div>';
 		}
 	}
 
@@ -403,7 +413,7 @@
 		}
 
 		echo '</td><td><div align="right">';
-		echo '<a href="http://www.mantisbt.org"><img src="images/mantis_logo_button.gif" width="88" height="35" alt="Power by Mantis Bugtracker" border="0" /></a>';
+		echo '<a href="http://www.mantisbt.org" title="Powered by Mantis Bugtracker"><img src="images/mantis_logo_button.gif" width="88" height="35" alt="Power by Mantis Bugtracker" border="0" /></a>';
 		echo '</div></td></tr></table>';
 	}
 

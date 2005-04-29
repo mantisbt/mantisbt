@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.45 2005-04-26 18:22:58 thraxisp Exp $
+	# $Id: login_page.php,v 1.46 2005-04-29 04:31:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -41,7 +41,7 @@
 	echo '<br /><div align="center">';
 
 	# Display short greeting message
-	echo lang_get( 'login_page_info' ) . '<br />';
+	# echo lang_get( 'login_page_info' ) . '<br />';
 
 	# Only echo error message if error variable is set
 	if ( $f_error ) {

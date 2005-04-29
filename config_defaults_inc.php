@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.259 2005-04-26 17:35:08 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.260 2005-04-29 04:31:21 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -404,7 +404,7 @@
 
 	# --- sitewide variables ----------
 	$g_window_title			= 'Mantis';	 # browser window title
-	$g_page_title			= 'Mantis';	 # title at top of html page
+	$g_page_title			= '';	 # title at top of html page (empty by default, since there is a logo now)
 
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
@@ -743,7 +743,7 @@
 	#  is wrapped to a maximum linelength (defaults to 100 chars in strings_api)
 	#  If turned off, the display may be wide when viewing the text
 	$g_wrap_in_preformatted_text = ON;
-	
+
 	##########################
 	# Mantis HR Settings
 	##########################
@@ -1256,6 +1256,7 @@
 	###########################
 
 	# Specify your top/bottom include file (logos, banners, etc)
+	# if a top file is supplied, the default Mantis logo at the top will be hidden
 	$g_bottom_include_page			= '%absolute_path%';
 	$g_top_include_page				= '%absolute_path%';
 	# CSS file
