@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.15 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: config_inc.php.sample,v 1.16 2005-04-29 13:24:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This sample file contains the essential files that you MUST
@@ -22,7 +22,7 @@
 	# In general the value OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# Look in http://www.mantisbt.org/manual or config_defaults_inc.php for more
+	# Look in http://manual.mantisbt.org/ or config_defaults_inc.php for more
 	# detailed comments.
 
 	# --- database variables ---------
@@ -32,6 +32,7 @@
 	$g_db_username   = "root";
 	$g_db_password   = "";
 	$g_database_name = "bugtracker";
+	$g_db_type       = "mysql";
 
 	# --- email variables -------------
 	$g_administrator_email  = 'administrator@example.com';

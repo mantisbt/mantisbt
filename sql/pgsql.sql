@@ -66,10 +66,13 @@ CREATE TABLE mantis_bug_monitor_table (
 --
 
 CREATE TABLE mantis_bug_relationship_table (
-  id  SERIAL PRIMARY KEY,
+  id  SERIAL,
   source_bug_id int NOT NULL default '0',
   destination_bug_id int NOT NULL default '0',
-  relationship_type int NOT NULL default '0'
+  relationship_type int NOT NULL default '0',
+  PRIMARY KEY (id)
+  -- KEY source_bug_id (source_bug_id),
+  -- KEY destination_bug_id (destination_bug_id)
 ) WITHOUT OIDS;
 
 --
@@ -82,7 +85,7 @@ CREATE TABLE mantis_bug_relationship_table (
 --
 
 CREATE TABLE mantis_bug_table (
-  id  SERIAL PRIMARY KEY,
+  id  SERIAL,
   project_id int NOT NULL default '0',
   reporter_id int NOT NULL default '0',
   handler_id int NOT NULL default '0',
@@ -101,11 +104,17 @@ CREATE TABLE mantis_bug_table (
   os varchar(32) NOT NULL default '',
   os_build varchar(32) NOT NULL default '',
   platform varchar(32) NOT NULL default '',
+  fixed_in_version varchar(64) NOT NULL default '',
   version varchar(64) NOT NULL default '',
   build varchar(32) NOT NULL default '',
   profile_id int NOT NULL default '0',
   view_state int NOT NULL default '10',
-  summary varchar(128) NOT NULL default ''
+  summary varchar(128) NOT NULL default '',
+  sponsorship_total int NOT NULL default '0',
+  sticky smallint NOT NULL default '0',
+  PRIMARY KEY  (id)
+  -- KEY sponsorship_total (sponsorship_total),
+  -- KEY fixed_in_version (fixed_in_version)
 ) WITHOUT OIDS;
 
 --
@@ -118,10 +127,11 @@ CREATE TABLE mantis_bug_table (
 --
 
 CREATE TABLE mantis_bug_text_table (
-  id SERIAL PRIMARY KEY,
+  id SERIAL,
   description text NOT NULL,
   steps_to_reproduce text NOT NULL,
-  additional_information text NOT NULL
+  additional_information text NOT NULL,
+  PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 --
@@ -134,13 +144,17 @@ CREATE TABLE mantis_bug_text_table (
 --
 
 CREATE TABLE mantis_bugnote_table (
-  id SERIAL PRIMARY KEY,
+  id SERIAL,
   bug_id int NOT NULL default '0',
   reporter_id int NOT NULL default '0',
   bugnote_text_id int NOT NULL default '0',
   view_state int NOT NULL default '10',
   date_submitted timestamp NOT NULL default '1970-01-01 00:00:01',
-  last_modified timestamp NOT NULL default '1970-01-01 00:00:01'
+  last_modified timestamp NOT NULL default '1970-01-01 00:00:01',
+  note_type int default '0',
+  note_attr varchar(250) default '',
+  PRIMARY KEY  (id)
+  -- KEY bug_id (bug_id)
 ) WITHOUT OIDS;
 
 --
@@ -153,14 +167,33 @@ CREATE TABLE mantis_bugnote_table (
 --
 
 CREATE TABLE mantis_bugnote_text_table (
-  id SERIAL PRIMARY KEY ,
-  note text NOT NULL
+  id SERIAL,
+  note text NOT NULL,
+  PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 --
 -- Dumping data for table 'mantis_bugnote_text_table'
 --
 
+-- 
+-- Table structure for table `mantis_config_table`
+-- 
+
+CREATE TABLE mantis_config_table (
+  config_id varchar(64) NOT NULL default '',
+  project_id int NOT NULL default '0',
+  user_id int NOT NULL default '0',
+  access_reqd int default '0',
+  type int default '90',
+  value text NOT NULL,
+  PRIMARY KEY  (config_id,project_id,user_id)
+  -- KEY config_id (config_id)
+) WITHOUT OIDS;
+
+-- 
+-- Dumping data for table `mantis_config_table`
+-- 
 
 --
 -- Table structure for table 'mantis_custom_field_project_table'
@@ -210,6 +243,14 @@ CREATE TABLE mantis_custom_field_table (
   length_min int NOT NULL default '0',
   length_max int NOT NULL default '0',
   advanced int NOT NULL default '0',
+  require_report smallint NOT NULL default '0',
+  require_update smallint NOT NULL default '0',
+  display_report smallint NOT NULL default '1',
+  display_update smallint NOT NULL default '1',
+  require_resolved smallint NOT NULL default '0',
+  display_resolved smallint NOT NULL default '0',
+  display_closed smallint NOT NULL default '0',
+  require_closed smallint NOT NULL default '0',
   PRIMARY KEY  (id)
 --  KEY name (name)
 ) WITHOUT OIDS;
@@ -217,6 +258,24 @@ CREATE TABLE mantis_custom_field_table (
 --
 -- Dumping data for table 'mantis_custom_field_table'
 --
+
+-- 
+-- Table structure for table `mantis_filters_table`
+-- 
+
+CREATE TABLE mantis_filters_table (
+  id SERIAL,
+  user_id int NOT NULL default '0',
+  project_id int NOT NULL default '0',
+  is_public smallint default NULL,
+  name varchar(64) NOT NULL default '',
+  filter_string text NOT NULL,
+  PRIMARY KEY  (id)
+) WITHOUT OIDS;
+
+-- 
+-- Dumping data for table `mantis_filters_table`
+-- 
 
 
 --
@@ -226,7 +285,7 @@ CREATE TABLE mantis_custom_field_table (
 CREATE TABLE mantis_news_table (
   id SERIAL,
   project_id int NOT NULL default '0',
-  poster_id int NOT NULL default '0000000',
+  poster_id int NOT NULL default '0',
   date_posted timestamp NOT NULL default '1970-01-01 00:00:01',
   last_modified timestamp NOT NULL default '1970-01-01 00:00:01',
   view_state int NOT NULL default '10',
@@ -281,6 +340,17 @@ CREATE TABLE mantis_project_file_table (
 -- Dumping data for table 'mantis_project_file_table'
 --
 
+-- Table structure for table `mantis_project_hierarchy_table`
+-- 
+
+CREATE TABLE mantis_project_hierarchy_table (
+  child_id int NOT NULL default '0',
+  parent_id int NOT NULL default '0'
+) WITHOUT OIDS;
+
+-- 
+-- Dumping data for table `mantis_project_hierarchy_table`
+-- 
 
 --
 -- Table structure for table 'mantis_project_table'
@@ -326,15 +396,63 @@ CREATE TABLE mantis_project_user_list_table (
 --
 
 CREATE TABLE mantis_project_version_table (
+  id SERIAL,
   project_id int NOT NULL default '0',
   version varchar(64) NOT NULL default '',
   date_order timestamp NOT NULL default '1970-01-01 00:00:01',
-  PRIMARY KEY  (project_id,version)
+  description text NOT NULL,
+  released smallint NOT NULL default '1',
+  PRIMARY KEY  (id),
+  UNIQUE (project_id,version)
 ) WITHOUT OIDS;
 
 --
 -- Dumping data for table 'mantis_project_version_table'
 --
+
+-- 
+-- Table structure for table `mantis_sponsorship_table`
+-- 
+
+CREATE TABLE mantis_sponsorship_table (
+  id SERIAL,
+  bug_id int NOT NULL default '0',
+  user_id int NOT NULL default '0',
+  amount int NOT NULL default '0',
+  logo varchar(128) NOT NULL default '',
+  url varchar(128) NOT NULL default '',
+  paid int NOT NULL default '0',
+  date_submitted timestamp NOT NULL default '1970-01-01 00:00:01',
+  last_updated timestamp NOT NULL default '1970-01-01 00:00:01',
+  PRIMARY KEY  (id)
+  -- KEY bug_id (bug_id),
+  -- KEY user_id (user_id)
+) WITHOUT OIDS;
+
+-- 
+-- Dumping data for table `mantis_sponsorship_table`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `mantis_tokens_table`
+-- 
+
+CREATE TABLE mantis_tokens_table (
+  id SERIAL,
+  owner int NOT NULL default '0',
+  type int NOT NULL default '0',
+  "timestamp" timestamp NOT NULL default '0001-01-01 00:00:00',
+  expiry timestamp NOT NULL default '0001-01-01 00:00:00',
+  value text NOT NULL,
+  PRIMARY KEY  (id)
+) WITHOUT OIDS;
+
+-- 
+-- Dumping data for table `mantis_tokens_table`
+-- 
 
 
 --
@@ -600,6 +718,62 @@ INSERT INTO mantis_upgrade_table VALUES ('0.17-vb-19','Add id field to bug histo
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-9','Fix double escaped data in mantis_bug_history_table');
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-10','Remove history entries where type=0 and the old value = new value.  These existed because of escaping errors');
 INSERT INTO mantis_upgrade_table VALUES ('0.18-vb-1','Add index on bug_id field in mantis_bug_file_table.');
+INSERT INTO mantis_upgrade_table VALUES ('filtersdb-1', 'Add mantis_filters_table');
+INSERT INTO mantis_upgrade_table VALUES ('emailsevs-1', 'Add the necessary columns for email severity filtering');
+INSERT INTO mantis_upgrade_table VALUES ('sponsorship-1', 'Add sponsorships table');
+INSERT INTO mantis_upgrade_table VALUES ('sponsorship-2', 'Add sponsorship_total to bug table');
+INSERT INTO mantis_upgrade_table VALUES ('sponsorship-3', 'Add an index on sponsorship_total in bug table');
+INSERT INTO mantis_upgrade_table VALUES ('fixed_in_version-1', 'Add fixed_in_version field to bug table.');
+INSERT INTO mantis_upgrade_table VALUES ('fixed_in_version-2', 'Add index on fixed_in_version field in bug table.');
+INSERT INTO mantis_upgrade_table VALUES ('user_realname', 'Add real name to user information.');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-1', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-2', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-3', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-4', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-5', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-6', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('version_remove_pk', 'Remove project_id+version primary key');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_version_', 'Add id to version table and use it as primary key');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_project_', 'Add a unique index for project_id + version combination.');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_descript', 'Add description field to versions.');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_released', 'Add released flag to determine whether the version was released or still a future release.');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-1', 'Add index on source_bug_id field in mantis_bug_relationship_table');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-2', 'Add index on destination_bug_id field in mantis_bug_relationship_table');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-3', 'Translate duplicate id information in a new duplicate relationship');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-4', 'Fix swapped value in duplicate relationship');
+INSERT INTO mantis_upgrade_table VALUES ('cat_user_id_unsigned', 'Change the user_id in mantis_project_category_table to unsigned int.');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-7', 'Allow custom fields to be hidden/displayed for report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-8', 'Allow custom fields to be hidden/displayed for report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-9', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-10', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-11', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-12', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-13', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-14', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-15', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-16', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-17', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-18', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-19', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-20', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('lost-password', 'Add the necessary columns for managing lost passwords');
+INSERT INTO mantis_upgrade_table VALUES ('delete-admin-over', 'Delete any project level access overrides for admin users');
+INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-limit', 'Add email_bugnote_limit to user preference table');
+INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-order', 'Add bugnote_order to user preference table');
+INSERT INTO mantis_upgrade_table VALUES ('cb_ml_upgrade', 'Upgrade custom field types (checkbox, list, multilist) to support advanced filtering');
+INSERT INTO mantis_upgrade_table VALUES ('bugnote-type', 'Add note type column to bugnote');
+INSERT INTO mantis_upgrade_table VALUES ('bugnote-attr', 'Add note_attr column to bugnote');
+INSERT INTO mantis_upgrade_table VALUES ('tokensdb-1', 'Add mantis_tokens_table');
+INSERT INTO mantis_upgrade_table VALUES ('sticky-issues', 'Add sticky column to bug table');
+INSERT INTO mantis_upgrade_table VALUES ('project-hierarchy', 'Add project hierarchy table');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-1', 'Add mantis_config_table');
+INSERT INTO mantis_upgrade_table VALUES ('field_shorten-1', 'shorten field names: lost_password_in_progress_count');
+INSERT INTO mantis_upgrade_table VALUES ('field_naming-1', 'DBMS compatibility: access is a reserved word');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-un', 'Drop mantis_config_table unique key');
+INSERT INTO mantis_upgrade_table VALUES ('configdb-pk', 'Add mantis_config_table primary key');
+INSERT INTO mantis_upgrade_table VALUES ('config-key1', 'make mantis_config_table keys not null');
+INSERT INTO mantis_upgrade_table VALUES ('config-key2', 'make mantis_config_table keys not null');
+INSERT INTO mantis_upgrade_table VALUES ('note_bug_id_index', 'Add index on bug_id in bugnotes table');
 
 --
 -- Table structure for table 'mantis_user_pref_table'
@@ -616,6 +790,7 @@ CREATE TABLE mantis_user_pref_table (
   advanced_update int NOT NULL default '0',
   refresh_delay int NOT NULL default '0',
   redirect_delay int NOT NULL default '0',
+  bugnote_order varchar(4) NOT NULL default 'ASC',
   email_on_new int NOT NULL default '0',
   email_on_assigned int NOT NULL default '0',
   email_on_feedback int NOT NULL default '0',
@@ -625,6 +800,16 @@ CREATE TABLE mantis_user_pref_table (
   email_on_bugnote int NOT NULL default '0',
   email_on_status int NOT NULL default '0',
   email_on_priority int NOT NULL default '0',
+  email_on_priority_minimum_severity int NOT NULL default '10',
+  email_on_status_minimum_severity int NOT NULL default '10',
+  email_on_bugnote_minimum_severity int NOT NULL default '10',
+  email_on_reopened_minimum_severity int NOT NULL default '10',
+  email_on_closed_minimum_severity int NOT NULL default '10',
+  email_on_resolved_minimum_severity int NOT NULL default '10',
+  email_on_feedback_minimum_severity int NOT NULL default '10',
+  email_on_assigned_minimum_severity int NOT NULL default '10',
+  email_on_new_minimum_severity int NOT NULL default '10',
+  email_bugnote_limit int NOT NULL default '0',
   language varchar(32) NOT NULL default 'english',
   PRIMARY KEY  (id)
 ) WITHOUT OIDS;
@@ -675,6 +860,7 @@ CREATE TABLE mantis_user_profile_table (
 CREATE TABLE mantis_user_table (
   id SERIAL,
   username varchar(32) NOT NULL default '',
+  realname varchar(64) NOT NULL default '',
   email varchar(64) NOT NULL default '',
   password varchar(32) NOT NULL default '',
   date_created timestamp NOT NULL default '1970-01-01 00:00:01',
@@ -683,6 +869,8 @@ CREATE TABLE mantis_user_table (
   protected int NOT NULL default '0',
   access_level int NOT NULL default '10',
   login_count int NOT NULL default '0',
+  lost_password_request_count int NOT NULL default '0',
+  failed_login_count int NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id)
 --  UNIQUE KEY cookie_string (cookie_string),
@@ -693,6 +881,5 @@ CREATE TABLE mantis_user_table (
 -- Dumping data for table 'mantis_user_table'
 --
 
-INSERT INTO mantis_user_table VALUES (1,'administrator','admin','63a9f0ea7bb98050796b649e85481845','2003-02-16 02:03:48','2003-02-16 02:36:38',1,1,90,3,'asdjkljkl');
-
+INSERT INTO mantis_user_table VALUES (1,'administrator','','admin','63a9f0ea7bb98050796b649e85481845','2003-02-16 02:03:48','2003-02-16 02:36:38',1,1,90,3,0,0,'asdjkljkl');
 
