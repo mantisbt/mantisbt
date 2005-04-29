@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.162 2005-04-26 01:17:52 thraxisp Exp $
+	# $Id: html_api.php,v 1.163 2005-04-29 03:36:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -352,6 +352,8 @@
 
 		echo "\t", '<br />', "\n";
 		echo "\t", '<hr size="1" />', "\n";
+
+		echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 		if ( ON == config_get( 'show_version' ) ) {
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a></span>', "\n";
 		}
@@ -399,6 +401,10 @@
 				echo "\t",  '</table>', "\n";
 			}
 		}
+
+		echo '</td><td><div align="right">';
+		echo '<a href="http://www.mantisbt.org"><img src="images/mantis_logo_button.gif" width="88" height="35" alt="Power by Mantis Bugtracker" border="0" /></a>';
+		echo '</div></td></tr></table>';
 	}
 
 	# --------------------
