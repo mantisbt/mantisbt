@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.28 2005-04-26 18:22:58 thraxisp Exp $
+	# $Id: bugnote_view_inc.php,v 1.29 2005-05-01 02:30:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,11 +47,13 @@
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <div id="bugnotes_closed" style="display: none;">
 <table class="width100" cellspacing="1">
+<tr>
 	<td class="form-title" colspan="2">
 		<a href="" onclick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
+</tr>
 </table>
 </div>
 <?php } ?>
