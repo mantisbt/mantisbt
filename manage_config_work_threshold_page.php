@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.6 2005-04-22 22:27:50 prichards Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.7 2005-05-01 16:05:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -25,7 +25,7 @@
 	$t_access = user_get_access_level( $t_user, $t_project );
 	$t_show_submit = false;
 
-	$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
+	$t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
 
 	function get_section_begin( $p_section_name ) {
 		global $t_access_levels;
@@ -35,41 +35,86 @@
 		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
 		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'alter_level' ) . '&nbsp;</td></tr><tr>';
-		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
+		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
+			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&nbsp;</td>';
 		}
 		echo '</tr>' . "\n";
 	}
 
 	function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
+	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
 
-		$t_needed_access = config_get( $p_threshold );
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_file = config_get_global( $p_threshold );
+        if ( ! is_array( $t_file ) ) {
+            $t_file_exp = array();
+		    foreach( $t_access_levels as $t_access_level => $t_label ) {
+		        if ( $t_access_level >= $t_file ) {
+		            $t_file_exp[] = $t_access_level;
+		        }
+		    }
+		} else {
+		    $t_file_exp = $t_file;
+		}
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+        if ( ! is_array( $t_global ) ) {
+            $t_global_exp = array();
+		    foreach( $t_access_levels as $t_access_level => $t_label ) {
+		        if ( $t_access_level >= $t_global ) {
+		            $t_global_exp[] = $t_access_level;
+		        }
+		    }
+		} else {
+		    $t_file_exp = $t_global;
+		}
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_project = config_get( $p_threshold );
+        if ( ! is_array( $t_project ) ) {
+            $t_project_exp = array();
+		    foreach( $t_access_levels as $t_access_level => $t_label ) {
+		        if ( $t_access_level >= $t_project ) {
+		            $t_project_exp[] = $t_access_level;
+		        }
+		    }
+		} else {
+		    $t_file_exp = $t_project;
+		}
+        
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
-		foreach( $t_access_levels as $t_access_level ) {
-			$t_entry_array = explode_enum_arr( $t_access_level );
-			if ( is_array( $t_needed_access ) ) {
-		        $t_set = in_array( $t_entry_array[0], $t_needed_access );
-		    } else {
-		        $t_set = $t_entry_array[0] >= $t_needed_access;
-		    }
+		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
+            $t_file = in_array( $t_access_level, $t_file_exp );
+            $t_global = in_array( $t_access_level, $t_global_exp );
+            $t_project = in_array( $t_access_level, $t_project_exp ) ;
+
+            $t_colour = '';
+            if ( $t_global != $t_file ) {
+                $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+            }
+            if ( $t_project != $t_global ) {
+                $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+            } 
 
 			if ( $t_can_change ) {
-			    $t_checked = $t_set ? "CHECKED" : "";
-			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_entry_array[0]\" $t_checked />";
+			    $t_checked = $t_project ? "CHECKED" : "";
+			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level]\" $t_checked />";
 			    $t_show_submit = true;
 			} else {
-			    if ( $t_set ) {
+			    if ( $t_project ) {
 				    $t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			    } else {
 				    $t_value = '&nbsp;';
 			    }
             }
-			echo '<td class="center">' . $t_value . '</td>';
+			echo '<td class="center"' . $t_colour . '>' . $t_value . '</td>';
 		}
 		if ( $t_can_change ) {
 			echo '<td><select name="access_' . $p_threshold . '">';
@@ -83,7 +128,27 @@
 	}
 
 	function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
+	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_file = config_get_global( $p_threshold );
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_project = config_get( $p_threshold );
+        
+        $t_colour = '';
+        if ( $t_global != $t_file ) {
+            $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+        }
+        if ( $t_project != $t_global ) {
+            $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+        } 
 
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
@@ -100,7 +165,7 @@
 			    $t_value = '&nbsp;';
 		    }
         }
-		echo '<td class="left" colspan="' . count( $t_access_levels ) . '">' . $t_value . '</td>';
+		echo '<td' . $t_colour . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
 
 		if ( $t_can_change ) {
 			echo '<td><select name="access_' . $p_threshold . '">';
@@ -114,20 +179,40 @@
 	}
 
 	function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
+	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_file = config_get_global( $p_threshold );
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+        
+        # flush the cache entries before continuing as the previous config_gets will have filled cache
+        config_flush_cache($p_threshold );
+        $t_project = config_get( $p_threshold );
+        
+        $t_colour = '';
+        if ( $t_global != $t_file ) {
+            $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+        }
+        if ( $t_project != $t_global ) {
+            $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+        } 
 
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
-			echo '<td class="left" colspan="' . count( $t_access_levels ) . '"><select name="flag_' . $p_threshold . '">';
+			echo '<td class="left" colspan="3"' . $t_colour . '><select name="flag_' . $p_threshold . '">';
 			print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
-			echo '</select> </td>';
+			echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
 		    $t_show_submit = true;
 		} else {
 			$t_value = get_enum_to_string( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;';
-		    echo '<td class="left" colspan="' . count( $t_access_levels ) . '">' . $t_value . '</td>';
+		    echo '<td class="left" colspan="3"' . $t_colour . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
         }
 
 		if ( $t_can_change ) {
@@ -145,6 +230,9 @@
 		echo '</table><br />' . "\n";
 	}
 
+	$t_colour_project = config_get( 'colour_project');
+	$t_colour_global = config_get( 'colour_global');
+	
     echo "<br /><br />\n";
 
 	if ( ALL_PROJECTS == $t_project ) {
@@ -153,6 +241,11 @@
 	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
+	if ( ALL_PROJECTS <> $t_project ) {
+	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	}
+	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 	echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 
