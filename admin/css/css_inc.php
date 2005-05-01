@@ -106,7 +106,7 @@ div.news-body		{ padding: 16px; text-align: left; width: 50%; border: solid 1px 
 <!-- For Netscape 4.x -->
 <script type="text/javascript" language="JavaScript">
 if (document.layers) {
-	document.write('<style>td{padding:0px;}</style>')
+	document.write('<style>td{padding:0px;}<\/style>')
 }
 </script>
 <noscript></noscript>

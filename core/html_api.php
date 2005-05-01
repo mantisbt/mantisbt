@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.164 2005-04-29 04:31:22 vboctor Exp $
+	# $Id: html_api.php,v 1.165 2005-05-01 02:35:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -211,7 +211,7 @@
 
 		# fix for NS 4.x css
 		echo "\t", '<script type="text/javascript" language="JavaScript"><!--', "\n";
-		echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}</style>")}', "\n";
+		echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}', "\n";
 		echo "\t", '// --></script>', "\n";
 	}
 
