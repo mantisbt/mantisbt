@@ -1,0 +1,55 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_config_revert.php,v 1.1 2005-05-01 16:21:46 thraxisp Exp $
+	# --------------------------------------------------------
+
+	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
+
+	$f_project_id = gpc_get_int( 'project', 0 );
+	$f_revert = gpc_get_string( 'revert', '' );
+	$f_return = gpc_get_string( 'return' );
+
+	$t_access = true;
+	$t_revert_vars = explode( ',', $f_revert );
+	foreach ( $t_revert_vars as $t_revert ) {
+		$t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
+	}
+	
+	if ( ! $t_access ) {
+		access_denied();
+	}
+	
+	if ( '' != $f_revert ) {
+		# Confirm with the user
+		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . ': ' .
+			$f_revert . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
+			lang_get( 'delete_config_button' ) );
+
+		foreach ( $t_revert_vars as $t_revert ) {
+			config_delete( $t_revert, null , $f_project_id );
+		}
+	}
+
+	$t_redirect_url = $f_return;
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
+?>
+<br />
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+?>
+</div>
+
+<?php html_page_bottom1( __FILE__ ) ?>
