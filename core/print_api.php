@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.127 2005-04-15 22:05:16 thraxisp Exp $
+	# $Id: print_api.php,v 1.128 2005-05-01 16:20:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -617,7 +617,7 @@
 			# workflow defined - find allowed states
 			if ( isset( $t_enum_workflow[$p_current_value] ) ) {
 				$t_arr  = explode_enum_string( $t_enum_workflow[$p_current_value] );
-			}else{
+			} else {
 				# workflow was not set for this status, this shouldn't happen
 				$t_arr  = explode_enum_string( $t_config_var_value );
 			}

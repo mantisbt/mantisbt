@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.4 2005-02-28 14:42:52 thraxisp Exp $
+	# $Id: copy_field.php,v 1.5 2005-05-01 16:20:23 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 	$result = @db_query( $query );
 	if ( FALSE == $result ) {
 		echo '<p>No fields need to be updated.</p>';
-	}else{
+	} else {
 
 		$count = db_num_rows( $result );
 		echo '<p>Found ' . $count . ' fields to be updated.</p>';
@@ -89,10 +89,10 @@
 				if ( ! bug_set_field( $v_bug_id, $f_dest_field, $t_cust_value ) ) {
 					echo 'database update failed';
 					$t_failures++;
-				}else{
+				} else {
 					echo 'applied';
 				}
-			}else{
+			} else {
 				echo 'field value was not valid or previously defined';
 				$t_failures++;
 			}

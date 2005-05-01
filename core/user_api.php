@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.97 2005-04-17 17:14:17 thraxisp Exp $
+	# $Id: user_api.php,v 1.98 2005-05-01 16:20:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -599,14 +599,14 @@
 			if ( ON == config_get( 'show_realname' ) ) {
 				if ( is_blank( $row['realname'] ) ) {
 					return $row['username'];
-				}else{
+				} else {
 					if ( isset( $row['duplicate_realname'] ) && ( ON == $row['duplicate_realname'] ) ) {
 						return $row['realname'] . ' (' . $row['username'] . ')';
-					}else{
+					} else {
 						return $row['realname'];
 					}
 				}
-			}else{
+			} else {
 				return $row['username'];
 			}
 		}

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_set_sponsorship.php,v 1.2 2004-07-20 11:11:14 vboctor Exp $
+	# $Id: bug_set_sponsorship.php,v 1.3 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 		$t_user = auth_get_current_user_id();
 		if ( is_blank( user_get_email( $t_user ) ) ) {
 			trigger_error( ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL, ERROR );
-		}else{
+		} else {
 			$sponsorship = new SponsorshipData;
 			$sponsorship->bug_id = $f_bug_id;
 			$sponsorship->user_id = $t_user;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.45 2005-04-20 15:09:33 thraxisp Exp $
+	# $Id: error_api.php,v 1.46 2005-05-01 16:20:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -55,7 +55,7 @@
 		$t_method_array = config_get( 'display_errors' );
 		if ( isset( $t_method_array[$p_type] ) ) {
 			$t_method = $t_method_array[$p_type];
-		}else{
+		} else {
 			$t_method		= 'none';
 		}
 

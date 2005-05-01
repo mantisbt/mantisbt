@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.42 2005-04-03 12:51:06 jlatour Exp $
+	# $Id: bug_actiongroup.php,v 1.43 2005-05-01 16:20:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,7 @@
 			} else {
 				if ( ! access_can_close_bug( $t_bug_id ) ) {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
-				}else{
+				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
 			}

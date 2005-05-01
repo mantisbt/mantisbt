@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.35 2005-02-12 20:01:17 jlatour Exp $
+	# $Id: lang_api.php,v 1.36 2005-05-01 16:20:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -176,7 +176,7 @@
 
 		if (count($g_lang_overrides) > 0 ) {
 			$t_lang = $g_lang_overrides[ count( $g_lang_overrides ) - 1];
-		}else{
+		} else {
 			$t_lang = lang_get_default();
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.67 2005-04-28 14:05:38 thraxisp Exp $
+	# $Id: file_api.php,v 1.68 2005-05-01 16:20:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,12 +31,12 @@
 		$t_name = preg_split($t_doc_match, $p_filename);
 		if ( isset( $t_name[1] ) ) {
 			return $t_name[1];
-		}else{
+		} else {
 			$t_bug_match = '/^\d{7}-/';
 			$t_name = preg_split($t_bug_match, $p_filename);
 			if ( isset( $t_name[1] ) ) {
 				return $t_name[1];
-			}else{
+			} else {
 				return $p_filename;
 			}
 		}
@@ -530,7 +530,7 @@
 		if ( 'bug' == $p_table ) {
 			$t_project_id	= bug_get_field( $p_bug_id, 'project_id' );
 			$t_bug_id		= bug_format_id( $p_bug_id );
-		}else{
+		} else {
 			$t_project_id	= helper_get_current_project();
 			$t_bug_id		= 0;
 		}

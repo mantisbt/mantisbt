@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.6 2005-02-28 14:42:53 thraxisp Exp $
+	# $Id: move_db2disk.php,v 1.7 2005-05-01 16:20:23 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -93,7 +93,7 @@
 			if ( $p_source == 'attachment' ) {
 				$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 				$t_bug_id = $v_bug_id;
-			}else{
+			} else { 
 				$t_project_id = (int) $v_project_id;
 				$t_bug_id = $t_project_id;
 			}
@@ -107,8 +107,8 @@
 			if ( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
 				echo 'Destination '. $t_real_file_path . ' not writable';
 				$t_failures++;
-			}else{
-				$t_file_name = $t_real_file_path . $c_filename;
+			} else {
+			 	$t_file_name = $t_real_file_path . $c_filename;
 
 				// write file to disk store after adjusting the path
 				if ( file_put_contents( $t_file_name, $v_content ) ){
@@ -123,10 +123,10 @@
 					if ( ! $update ) {
 						echo 'database update failed';
 						$t_failures++;
-					}else{
+					} else {
 						echo 'moved to ' . $t_file_name;
 					}
-				}else{
+				} else {
 					echo 'copy to ' . $t_file_name . ' failed';
 					$t_failures++;
 				}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.9 2005-04-26 18:22:58 thraxisp Exp $
+	# $Id: lost_pwd_page.php,v 1.10 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
@@ -68,7 +68,7 @@
 	</td>
 </tr>
 <?php
-  }else{
+  } else {
 ?>
 <tr>
 	<td colspan="2">

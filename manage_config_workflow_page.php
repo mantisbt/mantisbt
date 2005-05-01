@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.7 2005-05-01 14:53:49 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.8 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -51,7 +51,7 @@
     			$t_entry[$t_status][0] = $t_new_label;
     			$t_exit[0][$t_status] = $t_new_label;
     		}
-    	}else{
+    	} else {
 			$t_status = $t_submit_status_array;
 			$t_entry[$t_status][0] = $t_new_label;
 			$t_exit[0][$t_status] = $t_new_label;
@@ -72,7 +72,7 @@
 					$t_exit[$t_status][$t_next] = '';
 					$t_entry[$t_next][$t_status] = '';
 				}
-    		}else{
+    		} else {
     			$t_exit[$t_status] = array();
     		}
     		if ( $t_status >= $t_resolved_status ) {
@@ -288,7 +288,7 @@
                 if ( $t_project_new != $t_global_new ) {
                     $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
                 } 
-			}else{
+			} else {
 				$t_level = $t_project_set[$t_status];
 				$t_can_change = ( $t_access >= config_get_access( 'set_status_threshold' ) );
                 $t_colour = '';

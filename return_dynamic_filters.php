@@ -112,7 +112,7 @@
 				</span>
 				<?php
 			}
-		}else{
+		} else {
 			# error - no filter given
 			?>
 			<span style="color:red;weight:bold;">

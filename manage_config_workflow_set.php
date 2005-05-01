@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_set.php,v 1.3 2005-05-01 14:53:49 thraxisp Exp $
+	# $Id: manage_config_workflow_set.php,v 1.4 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -88,7 +88,7 @@
 			$f_level = gpc_get( 'access_change_' . $t_status_id );
 			if ( NEW_ == $t_status_id ) {
 				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
-			}else{
+			} else {
 				$t_set_status[$t_status_id] = (int)$f_level;
 			}
 		}

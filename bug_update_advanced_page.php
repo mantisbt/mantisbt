@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.84 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_update_advanced_page.php,v 1.85 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -326,7 +326,7 @@
 		<?php
 			if ( $t_show_version ) {
 				echo lang_get( 'product_version' );
-			}else{
+			} else {
 				echo lang_get( 'build' );
 			}
 		?>
@@ -339,7 +339,7 @@
 			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
 		</select>
 		<?php
-			}else{
+			} else {
 		?>
 		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
 		<?php

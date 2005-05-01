@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.18 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: custom_function_api.php,v 1.19 2005-05-01 16:20:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -131,7 +131,7 @@
 		$t_can_change = array( PLAIN, CRYPT, CRYPT_FULL_SALT, MD5 );
 		if ( in_array( config_get( 'login_method' ), $t_can_change ) ) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.28 2005-04-28 14:05:38 thraxisp Exp $
+	# $Id: proj_doc_update.php,v 1.29 2005-05-01 16:20:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -123,7 +123,7 @@
 			SET title='$c_title', description='$c_description', date_added=$t_now,
 				filename='$c_file_name', filesize=$c_file_size, file_type='$c_file_type', content='$c_content'
 				WHERE id='$c_file_id'";
-	}else{
+	} else {
 		$query = "UPDATE $t_project_file_table
 				SET title='$c_title', description='$c_description'
 				WHERE id='$c_file_id'";
