@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.260 2005-04-29 04:31:21 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.261 2005-05-01 14:53:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1126,6 +1126,10 @@
 	# The padding level when displaying bugnote ids
 	#  The bugnote id will be padded with 0's up to the size given
 	$g_display_bugnote_padding	= 7;
+	
+	# colours for configuration display
+	$g_colour_project = 'LightGreen';
+	$g_colour_global = 'LightBlue';
 
 	###############################
 	# Mantis Cookie Variables

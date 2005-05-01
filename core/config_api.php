@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.25 2005-04-11 02:16:21 thraxisp Exp $
+	# $Id: config_api.php,v 1.26 2005-05-01 14:53:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -202,7 +202,7 @@
 				#  once here. we need to reverse the sort, so that the last value overwrites the
 				#  config table
 				$query = "SELECT COUNT(*) FROM $t_config_table
-					WHERE config_id = '$p_option' AND
+					WHERE config_id = '$c_option' AND
 						$t_project_clause AND
 						$t_user_clause";
 
@@ -261,6 +261,53 @@
 
 		return true;
 	}
+	
+	# ------------------
+	# delete the config entry
+	function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
+	global $g_cache_config, $g_cache_config_access;
+		# bypass table lookup for certain options
+		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
+		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
+		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
+
+		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
+				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
+			$t_config_table = config_get_global( 'mantis_config_table' );
+			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
+			# @@ debug @@ error_print_stack_trace();
+
+			$c_option = db_prepare_string( $p_option );
+			$c_user = db_prepare_int( $p_user );
+			$c_project = db_prepare_int( $p_project );
+			$query = "DELETE FROM $t_config_table
+				WHERE config_id = '$c_option' AND
+					project_id=$c_project AND
+					user_id=$c_user";
+
+			$result = @db_query( $query);
+		}
+		config_flush_cache( $p_option );
+	}		
+		
+	# ------------------
+	# delete the config entry from the cache
+	# @@@ to be used sparingly
+	function config_flush_cache( $p_option='' ) {
+		global $g_cache_config, $g_cache_config_access;
+	
+		if ( '' !== $p_option ) {
+			unset( $g_cache_config[$p_option] );
+			unset( $g_cache_config_access[$p_option] );
+		} else {
+			unset( $g_cache_config );
+			unset( $g_cache_config_access );
+		}
+			
+	}
+		
+
 	# ------------------
 	# Checks if an obsolete configuration variable is still in use.  If so, an error
 	# will be generated and the script will exit.  This is called from admin_check.php.

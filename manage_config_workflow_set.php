@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_set.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: manage_config_workflow_set.php,v 1.3 2005-05-01 14:53:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -38,7 +38,7 @@
 
 	# process the workflow by reversing the flags to a matrix and creating the appropriate string
 	if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
-		$f_value = gpc_get( 'flag' );
+		$f_value = gpc_get( 'flag', array() );
 		$f_access = gpc_get( 'workflow_access' );
 		$t_matrix = array();
 
@@ -46,11 +46,19 @@
 			list( $t_from, $t_to ) = split( ':', $t_transition );
 			$t_matrix[$t_from][$t_to] = '';
 		}
-		$t_statuses = explode_enum_string( config_get( 'status_enum_string' ) );
-		foreach( $t_statuses as $t_status ) {
-			list( $t_state, $t_label ) = explode_enum_arr( $t_status );
+		$t_statuses = get_enum_to_array( config_get( 'status_enum_string' ) );
+		foreach( $t_statuses as $t_state => $t_label) {
 			$t_workflow_row = '';
-			$t_first = true;
+			$t_default = gpc_get_int( 'default_' . $t_state );
+			if ( isset( $t_matrix[$t_state] ) && isset( $t_matrix[$t_state][$t_default] ) ) {
+				$t_workflow_row .= $t_default . ':' . get_enum_element( 'status', $t_default );
+				unset( $t_matrix[$t_state][$t_default] );
+				$t_first = false;
+			} else {
+				# error default state isn't in the matrix
+				echo '<p>' . sprintf( lang_get( 'default_not_in_flow' ), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) )  . '</p>';
+				$t_first = true;
+			}
 			if ( isset( $t_matrix[$t_state] ) ) {
 				foreach ( $t_matrix[$t_state] as $t_next_state => $t_junk ) {
 					if ( false == $t_first ) {
