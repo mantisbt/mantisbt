@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.93 2005-04-11 17:05:47 thraxisp Exp $
+	# $Id: bug_api.php,v 1.94 2005-05-01 19:04:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -722,6 +722,10 @@
 			}
 		}
 
+		if( !is_blank( $p_bug_data->duplicate_id ) && ( $p_bug_data->duplicate_id != 0 ) && ( $p_bug_id == $p_bug_data->duplicate_id ) ) {
+			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );  # never returns
+	    }
+
 		$t_old_data = bug_get( $p_bug_id, true );
 
 		$t_bug_table = config_get( 'mantis_bug_table' );
@@ -1116,6 +1120,9 @@
 
 		if( !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 ) ) {
 			# MASC RELATIONSHIP
+			if ( $p_bug_id == $p_duplicate_id ) {
+			    trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );  # never returns
+			}
 
 			# the related bug exists...
 			bug_ensure_exists( $p_duplicate_id );
