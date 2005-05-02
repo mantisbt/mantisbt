@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.94 2005-05-01 19:04:07 thraxisp Exp $
+	# $Id: bug_api.php,v 1.95 2005-05-02 14:06:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -409,7 +409,7 @@
 
 		# log new bug
 		history_log_event_special( $t_bug_id, NEW_BUG );
-		
+
 		# log changes, if any (compare happens in history_log_event_direct)
 		history_log_event_direct( $t_bug_id, 'status', config_get( 'bug_submit_status' ), $t_status );
 		history_log_event_direct( $t_bug_id, 'handler_id', 0, $c_handler_id );
@@ -995,6 +995,35 @@
 		$t_stats['count'] = db_num_rows( $result );
 
 		return $t_stats;
+	}
+
+	# --------------------
+	# Get array of attachments associated with the specified bug id.  The array will be
+	# sorted in terms of date added (ASC).  The array will include the following fields:
+	# id, title, diskfile, filename, filesize, file_type, date_added.
+	function bug_get_attachments( $p_bug_id ) {
+		if ( !file_can_view_bug_attachments( $p_bug_id ) ) {
+	        return;
+		}
+
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+		$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
+		                FROM $t_bug_file_table
+		                WHERE bug_id='$c_bug_id'
+		                ORDER BY date_added";
+		$db_result = db_query( $query );
+		$num_notes = db_num_rows( $db_result );
+
+		$t_result = array();
+
+		for ( $i = 0; $i < $num_notes; $i++ ) {
+			$t_result[] = db_fetch_array( $db_result );
+		}
+
+		return $t_result;
 	}
 
 	#===================================

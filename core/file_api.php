@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.68 2005-05-01 16:20:24 thraxisp Exp $
+	# $Id: file_api.php,v 1.69 2005-05-02 14:06:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -133,30 +133,20 @@
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within
 	# bug_view_page.php and bug_view_advanced_page.php
-	function file_list_attachments ( $p_bug_id ) {
-		if ( !file_can_view_bug_attachments( $p_bug_id ) ) {
+	function file_list_attachments( $p_bug_id ) {
+		$t_attachment_rows = bug_get_attachments( $p_bug_id );
+
+		$num_files = sizeof( $t_attachment_rows );
+		if ( $num_files === 0 ) {
 			return;
 		}
-
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
-
-		$query = "SELECT id, title, diskfile, filename, filesize, date_added
-				FROM $t_bug_file_table
-				WHERE bug_id='$c_bug_id'
-				ORDER BY date_added";
-		$result = db_query( $query );
-
-		$t_bug = bug_get( $c_bug_id, false );
 
 		$t_can_download = file_can_download_bug_attachments( $p_bug_id );
 		$t_can_delete   = file_can_delete_bug_attachments( $p_bug_id );
 
-		$num_files = db_num_rows( $result );
 		$image_previewed = false;
 		for ( $i = 0 ; $i < $num_files ; $i++ ) {
-			$row = db_fetch_array( $result );
+			$row = $t_attachment_rows[$i];
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			$t_file_display_name = file_get_display_name( $v_filename );
@@ -511,7 +501,7 @@
                     break;
             }
         }
-        
+
 	    if ( ( '' == $p_tmp_file ) || ( '' == $p_file_name ) ) {
 		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
         }
