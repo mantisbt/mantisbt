@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.6 2005-03-22 00:52:45 thraxisp Exp $
+	# $Id: system_utils.php,v 1.7 2005-05-02 10:18:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,6 +73,11 @@
 		</SELECT>
 	<input type="submit" class="button" value="Copy" >
 	</form>
+	</center></td></tr>
+
+	<!-- Database Statistics -->
+	<tr bgcolor="#ffffff"><td>Show database statistics.</td><td><center>
+	<?php html_button( 'db_stats.php', 'Display', array() ); ?>
 	</center></td></tr>
 
 </table>
