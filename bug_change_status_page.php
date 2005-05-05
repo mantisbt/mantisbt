@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.20 2005-04-03 12:43:30 jlatour Exp $
+	# $Id: bug_change_status_page.php,v 1.21 2005-05-05 14:03:40 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -139,7 +139,11 @@ if ( ( $t_resolved > $f_new_status ) &&
 
 <!-- Custom Fields -->
 <?php
-$t_custom_status_label = null; # Don't show custom fields by default
+# @@@ thraxisp - I undid part of the change for #5068 for #5527
+#  We really need to say what fields are shown in which statusses. For now,
+#  this page will show required custom fields in update mode, or 
+#  display or required fields on resolve or close
+$t_custom_status_label = "update"; # Don't show custom fields by default
 if ( ( $f_new_status == $t_resolved ) &&
 			( CLOSED > $f_new_status ) ) {
 	$t_custom_status_label = "resolved";
@@ -148,22 +152,24 @@ if ( CLOSED == $f_new_status ) {
 	$t_custom_status_label = "closed";
 }
 
-$t_custom_fields_found = false;
-
-if ( $t_custom_status_label == null ) {
-	$t_related_custom_field_ids = array();
-} else {
-	$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
-}
+$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
 
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
-	if( ( $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
-		$t_custom_fields_found = true;
+	$t_display = $t_def['display_' . $t_custom_status_label];
+	$t_require = $t_def['require_' . $t_custom_status_label];
+	
+	if ( ( "update" == $t_custom_status_label ) && ( ! $t_require ) ) {
+        continue;
+	}
+	if ( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && ! ( $t_display || $t_require ) ) {
+        continue;
+	}
+	if ( custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_'. $t_custom_status_label]) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if ( $t_require ) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php
@@ -172,8 +178,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 </tr>
 <?php
-	} # $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] && custom_field_has_write_access( $t_id, $f_bug_id ) )
-	else if( ( $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+	} #  custom_field_has_write_access( $t_id, $f_bug_id ) )
+	else if ( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
@@ -184,7 +190,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		</td>
 	</tr>
 <?php
-	} # $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )
+	} # custom_field_has_read_access( $t_id, $f_bug_id ) )
 } # foreach( $t_related_custom_field_ids as $t_id )
 ?>
 
