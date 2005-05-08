@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.24 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: proj_doc_delete.php,v 1.25 2005-05-08 20:42:08 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -26,7 +26,7 @@
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
 		'<br/>' . lang_get( 'filename' ) . ': ' . $f_title,
-		lang_get( 'remove_user_button' ) );
+		lang_get( 'file_delete_button' ) );
 
 	file_delete( $f_file_id, 'project' );
 
