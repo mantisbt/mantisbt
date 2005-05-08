@@ -10,14 +10,13 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.102 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:43 $
+	# $Revision: 1.103 $
+	# $Author: marcelloscata $
+	# $Date: 2005-05-08 20:40:07 $
 	#
-	# $Id: strings_italian.txt,v 1.102 2005-04-21 06:52:43 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.103 2005-05-08 20:40:07 marcelloscata Exp $
 	###########################################################################
-?>
-<?php
+
 # Charset
 $s_charset = "windows-1252";
 
@@ -31,9 +30,9 @@ $s_actiongroup_menu_resolve = "Risolvi";
 $s_actiongroup_menu_update_priority = "Cambia priorità";
 $s_actiongroup_menu_update_status = "Cambia stato";
 $s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Imposta/resetta sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_category = "Aggiorna categoria";
+$s_actiongroup_menu_set_sticky = "Imposta/resetta sticky";
+$s_actiongroup_menu_update_field = "Aggiorna %s";
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -54,11 +53,11 @@ $s_assigned_projects = "Progetti assegnati";
 $s_unassigned_projects = "Progetti non assegnati";
 $s_print = "Stampa";
 $s_jump = "Vai";
-$s_copy_users = "Copia gli Utenti";
-$s_copy_categories_from = "Copia le Categorie da";
-$s_copy_categories_to = "Copia le Categorie su";
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users = "Copia utenti";
+$s_copy_categories_from = "Copia categorie da";
+$s_copy_categories_to = "Copia categorie su";
+$s_copy_users_from = "Copia utenti da";
+$s_copy_users_to = "Copia utenti su";
 $s_bug_history = "Storia della anomalia";
 $s_field = "Campo";
 $s_old_value = "Valore precedente";
@@ -66,7 +65,7 @@ $s_new_value = "Nuovo valore";
 $s_date_modified = "Data e ora";
 $s_bugnote = "Testo nota";
 $s_change = "Modifica";
-$s_bugnote_view_state = "Bugnote View State";
+$s_bugnote_view_state = "Nota View State";
 $s_bug_monitor = "Anomalia monitorata";
 $s_bug_end_monitor = "Anomalia non più monitorata";
 $s_announcement = "Annuncio";
@@ -106,7 +105,7 @@ $s_login_link = "Accedi";
 $s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
 $s_bug_actiongroup_access = "Non disponi dell'autorizzazione necessaria per eseguire questa azione";
 $s_bug_actiongroup_status = "Non é possibile impostare lo stato richiesto per la presente anomalia";
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = "Non é possibile impostare la categoria richiesta per la presente anomalia";
 $s_close_bugs_conf_msg = "Confermi di voler chiudere queste anomalie?";
 $s_delete_bugs_conf_msg = "Confermi di voler eliminare queste anomalie?";
 $s_move_bugs_conf_msg = "Sposta anomalia su";
@@ -116,8 +115,8 @@ $s_resolve_bugs_conf_msg = "Scegli la risoluzione";
 $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
 $s_view_status_bugs_conf_msg = "Seleziona vista priv/pubbl";
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Imposta/resetta anomalie come in primo piano (sticky)?';
+$s_category_bugs_conf_msg = "Seleziona categoria delle anomalie";
+$s_set_sticky_bugs_conf_msg = "Imposta/resetta anomalie come in primo piano (sticky)?";
 $s_close_group_bugs_button = "Chiudi anomalia";
 $s_delete_group_bugs_button = "Elimina anomalia";
 $s_move_group_bugs_button = "Sposta anomalia";
@@ -126,9 +125,9 @@ $s_assign_group_bugs_button = "Assegna anomalia";
 $s_resolve_group_bugs_button = "Risolvi anomalia";
 $s_priority_group_bugs_button = "Aggiorna priorità";
 $s_status_group_bugs_button = "Aggiorna stato";
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = "Aggiorna categoria";
 $s_view_status_group_bugs_button = "Cambia priv/pubbl";
-$s_set_sticky_group_bugs_button = 'Imposta/resetta in primo piano (Sticky)';
+$s_set_sticky_group_bugs_button = "Imposta/resetta in primo piano (Sticky)";
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "Grafico di sintesi per stato";
@@ -156,7 +155,7 @@ $s_legend_assigned = "Assegnate";
 $s_legend_total = "Totale";
 $s_legend_opened = "Aperte";
 $s_legend_closed = "Chiuse";
-$s_legend_reported = "Riportate";
+$s_legend_reported = "Segnalate";
 $s_cumulative = "Cumulative";
 $s_not_enough_data = "Non ci sono abbastanza dati per creare un grafico";
 
@@ -175,75 +174,75 @@ $s_bugnote_description = "Testo della Nota";
 $s_error_no_proceed = "Please use the 'Back' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.";
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.  Please report this to ';
-$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+$MANTIS_ERROR[ERROR_GENERIC] = "An error occurred during this action.  You may wish to report this error to your local administrator.";
+$MANTIS_ERROR[ERROR_SQL] = "SQL error detected.  Please report this to ";
+$MANTIS_ERROR[ERROR_REPORT] = "There was an error in your report.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "No file specified";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = "The file type is disallowed";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "The directory does not exist. Please check the project settings.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "This is a duplicate file.  Please delete the file first.";
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = "A project with that name already exists.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "A necessary field \'%s\' was empty.  Please recheck your inputs.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = "This account is protected.  You are not allowed to access this until the account protection is lifted.";
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = "Access Denied.";
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = "File upload failed.  File is not readable by Mantis. Please check the project settings";
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = "File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.";
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = "A required parameter to this page (%s) was not found.";
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = "That username is already being used.  Please go back and select another one.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = "Configuration option \'%s\' not found.";
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = "String \'%s\' not found.";
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = "Note not found.";
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = "Project not found.";
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "Database field \'%s\' not found.";
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = "Unable to connect to FTP server.";
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = "Issue handler does not have sufficient access rights to handle issue at this status.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "A project with that name already exists.  Please go back and enter a different name.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = "Invalid project name specified.  Project names cannot be blank.";
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = "User not found.";
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = "The login information stored by your browser is invalid.  Perhaps your account was deleted?";
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = "Preferences could not be found for this user.";
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = "News item not found.";
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = "Password does not match verification.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = "An array was expected but a string was received for %s.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = "A string was expected but an array was received for %s.";
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = "A number was expected for %s.";
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = "Issue %d not found.";
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = "Invalid email.";
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = "Profile not found.";
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = "File type not allowed for uploads.";
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = "This is a duplicate file.  Please delete the file first.";
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "Invalid upload path.  Directory either does not exist or not writable to webserver";
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = "No file was uploaded. Please go back and Choose a file before pressing Upload";
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = "Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver";
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = "You cannot set an issue as a duplicate of itself.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = "Custom field not found";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = "This is a duplicate name.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = "At least one project still uses this field.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "Invalid value for field";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Invalid custom field definition";
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = "LDAP Authentication Failed";
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = "LDAP Server Connection Failed";
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = "LDAP Record Update has failed.";
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = "LDAP User Record Not Found.";
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = "Database connection failed. Error received from database was #%d: %s";
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = "Database query failed.  Error received from database was #%d: %s for the query: %s";
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = "Database selection failed.  Error received from database was #%d: %s";
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "A category with that name already exists.";
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "No copy action was specified.";
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "Category not found.";
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "A version with that name already exists.";
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = "Version \'%s\' not found.";
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = "The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.";
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "User does not have required access level";
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "The \"Real Name\" chosen matches another user\'s login name. Please choose another.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Sponsorship support not enabled.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = "Sponsorship %d not found.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = "Sponsorship (%s) is below minimum amount (%s).";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = "Handler does not have the required access level to handle sponsored issues.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = "Access Denied: Assigning sponsored issues requires higher access level.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = "Sponsor has not provided an email address. Please update your profile.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = "Configuration option \'%s\' has invalid value \'%s\'";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = "The action cannot be performed because issue \'%d\' is read-only";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
@@ -254,10 +253,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "E' possibile eseguire l
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = "I dati inseriti e/o inviati non corrispondono ad alcun utente registrato.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = "Codice di convalida (hash code) non valido.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Raggiunto il numero massimo di richieste di reset pendenti.";
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = "That operation would create a loop in the subproject hierarchy.";
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = "You cannot change the access level of the only ADMINISTRATOR in the system.";
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = "Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.";
 $s_login_error = "L'account potrebbe essere stato disabilitato o bloccato (per troppi tentativi falliti di accesso) oppure potreste aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
 
@@ -266,15 +265,15 @@ $s_go_back = "Indietro";
 $s_proceed = "Clicca per continuare";
 
 $s_switch = "Cambia";
-$s_logged_in_as = "Autenticato come ";
+$s_logged_in_as = "Utente";
 
 $s_prefix_for_deleted_users = "utente";
 
 $s_administrator = "Amministratore";
 $s_myself = "Me stesso";
-$s_default_access_level = 'Livello di accesso di default';
+$s_default_access_level = "Livello di accesso di default";
 
-$s_issue_status_percentage = 'Stato anomalie (%)';
+$s_issue_status_percentage = "Stato anomalie (%)";
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore";
@@ -304,7 +303,7 @@ $s_new_account_signup_msg = "E' stato creato il seguente account:";
 $s_reset_request_msg = "Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email. Se questa richiesta non é stata fatta da te, ignora semplicemente questo messaggio.\n\nSe invece hai effettivamente richiesto tu la verifica, visita l'indirizzo di seguito riportato e potrai cambiare la tua password:";
 $s_reset_request_in_progress_msg = "Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all'indirizzo del tuo account con un codice di convalida. Quando riceverai questa email, segui le istruzioni in essa riportate.";
 
-$s_email_notification_title_for_status_bug_new = 'La seguente anomalia é stata ri-posta nello stato NUOVO';
+$s_email_notification_title_for_status_bug_new = "La seguente anomalia é stata ri-posta nello stato NUOVO";
 $s_email_notification_title_for_status_bug_feedback = "La seguente anomalia é stata posta in DISCUSSIONE.";
 $s_email_notification_title_for_status_bug_acknowledged = "La seguente anomalia é stata RICONOSCIUTA.";
 $s_email_notification_title_for_status_bug_confirmed = "La seguente anomalia é stata CONFERMATA.";
@@ -368,7 +367,7 @@ $s_username = "Nome Utente";
 $s_realname = "Nominativo";
 $s_email = "Email";
 $s_password = "Password";
-$s_no_password_change = 'La password é gestita da un altro sistema, non può quindi essere modificata da questa applicazione.';
+$s_no_password_change = "La password é gestita da un altro sistema, non può quindi essere modificata da questa applicazione.";
 $s_confirm_password  = "Conferma Password";
 $s_access_level = "Livello di Accesso";
 $s_update_user_button = "Aggiorna account";
@@ -508,9 +507,9 @@ $s_bug_reminder = "Invia un memorandum";
 $s_reminder_sent_to = "Inviato memorandum a";
 $s_bug_send_button = "Invia";
 $s_reminder = "Nota";
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = "Questo memorandum verrà inviato agli utenti selezionati a cui si richiede un feedback sull'anomalia.";
+$s_reminder_monitor = "Questi destinatari verranno aggiunti agli utenti che monitorano l'anomalia.";
+$s_reminder_store = "Questo memorandum verrà memorizzato con l'anomalia.";
 
 # bug_update.php
 $s_bug_updated_msg = "L'anomalia è stata aggiornata correttamente...";
@@ -543,6 +542,7 @@ $s_summary = "Riassunto";
 $s_description = "Descrizione";
 $s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
 $s_update_information_button = "Aggiorna informazione";
+$s_sticky_issue = "Anomalia sticky";
 
 # bug_update_page.php
 $s_update_advanced_link = "Aggiornamento dettagliato";
@@ -628,12 +628,12 @@ $s_filter_button = "Applica il filtro";
 $s_manage_users_link = "Gestione Utenti";
 $s_manage_projects_link = "Gestione Progetti";
 $s_manage_custom_field_link = "Gestione Campi Personalizzati";
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Report Permessi';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_global_profiles_link = "Gestione Profili Globali";
+$s_permissions_summary_report = "Report Permessi";
+$s_manage_config_link = "Configurazione";
+$s_manage_threshold_config = "Workflow e Livello di accesso";
+$s_manage_email_config = "Notifiche via email";
+$s_manage_workflow_config = "Workflow";
 $s_create_new_account_link = "Crea Nuovo Account";
 $s_projects_link = "Progetti";
 $s_documentation_link = "Documentazione";
@@ -649,53 +649,67 @@ $s_last_visit = "Ultima Visita";
 $s_edit_user_link = "Modifica Utente";
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_config_all_projects = "Nota: Queste configurazioni impattano TUTTI I PROGETTI.";
+$s_config_project = "Nota: Queste configurazioni impattano SOLO il progetto %s.";
+$s_colour_coding = "Nella tabella seguente, sono applicati i seguenti codici-colore:";
+$s_colour_project = "Impostazioni del progetto sovrascrivono quelle generali (TUTTI I PROGETTI)";
+$s_colour_global = "Impostazioni generali (TUTTI I PROGETTI) sovrascrivono quelle di default";
+$s_issue_reporter = "Utente che ha segnalato anomalia";
+$s_issue_handler = "Utente che ha assegnata anomalia";
+$s_users_added_bugnote = "Utenti che hanno aggiunto una nota";
+$s_change_configuration = "Aggiorna configurazione";
+$s_message = 'Messaggio';
+$s_default_notify = "Setting default notification flags to";
+$s_action_notify = "Setting action notification flags to";
+$s_notify_defaults_change_access = 'Può modificare valori di default notifiche via email';
+$s_notify_actions_change_access = 'Può modificare le notifiche via email';
+$s_revert_to_system = "Rimuove impostazioni generali (TUTTI I PROGETTI)";
+$s_revert_to_all_project = "Rimuove impostazioni specifiche di progetto";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_current_status = "Stato corrente";
+$s_next_status = "Stato successivo";
+$s_workflow = "Workflow";
+$s_workflow_thresholds = "Livelli di accesso che impattano il workflow";
+$s_threshold = "Threshold";
+$s_status_level = "Stato";
+$s_alter_level = "Può modificare questo valore";
+$s_validation = "Validazione del Workflow";
+$s_comment = "Commento/Errore";
+$s_superfluous = "Transizione verso stesso stato é implicita";
+$s_unreachable = "Non é prevista alcuna transizione in ingresso a questo stato";
+$s_no_exit = "Non é prevista alcuna transizione in uscita da questo stato";
+$s_access_levels = "Livelli di accesso";
+$s_access_change = "Livello minimo di accesso per cambiare questo stato";
+$s_desc_bug_submit_status = "Stato assegnato a nuova anomalia";
+$s_desc_bug_reopen_status = "Stato assegnato ad anomalia riaperta";
+$s_desc_bug_resolved_status_threshold = "Stato per cui una anomalia si considera risolta";
+$s_workflow_change_access = "Può modificare il workflow";
+$s_access_change_access = "Può modificare i livelli di accesso";
+
+# manage_config_workflow_set
+$s_default_not_in_flow = "Lo stato di default di %s non é previsto nello stato seguente ad %s. Sarà ignorato";
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = "Assegna anomalia";
+$s_allow_close_immediate = "Permette ad una anomalia di essere chiusa non appena risolta";
+$s_allow_reporter_close = "Permette all'utente che ha segnalato anomalia di chiuderla";
+$s_allow_reporter_reopen = "Permette all'utente che ha segnalato anomalia di riaprirla";
+$s_set_status_assigned = "Stato assegnato quando anomalia viene assegnata";
+$s_allow_user_edit = "Permette ad un utente di modificare proprie note";
+$s_limit_access = "Limita accesso alle sole proprie anomalie segnalate";
+$s_submit_status = "Stato assegnato ad una nuova anomalia";
+$s_assigned_status = "Stato assegnato alle anomalie assegnate in automatico";
+$s_resolved_status = "Stato per cui anomalia si considera risolta";
+$s_readonly_status = "Stato per cui anomalia si considera di sola-lettura";
+$s_reopen_status = "Stato assegnato ad anomalia riaperta";
+$s_reopen_resolution = "Risoluzione assegnata ad anomalia riaperta";
+
+# manage_config_revert_page
+$s_config_delete_sure = "Eliminare le impostazioni per:";
+$s_in_project = 'nel progetto';
+$s_delete_config_button = 'Rimuove impostazioni';
 
 # manage_proj_add.php
 $s_project_added_msg = "Il Progetto è stato inserito...";
@@ -718,7 +732,7 @@ $s_update_category_button = "Aggiorna categoria";
 $s_category_updated_msg = "La Categoria è stata aggiornata correttamente...";
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = "Aggiungi sottoprogetto";
 
 # manage_proj_delete.php
 $s_project_deleted_msg = "Il progetto è stato rimosso correttamente...";
@@ -746,10 +760,10 @@ $s_actions = "Azioni";
 $s_version = "Versione";
 $s_timestamp = "Timestamp";
 $s_update = "Aggiorna";
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = "Sottoprogetti";
+$s_add_subproject = "Aggiungi come sottoprogetto";
+$s_create_new_subproject_link = "Crea nuovo sottoprogetto";
+$s_unlink_link = "Rimuove";
 
 # manage_proj_menu_page.php
 $s_add_project_title = "Inserisci Progetto";
@@ -898,9 +912,9 @@ $s_project_removed_user_msg = "Utente eliminato dal progetto con successo";
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = "Rimuovere questo utente dal progetto?";
-$s_remove_user_button = 'Rimuovi utente';
-$s_remove_all_users_sure_msg = 'Rimuovere tutti gli utenti associati con questo progetto?';
-$s_remove_all_users_button = 'Rimuove tutti gli utenti';
+$s_remove_user_button = "Rimuovi utente";
+$s_remove_all_users_sure_msg = "Rimuovere tutti gli utenti associati con questo progetto?";
+$s_remove_all_users_button = "Rimuove tutti gli utenti";
 
 # proj_user_menu_page.php
 $s_add_user_title = "Aggiungi utente al progetto";
@@ -1000,8 +1014,8 @@ $s_show = "Quante anomalie";
 $s_changed = "Modificato (ore)";
 $s_viewing_bugs_title = "Elenco delle anomalie";
 $s_updated = "Aggiornato";
-$s_sticky = 'Visualizza anomalie sticky';
-$s_sort = 'Sort by';
+$s_sticky = "Visualizza anomalie sticky";
+$s_sort = "Sort by";
 
 # view_all_inc.php
 $s_none = "nessuno";
@@ -1058,7 +1072,7 @@ $s_viewing_bug_simple_details_title = "Scheda anomalia";
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = "Nessuno ha chiesto di essere notificato su questa anomalia.";
-$s_users_monitoring_bug = "Questa anomalia è tenuta sotto controllo da";
+$s_users_monitoring_bug = "Utenti che monitorano questa anomalia";
 $s_monitoring_user_list = "Elenco Utenti";
 
 # bug_sponsorship_list_view_inc.php
@@ -1072,7 +1086,7 @@ $s_add_custom_field_button = "Nuovo campo personalizzato";
 $s_delete_custom_field_button = "Elimina campo personalizzato";
 $s_delete_custom_field_everywhere = "Elimina tutti i Campi Personalizzati";
 $s_update_custom_field_button = "Aggiorna campo personalizzato";
-$s_add_existing_custom_field = "Aggiungi questo Campo Personalizzato";
+$s_add_existing_custom_field = "Aggiungi campo personalizzato";
 $s_edit_custom_field_title = "Modifica Campo Personalizzato";
 $s_custom_field = "Campo";
 $s_custom_fields_setup = "Campi Personalizzati";
@@ -1097,14 +1111,14 @@ $s_custom_field_require_resolved = "Obbligatorio in 'Risolvi anomalia'";
 $s_custom_field_require_closed = "Obbligatorio in 'Chiudi anomalia'";
 
 $s_custom_field_sequence = "Sequenza";
-$s_custom_field_type_enum_string = '0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email,5:Checkbox,6:Lista,7:Lista a scelta multipla,8:Date';
+$s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email,5:Checkbox,6:Lista,7:Lista a scelta multipla,8:Date";
 
 $s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante Indietro del tuo browser.  Per procedere, clicca sul pulsante qui sotto";
 $s_confirm_custom_field_deletion = "Eliminare questo campo personalizzato?";
 $s_field_delete_button = "Elimina campo personalizzato";
 
-$s_confirm_custom_field_unlinking = 'Rimuovere questo campo personalizzato dal presente progetto?';
-$s_field_remove_button = 'Rimuove campo personalizzato';
+$s_confirm_custom_field_unlinking = "Rimuovere questo campo personalizzato dal presente progetto?";
+$s_field_remove_button = "Rimuove campo personalizzato";
 
 $s_hide_status = "Non mostrare";
 $s_filter_closed = "Chiusi";
@@ -1171,75 +1185,75 @@ $s_view_issue = "Dettaglio anomalia";
 $s_checkin = "Checkin";
 
 # Pemissions report
-$s_perm_rpt_capability = 'Funzionalità';
-$s_view = 'Visualizzare';
-$s_issues = 'ANOMALIE';
-$s_report_issue = 'Sottoporre una anomalia';
-$s_update_issue = 'Aggiornare una anomalia';
-$s_monitor_issue = 'Monitorare una anomalia';
-$s_handle_issue = 'Gestire una anomalia';
-$s_move_issue = 'Muovere una anomalia';
-$s_delete_issue = 'Eliminare una anomalia';
-$s_reopen_issue = 'Riaprire una anomalia chiusa';
-$s_view_private_issues = 'Vedere le anomalie private';
-$s_update_readonly_issues = 'Aggiornare anomalie in sola lettura';
-$s_update_issue_status = 'Aggiornare lo stato di una anomalia';
-$s_set_view_status = 'Impostare lo stato di visualizz. (publico o privato)';
-$s_update_view_status = 'Aggiornare lo stato di visualizz. (publico o privato)';
-$s_show_list_of_users_monitoring_issue = 'Visualizzare lista degli utenti che monitorizzano una anomalia';
-$s_notes = 'NOTE';
-$s_add_notes = 'Aggiungere nuove note';
-$s_update_notes = 'Aggiornare una note';
-$s_delete_note = 'Eliminare una note';
-$s_view_private_notes = 'Visualizzare le note private';
-$s_news = 'NEWS';
-$s_view_private_news = 'Visualizzare le news private';
-$s_manage_news = 'Gestire le news';
-$s_view_list_of_attachments = 'Visualizzare gli allegare';
-$s_download_attachments = 'Scaricare gli allegati';
-$s_delete_attachments = 'Eliminare gli allegati';
+$s_perm_rpt_capability = "Funzionalità";
+$s_view = "Visualizzare";
+$s_issues = "ANOMALIE";
+$s_report_issue = "Segnala anomalia";
+$s_update_issue = "Aggiorna anomalia";
+$s_monitor_issue = "Monitora anomalia";
+$s_handle_issue = "Gestisce anomalia";
+$s_move_issue = "Muove anomalia";
+$s_delete_issue = "Elimina anomalia";
+$s_reopen_issue = "Riapre anomalia chiusa";
+$s_view_private_issues = "Visualizza anomalie private";
+$s_update_readonly_issues = "Aggiorna anomalie in sola lettura";
+$s_update_issue_status = "Aggiorna stato anomalia";
+$s_set_view_status = "Imposta stato di visualizz. (publico o privato)";
+$s_update_view_status = "Aggiorna stato di visualizz. (publico o privato)";
+$s_show_list_of_users_monitoring_issue = "Visualizza lista degli utenti che monitorizzano anomalia";
+$s_notes = "NOTE";
+$s_add_notes = "Aggiunge nota";
+$s_update_notes = "Aggiorna nota";
+$s_delete_note = "Elimina nota";
+$s_view_private_notes = "Visualizza note private";
+$s_news = "NEWS";
+$s_view_private_news = "Visualizza news private";
+$s_manage_news = "Gestire le news";
+$s_view_list_of_attachments = "Visualizza allegati";
+$s_download_attachments = "Scarica allegati";
+$s_delete_attachments = "Elimina allegati";
 $s_delete_attachment_button = "Elimina allegato";
 $s_delete_attachment_sure_msg = "Eliminare questo allegato?";
-$s_upload_issue_attachments = 'Aggiungere allegati ad una anomalia';
-$s_filters = 'filtri';
-$s_save_filters = 'Salvare nuovi filtri';
-$s_save_filters_as_shared = 'Salvare nuovi filtri come condivisi';
-$s_use_saved_filters = 'Utilizzare i filtri salvati';
-$s_create_project = 'Creare nuovi progetti';
-$s_delete_project = 'Eliminare un progetto';
-$s_manage_project = 'Gestire un progetto';
-$s_manage_user_access_to_project = 'Gestire gli accessi utente ai progetti';
-$s_automatically_included_in_private_projects = 'Utenti automaticamente aggiunti ai progetti privati';
-$s_project_documents = 'DOCUMENTAZIONE DI PROGETTO';
-$s_view_project_documents = 'Visualizzare la documentazione di progetto';
-$s_upload_project_documents = 'Aggiornare la documentazione di progetto';
-$s_link_custom_fields_to_projects = 'Aggiungere campi personalizzati ai progetti';
-$s_sponsorships = 'SPONSORIZZAZIONI';
-$s_view_sponsorship_details = 'Visualizzare i dettagli delle sponsorizzazioni';
-$s_view_sponsorship_total = 'Vedere il totale della sponsorizzazione';
-$s_sponsor_issue = 'Sponsorizzare una anomalia';
-$s_assign_sponsored_issue = 'Assegnare una anomalia sponsorizzata';
-$s_handle_sponsored_issue = 'Gestire una anomalia sponsorizzata';
-$s_others = 'ALTRI';
-$s_see_email_addresses_of_other_users = 'Visualizzare indirizzi email degli altri utenti';
-$s_send_reminders = 'Inviare memorandum';
-$s_add_profiles = 'Aggiugnere nuovi profili';
-$s_notify_of_new_user_created = 'Informati della creazione di nuovi utenti';
-$s_email_notification = 'NOTIFICHE VIA EMAIL';
-$s_status_changed_to = 'Email su stato cambiato in';
-$s_email_on_deleted = 'Email su \'Eliminazione\'';
-$s_email_on_sponsorship_changed = 'Email su variazione di sponsorizzazione';
-$s_email_on_relationship_changed = 'Email su variazione delle relazioni';
+$s_upload_issue_attachments = "Aggiungere allegati ad una anomalia";
+$s_filters = "filtri";
+$s_save_filters = "Salvare nuovi filtri";
+$s_save_filters_as_shared = "Salvare nuovi filtri come condivisi";
+$s_use_saved_filters = "Utilizzare i filtri salvati";
+$s_create_project = "Crea progetto";
+$s_delete_project = "Elimina progetto";
+$s_manage_project = "Gestisce progetto";
+$s_manage_user_access_to_project = "Gestisce accessi utente ai progetti";
+$s_automatically_included_in_private_projects = "Utenti automaticamente aggiunti ai progetti privati";
+$s_project_documents = "DOCUMENTAZIONE DI PROGETTO";
+$s_view_project_documents = "Visualizza documentazione di progetto";
+$s_upload_project_documents = "Aggiorna documentazione di progetto";
+$s_link_custom_fields_to_projects = "Aggiunge campi personalizzati ai progetti";
+$s_sponsorships = "SPONSORIZZAZIONI";
+$s_view_sponsorship_details = "Visualizza dettagli sponsorizzazioni";
+$s_view_sponsorship_total = "Visualizza totale sponsorizzazioni";
+$s_sponsor_issue = "Sponsorizza anomalia";
+$s_assign_sponsored_issue = "Assegna anomalia sponsorizzata";
+$s_handle_sponsored_issue = "Gestisce anomalia sponsorizzata";
+$s_others = "ALTRI";
+$s_see_email_addresses_of_other_users = "Visualizza indirizzi email altri utenti";
+$s_send_reminders = "Invia memorandum";
+$s_add_profiles = "Aggiugnere nuovi profili";
+$s_notify_of_new_user_created = "Informati creazione nuovi utenti";
+$s_email_notification = "NOTIFICHE VIA EMAIL";
+$s_status_changed_to = "Email su stato cambiato in";
+$s_email_on_deleted = "Email su 'Eliminazione'";
+$s_email_on_sponsorship_changed = "Email su variazione di sponsorizzazione";
+$s_email_on_relationship_changed = "Email su variazione delle relazioni";
 
 # DHTML filters
-$s_loading = 'In caricamento...';
+$s_loading = "In caricamento...";
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between = "Tra";
+$s_on_or_before = "Il o prima del";
+$s_before = "Prima del";
+# $s_on = "Il' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = "Dopo il";
+$s_on_or_after = "Il o dopo il";
 
 ?>
