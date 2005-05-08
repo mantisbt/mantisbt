@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.8 2005-05-01 16:20:22 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.9 2005-05-08 20:44:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -23,7 +23,7 @@
 	$t_access = current_user_get_access_level();
 	$t_project = helper_get_current_project();
 	$t_can_change_flags = $t_access >= config_get_access( 'status_enum_workflow' );
-	
+
 	function parse_workflow( $p_enum_workflow ) {
 	    global $t_status_arr;
         if ( 0 == count( $p_enum_workflow ) ) {
@@ -85,7 +85,7 @@
     	}
         return array( 'entry' => $t_entry, 'exit' => $t_exit, 'default' => $t_default );
     }
-	
+
 
 	# Get the value associated with the specific action and flag.
 	function show_flag( $p_from_status_id, $p_to_status_id ) {
@@ -94,14 +94,14 @@
             $t_file = isset( $t_file_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
             $t_global = isset( $t_global_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
             $t_project = isset( $t_project_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
-            
+
             $t_colour = '';
             if ( $t_global != $t_file ) {
                 $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
             }
             if ( $t_project != $t_global ) {
                 $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-            } 
+            }
             $t_value = '<td class="center"' . $t_colour . '>';
 
 			$t_flag = ( 1 == $t_project );
@@ -120,7 +120,7 @@
 		} else {
             $t_value = '<td>&nbsp;';
 		}
-		
+
 		$t_value .= '</td>';
 
 		return $t_value;
@@ -129,10 +129,10 @@
 	function section_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
-			. strtoupper( $p_section_name ) . '</td><td> </td></tr>' . "\n";
+		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 2 ) . '">'
+			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
-		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) ) . '">'
+		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
 			. lang_get( 'next_status' ) . '</td></tr>';
 		echo "\n<tr></td>";
 		foreach( $t_enum_status as $t_status ) {
@@ -150,18 +150,18 @@
 		foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 			echo show_flag( $p_from_status, $t_to_status_id );
 		}
-		
+
         $t_file = isset( $t_file_workflow['default'][$p_from_status] ) ? $t_file_workflow['default'][$p_from_status] : 0 ;
         $t_global = isset( $t_global_workflow['default'][$p_from_status] ) ? $t_global_workflow['default'][$p_from_status] : 0 ;
         $t_project = isset( $t_project_workflow['default'][$p_from_status] ) ? $t_project_workflow['default'][$p_from_status] : 0;
-            
+
         $t_colour = '';
         if ( $t_global != $t_file ) {
             $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
         }
         if ( $t_project != $t_global ) {
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-        } 
+        }
 		echo '<td class="center"' . $t_colour . '><select name="default_' . $p_from_status . '">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>';
@@ -183,15 +183,15 @@
 
 	function threshold_row( $p_threshold ) {
 		global $t_access, $t_colour_project, $t_colour_global;
-        
+
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
         $t_file = config_get_global( $p_threshold );
-        
+
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
-        
+
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
         $t_project = config_get( $p_threshold );
@@ -201,7 +201,7 @@
         }
         if ( $t_project != $t_global ) {
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-        } 
+        }
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>';
 		$t_change_threshold = config_get_access( $p_threshold );
@@ -248,7 +248,7 @@
 		$t_global_new = config_get( 'report_bug_threshold', null, null, ALL_PROJECTS );
 	    config_flush_cache( 'report_bug_threshold' );
 		$t_project_new = config_get( 'report_bug_threshold' );
-			
+
 	    config_flush_cache( 'set_status_threshold' );
 	    config_flush_cache( 'update_bug_status_threshold' );
 		$t_file_set = config_get_global( 'set_status_threshold' );
@@ -257,7 +257,7 @@
 		        $t_file_set[$t_status] = config_get_global('update_bug_status_threshold');
 		    }
 		}
-		
+
 	    config_flush_cache( 'set_status_threshold' );
 	    config_flush_cache( 'update_bug_status_threshold' );
 		$t_global_set = config_get( 'set_status_threshold', null, null, ALL_PROJECTS );
@@ -287,7 +287,7 @@
                 }
                 if ( $t_project_new != $t_global_new ) {
                     $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-                } 
+                }
 			} else {
 				$t_level = $t_project_set[$t_status];
 				$t_can_change = ( $t_access >= config_get_access( 'set_status_threshold' ) );
@@ -297,7 +297,7 @@
                 }
                 if ( $t_project_set[$t_status] != $t_global_set[$t_status] ) {
                     $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-                } 
+                }
 			}
 
 			if ( $t_can_change ) {
@@ -359,7 +359,7 @@
 
 	$t_colour_project = config_get( 'colour_project');
 	$t_colour_global = config_get( 'colour_global');
-	
+
 	if ( $t_can_change_flags ) {
 		echo "<form name=\"workflow_config_action\" method=\"post\" action=\"manage_config_workflow_set.php\">\n";
 	}
@@ -425,7 +425,7 @@
 		echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 
 		echo "</form>\n";
-		
+
 		echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
 		echo "<input name=\"revert\" type=\"hidden\" value=\"status_enum_workflow,set_status_threshold\"></input>";
 		echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
@@ -435,7 +435,7 @@
            echo lang_get( 'revert_to_system' );
         } else {
            echo lang_get( 'revert_to_all_project' );
-        } 
+        }
 		echo "\" />\n";
 		echo "</form></div>\n";
 
