@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.7 2005-05-01 16:05:15 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.8 2005-05-09 18:41:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -69,7 +69,7 @@
 		        }
 		    }
 		} else {
-		    $t_file_exp = $t_global;
+		    $t_global_exp = $t_global;
 		}
         
         # flush the cache entries before continuing as the previous config_gets will have filled cache
@@ -83,7 +83,7 @@
 		        }
 		    }
 		} else {
-		    $t_file_exp = $t_project;
+		    $t_project_exp = $t_project;
 		}
         
 		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
