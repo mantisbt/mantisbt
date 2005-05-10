@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.5 2005-04-15 22:07:23 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.6 2005-05-10 11:38:06 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -28,24 +28,24 @@
 
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
-	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold );
+	        $f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array( ) );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
 		    $t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
 		    ksort( $t_access_levels );
 		    reset( $t_access_levels );
 
-		    $t_lower_threshold = ANYBODY;
+		    $t_lower_threshold = NOBODY;
 		    $t_array_threshold = array();
 
 		    foreach( $t_access_levels as $t_access_level => $t_level_name ) {
 		        if ( in_array( $t_access_level, $f_threshold ) ) {
-		            if ( ANYBODY == $t_lower_threshold ) {
+		            if ( NOBODY == $t_lower_threshold ) {
 		                $t_lower_threshold = $t_access_level;
 		            }
 		            $t_array_threshold[] = $t_access_level;
 		        } else {
-		            if ( ANYBODY <> $t_lower_threshold ) {
+		            if ( NOBODY <> $t_lower_threshold ) {
 		                $t_lower_threshold = -1;
 		            }
 		        }
