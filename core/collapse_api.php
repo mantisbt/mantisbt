@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: collapse_api.php,v 1.4 2005-04-22 22:06:07 prichards Exp $
+	# $Id: collapse_api.php,v 1.5 2005-05-10 12:28:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -108,8 +108,8 @@
 		$g_open_collapse_section = false;
 
 		if ( ON == config_get( 'use_javascript' ) ) {
-			echo '<script type="text/JavaScript"><!--';
-			echo '	SetDiv( "', $p_name, '", g_div_', $p_name, ' );';
+			echo '<script type="text/JavaScript"><!--' . "\n";
+			echo '	SetDiv( "', $p_name, '", g_div_', $p_name, ' );' . "\n";
 			echo '--></script>';
 
 			ob_end_flush();
