@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.98 2005-05-01 16:20:25 thraxisp Exp $
+	# $Id: user_api.php,v 1.99 2005-05-10 17:32:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -635,16 +635,17 @@
 
 	# --------------------
 	# retun an array of project IDs to which the user has access
-	function user_get_accessible_projects( $p_user_id ) {
+	function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		global $g_user_accessible_projects_cache;
 
 		if ( null != $g_user_accessible_projects_cache
-		     && auth_get_current_user_id() == $p_user_id ) {
+		     && auth_get_current_user_id() == $p_user_id 
+		     && false == $p_show_disabled ) {
 			return $g_user_accessible_projects_cache;
 		}
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS );
+			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
 		} else {
 			$c_user_id = db_prepare_int( $p_user_id );
 
@@ -654,6 +655,7 @@
 
 			$t_public	= VS_PUBLIC;
 			$t_private	= VS_PRIVATE;
+			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = 1 AND';
 
 			$query = "SELECT p.id, p.name
 					  FROM $t_project_table p
@@ -661,7 +663,7 @@
 					    ON p.id=u.project_id AND u.user_id=$c_user_id
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
-					  WHERE ( p.enabled = 1 ) AND
+					  WHERE $t_enabled_clause
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'
 							    AND
@@ -693,11 +695,12 @@
 
 	# --------------------
 	# retun an array of subproject IDs of a certain project to which the user has access
-	function user_get_accessible_subprojects( $p_user_id, $p_project_id ) {
+	function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 		global $g_user_accessible_subprojects_cache;
 
 		if ( null != $g_user_accessible_subprojects_cache
-		     && auth_get_current_user_id() == $p_user_id ) {
+		     && auth_get_current_user_id() == $p_user_id 
+		      && false == $p_show_disabled ) {
 			if ( isset( $g_user_accessible_subprojects_cache[ $p_project_id ] ) ) {
 				return $g_user_accessible_subprojects_cache[ $p_project_id ];
 			} else {
@@ -712,6 +715,7 @@
 		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
 
+		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = 1 AND';
 		$t_public	= VS_PUBLIC;
 		$t_private	= VS_PRIVATE;
 
@@ -720,8 +724,8 @@
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
-					  WHERE p.enabled = 1
-					  	AND ph.parent_id IS NOT NULL
+					  WHERE $t_enabled_clause
+					  	 ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
 		} else {
 			$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
@@ -730,7 +734,7 @@
 					    ON p.id = u.project_id AND u.user_id='$c_user_id'
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
-					  WHERE ( p.enabled = 1 ) AND
+					  WHERE $t_enabled_clause
 					  	ph.parent_id IS NOT NULL AND
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'

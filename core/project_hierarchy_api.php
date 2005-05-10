@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.5 2005-04-11 02:21:54 thraxisp Exp $
+	# $Id: project_hierarchy_api.php,v 1.6 2005-05-10 17:32:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -77,17 +77,18 @@
 	$g_cache_project_hierarchy = null;
 
 	# --------------------
-	function project_hierarchy_cache() {
+	function project_hierarchy_cache( $p_show_disabled = false ) {
 		global $g_cache_project_hierarchy;
 
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
+		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = 1';
 
 		$query = "SELECT DISTINCT p.id, ph.parent_id, p.name
 				  FROM $t_project_table p
 				  LEFT JOIN $t_project_hierarchy_table ph
 				    ON ph.child_id = p.id
-				  WHERE p.enabled = 1
+				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
 		$result = db_query( $query );
@@ -112,11 +113,11 @@
 
 
 	# --------------------
-	function project_hierarchy_get_subprojects( $p_project_id ) {
+	function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = false ) {
 		global $g_cache_project_hierarchy;
 
-		if ( null === $g_cache_project_hierarchy ) {
-			project_hierarchy_cache();
+		if ( ( null === $g_cache_project_hierarchy ) || ( $p_show_disabled ) ) {
+			project_hierarchy_cache( $p_show_disabled );
 		}
 
 		if ( isset( $g_cache_project_hierarchy[ $p_project_id ] ) ) {

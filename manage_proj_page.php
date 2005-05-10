@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.17 2005-04-03 12:43:31 jlatour Exp $
+	# $Id: manage_proj_page.php,v 1.18 2005-05-10 17:32:32 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,7 +71,7 @@
 </tr>
 <?php
 	$t_manage_project_threshold = config_get( 'manage_project_threshold' );
-	$t_projects = current_user_get_accessible_projects();
+	$t_projects = user_get_accessible_projects( auth_get_current_user_id(), true );
 	$t_full_projects = array();
 	foreach ( $t_projects as $t_project_id ) {
 		$t_full_projects[] = project_get_row( $t_project_id );
@@ -113,7 +113,7 @@
 </tr>
 <?php
 		}
-		$t_subprojects = project_hierarchy_get_subprojects( $t_project_id );
+		$t_subprojects = project_hierarchy_get_subprojects( $t_project_id, true );
 
 		if ( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
 			array_unshift( $t_stack, $t_projects );
