@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.6 2005-02-12 20:03:50 jlatour Exp $
+ * $Id: common.js,v 1.7 2005-05-10 17:56:40 thraxisp Exp $
  * --------------------------------------------------------
  */
 
@@ -74,7 +74,7 @@ function SetCookie( p_cookie, p_value ) {
 
 	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires + ";";
+	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
 }
 
 
