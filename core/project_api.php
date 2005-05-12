@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.72 2005-05-12 16:06:48 thraxisp Exp $
+	# $Id: project_api.php,v 1.73 2005-05-12 21:42:06 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -453,8 +453,10 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_project_table = config_get( 'mantis_project_table' );
+		
+		$t_global_access_level = $p_access_level;
 
-		if( $c_project_id != ALL_PROJECTS ) {
+		if ( $c_project_id != ALL_PROJECTS ) {
 			# looking for specific project
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
 				# @@@ (thraxisp) this is probably more complex than it needs to be
@@ -490,11 +492,9 @@
 						$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
 					}
 				}
-			} else {
-				$t_global_access_level = $p_access_level;
 			}
 		}
-
+				
 		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
 		if ( is_array( $t_global_access_level ) ) {
 			if ( 0 == count( $t_global_access_level ) ) {
