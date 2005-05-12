@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.165 2005-05-01 02:35:07 vboctor Exp $
+	# $Id: html_api.php,v 1.166 2005-05-12 16:01:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -365,7 +365,8 @@
 
 		echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a></span>', "\n";
+			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a>', 
+					'[<a href="http://www.mantisbt.org/" target="_blank">^</a>]</span>', "\n";
 		}
 		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
 
