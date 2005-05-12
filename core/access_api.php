@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.42 2005-04-07 22:44:54 thraxisp Exp $
+	# $Id: access_api.php,v 1.43 2005-05-12 16:04:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -316,13 +316,13 @@
 		    $p_user_id = auth_get_current_user_id();
 		}
 
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		# check limit_Reporter (Issue #4769)
 		# reporters can view just issues they reported
 		$t_limit_reporters = config_get( 'limit_reporters' );
-		$t_report_bug_threshold = config_get( 'report_bug_threshold' );
-		if ( (ON === $t_limit_reporters) &&
-		     (!bug_is_user_reporter( $p_bug_id, $p_user_id )) &&
-		     ( current_user_get_access_level() <= $t_report_bug_threshold ) ) {
+		if ( ( ON === $t_limit_reporters ) &&
+		     ( !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) &&
+		     ( !access_has_project_level( REPORTER + 1, $t_project_id, $p_user_id ) ) ) {
 		  return false;
 		}
 
@@ -332,8 +332,6 @@
 			 !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bug_threshold' ) );
 		}
-
-		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 		return access_has_project_level( $p_access_level, $t_project_id, $p_user_id );
 	}
