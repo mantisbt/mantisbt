@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.71 2005-04-19 14:20:02 thraxisp Exp $
+	# $Id: project_api.php,v 1.72 2005-05-12 16:06:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -454,8 +454,6 @@
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_project_table = config_get( 'mantis_project_table' );
 
-		$t_project_access_level = $p_access_level;
-
 		if( $c_project_id != ALL_PROJECTS ) {
 			# looking for specific project
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
@@ -492,23 +490,12 @@
 						$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
 					}
 				}
-				$t_select_private = 'p.view_state=' . VS_PRIVATE . ' AND ';
 			} else {
 				$t_global_access_level = $p_access_level;
-				$t_select_private = '';
 			}
-		} else {
-			$t_global_access_level = $p_access_level;
-			$t_select_private = '';
 		}
 
 		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
-		if ( is_array( $t_project_access_level ) ) {
-			$t_project_access_clause = "IN (" . implode( ',', $t_project_access_level ) . ")";
-		} else {
-			$t_project_access_clause = ">= $t_project_access_level ";
-		}
-		
 		if ( is_array( $t_global_access_level ) ) {
 			if ( 0 == count( $t_global_access_level ) ) {
 				$t_global_access_clause = ">= " . NOBODY . " ";
@@ -523,39 +510,46 @@
 
 		$t_on = ON;
 		$t_adm = ADMINISTRATOR;
-
 		$t_users = array();
-	/* this query requires mysql4.1, but will improve performance in future
-		$query = "SELECT DISTINCT u.id, u.username, u.realname, u.access_level as access_level, l.access_level as override
-					FROM 	$t_user_table u LEFT JOIN
-							( $t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause )
-							ON l.user_id=u.id
-					WHERE	( ( $t_select_private u.access_level $t_global_access_clause )
-							OR ( l.access_level $t_project_access_clause AND l.user_id=u.id )
-							OR u.access_level>=$t_adm )
-							AND u.enabled = $t_on
-							$t_project_clause";
-	*/
-		$query = "SELECT DISTINCT u.id, u.username, u.realname
-					FROM 	$t_user_table u,
-							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id $t_project_clause 
-					WHERE	( ( $t_select_private u.access_level $t_global_access_clause )
-							OR ( l.access_level $t_project_access_clause AND l.user_id=u.id )
-							OR u.access_level>=$t_adm )
-							AND u.enabled = $t_on
-							$t_project_clause";
-	
+
+		$query = "SELECT id, username, realname, access_level
+				FROM $t_user_table
+				WHERE enabled = $t_on
+					AND access_level $t_global_access_clause";
+
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
-	/* this query requires mysql4.1, but will improve performance in future
-			if ( NULL <> $row['override'] ) {
-				$row['access_level'] = $row['override'];
+			$t_users[$row['id']] = $row;
+		}
+
+		if( $c_project_id != ALL_PROJECTS ) {
+			# Get the project overrides
+			$query = "SELECT u.id, u.username, u.realname, l.access_level
+				FROM $t_project_user_list_table l, $t_user_table u
+				WHERE l.user_id = u.id
+				AND u.enabled = $t_on
+				AND l.project_id = $c_project_id";
+
+			$result = db_query( $query );
+			$t_row_count = db_num_rows( $result );
+			for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+				$row = db_fetch_array( $result );
+				if ( is_array( $p_access_level ) ) {
+					$t_keep = in_array( $row['access_level'], $p_access_level );
+				} else {
+					$t_keep = $row['access_level'] >= $p_access_level;
+				}
+
+				if ( $t_keep ) {
+					$t_users[$row['id']] = $row;
+				} else {
+					# If user's overridden level is lower than required, so remove
+					#  them from the list if they were previously there
+					unset( $t_users[$row['id']] );
+				}
 			}
-	*/
-			$row['access_level'] = access_get_project_level( $p_project_id, $row['id'] );
-			$t_users[] = $row;
 		}
 
 		return array_values( $t_users );
