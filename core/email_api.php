@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.114 2005-04-22 23:27:56 thraxisp Exp $
+	# $Id: email_api.php,v 1.115 2005-05-13 21:59:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -246,7 +246,7 @@
 		unset( $t_status_change[RESOLVED] );
 		unset( $t_status_change[CLOSED] );
 
-		if ( $p_notify_type = 'owner' ) {
+		if ( 'owner' == $p_notify_type ) {
 			$t_pref_field = 'email_on_assigned';
 		} else if ( in_array( $p_notify_type, $t_status_change ) ) {
 			$t_pref_field = 'email_on_status';
