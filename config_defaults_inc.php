@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.262 2005-05-13 00:14:37 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.263 2005-05-13 22:02:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1364,6 +1364,16 @@
 	#  allowing you to see the errors.
 	# Only turn this option on for debugging
 	$g_stop_on_errors		= OFF;
+	
+	# --- system logging ---
+	# This controls the logging of information to a separate file for debug or audit
+	# $g_log_level controls what information is logged
+	#  it is formed by ORing constants like LOG_EMAIL | LOG_PROJECT
+	#  see constant_inc for details on the log channels
+	# $g_log_destination specifies where the data goes
+	#   right now, only "file:<file path>" is supported
+	$g_log_level = 0;
+	$g_log_destination = '';
 
 	##################
 	# Custom Fields

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.46 2005-04-17 17:14:17 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.47 2005-05-13 22:02:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -333,6 +333,11 @@
 	define( 'CUSTOM_FIELD_DATE_ON',			5 ) ;
 	define( 'CUSTOM_FIELD_DATE_AFTER',		6 ) ;
 	define( 'CUSTOM_FIELD_DATE_ONORAFTER',	7 ) ;
+	
+	# system logging
+	#  logging levels, can be OR'd together
+	define( 'LOG_EMAIL',                    1 );  # all emails sent
+	define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
 
 
 ?>

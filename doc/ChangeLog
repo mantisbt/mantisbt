@@ -1,7 +1,10 @@
 Mantis ChangeLog
 
 2005.xx.xx  -  1.0.0a3
+- New Feature: generic logging interface
 - New Config: $g_wrap_in_preformatted_text - if ON, will wrap text inside <pre> formatted text (thraxisp)
+- New Config: $g_log_level - system logging level bit map (thraxisp)
+- New Config: $g_log_destination - system logging destination (thraxisp)
 
 
 2005.04.25  -  1.0.0a2

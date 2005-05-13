@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.115 2005-05-13 21:59:42 thraxisp Exp $
+	# $Id: email_api.php,v 1.116 2005-05-13 22:02:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,12 +178,14 @@
 		if ( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
 			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 			$t_recipients[$t_reporter_id] = true;
+			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add reporter=$t_reporter_id" );
 		}
 
 		# add Handler
 		if ( ON == email_notify_flag( $p_notify_type, 'handler' )) {
 			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 			$t_recipients[$t_handler_id] = true;
+			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add handler=$t_handler_id" );
 		}
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -200,6 +202,7 @@
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
 				$t_recipients[$t_user_id] = true;
+			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add monitor=$t_user_id" );
 			}
 		}
 
@@ -220,6 +223,7 @@
 			for( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
 				$t_recipients[$t_user_id] = true;
+				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add note=$t_user_id" );
 			}
 		}
 
@@ -232,6 +236,7 @@
 			if ( $t_user['access_level'] <= $t_threshold_max ) {
 				if ( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
 					$t_recipients[$t_user['id']] = true;
+					log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add project=" . $t_user['id'] );
 				}
 			}
 		}
@@ -268,12 +273,14 @@
 			# Possibly eliminate the current user
 			if ( ( auth_get_current_user_id() == $t_id ) &&
 				 ( OFF == config_get( 'email_receive_own' ) ) ) {
+				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (own)" );
 				continue;
 			}
 
 			# Eliminate users who don't exist anymore or who are disabled
 			if ( !user_exists( $t_id ) ||
 				 !user_is_enabled( $t_id ) ) {
+				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (disabled)" );
 				continue;
 			}
 
@@ -281,6 +288,7 @@
 			if ( $t_pref_field ) {
 				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 				if ( OFF == $t_notify ) {
+					log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (pref $t_pref_field off)" );
 					continue;
 				} else {
 					# Users can define the severity of an issue before they are emailed for
@@ -290,6 +298,7 @@
 					$t_bug_severity       = bug_get_field( $p_bug_id, 'severity' );
 
 					if ( $t_bug_severity < $t_min_sev_notify ) {
+						log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (pref threshold)" );
 						continue;
 					}
 				}
@@ -298,6 +307,7 @@
 			# check that user can see bugnotes if the last update included a bugnote
 			if ( $t_bug_date == $t_bugnote_date ) {
 				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
+						log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (access level)" );
 					continue;
 				}
 			}
@@ -305,6 +315,7 @@
 			# Finally, let's get their emails, if they've set one
 			$t_email = user_get_email( $t_id );
 			if ( is_blank( $t_email ) ) {
+				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (no email)" );
 			} else {
 				# @@@ we could check the emails for validity again but I think
 				#   it would be too slow
@@ -341,6 +352,7 @@
 		# or else users won't be able to sign up
 		if( !is_blank( $t_email ) ) {
 			email_send( $t_email, $t_subject, $t_message );
+			log_event( LOG_EMAIL, "signup=$t_email" );
 		}
 
 		lang_pop();
@@ -372,6 +384,7 @@
 		# or else users won't be able to receive their reset pws
 		if( !is_blank( $t_email ) ) {
 			email_send( $t_email, $t_subject, $t_message );
+			log_event( LOG_EMAIL, "password_reset=$t_email" );
 		}
 
 		lang_pop();
@@ -400,6 +413,7 @@
 
 			if( !is_blank( $t_recipient_email ) ) {
 				email_send( $t_recipient_email, $t_subject, $t_message );
+				log_event( LOG_EMAIL, "new_account_notify=$t_email" );
 			}
 
 			lang_pop();
@@ -422,8 +436,9 @@
 			$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
 
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-
 			if ( is_array( $t_recipients ) ) {
+				log_event( LOG_EMAIL, sprintf("bug=%d, type=%s, msg=%s, recipients=(%s)", $p_bug_id, $p_notify_type, $p_message_id, implode( '. ', $t_recipients ) ) );
+
 				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
 					# load (push) user language here as build_visible_bug_data assumes current language

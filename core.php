@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.40 2005-04-26 17:35:08 thraxisp Exp $
+	# $Id: core.php,v 1.41 2005-05-13 22:02:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -81,6 +81,7 @@
 
 	require_once( $t_core_path.'config_api.php' );
 	require_once( $t_core_path.'timer_api.php' );
+	require_once( $t_core_path.'logging_api.php' );
 
 	# load utility functions used by everything else
 	require_once( $t_core_path.'utility_api.php' );
