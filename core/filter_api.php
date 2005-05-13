@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.106 2005-04-26 18:22:58 thraxisp Exp $
+	# $Id: filter_api.php,v 1.107 2005-05-13 00:14:39 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -434,6 +434,35 @@
 				array_push( $t_where_clauses, "( $t_bug_table.version in (". implode( ', ', $t_clauses ) .") )" );
 			} else {
 				array_push( $t_where_clauses, "( $t_bug_table.version=$t_clauses[0] )" );
+			}
+		}
+		
+		# profile
+		$t_any_found = false;
+		foreach( $t_filter['show_profile'] as $t_filter_member ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				$t_any_found = true;
+			}
+		}
+		if ( count( $t_filter['show_profile'] ) == 0 ) {
+			$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['show_profile'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
+				if ( META_FILTER_NONE == $t_filter_member ) {
+					array_push( $t_clauses, "0" );
+				} else {
+					$c_show_profile = db_prepare_int( $t_filter_member );
+					array_push( $t_clauses, "$c_show_profile" );
+				}
+			}
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.profile_id in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.profile_id=$t_clauses[0] )" );
 			}
 		}
 
@@ -950,7 +979,7 @@
 
 			$t_show_version = ( ON == config_get( 'show_product_version' ) )
 					|| ( ( AUTO == config_get( 'show_product_version' ) )
-								&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+								&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
 
 		?>
 
@@ -972,6 +1001,9 @@
 			</td>
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_resolution[]'; ?>" id="show_resolution_filter"><?php PRINT lang_get( 'resolution' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_profile[]'; ?>" id="show_profile_filter"><?php PRINT lang_get( 'profile' ) ?>:</a>
 			</td>
 		</tr>
 
@@ -1197,7 +1229,42 @@
 								}
 							?>
 			</td>
-		</tr>
+			<td class="small-caption" valign="top" id="show_profile_filter_target">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
+								if ( count( $t_filter['show_profile'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['show_profile'] as $t_current ) {
+										?>
+										<input type="hidden" name="show_profile[]" value="<?php echo $t_current;?>" />
+										<?php
+										$t_this_string = '';
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+											$t_any_found = true;
+										} else {
+											$t_profile = profile_get_row_direct( $t_current );
+											
+											$t_this_string = "${t_profile['platform']} ${t_profile['os']} ${t_profile['os_build']}";
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br />';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_string;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			</tr>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
 			<td class="small-caption" valign="top">
@@ -1228,6 +1295,9 @@
 			<?php } ?>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_priority[]'; ?>" id="show_priority_filter"><?php PRINT lang_get( 'priority' ) ?>:</a>
+			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
 			</td>
 		</tr>
 
@@ -1453,7 +1523,11 @@
 	                }
 	               }
 	              ?>
-	     </td>
+	    	</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+
 		</tr>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
@@ -1755,7 +1829,7 @@
 					}
 				?>
 			</td>
-			<td class="small-caption" valign="top" colspan="2">
+			<td class="small-caption" valign="top" colspan="3">
 			</td>
 		</tr>
 		<?php
@@ -2199,6 +2273,7 @@
 									  'hide_status' => 'int',
 									  'fixed_in_version' => 'string',
 									  'user_monitor' => 'int',
+									  'show_profile' => 'int'
 									 );
 		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
@@ -2216,7 +2291,7 @@
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
-					if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
+					if ( ( 5 <= $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
 					if ( 'string' == $t_multi_field_type ) {
@@ -2417,7 +2492,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
 			<option value="[any]" <?php check_selected( $t_filter['show_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="[none]" <?php check_selected( $t_filter['show_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
-			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED, false ) ?>
+			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED, false, true ) ?>
 		</select>
 		<?php
 	}
@@ -2428,7 +2503,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
 			<option value="[any]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="[none]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
-			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL, false ) ?>
+			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL, false, true ) ?>
 		</select>
 		<?php
 	}
@@ -2440,6 +2515,16 @@
 			<option value="[any]" <?php check_selected( $t_filter['show_priority'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php print_enum_string_option_list( 'priority', $t_filter['show_priority'] ) ?>
     </select>
+		<?php
+	}
+	
+	function print_filter_show_profile() {
+		global $t_select_modifier, $t_filter;
+		?><!-- Profile -->
+		<select <?php PRINT $t_select_modifier;?> name="show_profile[]">
+			<option value="[any]" <?php check_selected( $t_filter['show_profile'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<?php print_profile_option_list_for_project( helper_get_current_project(), $t_filter['show_profile'] ); ?>
+		</select>
 		<?php
 	}
 

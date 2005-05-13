@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.53 2005-04-21 14:41:07 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.54 2005-05-13 00:14:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -97,6 +97,14 @@
 	} else {
 		$f_fixed_in_version = gpc_get_string( 'fixed_in_version', META_FILTER_ANY );
 		$f_fixed_in_version = array( $f_fixed_in_version );
+	}
+	
+	$f_show_profile = array();
+	if ( is_array( gpc_get( 'show_profile', null ) ) ) {
+		$f_show_profile = gpc_get_string_array( 'show_profile', META_FILTER_ANY );
+	} else {
+		$f_show_profile = gpc_get_string( 'show_profile', META_FILTER_ANY );
+		$f_show_profile = array( $f_show_profile );
 	}
 
 	$f_show_priority = array();
@@ -274,6 +282,7 @@
 	24: $f_custom_field
 	25: $f_relationship_type
 	26: $f_relationship_bug
+	27: $f_show_profile
 
 */
 	# Set new filter values.  These are stored in a cookie
@@ -344,6 +353,7 @@
 				$t_setting_arr['sticky_issues'] = $f_sticky_issues;
 				$t_setting_arr['relationship_type'] = $f_relationship_type;
 				$t_setting_arr['relationship_bug'] = $f_relationship_bug;
+				$t_setting_arr['show_profile'] = $f_show_profile;
 
 				break;
 		# Set the sort order and direction

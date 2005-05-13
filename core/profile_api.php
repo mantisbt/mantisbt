@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.12 2005-03-21 12:44:20 vboctor Exp $
+	# $Id: profile_api.php,v 1.13 2005-05-13 00:14:40 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -153,7 +153,22 @@
 
 		return db_fetch_array( $result );
 	}
+	
+	# --------------------
+	# Return a profile row from the database
+	function profile_get_row_direct( $p_profile_id ) {
+		$c_profile_id	= db_prepare_int( $p_profile_id );
 
+		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
+
+		$query = "SELECT *
+				  FROM $t_user_profile_table
+				  WHERE id='$c_profile_id'";
+	    $result = db_query( $query );
+
+		return db_fetch_array( $result );
+	}
+	
 	# --------------------
 	# Return an array containing all rows for a given user
 	function profile_get_all_rows( $p_user_id ) {
@@ -186,6 +201,30 @@
 			return array_merge( profile_get_all_rows( ALL_USERS ),
 		                    profile_get_all_rows( $p_user_id ) );
 		}
+	}
+	
+	# --------------------
+	# Return an array containing all profiles used in a given project
+	function profile_get_all_for_project( $p_project_id ) {
+		$t_project_where = helper_project_specific_where( $p_project_id );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
+
+		$query = "SELECT up.*
+				  FROM $t_user_profile_table up, $t_bug_table b
+				  WHERE $t_project_where
+				  AND up.id = b.profile_id";
+	    $result = db_query( $query );
+
+		$t_rows = array();
+		$t_row_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			array_push( $t_rows, db_fetch_array( $result ) );
+		}
+
+		return $t_rows;
 	}
 
 	# --------------------

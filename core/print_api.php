@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.128 2005-05-01 16:20:25 thraxisp Exp $
+	# $Id: print_api.php,v 1.129 2005-05-13 00:14:39 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -401,7 +401,9 @@
 	# --------------------
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_user_id, $p_select_id='' ) {
-		$t_default_profile = profile_get_default( $p_user_id );
+		if ( '' === $p_select_id ) {
+			$p_select_id = profile_get_default( $p_user_id );
+		}
 		$t_profiles = profile_get_all_for_user( $p_user_id );
 
 		PRINT '<option value=""></option>';
@@ -412,7 +414,27 @@
 			$v_os_build	= string_display( $v_os_build );
 
 			PRINT "<option value=\"$v_id\"";
-			check_selected( $v_id, $t_default_profile );
+			check_selected( $p_select_id, $v_id );
+			PRINT ">$v_platform $v_os $v_os_build</option>";
+		}
+	}
+	# --------------------
+	# prints the profiles used in a certain project
+	function print_profile_option_list_for_project( $p_project_id, $p_select_id='') {
+		if ( '' === $p_select_id ) {
+			$p_select_id = profile_get_default( $p_user_id );
+		}
+		$t_profiles = profile_get_all_for_project( $p_user_id );
+
+		PRINT '<option value=""></option>';
+		foreach ( $t_profiles as $t_profile ) {
+			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
+			$v_platform	= string_display( $v_platform );
+			$v_os		= string_display( $v_os );
+			$v_os_build	= string_display( $v_os_build );
+
+			PRINT "<option value=\"$v_id\"";
+			check_selected( $p_select_id, $v_id );
 			PRINT ">$v_platform $v_os $v_os_build</option>";
 		}
 	}
@@ -535,14 +557,20 @@
 	# $p_version = currently selected version.
 	# $p_project_id = project id, otherwise current project will be used.
 	# $p_released = null to get all, 1: only released, 0: only future versions
-	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null, $p_leading_blank = true ) {
+	# $p_leading_black = allow selection of no version
+	# $p_with_subs = include subprojects
+	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs=false ) {
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
 		} else {
 			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
-		$versions = version_get_all_rows( $c_project_id, $p_released );
+		if ( $p_with_subs ) {
+			$versions = version_get_all_rows_with_subs( $c_project_id, $p_released );
+		} else {
+			$versions = version_get_all_rows( $c_project_id, $p_released );
+		}
 
 		if ( $p_leading_blank ) {
 			echo '<option value=""></option>';

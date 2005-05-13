@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.261 2005-05-01 14:53:49 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.262 2005-05-13 00:14:37 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -1141,7 +1141,7 @@
 	$g_cookie_path			= '/';
 	$g_cookie_domain		= '';
 	# cookie version for view_all_page
-	$g_cookie_version		= 'v6';
+	$g_cookie_version		= 'v7';
 
 	# --- cookie prefix ---------------
 	# set this to a unique identifier.  No spaces.

@@ -137,7 +137,7 @@
 
 	$t_show_version = ( ON == config_get( 'show_product_version' ) )
 			|| ( ( AUTO == config_get( 'show_product_version' ) )
-						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+						&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
@@ -176,6 +176,7 @@
 	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'category' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'profile' ) ?></td>
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
@@ -202,6 +203,10 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_resolution(); ?>
 	</td>
+	<!-- Profile -->
+	<td valign="top" colspan= <?php echo ( 1 * $t_custom_cols ); ?>">
+		<?php print_filter_show_profile(); ?>
+	</td>
 </tr>
 
 <tr class="row-category2">
@@ -224,6 +229,7 @@
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 </tr>
 <tr class="row-1">
 	<!-- Status -->
@@ -261,9 +267,10 @@
  		} ?>
  	</td>
 	<!-- Priority -->
-  <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php print_filter_show_priority(); ?>
-   </td>
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+		<?php print_filter_show_priority(); ?>
+	</td>
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 </tr>
 
 <tr class="row-category2">
@@ -271,7 +278,7 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<input type="checkbox" name="do_filter_by_date" <?php
 			check_checked( $t_filter['do_filter_by_date'], 'on' );
 			if ( ON == config_get( 'use_javascript' ) ) {
@@ -299,7 +306,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_highlight_changed(); ?>
 	</td>
-	<td valign="top" class="left" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td valign="top" class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
 	</td>
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
@@ -362,12 +369,12 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			print_filter_show_sort();
 		?>
 	</td>
-	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 	</td>
 </tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( 6 * $t_custom_cols ); ?>"></td>
+<td class="small-caption" colspan="<?php echo ( 7 * $t_custom_cols ); ?>"></td>
 </tr>
 <tr>
 	<!-- Search field -->

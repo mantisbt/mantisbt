@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.21 2005-03-08 13:41:19 vboctor Exp $
+	# $Id: version_api.php,v 1.22 2005-05-13 00:14:40 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -270,6 +270,34 @@
 		}
 		return $rows;
 	}
+	
+	# --------------------
+	# Return all versions for the specified project, including subprojects
+	function version_get_all_rows_with_subs( $p_project_id, $p_released = null ) {
+		$t_project_where = helper_project_specific_where( $p_project_id );
+
+		if ( $p_released === null ) {
+			$t_released_where = '';
+		} else {
+			$c_released = db_prepare_int( $p_released );
+			$t_released_where = "AND ( released = $c_released )";
+		}
+
+		$t_project_version_table = config_get( 'mantis_project_version_table' );
+
+		$query = "SELECT *
+				  FROM $t_project_version_table
+				  WHERE $t_project_where $t_released_where
+				  ORDER BY date_order DESC";
+		$result = db_query( $query );
+		$count = db_num_rows( $result );
+		$rows = array();
+		for ( $i = 0 ; $i < $count ; $i++ ) {
+			$row = db_fetch_array( $result );
+			$rows[] = $row;
+		}
+		return $rows;
+	}	
 
 	# --------------------
 	# Get the version_id, given the project_id and $p_version_id
