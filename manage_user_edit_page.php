@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.14 2005-04-17 17:14:15 thraxisp Exp $
+	# $Id: manage_user_edit_page.php,v 1.15 2005-05-13 01:57:16 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -141,8 +141,8 @@
 
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
-<?php if ( ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) &&
-    ( ADMINISTRATOR < access_has_global_level( $t_user['id'] ) ) ){
+<?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
+    !access_has_global_level( ADMINISTRATOR, $t_user['id'] ) ){
 ?>
 <br />
 <div align="center">
