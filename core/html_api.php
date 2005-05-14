@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.166 2005-05-12 16:01:12 thraxisp Exp $
+	# $Id: html_api.php,v 1.167 2005-05-14 22:56:35 prichards Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -414,7 +414,7 @@
 		}
 
 		echo '</td><td><div align="right">';
-		echo '<a href="http://www.mantisbt.org" title="Powered by Mantis Bugtracker"><img src="images/mantis_logo_button.gif" width="88" height="35" alt="Power by Mantis Bugtracker" border="0" /></a>';
+		echo '<a href="http://www.mantisbt.org" title="Powered by Mantis Bugtracker"><img src="images/mantis_logo_button.gif" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
 		echo '</div></td></tr></table>';
 	}
 
