@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.34 2005-03-31 01:08:37 thraxisp Exp $
+	# $Id: file_download.php,v 1.35 2005-05-14 13:23:09 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -72,7 +72,7 @@
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
-	header( 'Content-type: ' . $v_file_type );
+	header( 'Content-Type: ' . $v_file_type );
 	header( 'Content-Length: ' . $v_filesize );
 
 	# Added Quotes (") around file name.
@@ -82,7 +82,7 @@
 	# To fix an IE bug which causes problems when downloading
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
-	if ( ( "on" == $_SERVER["HTTPS"] ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+	if ( ( isset( $_SERVER["HTTPS"] ) && "on" == $_SERVER["HTTPS"] ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
 		header( 'Pragma: no-cache' );
