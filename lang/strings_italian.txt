@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.103 $
+	# $Revision: 1.104 $
 	# $Author: marcelloscata $
-	# $Date: 2005-05-08 20:40:07 $
+	# $Date: 2005-05-15 12:28:46 $
 	#
-	# $Id: strings_italian.txt,v 1.103 2005-05-08 20:40:07 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.104 2005-05-15 12:28:46 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -543,6 +543,7 @@ $s_description = "Descrizione";
 $s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
 $s_update_information_button = "Aggiorna informazione";
 $s_sticky_issue = "Anomalia sticky";
+$s_profile = 'Profilo';
 
 # bug_update_page.php
 $s_update_advanced_link = "Aggiornamento dettagliato";
