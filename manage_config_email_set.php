@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.5 2005-04-22 01:59:29 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.6 2005-05-15 12:26:06 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -132,6 +132,7 @@
 <br />
 <div align="center">
 <?php
+	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
