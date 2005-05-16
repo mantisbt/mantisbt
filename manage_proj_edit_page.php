@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.87 2005-04-15 22:05:15 thraxisp Exp $
+	# $Id: manage_proj_edit_page.php,v 1.88 2005-05-16 12:56:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -211,9 +211,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</td>
 	<td class="center">
 		<?php
-				print_bracket_link( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
-				echo ' ';
-				print_bracket_link( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'], lang_get( 'unlink_link' ) );
+				print_button( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
+				echo '&nbsp;';
+				print_button( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'], lang_get( 'unlink_link' ) );
 		?>
 	</td>
 </tr>
@@ -306,9 +306,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php
 					$t_name = urlencode( $t_name );
 
-					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'edit_link' ) );
-					echo ' ';
-					print_bracket_link( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'edit_link' ) );
+					echo '&nbsp;';
+					print_button( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -394,9 +394,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 
-					print_bracket_link( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+					print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_bracket_link( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -476,7 +476,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
+					print_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
 				?>
 				</td>
 			</tr>
@@ -661,7 +661,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 				#  from this project
 				if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-						print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+						print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
 					}
 				}
 			?>
@@ -679,7 +679,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 		# You need global or project-specific permissions to remove users
 		#  from this project
 		if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
-			print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
+			print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
 		}
 	?>
 	</td>

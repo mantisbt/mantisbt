@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.129 2005-05-13 00:14:39 jlatour Exp $
+	# $Id: print_api.php,v 1.130 2005-05-16 12:56:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1038,6 +1038,13 @@
 		}
 
 		PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
+	}
+	# --------------------
+	# print a button which presents a standalone form.
+	# if the $p_link is blank then the text is printed but no link is created
+	# if $p_new_window is true, link will open in a new window, default false.
+	function print_button( $p_action_page, $p_label ) {
+		echo '<form method="POST" action="', $p_action_page, '"><input type="submit" class="button" value="', $p_label, '" /></form>';
 	}
 	# --------------------
 	# print the bracketed links used near the top

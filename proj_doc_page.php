@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.45 2005-02-27 21:25:36 prichards Exp $
+	# $Id: proj_doc_page.php,v 1.46 2005-05-16 12:56:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -86,9 +86,9 @@
 			echo '(' . $v_date_added . ')';
 			if ( access_has_project_level( config_get( 'manage_project_threshold' ), $v_project_id ) ) {
 				echo '&nbsp;';
-				print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+				print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 				echo '&nbsp;';
-				print_bracket_link( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
+				print_button( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
 			}
 ?>
 		</span>

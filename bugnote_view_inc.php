@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.29 2005-05-01 02:30:42 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.30 2005-05-16 12:56:05 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -134,14 +134,14 @@
 			if ( !bug_is_readonly( $f_bug_id ) ) {
 				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
-					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
-					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
+					print_button( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
+					print_button( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
 					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) &&
 						access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
 						if ( VS_PRIVATE == $v3_view_state ) {
-							print_bracket_link('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
+							print_button('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {
-							print_bracket_link('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
+							print_button('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
 						}
 					}
 				}

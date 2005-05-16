@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.18 2005-05-10 17:32:32 thraxisp Exp $
+	# $Id: manage_proj_page.php,v 1.19 2005-05-16 12:56:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 		<?php
 		# Check the user's global access level before allowing project creation
 		if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-			print_bracket_link( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
+			print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 		}
 		?>
 	</td>

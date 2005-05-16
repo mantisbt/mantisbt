@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.57 2005-03-26 18:27:18 thraxisp Exp $
+	# $Id: manage_user_page.php,v 1.58 2005-05-16 12:56:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -119,7 +119,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ) ?>
+		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -198,7 +198,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <tr>
 	<td class="form-title" colspan="5">
 		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $user_count ?>]
-		<?php print_bracket_link( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
+		<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
 	</td>
 	<td class="center" colspan="2">
 		<form method="post" action="manage_user_page.php">
