@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.116 2005-05-13 22:02:55 thraxisp Exp $
+	# $Id: email_api.php,v 1.117 2005-05-16 19:18:21 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -826,7 +826,7 @@
 			$result[] = user_get_name( $t_recipient );
 
 			if ( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
-				$t_sender_email .= ' <' . current_user_get_field( 'email' ) . '>' ;
+				$t_sender_email = ' <' . current_user_get_field( 'email' ) . '>' ;
 			} else {
 				$t_sender_email = '';
 			}
