@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.8 2005-05-09 18:41:16 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.9 2005-05-16 16:23:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,8 +21,8 @@
 	print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
     $t_user = auth_get_current_user_id();
-	$t_project = helper_get_current_project();
-	$t_access = user_get_access_level( $t_user, $t_project );
+	$t_project_id = helper_get_current_project();
+	$t_access = user_get_access_level( $t_user, $t_project_id );
 	$t_show_submit = false;
 
 	$t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
@@ -42,7 +42,7 @@
 	}
 
 	function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
 
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
@@ -86,8 +86,8 @@
 		    $t_project_exp = $t_project;
 		}
         
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
+		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		foreach( $t_access_levels as $t_access_level => $t_access_label ) {
@@ -128,7 +128,7 @@
 	}
 
 	function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
 
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
@@ -150,8 +150,8 @@
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
         } 
 
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
+		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -179,7 +179,7 @@
 	}
 
 	function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
-	    global $t_user, $t_project, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
         
         # flush the cache entries before continuing as the previous config_gets will have filled cache
         config_flush_cache($p_threshold );
@@ -201,8 +201,8 @@
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
         } 
 
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
-		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
+		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -235,14 +235,14 @@
 	
     echo "<br /><br />\n";
 
-	if ( ALL_PROJECTS == $t_project ) {
+	if ( ALL_PROJECTS == $t_project_id ) {
 	    $t_project_title = lang_get( 'config_all_projects' );
 	} else {
-	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
+	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project_id ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
-	if ( ALL_PROJECTS <> $t_project ) {
+	if ( ALL_PROJECTS <> $t_project_id ) {
 	    echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
