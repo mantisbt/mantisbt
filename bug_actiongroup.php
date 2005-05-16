@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.43 2005-05-01 16:20:20 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.44 2005-05-16 19:29:51 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -88,7 +88,7 @@
 				$t_assign_status = $t_status;
 			}
 			$t_threshold = access_get_status_threshold( $t_assign_status, bug_get_field( $t_bug_id, 'project_id' ) );
-			if ( access_has_bug_level( $t_threshold , $t_bug_id, $f_assign ) &&
+			if ( access_has_bug_level( $t_threshold , $t_bug_id ) &&
 				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id ) &&
 					bug_check_workflow($t_status, $t_assign_status )	) {
 				bug_assign( $t_bug_id, $f_assign );
