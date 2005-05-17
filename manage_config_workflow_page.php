@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.9 2005-05-08 20:44:35 marcelloscata Exp $
+	# $Id: manage_config_workflow_page.php,v 1.10 2005-05-17 20:42:06 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -106,6 +106,7 @@
 
 			$t_flag = ( 1 == $t_project );
 			$t_label = $t_flag ? $t_project_workflow['exit'][$p_from_status_id][$p_to_status_id] : '';
+
 			if ( $t_can_change_flags ) {
 				$t_flag_name = $p_from_status_id . ':' . $p_to_status_id;
 				$t_set = $t_flag ? "CHECKED" : "";
@@ -137,7 +138,7 @@
 		echo "\n<tr></td>";
 		foreach( $t_enum_status as $t_status ) {
 			$t_entry_array = explode_enum_arr( $t_status );
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'status_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
+			echo '<td class="form-title" style="text-align:center">&nbsp;' . string_no_break( get_enum_to_string( lang_get( 'status_enum_string' ), $t_entry_array[0] ) ) . '&nbsp;</td>';
 		}
 			echo '<td class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</td>';
 		echo '</tr>' . "\n";
@@ -146,7 +147,7 @@
 	function capability_row( $p_from_status ) {
 		global $t_file_workflow, $t_global_workflow, $t_project_workflow, $t_colour_global, $t_colour_project;
 		$t_enum_status = get_enum_to_array( config_get( 'status_enum_string' ) );
-		echo '<tr ' . helper_alternate_class() . '><td>' . get_enum_to_string( lang_get( 'status_enum_string' ), $p_from_status ) . '</td>';
+		echo '<tr ' . helper_alternate_class() . '><td>' . string_no_break( get_enum_to_string( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>';
 		foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 			echo show_flag( $p_from_status, $t_to_status_id );
 		}
@@ -227,14 +228,9 @@
 	function access_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
+		echo '<tr><td class="form-title" colspan=2>'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
-		echo "\n<tr><td>&nbsp;</td>";
-		foreach( $t_enum_status as $t_status ) {
-			$t_entry_array = explode_enum_arr( $t_status );
-			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'status_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
-		}
-		echo '</tr>' . "\n";
+		echo '<tr><td class="form-title" colspan=2>' . lang_get( 'access_change' ) . '</td></tr>';
 	}
 
 	function access_row( ) {
@@ -276,8 +272,8 @@
 		    }
 		}
 
-		echo '<tr ' . helper_alternate_class() . '><td>' . lang_get( 'access_change' ) . '</td>';
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
+			echo '<tr ' . helper_alternate_class() . '><td width="30%">' . string_no_break( get_enum_to_string( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>';
 			if ( NEW_ == $t_status ) {
 				$t_level = $t_project_new;
 				$t_can_change = ( $t_access >= config_get_access( 'report_bug_threshold' ) );
@@ -289,17 +285,18 @@
                     $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
                 }
 			} else {
-				$t_level = $t_project_set[$t_status];
+				$t_level = ( isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : false );
+				$t_level_global = ( isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : false );
+				$t_level_file = ( isset( $t_file_set[$t_status] ) ? $t_file_set[$t_status] : false );
 				$t_can_change = ( $t_access >= config_get_access( 'set_status_threshold' ) );
                 $t_colour = '';
-                if ( $t_global_set[$t_status] != $t_file_set[$t_status] ) {
+                if ( $t_level_global != $t_level_file ) {
                     $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
                 }
-                if ( $t_project_set[$t_status] != $t_global_set[$t_status] ) {
+                if ( $t_level != $t_level_global ) {
                     $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
                 }
 			}
-
 			if ( $t_can_change ) {
 				echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '">';
 				print_enum_string_option_list( 'access_levels', $t_level );
@@ -307,8 +304,8 @@
 			} else {
 				echo '<td class="center"' . $t_colour . '>' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_access ) . '</td>';
 			}
+			echo '</tr>' . "\n";
 		}
-		echo '</tr>' . "\n";
 	}
 
 	echo '<br /><br />';
@@ -357,6 +354,15 @@
 		}
 	}
 
+	# check for exit == 0 and entry == 0, isolated state
+	foreach ( $t_status_arr as $t_status => $t_status_label ) {
+		if ( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) ){
+			$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
+							. get_enum_to_string( $t_lang_enum_status, $t_status )
+							. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td>';
+		}
+	}
+
 	$t_colour_project = config_get( 'colour_project');
 	$t_colour_global = config_get( 'colour_global');
 
@@ -375,7 +381,6 @@
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
-
 	# show the settings used to derive the table
 	threshold_begin( lang_get( 'workflow_thresholds' ) );
 	if ( ! is_array( config_get( 'bug_submit_status' ) ) ) {
@@ -384,6 +389,7 @@
 	threshold_row( 'bug_resolved_status_threshold' );
 	threshold_row( 'bug_reopen_status' );
 	threshold_end();
+	echo '<br />';
 
 	if ( '' <> $t_validation_result ) {
 		echo '<table class="width100">';
@@ -406,7 +412,7 @@
 		echo '<p>' . lang_get( 'workflow_change_access' ) . ':';
 		echo '<select name="workflow_access">';
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
-		echo '</select> </p>';
+		echo '</select> </p><br />';
 	}
 
 	# display the access levels required to move an issue
@@ -418,7 +424,7 @@
 		echo '<p>' . lang_get( 'access_change_access' ) . ':';
 		echo '<select name="status_access">';
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
-		echo '</select> </p>';
+		echo '</select> </p><br />';
 	}
 
 	if ( $t_can_change_flags ) {
