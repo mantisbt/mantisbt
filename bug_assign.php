@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.40 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: bug_assign.php,v 1.41 2005-05-18 02:11:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_handler_id = gpc_get_int( 'handler_id', auth_get_current_user_id() );
 
+	# check that current user has rights to assign the issue
 	access_ensure_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id );
 
 	$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
@@ -33,6 +34,7 @@
 	}
 
 	if ( $f_handler_id != NO_USER ) {
+		# check that new handler has rights to handle the issue
 		access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
 
 		if ( $t_bug_sponsored ) {

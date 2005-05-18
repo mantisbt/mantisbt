@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.44 2005-05-16 19:29:51 marcelloscata Exp $
+	# $Id: bug_actiongroup.php,v 1.45 2005-05-18 02:11:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,9 +87,11 @@
 			} else {
 				$t_assign_status = $t_status;
 			}
+			# check that new handler has rights to handle the issue, and
+			#  that current user has rights to assign the issue
 			$t_threshold = access_get_status_threshold( $t_assign_status, bug_get_field( $t_bug_id, 'project_id' ) );
-			if ( access_has_bug_level( $t_threshold , $t_bug_id ) &&
-				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id ) &&
+			if ( access_has_bug_level( $t_threshold , $t_bug_id, $f_assign ) &&
+				 access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) &&
 					bug_check_workflow($t_status, $t_assign_status )	) {
 				bug_assign( $t_bug_id, $f_assign );
 			} else {
