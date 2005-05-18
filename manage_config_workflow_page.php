@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.10 2005-05-17 20:42:06 marcelloscata Exp $
+	# $Id: manage_config_workflow_page.php,v 1.11 2005-05-18 01:56:45 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -25,7 +25,7 @@
 	$t_can_change_flags = $t_access >= config_get_access( 'status_enum_workflow' );
 
 	function parse_workflow( $p_enum_workflow ) {
-	    global $t_status_arr;
+        $t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
         if ( 0 == count( $p_enum_workflow ) ) {
             # workflow is not set, default it to all transitions
 	        foreach ( $t_status_arr as $t_status => $t_label ) {
@@ -311,8 +311,7 @@
 	echo '<br /><br />';
 
 	# count arcs in and out of each status
-	$t_enum_status = config_get( 'status_enum_string' );
-	$t_status_arr  = get_enum_to_array( $t_enum_status );
+	$t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
 
 	$t_extra_enum_status = '0:non-existent,' . $t_enum_status;
 	$t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'status_enum_string' );
