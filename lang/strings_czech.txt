@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:41 $
+	# $Date: 2005-05-18 18:25:50 $
 	#
-	# $Id: strings_czech.txt,v 1.79 2005-04-21 06:52:41 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.80 2005-05-18 18:25:50 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -545,6 +545,7 @@ $s_summary = 'Shrnutí';
 $s_description = 'Popis';
 $s_steps_to_reproduce = 'Kroky k vyvolání';
 $s_update_information_button = 'Ulo¾it';
+$s_sticky_issue = 'Sticky Issue';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Roz¹íøená aktualizace';
@@ -653,14 +654,20 @@ $s_edit_user_link = 'Upravit';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -681,8 +688,11 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
+
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
@@ -698,6 +708,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt byl úspì¹nì pøidán...';
