@@ -9,16 +9,16 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.32 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:41 $
+	# $Revision: 1.33 $
+	# $Author: vboctor $
+	# $Date: 2005-05-18 11:10:34 $
 	#
-	# $Id: strings_croatian.txt,v 1.32 2005-04-21 06:52:41 bigbadger Exp $
+	# $Id: strings_croatian.txt,v 1.33 2005-05-18 11:10:34 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'iso-8859-2';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
