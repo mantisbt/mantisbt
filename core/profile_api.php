@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.13 2005-05-13 00:14:40 jlatour Exp $
+	# $Id: profile_api.php,v 1.14 2005-05-18 21:26:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -211,7 +211,7 @@
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
-		$query = "SELECT up.*
+		$query = "SELECT DISTINCT(up.id), up.*
 				  FROM $t_user_profile_table up, $t_bug_table b
 				  WHERE $t_project_where
 				  AND up.id = b.profile_id";
