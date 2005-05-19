@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.36 2005-05-19 00:25:52 thraxisp Exp $
+	# $Id: file_download.php,v 1.37 2005-05-19 12:19:18 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -78,6 +78,7 @@
 	# Added Quotes (") around file name.
 	header( 'Content-Disposition: attachment; filename="' . file_get_display_name( $v_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', db_unixtimestamp( $v_date_added ) ) );
 
 	# To fix an IE bug which causes problems when downloading
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
