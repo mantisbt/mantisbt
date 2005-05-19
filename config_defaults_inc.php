@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.263 2005-05-13 22:02:53 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.264 2005-05-19 00:25:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1290,6 +1290,19 @@
 
 	$g_custom_headers				= array();
 	#$g_custom_headers[]			= 'P3P: CP="CUR ADM"';
+	
+	# Browser Caching Control
+	# By default, we try to prevent the browser from caching anything. These two settings
+	# will defeat this for some cases.
+	# 
+	# Browser Page caching - This will allow the browser to cache all pages. The upside will
+	#  be better performance, but there may be cases where obsolete information is displayed.
+	#  Note that this will be bypassed (and caching is allowed) for the bug report pages.
+	# $g_allow_browser_cache = ON;
+	#
+	# File caching - This will allow the browser to cache downloaded files. Without this set, 
+	# there may be issues with IE receiving files, and launching support programs.
+	# $g_allow_file_cache = ON;
 
 	###########################
 	# Debugging

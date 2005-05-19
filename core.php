@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.41 2005-05-13 22:02:54 thraxisp Exp $
+	# $Id: core.php,v 1.42 2005-05-19 00:25:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -118,12 +118,14 @@
 
 	# Headers to prevent caching
 	#  with option to bypass if running from script
-	global $g_bypass_headers;
+	global $g_bypass_headers, $g_allow_browser_cache;
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
-		header( 'Pragma: no-cache' );
+		if ( ! isset( $g_allow_browser_cache ) ) {
+			header( 'Pragma: no-cache' );
+			header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+			header( 'Cache-Control: post-check=0, pre-check=0', false );
+		}
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-		header( 'Cache-Control: post-check=0, pre-check=0', false );
 
 		# SEND USER-DEFINED HEADERS
 		foreach( config_get( 'custom_headers' ) as $t_header ) {

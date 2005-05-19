@@ -6,12 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: meta_inc.php,v 1.17 2005-03-31 01:08:37 thraxisp Exp $
+	# $Id: meta_inc.php,v 1.18 2005-05-19 00:25:52 thraxisp Exp $
 	# --------------------------------------------------------
 
+    global $g_allow_browser_cache;
+    if ( ! isset( $g_allow_browser_cache ) ) {
 ?>
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta http-equiv="Pragma-directive" content="no-cache" />
 	<meta http-equiv="Cache-Directive" content="no-cache" />
+<?php } # ! isset( $g_allow_browser_cache )  ?>
 	<meta http-equiv="Expires" content="<?php echo gmdate( 'D, d M Y H:i:s \G\M\T', time() ) ?>" />

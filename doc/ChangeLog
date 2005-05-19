@@ -5,6 +5,8 @@ Mantis ChangeLog
 - New Config: $g_wrap_in_preformatted_text - if ON, will wrap text inside <pre> formatted text (thraxisp)
 - New Config: $g_log_level - system logging level bit map (thraxisp)
 - New Config: $g_log_destination - system logging destination (thraxisp)
+- New Config: $g_allow_browser_cache - allow the browser to cache all pages (thraxisp)
+- New Config: $g_allow_file_cache - allow the browser to cache downloaded files (thraxisp)
 
 
 2005.04.25  -  1.0.0a2

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.35 2005-05-14 13:23:09 thraxisp Exp $
+	# $Id: file_download.php,v 1.36 2005-05-19 00:25:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -82,10 +82,13 @@
 	# To fix an IE bug which causes problems when downloading
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
+	global $g_allow_file_cache;
 	if ( ( isset( $_SERVER["HTTPS"] ) && "on" == $_SERVER["HTTPS"] ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
-		header( 'Pragma: no-cache' );
+		if ( ! isset( $g_allow_file_cache ) ) {
+		    header( 'Pragma: no-cache' );
+		}
 	}
 	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 

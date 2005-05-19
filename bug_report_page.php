@@ -6,11 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.51 2005-04-22 22:06:07 prichards Exp $
+	# $Id: bug_report_page.php,v 1.52 2005-05-19 00:25:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
 
+	$g_allow_browser_cache = 1;
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
