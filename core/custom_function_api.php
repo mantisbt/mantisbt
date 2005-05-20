@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.19 2005-05-01 16:20:23 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.20 2005-05-20 20:45:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -202,7 +202,14 @@
 			echo '</td>';
 		} else {
 			$t_function = 'print_column_title_' . $p_column;
-			$t_function( $t_sort, $t_dir, $p_print );
+			if ( function_exists( $t_function ) ) {
+				$t_function( $t_sort, $t_dir, $p_print );
+			} else {
+				echo '<td>';
+				print_view_bug_sort_link( lang_get_defaulted( $p_column ), $p_column, $t_sort, $t_dir, $p_print );
+				print_sort_icon( $t_dir, $t_sort, $p_column );
+				echo '</td>';
+			}
 		}
 	}
 
@@ -235,7 +242,11 @@
 			echo '</td>';
 		} else {
 			$t_function = 'print_column_' . $p_column;
-			$t_function( $p_issue_row, $p_print );
+			if ( function_exists( $t_function ) ) {
+				$t_function( $p_issue_row, $p_print );
+			} else {
+				echo '<td>' . $p_issue_row[$p_column] . '</td>';
+			}
 		}
 	}
 
