@@ -9,13 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.89 $
+	# $Revision: 1.90 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:45 $
+	# $Date: 2005-05-21 18:39:18 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.89 2005-04-21 06:52:45 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.90 2005-05-21 18:39:18 bigbadger Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
+	# Up-to-date with strings_english.txt revision 1.257 -- jferraz 2005/05/20
 	###########################################################################
 ?>
 <?php
@@ -32,9 +32,9 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Atualizar Prioridade';
 $s_actiongroup_menu_update_status = 'Atualizar Status';
 $s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_category = 'Atualizar Categoria';
+$s_actiongroup_menu_set_sticky = 'Marcar/Desmarcar Pegajoso';
+$s_actiongroup_menu_update_field = 'Atualizar %s';
 $s_actiongroup_bugs = 'Casos Selecionados';
 
 # new strings:
@@ -58,8 +58,8 @@ $s_jump = "Ir para";
 $s_copy_users = 'Copiar Usuários';
 $s_copy_categories_from = 'Copiar Categorias De';
 $s_copy_categories_to = 'Copiar Categorias Para';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'Copiar Usuários De';
+$s_copy_users_to = 'Copiar Usuários Para';
 $s_bug_history = 'Histórico do Caso';
 $s_field = 'Campo';
 $s_old_value = 'Valor Antigo';
@@ -107,7 +107,7 @@ $s_login_link = 'Login';
 $s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
 $s_bug_actiongroup_access = 'Você não possui as permissões apropriadas para realizar esta ação.';
 $s_bug_actiongroup_status = 'Este caso não pode ser alterado para o status solicitado';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'Este caso não pode ser alterado para a categoria solicitada';
 $s_close_bugs_conf_msg = 'Você tem certeza que deseja fechar estes casos ?';
 $s_delete_bugs_conf_msg = 'Você tem certeza que deseja apagar estes casos ?';
 $s_move_bugs_conf_msg = 'Mover casos para';
@@ -117,8 +117,8 @@ $s_resolve_bugs_conf_msg = 'Escolher resolução dos casos';
 $s_priority_bugs_conf_msg = 'Escolher prioridade dos casos';
 $s_status_bugs_conf_msg = 'Escolher status dos casos';
 $s_view_status_bugs_conf_msg = 'Escolher visibilidade dos casos';
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_category_bugs_conf_msg = 'Escolher a categoria do caso';
+$s_set_sticky_bugs_conf_msg = 'Você tem certeza que deseja marcar/desmarcar estes casos como "pegajosos"?';
 $s_close_group_bugs_button = 'Fechar Casos' ;
 $s_delete_group_bugs_button = 'Apagar Casos' ;
 $s_move_group_bugs_button = 'Mover Casos' ;
@@ -127,9 +127,9 @@ $s_assign_group_bugs_button = 'Atribuir Casos' ;
 $s_resolve_group_bugs_button = 'Resolver Casos' ;
 $s_priority_group_bugs_button = 'Atualizar Prioridade' ;
 $s_status_group_bugs_button = 'Atualizar Status' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Atualizar Categoria';
 $s_view_status_group_bugs_button = 'Atualizar Visibilidade';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Marcar/Desmarcar Pegajosos';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráfico de síntese por status' ;
@@ -187,9 +187,9 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário \'%s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  Os carregamentos de arquivos do PHP podem estar desabilitados.  Por favor, peça ao seu administrador executar o script admin_check para depurar este problema.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  O arquivo não pôde ser lido pelo Mantis. Por favor, verifique as configurações do projeto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavelmente é devido ao tamanho do arquivo ser maior do que o permitido atualmente por esta instalação PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página não foi encontrado.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página (%s) não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Este nome de usuário já está sendo usado.  Por favor, volte e selecione um outro.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opção de configuração \'%s\' não encontrada.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Texto \'%s\' não encontrado.';
@@ -205,17 +205,17 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A informação de login armazenada pel
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferências deste usuário não foram encontradas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Notícia não encontrada.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'A senha não combina com a verificação.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'string\' foi recebido.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'string\' foi recebido para %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido para %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Caminho para carregamento inválido.  O diretório não existe ou não pode ser escrito pelo servidor web';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Nenhum arquivo foi carregado. Por favor, volte e escolha um arquivo antes de pressionar o botão Carregar';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'O arquivo carregado não pôde ser movido para o diretório de armazenamento. O diretório não existe ou não é gravável pelo servidor web';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Você não pode ajustar um caso como duplicata de dele mesmo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado não encontrado';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Este é um nome duplicado.';
@@ -233,7 +233,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já existe
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão não encontrada.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão \'%s\' não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é válido. Nomes de usuário podem conter apenas letras, números, espaços, hífens e sublinhados.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuário não possui o nível de acesso necessário';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Nome Verdadeiro" escolhido é igual ao nome de login de outro usuário. Por favor escolha outro.';
@@ -255,8 +255,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Você deve fornecer um e
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A informação fornecida não combina com nenhuma conta registrada!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O endereço de confirmação é inválido ou já foi usado. Por favor, registre-se novamente.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número máximo de solicitações em progresso foi atingido. Por favor, contate o administrador do sistema.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você entrou não estão corretos.';
@@ -275,7 +275,7 @@ $s_administrator = 'administrador';
 $s_myself = "Eu mesmo";
 $s_default_access_level = 'Nível de acesso padrão';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Porcentagem dos Status dos Casos';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:visualizador,25:relator,40:atualizador,55:desenvolvedor,70:gerente,90:administrador';
@@ -285,9 +285,9 @@ $s_view_state_enum_string = '10:público,50:privado';
 
 $s_priority_enum_string = '10:nenhuma,20:baixa,30:normal,40:alta,50:urgente,60:imediato';
 $s_severity_enum_string = '10:recurso,20:trivial,30:texto,40:mínimo,50:pequeno,60:grande,70:travamento,80:obstáculo';
-$s_reproducibility_enum_string = '10:sempre,30:às vezes,50:aleatório,70:não se tentou,90:incapaz de duplicar,100:N/D';
+$s_reproducibility_enum_string = '10:sempre,30:às vezes,50:aleatório,70:não se tentou,90:incapaz de reproduzir,100:N/D';
 $s_status_enum_string = '10:novo,20:retorno,30:admitido,40:confirmado,50:atribuído,80:resolvido,90:fechado';
-$s_resolution_enum_string = '10:aberto,20:corrigido,30:reaberto,40:incapaz de duplicar,50:não corrigível,60:duplicado,70:não é um caso,80:suspenso,90:não será corrigido';
+$s_resolution_enum_string = '10:aberto,20:corrigido,30:reaberto,40:incapaz de reproduzir,50:não corrigível,60:duplicado,70:não é um caso,80:suspenso,90:não será corrigido';
 $s_projection_enum_string = '10:nenhuma,30:mínimo,50:correção pequena,70:grande recriação,90:redesenvolvimento';
 $s_eta_enum_string = '10:nenhum,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mês,60:> 1 mês';
 
@@ -329,10 +329,10 @@ $s_email_notification_title_for_action_related_to_relationship_added = "O seguin
 $s_email_notification_title_for_action_dependant_on_relationship_added = "O seguinte caso foi marcado como PAI do caso %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "O seguinte caso foi marcado como FILHO do caso %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "O seguinte caso foi DESmarcado como DUPLICADO do caso %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "O caso %s foi DESmarcado como DUPLICADO do seguinte caso.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "O seguinte caso foi DESmarcado como RELACIONADO ao caso %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "O seguinte caso foi DESmarcado como PAI do caso %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "O seguinte caso foi DESmarcado como FILHO do caso %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "O caso %s foi removido como DUPLICADO do seguinte caso.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "O seguinte caso foi marcado como NÃO-RELACIONADO ao caso %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "O seguinte caso foi removido como PAI do caso %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "O seguinte caso foi removido como FILHO do caso %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "O caso RELACIONADO %s foi RESOLVIDO.";
 $s_email_notification_title_for_action_relationship_child_closed = "O caso RELACIONADO %s foi FECHADO.";
 
@@ -387,7 +387,7 @@ $s_bugnote_order = 'Ordem de Classificação de Anotações';
 $s_bugnote_order_asc = 'Ascendente';
 $s_bugnote_order_desc = 'Descendente';
 $s_email_on_new = 'Enviar e-mail para Novos Casos';
-$s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
+$s_email_on_assigned = 'Enviar e-mail para Mudança de Atribuição';
 $s_email_on_feedback = 'Enviar e-mail para Retornos';
 $s_email_on_resolved = 'Enviar e-mail para Casos Resolvidos';
 $s_email_on_closed = 'Enviar e-mail para Casos Fechados';
@@ -544,6 +544,8 @@ $s_summary = 'Resumo';
 $s_description = 'Descrição';
 $s_steps_to_reproduce = 'Passos para Reproduzir';
 $s_update_information_button = 'Atualizar Informação';
+$s_sticky_issue = 'Caso "Pegajoso"';
+$s_profile = 'Perfil';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Atualização Avançada';
@@ -629,12 +631,12 @@ $s_filter_button = 'Aplicar Filtro';
 $s_manage_users_link = 'Gerenciar Usuários';
 $s_manage_projects_link = 'Gerenciar Projetos';
 $s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_global_profiles_link = 'Gerenciar Perfís Globais';
+$s_permissions_summary_report = 'Relatório de Permissões';
+$s_manage_config_link = 'Gerenciar Configuração';
+$s_manage_threshold_config = 'Limiares do Fluxo de Trabalho';
+$s_manage_email_config = 'Notificações por E-Mail';
+$s_manage_workflow_config = 'Transições de Fluxo de Trabalho';
 $s_create_new_account_link = 'Criar Nova Conta';
 $s_projects_link = 'Projetos';
 $s_documentation_link = 'Documentação';
@@ -650,53 +652,67 @@ $s_last_visit = 'Última Visita';
 $s_edit_user_link = 'Alterar Usuário';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_config_all_projects = 'Nota: Estas configurações afetam TODOS OS PROJETOS.';
+$s_config_project = 'Nota: Estas configurações afetam apenas o projeto %s.';
+$s_colour_coding = 'Na tabela abaixo, o seguinte código de cores se aplica:';
+$s_colour_project = 'Configuração do projeto sobrepõe as outras.';
+$s_colour_global = 'Todas as configurações do projeto sobrepõem as configurações padrão.';
+$s_issue_reporter = 'Usuário que reportou o caso';
+$s_issue_handler = 'Usuário que está tratando o caso';
+$s_users_added_bugnote = 'Usuários que adicionaram anotações';
+$s_change_configuration = 'Atualizar Configuração';
+$s_message = 'Mensagem';
+$s_default_notify = 'Ajustando opções de notificação padrão para';
+$s_action_notify = 'Ajustando opções de notificação de ação para';
+$s_notify_defaults_change_access = 'Quem pode alterar os padrões de notificação';
+$s_notify_actions_change_access = 'Quem pode alterar as notificações';
+$s_revert_to_system = "Apagar Todas as Configurações de Todos os Projetos";
+$s_revert_to_all_project = "Apagar as Configurações Específicas deste Projeto";
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
+$s_non_existent = 'inexistente';
+$s_current_status = 'Status Atual';
+$s_next_status = 'Próximo Status';
+$s_workflow = 'Fluxo de Trabalho';
+$s_workflow_thresholds = 'Limiares que Afetam o Fluxo de Trabalho';
+$s_threshold = 'Limiar';
 $s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
+$s_alter_level = 'Quem pode alterar este valor';
+$s_validation = 'Validação do Fluxo de Trabalho';
+$s_comment = 'Comentário da Validação';
+$s_superfluous = 'Um arco de um status para ele mesmo é implícito, e não precisa ser fornecido explicitamente';
+$s_unreachable = 'Você não pode mover um caso para este status';
+$s_no_exit = 'Você não pode mover um caso para fora deste status';
 $s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_access_change = 'Nível de Acesso Mínimo para Alterar para este Status';
+$s_desc_bug_submit_status = 'Status para o qual um novo caso é ajustado';
+$s_desc_bug_reopen_status = 'Status para o qual casos reabertos são ajustados';
+$s_desc_bug_resolved_status_threshold = 'Status o qual um caso é considerado resolvido';
+$s_workflow_change_access = 'Quem pode alterar o fluxo de trabalho';
+$s_access_change_access = 'Quem pode alterar os níveis de acesso';
+
+# manage_config_workflow_set
+$s_default_not_in_flow = 'O status padrão de %s não está selecionado nos próximos status de %s. Este será ignorado';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = 'Atribuir um caso';
+$s_allow_close_immediate = 'Permitir que o caso seja fechado ao ser Resolvido';
+$s_allow_reporter_close = 'Permitir ao relator fechar o caso';
+$s_allow_reporter_reopen = 'Permitir ao relator reabrir o caso';
+$s_set_status_assigned = 'Ajustar status na atribuição';
+$s_allow_user_edit = 'Permitir que o usuário altere suas próprias anotações';
+$s_limit_access = 'Limitar o acesso dos relatores aos seus próprios casos';
+$s_submit_status = 'Status para o qual novos casos são ajustados';
+$s_assigned_status = 'Status para o qual casos auto-atribuídos são ajustados';
+$s_resolved_status = 'Status o qual um caso é considerado resolvido';
+$s_readonly_status = 'Status o qual um caso se torna somente-leitura';
+$s_reopen_status = 'Status para o qual casos reabertos são ajustados';
+$s_reopen_resolution = 'Resolução para a qual casos reabertos são ajustados';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Você tem certeza que deseja apagar as configurações para';
+$s_in_project = 'no projeto';
+$s_delete_config_button = 'Apagar Configurações';
 
 # manage_proj_add.php
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
@@ -719,7 +735,7 @@ $s_update_category_button = 'Atualizar Categoria';
 $s_category_updated_msg = 'A categoria foi atualizada com sucesso...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'Adicionar Subprojeto';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'O projeto foi removido com sucesso...';
@@ -747,10 +763,10 @@ $s_actions = 'Ações';
 $s_version = 'Versão';
 $s_timestamp = 'Data/hora do Lançamento';
 $s_update = 'Atualizar';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'Subprojetos';
+$s_add_subproject = 'Adicionar como Subprojeto';
+$s_create_new_subproject_link = 'Criar novo Subprojeto';
+$s_unlink_link = 'Desvincular';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Adicionar Projeto';
@@ -802,7 +818,7 @@ $s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.';
-$s_account_reset_msg = 'Uma mensagem de confirmação foi enviada ao seu endereço de e-mail...';
+$s_account_reset_msg = 'Uma solicitação de confirmação foi enviada ao endereço de e-mail do usuário selecionado. Através deste, o usuário será capaz de alterar sua senha.';
 $s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
 
 # manage_user_update.php
@@ -899,9 +915,9 @@ $s_project_removed_user_msg = 'Usuário removido com sucesso do projeto';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Você tem certeza que deseja remover este usuário?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_button = 'Remover Usuário';
+$s_remove_all_users_sure_msg = 'Você tem certeza que deseja remover todos os usuários deste projeto?';
+$s_remove_all_users_button = 'Remover Todos os Usuários';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Adicionar usuário ao projeto';
@@ -1001,8 +1017,8 @@ $s_show = 'Mostrar';
 $s_changed = 'Alterado(hrs)';
 $s_viewing_bugs_title = 'Visualizando Casos';
 $s_updated = 'Atualizado';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Mostrar Casos "Pegajosos"';
+$s_sort = 'Ordenar por';
 
 # view_all_inc.php
 $s_none = 'nenhum';
@@ -1098,14 +1114,14 @@ $s_custom_field_require_resolved = 'Requerido na resolução';
 $s_custom_field_require_closed = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
-$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla,8:Date';
+$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla,8:Data';
 
 $s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
 $s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';
 $s_field_delete_button = 'Apagar Campo';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'Você tem certeza que deseja remover (desvincular) este campo personalizado do projeto e apagar todos os valores associados?';
+$s_field_remove_button = 'Remover Campo';
 
 $s_hide_status = 'Ocultar Status';
 $s_filter_closed = "Fechado";
@@ -1155,7 +1171,7 @@ $s_relationship_with_parent = "Relação com o caso pai";
 $s_delete_relationship_button = "Apagar";
 $s_delete_relationship_sure_msg = "Você tem certeza que deseja apagar esta relação?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nem todos os casos filhos foram resolvidos ou fechados.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todos os casos filhos já foram resolvidos ou fechados.<br>Antes de <b>resolver/fechar</b> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todos os casos filhos já foram resolvidos ou fechados.<br />Antes de <b>resolver/fechar</b> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.";
 $s_create_child_bug_button = "Criar Clone";
 $s_bug_cloned_to = "Caso clonado";
 $s_bug_created_from = "Caso gerado à partir de";
@@ -1172,75 +1188,75 @@ $s_view_issue = "Ver Caso";
 $s_checkin = 'Checkin';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'Capacidade';
+$s_view = 'Visualizar';
+$s_issues = 'CASOS';
+$s_report_issue = 'Relatar um caso';
+$s_update_issue = 'Atualizar um caso';
+$s_monitor_issue = 'Monitorar um caso';
+$s_handle_issue = 'Tratar um caso';
+$s_move_issue = 'Mover um caso';
+$s_delete_issue = 'Apagar um caso';
+$s_reopen_issue = 'Reabrir um caso';
+$s_view_private_issues = 'Ver casos privados';
+$s_update_readonly_issues = 'Atualizar casos somente-leitura';
+$s_update_issue_status = 'Atualizar status do caso';
+$s_set_view_status = 'Ajustar visibilidade (público vs privado)';
+$s_update_view_status = 'Atualizar visibilidade (público vs privado)';
+$s_show_list_of_users_monitoring_issue = 'Ver lista de usuários monitorando o caso';
+$s_notes = 'ANOTAÇÕES';
+$s_add_notes = 'Adicionar anotações';
+$s_update_notes = 'Atualizar anotações';
+$s_delete_note = 'Apagar anotação';
+$s_view_private_notes = 'Visualizar anotações privadas';
+$s_news = 'NOTÍCIAS';
+$s_view_private_news = 'Visualizar notícias privadas';
+$s_manage_news = 'Gerenciar notícias';
+$s_view_list_of_attachments = 'Ver lista de anexos';
+$s_download_attachments = 'Download de anexos';
+$s_delete_attachments = 'Apagar anexos';
+$s_delete_attachment_button = "Apagar";
+$s_delete_attachment_sure_msg = "Você tem certeza que deseja apagar este anexo?";
+$s_upload_issue_attachments = 'Carregar (upload) anexos aos casos';
+$s_filters = 'filtros';
+$s_save_filters = 'Salvar filtros';
+$s_save_filters_as_shared = 'Salvar filtros como compartilhados';
+$s_use_saved_filters = 'Usar filtros salvos';
+$s_create_project = 'Criar projecto';
+$s_delete_project = 'Apagar projecto';
+$s_manage_project = 'Gerenciar projecto';
+$s_manage_user_access_to_project = 'Gerenciar acessos de usuários ao projeto';
+$s_automatically_included_in_private_projects = 'Incluído automaticamente em projetos privados';
+$s_project_documents = 'DOCUMENTOS DO PROJETO';
+$s_view_project_documents = 'Visualizar documentos do projeto';
+$s_upload_project_documents = 'Atualizar documentos do projeto';
+$s_link_custom_fields_to_projects = 'Ligar campos personalizados aos projetos';
+$s_sponsorships = 'PATROCÍNIOS';
+$s_view_sponsorship_details = 'Visualizar detalhes de patrocínios';
+$s_view_sponsorship_total = 'Visualizar total de patrocínios';
+$s_sponsor_issue = 'Patrocinar caso';
+$s_assign_sponsored_issue = 'Atribuir caso patrocinado';
+$s_handle_sponsored_issue = 'Tratar caso patrocinado';
+$s_others = 'OUTROS';
+$s_see_email_addresses_of_other_users = 'Ver endereços de e-mail de outros usuários';
+$s_send_reminders = 'Enviar lembretes';
+$s_add_profiles = 'Adicionar perfís';
+$s_notify_of_new_user_created = 'Notificar criação de novo usuário';
+$s_email_notification = 'NOTIFICAÇÃO de E-MAIL';
+$s_status_changed_to = 'Mudança de status para';
+$s_email_on_deleted = 'Enviar e-mail para deleção de casos';
+$s_email_on_sponsorship_changed = 'Enviar e-mail para mudança de patrocínio';
+$s_email_on_relationship_changed = 'Enviar e-mail para mudança de relações';
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'Carregando...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
+$s_between = 'Entre' ;
+$s_on_or_before = 'Em ou Antes' ;
+$s_before = 'Antes' ;
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_after = 'Depois' ;
+$s_on_or_after = 'Em ou Depois' ;
 
 ?>
