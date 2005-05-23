@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.15 2005-04-28 14:05:38 thraxisp Exp $
+	# $Id: php_api.php,v 1.16 2005-05-23 13:51:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -15,11 +15,20 @@
 
 	# Constant for our minimum required PHP version
 	define( 'PHP_MIN_VERSION', '4.0.6' );
+	
+	# cache array fof comparisons
+	$g_cached_version = array();
 
 	# --------------------
 	# Returns true if the current PHP version is higher than the one
 	#  specified in the given string
 	function php_version_at_least( $p_version_string ) {
+		global $g_cached_version;
+		
+		if ( isset( $g_cached_version[$p_version_string] ) ) {
+			return $g_cached_version[$p_version_string];
+		}
+		
 		$t_curver = array_pad( explode( '.', phpversion() ), 3, 0 );
 		$t_minver = array_pad( explode( '.', $p_version_string ), 3, 0 );
 
@@ -28,13 +37,16 @@
 			$t_min = (int)$t_minver[$i];
 
 			if ( $t_cur < $t_min ) {
+				$g_cached_version[$p_version_string] = false;
 				return false;
 			} else if ( $t_cur > $t_min ) {
+				$g_cached_version[$p_version_string] = true;
 				return true;
 			}
 		}
 
 		# if we get here, the versions must match exactly so:
+		$g_cached_version[$p_version_string] = true;
 		return true;
 	}
 
