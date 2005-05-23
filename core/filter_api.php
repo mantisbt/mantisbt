@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.107 2005-05-13 00:14:39 jlatour Exp $
+	# $Id: filter_api.php,v 1.108 2005-05-23 13:17:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -20,6 +20,32 @@
 	###########################################################################
 	# Filter API
 	###########################################################################
+
+	# Get the standard filter that is to be used when no filter was previously saved.
+	# When creating specific filters, this can be used as a basis for the filter, where
+	# specific entries can be overridden.
+	function filter_get_default() {
+		$t_hide_status_default  = config_get( 'hide_status_default' );
+		$t_default_show_changed = config_get( 'default_show_changed' );
+
+		$t_filter = array(
+			'show_category'		=> Array ( '0' => META_FILTER_ANY ),
+			'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
+			'show_status'		=> Array ( '0' => META_FILTER_ANY ),
+			'highlight_changed'	=> $t_default_show_changed,
+			'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
+			'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
+			'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
+			'show_build'		=> Array ( '0' => META_FILTER_ANY ),
+			'show_version'		=> Array ( '0' => META_FILTER_ANY ),
+			'hide_status'		=> Array ( '0' => $t_hide_status_default ),
+			'user_monitor'		=> Array ( '0' => META_FILTER_ANY ),
+			'sort'              => 'last_updated',
+			'dir'               => 'DESC'
+		);
+
+		return $t_filter;
+	}
 
 	# @@@ Had to make all these parameters required because we can't use
 	#  call-time pass by reference anymore.  I really preferred not having
@@ -47,7 +73,7 @@
 	#   - user id to use as current user when filtering.
 	# $p_show_sticky
 	#	- get sticky issues only.
-	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
@@ -75,7 +101,7 @@
 			$t_project_id	= $p_project_id;
 		}
 
-		if ( $custom_filter == null ) {
+		if ( $p_custom_filter === null ) {
 			# Prefer current_user_get_bug_filter() over user_get_filter() when applicable since it supports
 			# cookies set by previous version of the code.
 			if ( $t_user_id == $t_current_user_id ) {
@@ -84,7 +110,7 @@
 				$t_filter = user_get_bug_filter( $t_user_id, $t_project_id );
 			}
 		} else {
-			$t_filter = $custom_filter;
+			$t_filter = $p_custom_filter;
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -178,9 +204,9 @@
 		}
 
 		# limit reporter
-		# @@@ thraxisp - access_has_project_level checks greater than or equal to, 
+		# @@@ thraxisp - access_has_project_level checks greater than or equal to,
 		#   this assumed that there aren't any holes above REPORTER where the limit would apply
-		# 
+		#
 		if ( ( ON === $t_limit_reporters ) && ( ! access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 			$c_reporter_id = $c_user_id;
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
@@ -436,7 +462,7 @@
 				array_push( $t_where_clauses, "( $t_bug_table.version=$t_clauses[0] )" );
 			}
 		}
-		
+
 		# profile
 		$t_any_found = false;
 		foreach( $t_filter['show_profile'] as $t_filter_member ) {
@@ -783,7 +809,7 @@
 		}
 		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
 			$c_sort = db_prepare_string( $t_sort_fields[$i] );
-			
+
 			if ( ! in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1) ) ) {
 
         		# if sorting by a custom field
@@ -804,7 +830,7 @@
 				$t_order_array[] = "$c_sort $c_dir";
 			}
 		}
-		
+
 		# add basic sorting if necessary
 		if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
 			$t_order_array[] = 'last_updated DESC';
@@ -885,6 +911,37 @@
 		}
 
 		return true;
+	}
+
+	# --------------------
+	# return filter array if supplied serialized filter is valid, otherwise false.otherwise
+	function filter_deserialize( $p_serialized_filter ) {
+		if ( is_blank( $p_serialized_filter ) ) {
+			return false;
+		}
+
+		# check to see if new cookie is needed
+		$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
+		if ( ( $t_setting_arr[0] == 'v1' ) ||
+			 ( $t_setting_arr[0] == 'v2' ) ||
+			 ( $t_setting_arr[0] == 'v3' ) ||
+			 ( $t_setting_arr[0] == 'v4' ) ) {
+			return false;
+		}
+
+		# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
+		# filter indices dynamically
+		$t_filter_array = array();
+		if ( isset( $t_setting_arr[1] ) ) {
+			$t_filter_array = unserialize( $t_setting_arr[1] );
+		} else {
+			return false;
+		}
+		if ( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
+			return false;
+		}
+
+		return $t_filter_array;
 	}
 
 	# --------------------
@@ -1246,7 +1303,7 @@
 											$t_any_found = true;
 										} else {
 											$t_profile = profile_get_row_direct( $t_current );
-											
+
 											$t_this_string = "${t_profile['platform']} ${t_profile['os']} ${t_profile['os_build']}";
 										}
 										if ( $t_first_flag != true ) {
@@ -1568,7 +1625,7 @@
 				<input type="hidden" name="view_state" value="<?php echo $t_filter['view_state'];?>" />
 			</td>
 			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
-				<?php 
+				<?php
 					$t_sticky_filter_state = gpc_string_to_bool( $t_filter['sticky_issues'] )  ;
 					PRINT ( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 				?>
@@ -2357,9 +2414,9 @@
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
 		<?php
 			# if current user is a reporter, and limited reports set to ON, only display that name
-		# @@@ thraxisp - access_has_project_level checks greater than or equal to, 
+		# @@@ thraxisp - access_has_project_level checks greater than or equal to,
 		#   this assumed that there aren't any holes above REPORTER where the limit would apply
-		# 
+		#
 			if ( ( ON === config_get( 'limit_reporters' ) ) && ( ! access_has_project_level( REPORTER + 1 ) ) ) {
 				$t_id = auth_get_current_user_id();
 				$t_username = user_get_field( $t_id, 'username' );
@@ -2517,7 +2574,7 @@
     </select>
 		<?php
 	}
-	
+
 	function print_filter_show_profile() {
 		global $t_select_modifier, $t_filter;
 		?><!-- Profile -->
@@ -2909,5 +2966,86 @@
 		print "</td></tr>\n<tr><td>";
 		print_date_selection_set("custom_field_" . $p_field_id . "_end" , config_get( 'short_date_format'), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year);
 		print "</td></tr>\n</table>";
+	}
+
+	#===================================
+	# Caching
+	#===================================
+
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+
+	$g_cache_filter = array();
+
+	# --------------------
+	# Cache a filter row if necessary and return the cached copy
+	# If the second parameter is true (default), trigger an error
+	# if the filter can't be found.  If the second parameter is
+	# false, return false if the filter can't be found.
+	function filter_cache_row( $p_filter_id, $p_trigger_errors=true) {
+		global $g_cache_filter;
+
+		$c_filter_id = db_prepare_int( $p_filter_id );
+
+		$t_filters_table = config_get( 'mantis_filters_table' );
+
+		if ( isset ( $g_cache_filter[$c_filter_id] ) ) {
+			return $g_cache_filter[$c_filter_id];
+		}
+
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE id='$c_filter_id'";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			if ( $p_trigger_errors ) {
+				error_parameters( $p_filter_id );
+				trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
+		}
+
+		$row = db_fetch_array( $result );
+
+		$g_cache_filter[$c_filter_id] = $row;
+
+		return $row;
+	}
+
+	# --------------------
+	# Clear the filter cache (or just the given id if specified)
+	function filter_clear_cache( $p_filter_id = null ) {
+		global $g_cache_filter;
+
+		if ( null === $p_filter_id ) {
+			$g_cache_filter = array();
+		} else {
+			$c_filter_id = db_prepare_int( $p_filter_id );
+			unset( $g_cache_filter[$c_filter_id] );
+		}
+
+		return true;
+	}
+
+	# --------------------
+	# return a filter row
+	function filter_get_row( $p_filter_id ) {
+		return filter_cache_row( $p_filter_id );
+	}
+
+	# --------------------
+	function filter_get_field( $p_filter_id, $p_field_name ) {
+		$row = filter_get_row( $p_filter_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			error_parameters( $p_field_name );
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
 	}
 ?>

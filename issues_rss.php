@@ -6,10 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.2 2005-04-27 14:37:12 vboctor Exp $
+	# $Id: issues_rss.php,v 1.3 2005-05-23 13:17:54 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
+	#
+	# GET PARAMETERS FOR THIS PAGE
+	#
+	# project_id: 0 - all projects, otherwise project id.
+	# filter_id: The filter id to use for generating the rss.
+	# sort: This parameter is ignore if filter_id is supplied and is not equal to 0.
+	#		"update": issues ordered descending by last updated date.
+	#       "submit": issues ordered descending by submit date (default).
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -24,7 +33,15 @@
 		access_denied();
 	}
 
-	$f_project_id = gpc_get_int( 'project_id', 0 );
+	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
+	$f_filter_id = gpc_get_int( 'filter_id', 0 );
+	$f_sort = gpc_get_string( 'sort', 'submit' );
+
+	if ( $f_sort === 'update' ) {
+		$c_sort_field = 'last_updated';
+	} else {
+		$c_sort_field = 'date_submitted';
+	}
 
 	$t_path = config_get( 'path' );
 
@@ -40,6 +57,10 @@
 	$category = project_get_name( $f_project_id );
 	if ( $f_project_id !== 0 ) {
 		$title .= ' - ' . $category;
+	}
+
+	if ( $f_filter_id !== 0 ) {
+		$title .= ' (' . filter_get_field( $f_filter_id, 'name' ) . ')';
 	}
 
 	# in minutes (only rss 2.0)
@@ -80,10 +101,22 @@
 	$t_issues_per_page = 25;
 	$t_page_count = 0;
 	$t_issues_count = 0;
-	$t_custom_filter = null;
 	$t_project_id = $f_project_id;
 	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
 	$t_show_sticky = null;
+
+	if ( $f_filter_id == 0 ) {
+		$t_custom_filter = filter_get_default();
+		$t_custom_filter['sort'] = $c_sort_field;
+	} else {
+		# null will be returned if the user doesn't have access right to access the filter.
+		$t_custom_filter = filter_db_get_filter( $f_filter_id, $t_user_id );
+		if ( null == $t_custom_filter ) {
+			access_denied();
+		}
+
+		$t_custom_filter = filter_deserialize( $t_custom_filter );
+	}
 
 	$t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,
 									 $t_custom_filter, $t_project_id, $t_user_id, $t_show_sticky );

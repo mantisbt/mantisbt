@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.47 2005-05-13 22:02:55 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.48 2005-05-23 13:17:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -261,13 +261,11 @@
 	define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW',	1704 );
 	define( 'ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL',	1705 );
 
-	# MASC RELATIONSHIP
 	# ERROR RELATIONSHIP
 	define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );
 	define( 'ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW', 1801 );
 	define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
 	define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
-	# MASC RELATIONSHIP
 
 	# ERROR_LOST_PASSWORD_*
 	define( 'ERROR_LOST_PASSWORD_NOT_ENABLED', 1900 );
@@ -276,6 +274,9 @@
 	define( 'ERROR_LOST_PASSWORD_NOT_MATCHING_DATA', 1903 );
 	define( 'ERROR_SIGNUP_NOT_MATCHING_CAPTCHA', 1904 );
 	define( 'ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED', 1905 );
+
+	# ERROR_FILTER_NOT_FOUND
+	define( 'ERROR_FILTER_NOT_FOUND', 2000 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
@@ -333,7 +334,7 @@
 	define( 'CUSTOM_FIELD_DATE_ON',			5 ) ;
 	define( 'CUSTOM_FIELD_DATE_AFTER',		6 ) ;
 	define( 'CUSTOM_FIELD_DATE_ONORAFTER',	7 ) ;
-	
+
 	# system logging
 	#  logging levels, can be OR'd together
 	define( 'LOG_EMAIL',                    1 );  # all emails sent

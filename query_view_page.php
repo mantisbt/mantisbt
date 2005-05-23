@@ -47,10 +47,13 @@
 
 		print '<td>';
 
-		print '<a href=' . $t_use_query_url . db_prepare_int( $t_id ) . '>' . string_display( $t_name ) . '</a>';
+		print_rss( 'issues_rss.php?project_id=' . helper_get_current_project() . '&amp;filter_id=' . $t_id, lang_get( 'rss' ) );
+		echo ' ';
+		print '<a href="' . $t_use_query_url . db_prepare_int( $t_id ) . '">' . string_display( $t_name ) . '</a>';
 
 		if ( filter_db_can_delete_filter( $t_id ) ) {
-			print " [<a href=" . $t_delete_query_url . db_prepare_int( $t_id ) . ">" . lang_get( 'delete_query' ) . "</a>]";
+			echo ' ';
+			print_button( $t_delete_query_url . db_prepare_int( $t_id ), lang_get( 'delete_query' ) );
 		}
 
 		print '</td>';
