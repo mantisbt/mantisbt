@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.16 2005-05-23 13:51:54 thraxisp Exp $
+	# $Id: php_api.php,v 1.17 2005-05-23 13:59:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -16,7 +16,7 @@
 	# Constant for our minimum required PHP version
 	define( 'PHP_MIN_VERSION', '4.0.6' );
 	
-	# cache array fof comparisons
+	# cache array of comparisons
 	$g_cached_version = array();
 
 	# --------------------
