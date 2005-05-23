@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.46 2005-04-22 22:27:50 prichards Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.47 2005-05-23 20:03:12 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,7 @@
 
 	# This is where we used to do the entire actual filter ourselves
 	$t_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = null;
+	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
@@ -118,7 +118,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			$t_bug_arr_sort[$index]=1;
 		}
 	}
-var_dump($t_field_name_arr);
+	# @@debug var_dump($t_field_name_arr);
 	for( $i=0; $i < $row_count; $i++ ) {
 
 		# prefix bug data with v_

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.58 2005-03-26 18:27:17 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.59 2005-05-23 20:03:12 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,7 @@
 
 	# This is where we used to do the entire actual filter ourselves
 	$t_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = null;
+	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
