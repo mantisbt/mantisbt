@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.42 2005-05-19 00:25:52 thraxisp Exp $
+	# $Id: core.php,v 1.43 2005-05-23 13:48:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -139,4 +139,7 @@
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'helper_api.php' );
 	require_once( $t_core_path.'user_api.php' );
+	
+	# push push default language to speed calls to lang_get
+	lang_push( lang_get_default() );
 ?>
