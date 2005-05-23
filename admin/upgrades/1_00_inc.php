@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.3 2005-05-23 13:55:38 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.4 2005-05-23 14:40:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,13 +66,13 @@
 		);
 
 	$upgrades[] = new SQLUpgrade(
-			'project_viewstate_index',
+			'project_vs_index',
 			'Add index on view_state in project table',
 			"ALTER TABLE $t_project_table ADD INDEX ( view_state )"
 		);
 
 	$upgrades[] = new SQLUpgrade(
-			'project_user_id_index',
+			'project_uid_index',
 			'Add index on user_id in project_user table',
 			"ALTER TABLE $t_project_user_list_table ADD INDEX ( user_id )"
 		);
