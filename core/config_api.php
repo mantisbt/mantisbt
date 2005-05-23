@@ -6,12 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.26 2005-05-01 14:53:49 thraxisp Exp $
+	# $Id: config_api.php,v 1.27 2005-05-23 13:51:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
 	$g_cache_config = array();
 	$g_cache_config_access = array();
+	
+	# cache environment to speed up lookups
+	$g_cache_db_table_exists = false;
 
 	### Configuration API ###
 
@@ -26,93 +29,93 @@
 	#     if not found, config_id + default user + all_project.
 	#    3.use GLOBAL[config_id]
 	function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
-		global $g_cache_config, $g_cache_config_access;
+		global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists;
 
 		if ( isset( $g_cache_config[$p_option] ) ) {
 			return $g_cache_config[$p_option];
 		}
+		
+		# @@ debug @@ echo "lu o=$p_option ";
 
 		# bypass table lookup for certain options
 		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
 		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
-		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
-				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
+		if ( ! $t_bypass_lookup ) {
 			$t_config_table = config_get_global( 'mantis_config_table' );
-			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
-			# @@ debug @@ error_print_stack_trace();
-
-			# prepare the user's list
-			$t_users = array( ALL_USERS );
-			if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
-				$t_users[] = auth_get_current_user_id();
-			} else if ( ! in_array( $p_user, $t_users ) ) {
-				$t_users[] = $p_user;
-			}
-			if ( 1 < count( $t_users ) ) {
-				$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
-			} else {
-				$t_user_clause = "user_id=$t_users[0]";
+			# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }
+			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
+			if ( ! $g_cache_db_table_exists ) {
+				$g_cache_db_table_exists = ( TRUE === db_is_connected() ) &&
+					db_table_exists( $t_config_table );
 			}
 
-			# prepare the projects list
-			$t_projects = array( ALL_PROJECTS );
-			if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
-				$t_selected_project = helper_get_current_project();
-				if ( ALL_PROJECTS <> $t_selected_project ) {
-					$t_projects[] = $t_selected_project;
+			if ( $g_cache_db_table_exists ) {
+				# @@ debug @@ echo " lu db $p_option ";
+				# @@ debug @@ error_print_stack_trace();
+
+				# prepare the user's list
+				$t_users = array( ALL_USERS );
+				if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+					$t_users[] = auth_get_current_user_id();
+				} else if ( ! in_array( $p_user, $t_users ) ) {
+					$t_users[] = $p_user;
 				}
-			} else if ( ! in_array( $p_project, $t_projects ) ) {
-				$t_projects[] = $p_project;
-			}
-			if ( 1 < count( $t_projects ) ) {
-				$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
-			} else {
-				$t_project_clause = "project_id=$t_projects[0]";
-			}
-
-			# @@@ thraxisp @@@ this code is required to handle the change in field name in the database.
-			# @@@ It can probably be removed after the next release , if the upgrade is fixed
-			# @@@ i.e. the only people that may need this are using CVS now.
-			if ( db_field_exists( 'access_reqd', $t_config_table ) ) {
-				$t_access_field = 'access_reqd';
-			} else {
-				$t_access_field = 'access';
-			}
-
-			$c_option = db_prepare_string( $p_option );
-			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
-			#  once here. we need to reverse the sort, so that the last value overwrites the
-			#  config table
-			$query = "SELECT type, value, $t_access_field FROM $t_config_table
-				WHERE config_id = '$p_option' AND
-					$t_project_clause AND
-					$t_user_clause
-				ORDER BY user_id DESC, project_id DESC";
-
-			$result = db_query( $query, 1 );
-
-			if ( 0 < db_num_rows( $result ) ) {
-				$row = db_fetch_array( $result );
-				$t_type = $row['type'];
-				$t_raw_value = $row['value'];
-
-				switch ( $t_type ) {
-					case CONFIG_TYPE_INT:
-						$t_value = (int) $t_raw_value;
-						break;
-					case CONFIG_TYPE_COMPLEX:
-						$t_value = unserialize( $t_raw_value );
-						break;
-					case CONFIG_TYPE_STRING:
-					default:
-						$t_value = config_eval( $t_raw_value );
+				if ( 1 < count( $t_users ) ) {
+					$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
+				} else {
+					$t_user_clause = "user_id=$t_users[0]";
 				}
-				$g_cache_config[$p_option] = $t_value;
-				$g_cache_config_access[$p_option] = $row[$t_access_field];
-				return $t_value;
+
+				# prepare the projects list
+				$t_projects = array( ALL_PROJECTS );
+				if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+					$t_selected_project = helper_get_current_project();
+					if ( ALL_PROJECTS <> $t_selected_project ) {
+						$t_projects[] = $t_selected_project;
+					}
+				} else if ( ! in_array( $p_project, $t_projects ) ) {
+					$t_projects[] = $p_project;
+				}
+				if ( 1 < count( $t_projects ) ) {
+					$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
+				} else {
+					$t_project_clause = "project_id=$t_projects[0]";
+				}
+
+				$c_option = db_prepare_string( $p_option );
+				# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
+				#  once here. we need to reverse the sort, so that the last value overwrites the
+				#  config table
+				$query = "SELECT type, value, access_reqd FROM $t_config_table
+					WHERE config_id = '$p_option' AND
+						$t_project_clause AND
+						$t_user_clause
+					ORDER BY user_id DESC, project_id DESC";
+
+				$result = db_query( $query, 1 );
+
+				if ( 0 < db_num_rows( $result ) ) {
+					$row = db_fetch_array( $result );
+					$t_type = $row['type'];
+					$t_raw_value = $row['value'];
+
+					switch ( $t_type ) {
+						case CONFIG_TYPE_INT:
+							$t_value = (int) $t_raw_value;
+							break;
+						case CONFIG_TYPE_COMPLEX:
+							$t_value = unserialize( $t_raw_value );
+							break;
+						case CONFIG_TYPE_STRING:
+						default:
+							$t_value = config_eval( $t_raw_value );
+					}
+					$g_cache_config[$p_option] = $t_value;
+					$g_cache_config_access[$p_option] = $row['access_reqd'];
+					return $t_value;
+				}
 			}
 		}
 		return config_get_global( $p_option, $p_default );
