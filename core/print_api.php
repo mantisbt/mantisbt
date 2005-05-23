@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.130 2005-05-16 12:56:06 vboctor Exp $
+	# $Id: print_api.php,v 1.131 2005-05-23 12:07:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -424,7 +424,8 @@
 		if ( '' === $p_select_id ) {
 			$p_select_id = profile_get_default( $p_user_id );
 		}
-		$t_profiles = profile_get_all_for_project( $p_user_id );
+
+		$t_profiles = profile_get_all_for_project( $p_project_id );
 
 		PRINT '<option value=""></option>';
 		foreach ( $t_profiles as $t_profile ) {
