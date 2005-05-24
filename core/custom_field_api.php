@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.51 2005-03-24 02:55:23 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.52 2005-05-24 18:04:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -602,11 +602,41 @@
 		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
 
 		if ( ALL_PROJECTS == $p_project_id ) {
-			$query = "SELECT id
-					  FROM $t_custom_field_table
-					  ORDER BY name ASC";
+            $t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+            $t_project_table = config_get( 'mantis_project_table' );
+            $t_user_table = config_get( 'mantis_user_table' );
+            $t_user_id = auth_get_current_user_id();
+            $t_pub = VS_PUBLIC;
+            $t_priv = VS_PRIVATE;
+            
+            $t_private_access = config_get( 'private_project_threshold' );
+            if ( is_array( $t_private_access ) ) {
+                if ( 1 == count( $t_private_access ) ) {
+				    $t_access_clause = "= " . array_shift( $t_private_access ) . " ";
+                } else {
+                    $t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
+                }
+            } else {
+                $t_access_clause = ">= $t_private_access ";
+            }			
+
+            
+            # select only the ids that the user has some access to 
+            #  e.g., all fields in public projects, or private projects where the user is listed
+            #    or private projects where the user is implicitly listed
+            $query = "SELECT distinct cft.id as id, cft.name as name
+                FROM $t_custom_field_table as cft
+                    JOIN $t_custom_field_project_table as cfpt on cft.id = cfpt.field_id
+                    JOIN $t_project_table as pt on cfpt.project_id = pt.id
+                    LEFT JOIN $t_project_user_list_table as pult 
+                        on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
+                    JOIN $t_user_table as ut on ut.id = $t_user_id
+                WHERE pt.view_state = $t_pub OR 
+                    ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
+                    ( pult.user_id is null and ut.access_level $t_access_clause )
+                ORDER BY name ASC";
 		} else {
-			$query = "SELECT $t_custom_field_table.id
+			$query = "SELECT $t_custom_field_table.id, $t_custom_field_table.name
 					  FROM $t_custom_field_table, $t_custom_field_project_table
 					  WHERE $t_custom_field_project_table.project_id = '$p_project_id' AND
 							$t_custom_field_table.id = $t_custom_field_project_table.field_id
