@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.82 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: print_all_bug_page.php,v 1.83 2005-05-24 23:22:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 	$f_dir		 			= null;
 	$t_project_id 			= 0;
 
-	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( true ) );
+	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_PRINT_PAGE ) );
 	$t_num_of_columns = sizeof( $t_columns );
 
 	# check to see if the cookie exists
@@ -164,20 +164,23 @@
 				$v_start = 0;
 				$v_end   = 0;
 			}
-			PRINT "( $v_start - $v_end )";
+			echo "( $v_start - $v_end )";
 		?>
 	</td>
 	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
 		<?php # print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) ) ?>
-		<?php print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) ?>
+		<?php # print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) ?>
 		<?php # print_bracket_link( 'summary_page.php', lang_get( 'summary' ) ) ?>
 	</td>
 </tr>
 <tr class="row-category">
 	<?php
+		$t_sort = $f_sort;	// used within the custom function called in the loop (@@@ cleanup)
+		$t_dir = $f_dir;    // used within the custom function called in the loop (@@@ cleanup)
+
 		foreach( $t_columns as $t_column ) {
 			$t_title_function = 'print_column_title';
-			helper_call_custom_function( $t_title_function, array( $t_column, true ) );
+			helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
 		}
 	?>
 </tr>
@@ -196,7 +199,7 @@
 <?php
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, true ) );
+			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
 		}
 ?>
 </tr>

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.5 2004-11-19 12:54:13 vboctor Exp $
+	# $Id: csv_api.php,v 1.6 2005-05-24 23:22:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -49,37 +49,9 @@
 	}
 
 	# --------------------
-	# Identified which fields to include, in which order, and the string to
-	# pass to lang_get() to retrieve the title.
-	# array ( 'column_internal_name' => 'lang str for column title', ... )
+	# An array of column names that are used to identify  fields to include and in which order.
 	function csv_get_columns() {
-		# @@@ Support configuration in the future
-	        $t_columns = array(	'id' => 'id',
-								'project_id' => 'email_project',
-								'reporter_id' => 'reporter',
-								'handler_id' => 'assigned_to',
-								'priority' => 'priority',
-								'severity' => 'severity',
-								'reproducibility' => 'reproducibility',
-								'version' => 'version',
-								'projection' => 'projection',
-								'category' => 'category',
-								'date_submitted' => 'date_submitted',
-								'eta' => 'eta',
-								'os' => 'os',
-								'os_build' => 'os_version',
-								'platform' => 'platform',
-								'view_state' => 'view_status',
-								'last_updated' => 'last_update',
-								'summary' => 'summary',
-								'status' => 'status',
-								'resolution' => 'resolution',
-								'fixed_in_version' => 'fixed_in_version' );
-
-		if ( OFF == config_get( 'enable_relationship' ) ) {
-			$t_columns['duplicate_id'] = 'duplicate_id';
-		} # MASC RELATIONSHIP
-
+		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_CSV_PAGE ) );
 		return $t_columns;
 	}
 

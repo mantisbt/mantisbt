@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.23 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: csv_export.php,v 1.24 2005-05-24 23:22:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,6 +16,7 @@
 
 	require_once( $t_core_path . 'filter_api.php' );
 	require_once( $t_core_path . 'csv_api.php' );
+	require_once( $t_core_path . 'columns_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
@@ -29,12 +30,12 @@
  	$t_sep = csv_get_separator();
 
 	# Get bug rows according to the current filter
-	$rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-	if ( $rows === false ) {
+	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	if ( $t_rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
-        $t_filename = csv_get_default_filename();
+	$t_filename = csv_get_default_filename();
 
 	# Send headers to browser to activate mime loading
 
@@ -51,12 +52,28 @@
 	$t_columns = csv_get_columns();
 
 	# export the titles
+	$t_first_column = true;
+	ob_start();
 	$t_titles = array();
-	foreach ( $t_columns as $column => $title ) {
-		$t_titles[] = lang_get( $title );
-	}
+	foreach ( $t_columns as $t_column ) {
+		if ( !$t_first_column ) {
+			echo $t_sep;
+		} else {
+			$t_first_column = false;
+		}
 
-	$t_header = implode( $t_sep, $t_titles ) . $t_nl;
+		if ( strpos( $t_column, 'custom_' ) === 0 ) {
+			$t_column_title_function = 'print_column_title';
+			helper_call_custom_function( $t_column_title_function, array( $t_column, COLUMNS_TARGET_CSV_PAGE ) );
+		} else {
+			$t_function = 'print_column_title_' . $t_column;
+			$t_function( '', 'ASC', COLUMNS_TARGET_CSV_PAGE );
+		}
+	}
+	
+	echo $t_nl;
+
+	$t_header = ob_get_clean();
 
 	# Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
 	# See Microsoft Knowledge Base Article - 323626
@@ -70,19 +87,33 @@
 	echo $t_header;
 
 	# export the rows
-	foreach ( $rows as $row ) {
-		$t_values = array();
-		foreach ( $t_columns as $key => $title ) {
-			# check if column should be visible
-			if ( !isset( $row[$key] ) ) {
-				$t_values[] = '';
-				continue;
+	foreach ( $t_rows as $t_row ) {
+		$t_first_column = true;
+
+		foreach ( $t_columns as $t_column ) {
+			if ( !$t_first_column ) {
+				echo $t_sep;
+			} else {
+				$t_first_column = false;
 			}
 
-			$t_function = 'csv_format_' . $key;
-			$t_values[] = $t_function( $row[ $key ] );
+			if ( strpos( $t_column, 'custom_' ) === 0 ) {
+				ob_start();
+				$t_column_value_function = 'print_column_value';
+				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
+				$t_value = ob_get_clean();
+
+				if ( strstr( $t_value, $t_sep ) !== false ) {
+					$t_value = '"' . $t_value . '"';
+				}
+
+				echo $t_value;
+			} else {
+				$t_function = 'csv_format_' . $t_column;
+				echo $t_function( $t_row[ $t_column ] );
+			}
 		}
 
-		echo implode( $t_sep, $t_values ) . $t_nl;
+		echo $t_nl;
 	}
 ?>

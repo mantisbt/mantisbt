@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.20 2005-05-20 20:45:51 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.21 2005-05-24 23:22:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -145,34 +145,64 @@
 	# - "custom_xxxx" were xxxx is the name of the custom field that is valid for the
 	#   current project.  In case of "All Projects, the field will be empty where it is
 	#   not applicable.
-	function custom_function_default_get_columns_to_view( $p_print = false ) {
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		$t_columns = array();
-		$t_columns[] = 'selection';
 
-		if ( !$p_print ) {
-			$t_columns[] = 'edit';
+		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
+			$t_columns[] = 'id'; // localized: 'id',
+			$t_columns[] = 'project_id'; // 'email_project'
+			$t_columns[] = 'reporter_id'; // 'reporter'
+			$t_columns[] = 'handler_id'; // 'assigned_to'
+			$t_columns[] = 'priority'; // 'priority'
+			$t_columns[] = 'severity'; // 'severity'
+			$t_columns[] = 'reproducibility'; // 'reproducibility'
+			$t_columns[] = 'version'; // 'version'
+			$t_columns[] = 'projection'; // 'projection'
+			$t_columns[] = 'category'; // 'category'
+			$t_columns[] = 'date_submitted'; // 'date_submitted'
+			$t_columns[] = 'eta'; // 'eta'
+			$t_columns[] = 'os'; // 'os'
+			$t_columns[] = 'os_build'; // 'os_version'
+			$t_columns[] = 'platform'; // 'platform'
+			$t_columns[] = 'view_state'; // 'view_status'
+			$t_columns[] = 'last_updated'; // 'last_update'
+			$t_columns[] = 'summary'; // 'summary'
+			$t_columns[] = 'status'; // 'status'
+			$t_columns[] = 'resolution'; // 'resolution'
+			$t_columns[] = 'fixed_in_version'; // 'fixed_in_version';
+
+			if ( OFF == config_get( 'enable_relationship' ) ) {
+				$t_columns[] = 'duplicate_id'; // 'duplicate_id'
+			}
+		} else {
+			$t_columns[] = 'selection';
+
+			if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+				$t_columns[] = 'edit';
+			}
+
+			$t_columns[] = 'priority';
+			$t_columns[] = 'id';
+
+			$t_enable_sponsorship = config_get( 'enable_sponsorship' );
+			if ( ON == $t_enable_sponsorship ) {
+				$t_columns[] = 'sponsorship';
+			}
+
+			$t_columns[] = 'bugnotes_count';
+
+			$t_show_attachments = config_get( 'show_attachment_indicator' );
+			if ( ON == $t_show_attachments ) {
+				$t_columns[] = 'attachment';
+			}
+
+			$t_columns[] = 'category';
+			$t_columns[] = 'severity';
+			$t_columns[] = 'status';
+			$t_columns[] = 'last_updated';
+			$t_columns[] = 'summary';
 		}
-
-		$t_columns[] = 'priority';
-		$t_columns[] = 'id';
-
-		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
-		if ( ON == $t_enable_sponsorship ) {
-			$t_columns[] = 'sponsorship';
-		}
-
-		$t_columns[] = 'bugnotes_count';
-
-		$t_show_attachments = config_get( 'show_attachment_indicator' );
-		if ( ON == $t_show_attachments ) {
-			$t_columns[] = 'attachment';
-		}
-
-		$t_columns[] = 'category';
-		$t_columns[] = 'severity';
-		$t_columns[] = 'status';
-		$t_columns[] = 'last_updated';
-		$t_columns[] = 'summary';
 
 		return $t_columns;
 	}
@@ -180,13 +210,16 @@
 	# --------------------
 	# Print the title of a column given its name.
 	# $p_column: custom_xxx for custom field xxx, or otherwise field name as in bug table.
-	function custom_function_default_print_column_title( $p_column, $p_print = false ) {
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		global $t_sort, $t_dir;
 
 		if ( strpos( $p_column, 'custom_' ) === 0 ) {
 			$t_custom_field = substr( $p_column, 7 );
 
-			echo '<td>';
+			if ( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
+				echo '<td>';
+			}
 
 			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 			if ( $t_field_id === false ) {
@@ -195,18 +228,24 @@
 				$t_def = custom_field_get_definition( $t_field_id );
 				$t_custom_field = lang_get_defaulted( $t_def['name'] );
 
-				print_view_bug_sort_link( $t_custom_field, $p_column, $t_sort, $t_dir, $p_print );
-				print_sort_icon( $t_dir, $t_sort, $p_column );
+				if ( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
+					print_view_bug_sort_link( $t_custom_field, $p_column, $t_sort, $t_dir, $p_columns_target );
+					print_sort_icon( $t_dir, $t_sort, $p_column );
+				} else {
+					echo $t_custom_field;
+				}
 			}
 
-			echo '</td>';
+			if ( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
+				echo '</td>';
+			}
 		} else {
 			$t_function = 'print_column_title_' . $p_column;
 			if ( function_exists( $t_function ) ) {
-				$t_function( $t_sort, $t_dir, $p_print );
+				$t_function( $t_sort, $t_dir, $p_columns_target );
 			} else {
 				echo '<td>';
-				print_view_bug_sort_link( lang_get_defaulted( $p_column ), $p_column, $t_sort, $t_dir, $p_print );
+				print_view_bug_sort_link( lang_get_defaulted( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
 				print_sort_icon( $t_dir, $t_sort, $p_column );
 				echo '</td>';
 			}
@@ -219,9 +258,20 @@
 	# see custom_function_default_print_column_title() for rules about column names.
 	# $p_column: name of field to show in the column.
 	# $p_row: the row from the bug table that belongs to the issue that we should print the values for.
-	function custom_function_default_print_column_value( $p_column, $p_issue_row, $p_print = false ) {
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function custom_function_default_print_column_value( $p_column, $p_issue_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( COLUMNS_TARGET_CSV_PAGE == $p_columns_target ) {
+			$t_column_start = '';
+			$t_column_end = '';
+			$t_column_empty = '';
+		} else {
+			$t_column_start = '<td>';
+			$t_column_end = '</td>';
+			$t_column_empty = '&nbsp;';
+		}
+
 		if ( strpos( $p_column, 'custom_' ) === 0 ) {
-			echo '<td>';
+			echo $t_column_start;
 			$t_custom_field = substr( $p_column, 7 );
 
 			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
@@ -236,16 +286,27 @@
 					print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
 				} else {
 					// field is not linked to project
-					echo '&nbsp;';
+					echo $t_column_empty;
 				}
 			}
-			echo '</td>';
+			echo $t_column_end;
 		} else {
-			$t_function = 'print_column_' . $p_column;
-			if ( function_exists( $t_function ) ) {
-				$t_function( $p_issue_row, $p_print );
+			if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+				$t_function = 'print_column_' . $p_column;
 			} else {
-				echo '<td>' . $p_issue_row[$p_column] . '</td>';
+				$t_function = 'csv_format_' . $p_column;
+			}
+
+			if ( function_exists( $t_function ) ) {
+				if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+					$t_function( $p_issue_row, $p_columns_target );
+				} else {
+					$t_function( $p_issue_row[$p_column] );
+				}
+			} else {
+				if ( isset( $p_issue_row[$p_column] ) ) {
+					echo $t_column_start . $p_issue_row[$p_column] . $t_column_end;
+				}
 			}
 		}
 	}

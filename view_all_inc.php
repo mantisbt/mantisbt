@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.158 2005-04-26 01:17:50 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.159 2005-05-24 23:22:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,7 @@
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 
-	$t_columns = helper_call_custom_function( 'get_columns_to_view', array() );
+	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_VIEW_PAGE ) );
 	$col_count = sizeof( $t_columns );
 
 	# -- ====================== FILTER FORM ========================= --

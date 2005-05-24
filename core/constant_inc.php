@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.48 2005-05-23 13:17:53 vboctor Exp $
+	# $Id: constant_inc.php,v 1.49 2005-05-24 23:22:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -340,5 +340,8 @@
 	define( 'LOG_EMAIL',                    1 );  # all emails sent
 	define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
 
-
+	# COLUMNS_TARGET_*
+	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );
+	define( 'COLUMNS_TARGET_PRINT_PAGE',  2 );
+	define( 'COLUMNS_TARGET_CSV_PAGE',    3 );
 ?>

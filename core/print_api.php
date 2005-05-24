@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.133 2005-05-23 13:53:30 thraxisp Exp $
+	# $Id: print_api.php,v 1.134 2005-05-24 23:22:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -928,7 +928,7 @@
 	}
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
-		$t_mantis_project_category_table = config_get( 'antis_project_category_table' );
+		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
@@ -985,8 +985,9 @@
 	# Link Printing API
 	###########################################################################
 	# --------------------
-	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_print = false ) {
-		if ( $p_print ) {
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
 			if ( $p_sort_field == $p_sort ) {
 				# We toggle between ASC and DESC if the user clicks the same sort order
 				if ( 'ASC' == $p_dir ) {
@@ -998,8 +999,8 @@
 				$t_dir = 'ASC';
 			}
 
-			PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
-		} else {
+			echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
+		} else if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 			if ( $p_sort_field == $p_sort ) {
 				# we toggle between ASC and DESC if the user clicks the same sort order
 				if ( 'ASC' == $p_dir ) {
@@ -1011,7 +1012,9 @@
 				$t_dir = 'ASC';
 			}
 
-			PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
+			echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
+		} else {
+			echo $p_string;
 		}
 	}
 	# --------------------
