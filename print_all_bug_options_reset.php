@@ -6,22 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_reset.php,v 1.14 2005-02-28 00:30:39 thraxisp Exp $
+	# $Id: print_all_bug_options_reset.php,v 1.15 2005-05-24 20:14:43 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# Reset prefs to defaults then redirect to account_prefs_page.php3
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'current_user_api.php' );
-?>
-<?php require( 'print_all_bug_options_inc.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+	require( 'print_all_bug_options_inc.php' );
+
+	auth_ensure_user_authenticated();
+
 	# protected account check
 	current_user_ensure_unprotected();
 
@@ -47,9 +45,21 @@
 	$result = db_query( $query );
 
 	$t_redirect_url = 'print_all_bug_options_page.php';
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect_url );
+	html_page_top2();
+	PRINT '<br /><div align="center">';
+
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print lang_get( 'operation_successful' );
 	} else {
-		print_mantis_error( ERROR_GENERIC );
+		print error_string( ERROR_GENERIC );
 	}
+
+	PRINT '<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	PRINT '<br /></div>';
+	html_page_bottom1( __FILE__ );
 ?>
+
