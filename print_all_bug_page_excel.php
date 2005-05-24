@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.47 2005-05-23 20:03:12 marcelloscata Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.48 2005-05-24 20:08:16 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -99,7 +99,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		if ( $f_type_page != 'html' ) {
 			for ( $i=0 ; $i <$field_name_count ; $i++ ) {
 				if ( isset( $t_prefs[$i] ) && ( 1 == $t_prefs[$i] ) ) {  ?>
-	<td class=xl2316681 style='border-left:none'><?php echo $t_field_name_arr[$i] ?></td>
+	<td class=xl2316681 style='border-left:none'><?php echo lang_get( $t_field_name_arr[$i] ) ?></td>
 <?php
 				} //if isset
 			} //for
