@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.108 2005-05-23 13:17:53 vboctor Exp $
+	# $Id: filter_api.php,v 1.109 2005-05-24 17:35:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -996,7 +996,7 @@
 
 		<?php
 		if ( $p_expanded ) {
-			$t_filter_cols = 7;
+			$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 			$t_custom_cols = $t_filter_cols;
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.264 2005-05-19 00:25:52 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.265 2005-05-24 17:35:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1159,7 +1159,7 @@
 	# Mantis Filter Variables
 	#######################################
 	$g_filter_by_custom_fields = ON;
-	$g_filter_custom_fields_per_row = 7;
+	$g_filter_custom_fields_per_row = 8;
 	$g_view_filters = SIMPLE_DEFAULT;
 
 	$g_dhtml_filters = OFF;
