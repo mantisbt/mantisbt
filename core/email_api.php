@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.117 2005-05-16 19:18:21 marcelloscata Exp $
+	# $Id: email_api.php,v 1.118 2005-05-25 19:47:54 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -413,7 +413,7 @@
 
 			if( !is_blank( $t_recipient_email ) ) {
 				email_send( $t_recipient_email, $t_subject, $t_message );
-				log_event( LOG_EMAIL, "new_account_notify=$t_email" );
+				log_event( LOG_EMAIL, "new_account_notify=$t_recipient_email" );
 			}
 
 			lang_pop();
