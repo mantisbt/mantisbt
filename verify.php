@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: verify.php,v 1.4 2005-03-21 20:48:55 vwegert Exp $
+	# $Id: verify.php,v 1.5 2005-05-25 19:57:13 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -25,6 +25,11 @@
 	$f_user_id = gpc_get_string('id');
 	$f_confirm_hash = gpc_get_string('confirm_hash');
 
+	# force logout on the current user if already authenticated
+	if( auth_is_user_authenticated() ) {
+		auth_logout();
+	}
+
 	$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
 	if ( $f_confirm_hash != $t_calculated_confirm_hash ) {
@@ -41,16 +46,4 @@
 	auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'account_page.php' );
-/*
-	html_page_top1();
-	html_page_top2();
-
-	echo '<br/>';
-	echo '<div align="center">';
-	echo lang_get( 'lost_password_confirm_hash_OK' ) . '<br/><br/>';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
-
-	html_page_bottom1( __FILE__ );
-*/
 ?>

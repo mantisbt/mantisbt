@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup.php,v 1.39 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: signup.php,v 1.40 2005-05-25 19:57:13 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -23,6 +23,11 @@
 	$f_username = trim( $f_username );
 	$f_email = email_append_domain( trim( $f_email ) );
 	$f_captcha = strtolower( trim( $f_captcha ) );
+
+	# forse logout on the current user if already authenticated
+	if( auth_is_user_authenticated() ) {
+		auth_logout();
+	}
 
 	# Check to see if signup is allowed
 	if ( OFF == config_get( 'allow_signup' ) ) {
