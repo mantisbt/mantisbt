@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.109 2005-05-24 17:35:02 thraxisp Exp $
+	# $Id: filter_api.php,v 1.110 2005-05-26 12:44:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -114,7 +114,7 @@
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-
+		
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie
 			#@@@ error instead?
@@ -700,7 +700,6 @@
 			$t_from_clauses = array( $t_project_table, $t_bug_table );
 		}
 
-
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 		$t_from		= 'FROM ' . implode( ', ', array_unique( $t_from_clauses ) );
 		$t_join		= implode( ' ', $t_join_clauses );
@@ -926,6 +925,7 @@
 			 ( $t_setting_arr[0] == 'v2' ) ||
 			 ( $t_setting_arr[0] == 'v3' ) ||
 			 ( $t_setting_arr[0] == 'v4' ) ) {
+			# these versions can't be salvaged, they are too old to update
 			return false;
 		}
 
@@ -938,7 +938,8 @@
 			return false;
 		}
 		if ( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
-			return false;
+			# if the version is new enough, update it using defaults
+			return filter_ensure_valid_filter( $t_filter_array );
 		}
 
 		return $t_filter_array;
@@ -2319,18 +2320,18 @@
 		}
 
 		$t_multi_select_list = array( 'show_category' => 'string',
-									  'show_severity' => 'int',
-									  'show_status' => 'int',
-									  'reporter_id' => 'int',
+									  'show_severity' => 'string',
+									  'show_status' => 'string',
+									  'reporter_id' => 'string',
 									  'handler_id' => 'string',
-									  'show_resolution' => 'int',
-									  'show_priority' => 'int',
+									  'show_resolution' => 'string',
+									  'show_priority' => 'string',
 									  'show_build' => 'string',
 									  'show_version' => 'string',
-									  'hide_status' => 'int',
+									  'hide_status' => 'string',
 									  'fixed_in_version' => 'string',
-									  'user_monitor' => 'int',
-									  'show_profile' => 'int'
+									  'user_monitor' => 'string',
+									  'show_profile' => 'string'
 									 );
 		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
@@ -2348,7 +2349,7 @@
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
-					if ( ( 5 <= $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
+					if ( ( 5 <= $t_cookie_vers ) && ( ( $t_filter_value == 'any' ) || ( $t_filter_value == 0 ) ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
 					if ( 'string' == $t_multi_field_type ) {
