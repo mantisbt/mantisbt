@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.36 2005-04-09 12:14:29 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.37 2005-05-26 00:02:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -112,7 +112,7 @@
 				if( null != $t_values && '' != $t_values ) {
 					return implode( '|', $t_values );
 				} else {
-					return '';
+					return $p_default;
 				}
 				break ;
 			case CUSTOM_FIELD_TYPE_DATE:

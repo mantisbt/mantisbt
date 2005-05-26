@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.83 2005-04-26 14:35:21 thraxisp Exp $
+	# $Id: bug_update.php,v 1.84 2005-05-26 00:03:03 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -100,8 +100,11 @@
 			continue;
 		}
 
-		# Only update the field if it is posted
-		if ( $t_custom_field_value === null ) {
+		# Only update the field if it is posted, or was required 
+		#  ( will fail in custom_field_set_value(), if it was required )
+		if ( ( $t_custom_field_value === null ) && 
+			! ( $t_def['require_' . $t_custom_status_label] ||
+				( $f_update_mode && $t_def['require_update'] ) ) ) {
 			continue;
 		}
 
