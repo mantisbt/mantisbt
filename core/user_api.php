@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.99 2005-05-10 17:32:33 thraxisp Exp $
+	# $Id: user_api.php,v 1.100 2005-05-26 13:34:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -661,15 +661,12 @@
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id AND u.user_id=$c_user_id
-					  LEFT JOIN $t_project_hierarchy_table ph
-					    ON ph.child_id = p.id
 					  WHERE $t_enabled_clause
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'
 							    AND
 						        u.user_id='$c_user_id' )
 						)
-					    AND ph.child_id IS NULL
 					  ORDER BY p.name";
 
 			$result = db_query( $query );
