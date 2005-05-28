@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.100 2005-05-26 13:34:51 thraxisp Exp $
+	# $Id: user_api.php,v 1.101 2005-05-28 02:15:40 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -657,10 +657,12 @@
 			$t_private	= VS_PRIVATE;
 			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = 1 AND';
 
-			$query = "SELECT p.id, p.name
+			$query = "SELECT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id AND u.user_id=$c_user_id
+					  LEFT JOIN $t_project_hierarchy_table ph
+					    ON ph.child_id = p.id
 					  WHERE $t_enabled_clause
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'
@@ -677,8 +679,16 @@
 			for ( $i=0 ; $i < $row_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 
-				array_push( $t_projects, $row['id'] );
+				$t_projects[ $row['id'] ] = $row['parent_id'];
 			}
+
+			# remove the projects where the parent is already listed
+			foreach ( $t_projects as $t_id => $t_parent ) {
+				if ( isset( $t_projects[$t_parent] ) AND ( $t_projects[$t_parent] !== NULL ) ) {
+					unset( $t_projects[$t_id] );
+				}
+			}
+			$t_projects = array_keys( $t_projects );
 		}
 
 		if ( auth_get_current_user_id() == $p_user_id ) {
