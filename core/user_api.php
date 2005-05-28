@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.101 2005-05-28 02:15:40 thraxisp Exp $
+	# $Id: user_api.php,v 1.102 2005-05-28 17:58:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -679,12 +679,12 @@
 			for ( $i=0 ; $i < $row_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 
-				$t_projects[ $row['id'] ] = $row['parent_id'];
+				$t_projects[ $row['id'] ] = ( $row['parent_id'] === NULL ) ? 0 : $row['parent_id'];
 			}
 
 			# remove the projects where the parent is already listed
 			foreach ( $t_projects as $t_id => $t_parent ) {
-				if ( isset( $t_projects[$t_parent] ) AND ( $t_projects[$t_parent] !== NULL ) ) {
+				if ( ( $t_parent !== 0 ) && isset( $t_projects[$t_parent] ) ) {
 					unset( $t_projects[$t_id] );
 				}
 			}
