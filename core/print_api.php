@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.134 2005-05-24 23:22:47 vboctor Exp $
+	# $Id: print_api.php,v 1.135 2005-05-28 00:54:34 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -183,7 +183,7 @@
 				$t_user_name = string_attribute( $t_user['realname'] );
 				if ( $t_sort_by_last_name ) {
 					$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
-					$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
+					$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 				} else {
 					$t_sort_name = strtolower( $t_user_name );
 				}
@@ -800,17 +800,19 @@
 		$t_display = array();
 		$t_sort = array();
 		$t_users = array();
+		$t_show_realname = ( ON == config_get( 'show_realname' ) );
+		$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_users[] = $row['id'];
 			$t_user_name = string_attribute( $row['username'] );
 			$t_sort_name = $t_user_name;
-			if ( ( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && ( ON == config_get( 'show_realname' ) ) ){
+			if ( ( isset( $row['realname'] ) ) && ( $row['realname'] <> "" ) && $t_show_realname ) {
 				$t_user_name = string_attribute( $row['realname'] );
-				if ( ON == config_get( 'sort_by_last_name') ) {
+				if ( $t_sort_by_last_name ) {
 					$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
-					$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
+					$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 				} else {
 					$t_sort_name = strtolower( $t_user_name );
 				}
