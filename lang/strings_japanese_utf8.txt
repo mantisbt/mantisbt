@@ -6,15 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
-	###########################################################################
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:44 $
+	# $Date: 2005-05-30 23:54:46 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.24 2005-04-21 06:52:44 bigbadger Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.25 2005-05-30 23:54:46 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,9 +30,9 @@ $s_actiongroup_menu_resolve = '実装済';
 $s_actiongroup_menu_update_priority = '重要度更新';
 $s_actiongroup_menu_update_status = 'ステータス更新';
 $s_actiongroup_menu_update_view_status = '閲覧ステータスを更新';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_category = 'カテゴリ更新';
+$s_actiongroup_menu_set_sticky = 'Stickyの設定/解除';
+$s_actiongroup_menu_update_field = '%sの更新';
 $s_actiongroup_bugs = '選択された改善要求';
 
 # new strings:
@@ -57,8 +56,8 @@ $s_jump = 'ID 指定';
 $s_copy_users = 'ユーザーのコピー';
 $s_copy_categories_from = 'カテゴリコピー元';
 $s_copy_categories_to = 'カテゴリコピー先';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'ユーザーのコピー元';
+$s_copy_users_to = 'ユーザーのコピー先';
 $s_bug_history = '履歴';
 $s_field = '項目';
 $s_old_value = '古い値';
@@ -106,7 +105,7 @@ $s_login_link = 'ログイン';
 $s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
 $s_bug_actiongroup_access = 'そのアクションを行なう適切な許可がありませんでした。';
 $s_bug_actiongroup_status = 'この改善要求は要求されたステータスに変更することができません。';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'この改善要求のカテゴリに変更できません。';
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
 $s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
@@ -116,8 +115,8 @@ $s_resolve_bugs_conf_msg = '分析状況を選択して下さい。';
 $s_priority_bugs_conf_msg = '重要度を選択して下さい。';
 $s_status_bugs_conf_msg = 'ステータスを選択して下さい。';
 $s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_category_bugs_conf_msg = '改善要求のカテゴリを選択してください。';
+$s_set_sticky_bugs_conf_msg = '改善要求にStickyを設定/解除してよろしいですか。';
 $s_close_group_bugs_button = '改善要求の完了';
 $s_delete_group_bugs_button = '改善要求の削除' ;
 $s_move_group_bugs_button = '改善要求の移動';
@@ -126,9 +125,9 @@ $s_assign_group_bugs_button = '改善要求の割り当て';
 $s_resolve_group_bugs_button = '改善要求の実装';
 $s_priority_group_bugs_button = '重要度の更新' ;
 $s_status_group_bugs_button = 'ステータスの更新' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'カテゴリの更新';
 $s_view_status_group_bugs_button = '閲覧ステータス更新';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Stickyの設定/解除';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'ステータスによるグラフ';
@@ -151,13 +150,13 @@ $s_severity_link = '重要度別';
 $s_category_link = 'カテゴリ別';
 $s_resolution_link = '分析状況別';
 $s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
-$s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
+$s_legend_resolved = '解決済';
+$s_legend_assigned = '割当済';
+$s_legend_total = '合計';
+$s_legend_opened = '未完了';
+$s_legend_closed = '完了';
+$s_legend_reported = '登録済';
+$s_cumulative = '累積';
 $s_not_enough_data = '十分なデータがないので、グラフを作成できません。';
 
 # print_all_bug_page.php : display selected bugs
@@ -186,9 +185,9 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'プロジェクトは既に登録さ�
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必須フィールド「%s」が入力されていません。入力を確認して下さい。';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '権限がありません。アクセスする為には、権限を上げて下さい。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'アクセスが拒否されました。';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。管理者にこの問題をデバッグするために admin_check スクリプトを実行するよう依頼して下さい。';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。ファイルを読めません。プロジェクト管理を確認してください。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認して下さい。';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータがありません。';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータ「%s」がありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択して下さい。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='設定項目「%s」がありません。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='文字列「%s」がありません。';
@@ -196,31 +195,31 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません。';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'データベースの項目「%s」がありません。';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTP サーバに接続できません。';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '妥当な権限を持っていないので、このステータスの改善要求を取り扱うことはできません。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力して下さい。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'プロジェクト名が無効です。プロジェクト名はブランクではいけません。';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ユーザーがありません。';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ブラウザから送信されたログイン情報は無効です。おそらく、あなたのアカウントは削除されています。';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ユーザーの表示設定がありません。';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ユーザーの選択情報がありません。';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'ニュースがありません。';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='パスワードが一致しません。';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '配列を期待しましたが、文字列を取得しました。';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='文字列を期待しましたが、配列を取得しました。';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '「%s」で、配列を期待しましたが文字列を取得しました。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='「%s」で、文字列を期待しましたが、配列を取得しました。';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '「%s」は、数値である必要があります。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '改善要求はありません。';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無効なメールアドレスです。';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'このファイル種別はアップロードできません。';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ファイルが重複しています。まず、ファイルを削除して下さい。';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '無効なアップロードパスです。ディレクトリが存在しないか書き込みできません。';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ファイルがアップロードされませんでした。戻って、 アップロードボタンを押下する前にファイルを選択してください。';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'アップロードしたファイルを所定のディレクトリに移動できませんでした。ディレクトリが存在しないか、Webサーバが書き込めないかいずれかです。';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '重複している ID に当該改善要求を設定できません。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'カスタム項目がありません。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'カスタム項目名が重複しています。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '少なくとも 1 つのプロジェクトがこのカスタム項目を使用しています。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '無効な値です。';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'スタム項目定義が無効です。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'カスタム項目定義が無効です。';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 認証に失敗しました。';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'LDAP サーバとの接続に失敗しました。';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP レコードの更新に失敗しました。';
@@ -232,31 +231,31 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'カテゴリが重複しています�
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'コピー元、コピー先が指定されていません。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'カテゴリがありません。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'バージョンが重複しています。';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョンがありません。';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョン \'%s\' がありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ユーザー名が無効です。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ユーザーが必要なアクセス権限を持っていません。';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '選ばれた「本名」はもう一人のユーザのログイン名と一致します。別のものを選んでください。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '後援機能が有効ではありません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '後援 %d が見つかりません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '後援(%s)は 最低額(%s)以下です。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ハンドラーは、後援済みの改善要求を扱うために必要なアクセスレベルを持っていません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '担当者は、後援済みの改善要求を扱うために必要なアクセスレベルを持っていません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 改善要求への後援の割り当てにはより高いアクセスレベルを要求します。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーは電子メールアドレスを提供していません。プロフィールを更新してください。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーはメールアドレスを提供していません。プロフィールを更新してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "後援が見つかりません。";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルを要求します。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルが必要です。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付け出来ません。";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'ハッシュ確認が一致しません。再度お願いします。';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'コードが一致しません。再度お願いします。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'パスワード紛失\' 機能は有効ではありません。';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'パスワードをリセットするために，電子メールアドレスを入力しなければなりません。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'パスワードをリセットするために，メールアドレスを入力しなければなりません。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '入力された情報は登録済みアカウントと一致しません!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。もう一度サインアップしてください。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '最大回数のリクエストを実行しました。システム管理者に連絡してください。';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
-
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'サブプロジェクトでループになってしまいます。';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'システム管理者のアクセスレベルは変更できません。';
+ 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
@@ -268,13 +267,13 @@ $s_proceed = '次へ';
 $s_switch = '変更';
 $s_logged_in_as = 'ユーザー名';
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = 'ユーザー';
 
 $s_administrator = '管理者';
 $s_myself = '自身';
 $s_default_access_level = 'デフォルトのアクセス権';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = '改善要求の割合(ステータス)';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者';
@@ -283,28 +282,28 @@ $s_project_view_state_enum_string = '10:公開,50:非公開';
 $s_view_state_enum_string = '10:公開,50:非公開';
 
 $s_priority_enum_string = '10:未定,20:低,30:中,40:高,50:緊急,60:即時';
-$s_severity_enum_string = '10:機能,20:重要ではない,30:表示,40:微調整,50:マイナー,60:メジャー,70:クラッシュ,80:システム停止';
+$s_severity_enum_string = '10:機能,20:些細な,30:表示,40:微調整,50:マイナー,60:メジャー,70:クラッシュ,80:システム停止';
 $s_reproducibility_enum_string = '10:毎回,30:時々,50:不定,70:未試験,90:再現不可,100:不明';
 $s_status_enum_string = '10:新規,20:要追加情報,30:内容確認済,40:再現済,50:担当者決定,80:解決済,90:完了';
 $s_resolution_enum_string = '10:不明,20:実装済,30:差戻し,40:再現不可,50:修正不可,60:二重登録,70:改善要求ではない,80:保留,90:後回し';
 $s_projection_enum_string = '10:未定,30:些細な修正,50:小さな修正,70:大きな修正,90:再設計';
-$s_eta_enum_string = '10:即時,20:1日以内,30:2〜3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
+$s_eta_enum_string = '10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
 
 # Email Strings
 $s_new_account_subject = 'アカウント登録';
 $s_new_account_greeting = '登録ありがとう。あなたのアカウントはユーザー名「';
-$s_new_account_greeting2 = "」です。\nあなたは登録を終えて、次のURL(1行になっているか確認してください)に訪れ、\n自分のアクセスパスワードを設定してください:";
+$s_new_account_greeting2 = '」です。\n登録を終了して、次のURL(1行になっているか確認してください)で、\n自分のアクセスパスワードを設定してください:';
 $s_new_account_username = 'ユーザー名:';
 $s_new_account_message = 'いかなる登録要請も、このメッセージを無視することで、何も発生しません。' . "\n\n";
 $s_new_account_do_not_reply = 'このメッセージに返信しないでください。';
-$s_new_account_email = '電子メール: ';
+$s_new_account_email = 'メール: ';
 $s_new_account_IP = 'リモート IP アドレス: ';
 $s_new_account_signup_msg = '次のアカウントが作成されました:';
 
-$s_reset_request_msg = '誰か(推測上あなた)が電子メール立証を通じてパスワード変更を要求しました。これがあなたでなかった場合は、このメッセージを無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するために次のURLを訪てください:';
-$s_reset_request_in_progress_msg = 'もしあなたが正確なユーザー名と電子メールアドレスを入力した場合、私たちは今すぐ、その電子メールアドレスへ確認メッセージを送るでしょう。一通のメッセージが受け取られたならば、あなたのアカウント上のパスワードを変更するための提供されたリンクに従ってください。';
+$s_reset_request_msg = '誰か(たぶん、あなた)がメールによる認証でパスワード変更を要求しました。これがあなたでなかった場合は、このメッセージを無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するために次のURLを参照してください:';
+$s_reset_request_in_progress_msg = 'もしあなたが正確なユーザー名とメールアドレスを入力した場合、今すぐ、そのメールアドレスに確認メッセージを送ります。メッセージが受け取ったら、指示に従ってあなたのアカウントのパスワードを変更してください。';
 
-$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_new = '次の改善要求が再び要求されました。';
 $s_email_notification_title_for_status_bug_feedback = '次の改善要求について、もっと情報が必要です。';
 $s_email_notification_title_for_status_bug_acknowledged = '次の改善要求の内容が確認されました。';
 $s_email_notification_title_for_status_bug_confirmed = '次の改善要求の再現を確認しました。';
@@ -362,11 +361,11 @@ $s_delete_account_button = 'アカウントの削除';
 
 # account_page.php
 $s_manage_profiles_link = 'プロフィール';
-$s_change_preferences_link = '表示設定';
+$s_change_preferences_link = '選択';
 $s_edit_account_title = 'アカウントの編集';
 $s_username = 'ユーザー名';
 $s_realname = '本名';
-$s_email = '電子メール';
+$s_email = 'メール';
 $s_password = 'パスワード';
 $s_no_password_change = 'パスワードは他のシステムで管理されていますので、ここでは編集できません。';
 $s_confirm_password  = 'パスワード(確認)';
@@ -374,7 +373,7 @@ $s_access_level = 'アクセス権';
 $s_update_user_button = '更新';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = '表示設定';
+$s_default_account_preferences_title = '選択';
 $s_default_project = 'デフォルトプロジェクト';
 $s_advanced_report = '高度な改善要求';
 $s_advanced_view = '高度な表示';
@@ -386,7 +385,7 @@ $s_bugnote_order = 'コメントソート順序';
 $s_bugnote_order_asc = '昇順';
 $s_bugnote_order_desc = '降順';
 $s_email_on_new = '新規改善要求通知メール';
-$s_email_on_assigned = '担当者決定通知メール';
+$s_email_on_assigned = '担当者変更通知メール';
 $s_email_on_feedback = 'フィードバック通知メール';
 $s_email_on_resolved = '実装通知メール';
 $s_email_on_closed = '完了通知メール';
@@ -394,7 +393,7 @@ $s_email_on_reopened = '差戻し通知メール';
 $s_email_on_bugnote_added = 'コメント追加通知メール';
 $s_email_on_status_change = 'ステータス変更通知メール';
 $s_email_on_priority_change = '優先度変更通知メール';
-$s_email_bugnote_limit = 'コメントの電子メール制限';
+$s_email_bugnote_limit = 'コメントのメール制限';
 $s_language = '言語';
 $s_update_prefs_button = '更新';
 $s_reset_prefs_button = 'リセット';
@@ -448,12 +447,12 @@ $s_bug_assign_msg       = '改善要求が担当者に割り当てられまし�
 
 # bug_change_status_page.php
 $s_new_bug_title = '新規改善要求';
-$s_feedback_bug_title = '改善要求へフィードバックを提供';
+$s_feedback_bug_title = '改善要求へのフィードバックを要求';
 $s_acknowledged_bug_title = '改善要求承認';
 $s_confirmed_bug_title = '改善要求確認';
 $s_assigned_bug_title = '改善要求割り当て';
 $s_new_bug_button = '新規改善要求';
-$s_feedback_bug_button = 'フィードバック提供';
+$s_feedback_bug_button = 'フィードバック要求';
 $s_acknowledged_bug_button = '改善要求承認';
 $s_confirmed_bug_button = '改善要求確認';
 $s_assigned_bug_button = '改善要求割り当て';
@@ -594,13 +593,13 @@ $s_select_project_button = '選択';
 # logout_page.php
 $s_logged_out_title = 'ログアウト中...';
 $s_redirecting = '...次のページ→';
-$s_here = 'Here';
+$s_here = 'ここ';
 
 # lost_pwd_page.php
 $s_lost_password_title = "パスワードリセット";
 $s_lost_password_done_title = "パスワードのメッセージを送信しました。";
 $s_lost_password_subject = "パスワードリセット";
-$s_lost_password_info = "なくしたパスワードを元に戻すために、アカウントの名前および電子メールアドレスを入力してください。<br /><br />データが有効なアカウントに相当すれば、特別なURLを、アカウントのための確認コードを含む電子メールで送ります。そのリンクに従って、あなたのパスワードを変更してください。";
+$s_lost_password_info = "忘れたパスワードを元に戻すために、アカウントの名前とメールアドレスを入力してください。<br /><br />有効なアカウントであれば、アカウントの妥当性を確かめるコードを含むURLをメールであなたに送ります。そのリンクに従って、パスワードを変更してください。";
 $s_lost_password_confirm_hash_OK = "あなたの確認は受理されました。パスワードを更新してください。";
 
 # main_page.php
@@ -628,12 +627,12 @@ $s_filter_button = '表示';
 $s_manage_users_link = 'ユーザー管理';
 $s_manage_projects_link = 'プロジェクト管理';
 $s_manage_custom_field_link = 'カスタム項目管理';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
+$s_manage_global_profiles_link = 'グローバルプロフィール管理';
 $s_permissions_summary_report = '権限一覧';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_config_link = '設定管理';
+$s_manage_threshold_config = 'ワークフロー閾値';
+$s_manage_email_config = '通知メール';
+$s_manage_workflow_config = 'ワークフロー遷移';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = 'ドキュメント';
@@ -649,53 +648,53 @@ $s_last_visit = '最終訪問日時';
 $s_edit_user_link = 'ユーザー編集';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
+$s_config_all_projects = '注意: これらの設定は、全てのプロジェクトに適用されます。';
+$s_config_project = '注意: これらの設定は、%s プロジェクトにのみ適用されます。';
+$s_issue_reporter = '改善要求を登録したユーザー';
+$s_issue_handler = '改善要求を担当するユーザー';
+$s_users_added_bugnote = 'コメントを登録したユーザー';
+$s_change_configuration = '設定更新';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = '通知メールのデフォルトを変更可能なユーザー';
+$s_notify_actions_change_access = '通知メールの設定を変更可能なユーザー';
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
+$s_current_status = '現在のステータス';
+$s_next_status = '次のステータス';
+$s_workflow = 'ワークフロー';
+$s_workflow_thresholds = 'ワークフローに影響を及ぼす閾値';
+$s_threshold = '閾値';
+$s_status_level = 'ステータス';
+$s_alter_level = 'この値を変更可能なアクセス権限';
+$s_validation = 'ワークフローの確認';
+$s_comment = 'コメント';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_unreachable = '改善要求をこのステータスに変更できません。';
+$s_no_exit = '改善要求をこのステータスから変更できません。';
+$s_access_levels = 'アクセス権限';
+$s_access_change = 'このステータスに変更するのに必要なアクセス権限';
+$s_desc_bug_submit_status = '新規改善要求に設定するステータス';
+$s_desc_bug_reopen_status = '差し戻された改善要求に設定するステータス';
+$s_desc_bug_resolved_status_threshold = '改善要求を解決済みとするステータス';
+$s_workflow_change_access = 'ワークフローの変更が可能なユーザー';
+$s_access_change_access = 'アクセス権限の変更が可能なユーザー';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = '改善要求の割当て';
+$s_allow_close_immediate = '解決済時に完了への変更を許可する';
+$s_allow_reporter_close = 'レポータ(登録)の完了への変更を許可する';
+$s_allow_reporter_reopen = 'レポータ(登録)に差戻しを許可する';
+$s_set_status_assigned = '担当者割り当て時にステータスを設定する';
+$s_allow_user_edit = '自身のコメントの編集を許可する';
+$s_limit_access = 'レポータ(登録)自身の改善要求へのアクセスを制限する';
+$s_submit_status = '新規の改善要求に設定するステータス';
+$s_assigned_status = '割当てられた改善要求に設定するステータス';
+$s_resolved_status = '解決済とするステータス';
+$s_readonly_status = '編集不可にするステータス';
+$s_reopen_status = '差戻しされた改善要求に設定するステータス';
+$s_reopen_resolution = '差戻された改善要求に設定する解決状況';
 
 # manage_proj_add.php
 $s_project_added_msg = 'プロジェクトが追加されました。';
@@ -718,7 +717,7 @@ $s_update_category_button = '更新';
 $s_category_updated_msg = 'カテゴリが更新されました。';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'サブプロジェクトの追加';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'プロジェクトが削除されました。';
@@ -746,10 +745,10 @@ $s_actions = '操作';
 $s_version = 'バージョン/ビルド';
 $s_timestamp = 'タイムスタンプ';
 $s_update = '更新';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'サブプロジェクト';
+$s_add_subproject = 'サブプロジェクトとして追加';
+$s_create_new_subproject_link = '新規サブプロジェクトの追加';
+$s_unlink_link = '解除';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'プロジェクト追加';
@@ -774,7 +773,7 @@ $s_delete_version_button = '削除';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'プロジェクトバージョンの編集';
 $s_update_version_button = '更新';
-$s_released = 'Released';
+$s_released = 'リリース';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'バージョンが更新されました。';
@@ -795,14 +794,14 @@ $s_confirm_account_pruning = 'ログインされたことのない古いアカ�
 $s_edit_user_title = 'ユーザー情報の編集';
 $s_reset_password_button = 'パスワードのリセット';
 $s_delete_user_button = 'アカウント削除';
-$s_reset_password_msg = 'リセットされたパスワードは、電子メールで確認URLを送ります。';
-$s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードが無しに設定されます。';
+$s_reset_password_msg = 'リセットされたパスワードは、メールで確認URLを送ります。';
+$s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードは未設定になります。';
 $s_show_all_users = '全て';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
-$s_account_reset_msg = '確認メッセージはあなたの電子メールアドレスへ送られました...';
-$s_account_reset_msg2 = 'パスワードが無しに設定されました。';
+$s_account_reset_msg = 'ユーザーのメールアドレスに、確認のメールを送付しました。メールの指示に従うと、当該ユーザーはパスワードを変更できます。';
+$s_account_reset_msg2 = 'パスワードが未設定になりました。';
 
 # manage_user_update.php
 $s_manage_user_protected_msg = 'アカウントが保護されています。アクセス権と有効/無効の設定は変更できません。その他の情報は更新されます。';
@@ -898,12 +897,12 @@ $s_project_removed_user_msg = 'プロジェクトからユーザーを削除し�
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'ユーザーをプロジェクトから削除しますか?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_button = 'ユーザーの削除';
+$s_remove_all_users_sure_msg = 'このプロジェクトからすべてのユーザーを削除してよろしいですか？';
+$s_remove_all_users_button = 'ユーザー全員削除';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'プロジェクトへのユーザーを追加';
+$s_add_user_title = 'プロジェクトにユーザーを追加';
 $s_add_user_button = '追加';
 $s_project_selection_title = 'プロジェクトを選択';
 $s_remove_link = 'プロジェクトから削除';
@@ -944,12 +943,12 @@ $s_valid_project_msg = 'プロジェクトを正しく選択して下さい。';
 
 # signup.php
 $s_signup_done_title = 'アカウント登録を処理しました。';
-$s_password_emailed_msg = 'おめでとうございます。登録に成功しました。電子メールアドレスを確認するために、ただいま電子メールを送信しています。このメールに含まれるリンクにアクセスすることで、あなたのアカウントは有効化されるでしょう。';
-$s_no_reponse_msg = 'アカウント確認処理の終了まで 7 日間待ちます。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。';
+$s_password_emailed_msg = 'おめでとうございます。登録に成功しました。メールアドレスを確認するために、ただいまメールを送信しています。このメールに含まれるリンクにアクセスすることで、あなたのアカウントは有効化されます。';
+$s_no_reponse_msg = 'アカウント確認処理の終了まで 7 日間待ちます。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去される場合があります。';
 
 # signup_page.php
 $s_signup_captcha_request = '右側上の箱の中で表示されたコードを入力します。';
-$s_signup_info = 'このフォームの完成および回答の確認は、指定した電子メールアドレスへ確認電子メールが送られるでしょう。<br />確認メールを用いることであなたのアカウントは有効になります。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。<br />アカウント確認電子メールを受け取るために有効な電子メールアドレスを指定しなければなりません。';
+$s_signup_info = 'このフォームに入力し、確認をするとすぐに、指定したメールアドレスに確認のメールが送られます。<br />確認メールに従うと、あなたのアカウントは有効になります。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは削除される場合があります。<br />アカウント確認メールを受け取るために有効なメールアドレスを指定しなければなりません。';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = '登録';
 $s_no_password_request = 'パスワードは他のシステムで管理されています。システム管理者に確認してください。';
@@ -1000,11 +999,11 @@ $s_show = '表示数';
 $s_changed = '変更(時間)';
 $s_viewing_bugs_title = '改善要求一覧';
 $s_updated = '最終更新日時';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Stickyを設定した改善要求の表示';
+$s_sort = 'ソート順';
 
 # view_all_inc.php
-$s_none = '無し';
+$s_none = 'なし';
 $s_search ='検索';
 $s_view_prev_link = '↑';
 $s_view_next_link = '↓';
@@ -1014,7 +1013,7 @@ $s_first = '先頭';
 $s_last = '最終';
 $s_start_date = '開始日';
 $s_end_date = '終了日';
-$s_use_date_filters = 'フィルターデータを使う';
+$s_use_date_filters = '日付フィルターを使う';
 $s_yes = 'はい';
 $s_no = 'いいえ';
 $s_open_filters = 'フィルター変更';
@@ -1047,7 +1046,7 @@ $s_bug_status_to_button = 'ステータス変更:';
 $s_reopen_bug_button = '差戻し';
 $s_move_bug_button = '改善要求の移動';
 $s_attached_files = '添付ファイル';
-$s_publish = 'Publish';
+$s_publish = '公開';
 $s_cached = 'Cached';
 
 # view_bug_inc.php
@@ -1086,25 +1085,25 @@ $s_custom_field_access_level_r = '読み取り権限';
 $s_custom_field_access_level_rw = '読み書き権限';
 $s_custom_field_length_min = '項目長(最小値)';
 $s_custom_field_length_max = '項目長(最大値)';
-$s_custom_field_advanced = '高度な画面で表示';
-$s_custom_field_display_report = 'いつ問題改善を報告したか表示';
-$s_custom_field_display_update = 'いつ問題改善を更新したか表示';
-$s_custom_field_display_resolved = '改善要求を解決する場合表示';
-$s_custom_field_display_closed = '改善要求を閉じる場合表示';
-$s_custom_field_require_report = 'レポートで要求';
-$s_custom_field_require_update = '更新で要求';
-$s_custom_field_require_resolved = '解決で要求';
-$s_custom_field_require_closed = 'クローズで要求';
+$s_custom_field_advanced = '高度な画面でのみ表示';
+$s_custom_field_display_report = '登録時に表示';
+$s_custom_field_display_update = '更新時に表示';
+$s_custom_field_display_resolved = '解決時に表示';
+$s_custom_field_display_closed = '完了時に表示';
+$s_custom_field_require_report = '登録時は必須';
+$s_custom_field_require_update = '更新時は必須';
+$s_custom_field_require_resolved = '解決時は必須';
+$s_custom_field_require_closed = '完了時は必須';
 
 $s_custom_field_sequence = '表示順';
-$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:チェックボックス,6:リスト,7:複数選択リスト,8:Date';
+$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:チェックボックス,6:リスト,7:複数選択リスト,8:日付';
 
-$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
+$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br>もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br>削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
 $s_field_delete_button = '項目の削除';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'このカスタム項目をプロジェクトから削除して値を削除してよろしいですか。';
+$s_field_remove_button = '項目の削除';
 
 $s_hide_status = '非表示にするステータス';
 $s_filter_closed = '完了';
@@ -1146,7 +1145,7 @@ $s_add_new_relationship_button = "追加";
 $s_this_bug = "現在の改善要求の";
 $s_relationship_added = "関連を追加しました。";
 $s_relationship_deleted = "関連を削除しました。";
-$s_no_relationship = "関連無し";
+$s_no_relationship = "関連なし";
 $s_relationship_replaced = "関連を差替えました。";
 $s_replace_relationship_button = "差替え";
 $s_replace_relationship_sure_msg = "既に当該改善要求間に関連が設定されています。差し替えてもよろしいですか。?";
@@ -1165,7 +1164,7 @@ $s_relation_graph = "関連グラフ";
 $s_dependency_graph = "依存グラフ";
 $s_vertical = "縦";
 $s_horizontal = "横";
-$s_view_issue = "改善要求を見る";
+$s_view_issue = "改善要求参照";
 
 # Source Control Integration
 $s_checkin = 'チェックイン';
@@ -1182,7 +1181,7 @@ $s_move_issue = '改善要求の移動';
 $s_delete_issue = '改善要求の削除';
 $s_reopen_issue = '改善要求の差戻し';
 $s_view_private_issues = '非公開改善要求の参照';
-$s_update_readonly_issues = '改善要求(リードオンリー)の更新';
+$s_update_readonly_issues = '改善要求(編集不可)の更新';
 $s_update_issue_status = '改善要求のステータス変更';
 $s_set_view_status = '外部からの参照を設定 (公開 vs 非公開)';
 $s_update_view_status = '外部からの参照を更新 (公開 vs 非公開)';
@@ -1198,8 +1197,8 @@ $s_manage_news = 'ニュースの管理';
 $s_view_list_of_attachments = '添付一覧の参照';
 $s_download_attachments = '添付のダウンロード';
 $s_delete_attachments = '添付の削除';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = "削除";
+$s_delete_attachment_sure_msg = "添付を削除してよろしいですか。";
 $s_upload_issue_attachments = '添付のアップロード';
 $s_filters = 'フィルター';
 $s_save_filters = 'フィルターの保存';
@@ -1232,14 +1231,14 @@ $s_email_on_sponsorship_changed = '後援の変更通知メール';
 $s_email_on_relationship_changed = '関連の変更通知メール';
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'ロード中...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
+$s_between = '期間' ;
+$s_on_or_before = '以前(当該日を含む)' ;
+$s_before = 'より前(当該日を含まない)' ;
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_after = 'より後(当該日を含まない)' ;
+$s_on_or_after = '以降(当該日を含む)' ;
 
 ?>
