@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.11 2005-05-18 01:56:45 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.12 2005-05-30 14:23:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -311,7 +311,8 @@
 	echo '<br /><br />';
 
 	# count arcs in and out of each status
-	$t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
+	$t_enum_status = config_get( 'status_enum_string' );
+	$t_status_arr  = get_enum_to_array( $t_enum_status );
 
 	$t_extra_enum_status = '0:non-existent,' . $t_enum_status;
 	$t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'status_enum_string' );
