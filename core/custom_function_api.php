@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.21 2005-05-24 23:22:47 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.22 2005-05-31 11:30:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -306,6 +306,8 @@
 			} else {
 				if ( isset( $p_issue_row[$p_column] ) ) {
 					echo $t_column_start . $p_issue_row[$p_column] . $t_column_end;
+				} else {
+					echo $t_column_start . '@' . $p_column . '@' . $t_column_end;
 				}
 			}
 		}
