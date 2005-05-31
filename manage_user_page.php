@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.58 2005-05-16 12:56:06 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.59 2005-05-31 11:13:20 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,6 +80,8 @@
 		ORDER BY date_created DESC";
 	$result = db_query( $query );
 	$new_user_count = db_num_rows( $result );
+
+	if ( $new_user_count > 0 ) {
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -104,7 +106,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 </table>
-<?php # New Accounts Form END ?>
+<?php } # New Accounts Form END ?>
 
 <?php # Never Logged In Form BEGIN ?>
 <?php
@@ -114,6 +116,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 		ORDER BY date_created DESC";
 	$result = db_query( $query );
 	$user_count = db_num_rows( $result );
+
+	if ( $user_count > 0 ) {
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -138,7 +142,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 </table>
-<?php # Never Logged In Form END ?>
+<?php } # Never Logged In Form END ?>
 
 <?php # Manage Form BEGIN ?>
 <?php
