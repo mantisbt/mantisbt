@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.6 2005-05-24 23:22:47 vboctor Exp $
+	# $Id: csv_api.php,v 1.7 2005-05-31 13:04:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -83,7 +83,9 @@
 	# --------------------
 	# returns the handler name corresponding to the supplied id
 	function csv_format_handler_id( $p_handler_id ) {
-		return csv_escape_string( user_get_name( $p_handler_id ) );
+		if ( $p_handler_id > 0 ) {
+			return csv_escape_string( user_get_name( $p_handler_id ) );
+		}
 	}
 
 	# --------------------

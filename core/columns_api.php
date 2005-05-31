@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.8 2005-05-24 23:22:46 vboctor Exp $
+	# $Id: columns_api.php,v 1.9 2005-05-31 13:04:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -524,6 +524,24 @@
 		  && $p_row['handler_id'] > 0 ) {
 			printf( ' (%s)', prepare_user_name( $p_row['handler_id'] ) );
 		}
+		echo '</td>';
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		echo '<td class="center">';
+		if ( $p_row['handler_id'] > 0 ) {
+			echo prepare_user_name( $p_row['handler_id'] );
+		}
+		echo '</td>';
+	}
+	
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_reporter_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		echo '<td class="center">';
+		echo prepare_user_name( $p_row['reporter_id'] );
 		echo '</td>';
 	}
 
