@@ -35,6 +35,7 @@ Mantis ChangeLog
 - 0005572: [filters] +/- button to show/hide filters doesn't work with IE5.5 (thraxisp)
 - 0005598: [filters] Add filter for profile (jlatour)
 - 0005599: [filters] Version filters do not show versions in subprojects (jlatour)
+- 0005675: [filters] [none] in filters is interpreted as [any] (thraxisp)
 - 0005533: [installation] Problem Downloading The Uploaded Documents (thraxisp)
 - 0005503: [localization] Updated language dutch file for 1.0.0a2 (Wanderer)
 - 0005519: [localization] Missing localization in manage_config_email_page.php (thraxisp)
