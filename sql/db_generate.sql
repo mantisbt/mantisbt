@@ -136,7 +136,9 @@ CREATE TABLE mantis_bug_table (
   sticky tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id),
   KEY sponsorship_total (sponsorship_total),
-  KEY fixed_in_version (fixed_in_version)
+  KEY `fixed_in_version` (`fixed_in_version`),
+  KEY `status` (`status`),
+  KEY `project_id` (`project_id`)
 ) TYPE=MyISAM;
 
 -- 
@@ -180,7 +182,8 @@ CREATE TABLE mantis_bugnote_table (
   note_type int(7) default '0',
   note_attr varchar(250) default '',
   PRIMARY KEY  (id),
-  KEY bug_id (bug_id)
+  KEY bug_id (bug_id),
+  KEY `last_modified` (`last_modified`)
 ) TYPE=MyISAM;
 
 -- 
@@ -396,7 +399,8 @@ CREATE TABLE mantis_project_file_table (
 
 CREATE TABLE mantis_project_hierarchy_table (
   child_id int(10) unsigned NOT NULL default '0',
-  parent_id int(10) unsigned NOT NULL default '0'
+  parent_id int(10) unsigned NOT NULL default '0',
+  KEY `child_id` (`child_id`)
 ) TYPE=MyISAM;
 
 -- 
@@ -421,7 +425,8 @@ CREATE TABLE mantis_project_table (
   description text NOT NULL,
   PRIMARY KEY  (id),
   UNIQUE KEY name (name),
-  KEY id (id)
+  KEY id (id),
+  KEY `view_state` (`view_state`)
 ) TYPE=MyISAM;
 
 -- 
@@ -439,7 +444,8 @@ CREATE TABLE mantis_project_user_list_table (
   project_id int(7) unsigned NOT NULL default '0',
   user_id int(7) unsigned NOT NULL default '0',
   access_level int(2) NOT NULL default '10',
-  PRIMARY KEY  (project_id,user_id)
+  PRIMARY KEY  (project_id,user_id),
+  KEY `user_id` (`user_id`)
 ) TYPE=MyISAM;
 
 -- 
@@ -837,6 +843,14 @@ INSERT INTO mantis_upgrade_table VALUES ('configdb-pk', 'Add mantis_config_table
 INSERT INTO mantis_upgrade_table VALUES ('config-key1', 'make mantis_config_table keys not null');
 INSERT INTO mantis_upgrade_table VALUES ('config-key2', 'make mantis_config_table keys not null');
 INSERT INTO mantis_upgrade_table VALUES ('note_bug_id_index', 'Add index on bug_id in bugnotes table');
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("project_child_index","Add index on child_id in project heirarchy table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("bug_status_index","Add index on status in bug table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("bug_project_index","Add index on project_id in bug table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("note_updated_index","Add index on last_modified in bugnotes table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("project_vs_index","Add index on view_state in project table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("project_uid_index","Add index on user_id in project_user table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("user_enabled_index","Add index on enabled in user table");
+INSERT INTO `mantis_upgrade_table` (`upgrade_id`,`description`) VALUES ("user_access_index","Add index on access_level in user table");
 
 -- --------------------------------------------------------
 
@@ -945,7 +959,9 @@ CREATE TABLE mantis_user_table (
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
   UNIQUE KEY cookie_string (cookie_string),
-  UNIQUE KEY username (username)
+  UNIQUE KEY username (username),
+  KEY `enabled` (`enabled`),
+  KEY `access_level` (`access_level`)
 ) TYPE=MyISAM;
 
 -- 
