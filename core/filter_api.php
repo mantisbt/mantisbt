@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.110 2005-05-26 12:44:01 thraxisp Exp $
+	# $Id: filter_api.php,v 1.111 2005-05-31 13:34:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2291,10 +2291,10 @@
 			$p_filter_arr['search'] = '';
 		}
 		if ( !isset( $p_filter_arr['and_not_assigned'] ) ) {
-			$p_filter_arr['and_not_assigned'] = gpc_get_bool( 'and_not_assigned' );
+			$p_filter_arr['and_not_assigned'] = gpc_get_bool( 'and_not_assigned', false );
 		}
 		if ( !isset( $p_filter_arr['do_filter_by_date'] ) ) {
-			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date' );
+			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date', false );
 		}
 		if ( !isset( $p_filter_arr['view_state'] ) ) {
 			$p_filter_arr['view_state'] = gpc_get_int( 'view_state', '' );
@@ -2340,7 +2340,7 @@
 				} else if ( 'custom_fields' == $t_multi_field_name ) {
 					$p_filter_arr[$t_multi_field_name] = array( $f_custom_fields_data );
 				} else {
-					$p_filter_arr[$t_multi_field_name] = array( "[any]" );
+					$p_filter_arr[$t_multi_field_name] = array( META_FILTER_ANY );
 				}
 			} else {
 				if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
@@ -2349,7 +2349,7 @@
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
-					if ( ( 5 <= $t_cookie_vers ) && ( ( $t_filter_value == 'any' ) || ( $t_filter_value == 0 ) ) ) {
+					if ( ( 5 <= $t_cookie_vers ) && ( ( $t_filter_value == 'any' ) || ( is_numeric($t_filter_value) && $t_filter_value == 0 ) ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
 					if ( 'string' == $t_multi_field_type ) {
