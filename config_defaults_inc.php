@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.265 2005-05-24 17:35:02 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.266 2005-05-31 13:34:37 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -312,7 +312,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.0.0a3-CVS';
+	$g_mantis_version		= '1.0.0a3';
 	$g_show_version			= ON;
 
 	################################
@@ -546,11 +546,11 @@
 	# look in constant_inc.php for values
 	$g_default_new_account_access_level	= REPORTER;
 
-        # Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
-        $g_default_bug_view_status = VS_PUBLIC;
+	# Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
+	$g_default_bug_view_status = VS_PUBLIC;
 
-        # Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
-        $g_default_bugnote_view_status = VS_PUBLIC;
+	# Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
+	$g_default_bugnote_view_status = VS_PUBLIC;
 
 	# Default bug severity when reporting a new bug
 	$g_default_bug_severity = MINOR;
@@ -762,7 +762,7 @@
 	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
 	$g_ldap_port			= '636';
 	$g_ldap_root_dn			= 'dc=example,dc=com,dc=au';
-	$g_ldap_organization		= '';    # e.g. '(organizationname=*Traffic)'
+	$g_ldap_organization	= '';    # e.g. '(organizationname=*Traffic)'
 	$g_ldap_uid_field		= 'uid'; # Use 'sAMAccountName' for Active Directory
 	$g_ldap_bind_dn			= '';
 	$g_ldap_bind_passwd		= '';
@@ -1126,7 +1126,7 @@
 	# The padding level when displaying bugnote ids
 	#  The bugnote id will be padded with 0's up to the size given
 	$g_display_bugnote_padding	= 7;
-	
+
 	# colours for configuration display
 	$g_colour_project = 'LightGreen';
 	$g_colour_global = 'LightBlue';
@@ -1290,17 +1290,17 @@
 
 	$g_custom_headers				= array();
 	#$g_custom_headers[]			= 'P3P: CP="CUR ADM"';
-	
+
 	# Browser Caching Control
 	# By default, we try to prevent the browser from caching anything. These two settings
 	# will defeat this for some cases.
-	# 
+	#
 	# Browser Page caching - This will allow the browser to cache all pages. The upside will
 	#  be better performance, but there may be cases where obsolete information is displayed.
 	#  Note that this will be bypassed (and caching is allowed) for the bug report pages.
 	# $g_allow_browser_cache = ON;
 	#
-	# File caching - This will allow the browser to cache downloaded files. Without this set, 
+	# File caching - This will allow the browser to cache downloaded files. Without this set,
 	# there may be issues with IE receiving files, and launching support programs.
 	# $g_allow_file_cache = ON;
 
@@ -1377,7 +1377,7 @@
 	#  allowing you to see the errors.
 	# Only turn this option on for debugging
 	$g_stop_on_errors		= OFF;
-	
+
 	# --- system logging ---
 	# This controls the logging of information to a separate file for debug or audit
 	# $g_log_level controls what information is logged
