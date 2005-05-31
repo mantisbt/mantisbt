@@ -84,12 +84,12 @@
 	$t_accessible_custom_fields_names = array();
 	$t_accessible_custom_fields_type = array() ;
 	$t_accessible_custom_fields_values = array();
-	$t_filter_cols = 7;
+	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 	$t_custom_cols = 1;
 	$t_custom_rows = 0;
 
 	if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-		$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
+		$t_custom_cols = $t_filter_cols;
 		$t_custom_fields = custom_field_get_ids( $t_project_id );
 
 		foreach ( $t_custom_fields as $t_cfid ) {
@@ -177,6 +177,7 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'profile' ) ?></td>
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
@@ -204,9 +205,10 @@
 		<?php print_filter_show_resolution(); ?>
 	</td>
 	<!-- Profile -->
-	<td valign="top" colspan= <?php echo ( 1 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_profile(); ?>
 	</td>
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
 </tr>
 
 <tr class="row-category2">
@@ -229,7 +231,7 @@
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
 </tr>
 <tr class="row-1">
 	<!-- Status -->
@@ -270,7 +272,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_priority(); ?>
 	</td>
-	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+	<td colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&nbsp;</td>
 </tr>
 
 <tr class="row-category2">
@@ -285,9 +287,10 @@
 				print "onclick=\"SwitchDateFields();\""; } ?> />
 		<?php echo lang_get( 'use_date_filters' ) ?>
 	</td>
-	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'bug_relationships' ) ?>
 	</td>
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
 </tr>
 <tr class="row-2">
 	<!-- Number of bugs per page -->
@@ -309,9 +312,10 @@
 	<td valign="top" class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
 	</td>
-	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
         <?php print_filter_relationship_type(); ?>
 	</td>
+	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&nbsp;</td> -->
 </tr>
 
 <?php
@@ -339,7 +343,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			}
 			?>
 			</tr>
-			<tr>
+			<tr class="row-2">
 			<?php
 			for ( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
@@ -364,17 +368,15 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
 		<?php PRINT lang_get( 'sort' ) ?>:
 	</td>
-	<td valign="top" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 ) * $t_custom_cols ); ?>">
 		<?php
 			print_filter_show_sort();
 		?>
 	</td>
-	<td valign="top" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
-	</td>
 </tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( 7 * $t_custom_cols ); ?>"></td>
+<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 1 ) * $t_custom_cols ); ?>"></td>
 </tr>
 <tr>
 	<!-- Search field -->
@@ -382,12 +384,13 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		<input type="text" size="16" name="search" value="<?php echo htmlspecialchars( $t_filter['search'] ); ?>" />
 	</td>
 
-	<td class="small-caption" colspan="<?php echo ( 5 * $t_custom_cols ); ?>"></td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 3 ) * $t_custom_cols ); ?>"></td>
 
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
 </table>
 </form>
