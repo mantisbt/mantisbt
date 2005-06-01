@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.111 2005-05-31 13:34:20 thraxisp Exp $
+	# $Id: filter_api.php,v 1.112 2005-06-01 01:38:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2429,7 +2429,7 @@
 				PRINT '<option value="' . $t_id . '" SELECTED >' . $t_display_name . '</option>';
 			} else {
 		?>
-			<option value="[any]" <?php check_selected( $t_filter['reporter_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['reporter_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2449,7 +2449,7 @@
 		?>
 	<!-- Monitored by -->
 		<select <?php PRINT $t_select_modifier;?> name="user_monitor[]">
-			<option value="[any]" <?php check_selected( $t_filter['user_monitor'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['user_monitor'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2467,8 +2467,8 @@
 		?>
 		<!-- Handler -->
 		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
-			<option value="[any]" <?php check_selected( $t_filter['handler_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['handler_id'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['handler_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['handler_id'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2486,7 +2486,7 @@
 		?>
 		<!-- Category -->
 		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
 			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
 		</select>
@@ -2497,7 +2497,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Severity -->
 			<select <?php PRINT $t_select_modifier;?> name="show_severity[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_severity'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_severity'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
 			</select>
 		<?php
@@ -2507,7 +2507,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Resolution -->
 			<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_resolution'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_resolution'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
 			</select>
 		<?php
@@ -2517,7 +2517,7 @@
 		global $t_select_modifier, $t_filter;
 		?>	<!-- Status -->
 			<select <?php PRINT $t_select_modifier;?> name="show_status[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_status'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_status'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
 			</select>
 		<?php
@@ -2527,7 +2527,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Hide Status -->
 			<select <?php PRINT $t_select_modifier;?> name="hide_status[]">
-				<option value="none">[<?php echo lang_get( 'none' ) ?>]</option>
+				<option value="<?php echo META_FILTER_NONE ?>">[<?php echo lang_get( 'none' ) ?>]</option>
 				<?php print_enum_string_option_list( 'status', $t_filter['hide_status'] ) ?>
 			</select>
 		<?php
@@ -2537,8 +2537,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Build -->
 		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_build'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_build'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_build'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['show_build'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_build_option_list( $t_filter['show_build'] ) ?>
 		</select>
 		<?php
@@ -2548,8 +2548,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Version -->
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['show_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED, false, true ) ?>
 		</select>
 		<?php
@@ -2559,8 +2559,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Fixed in Version -->
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
-			<option value="[any]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL, false, true ) ?>
 		</select>
 		<?php
@@ -2570,7 +2570,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Priority -->
     <select <?php PRINT $t_select_modifier;?> name="show_priority[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_priority'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_priority'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php print_enum_string_option_list( 'priority', $t_filter['show_priority'] ) ?>
     </select>
 		<?php
@@ -2580,7 +2580,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Profile -->
 		<select <?php PRINT $t_select_modifier;?> name="show_profile[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_profile'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_profile'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php print_profile_option_list_for_project( helper_get_current_project(), $t_filter['show_profile'] ); ?>
 		</select>
 		<?php
@@ -2598,8 +2598,8 @@
 		?><!-- View Status -->
 		<select name="view_state">
 			<?php
-			PRINT '<option value="[any]" ';
-			check_selected( $t_filter['view_state'], 'any' );
+			PRINT '<option value="' . META_FILTER_ANY . '" ';
+			check_selected( $t_filter['view_state'], META_FILTER_ANY );
 			PRINT '>[' . lang_get( 'any' ) . ']</option>';
 			PRINT '<option value="' . VS_PUBLIC . '" ';
 			check_selected( $t_filter['view_state'], VS_PUBLIC );
@@ -2730,17 +2730,17 @@
 				print_filter_custom_field_date($j, $p_field_id) ;
 			} else {
 				echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id .'[]">';
-				echo '<option value="[any]" ';
-				check_selected( $t_filter['custom_fields'][ $p_field_id ], '[any]' );
+				echo '<option value="' . META_FILTER_ANY . '" ';
+				check_selected( $t_filter['custom_fields'][ $p_field_id ], META_FILTER_ANY );
 				echo '>[' . lang_get( 'any' ) .']</option>';
 				# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 				if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
-					echo '<option value="[none]" ';
-					check_selected( $t_filter['custom_fields'][ $p_field_id ], '[none]' );
+					echo '<option value="' . META_FILTER_NONE . '" ';
+					check_selected( $t_filter['custom_fields'][ $p_field_id ], META_FILTER_NONE );
 					echo '>[' . lang_get( 'none' ) .']</option>';
 				}
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if ( ( strtolower( $t_item ) != "[any]" ) && ( strtolower( $t_item ) != "[none]" ) ) {
+					if ( ( strtolower( $t_item ) != META_FILTER_ANY ) && ( strtolower( $t_item ) != META_FILTER_NONE ) ) {
 						echo '<option value="' .  htmlentities( $t_item )  . '" ';
 						if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
 							check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
