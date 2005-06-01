@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.37 2005-05-24 23:22:47 vboctor Exp $
+	# $Id: lang_api.php,v 1.38 2005-06-01 13:19:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -218,9 +218,14 @@
 		if ( lang_exists( $p_string, $t_lang ) ) {
 			return $g_lang_strings[ $t_lang ][ $p_string];
 		} else {
-			error_parameters( $p_string );
-			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-			return '';
+			if ( $t_lang == 'english' ) {
+				error_parameters( $p_string );
+				trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
+				return '';
+			} else {
+				# if string is not found in a language other than english, then retry using the english language.
+				return lang_get( $p_string, 'english' );
+			}
 		}
 	}
 
