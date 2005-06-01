@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.52 2005-05-24 18:04:28 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.53 2005-06-01 13:28:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -626,14 +626,15 @@
             #    or private projects where the user is implicitly listed
             $query = "SELECT distinct cft.id as id, cft.name as name
                 FROM $t_custom_field_table as cft
-                    JOIN $t_custom_field_project_table as cfpt on cft.id = cfpt.field_id
-                    JOIN $t_project_table as pt on cfpt.project_id = pt.id
+                    JOIN $t_custom_field_project_table as cfpt
+                    JOIN $t_project_table as pt
                     LEFT JOIN $t_project_user_list_table as pult 
                         on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                    JOIN $t_user_table as ut on ut.id = $t_user_id
-                WHERE pt.view_state = $t_pub OR 
+                    JOIN $t_user_table as ut
+                WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
+                    ( pt.view_state = $t_pub OR 
                     ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
-                    ( pult.user_id is null and ut.access_level $t_access_clause )
+                    ( pult.user_id is null and ut.access_level $t_access_clause ) )
                 ORDER BY name ASC";
 		} else {
 			$query = "SELECT $t_custom_field_table.id, $t_custom_field_table.name
