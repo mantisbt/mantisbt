@@ -90,7 +90,7 @@
 
 	if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_custom_cols = $t_filter_cols;
-		$t_custom_fields = custom_field_get_ids( $t_project_id );
+		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 		foreach ( $t_custom_fields as $t_cfid ) {
 			$t_field_info = custom_field_cache_row( $t_cfid, true );

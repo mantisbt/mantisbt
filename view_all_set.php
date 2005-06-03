@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.54 2005-05-13 00:14:38 jlatour Exp $
+	# $Id: view_all_set.php,v 1.55 2005-06-03 16:03:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -147,7 +147,7 @@
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
 	$f_view_state			= gpc_get_string( 'view_state', META_FILTER_ANY );
 
-	$t_custom_fields 		= custom_field_get_ids();
+	$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 	$f_custom_fields_data 	= array();
 	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
@@ -389,7 +389,7 @@
 				$t_setting_arr['relationship_type'] = -1;
 				$t_setting_arr['relationship_bug'] = 0;
 
-				$t_custom_fields 		= custom_field_get_ids();
+				$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 				$t_custom_fields_data 	= array();
 				if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 					foreach( $t_custom_fields as $t_cfid ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.53 2005-06-01 13:28:20 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.54 2005-06-03 16:03:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -596,8 +596,10 @@
 	}
 
 	# --------------------
-	# Return an array all custom field ids
-	function custom_field_get_ids( $p_project_id = ALL_PROJECTS ) {
+	# Return an array of ids of custom fields bound to the specified project
+	#
+	# The ids will be sorted based on the sequence number associated with the binding
+	function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
 		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
 
@@ -626,22 +628,31 @@
             #    or private projects where the user is implicitly listed
             $query = "SELECT distinct cft.id as id, cft.name as name
                 FROM $t_custom_field_table as cft
-                    JOIN $t_custom_field_project_table as cfpt
-                    JOIN $t_project_table as pt
-                    LEFT JOIN $t_project_user_list_table as pult 
+                    JOIN $t_custom_field_project_table cfpt
+                    JOIN $t_project_table pt
+                    LEFT JOIN $t_project_user_list_table pult 
                         on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                    JOIN $t_user_table as ut
+                    JOIN $t_user_table ut
                 WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
                     ( pt.view_state = $t_pub OR 
                     ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
                     ( pult.user_id is null and ut.access_level $t_access_clause ) )
-                ORDER BY name ASC";
+                ORDER BY cfpt.sequence ASC, cft.name ASC";
 		} else {
-			$query = "SELECT $t_custom_field_table.id, $t_custom_field_table.name
-					  FROM $t_custom_field_table, $t_custom_field_project_table
-					  WHERE $t_custom_field_project_table.project_id = '$p_project_id' AND
-							$t_custom_field_table.id = $t_custom_field_project_table.field_id
-					  ORDER BY name ASC";
+            if ( is_array( $p_project_id ) ) {
+                if ( 1 == count( $p_project_id ) ) {
+				    $t_project_clause = "= " . array_shift( $p_project_id ) . " ";
+                } else {
+                    $t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
+                }
+            } else {
+                $t_project_clause = "= $p_project_id ";
+            }			
+			$query = "SELECT cft.id, cft.name, cfpt.sequence
+					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
+					  WHERE cfpt.project_id $t_project_clause AND
+							cft.id = cfpt.field_id
+					  ORDER BY sequence ASC, name ASC";
 		}
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
@@ -657,19 +668,12 @@
 	}
 
 	# --------------------
-	# Return an array of ids of custom fields bound to the specified project
-	#
-	# The ids will be sorted based on the sequence number associated with the binding
-	function custom_field_get_linked_ids( $p_project_id ) {
-		$c_project_id = db_prepare_int( $p_project_id );
-
-		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
+	# Return an array all custom field ids sorted by name
+	function custom_field_get_ids( ) {
 		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
-		$query = "SELECT field_id
-				  FROM $t_custom_field_project_table p, $t_custom_field_table f
-				  WHERE p.project_id='$c_project_id' AND
-				  		p.field_id=f.id
-				  ORDER BY p.sequence ASC, f.name ASC";
+		$query = "SELECT id, name
+				  FROM $t_custom_field_table
+				  ORDER BY name ASC";
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
@@ -677,7 +681,7 @@
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
-			array_push( $t_ids, $row['field_id'] );
+			array_push( $t_ids, $row['id'] );
 		}
 
 		return $t_ids;

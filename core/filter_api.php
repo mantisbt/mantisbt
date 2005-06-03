@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.113 2005-06-03 14:04:58 thraxisp Exp $
+	# $Id: filter_api.php,v 1.114 2005-06-03 16:03:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -592,7 +592,7 @@
 		# custom field filters
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
-			$t_custom_fields = custom_field_get_ids();	# @@@@ Shouldn't the filter be on project specific custom fields?
+			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );	
 
 			foreach( $t_custom_fields as $t_cfid ) {
 				$t_first_time = true;
@@ -1011,7 +1011,7 @@
 			$t_per_row = 0;
 
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-				$t_custom_fields = custom_field_get_ids( $t_project_id );
+				$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 				foreach ( $t_custom_fields as $t_cfid ) {
 					$t_field_info = custom_field_cache_row( $t_cfid, true );
@@ -2306,7 +2306,7 @@
 			$p_filter_arr['relationship_bug'] = gpc_get_int( 'relationship_bug', 0 );
 		}
 
-		$t_custom_fields 		= custom_field_get_ids();
+		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 		$f_custom_fields_data 	= array();
 		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 			foreach( $t_custom_fields as $t_cfid ) {
