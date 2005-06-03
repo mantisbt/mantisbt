@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.114 2005-06-03 16:03:14 thraxisp Exp $
+	# $Id: filter_api.php,v 1.115 2005-06-03 18:51:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -996,12 +996,9 @@
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
 
 		<?php
+		$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 		if ( $p_expanded ) {
-			$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 			$t_custom_cols = $t_filter_cols;
-			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
-			}
 
 			$t_current_user_access_level = current_user_get_access_level();
 			$t_accessible_custom_fields_ids = array();
@@ -1063,6 +1060,9 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_profile[]'; ?>" id="show_profile_filter"><?php PRINT lang_get( 'profile' ) ?>:</a>
 			</td>
+			<?php if ( $t_filter_cols > 8 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			} ?>
 		</tr>
 
 		<tr class="row-1">
@@ -1322,6 +1322,9 @@
 								}
 							?>
 			</td>
+			<?php if ( $t_filter_cols > 8 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			} ?>
 			</tr>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
@@ -1354,9 +1357,9 @@
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_priority[]'; ?>" id="show_priority_filter"><?php PRINT lang_get( 'priority' ) ?>:</a>
 			</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
-			</td>
+			<?php if ( $t_filter_cols > 7 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
+			} ?>
 		</tr>
 
 		<tr class="row-1">
@@ -1582,9 +1585,9 @@
 	               }
 	              ?>
 	    	</td>
-			<td colspan="1" class="small-caption" valign="top">
-				&nbsp;
-			</td>
+			<?php if ( $t_filter_cols > 7 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
+			} ?>
 
 		</tr>
 
@@ -1607,6 +1610,9 @@
 			<td class="small-caption" valign="top" colspan="2">
 				<a href="<?php PRINT $t_filters_url . 'relationship_type'; ?>" id="relationship_type_filter"><?php PRINT lang_get( 'bug_relationships' ) ?>:</a>
 			</td>
+			<?php if ( $t_filter_cols > 8 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			} ?>
 		</tr>
 		<tr class="row-1">
 			<td class="small-caption" valign="top" id="per_page_filter_target">
@@ -1700,15 +1706,9 @@
 
 							?>
 			</td>
-
-
-
-
-			<?php
-				if ( $t_custom_cols > $t_filter_cols ) {
-					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
-				}
-			?>
+			<?php if ( $t_filter_cols > 8 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			} ?>
 		</tr>
 		<?php
 
@@ -1887,8 +1887,9 @@
 					}
 				?>
 			</td>
-			<td class="small-caption" valign="top" colspan="3">
-			</td>
+			<?php if ( $t_filter_cols > 5 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&nbsp;</td>';
+			} ?>
 		</tr>
 		<?php
 		} // expanded
@@ -1904,7 +1905,7 @@
 				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
 			</td>
 			</form>
-			<td class="center">
+			<td class="center" colspan="<?php echo ( $t_filter_cols - 6 ) ?>"> <!-- use this label for padding -->
 				<?php
 					if ( ON == config_get( 'dhtml_filters' ) ) {
 						$f_switch_view_link = 'view_all_set.php?type=6&amp;view_type=';
