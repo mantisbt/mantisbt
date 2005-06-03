@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.46 2005-05-16 12:56:06 vboctor Exp $
+	# $Id: proj_doc_page.php,v 1.47 2005-06-03 18:06:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,21 +21,46 @@
 	}
 
 	$t_project_id = helper_get_current_project();
-	$t_mantis_project_file_table = config_get( 'mantis_project_file_table' );
+	$t_user_id = auth_get_current_user_id();
+	$t_project_file_table = config_get( 'mantis_project_file_table' );
+	$t_project_table = config_get( 'mantis_project_table' );
+	$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+	$t_user_table = config_get( 'mantis_user_table' );
+	$t_pub = VS_PUBLIC;
+	$t_priv = VS_PRIVATE;
 
-	if( $t_project_id != ALL_PROJECTS ) {
-		# Select all the project files
-		$query = "SELECT *
-				FROM $t_mantis_project_file_table
-				WHERE project_id='$t_project_id' or project_id='". ALL_PROJECTS . "'
-				ORDER BY project_id, title ASC";
+	if( $t_project_id == ALL_PROJECTS ) {
+		# Select all the projects that the user has access to
+		$t_projects = user_get_accessible_projects( $t_user_id );
 	}
 	else {
-		# Select the project files (specific project + all-projects docs)
-		$query = "SELECT *
-				FROM $t_mantis_project_file_table
-				ORDER BY project_id, title ASC";
+		# Select the specific project 
+		$t_projects = array( $t_project_id );
 	}
+		
+	$t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fetch
+	
+	$t_reqd_access = config_get( 'view_proj_doc_threshold' );
+	if ( is_array( $t_reqd_access ) ) {
+		if ( 1 == count( $t_reqd_access ) ) {
+			$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
+		} else {
+			$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
+		}
+	} else {
+		$t_access_clause = ">= $t_reqd_access ";
+	}			
+
+	$query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
+				FROM $t_project_file_table pft, $t_user_table ut
+					LEFT JOIN $t_project_table pt on pft.project_id = pt.id
+					LEFT JOIN $t_project_user_list_table as pult 
+						on pft.project_id = pult.project_id and pult.user_id = $t_user_id
+				WHERE ut.id = $t_user_id AND pft.project_id in (" . implode( ',', $t_projects ) . ") AND 
+					( pt.view_state = $t_pub OR pt.view_state is null OR
+						( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
+						( pult.user_id is null and ut.access_level $t_access_clause ) )
+				ORDER BY pt.name ASC, pft.title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 
@@ -62,43 +87,40 @@
 		$v_description = string_display_links( $v_description );
 		$v_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 
-		if( access_has_project_level( config_get( 'view_proj_doc_threshold' ), $v_project_id ) ) {
-			# check access rights for each document
 ?>
 <tr valign="top" <?php echo helper_alternate_class( $i ) ?>>
 	<td>
 <?php
-			$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
-			echo $t_href;
-			print_file_icon( $v_filename );
-			echo '</a>&nbsp;' . $t_href . $v_title . '</a> ('.$v_filesize.' bytes)';
+		$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+		echo $t_href;
+		print_file_icon( $v_filename );
+		echo '</a>&nbsp;' . $t_href . $v_title . '</a> ('.$v_filesize.' bytes)';
 ?>
-		<br />
-		<span class="small">
+	<br />
+	<span class="small">
 <?php
-			if( $v_project_id == ALL_PROJECTS ) {
-				echo lang_get( 'all_projects' ) . '<br/>';
-			}
-			elseif( $v_project_id != $t_project_id ) {
-				$t_project_name = project_get_name( $v_project_id );
-				echo $t_project_name . '<br/>';
-			}
-			echo '(' . $v_date_added . ')';
-			if ( access_has_project_level( config_get( 'manage_project_threshold' ), $v_project_id ) ) {
-				echo '&nbsp;';
-				print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
-				echo '&nbsp;';
-				print_button( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
-			}
+		if( $v_project_id == ALL_PROJECTS ) {
+			echo lang_get( 'all_projects' ) . '<br/>';
+		}
+		elseif( $v_project_id != $t_project_id ) {
+			$t_project_name = project_get_name( $v_project_id );
+			echo $t_project_name . '<br/>';
+		}
+		echo '(' . $v_date_added . ')';
+		if ( access_has_project_level( config_get( 'manage_project_threshold' ), $v_project_id ) ) {
+			echo '&nbsp;';
+			print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+			echo '&nbsp;';
+			print_button( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
+		}
 ?>
-		</span>
+	</span>
 	</td>
 	<td>
 		<?php echo $v_description ?>
 	</td>
 </tr>
 <?php
-		} # end access right check
 	} # end for loop
 ?>
 </table>
