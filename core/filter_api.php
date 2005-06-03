@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.112 2005-06-01 01:38:03 thraxisp Exp $
+	# $Id: filter_api.php,v 1.113 2005-06-03 14:04:58 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2352,6 +2352,9 @@
 					if ( ( 5 <= $t_cookie_vers ) && ( ( $t_filter_value == 'any' ) || ( is_numeric($t_filter_value) && $t_filter_value == 0 ) ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
+					if ( ( 5 <= $t_cookie_vers ) && ( $t_filter_value == 'none' ) ) {
+						$t_filter_value = META_FILTER_NONE;
+					}
 					if ( 'string' == $t_multi_field_type ) {
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
 					} else if ( 'int' == $t_multi_field_type ) {
@@ -2385,7 +2388,6 @@
 			}
 		}
 		# all of our filter values are now guaranteed to be there, and correct.
-
 		return $p_filter_arr;
 	}
 
