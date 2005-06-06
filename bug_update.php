@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.85 2005-05-26 23:46:19 thraxisp Exp $
+	# $Id: bug_update.php,v 1.86 2005-06-06 13:45:27 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -94,6 +94,7 @@
 
 		# Only update the field if it would have been display for editing
 		if( !( ( ! $f_update_mode && $t_def['require_' . $t_custom_status_label] ) ||
+						( ! $f_update_mode && $t_def['display_' . $t_custom_status_label] && in_array( $t_custom_status_label, array( "resolved", "closed" ) ) ) ||
 						( $f_update_mode && $t_def['display_update'] ) ||
 						( $f_update_mode && $t_def['require_update'] ) ) ) {
 			continue;
