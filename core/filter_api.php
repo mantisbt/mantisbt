@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.115 2005-06-03 18:51:22 thraxisp Exp $
+	# $Id: filter_api.php,v 1.116 2005-06-07 19:49:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1644,6 +1644,25 @@
 			</td>
 			<td class="small-caption" valign="top" colspan="2" id="do_filter_by_date_filter_target">
 							<?php
+							if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
+								?>
+		<script language="Javascript">
+		<!--
+			function SwitchDateFields() {
+		    	// All fields need to be enabled to go back to the script
+				document.filters_open.start_month.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.start_day.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.start_year.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.end_month.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.end_day.disabled = ! document.filters_open.do_filter_by_date.checked;
+				document.filters_open.end_year.disabled = ! document.filters_open.do_filter_by_date.checked;
+
+		   		return true;
+			}
+		// -->
+		</script>
+							<?php 
+							} # end if dhtml_filters
 							if ( 'on' == $t_filter['do_filter_by_date'] ) {
 								?>
 								<input type="hidden" name="do_filter_by_date" value="<?php echo $t_filter['do_filter_by_date'];?>" />
@@ -1745,6 +1764,47 @@
 						$t_values .= lang_get( 'any' );
 					} else {
 						if ( $t_accessible_custom_fields_types[$i] == CUSTOM_FIELD_TYPE_DATE ) {
+							# @@@ moved embedded javascript here from print_filter_custom_field_date
+							#  it appears not to load properly on Firefox and other browsers if loaded through the httpxmlreq
+							$t_field_id = $t_accessible_custom_fields_ids[$i];
+							$t_js_toggle_func = "toggle_custom_date_field_" . $t_field_id . "_controls" ;
+							if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
+								?>
+	<script language="Javascript">
+	<!--
+	function <?php echo $t_js_toggle_func . "_start" ; ?>(disable) {
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_start_year.disabled = disable ;
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_start_month.disabled = disable ;
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_start_day.disabled = disable ;
+	} ;
+
+	function <?php echo $t_js_toggle_func . "_end" ; ?>(disable) {
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_end_year.disabled = disable ;
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_end_month.disabled = disable ;
+			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_end_day.disabled = disable ;
+	} ;
+
+	function <?php echo $t_js_toggle_func ; ?>() {
+		switch (document.filters_open.custom_field_<?php echo $t_field_id ; ?>_control.selectedIndex) {
+		case <?php echo CUSTOM_FIELD_DATE_ANY ; ?>:
+		case <?php echo CUSTOM_FIELD_DATE_NONE ; ?>:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(true) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
+			break ;
+		case <?php echo CUSTOM_FIELD_DATE_BETWEEN ; ?>:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(false) ;
+			break ;
+		default:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
+			break ;
+		}
+	}
+	// -->
+	</script>
+<?php
+							} # end if dhtml_filters 
 							$t_short_date_format = config_get( 'short_date_format' );
 							if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] ) ) {
 								$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] = 0;
@@ -2635,14 +2695,15 @@
 		<table cellspacing="0" cellpadding="0">
 		<?php if ( ! $p_hide_checkbox ) {
 		?>
-		<tr>
+		<tr><td colspan="2">
 			<input type="checkbox" name="do_filter_by_date" <?php
 				check_checked( $t_filter['do_filter_by_date'], 'on' );
 				if ( ON == config_get( 'use_javascript' ) ) {
 					print "onclick=\"SwitchDateFields();\""; } ?> />
 			<?php echo lang_get( 'use_date_filters' ) ?>
-		</tr>
+		</td></tr>
 		<?php }
+		$t_menu_disabled = ( 'on' == $t_filter['do_filter_by_date'] ) ? '' : ' disabled ';
 		?>
 
 		<!-- Start date -->
@@ -2655,17 +2716,17 @@
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 			foreach( $t_chars as $t_char ) {
 				if ( strcasecmp( $t_char, "M" ) == 0 ) {
-					print "<select name=\"start_month\">";
+					print "<select name=\"start_month\" $t_menu_disabled>";
 					print_month_option_list( $t_filter['start_month'] );
 					print "</select>\n";
 				}
 				if ( strcasecmp( $t_char, "D" ) == 0 ) {
-					print "<select name=\"start_day\">";
+					print "<select name=\"start_day\" $t_menu_disabled>";
 					print_day_option_list( $t_filter['start_day'] );
 					print "</select>\n";
 				}
 				if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-					print "<select name=\"start_year\">";
+					print "<select name=\"start_year\" $t_menu_disabled>";
 					print_year_option_list( $t_filter['start_year'] );
 					print "</select>\n";
 				}
@@ -2683,17 +2744,17 @@
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 			foreach( $t_chars as $t_char ) {
 				if ( strcasecmp( $t_char, "M" ) == 0 ) {
-					print "<select name=\"end_month\">";
+					print "<select name=\"end_month\" $t_menu_disabled>";
 					print_month_option_list( $t_filter['end_month'] );
 					print "</select>\n";
 				}
 				if ( strcasecmp( $t_char, "D" ) == 0 ) {
-					print "<select name=\"end_day\">";
+					print "<select name=\"end_day\" $t_menu_disabled>";
 					print_day_option_list( $t_filter['end_day'] );
 					print "</select>\n";
 				}
 				if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-					print "<select name=\"end_year\">";
+					print "<select name=\"end_year\" $t_menu_disabled>";
 					print_year_option_list( $t_filter['end_year'] );
 					print "</select>\n";
 				}
@@ -2836,43 +2897,6 @@
 		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
 
 		$t_js_toggle_func = "toggle_custom_date_field_" . $p_field_id . "_controls" ;
-?>
-
-	<script language="Javascript">
-	<!--
-	function <?php echo $t_js_toggle_func . "_start" ; ?>(disable) {
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_year.disabled = disable ;
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_month.disabled = disable ;
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_day.disabled = disable ;
-	} ;
-
-	function <?php echo $t_js_toggle_func . "_end" ; ?>(disable) {
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_year.disabled = disable ;
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_month.disabled = disable ;
-			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_day.disabled = disable ;
-	} ;
-
-	function <?php echo $t_js_toggle_func ; ?>() {
-		switch (document.filters.custom_field_<?php echo $p_field_id ; ?>_control.selectedIndex) {
-		case <?php echo CUSTOM_FIELD_DATE_ANY ; ?>:
-		case <?php echo CUSTOM_FIELD_DATE_NONE ; ?>:
-			<?php echo $t_js_toggle_func . "_start" ; ?>(true) ;
-			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
-			break ;
-		case <?php echo CUSTOM_FIELD_DATE_BETWEEN ; ?>:
-			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
-			<?php echo $t_js_toggle_func . "_end" ; ?>(false) ;
-			break ;
-		default:
-			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
-			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
-			break ;
-		}
-	}
-	// -->
-	</script>
-
-<?php
 		# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 		# may be wrong for dates before early 2001.
 		array_multisort($t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC) ;
