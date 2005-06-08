@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.35 2005-03-24 02:55:22 thraxisp Exp $
+	# $Id: bugnote_api.php,v 1.36 2005-06-08 15:02:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -86,7 +86,7 @@
 	# Add a bugnote to a bug
 	#
 	# return the ID of the new bugnote
-	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private = false, $p_type = 0, $p_attr = '' ) {
+	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
 		$c_bugnote_text      	= db_prepare_string( $p_bugnote_text );
 		$c_private           	= db_prepare_bool( $p_private );
@@ -106,21 +106,26 @@
 		# retrieve bugnote text id number
 		$t_bugnote_text_id = db_insert_id( $t_bugnote_text_table );
 
+		# get user information
+		if ( $p_user_id === null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
+
 		# Check for private bugnotes.
-		if ( $p_private && access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
+		# @@@ VB: Should we allow users to report private bugnotes, and possibly see only their own private ones
+		if ( $p_private && access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $c_user_id ) ) {
 			$t_view_state = VS_PRIVATE;
 		} else {
 			$t_view_state = VS_PUBLIC;
 		}
 
-		# get user information
-		$t_user_id = auth_get_current_user_id();
-
 		# insert bugnote info
 		$query = "INSERT INTO $t_bugnote_table
 		          		(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr )
 		          	 VALUES
-		          		('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr')";
+		          		('$c_bug_id', '$c_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr')";
 		db_query( $query );
 
 		# get bugnote id
