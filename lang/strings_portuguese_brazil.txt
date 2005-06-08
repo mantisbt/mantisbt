@@ -9,13 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.90 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-21 18:39:18 $
+	# $Revision: 1.91 $
+	# $Author: vboctor $
+	# $Date: 2005-06-08 11:06:39 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.90 2005-05-21 18:39:18 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.91 2005-06-08 11:06:39 vboctor Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.257 -- jferraz 2005/05/20
+	# Up-to-date with strings_english.txt revision 1.258 -- jferraz 2005/06/07
 	###########################################################################
 ?>
 <?php
@@ -209,6 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido para %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]   = 'Filtro %d não encontrado.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';

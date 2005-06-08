@@ -1,6 +1,15 @@
 Mantis ChangeLog
 
 
+2005.06.xx  -  1.0.0
+
+- Updated Brazilian Portuguese language (Juliano Ravasi Ferraz / vboctor)
+- Updated Danish language (Gunner Poulsen / vboctor)
+- Updated Estonian language (Klemens Kasemaa / vboctor)
+- Updated Finnish language (Tomi Hurenius / vboctor)
+- Updated French language (BZC ToOn'S / vboctor)
+
+
 2005.05.31  -  1.0.0a3
 
 - 0005514: [administration] unable to manage inactive Projects (thraxisp)

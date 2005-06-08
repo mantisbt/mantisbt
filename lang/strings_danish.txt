@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.87 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-18 18:25:50 $
+	# $Revision: 1.88 $
+	# $Author: vboctor $
+	# $Date: 2005-06-08 11:06:38 $
 	#
-	# $Id: strings_danish.txt,v 1.87 2005-05-18 18:25:50 bigbadger Exp $
+	# $Id: strings_danish.txt,v 1.88 2005-06-08 11:06:38 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,20 +30,20 @@ $s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdater prioritering';
 $s_actiongroup_menu_update_status = 'Opdater status';
 $s_actiongroup_menu_update_view_status = 'Opdater vis-status';
-$s_actiongroup_menu_update_category = 'Update Category';
+$s_actiongroup_menu_update_category = 'Opdater kategori';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_field = 'Opdater %s';
 $s_actiongroup_bugs = 'Markerede fejl';
 
 # new strings:
 $s_all_projects = 'Alle projekter';
 $s_move_bugs = 'Flyt fejl';
-$s_operation_successful = 'Handling vellykket.';
-$s_date_order = 'Dato-orden';
+$s_operation_successful = 'Handlingen lykkedes.';
+$s_date_order = 'Datoorden';
 $s_print_all_bug_page_link = 'Udskriv rapport';
 $s_csv_export = 'CSV eksport';
-$s_login_anonymously = 'Log ind som anonym';
-$s_anonymous = 'Anonymous';
+$s_login_anonymously = 'Log ind anonymt';
+$s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Gå til fejlnoter';
 $s_public_project_msg = 'Dette projekt er OFFENTLIGT. Alle brugere har adgang til dette projekt.';
 $s_private_project_msg = 'Dette projekt er PRIVAT. Kun administratorer og udvalgte brugere har adgang.';
@@ -56,8 +56,8 @@ $s_jump = 'Gå til';
 $s_copy_users = 'Kopier brugere';
 $s_copy_categories_from = 'Kopier kategorier fra';
 $s_copy_categories_to = 'Kopier kategorier til';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'Kopier brugere fra';
+$s_copy_users_to = 'Kopier brugere til';
 $s_bug_history = 'Fejl-historik';
 $s_field = 'Felt';
 $s_old_value = 'Gammel værdi';
@@ -105,7 +105,7 @@ $s_login_link = 'Log ind';
 $s_bug_actiongroup_failed = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling på følgende fejl: ';
 $s_bug_actiongroup_access = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling.';
 $s_bug_actiongroup_status = 'Denne fejl kan ikke ændres til den ønskede tilstand';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'Denne fejl kan ikke ændres til den ønskede kategori';
 $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';
@@ -115,7 +115,7 @@ $s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
 $s_view_status_bugs_conf_msg = 'Vælg fejlenes visningsstatus';
-$s_category_bugs_conf_msg = 'Choose issues category';
+$s_category_bugs_conf_msg = 'Væld fejlkategori';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Luk fejlene' ;
 $s_delete_group_bugs_button = 'Slet fejlene' ;
@@ -125,7 +125,7 @@ $s_assign_group_bugs_button = 'Tildel fejlene' ;
 $s_resolve_group_bugs_button = 'Løs fejlene' ;
 $s_priority_group_bugs_button = 'Opdater prioritering' ;
 $s_status_group_bugs_button = 'Opdater status' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Opdater kategori';
 $s_view_status_group_bugs_button = 'Opdater visningsstatus';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
@@ -167,7 +167,7 @@ $s_printing_preferences_title = 'Vælg felter der skal udskrives';
 $s_printing_options_link = 'Udskriftmuligheder';
 
 # word and excel export
-$s_bugnote_title = 'Tilsyn af fejlnote' ;
+$s_bugnote_title = 'Behandler af fejlnote' ;
 $s_bugnote_date = 'Dato for fejlnote';
 $s_bugnote_description = 'Fejlnote-beskrivelse';
 
@@ -205,7 +205,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'FEJL: Nye elementer ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'FEJL: Adgangskode passer ikke til verificeringen.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'FEJL: En tabel var forventet, men en streng modtaget.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'FEJL: En streng var forventet, men en tabel modtaget.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Der forventedes et nummer for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'FEJL: Fejl ikke fundet.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'FEJL: Ugyldig e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'FEJL: Profil ikke fundet.';
@@ -252,11 +252,11 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Muligheden \'glemt din adgangs
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du skal angive en e-mail-adresse for at kunne nulstille adgangskoden';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De angivne oplysninger svarer ikke til nogen eksisterende konto!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen er ugyldig eller har allerede været brugt. Registrer dig igen.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. antal samtidige handlinger nået. Kontakt systemadministratoren';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. antal samtidige handlinger nået. Kontakt systemadministratoren';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den handling vilskabew et loop i underprojekthirakiet.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Din konto kan være lukket eller suspenderet (på grund af for mange fejlslagne login-forsøg) eller du bruger et forkert brugernavn eller adgangskode.';
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
 
@@ -273,7 +273,7 @@ $s_administrator = 'administrator';
 $s_myself = "Mig selv";
 $s_default_access_level = 'Standardadgangsniveau';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Fejlenes status i procent';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
@@ -335,7 +335,7 @@ $s_email_notification_title_for_action_relationship_child_resolved = "Den SAMMEN
 $s_email_notification_title_for_action_relationship_child_closed = "Den SAMMENHØRENDE fejl %s er blevet LUKKET.";
 
 $s_email_reporter = 'Rapportør';
-$s_email_handler = 'Tilsyn';
+$s_email_handler = 'Behandler';
 $s_email_project = 'Projekt';
 $s_email_bug = 'Fejl ID';
 $s_email_category = 'Kategori';
@@ -482,7 +482,7 @@ $s_file_upload_msg = 'Filen er blevet overført';
 $s_upload_file = 'Overfør fil';
 $s_select_file = 'Vælg fil';
 $s_upload_file_button = 'Overfør fil';
-$s_max_file_size = 'Max. størrelse';
+$s_max_file_size = 'Maks. størrelse';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Fejlen er blevet genåbnet...';
@@ -628,12 +628,12 @@ $s_filter_button = 'Filter';
 $s_manage_users_link = 'Bruger-administration';
 $s_manage_projects_link = 'Projekt-administration';
 $s_manage_custom_field_link = 'Administrer brugerdefinerede felter';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
+$s_manage_global_profiles_link = 'Administrer globale profiler';
 $s_permissions_summary_report = 'Rapport over rettigheder';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_config_link = 'Administrer konfigurationen';
+$s_manage_threshold_config = 'Arbrjdsfordelingens grænse';
+$s_manage_email_config = 'E-mail påmindelser';
+$s_manage_workflow_config = 'Arbejdsfordeling';
 $s_create_new_account_link = 'Opret konto';
 $s_projects_link = 'Projekter';
 $s_documentation_link = 'Dokumentation';
@@ -649,62 +649,62 @@ $s_last_visit = 'Sidste besøg';
 $s_edit_user_link = 'Rediger bruger';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
+$s_config_all_projects = 'Note: Disse indstillinger gælder for ALLE PROJEKTER.';
+$s_config_project = 'Note: Disse indstillinger har kun indflydelse på projekterne %s.';
 $s_colour_coding = 'In the table below, the following color code applies:';
 $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users who added Bugnotes';
-$s_change_configuration = 'Update Configuration';
+$s_issue_reporter = 'Brugeren der rapporterede fejlen';
+$s_issue_handler = 'Brugeren der behandler fejlen';
+$s_users_added_bugnote = 'Brugerens fejlnote';
+$s_change_configuration = 'Opdater konfigurationen';
 $s_message = 'Message';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Who can change notification defaults';
-$s_notify_actions_change_access = 'Who can change notifications';
+$s_default_notify = 'Sætter standard for påmindelser til';
+$s_action_notify = 'Sætter handlingspåmindelser til';
+$s_notify_defaults_change_access = 'Ændre brugere der kan ændre på standardpåmindelser til';
+$s_notify_actions_change_access = 'Ændrer brugere der kan ændre påmindelser til';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
+$s_non_existent = 'eksisterer ikke';
+$s_current_status = 'Nuværende status';
+$s_next_status = 'Næste status';
+$s_workflow = 'Arbejdsfordeling';
+$s_workflow_thresholds = 'Grænde der har effekt på arbejdsfordelingen';
+$s_threshold = 'Grænse';
 $s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
+$s_alter_level = 'Hvem kan ændre denne værdi';
+$s_validation = 'Validering af arbejdsfordeling';
+$s_comment = 'Kommentar til validering';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Who can change workflow';
-$s_access_change_access = 'Who can change access levels';
+$s_unreachable = 'Du kan ikke give denne fejl denne status';
+$s_no_exit = 'Du kan ikke flytte en fejl væk fra denne status';
+$s_access_levels = 'Adgangsniveau';
+$s_access_change = 'Mindste adgangsniveau der kan skifte til denne status';
+$s_desc_bug_submit_status = 'Status som tildeles en ny fejl';
+$s_desc_bug_reopen_status = 'Status som genåbnede fejl får';
+$s_desc_bug_resolved_status_threshold = 'Status hvor en fejl betragtes som løse';
+$s_workflow_change_access = 'Ændre brugere der kan skifte arbejdsfordelingen til';
+$s_access_change_access = 'Ændre brugere der kan skifte status skifter adgangsniveau til';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = 'Tildel en fejl';
+$s_allow_close_immediate = 'Tillad at fejlen markeres som lukket eller løst';
+$s_allow_reporter_close = 'Tillad at raportøren lukker fejlen';
+$s_allow_reporter_reopen = 'Tillad at raportøren genåbner fejlen';
+$s_set_status_assigned = 'Sæt status på tildeling af behandler';
+$s_allow_user_edit = 'Tillad brugerne at rette i deres egne fejlnoter';
+$s_limit_access = 'Begræns raportørernes adgang til de fejl de har raporteret';
+$s_submit_status = 'Status som nye fejl får';
+$s_assigned_status = 'Status som autotildelte fejl skal have';
+$s_resolved_status = 'Status hvor en fejl er betragtet som løst';
+$s_readonly_status = 'Status hvor en fejl bliver skrivebeskyttet';
+$s_reopen_status = 'Status som en genåbnet fejl får';
+$s_reopen_resolution = 'Løsningsnuveau som en genåbnet fejl bliver sat til';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
@@ -760,10 +760,10 @@ $s_actions = 'Handlinger';
 $s_version = 'Version/Udgave';
 $s_timestamp = 'Tidsstempel';
 $s_update = 'Opdater';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'Underprojekter';
+$s_add_subproject = 'Tilføj som underprojekt';
+$s_create_new_subproject_link = 'Opret nyt underprojekt';
+$s_unlink_link = 'Fjern sammenkædning';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Tilføj projekt';
@@ -912,9 +912,9 @@ $s_project_removed_user_msg = 'Bruger fjernet fra projektet';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Er du sikker på at du vil fjerne denne bruger?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_button = 'Fjern brugeren';
+$s_remove_all_users_sure_msg = 'Er du sikker på at du vil fjerne alle brugere fra dette projekt?';
+$s_remove_all_users_button = 'Fjern alle brugere';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Tilføj bruger til projekt';
@@ -1015,7 +1015,7 @@ $s_changed = 'Ændret (time)';
 $s_viewing_bugs_title = 'Vis fejl';
 $s_updated = 'Opdateret';
 $s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sort = 'Sorter efter';
 
 # view_all_inc.php
 $s_none = 'ingen';
@@ -1099,7 +1099,7 @@ $s_custom_field_valid_regexp = 'Regulært udtryk';
 $s_custom_field_access_level_r = 'Læse-rettighed';
 $s_custom_field_access_level_rw = 'Skrive-rettighed';
 $s_custom_field_length_min = 'Min. længde';
-$s_custom_field_length_max = 'Max. længde';
+$s_custom_field_length_max = 'Maks. længde';
 $s_custom_field_advanced = 'Avanceret';
 $s_custom_field_display_report = 'Vis når fejl rapporteres';
 $s_custom_field_display_update = 'Vis når fejl opdateres';
@@ -1117,8 +1117,8 @@ $s_confirm_used_custom_field_deletion = 'Dette felt er i øjeblikket knyttet til 
 $s_confirm_custom_field_deletion = 'Ønsker du at slette dette brugerdefinerede felt og alle tilknyttede værdier?';
 $s_field_delete_button = 'Slet felt';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'Er du sikker på at du vil fjerne (fjerne sammenkædningen af) dette brugerdefinerede felt fra dette projekt og slette alle tilknyttede værdier?';
+$s_field_remove_button = 'Fjern felt';
 
 $s_hide_status = 'Skjul status';
 $s_filter_closed = "Lukkede";
@@ -1182,10 +1182,10 @@ $s_horizontal = "Vandret";
 $s_view_issue = "Vis fejl";
 
 # Source Control Integration
-$s_checkin = 'Check ind';
+$s_checkin = 'Tjek ind';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
+$s_perm_rpt_capability = 'Tilladelser';
 $s_view = 'Vis';
 $s_issues = 'FEJL';
 $s_report_issue = 'Rapporter en fejl';
@@ -1212,8 +1212,8 @@ $s_manage_news = 'Håndter nyheder';
 $s_view_list_of_attachments = 'Vis listen over vedhæftede filer';
 $s_download_attachments = 'Hent vedhæftede filer';
 $s_delete_attachments = 'Slet vedhæftede filer';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = "Slet";
+$s_delete_attachment_sure_msg = "Er du sikker på at du vil slette denne vedhæftning?";
 $s_upload_issue_attachments = 'Overfør fejlens vedhæftede filer';
 $s_filters = 'filtre';
 $s_save_filters = 'Gem filtre';
@@ -1246,14 +1246,14 @@ $s_email_on_sponsorship_changed = 'E-mail når sponsorat ændres';
 $s_email_on_relationship_changed = 'E-mail når afhængigheder ændres';
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'Indlæser...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between = 'Mellem' ;
+$s_on_or_before = 'På eller før' ;
+$s_before = 'Før' ;
+# $s_on = 'På' ; # @@@ (thraxisp) denne eksisterer allerede (~ line 499)
+$s_after = 'Efter' ;
+$s_on_or_after = 'På eller efter' ;
 
 ?>

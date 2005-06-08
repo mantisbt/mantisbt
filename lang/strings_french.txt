@@ -13,12 +13,13 @@
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
+	# French: Réda Bourebaba, bzctoons@free.fr
 	# -------------------------------------------------
-	# $Revision: 1.101 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:41 $
+	# $Revision: 1.102 $
+	# $Author: vboctor $
+	# $Date: 2005-06-08 11:06:38 $
 	#
-	# $Id: strings_french.txt,v 1.101 2005-04-21 06:52:41 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.102 2005-06-08 11:06:38 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,9 +36,9 @@ $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
 $s_actiongroup_menu_update_status = 'Mettre à jour l\'état';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour Afficher l\'état';
-$s_actiongroup_menu_update_category = 'Update Category';
+$s_actiongroup_menu_update_category = 'Mettre à jour la Catégorie';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_field = 'Mettre à jour  %s';
 $s_actiongroup_bugs = 'Bugs sélectionnés';
 
 # new strings:
@@ -61,8 +62,8 @@ $s_jump = 'Chercher';
 $s_copy_users = 'Copier les utilisateurs';
 $s_copy_categories_from = 'Copier les catégories à partir de';
 $s_copy_categories_to = 'Copier les catégories vers';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'Copier les Utilisateurs à partir de';
+$s_copy_users_to = 'Copier les Utilisateurs vers';
 $s_bug_history = 'Historique du bug';
 $s_field = 'Champ';
 $s_old_value = 'Ancienne valeur';
@@ -110,17 +111,17 @@ $s_login_link = 'Connexion';
 $s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bugs suivants : ';
 $s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
 $s_bug_actiongroup_status = 'Ce bug ne peut pas être changé pour l\'état demandé';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'Ce bug ne peut pas être changé pour la catégorie demandée';
 $s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 $s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
 $s_move_bugs_conf_msg = 'Déplacer vers';
 $s_copy_bugs_conf_msg = 'Copier bugs vers';
 $s_assign_bugs_conf_msg = 'Assigner à';
-$s_resolve_bugs_conf_msg = 'Choisir la résultion des bugs';
+$s_resolve_bugs_conf_msg = 'Choisir la résolution des bugs';
 $s_priority_bugs_conf_msg = 'Choisir la priorité des bugs';
 $s_status_bugs_conf_msg = 'Choisir l\'état des bugs';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bugs';
-$s_category_bugs_conf_msg = 'Choose issues category';
+$s_category_bugs_conf_msg = 'Choose la catégorie des bugs';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fermer les bugs' ;
 $s_delete_group_bugs_button = 'Supprimer les bugs' ;
@@ -130,7 +131,7 @@ $s_assign_group_bugs_button = 'Assigner les bugs' ;
 $s_resolve_group_bugs_button = 'Résoudre les bugs' ;
 $s_priority_group_bugs_button = 'Mettre à jour la priorité' ;
 $s_status_group_bugs_button = 'Mettre à jour le statut' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Mettre à jour la Catégorie';
 $s_view_status_group_bugs_button = 'Mettre à jour Afficher le statut';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
@@ -154,15 +155,15 @@ $s_priority_link = 'Par priorité';
 $s_severity_link = 'Par sévérité';
 $s_category_link = 'Par catégorie';
 $s_resolution_link = 'Par résolution';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
+$s_legend_still_open = 'Encore Ouvert';
+$s_legend_resolved = 'Résolu';
+$s_legend_assigned = 'Assigné';
 $s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_legend_opened = 'Ouvert';
+$s_legend_closed = 'Fermé';
+$s_legend_reported = 'Rapporté';
+$s_cumulative = 'Cumulé';
+$s_not_enough_data = 'Pas assez d\'informations pour créer le graphique';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Afficher seulement les sélectionnés';
@@ -210,15 +211,16 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERREUR : Nouvelle non trouvée.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'ERREUR : Le mot de passe ne correspond pas à la vérification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERREUR : Tableau attendu mais chaîne reçue.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais tableau reçu.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'ERREUR : %s doit être un nombre.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERREUR : Bug non trouvé.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'ERREUR : Filtre %d non trouvé.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERREUR : Email invalide.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERREUR : Type de fichier non autorisé pour les dépôts de fichier.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERREUR : Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ERREUR : Aucun fichier déposé.  Merci de revenir en arrière et de choisir un fichier avant d\'appuyer su Envoyer.'; 
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'ERREUR : Le fichier envoyè n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y acceder.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERREUR : Impossible de marquer ce bug comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'ERREUR : Champs personnalisé non trouvé';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'ERREUR : Ceci est un nom dupliqué.';
@@ -245,7 +247,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'ERREUR : Commanditaire %d non trou
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'ERREUR : Sponsoriser (%s) est inférieur au montant minimum (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bugs sponsorisés.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Accès Refusé : Assigner des bugs sponsorisés requiert un niveau d\'accès plus élevé.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Le sponsor n\'a pas fourni d\'adresse email. Merci de mettre à jour votre profil.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'ERREUR : Le sponsor n\'a pas fourni d\'adresse email. Merci de mettre à jour votre profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ERREUR : L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'ERREUR : L\'action ne peut être executée car le bug \'%d\' est en lecture-seule';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERREUR : Il existe déjà une relation entre ces deux bugs.";
@@ -258,8 +260,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Vous devez fournir une 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournies ne correspondent à aucun compte enregistré !';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'URL de confirmation n\'est pas valide ou a déjà été utilisée. Merci de s\'inscrire à nouveau.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'ERREUR : Cette opération va créer une recursion dans la hierarchie des sous projets.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ERREUR : Vous ne pouvez pas modifier le niveau d\'accés de l\'unique ADMINISTRATEUR du syséme.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors l\'utilisateur/le mot de passe que vous avez saisi est incorrect.';
@@ -276,9 +278,9 @@ $s_prefix_for_deleted_users = 'utilisateur';
 
 $s_administrator = 'administrateur';
 $s_myself = "Moi";
-$s_default_access_level = 'Default access level';
+$s_default_access_level = 'niveau d\'accés par défaut';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Pourcentage de Statut de bug';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:manageur,90:administrateur';
@@ -326,18 +328,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Un commanditaire d
 $s_email_notification_title_for_action_sponsorship_deleted = 'Un commanditaire du bug suivant a été retiré.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Une note de bug a été ajoutée à ce bug.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Le bug suivant a été défini comme DOUBLON du bug %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Le bug %s a été défini comme DOUBLON du bug suivant.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Le bug suivant a été LIE avec le bug %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Le bug suivant a été défini comme PARENT du bug %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Le bug suivant a été défini comme ENFANT du bug %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Le bug suivant n\'est plus défini comme DOUBLON du bug %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Le bug %s n\'est plus défini comme DOUBLON du bug suivant.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Le bug suivant n\'est plus LIE avec le bug %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Le bug suivant n\'est plus défini comme PARENT du bug %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Le bug suivant n\'est plus défini comme ENFANT du bug %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Le bug LIE %s a été RESOLU.";
+$s_email_notification_title_for_action_relationship_child_closed = "Le bug LIE %s a été FERME.";
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Responsable';
@@ -372,7 +374,7 @@ $s_username = 'Utilisateur';
 $s_realname = 'Nom réel';
 $s_email = 'Email'; // 'Mél' pour les puristes
 $s_password = 'Mot de passe';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = 'Le mot de passe est controllé par un autre système, par conséquent il ne peut pas être édité ici.';
 $s_confirm_password  = 'Confirmation du mot de passe';
 $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
@@ -512,9 +514,9 @@ $s_bug_reminder = 'Envoyer un rappel';
 $s_reminder_sent_to = 'Rappel envoyé à';
 $s_bug_send_button = 'Envoyer';
 $s_reminder = 'Rappel';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Cette note sera envoyée aux destinataires surveillant ce bug.';
+$s_reminder_monitor = 'Ces destinataires commenceront également à surveiller ce bug.  Ils pourront cesser la surveillance à l\'aide du bouton Arreter le Surveillance.';
+$s_reminder_store = 'Cette note sera stockée avec le bug.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Le bug a été mis à jour...';
@@ -547,6 +549,8 @@ $s_summary = 'Résumé';
 $s_description = 'Description';
 $s_steps_to_reproduce = 'Etapes pour reproduire';
 $s_update_information_button = 'Mettre à jour l\'information';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Mise à jour détaillée';
@@ -632,11 +636,11 @@ $s_filter_button = 'Filtrer';
 $s_manage_users_link = 'Gérer les utilisateurs';
 $s_manage_projects_link = 'Gérer les projets';
 $s_manage_custom_field_link = 'Gérer les champs personnalisés';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
+$s_manage_global_profiles_link = 'Gérer les Profiles Globaux';
+$s_permissions_summary_report = 'Rapport des Permissions';
+$s_manage_config_link = 'Gérer la Configuration';
+$s_manage_threshold_config = 'Seuils du Workflow';
+$s_manage_email_config = 'Notifications par Email';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Créer un compte';
 $s_projects_link = 'Projets';
@@ -653,46 +657,55 @@ $s_last_visit = 'Dernière visite';
 $s_edit_user_link = 'Modifier l\'utilisateur';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_config_all_projects = 'Note: ces configurations affectent TOUT LES PROJETS.';
+$s_config_project = 'Note: ces configurations affectent seulement le projet %s.';
+$s_colour_coding = 'Dans le tableau suivant, les codes de couleurs suivants s\'appliquent:';
+$s_colour_project = 'Les paramètres du Projet sont prioritaires.';
+$s_colour_global = 'Tout les paramètres du Projet sont prioritaires par rapport à la configuration par défaut.';
+$s_issue_reporter = 'Utilisateur qui a rapporté le bug';
+$s_issue_handler = 'Utilisateur prenant en charge le bug';
+$s_users_added_bugnote = 'Notes de bug ajoutées par les utilisateurs.';
+$s_change_configuration = 'Mettre à jour la Configuration';
+$s_message = 'Message';
+$s_default_notify = 'Mise à jour des états de la notification par defaut à';
+$s_action_notify = 'Mise à jour des états de la notification d\'action à';
+$s_notify_defaults_change_access = 'Changer les utilisateurs qui peuvent modifier les paramètres de notification par défaut';
+$s_notify_actions_change_access = 'Changer les utilisateurs qui peuvent modifier les paramètres de notification';
+$s_revert_to_system = "Effacer Toutes les Options des Projets";
+$s_revert_to_all_project = "Effacer les Options Spécifiques au Projet";
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
+$s_non_existent = 'inexistant';
+$s_current_status = 'Phase Actuel';
+$s_next_status = 'Phase Suivant';
 $s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_workflow_thresholds = 'Seuils qui affectent le Workflow';
+$s_threshold = 'Seuil';
+$s_status_level = 'Phase';
+$s_alter_level = 'Qui peut changer cette valeur';
+$s_validation = 'Validation du Workflow';
+$s_comment = 'Commentaire de Validation';
+$s_superfluous = 'La connection d\'une Phase vers elle-même est implicite et ne doit pas être fournie explicitement';
+$s_unreachable = 'Vous ne pouvez pas déplacer un bug dans cette Phase';
+$s_no_exit = 'Vous ne pouvez pas déplacer un bug hors de cette Phase';
+$s_access_levels = 'Niveaux d\'Accés';
+$s_access_change = 'Niveau d\'Accés Minimum pour Modifier cette Phase';
+$s_desc_bug_submit_status = 'Phase pour un nouveau bug';
+$s_desc_bug_reopen_status = 'Phase pour les bugs réouverts';
+$s_desc_bug_resolved_status_threshold = 'Phase à laquelle un bug est considéré comme résolu';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'La Phase par défaut de %s n\'est pas définie pour %s dans les Phases suivantes. Elle sera ignorée.';
+
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
+$s_assign_issue = 'Assigner un bug';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_allow_reporter_close = 'Permettre aux Raporteurs de fermer un Bug';
+$s_allow_reporter_reopen = 'Permettre aux Raporteurs de re-ouvrirun Bug';
 $s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_allow_user_edit = 'Permettre aux utilisateurs de modifier leurs propres Notes de Bug';
 $s_limit_access = 'Limit reporter\'s access to their own issues';
 $s_submit_status = 'Status to which a new issue is set';
 $s_assigned_status = 'Status to set auto-assigned issues to';
@@ -700,6 +713,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
@@ -722,7 +740,7 @@ $s_update_category_button = 'Mettre à jour la catégorie';
 $s_category_updated_msg = 'La catégorie a été modifiée avec succès...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'Ajouter un sous projet';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Le projet a été supprimé avec succès...';
@@ -1107,8 +1125,8 @@ $s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moin
 $s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';
 $s_field_delete_button = 'Supprimer le champ';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'Etes vous sûr de vouloir supprimer (définitivement) ce champ personnalisé du projet et effacer toutes les valeurs qui y sont associées ?';
+$s_field_remove_button = 'Supprimer le Champ';
 
 $s_hide_status = 'Cacher le statut';
 $s_filter_closed = 'Fermé';
@@ -1150,38 +1168,38 @@ $s_add_new_relationship_button = "Ajouter";
 $s_this_bug = "Bug courant";
 $s_relationship_added = "Relation ajoutée";
 $s_relationship_deleted = "Relation supprimée";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "aucune relation";
+$s_relationship_replaced = "Relation remplacéd";
+$s_replace_relationship_button = "Remplacer";
+$s_replace_relationship_sure_msg = "Il y a déjà une relation entre les deux bugs. Etes vous sûr de vouloir la remplacer ?";
+$s_relationship_with_parent = "Relation avec le bug parent";
 $s_delete_relationship_button = "Supprimer";
 $s_delete_relationship_sure_msg = "Etes-vous certain de vouloir supprimer cette relation ?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Tous les fils de ce bug ne sont pas encore résolus ou fermés.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Tous les fils de ce bug ne sont pas encore résolus ou fermés.<br>Avant de <b>résoudre/fermer</b> un bug père, tous ses bugs fils reliés devraient être résolus ou fermés.";
 $s_create_child_bug_button = "Créer un fils";
-$s_bug_cloned_to = "Issue cloned";
+$s_bug_cloned_to = "Bug cloné";
 $s_bug_created_from = "Bug généré depuis";
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
+$s_viewing_bug_relationship_graph_title = "Graphique Relationnel";
+$s_relation_graph = "Graphique des Relations";
+$s_dependency_graph = "Graphique des dépendances";
 $s_vertical = "Vertical";
 $s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_view_issue = "Afficher le Bug";
 
 # Source Control Integration
 $s_checkin = 'Control';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'Voi';
-$s_issues = 'ISSUES';
+$s_perm_rpt_capability = 'Possibilités';
+$s_view = 'Voir';
+$s_issues = 'BUGS';
 $s_report_issue = 'Rapporter un bug';
 $s_update_issue = ' Mise à jour de l\'information d\'un bug';
 $s_monitor_issue = 'Démarer la surveillance d\'un bug';
-$s_handle_issue = 'Handle an issue';
+$s_handle_issue = 'Gérer un bug';
 $s_move_issue = 'Déplacer un bug';
 $s_delete_issue = 'Supprimer un bug';
 $s_reopen_issue = 'Réouvrir un buge';
@@ -1197,27 +1215,27 @@ $s_update_notes = 'Mettre à jour notes';
 $s_delete_note = 'Supprimer une note';
 $s_view_private_notes = 'Voir les notes privées';
 $s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
+$s_view_private_news = 'Afficher les News privées';
+$s_manage_news = 'Gérer les news';
+$s_view_list_of_attachments = 'Afficher la liste des pièces jointes';
 $s_download_attachments = 'Télécharger les pièces jointes';
 $s_delete_attachments = 'Supprimer les pièces jointes';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
+$s_delete_attachment_button = "Supprimer";
+$s_delete_attachment_sure_msg = "Etes vous sûr de vouloir supprimer cette pièce attachée ?";
 $s_upload_issue_attachments = 'Mettre à jour les pièces jointes d\'un bug';
 $s_filters = 'filtres';
 $s_save_filters = 'Enregistrer les filtres';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
+$s_save_filters_as_shared = 'Enregistrer les filtres et les partager';
+$s_use_saved_filters = 'Utiliser les fitres enregistrés';
 $s_create_project = 'Créer un projet';
 $s_delete_project = 'Supprimer un projet';
 $s_manage_project = 'Gérer les projets';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
+$s_manage_user_access_to_project = 'Gérer les droits d\'accés utilisateur à un projet';
+$s_automatically_included_in_private_projects = 'Automatiquement inclus dans les projects privés';
+$s_project_documents = 'DOCUMENTS DU PROJET';
+$s_view_project_documents = 'Afficher les documents du projet';
+$s_upload_project_documents = 'Envoyer les documents projet';
+$s_link_custom_fields_to_projects = 'Lier des champs personnalisés aux projets';
 $s_sponsorships = 'SPONSORSHIPS';
 $s_view_sponsorship_details = 'View sponsorship details';
 $s_view_sponsorship_total = 'View sponsorship total';
@@ -1236,14 +1254,14 @@ $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'Chargement...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
+$s_between = 'Entre' ;
+$s_on_or_before = 'Pendant ou Avant' ;
+$s_before = 'Avant' ;
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_after = 'Après' ;
+$s_on_or_after = 'Pendant Ou Après' ;
 
 ?>
