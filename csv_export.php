@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.24 2005-05-24 23:22:48 vboctor Exp $
+	# $Id: csv_export.php,v 1.25 2005-06-08 22:09:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,7 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
+	helper_begin_long_process();
 
 	$t_page_number = 1;
 	$t_per_page = -1;
@@ -70,7 +71,7 @@
 			$t_function( '', 'ASC', COLUMNS_TARGET_CSV_PAGE );
 		}
 	}
-	
+
 	echo $t_nl;
 
 	$t_header = ob_get_clean();
