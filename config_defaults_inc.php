@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.267 2005-05-31 17:17:37 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.268 2005-06-09 12:55:08 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -339,6 +339,7 @@
 		'estonian',
 		'finnish',
 		'french',
+		'french_canadian',
 		'german',
 		'hungarian',
 		'italian',
