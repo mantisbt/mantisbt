@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.49 2005-04-20 15:22:18 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.50 2005-06-09 20:07:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -405,6 +405,11 @@
 	
 	    # fail if DB isn't accessible
 	    if ( !db_is_connected() ) {
+			return false;
+		}
+
+	    # fail if cookie is blank
+	    if ( '' === $p_cookie_string ) {
 			return false;
 		}
 
