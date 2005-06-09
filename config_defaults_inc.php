@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.268 2005-06-09 12:55:08 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.269 2005-06-09 19:54:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1163,7 +1163,10 @@
 	$g_filter_custom_fields_per_row = 8;
 	$g_view_filters = SIMPLE_DEFAULT;
 
-	$g_dhtml_filters = OFF;
+	# This switch enables the use of xmlhttprequest protocol to speed up the filter display.
+	# Rather than launching a separate page, the filters are updated in-line in the 
+	# view_all_bugs_page.
+	$g_dhtml_filters = ON;
 
 	#######################################
 	# Mantis Database Table Variables

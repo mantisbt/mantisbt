@@ -3,6 +3,7 @@ Mantis ChangeLog
 
 2005.06.xx  -  1.0.0
 
+- Updated Config: $g_dhtml_filters - changed default from OFF to ON (thraxisp)
 - Updated Brazilian Portuguese language (Juliano Ravasi Ferraz / vboctor)
 - Updated Danish language (Gunner Poulsen / vboctor)
 - Updated Estonian language (Klemens Kasemaa / vboctor)
