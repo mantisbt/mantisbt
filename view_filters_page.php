@@ -76,9 +76,6 @@
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
 
-	$t_sort = $t_filter['sort'];
-	$t_dir = $t_filter['dir'];
-
 	$t_current_user_access_level = current_user_get_access_level();
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
@@ -150,9 +147,6 @@
 		print "<input type=\"hidden\" name=\"offset\" value=\"0\" />";
 	}
 ?>
-<input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
-<input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
-
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="right" colspan="<?php PRINT ( 8 * $t_custom_cols ); ?>">
