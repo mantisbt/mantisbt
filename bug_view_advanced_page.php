@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.70 2005-06-09 20:04:42 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.71 2005-06-10 01:27:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -31,14 +31,6 @@
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 		
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... set on fly the current project. This to avoid problems with categories and handlers lists etc.
-		$t_redirect_url = "set_project.php?project_id=" . $t_bug->project_id .
-				"&make_default=no&ref=" . urlencode( "bug_view_advanced_page.php?bug_id=" . $f_bug_id );
-		print_header_redirect( $t_redirect_url );
-	}
-
 	compress_enable();
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );

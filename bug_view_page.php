@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.73 2005-06-09 20:04:43 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.74 2005-06-10 01:27:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,14 +33,6 @@
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
-
-	if( $t_bug->project_id != helper_get_current_project() ) {
-		# in case the current project is not the same project of the bug we are viewing...
-		# ... set on fly the current project. This to avoid problems with categories and handlers lists etc.
-		$t_redirect_url = "set_project.php?project_id=" . $t_bug->project_id .
-				"&make_default=no&ref=" . urlencode( "bug_view_page.php?bug_id=" . $f_bug_id );
-		print_header_redirect( $t_redirect_url );
-	}
 
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
