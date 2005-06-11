@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.135 2005-05-28 00:54:34 thraxisp Exp $
+	# $Id: print_api.php,v 1.136 2005-06-11 19:32:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -680,6 +680,9 @@
 		$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close );
 
 		if ( count( $t_enum_list ) > 0 ) {
+			# resort the list into ascending order
+			ksort( $t_enum_list );
+			reset( $t_enum_list );
 			echo '<select name="' . $p_select_label . '">';
 			foreach ( $t_enum_list as $key => $val ) {
 				echo "<option value=\"$key\"";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.168 2005-05-28 02:07:28 thraxisp Exp $
+	# $Id: html_api.php,v 1.169 2005-06-11 19:32:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -881,6 +881,12 @@
 				( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() && ( ON == config_get( 'allow_reporter_close' ) ) ) );
 
 		if ( count( $t_enum_list ) > 0 ) {
+			# resort the list into ascending order after noting the key from the first element (the default)
+			$t_default_arr = each( $t_enum_list );
+			$t_default = $t_default_arr['key'];
+			ksort( $t_enum_list );
+			reset( $t_enum_list );
+			
 			echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 
 			$t_button_text = lang_get( 'bug_status_to_button' );
@@ -888,7 +894,9 @@
 
 			echo " <select name=\"new_status\">"; # space at beginning of line is important
 			foreach ( $t_enum_list as $key => $val ) {
-				echo "<option value=\"$key\">$val</option>";
+				echo "<option value=\"$key\" ";
+				check_selected( $key, $t_default );
+				echo ">$val</option>";
 			}
 			echo '</select>';
 
