@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.40 2005-03-01 23:14:16 jlatour Exp $
+	# $Id: bug_report.php,v 1.41 2005-06-11 01:22:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -46,22 +46,8 @@
 	$t_bug_data->project_id			= gpc_get_int( 'project_id' );
 
 	$t_bug_data->reporter_id		= auth_get_current_user_id();
-	$t_upload_method	= config_get( 'file_upload_method' );
 
 	$t_bug_data->summary			= trim( $t_bug_data->summary );
-
-	# If a file was uploaded, and we need to store it on disk, let's make
-	#  sure that the file path for this project exists
-	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
-		  file_allow_bug_upload() &&
-		  ( DISK == $t_upload_method || FTP == $t_upload_method ) ) {
-		$t_file_path = project_get_field( $t_bug_data->project_id, 'file_path' );
-
-		if ( !file_exists( $t_file_path ) ) {
-			trigger_error( ERROR_NO_DIRECTORY, ERROR );
-		}
-	}
-
 
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
@@ -102,12 +88,8 @@
 	$t_bug_id = bug_create( $t_bug_data );
 
 	# Handle the file upload
-	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
-		  0 != $f_file['size'] &&
-		  file_allow_bug_upload() ) {
-		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
-	}
-
+    $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
+	file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
 
 	# Handle custom field submission
 	foreach( $t_related_custom_field_ids as $t_id ) {
