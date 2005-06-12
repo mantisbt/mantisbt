@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.41 2005-06-11 01:22:16 thraxisp Exp $
+	# $Id: bug_report.php,v 1.42 2005-06-12 21:01:34 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -41,7 +41,8 @@
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', '' );
 
-	$f_file					= gpc_get_file( 'file', null );
+	$f_file					= gpc_get_file( 'file', null ); #@@@ (thraxisp) Note that this always returns a structure
+															# size = 0, if no file
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 	$t_bug_data->project_id			= gpc_get_int( 'project_id' );
 
@@ -88,9 +89,11 @@
 	$t_bug_id = bug_create( $t_bug_data );
 
 	# Handle the file upload
-    $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
-	file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
-
+	if ( '' != $f_file['tmp_name'] ) {
+    	$f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
+		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
+	}
+	
 	# Handle custom field submission
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
