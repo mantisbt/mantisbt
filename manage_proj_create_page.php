@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.8 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: manage_proj_create_page.php,v 1.9 2005-06-12 09:03:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -42,7 +42,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo lang_get( 'project_name' )?>
+		<span class="required">*</span><?php echo lang_get( 'project_name' )?>
 	</td>
 	<td width="75%">
 		<input type="text" name="name" size="64" maxlength="128" />
