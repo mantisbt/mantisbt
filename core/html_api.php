@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.169 2005-06-11 19:32:42 thraxisp Exp $
+	# $Id: html_api.php,v 1.170 2005-06-12 08:51:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -365,7 +365,7 @@
 
 		echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a>', 
+			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a>',
 					'[<a href="http://www.mantisbt.org/" target="_blank">^</a>]</span>', "\n";
 		}
 		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
@@ -547,7 +547,7 @@
 	# Print the menu bar with a list of projects to which the user has access
 	function print_project_menu_bar() {
 		$t_project_ids = current_user_get_accessible_projects();
-		
+
 		PRINT '<table class="width100" cellspacing="0">';
 		PRINT '<tr>';
 			PRINT '<td class="menu">';
@@ -886,7 +886,7 @@
 			$t_default = $t_default_arr['key'];
 			ksort( $t_enum_list );
 			reset( $t_enum_list );
-			
+
 			echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 
 			$t_button_text = lang_get( 'bug_status_to_button' );
@@ -1154,6 +1154,8 @@
 		echo '<td class="center">';
 		html_button_bug_delete( $p_bug_id );
 		echo '</td>';
+
+		helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
 		echo '</tr></table>';
 	}

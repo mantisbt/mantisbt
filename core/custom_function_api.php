@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.22 2005-05-31 11:30:48 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.23 2005-06-12 08:51:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -387,5 +387,12 @@
 		$t_possible_values = implode( '|', $t_enum );
 
 		return $t_possible_values;
+	}
+
+	# --------------------
+	# This function prints the custom buttons on the current view page based on specified bug id
+	# and the context.  The printing of the buttons will typically call html_button() from
+	# html_api.php.  For each button, this function needs to generate the enclosing '<td>' and '</td>'.
+	function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {
 	}
 ?>
