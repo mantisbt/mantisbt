@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.136 2005-06-11 19:32:42 thraxisp Exp $
+	# $Id: print_api.php,v 1.137 2005-06-12 00:20:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -752,6 +752,12 @@
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
 							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
+
+		$t_custom_group_actions = config_get( 'custom_group_actions' );
+
+		foreach( $t_custom_group_actions as $t_custom_group_action ) {
+			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
+		}
 
 		$t_project_id = helper_get_current_project();
 

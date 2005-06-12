@@ -6,13 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.49 2005-06-09 20:35:39 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.50 2005-06-12 00:20:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page allows actions to be performed on an array of bugs
 
 	require_once( 'core.php' );
+
+	require_once( $t_core_path.'bug_group_action_api.php' );
 
 	auth_ensure_user_authenticated();
 
@@ -28,6 +30,15 @@
 
 	$t_finished = false;
 	$t_request = '';
+
+	$t_custom_group_actions = config_get( 'custom_group_actions' );
+
+	foreach( $t_custom_group_actions as $t_custom_group_action ) {
+		if ( $f_action == $t_custom_group_action['action'] ) {
+			require_once( $t_custom_group_action['form_page'] );
+			exit;
+		}
+	}
 
 	# Check if user selected to update a custom field.
 	$t_custom_fields_prefix = 'custom_field_';
@@ -125,8 +136,7 @@
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	html_page_top1();
-	html_page_top2();
+	bug_group_action_print_top();
 ?>
 
 <br />
@@ -135,26 +145,13 @@
 <form method="POST" action="bug_actiongroup.php">
 <input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <?php
+	bug_group_action_print_hidden_fields( $f_bug_arr );
+
 	if ( $f_action === 'CUSTOM' ) {
 		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
 <table class="width75" cellspacing="1">
-<?php
-
-$t_bug_rows = "";
-$t_i = 1;
-
-foreach( $f_bug_arr as $t_bug_id ) {
-	$t_class = sprintf( "row-%d", ($t_i++ % 2) + 1 );
-	$t_bug_rows .= sprintf( "<tr bgcolor=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n",
-		get_status_color( bug_get_field( $t_bug_id, 'status' ) ), string_get_bug_view_link( $t_bug_id ), 
-		string_attribute( bug_get_field( $t_bug_id, 'summary' ) )
-    );
-	echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
-}
-?>
-
 <?php
 if ( !$t_finished ) {
 ?>
@@ -252,23 +249,14 @@ if ( !$t_finished ) {
 	</td>
 </tr>
 </table>
-
 <br />
 
-<table class="width75" cellspacing="1">
-<tr class="row-1">
-	<td class="category" colspan="2">
-		<?php echo lang_get( 'actiongroup_bugs' ); ?>
-	</td>
-</tr>
 <?php
-	echo $t_bug_rows;
+	bug_group_action_print_bug_list( $f_bug_arr );
 ?>
-</table>
 </form>
 </div>
 
-
 <?php
-	html_page_bottom1( __FILE__ );
+	bug_group_action_print_bottom();
 ?>

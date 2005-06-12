@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.269 2005-06-09 19:54:25 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.270 2005-06-12 00:20:46 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1164,7 +1164,7 @@
 	$g_view_filters = SIMPLE_DEFAULT;
 
 	# This switch enables the use of xmlhttprequest protocol to speed up the filter display.
-	# Rather than launching a separate page, the filters are updated in-line in the 
+	# Rather than launching a separate page, the filters are updated in-line in the
 	# view_all_bugs_page.
 	$g_dhtml_filters = ON;
 
@@ -1573,4 +1573,19 @@
 	# Number of years in the future that custom date fields will display in
 	# drop down boxes.
 	$g_forward_year_count 				= 4 ;
+
+	# Custom Group Actions
+	# Sample:
+	#
+	# array(
+	#	array(	'action' => 'my_custom_action',
+	#			'form_page' => 'my_custom_action_page.php',
+	#			'action_page' => 'my_custom_action.php'
+	#   )
+	#	array(	'action' => 'my_custom_action2',
+	#			'form_page' => 'my_custom_action2_page.php',
+	#			'action_page' => 'my_custom_action2.php'
+	#   )
+	# );
+	$g_custom_group_actions = array();
 ?>

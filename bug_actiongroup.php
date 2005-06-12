@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.45 2005-05-18 02:11:39 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.46 2005-06-12 00:20:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,15 @@
 	$f_action	= gpc_get_string( 'action' );
 	$f_custom_field_id = gpc_get_int( 'custom_field_id', 0 );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
+
+	$t_custom_group_actions = config_get( 'custom_group_actions' );
+
+	foreach( $t_custom_group_actions as $t_custom_group_action ) {
+		if ( $f_action == $t_custom_group_action['action'] ) {
+			require_once( $t_custom_group_action['action_page'] );
+			exit;
+		}
+	}
 
 	$t_failed_ids = array();
 
