@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact project administrators if you should be on this list!
@@ -106,6 +106,7 @@ Espen Holje
 Felipe Tonioli
 Fernando Machado
 Francis Labrie
+Grétar Jón Einarsson
 Gunner Poulsen
 Hermann-Josef Beckers
 Heiko Gierer
