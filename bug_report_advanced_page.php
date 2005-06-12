@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.49 2005-05-19 00:25:52 thraxisp Exp $
+	# $Id: bug_report_advanced_page.php,v 1.50 2005-06-12 21:04:43 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -31,8 +31,6 @@
 						( 0 == $f_master_bug_id ) ? '' : '?m_id=' . $f_master_bug_id );
 	}
 
-	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
-
 	if( $f_master_bug_id > 0 ) {
 		# master bug exists...
 		bug_ensure_exists( $f_master_bug_id );
@@ -43,10 +41,23 @@
 			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 		}
 
-		# the user can at least update the master bug (needed to add the relationship)...
-		access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_master_bug_id );
-
 		$t_bug = bug_prepare_display( bug_get( $f_master_bug_id, true ) );
+
+		# the user can at least update the master bug (needed to add the relationship)...
+		access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
+		
+		#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
+		#       what the current project is set to.
+		if( $t_bug->project_id != helper_get_current_project() ) {
+            # in case the current project is not the same project of the bug we are viewing...
+            # ... override the current project. This to avoid problems with categories and handlers lists etc.
+            $g_project_override = $t_bug->project_id;
+            $t_changed_project = true;
+        } else {
+            $t_changed_project = false;
+        }
+
+	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 		$f_build				= $t_bug->build;
 		$f_platform				= $t_bug->platform;
@@ -68,15 +79,10 @@
 
 		$t_project_id			= $t_bug->project_id;
 
-		if( $t_project_id != helper_get_current_project() ) {
-			# in case the current project is not the same project of the bug we are cloning...
-			# ...se set on fly the current project. This to avoid problems with categories and handlers lists etc.
-			$t_redirect_url = "set_project.php?project_id=" . $t_project_id .
-				"&make_default=no&ref=" . urlencode( "bug_report_advanced_page.php?m_id=" . $f_master_bug_id );
-			print_header_redirect( $t_redirect_url );
-		}
 	}
 	else {
+	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
+
 		$f_build				= gpc_get_string( 'build', '' );
 		$f_platform				= gpc_get_string( 'platform', '' );
 		$f_os					= gpc_get_string( 'os', '' );
@@ -134,6 +140,9 @@
 		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
 	</td>
 	<td width="70%">
+		<?php if ( $t_changed_project ) {
+			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
+		} ?>
 		<select tabindex="1" name="category">
 			<?php print_category_option_list( $f_category ) ?>
 		</select>

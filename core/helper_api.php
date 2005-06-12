@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.59 2005-04-27 02:20:14 thraxisp Exp $
+	# $Id: helper_api.php,v 1.60 2005-06-12 21:04:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -144,10 +144,21 @@
 		return $t_timeout;
 	}
 
+    # this allows pages to override the current project settings.
+    #  This typically applies to the view bug pages where the "current"
+    #  project as used by the filters, etc, does not match the bug being viewed.
+    $g_project_override = null;
+    
 	# --------------------
 	# Return the current project id as stored in a cookie
 	#  If no cookie exists, the user's default project is returned
 	function helper_get_current_project() {
+        global $g_project_override;
+        
+        if ( $g_project_override !== null ) {
+            return $g_project_override;
+        }
+        
 		$t_cookie_name = config_get( 'project_cookie' );
 
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );

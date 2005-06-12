@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.71 2005-06-10 01:27:10 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.72 2005-06-12 21:04:43 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -23,14 +23,20 @@
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
-	if ( SIMPLE_ONLY == config_get( 'show_view' ) ) {
-		print_header_redirect ( 'bug_view_page.php?bug_id=' . $f_bug_id );
-	}
-
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
-		
+
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
+
+	if ( ADVANCED_ONLY == config_get( 'show_view' ) ) {
+		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );
+	}
+
 	compress_enable();
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );

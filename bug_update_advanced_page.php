@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.85 2005-05-01 16:20:22 thraxisp Exp $
+	# $Id: bug_update_advanced_page.php,v 1.86 2005-06-12 21:04:43 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,6 +24,17 @@
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
+	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
+
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+		$t_changed_project = true;
+	} else {
+		$t_changed_project = false;
+	}
+
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
@@ -35,7 +46,6 @@
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
-	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
 <?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
 <?php html_page_top2() ?>
@@ -92,6 +102,9 @@
 
 	<!-- Category -->
 	<td>
+		<?php if ( $t_changed_project ) {
+			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
+		} ?>
 		<select name="category">
 		<?php print_category_option_list( $t_bug->category, $t_bug->project_id ) ?>
 		</select>
