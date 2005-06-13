@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.72 2005-06-12 21:04:43 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.73 2005-06-13 19:15:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -34,7 +34,7 @@
 	}
 
 	if ( ADVANCED_ONLY == config_get( 'show_view' ) ) {
-		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );
+		print_header_redirect ( 'bug_view_page.php?bug_id=' . $f_bug_id );
 	}
 
 	compress_enable();
