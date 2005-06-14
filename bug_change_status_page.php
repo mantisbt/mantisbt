@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.21 2005-05-05 14:03:40 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.22 2005-06-14 22:00:32 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,6 +21,14 @@
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
+	$t_bug = bug_get( $f_bug_id );
+	
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
+	
 	$f_new_status = gpc_get_int( 'new_status' );
 	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
 
