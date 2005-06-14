@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.42 2005-06-12 21:01:34 thraxisp Exp $
+	# $Id: bug_report.php,v 1.43 2005-06-14 17:48:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -89,7 +89,7 @@
 	$t_bug_id = bug_create( $t_bug_data );
 
 	# Handle the file upload
-	if ( '' != $f_file['tmp_name'] ) {
+	if ( !is_blank( $f_file['tmp_name'] ) && ( 0 < $f_file['size'] ) ) {
     	$f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
 	}
