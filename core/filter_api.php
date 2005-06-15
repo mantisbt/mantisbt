@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.116 2005-06-07 19:49:53 thraxisp Exp $
+	# $Id: filter_api.php,v 1.117 2005-06-15 18:25:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -114,7 +114,7 @@
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-		
+
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie
 			#@@@ error instead?
@@ -1714,6 +1714,8 @@
 			</td>
 
 			<td class="small-caption" valign="top" colspan="2" id="relationship_type_filter_target">
+							<input type="hidden" name="relationship_type" value="<?php echo $t_filter['relationship_type'];?>" />
+							<input type="hidden" name="relationship_bug" value="<?php echo $t_filter['relationship_bug'];?>" />
 							<?php
 								$c_rel_type = $t_filter['relationship_type'];
 								$c_rel_bug = $t_filter['relationship_bug'];
