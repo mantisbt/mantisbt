@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.91 $
+	# $Revision: 1.92 $
 	# $Author: vboctor $
-	# $Date: 2005-06-08 11:06:39 $
+	# $Date: 2005-06-15 13:20:16 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.91 2005-06-08 11:06:39 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.92 2005-06-15 13:20:16 vboctor Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.258 -- jferraz 2005/06/07
 	###########################################################################
@@ -684,7 +684,7 @@ $s_comment = 'Comentário da Validação';
 $s_superfluous = 'Um arco de um status para ele mesmo é implícito, e não precisa ser fornecido explicitamente';
 $s_unreachable = 'Você não pode mover um caso para este status';
 $s_no_exit = 'Você não pode mover um caso para fora deste status';
-$s_access_levels = 'Access Levels';
+$s_access_levels = 'Níveis de Acesso';
 $s_access_change = 'Nível de Acesso Mínimo para Alterar para este Status';
 $s_desc_bug_submit_status = 'Status para o qual um novo caso é ajustado';
 $s_desc_bug_reopen_status = 'Status para o qual casos reabertos são ajustados';

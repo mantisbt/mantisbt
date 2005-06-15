@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.53 2005-06-12 21:04:43 thraxisp Exp $
+	# $Id: bug_report_page.php,v 1.54 2005-06-15 13:20:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -56,9 +56,9 @@
         } else {
             $t_changed_project = false;
         }
-        
+
 	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
-	    
+
 	    $f_product_version		= $t_bug->version;
 		$f_category				= $t_bug->category;
 		$f_reproducibility		= $t_bug->reproducibility;
@@ -74,7 +74,7 @@
 	}
 	else {
 	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
-	    
+
 		$f_product_version		= gpc_get_string( 'product_version', '' );
 		$f_category				= gpc_get_string( 'category', '' );
 		$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
@@ -82,10 +82,12 @@
 		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 		$f_summary				= gpc_get_string( 'summary', '' );
 		$f_description			= gpc_get_string( 'description', '' );
-		$f_additional_info		= gpc_get_string( 'additional_info', '' );
+		$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
 		$t_project_id			= helper_get_current_project();
+
+		$t_changed_project		= false;
 	}
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );

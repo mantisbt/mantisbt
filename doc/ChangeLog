@@ -3,6 +3,8 @@ Mantis ChangeLog
 
 2005.06.xx  -  1.0.0
 
+- Added Config: $g_default_bug_steps_to_reproduce - default value for the bug steps to reproduce field (vboctor).
+- Added Config: $g_default_bug_additional_info - default value for the bug addition information field (vboctor).
 - Updated Config: $g_dhtml_filters - changed default from OFF to ON (thraxisp)
 - Updated Brazilian Portuguese language (Juliano Ravasi Ferraz / vboctor)
 - Updated Danish language (Gunner Poulsen / vboctor)

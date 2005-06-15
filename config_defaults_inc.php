@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.271 2005-06-12 05:24:29 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.272 2005-06-15 13:20:14 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -550,6 +550,12 @@
 
 	# Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
 	$g_default_bug_view_status = VS_PUBLIC;
+
+	# Default value for steps to reproduce field.
+	$g_default_bug_steps_to_reproduce = '';
+
+	# Default value for addition information field.
+	$g_default_bug_additional_info = '';
 
 	# Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
 	$g_default_bugnote_view_status = VS_PUBLIC;

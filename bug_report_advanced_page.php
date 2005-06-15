@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.50 2005-06-12 21:04:43 thraxisp Exp $
+	# $Id: bug_report_advanced_page.php,v 1.51 2005-06-15 13:20:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -45,7 +45,7 @@
 
 		# the user can at least update the master bug (needed to add the relationship)...
 		access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
-		
+
 		#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 		#       what the current project is set to.
 		if( $t_bug->project_id != helper_get_current_project() ) {
@@ -78,9 +78,7 @@
 		$f_view_state			= $t_bug->view_state;
 
 		$t_project_id			= $t_bug->project_id;
-
-	}
-	else {
+	} else {
 	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 		$f_build				= gpc_get_string( 'build', '' );
@@ -97,11 +95,13 @@
 		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 		$f_summary				= gpc_get_string( 'summary', '' );
 		$f_description			= gpc_get_string( 'description', '' );
-		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
-		$f_additional_info		= gpc_get_string( 'additional_info', '' );
+		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
+		$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
 		$t_project_id			= helper_get_current_project();
+
+		$t_changed_project		= false;
 	}
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
