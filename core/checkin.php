@@ -7,7 +7,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: checkin.php,v 1.3 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: checkin.php,v 1.4 2005-06-15 14:46:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;
@@ -34,8 +34,11 @@
 
 	# Detect references to issues + concat all lines to have the comment log.
 	$t_commit_regexp = config_get( 'source_control_regexp' );
+    $t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
+
 	$t_comment = '';
 	$t_issues = array();
+	$t_fixed_issues = array();
 	while ( ( $t_line = fgets( STDIN, 1024 ) ) ) {
 		$t_comment .= $t_line;
 		if ( preg_match_all( $t_commit_regexp, $t_line, $t_matches ) ) {
@@ -43,10 +46,16 @@
 				$t_issues[] = $t_matches[1][$i];
 			}
 		}
+
+		if ( preg_match_all( $t_commit_fixed_regexp, $t_line, $t_matches) ) {
+			for ( $i = 0; $i < count( $t_matches[0] ); ++$i ) {
+				$t_fixed_issues[] = $t_matches[1][$i];
+			}
+		}
 	}
 
 	# If no issues found, then no work to do.
-	if ( count( $t_issues ) == 0 ) {
+	if ( ( count( $t_issues ) == 0 ) && ( count( $t_fixed_issues ) == 0 ) ) {
 		echo "Comment does not reference any issues.\n";
 		exit(0);
 	}
@@ -62,8 +71,15 @@
 	$t_history_new_value = '';
 
 	# Call the custom function to register the checkin on each issue.
+
 	foreach ( $t_issues as $t_issue_id ) {
-		helper_call_custom_function( 'checkin', array( $t_issue_id, $t_comment, $t_history_old_value, $t_history_new_value ) );
+		if ( !in_array( $t_issue_id, $t_fixed_issues ) ) {
+			helper_call_custom_function( 'checkin', array( $t_issue_id, $t_comment, $t_history_old_value, $t_history_new_value, false ) );
+		}
+	}
+
+	foreach ( $t_fixed_issues as $t_issue_id ) {
+		helper_call_custom_function( 'checkin', array( $t_issue_id, $t_comment, $t_history_old_value, $t_history_new_value, true ) );
 	}
 
 	exit( 0 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.272 2005-06-15 13:20:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.273 2005-06-15 14:46:19 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1058,14 +1058,24 @@
 	# private ones (DEVELOPER access recommended).
 	$g_source_control_account           = '';
 
-	# If set to a status, then after a checkin, the issue status is set to the
-	# specified status, otherwise if set to OFF, the issue status is not affected.
+	# If set to a status, then after a checkin with a log message that matches the regular expression in
+	# $g_source_control_fixed_regexp, the issue status is set to the specified status.  If set to OFF, the
+	# issue status is not changed.
 	$g_source_control_set_status_to     = OFF;
+
+	# Whenever an issue status is set to $g_source_control_set_status_to, the issue resolution is set to
+	# the value specified for this configuration.
+	$g_source_control_set_resolution_to = FIXED;
 
 	# Regular expression used to detect issue ids within checkin comments.
 	# see preg_match_all() documentation at
 	# http://www.php.net/manual/en/function.preg-match-all.php
 	$g_source_control_regexp = "/\bissue [#]{0,1}(\d+)\b/i";
+
+	# Regular expression used to detect the fact that an issue is fixed and extracts
+	# its issue id.  If there is a match to this regular expression, then the issue
+	# will be marked as resolved and the resolution will be set to fixed.
+	$g_source_control_fixed_regexp = "%source_control_regexp%";
 
 	# --- Bug Linking ---------------
 	# if a number follows this tag it will create a link to a bug.

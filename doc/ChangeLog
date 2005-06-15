@@ -3,6 +3,9 @@ Mantis ChangeLog
 
 2005.06.xx  -  1.0.0
 
+- Custom Function Changed: custom_function_default_checkin(): Added a $p_fixed parameter (vboctor).
+- Added Config: $g_source_control_fixed_regexp - the regular expression to use to detect that an issue is resolved (vboctor).
+- Added Config: $g_source_control_set_resolution_to - the resolution to set to when an issue is fixed (vboctor).
 - Added Config: $g_default_bug_steps_to_reproduce - default value for the bug steps to reproduce field (vboctor).
 - Added Config: $g_default_bug_additional_info - default value for the bug addition information field (vboctor).
 - Updated Config: $g_dhtml_filters - changed default from OFF to ON (thraxisp)

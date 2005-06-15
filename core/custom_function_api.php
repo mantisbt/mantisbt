@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.23 2005-06-12 08:51:15 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.24 2005-06-15 14:46:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -62,16 +62,17 @@
 
 	# --------------------
 	# Register a checkin in source control by adding a history entry and a note
-	# This can be overriden to do extra work like changing the issue status to
-	# config_get( 'bug_readonly_status_threshold' );
-	function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version ) {
+	# This can be overriden to do extra work.
+	# The issue status/resolution would only be set if the issue is fixed, and hence $p_fixed is passed as true.
+	function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version, $p_fixed ) {
 		if ( bug_exists( $p_issue_id ) ) {
 			history_log_event_special( $p_issue_id, CHECKIN, $p_file, $p_new_version );
 			bugnote_add( $p_issue_id, $p_comment, VS_PRIVATE == config_get( 'source_control_notes_view_status' ) );
 
 			$t_status = config_get( 'source_control_set_status_to' );
-			if ( OFF != $t_status ) {
+			if ( ( OFF != $t_status ) && $p_fixed ) {
 				bug_set_field( $p_issue_id, 'status', $t_status );
+				bug_set_field( $p_issue_id, 'resolution', config_get( 'source_control_set_resolution_to' ) );
 			}
 		}
 	}
