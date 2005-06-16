@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.43 2005-05-23 13:48:39 thraxisp Exp $
+	# $Id: core.php,v 1.44 2005-06-16 13:26:05 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -142,4 +142,9 @@
 	
 	# push push default language to speed calls to lang_get
 	lang_push( lang_get_default() );
+	
+	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
+		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
+	}
+
 ?>
