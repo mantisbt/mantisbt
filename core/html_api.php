@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.170 2005-06-12 08:51:16 vboctor Exp $
+	# $Id: html_api.php,v 1.171 2005-06-16 13:26:41 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -992,21 +992,6 @@
 	}
 
 	# --------------------
-	# Print a button to resolve the given bug
-	function html_button_bug_resolve( $p_bug_id ) {
-		$t_status = bug_get_field( $p_bug_id, 'status' );
-		$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-
-		if ( ( $t_status < $t_resolved_status ) &&
-				access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) &&
-				bug_check_workflow($t_status, $t_resolved_status ) ) {
-			html_button( 'bug_resolve_page.php',
-						 lang_get( 'resolve_bug_button' ),
-						 array( 'bug_id' => $p_bug_id ) );
-		}
-	}
-
-	# --------------------
 	# Print a button to move the given bug to a different project
 	function html_button_bug_move( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
@@ -1047,20 +1032,6 @@
 						 array( 'bug_id' => $p_bug_id ,
 						 				'new_status' => $t_reopen_status,
 						 				'reopen_flag' => ON ) );
-		}
-	}
-
-	# --------------------
-	# Print a button to close the given bug
-	function html_button_bug_close( $p_bug_id ) {
-		$t_status = bug_get_field( $p_bug_id, 'status' );
-
-		if ( access_can_close_bug ( $p_bug_id ) &&
-				( $t_status < CLOSED ) &&
-				bug_check_workflow($t_status, CLOSED) ) {
-			html_button( 'bug_close_page.php',
-						 lang_get( 'close_bug_button' ),
-						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
 
