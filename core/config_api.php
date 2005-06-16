@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.27 2005-05-23 13:51:02 thraxisp Exp $
+	# $Id: config_api.php,v 1.28 2005-06-16 02:26:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -301,11 +301,11 @@
 		global $g_cache_config, $g_cache_config_access;
 	
 		if ( '' !== $p_option ) {
-			unset( $g_cache_config[$p_option] );
-			unset( $g_cache_config_access[$p_option] );
+			unset( $GLOBALS['g_cache_config'][$p_option] );
+			unset( $GLOBALS['g_cache_config_access'][$p_option] );
 		} else {
-			unset( $g_cache_config );
-			unset( $g_cache_config_access );
+			unset( $GLOBALS['g_cache_config'] );
+			unset( $GLOBALS['g_cache_config_access'] );
 		}
 			
 	}

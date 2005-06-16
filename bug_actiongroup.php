@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.46 2005-06-12 00:20:46 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.47 2005-06-16 02:26:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,17 @@
 
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
-		$t_status = bug_get_field( $t_bug_id, 'status' );
+		$t_bug = bug_get( $t_bug_id, true );
+
+		if( $t_bug->project_id != helper_get_current_project() ) {
+			# in case the current project is not the same project of the bug we are viewing...
+			# ... override the current project. This to avoid problems with categories and handlers lists etc.
+			$g_project_override = $t_bug->project_id;
+			# @@@ (thraxisp) the next line goes away if the cache was smarter and used project
+			config_flush_cache(); # flush the config cache so that configs are refetched
+		}
+
+		$t_status = $t_bug->status;
 
 		switch ( $f_action ) {
 

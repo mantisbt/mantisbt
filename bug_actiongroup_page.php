@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.50 2005-06-12 00:20:46 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.51 2005-06-16 02:26:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,28 @@
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
-	$t_project_id = helper_get_current_project();
+	# run through the issues to see if they are all from one project
+	$t_project_id = ALL_PROJECTS;
+	$t_multiple_projects = false;
+	foreach( $f_bug_arr as $t_bug_id ) {
+		$t_bug = bug_get( $t_bug_id );
+		if ( $t_project_id != $t_bug->project_id ) {
+			if ( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
+				$t_multiple_projects = true;
+			} else {
+				$t_project_id = $t_bug->project_id;
+			}
+		}
+	}
+	if ( $t_multiple_projects ) {
+		$t_project_id = ALL_PROJECTS;
+	}
+	# override the project if necessary
+	if( $t_project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_project_id;
+	}
 
 	$t_finished = false;
 	$t_request = '';
@@ -137,6 +158,10 @@
 	}
 
 	bug_group_action_print_top();
+	
+	if ( $t_multiple_projects ) {
+		echo '<p class="bold">' . lang_get( 'multiple_projects' ) . '</p>';
+	}
 ?>
 
 <br />

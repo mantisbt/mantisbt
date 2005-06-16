@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.258 $
-	# $Author: vboctor $
-	# $Date: 2005-05-23 13:17:54 $
+	# $Revision: 1.259 $
+	# $Author: thraxisp $
+	# $Date: 2005-06-16 02:26:49 $
 	#
-	# $Id: strings_english.txt,v 1.258 2005-05-23 13:17:54 vboctor Exp $
+	# $Id: strings_english.txt,v 1.259 2005-06-16 02:26:49 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -442,6 +442,9 @@ $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Issue has been successfully assigned...';
