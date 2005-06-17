@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.137 2005-06-12 00:20:47 vboctor Exp $
+	# $Id: print_api.php,v 1.138 2005-06-17 12:11:35 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -753,12 +753,6 @@
 							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
 
-		$t_custom_group_actions = config_get( 'custom_group_actions' );
-
-		foreach( $t_custom_group_actions as $t_custom_group_action ) {
-			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
-		}
-
 		$t_project_id = helper_get_current_project();
 
 		if ( ALL_PROJECTS != $t_project_id ) {
@@ -777,6 +771,12 @@
 				$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
 				$commands[$t_command_id] = $t_command_caption;
 			}
+		}
+
+		$t_custom_group_actions = config_get( 'custom_group_actions' );
+
+		foreach( $t_custom_group_actions as $t_custom_group_action ) {
+			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
 		}
 
 		while (list ($key,$val) = each ($commands)) {
