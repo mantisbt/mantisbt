@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.28 2005-06-16 02:26:48 thraxisp Exp $
+	# $Id: config_api.php,v 1.29 2005-06-17 14:54:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -266,6 +266,17 @@
 	}
 	
 	# ------------------
+	# Sets the value of the given config option to the given value
+	#  If the config option does not exist, an ERROR is triggered
+	function config_set_cache( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
+		global $g_cache_config, $g_cache_config_access;
+		$g_cache_config[$p_option] = $p_value;
+		$g_cache_config_access[$p_option] = $p_access;
+
+		return true;
+	}
+	
+	# ------------------
 	# delete the config entry
 	function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 	global $g_cache_config, $g_cache_config_access;
@@ -292,6 +303,21 @@
 			$result = @db_query( $query);
 		}
 		config_flush_cache( $p_option );
+	}		
+		
+	# ------------------
+	# delete the config entry
+	function config_delete_project( $p_project = ALL_PROJECTS ) {
+		global $g_cache_config, $g_cache_config_access;
+		$t_config_table = config_get_global( 'mantis_config_table' );
+		$c_project = db_prepare_int( $p_project );
+		$query = "DELETE FROM $t_config_table
+				WHERE project_id=$c_project";
+
+		$result = @db_query( $query);
+		
+		# flush cache here in case some of the deleted configs are in use.
+		config_flush_cache(); 
 	}		
 		
 	# ------------------

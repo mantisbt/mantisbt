@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.73 2005-05-12 21:42:06 jlatour Exp $
+	# $Id: project_api.php,v 1.74 2005-06-17 14:54:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -237,7 +237,8 @@
 	# Delete a project
 	function project_delete( $p_project_id ) {
 		$t_email_notifications = config_get( 'enable_email_notification' );
-		config_set( 'enable_email_notification', OFF );
+		# temporarily disable all notifications
+		config_set_cache( 'enable_email_notification', OFF );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
@@ -266,6 +267,12 @@
 
 		# Delete all news entries associated with the project being deleted
 		news_delete_all( $p_project_id );
+		
+		# Delete project specific configurations
+		config_delete_project( $p_project_id );
+		
+		# Delete any user prefs that are project specific
+		user_pref_delete_project( $p_project_id );
 
 		# Delete the project entry
 		$query = "DELETE FROM $t_project_table
@@ -273,7 +280,7 @@
 
 		db_query( $query );
 
-		config_set( 'enable_email_notification', $t_email_notifications );
+		config_set_cache( 'enable_email_notification', $t_email_notifications );
 
 		project_clear_cache( $p_project_id );
 

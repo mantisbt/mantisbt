@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.23 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.24 2005-06-17 14:54:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -281,6 +281,26 @@
 		db_query( $query );
 
 		user_pref_clear_cache( $p_user_id );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# delete all preferences for a project for all users (part of deleting the project)
+	# returns true if the prefs were successfully deleted
+	#
+	# It is far more efficient to delete them all in one query than to
+	#  call user_pref_delete() for each one and the code is short so that's
+	#  what we do
+	function user_pref_delete_project( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+
+		$query = "DELETE FROM $t_user_pref_table
+				  WHERE project_id='$c_project_id'";
+		db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
