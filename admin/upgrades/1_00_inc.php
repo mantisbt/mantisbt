@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.4 2005-05-23 14:40:28 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.5 2005-06-17 22:28:53 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,6 +87,12 @@
 			'user_access_index',
 			'Add index on access_level in user table',
 			"ALTER TABLE $t_user_table ADD INDEX ( access_level )"
+		);
+
+	$upgrades[] = new SQLUpgrade(
+			'cf_string_bug_index',
+			'Add index on bug_id in custom_field_string table',
+			"ALTER TABLE $t_custom_field_string_table ADD INDEX ( bug_id )"
 		);
 
 	return $upgrades;
