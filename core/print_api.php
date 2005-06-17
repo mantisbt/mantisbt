@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.138 2005-06-17 12:11:35 vboctor Exp $
+	# $Id: print_api.php,v 1.139 2005-06-17 21:31:26 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,7 +178,7 @@
 		$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
-			$t_sort_name = $t_user_name;
+			$t_sort_name = strtolower( $t_user_name );
 			if ( $t_show_realname && ( $t_user['realname'] <> "" ) ){
 				$t_user_name = string_attribute( $t_user['realname'] );
 				if ( $t_sort_by_last_name ) {
