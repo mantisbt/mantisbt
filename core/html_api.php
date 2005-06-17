@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.171 2005-06-16 13:26:41 thraxisp Exp $
+	# $Id: html_api.php,v 1.172 2005-06-17 21:27:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -555,7 +555,7 @@
 
 			foreach ( $t_project_ids as $t_id ) {
 				PRINT " | <a href=\"set_project.php?project_id=$t_id\">" . string_display( project_get_field( $t_id, 'name' ) ) . '</a>';
-				print_subproject_menu_bar( $t_id );
+				print_subproject_menu_bar( $t_id, $t_id . ';' );
 			}
 
 			PRINT '</td>';
@@ -565,12 +565,12 @@
 
 	# --------------------
 	# Print the menu bar with a list of projects to which the user has access
-	function print_subproject_menu_bar( $p_project_id ) {
+	function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 		$t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
 		$t_char = ':';
 		foreach ( $t_subprojects as $t_subproject ) {
-			PRINT "$t_char <a href=\"set_project.php?project_id=$t_subproject\">" . string_display( project_get_field( $t_subproject, 'name' ) ) . '</a>';
-			print_subproject_menu_bar( $t_subproject );
+			PRINT "$t_char <a href=\"set_project.php?project_id=$p_parents$t_subproject\">" . string_display( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+			print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
 			$t_char = ',';
 		}
 	}
