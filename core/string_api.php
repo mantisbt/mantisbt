@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.71 2005-04-27 14:37:12 vboctor Exp $
+	# $Id: string_api.php,v 1.72 2005-06-20 15:13:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -117,9 +117,12 @@
 		$t_string = string_restore_valid_html_tags( $t_string );
 		$t_string = string_nl2br( $t_string );
 		$t_string = string_insert_hrefs( $t_string );
-		$t_string = string_process_bug_link( $t_string );
-		$t_string = string_process_bugnote_link( $t_string );
+		$t_string = string_process_bug_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
+		$t_string = string_process_bugnote_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
 		$t_string = string_process_cvs_link( $t_string );
+
+		# another escaping to escape the special characters created by the generated links
+		$t_string = htmlspecialchars( $t_string );
 
 		return $t_string;
 	}
@@ -200,14 +203,14 @@
 	#
 	# The bug tag ('#' by default) must be at the beginning of the string or
 	#  preceeded by a character that is not a letter, a number or an underscore
-	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
+	#
+	# if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
+	function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 		$t_tag = config_get( 'bug_link_tag' );
 		# bail if the link tag is blank
 		if ( '' == $t_tag ) {
 			return $p_string;
 		}
-
-		$t_path = config_get( 'path' );
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag, '/') . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
@@ -220,7 +223,7 @@
 				if ( isset( $t_match[2] ) ) {
 					$t_bug_id = $t_match[2];
 					if ( bug_exists( $t_bug_id ) ) {
-						$t_result .= string_get_bug_view_link( $t_bug_id, null );
+						$t_result .= string_get_bug_view_link( $t_bug_id, null, $p_detail_info, $p_fqdn );
 					} else {
 						$t_result .= $t_bug_id;
 					}
@@ -257,14 +260,14 @@
 	#
 	# The bugnote tag ('~' by default) must be at the beginning of the string or
 	#  preceeded by a character that is not a letter, a number or an underscore
-	function string_process_bugnote_link( $p_string, $p_include_anchor=true ) {
+	#
+	# if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
+	function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 		$t_tag = config_get( 'bugnote_link_tag' );
 		# bail if the link tag is blank
 		if ( '' == $t_tag ) {
 			return $p_string;
 		}
-
-		$t_path = config_get( 'path' );
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
@@ -279,7 +282,7 @@
 					if ( bugnote_exists( $t_bugnote_id ) ) {
 						$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
 						if ( bug_exists( $t_bug_id ) ) {
-							$t_result .= string_get_bugnote_view_link( $t_bug_id, $t_bugnote_id, null );
+							$t_result .= string_get_bugnote_view_link( $t_bug_id, $t_bugnote_id, null, $p_detail_info, $p_fqdn );
 						} else {
 							$t_result .= $t_bugnote_id;
 						}
@@ -443,14 +446,16 @@
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true ) {
-		$t_link = "";
-
+	function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
 		if ( bug_exists( $p_bug_id ) ) {
-			$t_summary	= string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-			$t_status	= string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
-			$t_link		= '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
+			$t_link = '<a href="';
+			if ( $p_fqdn ) {
+				$t_link .= config_get( 'path' );
+			}
+			$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
 			if ( $p_detail_info ) {
+				$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
+				$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
 				$t_link .=  ' title="[' . $t_status . '] ' . $t_summary . '"';
 			}
 			$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
@@ -464,14 +469,17 @@
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true ) {
-		$t_link = "";
-
+	function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
 		if ( bug_exists( $p_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
-			$t_reporter		= string_attribute( user_get_name ( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
-			$t_update_date	= string_attribute( date( config_get( 'normal_date_format' ), ( db_unixtimestamp( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) ) );
-			$t_link		= '<a href="' . string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
+			$t_link = '<a href="';
+			if ( $p_fqdn ) {
+				$t_link .= config_get( 'path' );
+			}
+
+			$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
 			if ( $p_detail_info ) {
+				$t_reporter = string_attribute( user_get_name ( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
+				$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( db_unixtimestamp( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) ) );
 				$t_link .=  ' title="[' . $t_update_date . '] ' . $t_reporter . '"';
 			}
 			$t_link .= '>' . lang_get( 'bugnote' ) . ': ' . bugnote_format_id( $p_bugnote_id) . '</a>';

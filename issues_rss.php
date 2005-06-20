@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.3 2005-05-23 13:17:54 vboctor Exp $
+	# $Id: issues_rss.php,v 1.4 2005-06-20 15:13:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,6 @@
 	$encoding = lang_get( 'charset' );
 	$about = $t_path;
 	$title = config_get( 'window_title' ) . ' - ' . lang_get( 'issues' );
-	$description = '';  // @@@ add a description
 	$image_link = $t_path . 'images/mantis_logo_button.gif';
 
 	# only rss 2.0
@@ -62,6 +61,8 @@
 	if ( $f_filter_id !== 0 ) {
 		$title .= ' (' . filter_get_field( $f_filter_id, 'name' ) . ')';
 	}
+
+	$description = $title;
 
 	# in minutes (only rss 2.0)
 	$cache = '10';
@@ -75,7 +76,7 @@
 	# person, an organization, or a service
 	$creator = '';
 
-	$date = (string) date('Y-m-d\TH:i:sO');
+	$date = (string) date( 'r' );
 	$language = lang_get( 'phpmailer_language' );
 	$rights = '';
 
@@ -85,7 +86,11 @@
 	# person, an organization, or a service
 	$contributor = (string) '';
 
-	$rssfile->addDCdata( $publisher, $creator, $date, $language, $rights, $coverage, $contributor );
+	$rssfile->setPublisher( $publisher );
+	$rssfile->setCreator( $creator );
+	$rssfile->setRights( $rights );
+	$rssfile->setCoverage( $coverage );
+	$rssfile->setContributor( $contributor );
 
 	# hourly / daily / weekly / ...
 	$period = (string) 'hourly';
@@ -93,7 +98,12 @@
 	# every X hours/days/...
 	$frequency = (int) 1;
 
-	$base = (string) date('Y-m-d\TH:i:sO');
+	$base = (string) date( 'Y-m-d\TH:i:sO' );
+
+	# add missing : in the O part of the date.  PHP 5 supports a 'c' format which will output the format
+	# exactly as we want it.
+	# // 2002-10-02T10:00:00-0500 -> // 2002-10-02T10:00:00-05:00
+	$base = substr( $base, 0, 22 ) . ':' . substr( $base, -2 );
 
 	$rssfile->addSYdata( $period, $frequency, $base );
 
@@ -139,6 +149,15 @@
 
 		# author of item
 		$author = user_get_name( $t_bug->reporter_id );
+		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
+			$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
+			if ( is_blank( $t_author_email ) ) {
+				$t_author_email = $author . '@example.com';
+			}
+		} else {
+			$t_author_email = $author . '@example.com';
+		}
+		$author .= ' &lt;' . $t_author_email . '&gt;';
 
 		# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
 		$comments = $t_path . 'view.php?id=' . $row['id'] . '#bugnotes';
