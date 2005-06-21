@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.75 2005-06-12 21:04:44 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.76 2005-06-21 12:27:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,6 +25,8 @@
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_history	= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
+
+	bug_ensure_exists( $f_bug_id );
 
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
