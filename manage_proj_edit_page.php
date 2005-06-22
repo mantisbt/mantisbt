@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.88 2005-05-16 12:56:06 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.89 2005-06-22 13:20:42 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -231,14 +231,17 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php
 	$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id );
 	$t_all_subprojects[] = $f_project_id;
+	$t_manage_access = config_get( 'manage_project_threshold' );
 
 	$t_projects = project_get_all_rows();
 
 	$t_projects = multi_sort( $t_projects, 'name', ASC );
 
 	foreach ( $t_projects as $t_project ) {
-		if ( in_array( $t_project['id'], $t_all_subprojects ) || in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ) {
-			continue;
+		if ( in_array( $t_project['id'], $t_all_subprojects ) || 
+            in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
+            ! access_has_project_level( $t_manage_access, $t_project ) ) {
+                continue;
 		}
 ?>
 				<option value="<?php echo $t_project['id'] ?>"><?php echo $t_project['name'] ?></option>
@@ -621,7 +624,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 	$t_sort = array();
 	foreach ( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = $t_user_name;
+		$t_sort_name = strtolower( $t_user_name );
 		if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
 			if ( ON == config_get( 'sort_by_last_name') ) {
