@@ -9,12 +9,13 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
+	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/06/23
 	# -------------------------------------------------
-	# $Revision: 1.89 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:44 $
+	# $Revision: 1.90 $
+	# $Author: vboctor $
+	# $Date: 2005-06-23 13:35:36 $
 	#
-	# $Id: strings_polish.txt,v 1.89 2005-04-21 06:52:44 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.90 2005-06-23 13:35:36 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -543,6 +544,8 @@ $s_summary = 'Podsumowanie';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Kroki, by powtórzyæ';
 $s_update_information_button = 'Aktualizuj informacjê';
+$s_sticky_issue = 'Zagadnienie przyklejone';
+$s_profile = 'Profil';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Aktualizacja Zaawansowana';
@@ -651,14 +654,20 @@ $s_edit_user_link = 'Edytuj dane';
 # manage_config_email_page
 $s_config_all_projects = 'Uwaga: Ta konfiguracja dotyczy WSZYSTKICH PROJEKTÓW.';
 $s_config_project = 'Uwaga: Ta konfiguracja dotyczy tylko projektu %s.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Ustawienia dla projektu zastêpuj± pozosta³e.';
+$s_colour_global = 'Wszystkie ustawienia projektu zastêpuj± domy¶ln± konfiguracjê.';
 $s_issue_reporter = 'U¿ytkownik który zg³osi³ zagadnienie';
 $s_issue_handler = 'U¿ytkownik który obs³uguje zagadnienie';
 $s_users_added_bugnote = 'U¿ytkownik który doda³ komentarz.';
 $s_change_configuration = 'Aktualizuj konfiguracjê';
+$s_message = 'Wiadomo¶æ';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Zmieñ u¿ytkowników ktorzy mog± zmieniæ domy¶lne powiadomienia na';
 $s_notify_actions_change_access = 'Zmieñ u¿ytkowników którzy mog± zmieniæ powiadomienia na';
+$s_revert_to_system = 'Usuñ ustawienia wszystkich projektów';
+$s_revert_to_all_project = 'Usuñ ustawienia dla tego projektu';
 
 # manage_config_workflow_page
 $s_non_existent = 'nie istnieje';
@@ -682,6 +691,9 @@ $s_desc_bug_resolved_status_threshold = 'Status przy którym zagadnienie jest uzn
 $s_workflow_change_access = 'Kto mo¿e modyfikowaæ przep³yw pracy';
 $s_access_change_access = 'Kto mo¿e modyfikowaæ poziomy dostêpu do statusów';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Przypisz zagadnienie';
 $s_allow_close_immediate = 'Zezwól na zamkniêcie zagadnienia przy rozwi±zywaniu';
@@ -696,6 +708,12 @@ $s_resolved_status = 'Status przy którym zagadnienie jest uznane za rozwi±zane';
 $s_readonly_status = 'Status przy którym zagadnienie staje siê tylko do odczytu';
 $s_reopen_status = 'Status na który jest ustawiane ponownie otwarte zagadnienie';
 $s_reopen_resolution = 'Rozwi±zanie na które jest ustawiane ponownie otwarte zagadnienie';
+
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Usuñ ustawienia';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt zosta³ pomy¶lnie dodany...';
