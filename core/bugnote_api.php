@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.36 2005-06-08 15:02:21 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.37 2005-06-26 02:05:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -282,7 +282,8 @@
 			$g_cache_bugnotes = array();
 		}
 
-		if ( !isset( $g_cache_bugnotes[$p_bug_id] ) )  {
+		# the cache should be aware of the sorting order
+		if ( !isset( $g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order] ) )  {
 			$c_bug_id            	= db_prepare_int( $p_bug_id );
 			$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
 			$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
@@ -305,11 +306,13 @@
 				$t_bugnote_limit = $p_user_bugnote_limit;
 			}
 
+			# sort by bugnote id which should be more accurate than submit date, since two bugnotes
+			# may be submitted at the same time if submitted using a script (eg: MantisConnect).
 			$query = "SELECT b.*, t.note
 			          	FROM      $t_bugnote_table b
 			          	LEFT JOIN $t_bugnote_text_table t ON b.bugnote_text_id = t.id
 			          	WHERE b.bug_id = '$c_bug_id'
-			          	ORDER BY b.date_submitted $p_user_bugnote_order";
+			          	ORDER BY b.id $p_user_bugnote_order";
 			$t_bugnotes = array();
 
 			# BUILD bugnotes array
@@ -332,10 +335,10 @@
 
 				$t_bugnotes[] = $t_bugnote;
 			}
-			$g_cache_bugnotes[$p_bug_id] = $t_bugnotes;
+			$g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order] = $t_bugnotes;
 		}
 
-		return $g_cache_bugnotes[$p_bug_id];
+		return $g_cache_bugnotes[$p_bug_id][$p_user_bugnote_order];
 	}
 
 	#===================================
