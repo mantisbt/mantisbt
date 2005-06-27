@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.69 2005-05-02 14:06:58 vboctor Exp $
+	# $Id: file_api.php,v 1.70 2005-06-27 14:07:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -186,7 +186,7 @@
 			if ( $t_can_download &&
 				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 				( $v_filesize != 0 ) &&
-				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
+				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), array( 'png', 'jpg', 'jpeg', 'gif', 'bmp' ), true ) ) ) {
 
 				PRINT "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
 				$image_previewed = true;
