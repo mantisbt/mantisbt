@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.49 2005-05-24 23:22:47 vboctor Exp $
+	# $Id: constant_inc.php,v 1.50 2005-06-28 11:04:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -281,6 +281,12 @@
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);
+
+	# Filter Position
+	define( 'FILTER_POSITION_NONE',				0 );
+	define( 'FILTER_POSITION_TOP',				1 );
+	define( 'FILTER_POSITION_BOTTOM',			2 );
+	define( 'FILTER_POSITION_BOTH',				3 );  // FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
 
 	# Flags for settings E-mail categories
 	define( 'EMAIL_CATEGORY_PROJECT_CATEGORY',	1);

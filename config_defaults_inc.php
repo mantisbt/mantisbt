@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.273 2005-06-15 14:46:19 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.274 2005-06-28 11:04:05 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -440,6 +440,10 @@
 	# --- Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
+
+	# --- Position of the filter box, can be: FILTER_POSITION_*
+	# FILTER_POSITION_TOP, FILTER_POSITION_BOTTOM, or 0 for none.
+	$g_filter_position	= FILTER_POSITION_TOP;
 
 	# --- Show a legend with percentage of bug status
 	# --- x% of all bugs are new, y% of all bugs are assigned and so on.

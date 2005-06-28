@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.35 2005-04-26 01:27:58 thraxisp Exp $
+	# $Id: relationship_api.php,v 1.36 2005-06-28 11:04:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -736,7 +736,7 @@
 </tr>
 <?php
 		# bug not read-only and user authenticated
-		if ( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() ) {
+		if ( !bug_is_readonly( $p_bug_id ) ) {
 
 			# user access level at least updater
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {

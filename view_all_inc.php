@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.159 2005-05-24 23:22:48 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.160 2005-06-28 11:04:05 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,8 +32,12 @@
 	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_VIEW_PAGE ) );
 	$col_count = sizeof( $t_columns );
 
+	$t_filter_position = config_get( 'filter_position' );
+
 	# -- ====================== FILTER FORM ========================= --
-	filter_draw_selection_area( $f_page_number );
+	if ( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
+		filter_draw_selection_area( $f_page_number );
+	}
 	# -- ====================== end of FILTER FORM ================== --
 
 
@@ -191,4 +195,10 @@
 	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
 	}
+
+	# -- ====================== FILTER FORM ========================= --
+	if ( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
+		filter_draw_selection_area( $f_page_number );
+	}
+	# -- ====================== end of FILTER FORM ================== --
 ?>
