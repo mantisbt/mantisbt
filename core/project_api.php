@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.74 2005-06-17 14:54:53 thraxisp Exp $
+	# $Id: project_api.php,v 1.75 2005-06-28 19:22:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -490,7 +490,7 @@
 						# private threshold is a number, but request is an array, use values in request higher than threshold
 						$t_global_access_level = array();
 						foreach ( $p_access_level as $t_threshold ) {
-							if ( $t_private_project_threshold >= $t_threshold ) {
+							if ( $t_threshold >= $t_private_project_threshold ) {
 								$t_global_access_level[] = $t_threshold;
 							}
 						}
