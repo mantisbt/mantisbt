@@ -8,11 +8,11 @@
 	# Changes applied to 0.13 database to give us 0.14
 
 	# --------------------------------------------------------
-	# $Id: 0_13_inc.php,v 1.7 2005-02-12 20:01:09 jlatour Exp $
+	# $Id: 0_13_inc.php,v 1.8 2005-07-02 00:56:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( 'db_table_names_inc.php' );
+	require( 'db_table_names_inc.php' );
 
 	$upgrades = array();
 

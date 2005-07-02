@@ -8,11 +8,11 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.5 2005-06-17 22:28:53 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.6 2005-07-02 00:56:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( 'db_table_names_inc.php' );
+	require ( 'db_table_names_inc.php' );
 
 	$upgrades = array();
 
@@ -88,12 +88,21 @@
 			'Add index on access_level in user table',
 			"ALTER TABLE $t_user_table ADD INDEX ( access_level )"
 		);
-
+		
 	$upgrades[] = new SQLUpgrade(
 			'cf_string_bug_index',
 			'Add index on bug_id in custom_field_string table',
 			"ALTER TABLE $t_custom_field_string_table ADD INDEX ( bug_id )"
 		);
+	
+	# this line should be the last upgrade in a version. When it is set, the upgrader
+	# assumed that all updates in this file have been applied
+	
+	# uncomment the following line before the final release when the installer ( schema.php )is 
+	# sync'd with these incremantal updates
+	#$upgrades[] = new ReleaseUpgrade( '1.0.0' );
+
+
 
 	return $upgrades;
 ?>

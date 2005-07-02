@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.1 2005-04-26 17:35:08 thraxisp Exp $
+	# $Id: install.php,v 1.2 2005-07-02 00:56:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,6 +21,8 @@
 	define( 'GOOD', 1 );
 	$g_failed = false;
 
+	# -------
+	# print test result
 	function print_test_result( $p_result, $p_hard_fail=true, $p_message='' ) {
 		global $g_failed;
 		echo '<td ';
@@ -29,25 +31,28 @@
 				$g_failed = true;
 				echo 'bgcolor="red">BAD';
 			} else {
-				echo 'bgcolor="pink">BAD';
+				echo 'bgcolor="pink">POSSIBLE PROBLEM';
+			}
+			if ( '' != $p_message ) {
+				echo '<br />' . $p_message;
 			}
 		}
 
 		if ( GOOD == $p_result ) {
 			echo 'bgcolor="green">GOOD';
 		}
-		if ( '' !== $p_message ) {
-			echo '<br />' . $p_message;
-		}
-		echo '<td>';
+		echo '</td>';
 	}
 
-	//temporary default values
-	$t_hostname = 'localhost';
-	$t_database_name = 'bugtrack';
-	$t_db_username = '';
-	$t_db_password = '';
+	# -------
+	# print test header and result
+	function print_test( $p_test_description, $p_result, $p_hard_fail=true, $p_message='' ) {
 	
+		echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
+		print_test_result( $p_result, $p_hard_fail, $p_message );
+		echo "</tr>\n";
+	}
+
 	# install_state
 	#   0 = no checks done
 	#   1 = server ok, get database information
@@ -55,8 +60,18 @@
 	#   3 = install the database
 	#   4 = get additional config file information
 	#   5 = write the config file
+	#	6 = post install checks
+	#	7 = done, link to login or db updater
 	$t_install_state = gpc_get_int( 'install', 0 );
 
+	# read control variables with defaults
+	$f_hostname = gpc_get('hostname', 'localhost');
+	$f_db_type = gpc_get('db_type', '');
+	$f_database_name = gpc_get('database_name', 'bugtrack');
+	$f_db_username = gpc_get('db_username', '');
+	$f_db_password = gpc_get('db_password', '');
+	$f_admin_username = gpc_get( 'admin_username', '' );
+	$f_admin_password = gpc_get( 'admin_password', '');
 ?>
 <html>
 <head>
@@ -72,6 +87,9 @@
 		<td class="title">
 		<?php
 			switch ( $t_install_state ) {
+				case 6:
+					echo "Post Installation Checks";
+					break;
 				case 5:
 					echo "Install Configuration File";
 					break;
@@ -109,7 +127,7 @@ if ( 0 == $t_install_state ) {
 	</td>
 </tr>
 
-<!-- Check Php Version -->
+<!-- Check PHP Version -->
 <tr>
 	<td bgcolor="#ffffff">
 		Checking  PHP Version (Your version is <?php echo phpversion(); ?>)
@@ -122,7 +140,7 @@ if ( 0 == $t_install_state ) {
 				if ( version_compare ( phpversion() , '4.0.6', '>=' ) ) {
 					print_test_result( GOOD );
 				} else {
-					print_test_result( BAD );
+					print_test_result( BAD, 'Upgrade the version of PHP to a more recent version' );
 				}
 			} else {
 			 	print_test_result( BAD );
@@ -132,63 +150,11 @@ if ( 0 == $t_install_state ) {
 </tr>
 
 <!-- Check Safe Mode -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking If Safe mode is enabled for install script
-	</td>
-	<?php
-		if ( ! ini_get ( 'SAFE_MODE' ) ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD );
-		}
-	?>
-</tr>
+<?php print_test( 'Checking If Safe mode is enabled for install script', 
+		! ini_get ( 'SAFE_MODE' ),
+		true,
+		'Disable safe_mode in php.ini before proceeding' ) ?>
 
-<!-- Checking MD5 -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking for MD5 Crypt() support
-	</td>
-	<?php
-		if ( 1 === CRYPT_MD5 ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD, false );
-		}
-	?>
-</tr>
-
-<!-- Checking register_globals are off -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking for register_globals are off for mantis
-	</td>
-	<?php
-		if ( ! ini_get_bool( 'register_globals' ) ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD );
-		}
-	?>
-</tr>
-
-<!-- Checking config file is writable -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking that configuration file can be created
-	</td>
-	<?php
-		$t_fd = @fopen( $g_absolute_path . DIRECTORY_SEPARATOR . 'config_inc.php', 'x' );
-		if ( false !== $t_fd ) {
-			print_test_result( GOOD );
-			fclose( $t_fd );
-			@unlink( $g_absolute_path . DIRECTORY_SEPARATOR . 'config_inc.php' );
-		} else {
-			print_test_result( BAD );
-		}
-	?>
-</tr>
 </table>
 <?php
 	if ( false == $g_failed ) {
@@ -202,36 +168,10 @@ if ( 2 == $t_install_state ) {
 
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <!-- Setting config variables -->
-<tr>
-	<td bgcolor="#ffffff">
-		Setting Database Hostname
-	</td>
-	<?php
-			$f_hostname = gpc_get('hostname', '');
-			$g_config_entry['hostname'] = '\''.$f_hostname.'\'';
-			if ( '' !== $f_hostname ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD );
-			}
-	?>
-</tr>
+<?php print_test( 'Setting Database Hostname', '' !== $f_hostname , true, 'host name is blank' ) ?>
 
 <!-- Setting config variables -->
-<tr>
-	<td bgcolor="#ffffff">
-		Setting Database Type
-	</td>
-	<?php
-			$f_db_type = gpc_get('db_type', '');
-			$g_config_entry['db_type'] = '\''.$f_db_type.'\'';
-			if ( '' !== $f_db_type ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD );
-			}
-	?>
-</tr>
+<?php print_test( 'Setting Database Type', '' !== $f_db_type , true, 'database type is blank?' ) ?>
 
 <!-- Checking DB support-->
 <tr>
@@ -257,102 +197,54 @@ if ( 2 == $t_install_state ) {
 			if ( $t_support ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD );
+				print_test_result( BAD, true, 'database is not supported by PHP' );
 			}
 	?>
 </tr>
 
-<!-- Setting config variables -->
-<tr>
-	<td bgcolor="#ffffff">
-		Setting Database Username
-	</td>
-	<?php
-			$f_db_username = gpc_get('db_username', '');
-			$g_config_entry['db_username'] = '\''.$f_db_username.'\'';
-			if ( '' !== $f_db_username ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD );
-			}
-	?>
-</tr>
-
-<!-- Setting config variables -->
-<tr>
-	<td bgcolor="#ffffff">
-		Setting Database Password
-	</td>
-	<?php
-			$f_db_password = gpc_get('db_password', '');
-			$g_config_entry['db_password'] = '\''.$f_db_password.'\'';
-			if ( '' !== $f_db_password ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD, false );
-			}
-	?>
-</tr>
-
-<!-- Setting config variables -->
-<tr>
-	<td bgcolor="#ffffff">
-		Setting Database Name
-	</td>
-	<?php
-			$f_database_name = gpc_get('database_name', '');
-			$g_config_entry['database_name'] = '\''.$f_database_name.'\'';
-			if ( '' !== $f_database_name ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD );
-			}
-	?>
-</tr>
-
-<!-- Setting config variables -->
+<?php print_test( 'Setting Database Username', '' !== $f_db_username , true, 'database username is blank' ) ?>
+<?php print_test( 'Setting Database Password', '' !== $f_db_password , false, 'database password is blank' ) ?>
+<?php print_test( 'Setting Database Name', '' !== $f_database_name , true, 'database name is blank' )?>
 <tr>
 	<td bgcolor="#ffffff">
 		Setting Admin Username
 	</td>
 	<?php
-			$f_adm_username = gpc_get( 'admin_username', '' );
-			if ( '' !== $f_adm_username ) {
+			if ( '' !== $f_admin_username ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD );
+				print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
+				$f_admin_username = $f_db_username;
 			}
 	?>
 </tr>
-
-<!-- Setting config variables -->
 <tr>
 	<td bgcolor="#ffffff">
 		Setting Admin Password
 	</td>
 	<?php
-			$f_adm_password = gpc_get( 'admin_password', '');
-			if ( '' !== $f_adm_password ) {
+			if ( '' !== $f_admin_password ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD );
+				print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
+				$f_admin_password = $f_db_password;
 			}
 	?>
 </tr>
 
-<!-- Setting config variables -->
+<!-- connect to db -->
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as admin
 	</td>
 	<?php
 		$g_db = ADONewConnection($f_db_type);
-		$t_result = @$g_db->Connect($f_hostname, $f_adm_username, $f_adm_password);
+		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
 
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD );
+			print_test_result( BAD, true, 'Does administrative user have access to the database?' );
 		}
 	?>
 </tr>
@@ -367,7 +259,7 @@ if ( 2 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false ); # may fail if db doesn't exist, will recheck later
+			print_test_result( BAD, false, 'Either database user doesn\'t have access to the database or database has not been created yet' ); # may fail if db doesn't exist, will recheck later
 		}
 	?>
 </tr>
@@ -375,6 +267,8 @@ if ( 2 == $t_install_state ) {
 <?php
 	if ( false == $g_failed ) {
 		$t_install_state++;
+	} else {
+		$t_install_state--;	# a check failed, redisplay the questions
 	}
 } # end 2 == $t_install_state
 
@@ -407,7 +301,7 @@ if ( 1 == $t_install_state ) {
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo ( ( '' != $f_hostname ) ? $f_hostname : $t_hostname ); ?>"></input>
+		<input name="hostname" type="textbox" value="<?php echo $f_hostname ?>"></input>
 	</td>
 </tr>
 
@@ -416,7 +310,7 @@ if ( 1 == $t_install_state ) {
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo ( ( '' != $f_db_username ) ? $f_db_username : $t_db_username ); ?>"></input>
+		<input name="db_username" type="textbox" value="<?php echo $f_db_username ?>"></input>
 	</td>
 </tr>
 
@@ -425,7 +319,7 @@ if ( 1 == $t_install_state ) {
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php echo ( ( '' != $f_db_password ) ? $f_db_password : $t_db_password ); ?>"></input>
+		<input name="db_password" type="password" value="<?php echo $f_db_password ?>"></input>
 	</td>
 </tr>
 
@@ -434,7 +328,7 @@ if ( 1 == $t_install_state ) {
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo ( ( '' != $f_database_name ) ? $f_database_name : $t_database_name ); ?>"></input>
+		<input name="database_name" type="textbox" value="<?php echo $f_database_name ?>"></input>
 	</td>
 </tr>
 <tr>
@@ -442,7 +336,7 @@ if ( 1 == $t_install_state ) {
 		Admin Username (to create Database)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo ( ( '' != $f_adm_username ) ? $f_adm_username : $t_db_username ); ?>"></input>
+		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username ?>"></input>
 	</td>
 </tr>
 
@@ -451,7 +345,7 @@ if ( 1 == $t_install_state ) {
 		Admin Password (to create Database)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php echo ( ( '' != $f_adm_password ) ? $f_adm_password : $t_db_password ); ?>"></input>
+		<input name="admin_password" type="password" value="<?php echo $f_admin_password  ?>"></input>
 	</td>
 </tr>
 
@@ -476,25 +370,31 @@ if ( 3 == $t_install_state ) {
 
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Installing Database</span>
+	</td>
+</tr>
+
+<tr>
 	<td bgcolor="#ffffff">
 		Create database if it does not exist
 	</td>
 	<?php
-		$t_result = @$g_db->Connect( $f_hostname, $f_adm_username, $f_adm_password, $f_database_name );
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
 			// create db
 			$g_db = ADONewConnection( $f_db_type );
-			$t_result = $g_db->Connect( $f_hostname, $f_adm_username, $f_adm_password );
+			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 			$dict = NewDataDictionary( $g_db );
 			$sqlarray = $dict->CreateDatabase( $f_database_name );
 			$ret = $dict->ExecuteSQLArray( $sqlarray );
 			if( $ret == 2) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD );
+				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
 			}
 	}
 	?>
@@ -510,21 +410,22 @@ if ( 3 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD ); 
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' ); 
 		}
 	?>
 </tr>
 <?php
+	# install the tables
 	if ( false == $g_failed ) {
 		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		$lastid = sizeof( $upgrade );
 		for($i = 0; $i < $lastid; $i++) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
-		Create Schema ( Adding Schema Version <?php echo $i?> )
+		Create Schema ( <?php echo $upgrade[$i][1] . ' on ' . $upgrade[$i][2][0]?> )
 	</td>
 <?php
 			$dict = NewDataDictionary($g_db);
@@ -538,6 +439,28 @@ if ( 3 == $t_install_state ) {
 			echo '</tr>';
 		}
 	}
+	
+	# install any needed data
+	if ( false == $g_failed ) {
+		$lastid = sizeof( $upgrade_data );
+		for($i = 0; $i < $lastid; $i++) {
+?>
+<tr>
+	<td bgcolor="#ffffff">
+		Create Data ( <?php echo $upgrade_data[$i][1]?> )
+	</td>
+<?php
+			$query = "INSERT INTO " . $upgrade_data[$i][1] . " VALUES " . $upgrade_data[$i][2];
+			$ret = $g_db->Execute($query);
+			if ( false !== $ret ) {
+				print_test_result( GOOD );
+			} else {
+				print_test_result( BAD, true, $g_db->ErrorMsg() );
+			}
+			echo '</tr>';
+		}
+	}
+	
 	if ( false == $g_failed ) {
 		$t_install_state++;
 	}
@@ -549,42 +472,70 @@ if ( 3 == $t_install_state ) {
 # database installed, get any additional information
 if ( 4 == $t_install_state ) {
 	# @@@ to be written
-	#  must post $g_config_entry to preserve it
+	#  must post data gathered to preserve it
+?>
+		<input name="hostname" type="hidden" value="<?php echo $f_hostname ?>"></input>
+		<input name="db_type" type="hidden" value="<?php echo $f_db_type ?>"></input>
+		<input name="database_name" type="hidden" value="<?php echo $f_database_name ?>"></input>
+		<input name="db_username" type="hidden" value="<?php echo $f_db_username ?>"></input>
+		<input name="db_password" type="hidden" value="<?php echo $f_db_password ?>"></input>
+		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username ?>"></input>
+		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
+<?php
 	# must post <input name="install" type="hidden" value="5"></input>
 	# rather than the following line
 		$t_install_state++;
-	}  # end install_state == 4
+}  # end install_state == 4
 	
 # all checks have passed, install the database
 if ( 5 == $t_install_state ) {
 ?>
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Write Configuration File(s)</span>
+	</td>
+</tr>
+
+<tr>
 	<td bgcolor="#ffffff">
 		Creating Default Config File
 	</td>
 	<?php
-		if ( /*!$g_failed &&*/ ! file_exists ( $g_absolute_path .DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
-			$fd = fopen($g_absolute_path.DIRECTORY_SEPARATOR.'config_inc.php','x');
-			fwrite($fd, '<?php'."\r\n");
-			foreach ( $g_config_entry as $key => $value) {
-				fwrite($fd,'$g_'.$key.'='.$value.";\r\n");
-			}
-			fwrite($fd, '?>'."\r\n");
-
+		$t_config = '<?php'."\r\n";
+		$t_config .= "\$g_hostname = '$f_hostname';\r\n";
+		$t_config .= "\$g_db_type = '$f_db_type';\r\n";
+		$t_config .= "\$g_database_name = '$f_database_name';\r\n";
+		$t_config .= "\$g_db_username = '$f_db_username';\r\n";
+		$t_config .= "\$g_db_password = '$f_db_password';\r\n";
+		$t_config .= '?>' . "\r\n";
+		$t_write_failed = true;
+		
+		if ( ! file_exists ( $g_absolute_path . 'config_inc.php' ) ) {
+			$fd = fopen($g_absolute_path . 'config_inc.php','x');
+			fwrite($fd, $t_config );
 			fclose($fd);
-			if ( file_exists ( $g_absolute_path .DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
+			if ( file_exists ( $g_absolute_path . 'config_inc.php' ) ) {
 				print_test_result( GOOD );
+				$t_write_failed = false;
 			} else {
-				print_test_result( BAD );
+				print_test_result( BAD, false, 'cannot write ' . $g_absolute_path . 'config_inc.php' );
 			}
 		} else {
 			// already exists
-			print_test_result( BAD );
+			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists' );
 
 		}
 	?>
 </tr>
+<?php
+	if ( true == $t_write_failed ) {
+		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1" align="center">';
+		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check</td></tr>';
+		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
+	}
+?>
+		
 </table>
 
 <?php
@@ -594,17 +545,62 @@ if ( 5 == $t_install_state ) {
 }  # end install_state == 5
 
 if ( 6 == $t_install_state ) {
+# post install checks
+?>
+<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Checking Installation...</span>
+	</td>
+</tr>
+
+<!-- Checking MD5 -->
+<?php print_test( 'Checking for MD5 Crypt() support', 1 === CRYPT_MD5, false, 'password security may be lower than expected' ) ?>
+
+<!-- Checking register_globals are off -->
+<?php print_test( 'Checking for register_globals are off for mantis', ! ini_get_bool( 'register_globals' ), 'change php.ini to disable register_globals setting' ) ?>
+
+</table>
+<?php
+	if ( false == $g_failed ) {
+		$t_install_state++;
+	}
+}  # end install_state == 6
+
+if ( 7 == $t_install_state ) {
+# cleanup and launch upgrade
 ?>
 <p>Install was successful.</p>
-<p>Log in <a href="<?php echo dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR; ?>">here</a></p>
+<p><a href="upgrade.php">Continue</a> to check the database</p>
 
 <?php
-} # end install_state == 6
+} # end install_state == 7
 
 
-if( $g_failed ) { 
+if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) { 
 ?>
-	<p>Please correct failed checks</p>
+<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Checks Failed...</span>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">Please correct failed checks</td>
+	<td bgcolor="#ffffff">
+		<input name="install" type="hidden" value="<?php echo $t_install_state ?>"></input>
+		<input name="hostname" type="hidden" value="<?php echo $f_hostname ?>"></input>
+		<input name="db_type" type="hidden" value="<?php echo $f_db_type ?>"></input>
+		<input name="database_name" type="hidden" value="<?php echo $f_database_name ?>"></input>
+		<input name="db_username" type="hidden" value="<?php echo $f_db_username ?>"></input>
+		<input name="db_password" type="hidden" value="<?php echo $f_db_password ?>"></input>
+		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username ?>"></input>
+		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
+		<input name="retry" type="submit" value="Retry"></input>
+	</td>
+</tr>
+</table>
+		
 <?php 
 } 
 ?>

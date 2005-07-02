@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.15 2005-04-20 12:48:15 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.16 2005-07-02 00:56:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	$g_skip_open_db = true;  # don't open the database in database_api.php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-
+$g_error_send_page_header = false;
 	require_once( 'db_table_names_inc.php' );
 
 	$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
@@ -41,52 +41,6 @@
         exit();
 	}
 
-	# Create the upgrade table if it does not exist
-	$query = "CREATE TABLE IF NOT EXISTS $t_upgrade_table
-				  (upgrade_id char(20) NOT NULL,
-				  description char(255) NOT NULL,
-				  PRIMARY KEY (upgrade_id))";
-
-	$result = db_query( $query );
-
-	if ( false === $result ) {
-		# 0.14.0 upgrades (applied to 0.13 db)
-		if ( admin_check_applied( $t_project_table ) ) {
-			$t_upgrades = include( 'upgrades/0_13_inc.php' );
-
-			foreach ( $t_upgrades as $t_item ) {
-				$t_item->set_applied();
-			}
-		}
-
-		# 0.15.0 upgrades (applied to 0.14 db)
-		if ( admin_check_applied( $t_bug_file_table ) ) {
-			$t_upgrades = include( 'upgrades/0_14_inc.php' );
-
-			foreach ( $t_upgrades as $t_item ) {
-				$t_item->set_applied();
-			}
-		}
-
-		# 0.16.0 upgrades (applied to 0.15 db)
-		if ( admin_check_applied( $t_bug_history_table ) ) {
-			$t_upgrades = include( 'upgrades/0_15_inc.php' );
-
-			foreach ( $t_upgrades as $t_item ) {
-				$t_item->set_applied();
-			}
-		}
-
-		# 0.17.0 upgrades (applied to 0.16 db)
-		if ( admin_check_applied( $t_bug_monitor_table ) ) {
-			$t_upgrades = include( 'upgrades/0_16_inc.php' );
-
-			foreach ( $t_upgrades as $t_item ) {
-				$t_item->set_applied();
-			}
-		}
-	}
-
 	# Compatibility function
 	#
 	# The old upgrade system used this logic to determine whether an upgrade
@@ -104,6 +58,39 @@
 			return false;
 		}
 	}
+	
+	# --------------------
+	# Returns true if the current PHP version is higher than the one
+	#  specified in the given string
+	function db_version_at_least( $p_version_string ) {
+		global $g_cached_db_version;
+
+		if ( isset( $g_cached_db_version[$p_version_string] ) ) {
+			return $g_cached_db_version[$p_version_string];
+		}
+
+		$t_curver = array_pad( explode( '.', config_get( 'database_version', '0.0.0' ) ), 3, 0 );
+		$t_minver = array_pad( explode( '.', $p_version_string ), 3, 0 );
+
+		for ($i = 0 ; $i < 3 ; $i = $i + 1 ) {
+			$t_cur = (int)$t_curver[$i];
+			$t_min = (int)$t_minver[$i];
+
+			if ( $t_cur < $t_min ) {
+				$g_cached_db_version[$p_version_string] = false;
+				return false;
+			} else if ( $t_cur > $t_min ) {
+				$g_cached_db_version[$p_version_string] = true;
+				return true;
+			}
+		}
+
+		# if we get here, the versions must match exactly so:
+		$g_cached_db_version[$p_version_string] = true;
+		return true;
+	}
+
+
 ?>
 <?php
 	class Upgrade {
@@ -214,6 +201,26 @@
 		}
 	}
 
+	class ReleaseUpgrade extends Upgrade {
+		var $release_name;
+
+		function ReleaseUpgrade ( $p_release ) {
+			Upgrade::Upgrade( 'release_' . $p_release, 'Mark release for database version ' . $p_release );
+
+			$this->release_name = $p_release;
+		}
+
+		function execute() {
+			config_set( 'database_version', $this->release_name );
+
+			return true;
+		}
+
+		function display() {
+			return "# Upgrade $this->id: $this->description<br /><br />";
+		}
+	}
+
 	class UpgradeSet {
 		var $item_array;
 		var $upgrade_name;
@@ -234,6 +241,47 @@
 				$this->add_item( $t_item );
 			}
 		}
+		
+		# add items, and check if they can be marked as completed
+		function add_items_with_check( $p_upgrade_file, $p_table_check='', $p_version_check='0.0.0' ) {
+		
+			$t_start_count = $this->count_items();
+			$this->add_items( include( $p_upgrade_file ) );
+			$t_end_count = $this->count_items();
+			# check for table presence and db version and mark as applied if either the table
+			#  is present, or our version stamp is lower than the actual db
+			if ( ( ( $p_table_check != '' ) && admin_check_applied( $p_table_check ) ) ||
+					( db_version_at_least( $p_version_check ) ) ) {
+				for ( $i = $t_start_count; $i < $t_end_count; $i++ ) {
+					if ( ! $this->is_applied( $i ) ) {
+						$this->set_applied( $i );
+					}
+				}
+			}
+		}
+
+
+		# return count of items in upgrade set. Used to flag applied items in old databases
+		function count_items() {
+			if ( isset( $this->item_array ) ) {
+            	return count( $this->item_array );
+            } else {
+            	return 0;
+            }
+        }
+        
+        # set a specific item in the set to applied
+        function set_applied( $p_offset ) {
+            $t_item = $this->item_array[$p_offset];
+            $t_item->set_applied();
+        }
+
+        # check to see if a specific item in the set is applied
+        function is_applied( $p_offset ) {
+            $t_item = $this->item_array[$p_offset];
+            return $t_item->is_applied();
+        }
+
 
 		function process_post_data( $p_advanced=false ) {
 			$f_execute_all		= gpc_get_bool( $this->upgrade_file . '_execute_all' );

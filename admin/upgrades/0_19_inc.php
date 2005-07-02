@@ -8,11 +8,11 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.12 2005-04-19 13:49:05 thraxisp Exp $
+	# $Id: 0_19_inc.php,v 1.13 2005-07-02 00:56:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( 'db_table_names_inc.php' );
+	require( 'db_table_names_inc.php' );
 
 	$upgrades = array();
 
