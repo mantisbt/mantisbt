@@ -1,0 +1,275 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: account_sponsor_page.php,v 1.1 2005-07-03 15:09:09 thraxisp Exp $
+	# --------------------------------------------------------
+
+	# CALLERS
+	#	This page is called from:
+	#	- print_menu()
+	#	- print_account_menu()
+
+	# EXPECTED BEHAVIOUR
+	#	- Display the user's current sponsorships
+	#	- Allow the user to edit the payment flag
+
+	# CALLS
+	#	This page calls the following pages:
+	#	- account_update.php  (to save changes)
+	#	- account_delete.php  (to delete the user's account)
+
+	# RESTRICTIONS & PERMISSIONS
+	#	- User must be authenticated
+	#	- The user's account must not be protected
+
+	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
+
+	require_once( $t_core_path.'current_user_api.php' );
+
+	if ( config_get( 'enable_sponsorship' ) == OFF ) {
+		trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
+	}
+
+	# anonymous users are not allowed to sponsor issues
+	if ( current_user_is_anonymous() ) {
+		access_denied();
+	}
+
+	# start the page
+	html_page_top1( lang_get( 'my_sponsorship' ) );
+	html_page_top2();
+?>
+<br />
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title">
+		<?php echo lang_get( 'my_sponsorship' ) ?>
+	</td>
+	<td class="right">
+		<?php print_account_menu( 'account_sponsor_page.php' ) ?>
+	</td>
+</tr>
+</table>
+<?php
+	# get issues user has sponsored
+	$t_user = auth_get_current_user_id();
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	$t_bug_table = config_get( 'mantis_bug_table' );
+	$t_sponsor_table = config_get( 'mantis_sponsorship_table' );
+	$t_payment = config_get( 'payment_enable', 0 );
+	
+	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
+		FROM $t_bug_table b, $t_sponsor_table s 
+		WHERE s.user_id=$t_user AND b.status >= $t_resolved AND s.bug_id = b.id
+		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
+		
+	$result = db_query( $query );
+		
+	$t_sponsors = db_num_rows( $result );
+	if ( 0 == $t_sponsors ) {
+		echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
+	} else {
+?>
+
+<!-- # Edit own sponsorship Form BEGIN -->
+<br />
+<div align="center">
+<table class="width100" cellspacing="1">
+
+	<!-- Headings -->
+	<tr>
+		<td class="form-title" colspan="9">
+			<?php echo lang_get( 'own_sponsored' ) ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
+		<td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
+		<td class="form-title" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
+		<td class="form-title" width="8%">&nbsp;</td>
+		<td class="form-title" width="7%">&nbsp;</td>
+		<td class="form-title" width="10%">&nbsp;</td>
+	</tr>
+<?php 
+		$t_total_owing = 0;
+		$t_total_paid = 0;
+		for ( $i=0; $i < $t_sponsors; ++$i ) {
+			echo '<tr ' . helper_alternate_class() . '>';
+			$row = db_fetch_array( $result );
+			$t_bug = bug_get( $row['bug'] );
+			$t_sponsor = sponsorship_get( $row['sponsor'] );
+			
+			# describe bug
+			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+
+			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
+			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
+			echo '<td class="right">' . $t_bug->fixed_in_version . '&nbsp;</td>';
+			echo '<td bgcolor="' . get_status_color( $t_bug->status ) . '"><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+			echo '<td>';
+			print_user( $t_bug->handler_id );
+			echo '</td>';
+
+			# summary
+			echo '<td>' . $t_bug->summary;
+			if ( VS_PRIVATE == $t_bug->view_state ) {
+				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+			}
+			
+			# describe sponsorship amount
+			echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+			echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
+			
+			if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
+				$t_total_paid += $t_sponsor->amount;
+			} else {
+				$t_total_owing += $t_sponsor->amount;
+			}
+			
+			echo '<td>';
+			if ( $t_payment ) {
+				echo '(paypal button)';
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</td>';
+			echo '</tr>';
+		}
+?>
+<!-- Totals -->
+<tr border="top">
+	<td colspan="5"></td>
+	<td><?php echo lang_get( 'total_owing' ) ?></td>
+	<td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td colspan="2"></td>
+</tr>
+<tr>
+	<td colspan="5"></td>
+	<td><?php echo lang_get( 'total_paid' ) ?></td>
+	<td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td colspan="2"></td>
+</tr>
+</table>
+</div>
+<?php } # end sponsored issues
+
+	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
+		FROM $t_bug_table b, $t_sponsor_table s 
+		WHERE b.handler_id=$t_user AND b.status >= $t_resolved AND s.bug_id = b.id
+		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
+		
+	$result = db_query( $query );
+	$t_sponsors = db_num_rows( $result );
+	if ( 0 == $t_sponsors ) {
+		echo '<p>' . lang_get( 'no_sponsored' ) . '</p>';
+	} else {
+?>
+
+<!-- # Edit sponsorship Form BEGIN -->
+<br />
+<div align="center">
+<form method="post" action="account_sponsor_update.php">
+<table class="width100" cellspacing="1">
+
+	<!-- Headings -->
+	<tr>
+		<td class="form-title" colspan="8">
+			<?php echo lang_get( 'issues_handled' ) ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
+		<td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
+		<td class="form-title" width="35%"><?php echo lang_get( 'email_summary' ) ?></td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'sponsor' ) ?></td>
+		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="10%">&nbsp;</td>
+	</tr>
+<?php 
+		$t_bug_list = array();
+		$t_total_owing = 0;
+		$t_total_paid = 0;
+		for ( $i=0; $i < $t_sponsors; ++$i ) {
+			echo '<tr ' . helper_alternate_class() . '>';
+			$row = db_fetch_array( $result );
+			$t_bug = bug_get( $row['bug'] );
+			$t_sponsor = sponsorship_get( $row['sponsor'] );
+			$t_buglist[] = $row['bug'] . ':' . $row['sponsor'];
+			
+			# describe bug
+			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+
+			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
+			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
+			echo '<td class="right">' . $t_bug->fixed_in_version . '&nbsp;</td>';
+			echo '<td bgcolor="' . get_status_color( $t_bug->status ) . '"><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+
+			# summary
+			echo '<td>' . $t_bug->summary;
+			if ( VS_PRIVATE == $t_bug->view_state ) {
+				printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+			}
+			
+			# describe sponsorship amount
+			echo '<td>';
+			print_user( $t_sponsor->user_id );
+			echo '</td>';
+			echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+			echo '<td><select name="sponsor_' . $row['bug'] . '">';
+			print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
+			echo '</select></td>';
+			
+			echo '</tr>';
+			if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
+				$t_total_paid += $t_sponsor->amount;
+			} else {
+				$t_total_owing += $t_sponsor->amount;
+			}
+			
+		}
+		$t_hidden_bug_list = implode( ',', $t_buglist );
+?>
+<!-- Totals -->
+<tr border="top">
+	<td colspan="5"></td>
+	<td><?php echo lang_get( 'total_owing' ) ?></td>
+	<td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan="5"></td>
+	<td><?php echo lang_get( 'total_paid' ) ?></td>
+	<td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td></td>
+</tr>
+	<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />
+	<!-- BUTTONS -->
+	<tr>
+		<td colspan="5">&nbsp;</td>
+		<!-- Update Button -->
+		<td colspan="2">
+			<input type="submit" class="button" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>" />
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+<?php } # end sponsored issues ?>
+
+<br />
+
+<?php html_page_bottom1( __FILE__ ) ?>

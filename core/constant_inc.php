@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.50 2005-06-28 11:04:06 vboctor Exp $
+	# $Id: constant_inc.php,v 1.51 2005-07-03 15:09:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -145,6 +145,7 @@
 	define( 'BUG_CREATED_FROM', 			21 );
 	define( 'CHECKIN',				22 );
 	define( 'BUG_REPLACE_RELATIONSHIP', 		23 );
+	define( 'BUG_PAID_SPONSORSHIP', 		24 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );
@@ -350,4 +351,10 @@
 	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );
 	define( 'COLUMNS_TARGET_PRINT_PAGE',  2 );
 	define( 'COLUMNS_TARGET_CSV_PAGE',    3 );
+	
+	# sponsorship "paid" values
+	define( 'SPONSORSHIP_UNPAID',         0 );
+	define( 'SPONSORSHIP_REQUESTED',      1 );
+	define( 'SPONSORSHIP_PAID',           2 );
+	
 ?>

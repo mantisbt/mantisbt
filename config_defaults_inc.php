@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.274 2005-06-28 11:04:05 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.275 2005-07-03 15:09:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1250,6 +1250,7 @@
 	$g_resolution_enum_string			= '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
 	$g_projection_enum_string			= '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 	$g_eta_enum_string					= '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
+	$g_sponsorship_enum_string          = '0:Unpaid,1:Requested,2:Paid';
 
 	$g_custom_field_type_enum_string    = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date';
 

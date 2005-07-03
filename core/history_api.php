@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.31 2005-04-21 14:57:03 thraxisp Exp $
+	# $Id: history_api.php,v 1.32 2005-07-03 15:09:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -305,6 +305,10 @@
 				case BUG_DELETE_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_deleted' );
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					break;
+				case BUG_PAID_SPONSORSHIP:
+					$t_note = lang_get( 'sponsorship_paid' );
+					$t_change = user_get_name( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
 					break;
 				case BUG_ADD_RELATIONSHIP:
 					$t_note = lang_get( 'relationship_added' );

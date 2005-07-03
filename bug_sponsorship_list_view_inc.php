@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.11 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.12 2005-07-03 15:09:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -105,6 +105,9 @@
 					echo $t_date_added . ': ';
 					print_user( $t_sponsorship->user_id );
 					echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
+					if ( access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+						echo ' ' . get_enum_element( 'sponsorship', $t_sponsorship->paid );
+					}
 				}
 			}
 		?>

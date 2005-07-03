@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.172 2005-06-17 21:27:55 thraxisp Exp $
+	# $Id: html_api.php,v 1.173 2005-07-03 15:09:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -684,17 +684,22 @@
 		$t_account_page 				= 'account_page.php';
 		$t_account_prefs_page 			= 'account_prefs_page.php';
 		$t_account_profile_menu_page 	= 'account_prof_menu_page.php';
+		$t_account_sponsor_page			= 'account_sponsor_page.php';
 
 		switch ( $p_page ) {
 			case $t_account_page				: $t_account_page 				= ''; break;
 			case $t_account_prefs_page			: $t_account_prefs_page 		= ''; break;
 			case $t_account_profile_menu_page	: $t_account_profile_menu_page 	= ''; break;
+			case $t_account_sponsor_page		: $t_account_sponsor_page		= ''; break;
 		}
 
 		print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
 		print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
 		if ( access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
 			print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
+		}
+		if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) ) {
+			print_bracket_link( $t_account_sponsor_page, lang_get( 'my_sponsorship' ) );
 		}
 	}
 

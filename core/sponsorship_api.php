@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.5 2005-03-26 18:27:17 thraxisp Exp $
+	# $Id: sponsorship_api.php,v 1.6 2005-07-03 15:09:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -310,6 +310,27 @@
 		sponsorship_update_bug( $t_sponsorship->bug_id );
 
 		email_sponsorship_deleted( $t_sponsorship->bug_id );
+	}
+
+	# --------------------
+	# updates the paid field
+	function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
+		$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
+		$t_sponsorship = sponsorship_get( $c_sponsorship_id );
+
+		$c_paid = db_prepare_int( $p_paid );
+
+		$t_sponsorship_table = config_get( 'mantis_sponsorship_table' );
+
+		$query = "UPDATE $t_sponsorship_table
+				  SET last_updated= " . db_now() . ", paid=$c_paid
+				  WHERE id='$c_sponsorship_id'";
+		db_query( $query );
+
+		history_log_event_special( $t_sponsorship->bug_id, BUG_PAID_SPONSORSHIP, $t_sponsorship->user_id, $p_paid );
+		sponsorship_clear_cache( $p_sponsorship_id );
+
+		return true;
 	}
 
 	# --------------------
