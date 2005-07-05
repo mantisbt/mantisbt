@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.119 2005-07-05 13:19:31 vboctor Exp $
+	# $Id: email_api.php,v 1.120 2005-07-05 18:50:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -293,7 +293,7 @@
 				} else {
 					# Users can define the severity of an issue before they are emailed for
 					# each type of notification
-					$t_min_sev_pref_field = $t_pref_field . '_minimum_severity';
+					$t_min_sev_pref_field = $t_pref_field . '_min_severity';
 					$t_min_sev_notify     = user_pref_get_pref( $t_id, $t_min_sev_pref_field );
 					$t_bug_severity       = bug_get_field( $p_bug_id, 'severity' );
 
@@ -352,7 +352,7 @@
 		# or else users won't be able to sign up
 		if( !is_blank( $t_email ) ) {
 			email_send( $t_email, $t_subject, $t_message );
-			log_event( LOG_EMAIL, "signup=$t_email" );
+			log_event( LOG_EMAIL, "signup=$t_email, hash=$p_confirm_hash, id=$p_user_id" );
 		}
 
 		lang_pop();

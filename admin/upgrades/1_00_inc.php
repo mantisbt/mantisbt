@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.6 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.7 2005-07-05 18:50:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -93,6 +93,66 @@
 			'cf_string_bug_index',
 			'Add index on bug_id in custom_field_string table',
 			"ALTER TABLE $t_custom_field_string_table ADD INDEX ( bug_id )"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_new_min',
+			'change pref email_on_new_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_new_minimum_severity email_on_new_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_assigned_min',
+			'change pref email_on_assigned_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_assigned_minimum_severity email_on_assigned_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_feedback_min',
+			'change pref email_on_feedback_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_status_minimum_severity email_on_status_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_status_min',
+			'change pref email_on_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_feedback_minimum_severity email_on_feedback_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_resolved_min',
+			'change pref email_on_resolved_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_resolved_minimum_severity email_on_resolved_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_closed_min',
+			'change pref email_on_closed_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_closed_minimum_severity email_on_closed_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_reopened_min',
+			'change pref email_on_reopened_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_reopened_minimum_severity email_on_reopened_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_bugnote_min',
+			'change pref email_on_bugnote_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_bugnote_minimum_severity email_on_bugnote_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_status_min',
+			'change pref email_on_status_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_status_minimum_severity email_on_status_min_severity INT(2) DEFAULT '10' NOT NULL"
+		);
+	
+	$upgrades[] = new SQLUpgrade(
+			'pref_priority_min',
+			'change pref email_on_priority_minimum_severity for database compabilility',
+			"ALTER TABLE $t_user_pref_table CHANGE email_on_priority_minimum_severity email_on_priority_min_severity INT(2) DEFAULT '10' NOT NULL"
 		);
 	
 	# this line should be the last upgrade in a version. When it is set, the upgrader

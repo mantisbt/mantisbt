@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.24 2005-06-17 14:54:53 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.25 2005-07-05 18:50:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -32,15 +32,15 @@
 		var $email_on_bugnote;
 		var $email_on_status;
 		var $email_on_priority;
-		var $email_on_new_minimum_severity;
-		var $email_on_assigned_minimum_severity;
-		var $email_on_feedback_minimum_severity;
-		var $email_on_resolved_minimum_severity;
-		var $email_on_closed_minimum_severity;
-		var $email_on_reopened_minimum_severity;
-		var $email_on_bugnote_minimum_severity;
-		var $email_on_status_minimum_severity;
-		var $email_on_priority_minimum_severity;
+		var $email_on_new_min_severity;
+		var $email_on_assigned_min_severity;
+		var $email_on_feedback_min_severity;
+		var $email_on_resolved_min_severity;
+		var $email_on_closed_min_severity;
+		var $email_on_reopened_min_severity;
+		var $email_on_bugnote_min_severity;
+		var $email_on_status_min_severity;
+		var $email_on_priority_min_severity;
 		var $email_bugnote_limit;
 		var $language;
 
@@ -62,15 +62,15 @@
 			$this->email_on_bugnote                  	= config_get( 'default_email_on_bugnote' );
 			$this->email_on_status                   	= config_get( 'default_email_on_status' );
 			$this->email_on_priority                 	= config_get( 'default_email_on_priority' );
-			$this->email_on_new_minimum_severity     	= config_get( 'default_email_on_new_minimum_severity' );
-			$this->email_on_assigned_minimum_severity	= config_get( 'default_email_on_assigned_minimum_severity' );
-			$this->email_on_feedback_minimum_severity	= config_get( 'default_email_on_feedback_minimum_severity' );
-			$this->email_on_resolved_minimum_severity	= config_get( 'default_email_on_resolved_minimum_severity' );
-			$this->email_on_closed_minimum_severity  	= config_get( 'default_email_on_closed_minimum_severity' );
-			$this->email_on_reopened_minimum_severity	= config_get( 'default_email_on_reopened_minimum_severity' );
-			$this->email_on_bugnote_minimum_severity 	= config_get( 'default_email_on_bugnote_minimum_severity' );
-			$this->email_on_status_minimum_severity	 	= config_get( 'default_email_on_status_minimum_severity' );
-			$this->email_on_priority_minimum_severity	= config_get( 'default_email_on_priority_minimum_severity' );
+			$this->email_on_new_min_severity     	= config_get( 'default_email_on_new_minimum_severity' );
+			$this->email_on_assigned_min_severity	= config_get( 'default_email_on_assigned_minimum_severity' );
+			$this->email_on_feedback_min_severity	= config_get( 'default_email_on_feedback_minimum_severity' );
+			$this->email_on_resolved_min_severity	= config_get( 'default_email_on_resolved_minimum_severity' );
+			$this->email_on_closed_min_severity  	= config_get( 'default_email_on_closed_minimum_severity' );
+			$this->email_on_reopened_min_severity	= config_get( 'default_email_on_reopened_minimum_severity' );
+			$this->email_on_bugnote_min_severity 	= config_get( 'default_email_on_bugnote_minimum_severity' );
+			$this->email_on_status_min_severity	 	= config_get( 'default_email_on_status_minimum_severity' );
+			$this->email_on_priority_min_severity	= config_get( 'default_email_on_priority_minimum_severity' );
 			$this->email_bugnote_limit               	= config_get( 'default_email_bugnote_limit');
 			$this->language                          	= config_get( 'default_language');
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.275 2005-07-03 15:09:10 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.276 2005-07-05 18:50:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -603,7 +603,7 @@
 	$g_default_email_on_closed_minimum_severity		= OFF; # 'any'
 	$g_default_email_on_reopened_minimum_severity	= OFF; # 'any'
 	$g_default_email_on_bugnote_minimum_severity	= OFF; # 'any'
-	$g_default_email_on_status_minimum_severity		= OFF; # @@@ Unused
+	$g_default_email_on_status_minimum_severity		= OFF; # 'any'
 	$g_default_email_on_priority_minimum_severity	= OFF; # @@@ Unused
 	$g_default_email_bugnote_limit					= 0;
 	# default_language - is set to site language
