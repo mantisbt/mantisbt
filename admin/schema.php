@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.3 2005-07-05 18:53:30 thraxisp Exp $
+	# $Id: schema.php,v 1.4 2005-07-05 19:29:38 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -188,7 +188,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   headline 		C(64) NOTNULL DEFAULT \" '' \",
   body 			XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = Array('CreateIndexSQL',Array('idx_news_id',config_get('mantis_news_table'),'id'));
 
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_category_table'),"
   project_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
