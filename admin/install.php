@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.2 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: install.php,v 1.3 2005-07-05 18:53:30 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,6 +52,15 @@
 		print_test_result( $p_result, $p_hard_fail, $p_message );
 		echo "</tr>\n";
 	}
+	
+	# --------
+	# create an SQLArray to insert data
+	function InsertData( $p_table, $p_data ) {
+		$query = "INSERT INTO " . $p_table . " VALUES " . $p_data;
+		return Array( $query );
+	}
+	
+
 
 	# install_state
 	#   0 = no checks done
@@ -396,7 +405,8 @@ if ( 3 == $t_install_state ) {
 			} else {
 				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
 			}
-	}
+		}
+		$g_db->Close();
 	?>
 </tr>
 <tr>
@@ -412,6 +422,7 @@ if ( 3 == $t_install_state ) {
 		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' ); 
 		}
+		$g_db->Close();
 	?>
 </tr>
 <?php
@@ -420,50 +431,41 @@ if ( 3 == $t_install_state ) {
 		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		$g_db_connected = true; # fake out database access routines
+		$t_last_update = config_get( 'database_version', 0 );
 		$lastid = sizeof( $upgrade );
-		for($i = 0; $i < $lastid; $i++) {
+		$i = $t_last_update;
+		while ( ( $i < $lastid ) && ! $g_failed ) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
-		Create Schema ( <?php echo $upgrade[$i][1] . ' on ' . $upgrade[$i][2][0]?> )
+		Create Schema ( <?php echo $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0]?> )
 	</td>
 <?php
 			$dict = NewDataDictionary($g_db);
-			$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][1]),$upgrade[$i][2]);
+			if ( $upgrade[$i][0] == 'InsertData' ) {
+				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
+			} else {
+				$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][0]),$upgrade[$i][1]);
+			}
 			$ret = $dict->ExecuteSQLArray($sqlarray);
 			if ( $ret == 2 ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, true, $sqlarray[0] );
+				print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 			}
 			echo '</tr>';
-		}
-	}
-	
-	# install any needed data
-	if ( false == $g_failed ) {
-		$lastid = sizeof( $upgrade_data );
-		for($i = 0; $i < $lastid; $i++) {
-?>
-<tr>
-	<td bgcolor="#ffffff">
-		Create Data ( <?php echo $upgrade_data[$i][1]?> )
-	</td>
-<?php
-			$query = "INSERT INTO " . $upgrade_data[$i][1] . " VALUES " . $upgrade_data[$i][2];
-			$ret = $g_db->Execute($query);
-			if ( false !== $ret ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD, true, $g_db->ErrorMsg() );
-			}
-			echo '</tr>';
+			$i++;
 		}
 	}
 	
 	if ( false == $g_failed ) {
 		$t_install_state++;
+		config_set( 'database_version', $i );
+	} else {
+		config_set( 'database_version', --$i );
 	}
+
 ?>
 </table>
 <?php
@@ -571,7 +573,7 @@ if ( 7 == $t_install_state ) {
 # cleanup and launch upgrade
 ?>
 <p>Install was successful.</p>
-<p><a href="upgrade.php">Continue</a> to check the database</p>
+<p><a href="../login.php">Continue</a> to log into Mantis</p>
 
 <?php
 } # end install_state == 7
