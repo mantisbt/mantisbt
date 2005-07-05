@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.118 2005-05-25 19:47:54 marcelloscata Exp $
+	# $Id: email_api.php,v 1.119 2005-07-05 13:19:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -961,7 +961,7 @@
 
 			if ( isset( $p_visible_bug_data['sponsorships'] ) ) {
 				foreach ( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
-					$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_sponsorship->date_submitted ) );
+					$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
 
 					$t_message .= $t_date_added . ': ';
 					$t_message .= user_get_name( $t_sponsorship->user_id );
