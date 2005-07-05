@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.54 2005-06-03 16:03:14 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.55 2005-07-05 23:44:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -626,13 +626,10 @@
             # select only the ids that the user has some access to 
             #  e.g., all fields in public projects, or private projects where the user is listed
             #    or private projects where the user is implicitly listed
-            $query = "SELECT distinct cft.id as id, cft.name as name
-                FROM $t_custom_field_table as cft
-                    JOIN $t_custom_field_project_table cfpt
-                    JOIN $t_project_table pt
+            $query = "SELECT distinct cft.id as id, cft.name as name, cfpt.sequence
+                FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
                     LEFT JOIN $t_project_user_list_table pult 
                         on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                    JOIN $t_user_table ut
                 WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
                     ( pt.view_state = $t_pub OR 
                     ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 

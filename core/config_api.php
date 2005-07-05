@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.29 2005-06-17 14:54:53 thraxisp Exp $
+	# $Id: config_api.php,v 1.30 2005-07-05 23:44:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -93,9 +93,7 @@
 						$t_project_clause AND
 						$t_user_clause
 					ORDER BY user_id DESC, project_id DESC";
-
 				$result = db_query( $query, 1 );
-
 				if ( 0 < db_num_rows( $result ) ) {
 					$row = db_fetch_array( $result );
 					$t_type = $row['type'];
@@ -254,10 +252,9 @@
 					user_id = $c_user";
 		} else {
 			$t_set_query = "INSERT INTO $t_config_table
-				SET value='$c_value', type=$t_type, access_reqd=$c_access,
-					config_id = '$c_option',
-					project_id = $c_project,
-					user_id = $c_user";
+				( value, type, access_reqd, config_id, project_id, user_id )
+				VALUES 
+				('$c_value', $t_type, $c_access, '$c_option', $c_project, $c_user )";
 		}
 
 		$result = db_query( $t_set_query );
