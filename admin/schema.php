@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.4 2005-07-05 19:29:38 thraxisp Exp $
+	# $Id: schema.php,v 1.5 2005-07-05 23:48:49 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -19,6 +19,16 @@
 	
 	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE 
 	#  END OF THE TABLE!!!
+
+$upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
+			  config_id C(64) NOTNULL PRIMARY,
+			  project_id I DEFAULT '0' PRIMARY,
+			  user_id I DEFAULT '0' PRIMARY,
+			  access_reqd I DEFAULT '0',
+			  type I DEFAULT '90',
+			  value XS NOTNULL",
+Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
+$upgrade[] = Array('CreateIndexSQL',Array('idx_config',config_get('mantis_config_table'),'config_id'));
 
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_file_table'),"
   id			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -121,16 +131,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_text_table'
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   note 			XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
-$upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
-			  config_id C(64) NOTNULL PRIMARY,
-			  project_id I DEFAULT '0' PRIMARY,
-			  user_id I DEFAULT '0' PRIMARY,
-			  access_reqd I DEFAULT '0',
-			  type I DEFAULT '90',
-			  value XS NOTNULL",
-Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = Array('CreateIndexSQL',Array('idx_config',config_get('mantis_config_table'),'config_id'));
 
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_project_table'),"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
@@ -338,6 +338,6 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_enable',config_get('mantis_user_t
 $upgrade[] = Array('CreateIndexSQL',Array('idx_access',config_get('mantis_user_table'),'access_level'));
 
 $upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'), 
-    "(1, 'administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, CONCAT(MD5(RAND()),MD5(NOW())))" )
+    "(1, 'administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, MD5(NOW()))" )
     );
 ?>

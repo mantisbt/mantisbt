@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.3 2005-07-05 18:53:30 thraxisp Exp $
+	# $Id: install.php,v 1.4 2005-07-05 23:48:49 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,6 +16,7 @@
 	set_time_limit ( 0 ) ;
 	$g_skip_open_db = true;  # don't open the database in database_api.php
 	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+	$g_error_send_page_header = false; # bypass page headers in error handler
 
 	define( 'BAD', 0 );
 	define( 'GOOD', 1 );
@@ -249,14 +250,24 @@ if ( 2 == $t_install_state ) {
 	<?php
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
-
+		
+		$t_db_exists = false;
+		
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
+			# check if db exists for the admin
+			$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password, $f_database_name);
+			if ( $t_result == true ) {
+				$t_db_exists = true;
+			}
 		} else {
 			print_test_result( BAD, true, 'Does administrative user have access to the database?' );
 		}
 	?>
 </tr>
+<?php
+	if ( $t_database_exists ) {
+?>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
@@ -268,12 +279,13 @@ if ( 2 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Either database user doesn\'t have access to the database or database has not been created yet' ); # may fail if db doesn't exist, will recheck later
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' );
 		}
 	?>
 </tr>
 
 <?php
+	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
 	} else {
@@ -451,6 +463,7 @@ if ( 3 == $t_install_state ) {
 			$ret = $dict->ExecuteSQLArray($sqlarray);
 			if ( $ret == 2 ) {
 				print_test_result( GOOD );
+				config_set( 'database_version', $i );
 			} else {
 				print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 			}
@@ -459,12 +472,6 @@ if ( 3 == $t_install_state ) {
 		}
 	}
 	
-	if ( false == $g_failed ) {
-		$t_install_state++;
-		config_set( 'database_version', $i );
-	} else {
-		config_set( 'database_version', --$i );
-	}
 
 ?>
 </table>
