@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_set.php,v 1.5 2005-05-15 12:26:06 marcelloscata Exp $
+	# $Id: manage_config_workflow_set.php,v 1.6 2005-07-11 23:46:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -83,8 +83,7 @@
 		# walk through the status labels to set the status threshold
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		$t_set_status = array();
-		foreach ( $t_enum_status as $t_status) {
-			list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
+		foreach( $t_statuses as $t_status_id => $t_status_label) {
 			$f_level = gpc_get( 'access_change_' . $t_status_id );
 			if ( NEW_ == $t_status_id ) {
 				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
