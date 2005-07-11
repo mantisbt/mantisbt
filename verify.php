@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: verify.php,v 1.5 2005-05-25 19:57:13 marcelloscata Exp $
+	# $Id: verify.php,v 1.6 2005-07-11 19:08:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -36,6 +36,7 @@
 		trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 	}
 
+	# set a temporary cookie so the login information is passed between pages.
 	auth_logout();
 	auth_set_cookies( $f_user_id, false );
 

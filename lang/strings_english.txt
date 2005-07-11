@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.260 $
+	# $Revision: 1.261 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-03 15:09:11 $
+	# $Date: 2005-07-11 19:08:10 $
 	#
-	# $Id: strings_english.txt,v 1.260 2005-07-03 15:09:11 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.261 2005-07-11 19:08:10 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -373,6 +373,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password = 'Confirm Password';
 $s_access_level = 'Access Level';
 $s_update_user_button = 'Update User';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';

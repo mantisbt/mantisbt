@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.173 2005-07-03 15:09:11 thraxisp Exp $
+	# $Id: html_api.php,v 1.174 2005-07-11 19:08:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -355,7 +355,9 @@
 		# We do this at the end of the page so that:
 		#  1) we can display the user's last visit time on a page before updating it
 		#  2) we don't invalidate the user cache immediately after fetching it
-		if ( auth_is_user_authenticated() ) {
+		#  3) don't do this on the password verification page, as it causes the 
+		#    verification comparison to fail
+		if ( auth_is_user_authenticated() && !( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'verify.php' ) ) ) ) {
 			$t_user_id = auth_get_current_user_id();
 			user_update_last_visit( $t_user_id );
 		}
