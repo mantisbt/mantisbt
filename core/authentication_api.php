@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.50 2005-06-09 20:07:25 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.51 2005-07-11 23:49:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -371,17 +371,20 @@
 			} else {
 				if ( ON == config_get( 'allow_anonymous_login' ) ) {
 					if ( $g_cache_anonymous_user_cookie_string == null ) {
-						$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
+                        if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
+                            # get anonymous information if database is available
+						    $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
 								config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-						$result = db_query( $query );
+                            $result = db_query( $query );
 
-						if ( 1 == db_num_rows( $result ) ) {
-							$row		= db_fetch_array( $result );
-							$t_cookie	= $row['cookie_string'];
+                            if ( 1 == db_num_rows( $result ) ) {
+                                $row		= db_fetch_array( $result );
+                               $t_cookie	= $row['cookie_string'];
 
-							$g_cache_anonymous_user_cookie_string = $t_cookie;
-							$g_cache_current_user_id = $row['id'];
-						}
+                                $g_cache_anonymous_user_cookie_string = $t_cookie;
+                                $g_cache_current_user_id = $row['id'];
+                            }
+                        }
 					} else {
 						$t_cookie = $g_cache_anonymous_user_cookie_string;
 					}
