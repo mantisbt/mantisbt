@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.6 2005-05-10 17:32:33 thraxisp Exp $
+	# $Id: project_hierarchy_api.php,v 1.7 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -99,7 +99,7 @@
 		for ( $i=0 ; $i < $row_count ; $i++ ){
 			$row = db_fetch_array( $result );
 
-			if ( null == $row['parent_id'] ) {
+			if ( null === $row['parent_id'] ) {
 				$row['parent_id'] = ALL_PROJECTS;
 			}
 

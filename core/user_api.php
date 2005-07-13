@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.103 2005-05-29 15:10:36 thraxisp Exp $
+	# $Id: user_api.php,v 1.104 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -638,7 +638,7 @@
 	function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		global $g_user_accessible_projects_cache;
 
-		if ( null != $g_user_accessible_projects_cache
+		if ( null !== $g_user_accessible_projects_cache
 		     && auth_get_current_user_id() == $p_user_id 
 		     && false == $p_show_disabled ) {
 			return $g_user_accessible_projects_cache;
@@ -710,7 +710,7 @@
 	function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 		global $g_user_accessible_subprojects_cache;
 
-		if ( null != $g_user_accessible_subprojects_cache
+		if ( null !== $g_user_accessible_subprojects_cache
 		     && auth_get_current_user_id() == $p_user_id 
 		      && false == $p_show_disabled ) {
 			if ( isset( $g_user_accessible_subprojects_cache[ $p_project_id ] ) ) {

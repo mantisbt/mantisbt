@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.9 2005-05-31 13:04:17 vboctor Exp $
+	# $Id: columns_api.php,v 1.10 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -426,7 +426,7 @@
 
 		# grab the bugnote count
 		$t_bugnote_stats = bug_get_bugnote_stats( $p_row['id'] );
-		if ( NULL != $t_bugnote_stats ) {
+		if ( NULL !== $t_bugnote_stats ) {
 			$bugnote_count = $t_bugnote_stats['count'];
 			$v_bugnote_updated = $t_bugnote_stats['last_modified'];
 		} else {

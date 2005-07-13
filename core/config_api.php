@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.30 2005-07-05 23:44:39 thraxisp Exp $
+	# $Id: config_api.php,v 1.31 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -171,7 +171,7 @@
 
 				# prepare the user's list
 				$t_users = array( ALL_USERS );
-				if ( ( null == $p_user ) && ( auth_is_user_authenticated() ) ) {
+				if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 					$t_users[] = auth_get_current_user_id();
 				} else if ( ! in_array( $p_user, $t_users ) ) {
 					$t_users[] = $p_user;
@@ -184,7 +184,7 @@
 
 				# prepare the projects list
 				$t_projects = array( ALL_PROJECTS );
-				if ( ( null == $p_project ) && ( auth_is_user_authenticated() ) ) {
+				if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 					$t_selected_project = helper_get_current_project( false );
 					if ( ALL_PROJECTS <> $t_selected_project ) {
 						$t_projects[] = $t_selected_project;

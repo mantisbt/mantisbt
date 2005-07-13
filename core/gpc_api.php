@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.38 2005-05-26 23:46:20 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.39 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -109,7 +109,7 @@
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				$t_values = gpc_get_string_array( $p_var_name, $p_default );
-				if( null != $t_values && '' != $t_values ) {
+				if( null !== $t_values && '' != $t_values ) {
 					return implode( '|', $t_values );
 				} else {
 					return '';

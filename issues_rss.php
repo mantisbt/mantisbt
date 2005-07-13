@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.4 2005-06-20 15:13:42 vboctor Exp $
+	# $Id: issues_rss.php,v 1.5 2005-07-13 20:44:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -121,7 +121,7 @@
 	} else {
 		# null will be returned if the user doesn't have access right to access the filter.
 		$t_custom_filter = filter_db_get_filter( $f_filter_id, $t_user_id );
-		if ( null == $t_custom_filter ) {
+		if ( null === $t_custom_filter ) {
 			access_denied();
 		}
 

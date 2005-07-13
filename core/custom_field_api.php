@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.55 2005-07-05 23:44:39 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.56 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1140,7 +1140,7 @@
 	function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 		$t_id = $p_field_def['id'];
 
-		if( null == $p_bug_id ) {
+		if( null === $p_bug_id ) {
 			$t_custom_field_value = $p_field_def['default_value'];
 		} else {
 			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );

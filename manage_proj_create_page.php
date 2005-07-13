@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.9 2005-06-12 09:03:32 vboctor Exp $
+	# $Id: manage_proj_create_page.php,v 1.10 2005-07-13 20:45:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -25,14 +25,14 @@
 <br />
 <div align="center">
 <form method="post" action="manage_proj_create.php">
-<?php if ( null != $f_parent_id ) { ?>
+<?php if ( null !== $f_parent_id ) { ?>
 <input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>">
 <?php } ?>
 <table class="width75" cellspacing="1">
 <tr>
 <td class="form-title" colspan="2">
 		<?php
-			if ( null != $f_parent_id ) {
+			if ( null !== $f_parent_id ) {
 				echo lang_get( 'add_subproject_title' );
 			} else {
 				echo lang_get( 'add_project_title' );

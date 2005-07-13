@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.39 2005-04-22 22:11:18 prichards Exp $
+	# $Id: summary_api.php,v 1.40 2005-07-13 20:45:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -513,7 +513,7 @@
 		}
 
 		# Retrieve statistics one time to improve performance.
-		if ( null == $p_cache ) {
+		if ( null === $p_cache ) {
 			$query = "SELECT project_id, status, COUNT( status ) AS count
 					FROM $t_mantis_bug_table
 					GROUP BY project_id, status";
