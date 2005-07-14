@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.60 2005-06-12 21:04:44 thraxisp Exp $
+	# $Id: helper_api.php,v 1.61 2005-07-14 21:30:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -287,7 +287,7 @@
 
 	# --------------------
 	function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
-		if ( null == $p_user_id ) {
+		if ( null === $p_user_id ) {
 			$p_user_id = auth_get_current_user_id();
 		}
 

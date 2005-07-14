@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_user_remove.php,v 1.6 2004-12-14 20:37:07 marcelloscata Exp $
+	# $Id: manage_proj_user_remove.php,v 1.7 2005-07-14 21:30:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -20,7 +20,7 @@
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 	access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-	if ( null == $f_user_id ) {
+	if ( null === $f_user_id ) {
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 

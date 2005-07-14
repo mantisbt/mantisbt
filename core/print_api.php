@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.139 2005-06-17 21:31:26 thraxisp Exp $
+	# $Id: print_api.php,v 1.140 2005-07-14 21:30:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -791,7 +791,7 @@
 		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
 
-		if ( null == $p_project_id ) {
+		if ( null === $p_project_id ) {
 			$p_project_id = helper_get_current_project();
 		}
 		$c_project_id = (int)$p_project_id;
