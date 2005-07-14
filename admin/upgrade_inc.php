@@ -6,40 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.16 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.17 2005-07-14 21:38:00 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	$g_skip_open_db = true;  # don't open the database in database_api.php
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-$g_error_send_page_header = false;
-	require_once( 'db_table_names_inc.php' );
 
-	$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
-	if ( false == $result ) {
-?>
-<html>
-<head>
-<title> Mantis Administration - Upgrade Installation </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
-<body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
-	<tr class="top-bar">
-		<td class="links">
-			[ <a href="index.php">Back to Administration</a> ]
-		</td>
-		<td class="title">
-			Upgrade Installation
-		</td>
-	</tr>
-</table>
-<br /><br />
-<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
-</body>
-<?php
-        exit();
-	}
+	require_once( 'db_table_names_inc.php' );
 
 	# Compatibility function
 	#
@@ -52,45 +22,13 @@ $g_error_send_page_header = false;
 
 		$result = db_query( "DESCRIBE $c_table_name $c_field_name" );
 
-		if ( $result && db_num_rows($result) ) {
+		if ( $result && ( 0 < db_num_rows( $result ) ) ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	# --------------------
-	# Returns true if the current PHP version is higher than the one
-	#  specified in the given string
-	function db_version_at_least( $p_version_string ) {
-		global $g_cached_db_version;
-
-		if ( isset( $g_cached_db_version[$p_version_string] ) ) {
-			return $g_cached_db_version[$p_version_string];
-		}
-
-		$t_curver = array_pad( explode( '.', config_get( 'database_version', '0.0.0' ) ), 3, 0 );
-		$t_minver = array_pad( explode( '.', $p_version_string ), 3, 0 );
-
-		for ($i = 0 ; $i < 3 ; $i = $i + 1 ) {
-			$t_cur = (int)$t_curver[$i];
-			$t_min = (int)$t_minver[$i];
-
-			if ( $t_cur < $t_min ) {
-				$g_cached_db_version[$p_version_string] = false;
-				return false;
-			} else if ( $t_cur > $t_min ) {
-				$g_cached_db_version[$p_version_string] = true;
-				return true;
-			}
-		}
-
-		# if we get here, the versions must match exactly so:
-		$g_cached_db_version[$p_version_string] = true;
-		return true;
-	}
-
-
 ?>
 <?php
 	class Upgrade {
@@ -243,15 +181,14 @@ $g_error_send_page_header = false;
 		}
 		
 		# add items, and check if they can be marked as completed
-		function add_items_with_check( $p_upgrade_file, $p_table_check='', $p_version_check='0.0.0' ) {
+		function add_items_with_check( $p_upgrade_file, $p_table_check='' ) {
 		
 			$t_start_count = $this->count_items();
 			$this->add_items( include( $p_upgrade_file ) );
 			$t_end_count = $this->count_items();
 			# check for table presence and db version and mark as applied if either the table
 			#  is present, or our version stamp is lower than the actual db
-			if ( ( ( $p_table_check != '' ) && admin_check_applied( $p_table_check ) ) ||
-					( db_version_at_least( $p_version_check ) ) ) {
+			if ( ( ( $p_table_check != '' ) && admin_check_applied( $p_table_check ) ) ) {
 				for ( $i = $t_start_count; $i < $t_end_count; $i++ ) {
 					if ( ! $this->is_applied( $i ) ) {
 						$this->set_applied( $i );
@@ -431,4 +368,19 @@ $g_error_send_page_header = false;
 			}
 		}
 	}
+	
+	$upgrade_set = new UpgradeSet();
+
+	$upgrade_set->add_items_with_check( 'upgrades/0_13_inc.php', $t_project_table );
+	$upgrade_set->add_items_with_check( 'upgrades/0_14_inc.php', $t_bug_file_table );
+	$upgrade_set->add_items_with_check( 'upgrades/0_15_inc.php', $t_bug_history_table );
+	$upgrade_set->add_items_with_check( 'upgrades/0_16_inc.php', $t_bug_monitor_table );
+
+    # this upgrade process was introduced in 0.17.x, so beyond here, the 
+    #  process of checking the upgrade_table to see if updates are applied should work
+	$upgrade_set->add_items_with_check( 'upgrades/0_17_inc.php', '', '0.17.0' );
+	$upgrade_set->add_items_with_check( 'upgrades/0_18_inc.php', '', '0.18.0' );
+	$upgrade_set->add_items_with_check( 'upgrades/0_19_inc.php', '', '0.19.0' );
+	$upgrade_set->add_items_with_check( 'upgrades/1_00_inc.php', '', '1.0.0' );	
+
 ?>

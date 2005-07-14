@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.44 2005-06-16 13:26:05 thraxisp Exp $
+	# $Id: core.php,v 1.45 2005-07-14 21:38:00 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -46,7 +46,6 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 	} else {
 		# if not found, redirect to the admin page to install the system
-/* @@@ commented out for now until installer works
 		if ( ! stristr ( $_SERVER['PHP_SELF'], 'admin' ) ) {
 			if ( OFF == $g_use_iis ) {
 				header( 'Status: 302' );
@@ -54,13 +53,12 @@
 			header( 'Content-Type: text/html' );
 
 			if ( ON == $g_use_iis ) {
-				header( "Refresh: 0;url=admin/" );
+				header( "Refresh: 0;url=admin/install.php" );
 			} else {
-				header( "Location: admin/" );
+				header( "Location: admin/install.php" );
 			}
 		exit; # additional output can cause problems so let's just stop output here
 		}
-*/
 	}
 
 	# Allow an environment variable (defined in an Apache vhost for example)

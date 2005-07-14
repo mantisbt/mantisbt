@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.4 2005-07-05 23:48:49 thraxisp Exp $
+	# $Id: install.php,v 1.5 2005-07-14 21:38:00 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -75,11 +75,11 @@
 	$t_install_state = gpc_get_int( 'install', 0 );
 
 	# read control variables with defaults
-	$f_hostname = gpc_get('hostname', 'localhost');
-	$f_db_type = gpc_get('db_type', '');
-	$f_database_name = gpc_get('database_name', 'bugtrack');
-	$f_db_username = gpc_get('db_username', '');
-	$f_db_password = gpc_get('db_password', '');
+	$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack') );
+	$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 	$f_admin_username = gpc_get( 'admin_username', '' );
 	$f_admin_password = gpc_get( 'admin_password', '');
 ?>
@@ -266,7 +266,7 @@ if ( 2 == $t_install_state ) {
 	?>
 </tr>
 <?php
-	if ( $t_database_exists ) {
+	if ( $t_db_exists ) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -445,7 +445,8 @@ if ( 3 == $t_install_state ) {
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		$g_db_connected = true; # fake out database access routines
 		$t_last_update = config_get( 'database_version', 0 );
-		$lastid = sizeof( $upgrade );
+		$lastid = sizeof( $upgrade ) - 1;
+	var_dump($lastid);
 		$i = $t_last_update;
 		while ( ( $i < $lastid ) && ! $g_failed ) {
 ?>
@@ -469,9 +470,12 @@ if ( 3 == $t_install_state ) {
 			}
 			echo '</tr>';
 			$i++;
+var_dump($i);
 		}
 	}
-	
+	if ( false == $g_failed ) {
+		$t_install_state++;
+	} 
 
 ?>
 </table>
@@ -498,6 +502,7 @@ if ( 4 == $t_install_state ) {
 	
 # all checks have passed, install the database
 if ( 5 == $t_install_state ) {
+echo 'wcf';
 ?>
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
@@ -531,9 +536,17 @@ if ( 5 == $t_install_state ) {
 				print_test_result( BAD, false, 'cannot write ' . $g_absolute_path . 'config_inc.php' );
 			}
 		} else {
-			// already exists
-			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists' );
-
+			# already exists, see if the information is the same
+			if ( ( $f_hostname != config_get( 'hostname', '' ) ) ||
+					( $f_db_type != config_get( 'db_type', '' ) ) ||
+					( $f_database_name != config_get( 'database_name', '') ) ||
+					( $f_db_username != config_get( 'db_username', '' ) ) ||
+					( $f_db_password != config_get( 'db_password', '' ) ) ) {
+				print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
+			} else {
+				print_test_result( GOOD, false, 'file not updated' );
+				$t_write_failed = false;
+			}			
 		}
 	?>
 </tr>

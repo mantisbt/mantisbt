@@ -8,11 +8,11 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.13 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: 0_19_inc.php,v 1.14 2005-07-14 21:38:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require( 'db_table_names_inc.php' );
+	require( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'db_table_names_inc.php' );
 
 	$upgrades = array();
 

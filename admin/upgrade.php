@@ -6,45 +6,24 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.8 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: upgrade.php,v 1.9 2005-07-14 21:38:00 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once ( 'upgrade_inc.php' );
-	
-	if ( ! db_table_exists( $t_upgrade_table ) ) {
-        # Create the upgrade table if it does not exist
-        $query = "CREATE TABLE IF NOT EXISTS $t_upgrade_table
-				  (upgrade_id char(20) NOT NULL,
-				  description char(255) NOT NULL,
-				  PRIMARY KEY (upgrade_id))";
+	$g_skip_open_db = true;  # don't open the database in database_api.php
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+	$g_error_send_page_header = false; # suppress page headers in the error handler
 
-        $result = db_query( $query );
-    }
-
-	$upgrade_set = new UpgradeSet();
-
-	$upgrade_set->add_items_with_check( 'upgrades/0_13_inc.php', $t_project_table );
-	$upgrade_set->add_items_with_check( 'upgrades/0_14_inc.php', $t_bug_file_table );
-	$upgrade_set->add_items_with_check( 'upgrades/0_15_inc.php', $t_bug_history_table );
-	$upgrade_set->add_items_with_check( 'upgrades/0_16_inc.php', $t_bug_monitor_table );
-
-    # this upgrade process was introduced in 0.17.x, so beyond here, the 
-    #  process of checking the upgrade_table to see if updates are applied should work
-	$upgrade_set->add_items_with_check( 'upgrades/0_17_inc.php', '', '0.17.0' );
-	$upgrade_set->add_items_with_check( 'upgrades/0_18_inc.php', '', '0.18.0' );
-	$upgrade_set->add_items_with_check( 'upgrades/0_19_inc.php', '', '0.19.0' );
-	$upgrade_set->add_items_with_check( 'upgrades/1_00_inc.php', '', '1.0.0' );
-	
+    # @@@ upgrade list moved to the bottom of upgrade_inc.php
+    
 	$f_advanced = gpc_get_bool( 'advanced', false );
 ?>
 <html>
 <head>
-<title> Mantis Administration - Database Upgrade </title>
+<title> Mantis Administration - Upgrade Installation </title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
@@ -58,8 +37,30 @@
 	</tr>
 </table>
 <br /><br />
-
 <?php
+
+	$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+	if ( false == $result ) {
+?>
+<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
+</body>
+<?php
+        exit();
+	}
+	
+	if ( ! db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
+        # Create the upgrade table if it does not exist
+        $query = "CREATE TABLE IF NOT EXISTS" . config_get( 'mantis_upgrade_table' ) .
+				  "(upgrade_id char(20) NOT NULL,
+				  description char(255) NOT NULL,
+				  PRIMARY KEY (upgrade_id))";
+
+        $result = db_query( $query );
+    }
+
+	# link the data structures and upgrade list
+	require_once ( 'upgrade_inc.php' );
+	
 	$upgrade_set->process_post_data( $f_advanced );
 ?>
 </body>

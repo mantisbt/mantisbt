@@ -8,11 +8,11 @@
 	# Changes applied to 0.14 database to give us 0.15
 
 	# --------------------------------------------------------
-	# $Id: 0_14_inc.php,v 1.8 2005-07-02 00:56:04 thraxisp Exp $
+	# $Id: 0_14_inc.php,v 1.9 2005-07-14 21:38:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require( 'db_table_names_inc.php' );
+	require( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'db_table_names_inc.php' );
 
 	$upgrades = array();
 

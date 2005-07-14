@@ -1,5 +1,13 @@
 <?php
-	require_once( '../core.php' );
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: db_table_names_inc.php,v 1.8 2005-07-14 21:38:00 thraxisp Exp $
+	# --------------------------------------------------------
 
 	# Load all the table names for use by the upgrade statements
 	$t_bug_file_table				= config_get_global( 'mantis_bug_file_table' );

@@ -10,11 +10,11 @@
 	#  entities and then insert the data back in.
 
 	# --------------------------------------------------------
-	# $Id: 0_17_escaping_fixes_inc.php,v 1.4 2005-02-12 20:01:09 jlatour Exp $
+	# $Id: 0_17_escaping_fixes_inc.php,v 1.5 2005-07-14 21:38:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( 'db_table_names_inc.php' );
+	require( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'db_table_names_inc.php' );
 
 	$upgrades = array();
 
