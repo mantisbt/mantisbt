@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.140 2005-07-14 21:30:28 thraxisp Exp $
+	# $Id: print_api.php,v 1.141 2005-07-15 00:08:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -626,9 +626,10 @@
 		$t_enum_count = count( $t_arr );
 		for ( $i = 0; $i < $t_enum_count; $i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
-			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"";
-			check_selected( $p_val, $t_elem[0] );
+			$t_key = trim( $t_elem[0] );
+			$t_elem2 = get_enum_element( $p_enum_name, $t_key );
+			echo "<option value=\"$t_key\"";
+			check_selected( $p_val, $t_key );
 			echo ">$t_elem2</option>";
 		} # end for
 	}
