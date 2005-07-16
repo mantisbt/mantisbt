@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.72 2005-06-20 15:13:41 vboctor Exp $
+	# $Id: string_api.php,v 1.73 2005-07-16 17:38:06 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -362,7 +362,7 @@
 		#  * a \n, \r, or <
 
 		$p_string = preg_replace( '/(?<=^|&quot;|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&quot;|&gt;|[\s\,\<\n\r])/s',
-								'<a href="mailto:\1" target="_new">\1</a>',
+								'<a href="mailto:\1">\1</a>',
 								$p_string);
 
 		return $p_string;
