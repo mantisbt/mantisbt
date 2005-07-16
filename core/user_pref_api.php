@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.25 2005-07-05 18:50:50 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.26 2005-07-16 00:53:06 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -47,33 +47,14 @@
 		function UserPreferences() {
 			$this->default_profile                   	= 0;
 			$this->default_project              	 	= ALL_PROJECTS;
-			$this->advanced_report                   	= config_get( 'default_advanced_report' );
-			$this->advanced_view                     	= config_get( 'default_advanced_view' );
-			$this->advanced_update                   	= config_get( 'default_advanced_update' );
-			$this->refresh_delay                     	= config_get( 'default_refresh_delay' );
-			$this->redirect_delay                    	= config_get( 'default_redirect_delay' );
-			$this->bugnote_order                     	= config_get( 'default_bugnote_order' );
-			$this->email_on_new                      	= config_get( 'default_email_on_new' );
-			$this->email_on_assigned                 	= config_get( 'default_email_on_assigned' );
-			$this->email_on_feedback                 	= config_get( 'default_email_on_feedback' );
-			$this->email_on_resolved                 	= config_get( 'default_email_on_resolved' );
-			$this->email_on_closed                   	= config_get( 'default_email_on_closed' );
-			$this->email_on_reopened                 	= config_get( 'default_email_on_reopened' );
-			$this->email_on_bugnote                  	= config_get( 'default_email_on_bugnote' );
-			$this->email_on_status                   	= config_get( 'default_email_on_status' );
-			$this->email_on_priority                 	= config_get( 'default_email_on_priority' );
-			$this->email_on_new_min_severity     	= config_get( 'default_email_on_new_minimum_severity' );
-			$this->email_on_assigned_min_severity	= config_get( 'default_email_on_assigned_minimum_severity' );
-			$this->email_on_feedback_min_severity	= config_get( 'default_email_on_feedback_minimum_severity' );
-			$this->email_on_resolved_min_severity	= config_get( 'default_email_on_resolved_minimum_severity' );
-			$this->email_on_closed_min_severity  	= config_get( 'default_email_on_closed_minimum_severity' );
-			$this->email_on_reopened_min_severity	= config_get( 'default_email_on_reopened_minimum_severity' );
-			$this->email_on_bugnote_min_severity 	= config_get( 'default_email_on_bugnote_minimum_severity' );
-			$this->email_on_status_min_severity	 	= config_get( 'default_email_on_status_minimum_severity' );
-			$this->email_on_priority_min_severity	= config_get( 'default_email_on_priority_minimum_severity' );
-			$this->email_bugnote_limit               	= config_get( 'default_email_bugnote_limit');
-			$this->language                          	= config_get( 'default_language');
 		}
+		
+		function Get( $t_string ) {
+			if( !isset( $this->{$t_string} ) ) {					
+				$this->{$t_string} = config_get( 'default_' .$t_string );				
+			}
+			return $this->{$t_string} ;	
+ 		}
 	}
 
 	#===================================
@@ -97,11 +78,11 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
-
 		if ( isset ( $g_cache_user_pref[$c_user_id][$c_project_id] ) ) {
 			return $g_cache_user_pref[$c_user_id][$c_project_id];
 		}
+
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_pref_table
@@ -365,7 +346,7 @@
 		$t_vars = get_object_vars( $t_prefs );
 
 		if ( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
-			return $t_prefs->$p_pref_name;
+			return $t_prefs->Get( $p_pref_name );
 		} else {
 			error_parameters( $p_pref_name );
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
