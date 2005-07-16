@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.141 2005-07-15 00:08:03 thraxisp Exp $
+	# $Id: print_api.php,v 1.142 2005-07-16 01:01:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -362,6 +362,7 @@
 	# --------------------
 	# List projects that the current user has access to
 	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
+		project_cache_all();
 		$t_project_ids = current_user_get_accessible_projects();
 		if ( $p_include_all_projects ) {
 			PRINT '<option value="' . ALL_PROJECTS . '"';
