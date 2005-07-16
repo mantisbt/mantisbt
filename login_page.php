@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.48 2005-07-16 12:19:30 prichards Exp $
+	# $Id: login_page.php,v 1.49 2005-07-16 12:20:59 prichards Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -172,7 +172,6 @@
 	}
 	
 	# Check for db upgrade for versions > 1.0.0 using new
-	$t_db_version = config_get( 'database_version' , 0 );	
 	require_once( 'admin/schema.php' );
 	$t_upgrades_reqd = sizeof( $upgrade ) - 1;
 	
