@@ -6,10 +6,38 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.26 2005-07-16 00:53:06 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.27 2005-07-16 02:06:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
+	$g_default_mapping = array(
+		"advanced_report" => "default_advanced_report",
+		"advanced_view" => "default_advanced_view",
+		"advanced_update" => "default_advanced_update",
+		"refresh_delay" => "default_refresh_delay",
+		"redirect_delay" => "default_redirect_delay",
+		"bugnote_order" => "default_bugnote_order",
+		"email_on_new" => "default_email_on_new",
+		"email_on_assigned" => "default_email_on_assigned",
+		"email_on_feedback" => "default_email_on_feedback",
+		"email_on_resolved" => "default_email_on_resolved",
+		"email_on_closed" => "default_email_on_closed",
+		"email_on_reopened" => "default_email_on_reopened",
+		"email_on_bugnote" => "default_email_on_bugnote",
+		"email_on_status" => "default_email_on_status",
+		"email_on_priority" => "default_email_on_priority",
+		"email_on_new_min_severity" => "default_email_on_new_minimum_severity",
+		"email_on_assigned_min_severity" => "default_email_on_assigned_minimum_severity",
+		"email_on_feedback_min_severity" => "default_email_on_feedback_minimum_severity",
+		"email_on_resolved_min_severity" => "default_email_on_resolved_minimum_severity",
+		"email_on_closed_min_severity" => "default_email_on_closed_minimum_severity",
+		"email_on_reopened_min_severity" => "default_email_on_reopened_minimum_severity",
+		"email_on_bugnote_min_severity" => "default_email_on_bugnote_minimum_severity",
+		"email_on_status_min_severity" => "default_email_on_status_minimum_severity",
+		"email_on_priority_min_severity" => "default_email_on_priority_minimum_severity",
+		"email_bugnote_limit" => "default_email_bugnote_limit",
+		"language" => "default_language"
+		);
 
 	#===================================
 	# Preference Structure Definition
@@ -50,8 +78,9 @@
 		}
 		
 		function Get( $t_string ) {
+			global $g_default_mapping;
 			if( !isset( $this->{$t_string} ) ) {					
-				$this->{$t_string} = config_get( 'default_' .$t_string );				
+				$this->{$t_string} = config_get( $g_default_mapping[$t_string] );				
 			}
 			return $this->{$t_string} ;	
  		}
@@ -330,6 +359,8 @@
 			if ( in_array( $var, $t_row_keys, true ) ) {
 				# Store that value in the object
 				$t_prefs->$var = $row[$var];
+			} else {
+				$t_prefs->$var = config_get( $g_default_mapping[$var] );
 			}
 		}
 
