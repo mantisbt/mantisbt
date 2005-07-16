@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.10 2005-07-16 10:53:43 prichards Exp $
+	# $Id: upgrade.php,v 1.11 2005-07-16 13:12:32 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,7 @@
 	
 	if ( ! db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
         # Create the upgrade table if it does not exist
-        $query = "CREATE TABLE IF NOT EXISTS " . config_get( 'mantis_upgrade_table' ) .
+        $query = "CREATE TABLE " . config_get( 'mantis_upgrade_table' ) .
 				  "(upgrade_id char(20) NOT NULL,
 				  description char(255) NOT NULL,
 				  PRIMARY KEY (upgrade_id))";
