@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.27 2005-07-16 02:06:33 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.28 2005-07-16 07:14:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -76,13 +76,13 @@
 			$this->default_profile                   	= 0;
 			$this->default_project              	 	= ALL_PROJECTS;
 		}
-		
+
 		function Get( $t_string ) {
 			global $g_default_mapping;
-			if( !isset( $this->{$t_string} ) ) {					
-				$this->{$t_string} = config_get( $g_default_mapping[$t_string] );				
+			if( !isset( $this->{$t_string} ) ) {
+				$this->{$t_string} = config_get( $g_default_mapping[$t_string] );
 			}
-			return $this->{$t_string} ;	
+			return $this->{$t_string} ;
  		}
 	}
 
@@ -332,6 +332,8 @@
 	# --------------------
 	# return the user's preferences in a UserPreferences object
 	function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
+		global $g_default_mapping;
+
 		$t_prefs = new UserPreferences;
 
 		$row = user_pref_cache_row( $p_user_id, $p_project_id, false );
