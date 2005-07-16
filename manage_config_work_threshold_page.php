@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.9 2005-05-16 16:23:55 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.10 2005-07-16 01:46:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -44,8 +44,6 @@
 	function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
 
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_file = config_get_global( $p_threshold );
         if ( ! is_array( $t_file ) ) {
             $t_file_exp = array();
@@ -58,8 +56,6 @@
 		    $t_file_exp = $t_file;
 		}
         
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         if ( ! is_array( $t_global ) ) {
             $t_global_exp = array();
@@ -72,8 +68,6 @@
 		    $t_global_exp = $t_global;
 		}
         
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_project = config_get( $p_threshold );
         if ( ! is_array( $t_project ) ) {
             $t_project_exp = array();
@@ -130,16 +124,8 @@
 	function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
 
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_file = config_get_global( $p_threshold );
-        
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
-        
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_project = config_get( $p_threshold );
         
         $t_colour = '';
@@ -181,16 +167,8 @@
 	function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
 	    global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
         
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_file = config_get_global( $p_threshold );
-        
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
-        
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_project = config_get( $p_threshold );
         
         $t_colour = '';

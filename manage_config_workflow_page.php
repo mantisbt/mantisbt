@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.12 2005-05-30 14:23:19 vboctor Exp $
+	# $Id: manage_config_workflow_page.php,v 1.13 2005-07-16 01:46:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -185,16 +185,8 @@
 	function threshold_row( $p_threshold ) {
 		global $t_access, $t_colour_project, $t_colour_global;
 
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_file = config_get_global( $p_threshold );
-
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
-
-        # flush the cache entries before continuing as the previous config_gets will have filled cache
-        config_flush_cache($p_threshold );
         $t_project = config_get( $p_threshold );
         $t_colour = '';
         if ( $t_global != $t_file ) {
@@ -238,15 +230,10 @@
 
 		$t_enum_status = get_enum_to_array( config_get( 'status_enum_string' ) );
 
-	    config_flush_cache( 'report_bug_threshold' );
 		$t_file_new = config_get_global( 'report_bug_threshold' );
-	    config_flush_cache( 'report_bug_threshold' );
 		$t_global_new = config_get( 'report_bug_threshold', null, null, ALL_PROJECTS );
-	    config_flush_cache( 'report_bug_threshold' );
 		$t_project_new = config_get( 'report_bug_threshold' );
 
-	    config_flush_cache( 'set_status_threshold' );
-	    config_flush_cache( 'update_bug_status_threshold' );
 		$t_file_set = config_get_global( 'set_status_threshold' );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
 		    if ( ! isset( $t_file_set[$t_status] ) ) {
@@ -254,8 +241,6 @@
 		    }
 		}
 
-	    config_flush_cache( 'set_status_threshold' );
-	    config_flush_cache( 'update_bug_status_threshold' );
 		$t_global_set = config_get( 'set_status_threshold', null, null, ALL_PROJECTS );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
 		    if ( ! isset( $t_file_set[$t_status] ) ) {
@@ -263,8 +248,6 @@
 		    }
 		}
 
-	    config_flush_cache( 'set_status_threshold' );
-	    config_flush_cache( 'update_bug_status_threshold' );
 		$t_project_set = config_get( 'set_status_threshold' );
 		foreach ( $t_enum_status as $t_status => $t_status_label) {
 		    if ( ! isset( $t_file_set[$t_status] ) ) {
@@ -319,11 +302,8 @@
 	$t_all_status = explode( ',', $t_extra_enum_status);
 
 	# gather all versions of the workflow
-	config_flush_cache( 'status_enum_workflow' );
 	$t_file_workflow = parse_workflow( config_get_global( 'status_enum_workflow' ) );
-	config_flush_cache( 'status_enum_workflow' );
 	$t_global_workflow = parse_workflow( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
-	config_flush_cache( 'status_enum_workflow' );
 	$t_project_workflow = parse_workflow( config_get( 'status_enum_workflow' ) );
 
     # validate the project workflow

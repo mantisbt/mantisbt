@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.31 2005-07-13 20:45:02 thraxisp Exp $
+	# $Id: config_api.php,v 1.32 2005-07-16 01:46:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
 	$g_cache_config = array();
 	$g_cache_config_access = array();
+	$g_cache_filled = false;
 	
 	# cache environment to speed up lookups
 	$g_cache_db_table_exists = false;
@@ -29,12 +30,8 @@
 	#     if not found, config_id + default user + all_project.
 	#    3.use GLOBAL[config_id]
 	function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
-		global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists;
+		global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
 
-		if ( isset( $g_cache_config[$p_option] ) ) {
-			return $g_cache_config[$p_option];
-		}
-		
 		# @@ debug @@ echo "lu o=$p_option ";
 
 		# bypass table lookup for certain options
@@ -56,64 +53,72 @@
 				# @@ debug @@ error_print_stack_trace();
 
 				# prepare the user's list
-				$t_users = array( ALL_USERS );
-				if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
-					$t_users[] = auth_get_current_user_id();
-				} else if ( ! in_array( $p_user, $t_users ) ) {
+				$t_users = array();
+				if ( null === $p_user ) {
+					$t_users[] = auth_is_user_authenticated() ? auth_get_current_user_id() : ALL_USERS;
+				} else {
 					$t_users[] = $p_user;
 				}
-				if ( 1 < count( $t_users ) ) {
-					$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
-				} else {
-					$t_user_clause = "user_id=$t_users[0]";
+				if ( ! in_array( ALL_USERS, $t_users ) ) {
+					$t_users[] = ALL_USERS;
 				}
 
 				# prepare the projects list
-				$t_projects = array( ALL_PROJECTS );
-				if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
-					$t_selected_project = helper_get_current_project();
-					if ( ALL_PROJECTS <> $t_selected_project ) {
-						$t_projects[] = $t_selected_project;
-					}
-				} else if ( ! in_array( $p_project, $t_projects ) ) {
+				$t_projects = array();
+				if ( ( null === $p_project )  ) {
+					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
+				} else {
 					$t_projects[] = $p_project;
 				}
-				if ( 1 < count( $t_projects ) ) {
-					$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
-				} else {
-					$t_project_clause = "project_id=$t_projects[0]";
+				if ( ! in_array( ALL_PROJECTS, $t_projects ) ) {
+					$t_projects[] = ALL_PROJECTS;
 				}
 
-				$c_option = db_prepare_string( $p_option );
-				# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
-				#  once here. we need to reverse the sort, so that the last value overwrites the
-				#  config table
-				$query = "SELECT type, value, access_reqd FROM $t_config_table
-					WHERE config_id = '$p_option' AND
-						$t_project_clause AND
-						$t_user_clause
-					ORDER BY user_id DESC, project_id DESC";
-				$result = db_query( $query, 1 );
-				if ( 0 < db_num_rows( $result ) ) {
-					$row = db_fetch_array( $result );
-					$t_type = $row['type'];
-					$t_raw_value = $row['value'];
-
-					switch ( $t_type ) {
-						case CONFIG_TYPE_INT:
-							$t_value = (int) $t_raw_value;
-							break;
-						case CONFIG_TYPE_COMPLEX:
-							$t_value = unserialize( $t_raw_value );
-							break;
-						case CONFIG_TYPE_STRING:
-						default:
-							$t_value = config_eval( $t_raw_value );
+				if ( ! $g_cache_filled ) {
+					
+					$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
+					$result = db_query( $query );
+					while ( false <> ( $row = db_fetch_array( $result ) ) ) {
+						$t_config = $row['config_id'];
+						$t_user = $row['user_id'];
+						$t_project = $row['project_id'];
+						$g_cache_config[$t_config][$t_user][$t_project] = $row['type'] . ';' . $row['value'];
+						$g_cache_config_access[$t_config][$t_user][$t_project] = $row['access_reqd'];
 					}
-					$g_cache_config[$p_option] = $t_value;
-					$g_cache_config_access[$p_option] = $row['access_reqd'];
-					return $t_value;
+					$g_cache_filled = true;
 				}
+
+				if( isset( $g_cache_config[$p_option] ) ) {
+				    $t_found = false;
+				    reset( $t_users );
+				    while ( ( list( , $t_user ) = each( $t_users ) ) && ! $t_found ) {
+					   reset( $t_projects );
+					   while ( ( list( , $t_project ) = each( $t_projects ) ) && ! $t_found ) {
+					       if ( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
+    							$t_value = $g_cache_config[$p_option][$t_user][$t_project];
+    							$t_found = true;
+    							# @@ debug @@ echo "clu found u=$t_user, p=$t_project, v=$t_value ";
+    						}
+    					}
+    				}
+				
+    				if ( $t_found ) {
+    					list( $t_type, $t_raw_value ) = explode( ';', $t_value, 2 );
+
+    					switch ( $t_type ) {
+    						case CONFIG_TYPE_INT:
+    							$t_value = (int) $t_raw_value;
+    							break;
+    						case CONFIG_TYPE_COMPLEX:
+    							$t_value = unserialize( $t_raw_value );
+    							break;
+    						case CONFIG_TYPE_STRING:
+    						default:
+    							$t_value = config_eval( $t_raw_value );
+    					}
+    					return $t_value;
+    				}
+    			}
 			}
 		}
 		return config_get_global( $p_option, $p_default );
@@ -122,12 +127,12 @@
 	# ----------------------
 	# force config variable from a global to avoid recursion
 	function config_get_global( $p_option, $p_default = null ) {
-		global $g_cache_config, $g_cache_config_access;
 
 		if ( isset( $GLOBALS['g_' . $p_option] ) ) {
 			$t_value = config_eval( $GLOBALS['g_' . $p_option] );
-			$g_cache_config[$p_option] = $t_value;
-			$g_cache_config_access[$p_option] = ADMINISTRATOR;
+			if ( $t_value !== $GLOBALS['g_' . $p_option] ) {
+    			$GLOBALS['g_' . $p_option] = $t_value;
+    		}
 			return $t_value;
 		} else {
 			# unless we were allowing for the option not to exist by passing
@@ -142,80 +147,98 @@
 
 	# ------------------
 	# Retrieves the access level needed to change a config value
-	function config_get_access( $p_option ) {
-		global $g_cache_config, $g_cache_config_access;
+	function config_get_access( $p_option, $p_user = null, $p_project = null ) {
+		global $g_cache_config, $g_cache_config_access, $g_cache_filled;
 
-		if ( ! isset( $g_cache_config[$p_option] ) ) {
-			$t_value = config_get( $p_option );
+		# @@ debug @@ echo "lu o=$p_option ";
+
+		if ( ! $g_cache_filled ) {
+			$t = config_get( $p_option, null, $p_user, $p_project );
+		}
+		
+		# prepare the user's list
+		$t_users = array( ALL_USERS );
+		if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+			$t_users[] = auth_get_current_user_id();
+		} else if ( ! in_array( $p_user, $t_users ) ) {
+			$t_users[] = $p_user;
+		}
+		$t_users[] = ALL_USERS;
+
+		# prepare the projects list
+		$t_projects = array( ALL_PROJECTS );
+		if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+			$t_selected_project = helper_get_current_project();
+			if ( ALL_PROJECTS <> $t_selected_project ) {
+				$t_projects[] = $t_selected_project;
+			}
+		} else if ( ! in_array( $p_project, $t_projects ) ) {
+			$t_projects[] = $p_project;
+		}
+				
+		$t_found = false;
+		if ( isset( $g_cache_config[$p_option] ) ) {
+    		reset( $t_users );
+    		while ( ( list( , $t_user ) = each( $t_users ) ) && ! $t_found ) {
+    			reset( $t_projects );
+    			while ( ( list( , $t_project ) = each( $t_projects ) ) && ! $t_found ) {
+    				if ( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
+    					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
+    					$t_found = true;
+    				}
+    			}
+    		}
 		}
 
-		return $g_cache_config_access[$p_option];
+		return $t_found ? $t_access : ADMINISTRATOR;
 	}
 
 	# ------------------
 	# Returns true if the specified config option exists (ie. a
 	#  value or default can be found), false otherwise
 	function config_is_set( $p_option, $p_user = null, $p_project = null ) {
-		global $g_cache_config;
-		if ( isset( $GLOBALS['g_' . $p_option] ) || isset( $g_cache_config[$p_option] ) ) {
-			return true;
-		} else {
-			# bypass table lookup for certain options
-			$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
-			$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+		global $g_cache_config, $g_cache_filled;
+		
+		if ( ! $g_cache_filled ) {
+			$t = config_get( $p_option, null, $p_user, $p_project );
+		}
+		
+		# prepare the user's list
+		$t_users = array( ALL_USERS );
+		if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+			$t_users[] = auth_get_current_user_id();
+		} else if ( ! in_array( $p_user, $t_users ) ) {
+			$t_users[] = $p_user;
+		}
+		$t_users[] = ALL_USERS;
 
-			if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
-				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
-
-				$t_config_table = config_get_global( 'mantis_config_table' );
-
-				# prepare the user's list
-				$t_users = array( ALL_USERS );
-				if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
-					$t_users[] = auth_get_current_user_id();
-				} else if ( ! in_array( $p_user, $t_users ) ) {
-					$t_users[] = $p_user;
-				}
-				if ( 1 < count( $t_users ) ) {
-					$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
-				} else {
-					$t_user_clause = "user_id=$t_users[0]";
-				}
-
-				# prepare the projects list
-				$t_projects = array( ALL_PROJECTS );
-				if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
-					$t_selected_project = helper_get_current_project( false );
-					if ( ALL_PROJECTS <> $t_selected_project ) {
-						$t_projects[] = $t_selected_project;
-					}
-				} else if ( ! in_array( $p_project, $t_projects ) ) {
-					$t_projects[] = $p_project;
-				}
-				if ( 1 < count( $t_projects ) ) {
-					$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
-				} else {
-					$t_project_clause = "project_id=$t_projects[0]";
-				}
-
-				$c_option = db_prepare_string( $p_option );
-				# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
-				#  once here. we need to reverse the sort, so that the last value overwrites the
-				#  config table
-				$query = "SELECT COUNT(*) FROM $t_config_table
-					WHERE config_id = '$c_option' AND
-						$t_project_clause AND
-						$t_user_clause";
-
-				$result = db_query( $query );
-
-				if ( 0 < db_result( $result ) ) {
-					return true;
+		# prepare the projects list
+		$t_projects = array( ALL_PROJECTS );
+		if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+			$t_selected_project = helper_get_current_project();
+			if ( ALL_PROJECTS <> $t_selected_project ) {
+				$t_projects[] = $t_selected_project;
+			}
+		} else if ( ! in_array( $p_project, $t_projects ) ) {
+			$t_projects[] = $p_project;
+		}
+				
+		$t_found = false;
+		reset( $t_users );
+		while ( ( list( , $t_user ) = each( $t_users ) ) && ! $t_found ) {
+			reset( $t_projects );
+			while ( ( list( , $t_project ) = each( $t_projects ) ) && ! $t_found ) {
+				if ( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
+					$t_found = true;
 				}
 			}
-
-			return false;
 		}
+				
+		if ( $t_found ) {
+			return $t_value;
+		}
+
+		return isset( $GLOBALS['g_' . $p_option] ) ;
 	}
 
 	# ------------------
@@ -258,6 +281,8 @@
 		}
 
 		$result = db_query( $t_set_query );
+		
+		config_set_cache( $p_option, $p_value, $p_user, $p_project, $p_access );
 
 		return true;
 	}
@@ -267,8 +292,8 @@
 	#  If the config option does not exist, an ERROR is triggered
 	function config_set_cache( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
 		global $g_cache_config, $g_cache_config_access;
-		$g_cache_config[$p_option] = $p_value;
-		$g_cache_config_access[$p_option] = $p_access;
+		$g_cache_config[$p_option][$p_user][$p_project] = $p_value;
+		$g_cache_config_access[$p_option][$p_user][$p_project] = $p_access;
 
 		return true;
 	}
@@ -299,7 +324,7 @@
 
 			$result = @db_query( $query);
 		}
-		config_flush_cache( $p_option );
+		config_flush_cache( $p_option, $p_user, $p_project );
 	}		
 		
 	# ------------------
@@ -320,15 +345,16 @@
 	# ------------------
 	# delete the config entry from the cache
 	# @@@ to be used sparingly
-	function config_flush_cache( $p_option='' ) {
+	function config_flush_cache( $p_option='', $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 		global $g_cache_config, $g_cache_config_access;
 	
 		if ( '' !== $p_option ) {
-			unset( $GLOBALS['g_cache_config'][$p_option] );
-			unset( $GLOBALS['g_cache_config_access'][$p_option] );
+			unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );
+			unset( $GLOBALS['g_cache_config_access'][$p_option][$p_user][$p_project] );
 		} else {
 			unset( $GLOBALS['g_cache_config'] );
 			unset( $GLOBALS['g_cache_config_access'] );
+			$g_cache_filled = false;
 		}
 			
 	}
@@ -365,7 +391,8 @@
 		$t_value = $p_value;
 		if ( is_string( $t_value ) && !is_numeric( $t_value ) ) {
 			if ( 0 < preg_match_all( '/%(.*)%/U', $t_value, $t_matches ) ) {
-				for ($i=0; $i< count($t_matches[0]); $i++) {
+			    $t_count = count( $t_matches[0] );
+				for ($i=0; $i<$t_count; $i++) {
 					# $t_matches[0][$i] is the matched string including the delimiters
 					# $t_matches[1][$i] is the target parameter string
 					$t_repl = config_get( $t_matches[1][$i] );

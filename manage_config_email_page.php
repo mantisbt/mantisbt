@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.7 2005-05-01 14:53:49 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.8 2005-07-16 01:46:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -187,10 +187,6 @@
 	}
 	
 	# build a composite of the status flags, exploding the defaults
-    # flush the notify cache entries before continuing as the previous config_gets will have filled cache
-    unset( $g_cache_config['default_notify_flags'] );
-    unset( $g_cache_config['notify_flags'] );
-
 	$t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
 	$t_global_notify_flags = array();
 	foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
@@ -199,10 +195,6 @@
 	   }
 	}
 	$t_global_notify_flags = array_merge_recursive2( $t_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
-
-    # flush the notify cache entries before continuing as the previous config_gets will have filled cache
-    unset( $g_cache_config['default_notify_flags'] );
-    unset( $g_cache_config['notify_flags'] );
 
 	$t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
 	$t_file_notify_flags = array();
@@ -213,10 +205,6 @@
 	}
 	$t_file_notify_flags = array_merge_recursive2( $t_file_notify_flags, config_get_global( 'notify_flags' ) );
 	
-    # flush the notify cache entries before continuing as the previous config_gets will have filled cache
-    unset( $g_cache_config['default_notify_flags'] );
-    unset( $g_cache_config['notify_flags'] );
-    
 	$t_default_notify_flags = config_get( 'default_notify_flags' );
 	$t_notify_flags = array();
 	foreach ( $t_default_notify_flags as $t_flag => $t_value ) {
