@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.54 2005-06-15 13:20:13 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.55 2005-07-16 13:50:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -266,7 +266,7 @@
 		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
-		<?php print_custom_field_input( $t_def, $f_master_bug_id ) ?>
+		<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
 	</td>
 </tr>
 <?php
