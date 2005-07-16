@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.29 2005-07-16 11:55:58 prichards Exp $
+	# $Id: user_pref_api.php,v 1.30 2005-07-16 13:23:35 vboctor Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -198,7 +198,7 @@
 		$t_values	= array();
 
 		foreach ( $t_vars as $var => $val ) {
-			array_push( $t_values, '\'' . db_prepare_string( $p_prefs->$var ) . '\'' );
+			array_push( $t_values, '\'' . db_prepare_string( $p_prefs->Get( $var ) ) . '\'' );
 		}
 
 		$t_vars_string		= implode( ', ', array_keys( $t_vars ) );
@@ -231,11 +231,11 @@
 
 		foreach ( $t_vars as $var => $val ) {
 			if( is_bool( $p_prefs->$var ) ) {
-				array_push( $t_pairs, "$var = " . db_prepare_bool( $p_prefs->$var ) );
+				array_push( $t_pairs, "$var = " . db_prepare_bool( $p_prefs->Get( $var ) ) );
 			} else if( is_int( $p_prefs->$var ) ) {
-				array_push( $t_pairs, "$var = " . db_prepare_int( $p_prefs->$var ) );
+				array_push( $t_pairs, "$var = " . db_prepare_int( $p_prefs->Get( $var ) ) );
 			} else {
-				array_push( $t_pairs, "$var = '" . db_prepare_string( $p_prefs->$var ) . '\'' );
+				array_push( $t_pairs, "$var = '" . db_prepare_string( $p_prefs->Get( $var ) ) . '\'' );
 			}
 		}
 
