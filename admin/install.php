@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.6 2005-07-16 12:10:08 vboctor Exp $
+	# $Id: install.php,v 1.7 2005-07-16 13:11:36 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -376,7 +376,7 @@ if ( 1 == $t_install_state ) {
 		Attempt Installation
 	</td>
 	<td>
-		<input name="go" type="submit" value="Install Database"></input>
+		<input name="go" type="submit" value="Install/Upgrade Database"></input>
 	</td>
 </tr>
 <input name="install" type="hidden" value="2"></input>
@@ -444,10 +444,11 @@ if ( 3 == $t_install_state ) {
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		$g_db_connected = true; # fake out database access routines
-		$t_last_update = config_get( 'database_version', 0 );
+		$t_last_update = config_get( 'database_version', -1 );
 		$lastid = sizeof( $upgrade ) - 1;
-		$i = $t_last_update;
-		while ( ( $i < $lastid ) && ! $g_failed ) {
+		$i = $t_last_update + 1;
+
+		while ( ( $i <= $lastid ) && ! $g_failed ) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
