@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.5 2005-07-14 21:38:00 thraxisp Exp $
+	# $Id: install.php,v 1.6 2005-07-16 12:10:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -48,19 +48,19 @@
 	# -------
 	# print test header and result
 	function print_test( $p_test_description, $p_result, $p_hard_fail=true, $p_message='' ) {
-	
+
 		echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
 		print_test_result( $p_result, $p_hard_fail, $p_message );
 		echo "</tr>\n";
 	}
-	
+
 	# --------
 	# create an SQLArray to insert data
 	function InsertData( $p_table, $p_data ) {
 		$query = "INSERT INTO " . $p_table . " VALUES " . $p_data;
 		return Array( $query );
 	}
-	
+
 
 
 	# install_state
@@ -160,7 +160,7 @@ if ( 0 == $t_install_state ) {
 </tr>
 
 <!-- Check Safe Mode -->
-<?php print_test( 'Checking If Safe mode is enabled for install script', 
+<?php print_test( 'Checking If Safe mode is enabled for install script',
 		! ini_get ( 'SAFE_MODE' ),
 		true,
 		'Disable safe_mode in php.ini before proceeding' ) ?>
@@ -250,9 +250,9 @@ if ( 2 == $t_install_state ) {
 	<?php
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
-		
+
 		$t_db_exists = false;
-		
+
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 			# check if db exists for the admin
@@ -432,7 +432,7 @@ if ( 3 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' ); 
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' );
 		}
 		$g_db->Close();
 	?>
@@ -446,7 +446,6 @@ if ( 3 == $t_install_state ) {
 		$g_db_connected = true; # fake out database access routines
 		$t_last_update = config_get( 'database_version', 0 );
 		$lastid = sizeof( $upgrade ) - 1;
-	var_dump($lastid);
 		$i = $t_last_update;
 		while ( ( $i < $lastid ) && ! $g_failed ) {
 ?>
@@ -470,12 +469,11 @@ if ( 3 == $t_install_state ) {
 			}
 			echo '</tr>';
 			$i++;
-var_dump($i);
 		}
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
-	} 
+	}
 
 ?>
 </table>
@@ -499,10 +497,9 @@ if ( 4 == $t_install_state ) {
 	# rather than the following line
 		$t_install_state++;
 }  # end install_state == 4
-	
+
 # all checks have passed, install the database
 if ( 5 == $t_install_state ) {
-echo 'wcf';
 ?>
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
@@ -517,23 +514,27 @@ echo 'wcf';
 	</td>
 	<?php
 		$t_config = '<?php'."\r\n";
-		$t_config .= "\$g_hostname = '$f_hostname';\r\n";
-		$t_config .= "\$g_db_type = '$f_db_type';\r\n";
-		$t_config .= "\$g_database_name = '$f_database_name';\r\n";
-		$t_config .= "\$g_db_username = '$f_db_username';\r\n";
-		$t_config .= "\$g_db_password = '$f_db_password';\r\n";
+		$t_config .= "\t\$g_hostname = '$f_hostname';\r\n";
+		$t_config .= "\t\$g_db_type = '$f_db_type';\r\n";
+		$t_config .= "\t\$g_database_name = '$f_database_name';\r\n";
+		$t_config .= "\t\$g_db_username = '$f_db_username';\r\n";
+		$t_config .= "\t\$g_db_password = '$f_db_password';\r\n";
 		$t_config .= '?>' . "\r\n";
 		$t_write_failed = true;
-		
-		if ( ! file_exists ( $g_absolute_path . 'config_inc.php' ) ) {
-			$fd = fopen($g_absolute_path . 'config_inc.php','x');
-			fwrite($fd, $t_config );
-			fclose($fd);
-			if ( file_exists ( $g_absolute_path . 'config_inc.php' ) ) {
+
+		$t_config_filename = $g_absolute_path . 'config_inc.php';
+		if ( !file_exists ( $t_config_filename ) ) {
+			if ( is_writable( $t_config_filename ) ) {
+				$fd = fopen( $t_config_filename, 'x' );
+				fwrite( $fd, $t_config );
+				fclose( $fd );
+			}
+
+			if ( file_exists ( $t_config_filename ) ) {
 				print_test_result( GOOD );
 				$t_write_failed = false;
 			} else {
-				print_test_result( BAD, false, 'cannot write ' . $g_absolute_path . 'config_inc.php' );
+				print_test_result( BAD, false, 'cannot write ' . $t_config_filename );
 			}
 		} else {
 			# already exists, see if the information is the same
@@ -546,7 +547,7 @@ echo 'wcf';
 			} else {
 				print_test_result( GOOD, false, 'file not updated' );
 				$t_write_failed = false;
-			}			
+			}
 		}
 	?>
 </tr>
@@ -557,7 +558,7 @@ echo 'wcf';
 		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
 	}
 ?>
-		
+
 </table>
 
 <?php
@@ -580,7 +581,7 @@ if ( 6 == $t_install_state ) {
 <?php print_test( 'Checking for MD5 Crypt() support', 1 === CRYPT_MD5, false, 'password security may be lower than expected' ) ?>
 
 <!-- Checking register_globals are off -->
-<?php print_test( 'Checking for register_globals are off for mantis', ! ini_get_bool( 'register_globals' ), 'change php.ini to disable register_globals setting' ) ?>
+<?php print_test( 'Checking for register_globals are off for mantis', ! ini_get_bool( 'register_globals' ), false, 'change php.ini to disable register_globals setting' ) ?>
 
 </table>
 <?php
@@ -599,7 +600,7 @@ if ( 7 == $t_install_state ) {
 } # end install_state == 7
 
 
-if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) { 
+if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) {
 ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 <tr>
@@ -622,9 +623,9 @@ if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) {
 	</td>
 </tr>
 </table>
-		
-<?php 
-} 
+
+<?php
+}
 ?>
 
 </form>
