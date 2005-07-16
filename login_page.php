@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.47 2005-07-14 21:38:00 thraxisp Exp $
+	# $Id: login_page.php,v 1.48 2005-07-16 12:19:30 prichards Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -148,26 +148,29 @@
 			echo '</div>', "\n";
 	}
 */
-
-	# Check for db upgrade for versions < 1.0.0 using old upgrader
-	$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
-	$result = db_query( $query );
-	if ( db_num_rows( $result ) < 1 ) {
-		$t_upgrade_count = 0;
-	} else {
-		$t_upgrade_count = (int)db_result( $result );
+	$t_db_version = config_get( 'database_version' , 0 );
+	# if db version is 0, we haven't moved to new installer.
+	if($t_db_version == 0 ) { 
+		# Check for db upgrade for versions < 1.0.0 using old upgrader
+		$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
+		$result = db_query( $query );
+		if ( db_num_rows( $result ) < 1 ) {
+			$t_upgrade_count = 0;
+		} else {
+			$t_upgrade_count = (int)db_result( $result );
+		}
+		
+		require_once( 'admin/upgrade_inc.php' );
+		$t_upgrades_reqd = $upgrade_set->count_items();
+		
+		if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
+				( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
+			echo '<div class="warning" align="center">';
+			echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
+			echo '</div>';
+		}	
 	}
 	
-	require_once( 'admin/upgrade_inc.php' );
-	$t_upgrades_reqd = $upgrade_set->count_items();
-	
-	if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
-			( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
-		echo '<div class="warning" align="center">';
-		echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
-		echo '</div>';
-	}	
-
 	# Check for db upgrade for versions > 1.0.0 using new
 	$t_db_version = config_get( 'database_version' , 0 );	
 	require_once( 'admin/schema.php' );
