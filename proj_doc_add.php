@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.49 2005-04-05 16:26:28 thraxisp Exp $
+	# $Id: proj_doc_add.php,v 1.50 2005-07-17 13:36:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -27,6 +27,7 @@
 	$f_file = gpc_get_file( 'file' );
 
 	if ( is_blank( $f_title ) ) {
+		error_parameters( 'Title' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
