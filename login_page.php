@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.49 2005-07-16 12:20:59 prichards Exp $
+	# $Id: login_page.php,v 1.50 2005-07-17 12:21:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -148,9 +148,10 @@
 			echo '</div>', "\n";
 	}
 */
+/*
 	$t_db_version = config_get( 'database_version' , 0 );
 	# if db version is 0, we haven't moved to new installer.
-	if($t_db_version == 0 ) { 
+	if($t_db_version == 0 ) {
 		# Check for db upgrade for versions < 1.0.0 using old upgrader
 		$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
 		$result = db_query( $query );
@@ -159,28 +160,29 @@
 		} else {
 			$t_upgrade_count = (int)db_result( $result );
 		}
-		
+
 		require_once( 'admin/upgrade_inc.php' );
 		$t_upgrades_reqd = $upgrade_set->count_items();
-		
+
 		if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
 				( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
 			echo '<div class="warning" align="center">';
 			echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
 			echo '</div>';
-		}	
+		}
 	}
-	
+
 	# Check for db upgrade for versions > 1.0.0 using new
 	require_once( 'admin/schema.php' );
 	$t_upgrades_reqd = sizeof( $upgrade ) - 1;
-	
+
 	if ( ( 0 < $t_db_version ) &&
-			( $t_db_version != $t_upgrades_reqd ) ) { 
+			( $t_db_version != $t_upgrades_reqd ) ) {
 		echo '<div class="warning" align="center">';
 		echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
 		echo '</div>';
-	}	
+	}
+*/
 ?>
 
 <!-- Autofocus JS -->
