@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.22 2005-02-28 14:42:52 thraxisp Exp $
+	# $Id: check.php,v 1.23 2005-07-17 10:06:00 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -154,7 +154,7 @@
 		Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>]
 	</td>
 	<?php
-		$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+		$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {

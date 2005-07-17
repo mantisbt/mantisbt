@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.11 2005-07-16 13:12:32 thraxisp Exp $
+	# $Id: upgrade.php,v 1.12 2005-07-17 10:06:01 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,7 +39,7 @@
 <br /><br />
 <?php
 
-	$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 	if ( false == $result ) {
 ?>
 <p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
