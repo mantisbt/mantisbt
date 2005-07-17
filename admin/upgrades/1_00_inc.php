@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.8 2005-07-14 21:38:01 thraxisp Exp $
+	# $Id: 1_00_inc.php,v 1.9 2005-07-17 12:49:02 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -160,9 +160,7 @@
 	
 	# uncomment the following line before the final release when the installer ( schema.php )is 
 	# sync'd with these incremantal updates
-	#$upgrades[] = new ReleaseUpgrade( '1.0.0' );
-
-
+	$upgrades[] = new ReleaseUpgrade( '51' );
 
 	return $upgrades;
 ?>
