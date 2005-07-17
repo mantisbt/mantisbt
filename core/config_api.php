@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.32 2005-07-16 01:46:02 thraxisp Exp $
+	# $Id: config_api.php,v 1.33 2005-07-17 17:05:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -153,7 +153,7 @@
 		# @@ debug @@ echo "lu o=$p_option ";
 
 		if ( ! $g_cache_filled ) {
-			$t = config_get( $p_option, null, $p_user, $p_project );
+			$t = config_get( $p_option, -1, $p_user, $p_project );
 		}
 		
 		# prepare the user's list
@@ -200,7 +200,7 @@
 		global $g_cache_config, $g_cache_filled;
 		
 		if ( ! $g_cache_filled ) {
-			$t = config_get( $p_option, null, $p_user, $p_project );
+			$t = config_get( $p_option, -1, $p_user, $p_project );
 		}
 		
 		# prepare the user's list
@@ -235,7 +235,7 @@
 		}
 				
 		if ( $t_found ) {
-			return $t_value;
+			return true;
 		}
 
 		return isset( $GLOBALS['g_' . $p_option] ) ;
