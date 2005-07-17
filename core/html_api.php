@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.174 2005-07-11 19:08:12 thraxisp Exp $
+	# $Id: html_api.php,v 1.175 2005-07-17 13:20:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -355,7 +355,7 @@
 		# We do this at the end of the page so that:
 		#  1) we can display the user's last visit time on a page before updating it
 		#  2) we don't invalidate the user cache immediately after fetching it
-		#  3) don't do this on the password verification page, as it causes the 
+		#  3) don't do this on the password verification page, as it causes the
 		#    verification comparison to fail
 		if ( auth_is_user_authenticated() && !( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'verify.php' ) ) ) ) {
 			$t_user_id = auth_get_current_user_id();
@@ -700,7 +700,9 @@
 		if ( access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
 			print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
 		}
-		if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) ) {
+		if ( ( config_get( 'enable_sponsorship' ) == ON ) &&
+			 ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) &&
+			 !current_user_is_anonymous() ) {
 			print_bracket_link( $t_account_sponsor_page, lang_get( 'my_sponsorship' ) );
 		}
 	}
