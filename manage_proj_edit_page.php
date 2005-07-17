@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.89 2005-06-22 13:20:42 thraxisp Exp $
+	# $Id: manage_proj_edit_page.php,v 1.90 2005-07-17 13:14:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -156,7 +156,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
                 <?php
 	                # Check the user's global access level before allowing project creation
 	                if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-	                        print_bracket_link( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
+	                        print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
 	                }
                 ?>
 	</td>
@@ -238,7 +238,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	$t_projects = multi_sort( $t_projects, 'name', ASC );
 
 	foreach ( $t_projects as $t_project ) {
-		if ( in_array( $t_project['id'], $t_all_subprojects ) || 
+		if ( in_array( $t_project['id'], $t_all_subprojects ) ||
             in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
             ! access_has_project_level( $t_manage_access, $t_project ) ) {
                 continue;
