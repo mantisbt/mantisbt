@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.7 2005-07-16 13:11:36 thraxisp Exp $
+	# $Id: install.php,v 1.8 2005-07-17 12:22:29 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -595,7 +595,7 @@ if ( 7 == $t_install_state ) {
 # cleanup and launch upgrade
 ?>
 <p>Install was successful.</p>
-<p><a href="../login.php">Continue</a> to log into Mantis</p>
+<p><a href="../login_page.php">Continue</a> to log into Mantis</p>
 
 <?php
 } # end install_state == 7
