@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.42 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: database_api.php,v 1.43 2005-07-17 10:00:41 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -24,13 +24,21 @@
 	# Stores whether a database connection was succesfully opened.
 	$g_db_connected = false;
 
+	# set adodb fetch mode
+	$ADODB_FETCH_MODE = ADODB_FETCH_BOTH; 
+
 	# --------------------
 	# Make a connection to the database
-	function db_connect( $p_hostname, $p_username, $p_password, $p_database_name ) {
+	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $p_database_name );
-
+		if(  $p_dsn === false ) {
+			$g_db = ADONewConnection( config_get( 'db_type' ) );
+			$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $p_database_name );
+		} else {
+			$t_result = $g_db = ADONewConnection( $p_dsn );
+		}
+		
 		if ( !$t_result ) {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -44,7 +52,7 @@
 
 	# --------------------
 	# Make a persistent connection to the database
-	function db_pconnect( $p_hostname, $p_username, $p_password, $p_database_name ) {
+	function db_pconnect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
 		global $g_db_connected, $g_db;
 
 		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
@@ -133,10 +141,10 @@
 
 		if ( $p_result->EOF ) {
 			return false;
-		}
-		$test = $p_result->GetRowAssoc(false);
-		$p_result->MoveNext();
-		return $test;
+		}		
+		$t_array = $p_result->fields;
+ 		$p_result->MoveNext();
+		return $t_array;
 	}
 
 	# --------------------
@@ -385,13 +393,12 @@
 
 
 	# --------------------
-	$g_db = $db = ADONewConnection($g_db_type);
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
-			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( config_get( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		} else {
-			db_pconnect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_pconnect( config_get( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		}
 	}
 ?>
