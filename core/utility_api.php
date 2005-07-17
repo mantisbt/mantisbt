@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.19 2005-04-15 22:05:17 thraxisp Exp $
+	# $Id: utility_api.php,v 1.20 2005-07-17 21:56:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -210,4 +210,11 @@
 	   	}
 	  }
 	}
+	
+	# ---------------------
+	# return true or false if string matches current page name
+	function is_page_name( $p_string ) {
+	   return isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], $p_string ) );
+	}
+	
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.50 2005-07-11 19:08:14 thraxisp Exp $
+	# $Id: account_page.php,v 1.51 2005-07-17 21:56:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -60,7 +60,7 @@
 	
 	# note if we are being included by a script of a different name, if so,
 	#  this is a mandatory password change request
-	$t_force_pw_reset = ( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'verify.php' ) ) );
+	$t_force_pw_reset = is_page_name( 'verify.php' );
 
 	html_page_top1( lang_get( 'account_link' ) );
 	html_page_top2();

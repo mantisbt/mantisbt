@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.175 2005-07-17 13:20:59 vboctor Exp $
+	# $Id: html_api.php,v 1.176 2005-07-17 21:56:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -271,7 +271,7 @@
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		} else {
-			if ( strstr( $_SERVER['PHP_SELF'], 'login_page' ) !== false ) {
+			if ( ! is_page_name( 'login_page' ) ) {
 				$t_align = 'center';
 			} else {
 				$t_align = 'left';
@@ -355,9 +355,9 @@
 		# We do this at the end of the page so that:
 		#  1) we can display the user's last visit time on a page before updating it
 		#  2) we don't invalidate the user cache immediately after fetching it
-		#  3) don't do this on the password verification page, as it causes the
+		#  3) don't do this on the password verification or update page, as it causes the
 		#    verification comparison to fail
-		if ( auth_is_user_authenticated() && !( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'verify.php' ) ) ) ) {
+		if ( auth_is_user_authenticated() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
 			$t_user_id = auth_get_current_user_id();
 			user_update_last_visit( $t_user_id );
 		}
@@ -373,7 +373,7 @@
 		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
-		if ( isset( $_SERVER['PHP_SELF'] ) && ( false === strstr( "login_page.php", $_SERVER['PHP_SELF'] ) ) && !current_user_is_anonymous() ) {
+		if ( ! is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {
 			echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
 		}
 
