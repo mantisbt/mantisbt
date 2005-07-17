@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.8 2005-07-17 12:22:29 vboctor Exp $
+	# $Id: install.php,v 1.9 2005-07-17 13:39:30 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -511,7 +511,8 @@ if ( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-		Creating Default Config File
+		Creating Default Config File<br />
+		<font color="red">(if this file is not created, create it manually with the contents below)</font>
 	</td>
 	<?php
 		$t_config = '<?php'."\r\n";
