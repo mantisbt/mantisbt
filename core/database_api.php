@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.43 2005-07-17 10:00:41 prichards Exp $
+	# $Id: database_api.php,v 1.44 2005-07-17 10:07:03 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -396,9 +396,9 @@
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
-			db_connect( config_get( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		} else {
-			db_pconnect( config_get( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_pconnect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		}
 	}
 ?>
