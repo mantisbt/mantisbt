@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.44 2005-07-17 10:07:03 prichards Exp $
+	# $Id: database_api.php,v 1.45 2005-07-17 12:24:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -25,18 +25,22 @@
 	$g_db_connected = false;
 
 	# set adodb fetch mode
-	$ADODB_FETCH_MODE = ADODB_FETCH_BOTH; 
-
+	# most drivers don't implement this, but for mysql there is a small internal php performance gain for using it
+	if( $g_db_type == 'mysql' ) {	
+		$ADODB_FETCH_MODE = ADODB_FETCH_BOTH; 
+	}
+	
 	# --------------------
 	# Make a connection to the database
 	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
 		global $g_db_connected, $g_db;
 
 		if(  $p_dsn === false ) {
-			$g_db = ADONewConnection( config_get( 'db_type' ) );
+			$g_db = ADONewConnection( config_get_global( 'db_type' ) );
 			$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $p_database_name );
 		} else {
-			$t_result = $g_db = ADONewConnection( $p_dsn );
+			$g_db = ADONewConnection( $p_dsn );
+			$t_result = $g_db->IsConnected();
 		}
 		
 		if ( !$t_result ) {
@@ -55,7 +59,14 @@
 	function db_pconnect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
+		if(  $p_dsn === false ) {
+			$g_db = ADONewConnection( config_get_global( 'db_type' ) );
+			$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
+		} else {
+			$g_db = ADONewConnection( $p_dsn );
+			$t_result = $g_db->IsConnected();
+		}
+
 		if ( !$t_result ) {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -137,14 +148,22 @@
 
 	# --------------------
 	function db_fetch_array( & $p_result ) {
-		global $g_db;
+		global $g_db, $g_db_type;
 
 		if ( $p_result->EOF ) {
 			return false;
 		}		
-		$t_array = $p_result->fields;
- 		$p_result->MoveNext();
-		return $t_array;
+
+		# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
+		if( $g_db_type == 'mysql' ) {	
+			$t_array = $p_result->fields;
+ 			$p_result->MoveNext();
+			return $t_array;
+		} else { 
+			$test = $p_result->GetRowAssoc(false);
+			$p_result->MoveNext();
+			return $test;
+		}
 	}
 
 	# --------------------
@@ -255,7 +274,14 @@
 		switch( $t_db_type ) {
 			case 'mssql':
 			case 'odbc_mssql':
-				return addslashes( $p_string );
+				if( ini_get( 'magic_quotes_sybase' ) ) {
+					return addslashes( $p_string );
+				} else {
+					ini_set( 'magic_quotes_sybase', true );
+					$t_string = addslashes( $p_string );
+					ini_set( 'magic_quotes_sybase', false );
+					return $t_string;
+				}
 
 			case 'mysql':
 				return mysql_escape_string( $p_string );
