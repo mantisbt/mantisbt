@@ -32,6 +32,8 @@ http://manual.mantisbt.org/manual.installation.php
 
 ******************************************************************************
 
+This installation process has changed with release 1.0.0.
+
 1. First, transfer the file to your webserver using whatever method you like
 best (ftp, scp, etc).  You will need to telnet/ssh into the server machine for
 the next steps.
@@ -57,44 +59,38 @@ mv <directoryname> mantis
 
 If you are upgrading see the UPGRADING document.
 
-3. Next we will create the necessary database tables.  Make sure you have
-created the database ahead of time.  You should know your mysql username and
-password as well.
+3. Next we will create the necessary database tables and a basic configuration
+file.
 
-Go into the sql directory and run the following command:
+From your web server, access http://yoursite/mantis/admin/install.php
 
-mysql -u<username> -p<password> <databasename> < db_generate.sql
-
-You could also cut and paste the sql statements from db_generate.sql into a
-package like phpMyAdmin or into your terminal window.
-
-e.g. if your username is bob, password is mypass, database name is bugtracker:
-
-mysql -ubob -pmypass bugtracker < db_generate.sql
-
-You may require an additional host parameter if your SQL server is on another
-machine.  e.g. if your server is sqlserver
-
-mysql -h sqlserver -ubob -pmypass bugtracker < db_generate.sql
+This page will walk through the following steps:
+a) check basic parameters for the web server
+b) prompt for the database type and location, and a database user/password 
+pair. For installiion, an administrative user/password pair can also be 
+provided. The operating user requires ALTER, SELECT, INSERT, and UPDATE
+privileges. For installation, INDEX, CREATE, DELETE, and DROP privileges are
+also required.
+c) create the database and tables.
 
 * WARNING: A DEFAULT ADMINISTRATOR level account is created.  The account name
 and password are administrator / root.  Use this when you first login to
 Mantis. Immediately go to Manage and create at least one administrator level
-account.  Immediately after that DELETE the administrator account.  You can
-recreate it but you should delete the account to prevent the cookie_string
-from being used to trick the package.  It would be even better to rename the
-account or delete it permanently.  REMEMBER: After setting up the package,
-REMOVE the default administrator account.
+account.  Immediately after that DISABLE or DELETE the administrator account.  
+You can recreate it but you should delete the account to prevent the 
+cookie_string from being used to trick the package.  It would be even better 
+to rename the account or delete it permanently.  REMEMBER: After setting up 
+the package, REMOVE the default administrator account.
+
+d) write a basic "config_inc.php file to define the database.
+e) perform some post installation checks on the system.
 
 4. The next part involves configuring the installation to work with your
 specific setup.
 
-In the installation directory, locate config_inc.php.sample and copy it to
-config_inc.php.
-Open the file in an editor and edit the values to match your settings.  The
-sample file contains only essential settings.  There are many more that
-you can use to customize your Mantis installation.  See the customization.html
-file for in depth explanations.
+Open the file in an editor and add anyother values that are required. There are 
+many more that you can use to customize your Mantis installation.  See the 
+doc/CUSTOMIZATION file for in depth explanations.
 
 The file will overwrite the default values with those necessary for setup.
 
@@ -126,7 +122,7 @@ of the site please read the CUSTOMIZATION file.
 ### Upgrading ###
 -------------------------------------------------------------------------------
 
-See the files: UPGRADING and admin/index.php
+See the file: UPGRADING 
 
 -------------------------------------------------------------------------------
 ### Troubleshooting ###
