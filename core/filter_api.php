@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.117 2005-06-15 18:25:53 thraxisp Exp $
+	# $Id: filter_api.php,v 1.118 2005-07-18 18:57:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2332,6 +2332,47 @@
 		if ( !isset( $p_filter_arr['dir'] ) ) {
 			$p_filter_arr['dir'] = "DESC";
 		}
+		#validate sorting
+		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+		$t_n_fields = count( $t_fields );
+		$t_shown_fields[""] = "";
+		for ( $i=0; $i < $t_n_fields; $i++ ) {
+			if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+				unset( $t_fields[$i] );
+			}
+		}
+		$t_sort_fields = split( ',', $p_filter_arr['sort'] );
+		$t_dir_fields = split( ',', $p_filter_arr['dir'] );
+		for ( $i=0; $i<2; $i++ ) {
+			if ( isset( $t_sort_fields[$i] ) ) {
+				$t_drop = false;
+				$t_sort = $t_sort_fields[$i];
+        		if ( strpos( $t_sort, 'custom_' ) === 0 ) {
+        			if ( false === custom_field_get_id_from_name( substr( $t_sort, strlen( 'custom_' ) ) ) ) {
+        				$t_drop = true;
+        			}
+        		} else {
+        			if ( ! in_array( $t_sort, $t_fields ) ) {
+        				$t_drop = true;
+        			}
+        		}
+				if ( ! in_array( $t_dir_fields[$i], array( "ASC", "DESC" ) ) ) {
+					$t_drop = true;
+				}
+				if ( $t_drop ) {
+					unset( $t_sort_fields[$i] );
+					unset( $t_dir_fields[$i] );
+				}
+			}
+		}
+		if ( count( $t_sort_fields ) > 0 ) {
+			$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
+			$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
+		} else {
+			$p_filter_arr['sort'] = "last_updated";
+			$p_filter_arr['dir'] = "DESC";
+		}			
+
 		if ( !isset( $p_filter_arr['start_month'] ) ) {
 			$p_filter_arr['start_month'] = gpc_get_string( 'start_month', date( 'm' ) );
 		}

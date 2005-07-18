@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.160 2005-06-28 11:04:05 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.161 2005-07-18 18:56:59 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,8 +21,8 @@
 
 	$t_filter = current_user_get_bug_filter();
 
-	$t_sort = $t_filter['sort'];
-	$t_dir = $t_filter['dir'];
+	list( $t_sort, ) = split( ',', $t_filter['sort'] );
+	list( $t_dir, ) = split( ',', $t_filter['dir'] );
 
 	$t_checkboxes_exist = false;
 
