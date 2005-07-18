@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.7 2005-06-20 15:13:42 vboctor Exp $
+	# $Id: news_rss.php,v 1.8 2005-07-18 13:09:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,13 +34,13 @@
 	# construct rss file
 
 	$encoding = lang_get( 'charset' );
-	$about = config_get( 'path' );
-	$title = config_get( 'window_title' ) . ' - ' . lang_get( 'news' );
+	$about = string_rss_links( config_get( 'path' ) );
+	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
 	$description = $title;
 	$image_link = config_get( 'path' ) . 'images/mantis_logo_button.gif';
 
 	# only rss 2.0
-	$category = project_get_name( $f_project_id );
+	$category = string_rss_links( project_get_name( $f_project_id ) );
 
 	# in minutes (only rss 2.0)
 	$cache = '60';
@@ -113,7 +113,7 @@
 		$date = $v_date_posted;
 
 		# author of item
-		$author = user_get_name( $v_poster_id );
+		$author = string_rss_links( user_get_name( $v_poster_id ) );
 		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 			$t_author_email = user_get_field( $v_poster_id, 'email' );
 			if ( is_blank( $t_author_email ) ) {

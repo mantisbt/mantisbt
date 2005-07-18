@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.5 2005-07-13 20:44:46 thraxisp Exp $
+	# $Id: issues_rss.php,v 1.6 2005-07-18 13:09:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,11 +49,11 @@
 
 	$encoding = lang_get( 'charset' );
 	$about = $t_path;
-	$title = config_get( 'window_title' ) . ' - ' . lang_get( 'issues' );
+	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'issues' ) );
 	$image_link = $t_path . 'images/mantis_logo_button.gif';
 
 	# only rss 2.0
-	$category = project_get_name( $f_project_id );
+	$category = string_rss_links( project_get_name( $f_project_id ) );
 	if ( $f_project_id !== 0 ) {
 		$title .= ' - ' . $category;
 	}
@@ -142,13 +142,13 @@
 		$description = string_rss_links( $t_bug->description );
 
 		# subject is category.
-		$subject = $t_bug->category;
+		$subject = string_rss_links( $t_bug->category );
 
 		# optional DC value
 		$date = date( 'Y-m-d\TH:i:sO', $t_bug->last_updated );
 
 		# author of item
-		$author = user_get_name( $t_bug->reporter_id );
+		$author = string_rss_links( user_get_name( $t_bug->reporter_id ) );
 		if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 			$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
 			if ( is_blank( $t_author_email ) ) {
