@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.36 2005-04-17 17:14:16 thraxisp Exp $
+	# $Id: manage_user_update.php,v 1.37 2005-07-18 13:45:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,6 +37,7 @@
         && false == user_is_name_unique( $f_username ) ) {
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
+	user_ensure_realname_unique( $f_username, $f_realname );
 
 	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
