@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.7 2005-05-02 10:18:08 vboctor Exp $
+	# $Id: system_utils.php,v 1.8 2005-07-18 12:55:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,6 @@
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Mantis Administration</a> ]
-			[ <a href="upgrade_escaping.php">Refresh view</a> ]
 		</td>
 		<td class="title">
 			System Utilities
