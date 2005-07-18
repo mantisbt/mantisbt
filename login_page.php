@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.50 2005-07-17 12:21:31 vboctor Exp $
+	# $Id: login_page.php,v 1.51 2005-07-18 20:15:27 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -139,50 +139,48 @@
 		}
 	}
 
-# @@@ thraxisp - check removed to check for upgrades
-/*	# Check if the admin directory is available and is readable.
+	# Check if the admin directory is available and is readable.
 	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
-			echo '<div class="warning" align="center">', "\n";
-			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
-			echo '</div>', "\n";
-	}
-*/
-/*
-	$t_db_version = config_get( 'database_version' , 0 );
-	# if db version is 0, we haven't moved to new installer.
-	if($t_db_version == 0 ) {
+		echo '<div class="warning" align="center">', "\n";
+		echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
+		echo '</div>', "\n";
+			
+		# since admin directory and db_upgrade lists are available check for missing db upgrades	
 		# Check for db upgrade for versions < 1.0.0 using old upgrader
-		$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
-		$result = db_query( $query );
-		if ( db_num_rows( $result ) < 1 ) {
-			$t_upgrade_count = 0;
-		} else {
-			$t_upgrade_count = (int)db_result( $result );
+		$t_db_version = config_get( 'database_version' , 0 );
+		# if db version is 0, we haven't moved to new installer.
+		if ( $t_db_version == 0 ) {
+			$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
+			$result = db_query( $query );
+			if ( db_num_rows( $result ) < 1 ) {
+				$t_upgrade_count = 0;
+			} else {
+				$t_upgrade_count = (int)db_result( $result );
+			}
+
+			require_once( 'admin/upgrade_inc.php' );
+			$t_upgrades_reqd = $upgrade_set->count_items();
+
+			if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
+					( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
+				echo '</div>';
+			}
 		}
 
-		require_once( 'admin/upgrade_inc.php' );
-		$t_upgrades_reqd = $upgrade_set->count_items();
+		# Check for db upgrade for versions > 1.0.0 using new installer and schema
+		require_once( 'admin/schema.php' );
+		$t_upgrades_reqd = sizeof( $upgrade ) - 1;
 
-		if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
-				( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
+		if ( ( 0 < $t_db_version ) &&
+				( $t_db_version != $t_upgrades_reqd ) ) {
 			echo '<div class="warning" align="center">';
-			echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
+			echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
 			echo '</div>';
 		}
 	}
-
-	# Check for db upgrade for versions > 1.0.0 using new
-	require_once( 'admin/schema.php' );
-	$t_upgrades_reqd = sizeof( $upgrade ) - 1;
-
-	if ( ( 0 < $t_db_version ) &&
-			( $t_db_version != $t_upgrades_reqd ) ) {
-		echo '<div class="warning" align="center">';
-		echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
-		echo '</div>';
-	}
-*/
 ?>
 
 <!-- Autofocus JS -->
