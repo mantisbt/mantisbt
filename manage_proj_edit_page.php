@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.90 2005-07-17 13:14:01 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.91 2005-07-19 13:42:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -473,7 +473,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
-	<input type="submit" class="button" value="<?php echo lang_get( 'update' ) ?>" />
+	<input type="submit" class="button-small" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
 				</td>
 				<td class="center">

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.118 2005-07-18 18:57:01 thraxisp Exp $
+	# $Id: filter_api.php,v 1.119 2005-07-19 13:42:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -592,7 +592,7 @@
 		# custom field filters
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
-			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );	
+			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 			foreach( $t_custom_fields as $t_cfid ) {
 				$t_first_time = true;
@@ -1661,7 +1661,7 @@
 			}
 		// -->
 		</script>
-							<?php 
+							<?php
 							} # end if dhtml_filters
 							if ( 'on' == $t_filter['do_filter_by_date'] ) {
 								?>
@@ -1806,7 +1806,7 @@
 	// -->
 	</script>
 <?php
-							} # end if dhtml_filters 
+							} # end if dhtml_filters
 							$t_short_date_format = config_get( 'short_date_format' );
 							if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] ) ) {
 								$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] = 0;
@@ -1964,7 +1964,7 @@
 				?>:
 				<input type="text" size="16" name="search" value="<?php PRINT htmlspecialchars( $t_filter['search'] ); ?>" />
 
-				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
+				<input type="submit" name="filter" class="button-small" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
 			</td>
 			</form>
 			<td class="center" colspan="<?php echo ( $t_filter_cols - 6 ) ?>"> <!-- use this label for padding -->
@@ -2008,10 +2008,10 @@
 					}
 					?>
 					</select>
-					<input type="submit" name="switch_to_query_button" class="button" value="<?php PRINT lang_get( 'use_query' ) ?>" />
+					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php PRINT lang_get( 'use_query' ) ?>" />
 					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
-					<input type="submit" name="switch_to_query_button" class="button" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
+					<input type="submit" name="switch_to_query_button" class="button-small" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
 					</form>
 				<?php
 			} else {
@@ -2019,7 +2019,7 @@
 					<form method="get" name="reset_query" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
-					<input type="submit" name="reset_query_button" class="button" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
+					<input type="submit" name="reset_query_button" class="button-small" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
 					</form>
 				<?php
 			}
@@ -2027,7 +2027,7 @@
 			if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
 			?>
 					<form method="post" name="save_query" action="query_store_page.php">
-					<input type="submit" name="save_query_button" class="button" value="<?php PRINT lang_get( 'save_query' ) ?>" />
+					<input type="submit" name="save_query_button" class="button-small" value="<?php PRINT lang_get( 'save_query' ) ?>" />
 					</form>
 			<?php
 			} else {
@@ -2371,7 +2371,7 @@
 		} else {
 			$p_filter_arr['sort'] = "last_updated";
 			$p_filter_arr['dir'] = "DESC";
-		}			
+		}
 
 		if ( !isset( $p_filter_arr['start_month'] ) ) {
 			$p_filter_arr['start_month'] = gpc_get_string( 'start_month', date( 'm' ) );

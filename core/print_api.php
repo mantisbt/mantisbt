@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.142 2005-07-16 01:01:29 thraxisp Exp $
+	# $Id: print_api.php,v 1.143 2005-07-19 13:42:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1063,7 +1063,7 @@
 	# if the $p_link is blank then the text is printed but no link is created
 	# if $p_new_window is true, link will open in a new window, default false.
 	function print_button( $p_action_page, $p_label ) {
-		echo '<form method="POST" action="', $p_action_page, '"><input type="submit" class="button" value="', $p_label, '" /></form>';
+		echo '<form method="POST" action="', $p_action_page, '"><input type="submit" class="button-small" value="', $p_label, '" /></form>';
 	}
 	# --------------------
 	# print the bracketed links used near the top
