@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.176 2005-07-17 21:56:21 thraxisp Exp $
+	# $Id: html_api.php,v 1.177 2005-07-19 13:07:25 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -322,6 +322,7 @@
 			PRINT '<td class="login-info-right">';
 				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
 
+				echo lang_get( 'email_project' ), ': ';
 				if ( ON == config_get( 'use_javascript' )) {
 					PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
