@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.43 2005-06-14 17:48:35 thraxisp Exp $
+	# $Id: bug_report.php,v 1.44 2005-07-19 23:26:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -93,7 +93,7 @@
     	$f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );
 	}
-	
+
 	# Handle custom field submission
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
@@ -148,7 +148,7 @@
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id", true );
+	print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
 	print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
 	if ( $f_report_stay ) {
