@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_page.php,v 1.1 2005-07-03 15:09:09 thraxisp Exp $
+	# $Id: account_sponsor_page.php,v 1.2 2005-07-19 15:31:34 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -20,12 +20,11 @@
 
 	# CALLS
 	#	This page calls the following pages:
-	#	- account_update.php  (to save changes)
-	#	- account_delete.php  (to delete the user's account)
+	#	- account_sponsor_update.php  (to save changes)
 
 	# RESTRICTIONS & PERMISSIONS
-	#	- User must be authenticated
-	#	- The user's account must not be protected
+	#	- User must be authenticated, and not anonymous
+	#   - sponsorship must be enabled
 
 	require_once( 'core.php' );
 
@@ -41,10 +40,21 @@
 	if ( current_user_is_anonymous() ) {
 		access_denied();
 	}
+	
+	$t_show_all = gpc_get_bool( 'show_all', false );
 
 	# start the page
 	html_page_top1( lang_get( 'my_sponsorship' ) );
 	html_page_top2();
+	
+	$t_project = helper_get_current_project();
+	if ( ALL_PROJECTS == $t_project ) {
+	    $t_project_title = lang_get( 'sponsor_all_projects' );
+	} else {
+	    $t_project_title = sprintf( lang_get( 'sponsor_project' ) , project_get_name( $t_project ) );
+	}
+	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -65,9 +75,12 @@
 	$t_sponsor_table = config_get( 'mantis_sponsorship_table' );
 	$t_payment = config_get( 'payment_enable', 0 );
 	
+	$t_show_clause =  $t_show_all ? '' : 'AND ( b.status < ' . $t_resolved . ' OR s.paid < ' . SPONSORSHIP_PAID . ')';
+	$t_project_clause = helper_project_specific_where( $t_project );
+	
 	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
 		FROM $t_bug_table b, $t_sponsor_table s 
-		WHERE s.user_id=$t_user AND b.status >= $t_resolved AND s.bug_id = b.id
+		WHERE s.user_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 		
 	$result = db_query( $query );
@@ -90,21 +103,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
 		<td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
 		<td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
 		<td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
 		<td class="form-title" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
 		<td class="form-title" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
-		<td class="form-title" width="8%">&nbsp;</td>
-		<td class="form-title" width="7%">&nbsp;</td>
+		<td class="form-title" width="8%"><?php echo lang_get( 'amount' ) ?></td>
+		<td class="form-title" width="7%"><?php echo lang_get( 'status' ) ?></td>
 		<td class="form-title" width="10%">&nbsp;</td>
 	</tr>
 <?php 
 		$t_total_owing = 0;
 		$t_total_paid = 0;
 		for ( $i=0; $i < $t_sponsors; ++$i ) {
-			echo '<tr ' . helper_alternate_class() . '>';
 			$row = db_fetch_array( $result );
 			$t_bug = bug_get( $row['bug'] );
 			$t_sponsor = sponsorship_get( $row['sponsor'] );
@@ -112,11 +124,18 @@
 			# describe bug
 			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+			$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+			if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
+				$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
+			} else {
+				$t_released_label = $t_bug->fixed_in_version;
+			}
 
+			echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
 			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
-			echo '<td class="right">' . $t_bug->fixed_in_version . '&nbsp;</td>';
-			echo '<td bgcolor="' . get_status_color( $t_bug->status ) . '"><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+			echo '<td class="right">' . $t_released_label . '&nbsp;</td>';
+			echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
 			echo '<td>';
 			print_user( $t_bug->handler_id );
 			echo '</td>';
@@ -166,7 +185,7 @@
 
 	$query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status 
 		FROM $t_bug_table b, $t_sponsor_table s 
-		WHERE b.handler_id=$t_user AND b.status >= $t_resolved AND s.bug_id = b.id
+		WHERE b.handler_id=$t_user AND s.bug_id = b.id $t_show_clause AND $t_project_clause
 		ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 		
 	$result = db_query( $query );
@@ -189,21 +208,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
 		<td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
 		<td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
 		<td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
 		<td class="form-title" width="35%"><?php echo lang_get( 'email_summary' ) ?></td>
 		<td class="form-title" width="10%"><?php echo lang_get( 'sponsor' ) ?></td>
-		<td class="form-title" width="10%">&nbsp;</td>
-		<td class="form-title" width="10%">&nbsp;</td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'amount' ) ?></td>
+		<td class="form-title" width="10%"><?php echo lang_get( 'status' ) ?></td>
 	</tr>
 <?php 
 		$t_bug_list = array();
 		$t_total_owing = 0;
 		$t_total_paid = 0;
 		for ( $i=0; $i < $t_sponsors; ++$i ) {
-			echo '<tr ' . helper_alternate_class() . '>';
 			$row = db_fetch_array( $result );
 			$t_bug = bug_get( $row['bug'] );
 			$t_sponsor = sponsorship_get( $row['sponsor'] );
@@ -212,11 +230,18 @@
 			# describe bug
 			$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 			$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+			$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+			if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
+				$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
+			} else {
+				$t_released_label = $t_bug->fixed_in_version;
+			}
 
+			echo '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">';
 			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
-			echo '<td class="right">' . $t_bug->fixed_in_version . '&nbsp;</td>';
-			echo '<td bgcolor="' . get_status_color( $t_bug->status ) . '"><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+			echo '<td class="right">' . $t_released_label . '&nbsp;</td>';
+			echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
 
 			# summary
 			echo '<td>' . $t_bug->summary;
@@ -271,5 +296,12 @@
 <?php } # end sponsored issues ?>
 
 <br />
+<div align="center">
+<?php
+	html_button ( 'account_sponsor_page.php', 
+		lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ), 
+		array( 'show_all' => ( $t_show_all ? 0 : 1 ) ) );
+?>
+</div>
 
 <?php html_page_bottom1( __FILE__ ) ?>
