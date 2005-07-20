@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.9 2005-07-17 13:39:30 vboctor Exp $
+	# $Id: install.php,v 1.10 2005-07-20 23:49:02 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -82,6 +82,7 @@
 	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 	$f_admin_username = gpc_get( 'admin_username', '' );
 	$f_admin_password = gpc_get( 'admin_password', '');
+	$f_log_queries = gpc_get_bool( 'log_queries', false );
 ?>
 <html>
 <head>
@@ -371,6 +372,14 @@ if ( 1 == $t_install_state ) {
 </tr>
 
 <tr>
+	<td>
+		Log SQL Queries
+	</td>
+	<td>
+		<input name="log_queries" type="checkbox" value="1" <?php echo ( $f_log_queries ? 'checked="checked"' : '' ) ?>"></input>
+	</td>
+</tr>
+
 <tr>
 	<td>
 		Attempt Installation
@@ -447,30 +456,43 @@ if ( 3 == $t_install_state ) {
 		$t_last_update = config_get( 'database_version', -1 );
 		$lastid = sizeof( $upgrade ) - 1;
 		$i = $t_last_update + 1;
+			
+		if ( $f_log_queries ) {
+			echo '<tr><td bgcolor="#ffffff" col_span="2"> Progress Suppressed, SQL Queries follow <pre>';
+		}
 
 		while ( ( $i <= $lastid ) && ! $g_failed ) {
-?>
-<tr>
-	<td bgcolor="#ffffff">
-		Create Schema ( <?php echo $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0]?> )
-	</td>
-<?php
+			if ( ! $f_log_queries ) {
+				echo '<tr><td bgcolor="#ffffff">Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )</td>';
+			}
+
 			$dict = NewDataDictionary($g_db);
 			if ( $upgrade[$i][0] == 'InsertData' ) {
 				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 			} else {
 				$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][0]),$upgrade[$i][1]);
 			}
-			$ret = $dict->ExecuteSQLArray($sqlarray);
-			if ( $ret == 2 ) {
-				print_test_result( GOOD );
-				config_set( 'database_version', $i );
-			} else {
-				print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+			if ( $f_log_queries ) {
+				foreach ( $sqlarray as $sql ) {
+					echo htmlentities( $sql ) . "\r\n\r\n";
+				}
 			}
-			echo '</tr>';
+			$ret = $dict->ExecuteSQLArray($sqlarray);
+			if ( ! $f_log_queries ) {
+				if ( $ret == 2 ) {
+					print_test_result( GOOD );
+					config_set( 'database_version', $i );
+				} else {
+					print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+				}
+				echo '</tr>';
+			}
 			$i++;
 		}
+		if ( $f_log_queries ) {
+			echo '</pre></br /></td></tr>';
+		}
+		
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
@@ -493,6 +515,7 @@ if ( 4 == $t_install_state ) {
 		<input name="db_password" type="hidden" value="<?php echo $f_db_password ?>"></input>
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username ?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
+		<input name="log_queries" type="hidden" value="<?php echo ( $f_log_queries ? 1 : 0 ) ?>"></input>
 <?php
 	# must post <input name="install" type="hidden" value="5"></input>
 	# rather than the following line
@@ -621,6 +644,7 @@ if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) {
 		<input name="db_password" type="hidden" value="<?php echo $f_db_password ?>"></input>
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username ?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
+		<input name="log_queries" type="hidden" value="<?php echo ( $f_log_queries ? 1 : 0 ) ?>"></input>
 		<input name="retry" type="submit" value="Retry"></input>
 	</td>
 </tr>
