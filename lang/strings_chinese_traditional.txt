@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.80 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-18 18:25:40 $
+	# $Revision: 1.81 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:41 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.80 2005-05-18 18:25:40 bigbadger Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.81 2005-07-20 14:17:41 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -205,6 +205,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string w
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
@@ -286,6 +287,7 @@ $s_status_enum_string             = '10:new,20:feedback,30:acknowledged,40:confi
 $s_resolution_enum_string         = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won\'t fix';
 $s_projection_enum_string         = '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 $s_eta_enum_string                = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registration';
@@ -369,6 +371,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password  = '確認密碼';
 $s_access_level = '存取權限';
 $s_update_user_button = '更新使用者';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '預設帳號喜好設定';
@@ -431,6 +435,23 @@ $s_submit_button = '送出';
 # account_profile_update.php
 $s_profile_updated_msg = '個人設定更新...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = '你的帳戶已經成功更新...';
 $s_email_updated = 'Email address successfully updated';
@@ -439,6 +460,9 @@ $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = '臭蟲已經成功被指定...';
@@ -541,6 +565,7 @@ $s_description = '說明';
 $s_steps_to_reproduce = '臭蟲發生的 步驟說明';
 $s_update_information_button = '更新資訊';
 $s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = '進階更新';
@@ -1139,6 +1164,7 @@ $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = 'Sponsorship Added';
 $s_sponsorship_updated = 'Sponsorship Updated';
 $s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

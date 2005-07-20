@@ -203,6 +203,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string w
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Zadeva %d ni bila najdena.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Neveljavni elektronski naslov.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil ni bil najden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Vrsta datoteke ni dovoljena za naložitev.';
@@ -284,6 +285,7 @@ $s_status_enum_string = '10:novo,20:povratna informacija,30:sprejeto,40:potrjeno
 $s_resolution_enum_string = '10:odprto,20:popravljeno,30:ponovno odprto,40:ne gre reproducirati,50:nepopravljivo,60:kopija,70:ni napake,80:odloženo,90:ne bom popravil';
 $s_projection_enum_string = '10:nobeno,30:prilagoditev,50:manjši popravek,70:večji popravek,90:zahteva redizajn';
 $s_eta_enum_string = '10:nobeno,20:< 1 dan,30:2-3 dni,40:< 1 teden,50:< 1 mesec,60:> 1 mesec';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Vaš novi uporabniški račun';
@@ -367,6 +369,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password = 'Potrditev gesla';
 $s_access_level = 'Nivo dostopa';
 $s_update_user_button = 'Posodobi uporabnika';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Nastavitve računa';
@@ -429,6 +433,23 @@ $s_submit_button = 'Pošlji';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profil posodobljen...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Vaš račun je bil uspešno posodobljen...';
 $s_email_updated = 'Elektronski naslov je bil uspešno posodobljen...';
@@ -437,6 +458,9 @@ $s_realname_updated = 'Pravo ime je bilo uspešno posodobljeno';
 $s_password_updated = 'Geslo je bilo uspešno posodobljeno';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Zadeva je bila uspešno dodeljena...';
@@ -538,6 +562,8 @@ $s_summary = 'Povzetek';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Koraki za ponovitev';
 $s_update_information_button = 'Posodobi informacije';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Napredno posodabljanje';
@@ -646,14 +672,20 @@ $s_edit_user_link = 'Uredi uporabnika';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Change users who can change notification defaults to';
 $s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -677,6 +709,9 @@ $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered res
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
@@ -691,6 +726,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt je bila uspešno dodan...';
@@ -1122,6 +1162,7 @@ $s_sponsors = '%d sponzorjev';
 $s_sponsorship_added = 'Dodal sponzorstvo';
 $s_sponsorship_updated = 'Sponzorstvo posodobljeno';
 $s_sponsorship_deleted = 'Sponzorstvo izbrisano';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Več informacij o sponzorstvu';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

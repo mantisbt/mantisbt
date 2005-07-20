@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.92 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:44 $
+	# $Revision: 1.93 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:48 $
 	#
-	# $Id: strings_norwegian.txt,v 1.92 2005-04-21 06:52:44 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.93 2005-07-20 14:17:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -195,7 +195,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Finner ikke prosjektet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Finner ikke database-feltet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Kan ikke koble til FTP-server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Delegert saksbehandler har ikke rettighet til å behandle saker med denne statusen.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt et ugyldig prosjektnavn.  Prosjektnavnet kan ikke være blankt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Finner ikke bruker.';
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Forventet en tabell, men mottok en st
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men mottok en array.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Finner ikke saken.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ugyldig epost.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ble ikke funnet.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Ikke tillatt filtype.';
@@ -288,6 +289,7 @@ $s_status_enum_string             = '10:Ny,20:Tilbakemelding,30:Godkjent,40:Bekr
 $s_resolution_enum_string         = '10:Åpen,20:Fikset,30:Åpnet på nytt,40:Kan ikke reprodusere,50:Kan ikke fikses,60:Kopi,70:Ikke feil,80:Utsatt,90:Vil ikke fikse';
 $s_projection_enum_string         = '10:Ingen,30:Kan omgås,50:Mindre fiks,70:Omfattende rekoding,90:Redesign';
 $s_eta_enum_string                = '10:Ikke angitt,20:< 1 dag,30:2-3 dager,40:< 1 uke,50:< 1 mnd,60:> 1 mnd';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Kontoregistrering';
@@ -371,6 +373,8 @@ $s_no_password_change = 'Passordet er kontrollert av et annet system, det kan de
 $s_confirm_password  = 'Bekreft passord';
 $s_access_level = 'Tilgangsnivå';
 $s_update_user_button = 'Oppdater bruker';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Standard kontoinnstillinger';
@@ -433,6 +437,23 @@ $s_submit_button = 'OK';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profilen har blitt oppdatert ...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Kontoen din har blitt oppdatert ...';
 $s_email_updated = 'Epostadressen har blitt oppdatert';
@@ -441,6 +462,9 @@ $s_realname_updated = 'Oppdatert navn';
 $s_password_updated = 'Passordet er oppdatert';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Saken har blitt delegert ...';
@@ -542,6 +566,8 @@ $s_summary = 'Oppsummering';
 $s_description = 'Beskrivelse';
 $s_steps_to_reproduce  = 'Steg for å reprodusere';
 $s_update_information_button = 'Oppdater informasjon';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Oppdater avansert';
@@ -650,14 +676,20 @@ $s_edit_user_link = 'Rediger bruker';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Change users who can change notification defaults to';
 $s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -681,6 +713,9 @@ $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered res
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
@@ -695,6 +730,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
@@ -1126,6 +1166,7 @@ $s_sponsors = '%d sponsor(er)';
 $s_sponsorship_added = 'Sponsing lagt til';
 $s_sponsorship_updated = 'Sponsing oppdatert';
 $s_sponsorship_deleted = 'Sponsing slettet';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Mer informasjon om sponsing';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

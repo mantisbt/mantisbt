@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.78 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-30 23:54:45 $
+	# $Revision: 1.79 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:46 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.78 2005-05-30 23:54:45 bigbadger Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.79 2005-07-20 14:17:46 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -194,7 +194,7 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='•¶Žš—ñu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ƒRƒƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ƒvƒƒWƒFƒNƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ƒf[ƒ^ƒx[ƒX‚Ì€–Úu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTP ƒT[ƒo‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñB';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '‘Ã“–‚ÈŒ ŒÀ‚ðŽ‚Á‚Ä‚¢‚È‚¢‚Ì‚ÅA‚±‚ÌƒXƒe[ƒ^ƒX‚Ì‰ü‘P—v‹‚ðŽæ‚èˆµ‚¤‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ƒvƒƒWƒFƒNƒg–¼‚ÍŠù‚ÉŽg—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Äˆá‚¤ƒvƒƒWƒFƒNƒg–¼‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ƒvƒƒWƒFƒNƒg–¼‚ª–³Œø‚Å‚·BƒvƒƒWƒFƒNƒg–¼‚Íƒuƒ‰ƒ“ƒN‚Å‚Í‚¢‚¯‚Ü‚¹‚ñB';
@@ -203,30 +203,31 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ƒuƒ‰ƒEƒU‚©‚ç‘—M‚³‚ê‚½ƒƒOƒCƒ“î•ñ‚Í
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ƒ†[ƒU[‚Ì‘I‘ðî•ñ‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'ƒjƒ…[ƒX‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ƒpƒXƒ[ƒh‚ªˆê’v‚µ‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'u%sv‚ÅA”z—ñ‚ðŠú‘Ò‚µ‚Ü‚µ‚½‚ª•¶Žš—ñ‚ðŽæ“¾‚µ‚Ü‚µ‚½B';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='u%sv‚ÅA•¶Žš—ñ‚ðŠú‘Ò‚µ‚Ü‚µ‚½‚ªA”z—ñ‚ðŽæ“¾‚µ‚Ü‚µ‚½B';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'u%sv‚ÍA”’l‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '‰ü‘P—v‹‚Í‚ ‚è‚Ü‚¹‚ñB';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '–³Œø‚Èƒ[ƒ‹ƒAƒhƒŒƒX‚Å‚·B';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ƒvƒƒtƒB[ƒ‹‚ª‚ ‚è‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = '‚±‚Ìƒtƒ@ƒCƒ‹Ží•Ê‚ÍƒAƒbƒvƒ[ƒh‚Å‚«‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ƒtƒ@ƒCƒ‹‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B‚Ü‚¸Aƒtƒ@ƒCƒ‹‚ðíœ‚µ‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '–³Œø‚ÈƒAƒbƒvƒ[ƒhƒpƒX‚Å‚·BƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚µ‚È‚¢‚©‘‚«ž‚Ý‚Å‚«‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ƒtƒ@ƒCƒ‹‚ªƒAƒbƒvƒ[ƒh‚³‚ê‚Ü‚¹‚ñ‚Å‚µ‚½B–ß‚Á‚ÄA ƒAƒbƒvƒ[ƒhƒ{ƒ^ƒ“‚ð‰Ÿ‰º‚·‚é‘O‚Éƒtƒ@ƒCƒ‹‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'ƒAƒbƒvƒ[ƒh‚µ‚½ƒtƒ@ƒCƒ‹‚ðŠ’è‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½BƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚µ‚È‚¢‚©AWebƒT[ƒo‚ª‘‚«ž‚ß‚È‚¢‚©‚¢‚¸‚ê‚©‚Å‚·B';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'd•¡‚µ‚Ä‚¢‚é ID ‚É“–ŠY‰ü‘P—v‹‚ðÝ’è‚Å‚«‚Ü‚¹‚ñB';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ƒJƒXƒ^ƒ€€–Ú‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ƒJƒXƒ^ƒ€€–Ú–¼‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '­‚È‚­‚Æ‚à 1 ‚Â‚ÌƒvƒƒWƒFƒNƒg‚ª‚±‚ÌƒJƒXƒ^ƒ€€–Ú‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·B';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '–³Œø‚È’l‚Å‚·B';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'ƒJƒXƒ^ƒ€€–Ú’è‹`‚ª–³Œø‚Å‚·B';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP ”FØ‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'LDAP ƒT[ƒo‚Æ‚ÌÚ‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP ƒŒƒR[ƒh‚ÌXV‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'LDAP ‚Ìƒ†[ƒU[ƒŒƒR[ƒh‚ª‚ ‚è‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ƒf[ƒ^ƒx[ƒX‚Æ‚ÌÚ‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'ƒf[ƒ^ƒx[ƒX‚ÌŒŸõ‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'ƒf[ƒ^ƒx[ƒX‚Ì‘I‘ð‚ÉŽ¸”s‚µ‚Ü‚µ‚½B';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ƒJƒeƒSƒŠ‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ƒRƒs[Œ³AƒRƒs[æ‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ƒJƒeƒSƒŠ‚ª‚ ‚è‚Ü‚¹‚ñB';
@@ -255,7 +256,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Šm”F URL ‚Í–³Œø‚©Šù‚É
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Å‘å‰ñ”‚ÌƒŠƒNƒGƒXƒg‚ðŽÀs‚µ‚Ü‚µ‚½BƒVƒXƒeƒ€ŠÇ—ŽÒ‚É˜A—‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'ƒTƒuƒvƒƒWƒFƒNƒg‚Åƒ‹[ƒv‚É‚È‚Á‚Ä‚µ‚Ü‚¢‚Ü‚·B';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ƒVƒXƒeƒ€ŠÇ—ŽÒ‚ÌƒAƒNƒZƒXƒŒƒxƒ‹‚Í•ÏX‚Å‚«‚Ü‚¹‚ñB';
- 
+
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ƒGƒ‰[:ƒ†[ƒU[–¼/ƒpƒXƒ[ƒh‚ªŠÔˆá‚¦‚Ä‚¢‚Ü‚·B';
 $s_login_cookies_disabled = 'ƒGƒ‰[: Žg—p‚µ‚Ä‚¢‚éƒuƒ‰ƒEƒU‚ªƒNƒbƒL[‚É‘Î‰ž‚µ‚Ä‚¢‚È‚¢‚©AƒNƒbƒL[‚ð–³Œø‚É‚µ‚Ä‚¢‚Ü‚·B';
@@ -288,6 +289,7 @@ $s_status_enum_string = '10:V‹K,20:—v’Ç‰Áî•ñ,30:“à—eŠm”FÏ,40:ÄŒ»Ï,50:’S“–ŽÒ
 $s_resolution_enum_string = '10:•s–¾,20:ŽÀ‘•Ï,30:·–ß‚µ,40:ÄŒ»•s‰Â,50:C³•s‰Â,60:“ñd“o˜^,70:‰ü‘P—v‹‚Å‚Í‚È‚¢,80:•Û—¯,90:Œã‰ñ‚µ';
 $s_projection_enum_string = '10:–¢’è,30:±×‚ÈC³,50:¬‚³‚ÈC³,70:‘å‚«‚ÈC³,90:ÄÝŒv';
 $s_eta_enum_string = '10:‘¦Žž,20:1“úˆÈ“à,30:2`3“ú,40:1TŠÔˆÈ“à,50:1ƒ–ŒŽˆÈ“à,60:1ƒ–ŒŽˆÈã';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'ƒAƒJƒEƒ“ƒg“o˜^';
@@ -371,6 +373,8 @@ $s_no_password_change = 'ƒpƒXƒ[ƒh‚Í‘¼‚ÌƒVƒXƒeƒ€‚ÅŠÇ—‚³‚ê‚Ä‚¢‚Ü‚·‚Ì‚ÅA‚±‚±‚Å‚
 $s_confirm_password  = 'ƒpƒXƒ[ƒh(Šm”F)';
 $s_access_level = 'ƒAƒNƒZƒXŒ ';
 $s_update_user_button = 'XV';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '‘I‘ð';
@@ -433,6 +437,23 @@ $s_submit_button = 'ŽŸ‚Ö';
 # account_profile_update.php
 $s_profile_updated_msg = 'ƒvƒƒtƒB[ƒ‹‚ªXV‚³‚ê‚Ü‚µ‚½B';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'ƒAƒJƒEƒ“ƒg‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B';
 $s_email_updated = 'EmailƒAƒhƒŒƒX‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B';
@@ -441,6 +462,9 @@ $s_realname_updated = '–{–¼‚ÌXV‚É¬Œ÷‚µ‚Ü‚µ‚½B';
 $s_password_updated = 'ƒpƒXƒ[ƒh‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = '‰ü‘P—v‹‚ª’S“–ŽÒ‚ÉŠ„‚è“–‚Ä‚ç‚ê‚Ü‚µ‚½B';
@@ -542,6 +566,8 @@ $s_summary = '—v–ñ';
 $s_description = 'Ú×';
 $s_steps_to_reproduce = 'ÄŒ»•û–@';
 $s_update_information_button = 'XV';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = '‚“x‚È•\Ž¦';
@@ -650,14 +676,20 @@ $s_edit_user_link = 'ƒ†[ƒU[•ÒW';
 # manage_config_email_page
 $s_config_all_projects = '’ˆÓ: ‚±‚ê‚ç‚ÌÝ’è‚ÍA‘S‚Ä‚ÌƒvƒƒWƒFƒNƒg‚É“K—p‚³‚ê‚Ü‚·B';
 $s_config_project = '’ˆÓ: ‚±‚ê‚ç‚ÌÝ’è‚ÍA%s ƒvƒƒWƒFƒNƒg‚É‚Ì‚Ý“K—p‚³‚ê‚Ü‚·B';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = '‰ü‘P—v‹‚ð“o˜^‚µ‚½ƒ†[ƒU[';
 $s_issue_handler = '‰ü‘P—v‹‚ð’S“–‚·‚éƒ†[ƒU[';
 $s_users_added_bugnote = 'ƒRƒƒ“ƒg‚ð“o˜^‚µ‚½ƒ†[ƒU[';
 $s_change_configuration = 'Ý’èXV';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = '’Ê’mƒ[ƒ‹‚ÌƒfƒtƒHƒ‹ƒg‚ð•ÏX‰Â”\‚Èƒ†[ƒU[';
 $s_notify_actions_change_access = '’Ê’mƒ[ƒ‹‚ÌÝ’è‚ð•ÏX‰Â”\‚Èƒ†[ƒU[';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -681,6 +713,9 @@ $s_desc_bug_resolved_status_threshold = '‰ü‘P—v‹‚ð‰ðŒˆÏ‚Ý‚Æ‚·‚éƒXƒe[ƒ^ƒX';
 $s_workflow_change_access = 'ƒ[ƒNƒtƒ[‚Ì•ÏX‚ª‰Â”\‚Èƒ†[ƒU[';
 $s_access_change_access = 'ƒAƒNƒZƒXŒ ŒÀ‚Ì•ÏX‚ª‰Â”\‚Èƒ†[ƒU[';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = '‰ü‘P—v‹‚ÌŠ„“–‚Ä';
 $s_allow_close_immediate = '‰ðŒˆÏŽž‚ÉŠ®—¹‚Ö‚Ì•ÏX‚ð‹–‰Â‚·‚é';
@@ -695,6 +730,11 @@ $s_resolved_status = '‰ðŒˆÏ‚Æ‚·‚éƒXƒe[ƒ^ƒX';
 $s_readonly_status = '•ÒW•s‰Â‚É‚·‚éƒXƒe[ƒ^ƒX';
 $s_reopen_status = '·–ß‚µ‚³‚ê‚½‰ü‘P—v‹‚ÉÝ’è‚·‚éƒXƒe[ƒ^ƒX';
 $s_reopen_resolution = '·–ß‚³‚ê‚½‰ü‘P—v‹‚ÉÝ’è‚·‚é‰ðŒˆó‹µ';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'ƒvƒƒWƒFƒNƒg‚ª’Ç‰Á‚³‚ê‚Ü‚µ‚½B';
@@ -1126,6 +1166,7 @@ $s_sponsors = '%d ŒÂ‚ÌŒã‰‡';
 $s_sponsorship_added = 'Œã‰‡‚ð’Ç‰Á‚µ‚Ü‚µ‚½B';
 $s_sponsorship_updated = 'Œã‰‡‚ðXV‚µ‚Ü‚µ‚½B';
 $s_sponsorship_deleted = 'Œã‰‡‚ðíœ‚µ‚Ü‚µ‚½B';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Œã‰‡‚É‚Â‚¢‚Ä‚à‚Á‚Æî•ñ‚ðŒ©‚é';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

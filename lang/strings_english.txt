@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.262 $
+	# $Revision: 1.263 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-19 15:31:50 $
+	# $Date: 2005-07-20 14:17:42 $
 	#
-	# $Id: strings_english.txt,v 1.262 2005-07-19 15:31:50 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.263 2005-07-20 14:17:42 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -439,8 +439,6 @@ $s_profile_updated_msg = 'Profile updated...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
-$s_sponsor_all_projects = 'Note: These amounts reflect sponsorships in ALL PROJECTS.';
-$s_sponsor_project = 'Note: These amounts reflect sponsorships only in the %s project.';
 $s_update_sponsorship_button = 'Change Payment Status';
 $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';

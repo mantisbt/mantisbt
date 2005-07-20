@@ -9,11 +9,11 @@
 	###########################################################################
 	# Icelandic strings for Mantis 1.0.0a3
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2005-06-12 05:24:32 $
+	# $Revision: 1.2 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:45 $
 	#
-	# $Id: strings_icelandic.txt,v 1.1 2005-06-12 05:24:32 vboctor Exp $
+	# $Id: strings_icelandic.txt,v 1.2 2005-07-20 14:17:45 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -46,7 +46,7 @@ $s_login_anonymously = 'Nafnlaus innskráning';
 $s_anonymous = 'Anonymous'; 'Nafnlaus';
 $s_jump_to_bugnotes = 'Fara í athugasemd';
 $s_public_project_msg = 'ALMENNT verkefni. Allir notendur hafa aðgang.';
-$s_private_project_msg = 'LÆST verkefni, sem aðeins stjórnendur og sérstaklega valdir notendur hafa aðgang.'; 
+$s_private_project_msg = 'LÆST verkefni, sem aðeins stjórnendur og sérstaklega valdir notendur hafa aðgang.';
 $s_access_level_project = 'Aðgangsstig verkefnis';
 $s_view_submitted_bug_link = 'Skoða tilkynningar';
 $s_assigned_projects = 'Úthlutuð verkefni';
@@ -159,7 +159,7 @@ $s_legend_reported = 'Tilkynnt';
 $s_cumulative = 'Uppsöfnun';
 $s_not_enough_data = 'Ekki eru næg gögn til að búa til graf';
 
-# print_all_bug_page.php : display selected bugs 
+# print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Sýna eingöngu valið';
 
 # print_all_bug_options.php : printing preferences
@@ -289,6 +289,7 @@ $s_status_enum_string = '10:nýtt,20:viðbrögð,30:móttekið,40:staðfest,50:úthlutað
 $s_resolution_enum_string = '10:opið,20:leyst,30:enduropnað,40:ekki hægt að endurskapa,50:ekki hægt að laga,60:afrit.70:þarfnast engrar breytingar,80:sett til hliðar,:90:hefur ekki lagast';
 $s_projection_enum_string = '10:enginn,30:fínstilling,50:lítið verk,70:mikið verk,90:endurhönnun';
 $s_eta_enum_string = '10:enginn,20:< 1 dagur,30:2-3 dagar,40:< 1 vika,50:< 1 mánuður,60:> 1 mánuður';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Aðgangs skráning';
@@ -311,6 +312,7 @@ $s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriði er S
 $s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
 $s_email_notification_title_for_status_bug_resolved = 'Eftirfarandi atriði hefur verið LEYST.';
 $s_email_notification_title_for_status_bug_closed = 'Eftirfarandi atriði hefur verið LOKAÐ.';
+
 $s_email_notification_title_for_action_bug_submitted = 'Eftirfarandi atriði hefur verið SENT.';
 $s_email_notification_title_for_action_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
 $s_email_notification_title_for_action_bug_reopened = 'Eftirfarandi atriði hefur verið OPNAÐ AFTUR.';
@@ -371,6 +373,8 @@ $s_no_password_change = 'Lykilorðinu er stjórnað af öðru kerfi, því er ekki hægt
 $s_confirm_password = 'Staðfestu lykilorð';
 $s_access_level = 'Aðgangs stig';
 $s_update_user_button = 'Uppfæri notanda';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Aðgangsstillingar';
@@ -412,7 +416,7 @@ $s_profile_deleted_msg = 'Sniði eytt...';
 
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Skrifa snið';
-$s_platform = 'Platform'; 
+$s_platform = 'Platform';
 $s_operating_system = 'Stýrikerfi';
 $s_additional_description = 'Viðbótar lýsing';
 $s_update_profile_button = 'Uppfæra snið';
@@ -433,6 +437,23 @@ $s_submit_button = 'Senda';
 # account_profile_update.php
 $s_profile_updated_msg = 'Snið uppfært...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Aðgangur þinn hefur verið uppfærður...';
 $s_email_updated = 'Tölvupóstfang uppfært';
@@ -441,6 +462,9 @@ $s_realname_updated = 'Rétt nafn uppfært';
 $s_password_updated = 'Lykilorð uppfært';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Efninu hefur verið úthlutað...';
@@ -789,7 +813,7 @@ $s_delete_version_button = 'Eyða útgáfu';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Skrifa verkefna útgáfu';
 $s_update_version_button = 'Uppfæra útgáfu';
-$s_released = 'Released'; 
+$s_released = 'Released';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Útgáfan hefur verið uppfærð...';
@@ -1142,6 +1166,7 @@ $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = 'Sponsorship Added';
 $s_sponsorship_updated = 'Sponsorship Updated';
 $s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1181,6 +1206,7 @@ $s_dependency_graph = "Tengsla graf æðri/undir";
 $s_vertical = "Lóðrétt";
 $s_horizontal = "Lárétt";
 $s_view_issue = "Skoða atriði";
+
 # Source Control Integration
 $s_checkin = 'Skráning inn';
 
@@ -1223,7 +1249,7 @@ $s_create_project = 'Skapa verkefni';
 $s_delete_project = 'Eyða verkefni';
 $s_manage_project = 'Stjórna verkefni';
 $s_manage_user_access_to_project = 'Stjórna aðgangi notanda að verkefni';
-$s_automatically_included_in_private_projects = 'Fylgir sjálfkrafa með í læstum verkefnum'; 
+$s_automatically_included_in_private_projects = 'Fylgir sjálfkrafa með í læstum verkefnum';
 $s_project_documents = 'VERKEFNA SKJÖL';
 $s_view_project_documents = 'Skoða verkefna skjöl';
 $s_upload_project_documents = 'Upphala verkefna skjöl';

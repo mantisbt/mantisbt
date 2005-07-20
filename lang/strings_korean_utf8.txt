@@ -11,11 +11,11 @@
 	#             miren.info@gmail.com
 	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
 	# -------------------------------------------------
-	# $Revision: 1.12 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-28 13:58:19 $
+	# $Revision: 1.13 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:47 $
 	#
-	# $Id: strings_korean_utf8.txt,v 1.12 2005-04-28 13:58:19 bigbadger Exp $
+	# $Id: strings_korean_utf8.txt,v 1.13 2005-07-20 14:17:47 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,6 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= '오류: 문자열이 아닌 배열이
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '오류: 배열이 아닌 문자열이 입력되어야 합니다.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '오류: 숫자가 입력되어야 합니다.(%s).';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '오류: 이슈를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '오류: 잘못된 이메일.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '오류: 업로드 금지된 파일 형식입니다.';
@@ -258,7 +259,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '오류: �
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '해당 동작은 서브프로젝트 계층구조에서 루프를 생성합니다.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '시스템 관리자만이 접근권한을 변경할 수 있습니다.';
 
-#$s_login_error = '오류: (너무 많은 로그인 실패로) 계정이 사용 정지됐거나 사용자이름/비밀번호가 올바르지 않습니다.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '오류: 계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
@@ -290,6 +291,7 @@ $s_status_enum_string             = '10:새로운 이슈,20:정보 부족,30:이
 $s_resolution_enum_string         = '10:개설,20:수정됨,30:문제 제기,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:수정 계획 없음';
 $s_projection_enum_string         = '10:없음,30:조정,50:작은 수정,70:새로 작성,90:재설계';
 $s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = '계정 등록';
@@ -373,6 +375,8 @@ $s_no_password_change = '비밀번호는 다른 시스템에서 관리하므로 
 $s_confirm_password  = '비밀번호 확인';
 $s_access_level = '접근 레벨';
 $s_update_user_button = '정보 갱신';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '기본 계정 설정상태';
@@ -435,6 +439,23 @@ $s_submit_button = '확인';
 # account_profile_update.php
 $s_profile_updated_msg = '프로파일 갱신....';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 $s_email_updated = '이메일 주소가 변경되었습니다...';
@@ -443,6 +464,9 @@ $s_realname_updated = '실명이 수정 되었습니다.';
 $s_password_updated = '비밀번호가 변경되었습니다...';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = '이슈가 할당되었습니다...';
@@ -544,6 +568,8 @@ $s_summary = '요약';
 $s_description = '설 명';
 $s_steps_to_reproduce = '재발생 단계';
 $s_update_information_button = '정보사항 변경';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = '상세정보 갱신화면';
@@ -652,14 +678,20 @@ $s_edit_user_link = '사용자 편집';
 # manage_config_email_page
 $s_config_all_projects = '노트: 이 설정사항은 모든 프로젝트에 영향을 끼칩니다.';
 $s_config_project = '노트: 이 설정사항은 오직 %s 프로젝트에만 영향을 끼칩니다.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = '이슈를 보고한 사용자';
 $s_issue_handler = '이슈를 다루고 있는 사용자';
 $s_users_added_bugnote = '버그노트를 추가한 사용자';
 $s_change_configuration = '설정사항 갱신';
+$s_message = 'Message';
 $s_default_notify = '기본 알림 플래그를 다음과 같이 설정합니다 :';
 $s_action_notify = '행동 알림 플래그를 다음과 같이 설정합니다 :';
 $s_notify_defaults_change_access = '기본 알림설정을 변경할 수 있는 사용자를 다음으로 변경합니다 :';
 $s_notify_actions_change_access = '알림설정을 변경할 수 있는 사용자를 다음으로 변경합니다 :';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = '존재하지 않음';
@@ -683,6 +715,9 @@ $s_desc_bug_resolved_status_threshold = '이슈가 해결된 것으로 간주되
 $s_workflow_change_access = '워크플로우를 변경할 수 있는 사용자들을 다음과 같이 변경합니다 :';
 $s_access_change_access = '상태 변경 접근 레벨을 변경할 수 있는 사용자들을 다음과 같이 변경합니다 :';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = '이슈 할당';
 $s_allow_close_immediate = '[해결]상태의 이슈를 [폐쇄]할 수 있도록 합';
@@ -697,6 +732,11 @@ $s_resolved_status = '이슈가 해결된것으로 간주되어 있는 상태';
 $s_readonly_status = '이슈가 읽기 전용이 되어 있는 상태';
 $s_reopen_status = '재오픈된 이슈가 설정되어 있는 상태';
 $s_reopen_resolution = '재오픈된 이슈가 설정되어 있는 것에 대한 해결책';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = '프로젝트가 추가되었습니다....';
@@ -1067,7 +1107,6 @@ $s_no_users_sponsoring_bug = '이 이슈를 후원하는 사용자가 없습니�
 $s_users_sponsoring_bug = '이 이슈를 후원하는 사용자들';
 $s_sponsors_list = '후원자 목록';
 $s_total_sponsorship_amount = '총 후원 = %s';
-$s_sponsor_issue = '후원 이슈'; # is this removed? - yesdi
 
 # custom field strings
 $s_add_custom_field_button = '새로운 커스텀 필드';
@@ -1129,6 +1168,7 @@ $s_sponsors = '%d 후원(들)';
 $s_sponsorship_added = 'Sponsorship 추가됨';
 $s_sponsorship_updated = 'Sponsorship 갱신됨';
 $s_sponsorship_deleted = 'Sponsorship 삭제됨';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = '후원에 대한 더 많은 정보';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1240,7 +1280,7 @@ $s_loading = '불러오는 중...';
 $s_between = '사이' ;
 $s_on_or_before = '동안 또는 이전' ;
 $s_before = '이전' ;
-# $s_on = '동안' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '이후' ;
 $s_on_or_after = '동안 또는 이후' ;
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.30 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:46 $
+	# $Revision: 1.31 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:51 $
 	#
-	# $Id: strings_serbian.txt,v 1.30 2005-04-21 06:52:46 bigbadger Exp $
+	# $Id: strings_serbian.txt,v 1.31 2005-07-20 14:17:51 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'String je poslat umesto niza.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Niz je poslat umesto stringa.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Greška %d nije pronadjena.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'pogresan email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'profil nije pronadjen.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Ovaj tip fajla je zabranjen za prenos.';
@@ -288,6 +289,7 @@ $s_status_enum_string = '10:novo,20:povratna informacija,30:primljeno,40:potvrdj
 $s_resolution_enum_string = '10:otvoreno,20:popravljeno,30:ponovo otvoreno,40:nemogucnost dupliciranja,50:ne može se ispraviti,60:duplicate,70:nije greška,80:suspendovano,90:ne ispravlja se';
 $s_projection_enum_string = '10:nema,30:izmena,50:mala izmena,70:major rework,90:redesign';
 $s_eta_enum_string = '10:nema,20:< 1 dan,30:2-3 dana,40:< 1 nedelja,50:< 1 mesec,60:> 1 mesec';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Registracija naloga';
@@ -371,6 +373,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password = 'Potvrdite lozinku';
 $s_access_level = 'Pristupni nivo';
 $s_update_user_button = 'ažuriranje naloga';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Podešavanja naloga';
@@ -433,6 +437,23 @@ $s_submit_button = 'Pošalji';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profil je ažuriran...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Vas nalog je uspesno ažuriran...';
 $s_email_updated = 'Email adresa je uspesno ažurirana';
@@ -441,6 +462,9 @@ $s_realname_updated = 'Pravo ime je uspesno izmenjeno';
 $s_password_updated = 'Lozinka je uspesno ažurirana';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Greška je uspesno dodeljena...';
@@ -542,6 +566,8 @@ $s_summary = 'Sažetak';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Koraci za reprodukciju';
 $s_update_information_button = 'ažuriranje informacija';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Napredno ažuriranje';
@@ -650,14 +676,20 @@ $s_edit_user_link = 'Izmena korisnika';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Change users who can change notification defaults to';
 $s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -681,6 +713,9 @@ $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered res
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
@@ -695,6 +730,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'projekat je uspesno dodat...';
@@ -1126,6 +1166,7 @@ $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = 'Sponzorstvo dodato';
 $s_sponsorship_updated = 'Sponzorstvo izmenjeno';
 $s_sponsorship_deleted = 'Sponzorstvo izbrisano';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Vise informacija o sponzorstvu';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

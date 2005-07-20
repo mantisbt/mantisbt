@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.32 $
-	# $Author: vboctor $
-	# $Date: 2005-06-08 11:06:38 $
+	# $Revision: 1.33 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:43 $
 	#
-	# $Id: strings_estonian.txt,v 1.32 2005-06-08 11:06:38 vboctor Exp $
+	# $Id: strings_estonian.txt,v 1.33 2005-07-20 14:17:43 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -208,6 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Eeldati massiivi, aga vastu v&otilde
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu v&otilde;eti massiiv.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Peab olema number: %s';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Kannet %d ei leitud.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Vigane e-posti aadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Faili t&uuml;&uuml;p pole &uuml;leslaadimiseks lubatud.';
@@ -224,6 +225,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Vigane kasutaja v&auml;l
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine eba&otilde;nnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serveri &uuml;hendus eba&otilde;nnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP kirje uuendamine eba&otilde;nnestus.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Andmebaasi &uuml;hendus eba&otilde;nnestus. Andmebaasist tagastatud viga #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Andmebaasi p&auml;ring eba&otilde;nnestus.  Andmebaasist tagastatud viga #%d: %s p&auml;ringule: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Andmebaasi valik eba&otilde;nnestus.  Andmebaasist tagastatud viga #%d: %s';
@@ -256,6 +258,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. arv
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'See tegevus toob kaasa alamprojektide hierarhias katkematu rekursiooni';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'VIGA: Sinu kasutajakonto v&otilde;ib olla blokeeritud v&otilde;i sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska k&uuml;psiseid kasutada v&otilde;i on see omadus keelatud.';
 
@@ -287,6 +290,7 @@ $s_status_enum_string = '10:uus,20:tagasiside,30:tunnistatud,40:kinnitatud,50:m&
 $s_resolution_enum_string = '10:avatud,20:korras,30:uuesti avatud,40:ei kordu,50:v&otilde;imatu korrastada,60:duplikaatne,70:pole bugi,80:peatataud,90:ei saa korda';
 $s_projection_enum_string = '10:pole,30:lihtne,50:kerge korrastada,70:raske &uuml;mbertegemine,90:&uuml;le projekteerida';
 $s_eta_enum_string = '10:pole,20:< 1 p&auml;ev,30:2-3 p&auml;eva,40:< 1 n&auml;dal,50:< 1 kuu,60:> 1 kuu';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Kasutajakonto registreerimine';
@@ -370,6 +374,8 @@ $s_no_password_change = 'Kuna paroole hallatakse teise s&uuml;steemi poolt, ei o
 $s_confirm_password = 'Kinnita parool';
 $s_access_level = 'P&ouml;&ouml;rdus&otilde;iguste tase';
 $s_update_user_button = 'Uuenda kasutaja';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kasutajakonto eelistused';
@@ -432,6 +438,23 @@ $s_submit_button = 'Saada';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profiil uuendatud...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Sinu kasutajakonto on uuendatud...';
 $s_email_updated = 'Sinu E-posti aadress on uuendatud';
@@ -440,6 +463,9 @@ $s_realname_updated = 'Tegelik nimi on edukalt uuendatud';
 $s_password_updated = 'Sinu parool on vahetatud';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Kanne on m&auml;&auml;ratud...';
@@ -541,6 +567,8 @@ $s_summary = 'Kokkuv&otilde;te';
 $s_description = 'Kirjeldus';
 $s_steps_to_reproduce = 'Kordamise sammud';
 $s_update_information_button = 'Uuenda info';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Spetsiaalne uuendus';
@@ -649,14 +677,20 @@ $s_edit_user_link = 'Redigeeri kasutajat';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Uuenda konfiguratsiooni';
+$s_message = 'Message';
 $s_default_notify = 'M&auml;&auml;ra vaikimise teavitamise v&auml;&auml;rtus';
 $s_action_notify = 'M&auml;&auml;ra tegevuste teavitamise v&auml;&auml;rtus';
 $s_notify_defaults_change_access = 'M&auml;&auml;ra kasutajad, kes saavad muuta teavitamise vaikev&auml;&auml;rtusi';
 $s_notify_actions_change_access = 'M&auml;&auml;ra kasutajad, kes saavad muuta teavitamise v&auml;&auml;rtusi';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'mitte-eksisteeriv';
@@ -680,6 +714,9 @@ $s_desc_bug_resolved_status_threshold = 'Lahendatud kande staatus';
 $s_workflow_change_access = 'Muuda kasutajaid, kes saavad t&ouml;&ouml;voogu muuta';
 $s_access_change_access = 'Muuda kasutajaid, kes saavad muuta staatuse muutmise ligip&auml;&auml;su tasemeid';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
@@ -694,6 +731,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt lisatud...';
@@ -1125,6 +1167,7 @@ $s_sponsors = '%d sponsor(eid)';
 $s_sponsorship_added = 'Sponsorlus lisatud';
 $s_sponsorship_updated = 'Sponsorlus Uuendatud';
 $s_sponsorship_deleted = 'Sponsorlus Kustutatud';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Rohkem informatsiooni sponsorluse kohta';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1239,4 +1282,5 @@ $s_before = 'Enne';
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Peale';
 $s_on_or_after = 'Praegu v&otilde;i enne';
+
 ?>

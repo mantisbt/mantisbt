@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-18 18:25:51 $
+	# $Revision: 1.92 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:42 $
 	#
-	# $Id: strings_dutch.txt,v 1.91 2005-05-18 18:25:51 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.92 2005-07-20 14:17:42 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -110,6 +110,7 @@ $s_bug_actiongroup_status = 'Deze bug kan niet op de gevraagde status gezet word
 $s_bug_actiongroup_category = 'Deze bug kan niet naar de gewenste categorie gewijzigd worden';
 $s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wilt sluiten?';
 $s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wilt verwijderen?';$s_move_bugs_conf_msg = 'Verplaats bugs naar';
+$s_move_bugs_conf_msg = 'Move issues to';
 $s_copy_bugs_conf_msg = 'Kopieer bugs naar';
 $s_assign_bugs_conf_msg = 'Toewijzen bugs aan';
 $s_resolve_bugs_conf_msg = 'Kies afhandeling van bugs';
@@ -208,6 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FOUT: Een array werd verwacht, maar e
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een array ontvangen.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Een nummer was verwacht voor %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d niet gevonden.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FOUT: Dat file type mag niet ge-upload worden.';
@@ -257,6 +259,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aant
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hi&euml;rarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt het toegangsniveau van de enige beheerder van het systeem niet aanpassen.';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteunt geen cookies, of deze zijn uitgeschakeld.';
 
@@ -288,6 +291,7 @@ $s_status_enum_string             = '10:nieuw,20:feedback,30:onderkend,40:bevest
 $s_resolution_enum_string         = '10:open,20:opgelost,30:heropend,40:niet te dupliceren,50:niet oplosbaar,60:dubbele melding,70:geen bug,80:uitgesteld,90:zal niet opgelost worden';
 $s_projection_enum_string         = '10:geen,30:tweak,50:eenvoudige oplossing,70:ingewikkelde oplossing,90:herschrijven nodig';
 $s_eta_enum_string                = '10:geen,20:< 1 dag,30:2-3 dagen,40:< 1 week,50:< 1 maand,60:> 1 maand';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registratie';
@@ -371,6 +375,8 @@ $s_no_password_change = 'Het wachtwoord wordt bepaald door een ander systeem en 
 $s_confirm_password  = 'Bevestig wachtwoord';
 $s_access_level = 'Toegangsniveau';
 $s_update_user_button = 'Aanpassen gebruiker';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Standaard account instellingen';
@@ -433,6 +439,23 @@ $s_submit_button = 'Verder';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profiel aangepast.';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Uw account is aangepast.';
 $s_email_updated = 'E-mail adres is aangepast.';
@@ -441,6 +464,9 @@ $s_realname_updated = 'Echte naam is aangepast.';
 $s_password_updated = 'Wachtwoord is aangepast.';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Bug is toegewezen.';
@@ -542,6 +568,8 @@ $s_summary = 'Samenvatting';
 $s_description = 'Beschrijving';
 $s_steps_to_reproduce = 'Stappen om te reproduceren';
 $s_update_information_button = 'Aanpassen informatie';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Uitgebreid aanpassen';
@@ -650,14 +678,20 @@ $s_edit_user_link = 'Aanpassen gebruiker';
 # manage_config_email_page
 $s_config_all_projects = 'LET OP: Deze configuratie is van toepassing op ALLE PROJECTEN.';
 $s_config_project = 'Let op: Deze configuratie heeft alleen invloer op het %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'Gebruiker die de bug meldde';
 $s_issue_handler = 'Gebruiker die de bug behandelt';
 $s_users_added_bugnote = 'Gebruiker voegt herinnering toe';
 $s_change_configuration = 'Configuratie bijgewerkt';
+$s_message = 'Message';
 $s_default_notify = 'Standaard meldingsvlaggen gezet op';
 $s_action_notify = 'Zet actie meldingsvlaggen op';
 $s_notify_defaults_change_access = 'Verander gebruikers die de standaard meldingen kunnen zetten naar';
 $s_notify_actions_change_access = 'Verander gebruikers die de actie meldingen kunnen zetten naar';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'bestaat niet';
@@ -681,6 +715,9 @@ $s_desc_bug_resolved_status_threshold = 'Status waarbij een bug als afgehandeld 
 $s_workflow_change_access = 'Verander gebruikers die de werkwijze kunnen wijzigen naar';
 $s_access_change_access = 'Verander gebruiker die de status kunnen wijzigen naar';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Wijs een bug toe';
 $s_allow_close_immediate = 'Sta het afsluiten van een bug bij afgehandeld toe';
@@ -695,6 +732,11 @@ $s_resolved_status = 'Status waarbij een bug als afgehandeld wordt beschouwd';
 $s_readonly_status = 'Status waarbij een bug alleen-lezen wordt gezet';
 $s_reopen_status = 'Status waarop een heropende bug wordt gezet';
 $s_reopen_resolution = 'Afhandeling waar een heropende bug op wordt gezet';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project is succesvol toegevoegd.';
@@ -1126,6 +1168,7 @@ $s_sponsors = '%d sponsor(en)';
 $s_sponsorship_added = 'Sponsoring toegevoegd';
 $s_sponsorship_updated = 'Sponsoring aangepast';
 $s_sponsorship_deleted = 'Sponsoring verwijderd';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Meer informatie over sponsoring';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1237,7 +1280,7 @@ $s_loading = 'Loading...';
 $s_between = 'Tussen' ;
 $s_on_or_before = 'Op of voor' ;
 $s_before = 'Voor' ;
-# $s_on = 'Op' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Na' ;
 $s_on_or_after = 'Op of na' ;
 

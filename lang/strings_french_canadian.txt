@@ -16,11 +16,11 @@
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# French-Canadian: Francis Labrie, flabrie@smoguli.com
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2005-06-09 12:55:08 $
+	# $Revision: 1.2 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:44 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.1 2005-06-09 12:55:08 vboctor Exp $
+	# $Id: strings_french_canadian.txt,v 1.2 2005-07-20 14:17:44 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -212,7 +212,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERREUR : Nouvelle non trouvée.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'ERREUR : Le mot de passe ne correspond pas à la vérification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERREUR : Tableau attendu mais chaîne reçue.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais tableau reçu.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER]	= 'ERREUR : %s doit être un nombre.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERREUR : Bogue non trouvé.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'ERREUR : Filtre %d introuvable.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERREUR : Courriel invalide.';
@@ -220,7 +220,7 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERREUR : Type de fichier non autorisé pour les dépôts de fichier.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERREUR : Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ERREUR : Aucun fichier déposé.  Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».'; 
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ERREUR : Aucun fichier déposé.  Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'ERREUR : Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERREUR : Impossible de marquer ce bogue comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'ERREUR : Champs personnalisé non trouvé';
@@ -296,6 +296,7 @@ $s_status_enum_string             = '10:nouveau,20:commentaire,30:accepté,40:con
 $s_resolution_enum_string         = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
 $s_projection_enum_string         = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
 $s_eta_enum_string                = '10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Enregistrement de compte';
@@ -379,6 +380,8 @@ $s_no_password_change = 'Le mot de passe est contrôlé par un autre système : con
 $s_confirm_password  = 'Confirmation du mot de passe';
 $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Préférences du compte';
@@ -441,6 +444,23 @@ $s_submit_button = 'Soumettre';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profil mis à jour...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Votre compte a été mis à jour avec succès...';
 $s_email_updated = 'Adresse de courriel mise à jour avec succès';
@@ -449,6 +469,9 @@ $s_realname_updated = 'Nom réel mis à jour avec succès';
 $s_password_updated = 'Mot de passe mis à jour avec succès';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Le bogue a été assigné avec succès...';
@@ -1150,6 +1173,7 @@ $s_sponsors = '%d commanditaire(s)';
 $s_sponsorship_added = 'Commandite ajoutée';
 $s_sponsorship_updated = 'Commandite mise à jour';
 $s_sponsorship_deleted = 'Commandite supprimée';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Plus d\'information sur la commandite';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1264,4 +1288,5 @@ $s_before = 'Avant';
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Après';
 $s_on_or_after = 'Pendant ou après';
+
 ?>

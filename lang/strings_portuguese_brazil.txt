@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.92 $
-	# $Author: vboctor $
-	# $Date: 2005-06-15 13:20:16 $
+	# $Revision: 1.93 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:48 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.92 2005-06-15 13:20:16 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.93 2005-07-20 14:17:48 thraxisp Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.258 -- jferraz 2005/06/07
 	###########################################################################
@@ -209,7 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido para %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]   = 'Filtro %d não encontrado.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
@@ -291,6 +291,7 @@ $s_status_enum_string = '10:novo,20:retorno,30:admitido,40:confirmado,50:atribuí
 $s_resolution_enum_string = '10:aberto,20:corrigido,30:reaberto,40:incapaz de reproduzir,50:não corrigível,60:duplicado,70:não é um caso,80:suspenso,90:não será corrigido';
 $s_projection_enum_string = '10:nenhuma,30:mínimo,50:correção pequena,70:grande recriação,90:redesenvolvimento';
 $s_eta_enum_string = '10:nenhum,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mês,60:> 1 mês';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Registro de conta';
@@ -374,6 +375,8 @@ $s_no_password_change = 'A senha é controlada por outro sistema, e por este moti
 $s_confirm_password = 'Confirmar Senha';
 $s_access_level = 'Nível de Acesso';
 $s_update_user_button = 'Atualizar Usuário';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Preferências da Conta';
@@ -436,6 +439,23 @@ $s_submit_button = 'Enviar';
 # account_profile_update.php
 $s_profile_updated_msg = 'Perfil atualizado...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Sua conta foi atualizada com sucesso...';
 $s_email_updated = 'Endereço de email atualizado com sucesso';
@@ -444,6 +464,9 @@ $s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
 $s_password_updated = 'Senha atualizada com sucesso';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
@@ -1145,6 +1168,7 @@ $s_sponsors = '%d patrocinador(es)';
 $s_sponsorship_added = 'Patrocinador Adicionado';
 $s_sponsorship_updated = 'Patrocinador Atualizado';
 $s_sponsorship_deleted = 'Patrocinador Apagado';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Mais informações sobre patrocínio';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

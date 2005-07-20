@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.69 $
-	# $Author: vboctor $
-	# $Date: 2005-06-20 11:12:25 $
+	# $Revision: 1.70 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:41 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.69 2005-06-20 11:12:25 vboctor Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.70 2005-07-20 14:17:41 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
@@ -273,7 +273,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. numb
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = '您的账号可能已被禁用或被暂时锁定（可能是由于尝试登录的失败次数太多所至），或者您输入的用户名和密码不正确。';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -305,6 +305,7 @@ $s_status_enum_string             = '10:新建,20:反馈,30:公认,40:已确认,50:已分派
 $s_resolution_enum_string         = '10:未处理,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复问题,70:不是问题,80:暂停,90:不做修改';
 $s_projection_enum_string         = '10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计';
 $s_eta_enum_string                = '10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = '问题跟踪系统帐号注册';
@@ -388,6 +389,8 @@ $s_no_password_change = '该密码被另一个系统所控制，因此不能在这里修改。';
 $s_confirm_password  = '确认密码';
 $s_access_level = '存取权限';
 $s_update_user_button = '更新帐号信息';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '缺省帐号设置';
@@ -449,6 +452,23 @@ $s_submit_button = '提交';
 
 # account_profile_update.php
 $s_profile_updated_msg = '平台配置更新...';
+
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
 
 # account_update.php
 $s_account_updated_msg = '帐号信息更新成功...';
@@ -1162,6 +1182,7 @@ $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = '已添加 Sponsorship';
 $s_sponsorship_updated = '已修改 Sponsorship';
 $s_sponsorship_deleted = '已删除 Sponsorship';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = '关于 Sponsorship 的更多信息';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1233,7 +1254,7 @@ $s_manage_news = '管理新闻';
 $s_view_list_of_attachments = '查看附件列表';
 $s_download_attachments = '下载附件';
 $s_delete_attachments = '删除附件';
-$s_upload_issue_attachments = '上传问题附件';
+$s_delete_attachment_button = "Delete";
 $s_delete_attachment_sure_msg = '你确定要删除该附件吗？';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = '过滤器';

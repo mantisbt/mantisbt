@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.82 $
-	# $Author: bigbadger $
-	# $Date: 2005-04-21 06:52:47 $
+	# $Revision: 1.83 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:52 $
 	#
-	# $Id: strings_turkish.txt,v 1.82 2005-04-21 06:52:47 bigbadger Exp $
+	# $Id: strings_turkish.txt,v 1.83 2005-07-20 14:17:52 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -206,6 +206,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string w
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
@@ -287,6 +288,7 @@ $s_status_enum_string             = '10:yeni,20:ek bilgi gerektiren,30:onaylanmý
 $s_resolution_enum_string         = '10:açýk,20:çözümlendi,30:tekrar açýldý,40:tekrarlanamadý,50:çözümlenemedi,60:tekrar,70:bug deðil ,80:ertelendi,90:çözülmeyecek';
 $s_projection_enum_string         = '10:yok,30:ayar,50:basit çözüm,70:fazla iþ,90:dizayn deðiþikliði';
 $s_eta_enum_string                = '10:yok,20:< 1 güm,30:2-3 gün,40:< 1 hafta,50:< 1 ay,60:> 1 ay';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registration';
@@ -370,6 +372,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password  = 'Þifre Onayla';
 $s_access_level = 'Eriþim Seviyesi';
 $s_update_user_button = 'Kullanýcýyý Güncelle';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Varsayýlan Kullanýcý Hesabý Tercihleri';
@@ -432,6 +436,23 @@ $s_submit_button = 'Gönder';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profil güncelle...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Hesabýnýz baþarýyla güncellendi...';
 $s_email_updated = 'Email address successfully updated';
@@ -440,6 +461,9 @@ $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Bug baþarýyla atandý...';
@@ -541,6 +565,8 @@ $s_summary = 'Özet';
 $s_description = 'Açýklama';
 $s_steps_to_reproduce = 'Tekrarlamaya Yönelik Adýmlar';
 $s_update_information_button = 'Bilgi Güncelle';
+$s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Detaylý Güncelleme';
@@ -649,14 +675,20 @@ $s_edit_user_link = 'Kullanýcý Düzenle';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Change users who can change notification defaults to';
 $s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'non-existent';
@@ -680,6 +712,9 @@ $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered res
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
@@ -694,6 +729,11 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Proje baþarýyla eklendi...';
@@ -1125,6 +1165,7 @@ $s_sponsors = '%d sponsor(s)';
 $s_sponsorship_added = 'Sponsorship Added';
 $s_sponsorship_updated = 'Sponsorship Updated';
 $s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

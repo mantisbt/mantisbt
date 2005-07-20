@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.80 $
-	# $Author: bigbadger $
-	# $Date: 2005-05-18 18:25:50 $
+	# $Revision: 1.81 $
+	# $Author: thraxisp $
+	# $Date: 2005-07-20 14:17:41 $
 	#
-	# $Id: strings_czech.txt,v 1.80 2005-05-18 18:25:50 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.81 2005-07-20 14:17:41 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'CHYBA: Oèekávalo se pole, ale byl pøi
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'CHYBA: Oèekával se øetìzec, ale bylo pøijato pole.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'CHYBA: Problém nenalezen.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'CHYBA: Chybná elektronická adresa.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'CHYBA: Profil nenalezen.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'CHYBA: Nepovolený typ souboru pro upload.';
@@ -291,6 +292,7 @@ $s_status_enum_string             = '10:nový,20:reakce,30:potvrzený,40:schválený
 $s_resolution_enum_string         = '10:otevøený,20:vyøe¹ený,30:znovuotevøený,40:nelze nasimulovat,50:nelze vyøe¹it,60:duplicitní,70:není problém,80:odlo¾ený,90:neopravovat';
 $s_projection_enum_string         = '10:¾ádný,30:slabý,50:malá zmìna,70:velká zmìna,90:zmìna designu';
 $s_eta_enum_string                = '10:¾ádný,20:< 1 den,30:2-3 dny,40:< 1 týden,50:< 1 mìsíc,60:> 1 mìsíc';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Registrace nového u¾ivatelského úètu';
@@ -374,6 +376,8 @@ $s_no_password_change = 'The password is controlled by another system, hence can
 $s_confirm_password  = 'Heslo znovu';
 $s_access_level = 'Úroveò pøístupu';
 $s_update_user_button = 'Aktualizovat u¾ivatele';
+$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Nastavení úètu';
@@ -436,6 +440,23 @@ $s_submit_button = 'Ulo¾it';
 # account_profile_update.php
 $s_profile_updated_msg = 'Profil aktualizován...';
 
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
 # account_update.php
 $s_account_updated_msg = 'Vá¹ úèet byl úspì¹nì aktualizován...';
 $s_email_updated = 'Elektronická adresa byla úspì¹nì aktualizována';
@@ -444,6 +465,9 @@ $s_realname_updated = 'Skuteèné jméno bylo úspì¹nì aktualizováno';
 $s_password_updated = 'Heslo bylo úspì¹nì aktualizováno';
 
 # adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Problém byl úspì¹nì pøiøazen...';
@@ -546,6 +570,7 @@ $s_description = 'Popis';
 $s_steps_to_reproduce = 'Kroky k vyvolání';
 $s_update_information_button = 'Ulo¾it';
 $s_sticky_issue = 'Sticky Issue';
+$s_profile = 'Profile';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Roz¹íøená aktualizace';
@@ -1144,6 +1169,7 @@ $s_sponsors = '%d sponzor(-øi)';
 $s_sponsorship_added = 'Sponzoring pøidán';
 $s_sponsorship_updated = 'Sponzoring zmìnìn';
 $s_sponsorship_deleted = 'Sponzoring zru¹en';
+$s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Více informací o sponzoringu';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
