@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_page.php,v 1.2 2005-07-19 15:31:34 thraxisp Exp $
+	# $Id: account_sponsor_page.php,v 1.3 2005-07-20 14:19:40 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -48,13 +48,6 @@
 	html_page_top2();
 	
 	$t_project = helper_get_current_project();
-	if ( ALL_PROJECTS == $t_project ) {
-	    $t_project_title = lang_get( 'sponsor_all_projects' );
-	} else {
-	    $t_project_title = sprintf( lang_get( 'sponsor_project' ) , project_get_name( $t_project ) );
-	}
-	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-
 ?>
 <br />
 <table class="width100" cellspacing="1">
