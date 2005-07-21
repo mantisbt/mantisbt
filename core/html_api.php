@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.177 2005-07-19 13:07:25 vboctor Exp $
+	# $Id: html_api.php,v 1.178 2005-07-21 13:52:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -271,7 +271,7 @@
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		} else {
-			if ( ! is_page_name( 'login_page' ) ) {
+			if ( is_page_name( 'login_page' ) ) {
 				$t_align = 'center';
 			} else {
 				$t_align = 'left';
