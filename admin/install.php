@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.13 2005-07-21 13:26:22 thraxisp Exp $
+	# $Id: install.php,v 1.14 2005-07-21 15:18:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -426,6 +426,7 @@ if ( 3 == $t_install_state ) {
 				print_test_result( GOOD );
 			} else {
 				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
+				$t_install_state--;	# db creation failed, allow user to re-enter user/password info
 			}
 			$g_db->Close();
 		}
@@ -501,6 +502,8 @@ if ( 3 == $t_install_state ) {
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
+	} else { 
+		$t_install_state--;
 	}
 
 ?>
@@ -630,7 +633,7 @@ if ( 7 == $t_install_state ) {
 } # end install_state == 7
 
 
-if( $g_failed && ! in_array( $t_install_state, array( 1, 4 ) ) ) {
+if( $g_failed ) {
 ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 <tr>
