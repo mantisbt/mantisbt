@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.12 2005-07-21 12:54:40 thraxisp Exp $
+	# $Id: install.php,v 1.13 2005-07-21 13:26:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -404,43 +404,33 @@ if ( 3 == $t_install_state ) {
 		<span class="title">Installing Database</span>
 	</td>
 </tr>
-<?php
-		if ( $f_log_queries ) {
-			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
+<?php if ( ! $f_log_queries ) { ?>
+<tr>
+	<td bgcolor="#ffffff">
+		Create database if it does not exist
+	</td>
+	<?php
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		$g_db->Close();
+
+		if ( $t_result == true ) {
+			print_test_result( GOOD );
+		} else {
+			// create db
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 			$dict = NewDataDictionary( $g_db );
 			$sqlarray = $dict->CreateDatabase( $f_database_name );
-			foreach ( $sqlarray as $sql ) {
-				echo htmlentities( $sql ) . ";\r\n\r\n";
-			}
-			echo 'USE ' . $f_database_name . ";\r\n\r\n";
-		} else {
-			echo '<tr><td bgcolor="#ffffff">Create database if it does not exist</td>';
-
-			$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-			$g_db->Close();
-
-			if ( $t_result == true ) {
+			$ret = $dict->ExecuteSQLArray( $sqlarray );
+			if( $ret == 2) {
 				print_test_result( GOOD );
 			} else {
-				// create db
-				$g_db = ADONewConnection( $f_db_type );
-				$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
-				$dict = NewDataDictionary( $g_db );
-				$sqlarray = $dict->CreateDatabase( $f_database_name );
-				$ret = $dict->ExecuteSQLArray( $sqlarray );
-				if( $ret == 2) {
-					print_test_result( GOOD );
-				} else {
-					print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
-				}
-				$g_db->Close();
+				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
 			}
-			echo '</tr>';
+			$g_db->Close();
 		}
 	?>
-<?php if ( ! $f_log_queries ) { ?>
+</tr>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
@@ -471,6 +461,9 @@ if ( 3 == $t_install_state ) {
 		$t_last_update = config_get( 'database_version', -1 );
 		$lastid = sizeof( $upgrade ) - 1;
 		$i = $t_last_update + 1;
+		if ( $f_log_queries ) {
+			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
+		}
 			
 		while ( ( $i <= $lastid ) && ! $g_failed ) {
 			if ( ! $f_log_queries ) {
@@ -502,7 +495,7 @@ if ( 3 == $t_install_state ) {
 		if ( $f_log_queries ) {
 			# add a query to set the database version
 			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (' . $lastid . ', 1, 90, \'database_version\', 20, 0 );' . "\r\n";
-			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please install it before proceeding</td></tr>';
+			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding</td></tr>';
 		}
 		
 	}
