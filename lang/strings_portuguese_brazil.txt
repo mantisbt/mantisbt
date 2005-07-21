@@ -8,14 +8,15 @@
 	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
+	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.93 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:48 $
+	# $Revision: 1.94 $
+	# $Author: bigbadger $
+	# $Date: 2005-07-21 04:48:04 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.93 2005-07-20 14:17:48 thraxisp Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.94 2005-07-21 04:48:04 bigbadger Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.258 -- jferraz 2005/06/07
+	# Up-to-date with strings_english.txt revision 1.263 -- jferraz 2005/07/20
 	###########################################################################
 ?>
 <?php
@@ -209,7 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido para %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtro %d não encontrado.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
@@ -259,8 +260,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número 
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você entrou não estão corretos.';
+#$s_login_error = 'Sua conta pode estar desativada ou bloqueada (devido a um número excessivo de tentativas erradas de login) ou o nome de usuário e a senha que você digitou não estão corretos.';
+$s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.';
 $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
 # General Strings
@@ -290,8 +291,8 @@ $s_reproducibility_enum_string = '10:sempre,30:às vezes,50:aleatório,70:não se t
 $s_status_enum_string = '10:novo,20:retorno,30:admitido,40:confirmado,50:atribuído,80:resolvido,90:fechado';
 $s_resolution_enum_string = '10:aberto,20:corrigido,30:reaberto,40:incapaz de reproduzir,50:não corrigível,60:duplicado,70:não é um caso,80:suspenso,90:não será corrigido';
 $s_projection_enum_string = '10:nenhuma,30:mínimo,50:correção pequena,70:grande recriação,90:redesenvolvimento';
-$s_eta_enum_string = '10:nenhum,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mês,60:> 1 mês';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_eta_enum_string = '10:nenhum,20:menos de 1 dia,30:2 a 3 dias,40:menos de 1 semana,50:menos de 1 mês,60:mais de 1 mês';
+$s_sponsorship_enum_string = '0:Não pago,1:Solicitado,2:Pago';
 
 # Email Strings
 $s_new_account_subject = 'Registro de conta';
@@ -375,8 +376,8 @@ $s_no_password_change = 'A senha é controlada por outro sistema, e por este moti
 $s_confirm_password = 'Confirmar Senha';
 $s_access_level = 'Nível de Acesso';
 $s_update_user_button = 'Atualizar Usuário';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'As informações da sua conta foram verificadas. A mensagem de confirmação de conta que você recebeu não é mais válida.';
+$s_verify_change_password = 'Você deve ajustar uma senha aqui para que lhe seja permitido acessar novamente.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Preferências da Conta';
@@ -402,10 +403,10 @@ $s_email_on_priority_change = 'Enviar e-mail para Mudança de Prioridade';
 $s_email_bugnote_limit = 'Limite de Anotações por e-mail';
 $s_language = 'Idioma';
 $s_update_prefs_button = 'Atualizar Preferências';
-$s_reset_prefs_button = 'Zerar Preferências';
+$s_reset_prefs_button = 'Redefinir Preferências';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = 'As preferências foram zeradas...';
+$s_prefs_reset_msg = 'As preferências foram redefinidas...';
 
 # account_prefs_update.php
 $s_prefs_updated_msg = 'As preferências foram atualizadas...';
@@ -440,33 +441,33 @@ $s_submit_button = 'Enviar';
 $s_profile_updated_msg = 'Perfil atualizado...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_my_sponsorship = 'Meus Patrocínios';
+$s_update_sponsorship_button = 'Alterar Status do Pagamento';
+$s_no_sponsored = 'Nenhum caso patrocinado atribuídos a você foi encontrado.';
+$s_own_sponsored = 'Casos que Você Patrocinou:';
+$s_issues_handled = 'Casos Patrocinados Atribuídos a Você:';
+$s_no_own_sponsored = 'Você não patrocinou nenhum caso.';
+$s_sponsor = 'Patrocinar';
+$s_amount = 'Quantia';
+$s_total_owing = 'Total Devedor';
+$s_total_paid = 'Total Pago';
+$s_sponsor_hide = 'Ocultar Resolvidos e Pagos';
+$s_sponsor_show = 'Mostrar Todos';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Informações de pagamento atualizadas.';
 
 # account_update.php
 $s_account_updated_msg = 'Sua conta foi atualizada com sucesso...';
 $s_email_updated = 'Endereço de email atualizado com sucesso';
-$s_realname_duplicated = 'O nome verdadeiro é usado por outro usuário';
+$s_realname_duplicated = 'O nome verdadeiro está sendo usado por outro usuário';
 $s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
 $s_password_updated = 'Senha atualizada com sucesso';
 
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Os casos que você selecionou são de diferentes projetos. Os parâmetros abaixo refletem as configurações para todos os projetos. Se esta informação estiver incorreta, por favor, tente sua alteração com um número menor de casos selecionados.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
@@ -834,10 +835,10 @@ $s_confirm_account_pruning = 'Você tem certeza que deseja apagar as contas velha
 
 # manage_user_page.php
 $s_edit_user_title = 'Alterar Usuário';
-$s_reset_password_button = 'Zerar Senha';
+$s_reset_password_button = 'Redefinir Senha';
 $s_delete_user_button = 'Apagar Usuário';
-$s_reset_password_msg = 'Zerar Senha enviará o endereço de confirmação via e-mail.';
-$s_reset_password_msg2 = 'Zerar Senha deixará a senha em branco.';
+$s_reset_password_msg = 'Redefinir Senha enviará o endereço de confirmação via e-mail.';
+$s_reset_password_msg2 = 'Redefinir Senha deixará a senha em branco.';
 $s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
@@ -1068,7 +1069,7 @@ $s_use_query = 'Usar Filtro';
 $s_delete_query = 'Apagar Filtro';
 $s_query_deleted = 'Filtro Apagado';
 $s_save_query = 'Salvar Filtro Atual';
-$s_reset_query = 'Zerar Filtro';
+$s_reset_query = 'Redefinir Filtro';
 $s_query_name = 'Nome do Filtro';
 $s_query_exists = 'Esta consulta em particular aparenta já existir.';
 $s_query_dupe_name = 'Outra consulta já tem este nome. Por favor, escolha um nome diferente para esta consulta.';
@@ -1125,8 +1126,8 @@ $s_custom_field_default_value = 'Valor Padrão';
 $s_custom_field_valid_regexp = 'Expressão Regular';
 $s_custom_field_access_level_r = 'Acesso de Leitura';
 $s_custom_field_access_level_rw = 'Acesso de Escrita';
-$s_custom_field_length_min = 'Cumprimento Mínimo';
-$s_custom_field_length_max = 'Cumprimento Máximo';
+$s_custom_field_length_min = 'Comprimento Mínimo';
+$s_custom_field_length_max = 'Comprimento Máximo';
 $s_custom_field_advanced = 'Mostrar somente na página avançada';
 $s_custom_field_display_report = 'Mostrar ao reportar casos';
 $s_custom_field_display_update = 'Mostrar ao atualizar casos';
@@ -1165,11 +1166,11 @@ $s_phpmailer_language = 'br';
 
 # Sponsorship Strings
 $s_sponsors = '%d patrocinador(es)';
-$s_sponsorship_added = 'Patrocinador Adicionado';
-$s_sponsorship_updated = 'Patrocinador Atualizado';
-$s_sponsorship_deleted = 'Patrocinador Apagado';
-$s_sponsorship_paid = 'Sponsorship Paid';
-$s_sponsorship_more_info = 'Mais informações sobre patrocínio';
+$s_sponsorship_added = 'Patrocínio Adicionado';
+$s_sponsorship_updated = 'Patrocínio Atualizado';
+$s_sponsorship_deleted = 'Patrocínio Apagado';
+$s_sponsorship_paid = 'Patrocínio Pago';
+$s_sponsorship_more_info = 'Mais informações sobre o patrocínio';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1280,7 +1281,7 @@ $s_loading = 'Carregando...';
 $s_between = 'Entre' ;
 $s_on_or_before = 'Em ou Antes' ;
 $s_before = 'Antes' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'Em' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Depois' ;
 $s_on_or_after = 'Em ou Depois' ;
 

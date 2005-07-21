@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.133 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:44 $
+	# $Revision: 1.134 $
+	# $Author: bigbadger $
+	# $Date: 2005-07-21 04:48:04 $
 	#
-	# $Id: strings_german.txt,v 1.133 2005-07-20 14:17:44 thraxisp Exp $
+	# $Id: strings_german.txt,v 1.134 2005-07-21 04:48:04 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,7 +33,7 @@ $s_actiongroup_menu_resolve = 'Erledigen';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 $s_actiongroup_menu_update_view_status = 'Anzeigestatus ändern';
-$s_actiongroup_menu_update_category = 'Update Category';
+$s_actiongroup_menu_update_category = 'Kategorie ändern';
 $s_actiongroup_menu_set_sticky = 'Fixierung setzen/lösen';
 $s_actiongroup_menu_update_field = 'Aktualisiere %s';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
@@ -83,7 +83,7 @@ $s_duplicate_of = 'Duplikat von';
 $s_has_duplicate = 'hat Duplikat';
 $s_related_to = 'verwandt mit';
 $s_dependant_on = 'abhängig von';
-$s_blocks = 'Voraussetzung für';
+$s_blocks = 'Folgeproblem von';
 
 $s_new_bug = 'Neues Problem';
 $s_bugnote_added = 'Problemnotiz hinzugefügt';
@@ -108,7 +108,7 @@ $s_login_link = 'Anmelden';
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
 $s_bug_actiongroup_access = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion auszuführen.';
 $s_bug_actiongroup_status = 'Der gewünschte Status ist für dieses Problem nicht wählbar.';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_category = 'Dieses Problem kann nicht in die gewünschte Kategorie verändert werden.';
 $s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich schließen?';
 $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich löschen?';
 $s_move_bugs_conf_msg = 'Probleme verschieben zu Projekt:';
@@ -118,7 +118,7 @@ $s_resolve_bugs_conf_msg = 'Grund für Erledigung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Problempriorität:';
 $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
-$s_category_bugs_conf_msg = 'Choose issues category';
+$s_category_bugs_conf_msg = 'Problem-Kategorie wählen';
 $s_set_sticky_bugs_conf_msg = 'Sind Sie sicher, dass Sie die Fixierung dieser Probleme ändern wollen?';
 $s_close_group_bugs_button = 'Probleme schließen' ;
 $s_delete_group_bugs_button = 'Probleme löschen' ;
@@ -128,7 +128,7 @@ $s_assign_group_bugs_button = 'Probleme zuordnen' ;
 $s_resolve_group_bugs_button = 'Probleme erledigen' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Kategorie ändern';
 $s_view_status_group_bugs_button = 'Anzeigestatus ändern';
 $s_set_sticky_group_bugs_button = 'Fixierung ändern';
 
@@ -197,7 +197,7 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette \'%s\' nicht gefunden
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Keine Verbindung zum FTP-Server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Der Problembearbeiter hat keine ausreichenden Rechte, um ein Problem mit diesem Status zu bearbeiten.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname.  Projektnamen können nicht leer sein.';
@@ -210,14 +210,14 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Ein Feld wurde erwartet, aber eine Z
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eine Zeichenkette wurde erwartet, aber ein Feld übergeben.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Eine Zahl wurde für %s erwartet.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Problem %d nicht gefunden.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d nicht gefunden.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ungültige E-Mail-Adresse.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Dateityp für Uploads nicht erlaubt.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dateiübertragung nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht beschrieben werden.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Keine Datei übertragen. Gehen Sie zurück und wählen Sie eine Datei aus, bevor Sie auf Datei übertragen drücken';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Übertragene Datei konnte nicht in das Speicherverzeichnis verschoben werden. Verzeichnis nicht vorhanden oder vom Webserver nicht beschreibbar.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Sie können kein Problem als Duplikat von sich selbst anlegen.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
@@ -258,9 +258,9 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Die angeforderte Informa
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Die Bestätigungs-URL ist ungültig oder wurde bereits verwendet. Bitte registrieren Sie sich erneut.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. Anzahl der in Bearbeitung befindlichen Anfragen erreicht. Bitte setzen Sie sich mit Ihrem Systemadministrator in Verbindung.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Diese Operation würde eine Schleife in der Unterprojekthierarchie erzeugen.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sie können die Zugangsrechte des einzigen System-ADMINISTRATORS nicht ändern.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Ihr Konto ist vielleich deaktiviert oder gesperrt (wegen zu vieler fehlgeschlagener Loginversuche) oder der eingebene Benutzername oder das Passwort sind falsch.';
 $s_login_error = 'Benutzername oder Passwort falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 
@@ -289,10 +289,10 @@ $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:Blocker';
 $s_reproducibility_enum_string = '10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A';
 $s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen';
-$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
+$s_resolution_enum_string = '10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
 $s_projection_enum_string = '10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Neuentwicklung';
 $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string = '0:Unbezahlt,1:Gefordert,2:Bezahlt';
 
 # Email Strings
 $s_new_account_subject = 'Konto Registrierung';
@@ -350,7 +350,7 @@ $s_email_priority = 'Priorität';
 $s_email_status = 'Status';
 $s_email_resolution = 'Lösung';
 $s_email_duplicate = 'Duplikat';
-$s_email_fixed_in_version = 'Behoben in Version';
+$s_email_fixed_in_version = 'Erledigt in Version';
 $s_email_date_submitted = 'Erstellt am';
 $s_email_last_modified = 'Letzte Aktualisierung';
 $s_email_summary =  'Zusammenfassung';
@@ -376,8 +376,8 @@ $s_no_password_change = 'Das Passwort wird durch ein anderes System kontrolliert
 $s_confirm_password = 'Bestätige Passwort';
 $s_access_level = 'Zugangsberechtigung';
 $s_update_user_button = 'Benutzer aktualisieren';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'Ihre Kontoinformationen wurden überprüft. Die von Ihnen erhaltene Konto Bestätigungsmeldung ist jetzt ungültig.';
+$s_verify_change_password = 'Sie müssen hier ein Paßwort vergeben, um sich wieder anmelden zu können.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kontoeinstellungen';
@@ -441,21 +441,21 @@ $s_submit_button = 'Absenden';
 $s_profile_updated_msg = 'Profil aktualisiert...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_my_sponsorship = 'Meine Sponsorenschaften';
+$s_update_sponsorship_button = 'Bezahlstatus ändern';
+$s_no_sponsored = 'Keine von Ihnen gesponserten Probleme gefunden.';
+$s_own_sponsored = 'Von Ihnen gesponserte Probleme:';
+$s_issues_handled = 'Gesponserte Probleme, die Ihnen zugeordnet sind:';
+$s_no_own_sponsored = 'Sie haben keine Probleme gesponsert.';
 $s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_amount = 'Betrag';
+$s_total_owing = 'Außenstände gesamt';
+$s_total_paid = 'Bezahlt gesamt';
+$s_sponsor_hide = 'Bezahlt und Erledigt verbergen';
+$s_sponsor_show = 'Alle anzeigen';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Bazahlinformation aktualisiert.';
 
 # account_update.php
 $s_account_updated_msg = 'Ihr Konto wurde erfolgreich aktualisiert...';
@@ -467,7 +467,7 @@ $s_password_updated = 'Passwort erfolgreich aktualisiert.';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Die von Ihnen ausgewählten Probleme gehören zu verschiedenen Projekten.  Die unten stehenden Parameter berücksichtigen die Einstellungen aller Projekte. Falls das falsch ist, versuchen Sie eine Änderung mit weniger ausgewählten Problemen.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Das Problem wurde zugewiesen...';
@@ -569,8 +569,8 @@ $s_summary = 'Zusammenfassung';
 $s_description = 'Beschreibung';
 $s_steps_to_reproduce = 'Schritte zur Reproduktion';
 $s_update_information_button = 'Information aktualisieren';
-$s_sticky_issue = 'Sticky Issue';
-$s_profile = 'Profile';
+$s_sticky_issue = 'Fixiertes Problem';
+$s_profile = 'Profil';
 
 # bug_update_page.php
 $s_update_advanced_link = 'erweiterte Aktualisierung';
@@ -659,7 +659,7 @@ $s_manage_custom_field_link = 'Benutzerdefinierte Felder';
 $s_manage_global_profiles_link = 'Globale Profile verwalten';
 $s_permissions_summary_report = 'Rechte-Bericht';
 $s_manage_config_link = 'Konfiguration verwalten';
-$s_manage_threshold_config = 'Arbeitsablauf-Schwellwerte';
+$s_manage_threshold_config = 'Arbeitsablauf-Schwellenwerte';
 $s_manage_email_config = 'E-Mail-Benachrichtigungen';
 $s_manage_workflow_config = 'Arbeitsablauf';
 $s_create_new_account_link = 'Neues Konto erstellen';
@@ -679,65 +679,65 @@ $s_edit_user_link = 'Benutzer bearbeiten';
 # manage_config_email_page
 $s_config_all_projects = 'Hinweis: Diese Einstellungen betreffen ALLE PROJEKTE.';
 $s_config_project = 'Hinweis: Diese Einstellungen betreffen nur Projekt %s.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_colour_coding = 'In der folgenden Tabelle gelten folgende Farbkodes:';
+$s_colour_project = 'Projekteinstellungen überschreiben andere.';
+$s_colour_global = 'Alle Projekteinstellungen überschreiben die Standardwerte.';
+$s_issue_reporter = 'Benutzer, der das Problem gemeldet hat';
+$s_issue_handler = 'Benutzer, dem das Problem zugewiesen wurde';
+$s_users_added_bugnote = 'Benutzer, die Notizen eingegeben haben';
 $s_change_configuration = 'Konfiguration ändern';
-$s_message = 'Message';
-$s_default_notify = 'Setze Standard-Benachrichtigungen auf';
+$s_message = 'Meldung';
+$s_default_notify = 'Setze Benachrichtigungsvorgaben auf';
 $s_action_notify = 'Setze Aktionsbenachrichtigungen auf';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_notify_defaults_change_access = 'Wer kannn Benachrichtigungsvorgaben ändern';
+$s_notify_actions_change_access = 'Wer kann Benachrichtigungen ändern';
+$s_revert_to_system = "Alle Projekteinstellungen löschen";
+$s_revert_to_all_project = "Projektspezifische Einstellungen löschen";
 
 # manage_config_workflow_page
 $s_non_existent = 'nicht vorhanden';
 $s_current_status = 'Aktueller Status';
 $s_next_status = 'Nächster Status';
 $s_workflow = 'Arbeitsablauf';
-$s_workflow_thresholds = 'Schwellwert für den Arbeitsablauf';
-$s_threshold = 'Schwellwert';
+$s_workflow_thresholds = 'Schwellenwert für den Arbeitsablauf';
+$s_threshold = 'Schwellenwert';
 $s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
+$s_alter_level = 'Wer kann diesen Wert ändern';
+$s_validation = 'Arbeitsablauf überprüfen';
+$s_comment = 'Überprüfungskommentar';
+$s_superfluous = 'Verbindung vom Status zu sich selbst ist enthalten und braucht nicht angegeben zu werden.';
+$s_unreachable = 'Sie können ein Problem nicht in diesen Status versetzen';
+$s_no_exit = 'Sie können ein Problem nicht aus diesem Status entfernen';
+$s_access_levels = 'Zugangsberechtigung';
+$s_access_change = 'Minimale Zugangsberechtigung, um diesen Status zu ändern';
 $s_desc_bug_submit_status = 'Status für neu eingegebene Probleme';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_desc_bug_reopen_status = 'Status, auf den wiedereröffnete Problemem gesetzt werden';
+$s_desc_bug_resolved_status_threshold = 'Status, bei dem Probleme als erledigt angesehen werden';
+$s_workflow_change_access = 'Wer den Arbeitsablauf ändern kann';
+$s_access_change_access = 'Wer den Status ändern kann';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'Der Vorgabestatus von %s ist nicht in den nächsten Stati von %s ausgewählt. Er wird ignoriert.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Ein Problem zuweisen';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_close_immediate = Erlaube, ein Problem mit der Erledigung zu schließen';
+$s_allow_reporter_close = 'Erlaube Berichterstatter, ein Problem zu schließen';
+$s_allow_reporter_reopen = 'Erlaube Berichterstatter, ein Problem wieder zu eröffnen';
+$s_set_status_assigned = 'Setze Status bei Zuweisung eines Verantworlichen';
 $s_allow_user_edit = 'Benutzer dürfen eigene Notizen bearbeiten';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_limit_access = 'Begrenze zu Zugriff der Berichterstatter auf ihre eigenen Probleme';
 $s_submit_status = 'Status für neu eingegebene Probleme';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assigned_status = 'Status, auf den automatisch zugewiesene Probleme gesetzt werden';
+$s_resolved_status = ''Status, bei dem ein Problem als erledigt angesehen wird';
+$s_readonly_status = 'Status, bei dem ein Problem schreibgeschützt wird.';
+$s_reopen_status = 'Status, auf den ein wiedereröffnetes Problem gesetzt wird';
+$s_reopen_resolution = 'Lösung, auf die ein wiedereröffnetes Problem gesetzt wird';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_config_delete_sure = 'Wirklich die Einstellungen löschen für';
+$s_in_project = 'im Projekt';
+$s_delete_config_button = 'Einstellungen löschen';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt wurde hinzugefügt...';
@@ -791,7 +791,7 @@ $s_update = 'Aktualisierung';
 $s_subprojects = 'Unterprojekte';
 $s_add_subproject = 'Als Unterprojekt hinzufügen';
 $s_create_new_subproject_link = 'Neues Unterprojekt erzeugen';
-$s_unlink_link = 'Unlink';
+$s_unlink_link = 'Verknüpfung lösen';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Projekt hinzufügen';
@@ -991,7 +991,7 @@ $s_no_reponse_msg = 'Sie haben sieben Tage um die Kontobestätigung auszuführen. 
 
 # signup_page.php
 $s_signup_captcha_request = 'Geben Sie den Code ein, den Sie im Rahmen auf der rechten Seite sehen.';
-$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten, wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail-Adresse angeben um die Bestätigungsmail zu erhalten.';
+$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail-Adresse angeben, um die Bestätigungsmail zu erhalten.';
 $s_signup_title = 'Anmeldung';
 $s_signup_button = 'Anmelden';
 $s_no_password_request = 'Ihr Passwort wird von einem anderen System verwaltet. Nehmen Sie Kontakt mit Ihrem Administrator auf.';
@@ -1169,7 +1169,7 @@ $s_sponsors = '%d Sponsor(en)';
 $s_sponsorship_added = 'Sponsorenschaft hinzugefügt';
 $s_sponsorship_updated = 'Sponsorenschaft aktualisiert';
 $s_sponsorship_deleted = 'Sponsorenschaft gelöscht';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Sponsorenschaft bezahlt';
 $s_sponsorship_more_info = 'Mehr Informationen über die Sponsorenschaft';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1196,8 +1196,8 @@ $s_replace_relationship_sure_msg = "Es besteht bereits eine Beziehung zwischen d
 $s_relationship_with_parent = "Beziehung zum Original-Problem";
 $s_delete_relationship_button = "Löschen";
 $s_delete_relationship_sure_msg = "Sind Sie sicher, dass Sie diese Beziehung löschen wollen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle als Voraussetzung markierten Probleme sind bereits erledigt oder geschlossen.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle als Voraussetzung markierten Probleme sind bereits erledigt oder geschlossen.<br>Bevor Sie ein Grundproblem <b>erledigen/schließen</b>, sollten alle seine Voraussetzungen erledigt oder geschlossen werden.";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.";
 $s_create_child_bug_button = "Klon erzeugen";
 $s_bug_cloned_to = "Problem dupliziert";
 $s_bug_created_from = "Problem angelegt von";
@@ -1278,11 +1278,11 @@ $s_email_on_relationship_changed = 'E-Mail bei geänderter Beziehung';
 $s_loading = 'Lade...';
 
 # filter_api.php
-$s_between = 'Zwischen' ;
-$s_on_or_before = 'Bis' ;
-$s_before = 'Vor' ;
+$s_between = 'Zwischen';
+$s_on_or_before = 'Bis';
+$s_before = 'Vor';
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'Nach' ;
-$s_on_or_after = 'Ab' ;
+$s_after = 'Nach';
+$s_on_or_after = 'Ab';
 
 ?>
