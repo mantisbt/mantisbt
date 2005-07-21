@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.46 2005-07-17 21:56:21 thraxisp Exp $
+	# $Id: core.php,v 1.47 2005-07-21 12:15:26 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -46,7 +46,8 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 	} else {
 		# if not found, redirect to the admin page to install the system
-		if ( ! is_page_name( 'admin' ) ) {
+		# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
+		if ( ! ( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'admin' ) ) ) ) {
 			if ( OFF == $g_use_iis ) {
 				header( 'Status: 302' );
 			}
