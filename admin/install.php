@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.11 2005-07-21 01:20:40 thraxisp Exp $
+	# $Id: install.php,v 1.12 2005-07-21 12:54:40 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -412,8 +412,9 @@ if ( 3 == $t_install_state ) {
 			$dict = NewDataDictionary( $g_db );
 			$sqlarray = $dict->CreateDatabase( $f_database_name );
 			foreach ( $sqlarray as $sql ) {
-				echo htmlentities( $sql ) . "\r\n\r\n";
+				echo htmlentities( $sql ) . ";\r\n\r\n";
 			}
+			echo 'USE ' . $f_database_name . ";\r\n\r\n";
 		} else {
 			echo '<tr><td bgcolor="#ffffff">Create database if it does not exist</td>';
 
@@ -484,7 +485,7 @@ if ( 3 == $t_install_state ) {
 			}
 			if ( $f_log_queries ) {
 				foreach ( $sqlarray as $sql ) {
-					echo htmlentities( $sql ) . "\r\n\r\n";
+					echo htmlentities( $sql ) . ";\r\n\r\n";
 				}
 			} else {
 				$ret = $dict->ExecuteSQLArray($sqlarray);
@@ -499,12 +500,11 @@ if ( 3 == $t_install_state ) {
 			$i++;
 		}
 		if ( $f_log_queries ) {
-			echo '</pre></br /></td></tr>';
+			# add a query to set the database version
+			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (' . $lastid . ', 1, 90, \'database_version\', 20, 0 );' . "\r\n";
+			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please install it before proceeding</td></tr>';
 		}
 		
-	}
-	if ( $f_log_queries ) {
-		$g_failed = true; # fake a failure so we don't continue
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
