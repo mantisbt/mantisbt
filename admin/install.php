@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.10 2005-07-20 23:49:02 thraxisp Exp $
+	# $Id: install.php,v 1.11 2005-07-21 01:20:40 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -373,10 +373,10 @@ if ( 1 == $t_install_state ) {
 
 <tr>
 	<td>
-		Log SQL Queries
+		Print SQL Queries instead of Writing to the Database
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo ( $f_log_queries ? 'checked="checked"' : '' ) ?>"></input>
+		<input name="log_queries" type="checkbox" value="1" <?php echo ( $f_log_queries ? 'checked="checked"' : '' ) ?>></input>
 	</td>
 </tr>
 
@@ -404,32 +404,42 @@ if ( 3 == $t_install_state ) {
 		<span class="title">Installing Database</span>
 	</td>
 </tr>
-
-<tr>
-	<td bgcolor="#ffffff">
-		Create database if it does not exist
-	</td>
-	<?php
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-
-		if ( $t_result == true ) {
-			print_test_result( GOOD );
-		} else {
-			// create db
+<?php
+		if ( $f_log_queries ) {
+			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 			$dict = NewDataDictionary( $g_db );
 			$sqlarray = $dict->CreateDatabase( $f_database_name );
-			$ret = $dict->ExecuteSQLArray( $sqlarray );
-			if( $ret == 2) {
+			foreach ( $sqlarray as $sql ) {
+				echo htmlentities( $sql ) . "\r\n\r\n";
+			}
+		} else {
+			echo '<tr><td bgcolor="#ffffff">Create database if it does not exist</td>';
+
+			$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+			$g_db->Close();
+
+			if ( $t_result == true ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
+				// create db
+				$g_db = ADONewConnection( $f_db_type );
+				$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
+				$dict = NewDataDictionary( $g_db );
+				$sqlarray = $dict->CreateDatabase( $f_database_name );
+				$ret = $dict->ExecuteSQLArray( $sqlarray );
+				if( $ret == 2) {
+					print_test_result( GOOD );
+				} else {
+					print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
+				}
+				$g_db->Close();
 			}
+			echo '</tr>';
 		}
-		$g_db->Close();
 	?>
-</tr>
+<?php if ( ! $f_log_queries ) { ?>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
@@ -447,20 +457,20 @@ if ( 3 == $t_install_state ) {
 	?>
 </tr>
 <?php
+	}
 	# install the tables
 	if ( false == $g_failed ) {
+		$g_db_connected = false; # fake out database access routines used by config_get
 		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-		$g_db_connected = true; # fake out database access routines
+		if ( ! $f_log_queries ) {
+			$g_db_connected = true; # fake out database access routines used by config_get
+		}
 		$t_last_update = config_get( 'database_version', -1 );
 		$lastid = sizeof( $upgrade ) - 1;
 		$i = $t_last_update + 1;
 			
-		if ( $f_log_queries ) {
-			echo '<tr><td bgcolor="#ffffff" col_span="2"> Progress Suppressed, SQL Queries follow <pre>';
-		}
-
 		while ( ( $i <= $lastid ) && ! $g_failed ) {
 			if ( ! $f_log_queries ) {
 				echo '<tr><td bgcolor="#ffffff">Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )</td>';
@@ -476,9 +486,8 @@ if ( 3 == $t_install_state ) {
 				foreach ( $sqlarray as $sql ) {
 					echo htmlentities( $sql ) . "\r\n\r\n";
 				}
-			}
-			$ret = $dict->ExecuteSQLArray($sqlarray);
-			if ( ! $f_log_queries ) {
+			} else {
+				$ret = $dict->ExecuteSQLArray($sqlarray);
 				if ( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
@@ -493,6 +502,9 @@ if ( 3 == $t_install_state ) {
 			echo '</pre></br /></td></tr>';
 		}
 		
+	}
+	if ( $f_log_queries ) {
+		$g_failed = true; # fake a failure so we don't continue
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
