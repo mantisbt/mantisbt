@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.276 2005-07-05 18:50:49 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.277 2005-07-22 23:11:56 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -331,6 +331,7 @@
 		'auto',
 		'chinese_simplified',
 		'chinese_traditional',
+		'chinese_traditional_utf8',
 		'croatian',
 		'czech',
 		'danish',
