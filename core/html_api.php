@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.179 2005-07-22 15:34:01 thraxisp Exp $
+	# $Id: html_api.php,v 1.180 2005-07-22 23:13:24 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -329,7 +329,7 @@
 					PRINT '<select name="project_id" class="small">';
 				}
 				print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-				PRINT '</select>';
+				PRINT '</select> ';
 				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 				PRINT '</form>';
 			PRINT '</td>';
