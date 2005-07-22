@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.134 $
-	# $Author: bigbadger $
-	# $Date: 2005-07-21 04:48:04 $
+	# $Revision: 1.135 $
+	# $Author: vboctor $
+	# $Date: 2005-07-22 22:39:15 $
 	#
-	# $Id: strings_german.txt,v 1.134 2005-07-21 04:48:04 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.135 2005-07-22 22:39:15 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -721,7 +721,7 @@ $s_default_not_in_flow = 'Der Vorgabestatus von %s ist nicht in den nächsten Sta
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Ein Problem zuweisen';
-$s_allow_close_immediate = Erlaube, ein Problem mit der Erledigung zu schließen';
+$s_allow_close_immediate = 'Erlaube, ein Problem mit der Erledigung zu schließen';
 $s_allow_reporter_close = 'Erlaube Berichterstatter, ein Problem zu schließen';
 $s_allow_reporter_reopen = 'Erlaube Berichterstatter, ein Problem wieder zu eröffnen';
 $s_set_status_assigned = 'Setze Status bei Zuweisung eines Verantworlichen';
@@ -729,7 +729,7 @@ $s_allow_user_edit = 'Benutzer dürfen eigene Notizen bearbeiten';
 $s_limit_access = 'Begrenze zu Zugriff der Berichterstatter auf ihre eigenen Probleme';
 $s_submit_status = 'Status für neu eingegebene Probleme';
 $s_assigned_status = 'Status, auf den automatisch zugewiesene Probleme gesetzt werden';
-$s_resolved_status = ''Status, bei dem ein Problem als erledigt angesehen wird';
+$s_resolved_status = 'Status, bei dem ein Problem als erledigt angesehen wird';
 $s_readonly_status = 'Status, bei dem ein Problem schreibgeschützt wird.';
 $s_reopen_status = 'Status, auf den ein wiedereröffnetes Problem gesetzt wird';
 $s_reopen_resolution = 'Lösung, auf die ein wiedereröffnetes Problem gesetzt wird';
