@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.48 2005-05-24 20:08:16 marcelloscata Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.49 2005-07-22 01:07:41 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -112,56 +112,49 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	$f_bug_arr = explode_enum_string( $f_export );
 
-	for( $i=0; $i < $row_count; $i++ ) {
-		if ( isset( $f_bug_arr[$i] ) ) {
-			$index = $f_bug_arr[$i];
-			$t_bug_arr_sort[$index]=1;
-		}
-	}
 	# @@debug var_dump($t_field_name_arr);
 	for( $i=0; $i < $row_count; $i++ ) {
 
 		# prefix bug data with v_
 		extract( $result[$i], EXTR_PREFIX_ALL, 'v' );
 
-		$t_last_updated = date( $g_short_date_format, $v_last_updated );
+		if ( in_array( $v_id, $f_bug_arr ) || ( $f_show_flag==0 ) ) {
+            $t_last_updated = date( $g_short_date_format, $v_last_updated );
 
-		# grab the bugnote count
-		$bugnote_count = bug_get_bugnote_count( $v_id );
+            # grab the bugnote count
+            $bugnote_count = bug_get_bugnote_count( $v_id );
 
-		# grab the project name
-		$project_name = project_get_field( $v_project_id, 'name' );
+            # grab the project name
+            $project_name = project_get_field( $v_project_id, 'name' );
 
-	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
-		$query4 = "SELECT *
-			FROM $t_bug_text_table
-			WHERE id='$v_bug_text_id'";
-		$result4 = db_query( $query4 );
-		$row = db_fetch_array( $result4 );
-		extract( $row, EXTR_PREFIX_ALL, 'v2' );
+            $t_bug_text_table = config_get( 'mantis_bug_text_table' );
+            $query4 = "SELECT *
+                FROM $t_bug_text_table
+                WHERE id='$v_bug_text_id'";
+            $result4 = db_query( $query4 );
+            $row = db_fetch_array( $result4 );
+            extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
-		$v_os 						= string_display( $v_os );
-		$v_os_build					= string_display( $v_os_build );
-		$v_platform					= string_display( $v_platform );
-		$v_version 					= string_display( $v_version );
-		$v_summary 					= string_display_links( $v_summary );
+            $v_os 						= string_display( $v_os );
+            $v_os_build					= string_display( $v_os_build );
+            $v_platform					= string_display( $v_platform );
+            $v_version 					= string_display( $v_version );
+            $v_summary 					= string_display_links( $v_summary );
 
-		# line feeds are desactivated in case of excel export, to avoid multiple lines
-		if ( $f_type_page != 'html' ) {
+            # line feeds are desactivated in case of excel export, to avoid multiple lines
+            if ( $f_type_page != 'html' ) {
 				$v2_description = stripslashes( str_replace( '\n',' ',$v2_description ));
 				$v2_steps_to_reproduce  = stripslashes( str_replace( '\n',' ',$v2_steps_to_reproduce ) );
 				$v2_additional_information = stripslashes( str_replace( '\n',' ',$v2_additional_information ));
-		}
-		else {
-			$v2_description 			= string_display_links( $v2_description );
-			$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
-			$v2_additional_information 	= string_display_links( $v2_additional_information );
-		}
+            } else {
+                $v2_description 			= string_display_links( $v2_description );
+                $v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
+                $v2_additional_information 	= string_display_links( $v2_additional_information );
+            }
 
-		# an index for incrementing the array position
-		$name_index=0;
+            # an index for incrementing the array position
+            $name_index=0;
 
-		if ( isset( $t_bug_arr_sort[$i] ) || ( $f_show_flag==0 ) ) {
 ?>
 <tr>
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
@@ -448,7 +441,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 </tr>
 <?php
-		} #isset
+		} #in_array
 } #for loop
 ?>
 </table>

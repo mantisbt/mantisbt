@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.59 2005-05-23 20:03:12 marcelloscata Exp $
+	# $Id: print_all_bug_page_word.php,v 1.60 2005-07-22 01:07:41 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -69,48 +69,40 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	//$t_bug_arr_sort[$row_count]=-1;
 	$f_bug_arr = explode_enum_string( $f_export );
 
-	# $t_bug_arr_sort contains 1 if the field as been selected, 0 if not
-	for( $i=0; $i < $row_count; $i++ ) {
-		if ( isset( $f_bug_arr[$i] ) ) {
-			$index = $f_bug_arr[$i];
-			$t_bug_arr_sort[$index]=1;
-		}
-	}
-
 	for( $j=0; $j < $row_count; $j++ ) {
 
 		# prefix bug data with v_
 		extract( $result[$j], EXTR_PREFIX_ALL, 'v' );
 
-		$t_last_updated = date( $g_short_date_format, $v_last_updated );
-
-		# grab the bugnote count
-		$bugnote_count = bug_get_bugnote_count( $v_id );
-
-		# grab the project name
-		$t_project_name = project_get_field( $v_project_id, 'name' );
-
-		# bug text infos
-	    $t_bug_text_table = config_get( 'mantis_bug_text_table' );
-		$query3 = "SELECT *
-			FROM $t_bug_text_table
-			WHERE id='$v_bug_text_id'";
-		$result3 = db_query( $query3 );
-		$row = db_fetch_array( $result3 );
-		extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-		$v_os 						= string_display( $v_os );
-		$v_os_build					= string_display( $v_os_build );
-		$v_platform					= string_display( $v_platform );
-		$v_version 					= string_display( $v_version );
-		$v_summary 					= string_display_links( $v_summary );
-		$v2_description 			= string_display_links( $v2_description );
-		$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
-		$v2_additional_information 	= string_display_links( $v2_additional_information );
-		### note that dates are converted to unix format in filter_get_bug_rows
-
 		# display the available and selected bugs
-		if ( isset( $t_bug_arr_sort[$j] ) || ( $f_show_flag==0 )) {
+		if ( in_array( $v_id, $f_bug_arr ) || ( $f_show_flag==0 ) ) {
+
+            $t_last_updated = date( $g_short_date_format, $v_last_updated );
+
+            # grab the bugnote count
+            $bugnote_count = bug_get_bugnote_count( $v_id );
+
+            # grab the project name
+            $t_project_name = project_get_field( $v_project_id, 'name' );
+
+            # bug text infos
+            $t_bug_text_table = config_get( 'mantis_bug_text_table' );
+            $query3 = "SELECT *
+                FROM $t_bug_text_table
+                WHERE id='$v_bug_text_id'";
+            $result3 = db_query( $query3 );
+            $row = db_fetch_array( $result3 );
+            extract( $row, EXTR_PREFIX_ALL, 'v2' );
+
+            $v_os 						= string_display( $v_os );
+            $v_os_build					= string_display( $v_os_build );
+            $v_platform					= string_display( $v_platform );
+            $v_version 					= string_display( $v_version );
+            $v_summary 					= string_display_links( $v_summary );
+            $v2_description 			= string_display_links( $v2_description );
+            $v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
+            $v2_additional_information 	= string_display_links( $v2_additional_information );
+            ### note that dates are converted to unix format in filter_get_bug_rows
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -508,6 +500,6 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 <?php
 echo '<br /><br />';
-		} # end isset
+		} # end in_array
 }  # end main loop
 ?>
