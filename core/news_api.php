@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.22 2005-03-26 18:27:17 thraxisp Exp $
+	# $Id: news_api.php,v 1.23 2005-07-22 15:34:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -143,10 +143,11 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_news_table = config_get( 'mantis_news_table' );
+		$t_project_where = helper_project_specific_where( $p_project_id );
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_news_table
-				  WHERE project_id='$c_project_id'";
+				  WHERE $t_project_where";
 
 		if ( $p_sitewide ) {
 			$query .= ' OR project_id=' . ALL_PROJECTS;

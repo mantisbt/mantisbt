@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.30 2005-02-12 20:01:11 jlatour Exp $
+	# $Id: graph_api.php,v 1.31 2005-07-22 15:33:59 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -338,13 +338,7 @@
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " AND project_id='$t_project_id'";
-		}
+		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -371,14 +365,7 @@
 		$t_user_id = auth_get_current_user_id();
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_clo_val = CLOSED;
-
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " AND project_id='$t_project_id'";
-		}
+		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -422,14 +409,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
-
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " AND project_id='$t_project_id'";
-		}
+		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_clo_val = CLOSED;
@@ -491,14 +471,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
-
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " AND project_id='$t_project_id'";
-		}
+		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$query = "SELECT reporter_id
 				 FROM $t_bug_table
@@ -546,14 +519,7 @@
 		$t_cat_table = config_get( 'mantis_project_category_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
-
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " project_id='$t_project_id'";
-		}
+		$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$query = "SELECT DISTINCT category
 				FROM $t_cat_table
@@ -609,14 +575,7 @@
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
-
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = " project_id='$t_project_id'";
-		}
+		$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 		# Get all the submitted dates
 		$query = "SELECT date_submitted

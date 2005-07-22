@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.178 2005-07-21 13:52:17 vboctor Exp $
+	# $Id: html_api.php,v 1.179 2005-07-22 15:34:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -787,21 +787,11 @@
 		$t_user_id = auth_get_current_user_id();
 
 		#checking if it's a per project statistic or all projects
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$t_specific_where = 'WHERE (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$t_specific_where = '';
-			}
-		} else {
-			$t_specific_where = "WHERE project_id='$t_project_id'";
-		}
+		$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 		$query = "SELECT status, COUNT(*) AS number
 				FROM $t_mantis_bug_table
-				$t_specific_where
+				WHERE $t_specific_where
 				GROUP BY status";
 		$result = db_query( $query );
 

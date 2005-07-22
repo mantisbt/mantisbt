@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.105 2005-07-18 13:45:21 thraxisp Exp $
+	# $Id: user_api.php,v 1.106 2005-07-22 15:34:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -784,6 +784,8 @@
 
 	# --------------------
 	function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
+		# @@@ (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
+		#   affects how news and some summaries are generated
 		$t_todo        = user_get_accessible_subprojects( $p_user_id, $p_project_id );
 		$t_subprojects = Array();
 
@@ -806,11 +808,7 @@
 
 		$t_bug_table	= config_get('mantis_bug_table');
 
-		if ( ALL_PROJECTS == $p_project_id ) {
-			$t_where_prj = '';
-		} else {
-			$t_where_prj = "project_id='$c_project_id' AND";
-		}
+		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
 
 		$t_resolved	= config_get('bug_resolved_status_threshold');
 
@@ -832,11 +830,7 @@
 
 		$t_bug_table	= config_get('mantis_bug_table');
 
-		if ( ALL_PROJECTS == $p_project_id ) {
-			$t_where_prj = '';
-		} else {
-			$t_where_prj = "project_id='$c_project_id' AND";
-		}
+		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
 
 		$t_resolved	= config_get('bug_resolved_status_threshold');
 
