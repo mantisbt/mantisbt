@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_escaping.php,v 1.5 2005-07-22 23:28:24 thraxisp Exp $
+	# $Id: upgrade_escaping.php,v 1.6 2005-07-22 23:46:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,8 +15,32 @@
 	$g_error_send_page_header = false; # suppress page headers in the error handler
 
     # @@@ upgrade list moved to the bottom of upgrade_inc.php
-    
+
 	$f_advanced = gpc_get_bool( 'advanced', false );
+
+	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+	if ( false == $result ) {
+?>
+<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
+</body>
+<?php
+        exit();
+	}
+
+	# check to see if the new installer was used
+    if ( -1 != config_get( 'database_version', -1 ) ) {
+		if ( OFF == $g_use_iis ) {
+			header( 'Status: 302' );
+		}
+		header( 'Content-Type: text/html' );
+
+		if ( ON == $g_use_iis ) {
+			header( "Refresh: 0;url=install.php" );
+		} else {
+			header( "Location: install.php" );
+		}
+		exit; # additional output can cause problems so let's just stop output here
+	}
 ?>
 <html>
 <head>
@@ -37,31 +61,6 @@
 </table>
 <br /><br />
 <?php
-
-	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
-	if ( false == $result ) {
-?>
-<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
-</body>
-<?php
-        exit();
-	}
-	
-	# check to see if the new installer was used
-    if ( -1 != config_get( 'database_version', -1 ) ) {
-		if ( OFF == $g_use_iis ) {
-			header( 'Status: 302' );
-		}
-		header( 'Content-Type: text/html' );
-
-		if ( ON == $g_use_iis ) {
-			header( "Refresh: 0;url=install.php" );
-		} else {
-			header( "Location: install.php" );
-		}
-		exit; # additional output can cause problems so let's just stop output here
-	}
-
 	if ( ! db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
         # Create the upgrade table if it does not exist
         $query = "CREATE TABLE " . config_get( 'mantis_upgrade_table' ) .
@@ -75,7 +74,7 @@
 
 	# link the data structures and upgrade list
 	require_once ( 'upgrade_inc.php' );
-	
+
 	# drop the database upgrades and load the escaping ones
 	$upgrade_set = new UpgradeSet();
 
