@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.37 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:43 $
+	# $Revision: 1.38 $
+	# $Author: bigbadger $
+	# $Date: 2005-07-22 04:59:32 $
 	#
-	# $Id: strings_finnish.txt,v 1.37 2005-07-20 14:17:43 thraxisp Exp $
+	# $Id: strings_finnish.txt,v 1.38 2005-07-22 04:59:32 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,7 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'VIRHE: Odotin matriisia, mutta sain m
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'VIRHE: Taulukkodataa merkkijonodatan tilalla.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'VIRHE: Odotettiin numeroa: %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'VIRHE: Tapahtumaa ei lˆydy.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'VIRHE: Suodinta %d ei lˆytynyt.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'VIRHE: Virheellinen s‰hkˆpostiosoite.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'VIRHE: K‰ytt‰j‰profiilia ei lˆytynyt.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'VIRHE: T‰m‰n tyyppiset tiedostot eiv‰t ole sallittuja.';
@@ -291,7 +291,7 @@ $s_status_enum_string             = '10:uusi,20:palaute,30:huomioitu,40:varmiste
 $s_resolution_enum_string         = '10:avoin,20:korjattu,30:uudelleenavattu,40:ei toistettavissa,50:ei korjattavissa,60:kaksoiskappale,70:ei ole virhe,80:j‰‰dytetty,90:ei korjata';
 $s_projection_enum_string         = '10:ei m‰‰ritelty,30:pieni muutos,50:pieni korjaus,70:suuri muutos,90:vaatii uudelleensuunnittelun';
 $s_eta_enum_string                = '10:ei m‰‰ritelty,20:< 1 p‰iv‰,30:2-3 p‰iv‰‰,40:< 1 viikko,50:< 1 kuukausi,60:> 1 kuukausi';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string = '0:Maksamatta,1:Pyydetty,2:Maksettu';
 
 # Email Strings
 $s_new_account_subject = 'K‰ytt‰j‰tilin rekisterˆinti';
@@ -375,8 +375,8 @@ $s_no_password_change = 'Salasanaa ei voi muokata, koska sen yll‰pidosta vastaa 
 $s_confirm_password  = 'Vahvista salasana';
 $s_access_level = 'K‰yttˆoikeustaso';
 $s_update_user_button = 'P‰ivit‰ k‰ytt‰j‰tunnustiedot';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'K‰ytt‰j‰tilitietosi on vahvistettu. S‰hkˆpostina vastaanottamasi k‰ytt‰j‰tilin vahvistusviestin vahvistustietoja ei voi en‰‰ k‰ytt‰‰.';
+$s_verify_change_password = 'Sinun pit‰‰ syˆtt‰‰ salasana sis‰‰nkirjautumista varten.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'K‰ytt‰j‰tilin asetukset';
@@ -440,21 +440,21 @@ $s_submit_button = 'L‰het‰';
 $s_profile_updated_msg = 'Profiili p‰ivitetty...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_my_sponsorship = 'Omat sponsoritapahtumat';
+$s_update_sponsorship_button = 'Muokkaa maksatustilaa';
+$s_no_sponsored = 'Yht‰‰n sinulle osoitettua sponsoroitua tapahtumaa ei lˆytynyt.';
+$s_own_sponsored = 'Tapahtumat, joita olet sponsoroinut:';
+$s_issues_handled = 'Sponsoroidut tapahtumat jotka on osoitettu sinulle:';
+$s_no_own_sponsored = 'Et ole sponsoroinut yht‰‰n tapahtumaa.';
+$s_sponsor = 'Sponsori';
+$s_amount = 'M‰‰r‰';
+$s_total_owing = 'Maksamattomia/velkasaldo yhteens‰';
+$s_total_paid = 'Maksettu yhteens‰';
+$s_sponsor_hide = 'Piilota ratkaistut ja maksetut';
+$s_sponsor_show = 'N‰yt‰ kaikki';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Maksutieto p‰ivitetty.';
 
 # account_update.php
 $s_account_updated_msg = 'K‰ytt‰j‰tunnuksesi on onnistuneesti p‰ivitetty...';
@@ -466,7 +466,7 @@ $s_password_updated = 'Salasana onnistuneesti vaihdettu';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Valitsemasi tapahtumat ovat eri projekteista. Alla n‰kyv‰t parametrit ovat kaikkiin projekteihin vaikuttavia parametreja. Mik‰li n‰m‰ eiv‰t ole oikein, ole hyv‰ ja v‰henn‰ valittujen tapahtumien m‰‰r‰‰ sek‰ yrit‰ uudestaan.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Tapahtuma on onnistuneesti osoitettu...';
@@ -568,8 +568,8 @@ $s_summary = 'Yhteenveto';
 $s_description = 'Kuvaus';
 $s_steps_to_reproduce = 'Toisto-ohjeet';
 $s_update_information_button = 'P‰ivit‰ tiedot';
-$s_sticky_issue = 'Sticky Issue';
-$s_profile = 'Profile';
+$s_sticky_issue = 'P‰‰llimm‰isen‰ pysyv‰ tapahtuma';
+$s_profile = 'Profiili';
 
 # bug_update_page.php
 $s_update_advanced_link = 'P‰ivit‰ yksityiskohtaiset tiedot';
@@ -620,7 +620,7 @@ $s_select_project_button = 'Valitse projekti';
 
 # logout_page.php
 $s_logged_out_title = 'Uloskirjauduttu...';
-$s_redirecting = '...Edelleenohjataan';
+$s_redirecting = '... edelleenohjataan';
 $s_here = 'T‰nne';
 
 # lost_pwd_page.php
@@ -678,20 +678,20 @@ $s_edit_user_link = 'Muokkaa k‰ytt‰j‰‰';
 # manage_config_email_page
 $s_config_all_projects = 'HUOMAA: N‰m‰ asetukset vaikuttavat KAIKKIIN PROJEKTEIHIN.';
 $s_config_project = 'HUOMAA: N‰m‰ asetukset vaikuttavat projektiin %s.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
+$s_colour_coding = 'Alla olevassa taulukossa seuraavat v‰riarvo ovat voimassa:';
+$s_colour_project = 'Projektin asetus ohittaa muut asetukset.';
+$s_colour_global = 'Kaikki projektiasetukset ohittavat oletusasetukset.';
 $s_issue_reporter = 'K‰ytt‰j‰lle, joka lis‰si tapahtuman';
 $s_issue_handler = 'K‰ytt‰j‰lle, joka k‰sittelee tapahtumaa';
 $s_users_added_bugnote = 'K‰ytt‰j‰lle, joka on lis‰nnyt tapahtumaan muistiinpanon';
 $s_change_configuration = 'P‰ivit‰ asetukset';
-$s_message = 'Message';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
+$s_message = 'Viesti';
+$s_default_notify = 'Oletustiedonantoasetus:';
+$s_action_notify = 'Toimenpidetiedonantoasetus:';
 $s_notify_defaults_change_access = 'K‰ytt‰j‰taso, jolla voidaan muokata oletusmuistutusten muokkaustasoa';
 $s_notify_actions_change_access = 'K‰ytt‰j‰taso, jolla voidaan muokata muistutuksia';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = "Poista kaikki projektien asetukset.";
+$s_revert_to_all_project = "Poista projektikohtaiset asetukset.";
 
 # manage_config_workflow_page
 $s_non_existent = 'ei olemassa';
@@ -716,7 +716,7 @@ $s_workflow_change_access = 'Tapahtumaketjua voi muokata k‰ytt‰j‰tasolla';
 $s_access_change_access = 'K‰ytt‰j‰taso, jolla voidaan vaihtaa tilojen k‰yttˆoikeustason muokkaustasoa';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = '%s:n oletustilaa ei ole valittu %s:n seuraavissa tiloissa ja se ohitetaan.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Osoita tapahtuma';
@@ -734,9 +734,9 @@ $s_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat asetetaan'
 $s_reopen_resolution = 'Ratkaisuaste, jolle uudelleeavattu tapahtuma asetetaan';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_config_delete_sure = 'Oletko varma, ett‰ haluat poistaa asetukset kohteelta';
+$s_in_project = 'projektissa';
+$s_delete_config_button = 'Poista asetukset';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekti lis‰tty...';
@@ -1168,7 +1168,7 @@ $s_sponsors = '%d sponsoria';
 $s_sponsorship_added = 'Sponsori lis‰tty';
 $s_sponsorship_updated = 'Sponsori p‰ivitetty';
 $s_sponsorship_deleted = 'Sponsori poistettu';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Sponsoritapahtuma maksettu';
 $s_sponsorship_more_info = 'Lis‰‰ tietoa sponsoroinnista';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than

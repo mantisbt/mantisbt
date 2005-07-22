@@ -9,13 +9,13 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
-	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/06/23
+	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/07/21
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:48 $
+	# $Revision: 1.92 $
+	# $Author: bigbadger $
+	# $Date: 2005-07-22 04:59:32 $
 	#
-	# $Id: strings_polish.txt,v 1.91 2005-07-20 14:17:48 thraxisp Exp $
+	# $Id: strings_polish.txt,v 1.92 2005-07-22 04:59:32 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,14 +209,14 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Ci±g zamiast tablicy w %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Tablica zamiast ci±gu w %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Oczekiwano liczby w %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Nie znaleziono zagadnienia %d.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Nie znaleziono filtru %d.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Nieprawid³owy email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nieznaleziono profilu.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Pliki tego typu nie mog± byæ przesy³ane.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Plik o tej nazwie ju¿ istnieje, proszê usun±æ najpierw oryginalny plik.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'B³êdny katalog na pliki.  Katalog nie istnieje lub serwer www nie ma uprawnieñ by do niego zapisywaæ';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'B³êdny katalog na pliki. Katalog nie istnieje lub serwer www nie ma uprawnieñ by do niego zapisywaæ';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '¯aden plik nie zosta³ przes³any. Proszê wróciæ i wybraæ plik przed naci¶niêciem klawisza Prze¶lij';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Przes³any plik nie zosta³ skopiowany do Katalogu dla przesy³anych plików. Katalog nie istnieje albo serwer nie ma wystarczaj±cych praw by do niego zapisywaæ';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Nie mo¿na wskazaæ jako duplikat zagadnienia tego samego zagadnienia.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Pole w³asne nie znalezione';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ta nazwa jest ju¿ u¿ywana.';
@@ -291,7 +291,7 @@ $s_status_enum_string             = '10:nowy,20:zwrócony,30:uznany,40:potwierdzo
 $s_resolution_enum_string         = '10:otwarty,20:poprawiony,30:ponownie otwarty,40:nie do powtórzenia,50:nie naprawialny,60:duplikat,70:to nie Zagadnienie,80:zawieszony,90:nie zostanie naprawiony';
 $s_projection_enum_string         = '10:brak,30:poprawka,50:wiêksza poprawka,70:du¿y nak³ad pracy,90:przeprojektowanie';
 $s_eta_enum_string                = '10:¿aden,20:< 1 dzieñ,30:2-3 dni,40:< 1 tydzieñ,50:< 1 miesi±c,60:> 1 miesi±c';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string        = '0:Nieop³acony,1:¯±danie zap³aty,2:Op³acony';
 
 # Email Strings
 $s_new_account_subject = 'Rejestracja konta';
@@ -375,8 +375,8 @@ $s_no_password_change = 'Has³o jest kontrolowane przez inny system, nie mo¿e byæ
 $s_confirm_password  = 'Potwierd¼ has³o';
 $s_access_level = 'Poziom dostêpu';
 $s_update_user_button = 'Aktualizuj';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'Informacja o Twoim koncie zosta³a zweryfikowana. Wiadomo¶æ potwierdzaj±ca, któr± otrzyma³e¶ jest ju¿ niepoprawna.';
+$s_verify_change_password = 'Musisz ustawiæ swoje has³o tutaj, aby móc siê zalogowaæ ponownie.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Preferencje konta';
@@ -440,21 +440,21 @@ $s_submit_button = 'Wy¶lij';
 $s_profile_updated_msg = 'Profil zosta³ zaktualizowany...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
+$s_my_sponsorship = 'Moj sponsoring';
+$s_update_sponsorship_button = 'Zmiñ status p³atno¶ci';
 $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_own_sponsored = 'Zagadnienia, które sponsorowa³e¶:';
+$s_issues_handled = 'Zagadnienia sponsorowane, które s± przypisane do Ciebie:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
 $s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
+$s_amount = 'Kwota';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_sponsor_hide = 'Ukryj rozwi±zane i op³acone';
+$s_sponsor_show = 'Poka¿ wszystkie';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Informacja o p³atno¶ci zosta³a uaktualniona.';
 
 # account_update.php
 $s_account_updated_msg = 'Twoje konto zosta³o zaktualizowane...';
@@ -466,7 +466,7 @@ $s_password_updated = 'Has³o zosta³o zaktualizowane';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Zagadnienia, które wybra³e¶ nale¿± do ró¿nych projektów. Poni¿sze parametry pokazuj± ustawienia dla wszystkich projektów. Je¶li jest to niepoprawne, spróbuj z mniejsz± liczb± wybranych zagadnieñ.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Zagadnienie zosta³o pomy¶lnie przypisane...';
@@ -1168,7 +1168,7 @@ $s_sponsors = '%d sponsor(ów)';
 $s_sponsorship_added = 'Sponsoring dodany';
 $s_sponsorship_updated = 'Sponsoring zaktualizowany';
 $s_sponsorship_deleted = 'Sponsoring usuniêty';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Sponsoring op³acony';
 $s_sponsorship_more_info = 'Wiêcej informacji o sponsorowaniu';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
