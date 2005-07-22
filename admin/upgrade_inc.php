@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.17 2005-07-14 21:38:00 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.18 2005-07-22 23:28:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'db_table_names_inc.php' );
@@ -150,6 +150,7 @@
 
 		function execute() {
 			config_set( 'database_version', $this->release_name );
+			$this->set_applied();
 
 			return true;
 		}

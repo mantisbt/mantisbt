@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.12 2005-07-17 10:06:01 prichards Exp $
+	# $Id: upgrade.php,v 1.13 2005-07-22 23:28:24 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -48,6 +48,21 @@
         exit();
 	}
 	
+	# check to see if the new installer was used
+    if ( -1 != config_get( 'database_version', -1 ) ) {
+		if ( OFF == $g_use_iis ) {
+			header( 'Status: 302' );
+		}
+		header( 'Content-Type: text/html' );
+
+		if ( ON == $g_use_iis ) {
+			header( "Refresh: 0;url=install.php" );
+		} else {
+			header( "Location: install.php" );
+		}
+		exit; # additional output can cause problems so let's just stop output here
+	}
+
 	if ( ! db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
         # Create the upgrade table if it does not exist
         $query = "CREATE TABLE " . config_get( 'mantis_upgrade_table' ) .
