@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.24 2005-06-15 14:46:20 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.25 2005-07-23 12:01:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -188,7 +188,7 @@
 
 			$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 			if ( ON == $t_enable_sponsorship ) {
-				$t_columns[] = 'sponsorship';
+				$t_columns[] = 'sponsorship_total';
 			}
 
 			$t_columns[] = 'bugnotes_count';

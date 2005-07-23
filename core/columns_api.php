@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.10 2005-07-13 20:45:02 thraxisp Exp $
+	# $Id: columns_api.php,v 1.11 2005-07-23 12:01:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -266,7 +266,7 @@
 
 	# --------------------
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
-	function print_column_title_sponsorship( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 
 		if ( ON == $t_enable_sponsorship ) {
@@ -406,7 +406,7 @@
 
 	# --------------------
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
-	function print_column_sponsorship( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	function print_column_sponsorship_total( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 
 		if ( $t_enable_sponsorship == ON ) {
