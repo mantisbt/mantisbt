@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.279 2005-07-23 14:05:35 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.280 2005-07-23 15:08:57 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -330,6 +330,7 @@
 	$g_language_choices_arr	= array(
 		'auto',
 		'chinese_simplified',
+		'chinese_simplified_utf8',
 		'chinese_traditional',
 		'chinese_traditional_utf8',
 		'croatian',
