@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_page.php,v 1.3 2005-07-20 14:19:40 thraxisp Exp $
+	# $Id: account_sponsor_page.php,v 1.4 2005-07-23 15:09:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -247,7 +247,7 @@
 			print_user( $t_sponsor->user_id );
 			echo '</td>';
 			echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
-			echo '<td><select name="sponsor_' . $row['bug'] . '">';
+			echo '<td><select name="sponsor_' . $row['bug'] . '_' . $t_sponsor->id . '">';
 			print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
 			echo '</select></td>';
 			

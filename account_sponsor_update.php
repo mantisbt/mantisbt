@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_update.php,v 1.1 2005-07-03 15:09:10 thraxisp Exp $
+	# $Id: account_sponsor_update.php,v 1.2 2005-07-23 15:09:51 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,7 +39,7 @@
 		$t_bug = bug_get( $c_bug_id );
 		$t_sponsor = sponsorship_get( (int) $t_sponsor_id );
 		
-		$t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id, $t_sponsor->paid );
+		$t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id . '_' . $t_sponsor->id, $t_sponsor->paid );
 		if ( $t_new_payment != $t_sponsor->paid ) {
 			sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
 		}
