@@ -12,23 +12,23 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.70 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:41 $
+	# $Revision: 1.71 $
+	# $Author: bigbadger $
+	# $Date: 2005-07-23 14:58:04 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.70 2005-07-20 14:17:41 thraxisp Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.71 2005-07-23 14:58:04 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
-	#关于 Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2005-06-17)
+	#Mantis 1.0.0rc1 简体中文语言包的翻译说明(by NetCobra,2005-07-23)
 	#
 	#本语言包还存在以下问题，请继续改进，谢谢！
 	#
 	#1.错误信息部分（# ERROR strings）比较多，实际使用中发现很少遇到，因此没有翻译；
 	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
-	#3.“sponsor”和“Sponsorship”这两个单词仍然不知道怎么翻译，文中有部分译为“关
-	#  联”，可能不正确，其他部分就没有继续使用此翻译，但已有翻译没有再改回来；
-	#4.还有不少内容没有翻译完成，请继续；
+	#3.这次将“sponsor”和“Sponsorship”全部翻译成了“捐赠”，应该没有问题，如果不
+	#  正确，请告知我正确的翻译；
+	#4.哪位知道 Sticky 该如何翻译？我全部保留了原文*^_^*
 	#
 	###########################################################################
 ?>
@@ -273,7 +273,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. numb
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -305,12 +305,12 @@ $s_status_enum_string             = '10:新建,20:反馈,30:公认,40:已确认,50:已分派
 $s_resolution_enum_string         = '10:未处理,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复问题,70:不是问题,80:暂停,90:不做修改';
 $s_projection_enum_string         = '10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计';
 $s_eta_enum_string                = '10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string = '0:未支付,1:已请求,2:已支付';
 
 # Email Strings
 $s_new_account_subject = '问题跟踪系统帐号注册';
-$s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是 \'';
-$s_new_account_greeting2 = '\'。为了完成你的注册，请访问以下网页设置新的密码:';
+$s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是“';
+$s_new_account_greeting2 = '”。为了完成你的注册，请访问以下网页设置新的密码：';
 $s_new_account_username = '用户名: ';
 $s_new_account_message = '如果你从未申请过注册本系统，请忽略此消息' . '\n\n';
 $s_new_account_do_not_reply = '此邮件由系统自动生成，请勿回复';
@@ -334,23 +334,23 @@ $s_email_notification_title_for_action_bug_assigned = '下列问题已经被分派';
 $s_email_notification_title_for_action_bug_reopened = '下列问题重新打开';
 $s_email_notification_title_for_action_bug_deleted = '下列问题已经被删除';
 $s_email_notification_title_for_action_bug_updated = '下列问题已经被更新';
-$s_email_notification_title_for_action_sponsorship_added = '下列问题已经被关联';
-$s_email_notification_title_for_action_sponsorship_updated = '下列问题的一个关联关系被修改。';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_sponsorship_added = '已为下列问题添加捐赠';
+$s_email_notification_title_for_action_sponsorship_updated = '下列问题的一项捐赠被修改。';
+$s_email_notification_title_for_action_sponsorship_deleted = '下列问题的一项捐赠被撤销。';
 
 $s_email_notification_title_for_action_bugnote_submitted = '这个问题中新增加了一个注释。';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = '下面的问题被设置为与问题 %s 重复。';
 $s_email_notification_title_for_action_has_duplicate_relationship_added = '问题 %s 已经被置为与下列问题重复。';
-$s_email_notification_title_for_action_related_to_relationship_added = 'The following issue has been set as RELATED TO issue %s.';
-$s_email_notification_title_for_action_dependant_on_relationship_added = 'The following issue has been set PARENT OF issue %s.';
-$s_email_notification_title_for_action_blocks_relationship_added = 'The following issue has been set CHILD OF issue %s.';
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'The following issue has been UNset as DUPLICATE OF issue %s.';
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'The issue %s has been removed as a DUPLICATE OF the following issue.';
-$s_email_notification_title_for_action_related_to_relationship_deleted = 'The following issue has been marked as UNRELATED TO issue %s.';
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The following issue has been removed as the PARENT OF issue %s.';
-$s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %s.';
-$s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %s has been RESOLVED.';
-$s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %s has been CLOSED.';
+$s_email_notification_title_for_action_related_to_relationship_added = '下面的问题已经设置为和问题 %s 相关联.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = '下面的问题已经被设置为问题 %s 的父项问题。';
+$s_email_notification_title_for_action_blocks_relationship_added = '下面的问题已经被设置为问题 %s 的子项问题。';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的重复';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '因为被设置为下面的问题的重复，问题 %s 已经被删除。';
+$s_email_notification_title_for_action_related_to_relationship_deleted = '下面的问题已经被设置为和问题 %s 没有关联。';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的父项问题。';
+$s_email_notification_title_for_action_blocks_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的子项问题。';
+$s_email_notification_title_for_action_relationship_child_resolved = '相关联的问题 %s 已经被解决。';
+$s_email_notification_title_for_action_relationship_child_closed = '相关联的问题 %s 已经被关闭。';
 
 $s_email_reporter = '报告人';
 $s_email_handler = '处理人';
@@ -389,8 +389,8 @@ $s_no_password_change = '该密码被另一个系统所控制，因此不能在这里修改。';
 $s_confirm_password  = '确认密码';
 $s_access_level = '存取权限';
 $s_update_user_button = '更新帐号信息';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = '你的账号信息已经进行了检验，你所收到的账号检验信息现在已经失效。';
+$s_verify_change_password = '你必须在这里设置密码，否则将无法登录。';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '缺省帐号设置';
@@ -451,24 +451,24 @@ $s_select_profile = '选择平台配置';
 $s_submit_button = '提交';
 
 # account_profile_update.php
-$s_profile_updated_msg = '平台配置更新...';
+$s_profile_updated_msg = '平台配置已更新...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_my_sponsorship = '我的捐赠';
+$s_update_sponsorship_button = '修改支付状态';
+$s_no_sponsored = '没有找到分派给你的已捐赠的问题。';
+$s_own_sponsored = '你已经捐赠的问题：';
+$s_issues_handled = '分派给你的已捐赠的问题：';
+$s_no_own_sponsored = '你没有捐赠任何问题。';
+$s_sponsor = '捐赠';
+$s_amount = '数量';
+$s_total_owing = '未支付合计';
+$s_total_paid = '已支付合计';
+$s_sponsor_hide = '隐藏已支付并且已解决的问题';
+$s_sponsor_show = '全部显示';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = '支付信息已更新。';
 
 # account_update.php
 $s_account_updated_msg = '帐号信息更新成功...';
@@ -480,10 +480,10 @@ $s_password_updated = '密码更新成功';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = '你选择的问题时从属于多个不同的项目，下面的参数将影响所有的项目。如果这不是你所预期的结果，请少选择一些问题，重试你的修改。';
 
 # bug_assign.php
-$s_bug_assign_msg       = '已成功分派问题...';
+$s_bug_assign_msg = '已成功分派问题...';
 
 # bug_change_status_page.php
 $s_new_bug_title = '创建新的问题';
@@ -499,7 +499,7 @@ $s_assigned_bug_button = '分派问题';
 
 # bug_close.php
 $s_bug_close_msg       = '问题已被关闭...';
-$s_close_immediately   = '立即关闭:';
+$s_close_immediately   = '立即关闭：';
 
 # bug_close_page.php
 $s_closed_bug_title = '关闭问题';
@@ -641,7 +641,7 @@ $s_here = '到这里';
 $s_lost_password_title = '重置密码';
 $s_lost_password_done_title = '密码邮件已发出';
 $s_lost_password_subject = '密码重置';
-$s_lost_password_info = '如果你想重置丢失的密码, 请填写你的用户名和邮件地址。<br/><br/>如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
+$s_lost_password_info = '如果你想重置忘记的密码, 请填写你的用户名和邮件地址。<br/><br/>如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
 $s_lost_password_confirm_hash_OK = '系统已经接受了你的确认，请更新密码。';
 
 # main_page.php
@@ -700,10 +700,10 @@ $s_issue_handler = '问题管理人';
 $s_users_added_bugnote = '问题注释添加人';
 $s_change_configuration = '更改配置';
 $s_message = '信息';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Who can change notification defaults';
-$s_notify_actions_change_access = 'Who can change notifications';
+$s_default_notify = '设置默认公告标志为';
+$s_action_notify = '设置活动的公告标志为';
+$s_notify_defaults_change_access = '谁可以修改默认公告标志';
+$s_notify_actions_change_access = '谁可以修改公告';
 $s_revert_to_system = '删除所有项目的设置';
 $s_revert_to_all_project = '删除项目的指定设置';
 
@@ -718,7 +718,7 @@ $s_status_level = '状态';
 $s_alter_level = '谁可以修改这个值';
 $s_validation = '工作流校验';
 $s_comment = '校验注释';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_superfluous = 'Arc from status to itself is implied, 不需要明确指出';
 $s_unreachable = '不能将一个问题转移到该状态';
 $s_no_exit = '不能将一个问题转移出该状态';
 $s_access_levels = '存取权限级别';
@@ -734,15 +734,15 @@ $s_default_not_in_flow = '%s 的默认状态没有被选定为 %s 的下一个状态，它将被忽略'
 
 # manage_config_work_threshold_page
 $s_assign_issue = '分派问题';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_close_immediate = '允许关闭解决状态问题';
 $s_allow_reporter_close = '允许报告人关闭问题';
 $s_allow_reporter_reopen = '允许报告人重新打开问题';
-$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_set_status_assigned = '管理人分配时设置的状态';
 $s_allow_user_edit = '允许用户编辑自己的问题注释';
 $s_limit_access = '限制报告人对所报告的问题的权限为';
 $s_submit_status = '新建问题的状态设置为';
 $s_assigned_status = '将自动分派的问题状态设置为';
-$s_resolved_status = 'Status where an issue is considered resolved';
+$s_resolved_status = '问题已经被认为已解决的状态';
 $s_readonly_status = '只读问题的状态设置为';
 $s_reopen_status = '重新打开的问题状态设置为';
 $s_reopen_resolution = '重新打开的问题的解决状态设置为';
@@ -842,7 +842,7 @@ $s_account_deleted_msg = '已删除帐号...';
 $s_delete_account_sure_msg = '确定要删除此帐号吗？';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = '已删除所有从来没有登录过的账号和晚于一个星期的账号。';
+$s_accounts_pruned_msg = '已删除所有在一个星期以前注册，并且从来没有登录过的账号。';
 $s_prune_accounts_button = '删除';
 $s_confirm_account_pruning = '你确定要删除从来没有登录过的旧账号吗？';
 
@@ -946,7 +946,7 @@ $s_add_file = '添加文件';
 $s_project_document_updated = '更新项目成功';
 
 # proj_user_add.php
-$s_project_user_added_msg = '添加用户至项目成功';
+$s_project_user_added_msg = '成功添加用户至项目';
 
 # proj_user_delete.php
 $s_project_removed_user_msg = '从项目删除用户成功';
@@ -991,7 +991,7 @@ $s_check_report_more_bugs = '报告更多的问题';
 
 # report_bug_page.php
 $s_advanced_report_link = '高级报告';
-$s_report_stay = '延后报告';
+$s_report_stay = '继续报告';
 
 # set_project.php
 $s_selected_project = '选择项目';
@@ -1117,10 +1117,10 @@ $s_users_monitoring_bug = '正在监视这个问题的用户';
 $s_monitoring_user_list = '用户列表';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = '没有和该问题相关联的用户。';
-$s_users_sponsoring_bug = '和该问题相关联的用户';
-$s_sponsors_list = '关联列表';
-$s_total_sponsorship_amount = '合计 Sponsorship = %s';
+$s_no_users_sponsoring_bug = '没有捐赠该问题的用户。';
+$s_users_sponsoring_bug = '捐赠该问题的用户';
+$s_sponsors_list = '捐赠列表';
+$s_total_sponsorship_amount = '合计捐赠数量 = %s';
 
 # custom field strings
 $s_add_custom_field_button = '新建自定义字段';
@@ -1178,12 +1178,12 @@ $s_attachment_alt = 'A';
 $s_phpmailer_language = '中文';
 
 # Sponsorship Strings
-$s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = '已添加 Sponsorship';
-$s_sponsorship_updated = '已修改 Sponsorship';
-$s_sponsorship_deleted = '已删除 Sponsorship';
-$s_sponsorship_paid = 'Sponsorship Paid';
-$s_sponsorship_more_info = '关于 Sponsorship 的更多信息';
+$s_sponsors = '%d 项捐赠';
+$s_sponsorship_added = '已添加捐赠';
+$s_sponsorship_updated = '已修改捐赠';
+$s_sponsorship_deleted = '已删除捐赠';
+$s_sponsorship_paid = '已支付的捐赠';
+$s_sponsorship_more_info = '关于捐赠的更多信息';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1254,9 +1254,9 @@ $s_manage_news = '管理新闻';
 $s_view_list_of_attachments = '查看附件列表';
 $s_download_attachments = '下载附件';
 $s_delete_attachments = '删除附件';
-$s_delete_attachment_button = "Delete";
+$s_delete_attachment_button = "删除";
 $s_delete_attachment_sure_msg = '你确定要删除该附件吗？';
-$s_upload_issue_attachments = 'Upload issue attachments';
+$s_upload_issue_attachments = '上传问题相关附件';
 $s_filters = '过滤器';
 $s_save_filters = '保存过滤器';
 $s_save_filters_as_shared = '保存为共享过滤器';
@@ -1270,12 +1270,12 @@ $s_project_documents = '项目文档';
 $s_view_project_documents = '查看项目文档';
 $s_upload_project_documents = '上传项目文档';
 $s_link_custom_fields_to_projects = '将自定义字段连接到该项目';
-$s_sponsorships = '关联';
-$s_view_sponsorship_details = '查看关联详细信息';
-$s_view_sponsorship_total = '查看所有关联';
-$s_sponsor_issue = '关联问题';
-$s_assign_sponsored_issue = '分派关联问题';
-$s_handle_sponsored_issue = '管理关联问题';
+$s_sponsorships = '捐赠';
+$s_view_sponsorship_details = '查看捐赠详细信息';
+$s_view_sponsorship_total = '查看所有捐赠';
+$s_sponsor_issue = '捐赠问题';
+$s_assign_sponsored_issue = '分派有捐赠的问题';
+$s_handle_sponsored_issue = '管理有捐赠的问题';
 $s_others = '其他';
 $s_see_email_addresses_of_other_users = '查看其它用户的Email地址';
 $s_send_reminders = '发送提醒';
@@ -1284,7 +1284,7 @@ $s_notify_of_new_user_created = '创建新用户时提醒';
 $s_email_notification = 'EMAIL 提醒';
 $s_status_changed_to = '状态已修改为';
 $s_email_on_deleted = '删除时发送 Email';
-$s_email_on_sponsorship_changed = '关联改变时发送 Email';
+$s_email_on_sponsorship_changed = '捐赠改变时发送 Email';
 $s_email_on_relationship_changed = '关联改变时发送 Email';
 
 # DHTML filters
