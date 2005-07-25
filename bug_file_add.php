@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.47 2005-04-05 17:06:48 thraxisp Exp $
+	# $Id: bug_file_add.php,v 1.48 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,13 @@
 	}
 
 	access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
+
+	$t_bug = bug_get( $f_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
 
     $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
 	file_add( $f_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug', $f_file_error );

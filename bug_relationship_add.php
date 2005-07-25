@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_add.php,v 1.5 2005-06-28 11:04:04 vboctor Exp $
+	# $Id: bug_relationship_add.php,v 1.6 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -42,6 +42,13 @@
 	if ( !access_has_bug_level( VIEWER, $f_dest_bug_id ) ) {
 		error_parameters( $f_dest_bug_id );
 		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+	}
+
+	$t_bug = bug_get( $f_src_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
 	}
 
 	# check if there is other relationship between the bugs...

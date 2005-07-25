@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_graph.php,v 1.3 2005-04-22 21:34:03 prichards Exp $
+	# $Id: bug_relationship_graph.php,v 1.4 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -49,6 +49,12 @@
 	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
+
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
 
 	compress_enable();
 

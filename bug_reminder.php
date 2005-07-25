@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.18 2005-02-12 20:01:04 jlatour Exp $
+	# $Id: bug_reminder.php,v 1.19 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,6 +32,13 @@
 	}
 
 	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
+
+	$t_bug = bug_get( $f_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
 
 	# Automically add recipients to monitor list if they are above the monitor
 	# threshold, option is enabled, and not reporter or handler.

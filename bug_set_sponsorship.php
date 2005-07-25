@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_set_sponsorship.php,v 1.4 2005-07-25 11:55:36 thraxisp Exp $
+	# $Id: bug_set_sponsorship.php,v 1.5 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,6 +27,13 @@
 
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_amount	= gpc_get_int( 'amount' );
+
+	$t_bug = bug_get( $f_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
 
 	access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
 

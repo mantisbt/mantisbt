@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.9 2005-06-28 11:04:05 vboctor Exp $
+	# $Id: bug_relationship_delete.php,v 1.10 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -34,6 +34,13 @@
 	if ( bug_is_readonly( $f_bug_id ) ) {
 		error_parameters( $f_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
+
+	$t_bug = bug_get( $f_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
 	}
 
 	# retrieve the destination bug of the relationship

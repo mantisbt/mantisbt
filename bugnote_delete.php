@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.38 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: bugnote_delete.php,v 1.39 2005-07-25 16:34:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,6 +24,15 @@
 ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
+	
+	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
+
+	$t_bug = bug_get( $t_bug_id, true );
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
 
 	# Check if the current user is allowed to delete the bugnote
 	$t_user_id = auth_get_current_user_id();
@@ -35,8 +44,6 @@
 
 	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
 							 lang_get( 'delete_bugnote_button' ) );
-
-	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
 	bugnote_delete( $f_bugnote_id );
 
