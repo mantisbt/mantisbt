@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.47 2005-07-21 12:15:26 thraxisp Exp $
+	# $Id: core.php,v 1.48 2005-07-25 22:55:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -40,11 +40,25 @@
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
+
+	$t_config_inc_found = false;
+
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
 	# config_inc may not be present if this is a new install
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
-	} else {
+		$t_config_inc_found = true;
+	}
+
+	# Allow an environment variable (defined in an Apache vhost for example)
+	#  to specify a config file to load to override other local settings
+	$t_local_config = getenv( 'MANTIS_CONFIG' );
+	if ( $t_local_config && file_exists( $t_local_config ) ){
+		require_once( $t_local_config );
+		$t_config_inc_found = true;
+	}
+
+	if ( false === $t_config_inc_found ) {
 		# if not found, redirect to the admin page to install the system
 		# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
 		if ( ! ( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'admin' ) ) ) ) {
@@ -58,15 +72,9 @@
 			} else {
 				header( "Location: admin/install.php" );
 			}
-		exit; # additional output can cause problems so let's just stop output here
-		}
-	}
 
-	# Allow an environment variable (defined in an Apache vhost for example)
-	#  to specify a config file to load to override other local settings
-	$t_local_config = getenv( 'MANTIS_CONFIG' );
-	if( $t_local_config && file_exists( $t_local_config ) ){
-		require_once( $t_local_config );
+			exit; # additional output can cause problems so let's just stop output here
+		}
 	}
 
 
@@ -138,10 +146,10 @@
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'helper_api.php' );
 	require_once( $t_core_path.'user_api.php' );
-	
+
 	# push push default language to speed calls to lang_get
 	lang_push( lang_get_default() );
-	
+
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
 	}
