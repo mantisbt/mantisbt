@@ -9,13 +9,13 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
-	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/07/21
+	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/07/25
 	# -------------------------------------------------
-	# $Revision: 1.92 $
+	# $Revision: 1.93 $
 	# $Author: bigbadger $
-	# $Date: 2005-07-22 04:59:32 $
+	# $Date: 2005-07-25 11:15:57 $
 	#
-	# $Id: strings_polish.txt,v 1.92 2005-07-22 04:59:32 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.93 2005-07-25 11:15:57 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -257,7 +257,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Podane dane nie pasuj± d
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Adres potwierdzaj±cy jest nieprawid³owy lub zosta³ ju¿ u¿yty. Proszê zapisaæ siê ponownie.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Osi±gniêto maksymaln± liczbê oczekuj±cych ¿±dañ. Proszê skonaktowaæ siê z administratorem.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ta operacja spowodowa³aby pêtlê w hierarchii podprojektów.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Nie mo¿esz zmieniæ poziomu dostêpu dla jedynego ADMINISTRATORA systemu.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';
@@ -440,16 +440,16 @@ $s_submit_button = 'Wy¶lij';
 $s_profile_updated_msg = 'Profil zosta³ zaktualizowany...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'Moj sponsoring';
+$s_my_sponsorship = 'Mój sponsoring';
 $s_update_sponsorship_button = 'Zmiñ status p³atno¶ci';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_no_sponsored = 'Nie znaleziono sponosorowanych Zagadnieñ przypisanych do Ciebie.';
 $s_own_sponsored = 'Zagadnienia, które sponsorowa³e¶:';
 $s_issues_handled = 'Zagadnienia sponsorowane, które s± przypisane do Ciebie:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_no_own_sponsored = 'Nie sponsorowa³e¶ ¿adnych zagadnieñ.';
 $s_sponsor = 'Sponsor';
 $s_amount = 'Kwota';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
+$s_total_owing = '£±cznie zaleg³ych';
+$s_total_paid = '£±cznie op³aconych';
 $s_sponsor_hide = 'Ukryj rozwi±zane i op³acone';
 $s_sponsor_show = 'Poka¿ wszystkie';
 
@@ -678,7 +678,7 @@ $s_edit_user_link = 'Edytuj dane';
 # manage_config_email_page
 $s_config_all_projects = 'Uwaga: Ta konfiguracja dotyczy WSZYSTKICH PROJEKTÓW.';
 $s_config_project = 'Uwaga: Ta konfiguracja dotyczy tylko projektu %s.';
-$s_colour_coding = 'In the table below, the following color code applies:';
+$s_colour_coding = 'W tabeli oznaczono poni¿szymi kolorami, które ustawienia bêd± stosowane:';
 $s_colour_project = 'Ustawienia dla projektu zastêpuj± pozosta³e.';
 $s_colour_global = 'Wszystkie ustawienia projektu zastêpuj± domy¶ln± konfiguracjê.';
 $s_issue_reporter = 'U¿ytkownik który zg³osi³ zagadnienie';
@@ -716,7 +716,7 @@ $s_workflow_change_access = 'Kto mo¿e modyfikowaæ przep³yw pracy';
 $s_access_change_access = 'Kto mo¿e modyfikowaæ poziomy dostêpu do statusów';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'Domy¶lna warto¶æ \'%s\' nie jest zaznaczona w¶ród nastêpnych statusów dla statusu \'%s\'. To ustawienie zostanie zignorowanie.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Przypisz zagadnienie';
@@ -734,8 +734,8 @@ $s_reopen_status = 'Status na który jest ustawiane ponownie otwarte zagadnienie'
 $s_reopen_resolution = 'Rozwi±zanie na które jest ustawiane ponownie otwarte zagadnienie';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
+$s_config_delete_sure = 'Jeste¶ pewien, ¿e chcesz usun±æ ustawienia dla';
+$s_in_project = 'w projekcie';
 $s_delete_config_button = 'Usuñ ustawienia';
 
 # manage_proj_add.php
@@ -815,7 +815,7 @@ $s_delete_version_button = 'Usuñ wersjê';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Edycja wersji projektu';
 $s_update_version_button = 'Aktualizuj wersjê';
-$s_released = 'Released';
+$s_released = 'Opublikowana';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Wersja zosta³a pomy¶lnie zaktualizowana...';
@@ -1170,6 +1170,7 @@ $s_sponsorship_updated = 'Sponsoring zaktualizowany';
 $s_sponsorship_deleted = 'Sponsoring usuniêty';
 $s_sponsorship_paid = 'Sponsoring op³acony';
 $s_sponsorship_more_info = 'Wiêcej informacji o sponsorowaniu';
+$s_sponsorship_total = '£±czna kwota';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1192,7 +1193,7 @@ $s_no_relationship = "brak powi±zañ";
 $s_relationship_replaced = "Powi±zanie zast±pione";
 $s_replace_relationship_button = "Zast±p";
 $s_replace_relationship_sure_msg = "Istnieje ju¿ powi±zanie miêdzy tymi zagadnieniami. Czy na pewno chcesz je zast±piæ?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_relationship_with_parent = "Powi±zanie z zagadnieniem ¼ród³owym";
 $s_delete_relationship_button = "Usuñ";
 $s_delete_relationship_sure_msg = "Czy na pewno chcesz usun±æ te powi±zanie?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nie wszyskie zagadnienia blokuj±ce s± rozwi±zane lub zamkniête.";
