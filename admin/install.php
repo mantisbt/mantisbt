@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.14 2005-07-21 15:18:28 thraxisp Exp $
+	# $Id: install.php,v 1.15 2005-07-25 22:42:39 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -199,6 +199,8 @@ if ( 2 == $t_install_state ) {
 					$t_support = function_exists('pg_connect');
 					break;
 				case 'mssql':
+				case 'odbc_mssql':
+				case 'ado_mssql':
 					$t_support = function_exists('mssql_connect');
 					break;
 				default:
