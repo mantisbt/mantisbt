@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.264 $
+	# $Revision: 1.265 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-23 12:01:48 $
+	# $Date: 2005-07-25 11:55:36 $
 	#
-	# $Id: strings_english.txt,v 1.264 2005-07-23 12:01:48 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.265 2005-07-25 11:55:36 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -534,6 +534,9 @@ $s_reminder = 'Reminder';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Issue has been successfully updated...';

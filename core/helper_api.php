@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.61 2005-07-14 21:30:29 thraxisp Exp $
+	# $Id: helper_api.php,v 1.62 2005-07-25 11:55:36 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -238,7 +238,6 @@
 			return true;
 		}
 
-		global $PHP_SELF;
 		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_POST, $_GET;
 		}
@@ -254,7 +253,7 @@
 		print_hr();
 		PRINT "\n$p_message\n";
 
-		PRINT '<form method="post" action="' . $PHP_SELF . "\">\n";
+		PRINT '<form method="post" action="' . $_SERVER[ 'PHP_SELF' ] . "\">\n";
 
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );

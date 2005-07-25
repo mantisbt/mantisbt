@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_set_sponsorship.php,v 1.3 2005-05-01 16:20:22 thraxisp Exp $
+	# $Id: bug_set_sponsorship.php,v 1.4 2005-07-25 11:55:36 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,6 +30,10 @@
 
 	access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
 
+	helper_ensure_confirmed( 
+		sprintf( lang_get( 'confirm_sponsorship' ), $f_bug_id, sponsorship_format_amount( $f_amount ) ),
+		lang_get( 'sponsor_issue' ) );
+			
 	if ( $f_amount == 0 ) {
 		# if amount == 0, delete sponsorship by current user (if any)
 		$t_sponsorship_id = sponsorship_get_id( $f_bug_id );
@@ -51,6 +55,5 @@
 		}
 	}
 
-	$t_referrer = $_SERVER['HTTP_REFERER'];
-	print_header_redirect( $t_referrer );
+	print_header_redirect_view( $f_bug_id );
 ?>
