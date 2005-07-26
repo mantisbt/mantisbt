@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.86 2005-06-06 13:45:27 thraxisp Exp $
+	# $Id: bug_update.php,v 1.87 2005-07-26 11:04:42 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,13 @@
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 	$f_new_status	= gpc_get_int( 'status', bug_get_field( $f_bug_id, 'status' ) );
 
+	$t_bug_data = bug_get( $f_bug_id, true );
+	if( $t_bug_data->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+	}
+
 	if ( ! (
 				( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( access_has_bug_level( config_get( 'update_bug_threshold' ) , $f_bug_id ) ) ||
@@ -37,7 +44,6 @@
 	}
 
 	# extract current extended information
-	$t_bug_data = bug_get( $f_bug_id, true );
 	$t_old_bug_status = $t_bug_data->status;
 
 	$t_bug_data->reporter_id		= gpc_get_int( 'reporter_id', $t_bug_data->reporter_id );
