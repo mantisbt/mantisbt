@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.33 2005-07-17 17:05:28 thraxisp Exp $
+	# $Id: config_api.php,v 1.34 2005-07-27 16:15:06 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -73,7 +73,9 @@
 				if ( ! in_array( ALL_PROJECTS, $t_projects ) ) {
 					$t_projects[] = ALL_PROJECTS;
 				}
-
+				# @@ debug @@ echo 'pr= '; var_dump($t_projects);
+				# @@ debug @@ echo 'u= '; var_dump($t_users);
+				
 				if ( ! $g_cache_filled ) {
 					
 					$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
@@ -157,7 +159,7 @@
 		}
 		
 		# prepare the user's list
-		$t_users = array( ALL_USERS );
+		$t_users = array( );
 		if ( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 			$t_users[] = auth_get_current_user_id();
 		} else if ( ! in_array( $p_user, $t_users ) ) {
@@ -166,7 +168,7 @@
 		$t_users[] = ALL_USERS;
 
 		# prepare the projects list
-		$t_projects = array( ALL_PROJECTS );
+		$t_projects = array( );
 		if ( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 			$t_selected_project = helper_get_current_project();
 			if ( ALL_PROJECTS <> $t_selected_project ) {
@@ -175,6 +177,8 @@
 		} else if ( ! in_array( $p_project, $t_projects ) ) {
 			$t_projects[] = $p_project;
 		}
+		# @@ debug @@ echo 'pr= '; var_dump($t_projects);
+		# @@ debug @@ echo 'u= '; var_dump($t_users);
 				
 		$t_found = false;
 		if ( isset( $g_cache_config[$p_option] ) ) {
@@ -185,6 +189,7 @@
     				if ( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
     					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
     					$t_found = true;
+    					# @@ debug @@ echo "clua found u=$t_user, p=$t_project, a=$t_access ";
     				}
     			}
     		}
