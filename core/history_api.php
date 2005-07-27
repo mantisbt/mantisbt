@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.32 2005-07-03 15:09:11 thraxisp Exp $
+	# $Id: history_api.php,v 1.33 2005-07-27 19:01:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -247,6 +247,9 @@
 				break;
 			case 'duplicate_id':
 				$t_field_localized = lang_get( 'duplicate_id' );
+				break;
+			case 'sponsorship_total':
+				$t_field_localized = lang_get( 'sponsorship_total' );
 				break;
 		}
 
