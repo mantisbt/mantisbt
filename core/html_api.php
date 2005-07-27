@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.180 2005-07-22 23:13:24 vboctor Exp $
+	# $Id: html_api.php,v 1.181 2005-07-27 17:42:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -633,7 +633,7 @@
 		if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
 		}
-		if ( access_has_project_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+		if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
 		}
 		if ( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {

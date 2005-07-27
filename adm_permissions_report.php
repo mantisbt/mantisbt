@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.10 2005-04-22 22:27:50 prichards Exp $
+	# $Id: adm_permissions_report.php,v 1.11 2005-07-27 17:42:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -15,7 +15,7 @@
 
 	require_once( 'core.php' );
 
-	access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
+	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
 
 	$t_core_path = config_get( 'core_path' );
 
