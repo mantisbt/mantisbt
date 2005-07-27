@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.70 2005-06-27 14:07:41 vboctor Exp $
+	# $Id: file_api.php,v 1.71 2005-07-27 19:07:58 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -676,7 +676,7 @@
 	# --------------------
 	# checks whether the specified upload path exists and is writable
 	function file_ensure_valid_upload_path( $p_upload_path ) {
-		if ( is_blank( $p_upload_path ) || !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) ) {
+		if ( is_blank( $p_upload_path ) || !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
 			trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
 		}
 	}
