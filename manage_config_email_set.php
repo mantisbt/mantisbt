@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.6 2005-05-15 12:26:06 marcelloscata Exp $
+	# $Id: manage_config_email_set.php,v 1.7 2005-07-28 16:20:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -15,7 +15,7 @@
 	require_once( $t_core_path.'email_api.php' );
 
 	$t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
-	access_ensure_global_level( $t_can_change_level );
+	access_ensure_project_level( $t_can_change_level );
 
 	$t_redirect_url = 'manage_config_email_page.php';
 	$t_project = helper_get_current_project();

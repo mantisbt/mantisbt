@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.13 2005-07-16 01:46:03 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.14 2005-07-28 16:20:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -400,10 +400,10 @@
 	access_row( );
 	section_end();
 
-	if ( $t_access <= config_get_access( 'set_status_threshold' ) ) {
+	if ( $t_access >= config_get_access( 'set_status_threshold' ) ) {
 		echo '<p>' . lang_get( 'access_change_access' ) . ':';
 		echo '<select name="status_access">';
-		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
+		print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
 		echo '</select> </p><br />';
 	}
 

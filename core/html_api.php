@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.181 2005-07-27 17:42:37 thraxisp Exp $
+	# $Id: html_api.php,v 1.182 2005-07-28 16:20:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -627,7 +627,7 @@
 		}
 
 		PRINT '<br /><div align="center">';
-		if ( access_has_project_level( ADMINISTRATOR ) ) {
+		if ( access_has_global_level( ADMINISTRATOR ) ) {
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 		}
 		if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
