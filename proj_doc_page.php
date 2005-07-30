@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.47 2005-06-03 18:06:38 thraxisp Exp $
+	# $Id: proj_doc_page.php,v 1.48 2005-07-30 19:32:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -52,11 +52,12 @@
 	}			
 
 	$query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
-				FROM $t_project_file_table pft, $t_user_table ut
+				FROM $t_project_file_table pft
 					LEFT JOIN $t_project_table pt on pft.project_id = pt.id
 					LEFT JOIN $t_project_user_list_table as pult 
 						on pft.project_id = pult.project_id and pult.user_id = $t_user_id
-				WHERE ut.id = $t_user_id AND pft.project_id in (" . implode( ',', $t_projects ) . ") AND 
+					JOIN $t_user_table ut ON ut.id = $t_user_id
+				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND 
 					( pt.view_state = $t_pub OR pt.view_state is null OR
 						( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
 						( pult.user_id is null and ut.access_level $t_access_clause ) )
