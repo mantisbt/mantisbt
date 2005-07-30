@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.15 2005-07-25 22:42:39 prichards Exp $
+	# $Id: install.php,v 1.16 2005-07-30 18:10:40 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -57,7 +57,7 @@
 	# --------
 	# create an SQLArray to insert data
 	function InsertData( $p_table, $p_data ) {
-		$query = "INSERT INTO " . $p_table . " VALUES " . $p_data;
+		$query = "INSERT INTO " . $p_table . $p_data;
 		return Array( $query );
 	}
 

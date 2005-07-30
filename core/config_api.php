@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.34 2005-07-27 16:15:06 thraxisp Exp $
+	# $Id: config_api.php,v 1.35 2005-07-30 18:10:40 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -266,13 +266,13 @@
 		$c_access = db_prepare_int( $p_access );
 
 		$t_config_table = config_get_global( 'mantis_config_table' );
-		$query = "SELECT * from $t_config_table
+		$query = "SELECT COUNT(*) from $t_config_table
 			WHERE config_id = '$c_option' AND
 				project_id = $c_project AND
 				user_id = $c_user";
 		$result = db_query( $query );
 
-		if ( 0 < db_num_rows( $result ) ) {
+		if ( 0 < db_result( $result ) ) {
 			$t_set_query = "UPDATE $t_config_table
 				SET value='$c_value', type=$t_type, access_reqd=$c_access
 				WHERE config_id = '$c_option' AND
