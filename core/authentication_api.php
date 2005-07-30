@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.51 2005-07-11 23:49:13 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.52 2005-07-30 19:33:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -373,7 +373,7 @@
 					if ( $g_cache_anonymous_user_cookie_string == null ) {
                         if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
                             # get anonymous information if database is available
-						    $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
+						    $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = \'%s\'',
 								config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
                             $result = db_query( $query );
 
