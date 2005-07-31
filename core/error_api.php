@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.46 2005-05-01 16:20:24 thraxisp Exp $
+	# $Id: error_api.php,v 1.47 2005-07-31 16:23:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -162,7 +162,7 @@
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php PRINT htmlentities( $p_file ) ?></td>
+					<td>Full path: <?php PRINT string_html_entities( $p_file ) ?></td>
 				</tr>
 				<tr>
 					<td>Line: <?php PRINT $p_line ?></td>
@@ -185,7 +185,7 @@
 		# print normal variables
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( !is_array( $t_val ) && !is_object( $t_val ) ) {
-				$t_val = htmlentities( (string)$t_val );
+				$t_val = string_html_entities( (string)$t_val );
 				$t_type = gettype( $t_val );
 
 				# Mask Passwords
@@ -225,7 +225,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
+				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['params'] ) ) {
@@ -234,7 +234,7 @@
 					}
 				}
 
-				PRINT '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . string_html_entities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
 			PRINT '</table></center>';
 		} else if ( php_version_at_least( '4.3' ) ) {
@@ -248,7 +248,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
+				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
@@ -257,7 +257,7 @@
 					}
 				}
 
-				PRINT '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . string_html_entities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
 
 			PRINT '</table></center>';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.119 2005-07-19 13:42:46 vboctor Exp $
+	# $Id: filter_api.php,v 1.120 2005-07-31 16:23:29 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2848,7 +2848,7 @@
 				}
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
 					if ( ( strtolower( $t_item ) != META_FILTER_ANY ) && ( strtolower( $t_item ) != META_FILTER_NONE ) ) {
-						echo '<option value="' .  htmlentities( $t_item )  . '" ';
+						echo '<option value="' .  string_html_entities( $t_item )  . '" ';
 						if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
 							check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
 						}
