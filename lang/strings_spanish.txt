@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.89 $
-	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:51 $
+	# $Revision: 1.90 $
+	# $Author: vboctor $
+	# $Date: 2005-07-31 02:26:56 $
 	#
-	# $Id: strings_spanish.txt,v 1.89 2005-07-20 14:17:51 thraxisp Exp $
+	# $Id: strings_spanish.txt,v 1.90 2005-07-31 02:26:56 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,14 +33,14 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Cambiar Prioridad';
 $s_actiongroup_menu_update_status = 'Cambiar Estado';
 $s_actiongroup_menu_update_view_status = 'Actualizar vista de estado';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
-$s_actiongroup_bugs = 'Bugs seleccionados';
+$s_actiongroup_menu_update_category = 'Actualizar categoria';
+$s_actiongroup_menu_set_sticky = 'Marcar/desmarcar';
+$s_actiongroup_menu_update_field = 'Actualizar %s';
+$s_actiongroup_bugs = 'Incidencias seleccionadas';
 
 # new strings:
 $s_all_projects = 'Todos los Proyectos';
-$s_move_bugs = 'Mover Bugs';
+$s_move_bugs = 'Mover Incidencia';
 $s_operation_successful = 'Operación exitosa.';
 $s_date_order = 'Fecha';
 $s_print_all_bug_page_link = 'Imprimir Informes';
@@ -51,17 +51,17 @@ $s_jump_to_bugnotes = 'Saltar a Notas';
 $s_public_project_msg = 'Este proyecto es PÚBLICO.  Todos los usuarios tienen acceso a este proyecto.';
 $s_private_project_msg = 'Este proyecto es PRIVADO. Solo los administradores y usuarios agregados manualmente tienen acceso.';
 $s_access_level_project = 'Nivel de Acceso de Proyecto';
-$s_view_submitted_bug_link = 'Ver Bug Enviado';
+$s_view_submitted_bug_link = 'Ver Incidencia Enviada';
 $s_assigned_projects = 'Proyectos Asignados';
 $s_unassigned_projects = 'Proyectos No Asignados';
 $s_print = 'Imprimir';
-$s_jump = 'Saltar a Bug';
+$s_jump = 'Saltar a Incidencia';
 $s_copy_users = 'Copiar Usuarios';
 $s_copy_categories_from = 'Copiar Categorías Desde';
 $s_copy_categories_to = 'Copiar Categorías Hacia';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'Historial del Bug';
+$s_bug_history = 'Historial de la Incidencia';
 $s_field = 'Campo';
 $s_old_value = 'Valor Anterior';
 $s_new_value = 'Nuevo Valor';
@@ -69,7 +69,7 @@ $s_date_modified = 'Fecha de Modificación';
 $s_bugnote = 'Nota';
 $s_change = 'Cambio';
 $s_bugnote_view_state = 'Ver Estado de la Nota';
-$s_bug_monitor = 'Bug Monitorizado';
+$s_bug_monitor = 'Incidencia Monitorizada';
 $s_bug_end_monitor = 'Terminar monitor';
 $s_announcement = 'Anuncio';
 $s_stays_on_top = 'Siempre Arriba';
@@ -85,7 +85,7 @@ $s_related_to = 'relacionado con %id';
 $s_dependant_on = 'depende de %id';
 $s_blocks = 'bloquea %id';
 
-$s_new_bug = 'Nuevo bug';
+$s_new_bug = 'Nueva Incidencia';
 $s_bugnote_added = 'Nota Añadida';
 $s_bugnote_edited = 'Nota Editada';
 $s_bugnote_deleted = 'Nota Eliminada';
@@ -95,42 +95,42 @@ $s_additional_information_updated = 'Información Adicional Actualizada';
 $s_steps_to_reproduce_updated = 'Pasos para reproducirlo actualizados';
 $s_file_added = 'Fichero Añadido';
 $s_file_deleted = 'Fichero Borrado';
-$s_bug_deleted = 'Bug eliminado';
+$s_bug_deleted = 'Incidencia eliminada';
 
 $s_make_private = 'Hacerlo Privado';
 $s_make_public = 'Hacerlo Público';
 
 $s_create_new_project_link = 'Crear Nuevo Proyecto';
 
-$s_login_link = 'Login';
+$s_login_link = 'Registrarse';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'No tiene los permisos necesarios para realizar esta acción en los siguientes bugs: ';
 $s_bug_actiongroup_access = 'No tiene los permisos necesarios para realizar esta acción.';
-$s_bug_actiongroup_status = 'Este bug no se puede cambiar al estado solicitado';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = '¿Seguro que desea cerrar estos bugs?';
-$s_delete_bugs_conf_msg = '¿Seguro que desea eliminar estos bugs?';
-$s_move_bugs_conf_msg = 'Mover bugs a';
-$s_copy_bugs_conf_msg = 'Copiar bugs a';
-$s_assign_bugs_conf_msg = 'Asignar bugs a';
-$s_resolve_bugs_conf_msg = 'Cambiar resolucion bug';
-$s_priority_bugs_conf_msg = 'Cambiar resolucion bug';
-$s_status_bugs_conf_msg = 'Cambiar estado bug';
-$s_view_status_bugs_conf_msg = 'Escoger vista de estado de bugs';
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Cerrar Bugs';
-$s_delete_group_bugs_button = 'Eliminar Bugs';
-$s_move_group_bugs_button = 'Mover Bugs';
-$s_copy_group_bugs_button = 'Copiar Bugs' ;
-$s_assign_group_bugs_button = 'Asignar Bugs';
+$s_bug_actiongroup_status = 'Esta incidencia  no se puede cambiar al estado solicitado';
+$s_bug_actiongroup_category = 'esta incidencia no se puede cambiar a la categoria solicitada';
+$s_close_bugs_conf_msg = '¿Seguro que desea cerrar estas incidencias?';
+$s_delete_bugs_conf_msg = '¿Seguro que desea eliminar estas incidencias?';
+$s_move_bugs_conf_msg = 'Mover incidencia a';
+$s_copy_bugs_conf_msg = 'Copiar incidencia a';
+$s_assign_bugs_conf_msg = 'Asignar incidencia a';
+$s_resolve_bugs_conf_msg = 'Cambiar resolucion incidencia';
+$s_priority_bugs_conf_msg = 'Cambiar resolucion incidencia';
+$s_status_bugs_conf_msg = 'Cambiar estado incidencia';
+$s_view_status_bugs_conf_msg = 'Escoger vista de estado de incidencia';
+$s_category_bugs_conf_msg = 'Elegir categoría';
+$s_set_sticky_bugs_conf_msg = '¿Estas seguro que deseas poner/quitar estas incidencias dificiles?';
+$s_close_group_bugs_button = 'Cerrar Incidencia';
+$s_delete_group_bugs_button = 'Eliminar Incidencia';
+$s_move_group_bugs_button = 'Mover Incidencia';
+$s_copy_group_bugs_button = 'Copiar Incidencia' ;
+$s_assign_group_bugs_button = 'Asignar Incidencia';
 $s_resolve_group_bugs_button = 'Resolver Bugs';
 $s_priority_group_bugs_button = 'Actualizar Prioridad';
 $s_status_group_bugs_button = 'Actualizar Estado';
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Actualizar categoria';
 $s_view_status_group_bugs_button = 'Actualizar vista de estado';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Marcado/Desmarcado';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráficos por estado';
@@ -152,15 +152,15 @@ $s_priority_link = 'Por prioridad';
 $s_severity_link = 'Por gravedad';
 $s_category_link = 'Por categoría';
 $s_resolution_link = 'Por resolución';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
+$s_legend_still_open = 'todavia abierta';
+$s_legend_resolved = 'Resuelta';
+$s_legend_assigned = 'Asignada';
 $s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_legend_opened = 'Abierta';
+$s_legend_closed = 'Cerrada';
+$s_legend_reported = 'Reportada';
+$s_cumulative = 'cumulativa';
+$s_not_enough_data = 'No hay suficiente información para crear un gráfico';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Mostrar sólo seleccionados';
@@ -198,7 +198,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Nota no encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Proyecto no encontrado';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de datos no encontrado.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Imposible conectar con el servidor de FTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'La incidencia manejada no tiene el acceso debido para manejar incidencias en este estado ';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ya existe un proyecto con ese nombre. Por favor, regrese y seleccione un nombre diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nombre de proyecto no válido. Los nombres de proyecto no pueden estar en blanco.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Usuario no encontrado.';
@@ -208,17 +208,16 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'No se ha encontrado la noticia.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'La contraseña no ha superado la verificación.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Se esperaba un array y se ha recibido una cadena.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena y se ha recibido un array.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'No se encuentra el bug %d.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s esta esperando un nº';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'No se encuentra la incidencia %d.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Email incorrecto.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Tipo de archivo no permitido para subidas.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Este archivo está duplicado.  Por favor, elimine antes el archivo original.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ruta de subida no válida.  El directorio no existe o el servidor web no puede escribir en él.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'No se puede establecer un bug como duplicado de si mismo.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'El archivo no se ha cargado. Por favor, vuelve atrás y cambia el fichero presionando primero cargar';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'El archivo cargado no se puede mover al directorio de almacenamiento. Uno de los directorios no existe o no se puede escribir en el';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'No se puede establecer una incidencia como duplicada de si misma.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado no encontrado';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ese nombre está duplicado.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al menos un proyecto tiene ese campo en uso.';
@@ -246,10 +245,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'El propietario 
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acceso denegado: se necesita mayor permiso para administrar items patrocinados.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'El patrocinador no ha proporcionado una dirección de mail válida. Por favor actualice su perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'La opción de configuración \'%s\' tiene un valor \'%s\' no válido.';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'La acción no se puede efectuar puesto que el bug \'%d\' es de sólo lectura';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'La acción no se puede efectuar puesto que la incidencia \'%d\' es de sólo lectura';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: Ya hay una relación entre esos dos elementos.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relación no encontrada.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acceso denegado: El bug %d requiere un nivel de acceso mayor.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acceso denegado: La incidencia  %d requiere un nivel de acceso mayor.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Un bug no puede relacionarse consigo mismo.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'La cadena de confirmación no coincide. Por favor, vuelva a intentarlo.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'La opción \'lost your password\' no está disponible.';
@@ -257,8 +256,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Debe proporcionar una d
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'La información proporcionada no coincide con ninguna cuenta activa';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'La URL de confirmación es inválida o está en uso. Por favor vuelva a intentar acceder.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Número máximo de peticiones alcanzado. Por favor contacte con el administrador del sistema';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación puede crear un bucle en el subproyecto jerarquia';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No se puede cambiar el nivel de acceso del administrador en el sistema';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña introducidos son incorrectos.';
@@ -275,9 +274,9 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrador';
 $s_myself = "Mí";
-$s_default_access_level = 'Default access level';
+$s_default_access_level = 'Acceso por defecto al nivel';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Incidencia en estado de porcentaje';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:espectador,25:informador,40:actualizador,55:desarrollador,70:manager,90:administrador';
@@ -289,7 +288,7 @@ $s_priority_enum_string           = '10:ninguna,20:baja,30:normal,40:alta,50:urg
 $s_severity_enum_string           = '10:funcionalidad,20:trivial,30:texto,40:ajuste,50:menor,60:mayor,70:cuelgue,80:bloqueo';
 $s_reproducibility_enum_string    = '10:siempre,30:a veces,50:aleatorio,70:no se ha intentado,90:no es posible duplicar,100:no se sabe';
 $s_status_enum_string             = '10:nuevo,20:se necesitan más datos,30:aceptado,40:confirmado,50:asignado,80:resuelto,90:cerrado';
-$s_resolution_enum_string         = '10:abierto,20:arreglado,30:reabierto,40:no se pudo duplicar,50:no es corregible,60:duplicado,70:no es un bug,80:suspendido,90:no se arreglará';
+$s_resolution_enum_string         = '10:abierto,20:arreglado,30:reabierto,40:no se pudo duplicar,50:no es corregible,60:duplicado,70:no es una incidencia,80:suspendido,90:no se arreglará';
 $s_projection_enum_string         = '10:ninguna,30:ajuste,50:cambio menor,70:cambio importante,90:rediseño';
 $s_eta_enum_string                = '10:ninguno,20:< 1 día,30:2-3 días,40:< 1 semana,50:< 1 mes,60:> 1 mes';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
@@ -308,36 +307,36 @@ $s_new_account_signup_msg = 'La siguiente cuenta ha sido creada:';
 $s_reset_request_msg = 'Alguien (supuestamente usted) ha solicitado el cambio de contraseña mediante la verificación por email. Si no fue usted, simplemente ignore este mensaje.' . "\n\n" . 'Si solicitó este cambio, visite esta URL para cambiar la contraseña:';
 $s_reset_request_in_progress_msg = 'Si ha proporcionado un nombre de usuario y contraseña correctos, recibirá un mensaje de confirmación en su email. Cuando reciba este mensaje, siga las instrucciones para cambiar la contraseña de su cuenta.';
 
-$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'El siguiente bug requiere su OPINIÓN.';
-$s_email_notification_title_for_status_bug_acknowledged = 'El siguiente bug ha sido NOTIFICADO.';
-$s_email_notification_title_for_status_bug_confirmed = 'El siguiente bug ha sido CONFIRMADO.';
-$s_email_notification_title_for_status_bug_assigned = 'El siguiente bug ha sido ASIGNADO.';
-$s_email_notification_title_for_status_bug_resolved = 'El siguiente bug ha sido RESUELTO.';
-$s_email_notification_title_for_status_bug_closed = 'El siguiente bug ha sido CERRADO';
+$s_email_notification_title_for_status_bug_new = 'La siguiete incidencia esta en estado NUEVA';
+$s_email_notification_title_for_status_bug_feedback = 'La siguiente incidencia requiere su OPINIÓN.';
+$s_email_notification_title_for_status_bug_acknowledged = 'La siguiente incidencia ha sido NOTIFICADA.';
+$s_email_notification_title_for_status_bug_confirmed = 'La siguiente incidencia ha sido CONFIRMADA.';
+$s_email_notification_title_for_status_bug_assigned = 'La siguiente incidencia ha sido ASIGNADA.';
+$s_email_notification_title_for_status_bug_resolved = 'La siguiente incidencia ha sido RESUELTA.';
+$s_email_notification_title_for_status_bug_closed = 'La siguiente incidencia ha sido CERRADA';
 
-$s_email_notification_title_for_action_bug_submitted = 'El siguiente bug ha sido ENVIADO.';
-$s_email_notification_title_for_action_bug_assigned = 'El siguiente bug ha sido ASIGNADO.';
-$s_email_notification_title_for_action_bug_reopened = 'El siguiente bug ha sido REABIERTO.';
-$s_email_notification_title_for_action_bug_deleted = 'El siguiente bug ha sido ELIMINADO.';
-$s_email_notification_title_for_action_bug_updated = 'El siguiente bug ha sido ACTUALIZADO.';
-$s_email_notification_title_for_action_sponsorship_added = 'El siguiente bug ha sido PATROCINADO.';
-$s_email_notification_title_for_action_sponsorship_updated = 'Se ha modificado un patrocinio del siguiente bug.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'Se ha retirado un patrocinio del siguiente bug.';
+$s_email_notification_title_for_action_bug_submitted = 'La siguiente incidencia ha sido ENVIADA.';
+$s_email_notification_title_for_action_bug_assigned = 'La siguiente incidencia ha sido ASIGNADA.';
+$s_email_notification_title_for_action_bug_reopened = 'La siguiente incidencia ha sido REABIERTA.';
+$s_email_notification_title_for_action_bug_deleted = 'La siguiente incidencia ha sido ELIMINADA.';
+$s_email_notification_title_for_action_bug_updated = 'La siguiente incidencia ha sido ACTUALIZADA.';
+$s_email_notification_title_for_action_sponsorship_added = 'La siguiente incidencia ha sido PATROCINADA.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Se ha modificado un patrocinio de la siguiente incidencia.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Se ha retirado un patrocinio de la siguiente incidencia.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Se ha añadido una NOTA a este bug.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Se ha añadido una NOTA a esta incidencia.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'La siguiente incidencia se ha marcado como DUPLICADO de %s';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = '%s ha sido marcada como DUPLICADO de la siguiente incidencia';
+$s_email_notification_title_for_action_related_to_relationship_added = 'La siguiente incidencia ha sido marcada como REFERENCIA de %s';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'La siguiente incidencia ha sido marcada como PARIENTE de %s';
+$s_email_notification_title_for_action_blocks_relationship_added = 'La siguiente incidencia ha sido marcada como HIJA de %s';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'La siguiente incidencia se ha desmarcada como DUPLICADO de %s';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '%s ha sido desmarcada como DUPLICADO de la siguiente incidencia';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'La siguiente incidencia ha sido desmarcada como REFERENCIA de %s';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'La siguiente incidencia ha sido desmarcada como PARIENTE de %s';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'La siguiente incidencia ha sido marcada como HIJA de %s';
+$s_email_notification_title_for_action_relationship_child_resolved = 'La incidencia %s ha sido RESUELTA';
+$s_email_notification_title_for_action_relationship_child_closed = 'La incidencia %s ha sido CERRADA';
 
 $s_email_reporter = 'Informador';
 $s_email_handler = 'Encargado';
@@ -372,7 +371,7 @@ $s_username = 'Usuario';
 $s_realname = 'Nombre real';
 $s_email = 'Email';
 $s_password = 'Contraseña';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = 'La contraseña es controlada por cualquier sistema, por lo tanto no puede editarse aqui';
 $s_confirm_password  = 'Confirmar contraseña';
 $s_access_level = 'Nivel de Acceso';
 $s_update_user_button = 'Actualizar Usuario';
@@ -391,13 +390,13 @@ $s_with_minimum_severity = 'Con gravedad mínima de';
 $s_bugnote_order = 'Orden para Notas';
 $s_bugnote_order_asc = 'Ascendente';
 $s_bugnote_order_desc = 'Descencente';
-$s_email_on_new = 'Enviar Email en bugs Nuevos';
-$s_email_on_assigned = 'Enviar Email en bugs Asignados';
-$s_email_on_feedback = 'Enviar Email en bugs que requieren Opinión';
-$s_email_on_resolved = 'Enviar Email en bugs Resueltos';
-$s_email_on_closed = 'Enviar Email en bugs Cerrados';
-$s_email_on_reopened = 'Enviar Email en bugs Reabiertos';
-$s_email_on_bugnote_added = 'Enviar Email en Notas agregadas al bug';
+$s_email_on_new = 'Enviar Email en Incidencias  Nuevas';
+$s_email_on_assigned = 'Enviar Email en Incidencias  Asignadas';
+$s_email_on_feedback = 'Enviar Email en Incidencias  que requieren Opinión';
+$s_email_on_resolved = 'Enviar Email en Incidencias Resueltas';
+$s_email_on_closed = 'Enviar Email en Incidencias Cerradas';
+$s_email_on_reopened = 'Enviar Email en Incidecnias Reabiertas';
+$s_email_on_bugnote_added = 'Enviar Email en Notas agregadas a la Incidencia';
 $s_email_on_status_change = 'Enviar Email en Cambios de Estado';
 $s_email_on_priority_change = 'Enviar Email en Cambios de Prioridad';
 $s_email_bugnote_limit = 'Límite de notas por email';
@@ -470,36 +469,36 @@ $s_password_updated = 'Contraseña actualizada';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg       = 'El Bug ha sido exitosamente asignado...';
+$s_bug_assign_msg       = 'La Incidencia ha sido exitosamente asignada...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'Nuevo bug';
+$s_new_bug_title = 'Nueva Incidencia';
 $s_feedback_bug_title = 'Solicitar información adicional';
-$s_acknowledged_bug_title = 'Bug conocido';
-$s_confirmed_bug_title = 'Bug confirmado';
-$s_assigned_bug_title = 'Bug asignado';
-$s_new_bug_button = 'Nuevo bug';
+$s_acknowledged_bug_title = 'Incidencia conocida';
+$s_confirmed_bug_title = 'Incidencia confirmada';
+$s_assigned_bug_title = 'Incidencia asignada';
+$s_new_bug_button = 'Nueva Incidencia';
 $s_feedback_bug_button = 'Solicitar más información';
-$s_acknowledged_bug_button = 'Marcar bug como conocido';
-$s_confirmed_bug_button = 'Confirmar bug';
-$s_assigned_bug_button = 'Asignar bug';
+$s_acknowledged_bug_button = 'Marcar Incidencia como conocida';
+$s_confirmed_bug_button = 'Confirmar Incidencia';
+$s_assigned_bug_button = 'Asignar Incidencia';
 
 # bug_close.php
-$s_bug_close_msg       = 'El bug ha sido cerrado...';
+$s_bug_close_msg       = 'La Incidencia ha sido cerrada...';
 $s_close_immediately   = 'Cerrar inmediatamente:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Cerrar Bug';
+$s_closed_bug_title = 'Cerrar Incidencia';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'El Bug ha sido eliminado...';
+$s_bug_deleted_msg = 'La Incidencia ha sido eliminada...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = '¿Esta seguro de que desea eliminar este bug?';
-$s_delete_bug_button = 'Eliminar Bug';
+$s_delete_bug_sure_msg = '¿Esta seguro de que desea eliminar esta Incidencia?';
+$s_delete_bug_button = 'Eliminar Incidencia';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitorizar Bug';
+$s_monitor_bug_button = 'Monitorizar Incidencia';
 $s_unmonitor_bug_button = 'Detener Monitorización';
 
 # bug_file_add.php
@@ -512,17 +511,17 @@ $s_upload_file_button = 'Subir Archivo';
 $s_max_file_size = 'Tamaño Máximo';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'El bug ha sido reabierto...';
-$s_reopen_add_bugnote_title = 'Agregar una nota para reabrir el bug';
-$s_bugnote_add_reopen_button = 'Agregar nota y reabrir el bug';
+$s_bug_reopened_msg = 'La Incidencia ha sido reabierta...';
+$s_reopen_add_bugnote_title = 'Agregar una nota para reabrir la Incidencia';
+$s_bugnote_add_reopen_button = 'Agregar nota y reabrir la incidencia';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Resolver Bug';
-$s_resolved_bug_button = 'Resolver Bug';
+$s_resolved_bug_title = 'Resolver Incidencia';
+$s_resolved_bug_button = 'Resolver Incidencia';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'El bug ha sido resuelto. Introduzca una nota...';
-$s_resolve_add_bugnote_title = 'Agregar un motivo de resolución del bug';
+$s_bug_resolved_msg = 'La Incidencia ha sido resuelta. Introduzca una nota...';
+$s_resolve_add_bugnote_title = 'Agregar un motivo de resolución de la incidencia';
 $s_bugnote_add_resolve_button = 'Agregar Nota';
 
 # bug_reminder_page.php
@@ -534,17 +533,17 @@ $s_bug_reminder = 'Enviar un recordatorio';
 $s_reminder_sent_to = 'Recordatorio enviado a';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Recordatorio';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Esta nota será enviada a los destinatarios de las listas de peticion en esta incidencia';
+$s_reminder_monitor = 'Esos destinatarios empezaran a monitorizar la incidencia. Ellos pueden dejar de estar subscritos usando el botón de desmonitorización';
+$s_reminder_store = 'Esta nota será almacenada con la incidencia';
 
 # bug_update.php
-$s_bug_updated_msg = 'El bug ha sido exitosamente actualizado...';
+$s_bug_updated_msg = 'La incidencia ha sido exitosamente actualizado...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Volver a Bug';
+$s_back_to_bug_link = 'Volver a Incidencia';
 $s_update_simple_link = 'Cambiar a forma de Actualizacion Simple';
-$s_updating_bug_advanced_title = 'Actualizando información del Bug';
+$s_updating_bug_advanced_title = 'Actualizando información de la Incidencia';
 $s_id = 'ID';
 $s_category = 'Categoría';
 $s_severity = 'Gravedad';
@@ -569,12 +568,11 @@ $s_summary = 'Resumen';
 $s_description = 'Descripción';
 $s_steps_to_reproduce = 'Pasos para reproducirlo';
 $s_update_information_button = 'Actualizar Información';
-$s_sticky_issue = 'Sticky Issue';
-$s_profile = 'Profile';
+$s_profile = 'Perfil';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Cambiar a forma de Actualización Avanzada';
-$s_updating_bug_simple_title = 'Actualizando información del Bug';
+$s_updating_bug_simple_title = 'Actualizando información de la Incidencia';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Su voto ha sido agregado...';
@@ -590,12 +588,12 @@ $s_bug_notes_title = 'Notas';
 $s_edit_bugnote_title = 'Editar Nota';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'No hay notas asociadas a este bug.';
+$s_no_bugnotes_msg = 'No hay notas asociadas a esta Incidencia.';
 $s_delete_link = 'Eliminar';
 $s_add_bugnote_title = 'Agregar Nota';
 $s_add_bugnote_button = 'Agregar Nota';
 $s_bugnote_edit_link = 'Editar';
-$s_closed_bug_button = 'Cerrar Bug';
+$s_closed_bug_button = 'Cerrar Incidencia';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
@@ -632,8 +630,8 @@ $s_lost_password_info = "Para recuperar su contraseña olvidada, por favor rellen
 $s_lost_password_confirm_hash_OK = "Su confirmación ha sido aceptada. Por favor cambie su contraseña.";
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Bugs Abiertos y Asignados a mi';
-$s_open_and_reported_to_me = 'Bugs Abiertos y Reportados por mi';
+$s_open_and_assigned_to_me = 'Incidencias Abiertas y Asignados a mi';
+$s_open_and_reported_to_me = 'Incidencias Abiertas y Reportados por mi';
 $s_newer_news_link = 'Nuevas Noticias';
 $s_older_news_link = 'Noticias Anteriores';
 $s_archives = 'Noticias Archivadas';
@@ -656,11 +654,11 @@ $s_filter_button = 'Filtrar';
 $s_manage_users_link = 'Administrar Usuarios';
 $s_manage_projects_link = 'Administrar Proyectos';
 $s_manage_custom_field_link = 'Administrar Campos Personalizados';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
+$s_manage_global_profiles_link = 'manejo global de perfil';
+$s_permissions_summary_report = 'Reportar permisos';
+$s_manage_config_link = 'Configuración manejada';
 $s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
+$s_manage_email_config = 'Notificación por correo';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Crear cuenta';
 $s_projects_link = 'Proyectos';
@@ -677,67 +675,57 @@ $s_last_visit = 'Última Visita';
 $s_edit_user_link = 'Editar Usuario';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_message = 'Message';
+$s_config_all_projects = 'Nota: Esa configuración afecta a todos los proyectos';
+$s_config_project = 'Nota: Esa configuración afecta sólo al proyecto %s';
+$s_colour_coding = 'En la tabla inferior, se aplica el siguiente esquema de colores:';
+$s_colour_project = 'La configuración del proyecto no hace caso de otros';
+$s_colour_global = 'La configuración de todos los proyectos no hace caso a la configuración por defecto';
+$s_issue_reporter = 'Es el usuario quien reporta la incidencia';
+$s_issue_reporter = 'Es el usuario quien reporta la incidencia';
+$s_issue_handler = 'Es el usuario quien tramita la incidencia';
+$s_users_added_bugnote = 'El usuario añade lanota del bug';
+$s_change_configuration = 'Actualización de configuración';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_notify_defaults_change_access = 'Cambiar a los usuarios que pueden modificar la notificación por defecto';
+$s_notify_actions_change_access = 'Cambiar a los usuairos que pueden modificar la notificación';
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
+$s_non_existent = 'sin existencias';
+$s_current_status = 'Estado corriente';
+$s_next_status = 'estado nuevo';
 $s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
+$s_workflow_thresholds = 'A punto de afectar al curso del trabajo';
 $s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
-
-# manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_status_level = 'Estado';
+$s_alter_level = 'Quien puede alterar este valor';
+$s_validation = 'Validación workflow';
+$s_comment = 'validación comentada';
+$s_superfluous = 'El estado se da significado a si mismo y no necesita que se lo den explicitamente';
+$s_unreachable = 'No puedes mover una incidencia en ese estado';
+$s_no_exit = 'No puedes mover una incidencia fuera de ese estado';
+$s_access_levels = 'Acceso a niveles';
+$s_access_change = 'Minimo aceso al nivel para cambiar de estado';
+$s_desc_bug_submit_status = 'Marcada nueva incidencia';
+$s_desc_bug_reopen_status = 'Se reabren las incidencias marcadas';
+$s_desc_bug_resolved_status_threshold = 'Incidencia resuelta';
+$s_workflow_change_access = 'Cambia a los usuarios que pueden cambiar de workflow';
+$s_access_change_access = 'Los usuarios que puedan cambiar el estado que cambien tambien el nivel de acceso';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
-
-# manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_assign_issue = 'Asignar una incidencia';
+$s_allow_close_immediate = 'Permitir que la incidencia sea cerrada en resuelta';
+$s_allow_reporter_close = 'Permitir reportar la incidencia para cerrarla';
+$s_allow_reporter_reopen = 'Permitir reportar la incidencia para reabrirla';
+$s_set_status_assigned = 'Marcar estado de asiganción de manejo';
+$s_allow_user_edit = 'Editar cada usuario sus propias incidencias';
+$s_limit_access = 'limitar el acceso a sus propias incidencias';
+$s_submit_status = 'Estado en el que es marcada una nueva incidencia';
+$s_assigned_status = 'Estado para marcar una incidencia asignada a ti mismo';
+$s_resolved_status = 'Estado resuelto';
+$s_readonly_status = 'Estado de solo lectura';
+$s_reopen_status = 'Estado en que es marcada una incidencia reabierta';
+$s_reopen_resolution = 'Resolución para que sea marcada una inidencia reabierta';
 
 # manage_proj_add.php
 $s_project_added_msg = 'El proyecto ha sido agregado...';
@@ -760,13 +748,13 @@ $s_update_category_button = 'Actualizar Categoría';
 $s_category_updated_msg = 'La categoria ha sido actualizada...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'Añadir subproyecto';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'El proyecto ha sido eliminado...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = '¿Seguro que desea eliminar este proyecto y todos los bugs asociados?';
+$s_project_delete_msg = '¿Seguro que desea eliminar este proyecto y todas las Incidencias asociadas?';
 $s_project_delete_button = 'Eliminar Proyecto';
 
 # manage_proj_edit_page.php
@@ -782,16 +770,16 @@ $s_categories = 'Categorías';
 $s_add_category_button = 'Agregar Categoría';
 $s_versions = 'Versiones';
 $s_add_version_button = 'Agregar Versiones';
-$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_add_and_edit_version_button = 'Añade y edita la versión';
 $s_edit_link = 'Editar';
 $s_actions = 'Acciones';
 $s_version = 'Versión/Build';
 $s_timestamp = 'Marca de tiempo';
 $s_update = 'Actualizar';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'Subproyectos';
+$s_add_subproject = 'Añadir como subproyecto';
+$s_create_new_subproject_link = 'Crear un nuevo subproyecto';
+$s_unlink_link = 'Desunir';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Agregar Proyecto';
@@ -852,8 +840,8 @@ $s_manage_user_updated_msg = 'La cuenta ha sido actualizada...';
 
 # menu_inc.php
 $s_main_link = 'Principal';
-$s_view_bugs_link = 'Ver Bugs';
-$s_report_bug_link = 'Informar de Bug';
+$s_view_bugs_link = 'Ver Incidencias';
+$s_report_bug_link = 'Informar de Incidencia';
 $s_changelog_link = 'Log de cambios';
 $s_summary_link = 'Resumen';
 $s_account_link = 'Mi Cuenta';
@@ -936,20 +924,20 @@ $s_project_document_updated = 'Proyecto actualizado';
 $s_project_user_added_msg = 'Usuario agregado al proyecto';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Usuario desvinculado del proyecto';
+$s_project_removed_user_msg = 'Usuario eliminado del proyecto';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = '¿Seguro que desea desvincular este usuario?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_sure_msg = '¿Seguro que desea eliminar este usuario?';
+$s_remove_user_button = 'Eliminar usuarios';
+$s_remove_all_users_sure_msg ='¿Seguro que desea eliminar a todos los usuarios del proyecto?';
+$s_remove_all_users_button = 'Elimina todos los usuarios';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Agregar usuario al proyecto';
 $s_add_user_button = 'Agregar usuario';
 $s_project_selection_title = 'Selección de Proyecto';
 $s_remove_link = 'eliminar';
-$s_remove_all_link = 'Remove all';
+$s_remove_all_link = 'Eliminar todos';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Usuario actualizado';
@@ -960,7 +948,7 @@ $s_must_enter_severity = 'Debe seleccionar un nivel de gravedad';
 $s_must_enter_reproducibility = 'Debe seleccionar una capacida de reproducción';
 $s_must_enter_summary = 'Debe introducir un resumen';
 $s_must_enter_description = 'Debe introducir una descripción';
-$s_report_more_bugs = 'Informar de más bugs';
+$s_report_more_bugs = 'Informar de más Incidencias';
 $s_submission_thanks_msg = 'Gracias por su informe';
 
 # report_bug_advanced_page.php
@@ -974,7 +962,7 @@ $s_or_fill_in = 'O llene los siguientes campos';
 $s_assign_to = 'Asignar a';
 $s_additional_information = 'Información Adicional';
 $s_submit_report_button = 'Enviar Informe';
-$s_check_report_more_bugs = 'seleccione para informar de más bugs';
+$s_check_report_more_bugs = 'seleccione para informar de más Incidencias';
 
 # report_bug_page.php
 $s_advanced_report_link = 'Informe Avanzado';
@@ -994,7 +982,7 @@ $s_signup_captcha_request = 'Introduzca el código tal y como lo ve en la caja de
 $s_signup_info = 'Para completar este proceso, recibirá un email de confirmación en la dirección especificada.<br/>Mediante este email podrá activar su cuenta. Si esta verificación no se efectúa en siete días, la cuenta será eliminada.<br/>Debe consignar una dirección de email válida para recibir el mensaje de verificación.';
 $s_signup_title = 'Suscribirse';
 $s_signup_button = 'Suscribirse';
-$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
+$s_no_password_request = 'Tu contraseña la maneja cualquier sistema. Contacta con tu administrador del sistema';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Editar configuración del sitio';
@@ -1027,8 +1015,8 @@ $s_percentage_fixed = '% Corregido';
 $s_percentage_errors = '% Incorrecto';
 $s_errors = 'Incorrecto';
 $s_total = 'Total';
-$s_time_stats = 'estadísticas de bugs resueltos (días)';
-$s_longest_open_bug = 'bug abierto durante mayor tiempo';
+$s_time_stats = 'estadísticas de Incidencias  resueltas (días)';
+$s_longest_open_bug = 'Incidencia abierta durante mayor tiempo';
 $s_longest_open = 'mayor tiempo abierto';
 $s_average_time = 'tiempo promedio';
 $s_total_time = 'tiempo total';
@@ -1040,10 +1028,10 @@ $s_orct = '(abiertos/resueltos/cerrados/total)';
 $s_any = 'cualquiera';
 $s_show = 'Ver';
 $s_changed = 'Cambiado(hrs)';
-$s_viewing_bugs_title = 'Bugs';
+$s_viewing_bugs_title = 'Incidencias';
 $s_updated = 'Actualizado';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Ver la dificultad de la incidencia';
+$s_sort = 'solucionado por';
 
 # view_all_inc.php
 $s_none = 'ninguno';
@@ -1081,13 +1069,13 @@ $s_query_delete_msg = '¿Seguro que quiere borrar ese filtro?';
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Cambiar a Vista Simple';
 $s_viewing_bug_advanced_details_title = 'Vista Avanzada';
-$s_product_build = 'Build del Producto';
+$s_product_build = 'Desarrollo del Producto';
 $s_system_profile = 'Descripción del Sistema';
-$s_update_bug_button = 'Actualizar Bug';
+$s_update_bug_button = 'Actualizar Incidencia';
 $s_bug_assign_to_button = 'Asignar A:';
 $s_bug_status_to_button = 'Cambiar estado a:';
-$s_reopen_bug_button = 'Reabrir Bug';
-$s_move_bug_button = 'Mover Bug';
+$s_reopen_bug_button = 'Reabrir Incidencia';
+$s_move_bug_button = 'Mover Incidencia';
 $s_attached_files = 'Archivos Adjuntos';
 $s_publish = 'Publicar';
 $s_cached = 'En Caché';
@@ -1099,13 +1087,13 @@ $s_view_advanced_link = 'Cambiar a Vista Avanzada';
 $s_viewing_bug_simple_details_title = 'Vista Simple.';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'No hay usuarios monitorizando este bug.';
-$s_users_monitoring_bug = 'Usuarios monitorizando este bug.';
+$s_no_users_monitoring_bug = 'No hay usuarios monitorizando esta Incidencia.';
+$s_users_monitoring_bug = 'Usuarios monitorizando esta Incidencia.';
 $s_monitoring_user_list = 'Lista de Usuarios';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'No hay usuarios patrocinando este bug.';
-$s_users_sponsoring_bug = 'Usuarios patrocinando este bug.';
+$s_no_users_sponsoring_bug = 'No hay usuarios patrocinando esta Incidencia.';
+$s_users_sponsoring_bug = 'Usuarios patrocinando esta Incidencia.';
 $s_sponsors_list = 'Lista de patrocinadores';
 $s_total_sponsorship_amount = 'Patrocinio total = %s';
 
@@ -1129,10 +1117,10 @@ $s_custom_field_access_level_rw = 'Acceso escritura';
 $s_custom_field_length_min = 'Long. Mínima';
 $s_custom_field_length_max = 'Long. Máxima';
 $s_custom_field_advanced = 'Avanzado';
-$s_custom_field_display_report = 'Mostrar al informar bugs';
-$s_custom_field_display_update = 'Mostrar al actualizar bugs';
-$s_custom_field_display_resolved = 'Mostrar al resolver bugs';
-$s_custom_field_display_closed = 'Mostrar al cerrar bugs';
+$s_custom_field_display_report = 'Mostrar al informar de Incidencias';
+$s_custom_field_display_update = 'Mostrar al actualizar Incidencia ';
+$s_custom_field_display_resolved = 'Mostrar al resolver Incidencia';
+$s_custom_field_display_closed = 'Mostrar al cerrar Incidencia';
 $s_custom_field_require_report = 'Requerido al informar';
 $s_custom_field_require_update = 'Requerido al actualizar';
 $s_custom_field_require_resolved = 'Requerido al resolver';
@@ -1145,8 +1133,8 @@ $s_confirm_used_custom_field_deletion = 'Este campo está vinculado al menos a un
 $s_confirm_custom_field_deletion = '¿Seguro que desea eliminar este campo y todos los valores asociados?';
 $s_field_delete_button = 'Eliminar campo';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = '¿Estas seguro que deseas desvincular este campo del proyecto y eliminar todos los valores asociados?';
+$s_field_remove_button = 'Quita campo';
 
 $s_hide_status = 'Ocultar con Estado';
 $s_filter_closed = "Cerrado";
@@ -1183,106 +1171,106 @@ $s_changelog = 'Log de cambios';
 # Http auth
 $s_http_auth_realm = "Acceso a Mantis";
 
-$s_bug = "bug";
+$s_bug = "Incidencia";
 $s_add_new_relationship = "Nueva relación";
 $s_add_new_relationship_button = "Añadir";
-$s_this_bug = "Bug actual";
+$s_this_bug = "Icidencia actual";
 $s_relationship_added = "Relación añadida";
 $s_relationship_deleted = "Relación borrada";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = 'sin relación';
+$s_relationship_replaced = 'relación reemplazada';
+$s_replace_relationship_button = 'reemplazar';
+$s_replace_relationship_sure_msg = 'Hay una relación entre las dos incidencias. ¿Deseas reemplazarla?';
+$s_relationship_with_parent = 'relación con la incidencia padre';
 $s_delete_relationship_button = "Borrar";
 $s_delete_relationship_sure_msg = "¿Seguro que desea borrar esta relación?";
-$s_relationship_warning_blocking_bugs_not_resolved = "No todos los hijos de este bug están resueltos o cerrados.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIÓN</b>. No todos los hijos de este bug están resueltos o cerrados.<br>Antes de <b>cerrar/resolver</b> un bug padre, todos sus bugs hijos deben estar resueltos o cerrados.";
-$s_create_child_bug_button = "Create Clone";
-$s_bug_cloned_to = "Bug clonado";
-$s_bug_created_from = "Bug generado desde";
+$s_relationship_warning_blocking_bugs_not_resolved = "No todos los hijos de esta Incidencia están resueltos o cerrados.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIÓN</b>. No todos los hijos de esta Incidencia están resueltos o cerrados.<br>Antes de <b>cerrar/resolver</b> una Incidencia padre, todas sus Incidencias hijos deben estar resueltas o cerradas.";
+$s_create_child_bug_button = 'Creada clonada';
+$s_bug_cloned_to = "Incidencia clonada";
+$s_bug_created_from = "Incidencia generada desde";
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
+$s_viewing_bug_relationship_graph_title = "En relación a la grafica";
+$s_relation_graph = 'Relacionar a la grafica';
+$s_dependency_graph = 'Dependencia grafica';
 $s_vertical = "Vertical";
 $s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_view_issue = 'Visualizar incidencia';
 
 # Source Control Integration
-$s_checkin = 'Checkin';
+$s_checkin = 'Control';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'Capacidad';
+$s_view = 'Visualizar';
+$s_issues = 'INCIDENCIAS';
+$s_report_issue = 'Reportar incidencia';
+$s_update_issue = 'Actualizar incidencia';
+$s_monitor_issue = 'monitorizar incidencia';
+$s_handle_issue = 'Modificar incidencia';
+$s_move_issue = 'Mover incidencia';
+$s_delete_issue = 'Borrar incidencia';
+$s_reopen_issue = 'Reabrir incidencia';
+$s_view_private_issues = 'Visualiza las incidencias privadas';
+$s_update_readonly_issues = 'Actualiza como solo lectura la incidencia';
+$s_update_issue_status = 'Actualiza el estado de la incidencia';
+$s_set_view_status = 'Marca vista estado (publica o privada)';
+$s_update_view_status = 'Actualiza vista estado (publica o privada)';
+$s_show_list_of_users_monitoring_issue = 'Ver lista de usuarios que monitorizan incidencia';
+$s_notes = 'NOTAS';
+$s_add_notes = 'Añadir notas';
+$s_update_notes = 'Actualizar notas';
+$s_delete_note = 'Borrar nota';
+$s_view_private_notes = 'Ver notas privadas';
+$s_news = 'NOTICIAS';
+$s_view_private_news = 'Ver noticias privadas';
+$s_manage_news = 'Manejar noticias';
+$s_view_list_of_attachments = 'Ver lista de acciones';
+$s_download_attachments = 'Descargar acciones';
+$s_delete_attachments = 'Borrar acciones';
+$s_delete_attachment_button = 'Borrar';
+$s_delete_attachment_sure_msg = 'Estas seguro que deseas borrar esta acción';
+$s_upload_issue_attachments = 'Actualizar acciones en incidencias';
+$s_filters = 'Filtros';
+$s_save_filters = 'Salvar filtros';
+$s_save_filters_as_shared = 'Salvar filtros como acción';
+$s_use_saved_filters = 'Usar filtros guardados';
+$s_create_project = 'Crear proyecto';
+$s_delete_project = 'Borrar proyecto';
+$s_manage_project = 'Manejar proyecto';
+$s_manage_user_access_to_project = 'Dirigir el acceso de usuario al proyecto';
+$s_automatically_included_in_private_projects = 'Incluir automaticamente en proyecto privado';
+$s_project_documents = 'DOCUMENTOS DEL PROYECTO';
+$s_view_project_documents = 'Visualiza documentos del proyecto';
+$s_upload_project_documents = 'Actualiza documentos del proyecto';
+$s_link_custom_fields_to_projects = 'Une los campo cliente al proyecto';
+$s_sponsorships = 'PATROCINIOS';
+$s_view_sponsorship_details = 'Visualizando el detalle';
+$s_view_sponsorship_total = 'Visualizando totales';
+$s_sponsor_issue = 'Modificando Incidencia';
+$s_assign_sponsored_issue = 'Asignar incidencia';
+$s_handle_sponsored_issue = 'Modificar incidencia';
+$s_others = 'Otros';
+$s_see_email_addresses_of_other_users = 'Mirar la dirección de correo de los usuarios';
+$s_send_reminders = 'Enviar notificación';
+$s_add_profiles = 'Añadir perfil';
+$s_notify_of_new_user_created = 'Notificación de alta de usuario';
+$s_email_notification = 'Notificación de email';
+$s_status_changed_to = 'En estado de cambio';
+$s_email_on_deleted = 'Email borrado';
+$s_email_on_sponsorship_changed = 'Modificando Email';
+$s_email_on_relationship_changed = 'Email en relacion con el cambio';
 
 # DHTML filters
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
+$s_between = 'Mientras' ;
+$s_on_or_before = 'Antes o durante' ;
+$s_before = 'Antes';
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_after = 'Despues';
+$s_on_or_after = 'Mientras o después';
 
 ?>
