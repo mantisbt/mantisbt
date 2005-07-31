@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.182 2005-07-28 16:20:13 thraxisp Exp $
+	# $Id: html_api.php,v 1.183 2005-07-31 16:09:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -195,10 +195,14 @@
 	function html_title( $p_page_title = null ) {
 		$t_title = config_get( 'window_title' );
 		echo "\t", '<title>';
-		if ( $p_page_title === null ) {
+		if ( 0 == strlen( $p_page_title ) ) {
 			echo string_display( $t_title );
 		} else {
-			echo $p_page_title . ' - ' . string_display( $t_title );
+			if ( 0 == strlen( $t_title ) ) {
+				echo $p_page_title;
+			} else {
+				echo $p_page_title . ' - ' . string_display( $t_title );
+			}
 		}
 		echo '</title>', "\n";
 	}
