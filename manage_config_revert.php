@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_revert.php,v 1.1 2005-05-01 16:21:46 thraxisp Exp $
+	# $Id: manage_config_revert.php,v 1.2 2005-08-01 13:42:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -19,6 +19,7 @@
 
 	$t_access = true;
 	$t_revert_vars = explode( ',', $f_revert );
+	array_walk( $t_revert_vars, 'trim' );
 	foreach ( $t_revert_vars as $t_revert ) {
 		$t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
 	}
@@ -30,7 +31,7 @@
 	if ( '' != $f_revert ) {
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . ': ' .
-			$f_revert . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
+			implode( ', ', $t_revert_vars ) . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
 			lang_get( 'delete_config_button' ) );
 
 		foreach ( $t_revert_vars as $t_revert ) {

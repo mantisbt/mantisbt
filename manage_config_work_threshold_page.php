@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.10 2005-07-16 01:46:03 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.11 2005-08-01 13:42:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -26,6 +26,14 @@
 	$t_show_submit = false;
 
 	$t_access_levels = get_enum_to_array( config_get( 'access_levels_enum_string' ) );
+
+	$t_overrides = array();	
+	function set_overrides( $p_config ) {
+	   global $t_overrides;
+	   if ( ! in_array( $p_config, $t_overrides ) ) {
+	       $t_overrides[] = $p_config;
+	   }
+	}
 
 	function get_section_begin( $p_section_name ) {
 		global $t_access_levels;
@@ -92,9 +100,15 @@
             $t_colour = '';
             if ( $t_global != $t_file ) {
                 $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+                if ( $t_can_change ) {
+                    set_overrides( $p_threshold );
+                }
             }
             if ( $t_project != $t_global ) {
                 $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+                if ( $t_can_change ) {
+                    set_overrides( $p_threshold );
+                }
             } 
 
 			if ( $t_can_change ) {
@@ -111,7 +125,7 @@
 			echo '<td class="center"' . $t_colour . '>' . $t_value . '</td>';
 		}
 		if ( $t_can_change ) {
-			echo '<td><select name="access_' . $p_threshold . '">';
+			echo '<td> <select name="access_' . $p_threshold . '">';
 			print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 			echo '</select> </td>';
 		} else {
@@ -128,16 +142,22 @@
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         $t_project = config_get( $p_threshold );
         
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
+		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
+
         $t_colour = '';
         if ( $t_global != $t_file ) {
             $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+            if ( $t_can_change ) {
+                set_overrides( $p_threshold );
+            }
         }
         if ( $t_project != $t_global ) {
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+            if ( $t_can_change ) {
+                set_overrides( $p_threshold );
+            }
         } 
-
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
-		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -171,16 +191,22 @@
         $t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
         $t_project = config_get( $p_threshold );
         
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
+		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
+
         $t_colour = '';
         if ( $t_global != $t_file ) {
             $t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+            if ( $t_can_change ) {
+                set_overrides( $p_threshold );
+            }
         }
         if ( $t_project != $t_global ) {
             $t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+            if ( $t_can_change ) {
+                set_overrides( $p_threshold );
+            }
         } 
-
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
-		          && ( ( ALL_PROJECTS == $t_project_id ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 		if ( $t_can_change ) {
@@ -279,6 +305,21 @@
     }
 
 	echo "</form>\n";
+	
+	if ( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
+        echo "<div class=\"right\"><form name=\"threshold_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
+        echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
+        echo "<input name=\"project\" type=\"hidden\" value=\"$t_project_id\"></input>";
+        echo "<input name=\"return\" type=\"hidden\" value=\"" . $_SERVER['PHP_SELF'] ."\"></input>";
+        echo "<input type=\"submit\" class=\"button\" value=\"";
+        if ( ALL_PROJECTS == $t_project_id ) {
+            echo lang_get( 'revert_to_system' );
+        } else {
+        echo lang_get( 'revert_to_all_project' );
+        }
+        echo "\" />\n";
+        echo "</form></div>\n";
+    }
 
 	html_page_bottom1( __FILE__ );
 ?>
