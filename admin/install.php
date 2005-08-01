@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.16 2005-07-30 18:10:40 thraxisp Exp $
+	# $Id: install.php,v 1.17 2005-08-01 11:36:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -151,7 +151,7 @@ if ( 0 == $t_install_state ) {
 				if ( version_compare ( phpversion() , '4.0.6', '>=' ) ) {
 					print_test_result( GOOD );
 				} else {
-					print_test_result( BAD, 'Upgrade the version of PHP to a more recent version' );
+					print_test_result( BAD, true, 'Upgrade the version of PHP to a more recent version' );
 				}
 			} else {
 			 	print_test_result( BAD );
@@ -467,7 +467,7 @@ if ( 3 == $t_install_state ) {
 		if ( $f_log_queries ) {
 			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
 		}
-			
+
 		while ( ( $i <= $lastid ) && ! $g_failed ) {
 			if ( ! $f_log_queries ) {
 				echo '<tr><td bgcolor="#ffffff">Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )</td>';
@@ -500,11 +500,11 @@ if ( 3 == $t_install_state ) {
 			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (' . $lastid . ', 1, 90, \'database_version\', 20, 0 );' . "\r\n";
 			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding</td></tr>';
 		}
-		
+
 	}
 	if ( false == $g_failed ) {
 		$t_install_state++;
-	} else { 
+	} else {
 		$t_install_state--;
 	}
 
