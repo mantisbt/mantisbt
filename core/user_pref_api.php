@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.30 2005-07-16 13:23:35 vboctor Exp $
+	# $Id: user_pref_api.php,v 1.31 2005-08-01 17:12:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -45,32 +45,32 @@
 	# Preference Structure Definition
 	#===================================
 	class UserPreferences {
-		var $default_profile;
-		var $default_project;
-		var $advanced_report;
-		var $advanced_view;
-		var $advanced_update;
-		var $refresh_delay;
-		var $redirect_delay;
-		var $bugnote_order;
-		var $email_on_new;
-		var $email_on_assigned;
-		var $email_on_feedback;
-		var $email_on_resolved;
-		var $email_on_closed;
-		var $email_on_reopened;
-		var $email_on_bugnote;
-		var $email_on_status;
-		var $email_on_priority;
-		var $email_on_new_min_severity;
-		var $email_on_assigned_min_severity;
-		var $email_on_feedback_min_severity;
-		var $email_on_resolved_min_severity;
-		var $email_on_closed_min_severity;
-		var $email_on_reopened_min_severity;
-		var $email_on_bugnote_min_severity;
-		var $email_on_status_min_severity;
-		var $email_on_priority_min_severity;
+		var $default_profile = NULL;
+		var $default_project = NULL;
+		var $advanced_report = NULL;
+		var $advanced_view = NULL;
+		var $advanced_update = NULL;
+		var $refresh_delay = NULL;
+		var $redirect_delay = NULL;
+		var $bugnote_order = NULL;
+		var $email_on_new = NULL;
+		var $email_on_assigned = NULL;
+		var $email_on_feedback = NULL;
+		var $email_on_resolved = NULL;
+		var $email_on_closed = NULL;
+		var $email_on_reopened = NULL;
+		var $email_on_bugnote = NULL;
+		var $email_on_status = NULL;
+		var $email_on_priority = NULL;
+		var $email_on_new_min_severity = NULL;
+		var $email_on_assigned_min_severity = NULL;
+		var $email_on_feedback_min_severity = NULL;
+		var $email_on_resolved_min_severity = NULL;
+		var $email_on_closed_min_severity = NULL;
+		var $email_on_reopened_min_severity = NULL;
+		var $email_on_bugnote_min_severity = NULL;
+		var $email_on_status_min_severity = NULL;
+		var $email_on_priority_min_severity = NULL;
 		var $email_bugnote_limit;
 		var $language;
 
@@ -81,7 +81,7 @@
 
 		function Get( $t_string ) {
 			global $g_default_mapping;
-			if( !isset( $this->{$t_string} ) ) {
+			if( is_null( $this->{$t_string} ) ) {
 				$this->{$t_string} = config_get( $g_default_mapping[$t_string] );
 			}
 			return $this->{$t_string} ;
