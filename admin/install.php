@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.19 2005-08-02 00:34:56 thraxisp Exp $
+	# $Id: install.php,v 1.20 2005-08-02 02:26:06 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -266,7 +266,6 @@ if ( 2 == $t_install_state ) {
 		} else {
 			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
 		}
-var_dump( $g_db->ServerInfo() );
 	?>
 </tr>
 
