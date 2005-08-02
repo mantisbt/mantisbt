@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.18 2005-08-01 13:48:26 thraxisp Exp $
+	# $Id: install.php,v 1.19 2005-08-02 00:34:56 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -154,7 +154,7 @@ if ( 0 == $t_install_state ) {
 					print_test_result( BAD, true, 'Upgrade the version of PHP to a more recent version' );
 				}
 			} else {
-			 	print_test_result( BAD );
+			 	print_test_result( BAD, true, 'Upgrade the version of PHP to a more recent version' );
 			}
 		}
 	?>
@@ -264,8 +264,41 @@ if ( 2 == $t_install_state ) {
 				$t_db_exists = true;
 			}
 		} else {
-			print_test_result( BAD, true, 'Does administrative user have access to the database?' );
+			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
 		}
+var_dump( $g_db->ServerInfo() );
+	?>
+</tr>
+
+<!-- display database version -->
+<tr>
+	<td bgcolor="#ffffff">
+		Checking Database Server Version
+		<?php
+			$t_version_info = $g_db->ServerInfo();
+			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		?>
+	</td>
+	<?php
+		$t_warning = '';
+		$t_error = '';
+		switch ( $f_db_type ) {
+			case 'mysql':
+				if ( function_exists ( 'version_compare' ) ) {
+					if ( version_compare ( $t_version_info['version'] , '4.1.0', '>' ) ) {
+						$t_warning = 'Please ensure that you installation supports the new password scheme used in MySQL 4.1.0 and later. See ' .
+							'<a href="http://dev.mysql.com/doc/mysql/en/password-hashing.html">http://dev.mysql.com/doc/mysql/en/password-hashing.html</a>.';
+					}
+				}
+				break;
+			case 'pgsql':
+			case 'mssql':
+			case 'odbc_mssql':
+			case 'ado_mssql':
+			default:
+		}
+			
+		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 	?>
 </tr>
 <?php
@@ -282,7 +315,7 @@ if ( 2 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
 		}
 	?>
 </tr>
@@ -427,7 +460,7 @@ if ( 3 == $t_install_state ) {
 			if( $ret == 2) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, true, 'Does administrative user have access to create the database?' );
+				print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' .  db_error_msg() . ' )' );
 				$t_install_state--;	# db creation failed, allow user to re-enter user/password info
 			}
 			$g_db->Close();
@@ -445,7 +478,7 @@ if ( 3 == $t_install_state ) {
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
 		}
 		$g_db->Close();
 	?>

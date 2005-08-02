@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.14 2005-07-22 23:46:23 vboctor Exp $
+	# $Id: upgrade.php,v 1.15 2005-08-02 00:34:56 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,26 @@
 	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 	if ( false == $result ) {
 ?>
-<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed.</p>
+<html>
+<head>
+<title> Mantis Administration - Upgrade Installation </title>
+<link rel="stylesheet" type="text/css" href="admin.css" />
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+	<tr class="top-bar">
+		<td class="links">
+			[ <a href="upgrade_list.php">Back to Upgrade List</a> ]
+			[ <a href="upgrade.php">Refresh view</a> ]
+			[ <a href="upgrade.php?advanced=<?php echo ( $f_advanced ? 0 : 1 ) ?>"><?php echo ( $f_advanced ? 'Simple' : 'Advanced' ) ?></a> ]
+		</td>
+		<td class="title">
+			Upgrade Installation
+		</td>
+	</tr>
+</table>
+<br /><br />
+<p>Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>] failed ( <?php echo db_error_msg() ?> ).</p>
 </body>
 <?php
         exit();
