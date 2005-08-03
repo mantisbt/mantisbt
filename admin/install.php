@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.20 2005-08-02 02:26:06 thraxisp Exp $
+	# $Id: install.php,v 1.21 2005-08-03 15:23:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -210,7 +210,7 @@ if ( 2 == $t_install_state ) {
 			if ( $t_support ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, true, 'database is not supported by PHP' );
+				print_test_result( BAD, true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 			}
 	?>
 </tr>
@@ -650,6 +650,86 @@ if ( 6 == $t_install_state ) {
 <!-- Checking register_globals are off -->
 <?php print_test( 'Checking for register_globals are off for mantis', ! ini_get_bool( 'register_globals' ), false, 'change php.ini to disable register_globals setting' ) ?>
 
+<tr>
+	<td bgcolor="#ffffff">
+		Attempting to connect to database as user
+	</td>
+	<?php
+		$g_db = ADONewConnection($f_db_type);
+		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
+
+		if ( $t_result == true ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		checking ability to SELECT records
+	</td>
+	<?php
+		$t_mantis_config_table = config_get_global( 'mantis_config_table' );
+		$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
+		$t_result = @$g_db->Execute( $t_query );
+
+		if ( $t_result != false ) {
+			print_test_result( GOOD );
+			
+		} else {
+			print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		checking ability to INSERT records
+	</td>
+	<?php
+		$t_query = "INSERT INTO $t_mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES ('test', 1, 90, 'database_test', 20, 0 )";
+		$t_result = @$g_db->Execute( $t_query );
+
+		if ( $t_result != false ) {
+			print_test_result( GOOD );
+			
+		} else {
+			print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		checking ability to UPDATE records
+	</td>
+	<?php
+		$t_query = "UPDATE $t_mantis_config_table SET value='test_update' WHERE config_id='database_test'";
+		$t_result = @$g_db->Execute( $t_query );
+
+		if ( $t_result != false ) {
+			print_test_result( GOOD );
+			
+		} else {
+			print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		checking ability to DELETE records
+	</td>
+	<?php
+		$t_query = "DELETE FROM $t_mantis_config_table WHERE config_id='database_test'";
+		$t_result = @$g_db->Execute( $t_query );
+
+		if ( $t_result != false ) {
+			print_test_result( GOOD );
+			
+		} else {
+			print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
 </table>
 <?php
 	if ( false == $g_failed ) {
