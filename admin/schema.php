@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.7 2005-08-01 13:48:26 thraxisp Exp $
+	# $Id: schema.php,v 1.8 2005-08-03 14:20:34 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -339,6 +339,6 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_access',config_get('mantis_user_t
 
 $upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'), 
     "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES 
-        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 1, 90, 3, 0, 0, '" . 
+        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" . 
              md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 ?>
