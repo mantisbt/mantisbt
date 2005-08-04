@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.31 2005-08-01 17:12:42 thraxisp Exp $
+	# $Id: user_pref_api.php,v 1.32 2005-08-04 00:10:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -71,8 +71,8 @@
 		var $email_on_bugnote_min_severity = NULL;
 		var $email_on_status_min_severity = NULL;
 		var $email_on_priority_min_severity = NULL;
-		var $email_bugnote_limit;
-		var $language;
+		var $email_bugnote_limit = NULL;
+		var $language = NULL;
 
 		function UserPreferences() {
 			$this->default_profile                   	= 0;
