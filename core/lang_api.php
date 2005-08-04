@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.38 2005-06-01 13:19:31 vboctor Exp $
+	# $Id: lang_api.php,v 1.39 2005-08-04 20:57:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -148,8 +148,8 @@
 
 		# don't allow 'auto' as a language to be pushed onto the stack
 		#  The results from auto are always the local user, not what the
-		#  override wants
-		if ( 'auto' == $t_lang ) {
+		#  override wants, unless this is the first language setting
+		if ( ( 'auto' == $t_lang ) && ( 0 < count( $g_lang_overrides ) ) ) {
 			$t_lang = config_get( 'fallback_language' );
 		}
 

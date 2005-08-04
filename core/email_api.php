@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.120 2005-07-05 18:50:49 thraxisp Exp $
+	# $Id: email_api.php,v 1.121 2005-08-04 20:57:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -333,7 +333,9 @@
 					return;
 		}
 
-		lang_push( user_pref_get_language( $p_user_id ) );
+#		@@@ thraxisp - removed to address #6084 - user won't have any settings yet,
+#       use same language as display for the email
+#       lang_push( user_pref_get_language( $p_user_id ) );
 
 		# retrieve the username and email
 		$t_username = user_get_field( $p_user_id, 'username' );
@@ -355,7 +357,7 @@
 			log_event( LOG_EMAIL, "signup=$t_email, hash=$p_confirm_hash, id=$p_user_id" );
 		}
 
-		lang_pop();
+#		lang_pop(); # see above
 	}
 
 	# --------------------
