@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.51 2005-06-16 02:26:48 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.52 2005-08-04 16:59:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -207,10 +207,7 @@ if ( !$t_finished ) {
 					print_project_option_list( null, false );
 					break;
 				case 'ASSIGN':
-					$t_new_status = ( ON == config_get( 'auto_set_status_to_assigned' ) ) ? config_get( 'bug_assigned_status' ) : NEW_;
-					$t_assign_threshold = access_get_status_threshold( $t_new_status, $t_project_id );
-					# threshold is correct if auto_set_status_to_assigned is set, false thresholds will be caught when the bug is assigned
-					print_assign_to_option_list( 0, $t_project_id, $t_assign_threshold);
+					print_assign_to_option_list( 0, $t_project_id );
 					break;
 				case 'VIEW_STATUS':
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
