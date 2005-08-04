@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.51 2005-07-03 15:09:11 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.52 2005-08-04 19:54:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -278,6 +278,7 @@
 
 	# ERROR_FILTER_NOT_FOUND
 	define( 'ERROR_FILTER_NOT_FOUND', 2000 );
+	define( 'ERROR_FILTER_TOO_OLD', 2001 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);

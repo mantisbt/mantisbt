@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.55 2005-06-03 16:03:13 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.56 2005-08-04 19:54:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -288,26 +288,17 @@
 	# Set new filter values.  These are stored in a cookie
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-	$t_old_setting_arr	= explode( '#', $t_view_all_cookie, 2 );
-
-	$t_setting_arr = array();
-
-	# If we're not going to reset the cookie, make sure it's valid
-	if ( $f_type != 0 ) {
-		$t_cookie_vers = (int) substr( $t_old_setting_arr[0], 1 );
-		if ( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) { # if the version is old, update it
+	
+	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
+	if ( false === $t_setting_arr ) {
+		# couldn't deserialize, if we were trying to use the filter, clear it and reload
+		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
+		if ( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
 			gpc_clear_cookie( 'view_all_cookie' );
-			print_header_redirect( 'view_all_set.php?type=0' );
-		}
-		if ( isset( $t_old_setting_arr[1] ) ) {
-			$t_setting_arr = unserialize( $t_old_setting_arr[1] );
-		}
-
-		if ( isset($t_setting_arr['highlight_changed']) ) {
-			check_varset( $f_highlight_changed, $t_setting_arr['highlight_changed'] );
-		} else {
-			check_varset( $f_highlight_changed, config_get( 'default_show_changed' ) );
-		}
+			error_proceed_url( 'view_all_set.php?type=0' );
+			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
+			exit; # stop here
+		} 
 	}
 
 	$t_cookie_version = config_get( 'cookie_version' );
@@ -366,16 +357,19 @@
 		# This is when we want to copy another query from the
 		# database over the top of our current one
 		case '3':
-			$t_filter_string = filter_db_get_filter( $f_source_query_id );
-			# If we can use the query that we've requested,
-			# grab it. We will overwrite the current one at the
-			# bottom of this page
-			if ( $t_filter_string != null ) {
-				$t_cookie_detail = explode( '#', $t_filter_string, 2 );
-				$t_setting_arr = unserialize( $t_cookie_detail[1] );
-
+				$t_filter_string = filter_db_get_filter( $f_source_query_id );
+				# If we can use the query that we've requested,
+				# grab it. We will overwrite the current one at the
+				# bottom of this page
+				$t_setting_arr = filter_deserialize( $t_filter_string );
+				if ( false === $t_setting_arr ) {
+					# couldn't deserialize, if we were trying to use the filter, clear it and reload
+					gpc_clear_cookie( 'view_all_cookie' );
+					error_proceed_url( 'view_all_set.php?type=0' );
+					trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
+					exit; # stop here
+				} 
 				break;
-			}
 		# Generalise the filter
 		case '4':
 				$t_setting_arr['show_category']	= array( META_FILTER_ANY );
