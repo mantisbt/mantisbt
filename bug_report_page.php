@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.55 2005-07-16 13:50:13 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.56 2005-08-07 18:42:45 ryandesign Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -41,7 +41,7 @@
 			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 		}
 
-		$t_bug = bug_prepare_display( bug_get( $f_master_bug_id, true ) );
+		$t_bug = bug_prepare_edit( bug_get( $f_master_bug_id, true ) );
 
 		# the user can at least update the master bug (needed to add the relationship)...
 		access_ensure_bug_level( config_get( 'update_bug_threshold', null, $t_bug->project_id ), $f_master_bug_id );
