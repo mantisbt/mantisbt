@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.280 2005-07-23 15:08:57 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.281 2005-08-07 13:42:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1518,7 +1518,9 @@
 		'reported'      => '3',
 		'resolved'      => '4',
 		'recent_mod'	=> '5',
-		'monitored'	=> '6'
+		'monitored'		=> '6',
+		'feedback'		=> '0',
+		'verify'		=> '0'
 	);
 
 	# Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent boxes start at the same vertical position)

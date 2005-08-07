@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.11 2005-04-22 22:27:50 prichards Exp $
+	# $Id: my_view_page.php,v 1.12 2005-08-07 13:42:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -85,7 +85,8 @@
 		}
 
 		# don't display "Reported by Me" bugs to users that can't report bugs
-		else if ( $t_box_title == 'reported' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+		else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) && 
+				( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 			$t_number_of_boxes = $t_number_of_boxes - 1;
 		}
 

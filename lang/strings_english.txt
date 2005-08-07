@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.266 $
+	# $Revision: 1.267 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-04 19:54:02 $
+	# $Date: 2005-08-07 13:42:04 $
 	#
-	# $Id: strings_english.txt,v 1.266 2005-08-04 19:54:02 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.267 2005-08-07 13:42:04 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -874,6 +874,8 @@ $s_my_view_title_reported = 'Reported by Me';
 $s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
 $s_my_view_title_resolved = 'Resolved';
 $s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'News item added...';

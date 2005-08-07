@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.15 2005-07-12 13:54:23 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.16 2005-08-07 13:42:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,6 +124,37 @@
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
 	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&amp;hide_status=' . $t_hide_status_default;
+
+
+	$c_filter['feedback'] = array(
+		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_status'		=> Array ( '0' => FEEDBACK ),
+		'highlight_changed'	=> $t_default_show_changed,
+		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
+		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
+		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
+		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+	);
+	$url_link_parameters['feedback'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . FEEDBACK . '&amp;hide_status=' . $t_hide_status_default;
+
+	$c_filter['verify'] = array(
+		'show_category'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_severity'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
+		'highlight_changed'	=> $t_default_show_changed,
+		'reporter_id'		=> Array ( '0' => $t_current_user_id ),
+		'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
+		'show_build'		=> Array ( '0' => META_FILTER_ANY ),
+		'show_version'		=> Array ( '0' => META_FILTER_ANY ),
+		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
+		'user_monitor'		=> Array ( '0' => META_FILTER_ANY )
+	);
+	$url_link_parameters['verify'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . $t_bug_resolved_status_threshold;
 
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
 
