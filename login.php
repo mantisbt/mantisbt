@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.35 2004-08-05 17:58:47 jlatour Exp $
+	# $Id: login.php,v 1.36 2005-08-07 16:01:37 ryandesign Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,7 +43,7 @@
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_redirect_url = 'login_cookie_test.php?return=' . urlencode( $f_return );
 	} else {
-		$t_redirect_url = 'login_page.php?error=1';
+		$t_redirect_url = 'login_page.php?return=' . urlencode( $f_return ) . '&error=1';
 
 		if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 			auth_http_prompt();
