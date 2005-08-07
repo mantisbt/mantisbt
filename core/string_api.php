@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.74 2005-07-31 16:23:29 jlatour Exp $
+	# $Id: string_api.php,v 1.75 2005-08-07 15:29:07 ryandesign Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -187,7 +187,7 @@
 			$t_replace_with = '[CVS] '.$t_cvs_web.'\\1?rev=\\4\\5';
 		}
 
-		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
+		return preg_replace( '/cvs:([^\.\s:,\?!<]+(\.[^\.\s:,\?!<]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
 							 $t_replace_with,
 							 $p_string );
 	}
