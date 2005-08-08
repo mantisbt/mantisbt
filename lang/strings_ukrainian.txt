@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.14 $
+	# $Revision: 1.15 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:52 $
+	# $Date: 2005-08-08 21:29:13 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.14 2005-07-20 14:17:52 thraxisp Exp $
+	# $Id: strings_ukrainian.txt,v 1.15 2005-08-08 21:29:13 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Очікувався рядок, а отримано масив.
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Не можу знайти проблему %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Неправильний email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Не вдалось знайти профайл.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Цей тип файлів закачувати не дозволено.';
@@ -533,6 +534,9 @@ $s_reminder = 'Текст нагадування';
 $s_reminder_explain = 'Цей коментар буде відправлений тільки тим, хто потребує відповіді стосовно цієї проблеми.';
 $s_reminder_monitor = 'Ці особи почнуть слідкувати за проблемою. Вони зможуть відписатись за допомогою кнопки Припинити стеження.';
 $s_reminder_store = 'Цей коментар буде збережений з цією проблемою.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Проблему успішно оновлено...';
@@ -869,6 +873,8 @@ $s_my_view_title_reported = 'Повідомлені вами';
 $s_my_view_title_assigned = 'Призначені вам (невирішені)';
 $s_my_view_title_resolved = 'Вирішені';
 $s_my_view_title_monitored = 'За якими ви стежите';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Новину додано...';
@@ -1167,6 +1173,7 @@ $s_sponsorship_updated = 'Спонсорство оновлене';
 $s_sponsorship_deleted = 'Спонсорство видалене';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Докладніше про спонсорство';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

@@ -7,11 +7,11 @@
 
         # Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
         # -------------------------------------------------
-        # $Revision: 1.82 $
-        # $Author: vboctor $
-        # $Date: 2005-07-27 21:55:27 $
+        # $Revision: 1.83 $
+        # $Author: thraxisp $
+        # $Date: 2005-08-08 21:29:00 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.82 2005-07-27 21:55:27 vboctor Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.83 2005-08-08 21:29:00 thraxisp Exp $
         ###########################################################################
 ?>
 <?php
@@ -186,7 +186,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '©Úµ´¦s¨ú¡C';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '¤W¸üÀÉ®×¥¢±Ñ¡C PHP¤W¸üÀÉ®×¥\¯à¥i¯à¥¼±Ò¥Î¡C½Ð¸ß°Ý¨t²ÎºÞ²z­û°õ¦æadmin_check¸}¥»°£¥h¡£°£ÂÎ¡¤³o°ÝÃD¡C';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '¤W¸üÀÉ®×¥¢±Ñ¡C³o¥i¯à¬OÀÉ®×¤j¤p¶W¥XPHPªº¤W¸ü¤W­­¡C';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '§ä¤£¨ì³o­¶ªº¨ä¤¤¤@­Ó¥²¶·°Ñ¼Æ¡C';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '³o­Ó±b¸¹¦WºÙ¤w¸g¦s¦b¡C½Ð¿ï¾Ü¥t¤@±b¸¹¦WºÙ¡C½Ð¥ÎÂsÄý¾¹ªº¡§¦^«e¡¨Áä¦^¨ì¤W¤@­¶­«·s¿ï¾Ü¡C'; 
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '³o­Ó±b¸¹¦WºÙ¤w¸g¦s¦b¡C½Ð¿ï¾Ü¥t¤@±b¸¹¦WºÙ¡C½Ð¥ÎÂsÄý¾¹ªº¡§¦^«e¡¨Áä¦^¨ì¤W¤@­¶­«·s¿ï¾Ü¡C';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '§ä¤£¨ì³]©w¿ï¶µ\'%s\'¡C';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '§ä¤£¨ì¦r¦ê \'%s\'¡C';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '§ä¤£¨ì¯äÂÎµ§°O¡C';
@@ -205,7 +205,8 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '¹w´Á¬O°}¦C¦ý¦¬¨ìªº¬O¦r¦ê¡C';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '¹w´Á¬O¦r¦ê¦ý¦¬¨ìªº¬O°}¦C¡C';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%sªº¹w´Á¼Æ¾Ú¬°¼Æ­È¡C';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '§ä¤£¨ì¯äÂÎ %d ¡C';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]    = '§ä¤£¨ì¹LÂo¾¹ %d ¡C';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'µL®Äªº¹q¶l¦a§}';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '§ä¤£¨ì±b¸¹ªº­Ó¤H³]©w¡C';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '¤W¸ü¤£±µ¯Ç³oÀÉ®×Ãþ«¬¡C';
@@ -255,7 +256,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '¤w¹F¨ì³Ì°
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '¾Þ§@°µ¦¨´`Àô©ó ¤l±M®×¨î«×¡C';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '§A¤£¯à§ó§ï³Ì«á¤@­Ó¨t²ÎºÞ²z­ûªº¦s¨ú¤ô¥­m';
 
-#$s_login_error = '§Aªº±b¸¹¥¼±Ò¥Î©Î³Qªý¤î¡£¤Ó¦hªºµo¤J¥¢±Ñ¡¤¡A©Î¿é¥Xªº±b¸¹¦WºÙ©Î±K½X¤£¥¿½T¡C';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '§Aªº±b¸¹¥¼±Ò¥Î©Î³Qªý¤î¡A©Î§A¿é¤Jªº±b¸¹¦WºÙ©Î±K½X¤£¥¿½T¡C';
 $s_login_cookies_disabled = '¿ù»~¡G§AªºÂsÄý¾¹¤£ª¾«ç¼Ë³B²zcookies¡A©Î©Úµ´³B²zcookies¡C';
 
@@ -463,7 +464,6 @@ $s_password_updated = '±K½X¤w¸g¦¨¥\§ó·s';
 
 # bug_action_group_page
 $s_multiple_projects = '§A©Ò¿ï¾Üªº°ÝÃDÄÝ©ó¤£¦Pªº±M®×¡C¥H¤U°Ñ¼Æ¤Ï¬M©Ò¦³±M®×ªº³]©w¡C
-¦pªG¤£¥¿½T¡A½Ð§A¥u§ó§ï¤p³¡¥÷°ÝÃD¦A­«¸Õ¡C';
 
 # bug_assign.php
 $s_bug_assign_msg       = '¯äÂÎ¤w¸g¦¨¥\³Q«ü©w...';
@@ -533,6 +533,9 @@ $s_reminder = '´£¥Ü';
 $s_reminder_explain = '¦¹°O¿ý·|Âàµoµ¹­n¨D¦¹°ÝÃDªº´£¨Ñ¤ÏõXªº±b¸¹¡C';
 $s_reminder_monitor = '¦¬¥óªÌ¶}©lºÊµø¦¹°ÝÃD¡C¥J/¦o­Ì ¥i¥Î¡§°±¤îºÊµø¡¨°±¤î¡C';
 $s_reminder_store = '¦¹°O¿ý¤w¸ò¦¹°ÝÃDÀx¦s¦b¤@°_¡C';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = '¯äÂÎ¤w¸g¦¨¥\³Q§ó·s...';
@@ -624,7 +627,7 @@ $s_here = '¨ì³o¸Ì';
 $s_lost_password_title = "±K½X­«³]";
 $s_lost_password_done_title = "±K½X«H®§¤wµo¥X";
 $s_lost_password_subject = "±K½X­«³]";
-$s_lost_password_info = "­«³]±K½X¡A»Ý­n´£¨Ñ§Aªº±b¸¹¤Î¹q¶l¦a§}¡C<br/><br/>¦p´£¨Ñªº¸ê®Æ¬Û¹ï©ó¦³®Äªº±b¸¹, §A·|¸g¹q¶l¦¬¨ì¦³¯S§O¶Ã½XªºURL¡C½ÐÂsÄý¦¹³sµ²­«³]±K½X."; 
+$s_lost_password_info = "­«³]±K½X¡A»Ý­n´£¨Ñ§Aªº±b¸¹¤Î¹q¶l¦a§}¡C<br/><br/>¦p´£¨Ñªº¸ê®Æ¬Û¹ï©ó¦³®Äªº±b¸¹, §A·|¸g¹q¶l¦¬¨ì¦³¯S§O¶Ã½XªºURL¡C½ÐÂsÄý¦¹³sµ²­«³]±K½X.";
 $s_lost_password_confirm_hash_OK = "§Aªº­n¨D¤w½Ð§ó·s§Aªº±K½X¡C";
 
 # main_page.php
@@ -869,6 +872,8 @@ $s_my_view_title_reported = '³Q§Ú³ø§i';
 $s_my_view_title_assigned = '³Q«ü¬£µ¹§Ú ¡£¥¼¸Ñ¨M¡¤';
 $s_my_view_title_resolved = '¤w³Q¸Ñ¨M';
 $s_my_view_title_monitored = '³Q§ÚºÊµø';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = '·s»D¶µ¥Ø¤w·s¼W...';
@@ -1137,7 +1142,7 @@ $s_custom_field_require_closed = 'Ãö³¬®É¥²¶·';
 $s_custom_field_sequence = '§Ç¦C';
 $s_custom_field_type_enum_string = '0:¦r¦ê,1:¼Æ¦r,2:¯BÂI,3:¦CÁ|ªº¶µ¥Ø,4:¹q¶l¦a§},5:¿ï¶µ,6:¦Cªí,7:¦h¶µ¿ï¾Ü¦Cªí,8:¤é´Á';
 
-$s_confirm_used_custom_field_deletion = '¦¹Äæ¦ì³sµ²³Ì¤Ö¤@­Ó±M®×¡C§R°£¦¹Äæ¦ì¬O¤£¯à¨ú®øªº¡C¦p½T»{§R°£¦¹Äæ¦ì¡A½Ð«ö¥H¤UÁäÄ~Äò'; 
+$s_confirm_used_custom_field_deletion = '¦¹Äæ¦ì³sµ²³Ì¤Ö¤@­Ó±M®×¡C§R°£¦¹Äæ¦ì¬O¤£¯à¨ú®øªº¡C¦p½T»{§R°£¦¹Äæ¦ì¡A½Ð«ö¥H¤UÁäÄ~Äò';
 $s_confirm_custom_field_deletion = '½T»{§R°£¦¹¦Û©wÄæ¦ì¤Î¨ä¼Æ­È¡H';
 $s_field_delete_button = '§R°£Äæ¦ì';
 
@@ -1167,6 +1172,7 @@ $s_sponsorship_updated = '¸ê§U¤w³Q§ó·s';
 $s_sponsorship_deleted = '¸ê§U¤w³Q§R°£';
 $s_sponsorship_paid = '¸ê§U´Ú¶µ¤w¦¬°W';
 $s_sponsorship_more_info = '§ó¦hÃö©ó¸ê§Uªº¸ê®Æ';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1277,7 +1283,7 @@ $s_loading = '¸ü¤J¤¤...';
 $s_between = '¤§¶¡' ;
 $s_on_or_before = '©ó¦¹©Î¤§«e' ;
 $s_before = '¤§«e' ;
-# $s_on = '©ó' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '¤§«á' ;
 $s_on_or_after = '©ó¦¹©Î¤§«á' ;
 

@@ -7,11 +7,11 @@
 
         # Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
         # -------------------------------------------------
-        # $Revision: 1.2 $
-        # $Author: vboctor $
-        # $Date: 2005-07-27 21:55:27 $
+        # $Revision: 1.3 $
+        # $Author: thraxisp $
+        # $Date: 2005-08-08 21:29:01 $
         #
-        # $Id: strings_chinese_traditional_utf8.txt,v 1.2 2005-07-27 21:55:27 vboctor Exp $
+        # $Id: strings_chinese_traditional_utf8.txt,v 1.3 2005-08-08 21:29:01 thraxisp Exp $
         ###########################################################################
 ?>
 <?php
@@ -186,7 +186,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '拒絕存取。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '上載檔案失敗。 PHP上載檔案功能可能未啟用。請詢問系統管理員執行admin_check腳本除去﹝除蟲﹞這問題。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '上載檔案失敗。這可能是檔案大小超出PHP的上載上限。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '找不到這頁的其中一個必須參數。';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '這個帳號名稱已經存在。請選擇另一帳號名稱。請用瀏覽器的“回前”鍵回到上一頁重新選擇。'; 
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '這個帳號名稱已經存在。請選擇另一帳號名稱。請用瀏覽器的“回前”鍵回到上一頁重新選擇。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '找不到設定選項\'%s\'。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '找不到字串 \'%s\'。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '找不到臭蟲筆記。';
@@ -205,7 +205,8 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '預期是陣列但收到的是字串
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '預期是字串但收到的是陣列。';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s的預期數據為數值。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '找不到臭蟲 %d 。';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]    = '找不到過濾器 %d 。';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無效的電郵地址';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '找不到帳號的個人設定。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '上載不接納這檔案類型。';
@@ -255,7 +256,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已達到
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '操作做成循環於 子專案制度。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改最後一個系統管理員的存取水平m';
 
-#$s_login_error = '你的帳號未啟用或被阻止﹝太多的發入失敗﹞，或輸出的帳號名稱或密碼不正確。';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '你的帳號未啟用或被阻止，或你輸入的帳號名稱或密碼不正確。';
 $s_login_cookies_disabled = '錯誤：你的瀏覽器不知怎樣處理cookies，或拒絕處理cookies。';
 
@@ -463,7 +464,6 @@ $s_password_updated = '密碼已經成功更新';
 
 # bug_action_group_page
 $s_multiple_projects = '你所選擇的問題屬於不同的專案。以下參數反映所有專案的設定。
-如果不正確，請你只更改小部份問題再重試。';
 
 # bug_assign.php
 $s_bug_assign_msg       = '臭蟲已經成功被指定...';
@@ -533,6 +533,9 @@ $s_reminder = '提示';
 $s_reminder_explain = '此記錄會轉發給要求此問題的提供反饋的帳號。';
 $s_reminder_monitor = '收件者開始監視此問題。仔/她們 可用“停止監視”停止。';
 $s_reminder_store = '此記錄已跟此問題儲存在一起。';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = '臭蟲已經成功被更新...';
@@ -624,7 +627,7 @@ $s_here = '到這裡';
 $s_lost_password_title = "密碼重設";
 $s_lost_password_done_title = "密碼信息已發出";
 $s_lost_password_subject = "密碼重設";
-$s_lost_password_info = "重設密碼，需要提供你的帳號及電郵地址。<br/><br/>如提供的資料相對於有效的帳號, 你會經電郵收到有特別亂碼的URL。請瀏覽此連結重設密碼."; 
+$s_lost_password_info = "重設密碼，需要提供你的帳號及電郵地址。<br/><br/>如提供的資料相對於有效的帳號, 你會經電郵收到有特別亂碼的URL。請瀏覽此連結重設密碼.";
 $s_lost_password_confirm_hash_OK = "你的要求已請更新你的密碼。";
 
 # main_page.php
@@ -869,6 +872,8 @@ $s_my_view_title_reported = '被我報告';
 $s_my_view_title_assigned = '被指派給我 ﹝未解決﹞';
 $s_my_view_title_resolved = '已被解決';
 $s_my_view_title_monitored = '被我監視';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = '新聞項目已新增...';
@@ -1137,7 +1142,7 @@ $s_custom_field_require_closed = '關閉時必須';
 $s_custom_field_sequence = '序列';
 $s_custom_field_type_enum_string = '0:字串,1:數字,2:浮點,3:列舉的項目,4:電郵地址,5:選項,6:列表,7:多項選擇列表,8:日期';
 
-$s_confirm_used_custom_field_deletion = '此欄位連結最少一個專案。刪除此欄位是不能取消的。如確認刪除此欄位，請按以下鍵繼續'; 
+$s_confirm_used_custom_field_deletion = '此欄位連結最少一個專案。刪除此欄位是不能取消的。如確認刪除此欄位，請按以下鍵繼續';
 $s_confirm_custom_field_deletion = '確認刪除此自定欄位及其數值？';
 $s_field_delete_button = '刪除欄位';
 
@@ -1167,6 +1172,7 @@ $s_sponsorship_updated = '資助已被更新';
 $s_sponsorship_deleted = '資助已被刪除';
 $s_sponsorship_paid = '資助款項已收訖';
 $s_sponsorship_more_info = '更多關於資助的資料';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1277,7 +1283,7 @@ $s_loading = '載入中...';
 $s_between = '之間' ;
 $s_on_or_before = '於此或之前' ;
 $s_before = '之前' ;
-# $s_on = '於' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '之後' ;
 $s_on_or_after = '於此或之後' ;
 

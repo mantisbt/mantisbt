@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.38 $
-	# $Author: bigbadger $
-	# $Date: 2005-07-22 04:59:32 $
+	# $Revision: 1.39 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:01 $
 	#
-	# $Id: strings_finnish.txt,v 1.38 2005-07-22 04:59:32 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.39 2005-08-08 21:29:01 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'VIRHE: Taulukkodataa merkkijonodata
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'VIRHE: Odotettiin numeroa: %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'VIRHE: Tapahtumaa ei löydy.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'VIRHE: Suodinta %d ei löytynyt.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'VIRHE: Virheellinen sähköpostiosoite.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'VIRHE: Käyttäjäprofiilia ei löytynyt.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'VIRHE: Tämän tyyppiset tiedostot eivät ole sallittuja.';
@@ -536,6 +537,9 @@ $s_reminder = 'Muistutus';
 $s_reminder_explain = 'Tämä muistutus lähetetään niille vastaanottajille, jotka seuraavat tätä tapahtumaa.';
 $s_reminder_monitor = 'Nämä vastaanottajat lisätään tapahtuman seuraajien listalle. Tapahtumaseurannan voi peruuttaa painamalla painiketta Lopeta tapahtuman seuranta.';
 $s_reminder_store = 'Tämä muistutus talletetaan tapahtuman tietoihin.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Tapahtuma on onnistuneesti päivitetty...';
@@ -872,6 +876,8 @@ $s_my_view_title_reported = 'Minun raportoimat';
 $s_my_view_title_assigned = 'Minulle osoitetut (ratkaisemattomat)';
 $s_my_view_title_resolved = 'Ratkaistut';
 $s_my_view_title_monitored = 'Minun seuraamia';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Uutisartikkeli lisätty...';
@@ -1170,6 +1176,7 @@ $s_sponsorship_updated = 'Sponsori päivitetty';
 $s_sponsorship_deleted = 'Sponsori poistettu';
 $s_sponsorship_paid = 'Sponsoritapahtuma maksettu';
 $s_sponsorship_more_info = 'Lisää tietoa sponsoroinnista';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

@@ -11,11 +11,11 @@
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/07/25
 	# -------------------------------------------------
-	# $Revision: 1.93 $
-	# $Author: bigbadger $
-	# $Date: 2005-07-25 11:15:57 $
+	# $Revision: 1.94 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:10 $
 	#
-	# $Id: strings_polish.txt,v 1.93 2005-07-25 11:15:57 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.94 2005-08-08 21:29:10 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Tablica zamiast ci±gu w %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Oczekiwano liczby w %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Nie znaleziono zagadnienia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Nie znaleziono filtru %d.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Nieprawid³owy email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nieznaleziono profilu.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Pliki tego typu nie mog± byæ przesy³ane.';
@@ -536,6 +537,9 @@ $s_reminder = 'Przypomnienie';
 $s_reminder_explain = 'Ten komentarz zostanie wys³any do osób monitoruj±cych zagadnienie.';
 $s_reminder_monitor = 'Ci odbiorcy zaczn± monitorowaæ zagadnienie. Mog± zrezygnowaæ za pomoc± przycisku Nie monitoruj.';
 $s_reminder_store = 'Ten komentarz zostanie zachowany z zagadnieniem.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Zagadnienie zosta³o pomy¶lnie zaktualizowane...';
@@ -872,6 +876,8 @@ $s_my_view_title_reported = 'Zg³oszone przeze mnie';
 $s_my_view_title_assigned = 'Przypisane do mnie (nie rozwi±zane)';
 $s_my_view_title_resolved = 'Rozwi±zane';
 $s_my_view_title_monitored = 'Monitorowane przeze mnie';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Nowa wiadomo¶æ zosta³a dodana...';

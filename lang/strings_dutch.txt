@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.92 $
+	# $Revision: 1.93 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:42 $
+	# $Date: 2005-08-08 21:29:01 $
 	#
-	# $Id: strings_dutch.txt,v 1.92 2005-07-20 14:17:42 thraxisp Exp $
+	# $Id: strings_dutch.txt,v 1.93 2005-08-08 21:29:01 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een a
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Een nummer was verwacht voor %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FOUT: Dat file type mag niet ge-upload worden.';
@@ -536,6 +537,9 @@ $s_reminder = 'Herinnering';
 $s_reminder_explain = 'Deze herinnering wordt verstuurd naar de ontvangers die feedback wensen op deze bug.';
 $s_reminder_monitor = 'Deze ontvangers zullen ook de bug bij gaan houden. Met de knop Stop Bijhouden kunnen ze dit stilzetten.';
 $s_reminder_store = 'Deze herinnering zal worden opgeslagen bij deze bug.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Bug succesvol aangepast.';
@@ -872,6 +876,8 @@ $s_my_view_title_reported = 'Door mij gerapporteerd';
 $s_my_view_title_assigned = 'Aan mij toegewezen (onopgelost)';
 $s_my_view_title_resolved = 'Opgelost';
 $s_my_view_title_monitored = 'Door mij bijgehouden';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Nieuwsbericht toegevoegd.';
@@ -1170,6 +1176,7 @@ $s_sponsorship_updated = 'Sponsoring aangepast';
 $s_sponsorship_deleted = 'Sponsoring verwijderd';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Meer informatie over sponsoring';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

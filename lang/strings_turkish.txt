@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.83 $
+	# $Revision: 1.84 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:52 $
+	# $Date: 2005-08-08 21:29:13 $
 	#
-	# $Id: strings_turkish.txt,v 1.83 2005-07-20 14:17:52 thraxisp Exp $
+	# $Id: strings_turkish.txt,v 1.84 2005-08-08 21:29:13 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
@@ -533,6 +534,9 @@ $s_reminder = 'Reminder';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Bug baþarýyla güncellendi...';
@@ -869,6 +873,8 @@ $s_my_view_title_reported = 'Reported by Me';
 $s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
 $s_my_view_title_resolved = 'Resolved';
 $s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Haber eklendi...';
@@ -1167,6 +1173,7 @@ $s_sponsorship_updated = 'Sponsorship Updated';
 $s_sponsorship_deleted = 'Sponsorship Deleted';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

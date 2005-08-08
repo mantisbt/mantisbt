@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:51 $
+	# $Date: 2005-08-08 21:29:12 $
 	#
-	# $Id: strings_slovak.txt,v 1.43 2005-07-20 14:17:51 thraxisp Exp $
+	# $Id: strings_slovak.txt,v 1.44 2005-08-08 21:29:12 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Oèakával sa re»azec, ale bolo prija
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'CHYBA: Bug nenájdený.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'CHYBA: Neplatná e-mailová adresa.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nena¹iel.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'CHYBA: Súbor tohto typu nie je povolené uploadova».';
@@ -533,6 +534,9 @@ $s_reminder = 'Upozornenie';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Bug bol úspe¹ne aktualizovaný...';
@@ -869,6 +873,8 @@ $s_my_view_title_reported = 'Mnou oznámené';
 $s_my_view_title_assigned = 'Priradené mne (nevyrie¹ené)';
 $s_my_view_title_resolved = 'Vyrie¹ené';
 $s_my_view_title_monitored = 'Mnou sledované';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Novinka bola pridaná...';
@@ -1167,6 +1173,7 @@ $s_sponsorship_updated = 'Sponzoring aktualizovaný';
 $s_sponsorship_deleted = 'Sponzoring zru¹ený';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Viac inormácií o sponzoringu';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

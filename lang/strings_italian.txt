@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.105 $
+	# $Revision: 1.106 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:45 $
+	# $Date: 2005-08-08 21:29:02 $
 	#
-	# $Id: strings_italian.txt,v 1.105 2005-07-20 14:17:45 thraxisp Exp $
+	# $Id: strings_italian.txt,v 1.106 2005-08-08 21:29:02 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = "A string was expected but an array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = "A number was expected for %s.";
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = "Issue %d not found.";
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = "Invalid email.";
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = "Profile not found.";
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = "File type not allowed for uploads.";
@@ -536,6 +537,9 @@ $s_reminder = "Nota";
 $s_reminder_explain = "Questo memorandum verrà inviato agli utenti selezionati a cui si richiede un feedback sull'anomalia.";
 $s_reminder_monitor = "Questi destinatari verranno aggiunti agli utenti che monitorano l'anomalia.";
 $s_reminder_store = "Questo memorandum verrà memorizzato con l'anomalia.";
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = "L'anomalia è stata aggiornata correttamente...";
@@ -872,6 +876,8 @@ $s_my_view_title_reported = "Segnalati da me";
 $s_my_view_title_assigned = "Assegnati a me (Non risolti)";
 $s_my_view_title_resolved = "Risolti";
 $s_my_view_title_monitored = "Monitorati da me";
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = "Notizia Inserita...";
@@ -1170,6 +1176,7 @@ $s_sponsorship_updated = "Sponsorship modificata";
 $s_sponsorship_deleted = "Sponsorship eliminata";
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = "Maggiori informazioni circa lo sponsorship";
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

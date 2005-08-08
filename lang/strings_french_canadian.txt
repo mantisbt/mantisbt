@@ -16,11 +16,11 @@
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# French-Canadian: Francis Labrie, flabrie@smoguli.com
 	# -------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:44 $
+	# $Date: 2005-08-08 21:29:01 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.2 2005-07-20 14:17:44 thraxisp Exp $
+	# $Id: strings_french_canadian.txt,v 1.3 2005-08-08 21:29:01 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -215,6 +215,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais table
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERREUR : Bogue non trouvé.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'ERREUR : Filtre %d introuvable.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERREUR : Courriel invalide.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERREUR : Type de fichier non autorisé pour les dépôts de fichier.';
@@ -541,6 +542,9 @@ $s_reminder = 'Rappel';
 $s_reminder_explain = 'Cette note sera envoyée aux destinataires surveillant ce bogue.';
 $s_reminder_monitor = 'Ces destinataires commenceront également à surveiller ce bogue.  Ils pourront cesser la surveillance à l\'aide du bouton « Arrêter la surveillance ».';
 $s_reminder_store = 'Cette note sera enregistrée avec le bogue.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Le bogue a été mis à jour...';
@@ -877,6 +881,8 @@ $s_my_view_title_reported = 'Rapporté par moi';
 $s_my_view_title_assigned = 'Assigné à moi (non résolu)';
 $s_my_view_title_resolved = 'Résolu';
 $s_my_view_title_monitored = 'Surveillé par moi';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Nouvelle ajoutée...';
@@ -1175,6 +1181,7 @@ $s_sponsorship_updated = 'Commandite mise à jour';
 $s_sponsorship_deleted = 'Commandite supprimée';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Plus d\'information sur la commandite';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

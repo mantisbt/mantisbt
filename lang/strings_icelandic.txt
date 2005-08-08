@@ -9,11 +9,11 @@
 	###########################################################################
 	# Icelandic strings for Mantis 1.0.0a3
 	# -------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:45 $
+	# $Date: 2005-08-08 21:29:02 $
 	#
-	# $Id: strings_icelandic.txt,v 1.2 2005-07-20 14:17:45 thraxisp Exp $
+	# $Id: strings_icelandic.txt,v 1.3 2005-08-08 21:29:02 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -208,6 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Búist var við streng en fylki kom í
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Búist var við tölu fyrir %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Atriði %d finnst ekki.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Sía %d finnst ekki.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ógilt tölvupóstfang.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Sniðið finnst ekki.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Upphlaðning þessarar skráartegundar er ekki heimil.';
@@ -534,6 +535,9 @@ $s_reminder = 'Minnisatriði';
 $s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessu atriði';
 $s_reminder_monitor = 'Þessir viðtakendur munu einnig vakta atriðið. Þeir geta afskráð sig með því að nota hnappinn Hætta vöktun';
 $s_reminder_store = 'Þessi athugasemd verður vistuð með atriðinu';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Atriðið hefur verið uppfært...';
@@ -870,6 +874,8 @@ $s_my_view_title_reported = 'Tilkynnt af mér';
 $s_my_view_title_assigned = 'Úthlutað til mín (óleyst)';
 $s_my_view_title_resolved = 'Leyst';
 $s_my_view_title_monitored = 'Vaktað af mér';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Fréttaefni bætt við...';
@@ -1168,6 +1174,7 @@ $s_sponsorship_updated = 'Sponsorship Updated';
 $s_sponsorship_deleted = 'Sponsorship Deleted';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

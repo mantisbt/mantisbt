@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:52 $
+	# $Date: 2005-08-08 21:29:13 $
 	#
-	# $Id: strings_swedish.txt,v 1.90 2005-07-20 14:17:52 thraxisp Exp $
+	# $Id: strings_swedish.txt,v 1.91 2005-08-08 21:29:13 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -206,6 +206,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades med en array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Ärendet kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEL: Ogiltig e-postadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEL: Filtypen är inte tillåten.';
@@ -532,6 +533,9 @@ $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Ärendet har uppdaterats...';
@@ -868,6 +872,8 @@ $s_my_view_title_reported = 'Rapporterade av mig';
 $s_my_view_title_assigned = 'Tilldelade till mig (ej lösta)';
 $s_my_view_title_resolved = 'Lösta';
 $s_my_view_title_monitored = 'Bevakade av mig';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'La till nyhet...';
@@ -1166,6 +1172,7 @@ $s_sponsorship_updated = 'Sponsring uppdaterat';
 $s_sponsorship_deleted = 'Sponsring raderat';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Mer information om sponsring';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

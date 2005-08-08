@@ -11,11 +11,11 @@
 	#             miren.info@gmail.com
 	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
 	# -------------------------------------------------
-	# $Revision: 1.13 $
+	# $Revision: 1.14 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:47 $
+	# $Date: 2005-08-08 21:29:10 $
 	#
-	# $Id: strings_korean_utf8.txt,v 1.13 2005-07-20 14:17:47 thraxisp Exp $
+	# $Id: strings_korean_utf8.txt,v 1.14 2005-08-08 21:29:10 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -210,6 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '오류: 배열이 아닌 문자열�
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '오류: 숫자가 입력되어야 합니다.(%s).';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '오류: 이슈를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '오류: 잘못된 이메일.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '오류: 업로드 금지된 파일 형식입니다.';
@@ -536,6 +537,9 @@ $s_reminder = '요청자';
 $s_reminder_explain = '이 이슈노트는 이 이슈에 대해 추가 정보를 요청한 목록에 있는 수신자에게 전달됩니다.';
 $s_reminder_monitor = '또한 이 수신자들은 해당 이슈를 감시하게 되며 이슈 감시 끝내기 버튼으로 메일을 받지 않을 수도 있습니다.';
 $s_reminder_store = '이 이슈노트는 해당 이슈에 저장됩니다.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = '이슈정보가 갱신되었습니다....';
@@ -872,6 +876,8 @@ $s_my_view_title_reported = '내가 보고함';
 $s_my_view_title_assigned = '나에게 할당됨 (해결되지 않음)';
 $s_my_view_title_resolved = '해결됨';
 $s_my_view_title_monitored = '내가 감시 중';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = '뉴스가 추가됩니다...';
@@ -1170,6 +1176,7 @@ $s_sponsorship_updated = 'Sponsorship 갱신됨';
 $s_sponsorship_deleted = 'Sponsorship 삭제됨';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = '후원에 대한 더 많은 정보';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

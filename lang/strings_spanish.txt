@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.90 $
-	# $Author: vboctor $
-	# $Date: 2005-07-31 02:26:56 $
+	# $Revision: 1.91 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:12 $
 	#
-	# $Id: strings_spanish.txt,v 1.90 2005-07-31 02:26:56 vboctor Exp $
+	# $Id: strings_spanish.txt,v 1.91 2005-08-08 21:29:12 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -210,6 +210,8 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Se esperaba un array y se ha recibido
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena y se ha recibido un array.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s esta esperando un nº';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'No se encuentra la incidencia %d.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Email incorrecto.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Tipo de archivo no permitido para subidas.';
@@ -537,6 +539,9 @@ $s_reminder_explain = 'Esta nota será enviada a los destinatarios de las listas 
 $s_reminder_monitor = 'Esos destinatarios empezaran a monitorizar la incidencia. Ellos pueden dejar de estar subscritos usando el botón de desmonitorización';
 $s_reminder_store = 'Esta nota será almacenada con la incidencia';
 
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+
 # bug_update.php
 $s_bug_updated_msg = 'La incidencia ha sido exitosamente actualizado...';
 
@@ -568,6 +573,7 @@ $s_summary = 'Resumen';
 $s_description = 'Descripción';
 $s_steps_to_reproduce = 'Pasos para reproducirlo';
 $s_update_information_button = 'Actualizar Información';
+$s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Perfil';
 
 # bug_update_page.php
@@ -681,14 +687,16 @@ $s_colour_coding = 'En la tabla inferior, se aplica el siguiente esquema de colo
 $s_colour_project = 'La configuración del proyecto no hace caso de otros';
 $s_colour_global = 'La configuración de todos los proyectos no hace caso a la configuración por defecto';
 $s_issue_reporter = 'Es el usuario quien reporta la incidencia';
-$s_issue_reporter = 'Es el usuario quien reporta la incidencia';
 $s_issue_handler = 'Es el usuario quien tramita la incidencia';
 $s_users_added_bugnote = 'El usuario añade lanota del bug';
 $s_change_configuration = 'Actualización de configuración';
+$s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
 $s_notify_defaults_change_access = 'Cambiar a los usuarios que pueden modificar la notificación por defecto';
 $s_notify_actions_change_access = 'Cambiar a los usuairos que pueden modificar la notificación';
+$s_revert_to_system = "Delete All Projects Settings";
+$s_revert_to_all_project = "Delete Project Specific Settings";
 
 # manage_config_workflow_page
 $s_non_existent = 'sin existencias';
@@ -712,6 +720,9 @@ $s_desc_bug_resolved_status_threshold = 'Incidencia resuelta';
 $s_workflow_change_access = 'Cambia a los usuarios que pueden cambiar de workflow';
 $s_access_change_access = 'Los usuarios que puedan cambiar el estado que cambien tambien el nivel de acceso';
 
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
 # manage_config_work_threshold_page
 $s_assign_issue = 'Asignar una incidencia';
 $s_allow_close_immediate = 'Permitir que la incidencia sea cerrada en resuelta';
@@ -726,6 +737,11 @@ $s_resolved_status = 'Estado resuelto';
 $s_readonly_status = 'Estado de solo lectura';
 $s_reopen_status = 'Estado en que es marcada una incidencia reabierta';
 $s_reopen_resolution = 'Resolución para que sea marcada una inidencia reabierta';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Delete Settings';
 
 # manage_proj_add.php
 $s_project_added_msg = 'El proyecto ha sido agregado...';
@@ -861,6 +877,8 @@ $s_my_view_title_reported = 'Informados por mí';
 $s_my_view_title_assigned = 'Asignados a mí (pendientes)';
 $s_my_view_title_resolved = 'Resueltos';
 $s_my_view_title_monitored = 'Monitorizados por mí';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Noticia Agregada...';
@@ -1159,6 +1177,7 @@ $s_sponsorship_updated = 'Patrocinador actualizado';
 $s_sponsorship_deleted = 'Patrocinador borrado';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Más información sobre el patrocinador';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

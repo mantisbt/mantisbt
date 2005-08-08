@@ -10,11 +10,11 @@
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.94 $
-	# $Author: bigbadger $
-	# $Date: 2005-07-21 04:48:04 $
+	# $Revision: 1.95 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:10 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.94 2005-07-21 04:48:04 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.95 2005-08-08 21:29:10 thraxisp Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.263 -- jferraz 2005/07/20
 	###########################################################################
@@ -211,6 +211,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtro %d não encontrado.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
@@ -260,7 +261,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número 
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
 
-#$s_login_error = 'Sua conta pode estar desativada ou bloqueada (devido a um número excessivo de tentativas erradas de login) ou o nome de usuário e a senha que você digitou não estão corretos.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.';
 $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
@@ -537,6 +538,9 @@ $s_reminder = 'Lembrete';
 $s_reminder_explain = 'Esta anotação será enviada aos destinatários listados, solicitando retorno sobre este caso.';
 $s_reminder_monitor = 'Estes usuários também começarão a monitorar o caso. Eles podem se desinscrever usando o botão "Parar de Monitorar".';
 $s_reminder_store = 'Esta anotação será registrada no caso.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'O caso foi atualizado com sucesso...';
@@ -873,6 +877,8 @@ $s_my_view_title_reported = 'Relatados por Mim';
 $s_my_view_title_assigned = 'Atribuídos a Mim (não resolvidos)';
 $s_my_view_title_resolved = 'Resolvidos';
 $s_my_view_title_monitored = 'Monitorados por Mim';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Notícia adicionada...';
@@ -1171,6 +1177,7 @@ $s_sponsorship_updated = 'Patrocínio Atualizado';
 $s_sponsorship_deleted = 'Patrocínio Apagado';
 $s_sponsorship_paid = 'Patrocínio Pago';
 $s_sponsorship_more_info = 'Mais informações sobre o patrocínio';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1281,7 +1288,7 @@ $s_loading = 'Carregando...';
 $s_between = 'Entre' ;
 $s_on_or_before = 'Em ou Antes' ;
 $s_before = 'Antes' ;
-# $s_on = 'Em' ; # @@@ (thraxisp) this already exists (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Depois' ;
 $s_on_or_after = 'Em ou Depois' ;
 

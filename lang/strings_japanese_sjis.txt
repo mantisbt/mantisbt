@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.80 $
-	# $Author: vboctor $
-	# $Date: 2005-07-27 21:44:24 $
+	# $Revision: 1.81 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:08 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.80 2005-07-27 21:44:24 vboctor Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.81 2005-08-08 21:29:08 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -208,6 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='「%s」で、文字列を期待しましたが、配
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '「%s」は、数値である必要があります。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '改善要求はありません。';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'フィルター[%d」がありません。';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無効なメールアドレスです。';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'このファイル種別がアップロードできません。';
@@ -534,6 +535,9 @@ $s_reminder = '送信内容';
 $s_reminder_explain = '送信内容は、この改善要求のフィードバックを要求する受取人に送られます。';
 $s_reminder_monitor = '受取人は、この改善要求の監視ユーザに追加されます。監視を止める場合は、「監視終了」ボタンを押します。';
 $s_reminder_store = '送信内容は、この改善要求に追加されます。';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = '改善要求が正常に更新されました。';
@@ -870,6 +874,8 @@ $s_my_view_title_reported = '自分がレポート';
 $s_my_view_title_assigned = '自分が担当 (未解決)';
 $s_my_view_title_resolved = '解決済';
 $s_my_view_title_monitored = '自分が監視';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'ニュースが追加されました。';
@@ -1168,6 +1174,7 @@ $s_sponsorship_updated = '資金提供を更新しました。';
 $s_sponsorship_deleted = '資金提供を削除しました。';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = '資金提供についてもっと情報を見る';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

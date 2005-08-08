@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.71 $
-	# $Author: bigbadger $
-	# $Date: 2005-07-23 14:58:04 $
+	# $Revision: 1.72 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:28:56 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.71 2005-07-23 14:58:04 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.72 2005-08-08 21:28:56 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
@@ -224,6 +224,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
@@ -273,7 +274,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. numb
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -550,6 +551,9 @@ $s_reminder = '提醒';
 $s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
 $s_reminder_monitor = '这些收件人将开始监视此问题，他们可以适用“取消监视”按钮来取消订阅。';
 $s_reminder_store = '该注释将和问题一起储存。';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = '问题已经被成功更新...';
@@ -886,6 +890,8 @@ $s_my_view_title_reported = '由我报告的';
 $s_my_view_title_assigned = '指定给我的(尚未解决)';
 $s_my_view_title_resolved = '已解决的';
 $s_my_view_title_monitored = '我正在监视的';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = '公告项目已添加...';
@@ -1184,6 +1190,7 @@ $s_sponsorship_updated = '已修改捐赠';
 $s_sponsorship_deleted = '已删除捐赠';
 $s_sponsorship_paid = '已支付的捐赠';
 $s_sponsorship_more_info = '关于捐赠的更多信息';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

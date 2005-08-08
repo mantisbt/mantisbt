@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: thraxisp $
-	# $Date: 2005-07-20 14:17:43 $
+	# $Date: 2005-08-08 21:29:01 $
 	#
-	# $Id: strings_estonian.txt,v 1.33 2005-07-20 14:17:43 thraxisp Exp $
+	# $Id: strings_estonian.txt,v 1.34 2005-08-08 21:29:01 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,6 +209,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu v&otilde
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Peab olema number: %s';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Kannet %d ei leitud.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Vigane e-posti aadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Faili t&uuml;&uuml;p pole &uuml;leslaadimiseks lubatud.';
@@ -535,6 +536,9 @@ $s_reminder = 'Meeldetuletus';
 $s_reminder_explain = 'See m&auml;rkus saadetakse k&otilde;igile, kes on andnud n&otilde;usoleku tagasiside saamiseks.';
 $s_reminder_monitor = 'Need aadressaadid hakkavad seda kannet j&auml;lgima. J&auml;lgimisest loobumiseks on v&otilde;imalik vajutada &Auml;raj&auml;lgi nuppu.';
 $s_reminder_store = 'See m&auml;rkus lisatakse kande juurde.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Kanne on uuendatud...';
@@ -871,6 +875,8 @@ $s_my_view_title_reported = 'Raporteeritud minu poolt';
 $s_my_view_title_assigned = 'M&auml;&auml;ratud mulle (lahendamata)';
 $s_my_view_title_resolved = 'Lahendatud';
 $s_my_view_title_monitored = 'Minu poolt tegeletud';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Lisatud uudised...';
@@ -1169,6 +1175,7 @@ $s_sponsorship_updated = 'Sponsorlus Uuendatud';
 $s_sponsorship_deleted = 'Sponsorlus Kustutatud';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Rohkem informatsiooni sponsorluse kohta';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

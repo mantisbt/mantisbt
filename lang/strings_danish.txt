@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.90 $
-	# $Author: vboctor $
-	# $Date: 2005-07-22 22:39:15 $
+	# $Revision: 1.91 $
+	# $Author: thraxisp $
+	# $Date: 2005-08-08 21:29:01 $
 	#
-	# $Id: strings_danish.txt,v 1.90 2005-07-22 22:39:15 vboctor Exp $
+	# $Id: strings_danish.txt,v 1.91 2005-08-08 21:29:01 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -195,7 +195,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'FEJL: Fejlnote ikke fundet.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'FEJL: Projekt ikke fundet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEJL: Database-felt ikke fundet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FEJL: Kunne ikke opnå forbindelse til fTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Fejlmeldingssystemet havde ikke tilstrækkelige adgangsrettigheder til at håndtere en fejl med denne status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEJL: Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'FEJL: Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'FEJL: Bruger ikke fundet.';
@@ -208,6 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'FEJL: En streng var forventet, men 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Der forventedes et nummer for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'FEJL: Fejl ikke fundet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'FEJL: Ugyldig e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'FEJL: Profil ikke fundet.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'FEJL: Overførsel af denne filtype er ikke tilladt.';
@@ -257,7 +258,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. ant
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den handling vilskabew et loop i underprojekthirakiet.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = 'Din konto kan være lukket eller suspenderet (på grund af for mange fejlslagne login-forsøg) eller du bruger et forkert brugernavn eller adgangskode.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
 
@@ -534,6 +535,9 @@ $s_reminder = 'Påmindelse';
 $s_reminder_explain = 'Denne note bliver sendt til de modtagere der har bedt om at få besked om ændringer i denne fejl.';
 $s_reminder_monitor = 'Disse modtagere vil også begynde at overvåge denne fejl. De kan framelde sig ved at bruge knappen Afslut overvågning.';
 $s_reminder_store = 'Denne note vil blive gemt sammen med fejlen.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Fejlen er blevet opdateret...';
@@ -870,6 +874,8 @@ $s_my_view_title_reported = 'Rapporteret af mig';
 $s_my_view_title_assigned = 'Tildelt mig (uløste)';
 $s_my_view_title_resolved = 'Løst';
 $s_my_view_title_monitored = 'Overvåget af mig';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
 $s_news_added_msg = 'Nyhed tilføjet...';
@@ -1168,6 +1174,7 @@ $s_sponsorship_updated = 'Sponsorat opdateret';
 $s_sponsorship_deleted = 'Sponsorat slettet';
 $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'Flere oplysninger om sponsorering';
+$s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1278,7 +1285,7 @@ $s_loading = 'Indlæser...';
 $s_between = 'Mellem' ;
 $s_on_or_before = 'På eller før' ;
 $s_before = 'Før' ;
-# $s_on = 'På' ; # @@@ (thraxisp) denne eksisterer allerede (~ line 499)
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Efter' ;
 $s_on_or_after = 'På eller efter' ;
 
