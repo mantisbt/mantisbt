@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.22 2005-06-14 22:00:32 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.23 2005-08-08 22:30:58 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -101,7 +101,8 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 
 <?php
 $t_current_resolution = $t_bug->resolution;
-if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( in_array( $t_current_resolution, array( OPEN, REOPENED ) ) ) ) ) { ?>
+$t_bug_is_open = in_array( $t_current_resolution, array( OPEN, REOPENED ) );
+if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -109,7 +110,10 @@ if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( in_ar
 	</td>
 	<td>
 		<select name="resolution">
-			<?php print_enum_string_option_list( "resolution", FIXED ) ?>
+			<?php 
+                $t_resolution = $t_bug_is_open ? FIXED : $t_current_resolution;
+                print_enum_string_option_list( "resolution", $t_resolution );
+            ?>
 		</select>
 	</td>
 </tr>
