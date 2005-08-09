@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.44 2005-07-19 23:26:21 vboctor Exp $
+	# $Id: bug_report.php,v 1.45 2005-08-09 00:30:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -35,7 +35,7 @@
 	$t_bug_data->category				= gpc_get_string( 'category', '' );
 	$t_bug_data->reproducibility		= gpc_get_int( 'reproducibility' );
 	$t_bug_data->severity				= gpc_get_int( 'severity' );
-	$t_bug_data->priority				= gpc_get_int( 'priority', NORMAL );
+	$t_bug_data->priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 	$t_bug_data->summary				= gpc_get_string( 'summary' );
 	$t_bug_data->description			= gpc_get_string( 'description' );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
