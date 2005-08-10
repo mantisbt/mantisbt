@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.52 2005-07-30 19:33:52 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.53 2005-08-10 16:21:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -136,7 +136,7 @@
 	# --------------------
 	# Allows scripts to login using a login name or ( login name + password )
 	function auth_attempt_script_login( $p_username, $p_password = null ) {
-		global $g_script_login_cookie;
+		global $g_script_login_cookie, $g_cache_current_user_id;
 
 		$t_user_id = user_get_id_by_name( $p_username );
 
@@ -161,6 +161,9 @@
 
 		# set the cookies
 		$g_script_login_cookie = $t_user['cookie_string'];
+		
+		# cache user id for future reference
+		$g_cache_current_user_id = $t_user_id;
 
 		return true;
 	}
@@ -356,38 +359,45 @@
 
 	# --------------------
 	# Return the current user login cookie string,
+	# note that the cookie cached by a script login superceeds the cookie provided by
+	#  the browser. This shouldn't normally matter, except that the password verification uses
+	#  this routine to bypass the normal authentication, and can get confused when a normal user
+	#  logs in, then runs the verify script. the act of fetching config variables may get the wrong
+	#  userid.
 	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
 		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
 
+		# if logging in via a script, return that cookie
+		if ( $g_script_login_cookie !== null ) {
+			return $g_script_login_cookie;
+		}
+			
+		# fetch user cookie 
 		$t_cookie_name = config_get( 'string_cookie' );
 		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 		# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
 		if ( is_blank( $t_cookie ) ) {
-			if ( $g_script_login_cookie !== null ) {
-				return $g_script_login_cookie;
-			} else {
-				if ( ON == config_get( 'allow_anonymous_login' ) ) {
-					if ( $g_cache_anonymous_user_cookie_string == null ) {
-                        if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
-                            # get anonymous information if database is available
-						    $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = \'%s\'',
+			if ( ON == config_get( 'allow_anonymous_login' ) ) {
+				if ( $g_cache_anonymous_user_cookie_string === null ) {
+                    if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
+                        # get anonymous information if database is available
+                        $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = \'%s\'',
 								config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-                            $result = db_query( $query );
+                        $result = db_query( $query );
+                        
+                        if ( 1 == db_num_rows( $result ) ) {
+                            $row = db_fetch_array( $result );
+                            $t_cookie = $row['cookie_string'];
 
-                            if ( 1 == db_num_rows( $result ) ) {
-                                $row		= db_fetch_array( $result );
-                               $t_cookie	= $row['cookie_string'];
-
-                                $g_cache_anonymous_user_cookie_string = $t_cookie;
-                                $g_cache_current_user_id = $row['id'];
-                            }
+                            $g_cache_anonymous_user_cookie_string = $t_cookie;
+                            $g_cache_current_user_id = $row['id'];
                         }
-					} else {
-						$t_cookie = $g_cache_anonymous_user_cookie_string;
-					}
+                    }
+                } else {
+					$t_cookie = $g_cache_anonymous_user_cookie_string;
 				}
 			}
 		}
