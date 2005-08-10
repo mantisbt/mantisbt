@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.53 2005-08-07 18:42:45 ryandesign Exp $
+	# $Id: bug_report_advanced_page.php,v 1.54 2005-08-10 17:11:47 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -289,7 +289,7 @@
 
 
 <!-- Handler (if permissions allow) -->
-<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'update_bug_assign_threshold' ) ) ) { ?>
 <!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
