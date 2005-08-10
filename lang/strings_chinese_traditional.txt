@@ -1,17 +1,17 @@
 <?php
-        # Mantis - a php based bugtracking system
-        # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-        # Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-        # This program is distributed under the terms and conditions of the GPL
-        # See the README and LICENSE files for details
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
 
-        # Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
+	# Chinese_Traditional: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.84 $
-        # $Author: vboctor $
-        # $Date: 2005-08-10 12:21:50 $
+        # $Revision: 1.85 $
+        # $Author: thraxisp $
+        # $Date: 2005-08-10 19:19:38 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.84 2005-08-10 12:21:50 vboctor Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.85 2005-08-10 19:19:38 thraxisp Exp $
         ###########################################################################
 ?>
 <?php
@@ -19,1272 +19,1274 @@
 $s_charset = 'big5';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = '簿笆';
-$s_actiongroup_menu_copy = '狡籹';
-$s_actiongroup_menu_assign = '';
-$s_actiongroup_menu_close = '闽超';
-$s_actiongroup_menu_delete = '埃';
-$s_actiongroup_menu_resolve = '秆∕';
-$s_actiongroup_menu_update_priority = '穝纔舦';
-$s_actiongroup_menu_update_status = '穝篈';
-$s_actiongroup_menu_update_view_status = '穝浪跌篈';
-$s_actiongroup_menu_update_category = '穝摸';
-$s_actiongroup_menu_set_sticky = '砞﹚/秆埃Sticky';
-$s_actiongroup_menu_update_field = '穝 %s';
-$s_actiongroup_bugs = '匡拒拜肈';
+$s_actiongroup_menu_move = '∑h≤æ';
+$s_actiongroup_menu_copy = 'Ω∆ªs';
+$s_actiongroup_menu_assign = '§¿¨£';
+$s_actiongroup_menu_close = 'µ≤Æ◊';
+$s_actiongroup_menu_delete = 'ßR∞£';
+$s_actiongroup_menu_resolve = '∏—®M';
+$s_actiongroup_menu_update_priority = 'ßÛßÔ¿u•˝´◊';
+$s_actiongroup_menu_update_status = 'ßÛßÔ™¨∫A';
+$s_actiongroup_menu_update_view_status = 'ßÛ∑s¿Àµ¯™¨∫A';
+$s_actiongroup_menu_update_category = 'ßÛßÔ√˛ßO';
+$s_actiongroup_menu_set_sticky = '≥]©w/®˙Æ¯√¯√D';
+$s_actiongroup_menu_update_field = 'ßÛßÔ %s';
+$s_actiongroup_bugs = '§wøÔæ‹∞›√D';
 
 # new strings:
-$s_all_projects = '┮Τ盡';
-$s_move_bugs = '簿笆挛';
-$s_operation_successful = '巨ЧΘ';
-$s_date_order = 'ら戳逼';
-$s_print_all_bug_page_link = '厨';
-$s_csv_export = 'CSV 块';
-$s_login_anonymously = '拔祅';
-$s_anonymous = '拔';
-$s_jump_to_bugnotes = '锣簿挛掸癘';
-$s_public_project_msg = '硂盡琌そ秨┮Τ眀腹癸盡常Τ舦';
-$s_private_project_msg = '硂盡琌Τ╰参恨瞶の﹚ㄏノΤ舦';
-$s_access_level_project = '盡非,';
-$s_view_submitted_bug_link = '浪跌厨挛';
-$s_assigned_projects = '砆盡';
-$s_unassigned_projects = 'ゼ砆盡';
-$s_print = '';
-$s_jump = '锣簿';
-$s_copy_users = '狡籹眀腹';
-$s_copy_categories_from = '摸狡籹パ';
-$s_copy_categories_to = '狡籹摸';
-$s_copy_users_from = '眀腹狡籹パ';
-$s_copy_users_to = '眀腹狡籹';
-$s_bug_history = '挛菌';
-$s_field = '逆';
-$s_old_value = '侣计';
-$s_new_value = '穝计';
-$s_date_modified = 'ら戳砆э';
-$s_bugnote = '挛掸癘';
-$s_change = 'э';
-$s_bugnote_view_state = '挛掸癘浪跌篈';
-$s_bug_monitor = '挛砆菏跌';
-$s_bug_end_monitor = '挡挛菏跌';
-$s_announcement = '硄';
-$s_stays_on_top = '竚郴';
-$s_delete_bugnote_button = '埃挛掸癘';
-$s_delete_bugnote_sure_msg = '眤痷埃硂挛掸癘';
-$s_bug_relationships = '闽羛';
-$s_empty_password_sure_msg = '硂ㄏノ盞絏フ痷絋粄膥尿';
-$s_empty_password_button = 'ㄏノフ盞絏';
+$s_all_projects = '•˛≥°±MÆ◊';
+$s_move_bugs = '∑h≤æ Bugs';
+$s_operation_successful = '•øΩT∞ı¶Êßπ¶®';
+$s_date_order = '§È¥¡±∆ß«';
+$s_print_all_bug_page_link = '¶C¶L≥¯™Ì';
+$s_csv_export = 'CSV ∂◊•X';
+$s_login_anonymously = '•H∞Œ¶W™Ãµn§J';
+$s_anonymous = '∞Œ¶W™Ã';
+$s_jump_to_bugnotes = '∏ı®Ï Bug µß∞O';
+$s_public_project_msg = '≥o¨O≠” [§Ω∂}´¨] ™∫±MÆ◊. ©“¶≥§H≥£¶≥≈v≠≠®”æ\≈™ªP¶^≥¯≥o±MÆ◊™∫ Bug.';
+$s_private_project_msg = '≥o¨O≠” [´ ≥¨´¨] ™∫±MÆ◊. •u¶≥∫ﬁ≤z™Ã©M§‚∞ •[§J™∫®œ•Œ™Ã§~¶≥≈v≠≠∂i®”.';
+$s_access_level_project = '±MÆ◊¶s®˙µ•Ø≈';
+$s_view_submitted_bug_link = '¨›¶^≥¯™∫ Bug';
+$s_assigned_projects = '§¿¨£±MÆ◊';
+$s_unassigned_projects = '©|•º§¿¨£±MÆ◊';
+$s_print = '¶C¶L';
+$s_jump = '∏ı¶‹';
+$s_copy_users = 'Ω∆ªs®œ•Œ™Ã';
+$s_copy_categories_from = 'Ω∆ªs´¸©w±MÆ◊™∫√˛ßO®Ï•ª±MÆ◊';
+$s_copy_categories_to = 'Ω∆ªs•ª±MÆ◊™∫√˛ßO®Ï´¸©w±MÆ◊';
+$s_copy_users_from = 'Ω∆ªs´¸©w±MÆ◊™∫®œ•Œ™Ã®Ï•ª±MÆ◊';
+$s_copy_users_to = 'Ω∆ªs•ª±MÆ◊™∫®œ•Œ™Ã®Ï´¸©w±MÆ◊';
+$s_bug_history = 'Bug æ˙•v¨ˆø˝';
+$s_field = 'ƒÊ¶Ï';
+$s_old_value = '≠Ï•ª™∫§∫Æe';
+$s_new_value = 'ßÛ∑s™∫§∫Æe';
+$s_date_modified = '§È¥¡§wßÛßÔ';
+$s_bugnote = 'Bug µß∞O';
+$s_change = 'ßÛ∞ ';
+$s_bugnote_view_state = 'Bug µß∞O¿Àµ¯√˛´¨';
+$s_bug_monitor = '±“∞ ∫ ±±≥o Bug ';
+$s_bug_end_monitor = '√ˆ≥¨∫ ±±≥o Bug';
+$s_announcement = '§Ωßi';
+$s_stays_on_top = '§@™Ω´O´˘•X≤{¶b≠∫≠∂';
+$s_delete_bugnote_button = 'ßR∞£ Bug µß∞O';
+$s_delete_bugnote_sure_msg = 'ßAΩT©w≠nßR∞£≥o≠” Bug µß∞O∂‹?';
+$s_bug_relationships = '¨€√ˆ™∫ Bug';
+$s_empty_password_sure_msg = '≥o®œ•Œ™Ã™∫±KΩX¨∞™≈•’. ßAΩT©w≥oºÀ¨O•øΩT™∫∂‹?';
+$s_empty_password_button = '®œ•Œ™≈•’±KΩX';
 
-$s_duplicate_of = "duplicate of";
-$s_has_duplicate = "has duplicate";
-$s_related_to = "related to";
-$s_dependant_on = "parent of";
-$s_blocks = "child of";
+$s_duplicate_of = "Ω∆ªs of";
+$s_has_duplicate = "§w∏gΩ∆ªs";
+$s_related_to = "¨€√ˆ to";
+$s_dependant_on = "§Wºh of";
+$s_blocks = "§Uºh of";
 
-$s_new_bug = '穝挛。岿粇·';
-$s_bugnote_added = '挛掸癘砆穝糤';
-$s_bugnote_edited = '挛掸癘砆穝';
-$s_bugnote_deleted = '挛掸癘砆埃';
-$s_summary_updated = '篕璶砆穝';
-$s_description_updated = '弧砆穝';
-$s_additional_information_updated = '戈砆穝';
-$s_steps_to_reproduce_updated = '簍˙艼砆穝';
-$s_file_added = '穝糤郎';
-$s_file_deleted = '埃郎';
-$s_bug_deleted = '挛砆埃';
+$s_new_bug = '∑s Bug';
+$s_bugnote_added = 'Bug µß∞O§w∑sºW';
+$s_bugnote_edited = 'Bug µß∞O§wΩsøË';
+$s_bugnote_deleted = 'Bug µß∞O§wßR∞£';
+$s_summary_updated = '∫K≠n§wßÛ∑s';
+$s_description_updated = 'ª°©˙§wßÛ∑s';
+$s_additional_information_updated = '§wßÛ∑s√B•~∏Í∞T';
+$s_steps_to_reproduce_updated = '§wßÛ∑s≤£•Õ∞›√D®B∆J';
+$s_file_added = '¿…Æ◊§w∑sºW: ';
+$s_file_deleted = '¿…Æ◊§wßR∞£: ';
+$s_bug_deleted = 'Bug §wßR∞£';
 
-$s_make_private = '╬て';
-$s_make_public = 'そ秨て';
+$s_make_private = '≥]¨∞´ ≥¨';
+$s_make_public = '≥]¨∞§Ω∂}';
 
-$s_create_new_project_link = '穝糤盡';
+$s_create_new_project_link = '´ÿ•ﬂ∑s™∫±MÆ◊';
 
-$s_login_link = '祅';
+$s_login_link = 'µn§J';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = '⊿Τ続讽舦癸挛э';
-$s_bug_actiongroup_access = '⊿Τ続讽舦э';
-$s_bug_actiongroup_status = '拜肈ぃэ┮匡ぇ篈';
-$s_bug_actiongroup_category = '拜肈ぃэ┮匡ぇ摸';
-$s_close_bugs_conf_msg = '絋粄闽超硂挛';
-$s_delete_bugs_conf_msg = '絋粄埃硂挛';
-$s_move_bugs_conf_msg = '簿笆挛';
-$s_copy_bugs_conf_msg = '狡籹拜肈';
-$s_assign_bugs_conf_msg = '挛';
-$s_resolve_bugs_conf_msg = '匡拒挛秆猂';
-$s_priority_bugs_conf_msg = '匡拒挛纔舦';
-$s_status_bugs_conf_msg = '匡拒挛篈';
-$s_view_status_bugs_conf_msg = '匡拒拜肈浪跌篈';
-$s_category_bugs_conf_msg = '匡拒拜肈摸';
-$s_set_sticky_bugs_conf_msg = '絋粄砞﹚/秆埃拜肈sticky';
-$s_close_group_bugs_button = '闽超挛' ;
-$s_delete_group_bugs_button = '埃挛' ;
-$s_move_group_bugs_button = '簿笆挛' ;
-$s_copy_group_bugs_button = '狡籹拜肈' ;
-$s_assign_group_bugs_button = '挛' ;
-$s_resolve_group_bugs_button = '秆∕挛' ;
-$s_priority_group_bugs_button = '穝纔舦' ;
-$s_status_group_bugs_button = '穝篈' ;
-$s_category_group_bugs_button = '穝摸';
-$s_view_status_group_bugs_button = '穝浪跌篈';
-$s_set_sticky_group_bugs_button = '砞﹚/秆埃Sticky';
+$s_bug_actiongroup_failed = 'ßA®S¶≥æA∑Ì™∫≈v≠≠•h∞ı¶Ê≥oß@∑~, •X≤{•H§U™∫ bugs: ';
+$s_bug_actiongroup_access = 'ßA®S¶≥æA∑Ì™∫≈v≠≠•h∞ı¶Ê≥oß@∑~.';
+$s_bug_actiongroup_status = '≥o∞›√D§£Ø‡ßÛ∞ ¨∞ª›®D™¨∫A';
+$s_bug_actiongroup_category = '≥o∞›√D§£Ø‡ßÛ∞ ¨∞ª›®D√˛ßO';
+$s_close_bugs_conf_msg = 'ßAΩT©wßA≠nπÔ≥o®« bugs µ≤Æ◊∂‹?';
+$s_delete_bugs_conf_msg = 'ßAΩT©wßA≠nπÔ≥o®« bugs ßR∞£∂‹?';
+$s_move_bugs_conf_msg = '∑h≤æ bugs ®Ï';
+$s_copy_bugs_conf_msg = 'Ω∆ªs∞›√D®Ï';
+$s_assign_bugs_conf_msg = '§¿¨£ bugs µπ';
+$s_resolve_bugs_conf_msg = 'øÔæ‹ bugs §¿™R';
+$s_priority_bugs_conf_msg = 'øÔæ‹ bugs ¿u•˝´◊';
+$s_status_bugs_conf_msg = 'øÔæ‹ bugs ™¨∫A';
+$s_view_status_bugs_conf_msg = 'øÔæ‹∞›√D¿Àµ¯™¨∫A';
+$s_category_bugs_conf_msg = 'øÔæ‹∞›√D√˛ßO';
+$s_set_sticky_bugs_conf_msg = 'ßAΩT©wßA∑Q≥]©w/®˙Æ¯≥o®«¥∆§‚∞›√D?';
+$s_close_group_bugs_button = 'µ≤Æ◊™∫ Bugs' ;
+$s_delete_group_bugs_button = 'ßR∞£™∫ Bugs' ;
+$s_move_group_bugs_button = '∑h≤æ™∫ Bugs' ;
+$s_copy_group_bugs_button = 'Ω∆ªs∞›√D' ;
+$s_assign_group_bugs_button = '§¿¨£™∫ Bugs' ;
+$s_resolve_group_bugs_button = '∏—®M Bugs' ;
+$s_priority_group_bugs_button = 'ßÛ∑s¿u•˝´◊' ;
+$s_status_group_bugs_button = 'ßÛ∑s™¨∫A' ;
+$s_category_group_bugs_button = 'ßÛ∑s√˛ßO';
+$s_view_status_group_bugs_button = 'ßÛ∑s¿Àµ¯™¨∫A';
+$s_set_sticky_group_bugs_button = '≥]©w/®˙Æ¯√¯√D';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = '侯瓜ㄌ篈' ;
-$s_graph_imp_priority_title = '侯瓜ㄌ纔舦' ;
-$s_graph_imp_severity_title = '侯瓜ㄌ腨┦';
-$s_graph_imp_category_title = '侯瓜ㄌ摸';
-$s_graph_imp_resolution_title = '侯瓜ㄌ秆猂';
-$s_by_status_pct = 'ㄌ篈κだゑ';
-$s_by_priority_pct = 'ㄌ纔舦κだゑ';
-$s_by_severity_pct = 'ㄌ腨┦κだゑ';
-$s_by_category_pct = 'ㄌ摸κだゑ';
-$s_by_resolution_pct = 'ㄌ秆猂篈';
-$s_by_severity_mix = 'ㄌ腨┦の篈';
-$s_by_priority_mix = 'ㄌ纔舦の篈';
-$s_by_resolution_mix = 'ㄌ秆猂の篈';
-$s_synthesis_link = '侯瓜';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per 纔舦';
-$s_severity_link = 'Per 腨┦';
-$s_category_link = 'Per 摸';
-$s_resolution_link = 'Per 秆猂';
-$s_legend_still_open = 'ご礛嘞币';
-$s_legend_resolved = '砆秆∕';
-$s_legend_assigned = '砆';
-$s_legend_total = '羆计';
-$s_legend_opened = '砆嘞币';
-$s_legend_closed = '砆闽超';
-$s_legend_reported = '砆厨';
-$s_cumulative = '亥秈';
-$s_not_enough_data = '⊿Τì镑戈ネΘ瓜';
+$s_graph_imp_status_title = '™¨∫A¶X¶®πœ' ;
+$s_graph_imp_priority_title = '¿u•˝´◊¶X¶®πœ' ;
+$s_graph_imp_severity_title = 'ƒY≠´© ¶X¶®πœ';
+$s_graph_imp_category_title = '√˛ßO¶X¶®πœ';
+$s_graph_imp_resolution_title = '§¿™R¶X¶®πœ';
+$s_by_status_pct = '™¨∫A¶ §¿§Ò';
+$s_by_priority_pct = '¿u•˝´◊¶ §¿§Ò';
+$s_by_severity_pct = 'ƒY≠´© ¶ §¿§Ò';
+$s_by_category_pct = '√˛ßO¶ §¿§Ò';
+$s_by_resolution_pct = '§¿™R¶ §¿§Ò';
+$s_by_severity_mix = 'ƒY≠´© ©M™¨∫A';
+$s_by_priority_mix = '¿u•˝´◊©M™¨∫A';
+$s_by_resolution_mix = '§¿™R©M™¨∫A';
+$s_synthesis_link = '¶X¶®';
+$s_status_link = '™¨∫A';
+$s_priority_link = '¿u•˝´◊';
+$s_severity_link = 'ƒY≠´© ';
+$s_category_link = '√˛ßO';
+$s_resolution_link = '§¿™R';
+$s_legend_still_open = '§¥•ºµ≤Æ◊';
+$s_legend_resolved = '§w∏—®M';
+$s_legend_assigned = '§w§¿¨£';
+$s_legend_total = '¡`º∆';
+$s_legend_opened = '•ºµ≤Æ◊';
+$s_legend_closed = '§wµ≤Æ◊';
+$s_legend_reported = '§w¶^≥¯';
+$s_cumulative = '≤÷øn';
+$s_not_enough_data = '∏ÍÆ∆§£®¨µL™k´ÿ•ﬂπœßŒ';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = '陪ボ砆匡拒';
+$s_hide_button = '•u≈„•‹§wøÔæ‹';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = '匡拒逆';
-$s_printing_options_link = '匡兜';
+$s_printing_preferences_title = 'øÔæ‹¶C¶LƒÊ¶Ï';
+$s_printing_options_link = '¶C¶LøÔ∂µ';
 
 # word and excel export
-$s_bugnote_title = '挛掸癘' ;
-$s_bugnote_date = '挛掸癘ら戳';
-$s_bugnote_description = '挛掸癘弧';
+$s_bugnote_title = 'Bug µß∞O≥B≤z™Ã' ;
+$s_bugnote_date = 'Bug µß∞O§È¥¡';
+$s_bugnote_description = 'Bug µß∞Oª°©˙';
 
-$s_error_no_proceed = '叫ノ聅凝竟¨玡〃龄р岿粇兜ヘタ┪匡拒ㄤ笆ョノ垫虫匡兜钡锣┕ㄤ场だ';
+$s_error_no_proceed = 'Ω–®œ•Œ¬sƒ˝æπ™∫ "§W£∏≠∂" ´ˆ∂s¶^®Ï´e≠”µe≠±.  ®”≠◊•ø≤£•Õ≥o≠”ø˘ª~™∫∞›√D∏ÍÆ∆©Œ™ÃøÔæ‹®‰•L™∫ß@∑~.  ßA§]•i•H¶bøÔ≥Ê¶C¬IøÔßA∑Q≠n∞ı¶Ê™∫∑s∂µ•ÿ.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = '硂︽笆祇ネ岿粇惠璶厨倒╰参恨瞶瓀笵硂拜肈';
-$MANTIS_ERROR[ERROR_SQL] = '祇瞷SQL岿粇叫厨倒';
-$MANTIS_ERROR[ERROR_REPORT] = '厨い祇瞷岿粇';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '⊿Τ﹚郎';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '硂郎摸郎ぃ钡';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ぃ叫浪琩盡砞﹚';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Τ嘿郎叫埃硂郎';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '嘿盡竒';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ゲ惠逆 \'%s\'琌フ叫穝浪琩块计沮';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '硂眀腹琌玂臔眀腹玂臔秆埃玡ぃ癸ㄤ';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = '┶荡';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '更郎ア毖 PHP更郎ゼ币ノ叫高拜╰参恨瞶磅︽admin_check竲セ埃。埃挛·硂拜肈';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '更郎ア毖硂琌郎禬PHP更';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'тぃ硂ㄤいゲ斗把计';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '硂眀腹嘿竒叫匡拒眀腹嘿叫ノ聅凝竟¨玡〃龄穝匡拒';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'тぃ砞﹚匡兜\'%s\'';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'тぃ﹃ \'%s\'';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'тぃ挛掸癘';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'тぃ盡';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'тぃ计沮畐逆 \'%s\'';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'ぃ硈絬FTP狝竟';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '篈拜肈⊿Τì镑舦矪瞶拜肈';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '嘿盡竒叫玡块嘿';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '礚盡嘿盡嘿琌フ';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'тぃ眀腹';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '聅凝竟纗祅戈礚┪眀腹砆埃';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'тぃ眀腹跑砞﹚';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'тぃ穝籇';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '盞絏籔靡ぃ才';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '箇戳琌皚Μ琌﹃';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '箇戳琌﹃Μ琌皚';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s箇戳计沮计';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'тぃ挛 %d ';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '礚筿秎';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'тぃ眀腹砞﹚';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '更ぃ钡硂郎摸';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = '硂琌狡郎叫埃狡郎';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '礚更隔畖ゅンЖぃ┪呼狝竟ぃ糶';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '⊿Τ郎砆更叫玡の匡拒更郎';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '更郎ぃ簿癳郎纗ゅンЖゅンЖぃ┪呼狝竟ぃ糶';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'ぃ碻吏砞﹚硂拜肈';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'тぃ﹚逆';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '硂琌狡嘿';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '程ぶ临Τ盡ご礛ㄏノ硂逆';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '硂逆计礚';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '礚﹚逆﹚竡';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP挪﹚ア毖';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '硈絬LDAP狝竟ア毖';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = '穝LDAP癘魁ア毖';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'тぃLDAP眀腹癘魁';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '硈絬计沮畐狝竟ア毖计沮畐岿粇獺琌#%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = '计沮畐琩高ア毖计沮畐岿粇獺琌#%d: %s琩高%s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = '计沮畐技匡ア毖计沮畐岿粇獺琌#%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '嘿摸竒';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '⊿Τ﹚狡籹笆';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'тぃ摸';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '嘿セ竒';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'тぃセ';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '眀腹嘿礚眀腹嘿琌﹃计¨-〃┪¨_〃';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '眀腹⊿Τì镑キ';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '匡﹚"痷龟竡"籔眀腹眀腹嘿叫穝匡拒';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '戈や穿ゼ币ノ';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'тぃ戈 %d ';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '戈肂。%s·┏程肂。%s·';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '⊿Τ惠璶キ矪瞶戈拜肈.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '┶荡戈拜肈惠璶蔼キ';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '戈⊿Τ矗ㄑ筿秎. 叫穝砞﹚';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '砞﹚匡兜\'%s\' 计 \'%s\'礚';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'ぃ秈︽拜肈 \'%d\'琌斑弄';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "硂ㄢ拜肈Τ闽羛闽玒";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "тぃ闽羛闽玒";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "┶荡硂拜肈 %d 惠璶蔼キ";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "拜肈ぃ闽羛";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '絋粄睹絏ぃ才叫刚';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'框ア盞絏\'ゼ币ノ';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '惠璶矗ㄑ筿秎砞盞絏ぇノ';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '矗ㄑぇ戈ぃ才ヴ爹眀腹';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '絋粄URL礚┪竒ㄏノ叫穝signup';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '笷程蔼ノ秖叫羛蹈╰参恨瞶';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '巨暗Θ碻吏 盡';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ぃэ程╰参恨瞶キm';
+$MANTIS_ERROR[ERROR_GENERIC] = '∞ı¶Ê≥o≠”∞ ß@Æ…µo•Õ≤ß±`ø˘ª~. Ω–±N≥oø˘ª~∞TÆß¶^≥¯µπßA™∫®t≤Œ∫ﬁ≤z≠˚.';
+$MANTIS_ERROR[ERROR_SQL] = 'µo•Õ SQL ø˘ª~.  Ω–±N≥o∞TÆß¶^≥¯µπ ';
+$MANTIS_ERROR[ERROR_REPORT] = '¶bßA™∫¶^≥¯§§µo•Õø˘ª~.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '®S¶≥´¸©w¿…Æ◊';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '¿…Æ◊√˛´¨§£≥Q±µ®¸';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '¿…Æ◊∏ÙÆ|§£¶s¶b. Ω–¿À¨d±MÆ◊≥]©w≠»©Œ¨¢®t≤Œ∫ﬁ≤z≠˚´ÿ•ﬂ¿…Æ◊∏ÙÆ|.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '≥o¨O≠´Ω∆™∫¿…Æ◊.  Ω–•˝ßR∞£≠Ï•ª¿…Æ◊.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '≥o±MÆ◊™∫¶W∫Ÿ§w∏g¶s¶b.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '§@≠”•≤≠nƒÊ¶Ï \'%s\' ¨O™≈≠».  Ω–≠´∑s¿À¨dßAøÈ§J™∫∏ÍÆ∆.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '≥o≠”±b§·•ÿ´e¨∞´O≈@™¨∫A. ßA§£•i•H•h∞ı¶Ê≥o≠”ß@∑~. ¶p™G≠n∞ı¶Ê≥o≠”ß@∑~, •≤∂∑≠n•˝±N≥o≠”´O≈@™¨∫A®˙Æ¯.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'µL™k∞ı¶Ê≥o≠”ß@∑~.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '¿…Æ◊§W∂«•¢±—. PHP ¿…Æ◊§W∂«•\Ø‡•iØ‡®S¶≥∂}±“. Ω–≥q™æ®t≤Œ∫ﬁ≤z≠˚∞ı¶Ê admin_check ™∫ß@∑~®”∏—®M≥o≠”∞›√D.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '¿…Æ◊§W∂«•¢±—. ≥o´‹¶≥•iØ‡¨O¶]¨∞¿…Æ◊§j§p§w∏g∂WπL•ÿ´e PHP ©“≥]©w§π≥\™∫≥Ã§j≠».';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ø §÷≥o≠”≠∂≠±©“•≤≠n™∫∞—º∆.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '≥o≠”®œ•Œ™Ã±b∏π§w∏g¶s¶b. Ω–™¶^§W£∏≠∂øÔæ‹®‰•L™∫±b∏π.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ø §÷ \'%s\' ≥o≠”∞—º∆≥]©wøÔ∂µ.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Ø §÷ \'%s\' ≥o≠”¶r¶Í.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'µß∞Oß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '±MÆ◊ß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ß‰§£®Ï \'%s\' ≥o≠”∏ÍÆ∆ÆwƒÊ¶Ï.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'µL™k≥s§W FTP •Dæ˜.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '¶b•ÿ´e™∫∞›√D™¨∫A, ≥B≤z™Ã®S¶≥æA¶X™∫≈v≠≠•h≥B≤z≥o∞›√D.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '±MÆ◊¶W∫Ÿ§w∏g¶s¶b. Ω–™¶^§W£∏≠∂øÈ§J®‰•L¶W∫Ÿ.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '≥o±MÆ◊¶W∫Ÿ§£¶X≥W©w. ±MÆ◊¶W∫Ÿ§£•i¨∞™≈•’¶r¶Í.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = '®œ•Œ™Ãß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'µL™k±Nµn§J∏Í∞T¶s§JßA™∫¬sƒ˝æπ§§. •iØ‡ßA™∫±b∏π§w∏g≥QßR∞£©Œ¨O®S¶≥∂}±“¬sƒ˝æπ™∫ Cookie •\Ø‡?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'µL™kß‰®Ï≥o®œ•Œ™Ã™∫≥]©w≠».';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = '∑s™∫∂µ•ÿß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'øÈ§J™∫±KΩXªPπœßŒ§§™∫≠^º∆¶r§£≤≈.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'πw¥¡¨O∞}¶C¶˝¶¨®Ï™∫¨O¶r¶Í°C';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'πw¥¡¨O¶r¶Í¶˝¶¨®Ï™∫¨O∞}¶C°C';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s™∫πw¥¡º∆æ⁄¨∞º∆≠»°C';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d ß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'πL¬o±¯•Û %d µL™kß‰®Ï.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'ßA©“≠n®œ•Œ™∫πL¬o±¯•Û™©•ªπL¬¬, ∑–Ω–≠´∑s´ÿ•ﬂ';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'E-Mail ÆÊ¶°§£•øΩT.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ß‰§£®Ï≠”§H≥]©w.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '§W∂«¿…Æ◊™∫√˛´¨§£≥Q±µ®¸.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = '≥o¨O≠´Ω∆™∫¿…Æ◊°CΩ–•˝ßR∞£§w≠´Ω∆™∫¿…Æ◊°C';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '§W∂«∏ÙÆ|ø˘ª~. •ÿø˝•iØ‡§£¶s¶b©Œ™Ã®S¶≥ºg§J™∫≈v≠≠';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '®S¶≥¿…Æ◊≥Q§W∂«. Ω–™¶^§W≠∂®√•BøÔæ‹≠n§W∂«™∫¿…Æ◊';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '§W∂«¿…Æ◊µL™k≥Q∑h≤æ®Ï¿…Æ◊¿x¶s•ÿø˝. •ÿø˝•iØ‡§£¶s¶b©Œ™Ã®S¶≥ºg§J™∫≈v≠≠';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'ßA§£Ø‡¥`¿Ù≥]©w≥o∞›√D°C';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'ß‰§£®Ï¶€≠qƒÊ¶Ï';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '≥o¨O§@≠”≠´Ω∆™∫¶W∫Ÿ°C';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '≥Ã§÷¶≥§@≠”•H§W™∫±MÆ◊§¥¶b®œ•Œ≥oƒÊ¶Ï°C';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '≥oƒÊ¶Ï™∫º∆≠»µLÆƒ';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'µLÆƒ™∫¶€≠qƒÊ¶Ï©w∏q';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP ª{√“•¢±—';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '≥sΩu¶‹ LDAP ¶¯™Aæπ•¢±—';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'ßÛ∑s LDAP ∞Oø˝•¢±—°C';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'ß‰§£®Ï LDAP ±b∏π∞Oø˝°C';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '≥sΩu¶‹∏ÍÆ∆Æw¶¯™Aæπ•¢±—°C∏ÍÆ∆Æw™∫ø˘ª~∞TÆß¨O#%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = '∏ÍÆ∆Æw¨d∏ﬂ•¢±—°C∏ÍÆ∆Æw™∫ø˘ª~∞TÆß¨O#%d: %s°A¨d∏ﬂ%s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'øÔæ‹∏ÍÆ∆Æw•¢±—°C∏ÍÆ∆Æw™∫ø˘ª~∞TÆß¨O#%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '¨€¶P¶W∫Ÿ™∫√˛ßO§w∏g¶s¶b.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '®S¶≥´¸©w™∫Ω∆ªsß@∑~.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '√˛ßOß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '¨€¶P¶W∫Ÿ™∫™©•ª§w∏g¶s¶b.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '™©•ªß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '±b∏π¶W∫ŸµLÆƒ°C±b∏π¶W∫Ÿ•u•i•H¨O¶r¶Í°Bº∆¶r°B™≈ÆÊ°B°ß-°®©Œ°ß_°®.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '®œ•Œ™Ã®S¶≥®¨∞˜™∫¶s®˙≈v≠≠';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '≥o"ØuπÍ©m¶W"ªP®‰•L®œ•Œ™Ã™∫µn§J±b∏π¨€¶P. Ω–øÔæ‹®œ•Œ•t•~™∫ØuπÍ©m¶W.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '∏ÍßU™Ã§‰¥©•º±“•Œ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '∏ÍßU™Ã %d ß‰§£®Ï.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '∏ÍßU™˜√B°£%s°§©≥©Û≥ÃßC™˜√B°£%s°§°C';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '≥B≤z™Ã®S¶≥®¨∞˜™∫¶s®˙≈v≠≠•h≥B≤z∏ÍßU∞›√D.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '©⁄µ¥¶s®˙: §¿¨£∏ÍßU™∫∞›√Dª›≠nßÛ∞™™∫¶s®˙≈v≠≠.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '∏ÍßU™Ã®S¶≥¥£®— E-Mail. Ω–ßÛ∑sßA™∫≠”§H≥]©w.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '∞—º∆≥]©wøÔ∂µ \'%s\' •X≤{§£¶X≤z™∫§∫Æe \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '≥oß@∑~µL™k∞ı¶Ê, ¶]ª~∞›√D \'%d\' ¨O≥]©w∞ﬂ≈™™¨∫A';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "≥o®‚≠”∞›√D§ß´e¥N§w∏g≥]©w¨∞¨€√ˆ∞›√D.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "¨€√ˆ∞›√Dß‰§£®Ï.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "©⁄µ¥¶s®˙: ≥o∞›√D %d ª›≠nßÛ∞™™∫¶s®˙≈v≠≠.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "§£•i±N¶€§v≥]©w¨∞¨€√ˆ∞›√D.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'ΩTª{ΩsΩX§£≤≈. Ω–≠´∏’§@¶∏.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'ß—∞O±KΩX\' •\Ø‡•º±“•Œ.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'ßA•≤∂∑¥£®—§@≠” E-Mail ®”≠´∑s≥]©w±KΩX';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'ßA¥£®—™∫∏ÍÆ∆ªP§wµ˘•U™∫±b∏π§£≤≈!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '≥o≠”ª{√“∫Ùß}§£•øΩT©Œ¨O§w∏g≥Q¬IøÔª{√“πL. Ω–≠´∑s•”Ω–.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '•ÿ´e§w∂WπL®t≤Œ≥]©w™∫®œ•Œ≠≠®Óº∆, Ω–¡p√¥®t≤Œ∫ﬁ≤z≠˚';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '≥oºÀ∑|±N¶€§v´ÿ•ﬂ¨∞§Uºh±MÆ◊™∫§Uºh±MÆ◊¶”≥y¶®µLΩa∞j∏Ù∞›√D.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ßA§£•i•HßÛßÔ®t≤Œ§§≥Ã´·§@≠”®t≤Œ∫ﬁ≤z≠˚™∫≈v≠≠';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = '眀腹ゼ币ノ┪砆ゎ┪块眀腹嘿┪盞絏ぃタ絋';
-$s_login_cookies_disabled = '岿粇聅凝竟ぃ妓矪瞶cookies┪┶荡矪瞶cookies';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed µn§J attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'ßA™∫±b∏π•iØ‡≥Qº»∞±©Œ´ ¬Í©Œ™ÃøÈ§J§£•øΩT™∫±b∏π±KΩX.';
+$s_login_cookies_disabled = 'ø˘ª~: ßA™∫¬sƒ˝æπ•iØ‡§£§‰¥© cookies •\Ø‡©Œ¨O®S¶≥±N cookies •\Ø‡∂}±“.';
 
 # General Strings
-$s_go_back = '';
-$s_proceed = '硂柑膥尿';
+$s_go_back = '¶^§W≠∂';
+$s_proceed = '´ˆ≥o∏Ãƒ~ƒÚ';
 
-$s_switch = 'ち传';
-$s_logged_in_as = '祅';
+$s_switch = '§¡¥´';
+$s_logged_in_as = 'µn§J¨∞';
 
-$s_prefix_for_deleted_users = '眀腹';
+$s_prefix_for_deleted_users = '®œ•Œ™Ã';
 
-$s_administrator = '╰参恨瞶';
-$s_myself = "セ";
-$s_default_access_level = '箇砞キ';
+$s_administrator = '®t≤Œ∫ﬁ≤z≠˚';
+$s_myself = "ß⁄¶€§v";
+$s_default_access_level = 'πw≥]¶s®˙µ•Ø≈';
 
-$s_issue_status_percentage = '拜肈篈κだゑ';
+$s_issue_status_percentage = '∞›√D™¨∫A¶ §¿§Ò';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:芠,25:厨,40:穝,55:秨祇,70:竒瞶,90:╰参恨瞶';
-$s_project_status_enum_string     = '10:秨祇,30:祇︽,50:铆﹚,70:瞊∣';
-$s_project_view_state_enum_string = '10:そ秨,50:╬';
-$s_view_state_enum_string         = '10:そ秨,50:╬';
+$s_access_levels_enum_string      = '10:∞—∆[™Ã,25:¶^≥¯§H,40:ßÛ∑s™Ã,55:∂}µo™Ã,70:∫ﬁ≤z™Ã,90:®t≤Œ∫ﬁ≤z≠˚';
+$s_project_status_enum_string     = '10:∂}µo§§,30:§w§WΩu,50:§w√≠©w,70:§wß@ºo';
+$s_project_view_state_enum_string = '10:§Ω∂}´¨,50:´ ≥¨´¨';
+$s_view_state_enum_string         = '10:§Ω∂},50:´ ≥¨';
 
-$s_priority_enum_string           = '10:⊿Τ,20:,30:い,40:蔼,50:候,60:ミ';
-$s_severity_enum_string           = '10:砞璸疭紉,20:ぃ璶,30:セ,40:璚磑,50:Ω璶,60:璶,70:讽诀,80:Й锚';
-$s_reproducibility_enum_string    = '10:盽,30:案礛,50:繦诀,70:ゼ纜刚,90:ぃ簍,100:ぃ続';
-$s_status_enum_string             = '10:穝秨,20:は鮔,30:穦,40:絋粄,50:,80:秆∕,90:闽超';
-$s_resolution_enum_string         = '10:秨币,20:瞶,30:秨,40:ぃ簍,50:ぃ秆∕,60:狡,70:ぃ琌挛,80:既氨,90:ぃ秆∕';
-$s_projection_enum_string         = '10:⊿Τ,30:璚磑,50:Ω璶タ,70:璶璹,90:穝璸购';
-$s_eta_enum_string                = '10:⊿Τ,20:< ぱ,30:ぱ,40:< 琍戳,50:< る,60:> る';
-$s_sponsorship_enum_string        = '0:ゼ蹿,1:璶―蹿,2:蹿';
+$s_priority_enum_string           = '10:µL,20:ßC,30:§@ØÎ,40:∞™,50:∫Ú´Ê,60:•ﬂßY';
+$s_severity_enum_string           = '10:ØSºx,20:§£≠´≠n,30:§Â¶r,40:§£≠@¿£,50:¶∏≠n,60:≠´≠n,70:∑Ìæ˜,80:´r¶Ì';
+$s_reproducibility_enum_string    = '10:Æ…±`,30:∞∏µM,50:¿Hæ˜,70:•º¥˙∏’,90:µL™k≠´≤{,100:N/A';
+$s_status_enum_string             = '10:∑s∞›√D,20:¶≥¶^¬–,30:§w¶¨®Ï,40:¶≥ΩTª{,50:§w§¿¨£,80:§w∏—®M,90:§wµ≤Æ◊';
+$s_resolution_enum_string         = '10:•ºµ≤Æ◊,20:§w≠◊•ø,30:≠´≥]•ºµ≤Æ◊,40:µL™k≠´≤{ø˘ª~,50:µL™k≠◊¥_,60:≠´Ω∆¶^≥¯∞›√D,70:§£¨O Bug,80:º»Æ…¿¡∏m,90:§£∂∑≠◊•ø';
+$s_projection_enum_string         = '10:®S¶≥,30:¿£§O¥˙∏’,50:§p¥T≠◊•ø,70:•D≠n≠◊≠q,90:≠´∑s≥]≠p';
+$s_eta_enum_string                = '10:®S¶≥,20:< §@§—,30:§G¶‹§T§—,40:< §@¨P¥¡,50:< §@≠”§Î,60:> §@≠”§Î';
+$s_sponsorship_enum_string        = '0:•º•I¥⁄,1:§w≠n®D•I¥⁄,2:§w•I¥⁄';
 
 # Email Strings
-$s_new_account_subject = '眀腹爹';
-$s_new_account_greeting = '谅爹眀腹嘿\'';
-$s_new_account_greeting2 = '\'ЧΘ爹叫聅凝URL。俱︽URL·の砞﹚盞絏';
-$s_new_account_username = '眀腹: ';
-$s_new_account_message = '狦⊿Τ璶―筁爹ぃ瞶穦爹獺ぃ瞶穦⊿Τヴ拜肈穦祇ネ' . "\n\n";
-$s_new_account_do_not_reply = '叫ぃ璶滦獺';
-$s_new_account_email = '筿秎';
-$s_new_account_IP = '环祘IP';
-$s_new_account_signup_msg = '盢穦ミ眀腹';
+$s_new_account_subject = '∑s±b∏πµ˘•U≥q™æ';
+$s_new_account_greeting = '¡¬¡¬±z™∫µ˘•U. ±z™∫±b∏π¨∞ \'';
+$s_new_account_greeting2 = '\'. Ω–¬IøÔ§U≠±™∫∫Ùß}®”ßπ¶®µ˘•Uµ{ß«, ¬IøÔ´·∑|¶€∞ ∂}±“¬sƒ˝æπ≥s§J≈˝ßA≥]©w±KΩX™∫µe≠±:';
+$s_new_account_username = '±b∏π: ';
+$s_new_account_message = '¶p™GßA®S¶≥¶b•ª∫ÙØ∏µ˘•U, Ω–§£≠n≤z≥o´ µ˘•UΩTª{´H•Û, ¥N∑Ì¶®®Sµo•ÕπL¶n§F.' . "\n\n";
+$s_new_account_do_not_reply = 'Ω–§£≠n™Ω±µ¶^¬–≥o´ µ˘•UΩTª{´H•Û';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'ª∑∫› IP ¶Ïß}: ';
+$s_new_account_signup_msg = '≥o≠”±b∏π§w∏g´ÿ•ﬂßπ¶®:';
 
-$s_reset_request_msg = '琘。琌徽セ·矗竒筿秎絋粄跑盞絏狦ぃ琌徽矗叫ぃ璶瞶穦爹獺ぃ瞶穦⊿Τヴ拜肈穦祇ネ' . "\n\n" . '狦琌矗筁硂跑叫聅凝硂URL跑盞絏';
-$s_reset_request_in_progress_msg = '狦眀腹嘿の筿秎タ絋穦Μи盚┕筿秎絋粄獺叫蛤繦絋粄筿秎ず甧跑盞絏';
+$s_reset_request_msg = '¶≥§H (©Œ≥\¨OßA¶€§v) ¥£•XßÛßÔ±KΩX™∫ª›®D. ¶p™GßA®S¶≥¥£•XßÛßÔ±KΩX™∫ª›®D, Ω–§£≠n≤z≥o´ µ˘•UΩTª{´H•Û, ¥N∑Ì¶®®Sµo•ÕπL¶n§F.' . "\n\n" . '¶p™G≥o≠”ª›®DΩT©w¨OßA¥£•X, Ω–¬IøÔ•H§U™∫∫Ùß}®”ßÛßÔßA™∫±KΩX:';
+$s_reset_request_in_progress_msg = '¶p™GßA¥£®—•øΩT™∫±b∏π•H§Œ E-Mail, ®t≤Œ±N∑|¶€∞ ±Hµo§@´ ΩTª{´H®Á®ÏßA™∫ E-Mail §§. ∑ÌßA¶¨®Ï≥o´ ΩTª{´H®Á, ®Ã∑”´H§§™∫´¸•‹®B∆J, ±N•i•HÆe©ˆ™∫•hßÛßÔßA™∫±KΩX.';
 
-$s_email_notification_title_for_status_bug_new = '硂拜肈琌秨币篈。秨·';
-$s_email_notification_title_for_status_bug_feedback = '硂拜肈惠璶は鮔';
-$s_email_notification_title_for_status_bug_acknowledged = '硂挛砆穦.';
-$s_email_notification_title_for_status_bug_confirmed = '硂挛砆絋粄';
-$s_email_notification_title_for_status_bug_assigned = '硂挛砆';
-$s_email_notification_title_for_status_bug_resolved = '硂挛砆秆∕';
-$s_email_notification_title_for_status_bug_closed = '硂挛砆闽超';
+$s_email_notification_title_for_status_bug_new = '•H§U™∫∞›√D≤{¶b≥Q≠´≥]¨∞∑s∞›√D™¨∫A';
+$s_email_notification_title_for_status_bug_feedback = '•H§U™∫∞›√Dª›≠nßA™∫¶^¬–.';
+$s_email_notification_title_for_status_bug_acknowledged = '•H§U™∫ bug §w∏g¶¨®Ï.';
+$s_email_notification_title_for_status_bug_confirmed = '•H§U™∫ bug §w∏gΩTª{.';
+$s_email_notification_title_for_status_bug_assigned = '•H§U™∫ bug §w∏g§¿¨£.';
+$s_email_notification_title_for_status_bug_resolved = '•H§U™∫ bug §w∏g∏—®M.';
+$s_email_notification_title_for_status_bug_closed = '•H§U™∫ bug §w∏gµ≤Æ◊';
 
-$s_email_notification_title_for_action_bug_submitted = '硂挛厨.';
-$s_email_notification_title_for_action_bug_assigned = '硂挛砆';
-$s_email_notification_title_for_action_bug_reopened = '硂挛砆秨';
-$s_email_notification_title_for_action_bug_deleted = '硂挛砆埃';
-$s_email_notification_title_for_action_bug_updated = '硂拜肈砆穝';
-$s_email_notification_title_for_action_sponsorship_added = '硂拜肈砆戈';
-$s_email_notification_title_for_action_sponsorship_updated = '硂拜肈戈场だэ';
-$s_email_notification_title_for_action_sponsorship_deleted = '硂拜肈戈场だ篗綪';
+$s_email_notification_title_for_action_bug_submitted = '•H§U™∫ bug §w∏g¶^≥¯.';
+$s_email_notification_title_for_action_bug_assigned = '•H§U™∫ bug §w∏g§¿¨£.';
+$s_email_notification_title_for_action_bug_reopened = '•H§U™∫ bug §w∏g≠´≥]•ºµ≤Æ◊.';
+$s_email_notification_title_for_action_bug_deleted = '•H§U™∫ bug §w∏gßR∞£.';
+$s_email_notification_title_for_action_bug_updated = '•H§U™∫∞›√D§w∏gßÛ∑s.';
+$s_email_notification_title_for_action_sponsorship_added = '•H§U™∫∞›√D§w∏g≥Q∏ÍßU.';
+$s_email_notification_title_for_action_sponsorship_updated = '≥o∞›√D™∫∏ÍßU≥°§¿§wßÛßÔ.';
+$s_email_notification_title_for_action_sponsorship_deleted = '≥o∞›√D™∫∏ÍßU≥°§¿§w∫MæP.';
 
-$s_email_notification_title_for_action_bugnote_submitted = '挛掸癘穝糤挛.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "拜肈﹚%s狡拜肈";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "拜肈%s﹚拜肈狡拜肈";
-$s_email_notification_title_for_action_related_to_relationship_added = "拜肈﹚%sΤ闽拜肈";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "拜肈﹚%sダ拜肈";
-$s_email_notification_title_for_action_blocks_relationship_added = "拜肈﹚%s拜肈";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "拜肈は﹚%s狡拜肈";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "拜肈%sは﹚拜肈狡拜肈";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "拜肈は﹚%sΤ闽拜肈";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "拜肈は﹚%sダ拜肈";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "拜肈は﹚%s拜肈";
-$s_email_notification_title_for_action_relationship_child_resolved = "闽羛闽玒拜肈%s砆秆∕";
-$s_email_notification_title_for_action_relationship_child_closed = "闽羛闽玒拜肈%s砆闽超";
+$s_email_notification_title_for_action_bugnote_submitted = 'Bug µß∞O§w∏g≥Q∑sºW®Ï≥o bug §∫.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "•H§U™∫∞›√D§w∏g≥Q≥]©w¨∞≠´Ω∆™∫∞›√D %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "≥o∞›√D %s §w∏g≥Q≥]©w¨∞©M•H§U™∫∞›√D≠´Ω∆.";
+$s_email_notification_title_for_action_related_to_relationship_added = "•H§U™∫∞›√D§w∏g≥Q≥]©w¨∞≥o∞›√D™∫¨€√ˆ∞›√D %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "•H§U™∫∞›√D§w∏g≥Q≥]©w¨∞≥o≠”∞›√D™∫§Wºh∞›√D %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "•H§U™∫∞›√D§w∏g≥Q≥]©w¨∞≥o∞›√D™∫§Uºh∞›√D %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "•H§U™∫∞›√D§w∏g≥Q®˙Æ¯≥o∞›√D™∫≠´Ω∆∞›√D %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "≥o∞›√D %s §w∏g≥Q®˙Æ¯≥]©w¨∞•H§U∞›√D™∫≠´Ω∆∞›√D.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "•H§U™∫∞›√D§w∏g≥Q®˙Æ¯≥o∞›√D™∫¨€√ˆ∞›√D %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "•H§U™∫∞›√D§w∏g≥Q®˙Æ¯≥o∞›√D™∫§Wºh∞›√D %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "•H§U™∫∞›√D§w∏g≥Q®˙Æ¯≥o∞›√D™∫§Uºh∞›√D %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "≥o¨€√ˆ∞›√D %s §w∏g≥Q∏—®M.";
+$s_email_notification_title_for_action_relationship_child_closed = "≥o¨€√ˆ∞›√D %s §w∏g≥Qµ≤Æ◊.";
 
-$s_email_reporter = '厨';
-$s_email_handler = '。Handler·';
-$s_email_project = '盡';
-$s_email_bug = '挛絪腹';
-$s_email_category = '摸';
-$s_email_reproducibility = '瞷繵瞯';
-$s_email_severity = '腨┦';
-$s_email_priority = '纔舦';
-$s_email_status = '篈';
-$s_email_resolution = '秆猂';
-$s_email_duplicate = '狡籹';
-$s_email_fixed_in_version = 'セタ';
-$s_email_date_submitted = '厨ら戳';
-$s_email_last_modified = 'Ω穝';
-$s_email_summary =  '篕璶';
-$s_email_description = '弧';
+$s_email_reporter = '¶^≥¯§H';
+$s_email_handler = '≥B≤z™Ã';
+$s_email_project = '±MÆ◊';
+$s_email_bug = 'Bug Ωs∏π';
+$s_email_category = '√˛ßO';
+$s_email_reproducibility = '•X≤{¿W≤v';
+$s_email_severity = 'ƒY≠´© ';
+$s_email_priority = '¿u•˝´◊';
+$s_email_status = '™¨∫A';
+$s_email_resolution = '§¿™R';
+$s_email_duplicate = 'Ω∆ªs';
+$s_email_fixed_in_version = '§w≠◊•ø™©•ª';
+$s_email_date_submitted = '¶^≥¯§È¥¡';
+$s_email_last_modified = '§W¶∏ßÛ∑s';
+$s_email_summary =  '∫K≠n';
+$s_email_description = 'ª°©˙';
 
 # account_delete.php
-$s_account_protected_msg = '眀腹砆玂臔. 礚猭跑砞﹚...';
-$s_account_removed_msg = '眀腹竒砆簿埃...';
+$s_account_protected_msg = '±b∏π≥Q´O≈@. µL™k≈‹ßÛ≥]©w...';
+$s_account_removed_msg = 'ßA™∫±b∏π§w∏g≥Q≤æ∞£...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = '眤絋﹚璶埃眀腹?';
-$s_delete_account_button = '埃眀腹';
+$s_confirm_delete_msg = '±zΩT©w≠nßR∞£ßA™∫±b∏π?';
+$s_delete_account_button = 'ßR∞£±b∏π';
 
 # account_page.php
-$s_manage_profiles_link = '恨瞶砞﹚';
-$s_change_preferences_link = '跑尺砞﹚';
-$s_edit_account_title = '絪胯眀腹';
-$s_username = '眀腹';
-$s_realname = '﹎';
-$s_email = '筿秎';
-$s_password = '盞絏';
-$s_no_password_change = '盞絏琌パ╰参北┮ぃэ';
-$s_confirm_password  = '絋粄盞絏';
-$s_access_level = '舦';
-$s_update_user_button = '穝眀腹';
-$s_verify_warning = '眀腹絋粄Μ眀腹戈絋粄獺瞷竒礚';
-$s_verify_change_password = '惠璶砞﹚盞絏ㄓ穝祅';
+$s_manage_profiles_link = '∫ﬁ≤z≠”§H≥]©w';
+$s_change_preferences_link = '≈‹ßÛ≥ﬂ¶n≥]©w';
+$s_edit_account_title = 'ΩsøË±b∏π';
+$s_username = '±b∏π';
+$s_realname = 'ØuπÍ©m¶W';
+$s_email = 'E-Mail';
+$s_password = '±KΩX';
+$s_no_password_change = '≥o≠”±KΩX§w∏g≥Q®‰•L®t≤Œ±±®Ó§§, ©“•H•ÿ´eµL™k≥QßÛßÔΩsøË.';
+$s_confirm_password  = 'ΩTª{±KΩX';
+$s_access_level = '¶s®˙≈v≠≠';
+$s_update_user_button = 'ßÛ∑s®œ•Œ™Ã';
+$s_verify_warning = 'ßA™∫±b∏π∏Í∞T§w∏g≈Á√“µLª~. ßA©“¶¨®Ï™∫±b∏πΩTª{´H≤{¶b§w∏g•¢Æƒ.';
+$s_verify_change_password = 'ßA•≤∂∑¶b¶π≥]©w±KΩX§~•i≠´∑sµn§J.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = '箇砞眀腹尺砞﹚';
-$s_default_project = '箇砞盡';
-$s_advanced_report = '秈顶厨';
-$s_advanced_view = '秈顶浪跌';
-$s_advanced_update = '秈顶穝';
-$s_refresh_delay = '穝┑筐';
-$s_redirect_delay = '锣祇┑筐';
-$s_with_minimum_severity = 'ぃぶ腨┦';
-$s_bugnote_order = '挛掸癘逼よΑ';
-$s_bugnote_order_asc = '患糤';
-$s_bugnote_order_desc = '患搭';
-$s_email_on_new = '穝厨祇筿秎';
-$s_email_on_assigned = '砆祇筿秎';
-$s_email_on_feedback = 'Τは鮔祇筿秎';
-$s_email_on_resolved = '砆秆∕祇筿秎';
-$s_email_on_closed = '砆闽超祇筿秎';
-$s_email_on_reopened = '秨祇筿秎';
-$s_email_on_bugnote_added = '讽穝糤挛掸癘祇筿秎';
-$s_email_on_status_change = '篈穝祇筿秎';
-$s_email_on_priority_change = '纔舦穝祇筿秎';
-$s_email_bugnote_limit = '筿秎挛掸癘';
-$s_language = '粂ē';
-$s_update_prefs_button = '穝尺';
-$s_reset_prefs_button = '砞尺';
+$s_default_account_preferences_title = 'πw≥]±b∏π≥ﬂ¶n≥]©w';
+$s_default_project = 'πw≥]±MÆ◊';
+$s_advanced_report = '∂i∂•≥¯ßi';
+$s_advanced_view = '∂i∂•¿Àµ¯';
+$s_advanced_update = '∂i∂•ßÛ∑s';
+$s_refresh_delay = 'µ•¥X¨Ìµe≠±¶€∞ ßÛ∑s';
+$s_redirect_delay = 'µ•¥X¨Ì¶€∞ ¬‡ß}';
+$s_with_minimum_severity = '∑ÌƒY≠´© ∂WπL';
+$s_bugnote_order = 'Bug µß∞O±∆ß«§Ë¶°';
+$s_bugnote_order_asc = '§…æ≠±∆¶C(•—§p®Ï§j)';
+$s_bugnote_order_desc = '≠∞æ≠±∆¶C(•—§j®Ï§p)';
+$s_email_on_new = '¶≥∑s∞›√D¥N E-Mail µπß⁄';
+$s_email_on_assigned = '§w§¿¨£¥N E-Mail µπß⁄';
+$s_email_on_feedback = '§w¶^¬–¥N E-Mail µπß⁄';
+$s_email_on_resolved = '§w∏—®M¥N E-Mail µπß⁄';
+$s_email_on_closed = '§wµ≤Æ◊¥N E-Mail µπß⁄';
+$s_email_on_reopened = '≠´≥]•ºµ≤Æ◊¥N E-Mail µπß⁄';
+$s_email_on_bugnote_added = '∑sºW Bug µß∞O¥N E-Mail µπß⁄';
+$s_email_on_status_change = '™¨∫AßÛ∞ ¥N E-Mail µπß⁄';
+$s_email_on_priority_change = '¿u•˝´◊ßÛ∞ ¥N E-Mail µπß⁄';
+$s_email_bugnote_limit = 'Bug µß∞Oº∆∂WπL´¸©wº∆¥N E-Mail µπß⁄';
+$s_language = 'ªy®t';
+$s_update_prefs_button = 'ßÛ∑s≥ﬂ¶n';
+$s_reset_prefs_button = '≠´≥]≥ﬂ¶n';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = '尺砞﹚竒砞...';
+$s_prefs_reset_msg = '≥ﬂ¶n≥]©w§w∏g≠´≥]...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = '尺砞﹚竒穝...';
+$s_prefs_updated_msg = '≥ﬂ¶n≥]©w§w∏gßÛ∑s...';
 
 # account_profile_add.php
-$s_profile_added_msg = '砞﹚穝糤...';
+$s_profile_added_msg = '≠”§H≥]©w§w∑sºW...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = '埃砞﹚...';
+$s_profile_deleted_msg = 'ßR∞£≠”§H≥]©w...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = '絪胯砞﹚';
-$s_platform = '穨キ';
-$s_operating_system = '穨╰参';
-$s_additional_description = '肂弧';
-$s_update_profile_button = '穝砞﹚';
+$s_edit_profile_title = 'ΩsøË≠”§H≥]©w';
+$s_platform = 'ß@∑~•≠•x';
+$s_operating_system = 'ß@∑~®t≤Œ';
+$s_additional_description = '√B•~ª°©˙';
+$s_update_profile_button = 'ßÛ∑s≠”§H≥]©w';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = '箇砞砞﹚穝...';
+$s_profile_defaulted_msg = 'πw≥]≠”§H≥]©wßÛ∑s...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = '穝糤砞﹚';
-$s_add_profile_button = '穝糤砞﹚';
-$s_edit_or_delete_profiles_title = '絪胯┪埃砞﹚';
-$s_edit_profile = '絪胯砞﹚';
-$s_make_default = '﹚箇砞';
-$s_delete_profile = '埃砞﹚';
-$s_select_profile = '匡拒砞﹚';
-$s_submit_button = '癳';
+$s_add_profile_title = '∑sºW≠”§H≥]©w';
+$s_add_profile_button = '∑sºW≠”§H≥]©w';
+$s_edit_or_delete_profiles_title = 'ΩsøË©ŒßR∞£≠”§H≥]©w';
+$s_edit_profile = 'ΩsøË≠”§H≥]©w';
+$s_make_default = '´¸©wπw≥]≠»';
+$s_delete_profile = 'ßR∞£≠”§H≥]©w';
+$s_select_profile = 'øÔæ‹≠”§H≥]©w';
+$s_submit_button = '∞e•X';
 
 # account_profile_update.php
-$s_profile_updated_msg = '砞﹚穝...';
+$s_profile_updated_msg = '≠”§H≥]©wßÛ∑s...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'и戈';
-$s_update_sponsorship_button = 'э蹿篈';
-$s_no_sponsored = 'тぃ砆戈拜肈';
-$s_own_sponsored = '砆戈拜肈';
-$s_issues_handled = '砆戈拜肈';
-$s_no_own_sponsored = '⊿Τヴ砆戈拜肈';
-$s_sponsor = '戈';
-$s_amount = '肂';
-$s_total_owing = '羆ゼ';
-$s_total_paid = '羆肂';
-$s_sponsor_hide = '留旅秆∕の蹿';
-$s_sponsor_show = '陪跌┮Τ';
+$s_my_sponsorship = 'ß⁄™∫∏ÍßU™Ã';
+$s_sponsor_all_projects = '™`∑N: ≥o™˜√B±N∏ÍßU©“¶≥±MÆ◊.';
+$s_sponsor_project = '™`∑N: ≥o™˜√B•u∏ÍßU %s ≥o≠”±MÆ◊.';
+$s_update_sponsorship_button = 'ßÛßÔ•I¥⁄™¨∫A';
+$s_no_sponsored = 'ß‰§£®Ï´¸¨£µπßA™∫∞›√D¶≥≥Q∏ÍßU.';
+$s_own_sponsored = 'ßA≥Q∏ÍßU™∫∞›√D:';
+$s_issues_handled = '´¸¨£µπßA¶≥≥Q∏ÍßU™∫∞›√D:';
+$s_no_own_sponsored = '´¸¨£µπßA™∫∞›√Dß°®S¶≥≥Q∏ÍßU.';
+$s_sponsor = '∏ÍßU™Ã';
+$s_amount = '™˜√B';
+$s_total_owing = '§Ì¥⁄¡`√B';
+$s_total_paid = '•I¥⁄¡`√B';
+$s_sponsor_hide = '¡Ù¬√§w∏—®M§Œ§w•I¥⁄';
+$s_sponsor_show = '•˛≥°≈„µ¯';
 
 # account_sponsor_update.php
-$s_payment_updated = '蹿戈穝';
+$s_payment_updated = '•I¥⁄∏ÍÆ∆§wßÛ∑s.';
 
 # account_update.php
-$s_account_updated_msg = '眀め竒Θ穝...';
-$s_email_updated = '筿秎竒Θ穝';
-$s_realname_duplicated = '痷龟嘿竒ノ眀腹';
-$s_realname_updated = '痷龟嘿竒Θ穝';
-$s_password_updated = '盞絏竒Θ穝';
+$s_account_updated_msg = 'ßA™∫±b§·§w∏g¶®•\ßÛ∑s...';
+$s_email_updated = 'Email ¶aß}§w¶®•\ßÛ∑s';
+$s_realname_duplicated = '¶≥®‰•L®œ•Œ™Ã§w∏g®œ•Œ≥o≠”ØuπÍ©m¶W';
+$s_realname_updated = 'ØuπÍ©m¶W§w¶®•\ßÛ∑s';
+$s_password_updated = '±KΩX§w¶®•\ßÛ∑s';
 
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = '┮匡拒拜肈妮ぃ盡把计は琈┮Τ盡砞﹚';
+$s_multiple_projects = 'ßA©“øÔæ‹™∫∞›√Dƒ›©Û§£¶P™∫±MÆ◊°C•H§U∞—º∆±Nºv≈T®Ï©“¶≥±MÆ◊™∫≥]©w, ¶p™GßA§£¨O∑Q≥oºÀ™∫∏‹, Ω–≠´∑søÔ©w∏˚§÷™∫∞›√D.';
 
 # bug_assign.php
-$s_bug_assign_msg       = '挛竒Θ砆﹚...';
+$s_bug_assign_msg       = 'Bug §w∏g¶®•\≥Q´¸©w...';
 
 # bug_change_status_page.php
-$s_new_bug_title = '穝糤拜肈';
-$s_feedback_bug_title = '矗ㄑは鮔倒拜肈';
-$s_acknowledged_bug_title = '穦拜肈';
-$s_confirmed_bug_title = '絋粄拜肈';
-$s_assigned_bug_title = '拜肈';
-$s_new_bug_button = '穝糤拜肈';
-$s_feedback_bug_button = 'は鮔拜肈';
-$s_acknowledged_bug_button = '穦拜肈';
-$s_confirmed_bug_button = '絋粄拜肈';
-$s_assigned_bug_button = '拜肈';
+$s_new_bug_title = '∑s∞›√D';
+$s_feedback_bug_title = '¥£®—πÔ≥o∞›√D™∫¶^¬–';
+$s_acknowledged_bug_title = '§w¶¨®Ï∞›√D';
+$s_confirmed_bug_title = '¶≥ΩTª{∞›√D';
+$s_assigned_bug_title = '§w§¿¨£∞›√D';
+$s_new_bug_button = '∑s∞›√D';
+$s_feedback_bug_button = '¥£®—¶^¬–';
+$s_acknowledged_bug_button = '§w¶¨®Ï∞›√D';
+$s_confirmed_bug_button = '¶≥ΩTª{∞›√D';
+$s_assigned_bug_button = '§w§¿¨£∞›√D';
 
 # bug_close.php
-$s_bug_close_msg       = '挛竒闽超...';
-$s_close_immediately   = '皑闽超:';
+$s_bug_close_msg       = 'Bug §w∏g≥Qµ≤Æ◊...';
+$s_close_immediately   = '•ﬂ®Ëµ≤Æ◊:';
 
 # bug_close_page.php
-$s_closed_bug_title = '闽超挛';
+$s_closed_bug_title = 'µ≤Æ◊';
 
 # bug_delete.php
-$s_bug_deleted_msg = '挛竒砆埃...';
+$s_bug_deleted_msg = 'Bug §w∏g≥QßR∞£...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = '絋﹚璶埃挛?';
-$s_delete_bug_button = '埃挛';
+$s_delete_bug_sure_msg = 'ßAΩT©w≠nßR∞£¶π Bug?';
+$s_delete_bug_button = 'ßR∞£ Bug';
 
 # bug_monitor.php
-$s_monitor_bug_button = '菏跌挛';
-$s_unmonitor_bug_button = '氨ゎ菏跌';
+$s_monitor_bug_button = '∫ ±± Bug';
+$s_unmonitor_bug_button = '®˙Æ¯∫ ±±';
 
 # bug_file_add.php
-$s_file_upload_msg = '郎Θ更';
+$s_file_upload_msg = '¿…Æ◊§W∂«¶®•\'';
 
 # bug_file_upload_inc.php
-$s_upload_file = '更郎';
-$s_select_file = '匡拒郎';
-$s_upload_file_button = '更';
-$s_max_file_size = '程郎';
+$s_upload_file = '§W∂«¿…Æ◊';
+$s_select_file = 'øÔæ‹¿…Æ◊';
+$s_upload_file_button = '§W∂«¿…Æ◊';
+$s_max_file_size = '¿…Æ◊§j§p≠≠®Ó';
 
 # bug_reopen.php
-$s_bug_reopened_msg = '挛竒砆秨...';
-$s_reopen_add_bugnote_title = '穝糤秨挛挛掸癘瞶パ';
-$s_bugnote_add_reopen_button = '穝糤挛掸癘秨挛';
+$s_bug_reopened_msg = 'Bug §w∏g≥Q≠´≥]•ºµ≤Æ◊...';
+$s_reopen_add_bugnote_title = '∑sºW Bug µß∞O≤z•— For ≠´∂} Bug';
+$s_bugnote_add_reopen_button = '∑sºW Bug µß∞O•B≠´∂} Bug';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = '秆∕挛';
-$s_resolved_bug_button = '秆∕挛';
+$s_resolved_bug_title = '∏—®M Bug';
+$s_resolved_bug_button = '∏—®M Bug';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = '挛竒砆秆∕. 叫よ块挛掸癘...';
-$s_resolve_add_bugnote_title = '穝糤秆∕挛挛掸癘瞶パ';
-$s_bugnote_add_resolve_button = '穝糤挛掸癘';
+$s_bug_resolved_msg = 'Bug §w∏g≥Q∏—®M. Ω–¶b§U§ËøÈ§J Bug µß∞O...';
+$s_resolve_add_bugnote_title = '∑sºW Bug µß∞O≤z•— For ∏—®M Bug';
+$s_bugnote_add_resolve_button = '∑sºW Bug µß∞O';
 
 # bug_reminder_page.php
-$s_from = 'パ';
-$s_to = '';
-$s_on = '闽';
-$s_sent_you_this_reminder_about = '祇矗ボ闽';
-$s_bug_reminder = '祇矗ボ';
-$s_reminder_sent_to = '祇矗ボ';
-$s_bug_send_button = '祇';
-$s_reminder = '矗ボ';
-$s_reminder_explain = '癘魁穦锣祇倒璶―拜肈矗ㄑは鮔眀腹';
-$s_reminder_monitor = 'Μン秨﹍菏跌拜肈/ ノ¨氨ゎ菏跌〃氨ゎ';
-$s_reminder_store = '癘魁蛤拜肈纗癬';
+$s_from = 'From';
+$s_to = 'To';
+$s_on = '¶b';
+$s_sent_you_this_reminder_about = '∂«∞eµπßA≥o≠”¥£øÙ∞TÆß, §∫Æeª°©˙¶p§U';
+$s_bug_reminder = '∂«∞e¥£øÙ™∫ E-Mail µπ®œ•Œ™Ã';
+$s_reminder_sent_to = '¥£øÙ™Ã∂«∞eµπ';
+$s_bug_send_button = '∂«∞e';
+$s_reminder = '¥£øÙ∞TÆß(∑|¶€∞ •[§J Bug µß∞O§∫)';
+$s_reminder_explain = '≥o∞TÆß±N≥Q∂«∞e®Ï≤M≥Ê∏Ã≠±´¸©w™∫¶¨´H™Ã, •h≠n®D•L≠ÃØ‡∞˜¶^¬–¶≥√ˆ≥o∞›√D™∫≥B≤z™¨™p.';
+$s_reminder_monitor = '®t≤Œ∑|¶€∞ ±N≥o®«´¸©w™∫¶¨´H™Ã≥]©w∫ ±±≥o≠”∞›√D. •L≠Ã§]•i•H®œ•Œ®˙Æ¯∫ ±±™∫•\Ø‡±N≥o∞›√D≤æ•X•L™∫∫ ±±≤M≥Ê§∫.';
+$s_reminder_store = 'ßA©“øÈ§J™∫∞TÆß§]∑|≥Q∑Ì¶®§@≠” Bug µß∞O∞Oø˝¶b≥o Bug ∞›√D§∫.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = 'Ω–ΩTª{ßA©“≠n∏ÍßU™∫≥o∞›√D %d - %s.';
 
 # bug_update.php
-$s_bug_updated_msg = '挛竒Θ砆穝...';
+$s_bug_updated_msg = 'Bug §w∏g¶®•\≥QßÛ∑s...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = '挛';
-$s_update_simple_link = '虏穝';
-$s_updating_bug_advanced_title = 'タ穝挛戈癟';
-$s_id = '絪腹';
-$s_category = '摸';
-$s_severity = '腨┦';
-$s_reproducibility = '瞷繵瞯';
-$s_date_submitted = '厨ら戳';
-$s_last_update = 'Ω穝';
-$s_reporter = '厨';
-$s_assigned_to = '倒';
-$s_priority = '纔舦';
-$s_resolution = '秆猂';
-$s_status = '篈';
-$s_duplicate_id = '狡籹絪腹';
-$s_os = '穨╰参';
-$s_projection = '砏购单';
-$s_os_version = 'セ';
+$s_back_to_bug_link = '¶^®Ï Bug';
+$s_update_simple_link = '¬≤©ˆßÛ∑s';
+$s_updating_bug_advanced_title = '•ø¶bßÛ∑s Bug ∏Í∞T';
+$s_id = 'Ωs∏π';
+$s_category = '√˛ßO';
+$s_severity = 'ƒY≠´© ';
+$s_reproducibility = '•X≤{¿W≤v';
+$s_date_submitted = '¶^≥¯§È¥¡';
+$s_last_update = '§W¶∏ßÛ∑s';
+$s_reporter = '¶^≥¯§H';
+$s_assigned_to = '´¸©wµπ';
+$s_priority = '¿u•˝´◊';
+$s_resolution = '§¿™R';
+$s_status = '™¨∫A';
+$s_duplicate_id = 'Ω∆ªsΩs∏π';
+$s_os = 'ß@∑~®t≤Œ';
+$s_projection = '≥Wπ∫µ•Ø≈';
+$s_os_version = '™©•ª';
 $s_eta = 'ETA';
-$s_product_version = '玻珇セ';
-$s_build = 'ミ';
-$s_fixed_in_version = 'セタ';
-$s_votes = 'щ布';
-$s_summary = '篕璶';
-$s_description = '弧';
-$s_steps_to_reproduce = '挛祇ネ˙艼弧';
-$s_update_information_button = '穝戈癟';
-$s_sticky_issue = 'Sticky拜肈';
-$s_profile = '砞﹚';
+$s_product_version = '≤£´~™©•ª';
+$s_build = '´ÿ•ﬂ';
+$s_fixed_in_version = '§w≠◊•ø™©•ª';
+$s_votes = 'ßÎ≤º';
+$s_summary = '∫K≠n';
+$s_description = 'ª°©˙';
+$s_steps_to_reproduce = 'Bug µo•Õ™∫®B∆Jª°©˙';
+$s_update_information_button = 'ßÛ∑s∏Í∞T';
+$s_sticky_issue = '¥∆§‚∞›√D';
+$s_profile = '≠”§H≥]©w'; 
 
 # bug_update_page.php
-$s_update_advanced_link = '秈顶穝';
-$s_updating_bug_simple_title = 'タ穝挛戈癟';
+$s_update_advanced_link = '∂i∂•ßÛ∑s';
+$s_updating_bug_simple_title = '•ø¶bßÛ∑s Bug ∏Í∞T';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'щ布穝糤...';
+$s_vote_added_msg = 'ßÎ≤º§w∑sºW...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = '挛掸癘穝糤...';
+$s_bugnote_added_msg = 'Bug µß∞O§w∑sºW...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = '挛掸癘埃...';
-$s_bug_notes_title = '挛掸癘';
+$s_bugnote_deleted_msg = 'Bug µß∞O§wßR∞£...';
+$s_bug_notes_title = 'Bug µß∞O';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = '穝挛掸癘';
+$s_edit_bugnote_title = 'ΩsøË Bug µß∞O';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = '⊿Τ掸癘Ω挛ō';
-$s_delete_link = '埃';
-$s_add_bugnote_title = '穝糤挛掸癘';
-$s_add_bugnote_button = '穝糤挛掸癘';
-$s_bugnote_edit_link = '穝';
-$s_closed_bug_button = '闽超挛';
+$s_no_bugnotes_msg = '®S¶≥ Bug µß∞O™˛¶b≥o Bug ®≠§W';
+$s_delete_link = 'ßR∞£';
+$s_add_bugnote_title = '∑sºW Bug µß∞O';
+$s_add_bugnote_button = '∑sºW Bug µß∞O';
+$s_bugnote_edit_link = 'ΩsøË';
+$s_closed_bug_button = 'µ≤Æ◊';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Θ穝挛掸癘';
-$s_edited_on = 'э';
+$s_bugnote_updated_msg = 'Bug µß∞O§w∏g≥QßÛ∑s¶®•\...';
+$s_edited_on = '§wΩsøË: ';
 
 # index.php
-$s_click_to_login = '翴匡硂柑祅';
+$s_click_to_login = '¬IøÔ≥o∏Ãµn§J';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = '舧ㄓ挛發萝いみ';
-$s_login_title = '祅';
-$s_save_login = '癘Ω祅';
-$s_choose_project = '匡拒盡';
-$s_login_button = '祅';
-$s_signup_link = '爹穝眀腹';
-$s_lost_password_link = '框ア盞絏';
+$s_login_page_info = '≈w™Ô®”®Ï Bug ∞l¬‹§§§ﬂ';
+$s_login_title = 'µn§J';
+$s_save_login = '∞O¶Ì¶π¶∏µn§J';
+$s_choose_project = 'øÔæ‹±MÆ◊';
+$s_login_button = 'µn§J';
+$s_signup_link = 'µ˘•U§@≠”∑s±b∏π';
+$s_lost_password_link = 'ß—∞O±KΩX´ˆ≥o∏Ã';
 
 # login_select_proj_page.php
-$s_select_project_button = '匡拒盡';
+$s_select_project_button = 'øÔæ‹±MÆ◊';
 
 # logout_page.php
-$s_logged_out_title = '祅い...';
-$s_redirecting = '...锣い';
-$s_here = '硂柑';
+$s_logged_out_title = 'µn•X§§...';
+$s_redirecting = '...¬‡ß}§§';
+$s_here = '®Ï≥o∏Ã';
 
 # lost_pwd_page.php
-$s_lost_password_title = "盞絏砞";
-$s_lost_password_done_title = "盞絏獺祇";
-$s_lost_password_subject = "盞絏砞";
-$s_lost_password_info = "砞盞絏惠璶矗ㄑ眀腹の筿秎<br/><br/>矗ㄑ戈癸Τ眀腹, 穦竒筿秎ΜΤ疭睹絏URL叫聅凝硈挡砞盞絏.";
-$s_lost_password_confirm_hash_OK = "璶―叫穝盞絏";
+$s_lost_password_title = "≠´∑s≥]©w±KΩX";
+$s_lost_password_done_title = "≠´≥]±KΩX∞TÆß§w∏g∞e•X";
+$s_lost_password_subject = "≠´∑s≥]©w±KΩX";
+$s_lost_password_info = "∑ÌßAß—∞O±KΩXÆ…, Ω–øÈ§J•øΩT™∫±b∏π©M E-Mail µM´·¬IøÔ∞e•X.<br/><br/>∑ÌßAøÈ§J™∫±b∏π©M E-Mail •øΩTµLª~, ßA±N•i¶bßA™∫ E-Mail ´HΩc¶¨®Ï§@´ ≥q™æ´H, ¬IøÔ´H§§™∫∫Ùß}, ßA¥N•i•H≥s§W•ªØ∏ßÛ∑sßA™∫±KΩX.";
+$s_lost_password_confirm_hash_OK = "ßA™∫•”Ω–§w∏g≥Q±µ®¸. Ω–ßÛ∑sßA™∫±KΩX.";
 
 # main_page.php
-$s_open_and_assigned_to_me = '嘞币の倒и';
-$s_open_and_reported_to_me = 'パи厨の嘞币';
-$s_newer_news_link = '穝穝籇';
-$s_older_news_link = '祔Ν穝籇';
-$s_archives = '戈畐';
+$s_open_and_assigned_to_me = '§¿¨£µπß⁄•B©|•ºµ≤Æ◊';
+$s_open_and_reported_to_me = '•—ß⁄¶^≥¯•B©|•ºµ≤Æ◊';
+$s_newer_news_link = 'ßÛ∑s™∫∑sªD';
+$s_older_news_link = 'µy¶≠™∫∑sªD';
+$s_archives = '≤M≥Êº“¶°';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'ミ眀腹';
-$s_created_user_part2 = '舦';
+$s_created_user_part1 = '´ÿ•ﬂ®œ•Œ™Ã';
+$s_created_user_part2 = '¶s®˙≈v≠≠¨∞';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'ミㄏノ眀腹';
-$s_verify_password = '絋粄盞絏';
-$s_enabled = '币ノ';
-$s_protected = '玂臔';
-$s_create_user_button = 'ミ眀腹';
+$s_create_new_account_title = '´ÿ•ﬂ®œ•Œ™Ã±b∏π';
+$s_verify_password = 'ΩTª{±KΩX';
+$s_enabled = '±“•Œ';
+$s_protected = '´O≈@';
+$s_create_user_button = '´ÿ•ﬂ®œ•Œ™Ã';
 
 # manage_page.php
-$s_hide_disabled = '留旅ゼ币ノ';
-$s_filter_button = '筁耾竟';
-$s_manage_users_link = '恨瞶眀腹';
-$s_manage_projects_link = '恨瞶盡';
-$s_manage_custom_field_link = '恨瞶﹚逆';
-$s_manage_global_profiles_link = '恨瞶俱砰砞﹚';
-$s_permissions_summary_report = '舦篕璶厨';
-$s_manage_config_link = '恨瞶砞﹚';
-$s_manage_threshold_config = '瑈祘秨狠';
-$s_manage_email_config = '筿秎絋粄';
-$s_manage_workflow_config = '瑈祘';
-$s_create_new_account_link = 'ミ眀腹';
-$s_projects_link = 'ミ盡';
-$s_documentation_link = '弧';
-$s_new_accounts_title = '穝眀腹';
-$s_1_week_title = '秅ず';
-$s_never_logged_in_title = '眖ゼ祅';
-$s_prune_accounts = '俱瞶眀腹';
-$s_hide_inactive = '留旅盯竚';
-$s_manage_accounts_title = '恨瞶眀腹';
+$s_hide_disabled = '¡Ù¬√•º±“•Œ™∫';
+$s_filter_button = 'ΩT©wπL¬o±¯•Û';
+$s_manage_users_link = '∫ﬁ≤z®œ•Œ™Ã';
+$s_manage_projects_link = '∫ﬁ≤z±MÆ◊';
+$s_manage_custom_field_link = '∫ﬁ≤z¶€≠qƒÊ¶Ï';
+$s_manage_global_profiles_link = '∫ﬁ≤zæ„≈È≠”§H≥]©w';
+$s_permissions_summary_report = '≈v≠≠¶^≥¯';
+$s_manage_config_link = '∫ﬁ≤z∞—º∆≥]©w';
+$s_manage_threshold_config = '§uß@¨yµ{™˘¬e';
+$s_manage_email_config = 'E-Mail ≥q™æ';
+$s_manage_workflow_config = '§uß@¨yµ{';
+$s_create_new_account_link = '´ÿ•ﬂ±b∏π';
+$s_projects_link = '´ÿ•ﬂ±MÆ◊';
+$s_documentation_link = 'ª°©˙';
+$s_new_accounts_title = '∑s±b∏π';
+$s_1_week_title = '§@∂g§∫';
+$s_never_logged_in_title = '±q•ºµn§J';
+$s_prune_accounts = '≤M∞£±b∏π';
+$s_hide_inactive = '¡Ù¬√•º±“•Œ';
+$s_manage_accounts_title = '∫ﬁ≤z±b∏π';
 $s_p = 'p';
-$s_date_created = 'ミら戳';
-$s_last_visit = '程Ω聅凝';
-$s_edit_user_link = '絪胯眀腹';
+$s_date_created = '´ÿ•ﬂ§È¥¡';
+$s_last_visit = '≥Ã´·§@¶∏¬sƒ˝';
+$s_edit_user_link = 'ΩsøË®œ•Œ™Ã';
 
 # manage_config_email_page
-$s_config_all_projects = '猔種砞﹚紇臫┮Τ盡';
-$s_config_project = '猔種砞﹚紇臫 %s 盡';
-$s_colour_coding = '肅︹腹';
-$s_colour_project = '盡砞﹚纔ㄤ砞﹚';
-$s_colour_global = '┮Τ盡盡妮砞﹚纔箇砞砞﹚';
-$s_issue_reporter = '厨拜肈眀腹';
-$s_issue_handler = '矪瞶硂拜肈眀腹';
-$s_users_added_bugnote = '挛掸癘眀腹';
-$s_change_configuration = '穝砞﹚';
-$s_message = '獺絚';
-$s_default_notify = '砞﹚箇砞硄夹粁';
-$s_action_notify = '砞﹚︽笆硄夹粁';
-$s_notify_defaults_change_access = '街э箇砞硄';
-$s_notify_actions_change_access = '街э硄';
-$s_revert_to_system = "埃盡砞﹚";
-$s_revert_to_all_project = "埃盡疭砞﹚";
+$s_config_all_projects = '™`∑N: ≥o®«∞—º∆≥]©w±Nºv≈T©“¶≥±MÆ◊.';
+$s_config_project = '™`∑N: ≥o®«∞—º∆≥]©w±N•uºv≈T %s ≥o≠”±MÆ◊.';
+$s_colour_coding = '™ÌÆÊ§∫¶p•X≤{√C¶‚, Ω–∞—¶“•H§U¶U√C¶‚™∫§∫Æeª°©˙:';
+$s_colour_project = '±MÆ◊≥]©w¿u•˝©Û®‰•L≥]©w.';
+$s_colour_global = '•˛≥°±MÆ◊≥]©w≠»¿u•˝πw≥]∞—º∆≥]©w.';
+$s_issue_reporter = '¶^≥¯≥o∞›√D™∫®œ•Œ™Ã';
+$s_issue_handler = '≥B≤z≥o∞›√D™∫®œ•Œ™Ã';
+$s_users_added_bugnote = '§w∑sºW Bug µß∞O™∫®œ•Œ™Ã';
+$s_change_configuration = 'ßÛ∑s∞—º∆≥]©w';
+$s_message = '∞TÆß';
+$s_default_notify = '≥]©wπw≥] E-Mail ≥q™æ';
+$s_action_notify = '≥]©wß@∑~ E-Mail ≥q™æ';
+$s_notify_defaults_change_access = 'Ω÷•i•HßÛ∞ πw≥] E-Mail ≥q™æ';
+$s_notify_actions_change_access = 'Ω÷•i•HßÛ∞  E-Mail ≥q™æ';
+$s_revert_to_system = "ßR∞£•˛≥°±MÆ◊≥]©w≠»";
+$s_revert_to_all_project = "ßR∞£±MÆ◊ØS©w≥]©w≠»";
 
 # manage_config_workflow_page
-$s_non_existent = 'ぃ';
-$s_current_status = '瞷篈';
-$s_next_status = 'Next篈';
-$s_workflow = '瑈祘';
-$s_workflow_thresholds = '紇臫瑈祘秨狠';
-$s_threshold = '秨狠';
-$s_status_level = '篈';
-$s_alter_level = '街э硂计';
-$s_validation = '瑈祘絋粄';
-$s_comment = '絋粄爹睦';
-$s_superfluous = '篈琌緇のぃゲ璶ぃノē';
-$s_unreachable = 'ぃ砞﹚拜肈篈';
-$s_no_exit = 'ぃ砞﹚拜肈瞒秨篈';
-$s_access_levels = 'キ';
-$s_access_change = 'э篈程キ';
-$s_desc_bug_submit_status = '拜肈篈﹚穝拜肈';
-$s_desc_bug_reopen_status = '拜肈篈﹚秨拜肈';
-$s_desc_bug_resolved_status_threshold = '拜肈篈跌砆秆∕';
-$s_workflow_change_access = '街э瑈祘';
-$s_access_change_access = '街эキ';
+$s_non_existent = '§£¶s¶b™∫';
+$s_current_status = '•ÿ´e™¨∫A';
+$s_next_status = '§U≠”™¨∫A';
+$s_workflow = '§uß@¨yµ{';
+$s_workflow_thresholds = '•iºv≈T§uß@¨yµ{™˘¬e';
+$s_threshold = '™˘¬e';
+$s_status_level = '™¨∫A';
+$s_alter_level = 'Ω÷•i•HΩ’æ„§∫Æe';
+$s_validation = '§uß@¨yµ{ΩTª{';
+$s_comment = 'ΩTª{™˛µ˘';
+$s_superfluous = '™¨∫A¨O¶hæl™∫§Œ§£•≤≠n™∫, §£ª›¶A¥£®—';
+$s_unreachable = 'ßA§£Ø‡≥]©w≥o∞›√D¨∞≥o≠”™¨∫A';
+$s_no_exit = 'ßA§£Ø‡≥]©w≥o∞›√D¨∞≥o•H•~™∫™¨∫A';
+$s_access_levels = '¶s®˙≈v≠≠';
+$s_access_change = 'ßÛ∞ ≥o≠”™¨∫A™∫≥Ã§p¶s®˙≈v≠≠';
+$s_desc_bug_submit_status = '™¨∫A§w≥Q≥]©w¨∞∑s™∫∞›√D';
+$s_desc_bug_reopen_status = '™¨∫A§w≥Q≠´≥]¨∞•ºµ≤Æ◊™∫∞›√D';
+$s_desc_bug_resolved_status_threshold = '™¨∫A§w≥Q≥]¨∞§w∏—®M∞›√D';
+$s_workflow_change_access = 'Ω÷•i•HßÛ∞ §uß@¨yµ{';
+$s_access_change_access = 'Ω÷•i•HßÛ∞ ¶s®˙≈v≠≠';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = '%s箇砞篈⊿Τ砆匡%s篈硂穦砆┛跌';
+$s_default_not_in_flow = ' %s ™∫πw≥]™¨∫A®S≥QøÔæ‹ %s ™∫§U≠”™¨∫A. ≥o≠”∑|≥Q©ø≤§™∫';
 
 # manage_config_work_threshold_page
-$s_assign_issue = '拜肈';
-$s_allow_close_immediate = '甧砛拜肈秆∕闽超';
-$s_allow_reporter_close = '甧砛厨闽超拜肈';
-$s_allow_reporter_reopen = '甧砛厨秨拜肈';
-$s_set_status_assigned = '砞﹚篈';
-$s_allow_user_edit = '甧砛眀腹э挛掸癘';
-$s_limit_access = '厨拜肈';
-$s_submit_status = '硂拜肈篈﹚穝拜肈';
-$s_assigned_status = '硂拜肈篈﹚笆拜肈';
-$s_resolved_status = '硂拜肈篈﹚硂拜肈砆秆∕';
-$s_readonly_status = '硂拜肈篈﹚斑弄';
-$s_reopen_status = '硂拜肈篈﹚秨拜肈';
-$s_reopen_resolution = '秆猂跌秨拜肈';
+$s_assign_issue = '§¿¨£∞›√D';
+$s_allow_close_immediate = '§π≥\∞›√D¶b∏—®M´·¥Nµ≤Æ◊';
+$s_allow_reporter_close = '§π≥\¶^≥¯§HØ‡µ≤Æ◊';
+$s_allow_reporter_reopen = '§π≥\¶^≥¯§HØ‡≠´≥]•ºµ≤Æ◊';
+$s_set_status_assigned = '≥]©w≥B≤z™Ã§¿¨£™∫™¨∫A';
+$s_allow_user_edit = '§π≥\®œ•Œ™ÃØ‡ΩsøË¶€§v™∫ Bug µß∞O';
+$s_limit_access = '≠≠®Ó¶^≥¯§H¶s®˙¶€§v™∫∞›√D';
+$s_submit_status = '≥o∞›√D™∫™¨∫A§w≥Q≥]¨∞∑s™∫∞›√D';
+$s_assigned_status = '≥o∞›√D™∫™¨∫A§w≥Q≥]¨∞¶€∞ §¿¨£™∫∞›√D';
+$s_resolved_status = '≥o∞›√D™∫™¨∫A§w≥Q≥]¨∞§w∏—®M∞›√D';
+$s_readonly_status = '≥o∞›√D™∫™¨∫A§w≥Q≥]¨∞∞ﬂ≈™∞›√D';
+$s_reopen_status = '≥o∞›√D™∫™¨∫A§w≥Q≥]¨∞≠´≥]•ºµ≤Æ◊∞›√D';
+$s_reopen_resolution = '§¿™R§w≥Q≠´≥]¨∞•ºµ≤Æ◊∞›√D';
 
 # manage_config_revert_page
-$s_config_delete_sure = '絋粄埃硂砞﹚--';
-$s_in_project = '盡ず';
-$s_delete_config_button = '埃砞﹚';
+$s_config_delete_sure = 'ßAΩT©w≠nßR∞£ßR∞£≥o≥]©w≠»--';
+$s_in_project = '¶b±MÆ◊';
+$s_delete_config_button = 'ßR∞£≥]©w≠»';
 
 # manage_proj_add.php
-$s_project_added_msg = '盡穝糤...';
+$s_project_added_msg = '±MÆ◊§w∑sºW...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = '摸穝糤...';
+$s_category_added_msg = '√˛ßO§w∑sºW...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = '摸埃...';
+$s_category_deleted_msg = '√˛ßO§wßR∞£...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = '絋﹚璶埃摸? ┮Τ闽硈挛盢穦砆埃!!';
-$s_delete_category_button = '埃摸';
+$s_category_delete_sure_msg = 'ßAΩT©w≠nßR∞£¶π√˛ßO? ©“¶≥¨€√ˆ≥s™∫ Bug ±N∑|≥QßR∞£!!';
+$s_delete_category_button = 'ßR∞£√˛ßO';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = '絪胯盡 摸';
-$s_update_category_button = '穝摸';
+$s_edit_project_category_title = 'ΩsøË±MÆ◊√˛ßO';
+$s_update_category_button = 'ßÛ∑s√˛ßO';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = '摸竒Θ穝...';
+$s_category_updated_msg = '√˛ßO§w∏g¶®•\ßÛ∑s...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = '穝糤盡';
+$s_add_subproject_title = '∑sºW§Uºh±MÆ◊';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = '盡竒Θ埃...';
+$s_project_deleted_msg = '±MÆ◊§w∏g¶®•\ßR∞£...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = '絋﹚璶埃盡㎝┮Τ妮挛?';
-$s_project_delete_button = '埃盡';
+$s_project_delete_msg = 'ßAΩT©w≠nßR∞£¶π±MÆ◊©M©“¶≥™˛ƒ›™∫ Bug?';
+$s_project_delete_button = 'ßR∞£±MÆ◊';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = '絪胯盡';
-$s_project_name = '盡嘿';
-$s_view_status = '浪跌篈';
-$s_public = 'そ秨';
-$s_private = '╬';
-$s_update_project_button = '穝盡';
-$s_delete_project_button = '埃盡';
-$s_categories_and_version_title = '摸籔セ戈癟';
-$s_categories = '摸';
-$s_add_category_button = '穝糤摸';
-$s_versions = 'セ';
-$s_add_version_button = '穝糤セ';
-$s_add_and_edit_version_button = '穝糤のэセ';
-$s_edit_link = '絪胯';
-$s_actions = '笆';
-$s_version = 'セ/ミ';
-$s_timestamp = '丁秎耊';
-$s_update = '穝';
-$s_subprojects = '盡';
-$s_add_subproject = '穝糤盡';
-$s_create_new_subproject_link = '穝糤盡';
-$s_unlink_link = '秆秨硈挡';
+$s_edit_project_title = 'ΩsøË±MÆ◊';
+$s_project_name = '±MÆ◊¶W∫Ÿ';
+$s_view_status = '¿Àµ¯™¨∫A';
+$s_public = '§Ω∂}´¨';
+$s_private = '´ ≥¨´¨';
+$s_update_project_button = 'ßÛ∑s±MÆ◊';
+$s_delete_project_button = 'ßR∞£±MÆ◊';
+$s_categories_and_version_title = '√˛ßOªP™©•ª∏Í∞T';
+$s_categories = '√˛ßO';
+$s_add_category_button = '∑sºW√˛ßO';
+$s_versions = '™©•ª';
+$s_add_version_button = '∑sºW™©•ª';
+$s_add_and_edit_version_button = '∑sºW©MΩsøË™©•ª';
+$s_edit_link = 'ΩsøË';
+$s_actions = 'ß@∑~';
+$s_version = '™©•ª/´ÿ•ﬂ';
+$s_timestamp = '§È¥¡Æ…∂°';
+$s_update = 'ßÛ∑s';
+$s_subprojects = '§Uºh±MÆ◊';
+$s_add_subproject = '∑sºW¨∞§Uºh±MÆ◊';
+$s_create_new_subproject_link = '´ÿ•ﬂ∑s™∫§Uºh±MÆ◊';
+$s_unlink_link = 'ßR∞£';
 
 # manage_proj_menu_page.php
-$s_add_project_title = '穝糤盡';
-$s_upload_file_path = '更郎隔畖';
-$s_add_project_button = '穝糤盡';
-$s_projects_title = '┮Τ盡';
-$s_name = '嘿';
+$s_add_project_title = '∑sºW±MÆ◊';
+$s_upload_file_path = '§W∂«¿…Æ◊∏ÙÆ|';
+$s_add_project_button = '∑sºW±MÆ◊';
+$s_projects_title = '©“¶≥±MÆ◊';
+$s_name = '¶W∫Ÿ';
 
 # manage_proj_update.php
-$s_project_updated_msg = '盡竒Θ穝...';
+$s_project_updated_msg = '±MÆ◊§w∏g¶®•\ßÛ∑s...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'セ竒Θ穝糤...';
+$s_version_added_msg = '™©•ª§w∏g¶®•\§w∑sºW...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'セ竒Θ埃...';
+$s_version_deleted_msg = '™©•ª§w∏g¶®•\§wßR∞£...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = '絋﹚璶埃セ? ┮Τ闽硈挛盢穦砆埃!!';
-$s_delete_version_button = '埃セ';
+$s_version_delete_sure = 'ßAΩT©w≠nßR∞£¶π™©•ª? ©“¶≥¨€√ˆ≥s™∫ Bug ±N∑|≥QßR∞£!!';
+$s_delete_version_button = 'ßR∞£™©•ª';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = '絪胯盡 セ';
-$s_update_version_button = '穝セ';
-$s_released = '祇︽';
+$s_edit_project_version_title = 'ΩsøË±MÆ◊™©•ª';
+$s_update_version_button = 'ßÛ∑s™©•ª';
+$s_released = 'µo¶Ê';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'セ竒Θ穝...';
+$s_version_updated_msg = '™©•ª§w∏g¶®•\ßÛ∑s...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = '眀腹玂臔礚猭埃眀腹';
-$s_account_deleted_msg = '眀腹埃...';
+$s_account_delete_protected_msg = '±b∏π®¸´O≈@°AµL™kßR∞£¶π±b∏π';
+$s_account_deleted_msg = '±b∏π§wßR∞£...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = '絋﹚璶埃眀腹?';
+$s_delete_account_sure_msg = 'ßAΩT©w≠nßR∞£¶π§@±b∏π?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = '簿埃┮Τ眖ゼ祅の秨币禬筁琍戳眀腹';
-$s_prune_accounts_button = '俱瞶';
-$s_confirm_account_pruning = '絋粄簿埃眖ゼ祅眀腹';
+$s_accounts_pruned_msg = '©“¶≥•ºµn§JπL•H§Œ∂WπL§@¨P¥¡¡Ÿ•º≥qπLª{√“™∫±b∏π±N≥QßR∞£';
+$s_prune_accounts_button = '≤M∞£';
+$s_confirm_account_pruning = 'ßAΩT©wßA≠nßR∞£©|•ºµn§JπL™∫±b∏π∂‹?';
 
 # manage_user_page.php
-$s_edit_user_title = '絪胯眀腹';
-$s_reset_password_button = '砞盞絏';
-$s_delete_user_button = '埃眀腹';
-$s_reset_password_msg = '竒筿秎盚砞盞絏URL';
-$s_reset_password_msg2 = '砞盞絏フ';
-$s_show_all_users = '场ㄏノ';
+$s_edit_user_title = 'ΩsøË®œ•Œ™Ã';
+$s_reset_password_button = '≠´≥]±KΩX';
+$s_delete_user_button = 'ßR∞£®œ•Œ™Ã';
+$s_reset_password_msg = '¬I§U[≠´≥]±KΩX]´·®t≤Œ∑|±H•X§@´ ≥q™æ´H•Û, ¬IøÔ´H•Û§∫™∫ URL ¥N•i•H≥s§W®”ßÛßÔ±KΩX.';
+$s_reset_password_msg2 = '≠´∑s≥]©w±KΩX¨∞™≈•’.';
+$s_show_all_users = '•˛≥°®œ•Œ™Ã';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = '眀腹玂臔ぃ砞盞絏';
-$s_account_reset_msg = '絋粄獺祇筿秎獺絚...';
-$s_account_reset_msg2 = '眀腹盞絏砞フ...';
+$s_account_reset_protected_msg = '±b∏π®¸´O≈@. §£•i•H≠´≥]±KΩX.';
+$s_account_reset_msg = 'ΩTª{∞TÆß§w∏g≥Q±H∞e®ÏßA™∫ E-Mail ´HΩc...';
+$s_account_reset_msg2 = '≥o±b∏π™∫±KΩX§w∏g≥Q≥]¨∞™≈•’...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = '眀腹玂臔. 舦玂臔币笆. 玥眀腹盢穦砆穝...';
-$s_manage_user_updated_msg = '眀腹Θ穝...';
+$s_manage_user_protected_msg = '±b∏π®¸´O≈@. ¶s®˙≈v≠≠•B´O≈@•\Ø‡§w±“∞ . ß_´h°A±b∏π±N∑|≥QßÛ∑s...';
+$s_manage_user_updated_msg = '±b∏π¶®•\ßÛ∑s...';
 
 # menu_inc.php
-$s_main_link = '';
-$s_view_bugs_link = '浪跌挛';
-$s_report_bug_link = '厨挛';
-$s_changelog_link = '穝ら粁';
-$s_summary_link = '篕璶';
-$s_account_link = '眀腹';
-$s_users_link = '眀腹';
-$s_manage_link = '恨瞶';
-$s_edit_news_link = '絪胯穝籇';
-$s_docs_link = 'ㄏノ弧';
-$s_logout_link = '祅';
-$s_my_view_link = 'и浪跌';
+$s_main_link = '≠∫≠∂';
+$s_view_bugs_link = '¿Àµ¯ Bug';
+$s_report_bug_link = '¶^≥¯ Bug';
+$s_changelog_link = '™©•ªßÛ∞ ¨ˆø˝';
+$s_summary_link = '∫K≠n';
+$s_account_link = '≠”§H±b∏π';
+$s_users_link = '®œ•Œ™Ã';
+$s_manage_link = '∫ﬁ≤z';
+$s_edit_news_link = 'ΩsøË∑sªD';
+$s_docs_link = '®œ•Œª°©˙';
+$s_logout_link = 'µn•X';
+$s_my_view_link = 'ß⁄™∫∂◊æ„≠∂≠±';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'ゼ砆';
-$s_my_view_title_recent_mod = '程э筁';
-$s_my_view_title_reported = '砆и厨';
-$s_my_view_title_assigned = '砆倒и 。ゼ秆∕·';
-$s_my_view_title_resolved = '砆秆∕';
-$s_my_view_title_monitored = '砆и菏跌';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_unassigned = '©|•º§¿¨£';
+$s_my_view_title_recent_mod = '≥Ã™ÒºW≠◊';
+$s_my_view_title_reported = 'ß⁄§œ¿≥™∫';
+$s_my_view_title_assigned = '§¿¨£µπß⁄™∫ (©|•º∏—®M)';
+$s_my_view_title_resolved = '§w∏g∏—®M';
+$s_my_view_title_monitored = 'ß⁄∫ ±±™∫';
+$s_my_view_title_feedback = 'µ•´›ß⁄™∫¶^¬–';
+$s_my_view_title_verify = 'µ•´›ß⁄™∫ΩTª{';
 
 # news_add.php
-$s_news_added_msg = '穝籇兜ヘ穝糤...';
+$s_news_added_msg = '∑sªD∂µ•ÿ§w∑sºW...';
 
 # news_delete.php
-$s_news_deleted_msg = '埃穝籇兜ヘ...';
+$s_news_deleted_msg = '§wßR∞£∑sªD∂µ•ÿ...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = '絋﹚璶埃穝籇兜ヘ?';
-$s_delete_news_item_button = '埃穝籇兜ヘ';
+$s_delete_news_sure_msg = 'ßAΩT©w≠nßR∞£¶π∑sªD∂µ•ÿ?';
+$s_delete_news_item_button = 'ßR∞£∑sªD∂µ•ÿ';
 
 # news_edit_page.php
-$s_edit_news_title = '絪胯穝籇';
-$s_headline = '夹肈';
-$s_body = 'ずゅ';
-$s_update_news_button = '穝穝籇';
+$s_edit_news_title = 'ΩsøË∑sªD';
+$s_headline = 'º–√D';
+$s_body = '§∫§Â';
+$s_update_news_button = 'ßÛ∑s∑sªD';
 
 # news_menu_page.php
-$s_add_news_title = '穝糤穝籇';
-$s_post_to = '祇';
-$s_post_news_button = '祇穝籇';
-$s_edit_or_delete_news_title = '絪胯┪埃穝籇';
-$s_edit_post = '絪胯祇';
-$s_delete_post = '埃祇';
-$s_select_post = '匡拒祇';
+$s_add_news_title = '∑sºW∑sªD';
+$s_post_to = 'µo™Ì®Ï';
+$s_post_news_button = 'µo™Ì∑sªD';
+$s_edit_or_delete_news_title = 'ΩsøË©ŒßR∞£∑sªD';
+$s_edit_post = 'ΩsøËµo™Ì';
+$s_delete_post = 'ßR∞£µo™Ì';
+$s_select_post = 'øÔæ‹µo™Ì';
 
 # news_update.php
-$s_news_updated_msg = '穝籇兜ヘ穝...';
+$s_news_updated_msg = '∑sªD∂µ•ÿ§wßÛ∑s...';
 
 # news_view_page.php
-$s_back_link = '玡';
+$s_back_link = '™¶^';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Θ更郎';
+$s_file_uploaded_msg = '¿…Æ◊§W∂«¶®•\'';
 
 # proj_doc_add_page.php
-$s_upload_file_title = '更郎';
-$s_title = '夹肈';
+$s_upload_file_title = '§W∂«¿…Æ◊';
+$s_title = 'º–√D';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = '盡郎砆埃';
+$s_project_file_deleted_msg = '±MÆ◊¿…Æ◊ßR∞£';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = '絋粄埃郎';
+$s_confirm_file_delete_msg = 'ßAΩT©w≠nßR∞£≥o¿…Æ◊?';
 
 # proj_doc_edit_page.php
-$s_filename = '郎嘿';
-$s_file_update_button = '穝郎';
-$s_file_delete_button = '埃郎';
+$s_filename = '¿…Æ◊¶W∫Ÿ';
+$s_file_update_button = 'ßÛ∑s¿…Æ◊';
+$s_file_delete_button = 'ßR∞£¿…Æ◊';
 
 # proj_doc_page.php
-$s_project_documentation_title = '盡ゅ郎';
-$s_user_documentation = 'ㄏノゅ郎';
-$s_project_documentation = '盡ゅ郎';
-$s_add_file = '穝糤ゅン';
+$s_project_documentation_title = '±MÆ◊§Â•Û';
+$s_user_documentation = '®œ•Œ™Ã§Â•Û';
+$s_project_documentation = '±MÆ◊§Â•Û';
+$s_add_file = '∑sºW¿…Æ◊';
 
 # proj_doc_update.php
-$s_project_document_updated = '盡穝ЧΘ';
+$s_project_document_updated = '±MÆ◊ßÛ∑s¶®•\'';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'ЧΘ穝糤眀腹盡';
+$s_project_user_added_msg = '¶®•\∑sºW≥o±MÆ◊®œ•Œ™Ã';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'ЧΘパ盡簿埃眀腹';
+$s_project_removed_user_msg = '¶®•\ßR∞£≥o±MÆ◊®œ•Œ™Ã';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = '絋粄簿埃硂眀腹';
-$s_remove_user_button = '簿埃眀腹';
-$s_remove_all_users_sure_msg = '絋粄簿埃盡┮Τ眀腹';
-$s_remove_all_users_button = '簿埃┮Τ眀腹';
+$s_remove_user_sure_msg = 'ßAΩT©w≠n≤æ∞£≥o®œ•Œ™Ã¶b≥o±MÆ◊™∫≈v≠≠∂‹?';
+$s_remove_user_button = '≤æ∞£®œ•Œ™Ã';
+$s_remove_all_users_sure_msg = 'ßAΩT©w≠n≤æ∞£≥o±MÆ◊•˛≥°®œ•Œ™Ã≈v≠≠∂‹?';
+$s_remove_all_users_button = '≤æ∞£•˛≥°®œ•Œ™Ã';
 
 # proj_user_menu_page.php
-$s_add_user_title = '穝糤眀腹盡';
-$s_add_user_button = '穝糤眀腹';
-$s_project_selection_title = '盡匡拒';
-$s_remove_link = '簿埃';
-$s_remove_all_link = '场簿埃';
+$s_add_user_title = '∑sºW®œ•Œ™Ã¶b±MÆ◊™∫≈v≠≠';
+$s_add_user_button = 'ΩT©w∑sºW';
+$s_project_selection_title = '±MÆ◊øÔæ‹';
+$s_remove_link = '≤æ∞£';
+$s_remove_all_link = '•˛≥°≤æ∞£';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Θ穝眀腹';
+$s_updated_user_msg = 'ßÛ∑s®œ•Œ™Ã¶®•\'';
 
 # report_add.php
-$s_must_enter_category = '眤ゲ斗匡拒摸';
-$s_must_enter_severity = '眤ゲ斗匡拒腨┦';
-$s_must_enter_reproducibility = '眤ゲ斗匡拒瞷繵瞯';
-$s_must_enter_summary = '眤ゲ斗块篕璶';
-$s_must_enter_description = '眤ゲ斗块弧';
-$s_report_more_bugs = '厨挛';
-$s_submission_thanks_msg = '稰谅眤種ǎ! ^_^';
+$s_must_enter_category = '±z•≤∂∑øÔæ‹√˛ßO';
+$s_must_enter_severity = '±z•≤∂∑øÔæ‹ƒY≠´© ';
+$s_must_enter_reproducibility = '±z•≤∂∑øÔæ‹•X≤{¿W≤v';
+$s_must_enter_summary = '±z•≤∂∑øÈ§J∫K≠n';
+$s_must_enter_description = '±z•≤∂∑øÈ§Jª°©˙';
+$s_report_more_bugs = '¶^≥¯ßÛ¶h Bug';
+$s_submission_thanks_msg = '∑P¡¬±z™∫∑N®£! ^_^';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = '虏厨';
-$s_enter_report_details_title = '块厨冈灿戈';
-$s_required = 'ゲ恶';
-$s_select_category = '匡拒摸';
-$s_select_reproducibility = '匡拒瞷繵瞯';
-$s_select_severity = '匡拒腨┦';
-$s_or_fill_in = '┪恶';
-$s_assign_to = '倒';
-$s_additional_information = '肂戈癟';
-$s_submit_report_button = '癳厨';
-$s_check_report_more_bugs = '琩跌の厨挛';
+$s_simple_report_link = '¬≤©ˆ≥¯ßi';
+$s_enter_report_details_title = 'øÈ§J¶^≥¯∏‘≤”∏ÍÆ∆';
+$s_required = '•≤∂Ò';
+$s_select_category = 'øÔæ‹√˛ßO';
+$s_select_reproducibility = 'øÔæ‹•X≤{¿W≤v';
+$s_select_severity = 'øÔæ‹ƒY≠´© ';
+$s_or_fill_in = '©Œ∂Ò§J';
+$s_assign_to = '´¸¨£µπ';
+$s_additional_information = '√B•~∏Í∞T';
+$s_submit_report_button = '∞e•X¶^≥¯';
+$s_check_report_more_bugs = '§ƒøÔ•iƒ~ƒÚ¶^≥¯®‰•L™∫ Bug';
 
 # report_bug_page.php
-$s_advanced_report_link = '秈顶厨';
-$s_report_stay = '厨竚玡';
+$s_advanced_report_link = '∂i∂•≥¯ßi';
+$s_report_stay = '¶^≥¯™¨∫A';
 
 # set_project.php
-$s_selected_project = '砆匡拒盡';
-$s_valid_project_msg = '惠璶匡拒Τ盡';
+$s_selected_project = '§wøÔæ‹±MÆ◊';
+$s_valid_project_msg = 'ßA•≤∂∑øÔæ‹§@≠”•øΩT™∫±MÆ◊';
 
 # signup.php
-$s_signup_done_title = '眀腹爹ЧΘ';
-$s_password_emailed_msg = '尺眤竒Θ爹穦Μ絋粄筿秎筿秎叫聅凝筿秎ず硈挡币ノ眀腹';
-$s_no_reponse_msg = 'ΤぱЧΘ爹の币ノ眀腹狦⊿Τ┪ぃぱずЧΘ币ノ眀腹硂ゼ币ノ眀腹穦砆埃';
+$s_signup_done_title = 'µ˘•U±b∏π§w≥B≤z';
+$s_password_emailed_msg = 'Æ•≥ﬂ! ßA§w∏gµ˘•U¶®•\. ®t≤Œ•ø¶b∞e•Xª{√“´H®ÏßA™∫ E-Mail ´HΩc§∫. Ω–∂}±“ΩTª{´H•Û¬IøÔ´H§§™∫∫Ùß}, ßA±N≥s§W®t≤ŒøÈ§J±KΩX®”±“∞ ßA™∫±b∏π.';
+$s_no_reponse_msg = 'ßA•≤∂∑¶b§C§—§∫ßπ¶®≥o≠”ΩTª{´H™∫ß@∑~µ{ß«, ¶p™G¶b§C§—§∫ßA®S¶®•\±“∞ ±b∏π, ≥o≠”±b∏π±N∑|¶€∞ ßR∞£.';
 
 # signup_page.php
-$s_signup_captcha_request = '叫块ゅ逆ず絏';
-$s_signup_info = 'ЧΘ块爹戈絋粄筿秎穦盚矗ㄑ筿秎獺絚<br/>絋粄筿秎碞币ノ眀腹狦ぱず⊿Τ币ノ┪币ノア毖ゼΘ币ノ眀腹穦砆埃<br/>惠璶矗ㄑΤ筿秎钡Μ絋粄筿秎';
-$s_signup_title = '爹';
-$s_signup_button = '爹';
-$s_no_password_request = '盞絏琌パㄤ╰参恨瞶叫羛蹈╰参恨瞶';
+$s_signup_captcha_request = 'Ω–øÈ§J•k√‰πœ§§™∫≈Á√“≠^º∆¶r';
+$s_signup_info = '<ul><li>øÈ§J±b∏π, E-Mail •H§Œπœ§§™∫≈Á√“≠^º∆¶r´·, ¬IøÔ [µ˘•U] ´ˆ∂s. <li>®t≤Œ∑|ΩTª{ßAøÈ§J∏ÍÆ∆™∫•øΩT© , ∑ÌΩTª{µLª~´·, ®t≤Œ∑|¶€∞ ±Hµo§@´ ª{√“´H®ÏßAøÈ§J™∫ E-Mail §∫.<li>∂}±“≥o≠”ª{√“´H, ¬IøÔ´H§§™∫∫Ùß}, ßA±N≥s§W®t≤ŒøÈ§J±KΩX®”±“∞ ßA™∫±b∏π. <li>¶p™G¶b§C§—§∫ßA®S¶®•\±“∞ ±b∏π, ≥o≠”±b∏π±N∑|¶€∞ ßR∞£.<li>©“•HßA•≤∂∑¶b E-Mail §§øÈ§JßAØu•ø•i•H¶¨®Ï´H•Û™∫ E-Mail.</ul>';
+$s_signup_title = 'µ˘•U';
+$s_signup_button = 'µ˘•U';
+$s_no_password_request = 'ßA™∫±KΩX•ø¶b≥Q®‰•L®t≤Œ∫˚≈@§§, Ω–¡pµ∏®t≤Œ∫ﬁ≤z≠˚®”∏—®M≥o∞›√D!';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'э俱砞竚砞﹚';
-$s_save_settings_button = '纗砞﹚';
+$s_edit_site_settings_title = 'ΩsøËæ„≈È≥]©w≠»';
+$s_save_settings_button = '¿x¶s≥]©w≠»';
 
 # site_settings_page.php
-$s_site_settings_title = '俱砞竚砞﹚';
-$s_system_info_link = '╰参戈';
-$s_site_settings_link = '俱砞竚砞﹚';
+$s_site_settings_title = 'æ„≈È≥]©w≠»';
+$s_system_info_link = '®t≤Œ∏Í∞T';
+$s_site_settings_link = 'æ„≈È≥]©w≠»';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = '俱砞竚砞﹚穝ЧΘ';
+$s_site_settings_updated_msg = 'æ„≈È≥]©w≠»§wßÛ∑sßπ¶®';
 
 # summary_page.php
-$s_summary_title = '篕璶';
-$s_summary_jpgraph_link = '秈顶篕璶';
-$s_by_project = 'ㄌ盡';
-$s_by_status = 'ㄌ篈';
-$s_by_date = 'ㄌら戳';
-$s_by_severity = 'ㄌ腨┦';
-$s_by_resolution = 'ㄌ秆猂';
-$s_by_category = 'ㄌ摸';
-$s_by_priority = 'ㄌ纔舦';
-$s_by_developer = 'ㄌ秨祇';
-$s_by_reporter ='ㄌ厨';
-$s_reporter_by_resolution = '厨ㄌ秆猂';
-$s_reporter_effectiveness = '厨Θ';
-$s_developer_by_resolution = '秨祇ㄌ秆猂';
-$s_percentage_fixed = '% タЧΘ';
-$s_percentage_errors = '% タア毖';
-$s_errors = 'ア毖';
-$s_total = '羆计';
-$s_time_stats = '秆∕挛。ぱ计·丁篈';
-$s_longest_open_bug = '程秨币挛';
-$s_longest_open = '程秨币丁';
-$s_average_time = 'キА丁';
-$s_total_time = '羆丁';
-$s_developer_stats = '祇甶篈';
-$s_reporter_stats = '厨篈';
-$s_orct = '。秨币/砆秆∕/砆闽超/羆计·';
+$s_summary_title = '∫K≠n';
+$s_summary_jpgraph_link = '∂i∂•∫K≠n';
+$s_by_project = '®Ã±MÆ◊';
+$s_by_status = '®Ã™¨∫A';
+$s_by_date = '®Ã§È¥¡';
+$s_by_severity = '®ÃƒY≠´© ';
+$s_by_resolution = '®Ã§¿™R';
+$s_by_category = '®Ã√˛ßO';
+$s_by_priority = '®Ã¿u•˝´◊';
+$s_by_developer = '®Ã∂}µo™Ã';
+$s_by_reporter ='®Ã¶^≥¯§H';
+$s_reporter_by_resolution = '®Ã¶^≥¯§HªP§¿™R';
+$s_reporter_effectiveness = '¶^≥¯§H¶≥Æƒ´◊';
+$s_developer_by_resolution = '®Ã∂}µo™ÃªP§¿™R';
+$s_percentage_fixed = '% §w≠◊•ø';
+$s_percentage_errors = '% ª~ßP';
+$s_errors = 'ª~ßP';
+$s_total = '¡`º∆';
+$s_time_stats = '§w∏—®M Bug (§—º∆)™∫Æ…Æƒ™¨∫A';
+$s_longest_open_bug = '™·∂OÆ…∂°≥Ã™¯™∫ Bug Ωs∏π';
+$s_longest_open = '≥Ã™¯Æ…∂°';
+$s_average_time = '•≠ß°Æ…∂°';
+$s_total_time = '¡`¶@Æ…∂°';
+$s_developer_stats = '∂}µo™Ã™¨∫A';
+$s_reporter_stats = '¶^≥¯§H™¨∫A';
+$s_orct = '(•ºµ≤Æ◊/§w∏—®M/§wµ≤Æ◊/¡`º∆)';
 
 # view_all_bug_page.php
-$s_any = 'ヴ種';
-$s_show = '陪ボ';
-$s_changed = '跑。·';
-$s_viewing_bugs_title = '浪跌挛';
-$s_updated = '穝';
-$s_sticky = '陪ボSticky拜肈';
-$s_sort = '逼';
+$s_any = '•Ù∑N';
+$s_show = '≈„•‹';
+$s_changed = '§wßÛ∞ (§pÆ…)';
+$s_viewing_bugs_title = '¿Àµ¯ Bug';
+$s_updated = '§wßÛ∑s';
+$s_sticky = '≈„•‹¥∆§‚∞›√D';
+$s_sort = '±∆ß«§Ë¶°';
 
 # view_all_inc.php
-$s_none = '⊿Τ';
-$s_search ='穓碝';
-$s_view_prev_link = '浪跌玡';
-$s_view_next_link = '浪跌';
-$s_prev = '玡';
-$s_next = '';
-$s_first = '程玡';
-$s_last = '程';
-$s_start_date = '秨﹍ら戳';
-$s_end_date = 'ЧΘら戳';
-$s_use_date_filters = 'ㄏノら戳筁耾竟';
-$s_yes = '琌';
-$s_no = '';
-$s_open_filters = 'э筁耾竟';
-$s_or_unassigned = '┪ゼ';
-$s_ok = '絋粄';
-$s_select_all = '场匡拒';
+$s_none = 'µL';
+$s_search ='∑j¥M Bug §∫Æe√ˆ¡‰¶r';
+$s_view_prev_link = '¿Àµ¯´e§@µß';
+$s_view_next_link = '¿Àµ¯§U§@µß';
+$s_prev = '´e§@µß';
+$s_next = '§U§@µß';
+$s_first = '≤ƒ§@µß';
+$s_last = '≥Ã•Ωµß';
+$s_start_date = '∂}©l§È¥¡';
+$s_end_date = 'µ≤ßÙ§È¥¡';
+$s_use_date_filters = '®œ•Œ§È¥¡¨∞πL¬o±¯•Û';
+$s_yes = '¨O';
+$s_no = 'ß_';
+$s_open_filters = 'ßÛ∞ πL¬o±¯•Û';
+$s_or_unassigned = '©Œ®˙Æ¯§¿¨£';
+$s_ok = '¨O';
+$s_select_all = 'øÔæ‹•˛≥°';
 
 # stored query strings
-$s_use_query = 'ㄏノ筁耾竟';
-$s_delete_query = '埃筁耾竟';
-$s_query_deleted = '筁耾竟砆埃';
-$s_save_query = '纗ヘ玡筁耾竟匡兜';
-$s_reset_query = '砞筁耾竟';
-$s_query_name = '筁耾竟嘿';
-$s_query_exists = '筁耾竟';
-$s_query_dupe_name = '筁耾竟竒ㄏノ硂嘿叫硂硂筁耾竟匡拒嘿';
-$s_query_blank_name = 'ぃ纗⊿Τ嘿筁耾竟叫矗ㄑ筁耾竟嘿';
-$s_query_store_error = '纗筁耾竟岿粇';
-$s_open_queries = '恨瞶筁耾竟';
-$s_query_delete_msg = '絋粄埃筁耾竟';
+$s_use_query = '®œ•ŒπL¬o±¯•Û';
+$s_delete_query = 'ßR∞£πL¬o±¯•Û';
+$s_query_deleted = 'πL¬o±¯•Û§wßR∞£';
+$s_save_query = '¿x¶s•ÿ´e™∫πL¬o±¯•Û';
+$s_reset_query = '≠´≥]πL¬o±¯•Û';
+$s_query_name = 'πL¬o±¯•Û¶W∫Ÿ';
+$s_query_exists = '≥o≠”πL¬o±¯•Û§w∏g¶s¶b.';
+$s_query_dupe_name = '•t§@≠”πL¬o±¯•Û§w∏g®œ•Œ≥o≠”¶W∫Ÿ. Ω–ßÔøÔ•t•~§@≠”¶W∫Ÿ.';
+$s_query_blank_name = 'ßA§£•i•H®S´¸©wπL¬o±¯•Û¶W∫Ÿ. ¿x¶s´eΩ–•˝µπ≥oπL¬o±¯•Û¶W∫Ÿ.';
+$s_query_store_error = '¿x¶sπL¬o±¯•ÛπLµ{•X≤{ø˘ª~.';
+$s_open_queries = '∫ﬁ≤zπL¬o±¯•Û';
+$s_query_delete_msg = 'ßAΩT©wßA≠nßR∞£≥o≠”πL¬o±¯•Û∂‹?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = '虏浪跌';
-$s_viewing_bug_advanced_details_title = '浪跌挛秈顶冈灿戈';
-$s_product_build = '玻珇ミ';
-$s_system_profile = '╰参弧';
-$s_update_bug_button = '穝挛';
-$s_bug_assign_to_button = '倒';
-$s_bug_status_to_button = 'э篈';
-$s_reopen_bug_button = '秨拜肈';
-$s_move_bug_button = '簿笆拜肈';
-$s_attached_files = 'ンゅ郎';
-$s_publish = '祇';
-$s_cached = 'е硉絯侥禞';
+$s_view_simple_link = '¬≤©ˆ¿Àµ¯';
+$s_viewing_bug_advanced_details_title = '¿Àµ¯ Bug ∂i∂•∏‘≤”∏ÍÆ∆';
+$s_product_build = '≤£´~´ÿ•ﬂ';
+$s_system_profile = '®t≤Œª°©˙';
+$s_update_bug_button = 'ßÛ∑s Bug';
+$s_bug_assign_to_button = '§¿¨£µπ:';
+$s_bug_status_to_button = 'ßÛ∞ ™¨∫A¨∞:';
+$s_reopen_bug_button = '≠´≥]•ºµ≤Æ◊∞›√D';
+$s_move_bug_button = '∑h≤æ∞›√D';
+$s_attached_files = '™˛•Û¿…Æ◊';
+$s_publish = 'µo™Ì';
+$s_cached = 'ß÷®˙';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = '秈顶浪跌';
-$s_viewing_bug_simple_details_title = '浪跌挛冈灿戈。虏Α·';
+$s_view_advanced_link = '∂i∂•¿Àµ¯';
+$s_viewing_bug_simple_details_title = '¿Àµ¯ Bug ∏‘≤”∏ÍÆ∆(¬≤¶°)';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = '⊿Τ眀腹菏跌硂挛.';
-$s_users_monitoring_bug = '菏跌硂挛眀腹';
-$s_monitoring_user_list = '眀腹';
+$s_no_users_monitoring_bug = '®S¶≥®œ•Œ™Ã∫ ±±≥o bug.';
+$s_users_monitoring_bug = '®œ•Œ™Ã∫ ±±≥o bug';
+$s_monitoring_user_list = '®œ•Œ™Ã≤M≥Ê';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = '⊿Τ眀腹戈硂拜肈.';
-$s_users_sponsoring_bug = '眀腹戈硂拜肈';
-$s_sponsors_list = '戈';
-$s_total_sponsorship_amount = '戈羆肂 = %s';
+$s_no_users_sponsoring_bug = '®S¶≥®œ•Œ™Ã∏ÍßU≥o∞›√D.';
+$s_users_sponsoring_bug = '®œ•Œ™Ã∏ÍßU≥o∞›√D';
+$s_sponsors_list = '∏ÍßU™Ã≤M≥Ê';
+$s_total_sponsorship_amount = '∏ÍßU¡`√B = %s';
 
 # custom field strings
-$s_add_custom_field_button = '穝糤﹚逆';
-$s_delete_custom_field_button = '埃﹚逆';
-$s_delete_custom_field_everywhere = '埃矪﹚逆';
-$s_update_custom_field_button = '穝﹚逆';
-$s_add_existing_custom_field = '穝糤瞷﹚逆';
-$s_edit_custom_field_title = 'э﹚逆';
-$s_custom_field = '逆';
-$s_custom_fields_setup = '﹚逆';
-$s_custom_field_name = '嘿';
-$s_custom_field_project_count = '盡计ヘ';
-$s_custom_field_type = '篈';
-$s_custom_field_possible_values = '瞶计';
-$s_custom_field_default_value = '箇砞计';
+$s_add_custom_field_button = '∑sºW¶€≠qƒÊ¶Ï';
+$s_delete_custom_field_button = 'ßR∞£¶€≠qƒÊ¶Ï';
+$s_delete_custom_field_everywhere = 'ßR∞£©“¶≥¶€≠qƒÊ¶Ï';
+$s_update_custom_field_button = 'ßÛ∑s¶€≠qƒÊ¶Ï';
+$s_add_existing_custom_field = '∑sºW≥o≠”¶€≠qƒÊ¶Ï';
+$s_edit_custom_field_title = 'ΩsøË¶€≠qƒÊ¶Ï';
+$s_custom_field = 'ƒÊ¶Ï';
+$s_custom_fields_setup = '¶€≠qƒÊ¶Ï';
+$s_custom_field_name = '¶W∫Ÿ';
+$s_custom_field_project_count = '®œ•Œ≥oƒÊ¶Ï±MÆ◊º∆';
+$s_custom_field_type = '∏ÍÆ∆´¨∫A';
+$s_custom_field_possible_values = '•iØ‡™∫∏ÍÆ∆§∫Æe';
+$s_custom_field_default_value = 'πw≥]™∫∏ÍÆ∆§∫Æe';
 $s_custom_field_valid_regexp = 'Regular Expression';
-$s_custom_field_access_level_r = '斑弄';
-$s_custom_field_access_level_rw = '弄糶';
-$s_custom_field_length_min = '程ぶ';
-$s_custom_field_length_max = '程';
-$s_custom_field_advanced = '陪ボ秈顶';
-$s_custom_field_display_report = '讽拜肈厨陪ボ';
-$s_custom_field_display_update = '讽拜肈穝陪ボ';
-$s_custom_field_display_resolved = '讽拜肈秆∕陪ボ';
-$s_custom_field_display_closed = '讽拜肈陪ボ';
-$s_custom_field_require_report = '厨ゲ斗';
-$s_custom_field_require_update = '穝ゲ斗';
-$s_custom_field_require_resolved = '秆∕ゲ斗';
-$s_custom_field_require_closed = '闽超ゲ斗';
+$s_custom_field_access_level_r = '•i≈™≈v≠≠';
+$s_custom_field_access_level_rw = '•iºg≈v≠≠';
+$s_custom_field_length_min = '≥Ã§p™¯´◊';
+$s_custom_field_length_max = '≥Ã§j™¯´◊';
+$s_custom_field_advanced = '∂i∂•≠∂≠±≈„•‹';
+$s_custom_field_display_report = '¶^≥¯∞›√DÆ…≈„•‹';
+$s_custom_field_display_update = 'ßÛßÔ∞›√DÆ…≈„•‹';
+$s_custom_field_display_resolved = '∏—®M∞›√DÆ…≈„•‹';
+$s_custom_field_display_closed = 'µ≤Æ◊Æ…≈„•‹';
+$s_custom_field_require_report = '¶^≥¯Æ…ª›≠n≥oƒÊ¶Ï';
+$s_custom_field_require_update = 'ßÛ∑sÆ…ª›≠n≥oƒÊ¶Ï';
+$s_custom_field_require_resolved = '∏—®MÆ…ª›≠n≥oƒÊ¶Ï';
+$s_custom_field_require_closed = 'µ≤Æ◊Æ…ª›≠n≥oƒÊ¶Ï';
 
-$s_custom_field_sequence = '';
-$s_custom_field_type_enum_string = '0:﹃,1:计,2:疊翴,3:羭兜ヘ,4:筿秎,5:匡兜,6:,7:兜匡拒,8:ら戳';
+$s_custom_field_sequence = 'ß«¶C';
+$s_custom_field_type_enum_string = '0:¶r¶Í,1:æ„º∆,2:ØB¬Iº∆¶r,3:¶C¡|∂µ•ÿ,4:E-Mail,5:øÔ∂µ,6:≤M≥Ê,7:¶h≠´øÔ∂µ≤M≥Ê,8:§È¥¡';
 
-$s_confirm_used_custom_field_deletion = '逆硈挡程ぶ盡埃逆琌ぃ絋粄埃逆叫龄膥尿';
-$s_confirm_custom_field_deletion = '絋粄埃﹚逆のㄤ计';
-$s_field_delete_button = '埃逆';
+$s_confirm_used_custom_field_deletion = '≥oƒÊ¶Ï§w∏g¶b§@≠”•H§W™∫±MÆ◊®œ•Œ. ¶p™GΩT©wƒ~ƒÚ∞ı¶Ê, ®œ•Œ≥oƒÊ¶Ï™∫∏ÍÆ∆§∫Æe±N∑|ßπ•˛≥QßR∞£. ¶”•B∞ı¶Ê§ß´·¥NµL™k¥_≠Ï. ¶p™GßA§£≠nßR∞£≥oƒÊ¶Ï, Ω–¬IøÔ¬sƒ˝æπ™∫ [§W§@≠∂] ´ˆ∂s. ≠nßR∞£™∫∏‹, ¥N¬I§U≠±™∫´ˆ∂s';
+$s_confirm_custom_field_deletion = 'ßAΩT©w≠nßR∞£≥o¶€≠qƒÊ¶Ï©M®œ•Œ®Ï≥o¶€≠qƒÊ¶Ï™∫∏ÍÆ∆∂‹?';
+$s_field_delete_button = 'ßR∞£ƒÊ¶Ï';
 
-$s_confirm_custom_field_unlinking = '絋粄パ盡秆秨硈挡。unlink·﹚逆の埃ㄤ计';
-$s_field_remove_button = '簿埃逆';
+$s_confirm_custom_field_unlinking = 'ßAΩT©w≠n•—≥o±MÆ◊≤æ∞£≥o≠”¶€≠qƒÊ¶Ï©MßR∞£®œ•Œ®Ï≥o¶€≠qƒÊ¶Ï™∫∏ÍÆ∆∂‹?';
+$s_field_remove_button = '≤æ∞£ƒÊ¶Ï';
 
-$s_hide_status = '留旅篈';
-$s_filter_closed = "砆闽超";
-$s_filter_resolved = "砆秆∕";
-$s_hide_closed = "留旅闽超";
-$s_hide_resolved = "留旅秆∕";
-$s_and_above = 'のぇ玡';
-$s_advanced_filters = '蔼顶筁耾竟';
-$s_simple_filters = '膀セ筁耾竟';
-$s_monitored_by = '菏跌';
+$s_hide_status = '¡Ù¬√™¨∫A';
+$s_filter_closed = "§wµ≤Æ◊";
+$s_filter_resolved = "§w∏—®M";
+$s_hide_closed = "¡Ù¬√§wµ≤Æ◊";
+$s_hide_resolved = "¡Ù¬√§w∏—®M";
+$s_and_above = '•H§Œ§ß´e';
+$s_advanced_filters = '∂i∂•πL¬o±¯•Û';
+$s_simple_filters = '¬≤©ˆπL¬o±¯•Û';
+$s_monitored_by = '∫ ±±§H';
 
-$s_attachments = "ン";
+$s_attachments = "™˛•Û";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'en';
 
 # Sponsorship Strings
-$s_sponsors = '%d 戈';
-$s_sponsorship_added = '戈砆穝糤';
-$s_sponsorship_updated = '戈砆穝';
-$s_sponsorship_deleted = '戈砆埃';
-$s_sponsorship_paid = '戈蹿兜Μ癢';
-$s_sponsorship_more_info = '闽戈戈';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsors = '%d ∏ÍßU™Ã';
+$s_sponsorship_added = '∏ÍßU§w∑sºW';
+$s_sponsorship_updated = '∏ÍßU§wßÛ∑s';
+$s_sponsorship_deleted = '∏ÍßU§wßR∞£';
+$s_sponsorship_paid = '∏ÍßU¥⁄§w•I';
+$s_sponsorship_more_info = 'ßÛ¶h¶≥√ˆ∏ÍßU™∫∏Í∞T';
+$s_sponsorship_total = '∏ÍßU¡`º∆';
 
-# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# URL explaining the process of sponsoring an ∞›√D.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
 # is not need to provide such process information.
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = '穝ら粁';
+$s_changelog = '™©•ªßÛ∞ ¨ˆø˝';
 
 # Http auth
-$s_http_auth_realm = "BugTracker祅";
+$s_http_auth_realm = "Mantis µn§J";
 
-$s_bug = "拜肈";
-$s_add_new_relationship = "穝闽羛闽玒";
-$s_add_new_relationship_button = "穝糤";
-$s_this_bug = "ヘ玡拜肈";
-$s_relationship_added = "闽羛闽玒穝糤";
-$s_relationship_deleted = "闽羛闽玒埃";
-$s_no_relationship = "⊿Τ闽羛闽玒";
-$s_relationship_replaced = "闽羛闽玒砆";
-$s_replace_relationship_button = "";
-$s_replace_relationship_sure_msg = "硂ㄢ拜肈Τ闽羛闽玒絋粄硂闽羛闽玒";
-$s_relationship_with_parent = "闽羛ダ拜肈";
-$s_delete_relationship_button = "埃";
-$s_delete_relationship_sure_msg = "絋粄埃闽羛闽玒";
-$s_relationship_warning_blocking_bugs_not_resolved = "ぃ琌┮Τ拜肈常砆秆∕┪闽超";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>猔種</b>ぃ琌┮Τ拜肈常砆秆∕┪闽超<br><b>秆∕┪闽超ぇ玡</b>ダ拜肈┮ΤΤ闽羛闽玒拜肈常惠璶砆秆∕┪闽超";
-$s_create_child_bug_button = "穝糤狡籹";
-$s_bug_cloned_to = "拜肈狡籹";
-$s_bug_created_from = "拜肈祇ネ";
+$s_bug = "∞›√D";
+$s_add_new_relationship = "∑sºW¨€√ˆ∞›√D";
+$s_add_new_relationship_button = "∑sºW";
+$s_this_bug = "≥o≠”∞›√D";
+$s_relationship_added = "¨€√ˆ∞›√D§w∑sºW";
+$s_relationship_deleted = "¨€√ˆ∞›√D§wßR∞£";
+$s_no_relationship = "®S¶≥¨€√ˆ∞›√D";
+$s_relationship_replaced = "¨€√ˆ∞›√D§w≥Q®˙•N";
+$s_replace_relationship_button = "®˙•N";
+$s_replace_relationship_sure_msg = "≥o®‚≠”∞›√D§w´ÿ•ﬂ¨∞¨€√ˆ∞›√D. ßAΩT©wßA≠n®˙•N≥o√ˆ¡p∂‹?";
+$s_relationship_with_parent = "§Wºh∞›√D¨∞√ˆ¡p∞›√D";
+$s_delete_relationship_button = "ßR∞£";
+$s_delete_relationship_sure_msg = "ßAΩT©wßA≠nßR∞£≥o≠”¨€√ˆ∞›√D∂‹?";
+$s_relationship_warning_blocking_bugs_not_resolved = "®√´D©“¶≥≥o∞›√D™∫§Uºh∞›√D≥£§w∏—®M©Œ§wµ≤Æ◊.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>™`∑N</b>. §£¨O©“¶≥≥o∞›√D™∫§Uºh∞›√D§w∏—®M©Œ§wµ≤Æ◊.<br>¶b<b>∏—®M©Œµ≤Æ◊</b>§ß´e, ≥o∞›√D™∫©“¶≥§Uºh¨€√ˆ∞›√D¿≥∏”¨O§w∏—®M©Œ§wµ≤Æ◊™∫™¨∫A.";
+$s_create_child_bug_button = "´ÿ•ﬂΩ∆ªs";
+$s_bug_cloned_to = "∞›√D§w≥QΩ∆ªs";
+$s_bug_created_from = "∞›√D´ÿ•ﬂ®”∑Ω";
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "闽羛闽玒瓜";
-$s_relation_graph = "闽羛瓜";
-$s_dependency_graph = "ㄌ苦瓜";
-$s_vertical = "";
-$s_horizontal = "キ";
-$s_view_issue = "浪跌拜肈";
+$s_viewing_bug_relationship_graph_title = "¨€√ˆ∞›√Dπœ";
+$s_relation_graph = "¨€√ˆ∞›√Dπœ";
+$s_dependency_graph = "®Ã¶s∞›√Dπœ";
+$s_vertical = "´´™Ω";
+$s_horizontal = "§Ù•≠";
+$s_view_issue = "¿Àµ¯∞›√D";
 
 # Source Control Integration
-$s_checkin = '祅';
+$s_checkin = 'µn§J';
 
 # Pemissions report
-$s_perm_rpt_capability = '';
-$s_view = '浪跌';
-$s_issues = '拜肈';
-$s_report_issue = '厨拜肈';
-$s_update_issue = '穝拜肈';
-$s_monitor_issue = '菏跌拜肈';
-$s_handle_issue = '矪瞶拜肈';
-$s_move_issue = '簿笆拜肈';
-$s_delete_issue = '埃拜肈';
-$s_reopen_issue = '秨拜肈';
-$s_view_private_issues = '浪跌╬拜肈s';
-$s_update_readonly_issues = '穝斑弄拜肈';
-$s_update_issue_status = '穝拜肈篈';
-$s_set_view_status = '砞﹚浪跌篈 。そ秨vs╬·';
-$s_update_view_status = '穝浪跌篈 。そ秨vs╬·';
-$s_show_list_of_users_monitoring_issue = '菏跌拜肈眀腹';
-$s_notes = '癘魁';
-$s_add_notes = '穝糤癘魁';
-$s_update_notes = '穝癘魁';
-$s_delete_note = '埃癘魁';
-$s_view_private_notes = '浪跌╬癘魁';
-$s_news = '穝籇';
-$s_view_private_news = '浪跌╬穝籇';
-$s_manage_news = '恨瞶穝籇';
-$s_view_list_of_attachments = '浪跌ン';
-$s_download_attachments = '更ン';
-$s_delete_attachments = '埃ン';
-$s_delete_attachment_button = "埃";
-$s_delete_attachment_sure_msg = "絋粄埃ン?";
-$s_upload_issue_attachments = '穝拜肈ン';
-$s_filters = '筁耾竟';
-$s_save_filters = '纗筁耾竟';
-$s_save_filters_as_shared = '纗ノ筁耾竟';
-$s_use_saved_filters = 'ㄏノ纗筁耾竟';
-$s_create_project = '穝糤盡';
-$s_delete_project = '埃盡';
-$s_manage_project = '恨瞶盡';
-$s_manage_user_access_to_project = '恨瞶盡眀腹';
-$s_automatically_included_in_private_projects = '笆╬盡';
-$s_project_documents = '盡ゅ郎';
-$s_view_project_documents = '浪跌盡ゅ郎';
-$s_upload_project_documents = '更盡ゅ郎';
-$s_link_custom_fields_to_projects = '硈挡﹚逆盡';
-$s_sponsorships = '戈';
-$s_view_sponsorship_details = '浪跌戈戈';
-$s_view_sponsorship_total = '浪跌戈羆计';
-$s_sponsor_issue = '戈拜肈';
-$s_assign_sponsored_issue = '砆戈拜肈';
-$s_handle_sponsored_issue = '矪瞶砆戈拜肈';
-$s_others = 'ㄤ';
-$s_see_email_addresses_of_other_users = '琩眀腹筿秎';
-$s_send_reminders = '祇矗ボ';
-$s_add_profiles = '穝糤砞﹚';
-$s_notify_of_new_user_created = '穝眀腹ミぇ硄';
-$s_email_notification = '筿秎絋粄';
-$s_status_changed_to = 'э篈';
-$s_email_on_deleted = '砆埃祇筿秎';
-$s_email_on_sponsorship_changed = '戈戈穝祇筿秎';
-$s_email_on_relationship_changed = '闽羛闽玒戈穝祇筿秎';
+$s_perm_rpt_capability = '≈v≠≠•\Ø‡';
+$s_view = '¿Àµ¯';
+$s_issues = '∞›√D';
+$s_report_issue = '¶^≥¯∞›√D';
+$s_update_issue = 'ßÛ∑s∞›√D';
+$s_monitor_issue = '∫ ±±∞›√D';
+$s_handle_issue = '≥B≤z∞›√D';
+$s_move_issue = '∑h≤æ∞›√D';
+$s_delete_issue = 'ßR∞£∞›√D';
+$s_reopen_issue = '≠´≥]•ºµ≤Æ◊∞›√D';
+$s_view_private_issues = '¿Àµ¯´ ≥¨∞›√D';
+$s_update_readonly_issues = 'ßÛ∑s∞ﬂ≈™∞›√D';
+$s_update_issue_status = 'ßÛ∑s∞›√D™¨∫A';
+$s_set_view_status = '≥]©w¿Àµ¯™¨∫A (§Ω∂} vs ´ ≥¨)';
+$s_update_view_status = 'ßÛ∑s¿Àµ¯™¨∫A (§Ω∂} vs ´ ≥¨)';
+$s_show_list_of_users_monitoring_issue = '≈„•‹∫ ±±≥o∞›√D™∫®œ•Œ™Ã≤M≥Ê';
+$s_notes = 'µß∞O';
+$s_add_notes = '∑sºWµß∞O';
+$s_update_notes = 'ßÛ∑sµß∞O';
+$s_delete_note = 'ßR∞£µß∞O';
+$s_view_private_notes = '¿Àµ¯´ ≥¨µß∞O';
+$s_news = '∑sªD';
+$s_view_private_news = '¿Àµ¯´ ≥¨∑sªD';
+$s_manage_news = '∫ﬁ≤z∑sªD';
+$s_view_list_of_attachments = '¿Àµ¯™˛•Û≤M≥Ê';
+$s_download_attachments = '§U∏¸™˛•Û';
+$s_delete_attachments = 'ßR∞£™˛•Û';
+$s_delete_attachment_button = "ßR∞£";
+$s_delete_attachment_sure_msg = "ßAΩT©wßA≠nßR∞£≥o≠”™˛•Û∂‹?";
+$s_upload_issue_attachments = '§W∂«∞›√D™∫™˛•Û';
+$s_filters = 'πL¬o±¯•Û';
+$s_save_filters = '¿x¶sπL¬o±¯•Û';
+$s_save_filters_as_shared = '¿x¶s¨∞¶@•Œ™∫πL¬o±¯•Û';
+$s_use_saved_filters = '®œ•Œ§w¿x¶s™∫πL¬o±¯•Û';
+$s_create_project = '´ÿ•ﬂ±MÆ◊';
+$s_delete_project = 'ßR∞£±MÆ◊';
+$s_manage_project = '∫ﬁ≤z±MÆ◊';
+$s_manage_user_access_to_project = '∫ﬁ≤z¶s®˙±MÆ◊™∫®œ•Œ™Ã≈v≠≠';
+$s_automatically_included_in_private_projects = '¶€∞ •[§J®Ï´ ≥¨´¨±MÆ◊';
+$s_project_documents = '±MÆ◊§Â•Û';
+$s_view_project_documents = '¿Àµ¯±MÆ◊§Â•Û';
+$s_upload_project_documents = '§W∂«±MÆ◊§Â•Û';
+$s_link_custom_fields_to_projects = '≥sµ≤¶€≠qƒÊ¶Ï®Ï±MÆ◊';
+$s_sponsorships = '∏ÍßU™Ã';
+$s_view_sponsorship_details = '¿Àµ¯∏ÍßU™Ã∏ÍÆ∆';
+$s_view_sponsorship_total = '¿Àµ¯∏ÍßU™Ã¡`º∆';
+$s_sponsor_issue = '∏ÍßU™Ã∞›√D';
+$s_assign_sponsored_issue = '§¿¨£≥Q∏ÍßU™∫∞›√D';
+$s_handle_sponsored_issue = '≥B≤z≥Q∏ÍßU™∫∞›√D';
+$s_others = '®‰•L';
+$s_see_email_addresses_of_other_users = '¨›®‰•L®œ•Œ™Ã™∫ E-Mail';
+$s_send_reminders = '∂«∞e§@≠”¥£øÙ∞TÆß';
+$s_add_profiles = '∑sºW≠”§H≥]©w';
+$s_notify_of_new_user_created = '∑s™∫®œ•Œ™Ã§w´ÿ•ﬂ≥q™æ';
+$s_email_notification = 'E-Mail ≥q™æ';
+$s_status_changed_to = '™¨∫AßÛ∞ ¨∞';
+$s_email_on_deleted = '¶bßR∞£Æ…µo•X E-Mail';
+$s_email_on_sponsorship_changed = '∏ÍßU∏ÍÆ∆ßÛ∞ Æ…µo•X E-Mail';
+$s_email_on_relationship_changed = '¨€√ˆ∞›√DßÛ∞ Æ…µo•X E-Mail';
 
 # DHTML filters
-$s_loading = '更い...';
+$s_loading = '∏¸§J§§...';
 
 # filter_api.php
-$s_between = 'ぇ丁' ;
-$s_on_or_before = '┪ぇ玡' ;
-$s_before = 'ぇ玡' ;
+$s_between = '§ß∂°' ;
+$s_on_or_before = '©Û¶π©Œ§ß´e' ;
+$s_before = '§ß´e' ;
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'ぇ' ;
-$s_on_or_after = '┪ぇ' ;
+$s_after = '§ß´·' ;
+$s_on_or_after = '©Û¶π©Œ§ß´·' ;
 
 ?>
