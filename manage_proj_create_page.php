@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.10 2005-07-13 20:45:01 thraxisp Exp $
+	# $Id: manage_proj_create_page.php,v 1.11 2005-08-10 14:20:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -19,13 +19,16 @@
 <?php print_manage_menu( 'manage_proj_create_page.php' ) ?>
 
 <?php
-	$f_parent_id = gpc_get_int( 'parent_id', null );
+	$f_parent_id = gpc_get( 'parent_id', null );
 ?>
 
 <br />
 <div align="center">
 <form method="post" action="manage_proj_create.php">
-<?php if ( null !== $f_parent_id ) { ?>
+<?php 
+	if ( null !== $f_parent_id ) { 
+		$f_parent_id = (int) $f_parent_id;
+?>
 <input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>">
 <?php } ?>
 <table class="width75" cellspacing="1">
