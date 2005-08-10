@@ -10,13 +10,13 @@
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.95 $
+	# $Revision: 1.96 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:10 $
+	# $Date: 2005-08-10 18:37:14 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.95 2005-08-08 21:29:10 thraxisp Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.96 2005-08-10 18:37:14 thraxisp Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.263 -- jferraz 2005/07/20
+	# Up-to-date with strings_english.txt revision 1.267 -- jferraz 2005/08/10
 	###########################################################################
 ?>
 <?php
@@ -211,7 +211,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtro %d não encontrado.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'O filtro que você está tentando usar é muito velho e precisa ser atualizado, por favor, recrie-o';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
@@ -540,7 +540,7 @@ $s_reminder_monitor = 'Estes usuários também começarão a monitorar o caso. Eles 
 $s_reminder_store = 'Esta anotação será registrada no caso.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = 'Por favor, confirme que você deseja patrocinar o caso %d por %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'O caso foi atualizado com sucesso...';
@@ -877,8 +877,8 @@ $s_my_view_title_reported = 'Relatados por Mim';
 $s_my_view_title_assigned = 'Atribuídos a Mim (não resolvidos)';
 $s_my_view_title_resolved = 'Resolvidos';
 $s_my_view_title_monitored = 'Monitorados por Mim';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_feedback = 'Esperando meu Retorno';
+$s_my_view_title_verify = 'Esperando minha Confirmação de Resolução';
 
 # news_add.php
 $s_news_added_msg = 'Notícia adicionada...';
@@ -1177,7 +1177,7 @@ $s_sponsorship_updated = 'Patrocínio Atualizado';
 $s_sponsorship_deleted = 'Patrocínio Apagado';
 $s_sponsorship_paid = 'Patrocínio Pago';
 $s_sponsorship_more_info = 'Mais informações sobre o patrocínio';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = 'Total Patrocinado';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
