@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.56 2005-08-04 19:54:04 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.57 2005-08-10 14:26:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -288,17 +288,23 @@
 	# Set new filter values.  These are stored in a cookie
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-	
-	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
-	if ( false === $t_setting_arr ) {
-		# couldn't deserialize, if we were trying to use the filter, clear it and reload
-		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
-		if ( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
-			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
+
+	# process the cookie if it exists, it may be blank in a new install
+	if ( ! is_blank( $t_view_all_cookie ) ) {
+		$t_setting_arr = filter_deserialize( $t_view_all_cookie );
+		if ( false === $t_setting_arr ) {
+			# couldn't deserialize, if we were trying to use the filter, clear it and reload
+			# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
+			if ( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
+				gpc_clear_cookie( 'view_all_cookie' );
+				error_proceed_url( 'view_all_set.php?type=0' );
+				trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
+				exit; # stop here
+			} 
 		} 
+	} else {
+		# no cookie found, set it
+		$f_type = 1;
 	}
 
 	$t_cookie_version = config_get( 'cookie_version' );
