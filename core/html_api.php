@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.183 2005-07-31 16:09:36 jlatour Exp $
+	# $Id: html_api.php,v 1.184 2005-08-10 17:08:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -108,11 +108,11 @@
 
 		if ( auth_is_user_authenticated() ) {
 			html_login_info();
-		}
 
-		if( ON == config_get( 'show_project_menu_bar' ) ) {
-			print_project_menu_bar();
-			PRINT '<br />';
+			if( ON == config_get( 'show_project_menu_bar' ) ) {
+				print_project_menu_bar();
+				PRINT '<br />';
+			}
 		}
 		print_menu();
 	}
