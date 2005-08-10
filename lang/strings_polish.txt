@@ -9,13 +9,13 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
-	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/07/25
+	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# -------------------------------------------------
-	# $Revision: 1.94 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:10 $
+	# $Revision: 1.95 $
+	# $Author: vboctor $
+	# $Date: 2005-08-10 22:22:53 $
 	#
-	# $Id: strings_polish.txt,v 1.94 2005-08-08 21:29:10 thraxisp Exp $
+	# $Id: strings_polish.txt,v 1.95 2005-08-10 22:22:53 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -88,7 +88,7 @@ $s_new_bug = 'Nowe Zagadnienie';
 $s_bugnote_added = 'Dodano komentarz';
 $s_bugnote_edited = 'Edycja komentarza';
 $s_bugnote_deleted = 'Usuniêto komentarz';
-$s_summary_updated = 'Zaktualizowano podsumowanie';
+$s_summary_updated = 'Zaktualizowano temat';
 $s_description_updated = 'Zaktualizowano opis';
 $s_additional_information_updated = 'Zaktualizowano informacje dodatkowe';
 $s_steps_to_reproduce_updated = 'Zaktualizowano kroki, by powtórzyæ';
@@ -145,7 +145,7 @@ $s_by_resolution_pct = 'wg rozwi±zania procentowo';
 $s_by_severity_mix = 'wg wa¿no¶ci i statusu';
 $s_by_priority_mix = 'wg priorytetu i statusu';
 $s_by_resolution_mix = 'wg rozwi±zania i statusu';
-$s_synthesis_link = 'Podsumowanie';
+$s_synthesis_link = 'Temat';
 $s_status_link = 'Wg stanu';
 $s_priority_link = 'Wg priorytetu';
 $s_severity_link = 'Wg wa¿no¶ci';
@@ -210,7 +210,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Tablica zamiast ci±gu w %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Oczekiwano liczby w %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Nie znaleziono zagadnienia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Nie znaleziono filtru %d.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtr, którego próbujesz u¿yæ jest zbyt stary, aby mo¿na go by³o uaktualniæ. Proszê stworzyæ ten filtr od nowa.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Nieprawid³owy email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nieznaleziono profilu.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Pliki tego typu nie mog± byæ przesy³ane.';
@@ -244,7 +244,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsoring %d nie znaleziony.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsoring (%s) jest poni¿e minimalnej kwoty (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Operator nie ma wystarczaj±cych uprawnieñ do obs³ugi sponsorowanych zagadnieñ.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Przypisywanie sponsorowanych zagadnieñ wymaga wiêkszych uprawnieñ.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor ma nie podany adres email. Proszê zaktualizowaæ swój profil.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor nie ma podanego adresu email. Proszê zaktualizowaæ swój profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcja konfiguracji \'%s\' ma nieprawid³ow± warto¶æ \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Akcja nie mo¿e zostaæ wykonana poniewa¿ zg³oszenie \'%d\' jest tylko do odczytu.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Istnieje ju¿ powi±zanie pomiêdzy tymi dwoma zg³oszeniami.";
@@ -353,7 +353,7 @@ $s_email_duplicate = 'Duplikat Zagadnienia';
 $s_email_fixed_in_version = 'Rozwi±zane w wersji';
 $s_email_date_submitted = 'Data zg³oszenia';
 $s_email_last_modified = 'Data modyfikacji';
-$s_email_summary =  'Podsumowanie';
+$s_email_summary =  'Temat';
 $s_email_description = 'Opis';
 
 # account_delete.php
@@ -539,7 +539,7 @@ $s_reminder_monitor = 'Ci odbiorcy zaczn± monitorowaæ zagadnienie. Mog± zrezygno
 $s_reminder_store = 'Ten komentarz zostanie zachowany z zagadnieniem.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = 'Proszê potwierdziæ, ¿e chcesz sponsorowaæ zagadnienie %d na kwotê %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Zagadnienie zosta³o pomy¶lnie zaktualizowane...';
@@ -568,7 +568,7 @@ $s_product_version = 'Wersja produktu';
 $s_build = 'Kompilacja';
 $s_fixed_in_version = 'Poprawione w wersji';
 $s_votes = 'G³osy';
-$s_summary = 'Podsumowanie';
+$s_summary = 'Temat';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Kroki, by powtórzyæ';
 $s_update_information_button = 'Aktualizuj informacjê';
@@ -963,7 +963,7 @@ $s_updated_user_msg = 'U¿ytkownik zosta³ pomy¶lnie zaktualizowany';
 $s_must_enter_category = 'Nale¿y wybraæ kategoriê';
 $s_must_enter_severity = 'Nale¿y wybraæ wa¿no¶æ zagadnienia';
 $s_must_enter_reproducibility = 'Nale¿y wybraæ powtarzalno¶æ zagadnienia';
-$s_must_enter_summary = 'Nale¿y wpisaæ podsumowanie zagadnienia';
+$s_must_enter_summary = 'Nale¿y wpisaæ temat zagadnienia';
 $s_must_enter_description = 'Nale¿y wpisaæ opis zagadnienia';
 $s_report_more_bugs = 'Kontynuuj zg³aszanie';
 $s_submission_thanks_msg = 'Dziêkujemy za zg³oszenie zagadnienia';
