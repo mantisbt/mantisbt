@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.21 2005-08-03 15:23:20 thraxisp Exp $
+	# $Id: install.php,v 1.22 2005-08-10 17:10:12 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -83,6 +83,7 @@
 	$f_admin_username = gpc_get( 'admin_username', '' );
 	$f_admin_password = gpc_get( 'admin_password', '');
 	$f_log_queries = gpc_get_bool( 'log_queries', false );
+	$f_db_exists = gpc_get_bool( 'db_exists', false );
 ?>
 <html>
 <head>
@@ -254,14 +255,12 @@ if ( 2 == $t_install_state ) {
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
 
-		$t_db_exists = false;
-
 		if ( $t_result == true ) {
 			print_test_result( GOOD );
 			# check if db exists for the admin
 			$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password, $f_database_name);
 			if ( $t_result == true ) {
-				$t_db_exists = true;
+				$f_db_exists = true;
 			}
 		} else {
 			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
@@ -301,7 +300,7 @@ if ( 2 == $t_install_state ) {
 	?>
 </tr>
 <?php
-	if ( $t_db_exists ) {
+	if ( $f_db_exists ) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -558,6 +557,7 @@ if ( 4 == $t_install_state ) {
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username ?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo ( $f_log_queries ? 1 : 0 ) ?>"></input>
+		<input name="db_exists" type="hidden" value="<?php echo ( $f_db_exists ? 1 : 0 ) ?>"></input>
 <?php
 	# must post <input name="install" type="hidden" value="5"></input>
 	# rather than the following line
@@ -741,9 +741,12 @@ if ( 7 == $t_install_state ) {
 # cleanup and launch upgrade
 ?>
 <p>Install was successful.</p>
+<?php if ( $f_db_exists ) { ?>
 <p><a href="../login_page.php">Continue</a> to log into Mantis</p>
+<?php } else { ?>
+<p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.
 
-<?php
+<?php }
 } # end install_state == 7
 
 
@@ -768,6 +771,7 @@ if( $g_failed ) {
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password ?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo ( $f_log_queries ? 1 : 0 ) ?>"></input>
 		<input name="retry" type="submit" value="Retry"></input>
+		<input name="db_exists" type="hidden" value="<?php echo ( $f_db_exists ? 1 : 0 ) ?>"></input>
 	</td>
 </tr>
 </table>
