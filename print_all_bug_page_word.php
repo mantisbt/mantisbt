@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.60 2005-07-22 01:07:41 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.61 2005-08-10 20:07:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -181,7 +181,11 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo lang_get( 'assigned_to' ) ?>:
 	</td>
 	<td class="print">
-		<?php print_user_with_subject( $v_handler_id, $v_id ) ?>
+		<?php 
+			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $v_id ) ) {
+				print_user_with_subject( $v_handler_id, $f_bug_id ); 
+			}
+		?>
 	</td>
 	<td class="print-category">
 		<?php echo lang_get( 'os' ) ?>:
