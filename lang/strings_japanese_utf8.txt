@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.28 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:10 $
+	# $Revision: 1.29 $
+	# $Author: vboctor $
+	# $Date: 2005-08-10 12:21:51 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.28 2005-08-08 21:29:10 thraxisp Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.29 2005-08-10 12:21:51 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -108,12 +108,12 @@ $s_bug_actiongroup_status = 'この改善要求は要求されたステータス
 $s_bug_actiongroup_category = 'この改善要求のカテゴリに変更できません。';
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
-$s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
+$s_move_bugs_conf_msg = '改善要求の移動先を選択してください。';
 $s_copy_bugs_conf_msg = '改善要求コピー先';
-$s_assign_bugs_conf_msg = '担当者を選択して下さい。';
-$s_resolve_bugs_conf_msg = '分析状況を選択して下さい。';
-$s_priority_bugs_conf_msg = '重要度を選択して下さい。';
-$s_status_bugs_conf_msg = 'ステータスを選択して下さい。';
+$s_assign_bugs_conf_msg = '担当者を選択してください。';
+$s_resolve_bugs_conf_msg = '分析状況を選択してください。';
+$s_priority_bugs_conf_msg = '重要度を選択してください。';
+$s_status_bugs_conf_msg = 'ステータスを選択してください。';
 $s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
 $s_category_bugs_conf_msg = '改善要求のカテゴリを選択してください。';
 $s_set_sticky_bugs_conf_msg = '改善要求にStickyを設定/解除してよろしいですか。';
@@ -149,7 +149,7 @@ $s_priority_link = '優先度別';
 $s_severity_link = '重要度別';
 $s_category_link = 'カテゴリ別';
 $s_resolution_link = '分析状況別';
-$s_legend_still_open = 'Still Open';
+$s_legend_still_open = '未解決';
 $s_legend_resolved = '解決済';
 $s_legend_assigned = '割当済';
 $s_legend_total = '合計';
@@ -163,7 +163,7 @@ $s_not_enough_data = '十分なデータがないので、グラフを作成で�
 $s_hide_button = '選択項目のみ表示する';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = '印刷する項目を選択して下さい。';
+$s_printing_preferences_title = '印刷する項目を選択してください。';
 $s_printing_options_link = '印刷オプション';
 
 # word and excel export
@@ -171,24 +171,24 @@ $s_bugnote_title = 'コメント登録者' ;
 $s_bugnote_date = 'コメント登録年月日';
 $s_bugnote_description = 'コメント内容';
 
-$s_error_no_proceed = 'ブラウザの戻るボタンを使用して前のページに戻って下さい。そこで、エラーで判明した改善要求を直すか他のアクションを選択して下さい。もしくは、メニューバーからオプションで選択して、新しいセクションに直に進んで下さい。';
+$s_error_no_proceed = 'ブラウザの戻るボタンを使用して前のページに戻ってください。そこで、エラーで判明した改善要求を直すか他のアクションを選択してください。もしくは、メニューバーからオプションで選択して、新しいセクションに直に進んでください。';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'エラーが発生しました。システム管理者までお知らせ下さい。';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL のエラーを検知しました。システム管理者までお知らせ下さい→';
+$MANTIS_ERROR[ERROR_GENERIC] = 'エラーが発生しました。システム管理者までお知らせください。';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL のエラーを検知しました。システム管理者までお知らせください→';
 $MANTIS_ERROR[ERROR_REPORT] = 'レポートに間違いがあります。';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ファイルが選択されていません。';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ファイル種別は許可されていません。';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ディレクトリが存在しません。プロジェクトの設定を確認して下さい。';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ファイルが重複しています。先にファイルを削除して下さい。';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ディレクトリが存在しません。プロジェクトの設定を確認してください。';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ファイルが重複しています。先にファイルを削除してください。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'プロジェクトは既に登録されています。';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必須フィールド「%s」が入力されていません。入力を確認して下さい。';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '権限がありません。アクセスする為には、権限を上げて下さい。';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必須フィールド「%s」が入力されていません。入力を確認してください。';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '権限がありません。アクセスする為には、権限を上げてください。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'アクセスが拒否されました。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。ファイルを読めません。プロジェクト管理を確認してください。';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認して下さい。';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認してください。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータ「%s」がありません。';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択して下さい。';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='設定項目「%s」がありません。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='文字列「%s」がありません。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
@@ -196,7 +196,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません�
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'データベースの項目「%s」がありません。';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FTPサーバに接続できません。';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '妥当な権限を持っていないので、このステータスの改善要求を取り扱うことはできません。';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力して下さい。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力してください。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'プロジェクト名が無効です。プロジェクト名はブランクではいけません。';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ユーザーがありません。';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ブラウザから送信されたログイン情報は無効です。おそらく、あなたのアカウントは削除されています。';
@@ -208,7 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='「%s」で、文字列を期待し�
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '「%s」は、数値である必要があります。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '改善要求はありません。';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'フィルター[%d」がありません。';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'フィルターが古すぎるため更新できません。作り直してください。';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '無効なメールアドレスです。';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'プロフィールがありません。';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'このファイル種別がアップロードできません。';
@@ -519,7 +519,7 @@ $s_resolved_bug_title = '解決状況の入力';
 $s_resolved_bug_button = '解決状況の更新';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = '改善要求が実装されました。下記にコメントを記述して下さい。';
+$s_bug_resolved_msg = '改善要求が実装されました。下記にコメントを記述してください。';
 $s_resolve_add_bugnote_title = '問題解決の理由をコメント追加';
 $s_bugnote_add_resolve_button = 'コメント追加';
 
@@ -537,7 +537,7 @@ $s_reminder_monitor = '受取人は、この改善要求の監視ユーザに追
 $s_reminder_store = '送信内容は、この改善要求に追加されます。';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = '改善要求 %d に、%s 資金提供することを確認してください。';
 
 # bug_update.php
 $s_bug_updated_msg = '改善要求が正常に更新されました。';
@@ -870,12 +870,12 @@ $s_my_view_link = 'マイビュー';
 # my_view_page.php
 $s_my_view_title_unassigned = '担当不在';
 $s_my_view_title_recent_mod = '最近修正';
-$s_my_view_title_reported = '自分がレポート';
-$s_my_view_title_assigned = '自分が担当 (未解決)';
+$s_my_view_title_reported = 'レポート';
+$s_my_view_title_assigned = '担当 (未解決)';
 $s_my_view_title_resolved = '解決済';
-$s_my_view_title_monitored = '自分が監視';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_monitored = '監視中';
+$s_my_view_title_feedback = '追加情報待ち';
+$s_my_view_title_verify = '解決確認待ち';
 
 # news_add.php
 $s_news_added_msg = 'ニュースが追加されました。';
@@ -958,11 +958,11 @@ $s_remove_all_link = '全員削除';
 $s_updated_user_msg = 'ユーザーが更新されました。';
 
 # report_add.php
-$s_must_enter_category = 'カテゴリを選択して下さい。';
-$s_must_enter_severity = '重要度を選択して下さい。';
-$s_must_enter_reproducibility = '再現性を選択して下さい。';
-$s_must_enter_summary = '要約を記入して下さい。';
-$s_must_enter_description = '詳細を記入して下さい。';
+$s_must_enter_category = 'カテゴリを選択してください。';
+$s_must_enter_severity = '重要度を選択してください。';
+$s_must_enter_reproducibility = '再現性を選択してください。';
+$s_must_enter_summary = '要約を記入してください。';
+$s_must_enter_description = '詳細を記入してください。';
 $s_report_more_bugs = '次の改善要求';
 $s_submission_thanks_msg = '登録、ありがとうございました。';
 
@@ -977,7 +977,7 @@ $s_or_fill_in = '↑選択 or 記入↓';
 $s_assign_to = '担当者';
 $s_additional_information = '追加情報';
 $s_submit_report_button = '登録';
-$s_check_report_more_bugs = '続けて登録する場合にはチェックして下さい。';
+$s_check_report_more_bugs = '続けて登録する場合にはチェックしてください。';
 
 # report_bug_page.php
 $s_advanced_report_link = '高度な改善要求';
@@ -985,7 +985,7 @@ $s_report_stay = '次の改善要求';
 
 # set_project.php
 $s_selected_project = '選択したプロジェクト';
-$s_valid_project_msg = 'プロジェクトを正しく選択して下さい。';
+$s_valid_project_msg = 'プロジェクトを正しく選択してください。';
 
 # signup.php
 $s_signup_done_title = 'アカウント登録を処理しました。';
@@ -1144,7 +1144,7 @@ $s_custom_field_require_closed = '完了時は必須';
 $s_custom_field_sequence = '表示順';
 $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:チェックボックス,6:リスト,7:複数選択リスト,8:日付';
 
-$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br>もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br>削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
+$s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br>もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。<br>削除したくないなら、ブラウザの戻るボタンを選択してください。続行するなら、下のボタンをクリックしてください。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
 $s_field_delete_button = '項目の削除';
 
@@ -1169,12 +1169,12 @@ $s_phpmailer_language = 'ja';
 
 # Sponsorship Strings
 $s_sponsors = '%d 人のスポンサー';
-$s_sponsorship_added = '資金提供を追加しました。';
-$s_sponsorship_updated = '資金提供を更新しました。';
-$s_sponsorship_deleted = '資金提供を削除しました。';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_added = '資金提供の追加';
+$s_sponsorship_updated = '資金提供の更新';
+$s_sponsorship_deleted = '資金提供の削除';
+$s_sponsorship_paid = '資金支払済';
 $s_sponsorship_more_info = '資金提供についてもっと情報を見る';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = '総資金提供額';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.81 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:08 $
+	# $Revision: 1.82 $
+	# $Author: vboctor $
+	# $Date: 2005-08-10 12:21:51 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.81 2005-08-08 21:29:08 thraxisp Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.82 2005-08-10 12:21:51 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -108,12 +108,12 @@ $s_bug_actiongroup_status = '‚±‚Ì‰ü‘P—v‹‚Í—v‹‚³‚ê‚½ƒXƒe[ƒ^ƒX‚É•ÏX‚·‚é‚±‚Æ‚ª‚
 $s_bug_actiongroup_category = '‚±‚Ì‰ü‘P—v‹‚ÌƒJƒeƒSƒŠ‚É•ÏX‚Å‚«‚Ü‚¹‚ñB';
 $s_close_bugs_conf_msg = '‰ü‘P—v‹‚ğŠ®—¹‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B';
 $s_delete_bugs_conf_msg = '‰ü‘P—v‹‚ğíœ‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B';
-$s_move_bugs_conf_msg = '‰ü‘P—v‹‚ÌˆÚ“®æ‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
+$s_move_bugs_conf_msg = '‰ü‘P—v‹‚ÌˆÚ“®æ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_copy_bugs_conf_msg = '‰ü‘P—v‹ƒRƒs[æ';
-$s_assign_bugs_conf_msg = '’S“–Ò‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_resolve_bugs_conf_msg = '•ªÍó‹µ‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_priority_bugs_conf_msg = 'd—v“x‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_status_bugs_conf_msg = 'ƒXƒe[ƒ^ƒX‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
+$s_assign_bugs_conf_msg = '’S“–Ò‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_resolve_bugs_conf_msg = '•ªÍó‹µ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_priority_bugs_conf_msg = 'd—v“x‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_status_bugs_conf_msg = 'ƒXƒe[ƒ^ƒX‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_view_status_bugs_conf_msg = '‘I‘ğ‚µ‚½‰ü‘P—v‹‚Ìó‹µ‚ğŒ©‚é';
 $s_category_bugs_conf_msg = '‰ü‘P—v‹‚ÌƒJƒeƒSƒŠ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_set_sticky_bugs_conf_msg = '‰ü‘P—v‹‚ÉSticky‚ğİ’è/‰ğœ‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B';
@@ -149,7 +149,7 @@ $s_priority_link = '—Dæ“x•Ê';
 $s_severity_link = 'd—v“x•Ê';
 $s_category_link = 'ƒJƒeƒSƒŠ•Ê';
 $s_resolution_link = '•ªÍó‹µ•Ê';
-$s_legend_still_open = 'Still Open';
+$s_legend_still_open = '–¢‰ğŒˆ';
 $s_legend_resolved = '‰ğŒˆÏ';
 $s_legend_assigned = 'Š„“–Ï';
 $s_legend_total = '‡Œv';
@@ -163,7 +163,7 @@ $s_not_enough_data = '\•ª‚Èƒf[ƒ^‚ª‚È‚¢‚Ì‚ÅAƒOƒ‰ƒt‚ğì¬‚Å‚«‚Ü‚¹‚ñB';
 $s_hide_button = '‘I‘ğ€–Ú‚Ì‚İ•\¦‚·‚é';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'ˆóü‚·‚é€–Ú‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
+$s_printing_preferences_title = 'ˆóü‚·‚é€–Ú‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_printing_options_link = 'ˆóüƒIƒvƒVƒ‡ƒ“';
 
 # word and excel export
@@ -171,24 +171,24 @@ $s_bugnote_title = 'ƒRƒƒ“ƒg“o˜^Ò' ;
 $s_bugnote_date = 'ƒRƒƒ“ƒg“o˜^”NŒ“ú';
 $s_bugnote_description = 'ƒRƒƒ“ƒg“à—e';
 
-$s_error_no_proceed = 'ƒuƒ‰ƒEƒU‚Ì–ß‚éƒ{ƒ^ƒ“‚ğg—p‚µ‚Ä‘O‚Ìƒy[ƒW‚É–ß‚Á‚Ä‰º‚³‚¢B‚»‚±‚ÅAƒGƒ‰[‚Å”»–¾‚µ‚½‰ü‘P—v‹‚ğ’¼‚·‚©‘¼‚ÌƒAƒNƒVƒ‡ƒ“‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B‚à‚µ‚­‚ÍAƒƒjƒ…[ƒo[‚©‚çƒIƒvƒVƒ‡ƒ“‚Å‘I‘ğ‚µ‚ÄAV‚µ‚¢ƒZƒNƒVƒ‡ƒ“‚É’¼‚Éi‚ñ‚Å‰º‚³‚¢B';
+$s_error_no_proceed = 'ƒuƒ‰ƒEƒU‚Ì–ß‚éƒ{ƒ^ƒ“‚ğg—p‚µ‚Ä‘O‚Ìƒy[ƒW‚É–ß‚Á‚Ä‚­‚¾‚³‚¢B‚»‚±‚ÅAƒGƒ‰[‚Å”»–¾‚µ‚½‰ü‘P—v‹‚ğ’¼‚·‚©‘¼‚ÌƒAƒNƒVƒ‡ƒ“‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B‚à‚µ‚­‚ÍAƒƒjƒ…[ƒo[‚©‚çƒIƒvƒVƒ‡ƒ“‚Å‘I‘ğ‚µ‚ÄAV‚µ‚¢ƒZƒNƒVƒ‡ƒ“‚É’¼‚Éi‚ñ‚Å‚­‚¾‚³‚¢B';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½BƒVƒXƒeƒ€ŠÇ—Ò‚Ü‚Å‚¨’m‚ç‚¹‰º‚³‚¢B';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL ‚ÌƒGƒ‰[‚ğŒŸ’m‚µ‚Ü‚µ‚½BƒVƒXƒeƒ€ŠÇ—Ò‚Ü‚Å‚¨’m‚ç‚¹‰º‚³‚¢¨';
+$MANTIS_ERROR[ERROR_GENERIC] = 'ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½BƒVƒXƒeƒ€ŠÇ—Ò‚Ü‚Å‚¨’m‚ç‚¹‚­‚¾‚³‚¢B';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL ‚ÌƒGƒ‰[‚ğŒŸ’m‚µ‚Ü‚µ‚½BƒVƒXƒeƒ€ŠÇ—Ò‚Ü‚Å‚¨’m‚ç‚¹‚­‚¾‚³‚¢¨';
 $MANTIS_ERROR[ERROR_REPORT] = 'ƒŒƒ|[ƒg‚ÉŠÔˆá‚¢‚ª‚ ‚è‚Ü‚·B';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ƒtƒ@ƒCƒ‹‚ª‘I‘ğ‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ƒtƒ@ƒCƒ‹í•Ê‚Í‹–‰Â‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶İ‚µ‚Ü‚¹‚ñBƒvƒƒWƒFƒNƒg‚Ìİ’è‚ğŠm”F‚µ‚Ä‰º‚³‚¢B';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ƒtƒ@ƒCƒ‹‚ªd•¡‚µ‚Ä‚¢‚Ü‚·Bæ‚Éƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶İ‚µ‚Ü‚¹‚ñBƒvƒƒWƒFƒNƒg‚Ìİ’è‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ƒtƒ@ƒCƒ‹‚ªd•¡‚µ‚Ä‚¢‚Ü‚·Bæ‚Éƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ƒvƒƒWƒFƒNƒg‚ÍŠù‚É“o˜^‚³‚ê‚Ä‚¢‚Ü‚·B';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '•K{ƒtƒB[ƒ‹ƒhu%sv‚ª“ü—Í‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB“ü—Í‚ğŠm”F‚µ‚Ä‰º‚³‚¢B';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Œ ŒÀ‚ª‚ ‚è‚Ü‚¹‚ñBƒAƒNƒZƒX‚·‚éˆ×‚É‚ÍAŒ ŒÀ‚ğã‚°‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '•K{ƒtƒB[ƒ‹ƒhu%sv‚ª“ü—Í‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB“ü—Í‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Œ ŒÀ‚ª‚ ‚è‚Ü‚¹‚ñBƒAƒNƒZƒX‚·‚éˆ×‚É‚ÍAŒ ŒÀ‚ğã‚°‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'ƒAƒNƒZƒX‚ª‹‘”Û‚³‚ê‚Ü‚µ‚½B';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½Bƒtƒ@ƒCƒ‹‚ğ“Ç‚ß‚Ü‚¹‚ñBƒvƒƒWƒFƒNƒgŠÇ—‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½BPHP ‚Åİ’è‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹ƒTƒCƒY‚æ‚è‘å‚«‚¢‚±‚Æ‚ª–â‘è‚Å‚·Bİ’è‚ğŠm”F‚µ‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½BPHP ‚Åİ’è‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹ƒTƒCƒY‚æ‚è‘å‚«‚¢‚±‚Æ‚ª–â‘è‚Å‚·Bİ’è‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '‚±‚Ìƒy[ƒW‚Å•K{‚Èƒpƒ‰ƒ[ƒ^u%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ƒ†[ƒU[–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Ä•Ê‚Ìƒ†[ƒU[–¼‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ƒ†[ƒU[–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Ä•Ê‚Ìƒ†[ƒU[–¼‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='İ’è€–Úu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='•¶š—ñu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ƒRƒƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
@@ -196,7 +196,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ƒvƒƒWƒFƒNƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ƒf[ƒ^ƒx[ƒX‚Ì€–Úu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FTPƒT[ƒo‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '‘Ã“–‚ÈŒ ŒÀ‚ğ‚Á‚Ä‚¢‚È‚¢‚Ì‚ÅA‚±‚ÌƒXƒe[ƒ^ƒX‚Ì‰ü‘P—v‹‚ğæ‚èˆµ‚¤‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ƒvƒƒWƒFƒNƒg–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Äˆá‚¤ƒvƒƒWƒFƒNƒg–¼‚ğ“ü—Í‚µ‚Ä‰º‚³‚¢B';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ƒvƒƒWƒFƒNƒg–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Äˆá‚¤ƒvƒƒWƒFƒNƒg–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ƒvƒƒWƒFƒNƒg–¼‚ª–³Œø‚Å‚·BƒvƒƒWƒFƒNƒg–¼‚Íƒuƒ‰ƒ“ƒN‚Å‚Í‚¢‚¯‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ƒ†[ƒU[‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ƒuƒ‰ƒEƒU‚©‚ç‘—M‚³‚ê‚½ƒƒOƒCƒ“î•ñ‚Í–³Œø‚Å‚·B‚¨‚»‚ç‚­A‚ ‚È‚½‚ÌƒAƒJƒEƒ“ƒg‚Ííœ‚³‚ê‚Ä‚¢‚Ü‚·B';
@@ -208,7 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='u%sv‚ÅA•¶š—ñ‚ğŠú‘Ò‚µ‚Ü‚µ‚½‚ªA”z
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'u%sv‚ÍA”’l‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '‰ü‘P—v‹‚Í‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'ƒtƒBƒ‹ƒ^[[%dv‚ª‚ ‚è‚Ü‚¹‚ñB';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'ƒtƒBƒ‹ƒ^[‚ªŒÃ‚·‚¬‚é‚½‚ßXV‚Å‚«‚Ü‚¹‚ñBì‚è’¼‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '–³Œø‚Èƒ[ƒ‹ƒAƒhƒŒƒX‚Å‚·B';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ƒvƒƒtƒB[ƒ‹‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '‚±‚Ìƒtƒ@ƒCƒ‹í•Ê‚ªƒAƒbƒvƒ[ƒh‚Å‚«‚Ü‚¹‚ñB';
@@ -519,7 +519,7 @@ $s_resolved_bug_title = '‰ğŒˆó‹µ‚Ì“ü—Í';
 $s_resolved_bug_button = '‰ğŒˆó‹µ‚ÌXV';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = '‰ü‘P—v‹‚ªÀ‘•‚³‚ê‚Ü‚µ‚½B‰º‹L‚ÉƒRƒƒ“ƒg‚ğ‹Lq‚µ‚Ä‰º‚³‚¢B';
+$s_bug_resolved_msg = '‰ü‘P—v‹‚ªÀ‘•‚³‚ê‚Ü‚µ‚½B‰º‹L‚ÉƒRƒƒ“ƒg‚ğ‹Lq‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_resolve_add_bugnote_title = '–â‘è‰ğŒˆ‚Ì——R‚ğƒRƒƒ“ƒg’Ç‰Á';
 $s_bugnote_add_resolve_button = 'ƒRƒƒ“ƒg’Ç‰Á';
 
@@ -537,7 +537,7 @@ $s_reminder_monitor = 'óæl‚ÍA‚±‚Ì‰ü‘P—v‹‚ÌŠÄ‹ƒ†[ƒU‚É’Ç‰Á‚³‚ê‚Ü‚·BŠÄ‹‚ğ
 $s_reminder_store = '‘—M“à—e‚ÍA‚±‚Ì‰ü‘P—v‹‚É’Ç‰Á‚³‚ê‚Ü‚·B';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = '‰ü‘P—v‹ %d ‚ÉA%s ‘‹à’ñ‹Ÿ‚·‚é‚±‚Æ‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B';
 
 # bug_update.php
 $s_bug_updated_msg = '‰ü‘P—v‹‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B';
@@ -870,12 +870,12 @@ $s_my_view_link = 'ƒ}ƒCƒrƒ…[';
 # my_view_page.php
 $s_my_view_title_unassigned = '’S“–•sİ';
 $s_my_view_title_recent_mod = 'Å‹ßC³';
-$s_my_view_title_reported = '©•ª‚ªƒŒƒ|[ƒg';
-$s_my_view_title_assigned = '©•ª‚ª’S“– (–¢‰ğŒˆ)';
+$s_my_view_title_reported = 'ƒŒƒ|[ƒg';
+$s_my_view_title_assigned = '’S“– (–¢‰ğŒˆ)';
 $s_my_view_title_resolved = '‰ğŒˆÏ';
-$s_my_view_title_monitored = '©•ª‚ªŠÄ‹';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_monitored = 'ŠÄ‹’†';
+$s_my_view_title_feedback = '’Ç‰Áî•ñ‘Ò‚¿';
+$s_my_view_title_verify = '‰ğŒˆŠm”F‘Ò‚¿';
 
 # news_add.php
 $s_news_added_msg = 'ƒjƒ…[ƒX‚ª’Ç‰Á‚³‚ê‚Ü‚µ‚½B';
@@ -958,11 +958,11 @@ $s_remove_all_link = '‘Sˆõíœ';
 $s_updated_user_msg = 'ƒ†[ƒU[‚ªXV‚³‚ê‚Ü‚µ‚½B';
 
 # report_add.php
-$s_must_enter_category = 'ƒJƒeƒSƒŠ‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_must_enter_severity = 'd—v“x‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_must_enter_reproducibility = 'ÄŒ»«‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
-$s_must_enter_summary = '—v–ñ‚ğ‹L“ü‚µ‚Ä‰º‚³‚¢B';
-$s_must_enter_description = 'Ú×‚ğ‹L“ü‚µ‚Ä‰º‚³‚¢B';
+$s_must_enter_category = 'ƒJƒeƒSƒŠ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_must_enter_severity = 'd—v“x‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_must_enter_reproducibility = 'ÄŒ»«‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_must_enter_summary = '—v–ñ‚ğ‹L“ü‚µ‚Ä‚­‚¾‚³‚¢B';
+$s_must_enter_description = 'Ú×‚ğ‹L“ü‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_report_more_bugs = 'Ÿ‚Ì‰ü‘P—v‹';
 $s_submission_thanks_msg = '“o˜^A‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚µ‚½B';
 
@@ -977,7 +977,7 @@ $s_or_fill_in = 'ª‘I‘ğ or ‹L“ü«';
 $s_assign_to = '’S“–Ò';
 $s_additional_information = '’Ç‰Áî•ñ';
 $s_submit_report_button = '“o˜^';
-$s_check_report_more_bugs = '‘±‚¯‚Ä“o˜^‚·‚éê‡‚É‚Íƒ`ƒFƒbƒN‚µ‚Ä‰º‚³‚¢B';
+$s_check_report_more_bugs = '‘±‚¯‚Ä“o˜^‚·‚éê‡‚É‚Íƒ`ƒFƒbƒN‚µ‚Ä‚­‚¾‚³‚¢B';
 
 # report_bug_page.php
 $s_advanced_report_link = '‚“x‚È‰ü‘P—v‹';
@@ -985,7 +985,7 @@ $s_report_stay = 'Ÿ‚Ì‰ü‘P—v‹';
 
 # set_project.php
 $s_selected_project = '‘I‘ğ‚µ‚½ƒvƒƒWƒFƒNƒg';
-$s_valid_project_msg = 'ƒvƒƒWƒFƒNƒg‚ğ³‚µ‚­‘I‘ğ‚µ‚Ä‰º‚³‚¢B';
+$s_valid_project_msg = 'ƒvƒƒWƒFƒNƒg‚ğ³‚µ‚­‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B';
 
 # signup.php
 $s_signup_done_title = 'ƒAƒJƒEƒ“ƒg“o˜^‚ğˆ—‚µ‚Ü‚µ‚½B';
@@ -1144,7 +1144,7 @@ $s_custom_field_require_closed = 'Š®—¹‚Í•K{';
 $s_custom_field_sequence = '•\¦‡';
 $s_custom_field_type_enum_string = '0:•¶š—ñ,1:®”,2:•‚“®¬”“_,3:—ñ‹“,4:ƒ[ƒ‹,5:ƒ`ƒFƒbƒNƒ{ƒbƒNƒX,6:ƒŠƒXƒg,7:•¡”‘I‘ğƒŠƒXƒg,8:“ú•t';
 
-$s_confirm_used_custom_field_deletion = '‚±‚ÌƒJƒXƒ^ƒ€€–Ú‚ÍAŒ»İ1‚ÂˆÈã‚ÌƒvƒƒWƒFƒNƒg‚Åg—p‚³‚ê‚Ä‚¢‚Ü‚·B<br>‚à‚µ‘±s‚·‚é‚È‚ç‚ÎA‚±‚Ì€–Ú‚Ì‚·‚×‚Ä‚Ì’l‚Ííœ‚³‚ê‚Ü‚·Bíœ‚µ‚½‚ç–ß‚·‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br>íœ‚µ‚½‚­‚È‚¢‚È‚çAƒuƒ‰ƒEƒU‚Ì–ß‚éƒ{ƒ^ƒ“‚ğ‘I‘ğ‚µ‚Ä‰º‚³‚¢B‘±s‚·‚é‚È‚çA‰º‚Ìƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µ‚Ä‰º‚³‚¢B';
+$s_confirm_used_custom_field_deletion = '‚±‚ÌƒJƒXƒ^ƒ€€–Ú‚ÍAŒ»İ1‚ÂˆÈã‚ÌƒvƒƒWƒFƒNƒg‚Åg—p‚³‚ê‚Ä‚¢‚Ü‚·B<br>‚à‚µ‘±s‚·‚é‚È‚ç‚ÎA‚±‚Ì€–Ú‚Ì‚·‚×‚Ä‚Ì’l‚Ííœ‚³‚ê‚Ü‚·Bíœ‚µ‚½‚ç–ß‚·‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br>íœ‚µ‚½‚­‚È‚¢‚È‚çAƒuƒ‰ƒEƒU‚Ì–ß‚éƒ{ƒ^ƒ“‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B‘±s‚·‚é‚È‚çA‰º‚Ìƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢B';
 $s_confirm_custom_field_deletion = '‚±‚ÌƒJƒXƒ^ƒ€€–Ú‚Æ‚·‚×‚Ä‚Ìİ’è‚µ‚½’l‚ğíœ‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B';
 $s_field_delete_button = '€–Ú‚Ìíœ';
 
@@ -1169,12 +1169,12 @@ $s_phpmailer_language = 'ja';
 
 # Sponsorship Strings
 $s_sponsors = '%d l‚ÌƒXƒ|ƒ“ƒT[';
-$s_sponsorship_added = '‘‹à’ñ‹Ÿ‚ğ’Ç‰Á‚µ‚Ü‚µ‚½B';
-$s_sponsorship_updated = '‘‹à’ñ‹Ÿ‚ğXV‚µ‚Ü‚µ‚½B';
-$s_sponsorship_deleted = '‘‹à’ñ‹Ÿ‚ğíœ‚µ‚Ü‚µ‚½B';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_added = '‘‹à’ñ‹Ÿ‚Ì’Ç‰Á';
+$s_sponsorship_updated = '‘‹à’ñ‹Ÿ‚ÌXV';
+$s_sponsorship_deleted = '‘‹à’ñ‹Ÿ‚Ìíœ';
+$s_sponsorship_paid = '‘‹àx•¥Ï';
 $s_sponsorship_more_info = '‘‹à’ñ‹Ÿ‚É‚Â‚¢‚Ä‚à‚Á‚Æî•ñ‚ğŒ©‚é';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = '‘‘‹à’ñ‹ŸŠz';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there

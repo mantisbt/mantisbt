@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.80 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:02 $
+	# $Revision: 1.81 $
+	# $Author: vboctor $
+	# $Date: 2005-08-10 12:21:51 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.80 2005-08-08 21:29:02 thraxisp Exp $
+	# $Id: strings_japanese_euc.txt,v 1.81 2005-08-10 12:21:51 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -108,12 +108,12 @@ $s_bug_actiongroup_status = 'д│д╬▓■┴▒═╫╡сд╧═╫╡сд╡дьд┐е╣е╞б╝е┐е╣д╦╩╤╣╣д╣дыд│д╚дмд
 $s_bug_actiongroup_category = 'д│д╬▓■┴▒═╫╡сд╬еле╞е┤еъд╦╩╤╣╣д╟днд▐д╗дєбг';
 $s_close_bugs_conf_msg = '▓■┴▒═╫╡сдЄ┤░╬╗д╖д╞дшдэд╖ддд╟д╣длбг';
 $s_delete_bugs_conf_msg = '▓■┴▒═╫╡сдЄ║я╜№д╖д╞дшдэд╖ддд╟д╣длбг';
-$s_move_bugs_conf_msg = '▓■┴▒═╫╡сд╬░▄╞░└шдЄ┴к┬Єд╖д╞▓╝д╡ддбг';
+$s_move_bugs_conf_msg = '▓■┴▒═╫╡сд╬░▄╞░└шдЄ┴к┬Єд╖д╞дпд└д╡ддбг';
 $s_copy_bugs_conf_msg = '▓■┴▒═╫╡се│е╘б╝└ш';
-$s_assign_bugs_conf_msg = '├┤┼Ў╝╘дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_resolve_bugs_conf_msg = '╩м└╧╛ї╢╖дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_priority_bugs_conf_msg = '╜┼═╫┼┘дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_status_bugs_conf_msg = 'е╣е╞б╝е┐е╣дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
+$s_assign_bugs_conf_msg = '├┤┼Ў╝╘дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_resolve_bugs_conf_msg = '╩м└╧╛ї╢╖дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_priority_bugs_conf_msg = '╜┼═╫┼┘дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_status_bugs_conf_msg = 'е╣е╞б╝е┐е╣дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
 $s_view_status_bugs_conf_msg = '┴к┬Єд╖д┐▓■┴▒═╫╡сд╬╛ї╢╖дЄ╕лды';
 $s_category_bugs_conf_msg = '▓■┴▒═╫╡сд╬еле╞е┤еъдЄ┴к┬Єд╖д╞дпд└д╡ддбг';
 $s_set_sticky_bugs_conf_msg = '▓■┴▒═╫╡сд╦StickyдЄ└▀─ъ/▓Є╜№д╖д╞дшдэд╖ддд╟д╣длбг';
@@ -149,7 +149,7 @@ $s_priority_link = '═е└ш┼┘╩╠';
 $s_severity_link = '╜┼═╫┼┘╩╠';
 $s_category_link = 'еле╞е┤еъ╩╠';
 $s_resolution_link = '╩м└╧╛ї╢╖╩╠';
-$s_legend_still_open = 'Still Open';
+$s_legend_still_open = '╠д▓Є╖ш';
 $s_legend_resolved = '▓Є╖ш║╤';
 $s_legend_assigned = '│ф┼Ў║╤';
 $s_legend_total = '╣ч╖╫';
@@ -163,7 +163,7 @@ $s_not_enough_data = '╜╜╩мд╩е╟б╝е┐дмд╩ддд╬д╟бве░еще╒дЄ║ю└од╟днд▐д╗дєбг';
 $s_hide_button = '┴к┬Є╣р╠▄д╬д▀╔╜╝ид╣ды';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = '░ї║■д╣ды╣р╠▄дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
+$s_printing_preferences_title = '░ї║■д╣ды╣р╠▄дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
 $s_printing_options_link = '░ї║■еке╫е╖ечеє';
 
 # word and excel export
@@ -171,24 +171,24 @@ $s_bugnote_title = 'е│есеєе╚┼╨╧┐╝╘' ;
 $s_bugnote_date = 'е│есеєе╚┼╨╧┐╟п╖ю╞№';
 $s_bugnote_description = 'е│есеєе╚╞т═╞';
 
-$s_error_no_proceed = 'е╓ещеже╢д╬╠сдые▄е┐еєдЄ╗╚═╤д╖д╞┴░д╬е┌б╝е╕д╦╠сд├д╞▓╝д╡ддбгд╜д│д╟бвеиещб╝д╟╚╜╠└д╖д┐▓■┴▒═╫╡сдЄ─╛д╣дл┬╛д╬евепе╖ечеєдЄ┴к┬Єд╖д╞▓╝д╡ддбгдтд╖дпд╧бвесе╦ехб╝е╨б╝длдщеке╫е╖ечеєд╟┴к┬Єд╖д╞бв┐╖д╖дде╗епе╖ечеєд╦─╛д╦┐╩дєд╟▓╝д╡ддбг';
+$s_error_no_proceed = 'е╓ещеже╢д╬╠сдые▄е┐еєдЄ╗╚═╤д╖д╞┴░д╬е┌б╝е╕д╦╠сд├д╞дпд└д╡ддбгд╜д│д╟бвеиещб╝д╟╚╜╠└д╖д┐▓■┴▒═╫╡сдЄ─╛д╣дл┬╛д╬евепе╖ечеєдЄ┴к┬Єд╖д╞дпд└д╡ддбгдтд╖дпд╧бвесе╦ехб╝е╨б╝длдщеке╫е╖ечеєд╟┴к┬Єд╖д╞бв┐╖д╖дде╗епе╖ечеєд╦─╛д╦┐╩дєд╟дпд└д╡ддбг';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'еиещб╝дм╚п└╕д╖д▐д╖д┐бге╖е╣е╞ер┤╔═¤╝╘д▐д╟дк├╬дщд╗▓╝д╡ддбг';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL д╬еиещб╝дЄ╕б├╬д╖д▐д╖д┐бге╖е╣е╞ер┤╔═¤╝╘д▐д╟дк├╬дщд╗▓╝д╡ддвк';
+$MANTIS_ERROR[ERROR_GENERIC] = 'еиещб╝дм╚п└╕д╖д▐д╖д┐бге╖е╣е╞ер┤╔═¤╝╘д▐д╟дк├╬дщд╗дпд└д╡ддбг';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL д╬еиещб╝дЄ╕б├╬д╖д▐д╖д┐бге╖е╣е╞ер┤╔═¤╝╘д▐д╟дк├╬дщд╗дпд└д╡ддвк';
 $MANTIS_ERROR[ERROR_REPORT] = 'еье▌б╝е╚д╦┤╓░удддмдвдъд▐д╣бг';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'е╒ебедеыдм┴к┬Єд╡дьд╞ддд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'е╒ебедеы╝я╩╠д╧╡Ў▓─д╡дьд╞ддд▐д╗дєбг';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'е╟егеьепе╚еъдм┬╕║▀д╖д▐д╗дєбге╫еэе╕езепе╚д╬└▀─ъдЄ│╬╟зд╖д╞▓╝д╡ддбг';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'е╒ебедеыдм╜┼╩гд╖д╞ддд▐д╣бг└шд╦е╒ебедеыдЄ║я╜№д╖д╞▓╝д╡ддбг';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'е╟егеьепе╚еъдм┬╕║▀д╖д▐д╗дєбге╫еэе╕езепе╚д╬└▀─ъдЄ│╬╟зд╖д╞дпд└д╡ддбг';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'е╒ебедеыдм╜┼╩гд╖д╞ддд▐д╣бг└шд╦е╒ебедеыдЄ║я╜№д╖д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'е╫еэе╕езепе╚д╧┤√д╦┼╨╧┐д╡дьд╞ддд▐д╣бг';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '╔м┐▄е╒егб╝еые╔б╓%sб╫дм╞■╬╧д╡дьд╞ддд▐д╗дєбг╞■╬╧дЄ│╬╟зд╖д╞▓╝д╡ддбг';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '╕в╕┬дмдвдъд▐д╗дєбгевепе╗е╣д╣ды░┘д╦д╧бв╕в╕┬дЄ╛хд▓д╞▓╝д╡ддбг';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '╔м┐▄е╒егб╝еые╔б╓%sб╫дм╞■╬╧д╡дьд╞ддд▐д╗дєбг╞■╬╧дЄ│╬╟зд╖д╞дпд└д╡ддбг';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '╕в╕┬дмдвдъд▐д╗дєбгевепе╗е╣д╣ды░┘д╦д╧бв╕в╕┬дЄ╛хд▓д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'евепе╗е╣дм╡ё╚▌д╡дьд▐д╖д┐бг';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'е╒ебедеыд╬еве├е╫еэб╝е╔д╦╝║╟╘д╖д▐д╖д┐бге╒ебедеыдЄ╞╔дсд▐д╗дєбге╫еэе╕езепе╚┤╔═¤дЄ│╬╟зд╖д╞дпд└д╡ддбг';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'е╒ебедеыд╬еве├е╫еэб╝е╔д╦╝║╟╘д╖д▐д╖д┐бгPHP д╟└▀─ъд╡дьд╞дддые╒ебедеые╡еде║дшдъ┬чднддд│д╚дм╠ф┬ъд╟д╣бг└▀─ъдЄ│╬╟зд╖д╞▓╝д╡ддбг';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'е╒ебедеыд╬еве├е╫еэб╝е╔д╦╝║╟╘д╖д▐д╖д┐бгPHP д╟└▀─ъд╡дьд╞дддые╒ебедеые╡еде║дшдъ┬чднддд│д╚дм╠ф┬ъд╟д╣бг└▀─ъдЄ│╬╟зд╖д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'д│д╬е┌б╝е╕д╟╔м┐▄д╩е╤ещесб╝е┐б╓%sб╫дмдвдъд▐д╗дєбг';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ецб╝е╢б╝╠╛д╧┤√д╦╗╚═╤д╡дьд╞ддд▐д╣бг╠сд├д╞╩╠д╬ецб╝е╢б╝╠╛дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ецб╝е╢б╝╠╛д╧┤√д╦╗╚═╤д╡дьд╞ддд▐д╣бг╠сд├д╞╩╠д╬ецб╝е╢б╝╠╛дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='└▀─ъ╣р╠▄б╓%sб╫дмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='╩╕╗·╬єб╓%sб╫дмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'е│есеєе╚дмдвдъд▐д╗дєбг';
@@ -196,7 +196,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'е╫еэе╕езепе╚дмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'е╟б╝е┐е┘б╝е╣д╬╣р╠▄б╓%sб╫дмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FTPе╡б╝е╨д╦└▄┬│д╟днд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '┬┼┼Ўд╩╕в╕┬дЄ╗¤д├д╞ддд╩ддд╬д╟бвд│д╬е╣е╞б╝е┐е╣д╬▓■┴▒═╫╡сдЄ╝шдъ░╖джд│д╚д╧д╟днд▐д╗дєбг';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'е╫еэе╕езепе╚╠╛д╧┤√д╦╗╚═╤д╡дьд╞ддд▐д╣бг╠сд├д╞░удже╫еэе╕езепе╚╠╛дЄ╞■╬╧д╖д╞▓╝д╡ддбг';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'е╫еэе╕езепе╚╠╛д╧┤√д╦╗╚═╤д╡дьд╞ддд▐д╣бг╠сд├д╞░удже╫еэе╕езепе╚╠╛дЄ╞■╬╧д╖д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'е╫еэе╕езепе╚╠╛дм╠╡╕·д╟д╣бге╫еэе╕езепе╚╠╛д╧е╓ещеєепд╟д╧ддд▒д▐д╗дєбг';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ецб╝е╢б╝дмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'е╓ещеже╢длдщ┴ў┐од╡дьд┐еэе░едеє╛Ё╩єд╧╠╡╕·д╟д╣бгдкд╜дщдпбвдвд╩д┐д╬евележеєе╚д╧║я╜№д╡дьд╞ддд▐д╣бг';
@@ -208,7 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] ='б╓%sб╫д╟бв╩╕╗·╬єдЄ┤№┬╘д╖д▐д╖д┐дмбв╟█
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'б╓%sб╫д╧бв┐Ї├═д╟двды╔м═╫дмдвдъд▐д╣бг';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '▓■┴▒═╫╡сд╧двдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'е╒егеые┐б╝[%dб╫дмдвдъд▐д╗дєбг';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'е╒егеые┐б╝дм╕┼д╣додыд┐дс╣╣┐╖д╟днд▐д╗дєбг║юдъ─╛д╖д╞дпд└д╡ддбг';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '╠╡╕·д╩есб╝еыеве╔еье╣д╟д╣бг';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'е╫еэе╒егб╝еыдмдвдъд▐д╗дєбг';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'д│д╬е╒ебедеы╝я╩╠дмеве├е╫еэб╝е╔д╟днд▐д╗дєбг';
@@ -519,7 +519,7 @@ $s_resolved_bug_title = '▓Є╖ш╛ї╢╖д╬╞■╬╧';
 $s_resolved_bug_button = '▓Є╖ш╛ї╢╖д╬╣╣┐╖';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = '▓■┴▒═╫╡сдм╝┬┴їд╡дьд▐д╖д┐бг▓╝╡нд╦е│есеєе╚дЄ╡н╜╥д╖д╞▓╝д╡ддбг';
+$s_bug_resolved_msg = '▓■┴▒═╫╡сдм╝┬┴їд╡дьд▐д╖д┐бг▓╝╡нд╦е│есеєе╚дЄ╡н╜╥д╖д╞дпд└д╡ддбг';
 $s_resolve_add_bugnote_title = '╠ф┬ъ▓Є╖шд╬═¤═│дЄе│есеєе╚─╔▓├';
 $s_bugnote_add_resolve_button = 'е│есеєе╚─╔▓├';
 
@@ -537,7 +537,7 @@ $s_reminder_monitor = '╝ї╝ш┐═д╧бвд│д╬▓■┴▒═╫╡сд╬┤╞╗ыецб╝е╢д╦─╔▓├д╡дьд▐д╣бг┤╞╗ыдЄ╗
 $s_reminder_store = '┴ў┐о╞т═╞д╧бвд│д╬▓■┴▒═╫╡сд╦─╔▓├д╡дьд▐д╣бг';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = '▓■┴▒═╫╡с %d д╦бв%s ╗ё╢т─є╢бд╣дыд│д╚дЄ│╬╟зд╖д╞дпд└д╡ддбг';
 
 # bug_update.php
 $s_bug_updated_msg = '▓■┴▒═╫╡сдм└╡╛яд╦╣╣┐╖д╡дьд▐д╖д┐бг';
@@ -870,12 +870,12 @@ $s_my_view_link = 'е▐еде╙ехб╝';
 # my_view_page.php
 $s_my_view_title_unassigned = '├┤┼Ў╔╘║▀';
 $s_my_view_title_recent_mod = '║╟╢с╜д└╡';
-$s_my_view_title_reported = '╝л╩мдмеье▌б╝е╚';
-$s_my_view_title_assigned = '╝л╩мдм├┤┼Ў (╠д▓Є╖ш)';
+$s_my_view_title_reported = 'еье▌б╝е╚';
+$s_my_view_title_assigned = '├┤┼Ў (╠д▓Є╖ш)';
 $s_my_view_title_resolved = '▓Є╖ш║╤';
-$s_my_view_title_monitored = '╝л╩мдм┤╞╗ы';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_monitored = '┤╞╗ы├ц';
+$s_my_view_title_feedback = '─╔▓├╛Ё╩є┬╘д┴';
+$s_my_view_title_verify = '▓Є╖ш│╬╟з┬╘д┴';
 
 # news_add.php
 $s_news_added_msg = 'е╦ехб╝е╣дм─╔▓├д╡дьд▐д╖д┐бг';
@@ -958,11 +958,11 @@ $s_remove_all_link = '┴┤░ў║я╜№';
 $s_updated_user_msg = 'ецб╝е╢б╝дм╣╣┐╖д╡дьд▐д╖д┐бг';
 
 # report_add.php
-$s_must_enter_category = 'еле╞е┤еъдЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_must_enter_severity = '╜┼═╫┼┘дЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_must_enter_reproducibility = '║╞╕╜└ндЄ┴к┬Єд╖д╞▓╝д╡ддбг';
-$s_must_enter_summary = '═╫╠єдЄ╡н╞■д╖д╞▓╝д╡ддбг';
-$s_must_enter_description = '╛▄║┘дЄ╡н╞■д╖д╞▓╝д╡ддбг';
+$s_must_enter_category = 'еле╞е┤еъдЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_must_enter_severity = '╜┼═╫┼┘дЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_must_enter_reproducibility = '║╞╕╜└ндЄ┴к┬Єд╖д╞дпд└д╡ддбг';
+$s_must_enter_summary = '═╫╠єдЄ╡н╞■д╖д╞дпд└д╡ддбг';
+$s_must_enter_description = '╛▄║┘дЄ╡н╞■д╖д╞дпд└д╡ддбг';
 $s_report_more_bugs = '╝бд╬▓■┴▒═╫╡с';
 $s_submission_thanks_msg = '┼╨╧┐бвдвдъдмд╚джд┤д╢ддд▐д╖д┐бг';
 
@@ -977,7 +977,7 @@ $s_or_fill_in = 'вм┴к┬Є or ╡н╞■вн';
 $s_assign_to = '├┤┼Ў╝╘';
 $s_additional_information = '─╔▓├╛Ё╩є';
 $s_submit_report_button = '┼╨╧┐';
-$s_check_report_more_bugs = '┬│д▒д╞┼╨╧┐д╣ды╛ь╣чд╦д╧е┴езе├епд╖д╞▓╝д╡ддбг';
+$s_check_report_more_bugs = '┬│д▒д╞┼╨╧┐д╣ды╛ь╣чд╦д╧е┴езе├епд╖д╞дпд└д╡ддбг';
 
 # report_bug_page.php
 $s_advanced_report_link = '╣т┼┘д╩▓■┴▒═╫╡с';
@@ -985,7 +985,7 @@ $s_report_stay = '╝бд╬▓■┴▒═╫╡с';
 
 # set_project.php
 $s_selected_project = '┴к┬Єд╖д┐е╫еэе╕езепе╚';
-$s_valid_project_msg = 'е╫еэе╕езепе╚дЄ└╡д╖дп┴к┬Єд╖д╞▓╝д╡ддбг';
+$s_valid_project_msg = 'е╫еэе╕езепе╚дЄ└╡д╖дп┴к┬Єд╖д╞дпд└д╡ддбг';
 
 # signup.php
 $s_signup_done_title = 'евележеєе╚┼╨╧┐дЄ╜ш═¤д╖д▐д╖д┐бг';
@@ -1144,7 +1144,7 @@ $s_custom_field_require_closed = '┤░╬╗╗■д╧╔м┐▄';
 $s_custom_field_sequence = '╔╜╝и╜ч';
 $s_custom_field_type_enum_string = '0:╩╕╗·╬є,1:└░┐Ї,2:╔т╞░╛о┐Ї┼└,3:╬є╡є,4:есб╝еы,5:е┴езе├епе▄е├епе╣,6:еъе╣е╚,7:╩г┐Ї┴к┬Єеъе╣е╚,8:╞№╔╒';
 
-$s_confirm_used_custom_field_deletion = 'д│д╬еле╣е┐ер╣р╠▄д╧бв╕╜║▀1д─░╩╛хд╬е╫еэе╕езепе╚д╟╗╚═╤д╡дьд╞ддд▐д╣бг<br>дтд╖┬│╣╘д╣дыд╩дщд╨бвд│д╬╣р╠▄д╬д╣д┘д╞д╬├═д╧║я╜№д╡дьд▐д╣бг║я╜№д╖д┐дщ╠сд╣д│д╚д╧д╟днд▐д╗дєбг<br>║я╜№д╖д┐дпд╩ддд╩дщбве╓ещеже╢д╬╠сдые▄е┐еєдЄ┴к┬Єд╖д╞▓╝д╡ддбг┬│╣╘д╣дыд╩дщбв▓╝д╬е▄е┐еєдЄепеъе├епд╖д╞▓╝д╡ддбг';
+$s_confirm_used_custom_field_deletion = 'д│д╬еле╣е┐ер╣р╠▄д╧бв╕╜║▀1д─░╩╛хд╬е╫еэе╕езепе╚д╟╗╚═╤д╡дьд╞ддд▐д╣бг<br>дтд╖┬│╣╘д╣дыд╩дщд╨бвд│д╬╣р╠▄д╬д╣д┘д╞д╬├═д╧║я╜№д╡дьд▐д╣бг║я╜№д╖д┐дщ╠сд╣д│д╚д╧д╟днд▐д╗дєбг<br>║я╜№д╖д┐дпд╩ддд╩дщбве╓ещеже╢д╬╠сдые▄е┐еєдЄ┴к┬Єд╖д╞дпд└д╡ддбг┬│╣╘д╣дыд╩дщбв▓╝д╬е▄е┐еєдЄепеъе├епд╖д╞дпд└д╡ддбг';
 $s_confirm_custom_field_deletion = 'д│д╬еле╣е┐ер╣р╠▄д╚д╣д┘д╞д╬└▀─ъд╖д┐├═дЄ║я╜№д╖д╞дшдэд╖ддд╟д╣длбг';
 $s_field_delete_button = '╣р╠▄д╬║я╜№';
 
@@ -1169,12 +1169,12 @@ $s_phpmailer_language = 'ja';
 
 # Sponsorship Strings
 $s_sponsors = '%d ┐═д╬е╣е▌еєе╡б╝';
-$s_sponsorship_added = '╗ё╢т─є╢бдЄ─╔▓├д╖д▐д╖д┐бг';
-$s_sponsorship_updated = '╗ё╢т─є╢бдЄ╣╣┐╖д╖д▐д╖д┐бг';
-$s_sponsorship_deleted = '╗ё╢т─є╢бдЄ║я╜№д╖д▐д╖д┐бг';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_added = '╗ё╢т─є╢бд╬─╔▓├';
+$s_sponsorship_updated = '╗ё╢т─є╢бд╬╣╣┐╖';
+$s_sponsorship_deleted = '╗ё╢т─є╢бд╬║я╜№';
+$s_sponsorship_paid = '╗ё╢т╗┘╩з║╤';
 $s_sponsorship_more_info = '╗ё╢т─є╢бд╦д─ддд╞дтд├д╚╛Ё╩єдЄ╕лды';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = '┴э╗ё╢т─є╢б│█';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
