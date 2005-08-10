@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.33 2005-07-05 18:50:49 thraxisp Exp $
+	# $Id: account_prefs_inc.php,v 1.34 2005-08-10 18:05:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_path = config_get( 'core_path' );
@@ -264,15 +264,15 @@
 		<input type="hidden" name="email_on_bugnote"  value="<?php echo $t_pref->email_on_bugnote ?>" />
 		<input type="hidden" name="email_on_status"   value="<?php echo $t_pref->email_on_status ?>" />
 		<input type="hidden" name="email_on_priority" value="<?php echo $t_pref->email_on_priority ?>" />
-		<input type="hidden" name="email_on_new_minimum_severity"      value="<?php echo $t_pref->email_on_new_min_severity ?>" />
-		<input type="hidden" name="email_on_assigned_minimum_severity" value="<?php echo $t_pref->email_on_assigned_min_severity ?>" />
-		<input type="hidden" name="email_on_feedback_minimum_severity" value="<?php echo $t_pref->email_on_feedback_min_severity ?>" />
-		<input type="hidden" name="email_on_resolved_minimum_severity" value="<?php echo $t_pref->email_on_resolved_min_severity ?>" />
-		<input type="hidden" name="email_on_closed_minimum_severity"   value="<?php echo $t_pref->email_on_closed_min_severity ?>" />
-		<input type="hidden" name="email_on_reopened_minimum_severity" value="<?php echo $t_pref->email_on_reopened_min_severity ?>" />
-		<input type="hidden" name="email_on_bugnote_minimum_severity"  value="<?php echo $t_pref->email_on_bugnote_min_severity ?>" />
-		<input type="hidden" name="email_on_status_minimum_severity"   value="<?php echo $t_pref->email_on_status_min_severity ?>" />
-		<input type="hidden" name="email_on_priority_minimum_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
+		<input type="hidden" name="email_on_new_min_severity"      value="<?php echo $t_pref->email_on_new_min_severity ?>" />
+		<input type="hidden" name="email_on_assigned_min_severity" value="<?php echo $t_pref->email_on_assigned_min_severity ?>" />
+		<input type="hidden" name="email_on_feedback_min_severity" value="<?php echo $t_pref->email_on_feedback_min_severity ?>" />
+		<input type="hidden" name="email_on_resolved_min_severity" value="<?php echo $t_pref->email_on_resolved_min_severity ?>" />
+		<input type="hidden" name="email_on_closed_min_severity"   value="<?php echo $t_pref->email_on_closed_min_severity ?>" />
+		<input type="hidden" name="email_on_reopened_min_severity" value="<?php echo $t_pref->email_on_reopened_min_severity ?>" />
+		<input type="hidden" name="email_on_bugnote_min_severity"  value="<?php echo $t_pref->email_on_bugnote_min_severity ?>" />
+		<input type="hidden" name="email_on_status_min_severity"   value="<?php echo $t_pref->email_on_status_min_severity ?>" />
+		<input type="hidden" name="email_on_priority_min_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
 		<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
 <tr class="row-2">
