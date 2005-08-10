@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.76 2005-06-21 12:27:23 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.77 2005-08-10 19:59:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -209,7 +209,11 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
-		<?php print_user_with_subject( $t_bug->handler_id, $f_bug_id ) ?>
+		<?php 
+			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id ) ) {
+				print_user_with_subject( $t_bug->handler_id, $f_bug_id ); 
+			}
+		?>
 	</td>
 </tr>
 

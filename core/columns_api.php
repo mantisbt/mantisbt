@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.11 2005-07-23 12:01:48 thraxisp Exp $
+	# $Id: columns_api.php,v 1.12 2005-08-10 19:59:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -520,8 +520,9 @@
 		);
 
 		# print username instead of status
-		if ( ON == config_get( 'show_assigned_names' )
-		  && $p_row['handler_id'] > 0 ) {
+		if ( ( ON == config_get( 'show_assigned_names' ) )
+		  && ( $p_row['handler_id'] > 0 ) 
+		  && ( access_has_bug_level( config_get( 'view_handler_threshold' ), $p_row['id'] ) ) ) {
 			printf( ' (%s)', prepare_user_name( $p_row['handler_id'] ) );
 		}
 		echo '</td>';
@@ -531,7 +532,7 @@
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function print_column_handler_id( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		echo '<td class="center">';
-		if ( $p_row['handler_id'] > 0 ) {
+		if ( ( $p_row['handler_id'] > 0 ) && ( access_has_bug_level( config_get( 'view_handler_threshold' ), $p_row['id'] ) ) ) {
 			echo prepare_user_name( $p_row['handler_id'] );
 		}
 		echo '</td>';
