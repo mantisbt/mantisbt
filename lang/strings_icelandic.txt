@@ -7,13 +7,13 @@
 
 	# Icelandic: Gretar Einarsson, gretar@vedur.is
 	###########################################################################
-	# Icelandic strings for Mantis 1.0.0a3
+	# Icelandic strings for Mantis 1.0.0rc2
 	# -------------------------------------------------
-	# $Revision: 1.3 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:02 $
+	# $Revision: 1.4 $
+	# $Author: vboctor $
+	# $Date: 2005-08-11 11:45:03 $
 	#
-	# $Id: strings_icelandic.txt,v 1.3 2005-08-08 21:29:02 thraxisp Exp $
+	# $Id: strings_icelandic.txt,v 1.4 2005-08-11 11:45:03 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,9 +29,9 @@ $s_actiongroup_menu_delete = 'Eyða';
 $s_actiongroup_menu_resolve = 'Leyst';
 $s_actiongroup_menu_update_priority = 'Uppfæra forgang';
 $s_actiongroup_menu_update_status = 'Staða uppfærslu';
-$s_actiongroup_menu_update_view_status = 'Skoða Uppfærða stöðu';
+$s_actiongroup_menu_update_view_status = 'Skoða uppfærða stöðu';
 $s_actiongroup_menu_update_category = 'Uppfæra flokkun';
-$s_actiongroup_menu_set_sticky = 'Líming af/á';
+$s_actiongroup_menu_set_sticky = 'Líming á/af';
 $s_actiongroup_menu_update_field = 'Uppfæra %s';
 $s_actiongroup_bugs = 'Sérvalin atriði';
 
@@ -72,15 +72,15 @@ $s_announcement = 'Tilkynning';
 $s_stays_on_top = 'Verður efst';
 $s_delete_bugnote_button = 'Eyða athugasemd';
 $s_delete_bugnote_sure_msg = 'Ertu viss um að vilja eyða þessari athugasemd?';
-$s_bug_relationships = 'Relationships'; 'Tengsl';
+$s_bug_relationships = 'Tengsl';
 $s_empty_password_sure_msg = 'Notandinn hefur ekkert lykilorð. Ertu viss um að þú viljir það?';
 $s_empty_password_button = 'Ekkert lykilorð notað';
 
-$s_duplicate_of = 'afrit af %id';
-$s_has_duplicate = 'hefur afrit %id';
-$s_related_to = 'tengt við %id';
-$s_dependant_on = 'háður %id';
-$s_blocks = 'tálmaður af %id';
+$s_duplicate_of = 'afrit af';
+$s_has_duplicate = 'hefur afrit';
+$s_related_to = 'tengt við';
+$s_dependant_on = 'háður af';
+$s_blocks = 'tálmaður af';
 
 $s_new_bug = 'Nýtt atriði';
 $s_bugnote_added = 'Bætt við athugasemd';
@@ -97,7 +97,7 @@ $s_bug_deleted = 'Útgáfu eytt';
 $s_make_private = 'Læsa skrá';
 $s_make_public = 'Almenn skrá';
 
-$s_create_new_project_link = 'Skapa nýtt verkefni';
+$s_create_new_project_link = 'Nýtt verkefni';
 
 $s_login_link = 'Innskráning';
 
@@ -116,7 +116,7 @@ $s_priority_bugs_conf_msg = 'Velja forgang atriðis';
 $s_status_bugs_conf_msg = 'Velja stöðu atriðis';
 $s_view_status_bugs_conf_msg = 'Velja uppfærða stöðu atriðis';
 $s_category_bugs_conf_msg = 'Velja flokk atriðis';
-$s_set_sticky_bugs_conf_msg = 'Ertu viss um að vilja setja límingu atriðis af/á?';
+$s_set_sticky_bugs_conf_msg = 'Ertu viss um að vilja setja límingu atriðis á/af?';
 $s_close_group_bugs_button = 'Loka atriði';
 $s_delete_group_bugs_button = 'Eyða atriði';
 $s_move_group_bugs_button = 'Færa atriði';
@@ -127,7 +127,7 @@ $s_priority_group_bugs_button = 'Uppfæra forgang';
 $s_status_group_bugs_button = 'Uppfæra stöðu';
 $s_category_group_bugs_button = 'Uppfæra flokk';
 $s_view_status_group_bugs_button = 'Uppfæra stöðu atriðis';
-$s_set_sticky_group_bugs_button = 'Setja límingu af/á';
+$s_set_sticky_group_bugs_button = 'Setja límingu á/af';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Samþætt graf eftir stöðu';
@@ -137,16 +137,16 @@ $s_graph_imp_category_title = 'Samþætt graf eftir flokki';
 $s_graph_imp_resolution_title = 'Samþætt graf eftir úrlausn';
 $s_by_status_pct = 'eftir prósentu stöðu';
 $s_by_priority_pct = 'eftir forgangs prósentu';
-$s_by_severity_pct = 'eftir alvarleika prósentu';
+$s_by_severity_pct = 'eftir mikilvægis prósentu';
 $s_by_category_pct = 'eftir flokks prósentu';
 $s_by_resolution_pct = 'eftir úrlausnar prósentu';
-$s_by_severity_mix = 'eftir alvarleika og stöðu';
+$s_by_severity_mix = 'eftir mikilvægi og stöðu';
 $s_by_priority_mix = 'eftir forgangi og stöðu';
 $s_by_resolution_mix = 'eftir úrlausn og stöðu';
 $s_synthesis_link = 'Samþætting';
 $s_status_link = 'Eftir stöðu';
 $s_priority_link = 'Eftir forgangi';
-$s_severity_link = 'Eftir alvarleika';
+$s_severity_link = 'Eftir mikilvægi';
 $s_category_link = 'Eftir flokki';
 $s_resolution_link = 'Eftir úrlausn';
 $s_legend_still_open = 'Enn opið';
@@ -164,7 +164,7 @@ $s_hide_button = 'Sýna eingöngu valið';
 
 # print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Veldu svæði til að prenta';
-$s_printing_options_link = 'Prent Valkostir';
+$s_printing_options_link = 'Prent valkostir';
 
 # word and excel export
 $s_bugnote_title = 'Meðferð athugasemdar';
@@ -208,7 +208,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Búist var við streng en fylki kom í
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Búist var við tölu fyrir %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Atriði %d finnst ekki.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Sía %d finnst ekki.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Sían sem þú ert að reyna að nota er of gömul til að vera uppfærð, endurskapaðu hana';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ógilt tölvupóstfang.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Sniðið finnst ekki.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Upphlaðning þessarar skráartegundar er ekki heimil.';
@@ -235,7 +235,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Flokkur fannst ekki.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Útgáfa með þessu nafni er til staðar.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Útgáfa \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Notendanafnið er ógilt. Þau mega aðeins innihalda bókstafi, tölur, bil, bandstrik og undirstrik.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Notandi hefur ekki viðeigandi aðgangs stig.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Notandi hefur ekki viðeigandi aðgangsstig.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Nafnið sem valið var er það sama og notendanafn annars notanda. Veldu annað nafn.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
@@ -271,14 +271,14 @@ $s_logged_in_as = 'Skráður inn sem';
 
 $s_prefix_for_deleted_users = 'notandi';
 
-$s_administrator = 'umsjónamaður';
+$s_administrator = 'umsjónarmaður';
 $s_myself = "Ég sjálfur";
-$s_default_access_level = 'Sjálfgefið aðgangs stig';
+$s_default_access_level = 'Sjálfgefið aðgangsstig';
 
-$s_issue_status_percentage = 'Stöðu-prósenta aðgerða';
+$s_issue_status_percentage = 'Prósentustaða aðgerða';
 
 # Enum Strings
-$s_access_levels_enum_string = '10:skoðandi,25:skýrslugjafi,40:uppfæra,55:þróunaraðili,70:stjórnandi,90:umsjónamaður';
+$s_access_levels_enum_string = '10:skoðandi,25:skýrslugjafi,40:uppfærslumaður,55:forritari,70:stjórnandi,90:umsjónarmaður';
 $s_project_status_enum_string = '10:þróun,30:útgáfa,50:stöðugur,70:úreltur';
 $s_project_view_state_enum_string = '10:almennt,50:læst';
 $s_view_state_enum_string = '10:almennt, 50:læst';
@@ -286,8 +286,8 @@ $s_view_state_enum_string = '10:almennt, 50:læst';
 $s_priority_enum_string = '10:enginn,20:lágt,30:eðlilegt,40:hátt,50:áríðandi,60:tafarlaust';
 $s_severity_enum_string = '10:eiginleiki,20:smávægilegur,30:texti,40:fínstilling,50:minni háttar,60:meiri háttar, 70:hrun,80:lokar';
 $s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hægt að endurskapa,100:ekki mögulegt';
-$s_status_enum_string = '10:nýtt,20:viðbrögð,30:móttekið,40:staðfest,50:úthlutað,80:leyst,90:lokað';
-$s_resolution_enum_string = '10:opið,20:leyst,30:enduropnað,40:ekki hægt að endurskapa,50:ekki hægt að laga,60:afrit.70:þarfnast engrar breytingar,80:sett til hliðar,:90:hefur ekki lagast';
+$s_status_enum_string = '10:nýtt,20:svar,30:móttekið,40:staðfest,50:úthlutað,80:leyst,90:lokað';
+$s_resolution_enum_string = '10:opið,20:leyst,30:enduropnað,40:ekki hægt að endurskapa,50:ekki hægt að laga,60:afrit,70:þarfnast ekki breytinga,80:sett til hliðar,90:hefur ekki lagast';
 $s_projection_enum_string = '10:enginn,30:fínstilling,50:lítið verk,70:mikið verk,90:endurhönnun';
 $s_eta_enum_string = '10:enginn,20:< 1 dagur,30:2-3 dagar,40:< 1 vika,50:< 1 mánuður,60:> 1 mánuður';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
@@ -307,7 +307,7 @@ $s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykilorði m
 $s_reset_request_in_progress_msg = 'Ef þú hefur gefið upp rétt lykilorð og tölvupóstfang fyrir aðgang þinn, munum við nú hafa sent staðfest boð til uppgefins tölvupóstfangs. Þegar þessi boð hafa verið móttekinn, fylgdu eftir leiðbeiningunum til þess að breyta lykilorði fyrir þinn aðgang.';
 
 $s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriði er (aftur) í stöðu NÝTT.';
-$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriði krefst VIÐBRAGÐS frá þér.';
+$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriði krefst SVARS frá þér.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi atriði hefur verið MÓTTEKIÐ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriði er STAÐFEST.';
 $s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
@@ -324,18 +324,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur verið bætt við þetta atriði.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi atriði hefur verið sett sem AFRIT AF atriði %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Atriðið %s hefur verið sett sem AFRIT AF eftirfarandi atriði.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi atriði hefur verið sett sem TENGT VIÐ atriði %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi atriði hefur verið sett sem HÁÐUR AF atriði %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi atriði hefur verið sett sem TÁLMAÐUR AF atriði %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi atriði hefur verið tekið af sem AFRIT af atriði %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Atriðið %s hefur verið fjarlægt sem AFRIT af eftirfarandi atriði.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi atriði hafa verið merkt sem ÓTENGD atriði %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi atriði hefur verið fjarlægt sem TENGSL VIÐ atriði %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi atirði hefur veirð fjarlægt sem TÁLMAÐUR AF atriði %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Atriði TENGT %s hefur verið LEYST.";
+$s_email_notification_title_for_action_relationship_child_closed = "Atriði TENGT %s hefur verið LOKAÐ.";
 
 $s_email_reporter = 'Tilkynnt af';
 $s_email_handler = 'Úthlutað til';
@@ -343,7 +343,7 @@ $s_email_project = 'Verkefni';
 $s_email_bug = 'Útgáfu númer (ID)';
 $s_email_category = 'Flokkur';
 $s_email_reproducibility = 'Möguleg endursköpun';
-$s_email_severity = 'Alvarleiki';
+$s_email_severity = 'Mikilvægi';
 $s_email_priority = 'Forgangur';
 $s_email_status = 'Staða';
 $s_email_resolution = 'Úrlausn';
@@ -363,8 +363,8 @@ $s_confirm_delete_msg = 'Ertu viss um að vilja eyða aðgangi þínum?';
 $s_delete_account_button = 'Eyði Aðgangi';
 
 # account_page.php
-$s_manage_profiles_link = 'Forstillingar';
-$s_change_preferences_link = 'Forgangur';
+$s_manage_profiles_link = 'Snið';
+$s_change_preferences_link = 'Stillingar';
 $s_edit_account_title = 'Skrifa aðgengi';
 $s_username = 'Notendanafn';
 $s_realname = 'Raunverulegt nafn';
@@ -372,10 +372,10 @@ $s_email = 'Tölvupóstfang';
 $s_password = 'Lykilorð';
 $s_no_password_change = 'Lykilorðinu er stjórnað af öðru kerfi, því er ekki hægt að skrifa það hér.';
 $s_confirm_password = 'Staðfestu lykilorð';
-$s_access_level = 'Aðgangs stig';
+$s_access_level = 'Aðgangsstig';
 $s_update_user_button = 'Uppfæri notanda';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'Upplýsingar þínar um aðgang hafa verið staðfestar. Staðfestingar pósturinn sem þú fékkst er nú ógildur.';
+$s_verify_change_password = 'Þú verður að setja lykilorðið hér til þess að geta skráð þig inn aftur.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Aðgangsstillingar';
@@ -385,13 +385,13 @@ $s_advanced_view = 'Ítarleg skoðun';
 $s_advanced_update = 'Ítarleg uppfærsla';
 $s_refresh_delay = 'Endurglæða bið';
 $s_redirect_delay = 'Framsenda bið';
-$s_with_minimum_severity = 'Með lágmarks alvarleika';
-$s_bugnote_order = 'Röðun athugasemda';
+$s_with_minimum_severity = 'Með lágmarks mikilvægi';
+$s_bugnote_order = 'Röðun athugasemda:';
 $s_bugnote_order_asc = 'Hækkandi';
 $s_bugnote_order_desc = 'Lækkandi';
 $s_email_on_new = 'Tölvupóstur um nýtt';
 $s_email_on_assigned = 'Tölvupóstur um breytingu á úthlutun';
-$s_email_on_feedback = 'Tölvupóstur um viðbrögð';
+$s_email_on_feedback = 'Tölvupóstur um svar';
 $s_email_on_resolved = 'Tölvupóstur um leyst';
 $s_email_on_closed = 'Tölvupóstur um lokað';
 $s_email_on_reopened = 'Tölvupóstur um enduropnað';
@@ -417,7 +417,7 @@ $s_profile_deleted_msg = 'Sniði eytt...';
 
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Skrifa snið';
-$s_platform = 'Platform';
+$s_platform = 'Verkvangur';
 $s_operating_system = 'Stýrikerfi';
 $s_additional_description = 'Viðbótar lýsing';
 $s_update_profile_button = 'Uppfæra snið';
@@ -465,19 +465,19 @@ $s_password_updated = 'Lykilorð uppfært';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Atriðin sem þú hefur valið tilheyra öðrum verkefnum. Breyturnar fyrir neðan endurspegla stillingar fyrir öll verkefnin. Ef þetta er rangt, reyndu aftur að breyta en með færri valin atriði.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Efninu hefur verið úthlutað...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nýtt atriði';
-$s_feedback_bug_title = 'Fá viðbrögð við atriði';
+$s_feedback_bug_title = 'Óska svars við atriði';
 $s_acknowledged_bug_title = 'Móttekið atriði';
 $s_confirmed_bug_title = 'Staðfesta atriði';
 $s_assigned_bug_title = 'Úthluta atriði';
 $s_new_bug_button = 'Nýtt atriði';
-$s_feedback_bug_button = 'Fá viðbrögð';
+$s_feedback_bug_button = 'Óska svars';
 $s_acknowledged_bug_button = 'Móttaka atriði';
 $s_confirmed_bug_button = 'Staðfesta atriði';
 $s_assigned_bug_button = 'Úthluta atriði';
@@ -532,7 +532,7 @@ $s_bug_reminder = 'Senda minnisatriði';
 $s_reminder_sent_to = 'Minnisatriði sent til';
 $s_bug_send_button = 'Senda';
 $s_reminder = 'Minnisatriði';
-$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessu atriði';
+$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir svari við þessu atriði';
 $s_reminder_monitor = 'Þessir viðtakendur munu einnig vakta atriðið. Þeir geta afskráð sig með því að nota hnappinn Hætta vöktun';
 $s_reminder_store = 'Þessi athugasemd verður vistuð með atriðinu';
 
@@ -548,7 +548,7 @@ $s_update_simple_link = 'Einföld uppfærsla';
 $s_updating_bug_advanced_title = 'Uppfæri upplýsingar um atriði';
 $s_id = 'ID';
 $s_category = 'Flokkur';
-$s_severity = 'Alvarleiki';
+$s_severity = 'Mikilvægi';
 $s_reproducibility = 'Möguleg endursköpun';
 $s_date_submitted = 'Sendingardagur';
 $s_last_update = 'Síðast uppfært';
@@ -560,7 +560,7 @@ $s_status = 'Staða';
 $s_duplicate_id = 'Afrits "ID"';
 $s_os = 'OS';
 $s_projection = 'Skipulagning';
-$s_os_version = 'Stýrkikerfi';
+$s_os_version = 'Stýrikerfi';
 $s_eta = 'Áætlun';
 $s_product_version = 'Kerfis útgáfa';
 $s_build = 'Útgáfa';
@@ -657,11 +657,11 @@ $s_filter_button = 'Nota síu';
 $s_manage_users_link = 'Stjórna notendum';
 $s_manage_projects_link = 'Stjórna verkefnum';
 $s_manage_custom_field_link = 'Stjórna sérsniðum svæðum';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
+$s_manage_global_profiles_link = 'Stjórna öllum forstillingum';
 $s_permissions_summary_report = 'Skýrsla yfir leyfi';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
+$s_manage_config_link = 'Stjórna stillingum';
+$s_manage_threshold_config = 'Þröskuldur verkefnaflæðis';
+$s_manage_email_config = 'Tölvupósts athugasemdir';
 $s_manage_workflow_config = 'Verkefnaflæði';
 $s_create_new_account_link = 'Stofna nýjan aðgang';
 $s_projects_link = 'Verkefni';
@@ -673,67 +673,67 @@ $s_prune_accounts = 'Snyrta aðgangsheimildir';
 $s_hide_inactive = 'Fela óvirkur';
 $s_manage_accounts_title = 'Stjórna aðgangi';
 $s_p = 'p';
-$s_date_created = 'Stofn dagur';
-$s_last_visit = 'Síðast heimsóttur';
+$s_date_created = 'Stofndagur';
+$s_last_visit = 'Síðast heimsótt';
 $s_edit_user_link = 'Skrifa notenda';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users who added Bugnotes';
-$s_change_configuration = 'Update Configuration';
-$s_message = 'Message';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Who can change notification defaults';
-$s_notify_actions_change_access = 'Who can change notifications';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_config_all_projects = 'Athugið: Þessar stillingar gilda fyrir ÖLL VERKEFNI.';
+$s_config_project = 'Athugið: Þessi stilling gildir aðeins fyrir %s verkefni.';
+$s_colour_coding = 'Í töflunni fyrir neðan, gilda eftirfarandi litakóðar:';
+$s_colour_project = 'Verkefnastillingin skrifar yfir aðra.';
+$s_colour_global = 'Allar verkefnastillingarnar skrifa yfir sjálfgefna stillingu.';
+$s_issue_reporter = 'Notandin sem tilkynnti um atriðið';
+$s_issue_handler = 'Notandin sem meðhöndlar atiðið';
+$s_users_added_bugnote = 'Notandin sem bætti við athugasemd';
+$s_change_configuration = 'Uppfæra stillingar';
+$s_message = 'Skilaboð';
+$s_default_notify = 'Stilla sjálfgefin merki um athugasemdir í';
+$s_action_notify = 'Stilla merki um aðgerð við athugasemd í';
+$s_notify_defaults_change_access = 'Hver getur breytt sjálfgefnum athugasemdum';
+$s_notify_actions_change_access = 'Hver getur breytt athugasemdum';
+$s_revert_to_system = "Eyða öllum verkefna stillingum";
+$s_revert_to_all_project = "Eyða sérstökum verkefna stillingum";
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
+$s_non_existent = 'er ekki til';
+$s_current_status = 'Núverandi staða';
+$s_next_status = 'Næsta staða';
+$s_workflow = 'Verkefnaflæði';
+$s_workflow_thresholds = 'Þröskuldar sem hafa áhrif á verkefnaflæði';
+$s_threshold = 'Þröskuldur';
+$s_status_level = 'Staða';
+$s_alter_level = 'Hver getur breytt þessu gildi';
+$s_validation = 'Staðfesting á verkefnaflæði';
+$s_comment = 'Ábending um verkefnaflæði';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Who can change workflow';
-$s_access_change_access = 'Who can change access levels';
+$s_unreachable = 'Þú getur ekki fært atriði í þessa stöðu';
+$s_no_exit = 'Þú getur ekki fært atrið úr þessari stöðu';
+$s_access_levels = 'Aðgangsstig';
+$s_access_change = 'Lágmarks aðgangsstig til að breyta þessari stöðu';
+$s_desc_bug_submit_status = 'Staða sem ný atriði fá';
+$s_desc_bug_reopen_status = 'Staða sem enduropnuðu atriði fá';
+$s_desc_bug_resolved_status_threshold = 'Staða þar sem atriði er álitið leyst';
+$s_workflow_change_access = 'Hver getur breytt verkefnaflæði';
+$s_access_change_access = 'Hver getur breytt aðgangsstigi';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'Sjálfgefin staða %s er ekki valinn fyrir næstu stöðu %s. Því verður hafnað';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_allow_close_immediate = 'Heimila að Leystu atriði sé lokað';
+$s_allow_reporter_close = 'Heimila tilkynnanda að loka atriði';
+$s_allow_reporter_reopen = 'Heimila tilkynnanda að opna aftur atriði';
+$s_set_status_assigned = 'Setja úthlutunarstöðu á höndlara atriðis';
+$s_allow_user_edit = 'Heimila notanda að skrifa sínar eigin athugasemdir';
+$s_limit_access = 'Takmarka aðgang tilkynnanda að sínum eigin atriðum';
+$s_submit_status = 'Staða sem ný atriði fá';
+$s_assigned_status = 'Staða sem sjálfvirk úthlutuð atrið fá';
+$s_resolved_status = 'Staða þar sem atriði er álitið leyst';
+$s_readonly_status = 'Staða þar sem atriði verður aðeins lesanlegt';
+$s_reopen_status = 'Staða sem enduropnuð atriði fá';
+$s_reopen_resolution = 'Úrlausn sem enduropnuð atriði fá';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir';
@@ -817,7 +817,7 @@ $s_delete_version_button = 'Eyða útgáfu';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Skrifa verkefna útgáfu';
 $s_update_version_button = 'Uppfæra útgáfu';
-$s_released = 'Released';
+$s_released = 'Útgefið';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Útgáfan hefur verið uppfærð...';
@@ -848,7 +848,7 @@ $s_account_reset_msg = 'Beiðni um staðfestingu hefur verið send í tölvupósti til
 $s_account_reset_msg2 = 'Aðgangs lykilorðið hefur verið núllstillt...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Aðgangur varinn. Aðgangs stig og virk vörn. Annars, hefur aðgangsheimildin verið uppfærð...';
+$s_manage_user_protected_msg = 'Aðgangur varinn. Aðgangsstig og virk vörn. Annars, hefur aðgangsheimildin verið uppfærð...';
 $s_manage_user_updated_msg = 'Aðgangsheimild uppfærð...';
 
 # menu_inc.php
@@ -874,8 +874,8 @@ $s_my_view_title_reported = 'Tilkynnt af mér';
 $s_my_view_title_assigned = 'Úthlutað til mín (óleyst)';
 $s_my_view_title_resolved = 'Leyst';
 $s_my_view_title_monitored = 'Vaktað af mér';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_feedback = 'Beðið eftir svari frá mér';
+$s_my_view_title_verify = 'Beðið eftir staðfestingu á úrlausn frá mér';
 
 # news_add.php
 $s_news_added_msg = 'Fréttaefni bætt við...';
@@ -959,7 +959,7 @@ $s_updated_user_msg = 'Notandi uppfærður';
 
 # report_add.php
 $s_must_enter_category = 'Þú verður að velja flokk';
-$s_must_enter_severity = 'Þú verður að velja alvarleika';
+$s_must_enter_severity = 'Þú verður að velja mikilvægi';
 $s_must_enter_reproducibility = 'Þú verður að velja mögulega endursköpun';
 $s_must_enter_summary = 'Þú verður að skrifa yfirlit';
 $s_must_enter_description = 'Þú verður að skrifa lýsingu';
@@ -972,7 +972,7 @@ $s_enter_report_details_title = 'Skrifa ítarlega skýrslu';
 $s_required = 'krafist';
 $s_select_category = 'Veldu flokk';
 $s_select_reproducibility = 'Veldu mögulega endursköpun';
-$s_select_severity = 'Veldu alvarleika';
+$s_select_severity = 'Veldu mikilvægi';
 $s_or_fill_in = 'EÐA fylla út';
 $s_assign_to = 'Úthlutað til';
 $s_additional_information = 'Viðbótar upplýsingar';
@@ -1017,15 +1017,15 @@ $s_summary_jpgraph_link = 'Ítarlegt yfirlit';
 $s_by_project = 'Eftir verkefni';
 $s_by_status = 'Eftir stöðu';
 $s_by_date = 'Eftir dagsetningu (dögum)';
-$s_by_severity = 'Eftir alvarleika';
+$s_by_severity = 'Eftir mikilvægi';
 $s_by_resolution = 'Eftir úrlausn';
 $s_by_category = 'Eftir flokki';
 $s_by_priority = 'Eftir forgangi';
-$s_by_developer = 'Eftir þróunaraðila';
+$s_by_developer = 'Eftir forritara';
 $s_by_reporter = 'Eftir tilkynnanda';
 $s_reporter_by_resolution = 'Tilkynnt eftir úrlausn';
 $s_reporter_effectiveness = 'Árangur tilkynnanda';
-$s_developer_by_resolution = 'Þróunaraðili eftir úrlausn';
+$s_developer_by_resolution = 'Úrlausn eftir forritara';
 $s_percentage_fixed = '% lagað';
 $s_percentage_errors = '% óleyst';
 $s_errors = 'Óleyst';
@@ -1035,9 +1035,9 @@ $s_longest_open_bug = 'Atriði lengst opið';
 $s_longest_open = 'Lengst opið';
 $s_average_time = 'Meðal tími';
 $s_total_time = 'Heildar tími';
-$s_developer_stats = 'Þróunaraðili, tölfræði';
+$s_developer_stats = 'Forritari, tölfræði';
 $s_reporter_stats = 'Tilkynnendur, tölfræði';
-$s_orct = '(opinn/leyst/lokað/alls)';
+$s_orct = '(opið/leyst/lokað/alls)';
 
 # view_all_bug_page.php
 $s_any = 'allir';
@@ -1045,8 +1045,8 @@ $s_show = 'Sýna';
 $s_changed = 'Breytt (tími)';
 $s_viewing_bugs_title = 'Skoða atriði';
 $s_updated = 'Uppfært';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Sýna límd atriði';
+$s_sort = 'Raða eftir';
 
 # view_all_inc.php
 $s_none = 'enginn';
@@ -1059,7 +1059,7 @@ $s_first = 'Fyrst';
 $s_last = 'Síðast';
 $s_start_date = 'Upphafs dagur';
 $s_end_date = 'Loka dagur';
-$s_use_date_filters = 'Nota daga síu';
+$s_use_date_filters = 'Nota dagasíu';
 $s_yes = 'Já';
 $s_no = 'Nei';
 $s_open_filters = 'Breyta síu';
@@ -1157,7 +1157,7 @@ $s_filter_resolved = "Leyst";
 $s_hide_closed = "Fela lokað";
 $s_hide_resolved = "Fela leyst";
 $s_and_above = 'og fyrir ofan';
-$s_advanced_filters = 'Aukinn sía';
+$s_advanced_filters = 'Aukin sía';
 $s_simple_filters = 'Einföld sía';
 $s_monitored_by = 'Vaktað af';
 
@@ -1218,7 +1218,7 @@ $s_view_issue = "Skoða atriði";
 $s_checkin = 'Skráning inn';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Geta';
+$s_perm_rpt_capability = 'Möguleikar';
 $s_view = 'Skoða';
 $s_issues = 'ATRIÐI';
 $s_report_issue = 'Tilkynna atriði';
@@ -1272,7 +1272,7 @@ $s_see_email_addresses_of_other_users = 'Sjá tölvupóstfang annarra notenda';
 $s_send_reminders = 'Senda athugasemd';
 $s_add_profiles = 'Bæta við sniði';
 $s_notify_of_new_user_created = 'Tilkynna að nýjum notenda hafi verið bætt við';
-$s_email_notification = 'TÖLVUPÓST-ATHUGASEMDIR';
+$s_email_notification = 'TÖLVUPÓSTS-ATHUGASEMDIR';
 $s_status_changed_to = 'Breyting á stöðu';
 $s_email_on_deleted = 'Tölvupóstur um eyðingu';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
