@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.87 2005-07-26 11:04:42 thraxisp Exp $
+	# $Id: bug_update.php,v 1.88 2005-08-11 01:54:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,7 @@
 	if( $t_bug_data->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
-		$g_project_override = $t_bug->project_id;
+		$g_project_override = $t_bug_data->project_id;
 	}
 
 	if ( ! (
