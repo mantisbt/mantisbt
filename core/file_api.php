@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.71 2005-07-27 19:07:58 thraxisp Exp $
+	# $Id: file_api.php,v 1.72 2005-08-11 01:53:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -123,9 +123,9 @@
 		}
 
 		$t_reported_by_me	= bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
-		$t_can_download		= access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
+		$t_can_download		= access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
 # @@@ Fix this to be readable
-		$t_can_download		= $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+		$t_can_download		= $t_can_download || ( $t_reported_by_me && config_get( 'allow_delete_own_attachments' ) );
 
 		return $t_can_download;
 	}
