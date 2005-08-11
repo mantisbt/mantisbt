@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.120 2005-07-31 16:23:29 jlatour Exp $
+	# $Id: filter_api.php,v 1.121 2005-08-11 16:20:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -162,10 +162,21 @@
 		# private bug selection
 		if ( !access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id, $t_user_id ) ) {
 			$t_public = VS_PUBLIC;
-			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
+			$t_private = VS_PRIVATE;
+			switch ( $t_filter['view_state'] ) {
+				case META_FILTER_ANY:
+					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
+					break;
+				case VS_PUBLIC:
+					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public')" );
+					break;
+				case VS_PRIVATE:
+					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_private' AND $t_bug_table.reporter_id='$t_user_id')" );
+					break;
+			}
 		} else {
 			$t_view_state = db_prepare_int( $t_filter['view_state'] );
-			if ( ( $t_view_state != META_FILTER_ANY ) && ( !is_blank( $t_view_state ) ) ) {
+			if ( ( $t_filter['view_state'] != META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
 				array_push( $t_where_clauses, "($t_bug_table.view_state='$t_view_state')" );
 			}
 		}
