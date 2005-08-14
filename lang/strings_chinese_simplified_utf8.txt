@@ -12,23 +12,23 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-10 19:24:02 $
+	# $Date: 2005-08-14 17:31:30 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.3 2005-08-10 19:24:02 thraxisp Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.4 2005-08-14 17:31:30 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
-	#Mantis 1.0.0rc1 简体中文语言包的翻译说明(by NetCobra,2005-07-23)
+	#Mantis 1.0.0rc2 简体中文语言包的翻译说明(by NetCobra,2005-08-10)
 	#
-	#本语言包还存在以下问题，请继续改进，谢谢！
-	#
-	#1.错误信息部分（# ERROR strings）比较多，实际使用中发现很少遇到，因此没有翻译；
+	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
+	#  人 Pao-Hsi Huang；
 	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
-	#3.这次将“sponsor”和“Sponsorship”全部翻译成了“捐赠”，应该没有问题，如果不
-	#  正确，请告知我正确的翻译；
+	#3.这次将“sponsor”和“Sponsorship”参照繁体中文语言包中的翻译改为“资助”，
+	#  自己感觉这个词更合适一些；
 	#4.哪位知道 Sticky 该如何翻译？我全部保留了原文*^_^*
+	#5.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
 	#
 	###########################################################################
 ?>
@@ -92,11 +92,11 @@ $s_bug_relationships = '关系';
 $s_empty_password_sure_msg = '确定要设置用户密码为空吗？';
 $s_empty_password_button = '使用空白密码';
 
-$s_duplicate_of = '%id 重复';
-$s_has_duplicate = '有重复 %id';
-$s_related_to = '与 %id 关联';
-$s_dependant_on = '依赖于 %id';
-$s_blocks = '阻塞 %id';
+$s_duplicate_of = '是该问题的重复：';
+$s_has_duplicate = '有重复问题：';
+$s_related_to = '与该问题关联：';
+$s_dependant_on = '是该问题的子项：';
+$s_blocks = '是该问题的子项：';
 
 $s_new_bug = '新建问题';
 $s_bugnote_added = '已添加问题注释';
@@ -190,88 +190,89 @@ $s_bugnote_description = '问题注释内容';
 $s_error_no_proceed = '请在你的浏览器中使用“后退”按钮来返回到上一页面，这样您可以找到发生了什么问题或者进行别的操作；您还可以点击导航栏中的选项直接跳转到一个新的区段。';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.  Please report this to ';
-$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  File is not readable by Mantis. Please check the project settings';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The \'Real Name\' chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %d requires higher access level.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_GENERIC] = '执行该操作时发生错误，你可能需要将此问题报告给你的系统管理员。';
+$MANTIS_ERROR[ERROR_SQL] = '发生SQL错误；请将此错误报告给';
+$MANTIS_ERROR[ERROR_REPORT] = '在你的报表中发现错误。';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '没有指定文件';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '此类型的文件不允许上传';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '目录不存在；请检查项目设置。';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '已经有一个同名文件存在；请先删除该文件。';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '已经存在一个同名的项目。';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '字段“%s”是必须填写的，不能为空白，请重新填写。';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '该帐号设置为被保护状态，解除保护前你不能使用该账号。';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权限存取。';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，Mantis 系统无法读取文件；请检查项目设置。';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传上限造成的。';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。'; 
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目。';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '没有找到数据库字段 “%s”。';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = '无法连接 FTP 服务器。';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '主持人对处于当前状态的问题没有足够存取权进行处理。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '已经存在同名项目，请返回前一页重新输入项目名称。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '项目名称无效，项目名称不能为空。';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = '没有找到用户。';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '浏览器储存的登录资料无效；也许你的帐号已经被删除了？';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '没有找到帐号的配置信息';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = '没有找到公告。';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '密码与核证结果不匹配';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '预期 %s 接收到的是数组，但实际收到的是字符串。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '预期 %s 接收到的是字符串，但实际收到的是数组。';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '预期 %s 接收到的数据为数值。';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '没有找到问题 %d 。';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]    = '没有找到过滤器 %d 。';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = '你尝试使用的过滤器格式比较旧，无法更新，请重新建立该过滤器';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '无效的 Email 地址';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '没有找到帐号的个人配置。';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '不允许上传该类型的文件。';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = '文件重复，请先删除原有的文件。';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '无效的上传路径；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '没有上传文件，请返回并选择要上传的文件';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '上传的文件不能转移到文件储存目录；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = '不能将问题设置为自身的重复问题。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '没有找到自定义字段';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '名称重复。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少还有一个项目仍然在使用该字段。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '数值对该字段是无效的';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '自定义字段定义无效';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP 验证失败';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '连接至 LDAP 服务器失败';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = '更新 LDAP 记录失败。';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '没有找到 LDAP 帐号记录。';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '连接至数据库服务器失败；数据库返回的错误信息是：#%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = '数据库查询失败。数据库返回的错误信息是：#%d: %s 查询：%s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = '数据库选择失败。数据库返回的错误信息是：#%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '已存在同名类别。';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '没有指定的复制操作。';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '没有找到类别。';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '已存在同名版本。';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '没有找到版本“%s” 。';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '帐号名称无效；帐号名称只能由字串、数字、空格、“-”或“_”组成。';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '用户没有足够的存取权限';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '选定的“真实姓名”与另一个帐号的登录帐号名称相同；请重新选择。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '资助尚未启用。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '没有找到资助 %d 。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '资助金额﹝%s﹞低于最低资助金额﹝%s﹞。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '主持人没有必要的存取权限处理资助问题。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '拒绝存取：指派受资助的问题需要更高的存取权限。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '资助者没有提供 Email 地址；请更新你的个人设置。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '设置选项“%s”的数值“%s”无效';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '由于问题“%d”是只读的，操作无法执行';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "这两个问题已有关联关系。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "没有找到关联关系。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "拒绝存取：问题 %d 需要更高存取权限。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "问题不能与自身关联。";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '确认校验值不匹配，请重试。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '“忘记密码”功能未启用。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '你需要提供 Email 地址用于重新设置密码';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '提供的信息不符合任何已注册的帐号！';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '确认 URL 无效或已经进行了确认；请重新signup。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到最高请求数量；请联络系统管理员。';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
 
 #$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
@@ -299,9 +300,9 @@ $s_project_view_state_enum_string = '10:公共,50:私有';
 $s_view_state_enum_string         = '10:公共,50:私有';
 
 $s_priority_enum_string           = '10:无,20:低,30:中,40:高,50:加急,60:特急';
-$s_severity_enum_string           = '10:新特性,20:微不足道,30:文字错误,40:布局不合理,50:次要错误,60:严重错误,70:系统崩溃,80:系统死锁';
+$s_severity_enum_string           = '10:新特性,20:微不足道,30:文字错误,40:不合理或别扭,50:次要错误,60:严重错误,70:系统崩溃,80:系统死锁';
 $s_reproducibility_enum_string    = '10:经常,30:有时,50:随机,70:没有试验,90:无法重复,100:不适用';
-$s_status_enum_string             = '10:新建,20:反馈,30:公认,40:已确认,50:已分派,80:已解决,90:已关闭';
+$s_status_enum_string             = '10:新建,20:打回,30:公认,40:已确认,50:已分派,80:已解决,90:已关闭';
 $s_resolution_enum_string         = '10:未处理,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复问题,70:不是问题,80:暂停,90:不做修改';
 $s_projection_enum_string         = '10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计';
 $s_eta_enum_string                = '10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月';
@@ -321,8 +322,8 @@ $s_new_account_signup_msg = '已创建如下账号：';
 $s_reset_request_msg = '你请求了通过电子邮件确认的密码变更(如果你从未请求请忽略此信息)， 请访问以下网页修改你的密码:';
 $s_reset_request_in_progress_msg = '请填好你的用户名和邮件地址，系统将自动发确认邮件到你的信箱，收到邮件后请按邮件里的步骤修改你的密码。';
 
-$s_email_notification_title_for_status_bug_new = '下列问题的状态现在被(重新)设置为 NEW';
-$s_email_notification_title_for_status_bug_feedback = '下列问题需要您的反馈。';
+$s_email_notification_title_for_status_bug_new = '下列问题的状态现在被(重新)设置为新建';
+$s_email_notification_title_for_status_bug_feedback = '下列问题已被打回。';
 $s_email_notification_title_for_status_bug_acknowledged = '下列问题已经被公认。';
 $s_email_notification_title_for_status_bug_confirmed = '下列问题已经被确认。';
 $s_email_notification_title_for_status_bug_assigned = '下列问题已经被分派。';
@@ -334,9 +335,9 @@ $s_email_notification_title_for_action_bug_assigned = '下列问题已经被分�
 $s_email_notification_title_for_action_bug_reopened = '下列问题重新打开';
 $s_email_notification_title_for_action_bug_deleted = '下列问题已经被删除';
 $s_email_notification_title_for_action_bug_updated = '下列问题已经被更新';
-$s_email_notification_title_for_action_sponsorship_added = '已为下列问题添加捐赠';
-$s_email_notification_title_for_action_sponsorship_updated = '下列问题的一项捐赠被修改。';
-$s_email_notification_title_for_action_sponsorship_deleted = '下列问题的一项捐赠被撤销。';
+$s_email_notification_title_for_action_sponsorship_added = '已为下列问题添加资助';
+$s_email_notification_title_for_action_sponsorship_updated = '下列问题的一项资助被修改。';
+$s_email_notification_title_for_action_sponsorship_deleted = '下列问题的一项资助被撤销。';
 
 $s_email_notification_title_for_action_bugnote_submitted = '这个问题中新增加了一个注释。';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = '下面的问题被设置为与问题 %s 重复。';
@@ -406,7 +407,7 @@ $s_bugnote_order_asc = '升序';
 $s_bugnote_order_desc = '降序';
 $s_email_on_new = '当新建问题时发送 Email 提醒';
 $s_email_on_assigned = '当分派问题时发送 Email 提醒';
-$s_email_on_feedback = '当反馈问题时发送 Email 提醒';
+$s_email_on_feedback = '当打回问题时发送 Email 提醒';
 $s_email_on_resolved = '当解决问题时发送 Email 提醒';
 $s_email_on_closed = '当关闭问题时发送 Email 提醒';
 $s_email_on_reopened = '当重新打开时发送 Email 提醒';
@@ -454,13 +455,13 @@ $s_submit_button = '提交';
 $s_profile_updated_msg = '平台配置已更新...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = '我的捐赠';
+$s_my_sponsorship = '我的资助';
 $s_update_sponsorship_button = '修改支付状态';
-$s_no_sponsored = '没有找到分派给你的已捐赠的问题。';
-$s_own_sponsored = '你已经捐赠的问题：';
-$s_issues_handled = '分派给你的已捐赠的问题：';
-$s_no_own_sponsored = '你没有捐赠任何问题。';
-$s_sponsor = '捐赠';
+$s_no_sponsored = '没有找到分派给你的已资助的问题。';
+$s_own_sponsored = '你已经资助的问题：';
+$s_issues_handled = '分派给你的已资助的问题：';
+$s_no_own_sponsored = '你没有资助任何问题。';
+$s_sponsor = '资助';
 $s_amount = '数量';
 $s_total_owing = '未支付合计';
 $s_total_paid = '已支付合计';
@@ -487,12 +488,12 @@ $s_bug_assign_msg = '已成功分派问题...';
 
 # bug_change_status_page.php
 $s_new_bug_title = '创建新的问题';
-$s_feedback_bug_title = '给问题提供反馈信息';
+$s_feedback_bug_title = '给问题的打回提供信息';
 $s_acknowledged_bug_title = '告知问题已收到';
 $s_confirmed_bug_title = '确认问题存在';
 $s_assigned_bug_title = '分派问题';
 $s_new_bug_button = '创建问题';
-$s_feedback_bug_button = '反馈问题';
+$s_feedback_bug_button = '打回问题';
 $s_acknowledged_bug_button = '告知问题已收到';
 $s_confirmed_bug_button = '确认问题存在';
 $s_assigned_bug_button = '分派问题';
@@ -550,6 +551,8 @@ $s_reminder = '提醒';
 $s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
 $s_reminder_monitor = '这些收件人将开始监视此问题，他们可以适用“取消监视”按钮来取消订阅。';
 $s_reminder_store = '该注释将和问题一起储存。';
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = '请确认你要为 %d 号问题向 %s 提供资助。';
 
 # bug_update.php
 $s_bug_updated_msg = '问题已经被成功更新...';
@@ -886,6 +889,8 @@ $s_my_view_title_reported = '由我报告的';
 $s_my_view_title_assigned = '指定给我的(尚未解决)';
 $s_my_view_title_resolved = '已解决的';
 $s_my_view_title_monitored = '我正在监视的';
+$s_my_view_title_feedback = '正在等待我的反馈';
+$s_my_view_title_verify = '正在等待我的解决程度确认';
 
 # news_add.php
 $s_news_added_msg = '公告项目已添加...';
@@ -1061,12 +1066,12 @@ $s_sort = '排序字段';
 # view_all_inc.php
 $s_none = '无';
 $s_search ='搜索';
-$s_view_prev_link = '浏览上一个';
-$s_view_next_link = '浏览下一个';
-$s_prev = '前一个';
-$s_next = '下一个';
-$s_first = '第一个';
-$s_last = '最后一个';
+$s_view_prev_link = '浏览上一页';
+$s_view_next_link = '浏览下一页';
+$s_prev = '上一页';
+$s_next = '下一页';
+$s_first = '首页';
+$s_last = '末页';
 $s_start_date = '开始日期';
 $s_end_date = '完成日期';
 $s_use_date_filters = '使用时间过滤';
@@ -1117,10 +1122,10 @@ $s_users_monitoring_bug = '正在监视这个问题的用户';
 $s_monitoring_user_list = '用户列表';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = '没有捐赠该问题的用户。';
-$s_users_sponsoring_bug = '捐赠该问题的用户';
-$s_sponsors_list = '捐赠列表';
-$s_total_sponsorship_amount = '合计捐赠数量 = %s';
+$s_no_users_sponsoring_bug = '没有资助该问题的用户。';
+$s_users_sponsoring_bug = '资助该问题的用户';
+$s_sponsors_list = '资助列表';
+$s_total_sponsorship_amount = '合计资助数量 = %s';
 
 # custom field strings
 $s_add_custom_field_button = '新建自定义字段';
@@ -1169,7 +1174,7 @@ $s_hide_resolved = '隐藏已解决的问题';
 $s_and_above = '和以上';
 $s_advanced_filters = '高级过滤器';
 $s_simple_filters = '简易过滤器';
-$s_monitored_by = '监视人：';
+$s_monitored_by = '监视人';
 
 $s_attachments = '附件';
 $s_attachment_alt = 'A';
@@ -1178,12 +1183,13 @@ $s_attachment_alt = 'A';
 $s_phpmailer_language = '中文';
 
 # Sponsorship Strings
-$s_sponsors = '%d 项捐赠';
-$s_sponsorship_added = '已添加捐赠';
-$s_sponsorship_updated = '已修改捐赠';
-$s_sponsorship_deleted = '已删除捐赠';
-$s_sponsorship_paid = '已支付的捐赠';
-$s_sponsorship_more_info = '关于捐赠的更多信息';
+$s_sponsors = '%d 项资助';
+$s_sponsorship_added = '已添加资助';
+$s_sponsorship_updated = '已修改资助';
+$s_sponsorship_deleted = '已删除资助';
+$s_sponsorship_paid = '已支付的资助';
+$s_sponsorship_more_info = '关于资助的更多信息';
+$s_sponsorship_total = '资助合计';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1191,7 +1197,7 @@ $s_sponsorship_more_info = '关于捐赠的更多信息';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = '修改日志';
+$s_changelog = '修改记录';
 
 # Http auth
 $s_http_auth_realm = 'Mantis 问题跟踪系统登录';
@@ -1227,7 +1233,7 @@ $s_view_issue = '查看问题';
 $s_checkin = '签入';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
+$s_perm_rpt_capability = '权限';
 $s_view = '视图';
 $s_issues = '问题';
 $s_report_issue = '报告问题';
@@ -1270,12 +1276,12 @@ $s_project_documents = '项目文档';
 $s_view_project_documents = '查看项目文档';
 $s_upload_project_documents = '上传项目文档';
 $s_link_custom_fields_to_projects = '将自定义字段连接到该项目';
-$s_sponsorships = '捐赠';
-$s_view_sponsorship_details = '查看捐赠详细信息';
-$s_view_sponsorship_total = '查看所有捐赠';
-$s_sponsor_issue = '捐赠问题';
-$s_assign_sponsored_issue = '分派有捐赠的问题';
-$s_handle_sponsored_issue = '管理有捐赠的问题';
+$s_sponsorships = '资助';
+$s_view_sponsorship_details = '查看资助详细信息';
+$s_view_sponsorship_total = '查看所有资助';
+$s_sponsor_issue = '资助问题';
+$s_assign_sponsored_issue = '分派有资助的问题';
+$s_handle_sponsored_issue = '管理有资助的问题';
 $s_others = '其他';
 $s_see_email_addresses_of_other_users = '查看其它用户的Email地址';
 $s_send_reminders = '发送提醒';
@@ -1284,7 +1290,7 @@ $s_notify_of_new_user_created = '创建新用户时提醒';
 $s_email_notification = 'EMAIL 提醒';
 $s_status_changed_to = '状态已修改为';
 $s_email_on_deleted = '删除时发送 Email';
-$s_email_on_sponsorship_changed = '捐赠改变时发送 Email';
+$s_email_on_sponsorship_changed = '资助改变时发送 Email';
 $s_email_on_relationship_changed = '关联改变时发送 Email';
 
 # DHTML filters
