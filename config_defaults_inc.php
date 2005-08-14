@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.281 2005-08-07 13:42:03 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.282 2005-08-14 18:40:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1409,10 +1409,13 @@
 	# --- system logging ---
 	# This controls the logging of information to a separate file for debug or audit
 	# $g_log_level controls what information is logged
-	#  it is formed by ORing constants like LOG_EMAIL | LOG_PROJECT
-	#  see constant_inc for details on the log channels
-	# $g_log_destination specifies where the data goes
+	#  see constant_inc.php for details on the log channels available
+	#  e.g., $g_log_level = LOG_EMAIL | LOG_PROJECT;
+	#
+	# $g_log_destination specifies the file where the data goes
 	#   right now, only "file:<file path>" is supported
+	#   e.g., $g_log_destination = 'file:/tmp/mantis_log';
+	#   see http://www.php.net/error_log for details
 	$g_log_level = 0;
 	$g_log_destination = '';
 
