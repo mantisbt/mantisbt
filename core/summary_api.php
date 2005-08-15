@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.41 2005-08-15 19:24:25 thraxisp Exp $
+	# $Id: summary_api.php,v 1.42 2005-08-15 20:55:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -356,9 +356,6 @@
 
 			if ( 0 < $t_bugs_total ) {
 				$t_user = user_get_name( $v_reporter_id );
-
-				$result3 = db_query( $query );
-				$row3 = db_fetch_array( $result3 );
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;reporter_id=' . $v_reporter_id;
 				if ( 0 < $t_bugs_open ) {
