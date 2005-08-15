@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.40 2005-07-13 20:45:02 thraxisp Exp $
+	# $Id: summary_api.php,v 1.41 2005-08-15 19:24:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -27,11 +27,6 @@
 	# for each enum setting
 	# The enum field name is passed in through $p_enum
 	function summary_print_by_enum( $p_enum_string, $p_enum ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-
-		$t_arr = explode_enum_string( $p_enum_string );
-		$enum_count = count( $t_arr );
-
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
@@ -39,11 +34,18 @@
 		if ( ' 1<>1' == $t_project_filter ) {
 			return;
 		}
+		
+		$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
+		$t_arr = explode_enum_string( $p_enum_string );
+		$enum_count = count( $t_arr );
 
-		$query = "SELECT status, $p_enum
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';		  
+		$query = "SELECT COUNT(id) as count, $p_enum $t_status_query 
 				FROM $t_mantis_bug_table
 				WHERE $t_project_filter
-				ORDER BY $p_enum";
+				GROUP BY $p_enum $t_status_query 
+				ORDER BY $p_enum $t_status_query";
 		$result = db_query( $query );
 
 		$t_last_value = -1;
@@ -62,16 +64,16 @@
 				$t_bug_link = '';
 				switch ( $p_enum ) {
 					case 'status':
-						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_status=' . $t_last_value;
+						$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_status=' . $t_last_value;
 						break;
 					case 'severity':
-						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_severity=' . $t_last_value;
+						$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_severity=' . $t_last_value;
 						break;
 					case 'resolution':
-						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
+						$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_resolution=' . $t_last_value;
 						break;
 					case 'priority':
-						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_priority=' . $t_last_value;
+						$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_priority=' . $t_last_value;
 						break;
 				}
 
@@ -110,13 +112,13 @@
 				$t_bugs_total		= 0;
 			}
 
-			$t_bugs_total++;
+			$t_bugs_total += $row['count'];
 			if ( $t_closed_val <= $row['status'] ) {
-				$t_bugs_closed++;
+				$t_bugs_closed += $row['count'];
 			} else if ( $t_resolved_val <= $row['status'] ) {
-				$t_bugs_resolved++;
+				$t_bugs_resolved += $row['count'];
 			} else {
-				$t_bugs_open++;
+				$t_bugs_open += $row['count'];
 			}
 			$t_last_value = $row[$p_enum];
 		}
@@ -126,16 +128,16 @@
 			$t_bug_link = '';
 			switch ( $p_enum ) {
 				case 'status':
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_status=' . $t_last_value;
+					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_status=' . $t_last_value;
 					break;
 				case 'severity':
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_severity=' . $t_last_value;
+					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_severity=' . $t_last_value;
 					break;
 				case 'resolution':
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
+					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_resolution=' . $t_last_value;
 					break;
 				case 'priority':
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_priority=' . $t_last_value;
+					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;show_priority=' . $t_last_value;
 					break;
 			}
 
@@ -226,10 +228,11 @@
 			return;
 		}
 
-		$query = "SELECT handler_id, status
+		$query = "SELECT COUNT(id) as count, handler_id, status
 				FROM $t_mantis_bug_table
 				WHERE handler_id>0 AND $specific_where
-				ORDER BY handler_id";
+				GROUP BY handler_id, status
+				ORDER BY handler_id, status";
 		$result = db_query( $query );
 
 		$t_last_handler = -1;
@@ -269,17 +272,14 @@
 				$t_bugs_total = 0;
 			}
 
-			$t_bugs_total++;
-
-			switch( $v_status ) {
-				case $t_resolved_val:	$t_bugs_resolved++;
-										break;
-				case $t_closed_val:		$t_bugs_closed++;
-										break;
-				default:				$t_bugs_open++;
-										break;
+			$t_bugs_total += $v_count;
+			if ( $t_closed_val <= $row['status'] ) {
+				$t_bugs_closed += $v_count;
+			} else if ( $t_resolved_val <= $row['status'] ) {
+				$t_bugs_resolved += $v_count;
+			} else {
+				$t_bugs_open += $v_count;
 			}
-
 			$t_last_handler = $v_handler_id;
 		}
 
@@ -327,9 +327,11 @@
 
 		while ( $row = db_fetch_array( $result ) ) {
 			$v_reporter_id = $row['reporter_id'];
-			$query = "SELECT status FROM $t_mantis_bug_table
+			$query = "SELECT COUNT(id) as count, status FROM $t_mantis_bug_table
 					WHERE reporter_id=$v_reporter_id
-					AND $specific_where";
+					AND $specific_where
+					GROUP BY status
+					ORDER BY status";
 			$result2 = db_query( $query );
 
 			$last_reporter = -1;
@@ -342,16 +344,14 @@
 			$t_closed_val = CLOSED;
 
 			while ( $row2 = db_fetch_array( $result2 ) ) {
-				$t_bugs_total++;
-
-				switch( $row2['status'] ) {
-					case $t_resolved_val:	$t_bugs_resolved++;
-											break;
-					case $t_closed_val:		$t_bugs_closed++;
-											break;
-					default:				$t_bugs_open++;
-											break;
-				}
+                $t_bugs_total += $row2['count'];
+                if ( $t_closed_val <= $row2['status'] ) {
+                    $t_bugs_closed += $row2['count'];
+                } else if ( $t_resolved_val <= $row2['status'] ) {
+                    $t_bugs_resolved += $row2['count'];
+                } else {
+                    $t_bugs_open += $row2['count'];
+                }
 			}
 
 			if ( 0 < $t_bugs_total ) {
@@ -392,11 +392,13 @@
 		if ( ' 1<>1' == $specific_where ) {
 			return;
 		}
+		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'project_id, ' : '';
 
-		$query = "SELECT project_id, category, status
+		$query = "SELECT COUNT(id) as count, $t_project_query category, status
 				FROM $t_mantis_bug_table
 				WHERE category>'' AND $specific_where
-				ORDER BY project_id, category, status";
+				GROUP BY $t_project_query category, status
+				ORDER BY $t_project_query category, status";
 
 		$result = db_query( $query );
 
@@ -416,13 +418,7 @@
 			if ( ( $v_category != $last_category ) && ( $last_category != -1 ) ) {
 				$label = $last_category;
 				if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
-					$query = "SELECT name
-							FROM $t_mantis_project_table
-							WHERE id=$last_project";
-					$result2 = db_query( $query );
-					$row2 = db_fetch_array( $result2 );
-
-					$label = sprintf( '[%s] %s', $row2['name'], $label );
+					$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 				}
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
@@ -447,34 +443,25 @@
 				$t_bugs_total = 0;
 			}
 
-			$t_bugs_total++;
-
-			switch( $v_status ) {
-				case $t_resolved_val:
-										$t_bugs_resolved++;
-										break;
-				case $t_closed_val:
-										$t_bugs_closed++;
-										break;
-				default:
-										$t_bugs_open++;
-										break;
-			}
+            $t_bugs_total += $row['count'];
+            if ( $t_closed_val <= $row['status'] ) {
+                $t_bugs_closed += $row['count'];
+            } else if ( $t_resolved_val <= $row['status'] ) {
+                $t_bugs_resolved += $row['count'];
+            } else {
+                $t_bugs_open += $row['count'];
+            }
 
 			$last_category = $v_category;
-			$last_project = $v_project_id;
+			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
+                $last_project = $v_project_id;
+            }
 		}
 
 		if ( 0 < $t_bugs_total ) {
 			$label = $last_category;
 			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
-				$query = "SELECT name
-						FROM $t_mantis_project_table
-						WHERE id=$last_project";
-				$result2 = db_query( $query );
-				$row2 = db_fetch_array( $result2 );
-
-				$label = sprintf( '[%s] %s', $row2['name'], $label );
+				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 			}
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
@@ -526,18 +513,13 @@
 
 			while ( $row = db_fetch_array( $result ) ) {
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-				switch( $v_status ) {
-					case $t_resolved_val:
-										$p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
-										break;
-					case $t_closed_val:
-										$p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
-										break;
-					default:
-										$p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
-										break;
-				}
+                if ( $t_closed_val <= $v_status ) {
+                    $p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+                } else if ( $t_resolved_val <= $v_status ) {
+                    $p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+                } else {
+                    $p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
+                }
 			}
 		}
 
@@ -586,9 +568,11 @@
 
 		$specific_where .= ' AND handler_id > 0';
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT handler_id, resolution
+		$query = "SELECT COUNT(id) as count, handler_id, resolution
 				FROM $t_mantis_bug_table
-				WHERE $specific_where";
+				WHERE $specific_where
+				GROUP BY handler_id, resolution
+				ORDER BY handler_id, resolution";
 		$result = db_query( $query );
 
 		$t_handler_res_arr = array();
@@ -601,12 +585,13 @@
 			if ( !isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
 				$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] = 0;
 			}
-			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']]++;
-			$t_handler_res_arr[$t_arr['handler_id']]['total']++;
+			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] += $t_arr['count'];
+			$t_handler_res_arr[$t_arr['handler_id']]['total'] += $t_arr['count'];
 
 			$t_arr = db_fetch_array( $result );
 		}
 
+        $t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 		$t_row_count = 0;
 		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
 		foreach( $t_handler_res_arr as $t_handler_id => $t_arr2 ) {
@@ -634,7 +619,7 @@
 
 					PRINT '<td>';
 					if ( 0 < $res_bug_count ) {
-						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_handler_id;
+						$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;handler_id=' . $t_handler_id;
 						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[$j] . '">';
 						PRINT $t_bug_link . $res_bug_count . '</a>';
 					} else {
@@ -691,9 +676,10 @@
 		}
 
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT reporter_id, resolution
+		$query = "SELECT COUNT(id) as count, reporter_id, resolution
 				FROM $t_mantis_bug_table
-				WHERE $specific_where";
+				WHERE $specific_where
+				GROUP BY reporter_id, resolution";
 		$result = db_query( $query );
 
 		$t_reporter_res_arr = array();
@@ -707,8 +693,8 @@
 			if ( !isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
 				$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']]++;
-			$t_reporter_bugcount_arr[$t_arr['reporter_id']]++;
+			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] += $t_arr['count'];
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['count'];
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -827,9 +813,10 @@
 		}
 
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT reporter_id, resolution, severity
+		$query = "SELECT COUNT(id) as count, reporter_id, resolution, severity
 				FROM $t_mantis_bug_table
-				WHERE $specific_where";
+				WHERE $specific_where
+				GROUP BY reporter_id, resolution, severity";
 		$result = db_query( $query );
 
 		$t_reporter_ressev_arr = array();
@@ -847,9 +834,9 @@
 			if ( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
 				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']]++;
-			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total']++;
-			$t_reporter_bugcount_arr[$t_arr['reporter_id']]++;
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] += $t_arr['count'];
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] += $t_arr['count'];
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['count'];
 
 			$t_arr = db_fetch_array( $result );
 		}
