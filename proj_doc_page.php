@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.48 2005-07-30 19:32:02 thraxisp Exp $
+	# $Id: proj_doc_page.php,v 1.49 2005-08-15 00:45:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -57,10 +57,9 @@
 					LEFT JOIN $t_project_user_list_table as pult 
 						on pft.project_id = pult.project_id and pult.user_id = $t_user_id
 					JOIN $t_user_table ut ON ut.id = $t_user_id
-				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND 
-					( pt.view_state = $t_pub OR pt.view_state is null OR
-						( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
-						( pult.user_id is null and ut.access_level $t_access_clause ) )
+				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
+					( ( ( pt.view_state = $t_pub OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
+						( pult.user_id = $t_user_id AND pult.access_level $t_access_clause ) )
 				ORDER BY pt.name ASC, pft.title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
