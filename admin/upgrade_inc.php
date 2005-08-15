@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.18 2005-07-22 23:28:24 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.19 2005-08-15 22:13:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'db_table_names_inc.php' );
@@ -48,6 +48,10 @@
 
 		function is_applied() {
 			$t_upgrade_table = config_get_global( 'mantis_upgrade_table' );
+			
+			if ( ! db_table_exists( $t_upgrade_table ) ) {
+				return false;
+			}
 
 			$query = "SELECT COUNT(*)
 					  FROM $t_upgrade_table

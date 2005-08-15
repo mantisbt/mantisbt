@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.45 2005-07-17 12:24:00 prichards Exp $
+	# $Id: database_api.php,v 1.46 2005-08-15 22:13:52 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -209,6 +209,8 @@
 	# Check if there is an index defined on the specified table/field and with
 	# the specified type.
 	#
+	# @@@ thraxisp - this only works with MySQL
+	#
 	# $p_table: Name of table to check
 	# $p_field: Name of field to check
 	# $p_key: key type to check for (eg: PRI, MUL, ...etc)
@@ -223,8 +225,8 @@
 		for ( $i=0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
-			if ( $row['field'] == $c_field ) {
-				return ( $row['key'] == $c_key );
+			if ( $row['Field'] == $c_field ) {
+				return ( $row['Key'] == $c_key );
 			}
 		}
 		return false;

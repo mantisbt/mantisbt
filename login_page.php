@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.51 2005-07-18 20:15:27 thraxisp Exp $
+	# $Id: login_page.php,v 1.52 2005-08-15 22:13:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -151,16 +151,24 @@
 		$t_db_version = config_get( 'database_version' , 0 );
 		# if db version is 0, we haven't moved to new installer.
 		if ( $t_db_version == 0 ) {
-			$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
-			$result = db_query( $query );
-			if ( db_num_rows( $result ) < 1 ) {
-				$t_upgrade_count = 0;
+			if ( db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
+				$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
+				$result = db_query( $query );
+				if ( db_num_rows( $result ) < 1 ) {
+					$t_upgrade_count = 0;
+				} else {
+					$t_upgrade_count = (int)db_result( $result );
+				}
 			} else {
-				$t_upgrade_count = (int)db_result( $result );
+				$t_upgrade_count = 0;
 			}
 
-			require_once( 'admin/upgrade_inc.php' );
-			$t_upgrades_reqd = $upgrade_set->count_items();
+			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
+				require_once( 'admin/upgrade_inc.php' );
+				$t_upgrades_reqd = $upgrade_set->count_items();
+			} else {
+				$t_upgrades_reqd = 1000; # arbitrarily large number to force an upgrade
+			}
 
 			if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
 					( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
