@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_set.php,v 1.7 2005-07-28 16:20:14 thraxisp Exp $
+	# $Id: manage_config_workflow_set.php,v 1.8 2005-08-16 01:49:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -32,7 +32,9 @@
 		if( config_get_access( $t_threshold ) <= $t_access ) {
 			$f_value = gpc_get( 'threshold_' . $t_threshold );
 			$f_access = gpc_get( 'access_' . $t_threshold );
-			config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
+			if ( $f_value != config_get( $t_threshold ) ) {
+				config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
+			}
 		}
 	}
 
@@ -72,7 +74,9 @@
 				$t_workflow[$t_state] = $t_workflow_row;
 			}
 		}
-		config_set( 'status_enum_workflow', $t_workflow, NO_USER, $t_project, $f_access );
+		if ( $t_workflow != config_get( 'status_enum_workflow' ) ) {
+			config_set( 'status_enum_workflow', $t_workflow, NO_USER, $t_project, $f_access );
+		}
 	}
 
 	# process the access level changes
@@ -86,13 +90,17 @@
 		foreach( $t_statuses as $t_status_id => $t_status_label) {
 			$f_level = gpc_get( 'access_change_' . $t_status_id );
 			if ( NEW_ == $t_status_id ) {
-				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
+				if ( (int)$f_level != config_get( 'report_bug_threshold' ) ) {
+					config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
+				}
 			} else {
 				$t_set_status[$t_status_id] = (int)$f_level;
 			}
 		}
 
-		config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
+		if ( $t_set_status != config_get( 'set_status_threshold' ) ) {
+			config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
+		}
 	}
 ?>
 

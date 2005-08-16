@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.7 2005-07-28 16:20:14 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.8 2005-08-16 01:49:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -33,7 +33,7 @@
 	$t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
 	# build a list of the possible actions and flags
-	$t_valid_actions = array( 'new', 'owner', 'reopened', 'deleted', 'bugnote' );
+	$t_valid_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_valid_actions[] = 'sponsor';
 	}
@@ -60,7 +60,7 @@
 	# parse flags and thresholds
 	foreach( $f_flags as $t_flag_value ) {
 		list( $t_action, $t_flag ) = split( ':', $t_flag_value );
-		$t_flags[$t_action][$t_flag] = true;
+		$t_flags[$t_action][$t_flag] = ON;
 	}
 	foreach( $f_thresholds as $t_threshold_value ) {
 		list( $t_action, $t_threshold ) = split( ':', $t_threshold_value );
@@ -78,7 +78,7 @@
 
 		# for flags, assume they are true, unless one of the actions has them off
 		foreach ( $t_valid_flags as $t_flag ) {
-			$t_default_flags[$t_flag] = true;
+			$t_default_flags[$t_flag] = ON;
 			foreach ( $t_valid_actions as $t_action ) {
 				if ( ! isset( $t_flags[$t_action][$t_flag] ) ) {
 					unset( $t_default_flags[$t_flag] );
@@ -99,7 +99,10 @@
 		$t_default_flags['threshold_min'] = $t_default_min;
 		$t_default_flags['threshold_max'] = $t_default_max;
 
-		config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_actions_access );
+		$t_existing_default_flags = config_get( 'default_notify_flags' );
+		if ( $t_existing_default_flags != $t_default_flags ) { # only set the flags if they are different
+            config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_actions_access );
+        }
 	} else {
 		$t_default_flags = config_get( 'default_notify_flags' );
 	}
@@ -109,10 +112,10 @@
 		$t_action_printed = false;
 		foreach ( $t_valid_flags as $t_flag ) {
 			if ( ! isset( $t_default_flags[$t_flag] ) ) {
-				$t_default_flags[$t_flag] = false;
+				$t_default_flags[$t_flag] = OFF;
 			}
 			if ( isset( $t_flags[$t_action][$t_flag] ) <> $t_default_flags[$t_flag] ) {
-				$t_notify_flags[$t_action][$t_flag] = isset( $t_flags[$t_action][$t_flag] );
+				$t_notify_flags[$t_action][$t_flag] = isset( $t_flags[$t_action][$t_flag] ) ? ON : OFF;
 			}
 		}
 		if ( $t_default_flags['threshold_min'] <> $t_thresholds_min[$t_action] ) {
@@ -123,7 +126,10 @@
 		}
 	}
 	if ( isset( $t_notify_flags ) ) {
-		config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
+		$t_existing_flags = config_get( 'notify_flags' );
+		if ( $t_existing_flags != $t_notify_flags ) { # only set the flags if they are different
+            config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
+        }
 	}
 
 

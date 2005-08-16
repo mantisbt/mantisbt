@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.7 2005-05-15 12:26:06 marcelloscata Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.8 2005-08-16 01:49:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -51,10 +51,15 @@
 		        }
             # @@debug @@ var_dump($$t_access_level, $t_lower_threshold, $t_array_threshold); echo '<br />';
             }
+            $t_existing_threshold = config_get( $p_threshold );
             if ( -1 == $t_lower_threshold ) {
-		        config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
+                if ( $t_existing_threshold != $t_array_threshold ) {
+                    config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
+                }
 		    } else {
-		        config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
+                if ( $t_existing_threshold != $t_lower_threshold ) {
+                    config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
+                }
 		    }
 		}
 	}
@@ -66,9 +71,12 @@
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
 	        $f_flag = gpc_get( 'flag_' . $p_threshold, OFF );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
+	        $f_flag = ( OFF == $f_flag ) ? OFF : ON;
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
 
-		    config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
+            if ( $f_flag != config_get( $p_threshold ) ) {
+                config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
+            }
 		}
 	}
 
@@ -81,7 +89,9 @@
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
             # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
 
-		    config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
+            if ( $f_flag != config_get( $p_threshold ) ) {
+                config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
+            }
 		}
 	}
 
