@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.50 2005-08-10 20:07:01 thraxisp Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.51 2005-08-18 15:33:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -209,7 +209,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php      if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $v_id ) ) {
-				    print_user_with_subject( $v_handler_id, $f_bug_id ); 
+				    print_user_with_subject( $v_handler_id, $v_id ); 
                 }
 		  echo "</td>";
 			}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.61 2005-08-10 20:07:01 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.62 2005-08-18 15:33:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -183,7 +183,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print">
 		<?php 
 			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $v_id ) ) {
-				print_user_with_subject( $v_handler_id, $f_bug_id ); 
+				print_user_with_subject( $v_handler_id, $v_id ); 
 			}
 		?>
 	</td>
