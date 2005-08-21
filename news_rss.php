@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.8 2005-07-18 13:09:36 vboctor Exp $
+	# $Id: news_rss.php,v 1.9 2005-08-21 21:07:29 ryandesign Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,7 +34,7 @@
 	# construct rss file
 
 	$encoding = lang_get( 'charset' );
-	$about = string_rss_links( config_get( 'path' ) );
+	$about = config_get( 'path' );
 	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
 	$description = $title;
 	$image_link = config_get( 'path' ) . 'images/mantis_logo_button.gif';
