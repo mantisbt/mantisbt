@@ -12,23 +12,23 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-14 17:31:30 $
+	# $Date: 2005-08-22 14:50:31 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.74 2005-08-14 17:31:30 thraxisp Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.75 2005-08-22 14:50:31 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
-	#Mantis 1.0.0rc2 ºÚÃÂ÷–Œƒ”Ô—‘∞¸µƒ∑≠“ÎÀµ√˜(by NetCobra,2005-08-10)
+	#Mantis 1.0.0rc2 简体中文语言包的翻译说明(by NetCobra,2005-08-10)
 	#
-	#1.‘⁄¥À∞Ê±æ÷–Ω´¥ÌŒÛ–≈œ¢≤ø∑÷≤Œ’’∑±ÃÂ÷–Œƒ”Ô—‘∞¸»´≤ø∑≠“Î£¨∏––ª∑±ÃÂ÷–Œƒ”Ô—‘∞¸µƒ∑≠“Î
-	#  »À Pao-Hsi Huang£ª
-	#2.∂‘”⁄À˘”–µƒ°∞Issue°±£¨Œ“∑≠“ÎŒ™°∞Œ Ã‚°±£¨µ´∏–æı»‘»ª≤ª «∫‹◊º»∑£ª
-	#3.’‚¥ŒΩ´°∞sponsor°±∫Õ°∞Sponsorship°±≤Œ’’∑±ÃÂ÷–Œƒ”Ô—‘∞¸÷–µƒ∑≠“Î∏ƒŒ™°∞◊ ÷˙°±£¨
-	#  ◊‘º∫∏–æı’‚∏ˆ¥ ∏¸∫œ  “ª–©£ª
-	#4.ƒƒŒª÷™µ¿ Sticky ∏√»Á∫Œ∑≠“Î£øŒ“»´≤ø±£¡Ù¡À‘≠Œƒ*^_^*
-	#5.∂‘”⁄$s_superfluous“ªæ‰£¨“ÚŒ™Œﬁ∑®√˜»∑µÿ”√÷–Œƒ±Ì¥Ô£¨÷ª∑≠“Î¡À∫Û∞Îæ‰£ª
+	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
+	#  人 Pao-Hsi Huang；
+	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
+	#3.这次将“sponsor”和“Sponsorship”参照繁体中文语言包中的翻译改为“资助”，
+	#  自己感觉这个词更合适一些；
+	#4.哪位知道 Sticky 该如何翻译？我全部保留了原文*^_^*
+	#5.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
 	#
 	###########################################################################
 ?>
@@ -37,1159 +37,1159 @@
 $s_charset = 'GBK';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = '“∆∂Ø';
-$s_actiongroup_menu_copy = '∏¥÷∆';
-$s_actiongroup_menu_assign = '∑÷≈…';
-$s_actiongroup_menu_close = 'πÿ±’';
-$s_actiongroup_menu_delete = '…æ≥˝';
-$s_actiongroup_menu_resolve = 'Ω‚æˆ';
-$s_actiongroup_menu_update_priority = '∏¸–¬”≈œ»º∂';
-$s_actiongroup_menu_update_status = '∏¸–¬◊¥Ã¨';
-$s_actiongroup_menu_update_view_status = '∏¸–¬ ”Õº◊¥Ã¨';
-$s_actiongroup_menu_update_category = '∏¸–¬¿‡±';
-$s_actiongroup_menu_set_sticky = '…Ë÷√/»°œ˚ Sticky';
-$s_actiongroup_menu_update_field = '∏¸–¬ %s';
-$s_actiongroup_bugs = '—°‘ÒŒ Ã‚';
+$s_actiongroup_menu_move = '移动';
+$s_actiongroup_menu_copy = '复制';
+$s_actiongroup_menu_assign = '分派';
+$s_actiongroup_menu_close = '关闭';
+$s_actiongroup_menu_delete = '删除';
+$s_actiongroup_menu_resolve = '解决';
+$s_actiongroup_menu_update_priority = '更新优先级';
+$s_actiongroup_menu_update_status = '更新状态';
+$s_actiongroup_menu_update_view_status = '更新视图状态';
+$s_actiongroup_menu_update_category = '更新类别';
+$s_actiongroup_menu_set_sticky = '设置/取消 Sticky';
+$s_actiongroup_menu_update_field = '更新 %s';
+$s_actiongroup_bugs = '选择问题';
 
 # new strings:
-$s_all_projects = 'À˘”–µƒœÓƒø';
-$s_move_bugs = '“∆∂ØŒ Ã‚';
-$s_operation_successful = '≤Ÿ◊˜≥…π¶°£';
-$s_date_order = '»’∆⁄À≥–Ú';
-$s_print_all_bug_page_link = '¥Ú”°±®∏Ê';
-$s_csv_export = 'CSV µº≥ˆ';
-$s_login_anonymously = 'ƒ‰√˚µ«¬º';
-$s_anonymous = 'ƒ‰√˚';
-$s_jump_to_bugnotes = 'Ã¯◊™÷¡◊¢ Õ';
-$s_public_project_msg = '’‚∏ˆœÓƒø «π´π≤µƒ£¨À˘”–”√ªß∂ºø…“‘∑√Œ ∏√œÓƒø°£';
-$s_private_project_msg = '’‚∏ˆœÓƒø «ÀΩ”–µƒ£¨÷ª”–π‹¿Ì‘±∫Õ ⁄»®”√ªß≤≈ƒ‹∑√Œ °£';
-$s_access_level_project = 'œÓƒø∑√Œ º∂±';
-$s_view_submitted_bug_link = '≤Èø¥Ã·ΩªµƒŒ Ã‚';
-$s_assigned_projects = '“—∑÷≈‰µƒœÓƒø';
-$s_unassigned_projects = 'Œ¥∑÷≈‰µƒœÓƒø';
-$s_print = '¥Ú”°';
-$s_jump = 'Ã¯◊™µΩ∏√Œ Ã‚±‡∫≈';
-$s_copy_users = '∏¥÷∆”√ªß';
-$s_copy_categories_from = '¥”∏√œÓƒø∏¥÷∆∑÷¿‡';
-$s_copy_categories_to = '∏¥÷∆∑÷¿‡µΩ∏√œÓƒø';
-$s_copy_users_from = '¥”∏√œÓƒø∏¥÷∆”√ªß';
-$s_copy_users_to = '∏¥÷∆”√ªßµΩ∏√œÓƒø';
-$s_bug_history = 'Œ Ã‚¿˙ ∑';
-$s_field = '◊÷∂Œ';
-$s_old_value = 'æ…µƒ÷µ';
-$s_new_value = '–¬µƒ÷µ';
-$s_date_modified = '»’∆⁄–ﬁ’˝';
-$s_bugnote = 'Œ Ã‚◊¢ Õ';
-$s_change = '∏ƒ±‰';
-$s_bugnote_view_state = '≤Èø¥Œ Ã‚◊¢ Õ◊¥Ã¨';
-$s_bug_monitor = 'Œ Ã‚º‡ ”»À';
-$s_bug_end_monitor = '∏˙◊ŸŒ Ã‚';
-$s_announcement = 'π´∏Ê';
-$s_stays_on_top = '◊‹‘⁄◊Ó«∞√Ê';
-$s_delete_bugnote_button = '…æ≥˝Œ Ã‚◊¢ Õ';
-$s_delete_bugnote_sure_msg = '»∑∂®“™…æ≥˝’‚ÃıŒ Ã‚◊¢ Õ¬£ø';
-$s_bug_relationships = 'πÿœµ';
-$s_empty_password_sure_msg = '»∑∂®“™…Ë÷√”√ªß√‹¬ÎŒ™ø’¬£ø';
-$s_empty_password_button = ' π”√ø’∞◊√‹¬Î';
+$s_all_projects = '所有的项目';
+$s_move_bugs = '移动问题';
+$s_operation_successful = '操作成功。';
+$s_date_order = '日期顺序';
+$s_print_all_bug_page_link = '打印报告';
+$s_csv_export = 'CSV 导出';
+$s_login_anonymously = '匿名登录';
+$s_anonymous = '匿名';
+$s_jump_to_bugnotes = '跳转至注释';
+$s_public_project_msg = '这个项目是公共的，所有用户都可以访问该项目。';
+$s_private_project_msg = '这个项目是私有的，只有管理员和授权用户才能访问。';
+$s_access_level_project = '项目访问级别';
+$s_view_submitted_bug_link = '查看提交的问题';
+$s_assigned_projects = '已分配的项目';
+$s_unassigned_projects = '未分配的项目';
+$s_print = '打印';
+$s_jump = '跳转到该问题编号';
+$s_copy_users = '复制用户';
+$s_copy_categories_from = '从该项目复制分类';
+$s_copy_categories_to = '复制分类到该项目';
+$s_copy_users_from = '从该项目复制用户';
+$s_copy_users_to = '复制用户到该项目';
+$s_bug_history = '问题历史';
+$s_field = '字段';
+$s_old_value = '旧的值';
+$s_new_value = '新的值';
+$s_date_modified = '日期修正';
+$s_bugnote = '问题注释';
+$s_change = '改变';
+$s_bugnote_view_state = '查看问题注释状态';
+$s_bug_monitor = '问题监视人';
+$s_bug_end_monitor = '跟踪问题';
+$s_announcement = '公告';
+$s_stays_on_top = '总在最前面';
+$s_delete_bugnote_button = '删除问题注释';
+$s_delete_bugnote_sure_msg = '确定要删除这条问题注释吗？';
+$s_bug_relationships = '关系';
+$s_empty_password_sure_msg = '确定要设置用户密码为空吗？';
+$s_empty_password_button = '使用空白密码';
 
-$s_duplicate_of = ' «∏√Œ Ã‚µƒ÷ÿ∏¥£∫';
-$s_has_duplicate = '”–÷ÿ∏¥Œ Ã‚£∫';
-$s_related_to = '”Î∏√Œ Ã‚πÿ¡™£∫';
-$s_dependant_on = ' «∏√Œ Ã‚µƒ◊”œÓ£∫';
-$s_blocks = ' «∏√Œ Ã‚µƒ◊”œÓ£∫';
+$s_duplicate_of = '是该问题的重复：';
+$s_has_duplicate = '有重复问题：';
+$s_related_to = '与该问题关联：';
+$s_dependant_on = '是该问题的子项：';
+$s_blocks = '是该问题的父项：';
 
-$s_new_bug = '–¬Ω®Œ Ã‚';
-$s_bugnote_added = '“—ÃÌº”Œ Ã‚◊¢ Õ';
-$s_bugnote_edited = '“—±‡º≠Œ Ã‚◊¢ Õ';
-$s_bugnote_deleted = '“—…æ≥˝Œ Ã‚◊¢ Õ';
-$s_summary_updated = '’™“™“—–ﬁ∏ƒ';
-$s_description_updated = '√Ë ˆ“—–ﬁ∏ƒ';
-$s_additional_information_updated = '∏Ωº”–≈œ¢“—–ﬁ∏ƒ';
-$s_steps_to_reproduce_updated = 'Œ Ã‚÷ÿœ÷≤Ω÷Ë“—–ﬁ∏ƒ';
-$s_file_added = 'ÃÌº”¡À“‘œ¬Œƒº˛£∫';
-$s_file_deleted = '…æ≥˝¡À“‘œ¬Œƒº˛';
-$s_bug_deleted = '“—…æ≥˝Œ Ã‚';
+$s_new_bug = '新建问题';
+$s_bugnote_added = '已添加问题注释';
+$s_bugnote_edited = '已编辑问题注释';
+$s_bugnote_deleted = '已删除问题注释';
+$s_summary_updated = '摘要已修改';
+$s_description_updated = '描述已修改';
+$s_additional_information_updated = '附加信息已修改';
+$s_steps_to_reproduce_updated = '问题重现步骤已修改';
+$s_file_added = '添加了以下文件：';
+$s_file_deleted = '删除了以下文件';
+$s_bug_deleted = '已删除问题';
 
-$s_make_private = '±Íº«Œ™ÀΩ”–';
-$s_make_public = '±Íº«Œ™π´”–';
+$s_make_private = '标记为私有';
+$s_make_public = '标记为公有';
 
-$s_create_new_project_link = '¥¥Ω®–¬œÓƒø';
+$s_create_new_project_link = '创建新项目';
 
-$s_login_link = 'µ«¬º';
+$s_login_link = '登录';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'ƒ˙√ª”–  µ±µƒ»®œﬁ∂‘’‚∏ˆŒ Ã‚Ω¯––∏√≤Ÿ◊˜£∫';
-$s_bug_actiongroup_access = 'ƒ„Œﬁ»®÷¥––∏√œÓ≤Ÿ◊˜';
-$s_bug_actiongroup_status = 'Œﬁ∑®Ω´Œ Ã‚µƒ◊¥Ã¨∏ƒ≥…÷∏∂®µƒ◊¥Ã¨';
-$s_bug_actiongroup_category = 'Œﬁ∑®Ω´∏√Œ Ã‚–ﬁ∏ƒŒ™÷∏∂®µƒ¿‡±';
-$s_close_bugs_conf_msg = '»∑∂®“™πÿ±’’‚–©Œ Ã‚¬£ø';
-$s_delete_bugs_conf_msg = 'ƒ„»∑∂®“™…æ≥˝’‚–©Œ Ã‚¬£ø';
-$s_move_bugs_conf_msg = 'Ω´Œ Ã‚“∆∂ØµΩ';
-$s_copy_bugs_conf_msg = 'Ω´Œ Ã‚∏¥÷∆µΩ';
-$s_assign_bugs_conf_msg = 'Ω´Œ Ã‚∑÷≈…∏¯';
-$s_resolve_bugs_conf_msg = '—°‘Òœ‡πÿŒ Ã‚';
-$s_priority_bugs_conf_msg = '—°‘ÒŒ Ã‚”≈œ»º∂±';
-$s_status_bugs_conf_msg = '—°‘ÒŒ Ã‚◊¥Ã¨';
-$s_view_status_bugs_conf_msg = '—°‘ÒŒ Ã‚‰Ø¿¿◊¥Ã¨';
-$s_category_bugs_conf_msg = '—°‘ÒŒ Ã‚¿‡±';
-$s_set_sticky_bugs_conf_msg = 'ƒ„»∑∂®“™…Ë÷√/»°œ˚’‚–©Œ Ã‚µƒ sticky ¬£ø';
-$s_close_group_bugs_button = 'πÿ±’Œ Ã‚';
-$s_delete_group_bugs_button = '…æ≥˝Œ Ã‚';
-$s_move_group_bugs_button = '“∆∂ØŒ Ã‚';
-$s_copy_group_bugs_button = '∏¥÷∆Œ Ã‚';
-$s_assign_group_bugs_button = '∑÷≈…Œ Ã‚';
-$s_resolve_group_bugs_button = 'Ω‚æˆŒ Ã‚';
-$s_priority_group_bugs_button = '–ﬁ∏ƒ”≈œ»º∂±';
-$s_status_group_bugs_button = '–ﬁ∏ƒ◊¥Ã¨';
-$s_category_group_bugs_button = '∏¸–¬¿‡±';
-$s_view_status_group_bugs_button = '–ﬁ∏ƒ‰Ø¿¿◊¥Ã¨';
-$s_set_sticky_group_bugs_button = '…Ë÷√/»°œ˚ Sticky';
+$s_bug_actiongroup_failed = '您没有适当的权限对这个问题进行该操作：';
+$s_bug_actiongroup_access = '你无权执行该项操作';
+$s_bug_actiongroup_status = '无法将问题的状态改成指定的状态';
+$s_bug_actiongroup_category = '无法将该问题修改为指定的类别';
+$s_close_bugs_conf_msg = '确定要关闭这些问题吗？';
+$s_delete_bugs_conf_msg = '你确定要删除这些问题吗？';
+$s_move_bugs_conf_msg = '将问题移动到';
+$s_copy_bugs_conf_msg = '将问题复制到';
+$s_assign_bugs_conf_msg = '将问题分派给';
+$s_resolve_bugs_conf_msg = '选择相关问题';
+$s_priority_bugs_conf_msg = '选择问题优先级别';
+$s_status_bugs_conf_msg = '选择问题状态';
+$s_view_status_bugs_conf_msg = '选择问题浏览状态';
+$s_category_bugs_conf_msg = '选择问题类别';
+$s_set_sticky_bugs_conf_msg = '你确定要设置/取消这些问题的 sticky 吗？';
+$s_close_group_bugs_button = '关闭问题';
+$s_delete_group_bugs_button = '删除问题';
+$s_move_group_bugs_button = '移动问题';
+$s_copy_group_bugs_button = '复制问题';
+$s_assign_group_bugs_button = '分派问题';
+$s_resolve_group_bugs_button = '解决问题';
+$s_priority_group_bugs_button = '修改优先级别';
+$s_status_group_bugs_button = '修改状态';
+$s_category_group_bugs_button = '更新类别';
+$s_view_status_group_bugs_button = '修改浏览状态';
+$s_set_sticky_group_bugs_button = '设置/取消 Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = '◊€∫œ±®±Ì£®∞¥Œ Ã‚◊¥Ã¨£©';
-$s_graph_imp_priority_title = '◊€∫œ±®±Ì£®∞¥Œ Ã‚”≈œ»º∂±£©';
-$s_graph_imp_severity_title = '◊€∫œ±®±Ì£®∞¥Œ Ã‚—œ÷ÿ–‘£©';
-$s_graph_imp_category_title = '◊€∫œ±®±Ì£®∞¥œÓƒø∑÷¿‡£©';
-$s_graph_imp_resolution_title = '◊€∫œ±®±Ì£®∞¥ÕÍ≥…∂»£©';
-$s_by_status_pct = '∞¥Œ Ã‚◊¥Ã¨∞Ÿ∑÷±»';
-$s_by_priority_pct = '∞¥Œ Ã‚”≈œ»º∂±∞Ÿ∑÷±»';
-$s_by_severity_pct = '∞¥Œ Ã‚—œ÷ÿ–‘∞Ÿ∑÷±»';
-$s_by_category_pct = '∞¥œÓƒø∑÷¿‡∞Ÿ∑÷±»';
-$s_by_resolution_pct = '∞¥ÕÍ≥…∂»∞Ÿ∑÷±»';
-$s_by_severity_mix = '∞¥Œ Ã‚—œ÷ÿ–‘∫Õ◊¥Ã¨';
-$s_by_priority_mix = '∞¥Œ Ã‚”≈œ»º∂±∫Õ◊¥Ã¨';
-$s_by_resolution_mix = '∞¥Œ Ã‚ÕÍ≥…∂»∫Õ◊¥Ã¨';
-$s_synthesis_link = '◊€∫œ±®±Ì';
-$s_status_link = '∞¥◊¥Ã¨Õ≥º∆';
-$s_priority_link = '∞¥”≈œ»º∂±Õ≥º∆';
-$s_severity_link = '∞¥—œ÷ÿ–‘Õ≥º∆';
-$s_category_link = '∞¥∑÷¿‡Õ≥º∆';
-$s_resolution_link = '∞¥ÕÍ≥…∂»Õ≥º∆';
-$s_legend_still_open = '»‘»ª¥Úø™';
-$s_legend_resolved = '“—Ω‚æˆ';
-$s_legend_assigned = '“—∑÷≈…';
-$s_legend_total = '∫œº∆';
-$s_legend_opened = '“—¥Úø™';
-$s_legend_closed = '“—πÿ±’';
-$s_legend_reported = '“—±®∏Ê';
-$s_cumulative = '¿€º∆';
-$s_not_enough_data = '√ª”–◊„πªµƒ ˝æ›£¨Œﬁ∑®¥¥Ω®Õº–Œ±®±Ì°£';
+$s_graph_imp_status_title = '综合报表（按问题状态）';
+$s_graph_imp_priority_title = '综合报表（按问题优先级别）';
+$s_graph_imp_severity_title = '综合报表（按问题严重性）';
+$s_graph_imp_category_title = '综合报表（按项目分类）';
+$s_graph_imp_resolution_title = '综合报表（按完成度）';
+$s_by_status_pct = '按问题状态百分比';
+$s_by_priority_pct = '按问题优先级别百分比';
+$s_by_severity_pct = '按问题严重性百分比';
+$s_by_category_pct = '按项目分类百分比';
+$s_by_resolution_pct = '按完成度百分比';
+$s_by_severity_mix = '按问题严重性和状态';
+$s_by_priority_mix = '按问题优先级别和状态';
+$s_by_resolution_mix = '按问题完成度和状态';
+$s_synthesis_link = '综合报表';
+$s_status_link = '按状态统计';
+$s_priority_link = '按优先级别统计';
+$s_severity_link = '按严重性统计';
+$s_category_link = '按分类统计';
+$s_resolution_link = '按完成度统计';
+$s_legend_still_open = '仍然打开';
+$s_legend_resolved = '已解决';
+$s_legend_assigned = '已分派';
+$s_legend_total = '合计';
+$s_legend_opened = '已打开';
+$s_legend_closed = '已关闭';
+$s_legend_reported = '已报告';
+$s_cumulative = '累计';
+$s_not_enough_data = '没有足够的数据，无法创建图形报表。';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = '÷ªœ‘ æ—°÷–ƒ⁄»›';
+$s_hide_button = '只显示选中内容';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = '—°‘Ò“™¥Ú”°µƒ◊÷∂Œ';
-$s_printing_options_link = '¥Ú”°—°œÓ';
+$s_printing_preferences_title = '选择要打印的字段';
+$s_printing_options_link = '打印选项';
 
 # word and excel export
-$s_bugnote_title = 'Œ Ã‚◊¢ Õπ‹¿Ì»À' ;
-$s_bugnote_date = 'Œ Ã‚◊¢ Õ»’∆⁄';
-$s_bugnote_description = 'Œ Ã‚◊¢ Õƒ⁄»›';
+$s_bugnote_title = '问题注释管理人' ;
+$s_bugnote_date = '问题注释日期';
+$s_bugnote_description = '问题注释内容';
 
-$s_error_no_proceed = '«Î‘⁄ƒ„µƒ‰Ø¿¿∆˜÷– π”√°∞∫ÛÕÀ°±∞¥≈•¿¥∑µªÿµΩ…œ“ª“≥√Ê£¨’‚—˘ƒ˙ø…“‘’“µΩ∑¢…˙¡À ≤√¥Œ Ã‚ªÚ’ﬂΩ¯––±µƒ≤Ÿ◊˜£ªƒ˙ªπø…“‘µ„ª˜µº∫Ω¿∏÷–µƒ—°œÓ÷±Ω”Ã¯◊™µΩ“ª∏ˆ–¬µƒ«¯∂Œ°£';
+$s_error_no_proceed = '请在你的浏览器中使用“后退”按钮来返回到上一页面，这样您可以找到发生了什么问题或者进行别的操作；您还可以点击导航栏中的选项直接跳转到一个新的区段。';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = '÷¥––∏√≤Ÿ◊˜ ±∑¢…˙¥ÌŒÛ£¨ƒ„ø…ƒ‹–Ë“™Ω´¥ÀŒ Ã‚±®∏Ê∏¯ƒ„µƒœµÕ≥π‹¿Ì‘±°£';
-$MANTIS_ERROR[ERROR_SQL] = '∑¢…˙SQL¥ÌŒÛ£ª«ÎΩ´¥À¥ÌŒÛ±®∏Ê∏¯';
-$MANTIS_ERROR[ERROR_REPORT] = '‘⁄ƒ„µƒ±®±Ì÷–∑¢œ÷¥ÌŒÛ°£';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '√ª”–÷∏∂®Œƒº˛';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '¥À¿‡–ÕµƒŒƒº˛≤ª‘ –Ì…œ¥´';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ƒø¬º≤ª¥Ê‘⁄£ª«ÎºÏ≤ÈœÓƒø…Ë÷√°£';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '“—æ≠”–“ª∏ˆÕ¨√˚Œƒº˛¥Ê‘⁄£ª«Îœ»…æ≥˝∏√Œƒº˛°£';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '“—æ≠¥Ê‘⁄“ª∏ˆÕ¨√˚µƒœÓƒø°£';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '◊÷∂Œ°∞%s°± «±ÿ–ÎÃÓ–¥µƒ£¨≤ªƒ‹Œ™ø’∞◊£¨«Î÷ÿ–¬ÃÓ–¥°£';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '∏√’ ∫≈…Ë÷√Œ™±ª±£ª§◊¥Ã¨£¨Ω‚≥˝±£ª§«∞ƒ„≤ªƒ‹ π”√∏√’À∫≈°£';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Œﬁ»®œﬁ¥Ê»°°£';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Œƒº˛…œ¥´ ß∞‹£¨Mantis œµÕ≥Œﬁ∑®∂¡»°Œƒº˛£ª«ÎºÏ≤ÈœÓƒø…Ë÷√°£';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Œƒº˛…œ¥´ ß∞‹£¨ø…ƒ‹ «Œƒº˛¥Û–°≥¨≥ˆ PHP µƒ…œ¥´…œœﬁ‘Ï≥…µƒ°£';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '√ª”–’“µΩµ±«∞“≥µƒ“ª∏ˆ±ÿ–Î≤Œ ˝°£';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '“—¥Ê‘⁄Õ¨√˚”√ªß£¨«Î∑µªÿ«∞“ª“≥¡ÌÕ‚—°‘Ò“ª∏ˆ”√ªß√˚°£'; 
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '√ª”–’“µΩ…Ë÷√—°œÓ°∞%s°±°£';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '√ª”–’“µΩ◊÷∑˚¥Æ°∞%s°±°£';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '√ª”–’“µΩŒ Ã‚◊¢ Õ°£';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '√ª”–’“µΩœÓƒø°£';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '√ª”–’“µΩ ˝æ›ø‚◊÷∂Œ °∞%s°±°£';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Œﬁ∑®¡¨Ω” FTP ∑˛ŒÒ∆˜°£';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '÷˜≥÷»À∂‘¥¶”⁄µ±«∞◊¥Ã¨µƒŒ Ã‚√ª”–◊„πª¥Ê»°»®Ω¯––¥¶¿Ì°£';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '“—æ≠¥Ê‘⁄Õ¨√˚œÓƒø£¨«Î∑µªÿ«∞“ª“≥÷ÿ–¬ ‰»ÎœÓƒø√˚≥∆°£';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'œÓƒø√˚≥∆Œﬁ–ß£¨œÓƒø√˚≥∆≤ªƒ‹Œ™ø’°£';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = '√ª”–’“µΩ”√ªß°£';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '‰Ø¿¿∆˜¥¢¥Êµƒµ«¬º◊ ¡œŒﬁ–ß£ª“≤–Ìƒ„µƒ’ ∫≈“—æ≠±ª…æ≥˝¡À£ø';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '√ª”–’“µΩ’ ∫≈µƒ≈‰÷√–≈œ¢';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = '√ª”–’“µΩπ´∏Ê°£';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '√‹¬Î”Î∫À÷§Ω·π˚≤ª∆•≈‰';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '‘§∆⁄ %s Ω” ’µΩµƒ « ˝◊È£¨µ´ µº  ’µΩµƒ «◊÷∑˚¥Æ°£';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '‘§∆⁄ %s Ω” ’µΩµƒ «◊÷∑˚¥Æ£¨µ´ µº  ’µΩµƒ « ˝◊È°£';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '‘§∆⁄ %s Ω” ’µΩµƒ ˝æ›Œ™ ˝÷µ°£';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '√ª”–’“µΩŒ Ã‚ %d °£';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]    = '√ª”–’“µΩπ˝¬À∆˜ %d °£';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'ƒ„≥¢ ‘ π”√µƒπ˝¬À∆˜∏Ò Ω±»Ωœæ…£¨Œﬁ∑®∏¸–¬£¨«Î÷ÿ–¬Ω®¡¢∏√π˝¬À∆˜';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Œﬁ–ßµƒ Email µÿ÷∑';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '√ª”–’“µΩ’ ∫≈µƒ∏ˆ»À≈‰÷√°£';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '≤ª‘ –Ì…œ¥´∏√¿‡–ÕµƒŒƒº˛°£';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Œƒº˛÷ÿ∏¥£¨«Îœ»…æ≥˝‘≠”–µƒŒƒº˛°£';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Œﬁ–ßµƒ…œ¥´¬∑æ∂£ªƒø¬º≤ª¥Ê‘⁄ªÚ Web ∑˛ŒÒ∆˜≤ªƒ‹–¥»Î∏√ƒø¬º';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '√ª”–…œ¥´Œƒº˛£¨«Î∑µªÿ≤¢—°‘Ò“™…œ¥´µƒŒƒº˛';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '…œ¥´µƒŒƒº˛≤ªƒ‹◊™“∆µΩŒƒº˛¥¢¥Êƒø¬º£ªƒø¬º≤ª¥Ê‘⁄ªÚ Web ∑˛ŒÒ∆˜≤ªƒ‹–¥»Î∏√ƒø¬º';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = '≤ªƒ‹Ω´Œ Ã‚…Ë÷√Œ™◊‘…Ìµƒ÷ÿ∏¥Œ Ã‚°£';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '√ª”–’“µΩ◊‘∂®“Â◊÷∂Œ';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '√˚≥∆÷ÿ∏¥°£';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '◊Ó…Ÿªπ”–“ª∏ˆœÓƒø»‘»ª‘⁄ π”√∏√◊÷∂Œ°£';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = ' ˝÷µ∂‘∏√◊÷∂Œ «Œﬁ–ßµƒ';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '◊‘∂®“Â◊÷∂Œ∂®“ÂŒﬁ–ß';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP —È÷§ ß∞‹';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '¡¨Ω”÷¡ LDAP ∑˛ŒÒ∆˜ ß∞‹';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = '∏¸–¬ LDAP º«¬º ß∞‹°£';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '√ª”–’“µΩ LDAP ’ ∫≈º«¬º°£';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '¡¨Ω”÷¡ ˝æ›ø‚∑˛ŒÒ∆˜ ß∞‹£ª ˝æ›ø‚∑µªÿµƒ¥ÌŒÛ–≈œ¢ «£∫#%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = ' ˝æ›ø‚≤È—Ø ß∞‹°£ ˝æ›ø‚∑µªÿµƒ¥ÌŒÛ–≈œ¢ «£∫#%d: %s ≤È—Ø£∫%s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = ' ˝æ›ø‚—°‘Ò ß∞‹°£ ˝æ›ø‚∑µªÿµƒ¥ÌŒÛ–≈œ¢ «£∫#%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '“—¥Ê‘⁄Õ¨√˚¿‡±°£';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '√ª”–÷∏∂®µƒ∏¥÷∆≤Ÿ◊˜°£';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '√ª”–’“µΩ¿‡±°£';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '“—¥Ê‘⁄Õ¨√˚∞Ê±æ°£';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '√ª”–’“µΩ∞Ê±æ°∞%s°± °£';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '’ ∫≈√˚≥∆Œﬁ–ß£ª’ ∫≈√˚≥∆÷ªƒ‹”…◊÷¥Æ°¢ ˝◊÷°¢ø’∏Ò°¢°∞-°±ªÚ°∞_°±◊È≥…°£';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '”√ªß√ª”–◊„πªµƒ¥Ê»°»®œﬁ';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '—°∂®µƒ°∞’Ê µ–’√˚°±”Î¡Ì“ª∏ˆ’ ∫≈µƒµ«¬º’ ∫≈√˚≥∆œ‡Õ¨£ª«Î÷ÿ–¬—°‘Ò°£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '◊ ÷˙…–Œ¥∆Ù”√°£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '√ª”–’“µΩ◊ ÷˙ %d °£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '◊ ÷˙Ω∂Ó©z%s©{µÕ”⁄◊ÓµÕ◊ ÷˙Ω∂Ó©z%s©{°£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '÷˜≥÷»À√ª”–±ÿ“™µƒ¥Ê»°»®œﬁ¥¶¿Ì◊ ÷˙Œ Ã‚°£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'æ‹æ¯¥Ê»°£∫÷∏≈… ‹◊ ÷˙µƒŒ Ã‚–Ë“™∏¸∏ﬂµƒ¥Ê»°»®œﬁ°£';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '◊ ÷˙’ﬂ√ª”–Ã·π© Email µÿ÷∑£ª«Î∏¸–¬ƒ„µƒ∏ˆ»À…Ë÷√°£';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '…Ë÷√—°œÓ°∞%s°±µƒ ˝÷µ°∞%s°±Œﬁ–ß';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '”…”⁄Œ Ã‚°∞%d°± «÷ª∂¡µƒ£¨≤Ÿ◊˜Œﬁ∑®÷¥––';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "’‚¡Ω∏ˆŒ Ã‚“—”–πÿ¡™πÿœµ°£";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "√ª”–’“µΩπÿ¡™πÿœµ°£";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "æ‹æ¯¥Ê»°£∫Œ Ã‚ %d –Ë“™∏¸∏ﬂ¥Ê»°»®œﬁ°£";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Œ Ã‚≤ªƒ‹”Î◊‘…Ìπÿ¡™°£";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '»∑»œ–£—È÷µ≤ª∆•≈‰£¨«Î÷ÿ ‘°£';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '°∞Õ¸º«√‹¬Î°±π¶ƒ‹Œ¥∆Ù”√°£';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'ƒ„–Ë“™Ã·π© Email µÿ÷∑”√”⁄÷ÿ–¬…Ë÷√√‹¬Î';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Ã·π©µƒ–≈œ¢≤ª∑˚∫œ»Œ∫Œ“—◊¢≤·µƒ’ ∫≈£°';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '»∑»œ URL Œﬁ–ßªÚ“—æ≠Ω¯––¡À»∑»œ£ª«Î÷ÿ–¬signup°£';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '“—¥ÔµΩ◊Ó∏ﬂ«Î«Û ˝¡ø£ª«Î¡™¬ÁœµÕ≥π‹¿Ì‘±°£';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '¥À≤Ÿ◊˜Ω´‘Ï≥…œÓƒø¥” ÙΩ·ππ∑¢…˙¥ÌŒÛµƒ—≠ª∑Ω·ππ°£';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ƒ„≤ªƒ‹∏¸∏ƒœµÕ≥÷–Œ®“ª“ª∏ˆœµÕ≥π‹¿Ì‘±µƒ¥Ê»°»®œﬁ°£';
+$MANTIS_ERROR[ERROR_GENERIC] = '执行该操作时发生错误，你可能需要将此问题报告给你的系统管理员。';
+$MANTIS_ERROR[ERROR_SQL] = '发生SQL错误；请将此错误报告给';
+$MANTIS_ERROR[ERROR_REPORT] = '在你的报表中发现错误。';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '没有指定文件';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '此类型的文件不允许上传';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '目录不存在；请检查项目设置。';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '已经有一个同名文件存在；请先删除该文件。';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '已经存在一个同名的项目。';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '字段“%s”是必须填写的，不能为空白，请重新填写。';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '该帐号设置为被保护状态，解除保护前你不能使用该账号。';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权限存取。';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，Mantis 系统无法读取文件；请检查项目设置。';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传上限造成的。';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。'; 
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目。';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '没有找到数据库字段 “%s”。';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = '无法连接 FTP 服务器。';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '主持人对处于当前状态的问题没有足够存取权进行处理。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '已经存在同名项目，请返回前一页重新输入项目名称。';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '项目名称无效，项目名称不能为空。';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = '没有找到用户。';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '浏览器储存的登录资料无效；也许你的帐号已经被删除了？';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '没有找到帐号的配置信息';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = '没有找到公告。';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '密码与核证结果不匹配';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = '预期 %s 接收到的是数组，但实际收到的是字符串。';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '预期 %s 接收到的是字符串，但实际收到的是数组。';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '预期 %s 接收到的数据为数值。';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '没有找到问题 %d 。';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]    = '没有找到过滤器 %d 。';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = '你尝试使用的过滤器格式比较旧，无法更新，请重新建立该过滤器';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '无效的 Email 地址';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '没有找到帐号的个人配置。';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = '不允许上传该类型的文件。';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = '文件重复，请先删除原有的文件。';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '无效的上传路径；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '没有上传文件，请返回并选择要上传的文件';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '上传的文件不能转移到文件储存目录；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = '不能将问题设置为自身的重复问题。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '没有找到自定义字段';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '名称重复。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少还有一个项目仍然在使用该字段。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '数值对该字段是无效的';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '自定义字段定义无效';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP 验证失败';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '连接至 LDAP 服务器失败';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = '更新 LDAP 记录失败。';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '没有找到 LDAP 帐号记录。';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = '连接至数据库服务器失败；数据库返回的错误信息是：#%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = '数据库查询失败。数据库返回的错误信息是：#%d: %s 查询：%s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = '数据库选择失败。数据库返回的错误信息是：#%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '已存在同名类别。';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '没有指定的复制操作。';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '没有找到类别。';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '已存在同名版本。';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '没有找到版本“%s” 。';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '帐号名称无效；帐号名称只能由字串、数字、空格、“-”或“_”组成。';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '用户没有足够的存取权限';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '选定的“真实姓名”与另一个帐号的登录帐号名称相同；请重新选择。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '资助尚未启用。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '没有找到资助 %d 。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '资助金额﹝%s﹞低于最低资助金额﹝%s﹞。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '主持人没有必要的存取权限处理资助问题。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '拒绝存取：指派受资助的问题需要更高的存取权限。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '资助者没有提供 Email 地址；请更新你的个人设置。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '设置选项“%s”的数值“%s”无效';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '由于问题“%d”是只读的，操作无法执行';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "这两个问题已有关联关系。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "没有找到关联关系。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "拒绝存取：问题 %d 需要更高存取权限。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "问题不能与自身关联。";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '确认校验值不匹配，请重试。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '“忘记密码”功能未启用。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '你需要提供 Email 地址用于重新设置密码';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '提供的信息不符合任何已注册的帐号！';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '确认 URL 无效或已经进行了确认；请重新signup。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到最高请求数量；请联络系统管理员。';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
 
-#$s_login_error = 'ƒ„µƒ’À∫≈“—æ≠Õ£”√ªÚ“—±ªÀ¯∂®£®”…”⁄∂‡¥Œµ«¬º ß∞‹µº÷¬À¯∂®£©£¨ªÚ’ﬂƒ„ ‰»Îµƒ”√ªß√˚∫Õ√‹¬Î «¥ÌŒÛµƒ°£';
-$s_login_error = '∫‹“≈∫∂£¨ƒ„Œﬁ∑®µ«¬Ω£¨«Î»∑»œ «∑Òƒ„’˝»∑µÿ ‰»Î¡À”√ªß√˚∫Õ√‹¬Î≤¢≥¢ ‘÷ÿ–¬µ«¬º£ª»Áπ˚»‘»ªŒﬁ∑®µ«¬º£¨«Î◊…—Øπ‹¿Ì‘± «∑Òƒ„µƒ’À∫≈±ªÀ¯∂®°£';
-$s_login_cookies_disabled = 'ƒ„µƒ‰Ø¿¿∆˜Ω˚”√¡À Cookies π¶ƒ‹£¨ªÚ’ﬂƒ„ø…ƒ‹ π”√¡À≤ª÷ß≥÷ Cookie µƒæ…∞Ê‰Ø¿¿∆˜£ª«Î∆Ù”√ Cookie£¨ªÚ’ﬂ…˝º∂ƒ„µƒ‰Ø¿¿∆˜°£';
+#$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
+$s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
+$s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
 # General Strings
-$s_go_back = '∫ÛÕÀ';
-$s_proceed = '∞¥’‚¿ÔºÃ–¯';
+$s_go_back = '后退';
+$s_proceed = '按这里继续';
 
-$s_switch = '«–ªªœÓƒø';
-$s_logged_in_as = 'µ«¬ºŒ™';
+$s_switch = '切换项目';
+$s_logged_in_as = '登录为';
 
 $s_prefix_for_deleted_users = 'user';
 
-$s_administrator = 'π‹¿Ì‘±';
-$s_myself = '◊‘…Ì';
-$s_default_access_level = 'ƒ¨»œº∂±';
+$s_administrator = '管理员';
+$s_myself = '自身';
+$s_default_access_level = '默认级别';
 
-$s_issue_status_percentage = 'Œ Ã‚◊¥Ã¨∞Ÿ∑÷±»';
+$s_issue_status_percentage = '问题状态百分比';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:≤Èø¥»À‘±,25:±®∏Ê»À‘±,40:–ﬁ∏ƒ»À‘±,55:ø™∑¢»À‘±,70:æ≠¿Ì,90:π‹¿Ì‘±';
-$s_project_status_enum_string     = '10:ø™∑¢÷–,30:“—∑¢≤º,50:Œ»∂®,70:Õ£÷πŒ¨ª§';
-$s_project_view_state_enum_string = '10:π´π≤,50:ÀΩ”–';
-$s_view_state_enum_string         = '10:π´π≤,50:ÀΩ”–';
+$s_access_levels_enum_string      = '10:查看人员,25:报告人员,40:修改人员,55:开发人员,70:经理,90:管理员';
+$s_project_status_enum_string     = '10:开发中,30:已发布,50:稳定,70:停止维护';
+$s_project_view_state_enum_string = '10:公共,50:私有';
+$s_view_state_enum_string         = '10:公共,50:私有';
 
-$s_priority_enum_string           = '10:Œﬁ,20:µÕ,30:÷–,40:∏ﬂ,50:º”º±,60:Ãÿº±';
-$s_severity_enum_string           = '10:–¬Ãÿ–‘,20:Œ¢≤ª◊„µ¿,30:Œƒ◊÷¥ÌŒÛ,40:≤ª∫œ¿ÌªÚ±≈§,50:¥Œ“™¥ÌŒÛ,60:—œ÷ÿ¥ÌŒÛ,70:œµÕ≥±¿¿£,80:œµÕ≥À¿À¯';
-$s_reproducibility_enum_string    = '10:æ≠≥£,30:”– ±,50:ÀÊª˙,70:√ª”– ‘—È,90:Œﬁ∑®÷ÿ∏¥,100:≤ª  ”√';
-$s_status_enum_string             = '10:–¬Ω®,20:¥Úªÿ,30:π´»œ,40:“—»∑»œ,50:“—∑÷≈…,80:“—Ω‚æˆ,90:“—πÿ±’';
-$s_resolution_enum_string         = '10:Œ¥¥¶¿Ì,20:“—–ﬁ’˝,30:÷ÿ–¬¥Úø™,40:Œﬁ∑®÷ÿœ÷,50:Œﬁ∑®–ﬁ∏¥,60:÷ÿ∏¥Œ Ã‚,70:≤ª «Œ Ã‚,80:‘›Õ£,90:≤ª◊ˆ–ﬁ∏ƒ';
-$s_projection_enum_string         = '10:Œﬁ,30:∫‹–°µƒ∏ƒ∂Ø,50:Ωœ–°µƒ–ﬁ’˝,70:÷ÿ“™–ﬁ’˝,90:÷ÿ–¬…Ëº∆';
-$s_eta_enum_string                = '10:Œﬁ,20:–°”⁄ 1 ÃÏ,30:2-3 ÃÏ,40:–°”⁄ 1 –«∆⁄,50:–°”⁄ 1 ∏ˆ‘¬,60:≥¨π˝ 1 ∏ˆ‘¬';
-$s_sponsorship_enum_string = '0:Œ¥÷ß∏∂,1:“—«Î«Û,2:“—÷ß∏∂';
+$s_priority_enum_string           = '10:无,20:低,30:中,40:高,50:加急,60:特急';
+$s_severity_enum_string           = '10:新特性,20:微不足道,30:文字错误,40:不合理或别扭,50:次要错误,60:严重错误,70:系统崩溃,80:系统死锁';
+$s_reproducibility_enum_string    = '10:经常,30:有时,50:随机,70:没有试验,90:无法重复,100:不适用';
+$s_status_enum_string             = '10:新建,20:打回,30:公认,40:已确认,50:已分派,80:已解决,90:已关闭';
+$s_resolution_enum_string         = '10:未处理,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复问题,70:不是问题,80:暂停,90:不做修改';
+$s_projection_enum_string         = '10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计';
+$s_eta_enum_string                = '10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月';
+$s_sponsorship_enum_string = '0:未支付,1:已请求,2:已支付';
 
 # Email Strings
-$s_new_account_subject = 'Œ Ã‚∏˙◊ŸœµÕ≥’ ∫≈◊¢≤·';
-$s_new_account_greeting = '–ª–ªƒ„◊¢≤·±æœµÕ≥. ƒ„µƒµ«¬Ω’ ∫≈√˚≥∆ «°∞';
-$s_new_account_greeting2 = '°±°£Œ™¡ÀÕÍ≥…ƒ„µƒ◊¢≤·£¨«Î∑√Œ “‘œ¬Õ¯“≥…Ë÷√–¬µƒ√‹¬Î£∫';
-$s_new_account_username = '”√ªß√˚: ';
-$s_new_account_message = '»Áπ˚ƒ„¥”Œ¥…Í«Îπ˝◊¢≤·±æœµÕ≥£¨«Î∫ˆ¬‘¥Àœ˚œ¢' . '\n\n';
-$s_new_account_do_not_reply = '¥À” º˛”…œµÕ≥◊‘∂Ø…˙≥…£¨«ÎŒªÿ∏¥';
-$s_new_account_email = 'µÁ◊”” œ‰: ';
-$s_new_account_IP = 'IP µÿ÷∑: ';
-$s_new_account_signup_msg = '“—¥¥Ω®»Áœ¬’À∫≈£∫';
+$s_new_account_subject = '问题跟踪系统帐号注册';
+$s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是“';
+$s_new_account_greeting2 = '”。为了完成你的注册，请访问以下网页设置新的密码：';
+$s_new_account_username = '用户名: ';
+$s_new_account_message = '如果你从未申请过注册本系统，请忽略此消息' . '\n\n';
+$s_new_account_do_not_reply = '此邮件由系统自动生成，请勿回复';
+$s_new_account_email = '电子邮箱: ';
+$s_new_account_IP = 'IP 地址: ';
+$s_new_account_signup_msg = '已创建如下账号：';
 
-$s_reset_request_msg = 'ƒ„«Î«Û¡ÀÕ®π˝µÁ◊”” º˛»∑»œµƒ√‹¬Î±‰∏¸(»Áπ˚ƒ„¥”Œ¥«Î«Û«Î∫ˆ¬‘¥À–≈œ¢)£¨ «Î∑√Œ “‘œ¬Õ¯“≥–ﬁ∏ƒƒ„µƒ√‹¬Î:';
-$s_reset_request_in_progress_msg = '«ÎÃÓ∫√ƒ„µƒ”√ªß√˚∫Õ” º˛µÿ÷∑£¨œµÕ≥Ω´◊‘∂Ø∑¢»∑»œ” º˛µΩƒ„µƒ–≈œ‰£¨ ’µΩ” º˛∫Û«Î∞¥” º˛¿Ôµƒ≤Ω÷Ë–ﬁ∏ƒƒ„µƒ√‹¬Î°£';
+$s_reset_request_msg = '你请求了通过电子邮件确认的密码变更(如果你从未请求请忽略此信息)， 请访问以下网页修改你的密码:';
+$s_reset_request_in_progress_msg = '请填好你的用户名和邮件地址，系统将自动发确认邮件到你的信箱，收到邮件后请按邮件里的步骤修改你的密码。';
 
-$s_email_notification_title_for_status_bug_new = 'œ¬¡–Œ Ã‚µƒ◊¥Ã¨œ÷‘⁄±ª(÷ÿ–¬)…Ë÷√Œ™–¬Ω®';
-$s_email_notification_title_for_status_bug_feedback = 'œ¬¡–Œ Ã‚“—±ª¥Úªÿ°£';
-$s_email_notification_title_for_status_bug_acknowledged = 'œ¬¡–Œ Ã‚“—æ≠±ªπ´»œ°£';
-$s_email_notification_title_for_status_bug_confirmed = 'œ¬¡–Œ Ã‚“—æ≠±ª»∑»œ°£';
-$s_email_notification_title_for_status_bug_assigned = 'œ¬¡–Œ Ã‚“—æ≠±ª∑÷≈…°£';
-$s_email_notification_title_for_status_bug_resolved = 'œ¬¡–Œ Ã‚“—æ≠±ªΩ‚æˆ';
-$s_email_notification_title_for_status_bug_closed = 'œ¬¡–Œ Ã‚“—æ≠πÿ±’';
+$s_email_notification_title_for_status_bug_new = '下列问题的状态现在被(重新)设置为新建';
+$s_email_notification_title_for_status_bug_feedback = '下列问题已被打回。';
+$s_email_notification_title_for_status_bug_acknowledged = '下列问题已经被公认。';
+$s_email_notification_title_for_status_bug_confirmed = '下列问题已经被确认。';
+$s_email_notification_title_for_status_bug_assigned = '下列问题已经被分派。';
+$s_email_notification_title_for_status_bug_resolved = '下列问题已经被解决';
+$s_email_notification_title_for_status_bug_closed = '下列问题已经关闭';
 
-$s_email_notification_title_for_action_bug_submitted = 'œ¬¡–Œ Ã‚“—æ≠Ã·Ωª';
-$s_email_notification_title_for_action_bug_assigned = 'œ¬¡–Œ Ã‚“—æ≠±ª∑÷≈…';
-$s_email_notification_title_for_action_bug_reopened = 'œ¬¡–Œ Ã‚÷ÿ–¬¥Úø™';
-$s_email_notification_title_for_action_bug_deleted = 'œ¬¡–Œ Ã‚“—æ≠±ª…æ≥˝';
-$s_email_notification_title_for_action_bug_updated = 'œ¬¡–Œ Ã‚“—æ≠±ª∏¸–¬';
-$s_email_notification_title_for_action_sponsorship_added = '“—Œ™œ¬¡–Œ Ã‚ÃÌº”◊ ÷˙';
-$s_email_notification_title_for_action_sponsorship_updated = 'œ¬¡–Œ Ã‚µƒ“ªœÓ◊ ÷˙±ª–ﬁ∏ƒ°£';
-$s_email_notification_title_for_action_sponsorship_deleted = 'œ¬¡–Œ Ã‚µƒ“ªœÓ◊ ÷˙±ª≥∑œ˙°£';
+$s_email_notification_title_for_action_bug_submitted = '下列问题已经提交';
+$s_email_notification_title_for_action_bug_assigned = '下列问题已经被分派';
+$s_email_notification_title_for_action_bug_reopened = '下列问题重新打开';
+$s_email_notification_title_for_action_bug_deleted = '下列问题已经被删除';
+$s_email_notification_title_for_action_bug_updated = '下列问题已经被更新';
+$s_email_notification_title_for_action_sponsorship_added = '已为下列问题添加资助';
+$s_email_notification_title_for_action_sponsorship_updated = '下列问题的一项资助被修改。';
+$s_email_notification_title_for_action_sponsorship_deleted = '下列问题的一项资助被撤销。';
 
-$s_email_notification_title_for_action_bugnote_submitted = '’‚∏ˆŒ Ã‚÷––¬‘ˆº”¡À“ª∏ˆ◊¢ Õ°£';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = 'œ¬√ÊµƒŒ Ã‚±ª…Ë÷√Œ™”ÎŒ Ã‚ %s ÷ÿ∏¥°£';
-$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Œ Ã‚ %s “—æ≠±ª÷√Œ™”Îœ¬¡–Œ Ã‚÷ÿ∏¥°£';
-$s_email_notification_title_for_action_related_to_relationship_added = 'œ¬√ÊµƒŒ Ã‚“—æ≠…Ë÷√Œ™∫ÕŒ Ã‚ %s œ‡πÿ¡™.';
-$s_email_notification_title_for_action_dependant_on_relationship_added = 'œ¬√ÊµƒŒ Ã‚“—æ≠±ª…Ë÷√Œ™Œ Ã‚ %s µƒ∏∏œÓŒ Ã‚°£';
-$s_email_notification_title_for_action_blocks_relationship_added = 'œ¬√ÊµƒŒ Ã‚“—æ≠±ª…Ë÷√Œ™Œ Ã‚ %s µƒ◊”œÓŒ Ã‚°£';
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'œ¬√ÊµƒŒ Ã‚“—æ≠≤ª‘Ÿ±ª…Ë÷√Œ™Œ Ã‚ %s µƒ÷ÿ∏¥';
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '“ÚŒ™±ª…Ë÷√Œ™œ¬√ÊµƒŒ Ã‚µƒ÷ÿ∏¥£¨Œ Ã‚ %s “—æ≠±ª…æ≥˝°£';
-$s_email_notification_title_for_action_related_to_relationship_deleted = 'œ¬√ÊµƒŒ Ã‚“—æ≠±ª…Ë÷√Œ™∫ÕŒ Ã‚ %s √ª”–πÿ¡™°£';
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'œ¬√ÊµƒŒ Ã‚“—æ≠≤ª‘Ÿ±ª…Ë÷√Œ™Œ Ã‚ %s µƒ∏∏œÓŒ Ã‚°£';
-$s_email_notification_title_for_action_blocks_relationship_deleted = 'œ¬√ÊµƒŒ Ã‚“—æ≠≤ª‘Ÿ±ª…Ë÷√Œ™Œ Ã‚ %s µƒ◊”œÓŒ Ã‚°£';
-$s_email_notification_title_for_action_relationship_child_resolved = 'œ‡πÿ¡™µƒŒ Ã‚ %s “—æ≠±ªΩ‚æˆ°£';
-$s_email_notification_title_for_action_relationship_child_closed = 'œ‡πÿ¡™µƒŒ Ã‚ %s “—æ≠±ªπÿ±’°£';
+$s_email_notification_title_for_action_bugnote_submitted = '这个问题中新增加了一个注释。';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = '下面的问题被设置为与问题 %s 重复。';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = '问题 %s 已经被置为与下列问题重复。';
+$s_email_notification_title_for_action_related_to_relationship_added = '下面的问题已经设置为和问题 %s 相关联.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = '下面的问题已经被设置为问题 %s 的父项问题。';
+$s_email_notification_title_for_action_blocks_relationship_added = '下面的问题已经被设置为问题 %s 的子项问题。';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的重复';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = '因为被设置为下面的问题的重复，问题 %s 已经被删除。';
+$s_email_notification_title_for_action_related_to_relationship_deleted = '下面的问题已经被设置为和问题 %s 没有关联。';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的父项问题。';
+$s_email_notification_title_for_action_blocks_relationship_deleted = '下面的问题已经不再被设置为问题 %s 的子项问题。';
+$s_email_notification_title_for_action_relationship_child_resolved = '相关联的问题 %s 已经被解决。';
+$s_email_notification_title_for_action_relationship_child_closed = '相关联的问题 %s 已经被关闭。';
 
-$s_email_reporter = '±®∏Ê»À';
-$s_email_handler = '¥¶¿Ì»À';
-$s_email_project = 'œÓƒø';
-$s_email_bug = 'Œ Ã‚±‡∫≈';
-$s_email_category = '∑÷¿‡';
-$s_email_reproducibility = '≥ˆœ÷∆µ¬ ';
-$s_email_severity = '—œ÷ÿ–‘';
-$s_email_priority = '”≈œ»º∂';
-$s_email_status = '◊¥Ã¨';
-$s_email_resolution = 'ÕÍ≥…∂»';
-$s_email_duplicate = '∏¥÷∆';
-$s_email_fixed_in_version = '–ﬁ’˝∏√Œ Ã‚µƒ∞Ê±æ∫≈';
-$s_email_date_submitted = '±®∏Ê»’∆⁄';
-$s_email_last_modified = '…œ¥Œ∏¸–¬';
-$s_email_summary =  '’™“™';
-$s_email_description = 'Àµ√˜';
+$s_email_reporter = '报告人';
+$s_email_handler = '处理人';
+$s_email_project = '项目';
+$s_email_bug = '问题编号';
+$s_email_category = '分类';
+$s_email_reproducibility = '出现频率';
+$s_email_severity = '严重性';
+$s_email_priority = '优先级';
+$s_email_status = '状态';
+$s_email_resolution = '完成度';
+$s_email_duplicate = '复制';
+$s_email_fixed_in_version = '修正该问题的版本号';
+$s_email_date_submitted = '报告日期';
+$s_email_last_modified = '上次更新';
+$s_email_summary =  '摘要';
+$s_email_description = '说明';
 
 # account_delete.php
-$s_account_protected_msg = '’ ∫≈±ª±£ª§£¨Œﬁ∑®∏¸∏ƒ…Ë÷√...';
-$s_account_removed_msg = 'ƒ„µƒ’ ∫≈“—æ≠±ª…æ≥˝...';
+$s_account_protected_msg = '帐号被保护，无法更改设置...';
+$s_account_removed_msg = '你的帐号已经被删除...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'ƒ„»∑∂®“™…æ≥˝ƒ„µƒ’ ∫≈¬£ø';
-$s_delete_account_button = '…æ≥˝’ ∫≈';
+$s_confirm_delete_msg = '你确定要删除你的帐号吗？';
+$s_delete_account_button = '删除帐号';
 
 # account_page.php
-$s_manage_profiles_link = 'π‹¿Ì∆ΩÃ®≈‰÷√';
-$s_change_preferences_link = '∏¸∏ƒ∏ˆ»À…Ë÷√';
-$s_edit_account_title = '±‡º≠’ ∫≈';
-$s_username = '’ ∫≈';
-$s_realname = '’Ê µ–’√˚';
+$s_manage_profiles_link = '管理平台配置';
+$s_change_preferences_link = '更改个人设置';
+$s_edit_account_title = '编辑帐号';
+$s_username = '帐号';
+$s_realname = '真实姓名';
 $s_email = 'Email';
-$s_password = '√‹¬Î';
-$s_no_password_change = '∏√√‹¬Î±ª¡Ì“ª∏ˆœµÕ≥À˘øÿ÷∆£¨“Ú¥À≤ªƒ‹‘⁄’‚¿Ô–ﬁ∏ƒ°£';
-$s_confirm_password  = '»∑»œ√‹¬Î';
-$s_access_level = '¥Ê»°»®œﬁ';
-$s_update_user_button = '∏¸–¬’ ∫≈–≈œ¢';
-$s_verify_warning = 'ƒ„µƒ’À∫≈–≈œ¢“—æ≠Ω¯––¡ÀºÏ—È£¨ƒ„À˘ ’µΩµƒ’À∫≈ºÏ—È–≈œ¢œ÷‘⁄“—æ≠ ß–ß°£';
-$s_verify_change_password = 'ƒ„±ÿ–Î‘⁄’‚¿Ô…Ë÷√√‹¬Î£¨∑Ò‘ÚΩ´Œﬁ∑®µ«¬º°£';
+$s_password = '密码';
+$s_no_password_change = '该密码被另一个系统所控制，因此不能在这里修改。';
+$s_confirm_password  = '确认密码';
+$s_access_level = '存取权限';
+$s_update_user_button = '更新帐号信息';
+$s_verify_warning = '你的账号信息已经进行了检验，你所收到的账号检验信息现在已经失效。';
+$s_verify_change_password = '你必须在这里设置密码，否则将无法登录。';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = '»± °’ ∫≈…Ë÷√';
-$s_default_project = '»± °œÓƒø';
-$s_advanced_report = '∏ﬂº∂±®∏Ê';
-$s_advanced_view = '∏ﬂº∂≤Èø¥';
-$s_advanced_update = '∏ﬂº∂∏¸–¬';
-$s_refresh_delay = 'À¢–¬—”≥Ÿ';
-$s_redirect_delay = '÷ÿ∂®œÚ—” ±(√Î)';
-$s_with_minimum_severity = 'Œ Ã‚µƒ◊ÓµÕ—œ÷ÿº∂±Œ™£∫';
-$s_bugnote_order = 'Œ Ã‚◊¢ Õ≈≈–ÚπÊ‘Ú';
-$s_bugnote_order_asc = '…˝–Ú';
-$s_bugnote_order_desc = 'Ωµ–Ú';
-$s_email_on_new = 'µ±–¬Ω®Œ Ã‚ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_assigned = 'µ±∑÷≈…Œ Ã‚ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_feedback = 'µ±¥ÚªÿŒ Ã‚ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_resolved = 'µ±Ω‚æˆŒ Ã‚ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_closed = 'µ±πÿ±’Œ Ã‚ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_reopened = 'µ±÷ÿ–¬¥Úø™ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_bugnote_added = 'µ±ÃÌº”Œ Ã‚◊¢ Õ ±∑¢ÀÕ Email Ã·–—';
-$s_email_on_status_change = 'µ±◊¥Ã¨∏ƒ±‰ ±∑¢ÀÕEmailÃ·–—';
-$s_email_on_priority_change = 'µ±”≈œ»º∂∏ƒ±‰ ±∑¢ÀÕEmailÃ·–—';
-$s_email_bugnote_limit = '∑¢ÀÕŒ Ã‚◊¢ Õ Email ∑¢ÀÕœﬁ÷∆';
-$s_language = 'ΩÁ√Ê”Ô—‘';
-$s_update_prefs_button = '∏¸–¬…Ë÷√';
-$s_reset_prefs_button = '÷ÿ÷√Œ™ƒ¨»œ…Ë÷√';
+$s_default_account_preferences_title = '缺省帐号设置';
+$s_default_project = '缺省项目';
+$s_advanced_report = '高级报告';
+$s_advanced_view = '高级查看';
+$s_advanced_update = '高级更新';
+$s_refresh_delay = '刷新延迟';
+$s_redirect_delay = '重定向延时(秒)';
+$s_with_minimum_severity = '问题的最低严重级别为：';
+$s_bugnote_order = '问题注释排序规则';
+$s_bugnote_order_asc = '升序';
+$s_bugnote_order_desc = '降序';
+$s_email_on_new = '当新建问题时发送 Email 提醒';
+$s_email_on_assigned = '当分派问题时发送 Email 提醒';
+$s_email_on_feedback = '当打回问题时发送 Email 提醒';
+$s_email_on_resolved = '当解决问题时发送 Email 提醒';
+$s_email_on_closed = '当关闭问题时发送 Email 提醒';
+$s_email_on_reopened = '当重新打开时发送 Email 提醒';
+$s_email_on_bugnote_added = '当添加问题注释时发送 Email 提醒';
+$s_email_on_status_change = '当状态改变时发送Email提醒';
+$s_email_on_priority_change = '当优先级改变时发送Email提醒';
+$s_email_bugnote_limit = '发送问题注释 Email 发送限制';
+$s_language = '界面语言';
+$s_update_prefs_button = '更新设置';
+$s_reset_prefs_button = '重置为默认设置';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = '∏ˆ»À…Ë÷√“—æ≠∏¸∏ƒ...';
+$s_prefs_reset_msg = '个人设置已经更改...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = '∏ˆ»À…Ë÷√“—æ≠∏¸∏ƒ...';
+$s_prefs_updated_msg = '个人设置已经更改...';
 
 # account_profile_add.php
-$s_profile_added_msg = '∆ΩÃ®≈‰÷√“—ÃÌº”...';
+$s_profile_added_msg = '平台配置已添加...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = '…æ≥˝∆ΩÃ®≈‰÷√...';
+$s_profile_deleted_msg = '删除平台配置...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = '±‡º≠∆ΩÃ®…Ë÷√';
-$s_platform = '”≤º˛∆ΩÃ®';
-$s_operating_system = '≤Ÿ◊˜œµÕ≥';
-$s_additional_description = 'ºÚ“™Àµ√˜';
-$s_update_profile_button = '∏¸–¬∆ΩÃ®…Ë÷√';
+$s_edit_profile_title = '编辑平台设置';
+$s_platform = '硬件平台';
+$s_operating_system = '操作系统';
+$s_additional_description = '简要说明';
+$s_update_profile_button = '更新平台设置';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = '∏¸–¬ƒ¨»œ∆ΩÃ®≈‰÷√...';
+$s_profile_defaulted_msg = '更新默认平台配置...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'ÃÌº”∆ΩÃ®≈‰÷√';
-$s_add_profile_button = 'ÃÌº”∆ΩÃ®≈‰÷√';
-$s_edit_or_delete_profiles_title = '±‡º≠ªÚ…æ≥˝∆ΩÃ®≈‰÷√';
-$s_edit_profile = '±‡º≠∆ΩÃ®≈‰÷√';
-$s_make_default = '÷∏∂®‘§…Ë÷µ';
-$s_delete_profile = '…æ≥˝∆ΩÃ®≈‰÷√';
-$s_select_profile = '—°‘Ò∆ΩÃ®≈‰÷√';
-$s_submit_button = 'Ã·Ωª';
+$s_add_profile_title = '添加平台配置';
+$s_add_profile_button = '添加平台配置';
+$s_edit_or_delete_profiles_title = '编辑或删除平台配置';
+$s_edit_profile = '编辑平台配置';
+$s_make_default = '指定预设值';
+$s_delete_profile = '删除平台配置';
+$s_select_profile = '选择平台配置';
+$s_submit_button = '提交';
 
 # account_profile_update.php
-$s_profile_updated_msg = '∆ΩÃ®≈‰÷√“—∏¸–¬...';
+$s_profile_updated_msg = '平台配置已更新...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'Œ“µƒ◊ ÷˙';
-$s_update_sponsorship_button = '–ﬁ∏ƒ÷ß∏∂◊¥Ã¨';
-$s_no_sponsored = '√ª”–’“µΩ∑÷≈…∏¯ƒ„µƒ“—◊ ÷˙µƒŒ Ã‚°£';
-$s_own_sponsored = 'ƒ„“—æ≠◊ ÷˙µƒŒ Ã‚£∫';
-$s_issues_handled = '∑÷≈…∏¯ƒ„µƒ“—◊ ÷˙µƒŒ Ã‚£∫';
-$s_no_own_sponsored = 'ƒ„√ª”–◊ ÷˙»Œ∫ŒŒ Ã‚°£';
-$s_sponsor = '◊ ÷˙';
-$s_amount = ' ˝¡ø';
-$s_total_owing = 'Œ¥÷ß∏∂∫œº∆';
-$s_total_paid = '“—÷ß∏∂∫œº∆';
-$s_sponsor_hide = '“˛≤ÿ“—÷ß∏∂≤¢«““—Ω‚æˆµƒŒ Ã‚';
-$s_sponsor_show = '»´≤øœ‘ æ';
+$s_my_sponsorship = '我的资助';
+$s_update_sponsorship_button = '修改支付状态';
+$s_no_sponsored = '没有找到分派给你的已资助的问题。';
+$s_own_sponsored = '你已经资助的问题：';
+$s_issues_handled = '分派给你的已资助的问题：';
+$s_no_own_sponsored = '你没有资助任何问题。';
+$s_sponsor = '资助';
+$s_amount = '数量';
+$s_total_owing = '未支付合计';
+$s_total_paid = '已支付合计';
+$s_sponsor_hide = '隐藏已支付并且已解决的问题';
+$s_sponsor_show = '全部显示';
 
 # account_sponsor_update.php
-$s_payment_updated = '÷ß∏∂–≈œ¢“—∏¸–¬°£';
+$s_payment_updated = '支付信息已更新。';
 
 # account_update.php
-$s_account_updated_msg = '’ ∫≈–≈œ¢∏¸–¬≥…π¶...';
-$s_email_updated = 'Email µÿ÷∑∏¸–¬≥…π¶';
-$s_realname_duplicated = '’Ê µ–’√˚“—±ª∆‰À˚»ÀÀ˘ π”√';
-$s_realname_updated = '’Ê µ–’√˚“—æ≠≥…π¶–ﬁ∏ƒ';
-$s_password_updated = '√‹¬Î∏¸–¬≥…π¶';
+$s_account_updated_msg = '帐号信息更新成功...';
+$s_email_updated = 'Email 地址更新成功';
+$s_realname_duplicated = '真实姓名已被其他人所使用';
+$s_realname_updated = '真实姓名已经成功修改';
+$s_password_updated = '密码更新成功';
 
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'ƒ„—°‘ÒµƒŒ Ã‚ ±¥” Ù”⁄∂‡∏ˆ≤ªÕ¨µƒœÓƒø£¨œ¬√Êµƒ≤Œ ˝Ω´”∞œÏÀ˘”–µƒœÓƒø°£»Áπ˚’‚≤ª «ƒ„À˘‘§∆⁄µƒΩ·π˚£¨«Î…Ÿ—°‘Ò“ª–©Œ Ã‚£¨÷ÿ ‘ƒ„µƒ–ﬁ∏ƒ°£';
+$s_multiple_projects = '你选择的问题时从属于多个不同的项目，下面的参数将影响所有的项目。如果这不是你所预期的结果，请少选择一些问题，重试你的修改。';
 
 # bug_assign.php
-$s_bug_assign_msg = '“—≥…π¶∑÷≈…Œ Ã‚...';
+$s_bug_assign_msg = '已成功分派问题...';
 
 # bug_change_status_page.php
-$s_new_bug_title = '¥¥Ω®–¬µƒŒ Ã‚';
-$s_feedback_bug_title = '∏¯Œ Ã‚µƒ¥ÚªÿÃ·π©–≈œ¢';
-$s_acknowledged_bug_title = '∏Ê÷™Œ Ã‚“— ’µΩ';
-$s_confirmed_bug_title = '»∑»œŒ Ã‚¥Ê‘⁄';
-$s_assigned_bug_title = '∑÷≈…Œ Ã‚';
-$s_new_bug_button = '¥¥Ω®Œ Ã‚';
-$s_feedback_bug_button = '¥ÚªÿŒ Ã‚';
-$s_acknowledged_bug_button = '∏Ê÷™Œ Ã‚“— ’µΩ';
-$s_confirmed_bug_button = '»∑»œŒ Ã‚¥Ê‘⁄';
-$s_assigned_bug_button = '∑÷≈…Œ Ã‚';
+$s_new_bug_title = '创建新的问题';
+$s_feedback_bug_title = '给问题的打回提供信息';
+$s_acknowledged_bug_title = '告知问题已收到';
+$s_confirmed_bug_title = '确认问题存在';
+$s_assigned_bug_title = '分派问题';
+$s_new_bug_button = '创建问题';
+$s_feedback_bug_button = '打回问题';
+$s_acknowledged_bug_button = '告知问题已收到';
+$s_confirmed_bug_button = '确认问题存在';
+$s_assigned_bug_button = '分派问题';
 
 # bug_close.php
-$s_bug_close_msg       = 'Œ Ã‚“—±ªπÿ±’...';
-$s_close_immediately   = '¡¢º¥πÿ±’£∫';
+$s_bug_close_msg       = '问题已被关闭...';
+$s_close_immediately   = '立即关闭：';
 
 # bug_close_page.php
-$s_closed_bug_title = 'πÿ±’Œ Ã‚';
+$s_closed_bug_title = '关闭问题';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Œ Ã‚“—æ≠±ª…æ≥˝...';
+$s_bug_deleted_msg = '问题已经被删除...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = '»∑∂®“™…æ≥˝¥ÀŒ Ã‚¬£ø';
-$s_delete_bug_button = '…æ≥˝Œ Ã‚';
+$s_delete_bug_sure_msg = '确定要删除此问题吗？';
+$s_delete_bug_button = '删除问题';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'º‡ ”Œ Ã‚';
-$s_unmonitor_bug_button = 'Õ£÷πº‡ ”';
+$s_monitor_bug_button = '监视问题';
+$s_unmonitor_bug_button = '停止监视';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Œƒº˛…œ¥´≥…π¶';
+$s_file_upload_msg = '文件上传成功';
 
 # bug_file_upload_inc.php
-$s_upload_file = '…œ¥´Œƒº˛';
-$s_select_file = '—°‘ÒŒƒº˛';
-$s_upload_file_button = '…œ¥´Œƒº˛';
-$s_max_file_size = '◊Ó¥Ûµƒ¥Û–°';
+$s_upload_file = '上传文件';
+$s_select_file = '选择文件';
+$s_upload_file_button = '上传文件';
+$s_max_file_size = '最大的大小';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Œ Ã‚“—æ≠±ª÷ÿ–¬¥Úø™...';
-$s_reopen_add_bugnote_title = '÷ÿ–¬¥Úø™Œ Ã‚µƒ‘≠“Ú...';
-$s_bugnote_add_reopen_button = 'ÃÌº”Œ Ã‚◊¢ Õ≤¢÷ÿ–¬¥Úø™Œ Ã‚';
+$s_bug_reopened_msg = '问题已经被重新打开...';
+$s_reopen_add_bugnote_title = '重新打开问题的原因...';
+$s_bugnote_add_reopen_button = '添加问题注释并重新打开问题';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Ω‚æˆŒ Ã‚';
-$s_resolved_bug_button = 'Ω‚æˆŒ Ã‚';
+$s_resolved_bug_title = '解决问题';
+$s_resolved_bug_button = '解决问题';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Œ Ã‚“—æ≠±ªΩ‚æˆ£¨«Î‘⁄œ¬√ÊÃÓ»ÎŒ Ã‚◊¢ Õ...';
-$s_resolve_add_bugnote_title = 'Œ™Ω‚æˆŒ Ã‚ÃÌº”Œ Ã‚◊¢ Õ';
-$s_bugnote_add_resolve_button = 'ÃÌº”Œ Ã‚◊¢ Õ';
+$s_bug_resolved_msg = '问题已经被解决，请在下面填入问题注释...';
+$s_resolve_add_bugnote_title = '为解决问题添加问题注释';
+$s_bugnote_add_resolve_button = '添加问题注释';
 
 # bug_reminder_page.php
-$s_from = '¥”';
-$s_to = 'µΩ';
-$s_on = '‘⁄';
-$s_sent_you_this_reminder_about = 'œÚƒ˙∑¢ÀÕ’‚∏ˆÃ·–—£¨πÿ”⁄';
-$s_bug_reminder = 'Œ Ã‚Ã·–—';
-$s_reminder_sent_to = '∑¢ÀÕÃ·–—';
-$s_bug_send_button = '∑¢ÀÕ';
-$s_reminder = 'Ã·–—';
-$s_reminder_explain = '∏√◊¢ ÕΩ´±ª∑¢ÀÕ∏¯“™«ÛΩ” ’∏√Œ Ã‚∑¥¿°µƒÀ˘”– ’º˛»À°£';
-$s_reminder_monitor = '’‚–© ’º˛»ÀΩ´ø™ ºº‡ ”¥ÀŒ Ã‚£¨À˚√«ø…“‘  ”√°∞»°œ˚º‡ ”°±∞¥≈•¿¥»°œ˚∂©‘ƒ°£';
-$s_reminder_store = '∏√◊¢ ÕΩ´∫ÕŒ Ã‚“ª∆¥¢¥Ê°£';
+$s_from = '从';
+$s_to = '到';
+$s_on = '在';
+$s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
+$s_bug_reminder = '问题提醒';
+$s_reminder_sent_to = '发送提醒';
+$s_bug_send_button = '发送';
+$s_reminder = '提醒';
+$s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
+$s_reminder_monitor = '这些收件人将开始监视此问题，他们可以适用“取消监视”按钮来取消订阅。';
+$s_reminder_store = '该注释将和问题一起储存。';
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = '«Î»∑»œƒ„“™Œ™ %d ∫≈Œ Ã‚œÚ %s Ã·π©◊ ÷˙°£';
+$s_confirm_sponsorship = '请确认你要为 %d 号问题向 %s 提供资助。';
 
 # bug_update.php
-$s_bug_updated_msg = 'Œ Ã‚“—æ≠±ª≥…π¶∏¸–¬...';
+$s_bug_updated_msg = '问题已经被成功更新...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = '∑µªÿµΩŒ Ã‚';
-$s_update_simple_link = 'ºÚ“◊∏¸–¬';
-$s_updating_bug_advanced_title = '’˝‘⁄∏¸–¬Œ Ã‚–≈œ¢';
-$s_id = '±‡∫≈';
-$s_category = '∑÷¿‡';
-$s_severity = '—œ÷ÿ–‘';
-$s_reproducibility = '≥ˆœ÷∆µ¬ ';
-$s_date_submitted = '±®∏Ê»’∆⁄';
-$s_last_update = '…œ¥Œ∏¸–¬';
-$s_reporter = '±®∏Ê»À';
-$s_assigned_to = '∑÷≈…∏¯';
-$s_priority = '”≈œ»»®';
-$s_resolution = 'ÕÍ≥…∂»';
-$s_status = '◊¥Ã¨';
-$s_duplicate_id = '÷ÿ∏¥±‡∫≈';
-$s_os = '≤Ÿ◊˜œµÕ≥';
-$s_projection = '¥¶¿Ì∑Ω Ω';
-$s_os_version = '∞Ê±æ';
-$s_eta = 'π¿º∆ÕÍ≥… ±º‰';
-$s_product_version = '≤˙∆∑∞Ê±æ';
-$s_build = 'ππΩ®∫≈';
-$s_fixed_in_version = '–ﬁ’˝¥ÀŒ Ã‚µƒ»Ìº˛∞Ê±æ';
-$s_votes = 'Õ∂∆±';
-$s_summary = '’™“™';
-$s_description = 'Àµ√˜';
-$s_steps_to_reproduce = 'Œ Ã‚÷ÿœ÷≤Ω÷ËÀµ√˜';
-$s_update_information_button = '∏¸–¬–≈œ¢';
-$s_sticky_issue = 'StickyŒ Ã‚';
-$s_profile = '≈‰÷√';
+$s_back_to_bug_link = '返回到问题';
+$s_update_simple_link = '简易更新';
+$s_updating_bug_advanced_title = '正在更新问题信息';
+$s_id = '编号';
+$s_category = '分类';
+$s_severity = '严重性';
+$s_reproducibility = '出现频率';
+$s_date_submitted = '报告日期';
+$s_last_update = '上次更新';
+$s_reporter = '报告人';
+$s_assigned_to = '分派给';
+$s_priority = '优先权';
+$s_resolution = '完成度';
+$s_status = '状态';
+$s_duplicate_id = '重复编号';
+$s_os = '操作系统';
+$s_projection = '处理方式';
+$s_os_version = '版本';
+$s_eta = '估计完成时间';
+$s_product_version = '产品版本';
+$s_build = '构建号';
+$s_fixed_in_version = '修正此问题的软件版本';
+$s_votes = '投票';
+$s_summary = '摘要';
+$s_description = '说明';
+$s_steps_to_reproduce = '问题重现步骤说明';
+$s_update_information_button = '更新信息';
+$s_sticky_issue = 'Sticky问题';
+$s_profile = '配置';
 
 # bug_update_page.php
-$s_update_advanced_link = '∏ﬂº∂∏¸–¬';
-$s_updating_bug_simple_title = '’˝‘⁄∏¸–¬Œ Ã‚–≈œ¢';
+$s_update_advanced_link = '高级更新';
+$s_updating_bug_simple_title = '正在更新问题信息';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Õ∂∆±“—ÃÌº”...';
+$s_vote_added_msg = '投票已添加...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = '“—ÃÌº”Œ Ã‚◊¢ Õ...';
+$s_bugnote_added_msg = '已添加问题注释...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = '“—…æ≥˝Œ Ã‚◊¢ Õ...';
-$s_bug_notes_title = 'Œ Ã‚◊¢ Õ';
+$s_bugnote_deleted_msg = '已删除问题注释...';
+$s_bug_notes_title = '问题注释';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = '±‡º≠Œ Ã‚◊¢ Õ';
+$s_edit_bugnote_title = '编辑问题注释';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = '’‚∏ˆŒ Ã‚√ª”–◊¢ Õ–≈œ¢';
-$s_delete_link = '…æ≥˝';
-$s_add_bugnote_title = 'ÃÌº”Œ Ã‚◊¢ Õ';
-$s_add_bugnote_button = 'ÃÌº”Œ Ã‚◊¢ Õ';
-$s_bugnote_edit_link = '±‡º≠';
-$s_closed_bug_button = 'πÿ±’Œ Ã‚';
+$s_no_bugnotes_msg = '这个问题没有注释信息';
+$s_delete_link = '删除';
+$s_add_bugnote_title = '添加问题注释';
+$s_add_bugnote_button = '添加问题注释';
+$s_bugnote_edit_link = '编辑';
+$s_closed_bug_button = '关闭问题';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = '“—æ≠±ª≥…π¶∏¸–¬Œ Ã‚◊¢ Õ...';
-$s_edited_on = '±‡º≠”⁄£∫';
+$s_bugnote_updated_msg = '已经被成功更新问题注释...';
+$s_edited_on = '编辑于：';
 
 # index.php
-$s_click_to_login = 'µ„ª˜’‚¿ÔΩ¯»Î';
+$s_click_to_login = '点击这里进入';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'ª∂”≠∑√Œ  Mantis Œ Ã‚∏˙◊Ÿπ‹¿ÌœµÕ≥';
-$s_login_title = 'µ«¬º';
-$s_save_login = 'º«◊°¥À¥Œµ«¬º';
-$s_choose_project = '—°‘ÒœÓƒø';
-$s_login_button = 'µ«¬º';
-$s_signup_link = '◊¢≤·“ª∏ˆ–¬’ ∫≈';
-$s_lost_password_link = 'Õ¸º«√‹¬Î£ø';
+$s_login_page_info = '欢迎访问 Mantis 问题跟踪管理系统';
+$s_login_title = '登录';
+$s_save_login = '记住此次登录';
+$s_choose_project = '选择项目';
+$s_login_button = '登录';
+$s_signup_link = '注册一个新帐号';
+$s_lost_password_link = '忘记密码？';
 
 # login_select_proj_page.php
-$s_select_project_button = '—°‘ÒœÓƒø';
+$s_select_project_button = '选择项目';
 
 # logout_page.php
-$s_logged_out_title = '’˝‘⁄◊¢œ˙µ«¬º...';
-$s_redirecting = '...’˝‘⁄÷ÿ∂®œÚ“≥√Ê...';
-$s_here = 'µΩ’‚¿Ô';
+$s_logged_out_title = '正在注销登录...';
+$s_redirecting = '...正在重定向页面...';
+$s_here = '到这里';
 
 # lost_pwd_page.php
-$s_lost_password_title = '÷ÿ÷√√‹¬Î';
-$s_lost_password_done_title = '√‹¬Î” º˛“—∑¢≥ˆ';
-$s_lost_password_subject = '√‹¬Î÷ÿ÷√';
-$s_lost_password_info = '»Áπ˚ƒ„œÎ÷ÿ÷√Õ¸º«µƒ√‹¬Î, «ÎÃÓ–¥ƒ„µƒ”√ªß√˚∫Õ” º˛µÿ÷∑°£<br/><br/>»Áπ˚ƒ„ÃÓ–¥µƒ–≈œ¢ «”––ßµƒ, ƒ„Ω´Õ®π˝µÁ◊”” º˛ ’µΩ“ª∏ˆ∫¨”–Ãÿ ‚—È÷§¬ÎµƒÕ¯“≥¡¥Ω”£¨µ„ª˜∏√¡¥Ω”º¥ø…–ﬁ∏ƒƒ„µƒ√‹¬Î°£';
-$s_lost_password_confirm_hash_OK = 'œµÕ≥“—æ≠Ω” ‹¡Àƒ„µƒ»∑»œ£¨«Î∏¸–¬√‹¬Î°£';
+$s_lost_password_title = '重置密码';
+$s_lost_password_done_title = '密码邮件已发出';
+$s_lost_password_subject = '密码重置';
+$s_lost_password_info = '如果你想重置忘记的密码, 请填写你的用户名和邮件地址。<br/><br/>如果你填写的信息是有效的, 你将通过电子邮件收到一个含有特殊验证码的网页链接，点击该链接即可修改你的密码。';
+$s_lost_password_confirm_hash_OK = '系统已经接受了你的确认，请更新密码。';
 
 # main_page.php
-$s_open_and_assigned_to_me = '∑÷≈…∏¯Œ“«“Œ¥Ω‚æˆµƒŒ Ã‚';
-$s_open_and_reported_to_me = '”…Œ“±®∏Ê«“Œ¥Ω‚æˆµƒŒ Ã‚';
-$s_newer_news_link = '∏¸–¬µƒπ´∏Ê';
-$s_older_news_link = '…‘‘Áµƒπ´∏Ê';
-$s_archives = 'πÈµµπ´∏Ê';
+$s_open_and_assigned_to_me = '分派给我且未解决的问题';
+$s_open_and_reported_to_me = '由我报告且未解决的问题';
+$s_newer_news_link = '更新的公告';
+$s_older_news_link = '稍早的公告';
+$s_archives = '归档公告';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = '¥¥Ω®”√ªß';
-$s_created_user_part2 = '»®œﬁ';
+$s_created_user_part1 = '创建用户';
+$s_created_user_part2 = '权限';
 
 # manage_create_user_page.php
-$s_create_new_account_title = '¥¥Ω®”√ªß’ ∫≈';
-$s_verify_password = '»∑»œ√‹¬Î';
-$s_enabled = '∆Ù”√';
-$s_protected = '±£ª§';
-$s_create_user_button = '¥¥Ω®”√ªß';
+$s_create_new_account_title = '创建用户帐号';
+$s_verify_password = '确认密码';
+$s_enabled = '启用';
+$s_protected = '保护';
+$s_create_user_button = '创建用户';
 
 # manage_page.php
-$s_hide_disabled = '“˛≤ÿŒ¥∆Ù”√µƒ’À∫≈';
-$s_filter_button = '…∏—°';
-$s_manage_users_link = '”√ªßπ‹¿Ì';
-$s_manage_projects_link = 'œÓƒøπ‹¿Ì';
-$s_manage_custom_field_link = '◊‘∂®“Â◊÷∂Œπ‹¿Ì';
-$s_manage_global_profiles_link = 'π‹¿Ì»´æ÷≈‰÷√';
-$s_permissions_summary_report = '»®œﬁ±®±Ì';
-$s_manage_config_link = 'π‹¿Ì≈‰÷√';
-$s_manage_threshold_config = 'π§◊˜¡˜ø™ º';
-$s_manage_email_config = '” º˛Ã·–—';
-$s_manage_workflow_config = 'π§◊˜¡˜';
-$s_create_new_account_link = '¥¥Ω®–¬’À∫≈';
-$s_projects_link = '¥¥Ω®œÓƒø';
-$s_documentation_link = 'Àµ√˜';
-$s_new_accounts_title = '–¬’ ∫≈';
-$s_1_week_title = '“ª÷‹ƒ⁄';
-$s_never_logged_in_title = '¥”Œ¥µ«¬º';
-$s_prune_accounts = '«Â¿Ì’ ∫≈';
-$s_hide_inactive = '“˛≤ÿ∑«ªÓ∂Øµƒ';
-$s_manage_accounts_title = 'π‹¿Ì’ ∫≈';
+$s_hide_disabled = '隐藏未启用的账号';
+$s_filter_button = '筛选';
+$s_manage_users_link = '用户管理';
+$s_manage_projects_link = '项目管理';
+$s_manage_custom_field_link = '自定义字段管理';
+$s_manage_global_profiles_link = '管理全局配置';
+$s_permissions_summary_report = '权限报表';
+$s_manage_config_link = '管理配置';
+$s_manage_threshold_config = '工作流开始';
+$s_manage_email_config = '邮件提醒';
+$s_manage_workflow_config = '工作流';
+$s_create_new_account_link = '创建新账号';
+$s_projects_link = '创建项目';
+$s_documentation_link = '说明';
+$s_new_accounts_title = '新帐号';
+$s_1_week_title = '一周内';
+$s_never_logged_in_title = '从未登录';
+$s_prune_accounts = '清理帐号';
+$s_hide_inactive = '隐藏非活动的';
+$s_manage_accounts_title = '管理帐号';
 $s_p = 'p';
-$s_date_created = '¥¥Ω®»’∆⁄';
-$s_last_visit = '◊Ó∫Û“ª¥Œµ«¬º';
-$s_edit_user_link = '±‡º≠”√ªß';
+$s_date_created = '创建日期';
+$s_last_visit = '最后一次登录';
+$s_edit_user_link = '编辑用户';
 
 # manage_config_email_page
-$s_config_all_projects = '◊¢“‚£∫’‚–©…Ë÷√Ω´∂‘<b>À˘”–œÓƒø</b>≤˙…˙”∞œÏ°£';
-$s_config_project = '◊¢“‚£∫’‚–©…Ë÷√÷ª∂‘ %s œÓƒø≤˙…˙”∞œÏ°£';
-$s_colour_coding = '‘⁄œ¬√Êµƒ±Ì÷–£¨Ω´”¶”√œ¬¡–—’…´£∫';
-$s_colour_project = 'œÓƒø…Ë÷√Ω´∏≤–¥∆‰À˚œÓƒø°£';
-$s_colour_global = 'À˘”–µƒœÓƒø…Ë÷√∂ºΩ´∏≤–¥ƒ¨»œ…Ë÷√°£';
-$s_issue_reporter = 'Œ Ã‚±®∏Ê»À';
-$s_issue_handler = 'Œ Ã‚π‹¿Ì»À';
-$s_users_added_bugnote = 'Œ Ã‚◊¢ ÕÃÌº”»À';
-$s_change_configuration = '∏¸∏ƒ≈‰÷√';
-$s_message = '–≈œ¢';
-$s_default_notify = '…Ë÷√ƒ¨»œπ´∏Ê±Í÷æŒ™';
-$s_action_notify = '…Ë÷√ªÓ∂Øµƒπ´∏Ê±Í÷æŒ™';
-$s_notify_defaults_change_access = 'À≠ø…“‘–ﬁ∏ƒƒ¨»œπ´∏Ê±Í÷æ';
-$s_notify_actions_change_access = 'À≠ø…“‘–ﬁ∏ƒπ´∏Ê';
-$s_revert_to_system = '…æ≥˝À˘”–œÓƒøµƒ…Ë÷√';
-$s_revert_to_all_project = '…æ≥˝œÓƒøµƒ÷∏∂®…Ë÷√';
+$s_config_all_projects = '注意：这些设置将对<b>所有项目</b>产生影响。';
+$s_config_project = '注意：这些设置只对 %s 项目产生影响。';
+$s_colour_coding = '在下面的表中，将应用下列颜色：';
+$s_colour_project = '项目设置将覆写其他项目。';
+$s_colour_global = '所有的项目设置都将覆写默认设置。';
+$s_issue_reporter = '问题报告人';
+$s_issue_handler = '问题管理人';
+$s_users_added_bugnote = '问题注释添加人';
+$s_change_configuration = '更改配置';
+$s_message = '信息';
+$s_default_notify = '设置默认公告标志为';
+$s_action_notify = '设置活动的公告标志为';
+$s_notify_defaults_change_access = '谁可以修改默认公告标志';
+$s_notify_actions_change_access = '谁可以修改公告';
+$s_revert_to_system = '删除所有项目的设置';
+$s_revert_to_all_project = '删除项目的指定设置';
 
 # manage_config_workflow_page
-$s_non_existent = '≤ª¥Ê‘⁄';
-$s_current_status = 'µ±«∞◊¥Ã¨';
-$s_next_status = 'œ¬“ª◊¥Ã¨';
-$s_workflow = 'π§◊˜¡˜';
-$s_workflow_thresholds = '”∞œÏπ§◊˜¡˜µƒ∆µ„';
-$s_threshold = '∆µ„';
-$s_status_level = '◊¥Ã¨';
-$s_alter_level = 'À≠ø…“‘–ﬁ∏ƒ’‚∏ˆ÷µ';
-$s_validation = 'π§◊˜¡˜–£—È';
-$s_comment = '–£—È◊¢ Õ';
-$s_superfluous = 'Arc from status to itself is implied, ≤ª–Ë“™√˜»∑÷∏≥ˆ';
-$s_unreachable = '≤ªƒ‹Ω´“ª∏ˆŒ Ã‚◊™“∆µΩ∏√◊¥Ã¨';
-$s_no_exit = '≤ªƒ‹Ω´“ª∏ˆŒ Ã‚◊™“∆≥ˆ∏√◊¥Ã¨';
-$s_access_levels = '¥Ê»°»®œﬁº∂±';
-$s_access_change = '–ﬁ∏ƒ∏√◊¥Ã¨µƒ◊ÓµÕ»®œﬁ';
-$s_desc_bug_submit_status = '–¬Ω®¡¢µƒŒ Ã‚µƒ◊¥Ã¨';
-$s_desc_bug_reopen_status = '÷ÿ–¬¥Úø™µƒŒ Ã‚µƒ◊¥Ã¨';
-$s_desc_bug_resolved_status_threshold = '±ª…Ë÷√Œ™“—Ω‚æˆµƒŒ Ã‚µƒ◊¥Ã¨';
-$s_workflow_change_access = 'À≠ø…“‘–ﬁ∏ƒπ§◊˜¡˜';
-$s_access_change_access = 'À≠ø…“‘–ﬁ∏ƒ¥Ê»°»®œﬁº∂±';
+$s_non_existent = '不存在';
+$s_current_status = '当前状态';
+$s_next_status = '下一状态';
+$s_workflow = '工作流';
+$s_workflow_thresholds = '影响工作流的起点';
+$s_threshold = '起点';
+$s_status_level = '状态';
+$s_alter_level = '谁可以修改这个值';
+$s_validation = '工作流校验';
+$s_comment = '校验注释';
+$s_superfluous = 'Arc from status to itself is implied, 不需要明确指出';
+$s_unreachable = '不能将一个问题转移到该状态';
+$s_no_exit = '不能将一个问题转移出该状态';
+$s_access_levels = '存取权限级别';
+$s_access_change = '修改该状态的最低权限';
+$s_desc_bug_submit_status = '新建立的问题的状态';
+$s_desc_bug_reopen_status = '重新打开的问题的状态';
+$s_desc_bug_resolved_status_threshold = '被设置为已解决的问题的状态';
+$s_workflow_change_access = '谁可以修改工作流';
+$s_access_change_access = '谁可以修改存取权限级别';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = '%s µƒƒ¨»œ◊¥Ã¨√ª”–±ª—°∂®Œ™ %s µƒœ¬“ª∏ˆ◊¥Ã¨£¨À¸Ω´±ª∫ˆ¬‘';
+$s_default_not_in_flow = '%s 的默认状态没有被选定为 %s 的下一个状态，它将被忽略';
 
 # manage_config_work_threshold_page
-$s_assign_issue = '∑÷≈…Œ Ã‚';
-$s_allow_close_immediate = '‘ –Ìπÿ±’Ω‚æˆ◊¥Ã¨Œ Ã‚';
-$s_allow_reporter_close = '‘ –Ì±®∏Ê»Àπÿ±’Œ Ã‚';
-$s_allow_reporter_reopen = '‘ –Ì±®∏Ê»À÷ÿ–¬¥Úø™Œ Ã‚';
-$s_set_status_assigned = 'π‹¿Ì»À∑÷≈‰ ±…Ë÷√µƒ◊¥Ã¨';
-$s_allow_user_edit = '‘ –Ì”√ªß±‡º≠◊‘º∫µƒŒ Ã‚◊¢ Õ';
-$s_limit_access = 'œﬁ÷∆±®∏Ê»À∂‘À˘±®∏ÊµƒŒ Ã‚µƒ»®œﬁŒ™';
-$s_submit_status = '–¬Ω®Œ Ã‚µƒ◊¥Ã¨…Ë÷√Œ™';
-$s_assigned_status = 'Ω´◊‘∂Ø∑÷≈…µƒŒ Ã‚◊¥Ã¨…Ë÷√Œ™';
-$s_resolved_status = 'Œ Ã‚“—æ≠±ª»œŒ™“—Ω‚æˆµƒ◊¥Ã¨';
-$s_readonly_status = '÷ª∂¡Œ Ã‚µƒ◊¥Ã¨…Ë÷√Œ™';
-$s_reopen_status = '÷ÿ–¬¥Úø™µƒŒ Ã‚◊¥Ã¨…Ë÷√Œ™';
-$s_reopen_resolution = '÷ÿ–¬¥Úø™µƒŒ Ã‚µƒΩ‚æˆ◊¥Ã¨…Ë÷√Œ™';
+$s_assign_issue = '分派问题';
+$s_allow_close_immediate = '允许关闭解决状态问题';
+$s_allow_reporter_close = '允许报告人关闭问题';
+$s_allow_reporter_reopen = '允许报告人重新打开问题';
+$s_set_status_assigned = '管理人分配时设置的状态';
+$s_allow_user_edit = '允许用户编辑自己的问题注释';
+$s_limit_access = '限制报告人对所报告的问题的权限为';
+$s_submit_status = '新建问题的状态设置为';
+$s_assigned_status = '将自动分派的问题状态设置为';
+$s_resolved_status = '问题已经被认为已解决的状态';
+$s_readonly_status = '只读问题的状态设置为';
+$s_reopen_status = '重新打开的问题状态设置为';
+$s_reopen_resolution = '重新打开的问题的解决状态设置为';
 
 # manage_config_revert_page
-$s_config_delete_sure = '»∑∂®“™…æ≥˝∏√Ãıƒøµƒ…Ë÷√';
-$s_in_project = '‘⁄œÓƒø';
-$s_delete_config_button = '…æ≥˝…Ë÷√';
+$s_config_delete_sure = '确定要删除该条目的设置';
+$s_in_project = '在项目';
+$s_delete_config_button = '删除设置';
 
 # manage_proj_add.php
-$s_project_added_msg = '“—ÃÌº”œÓƒø...';
+$s_project_added_msg = '已添加项目...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = '“—ÃÌº”∑÷¿‡...';
+$s_category_added_msg = '已添加分类...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = '“—…æ≥˝∑÷¿‡...';
+$s_category_deleted_msg = '已删除分类...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = '»∑∂®“™…æ≥˝¥À∑÷¿‡¬£øÀ˘”–œ‡πÿ¡™µƒŒ Ã‚Ω´ª·±ª…æ≥˝£°';
-$s_delete_category_button = '…æ≥˝∑÷¿‡';
+$s_category_delete_sure_msg = '确定要删除此分类吗？所有相关联的问题将会被删除！';
+$s_delete_category_button = '删除分类';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = '±‡º≠œÓƒø∑÷¿‡';
-$s_update_category_button = '∏¸–¬∑÷¿‡';
+$s_edit_project_category_title = '编辑项目分类';
+$s_update_category_button = '更新分类';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = '∑÷¿‡“—æ≠≥…π¶∏¸–¬...';
+$s_category_updated_msg = '分类已经成功更新...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'ÃÌº”◊”œÓƒø';
+$s_add_subproject_title = '添加子项目';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'œÓƒø“—æ≠≥…π¶…æ≥˝...';
+$s_project_deleted_msg = '项目已经成功删除...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = '»∑∂®“™…æ≥˝¥ÀœÓƒø∫ÕÀ˘”–∏Ω ÙµƒŒ Ã‚¬£ø';
-$s_project_delete_button = '…æ≥˝œÓƒø';
+$s_project_delete_msg = '确定要删除此项目和所有附属的问题吗？';
+$s_project_delete_button = '删除项目';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = '±‡º≠œÓƒø';
-$s_project_name = 'œÓƒø√˚≥∆';
-$s_view_status = '≤Èø¥◊¥Ã¨';
-$s_public = 'π´π≤µƒ';
-$s_private = 'ÀΩ”–µƒ';
-$s_update_project_button = '∏¸–¬œÓƒø';
-$s_delete_project_button = '…æ≥˝œÓƒø';
-$s_categories_and_version_title = '∑÷¿‡”Î∞Ê±æ–≈œ¢';
-$s_categories = '∑÷¿‡';
-$s_add_category_button = 'ÃÌº”∑÷¿‡';
-$s_versions = '∞Ê±æ';
-$s_add_version_button = 'ÃÌº”∞Ê±æ';
-$s_add_and_edit_version_button = 'ÃÌº”≤¢±‡º≠∞Ê±æ';
-$s_edit_link = '±‡º≠';
-$s_actions = '≤Ÿ◊˜';
-$s_version = '∞Ê±æ';
-$s_timestamp = ' ±º‰¥¡';
-$s_update = '∏¸–¬';
-$s_subprojects = '◊”œÓƒø';
-$s_add_subproject = 'ÃÌº”Œ™◊”œÓƒø';
-$s_create_new_subproject_link = '–¬Ω®◊”œÓƒø';
+$s_edit_project_title = '编辑项目';
+$s_project_name = '项目名称';
+$s_view_status = '查看状态';
+$s_public = '公共的';
+$s_private = '私有的';
+$s_update_project_button = '更新项目';
+$s_delete_project_button = '删除项目';
+$s_categories_and_version_title = '分类与版本信息';
+$s_categories = '分类';
+$s_add_category_button = '添加分类';
+$s_versions = '版本';
+$s_add_version_button = '添加版本';
+$s_add_and_edit_version_button = '添加并编辑版本';
+$s_edit_link = '编辑';
+$s_actions = '操作';
+$s_version = '版本';
+$s_timestamp = '时间戳';
+$s_update = '更新';
+$s_subprojects = '子项目';
+$s_add_subproject = '添加为子项目';
+$s_create_new_subproject_link = '新建子项目';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'ÃÌº”œÓƒø';
-$s_upload_file_path = '…œ¥´Œƒº˛¥Ê∑≈¬∑æ∂';
-$s_add_project_button = 'ÃÌº”œÓƒø';
-$s_projects_title = 'À˘”–œÓƒø';
-$s_name = '√˚≥∆';
+$s_add_project_title = '添加项目';
+$s_upload_file_path = '上传文件存放路径';
+$s_add_project_button = '添加项目';
+$s_projects_title = '所有项目';
+$s_name = '名称';
 
 # manage_proj_update.php
-$s_project_updated_msg = '“—æ≠≥…π¶∏¸–¬œÓƒø...';
+$s_project_updated_msg = '已经成功更新项目...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = '“—æ≠≥…π¶ÃÌº”∞Ê±æ...';
+$s_version_added_msg = '已经成功添加版本...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = '“—æ≠≥…π¶…æ≥˝∞Ê±æ...';
+$s_version_deleted_msg = '已经成功删除版本...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = '»∑∂®“™…æ≥˝¥À∞Ê±æ¬? À˘”–œ‡πÿ¡™µƒŒ Ã‚Ω´ª·±ª…æ≥˝!!';
-$s_delete_version_button = '…æ≥˝∞Ê±æ';
+$s_version_delete_sure = '确定要删除此版本吗? 所有相关联的问题将会被删除!!';
+$s_delete_version_button = '删除版本';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = '±‡º≠œÓƒø∞Ê±æ';
-$s_update_version_button = '∏¸–¬∞Ê±æ';
-$s_released = '“—∑¢≤ºµƒ';
+$s_edit_project_version_title = '编辑项目版本';
+$s_update_version_button = '更新版本';
+$s_released = '已发布的';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = '∞Ê±æ“—æ≠≥…π¶∏¸–¬...';
+$s_version_updated_msg = '版本已经成功更新...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = '’ ∫≈ ‹±£ª§£¨Œﬁ∑®…æ≥˝¥À’ ∫≈';
-$s_account_deleted_msg = '“—…æ≥˝’ ∫≈...';
+$s_account_delete_protected_msg = '帐号受保护，无法删除此帐号';
+$s_account_deleted_msg = '已删除帐号...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = '»∑∂®“™…æ≥˝¥À’ ∫≈¬£ø';
+$s_delete_account_sure_msg = '确定要删除此帐号吗？';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = '“—…æ≥˝À˘”–‘⁄“ª∏ˆ–«∆⁄“‘«∞◊¢≤·£¨≤¢«“¥”¿¥√ª”–µ«¬ºπ˝µƒ’À∫≈°£';
-$s_prune_accounts_button = '…æ≥˝';
-$s_confirm_account_pruning = 'ƒ„»∑∂®“™…æ≥˝¥”¿¥√ª”–µ«¬ºπ˝µƒæ…’À∫≈¬£ø';
+$s_accounts_pruned_msg = '已删除所有在一个星期以前注册，并且从来没有登录过的账号。';
+$s_prune_accounts_button = '删除';
+$s_confirm_account_pruning = '你确定要删除从来没有登录过的旧账号吗？';
 
 # manage_user_page.php
-$s_edit_user_title = '±‡º≠ π”√’ﬂ';
-$s_reset_password_button = '÷ÿ…Ë√‹¬Î';
-$s_delete_user_button = '…æ≥˝ π”√’ﬂ';
-$s_reset_password_msg = '»Áπ˚÷ÿ÷√√‹¬Î£¨–ﬁ∏ƒ√‹¬ÎµƒÕ¯“≥¡¥Ω”Ω´Õ¨Õ®π˝” º˛∑¢ÀÕ”√ªß°£';
-$s_reset_password_msg2 = '»Áπ˚÷ÿ÷√√‹¬Î£¨–¬√‹¬ÎΩ´±‰Œ™ø’°£';
-$s_show_all_users = '»´≤ø';
+$s_edit_user_title = '编辑使用者';
+$s_reset_password_button = '重设密码';
+$s_delete_user_button = '删除使用者';
+$s_reset_password_msg = '如果重置密码，修改密码的网页链接将同通过邮件发送用户。';
+$s_reset_password_msg2 = '如果重置密码，新密码将变为空。';
+$s_show_all_users = '全部';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = '’ ∫≈ ‹±£ª§£¨≤ªƒ‹÷ÿ÷√√‹¬Î°£';
-$s_account_reset_msg = '»∑»œ” º˛“—æ≠∑¢Õ˘ƒ„µƒ” œ‰...';
-$s_account_reset_msg2 = '’À∫≈√‹¬Î“—æ≠÷√Œ™ø’...';
+$s_account_reset_protected_msg = '帐号受保护，不能重置密码。';
+$s_account_reset_msg = '确认邮件已经发往你的邮箱...';
+$s_account_reset_msg2 = '账号密码已经置为空...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = '’ ∫≈ ‹±£ª§£¨°∞”√ªßº∂±°±∫Õ°∞ «∑Ò∆Ù”√°±–≈œ¢≤ªƒ‹–ﬁ∏ƒ£ª’ ∫≈Œﬁ∑®∏¸–¬...';
-$s_manage_user_updated_msg = '’ ∫≈≥…π¶∏¸–¬...';
+$s_manage_user_protected_msg = '帐号受保护，“用户级别”和“是否启用”信息不能修改；帐号无法更新...';
+$s_manage_user_updated_msg = '帐号成功更新...';
 
 # menu_inc.php
-$s_main_link = ' ◊“≥';
-$s_view_bugs_link = '≤Èø¥Œ Ã‚';
-$s_report_bug_link = '±®∏ÊŒ Ã‚';
-$s_changelog_link = '–ﬁ∏ƒ»’÷æ';
-$s_summary_link = 'Õ≥º∆±®±Ì';
-$s_account_link = '∏ˆ»À’ ∫≈';
-$s_users_link = '”√ªß';
-$s_manage_link = 'π‹¿Ì';
-$s_edit_news_link = '±‡º≠π´∏Ê';
-$s_docs_link = ' π”√Àµ√˜';
-$s_logout_link = '◊¢œ˙';
-$s_my_view_link = 'Œ“µƒ ”Õº';
+$s_main_link = '首页';
+$s_view_bugs_link = '查看问题';
+$s_report_bug_link = '报告问题';
+$s_changelog_link = '修改日志';
+$s_summary_link = '统计报表';
+$s_account_link = '个人帐号';
+$s_users_link = '用户';
+$s_manage_link = '管理';
+$s_edit_news_link = '编辑公告';
+$s_docs_link = '使用说明';
+$s_logout_link = '注销';
+$s_my_view_link = '我的视图';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Œ¥÷∏∂®µƒ';
-$s_my_view_title_recent_mod = '◊ÓΩ¸–ﬁ∏ƒ';
-$s_my_view_title_reported = '”…Œ“±®∏Êµƒ';
-$s_my_view_title_assigned = '÷∏∂®∏¯Œ“µƒ(…–Œ¥Ω‚æˆ)';
-$s_my_view_title_resolved = '“—Ω‚æˆµƒ';
-$s_my_view_title_monitored = 'Œ“’˝‘⁄º‡ ”µƒ';
-$s_my_view_title_feedback = '’˝‘⁄µ»¥˝Œ“µƒ∑¥¿°';
-$s_my_view_title_verify = '’˝‘⁄µ»¥˝Œ“µƒΩ‚æˆ≥Ã∂»»∑»œ';
+$s_my_view_title_unassigned = '未指定的';
+$s_my_view_title_recent_mod = '最近修改';
+$s_my_view_title_reported = '由我报告的';
+$s_my_view_title_assigned = '指定给我的(尚未解决)';
+$s_my_view_title_resolved = '已解决的';
+$s_my_view_title_monitored = '我正在监视的';
+$s_my_view_title_feedback = '正在等待我的反馈';
+$s_my_view_title_verify = '正在等待我的解决程度确认';
 
 # news_add.php
-$s_news_added_msg = 'π´∏ÊœÓƒø“—ÃÌº”...';
+$s_news_added_msg = '公告项目已添加...';
 
 # news_delete.php
-$s_news_deleted_msg = '“—…æ≥˝π´∏ÊœÓƒø...';
+$s_news_deleted_msg = '已删除公告项目...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'ƒ„»∑∂®“™…æ≥˝¥Àπ´∏ÊœÓƒø£ø';
-$s_delete_news_item_button = '…æ≥˝π´∏ÊœÓƒø';
+$s_delete_news_sure_msg = '你确定要删除此公告项目？';
+$s_delete_news_item_button = '删除公告项目';
 
 # news_edit_page.php
-$s_edit_news_title = '±‡º≠π´∏Ê';
-$s_headline = '±ÍÃ‚';
-$s_body = '’˝Œƒ';
-$s_update_news_button = '∏¸–¬π´∏Ê';
+$s_edit_news_title = '编辑公告';
+$s_headline = '标题';
+$s_body = '正文';
+$s_update_news_button = '更新公告';
 
 # news_menu_page.php
-$s_add_news_title = 'ÃÌº”π´∏Ê';
-$s_post_to = '∑¢±ÌµΩ';
-$s_post_news_button = '∑¢±Ìπ´∏Ê';
-$s_edit_or_delete_news_title = '±‡º≠ªÚ…æ≥˝π´∏Ê';
-$s_edit_post = '±‡º≠“—∑¢±Ìπ´∏Ê';
-$s_delete_post = '…æ≥˝“—∑¢±Ìπ´∏Ê';
-$s_select_post = '—°‘Ò“—∑¢±Ìπ´∏Ê';
+$s_add_news_title = '添加公告';
+$s_post_to = '发表到';
+$s_post_news_button = '发表公告';
+$s_edit_or_delete_news_title = '编辑或删除公告';
+$s_edit_post = '编辑已发表公告';
+$s_delete_post = '删除已发表公告';
+$s_select_post = '选择已发表公告';
 
 # news_update.php
-$s_news_updated_msg = 'π´∏ÊœÓƒø“—∏¸–¬...';
+$s_news_updated_msg = '公告项目已更新...';
 
 # news_view_page.php
-$s_back_link = '∫ÛÕÀ';
+$s_back_link = '后退';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Œƒº˛…œ¥´≥…π¶';
+$s_file_uploaded_msg = '文件上传成功';
 
 # proj_doc_add_page.php
-$s_upload_file_title = '…œ¥´Œƒº˛';
-$s_title = '±ÍÃ‚';
+$s_upload_file_title = '上传文件';
+$s_title = '标题';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'œÓƒøŒƒº˛“—æ≠…æ≥˝°£';
+$s_project_file_deleted_msg = '项目文件已经删除。';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'ƒ„»∑∂®“™…æ≥˝’‚–©Œƒº˛¬£ø';
+$s_confirm_file_delete_msg = '你确定要删除这些文件吗？';
 
 # proj_doc_edit_page.php
-$s_filename = 'Œƒº˛√˚';
-$s_file_update_button = '∏¸–¬Œƒº˛';
-$s_file_delete_button = '…æ≥˝Œƒº˛';
+$s_filename = '文件名';
+$s_file_update_button = '更新文件';
+$s_file_delete_button = '删除文件';
 
 # proj_doc_page.php
-$s_project_documentation_title = 'œÓƒøŒƒµµ';
-$s_user_documentation = '”√ªßŒƒµµ';
-$s_project_documentation = 'œÓƒøŒƒµµ';
-$s_add_file = 'ÃÌº”Œƒº˛';
+$s_project_documentation_title = '项目文档';
+$s_user_documentation = '用户文档';
+$s_project_documentation = '项目文档';
+$s_add_file = '添加文件';
 
 # proj_doc_update.php
-$s_project_document_updated = '∏¸–¬œÓƒø≥…π¶';
+$s_project_document_updated = '更新项目成功';
 
 # proj_user_add.php
-$s_project_user_added_msg = '≥…π¶ÃÌº””√ªß÷¡œÓƒø';
+$s_project_user_added_msg = '成功添加用户至项目';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = '¥”œÓƒø…æ≥˝”√ªß≥…π¶';
+$s_project_removed_user_msg = '从项目删除用户成功';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = '»∑∂®“™…æ≥˝∏√”√ªß¬£ø';
-$s_remove_user_button = '…æ≥˝”√ªß';
-$s_remove_all_users_sure_msg = '»∑∂®“™…æ≥˝∏√œÓƒøµƒÀ˘”–”√ªß¬£ø';
-$s_remove_all_users_button = '…æ≥˝À˘”–”√ªß';
+$s_remove_user_sure_msg = '确定要删除该用户吗？';
+$s_remove_user_button = '删除用户';
+$s_remove_all_users_sure_msg = '确定要删除该项目的所有用户吗？';
+$s_remove_all_users_button = '删除所有用户';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'ÃÌº””√ªß÷¡œÓƒø';
-$s_add_user_button = 'ÃÌº””√ªß';
-$s_project_selection_title = 'œÓƒø—°‘Ò';
-$s_remove_link = '…æ≥˝';
-$s_remove_all_link = '»´≤ø…æ≥˝';
+$s_add_user_title = '添加用户至项目';
+$s_add_user_button = '添加用户';
+$s_project_selection_title = '项目选择';
+$s_remove_link = '删除';
+$s_remove_all_link = '全部删除';
 
 # proj_user_update.php
-$s_updated_user_msg = '”√ªß∏¸–¬≥…π¶';
+$s_updated_user_msg = '用户更新成功';
 
 # report_add.php
-$s_must_enter_category = '±ÿ–Î—°‘Ò∑÷¿‡';
-$s_must_enter_severity = '±ÿ–Î—°‘Ò—œ÷ÿ–‘';
-$s_must_enter_reproducibility = '±ÿ–Î—°‘Ò≥ˆœ÷∆µ¬ ';
-$s_must_enter_summary = '±ÿ–Î ‰»Î’™“™';
-$s_must_enter_description = '±ÿ–Î ‰»ÎÀµ√˜';
-$s_report_more_bugs = '±®∏Ê∏¸∂‡µƒŒ Ã‚';
-$s_submission_thanks_msg = '∏––ªƒ˙Ã·ΩªŒ Ã‚£°^_^';
+$s_must_enter_category = '必须选择分类';
+$s_must_enter_severity = '必须选择严重性';
+$s_must_enter_reproducibility = '必须选择出现频率';
+$s_must_enter_summary = '必须输入摘要';
+$s_must_enter_description = '必须输入说明';
+$s_report_more_bugs = '报告更多的问题';
+$s_submission_thanks_msg = '感谢您提交问题！^_^';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'ºÚ“◊±®∏Ê';
-$s_enter_report_details_title = ' ‰»Î±®∏ÊœÍœ∏◊ ¡œ';
-$s_required = '±ÿÃÓ';
-$s_select_category = '—°‘Ò∑÷¿‡';
-$s_select_reproducibility = '—°‘Ò≥ˆœ÷∆µ¬ ';
-$s_select_severity = '—°‘Ò—œ÷ÿ–‘';
-$s_or_fill_in = 'ªÚÃÓ–¥';
-$s_assign_to = '∑÷≈…∏¯';
-$s_additional_information = '∏Ωº”–≈œ¢';
-$s_submit_report_button = 'Ã·Ωª±®∏Ê';
-$s_check_report_more_bugs = '±®∏Ê∏¸∂‡µƒŒ Ã‚';
+$s_simple_report_link = '简易报告';
+$s_enter_report_details_title = '输入报告详细资料';
+$s_required = '必填';
+$s_select_category = '选择分类';
+$s_select_reproducibility = '选择出现频率';
+$s_select_severity = '选择严重性';
+$s_or_fill_in = '或填写';
+$s_assign_to = '分派给';
+$s_additional_information = '附加信息';
+$s_submit_report_button = '提交报告';
+$s_check_report_more_bugs = '报告更多的问题';
 
 # report_bug_page.php
-$s_advanced_report_link = '∏ﬂº∂±®∏Ê';
-$s_report_stay = 'ºÃ–¯±®∏Ê';
+$s_advanced_report_link = '高级报告';
+$s_report_stay = '继续报告';
 
 # set_project.php
-$s_selected_project = '—°‘ÒœÓƒø';
-$s_valid_project_msg = '±ÿ–Î—°‘Ò“ª∏ˆ”––ßµƒœÓƒø';
+$s_selected_project = '选择项目';
+$s_valid_project_msg = '必须选择一个有效的项目';
 
 # signup.php
-$s_signup_done_title = '’À∫≈◊¢≤·“—¥¶¿Ì';
-$s_password_emailed_msg = 'πßœ≤ƒ„£¨ƒ„µƒ◊¢≤·“—≥…π¶°£Œ™÷§ µƒ„µƒ” º˛µÿ÷∑µƒ”––ß–‘£¨œµÕ≥Ω´∑¢≥ˆ»∑»œ–≈£¨«Îƒ„‘⁄ ’µΩ∏√–≈∫Û∑√Œ ¡¥Ω”“‘º§ªÓƒ„µƒ’À∫≈°£';
-$s_no_reponse_msg = 'ƒ„±ÿ–Î‘⁄7ÃÏ÷Æƒ⁄º§ªÓƒ„µƒ’À∫≈£¨∑Ò‘Ú”‚∆⁄∏√’À∫≈Ω´±ª◊‘∂Ø«Â≥˝';
+$s_signup_done_title = '账号注册已处理';
+$s_password_emailed_msg = '恭喜你，你的注册已成功。为证实你的邮件地址的有效性，系统将发出确认信，请你在收到该信后访问链接以激活你的账号。';
+$s_no_reponse_msg = '你必须在7天之内激活你的账号，否则逾期该账号将被自动清除';
 
 # signup_page.php
-$s_signup_captcha_request = '«Î ‰»Î”“±ﬂµƒ◊÷∑˚¥Æ';
-$s_signup_info = 'ÃÓÕÍ¥À±Ìµ•∫Û£¨ƒ„Ω´‘⁄ƒ„ÃÓ–¥µƒ” œ‰¿Ô ’µΩ“ª∑‚»∑»œ–≈°£<br/>Õ®π˝»∑»œ–≈£¨ƒ„ø…“‘º§ªÓƒ„µƒ’À∫≈°£»Áπ˚ƒ„‘⁄7ÃÏ÷Æƒ⁄≤ªº§ªÓƒ„µƒ’À∫≈£¨œµÕ≥Ω´◊‘∂Ø«Â≥˝¥À’À∫≈°£<br/>Œ™¡Àƒ„ƒ‹πª ’µΩ’‚∑‚»∑»œ–≈£¨«ÎŒÒ±ÿ»∑±£ƒ„ ‰»Îµƒ” º˛µÿ÷∑ «”––ßµƒ°£';
-$s_signup_title = '◊¢≤·';
-$s_signup_button = '◊¢≤·';
-$s_no_password_request = 'ƒ„µƒ√‹¬Î±ª¡Ì“ª∏ˆœµÕ≥À˘π‹¿Ì£¨«Î¡™œµœµÕ≥π‹¿Ì‘±Ω¯–––ﬁ∏ƒ°£';
+$s_signup_captcha_request = '请输入右边的字符串';
+$s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br/>通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br/>为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
+$s_signup_title = '注册';
+$s_signup_button = '注册';
+$s_no_password_request = '你的密码被另一个系统所管理，请联系系统管理员进行修改。';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = '±‡º≠’æµ„…Ë÷√';
-$s_save_settings_button = '±£¥Ê…Ë÷√';
+$s_edit_site_settings_title = '编辑站点设置';
+$s_save_settings_button = '保存设置';
 
 # site_settings_page.php
-$s_site_settings_title = '’æµ„…Ë÷√';
-$s_system_info_link = 'œµÕ≥–≈œ¢';
-$s_site_settings_link = '’æµ„…Ë÷√';
+$s_site_settings_title = '站点设置';
+$s_system_info_link = '系统信息';
+$s_site_settings_link = '站点设置';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = '’æµ„…Ë÷√“—æ≠±ª∏¸–¬°£';
+$s_site_settings_updated_msg = '站点设置已经被更新。';
 
 # summary_page.php
-$s_summary_title = 'Õ≥º∆±®±Ì';
-$s_summary_jpgraph_link = 'Õº–Œ±®±Ì';
-$s_by_project = '∞¥œÓƒø';
-$s_by_status = '∞¥Œ Ã‚◊¥Ã¨';
-$s_by_date = '∞¥»’∆⁄';
-$s_by_severity = '∞¥—œ÷ÿ–‘';
-$s_by_resolution = '∞¥ÕÍ≥…∂»';
-$s_by_category = '∞¥œÓƒø∑÷¿‡';
-$s_by_priority = '∞¥”≈œ»»®';
-$s_by_developer = '∞¥ø™∑¢»À‘±';
-$s_by_reporter ='∞¥±®∏Ê»À';
-$s_reporter_by_resolution = '±®∏Ê»À/ÕÍ≥…∂»';
-$s_reporter_effectiveness = '±®∏Ê»À–ß¬ ';
-$s_developer_by_resolution = 'ø™∑¢»À‘±/ÕÍ≥…∂»';
-$s_percentage_fixed = '% “—–ﬁ’˝';
-$s_percentage_errors = '% ¥ÌŒÛ';
-$s_errors = '¥ÌŒÛ';
-$s_total = '∫œº∆';
-$s_time_stats = '“—Ω‚æˆŒ Ã‚µƒÀ˘”√ ±º‰(ÃÏ ˝)';
-$s_longest_open_bug = ' ±º‰◊Ó≥§µƒŒ¥Ω‚æˆŒ Ã‚';
-$s_longest_open = '◊Ó≥§Œ¥Ω‚æˆµƒ ±º‰';
-$s_average_time = '∆Ωæ˘ ±º‰';
-$s_total_time = '∫œº∆ ±º‰';
-$s_developer_stats = 'Œ Ã‚◊¥Ã¨”Îø™∑¢»À‘±(Œ¥Ω‚æˆ/“—Ω‚æˆ/“—πÿ±’/∫œº∆)';
-$s_reporter_stats = 'Œ Ã‚◊¥Ã¨”Î±®∏Ê»À(Œ¥Ω‚æˆ/“—Ω‚æˆ/“—πÿ±’/∫œº∆)';
-$s_orct = '(Œ¥Ω‚æˆ/“—Ω‚æˆ/“—πÿ±’/∫œº∆)';
+$s_summary_title = '统计报表';
+$s_summary_jpgraph_link = '图形报表';
+$s_by_project = '按项目';
+$s_by_status = '按问题状态';
+$s_by_date = '按日期';
+$s_by_severity = '按严重性';
+$s_by_resolution = '按完成度';
+$s_by_category = '按项目分类';
+$s_by_priority = '按优先权';
+$s_by_developer = '按开发人员';
+$s_by_reporter ='按报告人';
+$s_reporter_by_resolution = '报告人/完成度';
+$s_reporter_effectiveness = '报告人效率';
+$s_developer_by_resolution = '开发人员/完成度';
+$s_percentage_fixed = '% 已修正';
+$s_percentage_errors = '% 错误';
+$s_errors = '错误';
+$s_total = '合计';
+$s_time_stats = '已解决问题的所用时间(天数)';
+$s_longest_open_bug = '时间最长的未解决问题';
+$s_longest_open = '最长未解决的时间';
+$s_average_time = '平均时间';
+$s_total_time = '合计时间';
+$s_developer_stats = '问题状态与开发人员(未解决/已解决/已关闭/合计)';
+$s_reporter_stats = '问题状态与报告人(未解决/已解决/已关闭/合计)';
+$s_orct = '(未解决/已解决/已关闭/合计)';
 
 # view_all_bug_page.php
-$s_any = '»Œ“‚';
-$s_show = 'œ‘ æ';
-$s_changed = '“—±‰∏¸(–° ±)';
-$s_viewing_bugs_title = '≤Èø¥Œ Ã‚';
-$s_updated = '◊Ó∫Û∏¸–¬';
-$s_sticky = 'œ‘ æ Sticky Œ Ã‚';
-$s_sort = '≈≈–Ú◊÷∂Œ';
+$s_any = '任意';
+$s_show = '显示';
+$s_changed = '已变更(小时)';
+$s_viewing_bugs_title = '查看问题';
+$s_updated = '最后更新';
+$s_sticky = '显示 Sticky 问题';
+$s_sort = '排序字段';
 
 # view_all_inc.php
-$s_none = 'Œﬁ';
-$s_search ='À—À˜';
-$s_view_prev_link = '‰Ø¿¿…œ“ª“≥';
-$s_view_next_link = '‰Ø¿¿œ¬“ª“≥';
-$s_prev = '…œ“ª“≥';
-$s_next = 'œ¬“ª“≥';
-$s_first = ' ◊“≥';
-$s_last = 'ƒ©“≥';
-$s_start_date = 'ø™ º»’∆⁄';
-$s_end_date = 'ÕÍ≥…»’∆⁄';
-$s_use_date_filters = ' π”√ ±º‰π˝¬À';
-$s_yes = ' «';
-$s_no = '∑Ò';
-$s_open_filters = '–ﬁ∏ƒπ˝¬À∆˜';
-$s_or_unassigned = 'ªÚŒ¥∑÷≈…µƒ';
-$s_ok = '»∑∂®';
-$s_select_all = '»´—°';
+$s_none = '无';
+$s_search ='搜索';
+$s_view_prev_link = '浏览上一页';
+$s_view_next_link = '浏览下一页';
+$s_prev = '上一页';
+$s_next = '下一页';
+$s_first = '首页';
+$s_last = '末页';
+$s_start_date = '开始日期';
+$s_end_date = '完成日期';
+$s_use_date_filters = '使用时间过滤';
+$s_yes = '是';
+$s_no = '否';
+$s_open_filters = '修改过滤器';
+$s_or_unassigned = '或未分派的';
+$s_ok = '确定';
+$s_select_all = '全选';
 
 # stored query strings
-$s_use_query = ' π”√π˝¬À∆˜';
-$s_delete_query = '…æ≥˝π˝¬À∆˜';
-$s_query_deleted = 'π˝¬À∆˜“—…æ≥˝';
-$s_save_query = '±£¥Êµ±«∞π˝¬À∆˜';
-$s_reset_query = '÷ÿ÷√π˝¬À∆˜';
-$s_query_name = 'π˝¬À∆˜√˚≥∆';
-$s_query_exists = '’‚∏ˆÃÿ∂®µƒ≤È—Øø…ƒ‹“—æ≠¥Ê‘⁄¡À°£';
-$s_query_dupe_name = '’‚∏ˆ√˚≥∆“—æ≠±ª¡ÌÕ‚“ª∏ˆ≤È—Ø π”√£¨«ÎŒ™µ±«∞≤È—Ø¡ÌÕ‚—°‘Ò“ª∏ˆ√˚≥∆°£';
-$s_query_blank_name = '√ª”–√˚≥∆æÕ≤ªƒ‹±£¥Êπ˝¬À∆˜£¨‘⁄±£¥Ê«∞«Î∏¯µ±«∞π˝¬À∆˜∆“ª∏ˆ√˚◊÷°£';
-$s_query_store_error = '±£¥Ê’‚∏ˆ≤È—Ø ±∑¢…˙¥ÌŒÛ°£';
-$s_open_queries = 'π‹¿Ìπ˝¬À∆˜';
-$s_query_delete_msg = 'ƒ„»∑∂®“™…æ≥˝’‚∏ˆ≤È—Ø¬£ø';
+$s_use_query = '使用过滤器';
+$s_delete_query = '删除过滤器';
+$s_query_deleted = '过滤器已删除';
+$s_save_query = '保存当前过滤器';
+$s_reset_query = '重置过滤器';
+$s_query_name = '过滤器名称';
+$s_query_exists = '这个特定的查询可能已经存在了。';
+$s_query_dupe_name = '这个名称已经被另外一个查询使用，请为当前查询另外选择一个名称。';
+$s_query_blank_name = '没有名称就不能保存过滤器，在保存前请给当前过滤器起一个名字。';
+$s_query_store_error = '保存这个查询时发生错误。';
+$s_open_queries = '管理过滤器';
+$s_query_delete_msg = '你确定要删除这个查询吗？';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'ºÚ“◊≤Èø¥';
-$s_viewing_bug_advanced_details_title = '≤Èø¥Œ Ã‚Ω¯∂»œÍœ∏◊ ¡œ';
-$s_product_build = '≤˙∆∑ππΩ®∫≈';
-$s_system_profile = 'œµÕ≥Àµ√˜';
-$s_update_bug_button = '–ﬁ∏ƒŒ Ã‚';
-$s_bug_assign_to_button = '∑÷≈…∏¯£∫';
-$s_bug_status_to_button = 'Ω´◊¥Ã¨∏ƒŒ™:';
-$s_reopen_bug_button = '÷ÿ–¬¥Úø™Œ Ã‚';
-$s_move_bug_button = '“∆∂ØŒ Ã‚';
-$s_attached_files = '∏Ωº˛';
-$s_publish = '∑¢≤º';
-$s_cached = '“—ª∫¥Ê';
+$s_view_simple_link = '简易查看';
+$s_viewing_bug_advanced_details_title = '查看问题进度详细资料';
+$s_product_build = '产品构建号';
+$s_system_profile = '系统说明';
+$s_update_bug_button = '修改问题';
+$s_bug_assign_to_button = '分派给：';
+$s_bug_status_to_button = '将状态改为:';
+$s_reopen_bug_button = '重新打开问题';
+$s_move_bug_button = '移动问题';
+$s_attached_files = '附件';
+$s_publish = '发布';
+$s_cached = '已缓存';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = '∏ﬂº∂≤Èø¥';
-$s_viewing_bug_simple_details_title = '≤Èø¥Œ Ã‚œÍœ∏◊ ¡œ(ºÚ“◊)';
+$s_view_advanced_link = '高级查看';
+$s_viewing_bug_simple_details_title = '查看问题详细资料(简易)';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'µ±«∞√ª”–”√ªß‘⁄º‡ ”’‚∏ˆŒ Ã‚°£';
-$s_users_monitoring_bug = '’˝‘⁄º‡ ”’‚∏ˆŒ Ã‚µƒ”√ªß';
-$s_monitoring_user_list = '”√ªß¡–±Ì';
+$s_no_users_monitoring_bug = '当前没有用户在监视这个问题。';
+$s_users_monitoring_bug = '正在监视这个问题的用户';
+$s_monitoring_user_list = '用户列表';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = '√ª”–◊ ÷˙∏√Œ Ã‚µƒ”√ªß°£';
-$s_users_sponsoring_bug = '◊ ÷˙∏√Œ Ã‚µƒ”√ªß';
-$s_sponsors_list = '◊ ÷˙¡–±Ì';
-$s_total_sponsorship_amount = '∫œº∆◊ ÷˙ ˝¡ø = %s';
+$s_no_users_sponsoring_bug = '没有资助该问题的用户。';
+$s_users_sponsoring_bug = '资助该问题的用户';
+$s_sponsors_list = '资助列表';
+$s_total_sponsorship_amount = '合计资助数量 = %s';
 
 # custom field strings
-$s_add_custom_field_button = '–¬Ω®◊‘∂®“Â◊÷∂Œ';
-$s_delete_custom_field_button = '…æ≥˝◊‘∂®“Â◊÷∂Œ';
-$s_delete_custom_field_everywhere = '…æ≥˝À˘”–Œª÷√µƒ◊‘∂®“Â◊÷∂Œ';
-$s_update_custom_field_button = '–ﬁ∏ƒ◊‘∂®“Â◊÷∂Œ';
-$s_add_existing_custom_field = 'ÃÌº”’‚∏ˆ“—¥Ê‘⁄µƒ◊‘∂®“Â◊÷∂Œ';
-$s_edit_custom_field_title = '–ﬁ∏ƒ◊‘∂®“Â◊÷∂Œ';
-$s_custom_field = '◊÷∂Œ';
-$s_custom_fields_setup = '◊‘∂®“Â◊÷∂Œ';
-$s_custom_field_name = '√˚≥∆';
-$s_custom_field_project_count = 'œÓƒø√˚≥∆';
-$s_custom_field_type = '¿‡–Õ';
-$s_custom_field_possible_values = 'ø…ƒ‹»°÷µ';
-$s_custom_field_default_value = 'ƒ¨»œ÷µ';
-$s_custom_field_valid_regexp = '’˝‘Ú±Ì¥Ô Ω';
-$s_custom_field_access_level_r = '∂¡»®œﬁ';
-$s_custom_field_access_level_rw = '–¥»®œﬁ';
-$s_custom_field_length_min = '◊Ó–°≥§∂»';
-$s_custom_field_length_max = '◊Ó¥Û≥§∂»';
-$s_custom_field_advanced = '∏ﬂº∂';
-$s_custom_field_display_report = '‘⁄¥¥Ω®Œ Ã‚ ±œ‘ æ';
-$s_custom_field_display_update = '‘⁄∏¸–¬Œ Ã‚ ±œ‘ æ';
-$s_custom_field_display_resolved = 'Ω‚æˆŒ Ã‚ ±œ‘ æ';
-$s_custom_field_display_closed = 'πÿ±’Œ Ã‚ ±œ‘ æ';
-$s_custom_field_require_report = '±®∏ÊŒ Ã‚ ±±ÿ–Ë';
-$s_custom_field_require_update = '–ﬁ∏ƒŒ Ã‚ ±±ÿ–Ë';
-$s_custom_field_require_resolved = 'Ω‚æˆŒ Ã‚ ±±ÿ–Ë';
-$s_custom_field_require_closed = 'πÿ±’Œ Ã‚ ±±ÿ–Ë';
+$s_add_custom_field_button = '新建自定义字段';
+$s_delete_custom_field_button = '删除自定义字段';
+$s_delete_custom_field_everywhere = '删除所有位置的自定义字段';
+$s_update_custom_field_button = '修改自定义字段';
+$s_add_existing_custom_field = '添加这个已存在的自定义字段';
+$s_edit_custom_field_title = '修改自定义字段';
+$s_custom_field = '字段';
+$s_custom_fields_setup = '自定义字段';
+$s_custom_field_name = '名称';
+$s_custom_field_project_count = '项目名称';
+$s_custom_field_type = '类型';
+$s_custom_field_possible_values = '可能取值';
+$s_custom_field_default_value = '默认值';
+$s_custom_field_valid_regexp = '正则表达式';
+$s_custom_field_access_level_r = '读权限';
+$s_custom_field_access_level_rw = '写权限';
+$s_custom_field_length_min = '最小长度';
+$s_custom_field_length_max = '最大长度';
+$s_custom_field_advanced = '高级';
+$s_custom_field_display_report = '在创建问题时显示';
+$s_custom_field_display_update = '在更新问题时显示';
+$s_custom_field_display_resolved = '解决问题时显示';
+$s_custom_field_display_closed = '关闭问题时显示';
+$s_custom_field_require_report = '报告问题时必需';
+$s_custom_field_require_update = '修改问题时必需';
+$s_custom_field_require_resolved = '解决问题时必需';
+$s_custom_field_require_closed = '关闭问题时必需';
 
-$s_custom_field_sequence = 'À≥–Ú';
-$s_custom_field_type_enum_string = '0:◊÷∑˚¥Æ,1: ˝÷µ,2:∏°µ„ ˝,3:√∂æŸ¿‡–Õ,4:µÁ◊”” º˛,5:—°‘ÒøÚ,6:¡–±Ì,7:∂‡—°¡–±Ì';
+$s_custom_field_sequence = '顺序';
+$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:选择框,6:列表,7:多选列表';
 
-$s_confirm_used_custom_field_deletion = 'µ±«∞”–÷¡…Ÿ“ª∏ˆœÓƒø¡¥Ω”µΩ¡À’‚∏ˆ◊÷∂Œ£¨»Áπ˚ºÃ–¯£¨’‚∏ˆ◊÷∂ŒµƒÀ˘”–÷µ∂ºΩ´±ª”¿æ√…æ≥˝£ª…æ≥˝≤Ÿ◊˜Œﬁ∑®ª÷∏¥°£»Áπ˚ƒ„≤ªœÎ…æ≥˝’‚∏ˆ◊÷∂Œ£¨«Îµ„ª˜‰Ø¿¿∆˜µƒ°∞∫ÛÕÀ°±∞¥≈•£ªµ„ª˜œ¬√Êµƒ∞¥≈•ºÃ–¯…æ≥˝°£';
-$s_confirm_custom_field_deletion = 'ƒ„»∑∂®“™…æ≥˝’‚∏ˆ◊‘∂®“Â◊÷∂Œ∫ÕÀ˘”–œ‡πÿ¡™µƒ÷µ¬£ø';
-$s_field_delete_button = '…æ≥˝◊÷∂Œ';
+$s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
+$s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
+$s_field_delete_button = '删除字段';
 
-$s_confirm_custom_field_unlinking = '»∑∂®“™¥”∏√œÓƒø÷–“∆≥˝£®»°œ˚¡¥Ω”£©∏√◊‘∂®“Â◊÷∂Œ£¨≤¢…æ≥˝À˘”–πÿ¡™÷µ¬£ø';
-$s_field_remove_button = '“∆≥˝◊÷∂Œ';
+$s_confirm_custom_field_unlinking = '确定要从该项目中移除（取消链接）该自定义字段，并删除所有关联值吗？';
+$s_field_remove_button = '移除字段';
 
-$s_hide_status = '“˛≤ÿ◊¥Ã¨';
-$s_filter_closed = '“—πÿ±’';
-$s_filter_resolved = '“—Ω‚æˆ';
-$s_hide_closed = '“˛≤ÿ“—πÿ±’µƒŒ Ã‚';
-$s_hide_resolved = '“˛≤ÿ“—Ω‚æˆµƒŒ Ã‚';
-$s_and_above = '∫Õ“‘…œ';
-$s_advanced_filters = '∏ﬂº∂π˝¬À∆˜';
-$s_simple_filters = 'ºÚ“◊π˝¬À∆˜';
-$s_monitored_by = 'º‡ ”»À';
+$s_hide_status = '隐藏状态';
+$s_filter_closed = '已关闭';
+$s_filter_resolved = '已解决';
+$s_hide_closed = '隐藏已关闭的问题';
+$s_hide_resolved = '隐藏已解决的问题';
+$s_and_above = '和以上';
+$s_advanced_filters = '高级过滤器';
+$s_simple_filters = '简易过滤器';
+$s_monitored_by = '监视人';
 
-$s_attachments = '∏Ωº˛';
+$s_attachments = '附件';
 $s_attachment_alt = 'A';
 
 # PHPMailer
-$s_phpmailer_language = '÷–Œƒ';
+$s_phpmailer_language = '中文';
 
 # Sponsorship Strings
-$s_sponsors = '%d œÓ◊ ÷˙';
-$s_sponsorship_added = '“—ÃÌº”◊ ÷˙';
-$s_sponsorship_updated = '“—–ﬁ∏ƒ◊ ÷˙';
-$s_sponsorship_deleted = '“—…æ≥˝◊ ÷˙';
-$s_sponsorship_paid = '“—÷ß∏∂µƒ◊ ÷˙';
-$s_sponsorship_more_info = 'πÿ”⁄◊ ÷˙µƒ∏¸∂‡–≈œ¢';
-$s_sponsorship_total = '◊ ÷˙∫œº∆';
+$s_sponsors = '%d 项资助';
+$s_sponsorship_added = '已添加资助';
+$s_sponsorship_updated = '已修改资助';
+$s_sponsorship_deleted = '已删除资助';
+$s_sponsorship_paid = '已支付的资助';
+$s_sponsorship_more_info = '关于资助的更多信息';
+$s_sponsorship_total = '资助合计';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1197,111 +1197,111 @@ $s_sponsorship_total = '◊ ÷˙∫œº∆';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = '–ﬁ∏ƒº«¬º';
+$s_changelog = '修改记录';
 
 # Http auth
-$s_http_auth_realm = 'Mantis Œ Ã‚∏˙◊ŸœµÕ≥µ«¬º';
+$s_http_auth_realm = 'Mantis 问题跟踪系统登录';
 
-$s_bug = 'Œ Ã‚';
-$s_add_new_relationship = '–¬Ω®πÿ¡™';
-$s_add_new_relationship_button = 'ÃÌº”';
-$s_this_bug = 'µ±«∞Œ Ã‚';
-$s_relationship_added = 'πÿ¡™“—ÃÌº”';
-$s_relationship_deleted = 'πÿ¡™“—…æ≥˝';
-$s_no_relationship = 'Œﬁπÿ¡™';
-$s_relationship_replaced = '“—ÃÊªªπÿ¡™';
-$s_replace_relationship_button = 'ÃÊªª';
-$s_replace_relationship_sure_msg = '‘⁄’‚¡Ω∏ˆŒ Ã‚º‰“—æ≠”–“ª∏ˆπÿ¡™£¨“™ÃÊªªœ÷”–µƒπÿ¡™¬£ø';
-$s_relationship_with_parent = '”Î…œº∂Œ Ã‚πÿ¡™';
-$s_delete_relationship_button = '…æ≥˝';
-$s_delete_relationship_sure_msg = 'ƒ„»∑∂®“™…æ≥˝∏√πÿ¡™¬£ø';
-$s_relationship_warning_blocking_bugs_not_resolved = 'µ±«∞Œ Ã‚µƒ≤ø∑÷◊”œÓªπ√ª”–Ω‚æˆªÚπÿ±’°£';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>◊¢“‚</b>£∫µ±«∞Œ Ã‚µƒ≤ø∑÷◊”œÓªπ√ª”–Ω‚æˆªÚπÿ±’°£<br>‘⁄<b>Ω‚æˆªÚπÿ±’</b>“ª∏ˆ◊Êœ»Œ Ã‚«∞£¨”¶∏√Ω‚æˆªÚπÿ±’À˘”–œ‡πÿ¡™µƒ◊”œÓŒ Ã‚°£';
-$s_create_child_bug_button = '¥¥Ω®◊”œÓŒ Ã‚';
-$s_bug_cloned_to = 'Œ Ã‚“—∏¥÷∆';
-$s_bug_created_from = 'Œ Ã‚≤˙…˙”⁄';
+$s_bug = '问题';
+$s_add_new_relationship = '新建关联';
+$s_add_new_relationship_button = '添加';
+$s_this_bug = '当前问题';
+$s_relationship_added = '关联已添加';
+$s_relationship_deleted = '关联已删除';
+$s_no_relationship = '无关联';
+$s_relationship_replaced = '已替换关联';
+$s_replace_relationship_button = '替换';
+$s_replace_relationship_sure_msg = '在这两个问题间已经有一个关联，要替换现有的关联吗？';
+$s_relationship_with_parent = '与上级问题关联';
+$s_delete_relationship_button = '删除';
+$s_delete_relationship_sure_msg = '你确定要删除该关联吗？';
+$s_relationship_warning_blocking_bugs_not_resolved = '当前问题的部分子项还没有解决或关闭。';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>注意</b>：当前问题的部分子项还没有解决或关闭。<br>在<b>解决或关闭</b>一个祖先问题前，应该解决或关闭所有相关联的子项问题。';
+$s_create_child_bug_button = '创建子项问题';
+$s_bug_cloned_to = '问题已复制';
+$s_bug_created_from = '问题产生于';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = 'πÿ¡™Õº±Ì';
-$s_relation_graph = 'πÿ¡™Õº±Ì';
-$s_dependency_graph = '“¿¿µÕº±Ì';
-$s_vertical = '¥π÷±';
-$s_horizontal = 'ÀÆ∆Ω';
-$s_view_issue = '≤Èø¥Œ Ã‚';
+$s_viewing_bug_relationship_graph_title = '关联图表';
+$s_relation_graph = '关联图表';
+$s_dependency_graph = '依赖图表';
+$s_vertical = '垂直';
+$s_horizontal = '水平';
+$s_view_issue = '查看问题';
 
 # Source Control Integration
-$s_checkin = '«©»Î';
+$s_checkin = '签入';
 
 # Pemissions report
-$s_perm_rpt_capability = '»®œﬁ';
-$s_view = ' ”Õº';
-$s_issues = 'Œ Ã‚';
-$s_report_issue = '±®∏ÊŒ Ã‚';
-$s_update_issue = '–ﬁ∏ƒŒ Ã‚';
-$s_monitor_issue = 'º‡ ”Œ Ã‚';
-$s_handle_issue = 'π‹¿ÌŒ Ã‚';
-$s_move_issue = '“∆∂ØŒ Ã‚';
-$s_delete_issue = '…æ≥˝Œ Ã‚';
-$s_reopen_issue = '÷ÿ–¬¥Úø™Œ Ã‚';
-$s_view_private_issues = '≤Èø¥ÀΩ”–Œ Ã‚';
-$s_update_readonly_issues = '–ﬁ∏ƒ÷ª∂¡Œ Ã‚';
-$s_update_issue_status = '–ﬁ∏ƒŒ Ã‚◊¥Ã¨';
-$s_set_view_status = '…Ë÷√ ”Õº◊¥Ã¨(π´ø™µƒ vs ÀΩ”–µƒ)';
-$s_update_view_status = '–ﬁ∏ƒ ”Õº◊¥Ã¨(π´ø™µƒ vs ÀΩ”–µƒ)';
-$s_show_list_of_users_monitoring_issue = 'œ‘ æ’˝‘⁄º‡ ”Œ Ã‚µƒ”√ªß¡–±Ì';
-$s_notes = '<b>◊¢ Õ</b>';
-$s_add_notes = 'ÃÌº”◊¢ Õ';
-$s_update_notes = '–ﬁ∏ƒ◊¢ Õ';
-$s_delete_note = '…æ≥˝◊¢ Õ';
-$s_view_private_notes = '≤Èø¥ÀΩ”–◊¢ Õ';
-$s_news = '<b>–¬Œ≈</b>';
-$s_view_private_news = '≤Èø¥ÀΩ”––¬Œ≈';
-$s_manage_news = 'π‹¿Ì–¬Œ≈';
-$s_view_list_of_attachments = '≤Èø¥∏Ωº˛¡–±Ì';
-$s_download_attachments = 'œ¬‘ÿ∏Ωº˛';
-$s_delete_attachments = '…æ≥˝∏Ωº˛';
-$s_delete_attachment_button = "…æ≥˝";
-$s_delete_attachment_sure_msg = 'ƒ„»∑∂®“™…æ≥˝∏√∏Ωº˛¬£ø';
-$s_upload_issue_attachments = '…œ¥´Œ Ã‚œ‡πÿ∏Ωº˛';
-$s_filters = 'π˝¬À∆˜';
-$s_save_filters = '±£¥Êπ˝¬À∆˜';
-$s_save_filters_as_shared = '±£¥ÊŒ™π≤œÌπ˝¬À∆˜';
-$s_use_saved_filters = ' π”√“—±£¥Êµƒπ˝¬À∆˜';
-$s_create_project = '¥¥Ω®œÓƒø';
-$s_delete_project = '…æ≥˝œÓƒø';
-$s_manage_project = 'π‹¿ÌœÓƒø';
-$s_manage_user_access_to_project = 'π‹¿Ì”√ªß∂‘œÓƒøµƒ»®œﬁ';
-$s_automatically_included_in_private_projects = '◊‘∂Ø∞¸¿®‘⁄ÀΩ”–œÓƒø÷–';
-$s_project_documents = 'œÓƒøŒƒµµ';
-$s_view_project_documents = '≤Èø¥œÓƒøŒƒµµ';
-$s_upload_project_documents = '…œ¥´œÓƒøŒƒµµ';
-$s_link_custom_fields_to_projects = 'Ω´◊‘∂®“Â◊÷∂Œ¡¨Ω”µΩ∏√œÓƒø';
-$s_sponsorships = '◊ ÷˙';
-$s_view_sponsorship_details = '≤Èø¥◊ ÷˙œÍœ∏–≈œ¢';
-$s_view_sponsorship_total = '≤Èø¥À˘”–◊ ÷˙';
-$s_sponsor_issue = '◊ ÷˙Œ Ã‚';
-$s_assign_sponsored_issue = '∑÷≈…”–◊ ÷˙µƒŒ Ã‚';
-$s_handle_sponsored_issue = 'π‹¿Ì”–◊ ÷˙µƒŒ Ã‚';
-$s_others = '∆‰À˚';
-$s_see_email_addresses_of_other_users = '≤Èø¥∆‰À¸”√ªßµƒEmailµÿ÷∑';
-$s_send_reminders = '∑¢ÀÕÃ·–—';
-$s_add_profiles = 'ÃÌº”≈‰÷√';
-$s_notify_of_new_user_created = '¥¥Ω®–¬”√ªß ±Ã·–—';
-$s_email_notification = 'EMAIL Ã·–—';
-$s_status_changed_to = '◊¥Ã¨“—–ﬁ∏ƒŒ™';
-$s_email_on_deleted = '…æ≥˝ ±∑¢ÀÕ Email';
-$s_email_on_sponsorship_changed = '◊ ÷˙∏ƒ±‰ ±∑¢ÀÕ Email';
-$s_email_on_relationship_changed = 'πÿ¡™∏ƒ±‰ ±∑¢ÀÕ Email';
+$s_perm_rpt_capability = '权限';
+$s_view = '视图';
+$s_issues = '问题';
+$s_report_issue = '报告问题';
+$s_update_issue = '修改问题';
+$s_monitor_issue = '监视问题';
+$s_handle_issue = '管理问题';
+$s_move_issue = '移动问题';
+$s_delete_issue = '删除问题';
+$s_reopen_issue = '重新打开问题';
+$s_view_private_issues = '查看私有问题';
+$s_update_readonly_issues = '修改只读问题';
+$s_update_issue_status = '修改问题状态';
+$s_set_view_status = '设置视图状态(公开的 vs 私有的)';
+$s_update_view_status = '修改视图状态(公开的 vs 私有的)';
+$s_show_list_of_users_monitoring_issue = '显示正在监视问题的用户列表';
+$s_notes = '<b>注释</b>';
+$s_add_notes = '添加注释';
+$s_update_notes = '修改注释';
+$s_delete_note = '删除注释';
+$s_view_private_notes = '查看私有注释';
+$s_news = '<b>新闻</b>';
+$s_view_private_news = '查看私有新闻';
+$s_manage_news = '管理新闻';
+$s_view_list_of_attachments = '查看附件列表';
+$s_download_attachments = '下载附件';
+$s_delete_attachments = '删除附件';
+$s_delete_attachment_button = "删除";
+$s_delete_attachment_sure_msg = '你确定要删除该附件吗？';
+$s_upload_issue_attachments = '上传问题相关附件';
+$s_filters = '过滤器';
+$s_save_filters = '保存过滤器';
+$s_save_filters_as_shared = '保存为共享过滤器';
+$s_use_saved_filters = '使用已保存的过滤器';
+$s_create_project = '创建项目';
+$s_delete_project = '删除项目';
+$s_manage_project = '管理项目';
+$s_manage_user_access_to_project = '管理用户对项目的权限';
+$s_automatically_included_in_private_projects = '自动包括在私有项目中';
+$s_project_documents = '项目文档';
+$s_view_project_documents = '查看项目文档';
+$s_upload_project_documents = '上传项目文档';
+$s_link_custom_fields_to_projects = '将自定义字段连接到该项目';
+$s_sponsorships = '资助';
+$s_view_sponsorship_details = '查看资助详细信息';
+$s_view_sponsorship_total = '查看所有资助';
+$s_sponsor_issue = '资助问题';
+$s_assign_sponsored_issue = '分派有资助的问题';
+$s_handle_sponsored_issue = '管理有资助的问题';
+$s_others = '其他';
+$s_see_email_addresses_of_other_users = '查看其它用户的Email地址';
+$s_send_reminders = '发送提醒';
+$s_add_profiles = '添加配置';
+$s_notify_of_new_user_created = '创建新用户时提醒';
+$s_email_notification = 'EMAIL 提醒';
+$s_status_changed_to = '状态已修改为';
+$s_email_on_deleted = '删除时发送 Email';
+$s_email_on_sponsorship_changed = '资助改变时发送 Email';
+$s_email_on_relationship_changed = '关联改变时发送 Email';
 
 # DHTML filters
-$s_loading = '’˝‘⁄‘ÿ»Î...';
+$s_loading = '正在载入...';
 
 # filter_api.php
-$s_between = 'ΩÈ”⁄' ;
-$s_on_or_before = 'µ»”⁄ªÚ’ﬂ‘Á”⁄' ;
-$s_before = '‘Á”⁄' ;
+$s_between = '介于' ;
+$s_on_or_before = '等于或者早于' ;
+$s_before = '早于' ;
 # $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'ÕÌ”⁄' ;
-$s_on_or_after = 'µ»”⁄ªÚ’ﬂÕÌ”⁄' ;
+$s_after = '晚于' ;
+$s_on_or_after = '等于或者晚于' ;
 
 ?>
