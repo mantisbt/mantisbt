@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.8 2005-08-16 01:49:57 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.9 2005-08-25 03:20:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -108,6 +108,7 @@
 	}
 
 	# set the values for specific actions if different from the defaults
+	$t_notify_flags = array();
 	foreach ( $t_valid_actions as $t_action ) {
 		$t_action_printed = false;
 		foreach ( $t_valid_flags as $t_flag ) {
