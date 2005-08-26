@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.121 2005-08-11 16:20:13 thraxisp Exp $
+	# $Id: filter_api.php,v 1.122 2005-08-26 17:05:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1046,7 +1046,10 @@
 			$t_show_version = ( ON == config_get( 'show_product_version' ) )
 					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows_with_subs( $t_project_id ) ) > 0 ) );
-
+			# overload handler_id setting if user isn't supposed to see them (ref #6189)
+			if ( ! access_has_project_level( config_get( 'view_handler_threshold' ), $t_project_id ) ) { 
+				$t_filter['handler_id'] = array( META_FILTER_ANY ); 
+			} 
 		?>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
@@ -2585,6 +2588,7 @@
 		<!-- Handler -->
 		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
 			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['handler_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<?php if ( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) { ?>
 			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['handler_id'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -2594,6 +2598,7 @@
 				}
 			?>
 			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
+			<?php } ?>
 		</select>
 		<?php
 	}
