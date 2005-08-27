@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.33 2005-07-27 19:01:50 thraxisp Exp $
+	# $Id: history_api.php,v 1.34 2005-08-27 01:15:59 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -251,6 +251,16 @@
 			case 'sponsorship_total':
 				$t_field_localized = lang_get( 'sponsorship_total' );
 				break;
+			default:
+				# assume it's a custom field name
+				$t_field_id = custom_field_get_id_from_name( $p_field_name );
+				if ( false !== $t_field_id ) {
+					$t_cf_type = custom_field_type( $t_field_id );
+					if ( '' != $p_old_value ) {
+						$p_old_value = string_custom_field_value_for_email( $p_old_value, $t_cf_type ); 
+					}
+					$p_new_value = string_custom_field_value_for_email( $p_new_value, $t_cf_type ); 
+				}
 		}
 
 		if ( NORMAL_TYPE != $p_type ) {
