@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.15 2005-08-01 13:42:55 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.16 2005-08-31 22:49:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -332,7 +332,7 @@
 				echo '</select> </td>';
 			    $t_can_change_flags = true;
 			} else {
-				echo '<td class="center"' . $t_colour . '>' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_access ) . '</td>';
+				echo '<td class="center"' . $t_colour . '>' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_level ) . '</td>';
 			}
 			echo '</tr>' . "\n";
 		}
