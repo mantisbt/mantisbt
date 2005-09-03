@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.8 2005-08-16 01:49:57 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.9 2005-09-03 11:30:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -120,7 +120,7 @@
 	set_capability_row( 'change_view_status_threshold' );
 	set_capability_row( 'show_monitor_list_threshold' );
     set_capability_boolean( 'auto_set_status_to_assigned' );
-    set_capability_enum( 'bug_assigned_status', 'status' );
+    set_capability_enum( 'bug_assigned_status' );
     set_capability_boolean( 'limit_reporters', true );
 
 	# Notes
