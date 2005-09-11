@@ -17,11 +17,11 @@
 	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
 	# -------------------------------------------------
-	# $Revision: 1.4 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-25 20:10:13 $
+	# $Revision: 1.5 $
+	# $Author: vboctor $
+	# $Date: 2005-09-11 11:03:33 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.4 2005-08-25 20:10:13 thraxisp Exp $
+	# $Id: strings_french_canadian.txt,v 1.5 2005-09-11 11:03:33 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -622,7 +622,7 @@ $s_login_page_info = 'Bienvenue au système de gestion des bogues.';
 $s_login_title = 'Utilisateur';
 $s_save_login = 'Mémoriser l\'utilisateur';
 $s_choose_project = 'Choisir un projet';
-$s_login_button = 'Se brancher;
+$s_login_button = 'Se brancher';
 $s_signup_link = 'Ouvrir un nouveau compte';
 $s_lost_password_link = 'Oublié votre mot de passe ?';
 
