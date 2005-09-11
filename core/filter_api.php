@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.122 2005-08-26 17:05:11 thraxisp Exp $
+	# $Id: filter_api.php,v 1.123 2005-09-11 19:38:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1641,6 +1641,7 @@
 					PRINT lang_get( 'private' );
 				} else {
 					PRINT lang_get( 'any' );
+					$t_filter['view_state'] = META_FILTER_ANY;
 				}
 				?>
 				<input type="hidden" name="view_state" value="<?php echo $t_filter['view_state'];?>" />
