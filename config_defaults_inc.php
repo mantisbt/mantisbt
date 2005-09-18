@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.283 2005-09-11 11:24:09 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.284 2005-09-18 01:55:16 ryandesign Exp $
 	# --------------------------------------------------------
 
 
@@ -350,6 +350,7 @@
 		'japanese_sjis',
 		'japanese_utf8',
 		'korean',
+		'korean_utf8',
 		'latvian',
 		'lithuanian',
 		'norwegian',
