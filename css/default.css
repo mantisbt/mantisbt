@@ -24,6 +24,7 @@ span.print			{ font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
 span.small 			{ font-size: 8pt; font-weight: normal; }
 span.pagetitle		{ font-size: 12pt; font-weight: bold; text-align: center }
+span.bracket-link	{ white-space: nowrap; }
 
 table				{ }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }
@@ -74,6 +75,7 @@ td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
 td.menu					{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }
+td.menu a				{ white-space: nowrap; }
 
 td.news-heading-public	{ background-color: #c8c8e8; color: #000000; text-align: left; border-bottom: 1px solid #000000; }
 td.news-heading-private	{ background-color: #d8d8d8;       color: #000000; text-align: left; border-bottom: 1px solid #000000; }
