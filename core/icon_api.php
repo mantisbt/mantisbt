@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.13 2005-06-08 15:02:21 vboctor Exp $
+	# $Id: icon_api.php,v 1.14 2005-09-19 03:17:16 ryandesign Exp $
 	# --------------------------------------------------------
 
 	### Icon API ###
@@ -16,10 +16,9 @@
 	function icon_get_status_icon( $p_icon ) {
 		$t_icon_path		= config_get( 'icon_path' );
 		$t_status_icon_arr	= config_get( 'status_icon_arr' );
-
-		$t_none = NONE;
+		$t_priotext			= get_enum_element( 'priority', $p_icon );
 		if ( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
-			return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" />";
+			return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
 		} else {
 			return "&nbsp;";
 		}
