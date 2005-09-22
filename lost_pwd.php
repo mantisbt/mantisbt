@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd.php,v 1.5 2005-05-25 19:57:12 marcelloscata Exp $
+	# $Id: lost_pwd.php,v 1.6 2005-09-22 11:15:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -33,9 +33,12 @@
 	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
 
+	$c_username = db_prepare_string( $f_username );
+	$c_email = db_prepare_string( $f_email );
+
 	$t_user_table = config_get( 'mantis_user_table' );
 
-	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = \'' . $f_username . '\' and email = \'' . $f_email . '\'';
+	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = \'' . $c_username . '\' and email = \'' . $c_email . '\'';
 	$result = db_query( $query );
 
 	if ( 0 == db_num_rows( $result ) ) {
