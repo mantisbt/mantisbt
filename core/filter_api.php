@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.124 2005-10-02 18:47:56 thraxisp Exp $
+	# $Id: filter_api.php,v 1.125 2005-10-02 21:27:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -625,27 +625,32 @@
                     # Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
                     # and only after this process ends (if it is able to) the result query will be filtered
                     # by the WHERE clause and by the DISTINCT clause
-					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id AND $t_table_name.field_id = $t_cfid " );
+					$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id AND $t_table_name.field_id = $t_cfid ";
 
 					if ($t_def['type'] == CUSTOM_FIELD_TYPE_DATE) {
 						switch ($t_filter['custom_fields'][$t_cfid][0]) {
 						case CUSTOM_FIELD_DATE_ANY:
 							break ;
 						case CUSTOM_FIELD_DATE_NONE:
+							array_push( $t_join_clauses, $t_cf_join_clause );
 							$t_custom_where_clause = '(( ' . $t_table_name . '.bug_id is null) OR ( ' . $t_table_name . '.value = 0)' ;
 							break ;
 						case CUSTOM_FIELD_DATE_BEFORE:
+							array_push( $t_join_clauses, $t_cf_join_clause );
 							$t_custom_where_clause = '(( ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ($t_filter['custom_fields'][$t_cfid][2]) . ')' ;
 							break ;
 						case CUSTOM_FIELD_DATE_AFTER:
+							array_push( $t_join_clauses, $t_cf_join_clause );
 							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
 							break ;
 						default:
+							array_push( $t_join_clauses, $t_cf_join_clause );
 							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2] . ')' ;
 							break ;
 						}
 					} else {
 
+						array_push( $t_join_clauses, $t_cf_join_clause );
 						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 							if ( isset( $t_filter_member ) &&
 								( META_FILTER_ANY != strtolower( $t_filter_member ) ) ) {
