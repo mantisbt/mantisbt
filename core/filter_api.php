@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.123 2005-09-11 19:38:23 thraxisp Exp $
+	# $Id: filter_api.php,v 1.124 2005-10-02 18:47:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -621,21 +621,21 @@
 				if ( !$t_any_found ) {
 					$t_def = custom_field_get_definition( $t_cfid );
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
-					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
+                    # We need to filter each joined table or the result query will explode in dimensions
+                    # Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
+                    # and only after this process ends (if it is able to) the result query will be filtered
+                    # by the WHERE clause and by the DISTINCT clause
+					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id AND $t_table_name.field_id = $t_cfid " );
 
 					if ($t_def['type'] == CUSTOM_FIELD_TYPE_DATE) {
 						switch ($t_filter['custom_fields'][$t_cfid][0]) {
 						case CUSTOM_FIELD_DATE_ANY:
 							break ;
 						case CUSTOM_FIELD_DATE_NONE:
-							// need to modify that last join, nasty I know but unless you want to upgrade everyone using mysql to 4.1.....
-							$t_my_join = array_pop($t_join_clauses) ;
-							$t_my_join .= ' AND ' . $t_table_name . '.field_id = ' . $t_cfid ;
-							array_push( $t_join_clauses, $t_my_join ) ;
 							$t_custom_where_clause = '(( ' . $t_table_name . '.bug_id is null) OR ( ' . $t_table_name . '.value = 0)' ;
 							break ;
 						case CUSTOM_FIELD_DATE_BEFORE:
-							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ($t_filter['custom_fields'][$t_cfid][2]) . ')' ;
+							$t_custom_where_clause = '(( ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ($t_filter['custom_fields'][$t_cfid][2]) . ')' ;
 							break ;
 						case CUSTOM_FIELD_DATE_AFTER:
 							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
@@ -662,16 +662,16 @@
 									$t_custom_where_clause .= ' OR ';
 								}
 
-								$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value ";
+								$t_custom_where_clause .= "$t_table_name.value ";
 								switch( $t_def['type'] ) {
 								case CUSTOM_FIELD_TYPE_MULTILIST:
 								case CUSTOM_FIELD_TYPE_CHECKBOX:
 									$t_custom_where_clause .= "LIKE '%|";
-									$t_custom_where_clause_closing = "|%' )";
+									$t_custom_where_clause_closing = "|%'";
 									break;
 								default:
 									$t_custom_where_clause .= "= '";
-									$t_custom_where_clause_closing = "' )";
+									$t_custom_where_clause_closing = "'";
 								}
 								$t_custom_where_clause .= db_prepare_string( $t_filter_member );
 								$t_custom_where_clause .= $t_custom_where_clause_closing;
@@ -2416,7 +2416,9 @@
 			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date', false );
 		}
 		if ( !isset( $p_filter_arr['view_state'] ) ) {
-			$p_filter_arr['view_state'] = gpc_get_int( 'view_state', '' );
+			$p_filter_arr['view_state'] = gpc_get( 'view_state', '' );
+		} else if ( ( $p_filter_arr['view_state'] == 'any' ) || ( $p_filter_arr['view_state'] == 0 ) ) {
+			$p_filter_arr['view_state'] = META_FILTER_ANY;
 		}
 		if ( !isset( $p_filter_arr['relationship_type'] ) ) {
 			$p_filter_arr['relationship_type'] = gpc_get_int( 'relationship_type', -1 );
