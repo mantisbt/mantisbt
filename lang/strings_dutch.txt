@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.93 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:01 $
+	# $Revision: 1.94 $
+	# $Author: bigbadger $
+	# $Date: 2005-10-21 23:42:43 $
 	#
-	# $Id: strings_dutch.txt,v 1.93 2005-08-08 21:29:01 thraxisp Exp $
+	# $Id: strings_dutch.txt,v 1.94 2005-10-21 23:42:43 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -24,7 +24,7 @@ $s_charset = 'iso-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Verplaatsen';
-$s_actiongroup_menu_copy = 'Kopie&euml;ren';
+$s_actiongroup_menu_copy = 'Kopiëren';
 $s_actiongroup_menu_assign = 'Toewijzen';
 $s_actiongroup_menu_close = 'Sluiten';
 $s_actiongroup_menu_delete = 'Verwijderen';
@@ -55,9 +55,9 @@ $s_assigned_projects = 'Toegewezen projecten';
 $s_unassigned_projects = 'Niet toegewezen projecten';
 $s_print = 'Print';
 $s_jump = 'Ga naar';
-$s_copy_users = 'Kopie&euml;er gebruikers';
-$s_copy_categories_from = 'Kopieer categorie&euml;n van';
-$s_copy_categories_to = 'Kopieer categorie&euml;n naar';
+$s_copy_users = 'Kopieer gebruikers';
+$s_copy_categories_from = 'Kopieer categorieën van';
+$s_copy_categories_to = 'Kopieer categorieën naar';
 $s_copy_users_from = 'Kopieer gebruikers van';
 $s_copy_users_to = 'Kopieer gebruikers naar';
 $s_bug_history = 'Bug geschiedenis';
@@ -221,7 +221,7 @@ $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'FOUT: geuploade bestand kan niet naar b
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FOUT: Een bug kan geen duplicaat van zichzelf zijn.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Gebruikersveld niet gevonden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Deze naam komt al voor.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Tenminste &euml;&euml;n project gebruikt dit veld nog.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Tenminste één project gebruikt dit veld nog.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FOUT: Ongeldige waarde voor veld.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ongeldige gebruikersveld definitie';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FOUT: LDAP authenticatie mislukt.';
@@ -257,7 +257,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'U moet een e-mail adres
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De opgegeven informatie komt niet overeen met een bekend account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings URL is foutief of is al gebruikt. Meld u nogmaals aan.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hi&euml;rarchie.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hiërarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt het toegangsniveau van de enige beheerder van het systeem niet aanpassen.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
@@ -648,7 +648,7 @@ $s_created_user_part2 = 'met een toegangsniveau van';
 
 # manage_create_user_page.php
 $s_create_new_account_title = 'Aanmaken nieuw account';
-$s_verify_password = 'Verifie&euml;er wachtwoord';
+$s_verify_password = 'Verifieer wachtwoord';
 $s_enabled = 'Geactiveerd';
 $s_protected = 'Beschermd';
 $s_create_user_button = 'Aanmaken gebruiker';
@@ -681,10 +681,11 @@ $s_edit_user_link = 'Aanpassen gebruiker';
 
 # manage_config_email_page
 $s_config_all_projects = 'LET OP: Deze configuratie is van toepassing op ALLE PROJECTEN.';
-$s_config_project = 'Let op: Deze configuratie heeft alleen invloer op het %s project.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
+$s_config_project = 'Let op: Deze configuratie heeft alleen invloed op het %s project.';
+$s_colour_coding = 'In de onderstaande tabel geldt de volgende kleurcode:';
+#$s_colour_project = 'Project setting overrides others.';
+$s_colour_project = 'Project instelling vervangt andere.';
+$s_colour_global = 'Alle project instellingen vervangen de standaard configuratie.';
 $s_issue_reporter = 'Gebruiker die de bug meldde';
 $s_issue_handler = 'Gebruiker die de bug behandelt';
 $s_users_added_bugnote = 'Gebruiker voegt herinnering toe';
@@ -694,15 +695,15 @@ $s_default_notify = 'Standaard meldingsvlaggen gezet op';
 $s_action_notify = 'Zet actie meldingsvlaggen op';
 $s_notify_defaults_change_access = 'Verander gebruikers die de standaard meldingen kunnen zetten naar';
 $s_notify_actions_change_access = 'Verander gebruikers die de actie meldingen kunnen zetten naar';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = "Wis Alle Project Instellingen";
+$s_revert_to_all_project = "Wis Project-specifieke Instellingen";
 
 # manage_config_workflow_page
 $s_non_existent = 'bestaat niet';
 $s_current_status = 'Huidige status';
 $s_next_status = 'Volgende status';
 $s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Instellingen die de werkwijze be&iuml;nvloeden';
+$s_workflow_thresholds = 'Instellingen die de werkwijze beïnvloeden';
 $s_threshold = 'Instelling';
 $s_status_level = 'Status';
 $s_alter_level = 'Wie kan dit wijzigen';
@@ -738,9 +739,9 @@ $s_reopen_status = 'Status waarop een heropende bug wordt gezet';
 $s_reopen_resolution = 'Afhandeling waar een heropende bug op wordt gezet';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_config_delete_sure = 'Weet u zeker dat u de instellinge wilt vervangen voor'';
 $s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_delete_config_button = 'Wis Instellingen';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project is succesvol toegevoegd.';
@@ -780,8 +781,8 @@ $s_public = 'Publiek';
 $s_private = 'Intern';
 $s_update_project_button = 'Aanpassen project';
 $s_delete_project_button = 'Verwijder project';
-$s_categories_and_version_title = 'Categorie&euml;n en versies';
-$s_categories = 'Categorie&euml;n';
+$s_categories_and_version_title = 'Categorieën en versies';
+$s_categories = 'Categorieën';
 $s_add_category_button = 'Toevoegen categorie';
 $s_versions = 'Versies';
 $s_add_version_button = 'Toevoegen versie';
@@ -876,8 +877,8 @@ $s_my_view_title_reported = 'Door mij gerapporteerd';
 $s_my_view_title_assigned = 'Aan mij toegewezen (onopgelost)';
 $s_my_view_title_resolved = 'Opgelost';
 $s_my_view_title_monitored = 'Door mij bijgehouden';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_feedback = 'Wachtend op Feedback van Mij';
+$s_my_view_title_verify = 'Wachtend op Bevestiging van Afhandeling van Mij';
 
 # news_add.php
 $s_news_added_msg = 'Nieuwsbericht toegevoegd.';
@@ -1146,11 +1147,11 @@ $s_custom_field_require_closed = 'Verplicht bij sluiten';
 $s_custom_field_sequence = 'Rij';
 $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselectie lijst,8:Datum';
 
-$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
+$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste één project.  Als u doorgaat, zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';
 $s_field_delete_button = 'Verwijder gebruikersveld';
 
-$s_confirm_custom_field_unlinking = 'Weet u zeker dat u dit gebruikersveld wilt verwijderen (unlink) uit het project en de geassoci&euml;erde waardes verwijderen?';
+$s_confirm_custom_field_unlinking = 'Weet u zeker dat u dit gebruikersveld wilt verwijderen (unlink) uit het project en de geassociëerde waardes verwijderen?';
 $s_field_remove_button = 'Verwijder gebruikersveld';
 
 $s_hide_status = 'Verberg status';
@@ -1174,9 +1175,9 @@ $s_sponsors = '%d sponsor(en)';
 $s_sponsorship_added = 'Sponsoring toegevoegd';
 $s_sponsorship_updated = 'Sponsoring aangepast';
 $s_sponsorship_deleted = 'Sponsoring verwijderd';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Sponsorbedrag Betaald';
 $s_sponsorship_more_info = 'Meer informatie over sponsoring';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = 'Sponsorbedrag Totaal';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1230,19 +1231,19 @@ $s_handle_issue = 'Bug bewerken';
 $s_move_issue = 'Bug verplaatsen';
 $s_delete_issue = 'Bug verwijderen';
 $s_reopen_issue = 'Bug heropenen';
-$s_view_private_issues = 'Priv&euml; bugs inzien';
+$s_view_private_issues = 'Privé bugs inzien';
 $s_update_readonly_issues = 'Read-only bugs aanpassen';
 $s_update_issue_status = 'Bug status aanpassen';
-$s_set_view_status = 'View status aangeven (publiek/priv&euml;)';
-$s_update_view_status = 'View status wijzigen (publiek/priv&euml;)';
+$s_set_view_status = 'View status aangeven (publiek/privé)';
+$s_update_view_status = 'View status wijzigen (publiek/privé)';
 $s_show_list_of_users_monitoring_issue = 'Lijst tonen van monitorende gebruikers';
 $s_notes = 'AANTEKENINGEN';
 $s_add_notes = 'Aantekeningen toevoegen';
 $s_update_notes = 'Aantekeningen wijzigen';
 $s_delete_note = 'Aantekeningen verwijderen';
-$s_view_private_notes = 'Priv&euml; aantekeningen inzien';
+$s_view_private_notes = 'Privé aantekeningen inzien';
 $s_news = 'NIEUWS';
-$s_view_private_news = 'Priv&euml; nieuws inzien';
+$s_view_private_news = 'Privé nieuws inzien';
 $s_manage_news = 'Nieuws beheren';
 $s_view_list_of_attachments = 'Lijst met bijlage(n) zien';
 $s_download_attachments = 'Bijlage(n) downloaden';
@@ -1258,7 +1259,7 @@ $s_create_project = 'Maak project';
 $s_delete_project = 'Verwijder project';
 $s_manage_project = 'Beheer project';
 $s_manage_user_access_to_project = 'Beheer toegang tot een project';
-$s_automatically_included_in_private_projects = 'Automatich toegevoegd aan priv&euml; projecten';
+$s_automatically_included_in_private_projects = 'Automatich toegevoegd aan privé projecten';
 $s_project_documents = 'PROJECT DOCUMENTEN';
 $s_view_project_documents = 'Bekijk project documenten';
 $s_upload_project_documents = 'Upload project documenten';
