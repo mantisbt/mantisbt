@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.95 2005-05-02 14:06:58 vboctor Exp $
+	# $Id: bug_api.php,v 1.96 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -82,12 +82,12 @@
 	function bug_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug;
 
+		if ( isset( $g_cache_bug[$p_bug_id] ) ) {
+			return $g_cache_bug[$p_bug_id];
+		}
+
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$t_bug_table	= config_get( 'mantis_bug_table' );
-
-		if ( isset( $g_cache_bug[$c_bug_id] ) ) {
-			return $g_cache_bug[$c_bug_id];
-		}
 
 		$query = "SELECT *
 				  FROM $t_bug_table

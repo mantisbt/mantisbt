@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.75 2005-06-28 19:22:53 thraxisp Exp $
+	# $Id: project_api.php,v 1.76 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -39,14 +39,13 @@
 	function project_cache_row( $p_project_id, $p_trigger_errors=true ) {
 		global $g_cache_project, $g_cache_project_missing;
 
-		$c_project_id = db_prepare_int( $p_project_id );
-
 		if ( isset ( $g_cache_project[(int)$p_project_id] ) ) {
 			return $g_cache_project[(int)$p_project_id];
 		} else if ( isset( $g_cache_project_missing[(int)$p_project_id] ) ) {
 			return false;
 		}
 
+		$c_project_id = db_prepare_int( $p_project_id );
 		$t_project_table = config_get( 'mantis_project_table' );
 
 		$query = "SELECT *

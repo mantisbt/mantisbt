@@ -6,13 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.53 2005-08-10 16:21:28 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.54 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
 
 	$g_script_login_cookie = null;
 	$g_cache_anonymous_user_cookie_string = null;
+	$g_cache_current_user_cookie_string = null; 
+	$g_cache_cookie_valid = null;
 
 	#===================================
 	# Boolean queries and ensures
@@ -52,6 +54,9 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
+ 		global $g_cache_cookie_valid;
+ 		if($g_cache_cookie_valid)
+ 		  return true;		
 		return ( auth_is_cookie_valid( auth_get_current_user_cookie() ) );
 	}
 
@@ -367,7 +372,11 @@
 	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
-		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
+		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string, $g_cache_current_user_cookie_string;
+ 
+		if( isset( $g_cache_current_user_cookie_string ) ) {
+			return $g_cache_current_user_cookie_string;
+		}
 
 		# if logging in via a script, return that cookie
 		if ( $g_script_login_cookie !== null ) {
@@ -402,6 +411,7 @@
 			}
 		}
 
+		$g_cache_current_user_cookie_string = $t_cookie;
 		return $t_cookie;
 	}
 
@@ -414,8 +424,8 @@
 	# is cookie valid?
 
 	function auth_is_cookie_valid( $p_cookie_string ) {
-		global $g_cache_current_user_id;
-	
+		global $g_cache_current_user_id, $g_cache_cookie_valid;	
+		
 	    # fail if DB isn't accessible
 	    if ( !db_is_connected() ) {
 			return false;
@@ -442,8 +452,12 @@
 		$result = db_query( $query );
 
 		# return true if a matching cookie was found
-		return ( 1 == db_num_rows( $result ) );
-	}
+ 		$g_cache_cookie_valid = false;
+ 		if( 1 == db_num_rows( $result ) ) {
+ 			$g_cache_cookie_valid = true;
+ 			return ( true );
+ 		}
+}
 	
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them

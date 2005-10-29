@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.62 2005-07-25 11:55:36 thraxisp Exp $
+	# $Id: helper_api.php,v 1.63 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -148,40 +148,43 @@
     #  This typically applies to the view bug pages where the "current"
     #  project as used by the filters, etc, does not match the bug being viewed.
     $g_project_override = null;
+    $g_cache_current_project = null;
     
 	# --------------------
 	# Return the current project id as stored in a cookie
 	#  If no cookie exists, the user's default project is returned
 	function helper_get_current_project() {
-        global $g_project_override;
+        global $g_project_override, $g_cache_current_project;
         
         if ( $g_project_override !== null ) {
             return $g_project_override;
         }
-        
-		$t_cookie_name = config_get( 'project_cookie' );
 
-		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
+        if( $g_cache_current_project === null) {
+			$t_cookie_name = config_get( 'project_cookie' );
 
-		if ( null === $t_project_id ) {
-			$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
-			if ( false === $t_pref_row ) {
-				$t_project_id = ALL_PROJECTS;
+			$t_project_id = gpc_get_cookie( $t_cookie_name, null );
+
+			if ( null === $t_project_id ) {
+				$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
+				if ( false === $t_pref_row ) {
+					$t_project_id = ALL_PROJECTS;
+				} else {
+					$t_project_id = $t_pref_row['default_project'];
+				}
 			} else {
-				$t_project_id = $t_pref_row['default_project'];
+				$t_project_id = split( ';', $t_project_id );
+				$t_project_id = $t_project_id[ count( $t_project_id ) - 1 ];
 			}
-		} else {
-			$t_project_id = split( ';', $t_project_id );
-			$t_project_id = $t_project_id[ count( $t_project_id ) - 1 ];
-		}
 
-		if ( !project_exists( $t_project_id ) ||
-			 ( 0 == project_get_field( $t_project_id, 'enabled' ) ) ||
-			 !access_has_project_level( VIEWER, $t_project_id ) ) {
-			$t_project_id = ALL_PROJECTS;
+			if ( !project_exists( $t_project_id ) ||
+				 ( 0 == project_get_field( $t_project_id, 'enabled' ) ) ||
+				 !access_has_project_level( VIEWER, $t_project_id ) ) {
+				$t_project_id = ALL_PROJECTS;
+			}
+			$g_cache_current_project = (int)$t_project_id;
 		}
-
-		return (int)$t_project_id;
+		return $g_cache_current_project;
 	}
 
 	# --------------------

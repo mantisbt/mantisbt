@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.39 2005-08-04 20:57:51 thraxisp Exp $
+	# $Id: lang_api.php,v 1.40 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -174,8 +174,9 @@
   function lang_get_current( ) {
 		global $g_lang_overrides;
 
-		if (count($g_lang_overrides) > 0 ) {
-			$t_lang = $g_lang_overrides[ count( $g_lang_overrides ) - 1];
+		$t_count_overrides = count($g_lang_overrides);
+		if ($t_count_overrides > 0 ) {
+			$t_lang = $g_lang_overrides[ $t_count_overrides - 1];
 		} else {
 			$t_lang = lang_get_default();
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.106 2005-07-22 15:34:03 thraxisp Exp $
+	# $Id: user_api.php,v 1.107 2005-10-29 09:52:52 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -36,11 +36,11 @@
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		$t_user_table = config_get( 'mantis_user_table' );
-
 		if ( isset ( $g_cache_user[$c_user_id] ) ) {
 			return $g_cache_user[$c_user_id];
 		}
+
+		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_table
