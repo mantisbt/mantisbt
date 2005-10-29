@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.161 2005-07-18 18:56:59 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.162 2005-10-29 08:59:46 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -123,7 +123,8 @@
 
 		# -- Loop over bug rows --
 
-		for( $i=0; $i < sizeof( $p_rows ); $i++ ) {
+		$t_rows = sizeof( $p_rows ); 
+		for( $i=0; $i < $t_rows; $i++ ) {
 			$t_row = $p_rows[$i];
 
 			if ( ( 0 == $t_row['sticky'] ) && ( 0 == $i ) ) {
