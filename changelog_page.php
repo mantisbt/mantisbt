@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.15 2005-04-21 22:38:03 thraxisp Exp $
+	# $Id: changelog_page.php,v 1.16 2005-10-29 10:10:53 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -85,7 +85,7 @@
 
 			$t_version_id = version_get_id( $t_version, $t_project_id );
 
-			$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
+			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 			if ( !is_blank( $t_description ) ) {
@@ -105,6 +105,8 @@
 				if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
 					continue;
 				}
+
+				bug_cache_database_result($t_result->fields);
 
 				# check limit_Reporter (Issue #4770)
 				# reporters can view just issues they reported

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.96 2005-10-29 09:52:52 prichards Exp $
+	# $Id: bug_api.php,v 1.97 2005-10-29 10:10:53 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -73,6 +73,22 @@
 
 	$g_cache_bug = array();
 	$g_cache_bug_text = array();
+
+ 	# --------------------
+	# Cache an object as a bug.
+	function bug_cache_database_result( $p_bug_datebase_result ) {
+		global $g_cache_bug;
+		
+		if ( isset( $g_cache_bug[ $p_bug_datebase_result['id'] ] ) ) {
+			return $g_cache_bug[ $p_bug_datebase_result['id'] ];
+		}	
+		
+		if( !is_int( $p_bug_datebase_result['date_submitted'] ) )
+			$p_bug_datebase_result['date_submitted']	= db_unixtimestamp( $p_bug_datebase_result['date_submitted']['date_submitted'] );
+		if( !is_int( $p_bug_datebase_result['last_updated'] ) )
+			$p_bug_datebase_result['last_updated']	= db_unixtimestamp( $p_bug_datebase_result['last_updated'] );
+		$g_cache_bug[ $p_bug_datebase_result['id'] ] = $p_bug_datebase_result;		
+	}
 
 	# --------------------
 	# Cache a bug row if necessary and return the cached copy
