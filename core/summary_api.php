@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.42 2005-08-15 20:55:44 thraxisp Exp $
+	# $Id: summary_api.php,v 1.43 2005-11-21 17:26:39 prichards Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -511,11 +511,11 @@
 			while ( $row = db_fetch_array( $result ) ) {
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
                 if ( $t_closed_val <= $v_status ) {
-                    $p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+                    $p_cache[ $v_project_id ][ 'closed'   ]  += $v_count;
                 } else if ( $t_resolved_val <= $v_status ) {
-                    $p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+                    $p_cache[ $v_project_id ][ 'resolved' ]  += $v_count;
                 } else {
-                    $p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
+                    $p_cache[ $v_project_id ][ 'open'     ]  += $v_count;
                 }
 			}
 		}
