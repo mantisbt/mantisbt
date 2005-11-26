@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.22 2005-08-10 17:10:12 thraxisp Exp $
+	# $Id: install.php,v 1.23 2005-11-26 12:56:58 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -255,11 +255,11 @@ if ( 2 == $t_install_state ) {
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
 
-		if ( $t_result == true ) {
+		if ( $t_result ) {
 			print_test_result( GOOD );
 			# check if db exists for the admin
 			$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password, $f_database_name);
-			if ( $t_result == true ) {
+			if ( $t_result ) {
 				$f_db_exists = true;
 			}
 		} else {
@@ -344,10 +344,32 @@ if ( 1 == $t_install_state ) {
 	</td>
 	<td>
 		<select name="db_type">
-		<option value="mysql">MySql (default)</option>
-		<option value="odbc_mssql">Microsoft SQL Server ODBC (experimental)</option>
-		<option value="ado_mssql">Microsoft SQL Server ADO (experimental)</option>
-		<option value="pgsql">PGSQL (experimental)</option>
+		<?php
+			if ( $f_db_type == 'mysql' ) {
+				echo '<option value="mysql" selected="selected">MySql (default)</option>';
+			} else {
+				echo '<option value="mysql">MySql (default)</option>';
+			}
+
+			if ( $f_db_type == 'odbc_mssql' ) {
+				echo '<option value="odbc_mssql" selected="selected">Microsoft SQL Server ODBC (experimental)</option>';
+			} else {
+				echo '<option value="odbc_mssql">Microsoft SQL Server ODBC (experimental)</option>';
+			}
+
+			if ( $f_db_type == 'ado_mssql' ) {
+				echo '<option value="ado_mssql" selected="selected">Microsoft SQL Server ADO (experimental)</option>';
+			} else {
+				echo '<option value="ado_mssql">Microsoft SQL Server ADO (experimental)</option>';
+			}
+
+			if ( $f_db_type == 'pgsql' ) {
+				echo '<option value="pgsql" selected="selected">PGSQL (experimental)</option>';
+			} else {
+				echo '<option value="pgsql">PGSQL (experimental)</option>';
+			}
+		?>
+		</select>
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.46 2005-08-15 22:13:52 thraxisp Exp $
+	# $Id: database_api.php,v 1.47 2005-11-26 12:56:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -276,6 +276,7 @@
 		switch( $t_db_type ) {
 			case 'mssql':
 			case 'odbc_mssql':
+			case 'ado_mssql':
 				if( ini_get( 'magic_quotes_sybase' ) ) {
 					return addslashes( $p_string );
 				} else {
@@ -365,6 +366,7 @@
 		switch( $t_db_type ) {
 			case 'mssql':
 			case 'odbc_mssql':
+			case 'ado_mssql':
 				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
 			case 'mysql':
