@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.48 2005-10-29 09:05:41 prichards Exp $
+	# $Id: error_api.php,v 1.49 2005-11-26 23:48:30 ryandesign Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -38,7 +38,7 @@
 
 		# check if errors were disabled with @ somewhere in this call chain
 		# also suppress php 5 strict warnings
-		if ( 0 == error_reporting() || $p_type = 2048) {
+		if ( 0 == error_reporting() || 2048 == $p_type ) {
 			return;
 		}
 
