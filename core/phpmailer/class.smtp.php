@@ -28,13 +28,13 @@ class SMTP
      *  @var int
      */
     var $SMTP_PORT = 25;
-
+    
     /**
      *  SMTP reply line ending
      *  @var string
      */
     var $CRLF = "\r\n";
-
+    
     /**
      *  Sets whether debugging is turned on
      *  @var bool
@@ -332,6 +332,12 @@ class SMTP
             # smaller lines
             while(strlen($line) > $max_line_length) {
                 $pos = strrpos(substr($line,0,$max_line_length)," ");
+
+                # Patch to fix DOS attack
+                if(!$pos) {
+                    $pos = $max_line_length - 1;
+                }
+
                 $lines_out[] = substr($line,0,$pos);
                 $line = substr($line,$pos + 1);
                 # if we are processing headers we need to
@@ -502,7 +508,7 @@ class SMTP
         }
 
         $this->helo_rply = $rply;
-
+        
         return true;
     }
 

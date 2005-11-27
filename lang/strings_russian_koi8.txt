@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.73 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:11 $
+	# $Revision: 1.74 $
+	# $Author: vboctor $
+	# $Date: 2005-11-27 00:46:19 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.73 2005-08-08 21:29:11 thraxisp Exp $
+	# $Id: strings_russian_koi8.txt,v 1.74 2005-11-27 00:46:19 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1163,7 +1163,7 @@ $s_attachments = "Файл(ы)";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'ru';
 
 # Sponsorship Strings
 $s_sponsors = 'Финансирующих - %d';

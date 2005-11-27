@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:11 $
+	# $Revision: 1.86 $
+	# $Author: vboctor $
+	# $Date: 2005-11-27 00:46:19 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.85 2005-08-08 21:29:11 thraxisp Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.86 2005-11-27 00:46:19 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1164,7 +1164,7 @@ $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'pt';
+$s_phpmailer_language = 'br';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

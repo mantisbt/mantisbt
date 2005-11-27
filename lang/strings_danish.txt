@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:01 $
+	# $Revision: 1.92 $
+	# $Author: vboctor $
+	# $Date: 2005-11-27 00:46:19 $
 	#
-	# $Id: strings_danish.txt,v 1.91 2005-08-08 21:29:01 thraxisp Exp $
+	# $Id: strings_danish.txt,v 1.92 2005-11-27 00:46:19 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1165,7 +1165,7 @@ $s_attachments = "Vedhæftede filer";
 $s_attachment_alt = "V";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'dk';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.75 $
-  # $Author: thraxisp $
-  # $Date: 2005-08-08 21:29:02 $
+  # $Revision: 1.76 $
+  # $Author: vboctor $
+  # $Date: 2005-11-27 00:46:19 $
   #
-  # $Id: strings_hungarian.txt,v 1.75 2005-08-08 21:29:02 thraxisp Exp $
+  # $Id: strings_hungarian.txt,v 1.76 2005-11-27 00:46:19 vboctor Exp $
   ###########################################################################
 ?>
 <?php
@@ -1164,7 +1164,7 @@ $s_attachments = "Csatolmány(ok)";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'hu';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';
