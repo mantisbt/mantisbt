@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.9 2005-07-17 12:49:02 prichards Exp $
+	# $Id: 1_00_inc.php,v 1.10 2005-12-04 22:33:13 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,7 +43,7 @@
 
 	$upgrades[] = new SQLUpgrade(
 			'project_child_index',
-			'Add index on child_id in project heirarchy table',
+			'Add index on child_id in project hierarchy table',
 			"ALTER TABLE $t_project_hierarchy_table ADD INDEX ( child_id )"
 		);
 
