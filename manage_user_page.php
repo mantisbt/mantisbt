@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.59 2005-05-31 11:13:20 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.60 2005-12-05 10:53:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -178,7 +178,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 	if ( $f_prefix === 'ALL' ) {
 		$t_where = '(1 = 1)';
 	} else {
-		$t_where = "(username like '$f_prefix%')";
+		$c_prefix = db_prepare_string($f_prefix);
+		$t_where = "(username like '$c_prefix%')";
 	}
 
 	# Get the user data in $c_sort order
