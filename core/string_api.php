@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.75 2005-08-07 15:29:07 ryandesign Exp $
+	# $Id: string_api.php,v 1.76 2005-12-05 12:17:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -651,4 +651,21 @@
 		}
 	}
 
+	# --------------------
+	# Prepares a string to be used as part of header().
+	function string_prepare_header( $p_string ) {
+		$t_string = $p_string;
+
+		$t_truncate_pos = strpos($p_string, "\n");
+		if ($t_truncate_pos !== false ) {
+			$t_string = substr($t_string, 0, $t_truncate_pos);
+		}
+
+		$t_truncate_pos = strpos($p_string, "\r");
+		if ($t_truncate_pos !== false ) {
+			$t_string = substr($t_string, 0, $t_truncate_pos);
+		}
+
+		return $t_string;
+	}
 ?>

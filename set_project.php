@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.54 2005-04-24 13:27:03 thraxisp Exp $
+	# $Id: set_project.php,v 1.55 2005-12-05 12:17:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,8 @@
 	$f_project_id	= gpc_get_string( 'project_id' );
 	$f_make_default	= gpc_get_bool  ( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
+	
+	$c_ref = string_prepare_header( $f_ref );
 
 	$t_project = split( ';', $f_project_id );
 	$t_top     = $t_project[0];
@@ -39,8 +41,8 @@
 	# redirect to 'same page' when switching projects.
 
 	# for proxies that clear out HTTP_REFERER
-	if ( !is_blank( $f_ref ) ) {
-		$t_redirect_url = $f_ref;
+	if ( !is_blank( $c_ref ) ) {
+		$t_redirect_url = $c_ref;
 	} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 		$t_redirect_url = config_get( 'default_home_page' );
 	} else {
