@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.97 2005-10-29 10:10:53 prichards Exp $
+	# $Id: bug_api.php,v 1.98 2005-12-06 22:17:12 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -61,6 +61,9 @@
 		var $description = '';
 		var $steps_to_reproduce = '';
 		var $additional_information = '';
+		
+		#internal helper objects
+		var $_stats = null;
 	}
 
 	#===================================
@@ -74,9 +77,9 @@
 	$g_cache_bug = array();
 	$g_cache_bug_text = array();
 
- 	# --------------------
+	# --------------------
 	# Cache an object as a bug.
-	function bug_cache_database_result( $p_bug_datebase_result ) {
+	function bug_cache_database_result( $p_bug_datebase_result, $p_stats = null ) {
 		global $g_cache_bug;
 		
 		if ( isset( $g_cache_bug[ $p_bug_datebase_result['id'] ] ) ) {
@@ -87,7 +90,10 @@
 			$p_bug_datebase_result['date_submitted']	= db_unixtimestamp( $p_bug_datebase_result['date_submitted']['date_submitted'] );
 		if( !is_int( $p_bug_datebase_result['last_updated'] ) )
 			$p_bug_datebase_result['last_updated']	= db_unixtimestamp( $p_bug_datebase_result['last_updated'] );
-		$g_cache_bug[ $p_bug_datebase_result['id'] ] = $p_bug_datebase_result;		
+		$g_cache_bug[ $p_bug_datebase_result['id'] ] = $p_bug_datebase_result;
+		if( !is_null( $p_stats ) ) {
+			$g_cache_bug[ $p_bug_datebase_result['id'] ]['_stats'] = $p_stats;
+		}
 	}
 
 	# --------------------
@@ -994,7 +1000,19 @@
 	#  associated with the bug was modified and the total bugnote
 	#  count in one db query
 	function bug_get_bugnote_stats( $p_bug_id ) {
+		global $g_cache_bug;
 		$c_bug_id			= db_prepare_int( $p_bug_id );
+
+		if( !is_null( $g_cache_bug[ $c_bug_id ]['_stats'] ) ) {
+			if( $g_cache_bug[ $c_bug_id ]['_stats'] === false ) { 
+				return false;			
+			} else {
+				$t_stats['last_modified'] = db_unixtimestamp( $g_cache_bug[ $c_bug_id ]['_stats']['last_modified'] );
+				$t_stats['count'] = $g_cache_bug[ $c_bug_id ]['_stats']['count'];
+			}
+			return $t_stats;
+		}
+
 		$t_bugnote_table	= config_get( 'mantis_bugnote_table' );
 
 		$query = "SELECT last_modified

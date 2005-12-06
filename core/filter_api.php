@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.125 2005-10-02 21:27:44 thraxisp Exp $
+	# $Id: filter_api.php,v 1.126 2005-12-06 22:17:12 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -756,16 +756,19 @@
 		}
 
 		$t_id_array = array_unique( $t_id_array );
-		if ( count( $t_id_array ) > 0 ) {
-			$t_where = "WHERE $t_bug_table.id in (" . implode( ", ", $t_id_array ) . ")";
-		} else {
-			$t_where = "WHERE 1 != 1";
-		}
-
-		$t_from = 'FROM ' . $t_bug_table;
 
 		# Get the total number of bugs that meet the criteria.
 		$bug_count = count( $t_id_array );
+
+		$rows = array();
+
+		if ( $bug_count > 0 ) {
+			$t_where = "WHERE $t_bug_table.id in (" . implode( ", ", $t_id_array ) . ")";
+		} else {
+			return $rows;
+		}
+
+		$t_from = 'FROM ' . $t_bug_table;
 
 		# write the value back in case the caller wants to know
 		$p_bug_count = $bug_count;
@@ -878,15 +881,44 @@
 
 		$row_count = db_num_rows( $result2 );
 
-		$rows = array();
-
+		$t_id_array_lastmod = array();
+		
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
 			$row = db_fetch_array( $result2 );
+			$t_id_array_lastmod[] = db_prepare_int ( $row['id'] );
+			
 			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
 			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
-
+					
 			array_push( $rows, $row );
-			bug_add_to_cache( $row );
+		}
+
+		$t_id_array_lastmod = array_unique( $t_id_array_lastmod );
+		
+		// paulr: it should be impossible for t_id_array_lastmod to be array():
+		// that would imply that $t_id_array is null which aborts this function early
+		//if ( count( $t_id_array_lastmod ) > 0 ) {
+		$t_where = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";
+		
+		$query3 = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM mantis_bugnote_table $t_where GROUP BY bug_id";
+
+		# perform query
+		$result3 = db_query( $query3 );
+
+		$row_count = db_num_rows( $result2 );
+
+		for ( $i=0 ; $i < $row_count ; $i++ ) {
+			$row = db_fetch_array( $result3 );
+			
+			$t_stats[ $row['bug_id'] ] = $row;
+		}
+
+		foreach($rows as $row) {
+			if( is_null( $t_stats[ $row['id'] ] ) ) {
+				bug_cache_database_result( $row, false );
+			} else {
+				bug_cache_database_result( $row, $t_stats[ $row['id'] ] );
+			}
 		}
 
 		return $rows;
