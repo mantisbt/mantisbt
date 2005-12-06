@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.76 2005-12-05 12:17:55 vboctor Exp $
+	# $Id: string_api.php,v 1.77 2005-12-06 23:47:51 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -396,15 +396,16 @@
 		}
 
 		$tags = explode( ',', $t_html_valid_tags );
+		foreach ($tags as $key => $value) { 
+           if ( !is_blank( $value ) ) {
+           	$tags[$key] = trim($value); 
+           }
+          }
+        $tags = implode( '|', $tags);
 
-		foreach ( $tags as $tag ) {
-			if ( !is_blank( $tag ) ) {
-				$tag = trim( $tag );
-				$p_string = eregi_replace( "&lt;($tag)[[:space:]]*&gt;", "<\\1>", $p_string );
-				$p_string = eregi_replace( "&lt;\/($tag)[[:space:]]*&gt;", "</\\1>", $p_string );
-				$p_string = eregi_replace( "&lt;($tag)[[:space:]]*\/&gt;", "<\\1 />", $p_string );
-			}
-		}
+		$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*&gt;', '<\\1>', $p_string );
+		$p_string = eregi_replace( '&lt;\/(' .$tags . ')[[:space:]]*&gt;', '</\\1>', $p_string );
+		$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*\/&gt;', '<\\1 />', $p_string );
 
 		return $p_string;
 	}
