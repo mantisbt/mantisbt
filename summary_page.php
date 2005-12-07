@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.47 2005-11-29 10:19:31 prichards Exp $
+	# $Id: summary_page.php,v 1.48 2005-12-07 22:25:39 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,12 +65,13 @@
 	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
-		$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
+		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );		
 		$t_id = $row['id'];
 		$t_status = $row['status'];
 		if ( $row['hist_update'] !== NULL ) {
             $t_last_updated   = db_unixtimestamp( $row['hist_update'] );
+        } else {
+        	$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
         }
 		  
 		if ($t_last_updated < $t_date_submitted) {
