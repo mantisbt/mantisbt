@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.77 2005-12-06 23:47:51 prichards Exp $
+	# $Id: string_api.php,v 1.78 2005-12-08 22:16:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -84,7 +84,7 @@
 	# Prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string );
 		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = string_nl2br( $p_string );
@@ -113,7 +113,7 @@
 
 		# same steps as string_display_links() without the preservation of spaces since &nbsp; is undefined in XML.
 		$t_string = string_strip_hrefs( $t_string );
-		$t_string = htmlspecialchars( $t_string );
+		$t_string = string_html_specialchars( $t_string );
 		$t_string = string_restore_valid_html_tags( $t_string );
 		$t_string = string_nl2br( $t_string );
 		$t_string = string_insert_hrefs( $t_string );
@@ -122,7 +122,7 @@
 		$t_string = string_process_cvs_link( $t_string );
 
 		# another escaping to escape the special characters created by the generated links
-		$t_string = htmlspecialchars( $t_string );
+		$t_string = string_html_specialchars( $t_string );
 
 		return $t_string;
 	}
@@ -152,7 +152,7 @@
 	# --------------------
 	# Process a string for display in a textarea box
 	function string_textarea( $p_string ) {
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 
 		return $p_string;
 	}
@@ -160,7 +160,7 @@
 	# --------------------
 	# Process a string for display in a text box
 	function string_attribute( $p_string ) {
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 
 		return $p_string;
 	}
@@ -652,6 +652,17 @@
 		}
 	}
 
+	# --------------------
+	# Calls htmlspecialchars on the specified string, passing along
+	# the current charset, if the current PHP version supports it.
+	function string_html_specialchars( $p_string ) {
+		if ( php_version_at_least( '4.1.0' ) ) {
+			return htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
+		} else {
+			return htmlspecialchars( $p_string );
+		}
+	}
+	
 	# --------------------
 	# Prepares a string to be used as part of header().
 	function string_prepare_header( $p_string ) {

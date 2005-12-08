@@ -375,7 +375,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 <tr>
 	<!-- Search field -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="text" size="16" name="search" value="<?php echo htmlspecialchars( $t_filter['search'] ); ?>" />
+		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
 	</td>
 
 	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 3 ) * $t_custom_cols ); ?>"></td>

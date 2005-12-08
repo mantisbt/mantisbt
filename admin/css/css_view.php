@@ -8,7 +8,7 @@
 
 	ob_end_clean();
 
-	$contents = nl2br( htmlspecialchars( $contents ) );
+	$contents = nl2br( string_html_specialchars( $contents ) );
 	#$contents = str_replace( "\t", "&nbsp;&nbsp;&nbsp;&nbsp;", $contents );
 	#$contents = str_replace( " ", "&nbsp;", $contents );
 	echo $contents;

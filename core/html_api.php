@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.185 2005-12-08 14:21:50 jlatour Exp $
+	# $Id: html_api.php,v 1.186 2005-12-08 22:16:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -414,9 +414,9 @@
 					$t_time = $g_queries_array[$i][1];
 					$t_total += $t_time;
 					if ( true == $g_queries_array[$i][2] ) {
-						echo "\t",  '<tr valign="top"><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
+						echo "\t",  '<tr valign="top"><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					} else {
-						echo "\t",  '<tr valign="top"><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
+						echo "\t",  '<tr valign="top"><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					}
 				}
 				echo "\t", '<tr><td></td><td>', $t_total, '</td><td></td></tr>', "\n";

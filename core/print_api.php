@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.145 2005-12-08 14:21:50 jlatour Exp $
+	# $Id: print_api.php,v 1.146 2005-12-08 22:16:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1301,14 +1301,14 @@
 	# The names and values are passed through htmlspecialchars() before being displayed
 	function print_hidden_inputs( $p_assoc_array ) {
 		foreach ( $p_assoc_array as $key => $val ) {
-			$key = htmlspecialchars( $key );
+			$key = string_html_specialchars( $key );
 			if ( is_array( $val ) ) {
 				foreach ( $val as $val2 ) {
-					$val2 = htmlspecialchars( $val2 );
+					$val2 = string_html_specialchars( $val2 );
 					PRINT "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
 				}
 			} else {
-				$val = htmlspecialchars( $val );
+				$val = string_html_specialchars( $val );
 				PRINT "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 			}
 		}
