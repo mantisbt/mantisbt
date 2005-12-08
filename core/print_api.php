@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.144 2005-09-18 20:56:30 ryandesign Exp $
+	# $Id: print_api.php,v 1.145 2005-12-08 14:21:50 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -401,6 +401,98 @@
 			}
 		}
 	}
+	# --------------------
+	# Print extended project browser
+	function print_extended_project_browser( $p_trace=Array() ) {
+		project_cache_all();
+		$t_project_ids = current_user_get_accessible_projects();
+
+		PRINT '<script type="text/javascript" language="JavaScript">' . "\n";
+		PRINT "<!--\n";
+		PRINT "var subprojects = new Object();\n";
+
+		$t_projects = Array();
+
+		$t_project_count = count( $t_project_ids );
+		for ($i=0;$i<$t_project_count;$i++) {
+			$t_id = $t_project_ids[$i];
+			PRINT "subprojects['$t_id'] = new Object();\n";
+
+			$t_name = project_get_field( $t_id, 'name' );
+			$c_name = addslashes( $t_name );
+			PRINT "subprojects['$t_id']['$t_id'] = '$c_name';\n";
+
+			$t_projects[$t_id] = $t_name;
+			
+			print_extended_project_browser_subproject_javascript( $t_id );
+		}
+
+		PRINT "\n";
+		PRINT 'function setProject(projectVal) {' . "\n";
+		PRINT "\tvar spInput = document.form_set_project.project_id;\n";
+		PRINT "\tspInput.options.length = 0\n";
+		PRINT "\tif (projectVal == " . ALL_PROJECTS . ") {\n";
+		PRINT "\t\tspInput.options[0] = new Option('--- All Projects ---', '" . ALL_PROJECTS . "');\n";
+		PRINT "\t} else {\n";
+		PRINT "\t\tvar i = 0;\n";
+		PRINT "\t\tvar project = subprojects[ projectVal ];\n";
+		PRINT "\t\tfor ( var sp in project ) {\n";
+		PRINT "\t\t\tspInput.options[ i++ ] = new Option( project[sp], sp );\n";
+		PRINT "\t\t}\n";
+		PRINT "\t}\n";
+		PRINT "}\n";
+		
+		PRINT '// --></script>' . "\n";
+		PRINT '<select name="top_id" onChange="setProject(this.value)" class="small">' . "\n";
+		PRINT '<option value="' . ALL_PROJECTS . '"';
+		PRINT check_selected( $p_project_id, ALL_PROJECTS );
+		PRINT '>' . lang_get('all_projects') . '</option>' . "\n";
+		
+		foreach ( $t_projects as $t_id => $t_name ) {
+			$c_name = string_display( $t_name );
+			PRINT "<option value=\"$t_id\"";
+			PRINT check_selected( $p_project_id, $t_id );
+		        PRINT ">$c_name</option>\n";
+		}
+
+		PRINT '</select>' . "\n";
+
+		if ( 0 === count( $p_trace ) ) {
+			$t_top_id = ALL_PROJECTS;
+		} else {
+			$t_top_id = $p_trace[0];
+			$t_trace_str = join( ';', $p_trace );
+		}
+
+		PRINT '<select name="project_id" onChange="document.form_set_project.submit()" class="small"></select>' . "\n";
+		PRINT '<script type="text/javascript" language="JavaScript">' . "\n";
+		PRINT "<!--\n";
+		PRINT "document.form_set_project.top_id.value = '$t_top_id';\n";
+		PRINT "setProject($t_top_id);\n";
+		PRINT "document.form_set_project.project_id.value = '$t_trace_str';\n";
+		PRINT '// --></script>' . "\n";
+	}
+
+	# --------------------
+	# print the subproject javascript for the extended project browser
+	function print_extended_project_browser_subproject_javascript( $p_trace ) {
+		$t_trace_projects = split( ';', $p_trace);
+		$t_top_id = $t_trace_projects[0];
+		$t_level = count( $t_trace_projects );
+		$t_parent_id = $t_trace_projects[ $t_level - 1 ];
+		
+		$t_project_ids = current_user_get_accessible_subprojects( $t_parent_id );
+		$t_project_count = count( $t_project_ids );
+
+		for ($i=0;$i<$t_project_count;$i++) {
+			$t_id = $t_project_ids[$i];
+			$t_name = addslashes( str_repeat( '» ', $t_level ) . project_get_field( $t_id, 'name' ) );
+			PRINT "subprojects['$t_top_id']['$p_trace;$t_id'] = '$t_name';\n";
+
+			print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
+		}
+	}
+		
 	# --------------------
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_user_id, $p_select_id='' ) {

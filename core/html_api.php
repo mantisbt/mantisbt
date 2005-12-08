@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.184 2005-08-10 17:08:55 thraxisp Exp $
+	# $Id: html_api.php,v 1.185 2005-12-08 14:21:50 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -327,13 +327,17 @@
 				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
 
 				echo lang_get( 'email_project' ), ': ';
-				if ( ON == config_get( 'use_javascript' )) {
-					PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+				if ( ON == config_get( 'show_extended_project_browser' ) ) {
+					print_extended_project_browser( helper_get_current_project_trace() );
 				} else {
-					PRINT '<select name="project_id" class="small">';
+					if ( ON == config_get( 'use_javascript' ) ) {
+						PRINT '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+					} else {
+						PRINT '<select name="project_id" class="small">';
+					}
+					print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+					PRINT '</select> ';
 				}
-				print_project_option_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-				PRINT '</select> ';
 				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 				PRINT '</form>';
 			PRINT '</td>';

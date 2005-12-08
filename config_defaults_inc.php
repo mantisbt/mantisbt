@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.286 2005-11-27 01:36:18 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.287 2005-12-08 14:21:49 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -428,6 +428,10 @@
 
 	# --- show extra menu bar with all available projects ---
 	$g_show_project_menu_bar = OFF;
+
+	# --- show extra dropdown for subprojects ---
+	# Shows only top projects in the project dropdown and adds an extra dropdown for subprojects, can be: ON, OFF, AUTO
+	$g_show_extended_project_browser = OFF;
 
 	# --- show assigned to names ------
 	# This is in the view all pages
