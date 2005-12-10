@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.127 2005-12-08 22:16:20 jlatour Exp $
+	# $Id: filter_api.php,v 1.128 2005-12-10 02:10:43 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -641,11 +641,11 @@
 							break ;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
+							$t_custom_where_clause = '(( ' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
 							break ;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2] . ')' ;
+							$t_custom_where_clause = '(( ' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2] . ')' ;
 							break ;
 						}
 					} else {
@@ -905,7 +905,7 @@
 		# perform query
 		$result3 = db_query( $query3 );
 
-		$row_count = db_num_rows( $result2 );
+		$row_count = db_num_rows( $result3 );
 
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
 			$row = db_fetch_array( $result3 );
@@ -914,7 +914,7 @@
 		}
 
 		foreach($rows as $row) {
-			if( is_null( $t_stats[ $row['id'] ] ) ) {
+			if( !isset( $t_stats[ $row['id'] ] ) ) {
 				bug_cache_database_result( $row, false );
 			} else {
 				bug_cache_database_result( $row, $t_stats[ $row['id'] ] );
