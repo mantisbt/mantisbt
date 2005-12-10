@@ -6,17 +6,33 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.57 2005-08-10 14:26:28 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.58 2005-12-10 02:51:38 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type					= gpc_get_int( 'type', -1 );
-	$f_view_type			= gpc_get_string( 'view_type', 'simple' );
 	$f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 	$f_print				= gpc_get_bool( 'print' );
 	$f_temp_filter			= gpc_get_bool( 'temporary' );
+
+	# validate filter type
+	$f_default_view_type = 'simple';
+	if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+		$f_default_view_type = 'advanced';
+	}
+
+	$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
+	if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+		$f_view_type = 'advanced';
+	}
+	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+		$f_view_type = 'simple';
+	}
+	if ( ! in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+		$f_view_type = $f_default_view_type;
+	}	
 
 	# these are all possibly multiple selections for advanced filtering
 	$f_show_category = array();
