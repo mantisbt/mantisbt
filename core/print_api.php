@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.146 2005-12-08 22:16:20 jlatour Exp $
+	# $Id: print_api.php,v 1.147 2005-12-12 23:09:23 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -396,7 +396,7 @@
 				}
 				PRINT "$t_full_id\"";
 				check_selected( $p_project_id, $t_full_id );
-				PRINT '>' . str_repeat( "&raquo; ", count( $p_parents ) ) . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+				PRINT '>' . str_repeat( "&raquo;&nbsp;&nbsp;&nbsp;", count( $p_parents ) ) . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 				print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 			}
 		}
@@ -407,55 +407,55 @@
 		project_cache_all();
 		$t_project_ids = current_user_get_accessible_projects();
 
-		PRINT '<script type="text/javascript" language="JavaScript">' . "\n";
-		PRINT "<!--\n";
-		PRINT "var subprojects = new Object();\n";
+		echo '<script type="text/javascript" language="JavaScript">' . "\n";
+		echo "<!--\n";
+		echo "var subprojects = new Object();\n";
 
 		$t_projects = Array();
 
 		$t_project_count = count( $t_project_ids );
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
-			PRINT "subprojects['$t_id'] = new Object();\n";
+			echo 'subprojects[\'' . $t_id . '\'] = new Object();' . "\n";
 
 			$t_name = project_get_field( $t_id, 'name' );
 			$c_name = addslashes( $t_name );
-			PRINT "subprojects['$t_id']['$t_id'] = '$c_name';\n";
+			echo 'subprojects[\'' . $t_id . '\'][\'' . $t_id . '\'] = \'' . $c_name . '\';' . "\n";
 
 			$t_projects[$t_id] = $t_name;
 			
 			print_extended_project_browser_subproject_javascript( $t_id );
 		}
 
-		PRINT "\n";
-		PRINT 'function setProject(projectVal) {' . "\n";
-		PRINT "\tvar spInput = document.form_set_project.project_id;\n";
-		PRINT "\tspInput.options.length = 0\n";
-		PRINT "\tif (projectVal == " . ALL_PROJECTS . ") {\n";
-		PRINT "\t\tspInput.options[0] = new Option('--- All Projects ---', '" . ALL_PROJECTS . "');\n";
-		PRINT "\t} else {\n";
-		PRINT "\t\tvar i = 0;\n";
-		PRINT "\t\tvar project = subprojects[ projectVal ];\n";
-		PRINT "\t\tfor ( var sp in project ) {\n";
-		PRINT "\t\t\tspInput.options[ i++ ] = new Option( project[sp], sp );\n";
-		PRINT "\t\t}\n";
-		PRINT "\t}\n";
-		PRINT "}\n";
+		echo "\n";
+		echo 'function setProject(projectVal) {' . "\n";
+		echo "\t" . 'var spInput = document.form_set_project.project_id;' . "\n";
+		echo "\t" . 'spInput.options.length = 0' . "\n";
+		echo "\t" . 'if (projectVal == " . ALL_PROJECTS . ") {' . "\n";
+		echo "\t\t" . 'spInput.options[0] = new Option(\'--- All Projects ---\', \'' . ALL_PROJECTS . '\');' . "\n";
+		echo "\t" . '} else {' . "\n";
+		echo "\t\t" . 'var i = 0;' . "\n";
+		echo "\t\t" . 'var project = subprojects[ projectVal ];' . "\n";
+		echo "\t\t" . 'for ( var sp in project ) {' . "\n";
+		echo "\t\t\t" . 'spInput.options[ i++ ] = new Option( project[sp], sp );' . "\n";
+		echo "\t\t" . '}' . "\n";
+		echo "\t" . '}' . "\n";
+		echo '}' . "\n";
 		
-		PRINT '// --></script>' . "\n";
-		PRINT '<select name="top_id" onChange="setProject(this.value)" class="small">' . "\n";
-		PRINT '<option value="' . ALL_PROJECTS . '"';
-		PRINT check_selected( $p_project_id, ALL_PROJECTS );
-		PRINT '>' . lang_get('all_projects') . '</option>' . "\n";
+		echo '// --></script>' . "\n";
+		echo '<select name="top_id" onChange="setProject(this.value); document.form_set_project.submit()" class="small">' . "\n";
+		echo '<option value="' . ALL_PROJECTS . '"';
+		echo check_selected( $p_project_id, ALL_PROJECTS );
+		echo '>' . lang_get('all_projects') . '</option>' . "\n";
 		
 		foreach ( $t_projects as $t_id => $t_name ) {
 			$c_name = string_display( $t_name );
-			PRINT "<option value=\"$t_id\"";
-			PRINT check_selected( $p_project_id, $t_id );
-		        PRINT ">$c_name</option>\n";
+			echo '<option value="' . $t_id . '"';
+			echo check_selected( $p_project_id, $t_id );
+		        echo '>' . $c_name . '</option>' . "\n";
 		}
 
-		PRINT '</select>' . "\n";
+		echo '</select>' . "\n";
 
 		if ( 0 === count( $p_trace ) ) {
 			$t_top_id = ALL_PROJECTS;
@@ -464,13 +464,13 @@
 			$t_trace_str = join( ';', $p_trace );
 		}
 
-		PRINT '<select name="project_id" onChange="document.form_set_project.submit()" class="small"></select>' . "\n";
-		PRINT '<script type="text/javascript" language="JavaScript">' . "\n";
-		PRINT "<!--\n";
-		PRINT "document.form_set_project.top_id.value = '$t_top_id';\n";
-		PRINT "setProject($t_top_id);\n";
-		PRINT "document.form_set_project.project_id.value = '$t_trace_str';\n";
-		PRINT '// --></script>' . "\n";
+		echo '<select name="project_id" onChange="document.form_set_project.submit()" class="small-subprojects"></select>' . "\n";
+		echo '<script type="text/javascript" language="JavaScript">' . "\n";
+		echo '<!--' . "\n";
+		echo 'document.form_set_project.top_id.value = \'' . $t_top_id . '\';'. "\n";
+		echo 'setProject(' . $t_top_id . ');' . "\n";
+		echo 'document.form_set_project.project_id.value = \'' . $t_trace_str . '\';' . "\n";
+		echo '// --></script>' . "\n";
 	}
 
 	# --------------------
@@ -486,8 +486,8 @@
 
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
-			$t_name = addslashes( str_repeat( '» ', $t_level ) . project_get_field( $t_id, 'name' ) );
-			PRINT "subprojects['$t_top_id']['$p_trace;$t_id'] = '$t_name';\n";
+			$t_name = addslashes( str_repeat( '»   ', $t_level ) . project_get_field( $t_id, 'name' ) );
+			echo 'subprojects[\'' . $t_top_id . '\'][\'' . $p_trace . ';' . $t_id . '\'] = \'' . $t_name . '\';' . "\n";
 
 			print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
 		}
@@ -501,16 +501,16 @@
 		}
 		$t_profiles = profile_get_all_for_user( $p_user_id );
 
-		PRINT '<option value=""></option>';
+		echo '<option value=""></option>';
 		foreach ( $t_profiles as $t_profile ) {
 			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 			$v_platform	= string_display( $v_platform );
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
-			PRINT "<option value=\"$v_id\"";
+			echo '<option value="' . $v_id . '"';
 			check_selected( $p_select_id, $v_id );
-			PRINT ">$v_platform $v_os $v_os_build</option>";
+			echo '>' . $v_platform . ' ' . $v_os . ' ' . $v_os_build . '</option>';
 		}
 	}
 	# --------------------
@@ -522,7 +522,7 @@
 
 		$t_profiles = profile_get_all_for_project( $p_project_id );
 
-		PRINT '<option value=""></option>';
+		echo '<option value=""></option>';
 		foreach ( $t_profiles as $t_profile ) {
 			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 			$v_platform	= string_display( $v_platform );
