@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.147 2005-12-12 23:09:23 jlatour Exp $
+	# $Id: print_api.php,v 1.148 2005-12-13 10:36:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -396,7 +396,7 @@
 				}
 				PRINT "$t_full_id\"";
 				check_selected( $p_project_id, $t_full_id );
-				PRINT '>' . str_repeat( "&raquo;&nbsp;&nbsp;&nbsp;", count( $p_parents ) ) . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+				PRINT '>' . str_repeat( '&nbsp;', count( $p_parents ) ) . str_repeat( '&raquo;', count( $p_parents ) ) . ' ' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 				print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 			}
 		}
@@ -486,7 +486,8 @@
 
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
-			$t_name = addslashes( str_repeat( '»   ', $t_level ) . project_get_field( $t_id, 'name' ) );
+			$t_nbsp = chr( 160 );
+			$t_name = addslashes( str_repeat( $t_nbsp , $t_level ) . str_repeat( '»', $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
 			echo 'subprojects[\'' . $t_top_id . '\'][\'' . $p_trace . ';' . $t_id . '\'] = \'' . $t_name . '\';' . "\n";
 
 			print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
