@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.148 2005-12-13 10:36:01 jlatour Exp $
+	# $Id: print_api.php,v 1.149 2005-12-16 21:57:05 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -431,7 +431,7 @@
 		echo 'function setProject(projectVal) {' . "\n";
 		echo "\t" . 'var spInput = document.form_set_project.project_id;' . "\n";
 		echo "\t" . 'spInput.options.length = 0' . "\n";
-		echo "\t" . 'if (projectVal == " . ALL_PROJECTS . ") {' . "\n";
+		echo "\t" . 'if (projectVal == "' . ALL_PROJECTS . '") {' . "\n";
 		echo "\t\t" . 'spInput.options[0] = new Option(\'--- All Projects ---\', \'' . ALL_PROJECTS . '\');' . "\n";
 		echo "\t" . '} else {' . "\n";
 		echo "\t\t" . 'var i = 0;' . "\n";
