@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.58 2005-12-10 02:51:38 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.59 2005-12-17 23:08:52 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -81,6 +81,14 @@
 	} else {
 		$f_handler_id = gpc_get_string( 'handler_id', META_FILTER_ANY );
 		$f_handler_id = array( $f_handler_id );
+	}
+
+	$f_project_id = array();
+	if ( is_array( gpc_get( 'project_id', null ) ) ) {
+		$f_project_id = gpc_get_int_array( 'project_id', META_FILTER_CURRENT );
+	} else {
+		$f_project_id = gpc_get_int( 'project_id', META_FILTER_CURRENT );
+		$f_project_id = array( $f_project_id );
 	}
 
 	$f_show_resolution = array();
@@ -343,6 +351,7 @@
 				$t_setting_arr['highlight_changed'] = $f_highlight_changed;
 				$t_setting_arr['reporter_id'] = $f_reporter_id;
 				$t_setting_arr['handler_id'] = $f_handler_id;
+				$t_setting_arr['project_id'] = $f_project_id;
 				$t_setting_arr['sort'] = $f_sort;
 				$t_setting_arr['dir'] = $f_dir;
 				$t_setting_arr['start_month'] = $f_start_month;

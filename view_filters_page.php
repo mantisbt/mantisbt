@@ -372,17 +372,37 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		}
 	}
 }
+
+if ( 'simple' == $f_view_type ) {
+	$t_project_cols = 0;
+} else {
+	$t_project_cols = 3;
+}
 ?>
 
 <tr class="row-1">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
 		<?php PRINT lang_get( 'sort' ) ?>:
 	</td>
-	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 ) * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
 		<?php
 			print_filter_show_sort();
 		?>
 	</td>
+	<?php
+		if ( 'advanced' == $f_view_type ) {
+	?>
+			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
+				<?php PRINT lang_get( 'email_project' ) ?>:
+			</td>
+			<td valign="top" colspan="<?php echo( 2 * $t_custom_cols ); ?>">
+				<?php
+					print_filter_project_id();
+				?>
+			</td>
+	<?php
+		}
+	?>
 </tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>

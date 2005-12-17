@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.267 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-07 13:42:04 $
+	# $Revision: 1.268 $
+	# $Author: jlatour $
+	# $Date: 2005-12-17 23:08:52 $
 	#
-	# $Id: strings_english.txt,v 1.267 2005-08-07 13:42:04 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.268 2005-12-17 23:08:52 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'none';
+$s_current = 'current';
 $s_search = 'Search';
 $s_view_prev_link = 'View Prev';
 $s_view_next_link = 'View Next';

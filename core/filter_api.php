@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.129 2005-12-12 02:55:39 thraxisp Exp $
+	# $Id: filter_api.php,v 1.130 2005-12-17 23:08:52 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -35,6 +35,7 @@
 			'highlight_changed'	=> $t_default_show_changed,
 			'reporter_id'		=> Array ( '0' => META_FILTER_ANY ),
 			'handler_id'		=> Array ( '0' => META_FILTER_ANY ),
+			'project_id'		=> Array ( '0' => META_FILTER_CURRENT ),
 			'show_resolution'	=> Array ( '0' => META_FILTER_ANY ),
 			'show_build'		=> Array ( '0' => META_FILTER_ANY ),
 			'show_version'		=> Array ( '0' => META_FILTER_ANY ),
@@ -120,36 +121,55 @@
 			#@@@ error instead?
 		}
 
+		$t_view_type = $t_filter['_view_type'];
+
 		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
 		$t_join_clauses = array();
 		$t_from_clauses = array();
 
-		if ( ALL_PROJECTS == $t_project_id ) {
-			if ( !user_is_administrator( $t_user_id ) ) {
-				$t_topprojects = $t_projects = user_get_accessible_projects( $t_user_id );
-				foreach ( $t_topprojects as $t_project ) {
-					$t_projects = array_merge( $t_projects, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
+		if ( 'simple' == $t_view_type || in_array( META_FILTER_CURRENT, $t_filter['project_id'] ) ) {
+			if ( ALL_PROJECTS == $t_project_id ) {
+				if ( !user_is_administrator( $t_user_id ) ) {
+					$t_topprojects = $t_projects = user_get_accessible_projects( $t_user_id );
+					foreach ( $t_topprojects as $t_project ) {
+						$t_projects = array_merge( $t_projects, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
+					}
+	
+					$t_projects = array_unique( $t_projects );
+	
+					if ( 0 == count( $t_projects ) ) {
+						return array();  # no accessible projects, return an empty array
+					} else if ( 1 == count( $t_projects ) ) {
+						$t_project = $t_projects[0];
+						array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
+					} else {
+						array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
+					}
 				}
+			} else {
+				access_ensure_project_level( VIEWER, $t_project_id, $t_user_id );
 
+				$t_projects = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
+				$t_projects[] = $t_project_id;
+	
 				$t_projects = array_unique( $t_projects );
-
-				if ( 0 == count( $t_projects ) ) {
-					return array();  # no accessible projects, return an empty array
-				} else if ( 1 == count( $t_projects ) ) {
+	
+				if ( 1 == count( $t_projects ) ) {
 					$t_project = $t_projects[0];
 					array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
 				} else {
 					array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
 				}
 			}
-		} else {
-			access_ensure_project_level( VIEWER, $t_project_id, $t_user_id );
-
-			$t_projects = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
-			$t_projects[] = $t_project_id;
-
-			$t_projects = array_unique( $t_projects );
+		}
+		if ( 'advanced' == $t_view_type ) {
+			$t_projects = $t_filter['project_id'];
+			if ( !is_array($t_projects) ) {
+				$t_projects = Array( db_prepare_int( $t_filter['project_id'] ) );
+			} else {
+				$t_projects = array_map( 'db_prepare_int', $t_projects );
+			}
 
 			if ( 1 == count( $t_projects ) ) {
 				$t_project = $t_projects[0];
@@ -986,7 +1006,7 @@
 			return false;
 		}
 		if ( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
-			# if the version is new enough, update it using defaults
+			# if the version is not new enough, update it using defaults
 			return filter_ensure_valid_filter( $t_filter_array );
 		}
 
@@ -1977,7 +1997,7 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_sort'; ?>" id="show_sort_filter"><?php PRINT lang_get( 'sort' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top" colspan="4" id="show_sort_filter_target">
+			<td class="small-caption" valign="top" colspan="2" id="show_sort_filter_target">
 				<?php
 					$t_sort_fields = split( ',', $t_filter['sort'] );
 					$t_dir_fields = split( ',', $t_filter['dir'] );
@@ -2001,9 +2021,53 @@
 					}
 				?>
 			</td>
-			<?php if ( $t_filter_cols > 5 ) {
-				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&nbsp;</td>';
-			} ?>
+			<?php
+				if ( 'advanced' == $t_view_type ) {
+				?>
+					<td class="small-caption" valign="top">
+						<a href="<?php PRINT $t_filters_url . 'project_id'; ?>" id="project_id_filter"><?php PRINT lang_get( 'email_project' ) ?>:</a>
+					</td>
+					<td class="small-caption" valign="top" colspan="2" id="project_id_filter_target">
+						<?php
+							$t_output = '';
+							if ( !is_array( $t_filter['project_id'] ) ) {
+								$t_filter['project_id'] = Array( $t_filter['project_id'] );
+							}
+							if ( count( $t_filter['project_id'] ) == 0 ) {
+								PRINT lang_get( 'current' );
+							} else {
+								$t_first_flag = true;
+								foreach( $t_filter['project_id'] as $t_current ) {
+									?>
+									<input type="hidden" name="project_id[]" value="<?php echo $t_current;?>" />
+									<?php
+									$t_this_name = '';
+									if ( META_FILTER_CURRENT == $t_current ) {
+										$t_this_name = lang_get( 'current' );
+									} else {
+										$t_this_name = project_get_name( $t_current );
+									}
+									if ( $t_first_flag != true ) {
+										$t_output = $t_output . '<br />';
+									} else {
+										$t_first_flag = false;
+									}
+									$t_output = $t_output . $t_this_name;
+								}
+								PRINT $t_output;
+							}
+						?>
+					</td>
+					<?php 
+					if ( $t_filter_cols > 6 ) {
+						echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 5 ) . '">&nbsp;</td>';
+					}
+				} else {
+					if ( $t_filter_cols > 3 ) {
+						echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 2 ) . '">&nbsp;</td>';
+					}
+				} 
+			?>
 		</tr>
 		<?php
 		} // expanded
@@ -2385,6 +2449,10 @@
 		}
 		if ( !isset( $p_filter_arr['dir'] ) ) {
 			$p_filter_arr['dir'] = "DESC";
+		}
+
+		if ( !isset( $p_filter_arr['project_id'] ) ) {
+			$p_filter_arr['project_id'] = array( 0 => META_FILTER_CURRENT );
 		}
 
 		if ( !isset( $p_filter_arr['start_month'] ) ) {
@@ -3098,6 +3166,17 @@
 		print "</td></tr>\n<tr><td>";
 		print_date_selection_set("custom_field_" . $p_field_id . "_end" , config_get( 'short_date_format'), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year);
 		print "</td></tr>\n</table>";
+	}
+
+	function print_filter_project_id(){
+		global $t_select_modifier, $t_filter, $f_view_type;
+		?>
+		<!-- Project -->
+		<select <?php PRINT $t_select_modifier;?> name="project_id[]">
+			<option value="<?php echo META_FILTER_CURRENT ?>" <?php check_selected( $t_filter['project_id'], META_FILTER_CURRENT ); ?>>[<?php echo lang_get( 'current' ) ?>]</option>
+			<?php print_project_option_list( $t_filter['project_id'] ) ?>
+		</select>
+		<?php
 	}
 
 	#===================================
