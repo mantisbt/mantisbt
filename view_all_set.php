@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.59 2005-12-17 23:08:52 jlatour Exp $
+	# $Id: view_all_set.php,v 1.60 2005-12-18 14:27:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -149,7 +149,7 @@
 
 	# these are only single values, even when doing advanced filtering
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
-	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
+	$f_highlight_changed	= gpc_get_int( 'highlight_changed', config_get( 'default_show_changed' ) );
 	$f_sticky_issues		= gpc_get_bool( 'sticky_issues' );
 	# sort direction
 	$f_sort_d					= gpc_get_string( 'sort', '' );
@@ -235,8 +235,8 @@
 		}
 	}
 
-	$f_relationship_type = gpc_get_string( 'relationship_type', -1 );
-	$f_relationship_bug = gpc_get_string( 'relationship_bug', 0 );
+	$f_relationship_type = gpc_get_int( 'relationship_type', -1 );
+	$f_relationship_bug = gpc_get_int( 'relationship_bug', 0 );
 
 	if ( $f_temp_filter ) {
 		$f_type = 1;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.130 2005-12-17 23:08:52 jlatour Exp $
+	# $Id: filter_api.php,v 1.131 2005-12-18 14:27:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -115,6 +115,7 @@
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
+var_dump($t_filter);
 
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie
@@ -196,7 +197,7 @@
 			}
 		} else {
 			$t_view_state = db_prepare_int( $t_filter['view_state'] );
-			if ( ( $t_filter['view_state'] != META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
+			if ( ( $t_filter['view_state'] !== META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
 				array_push( $t_where_clauses, "($t_bug_table.view_state='$t_view_state')" );
 			}
 		}
@@ -205,7 +206,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY === $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -247,7 +248,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['handler_id'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY === $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -280,7 +281,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['show_category'] as $t_filter_member ) {
-			if ( META_FILTER_ANY == $t_filter_member ) {
+			if ( META_FILTER_ANY === $t_filter_member ) {
 				$t_any_found = true;
 			}
 		}
@@ -1272,7 +1273,7 @@
 										<input type="hidden" name="show_category[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -1305,7 +1306,7 @@
 										<input type="hidden" name="show_severity[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'severity', $t_current );
@@ -1338,7 +1339,7 @@
 										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'resolution', $t_current );
@@ -1371,7 +1372,7 @@
 										<input type="hidden" name="show_profile[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_profile = profile_get_row_direct( $t_current );
@@ -1447,7 +1448,7 @@
 										<input type="hidden" name="show_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1520,7 +1521,7 @@
 										<input type="hidden" name="show_build[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1557,7 +1558,7 @@
 										<input type="hidden" name="show_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1593,7 +1594,7 @@
 										<input type="hidden" name="fixed_in_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1636,7 +1637,7 @@
 										<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
 										<?php
                   	$t_this_string = '';
-										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
                   		$t_any_found = true;
 	                  } else {
 	                  	$t_this_string = get_enum_element( 'priority', $t_current );
@@ -1926,7 +1927,7 @@
 							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 								$t_current = stripslashes( $t_current );
 								$t_this_string = '';
-								if ( ( $t_current == META_FILTER_ANY ) || ( $t_current === 0 ) ) {
+								if ( ( $t_current === META_FILTER_ANY ) || ( $t_current === 0 ) ) {
 									$t_any_found = true;
 								} else if ( META_FILTER_NONE == $t_current ) {
 									$t_this_string = lang_get( 'none' );
@@ -2423,7 +2424,6 @@
 	# Make sure that our filters are entirely correct and complete (it is possible that they are not).
 	# We need to do this to cover cases where we don't have complete control over the filters given.
 	function filter_ensure_valid_filter( $p_filter_arr ) {
-
 		# extend current filter to add information passed via POST
 		if ( !isset( $p_filter_arr['_version'] ) ) {
 			$p_filter_arr['_version'] = config_get( 'cookie_version' );
@@ -2976,7 +2976,7 @@
 					echo '>[' . lang_get( 'none' ) .']</option>';
 				}
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if ( ( strtolower( $t_item ) != META_FILTER_ANY ) && ( strtolower( $t_item ) != META_FILTER_NONE ) ) {
+					if ( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' .  string_html_entities( $t_item )  . '" ';
 						if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
 							check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
