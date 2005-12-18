@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.131 2005-12-18 14:27:01 thraxisp Exp $
+	# $Id: filter_api.php,v 1.132 2005-12-18 16:42:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -115,7 +115,6 @@
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-var_dump($t_filter);
 
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie
