@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.132 2005-12-18 16:42:55 thraxisp Exp $
+	# $Id: filter_api.php,v 1.133 2005-12-18 17:14:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -280,7 +280,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['show_category'] as $t_filter_member ) {
-			if ( META_FILTER_ANY === $t_filter_member ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -439,7 +439,7 @@
 		# product build
 		$t_any_found = false;
 		foreach( $t_filter['show_build'] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -468,7 +468,7 @@
 		# product version
 		$t_any_found = false;
 		foreach( $t_filter['show_version'] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -542,7 +542,7 @@
 		# fixed in version
 		$t_any_found = false;
 		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -1272,7 +1272,8 @@
 										<input type="hidden" name="show_category[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+												|| ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -1520,7 +1521,8 @@
 										<input type="hidden" name="show_build[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+												|| ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1557,7 +1559,8 @@
 										<input type="hidden" name="show_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( ( $t_current == META_FILTER_ANY ) && (is_numeric( $t_current ) ) ) 
+												|| ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1593,7 +1596,8 @@
 										<input type="hidden" name="fixed_in_version[]" value="<?php echo string_display( $t_current );?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current === META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
+										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+												|| ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
@@ -1926,9 +1930,10 @@
 							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 								$t_current = stripslashes( $t_current );
 								$t_this_string = '';
-								if ( ( $t_current === META_FILTER_ANY ) || ( $t_current === 0 ) ) {
+								if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+										|| ( is_blank( $t_current ) ) ) {
 									$t_any_found = true;
-								} else if ( META_FILTER_NONE == $t_current ) {
+								} else if ( ( META_FILTER_NONE == $t_current ) && ( is_numeric( $t_current ) ) ) {
 									$t_this_string = lang_get( 'none' );
 								} else {
 									$t_this_string = string_display( $t_current );
