@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.78 2005-12-08 22:16:20 jlatour Exp $
+	# $Id: string_api.php,v 1.79 2006-01-01 02:56:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -384,6 +384,45 @@
 		return $p_string;
 	}
 
+	# --------------------
+	# strip all tags from a string
+	# This will remove HTML tags, javascript sections
+	# and white space. It will also convert some
+	# common HTML entities to their text equivalent.
+	function string_strip_tags( $p_string ) {
+		$t_search = array( 
+				'@<script[^>]*?>.*?</script>@si',	/* Strip out javascript */
+				'@<[\/\!]*?[^<>]*?>@si',			/* Strip out HTML tags */
+				'@([\r\n])[\s]+@',					/* Strip out white space */
+				'@&(quot|#34);@i',					/* Replace HTML entities */
+				'@&(amp|#38);@i',
+				'@&(lt|#60);@i',
+				'@&(gt|#62);@i',
+				'@&(nbsp|#160);@i',
+				'@&(iexcl|#161);@i',
+				'@&(cent|#162);@i',
+				'@&(pound|#163);@i',
+				'@&(copy|#169);@i',
+				'@&#(\d+);@e' );					/* evaluate as php */
+
+		$t_replace = array( 
+				'',
+				'',
+				'\1',
+				'"',
+				'&',
+				'<',
+				'>',
+				' ',
+				chr(161),
+				chr(162),
+				chr(163),
+				chr(169),
+				'chr(\1)' );
+
+		return preg_replace($t_search, $t_replace, $p_string);
+	}
+	
 	# --------------------
 	# This function looks for text with htmlentities
 	# like &lt;b&gt; and converts is into corresponding

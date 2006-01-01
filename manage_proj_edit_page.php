@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.92 2005-07-26 12:41:02 thraxisp Exp $
+	# $Id: manage_proj_edit_page.php,v 1.93 2006-01-01 02:56:39 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -244,7 +244,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
                 continue;
 		}
 ?>
-				<option value="<?php echo $t_project['id'] ?>"><?php echo $t_project['name'] ?></option>
+				<option value="<?php echo $t_project['id'] ?>"><?php echo string_attribute( $t_project['name'] ) ?></option>
 <?php
 	} # End looping over projects
 ?>

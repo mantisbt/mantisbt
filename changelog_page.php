@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.16 2005-10-29 10:10:53 prichards Exp $
+	# $Id: changelog_page.php,v 1.17 2006-01-01 02:56:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,7 +21,7 @@
 		$t_version_name = version_get_field( $p_version_id, 'version' );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
-		$t_release_title = $t_project_name . ' - ' . $t_version_name;
+		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
 		echo $t_release_title, '<br />';
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 
@@ -74,7 +74,7 @@
 
 		$t_version_rows = version_get_all_rows( $t_project_id );
 
-		echo '<br /><span class="pagetitle">', $t_project_name, ' - ', lang_get( 'changelog' ), '</span><br /><br />';
+		echo '<br /><span class="pagetitle">', string_display( $t_project_name ), ' - ', lang_get( 'changelog' ), '</span><br /><br />';
 		echo '<tt>';
 
 		$i = 0;
