@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.50 2005-08-16 14:36:43 thraxisp Exp $
+	# $Id: proj_doc_page.php,v 1.51 2006-01-06 02:23:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -111,7 +111,7 @@
 			echo '&nbsp;';
 			print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 			echo '&nbsp;';
-			print_button( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
+			print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
 		}
 ?>
 	</span>
