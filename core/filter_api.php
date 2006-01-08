@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.133 2005-12-18 17:14:28 thraxisp Exp $
+	# $Id: filter_api.php,v 1.134 2006-01-08 16:39:41 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -631,7 +631,7 @@
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
 				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 						$t_any_found = true;
 					}
 				}
@@ -672,35 +672,30 @@
 
 						array_push( $t_join_clauses, $t_cf_join_clause );
 						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-							if ( isset( $t_filter_member ) &&
-								( META_FILTER_ANY != strtolower( $t_filter_member ) ) ) {
-
-								$t_filter_member = stripslashes( $t_filter_member );
-								if ( META_FILTER_NONE == $t_filter_member ) { # coerce filter value if selecting META_FILTER_NONE
-									$t_filter_member = '';
-								}
-
-								if( $t_first_time ) {
-									$t_first_time = false;
-									$t_custom_where_clause = '(';
-								} else {
-									$t_custom_where_clause .= ' OR ';
-								}
-
-								$t_custom_where_clause .= "$t_table_name.value ";
-								switch( $t_def['type'] ) {
-								case CUSTOM_FIELD_TYPE_MULTILIST:
-								case CUSTOM_FIELD_TYPE_CHECKBOX:
-									$t_custom_where_clause .= "LIKE '%|";
-									$t_custom_where_clause_closing = "|%'";
-									break;
-								default:
-									$t_custom_where_clause .= "= '";
-									$t_custom_where_clause_closing = "'";
-								}
-								$t_custom_where_clause .= db_prepare_string( $t_filter_member );
-								$t_custom_where_clause .= $t_custom_where_clause_closing;
+							$t_filter_member = stripslashes( $t_filter_member );
+							if ( META_FILTER_NONE === $t_filter_member ) { # coerce filter value if selecting META_FILTER_NONE
+								$t_filter_member = '';
 							}
+
+							if( $t_first_time ) {
+								$t_first_time = false;
+								$t_custom_where_clause = '(';
+							} else {
+								$t_custom_where_clause .= ' OR ';
+							}
+							$t_custom_where_clause .= "$t_table_name.value ";
+							switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_MULTILIST:
+							case CUSTOM_FIELD_TYPE_CHECKBOX:
+								$t_custom_where_clause .= "LIKE '%|";
+								$t_custom_where_clause_closing = "|%'";
+								break;
+							default:
+								$t_custom_where_clause .= "= '";
+								$t_custom_where_clause_closing = "'";
+							}
+							$t_custom_where_clause .= db_prepare_string( $t_filter_member );
+							$t_custom_where_clause .= $t_custom_where_clause_closing;
 						}
 					}
 					if ( !is_blank( $t_custom_where_clause ) ) {
