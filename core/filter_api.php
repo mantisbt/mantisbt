@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.134 2006-01-08 16:39:41 thraxisp Exp $
+	# $Id: filter_api.php,v 1.135 2006-01-15 02:30:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -497,7 +497,7 @@
 		# profile
 		$t_any_found = false;
 		foreach( $t_filter['show_profile'] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -2577,12 +2577,10 @@
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
-					if ( ( 5 <= $t_cookie_vers ) && 
-							( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) ) {
+					if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
-					if ( ( 5 <= $t_cookie_vers ) && 
-							( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) ) {
+					if ( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
 						$t_filter_value = META_FILTER_NONE;
 					}
 					if ( 'string' == $t_multi_field_type ) {
@@ -2608,7 +2606,7 @@
 					$t_checked_array = array();
 					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
 						$t_filter_value = stripslashes( $t_filter_value );
-						if ( ( 5 == $t_cookie_vers ) && ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) ) {
+						if ( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
 							$t_filter_value = META_FILTER_ANY;
 						}
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
