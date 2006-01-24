@@ -6,11 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.12 2005-08-07 13:42:04 thraxisp Exp $
+	# $Id: my_view_page.php,v 1.13 2006-01-24 03:50:05 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'compress_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );

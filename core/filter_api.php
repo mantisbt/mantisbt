@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.135 2006-01-15 02:30:20 thraxisp Exp $
+	# $Id: filter_api.php,v 1.136 2006-01-24 03:50:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -814,13 +814,13 @@
 		$p_page_count = $t_page_count;
 
 		# Make sure $p_page_number isn't past the last page.
-		if ( $p_page_number > $t_page_count ) {
-			$p_page_number = $t_page_count;
+		if ( $t_page_number > $t_page_count ) {
+			$t_page_number = $t_page_count;
 		}
 
 		# Make sure $p_page_number isn't before the first page
-		if ( $p_page_number < 1 ) {
-			$p_page_number = 1;
+		if ( $t_page_number < 1 ) {
+			$t_page_number = 1;
 		}
 
 		# Now add the rest of the criteria i.e. sorting, limit.
@@ -888,7 +888,7 @@
 		# for example page number 2, per page 5:
 		#     t_offset = 5
 		$c_per_page = db_prepare_int( $p_per_page );
-		$c_page_number = db_prepare_int( $p_page_number );
+		$c_page_number = db_prepare_int( $t_page_number );
 		$t_offset = ( ( $c_page_number - 1 ) * $c_per_page );
 
 		# perform query
@@ -1031,6 +1031,7 @@
 		$t_filter = current_user_get_bug_filter();
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		$t_project_id = helper_get_current_project();
+		$t_page_number = (int) $p_page_number;
 
 		$t_view_type = $t_filter['_view_type'];
 
@@ -1055,7 +1056,7 @@
 				PRINT '<input type="hidden" name="offset" value="0" />';
 			}
 		?>
-		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
+		<input type="hidden" name="page_number" value="<?php PRINT $t_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
 
 		<?php
