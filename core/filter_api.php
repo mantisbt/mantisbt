@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.136 2006-01-24 03:50:04 thraxisp Exp $
+	# $Id: filter_api.php,v 1.137 2006-01-25 04:03:59 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -814,13 +814,13 @@
 		$p_page_count = $t_page_count;
 
 		# Make sure $p_page_number isn't past the last page.
-		if ( $t_page_number > $t_page_count ) {
-			$t_page_number = $t_page_count;
+		if ( $p_page_number > $t_page_count ) {
+			$p_page_number = $t_page_count;
 		}
 
 		# Make sure $p_page_number isn't before the first page
-		if ( $t_page_number < 1 ) {
-			$t_page_number = 1;
+		if ( $p_page_number < 1 ) {
+			$p_page_number = 1;
 		}
 
 		# Now add the rest of the criteria i.e. sorting, limit.
@@ -888,7 +888,7 @@
 		# for example page number 2, per page 5:
 		#     t_offset = 5
 		$c_per_page = db_prepare_int( $p_per_page );
-		$c_page_number = db_prepare_int( $t_page_number );
+		$c_page_number = db_prepare_int( $p_page_number );
 		$t_offset = ( ( $c_page_number - 1 ) * $c_per_page );
 
 		# perform query
