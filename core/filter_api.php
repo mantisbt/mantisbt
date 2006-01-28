@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.137 2006-01-25 04:03:59 thraxisp Exp $
+	# $Id: filter_api.php,v 1.138 2006-01-28 14:00:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -497,7 +497,7 @@
 		# profile
 		$t_any_found = false;
 		foreach( $t_filter['show_profile'] as $t_filter_member ) {
-				if ( ( META_FILTER_ANY == $t_filter_member ) || ( is_numeric( $t_filter_member ) ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
 				$t_any_found = true;
 			}
 		}
