@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.288 2005-12-17 23:08:51 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.289 2006-02-03 03:37:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -78,7 +78,7 @@
 			$t_host = 'www.example.com';
 		}
 
-		$t_path = dirname( $_SERVER['PHP_SELF'] );
+		$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
 		if ( '/' == $t_path || '\\' == $t_path ) {
 			$t_path = '';
 		}
