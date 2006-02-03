@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.35 2005-07-30 18:10:40 thraxisp Exp $
+	# $Id: config_api.php,v 1.35.6.1 2006-01-16 19:58:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -351,7 +351,7 @@
 	# delete the config entry from the cache
 	# @@@ to be used sparingly
 	function config_flush_cache( $p_option='', $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-		global $g_cache_config, $g_cache_config_access;
+		global $g_cache_config, $g_cache_config_access, $g_cache_filled;
 	
 		if ( '' !== $p_option ) {
 			unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );

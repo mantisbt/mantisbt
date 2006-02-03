@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.88 2005-08-11 01:54:22 thraxisp Exp $
+	# $Id: bug_update.php,v 1.88.4.1 2005-12-13 00:58:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -136,7 +136,7 @@
 			case $t_resolved:
 				# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
 				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
-						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
+						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id, $f_private );
 				$t_notify = false;
 				$t_bug_note_set = true;
 
@@ -152,7 +152,7 @@
 
 			case CLOSED:
 				# bug_close updates the status and bugnote and sends message
-				bug_close( $f_bug_id, $f_bugnote_text );
+				bug_close( $f_bug_id, $f_bugnote_text, $f_private );
 				$t_notify = false;
 				$t_bug_note_set = true;
 				break;
@@ -161,7 +161,7 @@
 				if ( $t_old_bug_status >= $t_resolved ) {
 					bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
 					# bug_reopen updates the status and bugnote and sends message
-					bug_reopen( $f_bug_id, $f_bugnote_text );
+					bug_reopen( $f_bug_id, $f_bugnote_text, $f_private );
 					$t_notify = false;
 					$t_bug_note_set = true;
 

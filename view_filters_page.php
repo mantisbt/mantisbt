@@ -85,6 +85,15 @@
 	$t_custom_cols = 1;
 	$t_custom_rows = 0;
 
+	#get valid target fields
+	$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+	$t_n_fields = count( $t_fields );
+	for ( $i=0; $i < $t_n_fields; $i++ ) {
+		if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+			unset( $t_fields[$i] );
+		}
+	}
+
 	if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_custom_cols = $t_filter_cols;
 		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
@@ -96,6 +105,7 @@
 				$t_accessible_custom_fields_names[] = $t_field_info['name'];
 				$t_accessible_custom_fields_types[] = $t_field_info['type'];
 				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid, $t_project_id );
+				$t_fields[] = "custom_" . $t_field_info['name'];
 			}
 		}
 
@@ -105,12 +115,15 @@
 		}
 	}
 
+	if ( ! in_array( $t_target_field, $t_fields ) ) {
+		$t_target_field = '';
+	}
+	
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
 	$t_action  = "view_all_set.php?f=3";
 
-	if ( $f_for_screen == false )
-	{
+	if ( $f_for_screen == false ) {
 		$t_action  = "view_all_set.php";
 	}
 
@@ -126,6 +139,9 @@
 	if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 		$f_view_type = 'simple';
 	}
+	if ( ! in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+		$f_view_type = $f_default_view_type;
+	}	
 
 	$t_select_modifier = '';
 	if ( 'advanced' == $f_view_type ) {
@@ -375,7 +391,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 <tr>
 	<!-- Search field -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="text" size="16" name="search" value="<?php echo htmlspecialchars( $t_filter['search'] ); ?>" />
+		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
 	</td>
 
 	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 3 ) * $t_custom_cols ); ?>"></td>

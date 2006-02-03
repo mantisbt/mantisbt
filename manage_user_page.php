@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.59 2005-05-31 11:13:20 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.59.8.1.2.1 2006-01-05 03:54:19 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,12 +25,31 @@
 	$f_save = gpc_get_bool( 'save' );
 	$f_prefix = strtoupper( gpc_get_string( 'prefix', config_get( 'default_manage_user_prefix' ) ) );
 
+	$t_user_table = config_get( 'mantis_user_table' );
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
 
+	# Clean up the form variables
+	if ( ! in_array( $f_sort, db_field_names( $t_user_table ) ) ) {
+        $c_sort = 'username';
+    } else {	 
+        $c_sort = addslashes($f_sort);
+    }
+
+	if ($f_dir == 'ASC') {
+		$c_dir = 'ASC';
+	} else {
+		$c_dir = 'DESC';
+	}
+
+	if ($f_hide == 0) { # a 0 will turn it off
+		$c_hide = 0;
+	} else {            # anything else (including 'on') will turn it on
+		$c_hide = 1;
+	}
 	# set cookie values for hide, sort by, and dir
 	if ( $f_save ) {
-		$t_manage_string = $f_hide.':'.$f_sort.':'.$f_dir;
+		$t_manage_string = $c_hide.':'.$c_sort.':'.$c_dir;
 		gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 	} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 		$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
@@ -49,20 +68,6 @@
 		}
 	}
 
-	# Clean up the form variables
-	$c_sort = addslashes($f_sort);
-
-	if ($f_dir == 'ASC') {
-		$c_dir = 'ASC';
-	} else {
-		$c_dir = 'DESC';
-	}
-
-	if ($f_hide == 0) { # a 0 will turn it off
-		$c_hide = 0;
-	} else {            # anything else (including 'on') will turn it on
-		$c_hide = 1;
-	}
 ?>
 <?php html_page_top1( lang_get( 'manage_users_link' ) ) ?>
 <?php html_page_top2() ?>
@@ -71,8 +76,6 @@
 
 <?php # New Accounts Form BEGIN ?>
 <?php
-	$t_user_table = config_get( 'mantis_user_table' );
-
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
@@ -178,7 +181,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 	if ( $f_prefix === 'ALL' ) {
 		$t_where = '(1 = 1)';
 	} else {
-		$t_where = "(username like '$f_prefix%')";
+		$c_prefix = db_prepare_string($f_prefix);
+		$t_where = "(username like '$c_prefix%')";
 	}
 
 	# Get the user data in $c_sort order

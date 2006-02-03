@@ -19,7 +19,7 @@
 	auth_ensure_user_authenticated();
 	compress_enable();
 
-	$f_query_name = gpc_get_string( 'query_name' );
+	$f_query_name = strip_tags( gpc_get_string( 'query_name' ) );
 	$f_is_public = gpc_get_bool( 'is_public' );
 	$f_all_projects = gpc_get_bool( 'all_projects' );
 

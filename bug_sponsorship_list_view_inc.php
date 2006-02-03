@@ -6,12 +6,14 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.12 2005-07-03 15:09:10 thraxisp Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.12.4.1 2005-09-22 11:01:05 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the list of users sponsoring the current
 	# bug.	$f_bug_id must be set to the bug id
+
+	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'sponsorship_api.php' );
 	require_once( $t_core_path . 'collapse_api.php' );

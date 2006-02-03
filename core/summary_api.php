@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.42 2005-08-15 20:55:44 thraxisp Exp $
+	# $Id: summary_api.php,v 1.42.6.1 2006-01-08 14:55:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -511,11 +511,23 @@
 			while ( $row = db_fetch_array( $result ) ) {
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
                 if ( $t_closed_val <= $v_status ) {
-                    $p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+                    if ( isset( $p_cache[ $v_project_id ][ 'closed'   ] ) ) {
+                        $p_cache[ $v_project_id ][ 'closed'   ]  += $v_count;
+                    } else {
+                        $p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+                    }
                 } else if ( $t_resolved_val <= $v_status ) {
-                    $p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+                    if ( isset( $p_cache[ $v_project_id ][ 'resolved' ] ) ) {
+                        $p_cache[ $v_project_id ][ 'resolved' ]  += $v_count;
+                    } else {
+                        $p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+                    }
                 } else {
-                    $p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
+                    if ( isset( $p_cache[ $v_project_id ][ 'open'     ] ) ) {
+                        $p_cache[ $v_project_id ][ 'open'     ]  += $v_count;
+                    } else {
+                        $p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
+                    }
                 }
 			}
 		}

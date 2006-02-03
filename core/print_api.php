@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.143 2005-07-19 13:42:48 vboctor Exp $
+	# $Id: print_api.php,v 1.143.6.1.4.1 2006-02-03 03:56:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -32,15 +32,18 @@
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
 		}
+		
+		# validate the url as part of this site before continuing
+		$t_url = string_sanitize_url( $p_url );
 
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {
 			header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 
 			if ( ON == $t_use_iis ) {
-				header( "Refresh: 0;url=$p_url" );
+				header( "Refresh: 0;url=$t_url" );
 			} else {
-				header( "Location: $p_url" );
+				header( "Location: $t_url" );
 			}
 		} else {
 			return false;
@@ -1204,17 +1207,17 @@
 	#
 	# If a value is an array an input will be created for each item with a name
 	#  that ends with []
-	# The names and values are passed through htmlspecialchars() before being displayed
+	# The names and values are passed through string_html_specialchars() before being displayed
 	function print_hidden_inputs( $p_assoc_array ) {
 		foreach ( $p_assoc_array as $key => $val ) {
-			$key = htmlspecialchars( $key );
+			$key = string_html_specialchars( $key );
 			if ( is_array( $val ) ) {
 				foreach ( $val as $val2 ) {
-					$val2 = htmlspecialchars( $val2 );
+					$val2 = string_html_specialchars( $val2 );
 					PRINT "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
 				}
 			} else {
-				$val = htmlspecialchars( $val );
+				$val = string_html_specialchars( $val );
 				PRINT "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 			}
 		}

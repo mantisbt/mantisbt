@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	# Mantis - a php based Issuetracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.4 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-14 17:31:30 $
+	# $Revision: 1.4.4.1 $
+	# $Author: jlatour $
+	# $Date: 2005-12-05 11:05:42 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.4 2005-08-14 17:31:30 thraxisp Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.4.4.1 2005-12-05 11:05:42 jlatour Exp $
 	###########################################################################
 
 	###########################################################################

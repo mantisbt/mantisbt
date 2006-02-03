@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.56 2005-08-10 20:07:01 thraxisp Exp $
+	# $Id: print_bug_page.php,v 1.56.6.1 2006-01-01 02:58:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="6">
-		<div class="center"><?php echo config_get( 'window_title' ) . ' - ' . project_get_name( $v_project_id ) ?></div>
+		<div class="center"><?php echo config_get( 'window_title' ) . ' - ' . string_display( project_get_name( $v_project_id ) ) ?></div>
 	</td>
 </tr>
 <tr>

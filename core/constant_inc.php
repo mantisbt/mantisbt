@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.52 2005-08-04 19:54:03 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.52.4.1 2005-12-12 02:46:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -306,8 +306,8 @@
 
 	# Meta filter values
 	define( 'META_FILTER_MYSELF',	-1 );
-	define( 'META_FILTER_NONE',     '[none]'  );
-	define( 'META_FILTER_ANY',      '[any]'   );
+	define( 'META_FILTER_NONE',     -2  );
+	define( 'META_FILTER_ANY',      0   );
 
 	# Versions
 	define( 'VERSION_ALL',		null );

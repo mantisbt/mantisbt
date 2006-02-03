@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.16 2005-08-31 22:49:46 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.16.6.1 2006-01-01 02:58:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -398,7 +398,7 @@
 	if ( ALL_PROJECTS == $t_project ) {
 	    $t_project_title = lang_get( 'config_all_projects' );
 	} else {
-	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
+	    $t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';

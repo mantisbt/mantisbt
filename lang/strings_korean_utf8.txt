@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -11,11 +11,11 @@
 	#             miren.info@gmail.com
 	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
 	# -------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:10 $
+	# $Revision: 1.14.4.1 $
+	# $Author: jlatour $
+	# $Date: 2005-12-05 12:09:12 $
 	#
-	# $Id: strings_korean_utf8.txt,v 1.14 2005-08-08 21:29:10 thraxisp Exp $
+	# $Id: strings_korean_utf8.txt,v 1.14.4.1 2005-12-05 12:09:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php

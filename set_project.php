@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.54 2005-04-24 13:27:03 thraxisp Exp $
+	# $Id: set_project.php,v 1.54.10.1 2005-12-05 12:14:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,8 @@
 	$f_project_id	= gpc_get_string( 'project_id' );
 	$f_make_default	= gpc_get_bool  ( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
+
+	$c_ref = string_prepare_header( $f_ref );
 
 	$t_project = split( ';', $f_project_id );
 	$t_top     = $t_project[0];
@@ -39,8 +41,8 @@
 	# redirect to 'same page' when switching projects.
 
 	# for proxies that clear out HTTP_REFERER
-	if ( !is_blank( $f_ref ) ) {
-		$t_redirect_url = $f_ref;
+	if ( !is_blank( $c_ref ) ) {
+		$t_redirect_url = $c_ref;
 	} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 		$t_redirect_url = config_get( 'default_home_page' );
 	} else {
@@ -50,7 +52,7 @@
 		$t_path = config_get( 'path' );
 		if ( strtolower( $t_path ) == strtolower( substr( $_SERVER['HTTP_REFERER'], 0, strlen( $t_path ) ) ) ) {
 			$t_referrer_page = substr( $_SERVER['HTTP_REFERER'], strlen( $t_path ) );
-			# if view_all_bug_page, pass on filter	
+			# if view_all_bug_page, pass on filter
 			if ( eregi( 'view_all_bug_page.php', $t_referrer_page ) ) {
 				$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 				$t_redirect_url = 'view_all_set.php?type=4';

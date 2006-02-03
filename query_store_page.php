@@ -38,7 +38,7 @@
 	}
 
 	# Check for an error
-	$t_error_msg = gpc_get_string( 'error_msg', null );
+	$t_error_msg = string_strip_tags( gpc_get_string( 'error_msg', null ) );
 	if ( $t_error_msg != null ) {
 		print "<br />$t_error_msg<br /><br />";
 	}

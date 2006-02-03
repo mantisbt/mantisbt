@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_cookie_test.php,v 1.8 2004-08-05 17:58:47 jlatour Exp $
+	# $Id: login_cookie_test.php,v 1.8.22.1 2005-12-05 12:14:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,8 +16,10 @@
 <?php
 	$f_return = gpc_get_string( 'return', config_get( 'default_home_page' ) );
 
+	$c_return = string_prepare_header( $f_return );
+
 	if ( auth_is_user_authenticated() ) {
-		$t_redirect_url = $f_return;
+		$t_redirect_url = $c_return;
 	} else {
 		$t_redirect_url = 'login_page.php?cookie_error=1';
 	}

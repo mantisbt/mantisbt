@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.46 2005-08-15 22:13:52 thraxisp Exp $
+	# $Id: database_api.php,v 1.46.6.1 2006-01-05 03:54:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -206,6 +206,12 @@
 	}
 
 	# --------------------
+	function db_field_names( $p_table_name ) {
+		global $g_db;
+		return $g_db->MetaColumnNames( $p_table_name );
+	}
+
+	# --------------------
 	# Check if there is an index defined on the specified table/field and with
 	# the specified type.
 	#
@@ -269,6 +275,7 @@
 	# --------------------
 	# prepare a string before DB insertion
 	# @@@ should default be return addslashes( $p_string ); or generate an error
+	# @@@ Consider using ADODB escaping for all databases.
 	function db_prepare_string( $p_string ) {
 		global $g_db;
 		$t_db_type = config_get( 'db_type' );
@@ -286,11 +293,15 @@
 				}
 
 			case 'mysql':
-				return mysql_escape_string( $p_string );
+				# mysql_escape_string was deprecated in v4.3.0 
+				if ( php_version_at_least( '4.3.0' ) ) {
+					return mysql_real_escape_string( $p_string );
+				} else {
+					return mysql_escape_string( $p_string );
+				}
 
 			# For some reason mysqli_escape_string( $p_string ) always returns an empty
 			# string.  This is happening with PHP v5.0.2.
-			# @@@ Consider using ADODB escaping for all databases.
 			case 'mysqli':
 				$t_escaped = $g_db->qstr( $p_string, false );
 				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );

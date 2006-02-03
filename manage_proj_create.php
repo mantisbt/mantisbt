@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create.php,v 1.7 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: manage_proj_create.php,v 1.7.14.1.2.1 2006-02-03 03:56:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 	$f_status		= gpc_get_int( 'status' );
 	$f_file_path	= gpc_get_string( 'file_path', '' );
 
-	$t_project_id = project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
+	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path );
 
 	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
 		$t_access_level = access_get_global_level();

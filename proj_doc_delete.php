@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.25 2005-05-08 20:42:08 marcelloscata Exp $
+	# $Id: proj_doc_delete.php,v 1.25.10.1 2006-01-06 02:30:05 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -17,15 +17,20 @@
 	}
 
 	$f_file_id = gpc_get_int( 'file_id' );
-	$f_title = gpc_get_string( 'title', '' );
 
 	$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
+	$t_project_file_table = config_get( 'mantis_project_file_table' );
+	$query = "SELECT title FROM $t_project_file_table 
+				WHERE id=$f_file_id";
+	$result = db_query( $query );
+	$t_title = db_result( $result );
+
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
-		'<br/>' . lang_get( 'filename' ) . ': ' . $f_title,
+		'<br/>' . lang_get( 'filename' ) . ': ' . string_display( $t_title ),
 		lang_get( 'file_delete_button' ) );
 
 	file_delete( $f_file_id, 'project' );

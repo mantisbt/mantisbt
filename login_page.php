@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.52 2005-08-15 22:13:51 thraxisp Exp $
+	# $Id: login_page.php,v 1.52.4.1 2005-12-08 22:28:16 jlatour Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -64,7 +64,7 @@
 		<?php
 			if ( !is_blank( $f_return ) ) {
 			?>
-				<input type="hidden" name="return" value="<?php echo htmlspecialchars( $f_return ) ?>" />
+				<input type="hidden" name="return" value="<?php echo string_html_specialchars( $f_return ) ?>" />
 				<?php
 			}
 			echo lang_get( 'login_title' ) ?>

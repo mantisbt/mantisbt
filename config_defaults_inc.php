@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.282 2005-08-14 18:40:14 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2 2006-02-03 22:17:59 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -78,7 +78,7 @@
 			$t_host = 'www.example.com';
 		}
 
-		$t_path = dirname( $_SERVER['PHP_SELF'] );
+		$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
 		if ( '/' == $t_path || '\\' == $t_path ) {
 			$t_path = '';
 		}
@@ -312,7 +312,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.0.0-CVS';
+	$g_mantis_version		= '1.0.0';
 	$g_show_version			= ON;
 
 	################################

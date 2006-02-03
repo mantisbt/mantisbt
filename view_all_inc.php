@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.161 2005-07-18 18:56:59 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.161.10.1 2006-01-24 04:10:44 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,7 +73,7 @@
 			$v_end   = 0;
 
 			if ( sizeof( $rows ) > 0 ) {
-				$v_start = $t_filter['per_page'] * ($f_page_number-1) +1;
+				$v_start = $t_filter['per_page'] * (int)($f_page_number-1) +1;
 				$v_end   = $v_start + sizeof( $rows ) -1;
 			}
 
@@ -94,7 +94,7 @@
 		<span class="small"> <?php
 			# -- Page number links --
 
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number );
+			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number );
 		?> </span>
 	</td>
 </tr>
@@ -180,7 +180,7 @@
 		<?php # -- Page number links -- ?>
 		<td class="right" colspan="2">
 			<span class="small">
-				<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
+				<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number ) ?>
 			</span>
 		</td>
 	</tr>

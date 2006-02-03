@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.83 2005-05-24 23:22:48 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.83.10.1 2006-01-01 02:58:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -79,7 +79,7 @@
 
 <table class="width100"><tr><td class="form-title">
 	<div class="center">
-		<?php echo config_get( 'window_title' ) . ' - ' . project_get_name( $t_project_id ); ?>
+		<?php echo config_get( 'window_title' ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
 	</div>
 </td></tr></table>
 

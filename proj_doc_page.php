@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.50 2005-08-16 14:36:43 thraxisp Exp $
+	# $Id: proj_doc_page.php,v 1.50.6.2 2006-01-15 22:36:05 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -28,6 +28,7 @@
 	$t_user_table = config_get( 'mantis_user_table' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
+	$t_admin = ADMINISTRATOR;
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		# Select all the projects that the user has access to
@@ -59,7 +60,8 @@
 					LEFT JOIN $t_user_table ut ON ut.id = $t_user_id
 				WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
 					( ( ( pt.view_state = $t_pub OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-						( pult.user_id = $t_user_id AND pult.access_level $t_access_clause ) )
+						( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR
+						( ut.access_level = $t_admin ) )
 				ORDER BY pt.name ASC, pft.title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
@@ -111,7 +113,7 @@
 			echo '&nbsp;';
 			print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 			echo '&nbsp;';
-			print_button( 'proj_doc_delete.php?file_id=' . $v_id . '&title=' . string_url( $v_title ), lang_get( 'delete_link' ) );
+			print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
 		}
 ?>
 	</span>

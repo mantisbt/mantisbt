@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.77 2005-08-10 19:59:13 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.77.6.1 2006-01-01 02:58:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -146,7 +146,7 @@
 	<!-- Category -->
 	<td>
 		<?php
-			$t_project_name = project_get_field( $t_bug->project_id, 'name' );
+			$t_project_name = string_display( project_get_field( $t_bug->project_id, 'name' ) );
 			echo "[$t_project_name] $t_bug->category";
 		?>
 	</td>

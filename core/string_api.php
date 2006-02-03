@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.75 2005-08-07 15:29:07 ryandesign Exp $
+	# $Id: string_api.php,v 1.75.4.2.2.1.2.1 2006-02-03 03:56:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -84,7 +84,7 @@
 	# Prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string );
 		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = string_nl2br( $p_string );
@@ -113,7 +113,7 @@
 
 		# same steps as string_display_links() without the preservation of spaces since &nbsp; is undefined in XML.
 		$t_string = string_strip_hrefs( $t_string );
-		$t_string = htmlspecialchars( $t_string );
+		$t_string = string_html_specialchars( $t_string );
 		$t_string = string_restore_valid_html_tags( $t_string );
 		$t_string = string_nl2br( $t_string );
 		$t_string = string_insert_hrefs( $t_string );
@@ -122,7 +122,7 @@
 		$t_string = string_process_cvs_link( $t_string );
 
 		# another escaping to escape the special characters created by the generated links
-		$t_string = htmlspecialchars( $t_string );
+		$t_string = string_html_specialchars( $t_string );
 
 		return $t_string;
 	}
@@ -152,7 +152,7 @@
 	# --------------------
 	# Process a string for display in a textarea box
 	function string_textarea( $p_string ) {
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 
 		return $p_string;
 	}
@@ -160,7 +160,7 @@
 	# --------------------
 	# Process a string for display in a text box
 	function string_attribute( $p_string ) {
-		$p_string = htmlspecialchars( $p_string );
+		$p_string = string_html_specialchars( $p_string );
 
 		return $p_string;
 	}
@@ -173,6 +173,35 @@
 		return $p_string;
 	}
 
+	# --------------------
+	# validate the url as part of this site before continuing
+	function string_sanitize_url( $p_url ) {
+
+		$t_url = strip_tags( urldecode( $p_url ) );
+		if ( preg_match( '?http(s)*://?', $t_url ) > 0 ) { 
+			// no embedded addresses
+			if ( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) { 
+				// url is ok if it begins with our path, if not, replace it
+				$t_url = 'index.php';
+			}
+		}
+		if ( $t_url == '' ) {
+			$t_url = 'index.php';
+		}
+		
+		// split and encode parameters
+		if ( strpos( '?', $t_url ) !== FALSE ) {
+			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
+			if ( $t_param !== "" ) {
+				return $t_path . '?' . urlencode( $t_param );
+			} else {
+				return $t_path;
+			}
+		} else {
+			return $t_url;
+		}
+	}
+	
 	# --------------------
 	# process the $p_string and convert filenames in the format
 	#  cvs:filename.ext or cvs:filename.ext:n.nn to a html link
@@ -651,4 +680,32 @@
 		}
 	}
 
+	# --------------------
+	# Calls htmlspecialchars on the specified string, passing along
+	# the current charset, if the current PHP version supports it.
+	function string_html_specialchars( $p_string ) {
+		if ( php_version_at_least( '4.1.0' ) ) {
+			return htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
+		} else {
+			return htmlspecialchars( $p_string );
+		}
+	}
+	
+	# --------------------
+	# Prepares a string to be used as part of header().
+	function string_prepare_header( $p_string ) {
+		$t_string = $p_string;
+
+		$t_truncate_pos = strpos($p_string, "\n");
+		if ($t_truncate_pos !== false ) {
+			$t_string = substr($t_string, 0, $t_truncate_pos);
+		}
+
+		$t_truncate_pos = strpos($p_string, "\r");
+		if ($t_truncate_pos !== false ) {
+			$t_string = substr($t_string, 0, $t_truncate_pos);
+		}
+
+		return $t_string;
+	}
 ?>

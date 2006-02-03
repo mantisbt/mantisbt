@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.184 2005-08-10 17:08:55 thraxisp Exp $
+	# $Id: html_api.php,v 1.184.4.1.2.1.2.1 2006-02-03 03:56:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -234,7 +234,9 @@
 			$p_time = config_get( 'wait_time' );
 		}
 
-		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\" />\n";
+		$t_url = string_sanitize_url( $p_url );
+
+		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
 
 		return true;
 	}
@@ -375,7 +377,7 @@
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a>',
 					'[<a href="http://www.mantisbt.org/" target="_blank">^</a>]</span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2006 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
 		if ( ! is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {
@@ -410,9 +412,9 @@
 					$t_time = $g_queries_array[$i][1];
 					$t_total += $t_time;
 					if ( true == $g_queries_array[$i][2] ) {
-						echo "\t",  '<tr valign="top"><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
+						echo "\t",  '<tr valign="top"><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					} else {
-						echo "\t",  '<tr valign="top"><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
+						echo "\t",  '<tr valign="top"><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					}
 				}
 				echo "\t", '<tr><td></td><td>', $t_total, '</td><td></td></tr>', "\n";

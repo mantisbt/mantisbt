@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.37 2005-06-09 13:05:38 vboctor Exp $
+	# $Id: login_select_proj_page.php,v 1.37.6.1 2005-12-08 22:28:16 jlatour Exp $
 	# --------------------------------------------------------
 
 	# Allows the user to select a project that is visible to him
@@ -28,7 +28,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="ref" value="<?php echo htmlspecialchars( $f_ref ) ?>" />
+		<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
 		<?php echo lang_get( 'select_project_button' ) ?>
 	</td>
 </tr>
