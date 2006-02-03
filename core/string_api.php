@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.79 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: string_api.php,v 1.80 2006-02-03 03:46:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -173,6 +173,35 @@
 		return $p_string;
 	}
 
+	# --------------------
+	# validate the url as part of this site before continuing
+	function string_sanitize_url( $p_url ) {
+
+		$t_url = strip_tags( urldecode( $p_url ) );
+		if ( preg_match( '?http(s)*://?', $t_url ) > 0 ) { 
+			// no embedded addresses
+			if ( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) { 
+				// url is ok if it begins with our path, if not, replace it
+				$t_url = 'index.php';
+			}
+		}
+		if ( $t_url == '' ) {
+			$t_url = 'index.php';
+		}
+		
+		// split and encode parameters
+		if ( strpos( '?', $t_url ) !== FALSE ) {
+			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
+			if ( $t_param !== "" ) {
+				return $t_path . '?' . urlencode( $t_param );
+			} else {
+				return $t_path;
+			}
+		} else {
+			return $t_url;
+		}
+	}
+	
 	# --------------------
 	# process the $p_string and convert filenames in the format
 	#  cvs:filename.ext or cvs:filename.ext:n.nn to a html link
@@ -384,45 +413,6 @@
 		return $p_string;
 	}
 
-	# --------------------
-	# strip all tags from a string
-	# This will remove HTML tags, javascript sections
-	# and white space. It will also convert some
-	# common HTML entities to their text equivalent.
-	function string_strip_tags( $p_string ) {
-		$t_search = array( 
-				'@<script[^>]*?>.*?</script>@si',	/* Strip out javascript */
-				'@<[\/\!]*?[^<>]*?>@si',			/* Strip out HTML tags */
-				'@([\r\n])[\s]+@',					/* Strip out white space */
-				'@&(quot|#34);@i',					/* Replace HTML entities */
-				'@&(amp|#38);@i',
-				'@&(lt|#60);@i',
-				'@&(gt|#62);@i',
-				'@&(nbsp|#160);@i',
-				'@&(iexcl|#161);@i',
-				'@&(cent|#162);@i',
-				'@&(pound|#163);@i',
-				'@&(copy|#169);@i',
-				'@&#(\d+);@e' );					/* evaluate as php */
-
-		$t_replace = array( 
-				'',
-				'',
-				'\1',
-				'"',
-				'&',
-				'<',
-				'>',
-				' ',
-				chr(161),
-				chr(162),
-				chr(163),
-				chr(169),
-				'chr(\1)' );
-
-		return preg_replace($t_search, $t_replace, $p_string);
-	}
-	
 	# --------------------
 	# This function looks for text with htmlentities
 	# like &lt;b&gt; and converts is into corresponding

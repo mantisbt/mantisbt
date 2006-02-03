@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.149 2005-12-16 21:57:05 jlatour Exp $
+	# $Id: print_api.php,v 1.150 2006-02-03 03:46:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -32,15 +32,18 @@
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
 		}
+		
+		# validate the url as part of this site before continuing
+		$t_url = string_sanitize_url( $p_url );
 
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {
 			header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 
 			if ( ON == $t_use_iis ) {
-				header( "Refresh: 0;url=$p_url" );
+				header( "Refresh: 0;url=$t_url" );
 			} else {
-				header( "Location: $p_url" );
+				header( "Location: $t_url" );
 			}
 		} else {
 			return false;
