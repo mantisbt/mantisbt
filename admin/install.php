@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.22 2005-08-10 17:10:12 thraxisp Exp $
+	# $Id: install.php,v 1.22.10.1 2006-02-08 03:04:05 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -196,6 +196,9 @@ if ( 2 == $t_install_state ) {
 				case 'mysql':
 					$t_support = function_exists('mysql_connect');
 					break;
+				case 'mysqli':
+					$t_support = function_exists('mysqli_connect');
+					break;
 				case 'pgsql':
 					$t_support = function_exists('pg_connect');
 					break;
@@ -282,6 +285,7 @@ if ( 2 == $t_install_state ) {
 		$t_error = '';
 		switch ( $f_db_type ) {
 			case 'mysql':
+			case 'mysqli':
 				if ( function_exists ( 'version_compare' ) ) {
 					if ( version_compare ( $t_version_info['version'] , '4.1.0', '>' ) ) {
 						$t_warning = 'Please ensure that you installation supports the new password scheme used in MySQL 4.1.0 and later. See ' .
@@ -345,6 +349,7 @@ if ( 1 == $t_install_state ) {
 	<td>
 		<select name="db_type">
 		<option value="mysql">MySql (default)</option>
+		<option value="mysqli">MySqli</option>
 		<option value="odbc_mssql">Microsoft SQL Server ODBC (experimental)</option>
 		<option value="ado_mssql">Microsoft SQL Server ADO (experimental)</option>
 		<option value="pgsql">PGSQL (experimental)</option>
@@ -492,7 +497,7 @@ if ( 3 == $t_install_state ) {
 		if ( ! $f_log_queries ) {
 			$g_db_connected = true; # fake out database access routines used by config_get
 		}
-		$t_last_update = config_get( 'database_version', -1 );
+		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 		$lastid = sizeof( $upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if ( $f_log_queries ) {
