@@ -3722,6 +3722,15 @@
 		}
 
 		switch($drivername) {
+		case 'mysqlt':
+		case 'mysqli': 
+				$drivername='mysql'; 
+				break;
+		case 'postgres7':
+		case 'postgres8':
+				$drivername = 'postgres'; 
+				break;	
+		case 'firebird15': $drivername = 'firebird'; break;
 		case 'oracle': $drivername = 'oci8'; break;
 		case 'access': if ($perf) $drivername = ''; break;
 		case 'db2'   : break;
