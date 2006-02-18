@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.24 2006-02-08 03:09:16 thraxisp Exp $
+	# $Id: install.php,v 1.25 2006-02-18 04:21:58 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -518,6 +518,7 @@ if ( 3 == $t_install_state ) {
 	# install the tables
 	if ( false == $g_failed ) {
 		$g_db_connected = false; # fake out database access routines used by config_get
+		$GLOBALS['g_db_type'] = $f_db_type; # database_api references this
 		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
