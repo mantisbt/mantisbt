@@ -1,6 +1,13 @@
 Mantis ChangeLog
 
 
+2006.02.18 - 1.0.1
+
+- 0006722: [installation] Remaining mysqli_ install problems (ref. #0006672): mysqli_real_escape_string() expects parameter 1 to be link (thraxisp)
+- 0006672: [installation] install.php assumes mysql extension, fails with mysqli extension (thraxisp)
+- 0006668: [filters] Parse error while saving new filter: Call to undefined function: string_strip_tags() (thraxisp)
+
+
 2006.02.04  -  1.0.0
 
 - 0006044: [security] 'Return' _GET is not checked (thraxisp)
