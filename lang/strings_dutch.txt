@@ -11,11 +11,11 @@
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# Dutch: Siebrand Mazeland, s.mazeland@xs4all.nl
 	# -------------------------------------------------
-	# $Revision: 1.93.4.2 $
-	# $Author: jlatour $
-	# $Date: 2005-12-07 15:28:59 $
+	# $Revision: 1.93.4.2.6.1 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_dutch.txt,v 1.93.4.2 2005-12-07 15:28:59 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.93.4.2.6.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -211,15 +211,13 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een a
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Een nummer was verwacht voor %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Melding %d niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d niet gevonden.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'De filter die u probeert te gebruiken is te oud om bijgewerkt te worden, maak hem alstublieft 
-opnieuw';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'De filter die u probeert te gebruiken is te oud om bijgewerkt te worden, maak hem alstublieft opnieuw';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FOUT: dat bestandstype mag niet toegevoegd worden.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Dit bestand bestaat al.  Verwijder het bestaande bestand eerst.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FOUT: ongeldig uploadpad.  De map bestaat niet of de webserver heeft er geen schrijfrechten op.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Er is geen bestands toegevoegd. Ga terug naar de vorige pagina en kies een bestand om toe 
-te voegen voor u "Toevoegen" kiest.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Er is geen bestands toegevoegd. Ga terug naar de vorige pagina en kies een bestand om toe te voegen voor u "Toevoegen" kiest.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'FOUT: toegevoegd bestand kan niet naar bestandsopslag worden verplaatst. Map bestaat niet of is niet beschrijfbaar voor de webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FOUT: een melding kan geen duplicaat van zichzelf zijn.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Gebruikersveld niet gevonden.';
@@ -263,6 +261,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aant
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hiërarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt het toegangsniveau van de enige beheerder van het systeem niet aanpassen.';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FOUT: uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: ofwel uw browser ondersteunt geen cookies, of deze zijn uitgeschakeld.';
 
@@ -291,8 +290,7 @@ $s_priority_enum_string           = '10:geen,20:laag,30:normaal,40:hoog,50:urgen
 $s_severity_enum_string           = '10:feature,20:triviaal,30:tekst,40:tweak,50:klein,60:groot,70:crash,80:blokkade';
 $s_reproducibility_enum_string    = '10:altijd,30:soms,50:willekeurig,70:niet geprobeerd,90:niet te dupliceren,100:N.V.T.';
 $s_status_enum_string             = '10:nieuw,20:feedback,30:erkend,40:bevestigd,50:toegewezen,80:afgehandeld,90:afgesloten';
-$s_resolution_enum_string         = '10:open,20:opgelost,30:heropend,40:niet te dupliceren,50:niet oplosbaar,60:dubbele melding,70:geen bug,80:uitgesteld,90:
-wordt niet opgelost';
+$s_resolution_enum_string         = '10:open,20:opgelost,30:heropend,40:niet te dupliceren,50:niet oplosbaar,60:dubbele melding,70:geen bug,80:uitgesteld,90:wordt niet opgelost';
 $s_projection_enum_string         = '10:geen,30:tweak,50:eenvoudige oplossing,70:ingewikkelde oplossing,90:herschrijven nodig';
 $s_eta_enum_string                = '10:geen,20:< 1 dag,30:2-3 dagen,40:< 1 week,50:< 1 maand,60:> 1 maand';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
@@ -470,8 +468,7 @@ $s_password_updated = 'Wachtwoord is aangepast.';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'De door u geselecteerde meldingen komen uit verschillende projecten. De parameters hieronder hebben betrekking op alle 
-projecten. Als dit onjuist is, doe het dan opnieuw met een kleinere selectie meldingen.';
+$s_multiple_projects = 'De door u geselecteerde meldingen komen uit verschillende projecten. De parameters hieronder hebben betrekking op alle projecten. Als dit onjuist is, doe het dan opnieuw met een kleinere selectie meldingen.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Melding is toegewezen.';
@@ -635,8 +632,7 @@ $s_here = 'Hier';
 $s_lost_password_title = "Wachtwoord opnieuw instellen";
 $s_lost_password_done_title = "Wachtwoordbericht verstuurd";
 $s_lost_password_subject = "Wachtwoord opnieuw instellen";
-$s_lost_password_info = "Om uw verloren wachtwoord opnieuw in te stellen, moet u hier uw naam en e-mail adres invullen.<br/><br/>Als de gegevens overeen komen met een geldig account 
-ontvangt u een link met de validatiecode via e-mail. Volg deze link om uw wachtwoord aan te passen.";
+$s_lost_password_info = "Om uw verloren wachtwoord opnieuw in te stellen, moet u hier uw naam en e-mail adres invullen.<br/><br/>Als de gegevens overeen komen met een geldig account ontvangt u een link met de validatiecode via e-mail. Volg deze link om uw wachtwoord aan te passen.";
 $s_lost_password_confirm_hash_OK = "Uw bevestiging is geaccepteerd. Pas uw wachtwoord aan.";
 
 # main_page.php
@@ -1151,8 +1147,7 @@ $s_custom_field_require_closed = 'Verplicht bij sluiten';
 $s_custom_field_sequence = 'Rij';
 $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselectie lijst,8:Datum';
 
-$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, 
-worden alle waarden voor dit veld permanent verwijderd.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
+$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, worden alle waarden voor dit veld permanent verwijderd.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';
 $s_field_delete_button = 'Verwijder gebruikersveld';
 
@@ -1209,8 +1204,7 @@ $s_relationship_with_parent = "Relatie met de hoofdmelding";
 $s_delete_relationship_button = "Verwijderen";
 $s_delete_relationship_sure_msg = "Weet u zeker dat u deze relatie wilt verwijderen?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nog niet alle onderliggende meldingen van deze melding zijn opgelost of gesloten.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende meldingen van deze melding zijn opgelost of gesloten.<br/>Voordat een bovenliggende melding opgelost of gesloten kan worden, moeten alle onderliggende 
-meldingen opgelost of gesloten zijn.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende meldingen van deze melding zijn opgelost of gesloten.<br/>Voordat een bovenliggende melding opgelost of gesloten kan worden, moeten alle onderliggende meldingen opgelost of gesloten zijn.";
 $s_create_child_bug_button = "Klonen";
 $s_bug_cloned_to = "Melding gekloond";
 $s_bug_created_from = "Melding gegenereerd van";

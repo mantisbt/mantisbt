@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.75 $
+  # $Revision: 1.75.10.1 $
   # $Author: thraxisp $
-  # $Date: 2005-08-08 21:29:02 $
+  # $Date: 2006-02-19 03:39:48 $
   #
-  # $Id: strings_hungarian.txt,v 1.75 2005-08-08 21:29:02 thraxisp Exp $
+  # $Id: strings_hungarian.txt,v 1.75.10.1 2006-02-19 03:39:48 thraxisp Exp $
   ###########################################################################
 ?>
 <?php

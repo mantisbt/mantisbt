@@ -11,11 +11,11 @@
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# -------------------------------------------------
-	# $Revision: 1.95 $
-	# $Author: vboctor $
-	# $Date: 2005-08-10 22:22:53 $
+	# $Revision: 1.95.10.1 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_polish.txt,v 1.95 2005-08-10 22:22:53 vboctor Exp $
+	# $Id: strings_polish.txt,v 1.95.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

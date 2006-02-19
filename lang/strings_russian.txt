@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.88 $
+	# $Revision: 1.88.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:11 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_russian.txt,v 1.88 2005-08-08 21:29:11 thraxisp Exp $
+	# $Id: strings_russian.txt,v 1.88.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

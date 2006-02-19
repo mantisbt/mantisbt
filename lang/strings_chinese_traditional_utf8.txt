@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional_UTF8: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.4 $
+        # $Revision: 1.4.10.1 $
         # $Author: thraxisp $
-        # $Date: 2005-08-10 19:19:38 $
+        # $Date: 2006-02-19 03:39:48 $
         #
-        # $Id: strings_chinese_traditional_utf8.txt,v 1.4 2005-08-10 19:19:38 thraxisp Exp $
+        # $Id: strings_chinese_traditional_utf8.txt,v 1.4.10.1 2006-02-19 03:39:48 thraxisp Exp $
         ###########################################################################
 ?>
 <?php
@@ -256,7 +256,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '目前已
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '這樣會將自己建立為下層專案的下層專案而造成無窮迴路問題.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不可以更改系統中最後一個系統管理員的權限';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed 登入 attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '你的帳號可能被暫停或封鎖或者輸入不正確的帳號密碼.';
 $s_login_cookies_disabled = '錯誤: 你的瀏覽器可能不支援 cookies 功能或是沒有將 cookies 功能開啟.';
 
@@ -438,8 +438,6 @@ $s_profile_updated_msg = '個人設定更新...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = '我的資助者';
-$s_sponsor_all_projects = '注意: 這金額將資助所有專案.';
-$s_sponsor_project = '注意: 這金額只資助 %s 這個專案.';
 $s_update_sponsorship_button = '更改付款狀態';
 $s_no_sponsored = '找不到指派給你的問題有被資助.';
 $s_own_sponsored = '你被資助的問題:';
@@ -571,7 +569,7 @@ $s_description = '說明';
 $s_steps_to_reproduce = 'Bug 發生的步驟說明';
 $s_update_information_button = '更新資訊';
 $s_sticky_issue = '棘手問題';
-$s_profile = '個人設定'; 
+$s_profile = '個人設定';
 
 # bug_update_page.php
 $s_update_advanced_link = '進階更新';
@@ -1176,7 +1174,7 @@ $s_sponsorship_paid = '資助款已付';
 $s_sponsorship_more_info = '更多有關資助的資訊';
 $s_sponsorship_total = '資助總數';
 
-# URL explaining the process of sponsoring an 問題.  This is defined here rather than
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
 # is not need to provide such process information.
 $s_sponsorship_process_url = '';

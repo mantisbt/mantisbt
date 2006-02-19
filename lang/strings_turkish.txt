@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.84.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:13 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_turkish.txt,v 1.84 2005-08-08 21:29:13 thraxisp Exp $
+	# $Id: strings_turkish.txt,v 1.84.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

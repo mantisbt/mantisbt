@@ -15,11 +15,11 @@
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# -------------------------------------------------
-	# $Revision: 1.104 $
+	# $Revision: 1.104.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:01 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_french.txt,v 1.104 2005-08-08 21:29:01 thraxisp Exp $
+	# $Id: strings_french.txt,v 1.104.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

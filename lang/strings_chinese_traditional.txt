@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.85 $
+        # $Revision: 1.85.10.1 $
         # $Author: thraxisp $
-        # $Date: 2005-08-10 19:19:38 $
+        # $Date: 2006-02-19 03:39:48 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.85 2005-08-10 19:19:38 thraxisp Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.85.10.1 2006-02-19 03:39:48 thraxisp Exp $
         ###########################################################################
 ?>
 <?php
@@ -256,7 +256,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '•ÿ�
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '≥oºÀ∑|±N¶€§v´ÿ•ﬂ¨∞§Uºh±MÆ◊™∫§Uºh±MÆ◊¶”≥y¶®µLΩa∞j∏Ù∞›√D.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ßA§£•i•HßÛßÔ®t≤Œ§§≥Ã´·§@≠”®t≤Œ∫ﬁ≤z≠˚™∫≈v≠≠';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed µn§J attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ßA™∫±b∏π•iØ‡≥Qº»∞±©Œ´ ¬Í©Œ™ÃøÈ§J§£•øΩT™∫±b∏π±KΩX.';
 $s_login_cookies_disabled = 'ø˘ª~: ßA™∫¬sƒ˝æπ•iØ‡§£§‰¥© cookies •\Ø‡©Œ¨O®S¶≥±N cookies •\Ø‡∂}±“.';
 
@@ -438,8 +438,6 @@ $s_profile_updated_msg = '≠”§H≥]©wßÛ∑s...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'ß⁄™∫∏ÍßU™Ã';
-$s_sponsor_all_projects = '™`∑N: ≥o™˜√B±N∏ÍßU©“¶≥±MÆ◊.';
-$s_sponsor_project = '™`∑N: ≥o™˜√B•u∏ÍßU %s ≥o≠”±MÆ◊.';
 $s_update_sponsorship_button = 'ßÛßÔ•I¥⁄™¨∫A';
 $s_no_sponsored = 'ß‰§£®Ï´¸¨£µπßA™∫∞›√D¶≥≥Q∏ÍßU.';
 $s_own_sponsored = 'ßA≥Q∏ÍßU™∫∞›√D:';
@@ -571,7 +569,7 @@ $s_description = 'ª°©˙';
 $s_steps_to_reproduce = 'Bug µo•Õ™∫®B∆Jª°©˙';
 $s_update_information_button = 'ßÛ∑s∏Í∞T';
 $s_sticky_issue = '¥∆§‚∞›√D';
-$s_profile = '≠”§H≥]©w'; 
+$s_profile = '≠”§H≥]©w';
 
 # bug_update_page.php
 $s_update_advanced_link = '∂i∂•ßÛ∑s';
@@ -1176,7 +1174,7 @@ $s_sponsorship_paid = '∏ÍßU¥⁄§w•I';
 $s_sponsorship_more_info = 'ßÛ¶h¶≥√ˆ∏ÍßU™∫∏Í∞T';
 $s_sponsorship_total = '∏ÍßU¡`º∆';
 
-# URL explaining the process of sponsoring an ∞›√D.  This is defined here rather than
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
 # is not need to provide such process information.
 $s_sponsorship_process_url = '';

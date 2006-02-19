@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.106 $
+	# $Revision: 1.106.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:02 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_italian.txt,v 1.106 2005-08-08 21:29:02 thraxisp Exp $
+	# $Id: strings_italian.txt,v 1.106.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 
 ?>

@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.4.4.1 $
-	# $Author: jlatour $
-	# $Date: 2005-12-05 11:05:42 $
+	# $Revision: 1.4.4.1.6.1 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.4.4.1 2005-12-05 11:05:42 jlatour Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.4.4.1.6.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
@@ -204,7 +204,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权限存取。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，Mantis 系统无法读取文件；请检查项目设置。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传上限造成的。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。'; 
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
@@ -274,7 +274,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
 
-#$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -551,6 +551,7 @@ $s_reminder = '提醒';
 $s_reminder_explain = '该注释将被发送给要求接收该问题反馈的所有收件人。';
 $s_reminder_monitor = '这些收件人将开始监视此问题，他们可以适用“取消监视”按钮来取消订阅。';
 $s_reminder_store = '该注释将和问题一起储存。';
+
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = '请确认你要为 %d 号问题向 %s 提供资助。';
 

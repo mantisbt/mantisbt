@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.31.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:10 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.31 2005-08-08 21:29:10 thraxisp Exp $
+	# $Id: strings_lithuanian.txt,v 1.31.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)

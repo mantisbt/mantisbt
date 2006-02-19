@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.75.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-22 14:50:31 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.75 2005-08-22 14:50:31 thraxisp Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.75.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 
 	###########################################################################
@@ -34,7 +34,7 @@
 ?>
 <?php
 # Charset
-$s_charset = 'GBK';
+$s_charset = 'GB2312';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'ÒÆ¶¯';
@@ -204,7 +204,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'ÎÞÈ¨ÏÞ´æÈ¡¡£';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ÎÄ¼þÉÏ´«Ê§°Ü£¬Mantis ÏµÍ³ÎÞ·¨¶ÁÈ¡ÎÄ¼þ£»Çë¼ì²éÏîÄ¿ÉèÖÃ¡£';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ÎÄ¼þÉÏ´«Ê§°Ü£¬¿ÉÄÜÊÇÎÄ¼þ´óÐ¡³¬³ö PHP µÄÉÏ´«ÉÏÏÞÔì³ÉµÄ¡£';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ã»ÓÐÕÒµ½µ±Ç°Ò³µÄÒ»¸ö±ØÐë²ÎÊý¡£';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ÒÑ´æÔÚÍ¬ÃûÓÃ»§£¬Çë·µ»ØÇ°Ò»Ò³ÁíÍâÑ¡ÔñÒ»¸öÓÃ»§Ãû¡£'; 
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ÒÑ´æÔÚÍ¬ÃûÓÃ»§£¬Çë·µ»ØÇ°Ò»Ò³ÁíÍâÑ¡ÔñÒ»¸öÓÃ»§Ãû¡£';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ã»ÓÐÕÒµ½ÉèÖÃÑ¡Ïî¡°%s¡±¡£';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Ã»ÓÐÕÒµ½×Ö·û´®¡°%s¡±¡£';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Ã»ÓÐÕÒµ½ÎÊÌâ×¢ÊÍ¡£';
@@ -274,7 +274,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'ÒÑ´ïµ½×î¸
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '´Ë²Ù×÷½«Ôì³ÉÏîÄ¿´ÓÊô½á¹¹·¢Éú´íÎóµÄÑ­»·½á¹¹¡£';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Äã²»ÄÜ¸ü¸ÄÏµÍ³ÖÐÎ¨Ò»Ò»¸öÏµÍ³¹ÜÀíÔ±µÄ´æÈ¡È¨ÏÞ¡£';
 
-#$s_login_error = 'ÄãµÄÕËºÅÒÑ¾­Í£ÓÃ»òÒÑ±»Ëø¶¨£¨ÓÉÓÚ¶à´ÎµÇÂ¼Ê§°Üµ¼ÖÂËø¶¨£©£¬»òÕßÄãÊäÈëµÄÓÃ»§ÃûºÍÃÜÂëÊÇ´íÎóµÄ¡£';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ºÜÒÅº¶£¬ÄãÎÞ·¨µÇÂ½£¬ÇëÈ·ÈÏÊÇ·ñÄãÕýÈ·µØÊäÈëÁËÓÃ»§ÃûºÍÃÜÂë²¢³¢ÊÔÖØÐÂµÇÂ¼£»Èç¹ûÈÔÈ»ÎÞ·¨µÇÂ¼£¬Çë×ÉÑ¯¹ÜÀíÔ±ÊÇ·ñÄãµÄÕËºÅ±»Ëø¶¨¡£';
 $s_login_cookies_disabled = 'ÄãµÄä¯ÀÀÆ÷½ûÓÃÁË Cookies ¹¦ÄÜ£¬»òÕßÄã¿ÉÄÜÊ¹ÓÃÁË²»Ö§³Ö Cookie µÄ¾É°æä¯ÀÀÆ÷£»ÇëÆôÓÃ Cookie£¬»òÕßÉý¼¶ÄãµÄä¯ÀÀÆ÷¡£';
 
@@ -551,6 +551,7 @@ $s_reminder = 'ÌáÐÑ';
 $s_reminder_explain = '¸Ã×¢ÊÍ½«±»·¢ËÍ¸øÒªÇó½ÓÊÕ¸ÃÎÊÌâ·´À¡µÄËùÓÐÊÕ¼þÈË¡£';
 $s_reminder_monitor = 'ÕâÐ©ÊÕ¼þÈË½«¿ªÊ¼¼àÊÓ´ËÎÊÌâ£¬ËûÃÇ¿ÉÒÔÊÊÓÃ¡°È¡Ïû¼àÊÓ¡±°´Å¥À´È¡Ïû¶©ÔÄ¡£';
 $s_reminder_store = '¸Ã×¢ÊÍ½«ºÍÎÊÌâÒ»Æð´¢´æ¡£';
+
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'ÇëÈ·ÈÏÄãÒªÎª %d ºÅÎÊÌâÏò %s Ìá¹©×ÊÖú¡£';
 

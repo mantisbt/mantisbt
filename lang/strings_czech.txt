@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.82 $
+	# $Revision: 1.82.10.1 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:01 $
+	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_czech.txt,v 1.82 2005-08-08 21:29:01 thraxisp Exp $
+	# $Id: strings_czech.txt,v 1.82.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
