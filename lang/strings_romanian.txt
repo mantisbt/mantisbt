@@ -8,11 +8,11 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	#		    Doru Ilasi <doru@aplix.org>
 	# -------------------------------------------------
-	# $Revision: 1.83 $
-	# $Author: vboctor $
-	# $Date: 2005-11-27 00:46:19 $
+	# $Revision: 1.84 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:52:36 $
 	#
-	# $Id: strings_romanian.txt,v 1.83 2005-11-27 00:46:19 vboctor Exp $
+	# $Id: strings_romanian.txt,v 1.84 2006-02-19 03:52:36 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

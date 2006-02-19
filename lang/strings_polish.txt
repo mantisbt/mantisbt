@@ -12,11 +12,11 @@
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
 	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: vboctor $
-	# $Date: 2005-09-17 07:23:23 $
+	# $Revision: 1.97 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:52:36 $
 	#
-	# $Id: strings_polish.txt,v 1.96 2005-09-17 07:23:23 vboctor Exp $
+	# $Id: strings_polish.txt,v 1.97 2006-02-19 03:52:36 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.91 $
+	# $Revision: 1.92 $
 	# $Author: thraxisp $
-	# $Date: 2005-08-08 21:29:12 $
+	# $Date: 2006-02-19 03:52:36 $
 	#
-	# $Id: strings_spanish.txt,v 1.91 2005-08-08 21:29:12 thraxisp Exp $
+	# $Id: strings_spanish.txt,v 1.92 2006-02-19 03:52:36 thraxisp Exp $
 	###########################################################################
 ?>
 <?php

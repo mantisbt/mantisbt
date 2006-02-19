@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.86 $
-	# $Author: vboctor $
-	# $Date: 2005-11-27 00:46:19 $
+	# $Revision: 1.87 $
+	# $Author: thraxisp $
+	# $Date: 2006-02-19 03:52:36 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.86 2005-11-27 00:46:19 vboctor Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.87 2006-02-19 03:52:36 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
