@@ -6,9 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.8 2005-08-03 14:20:34 thraxisp Exp $
+	# $Id: schema.php,v 1.8.10.1 2006-02-19 13:42:24 thraxisp Exp $
 	# --------------------------------------------------------
-	
+
 	# Each entry below defines the schema. The upgrade array consists of
 	#  two elements
 	# The first is the function to generate SQL statements (see adodb schema doc for more details)
@@ -16,8 +16,8 @@
 	#  DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL, AlterColumnSQL, DropColumnSQL
 	#  A local function "InsertData" has been provided to add data to the db
 	# The second parameter is an array of the parameters to be passed to the function.
-	
-	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE 
+
+	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
 	#  END OF THE TABLE!!!
 
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
@@ -337,8 +337,8 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_user_username',config_get('mantis
 $upgrade[] = Array('CreateIndexSQL',Array('idx_enable',config_get('mantis_user_table'),'enabled'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_access',config_get('mantis_user_table'),'access_level'));
 
-$upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'), 
-    "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES 
-        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" . 
+$upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'),
+    "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
+        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" .
              md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 ?>
