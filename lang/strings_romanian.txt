@@ -8,11 +8,11 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	#		    Doru Ilasi <doru@aplix.org>
 	# -------------------------------------------------
-	# $Revision: 1.84 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.85 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:11 $
 	#
-	# $Id: strings_romanian.txt,v 1.84 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_romanian.txt,v 1.85 2006-02-20 09:09:11 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nimic';
+$s_current = 'current';
 $s_search ='Cauta';
 $s_view_prev_link = 'Precedent';
 $s_view_next_link = 'Urmator';

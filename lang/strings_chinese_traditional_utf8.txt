@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional_UTF8: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.5 $
-        # $Author: thraxisp $
-        # $Date: 2006-02-19 03:52:36 $
+        # $Revision: 1.6 $
+        # $Author: bigbadger $
+        # $Date: 2006-02-20 09:08:41 $
         #
-        # $Id: strings_chinese_traditional_utf8.txt,v 1.5 2006-02-19 03:52:36 thraxisp Exp $
+        # $Id: strings_chinese_traditional_utf8.txt,v 1.6 2006-02-20 09:08:41 bigbadger Exp $
         ###########################################################################
 ?>
 <?php
@@ -1048,6 +1048,7 @@ $s_sort = '排序方式';
 
 # view_all_inc.php
 $s_none = '無';
+$s_current = 'current';
 $s_search ='搜尋 Bug 內容關鍵字';
 $s_view_prev_link = '檢視前一筆';
 $s_view_next_link = '檢視下一筆';

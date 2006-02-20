@@ -10,11 +10,11 @@
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-10 18:37:14 $
+	# $Revision: 1.97 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:10 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.96 2005-08-10 18:37:14 thraxisp Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.97 2006-02-20 09:09:10 bigbadger Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.267 -- jferraz 2005/08/10
 	###########################################################################
@@ -1053,6 +1053,7 @@ $s_sort = 'Ordenar por';
 
 # view_all_inc.php
 $s_none = 'nenhum';
+$s_current = 'current';
 $s_search = 'Procurar';
 $s_view_prev_link = 'Ver Ant';
 $s_view_next_link = 'Ver Próx';

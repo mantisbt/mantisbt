@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.77 $
-  # $Author: thraxisp $
-  # $Date: 2006-02-19 03:52:36 $
+  # $Revision: 1.78 $
+  # $Author: bigbadger $
+  # $Date: 2006-02-20 09:08:48 $
   #
-  # $Id: strings_hungarian.txt,v 1.77 2006-02-19 03:52:36 thraxisp Exp $
+  # $Id: strings_hungarian.txt,v 1.78 2006-02-20 09:08:48 bigbadger Exp $
   ###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nincs';
+$s_current = 'current';
 $s_search ='Keresés';
 $s_view_prev_link = 'Elõzõ';
 $s_view_next_link = 'Következõ';

@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.93 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.94 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:18 $
 	#
-	# $Id: strings_swedish.txt,v 1.93 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_swedish.txt,v 1.94 2006-02-20 09:09:18 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1048,6 +1048,7 @@ $s_sort = 'Sortera på';
 
 # view_all_inc.php
 $s_none = 'ingen';
+$s_current = 'current';
 $s_search ='Sök';
 $s_view_prev_link = 'Visa föregående';
 $s_view_next_link = 'Visa nästa';

@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.87 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.88 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:11 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.87 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.88 2006-02-20 09:09:11 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'Nenhum';
+$s_current = 'current';
 $s_search ='Pesquisar';
 $s_view_prev_link = 'Ver anterior';
 $s_view_next_link = 'Ver seguinte';

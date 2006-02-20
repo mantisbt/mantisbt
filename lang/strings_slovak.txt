@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.46 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:18 $
 	#
-	# $Id: strings_slovak.txt,v 1.45 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_slovak.txt,v 1.46 2006-02-20 09:09:18 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '¾iadny';
+$s_current = 'current';
 $s_search ='Hµada»';
 $s_view_prev_link = 'Predchádzajúci';
 $s_view_next_link = 'Následujúci';

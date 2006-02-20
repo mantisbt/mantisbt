@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.107 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.108 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:53 $
 	#
-	# $Id: strings_italian.txt,v 1.107 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_italian.txt,v 1.108 2006-02-20 09:08:53 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -1052,6 +1052,7 @@ $s_sort = "Sort by";
 
 # view_all_inc.php
 $s_none = "nessuno";
+$s_current = 'current';
 $s_search = "Ricerca";
 $s_view_prev_link = "Precedenti";
 $s_view_next_link = "Successivi";

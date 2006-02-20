@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.43 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:43 $
 	#
-	# $Id: strings_finnish.txt,v 1.42 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_finnish.txt,v 1.43 2006-02-20 09:08:43 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1052,6 +1052,7 @@ $s_sort = 'Lajittelujärjestys';
 
 # view_all_inc.php
 $s_none = 'ei mikään';
+$s_current = 'current';
 $s_search ='Haku';
 $s_view_prev_link = 'Näytä edelliset';
 $s_view_next_link = 'Näytä seuraavat';

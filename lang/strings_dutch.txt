@@ -11,11 +11,11 @@
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# Dutch: Siebrand Mazeland, s.mazeland@xs4all.nl
 	# -------------------------------------------------
-	# $Revision: 1.97 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.98 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:42 $
 	#
-	# $Id: strings_dutch.txt,v 1.97 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_dutch.txt,v 1.98 2006-02-20 09:08:42 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -1053,6 +1053,7 @@ $s_sort = 'Sorteren op';
 
 # view_all_inc.php
 $s_none = 'geen';
+$s_current = 'current';
 $s_search ='Zoeken';
 $s_view_prev_link = 'vorige';
 $s_view_next_link = 'volgende';

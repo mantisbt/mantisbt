@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.35 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.36 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:43 $
 	#
-	# $Id: strings_estonian.txt,v 1.35 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_estonian.txt,v 1.36 2006-02-20 09:08:43 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1051,6 +1051,7 @@ $s_sort = 'Sorteeri';
 
 # view_all_inc.php
 $s_none = 'Pole';
+$s_current = 'current';
 $s_search = 'Otsing';
 $s_view_prev_link = 'N&auml;ita eelmisi';
 $s_view_next_link = 'N&auml;ita j&auml;rgmisi';

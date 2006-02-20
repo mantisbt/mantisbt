@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.36 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.37 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:09 $
 	#
-	# $Id: strings_latvian.txt,v 1.36 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_latvian.txt,v 1.37 2006-02-20 09:09:09 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = "nav";
+$s_current = 'current';
 $s_search ="meklçt";
 $s_view_prev_link = "iepriekðçjos";
 $s_view_next_link = "nâkoðos";

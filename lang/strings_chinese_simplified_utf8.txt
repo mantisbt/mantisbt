@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.7 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:41 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.6 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.7 2006-02-20 09:08:41 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -1066,6 +1066,7 @@ $s_sort = '排序字段';
 
 # view_all_inc.php
 $s_none = '无';
+$s_current = 'current';
 $s_search ='搜索';
 $s_view_prev_link = '浏览上一页';
 $s_view_next_link = '浏览下一页';

@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.90 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.91 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:12 $
 	#
-	# $Id: strings_russian.txt,v 1.90 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_russian.txt,v 1.91 2006-02-20 09:09:12 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'нет';
+$s_current = 'current';
 $s_search = 'Поиск';
 $s_view_prev_link = 'Пред.';
 $s_view_next_link = 'След.';

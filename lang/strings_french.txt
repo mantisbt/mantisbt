@@ -15,11 +15,11 @@
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# -------------------------------------------------
-	# $Revision: 1.105 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.106 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:44 $
 	#
-	# $Id: strings_french.txt,v 1.105 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_french.txt,v 1.106 2006-02-20 09:08:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1056,6 +1056,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'aucun';
+$s_current = 'current';
 $s_search ='Chercher';
 $s_view_prev_link = 'Voir les précédents';
 $s_view_next_link = 'Voir les suivants';

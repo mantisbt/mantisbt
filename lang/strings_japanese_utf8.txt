@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.30 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.31 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:07 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.30 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.31 2006-02-20 09:09:07 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'ソート順';
 
 # view_all_inc.php
 $s_none = 'なし';
+$s_current = 'current';
 $s_search ='検索';
 $s_view_prev_link = '↑';
 $s_view_next_link = '↓';

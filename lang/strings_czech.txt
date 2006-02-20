@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.83 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.84 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:42 $
 	#
-	# $Id: strings_czech.txt,v 1.83 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_czech.txt,v 1.84 2006-02-20 09:08:42 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1053,6 +1053,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = '¾ádný';
+$s_current = 'current';
 $s_search ='Hledat';
 $s_view_prev_link = 'Pøedchozí';
 $s_view_next_link = 'Následující';

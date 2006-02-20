@@ -1046,6 +1046,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'noben';
+$s_current = 'current';
 $s_search = 'Iskanje';
 $s_view_prev_link = 'Poglej naslednjo';
 $s_view_next_link = 'Poglej prejšnjega';

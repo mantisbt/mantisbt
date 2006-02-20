@@ -9,11 +9,11 @@
 # Norwegian: Ingvald Skaug, dev@skaug.no
 # Norwegian: Alf-Ivar Holm, affi@csc.no
 # -------------------------------------------------
-# $Revision: 1.96 $
-# $Author: thraxisp $
-# $Date: 2006-02-19 03:52:36 $
+# $Revision: 1.97 $
+# $Author: bigbadger $
+# $Date: 2006-02-20 09:09:10 $
 #
-# $Id: strings_norwegian.txt,v 1.96 2006-02-19 03:52:36 thraxisp Exp $
+# $Id: strings_norwegian.txt,v 1.97 2006-02-20 09:09:10 bigbadger Exp $
 ###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'Sortere etter';
 
 # view_all_inc.php
 $s_none = 'Ingen';
+$s_current = 'current';
 $s_search ='Søk';
 $s_view_prev_link = 'Vis forrige';
 $s_view_next_link = 'Vis neste';

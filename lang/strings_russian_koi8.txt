@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.75 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.76 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:15 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.75 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_russian_koi8.txt,v 1.76 2006-02-20 09:09:15 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1048,6 +1048,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'нет';
+$s_current = 'current';
 $s_search = 'Поиск';
 $s_view_prev_link = 'Пред.';
 $s_view_next_link = 'След.';

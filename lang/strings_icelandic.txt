@@ -9,11 +9,11 @@
 	###########################################################################
 	# Icelandic strings for Mantis 1.0.0rc2
 	# -------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.7 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:50 $
 	#
-	# $Id: strings_icelandic.txt,v 1.6 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_icelandic.txt,v 1.7 2006-02-20 09:08:50 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'Raða eftir';
 
 # view_all_inc.php
 $s_none = 'enginn';
+$s_current = 'current';
 $s_search = 'Leita';
 $s_view_prev_link = 'Sjá fyrri';
 $s_view_next_link = 'Sjá næsta';

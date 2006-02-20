@@ -9,11 +9,11 @@
 	###########################################################################
 	# Catalan strings for Mantis
         # -------------------------------------------------
-        # $Revision: 1.1 $
-        # $Author: vboctor $
-        # $Date: 2005-09-22 11:51:04 $
+        # $Revision: 1.2 $
+        # $Author: bigbadger $
+        # $Date: 2006-02-20 09:08:39 $
         #
-        # $Id: strings_catalan.txt,v 1.1 2005-09-22 11:51:04 vboctor Exp $
+        # $Id: strings_catalan.txt,v 1.2 2006-02-20 09:08:39 bigbadger Exp $
         ###########################################################################
 ?>
 <?php
@@ -1049,6 +1049,7 @@ $s_sort = "Ordenar per";
 
 # view_all_inc.php
 $s_none = "cap";
+$s_current = 'current';
 $s_search = "Cercar";
 $s_view_prev_link = "Veure Anteriors";
 $s_view_next_link = "Veure Següents";

@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.86 $
-        # $Author: thraxisp $
-        # $Date: 2006-02-19 03:52:36 $
+        # $Revision: 1.87 $
+        # $Author: bigbadger $
+        # $Date: 2006-02-20 09:08:41 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.86 2006-02-19 03:52:36 thraxisp Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.87 2006-02-20 09:08:41 bigbadger Exp $
         ###########################################################################
 ?>
 <?php
@@ -1048,6 +1048,7 @@ $s_sort = '±∆ß«§Ë¶°';
 
 # view_all_inc.php
 $s_none = 'µL';
+$s_current = 'current';
 $s_search ='∑j¥M Bug §∫Æe√ˆ¡‰¶r';
 $s_view_prev_link = '¿Àµ¯´e§@µß';
 $s_view_next_link = '¿Àµ¯§U§@µß';

@@ -11,11 +11,11 @@
 	#             miren.info@gmail.com
 	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
 	# -------------------------------------------------
-	# $Revision: 1.15 $
-	# $Author: ryandesign $
-	# $Date: 2005-09-18 01:44:25 $
+	# $Revision: 1.16 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:09:09 $
 	#
-	# $Id: strings_korean_utf8.txt,v 1.15 2005-09-18 01:44:25 ryandesign Exp $
+	# $Id: strings_korean_utf8.txt,v 1.16 2006-02-20 09:09:09 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1052,6 +1052,7 @@ $s_sort = '정렬 by';
 
 # view_all_inc.php
 $s_none = '없음';
+$s_current = 'current';
 $s_search ='검색';
 $s_view_prev_link = '이전';
 $s_view_next_link = '다음';

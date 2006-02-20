@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.37 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:52:36 $
+	# $Revision: 1.38 $
+	# $Author: bigbadger $
+	# $Date: 2006-02-20 09:08:42 $
 	#
-	# $Id: strings_croatian.txt,v 1.37 2006-02-19 03:52:36 thraxisp Exp $
+	# $Id: strings_croatian.txt,v 1.38 2006-02-20 09:08:42 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1050,6 +1050,7 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = "ni¹ta";
+$s_current = 'current';
 $s_search ="Tra¾i";
 $s_view_prev_link = "Vidi prethodno";
 $s_view_next_link = "Vidi slijedeæe";
