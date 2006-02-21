@@ -12,23 +12,23 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:08:39 $
+	# $Date: 2006-02-21 16:41:59 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.77 2006-02-20 09:08:39 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.78 2006-02-21 16:41:59 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
-	#Mantis 1.0.0rc2 ¼òÌåÖĞÎÄÓïÑÔ°üµÄ·­ÒëËµÃ÷(by NetCobra,2005-08-10)
+	#Mantis 1.0.0 ¼òÌåÖĞÎÄÓïÑÔ°üµÄ·­ÒëËµÃ÷(by NetCobra,2006-01-05)
 	#
 	#1.ÔÚ´Ë°æ±¾ÖĞ½«´íÎóĞÅÏ¢²¿·Ö²ÎÕÕ·±ÌåÖĞÎÄÓïÑÔ°üÈ«²¿·­Òë£¬¸ĞĞ»·±ÌåÖĞÎÄÓïÑÔ°üµÄ·­Òë
 	#  ÈË Pao-Hsi Huang£»
 	#2.¶ÔÓÚËùÓĞµÄ¡°Issue¡±£¬ÎÒ·­ÒëÎª¡°ÎÊÌâ¡±£¬µ«¸Ğ¾õÈÔÈ»²»ÊÇºÜ×¼È·£»
-	#3.Õâ´Î½«¡°sponsor¡±ºÍ¡°Sponsorship¡±²ÎÕÕ·±ÌåÖĞÎÄÓïÑÔ°üÖĞµÄ·­Òë¸ÄÎª¡°×ÊÖú¡±£¬
-	#  ×Ô¼º¸Ğ¾õÕâ¸ö´Ê¸üºÏÊÊÒ»Ğ©£»
-	#4.ÄÄÎ»ÖªµÀ Sticky ¸ÃÈçºÎ·­Òë£¿ÎÒÈ«²¿±£ÁôÁËÔ­ÎÄ*^_^*
-	#5.¶ÔÓÚ$s_superfluousÒ»¾ä£¬ÒòÎªÎŞ·¨Ã÷È·µØÓÃÖĞÎÄ±í´ï£¬Ö»·­ÒëÁËºó°ë¾ä£»
+	#3.×ÉÑ¯ÍøÓÑºó£¬¡°Sticky¡±·­ÒëÎªÖÃ¶¥£»
+	#4.¶ÔÓÚ$s_superfluousÒ»¾ä£¬ÒòÎªÎŞ·¨Ã÷È·µØÓÃÖĞÎÄ±í´ï£¬Ö»·­ÒëÁËºó°ë¾ä£»
+	#
+	#ÓĞÈÎºÎ½¨Òé»òÒâ¼ûÇëÓëÎÒÁªÏµ£ºnetcobra@gmail.com£¬Ğ»Ğ»£¡
 	#
 	###########################################################################
 ?>
@@ -47,7 +47,7 @@ $s_actiongroup_menu_update_priority = '¸üĞÂÓÅÏÈ¼¶';
 $s_actiongroup_menu_update_status = '¸üĞÂ×´Ì¬';
 $s_actiongroup_menu_update_view_status = '¸üĞÂÊÓÍ¼×´Ì¬';
 $s_actiongroup_menu_update_category = '¸üĞÂÀà±ğ';
-$s_actiongroup_menu_set_sticky = 'ÉèÖÃ/È¡Ïû Sticky';
+$s_actiongroup_menu_set_sticky = 'ÉèÖÃ/È¡ÏûÖÃ¶¥';
 $s_actiongroup_menu_update_field = '¸üĞÂ %s';
 $s_actiongroup_bugs = 'Ñ¡ÔñÎÊÌâ';
 
@@ -132,7 +132,7 @@ $s_priority_bugs_conf_msg = 'Ñ¡ÔñÎÊÌâÓÅÏÈ¼¶±ğ';
 $s_status_bugs_conf_msg = 'Ñ¡ÔñÎÊÌâ×´Ì¬';
 $s_view_status_bugs_conf_msg = 'Ñ¡ÔñÎÊÌâä¯ÀÀ×´Ì¬';
 $s_category_bugs_conf_msg = 'Ñ¡ÔñÎÊÌâÀà±ğ';
-$s_set_sticky_bugs_conf_msg = 'ÄãÈ·¶¨ÒªÉèÖÃ/È¡ÏûÕâĞ©ÎÊÌâµÄ sticky Âğ£¿';
+$s_set_sticky_bugs_conf_msg = 'ÄãÈ·¶¨ÒªÉèÖÃ/È¡ÏûÕâĞ©ÎÊÌâµÄÖÃ¶¥Âğ£¿';
 $s_close_group_bugs_button = '¹Ø±ÕÎÊÌâ';
 $s_delete_group_bugs_button = 'É¾³ıÎÊÌâ';
 $s_move_group_bugs_button = 'ÒÆ¶¯ÎÊÌâ';
@@ -143,7 +143,7 @@ $s_priority_group_bugs_button = 'ĞŞ¸ÄÓÅÏÈ¼¶±ğ';
 $s_status_group_bugs_button = 'ĞŞ¸Ä×´Ì¬';
 $s_category_group_bugs_button = '¸üĞÂÀà±ğ';
 $s_view_status_group_bugs_button = 'ĞŞ¸Ää¯ÀÀ×´Ì¬';
-$s_set_sticky_group_bugs_button = 'ÉèÖÃ/È¡Ïû Sticky';
+$s_set_sticky_group_bugs_button = 'ÉèÖÃ/È¡ÏûÖÃ¶¥';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '×ÛºÏ±¨±í£¨°´ÎÊÌâ×´Ì¬£©';
@@ -274,7 +274,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'ÒÑ´ïµ½×î¸
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '´Ë²Ù×÷½«Ôì³ÉÏîÄ¿´ÓÊô½á¹¹·¢Éú´íÎóµÄÑ­»·½á¹¹¡£';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Äã²»ÄÜ¸ü¸ÄÏµÍ³ÖĞÎ¨Ò»Ò»¸öÏµÍ³¹ÜÀíÔ±µÄ´æÈ¡È¨ÏŞ¡£';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'ÄãµÄÕËºÅÒÑ¾­Í£ÓÃ»òÒÑ±»Ëø¶¨£¨ÓÉÓÚ¶à´ÎµÇÂ¼Ê§°Üµ¼ÖÂËø¶¨£©£¬»òÕßÄãÊäÈëµÄÓÃ»§ÃûºÍÃÜÂëÊÇ´íÎóµÄ¡£';
 $s_login_error = 'ºÜÒÅº¶£¬ÄãÎŞ·¨µÇÂ½£¬ÇëÈ·ÈÏÊÇ·ñÄãÕıÈ·µØÊäÈëÁËÓÃ»§ÃûºÍÃÜÂë²¢³¢ÊÔÖØĞÂµÇÂ¼£»Èç¹ûÈÔÈ»ÎŞ·¨µÇÂ¼£¬Çë×ÉÑ¯¹ÜÀíÔ±ÊÇ·ñÄãµÄÕËºÅ±»Ëø¶¨¡£';
 $s_login_cookies_disabled = 'ÄãµÄä¯ÀÀÆ÷½ûÓÃÁË Cookies ¹¦ÄÜ£¬»òÕßÄã¿ÉÄÜÊ¹ÓÃÁË²»Ö§³Ö Cookie µÄ¾É°æä¯ÀÀÆ÷£»ÇëÆôÓÃ Cookie£¬»òÕßÉı¼¶ÄãµÄä¯ÀÀÆ÷¡£';
 
@@ -1061,12 +1061,12 @@ $s_show = 'ÏÔÊ¾';
 $s_changed = 'ÒÑ±ä¸ü(Ğ¡Ê±)';
 $s_viewing_bugs_title = '²é¿´ÎÊÌâ';
 $s_updated = '×îºó¸üĞÂ';
-$s_sticky = 'ÏÔÊ¾ Sticky ÎÊÌâ';
+$s_sticky = 'ÏÔÊ¾ÖÃ¶¥ÎÊÌâ';
 $s_sort = 'ÅÅĞò×Ö¶Î';
 
 # view_all_inc.php
 $s_none = 'ÎŞ';
-$s_current = 'current';
+$s_current = 'µ±Ç°';
 $s_search ='ËÑË÷';
 $s_view_prev_link = 'ä¯ÀÀÉÏÒ»Ò³';
 $s_view_next_link = 'ä¯ÀÀÏÂÒ»Ò³';
