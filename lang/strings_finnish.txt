@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:08:43 $
+	# $Date: 2006-02-26 15:22:23 $
 	#
-	# $Id: strings_finnish.txt,v 1.43 2006-02-20 09:08:43 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.44 2006-02-26 15:22:23 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1145,7 +1145,7 @@ $s_custom_field_require_resolved = 'Vaadittu kenttä ratkaistaessa';
 $s_custom_field_require_closed = 'Vaadittu kenttä sulkemisessa';
 
 $s_custom_field_sequence = 'Järjestys';
-$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:Sähköpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:Date';
+$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:Sähköpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:Päivämäärä';
 
 $s_confirm_used_custom_field_deletion = 'Tämä kenttä on liitetty ainakin yhteen projektiin.  Jos jatkat, kaikki tähän kenttään liitetyt arvot poistetaan. Tätä komentoa ei voida jälkeenpäin kumota.  Jos et halua poistaa tätä kenttää, paina selaimesi Takaisin-painiketta.  Jatkaaksesi, paina allaolevaa painiketta';
 $s_confirm_custom_field_deletion = 'Oletko varma, että haluat poistaa tämän mukautetun kentän ja kaikki siihen liitetyt arvot?';
