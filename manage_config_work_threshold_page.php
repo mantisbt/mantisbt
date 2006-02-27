@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.12 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.13 2006-02-27 00:25:20 ryandesign Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -113,7 +113,7 @@
 
 			if ( $t_can_change ) {
 			    $t_checked = $t_project ? "CHECKED" : "";
-			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level]\" $t_checked />";
+			    $t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level\" $t_checked />";
 			    $t_show_submit = true;
 			} else {
 			    if ( $t_project ) {
