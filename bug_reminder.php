@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.19 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bug_reminder.php,v 1.19.10.1 2006-03-16 19:41:05 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -58,7 +58,7 @@
 	if ( ON == config_get( 'store_reminders' ) ) {
 		if ( count( $f_to ) > 50 ) {		# too many recipients to log, truncate the list
 			$t_to = array();
-			for ( $i=0; $i<$t_count_to; $i++ ) {
+			for ( $i=0; $i<50; $i++ ) {
 				$t_to[] = $f_to[$i];
 			}
 			$f_to = $t_to;
