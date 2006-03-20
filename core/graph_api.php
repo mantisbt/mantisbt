@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.31 2005-07-22 15:33:59 thraxisp Exp $
+	# $Id: graph_api.php,v 1.32 2006-03-20 02:54:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -26,7 +26,6 @@
 			'arial' => FF_ARIAL,
 			'verdana' => FF_VERDANA,
 			'courier' => FF_COURIER,
-			'book' => FF_BOOK,
 			'comic' => FF_COMIC,
 			'times' => FF_TIMES,
 			'georgia' => FF_GEORGIA,
@@ -231,7 +230,7 @@
 		$graph->legend->Pos($p_poshorizontal, $p_posvertical);
 		$graph->legend->SetFont( $t_graph_font );
 
-		$p1 = new PiePlot3d( array_values( $p_metrics ) );
+		$p1 = new PiePlot3d( array_values( $p_metrics ) ); // should be reversed?
 		$p1->SetTheme('earth');
 		#$p1->SetTheme("sand");
 		$p1->SetCenter($p_center);
