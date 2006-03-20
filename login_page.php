@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.53 2005-12-08 22:16:13 jlatour Exp $
+	# $Id: login_page.php,v 1.54 2006-03-20 02:51:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -164,8 +164,13 @@
 			}
 
 			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
-				require_once( 'admin/upgrade_inc.php' );
-				$t_upgrades_reqd = $upgrade_set->count_items();
+				if ( file_exists( 'admin/upgrade_inc.php' ) ) {
+					require_once( 'admin/upgrade_inc.php' );
+					$t_upgrades_reqd = $upgrade_set->count_items();
+				} else {
+					// can't find upgrade file, assume system is up to date
+					$t_upgrades_reqd = $t_upgrade_count;
+				}
 			} else {
 				$t_upgrades_reqd = 1000; # arbitrarily large number to force an upgrade
 			}
