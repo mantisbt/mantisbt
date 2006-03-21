@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.150 2006-02-03 03:46:12 thraxisp Exp $
+	# $Id: print_api.php,v 1.151 2006-03-21 12:11:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,15 +26,17 @@
 	#  immediately
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	function print_header_redirect( $p_url, $p_die = true ) {
+	# $p_sanitize - true/false - true in the case where the URL is extracted from GET/POST or untrusted source.
+	# This would be false if the URL is trusted (e.g. read from config_inc.php).
+	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = true ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
 		}
-		
+
 		# validate the url as part of this site before continuing
-		$t_url = string_sanitize_url( $p_url );
+		$t_url = $p_sanitize ? string_sanitize_url( $p_url ) : $p_url;
 
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {

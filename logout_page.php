@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: logout_page.php,v 1.17 2004-05-30 01:49:31 vboctor Exp $
+	# $Id: logout_page.php,v 1.18 2006-03-21 12:12:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,5 +18,5 @@
 		auth_http_set_logout_pending( true );
 	}
 
-	print_header_redirect( config_get( 'logout_redirect_page' ) );
+	print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );
 ?>
