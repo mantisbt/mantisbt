@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.151 2006-03-21 12:11:59 vboctor Exp $
+	# $Id: print_api.php,v 1.152 2006-03-21 13:06:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -802,9 +802,11 @@
  		print_user_option_list( 0, $p_project_id );
 	}
 	# --------------------
-	# prints the list of access levels exluding ADMINISTRATOR
-	# this is used when adding users to projects
-	function print_project_access_levels_option_list( $p_val ) {
+	# prints the list of access levels that are less than or equal to the access level of the
+	# logged in user.  This is used when adding users to projects
+	function print_project_access_levels_option_list( $p_val, $p_project_id = null ) {
+		$t_current_user_access_level = access_get_project_level( $p_project_id );
+
 		$t_access_levels_enum_string = config_get( 'access_levels_enum_string' );
 
 		# Add [default access level] to add the user to a project
@@ -817,9 +819,10 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
 
-#			if ( $t_elem[0] >= ADMINISTRATOR ) {
-#				continue;
-#			}
+			# a user must not be able to assign another user an access level that is higher than theirs.
+			if ( $t_elem[0] > $t_current_user_access_level ) {
+				continue;
+			}
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
 			PRINT "<option value=\"$t_elem[0]\"";
