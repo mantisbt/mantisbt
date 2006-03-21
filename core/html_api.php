@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.187 2006-02-03 03:46:13 thraxisp Exp $
+	# $Id: html_api.php,v 1.188 2006-03-21 13:28:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -92,6 +92,7 @@
 		html_content_type();
 		include( config_get( 'meta_include_file' ) );
 		html_rss_link();
+		echo '<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />';
 		html_title( $p_page_title );
 		html_head_javascript();
 	}
