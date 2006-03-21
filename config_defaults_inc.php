@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.289 2006-02-03 03:37:54 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.290 2006-03-21 13:17:12 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -258,7 +258,7 @@
 	$g_email_receive_own	= OFF;
 
 	# set to OFF to disable email check
-	$g_validate_email		= ON;
+	$g_validate_email		= ( substr( php_uname(), 0, 7 ) == 'Windows' ) ? OFF : ON;
 	$g_check_mx_record		= OFF;	# Not supported under Windows.
 
 	# if ON, allow the user to omit an email field

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.23 2005-07-17 10:06:00 prichards Exp $
+	# $Id: check.php,v 1.24 2006-03-21 13:17:11 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -188,7 +188,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 <!-- Email Validation -->
 <tr>
 	<td bgcolor="#ffffff">
-		validate_email = OFF?
+		Is validate_email set to OFF?
 	</td>
 	<?php
 		if ( ON != config_get_global( 'validate_email' ) ) {
@@ -202,7 +202,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 <!-- MX Record Checking -->
 <tr>
 	<td bgcolor="#ffffff">
-		check_mx_record = OFF?
+		Is check_mx_record set to OFF?
 	</td>
 	<?php
 		if ( ON != config_get_global( 'check_mx_record' ) ) {
