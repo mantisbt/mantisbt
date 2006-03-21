@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.25 2006-02-18 04:21:58 thraxisp Exp $
+	# $Id: install.php,v 1.26 2006-03-21 18:02:23 ryandesign Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -142,7 +142,7 @@ if ( 0 == $t_install_state ) {
 <!-- Check PHP Version -->
 <tr>
 	<td bgcolor="#ffffff">
-		Checking  PHP Version (Your version is <?php echo phpversion(); ?>)
+		Checking PHP version (your version is <?php echo phpversion(); ?>)
 	</td>
 	<?php
 		if (phpversion() == '4.0.6') {
@@ -152,17 +152,17 @@ if ( 0 == $t_install_state ) {
 				if ( version_compare ( phpversion() , '4.0.6', '>=' ) ) {
 					print_test_result( GOOD );
 				} else {
-					print_test_result( BAD, true, 'Upgrade the version of PHP to a more recent version' );
+					print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
 				}
 			} else {
-			 	print_test_result( BAD, true, 'Upgrade the version of PHP to a more recent version' );
+			 	print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
 			}
 		}
 	?>
 </tr>
 
 <!-- Check Safe Mode -->
-<?php print_test( 'Checking If Safe mode is enabled for install script',
+<?php print_test( 'Checking if safe mode is enabled for install script',
 		! ini_get ( 'SAFE_MODE' ),
 		true,
 		'Disable safe_mode in php.ini before proceeding' ) ?>
@@ -288,7 +288,7 @@ if ( 2 == $t_install_state ) {
 			case 'mysqli':
 				if ( function_exists ( 'version_compare' ) ) {
 					if ( version_compare ( $t_version_info['version'] , '4.1.0', '>' ) ) {
-						$t_warning = 'Please ensure that you installation supports the new password scheme used in MySQL 4.1.0 and later. See ' .
+						$t_warning = 'Please ensure that your installation supports the new password scheme used in MySQL 4.1.0 and later. See ' .
 							'<a href="http://dev.mysql.com/doc/mysql/en/password-hashing.html">http://dev.mysql.com/doc/mysql/en/password-hashing.html</a>.';
 					}
 				}
@@ -562,7 +562,7 @@ if ( 3 == $t_install_state ) {
 		if ( $f_log_queries ) {
 			# add a query to set the database version
 			echo 'INSERT INTO mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 20, 0 );' . "\r\n";
-			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding</td></tr>';
+			echo '</pre></br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</td></tr>';
 		}
 
 	}
@@ -654,7 +654,7 @@ if ( 5 == $t_install_state ) {
 <?php
 	if ( true == $t_write_failed ) {
 		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1" align="center">';
-		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check</td></tr>';
+		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
 		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
 	}
 ?>
