@@ -11,11 +11,11 @@
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# Dutch: Siebrand Mazeland, s.mazeland@xs4all.nl
 	# -------------------------------------------------
-	# $Revision: 1.98 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:08:42 $
+	# $Revision: 1.99 $
+	# $Author: vboctor $
+	# $Date: 2006-03-21 12:40:24 $
 	#
-	# $Id: strings_dutch.txt,v 1.98 2006-02-20 09:08:42 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.99 2006-03-21 12:40:24 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -442,7 +442,7 @@ $s_submit_button = 'Verder';
 $s_profile_updated_msg = 'Profiel aangepast.';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'Door mij gespronsord';
+$s_my_sponsorship = 'Door mij gesponsord';
 $s_update_sponsorship_button = 'Betalingsstatus wijzigen';
 $s_no_sponsored = 'Er zijn geen gesponsorde meldingen toegewezen aan uzelf aangetroffen.';
 $s_own_sponsored = 'Meldingen die u sponsort:';
