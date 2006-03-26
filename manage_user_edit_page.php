@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.15 2005-05-13 01:57:16 thraxisp Exp $
+	# $Id: manage_user_edit_page.php,v 1.16 2006-03-26 10:35:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -14,6 +14,7 @@
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_user_id = gpc_get_int( 'user_id' );
+	$c_user_id = $f_user_id;
 
 	$t_user = user_get_row( $f_user_id );
 
@@ -211,7 +212,7 @@
 <!-- ACCOUNT PREFERENCES -->
 <?php
 	include ( 'account_prefs_inc.php' );
-	edit_account_prefs( $t_user['id'], false, false, 'manage_user_page.php' );
+	edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $c_user_id );
 ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

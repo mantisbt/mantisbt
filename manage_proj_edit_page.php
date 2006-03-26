@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.95 2006-03-21 13:06:07 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.96 2006-03-26 10:35:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -260,6 +260,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <br />
 
 <!-- PROJECT CATEGORIES -->
+<a name="categories" />
 <div align="center">
 <table class="width75" cellspacing="1">
 
@@ -353,6 +354,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 ?>
 
 <!-- PROJECT VERSIONS -->
+<a name="versions" />
 <table class="width75" cellspacing="1">
 
 <!-- Title -->
@@ -428,6 +430,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 ?>
 
 <!-- PROJECT CUSTOM FIELD -->
+<a name="customfields" />
+
 <?php
 # You need either global permissions or project-specific permissions to link
 #  custom fields

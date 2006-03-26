@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.37 2005-07-18 13:45:22 thraxisp Exp $
+	# $Id: manage_user_update.php,v 1.38 2006-03-26 10:35:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -84,7 +84,7 @@
 	}
 
 	$result = db_query( $query );
-	$t_redirect_url = 'manage_user_page.php';
+	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 ?>
 <?php html_page_top1() ?>
 <?php
