@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.62 2005-08-18 15:33:28 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.63 2006-03-26 08:13:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,6 +32,8 @@
 	$f_offset		= gpc_get_int( 'offset', 0 );
 	$f_export		= gpc_get_string( 'export' );
 	$f_show_flag	= gpc_get_bool( 'show_flag' );
+
+	helper_begin_long_process();
 
 	# word or html export
 	if ( $f_type_page != 'html' ) {
