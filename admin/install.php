@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.26 2006-03-21 18:02:23 ryandesign Exp $
+	# $Id: install.php,v 1.27 2006-03-28 02:08:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -624,8 +624,7 @@ if ( 5 == $t_install_state ) {
 
 		$t_config_filename = $g_absolute_path . 'config_inc.php';
 		if ( !file_exists ( $t_config_filename ) ) {
-			if ( is_writable( $t_config_filename ) ) {
-				$fd = fopen( $t_config_filename, 'x' );
+			if ( $fd = fopen( $t_config_filename, 'x' ) ) {
 				fwrite( $fd, $t_config );
 				fclose( $fd );
 			}
