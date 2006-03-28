@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.37 2005-05-19 12:19:18 thraxisp Exp $
+	# $Id: file_download.php,v 1.38 2006-03-28 02:05:25 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -74,9 +74,16 @@
 
 	header( 'Content-Type: ' . $v_file_type );
 	header( 'Content-Length: ' . $v_filesize );
+	$t_filename = file_get_display_name( $v_filename );
+	$t_inline_files = explode(',', config_get('inline_file_exts', 'gif'));
+	if ( in_array( file_get_extension($t_filename), $t_inline_files ) ) {
+		$t_disposition = ''; //'inline;';
+	} else {
+		$t_disposition = ' attachment;';
+	}
 
 	# Added Quotes (") around file name.
-	header( 'Content-Disposition: attachment; filename="' . file_get_display_name( $v_filename ) . '"' );
+	header( 'Content-Disposition:' . $t_disposition . ' filename="' . $t_filename . '"' );
 	header( 'Content-Description: Download Data' );
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', db_unixtimestamp( $v_date_added ) ) );
 

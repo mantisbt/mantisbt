@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.290 2006-03-21 13:17:12 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.291 2006-03-28 02:05:24 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -853,6 +853,9 @@
 	# access level needed to view bugs attachments.  View means to see the file names
 	# sizes, and timestamps of the attachments.
 	$g_view_attachments_threshold	= VIEWER;
+	
+	# list of filetypes to view inline. This is a string of extentions separated by commas
+	$g_inline_file_exts = 'gif,png';
 
 	# access level needed to download bug attachments
 	$g_download_attachments_threshold	= VIEWER;
