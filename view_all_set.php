@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.57.4.1.2.1 2005-12-18 14:22:02 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.57.4.1.2.1.4.1 2006-04-06 00:28:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -152,12 +152,12 @@
 	$f_dir_1				= gpc_get_string( 'dir_1', '' );
 
 	# date values
-	$f_start_month			= gpc_get_string( 'start_month', date( 'm' ) );
-	$f_end_month			= gpc_get_string( 'end_month', date( 'm' ) );
-	$f_start_day			= gpc_get_string( 'start_day', 1 );
-	$f_end_day				= gpc_get_string( 'end_day', date( 'd' ) );
-	$f_start_year			= gpc_get_string( 'start_year', date( 'Y' ) );
-	$f_end_year				= gpc_get_string( 'end_year', date( 'Y' ) );
+	$f_start_month			= gpc_get_int( 'start_month', date( 'm' ) );
+	$f_end_month			= gpc_get_int( 'end_month', date( 'm' ) );
+	$f_start_day			= gpc_get_int( 'start_day', 1 );
+	$f_end_day				= gpc_get_int( 'end_day', date( 'd' ) );
+	$f_start_year			= gpc_get_int( 'start_year', date( 'Y' ) );
+	$f_end_year				= gpc_get_int( 'end_year', date( 'Y' ) );
 	$f_search				= gpc_get_string( 'search', '' );
 	$f_and_not_assigned		= gpc_get_bool( 'and_not_assigned' );
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
