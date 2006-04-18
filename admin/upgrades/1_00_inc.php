@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 1_00_inc.php,v 1.9 2005-07-17 12:49:02 prichards Exp $
+	# $Id: 1_00_inc.php,v 1.9.12.1 2006-04-18 00:53:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -162,5 +162,11 @@
 	# sync'd with these incremantal updates
 	$upgrades[] = new ReleaseUpgrade( '51' );
 
+	$upgrades[] = new SQLUpgrade(
+			'def_fixed_in_v',
+			'add default for fixed in version',
+			"ALTER TABLE $t_bug_table CHANGE fixed_in_version Fixed_in_version VARCHAR(64) DEFAULT '' NOT NULL"
+		);
+	
 	return $upgrades;
 ?>
