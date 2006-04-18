@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.99 2005-12-13 00:40:10 thraxisp Exp $
+	# $Id: bug_api.php,v 1.100 2006-04-18 00:43:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -411,7 +411,7 @@
 				      os, os_build,
 				      platform, version,
 				      build,
-				      profile_id, summary, view_state, sponsorship_total, sticky )
+				      profile_id, summary, view_state, sponsorship_total, sticky, fixed_in_version )
 				  VALUES
 				    ( '$c_project_id',
 				      '$c_reporter_id', '$c_handler_id',
@@ -424,7 +424,7 @@
 				      '$c_os', '$c_os_build',
 				      '$c_platform', '$c_version',
 				      '$c_build',
-				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total', '$c_sticky' )";
+				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total', '$c_sticky', '' )";
 		db_query( $query );
 
 		$t_bug_id = db_insert_id($t_bug_table);
