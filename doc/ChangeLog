@@ -1,6 +1,11 @@
 Mantis ChangeLog
 
 
+2006.04.18 - 1.0.2
+
+- 0006902: [security] XSS in mantis bug track system .... (thraxisp)
+- 0006859: [bugtracker] Can send reminders to all recipients (thraxisp)
+
 2006.02.18 - 1.0.1
 
 - 0006722: [installation] Remaining mysqli_ install problems (ref. #0006672): mysqli_real_escape_string() expects parameter 1 to be link (thraxisp)
