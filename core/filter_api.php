@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.138 2006-01-28 14:00:12 vboctor Exp $
+	# $Id: filter_api.php,v 1.139 2006-04-18 09:06:42 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -915,7 +915,7 @@
 		//if ( count( $t_id_array_lastmod ) > 0 ) {
 		$t_where = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";
 		
-		$query3 = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM mantis_bugnote_table $t_where GROUP BY bug_id";
+		$query3 = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where GROUP BY bug_id";
 
 		# perform query
 		$result3 = db_query( $query3 );
