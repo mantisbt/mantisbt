@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.32 2006-03-20 02:54:15 thraxisp Exp $
+	# $Id: graph_api.php,v 1.33 2006-04-19 00:50:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -601,7 +601,7 @@
 		#    also, get the last updated date for the bug as this may be all the information we have
 		$query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value
 			FROM $t_bug_table LEFT JOIN $t_history_table
-			ON mantis_bug_table.id = mantis_bug_history_table.bug_id
+			ON $t_bug_table.id = $t_history_table.bug_id
 			WHERE $specific_where
 						AND $t_bug_table.status >= '$t_res_val'
 						AND ( ( $t_history_table.new_value >= '$t_res_val'
