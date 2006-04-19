@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.57 2005-07-19 18:28:50 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.58 2006-04-19 00:45:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -34,6 +34,8 @@
 	#   being spoofed if register_globals is turned on
 
 	$g_cache_custom_field = array();
+	$g_cache_cf_list = NULL;
+	$g_cache_cf_linked = array();
 
 	# Cache a custom field row if necessary and return the cached copy
 	#  If the second parameter is true (default), trigger an error
@@ -600,88 +602,103 @@
 	#
 	# The ids will be sorted based on the sequence number associated with the binding
 	function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
-		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
-		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
+        global $g_cache_cf_linked;
+        
+        if ( ! isset( $g_cache_cf_linked[$p_project_id] ) ) {
+        
+     		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+     		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
 
-		if ( ALL_PROJECTS == $p_project_id ) {
-            $t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-            $t_project_table = config_get( 'mantis_project_table' );
-            $t_user_table = config_get( 'mantis_user_table' );
-            $t_user_id = auth_get_current_user_id();
-            $t_pub = VS_PUBLIC;
-            $t_priv = VS_PRIVATE;
+    		if ( ALL_PROJECTS == $p_project_id ) {
+                $t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+                $t_project_table = config_get( 'mantis_project_table' );
+                $t_user_table = config_get( 'mantis_user_table' );
+                $t_user_id = auth_get_current_user_id();
+                $t_pub = VS_PUBLIC;
+                $t_priv = VS_PRIVATE;
             
-            $t_private_access = config_get( 'private_project_threshold' );
-            if ( is_array( $t_private_access ) ) {
-                if ( 1 == count( $t_private_access ) ) {
-				    $t_access_clause = "= " . array_shift( $t_private_access ) . " ";
+                $t_private_access = config_get( 'private_project_threshold' );
+                if ( is_array( $t_private_access ) ) {
+                    if ( 1 == count( $t_private_access ) ) {
+    				    $t_access_clause = "= " . array_shift( $t_private_access ) . " ";
+                    } else {
+                        $t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
+                    }
                 } else {
-                    $t_access_clause = "IN (" . implode( ',', $t_private_access ) . ")";
-                }
-            } else {
-                $t_access_clause = ">= $t_private_access ";
-            }			
+                    $t_access_clause = ">= $t_private_access ";
+                }			
 
             
-            # select only the ids that the user has some access to 
-            #  e.g., all fields in public projects, or private projects where the user is listed
-            #    or private projects where the user is implicitly listed
-            $query = "SELECT cft.id as id, cft.name as name
-                FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
-                    LEFT JOIN $t_project_user_list_table pult 
-                        on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
-                    ( pt.view_state = $t_pub OR 
-                    ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
-                    ( pult.user_id is null and ut.access_level $t_access_clause ) )
-                GROUP BY cft.id, cft.name
-                ORDER BY cft.name ASC";
-		} else {
-            if ( is_array( $p_project_id ) ) {
-                if ( 1 == count( $p_project_id ) ) {
-				    $t_project_clause = "= " . array_shift( $p_project_id ) . " ";
+                # select only the ids that the user has some access to 
+                #  e.g., all fields in public projects, or private projects where the user is listed
+                #    or private projects where the user is implicitly listed
+                $query = "SELECT cft.id as id, cft.name as name
+                    FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
+                        LEFT JOIN $t_project_user_list_table pult 
+                            on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
+                    WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND 
+                        ( pt.view_state = $t_pub OR 
+                        ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR 
+                        ( pult.user_id is null and ut.access_level $t_access_clause ) )
+                    GROUP BY cft.id, cft.name
+                    ORDER BY cft.name ASC";
+    		} else {
+                if ( is_array( $p_project_id ) ) {
+                    if ( 1 == count( $p_project_id ) ) {
+    				    $t_project_clause = "= " . array_shift( $p_project_id ) . " ";
+                    } else {
+                        $t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
+                    }
                 } else {
-                    $t_project_clause = "IN (" . implode( ',', $p_project_id ) . ")";
-                }
-            } else {
-                $t_project_clause = "= $p_project_id ";
-            }			
-			$query = "SELECT cft.id, cft.name, cfpt.sequence
+                    $t_project_clause = "= $p_project_id ";
+                }			
+    			$query = "SELECT cft.id, cft.name, cfpt.sequence
 					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
 					  WHERE cfpt.project_id $t_project_clause AND
 							cft.id = cfpt.field_id
 					  ORDER BY sequence ASC, name ASC";
-		}
-		$result = db_query( $query );
-		$t_row_count = db_num_rows( $result );
-		$t_ids = array();
+    		}
+    		$result = db_query( $query );
+    		$t_row_count = db_num_rows( $result );
+    		$t_ids = array();
 
-		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-			$row = db_fetch_array( $result );
+    		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+    			$row = db_fetch_array( $result );
 
-			array_push( $t_ids, $row['id'] );
-		}
-
+    			array_push( $t_ids, $row['id'] );
+    		}
+    		$g_cache_cf_linked[$p_project_id] = $t_ids;
+    	} else {
+    		$t_ids = $g_cache_cf_linked[$p_project_id];
+        }
+        
 		return $t_ids;
 	}
 
 	# --------------------
 	# Return an array all custom field ids sorted by name
 	function custom_field_get_ids( ) {
-		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
-		$query = "SELECT id, name
+        global $g_cache_cf_list;
+       
+        if ( $g_cache_cf_list === NULL ) {
+            $t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+            $query = "SELECT id, name
 				  FROM $t_custom_field_table
 				  ORDER BY name ASC";
-		$result = db_query( $query );
-		$t_row_count = db_num_rows( $result );
-		$t_ids = array();
+            $result = db_query( $query );
+            $t_row_count = db_num_rows( $result );
+            $t_ids = array();
 
-		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-			$row = db_fetch_array( $result );
+            for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+                $row = db_fetch_array( $result );
 
-			array_push( $t_ids, $row['id'] );
-		}
+                array_push( $t_ids, $row['id'] );
+            }
+            $g_cache_cf_list = $t_ids;
 
+        } else {
+            $t_ids = $g_cache_cf_list;
+        }
 		return $t_ids;
 	}
 
