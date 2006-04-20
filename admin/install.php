@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.27 2006-03-28 02:08:15 thraxisp Exp $
+	# $Id: install.php,v 1.28 2006-04-20 13:53:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -203,8 +203,6 @@ if ( 2 == $t_install_state ) {
 					$t_support = function_exists('pg_connect');
 					break;
 				case 'mssql':
-				case 'odbc_mssql':
-				case 'ado_mssql':
 					$t_support = function_exists('mssql_connect');
 					break;
 				default:
@@ -243,8 +241,12 @@ if ( 2 == $t_install_state ) {
 			if ( '' !== $f_admin_password ) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
-				$f_admin_password = $f_db_password;
+				if (  '' != $f_db_password ) {
+					print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
+					$f_admin_password = $f_db_password;
+				} else {
+					print_test_result( GOOD );
+				}
 			}
 	?>
 </tr>
@@ -276,7 +278,8 @@ if ( 2 == $t_install_state ) {
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
-			$t_version_info = $g_db->ServerInfo();
+			# due to a bug in ADODB, this call prompts warnings, hence the @
+			$t_version_info = @$g_db->ServerInfo();
 			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
 		?>
 	</td>
@@ -295,8 +298,6 @@ if ( 2 == $t_install_state ) {
 				break;
 			case 'pgsql':
 			case 'mssql':
-			case 'odbc_mssql':
-			case 'ado_mssql':
 			default:
 		}
 			
@@ -361,16 +362,10 @@ if ( 1 == $t_install_state ) {
 				echo '<option value="mysqli">MySqli</option>';
 			}
 
-			if ( $f_db_type == 'odbc_mssql' ) {
-				echo '<option value="odbc_mssql" selected="selected">Microsoft SQL Server ODBC (experimental)</option>';
+			if ( $f_db_type == 'mssql' ) {
+				echo '<option value="mssql" selected="selected">Microsoft SQL Server (experimental)</option>';
 			} else {
-				echo '<option value="odbc_mssql">Microsoft SQL Server ODBC (experimental)</option>';
-			}
-
-			if ( $f_db_type == 'ado_mssql' ) {
-				echo '<option value="ado_mssql" selected="selected">Microsoft SQL Server ADO (experimental)</option>';
-			} else {
-				echo '<option value="ado_mssql">Microsoft SQL Server ADO (experimental)</option>';
+				echo '<option value="mssql">Microsoft SQL Server (experimental)</option>';
 			}
 
 			if ( $f_db_type == 'pgsql' ) {
@@ -624,7 +619,7 @@ if ( 5 == $t_install_state ) {
 
 		$t_config_filename = $g_absolute_path . 'config_inc.php';
 		if ( !file_exists ( $t_config_filename ) ) {
-			if ( $fd = fopen( $t_config_filename, 'x' ) ) {
+			if ( $fd = @fopen( $t_config_filename, 'x' ) ) {
 				fwrite( $fd, $t_config );
 				fclose( $fd );
 			}
