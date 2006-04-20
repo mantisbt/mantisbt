@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.17 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: changelog_page.php,v 1.18 2006-04-20 14:29:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -100,22 +100,24 @@
 			}
 			$t_first_entry = true;
 
-			for ( $t_result = db_query( $query ); !$t_result->EOF; $t_result->MoveNext() ) {
+			$t_result = db_query( $query );
+
+			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
 				if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
 					continue;
 				}
 
-				bug_cache_database_result($t_result->fields);
+				bug_cache_database_result( $t_row );
 
 				# check limit_Reporter (Issue #4770)
 				# reporters can view just issues they reported
 				if ( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
 					 !bug_is_user_reporter( $t_result->fields['id'], $t_user_id )) {
-				  continue;
+					continue;
 				}
 
-				$t_issue_id = $t_result->fields['id'];
+				$t_issue_id = $t_row['id'];
 
 				if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
 					continue;
