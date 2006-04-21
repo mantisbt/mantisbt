@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.268 $
-	# $Author: jlatour $
-	# $Date: 2005-12-17 23:08:52 $
+	# $Revision: 1.269 $
+	# $Author: vboctor $
+	# $Date: 2006-04-21 13:01:25 $
 	#
-	# $Id: strings_english.txt,v 1.268 2005-12-17 23:08:52 jlatour Exp $
+	# $Id: strings_english.txt,v 1.269 2006-04-21 13:01:25 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,6 +739,14 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';

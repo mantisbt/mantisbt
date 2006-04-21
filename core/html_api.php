@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.188 2006-03-21 13:28:31 vboctor Exp $
+	# $Id: html_api.php,v 1.189 2006-04-21 13:01:25 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -612,7 +612,7 @@
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
-		$t_manage_config_page = 'adm_permissions_report.php';
+		$t_manage_config_page = 'adm_config_report.php';
 		$t_manage_prof_menu_page    = 'manage_prof_menu_page.php';
 		# $t_documentation_page 		= 'documentation_page.php';
 
@@ -661,12 +661,16 @@
 	# Print the menu for the manage configuration section
 	# $p_page specifies the current page name so it's link can be disabled
 	function print_manage_config_menu( $p_page = '' ) {
+		$t_configuration_report = 'adm_config_report.php';
 		$t_permissions_summary_report = 'adm_permissions_report.php';
 		$t_manage_work_threshold     = 'manage_config_work_threshold_page.php';
 		$t_manage_email 		= 'manage_config_email_page.php';
 		$t_manage_workflow 		= 'manage_config_workflow_page.php';
 
 		switch ( $p_page ) {
+			case $t_configuration_report:
+				$t_configuration_report = '';
+				break;
 			case $t_permissions_summary_report:
 				$t_permissions_summary_report = '';
 				break;
@@ -683,6 +687,7 @@
 
 		PRINT '<br /><div align="center">';
 		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
+			print_bracket_link( $t_configuration_report, lang_get_defaulted( 'configuration_report' ) );
 			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
 			print_bracket_link( $t_manage_work_threshold, lang_get( 'manage_threshold_config' ) );
 			print_bracket_link( $t_manage_workflow, lang_get( 'manage_workflow_config' ) );
