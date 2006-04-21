@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.269 $
+	# $Revision: 1.270 $
 	# $Author: vboctor $
-	# $Date: 2006-04-21 13:01:25 $
+	# $Date: 2006-04-21 15:13:14 $
 	#
-	# $Id: strings_english.txt,v 1.269 2006-04-21 13:01:25 vboctor Exp $
+	# $Id: strings_english.txt,v 1.270 2006-04-21 15:13:14 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -747,6 +747,7 @@ $s_configuration_option = 'Configuration Option';
 $s_configuration_option_type = 'Type';
 $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';

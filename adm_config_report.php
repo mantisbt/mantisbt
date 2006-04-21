@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.2 2006-04-21 13:28:35 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.3 2006-04-21 15:13:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -119,6 +119,74 @@
 <?php
 	} # end for loop
 ?>
+<!-- Config Set Form -->
+</table>
+<br />
+<table class="width100" cellspacing="1">
+
+<!-- Title -->
+<tr>
+	<td class="form-title" colspan="2">
+		<?php echo lang_get( 'set_configuration_option' ) ?>
+	</td>
+</tr>
+		<form method="post" action="adm_config_set.php">
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td>
+		<?php echo lang_get( 'username' ) ?>
+	</td>
+	<td>
+		<select name="user_id">
+			<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
+			<?php print_user_option_list( auth_get_current_user_id() ) ?>
+		</select>
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td>
+		<?php echo lang_get( 'project_name' ) ?>
+	</td>
+	<td>
+		<select name="project_id">
+			<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
+			<?php print_project_option_list( ALL_PROJECTS, false ) ?>" />
+		</select>
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td>
+		<?php echo lang_get( 'configuration_option' ) ?>
+	</td>
+	<td>
+			<input type="text" name="config_option" value="" size="64" maxlength="64" />
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td>
+		<?php echo lang_get( 'configuration_option_type' ) ?>
+	</td>
+	<td>
+		<select name="type">
+			<option value="string" selected="selected">string</option>
+			<option value="integer">integer</option>
+			<option value="complex">complex</option>
+		</select>
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td>
+		<?php echo lang_get( 'configuration_option_value' ) ?>
+	</td>
+	<td>
+			<textarea name="value" cols="80" rows="10"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+			<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
+	</td>
+</tr>
+		</form>
 </table>
 </div>
 <?php

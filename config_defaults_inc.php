@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.291 2006-03-28 02:05:24 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.292 2006-04-21 15:13:14 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1133,6 +1133,9 @@
 
 	# threshold for users to view the system configurations
 	$g_view_configuration_threshold = DEVELOPER;
+
+	# threshold for users to set the system configurations generically via Mantis web interface.
+	$g_set_configuration_threshold = ADMINISTRATOR;
 
 	################################
 	# Mantis Look and Feel Variables

@@ -1,6 +1,7 @@
 Mantis ChangeLog
 
 2006.xx.xx  -  1.1
+- Added Config: $g_set_configuration_threshold - the user access level threshold required to be able to set configuration option via Mantis interface.
 - Added Config: $g_inline_file_exts - file extensions displayed inline
 
 2005.09.11  -  1.0.0rc2
