@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.1 2006-04-21 13:01:25 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.2 2006-04-21 13:28:35 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -33,20 +33,31 @@
 		}
 	}
 
-	function get_config_value_as_string( $p_type, $p_value ) {
+	function print_config_value_as_string( $p_type, $p_value ) {
 		switch( $p_type ) {
 			case CONFIG_TYPE_INT:
-				return (integer)$p_value;
+				$t_value = (integer)$p_value;
+				break;
 			case CONFIG_TYPE_COMPLEX:
-				return nl2br( var_dump( unserialize( $p_value ) ) );
+				$t_value = unserialize( $p_value );
+				break;
 			case CONFIG_TYPE_STRING:
 			default:
-				return config_eval( $p_value );
+				$t_value = config_eval( $p_value );
+				break;
 		}
+		
+		echo '<pre>';
+		if ( function_exists( 'var_export' ) ) {
+			var_export( $t_value );
+		} else {
+			print_r( $t_value );
+		}
+		echo '</pre>';
 	}
 
 	$t_config_table = config_get_global( 'mantis_config_table' );
-	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id";
+	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
 	$result = db_query( $query );
 ?>
 <br />
@@ -60,14 +71,14 @@
 	</td>
 </tr>
 		<tr class="row-category">
-			<td>
-				<?php echo lang_get( 'configuration_option' ) ?>
-			</td>
 			<td class="center">
 				<?php echo lang_get( 'username' ) ?>
 			</td>
 			<td class="center">
 				<?php echo lang_get( 'project_name' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'configuration_option' ) ?>
 			</td>
 			<td class="center">
 				<?php echo lang_get( 'configuration_option_type' ) ?>
@@ -85,21 +96,21 @@
 
 ?>
 <!-- Repeated Info Rows -->
-		<tr <?php echo helper_alternate_class() ?>>
-			<td>
-				<?php echo string_display( $v_config_id ) ?>
-			</td>
+		<tr <?php echo helper_alternate_class() ?> valign="top">
 			<td class="center">
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : user_get_name( $v_user_id ) ?>
 			</td>
 			<td class="center">
 				<?php echo project_get_name( $v_project_id ) ?>
 			</td>
+			<td>
+				<?php echo string_display( $v_config_id ) ?>
+			</td>
 			<td class="center">
 				<?php echo string_display( get_config_type( $v_type ) ) ?>
 			</td>
 			<td class="left">
-				<?php echo string_display( get_config_value_as_string( $v_type, $v_value ) ) ?>
+				<?php print_config_value_as_string( $v_type, $v_value ) ?>
 			</td>
 			<td class="center">
 				<?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?>
