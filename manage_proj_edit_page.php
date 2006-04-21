@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.96 2006-03-26 10:35:33 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.97 2006-04-21 10:36:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -373,6 +373,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php echo lang_get( 'version' ) ?>
 			</td>
 			<td class="center">
+				<?php echo lang_get( 'released' ) ?>
+			</td>
+			<td class="center">
 				<?php echo lang_get( 'timestamp' ) ?>
 			</td>
 			<td class="center">
@@ -384,6 +387,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 	foreach ( $t_versions as $t_version ) {
 		$t_name = $t_version['version'];
+		$t_released = $t_version['released'];
 		$t_date_order = $t_version['date_order'];
 		$t_date_formatted = string_format_complete_date( $t_version['date_order'] );
 ?>
@@ -391,6 +395,9 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
 				<?php echo string_display( $t_name ) ?>
+			</td>
+			<td class="center">
+				<?php echo trans_bool( $t_released ) ?>
 			</td>
 			<td class="center">
 				<?php echo $t_date_formatted ?>
