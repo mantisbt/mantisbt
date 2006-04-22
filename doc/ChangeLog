@@ -5,6 +5,8 @@ Mantis ChangeLog
 - Added Config: $g_ldap_protocol_version - If not 0, then used to specify the LDAP protocol version to be used.
 - Added Config: $g_set_configuration_threshold - the user access level threshold required to be able to set configuration option via Mantis interface.
 - Added Config: $g_inline_file_exts - file extensions displayed inline
+- Added Config: $g_default_bug_reproducibility - default bug reproducibility.
+- Added Config: $g_default_bug_category - default bug category.
 
 2005.09.11  -  1.0.0rc2
 

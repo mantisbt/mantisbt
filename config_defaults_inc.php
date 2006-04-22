@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.294 2006-04-22 04:33:02 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.295 2006-04-22 06:19:40 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -584,6 +584,12 @@
 
 	# Default bug priority when reporting a new bug
 	$g_default_bug_priority = NORMAL;
+	
+	# Default bug reproducibility when reporting a new bug
+	$g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
+
+	# Default bug category when reporting a new bug
+	$g_default_bug_category = '';
 
 	# --- viewing defaults ------------
 	# site defaults for viewing preferences

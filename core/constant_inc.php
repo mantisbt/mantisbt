@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.54 2005-12-17 23:08:52 jlatour Exp $
+	# $Id: constant_inc.php,v 1.55 2006-04-22 06:19:40 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -74,6 +74,14 @@
 	define( 'MAJOR',	60 );
 	define( 'CRASH',	70 );
 	define( 'BLOCK',	80 );
+	
+	# reproducibility
+	define( 'REPRODUCIBILITY_ALWAYS',		10 );
+	define( 'REPRODUCIBILITY_SOMETIMES',	30 );
+	define( 'REPRODUCIBILITY_RANDOM',		50 );
+	define( 'REPRODUCIBILITY_HAVENOTTRIED', 70 );
+	define( 'REPRODUCIBILITY_UNABLETODUPLICATE', 90 );
+	define( 'REPRODUCIBILITY_NOTAPPLICABLE', 100 );
 
 	# project view_state
 	define( 'VS_PUBLIC',	10 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.54 2005-08-10 17:11:47 thraxisp Exp $
+	# $Id: bug_report_advanced_page.php,v 1.55 2006-04-22 06:19:40 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -89,8 +89,8 @@
 		$f_profile_id			= gpc_get_int( 'profile_id', 0 );
 		$f_handler_id			= gpc_get_int( 'handler_id', 0 );
 
-		$f_category				= gpc_get_string( 'category', '' );
-		$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
+		$f_category				= gpc_get_string( 'category', config_get( 'default_bug_category' ) );
+		$f_reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
 		$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
 		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 		$f_summary				= gpc_get_string( 'summary', '' );
@@ -104,7 +104,7 @@
 		$t_changed_project		= false;
 	}
 
-	$f_report_stay			= gpc_get_bool( 'report_stay' );
+	$f_report_stay			= gpc_get_bool( 'report_stay', false );
 
 	html_page_top1( lang_get( 'report_bug_link' ) );
 	html_page_top2();
