@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.18 2005-02-12 20:01:17 jlatour Exp $
+	# $Id: ldap_api.php,v 1.19 2006-04-22 01:52:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -21,6 +21,12 @@
 
 		$t_ds = @ldap_connect ( $t_ldap_server, $t_ldap_port );
 		if ( $t_ds > 0 ) {
+			$t_protocol_version = config_get( 'ldap_protocol_version' );
+
+			if ( $t_protocol_version > 0 ) {
+				ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
+			}
+
 			# If no Bind DN and Password is set, attempt to login as the configured
 			#  Bind DN.
 			if ( is_blank( $p_binddn ) && is_blank( $p_password ) ) {

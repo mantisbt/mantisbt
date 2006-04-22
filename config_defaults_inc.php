@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.292 2006-04-21 15:13:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.293 2006-04-22 01:52:14 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -787,6 +787,9 @@
 	$g_ldap_bind_dn			= '';
 	$g_ldap_bind_passwd		= '';
 	$g_use_ldap_email		= OFF; # Should we send to the LDAP email address or what MySql tells us
+	
+	# The LDAP Protocol Version, if 0, then the protocol version is not set.
+	$g_ldap_protocol_version = 0;
 
 	############################
 	# Status Settings
@@ -1135,6 +1138,9 @@
 	$g_view_configuration_threshold = DEVELOPER;
 
 	# threshold for users to set the system configurations generically via Mantis web interface.
+	# WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
+	# to the fact that such users can set configurations to PHP code and hence there can be a security
+	# risk if such users are not trusted.
 	$g_set_configuration_threshold = ADMINISTRATOR;
 
 	################################
