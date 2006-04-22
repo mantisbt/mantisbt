@@ -35,4 +35,4 @@ $ADODB_LANG_ARRAY = array (
             DB_ERROR_ACCESS_VIOLATION   => 'нямате достатъчно права'
 );
 ?>
-
+		

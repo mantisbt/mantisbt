@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>ADODB Data Dictionary Manual</title>
+  <title>ADOdb Data Dictionary Manual</title>
   <meta http-equiv="Content-Type"
  content="text/html; charset=iso-8859-1">
   <style type="text/css">
@@ -11,7 +11,7 @@
       }
       pre {
         font-size: 9pt;
-         background-color: #EEEEEE; padding: .5em; margin: 0px;
+         background-color: #EEEEEE; padding: .5em; margin: 0px; 
       }
       .toplink {
         font-size: 8pt;
@@ -20,22 +20,13 @@
 </head>
 <body style="background-color: rgb(255, 255, 255);">
 <h2>ADOdb Data Dictionary Library for PHP</h2>
-<p>V4.60 24 Jan 2005 (c) 2000-2005 John Lim (<a
+<p>V4.80 8 Mar 2006 (c) 2000-2006 John Lim (<a
  href="mailto:jlim#natsoft.com.my">jlim#natsoft.com.my</a>).<br>
 AXMLS (c) 2004 ars Cognita, Inc</p>
 <p><font size="1">This software is dual licensed using BSD-Style and
 LGPL. This means you can use it in compiled proprietary and commercial
 products.</font></p>
-<table border="1">
-  <tbody>
-    <tr>
-      <td height="38"><font color="red">Kindly note that the ADOdb home page has
-moved to <a href="http://adodb.sourceforge.net/">http://adodb.sourceforge.net/</a>
-because of the persistent unreliability of http://php.weblogs.com. <b>Please
-change your links</b>!</font></td>
-    </tr>
-  </tbody>
-</table>
+
 <p>Useful ADOdb links: <a href="http://adodb.sourceforge.net/#download">Download</a>
 &nbsp; <a href="http://adodb.sourceforge.net/#docs">Other Docs</a>
 </p>
@@ -52,7 +43,7 @@ dcech#phpwerx.net and richtl#arscognita.com.</p>
 generic ODBC.
 </p>
 <h3>Example Usage</h3>
-<pre>  include_once('adodb.inc.php');<br>  <font color="#006600"># First create a normal connection</font><br>  $db-&gt;NewADOConnection('mysql');<br>  $db-&gt;Connect(...);<br><br>  <font
+<pre>  include_once('adodb.inc.php');<br>  <font color="#006600"># First create a normal connection</font><br>  $db = NewADOConnection('mysql');<br>  $db-&gt;Connect(...);<br><br>  <font
  color="#006600"># Then create a data dictionary object, using this connection</font><br>  $dict = <strong>NewDataDictionary</strong>($db);<br><br>  <font
  color="#006600"># We have a portable declarative data dictionary format in ADOdb, similar to SQL.<br>  # Field types use 1 character codes, and fields are separated by commas.<br>  # The following example creates three fields: "col1", "col2" and "col3":</font><br>  $flds = " <br>  <font
  color="#663300"><strong> col1 C(32) NOTNULL DEFAULT 'abc',<br>   col2 I  DEFAULT 0,<br>   col3 N(12.2)</strong></font><br>  ";<br><br>  <font
@@ -83,7 +74,7 @@ field. Each row has this format:</p>
 field type can be a portable type codes or the actual type for that
 database.</p>
 <p>Legal portable type codes include:</p>
-<pre>  C:  varchar<br>  X:  Largest varchar size <br>  XL: For Oracle, returns CLOB, otherwise same as 'X' above<br><br>  C2: Multibyte varchar<br>  X2: Multibyte varchar (largest size)<br><br>  B:  BLOB (binary large object)<br><br>  D:  Date (some databases do not support this, and we return a datetime type)<br>  T:  Datetime or Timestamp<br>  L:  Integer field suitable for storing booleans (0 or 1)<br>  I:  Integer (mapped to I4)<br>  I1: 1-byte integer<br>  I2: 2-byte integer<br>  I4: 4-byte integer<br>  I8: 8-byte integer<br>  F:  Floating point number<br>  N:  Numeric or decimal number<br></pre>
+<pre>  C:  Varchar, capped to 255 characters.<br>  X:  Larger varchar, capped to 4000 characters (to be compatible with Oracle). <br>  XL: For Oracle, returns CLOB, otherwise the largest varchar size.<br><br>  C2: Multibyte varchar<br>  X2: Multibyte varchar (largest size)<br><br>  B:  BLOB (binary large object)<br><br>  D:  Date (some databases do not support this, and we return a datetime type)<br>  T:  Datetime or Timestamp<br>  L:  Integer field suitable for storing booleans (0 or 1)<br>  I:  Integer (mapped to I4)<br>  I1: 1-byte integer<br>  I2: 2-byte integer<br>  I4: 4-byte integer<br>  I8: 8-byte integer<br>  F:  Floating point number<br>  N:  Numeric or decimal number<br></pre>
 <p>The $colsize field represents the size of the field. If a decimal
 number is used, then it is assumed that the number following the dot is
 the precision, so 6.2 means a number of size 6 digits and 2 decimal
@@ -177,7 +168,7 @@ specified</p>
 <pre>  RETURNS:      0 if failed, 1 if executed all but with errors, 2 if executed successfully<br>  $sqlarray:    an array of strings with sql code (no semicolon at the end of string)<br>  $contOnError: if true, then continue executing even if error occurs<br></pre>
 <p>Executes an array of SQL strings returned by CreateTableSQL or
 CreateIndexSQL.</p>
-<hr>
+<hr />
 <a name="xmlschema"></a>
 <h2>ADOdb XML Schema (AXMLS)</h2>
 <p>This is a class contributed by Richard Tango-Lowy and Dan Cech that
@@ -250,7 +241,11 @@ define for your own use.</p>
 <p>Now that we've defined an XML schema, you need to know how to apply
 it to your database. Here's a simple PHP script that shows how to load
 the schema.</p>
-<pre class="listing"><pre>&lt;?PHP<br>/* You must tell the script where to find the ADOdb and<br> * the AXMLS libraries.<br> */<br>require( "path_to_adodb/adodb.inc.php");<br>require( "path_to_adodb/adodb-xmlschema.inc.php" );<br><br>/* Configuration information. Define the schema filename,<br> * RDBMS platform (see the ADODB documentation for valid<br> * platform names), and database connection information here.<br> */<br>$schemaFile = 'example.xml';<br>$platform = 'mysql';<br>$dbHost = 'localhost';<br>$dbName = 'database';<br>$dbUser = 'username';<br>$dbPassword = 'password';<br><br>/* Start by creating a normal ADODB connection.<br> */<br>$db = ADONewConnection( $platform );<br>$db-&gt;Connect( $dbHost, $dbUser, $dbPassword, $dbName );<br><br>/* Use the database connection to create a new adoSchema object.<br> */<br>$schema = new adoSchema( $db );<br><br>/* Call ParseSchema() to build SQL from the XML schema file.<br> * Then call ExecuteSchema() to apply the resulting SQL to <br> * the database.<br> */<br>$sql = $schema-&gt;ParseSchema( $schemaFile );<br>$result = $schema-&gt;ExecuteSchema();<br>?&gt;<br></pre></pre>
+<pre class="listing"><pre>&lt;?PHP<br>/* You must tell the script where to find the ADOdb and<br> * the AXMLS libraries.<br> */
+require( "path_to_adodb/adodb.inc.php");
+require( "path_to_adodb/adodb-xmlschema.inc.php" ); # or adodb-xmlschema03.inc.php
+
+/* Configuration information. Define the schema filename,<br> * RDBMS platform (see the ADODB documentation for valid<br> * platform names), and database connection information here.<br> */<br>$schemaFile = 'example.xml';<br>$platform = 'mysql';<br>$dbHost = 'localhost';<br>$dbName = 'database';<br>$dbUser = 'username';<br>$dbPassword = 'password';<br><br>/* Start by creating a normal ADODB connection.<br> */<br>$db = ADONewConnection( $platform );<br>$db-&gt;Connect( $dbHost, $dbUser, $dbPassword, $dbName );<br><br>/* Use the database connection to create a new adoSchema object.<br> */<br>$schema = new adoSchema( $db );<br><br>/* Call ParseSchema() to build SQL from the XML schema file.<br> * Then call ExecuteSchema() to apply the resulting SQL to <br> * the database.<br> */<br>$sql = $schema-&gt;ParseSchema( $schemaFile );<br>$result = $schema-&gt;ExecuteSchema();<br>?&gt;<br></pre></pre>
 <p>Let's look at each part of the example in turn. After you manually
 create the database, there are three steps required to load (or
 upgrade) your schema.</p>
@@ -260,11 +255,11 @@ here should be those required to connect to your database.</p>
 <p>Second, create the adoSchema object that load and manipulate your
 schema. You must pass an ADOdb database connection object in order to
 create the adoSchema object.</p>
-<pre class="listing"><pre>$schema = new adoSchema( $db );<br></pre></pre>
+<pre class="listing">$schema = new adoSchema( $db );<br></pre>
 <p>Third, call ParseSchema() to parse the schema and then
 ExecuteSchema() to apply it to the database. You must pass
 ParseSchema() the path and filename of your schema file.</p>
-<pre class="listing"><pre><br>$schema-&gt;ParseSchema( $schemaFile ); <br>$schema-&gt;ExecuteSchema(); <br></pre></pre>
+<pre class="listing">$schema-&gt;ParseSchema( $schemaFile ); <br>$schema-&gt;ExecuteSchema();</pre>
 <p>Execute the above code and then log into your database. If you've
 done all this right, you should see your tables, indexes, and SQL.</p>
 <p>You can find the source files for this tutorial in the examples
@@ -272,14 +267,41 @@ directory as tutorial_shema.xml and tutorial.php. See the class
 documentation for a more detailed description of the adoSchema methods,
 including methods and schema elements that are not described in this
 tutorial.</p>
+<h3>XML Schema Version 3</h3>
+<p>In March 2006, we added adodb-xmlschema03.inc.php to the release, which supports version 3 of XML Schema. 
+The adodb-xmlschema.inc.php remains the same as previous releases, and supports version 2 of XML Schema. 
+Version 3 provides some enhancements:
+
+<ul>
+     <li> Support for updating table data during an upgrade.
+     <li> Support for platform-specific table options and platform negation.
+     <li> Support for unsigned fields.
+     <li> Fixed opt and constraint support
+     <li> Many other fixes such as OPT tag, which allows you to set optional platform settings:
+</ul>
+
+<p>Example usage:
+<pre>&lt;?xml version="1.0"?>
+<b>&lt;schema version="0.3"></b>
+ &lt;table name="ats_kb">
+  &lt;descr>ATS KnowledgeBase&lt;/descr>
+  &lt;opt platform="mysql">TYPE=INNODB&lt;/opt>
+  &lt;field name="recid" type="I"/>
+  &lt;field name="organization_code" type="I4"/> 
+  &lt;field name="sub_code" type="C" size="20"/>
+  etc...
+</pre>
+<p>To use it, change your code to include adodb-xmlschema03.inc.php.
+
 <h3>Upgrading</h3>
+<p>
 If your schema version is older, than XSLT is used to transform the
 schema to the newest version. This means that if you are using an older
 XML schema format, you need to have the XSLT extension installed.
 If you do not want to require your users to have the XSLT extension
 installed, make sure you modify your XML schema to conform to the
 latest version.
-<hr>
+<hr />
 <address>If you have any questions or comments, please email them to
 Richard at richtl#arscognita.com.
 </address>

@@ -22,7 +22,7 @@ $ADODB_LANG_ARRAY = array (
 	    DB_ERROR_SYNTAX		=> 'ÎØÃ Ýí ÇáÕíÛÉ',
 	    DB_ERROR_UNSUPPORTED	=> 'ÛíÑ ãÏÚæã',
 	    DB_ERROR_VALUE_COUNT_ON_ROW => 'ÚÏÏ ÇáÞíã Ýí ÇáÓÌá',
-	    DB_ERROR_INVALID_DSN	=> 'DNS ÛíÑ ÕÍíÍ',
+	    DB_ERROR_INVALID_DSN	=> 'DSN ÛíÑ ÕÍíÍ',
 	    DB_ERROR_CONNECT_FAILED	=> 'ÝÔá ÚãáíÉ ÇáÅÊÕÇá',
 	    0			       => 'áíÓ åäÇáß ÃÎØÇÁ', // DB_OK
 	    DB_ERROR_NEED_MORE_DATA	=> 'ÇáÈíÇäÇÊ ÇáãÒæÏÉ ÛíÑ ßÇÝíÉ',
@@ -31,4 +31,4 @@ $ADODB_LANG_ARRAY = array (
 	    DB_ERROR_ACCESS_VIOLATION	=> 'ÓãÇÍíÇÊ ÛíÑ ßÇÝíÉ'
 );
 ?>
-
+		

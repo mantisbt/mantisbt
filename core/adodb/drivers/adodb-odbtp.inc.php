@@ -1,6 +1,6 @@
 <?php
 /*
-  V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V4.80 8 Mar 2006  (c) 2000-2006 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -164,7 +164,7 @@ class ADODB_odbtp extends ADOConnection{
 		$this->odbc_driver = @odbtp_get_attr(ODB_ATTR_DRIVER, $this->_connectionID);
 		$dbms = strtolower(@odbtp_get_attr(ODB_ATTR_DBMSNAME, $this->_connectionID));
 		$this->odbc_name = $dbms;
-
+		
 		// Account for inconsistent DBMS names
 		if( $this->odbc_driver == ODB_DRIVER_ORACLE )
 			$dbms = 'oracle';
@@ -264,10 +264,11 @@ class ADODB_odbtp extends ADOConnection{
 		if (!@odbtp_select_db($dbName, $this->_connectionID)) {
 			return false;
 		}
-		$this->databaseName = $dbName;
+		$this->database = $dbName;
+		$this->databaseName = $dbName; # obsolete, retained for compat with older adodb versions
 		return true;
 	}
-
+	
 	function &MetaTables($ttype='',$showSchema=false,$mask=false)
 	{
 	global $ADODB_FETCH_MODE;
@@ -275,9 +276,9 @@ class ADODB_odbtp extends ADOConnection{
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		if ($this->fetchMode !== false) $savefm = $this->SetFetchMode(false);
-
+		
 		$arr =& $this->GetArray("||SQLTables||||$ttype");
-
+		
 		if (isset($savefm)) $this->SetFetchMode($savefm);
 		$ADODB_FETCH_MODE = $savem;
 
@@ -289,7 +290,7 @@ class ADODB_odbtp extends ADOConnection{
 		}
 		return $arr2;
 	}
-
+	
 	function &MetaColumns($table,$upper=true)
 	{
 	global $ADODB_FETCH_MODE;
@@ -301,9 +302,9 @@ class ADODB_odbtp extends ADOConnection{
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		if ($this->fetchMode !== false) $savefm = $this->SetFetchMode(false);
-
+		
 		$rs = $this->Execute( "||SQLColumns||$schema|$table" );
-
+		
 		if (isset($savefm)) $this->SetFetchMode($savefm);
 		$ADODB_FETCH_MODE = $savem;
 
@@ -311,6 +312,7 @@ class ADODB_odbtp extends ADOConnection{
 			$false = false;
 			return $false;
 		}
+		$retarr = array();
 		while (!$rs->EOF) {
 			//print_r($rs->fields);
 			if (strtoupper($rs->fields[2]) == $table) {
@@ -325,7 +327,7 @@ class ADODB_odbtp extends ADOConnection{
  					$fld->default_value = $rs->fields[12];
 				}
 				$retarr[strtoupper($fld->name)] = $fld;
-			} else if (sizeof($retarr)>0)
+			} else if (!empty($retarr))
 				break;
 			$rs->MoveNext();
 		}
@@ -369,7 +371,7 @@ class ADODB_odbtp extends ADOConnection{
 			$false = false;
 			return $false;
 		}
-
+		
 		$arr2 = array();
 
 		foreach($arr as $k => $v) {
@@ -423,7 +425,8 @@ class ADODB_odbtp extends ADOConnection{
 		if( $this->odbc_driver == ODB_DRIVER_FOXPRO ) {
 			if (!preg_match('/ORDER[ \t\r\n]+BY/is',$sql)) $sql .= ' ORDER BY 1';
 		}
-		return ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
+		$ret =& ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
+		return $ret;
 	}
 
 	function Prepare($sql)
@@ -516,6 +519,8 @@ class ADODB_odbtp extends ADOConnection{
 
 	function _query($sql,$inputarr=false)
 	{
+	global $php_errormsg;
+	
  		if ($inputarr) {
 			if (is_array($sql)) {
 				$stmtid = $sql[1];
