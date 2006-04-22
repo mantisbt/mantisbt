@@ -549,12 +549,14 @@ class ADODB_DataDict {
 			
 			$ftype = $this->_GetSize($ftype, $ty, $fsize, $fprec);
 			
-			if ($ty == 'X' || $ty == 'X2' || $ty == 'B') $fnotnull = false; // some blob types do not accept nulls
+			// plr - allow this for now as we use this until we identify what DB's dont allow this
+			//if ($ty == 'X' || $ty == 'X2' || $ty == 'B') $fnotnull = false; // some blob types do not accept nulls
 			
 			if ($fprimary) $pkey[] = $fname;
 			
 			// some databases do not allow blobs to have defaults
-			if ($ty == 'X') $fdefault = false;
+			// plr - allow this for now as we use this until we identify what DB's dont allow this
+			//if ($ty == 'X') $fdefault = false;
 			
 			//--------------------
 			// CONSTRUCT FIELD SQL
