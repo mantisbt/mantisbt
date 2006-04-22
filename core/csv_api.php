@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.7 2005-05-31 13:04:17 vboctor Exp $
+	# $Id: csv_api.php,v 1.8 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -51,7 +51,7 @@
 	# --------------------
 	# An array of column names that are used to identify  fields to include and in which order.
 	function csv_get_columns() {
-		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_CSV_PAGE ) );
+		$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
 		return $t_columns;
 	}
 

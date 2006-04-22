@@ -1,6 +1,7 @@
 Mantis ChangeLog
 
 2006.xx.xx  -  1.1
+- Added Config: $g_view_issues_page_columns - An array of column names to be shown on the View Issues page.
 - Added Config: $g_ldap_protocol_version - If not 0, then used to specify the LDAP protocol version to be used.
 - Added Config: $g_set_configuration_threshold - the user access level threshold required to be able to set configuration option via Mantis interface.
 - Added Config: $g_inline_file_exts - file extensions displayed inline

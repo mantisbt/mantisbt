@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.163 2006-01-24 03:50:04 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.164 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,8 @@
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 
-	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_VIEW_PAGE ) );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+
 	$col_count = sizeof( $t_columns );
 
 	$t_filter_position = config_get( 'filter_position' );

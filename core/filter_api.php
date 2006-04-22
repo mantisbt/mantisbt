@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.139 2006-04-18 09:06:42 prichards Exp $
+	# $Id: filter_api.php,v 1.140 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2508,7 +2508,7 @@
 		}
 
 		#validate sorting
-		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+		$t_fields = helper_get_columns_to_view();
 		$t_n_fields = count( $t_fields );
 		for ( $i=0; $i < $t_n_fields; $i++ ) {
 			if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
@@ -2993,7 +2993,7 @@
 
 		# get all of the displayed fields for sort, then drop ones that
 		#  are not appropriate and translate the rest
-		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+		$t_fields = helper_get_columns_to_view();
 		$t_n_fields = count( $t_fields );
 		$t_shown_fields[""] = "";
 		for ( $i=0; $i < $t_n_fields; $i++ ) {

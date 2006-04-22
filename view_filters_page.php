@@ -86,7 +86,7 @@
 	$t_custom_rows = 0;
 
 	#get valid target fields
-	$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+	$t_fields = helper_get_columns_to_view();
 	$t_n_fields = count( $t_fields );
 	for ( $i=0; $i < $t_n_fields; $i++ ) {
 		if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {

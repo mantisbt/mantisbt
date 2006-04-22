@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.25 2005-07-23 12:01:48 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.26 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -172,32 +172,16 @@
 			$t_columns[] = 'status'; // 'status'
 			$t_columns[] = 'resolution'; // 'resolution'
 			$t_columns[] = 'fixed_in_version'; // 'fixed_in_version';
-
-			if ( OFF == config_get( 'enable_relationship' ) ) {
-				$t_columns[] = 'duplicate_id'; // 'duplicate_id'
-			}
+			$t_columns[] = 'duplicate_id'; // 'duplicate_id'
+		} else if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+			$t_columns = config_get( 'view_issues_page_columns' );
 		} else {
 			$t_columns[] = 'selection';
-
-			if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
-				$t_columns[] = 'edit';
-			}
-
 			$t_columns[] = 'priority';
 			$t_columns[] = 'id';
-
-			$t_enable_sponsorship = config_get( 'enable_sponsorship' );
-			if ( ON == $t_enable_sponsorship ) {
-				$t_columns[] = 'sponsorship_total';
-			}
-
+			$t_columns[] = 'sponsorship_total';
 			$t_columns[] = 'bugnotes_count';
-
-			$t_show_attachments = config_get( 'show_attachment_indicator' );
-			if ( ON == $t_show_attachments ) {
-				$t_columns[] = 'attachment';
-			}
-
+			$t_columns[] = 'attachment';
 			$t_columns[] = 'category';
 			$t_columns[] = 'severity';
 			$t_columns[] = 'status';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.84 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: print_all_bug_page.php,v 1.85 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 	$f_dir		 			= null;
 	$t_project_id 			= 0;
 
-	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_PRINT_PAGE ) );
+	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 	$t_num_of_columns = sizeof( $t_columns );
 
 	# check to see if the cookie exists

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.63 2005-10-29 09:52:52 prichards Exp $
+	# $Id: helper_api.php,v 1.64 2006-04-22 04:33:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -317,5 +317,35 @@
 		}
 
 		return $t_project_filter;
+	}
+	
+	# --------------------
+	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_VIEW_PAGE ) );
+	
+		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
+		if ( OFF == $t_enable_sponsorship ) {
+			$t_keys = array_keys( $t_columns, 'sponsorship_total' );
+			foreach ( $t_keys as $t_key ) {
+				unset( $t_columns[$t_key] );
+			}
+		}
+	
+		$t_show_attachments = config_get( 'show_attachment_indicator' );
+		if ( OFF == $t_show_attachments ) {
+			$t_keys = array_keys( $t_columns, 'attachment' );
+			foreach ( $t_keys as $t_key ) {
+				unset( $t_columns[$t_key] );
+			}
+		}
+		
+		if ( OFF == config_get( 'enable_relationship' ) ) {
+			$t_keys = array_keys( $t_columns, 'duplicate_id' );
+			foreach ( $t_keys as $t_key ) {
+				unset( $t_columns[$t_key] );
+			}
+		}
+
+		return $t_columns;
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.293 2006-04-22 01:52:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.294 2006-04-22 04:33:02 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -441,6 +441,13 @@
 	# OFF: Shows priority as icon in view all bugs page
 	# ON:  Shows priority as text in view all bugs page
 	$g_show_priority_text	= OFF;
+
+	# A configuration option that identifies the columns to be shown on the View Issues page.
+	# This configuration can be overriden dynamically by overriding the custom function "get_columns_to_view".
+	# Some of the columns specified here can be removed automatically if they conflict with other configuration.
+	# For example, sponsorship_total will be removed if sponsorships are disabled.
+	# To include custom field 'xyz', include the column name as 'custom_xyz'.
+	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
 
 	# --- show projects when in All Projects mode ---
 	$g_show_bug_project_links	= ON;
