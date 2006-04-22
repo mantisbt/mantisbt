@@ -21,6 +21,7 @@ class ADODB2_db2 extends ADODB_DataDict {
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';
+		case 'XS': 
 		case 'XL': return 'CLOB';
 		case 'X': return 'VARCHAR(3600)'; 
 

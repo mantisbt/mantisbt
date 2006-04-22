@@ -24,6 +24,7 @@ class ADODB2_sapdb extends ADODB_DataDict {
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';
+		case 'XS':
 		case 'XL':
 		case 'X': return 'LONG';
 		

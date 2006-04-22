@@ -81,6 +81,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 		switch(strtoupper($meta)) {
 
 		case 'C': return 'VARCHAR';
+		case 'XS':
 		case 'XL': return (isset($this)) ? $this->typeXL : 'TEXT';
 		case 'X': return (isset($this)) ? $this->typeX : 'TEXT'; ## could be varchar(8000), but we want compat with oracle
 		case 'C2': return 'NVARCHAR';

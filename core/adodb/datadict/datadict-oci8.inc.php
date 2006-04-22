@@ -72,6 +72,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';
+		case 'XS': 
 		case 'X': return $this->typeX;
 		case 'XL': return $this->typeXL;
 		

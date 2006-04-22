@@ -80,6 +80,7 @@ class ADODB2_mysql extends ADODB_DataDict {
 	{
 		switch(strtoupper($meta)) {
 		case 'C': return 'VARCHAR';
+		case 'XS': return 'TEXT';
 		case 'XL':return 'LONGTEXT';
 		case 'X': return 'TEXT';
 		
