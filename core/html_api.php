@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.189 2006-04-21 13:01:25 vboctor Exp $
+	# $Id: html_api.php,v 1.190 2006-04-22 02:12:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -548,7 +548,14 @@
 			PRINT '</td>';
 			PRINT '<td class="right" style="white-space: nowrap;">';
 				PRINT '<form method="post" action="jump_to_bug.php">';
-				PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+
+				if ( ON == config_get( 'use_javascript' ) ) {
+					$t_bug_label = lang_get( 'issue_id' );
+					PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"$t_bug_label\" onfocus=\"if (this.value == '$t_bug_label') this.value = ''\" onblur=\"if (this.value == '') this.value = '$t_bug_label'\" />&nbsp;";
+				} else {
+					PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+				}
+
 				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
 				PRINT '</form>';
 			PRINT '</td>';
