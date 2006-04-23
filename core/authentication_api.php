@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.54 2005-10-29 09:52:52 prichards Exp $
+	# $Id: authentication_api.php,v 1.55 2006-04-23 12:32:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -141,7 +141,7 @@
 	# --------------------
 	# Allows scripts to login using a login name or ( login name + password )
 	function auth_attempt_script_login( $p_username, $p_password = null ) {
-		global $g_script_login_cookie, $g_cache_current_user_id;
+		global $g_script_login_cookie, $g_cache_cookie_valid, $g_cache_current_user_id, $g_cache_current_user_cookie_string;
 
 		$t_user_id = user_get_id_by_name( $p_username );
 
@@ -161,14 +161,18 @@
 
 		# ok, we're good to login now
 
+		# With cases like RSS feeds and MantisConnect there is a login per operation, hence, there is no
+		# real significance of incrementing login count.
 		# increment login count
-		user_increment_login_count( $t_user_id );
+		# user_increment_login_count( $t_user_id );
 
 		# set the cookies
 		$g_script_login_cookie = $t_user['cookie_string'];
-		
+		$g_cache_current_user_cookie_string = $g_script_login_cookie;
+
 		# cache user id for future reference
 		$g_cache_current_user_id = $t_user_id;
+		$g_cache_cookie_valid = true;
 
 		return true;
 	}
@@ -499,7 +503,6 @@
 
 		return $t_user_id;
 	}
-
 
 	#===================================
 	# HTTP Auth

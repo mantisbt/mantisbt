@@ -15,6 +15,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
+	require_once( $t_core_path.'rss_api.php' );
 
 	auth_ensure_user_authenticated();
 
@@ -47,7 +48,8 @@
 
 		print '<td>';
 
-		print_rss( 'issues_rss.php?project_id=' . helper_get_current_project() . '&amp;filter_id=' . $t_id, lang_get( 'rss' ) );
+		# Use the "new" RSS link style.
+		print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
 		echo ' ';
 		print '<a href="' . $t_use_query_url . db_prepare_int( $t_id ) . '">' . string_display( $t_name ) . '</a>';
 

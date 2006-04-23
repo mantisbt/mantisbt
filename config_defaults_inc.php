@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.295 2006-04-22 06:19:40 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.296 2006-04-23 12:32:58 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -125,7 +125,7 @@
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'database_name',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers'
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed'
 	);
 
 	#############################
@@ -1562,6 +1562,16 @@
 
 	# Default page after Login or Set Project
 	$g_default_home_page = 'my_view_page.php';
+
+	######################
+	# RSS Feeds
+	######################
+
+	# This seed is used as part of the inputs for calculating the authentication key for the RSS feeds.
+	# If this seed changes, all the existing keys for the RSS feeds will become invalid.  This is 
+	# defaulted to the database user name, but it is recommended to overwrite it with a specific value
+	# on installation.
+	$g_rss_key_seed = '%db_username%';
 
 	######################
 	# Bug Relationships

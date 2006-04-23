@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.6 2005-07-18 13:09:36 vboctor Exp $
+	# $Id: issues_rss.php,v 1.7 2006-04-23 12:32:58 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,16 +26,29 @@
 	require_once( $t_core_path . 'class.RSSBuilder.inc.php' );
 	require_once( $t_core_path . 'user_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );
-
-	# only allow RSS generation of anonymous login is enabled.
-	# @@@ consider adding an explicit option to enable/disable RSS syndication.
-	if ( OFF == config_get( 'allow_anonymous_login' ) ) {
-		access_denied();
-	}
+	require_once( $t_core_path . 'rss_api.php' );
 
 	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
 	$f_filter_id = gpc_get_int( 'filter_id', 0 );
 	$f_sort = gpc_get_string( 'sort', 'submit' );
+	$f_username = gpc_get_string( 'username', null );
+	$f_key = gpc_get_string( 'key', null );
+
+	# authenticate the user
+	if ( $f_username !== null ) {
+		if ( !rss_login( $f_username, $f_key ) ) {
+			access_denied();
+		}
+	} else {
+		if ( OFF == config_get( 'allow_anonymous_login' ) ) {
+			access_denied();
+		}
+	}
+
+	# Make sure that the current user has access to the selected project (if not ALL PROJECTS).
+	if ( $f_project_id != ALL_PROJECTS ) {
+		access_ensure_project_level( VIEWER, $f_project_id );
+	}
 
 	if ( $f_sort === 'update' ) {
 		$c_sort_field = 'last_updated';
@@ -49,13 +62,19 @@
 
 	$encoding = lang_get( 'charset' );
 	$about = $t_path;
-	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'issues' ) );
+	$title = string_rss_links( config_get( 'window_title' ) );
 	$image_link = $t_path . 'images/mantis_logo_button.gif';
 
 	# only rss 2.0
 	$category = string_rss_links( project_get_name( $f_project_id ) );
 	if ( $f_project_id !== 0 ) {
 		$title .= ' - ' . $category;
+	}
+
+	$title .= ' - ' . lang_get( 'issues' );
+
+ 	if ( $f_username !== null ) {
+		$title .= " - ($f_username)";
 	}
 
 	if ( $f_filter_id !== 0 ) {
@@ -112,7 +131,11 @@
 	$t_page_count = 0;
 	$t_issues_count = 0;
 	$t_project_id = $f_project_id;
-	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
+	if ( $f_username !== null ) {
+		$t_user_id = user_get_id_by_name( $f_username );
+	} else {
+		$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
+	}
 	$t_show_sticky = null;
 
 	if ( $f_filter_id == 0 ) {
@@ -139,6 +162,11 @@
 
 		$about = $link = $t_path . "view.php?id=" . $row['id'];
 		$title = string_rss_links( bug_format_id( $row['id'] ) . ': ' . $t_bug->summary );
+		
+		if ( $row['view_state'] == VS_PRIVATE ) {
+			$title .= ' [' . lang_get( 'private' ) . ']';
+		}
+                
 		$description = string_rss_links( $t_bug->description );
 
 		# subject is category.

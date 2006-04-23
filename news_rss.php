@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.9 2005-08-21 21:07:29 ryandesign Exp $
+	# $Id: news_rss.php,v 1.10 2006-04-23 12:32:58 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,17 +18,26 @@
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( $t_core_path . 'project_api.php' );
 	require_once( $t_core_path . 'print_api.php' );
+	require_once( $t_core_path . 'rss_api.php' );
 
-	# only allow RSS generation of anonymous login is enabled.
-	# @@@ consider adding an explicit option to enable/disable RSS syndication.
-	if ( OFF == config_get( 'allow_anonymous_login' ) ) {
-		access_denied();
+	$f_username = gpc_get_string( 'username', null );
+	$f_key = gpc_get_string( 'key', null );
+	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
+
+	# authenticate the user
+	if ( $f_username !== null ) {
+		if ( !rss_login( $f_username, $f_key ) ) {
+			access_denied();
+		}
+	} else {
+		if ( OFF == config_get( 'allow_anonymous_login' ) ) {
+			access_denied();
+		}
 	}
 
-	# Make sure that the user selected either all projects or a public one.
-	$f_project_id = gpc_get_int( 'project_id', 0 );
-	if ( ( $f_project_id != 0 ) && ( VS_PRIVATE == project_get_field( $f_project_id, 'view_state' ) ) ) {
-		access_denied();
+	# Make sure that the current user has access to the selected project (if not ALL PROJECTS).
+	if ( $f_project_id != ALL_PROJECTS ) {
+		access_ensure_project_level( VIEWER, $f_project_id );
 	}
 
 	# construct rss file
@@ -36,6 +45,11 @@
 	$encoding = lang_get( 'charset' );
 	$about = config_get( 'path' );
 	$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
+
+	if ( $f_username !== null ) {
+		$title .= " - ($f_username)";
+	}
+
 	$description = $title;
 	$image_link = config_get( 'path' ) . 'images/mantis_logo_button.gif';
 

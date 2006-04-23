@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.190 2006-04-22 02:12:56 vboctor Exp $
+	# $Id: html_api.php,v 1.191 2006-04-23 12:32:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -56,6 +56,7 @@
 	require_once( $t_core_dir . 'helper_api.php' );
 	require_once( $t_core_dir . 'authentication_api.php' );
 	require_once( $t_core_dir . 'user_api.php' );
+	require_once( $t_core_dir . 'rss_api.php' );
 
 	$g_rss_feed_url = null;
 
@@ -342,6 +343,11 @@
 					PRINT '</select> ';
 				}
 				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
+
+				# Link to RSS issues feed for the selected project, including authentication details.
+				PRINT '<a href="' . rss_get_issues_feed_url() . '">';
+				PRINT '<img src="images/rss.gif" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
+				PRINT '</a>';
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -382,7 +388,7 @@
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a>',
 					'[<a href="http://www.mantisbt.org/" target="_blank">^</a>]</span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2005 Mantis Group</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2006 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
 		if ( ! is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {

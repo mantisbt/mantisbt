@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.57 2005-03-21 12:09:32 vboctor Exp $
+	# $Id: main_page.php,v 1.58 2006-04-23 12:32:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This is the first page a user sees when they login to the bugtracker
@@ -20,16 +20,15 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'print_api.php' );
+	require_once( $t_core_path.'rss_api.php' );
 
 	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
 
 	$t_project_id = helper_get_current_project();
-
-	if ( ( $t_project_id == ALL_PROJECTS ) || ( VS_PRIVATE != project_get_field( $t_project_id, 'view_state' ) ) ) {
-		html_set_rss_link( "news_rss.php?project_id=$t_project_id" );
-	}
+	$t_rss_link = rss_get_news_feed_url( $t_project_id );
+	html_set_rss_link( $t_rss_link );
 
 	html_page_top1();
 	html_page_top2();
@@ -87,7 +86,7 @@
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
 
-	print_bracket_link( "news_rss.php?project_id=$t_project_id", lang_get( 'rss' ) );
+	print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
 
 	echo '</div>';
 
