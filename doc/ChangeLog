@@ -8,6 +8,7 @@ Mantis ChangeLog
 - Added Config: $g_inline_file_exts - file extensions displayed inline
 - Added Config: $g_default_bug_reproducibility - default bug reproducibility.
 - Added Config: $g_default_bug_category - default bug category.
+- Added Language: polish_utf8 (thanks to Bartosz Tomasik)
 
 2005.09.11  -  1.0.0rc2
 

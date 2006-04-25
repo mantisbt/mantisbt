@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.296 2006-04-23 12:32:58 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.297 2006-04-25 11:14:06 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -356,6 +356,7 @@
 		'lithuanian',
 		'norwegian',
 		'polish',
+		'polish_utf8',
 		'portuguese_brazil',
 		'portuguese_standard',
 		'romanian',
