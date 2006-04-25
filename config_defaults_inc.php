@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.298 2006-04-25 12:01:06 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.299 2006-04-25 13:18:27 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1569,6 +1569,10 @@
 	######################
 	# RSS Feeds
 	######################
+
+	# This flag enables or disables RSS syndication.  In the case where RSS syndication is not used,
+	# it is recommended to set it to OFF.
+	$g_rss_enabled = ON;
 
 	# This seed is used as part of the inputs for calculating the authentication key for the RSS feeds.
 	# If this seed changes, all the existing keys for the RSS feeds will become invalid.  This is 

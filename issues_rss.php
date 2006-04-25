@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: issues_rss.php,v 1.7 2006-04-23 12:32:58 vboctor Exp $
+	# $Id: issues_rss.php,v 1.8 2006-04-25 13:18:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,6 +33,11 @@
 	$f_sort = gpc_get_string( 'sort', 'submit' );
 	$f_username = gpc_get_string( 'username', null );
 	$f_key = gpc_get_string( 'key', null );
+
+	# make sure RSS syndication is enabled.
+	if ( OFF == config_get( 'rss_enabled' ) ) {
+		access_denied();
+	}
 
 	# authenticate the user
 	if ( $f_username !== null ) {

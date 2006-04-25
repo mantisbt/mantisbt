@@ -33,6 +33,8 @@
 
 	$t_use_query_url = 'view_all_set.php?type=3&amp;source_query_id=';
 	$t_delete_query_url = 'query_delete_page.php?source_query_id=';
+	
+	$t_rss_enabled = config_get( 'rss_enabled' );
 ?>
 <br />
 <div align="center">
@@ -48,9 +50,12 @@
 
 		print '<td>';
 
-		# Use the "new" RSS link style.
-		print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
-		echo ' ';
+		if ( OFF != $t_rss_enabled ) {
+			# Use the "new" RSS link style.
+			print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
+			echo ' ';
+		}
+
 		print '<a href="' . $t_use_query_url . db_prepare_int( $t_id ) . '">' . string_display( $t_name ) . '</a>';
 
 		if ( filter_db_can_delete_filter( $t_id ) ) {

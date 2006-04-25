@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.10 2006-04-23 12:32:58 vboctor Exp $
+	# $Id: news_rss.php,v 1.11 2006-04-25 13:18:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,11 @@
 	$f_username = gpc_get_string( 'username', null );
 	$f_key = gpc_get_string( 'key', null );
 	$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
+
+	# make sure RSS syndication is enabled.
+	if ( OFF == config_get( 'rss_enabled' ) ) {
+		access_denied();
+	}
 
 	# authenticate the user
 	if ( $f_username !== null ) {

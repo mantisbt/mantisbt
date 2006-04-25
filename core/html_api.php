@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.191 2006-04-23 12:32:59 vboctor Exp $
+	# $Id: html_api.php,v 1.192 2006-04-25 13:18:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -68,8 +68,10 @@
 	# null: means no feed (default).
 	function html_set_rss_link( $p_rss_feed_url )
 	{
-		global $g_rss_feed_url;
-		$g_rss_feed_url = $p_rss_feed_url;
+		if ( OFF != config_get( 'rss_enabled' ) ) {
+			global $g_rss_feed_url;
+			$g_rss_feed_url = $p_rss_feed_url;
+		}
 	}
 
 	# --------------------
@@ -344,10 +346,13 @@
 				}
 				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 
-				# Link to RSS issues feed for the selected project, including authentication details.
-				PRINT '<a href="' . rss_get_issues_feed_url() . '">';
-				PRINT '<img src="images/rss.gif" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
-				PRINT '</a>';
+				if ( OFF != config_get( 'rss_enabled' ) ) {
+					# Link to RSS issues feed for the selected project, including authentication details.
+					PRINT '<a href="' . rss_get_issues_feed_url() . '">';
+					PRINT '<img src="images/rss.gif" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
+					PRINT '</a>';
+				}
+
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
