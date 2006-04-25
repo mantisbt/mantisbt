@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.297 2006-04-25 11:14:06 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.298 2006-04-25 12:01:06 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -41,7 +41,9 @@
 	$g_db_username			= 'root';
 	$g_db_password			= '';
 	$g_database_name		= 'bugtracker';
-	$g_db_type			= 'mysql';
+
+	# Supported types: mysql for MySQL, mysqli for MySQL, pgsql for PostgreSQL, mssql for MS SQL Server, oci8 for Oracle.
+	$g_db_type				= 'mysql';
 
 	############################
 	# Mantis Path Settings

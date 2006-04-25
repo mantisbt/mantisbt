@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.28 2006-04-20 13:53:52 vboctor Exp $
+	# $Id: install.php,v 1.29 2006-04-25 12:01:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -205,6 +205,9 @@ if ( 2 == $t_install_state ) {
 				case 'mssql':
 					$t_support = function_exists('mssql_connect');
 					break;
+				case 'oci8':
+					$t_support = function_exists('OCILogon');
+					break;
 				default:
 					$t_support = false;
 			}
@@ -372,6 +375,12 @@ if ( 1 == $t_install_state ) {
 				echo '<option value="pgsql" selected="selected">PGSQL (experimental)</option>';
 			} else {
 				echo '<option value="pgsql">PGSQL (experimental)</option>';
+			}
+			
+			if ( $f_db_type == 'oci8' ) {
+				echo '<option value="oci8" selected="selected">Oracle - oci8 (Experimental)</option>';
+			} else {
+				echo '<option value="oci8">Oracle - oci8 (Experimental)</option>';
 			}
 		?>
 		</select>

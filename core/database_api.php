@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.48 2006-01-05 03:34:22 thraxisp Exp $
+	# $Id: database_api.php,v 1.49 2006-04-25 12:01:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -389,6 +389,9 @@
 			case 'postgres7':
 			case 'pgsql':
 				return "(date_mi($p_date1::date, $p_date2::date) ". $p_limitstring . ")";
+
+			case 'oci8':
+				return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
 
 			default:
 				error_parameters( 'db_type', $t_db_type );
