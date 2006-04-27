@@ -6,3 +6,4 @@ config_inc.php
 .project
 project.index
 .DS_Store
+!core
