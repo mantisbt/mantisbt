@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.63 2006-03-26 08:13:13 vboctor Exp $
+	# $Id: print_all_bug_page_word.php,v 1.64 2006-05-02 14:05:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,7 +37,7 @@
 
 	# word or html export
 	if ( $f_type_page != 'html' ) {
-		$t_export_title = $g_page_title."_word";
+		$t_export_title = helper_get_default_export_filename( '' );
 		$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
 
 		# Make sure that IE can download the attachments under https.

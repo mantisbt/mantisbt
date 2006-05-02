@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.64 2006-04-22 04:33:04 vboctor Exp $
+	# $Id: helper_api.php,v 1.65 2006-05-02 14:05:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -347,5 +347,22 @@
 		}
 
 		return $t_columns;
+	}
+
+	# --------------------
+	# if all projects selected, default to <prefix><username><suffix><extension>, otherwise default to
+	# <prefix><projectname><suffix><extension>.
+	function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = '', $p_suffix = '' ) {
+		$t_filename = $p_prefix;
+	
+		$t_current_project_id = helper_get_current_project();
+
+		if ( ALL_PROJECTS == $t_current_project_id ) {
+			$t_filename .= user_get_name( auth_get_current_user_id() );
+		} else {
+			$t_filename .= project_get_field( $t_current_project_id, 'name' );
+		}
+
+		return $t_filename . $p_suffix . $p_extension_with_dot;
 	}
 ?>
