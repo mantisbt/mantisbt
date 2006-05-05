@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.14.14.1 2006-05-05 15:55:50 vboctor Exp $
+	# $Id: profile_api.php,v 1.14.14.2 2006-05-05 16:25:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -178,7 +178,8 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id='$c_user_id'";
+				  WHERE user_id='$c_user_id'
+				  ORDER BY platform, os, os_build";
 	    $result = db_query( $query );
 
 		$t_rows = array();
@@ -198,8 +199,10 @@
 		if ( ALL_USERS == $p_user_id ) {
 			return profile_get_all_rows( ALL_USERS );
 		} else {
-			return array_merge( profile_get_all_rows( ALL_USERS ),
+			$t_profiles_array = array_merge( profile_get_all_rows( ALL_USERS ),
 		                    profile_get_all_rows( $p_user_id ) );
+			asort( $t_profiles_array );
+			return $t_profiles_array;
 		}
 	}
 	
