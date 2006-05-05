@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.15.12.1 2006-01-01 02:58:50 thraxisp Exp $
+	# $Id: changelog_page.php,v 1.15.12.1.4.1 2006-05-05 16:09:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -85,7 +85,7 @@
 
 			$t_version_id = version_get_id( $t_version, $t_project_id );
 
-			$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
+			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 			if ( !is_blank( $t_description ) ) {
@@ -100,9 +100,11 @@
 			}
 			$t_first_entry = true;
 
-			for ( $t_result = db_query( $query ); !$t_result->EOF; $t_result->MoveNext() ) {
+			$t_result = db_query( $query );
+
+			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
-				if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
+				if ( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
 					continue;
 				}
 
@@ -113,7 +115,7 @@
 				  continue;
 				}
 
-				$t_issue_id = $t_result->fields['id'];
+				$t_issue_id = $t_row['id'];
 
 				if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
 					continue;
