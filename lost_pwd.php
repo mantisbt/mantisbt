@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd.php,v 1.6 2005-09-22 11:15:08 vboctor Exp $
+	# $Id: lost_pwd.php,v 1.7 2006-05-05 16:33:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -38,7 +38,8 @@
 
 	$t_user_table = config_get( 'mantis_user_table' );
 
-	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = \'' . $c_username . '\' and email = \'' . $c_email . '\'';
+	# @@@ Consider moving this query to user_api.php
+	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = \'' . $c_username . '\' AND email = \'' . $c_email . '\' AND enabled=1';
 	$result = db_query( $query );
 
 	if ( 0 == db_num_rows( $result ) ) {
