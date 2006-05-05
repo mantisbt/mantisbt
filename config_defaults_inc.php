@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.299 2006-04-25 13:18:27 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.300 2006-05-05 15:11:39 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -331,6 +331,7 @@
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
 		'auto',
+		'bulgarian',
 		'catalan',
 		'chinese_simplified',
 		'chinese_simplified_utf8',
