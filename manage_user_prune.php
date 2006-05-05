@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_prune.php,v 1.7 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_user_prune.php,v 1.7.18.1 2006-05-05 15:52:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -18,9 +18,12 @@
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
 	$days_old = (integer)$days_old;
+
+	$date_calc = db_helper_compare_days( db_now(), "date_created", "> $days_old" );
+
 	$query = "SELECT id
 			FROM $t_user_table
-			WHERE login_count=0 AND TO_DAYS(".db_now().") - '$days_old' > TO_DAYS(date_created)";
+			WHERE login_count = 0 AND $date_calc";
 	$result = db_query($query);
 
 	$count = db_num_rows( $result );
