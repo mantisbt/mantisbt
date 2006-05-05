@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.55 2006-04-22 06:19:40 vboctor Exp $
+	# $Id: constant_inc.php,v 1.56 2006-05-05 15:37:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -177,6 +177,7 @@
 	define( 'ERROR_UPLOAD_FAILURE',					15 );
 	define( 'ERROR_FTP_CONNECT_ERROR',				16 );
 	define( 'ERROR_HANDLER_ACCESS_TOO_LOW',				17 );
+	define( 'ERROR_PAGE_REDIRECTION',				18 );
 
 	# ERROR_CONFIG_*
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',			100 );
