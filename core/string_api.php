@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.75.4.2.2.1.2.1 2006-02-03 03:56:33 thraxisp Exp $
+	# $Id: string_api.php,v 1.75.4.2.2.1.2.1.2.1 2006-05-05 16:18:25 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -190,10 +190,20 @@
 		}
 		
 		// split and encode parameters
-		if ( strpos( '?', $t_url ) !== FALSE ) {
+		if ( strpos( $t_url, '?' ) !== FALSE ) {
 			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
 			if ( $t_param !== "" ) {
-				return $t_path . '?' . urlencode( $t_param );
+				$t_vals = array();
+				$t_param = str_replace( '?','', $t_param );
+				parse_str( $t_param, $t_vals );
+				$t_param = '';
+				foreach($t_vals as $k => $v) {
+					if ($t_param != '') {
+						$t_param .= '&'; 
+					}
+					$t_param .= "$k=" . urlencode( strip_tags( urldecode( $v ) ) );
+				}
+				return $t_path . '?' . $t_param;
 			} else {
 				return $t_path;
 			}
