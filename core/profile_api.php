@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.14 2005-05-18 21:26:01 jlatour Exp $
+	# $Id: profile_api.php,v 1.14.14.1 2006-05-05 15:55:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -211,7 +211,8 @@
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
-		$query = "SELECT DISTINCT(up.id), up.*
+		# using up.* causes an SQL error on MS SQL since up.description is of type text
+		$query = "SELECT DISTINCT(up.id), up.user_id, up.platform, up.os, up.os_build
 				  FROM $t_user_profile_table up, $t_bug_table b
 				  WHERE $t_project_where
 				  AND up.id = b.profile_id";
