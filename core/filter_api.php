@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.122.2.2.2.3.2.5.2.3 2006-01-29 12:59:47 vboctor Exp $
+	# $Id: filter_api.php,v 1.122.2.2.2.3.2.5.2.3.2.1 2006-05-06 03:01:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2970,7 +2970,11 @@
 		$t_js_toggle_func = "toggle_custom_date_field_" . $p_field_id . "_controls" ;
 		# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 		# may be wrong for dates before early 2001.
-		array_multisort($t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC) ;
+		if (is_array($t_accessible_custom_fields_values[$p_field_num]))
+		{
+			array_multisort($t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC) ;
+		}
+
 		if (isset($t_accessible_custom_fields_values[$p_field_num][0])) {
 			$t_sel_start_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][0]) ;
 		}
