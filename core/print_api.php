@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.143.6.1.4.1 2006-02-03 03:56:33 thraxisp Exp $
+	# $Id: print_api.php,v 1.143.6.1.4.1.2.1 2006-05-07 05:56:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -46,6 +46,7 @@
 				header( "Location: $t_url" );
 			}
 		} else {
+			trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
 			return false;
 		}
 
