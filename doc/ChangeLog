@@ -1,5 +1,20 @@
 Mantis ChangeLog
 
+2005.05.07 - 1.0.3
+
+- 0007037: [security] Port: Login with disabled account possible (vboctor)
+- 0007034: [bugtracker] Port: bug in string_sanitize_url() (vboctor)
+- 0007028: [db mssql] Port: "Prune Accounts" function doesn't work with MS SQL (vboctor)
+- 0007029: [db mssql] Port: MS SQL Error on View Filters Page (vboctor)
+- 0007030: [db mssql] Port: installtion fails - administrator have no rights on db (vboctor)
+- 0007032: [db mssql] Port: Error on opening Change Log (vboctor)
+- 0007039: [db mssql] Notice: Only variables should be assigned by reference in \core\adodb\adodb.inc.php on line 2931 (vboctor)
+- 0007035: [feature] Port: Global Profiles list not sorted (vboctor)
+- 0007038: [filters] Port: SYSTEM WARNING: Argument 1 to array_multisort() is expected to be an array or a sort flag (vboctor)
+- 0007031: [installation] Port: is_writable never success in install.php (vboctor)
+- 0007041: [installation] Port: newbie admins may be redirected to blank page (vboctor)
+- 0007033: [printing] Port: wrong strpos function call (vboctor)
+- 0007027: [upgrade] Port: fixed_in_version is renamed to Fixed_in_version during database migration (vboctor)
 
 2006.04.18 - 1.0.2
 
