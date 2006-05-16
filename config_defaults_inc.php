@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.300 2006-05-05 15:11:39 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.301 2006-05-16 15:21:53 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -861,6 +861,14 @@
 	# view pages.  To disable this feature, set max size to 0.
 	# This feature applies to: bmp, png, gif, jpg
 	$g_preview_attachments_inline_max_size = 0;
+
+	# Specifies the maximum width for the auto-preview feature.  If no maximum width should be imposed
+	# then it should be set to 0.
+	$g_preview_max_width = 0;
+
+	# Specifies the maximum height for the auto-preview feature.  If no maximum height should be imposed
+	# then it should be set to 0.
+	$g_preview_max_height = 250;
 
 	# --- Show an attachment indicator on bug list ---
 	# Show a clickable attachment indicator on the bug

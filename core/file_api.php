@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.72 2005-08-11 01:53:02 thraxisp Exp $
+	# $Id: file_api.php,v 1.73 2006-05-16 15:21:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -188,7 +188,20 @@
 				( $v_filesize != 0 ) &&
 				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), array( 'png', 'jpg', 'jpeg', 'gif', 'bmp' ), true ) ) ) {
 
-				PRINT "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
+				$t_preview_style = 'border: 0;';
+				$t_max_width = config_get( 'preview_max_width' );
+				if ( $t_max_width > 0 ) {
+					$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
+				}
+				
+				$t_max_height = config_get( 'preview_max_height' );
+				if ( $t_max_height > 0 ) {
+					$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
+				}
+
+				$t_preview_style = 'style="' . $t_preview_style . '"';
+
+				PRINT "<br />$t_href_start<img $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
 				$image_previewed = true;
 			}
 
