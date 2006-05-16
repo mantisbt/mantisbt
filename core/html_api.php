@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.192 2006-04-25 13:18:27 vboctor Exp $
+	# $Id: html_api.php,v 1.193 2006-05-16 23:59:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -250,6 +250,8 @@
 	function html_head_javascript() {
 		if ( ON == config_get( 'use_javascript' ) ) {
 			echo "\t" . '<script type="text/JavaScript" src="javascript/common.js">';
+			echo '</script>' . "\n";
+			echo "\t" . '<script type="text/JavaScript" src="javascript/ajax.js">';
 			echo '</script>' . "\n";
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.89 2005-06-12 21:04:43 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.90 2006-05-16 23:59:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,6 +17,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 
+	require_once( $t_core_path.'ajax_api.php' );
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
@@ -155,9 +156,16 @@
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td>
-		<select name="reporter_id">
-			<?php print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id ) ?>
-		</select>
+		<?php
+			if ( ON == config_get( 'use_javascript' ) ) {
+				$t_username = user_get_name( $t_bug->reporter_id );
+				echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $f_bug_id );
+			} else {
+				echo '<select name="reporter_id">';
+				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
+				echo '</select>';
+			}
+		?>
 	</td>
 
 	<!-- View Status -->
