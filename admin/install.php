@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.29 2006-04-25 12:01:06 vboctor Exp $
+	# $Id: install.php,v 1.30 2006-05-17 00:49:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -603,6 +603,8 @@ if ( 4 == $t_install_state ) {
 
 # all checks have passed, install the database
 if ( 5 == $t_install_state ) {
+		$t_config_filename = $g_absolute_path . 'config_inc.php';
+		$t_config_exists = file_exists ( $t_config_filename );
 ?>
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
@@ -613,8 +615,14 @@ if ( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-		Creating Default Config File<br />
-		<font color="red">(if this file is not created, create it manually with the contents below)</font>
+		<?php
+			if ( !$t_config_exists ) {
+				echo 'Creating Configuration File (config_inc.php)<br />';
+				echo '<font color="red">(if this file is not created, create it manually with the contents below)</font>';
+			} else {
+				echo 'Updating Configuration File (config_inc.php)<br />';
+			}
+		 ?>
 	</td>
 	<?php
 		$t_config = '<?php'."\r\n";
@@ -626,8 +634,7 @@ if ( 5 == $t_install_state ) {
 		$t_config .= '?>' . "\r\n";
 		$t_write_failed = true;
 
-		$t_config_filename = $g_absolute_path . 'config_inc.php';
-		if ( !file_exists ( $t_config_filename ) ) {
+		if ( !$t_config_exists ) {
 			if ( $fd = @fopen( $t_config_filename, 'x' ) ) {
 				fwrite( $fd, $t_config );
 				fclose( $fd );

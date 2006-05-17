@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.9 2006-05-17 00:15:23 vboctor Exp $
+	# $Id: schema.php,v 1.10 2006-05-17 00:49:38 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -313,4 +313,6 @@ $upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'),
     "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES 
         ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" . 
              md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
+$upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "old_value C(255) NOTNULL" ) );
+$upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "new_value C(255) NOTNULL" ) );
 ?>
