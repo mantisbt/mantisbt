@@ -4,9 +4,8 @@
 	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.8 2005-08-03 14:20:34 thraxisp Exp $
+	# $Id: schema.php,v 1.9 2006-05-17 00:15:23 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -19,7 +18,6 @@
 	
 	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE 
 	#  END OF THE TABLE!!!
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
 			  config_id C(64) NOTNULL PRIMARY,
 			  project_id I DEFAULT '0' PRIMARY,
@@ -29,7 +27,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
 			  value XS NOTNULL",
 Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_config',config_get('mantis_config_table'),'config_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_file_table'),"
   id			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -44,7 +41,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_file_table'),"
   content 		B NOTNULL
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_file_bug_id',config_get('mantis_bug_file_table'),'bug_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_history_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -57,12 +53,10 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_history_table')
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_history_bug_id',config_get('mantis_bug_history_table'),'bug_id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_history_user_id',config_get('mantis_bug_history_table'),'user_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_monitor_table'),"
   user_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   bug_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_relationship_table'),"
   id 			 I  UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
   source_bug_id		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -71,7 +65,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_relationship_ta
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_relationship_source',config_get('mantis_bug_relationship_table'),'source_bug_id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_relationship_destination',config_get('mantis_bug_relationship_table'),'destination_bug_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -105,14 +98,12 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_sponsorship_total',config_get
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_fixed_in_version',config_get('mantis_bug_table'),'fixed_in_version'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_status',config_get('mantis_bug_table'),'status'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project',config_get('mantis_bug_table'),'project_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_text_table'),"
   id 			 I  PRIMARY UNSIGNED NOTNULL AUTOINCREMENT,
   description 		XS NOTNULL,
   steps_to_reproduce 	XS NOTNULL,
   additional_information XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -126,25 +117,21 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_table'),"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug',config_get('mantis_bugnote_table'),'bug_id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_last_mod',config_get('mantis_bugnote_table'),'last_modified'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_text_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   note 			XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_project_table'),"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   project_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   sequence 		I2 NOTNULL DEFAULT '0'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_string_table'),"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   bug_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   value 		C(255) NOTNULL DEFAULT \" '' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_custom_field_bug',config_get('mantis_custom_field_string_table'),'bug_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_table'),"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   name 			C(64) NOTNULL DEFAULT \" '' \",
@@ -167,7 +154,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_table'
   require_closed 	L NOTNULL DEFAULT '0'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_custom_field_name',config_get('mantis_custom_field_table'),'name'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_filters_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  NOTNULL DEFAULT '0',
@@ -176,7 +162,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_filters_table'),"
   name 			C(64) NOTNULL DEFAULT \" '' \",
   filter_string 	XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -188,13 +173,11 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   headline 		C(64) NOTNULL DEFAULT \" '' \",
   body 			XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_category_table'),"
   project_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   category 		C(64) NOTNULL PRIMARY DEFAULT \" '' \",
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_file_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -208,12 +191,10 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_file_table'
   date_added 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
   content 		B NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_hierarchy_table'),"
 			  child_id I UNSIGNED NOTNULL,
 			  parent_id I UNSIGNED NOTNULL",
 Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   name 			C(128) NOTNULL DEFAULT \" '' \",
@@ -227,14 +208,12 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_table'),"
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',config_get('mantis_project_table'),'id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_name',config_get('mantis_project_table'),'name',Array('UNIQUE')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_view',config_get('mantis_project_table'),'view_state'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_user_list_table'),"
   project_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   user_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   access_level 		I2 NOTNULL DEFAULT '10'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array( 'CreateIndexSQL',Array('idx_project_user',config_get('mantis_project_user_list_table'),'user_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_version_table'),"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -244,7 +223,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_version_tab
   released 		L NOTNULL DEFAULT '1'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_version',config_get('mantis_project_version_table'),'project_id,version',Array('UNIQUE')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_sponsorship_table'),"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   bug_id 		 I  NOTNULL DEFAULT '0',
@@ -258,7 +236,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_sponsorship_table')
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_sponsorship_bug_id',config_get('mantis_sponsorship_table'),'bug_id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_sponsorship_user_id',config_get('mantis_sponsorship_table'),'user_id'));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_tokens_table'),"
 			  id I NOTNULL PRIMARY AUTOINCREMENT,
 			  owner I NOTNULL,
@@ -267,7 +244,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_tokens_table'),"
 			  expiry T,
 			  value XS NOTNULL",
 Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_pref_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -301,12 +277,10 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_pref_table'),"
   email_bugnote_limit 	I2 NOTNULL DEFAULT '0',
   language 		C(32) NOTNULL DEFAULT 'english'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_print_pref_table'),"
   user_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   print_pref 		C(27) NOTNULL DEFAULT \" '' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_profile_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -315,7 +289,6 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_profile_table'
   os_build 		C(32) NOTNULL DEFAULT \" '' \",
   description 		XS NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
-
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   username 		C(32) NOTNULL DEFAULT \" '' \",
@@ -336,7 +309,6 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_user_cookie_string',config_get('m
 $upgrade[] = Array('CreateIndexSQL',Array('idx_user_username',config_get('mantis_user_table'),'username',Array('UNIQUE')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_enable',config_get('mantis_user_table'),'enabled'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_access',config_get('mantis_user_table'),'access_level'));
-
 $upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'), 
     "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES 
         ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" . 
