@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.154 2006-05-18 03:53:46 vboctor Exp $
+	# $Id: print_api.php,v 1.155 2006-05-18 06:17:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -28,7 +28,7 @@
 	#  option is turned on, return false and don't redirect.
 	# $p_sanitize - true/false - true in the case where the URL is extracted from GET/POST or untrusted source.
 	# This would be false if the URL is trusted (e.g. read from config_inc.php).
-	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = true ) {
+	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
