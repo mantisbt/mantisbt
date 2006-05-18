@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.65 2006-05-02 14:05:08 vboctor Exp $
+	# $Id: helper_api.php,v 1.66 2006-05-18 05:53:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -321,8 +321,8 @@
 	
 	# --------------------
 	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( COLUMNS_TARGET_VIEW_PAGE ) );
-	
+		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target ) );
+
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 		if ( OFF == $t_enable_sponsorship ) {
 			$t_keys = array_keys( $t_columns, 'sponsorship_total' );
@@ -338,7 +338,7 @@
 				unset( $t_columns[$t_key] );
 			}
 		}
-		
+
 		if ( OFF == config_get( 'enable_relationship' ) ) {
 			$t_keys = array_keys( $t_columns, 'duplicate_id' );
 			foreach ( $t_keys as $t_key ) {

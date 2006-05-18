@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.26 2006-04-22 04:33:04 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.27 2006-05-18 05:53:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -148,45 +148,12 @@
 	#   not applicable.
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-		$t_columns = array();
-
 		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
-			$t_columns[] = 'id'; // localized: 'id',
-			$t_columns[] = 'project_id'; // 'email_project'
-			$t_columns[] = 'reporter_id'; // 'reporter'
-			$t_columns[] = 'handler_id'; // 'assigned_to'
-			$t_columns[] = 'priority'; // 'priority'
-			$t_columns[] = 'severity'; // 'severity'
-			$t_columns[] = 'reproducibility'; // 'reproducibility'
-			$t_columns[] = 'version'; // 'version'
-			$t_columns[] = 'projection'; // 'projection'
-			$t_columns[] = 'category'; // 'category'
-			$t_columns[] = 'date_submitted'; // 'date_submitted'
-			$t_columns[] = 'eta'; // 'eta'
-			$t_columns[] = 'os'; // 'os'
-			$t_columns[] = 'os_build'; // 'os_version'
-			$t_columns[] = 'platform'; // 'platform'
-			$t_columns[] = 'view_state'; // 'view_status'
-			$t_columns[] = 'last_updated'; // 'last_update'
-			$t_columns[] = 'summary'; // 'summary'
-			$t_columns[] = 'status'; // 'status'
-			$t_columns[] = 'resolution'; // 'resolution'
-			$t_columns[] = 'fixed_in_version'; // 'fixed_in_version';
-			$t_columns[] = 'duplicate_id'; // 'duplicate_id'
+			$t_columns = config_get( 'csv_columns' );
 		} else if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 			$t_columns = config_get( 'view_issues_page_columns' );
 		} else {
-			$t_columns[] = 'selection';
-			$t_columns[] = 'priority';
-			$t_columns[] = 'id';
-			$t_columns[] = 'sponsorship_total';
-			$t_columns[] = 'bugnotes_count';
-			$t_columns[] = 'attachment';
-			$t_columns[] = 'category';
-			$t_columns[] = 'severity';
-			$t_columns[] = 'status';
-			$t_columns[] = 'last_updated';
-			$t_columns[] = 'summary';
+			$t_columns = config_get( 'print_issues_page_columns' );
 		}
 
 		return $t_columns;

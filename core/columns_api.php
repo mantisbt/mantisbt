@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.12 2005-08-10 19:59:13 thraxisp Exp $
+	# $Id: columns_api.php,v 1.13 2006-05-18 05:53:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,6 +50,19 @@
 			echo '</td>';
 		} else {
 			echo lang_get( 'email_project' );
+		}
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_title_duplicate_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+			echo '<td>';
+			print_view_bug_sort_link( lang_get( 'duplicate_id' ), 'duplicate_id', $p_sort, $p_dir, $p_columns_target );
+			print_sort_icon( $p_dir, $p_sort, 'duplicate_id' );
+			echo '</td>';
+		} else {
+			echo lang_get( 'duplicate_id' );
 		}
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.8 2006-04-22 04:33:04 vboctor Exp $
+	# $Id: csv_api.php,v 1.9 2006-05-18 05:53:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -194,5 +194,11 @@
 	# return the duplicate bug id
 	function csv_format_duplicate_id( $p_duplicate_id ) {
 		return bug_format_id( $p_duplicate_id );
+	}
+
+	# --------------------
+	# return the selection
+	function csv_format_selection( $p_duplicate_id ) {
+		return csv_escape_string( '' );
 	}
 ?>
