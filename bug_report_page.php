@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.57 2006-04-22 06:19:40 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.58 2006-05-18 13:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -128,7 +128,7 @@
 		<?php if ( $t_changed_project ) {
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
-		<select tabindex="1" name="category">
+		<select <?php echo helper_get_tab_index() ?> name="category">
 			<?php print_category_option_list( $f_category ) ?>
 		</select>
 	</td>
@@ -141,7 +141,7 @@
 		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>
 	</td>
 	<td>
-		<select tabindex="2" name="reproducibility">
+		<select <?php echo helper_get_tab_index() ?> name="reproducibility">
 			<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
 		</select>
 	</td>
@@ -154,7 +154,7 @@
 		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>
 	</td>
 	<td>
-		<select tabindex="3" name="severity">
+		<select <?php echo helper_get_tab_index() ?> name="severity">
 			<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
 		</select>
 	</td>
@@ -168,7 +168,7 @@
 		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>
 	</td>
 	<td>
-		<select tabindex="4" name="priority">
+		<select <?php echo helper_get_tab_index() ?> name="priority">
 			<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
 		</select>
 	</td>
@@ -193,7 +193,7 @@
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<select tabindex="9" name="product_version">
+		<select <?php echo helper_get_tab_index() ?> name="product_version">
 			<?php print_version_option_list( $f_product_version, $t_project_id, VERSION_RELEASED ) ?>
 		</select>
 	</td>
@@ -214,7 +214,7 @@
 		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
 	</td>
 	<td>
-		<input tabindex="5" type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
 
@@ -225,7 +225,7 @@
 		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
 	</td>
 	<td>
-		<textarea tabindex="6" name="description" cols="80" rows="10" wrap="virtual"><?php echo $f_description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10" wrap="virtual"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
 
@@ -236,7 +236,7 @@
 		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
 	</td>
 	<td>
-		<textarea tabindex="7" name="additional_info" cols="80" rows="10" wrap="virtual"><?php echo $f_additional_info ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10" wrap="virtual"><?php echo $f_additional_info ?></textarea>
 	</td>
 </tr>
 
@@ -292,7 +292,7 @@
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-		<input tabindex="8" name="file" type="file" size="60" />
+		<input <?php echo helper_get_tab_index() ?> name="file" type="file" size="60" />
 	</td>
 </tr>
 <?php } ?>
@@ -307,8 +307,8 @@
 <?php
 	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) {
 ?>
-		<input tabindex="9" type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
-		<input tabindex="10" type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
+		<input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
+		<input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
 <?php
 	} else {
 		echo get_enum_element( 'project_view_state', $f_view_state );
@@ -340,7 +340,7 @@
 		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>
 	</td>
 	<td>
-		<input tabindex="11" type="checkbox" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
+		<input <?php echo helper_get_tab_index() ?> type="checkbox" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
 	</td>
 </tr>
 
@@ -351,7 +351,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input tabindex="12" type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
 	</td>
 </tr>
 

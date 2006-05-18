@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: date_api.php,v 1.7 2005-02-26 01:00:39 vboctor Exp $
+	# $Id: date_api.php,v 1.8 2006-05-18 13:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Date API ###
@@ -110,30 +110,29 @@
 
 		foreach( $t_chars as $t_char ) {
 			if (strcmp( $t_char, "M") == 0) {
-				echo "<select name=\"" . $p_name . "_month\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\" $t_disable>" ;
 				echo $t_blank_line ;
 				print_month_option_list( $t_date[1] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcmp( $t_char, "m") == 0) {
-				echo "<select name=\"" . $p_name . "_month\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\" $t_disable>" ;
 				echo $t_blank_line ;
 				print_numeric_month_option_list( $t_date[1] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcasecmp( $t_char, "D") == 0) {
-				echo "<select name=\"" . $p_name . "_day\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\" $t_disable>" ;
 				echo $t_blank_line ;
 				print_day_option_list( $t_date[2] ) ;
 				echo "</select>\n" ;
 			}
 			if (strcasecmp( $t_char, "Y") == 0) {
-				echo "<select name=\"" . $p_name . "_year\" $t_disable>" ;
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\" $t_disable>" ;
 				echo $t_blank_line ;
 				print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end ) ;
 				echo "</select>\n" ;
 			}
 		}
 	}
-
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.90 2006-05-16 23:59:28 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.91 2006-05-18 13:00:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -110,21 +110,21 @@
 		<?php if ( $t_changed_project ) {
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
-		<select name="category">
+		<select <?php echo helper_get_tab_index() ?> name="category">
 			<?php print_category_option_list( $t_bug->category, $t_bug->project_id ) ?>
 		</select>
 	</td>
 
 	<!-- Severity -->
 	<td>
-		<select name="severity">
+		<select <?php echo helper_get_tab_index() ?> name="severity">
 			<?php print_enum_string_option_list( 'severity', $t_bug->severity ) ?>
 		</select>
 	</td>
 
 	<!-- Reproducibility -->
 	<td>
-		<select name="reproducibility">
+		<select <?php echo helper_get_tab_index() ?> name="reproducibility">
 			<?php print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility ) ?>
 		</select>
 	</td>
@@ -161,7 +161,7 @@
 				$t_username = user_get_name( $t_bug->reporter_id );
 				echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $f_bug_id );
 			} else {
-				echo '<select name="reporter_id">';
+				echo '<select ', helper_get_tab_index(), ' name="reporter_id">';
 				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
 				echo '</select>';
 			}
@@ -175,7 +175,7 @@
 	<td>
 <?php
 		if ( access_has_project_level( config_get( 'change_view_status_threshold' ) ) ) { ?>
-			<select name="view_state">
+			<select <?php echo helper_get_tab_index() ?> name="view_state">
 				<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
 			</select>
 <?php
@@ -199,7 +199,7 @@
 	<td colspan="5">
 	<?php if ( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
 	?>
-		<select name="handler_id">
+		<select <?php echo helper_get_tab_index() ?> name="handler_id">
 			<option value="0"></option>
 			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
 		</select>
@@ -220,7 +220,7 @@
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
 	<td>
-		<select name="priority">
+		<select <?php echo helper_get_tab_index() ?> name="priority">
 			<?php print_enum_string_option_list( 'priority', $t_bug->priority ) ?>
 		</select>
 	</td>
@@ -230,7 +230,7 @@
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<select name="resolution">
+		<select <?php echo helper_get_tab_index() ?> name="resolution">
 			<?php print_enum_string_option_list( "resolution", $t_bug->resolution ) ?>
 		</select>
 	</td>
@@ -261,7 +261,7 @@
 			# Duplicate ID
 			echo '<td class="category">', lang_get( 'duplicate_id' ), '&nbsp;</td>';
 			echo '<td>';
-			echo '<input type="text" name="duplicate_id" value="', $t_bug->duplicate_id, '" maxlength="7" />&nbsp;';
+			echo '<input ', helper_get_tab_index(), ' type="text" name="duplicate_id" value="', $t_bug->duplicate_id, '" maxlength="7" />&nbsp;';
 			echo '</td>';
 		} else {
 			# spacer
@@ -279,7 +279,7 @@
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<select name="version">
+		<select <?php echo helper_get_tab_index() ?> name="version">
 			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
 		</select>
 	</td>
@@ -295,7 +295,7 @@
 		<?php echo lang_get( 'fixed_in_version' ) ?>
 	</td>
 	<td colspan="5">
-		<select name="fixed_in_version">
+		<select <?php echo helper_get_tab_index() ?> name="fixed_in_version">
 			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
 	</td>
@@ -314,7 +314,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<input type="text" name="summary" size="105" maxlength="128" value="<?php echo $t_bug->summary ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="text" name="summary" size="105" maxlength="128" value="<?php echo $t_bug->summary ?>" />
 	</td>
 </tr>
 
@@ -325,7 +325,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="80" rows="10" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
 	</td>
 </tr>
 
@@ -336,7 +336,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="80" rows="10" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
 	</td>
 </tr>
 
@@ -384,7 +384,7 @@
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 
@@ -400,7 +400,7 @@
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
-			<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
+			<input <?php echo helper_get_tab_index() ?> type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
 <?php
 			echo lang_get( 'private' );
 		} else {
@@ -415,7 +415,7 @@
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+		<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>
 

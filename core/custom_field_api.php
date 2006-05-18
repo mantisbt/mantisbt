@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.58 2006-04-19 00:45:46 thraxisp Exp $
+	# $Id: custom_field_api.php,v 1.59 2006-05-18 13:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1182,9 +1182,9 @@
 			}
 
 			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-				echo '<select name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple>';
+				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple>';
 			} else {
-				echo '<select name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
+				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
 			}
 
 			$t_selected_values = explode( '|', $t_custom_field_value );
@@ -1201,7 +1201,7 @@
 			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 			$t_checked_values = explode( '|', $t_custom_field_value );
 			foreach( $t_values as $t_option ) {
-				echo '<input type="checkbox" name="custom_field_' . $t_id . '[]"';
+				echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $t_id . '[]"';
 				if( in_array( $t_option, $t_checked_values ) ) {
 					echo ' value="' . $t_option . '" checked>&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				} else {
@@ -1213,7 +1213,7 @@
 		case CUSTOM_FIELD_TYPE_FLOAT:
 		case CUSTOM_FIELD_TYPE_EMAIL:
 		case CUSTOM_FIELD_TYPE_STRING:
-			echo '<input type="text" name="custom_field_' . $t_id . '" size="80"';
+			echo '<input ', helper_get_tab_index(), ' type="text" name="custom_field_' . $t_id . '" size="80"';
 			if( 0 < $p_field_def['length_max'] ) {
 				echo ' maxlength="' . $p_field_def['length_max'] . '"';
 			} else {

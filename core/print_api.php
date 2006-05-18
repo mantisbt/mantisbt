@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.156 2006-05-18 06:57:14 vboctor Exp $
+	# $Id: print_api.php,v 1.157 2006-05-18 13:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -785,7 +785,7 @@
 			# resort the list into ascending order
 			ksort( $t_enum_list );
 			reset( $t_enum_list );
-			echo '<select name="' . $p_select_label . '">';
+			echo '<select ', helper_get_tab_index(), ' name="' . $p_select_label . '">';
 			foreach ( $t_enum_list as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $key, $p_current_value );
