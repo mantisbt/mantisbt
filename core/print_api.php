@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.155 2006-05-18 06:17:02 vboctor Exp $
+	# $Id: print_api.php,v 1.156 2006-05-18 06:57:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -678,11 +678,12 @@
 		if ( $p_leading_blank ) {
 			echo '<option value=""></option>';
 		}
+
 		foreach( $versions as $version ) {
-			$t_version = string_shorten( string_attribute( $version['version'] ) );
+			$t_version = string_attribute( $version['version'] );
 			echo "<option value=\"$t_version\"";
 			check_selected( $p_version, $t_version );
-			echo ">$t_version</option>";
+			echo '>', string_shorten( $t_version ), '</option>';
 		}
 	}
 	# --------------------
