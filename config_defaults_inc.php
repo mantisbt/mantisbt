@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.302 2006-05-18 03:53:46 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.303 2006-05-18 05:14:27 vboctor Exp $
 	# --------------------------------------------------------
 
 

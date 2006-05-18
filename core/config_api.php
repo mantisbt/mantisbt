@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.36 2006-01-16 19:56:56 thraxisp Exp $
+	# $Id: config_api.php,v 1.37 2006-05-18 05:14:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -35,8 +35,7 @@
 		# @@ debug @@ echo "lu o=$p_option ";
 
 		# bypass table lookup for certain options
-		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
-		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+		$t_bypass_lookup = !config_can_set_in_database( $p_option );
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 
 		if ( ! $t_bypass_lookup ) {
@@ -260,33 +259,36 @@
 			$t_type = CONFIG_TYPE_STRING;
 			$c_value = db_prepare_string( $p_value );
 		}
-		$c_option = db_prepare_string( $p_option );
-		$c_user = db_prepare_int( $p_user );
-		$c_project = db_prepare_int( $p_project );
-		$c_access = db_prepare_int( $p_access );
 
-		$t_config_table = config_get_global( 'mantis_config_table' );
-		$query = "SELECT COUNT(*) from $t_config_table
-			WHERE config_id = '$c_option' AND
-				project_id = $c_project AND
-				user_id = $c_user";
-		$result = db_query( $query );
+		if ( config_can_set_in_database( $p_option ) ) {
+			$c_option = db_prepare_string( $p_option );
+			$c_user = db_prepare_int( $p_user );
+			$c_project = db_prepare_int( $p_project );
+			$c_access = db_prepare_int( $p_access );
 
-		if ( 0 < db_result( $result ) ) {
-			$t_set_query = "UPDATE $t_config_table
-				SET value='$c_value', type=$t_type, access_reqd=$c_access
+			$t_config_table = config_get_global( 'mantis_config_table' );
+			$query = "SELECT COUNT(*) from $t_config_table
 				WHERE config_id = '$c_option' AND
 					project_id = $c_project AND
 					user_id = $c_user";
-		} else {
-			$t_set_query = "INSERT INTO $t_config_table
-				( value, type, access_reqd, config_id, project_id, user_id )
-				VALUES 
-				('$c_value', $t_type, $c_access, '$c_option', $c_project, $c_user )";
+			$result = db_query( $query );
+
+			if ( 0 < db_result( $result ) ) {
+				$t_set_query = "UPDATE $t_config_table
+					SET value='$c_value', type=$t_type, access_reqd=$c_access
+					WHERE config_id = '$c_option' AND
+						project_id = $c_project AND
+						user_id = $c_user";
+			} else {
+				$t_set_query = "INSERT INTO $t_config_table
+					( value, type, access_reqd, config_id, project_id, user_id )
+					VALUES 
+					('$c_value', $t_type, $c_access, '$c_option', $c_project, $c_user )";
+			}
+
+			$result = db_query( $t_set_query );
 		}
 
-		$result = db_query( $t_set_query );
-		
 		config_set_cache( $p_option, $p_value, $p_user, $p_project, $p_access );
 
 		return true;
@@ -304,17 +306,38 @@
 	}
 	
 	# ------------------
-	# delete the config entry
-	function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-	global $g_cache_config, $g_cache_config_access;
+	# Checks if the specific configuration option can be set in the database, otherwise it can only be set
+	# in the configuration file (config_inc.php / config_defaults_inc.php).
+	function config_can_set_in_database( $p_option ) {
 		# bypass table lookup for certain options
 		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
 		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+
+		return !$t_bypass_lookup;
+	}
+	
+	# ------------------
+	# Checks if the specific configuration option can be deleted from the database.
+	function config_can_delete( $p_option ) {
+		return ( strtolower( $p_option ) != 'database_version' );
+	}
+
+	# ------------------
+	# delete the config entry
+	function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
+		global $g_cache_config, $g_cache_config_access;
+
+		# bypass table lookup for certain options
+		$t_bypass_lookup = !config_can_set_in_database( $p_option );
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
 		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
 				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
+			if ( !config_can_delete( $p_option ) ) {
+				return;
+			}
+
 			$t_config_table = config_get_global( 'mantis_config_table' );
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
 			# @@ debug @@ error_print_stack_trace();
@@ -329,9 +352,10 @@
 
 			$result = @db_query( $query);
 		}
+
 		config_flush_cache( $p_option, $p_user, $p_project );
 	}		
-		
+
 	# ------------------
 	# delete the config entry
 	function config_delete_project( $p_project = ALL_PROJECTS ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.3 2006-04-21 15:13:14 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.4 2006-05-18 05:14:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -37,11 +37,15 @@
 		switch( $p_type ) {
 			case CONFIG_TYPE_INT:
 				$t_value = (integer)$p_value;
-				break;
+				echo $t_value;
+				return;
+			case CONFIG_TYPE_STRING:
+				$t_value = config_eval( $p_value );
+				echo "'$t_value'";
+				return;
 			case CONFIG_TYPE_COMPLEX:
 				$t_value = unserialize( $p_value );
 				break;
-			case CONFIG_TYPE_STRING:
 			default:
 				$t_value = config_eval( $p_value );
 				break;
@@ -89,6 +93,9 @@
 			<td class="center">
 				<?php echo lang_get( 'access_level' ) ?>
 			</td>
+			<td class="center">
+				<?php echo lang_get( 'actions' ) ?>
+			</td>
 		</tr>
 <?php
 	while ( $row = db_fetch_array( $result ) ) {
@@ -114,6 +121,15 @@
 			</td>
 			<td class="center">
 				<?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?>
+			</td>
+			<td class="center">
+				<?php
+					if ( config_can_delete( $v_config_id ) ) {
+						print_button( 'adm_config_delete.php?user_id=' . $v_user_id . '&amp;project_id=' . $v_project_id . '&amp;config_option=' . $v_config_id, lang_get( 'delete_link' ) );
+					} else {
+						echo '&nbsp;';
+					}
+				?>
 			</td>
 		</tr>
 <?php
@@ -167,7 +183,8 @@
 	</td>
 	<td>
 		<select name="type">
-			<option value="string" selected="selected">string</option>
+			<option value="default" selected="selected">default</option>
+			<option value="string">string</option>
 			<option value="integer">integer</option>
 			<option value="complex">complex</option>
 		</select>

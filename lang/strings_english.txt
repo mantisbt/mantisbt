@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.272 $
+	# $Revision: 1.273 $
 	# $Author: vboctor $
-	# $Date: 2006-05-05 15:37:09 $
+	# $Date: 2006-05-18 05:14:27 $
 	#
-	# $Id: strings_english.txt,v 1.272 2006-05-05 15:37:09 vboctor Exp $
+	# $Id: strings_english.txt,v 1.273 2006-05-18 05:14:27 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
@@ -749,6 +750,7 @@ $s_configuration_option_type = 'Type';
 $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
