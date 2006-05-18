@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.13 2006-05-18 05:53:44 vboctor Exp $
+	# $Id: columns_api.php,v 1.14 2006-05-18 06:24:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -521,6 +521,12 @@
 		echo '<td class="center">';
 		print_formatted_severity_string( $p_row['status'], $p_row['severity'] );
 		echo '</td>';
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_resolution( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		echo '<td class="center">', get_enum_element( 'resolution', $p_row['resolution'] ), '</td>';
 	}
 
 	# --------------------
