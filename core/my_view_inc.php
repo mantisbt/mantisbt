@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.16 2005-08-07 13:42:04 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.17 2006-05-18 06:32:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -231,7 +231,13 @@
 			if ( !bug_is_readonly( $v_id ) && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
 				echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 			}
-			print_status_icon( $v_priority );
+
+			if ( ON == config_get( 'show_priority_text' ) ) {
+				print_formatted_priority_string( $p_row['status'], $v_priority );
+			} else {
+				print_status_icon( $v_priority );
+			}
+
 			if ( 0 < $t_attachment_count ) {
 				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
 				echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';

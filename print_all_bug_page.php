@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.85 2006-04-22 04:33:04 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.86 2006-05-18 06:32:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -125,10 +125,10 @@
 		$t_search = urlencode( $f_search );
 
 		$t_icons = array(
-			array( 'print_all_bug_page_excel', 'excel', '', 'excelicon.gif', 'Excel 2000' ),
-			array( 'print_all_bug_page_excel', 'html', 'target="_blank"', 'ieicon.gif', 'Excel View' ),
-			array( 'print_all_bug_page_word', 'word', '', 'wordicon.gif', 'Word 2000' ),
-			array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ieicon.gif', 'Word View' ) );
+			array( 'print_all_bug_page_excel', 'excel', '', 'fileicons/xls.gif', 'Excel 2000' ),
+			array( 'print_all_bug_page_excel', 'html', 'target="_blank"', 'ie.gif', 'Excel View' ),
+			array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
+			array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 
 		foreach ( $t_icons as $t_icon ) {
 			echo '<a href="' . $t_icon[0] . '.php' .
