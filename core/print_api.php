@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.153 2006-05-05 15:37:08 vboctor Exp $
+	# $Id: print_api.php,v 1.154 2006-05-18 03:53:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1422,9 +1422,8 @@
 		}
 
 		$t_name = $t_file_type_icons[$ext];
-		PRINT '<img src="' . config_get( 'path' ) . 'images/'. $t_name . '" width="16" height="16" border="0" />';
+		PRINT '<img src="' . config_get( 'path' ) . 'images/fileicons/'. $t_name . '" width="16" height="16" border="0" />';
 	}
-
 
 	# --------------------
 	# Prints an RSS image that is hyperlinked to an RSS feed.
