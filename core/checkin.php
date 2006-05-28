@@ -7,7 +7,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: checkin.php,v 1.4 2005-06-15 14:46:20 vboctor Exp $
+	# $Id: checkin.php,v 1.4.12.1 2006-05-28 14:27:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;
@@ -69,6 +69,10 @@
 	# history parameters are reserved for future use.
 	$t_history_old_value = '';
 	$t_history_new_value = '';
+
+	# add note to each bug only once
+	$t_issues = array_unique( $t_issues );
+	$t_fixed_issues = array_unique( $t_fixed_issues );
 
 	# Call the custom function to register the checkin on each issue.
 
