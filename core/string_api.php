@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.75.4.2.2.1.2.1.2.1 2006-05-05 16:18:25 vboctor Exp $
+	# $Id: string_api.php,v 1.75.4.2.2.1.2.1.2.2 2006-07-05 03:04:41 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -194,7 +194,6 @@
 			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
 			if ( $t_param !== "" ) {
 				$t_vals = array();
-				$t_param = str_replace( '?','', $t_param );
 				parse_str( $t_param, $t_vals );
 				$t_param = '';
 				foreach($t_vals as $k => $v) {
