@@ -1,6 +1,14 @@
 Mantis ChangeLog
 
-2005.05.07 - 1.0.3
+2006.07.22 - 1.0.4
+
+- 0007051: [bugtracker] Fix for #6869 / #7034 removes quoted "?" from arguments (thraxisp)
+- 0007298: [bugtracker] Port: bugnote_delete.php redirection fails (vboctor)
+- 0007299: [bugtracker] Port: Save login feature does not work (vboctor)
+- 0007300: [bugtracker] Port: Remember login always redirects to main_page.php (vboctor)
+- 0007143: [other] Port: checkin.php needs array_unique() (vboctor)
+
+2006.05.07 - 1.0.3
 
 - 0007037: [security] Port: Login with disabled account possible (vboctor)
 - 0007034: [bugtracker] Port: bug in string_sanitize_url() (vboctor)
