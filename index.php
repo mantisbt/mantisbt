@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: index.php,v 1.15 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: index.php,v 1.15.18.1 2006-07-22 20:03:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
 	if ( auth_is_user_authenticated() ) {
-		print_header_redirect( 'main_page.php' );
+		print_header_redirect( config_get( 'default_home_page' ) );
 	} else {
 		print_header_redirect( 'login_page.php' );
 	}

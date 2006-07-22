@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.52.4.1 2005-12-08 22:28:16 jlatour Exp $
+	# $Id: login_page.php,v 1.52.4.1.6.1 2006-07-22 20:03:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in
 
 	require_once( 'core.php' );
+
+	if ( auth_is_user_authenticated() ) {
+		print_header_redirect( config_get( 'default_home_page' ) );
+	}
 
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
