@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.143.6.1.4.1.2.1 2006-05-07 05:56:22 vboctor Exp $
+	# $Id: print_api.php,v 1.143.6.1.4.1.2.2 2006-07-22 19:56:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,7 +26,7 @@
 	#  immediately
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	function print_header_redirect( $p_url, $p_die = true ) {
+	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
@@ -34,7 +34,11 @@
 		}
 		
 		# validate the url as part of this site before continuing
-		$t_url = string_sanitize_url( $p_url );
+		if ( $p_sanitize ) {
+			$t_url = string_sanitize_url( $p_url );
+		} else {
+			$t_url = $p_url;
+		}
 
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {

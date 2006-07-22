@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.184.4.1.2.1.2.1 2006-02-03 03:56:33 thraxisp Exp $
+	# $Id: html_api.php,v 1.184.4.1.2.1.2.1.2.1 2006-07-22 19:56:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -225,7 +225,7 @@
 	# $p_time is the number of seconds to wait before redirecting.
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	function html_meta_redirect( $p_url, $p_time=null ) {
+	function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = false ) {
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
 		}
@@ -234,7 +234,11 @@
 			$p_time = config_get( 'wait_time' );
 		}
 
-		$t_url = string_sanitize_url( $p_url );
+		if ( $p_sanitize ) {
+			$t_url = string_sanitize_url( $p_url );
+		} else {
+			$t_url = $p_url;
+		}
 
 		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
 
