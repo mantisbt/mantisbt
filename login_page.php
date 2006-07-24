@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.55 2006-04-25 12:35:06 vboctor Exp $
+	# $Id: login_page.php,v 1.56 2006-07-24 01:31:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -14,7 +14,7 @@
 
 	require_once( 'core.php' );
 
-	if ( auth_is_user_authenticated() ) {
+	if ( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 		print_header_redirect( config_get( 'default_home_page' ) );
 	}
 
