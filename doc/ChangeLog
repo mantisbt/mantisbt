@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2006.07.23 - 1.0.5
+
+- 0007301: [upgrade] Login page inaccessible after upgrade to 1.0.4 (thraxisp)
+
 2006.07.22 - 1.0.4
 
 - 0007051: [bugtracker] Fix for #6869 / #7034 removes quoted "?" from arguments (thraxisp)
