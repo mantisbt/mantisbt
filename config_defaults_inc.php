@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.304 2006-05-18 05:53:44 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.305 2006-08-06 07:12:41 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -878,6 +878,12 @@
 	# This feature applies to: bmp, png, gif, jpg
 	$g_preview_attachments_inline_max_size = 0;
 
+	# Extenstions for text files that can be expanded inline.
+	$g_preview_text_extensions = array( 'txt', 'diff', 'patch' );
+
+	# Extensions for images that can be expanded inline.
+	$g_preview_image_extensions = array( 'bmp', 'png', 'gif', 'jpg', 'jpeg' );
+
 	# Specifies the maximum width for the auto-preview feature.  If no maximum width should be imposed
 	# then it should be set to 0.
 	$g_preview_max_width = 0;
@@ -897,8 +903,10 @@
 	# access level needed to view bugs attachments.  View means to see the file names
 	# sizes, and timestamps of the attachments.
 	$g_view_attachments_threshold	= VIEWER;
-	
+
 	# list of filetypes to view inline. This is a string of extentions separated by commas
+	# This is used when downloading an attachment.  Rather than downloading, the attachment
+	# is viewed in the browser.
 	$g_inline_file_exts = 'gif,png';
 
 	# access level needed to download bug attachments

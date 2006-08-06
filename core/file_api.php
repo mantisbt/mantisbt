@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.73 2006-05-16 15:21:53 vboctor Exp $
+	# $Id: file_api.php,v 1.74 2006-08-06 07:12:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -143,6 +143,8 @@
 
 		$t_can_download = file_can_download_bug_attachments( $p_bug_id );
 		$t_can_delete   = file_can_delete_bug_attachments( $p_bug_id );
+		$t_preview_text_ext = config_get( 'preview_text_extensions' );
+		$t_preview_image_ext = config_get( 'preview_image_extensions' );
 
 		$image_previewed = false;
 		for ( $i = 0 ; $i < $num_files ; $i++ ) {
@@ -186,7 +188,54 @@
 			if ( $t_can_download &&
 				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 				( $v_filesize != 0 ) &&
-				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), array( 'png', 'jpg', 'jpeg', 'gif', 'bmp' ), true ) ) ) {
+				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
+                                $c_id=number_format($v_id);
+				$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+				echo "<script language='JavaScript'>
+<!--
+function swap_content( span ) {
+displayType = ( document.getElementById( span ).style.display == 'none' ) ? 'block' : 'none';
+document.getElementById( span ).style.display = displayType;
+}
+
+ -->
+ </script>";
+				PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onClick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
+				switch ( config_get( 'file_upload_method' ) ) {
+					case DISK:
+						if ( file_exists( $v_diskfile ) ) {
+							$v_content=file_get_contents( $v_diskfile );
+						}
+						break;
+					case FTP:
+						if ( file_exists( $v_diskfile ) ) {
+							file_get_contents( $v_diskfile );
+						} else {
+							$ftp = file_ftp_connect();
+							file_ftp_get ( $ftp, $v_diskfile, $v_diskfile );
+							file_ftp_disconnect( $ftp );
+							$v_content=file_get_contents( $v_diskfile );
+						}
+						break;
+					default:
+                  				$query = "SELECT *
+	                  					FROM $t_bug_file_table
+			            			WHERE id='$c_id'";
+                       				$result = db_query( $query );
+		                 		$row = db_fetch_array( $result );
+                                                $v_content=$row['content'];
+				}
+				echo htmlspecialchars($v_content);
+
+				PRINT "</pre></blockquote>";
+			}
+
+
+			if ( $t_can_download &&
+				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+				( $v_filesize != 0 ) &&
+				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
 
 				$t_preview_style = 'border: 0;';
 				$t_max_width = config_get( 'preview_max_width' );

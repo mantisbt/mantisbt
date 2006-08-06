@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.273 $
+	# $Revision: 1.274 $
 	# $Author: vboctor $
-	# $Date: 2006-05-18 05:14:27 $
+	# $Date: 2006-08-06 07:12:41 $
 	#
-	# $Id: strings_english.txt,v 1.273 2006-05-18 05:14:27 vboctor Exp $
+	# $Id: strings_english.txt,v 1.274 2006-08-06 07:12:41 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -603,6 +603,9 @@ $s_closed_bug_button = 'Close Issue';
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Note has been successfully updated...';
 $s_edited_on = 'edited on: ';
+
+# file_api.php
+$s_show_content ='Show Content';
 
 # index.php
 $s_click_to_login = 'Click here to login';
