@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.305 2006-08-06 07:12:41 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.306 2006-08-09 07:55:01 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1733,4 +1733,20 @@
 	#   )
 	# );
 	$g_custom_group_actions = array();
+
+	#####################
+	# Wiki Integration
+	#####################
+ 
+	# Wiki Integration Enabled?
+	$g_wiki_enable = OFF;
+
+	# Wiki Engine
+	$g_wiki_engine = 'dokuwiki';
+ 
+	# Wiki namespace to be used as root for all pages relating to this mantis installation.
+	$g_wiki_root_namespace = 'mantis';
+ 
+	# URL under which the wiki engine is hosted.  Must be on the same server.
+	$g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.193 2006-05-16 23:59:28 vboctor Exp $
+	# $Id: html_api.php,v 1.194 2006-08-09 07:55:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -57,6 +57,7 @@
 	require_once( $t_core_dir . 'authentication_api.php' );
 	require_once( $t_core_dir . 'user_api.php' );
 	require_once( $t_core_dir . 'rss_api.php' );
+	require_once( $t_core_dir . 'wiki_api.php' );
 
 	$g_rss_feed_url = null;
 
@@ -517,6 +518,12 @@
 					$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
 				}
 
+				# Project Wiki
+				if ( wiki_is_enabled() ) {
+					$t_current_project = helper_get_current_project();
+					$t_menu_options[] = '<a href="wiki.php?type=project&id=' . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
+				}
+
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 				$t_show_access = min( config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ), ADMINISTRATOR );
 				if ( access_has_global_level( $t_show_access) || access_has_any_project( $t_show_access ) )  {
@@ -874,22 +881,28 @@
 
 	# --------------------
 	# Print an html button inside a form
-	function html_button ( $p_action, $p_button_text, $p_fields = null ) {
+	function html_button ( $p_action, $p_button_text, $p_fields = null, $p_method = 'post' ) {
 		$p_action		= urlencode( $p_action );
 		$p_button_text	= string_attribute( $p_button_text );
 		if ( null === $p_fields ) {
 			$p_fields = array();
 		}
-
-		PRINT "<form method=\"post\" action=\"$p_action\">\n";
-
+		
+		if ( strtolower( $p_method ) == 'get' ) {
+			$t_method = 'get';
+		} else {
+			$t_method = 'post';
+		}
+	 
+		PRINT "<form method=\"$t_method\" action=\"$p_action\">\n";
+	 
 		foreach ( $p_fields as $key => $val ) {
 			$key = string_attribute( $key );
 			$val = string_attribute( $val );
-
+	 
 			PRINT "	<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 		}
-
+	 
 		PRINT "	<input type=\"submit\" class=\"button\" value=\"$p_button_text\" />\n";
 		PRINT "</form>\n";
 	}
@@ -1097,6 +1110,19 @@
 			html_button( 'bug_actiongroup_page.php',
 						 lang_get( 'delete_bug_button' ),
 						 array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+		}
+	}
+
+	# --------------------
+	# Print a button to create a wiki page
+	function html_button_wiki( $p_bug_id ) {
+		if ( ON == config_get( 'wiki_enable' ) ) {
+			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+				html_button( 'wiki.php',
+							 lang_get_defaulted( 'Wiki' ),
+							 array( 'id' => $p_bug_id, 'type' => 'issue' ),
+							 'get' );
+			}
 		}
 	}
 
