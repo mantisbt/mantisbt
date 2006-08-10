@@ -9,6 +9,7 @@ Mantis ChangeLog
 - Added Config: $g_default_bug_reproducibility - default bug reproducibility.
 - Added Config: $g_default_bug_category - default bug category.
 - Added Language: polish_utf8 (thanks to Bartosz Tomasik)
+- Updated Language: romanian (thanks to Cristian Navalici)
 
 2005.09.11  -  1.0.0rc2
 

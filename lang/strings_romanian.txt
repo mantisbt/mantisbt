@@ -8,11 +8,11 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	#		    Doru Ilasi <doru@aplix.org>
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:09:11 $
+	# $Revision: 1.86 $
+	# $Author: vboctor $
+	# $Date: 2006-08-10 05:18:50 $
 	#
-	# $Id: strings_romanian.txt,v 1.85 2006-02-20 09:09:11 bigbadger Exp $
+	# $Id: strings_romanian.txt,v 1.86 2006-08-10 05:18:50 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,15 +22,15 @@ $s_charset = 'iso-8859-2';
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Muta';
 $s_actiongroup_menu_copy = 'Copiaza';
-$s_actiongroup_menu_assign = 'Assigneaza';
+$s_actiongroup_menu_assign = 'Asigneaza';
 $s_actiongroup_menu_close = 'Inchide';
 $s_actiongroup_menu_delete = 'Sterge';
 $s_actiongroup_menu_resolve = 'Rezolva';
 $s_actiongroup_menu_update_priority = 'Modifica prioritatea';
 $s_actiongroup_menu_update_status = 'Modifca starea';
 $s_actiongroup_menu_update_view_status = 'Modifica starea reviziei';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_category = 'Updateaza categoria';
+$s_actiongroup_menu_set_sticky = 'Seteaza/Deseteaza Lipicios';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Cerintele selectate';
 
@@ -53,187 +53,187 @@ $s_unassigned_projects = 'Proiecte nealocate';
 $s_print = 'Tipareste';
 $s_jump = 'Salt';
 $s_copy_users = 'Copiaza utilizatori';
-$s_copy_categories_from = 'Copy Categories From';
-$s_copy_categories_to = 'Copy Categories To';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'Bug History';
-$s_field = 'Field';
-$s_old_value = 'Old Value';
-$s_new_value = 'New Value';
-$s_date_modified = 'Date Modified';
+$s_copy_categories_from = 'Copiaza categorii din';
+$s_copy_categories_to = 'Copiaza categorii catre';
+$s_copy_users_from = 'Copiaza userii din';
+$s_copy_users_to = 'Copiaza userii catre';
+$s_bug_history = 'Istoricul bugurilor';
+$s_field = 'Camp';
+$s_old_value = 'Vechea valoare';
+$s_new_value = 'Noua valoare';
+$s_date_modified = 'Data modificarii';
 $s_bugnote = 'Bugnote';
-$s_change = 'Change';
+$s_change = 'Schimba';
 $s_bugnote_view_state = 'Bugnote View State';
-$s_bug_monitor = 'Bug Monitored';
-$s_bug_end_monitor = 'Bug End Monitor';
-$s_announcement = 'Announcement';
-$s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = 'Delete Bugnote';
-$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-$s_bug_relationships = 'Relationships';
-$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-$s_empty_password_button = 'Use Empty Password';
+$s_bug_monitor = 'Bug Monitorizat';
+$s_bug_end_monitor = 'Sfarsitul monitorizarii Bugului';
+$s_announcement = 'Anunt';
+$s_stays_on_top = 'Sta deasupra';
+$s_delete_bugnote_button = 'Sterge Bugnote';
+$s_delete_bugnote_sure_msg = 'Sunteti sigur ca doriti stergerea acestui bugnote?';
+$s_bug_relationships = 'Relatii';
+$s_empty_password_sure_msg = 'Userul are o parola goala. Sunteti sigur ca asta doriti?';
+$s_empty_password_button = 'Foloseste Parola Goala';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
+$s_duplicate_of = 'duplicat al %id';
+$s_has_duplicate = 'are duplicatul %id';
+$s_related_to = 'referitor la %id';
+$s_dependant_on = 'depinzand de %id';
 $s_blocks = 'blocks %id';
 
-$s_new_bug = 'New Bug';
-$s_bugnote_added = 'Bugnote Added';
-$s_bugnote_edited = 'Bugnote Edited';
-$s_bugnote_deleted = 'Bugnote Deleted';
-$s_summary_updated = 'Summary Updated';
-$s_description_updated = 'Description Updated';
-$s_additional_information_updated = 'Additional Information Updated';
+$s_new_bug = 'Nou Bug';
+$s_bugnote_added = 'Bugnote Adaugat';
+$s_bugnote_edited = 'Bugnote Editat';
+$s_bugnote_deleted = 'Bugnote Sters';
+$s_summary_updated = 'Sumar updatat';
+$s_description_updated = 'Descriere updatata';
+$s_additional_information_updated = 'Informatie Aditionala Updatata';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-$s_file_added = 'File Added: ';
-$s_file_deleted = 'File Deleted: ';
-$s_bug_deleted = 'Bug Deleted';
+$s_file_added = 'Fisier Adaugat: ';
+$s_file_deleted = 'Fisier Sters: ';
+$s_bug_deleted = 'Bug Sters';
 
-$s_make_private = 'Make Private';
-$s_make_public = 'Make Public';
+$s_make_private = 'Fa privat';
+$s_make_public = 'Fa public';
 
-$s_create_new_project_link = 'Create New Project';
+$s_create_new_project_link = 'Creeaza proiect nou';
 
-$s_login_link = 'Login';
+$s_login_link = 'Logare';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-$s_move_bugs_conf_msg = 'Move bugs to';
-$s_copy_bugs_conf_msg = 'Copy issues to';
-$s_assign_bugs_conf_msg = 'Assign bugs to';
-$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-$s_priority_bugs_conf_msg = 'Choose bugs priority';
-$s_status_bugs_conf_msg = 'Choose bugs status';
+$s_bug_actiongroup_failed = 'Nu aveti permisiile necesare pentru a realiza aceasta actiune asupra urmatoarelor buguri: ';
+$s_bug_actiongroup_access = 'Nu aveti permisiile necesare pentru a realiza aceasta actiune.';
+$s_bug_actiongroup_status = 'Acest lucru nu poate fi schimbat catre starea ceruta';
+$s_bug_actiongroup_category = 'Acest lucru nu poate fi schimbat catre categoria ceruta';
+$s_close_bugs_conf_msg = 'Sunteti sigur ca doriti inchiderea acestor buguri?';
+$s_delete_bugs_conf_msg = 'Sunteti sigur ca doriti stergerea acestor buguri?';
+$s_move_bugs_conf_msg = 'Muta bugurile in';
+$s_copy_bugs_conf_msg = 'Copiaza bugurile in';
+$s_assign_bugs_conf_msg = 'Atribuie bugurile in';
+$s_resolve_bugs_conf_msg = 'Alege rezolutia bugurilor';
+$s_priority_bugs_conf_msg = 'Schimba prioritatea bugurilor';
+$s_status_bugs_conf_msg = 'Schimba statusul bugurilor';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Close Bugs' ;
-$s_delete_group_bugs_button = 'Delete Bugs' ;
-$s_move_group_bugs_button = 'Move Bugs' ;
-$s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Assign Bugs' ;
-$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-$s_priority_group_bugs_button = 'Update Priority' ;
-$s_status_group_bugs_button = 'Update Status' ;
-$s_category_group_bugs_button = 'Update Category';
-$s_view_status_group_bugs_button = 'Update View Status';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_bugs_conf_msg = 'Sunteti sigur ca doriti sa setati/desetati aceste lucruri "sticky"?';
+$s_close_group_bugs_button = 'Inchide Buguri' ;
+$s_delete_group_bugs_button = 'Sterge Buguri' ;
+$s_move_group_bugs_button = 'Muta Buguri' ;
+$s_copy_group_bugs_button = 'Copiaza Aspecte' ;
+$s_assign_group_bugs_button = 'Atribuie Buguri' ;
+$s_resolve_group_bugs_button = 'Rezolva Buguri' ;
+$s_priority_group_bugs_button = 'Updateaza Prioritatea' ;
+$s_status_group_bugs_button = 'Updateaza Statusul' ;
+$s_category_group_bugs_button = 'Updateaza Categoria';
+$s_view_status_group_bugs_button = 'Updateaza Statusul Vizualizarii';
+$s_set_sticky_group_bugs_button = 'Seteaza/Deseteaza Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
+$s_graph_imp_status_title = 'Grafice sinteza dupa status' ;
+$s_graph_imp_priority_title = 'Grafice sinteza dupa prioritate' ;
+$s_graph_imp_severity_title = 'Grafice sinteza dupa severitate';
+$s_graph_imp_category_title = 'Grafice sinteza dupa categorie';
+$s_graph_imp_resolution_title = 'Grafice sinteza dupa rezolutie';
+$s_by_status_pct = 'dupa procentul statusului';
+$s_by_priority_pct = 'dupa procentul prioritatii';
+$s_by_severity_pct = 'dupa procentul severitatii';
+$s_by_category_pct = 'dupa procentul categoriei';
+$s_by_resolution_pct = 'dupa procentul rezolutiei';
+$s_by_severity_mix = 'dupa severitate si status';
+$s_by_priority_mix = 'dupa prioritate si status';
+$s_by_resolution_mix = 'dupa rezolutie si status';
+$s_synthesis_link = 'Sinteza';
+$s_status_link = 'Per stare';
+$s_priority_link = 'Per prioritate';
+$s_severity_link = 'Per severitate';
+$s_category_link = 'Per categorie';
+$s_resolution_link = 'Per rezolutie';
+$s_legend_still_open = 'Inca deschis';
+$s_legend_resolved = 'Rezolvat';
+$s_legend_assigned = 'Atribuit';
 $s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
+$s_legend_opened = 'Deschise';
+$s_legend_closed = 'Inchise';
+$s_legend_reported = 'Reportate';
 $s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_not_enough_data = 'Nu sunt suficiente informatii pentru a crea un grafic';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = 'Afiseaza numai selectate';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
+$s_printing_preferences_title = 'Alege campurile pentru tiparire';
+$s_printing_options_link = 'Optiuni de Tiparire';
 
 # word and excel export
 $s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_date = 'Data pt bugnote';
+$s_bugnote_description = 'Decriere Bugnote';
 
-$s_error_no_proceed = 'Please use the \'Back\' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Va rugam folositi butonul \'Inapoi\' in browserul dvs pentru a va intoarce la pagina precedenta. Acolo puteti corecta orice fel de problema identificata cu aceasta eroare sau puteti selecta alta actiune. De asemenea puteti alege direct o optiune din bara de meniu pentru a naviga catre o noua sectiune.';
 
-# ERROR strings
+# EROARE strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'EROARE: O eroare a aparut in timpul aceste actiuni.  Sunteti rugat sa semnalati acest lucru administratorului local.';
 $MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
 $MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu ati specificat un fisier.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: Acest tip de fisier este interzis.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'EROARE: Acest tip de fisier este interzis.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Acest cont este protejat si nu poate fi accesat pana cand protectia nu este anulata.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'EROARE: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'EROARE: Un proiect cu acest nume exista deja.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana cand protectia nu este anulata.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'EROARE: Acces Interzis.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'EROARE: Uploadul fisierului esuat. Cere administratorului sa ruleze scriptul admin_check pentru depanarea acestei probleme.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'EROARE: Uploadul fisierului esuat. Cel mai probabil deoarece marimea fisierului este mai mare decat cea acceptata de PHPul instalat.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'EROARE: Un parametru cerut pe aceasta pagina nu a fost gasit.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Acest nume de utilizator este deja folosit. Mergeti inapoi si si selectati un altul.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Optiunea de configurare \'%s\' nu a fost gasita.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Sirul \'%s\' nu a fost gasit.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'EROARE: Bugnote nu a fost gasit.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'EROARE: Proiectul nu a fost gasit.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campul bazei de date \'%s\' nu a fost gasit.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'EROARE: Nu pot sa ma conectez la serverul FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'EROARE: Un proiect cu acest nume exista deja. Va rugam mergeti inapoi si selectati un nume diferit.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Numele proiectului specificat este invalid. Numele proiectelor nu pot fi goale.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'EROARE: Utilizatorul nu a fost gasit.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informatia de logare stocata de browserul dvs este invalida. Probabil contul dvs a fost sters?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nu au putut fi gasite preferintele pentru acest user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'EROARE: Obiectul stiri nu a fost gasit.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Parola nu confirma verificarea.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'EROARE: Un tablou a fost dorit dar un sir a fost primit.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Un sir a fost dorit dar un tablou a fost primit';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Un numar a fost asteptat pentru %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtrul %d nu a fost gasit.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtrul pe care incercati sa-l utilizati este prea vechi pentru a fi upgradat, va rugam recreati-l';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'EROARE: Email invalid.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilul nu a fost gasit.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'EROARE: Tip de fisier nepermis pentru upload.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'EROARE: Acesta este un fisier duplicat. Va rugam stergeti mai intai fisierul.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'EROARE: Cale de upload invalida.  Directorul ori nu exista, ori nu este permis la scriere pentru serverul web';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'EROARE: You cannot set a bug as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'EROARE: Invalid value for field';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'EROARE: LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'EROARE: LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'EROARE: Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'EROARE: Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'EROARE: Database selection failed.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'EROARE: No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'EROARE: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'EROARE: Version not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'EROARE: The username is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
@@ -244,8 +244,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "EROARE: There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "EROARE: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
@@ -259,7 +259,7 @@ $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access leve
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_cookies_disabled = 'EROARE: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Intoarcere';
@@ -486,7 +486,7 @@ $s_bug_close_msg       = 'Bug-ul a fost inchis...';
 $s_close_immediately   = 'Inchide imediat:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Close Bug';
+$s_closed_bug_title = 'Inchide Bug';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Bug-ul a fost sters...';
@@ -1049,7 +1049,6 @@ $s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'nimic';
-$s_current = 'current';
 $s_search ='Cauta';
 $s_view_prev_link = 'Precedent';
 $s_view_next_link = 'Urmator';
@@ -1139,7 +1138,7 @@ $s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
 $s_custom_field_require_resolved = 'Required On Resolve';
-$s_custom_field_require_closed = 'Required On Close';
+$s_custom_field_require_closed = 'Required On Inchide';
 
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
@@ -1152,9 +1151,9 @@ $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) th
 $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Hide Status';
-$s_filter_closed = 'Closed';
+$s_filter_closed = 'Inchided';
 $s_filter_resolved = 'Resolved';
-$s_hide_closed = "Hide Closed";
+$s_hide_closed = "Hide Inchided";
 $s_hide_resolved = "Hide Resolved";
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
@@ -1290,3 +1289,4 @@ $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
 ?>
+
