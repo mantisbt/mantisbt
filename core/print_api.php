@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.157 2006-05-18 13:00:28 vboctor Exp $
+	# $Id: print_api.php,v 1.158 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -15,6 +15,7 @@
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'prepare_api.php' );
 	require_once( $t_core_dir . 'profile_api.php' );
+	require_once( $t_core_dir . 'last_visited_api.php' );
 
 	### Print API ###
 
@@ -1431,5 +1432,33 @@
 	function print_rss( $p_feed_url, $p_title = '' ) {
 		$t_path = config_get( 'path' );
 		echo '<a href="', $p_feed_url, '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.gif" border="0" alt="', $p_title, '" width="26" height="13" /></a>';
+	}
+
+	# --------------------
+	# Prints the recently visited issues.
+	function print_recently_visited() {
+		if ( OFF == config_get( 'recently_visited' ) ) {
+			return;
+		}
+
+		$t_ids = last_visited_get_array();
+		
+		if ( count( $t_ids ) == 0 ) {
+			return;
+		}
+
+		echo '<div align="right"><small>' . lang_get( 'recently_visited' ) . ': ';		
+		$t_first = true;
+
+		foreach( $t_ids as $t_id ) {
+			if ( !$t_first ) {
+				echo ', ';
+			} else {
+				$t_first = false;
+			}
+
+			echo string_get_bug_view_link( $t_id );
+		}
+		echo '</small></div>';
 	}
 ?>

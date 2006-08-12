@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.141 2006-05-06 02:58:43 vboctor Exp $
+	# $Id: filter_api.php,v 1.142 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2511,7 +2511,7 @@
 		$t_fields = helper_get_columns_to_view();
 		$t_n_fields = count( $t_fields );
 		for ( $i=0; $i < $t_n_fields; $i++ ) {
-			if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+			if ( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
 				unset( $t_fields[$i] );
 			}
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.4 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: tokens_api.php,v 1.5 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	### TOKENS API ###
@@ -27,16 +27,22 @@
 	# 9. return 'default param' from token_add is token not found
 
 	# --------------------
-	function token_ensure_owner( $p_token_id, $p_owner_id ) {
+	function token_ensure_owner( $p_token_id, $p_user_id = null ) {
 		$c_token_id = db_prepare_int( $p_token_id );
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+
+		if( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
 
 		$query = "SELECT owner
 				          	FROM $t_tokens_table
 				          	WHERE id='$c_token_id'";
 		$result = db_query( $query );
 
-		if( db_result( $result ) != $p_owner_id ) {
+		if( db_result( $result ) != $c_user_id ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
@@ -48,14 +54,18 @@
 	}
 
 	# --------------------
-	function token_delete_by_owner( $p_owner_owner ) {
-		$c_token_owner = db_prepare_int( $p_token_owner );
+	function token_delete_by_owner( $p_user_id = null ) {
+		if( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
 
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
 		# Remove
 		$query = "DELETE FROM $t_tokens_table
-		          	WHERE owner='$c_token_owner'";
+		          	WHERE owner='$c_user_id'";
 		db_query( $query );
 
 		return true;
@@ -76,15 +86,20 @@
 	}
 
 	# --------------------
-	function token_delete_by_type_owner( $p_token_type, $p_token_owner ) {
+	function token_delete_by_type_owner( $p_token_type, $p_user_id ) {
 		$c_token_type = db_prepare_int( $p_token_type );
-		$c_token_owner = db_prepare_int( $p_token_owner );
+
+		if ( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
 
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
 		# Remove
 		$query = "DELETE FROM $t_tokens_table
-		          	WHERE type='$c_token_type' and owner='$c_token_owner'";
+		          	WHERE type='$c_token_type' and owner='$c_user_id'";
 		db_query( $query );
 
 		return true;
@@ -100,7 +115,7 @@
 		          	WHERE id='$c_token_id'";
 		$result	= db_query( $query, 1 );
 
-		return( 1 == db_result( $result ) );
+		return( 1 == db_num_rows( $result ) );
 	}
 
 	# --------------------
@@ -113,23 +128,29 @@
 	}
 
 	# --------------------
-	function token_add( $p_token_value, $p_token_type = TOKEN_UNKNOWN, $p_token_owner = null ) {
+	function token_add( $p_token_value, $p_token_type = TOKEN_UNKNOWN, $p_user_id = null ) {
 		$c_token_type = db_prepare_int( $p_token_type );
 		$c_token_value = db_prepare_string ( $p_token_value );
 
-		if( $p_token_owner == null ) {
-			$c_token_owner = auth_get_current_user_id();
+		if ( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
 		} else {
-			$c_token_owner = db_prepare_int( $p_token_owner );
+			$c_user_id = db_prepare_int( $p_user_id );
 		}
+
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 		# insert
 		$query = "INSERT INTO $t_tokens_table
 		          		( type, owner, timestamp, value )
 		          	 VALUES
-		          		( $c_token_type, $c_token_owner, " . db_now(). ",'$c_token_value' )";
+		          		( $c_token_type, $c_user_id, " . db_now(). ",'$c_token_value' )";
 		db_query( $query );
 		return db_insert_id( $t_tokens_table );
+	}
+	# --------------------
+	function token_set_value_by_type( $p_token_value, $p_token_type, $p_user_id = null ) {
+		token_delete_by_type_owner( $p_token_type, $p_user_id );
+		token_add( $p_token_value, $p_token_type, $p_user_id );
 	}
 	# --------------------
 	# This method does not generate an error if the token does not exist,
@@ -145,16 +166,52 @@
 		return true;
 	}
 	# --------------------
-	function token_get_value( $p_token_id ) {
+	function token_get_value( $p_token_id, $p_user_id = null ) {
 		$c_token_id = db_prepare_int( $p_token_id );
-		$c_token_owner = auth_get_current_user_id();
+
+		if ( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
+
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+
 		token_purge_expired();
-		token_ensure_owner( $c_token_id, $c_token_owner ) ;
+
 		$query = "SELECT value
 		          	FROM $t_tokens_table
-		          	WHERE id='$c_token_id'";
+		          	WHERE id='$c_token_id' AND owner='$c_user_id'";
 		$result = db_query( $query );
+		
+		if ( 0 == db_num_rows( $result ) ) {
+			return null;
+		}
+
+		return db_result( $result );
+	}
+	# --------------------
+	function token_get_value_by_type( $p_token_type, $p_user_id = null ) {
+		$c_token_type = db_prepare_int( $p_token_type );
+
+		if ( $p_user_id == null ) {
+			$c_user_id = auth_get_current_user_id();
+		} else {
+			$c_user_id = db_prepare_int( $p_user_id );
+		}
+
+		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+
+		$query = "SELECT value
+					FROM $t_tokens_table
+					WHERE owner='$c_user_id' AND type='$c_token_type'";
+
+		$result = db_query( $query, 1 );
+		
+		if ( 0 == db_num_rows( $result ) ) {
+			return null;
+		}
+
 		return db_result( $result );
 	}
 	# --------------------

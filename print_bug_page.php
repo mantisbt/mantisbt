@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.57 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: print_bug_page.php,v 1.58 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,7 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'string_api.php' );
+	require_once( $t_core_path.'last_visited_api.php' );
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -339,4 +340,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 </table>
 
-<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ?>
+<?php
+	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ;
+
+	last_visited_issue( $f_bug_id );
+?>

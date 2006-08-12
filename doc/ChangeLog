@@ -8,6 +8,8 @@ Mantis ChangeLog
 - Added Config: $g_inline_file_exts - file extensions displayed inline
 - Added Config: $g_default_bug_reproducibility - default bug reproducibility.
 - Added Config: $g_default_bug_category - default bug category.
+- Added Config: $g_recently_visited - Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
+- Added Config: $g_recently_visited_count - The maximum number of issues to keep in the recently visited list.
 - Added Language: polish_utf8 (thanks to Bartosz Tomasik)
 - Updated Language: romanian (thanks to Cristian Navalici)
 

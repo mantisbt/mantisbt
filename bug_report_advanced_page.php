@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.56 2006-05-18 13:00:27 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.57 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -18,6 +18,7 @@
 
 	require_once( $t_core_path.'file_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
+	require_once( $t_core_path.'last_visited_api.php' );
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
@@ -108,6 +109,8 @@
 
 	html_page_top1( lang_get( 'report_bug_link' ) );
 	html_page_top2();
+
+	print_recently_visited();
 ?>
 
 <br />

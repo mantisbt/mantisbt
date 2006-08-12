@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.13 2006-01-24 03:50:05 thraxisp Exp $
+	# $Id: my_view_page.php,v 1.14 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,6 +16,7 @@
 
 	require_once( $t_core_path . 'compress_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );
+	require_once( $t_core_path . 'last_visited_api.php' );
 
 	auth_ensure_user_authenticated();
 
@@ -30,6 +31,8 @@
 	}
 
 	html_page_top2();
+	
+	print_recently_visited();
 
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
 

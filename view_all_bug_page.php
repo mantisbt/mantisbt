@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.60 $
-	# $Author: thraxisp $
-	# $Date: 2005-01-29 02:26:48 $
+	# $Revision: 1.61 $
+	# $Author: vboctor $
+	# $Date: 2006-08-12 08:04:13 $
 	#
-	# $Id: view_all_bug_page.php,v 1.60 2005-01-29 02:26:48 thraxisp Exp $
+	# $Id: view_all_bug_page.php,v 1.61 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,7 @@
 
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
+	require_once( $t_core_path.'last_visited_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
@@ -50,6 +51,8 @@
 	}
 
 	html_page_top2();
+
+	print_recently_visited();
 
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 

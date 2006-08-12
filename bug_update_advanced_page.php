@@ -1,18 +1,14 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.88 2006-05-18 13:00:28 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.89 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	# Show the advanced update bug options
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -21,6 +17,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
+	require_once( $t_core_path.'last_visited_api.php' );
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -47,9 +44,11 @@
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
+	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	html_page_top2();
+
+	print_recently_visited();
 ?>
-<?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
-<?php html_page_top2() ?>
 
 <br />
 <form method="post" action="bug_update.php">
@@ -527,6 +526,9 @@
 </table>
 </form>
 
-<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ); ?>
+<?php
+	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
+	html_page_bottom1( __FILE__ );
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	last_visited_issue( $f_bug_id );
+?>

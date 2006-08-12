@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.78 2006-08-09 07:55:01 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.79 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -19,6 +19,7 @@
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'relationship_api.php' );
+	require_once( $t_core_path.'last_visited_api.php' );
 
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_history		= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
@@ -43,6 +44,8 @@
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_page_top2();
+
+	print_recently_visited();
 
 	$t_access_level_needed = config_get( 'view_history_threshold' );
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
@@ -536,4 +539,6 @@
 	}
 
 	html_page_bottom1( __FILE__ );
+
+	last_visited_issue( $f_bug_id );
 ?>

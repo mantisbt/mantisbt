@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.57 2006-05-18 05:14:27 vboctor Exp $
+	# $Id: constant_inc.php,v 1.58 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -335,9 +335,10 @@
 	define( 'REMINDER', 1 );
 
 	# token types
-	define( 'TOKEN_UNKNOWN',	0 );
-	define( 'TOKEN_FILTER',		1 );
-	define( 'TOKEN_GRAPH',		2 );
+	define( 'TOKEN_UNKNOWN',		0 );
+	define( 'TOKEN_FILTER',			1 );
+	define( 'TOKEN_GRAPH',			2 );
+	define( 'TOKEN_LAST_VISITED',	3 );
 
 	# config types
 	define( 'CONFIG_TYPE_INT', 1 );

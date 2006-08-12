@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.275 $
+	# $Revision: 1.276 $
 	# $Author: vboctor $
-	# $Date: 2006-08-09 07:55:01 $
+	# $Date: 2006-08-12 08:04:14 $
 	#
-	# $Id: strings_english.txt,v 1.275 2006-08-09 07:55:01 vboctor Exp $
+	# $Id: strings_english.txt,v 1.276 2006-08-12 08:04:14 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1063,6 +1063,7 @@ $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'none';

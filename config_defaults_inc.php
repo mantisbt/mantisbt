@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.306 2006-08-09 07:55:01 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.307 2006-08-12 08:04:13 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1749,4 +1749,14 @@
  
 	# URL under which the wiki engine is hosted.  Must be on the same server.
 	$g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
+	
+	#####################
+	# Recently Visited
+	#####################
+
+	# Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
+	$g_recently_visited = ON;
+	
+	# The maximum number of issues to keep in the recently visited list.
+	$g_recently_visited_count = 5;
 ?>
