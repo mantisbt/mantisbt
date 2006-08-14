@@ -6,17 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.121 2005-08-04 20:57:50 thraxisp Exp $
+	# $Id: email_api.php,v 1.122 2006-08-14 08:32:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	define( 'PHPMAILER_PATH', $t_core_dir . 'phpmailer' . DIRECTORY_SEPARATOR );
 
+	define( 'PHPMAILER_PATH', $t_core_dir . 'phpmailer' . DIRECTORY_SEPARATOR );
+	
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'custom_field_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
+	require_once( $t_core_dir . 'email_queue_api.php' );
 	require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
 	# reusable object of class SMTP
@@ -353,8 +355,12 @@
 		# Send signup email regardless of mail notification pref
 		# or else users won't be able to sign up
 		if( !is_blank( $t_email ) ) {
-			email_send( $t_email, $t_subject, $t_message );
+			email_store( $t_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, "signup=$t_email, hash=$p_confirm_hash, id=$p_user_id" );
+
+			if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+				email_send_all();
+			}
 		}
 
 #		lang_pop(); # see above
@@ -363,7 +369,6 @@
 	# --------------------
 	# Send confirm_hash url to user forgets the password
 	function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-
 		if ( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 			return;
 		}
@@ -385,8 +390,12 @@
 		# Send password reset regardless of mail notification prefs
 		# or else users won't be able to receive their reset pws
 		if( !is_blank( $t_email ) ) {
-			email_send( $t_email, $t_subject, $t_message );
+			email_store( $t_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, "password_reset=$t_email" );
+
+			if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+				email_send_all();
+			}
 		}
 
 		lang_pop();
@@ -414,8 +423,12 @@
 						lang_get( 'new_account_do_not_reply' );
 
 			if( !is_blank( $t_recipient_email ) ) {
-				email_send( $t_recipient_email, $t_subject, $t_message );
+				email_store( $t_recipient_email, $t_subject, $t_message );
 				log_event( LOG_EMAIL, "new_account_notify=$t_recipient_email" );
+
+				if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+					email_send_all();
+				}
 			}
 
 			lang_pop();
@@ -452,6 +465,10 @@
 					lang_pop();
 				}
 			}
+		}
+
+		if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+			email_send_all();
 		}
 
 		return $t_ok;
@@ -531,7 +548,6 @@
 	# send notices to all the handlers of the parent bugs still open when a child bug is resolved/closed
 	# MASC RELATIONSHIP
 	function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
-
 		# retrieve all the relationships in which the bug is the destination bug
 		$t_relationship = relationship_get_all_dest( $p_bug_id );
 		$t_relationship_count = count( $t_relationship );
@@ -608,13 +624,7 @@
 		email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
 	}
 	# --------------------
-	# this function sends the actual email
-	# if $p_exit_on_error == true (default) - calls exit() on errors, else - returns true on success and false on errors
-	# @@@@ (thraxisp) $p_header doesn't work as expected, it adds a list of names to the bcc list, rather than headers
-	#         this is ok for now as nothing uses it
-	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='', $p_exit_on_error=true ) {
-		global $g_phpMailer_smtp;
-
+	function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = string_email( trim( $p_subject ) );
 		$t_message   = string_email_links( trim( $p_message ) );
@@ -626,16 +636,58 @@
 			return;
 		}
 
-		# for debugging only
-		#PRINT $t_recipient.'<br />'.$t_subject.'<br />'.$t_message.'<br />'.$t_headers;
-		#exit;
-		#PRINT '<br />xxxRecipient ='.$t_recipient.'<br />';
-		#PRINT 'Headers ='.nl2br($t_headers).'<br />';
-		#PRINT $t_subject.'<br />';
-		#PRINT nl2br($t_message).'<br />';
-		#exit;
+		$t_email_data = new EmailData;
 
-		$t_debug_email = config_get('debug_email');
+		$t_email_data->email = $t_recipient;
+		$t_email_data->subject = $t_subject;
+		$t_email_data->body = $t_message;
+		$t_email_data->metadata = array();
+		$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
+		$t_email_data->metadata['priority'] = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
+		$t_email_data->metadata['charset'] =  lang_get( 'charset', lang_get_current() );
+
+		$t_email_id = email_queue_add( $t_email_data );
+		
+		return $t_email_id; 
+	}
+
+	# --------------------
+	# This function sends all the emails that are stored in the queue.  If a failure occurs, then the
+	# function exists.  This function will be called after storing emails in case of synchronous
+	# emails, or will be called from a cronjob in case of asynchronous emails.
+	# @@@ In case of synchronous email sending, we may get a race condition where two requests send the same email.
+	function email_send_all() {
+		$t_ids = email_queue_get_ids();
+
+		$t_emails_recipients_failed = array();
+		foreach ( $t_ids as $t_id ) {
+			$t_email_data = email_queue_get( $t_id );
+
+			# check if email was not found.  This can happen if another request picks up the email first and sends it.
+			if ( $t_email_data === false ) {
+				continue;
+			}
+
+			# if unable to place the email in the email server queue, then the connection to the server is down,
+			# and hence no point to continue trying with the rest of the emails.
+			if ( !email_send( $t_email_data ) ) {
+				return;
+			}
+		}
+	}
+
+	# --------------------
+	# This function sends an email message based on the supplied email data.
+	function email_send( $p_email_data ) {
+		global $g_phpMailer_smtp;
+
+		$t_email_data = $p_email_data;
+
+		$t_recipient = trim( $t_email_data->email );
+		$t_subject   = string_email( trim( $t_email_data->subject ) );
+		$t_message   = string_email_links( trim( $t_email_data->body ) );
+
+		$t_debug_email = config_get( 'debug_email' );
 
 		# Visit http://phpmailer.sourceforge.net
 		# if you have problems with phpMailer
@@ -643,8 +695,9 @@
 		$mail = new PHPMailer;
 
 		$mail->PluginDir = PHPMAILER_PATH;
+
 		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
-		$mail->SetLanguage( lang_get( 'phpmailer_language', lang_get_current() ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
+		$mail->SetLanguage( lang_get( 'phpmailer_language', config_get( 'default_language' ) ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
 
 		# Select the method to send mail
 		switch ( config_get( 'phpMailer_method' ) ) {
@@ -659,6 +712,7 @@
 						# SMTP collection is always kept alive
 						#
 						$mail->SMTPKeepAlive = true;
+
 						# @@@ yarick123: It is said in phpMailer comments, that phpMailer::smtp has private access.
 						# but there is no common method to reset PHPMailer object, so
 						# I see the smallest evel - to initialize only one 'private'
@@ -672,76 +726,43 @@
 					}
 					break;
 		}
-		$mail->IsHTML(false);              # set email format to plain text
+
+		$mail->IsHTML( false );              # set email format to plain text
 		$mail->WordWrap = 80;              # set word wrap to 50 characters
-		$mail->Priority = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
-		$mail->CharSet = lang_get( 'charset', lang_get_current() );
+		$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
+		$mail->CharSet = $t_email_data->metadata['charset'];
 		$mail->Host     = config_get( 'smtp_host' );
 		$mail->From     = config_get( 'from_email' );
 		$mail->Sender   = config_get( 'return_path_email' );
 		$mail->FromName = '';
+
 		if ( !is_blank( config_get( 'smtp_username' ) ) ) {     # Use SMTP Authentication
 			$mail->SMTPAuth = true;
 			$mail->Username = config_get( 'smtp_username' );
 			$mail->Password = config_get( 'smtp_password' );
 		}
 
-		$t_debug_to = '';
-		# add to the Recipient list
-		$t_recipient_list = split(',', $t_recipient);
-		while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
-			if ( !is_blank( $t_recipient ) ) {
-				if ( OFF === $t_debug_email ) {
-					$mail->AddAddress( $t_recipient, '' );
-				} else {
-					$t_debug_to .= !is_blank( $t_debug_to ) ? ', ' : '';
-					$t_debug_to .= $t_recipient;
-				}
-			}
-		}
-
-		# add to the BCC list
-		$t_debug_bcc = '';
-		$t_bcc_list = split(',', $p_header);
-		while(list(, $t_bcc) = each($t_bcc_list)) {
-			if ( !is_blank( $t_bcc ) ) {
-				if ( OFF === $t_debug_email ) {
-					$mail->AddBCC( $t_bcc, '' );
-				} else {
-					$t_debug_bcc .= !is_blank( $t_debug_bcc ) ? ', ' : '';
-					$t_debug_bcc .= $t_bcc;
-				}
-			}
-		}
-
 		if ( OFF !== $t_debug_email ) {
-			$t_message = "\n" . $t_message;
-
-			if ( !is_blank( $t_debug_bcc ) ) {
-				$t_message = 'Bcc: ' . $t_debug_bcc . "\n" . $t_message;
-			}
-
-			if ( !is_blank( $t_debug_to ) ) {
-				$t_message = 'To: '. $t_debug_to . "\n" . $t_message;
-			}
-
+			$t_message = 'To: '. $t_recipient . "\n\n" . $t_message;
 			$mail->AddAddress( $t_debug_email, '' );
+		} else {
+			$mail->AddAddress( $t_recipient, '' );
 		}
 
 		$mail->Subject = $t_subject;
-		$mail->Body    = make_lf_crlf( "\n".$t_message );
+		$mail->Body    = make_lf_crlf( "\n" . $t_message );
 
-		if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) )  {
-			$mail->AddCustomHeader( "Keywords: $p_category" );
+		foreach ( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
+			$mail->AddCustomHeader( "$t_key: $t_value" );
 		}
 
 		if ( !$mail->Send() ) {
-			PRINT "PROBLEMS SENDING MAIL TO: $p_recipient<br />";
-			PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
-			if ( $p_exit_on_error )  {
-				exit;
-			} else {
-				return false;
+			$t_success = false;
+		} else {
+			$t_success = true;
+
+			if ( $t_email_data->email_id > 0 ) {
+				email_queue_delete( $t_email_data->email_id );
 			}
 		}
 
@@ -753,7 +774,7 @@
 			$g_phpMailer_smtp = $mail->smtp;
 		}
 
-		return true;
+		return $t_success;
 	}
 
 	# --------------------
@@ -839,11 +860,16 @@
 							" \n\n$p_message";
 
 			if( ON == config_get( 'enable_email_notification' ) ) {
-				email_send( $t_email, $t_subject, $t_contents );
+				email_store( $t_email, $t_subject, $t_contents );
 			}
 
 			lang_pop();
 		}
+
+		if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+			email_send_all();
+		}
+
 		return $result;
 	}
 
@@ -881,7 +907,7 @@
 
 		# send mail
 		# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
-		$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
+		$t_ok = email_store( $t_user_email, $t_subject, $t_message, array( 'keywords' => $p_visible_bug_data['set_category'] ) );
 
 		return $t_ok;
 	}

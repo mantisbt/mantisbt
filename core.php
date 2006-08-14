@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.48 2005-07-25 22:55:49 vboctor Exp $
+	# $Id: core.php,v 1.49 2006-08-14 08:32:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -77,7 +77,6 @@
 		}
 	}
 
-
 	# Attempt to find the location of the core files.
 	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
@@ -139,7 +138,7 @@
 			header( $t_header );
 		}
 	}
-
+	
 	require_once( $t_core_path.'project_api.php' );
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 	require_once( $t_core_path.'access_api.php' );
@@ -153,5 +152,4 @@
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
 	}
-
 ?>

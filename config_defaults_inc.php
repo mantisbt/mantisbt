@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.307 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.308 2006-08-14 08:32:57 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -297,6 +297,12 @@
 	# and password will be used when logging in to the SMTP server.
 	$g_smtp_username = '';
 	$g_smtp_password = '';
+
+	# It is recommended to use a cronjob or a scheduler task to send emails.  
+	# The cronjob should typically run every 5 minutes.  If no cronjob is used,
+	# then user will have to wait for emails to be sent after performing an action
+	# which triggers notifications.  This slows user performance.
+	$g_email_send_using_cronjob = OFF;
 
 	# Specify whether e-mails should be sent with the category set or not.  This is tested
 	# with Microsoft Outlook.  More testing for this feature + other formats will be added
@@ -1294,7 +1300,8 @@
 	$g_mantis_tokens_table					= '%db_table_prefix%_tokens%db_table_suffix%';
 	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierarchy%db_table_suffix%';
 	$g_mantis_config_table					= '%db_table_prefix%_config%db_table_suffix%';
-	$g_mantis_database_table					= '%db_table_prefix%_database%db_table_suffix%';
+	$g_mantis_database_table				= '%db_table_prefix%_database%db_table_suffix%';
+	$g_mantis_email_table					= '%db_table_prefix%_email%db_table_suffix%';
 
 	###########################
 	# Mantis Enum Strings

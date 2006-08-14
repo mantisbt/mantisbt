@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.10 2006-05-17 00:49:38 vboctor Exp $
+	# $Id: schema.php,v 1.11 2006-08-14 08:32:57 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -315,4 +315,14 @@ $upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'),
              md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "old_value C(255) NOTNULL" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "new_value C(255) NOTNULL" ) );
+
+$upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_email_table'),"
+  email_id 		I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+  email		 	C(64) NOTNULL DEFAULT \" '' \",
+  subject		C(250) NOTNULL DEFAULT \" '' \",
+  submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
+  metadata 		XS NOTNULL,
+  body 			XS NOTNULL
+  ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
+$upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',config_get('mantis_email_table'),'email_id'));
 ?>
