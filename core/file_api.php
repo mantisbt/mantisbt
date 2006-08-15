@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.74 2006-08-06 07:12:41 vboctor Exp $
+	# $Id: file_api.php,v 1.75 2006-08-15 06:02:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -174,7 +174,7 @@
 
 			PRINT $t_href_start;
 			print_file_icon ( $t_file_display_name );
-			PRINT $t_href_end . '</a>&nbsp;' . $t_href_start . $t_file_display_name .
+			PRINT $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name .
 				$t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
