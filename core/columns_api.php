@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.14 2006-05-18 06:24:36 vboctor Exp $
+	# $Id: columns_api.php,v 1.15 2006-08-15 06:10:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -579,6 +579,14 @@
 			echo $t_last_updated;
 		}
 		echo '</td>';
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_date_submitted( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		$t_date_submitted = date( config_get( 'short_date_format' ), $p_row['date_submitted'] );
+
+		echo '<td class="center">', $t_date_submitted, '</td>';
 	}
 
 	# --------------------
