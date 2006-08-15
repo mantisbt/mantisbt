@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.57 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.58 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -248,7 +248,7 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
+		<input <?php echo helper_get_tab_index() ?> type="text" name="os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>" />
 	</td>
 </tr>
 

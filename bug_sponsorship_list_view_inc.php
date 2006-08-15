@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.13 2005-09-22 10:54:12 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.14 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,7 +71,7 @@
 	<tr class="row-1">
 		<td class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></td>
 		<td>
-			<form method="POST" action="bug_set_sponsorship.php">
+			<form method="post" action="bug_set_sponsorship.php">
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
 				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />

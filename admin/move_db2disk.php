@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.7 2005-05-01 16:20:23 thraxisp Exp $
+	# $Id: move_db2disk.php,v 1.8 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -151,6 +151,7 @@
 		}
 	}
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Mantis Administration - Move <?php echo $t_type ?> to Disk</title>

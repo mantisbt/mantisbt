@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.37 2006-04-10 11:48:05 vboctor Exp $
+	# $Id: relationship_api.php,v 1.38 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -686,15 +686,15 @@
 ?>
 <select name="<?php echo $p_select_name?>">
 <?php if ($p_include_any) { ?>
-<option value="-1" <?php echo ( $p_default_rel_type == -1 ? ' selected' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+<option value="-1" <?php echo ( $p_default_rel_type == -1 ? ' selected="selected"' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 <?php
     }
 ?>
-<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
-<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
-<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
-<option value="<?php echo BUG_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_DUPLICATE ? ' selected' : '' ) ?>><?php echo lang_get( 'duplicate_of' ) ?></option>
-<option value="<?php echo BUG_HAS_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_HAS_DUPLICATE ? ' selected' : '' ) ?>><?php echo lang_get( 'has_duplicate' ) ?></option>
+<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
+<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
+<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
+<option value="<?php echo BUG_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_DUPLICATE ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'duplicate_of' ) ?></option>
+<option value="<?php echo BUG_HAS_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_HAS_DUPLICATE ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'has_duplicate' ) ?></option>
 </select>
 <?php
 	}
@@ -704,10 +704,10 @@
 	function relationship_list_box_for_cloned_bug( $p_default_rel_type = -1 ) {
 ?>
 <select name="rel_type">
-<option value="-1"<?php echo ( $p_default_rel_type == -1 ? ' selected' : '' ) ?>><?php echo lang_get( 'no_relationship' ) ?></option>
-<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
-<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
-<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
+<option value="-1"<?php echo ( $p_default_rel_type == -1 ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'no_relationship' ) ?></option>
+<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
+<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
+<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
 </select>
 <?php
 	}

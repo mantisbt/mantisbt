@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.59 2006-05-18 13:00:28 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.60 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1182,7 +1182,7 @@
 			}
 
 			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple>';
+				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple="multiple">';
 			} else {
 				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
 			}
@@ -1190,7 +1190,7 @@
 			$t_selected_values = explode( '|', $t_custom_field_value );
  			foreach( $t_values as $t_option ) {
 				if( in_array( $t_option, $t_selected_values ) ) {
- 					echo '<option value="' . $t_option . '" selected> ' . $t_option . '</option>';
+ 					echo '<option value="' . $t_option . '" selected="selected"> ' . $t_option . '</option>';
  				} else {
  					echo '<option value="' . $t_option . '">' . $t_option . '</option>';
  				}
@@ -1203,7 +1203,7 @@
 			foreach( $t_values as $t_option ) {
 				echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $t_id . '[]"';
 				if( in_array( $t_option, $t_checked_values ) ) {
-					echo ' value="' . $t_option . '" checked>&nbsp;' . $t_option . '&nbsp;&nbsp;';
+					echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				} else {
 					echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				}

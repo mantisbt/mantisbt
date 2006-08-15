@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.37 2005-04-22 22:06:07 prichards Exp $
+	# $Id: bug_file_upload_inc.php,v 1.38 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,7 +68,7 @@
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript">
+<script type="text/javascript" language="JavaScript">
 <!--
 	SetDiv( "upload_form", g_div_upload_form );
 -->

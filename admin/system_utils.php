@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.8 2005-07-18 12:55:14 vboctor Exp $
+	# $Id: system_utils.php,v 1.9 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Mantis Administration - System Utilities</title>
@@ -70,7 +71,7 @@
 				}
 			?>
 		</SELECT>
-	<input type="submit" class="button" value="Copy" >
+	<input type="submit" class="button" value="Copy" />
 	</form>
 	</center></td></tr>
 

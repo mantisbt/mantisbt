@@ -18,7 +18,7 @@
 					<option value="1">mantis</option>
 					<option value="3">public</option>
 					</select>
-				<input type="submit" value="Switch" class="small">
+				<input type="submit" value="Switch" class="small" />
 			</td>
 		</tr>
 		</table>
@@ -42,7 +42,8 @@
 				<a href="">Logout</a>
 			</td>
 			<td class="right">
-				<input class="small" type="input" name="f_bug_id" size="6"><input class="small" type="submit" value="Jump">
+				<input class="small" type="input" name="f_bug_id" size="6" />
+				<input class="small" type="submit" value="Jump" />
 			</td>
 		</tr>
 		</table>
@@ -66,7 +67,7 @@
 				<option value="1">mantis</option>
 				<option value="3">public</option>
 				</select>
-			<input type="submit" value="Switch" class="small">
+			<input type="submit" value="Switch" class="small" />
 		</div>
 
 		<div class="menu-left">
@@ -80,7 +81,8 @@
 			<a href="">Logout</a>
 		</div>
 		<div class="menu-right">
-			&nbsp;<input class="small" type="input" name="f_bug_id" size="6"><input class="small" type="submit" value="Jump">
+			&nbsp;<input class="small" type="input" name="f_bug_id" size="6" />
+			<input class="small" type="submit" value="Jump" />
 		</div>
 
 		<!-- News -->
@@ -123,7 +125,7 @@
 		<tr>
 			<td class="form-title" colspan="2">
 				<div class="left"><span class="bold">Edit Account</span></div>
-				<div class="right">[ Account ][ <a href="">Change Preferences</a> ][ <a href="">Manage Profiles</a> ]</a>
+				<div class="right">[ Account ][ <a href="">Change Preferences</a> ][ <a href="">Manage Profiles</a> ]</div>
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -131,7 +133,7 @@
 				Username:
 			</td>
 			<td width="75%">
-				<input type="text" size="16" maxlength="32" name="f_username" value="prescience">
+				<input type="text" size="16" maxlength="32" name="f_username" value="prescience" />
 			</td>
 		</tr>
 		<tr class="row-2">
@@ -139,7 +141,7 @@
 				Password:
 			</td>
 			<td>
-				<input type="password" size="32" maxlength="32" name="f_password">
+				<input type="password" size="32" maxlength="32" name="f_password" />
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -147,7 +149,7 @@
 				Confirm Password:
 			</td>
 			<td>
-				<input type="password" size="32" maxlength="32" name="f_password_confirm">
+				<input type="password" size="32" maxlength="32" name="f_password_confirm" />
 			</td>
 		</tr>
 		<tr class="row-2">
@@ -155,7 +157,7 @@
 			    Email:
 			</td>
 			<td>
-			    <input type="text" size="32" maxlength="64" name="f_email" value="prescience@nowhere.com">
+			    <input type="text" size="32" maxlength="64" name="f_email" value="prescience@nowhere.com" />
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -168,7 +170,7 @@
 		</tr>
 		<tr>
 			<td class="left">
-				<input type="submit" value="Update User">
+				<input type="submit" value="Update User" />
 			</td>
 			<td>
 				&nbsp;
@@ -237,7 +239,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_new_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002500">
+				<input type="checkbox" name="f_bug_arr[]" value="0002500" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_new_color ?>">
 			</td>
@@ -265,7 +267,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_feedback_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002493">
+				<input type="checkbox" name="f_bug_arr[]" value="0002493" />
 			</td>
 				<td class="center" bgcolor="<?php echo $g_feedback_color ?>">
 			</td>
@@ -289,7 +291,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_acknowledged_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002416">
+				<input type="checkbox" name="f_bug_arr[]" value="0002416" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_acknowledged_color ?>">
 			</td>
@@ -317,7 +319,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_confirmed_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002177">
+				<input type="checkbox" name="f_bug_arr[]" value="0002177" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_confirmed_color ?>">
 			</td>
@@ -345,7 +347,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_assigned_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002478">
+				<input type="checkbox" name="f_bug_arr[]" value="0002478" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_assigned_color ?>">
 			</td>
@@ -373,7 +375,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_resolved_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0001158">
+				<input type="checkbox" name="f_bug_arr[]" value="0001158" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_resolved_color ?>">
 			</td>
@@ -401,7 +403,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="<?php echo $g_closed_color ?>">
-				<input type="checkbox" name="f_bug_arr[]" value="0002481">
+				<input type="checkbox" name="f_bug_arr[]" value="0002481" />
 			</td>
 			<td class="center" bgcolor="<?php echo $g_closed_color ?>">
 			</td>

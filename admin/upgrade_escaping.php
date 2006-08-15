@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_escaping.php,v 1.6 2005-07-22 23:46:23 vboctor Exp $
+	# $Id: upgrade_escaping.php,v 1.7 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,6 +42,7 @@
 		exit; # additional output can cause problems so let's just stop output here
 	}
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title> Mantis Administration - String Escaping Database Fixes </title>

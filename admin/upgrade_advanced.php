@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_advanced.php,v 1.6 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: upgrade_advanced.php,v 1.7 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,6 +22,7 @@
 	$upgrade_set->add_items( include( 'upgrades/0_18_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_19_inc.php' ) );
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title> Mantis Administration - Database Upgrade </title>

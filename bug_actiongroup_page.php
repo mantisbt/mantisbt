@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.52 2005-08-04 16:59:39 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.53 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -167,7 +167,7 @@
 <br />
 
 <div align="center">
-<form method="POST" action="bug_actiongroup.php">
+<form method="post" action="bug_actiongroup.php">
 <input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <?php
 	bug_group_action_print_hidden_fields( $f_bug_arr );

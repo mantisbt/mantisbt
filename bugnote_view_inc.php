@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.30 2005-05-16 12:56:05 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.31 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -177,7 +177,7 @@
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
+<script type="text/javascript" language="JavaScript">
 <!--
 	SetDiv( "bugnotes", g_div_bugnotes );
 // -->

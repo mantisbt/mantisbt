@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.25 2005-04-26 18:22:57 thraxisp Exp $
+	# $Id: bugnote_add_inc.php,v 1.26 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -79,7 +79,7 @@
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
+<script type="text/javascript" language="JavaScript">
 <!--
 	SetDiv( "bugnote_add", g_div_bugnote_add );
 // -->

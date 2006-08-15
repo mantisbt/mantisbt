@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.142 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: filter_api.php,v 1.143 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1718,7 +1718,7 @@
 							<?php
 							if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 								?>
-		<script language="Javascript">
+		<script type="text/javascript" language="JavaScript">
 		<!--
 			function SwitchDateFields() {
 		    	// All fields need to be enabled to go back to the script
@@ -1844,7 +1844,7 @@
 							$t_js_toggle_func = "toggle_custom_date_field_" . $t_field_id . "_controls" ;
 							if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
 								?>
-	<script language="Javascript">
+	<script type="text/javascript" language="JavaScript">
 	<!--
 	function <?php echo $t_js_toggle_func . "_start" ; ?>(disable) {
 			document.filters_open.custom_field_<?php echo $t_field_id ; ?>_start_year.disabled = disable ;
@@ -2657,7 +2657,7 @@
 				if ( ( isset( $t_realname ) ) && ( $t_realname > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 					$t_display_name = string_attribute( $t_realname );
 				}
-				PRINT '<option value="' . $t_id . '" SELECTED >' . $t_display_name . '</option>';
+				PRINT '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
 			} else {
 		?>
 			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['reporter_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>

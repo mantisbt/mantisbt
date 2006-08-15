@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.22 2004-08-03 23:46:55 prichards Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.23 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -126,7 +126,7 @@
 				<?php echo lang_get( 'custom_field_advanced' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="advanced" value="1" <?php check_checked( $t_definition['advanced'] ) ?>>
+				<input type="checkbox" name="advanced" value="1" <?php check_checked( $t_definition['advanced'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -134,7 +134,7 @@
 				<?php echo lang_get( 'custom_field_display_report' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?>>
+				<input type="checkbox" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -142,7 +142,7 @@
 				<?php echo lang_get( 'custom_field_display_update' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?>>
+				<input type="checkbox" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -150,7 +150,7 @@
 				<?php echo lang_get( 'custom_field_display_resolved' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?>>
+				<input type="checkbox" name="display_resolved" value="1" <?php check_checked( $t_definition['display_resolved'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -158,7 +158,7 @@
 				<?php echo lang_get( 'custom_field_display_closed' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?>>
+				<input type="checkbox" name="display_closed" value="1" <?php check_checked( $t_definition['display_closed'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -166,7 +166,7 @@
 				<?php echo lang_get( 'custom_field_require_report' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?>>
+				<input type="checkbox" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -174,7 +174,7 @@
 				<?php echo lang_get( 'custom_field_require_update' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?>>
+				<input type="checkbox" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -182,7 +182,7 @@
 				<?php echo lang_get( 'custom_field_require_resolved' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?>>
+				<input type="checkbox" name="require_resolved" value="1" <?php check_checked( $t_definition['require_resolved'] ) ?> />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -190,7 +190,7 @@
 				<?php echo lang_get( 'custom_field_require_closed' ) ?>
 			</td>
 			<td>
-				<input type="checkbox" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?>>
+				<input type="checkbox" name="require_closed" value="1" <?php check_checked( $t_definition['require_closed'] ) ?> />
 			</td>
 		</tr>
 		<tr>

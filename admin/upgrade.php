@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.15 2005-08-02 00:34:56 thraxisp Exp $
+	# $Id: upgrade.php,v 1.16 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,12 +17,11 @@
     # @@@ upgrade list moved to the bottom of upgrade_inc.php
 
 	$f_advanced = gpc_get_bool( 'advanced', false );
-?>
-<?php
 
 	$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 	if ( false == $result ) {
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title> Mantis Administration - Upgrade Installation </title>

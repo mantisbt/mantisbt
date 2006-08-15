@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.14 2005-04-22 22:06:07 prichards Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.15 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -81,7 +81,7 @@
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript">
+<script type="text/javascript" language="JavaScript">
 <!--
 	SetDiv( "monitoring", g_div_monitoring );
 -->

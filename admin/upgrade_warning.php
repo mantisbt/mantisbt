@@ -6,9 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_warning.php,v 1.3 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: upgrade_warning.php,v 1.4 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title> Mantis Administration - Check Installation </title>
@@ -44,3 +45,5 @@
 		</tr>
 	</table>
 </div>
+</body>
+</html>

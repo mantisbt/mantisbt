@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.5 2005-05-01 16:20:23 thraxisp Exp $
+	# $Id: copy_field.php,v 1.6 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,6 +17,7 @@
 	$f_source_field_id = gpc_get_int( 'source_id' );
 	$f_dest_field = gpc_get( 'dest_id' );
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title> Mantis Administration - Copy Custom Fields to Built-in </title>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.164 2006-04-22 04:33:04 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.165 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,14 +51,14 @@
 # @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
 	if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 		?>
-		<script type="text/javascript">
+		<script type="text/javascript" language="JavaScript">
 		<!--
 			var string_loading = '<?php echo lang_get( 'loading' );?>';
 		// -->
 		</script>
-		<script type="text/javascript" src="javascript/xmlhttprequest.js"></script>
-		<script type="text/javascript" src="javascript/addLoadEvent.js"></script>
-		<script type="text/javascript" src="javascript/dynamic_filters.js"></script>
+		<script type="text/javascript" language="JavaScript" src="javascript/xmlhttprequest.js"></script>
+		<script type="text/javascript" language="JavaScript" src="javascript/addLoadEvent.js"></script>
+		<script type="text/javascript" language="JavaScript" src="javascript/dynamic_filters.js"></script>
 		<?php
 	}
 ?>
@@ -164,7 +164,7 @@
 		<td class="left" colspan="<?php echo $col_count-2; ?>">
 <?php
 		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
-			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\"><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
+			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onclick=\"checkall('bug_action', this.form.all_bugs.checked)\" /><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
 		}
 
 		if ( $t_checkboxes_exist ) {

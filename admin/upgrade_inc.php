@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.19 2005-08-15 22:13:52 thraxisp Exp $
+	# $Id: upgrade_inc.php,v 1.20 2006-08-15 07:11:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'db_table_names_inc.php' );
@@ -262,7 +262,7 @@
 			}
 
 			# Form
-			echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+			echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 
 			# Execute All Button
 			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_execute_all\" value=\"Execute All\" />";
@@ -351,6 +351,8 @@
 				# Print Selected Button
 				echo "<input type=\"submit\" name=\"{$this->upgrade_file}_print_selected\" value=\"Print Selected\" />";
 			}
+
+			echo '</form>';
 		}
 
 		function output( $p_limit=null ) {

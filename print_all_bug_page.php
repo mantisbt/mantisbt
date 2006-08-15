@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.86 2006-05-18 06:32:19 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.87 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -139,7 +139,7 @@
 				"&amp;export=$f_export" .
 				"&amp;show_flag=$t_show_flag" .
 				'" ' . $t_icon[2] . '>' .
-				'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '"></a> ';
+				'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '" /></a> ';
 		}
 ?>
 	</td>

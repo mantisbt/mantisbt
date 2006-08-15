@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.18 2006-08-06 03:56:51 vboctor Exp $
+	# $Id: manage_config_workflow_page.php,v 1.19 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -150,7 +150,7 @@
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
 			. lang_get( 'next_status' ) . '</td></tr>';
-		echo "\n<tr></td>";
+		echo "\n<tr>";
 		foreach( $t_enum_status as $t_status ) {
 			$t_entry_array = explode_enum_arr( $t_status );
 			echo '<td class="form-title" style="text-align:center">&nbsp;' . string_no_break( get_enum_to_string( lang_get( 'status_enum_string' ), $t_entry_array[0] ) ) . '&nbsp;</td>';

@@ -30,7 +30,7 @@
 		?>
 		<body onload="SetInitialFocus();">
 
-		<script language="Javascript">
+		<script type="text/javascript" language="JavaScript">
 		<!--
 		function SetInitialFocus() {
 			<?php

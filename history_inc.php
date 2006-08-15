@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.29 2005-04-26 18:22:58 thraxisp Exp $
+	# $Id: history_inc.php,v 1.30 2006-08-15 07:11:23 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -95,7 +95,7 @@
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
+<script type="text/javascript" language="JavaScript">
 <!--
 	SetDiv( "history", g_div_history );
 // -->
