@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.122 2006-08-14 08:32:57 vboctor Exp $
+	# $Id: email_api.php,v 1.123 2006-08-21 04:41:35 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -752,8 +752,10 @@
 		$mail->Subject = $t_subject;
 		$mail->Body    = make_lf_crlf( "\n" . $t_message );
 
-		foreach ( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
-			$mail->AddCustomHeader( "$t_key: $t_value" );
+		if ( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
+			foreach ( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
+				$mail->AddCustomHeader( "$t_key: $t_value" );
+			}
 		}
 
 		if ( !$mail->Send() ) {
