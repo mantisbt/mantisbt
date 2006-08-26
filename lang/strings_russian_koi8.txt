@@ -1,22 +1,24 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
+	# Russian (KOI8-R): Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.76 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:09:15 $
+	# $Revision: 1.77 $
+	# $Author: vboctor $
+	# $Date: 2006-08-26 05:52:05 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.76 2006-02-20 09:09:15 bigbadger Exp $
+	# $Id: strings_russian_koi8.txt,v 1.77 2006-08-26 05:52:05 vboctor Exp $
 	###########################################################################
 ?>
+
 <?php
 # Charset
-$s_charset = 'KOI8-R';
+$s_charset = 'windows-1251';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Перенести';
@@ -28,9 +30,9 @@ $s_actiongroup_menu_resolve = 'Решить';
 $s_actiongroup_menu_update_priority = 'Обн. приоритет';
 $s_actiongroup_menu_update_status = 'Обн. статус';
 $s_actiongroup_menu_update_view_status = 'Обн. режим доступа';
-$s_actiongroup_menu_update_category = 'Update Category';
-$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
-$s_actiongroup_menu_update_field = 'Update %s';
+$s_actiongroup_menu_update_category = 'Обн. категорию';
+$s_actiongroup_menu_set_sticky = 'Изменить Sticky';
+$s_actiongroup_menu_update_field = 'Обновить %s';
 $s_actiongroup_bugs = 'Выбранные обращения';
 
 # new strings:
@@ -54,8 +56,8 @@ $s_jump = 'Перейти';
 $s_copy_users = 'Копировать пользователей';
 $s_copy_categories_from = 'Копировать категории из';
 $s_copy_categories_to = 'Копировать категории в';
-$s_copy_users_from = 'Copy Users From';
-$s_copy_users_to = 'Copy Users To';
+$s_copy_users_from = 'Копировать пользователей из';
+$s_copy_users_to = 'Копировать пользователей в';
 $s_bug_history = 'История';
 $s_field = 'Поле';
 $s_old_value = 'Старое значение';
@@ -102,8 +104,8 @@ $s_login_link = 'Вход';
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'У Вас недостаточно прав для выполнения этой операции со следующими обращениями: ';
 $s_bug_actiongroup_access = 'У Вас недостаточно прав для выполнения этой операции.';
-$s_bug_actiongroup_status = 'Это обращение не может быты изменено в запрошенный статус';
-$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_bug_actiongroup_status = 'Это обращение не может быть изменено в запрошенный статус';
+$s_bug_actiongroup_category = 'Этому обращению не может быть назначена запрошенная категория';
 $s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти обращения?';
 $s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти обращения?';
 $s_move_bugs_conf_msg = 'Перенести обрашения в';
@@ -113,8 +115,8 @@ $s_resolve_bugs_conf_msg = 'Выберите результат для обращений';
 $s_priority_bugs_conf_msg = 'Выберите приоритет обращений';
 $s_status_bugs_conf_msg = 'Выберите статус обращений';
 $s_view_status_bugs_conf_msg = 'Выберите режим доступа к обращениям';
-$s_category_bugs_conf_msg = 'Choose issues category';
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_category_bugs_conf_msg = 'Выбрать категорию обращения';
+$s_set_sticky_bugs_conf_msg = 'Вы уверены, что хотите изменить Sticky для этих обращений?';
 $s_close_group_bugs_button = 'Закрыть обращения' ;
 $s_delete_group_bugs_button = 'Удалить обращения' ;
 $s_move_group_bugs_button = 'Перенести обращения' ;
@@ -123,9 +125,9 @@ $s_assign_group_bugs_button = 'Назначить обращения' ;
 $s_resolve_group_bugs_button = 'Решить обращения' ;
 $s_priority_group_bugs_button = 'Обновить приоритет' ;
 $s_status_group_bugs_button = 'Обновить статус' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Обновить категорию';
 $s_view_status_group_bugs_button = 'Обновить режим доступа';
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Изменить Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Суммарный график по состоянию' ;
@@ -148,8 +150,8 @@ $s_severity_link = 'По критичности';
 $s_category_link = 'По категориям';
 $s_resolution_link = 'По результату';
 $s_legend_still_open = 'До сих пор открытые';
-$s_legend_resolved = 'Решенные;
-$s_legend_assigned = Назначенные';
+$s_legend_resolved = 'Решенные';
+$s_legend_assigned = 'Назначенные';
 $s_legend_total = 'Всего';
 $s_legend_opened = 'Открытых';
 $s_legend_closed = 'Закрытых';
@@ -181,7 +183,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Каталога не существует. Проверьте настройки
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Дубликат файла. Сначала удалите старый файл.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Это имя проекта уже используется.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Обязательное поле \'%s\' не заполнено. Проверьте правильность ввода.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Этот аккаунт защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Доступ запрещен.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Выгрузка файла неудачна.  Выгрузка файлов при ромощи PHP может быть запрещена.  Попросите администратора запустить admin_check скрипт для отладки.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Выгрузка файла неудачна.  Это произошло верояинее всего по причине того, что размер файла был больше, чем разрешено в данной кофигурации PHP.';
@@ -197,23 +199,23 @@ $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Ответственный не имеет достаточн
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Проект с таким именем уже существует.  Вернитесь назад и введите другое имя.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Некорректное имя проекта.  Имена проектов не могут быть пустыми.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Пользователь не найден.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Информация, сохраненная в вашем браузере, некорректна.  Вероятно, Ваш бюджет удален??';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Информация, сохраненная в вашем браузере, некорректна.  Вероятно, Ваш аккаунт удален??';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Предпочтения пользователя не найдены.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Новость на найдена.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Пароли не совпадают.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Ожидается массив, но получена строка.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Ожидается строка, но получен массив.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Вместо "%s" ожидается число.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Обращение %d не найдено.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Фильтр %d не найден.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Фильтр, который Вы пытаетесь использовать слишком устарел для обновления, пожалуйста пересоздайте его.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Неправильный e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Профиль не найден.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Этот тип файла запрещен.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Это дубликат файла.  Удалите первый файл.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Неправильный путь выгрузки файлов.  Каталог не существует или сервер не может туда записывать';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Файл не был выгружен. Пожалуйста вернитесь и выберите файл перед нажатием кнопки  "Выгрузить"';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Выгруженный файл не может быть перемещ╦н в папку хранения. Папка не существует или недостаточно прав для записи в не╦.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Вы не можете установать обращение как дубликат самого себя.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Пользовательское поле не найдено';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Это дублирующееся имя.';
@@ -245,19 +247,19 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Параметр конфигурации "%s" имеет непр
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Действие не может быть произведено, потому что обращение \'%d\' в режиме RO';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Между этими обращениями уже есть связь.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Связь не найдена";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Дрступ запрещен: обращение %d требует большего уровня доступа.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Доступ запрещен: обращение %d требует большего уровня доступа.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "обращение не может быть связано с собой";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Подтверждающий хэш не совпадает. Повторите ввод.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Возможность \'Восстановление пароля\' недоступна.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Вы дожны предоставить e-mail адрес, для того чтобы сбросить пароль';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Предоставленная информация не совпадает ни с одним зарегистрированным бюджетом!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Предоставленная информация не совпадает ни с одним зарегистрированным аккаунтом!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL подтверждения некорректен или уже был использован.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Достигнуто максимальное число параллельных запросов. Свяжитесь с администратором';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Эта операция создаст зацикленность в иерархии подпроектов.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'Ваш бюджет может быть заблокирован или введенное имя пользователя/пароль неправильны.';
+#$s_login_error = 'Ваш аккаунт может быть запрещ╦н или блокирован (из-за множества неверных попыток входа) или Вы ввели неправильные логин и пароль';
+$s_login_error = 'Ваш аккаунт может быть заблокирован или введенное имя пользователя/пароль неправильны.';
 $s_login_cookies_disabled = 'Ваш браузер или не знает как обрабатывать куки, или не принимает их.';
 
 # General Strings
@@ -273,7 +275,7 @@ $s_administrator = 'администратор';
 $s_myself = "Себе";
 $s_default_access_level = 'Стандартный уровень доступа';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
+$s_issue_status_percentage = 'Статусы обращений в %';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:зритель,25:автор,40:редактор,55:разработчик,70:менеджер,90:администратор';
@@ -288,21 +290,21 @@ $s_status_enum_string             = '10:новый,20:информация,30:признан,40:подтве
 $s_resolution_enum_string         = '10:открыт,20:исправлен,30:открыт снова,40:невоспр.,50:неисправим,60:дубликат,70:не баг,80:приост.,90:не будет исправлен';
 $s_projection_enum_string         = '10:нет,30:мелкие изменения,50:небольшие исправления,70:большая переработка,90:перепроектирование';
 $s_eta_enum_string                = '10:нет,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string = '0:не выплачено,1:запрошено,2:выплачено';
 
 # Email Strings
 $s_new_account_subject = 'Новая регистрация';
-$s_new_account_greeting = 'Спасибо за регистрацию. Зарегистрирован ваш бюджет с именем пользователя \'';
+$s_new_account_greeting = 'Спасибо за регистрацию. Зарегистрирован ваш аккаунт с именем пользователя \'';
 $s_new_account_greeting2 = '\'. Для завершения регистрации, посетите следующий адрес (убедитесь, что он ввведен в одну строку) и установите собственный пароль доступа:';
 $s_new_account_username = 'Пользователь: ';
 $s_new_account_message = 'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение.' . "\n\n";
-$s_new_account_do_not_reply = 'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ';
+$s_new_account_do_not_reply = 'ПОЖАЛУЙСТА, НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ!';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'IP-адрес клиента: ';
-$s_new_account_signup_msg = 'Создан новый бюджет:';
+$s_new_account_signup_msg = 'Создан новый аккаунт:';
 
 $s_reset_request_msg = 'Был получен запрос на изменение пароля с помощью e-mail верификации';
-$s_reset_request_in_progress_msg = 'Если вы ввели корректное имя и e-mail вашего бюджета, то вам высылается подтверждающее сообщение на этот адрес. После получения сообщения следуйте инструкциям для смены пароля вашего бюджета.';
+$s_reset_request_in_progress_msg = 'Если вы ввели корректное имя и e-mail вашего аккаунта, то вам высылается подтверждающее сообщение на этот адрес. После получения сообщения следуйте инструкциям для смены пароля вашего аккаунта.';
 
 $s_email_notification_title_for_status_bug_new = 'Это обращение в статусе НОВОЕ (снова)';
 $s_email_notification_title_for_status_bug_feedback = 'Это обращение требует Вашего ответа.';
@@ -322,18 +324,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Финансирование это
 $s_email_notification_title_for_action_sponsorship_deleted = 'Финансирование этого обращения отменено.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'КОММЕНТАРИЙ был добавлен к этому обращению.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Это обращение было помечено как ДУБЛИКАТ обращения %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Обращение %s было помечено как ДУБЛИКАТ этого обращения.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Это обращение было помечено как СВЯЗАННОЕ с обращением %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Обращение %s было помечено как ЗАВИСЯЩЕЕ от этого обращения.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Это обращение было помечено как ЗАВИСЯЩЕЕ от %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "С этого обращения была снята пометка о ДУБЛИКАТЕ обращения %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "С обращения %s была СНЯТА пометка о ДУБЛИКАТЕ этого обращения.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "С этого обращения была СНЯТА пометка о СВЯЗАННОСТИ с обращением %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "С обращения %s была СНЯТА пометка о ЗАВИСИМОСТИ от этого.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "С этого обращения была СНЯТА пометка о ЗАВИСИМОСТИ от обращения %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "СВЯЗАННОЕ обращение %s было РЕШЕНО.";
+$s_email_notification_title_for_action_relationship_child_closed = "Связанное обращения %s было ЗАКРЫТО.";
 
 $s_email_reporter = 'Добавлено';
 $s_email_handler = 'Назначено';
@@ -353,17 +355,17 @@ $s_email_summary = 'Сводка';
 $s_email_description = 'Описание';
 
 # account_delete.php
-$s_account_protected_msg = 'Бюджет защищен. Изменение настроек невозможно...';
-$s_account_removed_msg = 'Ваш бюджет удален...';
+$s_account_protected_msg = 'Аккаунт защищен. Изменение настроек невозможно...';
+$s_account_removed_msg = 'Ваш аккаунт удален...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Вы уверены, что хотите удалить свой бюджет?';
-$s_delete_account_button = 'Удалить бюджет';
+$s_confirm_delete_msg = 'Вы уверены, что хотите удалить свой аккаунт?';
+$s_delete_account_button = 'Удалить аккаунт';
 
 # account_page.php
 $s_manage_profiles_link = 'Профили';
 $s_change_preferences_link = 'Предпочтения';
-$s_edit_account_title = 'Редактировать бюджет';
+$s_edit_account_title = 'Редактировать аккаунт';
 $s_username = 'Имя пользователя';
 $s_realname = 'Настоящее имя';
 $s_email = 'Email';
@@ -372,11 +374,11 @@ $s_no_password_change = 'Пароль контролируется другой системой и не может быть и
 $s_confirm_password = 'Подтверждение пароля';
 $s_access_level = 'Уровень доступа';
 $s_update_user_button = 'Обновить пользователя';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'Информация о Вашем аккаунте верифицирована. Сообщение о подтвердении информации аккаунта, которе Вы получили, больше не действительно.';
+$s_verify_change_password = 'Вы должны установить пароль чтобы иметь возможность снова войти в систему.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Предпочтения бюджета';
+$s_default_account_preferences_title = 'Предпочтения аккаунта';
 $s_default_project = 'Стандартный проект';
 $s_advanced_report = 'Расширенный рапорт';
 $s_advanced_view = 'Расширенный просмотр';
@@ -384,9 +386,9 @@ $s_advanced_update = 'Расширенное обновление';
 $s_refresh_delay = 'Задержка обновления';
 $s_redirect_delay = 'Задержка перенаправления';
 $s_with_minimum_severity = 'С минимальной критичностью';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
+$s_bugnote_order = 'Порядок сортировки комментариев';
+$s_bugnote_order_asc = 'По возрастанию';
+$s_bugnote_order_desc = 'По убыванию';
 $s_email_on_new = 'Извещать о новых';
 $s_email_on_assigned = 'Извещать о назначенных';
 $s_email_on_feedback = 'Извещать о дополнительной информации';
@@ -396,7 +398,7 @@ $s_email_on_reopened = 'Извещать о переоткрытых';
 $s_email_on_bugnote_added = 'Извещать о добавлении комментария';
 $s_email_on_status_change = 'Извещать об изменении статуса';
 $s_email_on_priority_change = 'Изменять об изменении приоритета';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'Максимальное кол-во комментариев в Email-нотификациях';
 $s_language = 'Язык';
 $s_update_prefs_button = 'Обновить предпочтения';
 $s_reset_prefs_button = 'Сбросить предпочтения';
@@ -416,7 +418,7 @@ $s_profile_deleted_msg = 'Профил удален...';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Редактировать профиль';
 $s_platform = 'Платформа';
-$s_operating_system = 'OS';
+$s_operating_system = 'ОС';
 $s_additional_description = 'Дополнительное описание';
 $s_update_profile_button = 'Обновить профиль';
 
@@ -426,7 +428,7 @@ $s_profile_defaulted_msg = 'Стандартный профиль обновлен...';
 # account_profile_manage_page.php
 $s_add_profile_title = 'Добавление профиля';
 $s_add_profile_button = 'Добавить профиль';
-$s_edit_or_delete_profiles_title = 'Редкатирование или удаление профилей';
+$s_edit_or_delete_profiles_title = 'Редактирование или удаление профилей';
 $s_edit_profile = 'Редактировать профиль';
 $s_make_default = 'Сделать стандартным';
 $s_delete_profile = 'Удалить профиль';
@@ -437,24 +439,24 @@ $s_submit_button = 'OK';
 $s_profile_updated_msg = 'Профиль обновлен...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_my_sponsorship = 'Мои Финансирования';
+$s_update_sponsorship_button = 'Изменить статус выплаты';
+$s_no_sponsored = 'Не было найдено обращений, финансируемых Вами.';
+$s_own_sponsored = 'Финансируемые Вами обращения';
+$s_issues_handled = 'Финансируемые обращения, назначенные Вам';
+$s_no_own_sponsored = 'Вы не финансировали обращений.';
+$s_sponsor = 'Спонсор';
+$s_amount = 'Сумма';
+$s_total_owing = 'Задолженность';
+$s_total_paid = 'Выплачено';
+$s_sponsor_hide = 'Скрыть оплаченные';
+$s_sponsor_show = 'Показать вс╦';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Информация о выплате обновлена.';
 
 # account_update.php
-$s_account_updated_msg = 'Ваш бюджет успешно обновлен...';
+$s_account_updated_msg = 'Ваш аккаунт успешно обновлен...';
 $s_email_updated = 'Email адрес успешно обновлен';
 $s_realname_duplicated = 'Реальное имя используется другим пользователем';
 $s_realname_updated = 'Настоящее имя успешно обновлено';
@@ -463,7 +465,7 @@ $s_password_updated = 'Пароль успешно обновлен';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Обращения, которые Вы выбрали, относятся к разным проектам. Следующие параметры влияют на настройки для всех проектов. Если это неправильно, пожалуйста попробуйте выполнить обновление меньшего числа выбранных обращений';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Обращение было успешно назначено...';
@@ -530,12 +532,12 @@ $s_bug_reminder = 'Послать напоминание';
 $s_reminder_sent_to = 'Напоминание выслано';
 $s_bug_send_button = 'Послать';
 $s_reminder = 'Напоминание';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Это напоминание будет выслано выбранным получателям с запросом отзывов по данному обращению.';
+$s_reminder_monitor = 'Получатели также автоматически начнут следить за этим обращением. Они могут отписать от уведомлений используя кнопку "Не следить".';
+$s_reminder_store = 'Это напоминание будет сохранено в обращении.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = 'Пожалуйста подтвердите, что Вы хотите профинансировать обращение %d для %s.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Обращение было успешно обновлено...';
@@ -556,9 +558,9 @@ $s_priority = 'Приоритет';
 $s_resolution = 'Решение';
 $s_status = 'Статус';
 $s_duplicate_id = 'ID дубликата';
-$s_os = 'OS';
+$s_os = 'ОС';
 $s_projection = 'Прогноз';
-$s_os_version = 'Версия OS';
+$s_os_version = 'Версия ОС';
 $s_eta = 'ETA';
 $s_product_version = 'Версия';
 $s_build = 'Подверсия';
@@ -568,8 +570,8 @@ $s_summary = 'Сводка';
 $s_description = 'Описание';
 $s_steps_to_reproduce = 'Шаги по воспроизведению';
 $s_update_information_button = 'Обновить данные';
-$s_sticky_issue = 'Sticky Issue';
-$s_profile = 'Profile';
+$s_sticky_issue = 'Sticky-обращение';
+$s_profile = 'Профиль';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Расширенное обновление';
@@ -612,7 +614,7 @@ $s_login_title = 'Вход';
 $s_save_login = 'Запомнить данные';
 $s_choose_project = 'Выберите проект';
 $s_login_button = 'Войти';
-$s_signup_link = 'Зарегистрировать новый бюджет';
+$s_signup_link = 'Зарегистрировать новый аккант';
 $s_lost_password_link = 'Забыли пароль?';
 
 # login_select_proj_page.php
@@ -627,7 +629,7 @@ $s_here = 'здесь';
 $s_lost_password_title = "Сброс пароля";
 $s_lost_password_done_title = "Сообщение выслано";
 $s_lost_password_subject = "Сброс пароля";
-$s_lost_password_info = "Для восстановления пароля введите имя пользователя и e-mail для вашего бюджета.<br/><br/>Если дата соответствует реальному бюджету, вам будет выслан специальный URL, который содержит код верификации. Используйте этот линк для смены пароля.";
+$s_lost_password_info = "Для восстановления пароля введите имя пользователя и e-mail для вашего аккаунта.<br/><br/>Если дата соответствует реальному аккаунту, вам будет выслан специальный URL, который содержит код верификации. Используйте этот линк для смены пароля.";
 $s_lost_password_confirm_hash_OK = "Подтверждение принято. Обновите ваш пароль.";
 
 # main_page.php
@@ -643,7 +645,7 @@ $s_created_user_part1 = 'Создан пользователь';
 $s_created_user_part2 = 'с уровнем доступа';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Cоздать новый бюджет';
+$s_create_new_account_title = 'Cоздать новый аккаунт';
 $s_verify_password = 'Подтверждение пароля';
 $s_enabled = 'Разрешен';
 $s_protected = 'Защищен';
@@ -655,88 +657,88 @@ $s_filter_button = 'Фильтровать';
 $s_manage_users_link = 'Управление пользователями';
 $s_manage_projects_link = 'Управление проектами';
 $s_manage_custom_field_link = 'Управление пользовательскими полями';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
-$s_manage_threshold_config = 'Workflow Thresholds';
-$s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = 'Cоздать бюджет';
+$s_manage_global_profiles_link = 'Управление глобальными профилями';
+$s_permissions_summary_report = 'Отч╦т о правах доступа';
+$s_manage_config_link = 'Управление настройками';
+$s_manage_threshold_config = 'Ограничения изменения статуса';
+$s_manage_email_config = 'Email-уведомления';
+$s_manage_workflow_config = 'Порядок изменения статуса';
+$s_create_new_account_link = 'Cоздать аккаунт';
 $s_projects_link = 'Проекты';
 $s_documentation_link = 'Документация';
-$s_new_accounts_title = 'Новые бюджеты';
+$s_new_accounts_title = 'Новые аккаунты';
 $s_1_week_title = 'За неделю';
 $s_never_logged_in_title = 'Никогда не входившие в систему';
-$s_prune_accounts = 'Удалить бюджеты';
+$s_prune_accounts = 'Удалить аккаунты';
 $s_hide_inactive = 'Скрыть неактивных';
-$s_manage_accounts_title = 'Управление бюджетами';
+$s_manage_accounts_title = 'Управление аккаунтами';
 $s_p = 'З';
 $s_date_created = 'Создан';
 $s_last_visit = 'Последнее посещение';
 $s_edit_user_link = 'Редактировать пользователя';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_change_configuration = 'Update Configuration';
-$s_message = 'Message';
-$s_default_notify = 'Setting default notification flags to';
-$s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_config_all_projects = 'Замечание: Эти настройки повлияют на ВСЕ ПРОЕКТЫ.';
+$s_config_project = 'Замечание: Эти настройки повлияют только на проект %s.';
+$s_colour_coding = 'В таблице используется следующая индикация цветом:';
+$s_colour_project = 'Настройки проекта перекрывают другие настройки.';
+$s_colour_global = 'Общие настройки для проектов перекрывают настройки по умолчанию.';
+$s_issue_reporter = 'Пользователь, создавший обращение';
+$s_issue_handler = 'Пользователь, назначенный обращению';
+$s_users_added_bugnote = 'Пользователи, добавившие комментарии';
+$s_change_configuration = 'Обновить настройки';
+$s_message = 'Сообщение';
+$s_default_notify = 'Установка флагов уведомлений по умолчанию для';
+$s_action_notify = 'Установка флагов по умолчанию уведомлений по действиям для';
+$s_notify_defaults_change_access = 'Пользователи, которые могут изменять настройки уведомлений по умолчанию';
+$s_notify_actions_change_access = 'Пользователи, которые могут изменять данные настройки';
+$s_revert_to_system = "Очистить общие настройки проектов";
+$s_revert_to_all_project = "Очистить настройки этого проекта";
 
 # manage_config_workflow_page
-$s_non_existent = 'non-existent';
-$s_current_status = 'Current Status';
-$s_next_status = 'Next Status';
-$s_workflow = 'Workflow';
-$s_workflow_thresholds = 'Thresholds that Affect Workflow';
-$s_threshold = 'Threshold';
-$s_status_level = 'Status';
-$s_alter_level = 'Who can alter this value';
-$s_validation = 'Workflow Validation';
-$s_comment = 'Validation Comment';
+$s_non_existent = 'не существующий';
+$s_current_status = 'Текущий статус';
+$s_next_status = 'Следующий статус';
+$s_workflow = 'Порядок изменения статусов';
+$s_workflow_thresholds = 'Ограничения изменения статусов';
+$s_threshold = 'Ограничение';
+$s_status_level = 'Статус';
+$s_alter_level = 'Кто может менять эту настройку';
+$s_validation = 'Проверка порядка изменения статусов';
+$s_comment = 'Комментарий проверки';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'You cannot move an issue into this status';
-$s_no_exit = 'You cannot move an issue out of this status';
-$s_access_levels = 'Access Levels';
-$s_access_change = 'Minimum Access Level to Change to this Status';
-$s_desc_bug_submit_status = 'Status to which a new issue is set';
-$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
-$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_unreachable = 'Вы не сможете назначить обращениям этот статус';
+$s_no_exit = 'Вы не сможете вывести обращение из этого статуса';
+$s_access_levels = 'Уровни доступа';
+$s_access_change = 'Минимальный уровень доступа для изменения статуса на этот';
+$s_desc_bug_submit_status = 'Статус, который получают новые обращения';
+$s_desc_bug_reopen_status = 'Статус, который получают переоткрытые обращения';
+$s_desc_bug_resolved_status_threshold = 'Статус реш╦нных обращений';
+$s_workflow_change_access = 'Пользователи, которые могут изменять порядок изменения статусов';
+$s_access_change_access = 'Пользователи, которые могут менять уровни доступа';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'Статус по умолчанию %s не выбран как "следующий статус" для %s. Он будет проигнорирован.';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = 'Назначать обращение';
+$s_allow_close_immediate = 'Разрешить закрывать обращения сразу при решении';
+$s_allow_reporter_close = 'Разрешить создавшему обращение закрывать его';
+$s_allow_reporter_reopen = 'Разрешить создавшему обращение переоткрывать его';
+$s_set_status_assigned = 'Менять статус при назначении обращения';
+$s_allow_user_edit = 'Разрешить пользователям редактировать собственные комментарии';
+$s_limit_access = 'Ограничить доступ создавшего обращение к его обращению';
+$s_submit_status = 'Статус, в который выставляются новые обращения';
+$s_assigned_status = 'Статус, в который выставляются назначенные обращения';
+$s_resolved_status = 'Статус для реш╦нных обращений';
+$s_readonly_status = 'Статус, при которм обращение стновится "только для чтения"';
+$s_reopen_status = 'Статус, в который выставляется переоткрытое обращение';
+$s_reopen_resolution = 'Решение, в которое выставляется переоткрытое обращение';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_config_delete_sure = 'Вы уверены, что хотите очистить настройки для';
+$s_in_project = 'в проекте';
+$s_delete_config_button = 'Очистить настройки';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Проект добавлен...';
@@ -759,7 +761,7 @@ $s_update_category_button = 'Обновить категорию';
 $s_category_updated_msg = 'Категория обновлена...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Add Subproject';
+$s_add_subproject_title = 'Добавить подпроект';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Проект успешно удален...';
@@ -787,14 +789,14 @@ $s_actions = 'Действия';
 $s_version = 'Версия';
 $s_timestamp = 'Время';
 $s_update = 'Обновить';
-$s_subprojects = 'Subprojects';
-$s_add_subproject = 'Add as Subproject';
-$s_create_new_subproject_link = 'Create New Subproject';
-$s_unlink_link = 'Unlink';
+$s_subprojects = 'Подпроекты';
+$s_add_subproject = 'Добавить как подпроект';
+$s_create_new_subproject_link = 'Создать новый подпроект';
+$s_unlink_link = 'Отсоединить';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Добавить проект';
-$s_upload_file_path = 'Путь для загружаемых файлов';
+$s_upload_file_path = 'Путь для выгружаемых файлов';
 $s_add_project_button = 'Добавить проект';
 $s_projects_title = 'Проекты';
 $s_name = 'Названия';
@@ -821,41 +823,41 @@ $s_released = 'Выпущена';
 $s_version_updated_msg = 'Версия обновлена...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Бюджет защищен. Удаление невозможно.';
-$s_account_deleted_msg = 'Бюджет удален...';
+$s_account_delete_protected_msg = 'Аккаунт защищен. Удаление невозможно.';
+$s_account_deleted_msg = 'Аккаунт удален...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Вы уверены, что хотите удалить этот бюджет?';
+$s_delete_account_sure_msg = 'Вы уверены, что хотите удалить этот аккаунт?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Все пользователи, которые ни разу не входили в систему и бюджеты заведены более недели назад были удалены';
+$s_accounts_pruned_msg = 'Все пользователи, которые ни разу не входили в систему и аккаунты заведены более недели назад были удалены';
 $s_prune_accounts_button = 'Очистить';
-$s_confirm_account_pruning = 'Вы уверены, что хотите удалить старые неиспользовавшиеся бюджеты?';
+$s_confirm_account_pruning = 'Вы уверены, что хотите удалить старые неиспользовавшиеся аккаунты?';
 
 # manage_user_page.php
 $s_edit_user_title = 'Редактирование пользователя';
 $s_reset_password_button = 'Сбросить пароль';
 $s_delete_user_button = 'Удалить пользователя';
-$s_reset_password_msg = 'Сьрос пароля высылает URL подтверждения по e-mail.';
+$s_reset_password_msg = 'Сброс пароля высылает URL подтверждения по e-mail.';
 $s_reset_password_msg2 = 'Сброс пароля привел к тому, что сейчас пароль - пустая строка.';
 $s_show_all_users = 'Все';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';
+$s_account_reset_protected_msg = 'Аккаунт защищен. Невозможно обнулить пароль.';
 $s_account_reset_msg = 'Подтверждающее сообщение выслано на ваш адрес...';
-$s_account_reset_msg2 = 'Пароль к бюджету установлен пустым...';
+$s_account_reset_msg2 = 'Пароль к аккаунту установлен пустым...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Бюджет защищен. Уровень доступа и разрешение заблокировано. Все остальные данные обновлены...';
-$s_manage_user_updated_msg = 'Бюджет обновлен ...';
+$s_manage_user_protected_msg = 'Аккаунт защищен. Уровень доступа и разрешение заблокировано. Все остальные данные обновлены...';
+$s_manage_user_updated_msg = 'Аккаунт обновлен ...';
 
 # menu_inc.php
 $s_main_link = 'Главная';
-$s_view_bugs_link = 'Просмотр обращений';
-$s_report_bug_link = 'Зарегистрировать обращение';
+$s_view_bugs_link = 'Обращения';
+$s_report_bug_link = 'Новое обращение';
 $s_changelog_link = 'Изменения';
 $s_summary_link = 'Статистика';
-$s_account_link = 'Мой бюджет';
+$s_account_link = 'Мой аккаунт';
 $s_users_link = 'Пользователи';
 $s_manage_link = 'Управление';
 $s_edit_news_link = 'Редактирование новостей';
@@ -872,8 +874,8 @@ $s_my_view_title_reported = 'Занесенные мной';
 $s_my_view_title_assigned = 'Назначенные мне (нерешенные)';
 $s_my_view_title_resolved = 'Решенные';
 $s_my_view_title_monitored = 'Отслеживаемые мной';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_feedback = 'Ожидается информация от Меня';
+$s_my_view_title_verify = 'Ожидаеся Подтверждение или Решение от Меня';
 
 # news_add.php
 $s_news_added_msg = 'Новость добавлена...';
@@ -907,10 +909,10 @@ $s_news_updated_msg = 'Новость обновлена...';
 $s_back_link = 'Назад';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Файл загружен';
+$s_file_uploaded_msg = 'Файл выгружен';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Загрузить файл';
+$s_upload_file_title = 'Выгрузить файл';
 $s_title = 'Название';
 
 # proj_doc_delete.php
@@ -941,9 +943,9 @@ $s_project_removed_user_msg = 'Пользователь удален из проекта';
 
 # proj_user_delete_page.php
 $s_remove_user_sure_msg = 'Вы уверены, что хотите удалить этого пользователя?';
-$s_remove_user_button = 'Remove User';
-$s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
-$s_remove_all_users_button = 'Remove All Users';
+$s_remove_user_button = 'Удалить пользователя';
+$s_remove_all_users_sure_msg = 'Вы уверены, что хотите удалить всех пользователей из этого проекта?';
+$s_remove_all_users_button = 'Удалить всех пользователей';
 
 # proj_user_menu_page.php
 $s_add_user_title = 'Добавление пользователя к проекту';
@@ -986,13 +988,13 @@ $s_selected_project = 'Выбранный проект';
 $s_valid_project_msg = 'Вы должны выбрать правильный проект';
 
 # signup.php
-$s_signup_done_title = 'Регистрация бюджета обработана';
-$s_password_emailed_msg = 'Вы успешно зарегистрированы. Вам выслано подтверждающее сообщение для проверки адреса. Посещение линка, высланного в письме, активирует ваш бюджет.';
-$s_no_reponse_msg = 'У вас есть семь дней для завершения процесса подтверждения бюджета; в случае неподтверждения в течение этого периода, свежезарегистированный бюджет может быть удален.';
+$s_signup_done_title = 'Регистрация аккаунта обработана';
+$s_password_emailed_msg = 'Вы успешно зарегистрированы. Вам выслано подтверждающее сообщение для проверки адреса. Посещение линка, высланного в письме, активирует ваш аккант.';
+$s_no_reponse_msg = 'У вас есть семь дней для завершения процесса подтверждения аккаунта; в случае неподтверждения в течение этого периода, свежезарегистированный аккаунт может быть удален.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Ввведите код, как он показан в прямоугольнике справа';
-$s_signup_info = 'После заполнения этой формы и проверки ваших ответов, вам будет выслано подтверждающее сообщеение на указанный вами адрес.<br/>Используя это сообщение вы сможете активировать ваш бюджет. Если вы не активируете бюджет в течение 7 дней,он может быть удален.<br/>Вы должны использовать работоспособный e-mail адрес, чтобы получить подтверждающее сообщение.';
+$s_signup_captcha_request = 'Введите код, как он показан в прямоугольнике справа';
+$s_signup_info = 'После заполнения этой формы и проверки ваших ответов, вам будет выслано подтверждающее сообщеение на указанный вами адрес.<br/>Используя это сообщение вы сможете активировать ваш аккаунт. Если вы не активируете аккаунт в течение 7 дней,он может быть удален.<br/>Вы должны использовать работоспособный e-mail адрес, чтобы получить подтверждающее сообщение.';
 $s_signup_title = 'Регистрация';
 $s_signup_button = 'Зарегистрироваться';
 $s_no_password_request = 'Пароль управляется другой системой. Свяжитесь с системным администратором.';
@@ -1043,12 +1045,11 @@ $s_show = 'Показать';
 $s_changed = 'Изменены (часов)';
 $s_viewing_bugs_title = 'Просмотр обращений';
 $s_updated = 'Обновлено';
-$s_sticky = 'Show Sticky Issues';
-$s_sort = 'Sort by';
+$s_sticky = 'Показать Sticky-обращения';
+$s_sort = 'Сортировка';
 
 # view_all_inc.php
 $s_none = 'нет';
-$s_current = 'current';
 $s_search = 'Поиск';
 $s_view_prev_link = 'Пред.';
 $s_view_next_link = 'След.';
@@ -1141,14 +1142,14 @@ $s_custom_field_require_resolved = 'Обязательное при решении';
 $s_custom_field_require_closed = 'Обязательное при закрытии';
 
 $s_custom_field_sequence = 'Последовательность';
-$s_custom_field_type_enum_string = '0:Строка,1:Целое,2:Плавающее,3:Перечисление,4:Email,5:Чекбокс,6:Список,7:Список множественного выбора,8:Date';
+$s_custom_field_type_enum_string = '0:Строка,1:Целое,2:Плавающее,3:Перечисление,4:Email,5:Чекбокс,6:Список,7:Список множественного выбора,8:Дата';
 
 $s_confirm_used_custom_field_deletion = 'Это поле связано как минимум с одним проектом.  Если Вы продолжите, все значения для этого поля будут безвозвратно удалены.  Это действие невозможно откатить.  Если Вы не хотите удалять это поле, нажмите кнопку Back в Вашем браузере.  Для удаления - нажмите кнопку ниже';
 $s_confirm_custom_field_deletion = 'Вы уверены, что хотите удалить это поле и все связанные с ним значения?';
 $s_field_delete_button = 'Удалить поле';
 
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
-$s_field_remove_button = 'Remove Field';
+$s_confirm_custom_field_unlinking = 'Вы уверены, что хотите отсоединить это пользовательское поле от проекта и удалить все назначенные значения?';
+$s_field_remove_button = 'Удалить поле';
 
 $s_hide_status = 'Статус скрытия';
 $s_filter_closed = "Закрытые";
@@ -1164,16 +1165,16 @@ $s_attachments = "Файл(ы)";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'ru';
+$s_phpmailer_language = 'en';
 
 # Sponsorship Strings
 $s_sponsors = 'Финансирующих - %d';
 $s_sponsorship_added = 'Финансирование добавлено';
 $s_sponsorship_updated = 'Финансирование обновлено';
 $s_sponsorship_deleted = 'Финансирование снято';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Финансирование оплачено';
 $s_sponsorship_more_info = 'Дополнительная информация о финансировании обращений';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = 'Всего финансировано';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1192,16 +1193,16 @@ $s_add_new_relationship_button = "Добавить";
 $s_this_bug = "Активное обращение";
 $s_relationship_added = "Связь добавлена";
 $s_relationship_deleted = "Связь удалена";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "нет связей";
+$s_relationship_replaced = "Связь заменена";
+$s_replace_relationship_button = "Заменить";
+$s_replace_relationship_sure_msg = "Между двумя обращениями уже есть связь. Вы уверены, что хотите заменить е╦?";
+$s_relationship_with_parent = "Связь с родительским обращением";
 $s_delete_relationship_button = "Удалить";
 $s_delete_relationship_sure_msg = "Вы уверены, что хотите удалить эту связь?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Не все дочерние обращения решены или закрыты.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не все потомки этого обращения решены или закрыты.<br>До <b>решения/закрытия</b> родительского обращения, все порожденные обращения должны быть решены или закрыты.";
-$s_create_child_bug_button = "Создать потомка";
+$s_create_child_bug_button = "Создать клон";
 $s_bug_cloned_to = "Обращение клонировано";
 $s_bug_created_from = "Обращение создано из";
 
@@ -1217,75 +1218,74 @@ $s_view_issue = "Просмотр обращения";
 $s_checkin = 'Checkin';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = "Delete";
-$s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'Возможность';
+$s_view = 'Просмотр';
+$s_issues = 'ОБРАЩЕНИЯ';
+$s_report_issue = 'Создать обращение';
+$s_update_issue = 'Обновить обращение';
+$s_monitor_issue = 'Следить за обращением';
+$s_handle_issue = 'Быть назначенным обращению';
+$s_move_issue = 'Переместить обращение';
+$s_delete_issue = 'Удалить обращение';
+$s_reopen_issue = 'Переоткрыть обращение';
+$s_view_private_issues = 'Просмотр частных обращений';
+$s_update_readonly_issues = 'Обновлять обращения "только для чтения"';
+$s_update_issue_status = 'Обновлять статус обращения';
+$s_set_view_status = 'Устанавливать режим просмотра (общий или частный)';
+$s_update_view_status = 'Изменять режим просмотра (общий или частный)';
+$s_show_list_of_users_monitoring_issue = 'Просмотр списка следящих за обращением';
+$s_notes = 'КОММЕНТАРИИ';
+$s_add_notes = 'Добавлять комментарии';
+$s_update_notes = 'Изменять комментарии';
+$s_delete_note = 'Удалять комментарии';
+$s_view_private_notes = 'Просмотр частных комментариев';
+$s_news = 'НОВОСТИ';
+$s_view_private_news = 'Просмотр частных новостей';
+$s_manage_news = 'Управление новостями';
+$s_view_list_of_attachments = 'Просмотр список прикепл╦нных файлов';
+$s_download_attachments = 'Скачивать прикрепл╦нные файлы';
+$s_delete_attachments = 'Удалять прикрепл╦нные файлы';
+$s_delete_attachment_button = "Удалить";
+$s_delete_attachment_sure_msg = "Вы уверены, что хотите удалить этот прикрепл╦нный файл?";
+$s_upload_issue_attachments = 'Прикрепить файл к обращению';
+$s_filters = 'фильтры';
+$s_save_filters = 'Сохранять фильтры';
+$s_save_filters_as_shared = 'Сохранять общие фильтры';
+$s_use_saved_filters = 'Использовать сохран╦ные фильтры';
+$s_create_project = 'Создавать проект';
+$s_delete_project = 'Удалять проект';
+$s_manage_project = 'Управлять проектом';
+$s_manage_user_access_to_project = 'Управлять правами доступа к проекту';
+$s_automatically_included_in_private_projects = 'Автоматически включать в частные проекты';
+$s_project_documents = 'ДОКУМЕНТАЦИЯ ПРОЕКТОВ';
+$s_view_project_documents = 'Просмотр документации проектов';
+$s_upload_project_documents = 'Добавление документации проектов';
+$s_link_custom_fields_to_projects = 'Связывать пользовательские поля с проектами';
+$s_sponsorships = 'ФИНАНСИРОВАНИЕ';
+$s_view_sponsorship_details = 'Просмотр деталей финансирования';
+$s_view_sponsorship_total = 'Просмотр суммы финансирования';
+$s_sponsor_issue = 'Финансировать обращение';
+$s_assign_sponsored_issue = 'Назначать финансируемые обращения';
+$s_handle_sponsored_issue = 'Быть назначенным финансируемым обращениям';
+$s_others = 'ДРУГОЕ';
+$s_see_email_addresses_of_other_users = 'Просмотр email-адресов других пользователей';
+$s_send_reminders = 'Отправка напоминаний';
+$s_add_profiles = 'Добавление профилей';
+$s_notify_of_new_user_created = 'Уведомить о создании нового аккаунта';
+$s_email_notification = 'EMAIL-УВЕДОМЛЕНИЯ';
+$s_status_changed_to = 'Статус изменился на';
+$s_email_on_deleted = 'Email при удалении';
+$s_email_on_sponsorship_changed = 'Email при изменении финансирования';
+$s_email_on_relationship_changed = 'Email при изменении отношений обращений';
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'Загрузка...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
-
+$s_between = 'Между';
+$s_on_or_before = 'На или до';
+$s_before = 'До';
+# $s_on = 'На'; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'После';
+$s_on_or_after = 'На или после';
 ?>
