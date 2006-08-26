@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: wiki.php,v 1.1 2006-08-09 07:55:01 vboctor Exp $
+	# $Id: wiki.php,v 1.2 2006-08-26 03:34:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,10 @@
 	$f_type = gpc_get_string( 'type', 'issue' );
 	
 	if ( $f_type == 'project' ) {
-		project_ensure_exists( $f_id );
+		if ( $f_id !== 0 ) {
+			project_ensure_exists( $f_id );
+		}
+
 		$t_url = wiki_get_url_for_project( $f_id );
 	} else {
 		bug_ensure_exists( $f_id );
