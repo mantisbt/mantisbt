@@ -1,6 +1,103 @@
 Mantis ChangeLog
 
-2006.xx.xx  -  1.1
+2006.09.11  -  1.1.0a1
+
+This is the first preview release for Mantis 1.1, it is not recommended for production use.  This list of issues below is relative to Mantis 1.0.0rc2.  Hence, some of the fixes, specially the security ones, would be available in the 1.0.x releases.
+
+- 0006637: [administration] Disabled projects don't appear under parent project (vboctor)
+- 0006869: [administration] bug in string_sanitize_url() (thraxisp)
+- 0006887: [administration] Updating user details and preferences should re-direct back to the same page (vboctor)
+- 0006969: [administration] Show released flag on the version table in manage_proj_edit_page.php (vboctor)
+- 0006972: [administration] Implement a Configuration Report to show all configs in database (vboctor)
+- 0006973: [administration] Provide a way to set configuration via Mantis interface (vboctor)
+- 0007096: [administration] fields too short in table "mantis_bug_history_table" (vboctor)
+- 0003424: [bugtracker] Save login feature does not work (vboctor)
+- 0004102: [bugtracker] Category field should be empty by default or default specified (vboctor)
+- 0004460: [bugtracker] Show last visited N issues (vboctor)
+- 0005408: [bugtracker] Suggestion: Tooltip (title) with text for priority icon (ryandesign)
+- 0006248: [bugtracker] In menu lists, embedded spaces should be non-breaking (ryandesign)
+- 0006355: [bugtracker] "Time Stats For Resolved Issues" is global, even if a specific project is selected (grangeway)
+- 0006366: [bugtracker] Summary By Project: Open bugs (grangeway)
+- 0006472: [bugtracker] Alternate method for selecting projects with many subprojects (jlatour)
+- 0006504: [bugtracker] Extended Project browser crash when selecting back "All Projects" (jlatour)
+- 0006512: [bugtracker] Specify multiple relationships at one time (vboctor)
+- 0006824: [bugtracker] Need URL for bookmarking project page (vboctor)
+- 0006860: [bugtracker] Can send remonders to all recipients (thraxisp)
+- 0006974: [bugtracker] JS helper for the Jump text input box (vboctor)
+- 0006986: [bugtracker] Remember login always redirects to main_page.php (vboctor)
+- 0007088: [bugtracker] bugnote_delete.php redirection fails (vboctor)
+- 0007089: [bugtracker] Priority is not shown as text in "My view" (vboctor)
+- 0007114: [bugtracker] tabindex in duplicate in bug_report_advanced_page (vboctor)
+- 0007257: [bugtracker] Port: Fix for #6869 / #7034 removes quoted "?" from arguments (thraxisp)
+- 0007009: [change log] Fixed_in_version abbreviated hide version in Change Log (vboctor)
+- 0006319: [customization] Option to customise columns on View Issues (vboctor)
+- 0006488: [customization] Should be able to remove severity and reproducibility (vboctor)
+- 0006866: [customization] User redirection after logging out (vboctor)
+- 0007103: [customization] Added column resolution in view issues wrong content (vboctor)
+- 0007110: [customization] Option to customise columns on CSV export (vboctor)
+- 0007111: [customization] Option to customise columns on Print Issues page (vboctor)
+- 0006701: [csv] Show custom fields in CSV export (vboctor)
+- 0007003: [csv] Error in version 1.1.0-CVS when exporting to CSV (vboctor)
+- 0007348: [customization] no print_column_date_submitted() in columns_api.php (vboctor)
+- 0006559: [db mssql] "Prune Accounts" function doesn't work with MS SQL (vboctor)
+- 0006888: [db mssql] Changelog doesn't work on MS SQL (vboctor)
+- 0006952: [db mssql] MS SQL Error on View Filters Page (vboctor)
+- 0006957: [db mssql] installtion fails - administrator have no rights on db (vboctor)
+- 0006977: [db mssql] PHP Notice: Only variables should be assigned by reference (vboctor)
+- 0005209: [db oracle] Bugtracker and Oracle (vboctor)
+- 0006519: [db oracle] Error on opening Change Log (vboctor)
+- 0005925: [email] Upgrade to PHPMailer 1.73 (vboctor)
+- 0007097: [email] Link in e-Mail notifications is broken. (vboctor)
+- 0006252: [feature] Control over display size of inlined images (vboctor)
+- 0006253: [feature] Inlining of other types of files (vboctor)
+- 0006921: [feature] Global Profiles list not sorted (vboctor)
+- 0006500: [feature] favicon (vboctor)
+- 0007212: [feature] Quick Full Text Search implementation (vboctor)
+- 0006380: [filters] Filter returns private issues when it should not (thraxisp)
+- 0006507: [filters] Allow filtering of issues in multiple (unrelated) projects (jlatour)
+- 0006571: [filters] port Filters on custom fields failing (thraxisp)
+- 0006647: [filters] Port #6634: [filters] Filter does not work with profiles (vboctor)
+- 0006867: [filters] Call to undefined function: string_strip_tags() in query_store_page.php (thraxisp)
+- 0007000: [filters] SYSTEM WARNING: Argument 1 to array_multisort() is expected to be an array or a sort flag (vboctor)
+- 0006451: [installation] Upgrading Mantis packaging script (vboctor)
+- 0006715: [installation] wrong display of a "validate_email = OFF"-warning (vboctor)
+- 0006843: [installation] is_writable never success in install.php (thraxisp)
+- 0007013: [installation] newbie admins may be redirected to blank page (vboctor)
+- 0004746: [localization] New Korean UTF8 must be added to language list (ryandesign)
+- 0006292: [localization] Add Catalan language (vboctor)
+- 0006764: [localization] Typo in the dutch translation (vboctor)
+- 0006837: [localization] translations into spanish missing (vboctor)
+- 0007026: [localization] Add Bulgarian Localisation (thanks to Alex Stanev) (vboctor)
+- 0007333: [localization] access_levels_enum_string not translated in manage_config_workflow_page.php (vboctor)
+- 0005549: [other] Misc XHTML compliance fixes and more (patch) (ryandesign)
+- 0006679: [other] Attachment download always opens "Save As" dialog even when a .png (thraxisp)
+- 0006886: [other] Export to Word and Excel times out if process takes more than 30 seconds (vboctor)
+- 0007012: [other] Word and Excel files are exported as _word and _excel (vboctor)
+- 0007076: [other] checkin.php needs array_unique() (vboctor)
+- 0007109: [other] Add more file icons + move icons to images/fileicons/ (vboctor)
+- 0004019: [performance] Ability to update reporter increases update page size dramatically (vboctor)
+- 0006627: [performance] Very slow performance when filing a new issue or adding a note (vboctor)
+- 0006868: [printing] wrong strpos function call (thraxisp)
+- 0004213: [rss] Request: Ability to log in to RSS feed via GET so that RSS would be available to registered users (vboctor)
+- 0004641: [rss] RSS support for "View Issues" pages (vboctor)
+- 0006757: [rss] Allow RSS syndication without allowing anonymous login. (vboctor)
+- 0006987: [rss] Add $g_rss_enabled configuration option (vboctor)
+- 0006453: [security] Make note private has no effect when resolving bug (thraxisp)
+- 0006459: [security] Port #6457: SQL Injection in manage user page (TKADV2005-11-002) (vboctor)
+- 0006462: [security] Port #6460: HTTP Header CRLF Injection (TKADV2005-11-002) (vboctor)
+- 0006490: [security] Port Injection Vulnerabilities in Filters (TKADV2005-11-002) (thraxisp)
+- 0006510: [security] Port: Additional XSS Vulnerabilities in Filter (thraxisp)
+- 0006558: [security] XSS Vulnerability in manage_user (TKADV2005-11-002) (thraxisp)
+- 0006564: [security] Port XSS Vulnerability in project documents (TKADV2005-11-002) (thraxisp)
+- 0006570: [security] XSS Vulnerability in saved queries (TKADV2005-11-002) (thraxisp)
+- 0006629: [security] Port: code injection (thraxisp)
+- 0006664: [security] Port #6659: Cross site scripting vulnerability (thraxisp)
+- 0006665: [security] Port #6044: 'Return' _GET is not checked (thraxisp)
+- 0006667: [security] Adodb and phpmailer update .... (vboctor)
+- 0006719: [security] Manager of a project can assign the Administrator role to a user. (vboctor)
+- 0007006: [security] Login with disabled account possible (vboctor)
+- 0007021: [upgrade] fixed_in_version is renamed to Fixed_in_version during database migration (vboctor)
+- 0007356: [webpage] There is an extra "</a>" closing tag. (vboctor)
 - Added Config: $g_rss_key_seed - A seed to be used as one of the input for calculating RSS authentication keys.
 - Added Config: $g_view_issues_page_columns - An array of column names to be shown on the View Issues page.
 - Added Config: $g_ldap_protocol_version - If not 0, then used to specify the LDAP protocol version to be used.
@@ -12,6 +109,88 @@ Mantis ChangeLog
 - Added Config: $g_recently_visited_count - The maximum number of issues to keep in the recently visited list.
 - Added Language: polish_utf8 (thanks to Bartosz Tomasik)
 - Updated Language: romanian (thanks to Cristian Navalici)
+
+2006.07.23 - 1.0.5
+
+- 0007301: [upgrade] Login page inaccessible after upgrade to 1.0.4 (thraxisp)
+
+2006.07.22 - 1.0.4
+
+- 0007051: [bugtracker] Fix for #6869 / #7034 removes quoted "?" from arguments (thraxisp)
+- 0007298: [bugtracker] Port: bugnote_delete.php redirection fails (vboctor)
+- 0007299: [bugtracker] Port: Save login feature does not work (vboctor)
+- 0007300: [bugtracker] Port: Remember login always redirects to main_page.php (vboctor)
+- 0007143: [other] Port: checkin.php needs array_unique() (vboctor)
+
+2006.05.07 - 1.0.3
+
+- 0007037: [security] Port: Login with disabled account possible (vboctor)
+- 0007034: [bugtracker] Port: bug in string_sanitize_url() (vboctor)
+- 0007028: [db mssql] Port: "Prune Accounts" function doesn't work with MS SQL (vboctor)
+- 0007029: [db mssql] Port: MS SQL Error on View Filters Page (vboctor)
+- 0007030: [db mssql] Port: installtion fails - administrator have no rights on db (vboctor)
+- 0007032: [db mssql] Port: Error on opening Change Log (vboctor)
+- 0007039: [db mssql] Notice: Only variables should be assigned by reference in \core\adodb\adodb.inc.php on line 2931 (vboctor)
+- 0007035: [feature] Port: Global Profiles list not sorted (vboctor)
+- 0007038: [filters] Port: SYSTEM WARNING: Argument 1 to array_multisort() is expected to be an array or a sort flag (vboctor)
+- 0007031: [installation] Port: is_writable never success in install.php (vboctor)
+- 0007041: [installation] Port: newbie admins may be redirected to blank page (vboctor)
+- 0007033: [printing] Port: wrong strpos function call (vboctor)
+- 0007027: [upgrade] Port: fixed_in_version is renamed to Fixed_in_version during database migration (vboctor)
+
+2006.04.18 - 1.0.2
+
+- 0006902: [security] XSS in mantis bug track system .... (thraxisp)
+- 0006859: [bugtracker] Can send reminders to all recipients (thraxisp)
+
+2006.02.18 - 1.0.1
+
+- 0006722: [installation] Remaining mysqli_ install problems (ref. #0006672): mysqli_real_escape_string() expects parameter 1 to be link (thraxisp)
+- 0006672: [installation] install.php assumes mysql extension, fails with mysqli extension (thraxisp)
+- 0006668: [filters] Parse error while saving new filter: Call to undefined function: string_strip_tags() (thraxisp)
+
+2006.02.04  -  1.0.0
+
+- 0006044: [security] 'Return' _GET is not checked (thraxisp)
+- 0006650: [security] ADOdb can be exploited to execute arbitrary SQL code (vboctor)
+- 0006659: [security] Cross site scripting vulnerability (thraxisp)
+- 0006634: [filters] Filter does not work with profiles (vboctor)
+
+2006.01.17  -  1.0.0rc5
+
+- 0006509: [security] Port: Additional XSS Vulnerabilities in Filter (thraxisp)
+- 0006557: [security] XSS Vulnerability in manage_user (TKADV2005-11-002) (thraxisp)
+- 0006563: [security] Port XSS Vulnerability in project documents (TKADV2005-11-002) (thraxisp)
+- 0006569: [security] XSS Vulnerability in saved queries (TKADV2005-11-002) (thraxisp)
+- 0006594: [bugtracker] config_flush_cache does not work correctly (thraxisp)
+- 0006585: [documentation] don't see the documentation (thraxisp)
+- 0006501: [filters] Categories can't be selected for filter-setting (thraxisp)
+
+2005.12.13  -  1.0.0rc4
+
+- 0006421: [security] Private bugs show up in public RSS feed (vboctor)
+- 0006458: [security] Port #6457: SQL Injection in manage user page (TKADV2005-11-002) (vboctor)
+- 0006461: [security] Port #6460: HTTP Header CRLF Injection (TKADV2005-11-002) (vboctor)
+- 0006485: [security] XSS Vulnerability in filters (TKADV2005-11-002) (thraxisp)
+- 0006489: [security] Port Injection Vulnerabilities in Filters (TKADV2005-11-002) (thraxisp)
+- 0006492: [security] Port #6453: Make note private has no effect when resolving bug (thraxisp)
+- 0006432: [bugtracker] error processing does not work! (jlatour)
+- 0006379: [filters] Filter returns private issues when it should not (thraxisp)
+- 0006254: [localization] strings_korean_utf8.txt has UTF-8 byte-order marker (ryandesign)
+- 0006268: [localization] strings_chinese_simplified_utf8.txt has UTF-8 byte-order marker (ryandesign)
+- 0006304: [localization] [PATCH] Major overhaul of strings_dutch.txt (jlatour)
+- 0006358: [localization] Updated Dutch localization (Wanderer)
+- 0006474: [localization] Calls to htmlspecialchars should take into account the current charset (jlatour)
+
+2005.10.29  -  1.0.0rc3
+
+- 0006273: [security] File Inclusion Vulnerability (vboctor)
+- 0006275: [security] SQL injection (vboctor)
+- 0006234: [filters] Filter sometimes returns no results (thraxisp)
+- 0006295: [filters] Old filters and view_state problems. (thraxisp)
+- 0006288: [filters] Patch against CVS HEAD for Saved filter problem with view_state (thraxisp)
+- 0006296: [filters] Filter sql includes unnecessary links to custom_field_string_table for date custom fields (thraxisp)
+- 0006297: [filters] sorting on custom field, bring MySQL to deadlock loop (thraxisp)
 
 2005.09.11  -  1.0.0rc2
 
@@ -68,7 +247,6 @@ Mantis ChangeLog
 - 0006118: [sql] Database query failure - click on Docs link - MySQL 3.23 (thraxisp)
 - 0006140: [sql] MSSQL: Ambiguous column name when trying to open Summary page (thraxisp)
 - 0006142: [sql] PostgreSQL: creation of user failed (thraxisp)
-
 
 2005.07.23  -  1.0.0rc1
 

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.4 2006-05-18 05:14:27 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.5 2006-09-12 03:38:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -135,9 +135,9 @@
 <?php
 	} # end for loop
 ?>
-<!-- Config Set Form -->
 </table>
 <br />
+<!-- Config Set Form -->
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
