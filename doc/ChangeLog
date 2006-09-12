@@ -75,6 +75,7 @@ This is the alpha release for Mantis 1.1, it is not recommended for production u
 - 0007012: [other] Word and Excel files are exported as _word and _excel (vboctor)
 - 0007076: [other] checkin.php needs array_unique() (vboctor)
 - 0007109: [other] Add more file icons + move icons to images/fileicons/ (vboctor)
+- 0007426: [other] Update Mantis to refer to new website (vboctor)
 - 0004019: [performance] Ability to update reporter increases update page size dramatically (vboctor)
 - 0006627: [performance] Very slow performance when filing a new issue or adding a note (vboctor)
 - 0006868: [printing] wrong strpos function call (thraxisp)
