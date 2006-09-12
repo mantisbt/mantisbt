@@ -2,7 +2,7 @@ Mantis ChangeLog
 
 2006.09.11  -  1.1.0a1
 
-This is the alpha release for Mantis 1.1, it is not recommended for production use.  The list of issues below are relative to Mantis 1.0.0rc2, hence, some of the fixes, specially the security ones, would be available in the 1.0.x releases.  This release has about 100 enhancements and fixes, some of the highlights include web based configuration (general/per user/per project), customizing columns for view/print/csv issues can now be done through the web interface and can be per user or project, email queuing, and authenticated RSS feeds.
+This is the alpha release for Mantis 1.1, it is not recommended for production use.  The list of issues below are relative to Mantis 1.0.0rc2, hence, some of the fixes, specially the security ones, would be available in the 1.0.x releases.  This release has about 100 enhancements and fixes, some of the highlights include wiki integration, web based configuration (general/per user/per project), customizing columns for view/print/csv issues can now be done through the web interface and can be per user or project, email queuing, and authenticated RSS feeds.
 
 - 0006637: [administration] Disabled projects don't appear under parent project (vboctor)
 - 0006869: [administration] bug in string_sanitize_url() (thraxisp)

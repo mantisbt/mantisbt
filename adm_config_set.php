@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_set.php,v 1.2 2006-05-18 05:14:27 vboctor Exp $
+	# $Id: adm_config_set.php,v 1.3 2006-09-12 04:38:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -29,7 +29,7 @@
 	
 	# make sure that configuration option specified is a valid one.
 	$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
-	if ( config_get_global( $f_config_option, $t_not_found_value ) == $t_not_found_value ) {
+	if ( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
 		error_parameters( $f_config_option );
 		trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
 	}
