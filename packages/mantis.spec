@@ -9,7 +9,7 @@ Version: 1.1.0
 Release: 20051130
 License: GPL
 Group: Applications/Internet
-URL: http://www.mantisbt.org/
+URL: http://www.mantisbugtracker.com/
 BuildArch: noarch
 Source0: http://download.sourceforge.net/sourceforge/mantisbt/%name-%version-%release.tar.gz
 Source1: mantis-httpd.conf
