@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.23 2005-08-08 22:30:58 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.24 2006-09-15 06:00:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -69,9 +69,12 @@
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$t_bug = bug_get( $f_bug_id );
+
+	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	html_page_top2();
+
+	print_recently_visited();
 ?>
-<?php html_page_top1(bug_format_summary( $f_bug_id, SUMMARY_CAPTION )) ?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
