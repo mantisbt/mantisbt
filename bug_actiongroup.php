@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.47 2005-06-16 02:26:48 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.48 2006-09-15 05:39:30 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -190,7 +190,7 @@
 			if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_id ) ) {
 				$f_sticky = bug_get_field( $t_bug_id, 'sticky' );
 				// The new value is the inverted old value
-				bug_set_field( $t_bug_id, 'sticky', !$f_sticky );
+				bug_set_field( $t_bug_id, 'sticky', intval( !$f_sticky ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
