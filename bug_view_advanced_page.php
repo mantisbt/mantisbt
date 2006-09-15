@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.79 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.80 2006-09-15 05:19:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -76,10 +76,15 @@
 		</span>
 	<?php
 		}
+		
+		if ( wiki_is_enabled() ) {
 	?>
 		<span class="small">
 			<?php print_bracket_link( 'wiki.php?id='.$f_bug_id, lang_get( 'wiki' ) ) ?>
 		</span>
+	<?php
+		}
+	?>
 	</td>
 
 	<!-- prev/next links -->
