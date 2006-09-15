@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.75 2006-08-15 06:02:06 vboctor Exp $
+	# $Id: file_api.php,v 1.76 2006-09-15 05:02:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -172,27 +172,33 @@
 				$t_href_clicket = '';
 			}
 
-			PRINT $t_href_start;
-			print_file_icon ( $t_file_display_name );
-			PRINT $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name .
-				$t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
+			$t_exists = config_get( 'file_upload_method' ) != DISK || file_exists( $v_diskfile );
 
-			if ( $t_can_delete ) {
-				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
-			}
+			if ( !$t_exists ) {
+				print_file_icon ( $t_file_display_name );
+				PRINT '&nbsp;<font STYLE="text-decoration: line-through">' . $t_file_display_name . '</font> (attachment missing)';
+			} else {
+				PRINT $t_href_start;
+				print_file_icon ( $t_file_display_name );
+				PRINT $t_href_end . '&nbsp;' . $t_href_start . $t_file_display_name .
+					$t_href_end . "$t_href_clicket ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
-			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
-				PRINT ' (' . lang_get( 'cached' ) . ')';
-			}
+				if ( $t_can_delete ) {
+					PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
+				}
 
-			if ( $t_can_download &&
-				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
-				( $v_filesize != 0 ) &&
-				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
-                                $c_id=number_format($v_id);
-				$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+				if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
+					PRINT ' (' . lang_get( 'cached' ) . ')';
+				}
 
-				echo "<script language='JavaScript'>
+				if ( $t_can_download &&
+					( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+					( $v_filesize != 0 ) &&
+					( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
+                                	$c_id = number_format( $v_id );
+					$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+					echo "<script language='JavaScript'>
 <!--
 function swap_content( span ) {
 displayType = ( document.getElementById( span ).style.display == 'none' ) ? 'block' : 'none';
@@ -201,57 +207,58 @@ document.getElementById( span ).style.display = displayType;
 
  -->
  </script>";
-				PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onClick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
-				switch ( config_get( 'file_upload_method' ) ) {
-					case DISK:
-						if ( file_exists( $v_diskfile ) ) {
-							$v_content=file_get_contents( $v_diskfile );
-						}
-						break;
-					case FTP:
-						if ( file_exists( $v_diskfile ) ) {
-							file_get_contents( $v_diskfile );
-						} else {
-							$ftp = file_ftp_connect();
-							file_ftp_get ( $ftp, $v_diskfile, $v_diskfile );
-							file_ftp_disconnect( $ftp );
-							$v_content=file_get_contents( $v_diskfile );
-						}
-						break;
-					default:
-                  				$query = "SELECT *
-	                  					FROM $t_bug_file_table
-			            			WHERE id='$c_id'";
-                       				$result = db_query( $query );
-		                 		$row = db_fetch_array( $result );
-                                                $v_content=$row['content'];
+					PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onClick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
+					switch ( config_get( 'file_upload_method' ) ) {
+						case DISK:
+							if ( file_exists( $v_diskfile ) ) {
+								$v_content=file_get_contents( $v_diskfile );
+							}
+							break;
+						case FTP:
+							if ( file_exists( $v_diskfile ) ) {
+								file_get_contents( $v_diskfile );
+							} else {
+								$ftp = file_ftp_connect();
+								file_ftp_get ( $ftp, $v_diskfile, $v_diskfile );
+								file_ftp_disconnect( $ftp );
+								$v_content=file_get_contents( $v_diskfile );
+							}
+							break;
+						default:
+                  					$query = "SELECT *
+	                  						FROM $t_bug_file_table
+				            			WHERE id='$c_id'";
+        	               				$result = db_query( $query );
+			                 		$row = db_fetch_array( $result );
+                        	                        $v_content=$row['content'];
+					}
+					echo htmlspecialchars($v_content);
+
+					PRINT "</pre></blockquote>";
 				}
-				echo htmlspecialchars($v_content);
-
-				PRINT "</pre></blockquote>";
-			}
 
 
-			if ( $t_can_download &&
-				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
-				( $v_filesize != 0 ) &&
-				( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
+				if ( $t_can_download &&
+					( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+					( $v_filesize != 0 ) &&
+					( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_image_ext, true ) ) ) {
 
-				$t_preview_style = 'border: 0;';
-				$t_max_width = config_get( 'preview_max_width' );
-				if ( $t_max_width > 0 ) {
-					$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
-				}
+					$t_preview_style = 'border: 0;';
+					$t_max_width = config_get( 'preview_max_width' );
+					if ( $t_max_width > 0 ) {
+						$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
+					}
 				
-				$t_max_height = config_get( 'preview_max_height' );
-				if ( $t_max_height > 0 ) {
-					$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
+					$t_max_height = config_get( 'preview_max_height' );
+					if ( $t_max_height > 0 ) {
+						$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
+					}
+
+					$t_preview_style = 'style="' . $t_preview_style . '"';
+
+					PRINT "<br />$t_href_start<img $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
+					$image_previewed = true;
 				}
-
-				$t_preview_style = 'style="' . $t_preview_style . '"';
-
-				PRINT "<br />$t_href_start<img $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
-				$image_previewed = true;
 			}
 
 			if ( $i != ( $num_files - 1 ) ) {
