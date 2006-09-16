@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.310 2006-09-12 03:38:57 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.311 2006-09-16 18:02:05 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -320,7 +320,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.1.0a1';
+	$g_mantis_version		= '1.1.0a2-CVS';
 	$g_show_version			= ON;
 
 	################################
@@ -356,6 +356,7 @@
 		'hungarian',
 		'icelandic',
 		'italian',
+		'italian_utf8',
 		'japanese_euc',
 		'japanese_sjis',
 		'japanese_utf8',
