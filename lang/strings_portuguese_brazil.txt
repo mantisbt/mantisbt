@@ -7,16 +7,16 @@
 
 	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
-	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
+	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.97 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:09:10 $
+	# $Revision: 1.98 $
+	# $Author: vboctor $
+	# $Date: 2006-09-17 01:41:18 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.97 2006-02-20 09:09:10 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.98 2006-09-17 01:41:18 vboctor Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.267 -- jferraz 2005/08/10
+	# Up-to-date with strings_english.txt revision 1.276 -- jravasi 2006/09/13
 	###########################################################################
 ?>
 <?php
@@ -247,6 +247,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Esta pessoa não
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado: Atribuir casos patrocinados requer um nível de acesso maior.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Patrocinador não forneceu um endereço de e-mail. Por favor, atualize seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%s\' tem um valor inválido \'%s\'';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'A opção de configuração \'%s\' não pode ser ajustada no banco-de-dados.  Ela deve ser ajustada em config_inc.php.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%d\' é somente-leitura';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Já existe uma relação entre estes dois casos.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relação não encontrada.";
@@ -260,6 +261,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O endereço de confirm
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número máximo de solicitações em progresso foi atingido. Por favor, contate o administrador do sistema.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erro de redirecionamento de página, certifique-se que não haja espaços fora do bloco PHP (&lt;?php ?&gt;) nos arquivos config_inc.php ou custom_*.php.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.';
@@ -605,6 +607,9 @@ $s_closed_bug_button = 'Fechar Caso';
 $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
 $s_edited_on = 'alterado em: ';
 
+# file_api.php
+$s_show_content ='Mostrar Conteúdo';
+
 # index.php
 $s_click_to_login = 'Clique aqui para acessar';
 
@@ -742,6 +747,16 @@ $s_reopen_resolution = 'Resolução para a qual casos reabertos são ajustados';
 $s_config_delete_sure = 'Você tem certeza que deseja apagar as configurações para';
 $s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar Configurações';
+
+# adm_config_report.php
+$s_configuration_report = 'Relatório de Configuração';
+$s_database_configuration = 'Configuração de Banco-de-dados';
+$s_configuration_option = 'Opção de Configuração';
+$s_configuration_option_type = 'Tipo';
+$s_configuration_option_value = 'Valor';
+$s_all_users = 'Todos os Usuários';
+$s_set_configuration_option = 'Ajustar Opção de Configuração';
+$s_delete_config_sure_msg = 'Você tem certeza que deseja apagar esta opção de configuração?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
@@ -1050,10 +1065,12 @@ $s_viewing_bugs_title = 'Visualizando Casos';
 $s_updated = 'Atualizado';
 $s_sticky = 'Mostrar Casos "Pegajosos"';
 $s_sort = 'Ordenar por';
+$s_issue_id = 'Caso #';
+$s_recently_visited = 'Recentemente Visitado';
 
 # view_all_inc.php
 $s_none = 'nenhum';
-$s_current = 'current';
+$s_current = 'atual';
 $s_search = 'Procurar';
 $s_view_prev_link = 'Ver Ant';
 $s_view_next_link = 'Ver Próx';
@@ -1293,4 +1310,6 @@ $s_before = 'Antes' ;
 $s_after = 'Depois' ;
 $s_on_or_after = 'Em ou Depois' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
