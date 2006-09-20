@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.48 2005-12-07 22:25:39 prichards Exp $
+	# $Id: summary_page.php,v 1.49 2006-09-20 04:31:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -100,7 +100,7 @@
 	$t_orcttab = "";
 	foreach ( $t_orct_arr as $t_orct_s ) {
 		$t_orcttab .= '<td class="right">';
-		$t_orcttab .= ucwords( $t_orct_s );
+		$t_orcttab .= $t_orct_s;
 		$t_orcttab .= '</td>';
 	}
 ?>
@@ -324,7 +324,7 @@
 				print '<td>';
 				$t_s = explode_enum_arr( $t_arr[$i] );
 				$c_s[0] = db_prepare_string( $t_s[0] );
-				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
+				echo get_enum_element( 'resolution', $c_s[0] );
 				print '</td>';
 			}
 
@@ -354,7 +354,7 @@
 				print '<td>';
 				$t_s = explode_enum_arr( $t_arr[$i] );
 				$c_s[0] = db_prepare_string( $t_s[0] );
-				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
+				echo get_enum_element( 'resolution', $c_s[0] );
 				print '</td>';
 			}
 
