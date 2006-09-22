@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.311 2006-09-16 18:02:05 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.312 2006-09-22 22:18:08 achumakov Exp $
 	# --------------------------------------------------------
 
 
@@ -372,6 +372,7 @@
 		'romanian',
 		'russian',
 		'russian_koi8',
+		'russian_utf8',
 		'serbian',
 		'slovak',
 		'slovene',
