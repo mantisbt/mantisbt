@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.92.6.1 2006-01-01 02:58:50 thraxisp Exp $
+	# $Id: manage_proj_edit_page.php,v 1.92.6.1.4.1 2006-09-23 06:30:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -566,8 +566,8 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 				</td>
 				<td>
 					<select name="access_level">
-						<?php # No administrator choice ?>
-						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
+						<?php # only access levels that are less than or equal current user access level for current project ?>
+						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ) ?>
 					</select>
 				</td>
 				<td>
