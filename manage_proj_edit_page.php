@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.92.6.1.4.1 2006-09-23 06:30:22 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.92.6.1.4.2 2006-09-23 06:48:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -164,7 +164,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 <!-- Subprojects -->
 <?php
-	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id );
+	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, /* show_disabled */ true );
 
 	if ( Array() != $t_subproject_ids ) {
 ?>
@@ -229,7 +229,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="subproject_id">
 <?php
-	$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id );
+	$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, /* $p_show_disabled */ true );
 	$t_all_subprojects[] = $f_project_id;
 	$t_manage_access = config_get( 'manage_project_threshold' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.28 2005-04-27 13:31:06 vboctor Exp $
+	# $Id: current_user_api.php,v 1.28.14.1 2006-09-23 06:48:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -61,14 +61,14 @@
 	# --------------------
 	# Return an array of projects to which the currently logged in user
 	#  has access
-	function current_user_get_accessible_projects() {
-		return user_get_accessible_projects( auth_get_current_user_id() );
+	function current_user_get_accessible_projects( $p_show_disabled = false ) {
+		return user_get_accessible_projects( auth_get_current_user_id(), $p_show_disabled );
 	}
 	# --------------------
 	# Return an array of subprojects of the specified project to which the
 	# currently logged in user has access
-	function current_user_get_accessible_subprojects( $p_project_id ) {
-		return user_get_accessible_subprojects( auth_get_current_user_id(), $p_project_id );
+	function current_user_get_accessible_subprojects( $p_project_id, $p_show_disabled = false ) {
+		return user_get_accessible_subprojects( auth_get_current_user_id(), $p_project_id, $p_show_disabled );
 	}
 	# --------------------
 	# Return an array of subprojects of the specified project to which the
