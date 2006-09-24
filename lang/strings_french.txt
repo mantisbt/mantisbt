@@ -18,11 +18,11 @@
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
 	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
 	# -------------------------------------------------
-	# $Revision: 1.108 $
+	# $Revision: 1.109 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_french.txt,v 1.108 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_french.txt,v 1.109 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -456,7 +456,8 @@ $s_no_sponsored = 'Aucun bogue commandité et assigné à vous même n\'a été 
 $s_own_sponsored = 'Bogues que vous avez commandités :';
 $s_issues_handled = 'Bogues commandités qui vous ont été assignés :';
 $s_no_own_sponsored = 'Vous n\'avez commandité aucun bogue.';
-$s_sponsor = 'Commanditaire';
+$s_sponsor = 'Commanditaire';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Montant';
 $s_total_owing = 'Total dû';
 $s_total_paid = 'Total payé';

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.15 2006-09-20 04:25:47 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.16 2006-09-24 14:11:27 achumakov Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,7 +49,7 @@
 <table class="width100" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
-			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor' ) ?>" border="0" />
+			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" border="0" />
 		</td>
 		<td class="form-title" colspan="2">
 			<?php collapse_icon( 'sponsorship' ); ?>
@@ -75,7 +75,7 @@
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
 				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
-				<input type="submit" class="button" name="sponsor" value="<?php echo lang_get( 'sponsor' ) ?>" />
+				<input type="submit" class="button" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
 			</form>
 		</td>
 	</tr>

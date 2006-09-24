@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.140 $
+	# $Revision: 1.141 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_german.txt,v 1.140 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_german.txt,v 1.141 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -449,7 +449,8 @@ $s_no_sponsored = 'Keine von Ihnen gesponserten Probleme gefunden.';
 $s_own_sponsored = 'Von Ihnen gesponserte Probleme:';
 $s_issues_handled = 'Gesponserte Probleme, die Ihnen zugeordnet sind:';
 $s_no_own_sponsored = 'Sie haben keine Probleme gesponsert.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Betrag';
 $s_total_owing = 'Außenstände gesamt';
 $s_total_paid = 'Bezahlt gesamt';

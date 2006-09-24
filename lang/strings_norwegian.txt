@@ -9,11 +9,11 @@
 # Norwegian: Ingvald Skaug, dev@skaug.no
 # Norwegian: Alf-Ivar Holm, affi@csc.no
 # -------------------------------------------------
-# $Revision: 1.98 $
+# $Revision: 1.99 $
 # $Author: achumakov $
-# $Date: 2006-09-24 09:47:04 $
+# $Date: 2006-09-24 14:11:28 $
 #
-# $Id: strings_norwegian.txt,v 1.98 2006-09-24 09:47:04 achumakov Exp $
+# $Id: strings_norwegian.txt,v 1.99 2006-09-24 14:11:28 achumakov Exp $
 ###########################################################################
 ?>
 <?php
@@ -446,7 +446,8 @@ $s_no_sponsored = 'Finner ingen sponsede saker delegert til deg.';
 $s_own_sponsored = 'Saker du har sponset:';
 $s_issues_handled = 'Sponsede saker du har blitt delegert:';
 $s_no_own_sponsored = 'Du har ikke sponset noen saker.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Beløp';
 $s_total_owing = 'Totalt utestående';
 $s_total_paid = 'Totalt betalt';

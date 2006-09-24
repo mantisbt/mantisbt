@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_finnish.txt,v 1.45 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_finnish.txt,v 1.46 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -448,7 +448,8 @@ $s_no_sponsored = 'Yhtään sinulle osoitettua sponsoroitua tapahtumaa ei löytynyt
 $s_own_sponsored = 'Tapahtumat, joita olet sponsoroinut:';
 $s_issues_handled = 'Sponsoroidut tapahtumat jotka on osoitettu sinulle:';
 $s_no_own_sponsored = 'Et ole sponsoroinut yhtään tapahtumaa.';
-$s_sponsor = 'Sponsori';
+$s_sponsor = 'Sponsori';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Määrä';
 $s_total_owing = 'Maksamattomia/velkasaldo yhteensä';
 $s_total_paid = 'Maksettu yhteensä';

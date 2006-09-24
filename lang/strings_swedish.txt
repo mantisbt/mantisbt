@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.95 $
+	# $Revision: 1.96 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:29 $
 	#
-	# $Id: strings_swedish.txt,v 1.95 2006-09-24 09:47:04 achumakov Exp $
+	# $Id: strings_swedish.txt,v 1.96 2006-09-24 14:11:29 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -444,7 +444,8 @@ $s_no_sponsored = 'Inga sponsrade ärenden tilldelade till dig kunde hittas.';
 $s_own_sponsored = 'Ärenden du har sponsrat:';
 $s_issues_handled = 'Sponsrade ärenden som tilldelats dig:';
 $s_no_own_sponsored = 'Du har inte sponsrat några ärenden.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Belopp';
 $s_total_owing = 'Total skuld';
 $s_total_paid = 'Totalt betalt';

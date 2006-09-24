@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.10 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 11:17:02 $
+	# $Revision: 1.11 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 14:11:27 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.10 2006-09-24 11:17:02 siebrand Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.11 2006-09-24 14:11:27 achumakov Exp $
 	###########################################################################
 
 	###########################################################################
@@ -463,7 +463,8 @@ $s_no_sponsored = '没有找到分派给你的已资助的问题。';
 $s_own_sponsored = '你已经资助的问题：';
 $s_issues_handled = '分派给你的已资助的问题：';
 $s_no_own_sponsored = '你没有资助任何问题。';
-$s_sponsor = '资助';
+$s_sponsor = '资助';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '数量';
 $s_total_owing = '未支付合计';
 $s_total_paid = '已支付合计';

@@ -11,11 +11,11 @@
 	###########################################################################
 	# Bulgarian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.3 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 11:17:02 $
+	# $Revision: 1.4 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 14:11:27 $
 	#
-	# $Id: strings_bulgarian.txt,v 1.3 2006-09-24 11:17:02 siebrand Exp $
+	# $Id: strings_bulgarian.txt,v 1.4 2006-09-24 14:11:27 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -448,7 +448,8 @@ $s_no_sponsored = 'Няма спонсорирани проблеми, назначени на ваше име.';
 $s_own_sponsored = 'Спонсорирани от вас проблеми:';
 $s_issues_handled = 'Спонсорирани проблеми, които са Ви били назначени:';
 $s_no_own_sponsored = 'Няма спонсорирани от Вас проблеми.';
-$s_sponsor = 'Спонсор';
+$s_sponsor = 'Спонсор';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Сума';
 $s_total_owing = 'Дължимо общо';
 $s_total_paid = 'Платено общо';

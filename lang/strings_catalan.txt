@@ -9,11 +9,11 @@
 	###########################################################################
 	# Catalan strings for Mantis
         # -------------------------------------------------
-        # $Revision: 1.4 $
-        # $Author: siebrand $
-        # $Date: 2006-09-24 11:17:02 $
+        # $Revision: 1.5 $
+        # $Author: achumakov $
+        # $Date: 2006-09-24 14:11:27 $
         #
-        # $Id: strings_catalan.txt,v 1.4 2006-09-24 11:17:02 siebrand Exp $
+        # $Id: strings_catalan.txt,v 1.5 2006-09-24 14:11:27 achumakov Exp $
         ###########################################################################
 ?>
 <?php
@@ -447,7 +447,8 @@ $s_no_sponsored = "No se t'han trobat comandes patrocinades assignades";
 $s_own_sponsored = 'Comandes que has patrocinat:';
 $s_issues_handled = 'Comandes Patrocinades que has Assignat:';
 $s_no_own_sponsored = 'No has patrocinat cap comanda.';
-$s_sponsor = 'Espónsor';
+$s_sponsor = 'Espónsor';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Import';
 $s_total_owing = 'Total Deure';
 $s_total_paid = 'Total Pagat';

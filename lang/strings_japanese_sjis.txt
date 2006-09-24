@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.85 $
+	# $Revision: 1.86 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.85 2006-09-24 09:47:04 achumakov Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.86 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -446,7 +446,8 @@ $s_no_sponsored = '‚ ‚È‚½‚ª’S“–‚·‚é‰ü‘P—v‹‚ÉŽ‘‹à’ñ‹Ÿ‚³‚ê‚Ä‚¢‚È‚¢‚à‚Ì‚ªŒ©‚Â‚©‚è‚
 $s_own_sponsored = 'Ž‘‹à’ñ‹Ÿ‚·‚é‰ü‘P—v‹:';
 $s_issues_handled = 'Ž‘‹à’ñ‹Ÿ‚ðŽó‚¯‚½’S“–‚·‚é‰ü‘P—v‹:';
 $s_no_own_sponsored = 'Ž‘‹à’ñ‹Ÿ‚ðŽó‚¯‚½‰ü‘P—v‹‚ð’S“–‚µ‚Ä‚¢‚Ü‚¹‚ñB';
-$s_sponsor = 'ƒXƒ|ƒ“ƒT[';
+$s_sponsor = 'ƒXƒ|ƒ“ƒT[';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '‡Œv';
 $s_total_owing = '‘Šz';
 $s_total_paid = '‘Žx•¥‚¢Šz';

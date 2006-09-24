@@ -18,9 +18,9 @@
 	#	to make it understandable by non-techie users
 	#
 	# -------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:29 $
 	#
 	# $Id:
 	###########################################################################
@@ -481,7 +481,8 @@ $s_no_sponsored = 'Не найдено оплачиваемых вопросов
 $s_own_sponsored = 'Вопросы, оплачиваемые вами:';
 $s_issues_handled = 'Оплачиваемые вопросы, назначенные вам:';
 $s_no_own_sponsored = 'Вы не оплачиваете никакие вопросы.';
-$s_sponsor = 'Плательщик';
+$s_sponsor = 'Плательщик';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Оплатить';		# like in 'Sponsor it!'
 $s_amount = 'Размер оплаты';
 $s_total_owing = 'Всего причитается';
 $s_total_paid = 'Всего уплачено';

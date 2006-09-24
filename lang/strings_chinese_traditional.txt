@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.89 $
-        # $Author: siebrand $
-        # $Date: 2006-09-24 11:17:02 $
+        # $Revision: 1.90 $
+        # $Author: achumakov $
+        # $Date: 2006-09-24 14:11:27 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.89 2006-09-24 11:17:02 siebrand Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.90 2006-09-24 14:11:27 achumakov Exp $
         ###########################################################################
 ?>
 <?php
@@ -445,7 +445,8 @@ $s_no_sponsored = 'ß‰§£®Ï´¸¨£µπßA™∫∞›√D�
 $s_own_sponsored = 'ßA≥Q∏ÍßU™∫∞›√D:';
 $s_issues_handled = '´¸¨£µπßA¶≥≥Q∏ÍßU™∫∞›√D:';
 $s_no_own_sponsored = '´¸¨£µπßA™∫∞›√Dß°®S¶≥≥Q∏ÍßU.';
-$s_sponsor = '∏ÍßU™Ã';
+$s_sponsor = '∏ÍßU™Ã';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '™˜√B';
 $s_total_owing = '§Ì¥⁄¡`√B';
 $s_total_paid = '•I¥⁄¡`√B';

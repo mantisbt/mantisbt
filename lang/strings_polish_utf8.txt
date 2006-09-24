@@ -12,11 +12,11 @@
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 10:37:29 $
+	# $Date: 2006-09-24 14:11:29 $
 	#
-	# $Id: strings_polish_utf8.txt,v 1.3 2006-09-24 10:37:29 achumakov Exp $
+	# $Id: strings_polish_utf8.txt,v 1.4 2006-09-24 14:11:29 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -450,7 +450,8 @@ $s_no_sponsored = 'Nie znaleziono sponosorowanych Zagadnień przypisanych tobie.
 $s_own_sponsored = 'Zagadnienia, które sponsorowałeś:';
 $s_issues_handled = 'Zagadnienia sponsorowane, które są przypisane tobie:';
 $s_no_own_sponsored = 'Nie sponsorowałeś żadnych zagadnień.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Kwota';
 $s_total_owing = 'Łącznie zaległych';
 $s_total_paid = 'Łącznie opłaconych';

@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional_UTF8: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.8 $
-        # $Author: siebrand $
-        # $Date: 2006-09-24 11:17:02 $
+        # $Revision: 1.9 $
+        # $Author: achumakov $
+        # $Date: 2006-09-24 14:11:27 $
         #
-        # $Id: strings_chinese_traditional_utf8.txt,v 1.8 2006-09-24 11:17:02 siebrand Exp $
+        # $Id: strings_chinese_traditional_utf8.txt,v 1.9 2006-09-24 14:11:27 achumakov Exp $
         ###########################################################################
 ?>
 <?php
@@ -445,7 +445,8 @@ $s_no_sponsored = '找不到指派給你的問題有被資助.';
 $s_own_sponsored = '你被資助的問題:';
 $s_issues_handled = '指派給你有被資助的問題:';
 $s_no_own_sponsored = '指派給你的問題均沒有被資助.';
-$s_sponsor = '資助者';
+$s_sponsor = '資助者';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '金額';
 $s_total_owing = '欠款總額';
 $s_total_paid = '付款總額';

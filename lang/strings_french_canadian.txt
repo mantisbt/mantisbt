@@ -19,11 +19,11 @@
 		# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
  # Translated constant $s_current which was missing in all language files (v 1.8 2006/03/04)
 	# -------------------------------------------------
-	# $Revision: 1.9 $
+	# $Revision: 1.10 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.9 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_french_canadian.txt,v 1.10 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -457,7 +457,8 @@ $s_no_sponsored = 'Aucun bogue commandité et assigné à vous même n\'a été trouvé
 $s_own_sponsored = 'Bogues que vous avez commandités :';
 $s_issues_handled = 'Bogues commandités qui vous ont été assignés :';
 $s_no_own_sponsored = 'Vous n\'avez commandité aucun bogue.';
-$s_sponsor = 'Commanditaire';
+$s_sponsor = 'Commanditaire';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Montant';
 $s_total_owing = 'Total dû';
 $s_total_paid = 'Total payé';

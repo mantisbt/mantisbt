@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.89 $
+	# $Revision: 1.90 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:29 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.89 2006-09-24 09:47:04 achumakov Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.90 2006-09-24 14:11:29 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -445,7 +445,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';

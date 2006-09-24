@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:29 $
 	#
-	# $Id: strings_serbian.txt,v 1.35 2006-09-24 09:47:04 achumakov Exp $
+	# $Id: strings_serbian.txt,v 1.36 2006-09-24 14:11:29 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -446,7 +446,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';

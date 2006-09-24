@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2006-09-16 18:02:05 $
+	# $Revision: 1.2 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_italian_utf8.txt,v 1.1 2006-09-16 18:02:05 vboctor Exp $
+	# $Id: strings_italian_utf8.txt,v 1.2 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -449,7 +449,8 @@ $s_no_sponsored = "Non vi sono anomalie sponsorizzate assegnate a te.";
 $s_own_sponsored = "Anomalie che hai sponsorizzato:";
 $s_issues_handled = "Anomalie sponsorizzate assegnate a te:";
 $s_no_own_sponsored = "Non hai sponsorizzato nessuna anomalia.";
-$s_sponsor = "Sponsor";
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = "Somma";
 $s_total_owing = "Totale dovuto";
 $s_total_paid = "Totale pagato";

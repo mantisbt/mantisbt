@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:04 $
+	# $Date: 2006-09-24 14:11:28 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.32 2006-09-24 09:47:04 achumakov Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.33 2006-09-24 14:11:28 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -446,7 +446,8 @@ $s_no_sponsored = 'あなたが担当する改善要求に資金提供されて�
 $s_own_sponsored = '資金提供する改善要求:';
 $s_issues_handled = '資金提供を受けた担当する改善要求:';
 $s_no_own_sponsored = '資金提供を受けた改善要求を担当していません。';
-$s_sponsor = 'スポンサー';
+$s_sponsor = 'スポンサー';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '合計';
 $s_total_owing = '総額';
 $s_total_paid = '総支払い額';
