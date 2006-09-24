@@ -12,11 +12,11 @@
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
 	# -------------------------------------------------
-	# $Revision: 1.98 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-20 09:09:10 $
+	# $Revision: 1.99 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:04 $
 	#
-	# $Id: strings_polish.txt,v 1.98 2006-02-20 09:09:10 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.99 2006-09-24 09:47:04 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -260,6 +260,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Adres potwierdzaj±cy 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Osi±gniêto maksymaln± liczbê oczekuj±cych ¿±dañ. Proszê skonaktowaæ siê z administratorem.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ta operacja spowodowa³aby pêtlê w hierarchii podprojektów.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Nie mo¿esz zmieniæ poziomu dostêpu dla jedynego ADMINISTRATORA systemu.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';

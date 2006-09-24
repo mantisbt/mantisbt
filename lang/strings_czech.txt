@@ -12,11 +12,11 @@
 	# Czech: Přemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: bigbadger $
-	# $Date: 2006-03-13 15:35:17 $
+	# $Revision: 1.86 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:03 $
 	#
-	# $Id: strings_czech.txt,v 1.85 2006-03-13 15:35:17 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.86 2006-09-24 09:47:03 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -260,6 +260,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrzovací U
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosaženo maximum vnitřních procesů. Obra»te se na správce systému.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'CHYBA: Váš účet je vyřazen nebo blokován, nebo je zadána chybná kombinace uživatelské jméno/heslo.';

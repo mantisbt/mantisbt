@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.44 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-26 15:22:23 $
+	# $Revision: 1.45 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:03 $
 	#
-	# $Id: strings_finnish.txt,v 1.44 2006-02-26 15:22:23 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.45 2006-09-24 09:47:03 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -259,6 +259,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'VIRHE: Vahvistuslinkk
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'VIRHE: Kyselyjen/pyyntöjen maksimimäärä saavutettu. Ole hyvä, ja ota yhteys ylläpitoon';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'VIRHE: Tämä toiminto aiheuttaisi päättymättömän silmukan aliprojektihierarkiassa.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'VIRHE: Ainoan ylläpitäjän oikeustasoa ei voi muuttaa.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'VIRHE: Käyttäjätunnuksesi saattaa olla pois käytöstä tai antamasi käyttäjätunnus/salasanayhdistelmä on virheellinen.';

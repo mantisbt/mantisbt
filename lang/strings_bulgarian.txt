@@ -11,11 +11,11 @@
 	###########################################################################
 	# Bulgarian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2006-05-05 15:11:40 $
+	# $Revision: 1.2 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:02 $
 	#
-	# $Id: strings_bulgarian.txt,v 1.1 2006-05-05 15:11:40 vboctor Exp $
+	# $Id: strings_bulgarian.txt,v 1.2 2006-09-24 09:47:02 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -258,6 +258,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Адресът за потвържден
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Максималният брой паралелни заявки е достигнат. Моля, обърнете се към системния администратор';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Тази операция ще доведе до цикъл в подпроектната йерархия.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Забрана за промяна нивото на достъп на единствения АДМИНИСТРАТОР на системата.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Профилът може да е дезактивиран или блокиран (поради твърде много неуспешни опити за вход) или е въведено невалидно потребителско име/парола';
 $s_login_error = 'Профилът е дезактивиран, блокиран или е въведена неправилна комбинация от потребителско име/парола.';

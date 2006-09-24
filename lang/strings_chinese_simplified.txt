@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.78 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-21 16:41:59 $
+	# $Revision: 1.79 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:02 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.78 2006-02-21 16:41:59 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.79 2006-09-24 09:47:02 achumakov Exp $
 	###########################################################################
 
 	###########################################################################
@@ -273,6 +273,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '确认 URL 无效或已经进
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到最高请求数量；请联络系统管理员。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';

@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.94 $
-	# $Author: bigbadger $
-	# $Date: 2006-02-22 00:16:04 $
+	# $Revision: 1.95 $
+	# $Author: achumakov $
+	# $Date: 2006-09-24 09:47:04 $
 	#
-	# $Id: strings_spanish.txt,v 1.94 2006-02-22 00:16:04 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.95 2006-09-24 09:47:04 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -260,6 +260,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'La URL de confirmació
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Número máximo de peticiones alcanzado. Por favor contacte con el administrador del sistema';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación puede crear un error de ciclo recursivo';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No se puede cambiar el nivel de acceso del administrador en el sistema';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña introducidos son incorrectos.';
