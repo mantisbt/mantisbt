@@ -13,11 +13,11 @@
 	#
 	# Based on strings_english.txt rev. 1.276
 	# -------------------------------------------------
-	# $Revision: 1.101 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Revision: 1.102 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 10:18:18 $
 	#
-	# $Id: strings_dutch.txt,v 1.101 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_dutch.txt,v 1.102 2006-09-24 10:18:18 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -263,7 +263,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings URL i
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus maken in de subproject hiërarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt het toegangsniveau van de enige BEHEERDER van het systeem niet wijzigen.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fout in de paginadoorverwijzing. Zorg ervoor dat er geen spaties buiten het PHP blok staan (&lt;?php ?&gt;) in config_inc.php of custom_*.php-bestanden.';
 
 #$s_login_error = 'Uw account is wellicht uitgeschakeld of geblokkeerd - vanwege te veel mislukte aanmeldpogingen - of de gebruikte combinatie van gebruikersnaam en wachtwoord is onjuist.';
 $s_login_error = 'Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord-combinatie die u ingevoerd heeft is niet juist.';
