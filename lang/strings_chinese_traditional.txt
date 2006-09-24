@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Jonathan Tsai, tryweb@ichiayi.com
         # -------------------------------------------------
-        # $Revision: 1.88 $
-        # $Author: achumakov $
-        # $Date: 2006-09-24 09:47:02 $
+        # $Revision: 1.89 $
+        # $Author: siebrand $
+        # $Date: 2006-09-24 11:17:02 $
         #
-        # $Id: strings_chinese_traditional.txt,v 1.88 2006-09-24 09:47:02 achumakov Exp $
+        # $Id: strings_chinese_traditional.txt,v 1.89 2006-09-24 11:17:02 siebrand Exp $
         ###########################################################################
 ?>
 <?php
@@ -188,6 +188,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '¿…Æ◊§W∂«•¢±—. ≥o�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ø §÷≥o≠”≠∂≠±©“•≤≠n™∫∞—º∆.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '≥o≠”®œ•Œ™Ã±b∏π§w∏g¶s¶b. Ω–™¶^§W£∏≠∂øÔæ‹®‰•L™∫±b∏π.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ø §÷ \'%s\' ≥o≠”∞—º∆≥]©wøÔ∂µ.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Ø §÷ \'%s\' ≥o≠”¶r¶Í.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'µß∞Oß‰§£®Ï.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '±MÆ◊ß‰§£®Ï.';
@@ -601,6 +602,9 @@ $s_closed_bug_button = 'µ≤Æ◊';
 $s_bugnote_updated_msg = 'Bug µß∞O§w∏g≥QßÛ∑s¶®•\...';
 $s_edited_on = '§wΩsøË: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '¬IøÔ≥o∏Ãµn§J';
 
@@ -738,6 +742,16 @@ $s_reopen_resolution = '§¿™R§w≥Q≠´≥]¨∞•ºµ≤Æ◊∞�6
 $s_config_delete_sure = 'ßAΩT©w≠nßR∞£ßR∞£≥o≥]©w≠»--';
 $s_in_project = '¶b±MÆ◊';
 $s_delete_config_button = 'ßR∞£≥]©w≠»';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '±MÆ◊§w∑sºW...';
@@ -1046,6 +1060,8 @@ $s_viewing_bugs_title = '¿Àµ¯ Bug';
 $s_updated = '§wßÛ∑s';
 $s_sticky = '≈„•‹¥∆§‚∞›√D';
 $s_sort = '±∆ß«§Ë¶°';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'µL';
@@ -1289,4 +1305,6 @@ $s_before = '§ß´e' ;
 $s_after = '§ß´·' ;
 $s_on_or_after = '©Û¶π©Œ§ß´·' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

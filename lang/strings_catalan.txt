@@ -9,11 +9,11 @@
 	###########################################################################
 	# Catalan strings for Mantis
         # -------------------------------------------------
-        # $Revision: 1.3 $
-        # $Author: achumakov $
-        # $Date: 2006-09-24 09:47:02 $
+        # $Revision: 1.4 $
+        # $Author: siebrand $
+        # $Date: 2006-09-24 11:17:02 $
         #
-        # $Id: strings_catalan.txt,v 1.3 2006-09-24 09:47:02 achumakov Exp $
+        # $Id: strings_catalan.txt,v 1.4 2006-09-24 11:17:02 siebrand Exp $
         ###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "Ha fallat la pujada de l'arxiu. Possi
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "No s'ha trobat un paràmetre requerit.";
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = "Aquest nom de usuari està en ús. Si us plau, torni enrera i seleccioni'n un altre.";
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = "No es troba l'opció de configuració '%s'.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = "Cadena '%s' no trobada.";
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "Nota no trobada.";
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "Projecte no trobat";
@@ -438,6 +439,7 @@ $s_submit_button = "Enviar";
 
 # account_profile_update.php
 $s_profile_updated_msg = "Perfil actualitzat...";
+
 # account_sponsor_page.php
 $s_my_sponsorship = 'Els meus Patrocinadors';
 $s_update_sponsorship_button = "Canvia l'estat del pagament";
@@ -602,6 +604,9 @@ $s_closed_bug_button = "Tancar Comanda";
 $s_bugnote_updated_msg = "La nota ha estat actualitzada...";
 $s_edited_on = "editada a: ";
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = "Clicar aquí per a iniciar la sessió";
 
@@ -739,6 +744,16 @@ $s_reopen_resolution = "Resolució que es posa a una comanda reoberta ";
 $s_config_delete_sure = "Esta segur que vol esborrar la configuració de ";
 $s_in_project = "al projecte";
 $s_delete_config_button = "Esborrar Configuració";
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = "El projecte ha estat agregat...";
@@ -1047,6 +1062,8 @@ $s_viewing_bugs_title = "Comandes";
 $s_updated = "Actualitzat";
 $s_sticky = "Mostrar les comandes 'Difícil'";
 $s_sort = "Ordenar per";
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = "cap";
@@ -1112,7 +1129,6 @@ $s_no_users_sponsoring_bug = "No hi ha usuaris patrocinant aquesta comanda.";
 $s_users_sponsoring_bug = "Usuaris patrocinant aquesta comanda.";
 $s_sponsors_list = "Llista de patrocinadors";
 $s_total_sponsorship_amount = "Patrocini total = %s";
-$s_sponsor_issue = "Patrocinar comanda";
 
 # custom field strings
 $s_add_custom_field_button = "Nou camp personalitzat";
@@ -1291,4 +1307,6 @@ $s_before = "Abans";
 $s_after = "Després";
 $s_on_or_after = "Ara o després";
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

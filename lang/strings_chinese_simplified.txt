@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.79 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:02 $
+	# $Revision: 1.80 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 11:17:02 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.79 2006-09-24 09:47:02 achumakov Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.80 2006-09-24 11:17:02 siebrand Exp $
 	###########################################################################
 
 	###########################################################################
@@ -206,6 +206,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目。';
@@ -619,6 +620,9 @@ $s_closed_bug_button = '关闭问题';
 $s_bugnote_updated_msg = '已经被成功更新问题注释...';
 $s_edited_on = '编辑于：';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '点击这里进入';
 
@@ -756,6 +760,16 @@ $s_reopen_resolution = '重新打开的问题的解决状态设置为';
 $s_config_delete_sure = '确定要删除该条目的设置';
 $s_in_project = '在项目';
 $s_delete_config_button = '删除设置';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '已添加项目...';
@@ -1064,6 +1078,8 @@ $s_viewing_bugs_title = '查看问题';
 $s_updated = '最后更新';
 $s_sticky = '显示置顶问题';
 $s_sort = '排序字段';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '无';
@@ -1307,4 +1323,6 @@ $s_before = '早于' ;
 $s_after = '晚于' ;
 $s_on_or_after = '等于或者晚于' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
