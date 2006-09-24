@@ -15,11 +15,11 @@
 	# Dutch strings for Mantis
 	# Based on strings_english.txt rev. 1.277
 	# -------------------------------------------------
-	# $Revision: 1.106 $
+	# $Revision: 1.107 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:33:09 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_dutch.txt,v 1.106 2006-09-24 20:33:09 siebrand Exp $
+	# $Id: strings_dutch.txt,v 1.107 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -267,7 +267,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze bewerking zou een lus m
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt het toegangsniveau van de enige BEHEERDER van het systeem niet wijzigen.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fout in de paginadoorverwijzing. Zorg ervoor dat er geen spaties buiten het PHP blok staan (&lt;?php ?&gt;) in config_inc.php of custom_*.php-bestanden.';
 
-#$s_login_error = 'Uw account is wellicht uitgeschakeld of geblokkeerd - vanwege te veel mislukte aanmeldpogingen - of de gebruikte combinatie van gebruikersnaam en wachtwoord is onjuist.';
 $s_login_error = 'Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord-combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'Uw browser ondersteunt geen cookies of deze zijn uitgeschakeld.';
 
@@ -1311,7 +1310,6 @@ $s_loading = 'Laden...';
 $s_between = 'Tussen' ;
 $s_on_or_before = 'Op of voor' ;
 $s_before = 'Voor' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Na' ;
 $s_on_or_after = 'Op of na' ;
 

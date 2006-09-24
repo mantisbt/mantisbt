@@ -13,11 +13,11 @@
 	# Japanese strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.35 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.36 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -265,9 +265,8 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'サブプロジェクトで�
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'システム管理者のアクセスレベルは変更できません。';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
-$s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
+$s_login_error = 'ユーザー名/パスワードが間違えています。';
+$s_login_cookies_disabled = '使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
 
 # General Strings
 $s_go_back = '戻る';
@@ -1309,7 +1308,6 @@ $s_loading = 'ロード中...';
 $s_between = '期間' ;
 $s_on_or_before = '以前(当該日を含む)' ;
 $s_before = 'より前(当該日を含まない)' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'より後(当該日を含まない)' ;
 $s_on_or_after = '以降(当該日を含む)' ;
 

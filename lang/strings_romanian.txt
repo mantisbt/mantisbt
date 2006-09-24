@@ -12,11 +12,11 @@
 	# Romanian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:56 $
 	#
-	# $Id: strings_romanian.txt,v 1.90 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_romanian.txt,v 1.91 2006-09-24 21:21:56 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -178,47 +178,47 @@ $s_bugnote_description = 'Decriere Bugnote';
 $s_error_no_proceed = 'Va rugam folositi butonul \'Inapoi\' in browserul dvs pentru a va intoarce la pagina precedenta. Acolo puteti corecta orice fel de problema identificata cu aceasta eroare sau puteti selecta alta actiune. De asemenea puteti alege direct o optiune din bara de meniu pentru a naviga catre o noua sectiune.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'EROARE: O eroare a aparut in timpul aceste actiuni.  Sunteti rugat sa semnalati acest lucru administratorului local.';
-$MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
-$MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu ati specificat un fisier.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'EROARE: Acest tip de fisier este interzis.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'EROARE: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'EROARE: Un proiect cu acest nume exista deja.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana cand protectia nu este anulata.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'EROARE: Acces Interzis.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'EROARE: Uploadul fisierului esuat. Cere administratorului sa ruleze scriptul admin_check pentru depanarea acestei probleme.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'EROARE: Uploadul fisierului esuat. Cel mai probabil deoarece marimea fisierului este mai mare decat cea acceptata de PHPul instalat.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'EROARE: Un parametru cerut pe aceasta pagina nu a fost gasit.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'O eroare a aparut in timpul aceste actiuni.  Sunteti rugat sa semnalati acest lucru administratorului local.';
+$MANTIS_ERROR[ERROR_SQL] = 'Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Ati omis un detaliu obligatoriu din raport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nu ati specificat un fisier.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Acest tip de fisier este interzis.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Un proiect cu acest nume exista deja.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Acest cont este protejat si nu poate fi accesat pana cand protectia nu este anulata.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Acces Interzis.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Uploadul fisierului esuat. Cere administratorului sa ruleze scriptul admin_check pentru depanarea acestei probleme.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Uploadul fisierului esuat. Cel mai probabil deoarece marimea fisierului este mai mare decat cea acceptata de PHPul instalat.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Un parametru cerut pe aceasta pagina nu a fost gasit.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Acest nume de utilizator este deja folosit. Mergeti inapoi si si selectati un altul.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Optiunea de configurare \'%s\' nu a fost gasita.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Sirul \'%s\' nu a fost gasit.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'EROARE: Bugnote nu a fost gasit.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'EROARE: Proiectul nu a fost gasit.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Bugnote nu a fost gasit.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Proiectul nu a fost gasit.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campul bazei de date \'%s\' nu a fost gasit.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'EROARE: Nu pot sa ma conectez la serverul FTP.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Nu pot sa ma conectez la serverul FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'EROARE: Un proiect cu acest nume exista deja. Va rugam mergeti inapoi si selectati un nume diferit.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Un proiect cu acest nume exista deja. Va rugam mergeti inapoi si selectati un nume diferit.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Numele proiectului specificat este invalid. Numele proiectelor nu pot fi goale.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'EROARE: Utilizatorul nu a fost gasit.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Utilizatorul nu a fost gasit.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informatia de logare stocata de browserul dvs este invalida. Probabil contul dvs a fost sters?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nu au putut fi gasite preferintele pentru acest user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'EROARE: Obiectul stiri nu a fost gasit.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Obiectul stiri nu a fost gasit.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Parola nu confirma verificarea.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'EROARE: Un tablou a fost dorit dar un sir a fost primit.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Un tablou a fost dorit dar un sir a fost primit.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Un sir a fost dorit dar un tablou a fost primit';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Un numar a fost asteptat pentru %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtrul %d nu a fost gasit.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtrul pe care incercati sa-l utilizati este prea vechi pentru a fi upgradat, va rugam recreati-l';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'EROARE: Email invalid.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Email invalid.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilul nu a fost gasit.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'EROARE: Tip de fisier nepermis pentru upload.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'EROARE: Acesta este un fisier duplicat. Va rugam stergeti mai intai fisierul.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'EROARE: Cale de upload invalida.  Directorul ori nu exista, ori nu este permis la scriere pentru serverul web';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Tip de fisier nepermis pentru upload.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Acesta este un fisier duplicat. Va rugam stergeti mai intai fisierul.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Cale de upload invalida.  Directorul ori nu exista, ori nu este permis la scriere pentru serverul web';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
@@ -231,13 +231,13 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'EROARE: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'EROARE: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'EROARE: Database selection failed.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'EROARE: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'EROARE: Category not found.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Database selection failed.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Aceasta categorie exista deja.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Aceasta versiune exista deja.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
@@ -264,9 +264,8 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
-$s_login_cookies_disabled = 'EROARE: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_error = 'acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Intoarcere';
@@ -1308,7 +1307,6 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 

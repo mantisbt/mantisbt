@@ -10,11 +10,11 @@
 	# Turkish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:56 $
 	#
-	# $Id: strings_turkish.txt,v 1.90 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_turkish.txt,v 1.91 2006-09-24 21:21:56 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -176,16 +176,16 @@ $s_bugnote_description = 'Note description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'HATA: Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
-$MANTIS_ERROR[ERROR_SQL] = 'HATA: SQL hatasý belirlendi. Lütfen hatayý bildiriniz ';
-$MANTIS_ERROR[ERROR_REPORT] = 'HATA: Raporunuzda bir hata tespit edildi.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HATA: Dosya adý belirtilmedi.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'HATA: Bu dosya türüne izin verilmemektedir';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HATA: Dizin bulunamadý. Lütfen proje ayarlarýnýzý kontrol ediniz.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HATA: Bu daha önce girilmiþ bir dosya adý. Lütfen önce dosyayý siliniz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL hatasý belirlendi. Lütfen hatayý bildiriniz ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adý belirtilmedi.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadý. Lütfen proje ayarlarýnýzý kontrol ediniz.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Bu daha önce girilmiþ bir dosya adý. Lütfen önce dosyayý siliniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HATA: Gerekli bir girdi alaný boþ býrakýldý. Lütfen girdilerinizi kontrol ediniz.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'HATA: Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli bir girdi alaný boþ býrakýldý. Lütfen girdilerinizi kontrol ediniz.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  File is not readable by Mantis. Please check the project settings';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
@@ -262,7 +262,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
@@ -1306,7 +1305,6 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 

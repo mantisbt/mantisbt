@@ -22,11 +22,11 @@
 	# French Canadian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.12 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_french_canadian.txt,v 1.13 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -188,78 +188,78 @@ $s_bugnote_description = 'Description de la note';
 $s_error_no_proceed = 'Merci d\'utiliser le bouton « Précédent » de votre navigateur web pour retourner à la page précédente. Vous pourrez y corriger les problèmes identifiés par cette erreur ou choisir une autre action. Vous pouvez aussi choisir une option de la barre de menu pour aller directement dans une nouvelle section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'ERREUR : Une erreur s\'est produite.  Merci de contacter votre administrateur.';
-$MANTIS_ERROR[ERROR_SQL] = 'ERREUR : Erreur SQL détectée.  Rapporter cette erreur à ';
-$MANTIS_ERROR[ERROR_REPORT] = 'ERREUR : Il y avait une erreur dans votre rapport.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERREUR : Aucun fichier spécifié';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ERREUR : Type de fichier interdit';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERREUR : Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ERREUR : Un projet ayant ce nom existe déjà.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERREUR : Un champ obligatoire n\'est pas renseigné.  Merci de vérifier votre saisie.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'ERREUR : Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'ERREUR : Accès interdit.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ERREUR : Échec du dépôt de fichier.  Demander à votre administrateur d\'exécuter le script admin_check pour deboguer ce problème.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ERREUR : Échec du dépôt de fichier.  La taille du fichier était vraisemblablement trop grande pour votre configuration de PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'ERREUR : Un paramètre requis par cette page n\'a pas été trouvé.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ERREUR : Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ERREUR : L\'option de configuration \'%s\' n\'a pas été trouvé.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s\'est produite.  Merci de contacter votre administrateur.';
+$MANTIS_ERROR[ERROR_SQL] = 'Erreur SQL détectée.  Rapporter cette erreur à ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Type de fichier interdit';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un champ obligatoire n\'est pas renseigné.  Merci de vérifier votre saisie.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accès interdit.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier.  Demander à votre administrateur d\'exécuter le script admin_check pour deboguer ce problème.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Échec du dépôt de fichier.  La taille du fichier était vraisemblablement trop grande pour votre configuration de PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page n\'a pas été trouvé.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'option de configuration \'%s\' n\'a pas été trouvé.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'ERREUR : Chaîne « %s » non trouvée.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ERREUR : Note non trouvée.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ERREUR : Projet non trouvé.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERREUR : Champ de base de données non trouvé.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'ERREUR : Impossible de se connecter au serveur FTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ERREUR : Cette personne ne possède pas les permissions requises pour prendre en charge ce bogue dans son état actuel.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERREUR : Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ERREUR : Nom de projet spécifié non valide.  Les noms de projet ne peuvent être vides.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'ERREUR : Utilisateur non trouvé.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ERREUR : Les informations de connexion enregistrées par votre navigateur ne sont pas valides.  Votre compte a peut-être été supprimé ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ERREUR : Les préférences pourraient être introuvables pour cet utilisateur.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'ERREUR : Nouvelle non trouvée.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'ERREUR : Le mot de passe ne correspond pas à la vérification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'ERREUR : Tableau attendu mais chaîne reçue.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais tableau reçu.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'ERREUR : %s doit être un nombre.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'ERREUR : Bogue non trouvé.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'ERREUR : Filtre %d introuvable.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'ERREUR : Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'ERREUR : Courriel invalide.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'ERREUR : Type de fichier non autorisé pour les dépôts de fichier.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERREUR : Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ERREUR : Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'ERREUR : Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'ERREUR : Impossible de marquer ce bogue comme doublon de lui même.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'ERREUR : Champs personnalisé non trouvé';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'ERREUR : Ceci est un nom dupliqué.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'ERREUR : Au moins un projet utilise encore ce champs.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERREUR : Valeur invalide pour ce champ.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'ERREUR : Définition de champs personnalisé invalide';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'ERREUR : Échec d\'indentification par LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'ERREUR : Échec de connexion au serveur LDAP';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'ERREUR : Échec de mise à jour de l\'enregistrement LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'ERREUR : Enregistrement d\'utilisateur LDAP non trouvé.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ERREUR : Échec de connexion à la base de données.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'ERREUR : Échec de la requête de base de données.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'ERREUR : Échec de la sélection de la base de données.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERREUR : Catégorie dupliquée.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERREUR : Aucune copie spécifiée.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERREUR : Catégorie non trouvée.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERREUR : Version dupliquée.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'ERREUR : Version non trouvée.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ERREUR : Nom d\'utilisateur invalide.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ERREUR : L\'utilisateur n\'a pas le niveau d\'accès requis';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'ERREUR : Le nom réel saisi correspond au code d\'un autre utilisateur. Veuillez en choisir un autre.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'ERREUR : Support de commanditaire non activé.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'ERREUR : Commanditaire %d non trouvé.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'ERREUR : La commandite (%s) est inférieure au montant minimum (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bogues commandités.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %s » non trouvée.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note non trouvée.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet non trouvé.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Champ de base de données non trouvé.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Impossible de se connecter au serveur FTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Cette personne ne possède pas les permissions requises pour prendre en charge ce bogue dans son état actuel.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nom de projet spécifié non valide.  Les noms de projet ne peuvent être vides.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Utilisateur non trouvé.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Les informations de connexion enregistrées par votre navigateur ne sont pas valides.  Votre compte a peut-être été supprimé ?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Les préférences pourraient être introuvables pour cet utilisateur.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nouvelle non trouvée.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Le mot de passe ne correspond pas à la vérification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Tableau attendu mais chaîne reçue.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Chaîne attendue mais tableau reçu.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s doit être un nombre.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bogue non trouvé.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %d introuvable.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Courriel invalide.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil non trouvé.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Type de fichier non autorisé pour les dépôts de fichier.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Impossible de marquer ce bogue comme doublon de lui même.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champs personnalisé non trouvé';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ceci est un nom dupliqué.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champs.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur invalide pour ce champ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champs personnalisé invalide';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d\'indentification par LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l\'enregistrement LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Enregistrement d\'utilisateur LDAP non trouvé.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Échec de connexion à la base de données.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Échec de la requête de base de données.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Échec de la sélection de la base de données.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Catégorie dupliquée.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Aucune copie spécifiée.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Catégorie non trouvée.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Version dupliquée.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version non trouvée.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilisateur invalide.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'L\'utilisateur n\'a pas le niveau d\'accès requis';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Le nom réel saisi correspond au code d\'un autre utilisateur. Veuillez en choisir un autre.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Support de commanditaire non activé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Commanditaire %d non trouvé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'La commandite (%s) est inférieure au montant minimum (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bogues commandités.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Accès refusé. L\'assignation des bogues commandités requiert un niveau d\'accès plus élevé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Le commanditaire n\'a pas fourni de courriel. Merci de mettre à jour votre profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ERREUR : L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'ERREUR : L\'action ne peut être exécutée car le bogue \'%d\' est en lecture seule';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'action ne peut être exécutée car le bogue \'%d\' est en lecture seule';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'ERREUR : Il existe déjà une relation entre ces deux bogues.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'ERREUR : Relation introuvable.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'ERREUR : Accès refusé : Le bogue %d requiert un niveau d\'accès plus élevé.';
@@ -270,13 +270,12 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Vous devez fournir une 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournies ne correspondent à aucun compte enregistré !';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'hyperlien de confirmation n\'est pas valide ou a déjà été utilisé. Veuillez vous inscrire de nouveau.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'ERREUR : Cette opération va créer une recursion dans la hiérarchie des sous projets.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ERREUR : Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Cette opération va créer une recursion dans la hiérarchie des sous projets.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Votre compte est peut être désactivé ou en panne (dû aux nombreux échecs d\'accès) ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
-$s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
-$s_login_cookies_disabled = 'ERREUR : Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
+$s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
+$s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 
 # General Strings
 $s_go_back = 'Retour';
@@ -1315,7 +1314,6 @@ $s_loading = 'Chargement en cours...';
 $s_between = 'Entre';
 $s_on_or_before = 'Pendant ou avant';
 $s_before = 'Avant';
-# $s_on = 'Le'; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Après';
 $s_on_or_after = 'Pendant ou après';
 

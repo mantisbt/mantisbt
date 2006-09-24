@@ -13,11 +13,11 @@
 	# Finnish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_finnish.txt,v 1.48 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_finnish.txt,v 1.49 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -179,95 +179,94 @@ $s_bugnote_description = 'Muistiinpanon kuvaus';
 $s_error_no_proceed = 'Ole hyvä, siirry edelliselle sivulle, jossa voit korjata virheviestissä osoitetut kohdat tai valita uuden tapahtuman. Voit myös suoraan siirtyä toiseen osioon klikkaamalla menupalkkia.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'VIRHE: Virhe suoritettaessa tätä komentoa. Saatat haluta ilmoittaa tästä virheestä paikallisen järjestelmäsi ylläpitäjälle.';
-$MANTIS_ERROR[ERROR_SQL]                = 'VIRHE: SQL-virhe havaitty.  Ole hyvä ja raportoi tämä virhe ';
-$MANTIS_ERROR[ERROR_REPORT]             = 'VIRHE: Raportissasi oli virhe.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'VIRHE: Tiedostoa ei ole määritelty';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'VIRHE: Tämä tiedostotyyppi ei ole sallittu';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'VIRHE: Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'VIRHE: Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'VIRHE: Samanniminen projekti on jo olemassa.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'VIRHE: Tarvittu kenttä on tyhjä. Ole hyvä ja tarkista syöttösi.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'VIRHE: Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'VIRHE: Pääsy kielletty.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'VIRHE: Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä.  Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'VIRHE: Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'VIRHE: Tämän sivun vaatimaa muuttujaa ei löydy.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'VIRHE: Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'VIRHE: Ohjelma-asetus  \'%s\' ei löytynyt.';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'Virhe suoritettaessa tätä komentoa. Saatat haluta ilmoittaa tästä virheestä paikallisen järjestelmäsi ylläpitäjälle.';
+$MANTIS_ERROR[ERROR_SQL]                = 'SQL-virhe havaitty.  Ole hyvä ja raportoi tämä virhe ';
+$MANTIS_ERROR[ERROR_REPORT]             = 'Raportissasi oli virhe.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Tiedostoa ei ole määritelty';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Tämä tiedostotyyppi ei ole sallittu';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Hakemistoa ei ole olemassa. Ole hyvä ja tarkista projektin asetukset.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Samanniminen projekti on jo olemassa.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Tarvittu kenttä on tyhjä. Ole hyvä ja tarkista syöttösi.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Tämä käyttäjätunnus on suojattu.  Pääsy on sallittu vasta kun suojaus poistetaan.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Pääsy kielletty.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä.  Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Tämän sivun vaatimaa muuttujaa ei löydy.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%s\' ei löytynyt.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'VIRHE: Merkkijonoa \'%s\' ei löytynyt.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'VIRHE: Muistiinpanoa ei löydy.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'VIRHE: Projektia ei löydy.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'VIRHE: Tietokantakenttää ei löydy.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'VIRHE: Yhteys FTP-palvelimelle epäonnistui.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'VIRHE: Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'VIRHE: Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'VIRHE: Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhjä.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'VIRHE: Käyttäjätunnusta ei löydy.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'VIRHE: Selaimesi välittämä kirjautumistietosi on virheellinen.  Käyttäjätilisi on ehkä poistettu.';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'VIRHE: Käyttäjän asetustietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'VIRHE: Uutisartikkelia ei löydy.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'VIRHE: Salasanavirhe.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'VIRHE: Odotin matriisia, mutta sain merkkijonon.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'VIRHE: Taulukkodataa merkkijonodatan tilalla.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'VIRHE: Odotettiin numeroa: %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'VIRHE: Tapahtumaa ei löydy.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'VIRHE: Suodinta %d ei löytynyt.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'VIRHE: Käyttämäsi suodin on liian vanha päivitettäväksi. Ole hyvä ja luo se uudestaan.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'VIRHE: Virheellinen sähköpostiosoite.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'VIRHE: Käyttäjäprofiilia ei löytynyt.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'VIRHE: Tämän tyyppiset tiedostot eivät ole sallittuja.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'VIRHE: Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'VIRHE: Virheellinen lähetettävän tiedoston hakemistopolku. Hakemistoa ei ole tai siihen ei voida kirjoittaa.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'VIRHE: Tiedostoa ei lähetetty. Ole hyvä ja siirry edelliselle sivulle sekä valitse läheteettävä tiedosto ennen \'Lähetä\'-painikkeen painamista.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'VIRHE: Vastaanotettua tiedostoa ei voitu siirtää säilytyshakemistoon. Hakemistoa ei ole olemassa tai siihen ei voi kirjoittaa.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'VIRHE: Et voi määritellä tapahtumaa itsensä kaksoiskappaleeksi.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'VIRHE: Räätälöityä kenttää ei löytynyt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'VIRHE: Nimiduplikaatti.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'VIRHE: Kenttä on käytössä ainakin yhdessä projektissa.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'VIRHE: Kentällä on virheellinen arvo';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'VIRHE: Virheellinen mukautetun kentän määrite.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'VIRHE: LDAP-autentikaatio epäonnistui';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'VIRHE: LDAP-palvelinyhteys epäonnistui.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'VIRHE: LDAP-tietueen päivittäminen epäonnistui.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'VIRHE: LDAP-käyttäjätietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'VIRHE: Tietokantayhteys epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'VIRHE: Tietokantakysely epäonnistui.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'VIRHE: Tietokantavalinta epäonnistui.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'VIRHE: Samanniminen kategoria on jo olemassa.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'VIRHE: Kopiointitoimea ei ole määritelty.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'VIRHE: Kategoriaa ei löydy.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'VIRHE: Samanniminen versio on jo olemassa.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'VIRHE: Versiota ei löydy.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'VIRHE: Virheellinen käyttäjätunnus.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'VIRHE: Käyttäjätaso liian alhainen';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'VIRHE: Syöttämäsi nimi on jo käytössä toisella käyttäjällä käyttäjänimenä. Ole hyvä, ja syötä uusi nimi.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'VIRHE: Sponsorointitukea ei ole aktivoitu.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'VIRHE: Sponssia %d ei löytynyt.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'VIRHE: Sponsorituki (%s) on alle minimimäärän (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'VIRHE: Käsittelijällä ei ole tarpeenksi korkeata käyttäjätasoa sponsoroitujen tapahtumien käsittelyyn.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'VIRHE: Pääsy estetty: Sponsoroitujen tapahtumien osoittaminen vaatii korkeamman käyttäjätason.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'VIRHE: Sponsori ei ole syöttänyt sähköpostiosoitetta. Ole hyvä, ja päivitä käyttäjätietosi.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'VIRHE: Konfiguraatioasetuksessa \'%s\' on virheellinen arvo \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'VIRHE: Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehdä muutoksia';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "VIRHE: Näiden kahden tapahtuman välillä on jo relaatio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "VIRHE: Relaatiota ei löytynyt.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "VIRHE: Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "VIRHE: Tapahtumaa ei voi kytkeä relaationa itseensä.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'VIRHE: Vahvistushash-koodi on virheellinen. Yritä uudelleen.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'VIRHE: \'Unohdettu salasana\' -toiminto ei ole käytössä.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'VIRHE: Syötä sähköpostiosoite, jotta salasanasi uudistetaan';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'VIRHE: Rekisteröityä käyttäjätiliä ei löytynyt antamillasi tiedoilla!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'VIRHE: Vahvistuslinkki on jo kertaalleen käytetty tai virheellinen. Ole hyvä, ja kirjaudu uudestaan.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'VIRHE: Kyselyjen/pyyntöjen maksimimäärä saavutettu. Ole hyvä, ja ota yhteys ylläpitoon';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'VIRHE: Tämä toiminto aiheuttaisi päättymättömän silmukan aliprojektihierarkiassa.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'VIRHE: Ainoan ylläpitäjän oikeustasoa ei voi muuttaa.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%s\' ei löytynyt.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Muistiinpanoa ei löydy.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektia ei löydy.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakenttää ei löydy.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Yhteys FTP-palvelimelle epäonnistui.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhjä.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Käyttäjätunnusta ei löydy.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Selaimesi välittämä kirjautumistietosi on virheellinen.  Käyttäjätilisi on ehkä poistettu.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Käyttäjän asetustietoja ei löytynyt.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Uutisartikkelia ei löydy.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Salasanavirhe.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Odotin matriisia, mutta sain merkkijonon.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Taulukkodataa merkkijonodatan tilalla.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Odotettiin numeroa: %s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Tapahtumaa ei löydy.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Suodinta %d ei löytynyt.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Käyttämäsi suodin on liian vanha päivitettäväksi. Ole hyvä ja luo se uudestaan.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Virheellinen sähköpostiosoite.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Käyttäjäprofiilia ei löytynyt.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Tämän tyyppiset tiedostot eivät ole sallittuja.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Tämä tiedosto on kaksoiskappale.  Ole hyvä ja poista alkuperäinen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Virheellinen lähetettävän tiedoston hakemistopolku. Hakemistoa ei ole tai siihen ei voida kirjoittaa.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Tiedostoa ei lähetetty. Ole hyvä ja siirry edelliselle sivulle sekä valitse läheteettävä tiedosto ennen \'Lähetä\'-painikkeen painamista.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Vastaanotettua tiedostoa ei voitu siirtää säilytyshakemistoon. Hakemistoa ei ole olemassa tai siihen ei voi kirjoittaa.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Et voi määritellä tapahtumaa itsensä kaksoiskappaleeksi.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Räätälöityä kenttää ei löytynyt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Nimiduplikaatti.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Kenttä on käytössä ainakin yhdessä projektissa.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kentällä on virheellinen arvo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Virheellinen mukautetun kentän määrite.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP-autentikaatio epäonnistui';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP-tietueen päivittäminen epäonnistui.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-käyttäjätietoja ei löytynyt.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Tietokantayhteys epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Tietokantakysely epäonnistui.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Tietokantavalinta epäonnistui.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole määritelty.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei löydy.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Samanniminen versio on jo olemassa.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versiota ei löydy.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Virheellinen käyttäjätunnus.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Käyttäjätaso liian alhainen';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Syöttämäsi nimi on jo käytössä toisella käyttäjällä käyttäjänimenä. Ole hyvä, ja syötä uusi nimi.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorointitukea ei ole aktivoitu.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponssia %d ei löytynyt.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorituki (%s) on alle minimimäärän (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Käsittelijällä ei ole tarpeenksi korkeata käyttäjätasoa sponsoroitujen tapahtumien käsittelyyn.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pääsy estetty: Sponsoroitujen tapahtumien osoittaminen vaatii korkeamman käyttäjätason.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole syöttänyt sähköpostiosoitetta. Ole hyvä, ja päivitä käyttäjätietosi.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraatioasetuksessa \'%s\' on virheellinen arvo \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehdä muutoksia';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Näiden kahden tapahtuman välillä on jo relaatio.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relaatiota ei löytynyt.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Pääsy estetty: tapahtuman %d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Tapahtumaa ei voi kytkeä relaationa itseensä.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Vahvistushash-koodi on virheellinen. Yritä uudelleen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Unohdettu salasana\' -toiminto ei ole käytössä.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Syötä sähköpostiosoite, jotta salasanasi uudistetaan';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Rekisteröityä käyttäjätiliä ei löytynyt antamillasi tiedoilla!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Vahvistuslinkki on jo kertaalleen käytetty tai virheellinen. Ole hyvä, ja kirjaudu uudestaan.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Kyselyjen/pyyntöjen maksimimäärä saavutettu. Ole hyvä, ja ota yhteys ylläpitoon';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tämä toiminto aiheuttaisi päättymättömän silmukan aliprojektihierarkiassa.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ainoan ylläpitäjän oikeustasoa ei voi muuttaa.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'VIRHE: Käyttäjätunnuksesi saattaa olla pois käytöstä tai antamasi käyttäjätunnus/salasanayhdistelmä on virheellinen.';
-$s_login_cookies_disabled = 'VIRHE: Selaimesi ei tunnu ymmärtävän tai hyväksyvän evästeitä.';
+$s_login_error = 'Käyttäjätunnuksesi saattaa olla pois käytöstä tai antamasi käyttäjätunnus/salasanayhdistelmä on virheellinen.';
+$s_login_cookies_disabled = 'Selaimesi ei tunnu ymmärtävän tai hyväksyvän evästeitä.';
 
 # General Strings
 $s_go_back = 'Takaisin';
@@ -1309,7 +1308,6 @@ $s_loading = 'Ladataan...';
 $s_between = 'Välillä' ;
 $s_on_or_before = 'Tällöin tai ennen' ;
 $s_before = 'Ennen' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Jälkeen' ;
 $s_on_or_after = 'Tällöin tai jälkeen' ;
 

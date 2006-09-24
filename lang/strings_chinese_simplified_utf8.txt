@@ -16,11 +16,11 @@
 	# Chinese Simplified strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.12 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.13 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 	#Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2006-01-05)
 	#
@@ -279,7 +279,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从�
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = '你的账号已经停用或已被锁定（由于多次登录失败导致锁定），或者你输入的用户名和密码是错误的。';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -1323,7 +1322,6 @@ $s_loading = '正在载入...';
 $s_between = '介于' ;
 $s_on_or_before = '等于或者早于' ;
 $s_before = '早于' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '晚于' ;
 $s_on_or_after = '等于或者晚于' ;
 

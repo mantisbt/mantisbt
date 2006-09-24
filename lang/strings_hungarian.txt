@@ -13,11 +13,11 @@
 	# Hungarian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.82 $
+	# $Revision: 1.83 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_hungarian.txt,v 1.82 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_hungarian.txt,v 1.83 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -179,68 +179,68 @@ $s_bugnote_description = 'Hiba Megjegyzés leírása';
 $s_error_no_proceed = 'Kérjük nyomja meg a böngészõ "Vissza" gombotját, hogy vissza tudjon térni az elõzõ oldalra. Ott ki tudja javítani az itt jelzett hibát, vagy választhat egy másik mûveletet. Esetleg a menüsorból is választhat egy opciót, amellyel közvetlenül egy új részhez ugorhat.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'HIBA: Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
-$MANTIS_ERROR[ERROR_SQL] = 'HIBA: SQL hibát találtam.  Kérem jelentse a hibát itt: ';
-$MANTIS_ERROR[ERROR_REPORT] = 'HIBA: A bejelentés feldolgozásakor hiba történt.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HIBA: Nincs megadva file';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HIBA: A érvénytelen file típus.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HIBA: A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'HIBA: Már létezik ilyen néven projekt.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'HIBA: Hozzáférés megtagadva.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'HIBA: File feltöltés sikertelen. Kérd meg a rendszergazdát, hogy futtassa le az admin_check scriptet, hogy feltárja ennek a problémának az okát.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'HIBA: File feltöltés sikertelen.  File méret probléma is lehet.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'HIBA: A kért paramétert nem találom a laphoz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL hibát találtam.  Kérem jelentse a hibát itt: ';
+$MANTIS_ERROR[ERROR_REPORT] = 'A bejelentés feldolgozásakor hiba történt.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nincs megadva file';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'A érvénytelen file típus.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A könyvtár nem létezik, kérem ellenõrizze a projektbeállításokat.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ez a file már létezik, elõször törölni kell.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Már létezik ilyen néven projekt.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Hozzáférés megtagadva.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File feltöltés sikertelen. Kérd meg a rendszergazdát, hogy futtassa le az admin_check scriptet, hogy feltárja ennek a problémának az okát.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File feltöltés sikertelen.  File méret probléma is lehet.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'A kért paramétert nem találom a laphoz.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'A felhasználónév már használatban van. Kérjük térjen vissza az elõzõ oldalra és válasszon egy másikat.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Hiányzik a(z) \'%s\' beállítási paraméter.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Hiányzik a(z) \'%s\' szövegparaméter.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'HIBA: Hiba megjegyzést nem találom.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'HIBA: Projektet nem találom.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'HIBA: Adatbázis mezõt nem találom.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'HIBA: Nem tud csatlakozni az FTP szerverhez.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Hiba megjegyzést nem találom.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektet nem találom.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Adatbázis mezõt nem találom.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Nem tud csatlakozni az FTP szerverhez.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'HIBA: Ezen a néven már létezik projekt.  Nyomja meg a vissza gombot és írjon be egy másik nevet.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'HIBA: Érvénytelen projekt nevet adott meg. A projekt neve nem lehet üres.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'HIBA: Ilyen felhasználót nem találtam.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'HIBA: A webböngészõ által tárolt bejelentkezési információk érvénytelenek. Esetleg törölték a fiókját?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'HIBA: Nincsenek beállítások ehhez a felhasználóhoz.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'HIBA: Újabb adatot nem találok.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'HIBA: A jelszó és a jelszó megerõsítés nem egyezik meg.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'HIBA: Listát vártam de szöveget kaptam.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'HIBA: Szöveget vártam, de listát kaptam.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ezen a néven már létezik projekt.  Nyomja meg a vissza gombot és írjon be egy másik nevet.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Érvénytelen projekt nevet adott meg. A projekt neve nem lehet üres.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Ilyen felhasználót nem találtam.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A webböngészõ által tárolt bejelentkezési információk érvénytelenek. Esetleg törölték a fiókját?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nincsenek beállítások ehhez a felhasználóhoz.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Újabb adatot nem találok.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'A jelszó és a jelszó megerõsítés nem egyezik meg.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Listát vártam de szöveget kaptam.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Szöveget vártam, de listát kaptam.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'HIBA: Nem találtam a hibát.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Nem találtam a hibát.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'HIBA: Nem jó az e-mail.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'HIBA: Nem találom a profilt.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'HIBA: A File Típus nincs engedélyezve a feltöltéshez.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'HIBA: Ez a file már létezik.  Elõször törölje le.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'HIBA: Nincs ilyen könyvtár.  Lehet , hogy nincs ilyen vagy nincs írási joga a webszervernek.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Nem jó az e-mail.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nem találom a profilt.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'A File Típus nincs engedélyezve a feltöltéshez.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Ez a file már létezik.  Elõször törölje le.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Nincs ilyen könyvtár.  Lehet , hogy nincs ilyen vagy nincs írási joga a webszervernek.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'HIBA: Nem lehet önbagába duplikálni egy hibát.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'HIBA: Az egyéni mezõ nem található.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'HIBA: Ez a név már szerepel egyszer az adatbázisban.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'HIBA: Még legalább egy projekt használja ezt a mezõt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'HIBA: Érvénytelen érték a mezõben';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'HIBA: Érvénytelen egyéni mezõ definíció.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'HIBA: LDAP Hitelesítés Megtagadva';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'HIBA: nem sikerült az LDAP szerverhez kapcsolódni.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'HIBA: LDAP Rekord felülírás megtagadva.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Nem lehet önbagába duplikálni egy hibát.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Az egyéni mezõ nem található.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ez a név már szerepel egyszer az adatbázisban.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Még legalább egy projekt használja ezt a mezõt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Érvénytelen érték a mezõben';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Érvénytelen egyéni mezõ definíció.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Hitelesítés Megtagadva';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'nem sikerült az LDAP szerverhez kapcsolódni.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP Rekord felülírás megtagadva.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'HIBA: Adatbázis konnekció hibás.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'HIBA: Adatbázis lekérdeés hibás.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'HIBA: Adatbázis kijelölés hibás.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'HIBA: Ez a kategória már létezik.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'HIBA: Nincs másolás metódus definiálva.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'HIBA: A Kategóriát nem találom.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'HIBA: Ez a verzió már létezik.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'HIBA: Verziót nem találom.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'HIBA: A Felhasználónén nem érvényes.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Adatbázis konnekció hibás.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Adatbázis lekérdeés hibás.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Adatbázis kijelölés hibás.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ez a kategória már létezik.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nincs másolás metódus definiálva.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'A Kategóriát nem találom.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ez a verzió már létezik.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Verziót nem találom.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'A Felhasználónén nem érvényes.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
@@ -265,9 +265,8 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
-$s_login_cookies_disabled = 'HIBA: a böngészõjében le van tiltva a "sütik" (cookies) kezelésére, vagy esetleg ezt a funkciót nem is támogatja.';
+$s_login_error = 'elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
+$s_login_cookies_disabled = 'a böngészõjében le van tiltva a "sütik" (cookies) kezelésére, vagy esetleg ezt a funkciót nem is támogatja.';
 
 # General Strings
 $s_go_back = 'Visszatérés';
@@ -1309,7 +1308,6 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 

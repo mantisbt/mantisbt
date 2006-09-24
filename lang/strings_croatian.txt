@@ -11,11 +11,11 @@
 	# Croatian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.42 $
+	# $Revision: 1.43 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_croatian.txt,v 1.42 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_croatian.txt,v 1.43 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -177,16 +177,16 @@ $s_bugnote_description = 'Bugnote description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "GRE©KA: U toku ove akcije pojavila se gre¹ka. Mo¾ete prijaviti gre¹ku administratoru.";
-$MANTIS_ERROR[ERROR_SQL]                = "GRE©KA: SQL gre¹ka detektirana.  Molimo Vas da to prijavite.";
-$MANTIS_ERROR[ERROR_REPORT]             = "GRE©KA: Gre¹ka u izvje¹æu.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "GRE©KA: Nije naznaèena datoteka";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "GRE©KA: Tip datoteke nije dozvoljen";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "GRE©KA: Mapa ne postoji. Molimo Vas da provjerite postavke projekta.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "GRE©KA: Ovo je duplicirana datoteka. Molimo Vas da najprije obri¹ete datoteku.";
+$MANTIS_ERROR[ERROR_GENERIC]            = "U toku ove akcije pojavila se gre¹ka. Mo¾ete prijaviti gre¹ku administratoru.";
+$MANTIS_ERROR[ERROR_SQL]                = "SQL gre¹ka detektirana.  Molimo Vas da to prijavite.";
+$MANTIS_ERROR[ERROR_REPORT]             = "Gre¹ka u izvje¹æu.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "Nije naznaèena datoteka";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Tip datoteke nije dozvoljen";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "Mapa ne postoji. Molimo Vas da provjerite postavke projekta.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "Ovo je duplicirana datoteka. Molimo Vas da najprije obri¹ete datoteku.";
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "GRE©KA: Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "GRE©KA: Korisnièki raèun je za¹tiæen. Za to vrijeme Vam nije omoguæen pristup.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Korisnièki raèun je za¹tiæen. Za to vrijeme Vam nije omoguæen pristup.";
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
@@ -263,7 +263,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
@@ -1307,7 +1306,6 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 

@@ -14,11 +14,11 @@
 	# Italian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_italian_utf8.txt,v 1.3 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_italian_utf8.txt,v 1.4 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -266,7 +266,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = "Questa operazione creerebbe 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = "Non puoi modificare il livello di accesso nell'unico amministratore del sistema.";
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = "Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php";
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = "L'account potrebbe essere stato disabilitato o bloccato oppure potresti aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
 
@@ -1310,7 +1309,6 @@ $s_loading = "In caricamento...";
 $s_between = "Tra";
 $s_on_or_before = "Il o prima del";
 $s_before = "Prima del";
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = "Dopo il";
 $s_on_or_after = "Il o dopo il";
 

@@ -14,11 +14,11 @@
 	# Russian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:56 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.81 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_russian_koi8.txt,v 1.82 2006-09-24 21:21:56 siebrand Exp $
 	###########################################################################
   #
   # Russian glossary
@@ -290,6 +290,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Достигнут
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Это действие зациклило бы структуру подпроектов.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Нельзя менять уровень доступа единственного АДМИНИСТРАТОРА системы!';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Ошибка перенаправления страницы, убедитесь, что за пределами блока PHP (&lt;?php ?&gt;) в config_inc.php или настроенных файлах custom_*.php нет пробелов.';
+
 $s_login_error = 'Возможно, ваша учетная запись заблокирована, или введенное регистрационное имя/пароль неправильны.';
 $s_login_cookies_disabled = 'Ваш браузер или не умеет обрабатывать cookie, или не принимает их.';
 
@@ -1333,7 +1334,6 @@ $s_loading = 'Загрузка...';
 $s_between = 'между' ;
 $s_on_or_before = 'на дату или до' ;
 $s_before = 'до' ;
-# $s_on = 'на дату' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'после' ;
 $s_on_or_after = 'на дату или после' ;
 # wiki related strings
@@ -1359,11 +1359,11 @@ $s_wiki = 'Вики';
 	# Alexander Leschinsky aml@lair.pp.ru
 	# Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:33 $
+	# $Date: 2006-09-24 21:21:56 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.81 2006-09-24 20:42:33 siebrand Exp $
+	# $Id: strings_russian_koi8.txt,v 1.82 2006-09-24 21:21:56 siebrand Exp $
 	###########################################################################
 
 #
@@ -2678,7 +2678,6 @@ $s_loading = 'Загрузка...';
 $s_between = 'между' ;
 $s_on_or_before = 'на дату или до' ;
 $s_before = 'до' ;
-# $s_on = 'на дату' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'после' ;
 $s_on_or_after = 'на дату или после' ;
 # wiki related strings

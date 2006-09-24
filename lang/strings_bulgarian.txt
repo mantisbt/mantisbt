@@ -13,11 +13,11 @@
 	# Bulgarian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.5 $
+	# $Revision: 1.6 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 20:42:32 $
+	# $Date: 2006-09-24 21:21:52 $
 	#
-	# $Id: strings_bulgarian.txt,v 1.5 2006-09-24 20:42:32 siebrand Exp $
+	# $Id: strings_bulgarian.txt,v 1.6 2006-09-24 21:21:52 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -264,7 +264,6 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Тази операция ще доведе до ц
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Забрана за промяна нивото на достъп на единствения АДМИНИСТРАТОР на системата.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Профилът може да е дезактивиран или блокиран (поради твърде много неуспешни опити за вход) или е въведено невалидно потребителско име/парола';
 $s_login_error = 'Профилът е дезактивиран, блокиран или е въведена неправилна комбинация от потребителско име/парола.';
 $s_login_cookies_disabled = 'Браузърът не може да работи с cookies или не е настроен да ги приема.';
 
@@ -1308,7 +1307,6 @@ $s_loading = 'Зареждане...';
 $s_between = 'Между' ;
 $s_on_or_before = 'Върху или Преди' ;
 $s_before = 'Преди' ;
-# $s_on = 'Върху' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'След' ;
 $s_on_or_after = 'Върху или След' ;
 
