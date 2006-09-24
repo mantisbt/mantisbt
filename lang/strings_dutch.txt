@@ -11,13 +11,13 @@
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# Dutch: Siebrand Mazeland, s.mazeland@xs4all.nl
 	#
-	# Based on strings_english.txt rev. 1.276
+	# Based on strings_english.txt rev. 1.277
 	# -------------------------------------------------
-	# $Revision: 1.104 $
+	# $Revision: 1.105 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 17:01:57 $
+	# $Date: 2006-09-24 18:22:41 $
 	#
-	# $Id: strings_dutch.txt,v 1.104 2006-09-24 17:01:57 siebrand Exp $
+	# $Id: strings_dutch.txt,v 1.105 2006-09-24 18:22:41 siebrand Exp $
 	###########################################################################
 
 ?>

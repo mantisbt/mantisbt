@@ -10,13 +10,13 @@
 	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
 	# -------------------------------------------------
-	# $Revision: 1.99 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:29 $
+	# $Revision: 1.100 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:22:41 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.99 2006-09-24 14:11:29 achumakov Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.100 2006-09-24 18:22:41 siebrand Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.276 -- jravasi 2006/09/13
+	# Up-to-date with strings_english.txt revision 1.277 -- jravasi 2006/09/24
 	###########################################################################
 ?>
 <?php
@@ -450,8 +450,8 @@ $s_no_sponsored = 'Nenhum caso patrocinado atribuídos a você foi encontrado.';
 $s_own_sponsored = 'Casos que Você Patrocinou:';
 $s_issues_handled = 'Casos Patrocinados Atribuídos a Você:';
 $s_no_own_sponsored = 'Você não patrocinou nenhum caso.';
-$s_sponsor = 'Patrocinar';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor = 'Patrocinador';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Patrocinar';	# like in 'Sponsor it!'
 $s_amount = 'Quantia';
 $s_total_owing = 'Total Devedor';
 $s_total_paid = 'Total Pago';
