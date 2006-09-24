@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.33 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.34 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:30 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.33 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.34 2006-09-24 19:43:30 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータ「%s」がありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='設定項目「%s」がありません。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='文字列「%s」がありません。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません。';
@@ -604,6 +605,9 @@ $s_closed_bug_button = '完了';
 $s_bugnote_updated_msg = 'コメントが更新されました。';
 $s_edited_on = '更新日時:';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'ログイン→';
 
@@ -741,6 +745,16 @@ $s_reopen_resolution = '差戻された改善要求に設定する解決状況';
 $s_config_delete_sure = '設定を削除してみよろしいですか。';
 $s_in_project = 'in project';
 $s_delete_config_button = '設定を削除';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'プロジェクトが追加されました。';
@@ -1049,6 +1063,8 @@ $s_viewing_bugs_title = '改善要求一覧';
 $s_updated = '最終更新日時';
 $s_sticky = 'Stickyを設定した改善要求の表示';
 $s_sort = 'ソート順';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'なし';
@@ -1292,4 +1308,6 @@ $s_before = 'より前(当該日を含まない)' ;
 $s_after = 'より後(当該日を含まない)' ;
 $s_on_or_after = '以降(当該日を含む)' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

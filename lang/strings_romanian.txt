@@ -8,11 +8,11 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	#		    Doru Ilasi <doru@aplix.org>
 	# -------------------------------------------------
-	# $Revision: 1.88 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:29 $
+	# $Revision: 1.89 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:30 $
 	#
-	# $Id: strings_romanian.txt,v 1.88 2006-09-24 14:11:29 achumakov Exp $
+	# $Id: strings_romanian.txt,v 1.89 2006-09-24 19:43:30 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -172,7 +172,7 @@ $s_bugnote_description = 'Decriere Bugnote';
 
 $s_error_no_proceed = 'Va rugam folositi butonul \'Inapoi\' in browserul dvs pentru a va intoarce la pagina precedenta. Acolo puteti corecta orice fel de problema identificata cu aceasta eroare sau puteti selecta alta actiune. De asemenea puteti alege direct o optiune din bara de meniu pentru a naviga catre o noua sectiune.';
 
-# EROARE strings
+# ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = 'EROARE: O eroare a aparut in timpul aceste actiuni.  Sunteti rugat sa semnalati acest lucru administratorului local.';
 $MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
 $MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
@@ -189,6 +189,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'EROARE: Uploadul fisierului esuat. Ce
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'EROARE: Un parametru cerut pe aceasta pagina nu a fost gasit.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Acest nume de utilizator este deja folosit. Mergeti inapoi si si selectati un altul.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Optiunea de configurare \'%s\' nu a fost gasita.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Sirul \'%s\' nu a fost gasit.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'EROARE: Bugnote nu a fost gasit.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'EROARE: Proiectul nu a fost gasit.';
@@ -215,15 +216,15 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'EROARE: Acesta este un fisier duplicat. V
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'EROARE: Cale de upload invalida.  Directorul ori nu exista, ori nu este permis la scriere pentru serverul web';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'EROARE: You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'EROARE: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'EROARE: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'EROARE: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'EROARE: Database connection failed.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'EROARE: Database query failed.';
@@ -232,8 +233,8 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Aceasta categorie exista deja
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'EROARE: No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'EROARE: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Aceasta versiune exista deja.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'EROARE: Version not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'EROARE: The username is invalid.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
@@ -244,8 +245,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "EROARE: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "EROARE: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
@@ -307,23 +308,23 @@ $s_reset_request_msg = 'Someone (presumably you) requested a password change thr
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
 $s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
 $s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
@@ -385,8 +386,8 @@ $s_advanced_view = 'Vizualizare avansata';
 $s_advanced_update = 'Modificare avansata';
 $s_refresh_delay = 'Interval de refresh';
 $s_redirect_delay = 'Interval de redirectionare';
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
+$s_with_minimum_severity = 'With Minimum Severity of';
+$s_bugnote_order = 'Notes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email la nou';
@@ -473,12 +474,12 @@ $s_bug_assign_msg       = 'Bug-ul a fost asignat cu succes...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_feedback_bug_title = 'Request Feedback on Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
 $s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
+$s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
@@ -498,7 +499,7 @@ $s_delete_bug_sure_msg = 'Sunteti sigur ca doriti sa stergeti acest bug?';
 $s_delete_bug_button = 'Sterge bug-ul';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitor Bug';
+$s_monitor_bug_button = 'Monitor Issue';
 $s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php
@@ -603,6 +604,9 @@ $s_closed_bug_button = 'Inchide bug-ul';
 $s_bugnote_updated_msg = 'Comentariul a fost modificat cu succes...';
 $s_edited_on = 'modificat la: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Click aici pentru autentificare';
 
@@ -686,13 +690,13 @@ $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
@@ -715,8 +719,8 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
@@ -740,6 +744,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Proiectul a fost adaugat cu succes...';
@@ -1048,9 +1062,12 @@ $s_viewing_bugs_title = 'Lista de bug-uri';
 $s_updated = 'Modificat';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'nimic';
+$s_current = 'current';
 $s_search ='Cauta';
 $s_view_prev_link = 'Precedent';
 $s_view_next_link = 'Urmator';
@@ -1290,5 +1307,7 @@ $s_before = 'Before' ;
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
 

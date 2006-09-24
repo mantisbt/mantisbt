@@ -11,11 +11,11 @@
 	#             miren.info@gmail.com
 	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
 	# -------------------------------------------------
-	# $Revision: 1.95 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.96 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:30 $
 	#
-	# $Id: strings_korean.txt,v 1.95 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_korean.txt,v 1.96 2006-09-24 19:43:30 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -192,6 +192,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = '오류: 파일 올리기 실패.  현재 PHP 설�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = '오류: 이 페이지에 필요한 인자를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '오류: 이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '오류: \'%s\' 설정 옵션이 없습니다.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '오류: \'%s\' 문자열이 없습니다.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = '오류: 이슈노트를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = '오류: 프로젝트를 찾을 수 없습니다.';
@@ -606,6 +607,9 @@ $s_closed_bug_button = '이슈 폐쇄';
 $s_bugnote_updated_msg = '이슈노트가 수정되었습니다....';
 $s_edited_on = '수정날짜: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '로그인';
 
@@ -743,6 +747,16 @@ $s_reopen_resolution = '재오픈된 이슈가 설정되어 있는 것에 대한 해결책';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '프로젝트가 추가되었습니다....';
@@ -1051,6 +1065,8 @@ $s_viewing_bugs_title = '이슈 보기';
 $s_updated = '최종 갱신';
 $s_sticky = 'Sticky 이슈 보기';
 $s_sort = '정렬 by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '없음';
@@ -1294,4 +1310,6 @@ $s_before = '이전' ;
 $s_after = '이후' ;
 $s_on_or_after = '동안 또는 이후' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

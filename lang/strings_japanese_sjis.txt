@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.86 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.87 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:30 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.86 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.87 2006-09-24 19:43:30 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚ÉŽ¸”s‚µ‚Ü‚µ‚½BPHP ‚
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '‚±‚Ìƒy[ƒW‚Å•K{‚Èƒpƒ‰ƒ[ƒ^u%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ƒ†[ƒU[–¼‚ÍŠù‚ÉŽg—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Ä•Ê‚Ìƒ†[ƒU[–¼‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='Ý’è€–Úu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='•¶Žš—ñu%sv‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ƒRƒƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ƒvƒƒWƒFƒNƒg‚ª‚ ‚è‚Ü‚¹‚ñB';
@@ -604,6 +605,9 @@ $s_closed_bug_button = 'Š®—¹';
 $s_bugnote_updated_msg = 'ƒRƒƒ“ƒg‚ªXV‚³‚ê‚Ü‚µ‚½B';
 $s_edited_on = 'XV“úŽž:';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'ƒƒOƒCƒ“¨';
 
@@ -741,6 +745,16 @@ $s_reopen_resolution = '·–ß‚³‚ê‚½‰ü‘P—v‹‚ÉÝ’è‚·‚é‰ðŒˆó‹µ';
 $s_config_delete_sure = 'Ý’è‚ðíœ‚µ‚Ä‚Ý‚æ‚ë‚µ‚¢‚Å‚·‚©B';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Ý’è‚ðíœ';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'ƒvƒƒWƒFƒNƒg‚ª’Ç‰Á‚³‚ê‚Ü‚µ‚½B';
@@ -1049,6 +1063,8 @@ $s_viewing_bugs_title = '‰ü‘P—v‹ˆê——';
 $s_updated = 'ÅIXV“úŽž';
 $s_sticky = 'Sticky‚ðÝ’è‚µ‚½‰ü‘P—v‹‚Ì•\Ž¦';
 $s_sort = 'ƒ\[ƒg‡';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '‚È‚µ';
@@ -1292,4 +1308,6 @@ $s_before = '‚æ‚è‘O(“–ŠY“ú‚ðŠÜ‚Ü‚È‚¢)' ;
 $s_after = '‚æ‚èŒã(“–ŠY“ú‚ðŠÜ‚Ü‚È‚¢)' ;
 $s_on_or_after = 'ˆÈ~(“–ŠY“ú‚ðŠÜ‚Þ)' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

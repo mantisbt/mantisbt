@@ -9,11 +9,11 @@
 # Norwegian: Ingvald Skaug, dev@skaug.no
 # Norwegian: Alf-Ivar Holm, affi@csc.no
 # -------------------------------------------------
-# $Revision: 1.99 $
-# $Author: achumakov $
-# $Date: 2006-09-24 14:11:28 $
+# $Revision: 1.100 $
+# $Author: siebrand $
+# $Date: 2006-09-24 19:43:30 $
 #
-# $Id: strings_norwegian.txt,v 1.99 2006-09-24 14:11:28 achumakov Exp $
+# $Id: strings_norwegian.txt,v 1.100 2006-09-24 19:43:30 siebrand Exp $
 ###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Mislykket filopplasting. Dette er sannsynli
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'En påkrevd parameter til denne siden ble ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Det brukernavnet er allerede i bruk. Vennligst gå tilbake og velg et annet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurasjonsopsjon \'%s\' ikke funnet.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengen \'%s\' ikke funnet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Finner ikke prosjektet.';
@@ -604,6 +605,9 @@ $s_closed_bug_button = 'Avslutt sak';
 $s_bugnote_updated_msg = 'Notat har blitt oppdatert ...';
 $s_edited_on = 'Redigert: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Klikk her for å logge inn';
 
@@ -741,6 +745,16 @@ $s_reopen_resolution = 'Løsningsstatus for en gjenåpnet sak settes til';
 $s_config_delete_sure = 'Er du sikker på at du ønsker å slette innstillinger for';
 $s_in_project = 'i prosjekt';
 $s_delete_config_button = 'Slette innstillinger';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
@@ -1049,6 +1063,8 @@ $s_viewing_bugs_title = 'Oversikt over saker';
 $s_updated = 'Oppdatert';
 $s_sticky = 'Vis fastlåste saker';
 $s_sort = 'Sortere etter';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'Ingen';
@@ -1292,4 +1308,6 @@ $s_before = 'Før';
 $s_after = 'Etter';
 $s_on_or_after = 'På eller etter';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

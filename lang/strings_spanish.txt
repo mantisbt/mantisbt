@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:29 $
+	# $Revision: 1.97 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:31 $
 	#
-	# $Id: strings_spanish.txt,v 1.96 2006-09-24 14:11:29 achumakov Exp $
+	# $Id: strings_spanish.txt,v 1.97 2006-09-24 19:43:31 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -193,6 +193,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Ha fallado el proceso de carga del ar
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'No se ha encontrado un parámetro requerido.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ese nombre de usuario está en uso. Por favor, regrese y escoja otro.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'No se encuentra la opción de configuración \'%s\'.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Cadena \'%s\' no encontrada.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Nota no encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Proyecto no encontrado';
@@ -607,6 +608,9 @@ $s_closed_bug_button = 'Cerrar problema reportado';
 $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
 $s_edited_on = 'editada el: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Haga click aquí para iniciar la sesión';
 
@@ -744,6 +748,16 @@ $s_reopen_resolution = 'Resolución para que sea marcada un problema reportado re
 $s_config_delete_sure = 'Esta usted seguro de que quiere borrar los parámetros de';
 $s_in_project = 'en el proyecto';
 $s_delete_config_button = 'Borrar parámetros';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'El proyecto ha sido agregado...';
@@ -1052,6 +1066,8 @@ $s_viewing_bugs_title = 'problemas reportados';
 $s_updated = 'Actualizado';
 $s_sticky = 'Ver la dificultad del problema reportado';
 $s_sort = 'solucionado por';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'ninguno';
@@ -1295,4 +1311,6 @@ $s_before = 'Antes';
 $s_after = 'Después';
 $s_on_or_after = 'Mientras o después';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

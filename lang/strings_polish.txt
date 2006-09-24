@@ -12,11 +12,11 @@
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
 	# -------------------------------------------------
-	# $Revision: 1.100 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:29 $
+	# $Revision: 1.101 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 19:43:30 $
 	#
-	# $Id: strings_polish.txt,v 1.100 2006-09-24 14:11:29 achumakov Exp $
+	# $Id: strings_polish.txt,v 1.101 2006-09-24 19:43:30 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -193,6 +193,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Przesy³anie pliku nie powiod³o siê. P
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Nie znaleziono parametru (%s) wymaganego przez stronê.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ta nazwa u¿ytkownika jest ju¿ u¿ywana.  Proszê wróciæ i podaæ inn± nazwê.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opcja konfiguracji \'%s\' nie znaleziona.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Napis \'%s\' nie znaleziony.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Nie znaleziono komentarza.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Nie znaleziono projektu.';
@@ -380,7 +381,6 @@ $s_access_level = 'Poziom dostêpu';
 $s_update_user_button = 'Aktualizuj';
 $s_verify_warning = 'Informacja o Twoim koncie zosta³a zweryfikowana. Wiadomo¶æ potwierdzaj±ca, któr± otrzyma³e¶ jest ju¿ niepoprawna.';
 $s_verify_change_password = 'Musisz ustawiæ swoje has³o tutaj, aby móc siê zalogowaæ ponownie.';
-$s_verify_change_password = 'Musisz tutaj ustawiæ swoje has³o, aby móc siê ponownie zalogowaæ.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Preferencje konta';
@@ -608,6 +608,9 @@ $s_closed_bug_button = 'Zamknij Zagadnienie';
 $s_bugnote_updated_msg = 'Komentarz zosta³ pomy¶lnie zaktualizowany...';
 $s_edited_on = 'edytowano: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Kilknij tutaj, aby siê zalogowaæ';
 
@@ -745,6 +748,16 @@ $s_reopen_resolution = 'Rozwi±zanie na które jest ustawiane ponownie otwarte zag
 $s_config_delete_sure = 'Jeste¶ pewien, ¿e chcesz usun±æ ustawienia dla';
 $s_in_project = 'w projekcie';
 $s_delete_config_button = 'Usuñ ustawienia';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt zosta³ pomy¶lnie dodany...';
@@ -1053,6 +1066,8 @@ $s_viewing_bugs_title = 'Przegl±danie Zagadnieñ';
 $s_updated = 'Aktualizacja';
 $s_sticky = 'Pokazuj przyklejone zagadnienia';
 $s_sort = 'Sortuj wed³ug';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '¿adne';
@@ -1296,4 +1311,6 @@ $s_before = 'Przed' ;
 $s_after = 'Po' ;
 $s_on_or_after = 'W lub po' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
