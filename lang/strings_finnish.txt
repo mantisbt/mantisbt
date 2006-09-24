@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.47 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:28:52 $
 	#
-	# $Id: strings_finnish.txt,v 1.46 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_finnish.txt,v 1.47 2006-09-24 18:28:52 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -192,6 +192,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'VIRHE: Tiedoston lähetys epäonnistui.
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'VIRHE: Tämän sivun vaatimaa muuttujaa ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'VIRHE: Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'VIRHE: Ohjelma-asetus  \'%s\' ei löytynyt.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'VIRHE: Merkkijonoa \'%s\' ei löytynyt.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'VIRHE: Muistiinpanoa ei löydy.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'VIRHE: Projektia ei löydy.';
@@ -606,6 +607,9 @@ $s_closed_bug_button = 'Sulje tapahtuma';
 $s_bugnote_updated_msg = 'Muistiinpano onnistuneesti päivitetty...';
 $s_edited_on = 'muokattu: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Klikkaa tästä kirjautuaksesi sisään';
 
@@ -743,6 +747,16 @@ $s_reopen_resolution = 'Ratkaisuaste, jolle uudelleeavattu tapahtuma asetetaan';
 $s_config_delete_sure = 'Oletko varma, että haluat poistaa asetukset kohteelta';
 $s_in_project = 'projektissa';
 $s_delete_config_button = 'Poista asetukset';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekti lisätty...';
@@ -1051,6 +1065,8 @@ $s_viewing_bugs_title = 'Näytetään tapahtumat';
 $s_updated = 'Päivitetty';
 $s_sticky = 'Näytä päällimmäisinä pysyvät tapahtumat';
 $s_sort = 'Lajittelujärjestys';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'ei mikään';
@@ -1294,4 +1310,6 @@ $s_before = 'Ennen' ;
 $s_after = 'Jälkeen' ;
 $s_on_or_after = 'Tällöin tai jälkeen' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

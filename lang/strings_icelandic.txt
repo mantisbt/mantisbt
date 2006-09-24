@@ -9,11 +9,11 @@
 	###########################################################################
 	# Icelandic strings for Mantis 1.0.0rc2
 	# -------------------------------------------------
-	# $Revision: 1.9 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.10 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:28:52 $
 	#
-	# $Id: strings_icelandic.txt,v 1.9 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_icelandic.txt,v 1.10 2006-09-24 18:28:52 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Upphlaðning skráar mistókst. Líklega vegna 
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tilskilin breyta á þessari síðu (%s) fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Þetta notendanafn er þegar í notkun. Farðu til baka og veldu annað.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar möguleiki \'%s\' fannst ekki.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Stengur \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
@@ -604,6 +605,9 @@ $s_closed_bug_button = 'Loka atriði';
 $s_bugnote_updated_msg = 'Athugasemdin hefur verið uppfærð...';
 $s_edited_on = 'leiðrétting á: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Ýtið hér til innskráningar';
 
@@ -741,6 +745,16 @@ $s_reopen_resolution = 'Úrlausn sem enduropnuð atriði fá';
 $s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir';
 $s_in_project = 'í framkvæmd';
 $s_delete_config_button = 'Eyða stillingum';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
@@ -1049,6 +1063,8 @@ $s_viewing_bugs_title = 'Skoða atriði';
 $s_updated = 'Uppfært';
 $s_sticky = 'Sýna límd atriði';
 $s_sort = 'Raða eftir';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'enginn';
@@ -1292,4 +1308,6 @@ $s_before = 'Before' ;
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.80 $
-  # $Author: achumakov $
-  # $Date: 2006-09-24 14:11:28 $
+  # $Revision: 1.81 $
+  # $Author: siebrand $
+  # $Date: 2006-09-24 18:28:52 $
   #
-  # $Id: strings_hungarian.txt,v 1.80 2006-09-24 14:11:28 achumakov Exp $
+  # $Id: strings_hungarian.txt,v 1.81 2006-09-24 18:28:52 siebrand Exp $
   ###########################################################################
 ?>
 <?php
@@ -189,6 +189,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'HIBA: File feltöltés sikertelen.  Fil
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'HIBA: A kért paramétert nem találom a laphoz.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'A felhasználónév már használatban van. Kérjük térjen vissza az elõzõ oldalra és válasszon egy másikat.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Hiányzik a(z) \'%s\' beállítási paraméter.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Hiányzik a(z) \'%s\' szövegparaméter.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'HIBA: Hiba megjegyzést nem találom.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'HIBA: Projektet nem találom.';
@@ -244,8 +245,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
@@ -307,33 +308,33 @@ $s_reset_request_msg = 'Someone (presumably you) requested a password change thr
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
 $s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
 $s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
 $s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
@@ -603,6 +604,9 @@ $s_closed_bug_button = 'Hiba lezárása';
 $s_bugnote_updated_msg = 'A megjegyzést sikerült módosítani...';
 $s_edited_on = 'módosítva ekkor: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'A bejelentkezéshez kattintson ide';
 
@@ -679,20 +683,20 @@ $s_last_visit = 'Utolsó látogatás';
 $s_edit_user_link = 'Felhasználó szerkesztése';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
 $s_colour_coding = 'In the table below, the following color code applies:';
 $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
@@ -715,8 +719,8 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
@@ -740,6 +744,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'A projektet sikerült felvenni...';
@@ -1048,6 +1062,8 @@ $s_viewing_bugs_title = 'Hibák listája';
 $s_updated = 'Módosítva';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'nincs';
@@ -1291,4 +1307,6 @@ $s_before = 'Before' ;
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

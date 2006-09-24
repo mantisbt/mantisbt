@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.40 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:27 $
+	# $Revision: 1.41 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:28:52 $
 	#
-	# $Id: strings_croatian.txt,v 1.40 2006-09-24 14:11:27 achumakov Exp $
+	# $Id: strings_croatian.txt,v 1.41 2006-09-24 18:28:52 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -190,6 +190,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely b
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Bugnote not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Project not found.';
@@ -604,6 +605,9 @@ $s_closed_bug_button = "Zatvori bug";
 $s_bugnote_updated_msg = "Bilje¹ka je uspje¹no a¾urirana...";
 $s_edited_on = "editirana na: ";
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = "Klikni ovdje za prijavu";
 
@@ -741,6 +745,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = "Projekt je uspje¹no dodan...";
@@ -1049,6 +1063,8 @@ $s_viewing_bugs_title = "Pregled bugova";
 $s_updated = "A¾urirani";
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = "ni¹ta";
@@ -1106,7 +1122,7 @@ $s_viewing_bug_simple_details_title = "Pregled jednostavnih detalja buga";
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
 
 # bug_sponsorship_list_view_inc.php
@@ -1204,7 +1220,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
@@ -1292,4 +1308,6 @@ $s_before = 'Before' ;
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

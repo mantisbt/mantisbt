@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.141 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.142 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:28:52 $
 	#
-	# $Id: strings_german.txt,v 1.141 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_german.txt,v 1.142 2006-09-24 18:28:52 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -193,6 +193,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrschein
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption \'%s\' nicht gefunden.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette \'%s\' nicht gefunden.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
@@ -607,6 +608,9 @@ $s_closed_bug_button = 'Schließen';
 $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
 $s_edited_on = 'bearbeitet am: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Anmeldung: bitte hier klicken';
 
@@ -744,6 +748,16 @@ $s_reopen_resolution = 'Lösung, auf die ein wiedereröffnetes Problem gesetzt wir
 $s_config_delete_sure = 'Wirklich die Einstellungen löschen für';
 $s_in_project = 'im Projekt';
 $s_delete_config_button = 'Einstellungen löschen';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt wurde hinzugefügt...';
@@ -1052,6 +1066,8 @@ $s_viewing_bugs_title = 'Probleme anzeigen';
 $s_updated = 'Aktualisiert';
 $s_sticky = 'Fixierte Probleme anzeigen';
 $s_sort = 'Sortieren nach';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'keine';
@@ -1295,4 +1311,6 @@ $s_before = 'Vor';
 $s_after = 'Nach';
 $s_on_or_after = 'Ab';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

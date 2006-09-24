@@ -18,11 +18,11 @@
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
 	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
 	# -------------------------------------------------
-	# $Revision: 1.109 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:28 $
+	# $Revision: 1.110 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 18:28:52 $
 	#
-	# $Id: strings_french.txt,v 1.109 2006-09-24 14:11:28 achumakov Exp $
+	# $Id: strings_french.txt,v 1.110 2006-09-24 18:28:52 siebrand Exp $
 	###########################################################################
 ?>
 <?php
@@ -200,6 +200,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'ERREUR : Un paramètre requis par cet
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ERREUR : Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ERREUR : L\'option de configuration \'%s\' n\'a pas été trouvé.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'ERREUR : Chaîne « %s » non trouvée.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ERREUR : Note non trouvée.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ERREUR : Projet non trouvé.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERREUR : Champ de base de données non trouvé.';
@@ -269,7 +270,6 @@ $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ERREUR : Vous ne pouvez pas modi
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
 #$s_login_error = 'Votre compte est peut être désactivé ou en panne (dû aux nombreux échecs d\'accès) ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
-#$s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors l\'utilisateur/mot de passe sont incorrects.Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
 $s_login_cookies_disabled = 'ERREUR : Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 
@@ -614,6 +614,9 @@ $s_closed_bug_button = 'Fermer le bogue';
 $s_bugnote_updated_msg = 'La note a été mise à jour avec succès...';
 $s_edited_on = 'modifié le : ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Cliquer pour accéder';
 
@@ -751,6 +754,16 @@ $s_reopen_resolution = 'Résolution à laquelle un bogue ré-ouvert est initiée
 $s_config_delete_sure = 'Voulez-vous vraiement supprimer la configuration pour';
 $s_in_project = 'du projet';
 $s_delete_config_button = 'Supprimer la configuration';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
@@ -1059,6 +1072,8 @@ $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
 $s_sticky = 'Afficher les bogues récurrants';
 $s_sort = 'Trier par';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'aucun';
@@ -1302,4 +1317,6 @@ $s_before = 'Avant';
 $s_after = 'Après';
 $s_on_or_after = 'Pendant ou après';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
