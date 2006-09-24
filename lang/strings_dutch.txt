@@ -11,13 +11,15 @@
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# Dutch: Siebrand Mazeland, s.mazeland@xs4all.nl
 	#
+	###########################################################################
+	# Dutch strings for Mantis
 	# Based on strings_english.txt rev. 1.277
 	# -------------------------------------------------
-	# $Revision: 1.105 $
+	# $Revision: 1.106 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 18:22:41 $
+	# $Date: 2006-09-24 20:33:09 $
 	#
-	# $Id: strings_dutch.txt,v 1.105 2006-09-24 18:22:41 siebrand Exp $
+	# $Id: strings_dutch.txt,v 1.106 2006-09-24 20:33:09 siebrand Exp $
 	###########################################################################
 
 ?>
