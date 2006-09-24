@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.109 $
+	# $Revision: 1.110 $
 	# $Author: achumakov $
-	# $Date: 2006-09-24 09:47:03 $
+	# $Date: 2006-09-24 10:37:29 $
 	#
-	# $Id: strings_italian.txt,v 1.109 2006-09-24 09:47:03 achumakov Exp $
+	# $Id: strings_italian.txt,v 1.110 2006-09-24 10:37:29 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -1293,4 +1293,6 @@ $s_before = "Prima del";
 $s_after = "Dopo il";
 $s_on_or_after = "Il o dopo il";
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>
