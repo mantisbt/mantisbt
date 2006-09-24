@@ -1,22 +1,25 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# Bulgarian: Alex Stanev, alex <at> stanev.org
 	# Bulgarian: Mihaela Georgieva, helicopterbg <at> gmail.com
 	# Bulgarian: Svetlin Stefanov, desertwaste <at> gmail.com
+  #
 	###########################################################################
 	# Bulgarian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.4 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:27 $
+	# $Revision: 1.5 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:32 $
 	#
-	# $Id: strings_bulgarian.txt,v 1.4 2006-09-24 14:11:27 achumakov Exp $
+	# $Id: strings_bulgarian.txt,v 1.5 2006-09-24 20:42:32 siebrand Exp $
 	###########################################################################
+
 ?>
 <?php
 # Charset

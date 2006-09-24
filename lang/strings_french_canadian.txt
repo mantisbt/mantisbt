@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -16,15 +16,19 @@
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
-		# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
- # Translated constant $s_current which was missing in all language files (v 1.8 2006/03/04)
-	# -------------------------------------------------
-	# $Revision: 1.11 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 18:28:52 $
-	#
-	# $Id: strings_french_canadian.txt,v 1.11 2006-09-24 18:28:52 siebrand Exp $
+	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+  #
 	###########################################################################
+	# French Canadian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.12 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:32 $
+	#
+	# $Id: strings_french_canadian.txt,v 1.12 2006-09-24 20:42:32 siebrand Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset

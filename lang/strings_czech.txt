@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -10,14 +10,18 @@
 	# Czech: Vít Jurásek, vit.jurasek@vegateam.cz
 	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Czech: Přemek Brada, brada@kiv.zcu.cz
-	# Code page: ISO-8859-2
-	# -------------------------------------------------
-	# $Revision: 1.87 $
-	# $Author: achumakov $
-	# $Date: 2006-09-24 14:11:27 $
-	#
-	# $Id: strings_czech.txt,v 1.87 2006-09-24 14:11:27 achumakov Exp $
+  #
 	###########################################################################
+	# Czech strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.88 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:32 $
+	#
+	# $Id: strings_czech.txt,v 1.88 2006-09-24 20:42:32 siebrand Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset

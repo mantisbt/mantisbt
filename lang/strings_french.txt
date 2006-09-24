@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -17,13 +17,18 @@
 	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
 	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
-	# -------------------------------------------------
-	# $Revision: 1.110 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 18:28:52 $
-	#
-	# $Id: strings_french.txt,v 1.110 2006-09-24 18:28:52 siebrand Exp $
+  #
 	###########################################################################
+	# French strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.111 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:32 $
+	#
+	# $Id: strings_french.txt,v 1.111 2006-09-24 20:42:32 siebrand Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset

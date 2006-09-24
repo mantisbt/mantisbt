@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -11,13 +11,18 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
-	# -------------------------------------------------
-	# $Revision: 1.142 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 18:28:52 $
-	#
-	# $Id: strings_german.txt,v 1.142 2006-09-24 18:28:52 siebrand Exp $
+  #
 	###########################################################################
+	# German strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.143 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:32 $
+	#
+	# $Id: strings_german.txt,v 1.143 2006-09-24 20:42:32 siebrand Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset

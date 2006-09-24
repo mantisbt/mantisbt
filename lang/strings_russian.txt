@@ -4,52 +4,47 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# Russian: Alexey Chumakov alex@chumakov.ru
+	# Russian: Alexander Leschinsky aml@lair.pp.ru
+	# Russian: Alex Volkov, alex@volkov.ru
+	# Russian: Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
 	#
-	# Russian (Windows1251): Alexey Chumakov alex@chumakov.ru
-	# Alexander Leschinsky aml@lair.pp.ru
-	# Alex Volkov, alex@volkov.ru
-	# Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
-	#
-	# supercedes previous Russian translations:
-	# (whole retranslation & cleanup:
-	#	to match Russian traditions (scope-neutral),
-	# 	to clean the language style
-	#	to allow for use in helpdesk, task- and risk- processing,
-	#	to make it understandable by non-techie users
-	#
-	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 19:43:30 $
-	#
-	# $Id: 
 	###########################################################################
-
-#
-# Russian glossary
-#
-#issue		вопрос (не запрос/баг/ошибка/заявка/обращение, хотя темя для разговора)
-#severity	серьезность
-#sticky		прикрепленный
-#resolution	решение
-#feedback	отклик
-#projection	трудоемкость
-#view status	видимость (общая/ограниченная)
-#developer	участник
-#reporter	инициатор
-#access level	видимость
-#sponsor	плательщик
-#sponsorship	оплата
-#payment	платеж [уплачиваемый]
-#update		изменение (не обновление!)
-
-#
-# Localization issues
-#
-# маленькие буквы в ссылках могут потребовать разделения некоторых строк
-# или отката (по-русски не приняты строчные ссылки с большой)
-#
-# возможно, reminder нужно переводить как извещение, а не напоминание
+	# Russian strings for Mantis
+	# -------------------------------------------------
+	# $Revision: 1.97 $
+	# $Author: siebrand $
+	# $Date: 2006-09-24 20:42:33 $
+	#
+	# $Id: strings_russian.txt,v 1.97 2006-09-24 20:42:33 siebrand Exp $
+	###########################################################################
+  #
+  # Russian glossary
+  #
+  #issue		вопрос (не запрос/баг/ошибка/заявка/обращение, хотя темя для разговора)
+  #severity	серьезность
+  #sticky		прикрепленный
+  #resolution	решение
+  #feedback	отклик
+  #projection	трудоемкость
+  #view status	видимость (общая/ограниченная)
+  #developer	участник
+  #reporter	инициатор
+  #access level	видимость
+  #sponsor	плательщик
+  #sponsorship	оплата
+  #payment	платеж [уплачиваемый]
+  #update		изменение (не обновление!)
+	###########################################################################
+  #
+  # Localization issues
+  #
+  # маленькие буквы в ссылках могут потребовать разделения некоторых строк
+  # или отката (по-русски не приняты строчные ссылки с большой)
+  #
+  # возможно, reminder нужно переводить как извещение, а не напоминание
+	###########################################################################
 
 ?>
 <?php

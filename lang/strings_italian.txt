@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -9,12 +9,16 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
+  #
+	###########################################################################
+	# Italian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.112 $
+	# $Revision: 1.113 $
 	# $Author: siebrand $
-	# $Date: 2006-09-24 18:28:52 $
+	# $Date: 2006-09-24 20:42:33 $
 	#
-	# $Id: strings_italian.txt,v 1.112 2006-09-24 18:28:52 siebrand Exp $
+	# $Id: strings_italian.txt,v 1.113 2006-09-24 20:42:33 siebrand Exp $
 	###########################################################################
 
 ?>
