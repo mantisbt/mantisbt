@@ -16,11 +16,11 @@
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.145 $
+	# $Revision: 1.146 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-09-25 11:23:30 $
 	#
-	# $Id: strings_german.txt,v 1.145 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_german.txt,v 1.146 2006-09-25 11:23:30 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -88,7 +88,7 @@ $s_duplicate_of = 'Duplikat von';
 $s_has_duplicate = 'hat Duplikat';
 $s_related_to = 'verwandt mit';
 $s_dependant_on = 'abhängig von';
-$s_blocks = 'Folgeproblem von';
+$s_blocks = 'blockiert';
 
 $s_new_bug = 'Neues Problem';
 $s_bugnote_added = 'Problemnotiz hinzugefügt';
@@ -254,10 +254,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweig
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor hat keine E-Mail-Adresse angegeben. Bitte aktualisieren Sie Ihr Konto.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Einstellung \'%s\' enthält ungültigen Wert \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nicht ausführbar, weil Problem \'%d\' schreibgeschützt ist';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Es besteht bereits eine Beziehung zwischen diesen zwei Problemen.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Beziehung nicht gefunden.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Zugang verweigert: Das Problem %d benötigt höhere Zugriffsrechte .";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Ein Problem kann nicht mit sich selbst in Beziehung gesetzt werden.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Es besteht bereits eine Beziehung zwischen diesen zwei Problemen.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Beziehung nicht gefunden.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Zugang verweigert: Das Problem %d benötigt höhere Zugriffsrechte.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Ein Problem kann nicht mit sich selbst in Beziehung gesetzt werden.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bestätigungsschlüssel nicht korrekt. Bitte versuchen Sie es noch einmal.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Die "Passwort vergessen" Funktion ist nicht verfügbar.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Sie müssen eine E-Mail-Adresse angeben, um Ihr Passwort zurücksetzen zu können.';
@@ -268,7 +268,7 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Diese Operation würde eine S
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sie können die Zugangsrechte des einzigen System-ADMINISTRATORS nicht ändern.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'Benutzername oder Passwort falsch.';
+$s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eigegebene Benutzer/Password ist falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 
 # General Strings
@@ -306,13 +306,13 @@ $s_new_account_subject = 'Konto Registrierung';
 $s_new_account_greeting = 'Danke für ihre Registrierung. Ihr Konto hat den Benutzernamen \'';
 $s_new_account_greeting2 = '\'. Um die Registrierung abzuschließen, besuchen Sie die folgende URL (stellen Sie sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setzen Sie ihr eigenes Zugangskennwort:';
 $s_new_account_username = 'Benutzername: ';
-$s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.' . "\n\n";
+$s_new_account_message = 'Wenn Sie sich nicht registriert haben, ignorieren Sie diese Nachricht, es wird nichts passieren.' . '\n\n';
 $s_new_account_do_not_reply = 'NICHT AUF DIESE NACHRICHT ANTWORTEN';
 $s_new_account_email = 'E-Mail: ';
 $s_new_account_IP = 'Von IP Adresse: ';
 $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
 
-$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.' . "\n\n" . 'Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
+$s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.' . '\n\n' . 'Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 
 $s_email_notification_title_for_status_bug_new = 'Das folgende Problem hat (erneut) den Status NEU';
@@ -333,18 +333,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Die Sponsorenschaf
 $s_email_notification_title_for_action_sponsorship_deleted = 'Die Sponsorenschaft des folgenden Problems wurde zurückgezogen.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Eine Notiz wurde zu diesem Problem hinzugefügt.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Das folgende Problem wurde als DUPLIKAT VON Problem %s bestimmt.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Das Problem %s wurde als DUPLIKAT VON des folgenden Problems bestimmt.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Das folgende Problem wurde als VERWANDT MIT Problem %s bestimmt.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Das folgende Problem wurde als ABHÄNGIG VON Problem %s bestimmt.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Das folgende Problem wurde als VORAUSSETZUNG FÜR Problem %s bestimmt.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Die Beziehung des folgenden Problems als DUPLIKAT VON Problem %s wurde aufgehoben.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Die Beziehung des Problems %s als DUPLIKAT VON des folgenden Problems wurde aufgehoben.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Die Beziehung des folgenden Problems als VERWANDT MIT Problem %s wurde aufgehoben.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Das folgende Problem ist nicht mehr ABHÄNGIG VON Problem %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Das folgende Problem ist nicht mehr VORAUSSETZUNG FÜR Problem %s..";
-$s_email_notification_title_for_action_relationship_child_resolved = "Das VERWANDTE Problem %s wurde ERLEDIGT.";
-$s_email_notification_title_for_action_relationship_child_closed = "Das VERWANDTE Problem %s wurde GESCHLOSSEN.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Das folgende Problem wurde als DUPLIKAT VON Problem %s bestimmt.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Das Problem %s wurde als DUPLIKAT VON des folgenden Problems bestimmt.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Das folgende Problem wurde als VERWANDT MIT Problem %s bestimmt.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Das folgende Problem wurde als ABHÄNGIG VON Problem %s bestimmt.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Das folgende Problem wurde als VORAUSSETZUNG FÜR Problem %s bestimmt.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Die Beziehung des folgenden Problems als DUPLIKAT VON Problem %s wurde aufgehoben.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Die Beziehung des Problems %s als DUPLIKAT VON des folgenden Problems wurde aufgehoben.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Die Beziehung des folgenden Problems als VERWANDT MIT Problem %s wurde aufgehoben.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Das folgende Problem ist nicht mehr ABHÄNGIG VON Problem %s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Das folgende Problem ist nicht mehr VORAUSSETZUNG FÜR Problem %s..';
+$s_email_notification_title_for_action_relationship_child_resolved = 'Das VERWANDTE Problem %s wurde ERLEDIGT.';
+$s_email_notification_title_for_action_relationship_child_closed = 'Das VERWANDTE Problem %s wurde GESCHLOSSEN.';
 
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';
@@ -639,11 +639,11 @@ $s_redirecting = '...Weiterleitung';
 $s_here = 'hier klicken';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Passwort zurücksetzen";
-$s_lost_password_done_title = "Passwort Nachricht gesendet";
-$s_lost_password_subject = "Passwort zurücksetzen";
-$s_lost_password_info = "Um ihr verlorenes Passwort zu erhalten, geben Sie bitte Benutzername und E-Mail Adresse Ihres Kontos an.<br/><br/>Wenn die Daten mit einem gültigen Konto übereinstimmen, wird Ihnen eine spezielle URL über E-Mail geschickt die einen Bestätigungscode für Ihr Konto enthält. Bitte folgen Sie dem Link und ändern Sie ihr Passwort.";
-$s_lost_password_confirm_hash_OK = "Ihr Bestätigung wurde akzeptiert. Bitte aktualisieren Sie Ihr Passwort.";
+$s_lost_password_title = 'Passwort zurücksetzen';
+$s_lost_password_done_title = 'Passwort Nachricht gesendet';
+$s_lost_password_subject = 'Passwort zurücksetzen';
+$s_lost_password_info = 'Um ihr verlorenes Passwort zu erhalten, geben Sie bitte Benutzername und E-Mail Adresse Ihres Kontos an.<br/><br/>Wenn die Daten mit einem gültigen Konto übereinstimmen, wird Ihnen eine spezielle URL über E-Mail geschickt die einen Bestätigungscode für Ihr Konto enthält. Bitte folgen Sie dem Link und ändern Sie ihr Passwort.';
+$s_lost_password_confirm_hash_OK = 'Ihr Bestätigung wurde akzeptiert. Bitte aktualisieren Sie Ihr Passwort.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Offen und mir zugewiesen';
@@ -703,10 +703,10 @@ $s_change_configuration = 'Konfiguration ändern';
 $s_message = 'Meldung';
 $s_default_notify = 'Setze Benachrichtigungsvorgaben auf';
 $s_action_notify = 'Setze Aktionsbenachrichtigungen auf';
-$s_notify_defaults_change_access = 'Wer kannn Benachrichtigungsvorgaben ändern';
-$s_notify_actions_change_access = 'Wer kann Benachrichtigungen ändern';
-$s_revert_to_system = "Alle Projekteinstellungen löschen";
-$s_revert_to_all_project = "Projektspezifische Einstellungen löschen";
+$s_notify_defaults_change_access = 'Wer darf Vorgaben für Benachrichtigungen ändern';
+$s_notify_actions_change_access = 'Wer darf Benachrichtigungen ändern';
+$s_revert_to_system = 'Alle Projekteinstellungen löschen';
+$s_revert_to_all_project = 'Projektspezifische Einstellungen löschen';
 
 # manage_config_workflow_page
 $s_non_existent = 'nicht vorhanden';
@@ -722,34 +722,34 @@ $s_comment = 'Überprüfungskommentar';
 $s_superfluous = 'Verbindung vom Status zu sich selbst ist enthalten und braucht nicht angegeben zu werden.';
 $s_unreachable = 'Sie können ein Problem nicht in diesen Status versetzen';
 $s_no_exit = 'Sie können ein Problem nicht aus diesem Status entfernen';
-$s_access_levels = 'Zugangsberechtigung';
+$s_access_levels = 'Zugangsberechtigungen';
 $s_access_change = 'Minimale Zugangsberechtigung, um diesen Status zu ändern';
 $s_desc_bug_submit_status = 'Status für neu eingegebene Probleme';
-$s_desc_bug_reopen_status = 'Status, auf den wiedereröffnete Problemem gesetzt werden';
-$s_desc_bug_resolved_status_threshold = 'Status, bei dem Probleme als erledigt angesehen werden';
-$s_workflow_change_access = 'Wer den Arbeitsablauf ändern kann';
-$s_access_change_access = 'Wer den Status ändern kann';
+$s_desc_bug_reopen_status = 'Status, auf den wiedereröffnete Probleme gesetzt werden';
+$s_desc_bug_resolved_status_threshold = 'Status, ab dem ein Problem als erledigt angesehen wird';
+$s_workflow_change_access = 'Wer darf den Arbeitsablauf ändern';
+$s_access_change_access = 'Wer darf den Status ändern';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'Der Vorgabestatus von %s ist nicht in den nächsten Stati von %s ausgewählt. Er wird ignoriert.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Ein Problem zuweisen';
-$s_allow_close_immediate = 'Erlaube, ein Problem mit der Erledigung zu schließen';
-$s_allow_reporter_close = 'Erlaube Berichterstatter, ein Problem zu schließen';
-$s_allow_reporter_reopen = 'Erlaube Berichterstatter, ein Problem wieder zu eröffnen';
-$s_set_status_assigned = 'Setze Status bei Zuweisung eines Verantworlichen';
+$s_allow_close_immediate = 'Erlaube erledigte Probleme zu schließen';
+$s_allow_reporter_close = 'Erlaubt Reportern Probleme zu schließen';
+$s_allow_reporter_reopen = 'Erlaubt Reportern Probleme wiederzueröffnen';
+$s_set_status_assigned = 'Setze Status bei Zuweisung eines Bearbeiters';
 $s_allow_user_edit = 'Benutzer dürfen eigene Notizen bearbeiten';
-$s_limit_access = 'Begrenze zu Zugriff der Berichterstatter auf ihre eigenen Probleme';
+$s_limit_access = 'Reporter dürfen nur auf ihre eigenen Probleme zugreifen';
 $s_submit_status = 'Status für neu eingegebene Probleme';
 $s_assigned_status = 'Status, auf den automatisch zugewiesene Probleme gesetzt werden';
 $s_resolved_status = 'Status, bei dem ein Problem als erledigt angesehen wird';
-$s_readonly_status = 'Status, bei dem ein Problem schreibgeschützt wird.';
+$s_readonly_status = 'Status, bei dem ein Problem schreibgeschützt wird';
 $s_reopen_status = 'Status, auf den ein wiedereröffnetes Problem gesetzt wird';
 $s_reopen_resolution = 'Lösung, auf die ein wiedereröffnetes Problem gesetzt wird';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Wirklich die Einstellungen löschen für';
+$s_config_delete_sure = 'Sind Sie sicher das Sie die Einstellungen löschen möchten für';
 $s_in_project = 'im Projekt';
 $s_delete_config_button = 'Einstellungen löschen';
 
@@ -1180,8 +1180,8 @@ $s_field_remove_button = 'Feld entfernen';
 $s_hide_status = 'Status ausblenden';
 $s_filter_closed = 'Geschlossen';
 $s_filter_resolved = 'Erledigt';
-$s_hide_closed = "Geschlossene Probleme ausblenden";
-$s_hide_resolved = "Gelöste Probleme ausblenden";
+$s_hide_closed = 'Geschlossene Probleme ausblenden';
+$s_hide_resolved = 'Gelöste Probleme ausblenden';
 $s_and_above = 'und darüber';
 $s_advanced_filters = 'Erweiterte Filter';
 $s_simple_filters = 'Einfache Filter';
@@ -1211,34 +1211,34 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Änderungsprotokoll';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = 'Mantis Login';
 
-$s_bug = "Problem";
-$s_add_new_relationship = "Neue Beziehung";
-$s_add_new_relationship_button = "Hinzufügen";
-$s_this_bug = "Aktuelles Problem";
-$s_relationship_added = "Beziehung hinzugefügt";
-$s_relationship_deleted = "Beziehung gelöscht";
-$s_no_relationship = "Keine Beziehung";
-$s_relationship_replaced = "Beziehung ersetzt";
-$s_replace_relationship_button = "Ersetze";
-$s_replace_relationship_sure_msg = "Es besteht bereits eine Beziehung zwischen den Problemen. Wollen Sie sie ersetzen?";
-$s_relationship_with_parent = "Beziehung zum Original-Problem";
-$s_delete_relationship_button = "Löschen";
-$s_delete_relationship_sure_msg = "Sind Sie sicher, dass Sie diese Beziehung löschen wollen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.";
-$s_create_child_bug_button = "Klon erzeugen";
-$s_bug_cloned_to = "Problem dupliziert";
-$s_bug_created_from = "Problem angelegt von";
+$s_bug = 'Problem';
+$s_add_new_relationship = 'Neue Beziehung';
+$s_add_new_relationship_button = 'Hinzufügen';
+$s_this_bug = 'Aktuelles Problem';
+$s_relationship_added = 'Beziehung hinzugefügt';
+$s_relationship_deleted = 'Beziehung gelöscht';
+$s_no_relationship = 'Keine Beziehung';
+$s_relationship_replaced = 'Beziehung ersetzt';
+$s_replace_relationship_button = 'Ersetze';
+$s_replace_relationship_sure_msg = 'Es besteht bereits eine Beziehung zwischen den Problemen. Wollen Sie sie ersetzen?';
+$s_relationship_with_parent = 'Beziehung zum Original-Problem';
+$s_delete_relationship_button = 'Löschen';
+$s_delete_relationship_sure_msg = 'Sind Sie sicher, dass Sie diese Beziehung löschen wollen?';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.';
+$s_create_child_bug_button = 'Klon erzeugen';
+$s_bug_cloned_to = 'Problem dupliziert';
+$s_bug_created_from = 'Problem angelegt von';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Beziehungs-Grafik";
-$s_relation_graph = "Grafik der Beziehungen";
-$s_dependency_graph = "Grafik der Abhängigkeiten";
-$s_vertical = "Vertikal";
-$s_horizontal = "Horizontal";
-$s_view_issue = "Problem ansehen";
+$s_viewing_bug_relationship_graph_title = 'Beziehungs-Grafik';
+$s_relation_graph = 'Grafik der Beziehungen';
+$s_dependency_graph = 'Grafik der Abhängigkeiten';
+$s_vertical = 'Vertikal';
+$s_horizontal = 'Horizontal';
+$s_view_issue = 'Problem ansehen';
 
 # Source Control Integration
 $s_checkin = 'Einchecken';
