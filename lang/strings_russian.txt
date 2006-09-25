@@ -4,7 +4,7 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Russian: Alexey Chumakov alex@chumakov.ru
 	# Russian: Alexander Leschinsky aml@lair.pp.ru
 	# Russian: Alex Volkov, alex@volkov.ru
@@ -13,37 +13,37 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.98 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:56 $
+	# $Revision: 1.99 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:49 $
 	#
-	# $Id: strings_russian.txt,v 1.98 2006-09-24 21:21:56 siebrand Exp $
+	# $Id: strings_russian.txt,v 1.99 2006-09-25 05:16:49 achumakov Exp $
 	###########################################################################
-  #
-  # Russian glossary
-  #
-  #issue		вопрос (не запрос/баг/ошибка/заявка/обращение, хотя темя для разговора)
-  #severity	серьезность
-  #sticky		прикрепленный
-  #resolution	решение
-  #feedback	отклик
-  #projection	трудоемкость
-  #view status	видимость (общая/ограниченная)
-  #developer	участник
-  #reporter	инициатор
-  #access level	видимость
-  #sponsor	плательщик
-  #sponsorship	оплата
-  #payment	платеж [уплачиваемый]
-  #update		изменение (не обновление!)
+	#
+	# Russian glossary
+	#
+	# access level	видимость
+	# developer	участник
+	# feedback	отклик
+	# issue		вопрос (не запрос/баг/ошибка/заявка/обращение, хотя тема для разговора)
+	# payment	платеж [уплачиваемый]
+	# projection	трудоемкость
+	# reporter	инициатор
+	# resolution	решение
+	# severity	серьезность
+	# sticky	прикрепленный
+	# view status	видимость (общая/ограниченная)
+	# sponsor	плательщик
+	# sponsorship	оплата
+	# update	изменение (не обновление!)
 	###########################################################################
-  #
-  # Localization issues
-  #
-  # маленькие буквы в ссылках могут потребовать разделения некоторых строк
-  # или отката (по-русски не приняты строчные ссылки с большой)
-  #
-  # возможно, reminder нужно переводить как извещение, а не напоминание
+	#
+	# Localization issues
+	#
+	# маленькие буквы в ссылках могут потребовать разделения некоторых строк
+	# или отката (по-русски не приняты строчные ссылки с большой)
+	#
+	# возможно, reminder нужно переводить как извещение, а не напоминание
 	###########################################################################
 
 ?>

@@ -4,20 +4,20 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-  # Norwegian: Espen Holje, eh@escio.no
-  # Norwegian: Ingvald Skaug, dev@skaug.no
-  # Norwegian: Alf-Ivar Holm, affi@csc.no
-  #
+	#
+	# Norwegian: Espen Holje, eh@escio.no
+	# Norwegian: Ingvald Skaug, dev@skaug.no
+	# Norwegian: Alf-Ivar Holm, affi@csc.no
+	#
 	###########################################################################
 	# Norwegian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.102 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:55 $
+	# $Revision: 1.103 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:48 $
 	#
-	# $Id: strings_norwegian.txt,v 1.102 2006-09-24 21:21:55 siebrand Exp $
+	# $Id: strings_norwegian.txt,v 1.103 2006-09-25 05:16:48 achumakov Exp $
 	###########################################################################
 
 ?>

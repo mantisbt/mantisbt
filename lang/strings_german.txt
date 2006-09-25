@@ -4,23 +4,23 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# German: Hermann-Josef Beckers, hjb-rheine@t-online.de
 	# German: Heiko Gierer, gierer@rittershaus.de
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
-  #
+	#
 	###########################################################################
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.144 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:52 $
+	# $Revision: 1.145 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:48 $
 	#
-	# $Id: strings_german.txt,v 1.144 2006-09-24 21:21:52 siebrand Exp $
+	# $Id: strings_german.txt,v 1.145 2006-09-25 05:16:48 achumakov Exp $
 	###########################################################################
 
 ?>

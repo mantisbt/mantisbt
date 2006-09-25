@@ -4,19 +4,19 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Estonian: Villem Vannas, willu60@hotmail.com (14.09.2004)
  	# Estonian: Klemens Kasemaa, Elion Ettevutted AS, klem (at) estpak.ee (27.01.2005)
-  #
+	#
 	###########################################################################
 	# Estonian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.41 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:52 $
+	# $Revision: 1.42 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:48 $
 	#
-	# $Id: strings_estonian.txt,v 1.41 2006-09-24 21:21:52 siebrand Exp $
+	# $Id: strings_estonian.txt,v 1.42 2006-09-25 05:16:48 achumakov Exp $
 	###########################################################################
 
 ?>

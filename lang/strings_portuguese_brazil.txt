@@ -4,21 +4,21 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
-  #
+	#
 	###########################################################################
 	# Brazilian Portuguese strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.103 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:56 $
+	# $Revision: 1.104 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:48 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.103 2006-09-24 21:21:56 siebrand Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.104 2006-09-25 05:16:48 achumakov Exp $
 	###########################################################################
 
 ?>

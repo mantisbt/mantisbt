@@ -4,23 +4,23 @@
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# Polish: Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
 	# Polish: Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
 	# Polish: Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
-  #
+	#
 	###########################################################################
 	# Polish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.7 $
-	# $Author: siebrand $
-	# $Date: 2006-09-24 21:21:56 $
+	# $Revision: 1.8 $
+	# $Author: achumakov $
+	# $Date: 2006-09-25 05:16:48 $
 	#
-	# $Id: strings_polish_utf8.txt,v 1.7 2006-09-24 21:21:56 siebrand Exp $
+	# $Id: strings_polish_utf8.txt,v 1.8 2006-09-25 05:16:48 achumakov Exp $
 	###########################################################################
 
 ?>
