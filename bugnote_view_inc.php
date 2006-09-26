@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.31 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.32 2006-09-26 01:50:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$t_user_id = auth_get_current_user_id();
 
 	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
-		$t_restriction = 'AND view_state=' . VS_PUBLIC;
+		$t_restriction = 'AND ( view_state=' . VS_PUBLIC . ' OR reporter_id = ' . $t_user_id . ')';
 	} else {
 		$t_restriction = '';
 	}
