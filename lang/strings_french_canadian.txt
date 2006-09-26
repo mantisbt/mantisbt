@@ -22,11 +22,11 @@
 	# French Canadian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Revision: 1.15 $
+	# $Author: siebrand $
+	# $Date: 2006-09-26 22:37:55 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.14 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_french_canadian.txt,v 1.15 2006-09-26 22:37:55 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -461,7 +461,7 @@ $s_own_sponsored = 'Bogues que vous avez commandités :';
 $s_issues_handled = 'Bogues commandités qui vous ont été assignés :';
 $s_no_own_sponsored = 'Vous n\'avez commandité aucun bogue.';
 $s_sponsor = 'Commanditaire';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor_verb = 'Commanditer';	# like in 'Sponsor it!'
 $s_amount = 'Montant';
 $s_total_owing = 'Total dû';
 $s_total_paid = 'Total payé';
