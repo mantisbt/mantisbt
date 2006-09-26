@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.35 2006-09-24 23:23:29 thraxisp Exp $
+	# $Id: history_api.php,v 1.36 2006-09-26 01:30:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -139,18 +139,20 @@
 				continue; 
 			}
 			// bugnotes
-			if ( ( $v_type == BUGNOTE_ADDED ) ||
+			if ( $t_user_id != $v_user_id ) { // bypass if user originated note
+				if ( ( $v_type == BUGNOTE_ADDED ) ||
 					( $v_type == BUGNOTE_UPDATED ) ||
 					( $v_type == BUGNOTE_DELETED ) ) {
-				if ( !$t_private_bugnote_visible && 
-						( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
-					continue;
+						if ( !$t_private_bugnote_visible && 
+							( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+								continue;
+						}
 				}
-			}
-			if ( $v_type == BUGNOTE_STATE_CHANGED ) {
-				if ( !$t_private_bugnote_visible && 
-						( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
-					continue;
+				if ( $v_type == BUGNOTE_STATE_CHANGED ) {
+					if ( !$t_private_bugnote_visible && 
+							( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+						continue;
+					}
 				}
 			}
 			$raw_history[$j]['date']	= db_unixtimestamp( $v_date_modified );
