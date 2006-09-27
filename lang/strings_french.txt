@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -22,11 +22,11 @@
 	# French strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.114 $
+	# $Revision: 1.115 $
 	# $Author: siebrand $
-	# $Date: 2006-09-26 22:37:55 $
+	# $Date: 2006-09-27 08:03:01 $
 	#
-	# $Id: strings_french.txt,v 1.114 2006-09-26 22:37:55 siebrand Exp $
+	# $Id: strings_french.txt,v 1.115 2006-09-27 08:03:01 siebrand Exp $
 	###########################################################################
 
 ?>
