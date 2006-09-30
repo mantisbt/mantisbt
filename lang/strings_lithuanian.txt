@@ -12,11 +12,11 @@
 	# Lithuanian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.39 $
+	# $Revision: 1.40 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-09-30 22:01:45 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.39 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_lithuanian.txt,v 1.40 2006-09-30 22:01:45 achumakov Exp $
 	###########################################################################
 	#
 	# Problematiðki vertimai
@@ -34,7 +34,7 @@
 ?>
 <?php
 # Charset
-$s_charset = 'Windows-1257';
+$s_charset = 'windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Perkelti';

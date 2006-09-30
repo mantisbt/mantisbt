@@ -11,17 +11,17 @@
 	# Latvian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-09-30 22:01:45 $
 	#
-	# $Id: strings_latvian.txt,v 1.43 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_latvian.txt,v 1.44 2006-09-30 22:01:45 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'Windows-1257';
+$s_charset = 'windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Pârvietot';
@@ -389,7 +389,7 @@ $s_advanced_view = "Paplaðinâta apskate";
 $s_advanced_update = "Paplaðinâta laboðana";
 $s_refresh_delay = "Ekrâna atjauninâðnas aizture";
 $s_redirect_delay = "Aizture veicot noteiktas darbîbas";
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
