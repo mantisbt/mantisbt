@@ -11,11 +11,11 @@
 	# Icelandic strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.13 $
-	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Revision: 1.14 $
+	# $Author: siebrand $
+	# $Date: 2006-09-30 09:31:49 $
 	#
-	# $Id: strings_icelandic.txt,v 1.13 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_icelandic.txt,v 1.14 2006-09-30 09:31:49 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -193,8 +193,8 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Upphlaðning skráar mistókst. Líklega vegna 
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tilskilin breyta á þessari síðu (%s) fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Þetta notendanafn er þegar í notkun. Farðu til baka og veldu annað.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar möguleiki \'%s\' fannst ekki.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Stengur \'%s\' fannst ekki.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Ekki er hægt að breyta stillingar möguleikanum \'%s\' í gagnagrunninum. Það verður að breyta honum í config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengur \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svæðið \'%s\' fannst ekki.';
@@ -224,7 +224,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Þú getur ekki sett inn atriði sem af
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Sérsniðið svæði finnst ekki';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Þetta er nafn afrits.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Að minnsta kosti eitt verkefni notar þetta svæði.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ógild gildi fyrir þetta svæði';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir þetta svæði';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Sérsniðin svæðisskilgreining er ógilt';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP staðfesting mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging þjóns mistókst.';
@@ -289,7 +289,7 @@ $s_view_state_enum_string = '10:almennt, 50:læst';
 
 $s_priority_enum_string = '10:enginn,20:lágt,30:eðlilegt,40:hátt,50:áríðandi,60:tafarlaust';
 $s_severity_enum_string = '10:eiginleiki,20:smávægilegur,30:texti,40:fínstilling,50:minni háttar,60:meiri háttar, 70:hrun,80:lokar';
-$s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hægt að endurskapa,100:ekki mögulegt';
+$s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hægt að endurskapa,100:á ekki við';
 $s_status_enum_string = '10:nýtt,20:svar,30:móttekið,40:staðfest,50:úthlutað,80:leyst,90:lokað';
 $s_resolution_enum_string = '10:opið,20:leyst,30:enduropnað,40:ekki hægt að endurskapa,50:ekki hægt að laga,60:afrit,70:þarfnast ekki breytinga,80:sett til hliðar,90:hefur ekki lagast';
 $s_projection_enum_string = '10:enginn,30:fínstilling,50:lítið verk,70:mikið verk,90:endurhönnun';
@@ -608,7 +608,7 @@ $s_bugnote_updated_msg = 'Athugasemdin hefur verið uppfærð...';
 $s_edited_on = 'leiðrétting á: ';
 
 # file_api.php
-$s_show_content ='Show Content';
+$s_show_content ='Sýna innihald';
 
 # index.php
 $s_click_to_login = 'Ýtið hér til innskráningar';
@@ -749,14 +749,14 @@ $s_in_project = 'í framkvæmd';
 $s_delete_config_button = 'Eyða stillingum';
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
-$s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_report = 'Skýrsla um stillingar';
+$s_database_configuration = 'Gagnagrunns stillingar';
+$s_configuration_option = 'Stillingar möguleikar';
+$s_configuration_option_type = 'Tegund';
+$s_configuration_option_value = 'Gildi';
+$s_all_users = 'Allir notendur';
+$s_set_configuration_option = 'Setja stillingar möguleika';
+$s_delete_config_sure_msg = 'Ertu viss um að vilja eyða þessum stillingar möguleika?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
@@ -1065,12 +1065,12 @@ $s_viewing_bugs_title = 'Skoða atriði';
 $s_updated = 'Uppfært';
 $s_sticky = 'Sýna límd atriði';
 $s_sort = 'Raða eftir';
-$s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_issue_id = 'Atriði #';
+$s_recently_visited = 'Nýlega sótt';
 
 # view_all_inc.php
 $s_none = 'enginn';
-$s_current = 'current';
+$s_current = 'núverandi';
 $s_search = 'Leita';
 $s_view_prev_link = 'Sjá fyrri';
 $s_view_next_link = 'Sjá næsta';
