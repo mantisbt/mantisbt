@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.82 2006-07-05 03:14:07 thraxisp Exp $
+	# $Id: string_api.php,v 1.83 2006-09-30 22:23:57 achumakov Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -695,7 +695,10 @@
 	# the current charset, if the current PHP version supports it.
 	function string_html_specialchars( $p_string ) {
 		if ( php_version_at_least( '4.1.0' ) ) {
-			return htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
+			# achumakov: @ added to avoid warning output in unsupported codepages
+			# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
+			# This is VERY important for Eastern European, Baltic and Korean languages
+			return @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
 		} else {
 			return htmlspecialchars( $p_string );
 		}
