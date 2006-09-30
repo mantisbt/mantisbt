@@ -11,11 +11,11 @@
 	# Croatian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-09-30 21:59:41 $
 	#
-	# $Id: strings_croatian.txt,v 1.44 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_croatian.txt,v 1.45 2006-09-30 21:59:41 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -389,7 +389,7 @@ $s_advanced_view = "Napredni pregled";
 $s_advanced_update = "Napredno a¾uriranje";
 $s_refresh_delay = "Vrijeme izmeðu obnavljanja";
 $s_redirect_delay = "Vrijeme prije redirekcije";
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';

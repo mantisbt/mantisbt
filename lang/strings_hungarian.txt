@@ -13,11 +13,11 @@
 	# Hungarian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-09-30 22:00:35 $
 	#
-	# $Id: strings_hungarian.txt,v 1.84 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_hungarian.txt,v 1.85 2006-09-30 22:00:35 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -391,7 +391,7 @@ $s_advanced_view = 'Részletes nézet';
 $s_advanced_update = 'Részletes módosítás';
 $s_refresh_delay = 'Frissítési késleltetés';
 $s_redirect_delay = 'Átirányítási késleltetés';
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';

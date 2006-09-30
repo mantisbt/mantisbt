@@ -12,11 +12,11 @@
 	# Portugese Standard strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.94 $
+	# $Revision: 1.95 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:49 $
+	# $Date: 2006-09-30 22:02:21 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.94 2006-09-25 05:16:49 achumakov Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.95 2006-09-30 22:02:21 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -390,7 +390,7 @@ $s_advanced_view = 'Visualização Avançada';
 $s_advanced_update = 'Actualização Avançada';
 $s_refresh_delay = 'Tempo de Actualização (em min.)';
 $s_redirect_delay = 'Tempo de Espera de Redireccionamento de Página (em seg.)';
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
