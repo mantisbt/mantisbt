@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.312 2006-09-22 22:18:08 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.313 2006-09-30 22:21:33 achumakov Exp $
 	# --------------------------------------------------------
 
 
@@ -345,12 +345,14 @@
 		'chinese_traditional_utf8',
 		'croatian',
 		'czech',
+		'czech_utf8',
 		'danish',
 		'dutch',
 		'english',
 		'estonian',
 		'finnish',
 		'french',
+		'french_utf8',
 		'french_canadian',
 		'german',
 		'hungarian',
@@ -376,6 +378,7 @@
 		'serbian',
 		'slovak',
 		'slovene',
+		'slovene_utf8',
 		'spanish',
 		'swedish',
 		'turkish',
