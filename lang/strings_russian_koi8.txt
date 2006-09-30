@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: siebrand $
-	# $Date: 2006-09-30 09:39:09 $
+	# $Revision: 1.86 $
+	# $Author: achumakov $
+	# $Date: 2006-09-30 22:05:24 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.85 2006-09-30 09:39:09 siebrand Exp $
+	# $Id: strings_russian_koi8.txt,v 1.86 2006-09-30 22:05:24 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -1336,60 +1336,7 @@ $s_on_or_before = 'на дату или до' ;
 $s_before = 'до' ;
 $s_after = 'после' ;
 $s_on_or_after = 'на дату или после' ;
+
 # wiki related strings
 $s_wiki = 'Вики';
-
-?><?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
-
-	#
-	# Russian (Windows1251): Alexey Chumakov alex@chumakov.ru
-	#
-	# (whole retranslation & cleanup:
-	#	to match Russian traditions (scope-neutral),
-	# 	to clean the language style
-	#	to allow for use in helpdesk, task- and risk- processing,
-	#	to make it understandable by non-techie users
-	#
-	# previous Russian translations:
-	# Alexander Leschinsky aml@lair.pp.ru
-	# Alex Volkov, alex@volkov.ru
-	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: siebrand $
-	# $Date: 2006-09-30 09:39:09 $
-	#
-	# $Id: strings_russian_koi8.txt,v 1.85 2006-09-30 09:39:09 siebrand Exp $
-	###########################################################################
-
-#
-# Russian glossary
-#
-#issue		вопрос (не запрос/баг/ошибка/заявка/обращение)
-#severity	серьезность
-#sticky		прикрепленный
-#resolution	решение
-#feedback	отклик
-#projection	трудоемкость
-#view status	видимость (общая/ограниченная)
-#developer	участник
-#reporter	инициатор
-#access level	видимость
-#sponsor	плательщик
-#sponsorship	оплата
-#payment	платеж [уплачиваемый]
-#update		изменение (не обновление!)
-
-#
-# Localization issues
-#
-# маленькие буквы в ссылках могут потребовать разделения некоторых строк
-# или отката (по-русски не приняты строчные ссылки с большой)
-#
-# возможно, reminder нужно переводить как извещение, а не напоминание
-
 ?>
