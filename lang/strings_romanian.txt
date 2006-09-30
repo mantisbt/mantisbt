@@ -12,11 +12,11 @@
 	# Romanian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.92 $
+	# $Revision: 1.93 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:49 $
+	# $Date: 2006-09-30 22:04:46 $
 	#
-	# $Id: strings_romanian.txt,v 1.92 2006-09-25 05:16:49 achumakov Exp $
+	# $Id: strings_romanian.txt,v 1.93 2006-09-30 22:04:46 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -1313,4 +1313,3 @@ $s_on_or_after = 'On Or After' ;
 # wiki related strings
 $s_wiki = 'Wiki';
 ?>
-
