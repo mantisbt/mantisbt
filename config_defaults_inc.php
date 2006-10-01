@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.313 2006-09-30 22:21:33 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.314 2006-10-01 00:31:42 achumakov Exp $
 	# --------------------------------------------------------
 
 
@@ -387,33 +387,40 @@
 
 	# Browser language mapping for 'auto' language selection
 	$g_language_auto_map = array(
-		'en-us, en-gb, en-au, en' => 'english',
+		'bg' => 'bulgarian',
+		'ca' => 'catalan',
 		'zh-cn, zh-sg, zh' => 'chinese_simplified',
 		'zh-hk, zh-tw' => 'chinese_traditional',
 		'cs' => 'czech',
 		'da' => 'danish',
 		'nl-be, nl' => 'dutch',
+		'en-us, en-gb, en-au, en' => 'english',
 		'et' => 'estonian',
 		'fi' => 'finnish',
-		'fr-be, fr-ca, fr-ch, fr' => 'french',
+		'fr-be, fr-ch, fr' => 'french',
+		'fr-ca' => 'french_canadian',
 		'de-de, de-at, de-ch, de' => 'german',
 		'hu' => 'hungarian',
+		'hr' => 'croatian',
+		'is' => 'icelandic',
 		'it-ch, it' => 'italian',
 		'ja' => 'japanese_sjis',
 		'ko' => 'korean',
 		'lt' => 'lithuanian',
+		'lv' => 'latvian',
 		'no' => 'norwegian',
 		'pl' => 'polish',
 		'pt-br' => 'portugese_brazil',
 		'pt' => 'portugese_standard',
 		'ro-mo, ro' => 'romanian',
-		'ru-mo, ru' => 'russian',
+		'ru-mo, ru-ru, ru-ua, ru' => 'russian',
 		'sr' => 'serbian',
 		'sk' => 'slovak',
 		'sl' => 'slovene',
 		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 		'sv-fi, sv' => 'swedish',
-		'tr' => 'turkish'
+		'tr' => 'turkish',
+		'uk' => 'ukrainian'
 	);
 
 	# Fallback for automatic language selection
