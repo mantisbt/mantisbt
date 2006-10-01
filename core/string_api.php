@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.83 2006-09-30 22:23:57 achumakov Exp $
+	# $Id: string_api.php,v 1.84 2006-10-01 09:23:12 achumakov Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -381,7 +381,8 @@
 		#  when applied to data that has already had entities inserted.
 		#
 		# bpfennig: '@' doesn't accepted anymore
-		$t_atom = '[^\'@\'](?:[^()<>@,;:\\\".\[\]\000-\037\177 &]+)';
+		# achumakov: characters 0x80-0xFF aren't acceptable, too
+		$t_atom = '[^\'@\'](?:[^()<>@,;:\\\".\[\]\000-\037\177-\377 &]+)';
 
 		# In order to avoid selecting URLs containing @ characters as email
 		#  addresses we limit our selection to addresses that are preceded by:
