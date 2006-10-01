@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.280 $
+	# $Revision: 1.281 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-10-01 09:04:57 $
 	#
-	# $Id: strings_english.txt,v 1.280 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_english.txt,v 1.281 2006-10-01 09:04:57 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -238,7 +238,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
