@@ -11,11 +11,11 @@
 	# Catalan strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.8 $
+	# $Revision: 1.9 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-10-01 22:47:14 $
 	#
-	# $Id: strings_catalan.txt,v 1.8 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_catalan.txt,v 1.9 2006-10-01 22:47:14 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -50,7 +50,7 @@ $s_anonymous = "Anònim";
 $s_jump_to_bugnotes = "Saltar a Notes";
 $s_public_project_msg = "Aquest projecte es PÚBLIC.  Tots els usuaris tenen accés a aquest projecte.";
 $s_private_project_msg = "Aquest projecte es PRIVAT. Només els administradors i usuaris agregats manualment tenen accés.";
-$s_access_level_project = "Nivell d'Accés de Projecte";
+$s_access_level_project = "Nivell d'Accés del Projecte";
 $s_view_submitted_bug_link = "Veure Comanda Enviada";
 $s_assigned_projects = "Projectes Assignats";
 $s_unassigned_projects = "Projectes No Assignats";
@@ -449,8 +449,8 @@ $s_no_sponsored = "No se t'han trobat comandes patrocinades assignades";
 $s_own_sponsored = 'Comandes que has patrocinat:';
 $s_issues_handled = 'Comandes Patrocinades que has Assignat:';
 $s_no_own_sponsored = 'No has patrocinat cap comanda.';
-$s_sponsor = 'Espónsor';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor = 'Patrocinador';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Patrocina';	# like in 'Sponsor it!'
 $s_amount = 'Import';
 $s_total_owing = 'Total Deure';
 $s_total_paid = 'Total Pagat';
@@ -1283,9 +1283,9 @@ $s_view_project_documents = "Vista documents del projecte";
 $s_upload_project_documents = "Pujar documents del projecte ";
 $s_link_custom_fields_to_projects = "Enllaçar camps personalitzats a projectes ";
 $s_sponsorships = "PATROCINADORS";
-$s_view_sponsorship_details = "Vista de detalls de l'Espónsor";
-$s_view_sponsorship_total = "Vista total de l'Espónsor";
-$s_sponsor_issue = "Informe de l'Espónsor";
+$s_view_sponsorship_details = "Vista de detalls del Patrocinador";
+$s_view_sponsorship_total = "Vista total del Patrocinador";
+$s_sponsor_issue = "Informe del Patrocinador";
 $s_assign_sponsored_issue = "Assignar informe patrocinat";
 $s_handle_sponsored_issue = "Suportar informe patrocinat";
 $s_others = "ALTRES";
@@ -1296,7 +1296,7 @@ $s_notify_of_new_user_created = "Notificar la creació d'un nou usuari";
 $s_email_notification = "CORREU NOTFICAT";
 $s_status_changed_to = "Estat canviat a ";
 $s_email_on_deleted = "Correu d'esborrat";
-$s_email_on_sponsorship_changed = "Correu de l'Espónsor canviat";
+$s_email_on_sponsorship_changed = "Correu del Patrocinador canviat";
 $s_email_on_relationship_changed = "Correu de la Relació canviada";
 
 # DHTML filters
