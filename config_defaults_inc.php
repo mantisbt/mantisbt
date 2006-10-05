@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.314 2006-10-01 00:31:42 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.315 2006-10-05 21:46:42 achumakov Exp $
 	# --------------------------------------------------------
 
 
@@ -571,12 +571,12 @@
 	############################
 
 	# --- date format settings --------
-	# date format strings (default is 'US' formatting)
+	# date format strings defaults to ISO 8601 formatting
 	# go to http://www.php.net/manual/en/function.date.php
 	# for detailed instructions on date formatting
-	$g_short_date_format	= 'm-d-y';
-	$g_normal_date_format	= 'm-d-y H:i';
-	$g_complete_date_format	= 'm-d-Y H:i T';
+	$g_short_date_format    = 'Y-m-d';
+	$g_normal_date_format   = 'Y-m-d H:i';
+	$g_complete_date_format = 'Y-m-d H:i T';
 
 	############################
 	# Mantis News Settings

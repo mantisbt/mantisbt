@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.49 2006-08-14 08:32:57 vboctor Exp $
+	# $Id: core.php,v 1.50 2006-10-05 21:46:42 achumakov Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -83,7 +83,7 @@
 		$t_core_path = $g_core_path;
 	}
 
-	# Load rest of core in seperate directory.
+	# Load rest of core in separate directory.
 
 	require_once( $t_core_path.'config_api.php' );
 	require_once( $t_core_path.'timer_api.php' );
