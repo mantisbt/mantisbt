@@ -11,13 +11,13 @@
 	#
 	###########################################################################
 	# Japanese strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.281
 	# -------------------------------------------------
-	# $Revision: 1.37 $
-	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Revision: 1.38 $
+	# $Author: siebrand $
+	# $Date: 2006-10-09 06:02:21 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.37 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.38 2006-10-09 06:02:21 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -99,8 +99,8 @@ $s_file_added = 'ファイル追加: ';
 $s_file_deleted = 'ファイル削除: ';
 $s_bug_deleted = '改善要求削除';
 
-$s_make_private = '非公開にする';
-$s_make_public = '公開する';
+$s_make_private = '非公開';
+$s_make_public = '公開';
 
 $s_create_new_project_link = '新しいプロジェクトを作成する';
 
@@ -195,7 +195,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須なパラメータ「%s」がありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] ='設定項目「%s」がありません。';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定項目 \'%s\' をデータベースに設定することはできません。 config_inc.phpに設定してください。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='文字列「%s」がありません。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません。';
@@ -243,16 +243,16 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョン \'%s\' がありませ
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ユーザー名が無効です。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ユーザーが必要なアクセス権限を持っていません。';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '選ばれた「本名」はもう一人のユーザのログイン名と一致します。別のものを選んでください。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '資金提供機能が有効ではありません。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '資金提供 %d が見つかりません。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '資金(%s)は 最低額(%s)以下です。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '担当者は、資金提供された改善要求を扱うために必要な権限がありません。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 資金提供された改善要求を割り当てるには、より高い権限が必要です。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '投票機能が有効ではありません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '投票 %d が見つかりません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '投票(%s)は 最低額(%s)以下です。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '担当者は、投票された改善要求を扱うために必要な権限がありません。';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 投票された改善要求を割り当てるには、より高い権限が必要です。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーはメールアドレスが設定されていません。プロフィールを更新してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "資金提供が見つかりません。";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "投票が見つかりません。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高い権限が必要です。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付けできません。";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'コードが一致しません。再度お願いします。';
@@ -263,7 +263,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効�
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '最大回数のリクエストを実行しました。システム管理者に連絡してください。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'サブプロジェクトでループになってしまいます。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'システム管理者のアクセスレベルは変更できません。';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = '画面遷移に失敗しました。config_inc.phpやcustom_*.phpファイルのPHPブロック(&lt;?php ?&gt;)の外側にスペースがないことを確認してください。';
 
 $s_login_error = 'ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = '使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
@@ -290,7 +290,7 @@ $s_project_view_state_enum_string = '10:公開,50:非公開';
 $s_view_state_enum_string = '10:公開,50:非公開';
 
 $s_priority_enum_string = '10:未定,20:低,30:中,40:高,50:緊急,60:即時';
-$s_severity_enum_string = '10:機能,20:些細な,30:表示,40:微調整,50:マイナー,60:メジャー,70:クラッシュ,80:システム停止';
+$s_severity_enum_string = '10:要望,20:些細な,30:表示,40:微調整,50:マイナー,60:メジャー,70:クラッシュ,80:システム停止';
 $s_reproducibility_enum_string = '10:毎回,30:時々,50:不定,70:未試験,90:再現不可,100:不明';
 $s_status_enum_string = '10:新規,20:要追加情報,30:内容確認済,40:再現済,50:担当者決定,80:解決済,90:完了';
 $s_resolution_enum_string = '10:不明,20:実装済,30:差戻し,40:再現不可,50:修正不可,60:二重登録,70:改善要求ではない,80:保留,90:後回し';
@@ -301,15 +301,15 @@ $s_sponsorship_enum_string = '0:未払い,1:要求中,2:支払済';
 # Email Strings
 $s_new_account_subject = 'アカウント登録';
 $s_new_account_greeting = '登録ありがとうございます。あなたのアカウントはユーザー名は、\'';
-$s_new_account_greeting2 = '\'です。登録を終了するには、次のURL(1行になっているか確認してください)で、自分のパスワードを設定してください:';
+$s_new_account_greeting2 = '\'です。' . "\n" . '登録を完了するには、次のURL(1行になっているか確認してください)で、パスワードを設定してください:';
 $s_new_account_username = 'ユーザー名:';
-$s_new_account_message = 'いかなる登録要請も、このメッセージを無視することで、何も発生しません。' . "\n\n";
+$s_new_account_message = '登録した覚えがなければ、このメッセージを無視してください。' . "\n\n";
 $s_new_account_do_not_reply = 'このメッセージに返信しないでください。';
 $s_new_account_email = 'メール: ';
 $s_new_account_IP = 'リモート IP アドレス: ';
 $s_new_account_signup_msg = '次のアカウントが作成されました:';
 
-$s_reset_request_msg = '誰か(たぶん、あなた)がメールによる認証でパスワード変更を要求しました。あなたでなかった場合は、このメッセージを無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するには次のURLを参照してください:';
+$s_reset_request_msg = '誰か(たぶん、あなた)がメールによる認証でパスワードを変更しようとしました。' . "\n" . 'もし、覚えがない場合は、このメッセージは無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するには次のURLを参照してください:';
 $s_reset_request_in_progress_msg = '正しいユーザー名とメールアドレスなら、今すぐ、そのメールアドレスに確認メッセージを送ります。メッセージが受け取ったら、指示に従ってあなたのアカウントのパスワードを変更してください。';
 
 $s_email_notification_title_for_status_bug_new = '次の改善要求が再び要求されました。';
@@ -325,9 +325,9 @@ $s_email_notification_title_for_action_bug_assigned = '次の改善要求の担�
 $s_email_notification_title_for_action_bug_reopened = '次の改善要求が差戻されました。';
 $s_email_notification_title_for_action_bug_deleted = '次の改善要求が削除されました。';
 $s_email_notification_title_for_action_bug_updated = '次の改善要求が更新されました。';
-$s_email_notification_title_for_action_sponsorship_added = '次の改善要求に資金提供されました。';
-$s_email_notification_title_for_action_sponsorship_updated = '次の改善要求の資金提供が修正されました。';
-$s_email_notification_title_for_action_sponsorship_deleted = '次の改善要求の資金提供は世間離れしています。';
+$s_email_notification_title_for_action_sponsorship_added = '次の改善要求が投票されました。';
+$s_email_notification_title_for_action_sponsorship_updated = '次の改善要求の投票が修正されました。';
+$s_email_notification_title_for_action_sponsorship_deleted = '次の改善要求の投票が削除されました。';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "次の改善要求が、改善要求%sの重複改善要求に設定されました。";
@@ -445,14 +445,14 @@ $s_submit_button = '次へ';
 $s_profile_updated_msg = 'プロフィールが更新されました。';
 
 # account_sponsor_page.php
-$s_my_sponsorship = '資金提供';
-$s_update_sponsorship_button = '支払い状況の変更';
-$s_no_sponsored = 'あなたが担当する改善要求に資金提供されていないものが見つかりました。';
-$s_own_sponsored = '資金提供する改善要求:';
-$s_issues_handled = '資金提供を受けた担当する改善要求:';
-$s_no_own_sponsored = '資金提供を受けた改善要求を担当していません。';
+$s_my_sponsorship = '投票';
+$s_update_sponsorship_button = '投票の変更';
+$s_no_sponsored = 'あなたが担当する改善要求に投票されていないものが見つかりました。';
+$s_own_sponsored = '投票した改善要求:';
+$s_issues_handled = '投票された担当する改善要求:';
+$s_no_own_sponsored = '投票された改善要求を担当していません。';
 $s_sponsor = 'スポンサー';	# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor_verb = '投票';	# like in 'Sponsor it!'
 $s_amount = '合計';
 $s_total_owing = '総額';
 $s_total_paid = '総支払い額';
@@ -472,7 +472,7 @@ $s_password_updated = 'パスワードが正常に更新されました。';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = '選択した改善要求は、複数の異なるプロジェクトの改善要求です。変更は全てのプロジェクトに影響します。そうしたくなければ、もう一度選択ししてください。';
 
 # bug_assign.php
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
@@ -504,7 +504,7 @@ $s_delete_bug_sure_msg = '本当にこの改善要求を削除しても良いで
 $s_delete_bug_button = '削除';
 
 # bug_monitor.php
-$s_monitor_bug_button = '改善要求を監視';
+$s_monitor_bug_button = '監視';
 $s_unmonitor_bug_button = '監視終了';
 
 # bug_file_add.php
@@ -535,30 +535,30 @@ $s_from = '差出人';
 $s_to = '宛先';
 $s_on = '日時';
 $s_sent_you_this_reminder_about = 'が、次のリマインダーをあなたに送信しました。';
-$s_bug_reminder = 'リマインダーを送る';
+$s_bug_reminder = 'リマインダー送信';
 $s_reminder_sent_to = 'リマインダーの送信';
 $s_bug_send_button = '送信';
 $s_reminder = '送信内容';
 $s_reminder_explain = '送信内容は、この改善要求のフィードバックを要求する受取人に送られます。';
-$s_reminder_monitor = '受取人は、この改善要求の監視ユーザに追加されます。監視を止める場合は、「監視終了」ボタンを押します。';
+$s_reminder_monitor = '受取人は、この改善要求の監視ユーザーに追加されます。監視を止める場合は、「監視終了」ボタンを押します。';
 $s_reminder_store = '送信内容は、この改善要求に追加されます。';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = '改善要求 %d に、%s 資金提供することを確認してください。';
+$s_confirm_sponsorship = '改善要求 %d に、%s 投票してよろしいですか。';
 
 # bug_update.php
 $s_bug_updated_msg = '改善要求が正常に更新されました。';
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = '改善要求の内容へ';
-$s_update_simple_link = '簡単な表示';
+$s_update_simple_link = '簡易な表示';
 $s_updating_bug_advanced_title = '改善要求の変更(高度な表示)';
 $s_id = 'ID';
 $s_category = 'カテゴリ';
 $s_severity = '重要度';
 $s_reproducibility = '再現性';
 $s_date_submitted = '登録日';
-$s_last_update = '最終更新日';
+$s_last_update = '更新日';
 $s_reporter = '登録者';
 $s_assigned_to = '担当者';
 $s_priority = '優先度';
@@ -582,7 +582,7 @@ $s_profile = 'プロフィール';
 
 # bug_update_page.php
 $s_update_advanced_link = '高度な表示';
-$s_updating_bug_simple_title = '改善要求の変更(簡単な表示)';
+$s_updating_bug_simple_title = '改善要求の変更(簡易表示)';
 
 # bug_vote_add.php
 $s_vote_added_msg = '実装希望が投票されました。';
@@ -610,7 +610,7 @@ $s_bugnote_updated_msg = 'コメントが更新されました。';
 $s_edited_on = '更新日時:';
 
 # file_api.php
-$s_show_content ='Show Content';
+$s_show_content ='表示';
 
 # index.php
 $s_click_to_login = 'ログイン→';
@@ -640,11 +640,11 @@ $s_lost_password_title = "パスワードリセット";
 $s_lost_password_done_title = "パスワードのメッセージを送信しました。";
 $s_lost_password_subject = "パスワードリセット";
 $s_lost_password_info = "パスワードを元に戻すために、アカウントの名前とメールアドレスを入力してください。<br /><br />有効なアカウントであれば、アカウントの妥当性を確かめるコードを含むURLをメールであなたに送ります。そのリンクに従って、パスワードを変更してください。";
-$s_lost_password_confirm_hash_OK = "あなたの確認は受理されました。パスワードを更新してください。";
+$s_lost_password_confirm_hash_OK = "受理されました。パスワードを更新してください。";
 
 # main_page.php
-$s_open_and_assigned_to_me = '私が担当する改善要求';
-$s_open_and_reported_to_me = '私が登録した改善要求';
+$s_open_and_assigned_to_me = '担当する改善要求';
+$s_open_and_reported_to_me = '登録した改善要求';
 $s_newer_news_link = '新しいニュース';
 $s_older_news_link = '過去のニュース';
 $s_archives = '履歴';
@@ -746,19 +746,19 @@ $s_reopen_status = '差戻しされた改善要求に設定するステータス
 $s_reopen_resolution = '差戻された改善要求に設定する解決状況';
 
 # manage_config_revert_page
-$s_config_delete_sure = '設定を削除してみよろしいですか。';
+$s_config_delete_sure = '設定を削除してもよろしいですか。';
 $s_in_project = 'in project';
 $s_delete_config_button = '設定を削除';
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
-$s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_report = '設定レポート';
+$s_database_configuration = 'データベース設定';
+$s_configuration_option = 'オプション';
+$s_configuration_option_type = '型';
+$s_configuration_option_value = '値';
+$s_all_users = '全ユーザー';
+$s_set_configuration_option = 'オプションの設定';
+$s_delete_config_sure_msg = 'この設定を削除してよろしいですか?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'プロジェクトが追加されました。';
@@ -987,7 +987,7 @@ $s_report_more_bugs = '次の改善要求';
 $s_submission_thanks_msg = '登録、ありがとうございました。';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = '簡単な改善要求';
+$s_simple_report_link = '簡易な改善要求';
 $s_enter_report_details_title = '改善要求の登録';
 $s_required = '必須';
 $s_select_category = '*カテゴリを選択*';
@@ -1055,8 +1055,8 @@ $s_longest_open_bug = '最大放置 ID';
 $s_longest_open = '最大放置日数';
 $s_average_time = '平均完了日数';
 $s_total_time = '合計完了日数';
-$s_developer_stats = '開発者による';
-$s_reporter_stats = '登録者による';
+$s_developer_stats = '開発者';
+$s_reporter_stats = '登録者';
 $s_orct = '(新規/実装済/完了/合計)';
 
 # view_all_bug_page.php
@@ -1064,11 +1064,11 @@ $s_any = '全て';
 $s_show = '表示数';
 $s_changed = '変更(時間)';
 $s_viewing_bugs_title = '改善要求一覧';
-$s_updated = '最終更新日時';
+$s_updated = '更新日';
 $s_sticky = 'Stickyを設定した改善要求の表示';
 $s_sort = 'ソート順';
 $s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_recently_visited = '参照履歴';
 
 # view_all_inc.php
 $s_none = 'なし';
@@ -1082,7 +1082,7 @@ $s_first = '先頭';
 $s_last = '最終';
 $s_start_date = '開始日';
 $s_end_date = '終了日';
-$s_use_date_filters = '日付フィルターを使う';
+$s_use_date_filters = '日付フィルターの使用';
 $s_yes = 'はい';
 $s_no = 'いいえ';
 $s_open_filters = 'フィルター変更';
@@ -1097,15 +1097,15 @@ $s_query_deleted = 'フィルターを削除しました。';
 $s_save_query = '現在のフィルターを保存';
 $s_reset_query = 'フィルターリセット';
 $s_query_name = 'フィルター名';
-$s_query_exists = 'このフィルターは既に存在するように見えます。';
-$s_query_dupe_name = '別のフィルターが既にこの名前を持っています。別の名前を選んでください。';
+$s_query_exists = 'このフィルターは既に存在しています。';
+$s_query_dupe_name = '別のフィルターが既にこの名前を使用しています。別の名前を選んでください。';
 $s_query_blank_name = '名前のないフィルターを保管することができません。保存する前にこのフィルターに名前をつけてください。';
 $s_query_store_error = 'このフィルターの保存に失敗しました。';
 $s_open_queries = 'フィルター管理';
 $s_query_delete_msg = 'このフィルターを本当に削除しますか?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = '簡単な表示';
+$s_view_simple_link = '簡易表示';
 $s_viewing_bug_advanced_details_title = '改善要求の内容(高度な表示)';
 $s_product_build = '製品ビルド';
 $s_system_profile = 'システムの詳細説明';
@@ -1113,7 +1113,7 @@ $s_update_bug_button = '更新';
 $s_bug_assign_to_button = '担当者の割り当て';
 $s_bug_status_to_button = 'ステータス変更:';
 $s_reopen_bug_button = '差戻し';
-$s_move_bug_button = '改善要求の移動';
+$s_move_bug_button = '移動';
 $s_attached_files = '添付ファイル';
 $s_publish = '公開';
 $s_cached = 'Cached';
@@ -1122,18 +1122,18 @@ $s_cached = 'Cached';
 
 # view_bug_page.php
 $s_view_advanced_link = '高度な表示';
-$s_viewing_bug_simple_details_title = '改善要求の内容(簡単な表示)';
+$s_viewing_bug_simple_details_title = '改善要求の内容(簡易表示)';
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'この改善要求を監視しているユーザーはいません。';
-$s_users_monitoring_bug = 'この改善要求を監視しているユーザー';
+$s_users_monitoring_bug = '改善要求を監視しているユーザー';
 $s_monitoring_user_list = 'ユーザー一覧';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'この改善要求を支持するユーザはいません。';
-$s_users_sponsoring_bug = 'この改善要求の資金提供一覧';
-$s_sponsors_list = '資金提供一覧';
-$s_total_sponsorship_amount = '総資金提供額 = %s';
+$s_no_users_sponsoring_bug = 'この改善要求を支持するユーザーはいません。';
+$s_users_sponsoring_bug = 'この改善要求の投票一覧';
+$s_sponsors_list = '投票一覧';
+$s_total_sponsorship_amount = '総投票額 = %s';
 
 # custom field strings
 $s_add_custom_field_button = 'カスタム項目の登録';
@@ -1181,7 +1181,7 @@ $s_hide_closed = '完了を隠す';
 $s_hide_resolved = '解決済を隠す';
 $s_and_above = 'とそれ以上';
 $s_advanced_filters = '高度なフィルター';
-$s_simple_filters = '簡単なフィルター';
+$s_simple_filters = '簡易なフィルター';
 $s_monitored_by = '監視者';
 
 $s_attachments = '添付';
@@ -1192,12 +1192,12 @@ $s_phpmailer_language = 'ja';
 
 # Sponsorship Strings
 $s_sponsors = '%d 人のスポンサー';
-$s_sponsorship_added = '資金提供の追加';
-$s_sponsorship_updated = '資金提供の更新';
-$s_sponsorship_deleted = '資金提供の削除';
-$s_sponsorship_paid = '資金支払済';
-$s_sponsorship_more_info = '資金提供についてもっと情報を見る';
-$s_sponsorship_total = '総資金提供額';
+$s_sponsorship_added = '投票の追加';
+$s_sponsorship_updated = '投票の更新';
+$s_sponsorship_deleted = '投票の削除';
+$s_sponsorship_paid = '支払済';
+$s_sponsorship_more_info = '投票についてもっと情報を見る';
+$s_sponsorship_total = '総投票額';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1225,7 +1225,7 @@ $s_delete_relationship_button = "削除";
 $s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
 $s_relationship_warning_blocking_bugs_not_resolved = "この改善要求の子番号に、解決済か完了ではない改善要求があります。";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br>この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。";
-$s_create_child_bug_button = "複製する";
+$s_create_child_bug_button = "複製";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
 
@@ -1256,7 +1256,7 @@ $s_update_readonly_issues = '改善要求(編集不可)の更新';
 $s_update_issue_status = '改善要求のステータス変更';
 $s_set_view_status = '外部からの参照を設定 (公開 vs 非公開)';
 $s_update_view_status = '外部からの参照を更新 (公開 vs 非公開)';
-$s_show_list_of_users_monitoring_issue = '改善要求を監視しているユーザ一覧の表示';
+$s_show_list_of_users_monitoring_issue = '改善要求を監視しているユーザー一覧の表示';
 $s_notes = 'コメント';
 $s_add_notes = 'コメントの追加';
 $s_update_notes = 'コメントの更新';
@@ -1278,27 +1278,27 @@ $s_use_saved_filters = '保存したフィルターの使用';
 $s_create_project = 'プロジェクトの作成';
 $s_delete_project = 'プロジェクトの削除';
 $s_manage_project = 'プロジェクトの管理';
-$s_manage_user_access_to_project = 'プロジェクトにアクセスするユーザの管理';
+$s_manage_user_access_to_project = 'プロジェクトにアクセスするユーザーの管理';
 $s_automatically_included_in_private_projects = '自動的に非公開プロジェクトに参加';
 $s_project_documents = 'プロジェクトドキュメント';
 $s_view_project_documents = 'プロジェクトドキュメントの参照';
 $s_upload_project_documents = 'プロジェクトドキュメントのアップロード';
 $s_link_custom_fields_to_projects = 'カスタム項目をプロジェクトにリンク';
-$s_sponsorships = '資金提供';
-$s_view_sponsorship_details = '資金提供一覧の参照';
-$s_view_sponsorship_total = '総資金提供額の参照';
-$s_sponsor_issue = '改善要求への資金提供';
-$s_assign_sponsored_issue = '資金提供された改善要求の割り当て';
-$s_handle_sponsored_issue = '資金提供された改善要求の操作';
+$s_sponsorships = '投票';
+$s_view_sponsorship_details = '投票一覧の参照';
+$s_view_sponsorship_total = '総投票額の参照';
+$s_sponsor_issue = '改善要求へ投票';
+$s_assign_sponsored_issue = '投票された改善要求の割り当て';
+$s_handle_sponsored_issue = '投票された改善要求の操作';
 $s_others = 'その他';
-$s_see_email_addresses_of_other_users = '他ユーザのメールアドレスを参照';
+$s_see_email_addresses_of_other_users = '他ユーザーのメールアドレスを参照';
 $s_send_reminders = 'リマインダーの送信';
 $s_add_profiles = 'プロフィールの追加';
-$s_notify_of_new_user_created = '新規ユーザ作成の通知';
+$s_notify_of_new_user_created = '新規ユーザー作成の通知';
 $s_email_notification = '通知メール';
 $s_status_changed_to = 'ステータス変更';
 $s_email_on_deleted = '削除通知メール';
-$s_email_on_sponsorship_changed = '資金提供の変更通知メール';
+$s_email_on_sponsorship_changed = '投票の変更通知メール';
 $s_email_on_relationship_changed = '関連の変更通知メール';
 
 # DHTML filters
