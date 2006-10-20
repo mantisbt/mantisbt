@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.315 2006-10-05 21:46:42 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.316 2006-10-20 05:48:11 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -404,7 +404,7 @@
 		'hr' => 'croatian',
 		'is' => 'icelandic',
 		'it-ch, it' => 'italian',
-		'ja' => 'japanese_sjis',
+		'ja' => 'japanese_utf8',
 		'ko' => 'korean',
 		'lt' => 'lithuanian',
 		'lv' => 'latvian',
