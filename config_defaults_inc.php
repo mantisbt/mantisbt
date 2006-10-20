@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.8 2006-09-09 05:47:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.9 2006-10-20 05:50:59 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -382,7 +382,7 @@
 		'de-de, de-at, de-ch, de' => 'german',
 		'hu' => 'hungarian',
 		'it-ch, it' => 'italian',
-		'ja' => 'japanese_sjis',
+		'ja' => 'japanese_utf8',
 		'ko' => 'korean',
 		'lt' => 'lithuanian',
 		'no' => 'norwegian',
