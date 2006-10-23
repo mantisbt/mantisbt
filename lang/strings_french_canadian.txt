@@ -1,10 +1,10 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# French: Hellekin O. Wolf, hellekin@mmania.com
 	# French: Eric Hartmann, eric@rhinfo.com
 	# French: Samuel Tardieu, sam@rfc1149.net
@@ -16,13 +16,19 @@
 	# French: Réda Bourebaba, bzctoons@free.fr
 	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
-	# -------------------------------------------------
-	# $Revision: 1.5.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
+	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
 	#
-	# $Id: strings_french_canadian.txt,v 1.5.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
+	# French Canadian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.5.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:44 $
+	#
+	# $Id: strings_french_canadian.txt,v 1.5.10.2 2006-10-23 07:14:44 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -107,7 +113,7 @@ $s_make_public = 'Rendre public';
 
 $s_create_new_project_link = 'Créer un nouveau projet';
 
-$s_login_link = 'Branchement';
+$s_login_link = 'Ouvrir la session';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bogues suivants : ';
@@ -182,80 +188,81 @@ $s_bugnote_description = 'Description de la note';
 $s_error_no_proceed = 'Merci d\'utiliser le bouton « Précédent » de votre navigateur web pour retourner à la page précédente. Vous pourrez y corriger les problèmes identifiés par cette erreur ou choisir une autre action. Vous pouvez aussi choisir une option de la barre de menu pour aller directement dans une nouvelle section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'ERREUR : Une erreur s\'est produite.  Merci de contacter votre administrateur.';
-$MANTIS_ERROR[ERROR_SQL] = 'ERREUR : Erreur SQL détectée.  Rapporter cette erreur à ';
-$MANTIS_ERROR[ERROR_REPORT] = 'ERREUR : Il y avait une erreur dans votre rapport.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERREUR : Aucun fichier spécifié';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ERREUR : Type de fichier interdit';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERREUR : Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ERREUR : Un projet ayant ce nom existe déjà.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERREUR : Un champ obligatoire n\'est pas renseigné.  Merci de vérifier votre saisie.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'ERREUR : Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'ERREUR : Accès interdit.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ERREUR : Échec du dépôt de fichier.  Demander à votre administrateur d\'exécuter le script admin_check pour debogueger ce problème.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ERREUR : Échec du dépôt de fichier.  La taille du fichier était vraisemblablement trop grande pour votre configuration de PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'ERREUR : Un paramètre requis par cette page n\'a pas été trouvé.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'ERREUR : Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ERREUR : L\'option de configuration \'%s\' n\'a pas été trouvé.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'ERREUR : Chaîne « %s » non trouvée.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'ERREUR : Note non trouvée.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'ERREUR : Projet non trouvé.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERREUR : Champ de base de données non trouvé.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'ERREUR : Impossible de se connecter au serveur FTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ERREUR : Cette personne ne possède pas les permissions requises pour prende en charge ce bogue dans son état actuel.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERREUR : Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ERREUR : Nom de projet spécifié non valide.  Les noms de projet ne peuvent être vides.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'ERREUR : Utilisateur non trouvé.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'ERREUR : Les informations de connexion enregistrées par votre navigateur ne sont pas valides.  Votre compte a peut-être été supprimé ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ERREUR : Les préférences pourraient être introuvales pour cet utilisateur.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'ERREUR : Nouvelle non trouvée.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'ERREUR : Le mot de passe ne correspond pas à la vérification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'ERREUR : Tableau attendu mais chaîne reçue.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'ERREUR : Chaîne attendue mais tableau reçu.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'ERREUR : %s doit être un nombre.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'ERREUR : Bogue non trouvé.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'ERREUR : Filtre %d introuvable.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'ERREUR : Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'ERREUR : Courriel invalide.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ERREUR : Profil non trouvé.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'ERREUR : Type de fichier non autorisé pour les dépôts de fichier.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'ERREUR : Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERREUR : Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'ERREUR : Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'ERREUR : Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'ERREUR : Impossible de marquer ce bogue comme doublon de lui même.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'ERREUR : Champs personnalisé non trouvé';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'ERREUR : Ceci est un nom dupliqué.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'ERREUR : Au moins un projet utilise encore ce champs.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERREUR : Valeur invalide pour ce champ.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'ERREUR : Définition de champs personnalisé invalide';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'ERREUR : Échec d\'indentification par LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'ERREUR : Échec de connexion au serveur LDAP';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'ERREUR : Échec de mise à jour de l\'enregistrement LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'ERREUR : Enregistrement d\'utilisateur LDAP non trouvé.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ERREUR : Échec de connexion à la base de données.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'ERREUR : Échec de la requête de base de données.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'ERREUR : Échec de la sélection de la base de données.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERREUR : Catégorie dupliquée.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERREUR : Aucune copie spécifiée.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERREUR : Catégorie non trouvée.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERREUR : Version dupliquée.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'ERREUR : Version non trouvée.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ERREUR : Nom d\'utilisateur invalide.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ERREUR : L\'utilisateur n\'a pas le niveau d\'accès requis';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'ERREUR : Le nom réel saisi correspond au code d\'un autre utilisateur. Veuillez en choisir un autre.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'ERREUR : Support de commanditaire non activé.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'ERREUR : Commanditaire %d non trouvé.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'ERREUR : La commandite (%s) est inférieure au montant minimum (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bogues commandités.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s\'est produite.  Merci de contacter votre administrateur.';
+$MANTIS_ERROR[ERROR_SQL] = 'Erreur SQL détectée.  Rapporter cette erreur à ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Type de fichier interdit';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un champ obligatoire n\'est pas renseigné.  Merci de vérifier votre saisie.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accès interdit.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier.  Demander à votre administrateur d\'exécuter le script admin_check pour deboguer ce problème.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Échec du dépôt de fichier.  La taille du fichier était vraisemblablement trop grande pour votre configuration de PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page n\'a pas été trouvé.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'option de configuration \'%s\' n\'a pas été trouvé.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %s » non trouvée.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note non trouvée.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet non trouvé.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Champ de base de données non trouvé.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Impossible de se connecter au serveur FTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Cette personne ne possède pas les permissions requises pour prendre en charge ce bogue dans son état actuel.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nom de projet spécifié non valide.  Les noms de projet ne peuvent être vides.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Utilisateur non trouvé.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Les informations de connexion enregistrées par votre navigateur ne sont pas valides.  Votre compte a peut-être été supprimé ?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Les préférences pourraient être introuvables pour cet utilisateur.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nouvelle non trouvée.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Le mot de passe ne correspond pas à la vérification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Tableau attendu mais chaîne reçue.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Chaîne attendue mais tableau reçu.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s doit être un nombre.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bogue non trouvé.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %d introuvable.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Courriel invalide.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil non trouvé.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Type de fichier non autorisé pour les dépôts de fichier.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Impossible de marquer ce bogue comme doublon de lui même.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champs personnalisé non trouvé';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ceci est un nom dupliqué.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champs.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur invalide pour ce champ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champs personnalisé invalide';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d\'indentification par LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l\'enregistrement LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Enregistrement d\'utilisateur LDAP non trouvé.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Échec de connexion à la base de données.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Échec de la requête de base de données.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Échec de la sélection de la base de données.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Catégorie dupliquée.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Aucune copie spécifiée.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Catégorie non trouvée.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Version dupliquée.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version non trouvée.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilisateur invalide.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'L\'utilisateur n\'a pas le niveau d\'accès requis';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Le nom réel saisi correspond au code d\'un autre utilisateur. Veuillez en choisir un autre.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Support de commanditaire non activé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Commanditaire %d non trouvé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'La commandite (%s) est inférieure au montant minimum (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bogues commandités.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Accès refusé. L\'assignation des bogues commandités requiert un niveau d\'accès plus élevé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Le commanditaire n\'a pas fourni de courriel. Merci de mettre à jour votre profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ERREUR : L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'ERREUR : L\'action ne peut être executée car le bogue \'%d\' est en lecture-seule';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'action ne peut être exécutée car le bogue \'%d\' est en lecture seule';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'ERREUR : Il existe déjà une relation entre ces deux bogues.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'ERREUR : Relation introuvable.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'ERREUR : Accès Refusé : Le bogue %d requiert un niveau d\'accès plus élevé.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'ERREUR : Accès refusé : Le bogue %d requiert un niveau d\'accès plus élevé.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'ERREUR :  Un bogue ne peut pas être relié à lui-même.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Les éléments de confirmations ne correspondent pas. Merci de réessayer.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'la fonctionnalité « Oublié votre mot de passe ? » n\'est pas disponible.';
@@ -263,12 +270,12 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Vous devez fournir une 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournies ne correspondent à aucun compte enregistré !';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'hyperlien de confirmation n\'est pas valide ou a déjà été utilisé. Veuillez vous inscrire de nouveau.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'ERREUR : Cette opération va créer une recursion dans la hiérarchie des sous-projets.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'ERREUR : Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Cette opération va créer une recursion dans la hiérarchie des sous projets.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
-$s_login_cookies_disabled = 'ERREUR : Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
+$s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
+$s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
 
 # General Strings
 $s_go_back = 'Retour';
@@ -293,7 +300,7 @@ $s_view_state_enum_string = '10:public,50:privé';
 
 $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
 $s_severity_enum_string = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:critique,80:bloquant';
-$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:N/A';
+$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:S/O';
 $s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
 $s_resolution_enum_string = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
 $s_projection_enum_string = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
@@ -303,7 +310,7 @@ $s_sponsorship_enum_string = '0:non payé,1:demandé,2:payé';
 # Email Strings
 $s_new_account_subject = 'Enregistrement de compte';
 $s_new_account_greeting = 'Merci de vous être enregistré. Votre code d\'utilisateur est « ';
-$s_new_account_greeting2 = ' ». Pour compléter votre enregistrement, visitez l\'hyperlien suivante (vérifiez qu\'elle est donnée sur une seule ligne) et entrer votre propre mot de passe d\'accès :';
+$s_new_account_greeting2 = ' ». Pour compléter votre enregistrement, visiter l\'hyperlien suivant (vérifiez qu\'il est donné sur une seule ligne) et entrer votre propre mot de passe d\'accès :';
 $s_new_account_username = 'Utilisateur : ';
 $s_new_account_message = 'Si vous n\'aviez fait aucune demande d\'enregistrement, ignorez ce message et rien ne sera fait.' . '\n\n';
 $s_new_account_do_not_reply = 'NE PAS RÉPONDRE À CE MESSAGE';
@@ -453,7 +460,8 @@ $s_no_sponsored = 'Aucun bogue commandité et assigné à vous même n\'a été trouvé
 $s_own_sponsored = 'Bogues que vous avez commandités :';
 $s_issues_handled = 'Bogues commandités qui vous ont été assignés :';
 $s_no_own_sponsored = 'Vous n\'avez commandité aucun bogue.';
-$s_sponsor = 'Commanditaire';
+$s_sponsor = 'Commanditaire';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Commanditer';	# like in 'Sponsor it!'
 $s_amount = 'Montant';
 $s_total_owing = 'Total dû';
 $s_total_paid = 'Total payé';
@@ -480,7 +488,7 @@ $s_bug_assign_msg = 'Le bogue a été assigné avec succès...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nouveau bogue';
-$s_feedback_bug_title = 'Demander un commmentaire sur le bogue';
+$s_feedback_bug_title = 'Demander un commentaire sur le bogue';
 $s_acknowledged_bug_title = 'Accepter le bogue';
 $s_confirmed_bug_title = 'Confirmer le bogue';
 $s_assigned_bug_title = 'Assigner le bogue';
@@ -621,7 +629,7 @@ $s_login_page_info = 'Bienvenue au système de gestion des bogues.';
 $s_login_title = 'Utilisateur';
 $s_save_login = 'Mémoriser l\'utilisateur';
 $s_choose_project = 'Choisir un projet';
-$s_login_button = 'Se brancher';
+$s_login_button = 'Ouvrir la session';
 $s_signup_link = 'Ouvrir un nouveau compte';
 $s_lost_password_link = 'Oublié votre mot de passe ?';
 
@@ -629,7 +637,7 @@ $s_lost_password_link = 'Oublié votre mot de passe ?';
 $s_select_project_button = 'Choisir un projet';
 
 # logout_page.php
-$s_logged_out_title = 'Débranchement...';
+$s_logged_out_title = 'Fermer la session...';
 $s_redirecting = '... Redirection en cours';
 $s_here = 'Ici';
 
@@ -667,7 +675,7 @@ $s_manage_projects_link = 'Gérer les projets';
 $s_manage_custom_field_link = 'Gérer les champs personnalisés';
 $s_manage_global_profiles_link = 'Gérer les profils globaux';
 $s_permissions_summary_report = 'Rapport des permissions';
-$s_manage_config_link = 'Gérer la Configuration';
+$s_manage_config_link = 'Gérer la configuration';
 $s_manage_threshold_config = 'Seuils du cheminement de travail';
 $s_manage_email_config = 'Notifications par courriel';
 $s_manage_workflow_config = 'Cheminement de travail';
@@ -689,12 +697,12 @@ $s_edit_user_link = 'Modifier l\'utilisateur';
 $s_config_all_projects = 'Note : ces réglages affectent tous les projets.';
 $s_config_project = 'Note : ces réglages affectent uniquement le projet %s.';
 $s_colour_coding = 'Codes de couleurs applicables au tableau suivant :';
-$s_colour_project = 'Les paramètres du Projet sont prioritaires.';
+$s_colour_project = 'Les paramètres du projet sont prioritaires.';
 $s_colour_global = 'Tous les paramètres du projet sont prioritaires par rapport à la configuration par défaut.';
 $s_issue_reporter = 'Utilisateur ayant rapporté le bogue';
 $s_issue_handler = 'Utilisateur prenant en charge le bogue';
 $s_users_added_bugnote = 'Notes ajoutées par les utilisateurs.';
-$s_change_configuration = 'Mettre à jour la Configuration';
+$s_change_configuration = 'Mettre à jour la configuration';
 $s_message = 'Message';
 $s_default_notify = 'Mise à jour des états de la notification par defaut à';
 $s_action_notify = 'Mise à jour des états de la notification d\'action à';
@@ -712,8 +720,8 @@ $s_workflow_thresholds = 'Seuils qui affectent le cheminement de travail';
 $s_threshold = 'Seuil';
 $s_status_level = 'Phase';
 $s_alter_level = 'Qui peut changer cette valeur';
-$s_validation = 'Validation du flux de travaux';
-$s_comment = 'Commentaire de Validation';
+$s_validation = 'Validation du cheminement de travail';
+$s_comment = 'Commentaire de validation';
 $s_superfluous = 'La connexion d\'une phase vers elle-même est implicite et ne doit pas être fournie explicitement';
 $s_unreachable = 'Vous ne pouvez pas déplacer un bogue dans cette phase';
 $s_no_exit = 'Vous ne pouvez pas déplacer un bogue hors de cette phase';
@@ -723,19 +731,19 @@ $s_desc_bug_submit_status = 'Phase pour un nouveau bogue';
 $s_desc_bug_reopen_status = 'Phase pour les bogues réouverts';
 $s_desc_bug_resolved_status_threshold = 'Phase à laquelle un bogue est considéré comme résolu';
 $s_workflow_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications au cheminement de travail à';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_access_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications aux niveaux d\'accès';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'La Phase par défaut de %s n\'est pas définie pour %s dans les Phases suivantes. Elle sera ignorée.';
+$s_default_not_in_flow = 'La phase par défaut de %s n\'est pas définie pour %s dans les phases suivantes. Elle sera ignorée.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Assigner un bogue';
 $s_allow_close_immediate = 'Permettre la fermeture d\'un bogue à sa résolution';
 $s_allow_reporter_close = 'Permettre aux demandeurs de fermer un bogue';
-$s_allow_reporter_reopen = 'Permettre aux demandeurs de ré-ouvrirun bogue';
+$s_allow_reporter_reopen = 'Permettre aux demandeurs de ré-ouvrir un bogue';
 $s_set_status_assigned = 'Changer l\'état à l\'assignement';
 $s_allow_user_edit = 'Permettre aux utilisateurs de modifier leurs propres notes de bogue';
-$s_limit_access = 'Restraindre l\'accès des demandeurs aux bogues qu\'ils ont soumis';
+$s_limit_access = 'Restreindre l\'accès des demandeurs aux bogues qu\'ils ont soumis';
 $s_submit_status = 'État auquel un nouveau bogue est initié';
 $s_assigned_status = 'État auquel les bogues auto-assignés sont initiés';
 $s_resolved_status = 'État auquel un bogue est considéré comme résolu';
@@ -747,6 +755,16 @@ $s_reopen_resolution = 'Résolution à laquelle un bogue ré-ouvert est initiée';
 $s_config_delete_sure = 'Voulez-vous vraiement supprimer la configuration pour';
 $s_in_project = 'du projet';
 $s_delete_config_button = 'Supprimer la configuration';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
@@ -769,7 +787,7 @@ $s_update_category_button = 'Mettre à jour la catégorie';
 $s_category_updated_msg = 'La catégorie a été modifiée avec succès...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Ajouter un sous-projet';
+$s_add_subproject_title = 'Ajouter un sous projet';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Le projet a été supprimé avec succès...';
@@ -797,9 +815,9 @@ $s_actions = 'Actions';
 $s_version = 'Version';
 $s_timestamp = 'Marqueur de temps';
 $s_update = 'Mettre à jour';
-$s_subprojects = 'Sous-projets';
-$s_add_subproject = 'Ajouter en tant que sous-projet';
-$s_create_new_subproject_link = 'Créer un nouveau sous-projet';
+$s_subprojects = 'Sous projets';
+$s_add_subproject = 'Ajouter en tant que sous projet';
+$s_create_new_subproject_link = 'Créer un nouveau sous projet';
 $s_unlink_link = 'Dissocier';
 
 # manage_proj_menu_page.php
@@ -865,12 +883,12 @@ $s_view_bugs_link = 'Afficher les bogues';
 $s_report_bug_link = 'Rapporter un bogue';
 $s_changelog_link = 'Changements';
 $s_summary_link = 'Synthèse';
-$s_account_link = 'Options';
+$s_account_link = 'Mon compte';
 $s_users_link = 'Utilisateurs';
 $s_manage_link = 'Administration';
 $s_edit_news_link = 'Modifier les nouvelles';
 $s_docs_link = 'Documentation';
-$s_logout_link = 'Débranchement';
+$s_logout_link = 'Fermer la session';
 $s_my_view_link = 'Mon affichage';
 
 # meta_inc.php
@@ -1055,9 +1073,12 @@ $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
 $s_sticky = 'Afficher les bogues récurrants';
 $s_sort = 'Trier par';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'aucun';
+$s_current = 'actuelle';
 $s_search = 'Chercher';
 $s_view_prev_link = 'Voir les précédents';
 $s_view_next_link = 'Voir les suivants';
@@ -1084,8 +1105,8 @@ $s_reset_query = 'Effacer le filtre';
 $s_query_name = 'Nom du filtre';
 $s_query_exists = 'Ce filtre particulier semble déjà exister.';
 $s_query_dupe_name = 'Un autre filtre porte déjà ce nom. Merci de choisir un autre nom pour ce filtre.';
-$s_query_blank_name = 'Vous ne pouvez pas enregistrer un filtre sans nom. merci de nommer ce filtre avant de l\'enregistrer.';
-$s_query_store_error = 'Il y a eu une erreur durant la sauvagarde de ce filtre.';
+$s_query_blank_name = 'Vous ne pouvez pas enregistrer un filtre sans nom. Merci de nommer ce filtre avant de l\'enregistrer.';
+$s_query_store_error = 'Il y a eu une erreur durant la sauvegarde de ce filtre.';
 $s_open_queries = 'Gérer les filtres';
 $s_query_delete_msg = 'Êtes-vous certain de vouloir supprimer ce filtre ?';
 
@@ -1259,12 +1280,12 @@ $s_upload_issue_attachments = 'Mettre à jour les pièces jointes d\'un bogue';
 $s_filters = 'filtres';
 $s_save_filters = 'Enregistrer les filtres';
 $s_save_filters_as_shared = 'Enregistrer et partager les filtres';
-$s_use_saved_filters = 'Utiliser les fitres enregistrés';
+$s_use_saved_filters = 'Utiliser les filtres enregistrés';
 $s_create_project = 'Créer un projet';
 $s_delete_project = 'Supprimer un projet';
 $s_manage_project = 'Gérer les projets';
 $s_manage_user_access_to_project = 'Gérer les droits d\'accès utilisateur à un projet';
-$s_automatically_included_in_private_projects = 'Automatiquement inclus dans les projects privés';
+$s_automatically_included_in_private_projects = 'Automatiquement inclus dans les projets privés';
 $s_project_documents = 'DOCUMENTS DU PROJET';
 $s_view_project_documents = 'Afficher les documents du projet';
 $s_upload_project_documents = 'Envoyer les documents projet';
@@ -1293,8 +1314,9 @@ $s_loading = 'Chargement en cours...';
 $s_between = 'Entre';
 $s_on_or_before = 'Pendant ou avant';
 $s_before = 'Avant';
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Après';
 $s_on_or_after = 'Pendant ou après';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

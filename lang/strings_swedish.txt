@@ -1,18 +1,23 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	# Swedish: Ludvig Omholt, ludde@ludde.net
-	# -------------------------------------------------
-	# $Revision: 1.92.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_swedish.txt,v 1.92.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# Swedish: Ludvig Omholt, ludde@ludde.net
+	#
 	###########################################################################
+	# Swedish strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.92.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:47 $
+	#
+	# $Id: strings_swedish.txt,v 1.92.10.2 2006-10-23 07:14:47 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -172,67 +177,68 @@ $s_bugnote_description = 'Beskrivning av meddelande';
 $s_error_no_proceed = 'Använd "back"-knappen i din webbläsare för att återgå till föregående sida. Där kan du rätta de fel som uppstått. Du kan också välja att gå direkt till en annan sida via någon av länkarna i menyn.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'FEL: Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
-$MANTIS_ERROR[ERROR_SQL] = 'FEL: Ett SQL-fel uppstod.  Var god rapportera detta till ';
-$MANTIS_ERROR[ERROR_REPORT] = 'FEL: Det fanns ett fel i din rapport.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEL: Ingen fil angiven';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEL: Filtypen är inte tillåten';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEL: Katalogen finns inte. Var god kontrollera projektinställningarna.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FEL: Ett projekt med det namnet finns redan.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEL: Ett obligatoriskt fält var tomt.  Var god försök igen.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEL: Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'FEL: Åtkomst nekas.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEL: Skickning av filen misslyckades.  Be din administratör köra skriptet admin_check för att se vad som är fel.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEL: Skickning av filen misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEL: Ett obligatoriskt värde för den här sidan saknas.';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
+$MANTIS_ERROR[ERROR_SQL] = 'Ett SQL-fel uppstod.  Var god rapportera detta till ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Det fanns ett fel i din rapport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil angiven';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Filtypen är inte tillåten';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogen finns inte. Var god kontrollera projektinställningarna.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Filen finns redan.  Var god ta bort den andra filen först.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Ett projekt med det namnet finns redan.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ett obligatoriskt fält var tomt.  Var god försök igen.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Åtkomst nekas.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Skickning av filen misslyckades.  Be din administratör köra skriptet admin_check för att se vad som är fel.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Skickning av filen misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Ett obligatoriskt värde för den här sidan saknas.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Användarnamnet finns redan. Var vänlig och välj ett annat användarnamn.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsvalet \'%s\' kunde inte hittas.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strängen \'%s\' kunde inte hittas.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEL: meddelandet saknas.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FEL: Projektet saknas.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEL: Databasfältet saknas.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FEL: Kan inte ansluta till FTP-servern.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'meddelandet saknas.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektet saknas.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databasfältet saknas.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Kan inte ansluta till FTP-servern.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Otillräckliga rättigheter för att hantera ett ärende med denna status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEL: Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Felaktigt projektname specificerades.  Projektnamn kan inte var tomma.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'FEL: Användaren finns inte.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Användaren finns inte.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Inloggningsinformationen som din webbläsare har sparat är ogiltig. Ditt användarekonto har kanske tagits bort?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Användarinställningar kunde inte hittas för detta användarkonto.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEL: Hittar inte nyheten.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Hittar inte nyheten.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lösenordet stämmer inte med verifikationen.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEL: En array förväntades men en sträng mottogs.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'En array förväntades men en sträng mottogs.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades med en array mottogs.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Ett nummer förväntades för %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Ärendet kan inte hittas.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Ärendet kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtret du försöker använda är för gammalt för att uppgraderas, skapa ett nytt.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEL: Ogiltig e-postadress.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ogiltig e-postadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEL: Filtypen är inte tillåten.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEL: Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Filtypen är inte tillåten.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Filen finns redan.  Var god ta bort den andra filen först.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ingen fil laddades upp. Gå tillbaka och välj en fil innan du laddar upp';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Den uppladdade filen kunde inte flyttas till filarean. Katalogen finns inte eller är inte skrivbar för servern.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEL: Kan inte ange ett ärende som kopia av sig själv.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Kan inte ange ett ärende som kopia av sig själv.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Detta namnet är inte unikt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Fältet används av åtminstone ett annat projekt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEL: Ogiltigt fältvärde';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ogiltigt fältvärde';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Felaktig definition av egendefinierat fält';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEL: LDAP Autentisiering Misslyckades,';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Autentisiering Misslyckades,';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Anslutningen till LDAP-servern misslyckades';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEL: LDAP uppdatering misslyckades.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP uppdatering misslyckades.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP förteckning över användaren kunde inte hittas.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FEL: Kan inte ansluta till databasen.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FEL: Databasfråga misslyckades.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEL: Databassökning misslyckades.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEL: Kategorin finns redan.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEL: Ingen kopieringsändring angiven.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEL: Kategorin finns inte.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEL: Versionen finns redan.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEL: Versionen finns inte.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEL: Användarnamnet är ogiltigt.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Kan inte ansluta till databasen.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Databasfråga misslyckades.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Databassökning misslyckades.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorin finns redan.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen kopieringsändring angiven.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorin finns inte.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Versionen finns redan.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versionen finns inte.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Användarnamnet är ogiltigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Användaren har inte tillräcklig behörighet.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorstöd är ej påslaget.';
@@ -243,8 +249,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Åtkomst nekad:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsorn har inte angett någon e-postadress. Var vänlig och uppdatera din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Inställningsval \'%s\' har ett ogiltigt värde \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Valet kan inte utföras eftersom ärendet \'%d\' är skrivskyddat.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FEL: Det finns redan en relation mellan dessa ärenden.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FEL: Relationen kunde inte hittas.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Det finns redan en relation mellan dessa ärenden.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationen kunde inte hittas.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Åtkomst nekad: Ärendet %d kräver högre användarrättigheter.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Ett ärende kan inte ha en relation till sig själv.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Verifieringshashsumman överenstämmer inte. Var vänlig och försök igen.';
@@ -255,10 +261,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den operationen skulle skapa en loop i subprojekthierarkin.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan inte ändra accessnivå på den enda ADMINISTRATÖREN i systemet.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'FEL: ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
-$s_login_cookies_disabled = 'FEL: Din webb-läsare kan inte hantera cookies eller vägrar använda dem (det kan vara avstängt).';
+$s_login_error = 'ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
+$s_login_cookies_disabled = 'Din webb-läsare kan inte hantera cookies eller vägrar använda dem (det kan vara avstängt).';
 
 # General Strings
 $s_go_back = 'Gå tillbaks';
@@ -443,7 +449,8 @@ $s_no_sponsored = 'Inga sponsrade ärenden tilldelade till dig kunde hittas.';
 $s_own_sponsored = 'Ärenden du har sponsrat:';
 $s_issues_handled = 'Sponsrade ärenden som tilldelats dig:';
 $s_no_own_sponsored = 'Du har inte sponsrat några ärenden.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Belopp';
 $s_total_owing = 'Total skuld';
 $s_total_paid = 'Totalt betalt';
@@ -600,6 +607,9 @@ $s_closed_bug_button = 'Stäng ärende';
 $s_bugnote_updated_msg = 'Meddelandet har uppdaterats...';
 $s_edited_on = 'redigerad: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Klicka här för att logga in';
 
@@ -737,6 +747,16 @@ $s_reopen_resolution = 'Lösning som ett återöppnat ärende sätts till';
 $s_config_delete_sure = 'Är du säker på att du vill ta bort inställningarna för';
 $s_in_project = 'i projektet';
 $s_delete_config_button = 'Ta bort inställningar';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projektet har lagts till...';
@@ -1045,9 +1065,12 @@ $s_viewing_bugs_title = 'Visa ärenden';
 $s_updated = 'Uppdaterad';
 $s_sticky = 'Visa klistrade ärenden';
 $s_sort = 'Sortera på';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'ingen';
+$s_current = 'current';
 $s_search ='Sök';
 $s_view_prev_link = 'Visa föregående';
 $s_view_next_link = 'Visa nästa';
@@ -1283,8 +1306,9 @@ $s_loading = 'Laddar...';
 $s_between = 'Mellan' ;
 $s_on_or_before = 'Till och med' ;
 $s_before = 'Före' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Efter' ;
 $s_on_or_after = 'Från och med' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

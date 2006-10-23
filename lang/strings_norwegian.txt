@@ -1,20 +1,25 @@
 <?php
-# Mantis - a php based bugtracking system
-# Copyright (C) 2000 - 2002 Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2004 Mantis Team - mantisbt-dev@lists.sourceforge.net
-# This program is distributed under the terms and conditions of the GPL
-# See the README and LICENSE files for details
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+	#
+	# Norwegian: Espen Holje, eh@escio.no
+	# Norwegian: Ingvald Skaug, dev@skaug.no
+	# Norwegian: Alf-Ivar Holm, affi@csc.no
+	#
+	###########################################################################
+	# Norwegian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.95.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:46 $
+	#
+	# $Id: strings_norwegian.txt,v 1.95.10.2 2006-10-23 07:14:46 vboctor Exp $
+	###########################################################################
 
-# Norwegian: Espen Holje, eh@escio.no
-# Norwegian: Ingvald Skaug, dev@skaug.no
-# Norwegian: Alf-Ivar Holm, affi@csc.no
-# -------------------------------------------------
-# $Revision: 1.95.10.1 $
-# $Author: thraxisp $
-# $Date: 2006-02-19 03:39:48 $
-#
-# $Id: strings_norwegian.txt,v 1.95.10.1 2006-02-19 03:39:48 thraxisp Exp $
-###########################################################################
 ?>
 <?php
 # Charset
@@ -190,6 +195,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Mislykket filopplasting. Dette er sannsynli
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'En påkrevd parameter til denne siden ble ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Det brukernavnet er allerede i bruk. Vennligst gå tilbake og velg et annet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurasjonsopsjon \'%s\' ikke funnet.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengen \'%s\' ikke funnet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Finner ikke prosjektet.';
@@ -257,8 +263,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekreftelsesadressen 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks antall forsøk har blitt nådd. Vennligst kontakt systemadministrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Operasjonen vil medføre en uendelig løkke i hierarkiet av underprosjekter.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan ikke endre tilgangsnivå for den eneste ADMINISTRATOREN i systemet.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
 $s_login_cookies_disabled = 'Nettleseren din er ikke konfigurert til å støtte \'cookies\' (informasjonskapsler).';
 
@@ -445,7 +451,8 @@ $s_no_sponsored = 'Finner ingen sponsede saker delegert til deg.';
 $s_own_sponsored = 'Saker du har sponset:';
 $s_issues_handled = 'Sponsede saker du har blitt delegert:';
 $s_no_own_sponsored = 'Du har ikke sponset noen saker.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Beløp';
 $s_total_owing = 'Totalt utestående';
 $s_total_paid = 'Totalt betalt';
@@ -602,6 +609,9 @@ $s_closed_bug_button = 'Avslutt sak';
 $s_bugnote_updated_msg = 'Notat har blitt oppdatert ...';
 $s_edited_on = 'Redigert: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Klikk her for å logge inn';
 
@@ -739,6 +749,16 @@ $s_reopen_resolution = 'Løsningsstatus for en gjenåpnet sak settes til';
 $s_config_delete_sure = 'Er du sikker på at du ønsker å slette innstillinger for';
 $s_in_project = 'i prosjekt';
 $s_delete_config_button = 'Slette innstillinger';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
@@ -1047,9 +1067,12 @@ $s_viewing_bugs_title = 'Oversikt over saker';
 $s_updated = 'Oppdatert';
 $s_sticky = 'Vis fastlåste saker';
 $s_sort = 'Sortere etter';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'Ingen';
+$s_current = 'current';
 $s_search ='Søk';
 $s_view_prev_link = 'Vis forrige';
 $s_view_next_link = 'Vis neste';
@@ -1285,8 +1308,9 @@ $s_loading = 'Laster...';
 $s_between = 'Mellom';
 $s_on_or_before = 'På eller før';
 $s_before = 'Før';
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Etter';
 $s_on_or_after = 'På eller etter';
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

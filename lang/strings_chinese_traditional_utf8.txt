@@ -1,18 +1,23 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+	#
+	# Chinese Traditional UTF8: Jonathan Tsai, tryweb@ichiayi.com
+	#
+	###########################################################################
+	# Chinese Traditional strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.4.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:43 $
+	#
+	# $Id: strings_chinese_traditional_utf8.txt,v 1.4.10.2 2006-10-23 07:14:43 vboctor Exp $
+	###########################################################################
 
-	# Chinese_Traditional_UTF8: Jonathan Tsai, tryweb@ichiayi.com
-        # -------------------------------------------------
-        # $Revision: 1.4.10.1 $
-        # $Author: thraxisp $
-        # $Date: 2006-02-19 03:39:48 $
-        #
-        # $Id: strings_chinese_traditional_utf8.txt,v 1.4.10.1 2006-02-19 03:39:48 thraxisp Exp $
-        ###########################################################################
 ?>
 <?php
 # Charset
@@ -188,6 +193,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '檔案上傳失敗. 這很有可能是因�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '缺少這個頁面所必要的參數.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '這個使用者帳號已經存在. 請返回上ㄧ頁選擇其他的帳號.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '缺少 \'%s\' 這個參數設定選項.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '缺少 \'%s\' 這個字串.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '筆記找不到.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '專案找不到.';
@@ -255,8 +261,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '這個認證網址不
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '目前已超過系統設定的使用限制數, 請聯繫系統管理員';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '這樣會將自己建立為下層專案的下層專案而造成無窮迴路問題.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不可以更改系統中最後一個系統管理員的權限';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '你的帳號可能被暫停或封鎖或者輸入不正確的帳號密碼.';
 $s_login_cookies_disabled = '錯誤: 你的瀏覽器可能不支援 cookies 功能或是沒有將 cookies 功能開啟.';
 
@@ -443,7 +449,8 @@ $s_no_sponsored = '找不到指派給你的問題有被資助.';
 $s_own_sponsored = '你被資助的問題:';
 $s_issues_handled = '指派給你有被資助的問題:';
 $s_no_own_sponsored = '指派給你的問題均沒有被資助.';
-$s_sponsor = '資助者';
+$s_sponsor = '資助者';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '金額';
 $s_total_owing = '欠款總額';
 $s_total_paid = '付款總額';
@@ -600,6 +607,9 @@ $s_closed_bug_button = '結案';
 $s_bugnote_updated_msg = 'Bug 筆記已經被更新成功...';
 $s_edited_on = '已編輯: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '點選這裡登入';
 
@@ -737,6 +747,16 @@ $s_reopen_resolution = '分析已被重設為未結案問題';
 $s_config_delete_sure = '你確定要刪除刪除這設定值--';
 $s_in_project = '在專案';
 $s_delete_config_button = '刪除設定值';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '專案已新增...';
@@ -1045,9 +1065,12 @@ $s_viewing_bugs_title = '檢視 Bug';
 $s_updated = '已更新';
 $s_sticky = '顯示棘手問題';
 $s_sort = '排序方式';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '無';
+$s_current = 'current';
 $s_search ='搜尋 Bug 內容關鍵字';
 $s_view_prev_link = '檢視前一筆';
 $s_view_next_link = '檢視下一筆';
@@ -1283,8 +1306,9 @@ $s_loading = '載入中...';
 $s_between = '之間' ;
 $s_on_or_before = '於此或之前' ;
 $s_before = '之前' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '之後' ;
 $s_on_or_after = '於此或之後' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

@@ -1,0 +1,1314 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+	#
+	# Catalan: Bernat Pegueroles - bpf at pegueroles dot com
+	#
+	###########################################################################
+	# Catalan strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.9.2.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:53 $
+	#
+	# $Id: strings_catalan.txt,v 1.9.2.2 2006-10-23 07:14:53 vboctor Exp $
+	###########################################################################
+
+?>
+<?php
+# Charset
+$s_charset = "iso-8859-15";
+
+# Group commands menuitems
+$s_actiongroup_menu_move = "Moure";
+$s_actiongroup_menu_copy = "Copiar";
+$s_actiongroup_menu_assign = "Assignar";
+$s_actiongroup_menu_close = "Tancar";
+$s_actiongroup_menu_delete = "Eliminar";
+$s_actiongroup_menu_resolve = "Resoldre";
+$s_actiongroup_menu_update_priority = "Canviar Prioritat";
+$s_actiongroup_menu_update_status = "Canviar Estat";
+$s_actiongroup_menu_update_view_status = "Actualitzar vista de l'estat";
+$s_actiongroup_menu_update_category = "Modificar Categoria";
+$s_actiongroup_menu_set_sticky = "Marcar/Desmarcar 'Difícil'";
+$s_actiongroup_menu_update_field = "Modificar %s";
+$s_actiongroup_bugs = "Comandes seleccionades";
+
+# new strings:
+$s_all_projects = "Tots els Projectes";
+$s_move_bugs = "Moure Comandes";
+$s_operation_successful = "Operació correcta.";
+$s_date_order = "Data";
+$s_print_all_bug_page_link = "Imprimir Comandes";
+$s_csv_export = "Exportar a CSV";
+$s_login_anonymously = "Connectar-se Anònimament";
+$s_anonymous = "Anònim";
+$s_jump_to_bugnotes = "Saltar a Notes";
+$s_public_project_msg = "Aquest projecte es PÚBLIC.  Tots els usuaris tenen accés a aquest projecte.";
+$s_private_project_msg = "Aquest projecte es PRIVAT. Només els administradors i usuaris agregats manualment tenen accés.";
+$s_access_level_project = "Nivell d'Accés del Projecte";
+$s_view_submitted_bug_link = "Veure Comanda Enviada";
+$s_assigned_projects = "Projectes Assignats";
+$s_unassigned_projects = "Projectes No Assignats";
+$s_print = "Imprimir";
+$s_jump = "Saltar a la Comanda";
+$s_copy_users = "Copiar Usuaris";
+$s_copy_categories_from = "Copiar Categories Des de";
+$s_copy_categories_to = "Copiar Categories Cap a";
+$s_copy_users_from = "Copiar Usuaris De";
+$s_copy_users_to = "Copiar Usuaris A";
+$s_bug_history = "Història de la Comanda";
+$s_field = "Camp";
+$s_old_value = "Valor Anterior";
+$s_new_value = "Nou Valor";
+$s_date_modified = "Data de Modificació";
+$s_bugnote = "Nota";
+$s_change = "Canvi";
+$s_bugnote_view_state = "Veure Estat de la Nota";
+$s_bug_monitor = "Comanda Monitoritzada";
+$s_bug_end_monitor = "Acabar monitor";
+$s_announcement = "Anunci";
+$s_stays_on_top = "Sempre Amunt";
+$s_delete_bugnote_button = "Eliminar Nota";
+$s_delete_bugnote_sure_msg = "¿Segur que desitja eliminar aquesta nota?";
+$s_bug_relationships = "Relacions";
+$s_empty_password_sure_msg = "L'usuari té una contrasenya buida. ¿Segur que desitja això?";
+$s_empty_password_button = "Utilitzar Contrasenya en Blanc";
+
+$s_duplicate_of = "Duplicat en %id";
+$s_has_duplicate = "Té duplicat en %id";
+$s_related_to = "relacionat amb %id";
+$s_dependant_on = "depèn de %id";
+$s_blocks = "bloqueja %id";
+
+$s_new_bug = "Nova comanda";
+$s_bugnote_added = "Nota Afegida";
+$s_bugnote_edited = "Nota Editada";
+$s_bugnote_deleted = "Nota Eliminada";
+$s_summary_updated = "Resum Actualitzat";
+$s_description_updated = "Descripció Actualitzada";
+$s_additional_information_updated = "Informació Addicional Actualitzada";
+$s_steps_to_reproduce_updated = "Passos actualitzats per a reproduir-lo ";
+$s_file_added = "Fitxer Afegit";
+$s_file_deleted = "Fitxer Esborrat";
+$s_bug_deleted = "Comanda eliminada";
+
+$s_make_private = "Fer-lo Privat";
+$s_make_public = "Fer-lo Públic";
+
+$s_create_new_project_link = "Crear Nou Projecte";
+
+$s_login_link = "Login";
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = "No té els permisos necessaris per a realitzar aquesta acció a les següents comandes: ";
+$s_bug_actiongroup_access = "No té els permisos necessaris per a realitzar aquesta acció.";
+$s_bug_actiongroup_status = "Aquesta comanda no es pot canviar a l'estat sol·licitat";
+$s_bug_actiongroup_category = "Aquesta comanda no es pot canviar a aquesta categoria";
+$s_close_bugs_conf_msg = "¿Segur que desitja tancar aquestes comandes?";
+$s_delete_bugs_conf_msg = "¿Segur que desitja eliminar aquestes comandes?";
+$s_move_bugs_conf_msg = "Moure comandes a";
+$s_copy_bugs_conf_msg = "Copiar comandes a";
+$s_assign_bugs_conf_msg = "Assignar comandes a";
+$s_resolve_bugs_conf_msg = "Canviar resolució de la comanda";
+$s_priority_bugs_conf_msg = "Canviar resolució de la comanda";
+$s_status_bugs_conf_msg = "Canviar estat de la comanda";
+$s_view_status_bugs_conf_msg = "Escollir vista d'estat de les comandes";
+$s_category_bugs_conf_msg = "Triar la categoria de les comandes";
+$s_set_sticky_bugs_conf_msg = "Esta segur que vol marcar/desmarcar aquestes comandes 'Difícils'?";
+$s_close_group_bugs_button = "Tancar Comandes";
+$s_delete_group_bugs_button = "Eliminar Comandes";
+$s_move_group_bugs_button = "Moure Comandes";
+$s_copy_group_bugs_button = "Copiar Comandes";
+$s_assign_group_bugs_button = "Assignar Comandes";
+$s_resolve_group_bugs_button = "Resoldre Comandes";
+$s_priority_group_bugs_button = "Actualitzar Prioritat";
+$s_status_group_bugs_button = "Actualitzar Estat";
+$s_category_group_bugs_button = "Modificar Categoria";
+$s_view_status_group_bugs_button = "Actualitzar vista de l'estat";
+$s_set_sticky_group_bugs_button = "Marcar/Desmarcar 'Difícil'";
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = "Gràfics per l'estat";
+$s_graph_imp_priority_title = "Gràfics per prioritat";
+$s_graph_imp_severity_title = "Gràfics per gravetat";
+$s_graph_imp_category_title = "Gràfics per categoria";
+$s_graph_imp_resolution_title = "Gràfics per resolució";
+$s_by_status_pct = "percentatge per l'estat";
+$s_by_priority_pct = "percentatge per prioritat";
+$s_by_severity_pct = "percentatge per gravetat";
+$s_by_category_pct = "percentatge per categoria";
+$s_by_resolution_pct = "percentatge per resolució";
+$s_by_severity_mix = "per gravetat i estat";
+$s_by_priority_mix = "per prioritat i estat";
+$s_by_resolution_mix = "per resolució i estat";
+$s_synthesis_link = "Síntesi";
+$s_status_link = "Per estat";
+$s_priority_link = "Per prioritat";
+$s_severity_link = "Per gravetat";
+$s_category_link = "Per categoria";
+$s_resolution_link = "Per resolució";
+$s_legend_still_open = "Encara Obert";
+$s_legend_resolved = "Resolt";
+$s_legend_assigned = "Assignat";
+$s_legend_total = "Total";
+$s_legend_opened = "Obert";
+$s_legend_closed = "Tancat";
+$s_legend_reported = "Reportat";
+$s_cumulative = "Acumulat";
+$s_not_enough_data = "No hi ha  prou informació per crear un gràfic";
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = "Mostrar només seleccionats";
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = "Seleccioni camps per imprimir";
+$s_printing_options_link = "Opcions d'Impressió";
+
+# word and excel export
+$s_bugnote_title = "Títol de la nota";
+$s_bugnote_date = "Data de la nota";
+$s_bugnote_description = "Descripció de la nota";
+
+$s_error_no_proceed = "Si us plau, utilitzi el botó \"Endarrera\" del seu navegador web per a tornar a la pàgina anterior.  Allà pot corregir els problemes identificats en aquesta notificació d'error o seleccionar una altra acció.  També pot clicar sobre una opció de la barra de menú per anar directament a una nova secció.";
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = "Hi ha hagut un error durant aquesta acció. Informi d'aquest error al seu administrador local.";
+$MANTIS_ERROR[ERROR_SQL] = "Error de SQL detectat.  Si us plau informi a ";
+$MANTIS_ERROR[ERROR_REPORT] = "S'ha trobat un error en la seva comanda.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "Arxiu no especificat";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Aquest tipus d'arxiu no està permès";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "El directori no existeix. Si us plau revisi la configuració del projecte.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "Aquest és un arxiu duplicat. Si us plau esborri l'arxiu primer.";
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = "Ja existeix un projecte amb aquest nom.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "Un camp necessari estava buit. Si us plau, comprovi les dades.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Aquest compte està protegit. No hi té accés fins que la protecció del compte hagi estat retirada.";
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "Accés Denegat.";
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "Ha fallat la pujada de l'arxiu.  Sol·liciti al seu administrador que utilitzi el script admin_check per a depurar aquest problema.";
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "Ha fallat la pujada de l'arxiu. Possiblement la mida  de l'arxiu és més gran del que actualment esta permès en aquesta instal·lació de PHP.";
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "No s'ha trobat un paràmetre requerit.";
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = "Aquest nom de usuari està en ús. Si us plau, torni enrera i seleccioni'n un altre.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = "No es troba l'opció de configuració '%s'.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = "Cadena '%s' no trobada.";
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "Nota no trobada.";
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "Projecte no trobat";
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "Camp de base de dades no trobat.";
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]  = "Impossible connectar amb el servidor de FTP.";
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]      = "L'usuari no té prou drets per informar en aquests estat.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "Ja existeix un projecte amb aquest nom. Si us plau, torni i seleccioni un nom diferent.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = "Nom de projecte no vàlid. Els noms de projecte no poden estar en blanc.";
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]     = "Usuari no trobat.";
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = "La informació emmagatzemada pel seu navegador és incorrecta. Potser el seu compte ha estat esborrat.";
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = "No s'han trobat preferències par a aquest usuari.";
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]     = "No s'ha trobat la notícia.";
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = "La contrasenya no ha superat la verificació.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = "S'esperava un array i s'ha rebut una cadena.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = "S'esperava una cadena i s'ha rebut un array.";
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = "S'esperava un número per %s.";
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]      = "No es troba la comanda %d.";
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = "Filtre %d no trobat.";
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = "El filtre que està intentant usar és massa vell per a ser modificat, si us plau torna'l a crear";
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]      = "Email incorrecte.";
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = "Perfil no trobat.";
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]   = "Tipus d'arxiu no permès per a pujades.";
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]     = "Aquest arxiu està duplicat.  Si us plau, elimini abans l'arxiu original.";
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "Ruta de pujada no vàlida.  El directori no existeix o el servidor web no pot escriure-hi.";
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = "Fitxer no pujat. Si us plau feu enrera i trieu un fitxer abans de clicar Pujar";
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = "El fitxer pujat no es pot moure al directori de destí. El Directori o no existeix o no té permisos d'escriptura pel webserver";
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = "No es pot establir una comanda com a duplicat d'ella mateixa.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = "Camp personalitzat no trobat";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = "Aquest nom està duplicat.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = "Al menys un projecte té aquest camp en ús.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "Valor incorrecte per a aquest camp";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Definició de camp personalitzat no vàlida";
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]   = "Ha fallat la validació LDAP";
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = "Ha Fallat la connexió al servidor LDAP";
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = "Ha fallat l'actualització del registre LDAP.";
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = "No s'ha trobat el registre LDAP de l'usuari.";
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]  = "Ha fallat la connexió a la base de dades.";
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]    = "Ha fallat la consulta a la base de dades.";
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]   = "Ha fallat la selecció de la base de dades.";
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "Aquesta és una categoria duplicada.";
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "No s'ha especificat cap acció de còpia.";
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "Categoria no trobada.";
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "Aquesta és una versió duplicada.";
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = "Versió no trobada.";
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = "L'usuari és incorrecte.";
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "L'usuari no té el nivell d'accés requerit";
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "El \"Nom Real\" coincideix amb el nom d'un altre usuari. Si us plau seleccioni'n un altre.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Patrocini no disponible.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = "No s'ha trobat el patrocini %d.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = "El patrocini (%s) és menor que el valor mínim de (%s).";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = "El propietari no té suficient nivell d'accés per a suportar ítems patrocinats.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = "Accés denegat: es necessita un permís més gran per a administrar ítems patrocinats.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = "El patrocinador no ha proporcionat una adreça de mail vàlida. Si us plau actualitzi el seu perfil.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = "L'opció de configuració '%s' té un valor '%s' no vàlid.";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = "L'acció no es pot efectuar ja que la comanda '%d' és de només lectura";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: Ja hi ha una relació entre aquests dos elements.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relació no trobada.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Accés denegat: La comanda %d requereix un nivell d'accés més gran.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Una comanda no pot relacionar-se amb ella mateixa.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = "La cadena de confirmació no coincideix. Si us plau, torni a intentar-ho.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = "L'opció 'lost your password' no està disponible.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "Ha de proporcionar una adreça de correu vàlida per a restaurar la contrasenya";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = "La informació proporcionada no coincideix amb cap compte actiu";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = "La URL de confirmació és invàlida o està en ús. Si us plau torni a intentar accedir-hi.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Número màxim de peticions agafat. Si us plau contacti amb l'administrador del sistema";
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = "Aquesta operació podria crear un bucle al subprojecte jerarquitzat.";
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = "No es pot canviar el nivell d'accés de l'únic ADMINISTRADOR del sistema.";
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+
+$s_login_error = "El seu compte pot estar deshabilitat o el nom d'usuari/contrasenya introduïts són incorrectes.";
+$s_login_cookies_disabled = "El seu navegador o no suporta cookies, o els ha rebutjat.";
+
+# General Strings
+$s_go_back = "Tornar";
+$s_proceed = "Faci clic per a continuar";
+
+$s_switch = "Canviar";
+$s_logged_in_as = "Connectat com";
+
+$s_prefix_for_deleted_users = "usuari";
+
+$s_administrator = "administrador";
+$s_myself = "mi mateix";
+$s_default_access_level = "Nivell d'accés per defecte";
+
+$s_issue_status_percentage = "Percentatge d'estat de la comanda";
+
+# Enum Strings
+$s_access_levels_enum_string      = "10:espectador,25:informador,40:actualitzador,55:desenvolupador,70:manager,90:administrador";
+$s_project_status_enum_string     = "10:en desenvolupament,30:fet,50:estable,70:obsolet";
+$s_project_view_state_enum_string = "10:públic,50:privat";
+$s_view_state_enum_string         = "10:públic,50:privat";
+
+$s_priority_enum_string           = "10:cap,20:baixa,30:normal,40:alta,50:urgent,60:immediata";
+$s_severity_enum_string           = "10:funcionalitat,20:trivial,30:text,40:ajust,50:menor,60:major,70:penjat,80:bloqueig";
+$s_reproducibility_enum_string    = "10:sempre,30:de vegades,50:aleatori,70:no s'ha intentat,90:no és possible duplicar,100:no se sap";
+$s_status_enum_string             = "10:nou,20:es necessiten més dades,30:aceptat,40:confirmat,50:assignat,80:resolt,90:tancat";
+$s_resolution_enum_string         = "10:obert,20:arreglat,30:reobert,40:no es pot duplicar,50:no es pot corregir,60:duplicat,70:no és una comanda,80:suspès,90:no s'arreglarà";
+$s_projection_enum_string         = "10:cap,30:ajust,50:canvi menor,70:canvi important,90:redisseny";
+$s_eta_enum_string                = "10:cap,20:< 1 dia,30:2-3 dies,40:< 1 setmana,50:< 1 mes,60:> 1 mes";
+$s_sponsorship_enum_string = '0:Impagat,1:Requerit,2:Pagat';
+
+# Email Strings
+$s_new_account_subject = "Registre d'un nou compte";
+$s_new_account_greeting = "Gràcies por registrar-se. S'ha donat d'alta el seu compte amb el nom de l'usuari '";
+$s_new_account_greeting2 = "'. Per a completar el registre, visiti la URL (asseguri's de posar-la en una sola línia) i posi la contrasenya d'usuari que desitgi:";
+$s_new_account_username = "Usuari: ";
+$s_new_account_message = "Si no ha sol·licitat cap registre, si us plau ignori aquest missatge." . "\n\n";
+$s_new_account_do_not_reply = "NO RESPONGUI A AQUEST MISSATGE";
+$s_new_account_email = "Correu: ";
+$s_new_account_IP = "Direcció IP remota: ";
+$s_new_account_signup_msg = "El següent compte s'ha creat:";
+
+$s_reset_request_msg = "Algú (suposadament vostè) ha sol·licitat el canvi de contrasenya mitjançant la verificació per email. Si no ha estat vostè, simplement ignori aquest missatge." . "\n\n" . "Si va sol·licitar aquest canvi, visiti aquesta URL per a canviar la contrasenya:";
+$s_reset_request_in_progress_msg = "Si ha proporcionat un nom d'usuari i contrasenya correctes, rebrà un missatge de confirmació al  seu email. Quan rebi aquest missatge, segueixi les instruccions per a canviar la contrasenya del seu compte.";
+
+$s_email_notification_title_for_status_bug_new = "La següent comanda passa a estat de NOVA (una altra vegada)";
+$s_email_notification_title_for_status_bug_feedback = "La següent comanda requereix la seva OPINIÓ.";
+$s_email_notification_title_for_status_bug_acknowledged = "La següent comanda ha estat NOTIFICADA.";
+$s_email_notification_title_for_status_bug_confirmed = "La següent comanda ha estat CONFIRMADA.";
+$s_email_notification_title_for_status_bug_assigned = "La següent comanda ha estat ASSIGNADA.";
+$s_email_notification_title_for_status_bug_resolved = "La següent comanda ha estat RESOLTA.";
+$s_email_notification_title_for_status_bug_closed = "La següent comanda ha estat TANCADA";
+
+$s_email_notification_title_for_action_bug_submitted = "La següent comanda ha estat ENVIADA.";
+$s_email_notification_title_for_action_bug_assigned = "La següent comanda ha estat ASSIGNADA.";
+$s_email_notification_title_for_action_bug_reopened = "La següent comanda ha estat REOBERTA.";
+$s_email_notification_title_for_action_bug_deleted = "La següent comanda ha estat ELIMINADA.";
+$s_email_notification_title_for_action_bug_updated = "La següent comanda ha estat ACTUALIZADA.";
+$s_email_notification_title_for_action_sponsorship_added = "La següent comanda ha estat PATROCINADA.";
+$s_email_notification_title_for_action_sponsorship_updated = "S'ha modificat un patrocini de la següent comanda.";
+$s_email_notification_title_for_action_sponsorship_deleted = "S'ha retirat un patrocini de la següent comanda.";
+
+$s_email_notification_title_for_action_bugnote_submitted = "S'ha afegit una NOTA a aquesta comanda.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "La següent comanda s'ha generat com a DUPLICADA del %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "La comanda s'ha marcat com a DUPLICADA de la següent comanda.";
+$s_email_notification_title_for_action_related_to_relationship_added = "La següent comanda s'ha RELACIONAT amb la comanda %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "La següent comanda s'ha lligat com a PARE de la comanda %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "La següent comanda s'ha lligat com a FILLA de la comanda %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "La següent comanda s'ha desmarcat com a DUPLICADA de la comanda %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "La comanda %s s'ha desmarcat com a DUPLICADA de la següent comanda.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = " LA següent comanda s'ha deslligat com a RELACIONADA de la comanda %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = " La següent comanda s'ha deslligat com a PARE de la comanda %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = " La següent comanda s'ha deslligat com a FILL de la comanda %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "La comanda RELACIONADA %s ha estat RESOLTA.";
+$s_email_notification_title_for_action_relationship_child_closed = " La comanda RELACIONADA %s ha estat TANCADA.";
+
+$s_email_reporter = "Informador";
+$s_email_handler = "Encarregat";
+$s_email_project = "Projecte";
+$s_email_bug = "ID de comanda";
+$s_email_category = "Categoria";
+$s_email_reproducibility = "Reproduïble";
+$s_email_severity = "Gravetat";
+$s_email_priority = "Prioritat";
+$s_email_status = "Estat";
+$s_email_resolution = "Resolució";
+$s_email_duplicate = "Duplicat de";
+$s_email_fixed_in_version = "Reparat en versió";
+$s_email_date_submitted = "Data de la comanda";
+$s_email_last_modified = "Última Modificació";
+$s_email_summary = "Resum";
+$s_email_description = "Descripció";
+
+# account_delete.php
+$s_account_protected_msg = "Compte Protegit. No és possible canviar la configuració...";
+$s_account_removed_msg = "El seu compte ha estat eliminat...";
+
+# account_delete_page.php
+$s_confirm_delete_msg = "¿Segur que desitja eliminar el seu compte?";
+$s_delete_account_button = "Eliminar Compte";
+
+# account_page.php
+$s_manage_profiles_link = "Perfils";
+$s_change_preferences_link = "Preferències";
+$s_edit_account_title = "Editar Compte";
+$s_username = "Usuari";
+$s_realname = "Nom real";
+$s_email = "Email";
+$s_password = "Contrasenya";
+$s_no_password_change = "El password està controlat per un altre sistema, per tant no és editat ara.";
+$s_confirm_password  = "Confirmar contrasenya";
+$s_access_level = "Nivell d'Accés";
+$s_update_user_button = "Actualitzar Usuari";
+$s_verify_warning = "La informació del seu compte ha estat verificada. El missatge de confirmació que ha rebut no és vàlid.";
+$s_verify_change_password = "Has de fixar una paraula de pas per poder entrar una altra vegada";
+
+# account_prefs_page.php
+$s_default_account_preferences_title = "Preferències de comptes per defecte";
+$s_default_project = "Projecte per defecte";
+$s_advanced_report = "Informe Avançat";
+$s_advanced_view = "Vista Avançada";
+$s_advanced_update = "Actualització Avançada";
+$s_refresh_delay = "Demora de Recàrrega";
+$s_redirect_delay = "Demora de Redirecció";
+$s_with_minimum_severity = "Amb Gravetat mínima de";
+$s_bugnote_order = "Ordre per a Notes";
+$s_bugnote_order_asc = "Ascendent";
+$s_bugnote_order_desc = "Descendent";
+$s_email_on_new = "Enviar correu de les comandes Noves";
+$s_email_on_assigned = "Enviar correu de les comandes Assignades";
+$s_email_on_feedback = "Enviar correu de les comandes que requereixin Opinió";
+$s_email_on_resolved = "Enviar correu de les comandes Resoltes";
+$s_email_on_closed = "Enviar correu de les comandes Tancades";
+$s_email_on_reopened = "Enviar correu de les comandes Reobertes";
+$s_email_on_bugnote_added = "Enviar correu de Notes agregades a la comanda";
+$s_email_on_status_change = "Enviar correu de Canvis d'Estat";
+$s_email_on_priority_change = "Enviar correu de Canvis de Prioritat";
+$s_email_bugnote_limit = "Límit de notes por correu";
+$s_language = "Idioma";
+$s_update_prefs_button = "Actualitzar Preferències";
+$s_reset_prefs_button = "Restablir Preferències";
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = "Les Preferències han estat restablertes...";
+
+# account_prefs_update.php
+$s_prefs_updated_msg = "Les Preferències han estat actualitzades...";
+
+# account_profile_add.php
+$s_profile_added_msg = "Perfil agregat...";
+
+# account_profile_delete.php
+$s_profile_deleted_msg = "Perfil eliminat...";
+
+# account_profile_edit_page.php
+$s_edit_profile_title = "Editar Perfil";
+$s_platform = "Plataforma";
+$s_operating_system = "Sistema Operatiu";
+$s_additional_description = "Descripció Addicional";
+$s_update_profile_button = "Actualitzar Perfil";
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = "Perfil per defecte actualitzat...";
+
+# account_profile_manage_page.php
+$s_add_profile_title = "Afegir Perfil";
+$s_add_profile_button = "Afegir Perfil";
+$s_edit_or_delete_profiles_title = "Editar o Eliminar Perfils";
+$s_edit_profile = "Editar Perfil";
+$s_make_default = "Establir per defecte.";
+$s_delete_profile = "Eliminar Perfil";
+$s_select_profile = "Seleccionar Perfil";
+$s_submit_button = "Enviar";
+
+# account_profile_update.php
+$s_profile_updated_msg = "Perfil actualitzat...";
+
+# account_sponsor_page.php
+$s_my_sponsorship = 'Els meus Patrocinadors';
+$s_update_sponsorship_button = "Canvia l'estat del pagament";
+$s_no_sponsored = "No se t'han trobat comandes patrocinades assignades";
+$s_own_sponsored = 'Comandes que has patrocinat:';
+$s_issues_handled = 'Comandes Patrocinades que has Assignat:';
+$s_no_own_sponsored = 'No has patrocinat cap comanda.';
+$s_sponsor = 'Patrocinador';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Patrocina';	# like in 'Sponsor it!'
+$s_amount = 'Import';
+$s_total_owing = 'Total Deure';
+$s_total_paid = 'Total Pagat';
+$s_sponsor_hide = "Amagar Resolts i Pagar";
+$s_sponsor_show = "Mostrar-ho tot";
+
+# account_sponsor_update.php
+$s_payment_updated = "Informació del pagament actualitzada.";
+
+# account_update.php
+$s_account_updated_msg = "El seu compte ha estat actualitzat...";
+$s_email_updated = "La seva adreça de correu ha estat actualitzada";
+$s_realname_duplicated = "Aquest nom real està sent utilitzat per un altre usuari.";
+$s_realname_updated = "Nom real actualitzat correctament";
+$s_password_updated = "Contrasenya actualitzada";
+
+# adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = "Les comandes que ha seleccionat són de diferents projectes. Els paràmetres de sota mostren les posicions per a tots els projectes. Si és incorrecte, si us plau reintenti el canvi amb un nombre més petit de comandes seleccionades.";
+
+# bug_assign.php
+$s_bug_assign_msg       = "La Comanda ha estat assignada correctament...";
+
+# bug_change_status_page.php
+$s_new_bug_title = "Nova comanda";
+$s_feedback_bug_title = "Sol·licitar informació addicional";
+$s_acknowledged_bug_title = "Comanda coneguda";
+$s_confirmed_bug_title = "Comanda confirmada";
+$s_assigned_bug_title = "Comanda assignada";
+$s_new_bug_button = "Nova comanda";
+$s_feedback_bug_button = "Sol·licitar més informació";
+$s_acknowledged_bug_button = "Marcar comanda com a coneguda";
+$s_confirmed_bug_button = "Confirmar comanda";
+$s_assigned_bug_button = "Assignar comanda";
+
+# bug_close.php
+$s_bug_close_msg       = "La comanda ha estat tancada...";
+$s_close_immediately   = "Tancar immediatament:";
+
+# bug_close_page.php
+$s_closed_bug_title = "Tancar Comanda";
+
+# bug_delete.php
+$s_bug_deleted_msg = "La Comanda ha estat eliminada...";
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = "¿Està segur que desitja eliminar aquesta comanda?";
+$s_delete_bug_button = "Eliminar Comanda";
+
+# bug_monitor.php
+$s_monitor_bug_button = "Monitoritzar Comanda";
+$s_unmonitor_bug_button = "Aturar Monitorització";
+
+# bug_file_add.php
+$s_file_upload_msg = "Arxiu pujat";
+
+# bug_file_upload_inc.php
+$s_upload_file = "Pujar Arxiu";
+$s_select_file = "Seleccionar Arxiu";
+$s_upload_file_button = "Pujar Arxiu";
+$s_max_file_size = "Mida Màxima";
+
+# bug_reopen.php
+$s_bug_reopened_msg = "La comanda ha estat reoberta...";
+$s_reopen_add_bugnote_title = "Afegir una nota per a reobrir la comanda";
+$s_bugnote_add_reopen_button = "Afegir nota i reobrir la comanda";
+
+# bug_resolve_page.php
+$s_resolved_bug_title = "Resoldre Comanda";
+$s_resolved_bug_button = "Resoldre Comanda";
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = "La comanda ha estat resolta. Introdueixi una nota...";
+$s_resolve_add_bugnote_title = "Afegir un motiu de resolució de la comanda";
+$s_bugnote_add_resolve_button = "Afegir Nota";
+
+# bug_reminder_page.php
+$s_from = "De";
+$s_to = "Per a";
+$s_on = "a ";
+$s_sent_you_this_reminder_about = "li ha enviat aquest recordatori sobre";
+$s_bug_reminder = "Enviar un recordatori";
+$s_reminder_sent_to = "Recordatori enviat a";
+$s_bug_send_button = "Enviar";
+$s_reminder = "Recordatori";
+$s_reminder_explain = "Aquesta nota serà enviadda a als destinataris de la llista requerida a la resposta d'aquesta incidència.";
+$s_reminder_monitor = "Thaquest recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.";
+$s_reminder_store = "Aquesta nota quedarà arxivada amb aquesta comanda.";
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+
+# bug_update.php
+$s_bug_updated_msg = "La comanda ha estat actualitzat correctament...";
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = "Tornar a la Comanda";
+$s_update_simple_link = "Canviar a format d'Actualització Simple";
+$s_updating_bug_advanced_title = "Actualitzant informació de la Comanda";
+$s_id = "ID";
+$s_category = "Categoria";
+$s_severity = "Gravetat";
+$s_reproducibility = "Reproduïble";
+$s_date_submitted = "Data d'Enviament";
+$s_last_update = "Última Actualització";
+$s_reporter = "Informador";
+$s_assigned_to = "Assignat a";
+$s_priority = "Prioritat";
+$s_resolution = "Resolució";
+$s_status = "Estat";
+$s_duplicate_id = "ID Duplicada";
+$s_os = "Sistema Operatiu";
+$s_projection = "Projecció";
+$s_os_version = "Versió";
+$s_eta = "Temps Estimat";
+$s_product_version = "Versió de Producte";
+$s_build = "Build";
+$s_fixed_in_version = "Resolt en versió";
+$s_votes = "Vots";
+$s_summary = "Resum";
+$s_description = "Descripció";
+$s_steps_to_reproduce = "Passos per a reproduir-lo";
+$s_update_information_button = "Actualitzar Informació";
+$s_sticky_issue = "Incidència adherida";
+$s_profile = "Perfil";
+
+# bug_update_page.php
+$s_update_advanced_link = "Canviar a format d'Actualització Avançada";
+$s_updating_bug_simple_title = "Actualitzant informació de la Comanda";
+
+# bug_vote_add.php
+$s_vote_added_msg = "El seu vot ha estat agregat...";
+
+# bugnote_add.php
+$s_bugnote_added_msg = "Nota agregada...";
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = "La Nota ha estat eliminada...";
+$s_bug_notes_title = "Notes";
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = "Editar Nota";
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = "No hi ha notes associades a aquesta comanda.";
+$s_delete_link = "Eliminar";
+$s_add_bugnote_title = "Afegir Nota";
+$s_add_bugnote_button = "Afegir Nota";
+$s_bugnote_edit_link = "Editar";
+$s_closed_bug_button = "Tancar Comanda";
+
+# bugnote_update.php
+$s_bugnote_updated_msg = "La nota ha estat actualitzada...";
+$s_edited_on = "editada a: ";
+
+# file_api.php
+$s_show_content ='Show Content';
+
+# index.php
+$s_click_to_login = "Clicar aquí per a iniciar la sessió";
+
+# login.php
+
+# login_page.php
+#@@@ should the following string be related to $g_window_title?
+$s_login_page_info = "Benvingut al Gestor d'incidències.";
+$s_login_title = "Inici de sessió";
+$s_save_login = "Guardar dades";
+$s_choose_project = "Seleccioni Projecte";
+$s_login_button = "Iniciar sessió";
+$s_signup_link = "Sol·licitar un Compte Nou";
+$s_lost_password_link = "¿No recorda la contrasenya?";
+
+# login_select_proj_page.php
+$s_select_project_button = "Seleccioni Projecte";
+
+# logout_page.php
+$s_logged_out_title = "Sessió tancada...";
+$s_redirecting = "...Redirigint";
+$s_here = "Aquí";
+
+# lost_pwd_page.php
+$s_lost_password_title = "Restaurar contrasenya";
+$s_lost_password_done_title = "Missatge de contrasenya enviat";
+$s_lost_password_subject = "Restaurar contrasenya";
+$s_lost_password_info = "Per a recuperar la seva contrasenya oblidada, si us plau completi el seu correu i contrasenya.<br/><br/>Si les dades es corresponen amb un compte vàlid, rebrà un correu amb una URL especial per a canviar la contrasenya. Si us plau segueixi les instruccions que rebrà i podrà canviar la contrasenya.";
+$s_lost_password_confirm_hash_OK = "La seva confirmació ha estat acceptada. Si us plau canviï la seva contrasenya.";
+
+# main_page.php
+$s_open_and_assigned_to_me = "Comandes obertes i assignades a mi";
+$s_open_and_reported_to_me = "Comandes obertes i reportades per a mi";
+$s_newer_news_link = "Noves notícies";
+$s_older_news_link = "Notícies anteriors";
+$s_archives = "Notícies arxivades";
+$s_rss = "RSS";
+
+# manage_create_new_user.php
+$s_created_user_part1 = "Usuari creat";
+$s_created_user_part2 = "amb un nivell d'accés de";
+
+# manage_create_user_page.php
+$s_create_new_account_title = "Crear nou compte";
+$s_verify_password = "Verificar contrasenya";
+$s_enabled = "Activat";
+$s_protected = "Protegit";
+$s_create_user_button = "Crear usuari";
+
+# manage_page.php
+$s_hide_disabled = "Amagar desactivats";
+$s_filter_button = "Filtrar";
+$s_manage_users_link = "Administrar usuaris";
+$s_manage_projects_link = "Administrar Projectes";
+$s_manage_custom_field_link = "Administrar camps personalitzats";
+$s_manage_global_profiles_link = "Gestionar perfils globals";
+$s_permissions_summary_report = "Relació de permisos";
+$s_manage_config_link = "Gestionar configuració";
+$s_manage_threshold_config = "Llindars de treball";
+$s_manage_email_config = "Notificacions de correus";
+$s_manage_workflow_config = "Transicions de treball";
+$s_create_new_account_link = "Crear compte";
+$s_projects_link = "Projectes";
+$s_documentation_link = "Documentació";
+$s_new_accounts_title = "Nous Comptes";
+$s_1_week_title = "1 setmana";
+$s_never_logged_in_title = "Mai ha iniciat una sessió";
+$s_prune_accounts = "Podar comptes";
+$s_hide_inactive = "Ocultar inactius";
+$s_manage_accounts_title = "Comptes";
+$s_p = "P";
+$s_date_created = "Data de creació";
+$s_last_visit = "Última visita";
+$s_edit_user_link = "Editar usuari";
+
+# manage_config_email_page
+$s_config_all_projects = "Nota: Aquestes configuracions afecten TOTS ELS PROJECTES, menys per sobre del nivell del projecte.";
+$s_config_project = "Nota: Aquesta configuració afecta només el projecte %s.";
+$s_colour_coding = "A la taula de sota, els següents codis de color s'apliquen:";
+$s_colour_project = "Les definicions de Projecte estan per sobre les altres.";
+$s_colour_global = "Totes les definicions de Projecte estan per sobre la configuració per defecte.";
+$s_issue_reporter = "Usuari que comunica la comanda ";
+$s_issue_handler = "Usuari que té la comanda ";
+$s_users_added_bugnote = "Usuaris que afegeixen notes ";
+$s_change_configuration = "Modificar la configuració";
+$s_message = "Missatge";
+$s_default_notify = "Posant els indicadors de notificacions per defecte a";
+$s_action_notify = " Posant els indicadors de notificacions d'acció a ";
+$s_notify_defaults_change_access = "Pot canviar les notificacions per defecte ";
+$s_notify_actions_change_access = "Pot canviar les notificacions";
+$s_revert_to_system = "Esborrar totes les definicions de Projecte";
+$s_revert_to_all_project = "Esborrar les definicions específiques del Projecte ";
+
+# manage_config_workflow_page
+$s_non_existent = "no existeix";
+$s_current_status = "Estat actual ";
+$s_next_status = "Proper estat ";
+$s_workflow = "Treballs";
+$s_workflow_thresholds = "Llindars que afecten al Workflow";
+$s_threshold = "Llindar";
+$s_status_level = "Estat";
+$s_alter_level = "Qui pot canviar aquest valor ";
+$s_validation = "Validació del Workflow ";
+$s_comment = "Comentari Val. ";
+$s_superfluous = "L'arc de l'estat s'implica a ell mateix, i no necessita ser informat explícitament ";
+$s_unreachable = "No es pot canviar la comanda a aquest estat ";
+$s_no_exit = "No pot treure la comanda d'aquest estat ";
+$s_access_levels = "Nivells d'Accés";
+$s_access_change = "Nivell mínim d'accés per canviar aquest estat ";
+$s_desc_bug_submit_status = "La nova comanda s'ha mogut a aquest estat ";
+$s_desc_bug_reopen_status = "La comanda reoberta s'ha mogut a aquest estat ";
+$s_desc_bug_resolved_status_threshold = "Estat en què una comanda es considera resolta ";
+$s_workflow_change_access = "Qui pot canviar el workflow";
+$s_access_change_access = "Qui pot canviar els nivells d'accés.";
+
+# manage_config_workflow_set
+$s_default_not_in_flow = "L'estat per defecte %s no es selecciona en els següents estats per %s. Serà ignorat";
+
+# manage_config_work_threshold_page
+$s_assign_issue = "Assignada una comanda ";
+$s_allow_close_immediate = "Permetre que una comanda sigui tancada o resolta ";
+$s_allow_reporter_close = "Permetre Informar del tancament de la comanda ";
+$s_allow_reporter_reopen = " Permetre informar en reobrir una comanda ";
+$s_set_status_assigned = "Fixa l'estat en l'assignació del mantenidor";
+$s_allow_user_edit = "Permetre a l'usuari editar les seves pròpies notes ";
+$s_limit_access = "Limita l'accés a documentar les pròpies comandes";
+$s_submit_status = "Estat on s'ha mogut la nova comanda ";
+$s_assigned_status = "Estat per a fixar les comandes auto-assignades ";
+$s_resolved_status = "Estat en què una comanda es considera resolta. ";
+$s_readonly_status = "Estat en què una comanda passa a només lectura ";
+$s_reopen_status = "Estat al qual es posa una comanda reoberta ";
+$s_reopen_resolution = "Resolució que es posa a una comanda reoberta ";
+
+# manage_config_revert_page
+$s_config_delete_sure = "Esta segur que vol esborrar la configuració de ";
+$s_in_project = "al projecte";
+$s_delete_config_button = "Esborrar Configuració";
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+
+# manage_proj_add.php
+$s_project_added_msg = "El projecte ha estat agregat...";
+
+# manage_proj_category_add.php
+$s_category_added_msg = "La categoria ha estat agregada...";
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = "La categoria ha estat eliminada...";
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = "¿Segur que desitja eliminar la categoria?";
+$s_delete_category_button = "Eliminar Categoria";
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = "Editar Categoria de Projecte";
+$s_update_category_button = "Actualitzar Categoria";
+
+# manage_proj_category_update.php
+$s_category_updated_msg = "La categoria ha estat actualitzada...";
+
+# manage_proj_create_page.php
+$s_add_subproject_title = "Afegir Subprojecte";
+
+# manage_proj_delete.php
+$s_project_deleted_msg = "El projecte ha estat eliminat...";
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = "¿Segur que desitja eliminar aquest projecte i totes les comandes associades?";
+$s_project_delete_button = "Eliminar Projecte";
+
+# manage_proj_edit_page.php
+$s_edit_project_title = "Editar Projecte";
+$s_project_name = "Nom del Projecte";
+$s_view_status = "Accés";
+$s_public = "Públic";
+$s_private = "Privat";
+$s_update_project_button = "Actualitzar Projecte";
+$s_delete_project_button = "Eliminar Projecte";
+$s_categories_and_version_title = "Categories i Versions";
+$s_categories = "Categories";
+$s_add_category_button = "Afegir Categoria";
+$s_versions = "Versions";
+$s_add_version_button = "Afegir Versions";
+$s_add_and_edit_version_button = "Afegir i editar Versió";
+$s_edit_link = "Editar";
+$s_actions = "Accions";
+$s_version = "Versió/Construït";
+$s_timestamp = "Marca de temps";
+$s_update = "Actualitzar";
+$s_subprojects = "Subprojectes";
+$s_add_subproject = "Afegir com un Subprojecte";
+$s_create_new_subproject_link = "Crear un Subprojecte Nou";
+$s_unlink_link = "Deslligar";
+
+# manage_proj_menu_page.php
+$s_add_project_title = "Afegir Projecte";
+$s_upload_file_path = "Ruta d'arxius pujats";
+$s_add_project_button = "Afegir Projecte";
+$s_projects_title = "Projectes";
+$s_name = "Nom";
+
+# manage_proj_update.php
+$s_project_updated_msg = "El projecte ha estat actualitzat...";
+
+# manage_proj_version_add.php
+$s_version_added_msg = "La versió ha estat agregada...";
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = "La versió ha estat eliminada...";
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = "¿Segur que desitja eliminar la versió?";
+$s_delete_version_button = "Eliminar Versió";
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = "Editar Versions";
+$s_update_version_button = "Actualitzar Versions";
+$s_released = "Released";
+
+# manage_proj_version_update.php
+$s_version_updated_msg = "La versió ha estat actualitzada...";
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = "Compte Protegit. No és possible eliminar aquest compte.";
+$s_account_deleted_msg = "Compte eliminat...";
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = "¿Segur que desitja eliminar aquest compte?";
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = "Tots els comptes que mai s'han connectat i tenen més d'una setmana han estat eliminats";
+$s_prune_accounts_button = "Podar";
+$s_confirm_account_pruning = "¿Segur que desitja eliminar els comptes antics que mai han iniciat una sessió?";
+
+# manage_user_page.php
+$s_edit_user_title = "Editar Usuari";
+$s_reset_password_button = "Restablir Contrasenya";
+$s_delete_user_button = "Eliminar Usuari";
+$s_reset_password_msg = "Restablir la contrasenya enviant una URL de confirmació mitjançant email.";
+$s_reset_password_msg2 = "Restablir la contrasenya deixant-la en blanc.";
+$s_show_all_users = "Tots";
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = "Compte Protegit. No és possible restablir la contrasenya.";
+$s_account_reset_msg = "S'ha enviat un correu de confirmació a l'adreça de correu electrònic...";
+$s_account_reset_msg2 = "La contrasenya s'ha establert en blanc...";
+
+# manage_user_update.php
+$s_manage_user_protected_msg = "Compte Protegit. Nivell d'accés i activació protegits. Per la resta, el compte ha estat actualitzat...";
+$s_manage_user_updated_msg = "El compte ha estat actualitzat...";
+
+# menu_inc.php
+$s_main_link = "Principal";
+$s_view_bugs_link = "Veure Comandes";
+$s_report_bug_link = "Informar d'una Comanda";
+$s_changelog_link = "Log de canvis";
+$s_summary_link = "Resum";
+$s_account_link = "El meu Compte";
+$s_users_link = "Usuaris del Projecte";
+$s_manage_link = "Administració";
+$s_edit_news_link = "Notícies";
+$s_docs_link = "Documents";
+$s_logout_link = "Sortir";
+$s_my_view_link = "La meva vista";
+
+# meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = "No assignats";
+$s_my_view_title_recent_mod = "Modificat recentment";
+$s_my_view_title_reported = "Informats per mi";
+$s_my_view_title_assigned = "Assignats a mi (pendents)";
+$s_my_view_title_resolved = "Resolts";
+$s_my_view_title_monitored = "Monitoritzats per mi";
+$s_my_view_title_feedback = "Esperant una resposta meva";
+$s_my_view_title_verify = "Esperant Confirmació meva del Resultat";
+
+# news_add.php
+$s_news_added_msg = "Notícia Agregada...";
+
+# news_delete.php
+$s_news_deleted_msg = "Notícia Eliminada...";
+
+# news_delete_page.php
+$s_delete_news_sure_msg = "¿Segur que desitja eliminar aquesta notícia?";
+$s_delete_news_item_button = "Eliminar Notícia";
+
+# news_edit_page.php
+$s_edit_news_title = "Editar Notícia";
+$s_headline = "Capçalera";
+$s_body = "Cos";
+$s_update_news_button = "Actualitzar Notícia";
+
+# news_menu_page.php
+$s_add_news_title = "Afegir Notícia";
+$s_post_to = "Publicar a";
+$s_post_news_button = "Publicar Notícia";
+$s_edit_or_delete_news_title = "Editar o Eliminar Notícia";
+$s_edit_post = "Editar Publicació";
+$s_delete_post = "Eliminar Publicació";
+$s_select_post = "Seleccionar Publicació";
+
+# news_update.php
+$s_news_updated_msg = "Notícia actualitzada...";
+
+# news_view_page.php
+$s_back_link = "Tornar";
+
+# proj_doc_add.php
+$s_file_uploaded_msg = "Arxiu pujat";
+
+# proj_doc_add_page.php
+$s_upload_file_title = "Pujar Arxiu";
+$s_title = "Títol";
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = "Arxiu de Projecte esborrat...";
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = "¿Segur que desitja eliminar aquest arxiu?";
+
+# proj_doc_edit_page.php
+$s_filename = "Nom de l'Arxiu";
+$s_file_update_button = "Actualitzar Arxiu";
+$s_file_delete_button = "Eliminar Arxiu";
+
+# proj_doc_page.php
+$s_project_documentation_title = "Documentació del Projecte";
+$s_user_documentation = "Documentació de l'Usuari";
+$s_project_documentation = "Documentació del Projecte";
+$s_add_file = "Afegir Arxiu";
+
+# proj_doc_update.php
+$s_project_document_updated = "Projecte actualitzat";
+
+# proj_user_add.php
+$s_project_user_added_msg = "Usuari agregat al projecte";
+
+# proj_user_delete.php
+$s_project_removed_user_msg = "Usuari desvinculat del projecte";
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = "¿Segur que desitja desvincular aquest usuari?";
+$s_remove_user_button = "Esborrar Usuari";
+$s_remove_all_users_sure_msg = "Està segur que vol esborrar tots els usuaris d'aquest projecte?";
+$s_remove_all_users_button = "Esborrar Tots els Usuaris ";
+
+# proj_user_menu_page.php
+$s_add_user_title = "Afegir usuari al projecte";
+$s_add_user_button = "Afegir usuari";
+$s_project_selection_title = "Selecció de Projecte";
+$s_remove_link = "eliminar";
+$s_remove_all_link = "Esborrar-ho tot";
+
+# proj_user_update.php
+$s_updated_user_msg = "Usuari actualitzat";
+
+# report_add.php
+$s_must_enter_category = "Ha de seleccionar una categoria";
+$s_must_enter_severity = "Ha de seleccionar un nivell de Gravetat";
+$s_must_enter_reproducibility = "Ha de seleccionar una capacitat de reproducció";
+$s_must_enter_summary = "Ha d'introduir un resum";
+$s_must_enter_description = "Ha d'introduir una descripció";
+$s_report_more_bugs = "Informar de més comandes";
+$s_submission_thanks_msg = "Gràcies per la seva comanda";
+
+# report_bug_advanced_page.php
+$s_simple_report_link = "Comanda Simple";
+$s_enter_report_details_title = "Introdueixi el detall de la comanda.";
+$s_required = "Requerit";
+$s_select_category = "Seleccioni Categoria";
+$s_select_reproducibility = "Seleccioni Capacitat de Reproducció";
+$s_select_severity = "Seleccioni Gravetat";
+$s_or_fill_in = "O ompli els següents camps";
+$s_assign_to = "Assignar a";
+$s_additional_information = "Informació Addicional";
+$s_submit_report_button = "Enviar comanda";
+$s_check_report_more_bugs = "seleccioni per a informar de més comandes";
+
+# report_bug_page.php
+$s_advanced_report_link = "Comanda Avançada";
+$s_report_stay = "Continuar informant";
+
+# set_project.php
+$s_selected_project = "Projecte Seleccionat";
+$s_valid_project_msg = "Ha de seleccionar un projecte vàlid";
+
+# signup.php
+$s_signup_done_title = "Alta processada";
+$s_password_emailed_msg = "Enhorabona. S'ha registrat correctament. Rebrà un missatge per correu per a verificar la seva adreça de correu electrònic. Faci clic en el link que rebrà per a activar el seu compte.";
+$s_no_reponse_msg = "Té set dies per a completar el procés de registre. Si no el completa en aquest termini, el seu compte serà eliminat.";
+
+# signup_page.php
+$s_signup_captcha_request = "Introdueixi el codi tal com el veu a la caixa de la dreta";
+$s_signup_info = "Per a completar aquest procés, rebrà un correu de confirmació a l'adreça especificada.<br/>Mitjançant aquest correu podrà activar el seu compte. Si aquesta verificació no s'efectua en set dies, el compte serà eliminat.<br/>Ha de consignar una adreça de correu vàlida per a rebre el missatge de verificació.";
+$s_signup_title = "Subscriure's";
+$s_signup_button = "Subscriure's";
+$s_no_password_request = "El seu password està gestionat per un altre sistema. Si us plau contacti amb el seu administrador de sistema.";
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = "Editar configuració del lloc";
+$s_save_settings_button = "Gravar Configuració";
+
+# site_settings_page.php
+$s_site_settings_title = "Configuració del Lloc";
+$s_system_info_link = "Informació del Sistema";
+$s_site_settings_link = "Configuració del Lloc";
+
+# site_settings_update.php
+$s_site_settings_updated_msg = "Configuració del lloc actualitzada";
+
+# summary_page.php
+$s_summary_title = "Informe General";
+$s_summary_jpgraph_link = "Informe General Avançat";
+$s_by_project = "per projecte";
+$s_by_status = "per estat";
+$s_by_date = "per data";
+$s_by_severity = "per gravetat";
+$s_by_resolution = "per resolució";
+$s_by_category = "per categoria";
+$s_by_priority = "per prioritat";
+$s_by_developer = "per desenvolupador";
+$s_by_reporter = "per informador";
+$s_reporter_by_resolution = "Informador Per Resolució";
+$s_reporter_effectiveness = "Efectivitat de l'Informador";
+$s_developer_by_resolution = "Desenvolupador Per Resolució";
+$s_percentage_fixed = "% Corregit";
+$s_percentage_errors = "% Incorrecte";
+$s_errors = "Incorrecte";
+$s_total = "Total";
+$s_time_stats = "estadístiques de comandes resoltes (dies)";
+$s_longest_open_bug = "comandes obertes durant més temps";
+$s_longest_open = "temps més gran obert";
+$s_average_time = "temps mitjà";
+$s_total_time = "temps total";
+$s_developer_stats = "estadístiques de desenvolupadors";
+$s_reporter_stats = "estadístiques d'usuaris";
+$s_orct = "(oberts/resolts/tancats/total)";
+
+# view_all_bug_page.php
+$s_any = "Qualsevol";
+$s_show = "Veure";
+$s_changed = "Canviat(hrs)";
+$s_viewing_bugs_title = "Comandes";
+$s_updated = "Actualitzat";
+$s_sticky = "Mostrar les comandes 'Difícil'";
+$s_sort = "Ordenar per";
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
+
+# view_all_inc.php
+$s_none = "cap";
+$s_current = 'current';
+$s_search = "Cercar";
+$s_view_prev_link = "Veure Anteriors";
+$s_view_next_link = "Veure Següents";
+$s_prev = "Ant";
+$s_next = "Seg";
+$s_first = "Primer";
+$s_last = "Últim";
+$s_start_date = "Data inici";
+$s_end_date = "Data final";
+$s_use_date_filters = "Utilitzar filtres de data";
+$s_yes = "Sí";
+$s_no = "No";
+$s_open_filters = "Canviar filtre";
+$s_or_unassigned = "O sense assignar";
+$s_ok = "OK";
+$s_select_all = "Seleccionar-los tots";
+
+# stored query strings
+$s_use_query = "Utilitzar filtre";
+$s_delete_query = "Esborrar filtre";
+$s_query_deleted = "Filtre esborrat";
+$s_save_query = "Guardar filtre actual";
+$s_reset_query = "Restaurar filtre";
+$s_query_name = "Nom del filtre";
+$s_query_exists = "Aquest filtre en particular sembla que ja existeix.";
+$s_query_dupe_name = "Ja hi ha un altre filtre amb aquest nom. Si us plau triïn un altre de diferent.";
+$s_query_blank_name = "No es pot emmagatzemar un filtre sense nom. Si us plau informi un nom abans de guardar-lo.";
+$s_query_store_error = "S'ha produït un error en guardar el filtre.";
+$s_open_queries = "Administrar filtres";
+$s_query_delete_msg = "¿Segur que vol esborrar aquest filtre?";
+
+# view_bug_advanced_page.php
+$s_view_simple_link = "Canviar a Vista Simple";
+$s_viewing_bug_advanced_details_title = "Vista Avançada";
+$s_product_build = "Construcció del Producte";
+$s_system_profile = "Descripció del Sistema";
+$s_update_bug_button = "Actualitzar Comanda";
+$s_bug_assign_to_button = "Assignar A:";
+$s_bug_status_to_button = "Canviar estat a:";
+$s_reopen_bug_button = "Reobrir Comanda";
+$s_move_bug_button = "Moure Comanda";
+$s_attached_files = "Arxius Adjunts";
+$s_publish = "Publicar";
+$s_cached = "En Cache";
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = "Canviar a Vista Avançada";
+$s_viewing_bug_simple_details_title = "Vista Simple.";
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = "No hi ha usuaris monitoritzant aquesta comanda.";
+$s_users_monitoring_bug = "Usuaris monitorizant aquesta comanda.";
+$s_monitoring_user_list = "Llista d'Usuaris";
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = "No hi ha usuaris patrocinant aquesta comanda.";
+$s_users_sponsoring_bug = "Usuaris patrocinant aquesta comanda.";
+$s_sponsors_list = "Llista de patrocinadors";
+$s_total_sponsorship_amount = "Patrocini total = %s";
+
+# custom field strings
+$s_add_custom_field_button = "Nou camp personalitzat";
+$s_delete_custom_field_button = "Eliminar camp personalitzat";
+$s_delete_custom_field_everywhere = "Eliminar camp personalitzat de totes les parts";
+$s_update_custom_field_button = "Actualitzar camp personalitzat";
+$s_add_existing_custom_field = "Afegir aquest camp personalitzat";
+$s_edit_custom_field_title = "Editar camp personalitzat";
+$s_custom_field = "Camp";
+$s_custom_fields_setup = "Camps Personalitzats";
+$s_custom_field_name = "Nom";
+$s_custom_field_project_count = "Número de Projectes";
+$s_custom_field_type = "Tipus";
+$s_custom_field_possible_values = "Valors possibles";
+$s_custom_field_default_value = "Valor per defecte";
+$s_custom_field_valid_regexp = "Expressió regular";
+$s_custom_field_access_level_r = "Accés lectura";
+$s_custom_field_access_level_rw = "Accés escriptura";
+$s_custom_field_length_min = "Long. Mínima";
+$s_custom_field_length_max = "Long. Màxima";
+$s_custom_field_advanced = "Avançat";
+$s_custom_field_display_report = "Mostrar a l'informar comandes";
+$s_custom_field_display_update = "Mostrar a l'actualitzar comandes";
+$s_custom_field_display_resolved = "Mostrar en resoldre comandes";
+$s_custom_field_display_closed = "Mostrar en tancar comandes";
+$s_custom_field_require_report = "Requerit en informar";
+$s_custom_field_require_update = "Requerit a l'actualitzar";
+$s_custom_field_require_resolved = "Requerit en resoldre";
+$s_custom_field_require_closed = "Requerit en tancar";
+
+$s_custom_field_sequence = "Seqüència";
+$s_custom_field_type_enum_string = "0:Cadena,1:Numéric,2:Flotant,3:Enumeració,4:Correu,5:Casella de verificació,6:Llista,7:Selecció múltiple";
+
+$s_confirm_used_custom_field_deletion = "Aquest camp està vinculat al menys a un projecte.  Si continua tots els valors per a aquest camp seran esborrats permanentment.  Aquesta acció no pot tornar-se enrera. Si no desitja eliminar el camp, faci clic sobre el botó Enrera del seu navegador.  Per a procedir, faci clic sobre el botó que hi ha sota";
+$s_confirm_custom_field_deletion = "¿Segur que desitja eliminar aquest camp i tots els valors associats?";
+$s_field_delete_button = "Eliminar camp";
+
+$s_confirm_custom_field_unlinking = "Està segur que vol esborrar (unlink) aquest camp personalitzat del projecte i esborrar tots els valors associats?";
+$s_field_remove_button = "Esborrar camp ";
+
+$s_hide_status = "Amagar amb Estat";
+$s_filter_closed = "Tancar";
+$s_filter_resolved = "Resolt";
+$s_hide_closed = "Amagar tancats";
+$s_hide_resolved = "Amagar resolts";
+$s_and_above = "I superiors";
+$s_advanced_filters = "Filtres avançats";
+$s_simple_filters = "Filtres simples";
+$s_monitored_by = "Monitoritzat per";
+
+$s_attachments = "adjunt(s)";
+$s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = "ca";
+
+# Sponsorship Strings
+$s_sponsors = "%d patrocinador(s)";
+$s_sponsorship_added = "Patrocinador afegit";
+$s_sponsorship_updated = "Patrocinador actualitzat";
+$s_sponsorship_deleted = "Patrocinador esborrat";
+$s_sponsorship_paid = " patrocindaor Pagat";
+$s_sponsorship_more_info = "Més informació sobre el patrocinador";
+$s_sponsorship_total = "Patrocinador Total";
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = "";
+
+# Changelog
+$s_changelog = "Log de canvis";
+
+# Http auth
+$s_http_auth_realm = "Accés a Mantis";
+
+$s_bug = "comanda";
+$s_add_new_relationship = "Nova relació";
+$s_add_new_relationship_button = "Afegir";
+$s_this_bug = "Comanda actual";
+$s_relationship_added = "Relació afegida";
+$s_relationship_deleted = "Relació esborrada";
+$s_no_relationship = "sense relació";
+$s_relationship_replaced = "Relació reemplaçada";
+$s_replace_relationship_button = "Reemplaçar";
+$s_replace_relationship_sure_msg = "Ja existeix una relació entre els dos temes. Segur que vol reemplaçar-ho?";
+$s_relationship_with_parent = "Relació amb la comanda pare ";
+$s_delete_relationship_button = "Esborrar";
+$s_delete_relationship_sure_msg = "¿Segur que desitja esborrar aquesta relació?";
+$s_relationship_warning_blocking_bugs_not_resolved = "No tots els fills d'aquesta comanda estan resolts o tancats.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIó</b>. No tots els fills d'aquesta comanda estan resolts o tancats.<br>Abans de <b>tancar/resoldre</b> una comanda pare, totes les seves comandes filles han d'estar resoltes o tancades.";
+$s_create_child_bug_button = "Crear Clon";
+$s_bug_cloned_to = "Comanda clonada";
+$s_bug_created_from = "Comanda generada des de";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relació Gràfica";
+$s_relation_graph = "Relació Gràfica";
+$s_dependency_graph = "Dependència Gràfica";
+$s_vertical = "Vertical";
+$s_horizontal = "Horitzontal";
+$s_view_issue = "Vista de la comanda";
+
+# Source Control Integration
+$s_checkin = "Checkin";
+
+# Pemissions report
+$s_perm_rpt_capability = "Capacitat";
+$s_view = "Vista";
+$s_issues = "COMANDES";
+$s_report_issue = "Llistar una comanda ";
+$s_update_issue = "Modificar una comanda ";
+$s_monitor_issue = "Monitoritzar una comanda";
+$s_handle_issue = "Suportar una comanda ";
+$s_move_issue = "Moure una comanda";
+$s_delete_issue = "Esborrar una comanda";
+$s_reopen_issue = "Reobrir una comanda ";
+$s_view_private_issues = "Vista privada de les comandes ";
+$s_update_readonly_issues = "Modificar comandes de només lectura ";
+$s_update_issue_status = "Modificar estat de la comanda ";
+$s_set_view_status = "Posar l'estat de la vista (públic vs privat)";
+$s_update_view_status = "Modificar l'estat de la vista (públic vs privat)";
+$s_show_list_of_users_monitoring_issue = "Mostrar la llista d'usuaris monitoritzant una comanda ";
+$s_notes = "NOTES";
+$s_add_notes = "Afegir notes";
+$s_update_notes = "Modificar notes";
+$s_delete_note = "Esborrar nota";
+$s_view_private_notes = "Vista privada de notes";
+$s_news = "NOTÍCIES";
+$s_view_private_news = "Vista privada de notícies ";
+$s_manage_news = "Gestionar notícies";
+$s_view_list_of_attachments = "Vista de la Llista d'adjunts ";
+$s_download_attachments = "Baixar adjunts";
+$s_delete_attachments = "Esborrar adjunts ";
+$s_delete_attachment_button = "Esborrar";
+$s_delete_attachment_sure_msg = "Està segur que vol esborrar aquest adjunt?";
+$s_upload_issue_attachments = "Pujar adjunts a la comanda ";
+$s_filters = "filtres";
+$s_save_filters = "Salvar filtres";
+$s_save_filters_as_shared = "Salvar filtres com a compartits";
+$s_use_saved_filters = "Utilitzar filtres salvats";
+$s_create_project = "Crear projecte";
+$s_delete_project = "Esborrar projecte";
+$s_manage_project = "Gestionar projecte";
+$s_manage_user_access_to_project = "Gestionar accés d'usuari als projectes";
+$s_automatically_included_in_private_projects = "Inclosos automàticament a projectes privats";
+$s_project_documents = " DOCUMENTS DEL PROJECTE";
+$s_view_project_documents = "Vista documents del projecte";
+$s_upload_project_documents = "Pujar documents del projecte ";
+$s_link_custom_fields_to_projects = "Enllaçar camps personalitzats a projectes ";
+$s_sponsorships = "PATROCINADORS";
+$s_view_sponsorship_details = "Vista de detalls del Patrocinador";
+$s_view_sponsorship_total = "Vista total del Patrocinador";
+$s_sponsor_issue = "Informe del Patrocinador";
+$s_assign_sponsored_issue = "Assignar informe patrocinat";
+$s_handle_sponsored_issue = "Suportar informe patrocinat";
+$s_others = "ALTRES";
+$s_see_email_addresses_of_other_users = "veure adreces correu d'altres usuaris";
+$s_send_reminders = "Enviar recordatoris";
+$s_add_profiles = "Afegir perfils";
+$s_notify_of_new_user_created = "Notificar la creació d'un nou usuari";
+$s_email_notification = "CORREU NOTFICAT";
+$s_status_changed_to = "Estat canviat a ";
+$s_email_on_deleted = "Correu d'esborrat";
+$s_email_on_sponsorship_changed = "Correu del Patrocinador canviat";
+$s_email_on_relationship_changed = "Correu de la Relació canviada";
+
+# DHTML filters
+$s_loading = "Carregant...";
+
+# filter_api.php
+$s_between = "Entre";
+$s_on_or_before = "Ara o abans";
+$s_before = "Abans";
+$s_after = "Després";
+$s_on_or_after = "Ara o després";
+
+# wiki related strings
+$s_wiki = 'Wiki';
+?>

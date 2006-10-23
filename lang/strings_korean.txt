@@ -1,22 +1,27 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	# 한글 번역   aporie@kornet.net
-	# 추가 번역   torija@users.sourceforge.net
-	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
-	#             miren.info@gmail.com
-	#             yesdi@nate.com - (마지막 수정일: 2005/04/23)
-	# -------------------------------------------------
-	# $Revision: 1.91.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_korean.txt,v 1.91.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# Korean: aporie@kornet.net
+	# Korean: torija@users.sourceforge.net
+	# Korean: hardkoder@gmail.com - (마지막 수정일:2004/09/22)
+	# Korean: miren.info@gmail.com
+	# Korean: yesdi@nate.com - (마지막 수정일: 2005/04/23)
+	#
 	###########################################################################
+	# Korean strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.91.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:45 $
+	#
+	# $Id: strings_korean.txt,v 1.91.10.2 2006-10-23 07:14:45 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -176,93 +181,94 @@ $s_bugnote_description = '이슈노트 설명';
 $s_error_no_proceed = '이전 페이지로 돌아가려면 웹 브라우저에서 "뒤로" 버튼을 사용하세요. 이 오류에 대한 문제를 수정하거나 다른 동작을 선택하세요. 새로운 영역으로 이동하기 위해서는 메뉴의 옵션을 클릭하시면 됩니다.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = '오류: 이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
-$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 문제를 보고해 주시기 바랍니다.';
-$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = '오류: 접근이 거부되었습니다.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = '오류: 파일 올리기 실패.  현재 PHP 설치시 허용된 파일 크기보다 업로드하려는 파일이 큰 것 같습니다.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = '오류: 이 페이지에 필요한 인자를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '오류: 이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '오류: \'%s\' 설정 옵션이 없습니다.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '오류: \'%s\' 문자열이 없습니다.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = '오류: 이슈노트를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = '오류: 프로젝트를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '오류: 데이타베이스 필드를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= '오류: FTP 서버에 연결할 수 없습니다.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '오류: 이슈 핸들러가 이 상태의 이슈를 다루기에 충분한 접근 권한을 가지고 있지 않습니다.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '오류: 이미 사용중인 프로젝트 이름입니다.  다른 이름을 사용하세요.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '오류: 올바르지 않은 프로젝트 이름입니다. 프로젝트 이름은 비워둘 수 없습니다.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= '오류: 사용자를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '오류: 브라우저에 저장된 로그인 정보는 유효하지 않습니다. 계정이 삭제됐습니까?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '오류: 이 사용자는 설정 화면이 없습니다.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= '오류: 뉴스를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '오류: 비밀번호가 일치하지 않습니다.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= '오류: 문자열이 아닌 배열이 입력되어야 합니다.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '오류: 배열이 아닌 문자열이 입력되어야 합니다.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '오류: 숫자가 입력되어야 합니다.(%s).';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '오류: 이슈를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_GENERIC] = '이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL 오류 발생. 문제를 보고해 주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_REPORT] = '입력내용에 오류가 발생했습니다.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '파일이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '허용되지 않는 파일 종류입니다.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '파일 중복. 먼저 파일을 삭제하세요.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '같은 이름의 프로젝트가 이미 존재합니다.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '필수 입력 필드 누락, 입력사항을 확인하세요.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = '접근이 거부되었습니다.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = '파일 올리기 실패.  현재 PHP 설치시 허용된 파일 크기보다 업로드하려는 파일이 큰 것 같습니다.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = '이 페이지에 필요한 인자를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '\'%s\' 설정 옵션이 없습니다.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '\'%s\' 문자열이 없습니다.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = '이슈노트를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = '프로젝트를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '데이타베이스 필드를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FTP 서버에 연결할 수 없습니다.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = '이슈 핸들러가 이 상태의 이슈를 다루기에 충분한 접근 권한을 가지고 있지 않습니다.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '이미 사용중인 프로젝트 이름입니다.  다른 이름을 사용하세요.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '올바르지 않은 프로젝트 이름입니다. 프로젝트 이름은 비워둘 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= '사용자를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '브라우저에 저장된 로그인 정보는 유효하지 않습니다. 계정이 삭제됐습니까?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '이 사용자는 설정 화면이 없습니다.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= '뉴스를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '비밀번호가 일치하지 않습니다.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= '문자열이 아닌 배열이 입력되어야 합니다.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '배열이 아닌 문자열이 입력되어야 합니다.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '숫자가 입력되어야 합니다.(%s).';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= '이슈를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '오류: 잘못된 이메일.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '오류: 프로파일이 없습니다.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '오류: 업로드 금지된 파일 형식입니다.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= '오류: 중복된 파일입니다. 먼저 이 파일을 삭제하세요.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '오류: 잘못된 업로드 경로. 디렉토리가 존재하지 않거나 웹서버에서 쓰기 권한이 없습니다.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '오류: 파일이 업로드되지 못했습니다. 이전으로 돌아가서 파일을 선택후 업로드를 눌러주세요.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '오류: 업로드된 파일을 파일저장 디렉토리로 이동시킬 수 없습니다. 디렉토리가 존재하지 않거나, 웹서버에 쓰기가 가능하지 않습니다.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= '오류: 중복으로 이슈를 설정할 수 없습니다.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '오류: 커스텀 필드를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '오류: 중복된 필드 이름 입니다.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '오류: 적어도 한 프로젝트에서는 여전히 이 필드를 사용하고 있습니다.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '오류: 잘못된 필드 값';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '오류: 잘못된 커그텀 필드 정의';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= '오류: LDAP 인증 실패';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '오류: LDAP 서버 연결 실패';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= '오류: LDAP 사용자 갱신 오류.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '오류: LDAP 사용자 레코드가 발견되지 않습니다.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '오류: 데이타베이스 연결 오류.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= '잘못된 이메일.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = '프로파일이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= '업로드 금지된 파일 형식입니다.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= '중복된 파일입니다. 먼저 이 파일을 삭제하세요.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '잘못된 업로드 경로. 디렉토리가 존재하지 않거나 웹서버에서 쓰기 권한이 없습니다.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '파일이 업로드되지 못했습니다. 이전으로 돌아가서 파일을 선택후 업로드를 눌러주세요.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '업로드된 파일을 파일저장 디렉토리로 이동시킬 수 없습니다. 디렉토리가 존재하지 않거나, 웹서버에 쓰기가 가능하지 않습니다.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= '중복으로 이슈를 설정할 수 없습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '커스텀 필드를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '중복된 필드 이름 입니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '적어도 한 프로젝트에서는 여전히 이 필드를 사용하고 있습니다.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '잘못된 필드 값';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '잘못된 커그텀 필드 정의';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP 인증 실패';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP 서버 연결 실패';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP 사용자 갱신 오류.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP 사용자 레코드가 발견되지 않습니다.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '데이타베이스 연결 오류.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '데이타베이스 질의 오류.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = '데이타베이스 셀렉션 실패.  데이터베이스로부터 다음과 같은 에러메세지를 수신했습니다. #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '오류: 복사 실행이 명시되지 않음.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '오류: 카테고리를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '오류: 버전정보를 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '오류: 사용자 이름 오류.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '오류: 접근 권한이 없는 사용자입니다.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '오류: 이 실명은 다른 사용자의 아이디로 사용되고 있습니다. 다른걸로 바꿔주세요.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '오류: Sponsorship 지원기능이 꺼져 있습니다.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '오류: %d Sponsorship을 찾을 수 없습니다.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '오류: Sponsorship(%s)이 최소량 (%s) 이하입니다.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '오류: 핸들러가 후원되고 있는 이슈들을 다루기에 요구되는 접근권한을 가지고 있지 않습니다.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '카테고리 중복.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '복사 실행이 명시되지 않음.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '카테고리를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '버전 중복.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '버전정보를 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '사용자 이름 오류.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '접근 권한이 없는 사용자입니다.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '이 실명은 다른 사용자의 아이디로 사용되고 있습니다. 다른걸로 바꿔주세요.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship 지원기능이 꺼져 있습니다.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '%d Sponsorship을 찾을 수 없습니다.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship(%s)이 최소량 (%s) 이하입니다.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '핸들러가 후원되고 있는 이슈들을 다루기에 요구되는 접근권한을 가지고 있지 않습니다.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '접근거부: 지정된 후원 이슈들은 더 높은 접근권한을 요구합니다.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '오류: 스폰서의 전자메일 주소가 없습니다. 프로파일을 갱신해 주세요.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '오류: 설정 옵션 \'%s\'이 잘못된 값 \'%s\'을 가지고 있습니다.';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '오류: 해당 액션이 수행될 수 없습니다. - \'%d\'번 이슈가 읽기 전용입니다.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "오류: 두 이슈사이에 이미 관계가 설정되어 있습니다.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "오류: 관계가 설정되어 있지 않습니다.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '스폰서의 전자메일 주소가 없습니다. 프로파일을 갱신해 주세요.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '설정 옵션 \'%s\'이 잘못된 값 \'%s\'을 가지고 있습니다.';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '해당 액션이 수행될 수 없습니다. - \'%d\'번 이슈가 읽기 전용입니다.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "두 이슈사이에 이미 관계가 설정되어 있습니다.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "관계가 설정되어 있지 않습니다.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "접근 거부: %d번 이슈가 더 높은 접근 권한을 요구합니다.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "오류: 이슈는 자기자신과 관계를 맺을 수 없습니다.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '오류: 확인용 해쉬가 일치하지 않습니다. 재시도하십시요.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '오류: \'비밀번호 찾기\' 기능이 사용 가능하지 않습니다.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '오류: 비밀번호를 초기화하려면 이메일을 적어야 합니다.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '오류: 입력된 정보가 바르지 않습니다. 해당 계정으로 등록된 적이 없습니다.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '오류: 이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '오류: 요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "이슈는 자기자신과 관계를 맺을 수 없습니다.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = '확인용 해쉬가 일치하지 않습니다. 재시도하십시요.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'비밀번호 찾기\' 기능이 사용 가능하지 않습니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '비밀번호를 초기화하려면 이메일을 적어야 합니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '입력된 정보가 바르지 않습니다. 해당 계정으로 등록된 적이 없습니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '해당 동작은 서브프로젝트 계층구조에서 루프를 생성합니다.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '시스템 관리자만이 접근권한을 변경할 수 있습니다.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = '오류: 계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
-$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
+$s_login_error = '계정이 사용 정지 됐거나, 사용자이름/비밀번호가 올바르지 않습니다.';
+$s_login_cookies_disabled = '쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
 # General Strings
 $s_go_back = '뒤로';
@@ -447,7 +453,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -604,6 +611,9 @@ $s_closed_bug_button = '이슈 폐쇄';
 $s_bugnote_updated_msg = '이슈노트가 수정되었습니다....';
 $s_edited_on = '수정날짜: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '로그인';
 
@@ -741,6 +751,16 @@ $s_reopen_resolution = '재오픈된 이슈가 설정되어 있는 것에 대한 해결책';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '프로젝트가 추가되었습니다....';
@@ -1049,9 +1069,12 @@ $s_viewing_bugs_title = '이슈 보기';
 $s_updated = '최종 갱신';
 $s_sticky = 'Sticky 이슈 보기';
 $s_sort = '정렬 by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '없음';
+$s_current = 'current';
 $s_search ='검색';
 $s_view_prev_link = '이전';
 $s_view_next_link = '다음';
@@ -1287,8 +1310,9 @@ $s_loading = '불러오는 중...';
 $s_between = '사이' ;
 $s_on_or_before = '동안 또는 이전' ;
 $s_before = '이전' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '이후' ;
 $s_on_or_after = '동안 또는 이후' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

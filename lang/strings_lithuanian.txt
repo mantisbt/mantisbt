@@ -1,20 +1,24 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	##########################################################################
+	#
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
-	# -------------------------------------------------
-	# $Revision: 1.31.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.31.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
+	# Lithuanian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.31.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:45 $
+	#
+	# $Id: strings_lithuanian.txt,v 1.31.10.2 2006-10-23 07:14:45 vboctor Exp $
+	###########################################################################
+	#
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
 	# bug - problema (riktas)
@@ -26,10 +30,11 @@
 	# cookie - slapukas (slapukas)
 	# developer - sprendëjas (-)
 	###########################################################################
+
 ?>
 <?php
 # Charset
-$s_charset = 'Windows-1257';
+$s_charset = 'windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Perkelti';
@@ -201,6 +206,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Failo ákëlimas nepavyko.  Greièiausia
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Reikalingas parametras nerastas.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toks vartotojo vardas jau egzistuoja.  Gráþkite atgal ir pasirinkite kità.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigûracijos parametras \'%s\' nerastas.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Eilutë \'%s\' nerasta.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Komantaras nerastas.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektas nerastas.';
@@ -268,8 +274,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Neteisingas arba jau 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maksimalus laukianèiø praðymø skaièius pasiektas. Susisiekite su administratoriumi';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Neteisingas vartotojo vardas ir/arba slaptaþodis, arba vartotojo vardas iðjungtas/blokuojamas.';
 $s_login_cookies_disabled = 'Jûsø narðyklë nepalaiko sausainëliø arba juos atmeta.';
 
@@ -341,10 +347,10 @@ $s_email_notification_title_for_action_related_to_relationship_added = "The foll
 $s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
@@ -456,7 +462,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -613,6 +620,9 @@ $s_closed_bug_button = 'Uþdaryti klaidà';
 $s_bugnote_updated_msg = 'Komentaras sëkmingai atnaujintas...';
 $s_edited_on = 'redaguotas: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Norëdami prisijungti spauskite èia';
 
@@ -689,20 +699,20 @@ $s_last_visit = 'Paskutinis apsilankymas';
 $s_edit_user_link = 'Redaguoti vartotojà';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
 $s_colour_coding = 'In the table below, the following color code applies:';
 $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
@@ -725,8 +735,8 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
@@ -750,6 +760,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projektas sëkmingai sukurtas...';
@@ -1058,9 +1078,12 @@ $s_viewing_bugs_title = 'Klaidø perþiûra';
 $s_updated = 'Atnaujinta';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'nëra';
+$s_current = 'current';
 $s_search ='Ieðkoti';
 $s_view_prev_link = 'Rodyti ankstesná';
 $s_view_next_link = 'Rodyti sekantá';
@@ -1296,8 +1319,9 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

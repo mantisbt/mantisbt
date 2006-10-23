@@ -1,0 +1,1315 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+	#
+	# Bulgarian: Alex Stanev, alex <at> stanev.org
+	# Bulgarian: Mihaela Georgieva, helicopterbg <at> gmail.com
+	# Bulgarian: Svetlin Stefanov, desertwaste <at> gmail.com
+	#
+	###########################################################################
+	# Bulgarian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.7.2.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:52 $
+	#
+	# $Id: strings_bulgarian.txt,v 1.7.2.2 2006-10-23 07:14:52 vboctor Exp $
+	###########################################################################
+
+?>
+<?php
+# Charset
+$s_charset = 'windows-1251';
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Преместване';
+$s_actiongroup_menu_copy = 'Копиране';
+$s_actiongroup_menu_assign = 'Назначаване';
+$s_actiongroup_menu_close = 'Приключване';
+$s_actiongroup_menu_delete = 'Изтриване';
+$s_actiongroup_menu_resolve = 'Решаване';
+$s_actiongroup_menu_update_priority = 'Обновяване на приоритет';
+$s_actiongroup_menu_update_status = 'Обновяване на статус';
+$s_actiongroup_menu_update_view_status = 'Обновяване преглед';
+$s_actiongroup_menu_update_category = 'Обновяване на категория';
+$s_actiongroup_menu_set_sticky = 'Проблематичен';
+$s_actiongroup_menu_update_field = 'Обновяване на %s';
+$s_actiongroup_bugs = 'Избрани проблеми';
+
+# new strings:
+$s_all_projects = 'Всички проекти';
+$s_move_bugs = 'Преместване на проблеми';
+$s_operation_successful = 'Операцията е успешна';
+$s_date_order = 'Подреждане по дата';
+$s_print_all_bug_page_link = 'Отпечатване на отчет';
+$s_csv_export = 'CSV Експорт';
+$s_login_anonymously = 'Вход като гост';
+$s_anonymous = 'Гост';
+$s_jump_to_bugnotes = 'Преглед на Бележките';
+$s_public_project_msg = 'Проектът е ПУБЛИЧЕН. Всички потребители имат достъп.';
+$s_private_project_msg = 'Проектът е ЧАСТЕН. Само администраторите и ръчно-добавените потребители имат достъп.';
+$s_access_level_project = 'Ниво на достъп за проекта';
+$s_view_submitted_bug_link = 'Преглед на изпратения проблем';
+$s_assigned_projects = 'Назначени проекти';
+$s_unassigned_projects = 'Неназначени проекти';
+$s_print = 'Печат';
+$s_jump = 'Избор на проблем';
+$s_copy_users = 'Копиране на потребители';
+$s_copy_categories_from = 'Копиране на категории от';
+$s_copy_categories_to = 'Копиране на категории в';
+$s_copy_users_from = 'Копиране на потребители от';
+$s_copy_users_to = 'Копиране на потребители в';
+$s_bug_history = 'История на проблема';
+$s_field = 'Поле';
+$s_old_value = 'Стара стойност';
+$s_new_value = 'Нова стойност';
+$s_date_modified = 'Дата на редакция';
+$s_bugnote = 'Бележка';
+$s_change = 'Промяна';
+$s_bugnote_view_state = 'Състояние на преглед на бележката';
+$s_bug_monitor = 'Проблемът се проследява';
+$s_bug_end_monitor = 'Спиране проследяването на проблема';
+$s_announcement = 'Обява';
+$s_stays_on_top = 'Стои най-отгоре';
+$s_delete_bugnote_button = 'Изтриване на бележка';
+$s_delete_bugnote_sure_msg = 'Изтриване на бележката?';
+$s_bug_relationships = 'Релации';
+$s_empty_password_sure_msg = 'Потребителят има празна парола. Потвърждаване на празна парола?';
+$s_empty_password_button = 'Използване на празна парола';
+
+$s_duplicate_of = "Дубликат на";
+$s_has_duplicate = "Съществува дубликат";
+$s_related_to = "Отнася се до";
+$s_dependant_on = "Зависи от";
+$s_blocks = "Производен на";
+
+$s_new_bug = 'Нов проблем';
+$s_bugnote_added = 'Бележката е добавена';
+$s_bugnote_edited = 'Бележката е редактирана';
+$s_bugnote_deleted = 'Бележката е изтрита';
+$s_summary_updated = 'Краткото описание е обновено';
+$s_description_updated = 'Описанието е обновено';
+$s_additional_information_updated = 'Допълнителната информация е обновена';
+$s_steps_to_reproduce_updated = 'Стъпките за репродуциране са обновени';
+$s_file_added = 'Файлът е добавен';
+$s_file_deleted = 'Файлът е изтрит';
+$s_bug_deleted = 'Проблемът е изтрит';
+
+$s_make_private = 'Промени на Частен';
+$s_make_public = 'Промени на Публичен';
+
+$s_create_new_project_link = 'Нов проект';
+
+$s_login_link = 'Вход';
+
+# bug_actiongroup_page.php : 'Количество обработка.';
+$s_bug_actiongroup_failed = 'Няма права за извършване на действието върху следните проблеми: ';
+$s_bug_actiongroup_access = 'Няма права за извършване на действието';
+$s_bug_actiongroup_status = 'Проблемът не може да бъде променен в искания статус';
+$s_bug_actiongroup_category = 'Проблемът не може да бъде променен в исканата категория';
+$s_close_bugs_conf_msg = 'Приключване на проблемите?';
+$s_delete_bugs_conf_msg = 'Изтриване на проблемите?';
+$s_move_bugs_conf_msg = 'Преместване на проблемите в ';
+$s_copy_bugs_conf_msg = 'Копиране на проблемите в ';
+$s_assign_bugs_conf_msg = 'Назначаване на проблемите на ';
+$s_resolve_bugs_conf_msg = 'Резолюция на проблема';
+$s_priority_bugs_conf_msg = 'Приоритет на проблема';
+$s_status_bugs_conf_msg = 'Статус на проблема';
+$s_view_status_bugs_conf_msg = 'Визуален статус';
+$s_category_bugs_conf_msg = 'Категория на проблема';
+$s_set_sticky_bugs_conf_msg = 'Промяна на проблематичността на тези проблеми?';
+$s_close_group_bugs_button = 'Приключване на проблеми' ;
+$s_delete_group_bugs_button = 'Изтриване на проблеми' ;
+$s_move_group_bugs_button = 'Преместване на проблеми' ;
+$s_copy_group_bugs_button = 'Копиране на проблеми' ;
+$s_assign_group_bugs_button = 'Назначаване на проблеми' ;
+$s_resolve_group_bugs_button = 'Решаване на проблеми' ;
+$s_priority_group_bugs_button = 'Обновяване на приоритета' ;
+$s_status_group_bugs_button = 'Обновяване на статуса' ;
+$s_category_group_bugs_button = 'Обновяване на категорията';
+$s_view_status_group_bugs_button = 'Обновяване на визуализиращ статус';
+$s_set_sticky_group_bugs_button = 'Установяване на проблематичност';
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Синтетична диаграма по Статус';
+$s_graph_imp_priority_title = 'Синтетична диаграма по Приоритет';
+$s_graph_imp_severity_title = 'Синтетична диаграма по Значимост';
+$s_graph_imp_category_title = 'Синтетична диаграма по Категория';
+$s_graph_imp_resolution_title = 'Синтетична диаграма по Резолюция';
+$s_by_status_pct = 'По Статус (%)';
+$s_by_priority_pct = 'По Приоритет (%)';
+$s_by_severity_pct = 'По Значимост (%)';
+$s_by_category_pct = 'По Категория (%)';
+$s_by_resolution_pct = 'По Резолюция (%)';
+$s_by_severity_mix = 'По Значимост и Статус';
+$s_by_priority_mix = 'По Приоритет и Статус';
+$s_by_resolution_mix = 'По Резолюция и Статус';
+$s_synthesis_link = 'Обобщена справка';
+$s_status_link = 'По Статус';
+$s_priority_link = 'По Приоритет';
+$s_severity_link = 'По Значимост';
+$s_category_link = 'По Категория';
+$s_resolution_link = 'По Резолюция';
+$s_legend_still_open = 'Все още отворен';
+$s_legend_resolved = 'Решен';
+$s_legend_assigned = 'Назначен';
+$s_legend_total = 'Общо';
+$s_legend_opened = 'Отворен';
+$s_legend_closed = 'Приключен';
+$s_legend_reported = 'Съобщен';
+$s_cumulative = 'С натрупване';
+$s_not_enough_data = 'Няма достатъчно данни';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Визуализация само на избраните';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Избор на полета за печат';
+$s_printing_options_link = 'Настройки за печат';
+
+# word and excel export
+$s_bugnote_title = 'Заглавие на бележката' ;
+$s_bugnote_date = 'Дата';
+$s_bugnote_description = 'Описание';
+
+$s_error_no_proceed = 'Чрез избор на бутон "Back" системата се връща на предишната страница. Поправете проблемите, изброени по-горе или изберете друго действие.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'Поява на неидентифициран проблем. Моля обърнете се към системния администратор.';
+$MANTIS_ERROR[ERROR_SQL] = 'Грешка при изпълнение на SQL заявка. Моля обърнете се към';
+$MANTIS_ERROR[ERROR_REPORT] = 'Грешка в отчета.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не е зададен файл';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Този файлов тип е забранен за зареждане';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Няма такава директория. Моля  проверете проектните настройки.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Зареденият файл вече съществува.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Вече съществува проект с такова име.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Задължителното поле \'%s\' е празно. Моля допълнете формата.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Профилът е защитен. Нямате право на достъп докато не се премахне защитата.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Достъпът отказан.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Проблем при зареждането на файла. Каченият файл не се разпознава от Mantis. Моля, проверете проектовите настройки';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Проблем при зареждането на файла, поради опит за качване на твърде голям файл. Моля, проверете настройките на PHP инсталацията.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Задължителният параметър към тази страница (%s) не е открит.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Потребителското име е вече заето. Моля изберете друго.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Конфигурационната опция(ред в конфигурационния файл) \'%s\' не е открита.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Низът \'%s\' не е открит.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Бележката не е открита.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проектът не е открит.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Полето в базата \'%s\' не е открито.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Проблем при връзката с FTP сървъра.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Служителят, който е избран за закриване на проблема няма необходимите права, за да работи по проблем с такъв статус.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Проект с такова име вече съществува. Моля, изберете ново име.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Невалидно име на проекта. Името на проекта не може да бъде празно.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Потребителят не е открит.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Информацията за достъп, съхранявана от браузъра ви (чрез cookies)е некоректна. Моля, обърнете се към системния администратор.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Потребителските настройки не са открити.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Новината не е открита.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Паролата не съвпада.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Изисква се масив, вместо това е получен низ за %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Изисква се низ, вместо това е получен масив за %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Стойността не е числова: %s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Проблемът %d не е открит.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Филтърът %d не е открит.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Филтърът използва твърде стар синтаксис, за да бъде автоматично преработен. Моля създайте го наново.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Неправилен email адрес.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Профилът не е открит.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Този тип файл е забранен за зареждане.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Опитвате се да заредите файл, който вече съществува.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Грешен път за зареждане на файловете. Директорията не съществува или потребителят на уеб сървъра няма права да пише в нея.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Няма посочен файл за зареждане.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Зареденият файл не може да бъде преместен в директорията за съхранение. Директорията не съществува или потребителят на уеб сървъра няма права да пише в нея.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Не можете да посочите като дубликат същия проблем.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Потребителското поле не е открито';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Потребителско поле с такова име вече съществува.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Поне един от проектите все още използва това потребителско поле.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Грешна стойност.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Некоректна дефиниция на потребителското поле.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP оторизацията неуспешна';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Връзката с LDAP сървъра неуспешна';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Обновяването на LDAP записа неуспешно.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Неоткрит LDAP запис за потребителя.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Връзката с базата данни неуспешна. Върната грешка #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Търсенето в базата неуспешно. Върната грешка #%d: %s за заявката: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Изборът на базата данни неуспешен. Върната грешка #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Категория с това име вече съществува.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Липсва зададено действие при копиране на категорията.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Категорията не е открита.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Версия с това име вече съществува.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версията \'%s\' не е открита.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Потребителското име е невалидно. Потребителските имена могат да съдържат единствено букви, цифри, тирета, интервали и символи за подчертаване.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Потребителят няма необходимото ниво на достъп';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Избраното потребителско име съвпада с името на друг потребител.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Поддръжката на спонсорство не е включена.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Спонсорството %d не е открито.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Спонсорстовото (%s) е под минималното количество(%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Служителят, избран за закриване на проблема няма необходимите права, за да работи по спонсорирани проблеми.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Достъпът отказан: Назначаването на спонсориран проблем изисква по-високо ниво на достъп.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Спонсорът не е задал email адрес. Моля, обновете потребителския профил.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Конфигурационната опция \'%s\' съдържа некоректна стойност \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Действието не може да бъде извършено, защото проблем \'%d\' е забранен за редакция"';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Вече съществува  дефинирана релация между тези два проблема.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Релацията между проблемите не е открита.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Достъпът отказан: Проблемът %d изисква по-високо ниво на достъп.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Проблемът не може да бъде свързан със себе си.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Кодът за потвърждение не съвпада. Моля опитайте отново.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Функционалността \'забравена парола\' не е включена.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'За презаписване на паролата, трябва да бъде зададен email адрес';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Подадените данни не съвпадат с никои от тези на регистрираните потребители!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Адресът за потвърждение е невалиден или вече е бил използван веднъж. Моля регистрирайте се отново.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Максималният брой паралелни заявки е достигнат. Моля, обърнете се към системния администратор';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Тази операция ще доведе до цикъл в подпроектната йерархия.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Забрана за промяна нивото на достъп на единствения АДМИНИСТРАТОР на системата.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+
+$s_login_error = 'Профилът е дезактивиран, блокиран или е въведена неправилна комбинация от потребителско име/парола.';
+$s_login_cookies_disabled = 'Браузърът не може да работи с cookies или не е настроен да ги приема.';
+
+# General Strings
+$s_go_back = 'Назад';
+$s_proceed = 'Напред';
+
+$s_switch = 'Избор';
+$s_logged_in_as = 'Текущ потребител';
+
+$s_prefix_for_deleted_users = 'потребител';
+
+$s_administrator = 'администратор';
+$s_myself = "Себе си";
+$s_default_access_level = 'Ниво на достъп по подразбиране';
+
+$s_issue_status_percentage = 'Статус на проблем (%)';
+
+# Enum Strings
+$s_access_levels_enum_string = '10:наблюдател,25:кореспондент,40:updater,55:разработчик,70:мениджър,90:администратор';
+$s_project_status_enum_string = '10:в развитие,30:краен продукт,50:стабилен,70:остарял';
+$s_project_view_state_enum_string = '10:публичен,50:частен';
+$s_view_state_enum_string = '10:публичен,50:частен';
+
+$s_priority_enum_string = '10:няма,20:минимален,30:нормален,40:висок,50:спешен,60:неотложен';
+$s_severity_enum_string = '10:нова функционалност,20:обикновен,30:текст,40:настройка,50:незначителен,60:значителен,70:срив,80:блокира';
+$s_reproducibility_enum_string = '10:винаги,30:понякога,50:случайно,70:не е изпробвано,90:невъзпроизводима,100:не мога да определя';
+$s_status_enum_string = '10:нов,20:отворен наново,30:приет,40:потвърден,50:назначен,80:решен,90:приключен';
+$s_resolution_enum_string = '10:отворен,20:решен,30:отворен наново,40:невъзпроизводим,50:нерешим,60:дубликат,70:не се налага корекция,80:временно преустановен,90:не може да се реши';
+$s_projection_enum_string = '10:няма,30:откъсване,50:минимална преработка,70:основна преработка,90:редизайн';
+$s_eta_enum_string = '10:няма,20:< 1 ден,30:2-3 дни,40:< 1 седмица,50:< 1 месец,60:> 1 месец';
+$s_sponsorship_enum_string = '0:Неплатен,1:Поискан,2:Платен';
+
+# Email Strings
+$s_new_account_subject = 'Регистрация на нов профил';
+$s_new_account_greeting = 'Благодарим Ви за регистрацията. Профилът Ви е с потребителско име \'';
+$s_new_account_greeting2 = '\'. За приключване на регистрацията, посетете следния адрес (убедете се, че е въведен на един ред) и въведете своя парола за достъп:';
+$s_new_account_username = 'Потребителско име: ';
+$s_new_account_message = 'Ако не сте регистрирани, пропуснете това съобщение.' . "\n\n";
+$s_new_account_do_not_reply = 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ';
+$s_new_account_email = 'Email: ';
+$s_new_account_IP = 'IP адрес: ';
+$s_new_account_signup_msg = 'Създаден е следният профил:';
+
+$s_reset_request_msg = 'Изискана е смяна на парола чрез email. Ако това не сте Вие, пропуснете това съобщение.' . "\n\n" . 'Ако Вие сте изискали смяната, посетете следния адрес за да промените паролата:';
+$s_reset_request_in_progress_msg = 'Ако са въведени потребителско име и email адрес, валидни за профила, ще бъде изпратено потвърждаващо писмо на този email адрес. Следвайте инструкциите в него, за да смените паролата на вашия профил.';
+
+$s_email_notification_title_for_status_bug_new = 'Следният проблем е с променен статус НОВ (отново)';
+$s_email_notification_title_for_status_bug_feedback = 'Следният проблем е ОТВОРЕН НАНОВО.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Следният проблем е ПРИЗНАТ.';
+$s_email_notification_title_for_status_bug_confirmed = 'Следният проблем е ПОТВЪРДЕН.';
+$s_email_notification_title_for_status_bug_assigned = 'Следният проблем е НАЗНАЧЕН.';
+$s_email_notification_title_for_status_bug_resolved = 'Следният проблем е РЕШЕН.';
+$s_email_notification_title_for_status_bug_closed = 'Следният проблем Е ПРИКЛЮЧЕН.';
+
+$s_email_notification_title_for_action_bug_submitted = 'Следният проблем е СЪОБЩЕН.';
+$s_email_notification_title_for_action_bug_assigned = 'Следният проблем е НАЗНАЧЕН.';
+$s_email_notification_title_for_action_bug_reopened = 'Следният проблем е ОТВОРЕН НАНОВО.';
+$s_email_notification_title_for_action_bug_deleted = 'Следният проблем е ИЗТРИТ.';
+$s_email_notification_title_for_action_bug_updated = 'Следният проблем e ОБНОВЕН.';
+$s_email_notification_title_for_action_sponsorship_added = 'Следният проблем е СПОНСОРИРАН.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Спонсорството на следния проблем е модифицирано.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Спонсорството на следния проблем е оттеглено.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'Към този проблем е добавена БЕЛЕЖКА.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Следният проблем е маркиран като ДУБЛИКАТ на %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Проблемът %s е маркиран като ДУБЛИКАТ на следния проблем.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Следният проблем е маркиран като СВЪРЗАН с %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Следният проблем е маркиран като ЗАВИСИМ от %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Следният проблем е маркиран като ПОТОМЪК на %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Следният проблем е премахнат като ДУБЛИКАТ на проблем %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Проблемът %s е премахнат като ДУБЛИКАТ на следния проблем.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Следният проблем е маркиран като НЕСВЪРАЗАН с %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Следният проблем е премахнат като ЗАВИСИМ от %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Следният проблем е премахнат като ПОТОМЪК на %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "СВЪРЗАНЯТ проблем %s е РЕШЕН.";
+$s_email_notification_title_for_action_relationship_child_closed = "СВЪРЗАНИЯТ проблем %s е ПРИКЛЮЧЕН.";
+
+$s_email_reporter = 'Съобщен От';
+$s_email_handler = 'Определен На';
+$s_email_project = 'Проект';
+$s_email_bug = 'ID';
+$s_email_category = 'Категория';
+$s_email_reproducibility = 'Възпроизводимост';
+$s_email_severity = 'Значимост';
+$s_email_priority = 'Приоритет';
+$s_email_status = 'Статус';
+$s_email_resolution = 'Резолюция';
+$s_email_duplicate = 'Дубликат';
+$s_email_fixed_in_version = 'Решен във версия';
+$s_email_date_submitted = 'Дата на съобщаване';
+$s_email_last_modified = 'Последна промяна';
+$s_email_summary = 'Кратко описание';
+$s_email_description = 'Описание';
+
+# account_delete.php
+$s_account_protected_msg = 'Профилът е защитен. Забрана за промяна на настройки...';
+$s_account_removed_msg = 'Профилът е премахнат...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Изтриване на профил?';
+$s_delete_account_button = 'Изтриване на профила';
+
+# account_page.php
+$s_manage_profiles_link = 'Профили';
+$s_change_preferences_link = 'Настройки';
+$s_edit_account_title = 'Редакция на профил';
+$s_username = 'Потребителско име';
+$s_realname = 'Име';
+$s_email = 'Email';
+$s_password = 'Парола';
+$s_no_password_change = 'Паролата е контролирана от друга система, не може да бъде променена от тук.';
+$s_confirm_password = 'Потвърждаване на паролата';
+$s_access_level = 'Ниво на достъп';
+$s_update_user_button = 'Обновяване на профил';
+$s_verify_warning = 'Данните от профила са проверени. Полученото потвърждаващото писмо е невалидно.';
+$s_verify_change_password = 'Изисква се въвеждането на парола за обратен достъп до системата.';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Настройки на профил';
+$s_default_project = 'Проект';
+$s_advanced_report = 'Разширена информация';
+$s_advanced_view = 'Разширен изглед';
+$s_advanced_update = 'Разширено обновяване';
+$s_refresh_delay = 'Автоматично опресняване';
+$s_redirect_delay = 'Автоматично пренасочване';
+$s_with_minimum_severity = 'С минимално ниво';
+$s_bugnote_order = 'Ред на сортиране на бележките';
+$s_bugnote_order_asc = 'Растящ';
+$s_bugnote_order_desc = 'Намаляващ';
+$s_email_on_new = 'Изпращане на еmail при получаване на НОВ проблем';
+$s_email_on_assigned = 'Изпращане на email при смяна на служителя, избран за закриване на проблема';
+$s_email_on_feedback = 'Изпращане на еmail при Наново отворен проблем';
+$s_email_on_resolved = 'Изпращане на еmail при Решен проблем';
+$s_email_on_closed =   'Изпращане на еmail при Приключен проблем';
+$s_email_on_reopened = 'Изпращане на еmail при Наново Отворен проблем';
+$s_email_on_bugnote_added = 'Изпращане на еmail при Добавена бележка';
+$s_email_on_status_change = 'Изпращане на еmail при Смяна на статус';
+$s_email_on_priority_change = 'Изпращане на еmail при Смяна на приоритет';
+$s_email_bugnote_limit = 'Лимит на брой еmail-и';
+$s_language = 'Език';
+$s_update_prefs_button = 'Запазване на зададените настройки';
+$s_reset_prefs_button = 'Запазване на първоначалните настройки';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Първоначалните настройки са запазени';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Зададените настройки са запазени...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Профилът е добавен...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Изтриване на профил...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Редактиране на профил';
+$s_platform = 'Платформа';
+$s_operating_system = 'Операционна система';
+$s_additional_description = 'Допълнително описание';
+$s_update_profile_button = 'Обновяване на профил';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Профилът е обновен...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Прибавяне на профил';
+$s_add_profile_button = 'Прибавяне на профил';
+$s_edit_or_delete_profiles_title = 'Редактиране или изтриване на профили';
+$s_edit_profile = 'Редактиране на профил';
+$s_make_default = 'Настройване по подразбиране';
+$s_delete_profile = 'Изтриване на профил';
+$s_select_profile = 'Избор на профил';
+$s_submit_button = 'Подаване';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Профилът е обновен ...';
+
+# account_sponsor_page.php
+$s_my_sponsorship = 'Моите спонсорства';
+$s_update_sponsorship_button = 'Смяна на статуса на плащане';
+$s_no_sponsored = 'Няма спонсорирани проблеми, назначени на ваше име.';
+$s_own_sponsored = 'Спонсорирани от вас проблеми:';
+$s_issues_handled = 'Спонсорирани проблеми, които са Ви били назначени:';
+$s_no_own_sponsored = 'Няма спонсорирани от Вас проблеми.';
+$s_sponsor = 'Спонсор';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_amount = 'Сума';
+$s_total_owing = 'Дължимо общо';
+$s_total_paid = 'Платено общо';
+$s_sponsor_hide = 'Скрий решени и платени';
+$s_sponsor_show = 'Покажи всички';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Информацията за плащане е обновена.';
+
+# account_update.php
+$s_account_updated_msg = 'Профилът е обновен успешно...';
+$s_email_updated = 'Email адресът е обновен успешно';
+$s_realname_duplicated = 'Съществува друг потребител с това име';
+$s_realname_updated = 'Името е обновено успешно';
+$s_password_updated = 'Паролата е обновена успешно';
+
+# adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'Избраните проблеми са от различни проекти. Следните параметри засягат настройките на всички проекти. Ако това не е вярно, повторете операцията с по-малък брой проблеми.';
+
+# bug_assign.php
+$s_bug_assign_msg = 'Проблемът е назначен успешно...';
+
+# bug_change_status_page.php
+$s_new_bug_title = 'Нов проблем';
+$s_feedback_bug_title = 'Отваряне наново';
+$s_acknowledged_bug_title = 'Приемане на проблем';
+$s_confirmed_bug_title = 'Потвърждаване на проблем';
+$s_assigned_bug_title = 'Назначаване на проблем';
+$s_new_bug_button = 'Нов проблем';
+$s_feedback_bug_button = 'Отваряне наново';
+$s_acknowledged_bug_button = 'Приемане на проблем';
+$s_confirmed_bug_button = 'Потвърждаване на проблем';
+$s_assigned_bug_button = 'Назначаване на проблем';
+
+# bug_close.php
+$s_bug_close_msg = 'Проблемът е приключен...';
+$s_close_immediately = 'Незабавно приключване:';
+
+# bug_close_page.php
+$s_closed_bug_title = 'Приключване на проблем';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Проблемът е изтрит...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Изтриване на проблема?';
+$s_delete_bug_button = 'Изтриване на проблем';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Наблюдение на проблем';
+$s_unmonitor_bug_button = 'Спри наблюдението';
+
+# bug_file_add.php
+$s_file_upload_msg = 'Файлът е добавен успешно';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'Добавяне на файл';
+$s_select_file = 'Избиране на файл';
+$s_upload_file_button = 'Добавяне на файл';
+$s_max_file_size = 'Максимален размер';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Проблемът е отворен наново...';
+$s_reopen_add_bugnote_title = 'Причина за отваряне наново';
+$s_bugnote_add_reopen_button = 'Причина за отваряне наново';
+
+# bug_resolve_page.php
+$s_resolved_bug_title = 'Решаване на проблем';
+$s_resolved_bug_button = 'Решаване на проблем';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Проблемът е решен. Въвеждане на бележка ...';
+$s_resolve_add_bugnote_title = 'Бележка за причината за решаване на проблема';
+$s_bugnote_add_resolve_button = 'Добавяне на бележка';
+
+# bug_reminder_page.php
+$s_from = 'От';
+$s_to = 'За';
+$s_on = 'На';
+$s_sent_you_this_reminder_about = 'Ви изпрати това напомнящо съобщение във връзка с ';
+$s_bug_reminder = 'Изпращане на напомнящо съобщение';
+$s_reminder_sent_to = 'Напомнящо съобщение изпратено на';
+$s_bug_send_button = 'Изпращане';
+$s_reminder = 'Напомнящо съобщение';
+$s_reminder_explain = 'Съобщението ще бъде изпратено до този, който е отворил проблема повторно.';
+$s_reminder_monitor = 'Получателите също ще наблюдават проблема. Могат да се отпишат от списъка чрез бутон "Спри наблюдението".';
+$s_reminder_store = 'Съобщението ще бъде прикрепено към проблема.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Потвърждение за спонсориране на проблем %d за %s.';
+
+# bug_update.php
+$s_bug_updated_msg = 'Проблемът е обновен успешно...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Назад';
+$s_update_simple_link = 'Обновяване с опростен формуляр';
+$s_updating_bug_advanced_title = 'Обновяване информацията за проблем';
+$s_id = 'ID';
+$s_category = 'Категория';
+$s_severity = 'Значимост';
+$s_reproducibility = 'Възпроизводимост';
+$s_date_submitted = 'Дата на съобщаване';
+$s_last_update = 'Последно обновяване';
+$s_reporter = 'Съобщен от';
+$s_assigned_to = 'Назначен на';
+$s_priority = 'Приоритет';
+$s_resolution = 'Резолюция';
+$s_status = 'Статус';
+$s_duplicate_id = 'Дубликат ID';
+$s_os = 'OS';
+$s_projection = 'Прогноза';
+$s_os_version = 'OS Версия';
+$s_eta = 'ETA';
+$s_product_version = 'Версия на продукта';
+$s_build = 'Build';
+$s_fixed_in_version = 'Решен във версия';
+$s_votes = 'Бележки';
+$s_summary = 'Заглавие';
+$s_description = 'Описание';
+$s_steps_to_reproduce = 'Стъпки за възпроизвеждане';
+$s_update_information_button = 'Обновяване на информацията';
+$s_sticky_issue = 'Проблематичен';
+$s_profile = 'Профил';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Обновяване с разширен формуляр';
+$s_updating_bug_simple_title = 'Обновяване на информацията за проблем';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Добавена е бележка...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Бележката е добавена...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'Бележката е изтрита успешно...';
+$s_bug_notes_title = 'Бележки';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Редакция на бележка';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Няма бележки към проблема.';
+$s_delete_link = 'Изтриване';
+$s_add_bugnote_title = 'Добавяне на бележка';
+$s_add_bugnote_button = 'Добавяне на бележка';
+$s_bugnote_edit_link = 'Редакция';
+$s_closed_bug_button = 'Приключване на проблем';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'Бележката е обновена успешно...';
+$s_edited_on = 'редактирана на: ';
+
+# file_api.php
+$s_show_content ='Show Content';
+
+# index.php
+$s_click_to_login = 'Вход в системата';
+
+# login.php
+
+# login_page.php
+#@@@ should the following string be related to $g_window_title?
+$s_login_page_info = 'Добре дошли в системата за следене на грешки.';
+$s_login_title = 'Вход';
+$s_save_login = 'Запомни ме';
+$s_choose_project = 'Избор на проект';
+$s_login_button = 'Вход';
+$s_signup_link = 'Регистрация на нов потребител';
+$s_lost_password_link = 'Забравена парола?';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Избор на проект';
+
+# logout_page.php
+$s_logged_out_title = 'Изход...';
+$s_redirecting = '...пренасочване';
+$s_here = 'Тук';
+
+# lost_pwd_page.php
+$s_lost_password_title = 'Възстановяване на парола';
+$s_lost_password_done_title = "Писмото с паролата е изпратено";
+$s_lost_password_subject = "Възстановяване на парола";
+$s_lost_password_info = "За възстановяване на загубена парола, моля въведете име и email адрес.<br/><br/>Ако информацията съвпада със съществуващ профил, ще ви бъде изпратен специален линк, който съдържа удостоверяващ номер към профила ви. Моля следвайте линка, за да промените паролата си.";
+$s_lost_password_confirm_hash_OK = "Потвърждението е прието. Моля обновете паролата си.";
+
+# main_page.php
+$s_open_and_assigned_to_me = 'Отворени и предназначени за мен проблеми';
+$s_open_and_reported_to_me = 'Отворени и съобщени от мен проблеми';
+$s_newer_news_link = 'По-нови новини';
+$s_older_news_link = 'По-стари новини';
+$s_archives = 'Архиви';
+$s_rss = 'RSS';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Създаден потребител';
+$s_created_user_part2 = 'с ниво на достъп';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Създаване на нов профил';
+$s_verify_password = 'Проверка на паролата';
+$s_enabled = 'Активен';
+$s_protected = 'Защитен';
+$s_create_user_button = 'Нов потребител';
+
+# manage_page.php
+$s_hide_disabled = 'Скриване на неактивните';
+$s_filter_button = 'Избор на филтъра';
+$s_manage_users_link = 'Управление на Потребители';
+$s_manage_projects_link = 'Управление на Проекти';
+$s_manage_custom_field_link = 'Управление на Потребителски Полета';
+$s_manage_global_profiles_link = 'Управление на Глобални Профили';
+$s_permissions_summary_report = 'Известие за Разрешение';
+$s_manage_config_link = 'Управление на Конфигурации';
+$s_manage_threshold_config = 'Прагове на работния процес';
+$s_manage_email_config = 'Известяване по Email ';
+$s_manage_workflow_config = 'Развитие на работния процес';
+$s_create_new_account_link = 'Нов профил';
+$s_projects_link = 'Проекти';
+$s_documentation_link = 'Документация';
+$s_new_accounts_title = 'Нови профили';
+$s_1_week_title = '1 Седмица';
+$s_never_logged_in_title = 'Никога не е влизал в системата';
+$s_prune_accounts = 'Изтриане на недействащите';
+$s_hide_inactive = 'Скриване на неактивните';
+$s_manage_accounts_title = 'Управление на Профили';
+$s_p = 'p';
+$s_date_created = 'Дата на създаване';
+$s_last_visit = 'Последно посещение';
+$s_edit_user_link = 'Редакция на потребител';
+
+# manage_config_email_page
+$s_config_all_projects = 'Забележка: Настройките са валидни за ВСИЧКИ ПРОЕКТИ, освен ако не са въведени други настройки, които да отхвърлят началните.';
+$s_config_project = 'Забележка: Конфигурацията засяга само проект %s.';
+$s_colour_coding = 'В таблицата е използвана следната цветова схема:';
+$s_colour_project = 'Текущите настройки на проекта са приоритетни.';
+$s_colour_global = 'Текущите настройки на проекта са приоритетни спрямо глобалните.';
+$s_issue_reporter = 'Потребител, съобщил проблем';
+$s_issue_handler = 'Служител, избран за закриване на проблема';
+$s_users_added_bugnote = 'Потребители, които са добавили Бележка по проблем';
+$s_change_configuration = 'Обновяване на конфигурацията';
+$s_message = 'Съобщение';
+$s_default_notify = 'Определяне на основните Видове Известия на';
+$s_action_notify = 'Определяне на действие Видове Известия на';
+$s_notify_defaults_change_access = 'Право на редакция от';
+$s_notify_actions_change_access = 'Право на редакция от';
+$s_revert_to_system = "Изтриване на всички настройки на проекта";
+$s_revert_to_all_project = "Изтриване на специфичните настройки на проекта";
+
+# manage_config_workflow_page
+$s_non_existent = 'несъществуващ';
+$s_current_status = 'Статус';
+$s_next_status = 'Следващ статус';
+$s_workflow = 'Работен процес';
+$s_workflow_thresholds = 'Прагове, влияещи на работния процес';
+$s_threshold = 'Праг';
+$s_status_level = 'Статус';
+$s_alter_level = 'Право на редакция от';
+$s_validation = 'Валидация на работния процес';
+$s_comment = 'Коментар при при валидация';
+$s_superfluous = 'Връзката на проблема със себе си се подразбира и няма нужда да бъде изрично зададена';
+$s_unreachable = 'Забрана за задаване на такъв статус';
+$s_no_exit = 'Забрана за назначаване на друг статус';
+$s_access_levels = 'Нива на достъп';
+$s_access_change = 'Минимално ниво на достъп за промяна на статус';
+$s_desc_bug_submit_status = 'Статус, назначаван на нов проблем';
+$s_desc_bug_reopen_status = 'Статус, назначаван на отворени наново проблеми';
+$s_desc_bug_resolved_status_threshold = 'Статус, при който проблема се счита за решен';
+$s_workflow_change_access = 'Право на редакция от';
+$s_access_change_access = 'Право на редакция от';
+
+# manage_config_workflow_set
+$s_default_not_in_flow = 'Първоначално-зададеният статус на %s не е избиран в следващите статуси на %s. Ще бъде игнориран';
+
+# manage_config_work_threshold_page
+$s_assign_issue = 'Назначаване на проблем';
+$s_allow_close_immediate = 'Разрешение проблемът да бъде приключен при статус Решен';
+$s_allow_reporter_close = 'Разрешение за приключване на проблема';
+$s_allow_reporter_reopen = 'Разрешение за повторно отваряне на проблема';
+$s_set_status_assigned = 'Статус на назначаване на служителя, избран за закриване на проблема';
+$s_allow_user_edit = 'Разрешение потребителите да редактират собствените си бележки по проблема';
+$s_limit_access = 'Ограничаване достъпа на кореспондентите до техните собствени проблеми';
+$s_submit_status = 'Статус, назначен на новия проблем';
+$s_assigned_status = 'Статус, който да настройва назначени от системата проблеми на';
+$s_resolved_status = 'Статус, при който проблемът се счита за решен';
+$s_readonly_status = 'Статус, при който редакция на проблема не е позволена';
+$s_reopen_status = 'Статус, назначен на повторно отворен проблем';
+$s_reopen_resolution = 'Резолюция, назначена на повторно отворен проблем';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Изтриване на настройките за';
+$s_in_project = 'в проект';
+$s_delete_config_button = 'Изтриване на настройките';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+
+# manage_proj_add.php
+$s_project_added_msg = 'Проектът е добавен успешно...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'Категорията е добавена успешно...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'Категорията е изтрита успешно...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Изтриване на категорията?';
+$s_delete_category_button = 'Изтриване на категорията';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Редакция на категорията на проекта';
+$s_update_category_button = 'Обновяване на категорията';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'Категорията е обновена успешно...';
+
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Добавяне на подпроект';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'Проектът е премахнат успешно...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Изтриване на проекта и всички съобщения за проблеми към него?';
+$s_project_delete_button = 'Изтриване на проекта';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Редактиране на проект';
+$s_project_name = 'Име на проект';
+$s_view_status = 'Визуален статус';
+$s_public = 'публичен';
+$s_private = 'частен';
+$s_update_project_button = 'Обновяване на проект';
+$s_delete_project_button = 'Изтриване на проект';
+$s_categories_and_version_title = 'Категории и версии';
+$s_categories = 'Категории';
+$s_add_category_button = 'Добавяне на категория';
+$s_versions = 'Версии';
+$s_add_version_button = 'Добавяне на версия';
+$s_add_and_edit_version_button = 'Добавяне и редакция на версия';
+$s_edit_link = 'Редакция';
+$s_actions = 'Действия';
+$s_version = 'Версия';
+$s_timestamp = 'Време на запис на действието';
+$s_update = 'Обновяване';
+$s_subprojects = 'Подпроекти';
+$s_add_subproject = 'Добавяне като подпроект';
+$s_create_new_subproject_link = 'Нов подпроект';
+$s_unlink_link = 'Премахване на връзката';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Добавяне на проект';
+$s_upload_file_path = 'Добавяне на път към файла';
+$s_add_project_button = 'Добавяне на проект';
+$s_projects_title = 'Проекти';
+$s_name = 'Име';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'Проектът е обновен успешно...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'Версията е добавена успешно...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'Версията е изтрита успешно...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Изтриване на версията?';
+$s_delete_version_button = 'Изтриване на версията';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Редакция на версията на проект';
+$s_update_version_button = 'Обновяване на версията';
+$s_released = 'Освободен';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'Версията е обновена успешно...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'Профилът е защитен. Забрана за  изтриване.';
+$s_account_deleted_msg = 'Профилът е изтрит...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Изтриване на профила?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'Всички профили на потребители, които никога не са влизали в системата и са регистрирани до преди една седмица са изтрити';
+$s_prune_accounts_button = 'Изчисти';
+$s_confirm_account_pruning = 'Изтриване на профилите на потребителите, които никога не са влизали в системата и са регистрирани до преди една седмица?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Редакция на потребител';
+$s_reset_password_button = 'Нова парола';
+$s_delete_user_button = 'Изтриване на потребител';
+$s_reset_password_msg = '"Нова парола" изпраща потвърждаващо писмо.';
+$s_reset_password_msg2 = '"Нова парола" сменя паролата на празна парола.';
+$s_show_all_users = 'ВСИЧКИ';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Профилът е защитен. Забрана за смяна на паролата.';
+$s_account_reset_msg = 'Изпратено е потвърждаващо писмо на избрания email адрес. Чрез това писмо потребителят може да смени паролата си';
+$s_account_reset_msg2 = 'Паролата е сменена на празна парола.';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'Профилът е защитен. Забрана за промяна на нивото на достъп и статусът "Активиран". Останалата част от информацията е обновена...';
+$s_manage_user_updated_msg = 'Профилът е обновен успешно...';
+
+# menu_inc.php
+$s_main_link = 'Главна страница';
+$s_view_bugs_link = 'Преглед на проблемите';
+$s_report_bug_link = 'Съобщаване на проблем';
+$s_changelog_link = 'История на промените';
+$s_summary_link = 'Справки';
+$s_account_link = 'Личен профил';
+$s_users_link = 'Потребители';
+$s_manage_link = 'Управление';
+$s_edit_news_link = 'Редакция на новини';
+$s_docs_link = 'Документи';
+$s_logout_link = 'Изход';
+$s_my_view_link = 'Мой изглед';
+
+# meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Неназначени';
+$s_my_view_title_recent_mod = 'Последно променени';
+$s_my_view_title_reported = 'Съобщени от мен';
+$s_my_view_title_assigned = 'Назначени за мен (Нерешени)';
+$s_my_view_title_resolved = 'Решени';
+$s_my_view_title_monitored = 'Наблюдавани от мен';
+$s_my_view_title_feedback = 'Отворени наново';
+$s_my_view_title_verify = 'Очакващи потвърждение от мен';
+
+# news_add.php
+$s_news_added_msg = 'Новината е добавена...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Новината е изтрита...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Изтриване на новината?';
+$s_delete_news_item_button = 'Изтриване на новината';
+
+# news_edit_page.php
+$s_edit_news_title = 'Редакция на новина';
+$s_headline = 'Заглавие';
+$s_body = 'Текст';
+$s_update_news_button = 'Обновяване на новината';
+
+# news_menu_page.php
+$s_add_news_title = 'Добавяне на новини';
+$s_post_to = 'Публикуване в';
+$s_post_news_button = 'Публикуване на новината';
+$s_edit_or_delete_news_title = 'Редакция / изтриване на новини';
+$s_edit_post = 'Редакция на новина';
+$s_delete_post = 'Изтриване на новина';
+$s_select_post = 'Избор на новина';
+
+# news_update.php
+$s_news_updated_msg = 'Новината е обновена...';
+
+# news_view_page.php
+$s_back_link = 'Назад';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'Добавянето на файла е успешно';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'Добавяне на файл';
+$s_title = 'Заглавие';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'Файлът е изтрит';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Изтриване на файла?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Име на файл';
+$s_file_update_button = 'Обновяване на файла';
+$s_file_delete_button = 'Изтриване на файла';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Проектова документация';
+$s_user_documentation = 'Потребителска документация';
+$s_project_documentation = 'Проектова документация';
+$s_add_file = 'Прибавяне на файл';
+
+# proj_doc_update.php
+$s_project_document_updated = 'Проектът е обновен успешно';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'Добавянето на новия потребител в проекта е успешно';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'Премахването на потребителя от проекта е успешно';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Премахване на потребителя?';
+$s_remove_user_button = 'Премахване на потребителя';
+$s_remove_all_users_sure_msg = 'Премахване на всички потребители от този проект?';
+$s_remove_all_users_button = 'Премахване на всички потребители';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Добавяне на потребител към проект';
+$s_add_user_button = 'Добавяне на потребителя';
+$s_project_selection_title = 'Избор на проект';
+$s_remove_link = 'Премахване';
+$s_remove_all_link = 'Премахване всички';
+
+# proj_user_update.php
+$s_updated_user_msg = 'Данните за потребителя са обновени успешно';
+
+# report_add.php
+$s_must_enter_category = 'Изберете категория';
+$s_must_enter_severity = 'Изберете значимост';
+$s_must_enter_reproducibility = 'Изберете възпроизводимост';
+$s_must_enter_summary = 'Въведете заглавие';
+$s_must_enter_description = 'Въведете описание';
+$s_report_more_bugs = 'Съобщете за нови грешки';
+$s_submission_thanks_msg = 'Благодаря за изпратената информация';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Опростен формуляр';
+$s_enter_report_details_title = 'Данни за проблема';
+$s_required = 'задължителни полета';
+$s_select_category = 'Категория';
+$s_select_reproducibility = 'Възпроизводимост';
+$s_select_severity = 'Значимост';
+$s_or_fill_in = 'Допълнителни данни';
+$s_assign_to = 'Назначаване на';
+$s_additional_information = 'Допълнителна информация';
+$s_submit_report_button = 'Изпращане';
+$s_check_report_more_bugs = 'Маркирайте, ако искате да съобщите за повече грешки';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Разширен формуляр';
+$s_report_stay = 'Още грешки';
+
+# set_project.php
+$s_selected_project = 'Избран проект';
+$s_valid_project_msg = 'Изберете валиден проект';
+
+# signup.php
+$s_signup_done_title = 'Регистрацията на профила премина успешно';
+$s_password_emailed_msg = 'Поздравления. Регистрирахте се успешно. Ще бъде изпратен email за потвърждение на email адреса ви. Чрез избор на линка, пратен в този email, ще активирате личния си профил.';
+$s_no_reponse_msg = 'Имате 7 дни да завършите процеса по потвърждаване на профила; ако не успеете да завършите потвърждаването на профила до 7 дни, новосъздадения профил ще бъде елиминиран.';
+
+# signup_page.php
+$s_signup_captcha_request = 'Въведете кода, както е показан в правоъгълника в дясно';
+$s_signup_info = 'След попълване на формуляра и проверка на отговорите, ще ви бъде изпратен потвърждаващ email на email адреса, който е предоставен.<br/>Чрез потвърждаващия email, ще можете да активирате профила си. Ако не успеете да активирате профила си до 7 дни, той ще бъде елиминиран.<br/>Трябва да предоставите валиден email, за да можете да получите потвърждаващия email.';
+$s_signup_title = 'Вход';
+$s_signup_button = 'Вход';
+$s_no_password_request = 'Паролата е управлявана от друга система. Моля, обърнете се към системния администратор.';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Редакция на екранните настройки';
+$s_save_settings_button = 'Запазване на настройките';
+
+# site_settings_page.php
+$s_site_settings_title = 'Екранни настройки';
+$s_system_info_link = 'Информация за системата';
+$s_site_settings_link = 'Екранни настройки';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Екранните настройки са обновени';
+
+# summary_page.php
+$s_summary_title = 'Кратко описание';
+$s_summary_jpgraph_link = 'Разширено описание';
+$s_by_project = 'По Проект';
+$s_by_status = 'По Статус';
+$s_by_date = 'По Дата (дни)';
+$s_by_severity = 'По Значимост';
+$s_by_resolution = 'По Резолюция';
+$s_by_category = 'По Категория';
+$s_by_priority = 'По Приоритет';
+$s_by_developer = 'По Разработчик';
+$s_by_reporter = 'По Кореспондент';
+$s_reporter_by_resolution = 'Кореспондент по Резолюция';
+$s_reporter_effectiveness = 'Ефективност на Кореспондент';
+$s_developer_by_resolution = 'Разработчик по Резолюция';
+$s_percentage_fixed = '% Решен';
+$s_percentage_errors = '% Грешен';
+$s_errors = 'Грешен';
+$s_total = 'Общо';
+$s_time_stats = 'Времева статистика за Решени проблеми (дни)';
+$s_longest_open_bug = 'Най-дълго отворен проблем';
+$s_longest_open = 'Най-дълго отворен';
+$s_average_time = 'Средно време';
+$s_total_time = 'Общо време';
+$s_developer_stats = 'Статус на Разработчик';
+$s_reporter_stats = 'Статус на Кореспондент';
+$s_orct = '(отворен/решен/приключен/общо)';
+
+# view_all_bug_page.php
+$s_any = 'Всички';
+$s_show = 'Покажи';
+$s_changed = 'Променени(часове)';
+$s_viewing_bugs_title = 'Преглед на проблемите';
+$s_updated = 'Обновени';
+$s_sticky = 'Неприятни проблеми';
+$s_sort = 'Подредба по';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
+
+# view_all_inc.php
+$s_none = 'Няма';
+$s_current = 'current';
+$s_search = 'Търсене';
+$s_view_prev_link = 'Предишен';
+$s_view_next_link = 'Следващ';
+$s_prev = 'Предишна';
+$s_next = 'Следваща';
+$s_first = 'Първа';
+$s_last = 'Последна';
+$s_start_date = 'Начална Дата';
+$s_end_date = 'Крайна Дата';
+$s_use_date_filters = 'Времеви филтри';
+$s_yes = 'Да';
+$s_no = 'Не';
+$s_open_filters = 'Промяна на филтър';
+$s_or_unassigned = 'Или Неназначени';
+$s_ok = 'OK';
+$s_select_all = 'Избор на всички';
+
+# stored query strings
+$s_use_query = 'Избор на филтъра';
+$s_delete_query = 'Изтриване на филтър';
+$s_query_deleted = 'Филтърът е изтрит';
+$s_save_query = 'Запазване на зададения филтър';
+$s_reset_query = 'Запазване на първоначалния филтър';
+$s_query_name = 'Име на филтър';
+$s_query_exists = 'Филтърът вече съществува.';
+$s_query_dupe_name = 'Името вече е зададено на друг филтър. Моля изберете друго име.';
+$s_query_blank_name = 'Забрана за запазване на филтър без зададено име. Моля задайте име на филтъра преди за го запазите.';
+$s_query_store_error = 'Грешка при запазване на филтъра.';
+$s_open_queries = 'Управление на филтри';
+$s_query_delete_msg = 'Изтриване на филтъра?';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Опростен изглед';
+$s_viewing_bug_advanced_details_title = 'Детайлен изглед на проблем';
+$s_product_build = 'Билд на продукта';
+$s_system_profile = 'Описание на системата';
+$s_update_bug_button = 'Обновяване на проблем';
+$s_bug_assign_to_button = 'Назначаване на';
+$s_bug_status_to_button = 'Промяна на статуса на';
+$s_reopen_bug_button = 'Отваряне на проблем наново';
+$s_move_bug_button = 'Преместване на проблем';
+$s_attached_files = 'Прикрепени файлове';
+$s_publish = 'Публикуване';
+$s_cached = 'Кеширан';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Разширен изглед';
+$s_viewing_bug_simple_details_title = 'Опростен изглед на проблем';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'Няма потребители, наблюдаващи този проблем.';
+$s_users_monitoring_bug = 'Потребители, наблюдаващи този проблем';
+$s_monitoring_user_list = 'Списък с потребители';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'Няма потребители, спонсориращи този проблем.';
+$s_users_sponsoring_bug = 'Потребители, спонсориращи този проблем';
+$s_sponsors_list = 'Списък със спонсори';
+$s_total_sponsorship_amount = 'Общо спонсорство = %s';
+
+# custom field strings
+$s_add_custom_field_button = 'Ново потребителско поле';
+$s_delete_custom_field_button = 'Изтриване на потребителско поле';
+$s_delete_custom_field_everywhere = 'Изтриване на всички потребителски полета';
+$s_update_custom_field_button = 'Обновяване на потребителските полета';
+$s_add_existing_custom_field = 'Прибавяне на това съществуващо потребителско поле';
+$s_edit_custom_field_title = 'Редактиране на потребителското поле';
+$s_custom_field = 'Потребителско поле';
+$s_custom_fields_setup = 'Потребителски полета';
+$s_custom_field_name = 'Име';
+$s_custom_field_project_count = 'Брой проекти';
+$s_custom_field_type = 'Тип';
+$s_custom_field_possible_values = 'Възможни стойности';
+$s_custom_field_default_value = 'Стойност по подразбиране';
+$s_custom_field_valid_regexp = 'Регулярен израз за проверка';
+$s_custom_field_access_level_r = 'Ниво на достъп за четене';
+$s_custom_field_access_level_rw = 'Ниво на достъп за редакция';
+$s_custom_field_length_min = 'Минимална дължина';
+$s_custom_field_length_max = 'Максимална дължина';
+$s_custom_field_advanced = 'Само на страницата с разширена информация';
+$s_custom_field_display_report = 'Визуализация при съобщаване на проблеми';
+$s_custom_field_display_update = 'Визуализация при обновяване на проблеми';
+$s_custom_field_display_resolved = 'Визуализация при решаване на проблеми';
+$s_custom_field_display_closed = 'Визуализация при приключване на проблеми';
+$s_custom_field_require_report = 'Задължително при нов проблем';
+$s_custom_field_require_update = 'Задължително при обновяване';
+$s_custom_field_require_resolved = 'Задължително при решаване';
+$s_custom_field_require_closed = 'Задължително при затваряне';
+
+$s_custom_field_sequence = 'Тип на полето';
+$s_custom_field_type_enum_string = '0:Низ,1:Числова стойност,2:Дроб,3:Изброяване,4:Email,5:Отметка,6:Списък,7:Списък с множествен избор,8:Дата';
+
+$s_confirm_used_custom_field_deletion = 'Полето е свързано с поне един проект.  При потвърждаване, всички стойност за това поле ще бъдат безвъзвратно изтрити. Действието няма да може да се поправи.  Ако не желаете да изтриете това поле, натиснете бутон "Back" в браузъра.  За да продължите, натиснете бутона отдолу';
+$s_confirm_custom_field_deletion = 'Изтриване на потребителското поле и всички попълнени стойности?';
+$s_field_delete_button = 'Изтриване на полето';
+
+$s_confirm_custom_field_unlinking = 'Премахване на потребителското поле от проекта и на всички попълнени стойности?';
+$s_field_remove_button = 'Премахване на полето';
+
+$s_hide_status = 'Скриване на статус';
+$s_filter_closed = "Приключени";
+$s_filter_resolved = "Решени";
+$s_hide_closed = "Скриване на приключени";
+$s_hide_resolved = "Скриване на решени";
+$s_and_above = 'и по-висок';
+$s_advanced_filters = 'Разширени филтри';
+$s_simple_filters = 'Опростени филтри';
+$s_monitored_by = 'Наблюдаван от';
+
+$s_attachments = "Прикрепен/и Документ/и";
+$s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
+
+# Sponsorship Strings
+$s_sponsors = '%d спонсор/и';
+$s_sponsorship_added = 'Спонсорството е прибавено';
+$s_sponsorship_updated = 'Спонсорството е обновено';
+$s_sponsorship_deleted = 'Спонсорството е изтрито';
+$s_sponsorship_paid = 'Спонсорството е платено';
+$s_sponsorship_more_info = 'Повече информация за спонсорство';
+$s_sponsorship_total = 'Общо спонсорство';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'История на промените';
+
+# Http auth
+$s_http_auth_realm = "Вход в Mantis";
+
+$s_bug = "проблем";
+$s_add_new_relationship = "Нова релация";
+$s_add_new_relationship_button = "Добавяне";
+$s_this_bug = "Текущ проблем";
+$s_relationship_added = "Релацията е прибавена";
+$s_relationship_deleted = "Релацията е изтрита";
+$s_no_relationship = "Няма релация";
+$s_relationship_replaced = "Релацията е заменена";
+$s_replace_relationship_button = "Замяна";
+$s_replace_relationship_sure_msg = "Вече съществува релация между двата проблема. Замяна?";
+$s_relationship_with_parent = "Връзка със зависимия проблем";
+$s_delete_relationship_button = "Изтриване";
+$s_delete_relationship_sure_msg = "Изтриване на връзката?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Не всички производни на този проблем са решени или приключени.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не всички производни на този проблем са решени или приключени.<br />Преди <b>РЕШАВАНЕ/ПРИКЛЮЧВАНЕ</b> на зависимия проблем, всички производни трябва да са решени или приключени.";
+$s_create_child_bug_button = "Създаване на дубликат";
+$s_bug_cloned_to = "Проблемът е дублиран";
+$s_bug_created_from = "Проблем създаден от";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Графика на релациите";
+$s_relation_graph = "Графика на релациите";
+$s_dependency_graph = "Графика на зависимост";
+$s_vertical = "Вертикален";
+$s_horizontal = "Хоризонтален";
+$s_view_issue = "Визуализация на проблем";
+
+# Source Control Integration
+$s_checkin = 'Регистрация';
+
+# Pemissions report
+$s_perm_rpt_capability = 'Дейности';
+$s_view = 'Визуализация';
+$s_issues = 'ПРОБЛЕМИ';
+$s_report_issue = 'Съобщаване за проблем';
+$s_update_issue = 'Обновяване на проблем';
+$s_monitor_issue = 'Наблюдение на проблем';
+$s_handle_issue = 'Започване работа по проблем';
+$s_move_issue = 'Преместване на проблем';
+$s_delete_issue = 'Изтриване на проблем';
+$s_reopen_issue = 'Отваряне на проблем отново';
+$s_view_private_issues = 'Визуализация на частни проблеми';
+$s_update_readonly_issues = 'Обновяване на проблеми, неподлежащи на редакция';
+$s_update_issue_status = 'Обновяване статуса на проблема';
+$s_set_view_status = 'Настройka на статус (публичен или частен)';
+$s_update_view_status = 'Обновяване на статус (публичен или частен)';
+$s_show_list_of_users_monitoring_issue = 'Списък на потребители, наблюдаващи проблема';
+$s_notes = 'БЕЛЕЖКИ';
+$s_add_notes = 'Добавяне на бележки';
+$s_update_notes = 'Обновяване на бележки';
+$s_delete_note = 'Изтриване на бележка';
+$s_view_private_notes = 'Частни бележки';
+$s_news = 'НОВИНИ';
+$s_view_private_news = 'Частни бележки';
+$s_manage_news = 'Управление на новини';
+$s_view_list_of_attachments = 'Списък с прикрепени документи';
+$s_download_attachments = 'Запазване на прикрепените документи';
+$s_delete_attachments = 'Изтриване на прикрепените документи';
+$s_delete_attachment_button = "Изтриване";
+$s_delete_attachment_sure_msg = "Изтриване на прикрепения документ?";
+$s_upload_issue_attachments = 'Добавяне на документи към проблема';
+$s_filters = 'филтри';
+$s_save_filters = 'Запазване на филтри';
+$s_save_filters_as_shared = 'Запазване на филтрите като общи';
+$s_use_saved_filters = 'Ползване на запазените филтри';
+$s_create_project = 'Създаване на проект';
+$s_delete_project = 'Изтриване на проект';
+$s_manage_project = 'Управление на проект';
+$s_manage_user_access_to_project = 'Управление на достъпа на потребителите до проекта';
+$s_automatically_included_in_private_projects = 'Автоматично добавени в частни проекти';
+$s_project_documents = 'ДОКУМЕНТАЦИЯ ПО ПРОЕКТ';
+$s_view_project_documents = 'Документация по проекта';
+$s_upload_project_documents = 'Добавяне на документация по проекта';
+$s_link_custom_fields_to_projects = 'Свързване на потребителските полета към проектите';
+$s_sponsorships = 'СПОНСОРСТВА';
+$s_view_sponsorship_details = 'Детайли на спонсорствата';
+$s_view_sponsorship_total = 'Общ брой спонсорства';
+$s_sponsor_issue = 'Спонсориран проблем';
+$s_assign_sponsored_issue = 'Назначаване на Спонсориран проблем';
+$s_handle_sponsored_issue = 'Започване на работа по спонсориран проблем';
+$s_others = 'ДРУГИ';
+$s_see_email_addresses_of_other_users = 'Визуализация на email адресите на другите потребители';
+$s_send_reminders = 'Изпращане на напомнящи съобщения';
+$s_add_profiles = 'Добавяне на профили';
+$s_notify_of_new_user_created = 'Известие при добавянето на нов потребител';
+$s_email_notification = 'EMAIL ИЗВЕСТИЕ';
+$s_status_changed_to = 'Статусът е променен на';
+$s_email_on_deleted = 'Изпращане на email при изтриване';
+$s_email_on_sponsorship_changed = 'Изпращане на еmail при смяна на спонсорството';
+$s_email_on_relationship_changed = 'Изпращане на еmail при смяна на релацията';
+
+# DHTML filters
+$s_loading = 'Зареждане...';
+
+# filter_api.php
+$s_between = 'Между' ;
+$s_on_or_before = 'Върху или Преди' ;
+$s_before = 'Преди' ;
+$s_after = 'След' ;
+$s_on_or_after = 'Върху или След' ;
+
+# wiki related strings
+$s_wiki = 'Wiki';
+?>

@@ -1,20 +1,25 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	# Danish: Søren Mortensen, sm@artmus.dk
-	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
-	# Translations: Bug, Isssue - Fejl
-	# -------------------------------------------------
-	# $Revision: 1.91.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_danish.txt,v 1.91.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# Danish: Søren Mortensen, sm@artmus.dk
+	# Danish: Gunner Poulsen, gp@lyngbjerggaardskolen.dk
+	# Danish: Fejl
+	#
 	###########################################################################
+	# Danish strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.91.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:43 $
+	#
+	# $Id: strings_danish.txt,v 1.91.10.2 2006-10-23 07:14:43 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -174,67 +179,68 @@ $s_bugnote_description = 'Fejlnote-beskrivelse';
 $s_error_no_proceed = 'Brug knappen "Tilbage" i din browser, til at komme tilbage til den side du så før. Der kan du rette de problemer der er beskrevet i denne fejlmeddelelse eller vælge en anden handling. Du kan også vælge en af mulighederne i menuen for at gå direkte til en anden sektion.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'FEJL: Der opstod en uventet fejl. Du bedes kontakte din lokale administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'FEJL: SQL fejl opstået. Giv venligst besked om dette til ';
-$MANTIS_ERROR[ERROR_REPORT] = 'FEJL: Din rapportering indeholder fejl.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEJL: Der er ikke valgt en fil';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'FEJL: Denne filtype er ikke tilladt';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEJL: Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEJL: Denne fil findes allerede. Slet den gamle fil først.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'FEJL: Der findes allerede et projekt med dette navn.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEJL: Et påkrævet felt er ikke udfyldt. Ret venligst dette.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'FEJL: Denne konto er beskyttet. Du har ikke adgang før kontoens beskyttelse er ophævet.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'FEJL: Adgang nægtet.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'FEJL: Overførslen af filen mislykkedes. Bed din administrator om at afvikle scriptet admin_check for at løse dette problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'FEJL: Overførslen af filen mislykkedes. Dette skyldes sandsynligvis at filstørrelsen oversteg, hvad der i øjeblikket er tillad i denne PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'FEJL: Et krævet paramter til denne side blev ikke fundet.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'FEJL: Dette brugernavn er allerede i brug. Gå venligst tilbage og vælg et andet brugernavn.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'FEJL: Konfigurationsmulighed ikke fundet.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'FEJL: Streng ikke fundet.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'FEJL: Fejlnote ikke fundet.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'FEJL: Projekt ikke fundet.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEJL: Database-felt ikke fundet.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FEJL: Kunne ikke opnå forbindelse til fTP server.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Der opstod en uventet fejl. Du bedes kontakte din lokale administrator.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL fejl opstået. Giv venligst besked om dette til ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Din rapportering indeholder fejl.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Der er ikke valgt en fil';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Denne filtype er ikke tilladt';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Denne fil findes allerede. Slet den gamle fil først.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Der findes allerede et projekt med dette navn.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Et påkrævet felt er ikke udfyldt. Ret venligst dette.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Denne konto er beskyttet. Du har ikke adgang før kontoens beskyttelse er ophævet.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Adgang nægtet.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Overførslen af filen mislykkedes. Bed din administrator om at afvikle scriptet admin_check for at løse dette problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Overførslen af filen mislykkedes. Dette skyldes sandsynligvis at filstørrelsen oversteg, hvad der i øjeblikket er tillad i denne PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Et krævet paramter til denne side blev ikke fundet.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dette brugernavn er allerede i brug. Gå venligst tilbage og vælg et andet brugernavn.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsmulighed ikke fundet.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Streng ikke fundet.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Fejlnote ikke fundet.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt ikke fundet.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database-felt ikke fundet.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Kunne ikke opnå forbindelse til fTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEJL: Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'FEJL: Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'FEJL: Bruger ikke fundet.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'FEJL: Log ind informationer gemt i din browser er ugyldige. Måske er din konto blevet slettet?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'FEJL: Præferencer for denne bruger kunne ikke findes.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'FEJL: Nye elementer ikke fundet.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'FEJL: Adgangskode passer ikke til verificeringen.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'FEJL: En tabel var forventet, men en streng modtaget.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'FEJL: En streng var forventet, men en tabel modtaget.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Bruger ikke fundet.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Log ind informationer gemt i din browser er ugyldige. Måske er din konto blevet slettet?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Præferencer for denne bruger kunne ikke findes.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Nye elementer ikke fundet.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Adgangskode passer ikke til verificeringen.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'En tabel var forventet, men en streng modtaget.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men en tabel modtaget.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Der forventedes et nummer for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'FEJL: Fejl ikke fundet.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Fejl ikke fundet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'FEJL: Ugyldig e-mail.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'FEJL: Profil ikke fundet.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'FEJL: Overførsel af denne filtype er ikke tilladt.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'FEJL: Dette er en duplikeret fil. Slet filen først.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEJL: Ugyldig overførselssti. Enten findes mappen ikke eller tillader ikke tilføjelser til webserveren';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ugyldig e-mail.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil ikke fundet.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Overførsel af denne filtype er ikke tilladt.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Dette er en duplikeret fil. Slet filen først.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ugyldig overførselssti. Enten findes mappen ikke eller tillader ikke tilføjelser til webserveren';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'FEJL: Du kan ikke gøre en fejl til en dublet af sig selv.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'FEJL: Brugerdefineret felt ikke fundet';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'FEJL: Dette er et duplikat-navn.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'FEJL: Mindst et projekt anvender dette felt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEJL: Ugyldig værdi for dette felt';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Du kan ikke gøre en fejl til en dublet af sig selv.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Brugerdefineret felt ikke fundet';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Dette er et duplikat-navn.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindst et projekt anvender dette felt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ugyldig værdi for dette felt';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ugyldig feltbeskrivelse';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'FEJL: LDAP-godkendelse mislykkedes';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'FEJL: forbindelse til LDAP-server mislykkedes';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'FEJL: LDAP Record Update mislykkedes.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'FEJL: LDAP User Record ikke fundet.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'FEJL: Database-forbindelse mislykkedes.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'FEJL: Database-forespørgsel mislykkedes.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'FEJL: Database-valg mislykkedes.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEJL: Denne kategori findes allerede.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEJL: Ingen kopi-handling specificeret.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEJL: Kategori ikke fundet.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEJL: Denne version findes allerede.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'FEJL: Version ikke fundet.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'FEJL: Brugernavnet er ugyldigt.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP-godkendelse mislykkedes';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'forbindelse til LDAP-server mislykkedes';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update mislykkedes.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record ikke fundet.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database-forbindelse mislykkedes.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database-forespørgsel mislykkedes.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database-valg mislykkedes.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Denne kategori findes allerede.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen kopi-handling specificeret.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategori ikke fundet.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Denne version findes allerede.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version ikke fundet.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Brugernavnet er ugyldigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brugeren har ikke det krævede adgangsniveau';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Det "Rigtige navn" du valgte findes allerede som log ind-navn. Vælg et andet.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorunderstøttelse ikke slået til.';
@@ -245,8 +251,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Adgang nægtet:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angivet en e-mail-adresse. Opdater din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden \'%s\' har en ugyldig værdi \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi fejlen \'%d\' er skrivebeskyttet';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FEJL: Der er allerede en afhængighed mellem disse to fejl.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FEJL: Afhængighed ikke fundet.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Der er allerede en afhængighed mellem disse to fejl.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Afhængighed ikke fundet.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Adgang nægtet: fejlen %d kræver et højere adgangsniveau.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "En fejl kan ikke gøres afhængig af sig selv.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bekræftigelsens hash passer ikke. Prøv igen.';
@@ -257,10 +263,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. antal samtidige handlinger nået. Kontakt systemadministratoren';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den handling vilskabew et loop i underprojekthirakiet.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
-$s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
+$s_login_error = 'Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
+$s_login_cookies_disabled = 'Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
 
 # General Strings
 $s_go_back = 'Tilbage';
@@ -445,7 +451,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -602,6 +609,9 @@ $s_closed_bug_button = 'Luk fejl';
 $s_bugnote_updated_msg = 'Fejlnoten er blevet opdateret ...';
 $s_edited_on = 'rettet den: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Klik her for at logge ind';
 
@@ -739,6 +749,16 @@ $s_reopen_resolution = 'Løsningsnuveau som en genåbnet fejl bliver sat til';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projektet er tilføjet...';
@@ -1047,9 +1067,12 @@ $s_viewing_bugs_title = 'Vis fejl';
 $s_updated = 'Opdateret';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sorter efter';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'ingen';
+$s_current = 'current';
 $s_search = 'Søg';
 $s_view_prev_link = 'Vis forrige';
 $s_view_next_link = 'Vis næste';
@@ -1165,7 +1188,7 @@ $s_attachments = "Vedhæftede filer";
 $s_attachment_alt = "V";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'dk';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';
@@ -1285,8 +1308,9 @@ $s_loading = 'Indlæser...';
 $s_between = 'Mellem' ;
 $s_on_or_before = 'På eller før' ;
 $s_before = 'Før' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Efter' ;
 $s_on_or_after = 'På eller efter' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

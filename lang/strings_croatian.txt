@@ -1,20 +1,23 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Croatian: Dejan Gambin, dejan.gambin@grad-pula.hinet.hr
+	#
 	###########################################################################
 	# Croatian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.36.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
+	# $Revision: 1.36.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:43 $
 	#
-	# $Id: strings_croatian.txt,v 1.36.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# $Id: strings_croatian.txt,v 1.36.10.2 2006-10-23 07:14:43 vboctor Exp $
 	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -174,22 +177,23 @@ $s_bugnote_description = 'Bugnote description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "GRE©KA: U toku ove akcije pojavila se gre¹ka. Mo¾ete prijaviti gre¹ku administratoru.";
-$MANTIS_ERROR[ERROR_SQL]                = "GRE©KA: SQL gre¹ka detektirana.  Molimo Vas da to prijavite.";
-$MANTIS_ERROR[ERROR_REPORT]             = "GRE©KA: Gre¹ka u izvje¹æu.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "GRE©KA: Nije naznaèena datoteka";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "GRE©KA: Tip datoteke nije dozvoljen";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "GRE©KA: Mapa ne postoji. Molimo Vas da provjerite postavke projekta.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "GRE©KA: Ovo je duplicirana datoteka. Molimo Vas da najprije obri¹ete datoteku.";
+$MANTIS_ERROR[ERROR_GENERIC]            = "U toku ove akcije pojavila se gre¹ka. Mo¾ete prijaviti gre¹ku administratoru.";
+$MANTIS_ERROR[ERROR_SQL]                = "SQL gre¹ka detektirana.  Molimo Vas da to prijavite.";
+$MANTIS_ERROR[ERROR_REPORT]             = "Gre¹ka u izvje¹æu.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "Nije naznaèena datoteka";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Tip datoteke nije dozvoljen";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "Mapa ne postoji. Molimo Vas da provjerite postavke projekta.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "Ovo je duplicirana datoteka. Molimo Vas da najprije obri¹ete datoteku.";
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "GRE©KA: Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "GRE©KA: Korisnièki raèun je za¹tiæen. Za to vrijeme Vam nije omoguæen pristup.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Korisnièki raèun je za¹tiæen. Za to vrijeme Vam nije omoguæen pristup.";
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Bugnote not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Project not found.';
@@ -257,8 +261,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
@@ -385,7 +389,7 @@ $s_advanced_view = "Napredni pregled";
 $s_advanced_update = "Napredno a¾uriranje";
 $s_refresh_delay = "Vrijeme izmeðu obnavljanja";
 $s_redirect_delay = "Vrijeme prije redirekcije";
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
@@ -445,7 +449,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -602,6 +607,9 @@ $s_closed_bug_button = "Zatvori bug";
 $s_bugnote_updated_msg = "Bilje¹ka je uspje¹no a¾urirana...";
 $s_edited_on = "editirana na: ";
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = "Klikni ovdje za prijavu";
 
@@ -739,6 +747,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = "Projekt je uspje¹no dodan...";
@@ -1047,9 +1065,12 @@ $s_viewing_bugs_title = "Pregled bugova";
 $s_updated = "A¾urirani";
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = "ni¹ta";
+$s_current = 'current';
 $s_search ="Tra¾i";
 $s_view_prev_link = "Vidi prethodno";
 $s_view_next_link = "Vidi slijedeæe";
@@ -1103,7 +1124,7 @@ $s_viewing_bug_simple_details_title = "Pregled jednostavnih detalja buga";
 
 # bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
 
 # bug_sponsorship_list_view_inc.php
@@ -1201,7 +1222,7 @@ $s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
 $s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
@@ -1285,8 +1306,9 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

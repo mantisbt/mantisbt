@@ -1,24 +1,27 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	# Latvian (Windows1257): Sergis Kanters, "kanters at yahoo dot com"
+	#
+	# Latvian: Sergis Kanters, "kanters at yahoo dot com"
+	#
 	###########################################################################
 	# Latvian strings for Mantis
+	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.35.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
+	# $Revision: 1.35.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:45 $
 	#
-	# $Id: strings_latvian.txt,v 1.35.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# $Id: strings_latvian.txt,v 1.35.10.2 2006-10-23 07:14:45 vboctor Exp $
 	###########################################################################
+
 ?>
 <?php
 # Charset
-$s_charset = 'Windows-1257';
+$s_charset = 'windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Pârvietot';
@@ -174,42 +177,43 @@ $s_bugnote_description = 'Bugnote description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "KÏÛDA: darbîbas izpildes rezultâtâ notikusi kïûda.  Iespçjams, Jûs vçlaties par to ziòot savam lokâlajam administrâtoram.";
-$MANTIS_ERROR[ERROR_SQL] = "KÏÛDA: Notikusi SQL kïûda. Lûdzu ziòojiet par to ";
-$MANTIS_ERROR[ERROR_REPORT] = "KÏÛDA: Jûsu ziòojumâ konstatçtas kïûdas.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "KÏÛDA: Fails neeksistç";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "KÏÛDA: Ðâdi faili ir aizliegti";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "KÏÛDA: Katalogs neeksistç. Pârbaudiet projekta opcijas.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "KÏÛDA: Faila dublikâts. Vispirms izdzçsiet veco failu.";
+$MANTIS_ERROR[ERROR_GENERIC]            = "darbîbas izpildes rezultâtâ notikusi kïûda.  Iespçjams, Jûs vçlaties par to ziòot savam lokâlajam administrâtoram.";
+$MANTIS_ERROR[ERROR_SQL] = "Notikusi SQL kïûda. Lûdzu ziòojiet par to ";
+$MANTIS_ERROR[ERROR_REPORT] = "Jûsu ziòojumâ konstatçtas kïûdas.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "Fails neeksistç";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Ðâdi faili ir aizliegti";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "Katalogs neeksistç. Pârbaudiet projekta opcijas.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "Faila dublikâts. Vispirms izdzçsiet veco failu.";
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Projekts ar ðâdu nosaukumu jau eksistç.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "KÏÛDA: Nav aizpildîti visi lauki.  Pârbaudiet ievades pareizîbu.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "KÏÛDA: Ðis lietotâjs ir aizsargâts. Jûs nevarat labot opcijas.";
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'KÏÛDA: Pieeja liegta.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'KÏÛDA: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'KÏÛDA: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'KÏÛDA: A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "Nav aizpildîti visi lauki.  Pârbaudiet ievades pareizîbu.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Ðis lietotâjs ir aizsargâts. Jûs nevarat labot opcijas.";
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Pieeja liegta.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'KÏÛDA: Bugnote not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'KÏÛDA: Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'KÏÛDA: Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'KÏÛDA: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Bugnote not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'KÏÛDA: A project with that name already exists.  Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'KÏÛDA: User not found.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'User not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'KÏÛDA: News item not found.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'KÏÛDA: An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'KÏÛDA: Bug not found.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'KÏÛDA: Invalid email.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
@@ -220,21 +224,21 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplica
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'KÏÛDA: Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'KÏÛDA: LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'KÏÛDA: LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'KÏÛDA: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'KÏÛDA: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'KÏÛDA: Database selection failed.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'KÏÛDA: Ðâda kategorija jau eksistç.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'KÏÛDA: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'KÏÛDA: Kategorija nav atrasta.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'KÏÛDA: Ðâda versija jau eksistç.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'KÏÛDA: Versija nav atrasta.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'KÏÛDA: The username is invalid.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Database connection failed.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Database query failed.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Database selection failed.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ðâda kategorija jau eksistç.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nav atrasta.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ðâda versija jau eksistç.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versija nav atrasta.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'The username is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Lieotâjam nav nepiecieðamâ pieejas lîmeòa';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
@@ -257,10 +261,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'KÏÛDA: Jûsu pieeja ir atslçgta vai ievadîts nepareizs lietotâja vârds, parole.';
-$s_login_cookies_disabled = 'KÏÛDA: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_error = 'Jûsu pieeja ir atslçgta vai ievadîts nepareizs lietotâja vârds, parole.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = "Atpakaï";
@@ -385,7 +389,7 @@ $s_advanced_view = "Paplaðinâta apskate";
 $s_advanced_update = "Paplaðinâta laboðana";
 $s_refresh_delay = "Ekrâna atjauninâðnas aizture";
 $s_redirect_delay = "Aizture veicot noteiktas darbîbas";
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
@@ -445,7 +449,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -602,6 +607,9 @@ $s_closed_bug_button = "AIZVÇRT kïûdu";
 $s_bugnote_updated_msg = "Komentârs saglabâts...";
 $s_edited_on = "labots: ";
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = "Noklikðíiniet, lai pieslçgtos";
 
@@ -678,20 +686,20 @@ $s_last_visit = "Pçdçjâ vizîte";
 $s_edit_user_link = "Labot lietotâju";
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
 $s_colour_coding = 'In the table below, the following color code applies:';
 $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
@@ -714,8 +722,8 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
@@ -739,6 +747,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = "Projekts pievienots...";
@@ -1047,9 +1065,12 @@ $s_viewing_bugs_title = "Kïûdu apskate";
 $s_updated = "Atjaunots";
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = "nav";
+$s_current = 'current';
 $s_search ="meklçt";
 $s_view_prev_link = "iepriekðçjos";
 $s_view_next_link = "nâkoðos";
@@ -1285,8 +1306,9 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

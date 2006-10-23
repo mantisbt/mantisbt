@@ -1,36 +1,39 @@
 <?php
 	# Mantis - a php based Issuetracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
 	# Chinese_Simplified: Singoo, singoo@163.com
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
-	# -------------------------------------------------
-	# $Revision: 1.4.4.1.6.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_chinese_simplified_utf8.txt,v 1.4.4.1.6.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
-
+	# Chinese Simplified strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.4.4.1.6.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:42 $
+	#
+	# $Id: strings_chinese_simplified_utf8.txt,v 1.4.4.1.6.2 2006-10-23 07:14:42 vboctor Exp $
 	###########################################################################
-	#Mantis 1.0.0rc2 简体中文语言包的翻译说明(by NetCobra,2005-08-10)
+	#Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2006-01-05)
 	#
 	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
 	#  人 Pao-Hsi Huang；
 	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
-	#3.这次将“sponsor”和“Sponsorship”参照繁体中文语言包中的翻译改为“资助”，
-	#  自己感觉这个词更合适一些；
-	#4.哪位知道 Sticky 该如何翻译？我全部保留了原文*^_^*
-	#5.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
+	#3.咨询网友后，“Sticky”翻译为置顶；
+	#4.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
+	#
+	#有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
 	#
 	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -47,7 +50,7 @@ $s_actiongroup_menu_update_priority = '更新优先级';
 $s_actiongroup_menu_update_status = '更新状态';
 $s_actiongroup_menu_update_view_status = '更新视图状态';
 $s_actiongroup_menu_update_category = '更新类别';
-$s_actiongroup_menu_set_sticky = '设置/取消 Sticky';
+$s_actiongroup_menu_set_sticky = '设置/取消置顶';
 $s_actiongroup_menu_update_field = '更新 %s';
 $s_actiongroup_bugs = '选择问题';
 
@@ -96,7 +99,7 @@ $s_duplicate_of = '是该问题的重复：';
 $s_has_duplicate = '有重复问题：';
 $s_related_to = '与该问题关联：';
 $s_dependant_on = '是该问题的子项：';
-$s_blocks = '是该问题的子项：';
+$s_blocks = '是该问题的父项：';
 
 $s_new_bug = '新建问题';
 $s_bugnote_added = '已添加问题注释';
@@ -132,7 +135,7 @@ $s_priority_bugs_conf_msg = '选择问题优先级别';
 $s_status_bugs_conf_msg = '选择问题状态';
 $s_view_status_bugs_conf_msg = '选择问题浏览状态';
 $s_category_bugs_conf_msg = '选择问题类别';
-$s_set_sticky_bugs_conf_msg = '你确定要设置/取消这些问题的 sticky 吗？';
+$s_set_sticky_bugs_conf_msg = '你确定要设置/取消这些问题的置顶吗？';
 $s_close_group_bugs_button = '关闭问题';
 $s_delete_group_bugs_button = '删除问题';
 $s_move_group_bugs_button = '移动问题';
@@ -143,7 +146,7 @@ $s_priority_group_bugs_button = '修改优先级别';
 $s_status_group_bugs_button = '修改状态';
 $s_category_group_bugs_button = '更新类别';
 $s_view_status_group_bugs_button = '修改浏览状态';
-$s_set_sticky_group_bugs_button = '设置/取消 Sticky';
+$s_set_sticky_group_bugs_button = '设置/取消置顶';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '综合报表（按问题状态）';
@@ -206,6 +209,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目。';
@@ -273,8 +277,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '确认 URL 无效或�
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到最高请求数量；请联络系统管理员。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
 
@@ -461,7 +465,8 @@ $s_no_sponsored = '没有找到分派给你的已资助的问题。';
 $s_own_sponsored = '你已经资助的问题：';
 $s_issues_handled = '分派给你的已资助的问题：';
 $s_no_own_sponsored = '你没有资助任何问题。';
-$s_sponsor = '资助';
+$s_sponsor = '资助';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = '数量';
 $s_total_owing = '未支付合计';
 $s_total_paid = '已支付合计';
@@ -618,6 +623,9 @@ $s_closed_bug_button = '关闭问题';
 $s_bugnote_updated_msg = '已经被成功更新问题注释...';
 $s_edited_on = '编辑于：';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = '点击这里进入';
 
@@ -755,6 +763,16 @@ $s_reopen_resolution = '重新打开的问题的解决状态设置为';
 $s_config_delete_sure = '确定要删除该条目的设置';
 $s_in_project = '在项目';
 $s_delete_config_button = '删除设置';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = '已添加项目...';
@@ -1061,11 +1079,14 @@ $s_show = '显示';
 $s_changed = '已变更(小时)';
 $s_viewing_bugs_title = '查看问题';
 $s_updated = '最后更新';
-$s_sticky = '显示 Sticky 问题';
+$s_sticky = '显示置顶问题';
 $s_sort = '排序字段';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = '无';
+$s_current = '当前';
 $s_search ='搜索';
 $s_view_prev_link = '浏览上一页';
 $s_view_next_link = '浏览下一页';
@@ -1301,8 +1322,9 @@ $s_loading = '正在载入...';
 $s_between = '介于' ;
 $s_on_or_before = '等于或者早于' ;
 $s_before = '早于' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = '晚于' ;
 $s_on_or_after = '等于或者晚于' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

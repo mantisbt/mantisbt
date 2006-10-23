@@ -1,23 +1,26 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
-	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
+	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
-	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: thraxisp $
-	# $Date: 2005-08-10 18:37:14 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.96 2005-08-10 18:37:14 thraxisp Exp $
-	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.267 -- jferraz 2005/08/10
 	###########################################################################
+	# Brazilian Portuguese strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.96.10.1 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:46 $
+	#
+	# $Id: strings_portuguese_brazil.txt,v 1.96.10.1 2006-10-23 07:14:46 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -193,6 +196,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavel
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página (%s) não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Este nome de usuário já está sendo usado.  Por favor, volte e selecione um outro.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opção de configuração \'%s\' não encontrada.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'A opção de configuração \'%s\' não pode ser ajustada no banco-de-dados.  Ela deve ser ajustada em config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Texto \'%s\' não encontrado.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Anotação não encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projeto não encontrado.';
@@ -260,10 +264,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O endereço de confirm
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número máximo de solicitações em progresso foi atingido. Por favor, contate o administrador do sistema.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erro de redirecionamento de página, certifique-se que não haja espaços fora do bloco PHP (&lt;?php ?&gt;) nos arquivos config_inc.php ou custom_*.php.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.';
-$s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
+$s_login_cookies_disabled = 'Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
 # General Strings
 $s_go_back = 'Voltar';
@@ -448,7 +452,8 @@ $s_no_sponsored = 'Nenhum caso patrocinado atribuídos a você foi encontrado.';
 $s_own_sponsored = 'Casos que Você Patrocinou:';
 $s_issues_handled = 'Casos Patrocinados Atribuídos a Você:';
 $s_no_own_sponsored = 'Você não patrocinou nenhum caso.';
-$s_sponsor = 'Patrocinar';
+$s_sponsor = 'Patrocinador';	# like in 'The sponsor of...'
+$s_sponsor_verb = 'Patrocinar';	# like in 'Sponsor it!'
 $s_amount = 'Quantia';
 $s_total_owing = 'Total Devedor';
 $s_total_paid = 'Total Pago';
@@ -605,6 +610,9 @@ $s_closed_bug_button = 'Fechar Caso';
 $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
 $s_edited_on = 'alterado em: ';
 
+# file_api.php
+$s_show_content ='Mostrar Conteúdo';
+
 # index.php
 $s_click_to_login = 'Clique aqui para acessar';
 
@@ -742,6 +750,16 @@ $s_reopen_resolution = 'Resolução para a qual casos reabertos são ajustados';
 $s_config_delete_sure = 'Você tem certeza que deseja apagar as configurações para';
 $s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar Configurações';
+
+# adm_config_report.php
+$s_configuration_report = 'Relatório de Configuração';
+$s_database_configuration = 'Configuração de Banco-de-dados';
+$s_configuration_option = 'Opção de Configuração';
+$s_configuration_option_type = 'Tipo';
+$s_configuration_option_value = 'Valor';
+$s_all_users = 'Todos os Usuários';
+$s_set_configuration_option = 'Ajustar Opção de Configuração';
+$s_delete_config_sure_msg = 'Você tem certeza que deseja apagar esta opção de configuração?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
@@ -1050,9 +1068,12 @@ $s_viewing_bugs_title = 'Visualizando Casos';
 $s_updated = 'Atualizado';
 $s_sticky = 'Mostrar Casos "Pegajosos"';
 $s_sort = 'Ordenar por';
+$s_issue_id = 'Caso #';
+$s_recently_visited = 'Recentemente Visitado';
 
 # view_all_inc.php
 $s_none = 'nenhum';
+$s_current = 'atual';
 $s_search = 'Procurar';
 $s_view_prev_link = 'Ver Ant';
 $s_view_next_link = 'Ver Próx';
@@ -1288,8 +1309,9 @@ $s_loading = 'Carregando...';
 $s_between = 'Entre' ;
 $s_on_or_before = 'Em ou Antes' ;
 $s_before = 'Antes' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'Depois' ;
 $s_on_or_after = 'Em ou Depois' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

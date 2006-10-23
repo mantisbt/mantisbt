@@ -1,23 +1,27 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
+	#
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
 	# Czech: Vít Jurásek, vit.jurasek@vegateam.cz
 	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
-	# Code page: ISO-8859-2
-	# -------------------------------------------------
-	# $Revision: 1.82.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_czech.txt,v 1.82.10.1 2006-02-19 03:39:48 thraxisp Exp $
 	###########################################################################
+	# Czech strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.82.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:43 $
+	#
+	# $Id: strings_czech.txt,v 1.82.10.2 2006-10-23 07:14:43 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -177,93 +181,93 @@ $s_bugnote_description = 'Popis reportu';
 $s_error_no_proceed = 'K návratu na pøedcházející stránku prosím pou¾ijte tlaèítko "Zpìt" va¹eho prohlí¾eèe.  Mù¾ete tak opravit chyby indikované touto chybovou zprávou, nebo zvolit jiný pokyn.  Mù¾ete také zvolit jinou volbu z nabídky a pøejít pøímo na jinou sekci.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'CHYBA: Pøi této akci se vyskytla chyba. Oznamte to va¹emu lokálnímu správci.';
-$MANTIS_ERROR[ERROR_SQL] = 'CHYBA: Chyba SQL.  Prosíme oznamte ji na adresu ';
-$MANTIS_ERROR[ERROR_REPORT] = 'CHYBA: Chybná data ve va¹em reportu.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'CHYBA: Nezadaný soubor';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'CHYBA: Nepovolený typ souboru';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'CHYBA: Adresáø neexistuje, zkontrolujte nastavení projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'CHYBA: Duplicitní soubor.  Prosím, napøed soubor zru¹te.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'CHYBA: Projekt s tímto jménem u¾ existuje.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'CHYBA: Povinné pole je prázdné.  Prosím zkontrolujte si va¹e zadání.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'CHYBA: Tento úèet je chránìn. Nesmíte sem pøistupovat dokud nebude ochrana úètu odstranìna.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'CHYBA: Pøístup odepøen.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'CHYBA: Chyba uploadu souboru.  Po¾ádejte správce, aby spustil skript admin_check ke sledování této chyby.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'CHYBA: Chyba uploadu souboru.  Soubor byl zøejmì vìt¹í, ze¾ je povoleno instalací PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'CHYBA: Nutný parametr pro tuto ztránku nebyl nalezen.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'CHYBA: Toto u¾ivatelské jméno je ji¾ pou¾ito.  Prosíme, vra»te se zpìt a zvolte jiné.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'CHYBA: Konfiguraèní volba \'%s\' nenalezena.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'CHYBA: Textový øetìzec  \'%s\'  nenalezen.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'CHYBA: Report nenalezen.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'CHYBA: Projekt nenalezen.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'CHYBA: Pole v databázi nenalezeno.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'CHYBA: Nelze se spojit s FTP serverem.';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'Pøi této akci se vyskytla chyba. Oznamte to va¹emu lokálnímu správci.';
+$MANTIS_ERROR[ERROR_SQL] = 'Chyba SQL.  Prosíme oznamte ji na adresu ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Chybná data ve va¹em reportu.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nezadaný soubor';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Nepovolený typ souboru';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresáø neexistuje, zkontrolujte nastavení projektu.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Duplicitní soubor.  Prosím, napøed soubor zru¹te.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tímto jménem u¾ existuje.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Povinné pole je prázdné.  Prosím zkontrolujte si va¹e zadání.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Tento úèet je chránìn. Nesmíte sem pøistupovat dokud nebude ochrana úètu odstranìna.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Pøístup odepøen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Chyba uploadu souboru.  Po¾ádejte správce, aby spustil skript admin_check ke sledování této chyby.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Chyba uploadu souboru.  Soubor byl zøejmì vìt¹í, ze¾ je povoleno instalací PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Nutný parametr pro tuto ztránku nebyl nalezen.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toto u¾ivatelské jméno je ji¾ pou¾ito.  Prosíme, vra»te se zpìt a zvolte jiné.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfiguraèní volba \'%s\' nenalezena.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Textový øetìzec  \'%s\'  nenalezen.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Report nenalezen.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projekt nenalezen.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Pole v databázi nenalezeno.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Nelze se spojit s FTP serverem.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'CHYBA: Projekt tohoto jména ji¾ existuje.  Prosím vra»te se a zadejte jiné jméno.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'CHYBA: Zadáno nepøípustné jméno projektu. Jméno projektu nesmí být prázdné.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'CHYBA: U¾ivatel nenalezen.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'CHYBA: Informace ulo¾ené va¹ím prohlí¾eèem nejsou platné.  Mo¾ná byl vá¹ úèet zru¹en?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'CHYBA: Pro tohoto u¾ivatele nelze najít nastavení.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'CHYBA: Novinka nenalezena.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'CHYBA: Hesla nejsou shodná.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'CHYBA: Oèekávalo se pole, ale byl pøijat øetìzec.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'CHYBA: Oèekával se øetìzec, ale bylo pøijato pole.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt tohoto jména ji¾ existuje.  Prosím vra»te se a zadejte jiné jméno.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadáno nepøípustné jméno projektu. Jméno projektu nesmí být prázdné.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'U¾ivatel nenalezen.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informace ulo¾ené va¹ím prohlí¾eèem nejsou platné.  Mo¾ná byl vá¹ úèet zru¹en?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Pro tohoto u¾ivatele nelze najít nastavení.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Novinka nenalezena.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Hesla nejsou shodná.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Oèekávalo se pole, ale byl pøijat øetìzec.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Oèekával se øetìzec, ale bylo pøijato pole.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'CHYBA: Problém nenalezen.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Problém nenalezen.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'CHYBA: Chybná elektronická adresa.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'CHYBA: Profil nenalezen.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'CHYBA: Nepovolený typ souboru pro upload.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'CHYBA: Soubor tohoto jména ji¾ existuje, nejprve soubor prosím sma¾te.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'CHYBA: Nedovolená cesta pro upload.  Adresáø buï neexistuje, nebo do nìj nelze zapisovat';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Chybná elektronická adresa.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nenalezen.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Nepovolený typ souboru pro upload.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Soubor tohoto jména ji¾ existuje, nejprve soubor prosím sma¾te.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Nedovolená cesta pro upload.  Adresáø buï neexistuje, nebo do nìj nelze zapisovat';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'CHYBA: Nemù¾ete nastavit, ¾e problém je duplikátem sama sebe.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'CHYBA: U¾ivatelem definované pole nebylo nalezeno';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'CHYBA: Duplicitní jméno.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'CHYBA: Toto pole pou¾ívá je¹tì alespoò jeden projekt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'CHYBA: Tato hodnota není pøípustná pro toto pole';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'CHYBA: Nepøípustná definice u¾ivatelského pole';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'CHYBA: LDAP Autentizace se nezdaøila';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'CHYBA: Nezdaøila se komunikace s LDAP serverem';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'CHYBA: LDAP Chyba pøi aktualizaci záznamu.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Nemù¾ete nastavit, ¾e problém je duplikátem sama sebe.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'U¾ivatelem definované pole nebylo nalezeno';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitní jméno.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Toto pole pou¾ívá je¹tì alespoò jeden projekt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Tato hodnota není pøípustná pro toto pole';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nepøípustná definice u¾ivatelského pole';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP Autentizace se nezdaøila';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nezdaøila se komunikace s LDAP serverem';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP Chyba pøi aktualizaci záznamu.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Nenalezen záznam u¾ivatele.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'CHYBA: Chyba v pøipojení databáze.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'CHYBA: Dotaz v databázi se nezdaøil.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'CHYBA: Výbìr z databáze se nezdaøil.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'CHYBA: Kategorie tohoto jména ji¾ existuje.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'CHYBA: Nebylo specifikováno kopírování.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'CHYBA: Kategorie nenalezena.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'CHYBA: Verze tohoto jména ji¾ existuje.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verze nenalezena.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Neplatné u¾ivatelské jméno.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'CHYBA: U¾ivatel nemá potøebnou pøístupovou úroveò';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'CHYBA: Zvolené "Skuteèné jméno" se shoduje se jménem jiného u¾ivatele. Zvolte si prosím jiné.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'CHYBA: Podpora sponzoringu není dostupná.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'CHYBA: Sponzor %d nenalezen.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'CHYBA: Sponzor (%s) se nalézá pod minimální èástkou (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'CHYBA: Øídící nemá minimální pøístupovou úroveò po¾adovanou pro manipulaci se sponzorovanými problémy.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'CHYBA: Nepovolený pøístup: Pøidìlení sponzorovaného problému vy¾aduje vy¹¹í pøístupovou úroveò.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'CHYBA: Sponzor nemá elektronickou adresu. Opravte prosím vá¹ profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'CHYBA: Konfiguraèní volba \'%s\' má nedovolenou hodnotu \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'CHYBA: Tato akce nemù¾e být uskuteènìna, proto¾e problém \'%d\' je ve stavu JEN ÈTENÍ';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "CHYBA: Vztah mezi tìmito dvìma problémy u¾ je.";
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Chyba v pøipojení databáze.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Dotaz v databázi se nezdaøil.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Výbìr z databáze se nezdaøil.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorie tohoto jména ji¾ existuje.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nebylo specifikováno kopírování.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nenalezena.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verze tohoto jména ji¾ existuje.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Verze nenalezena.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Neplatné u¾ivatelské jméno.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'U¾ivatel nemá potøebnou pøístupovou úroveò';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Zvolené "Skuteèné jméno" se shoduje se jménem jiného u¾ivatele. Zvolte si prosím jiné.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Podpora sponzoringu není dostupná.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzor %d nenalezen.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzor (%s) se nalézá pod minimální èástkou (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Øídící nemá minimální pøístupovou úroveò po¾adovanou pro manipulaci se sponzorovanými problémy.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Nepovolený pøístup: Pøidìlení sponzorovaného problému vy¾aduje vy¹¹í pøístupovou úroveò.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nemá elektronickou adresu. Opravte prosím vá¹ profil.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraèní volba \'%s\' má nedovolenou hodnotu \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akce nemù¾e být uskuteènìna, proto¾e problém \'%d\' je ve stavu JEN ÈTENÍ';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Vztah mezi tìmito dvìma problémy u¾ je.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "CHYAB: Vztah nenalezen.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "CHYAB: Pøístup zakázán. Problém %d vy¾aduje vy¹¹í pøístupovou úroveò.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "CHYBA: Problém nemù¾e být ve vztahu sám se sebou.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'CHYBA: Potvrzení se nezdaøilo. Prosím opakujte.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'CHYBA: Fukce \'ztracené heslo\' není dostupná.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'CHYBA: Pøi objednávce zru¹ení hesla musíte uvést svou elektronickou adresu';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'CHYBA: Udané informace neodpovídají ¾ádnému z registrovaných úètù!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrzovací URL je chybné nebo bylo ji¾ pou¾ito. Prosím pøihlaste se znovu.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosa¾eno maximum vnitøních procesù. Obra»te se na správce systému.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Problém nemù¾e být ve vztahu sám se sebou.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrzení se nezdaøilo. Prosím opakujte.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Fukce \'ztracené heslo\' není dostupná.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pøi objednávce zru¹ení hesla musíte uvést svou elektronickou adresu';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Udané informace neodpovídají ¾ádnému z registrovaných úètù!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrzovací URL je chybné nebo bylo ji¾ pou¾ito. Prosím pøihlaste se znovu.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosa¾eno maximum vnitøních procesù. Obra»te se na správce systému.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'CHYBA: Vá¹ úèet je vyøazen nebo blokován, nebo je zadána chybná kombinace u¾ivatelské jméno/heslo.';
-$s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè neumí nebo odmítá pracovat s koláèky (cookies).';
+$s_login_error = 'Vá¹ úèet je vyøazen nebo blokován, nebo je zadána chybná kombinace u¾ivatelské jméno/heslo.';
+$s_login_cookies_disabled = 'Vá¹ prohlí¾eè neumí nebo odmítá pracovat s koláèky (cookies).';
 
 # General Strings
 $s_go_back = 'Zpìt';
@@ -448,7 +452,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -1288,7 +1293,6 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 

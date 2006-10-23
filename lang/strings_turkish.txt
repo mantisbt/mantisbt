@@ -1,19 +1,22 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-
-	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
-	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
-	# -------------------------------------------------
-	# $Revision: 1.84.10.1 $
-	# $Author: thraxisp $
-	# $Date: 2006-02-19 03:39:48 $
 	#
-	# $Id: strings_turkish.txt,v 1.84.10.1 2006-02-19 03:39:48 thraxisp Exp $
+	# Turkish: Oktay Altunergil - oktay@bellatlantic.net
 	###########################################################################
+	# Turkish strings for Mantis
+	# Based on strings_english.txt rev. 1.???
+	# -------------------------------------------------
+	# $Revision: 1.84.10.2 $
+	# $Author: vboctor $
+	# $Date: 2006-10-23 07:14:52 $
+	#
+	# $Id: strings_turkish.txt,v 1.84.10.2 2006-10-23 07:14:52 vboctor Exp $
+	###########################################################################
+
 ?>
 <?php
 # Charset
@@ -57,41 +60,41 @@ $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'Bug History';
+$s_bug_history = 'Issue History';
 $s_field = 'Field';
 $s_old_value = 'Old Value';
 $s_new_value = 'New Value';
 $s_date_modified = 'Date Modified';
-$s_bugnote = 'Bugnote';
+$s_bugnote = 'Note';
 $s_change = 'Change';
-$s_bugnote_view_state = 'Bugnote View State';
-$s_bug_monitor = 'Bug Monitored';
-$s_bug_end_monitor = 'Bug End Monitor';
+$s_bugnote_view_state = 'Note View State';
+$s_bug_monitor = 'Issue Monitored';
+$s_bug_end_monitor = 'Issue End Monitor';
 $s_announcement = 'Announcement';
 $s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = 'Delete Bugnote';
-$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
+$s_delete_bugnote_button = 'Delete Note';
+$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
-$s_blocks = 'blocks %id';
+$s_duplicate_of = "duplicate of";
+$s_has_duplicate = "has duplicate";
+$s_related_to = "related to";
+$s_dependant_on = "parent of";
+$s_blocks = "child of";
 
-$s_new_bug = 'New Bug';
-$s_bugnote_added = 'Bugnote Added';
-$s_bugnote_edited = 'Bugnote Edited';
-$s_bugnote_deleted = 'Bugnote Deleted';
+$s_new_bug = 'New Issue';
+$s_bugnote_added = 'Note Added';
+$s_bugnote_edited = 'Note Edited';
+$s_bugnote_deleted = 'Note Deleted';
 $s_summary_updated = 'Summary Updated';
 $s_description_updated = 'Description Updated';
 $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added';
 $s_file_deleted = 'File Deleted';
-$s_bug_deleted = 'Bug Deleted';
+$s_bug_deleted = 'Issue Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -101,27 +104,27 @@ $s_create_new_project_link = 'Create New Project';
 $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-$s_move_bugs_conf_msg = 'Move bugs to';
+$s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
+$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
+$s_move_bugs_conf_msg = 'Move issues to';
 $s_copy_bugs_conf_msg = 'Copy issues to';
-$s_assign_bugs_conf_msg = 'Assign bugs to';
-$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-$s_priority_bugs_conf_msg = 'Choose bugs priority';
-$s_status_bugs_conf_msg = 'Choose bugs status';
+$s_assign_bugs_conf_msg = 'Assign issues to';
+$s_resolve_bugs_conf_msg = 'Choose issues resolution';
+$s_priority_bugs_conf_msg = 'Choose issues priority';
+$s_status_bugs_conf_msg = 'Choose issues status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Close Bugs' ;
-$s_delete_group_bugs_button = 'Delete Bugs' ;
-$s_move_group_bugs_button = 'Move Bugs' ;
+$s_close_group_bugs_button = 'Close Issues' ;
+$s_delete_group_bugs_button = 'Delete Issues' ;
+$s_move_group_bugs_button = 'Move Issues' ;
 $s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Assign Bugs' ;
-$s_resolve_group_bugs_button = 'Resolve Bugs' ;
+$s_assign_group_bugs_button = 'Assign Issues' ;
+$s_resolve_group_bugs_button = 'Resolve Issues' ;
 $s_priority_group_bugs_button = 'Update Priority' ;
 $s_status_group_bugs_button = 'Update Status' ;
 $s_category_group_bugs_button = 'Update Category';
@@ -166,33 +169,34 @@ $s_printing_preferences_title = 'Choose fields to print';
 $s_printing_options_link = 'Printing Options';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_title = 'Note handler' ;
+$s_bugnote_date = 'Date of note';
+$s_bugnote_description = 'Note description';
 
-$s_error_no_proceed = 'Please use the \'Back\' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'HATA: Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
-$MANTIS_ERROR[ERROR_SQL] = 'HATA: SQL hatasý belirlendi. Lütfen hatayý bildiriniz ';
-$MANTIS_ERROR[ERROR_REPORT] = 'HATA: Raporunuzda bir hata tespit edildi.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HATA: Dosya adý belirtilmedi.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'HATA: Bu dosya türüne izin verilmemektedir';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'HATA: Dizin bulunamadý. Lütfen proje ayarlarýnýzý kontrol ediniz.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HATA: Bu daha önce girilmiþ bir dosya adý. Lütfen önce dosyayý siliniz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Bu iþlemi gerçekleþtirmeye çalýþýrken bir hata meydana geldi. Bu hatayý yerel yöneticinize bildirebilirsiniz.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL hatasý belirlendi. Lütfen hatayý bildiriniz ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adý belirtilmedi.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadý. Lütfen proje ayarlarýnýzý kontrol ediniz.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Bu daha önce girilmiþ bir dosya adý. Lütfen önce dosyayý siliniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HATA: Gerekli bir girdi alaný boþ býrakýldý. Lütfen girdilerinizi kontrol ediniz.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'HATA: Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli bir girdi alaný boþ býrakýldý. Lütfen girdilerinizi kontrol ediniz.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanýcý hesabý koruma altýnda. Koruma kaldýrýlana kadar eriþime izin verilmeyecektir.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  File is not readable by Mantis. Please check the project settings';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Bugnote not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
@@ -202,10 +206,10 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
@@ -215,7 +219,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
@@ -256,10 +260,10 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Geri Git';
@@ -306,33 +310,33 @@ $s_reset_request_msg = 'Someone (presumably you) requested a password change thr
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
 $s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
 $s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
 $s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
@@ -384,8 +388,8 @@ $s_advanced_view = 'Detaylý Ýzle';
 $s_advanced_update = 'Detaylý Güncelleme';
 $s_refresh_delay = 'Yeniden Yükleme Gecikmesi';
 $s_redirect_delay = 'Yönlendirme Gecikmesi';
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
+$s_with_minimum_severity = 'With Minimum Severity of';
+$s_bugnote_order = 'Notes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Yenileri Emaille';
@@ -397,7 +401,7 @@ $s_email_on_reopened = 'Yeniden açýlanlarý Emaille';
 $s_email_on_bugnote_added = 'Bug notu eklenenleri Emaille';
 $s_email_on_status_change = 'Statü deðiþikliklerini Emaille';
 $s_email_on_priority_change = 'Öncelik deðiþikliklerini Emaille';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'Email Notes Limit';
 $s_language = 'Dil';
 $s_update_prefs_button = 'Tercihleri Güncelle';
 $s_reset_prefs_button = 'Tercihleri Sýfýrla';
@@ -444,7 +448,8 @@ $s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
 $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -471,12 +476,12 @@ $s_bug_assign_msg = 'Bug baþarýyla atandý...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_feedback_bug_title = 'Request Feedback on Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
 $s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
+$s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
@@ -601,6 +606,9 @@ $s_closed_bug_button = 'Bug Kapat';
 $s_bugnote_updated_msg = 'Bug notu baþarýyla güncellendi...';
 $s_edited_on = 'güncelleme tarihi: ';
 
+# file_api.php
+$s_show_content ='Show Content';
+
 # index.php
 $s_click_to_login = 'Sisteme Girmek Ýçin Týklayýnýz';
 
@@ -684,13 +692,13 @@ $s_colour_project = 'Project setting overrides others.';
 $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported issue';
 $s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
-$s_notify_defaults_change_access = 'Change users who can change notification defaults to';
-$s_notify_actions_change_access = 'Change users who can change notifications to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Who can change notifications';
 $s_revert_to_system = "Delete All Projects Settings";
 $s_revert_to_all_project = "Delete Project Specific Settings";
 
@@ -713,8 +721,8 @@ $s_access_change = 'Minimum Access Level to Change to this Status';
 $s_desc_bug_submit_status = 'Status to which a new issue is set';
 $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
-$s_workflow_change_access = 'Change users who can change workflow to';
-$s_access_change_access = 'Change users who can change status change access level to';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
@@ -738,6 +746,16 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_config_delete_sure = 'Are you sure you want to delete the settings for';
 $s_in_project = 'in project';
 $s_delete_config_button = 'Delete Settings';
+
+# adm_config_report.php
+$s_configuration_report = 'Configuration Report';
+$s_database_configuration = 'Database Configuration';
+$s_configuration_option = 'Configuration Option';
+$s_configuration_option_type = 'Type';
+$s_configuration_option_value = 'Value';
+$s_all_users = 'All Users';
+$s_set_configuration_option = 'Set Configuration Option';
+$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Proje baþarýyla eklendi...';
@@ -843,7 +861,7 @@ $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Hesap korumalý. Sifre sýfýrlanamaz.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s email address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Hesap þifresi boþ olarak düzenlendi...';
 
 # manage_user_update.php
@@ -1046,9 +1064,12 @@ $s_viewing_bugs_title = 'Buglar Ýzleniyor';
 $s_updated = 'Son Güncelleme';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
 $s_none = 'hiçbiri';
+$s_current = 'current';
 $s_search = 'Ara';
 $s_view_prev_link = 'Öncekini Göster';
 $s_view_next_link = 'Sonrakini Göster';
@@ -1160,8 +1181,8 @@ $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 
-$s_attachments = 'attachment(s)';
-$s_attachment_alt = 'A';
+$s_attachments = "attachment(s)";
+$s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'tr';
@@ -1284,8 +1305,9 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
+# wiki related strings
+$s_wiki = 'Wiki';
 ?>

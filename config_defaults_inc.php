@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.9 2006-10-20 05:50:59 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.10 2006-10-23 07:14:42 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -41,6 +41,8 @@
 	$g_db_username			= 'root';
 	$g_db_password			= '';
 	$g_database_name		= 'bugtracker';
+
+	# Supported types: mysql for MySQL, mysqli for MySQL, pgsql for PostgreSQL, mssql for MS SQL Server, oci8 for Oracle.
 	$g_db_type			= 'mysql';
 
 	############################
@@ -329,39 +331,48 @@
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
 		'auto',
+		'bulgarian',
+		'catalan',
 		'chinese_simplified',
 		'chinese_simplified_utf8',
 		'chinese_traditional',
 		'chinese_traditional_utf8',
 		'croatian',
 		'czech',
+		'czech_utf8',
 		'danish',
 		'dutch',
 		'english',
 		'estonian',
 		'finnish',
 		'french',
+		'french_utf8',
 		'french_canadian',
 		'german',
 		'hungarian',
 		'icelandic',
 		'italian',
+		'italian_utf8',
 		'japanese_euc',
 		'japanese_sjis',
 		'japanese_utf8',
 		'korean',
+		'korean_utf8',
 		'latvian',
 		'lithuanian',
 		'norwegian',
 		'polish',
+		'polish_utf8',
 		'portuguese_brazil',
 		'portuguese_standard',
 		'romanian',
 		'russian',
 		'russian_koi8',
+		'russian_utf8',
 		'serbian',
 		'slovak',
 		'slovene',
+		'slovene_utf8',
 		'spanish',
 		'swedish',
 		'turkish',
@@ -370,33 +381,40 @@
 
 	# Browser language mapping for 'auto' language selection
 	$g_language_auto_map = array(
-		'en-us, en-gb, en-au, en' => 'english',
+		'bg' => 'bulgarian',
+		'ca' => 'catalan',
 		'zh-cn, zh-sg, zh' => 'chinese_simplified',
 		'zh-hk, zh-tw' => 'chinese_traditional',
 		'cs' => 'czech',
 		'da' => 'danish',
 		'nl-be, nl' => 'dutch',
+		'en-us, en-gb, en-au, en' => 'english',
 		'et' => 'estonian',
 		'fi' => 'finnish',
-		'fr-be, fr-ca, fr-ch, fr' => 'french',
+		'fr-be, fr-ch, fr' => 'french',
+		'fr-ca' => 'french_canadian',
 		'de-de, de-at, de-ch, de' => 'german',
 		'hu' => 'hungarian',
+		'hr' => 'croatian',
+		'is' => 'icelandic',
 		'it-ch, it' => 'italian',
 		'ja' => 'japanese_utf8',
 		'ko' => 'korean',
 		'lt' => 'lithuanian',
+		'lv' => 'latvian',
 		'no' => 'norwegian',
 		'pl' => 'polish',
 		'pt-br' => 'portugese_brazil',
 		'pt' => 'portugese_standard',
 		'ro-mo, ro' => 'romanian',
-		'ru-mo, ru' => 'russian',
+		'ru-mo, ru-ru, ru-ua, ru' => 'russian',
 		'sr' => 'serbian',
 		'sk' => 'slovak',
 		'sl' => 'slovene',
 		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 		'sv-fi, sv' => 'swedish',
-		'tr' => 'turkish'
+		'tr' => 'turkish',
+		'uk' => 'ukrainian'
 	);
 
 	# Fallback for automatic language selection
