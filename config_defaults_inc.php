@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.10 2006-10-23 07:14:42 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.283.2.1.2.1.2.1.2.2.2.11 2006-10-29 00:13:22 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -928,7 +928,7 @@
 
 	# access level needed to send a reminder from the bug view pages
 	# set to NOBODY to disable the feature
-	$g_bug_reminder_threshold		= REPORTER;
+	$g_bug_reminder_threshold		= DEVELOPER;
 
 	# access level needed to upload files to the project documentation section
 	# You can set this to NOBODY to prevent uploads to projects
