@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a php based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 INSTALLATION
@@ -13,7 +13,7 @@ Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using Mantis.
 
 These instructions are also available at:
-http://manual.mantisbt.org/manual.installation.php
+http://manual.mantisbugtracker.com/manual.installation.php
 
 # --- Requirements ----------
 

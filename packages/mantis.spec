@@ -7,7 +7,7 @@ License: GPL
 Group: Development/Tools
 Vendor: Mantis Team <mantisbt-dev@lists.sourceforge.net>
 Source: mantis-%{version}.tar.gz
-URL: http://www.mantisbt.org/
+URL: http://www.mantisbugtracker.com/
 Buildroot: %{_tmppath}/%{name}-root
 Prefix: /var/www/mantis
 Requires: php >= 4.0.6

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.16 2005-04-29 13:24:10 vboctor Exp $
+	# $Id: config_inc.php.sample,v 1.16.14.1 2006-10-29 00:34:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This sample file contains the essential files that you MUST
@@ -22,7 +22,7 @@
 	# In general the value OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# Look in http://manual.mantisbt.org/ or config_defaults_inc.php for more
+	# Look in http://manual.mantisbugtracker.com/ or config_defaults_inc.php for more
 	# detailed comments.
 
 	# --- database variables ---------
