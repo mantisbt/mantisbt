@@ -1,5 +1,15 @@
 Mantis ChangeLog
 
+2006.10.28 - 1.0.6
+
+- 0007466: [security] Port: 6719: Manager of a project can assign the Administrator role to a user. (vboctor)
+- 0007543: [security] Port 5163: Default value for $g_bug_reminder_threshold should be higher than "reporter" (vboctor)
+- 0007467: [administration] Port 6637: Disabled projects don't appear under parent project (vboctor)
+- 0007527: [localization] Port 7526: japanese_utf8 is more suitable than japanese_sjis ($g_language_auto_map) (vboctor)
+- 0007470: [localization] [all lang] Port latest localization files from Mantis 1.1 to Mantis 1.0.x (vboctor)
+- 0007530: [localization] Port:: New Languages: bulgarian, catalan, czech_utf8, french_utf8, italian_utf8, polish_utf8, russian_utf8, slovene_utf8 (vboctor)
+- 0007412: [other] Update Mantis to refer to new website (vboctor)
+
 2006.07.23 - 1.0.5
 
 - 0007301: [upgrade] Login page inaccessible after upgrade to 1.0.4 (thraxisp)
