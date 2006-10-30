@@ -4,6 +4,16 @@ Mantis ChangeLog
 
 - Added Italian UTF8 localization (thanks to lele)
 
+2006.10.28 - 1.0.6
+
+- 0007466: [security] Port: 6719: Manager of a project can assign the Administrator role to a user. (vboctor)
+- 0007543: [security] Port 5163: Default value for $g_bug_reminder_threshold should be higher than "reporter" (vboctor)
+- 0007467: [administration] Port 6637: Disabled projects don't appear under parent project (vboctor)
+- 0007527: [localization] Port 7526: japanese_utf8 is more suitable than japanese_sjis ($g_language_auto_map) (vboctor)
+- 0007470: [localization] [all lang] Port latest localization files from Mantis 1.1 to Mantis 1.0.x (vboctor)
+- 0007530: [localization] Port:: New Languages: bulgarian, catalan, czech_utf8, french_utf8, italian_utf8, polish_utf8, russian_utf8, slovene_utf8 (vboctor)
+- 0007412: [other] Update Mantis to refer to new website (vboctor)
+
 2006.09.11  -  1.1.0a1
 
 This is the alpha release for Mantis 1.1, it is not recommended for production use.  The list of issues below are relative to Mantis 1.0.0rc2, hence, some of the fixes, specially the security ones, would be available in the 1.0.x releases.  This release has about 100 enhancements and fixes, some of the highlights include wiki integration, web based configuration (general/per user/per project), customizing columns for view/print/csv issues can now be done through the web interface and can be per user or project, email queuing, and authenticated RSS feeds.
