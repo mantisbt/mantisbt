@@ -22,11 +22,11 @@
 	# French strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.117 $
+	# $Revision: 1.118 $
 	# $Author: siebrand $
-	# $Date: 2006-10-31 20:30:18 $
+	# $Date: 2006-10-31 20:33:22 $
 	#
-	# $Id: strings_french.txt,v 1.117 2006-10-31 20:30:18 siebrand Exp $
+	# $Id: strings_french.txt,v 1.118 2006-10-31 20:33:22 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -1076,7 +1076,7 @@ $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
 $s_sticky = 'Afficher les bogues récurrants';
 $s_sort = 'Trier par';
-$s_issue_id = 'Bug #';
+$s_issue_id = 'Bogue #';
 $s_recently_visited = 'Visité récemment';
 
 # view_all_inc.php
