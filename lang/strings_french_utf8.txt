@@ -22,11 +22,11 @@
 	# French strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: achumakov $
-	# $Date: 2006-09-30 22:19:42 $
+	# $Revision: 1.2 $
+	# $Author: siebrand $
+	# $Date: 2006-10-31 20:58:56 $
 	#
-	# $Id: strings_french_utf8.txt,v 1.1 2006-09-30 22:19:42 achumakov Exp $
+	# $Id: strings_french_utf8.txt,v 1.2 2006-10-31 20:58:56 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -302,7 +302,7 @@ $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,
 $s_severity_enum_string = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:critique,80:bloquant';
 $s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:S/O';
 $s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
-$s_resolution_enum_string = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
+$s_resolution_enum_string = '10:ouvert,20:résolu,30:rouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
 $s_projection_enum_string = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
 $s_eta_enum_string = '10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois';
 $s_sponsorship_enum_string = '0:non payé,1:demandé,2:payé';
@@ -331,7 +331,7 @@ $s_email_notification_title_for_status_bug_closed = 'Le bogue suivant a été fe
 
 $s_email_notification_title_for_action_bug_submitted = 'Le bogue suivant a été soumis.';
 $s_email_notification_title_for_action_bug_assigned = 'Le bogue suivant a été assigné.';
-$s_email_notification_title_for_action_bug_reopened = 'Le bogue suivant a été réouvert.';
+$s_email_notification_title_for_action_bug_reopened = 'Le bogue suivant a été rouvert.';
 $s_email_notification_title_for_action_bug_deleted = 'Le bogue suivant a été supprimé.';
 $s_email_notification_title_for_action_bug_updated = 'Le bogue suivant a été mis à jour.';
 $s_email_notification_title_for_action_sponsorship_added = 'Le bogue suivant a été commandité.';
@@ -526,9 +526,9 @@ $s_upload_file_button = 'Envoyer le fichier';
 $s_max_file_size = 'Taille max. ';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Le bogue a été réouvert...';
-$s_reopen_add_bugnote_title = 'Ajouter une note pour la réouverture du bogue';
-$s_bugnote_add_reopen_button = 'Ajouter une note et réouvrir le bogue';
+$s_bug_reopened_msg = 'Le bogue a été rouvert...';
+$s_reopen_add_bugnote_title = 'Ajouter une note pour la rouverture du bogue';
+$s_bugnote_add_reopen_button = 'Ajouter une note et rouvrir le bogue';
 
 # bug_resolve_page.php
 $s_resolved_bug_title = 'Résolution d\'un bogue';
@@ -731,7 +731,7 @@ $s_no_exit = 'Vous ne pouvez pas déplacer un bogue hors de cette phase';
 $s_access_levels = 'Niveaux d\'accès';
 $s_access_change = 'Niveau d\'accès minimal pour modifier cette phase';
 $s_desc_bug_submit_status = 'Phase pour un nouveau bogue';
-$s_desc_bug_reopen_status = 'Phase pour les bogues réouverts';
+$s_desc_bug_reopen_status = 'Phase pour les bogues rouverts';
 $s_desc_bug_resolved_status_threshold = 'Phase à laquelle un bogue est considéré comme résolu';
 $s_workflow_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications au cheminement de travail à';
 $s_access_change_access = 'Modifier les utilisateurs qui peuvent faire des modifications aux niveaux d\'accès';
@@ -743,7 +743,7 @@ $s_default_not_in_flow = 'La phase par défaut de %s n\'est pas définie pour %s
 $s_assign_issue = 'Assigner un bogue';
 $s_allow_close_immediate = 'Permettre la fermeture d\'un bogue à sa résolution';
 $s_allow_reporter_close = 'Permettre aux demandeurs de fermer un bogue';
-$s_allow_reporter_reopen = 'Permettre aux demandeurs de ré-ouvrir un bogue';
+$s_allow_reporter_reopen = 'Permettre aux demandeurs de rouvrir un bogue';
 $s_set_status_assigned = 'Changer l\'état à l\'assignement';
 $s_allow_user_edit = 'Permettre aux utilisateurs de modifier leurs propres notes de bogue';
 $s_limit_access = 'Restreindre l\'accès des demandeurs aux bogues qu\'ils ont soumis';
@@ -1121,7 +1121,7 @@ $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Mettre à jour le bogue';
 $s_bug_assign_to_button = 'Assigné à :';
 $s_bug_status_to_button = 'Changer l\'état en :';
-$s_reopen_bug_button = 'Réouvrir un bogue';
+$s_reopen_bug_button = 'Rouvrir un bogue';
 $s_move_bug_button = 'Déplacer bogue';
 $s_attached_files = 'Pièces jointes';
 $s_publish = 'Publié';
@@ -1259,7 +1259,7 @@ $s_monitor_issue = 'Démarrer la surveillance d\'un bogue';
 $s_handle_issue = 'Gérer un bogue';
 $s_move_issue = 'Déplacer un bogue';
 $s_delete_issue = 'Supprimer un bogue';
-$s_reopen_issue = 'Réouvrir un bogue';
+$s_reopen_issue = 'Rouvrir un bogue';
 $s_view_private_issues = 'Voir les bogues privés';
 $s_update_readonly_issues = 'Mettre à jour un bogue qui est en lecture seule';
 $s_update_issue_status = 'Mettre à jour le statut d\'un bogue';
