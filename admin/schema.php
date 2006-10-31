@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.11 2006-08-14 08:32:57 vboctor Exp $
+	# $Id: schema.php,v 1.12 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -325,4 +325,5 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_email_table'),"
   body 			XS NOTNULL
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',config_get('mantis_email_table'),'email_id'));
+$upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bug_table'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 ?>

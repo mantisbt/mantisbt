@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.9 2006-05-18 05:53:44 vboctor Exp $
+	# $Id: csv_api.php,v 1.10 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -116,6 +116,12 @@
 	# return the fixed_in_version
 	function csv_format_fixed_in_version( $p_fixed_in_version ) {
 		return csv_escape_string( $p_fixed_in_version );
+	}
+
+	# --------------------
+	# return the target_version
+	function csv_format_target_version( $p_target_version ) {
+		return csv_escape_string( $p_target_version );
 	}
 
 	# --------------------

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.27 2006-05-18 05:53:44 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.28 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -30,6 +30,28 @@
 	# --------------------
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
+		$t_bug = bug_get( $p_issue_id );
+		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_attribute( $t_bug->summary );
+
+		if ( $t_bug->handler_id != 0 ) {
+			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
+		}
+
+		echo '<br />';
+	}
+
+	# --------------------
+	# Checks the provided bug and determines whether it should be included in the roadmap or not.
+	# returns true: to include, false: to exclude.
+	function custom_function_default_roadmap_include_issue( $p_issue_id ) {
+		$t_issue = bug_get( $p_issue_id );
+
+		return ( $t_issue->duplicate_id == 0 );
+	}
+
+	# --------------------
+	# Prints one entry in the roadmap.
+	function custom_function_default_roadmap_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
 		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_attribute( $t_bug->summary );
 

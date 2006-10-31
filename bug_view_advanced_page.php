@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.80 2006-09-15 05:19:45 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.81 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -381,7 +381,15 @@
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- spacer -->
-	<td colspan="4">&nbsp;</td>
+	<td colspan="2">&nbsp;</td>
+
+	<!-- Target Version -->
+	<td class="category">
+		<?php echo lang_get( 'target_version' ) ?>
+	</td>
+	<td>
+		<?php echo $t_bug->target_version ?>
+	</td>
 
 	<!-- Product Build -->
 	<td class="category">

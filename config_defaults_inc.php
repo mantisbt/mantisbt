@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.317 2006-10-29 00:09:35 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.318 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1079,6 +1079,9 @@
 	# threshold for viewing changelog
 	$g_view_changelog_threshold = VIEWER;
 
+	# threshold for viewing roadmap
+	$g_roadmap_view_threshold = VIEWER;
+	
 	# status change thresholds
 	$g_update_bug_status_threshold = DEVELOPER;
 

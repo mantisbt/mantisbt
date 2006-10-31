@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.61 2006-04-06 00:24:45 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.62 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -123,6 +123,14 @@
 		$f_fixed_in_version = array( $f_fixed_in_version );
 	}
 	
+	$f_target_version = array();
+	if ( is_array( gpc_get( 'target_version', null ) ) ) {
+		$f_target_version = gpc_get_string_array( 'target_version', META_FILTER_ANY );
+	} else {
+		$f_target_version = gpc_get_string( 'target_version', META_FILTER_ANY );
+		$f_target_version = array( $f_target_version );
+	}
+
 	$f_show_profile = array();
 	if ( is_array( gpc_get( 'show_profile', null ) ) ) {
 		$f_show_profile = gpc_get_string_array( 'show_profile', META_FILTER_ANY );
@@ -368,6 +376,7 @@
 				$t_setting_arr['show_version'] = $f_show_version;
 				$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
 				$t_setting_arr['fixed_in_version'] = $f_fixed_in_version;
+				$t_setting_arr['target_version'] = $f_target_version;
 				$t_setting_arr['show_priority'] = $f_show_priority;
 				$t_setting_arr['user_monitor'] = $f_user_monitor;
 				$t_setting_arr['view_state'] = $f_view_state;
@@ -410,6 +419,7 @@
 				$t_setting_arr['show_version'] 	= array( META_FILTER_ANY );
 				$t_setting_arr['show_priority']	= array( META_FILTER_ANY );
 				$t_setting_arr['fixed_in_version']	= array( META_FILTER_ANY );
+				$t_setting_arr['target_version']	= array( META_FILTER_ANY );
 				$t_setting_arr['user_monitor'] 		= array( META_FILTER_ANY );
 				$t_setting_arr['relationship_type'] = -1;
 				$t_setting_arr['relationship_bug'] = 0;

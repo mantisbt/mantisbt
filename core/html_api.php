@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.197 2006-09-22 05:54:17 vboctor Exp $
+	# $Id: html_api.php,v 1.198 2006-10-31 08:43:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -510,6 +510,11 @@
 				# Changelog Page
 				if ( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
 					$t_menu_options[] = '<a href="changelog_page.php">' . lang_get( 'changelog_link' ) . '</a>';
+				}
+
+				# Roadmap Page
+				if ( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+					$t_menu_options[] = '<a href="roadmap_page.php">' . lang_get( 'roadmap_link' ) . '</a>';
 				}
 
 				# Summary Page

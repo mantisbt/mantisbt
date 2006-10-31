@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.144 2006-09-12 04:38:02 vboctor Exp $
+	# $Id: filter_api.php,v 1.145 2006-10-31 08:43:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -565,6 +565,37 @@
 				array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version in (". implode( ', ', $t_clauses ) .") )" );
 			} else {
 				array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version=$t_clauses[0] )" );
+			}
+		}
+
+		# target version
+		$t_any_found = false;
+		foreach( $t_filter['target_version'] as $t_filter_member ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
+				$t_any_found = true;
+			}
+		}
+		if ( count( $t_filter['target_version'] ) == 0 ) {
+			$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['target_version'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
+				if ( META_FILTER_NONE == $t_filter_member ) {
+					array_push( $t_clauses, "''" );
+				} else {
+					$c_target_version = db_prepare_string( $t_filter_member );
+					array_push( $t_clauses, "'$c_target_version'" );
+				}
+			}
+			
+			#echo var_dump( $t_clauses ); exit;
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.target_version in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.target_version=$t_clauses[0] )" );
 			}
 		}
 
@@ -1425,7 +1456,10 @@
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_priority[]'; ?>" id="show_priority_filter"><?php PRINT lang_get( 'priority' ) ?>:</a>
 			</td>
-			<?php if ( $t_filter_cols > 7 ) {
+			<td colspan="1" class="small-caption" valign="top">
+				<a href="<?php echo $t_filters_url . 'target_version[]'; ?>" id="show_target_version_filter"><?php echo lang_get( 'target_version' ) ?>:</a>
+			</td>
+			<?php if ( $t_filter_cols > 8 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
 			} ?>
 		</tr>
@@ -1656,7 +1690,44 @@
 	               }
 	              ?>
 	    	</td>
-			<?php if ( $t_filter_cols > 7 ) {
+			<td colspan="1" class="small-caption" valign="top" id="show_target_version_filter_target">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
+								if ( count( $t_filter['target_version'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['target_version'] as $t_current ) {
+										$t_current = stripslashes( $t_current );
+										?>
+										<input type="hidden" name="target_version[]" value="<?php echo string_display( $t_current );?>" />
+										<?php
+										$t_this_string = '';
+										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+												|| ( is_blank( $t_current ) ) ) {
+											$t_any_found = true;
+										} else if ( META_FILTER_NONE == $t_current ) {
+											$t_this_string = lang_get( 'none' );
+										} else {
+											$t_this_string = string_display( $t_current );
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br />';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_string;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			<?php if ( $t_filter_cols > 8 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 7 ) . '">&nbsp;</td>';
 			} ?>
 
@@ -2493,6 +2564,9 @@
 		if ( !isset( $p_filter_arr['relationship_bug'] ) ) {
 			$p_filter_arr['relationship_bug'] = gpc_get_int( 'relationship_bug', 0 );
 		}
+		if ( !isset( $p_filter_arr['target_version'] ) ) {
+			$p_filter_arr['target_version'] = META_FILTER_ANY;
+		}
 
 		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 		$f_custom_fields_data 	= array();
@@ -2559,6 +2633,7 @@
 									  'show_version' => 'string',
 									  'hide_status' => 'int',
 									  'fixed_in_version' => 'string',
+									  'target_version' => 'string',
 									  'user_monitor' => 'int',
 									  'show_profile' => 'int'
 									 );
@@ -2795,6 +2870,17 @@
 			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL, false, true ) ?>
+		</select>
+		<?php
+	}
+
+	function print_filter_show_target_version(){
+		global $t_select_modifier, $t_filter;
+		?><!-- Fixed in Version -->
+		<select <?php PRINT $t_select_modifier;?> name="target_version[]">
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['target_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="<?php echo META_FILTER_NONE ?>" <?php check_selected( $t_filter['target_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<?php print_version_option_list( $t_filter['target_version'], null, VERSION_ALL, false, true ) ?>
 		</select>
 		<?php
 	}

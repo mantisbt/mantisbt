@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.36 2006-09-26 01:30:57 thraxisp Exp $
+	# $Id: history_api.php,v 1.37 2006-10-31 08:43:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -265,6 +265,9 @@
 				break;
 			case 'fixed_in_version':
 				$t_field_localized = lang_get( 'fixed_in_version' );
+				break;
+			case 'target_version':
+				$t_field_localized = lang_get( 'target_version' );
 				break;
 			case 'date_submitted':
 				$t_field_localized = lang_get( 'date_submitted' );

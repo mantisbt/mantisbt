@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.123 2006-08-21 04:41:35 vboctor Exp $
+	# $Id: email_api.php,v 1.124 2006-10-31 08:43:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -952,6 +952,7 @@
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
 
 		# custom fields formatting
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
@@ -1094,6 +1095,10 @@
 
 		$t_bug_data['email_resolution'] = $row['resolution'];
 		$t_bug_data['email_fixed_in_version'] = $row['fixed_in_version'];
+
+		if ( !is_blank( $row['target_version'] ) ) {
+			$t_bug_data['email_target_version'] = $row['target_version'];
+		}
 
 		if ( DUPLICATE == $row['resolution'] ) {
 			$t_bug_data['email_duplicate'] = $row['duplicate_id'];

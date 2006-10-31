@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.89 2005-12-13 00:40:10 thraxisp Exp $
+	# $Id: bug_update.php,v 1.90 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,6 +63,7 @@
 	$t_bug_data->version			= gpc_get_string( 'version', $t_bug_data->version );
 	$t_bug_data->build				= gpc_get_string( 'build', $t_bug_data->build );
 	$t_bug_data->fixed_in_version		= gpc_get_string( 'fixed_in_version', $t_bug_data->fixed_in_version );
+	$t_bug_data->target_version		= gpc_get_string( 'target_version', $t_bug_data->target_version );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
 

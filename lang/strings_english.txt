@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.281 $
-	# $Author: achumakov $
-	# $Date: 2006-10-01 09:04:57 $
+	# $Revision: 1.282 $
+	# $Author: vboctor $
+	# $Date: 2006-10-31 08:43:58 $
 	#
-	# $Id: strings_english.txt,v 1.281 2006-10-01 09:04:57 achumakov Exp $
+	# $Id: strings_english.txt,v 1.282 2006-10-31 08:43:58 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -353,6 +353,7 @@ $s_email_status = 'Status';
 $s_email_resolution = 'Resolution';
 $s_email_duplicate = 'Duplicate';
 $s_email_fixed_in_version = 'Fixed in Version';
+$s_email_target_version = 'Target Version';
 $s_email_date_submitted = 'Date Submitted';
 $s_email_last_modified = 'Last Modified';
 $s_email_summary = 'Summary';
@@ -570,6 +571,7 @@ $s_eta = 'ETA';
 $s_product_version = 'Product Version';
 $s_build = 'Build';
 $s_fixed_in_version = 'Fixed in Version';
+$s_target_version = 'Target Version';
 $s_votes = 'Votes';
 $s_summary = 'Summary';
 $s_description = 'Description';
@@ -874,6 +876,7 @@ $s_main_link = 'Main';
 $s_view_bugs_link = 'View Issues';
 $s_report_bug_link = 'Report Issue';
 $s_changelog_link = 'Change Log';
+$s_roadmap_link = 'Roadmap';
 $s_summary_link = 'Summary';
 $s_account_link = 'My Account';
 $s_users_link = 'Users';
@@ -1204,6 +1207,9 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Change Log';
+
+# Roadmap
+$s_roadmap = 'Roadmap';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.15 2006-08-15 06:10:14 vboctor Exp $
+	# $Id: columns_api.php,v 1.16 2006-10-31 08:43:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -167,6 +167,19 @@
 			echo '</td>';
 		} else {
 			echo lang_get( 'fixed_in_version' );
+		}
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+			echo '<td>';
+			print_view_bug_sort_link( lang_get( 'target_version' ), 'target_version', $p_sort, $p_dir, $p_columns_target );
+			print_sort_icon( $p_dir, $p_sort, 'target_version' );
+			echo '</td>';
+		} else {
+			echo lang_get( 'target_version' );
 		}
 	}
 
