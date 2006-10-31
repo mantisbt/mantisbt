@@ -12,13 +12,13 @@
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.281
 	# -------------------------------------------------
-	# $Revision: 1.115 $
-	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Revision: 1.116 $
+	# $Author: siebrand $
+	# $Date: 2006-10-31 20:24:06 $
 	#
-	# $Id: strings_italian.txt,v 1.115 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_italian.txt,v 1.116 2006-10-31 20:24:06 siebrand Exp $
 	###########################################################################
 
 ?>
@@ -241,7 +241,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "No copy action was specified.";
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "Category not found.";
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "A version with that name already exists.";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = "Version \'%s\' not found.";
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = "The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.";
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = "Il nome dell'utente non è valido.  I nomi utente possono contenere solo lettere non accentate, cifre, spazi, trattini e underscore (\"_\").";
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "User does not have required access level";
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "The \"Real Name\" chosen matches another user\'s login name. Please choose another.";
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Sponsorship support not enabled.";
@@ -295,8 +295,8 @@ $s_severity_enum_string           = "10:nuova funzionalita',20:banale,30:ortogra
 $s_reproducibility_enum_string    = "10:sempre,30:qualche volta,50:casuale,70:non testato,90:non riproducibile,100:non pertinente";
 $s_status_enum_string             = "10:nuovo,20:da discutere,30:riconosciuto,40:confermato,50:assegnato,80:risolto,90:chiuso";
 $s_resolution_enum_string         = "10:aperta,20:risolta,30:riaperta,40:incapace di riprodurla,50:non correggibile,60:duplicata,70:non e' una anomalia,80:sospesa,90:non verra' corretta";
-$s_projection_enum_string         = "10:nessuno,30:ritocco,50:fix minore,70:considerevole,90:riscrittura";
-$s_eta_enum_string                = "10:nessuno,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un mese,60:piu' di un mese";
+$s_projection_enum_string         = "10:nessuna,30:ritocco,50:fix minore,70:considerevole,90:riscrittura";
+$s_eta_enum_string                = "10:nessuna,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un mese,60:più di un mese";
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
@@ -453,7 +453,7 @@ $s_own_sponsored = 'Issues You have Sponsored:';
 $s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
 $s_no_own_sponsored = 'You have not sponsored any issues.';
 $s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor_verb = 'Sponsorizza';	# like in 'Sponsor it!'
 $s_amount = 'Amount';
 $s_total_owing = 'Total Owing';
 $s_total_paid = 'Total Paid';
@@ -804,7 +804,7 @@ $s_categories = "Categorie";
 $s_add_category_button = "Nuova categoria";
 $s_versions = "Versioni";
 $s_add_version_button = "Nuova versione";
-$s_add_and_edit_version_button = "Aggiunge o modifica versione";
+$s_add_and_edit_version_button = "Aggiungi e modifica versione";
 $s_edit_link = "modifica";
 $s_actions = "Azioni";
 $s_version = "Versione";
@@ -1087,7 +1087,7 @@ $s_use_date_filters = "Filtro per data";
 $s_yes = "Si";
 $s_no = "No";
 $s_open_filters = "Cambia filtro";
-$s_or_unassigned = "oppure non assegnato";
+$s_or_unassigned = "oppure non assegnata";
 $s_ok = "OK";
 $s_select_all = "Seleziona tutti";
 
@@ -1095,8 +1095,8 @@ $s_select_all = "Seleziona tutti";
 $s_use_query = "Usa filtro";
 $s_delete_query = "Elimina filtro";
 $s_query_deleted = "Filtro eliminato";
-$s_save_query = "Save filtro corrente";
-$s_reset_query = "Reset filtro";
+$s_save_query = "Memorizza filtro corrente";
+$s_reset_query = "Annulla filtro";
 $s_query_name = "Nome filtro";
 $s_query_exists = "Questa query sembra già esistere";
 $s_query_dupe_name = "Esiste un'altra query con questo nome. Indicare un nome differente";
