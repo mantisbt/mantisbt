@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graphviz_api.php,v 1.5 2005-02-12 20:01:11 jlatour Exp $
+	# $Id: graphviz_api.php,v 1.6 2006-11-04 12:50:17 prichards Exp $
 	# --------------------------------------------------------
 
 	### GraphViz API ###
@@ -321,9 +321,8 @@
 
 					echo $t_dot_output;
 				}
-
-				$t_graphviz->release();
-				$t_graphviz = null;
+								
+				unset($t_graphviz);
 			} else if ( php_version_at_least( '4.3.0' ) ) {
 				# If we are not under Windows, use proc_open whenever possible,
 				# (PHP >= 4.3.0) since it avoids the need of temporary files.
