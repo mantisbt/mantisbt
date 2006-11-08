@@ -11,11 +11,11 @@
 	# Icelandic strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:45 $
+	# $Date: 2006-11-08 14:02:39 $
 	#
-	# $Id: strings_icelandic_8859-1.txt,v 1.1 2006-11-08 13:32:45 achumakov Exp $
+	# $Id: strings_icelandic_8859-1.txt,v 1.2 2006-11-08 14:02:39 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -33,7 +33,7 @@ $s_actiongroup_menu_resolve = 'Leyst';
 $s_actiongroup_menu_update_priority = 'Uppfæra forgang';
 $s_actiongroup_menu_update_status = 'Staða uppfærslu';
 $s_actiongroup_menu_update_view_status = 'Skoða uppfærða stöðu';
-$s_actiongroup_menu_update_category = 'Uppfæra flokkun';
+$s_actiongroup_menu_update_category = 'Uppfæra verkþætti';
 $s_actiongroup_menu_set_sticky = 'Líming á/af';
 $s_actiongroup_menu_update_field = 'Uppfæra %s';
 $s_actiongroup_bugs = 'Sérvalin atriði';
@@ -57,8 +57,8 @@ $s_unassigned_projects = 'Óúthlutuð verkefni';
 $s_print = 'Prenta';
 $s_jump = 'Fara til';
 $s_copy_users = 'Afrita notendur';
-$s_copy_categories_from = 'Afrita flokka frá';
-$s_copy_categories_to = 'Afrita flokka til';
+$s_copy_categories_from = 'Afrita verkþætti frá';
+$s_copy_categories_to = 'Afrita verkþætti til';
 $s_copy_users_from = 'Afrita notendur frá';
 $s_copy_users_to = 'Afrita notendur til';
 $s_bug_history = 'Ferill atriða';
@@ -108,7 +108,7 @@ $s_login_link = 'Innskráning';
 $s_bug_actiongroup_failed = 'Þú hafðir ekki leyfi til að framkvæma þessa aðgerð á eftirfarandi atriðum: ';
 $s_bug_actiongroup_access = 'Þú hafðir ekki leyfi til að framkvæma þessa aðgerð.';
 $s_bug_actiongroup_status = 'Þessu atriði er ekki hægt að breyta í þessa stöðu.';
-$s_bug_actiongroup_category = 'Þessu atriði er ekki hægt að breyta í þennan flokk.';
+$s_bug_actiongroup_category = 'Þessu atriði er ekki hægt að breyta í þennan verkþátt.';
 $s_close_bugs_conf_msg = 'Ertu viss um að vilja loka þessu atriði?';
 $s_delete_bugs_conf_msg = 'Ertu viss um að vilja eyða þessu atriði?';
 $s_move_bugs_conf_msg = 'Færa atriði til';
@@ -118,7 +118,7 @@ $s_resolve_bugs_conf_msg = 'Velja úrlausn atriðis';
 $s_priority_bugs_conf_msg = 'Velja forgang atriðis';
 $s_status_bugs_conf_msg = 'Velja stöðu atriðis';
 $s_view_status_bugs_conf_msg = 'Velja uppfærða stöðu atriðis';
-$s_category_bugs_conf_msg = 'Velja flokk atriðis';
+$s_category_bugs_conf_msg = 'Velja verkþátt atriðis';
 $s_set_sticky_bugs_conf_msg = 'Ertu viss um að vilja setja límingu atriðis á/af?';
 $s_close_group_bugs_button = 'Loka atriði';
 $s_delete_group_bugs_button = 'Eyða atriði';
@@ -128,7 +128,7 @@ $s_assign_group_bugs_button = 'Úthluta atriði';
 $s_resolve_group_bugs_button = 'Leysa atriði';
 $s_priority_group_bugs_button = 'Uppfæra forgang';
 $s_status_group_bugs_button = 'Uppfæra stöðu';
-$s_category_group_bugs_button = 'Uppfæra flokk';
+$s_category_group_bugs_button = 'Uppfæra verkþátt';
 $s_view_status_group_bugs_button = 'Uppfæra stöðu atriðis';
 $s_set_sticky_group_bugs_button = 'Setja límingu á/af';
 
@@ -136,12 +136,12 @@ $s_set_sticky_group_bugs_button = 'Setja límingu á/af';
 $s_graph_imp_status_title = 'Samþætt graf eftir stöðu';
 $s_graph_imp_priority_title = 'Samþætt graf eftir forgangi';
 $s_graph_imp_severity_title = 'Samþætt graf eftir alvöru';
-$s_graph_imp_category_title = 'Samþætt graf eftir flokki';
+$s_graph_imp_category_title = 'Samþætt graf eftir verkþætti';
 $s_graph_imp_resolution_title = 'Samþætt graf eftir úrlausn';
 $s_by_status_pct = 'eftir prósentu stöðu';
 $s_by_priority_pct = 'eftir forgangs prósentu';
 $s_by_severity_pct = 'eftir mikilvægis prósentu';
-$s_by_category_pct = 'eftir flokks prósentu';
+$s_by_category_pct = 'eftir verkþátts prósentu';
 $s_by_resolution_pct = 'eftir úrlausnar prósentu';
 $s_by_severity_mix = 'eftir mikilvægi og stöðu';
 $s_by_priority_mix = 'eftir forgangi og stöðu';
@@ -150,7 +150,7 @@ $s_synthesis_link = 'Samþætting';
 $s_status_link = 'Eftir stöðu';
 $s_priority_link = 'Eftir forgangi';
 $s_severity_link = 'Eftir mikilvægi';
-$s_category_link = 'Eftir flokki';
+$s_category_link = 'Eftir verkþætti';
 $s_resolution_link = 'Eftir úrlausn';
 $s_legend_still_open = 'Enn opið';
 $s_legend_resolved = 'Leyst';
@@ -233,9 +233,9 @@ $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Upplýsingar um LDAP notenda fundust 
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Tenging við gagnagrunn mistókst. Villa móttekin frá gagnagrunni var #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Fyrirspurn á gagnagrunni mistókst. Villa móttekin frá gagnagrunni vegna fyrirspurnar um #%d: %s var %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Gagnagrunnsval mistókst. Villa móttekinn frá gagnagrunni var #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Flokkur með þessu nafni er til staðar.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Verkþáttur með þessu nafni er til staðar.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Enginn afritun var tilgreind.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Flokkur fannst ekki.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Verkþáttur fannst ekki.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Útgáfa með þessu nafni er til staðar.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Útgáfa \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Notendanafnið er ógilt. Þau mega aðeins innihalda bókstafi, tölur, bil, bandstrik og undirstrik.';
@@ -345,7 +345,7 @@ $s_email_reporter = 'Tilkynnt af';
 $s_email_handler = 'Úthlutað til';
 $s_email_project = 'Verkefni';
 $s_email_bug = 'Útgáfu númer (ID)';
-$s_email_category = 'Flokkur';
+$s_email_category = 'Verkþáttur';
 $s_email_reproducibility = 'Möguleg endursköpun';
 $s_email_severity = 'Mikilvægi';
 $s_email_priority = 'Forgangur';
@@ -552,7 +552,7 @@ $s_back_to_bug_link = 'Aftur til atriðis';
 $s_update_simple_link = 'Einföld uppfærsla';
 $s_updating_bug_advanced_title = 'Uppfæri upplýsingar um atriði';
 $s_id = 'ID';
-$s_category = 'Flokkur';
+$s_category = 'Verkþáttur';
 $s_severity = 'Mikilvægi';
 $s_reproducibility = 'Möguleg endursköpun';
 $s_date_submitted = 'Sendingardagur';
@@ -762,21 +762,21 @@ $s_delete_config_sure_msg = 'Ertu viss um að vilja eyða þessum stillingar mögule
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Flokkinum hefur verið bætt við...';
+$s_category_added_msg = 'Verkþættinum hefur verið bætt við...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Flokkinum hefur verið eytt...';
+$s_category_deleted_msg = 'Verkþættinum hefur verið eytt...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum flokki?';
-$s_delete_category_button = 'Eyða flokki';
+$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?';
+$s_delete_category_button = 'Eyða verkþætti';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Skrifa Verkefna flokk';
-$s_update_category_button = 'Uppfæra flokk';
+$s_edit_project_category_title = 'Skrifa verkþátt';
+$s_update_category_button = 'Uppfæra verkþátt';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Flokkurinn hefur verið uppfærður...';
+$s_category_updated_msg = 'Verkþátturinn hefur verið uppfærður...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Bæti við undirverkefnum';
@@ -796,9 +796,9 @@ $s_public = 'almennt';
 $s_private = 'læst';
 $s_update_project_button = 'Uppfæra verkefni';
 $s_delete_project_button = 'Eyða verkefni';
-$s_categories_and_version_title = 'Flokkar og útgáfur';
-$s_categories = 'Flokkar';
-$s_add_category_button = 'Bæta við flokki';
+$s_categories_and_version_title = 'Verkþættir og útgáfur';
+$s_categories = 'Verkþáttur';
+$s_add_category_button = 'Bæta við verkþætti';
 $s_versions = 'Útgáfur';
 $s_add_version_button = 'Bæta við útgáfu';
 $s_add_and_edit_version_button = 'Bæta við og skrifa útgáfu';
@@ -809,7 +809,7 @@ $s_timestamp = 'Tímastimpill';
 $s_update = 'Uppfæra';
 $s_subprojects = 'Undirverkefni';
 $s_add_subproject = 'Bæta við sem undirverkefni';
-$s_create_new_subproject_link = 'Skapa nýjan undirflokk';
+$s_create_new_subproject_link = 'Útbúa nýtt undirverkefni';
 $s_unlink_link = 'Aftengja';
 
 # manage_proj_menu_page.php
@@ -976,7 +976,7 @@ $s_remove_all_link = 'Fjarlægi alla';
 $s_updated_user_msg = 'Notandi uppfærður';
 
 # report_add.php
-$s_must_enter_category = 'Þú verður að velja flokk';
+$s_must_enter_category = 'Þú verður að velja verkþátt';
 $s_must_enter_severity = 'Þú verður að velja mikilvægi';
 $s_must_enter_reproducibility = 'Þú verður að velja mögulega endursköpun';
 $s_must_enter_summary = 'Þú verður að skrifa yfirlit';
@@ -988,7 +988,7 @@ $s_submission_thanks_msg = 'Takk fyrir þitt framlag';
 $s_simple_report_link = 'Einföld skýrsla';
 $s_enter_report_details_title = 'Skrifa ítarlega skýrslu';
 $s_required = 'krafa';
-$s_select_category = 'Veldu flokk';
+$s_select_category = 'Veldu verkþátt';
 $s_select_reproducibility = 'Veldu mögulega endursköpun';
 $s_select_severity = 'Veldu mikilvægi';
 $s_or_fill_in = 'EÐA fylla út';
@@ -1037,7 +1037,7 @@ $s_by_status = 'Eftir stöðu';
 $s_by_date = 'Eftir dagsetningu (dögum)';
 $s_by_severity = 'Eftir mikilvægi';
 $s_by_resolution = 'Eftir úrlausn';
-$s_by_category = 'Eftir flokki';
+$s_by_category = 'Eftir verkþætti';
 $s_by_priority = 'Eftir forgangi';
 $s_by_developer = 'Eftir forritara';
 $s_by_reporter = 'Eftir tilkynnanda';
