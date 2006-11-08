@@ -1,0 +1,1314 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Hebrew UTF-8: Eyal Zvi, eyal@bikoret-bona.com
+	#
+	# NOTE: requires right-to-left CSS at the moment!
+	###########################################################################
+	# Hebrew strings for Mantis
+	# -------------------------------------------------
+	# $Revision: 1.1 $
+	# $Author: achumakov $
+	# $Date: 2006-11-08 14:24:22 $
+	#
+	# $Id: strings_hebrew.txt,v 1.1 2006-11-08 14:24:22 achumakov Exp $
+	###########################################################################
+?>
+<?php
+# Charset
+$s_charset = 'utf-8';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'העברה';
+$s_actiongroup_menu_copy = 'העתקה';
+$s_actiongroup_menu_assign = 'שיוך';
+$s_actiongroup_menu_close = 'סגירה';
+$s_actiongroup_menu_delete = 'מחיקה';
+$s_actiongroup_menu_resolve = 'פתרון';
+$s_actiongroup_menu_update_priority = 'עדכון עדיפות';
+$s_actiongroup_menu_update_status = 'עדכון סטטוס';
+$s_actiongroup_menu_update_view_status = 'עדכון סטטוס הצגה';
+$s_actiongroup_menu_update_category = 'עדכון קטגוריה';
+$s_actiongroup_menu_set_sticky = 'עדכון "דביקות"';
+$s_actiongroup_menu_update_field = 'עדכון "%s"';
+$s_actiongroup_bugs = 'באגים מסומנים';
+
+# new strings:
+$s_all_projects = 'כל הפרוייקטים';
+$s_move_bugs = 'העברת באגים';
+$s_operation_successful = 'הפעולה הצליחה.';
+$s_date_order = 'מיון לפי תאריך';
+$s_print_all_bug_page_link = 'הדפסת דוחו"ת';
+$s_csv_export = 'יצוא ל-CVS';
+$s_login_anonymously = 'כניסה אנונימית';
+$s_anonymous = 'אנונימי';
+$s_jump_to_bugnotes = 'דילוג להערות';
+$s_public_project_msg = 'פרוייקט זה הוא ציבורי - נגיש לכל המשתמשים.';
+$s_private_project_msg = 'פרוייקט זה הוא פרטי - נגיש רק למנהל ולמשתמשים מורשים על ידו.';
+$s_access_level_project = 'רמת נגישות הפרוייקט';
+$s_view_submitted_bug_link = 'הצגת באג מדווח';
+$s_assigned_projects = 'מצורף לפרוייקטים';
+$s_unassigned_projects = 'אינו בפרוייקטים';
+$s_print = 'הדפסה';
+$s_jump = 'הצגה';
+$s_copy_users = 'העתקת חשבונות';
+$s_copy_categories_from = 'העתקה מ';
+$s_copy_categories_to = 'העתקה אל';
+$s_copy_users_from = 'העתקה מ';
+$s_copy_users_to = 'העתקה אל';
+$s_bug_history = 'היסטוריית הבאג';
+$s_field = 'שדה';
+$s_old_value = 'ערך ישן';
+$s_new_value = 'ערך חדש';
+$s_date_modified = 'תאריך שינוי';
+$s_bugnote = 'הערה';
+$s_change = 'שינוי';
+$s_bugnote_view_state = 'הרשאת צפיה בהערה';
+$s_bug_monitor = 'תחילת מעקב';
+$s_bug_end_monitor = 'סיום מעקב';
+$s_announcement = 'הכרזה';
+$s_stays_on_top = 'תמיד מוצג';
+$s_delete_bugnote_button = 'מחיקת הערה';
+$s_delete_bugnote_sure_msg = 'נא לאשר שברצונך למחוק הערה זו';
+$s_bug_relationships = 'קשרים';
+$s_empty_password_sure_msg = 'סיסמת החשבון ריקה - האם זו אכן כוונתך?';
+$s_empty_password_button = 'סיסמה ריקה';
+
+$s_duplicate_of = "כפיל של";
+$s_has_duplicate = "בעל כפילים";
+$s_related_to = "קשור ל";
+$s_dependant_on = "אב של";
+$s_blocks = "בן של";
+
+$s_new_bug = 'באג חדש';
+$s_bugnote_added = 'הערה נוספה';
+$s_bugnote_edited = 'הערה עודכנה';
+$s_bugnote_deleted = 'הערה נמחקה';
+$s_summary_updated = 'תקציר עודכן';
+$s_description_updated = 'תאור עודכן';
+$s_additional_information_updated = 'מידע נוסף עודכן';
+$s_steps_to_reproduce_updated = 'צעדים לשחזור';
+$s_file_added = 'קובץ נוסף';
+$s_file_deleted = 'קובץ נמחק';
+$s_bug_deleted = 'באג נמחק';
+
+$s_make_private = 'מוגבל';
+$s_make_public = 'ציבורי';
+
+$s_create_new_project_link = 'פרוייקט חדש';
+
+$s_login_link = 'כניסה';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'אין לך הרשאות מתאימות לבצע את הפעולה על הבאגים הבאים: ';
+$s_bug_actiongroup_access = 'אין לך הרשאות מתאימות לבצע את הפעולה.';
+$s_bug_actiongroup_status = 'באג זה אינו יכול להתעדכן לסטטוס המבוקש.';
+$s_bug_actiongroup_category = 'באג זה אינו יכול להתעדכן לקטגוריה המבוקשת.';
+$s_close_bugs_conf_msg = 'נא לאשר שברצונך לסגור את הבאגים';
+$s_delete_bugs_conf_msg = 'נא לאשר שברצונך למחוק את הבאגים';
+$s_move_bugs_conf_msg = 'העברת באגים אל';
+$s_copy_bugs_conf_msg = 'העתקת באגים אל';
+$s_assign_bugs_conf_msg = 'שיוך באגים ל';
+$s_resolve_bugs_conf_msg = 'בחירת פתרון';
+$s_priority_bugs_conf_msg = 'בחירת עדיפות';
+$s_status_bugs_conf_msg = 'בחירת סטטוס';
+$s_view_status_bugs_conf_msg = 'בחירת הרשאת צפיה';
+$s_category_bugs_conf_msg = 'בחירת קטגוריה';
+$s_set_sticky_bugs_conf_msg = 'האם ברצונך לשנות את ה"דביקות" של הבאגים?';
+$s_close_group_bugs_button = 'סגירה' ;
+$s_delete_group_bugs_button = 'מחיקה!' ;
+$s_move_group_bugs_button = 'העברה' ;
+$s_copy_group_bugs_button = 'העתקה' ;
+$s_assign_group_bugs_button = 'שיוך' ;
+$s_resolve_group_bugs_button = 'פתרון' ;
+$s_priority_group_bugs_button = 'עדכון עדיפות' ;
+$s_status_group_bugs_button = 'עדכון סטטוס' ;
+$s_category_group_bugs_button = 'עדכון קטגוריה';
+$s_view_status_group_bugs_button = 'עדכון הרשאת צפיה';
+$s_set_sticky_group_bugs_button = 'עדכון "דביקות"';
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+$s_graph_imp_category_title = 'Synthesis graphs by category';
+$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+$s_by_status_pct = 'by status percentage';
+$s_by_priority_pct = 'by priority percentage';
+$s_by_severity_pct = 'by severity percentage';
+$s_by_category_pct = 'by category percentage';
+$s_by_resolution_pct = 'by resolution percentage';
+$s_by_severity_mix = 'by severity and status';
+$s_by_priority_mix = 'by priority and status';
+$s_by_resolution_mix = 'by resolution and status';
+$s_synthesis_link = 'Synthesis';
+$s_status_link = 'Per state';
+$s_priority_link = 'Per priority';
+$s_severity_link = 'Per severity';
+$s_category_link = 'Per category';
+$s_resolution_link = 'Per resolution';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'הצגת מסומנים בלבד';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'בחירת שדות להדפסה';
+$s_printing_options_link = 'אפשרויות הדפסה';
+
+# word and excel export
+$s_bugnote_title = 'כותב הערה' ;
+$s_bugnote_date = 'תאריך הערה';
+$s_bugnote_description = 'תוכן הערה';
+
+$s_error_no_proceed = 'נא ללחוץ על כפתור "חזרה" של הדפדפן על מנת לחזור לעמוד הקודם. שם עליך לתקן את הדרוש לפי הודעת השגיאה לעיל. כמו באפשרותך לבצע פעולה אחרת או לעבור למסך אחר דרך התפריט הראשי.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'ארעה תקלה בפעולה זו. מומלץ להודיע למנהל המערכת.';
+$MANTIS_ERROR[ERROR_SQL] = 'התגלתה שגיאה בשאילתת SQL. נא לדווח ל';
+$MANTIS_ERROR[ERROR_REPORT] = 'נמצאה שגיאה בדו"ח שלך.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'לא צויין קובץ';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'סוג הקובץ אסור';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'המחיצה אינה קיימת - יש לבדוק את הגדרות הפרוייקט.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'קובץ זה כבר קיים. יש למחוק את הקובץ הקודם.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'קיים פרוייקט בשם זה.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'שדה חובה \'%s\' הושאר ריק.  עליך לבדוק את הנתונים שקלטת.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'חשבון זה מוגן. אין אפשרות לגשת לחשבון זה אלא לאחר הסרת ההגנה.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'גישה חסומה.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'העברת הקובץ נכשלה. המערכת אינה מצליחה לקרוא את הקובץ. נא לבדוק את הגדרות הפרוייקט.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'העברת הקובץ נכשלה. יתכן שהקובץ גדול מכפי שמוגדר ב-PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'פרמטר חובה לעמוד זה (%s) לא נמצא.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'שם המשתמש כבר תפוס. נא לחזור ולבחור בשם אחר.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'הגדרת תצורה \'%s\' לא נמצאה.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'הגדרת תצורה \'%s\' לא ניתנת לעדכון בקובץ ה-Database. יש להגדירה בקובץ config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'המחרוזת \'%s\' לא נמצאה.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'הערה לא נמצאה.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'פרוייקט לא נמצא.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'שדה Database \'%s\' לא נמצא.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'נכשלו נסיונות ההתחברות לשרת FTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'פרוייקט בשם זה כבר קיים. נא לחזור ולבחור בשם אחר';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'שם הפרוייקט אינו תקין. השם אינו יכול להיות ריק.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'חשבון לא נמצא.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'השם והסיסמה שנשמרו בדפדפן שלך (Cookie) אינם תקינים. אולי חשבונך נמחק?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'לא נמצאו העדפות לחשבון זה.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'לא נמצאו פריטי חדשות.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'הסיסמא אינה תואמת לשדה וידוא הסיסמא.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'באג %d לא נמצא.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'מסנן %d לא נמצא.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'המסנן שבחרת ישן ולא ניתן לשדרג אותו לגרסה תואמת - עליך להגדיר אותו מחדש.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'חשבונך מבוטל או חסום או שהזנת שם והסיסמא שגויים.';
+$s_login_cookies_disabled = 'הדפדפן שלך אינו תומך ב-Cookies, או שהוגדר לסרב להן.';
+
+# General Strings
+$s_go_back = 'חזרה';
+$s_proceed = 'נא להקליק להמשך';
+
+$s_switch = 'החלפה';
+$s_logged_in_as = 'זיהוי';
+
+$s_prefix_for_deleted_users = 'חשבון';
+
+$s_administrator = 'מנהל המערכת';
+$s_myself = "עצמי";
+$s_default_access_level = 'הרשאת ברירת מחדל';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
+
+# Enum Strings
+$s_access_levels_enum_string = '10:צופה,25:מדווח,40:מעדכן,55:מפתח,70:מנהל,90:מנהל מערכת';
+$s_project_status_enum_string = '10:פיתוח,30:השקה,50:יציב,70:לא בשימוש';
+$s_project_view_state_enum_string = '10:ציבורי,50:מוגבל';
+$s_view_state_enum_string = '10:ציבורי,50:מוגבל';
+
+$s_priority_enum_string = '10:(אין),20:נמוכה,30:רגילה,40:גבוהה,50:דחופה,60:מיידית';
+$s_severity_enum_string = '10:תכונה חדשה,20:תוספת / הרחבה,30:שיפור קל,40:תיקון קוסמטי / ניסוח,50:תקלה רגילה,60:תקלה משמעותית,70:קריסה / תקיעה,80:מונע הפעלת התוכנה';
+$s_reproducibility_enum_string = '10:תמיד,30:לפעמים,50:אקראי,70:טרם נוסה,90:לא,100:(לא רלבנטי)';
+$s_status_enum_string = '10:חדש,20:ממתין למידע נוסף,30:התקבל - טרם נבדק,40:נבדק - להמשך טיפול,50:משוייך,80:נפתר,90:נסגר';
+$s_resolution_enum_string = '10:פתוח,20:תוקן,30:נפתח מחדש,40:לא ניתן לשחזר,50:לא ניתן לתקן,60:כפילות,70:אין מה לתקן,80:מושעה,90:לא לתיקון';
+$s_projection_enum_string = '10:(אין),30:נגיעה,50:תיקון קל,70:תיקון משמעותי,90:ביצוע מחדש';
+$s_eta_enum_string = '10:(אין),20:שעה-שעתיים,30:יום,40:מספר ימים,50:שבוע-שבועיים,60:חודש ויותר';
+$s_sponsorship_enum_string = '0:לא מתוקצב,1:נדרש תקצוב,2:מתוקצב';
+
+# Email Strings
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_username = 'Username: ';
+$s_new_account_message = 'If you didn\'t request any registration, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
+
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+
+$s_email_reporter = 'Reported By';
+$s_email_handler = 'Assigned To';
+$s_email_project = 'פרוייקט';
+$s_email_bug = 'מספר באג';
+$s_email_category = 'קטגוריה';
+$s_email_reproducibility = 'ניתן לשחזור';
+$s_email_severity = 'דרגת חומרה';
+$s_email_priority = 'עדיפות';
+$s_email_status = 'סטטוס';
+$s_email_resolution = 'פתרון';
+$s_email_duplicate = 'כפיל';
+$s_email_fixed_in_version = 'תוקן בגרסה';
+$s_email_date_submitted = 'תאריך דיווח';
+$s_email_last_modified = 'תאריך שינוי אחרון';
+$s_email_summary = 'תקציר';
+$s_email_description = 'תאור';
+
+# account_delete.php
+$s_account_protected_msg = 'החשבון מוגן - לא ניתן למחקו';
+$s_account_removed_msg = 'חשבונך נמחק';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'האם ברצונך למחוק את החשבון שלך?';
+$s_delete_account_button = 'מחיקה!';
+
+# account_page.php
+$s_manage_profiles_link = 'פרופילים';
+$s_change_preferences_link = 'העדפות';
+$s_edit_account_title = 'עדכון חשבון';
+$s_username = 'שם משתמש';
+$s_realname = 'שם אמיתי';
+$s_email = 'כתובת דוא"ל';
+$s_password = 'סיסמא';
+$s_no_password_change = 'הסיסמאות מנוהלות במערכת חיצונית, לכן לא ניתן לשנות את הסיסמא.';
+$s_confirm_password = 'וידוא סיסמא';
+$s_access_level = 'רמת הרשאה';
+$s_update_user_button = 'שמירה';
+$s_verify_warning = 'פרטי החשבון נמצאו תקינים. הודעת האישור שיקבלת פגה ואין בה צורך.';
+$s_verify_change_password = 'חובה לקבוע סיסמא כדי להיכנס למערכת.';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'העדפות';
+$s_default_project = 'פרוייקט ברירת מחדל';
+$s_advanced_report = 'דו"ח מפורט';
+$s_advanced_view = 'הצגה מפורטת';
+$s_advanced_update = 'עריכה מפורטת';
+$s_refresh_delay = 'זמן לרענון';
+$s_redirect_delay = 'זמן להפניה';
+$s_with_minimum_severity = 'אם דרגת החומרה לפחות';
+$s_bugnote_order = 'מיון הערות';
+$s_bugnote_order_asc = 'סדר עולה';
+$s_bugnote_order_desc = 'סדר יורד';
+$s_email_on_new = 'דוא"ל לבאג חדש';
+$s_email_on_assigned = 'שינוי שיוך';
+$s_email_on_feedback = 'תגובה';
+$s_email_on_resolved = 'פתרון';
+$s_email_on_closed = 'סגירה';
+$s_email_on_reopened = 'פתיחה מחדש';
+$s_email_on_bugnote_added = 'הוספת הערה';
+$s_email_on_status_change = 'שינוי סטטוס';
+$s_email_on_priority_change = 'שינוי עדיפות';
+$s_email_bugnote_limit = 'הגבלת התראות דוא"ל בגין הערות';
+$s_language = 'שפה';
+$s_update_prefs_button = 'שמירה';
+$s_reset_prefs_button = 'ברירות מחדל';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'ההעדפות שוחזרו לברירת המחדל';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'ההעדפות עודכנו';
+
+# account_profile_add.php
+$s_profile_added_msg = 'הפרופיל נוסף';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'הפרופיל נמחק';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'עריכת פרופיל';
+$s_platform = 'פלטפורמה';
+$s_operating_system = 'מערכת הפעלה';
+$s_additional_description = 'תאור נוסף';
+$s_update_profile_button = 'שמירה';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'פרופיל ברירת מחדל עודכן';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'הוספת פרופיל';
+$s_add_profile_button = 'שמירה';
+$s_edit_or_delete_profiles_title = 'עדכון או מחיקת פרופילים';
+$s_edit_profile = 'עריכת פרופיל';
+$s_make_default = 'ברירת מחדל';
+$s_delete_profile = 'מחיקת פרופיל';
+$s_select_profile = 'בחירת פרופיל';
+$s_submit_button = 'בצוע...';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'הפרופיל עודכן';
+
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
+# account_update.php
+$s_account_updated_msg = 'חשבונך עודכן';
+$s_email_updated = 'כתובת הדואר האלקטרוני שלך עודכנה';
+$s_realname_duplicated = 'השם שציינת כבר מופיע בחשבון אחר';
+$s_realname_updated = 'השם עודכן';
+$s_password_updated = 'הסיסמא עודכנה';
+
+# adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'הבאגים שבחרת שייכים לפרוייקטים שונים. הפרמטרים להלן משקפים את ההגדרות לכל הפרוייקטים. במקרה של שגיאה, עליך לנסות שוב אך לסמן מספר קטן יותר של באגים.';
+
+# bug_assign.php
+$s_bug_assign_msg = 'הבאג שוייך';
+
+# bug_change_status_page.php
+$s_new_bug_title = 'באג חדש';
+$s_feedback_bug_title = 'באג בהמתנה למידע נוסף';
+$s_acknowledged_bug_title = 'באג התקבל - טרם נבדק';
+$s_confirmed_bug_title = 'באג נבדק - להמשך טיפול';
+$s_assigned_bug_title = 'באג משוייך';
+$s_new_bug_button = 'שמירה';
+$s_feedback_bug_button = 'שמירה';
+$s_acknowledged_bug_button = 'שמירה';
+$s_confirmed_bug_button = 'שמירה';
+$s_assigned_bug_button = 'שמירה';
+
+# bug_close.php
+$s_bug_close_msg = 'הבאג נסגר';
+$s_close_immediately = 'סגירה מיידית:';
+
+# bug_close_page.php
+$s_closed_bug_title = 'סגירת באג';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'הבאג נמחק';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'האם אכן ברצונך למחוק את הבאג לחלוטין?';
+$s_delete_bug_button = 'מחיקה...';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'הוספה למעקב';
+$s_unmonitor_bug_button = 'ביטול מעקב';
+
+# bug_file_add.php
+$s_file_upload_msg = 'הקובץ נקלט';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'הוספת קובץ<BR/>';
+$s_select_file = 'בחירת קובץ';
+$s_upload_file_button = 'שליחה';
+$s_max_file_size = 'נפח עד';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'הבאג נפתח מחדש';
+$s_reopen_add_bugnote_title = 'הערת הבהרה לפתיחה מחדש של הבאג';
+$s_bugnote_add_reopen_button = 'שמירה';
+
+# bug_resolve_page.php
+$s_resolved_bug_title = 'פתרון באג';
+$s_resolved_bug_button = 'שמירה';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'הבאג נפתר - נא להוסיף הערה';
+$s_resolve_add_bugnote_title = 'הערת הבהרה לפתרון הבאג';
+$s_bugnote_add_resolve_button = 'שמירה';
+
+# bug_reminder_page.php
+$s_from = 'מאת';
+$s_to = 'אל';
+$s_on = 'בתאריך';
+$s_sent_you_this_reminder_about = 'שלח/ה אליך תזכורת זו בנוגע ל';
+$s_bug_reminder = 'שליחת תזכורת';
+$s_reminder_sent_to = 'תזכורת נשלחה אל';
+$s_bug_send_button = 'שליחה';
+$s_reminder = 'תזכורת';
+$s_reminder_explain = 'תזכורת זו תשלח אל הנמענים המסומנים.';
+$s_reminder_monitor = 'הנמענים יצורפו לרשימת המעקב של הבאג, ויוכלו להסיר את עצמם מהרשימה באמצעות כפתור "ביטול מעקב".';
+$s_reminder_store = 'התזכורת תצורף כהערה לבאג.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+
+# bug_update.php
+$s_bug_updated_msg = 'הבאג עודכן';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'חזרה לבאג';
+$s_update_simple_link = 'טופס עדכון מקוצר';
+$s_updating_bug_advanced_title = 'עדכון באג מפורט';
+$s_id = 'מספר';
+$s_category = 'קטגוריה';
+$s_severity = 'דרגת חומרה';
+$s_reproducibility = 'ניתן לשחזור';
+$s_date_submitted = 'תאריך דיווח';
+$s_last_update = 'עדכון אחרון';
+$s_reporter = 'פותח הבאג';
+$s_assigned_to = 'שייך ל';
+$s_priority = 'עדיפות';
+$s_resolution = 'פתרון';
+$s_status = 'סטטוס';
+$s_duplicate_id = 'מספר כפיל';
+$s_os = 'מערכת הפעלה';
+$s_projection = 'הערכת קושי';
+$s_os_version = 'גרסת מעה"פ';
+$s_eta = 'הערכת זמן';
+$s_product_version = 'גרסת מוצר';
+$s_build = 'תת-גרסה';
+$s_fixed_in_version = 'תוקן בגרסה';
+$s_votes = 'הצבעות';
+$s_summary = 'תקציר';
+$s_description = 'תאור';
+$s_steps_to_reproduce = 'צעדים לשחזור';
+$s_update_information_button = 'שמירה';
+$s_sticky_issue = 'באג "דביק"';
+$s_profile = 'פרופיל';
+
+# bug_update_page.php
+$s_update_advanced_link = 'טופס עדכון מפורט';
+$s_updating_bug_simple_title = 'עדכון באג מקוצר';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'הצבעה נוספה';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'הערה נוספה';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'הערה נמחקה';
+$s_bug_notes_title = 'הערות';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'עדכון הערה';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'אין הערות לבאג זה.';
+$s_delete_link = 'מחיקה...';
+$s_add_bugnote_title = 'הוספת הערה';
+$s_add_bugnote_button = 'הוספה';
+$s_bugnote_edit_link = 'עריכה...';
+$s_closed_bug_button = 'Close Issue';						// *** EZ - Unused?
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'ההערה עודכנה';
+$s_edited_on = 'נערכה ב: ';
+
+# file_api.php
+$s_show_content ='הצגת התוכן';
+
+# index.php
+$s_click_to_login = 'קליק כאן לכניסה';
+
+# login.php
+
+# login_page.php
+#@@@ should the following string be related to $g_window_title?
+$s_login_page_info = 'ברוכים הבאים למערכת הבאגים.';
+$s_login_title = 'כניסה';
+$s_save_login = 'שמירת פרטי הזיהוי';
+$s_choose_project = 'בחירת פרוייקט';
+$s_login_button = 'כניסה';
+$s_signup_link = 'בקשה לפתיחת חשבון';
+$s_lost_password_link = 'אבדת את הסיסמא?';
+
+# login_select_proj_page.php
+$s_select_project_button = 'המשך';
+
+# logout_page.php
+$s_logged_out_title = 'יצאת מהמערכת...';
+$s_redirecting = '...ניתוב';
+$s_here = 'כאן';
+
+# lost_pwd_page.php
+$s_lost_password_title = "איפוס סיסמה";
+$s_lost_password_done_title = "נשלחה הודעת סיסמה";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+
+# main_page.php
+$s_open_and_assigned_to_me = 'פתוחים המשוייכים לי';
+$s_open_and_reported_to_me = 'פתוחים שאני דיווחתי';
+$s_newer_news_link = 'חדשות עדכניות';
+$s_older_news_link = 'חדשות קודמות';
+$s_archives = 'ארכיון';
+$s_rss = 'RSS';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'חשבון נוצר';
+$s_created_user_part2 = 'עם הרשאת גישה של';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'פתיחת חשבון חדש';
+$s_verify_password = 'וידוא סיסמה';
+$s_enabled = 'פעיל';
+$s_protected = 'מוגן';
+$s_create_user_button = 'שמירה';
+
+# manage_page.php
+$s_hide_disabled = 'הסתרת חסומים';
+$s_filter_button = 'סינון';
+$s_manage_users_link = 'חשבונות';
+$s_manage_projects_link = 'פרוייקטים';
+$s_manage_custom_field_link = 'שדות נוספים';
+$s_manage_global_profiles_link = 'פרופילים';
+$s_permissions_summary_report = 'דו"ח הרשאות';
+$s_manage_config_link = 'תצורה';
+$s_manage_threshold_config = 'Workflow Thresholds';
+$s_manage_email_config = 'התראות בדוא"ל';
+$s_manage_workflow_config = 'Workflow Transitions';
+$s_create_new_account_link = 'חשבון חדש';
+$s_projects_link = 'פרוייקטים';
+$s_documentation_link = 'תעוד';
+$s_new_accounts_title = 'חשבונות חדשים';
+$s_1_week_title = 'שבוע אחרון';
+$s_never_logged_in_title = 'מעולם לא נכנסו';
+$s_prune_accounts = 'ניקוי חשבונות';
+$s_hide_inactive = 'הסתר לא פעילים';
+$s_manage_accounts_title = 'ניהול חשבונות';
+$s_p = 'p';
+$s_date_created = 'מועד פתיחה';
+$s_last_visit = 'כניסה אחרונה';
+$s_edit_user_link = 'Edit User';							// *** EZ - Unused?
+
+# manage_config_email_page
+$s_config_all_projects = 'ההגדרות להלן חלות על כל הפרוייקטים, אלא אם הוגדרו ערכים שונים ברמת פרוייקט מסויים.';
+$s_config_project = 'הגדרות אלה חלות רק על פרוייקט "%s"';
+$s_colour_coding = 'מקרא צבעים לטבלה:';
+$s_colour_project = 'הגדרות לפרוייקט הנוכחי גוברות.';
+$s_colour_global = 'הגדרות לכל הפרוייקטים גוברות על ברירות המחדל.';
+$s_issue_reporter = 'המשתמש שדיווח על הבאג';
+$s_issue_handler = 'המשתמש האחראי לטיפול בבאג';
+$s_users_added_bugnote = 'משתמשים שרשמו הערות לבאג';
+$s_change_configuration = 'שמירה';
+$s_message = 'התראה בגין...';
+$s_default_notify = 'Setting default notification flags to';
+$s_action_notify = 'Setting action notification flags to';
+$s_notify_defaults_change_access = 'מי רשאי לשנות את ברירות המחדל להתראות';
+$s_notify_actions_change_access = 'מי רשאי לשנות את הגדרת ההתראות';
+$s_revert_to_system = "מחיקת הגדרות של 'כל הפרוייקטים'";
+$s_revert_to_all_project = "מחיקת הגדרות לפרוייקט הנוכחי";
+
+# manage_config_workflow_page
+$s_non_existent = 'non-existent';
+$s_current_status = 'Current Status';
+$s_next_status = 'Next Status';
+$s_workflow = 'Workflow';
+$s_workflow_thresholds = 'Thresholds that Affect Workflow';
+$s_threshold = 'Threshold';
+$s_status_level = 'Status';
+$s_alter_level = 'Who can alter this value';
+$s_validation = 'Workflow Validation';
+$s_comment = 'Validation Comment';
+$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_unreachable = 'You cannot move an issue into this status';
+$s_no_exit = 'You cannot move an issue out of this status';
+$s_access_levels = 'הרשאת גישה';
+$s_access_change = 'Minimum Access Level to Change to this Status';
+$s_desc_bug_submit_status = 'Status to which a new issue is set';
+$s_desc_bug_reopen_status = 'Status to which reopened issues are set';
+$s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
+$s_workflow_change_access = 'Who can change workflow';
+$s_access_change_access = 'Who can change access levels';
+
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
+# manage_config_work_threshold_page
+$s_assign_issue = 'Assign an issue';
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'האם ברצונך למחוק את ההגדרות של';
+$s_in_project = 'בפרוייקט:';
+$s_delete_config_button = 'מחיקה!';
+
+# adm_config_report.php
+$s_configuration_report = 'דו"ח תצורה';
+$s_database_configuration = 'תצורת בסיס נתונים (DB)';
+$s_configuration_option = 'הגדרה';
+$s_configuration_option_type = 'סוג';
+$s_configuration_option_value = 'ערך';
+$s_all_users = 'כל החשבונות';
+$s_set_configuration_option = 'שמירה';
+$s_delete_config_sure_msg = 'האם ברצונך למחוק את הגדרת התצורה?';
+
+# manage_proj_add.php
+$s_project_added_msg = 'הפרוייקט הוקם';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'הקטגוריה נוספה';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'הקטגוריה נמחקה';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'האם ברצונך למחוק את הקטגוריה?';
+$s_delete_category_button = 'מחיקה!';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'עריכת קטגורייה';
+$s_update_category_button = 'שמירה';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'הקטגוריה עודכנה';
+
+# manage_proj_create_page.php
+$s_add_subproject_title = 'הוספת תת-פרוייקט';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'הפרוייקט נמחק';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'האם ברצונך למחוק את הפרוייקט, כל הבאגים שבו, וכל יתר המידע הקשור לפרוייקט?';
+$s_project_delete_button = 'מחיקה!';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'עדכון הפרוייקט';
+$s_project_name = 'שם הפרוייקט';
+$s_view_status = 'הרשאת צפיה';
+$s_public = 'ציבורי';
+$s_private = 'מוגבל';
+$s_update_project_button = 'שמירה';
+$s_delete_project_button = 'מחיקה!';
+$s_categories_and_version_title = 'קטגוריות וגרסאות';
+$s_categories = 'קטגוריות';
+$s_add_category_button = 'שמירה';
+$s_versions = 'גרסאות';
+$s_add_version_button = 'שמירה';
+$s_add_and_edit_version_button = 'שמירה ועריכה...';
+$s_edit_link = 'עריכה...';
+$s_actions = 'פעולות';
+$s_version = 'גרסה';
+$s_timestamp = 'חתימת זמן';
+$s_update = 'עדכון';
+$s_subprojects = 'תת-פרוייקטים';
+$s_add_subproject = 'הוספה';
+$s_create_new_subproject_link = 'חדש';
+$s_unlink_link = 'הסרה';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'הוספת פרוייקט';
+$s_upload_file_path = 'נתיב למחיצת קבצי הפרוייקט';
+$s_add_project_button = 'שמירה';
+$s_projects_title = 'פרוייקטים';
+$s_name = 'שם';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'הפרוייקט עודכן';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'הגרסה נוספה';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'הגרסה נמחקה';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'האם ברצונך למחוק את גרסה זו?';
+$s_delete_version_button = 'מחיקה!';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'עריכת גרסה';
+$s_update_version_button = 'שמירה';
+$s_released = 'הופצה למשתמשים';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'הגרסה עודכנה';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'החשבון מוגן - לא ניתן למחקו.';
+$s_account_deleted_msg = 'החשבון נמחק';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'האם ברצונך למחוק חשבון זה?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'כל החשבונות שנפתחו לפני למעלה משבוע אך טרם נעשה הם שימוש - נמחקו';
+$s_prune_accounts_button = 'ניקוי';
+$s_confirm_account_pruning = 'האם ברצונך למחוק חשבונות ישנים שמעולם לא נעשה בהם שימוש?';
+
+# manage_user_page.php
+$s_edit_user_title = 'עדכון חשבון';
+$s_reset_password_button = 'איפוס סיסמא';
+$s_delete_user_button = 'מחיקת חשבון';
+$s_reset_password_msg = 'לאחר איפוס הסיסמא תשלח למשתמש הודעת אישור.';
+$s_reset_password_msg2 = 'איפוס הסיסמא מוחק את הסיסמא הקיימת.';
+$s_show_all_users = 'כולם';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'החשבון מוגן - לא ניתן לאפס את סיסמתו.';
+$s_account_reset_msg = 'הודעת אישור נשלחה בדוא"ל למשתמש בחשבון. ההודעה תפנה את המשתמש לתהליך בחירת סיסמא.';
+$s_account_reset_msg2 = 'הסיסמא התאפסה';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'החשבון מוגן - הפרטים עודכנו מלבד ההרשאות ומצב פעילות';
+$s_manage_user_updated_msg = 'החשבון עודכן';
+
+# menu_inc.php
+$s_main_link = 'ראשי';
+$s_view_bugs_link = 'הצגה';
+$s_report_bug_link = 'באג חדש';
+$s_changelog_link = 'ChangeLog';
+$s_summary_link = 'דו"ח מרכז';
+$s_account_link = 'החשבון שלי';
+$s_users_link = 'משתמשים';
+$s_manage_link = 'ניהול';
+$s_edit_news_link = 'חדשות';
+$s_docs_link = 'תעוד';
+$s_logout_link = 'יציאה';
+$s_my_view_link = 'דו"ח אישי';
+
+# meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'לא משוייכים';
+$s_my_view_title_recent_mod = 'עודכנו לאחרונה';
+$s_my_view_title_reported = 'אני פתחתי';
+$s_my_view_title_assigned = 'משוייכים לי (לא פתורים)';
+$s_my_view_title_resolved = 'פתורים';
+$s_my_view_title_monitored = 'במעקב שלי';
+$s_my_view_title_feedback = 'ממתינים לתגובה שלי';
+$s_my_view_title_verify = 'ממתינים לאישור שלי לפתרון';
+
+# news_add.php
+$s_news_added_msg = 'פריט חדשות נוסף.';
+
+# news_delete.php
+$s_news_deleted_msg = 'פריט חדשות נמחק.';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'האם ברצונך למחוק הודעה זו?';
+$s_delete_news_item_button = 'מחיקה!';
+
+# news_edit_page.php
+$s_edit_news_title = 'עריכת הודעה';
+$s_headline = 'כותרת';
+$s_body = 'תוכן';
+$s_update_news_button = 'שמירה';
+
+# news_menu_page.php
+$s_add_news_title = 'הוספת חדשות';
+$s_post_to = 'פרסום ב-';
+$s_post_news_button = 'שמירה';
+$s_edit_or_delete_news_title = 'עריכה או מחיקה של חדשות';
+$s_edit_post = 'עריכת הודעה';
+$s_delete_post = 'מחיקת הודעה';
+$s_select_post = 'בחירת הודעה';
+
+# news_update.php
+$s_news_updated_msg = 'הודעה נשמרה';
+
+# news_view_page.php
+$s_back_link = 'חזרה';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'הקובץ נקלט';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'הוספת קובץ';
+$s_title = 'כותרת';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'הקובץ נמחק מהפרוייקט';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'האם ברצונך למחוק את הקובץ?';
+
+# proj_doc_edit_page.php
+$s_filename = 'שם הקובץ';
+$s_file_update_button = 'עדכון...';
+$s_file_delete_button = 'מחיקה...';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'תעוד נלווה לפרוייקט';
+$s_user_documentation = 'תעוד משתמש';
+$s_project_documentation = 'תעוד פרוייקט';
+$s_add_file = 'הוספת קובץ';
+
+# proj_doc_update.php
+$s_project_document_updated = 'הפרוייקט עודכן';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'החשבון צורף לפרוייקט';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'החשבון נותק מהפרוייקט';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'האם ברצונך לנתק את המשתמש מהפרוייקט?';
+$s_remove_user_button = 'ניתוק';
+$s_remove_all_users_sure_msg = 'האם ברצונך לנתק את כל המשתמשים מהפרוייקט?';
+$s_remove_all_users_button = '';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'צרוף חשבון לפרוייקטים';
+$s_add_user_button = 'שמירה';
+$s_project_selection_title = 'בחירת פרוייקטים';
+$s_remove_link = 'ניתוק';
+$s_remove_all_link = 'ניתוק כולם';
+
+# proj_user_update.php
+$s_updated_user_msg = 'החשבון עודכן';
+
+# report_add.php
+$s_must_enter_category = 'חובה לבחור קטגוריה';
+$s_must_enter_severity = 'חובה לבחור דרגת חומרה';
+$s_must_enter_reproducibility = 'חובה לבחור אפשרות שחזור';
+$s_must_enter_summary = 'חובה להזין תקציר';
+$s_must_enter_description = 'חובה להזין תאור';
+$s_report_more_bugs = 'דיווח באג נוסף';
+$s_submission_thanks_msg = 'תודה על הדיווח!';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'טופס מקוצר';
+$s_enter_report_details_title = 'דיווח באג חדש';
+$s_required = 'חובה';
+$s_select_category = 'Select Category';						// *** EZ - Unused?
+$s_select_reproducibility = 'Select Reproducibility';		// *** EZ - Unused?
+$s_select_severity = 'Select Severity';						// *** EZ - Unused?
+$s_or_fill_in = 'או קליטה ידנית:';
+$s_assign_to = 'שיוך ל';
+$s_additional_information = 'מידע נוסף';
+$s_submit_report_button = 'שמירה';
+$s_check_report_more_bugs = 'נא לסמן כדי לקלוט באג נוסף';
+
+# report_bug_page.php
+$s_advanced_report_link = 'טופס מפורט';
+$s_report_stay = 'המשך קליטה';
+
+# set_project.php
+$s_selected_project = 'Selected project';					// *** EZ - Unused?
+$s_valid_project_msg = 'חובה לבחור פרוייקט';
+
+# signup.php
+$s_signup_done_title = 'בקשתך נקלטה';
+$s_password_emailed_msg = 'עברת בהצלחה את השלב הראשון בדרך לפתיחת חשבונך במערכת.<BR><BR>כעת נשלחת אליך הודעת אישור בדואר אלקטרוני, ובה הנחיות להפעלת החשבון (בקצרה: עליך ללחוץ על הקישור המופיע בהודעה).';
+$s_no_reponse_msg = 'לרשותך 7 ימים להענות להודעת האישור, בטרם הבקשה תבוטל ויהיה עליך למלא בקשה חדשה.';
+
+# signup_page.php
+$s_signup_captcha_request = 'נא להקיש את הקוד המופיע במלבן הסמוך';
+$s_signup_info = 'לאחר השלמת טופס הרישום תשלח אליך הודעת אישור בדואר אלקטרוני. יש להקפיד שכתובת הדוא"ל נכונה, אחרת הודעת האישור לא תגיע אליך.<BR>בהודעת האישור  הוראות להשלמת התהליך והפעלת החשבון. עליך להפעיל את החשבון תוך 7 ימים, ולא - החשבון ימחק.';
+$s_signup_title = 'בקשת לפתיחת חשבון';
+$s_signup_button = 'שליחה';
+$s_no_password_request = 'סיסמתך מנוהלת במערכת נפרדת. נא לפנות למנהל המערכת שלך.';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Edit Site Settings';			// *** EZ - Unused?
+$s_save_settings_button = 'Save Settings';					// *** EZ - Unused?
+
+# site_settings_page.php
+$s_site_settings_title = 'Site Settings';					// *** EZ - Unused?
+$s_system_info_link = 'System Info';						// *** EZ - Unused?
+$s_site_settings_link = 'Site Settings';					// *** EZ - Unused?
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Site settings have been updated';		// *** EZ - Unused?
+
+# summary_page.php
+$s_summary_title = 'דו"ח מרכז';
+$s_summary_jpgraph_link = 'מתקדם';
+$s_by_project = 'לפי פרוייקט';
+$s_by_status = 'לפי סטטוס';
+$s_by_date = 'לפי תאריך (ימים)';
+$s_by_severity = 'לפי דרגת חומרה';
+$s_by_resolution = 'לפי פתרון';
+$s_by_category = 'לפי קטגוריה';
+$s_by_priority = 'לפי עדיפות';
+$s_by_developer = 'לפי מפתח';
+$s_by_reporter = 'לפי מדווח';
+$s_reporter_by_resolution = 'מדווחים לפי פתרון';
+$s_reporter_effectiveness = 'יעילות מדווחים';
+$s_developer_by_resolution = 'מפתח לפי פתרון';
+$s_percentage_fixed = '% תוקנו';
+$s_percentage_errors = '% שגויים';
+$s_errors = 'שגויים';
+$s_total = 'סה"כ';
+$s_time_stats = 'סטטיסטיקת זמנים לבאגים פתורים (ימים)';
+$s_longest_open_bug = 'הבאג הפתוח הותיק ביותר';
+$s_longest_open = 'הפתוח הותיק ביותר';
+$s_average_time = 'זמן ממוצע';
+$s_total_time = 'סה"כ זמן';
+$s_developer_stats = 'סטטיסטיקת מפתח';
+$s_reporter_stats = 'סטטיסטיקת מדווח';
+$s_orct = '(פתוח/פתור/סגור/סה"כ)';
+
+# view_all_bug_page.php
+$s_any = 'כלשהו';
+$s_show = 'כמה להציג';
+$s_changed = 'עודכן לאחרונה (שעות)';
+$s_viewing_bugs_title = 'רשימת באגים';
+$s_updated = 'עודכן';
+$s_sticky = 'הצגת באגים "דביקים"';
+$s_sort = 'מיון לפי';
+$s_issue_id = 'באג #';
+$s_recently_visited = 'באגים אחרונים בהם צפית';
+
+# view_all_inc.php
+$s_none = 'אין';
+$s_current = 'נוכחי';
+$s_search = 'לפי מילה';
+$s_view_prev_link = 'הקודמים';
+$s_view_next_link = 'הבאים';
+$s_prev = 'הקודם';
+$s_next = 'הבא';
+$s_first = 'ראשון';
+$s_last = 'אחרון';
+$s_start_date = 'תאריך התחלה';
+$s_end_date = 'תאריך סיום';
+$s_use_date_filters = 'שימוש במסנן תאריכים';
+$s_yes = 'כן';
+$s_no = 'לא';
+$s_open_filters = 'Change Filter';							// *** EZ - Unused?
+$s_or_unassigned = 'Or Unassigned';							// *** EZ - Unused?
+$s_ok = 'אישור';
+$s_select_all = 'סימון הכל';
+
+# stored query strings
+$s_use_query = 'טעינה';
+$s_delete_query = 'מחיקה';
+$s_query_deleted = 'המסנן נמחק';
+$s_save_query = 'שמירה';
+$s_reset_query = 'ביטול סינון';
+$s_query_name = 'שם המסנן';
+$s_query_exists = 'מסנן כמו זה כבר קיים.';
+$s_query_dupe_name = 'שם המסנן שבחרת כבר קיים - נא לבחור שם יחודי.';
+$s_query_blank_name = 'אין אפשרות לשמור מסנן ללא שם - נא לבחור שם יחודי.';
+$s_query_store_error = 'חלה תקלה בשמירת המסנן.';
+$s_open_queries = 'ניהול...';
+$s_query_delete_msg = 'האם ברצונך למחוק את המסנן?';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'הצגה מקוצרת';
+$s_viewing_bug_advanced_details_title = 'הצגת באג מפורטת';
+$s_product_build = 'גרסת מוצר';
+$s_system_profile = 'System Description';					// *** EZ - Unused?
+$s_update_bug_button = 'עדכון...';
+$s_bug_assign_to_button = 'שיוך ל:';
+$s_bug_status_to_button = 'שינוי סטטוס ל:';
+$s_reopen_bug_button = 'פתיחה מחדש';
+$s_move_bug_button = 'העברה...';
+$s_attached_files = 'קבצים מצורפים';
+$s_publish = 'Publish';										// *** EZ - Unused?
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'הצגה מפורטת';
+$s_viewing_bug_simple_details_title = 'הצגת באג מקוצרת';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'אין משתמשים העוקבים אחר הבאג.';
+$s_users_monitoring_bug = 'משתמשים העוקבים אחר הבאג';
+$s_monitoring_user_list = 'רשימת משתמשים';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+
+# custom field strings
+$s_add_custom_field_button = 'שדה חדש';
+$s_delete_custom_field_button = 'מחיקה!';
+$s_delete_custom_field_everywhere = 'מחיקת שדה גורפת';
+$s_update_custom_field_button = 'שמירה';
+$s_add_existing_custom_field = 'הוספה';
+$s_edit_custom_field_title = 'עריכת שדה מותאם';
+$s_custom_field = 'שדה';
+$s_custom_fields_setup = 'שדות מותאמים';
+$s_custom_field_name = 'שם';
+$s_custom_field_project_count = 'מספר פרוייקטים';
+$s_custom_field_type = 'סוג';
+$s_custom_field_possible_values = 'ערכים מותרים';
+$s_custom_field_default_value = 'ערך ברירת מחדל';
+$s_custom_field_valid_regexp = 'Regular Expression';
+$s_custom_field_access_level_r = 'הרשאת קריאה';
+$s_custom_field_access_level_rw = 'הרשאת כתיבה';
+$s_custom_field_length_min = 'אורך מינמלי';
+$s_custom_field_length_max = 'אורך מקסימלי';
+$s_custom_field_advanced = 'הצגה רק במצב מפורט';
+$s_custom_field_display_report = 'הצגה בדיווח באג';
+$s_custom_field_display_update = 'הצגה בעדכון באג';
+$s_custom_field_display_resolved = 'הצגה בפתרון באג';
+$s_custom_field_display_closed = 'הצגה בסגירת באג';
+$s_custom_field_require_report = 'חובה בדו"ח';
+$s_custom_field_require_update = 'חובה בעדכון באג';
+$s_custom_field_require_resolved = 'חובה בפתרון באג';
+$s_custom_field_require_closed = 'חובה בסגירת באג';
+
+$s_custom_field_sequence = 'רצף';
+$s_custom_field_type_enum_string = '0:מחרוזת תוים,1:מספר שלם,2:מספר כלשהו,3:רשימה נגללת,4:כתובת דוא"ל,5:תיבת סימון,6:רשימה פתוחה - בחירה אחת,7:רשימה פתוחה - ריבוי בחירות,8:תאריך';
+
+$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+$s_field_delete_button = 'Delete Field';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Remove Field';
+
+$s_hide_status = 'לא בסטטוס';
+$s_filter_closed = "Closed";								// *** EZ - Unused?
+$s_filter_resolved = "Resolved";							// *** EZ - Unused?
+$s_hide_closed = "Hide Closed";								// *** EZ - Unused?
+$s_hide_resolved = "Hide Resolved";							// *** EZ - Unused?
+$s_and_above = 'ומעלה';
+$s_advanced_filters = 'סינון מתקדם';
+$s_simple_filters = 'סינון פשוט';
+$s_monitored_by = 'במעקב של';
+
+$s_attachments = "קבצים";
+$s_attachment_alt = "ק'";
+
+# PHPMailer
+$s_phpmailer_language = 'he';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsorship_total = 'Sponsorship Total';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
+
+$s_bug = "באג";
+$s_add_new_relationship = "קשר חדש";
+$s_add_new_relationship_button = "הוספה";
+$s_this_bug = "הבאג הנוכחי";
+$s_relationship_added = "קשר נוסף";
+$s_relationship_deleted = "קשר נמחק";
+$s_no_relationship = "אין קשר";
+$s_relationship_replaced = "קשר הוחלף";
+$s_replace_relationship_button = "החלפה...";
+$s_replace_relationship_sure_msg = "כבר קיים קשר בין שני הבאגים - האם ברצונך להחליפו?";
+$s_relationship_with_parent = "קשר אל באג-אב";
+$s_delete_relationship_button = "מחיקה";
+$s_delete_relationship_sure_msg = "נא לאשר שברצונך למחוק את הקשר";
+$s_relationship_warning_blocking_bugs_not_resolved = "לא כל הבאגים-בנים של באג זה נפתרו או נסגרו.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_create_child_bug_button = "שכפול...";
+$s_bug_cloned_to = "הבאג שוכפל";
+$s_bug_created_from = "באג נוצר מ-";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "מפת יחסים";
+$s_relation_graph = "קשרים";
+$s_dependency_graph = "תלויות";
+$s_vertical = "אנכי";
+$s_horizontal = "אופקי";
+$s_view_issue = "הצגת באג";
+
+# Source Control Integration
+$s_checkin = 'Checkin';
+
+# Pemissions report
+$s_perm_rpt_capability = 'יכולת';
+$s_view = 'הצגת ';
+$s_issues = 'באגים';
+$s_report_issue = 'דיווח באג';
+$s_update_issue = 'עדכון באג';
+$s_monitor_issue = 'מעקב אחר באג';
+$s_handle_issue = 'טיפול בבאג';
+$s_move_issue = 'העברת באג';
+$s_delete_issue = 'מחיקת באג';
+$s_reopen_issue = 'פתיחת באג מחדש';
+$s_view_private_issues = 'הצגת באג מוגבל';
+$s_update_readonly_issues = 'עדכון באג במצב "קריאה בלבד"';
+$s_update_issue_status = 'עדכון סטטוס של באג';
+$s_set_view_status = 'קביעת הרשאת צפיה (ציבורי או מוגבל)';
+$s_update_view_status = 'עדכון הרשאת צפיה (ציבורי או מוגבל)';
+$s_show_list_of_users_monitoring_issue = 'רשימת העוקבים אחר הבאג';
+$s_notes = 'הערות';
+$s_add_notes = 'הוספת הערה';
+$s_update_notes = 'עריכת הערה';
+$s_delete_note = 'מחיקת הערה';
+$s_view_private_notes = 'הצגת הערה מוגבלת';
+$s_news = 'חדשות';
+$s_view_private_news = 'הצגת חדשות מוגבלות';
+$s_manage_news = 'ניהול חדשות';
+$s_view_list_of_attachments = 'הצגת רשימת קבצים מצורפים';
+$s_download_attachments = 'הורדת קובץ מצורף';
+$s_delete_attachments = 'מחיקת קובץ מצורף';
+$s_delete_attachment_button = "מחיקה!";
+$s_delete_attachment_sure_msg = "האם ברצונך למחוק קובץ זה?";
+$s_upload_issue_attachments = 'הוספת קובץ לבאג';
+$s_filters = 'מסננים';
+$s_save_filters = 'שמירת מסנן';
+$s_save_filters_as_shared = 'שמירת מסנן משותף';
+$s_use_saved_filters = 'שימוש במסנן שמור';
+$s_create_project = 'הקמת פרוייקט';
+$s_delete_project = 'מחיקת פרוייקט';
+$s_manage_project = 'ניהול פרוייקט';
+$s_manage_user_access_to_project = 'ניהול הרשאות לפרוייקט';
+$s_automatically_included_in_private_projects = 'הכללה אוטומטית בפרוייקטים מוגבלים';
+$s_project_documents = 'תעוד לפרוייקט';
+$s_view_project_documents = 'הצגת תעוד';
+$s_upload_project_documents = 'הוספת קובץ תעוד';
+$s_link_custom_fields_to_projects = 'הוספת שדות מותאמים לפרוייקט';
+$s_sponsorships = 'SPONSORSHIPS';
+$s_view_sponsorship_details = 'View sponsorship details';
+$s_view_sponsorship_total = 'View sponsorship total';
+$s_sponsor_issue = 'Sponsor issue';
+$s_assign_sponsored_issue = 'Assign sponsored issue';
+$s_handle_sponsored_issue = 'Handle sponsored issue';
+$s_others = 'שונות';
+$s_see_email_addresses_of_other_users = 'הצגת כתובות דוא"ל של משתמשים אחרים';
+$s_send_reminders = 'שליחת תזכורות';
+$s_add_profiles = 'הוספת פרופילים';
+$s_notify_of_new_user_created = 'פתיחת חשבון חדש';
+$s_email_notification = 'התראות דוא"ל';
+$s_status_changed_to = 'שינוי סטטוס ל-';
+$s_email_on_deleted = 'מחיקה';
+$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
+$s_email_on_relationship_changed = 'שינוי קשר בין באגים';
+
+# DHTML filters
+$s_loading = 'טעינה...';
+
+# filter_api.php
+$s_between = 'בין' ;
+$s_on_or_before = 'עד וכולל' ;
+$s_before = 'לפני' ;
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
+$s_after = 'אחרי' ;
+$s_on_or_after = 'החל מ-' ;
+
+# wiki related strings
+$s_wiki = 'Wiki';
+?>

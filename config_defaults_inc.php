@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.319 2006-11-08 13:36:46 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.320 2006-11-08 14:24:22 achumakov Exp $
 	# --------------------------------------------------------
 
 
@@ -350,6 +350,7 @@
 		'finnish',
 		'french',
 		'german',
+		'hebrew',
 		'hungarian',
 		'icelandic',
 		'italian',
@@ -386,6 +387,7 @@
 		'fi' => 'finnish',
 		'fr-ca, fr-be, fr-ch, fr' => 'french',
 		'de-de, de-at, de-ch, de' => 'german',
+		'he' => 'hebrew',
 		'hu' => 'hungarian',
 		'hr' => 'croatian',
 		'is' => 'icelandic',
