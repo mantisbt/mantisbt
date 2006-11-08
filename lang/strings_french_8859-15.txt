@@ -19,14 +19,14 @@
 	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
 	#
 	###########################################################################
-	# French Canadian strings for Mantis
+	# French strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: siebrand $
-	# $Date: 2006-10-31 20:58:56 $
+	# $Revision: 1.1 $
+	# $Author: achumakov $
+	# $Date: 2006-11-08 13:32:44 $
 	#
-	# $Id: strings_french_canadian.txt,v 1.16 2006-10-31 20:58:56 siebrand Exp $
+	# $Id: strings_french_8859-15.txt,v 1.1 2006-11-08 13:32:44 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -204,8 +204,8 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Échec du dépôt de fichier.  La taille du fi
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page n\'a pas été trouvé.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà utilisé.  Merci de recommencer et choisir un autre nom.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'option de configuration \'%s\' n\'a pas été trouvé.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %s » non trouvée.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note non trouvée.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet non trouvé.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Champ de base de données non trouvé.';
@@ -256,7 +256,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Support de commanditaire non act
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Commanditaire %d non trouvé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'La commandite (%s) est inférieure au montant minimum (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Le responsable n\'a pas le niveau d\'accès requis pour manipuler les bogues commandités.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'ERREUR : Accès refusé. L\'assignation des bogues commandités requiert un niveau d\'accès plus élevé.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Accès refusé. L\'assignation des bogues commandités requiert un niveau d\'accès plus élevé.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Le commanditaire n\'a pas fourni de courriel. Merci de mettre à jour votre profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'L\'option de configuration \'%s\' a une valeur non valide \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'action ne peut être exécutée car le bogue \'%d\' est en lecture seule';
@@ -617,6 +617,9 @@ $s_closed_bug_button = 'Fermer le bogue';
 # bugnote_update.php
 $s_bugnote_updated_msg = 'La note a été mise à jour avec succès...';
 $s_edited_on = 'modifié le : ';
+
+# file_api.php
+$s_show_content ='Show Content';
 
 # index.php
 $s_click_to_login = 'Cliquer pour accéder';
@@ -1073,8 +1076,8 @@ $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
 $s_sticky = 'Afficher les bogues récurrants';
 $s_sort = 'Trier par';
-$s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_issue_id = 'Bogue #';
+$s_recently_visited = 'Visité récemment';
 
 # view_all_inc.php
 $s_none = 'aucun';

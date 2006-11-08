@@ -11,17 +11,17 @@
 	# Croatian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: achumakov $
-	# $Date: 2006-09-30 21:59:41 $
+	# $Date: 2006-11-08 13:32:44 $
 	#
-	# $Id: strings_croatian.txt,v 1.45 2006-09-30 21:59:41 achumakov Exp $
+	# $Id: strings_croatian.txt,v 1.46 2006-11-08 13:32:44 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-2';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
@@ -41,21 +41,21 @@ $s_actiongroup_bugs = 'Selected Issues';
 # new strings:
 $s_all_projects = "Svi projekti";
 $s_move_bugs = "Premjesti bugove";
-$s_operation_successful = "Operacija uspjeπna.";
+$s_operation_successful = "Operacija uspje≈°na.";
 $s_date_order = "Redoslijed datuma";
-$s_print_all_bug_page_link = "Ispiπi izvjeπÊa";
+$s_print_all_bug_page_link = "Ispi≈°i izvje≈°ƒáa";
 $s_csv_export = "CSV Export";
 $s_login_anonymously = "Prijaci se anonimno";
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = "SkoËi na Bug biljeπke";
+$s_jump_to_bugnotes = "Skoƒçi na Bug bilje≈°ke";
 $s_public_project_msg = "Ovaj projekt je JAVAN.  Svi korisnici imaju pristup.";
-$s_private_project_msg = "Ovaj projekt je PRIVATAN.  Samo administratori i ruËno dodani korisnici imaju pristup.";
+$s_private_project_msg = "Ovaj projekt je PRIVATAN.  Samo administratori i ruƒçno dodani korisnici imaju pristup.";
 $s_access_level_project = "Razina pristupa projektu";
 $s_view_submitted_bug_link = "Vidi prijavljene bugove";
 $s_assigned_projects = "Dodijeljeni projekti";
 $s_unassigned_projects = "Nedodijeljeni projekti";
-$s_print = "Ispiπi";
-$s_jump = "SkoËi";
+$s_print = "Ispi≈°i";
+$s_jump = "Skoƒçi";
 $s_copy_users = "Kopiraj korisnike";
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
@@ -177,16 +177,16 @@ $s_bugnote_description = 'Bugnote description';
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "U toku ove akcije pojavila se greπka. Moæete prijaviti greπku administratoru.";
-$MANTIS_ERROR[ERROR_SQL]                = "SQL greπka detektirana.  Molimo Vas da to prijavite.";
-$MANTIS_ERROR[ERROR_REPORT]             = "Greπka u izvjeπÊu.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "Nije naznaËena datoteka";
+$MANTIS_ERROR[ERROR_GENERIC]            = "U toku ove akcije pojavila se gre≈°ka. Mo≈æete prijaviti gre≈°ku administratoru.";
+$MANTIS_ERROR[ERROR_SQL]                = "SQL gre≈°ka detektirana.  Molimo Vas da to prijavite.";
+$MANTIS_ERROR[ERROR_REPORT]             = "Gre≈°ka u izvje≈°ƒáu.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "Nije naznaƒçena datoteka";
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "Tip datoteke nije dozvoljen";
 $MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "Mapa ne postoji. Molimo Vas da provjerite postavke projekta.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "Ovo je duplicirana datoteka. Molimo Vas da najprije obriπete datoteku.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "Ovo je duplicirana datoteka. Molimo Vas da najprije obri≈°ete datoteku.";
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'A project with that name already exists.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "KorisniËki raËun je zaπtiÊen. Za to vrijeme Vam nije omoguÊen pristup.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "Korisniƒçki raƒçun je za≈°tiƒáen. Za to vrijeme Vam nije omoguƒáen pristup.";
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
@@ -282,25 +282,25 @@ $s_default_access_level = 'Default access level';
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string      = "10:pregled,25:prijava,40:aæuriranje,55:razvoj,70:upravljanje,90:administracija";
+$s_access_levels_enum_string      = "10:pregled,25:prijava,40:a≈æuriranje,55:razvoj,70:upravljanje,90:administracija";
 $s_project_status_enum_string     = "10:u razvoju,30:izdan,50:stabilan,70:zastario";
 $s_project_view_state_enum_string = "10:javan,50:privatan";
 $s_view_state_enum_string         = '10:public,50:private';
 
-$s_priority_enum_string           = "10:niπta,20:niski,30:normalni,40:visoki,50:hitno,60:trenutno";
-$s_severity_enum_string           = "10:zahtjeva nove moguÊnosti,20:trivijalni bug,30:tekstualni bug,40:potrebno podeπavanje,50:jednostavan bug,60:teæak bug,70:pad sustava/aplikacije,80:blokiranje rada";
-$s_reproducibility_enum_string    = "10:uvijek,30:ponekad,50:sluËajno,70:nepoznata,90:nije reproducirano,100:N/A";
-$s_status_enum_string             = "10:novi,20:nedovoljno informacija,30:obznanjen,40:potvren,50:dodijeljen,80:rijeπen,90:zatvoren";
-$s_resolution_enum_string         = "10:otvoren,20:ispravljen,30:ponovno otvoren,40:ne moæe se reproducirati,50:neispravljiv,60:dupliciran,70:nije bug,80:obustavljen,90:neÊe se ispraviti";
-$s_projection_enum_string         = "10:niπta,30:rijeπeno za tren,50:sitne ispravke,70:velike izmjene,90:redizajn";
-$s_eta_enum_string                = "10:niπta,20:< 1 dan,30:2-3 dana,40:< 1 tjedan,50:< 1 mjesec,60:> 1 mjesec";
+$s_priority_enum_string           = "10:ni≈°ta,20:niski,30:normalni,40:visoki,50:hitno,60:trenutno";
+$s_severity_enum_string           = "10:zahtjeva nove moguƒánosti,20:trivijalni bug,30:tekstualni bug,40:potrebno pode≈°avanje,50:jednostavan bug,60:te≈æak bug,70:pad sustava/aplikacije,80:blokiranje rada";
+$s_reproducibility_enum_string    = "10:uvijek,30:ponekad,50:sluƒçajno,70:nepoznata,90:nije reproducirano,100:N/A";
+$s_status_enum_string             = "10:novi,20:nedovoljno informacija,30:obznanjen,40:potvrƒëen,50:dodijeljen,80:rije≈°en,90:zatvoren";
+$s_resolution_enum_string         = "10:otvoren,20:ispravljen,30:ponovno otvoren,40:ne mo≈æe se reproducirati,50:neispravljiv,60:dupliciran,70:nije bug,80:obustavljen,90:neƒáe se ispraviti";
+$s_projection_enum_string         = "10:ni≈°ta,30:rije≈°eno za tren,50:sitne ispravke,70:velike izmjene,90:redizajn";
+$s_eta_enum_string                = "10:ni≈°ta,20:< 1 dan,30:2-3 dana,40:< 1 tjedan,50:< 1 mjesec,60:> 1 mjesec";
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registration';
 $s_new_account_greeting = 'Thank you for registering. You have account with username \'';
 $s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
-$s_new_account_username = "KorisniËko ime: ";
+$s_new_account_username = "Korisniƒçko ime: ";
 $s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
@@ -346,48 +346,48 @@ $s_email_handler = "Rukovatelj";
 $s_email_project = "Projekt";
 $s_email_bug = "Bug ID";
 $s_email_category = "Kategorija";
-$s_email_reproducibility = "UËestalost";
+$s_email_reproducibility = "Uƒçestalost";
 $s_email_severity = "Ozbiljnost";
 $s_email_priority = "Prioritet";
 $s_email_status = "Status";
-$s_email_resolution = "Rjeπenje";
+$s_email_resolution = "Rje≈°enje";
 $s_email_duplicate = "Dupliciran";
 $s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = "Datum prijave";
 $s_email_last_modified = "Zadnje modificiran";
-$s_email_summary =  "Saæetak";
+$s_email_summary =  "Sa≈æetak";
 $s_email_description = "Opis";
 
 # account_delete.php
-$s_account_protected_msg = "KorisniËki raËun zaπtiÊen. Ne mogu promijeniti postavke...";
-$s_account_removed_msg = "Vaπ korisniËki raËun je odstranjen...";
+$s_account_protected_msg = "Korisniƒçki raƒçun za≈°tiƒáen. Ne mogu promijeniti postavke...";
+$s_account_removed_msg = "Va≈° korisniƒçki raƒçun je odstranjen...";
 
 # account_delete_page.php
-$s_confirm_delete_msg = "Jeste li sigurni da æelite obrisati Vaπ korisniËki raËun?";
-$s_delete_account_button = "Obriπi korisniËki raËun";
+$s_confirm_delete_msg = "Jeste li sigurni da ≈æelite obrisati Va≈° korisniƒçki raƒçun?";
+$s_delete_account_button = "Obri≈°i korisniƒçki raƒçun";
 
 # account_page.php
 $s_manage_profiles_link = "Profili";
 $s_change_preferences_link = "Preference";
-$s_edit_account_title = "Editiraj korisniËki raËun";
-$s_username = "KorisniËko ime";
+$s_edit_account_title = "Editiraj korisniƒçki raƒçun";
+$s_username = "Korisniƒçko ime";
 $s_realname = 'Real Name';
 $s_email = "Email";
 $s_password = "Zaporka";
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = "Potvrdi zaporku";
 $s_access_level = "Razina pristupa";
-$s_update_user_button = "Aæuriraj korisnika";
+$s_update_user_button = "A≈æuriraj korisnika";
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = "KorisniËke preference";
+$s_default_account_preferences_title = "Korisniƒçke preference";
 $s_default_project = "Polazni Projekt";
-$s_advanced_report = "Napredno izvjeπÊe";
+$s_advanced_report = "Napredno izvje≈°ƒáe";
 $s_advanced_view = "Napredni pregled";
-$s_advanced_update = "Napredno aæuriranje";
-$s_refresh_delay = "Vrijeme izmeu obnavljanja";
+$s_advanced_update = "Napredno a≈æuriranje";
+$s_refresh_delay = "Vrijeme izmeƒëu obnavljanja";
 $s_redirect_delay = "Vrijeme prije redirekcije";
 $s_with_minimum_severity = 'With Minimum Severity of';
 $s_bugnote_order = 'Bugnotes Sort Order';
@@ -396,22 +396,22 @@ $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = "Email za novi bug";
 $s_email_on_assigned = "Email za dodijeljeni bug";
 $s_email_on_feedback = "Email za povratnu informaciju";
-$s_email_on_resolved = "Email za rijeπeni bug";
+$s_email_on_resolved = "Email za rije≈°eni bug";
 $s_email_on_closed = "Email za zatvoreni bug";
 $s_email_on_reopened = "Email za ponovno otvoreni bug";
-$s_email_on_bugnote_added = "Email za dodanu biljeπku";
+$s_email_on_bugnote_added = "Email za dodanu bilje≈°ku";
 $s_email_on_status_change = "Email za promjenu statusa";
 $s_email_on_priority_change = "Email za promjenu prioriteta";
 $s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = "Jezik";
-$s_update_prefs_button = "Aæuriraj preference";
+$s_update_prefs_button = "A≈æuriraj preference";
 $s_reset_prefs_button = "Resetiraj preference";
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = "Preference su resetirane...";
 
 # account_prefs_update.php
-$s_prefs_updated_msg = "Preference su aæurirane...";
+$s_prefs_updated_msg = "Preference su a≈æurirane...";
 
 # account_profile_add.php
 $s_profile_added_msg = "Profil dodan...";
@@ -424,23 +424,23 @@ $s_edit_profile_title = "Editiraj profil";
 $s_platform = "Platforma";
 $s_operating_system = "Operacijski sustav";
 $s_additional_description = "Dodatni opis";
-$s_update_profile_button = "Aæuriraj profil";
+$s_update_profile_button = "A≈æuriraj profil";
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = "Polazni profil aæuriran...";
+$s_profile_defaulted_msg = "Polazni profil a≈æuriran...";
 
 # account_profile_manage_page.php
 $s_add_profile_title = "Dodaj profil";
 $s_add_profile_button = "Dodaj profil";
-$s_edit_or_delete_profiles_title = "Editiraj ili obriπi profile";
+$s_edit_or_delete_profiles_title = "Editiraj ili obri≈°i profile";
 $s_edit_profile = "Editiraj profil";
-$s_make_default = "UËini polaznim";
-$s_delete_profile = "Obriπi profil";
+$s_make_default = "Uƒçini polaznim";
+$s_delete_profile = "Obri≈°i profil";
 $s_select_profile = "Odaberi profil";
-$s_submit_button = "Izvrπi";
+$s_submit_button = "Izvr≈°i";
 
 # account_profile_update.php
-$s_profile_updated_msg = "Profil aæuriran...";
+$s_profile_updated_msg = "Profil a≈æuriran...";
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -461,7 +461,7 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = "Vaπ korisniËki raËun je uspjeπno aæuriran...";
+$s_account_updated_msg = "Va≈° korisniƒçki raƒçun je uspje≈°no a≈æuriran...";
 $s_email_updated = 'Email address successfully updated';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
@@ -473,7 +473,7 @@ $s_password_updated = 'Password successfully updated';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg       = "Bug je uspjeπno dodijeljen...";
+$s_bug_assign_msg       = "Bug je uspje≈°no dodijeljen...";
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
@@ -489,7 +489,7 @@ $s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
 $s_bug_close_msg       = "Bug je zatvoren...";
-$s_close_immediately   = "Zatvori trenutaËno:";
+$s_close_immediately   = "Zatvori trenutaƒçno:";
 
 # bug_close_page.php
 $s_closed_bug_title = "Zatvori bug";
@@ -498,15 +498,15 @@ $s_closed_bug_title = "Zatvori bug";
 $s_bug_deleted_msg = "Bug je obrisan...";
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "Jeste li sigurni da æelite obrisati bug?";
-$s_delete_bug_button = "Obriπi bug";
+$s_delete_bug_sure_msg = "Jeste li sigurni da ≈æelite obrisati bug?";
+$s_delete_bug_button = "Obri≈°i bug";
 
 # bug_monitor.php
 $s_monitor_bug_button = "Nadgledaj bug";
-$s_unmonitor_bug_button = "Zavrπi nadgledanje";
+$s_unmonitor_bug_button = "Zavr≈°i nadgledanje";
 
 # bug_file_add.php
-$s_file_upload_msg = "Upload datoteke uspjeπan";
+$s_file_upload_msg = "Upload datoteke uspje≈°an";
 
 # bug_file_upload_inc.php
 $s_upload_file = "Upload datoteka";
@@ -516,17 +516,17 @@ $s_max_file_size = 'Max size';
 
 # bug_reopen.php
 $s_bug_reopened_msg = "Bug je ponovno otvoren...";
-$s_reopen_add_bugnote_title = "Dodaj biljeπku za razlog ponovnog otvaranja buga";
-$s_bugnote_add_reopen_button = "Dodaj biljeπku o ponovnom otvaranju buga";
+$s_reopen_add_bugnote_title = "Dodaj bilje≈°ku za razlog ponovnog otvaranja buga";
+$s_bugnote_add_reopen_button = "Dodaj bilje≈°ku o ponovnom otvaranju buga";
 
 # bug_resolve_page.php
-$s_resolved_bug_title = "Rijeπi bug";
-$s_resolved_bug_button = "Rijeπi bug";
+$s_resolved_bug_title = "Rije≈°i bug";
+$s_resolved_bug_button = "Rije≈°i bug";
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "Bug je rijeπen. Upiπi niæe biljeπku...";
-$s_resolve_add_bugnote_title = "Dodaj biljeπku o rjeπenju buga";
-$s_bugnote_add_resolve_button = "Dodaj biljeπku";
+$s_bug_resolved_msg = "Bug je rije≈°en. Upi≈°i ni≈æe bilje≈°ku...";
+$s_resolve_add_bugnote_title = "Dodaj bilje≈°ku o rje≈°enju buga";
+$s_bugnote_add_resolve_button = "Dodaj bilje≈°ku";
 
 # bug_reminder_page.php
 $s_from = 'From';
@@ -545,22 +545,22 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = "Bug je uspjeπno aæuriran...";
+$s_bug_updated_msg = "Bug je uspje≈°no a≈æuriran...";
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = "Natrag na bug";
-$s_update_simple_link = "Aæuriraj jednostavno";
-$s_updating_bug_advanced_title = "Aæuriram informacije o bugu";
+$s_update_simple_link = "A≈æuriraj jednostavno";
+$s_updating_bug_advanced_title = "A≈æuriram informacije o bugu";
 $s_id = "ID";
 $s_category = "Kategorija";
 $s_severity = "Ozbiljnost";
-$s_reproducibility = "UËestalost";
+$s_reproducibility = "Uƒçestalost";
 $s_date_submitted = "Datum prijave";
-$s_last_update = "Zadnje aæuriran";
+$s_last_update = "Zadnje a≈æuriran";
 $s_reporter = "Izvjestitelj";
 $s_assigned_to = "Dodijeljen";
 $s_priority = "Prioritet";
-$s_resolution = "Rjeπenje";
+$s_resolution = "Rje≈°enje";
 $s_status = "Status";
 $s_duplicate_id = "Duplicirani ID";
 $s_os = "OS";
@@ -571,40 +571,40 @@ $s_product_version = "Verzija produkta";
 $s_build = "Build";
 $s_fixed_in_version = 'Fixed in Version';
 $s_votes = "Glasovi";
-$s_summary = "Saæetak";
+$s_summary = "Sa≈æetak";
 $s_description = "Opis";
 $s_steps_to_reproduce = "Koraci za reproduciranje";
-$s_update_information_button = "Aæuriraj informaciju";
+$s_update_information_button = "A≈æuriraj informaciju";
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = "Aæuriraj napredno";
-$s_updating_bug_simple_title = "Aæuriram informacije o bugu";
+$s_update_advanced_link = "A≈æuriraj napredno";
+$s_updating_bug_simple_title = "A≈æuriram informacije o bugu";
 
 # bug_vote_add.php
 $s_vote_added_msg = "Glas je dodan...";
 
 # bugnote_add.php
-$s_bugnote_added_msg = "Biljeπka dodana...";
+$s_bugnote_added_msg = "Bilje≈°ka dodana...";
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = "Biljeπka je uspjeπno obrisana...";
-$s_bug_notes_title = "Bug biljeπke";
+$s_bugnote_deleted_msg = "Bilje≈°ka je uspje≈°no obrisana...";
+$s_bug_notes_title = "Bug bilje≈°ke";
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = "Editiraj biljeπke";
+$s_edit_bugnote_title = "Editiraj bilje≈°ke";
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = "Nema biljeπki o ovom bugu.";
-$s_delete_link = "Obriπi";
-$s_add_bugnote_title = "Dodaj biljeπku";
-$s_add_bugnote_button = "Dodaj biljeπku";
+$s_no_bugnotes_msg = "Nema bilje≈°ki o ovom bugu.";
+$s_delete_link = "Obri≈°i";
+$s_add_bugnote_title = "Dodaj bilje≈°ku";
+$s_add_bugnote_button = "Dodaj bilje≈°ku";
 $s_bugnote_edit_link = "Editiraj";
 $s_closed_bug_button = "Zatvori bug";
 
 # bugnote_update.php
-$s_bugnote_updated_msg = "Biljeπka je uspjeπno aæurirana...";
+$s_bugnote_updated_msg = "Bilje≈°ka je uspje≈°no a≈æurirana...";
 $s_edited_on = "editirana na: ";
 
 # file_api.php
@@ -617,12 +617,12 @@ $s_click_to_login = "Klikni ovdje za prijavu";
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = "Dobrodoπli u HelpDesk";
+$s_login_page_info = "Dobrodo≈°li u HelpDesk";
 $s_login_title = "Prijava";
 $s_save_login = "Pohrani prijavu";
 $s_choose_project = "Odaberi projekt";
 $s_login_button = "Prijava";
-$s_signup_link = "Prijavi se za novi korisniËki raËun";
+$s_signup_link = "Prijavi se za novi korisniƒçki raƒçun";
 $s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
@@ -653,14 +653,14 @@ $s_created_user_part1 = "Kreirani korisnik";
 $s_created_user_part2 = "sa razinom pristupa";
 
 # manage_create_user_page.php
-$s_create_new_account_title = "Kreiraj novi korisniËki raËun";
+$s_create_new_account_title = "Kreiraj novi korisniƒçki raƒçun";
 $s_verify_password = "Potvrdi zaporku";
-$s_enabled = "OmoguÊen";
-$s_protected = "ZaπtiÊen";
+$s_enabled = "Omoguƒáen";
+$s_protected = "Za≈°tiƒáen";
 $s_create_user_button = "Kreiraj korisnika";
 
 # manage_page.php
-$s_hide_disabled = "Sakrij onemoguÊeno";
+$s_hide_disabled = "Sakrij onemoguƒáeno";
 $s_filter_button = "Primjeni filter";
 $s_manage_users_link = "Administriraj korisnike";
 $s_manage_projects_link = "Administriraj projekte";
@@ -671,18 +671,18 @@ $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = "Kreiraj korisniËki raËun";
+$s_create_new_account_link = "Kreiraj korisniƒçki raƒçun";
 $s_projects_link = "Projekti";
 $s_documentation_link = "Dokumentacija";
 $s_new_accounts_title = "New Accounts";
 $s_1_week_title = "1 tjedan";
 $s_never_logged_in_title = "Nikad nije prijavljen";
-$s_prune_accounts = "OËisti Accounts";
+$s_prune_accounts = "Oƒçisti Accounts";
 $s_hide_inactive = "Sakrij neaktivne";
-$s_manage_accounts_title = "Administriraj korisniËke raËune";
+$s_manage_accounts_title = "Administriraj korisniƒçke raƒçune";
 $s_p = "p";
 $s_date_created = "Datum kreiranja";
-$s_last_visit = "Zadnje posjeÊen";
+$s_last_visit = "Zadnje posjeƒáen";
 $s_edit_user_link = "Editiraj korisnika";
 
 # manage_config_email_page
@@ -759,34 +759,34 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = "Projekt je uspjeπno dodan...";
+$s_project_added_msg = "Projekt je uspje≈°no dodan...";
 
 # manage_proj_category_add.php
-$s_category_added_msg = "Kategorija je uspjeπno dodana...";
+$s_category_added_msg = "Kategorija je uspje≈°no dodana...";
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "Kategorija je uspjeπno obrisana...";
+$s_category_deleted_msg = "Kategorija je uspje≈°no obrisana...";
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "Jeste li sigurni da æelite obrisati kategoriju?";
-$s_delete_category_button = "Obriπi kategoriju";
+$s_category_delete_sure_msg = "Jeste li sigurni da ≈æelite obrisati kategoriju?";
+$s_delete_category_button = "Obri≈°i kategoriju";
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = "Editiraj kategoriju projekta";
-$s_update_category_button = "Aæuriraj kategoriju";
+$s_update_category_button = "A≈æuriraj kategoriju";
 
 # manage_proj_category_update.php
-$s_category_updated_msg = "Kategorija je uspjeπno aæurirana...";
+$s_category_updated_msg = "Kategorija je uspje≈°no a≈æurirana...";
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = "Projekt je uspjeπno obrisan...";
+$s_project_deleted_msg = "Projekt je uspje≈°no obrisan...";
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "Jeste li sigurni da æelite obrisati projekt i sva pridruæena izvjeπÊa ?";
-$s_project_delete_button = "Obriπi projekt";
+$s_project_delete_msg = "Jeste li sigurni da ≈æelite obrisati projekt i sva pridru≈æena izvje≈°ƒáa ?";
+$s_project_delete_button = "Obri≈°i projekt";
 
 # manage_proj_edit_page.php
 $s_edit_project_title = "Editiraj projekt";
@@ -794,8 +794,8 @@ $s_project_name = "Ime projekta";
 $s_view_status = "Vidi status";
 $s_public = "javni";
 $s_private = "privatni";;
-$s_update_project_button = "Aæuriraj projekt";
-$s_delete_project_button = "Obriπi projekt";
+$s_update_project_button = "A≈æuriraj projekt";
+$s_delete_project_button = "Obri≈°i projekt";
 $s_categories_and_version_title = "Kategorije i verzije";
 $s_categories = "Kategorije";
 $s_add_category_button = "Dodaj kategoriju";
@@ -820,62 +820,62 @@ $s_projects_title = "Projekti";
 $s_name = "Ime";
 
 # manage_proj_update.php
-$s_project_updated_msg = "Projekt je uspjeπno aæuriran...";
+$s_project_updated_msg = "Projekt je uspje≈°no a≈æuriran...";
 
 # manage_proj_version_add.php
-$s_version_added_msg = "Verzija je uspjeπno dodana...";
+$s_version_added_msg = "Verzija je uspje≈°no dodana...";
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "Verzija je uspjeπno obrisana...";
+$s_version_deleted_msg = "Verzija je uspje≈°no obrisana...";
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "Jeste li sigurni da æelite obrisati verziju?";
-$s_delete_version_button = "Obriπi verziju";
+$s_version_delete_sure = "Jeste li sigurni da ≈æelite obrisati verziju?";
+$s_delete_version_button = "Obri≈°i verziju";
 
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = "Editiraj verziju projekta";
-$s_update_version_button = "Aæuriraj verziju";
+$s_update_version_button = "A≈æuriraj verziju";
 $s_released = 'Released';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = "Verzija je uspjeπno aæurirana...";
+$s_version_updated_msg = "Verzija je uspje≈°no a≈æurirana...";
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "KorisniËki raËun zaπtiÊen. Ne mogu obrisati korisniËki raËun.";
-$s_account_deleted_msg = "KorisniËki raËun obrisan...";
+$s_account_delete_protected_msg = "Korisniƒçki raƒçun za≈°tiƒáen. Ne mogu obrisati korisniƒçki raƒçun.";
+$s_account_deleted_msg = "Korisniƒçki raƒçun obrisan...";
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "Jeste li sigurni da æelite obrisati korisniËki raËun?";
+$s_delete_account_sure_msg = "Jeste li sigurni da ≈æelite obrisati korisniƒçki raƒçun?";
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = "Svi nekoriπteni korisniËki raËuni stariji od 1 tjedna su obrisani";
+$s_accounts_pruned_msg = "Svi nekori≈°teni korisniƒçki raƒçuni stariji od 1 tjedna su obrisani";
 $s_prune_accounts_button = 'Prune';
 $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 # manage_user_page.php
 $s_edit_user_title = "Editiraj korisnika";
 $s_reset_password_button = "Resetiraj zaporku";
-$s_delete_user_button = "Obriπi korisnika";
+$s_delete_user_button = "Obri≈°i korisnika";
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = "KorisniËki raËun zaπtiÊen. Ne mogu resetirati zaporku.";
+$s_account_reset_protected_msg = "Korisniƒçki raƒçun za≈°tiƒáen. Ne mogu resetirati zaporku.";
 $s_account_reset_msg = 'Confirmation message has been sent to your email address...';
-$s_account_reset_msg2 = "Postavljena je prazna korisniËka zaporka...";
+$s_account_reset_msg2 = "Postavljena je prazna korisniƒçka zaporka...";
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "KorisniËki raËun zaπtiÊen. Razina pristupa zaπtiÊena. InaËe, korisniËki raËun je aæuriran...";
-$s_manage_user_updated_msg = "KorisniËki raËun uspjeπno aæuriran...";
+$s_manage_user_protected_msg = "Korisniƒçki raƒçun za≈°tiƒáen. Razina pristupa za≈°tiƒáena. Inaƒçe, korisniƒçki raƒçun je a≈æuriran...";
+$s_manage_user_updated_msg = "Korisniƒçki raƒçun uspje≈°no a≈æuriran...";
 
 # menu_inc.php
 $s_main_link = "Glavni";
 $s_view_bugs_link = "Pregledaj bugove";
 $s_report_bug_link = "Prijavi bug";
 $s_changelog_link = 'Change Log';
-$s_summary_link = "Saæetak";
-$s_account_link = "KorisniËki raËun";
+$s_summary_link = "Sa≈æetak";
+$s_account_link = "Korisniƒçki raƒçun";
 $s_users_link = "Korisnici";
 $s_manage_link = "Administriraj";
 $s_edit_news_link = "Editiraj novosti";
@@ -902,32 +902,32 @@ $s_news_added_msg = "Novosti dodane...";
 $s_news_deleted_msg = "Novost obrisana...";
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "Jeste li sigurni da æelite obrisati novost?";
-$s_delete_news_item_button = "Obriπi novost";
+$s_delete_news_sure_msg = "Jeste li sigurni da ≈æelite obrisati novost?";
+$s_delete_news_item_button = "Obri≈°i novost";
 
 # news_edit_page.php
 $s_edit_news_title = "Editiraj novosti";
 $s_headline = "Naslov";
 $s_body = "Tijelo";
-$s_update_news_button = "Aæuriraj novosti";
+$s_update_news_button = "A≈æuriraj novosti";
 
 # news_menu_page.php
 $s_add_news_title = "Dodaj novosti";
 $s_post_to = "Poslano";
-$s_post_news_button = "Poπalji novosti";
-$s_edit_or_delete_news_title = "Editiraj ili obriπi novosti";
+$s_post_news_button = "Po≈°alji novosti";
+$s_edit_or_delete_news_title = "Editiraj ili obri≈°i novosti";
 $s_edit_post = "Editiraj poslanu novost";
-$s_delete_post = "Obriπi poslanu novost";
+$s_delete_post = "Obri≈°i poslanu novost";
 $s_select_post = "Odaberi poslanu novost";
 
 # news_update.php
-$s_news_updated_msg = "Novost aæurirana...";
+$s_news_updated_msg = "Novost a≈æurirana...";
 
 # news_view_page.php
 $s_back_link = "Natrag";
 
 # proj_doc_add.php
-$s_file_uploaded_msg = "Upload datoteke uspjeπan";
+$s_file_uploaded_msg = "Upload datoteke uspje≈°an";
 
 # proj_doc_add_page.php
 $s_upload_file_title = "Upload datoteke";
@@ -937,30 +937,30 @@ $s_title = "Naslov";
 $s_project_file_deleted_msg = "Projektna datoteka obrisana";
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "Jeste li sigurni da æelite obrisati datoteku?";
+$s_confirm_file_delete_msg = "Jeste li sigurni da ≈æelite obrisati datoteku?";
 
 # proj_doc_edit_page.php
 $s_filename = "Ime datoteke";
-$s_file_update_button = "Aæuriraj datoteku";
-$s_file_delete_button = "Obriπi datoteku";
+$s_file_update_button = "A≈æuriraj datoteku";
+$s_file_delete_button = "Obri≈°i datoteku";
 
 # proj_doc_page.php
 $s_project_documentation_title = "Projektna dokumentacija";
-$s_user_documentation = "KorisniËka dokumentacija";
+$s_user_documentation = "Korisniƒçka dokumentacija";
 $s_project_documentation = "Projektna dokumentacija";
 $s_add_file = "Dodaj datoteku";
 
 # proj_doc_update.php
-$s_project_document_updated = "Aæuriranje projekta uspjeπno";
+$s_project_document_updated = "A≈æuriranje projekta uspje≈°no";
 
 # proj_user_add.php
-$s_project_user_added_msg = "Korisnik uspjeπno dodan projektu";
+$s_project_user_added_msg = "Korisnik uspje≈°no dodan projektu";
 
 # proj_user_delete.php
-$s_project_removed_user_msg = "Korisnik uspjeπno izuzet iz projekta";
+$s_project_removed_user_msg = "Korisnik uspje≈°no izuzet iz projekta";
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "Jeste li sigurni da æelite obrisati korinika?";
+$s_remove_user_sure_msg = "Jeste li sigurni da ≈æelite obrisati korinika?";
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
@@ -973,33 +973,33 @@ $s_remove_link = "odstrani";
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = "Korisnik uspjeπno aæuriran";
+$s_updated_user_msg = "Korisnik uspje≈°no a≈æuriran";
 
 # report_add.php
 $s_must_enter_category = "Morate odabrati kategoriju";
 $s_must_enter_severity = "Morate odabrati ozbiljnost";
-$s_must_enter_reproducibility = "Morate odabrati uËestalost";
-$s_must_enter_summary = "Morate unijeti saæetak";
+$s_must_enter_reproducibility = "Morate odabrati uƒçestalost";
+$s_must_enter_summary = "Morate unijeti sa≈æetak";
 $s_must_enter_description = "Morate unijeti opis";
-$s_report_more_bugs = "Prijavi viπe bugova";
+$s_report_more_bugs = "Prijavi vi≈°e bugova";
 $s_submission_thanks_msg = "Hvala na prijedlogu";
 
 # report_bug_advanced_page.php
-$s_simple_report_link = "Jednostavno izvjeπÊe";
-$s_enter_report_details_title = "Unesite detalje izvjeπÊa";
+$s_simple_report_link = "Jednostavno izvje≈°ƒáe";
+$s_enter_report_details_title = "Unesite detalje izvje≈°ƒáa";
 $s_required = "obavezno";
 $s_select_category = "Odaberi kategoriju";
-$s_select_reproducibility = "Odaberi uËestalost";
+$s_select_reproducibility = "Odaberi uƒçestalost";
 $s_select_severity = "Odaberi ozbiljnost";
 $s_or_fill_in = "ILI ispuni";
 $s_assign_to = "Dodijeli";
 $s_additional_information = "Dodatna infomacija";
-$s_submit_report_button = "Podnesi izvjeπÊe";
-$s_check_report_more_bugs = "oznaËi za prijavu viπe bugova";
+$s_submit_report_button = "Podnesi izvje≈°ƒáe";
+$s_check_report_more_bugs = "oznaƒçi za prijavu vi≈°e bugova";
 
 # report_bug_page.php
-$s_advanced_report_link = "Napredno izvjeπÊe";
-$s_report_stay = "IzvjeπÊe ostaje";
+$s_advanced_report_link = "Napredno izvje≈°ƒáe";
+$s_report_stay = "Izvje≈°ƒáe ostaje";
 
 # set_project.php
 $s_selected_project = "Odabrani projekt";
@@ -1027,16 +1027,16 @@ $s_system_info_link = "Info sustava";
 $s_site_settings_link = "Postavke sustava";
 
 # site_settings_update.php
-$s_site_settings_updated_msg = "Postavke sustava su aæurirane";
+$s_site_settings_updated_msg = "Postavke sustava su a≈æurirane";
 
 # summary_page.php
-$s_summary_title = "Saæetak";
-$s_summary_jpgraph_link = "Napredni saæetak";
+$s_summary_title = "Sa≈æetak";
+$s_summary_jpgraph_link = "Napredni sa≈æetak";
 $s_by_project = 'by project';
 $s_by_status = "prema statusu";
 $s_by_date = "prema datumu (danima)";
 $s_by_severity = "prema ozbiljnosti";
-$s_by_resolution = "prema rjeπenju";
+$s_by_resolution = "prema rje≈°enju";
 $s_by_category = "prema kategoriji";
 $s_by_priority = "prema prioritetu";
 $s_by_developer = "prema razvoju";
@@ -1048,32 +1048,32 @@ $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
 $s_total = 'Total';
-$s_time_stats = "vremenski status rijeπenih bugova(dani)";
-$s_longest_open_bug = "najduæe otvoren bug";
-$s_longest_open = "najduæe otvoren";
-$s_average_time = "prosjeËno vrijeme";
+$s_time_stats = "vremenski status rije≈°enih bugova(dani)";
+$s_longest_open_bug = "najdu≈æe otvoren bug";
+$s_longest_open = "najdu≈æe otvoren";
+$s_average_time = "prosjeƒçno vrijeme";
 $s_total_time = "ukupno vrijeme";
 $s_developer_stats = "status razvoja";
 $s_reporter_stats = "status uzvjestitelja";
-$s_orct = "(otvoreni/rijeπeni/zatvoreni/ukupno)";
+$s_orct = "(otvoreni/rije≈°eni/zatvoreni/ukupno)";
 
 # view_all_bug_page.php
 $s_any = "bilo koji";
-$s_show = "Prikaæi";
+$s_show = "Prika≈æi";
 $s_changed = "Promijenjeni(sati)";
 $s_viewing_bugs_title = "Pregled bugova";
-$s_updated = "Aæurirani";
+$s_updated = "A≈æurirani";
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = "niπta";
+$s_none = "ni≈°ta";
 $s_current = 'current';
-$s_search ="Traæi";
+$s_search ="Tra≈æi";
 $s_view_prev_link = "Vidi prethodno";
-$s_view_next_link = "Vidi slijedeÊe";
+$s_view_next_link = "Vidi slijedeƒáe";
 $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
@@ -1107,12 +1107,12 @@ $s_view_simple_link = "Vidi jednostavno";
 $s_viewing_bug_advanced_details_title = "Pregled naprednih detalja buga";
 $s_product_build = "Produkt Build";
 $s_system_profile = "Opis sustava";
-$s_update_bug_button = "Aæuriraj bug";
+$s_update_bug_button = "A≈æuriraj bug";
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = "Ponovno otvori bug";
 $s_move_bug_button = 'Move Issue';
-$s_attached_files = "Pridruæene datoteke";
+$s_attached_files = "Pridru≈æene datoteke";
 $s_publish = 'Publish';
 $s_cached = 'Cached';
 

@@ -6,46 +6,46 @@
 	# See the README and LICENSE files for details
 	#
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
-	# Lithuanian: Vilius Ğumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
+	# Lithuanian: Vilius Å umskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	#
 	###########################################################################
 	# Lithuanian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.40 $
+	# $Revision: 1.41 $
 	# $Author: achumakov $
-	# $Date: 2006-09-30 22:01:45 $
+	# $Date: 2006-11-08 13:32:45 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.40 2006-09-30 22:01:45 achumakov Exp $
+	# $Id: strings_lithuanian.txt,v 1.41 2006-11-08 13:32:45 achumakov Exp $
 	###########################################################################
 	#
-	# Problematiğki vertimai
-	# Angliğki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø şodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
+	# ProblematiÅ¡ki vertimai
+	# AngliÅ¡ki terminai - jÅ³ vertimas (vertimas pagal kompiuteriniÅ³ terminÅ³ anglÅ³ - lietuviÅ³ Å¾odynÄ…, URL http://www.likit.lt/frames/turinys/turinys.htm)
 	# bug - problema (riktas)
 	# bugnote - komentaras (-)
-	# bugtracker - problemø kontrolës sistema (-)
-	# build - trumpalaikë versija (trumpalaikë versija)
+	# bugtracker - problemÅ³ kontrolÄ—s sistema (-)
+	# build - trumpalaikÄ— versija (trumpalaikÄ— versija)
 	# account - prisijungimas (paskyra)
 	# preferences - nustatymai (nuostatos)
 	# cookie - slapukas (slapukas)
-	# developer - sprendëjas (-)
+	# developer - sprendÄ—jas (-)
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'windows-1257';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Perkelti';
 $s_actiongroup_menu_copy = 'Kopijuoti';
 $s_actiongroup_menu_assign = 'Paskirti';
-$s_actiongroup_menu_close = 'Uşdaryti';
-$s_actiongroup_menu_delete = 'Iğtrinti';
-$s_actiongroup_menu_resolve = 'Iğspræsti';
-$s_actiongroup_menu_update_priority = 'Pakeisti prioritetà';
-$s_actiongroup_menu_update_status = 'Pakeisti bûsenà';
-$s_actiongroup_menu_update_view_status = 'Pakeisti perşiûros bûsena';
+$s_actiongroup_menu_close = 'UÅ¾daryti';
+$s_actiongroup_menu_delete = 'IÅ¡trinti';
+$s_actiongroup_menu_resolve = 'IÅ¡sprÄ™sti';
+$s_actiongroup_menu_update_priority = 'Pakeisti prioritetÄ…';
+$s_actiongroup_menu_update_status = 'Pakeisti bÅ«senÄ…';
+$s_actiongroup_menu_update_view_status = 'Pakeisti perÅ¾iÅ«ros bÅ«sena';
 $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
@@ -54,117 +54,117 @@ $s_actiongroup_bugs = 'Pasirinktos klaidos';
 # new strings:
 $s_all_projects = 'Visi projektai';
 $s_move_bugs = 'Perkelti klaidas';
-$s_operation_successful = 'Operacija sëkminga.';
-$s_date_order = 'Pagal datà';
+$s_operation_successful = 'Operacija sÄ—kminga.';
+$s_date_order = 'Pagal datÄ…';
 $s_print_all_bug_page_link = 'Spausdinti ataskaitas';
 $s_csv_export = 'CSV eksportas';
-$s_login_anonymously = 'Prisijungti anonimiğkai';
+$s_login_anonymously = 'Prisijungti anonimiÅ¡kai';
 $s_anonymous = 'Anonimas';
 $s_jump_to_bugnotes = 'Rodyti komentarus';
-$s_public_project_msg = 'Ğis projektas yra VIEĞAS. Gali prisijungti visi vartotojai.';
-$s_private_project_msg = 'Ğis projektas yra UŞDARAS.  Prisijungti gali tik administratorius ir priskirti vartotojai.';
-$s_access_level_project = 'Projekto priëjimo lygis';
-$s_view_submitted_bug_link = 'Rodyti ávestas klaidas';
+$s_public_project_msg = 'Å is projektas yra VIEÅ AS. Gali prisijungti visi vartotojai.';
+$s_private_project_msg = 'Å is projektas yra UÅ½DARAS.  Prisijungti gali tik administratorius ir priskirti vartotojai.';
+$s_access_level_project = 'Projekto priÄ—jimo lygis';
+$s_view_submitted_bug_link = 'Rodyti Ä¯vestas klaidas';
 $s_assigned_projects = 'Priskiti projektai';
 $s_unassigned_projects = 'Nepriskirti projektai';
 $s_print = 'Spausdinti';
 $s_jump = 'Pereiti';
 $s_copy_users = 'Kopijuoti vartotojus';
-$s_copy_categories_from = 'Kopijuoti kategorijas iğ';
-$s_copy_categories_to = 'Kopijuoti kategorijas á';
+$s_copy_categories_from = 'Kopijuoti kategorijas iÅ¡';
+$s_copy_categories_to = 'Kopijuoti kategorijas Ä¯';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
 $s_bug_history = 'Klaidos istorija';
 $s_field = 'Laukas';
-$s_old_value = 'Sena reikğmë';
-$s_new_value = 'Nauja reikğmë';
+$s_old_value = 'Sena reikÅ¡mÄ—';
+$s_new_value = 'Nauja reikÅ¡mÄ—';
 $s_date_modified = 'Pakeitimo data';
 $s_bugnote = 'Komentaras';
 $s_change = 'Keisti';
-$s_bugnote_view_state = 'Komentaro perşiûros bûsena';
+$s_bugnote_view_state = 'Komentaro perÅ¾iÅ«ros bÅ«sena';
 $s_bug_monitor = 'Klaida stebima';
 $s_bug_end_monitor = 'Klaida nebestebima';
 $s_announcement = 'Skelbimas';
-$s_stays_on_top = 'Visada virğuje';
-$s_delete_bugnote_button = 'Iğtrinti komentarà';
-$s_delete_bugnote_sure_msg = 'Ar tikrai norite iğtrinti ğá komentarà?';
-$s_bug_relationships = 'Ryğiai';
-$s_empty_password_sure_msg = 'Vartotojui neturës slaptaşodşio.  Ar Jûs tikrai to norite?';
-$s_empty_password_button = 'Nenaudoti slaptaşodşio';
+$s_stays_on_top = 'Visada virÅ¡uje';
+$s_delete_bugnote_button = 'IÅ¡trinti komentarÄ…';
+$s_delete_bugnote_sure_msg = 'Ar tikrai norite iÅ¡trinti Å¡Ä¯ komentarÄ…?';
+$s_bug_relationships = 'RyÅ¡iai';
+$s_empty_password_sure_msg = 'Vartotojui neturÄ—s slaptaÅ¾odÅ¾io.  Ar JÅ«s tikrai to norite?';
+$s_empty_password_button = 'Nenaudoti slaptaÅ¾odÅ¾io';
 
-$s_duplicate_of = 'pakartoja klaidà';
-$s_has_duplicate = 'turi pasikartojanèià klaidà';
+$s_duplicate_of = 'pakartoja klaidÄ…';
+$s_has_duplicate = 'turi pasikartojanÄiÄ… klaidÄ…';
 $s_related_to = 'susijusi su';
 $s_dependant_on = 'priklauso nuo';
-$s_blocks = 'poklaidë';
+$s_blocks = 'poklaidÄ—';
 
 $s_new_bug = 'Nauja klaida';
-$s_bugnote_added = 'Komentaras árağytas';
+$s_bugnote_added = 'Komentaras Ä¯raÅ¡ytas';
 $s_bugnote_edited = 'Komentaras redaguotas';
-$s_bugnote_deleted = 'Komentaras iğtrintas';
+$s_bugnote_deleted = 'Komentaras iÅ¡trintas';
 $s_summary_updated = 'Santrauka atnaujinta';
-$s_description_updated = 'Aprağymas atnaujintas';
+$s_description_updated = 'ApraÅ¡ymas atnaujintas';
 $s_additional_information_updated = 'Papildoma informacija atnaujinta';
-$s_steps_to_reproduce_updated = 'Atkartojimo şingsniai atnaujinti';
-$s_file_added = 'Failas pridëtas';
-$s_file_deleted = 'Failas iğtrintas';
-$s_bug_deleted = 'Klaida iğtrinta';
+$s_steps_to_reproduce_updated = 'Atkartojimo Å¾ingsniai atnaujinti';
+$s_file_added = 'Failas pridÄ—tas';
+$s_file_deleted = 'Failas iÅ¡trintas';
+$s_bug_deleted = 'Klaida iÅ¡trinta';
 
-$s_make_private = 'Padaryti uşdaru';
-$s_make_public = 'Padaryti vieğu';
+$s_make_private = 'Padaryti uÅ¾daru';
+$s_make_public = 'Padaryti vieÅ¡u';
 
-$s_create_new_project_link = 'Sukurti naujà projektà';
+$s_create_new_project_link = 'Sukurti naujÄ… projektÄ…';
 
 $s_login_link = 'Prisijungti';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Jûs neturite pakankamai teisiø atlikti ğá veiksmà pasirinktoms klaidoms: ';
-$s_bug_actiongroup_access = 'Jûs neturite pakankamai teisiø atlikti ğá veiksmà.';
-$s_bug_actiongroup_status = 'Negaliu pakeisti ğios klaidos bûsenos';
+$s_bug_actiongroup_failed = 'JÅ«s neturite pakankamai teisiÅ³ atlikti Å¡Ä¯ veiksmÄ… pasirinktoms klaidoms: ';
+$s_bug_actiongroup_access = 'JÅ«s neturite pakankamai teisiÅ³ atlikti Å¡Ä¯ veiksmÄ….';
+$s_bug_actiongroup_status = 'Negaliu pakeisti Å¡ios klaidos bÅ«senos';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Ar tikrai norite uşdaryti ğias klaidas?';
-$s_delete_bugs_conf_msg = 'Ar tikrai norite iğtrinti ğias klaidas?';
-$s_move_bugs_conf_msg = 'Perkelti klaidas á';
-$s_copy_bugs_conf_msg = 'Kopijuoti klaidas á';
+$s_close_bugs_conf_msg = 'Ar tikrai norite uÅ¾daryti Å¡ias klaidas?';
+$s_delete_bugs_conf_msg = 'Ar tikrai norite iÅ¡trinti Å¡ias klaidas?';
+$s_move_bugs_conf_msg = 'Perkelti klaidas Ä¯';
+$s_copy_bugs_conf_msg = 'Kopijuoti klaidas Ä¯';
 $s_assign_bugs_conf_msg = 'Priskirti klaidas';
-$s_resolve_bugs_conf_msg = 'Pasirinkti klaidø sprendimà';
-$s_priority_bugs_conf_msg = 'Pasirinkti klaidø prioritetà';
-$s_status_bugs_conf_msg = 'Pasirinkti klaidø bûsenà';
-$s_view_status_bugs_conf_msg = 'Pasirinkti klaidos perşiûros bûsenà';
+$s_resolve_bugs_conf_msg = 'Pasirinkti klaidÅ³ sprendimÄ…';
+$s_priority_bugs_conf_msg = 'Pasirinkti klaidÅ³ prioritetÄ…';
+$s_status_bugs_conf_msg = 'Pasirinkti klaidÅ³ bÅ«senÄ…';
+$s_view_status_bugs_conf_msg = 'Pasirinkti klaidos perÅ¾iÅ«ros bÅ«senÄ…';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Uşdaryti klaidas';
-$s_delete_group_bugs_button = 'Iğtrinti klaidas';
+$s_close_group_bugs_button = 'UÅ¾daryti klaidas';
+$s_delete_group_bugs_button = 'IÅ¡trinti klaidas';
 $s_move_group_bugs_button = 'Perkelti klaidas';
 $s_copy_group_bugs_button = 'Kopijuoti klaidas';
 $s_assign_group_bugs_button = 'Priskirti klaidas';
-$s_resolve_group_bugs_button = 'Iğspræsti klaidas';
-$s_priority_group_bugs_button = 'Keisti prioritetà';
-$s_status_group_bugs_button = 'Keisti bûsenà';
+$s_resolve_group_bugs_button = 'IÅ¡sprÄ™sti klaidas';
+$s_priority_group_bugs_button = 'Keisti prioritetÄ…';
+$s_status_group_bugs_button = 'Keisti bÅ«senÄ…';
 $s_category_group_bugs_button = 'Update Category';
-$s_view_status_group_bugs_button = 'Keisti perşiûros bûsenà';
+$s_view_status_group_bugs_button = 'Keisti perÅ¾iÅ«ros bÅ«senÄ…';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Sukurti grafikà pagal bûsenà';
-$s_graph_imp_priority_title = 'Sukurti grafikà pagal prioritetà' ;
-$s_graph_imp_severity_title = 'Sukurti grafikà pagal svarbà';
-$s_graph_imp_category_title = 'Sukurti grafikà pagal kategorijà';
-$s_graph_imp_resolution_title = 'Sukurti grafikà pagal sprendimà';
-$s_by_status_pct = 'pagal bûsenà santykinai';
-$s_by_priority_pct = 'pagal prioritetà santykinai';
-$s_by_severity_pct = 'pagal svarbà santykinai';
-$s_by_category_pct = 'pagal kategorijà santykinai';
-$s_by_resolution_pct = 'pagal sprendimà santykinai';
-$s_by_severity_mix = 'pagal svarbà ir bûsenà';
-$s_by_priority_mix = 'pagal prioritetà ir bûsenà';
-$s_by_resolution_mix = 'pagal sprendimà ir bûsenà';
+$s_graph_imp_status_title = 'Sukurti grafikÄ… pagal bÅ«senÄ…';
+$s_graph_imp_priority_title = 'Sukurti grafikÄ… pagal prioritetÄ…' ;
+$s_graph_imp_severity_title = 'Sukurti grafikÄ… pagal svarbÄ…';
+$s_graph_imp_category_title = 'Sukurti grafikÄ… pagal kategorijÄ…';
+$s_graph_imp_resolution_title = 'Sukurti grafikÄ… pagal sprendimÄ…';
+$s_by_status_pct = 'pagal bÅ«senÄ… santykinai';
+$s_by_priority_pct = 'pagal prioritetÄ… santykinai';
+$s_by_severity_pct = 'pagal svarbÄ… santykinai';
+$s_by_category_pct = 'pagal kategorijÄ… santykinai';
+$s_by_resolution_pct = 'pagal sprendimÄ… santykinai';
+$s_by_severity_mix = 'pagal svarbÄ… ir bÅ«senÄ…';
+$s_by_priority_mix = 'pagal prioritetÄ… ir bÅ«senÄ…';
+$s_by_resolution_mix = 'pagal sprendimÄ… ir bÅ«senÄ…';
 $s_synthesis_link = 'Sukurti';
-$s_status_link = 'Pagal bûsenà';
-$s_priority_link = 'Pagal prioritetà';
-$s_severity_link = 'Pagal svarbà';
-$s_category_link = 'Pagal kategorijà';
-$s_resolution_link = 'Pagal sprendimà';
+$s_status_link = 'Pagal bÅ«senÄ…';
+$s_priority_link = 'Pagal prioritetÄ…';
+$s_severity_link = 'Pagal svarbÄ…';
+$s_category_link = 'Pagal kategorijÄ…';
+$s_resolution_link = 'Pagal sprendimÄ…';
 $s_legend_still_open = 'Still Open';
 $s_legend_resolved = 'Resolved';
 $s_legend_assigned = 'Assigned';
@@ -179,168 +179,168 @@ $s_not_enough_data = 'Not enough data to create graph';
 $s_hide_button = 'Rodyti tik pasirinktas';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Laukø pasirinkimas spausdinimui';
+$s_printing_preferences_title = 'LaukÅ³ pasirinkimas spausdinimui';
 $s_printing_options_link = 'Spausdinimo nustatymai';
 
 # word and excel export
-$s_bugnote_title = 'Komentaro antrağtë' ;
+$s_bugnote_title = 'Komentaro antraÅ¡tÄ—' ;
 $s_bugnote_date = 'Komentaro data';
-$s_bugnote_description = 'Komentaro aprağymas';
+$s_bugnote_description = 'Komentaro apraÅ¡ymas';
 
-$s_error_no_proceed = 'Kad gráştumëte á ankstesná puslapá, paspauskite mygtukà "Atgal (Back)" Jûsø interneto narğyklëje.  Tuomet galësite iğtaisyti prieşastis, dël kuriø atsirado ği klaida, arba pasirinkti kità veiksmà.  Tai pat galite pasirinkti kità meniu punktà.';
+$s_error_no_proceed = 'Kad grÄ¯Å¾tumÄ—te Ä¯ ankstesnÄ¯ puslapÄ¯, paspauskite mygtukÄ… "Atgal (Back)" JÅ«sÅ³ interneto narÅ¡yklÄ—je.  Tuomet galÄ—site iÅ¡taisyti prieÅ¾astis, dÄ—l kuriÅ³ atsirado Å¡i klaida, arba pasirinkti kitÄ… veiksmÄ….  Tai pat galite pasirinkti kitÄ… meniu punktÄ….';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'Klaida atliekant ğá veiksmà. Susisiekite su administratoriumi.';
-$MANTIS_ERROR[ERROR_SQL]                = 'SQL klaida. Praneğkite apie tai ';
-$MANTIS_ERROR[ERROR_REPORT]             = 'Jûsø praneğime yra klaida.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Nenurodëte failo';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'Klaida atliekant Å¡Ä¯ veiksmÄ…. Susisiekite su administratoriumi.';
+$MANTIS_ERROR[ERROR_SQL]                = 'SQL klaida. PraneÅ¡kite apie tai ';
+$MANTIS_ERROR[ERROR_REPORT]             = 'JÅ«sÅ³ praneÅ¡ime yra klaida.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'NenurodÄ—te failo';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Neleistinas failo tipas';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Ğis katalogas neegzistuoja. Prağome patikrinti projekto nustatymus.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'Toks failas jau yra.  Prağome pirmiau iğtrinti senà failà.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Å is katalogas neegzistuoja. PraÅ¡ome patikrinti projekto nustatymus.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'Toks failas jau yra.  PraÅ¡ome pirmiau iÅ¡trinti senÄ… failÄ….';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Projektas tokiu pavadinimu jau yra.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Privalomas laukas \'%s\' tuğèias.  Prağome uşpildyti iki galo.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Ğis vartotojas apsaugotas.  Jûs neturite teisiø prie jo prieiti, kol apsauga nebus iğjungta.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Priëjimas uşdraustas.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Failo ákëlimas nepavyko.  Greièiausiai iğjungta PHP failø ákëlimas.  Paprağykite savo administratoriaus paleisti admin_check skriptà ğios problemos sprendimui.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Failo ákëlimas nepavyko.  Greièiausiai failo dydis virğija PHP konfigûracijoje nustatytà dydá.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Privalomas laukas \'%s\' tuÅ¡Äias.  PraÅ¡ome uÅ¾pildyti iki galo.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Å is vartotojas apsaugotas.  JÅ«s neturite teisiÅ³ prie jo prieiti, kol apsauga nebus iÅ¡jungta.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'PriÄ—jimas uÅ¾draustas.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Failo Ä¯kÄ—limas nepavyko.  GreiÄiausiai iÅ¡jungta PHP failÅ³ Ä¯kÄ—limas.  PapraÅ¡ykite savo administratoriaus paleisti admin_check skriptÄ… Å¡ios problemos sprendimui.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Failo Ä¯kÄ—limas nepavyko.  GreiÄiausiai failo dydis virÅ¡ija PHP konfigÅ«racijoje nustatytÄ… dydÄ¯.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Reikalingas parametras nerastas.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toks vartotojo vardas jau egzistuoja.  Gráşkite atgal ir pasirinkite kità.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigûracijos parametras \'%s\' nerastas.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toks vartotojo vardas jau egzistuoja.  GrÄ¯Å¾kite atgal ir pasirinkite kitÄ….';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'KonfigÅ«racijos parametras \'%s\' nerastas.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Eilutë \'%s\' nerasta.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'EilutÄ— \'%s\' nerasta.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Komantaras nerastas.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektas nerastas.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Duomenø bazës laukas \'%s\' nerastas.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'DuomenÅ³ bazÄ—s laukas \'%s\' nerastas.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Prisijungti prie FTP serverio nepavyko.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projektas tokiu pavadinimu jau egzistuoja. Gráşkite atgal ir pasirinkite kitoká pavadinimà.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Klaidingas projekto pavadinimas.  Projekto pavadinimas negali bûti tuğèias.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projektas tokiu pavadinimu jau egzistuoja. GrÄ¯Å¾kite atgal ir pasirinkite kitokÄ¯ pavadinimÄ….';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Klaidingas projekto pavadinimas.  Projekto pavadinimas negali bÅ«ti tuÅ¡Äias.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Vartotojas nerastas.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Jûsø narğyklë saugo neteisingà prisijungimo informacijà.  Galbût jûsø vartotojo vardas buvo iğtrintas?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Ğis vartotojas neturi nustatymø.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'JÅ«sÅ³ narÅ¡yklÄ— saugo neteisingÄ… prisijungimo informacijÄ….  GalbÅ«t jÅ«sÅ³ vartotojo vardas buvo iÅ¡trintas?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Å is vartotojas neturi nustatymÅ³.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Naujiena nerasta.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Slaptaşodşiai nesutampa.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Vietoj masyvo buvo gauta eilutë.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Vietoj eilutës buvo gautas masyvas.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'SlaptaÅ¾odÅ¾iai nesutampa.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Vietoj masyvo buvo gauta eilutÄ—.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Vietoj eilutÄ—s buvo gautas masyvas.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Klaida nerasta.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Neteisingas elektroninio pağto adresas.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Aprağymas nerastas.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Neteisingas elektroninio paÅ¡to adresas.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'ApraÅ¡ymas nerastas.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Neleistinas failo tipas.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Toks failas jau yra.  Prağome pirmiau iğtrinti senà failà.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Neteisingas ákëlimo kataogas.  Katalogas neegzistuoja arba WWW serveris neturi rağymo teisiø';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Toks failas jau yra.  PraÅ¡ome pirmiau iÅ¡trinti senÄ… failÄ….';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Neteisingas Ä¯kÄ—limo kataogas.  Katalogas neegzistuoja arba WWW serveris neturi raÅ¡ymo teisiÅ³';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Jûs negalite nurodyti klaidos kaip atkartojanèios save paèià.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Ğis laukas nerastas';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'JÅ«s negalite nurodyti klaidos kaip atkartojanÄios save paÄiÄ….';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Å is laukas nerastas';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Toks pavadinimas jau egzistuoja.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Bent vienas projektas vis dar naudoja ğá laukà.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Neteisinga reikğmë';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Neteisingas lauko apibrëşimas';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Bent vienas projektas vis dar naudoja Å¡Ä¯ laukÄ….';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Neteisinga reikÅ¡mÄ—';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Neteisingas lauko apibrÄ—Å¾imas';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP autentifikavimo klaida';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Prisijungti prie LDAP serverio nepavyko';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'Pakeisti LDAP árağo nepavyko.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP vartotojo árağas nerastas.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Prisijungti prie duomenø bazës nepavyko. Duomenø bazës klaida #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Nepavyko ávykdyti uşklausos.  Duomenø bazës klaida #%d: %s uşklausai: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Pasirinkti duomenø bazës nepavyko.  Duomenø bazës klaida #%d: %s';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'Pakeisti LDAP Ä¯raÅ¡o nepavyko.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP vartotojo Ä¯raÅ¡as nerastas.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Prisijungti prie duomenÅ³ bazÄ—s nepavyko. DuomenÅ³ bazÄ—s klaida #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Nepavyko Ä¯vykdyti uÅ¾klausos.  DuomenÅ³ bazÄ—s klaida #%d: %s uÅ¾klausai: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Pasirinkti duomenÅ³ bazÄ—s nepavyko.  DuomenÅ³ bazÄ—s klaida #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija tokiu pavadinimu jau egzisuotja.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nepasirinktas kopijavimo veiksmas.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nerasta.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Versija tokiu pavadinimu jau egzistuoja.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versija nerasta.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Vartotojo vardas neteisingas. Vartotojo varde gali bûti tik raidës, skaièiai, tarpai, brûkğneliai ir pabraukimai.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Vartotojas neturi reikalingo priëjimo lygio';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Pasirinktas "Tikras vardas" sutampa su kito vartotojo prisijungimo vardu. Pasirinkite kità.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Rëmimai iğjungti.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Rëmimas %d nerastas.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Rëmimas (%s) şemiau leistinos ribos (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Vartotojas neturi reikalingø teisiø, kad spræsti remiamas klaidas.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Priëjimas uşdraustas: priskirti remiamas klaidas reikalingos aukğtesnës teisës.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Rëmëjas neárağë el. pağto adreso. Atnaujinkite savo aprağymà.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigûracijos parametre \'%s\' nustatyta neteisinga reikğmë \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ğio veiksmo ávykdyti negalima, kadangi klaida \'%d\' yra tik skaitymui';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "KLAIDA: tarp ğiø klaidø jau egzistuoja tarpusavio ryğys.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "KLAIDA: ryğiai nerasti.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Priëjimas uşdraustas: klaida %d reikalauja aukğtesnio priëjimo lygio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Klaida negali bûti susijusi su savimi.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Neatitinka patvirtinimo kodas. Bandykite dar kartà.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Slaptaşodşio priminimo galimybë iğjungta.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Norëdami pakeisti slaptaşodá áveskite savo el. pağto adresà';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Ávesti duomenys nesutampa su jokiu egzistuojanèiu vartotojo vardu duomenø bazëje!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Neteisingas arba jau panaudotas patvirtinimo URL adresas. Uşsiregistruokite dar kartà.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maksimalus laukianèiø prağymø skaièius pasiektas. Susisiekite su administratoriumi';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Vartotojo vardas neteisingas. Vartotojo varde gali bÅ«ti tik raidÄ—s, skaiÄiai, tarpai, brÅ«kÅ¡neliai ir pabraukimai.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Vartotojas neturi reikalingo priÄ—jimo lygio';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Pasirinktas "Tikras vardas" sutampa su kito vartotojo prisijungimo vardu. Pasirinkite kitÄ….';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'RÄ—mimai iÅ¡jungti.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'RÄ—mimas %d nerastas.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'RÄ—mimas (%s) Å¾emiau leistinos ribos (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Vartotojas neturi reikalingÅ³ teisiÅ³, kad sprÄ™sti remiamas klaidas.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'PriÄ—jimas uÅ¾draustas: priskirti remiamas klaidas reikalingos aukÅ¡tesnÄ—s teisÄ—s.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'RÄ—mÄ—jas neÄ¯raÅ¡Ä— el. paÅ¡to adreso. Atnaujinkite savo apraÅ¡ymÄ….';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'KonfigÅ«racijos parametre \'%s\' nustatyta neteisinga reikÅ¡mÄ— \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Å io veiksmo Ä¯vykdyti negalima, kadangi klaida \'%d\' yra tik skaitymui';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "KLAIDA: tarp Å¡iÅ³ klaidÅ³ jau egzistuoja tarpusavio ryÅ¡ys.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "KLAIDA: ryÅ¡iai nerasti.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "PriÄ—jimas uÅ¾draustas: klaida %d reikalauja aukÅ¡tesnio priÄ—jimo lygio.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Klaida negali bÅ«ti susijusi su savimi.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Neatitinka patvirtinimo kodas. Bandykite dar kartÄ….';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'SlaptaÅ¾odÅ¾io priminimo galimybÄ— iÅ¡jungta.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'NorÄ—dami pakeisti slaptaÅ¾odÄ¯ Ä¯veskite savo el. paÅ¡to adresÄ…';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Ä®vesti duomenys nesutampa su jokiu egzistuojanÄiu vartotojo vardu duomenÅ³ bazÄ—je!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Neteisingas arba jau panaudotas patvirtinimo URL adresas. UÅ¾siregistruokite dar kartÄ….';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maksimalus laukianÄiÅ³ praÅ¡ymÅ³ skaiÄius pasiektas. Susisiekite su administratoriumi';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'Neteisingas vartotojo vardas ir/arba slaptaşodis, arba vartotojo vardas iğjungtas/blokuojamas.';
-$s_login_cookies_disabled = 'Jûsø narğyklë nepalaiko sausainëliø arba juos atmeta.';
+$s_login_error = 'Neteisingas vartotojo vardas ir/arba slaptaÅ¾odis, arba vartotojo vardas iÅ¡jungtas/blokuojamas.';
+$s_login_cookies_disabled = 'JÅ«sÅ³ narÅ¡yklÄ— nepalaiko sausainÄ—liÅ³ arba juos atmeta.';
 
 # General Strings
 $s_go_back = 'Atgal';
-$s_proceed = 'Tæsti';
+$s_proceed = 'TÄ™sti';
 
 $s_switch = 'Pasirinkti';
-$s_logged_in_as = 'Prisijungæs kaip';
+$s_logged_in_as = 'PrisijungÄ™s kaip';
 
 $s_prefix_for_deleted_users = 'vartotojas';
 
 $s_administrator = 'administratorius';
-$s_myself = "Ağ pats";
+$s_myself = "AÅ¡ pats";
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:stebëtojas,25:praneğëjas,40:atnaujintojas,55:sprendëjas,70:vadovas,90:administratorius';
-$s_project_status_enum_string     = '10:kuriamas,30:iğleistas,50:stabilus,70:pasenæs';
-$s_project_view_state_enum_string = '10:vieğas,50:uşdaras';
-$s_view_state_enum_string         = '10:vieğas,50:uşdaras';
+$s_access_levels_enum_string      = '10:stebÄ—tojas,25:praneÅ¡Ä—jas,40:atnaujintojas,55:sprendÄ—jas,70:vadovas,90:administratorius';
+$s_project_status_enum_string     = '10:kuriamas,30:iÅ¡leistas,50:stabilus,70:pasenÄ™s';
+$s_project_view_state_enum_string = '10:vieÅ¡as,50:uÅ¾daras';
+$s_view_state_enum_string         = '10:vieÅ¡as,50:uÅ¾daras';
 
-$s_priority_enum_string           = '10:neapibrëşta,20:şemas,30:vidutinis,40:aukğtas,50:skubus,60:neatidëliotinas';
-$s_severity_enum_string           = '10:nauja galimybë,20:nereikğminga,30:klaida tekste,40:maşas patobulinimas,50:antraeilë,60:svarbu,70:skubu,80:neatidëliotina';
-$s_reproducibility_enum_string    = '10:nuolat,30:kartais,50:atsitiktinai,70:nepatikrinta,90:negalima atkartoti,100:neapibrëşta';
-$s_status_enum_string             = '10:nauja,20:reikalauja atsakymo,30:uşregistruota,40:patvirtinta,50:paskirta,80:iğspræsta,90:uşdaryta';
-$s_resolution_enum_string         = '10:atvira,20:iğspræsta,30:vël atidaryta,40:nepakartojama,50:neámanoma iğspræsti,60:pasikartojanti,70:ne problema,80:atidëta,90:nebus iğspræsta';
-$s_projection_enum_string         = '10:nëra,30:neşymûs patobulinimai,50:nedideli pakeitimai,70:dideli pakeitimai,90:esminiai pakeitimai';
-$s_eta_enum_string                = '10:nëra,20:< 1 diena,30:2-3 dienos,40:< 1 savaitë,50:< 1 mënuo,60:> 1 mënuo';
+$s_priority_enum_string           = '10:neapibrÄ—Å¾ta,20:Å¾emas,30:vidutinis,40:aukÅ¡tas,50:skubus,60:neatidÄ—liotinas';
+$s_severity_enum_string           = '10:nauja galimybÄ—,20:nereikÅ¡minga,30:klaida tekste,40:maÅ¾as patobulinimas,50:antraeilÄ—,60:svarbu,70:skubu,80:neatidÄ—liotina';
+$s_reproducibility_enum_string    = '10:nuolat,30:kartais,50:atsitiktinai,70:nepatikrinta,90:negalima atkartoti,100:neapibrÄ—Å¾ta';
+$s_status_enum_string             = '10:nauja,20:reikalauja atsakymo,30:uÅ¾registruota,40:patvirtinta,50:paskirta,80:iÅ¡sprÄ™sta,90:uÅ¾daryta';
+$s_resolution_enum_string         = '10:atvira,20:iÅ¡sprÄ™sta,30:vÄ—l atidaryta,40:nepakartojama,50:neÄ¯manoma iÅ¡sprÄ™sti,60:pasikartojanti,70:ne problema,80:atidÄ—ta,90:nebus iÅ¡sprÄ™sta';
+$s_projection_enum_string         = '10:nÄ—ra,30:neÅ¾ymÅ«s patobulinimai,50:nedideli pakeitimai,70:dideli pakeitimai,90:esminiai pakeitimai';
+$s_eta_enum_string                = '10:nÄ—ra,20:< 1 diena,30:2-3 dienos,40:< 1 savaitÄ—,50:< 1 mÄ—nuo,60:> 1 mÄ—nuo';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Vartotojo registracija';
-$s_new_account_greeting = 'Aèiû, kad uşsiregistravote. Jûsø vartotojo vardas \'';
-$s_new_account_greeting2 = '\'. Norëdami baigti registracijos procedûrà, aplankykite puslapá ğiuo adresu (ásitikinkite, kad jis árağytas vienoje eilutëje) ir árağykite savo slaptaşodá:';
+$s_new_account_greeting = 'AÄiÅ«, kad uÅ¾siregistravote. JÅ«sÅ³ vartotojo vardas \'';
+$s_new_account_greeting2 = '\'. NorÄ—dami baigti registracijos procedÅ«rÄ…, aplankykite puslapÄ¯ Å¡iuo adresu (Ä¯sitikinkite, kad jis Ä¯raÅ¡ytas vienoje eilutÄ—je) ir Ä¯raÅ¡ykite savo slaptaÅ¾odÄ¯:';
 $s_new_account_username = 'Vartotojo vardas: ';
-$s_new_account_message = 'Jeigu jûs nesiregistravote, nekreipkite dëmesio á ğá laiğkà.' . "\n\n";
-$s_new_account_do_not_reply = 'NEATSAKINËKITE Á ĞÁ LAIĞKÀ';
-$s_new_account_email = 'El. pağto adresas: ';
+$s_new_account_message = 'Jeigu jÅ«s nesiregistravote, nekreipkite dÄ—mesio Ä¯ Å¡Ä¯ laiÅ¡kÄ….' . "\n\n";
+$s_new_account_do_not_reply = 'NEATSAKINÄ–KITE Ä® Å Ä® LAIÅ KÄ„';
+$s_new_account_email = 'El. paÅ¡to adresas: ';
 $s_new_account_IP = 'IP adresas: ';
-$s_new_account_signup_msg = 'Vartotojo vardas sukurtas su şemiau esanèiais parametrais:';
+$s_new_account_signup_msg = 'Vartotojo vardas sukurtas su Å¾emiau esanÄiais parametrais:';
 
-$s_reset_request_msg = 'Kaşkas (greièiausiai jûs pats) paprağëte slaptaşodşio pakeitimo. Jeigu tai buvote ne jûs, nekreipkite dëmesio á ğá laiğkà.' . "\n\n" . 'Prieğingu atveju aplankykite puslapá ğiuo adresu:';
-$s_reset_request_in_progress_msg = 'Jeigu ávedëte teisingà vartotojo vardà ir el. pağto adresà, mes jums iğsiuntëme patvirtinimo laiğkà. Kai tik gausite minëtà laiğkà, sekite instrukcijas ekrane.';
+$s_reset_request_msg = 'KaÅ¾kas (greiÄiausiai jÅ«s pats) papraÅ¡Ä—te slaptaÅ¾odÅ¾io pakeitimo. Jeigu tai buvote ne jÅ«s, nekreipkite dÄ—mesio Ä¯ Å¡Ä¯ laiÅ¡kÄ….' . "\n\n" . 'PrieÅ¡ingu atveju aplankykite puslapÄ¯ Å¡iuo adresu:';
+$s_reset_request_in_progress_msg = 'Jeigu Ä¯vedÄ—te teisingÄ… vartotojo vardÄ… ir el. paÅ¡to adresÄ…, mes jums iÅ¡siuntÄ—me patvirtinimo laiÅ¡kÄ…. Kai tik gausite minÄ—tÄ… laiÅ¡kÄ…, sekite instrukcijas ekrane.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'Ğiai klaidai reikia Jûsø ATSAKYMO.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Ği klaida buvo UŞREGISTRUOTA.';
-$s_email_notification_title_for_status_bug_confirmed = 'Ği klaida buvo PATVIRTINTA.';
-$s_email_notification_title_for_status_bug_assigned = 'Ği klaida buvo PRISKIRTA.';
-$s_email_notification_title_for_status_bug_resolved = 'Ği klaida buvo IĞSPRÆSTA.';
-$s_email_notification_title_for_status_bug_closed = 'Ği klaida buvo UŞDARYTA.';
+$s_email_notification_title_for_status_bug_feedback = 'Å iai klaidai reikia JÅ«sÅ³ ATSAKYMO.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Å i klaida buvo UÅ½REGISTRUOTA.';
+$s_email_notification_title_for_status_bug_confirmed = 'Å i klaida buvo PATVIRTINTA.';
+$s_email_notification_title_for_status_bug_assigned = 'Å i klaida buvo PRISKIRTA.';
+$s_email_notification_title_for_status_bug_resolved = 'Å i klaida buvo IÅ SPRÄ˜STA.';
+$s_email_notification_title_for_status_bug_closed = 'Å i klaida buvo UÅ½DARYTA.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Ği klaida buvo ÁVESTA.';
-$s_email_notification_title_for_action_bug_assigned = 'Ği klaida buvo PRISKIRTA.';
-$s_email_notification_title_for_action_bug_reopened = 'Ği klaida buvo VËL ATIDARYTA.';
-$s_email_notification_title_for_action_bug_deleted = 'Ği klaida buvo IĞTRINTA.';
-$s_email_notification_title_for_action_bug_updated = 'Ği klaida buvo ATNAUJINTA.';
-$s_email_notification_title_for_action_sponsorship_added = 'Ği klaida turi RËMËJÀ.';
-$s_email_notification_title_for_action_sponsorship_updated = 'Pasikeitë ğios klaidos rëmëjas.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'Rëmëjas atsisakë remti ğià klaidà.';
+$s_email_notification_title_for_action_bug_submitted = 'Å i klaida buvo Ä®VESTA.';
+$s_email_notification_title_for_action_bug_assigned = 'Å i klaida buvo PRISKIRTA.';
+$s_email_notification_title_for_action_bug_reopened = 'Å i klaida buvo VÄ–L ATIDARYTA.';
+$s_email_notification_title_for_action_bug_deleted = 'Å i klaida buvo IÅ TRINTA.';
+$s_email_notification_title_for_action_bug_updated = 'Å i klaida buvo ATNAUJINTA.';
+$s_email_notification_title_for_action_sponsorship_added = 'Å i klaida turi RÄ–MÄ–JÄ„.';
+$s_email_notification_title_for_action_sponsorship_updated = 'PasikeitÄ— Å¡ios klaidos rÄ—mÄ—jas.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'RÄ—mÄ—jas atsisakÄ— remti Å¡iÄ… klaidÄ….';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Prie klaidos pridëtas KOMENTARAS.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Prie klaidos pridÄ—tas KOMENTARAS.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
 $s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
 $s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
@@ -354,7 +354,7 @@ $s_email_notification_title_for_action_blocks_relationship_deleted = "The follow
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
-$s_email_reporter = 'Praneğëjas';
+$s_email_reporter = 'PraneÅ¡Ä—jas';
 $s_email_handler = 'Priskirta';
 $s_email_project = 'Projektas';
 $s_email_bug = 'Klaidos ID';
@@ -362,63 +362,63 @@ $s_email_category = 'Kategorija';
 $s_email_reproducibility = 'Pasikartojamumas';
 $s_email_severity = 'Svarba';
 $s_email_priority = 'Prioritetas';
-$s_email_status = 'Bûsena';
+$s_email_status = 'BÅ«sena';
 $s_email_resolution = 'Sprendimas';
 $s_email_duplicate = 'Pasikartojantis';
-$s_email_fixed_in_version = 'Iğtaisyta versijoje';
-$s_email_date_submitted = 'Ávedimo data';
+$s_email_fixed_in_version = 'IÅ¡taisyta versijoje';
+$s_email_date_submitted = 'Ä®vedimo data';
 $s_email_last_modified = 'Paskutiniai pakeitimai';
 $s_email_summary =  'Santrauka';
-$s_email_description = 'Aprağymas';
+$s_email_description = 'ApraÅ¡ymas';
 
 # account_delete.php
-$s_account_protected_msg = 'Vartotojo vardas apsaugotas. Nustatymø keisti negalima...';
-$s_account_removed_msg = 'Jûsø vartotojo vardas buvo iğtrintas...';
+$s_account_protected_msg = 'Vartotojo vardas apsaugotas. NustatymÅ³ keisti negalima...';
+$s_account_removed_msg = 'JÅ«sÅ³ vartotojo vardas buvo iÅ¡trintas...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Ar tikrai norite iğtrinti savo vartotojo vardà?';
-$s_delete_account_button = 'Iğtrinti vartotojo vardà';
+$s_confirm_delete_msg = 'Ar tikrai norite iÅ¡trinti savo vartotojo vardÄ…?';
+$s_delete_account_button = 'IÅ¡trinti vartotojo vardÄ…';
 
 # account_page.php
-$s_manage_profiles_link = 'Aprağymai';
+$s_manage_profiles_link = 'ApraÅ¡ymai';
 $s_change_preferences_link = 'Nustatymai';
 $s_edit_account_title = 'Vartotojo vardo redagavimas';
 $s_username = 'Vartotojo vardas';
 $s_realname = 'Tikras vardas';
-$s_email = 'El. pağto adresas';
-$s_password = 'Slaptaşodis';
+$s_email = 'El. paÅ¡to adresas';
+$s_password = 'SlaptaÅ¾odis';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
-$s_confirm_password  = 'Slaptaşodis (dar kartà)';
-$s_access_level = 'Priëjimo lygis';
-$s_update_user_button = 'Atnaujinti vartotojo vardà';
+$s_confirm_password  = 'SlaptaÅ¾odis (dar kartÄ…)';
+$s_access_level = 'PriÄ—jimo lygis';
+$s_update_user_button = 'Atnaujinti vartotojo vardÄ…';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Nustatymai';
 $s_default_project = 'Pagrindinis projektas';
-$s_advanced_report = 'Detalus praneğimas';
-$s_advanced_view = 'Detali perşiûra';
+$s_advanced_report = 'Detalus praneÅ¡imas';
+$s_advanced_view = 'Detali perÅ¾iÅ«ra';
 $s_advanced_update = 'Detalus atnaujinimas';
-$s_refresh_delay = 'Atnaujinimo daşnumas (minutëmis)';
+$s_refresh_delay = 'Atnaujinimo daÅ¾numas (minutÄ—mis)';
 $s_redirect_delay = 'Nukreipimas po';
-$s_with_minimum_severity = 'kai maşiausia svarba';
-$s_bugnote_order = 'Komentarø iğdëstymo tvarka';
-$s_bugnote_order_asc = 'Naujausi virğuje';
-$s_bugnote_order_desc = 'Seniausi virğuje';
-$s_email_on_new = 'Laiğkas pasirodşius naujai klaidai';
-$s_email_on_assigned = 'Laiğkas priskyrus klaidà man';
-$s_email_on_feedback = 'Laiğkas kai klaida reikalauja atsakymo';
-$s_email_on_resolved = 'Laiğkas iğsprendus klaidà';
-$s_email_on_closed = 'Laiğkas uşdarius klaidà';
-$s_email_on_reopened = 'Laiğkas vël atidarius klaidà';
-$s_email_on_bugnote_added = 'Laiğkas atsiradus naujam komentarui';
-$s_email_on_status_change = 'Laiğkas pasikeitus bûsenai';
-$s_email_on_priority_change = 'Laiğkas pasikeitus prioritetui';
-$s_email_bugnote_limit = 'Laiğkø skaièiaus limitas';
+$s_with_minimum_severity = 'kai maÅ¾iausia svarba';
+$s_bugnote_order = 'KomentarÅ³ iÅ¡dÄ—stymo tvarka';
+$s_bugnote_order_asc = 'Naujausi virÅ¡uje';
+$s_bugnote_order_desc = 'Seniausi virÅ¡uje';
+$s_email_on_new = 'LaiÅ¡kas pasirodÅ¾ius naujai klaidai';
+$s_email_on_assigned = 'LaiÅ¡kas priskyrus klaidÄ… man';
+$s_email_on_feedback = 'LaiÅ¡kas kai klaida reikalauja atsakymo';
+$s_email_on_resolved = 'LaiÅ¡kas iÅ¡sprendus klaidÄ…';
+$s_email_on_closed = 'LaiÅ¡kas uÅ¾darius klaidÄ…';
+$s_email_on_reopened = 'LaiÅ¡kas vÄ—l atidarius klaidÄ…';
+$s_email_on_bugnote_added = 'LaiÅ¡kas atsiradus naujam komentarui';
+$s_email_on_status_change = 'LaiÅ¡kas pasikeitus bÅ«senai';
+$s_email_on_priority_change = 'LaiÅ¡kas pasikeitus prioritetui';
+$s_email_bugnote_limit = 'LaiÅ¡kÅ³ skaiÄiaus limitas';
 $s_language = 'Kalba';
 $s_update_prefs_button = 'Atnaujinti nustatymus';
-$s_reset_prefs_button = 'Atstatyti nustatymus á pradinæ bûsenà';
+$s_reset_prefs_button = 'Atstatyti nustatymus Ä¯ pradinÄ™ bÅ«senÄ…';
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = 'Nustatymai pakeisti...';
@@ -427,33 +427,33 @@ $s_prefs_reset_msg = 'Nustatymai pakeisti...';
 $s_prefs_updated_msg = 'Nustatymai pakeisti...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Aprağymas pridëtas...';
+$s_profile_added_msg = 'ApraÅ¡ymas pridÄ—tas...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Aprağymas iğtrintas...';
+$s_profile_deleted_msg = 'ApraÅ¡ymas iÅ¡trintas...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Aprağymo redagavimas';
+$s_edit_profile_title = 'ApraÅ¡ymo redagavimas';
 $s_platform = 'Platforma';
-$s_operating_system = 'Operacinë sistema';
-$s_additional_description = 'Detalus aprağymas';
-$s_update_profile_button = 'Atnaujinti aprağymà';
+$s_operating_system = 'OperacinÄ— sistema';
+$s_additional_description = 'Detalus apraÅ¡ymas';
+$s_update_profile_button = 'Atnaujinti apraÅ¡ymÄ…';
 
 # account_profile_make_default.php
 $s_profile_defaulted_msg = 'Pagrindinis profilis pakeistas...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Aprağymo sukûrimas';
-$s_add_profile_button = 'Sukurti aprağymà';
-$s_edit_or_delete_profiles_title = 'Aprağymo redagavimas arba trynimas';
-$s_edit_profile = 'Redaguoti aprağymà';
+$s_add_profile_title = 'ApraÅ¡ymo sukÅ«rimas';
+$s_add_profile_button = 'Sukurti apraÅ¡ymÄ…';
+$s_edit_or_delete_profiles_title = 'ApraÅ¡ymo redagavimas arba trynimas';
+$s_edit_profile = 'Redaguoti apraÅ¡ymÄ…';
 $s_make_default = 'Padaryti pagrindiniu';
-$s_delete_profile = 'Iğtrinti aprağymà';
-$s_select_profile = 'Iğrinkti aprağymà';
+$s_delete_profile = 'IÅ¡trinti apraÅ¡ymÄ…';
+$s_select_profile = 'IÅ¡rinkti apraÅ¡ymÄ…';
 $s_submit_button = 'Vykdyti';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Aprağymas pakeistas...';
+$s_profile_updated_msg = 'ApraÅ¡ymas pakeistas...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -474,11 +474,11 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = 'Jûsø vartotojo vardas sëkmingai atnaujintas...';
-$s_email_updated = 'Elektroninio pağto adresas sëkmingai pakeistas';
+$s_account_updated_msg = 'JÅ«sÅ³ vartotojo vardas sÄ—kmingai atnaujintas...';
+$s_email_updated = 'Elektroninio paÅ¡to adresas sÄ—kmingai pakeistas';
 $s_realname_duplicated = 'Tikrasis vardas naudojamas kito vartotojo';
-$s_realname_updated = 'Tikrasis vardas sëkmingai pakeistas';
-$s_password_updated = 'Slaptaşodis sëkmingai pakeistas';
+$s_realname_updated = 'Tikrasis vardas sÄ—kmingai pakeistas';
+$s_password_updated = 'SlaptaÅ¾odis sÄ—kmingai pakeistas';
 
 # adm_permission_report.php
 
@@ -486,7 +486,7 @@ $s_password_updated = 'Slaptaşodis sëkmingai pakeistas';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg       = 'Klaida sëkmingai priskirta...';
+$s_bug_assign_msg       = 'Klaida sÄ—kmingai priskirta...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nauja klaida';
@@ -496,59 +496,59 @@ $s_confirmed_bug_title = 'Klaidos patvirtinimas';
 $s_assigned_bug_title = 'Klaidos priskyrimas';
 $s_new_bug_button = 'Nauja klaida';
 $s_feedback_bug_button = 'Atsakyti';
-$s_acknowledged_bug_button = 'Analizuoti klaidà';
-$s_confirmed_bug_button = 'Patvirtinti klaidà';
-$s_assigned_bug_button = 'Priskirti klaidà';
+$s_acknowledged_bug_button = 'Analizuoti klaidÄ…';
+$s_confirmed_bug_button = 'Patvirtinti klaidÄ…';
+$s_assigned_bug_button = 'Priskirti klaidÄ…';
 
 # bug_close.php
-$s_bug_close_msg       = 'Klaida uşdaryta...';
-$s_close_immediately   = 'Uşdaryti dabar:';
+$s_bug_close_msg       = 'Klaida uÅ¾daryta...';
+$s_close_immediately   = 'UÅ¾daryti dabar:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Klaidos uşdarymas';
+$s_closed_bug_title = 'Klaidos uÅ¾darymas';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Klaida iğtrinta...';
+$s_bug_deleted_msg = 'Klaida iÅ¡trinta...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Ar tikrai norite iğtrinti ğià klaidà?';
-$s_delete_bug_button = 'Iğtrinti klaidà';
+$s_delete_bug_sure_msg = 'Ar tikrai norite iÅ¡trinti Å¡iÄ… klaidÄ…?';
+$s_delete_bug_button = 'IÅ¡trinti klaidÄ…';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Stebëti klaidà';
-$s_unmonitor_bug_button = 'Baigti stebëjimà';
+$s_monitor_bug_button = 'StebÄ—ti klaidÄ…';
+$s_unmonitor_bug_button = 'Baigti stebÄ—jimÄ…';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Failas sëkmingai ákeltas';
+$s_file_upload_msg = 'Failas sÄ—kmingai Ä¯keltas';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Failo ákëlimas';
-$s_select_file = 'Pasirinkite failà';
-$s_upload_file_button = 'Ákelti failà';
+$s_upload_file = 'Failo Ä¯kÄ—limas';
+$s_select_file = 'Pasirinkite failÄ…';
+$s_upload_file_button = 'Ä®kelti failÄ…';
 $s_max_file_size = 'Maksimalus dydis';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Klaida atidaryta dar kartà...';
-$s_reopen_add_bugnote_title = 'Atidarymo prieşasties komentaras';
-$s_bugnote_add_reopen_button = 'Pridëti komentarà ir iğ naujo atidaryti klaidà';
+$s_bug_reopened_msg = 'Klaida atidaryta dar kartÄ…...';
+$s_reopen_add_bugnote_title = 'Atidarymo prieÅ¾asties komentaras';
+$s_bugnote_add_reopen_button = 'PridÄ—ti komentarÄ… ir iÅ¡ naujo atidaryti klaidÄ…';
 
 # bug_resolve_page.php
 $s_resolved_bug_title = 'Klaidos sprendimas';
-$s_resolved_bug_button = 'Iğspræsti klaidà';
+$s_resolved_bug_button = 'IÅ¡sprÄ™sti klaidÄ…';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Klaida iğspræsta. Áveskite komentarà...';
+$s_bug_resolved_msg = 'Klaida iÅ¡sprÄ™sta. Ä®veskite komentarÄ…...';
 $s_resolve_add_bugnote_title = 'Sprendimo komentaras';
-$s_bugnote_add_resolve_button = 'Pridëti komentarà';
+$s_bugnote_add_resolve_button = 'PridÄ—ti komentarÄ…';
 
 # bug_reminder_page.php
 $s_from = 'Nuo';
 $s_to = 'Kam';
 $s_on = 'Kada';
-$s_sent_you_this_reminder_about = 'siunèia Jums ğá priminimà apie';
-$s_bug_reminder = 'Siøsti priminimà';
-$s_reminder_sent_to = 'Siøsti priminimà';
-$s_bug_send_button = 'Siøsti';
+$s_sent_you_this_reminder_about = 'siunÄia Jums Å¡Ä¯ priminimÄ… apie';
+$s_bug_reminder = 'SiÅ³sti priminimÄ…';
+$s_reminder_sent_to = 'SiÅ³sti priminimÄ…';
+$s_bug_send_button = 'SiÅ³sti';
 $s_reminder = 'Priminimas';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
@@ -558,7 +558,7 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Klaida sëkmingai atnaujinta...';
+$s_bug_updated_msg = 'Klaida sÄ—kmingai atnaujinta...';
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = 'Atgal prie klaidos';
@@ -568,113 +568,113 @@ $s_id = 'ID';
 $s_category = 'Kategorija';
 $s_severity = 'Svarba';
 $s_reproducibility = 'Pasikartojimas';
-$s_date_submitted = 'Ávedimo data';
+$s_date_submitted = 'Ä®vedimo data';
 $s_last_update = 'Paskutiniai pakeitimai';
-$s_reporter = 'Praneğëjas';
+$s_reporter = 'PraneÅ¡Ä—jas';
 $s_assigned_to = 'Priskirta';
 $s_priority = 'Prioritetas';
 $s_resolution = 'Sprendimas';
-$s_status = 'Bûsena';
-$s_duplicate_id = 'Pasikartojanèios klaidos ID';
-$s_os = 'Operacinë sistema';
+$s_status = 'BÅ«sena';
+$s_duplicate_id = 'PasikartojanÄios klaidos ID';
+$s_os = 'OperacinÄ— sistema';
 $s_projection = 'Projekcija';
-$s_os_version = 'Operacinës sistemos versija';
+$s_os_version = 'OperacinÄ—s sistemos versija';
 $s_eta = 'ETA';
 $s_product_version = 'Produkto versija';
-$s_build = 'Iğleidimo versija (build)';
-$s_fixed_in_version = 'Iğtaisyta versijoje';
+$s_build = 'IÅ¡leidimo versija (build)';
+$s_fixed_in_version = 'IÅ¡taisyta versijoje';
 $s_votes = 'Balsai';
 $s_summary = 'Santrauka';
-$s_description = 'Aprağymas';
-$s_steps_to_reproduce = 'Şingsniai atgaminimui';
+$s_description = 'ApraÅ¡ymas';
+$s_steps_to_reproduce = 'Å½ingsniai atgaminimui';
 $s_update_information_button = 'Atnaujinti duomenis';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Atnaujinti detalià informacijà';
-$s_updating_bug_simple_title = 'Klaidos duomenø keitimas';
+$s_update_advanced_link = 'Atnaujinti detaliÄ… informacijÄ…';
+$s_updating_bug_simple_title = 'Klaidos duomenÅ³ keitimas';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Balsas áskaièiuotas...';
+$s_vote_added_msg = 'Balsas Ä¯skaiÄiuotas...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Komentaras árağytas...';
+$s_bugnote_added_msg = 'Komentaras Ä¯raÅ¡ytas...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Komentaras sëkmingai iğtrintas...';
+$s_bugnote_deleted_msg = 'Komentaras sÄ—kmingai iÅ¡trintas...';
 $s_bug_notes_title = 'Komentarai';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Komentaro antrağtës redagavimas';
+$s_edit_bugnote_title = 'Komentaro antraÅ¡tÄ—s redagavimas';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Kolkas komentarø nëra.';
-$s_delete_link = 'Iğtrinti';
-$s_add_bugnote_title = 'Komentaro rağymas';
-$s_add_bugnote_button = 'Pridëti komentarà';
+$s_no_bugnotes_msg = 'Kolkas komentarÅ³ nÄ—ra.';
+$s_delete_link = 'IÅ¡trinti';
+$s_add_bugnote_title = 'Komentaro raÅ¡ymas';
+$s_add_bugnote_button = 'PridÄ—ti komentarÄ…';
 $s_bugnote_edit_link = 'Redaguoti';
-$s_closed_bug_button = 'Uşdaryti klaidà';
+$s_closed_bug_button = 'UÅ¾daryti klaidÄ…';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Komentaras sëkmingai atnaujintas...';
+$s_bugnote_updated_msg = 'Komentaras sÄ—kmingai atnaujintas...';
 $s_edited_on = 'redaguotas: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = 'Norëdami prisijungti spauskite èia';
+$s_click_to_login = 'NorÄ—dami prisijungti spauskite Äia';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Sveiki atvykæ á klaidø kontrolës sistemà.';
+$s_login_page_info = 'Sveiki atvykÄ™ Ä¯ klaidÅ³ kontrolÄ—s sistemÄ….';
 $s_login_title = 'Prisijungimas';
 $s_save_login = 'Prisiminti mane';
-$s_choose_project = 'Pasirinkite projektà';
+$s_choose_project = 'Pasirinkite projektÄ…';
 $s_login_button = 'Prisijungti';
 $s_signup_link = 'Registruotis';
-$s_lost_password_link = 'Neprisimenu savo slaptaşodşio';
+$s_lost_password_link = 'Neprisimenu savo slaptaÅ¾odÅ¾io';
 
 # login_select_proj_page.php
-$s_select_project_button = 'Pasirinkti projektà';
+$s_select_project_button = 'Pasirinkti projektÄ…';
 
 # logout_page.php
 $s_logged_out_title = 'Atsijungimas...';
 $s_redirecting = '...Nukreipiu';
-$s_here = 'Èia';
+$s_here = 'ÄŒia';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Slaptaşodşio keitimas";
-$s_lost_password_done_title = "Laiğkas apie slaptaşodşio pakeitimà iğsiøstas";
-$s_lost_password_subject = "Slaptaşodio keitimas";
-$s_lost_password_info = "Norëdami pakeisti savo slaptaşodá árağykite savo vartotojo vardà ir el. pağto adresà. <br/><br/>Jeigu duomenys sutaps su esamu vartotoju mûsø sistemoje, jûs gausite laiğkà su instrukcijomis kaip elgtis toliau.";
-$s_lost_password_confirm_hash_OK = "Jûsø patvirtinimo kodas priimtas. Dabar galite pasikeisti savo slaptaşodá.";
+$s_lost_password_title = "SlaptaÅ¾odÅ¾io keitimas";
+$s_lost_password_done_title = "LaiÅ¡kas apie slaptaÅ¾odÅ¾io pakeitimÄ… iÅ¡siÅ³stas";
+$s_lost_password_subject = "SlaptaÅ¾odio keitimas";
+$s_lost_password_info = "NorÄ—dami pakeisti savo slaptaÅ¾odÄ¯ Ä¯raÅ¡ykite savo vartotojo vardÄ… ir el. paÅ¡to adresÄ…. <br/><br/>Jeigu duomenys sutaps su esamu vartotoju mÅ«sÅ³ sistemoje, jÅ«s gausite laiÅ¡kÄ… su instrukcijomis kaip elgtis toliau.";
+$s_lost_password_confirm_hash_OK = "JÅ«sÅ³ patvirtinimo kodas priimtas. Dabar galite pasikeisti savo slaptaÅ¾odÄ¯.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Atviros ir priskirtos man';
-$s_open_and_reported_to_me = 'Atviros ir apie kurias praneğiau pats';
-$s_newer_news_link = 'Naujesnës naujienos';
-$s_older_news_link = 'Senesnës naujienos';
+$s_open_and_reported_to_me = 'Atviros ir apie kurias praneÅ¡iau pats';
+$s_newer_news_link = 'NaujesnÄ—s naujienos';
+$s_older_news_link = 'SenesnÄ—s naujienos';
 $s_archives = 'Archyvas';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'Sukurti vartotojà';
-$s_created_user_part2 = 'su priëjimo lygiu';
+$s_created_user_part1 = 'Sukurti vartotojÄ…';
+$s_created_user_part2 = 'su priÄ—jimo lygiu';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Naujo vartotojo kûrimas';
-$s_verify_password = 'Patvirtinti slaptaşodá';
+$s_create_new_account_title = 'Naujo vartotojo kÅ«rimas';
+$s_verify_password = 'Patvirtinti slaptaÅ¾odÄ¯';
 $s_enabled = 'Aktyvus';
 $s_protected = 'Apsaugotas';
-$s_create_user_button = 'Sukurti vartotojà';
+$s_create_user_button = 'Sukurti vartotojÄ…';
 
 # manage_page.php
-$s_hide_disabled = 'Paslëpti iğjungtus';
-$s_filter_button = 'Pritaikyti filtrà';
+$s_hide_disabled = 'PaslÄ—pti iÅ¡jungtus';
+$s_filter_button = 'Pritaikyti filtrÄ…';
 $s_manage_users_link = 'Tvarkyti vartotojus';
 $s_manage_projects_link = 'Tvarkyti projektus';
 $s_manage_custom_field_link = 'Tvarkyti papildomus laukus';
@@ -684,19 +684,19 @@ $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = 'Sukurti naujà vartotojà';
+$s_create_new_account_link = 'Sukurti naujÄ… vartotojÄ…';
 $s_projects_link = 'Projektai';
 $s_documentation_link = 'Dokumentacija';
 $s_new_accounts_title = 'Nauji vartotojai';
-$s_1_week_title = '1 savaitë';
-$s_never_logged_in_title = 'Niekada neprisijungæ';
+$s_1_week_title = '1 savaitÄ—';
+$s_never_logged_in_title = 'Niekada neprisijungÄ™';
 $s_prune_accounts = 'Valyti vartotojus';
-$s_hide_inactive = 'Paslëpti neaktyvius';
+$s_hide_inactive = 'PaslÄ—pti neaktyvius';
 $s_manage_accounts_title = 'Tvarkyti vartotojus';
 $s_p = 'aps';
-$s_date_created = 'Sukûrimo data';
+$s_date_created = 'SukÅ«rimo data';
 $s_last_visit = 'Paskutinis apsilankymas';
-$s_edit_user_link = 'Redaguoti vartotojà';
+$s_edit_user_link = 'Redaguoti vartotojÄ…';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS, unless overridden at the project level.';
@@ -772,48 +772,48 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Projektas sëkmingai sukurtas...';
+$s_project_added_msg = 'Projektas sÄ—kmingai sukurtas...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Kategorija sëkmingai sukurta...';
+$s_category_added_msg = 'Kategorija sÄ—kmingai sukurta...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Kategorija sëkmingai iğtrinta...';
+$s_category_deleted_msg = 'Kategorija sÄ—kmingai iÅ¡trinta...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Ar tikrai norite iğtrinti ğià kategorijà?';
-$s_delete_category_button = 'Iğtrinti kategorijà';
+$s_category_delete_sure_msg = 'Ar tikrai norite iÅ¡trinti Å¡iÄ… kategorijÄ…?';
+$s_delete_category_button = 'IÅ¡trinti kategorijÄ…';
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = 'Projekto kategorijos redagavimas';
-$s_update_category_button = 'Atnaujinti kategorijà';
+$s_update_category_button = 'Atnaujinti kategorijÄ…';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Kategorija sëkmingai atnaujinta...';
+$s_category_updated_msg = 'Kategorija sÄ—kmingai atnaujinta...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Projektas sëkmingai iğtrintas...';
+$s_project_deleted_msg = 'Projektas sÄ—kmingai iÅ¡trintas...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Ar tikrai norite iğtrinti projektà ir visus susijusius klaidø praneğimus?';
-$s_project_delete_button = 'Iğtrinti projektà';
+$s_project_delete_msg = 'Ar tikrai norite iÅ¡trinti projektÄ… ir visus susijusius klaidÅ³ praneÅ¡imus?';
+$s_project_delete_button = 'IÅ¡trinti projektÄ…';
 
 # manage_proj_edit_page.php
 $s_edit_project_title = 'Projekto redagavimas';
 $s_project_name = 'Projekto pavadinimas';
-$s_view_status = 'Priëjimo lygis';
-$s_public = 'vieğas';
-$s_private = 'uşdaras';
-$s_update_project_button = 'Atnaujinti projektà';
-$s_delete_project_button = 'Iğtrinti projektà';
+$s_view_status = 'PriÄ—jimo lygis';
+$s_public = 'vieÅ¡as';
+$s_private = 'uÅ¾daras';
+$s_update_project_button = 'Atnaujinti projektÄ…';
+$s_delete_project_button = 'IÅ¡trinti projektÄ…';
 $s_categories_and_version_title = 'Kategorijos ir versijos';
 $s_categories = 'Kategorijos';
-$s_add_category_button = 'Pridëti kategorijà';
+$s_add_category_button = 'PridÄ—ti kategorijÄ…';
 $s_versions = 'Versijos';
-$s_add_version_button = 'Pridëti versijà';
+$s_add_version_button = 'PridÄ—ti versijÄ…';
 $s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Redaguoti';
 $s_actions = 'Veiksmai';
@@ -826,67 +826,67 @@ $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Projekto sukûrimas';
-$s_upload_file_path = 'Failø ákëlimo katalogas';
-$s_add_project_button = 'Sukurti projektà';
+$s_add_project_title = 'Projekto sukÅ«rimas';
+$s_upload_file_path = 'FailÅ³ Ä¯kÄ—limo katalogas';
+$s_add_project_button = 'Sukurti projektÄ…';
 $s_projects_title = 'Projektai';
 $s_name = 'Pavadinimas';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Projektas sëkmingai atnaujintas...';
+$s_project_updated_msg = 'Projektas sÄ—kmingai atnaujintas...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Versija sëkmingai sukurta...';
+$s_version_added_msg = 'Versija sÄ—kmingai sukurta...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'Versija sëkmingai iğtrinta...';
+$s_version_deleted_msg = 'Versija sÄ—kmingai iÅ¡trinta...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Ar tikrai norite iğtrinti ğià versijà?';
-$s_delete_version_button = 'Iğtrinti versijà';
+$s_version_delete_sure = 'Ar tikrai norite iÅ¡trinti Å¡iÄ… versijÄ…?';
+$s_delete_version_button = 'IÅ¡trinti versijÄ…';
 
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Projekto versijos redagavimas';
-$s_update_version_button = 'Atnaujinti versijà';
-$s_released = 'Iğleista';
+$s_update_version_button = 'Atnaujinti versijÄ…';
+$s_released = 'IÅ¡leista';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Versija sëkmingai atnaujinta...';
+$s_version_updated_msg = 'Versija sÄ—kmingai atnaujinta...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Vartotojo vardas apsaugotas. Ğio vartotojo vardo iğtrinti negalima.';
-$s_account_deleted_msg = 'Vartotojo vardas iğtrintas...';
+$s_account_delete_protected_msg = 'Vartotojo vardas apsaugotas. Å io vartotojo vardo iÅ¡trinti negalima.';
+$s_account_deleted_msg = 'Vartotojo vardas iÅ¡trintas...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Ar tikrai norite iğtrinti ğá vartotojo vardà?';
+$s_delete_account_sure_msg = 'Ar tikrai norite iÅ¡trinti Å¡Ä¯ vartotojo vardÄ…?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Visi vartotojø vardai, kurie senesni negu savaitë ir në karto nenaudoti, iğtrinti';
+$s_accounts_pruned_msg = 'Visi vartotojÅ³ vardai, kurie senesni negu savaitÄ— ir nÄ— karto nenaudoti, iÅ¡trinti';
 $s_prune_accounts_button = 'Valyti';
-$s_confirm_account_pruning = 'Ar tikrai norite iğtrinti senus niekada nepanaudotus vartotojø vardus?';
+$s_confirm_account_pruning = 'Ar tikrai norite iÅ¡trinti senus niekada nepanaudotus vartotojÅ³ vardus?';
 
 # manage_user_page.php
 $s_edit_user_title = 'Vartotojo redagavimas';
-$s_reset_password_button = 'Keisti slaptaşodá';
-$s_delete_user_button = 'Iğtrinti vartotojà';
-$s_reset_password_msg = 'Ği galimybë el. laiğku nusiunèia patvirtinimo kodà.';
-$s_reset_password_msg2 = 'Ği galimybë pakeièia slaptaşodá tuğèiu.';
+$s_reset_password_button = 'Keisti slaptaÅ¾odÄ¯';
+$s_delete_user_button = 'IÅ¡trinti vartotojÄ…';
+$s_reset_password_msg = 'Å i galimybÄ— el. laiÅ¡ku nusiunÄia patvirtinimo kodÄ….';
+$s_reset_password_msg2 = 'Å i galimybÄ— pakeiÄia slaptaÅ¾odÄ¯ tuÅ¡Äiu.';
 $s_show_all_users = 'VISI';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Vartotojo vardas apsaugotas. Slaptaşodşio pakeisti negalima.';
-$s_account_reset_msg = 'Patvirtinimo kodas nusiøstas á jûsø el. pağto dëşutæ...';
-$s_account_reset_msg2 = 'Slaptaşodis pakeistas á tuğèià...';
+$s_account_reset_protected_msg = 'Vartotojo vardas apsaugotas. SlaptaÅ¾odÅ¾io pakeisti negalima.';
+$s_account_reset_msg = 'Patvirtinimo kodas nusiÅ³stas Ä¯ jÅ«sÅ³ el. paÅ¡to dÄ—Å¾utÄ™...';
+$s_account_reset_msg2 = 'SlaptaÅ¾odis pakeistas Ä¯ tuÅ¡ÄiÄ…...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Vartotojo vardas apsaugotas. Priëjimo lygis ir aktyvumas taip pat apsaugoti. Kiti vartotojo parametrai bus atnaujinti...';
-$s_manage_user_updated_msg = 'Vartotojo duomenys sëkmingai atnaujinti...';
+$s_manage_user_protected_msg = 'Vartotojo vardas apsaugotas. PriÄ—jimo lygis ir aktyvumas taip pat apsaugoti. Kiti vartotojo parametrai bus atnaujinti...';
+$s_manage_user_updated_msg = 'Vartotojo duomenys sÄ—kmingai atnaujinti...';
 
 # menu_inc.php
 $s_main_link = 'Pagrindinis puslapis';
 $s_view_bugs_link = 'Rodyti klaidas';
-$s_report_bug_link = 'Praneğti apie klaidà';
-$s_changelog_link = 'Pakeitimø istorija';
+$s_report_bug_link = 'PraneÅ¡ti apie klaidÄ…';
+$s_changelog_link = 'PakeitimÅ³ istorija';
 $s_summary_link = 'Statistika';
 $s_account_link = 'Mano nustatymai';
 $s_users_link = 'Vartotojai';
@@ -901,9 +901,9 @@ $s_my_view_link = 'Mano santrauka';
 # my_view_page.php
 $s_my_view_title_unassigned = 'Nepriskirtos';
 $s_my_view_title_recent_mod = 'Nesenai keistos';
-$s_my_view_title_reported = 'Praneğiau ağ pats';
-$s_my_view_title_assigned = 'Priskirtos man (neiğspræstos)';
-$s_my_view_title_resolved = 'Iğspræstos';
+$s_my_view_title_reported = 'PraneÅ¡iau aÅ¡ pats';
+$s_my_view_title_assigned = 'Priskirtos man (neiÅ¡sprÄ™stos)';
+$s_my_view_title_resolved = 'IÅ¡sprÄ™stos';
 $s_my_view_title_monitored = 'Klaidos kurias seku';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
@@ -912,26 +912,26 @@ $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 $s_news_added_msg = 'Naujiena sukurta...';
 
 # news_delete.php
-$s_news_deleted_msg = 'Naujiena iğtrinta...';
+$s_news_deleted_msg = 'Naujiena iÅ¡trinta...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Ar tikrai norite iğtrinti ğià naujienà?';
-$s_delete_news_item_button = 'Iğtrinti naujienà';
+$s_delete_news_sure_msg = 'Ar tikrai norite iÅ¡trinti Å¡iÄ… naujienÄ…?';
+$s_delete_news_item_button = 'IÅ¡trinti naujienÄ…';
 
 # news_edit_page.php
-$s_edit_news_title = 'Naujienø redagavimas';
-$s_headline = 'Antrağtë';
+$s_edit_news_title = 'NaujienÅ³ redagavimas';
+$s_headline = 'AntraÅ¡tÄ—';
 $s_body = 'Tekstas';
 $s_update_news_button = 'Atnaujinti naujienas';
 
 # news_menu_page.php
-$s_add_news_title = 'Naujienos sukûrimas';
-$s_post_to = 'Publikuoti á';
-$s_post_news_button = 'Publikuoti naujienà';
-$s_edit_or_delete_news_title = 'Naujienø redagavimas ir trynimas';
-$s_edit_post = 'Redaguoti naujienà';
-$s_delete_post = 'Iğtrinti naujienà';
-$s_select_post = 'Pasirinkti naujienà';
+$s_add_news_title = 'Naujienos sukÅ«rimas';
+$s_post_to = 'Publikuoti Ä¯';
+$s_post_news_button = 'Publikuoti naujienÄ…';
+$s_edit_or_delete_news_title = 'NaujienÅ³ redagavimas ir trynimas';
+$s_edit_post = 'Redaguoti naujienÄ…';
+$s_delete_post = 'IÅ¡trinti naujienÄ…';
+$s_select_post = 'Pasirinkti naujienÄ…';
 
 # news_update.php
 $s_news_updated_msg = 'Naujiena atnaujinta...';
@@ -940,99 +940,99 @@ $s_news_updated_msg = 'Naujiena atnaujinta...';
 $s_back_link = 'Atgal';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Failas sëkmingai ákeltas';
+$s_file_uploaded_msg = 'Failas sÄ—kmingai Ä¯keltas';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Failo ákëlimas';
+$s_upload_file_title = 'Failo Ä¯kÄ—limas';
 $s_title = 'Pavadinimas';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Projekto failas iğtrintas';
+$s_project_file_deleted_msg = 'Projekto failas iÅ¡trintas';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Ar tikrai norite iğtrinti ğá failà?';
+$s_confirm_file_delete_msg = 'Ar tikrai norite iÅ¡trinti Å¡Ä¯ failÄ…?';
 
 # proj_doc_edit_page.php
 $s_filename = 'Failo pavadinimas';
-$s_file_update_button = 'Atnaujinti failà';
-$s_file_delete_button = 'Iğtrinti failà';
+$s_file_update_button = 'Atnaujinti failÄ…';
+$s_file_delete_button = 'IÅ¡trinti failÄ…';
 
 # proj_doc_page.php
 $s_project_documentation_title = 'Projekto dokumentacija';
 $s_user_documentation = 'Vartotojo dokumentacija';
 $s_project_documentation = 'Projekto dokumentacija';
-$s_add_file = 'Pridëti failà';
+$s_add_file = 'PridÄ—ti failÄ…';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Projektas sëkmingai atnaujintas';
+$s_project_document_updated = 'Projektas sÄ—kmingai atnaujintas';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Vartotojas sëkmingai átrauktas á projektà';
+$s_project_user_added_msg = 'Vartotojas sÄ—kmingai Ä¯trauktas Ä¯ projektÄ…';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Vartotojas sëkmingai pağalintas iğ projekto';
+$s_project_removed_user_msg = 'Vartotojas sÄ—kmingai paÅ¡alintas iÅ¡ projekto';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Ar tikrai norite pağalinti ğá vartotojà?';
+$s_remove_user_sure_msg = 'Ar tikrai norite paÅ¡alinti Å¡Ä¯ vartotojÄ…?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Vartotojo átraukimas á projektà';
-$s_add_user_button = 'Átraukti vartotojà';
+$s_add_user_title = 'Vartotojo Ä¯traukimas Ä¯ projektÄ…';
+$s_add_user_button = 'Ä®traukti vartotojÄ…';
 $s_project_selection_title = 'Projekto pasirinkimas';
-$s_remove_link = 'Pağalinti';
+$s_remove_link = 'PaÅ¡alinti';
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Vartotojo duomenys sëkmingai atnaujinti';
+$s_updated_user_msg = 'Vartotojo duomenys sÄ—kmingai atnaujinti';
 
 # report_add.php
-$s_must_enter_category = 'Jûs turite pasirinkti kategorijà';
-$s_must_enter_severity = 'Jûs turite pasirinkti svarbà';
-$s_must_enter_reproducibility = 'Jûs turite pasirinkti pasikartojamumà';
-$s_must_enter_summary = 'Jûs turite ávesti santraukà';
-$s_must_enter_description = 'Jûs turite ávesti aprağymà';
-$s_report_more_bugs = 'Praneğti apie daugiau klaidø';
-$s_submission_thanks_msg = 'Aèiû uş Jûsø praneğimà';
+$s_must_enter_category = 'JÅ«s turite pasirinkti kategorijÄ…';
+$s_must_enter_severity = 'JÅ«s turite pasirinkti svarbÄ…';
+$s_must_enter_reproducibility = 'JÅ«s turite pasirinkti pasikartojamumÄ…';
+$s_must_enter_summary = 'JÅ«s turite Ä¯vesti santraukÄ…';
+$s_must_enter_description = 'JÅ«s turite Ä¯vesti apraÅ¡ymÄ…';
+$s_report_more_bugs = 'PraneÅ¡ti apie daugiau klaidÅ³';
+$s_submission_thanks_msg = 'AÄiÅ« uÅ¾ JÅ«sÅ³ praneÅ¡imÄ…';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'Paprastas praneğimas';
-$s_enter_report_details_title = 'Ávesti praneğimo duomenis';
-$s_required = 'bûtini laukai';
-$s_select_category = 'Pasirinkite kategorijà';
-$s_select_reproducibility = 'Pasirinkite pasikartojamumà';
-$s_select_severity = 'Pasirinkite svarbà';
-$s_or_fill_in = 'ARBA uşpildykite èia';
+$s_simple_report_link = 'Paprastas praneÅ¡imas';
+$s_enter_report_details_title = 'Ä®vesti praneÅ¡imo duomenis';
+$s_required = 'bÅ«tini laukai';
+$s_select_category = 'Pasirinkite kategorijÄ…';
+$s_select_reproducibility = 'Pasirinkite pasikartojamumÄ…';
+$s_select_severity = 'Pasirinkite svarbÄ…';
+$s_or_fill_in = 'ARBA uÅ¾pildykite Äia';
 $s_assign_to = 'Priskirta';
 $s_additional_information = 'Papildoma informacija';
-$s_submit_report_button = 'Árağyti praneğimà';
-$s_check_report_more_bugs = 'paşymëkite, jei norite praneğti apie daugiau klaidø';
+$s_submit_report_button = 'Ä®raÅ¡yti praneÅ¡imÄ…';
+$s_check_report_more_bugs = 'paÅ¾ymÄ—kite, jei norite praneÅ¡ti apie daugiau klaidÅ³';
 
 # report_bug_page.php
-$s_advanced_report_link = 'Detalus praneğimas';
-$s_report_stay = 'Pasilikti praneğimo langà';
+$s_advanced_report_link = 'Detalus praneÅ¡imas';
+$s_report_stay = 'Pasilikti praneÅ¡imo langÄ…';
 
 # set_project.php
 $s_selected_project = 'Pasirinktas projektas';
-$s_valid_project_msg = 'Jûs turite pasirinkti esamà projektà';
+$s_valid_project_msg = 'JÅ«s turite pasirinkti esamÄ… projektÄ…';
 
 # signup.php
 $s_signup_done_title = 'Vartotojo vardo registracija apdorota';
-$s_password_emailed_msg = 'Sveikiname. Jûs sëkmingai uşsiregistravote. Ğiuo metu jums siunèiamas patvirtinimo laiğkas, kad patikrintume jûsø el. pağto adreso tikrumà. Norëdami aktyvuoti savo vartotojo vardà, aplankykite puslapá, kurio URL adresas nurodytas tame laiğke.';
-$s_no_reponse_msg = 'Jûs turite septynias dienas uşbaigti registracijos procesà, prieğingu atveju ğis naujas vartotojo vardas bus iğtrintas.';
+$s_password_emailed_msg = 'Sveikiname. JÅ«s sÄ—kmingai uÅ¾siregistravote. Å iuo metu jums siunÄiamas patvirtinimo laiÅ¡kas, kad patikrintume jÅ«sÅ³ el. paÅ¡to adreso tikrumÄ…. NorÄ—dami aktyvuoti savo vartotojo vardÄ…, aplankykite puslapÄ¯, kurio URL adresas nurodytas tame laiÅ¡ke.';
+$s_no_reponse_msg = 'JÅ«s turite septynias dienas uÅ¾baigti registracijos procesÄ…, prieÅ¡ingu atveju Å¡is naujas vartotojo vardas bus iÅ¡trintas.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Árağykite kodà, kuris rodomas deşinëje';
-$s_signup_info = 'Uşpildæ ğià formà gausite patvirtinimo laiğkà.<br/>Pasinaudodami minëtu laiğku galësite aktyvuoti savo vartotojo vardà. Jeigu per septynias dienas nespësite to padaryti, jûsø vartotojo vardas bus iğtrintas.<br/>Norëdami gauti patvirtinimo laiğkà, turi ávesti tikrà el. pağto adresà.';
+$s_signup_captcha_request = 'Ä®raÅ¡ykite kodÄ…, kuris rodomas deÅ¾inÄ—je';
+$s_signup_info = 'UÅ¾pildÄ™ Å¡iÄ… formÄ… gausite patvirtinimo laiÅ¡kÄ….<br/>Pasinaudodami minÄ—tu laiÅ¡ku galÄ—site aktyvuoti savo vartotojo vardÄ…. Jeigu per septynias dienas nespÄ—site to padaryti, jÅ«sÅ³ vartotojo vardas bus iÅ¡trintas.<br/>NorÄ—dami gauti patvirtinimo laiÅ¡kÄ…, turi Ä¯vesti tikrÄ… el. paÅ¡to adresÄ….';
 $s_signup_title = 'Registracija';
 $s_signup_button = 'Pegistruotis';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'Tinklapio nustatymø redagavimas';
-$s_save_settings_button = 'Iğsaugoti nustatymus';
+$s_edit_site_settings_title = 'Tinklapio nustatymÅ³ redagavimas';
+$s_save_settings_button = 'IÅ¡saugoti nustatymus';
 
 # site_settings_page.php
 $s_site_settings_title = 'Tinklapio nustatymai';
@@ -1045,36 +1045,36 @@ $s_site_settings_updated_msg = 'Puslapio nustatymai atnaujinti';
 # summary_page.php
 $s_summary_title = 'Statistika';
 $s_summary_jpgraph_link = 'Detali statistika';
-$s_by_project = 'pagal projektà';
-$s_by_status = 'pagal bûsenà';
-$s_by_date = 'pagal datà (dienas)';
-$s_by_severity = 'pagal svarbà';
-$s_by_resolution = 'pagal sprendimà';
-$s_by_category = 'pagal kategorijà';
-$s_by_priority = 'pagal prioritetà';
-$s_by_developer = 'pagal sprendëjà';
-$s_by_reporter ='pagal praneğëjà';
-$s_reporter_by_resolution = 'Praneğëjas pagal sprendimus';
-$s_reporter_effectiveness = 'Praneğëjo nağumas';
-$s_developer_by_resolution = 'Sprendëjas pagal sprendimus';
-$s_percentage_fixed = '% Iğspræsta';
+$s_by_project = 'pagal projektÄ…';
+$s_by_status = 'pagal bÅ«senÄ…';
+$s_by_date = 'pagal datÄ… (dienas)';
+$s_by_severity = 'pagal svarbÄ…';
+$s_by_resolution = 'pagal sprendimÄ…';
+$s_by_category = 'pagal kategorijÄ…';
+$s_by_priority = 'pagal prioritetÄ…';
+$s_by_developer = 'pagal sprendÄ—jÄ…';
+$s_by_reporter ='pagal praneÅ¡Ä—jÄ…';
+$s_reporter_by_resolution = 'PraneÅ¡Ä—jas pagal sprendimus';
+$s_reporter_effectiveness = 'PraneÅ¡Ä—jo naÅ¡umas';
+$s_developer_by_resolution = 'SprendÄ—jas pagal sprendimus';
+$s_percentage_fixed = '% IÅ¡sprÄ™sta';
 $s_percentage_errors = '% Klaidinga';
 $s_errors = 'Klaidinga';
-$s_total = 'Iğ viso';
-$s_time_stats = 'Laiko statistika pagal iğspræstas klaidas (dienomis)';
+$s_total = 'IÅ¡ viso';
+$s_time_stats = 'Laiko statistika pagal iÅ¡sprÄ™stas klaidas (dienomis)';
 $s_longest_open_bug = 'Ilgiausiai atvira klaida';
 $s_longest_open = 'Ilgiausiai atvira';
 $s_average_time = 'Vidutinis laikas';
 $s_total_time = 'Visas laikas';
-$s_developer_stats = 'Sprendëjo statistika';
-$s_reporter_stats = 'Praneğëjo statistika';
-$s_orct = '(atvira/iğspræsta/uşdaryta/iğ viso)';
+$s_developer_stats = 'SprendÄ—jo statistika';
+$s_reporter_stats = 'PraneÅ¡Ä—jo statistika';
+$s_orct = '(atvira/iÅ¡sprÄ™sta/uÅ¾daryta/iÅ¡ viso)';
 
 # view_all_bug_page.php
 $s_any = 'visi';
 $s_show = 'Rodyti';
 $s_changed = 'Pakeista(val)';
-$s_viewing_bugs_title = 'Klaidø perşiûra';
+$s_viewing_bugs_title = 'KlaidÅ³ perÅ¾iÅ«ra';
 $s_updated = 'Atnaujinta';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
@@ -1082,116 +1082,116 @@ $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = 'nëra';
+$s_none = 'nÄ—ra';
 $s_current = 'current';
-$s_search ='Ieğkoti';
-$s_view_prev_link = 'Rodyti ankstesná';
-$s_view_next_link = 'Rodyti sekantá';
+$s_search ='IeÅ¡koti';
+$s_view_prev_link = 'Rodyti ankstesnÄ¯';
+$s_view_next_link = 'Rodyti sekantÄ¯';
 $s_prev = 'Ankstesnis';
 $s_next = 'Sekantis';
 $s_first = 'Pirmas';
 $s_last = 'Paskutinis';
-$s_start_date = 'Pradşios data';
+$s_start_date = 'PradÅ¾ios data';
 $s_end_date = 'Pabaigos data';
-$s_use_date_filters = 'Naudoti datos filtrà';
+$s_use_date_filters = 'Naudoti datos filtrÄ…';
 $s_yes = 'Taip';
 $s_no = 'Ne';
-$s_open_filters = 'Pakeisti filtrà';
+$s_open_filters = 'Pakeisti filtrÄ…';
 $s_or_unassigned = 'arba nepriskirta';
 $s_ok = 'GERAI';
 $s_select_all = 'Pasirinkti visus';
 
 # stored query strings
-$s_use_query = 'Panaudoti filtrà';
-$s_delete_query = 'Iğtrinti filtrà';
-$s_query_deleted = 'Filtras iğtrintas';
-$s_save_query = 'Iğsaugoti ğá filtrà';
-$s_reset_query = 'Keisti filtrà';
+$s_use_query = 'Panaudoti filtrÄ…';
+$s_delete_query = 'IÅ¡trinti filtrÄ…';
+$s_query_deleted = 'Filtras iÅ¡trintas';
+$s_save_query = 'IÅ¡saugoti Å¡Ä¯ filtrÄ…';
+$s_reset_query = 'Keisti filtrÄ…';
 $s_query_name = 'Filtro pavadinimas';
-$s_query_exists = 'Ği uşklausa jau egzistuoja.';
-$s_query_dupe_name = 'Uşklausa tokiu pavadinimu jau egzistuoja. Iğsirinkite kità pavadinimà.';
-$s_query_blank_name = 'Jûs turite árağyti filtro pavadinimà.';
-$s_query_store_error = 'Iğsaugant ğá filtrà ávyko klaida.';
+$s_query_exists = 'Å i uÅ¾klausa jau egzistuoja.';
+$s_query_dupe_name = 'UÅ¾klausa tokiu pavadinimu jau egzistuoja. IÅ¡sirinkite kitÄ… pavadinimÄ….';
+$s_query_blank_name = 'JÅ«s turite Ä¯raÅ¡yti filtro pavadinimÄ….';
+$s_query_store_error = 'IÅ¡saugant Å¡Ä¯ filtrÄ… Ä¯vyko klaida.';
 $s_open_queries = 'Tvarkyti filtrus';
-$s_query_delete_msg = 'Ar tikrai norite iğtrinti ğià uşklausà?';
+$s_query_delete_msg = 'Ar tikrai norite iÅ¡trinti Å¡iÄ… uÅ¾klausÄ…?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'Paprasta perşiûra';
-$s_viewing_bug_advanced_details_title = 'Klaidos duomenø detali perşiûra';
-$s_product_build = 'Produkto iğleidimo versija (build)';
-$s_system_profile = 'Sistemos aprağymas';
+$s_view_simple_link = 'Paprasta perÅ¾iÅ«ra';
+$s_viewing_bug_advanced_details_title = 'Klaidos duomenÅ³ detali perÅ¾iÅ«ra';
+$s_product_build = 'Produkto iÅ¡leidimo versija (build)';
+$s_system_profile = 'Sistemos apraÅ¡ymas';
 $s_update_bug_button = 'Atnaujinti duomenis';
 $s_bug_assign_to_button = 'Priskirti:';
-$s_bug_status_to_button = 'Keisti bûsenà á:';
-$s_reopen_bug_button = 'Vël atidaryti klaidà';
-$s_move_bug_button = 'Perkelti klaidà';
+$s_bug_status_to_button = 'Keisti bÅ«senÄ… Ä¯:';
+$s_reopen_bug_button = 'VÄ—l atidaryti klaidÄ…';
+$s_move_bug_button = 'Perkelti klaidÄ…';
 $s_attached_files = 'Prikabinti failai';
 $s_publish = 'Publikuoti';
-$s_cached = 'Keğuota';
+$s_cached = 'KeÅ¡uota';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Detali perşiûra';
-$s_viewing_bug_simple_details_title = 'Klaidos duomenø perşiûra';
+$s_view_advanced_link = 'Detali perÅ¾iÅ«ra';
+$s_viewing_bug_simple_details_title = 'Klaidos duomenÅ³ perÅ¾iÅ«ra';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Vartotojø, stebinèiø ğià klaidà, nëra.';
-$s_users_monitoring_bug = 'Vartotojai stebintys ğià klaidà';
-$s_monitoring_user_list = 'Stebinèiø vartotojø sàrağas';
+$s_no_users_monitoring_bug = 'VartotojÅ³, stebinÄiÅ³ Å¡iÄ… klaidÄ…, nÄ—ra.';
+$s_users_monitoring_bug = 'Vartotojai stebintys Å¡iÄ… klaidÄ…';
+$s_monitoring_user_list = 'StebinÄiÅ³ vartotojÅ³ sÄ…raÅ¡as';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'Vartotojø, remianèiø ğià klaidà, nëra.';
-$s_users_sponsoring_bug = 'Vartotojai remiantys ğià klaidà';
-$s_sponsors_list = 'Rëmëjø sàrağas';
+$s_no_users_sponsoring_bug = 'VartotojÅ³, remianÄiÅ³ Å¡iÄ… klaidÄ…, nÄ—ra.';
+$s_users_sponsoring_bug = 'Vartotojai remiantys Å¡iÄ… klaidÄ…';
+$s_sponsors_list = 'RÄ—mÄ—jÅ³ sÄ…raÅ¡as';
 $s_total_sponsorship_amount = 'Bendra suma = %s';
 
 # custom field strings
 $s_add_custom_field_button = 'Naujas papildomas laukas';
-$s_delete_custom_field_button = 'Iğtrinti papildomà laukà';
-$s_delete_custom_field_everywhere = 'Iğtrinti papildomà laukà visuose projektuose';
-$s_update_custom_field_button = 'Atnaujinti papildomà laukà';
-$s_add_existing_custom_field = 'Pridëti ğá jau egzistuojantá papildomà laukà';
-$s_edit_custom_field_title = 'Redaguoti papildomà laukà';
+$s_delete_custom_field_button = 'IÅ¡trinti papildomÄ… laukÄ…';
+$s_delete_custom_field_everywhere = 'IÅ¡trinti papildomÄ… laukÄ… visuose projektuose';
+$s_update_custom_field_button = 'Atnaujinti papildomÄ… laukÄ…';
+$s_add_existing_custom_field = 'PridÄ—ti Å¡Ä¯ jau egzistuojantÄ¯ papildomÄ… laukÄ…';
+$s_edit_custom_field_title = 'Redaguoti papildomÄ… laukÄ…';
 $s_custom_field = 'Laukas';
 $s_custom_fields_setup = 'Papildomi laukai';
 $s_custom_field_name = 'Pavadinimas';
-$s_custom_field_project_count = 'Projektø skaièius';
+$s_custom_field_project_count = 'ProjektÅ³ skaiÄius';
 $s_custom_field_type = 'Tipas';
-$s_custom_field_possible_values = 'Galimos reikğmës';
-$s_custom_field_default_value = 'Pradinë reikğmë';
-$s_custom_field_valid_regexp = 'Reguliari iğraiğkà';
-$s_custom_field_access_level_r = 'Skaitymo teisës';
-$s_custom_field_access_level_rw = 'Rağymo teisës';
+$s_custom_field_possible_values = 'Galimos reikÅ¡mÄ—s';
+$s_custom_field_default_value = 'PradinÄ— reikÅ¡mÄ—';
+$s_custom_field_valid_regexp = 'Reguliari iÅ¡raiÅ¡kÄ…';
+$s_custom_field_access_level_r = 'Skaitymo teisÄ—s';
+$s_custom_field_access_level_rw = 'RaÅ¡ymo teisÄ—s';
 $s_custom_field_length_min = 'Min. ilgis';
 $s_custom_field_length_max = 'Maks. ilgis';
-$s_custom_field_advanced = 'Rodyti tik detaliame praneğimo puslapyje';
-$s_custom_field_display_report = 'Rodyti praneğama apie klaidà';
+$s_custom_field_advanced = 'Rodyti tik detaliame praneÅ¡imo puslapyje';
+$s_custom_field_display_report = 'Rodyti praneÅ¡ama apie klaidÄ…';
 $s_custom_field_display_update = 'Rodyti kai klaida redaguojama';
-$s_custom_field_display_resolved = 'Rodyti sprendşiant klaidà';
-$s_custom_field_display_closed = 'Rodyti uşdarant klaidà';
-$s_custom_field_require_report = 'Reikia uşpildyti praneğant';
-$s_custom_field_require_update = 'Reikia uşpildyti atnaujinant';
-$s_custom_field_require_resolved = 'Reikia uşpildyti sprendşiant';
-$s_custom_field_require_closed = 'Reikia uşpildyti uşdarant';
+$s_custom_field_display_resolved = 'Rodyti sprendÅ¾iant klaidÄ…';
+$s_custom_field_display_closed = 'Rodyti uÅ¾darant klaidÄ…';
+$s_custom_field_require_report = 'Reikia uÅ¾pildyti praneÅ¡ant';
+$s_custom_field_require_update = 'Reikia uÅ¾pildyti atnaujinant';
+$s_custom_field_require_resolved = 'Reikia uÅ¾pildyti sprendÅ¾iant';
+$s_custom_field_require_closed = 'Reikia uÅ¾pildyti uÅ¾darant';
 
-$s_custom_field_sequence = 'Eilës tvarka';
-$s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis skaièius,3:Sugrupuotas sàrağas,4:El.pağto adresas,5:Paşymëjimo laukas,6:Sàrağas,7:Daugialypis sàrağas,8:Date';
+$s_custom_field_sequence = 'EilÄ—s tvarka';
+$s_custom_field_type_enum_string = '0:EilutÄ—,1:Sveikasis skaiÄius,2:Realusis skaiÄius,3:Sugrupuotas sÄ…raÅ¡as,4:El.paÅ¡to adresas,5:PaÅ¾ymÄ—jimo laukas,6:SÄ…raÅ¡as,7:Daugialypis sÄ…raÅ¡as,8:Date';
 
-$s_confirm_used_custom_field_deletion = 'Ğis laukas susietas bent su vienu projektu.  Jei pratæsite, visos ğio lauko reikğmës bus iğtrintos.  Veiksmo nebus galima atğaukti.  Jeigu nenorite iğtrinti ğio lauko, paspauskite mygtukà "Atgal" savo narğyklëje.  Jei norite tæsti, spauskite mygtukà apaèioje';
-$s_confirm_custom_field_deletion = 'Ar tikrai norite iğtrinti ğá papildomà laukà ir visas susijusias reikğmes?';
-$s_field_delete_button = 'Iğtrinti laukà';
+$s_confirm_used_custom_field_deletion = 'Å is laukas susietas bent su vienu projektu.  Jei pratÄ™site, visos Å¡io lauko reikÅ¡mÄ—s bus iÅ¡trintos.  Veiksmo nebus galima atÅ¡aukti.  Jeigu nenorite iÅ¡trinti Å¡io lauko, paspauskite mygtukÄ… "Atgal" savo narÅ¡yklÄ—je.  Jei norite tÄ™sti, spauskite mygtukÄ… apaÄioje';
+$s_confirm_custom_field_deletion = 'Ar tikrai norite iÅ¡trinti Å¡Ä¯ papildomÄ… laukÄ… ir visas susijusias reikÅ¡mes?';
+$s_field_delete_button = 'IÅ¡trinti laukÄ…';
 
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
 
-$s_hide_status = 'Paslëpti bûsenà';
-$s_filter_closed = 'Uşdaryta';
-$s_filter_resolved = 'Iğspræsta';
-$s_hide_closed = "Paslëpti uşdarytas";
-$s_hide_resolved = "Paslëpti iğspræstas";
+$s_hide_status = 'PaslÄ—pti bÅ«senÄ…';
+$s_filter_closed = 'UÅ¾daryta';
+$s_filter_resolved = 'IÅ¡sprÄ™sta';
+$s_hide_closed = "PaslÄ—pti uÅ¾darytas";
+$s_hide_resolved = "PaslÄ—pti iÅ¡sprÄ™stas";
 $s_and_above = 'ir tolimesnias';
-$s_advanced_filters = 'Detalûs filtrai';
+$s_advanced_filters = 'DetalÅ«s filtrai';
 $s_simple_filters = 'Paprasti filtrai';
 $s_monitored_by = 'Stebimos';
 
@@ -1202,12 +1202,12 @@ $s_attachment_alt = "A";
 $s_phpmailer_language = 'lt';
 
 # Sponsorship Strings
-$s_sponsors = '%d rëmëjas(ai)';
-$s_sponsorship_added = 'Rëmimas pridëtas';
-$s_sponsorship_updated = 'Rëmimas atnaujintas';
-$s_sponsorship_deleted = 'Rëmimas iğtrintas';
+$s_sponsors = '%d rÄ—mÄ—jas(ai)';
+$s_sponsorship_added = 'RÄ—mimas pridÄ—tas';
+$s_sponsorship_updated = 'RÄ—mimas atnaujintas';
+$s_sponsorship_deleted = 'RÄ—mimas iÅ¡trintas';
 $s_sponsorship_paid = 'Sponsorship Paid';
-$s_sponsorship_more_info = 'Daugiau informacijos apie rëmimà';
+$s_sponsorship_more_info = 'Daugiau informacijos apie rÄ—mimÄ…';
 $s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1216,29 +1216,29 @@ $s_sponsorship_total = 'Sponsorship Total';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Pakeitimø statistika';
+$s_changelog = 'PakeitimÅ³ statistika';
 
 # Http auth
 $s_http_auth_realm = "Mantis prisijungimas";
 
 $s_bug = "klaida";
-$s_add_new_relationship = "Nauji ryğiai";
+$s_add_new_relationship = "Nauji ryÅ¡iai";
 $s_add_new_relationship_button = "Sukurti";
-$s_this_bug = "Dabartinë klaida";
-$s_relationship_added = "Ryğys sukurtas";
-$s_relationship_deleted = "Ryğys iğtrintas";
+$s_this_bug = "DabartinÄ— klaida";
+$s_relationship_added = "RyÅ¡ys sukurtas";
+$s_relationship_deleted = "RyÅ¡ys iÅ¡trintas";
 $s_no_relationship = "no relationship";
 $s_relationship_replaced = "Relationship replaced";
 $s_replace_relationship_button = "Replace";
 $s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
 $s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Iğtrinti";
-$s_delete_relationship_sure_msg = "Ar tikrai norite iğtrinti ğá ryğá?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ne visos su ğia klaida susijusios klaidos buvo iğspræstos arba uşdarytos.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos su ğia klaida susijusios klaidos buvo iğspræstos arba uşdarytos.<br>Prieğ <b>iğsprændşiant/uşdarant</b> ğià klaidà, turite iğspræsti arba uşdaryti visas susijusias klaidas.";
-$s_create_child_bug_button = "Sukurti sàryğá";
+$s_delete_relationship_button = "IÅ¡trinti";
+$s_delete_relationship_sure_msg = "Ar tikrai norite iÅ¡trinti Å¡Ä¯ ryÅ¡Ä¯?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Ne visos su Å¡ia klaida susijusios klaidos buvo iÅ¡sprÄ™stos arba uÅ¾darytos.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DÄ–MESIO</b>. Ne visos su Å¡ia klaida susijusios klaidos buvo iÅ¡sprÄ™stos arba uÅ¾darytos.<br>PrieÅ¡ <b>iÅ¡sprÄ™ndÅ¾iant/uÅ¾darant</b> Å¡iÄ… klaidÄ…, turite iÅ¡sprÄ™sti arba uÅ¾daryti visas susijusias klaidas.";
+$s_create_child_bug_button = "Sukurti sÄ…ryÅ¡Ä¯";
 $s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Klaida sukurta iğ";
+$s_bug_created_from = "Klaida sukurta iÅ¡";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";

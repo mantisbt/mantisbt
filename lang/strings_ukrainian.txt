@@ -5,442 +5,442 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
-	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
+	# Ukrainian: Yuri Kirghisov, yuri@apple.com.ua
 	#
 	###########################################################################
 	# Ukrainian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: achumakov $
-	# $Date: 2006-10-01 09:05:31 $
+	# $Date: 2006-11-08 13:32:47 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.24 2006-10-01 09:05:31 achumakov Exp $
+	# $Id: strings_ukrainian.txt,v 1.25 2006-11-08 13:32:47 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'windows-1251';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Перенести';
-$s_actiongroup_menu_copy = 'Скопіювати';
-$s_actiongroup_menu_assign = 'Призначити';
-$s_actiongroup_menu_close = 'Закрити';
-$s_actiongroup_menu_delete = 'Видалити';
-$s_actiongroup_menu_resolve = 'Вирішити';
-$s_actiongroup_menu_update_priority = 'Змінити пріоритет';
-$s_actiongroup_menu_update_status = 'Змінити статус';
-$s_actiongroup_menu_update_view_status = 'Змінити рівень доступу';
+$s_actiongroup_menu_move = 'РџРµСЂРµРЅРµСЃС‚Рё';
+$s_actiongroup_menu_copy = 'РЎРєРѕРїС–СЋРІР°С‚Рё';
+$s_actiongroup_menu_assign = 'РџСЂРёР·РЅР°С‡РёС‚Рё';
+$s_actiongroup_menu_close = 'Р—Р°РєСЂРёС‚Рё';
+$s_actiongroup_menu_delete = 'Р’РёРґР°Р»РёС‚Рё';
+$s_actiongroup_menu_resolve = 'Р’РёСЂС–С€РёС‚Рё';
+$s_actiongroup_menu_update_priority = 'Р—РјС–РЅРёС‚Рё РїСЂС–РѕСЂРёС‚РµС‚';
+$s_actiongroup_menu_update_status = 'Р—РјС–РЅРёС‚Рё СЃС‚Р°С‚СѓСЃ';
+$s_actiongroup_menu_update_view_status = 'Р—РјС–РЅРёС‚Рё СЂС–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ';
 $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
-$s_actiongroup_bugs = 'Виділені проблеми';
+$s_actiongroup_bugs = 'Р’РёРґС–Р»РµРЅС– РїСЂРѕР±Р»РµРјРё';
 
 # new strings:
-$s_all_projects = 'Всі проекти';
-$s_move_bugs = 'Перенести проблеми';
-$s_operation_successful = 'Операцію успішно виконано.';
-$s_date_order = 'В порядку дат';
-$s_print_all_bug_page_link = 'Друкувати звіт';
-$s_csv_export = 'Експортувати в CSV';
-$s_login_anonymously = 'Анонімний вхід';
-$s_anonymous = 'Анонім';
-$s_jump_to_bugnotes = 'Перейти до коментарів';
-$s_public_project_msg = 'Це СПІЛЬНИЙ проект. Доступ до нього мають всі користувачі.';
-$s_private_project_msg = 'Це ЗАКРИТИЙ проект. Доступ до нього мають тільки Адміністратори і користувачі, додані вручну.';
-$s_access_level_project = 'Рівень доступу до проекту';
-$s_view_submitted_bug_link = 'Переглянути повідомлену проблему';
-$s_assigned_projects = 'Призначені проекти';
-$s_unassigned_projects = 'Непризначені проекти';
-$s_print = 'Друкувати';
-$s_jump = 'Перейти';
-$s_copy_users = 'Скопіювати користувачів';
-$s_copy_categories_from = 'Скопіювати категорії з';
-$s_copy_categories_to = 'Скопіювати категорії в';
+$s_all_projects = 'Р’СЃС– РїСЂРѕРµРєС‚Рё';
+$s_move_bugs = 'РџРµСЂРµРЅРµСЃС‚Рё РїСЂРѕР±Р»РµРјРё';
+$s_operation_successful = 'РћРїРµСЂР°С†С–СЋ СѓСЃРїС–С€РЅРѕ РІРёРєРѕРЅР°РЅРѕ.';
+$s_date_order = 'Р’ РїРѕСЂСЏРґРєСѓ РґР°С‚';
+$s_print_all_bug_page_link = 'Р”СЂСѓРєСѓРІР°С‚Рё Р·РІС–С‚';
+$s_csv_export = 'Р•РєСЃРїРѕСЂС‚СѓРІР°С‚Рё РІ CSV';
+$s_login_anonymously = 'РђРЅРѕРЅС–РјРЅРёР№ РІС…С–Рґ';
+$s_anonymous = 'РђРЅРѕРЅС–Рј';
+$s_jump_to_bugnotes = 'РџРµСЂРµР№С‚Рё РґРѕ РєРѕРјРµРЅС‚Р°СЂС–РІ';
+$s_public_project_msg = 'Р¦Рµ РЎРџР†Р›Р¬РќРР™ РїСЂРѕРµРєС‚. Р”РѕСЃС‚СѓРї РґРѕ РЅСЊРѕРіРѕ РјР°СЋС‚СЊ РІСЃС– РєРѕСЂРёСЃС‚СѓРІР°С‡С–.';
+$s_private_project_msg = 'Р¦Рµ Р—РђРљР РРўРР™ РїСЂРѕРµРєС‚. Р”РѕСЃС‚СѓРї РґРѕ РЅСЊРѕРіРѕ РјР°СЋС‚СЊ С‚С–Р»СЊРєРё РђРґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂРё С– РєРѕСЂРёСЃС‚СѓРІР°С‡С–, РґРѕРґР°РЅС– РІСЂСѓС‡РЅСѓ.';
+$s_access_level_project = 'Р С–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ РґРѕ РїСЂРѕРµРєС‚Сѓ';
+$s_view_submitted_bug_link = 'РџРµСЂРµРіР»СЏРЅСѓС‚Рё РїРѕРІС–РґРѕРјР»РµРЅСѓ РїСЂРѕР±Р»РµРјСѓ';
+$s_assigned_projects = 'РџСЂРёР·РЅР°С‡РµРЅС– РїСЂРѕРµРєС‚Рё';
+$s_unassigned_projects = 'РќРµРїСЂРёР·РЅР°С‡РµРЅС– РїСЂРѕРµРєС‚Рё';
+$s_print = 'Р”СЂСѓРєСѓРІР°С‚Рё';
+$s_jump = 'РџРµСЂРµР№С‚Рё';
+$s_copy_users = 'РЎРєРѕРїС–СЋРІР°С‚Рё РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ';
+$s_copy_categories_from = 'РЎРєРѕРїС–СЋРІР°С‚Рё РєР°С‚РµРіРѕСЂС–С— Р·';
+$s_copy_categories_to = 'РЎРєРѕРїС–СЋРІР°С‚Рё РєР°С‚РµРіРѕСЂС–С— РІ';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'Хронологія проблеми';
-$s_field = 'Поле';
-$s_old_value = 'Старе значення';
-$s_new_value = 'Нове значення';
-$s_date_modified = 'Дата';
-$s_bugnote = 'Коментар';
-$s_change = 'Зміна';
-$s_bugnote_view_state = 'Рівень доступу коментаря';
-$s_bug_monitor = 'Почав стеження';
-$s_bug_end_monitor = 'Завершив стеження';
-$s_announcement = 'Оголошення';
-$s_stays_on_top = 'Залишається вгорі';
-$s_delete_bugnote_button = 'Видалити коментар';
-$s_delete_bugnote_sure_msg = 'Ви справді хочете видалити цей коментар?';
-$s_bug_relationships = 'Зв\'язки';
-$s_empty_password_sure_msg = 'У користувача порожній пароль.  Так і має бути?';
-$s_empty_password_button = 'Працювати без пароля';
+$s_bug_history = 'РҐСЂРѕРЅРѕР»РѕРіС–СЏ РїСЂРѕР±Р»РµРјРё';
+$s_field = 'РџРѕР»Рµ';
+$s_old_value = 'РЎС‚Р°СЂРµ Р·РЅР°С‡РµРЅРЅСЏ';
+$s_new_value = 'РќРѕРІРµ Р·РЅР°С‡РµРЅРЅСЏ';
+$s_date_modified = 'Р”Р°С‚Р°';
+$s_bugnote = 'РљРѕРјРµРЅС‚Р°СЂ';
+$s_change = 'Р—РјС–РЅР°';
+$s_bugnote_view_state = 'Р С–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ РєРѕРјРµРЅС‚Р°СЂСЏ';
+$s_bug_monitor = 'РџРѕС‡Р°РІ СЃС‚РµР¶РµРЅРЅСЏ';
+$s_bug_end_monitor = 'Р—Р°РІРµСЂС€РёРІ СЃС‚РµР¶РµРЅРЅСЏ';
+$s_announcement = 'РћРіРѕР»РѕС€РµРЅРЅСЏ';
+$s_stays_on_top = 'Р—Р°Р»РёС€Р°С”С‚СЊСЃСЏ РІРіРѕСЂС–';
+$s_delete_bugnote_button = 'Р’РёРґР°Р»РёС‚Рё РєРѕРјРµРЅС‚Р°СЂ';
+$s_delete_bugnote_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ РєРѕРјРµРЅС‚Р°СЂ?';
+$s_bug_relationships = 'Р—РІ\'СЏР·РєРё';
+$s_empty_password_sure_msg = 'РЈ РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РїРѕСЂРѕР¶РЅС–Р№ РїР°СЂРѕР»СЊ.  РўР°Рє С– РјР°С” Р±СѓС‚Рё?';
+$s_empty_password_button = 'РџСЂР°С†СЋРІР°С‚Рё Р±РµР· РїР°СЂРѕР»СЏ';
 
-$s_duplicate_of = "дублікат проблеми";
-$s_has_duplicate = "має дублікат";
-$s_related_to = "пов'язана з";
-$s_dependant_on = "батьківська до";
-$s_blocks = "нащадок проблеми";
+$s_duplicate_of = "РґСѓР±Р»С–РєР°С‚ РїСЂРѕР±Р»РµРјРё";
+$s_has_duplicate = "РјР°С” РґСѓР±Р»С–РєР°С‚";
+$s_related_to = "РїРѕРІ'СЏР·Р°РЅР° Р·";
+$s_dependant_on = "Р±Р°С‚СЊРєС–РІСЃСЊРєР° РґРѕ";
+$s_blocks = "РЅР°С‰Р°РґРѕРє РїСЂРѕР±Р»РµРјРё";
 
-$s_new_bug = 'Нова проблема';
-$s_bugnote_added = 'Додано коментар';
-$s_bugnote_edited = 'Змінено коментар';
-$s_bugnote_deleted = 'Видалено коментар';
-$s_summary_updated = 'Змінено тему';
-$s_description_updated = 'Змінено опис';
-$s_additional_information_updated = 'Змінено додаткову інформацію';
-$s_steps_to_reproduce_updated = 'Змінено кроки для відтворення';
-$s_file_added = 'Прикріплено файл';
-$s_file_deleted = 'Видалено файл';
-$s_bug_deleted = 'Проблема видалена';
+$s_new_bug = 'РќРѕРІР° РїСЂРѕР±Р»РµРјР°';
+$s_bugnote_added = 'Р”РѕРґР°РЅРѕ РєРѕРјРµРЅС‚Р°СЂ';
+$s_bugnote_edited = 'Р—РјС–РЅРµРЅРѕ РєРѕРјРµРЅС‚Р°СЂ';
+$s_bugnote_deleted = 'Р’РёРґР°Р»РµРЅРѕ РєРѕРјРµРЅС‚Р°СЂ';
+$s_summary_updated = 'Р—РјС–РЅРµРЅРѕ С‚РµРјСѓ';
+$s_description_updated = 'Р—РјС–РЅРµРЅРѕ РѕРїРёСЃ';
+$s_additional_information_updated = 'Р—РјС–РЅРµРЅРѕ РґРѕРґР°С‚РєРѕРІСѓ С–РЅС„РѕСЂРјР°С†С–СЋ';
+$s_steps_to_reproduce_updated = 'Р—РјС–РЅРµРЅРѕ РєСЂРѕРєРё РґР»СЏ РІС–РґС‚РІРѕСЂРµРЅРЅСЏ';
+$s_file_added = 'РџСЂРёРєСЂС–РїР»РµРЅРѕ С„Р°Р№Р»';
+$s_file_deleted = 'Р’РёРґР°Р»РµРЅРѕ С„Р°Р№Р»';
+$s_bug_deleted = 'РџСЂРѕР±Р»РµРјР° РІРёРґР°Р»РµРЅР°';
 
-$s_make_private = 'Зробити приватною';
-$s_make_public = 'Зробити спільною';
+$s_make_private = 'Р—СЂРѕР±РёС‚Рё РїСЂРёРІР°С‚РЅРѕСЋ';
+$s_make_public = 'Р—СЂРѕР±РёС‚Рё СЃРїС–Р»СЊРЅРѕСЋ';
 
-$s_create_new_project_link = 'Створити новий проект';
+$s_create_new_project_link = 'РЎС‚РІРѕСЂРёС‚Рё РЅРѕРІРёР№ РїСЂРѕРµРєС‚';
 
-$s_login_link = 'Увійти';
+$s_login_link = 'РЈРІС–Р№С‚Рё';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'У вас недостатньо прав на виконання операції над наступними проблемами: ';
-$s_bug_actiongroup_access = 'У вас недостатньо прав на виконання операції.';
-$s_bug_actiongroup_status = 'Неможливо змінити статус проблеми на вказаний';
+$s_bug_actiongroup_failed = 'РЈ РІР°СЃ РЅРµРґРѕСЃС‚Р°С‚РЅСЊРѕ РїСЂР°РІ РЅР° РІРёРєРѕРЅР°РЅРЅСЏ РѕРїРµСЂР°С†С–С— РЅР°Рґ РЅР°СЃС‚СѓРїРЅРёРјРё РїСЂРѕР±Р»РµРјР°РјРё: ';
+$s_bug_actiongroup_access = 'РЈ РІР°СЃ РЅРµРґРѕСЃС‚Р°С‚РЅСЊРѕ РїСЂР°РІ РЅР° РІРёРєРѕРЅР°РЅРЅСЏ РѕРїРµСЂР°С†С–С—.';
+$s_bug_actiongroup_status = 'РќРµРјРѕР¶Р»РёРІРѕ Р·РјС–РЅРёС‚Рё СЃС‚Р°С‚СѓСЃ РїСЂРѕР±Р»РµРјРё РЅР° РІРєР°Р·Р°РЅРёР№';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Ви справді хочете закрити ці проблеми?';
-$s_delete_bugs_conf_msg = 'Ви справді хочете видалити ці проблеми?';
-$s_move_bugs_conf_msg = 'Перенести проблеми в проект';
-$s_copy_bugs_conf_msg = 'Скопіювати проблеми в проект';
-$s_assign_bugs_conf_msg = 'Кому призначити проблеми:';
-$s_resolve_bugs_conf_msg = 'Вкажіть резолюцію для проблем';
-$s_priority_bugs_conf_msg = 'Вкажіть пріоритет проблем';
-$s_status_bugs_conf_msg = 'Вкажіть статус проблем';
-$s_view_status_bugs_conf_msg = 'Вкажіть рівень доступу проблеми';
+$s_close_bugs_conf_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ Р·Р°РєСЂРёС‚Рё С†С– РїСЂРѕР±Р»РµРјРё?';
+$s_delete_bugs_conf_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†С– РїСЂРѕР±Р»РµРјРё?';
+$s_move_bugs_conf_msg = 'РџРµСЂРµРЅРµСЃС‚Рё РїСЂРѕР±Р»РµРјРё РІ РїСЂРѕРµРєС‚';
+$s_copy_bugs_conf_msg = 'РЎРєРѕРїС–СЋРІР°С‚Рё РїСЂРѕР±Р»РµРјРё РІ РїСЂРѕРµРєС‚';
+$s_assign_bugs_conf_msg = 'РљРѕРјСѓ РїСЂРёР·РЅР°С‡РёС‚Рё РїСЂРѕР±Р»РµРјРё:';
+$s_resolve_bugs_conf_msg = 'Р’РєР°Р¶С–С‚СЊ СЂРµР·РѕР»СЋС†С–СЋ РґР»СЏ РїСЂРѕР±Р»РµРј';
+$s_priority_bugs_conf_msg = 'Р’РєР°Р¶С–С‚СЊ РїСЂС–РѕСЂРёС‚РµС‚ РїСЂРѕР±Р»РµРј';
+$s_status_bugs_conf_msg = 'Р’РєР°Р¶С–С‚СЊ СЃС‚Р°С‚СѓСЃ РїСЂРѕР±Р»РµРј';
+$s_view_status_bugs_conf_msg = 'Р’РєР°Р¶С–С‚СЊ СЂС–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ РїСЂРѕР±Р»РµРјРё';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Закрити проблеми' ;
-$s_delete_group_bugs_button = 'Видалити проблеми' ;
-$s_move_group_bugs_button = 'Перенести проблеми' ;
-$s_copy_group_bugs_button = 'Скопіювати проблеми' ;
-$s_assign_group_bugs_button = 'Призначити проблеми' ;
-$s_resolve_group_bugs_button = 'Вирішити проблеми' ;
-$s_priority_group_bugs_button = 'Змінити пріоритет' ;
-$s_status_group_bugs_button = 'Змінити статус' ;
+$s_close_group_bugs_button = 'Р—Р°РєСЂРёС‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_delete_group_bugs_button = 'Р’РёРґР°Р»РёС‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_move_group_bugs_button = 'РџРµСЂРµРЅРµСЃС‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_copy_group_bugs_button = 'РЎРєРѕРїС–СЋРІР°С‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_assign_group_bugs_button = 'РџСЂРёР·РЅР°С‡РёС‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_resolve_group_bugs_button = 'Р’РёСЂС–С€РёС‚Рё РїСЂРѕР±Р»РµРјРё' ;
+$s_priority_group_bugs_button = 'Р—РјС–РЅРёС‚Рё РїСЂС–РѕСЂРёС‚РµС‚' ;
+$s_status_group_bugs_button = 'Р—РјС–РЅРёС‚Рё СЃС‚Р°С‚СѓСЃ' ;
 $s_category_group_bugs_button = 'Update Category';
-$s_view_status_group_bugs_button = 'Змінити рівень доступу';
+$s_view_status_group_bugs_button = 'Р—РјС–РЅРёС‚Рё СЂС–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Діаграми за статусами' ;
-$s_graph_imp_priority_title = 'Діаграми пріоритетів' ;
-$s_graph_imp_severity_title = 'Діаграми серйозності';
-$s_graph_imp_category_title = 'Діаграми категорій';
-$s_graph_imp_resolution_title = 'Діаграми резолюцій';
-$s_by_status_pct = 'Статуси у відсотках';
-$s_by_priority_pct = 'Пріоритети у відсотках';
-$s_by_severity_pct = 'Серйозність у відсотках';
-$s_by_category_pct = 'Категорії у відсотках';
-$s_by_resolution_pct = 'Резолюції у відсотках';
-$s_by_severity_mix = 'Серйозність та статуси';
-$s_by_priority_mix = 'Пріоритети і статуси';
-$s_by_resolution_mix = 'Резолюції та статуси';
-$s_synthesis_link = 'Статистика';
-$s_status_link = 'Статуси';
-$s_priority_link = 'Пріоритети';
-$s_severity_link = 'Серйозність';
-$s_category_link = 'Категорії';
-$s_resolution_link = 'Резолюції';
-$s_legend_still_open = 'Ще відкриті';
-$s_legend_resolved = 'Вирішені';
-$s_legend_assigned = 'Призначені';
-$s_legend_total = 'Загалом';
-$s_legend_opened = 'Відкриті';
-$s_legend_closed = 'Закриті';
-$s_legend_reported = 'Повідомлені';
-$s_cumulative = 'Накопичувальні';
-$s_not_enough_data = 'Не вистачає даних для діаграми';
+$s_graph_imp_status_title = 'Р”С–Р°РіСЂР°РјРё Р·Р° СЃС‚Р°С‚СѓСЃР°РјРё' ;
+$s_graph_imp_priority_title = 'Р”С–Р°РіСЂР°РјРё РїСЂС–РѕСЂРёС‚РµС‚С–РІ' ;
+$s_graph_imp_severity_title = 'Р”С–Р°РіСЂР°РјРё СЃРµСЂР№РѕР·РЅРѕСЃС‚С–';
+$s_graph_imp_category_title = 'Р”С–Р°РіСЂР°РјРё РєР°С‚РµРіРѕСЂС–Р№';
+$s_graph_imp_resolution_title = 'Р”С–Р°РіСЂР°РјРё СЂРµР·РѕР»СЋС†С–Р№';
+$s_by_status_pct = 'РЎС‚Р°С‚СѓСЃРё Сѓ РІС–РґСЃРѕС‚РєР°С…';
+$s_by_priority_pct = 'РџСЂС–РѕСЂРёС‚РµС‚Рё Сѓ РІС–РґСЃРѕС‚РєР°С…';
+$s_by_severity_pct = 'РЎРµСЂР№РѕР·РЅС–СЃС‚СЊ Сѓ РІС–РґСЃРѕС‚РєР°С…';
+$s_by_category_pct = 'РљР°С‚РµРіРѕСЂС–С— Сѓ РІС–РґСЃРѕС‚РєР°С…';
+$s_by_resolution_pct = 'Р РµР·РѕР»СЋС†С–С— Сѓ РІС–РґСЃРѕС‚РєР°С…';
+$s_by_severity_mix = 'РЎРµСЂР№РѕР·РЅС–СЃС‚СЊ С‚Р° СЃС‚Р°С‚СѓСЃРё';
+$s_by_priority_mix = 'РџСЂС–РѕСЂРёС‚РµС‚Рё С– СЃС‚Р°С‚СѓСЃРё';
+$s_by_resolution_mix = 'Р РµР·РѕР»СЋС†С–С— С‚Р° СЃС‚Р°С‚СѓСЃРё';
+$s_synthesis_link = 'РЎС‚Р°С‚РёСЃС‚РёРєР°';
+$s_status_link = 'РЎС‚Р°С‚СѓСЃРё';
+$s_priority_link = 'РџСЂС–РѕСЂРёС‚РµС‚Рё';
+$s_severity_link = 'РЎРµСЂР№РѕР·РЅС–СЃС‚СЊ';
+$s_category_link = 'РљР°С‚РµРіРѕСЂС–С—';
+$s_resolution_link = 'Р РµР·РѕР»СЋС†С–С—';
+$s_legend_still_open = 'Р©Рµ РІС–РґРєСЂРёС‚С–';
+$s_legend_resolved = 'Р’РёСЂС–С€РµРЅС–';
+$s_legend_assigned = 'РџСЂРёР·РЅР°С‡РµРЅС–';
+$s_legend_total = 'Р—Р°РіР°Р»РѕРј';
+$s_legend_opened = 'Р’С–РґРєСЂРёС‚С–';
+$s_legend_closed = 'Р—Р°РєСЂРёС‚С–';
+$s_legend_reported = 'РџРѕРІС–РґРѕРјР»РµРЅС–';
+$s_cumulative = 'РќР°РєРѕРїРёС‡СѓРІР°Р»СЊРЅС–';
+$s_not_enough_data = 'РќРµ РІРёСЃС‚Р°С‡Р°С” РґР°РЅРёС… РґР»СЏ РґС–Р°РіСЂР°РјРё';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Показати тількі відмічені';
+$s_hide_button = 'РџРѕРєР°Р·Р°С‚Рё С‚С–Р»СЊРєС– РІС–РґРјС–С‡РµРЅС–';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Виберіть поля для друку';
-$s_printing_options_link = 'Параметри друку';
+$s_printing_preferences_title = 'Р’РёР±РµСЂС–С‚СЊ РїРѕР»СЏ РґР»СЏ РґСЂСѓРєСѓ';
+$s_printing_options_link = 'РџР°СЂР°РјРµС‚СЂРё РґСЂСѓРєСѓ';
 
 # word and excel export
-$s_bugnote_title = 'Обробник коментарів' ;
-$s_bugnote_date = 'Дата коментаря';
-$s_bugnote_description = 'Опис коментаря';
+$s_bugnote_title = 'РћР±СЂРѕР±РЅРёРє РєРѕРјРµРЅС‚Р°СЂС–РІ' ;
+$s_bugnote_date = 'Р”Р°С‚Р° РєРѕРјРµРЅС‚Р°СЂСЏ';
+$s_bugnote_description = 'РћРїРёСЃ РєРѕРјРµРЅС‚Р°СЂСЏ';
 
-$s_error_no_proceed = 'Натисніть в браузері кнопку Назад (Back), щоб повернутись до попередньої сторінки.  На ній ви зможете виправити помилки або запросити іншу операцію.  Ви також можете вибрати з меню опцію, щоб перейти прямо до нового розділу.';
+$s_error_no_proceed = 'РќР°С‚РёСЃРЅС–С‚СЊ РІ Р±СЂР°СѓР·РµСЂС– РєРЅРѕРїРєСѓ РќР°Р·Р°Рґ (Back), С‰РѕР± РїРѕРІРµСЂРЅСѓС‚РёСЃСЊ РґРѕ РїРѕРїРµСЂРµРґРЅСЊРѕС— СЃС‚РѕСЂС–РЅРєРё.  РќР° РЅС–Р№ РІРё Р·РјРѕР¶РµС‚Рµ РІРёРїСЂР°РІРёС‚Рё РїРѕРјРёР»РєРё Р°Р±Рѕ Р·Р°РїСЂРѕСЃРёС‚Рё С–РЅС€Сѓ РѕРїРµСЂР°С†С–СЋ.  Р’Рё С‚Р°РєРѕР¶ РјРѕР¶РµС‚Рµ РІРёР±СЂР°С‚Рё Р· РјРµРЅСЋ РѕРїС†С–СЋ, С‰РѕР± РїРµСЂРµР№С‚Рё РїСЂСЏРјРѕ РґРѕ РЅРѕРІРѕРіРѕ СЂРѕР·РґС–Р»Сѓ.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'В процесі виконання виникла помилка.  Повідомте про неї локального адміністратора.';
-$MANTIS_ERROR[ERROR_SQL] = 'Виникла помилка SQL.  Повідомте про це ';
-$MANTIS_ERROR[ERROR_REPORT] = 'Десь у вашому звіті є помилка.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не вказаний файл';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Недозволений тип файлів';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Папка не існує. Перевірте параметри проекту.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Це дублікат файла. Спочатку видаліть попередній файл.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект з такою назвою вже існує.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Не заповнене обов\'язкове поле \'%s\'.  Перевірте заповнені поля.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Цей запис захищений.  Ви не зможете переглядати його доки ввімкнений захист.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Доступ заборонений.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Помилка закачування файла.  Можливо в параметрах PHP закачування не дозволені.  Попросіть адміністратора з\'ясувати проблему за допомогою скрипта admin_check.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Не вдалось закачати файл.  Скидається на те, що розмір файла більший, ніж дозволений параметрами PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Не вдалось знайти необхідний сторінці параметр.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Такий користувач вже існує. Поверніться назад і введіть інше ім\'я користувача.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Не вдалось знайти параметр \'%s\'.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Р’ РїСЂРѕС†РµСЃС– РІРёРєРѕРЅР°РЅРЅСЏ РІРёРЅРёРєР»Р° РїРѕРјРёР»РєР°.  РџРѕРІС–РґРѕРјС‚Рµ РїСЂРѕ РЅРµС— Р»РѕРєР°Р»СЊРЅРѕРіРѕ Р°РґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂР°.';
+$MANTIS_ERROR[ERROR_SQL] = 'Р’РёРЅРёРєР»Р° РїРѕРјРёР»РєР° SQL.  РџРѕРІС–РґРѕРјС‚Рµ РїСЂРѕ С†Рµ ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Р”РµСЃСЊ Сѓ РІР°С€РѕРјСѓ Р·РІС–С‚С– С” РїРѕРјРёР»РєР°.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'РќРµ РІРєР°Р·Р°РЅРёР№ С„Р°Р№Р»';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'РќРµРґРѕР·РІРѕР»РµРЅРёР№ С‚РёРї С„Р°Р№Р»С–РІ';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'РџР°РїРєР° РЅРµ С–СЃРЅСѓС”. РџРµСЂРµРІС–СЂС‚Рµ РїР°СЂР°РјРµС‚СЂРё РїСЂРѕРµРєС‚Сѓ.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Р¦Рµ РґСѓР±Р»С–РєР°С‚ С„Р°Р№Р»Р°. РЎРїРѕС‡Р°С‚РєСѓ РІРёРґР°Р»С–С‚СЊ РїРѕРїРµСЂРµРґРЅС–Р№ С„Р°Р№Р».';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'РџСЂРѕРµРєС‚ Р· С‚Р°РєРѕСЋ РЅР°Р·РІРѕСЋ РІР¶Рµ С–СЃРЅСѓС”.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'РќРµ Р·Р°РїРѕРІРЅРµРЅРµ РѕР±РѕРІ\'СЏР·РєРѕРІРµ РїРѕР»Рµ \'%s\'.  РџРµСЂРµРІС–СЂС‚Рµ Р·Р°РїРѕРІРЅРµРЅС– РїРѕР»СЏ.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Р¦РµР№ Р·Р°РїРёСЃ Р·Р°С…РёС‰РµРЅРёР№.  Р’Рё РЅРµ Р·РјРѕР¶РµС‚Рµ РїРµСЂРµРіР»СЏРґР°С‚Рё Р№РѕРіРѕ РґРѕРєРё РІРІС–РјРєРЅРµРЅРёР№ Р·Р°С…РёСЃС‚.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Р”РѕСЃС‚СѓРї Р·Р°Р±РѕСЂРѕРЅРµРЅРёР№.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'РџРѕРјРёР»РєР° Р·Р°РєР°С‡СѓРІР°РЅРЅСЏ С„Р°Р№Р»Р°.  РњРѕР¶Р»РёРІРѕ РІ РїР°СЂР°РјРµС‚СЂР°С… PHP Р·Р°РєР°С‡СѓРІР°РЅРЅСЏ РЅРµ РґРѕР·РІРѕР»РµРЅС–.  РџРѕРїСЂРѕСЃС–С‚СЊ Р°РґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂР° Р·\'СЏСЃСѓРІР°С‚Рё РїСЂРѕР±Р»РµРјСѓ Р·Р° РґРѕРїРѕРјРѕРіРѕСЋ СЃРєСЂРёРїС‚Р° admin_check.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·Р°РєР°С‡Р°С‚Рё С„Р°Р№Р».  РЎРєРёРґР°С”С‚СЊСЃСЏ РЅР° С‚Рµ, С‰Рѕ СЂРѕР·РјС–СЂ С„Р°Р№Р»Р° Р±С–Р»СЊС€РёР№, РЅС–Р¶ РґРѕР·РІРѕР»РµРЅРёР№ РїР°СЂР°РјРµС‚СЂР°РјРё PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РЅРµРѕР±С…С–РґРЅРёР№ СЃС‚РѕСЂС–РЅС†С– РїР°СЂР°РјРµС‚СЂ.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'РўР°РєРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ РІР¶Рµ С–СЃРЅСѓС”. РџРѕРІРµСЂРЅС–С‚СЊСЃСЏ РЅР°Р·Р°Рґ С– РІРІРµРґС–С‚СЊ С–РЅС€Рµ С–Рј\'СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РїР°СЂР°РјРµС‚СЂ \'%s\'.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Не вдалось знайти рядок \'%s\'.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Коментар не знайдений.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Такого проекту немає.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Не можу знайти поле \'%s\' бази даних.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Не можу з\'єднатись з FTP-сервером.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Обробник проблем не має достатніх привілеїв на обробку проблеми з цим статусом.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Такий проект вже існує.  Поверніться назад і введіть іншу назву проекта.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Хибна назва проекта.  Назва проекта не може бути порожнью.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'немає такого користувача.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Інформація для входу, що зберігається у вашому браузері, неправильна.  Може ваш запис був видалений?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Не можу знайти параметри цього користувача.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Не вдалось знайти новину.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Пароль і перевірка не співпадають.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Очікувався масив, а отримано рядок.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Очікувався рядок, а отримано масив.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё СЂСЏРґРѕРє \'%s\'.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'РљРѕРјРµРЅС‚Р°СЂ РЅРµ Р·РЅР°Р№РґРµРЅРёР№.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'РўР°РєРѕРіРѕ РїСЂРѕРµРєС‚Сѓ РЅРµРјР°С”.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'РќРµ РјРѕР¶Сѓ Р·РЅР°Р№С‚Рё РїРѕР»Рµ \'%s\' Р±Р°Р·Рё РґР°РЅРёС….';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'РќРµ РјРѕР¶Сѓ Р·\'С”РґРЅР°С‚РёСЃСЊ Р· FTP-СЃРµСЂРІРµСЂРѕРј.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'РћР±СЂРѕР±РЅРёРє РїСЂРѕР±Р»РµРј РЅРµ РјР°С” РґРѕСЃС‚Р°С‚РЅС–С… РїСЂРёРІС–Р»РµС—РІ РЅР° РѕР±СЂРѕР±РєСѓ РїСЂРѕР±Р»РµРјРё Р· С†РёРј СЃС‚Р°С‚СѓСЃРѕРј.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'РўР°РєРёР№ РїСЂРѕРµРєС‚ РІР¶Рµ С–СЃРЅСѓС”.  РџРѕРІРµСЂРЅС–С‚СЊСЃСЏ РЅР°Р·Р°Рґ С– РІРІРµРґС–С‚СЊ С–РЅС€Сѓ РЅР°Р·РІСѓ РїСЂРѕРµРєС‚Р°.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'РҐРёР±РЅР° РЅР°Р·РІР° РїСЂРѕРµРєС‚Р°.  РќР°Р·РІР° РїСЂРѕРµРєС‚Р° РЅРµ РјРѕР¶Рµ Р±СѓС‚Рё РїРѕСЂРѕР¶РЅСЊСЋ.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'РЅРµРјР°С” С‚Р°РєРѕРіРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Р†РЅС„РѕСЂРјР°С†С–СЏ РґР»СЏ РІС…РѕРґСѓ, С‰Рѕ Р·Р±РµСЂС–РіР°С”С‚СЊСЃСЏ Сѓ РІР°С€РѕРјСѓ Р±СЂР°СѓР·РµСЂС–, РЅРµРїСЂР°РІРёР»СЊРЅР°.  РњРѕР¶Рµ РІР°С€ Р·Р°РїРёСЃ Р±СѓРІ РІРёРґР°Р»РµРЅРёР№?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'РќРµ РјРѕР¶Сѓ Р·РЅР°Р№С‚Рё РїР°СЂР°РјРµС‚СЂРё С†СЊРѕРіРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РЅРѕРІРёРЅСѓ.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'РџР°СЂРѕР»СЊ С– РїРµСЂРµРІС–СЂРєР° РЅРµ СЃРїС–РІРїР°РґР°СЋС‚СЊ.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'РћС‡С–РєСѓРІР°РІСЃСЏ РјР°СЃРёРІ, Р° РѕС‚СЂРёРјР°РЅРѕ СЂСЏРґРѕРє.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'РћС‡С–РєСѓРІР°РІСЃСЏ СЂСЏРґРѕРє, Р° РѕС‚СЂРёРјР°РЅРѕ РјР°СЃРёРІ.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Не можу знайти проблему %d.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'РќРµ РјРѕР¶Сѓ Р·РЅР°Р№С‚Рё РїСЂРѕР±Р»РµРјСѓ %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Неправильний email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Не вдалось знайти профайл.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Цей тип файлів закачувати не дозволено.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Це дублікат файла. Спочатку видаліть попередній файл.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Неправильний шлях для закачуваних файлів.  Папка або не існує, або неможливо в неї що-небудь записати.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'РќРµРїСЂР°РІРёР»СЊРЅРёР№ email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РїСЂРѕС„Р°Р№Р».';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Р¦РµР№ С‚РёРї С„Р°Р№Р»С–РІ Р·Р°РєР°С‡СѓРІР°С‚Рё РЅРµ РґРѕР·РІРѕР»РµРЅРѕ.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Р¦Рµ РґСѓР±Р»С–РєР°С‚ С„Р°Р№Р»Р°. РЎРїРѕС‡Р°С‚РєСѓ РІРёРґР°Р»С–С‚СЊ РїРѕРїРµСЂРµРґРЅС–Р№ С„Р°Р№Р».';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'РќРµРїСЂР°РІРёР»СЊРЅРёР№ С€Р»СЏС… РґР»СЏ Р·Р°РєР°С‡СѓРІР°РЅРёС… С„Р°Р№Р»С–РІ.  РџР°РїРєР° Р°Р±Рѕ РЅРµ С–СЃРЅСѓС”, Р°Р±Рѕ РЅРµРјРѕР¶Р»РёРІРѕ РІ РЅРµС— С‰Рѕ-РЅРµР±СѓРґСЊ Р·Р°РїРёСЃР°С‚Рё.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Ви не можете зробити проблему дублікатом неї ж.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Не можу знайти таке власне поле';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Таке ім\'я вже існує.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Принаймні один проект використовує це поле.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Хибне значення поля.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Хибне означення власного поля';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'Помилка LDAP-авторизації';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не вдалось зв\'язатись з LDAP-сервером';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Не вдалось оновити рядок в LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Не вдалось знайти користувача в LDAP-базі.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Помилка з\'єднання з базою даних. Отримана відповідь #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Помилка в запиті до бази даних.  Відповідь містила #%d: %s на запит: %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Помилка виборки з бази даних.  Отримана відповідь #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Така категорія вже існує.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Не ваказана операція копіювання.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Не вдалось знайти таку категорію.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Така версія вже існує.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Не вдалось знайти версію.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Хибне ім\'я запису. Імена можуть містити тільки літери, числа, пробіли, дефіси та символи підкреслення.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Користувач не має достатнього рівня доступу.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Таке "Повне ім\'я" співпадає з іменем іншого користувача. Виберіть собі інше.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Підтримка спонсорства вимкнена.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Меценатство %d не знайдене.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Меценатство (%s) нижче необхідного мінімуму (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Обробник не має необхідних привілеїв для обробки спонсорованих проблем.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Доступ заборонений: Призначення спонсорованих проблем вимагає вищого рівня доступу.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Спонсор не вказав електронної адреси. Оновіть, будь ласка, свій профайл.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Поле \'%s\' конфігурації має хибне значення \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Не вдається виконати операцію, тому що проблему \'%d\' не можна змінювати';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Ці проблеми вже зв'язані.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Зв'язок не знайдений.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Доступ заборонений: проблема %d вимагає вищого рівня доступу.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Проблему не можна зв'язувати з нею самою ж.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Хибне підтвердження. Спробуйте ще раз.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Функція \'забув пароль\' не доступна.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Вкажіть email, щоб скинути пароль';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Вказана інформація не підходить до жодного активного запису!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL підтвердження або хибний, або вже використаний. Зареєструйтесь знову.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Досягнуто максимуму паралельних запитів. Зв\'яжіться з системним адміністратором';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Р’Рё РЅРµ РјРѕР¶РµС‚Рµ Р·СЂРѕР±РёС‚Рё РїСЂРѕР±Р»РµРјСѓ РґСѓР±Р»С–РєР°С‚РѕРј РЅРµС— Р¶.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'РќРµ РјРѕР¶Сѓ Р·РЅР°Р№С‚Рё С‚Р°РєРµ РІР»Р°СЃРЅРµ РїРѕР»Рµ';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'РўР°РєРµ С–Рј\'СЏ РІР¶Рµ С–СЃРЅСѓС”.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'РџСЂРёРЅР°Р№РјРЅС– РѕРґРёРЅ РїСЂРѕРµРєС‚ РІРёРєРѕСЂРёСЃС‚РѕРІСѓС” С†Рµ РїРѕР»Рµ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'РҐРёР±РЅРµ Р·РЅР°С‡РµРЅРЅСЏ РїРѕР»СЏ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'РҐРёР±РЅРµ РѕР·РЅР°С‡РµРЅРЅСЏ РІР»Р°СЃРЅРѕРіРѕ РїРѕР»СЏ';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'РџРѕРјРёР»РєР° LDAP-Р°РІС‚РѕСЂРёР·Р°С†С–С—';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РІ\'СЏР·Р°С‚РёСЃСЊ Р· LDAP-СЃРµСЂРІРµСЂРѕРј';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'РќРµ РІРґР°Р»РѕСЃСЊ РѕРЅРѕРІРёС‚Рё СЂСЏРґРѕРє РІ LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РІ LDAP-Р±Р°Р·С–.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'РџРѕРјРёР»РєР° Р·\'С”РґРЅР°РЅРЅСЏ Р· Р±Р°Р·РѕСЋ РґР°РЅРёС…. РћС‚СЂРёРјР°РЅР° РІС–РґРїРѕРІС–РґСЊ #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'РџРѕРјРёР»РєР° РІ Р·Р°РїРёС‚С– РґРѕ Р±Р°Р·Рё РґР°РЅРёС….  Р’С–РґРїРѕРІС–РґСЊ РјС–СЃС‚РёР»Р° #%d: %s РЅР° Р·Р°РїРёС‚: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'РџРѕРјРёР»РєР° РІРёР±РѕСЂРєРё Р· Р±Р°Р·Рё РґР°РЅРёС….  РћС‚СЂРёРјР°РЅР° РІС–РґРїРѕРІС–РґСЊ #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'РўР°РєР° РєР°С‚РµРіРѕСЂС–СЏ РІР¶Рµ С–СЃРЅСѓС”.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'РќРµ РІР°РєР°Р·Р°РЅР° РѕРїРµСЂР°С†С–СЏ РєРѕРїС–СЋРІР°РЅРЅСЏ.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё С‚Р°РєСѓ РєР°С‚РµРіРѕСЂС–СЋ.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'РўР°РєР° РІРµСЂСЃС–СЏ РІР¶Рµ С–СЃРЅСѓС”.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'РќРµ РІРґР°Р»РѕСЃСЊ Р·РЅР°Р№С‚Рё РІРµСЂСЃС–СЋ.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'РҐРёР±РЅРµ С–Рј\'СЏ Р·Р°РїРёСЃСѓ. Р†РјРµРЅР° РјРѕР¶СѓС‚СЊ РјС–СЃС‚РёС‚Рё С‚С–Р»СЊРєРё Р»С–С‚РµСЂРё, С‡РёСЃР»Р°, РїСЂРѕР±С–Р»Рё, РґРµС„С–СЃРё С‚Р° СЃРёРјРІРѕР»Рё РїС–РґРєСЂРµСЃР»РµРЅРЅСЏ.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'РљРѕСЂРёСЃС‚СѓРІР°С‡ РЅРµ РјР°С” РґРѕСЃС‚Р°С‚РЅСЊРѕРіРѕ СЂС–РІРЅСЏ РґРѕСЃС‚СѓРїСѓ.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'РўР°РєРµ "РџРѕРІРЅРµ С–Рј\'СЏ" СЃРїС–РІРїР°РґР°С” Р· С–РјРµРЅРµРј С–РЅС€РѕРіРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°. Р’РёР±РµСЂС–С‚СЊ СЃРѕР±С– С–РЅС€Рµ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'РџС–РґС‚СЂРёРјРєР° СЃРїРѕРЅСЃРѕСЂСЃС‚РІР° РІРёРјРєРЅРµРЅР°.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'РњРµС†РµРЅР°С‚СЃС‚РІРѕ %d РЅРµ Р·РЅР°Р№РґРµРЅРµ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'РњРµС†РµРЅР°С‚СЃС‚РІРѕ (%s) РЅРёР¶С‡Рµ РЅРµРѕР±С…С–РґРЅРѕРіРѕ РјС–РЅС–РјСѓРјСѓ (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'РћР±СЂРѕР±РЅРёРє РЅРµ РјР°С” РЅРµРѕР±С…С–РґРЅРёС… РїСЂРёРІС–Р»РµС—РІ РґР»СЏ РѕР±СЂРѕР±РєРё СЃРїРѕРЅСЃРѕСЂРѕРІР°РЅРёС… РїСЂРѕР±Р»РµРј.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Р”РѕСЃС‚СѓРї Р·Р°Р±РѕСЂРѕРЅРµРЅРёР№: РџСЂРёР·РЅР°С‡РµРЅРЅСЏ СЃРїРѕРЅСЃРѕСЂРѕРІР°РЅРёС… РїСЂРѕР±Р»РµРј РІРёРјР°РіР°С” РІРёС‰РѕРіРѕ СЂС–РІРЅСЏ РґРѕСЃС‚СѓРїСѓ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'РЎРїРѕРЅСЃРѕСЂ РЅРµ РІРєР°Р·Р°РІ РµР»РµРєС‚СЂРѕРЅРЅРѕС— Р°РґСЂРµСЃРё. РћРЅРѕРІС–С‚СЊ, Р±СѓРґСЊ Р»Р°СЃРєР°, СЃРІС–Р№ РїСЂРѕС„Р°Р№Р».';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'РџРѕР»Рµ \'%s\' РєРѕРЅС„С–РіСѓСЂР°С†С–С— РјР°С” С…РёР±РЅРµ Р·РЅР°С‡РµРЅРЅСЏ \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'РќРµ РІРґР°С”С‚СЊСЃСЏ РІРёРєРѕРЅР°С‚Рё РѕРїРµСЂР°С†С–СЋ, С‚РѕРјСѓ С‰Рѕ РїСЂРѕР±Р»РµРјСѓ \'%d\' РЅРµ РјРѕР¶РЅР° Р·РјС–РЅСЋРІР°С‚Рё';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Р¦С– РїСЂРѕР±Р»РµРјРё РІР¶Рµ Р·РІ'СЏР·Р°РЅС–.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Р—РІ'СЏР·РѕРє РЅРµ Р·РЅР°Р№РґРµРЅРёР№.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Р”РѕСЃС‚СѓРї Р·Р°Р±РѕСЂРѕРЅРµРЅРёР№: РїСЂРѕР±Р»РµРјР° %d РІРёРјР°РіР°С” РІРёС‰РѕРіРѕ СЂС–РІРЅСЏ РґРѕСЃС‚СѓРїСѓ.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "РџСЂРѕР±Р»РµРјСѓ РЅРµ РјРѕР¶РЅР° Р·РІ'СЏР·СѓРІР°С‚Рё Р· РЅРµСЋ СЃР°РјРѕСЋ Р¶.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'РҐРёР±РЅРµ РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ. РЎРїСЂРѕР±СѓР№С‚Рµ С‰Рµ СЂР°Р·.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Р¤СѓРЅРєС†С–СЏ \'Р·Р°Р±СѓРІ РїР°СЂРѕР»СЊ\' РЅРµ РґРѕСЃС‚СѓРїРЅР°.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Р’РєР°Р¶С–С‚СЊ email, С‰РѕР± СЃРєРёРЅСѓС‚Рё РїР°СЂРѕР»СЊ';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Р’РєР°Р·Р°РЅР° С–РЅС„РѕСЂРјР°С†С–СЏ РЅРµ РїС–РґС…РѕРґРёС‚СЊ РґРѕ Р¶РѕРґРЅРѕРіРѕ Р°РєС‚РёРІРЅРѕРіРѕ Р·Р°РїРёСЃСѓ!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ Р°Р±Рѕ С…РёР±РЅРёР№, Р°Р±Рѕ РІР¶Рµ РІРёРєРѕСЂРёСЃС‚Р°РЅРёР№. Р—Р°СЂРµС”СЃС‚СЂСѓР№С‚РµСЃСЊ Р·РЅРѕРІСѓ.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Р”РѕСЃСЏРіРЅСѓС‚Рѕ РјР°РєСЃРёРјСѓРјСѓ РїР°СЂР°Р»РµР»СЊРЅРёС… Р·Р°РїРёС‚С–РІ. Р—РІ\'СЏР¶С–С‚СЊСЃСЏ Р· СЃРёСЃС‚РµРјРЅРёРј Р°РґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂРѕРј';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'Ви неправильно ввели ім\'я і пароль або ваш запис був заблокований.';
-$s_login_cookies_disabled = 'Ваш браузер або не підтримує "куки", або не хоче їх обробляти.';
+$s_login_error = 'Р’Рё РЅРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё С–Рј\'СЏ С– РїР°СЂРѕР»СЊ Р°Р±Рѕ РІР°С€ Р·Р°РїРёСЃ Р±СѓРІ Р·Р°Р±Р»РѕРєРѕРІР°РЅРёР№.';
+$s_login_cookies_disabled = 'Р’Р°С€ Р±СЂР°СѓР·РµСЂ Р°Р±Рѕ РЅРµ РїС–РґС‚СЂРёРјСѓС” "РєСѓРєРё", Р°Р±Рѕ РЅРµ С…РѕС‡Рµ С—С… РѕР±СЂРѕР±Р»СЏС‚Рё.';
 
 # General Strings
-$s_go_back = 'Назад';
-$s_proceed = 'Натисніть, щоб продовжити';
+$s_go_back = 'РќР°Р·Р°Рґ';
+$s_proceed = 'РќР°С‚РёСЃРЅС–С‚СЊ, С‰РѕР± РїСЂРѕРґРѕРІР¶РёС‚Рё';
 
-$s_switch = 'Змінити';
-$s_logged_in_as = 'Ви зареєстровані як';
+$s_switch = 'Р—РјС–РЅРёС‚Рё';
+$s_logged_in_as = 'Р’Рё Р·Р°СЂРµС”СЃС‚СЂРѕРІР°РЅС– СЏРє';
 
-$s_prefix_for_deleted_users = 'користувач';
+$s_prefix_for_deleted_users = 'РєРѕСЂРёСЃС‚СѓРІР°С‡';
 
-$s_administrator = 'Адміністратор';
-$s_myself = "Мені";
-$s_default_access_level = 'Початкові привілеї доступу';
+$s_administrator = 'РђРґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂ';
+$s_myself = "РњРµРЅС–";
+$s_default_access_level = 'РџРѕС‡Р°С‚РєРѕРІС– РїСЂРёРІС–Р»РµС— РґРѕСЃС‚СѓРїСѓ';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string = '10:Спостерігач,25:Репортер,40:Редактор,55:Розробник,70:Керівник,90:Адміністратор';
+$s_access_levels_enum_string = '10:РЎРїРѕСЃС‚РµСЂС–РіР°С‡,25:Р РµРїРѕСЂС‚РµСЂ,40:Р РµРґР°РєС‚РѕСЂ,55:Р РѕР·СЂРѕР±РЅРёРє,70:РљРµСЂС–РІРЅРёРє,90:РђРґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂ';
 $s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
-$s_project_view_state_enum_string = '10:спільний,50:закритий';
-$s_view_state_enum_string = '10:спільна,50:закрита';
+$s_project_view_state_enum_string = '10:СЃРїС–Р»СЊРЅРёР№,50:Р·Р°РєСЂРёС‚РёР№';
+$s_view_state_enum_string = '10:СЃРїС–Р»СЊРЅР°,50:Р·Р°РєСЂРёС‚Р°';
 
-$s_priority_enum_string = '10:немає,20:низький,30:нормальний,40:високий,50:терміново,60:невідкладно';
-$s_severity_enum_string = '10:побажання,20:банальна,30:текст,40:доводка,50:незначна,60:значна,70:спричиняє до аварії,80:блокуюча';
-$s_reproducibility_enum_string = '10:завжди,30:іноді,50:випадково,70:не пробував,90:не можу відтворити,100:не визначено';
-$s_status_enum_string = '10:нова,20:потрібна відповідь,30:визнана,40:підтверджена,50:призначена,80:вирішена,90:закрита';
-$s_resolution_enum_string = '10:відкрита,20:вирішена,30:відкрита знову,40:не відтворювана,50:не виправляється,60:дублікат,70:не проблема,80:призупинена,90:не буде вирішена';
-$s_projection_enum_string = '10:немає,30:доводка,50:незначне виправлення,70:велика переробка,90:пере-проектування';
-$s_eta_enum_string = '10:невідомо,20:< 1 дня,30:2-3 дні,40:< 1 тижня,50:< 1 місяця,60:> 1 місяця';
+$s_priority_enum_string = '10:РЅРµРјР°С”,20:РЅРёР·СЊРєРёР№,30:РЅРѕСЂРјР°Р»СЊРЅРёР№,40:РІРёСЃРѕРєРёР№,50:С‚РµСЂРјС–РЅРѕРІРѕ,60:РЅРµРІС–РґРєР»Р°РґРЅРѕ';
+$s_severity_enum_string = '10:РїРѕР±Р°Р¶Р°РЅРЅСЏ,20:Р±Р°РЅР°Р»СЊРЅР°,30:С‚РµРєСЃС‚,40:РґРѕРІРѕРґРєР°,50:РЅРµР·РЅР°С‡РЅР°,60:Р·РЅР°С‡РЅР°,70:СЃРїСЂРёС‡РёРЅСЏС” РґРѕ Р°РІР°СЂС–С—,80:Р±Р»РѕРєСѓСЋС‡Р°';
+$s_reproducibility_enum_string = '10:Р·Р°РІР¶РґРё,30:С–РЅРѕРґС–,50:РІРёРїР°РґРєРѕРІРѕ,70:РЅРµ РїСЂРѕР±СѓРІР°РІ,90:РЅРµ РјРѕР¶Сѓ РІС–РґС‚РІРѕСЂРёС‚Рё,100:РЅРµ РІРёР·РЅР°С‡РµРЅРѕ';
+$s_status_enum_string = '10:РЅРѕРІР°,20:РїРѕС‚СЂС–Р±РЅР° РІС–РґРїРѕРІС–РґСЊ,30:РІРёР·РЅР°РЅР°,40:РїС–РґС‚РІРµСЂРґР¶РµРЅР°,50:РїСЂРёР·РЅР°С‡РµРЅР°,80:РІРёСЂС–С€РµРЅР°,90:Р·Р°РєСЂРёС‚Р°';
+$s_resolution_enum_string = '10:РІС–РґРєСЂРёС‚Р°,20:РІРёСЂС–С€РµРЅР°,30:РІС–РґРєСЂРёС‚Р° Р·РЅРѕРІСѓ,40:РЅРµ РІС–РґС‚РІРѕСЂСЋРІР°РЅР°,50:РЅРµ РІРёРїСЂР°РІР»СЏС”С‚СЊСЃСЏ,60:РґСѓР±Р»С–РєР°С‚,70:РЅРµ РїСЂРѕР±Р»РµРјР°,80:РїСЂРёР·СѓРїРёРЅРµРЅР°,90:РЅРµ Р±СѓРґРµ РІРёСЂС–С€РµРЅР°';
+$s_projection_enum_string = '10:РЅРµРјР°С”,30:РґРѕРІРѕРґРєР°,50:РЅРµР·РЅР°С‡РЅРµ РІРёРїСЂР°РІР»РµРЅРЅСЏ,70:РІРµР»РёРєР° РїРµСЂРµСЂРѕР±РєР°,90:РїРµСЂРµ-РїСЂРѕРµРєС‚СѓРІР°РЅРЅСЏ';
+$s_eta_enum_string = '10:РЅРµРІС–РґРѕРјРѕ,20:< 1 РґРЅСЏ,30:2-3 РґРЅС–,40:< 1 С‚РёР¶РЅСЏ,50:< 1 РјС–СЃСЏС†СЏ,60:> 1 РјС–СЃСЏС†СЏ';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
-$s_new_account_subject = 'Реєстрація користувача';
-$s_new_account_greeting = 'Дякуємо за реєстрацію. Ви зареєструвались як  \'';
-$s_new_account_greeting2 = '\'. Щоб завершити процес реєстрації, перейдіть на наступну сторінку (впевніться, що весь лінк введений в один рядок) і задайте свій власний пароль:';
-$s_new_account_username = 'Ім\'я: ';
-$s_new_account_message = 'Якщо ви не просили цієї реєстрації, просто проігноруйте лист і нічого не відбудеться.' . "\n\n";
-$s_new_account_do_not_reply = 'НЕ ВІДПОВІДАЙТЕ НА ЦЕЙ ЛИСТ';
+$s_new_account_subject = 'Р РµС”СЃС‚СЂР°С†С–СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
+$s_new_account_greeting = 'Р”СЏРєСѓС”РјРѕ Р·Р° СЂРµС”СЃС‚СЂР°С†С–СЋ. Р’Рё Р·Р°СЂРµС”СЃС‚СЂСѓРІР°Р»РёСЃСЊ СЏРє  \'';
+$s_new_account_greeting2 = '\'. Р©РѕР± Р·Р°РІРµСЂС€РёС‚Рё РїСЂРѕС†РµСЃ СЂРµС”СЃС‚СЂР°С†С–С—, РїРµСЂРµР№РґС–С‚СЊ РЅР° РЅР°СЃС‚СѓРїРЅСѓ СЃС‚РѕСЂС–РЅРєСѓ (РІРїРµРІРЅС–С‚СЊСЃСЏ, С‰Рѕ РІРµСЃСЊ Р»С–РЅРє РІРІРµРґРµРЅРёР№ РІ РѕРґРёРЅ СЂСЏРґРѕРє) С– Р·Р°РґР°Р№С‚Рµ СЃРІС–Р№ РІР»Р°СЃРЅРёР№ РїР°СЂРѕР»СЊ:';
+$s_new_account_username = 'Р†Рј\'СЏ: ';
+$s_new_account_message = 'РЇРєС‰Рѕ РІРё РЅРµ РїСЂРѕСЃРёР»Рё С†С–С”С— СЂРµС”СЃС‚СЂР°С†С–С—, РїСЂРѕСЃС‚Рѕ РїСЂРѕС–РіРЅРѕСЂСѓР№С‚Рµ Р»РёСЃС‚ С– РЅС–С‡РѕРіРѕ РЅРµ РІС–РґР±СѓРґРµС‚СЊСЃСЏ.' . "\n\n";
+$s_new_account_do_not_reply = 'РќР• Р’Р†Р”РџРћР’Р†Р”РђР™РўР• РќРђ Р¦Р•Р™ Р›РРЎРў';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Ваша IP-адреса: ';
-$s_new_account_signup_msg = 'Був створений наступний запис:';
+$s_new_account_IP = 'Р’Р°С€Р° IP-Р°РґСЂРµСЃР°: ';
+$s_new_account_signup_msg = 'Р‘СѓРІ СЃС‚РІРѕСЂРµРЅРёР№ РЅР°СЃС‚СѓРїРЅРёР№ Р·Р°РїРёСЃ:';
 
-$s_reset_request_msg = 'Дехто (сподіваємось, що ви) запросив змінити пароль з підтвердженням електронною поштою. Якщо це були не ви, просто проігноруйте лист і нічого не відбудеться.' . "\n\n" . 'Якщо ви просили скинути пароль, перейдіть на сторінку за цим лінком, щоб змінити пароль:';
-$s_reset_request_in_progress_msg = 'Якщо ви ввели правильні ім\'я і email, ми відправили вам лист-підтвердження. Щоб змінити пароль вашого запису, виконайте інструкції, вказані в цьому листі.';
+$s_reset_request_msg = 'Р”РµС…С‚Рѕ (СЃРїРѕРґС–РІР°С”РјРѕСЃСЊ, С‰Рѕ РІРё) Р·Р°РїСЂРѕСЃРёРІ Р·РјС–РЅРёС‚Рё РїР°СЂРѕР»СЊ Р· РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏРј РµР»РµРєС‚СЂРѕРЅРЅРѕСЋ РїРѕС€С‚РѕСЋ. РЇРєС‰Рѕ С†Рµ Р±СѓР»Рё РЅРµ РІРё, РїСЂРѕСЃС‚Рѕ РїСЂРѕС–РіРЅРѕСЂСѓР№С‚Рµ Р»РёСЃС‚ С– РЅС–С‡РѕРіРѕ РЅРµ РІС–РґР±СѓРґРµС‚СЊСЃСЏ.' . "\n\n" . 'РЇРєС‰Рѕ РІРё РїСЂРѕСЃРёР»Рё СЃРєРёРЅСѓС‚Рё РїР°СЂРѕР»СЊ, РїРµСЂРµР№РґС–С‚СЊ РЅР° СЃС‚РѕСЂС–РЅРєСѓ Р·Р° С†РёРј Р»С–РЅРєРѕРј, С‰РѕР± Р·РјС–РЅРёС‚Рё РїР°СЂРѕР»СЊ:';
+$s_reset_request_in_progress_msg = 'РЇРєС‰Рѕ РІРё РІРІРµР»Рё РїСЂР°РІРёР»СЊРЅС– С–Рј\'СЏ С– email, РјРё РІС–РґРїСЂР°РІРёР»Рё РІР°Рј Р»РёСЃС‚-РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ. Р©РѕР± Р·РјС–РЅРёС‚Рё РїР°СЂРѕР»СЊ РІР°С€РѕРіРѕ Р·Р°РїРёСЃСѓ, РІРёРєРѕРЅР°Р№С‚Рµ С–РЅСЃС‚СЂСѓРєС†С–С—, РІРєР°Р·Р°РЅС– РІ С†СЊРѕРјСѓ Р»РёСЃС‚С–.';
 
-$s_email_notification_title_for_status_bug_new = 'Наступна проблема має статус НОВА (знову)';
-$s_email_notification_title_for_status_bug_feedback = 'Стосовно наступної проблеми потрібна ваша ВІДПОВІДЬ.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Наступна проблема була ВИЗНАНА.';
-$s_email_notification_title_for_status_bug_confirmed = 'Наступна проблема була ПІДТВЕРДЖЕНА.';
-$s_email_notification_title_for_status_bug_assigned = 'Наступна проблема була ПРИЗНАЧЕНА.';
-$s_email_notification_title_for_status_bug_resolved = 'Наступна проблема була ВИРІШЕНА.';
-$s_email_notification_title_for_status_bug_closed = 'Наступна проблема була ЗАКРИТА.';
+$s_email_notification_title_for_status_bug_new = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° РјР°С” СЃС‚Р°С‚СѓСЃ РќРћР’Рђ (Р·РЅРѕРІСѓ)';
+$s_email_notification_title_for_status_bug_feedback = 'РЎС‚РѕСЃРѕРІРЅРѕ РЅР°СЃС‚СѓРїРЅРѕС— РїСЂРѕР±Р»РµРјРё РїРѕС‚СЂС–Р±РЅР° РІР°С€Р° Р’Р†Р”РџРћР’Р†Р”Р¬.';
+$s_email_notification_title_for_status_bug_acknowledged = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° Р’РР—РќРђРќРђ.';
+$s_email_notification_title_for_status_bug_confirmed = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° РџР†Р”РўР’Р•Р Р”Р–Р•РќРђ.';
+$s_email_notification_title_for_status_bug_assigned = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° РџР РР—РќРђР§Р•РќРђ.';
+$s_email_notification_title_for_status_bug_resolved = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° Р’РР Р†РЁР•РќРђ.';
+$s_email_notification_title_for_status_bug_closed = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° Р—РђРљР РРўРђ.';
 
-$s_email_notification_title_for_action_bug_submitted = 'З\'явилась НОВА ПРОБЛЕМА.';
-$s_email_notification_title_for_action_bug_assigned = 'Наступна проблема була ПРИЗНАЧЕНА.';
-$s_email_notification_title_for_action_bug_reopened = 'Наступна проблема була ЗНОВУ ВІДКРИТА.';
-$s_email_notification_title_for_action_bug_deleted = 'Наступна проблема була ВИДАЛЕНА.';
-$s_email_notification_title_for_action_bug_updated = 'Наступна проблема була ОНОВЛЕНА.';
-$s_email_notification_title_for_action_sponsorship_added = 'Наступна проблема тепер СПОНСУЄТЬСЯ.';
-$s_email_notification_title_for_action_sponsorship_updated = 'Змінилось спонсорство наступної проблеми.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'Наступна проблема більше не СПОНСУЄТЬСЯ.';
+$s_email_notification_title_for_action_bug_submitted = 'Р—\'СЏРІРёР»Р°СЃСЊ РќРћР’Рђ РџР РћР‘Р›Р•РњРђ.';
+$s_email_notification_title_for_action_bug_assigned = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° РџР РР—РќРђР§Р•РќРђ.';
+$s_email_notification_title_for_action_bug_reopened = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° Р—РќРћР’РЈ Р’Р†Р”РљР РРўРђ.';
+$s_email_notification_title_for_action_bug_deleted = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° Р’РР”РђР›Р•РќРђ.';
+$s_email_notification_title_for_action_bug_updated = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±СѓР»Р° РћРќРћР’Р›Р•РќРђ.';
+$s_email_notification_title_for_action_sponsorship_added = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° С‚РµРїРµСЂ РЎРџРћРќРЎРЈР„РўР¬РЎРЇ.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Р—РјС–РЅРёР»РѕСЃСЊ СЃРїРѕРЅСЃРѕСЂСЃС‚РІРѕ РЅР°СЃС‚СѓРїРЅРѕС— РїСЂРѕР±Р»РµРјРё.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±С–Р»СЊС€Рµ РЅРµ РЎРџРћРќРЎРЈР„РўР¬РЎРЇ.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'До проблеми був доданий КОМЕНТАР.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Наступна проблема задана як ДУБЛІКАТ проблеми %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Проблема %s задана як ДУБЛІКАТ наступної проблеми.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Наступна проблема задана як ПОВ'ЯЗАНА З проблемою %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Наступна проблема задана як БАТЬКІВСЬКА ДО проблеми %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Наступна проблема задана як НАЩАДОК проблеми %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Наступна проблема більше не є ДУБЛІКАТОМ проблеми %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Проблема %s більше не є ДУБЛІКАТОМ наступної проблеми.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Наступна проблема більше не ПОВ'ЯЗАНА З проблемою %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Наступна проблема більше не є БАТЬКІВСЬКОЮ ДО проблеми %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Наступна проблема більше не є НАЩАДКОМ проблеми %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "ПОВ'ЯЗАНА проблема %s була ВИРІШЕНА.";
-$s_email_notification_title_for_action_relationship_child_closed = "ПОВ'ЯЗАНА проблема %s була ЗАКРИТА.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Р”Рѕ РїСЂРѕР±Р»РµРјРё Р±СѓРІ РґРѕРґР°РЅРёР№ РљРћРњР•РќРўРђР .';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р·Р°РґР°РЅР° СЏРє Р”РЈР‘Р›Р†РљРђРў РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "РџСЂРѕР±Р»РµРјР° %s Р·Р°РґР°РЅР° СЏРє Р”РЈР‘Р›Р†РљРђРў РЅР°СЃС‚СѓРїРЅРѕС— РїСЂРѕР±Р»РµРјРё.";
+$s_email_notification_title_for_action_related_to_relationship_added = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р·Р°РґР°РЅР° СЏРє РџРћР’'РЇР—РђРќРђ Р— РїСЂРѕР±Р»РµРјРѕСЋ %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р·Р°РґР°РЅР° СЏРє Р‘РђРўР¬РљР†Р’РЎР¬РљРђ Р”Рћ РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р·Р°РґР°РЅР° СЏРє РќРђР©РђР”РћРљ РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±С–Р»СЊС€Рµ РЅРµ С” Р”РЈР‘Р›Р†РљРђРўРћРњ РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "РџСЂРѕР±Р»РµРјР° %s Р±С–Р»СЊС€Рµ РЅРµ С” Р”РЈР‘Р›Р†РљРђРўРћРњ РЅР°СЃС‚СѓРїРЅРѕС— РїСЂРѕР±Р»РµРјРё.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±С–Р»СЊС€Рµ РЅРµ РџРћР’'РЇР—РђРќРђ Р— РїСЂРѕР±Р»РµРјРѕСЋ %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±С–Р»СЊС€Рµ РЅРµ С” Р‘РђРўР¬РљР†Р’РЎР¬РљРћР® Р”Рћ РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "РќР°СЃС‚СѓРїРЅР° РїСЂРѕР±Р»РµРјР° Р±С–Р»СЊС€Рµ РЅРµ С” РќРђР©РђР”РљРћРњ РїСЂРѕР±Р»РµРјРё %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "РџРћР’'РЇР—РђРќРђ РїСЂРѕР±Р»РµРјР° %s Р±СѓР»Р° Р’РР Р†РЁР•РќРђ.";
+$s_email_notification_title_for_action_relationship_child_closed = "РџРћР’'РЇР—РђРќРђ РїСЂРѕР±Р»РµРјР° %s Р±СѓР»Р° Р—РђРљР РРўРђ.";
 
-$s_email_reporter = 'Ким повідомлена';
-$s_email_handler = 'Кому призначена';
-$s_email_project = 'Проект';
-$s_email_bug = 'Код проблеми';
-$s_email_category = 'Категорія';
-$s_email_reproducibility = 'Відтворюваність';
-$s_email_severity = 'Серйозність';
-$s_email_priority = 'Пріоритет';
-$s_email_status = 'Статус';
-$s_email_resolution = 'Резолюція';
-$s_email_duplicate = 'Дублікат';
-$s_email_fixed_in_version = 'Виправлена у версії';
-$s_email_date_submitted = 'Зареєстрована';
-$s_email_last_modified = 'Останнє оновлення';
-$s_email_summary = 'Тема';
-$s_email_description = 'Опис';
+$s_email_reporter = 'РљРёРј РїРѕРІС–РґРѕРјР»РµРЅР°';
+$s_email_handler = 'РљРѕРјСѓ РїСЂРёР·РЅР°С‡РµРЅР°';
+$s_email_project = 'РџСЂРѕРµРєС‚';
+$s_email_bug = 'РљРѕРґ РїСЂРѕР±Р»РµРјРё';
+$s_email_category = 'РљР°С‚РµРіРѕСЂС–СЏ';
+$s_email_reproducibility = 'Р’С–РґС‚РІРѕСЂСЋРІР°РЅС–СЃС‚СЊ';
+$s_email_severity = 'РЎРµСЂР№РѕР·РЅС–СЃС‚СЊ';
+$s_email_priority = 'РџСЂС–РѕСЂРёС‚РµС‚';
+$s_email_status = 'РЎС‚Р°С‚СѓСЃ';
+$s_email_resolution = 'Р РµР·РѕР»СЋС†С–СЏ';
+$s_email_duplicate = 'Р”СѓР±Р»С–РєР°С‚';
+$s_email_fixed_in_version = 'Р’РёРїСЂР°РІР»РµРЅР° Сѓ РІРµСЂСЃС–С—';
+$s_email_date_submitted = 'Р—Р°СЂРµС”СЃС‚СЂРѕРІР°РЅР°';
+$s_email_last_modified = 'РћСЃС‚Р°РЅРЅС” РѕРЅРѕРІР»РµРЅРЅСЏ';
+$s_email_summary = 'РўРµРјР°';
+$s_email_description = 'РћРїРёСЃ';
 
 # account_delete.php
-$s_account_protected_msg = 'Запис захищений. Не можу змінити параметри...';
-$s_account_removed_msg = 'Ваш запис був видалений...';
+$s_account_protected_msg = 'Р—Р°РїРёСЃ Р·Р°С…РёС‰РµРЅРёР№. РќРµ РјРѕР¶Сѓ Р·РјС–РЅРёС‚Рё РїР°СЂР°РјРµС‚СЂРё...';
+$s_account_removed_msg = 'Р’Р°С€ Р·Р°РїРёСЃ Р±СѓРІ РІРёРґР°Р»РµРЅРёР№...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Ви справді хочете видалити свій запис?';
-$s_delete_account_button = 'Видалити запис';
+$s_confirm_delete_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё СЃРІС–Р№ Р·Р°РїРёСЃ?';
+$s_delete_account_button = 'Р’РёРґР°Р»РёС‚Рё Р·Р°РїРёСЃ';
 
 # account_page.php
-$s_manage_profiles_link = 'Шаблони';
-$s_change_preferences_link = 'Параметри';
-$s_edit_account_title = 'Редагування запису';
-$s_username = 'Користувач';
-$s_realname = 'Повне ім\'я';
+$s_manage_profiles_link = 'РЁР°Р±Р»РѕРЅРё';
+$s_change_preferences_link = 'РџР°СЂР°РјРµС‚СЂРё';
+$s_edit_account_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ Р·Р°РїРёСЃСѓ';
+$s_username = 'РљРѕСЂРёСЃС‚СѓРІР°С‡';
+$s_realname = 'РџРѕРІРЅРµ С–Рј\'СЏ';
 $s_email = 'Email';
-$s_password = 'Пароль';
-$s_no_password_change = 'Пароль контролюється іншою системою, а тому тут не змінюється.';
-$s_confirm_password = 'Перевірка пароля';
-$s_access_level = 'Рівень доступу';
-$s_update_user_button = 'Зберегти';
+$s_password = 'РџР°СЂРѕР»СЊ';
+$s_no_password_change = 'РџР°СЂРѕР»СЊ РєРѕРЅС‚СЂРѕР»СЋС”С‚СЊСЃСЏ С–РЅС€РѕСЋ СЃРёСЃС‚РµРјРѕСЋ, Р° С‚РѕРјСѓ С‚СѓС‚ РЅРµ Р·РјС–РЅСЋС”С‚СЊСЃСЏ.';
+$s_confirm_password = 'РџРµСЂРµРІС–СЂРєР° РїР°СЂРѕР»СЏ';
+$s_access_level = 'Р С–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ';
+$s_update_user_button = 'Р—Р±РµСЂРµРіС‚Рё';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Параметри запису';
-$s_default_project = 'Основний проект';
-$s_advanced_report = 'Розширена форма';
-$s_advanced_view = 'Розширений перегляд';
-$s_advanced_update = 'Розширене редагування';
-$s_refresh_delay = 'Інтервал оновлення';
-$s_redirect_delay = 'Затримка перед перенапрямленням';
-$s_with_minimum_severity = 'З мінімальною серйозністю:';
-$s_bugnote_order = 'Порядок сортування коментарів';
-$s_bugnote_order_asc = 'Зростаючий';
-$s_bugnote_order_desc = 'Спадаючий';
-$s_email_on_new = 'Повідомляти про Нові проблеми';
-$s_email_on_assigned = 'Повідомляти про Призначення';
-$s_email_on_feedback = 'Повідомляти про Потребу Відповіді';
-$s_email_on_resolved = 'Повідомляти про Вирішення проблеми';
-$s_email_on_closed = 'Повідомляти про Закриття';
-$s_email_on_reopened = 'Повідомляти про Повторне відкриття';
-$s_email_on_bugnote_added = 'Повідомляти про додання коментаря';
-$s_email_on_status_change = 'Повідомляти про зміни Статусу';
-$s_email_on_priority_change = 'Повідомляти про зміни Пріоритету';
-$s_email_bugnote_limit = 'Максимум коментарів в листі';
-$s_language = 'Мова інтерфейсу';
-$s_update_prefs_button = 'Зберегти';
-$s_reset_prefs_button = 'Скинути';
+$s_default_account_preferences_title = 'РџР°СЂР°РјРµС‚СЂРё Р·Р°РїРёСЃСѓ';
+$s_default_project = 'РћСЃРЅРѕРІРЅРёР№ РїСЂРѕРµРєС‚';
+$s_advanced_report = 'Р РѕР·С€РёСЂРµРЅР° С„РѕСЂРјР°';
+$s_advanced_view = 'Р РѕР·С€РёСЂРµРЅРёР№ РїРµСЂРµРіР»СЏРґ';
+$s_advanced_update = 'Р РѕР·С€РёСЂРµРЅРµ СЂРµРґР°РіСѓРІР°РЅРЅСЏ';
+$s_refresh_delay = 'Р†РЅС‚РµСЂРІР°Р» РѕРЅРѕРІР»РµРЅРЅСЏ';
+$s_redirect_delay = 'Р—Р°С‚СЂРёРјРєР° РїРµСЂРµРґ РїРµСЂРµРЅР°РїСЂСЏРјР»РµРЅРЅСЏРј';
+$s_with_minimum_severity = 'Р— РјС–РЅС–РјР°Р»СЊРЅРѕСЋ СЃРµСЂР№РѕР·РЅС–СЃС‚СЋ:';
+$s_bugnote_order = 'РџРѕСЂСЏРґРѕРє СЃРѕСЂС‚СѓРІР°РЅРЅСЏ РєРѕРјРµРЅС‚Р°СЂС–РІ';
+$s_bugnote_order_asc = 'Р—СЂРѕСЃС‚Р°СЋС‡РёР№';
+$s_bugnote_order_desc = 'РЎРїР°РґР°СЋС‡РёР№';
+$s_email_on_new = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ РќРѕРІС– РїСЂРѕР±Р»РµРјРё';
+$s_email_on_assigned = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ РџСЂРёР·РЅР°С‡РµРЅРЅСЏ';
+$s_email_on_feedback = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ РџРѕС‚СЂРµР±Сѓ Р’С–РґРїРѕРІС–РґС–';
+$s_email_on_resolved = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ Р’РёСЂС–С€РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_email_on_closed = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ Р—Р°РєСЂРёС‚С‚СЏ';
+$s_email_on_reopened = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ РџРѕРІС‚РѕСЂРЅРµ РІС–РґРєСЂРёС‚С‚СЏ';
+$s_email_on_bugnote_added = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ РґРѕРґР°РЅРЅСЏ РєРѕРјРµРЅС‚Р°СЂСЏ';
+$s_email_on_status_change = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ Р·РјС–РЅРё РЎС‚Р°С‚СѓСЃСѓ';
+$s_email_on_priority_change = 'РџРѕРІС–РґРѕРјР»СЏС‚Рё РїСЂРѕ Р·РјС–РЅРё РџСЂС–РѕСЂРёС‚РµС‚Сѓ';
+$s_email_bugnote_limit = 'РњР°РєСЃРёРјСѓРј РєРѕРјРµРЅС‚Р°СЂС–РІ РІ Р»РёСЃС‚С–';
+$s_language = 'РњРѕРІР° С–РЅС‚РµСЂС„РµР№СЃСѓ';
+$s_update_prefs_button = 'Р—Р±РµСЂРµРіС‚Рё';
+$s_reset_prefs_button = 'РЎРєРёРЅСѓС‚Рё';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = 'Параметри скинуті...';
+$s_prefs_reset_msg = 'РџР°СЂР°РјРµС‚СЂРё СЃРєРёРЅСѓС‚С–...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Параметри збережені...';
+$s_prefs_updated_msg = 'РџР°СЂР°РјРµС‚СЂРё Р·Р±РµСЂРµР¶РµРЅС–...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Шаблон додано...';
+$s_profile_added_msg = 'РЁР°Р±Р»РѕРЅ РґРѕРґР°РЅРѕ...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Шаблон видалений...';
+$s_profile_deleted_msg = 'РЁР°Р±Р»РѕРЅ РІРёРґР°Р»РµРЅРёР№...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Редагувати шаблон';
-$s_platform = 'Платформа';
-$s_operating_system = 'Операційна система';
-$s_additional_description = 'Додаткове пояснення';
-$s_update_profile_button = 'Зберегти';
+$s_edit_profile_title = 'Р РµРґР°РіСѓРІР°С‚Рё С€Р°Р±Р»РѕРЅ';
+$s_platform = 'РџР»Р°С‚С„РѕСЂРјР°';
+$s_operating_system = 'РћРїРµСЂР°С†С–Р№РЅР° СЃРёСЃС‚РµРјР°';
+$s_additional_description = 'Р”РѕРґР°С‚РєРѕРІРµ РїРѕСЏСЃРЅРµРЅРЅСЏ';
+$s_update_profile_button = 'Р—Р±РµСЂРµРіС‚Рё';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = 'Задано основний шаблон...';
+$s_profile_defaulted_msg = 'Р—Р°РґР°РЅРѕ РѕСЃРЅРѕРІРЅРёР№ С€Р°Р±Р»РѕРЅ...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Створити шаблон';
-$s_add_profile_button = 'Створити шаблон';
-$s_edit_or_delete_profiles_title = 'Зміна або видалення шаблонів';
-$s_edit_profile = 'Редагувати шаблон';
-$s_make_default = 'Зробити основним';
-$s_delete_profile = 'Видалити шаблон';
-$s_select_profile = 'Виберіть шаблон';
-$s_submit_button = 'Застосувати';
+$s_add_profile_title = 'РЎС‚РІРѕСЂРёС‚Рё С€Р°Р±Р»РѕРЅ';
+$s_add_profile_button = 'РЎС‚РІРѕСЂРёС‚Рё С€Р°Р±Р»РѕРЅ';
+$s_edit_or_delete_profiles_title = 'Р—РјС–РЅР° Р°Р±Рѕ РІРёРґР°Р»РµРЅРЅСЏ С€Р°Р±Р»РѕРЅС–РІ';
+$s_edit_profile = 'Р РµРґР°РіСѓРІР°С‚Рё С€Р°Р±Р»РѕРЅ';
+$s_make_default = 'Р—СЂРѕР±РёС‚Рё РѕСЃРЅРѕРІРЅРёРј';
+$s_delete_profile = 'Р’РёРґР°Р»РёС‚Рё С€Р°Р±Р»РѕРЅ';
+$s_select_profile = 'Р’РёР±РµСЂС–С‚СЊ С€Р°Р±Р»РѕРЅ';
+$s_submit_button = 'Р—Р°СЃС‚РѕСЃСѓРІР°С‚Рё';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Шаблон оновлено...';
+$s_profile_updated_msg = 'РЁР°Р±Р»РѕРЅ РѕРЅРѕРІР»РµРЅРѕ...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -461,11 +461,11 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = 'Ваш запис був успішно оновлений';
-$s_email_updated = 'Email-адреса була успішно змінена';
-$s_realname_duplicated = 'Таке повне ім\'я вже зайняте іншим користувачем';
-$s_realname_updated = 'Повне ім\'я було успішно змінене';
-$s_password_updated = 'Пароль був успішно змінений';
+$s_account_updated_msg = 'Р’Р°С€ Р·Р°РїРёСЃ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅРёР№';
+$s_email_updated = 'Email-Р°РґСЂРµСЃР° Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ Р·РјС–РЅРµРЅР°';
+$s_realname_duplicated = 'РўР°РєРµ РїРѕРІРЅРµ С–Рј\'СЏ РІР¶Рµ Р·Р°Р№РЅСЏС‚Рµ С–РЅС€РёРј РєРѕСЂРёСЃС‚СѓРІР°С‡РµРј';
+$s_realname_updated = 'РџРѕРІРЅРµ С–Рј\'СЏ Р±СѓР»Рѕ СѓСЃРїС–С€РЅРѕ Р·РјС–РЅРµРЅРµ';
+$s_password_updated = 'РџР°СЂРѕР»СЊ Р±СѓРІ СѓСЃРїС–С€РЅРѕ Р·РјС–РЅРµРЅРёР№';
 
 # adm_permission_report.php
 
@@ -473,217 +473,217 @@ $s_password_updated = 'Пароль був успішно змінений';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Проблема була успішно призначена...';
+$s_bug_assign_msg = 'РџСЂРѕР±Р»РµРјР° Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ РїСЂРёР·РЅР°С‡РµРЅР°...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'Нова проблема';
-$s_feedback_bug_title = 'Запит стосовно проблеми';
-$s_acknowledged_bug_title = 'Визнання проблеми';
-$s_confirmed_bug_title = 'Підтвердження проблеми';
-$s_assigned_bug_title = 'Призначення проблеми';
-$s_new_bug_button = 'Нова проблема';
-$s_feedback_bug_button = 'Запитати подробиці';
-$s_acknowledged_bug_button = 'Визнати проблему';
-$s_confirmed_bug_button = 'Підтвердити проблему';
-$s_assigned_bug_button = 'Призначити проблему';
+$s_new_bug_title = 'РќРѕРІР° РїСЂРѕР±Р»РµРјР°';
+$s_feedback_bug_title = 'Р—Р°РїРёС‚ СЃС‚РѕСЃРѕРІРЅРѕ РїСЂРѕР±Р»РµРјРё';
+$s_acknowledged_bug_title = 'Р’РёР·РЅР°РЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_confirmed_bug_title = 'РџС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_assigned_bug_title = 'РџСЂРёР·РЅР°С‡РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_new_bug_button = 'РќРѕРІР° РїСЂРѕР±Р»РµРјР°';
+$s_feedback_bug_button = 'Р—Р°РїРёС‚Р°С‚Рё РїРѕРґСЂРѕР±РёС†С–';
+$s_acknowledged_bug_button = 'Р’РёР·РЅР°С‚Рё РїСЂРѕР±Р»РµРјСѓ';
+$s_confirmed_bug_button = 'РџС–РґС‚РІРµСЂРґРёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
+$s_assigned_bug_button = 'РџСЂРёР·РЅР°С‡РёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
 
 # bug_close.php
-$s_bug_close_msg = 'Проблему закрито...';
-$s_close_immediately = 'Закрити невідкладно:';
+$s_bug_close_msg = 'РџСЂРѕР±Р»РµРјСѓ Р·Р°РєСЂРёС‚Рѕ...';
+$s_close_immediately = 'Р—Р°РєСЂРёС‚Рё РЅРµРІС–РґРєР»Р°РґРЅРѕ:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Закриття проблеми';
+$s_closed_bug_title = 'Р—Р°РєСЂРёС‚С‚СЏ РїСЂРѕР±Р»РµРјРё';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Проблему видалено...';
+$s_bug_deleted_msg = 'РџСЂРѕР±Р»РµРјСѓ РІРёРґР°Р»РµРЅРѕ...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Ви справді хочете видалити цю проблему?';
-$s_delete_bug_button = 'Видалити проблему';
+$s_delete_bug_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†СЋ РїСЂРѕР±Р»РµРјСѓ?';
+$s_delete_bug_button = 'Р’РёРґР°Р»РёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Стежити за проблемою';
-$s_unmonitor_bug_button = 'Припинити стеження';
+$s_monitor_bug_button = 'РЎС‚РµР¶РёС‚Рё Р·Р° РїСЂРѕР±Р»РµРјРѕСЋ';
+$s_unmonitor_bug_button = 'РџСЂРёРїРёРЅРёС‚Рё СЃС‚РµР¶РµРЅРЅСЏ';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Файл прийнято';
+$s_file_upload_msg = 'Р¤Р°Р№Р» РїСЂРёР№РЅСЏС‚Рѕ';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Закачати файл';
-$s_select_file = 'Виберіть файл';
-$s_upload_file_button = 'Закачати файл';
-$s_max_file_size = 'Обмеження за розміром';
+$s_upload_file = 'Р—Р°РєР°С‡Р°С‚Рё С„Р°Р№Р»';
+$s_select_file = 'Р’РёР±РµСЂС–С‚СЊ С„Р°Р№Р»';
+$s_upload_file_button = 'Р—Р°РєР°С‡Р°С‚Рё С„Р°Р№Р»';
+$s_max_file_size = 'РћР±РјРµР¶РµРЅРЅСЏ Р·Р° СЂРѕР·РјС–СЂРѕРј';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Проблему знову відкрито...';
-$s_reopen_add_bugnote_title = 'Вкажіть причину повторного відкриття проблеми';
-$s_bugnote_add_reopen_button = 'Додати коментар і відкрити проблему';
+$s_bug_reopened_msg = 'РџСЂРѕР±Р»РµРјСѓ Р·РЅРѕРІСѓ РІС–РґРєСЂРёС‚Рѕ...';
+$s_reopen_add_bugnote_title = 'Р’РєР°Р¶С–С‚СЊ РїСЂРёС‡РёРЅСѓ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РІС–РґРєСЂРёС‚С‚СЏ РїСЂРѕР±Р»РµРјРё';
+$s_bugnote_add_reopen_button = 'Р”РѕРґР°С‚Рё РєРѕРјРµРЅС‚Р°СЂ С– РІС–РґРєСЂРёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Вирішення проблеми';
-$s_resolved_bug_button = 'Вирішити проблему';
+$s_resolved_bug_title = 'Р’РёСЂС–С€РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_resolved_bug_button = 'Р’РёСЂС–С€РёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Проблему вирішено. Введіть коментар...';
-$s_resolve_add_bugnote_title = 'Введіть коментар до вирішення проблеми';
-$s_bugnote_add_resolve_button = 'Додати коментар';
+$s_bug_resolved_msg = 'РџСЂРѕР±Р»РµРјСѓ РІРёСЂС–С€РµРЅРѕ. Р’РІРµРґС–С‚СЊ РєРѕРјРµРЅС‚Р°СЂ...';
+$s_resolve_add_bugnote_title = 'Р’РІРµРґС–С‚СЊ РєРѕРјРµРЅС‚Р°СЂ РґРѕ РІРёСЂС–С€РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_bugnote_add_resolve_button = 'Р”РѕРґР°С‚Рё РєРѕРјРµРЅС‚Р°СЂ';
 
 # bug_reminder_page.php
-$s_from = 'Від кого';
-$s_to = 'Кому';
-$s_on = 'Коли';
-$s_sent_you_this_reminder_about = 'відправив(ла) вам це нагадування про';
-$s_bug_reminder = 'Нагадування';
-$s_reminder_sent_to = 'Нагадування відправлене користувачу';
-$s_bug_send_button = 'Відправити';
-$s_reminder = 'Текст нагадування';
-$s_reminder_explain = 'Цей коментар буде відправлений тільки тим, хто потребує відповіді стосовно цієї проблеми.';
-$s_reminder_monitor = 'Ці особи почнуть слідкувати за проблемою. Вони зможуть відписатись за допомогою кнопки Припинити стеження.';
-$s_reminder_store = 'Цей коментар буде збережений з цією проблемою.';
+$s_from = 'Р’С–Рґ РєРѕРіРѕ';
+$s_to = 'РљРѕРјСѓ';
+$s_on = 'РљРѕР»Рё';
+$s_sent_you_this_reminder_about = 'РІС–РґРїСЂР°РІРёРІ(Р»Р°) РІР°Рј С†Рµ РЅР°РіР°РґСѓРІР°РЅРЅСЏ РїСЂРѕ';
+$s_bug_reminder = 'РќР°РіР°РґСѓРІР°РЅРЅСЏ';
+$s_reminder_sent_to = 'РќР°РіР°РґСѓРІР°РЅРЅСЏ РІС–РґРїСЂР°РІР»РµРЅРµ РєРѕСЂРёСЃС‚СѓРІР°С‡Сѓ';
+$s_bug_send_button = 'Р’С–РґРїСЂР°РІРёС‚Рё';
+$s_reminder = 'РўРµРєСЃС‚ РЅР°РіР°РґСѓРІР°РЅРЅСЏ';
+$s_reminder_explain = 'Р¦РµР№ РєРѕРјРµРЅС‚Р°СЂ Р±СѓРґРµ РІС–РґРїСЂР°РІР»РµРЅРёР№ С‚С–Р»СЊРєРё С‚РёРј, С…С‚Рѕ РїРѕС‚СЂРµР±СѓС” РІС–РґРїРѕРІС–РґС– СЃС‚РѕСЃРѕРІРЅРѕ С†С–С”С— РїСЂРѕР±Р»РµРјРё.';
+$s_reminder_monitor = 'Р¦С– РѕСЃРѕР±Рё РїРѕС‡РЅСѓС‚СЊ СЃР»С–РґРєСѓРІР°С‚Рё Р·Р° РїСЂРѕР±Р»РµРјРѕСЋ. Р’РѕРЅРё Р·РјРѕР¶СѓС‚СЊ РІС–РґРїРёСЃР°С‚РёСЃСЊ Р·Р° РґРѕРїРѕРјРѕРіРѕСЋ РєРЅРѕРїРєРё РџСЂРёРїРёРЅРёС‚Рё СЃС‚РµР¶РµРЅРЅСЏ.';
+$s_reminder_store = 'Р¦РµР№ РєРѕРјРµРЅС‚Р°СЂ Р±СѓРґРµ Р·Р±РµСЂРµР¶РµРЅРёР№ Р· С†С–С”СЋ РїСЂРѕР±Р»РµРјРѕСЋ.';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Проблему успішно оновлено...';
+$s_bug_updated_msg = 'РџСЂРѕР±Р»РµРјСѓ СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅРѕ...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Повернутись до проблеми';
-$s_update_simple_link = 'Спрощене редагування';
-$s_updating_bug_advanced_title = 'Детальне редагування проблеми';
-$s_id = 'Код';
-$s_category = 'Категорія';
-$s_severity = 'Серйозність';
-$s_reproducibility = 'Відтворюваність';
-$s_date_submitted = 'Зареєстрована';
-$s_last_update = 'Змінена';
-$s_reporter = 'Хто повідомив';
-$s_assigned_to = 'Кому призначена';
-$s_priority = 'Пріоритет';
-$s_resolution = 'Резолюція';
-$s_status = 'Статус';
-$s_duplicate_id = 'Дублює проблему';
-$s_os = 'ОС';
-$s_projection = 'Прогноз';
-$s_os_version = 'Версія';
-$s_eta = 'Очікувана швидкість вирішення';
-$s_product_version = 'Версія продукту';
-$s_build = 'Збірка';
-$s_fixed_in_version = 'Виправлена у версії';
-$s_votes = 'Голосів';
-$s_summary = 'Статистика';
-$s_description = 'Опис';
-$s_steps_to_reproduce = 'Кроки для відтворення';
-$s_update_information_button = 'Зберегти інформацію';
+$s_back_to_bug_link = 'РџРѕРІРµСЂРЅСѓС‚РёСЃСЊ РґРѕ РїСЂРѕР±Р»РµРјРё';
+$s_update_simple_link = 'РЎРїСЂРѕС‰РµРЅРµ СЂРµРґР°РіСѓРІР°РЅРЅСЏ';
+$s_updating_bug_advanced_title = 'Р”РµС‚Р°Р»СЊРЅРµ СЂРµРґР°РіСѓРІР°РЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_id = 'РљРѕРґ';
+$s_category = 'РљР°С‚РµРіРѕСЂС–СЏ';
+$s_severity = 'РЎРµСЂР№РѕР·РЅС–СЃС‚СЊ';
+$s_reproducibility = 'Р’С–РґС‚РІРѕСЂСЋРІР°РЅС–СЃС‚СЊ';
+$s_date_submitted = 'Р—Р°СЂРµС”СЃС‚СЂРѕРІР°РЅР°';
+$s_last_update = 'Р—РјС–РЅРµРЅР°';
+$s_reporter = 'РҐС‚Рѕ РїРѕРІС–РґРѕРјРёРІ';
+$s_assigned_to = 'РљРѕРјСѓ РїСЂРёР·РЅР°С‡РµРЅР°';
+$s_priority = 'РџСЂС–РѕСЂРёС‚РµС‚';
+$s_resolution = 'Р РµР·РѕР»СЋС†С–СЏ';
+$s_status = 'РЎС‚Р°С‚СѓСЃ';
+$s_duplicate_id = 'Р”СѓР±Р»СЋС” РїСЂРѕР±Р»РµРјСѓ';
+$s_os = 'РћРЎ';
+$s_projection = 'РџСЂРѕРіРЅРѕР·';
+$s_os_version = 'Р’РµСЂСЃС–СЏ';
+$s_eta = 'РћС‡С–РєСѓРІР°РЅР° С€РІРёРґРєС–СЃС‚СЊ РІРёСЂС–С€РµРЅРЅСЏ';
+$s_product_version = 'Р’РµСЂСЃС–СЏ РїСЂРѕРґСѓРєС‚Сѓ';
+$s_build = 'Р—Р±С–СЂРєР°';
+$s_fixed_in_version = 'Р’РёРїСЂР°РІР»РµРЅР° Сѓ РІРµСЂСЃС–С—';
+$s_votes = 'Р“РѕР»РѕСЃС–РІ';
+$s_summary = 'РЎС‚Р°С‚РёСЃС‚РёРєР°';
+$s_description = 'РћРїРёСЃ';
+$s_steps_to_reproduce = 'РљСЂРѕРєРё РґР»СЏ РІС–РґС‚РІРѕСЂРµРЅРЅСЏ';
+$s_update_information_button = 'Р—Р±РµСЂРµРіС‚Рё С–РЅС„РѕСЂРјР°С†С–СЋ';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Розширене редагування';
-$s_updating_bug_simple_title = 'Спрощене редагування проблеми';
+$s_update_advanced_link = 'Р РѕР·С€РёСЂРµРЅРµ СЂРµРґР°РіСѓРІР°РЅРЅСЏ';
+$s_updating_bug_simple_title = 'РЎРїСЂРѕС‰РµРЅРµ СЂРµРґР°РіСѓРІР°РЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Голос був доданий...';
+$s_vote_added_msg = 'Р“РѕР»РѕСЃ Р±СѓРІ РґРѕРґР°РЅРёР№...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Коментар був доданий...';
+$s_bugnote_added_msg = 'РљРѕРјРµРЅС‚Р°СЂ Р±СѓРІ РґРѕРґР°РЅРёР№...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Коментар був успішно видалений...';
-$s_bug_notes_title = 'Коментарі';
+$s_bugnote_deleted_msg = 'РљРѕРјРµРЅС‚Р°СЂ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РІРёРґР°Р»РµРЅРёР№...';
+$s_bug_notes_title = 'РљРѕРјРµРЅС‚Р°СЂС–';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Редагувати';
+$s_edit_bugnote_title = 'Р РµРґР°РіСѓРІР°С‚Рё';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'До цієї проблеми немає коментарів.';
-$s_delete_link = 'Видалити';
-$s_add_bugnote_title = 'Додання коментаря';
-$s_add_bugnote_button = 'Додати коментар';
-$s_bugnote_edit_link = 'Редагувати';
-$s_closed_bug_button = 'Закрити проблему';
+$s_no_bugnotes_msg = 'Р”Рѕ С†С–С”С— РїСЂРѕР±Р»РµРјРё РЅРµРјР°С” РєРѕРјРµРЅС‚Р°СЂС–РІ.';
+$s_delete_link = 'Р’РёРґР°Р»РёС‚Рё';
+$s_add_bugnote_title = 'Р”РѕРґР°РЅРЅСЏ РєРѕРјРµРЅС‚Р°СЂСЏ';
+$s_add_bugnote_button = 'Р”РѕРґР°С‚Рё РєРѕРјРµРЅС‚Р°СЂ';
+$s_bugnote_edit_link = 'Р РµРґР°РіСѓРІР°С‚Рё';
+$s_closed_bug_button = 'Р—Р°РєСЂРёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Коментар був успішно змінений...';
-$s_edited_on = 'змінений: ';
+$s_bugnote_updated_msg = 'РљРѕРјРµРЅС‚Р°СЂ Р±СѓРІ СѓСЃРїС–С€РЅРѕ Р·РјС–РЅРµРЅРёР№...';
+$s_edited_on = 'Р·РјС–РЅРµРЅРёР№: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = 'Натисніть, щоб увійти';
+$s_click_to_login = 'РќР°С‚РёСЃРЅС–С‚СЊ, С‰РѕР± СѓРІС–Р№С‚Рё';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Ласкаво просимо до Системи Обліку Проблем.';
-$s_login_title = 'Вхід';
-$s_save_login = 'Запам\'ятати дані';
-$s_choose_project = 'Оберіть проект';
-$s_login_button = 'Увійти';
-$s_signup_link = 'Новий обліковий запис';
-$s_lost_password_link = 'Забули свій пароль?';
+$s_login_page_info = 'Р›Р°СЃРєР°РІРѕ РїСЂРѕСЃРёРјРѕ РґРѕ РЎРёСЃС‚РµРјРё РћР±Р»С–РєСѓ РџСЂРѕР±Р»РµРј.';
+$s_login_title = 'Р’С…С–Рґ';
+$s_save_login = 'Р—Р°РїР°Рј\'СЏС‚Р°С‚Рё РґР°РЅС–';
+$s_choose_project = 'РћР±РµСЂС–С‚СЊ РїСЂРѕРµРєС‚';
+$s_login_button = 'РЈРІС–Р№С‚Рё';
+$s_signup_link = 'РќРѕРІРёР№ РѕР±Р»С–РєРѕРІРёР№ Р·Р°РїРёСЃ';
+$s_lost_password_link = 'Р—Р°Р±СѓР»Рё СЃРІС–Р№ РїР°СЂРѕР»СЊ?';
 
 # login_select_proj_page.php
-$s_select_project_button = 'Вибрати проект';
+$s_select_project_button = 'Р’РёР±СЂР°С‚Рё РїСЂРѕРµРєС‚';
 
 # logout_page.php
-$s_logged_out_title = 'Вихід...';
-$s_redirecting = '...Перенаправляю';
-$s_here = 'сюди';
+$s_logged_out_title = 'Р’РёС…С–Рґ...';
+$s_redirecting = '...РџРµСЂРµРЅР°РїСЂР°РІР»СЏСЋ';
+$s_here = 'СЃСЋРґРё';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Скидання паролю";
-$s_lost_password_done_title = "Лист про пароль був відправлений";
-$s_lost_password_subject = "Скидання паролю";
-$s_lost_password_info = "Для того, щоб відновити забутий пароль, вкажіть своє ім'я та email.<br/><br/>Якщо дані будуть коректними, ви отримаєте лист зі спеціальним лінком на сторінку зміни вашого паролю.";
-$s_lost_password_confirm_hash_OK = "Підтвердження було прийняте. Задайте новий пароль.";
+$s_lost_password_title = "РЎРєРёРґР°РЅРЅСЏ РїР°СЂРѕР»СЋ";
+$s_lost_password_done_title = "Р›РёСЃС‚ РїСЂРѕ РїР°СЂРѕР»СЊ Р±СѓРІ РІС–РґРїСЂР°РІР»РµРЅРёР№";
+$s_lost_password_subject = "РЎРєРёРґР°РЅРЅСЏ РїР°СЂРѕР»СЋ";
+$s_lost_password_info = "Р”Р»СЏ С‚РѕРіРѕ, С‰РѕР± РІС–РґРЅРѕРІРёС‚Рё Р·Р°Р±СѓС‚РёР№ РїР°СЂРѕР»СЊ, РІРєР°Р¶С–С‚СЊ СЃРІРѕС” С–Рј'СЏ С‚Р° email.<br/><br/>РЇРєС‰Рѕ РґР°РЅС– Р±СѓРґСѓС‚СЊ РєРѕСЂРµРєС‚РЅРёРјРё, РІРё РѕС‚СЂРёРјР°С”С‚Рµ Р»РёСЃС‚ Р·С– СЃРїРµС†С–Р°Р»СЊРЅРёРј Р»С–РЅРєРѕРј РЅР° СЃС‚РѕСЂС–РЅРєСѓ Р·РјС–РЅРё РІР°С€РѕРіРѕ РїР°СЂРѕР»СЋ.";
+$s_lost_password_confirm_hash_OK = "РџС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ Р±СѓР»Рѕ РїСЂРёР№РЅСЏС‚Рµ. Р—Р°РґР°Р№С‚Рµ РЅРѕРІРёР№ РїР°СЂРѕР»СЊ.";
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Відкритих й призначених вам';
-$s_open_and_reported_to_me = 'Відкритих й повідомлених вами';
-$s_newer_news_link = 'Свіжі новини';
-$s_older_news_link = 'Старі новини';
-$s_archives = 'Архіви';
+$s_open_and_assigned_to_me = 'Р’С–РґРєСЂРёС‚РёС… Р№ РїСЂРёР·РЅР°С‡РµРЅРёС… РІР°Рј';
+$s_open_and_reported_to_me = 'Р’С–РґРєСЂРёС‚РёС… Р№ РїРѕРІС–РґРѕРјР»РµРЅРёС… РІР°РјРё';
+$s_newer_news_link = 'РЎРІС–Р¶С– РЅРѕРІРёРЅРё';
+$s_older_news_link = 'РЎС‚Р°СЂС– РЅРѕРІРёРЅРё';
+$s_archives = 'РђСЂС…С–РІРё';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'Створено користувача';
-$s_created_user_part2 = 'з рівнем доступу';
+$s_created_user_part1 = 'РЎС‚РІРѕСЂРµРЅРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
+$s_created_user_part2 = 'Р· СЂС–РІРЅРµРј РґРѕСЃС‚СѓРїСѓ';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Новий запис';
-$s_verify_password = 'Перевірка пароля';
-$s_enabled = 'Ввімкнений';
-$s_protected = 'Захищений';
-$s_create_user_button = 'Створити запис';
+$s_create_new_account_title = 'РќРѕРІРёР№ Р·Р°РїРёСЃ';
+$s_verify_password = 'РџРµСЂРµРІС–СЂРєР° РїР°СЂРѕР»СЏ';
+$s_enabled = 'Р’РІС–РјРєРЅРµРЅРёР№';
+$s_protected = 'Р—Р°С…РёС‰РµРЅРёР№';
+$s_create_user_button = 'РЎС‚РІРѕСЂРёС‚Рё Р·Р°РїРёСЃ';
 
 # manage_page.php
-$s_hide_disabled = 'Ховати вимкнені';
-$s_filter_button = 'Застосувати фільтр';
-$s_manage_users_link = 'Користувачі';
-$s_manage_projects_link = 'Проекти';
-$s_manage_custom_field_link = 'Власні поля';
+$s_hide_disabled = 'РҐРѕРІР°С‚Рё РІРёРјРєРЅРµРЅС–';
+$s_filter_button = 'Р—Р°СЃС‚РѕСЃСѓРІР°С‚Рё С„С–Р»СЊС‚СЂ';
+$s_manage_users_link = 'РљРѕСЂРёСЃС‚СѓРІР°С‡С–';
+$s_manage_projects_link = 'РџСЂРѕРµРєС‚Рё';
+$s_manage_custom_field_link = 'Р’Р»Р°СЃРЅС– РїРѕР»СЏ';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = 'Новий запис';
-$s_projects_link = 'Проекти';
-$s_documentation_link = 'Документація';
-$s_new_accounts_title = 'Нові облікові записи';
-$s_1_week_title = 'за тиждень';
-$s_never_logged_in_title = 'Ніколи не входили в систему';
-$s_prune_accounts = 'Видалити записи';
-$s_hide_inactive = 'Ховати неактивні';
-$s_manage_accounts_title = 'Облікові записи';
-$s_p = 'Зах.';
-$s_date_created = 'Дата створення';
-$s_last_visit = 'Останній візит';
-$s_edit_user_link = 'Редагування користувача';
+$s_create_new_account_link = 'РќРѕРІРёР№ Р·Р°РїРёСЃ';
+$s_projects_link = 'РџСЂРѕРµРєС‚Рё';
+$s_documentation_link = 'Р”РѕРєСѓРјРµРЅС‚Р°С†С–СЏ';
+$s_new_accounts_title = 'РќРѕРІС– РѕР±Р»С–РєРѕРІС– Р·Р°РїРёСЃРё';
+$s_1_week_title = 'Р·Р° С‚РёР¶РґРµРЅСЊ';
+$s_never_logged_in_title = 'РќС–РєРѕР»Рё РЅРµ РІС…РѕРґРёР»Рё РІ СЃРёСЃС‚РµРјСѓ';
+$s_prune_accounts = 'Р’РёРґР°Р»РёС‚Рё Р·Р°РїРёСЃРё';
+$s_hide_inactive = 'РҐРѕРІР°С‚Рё РЅРµР°РєС‚РёРІРЅС–';
+$s_manage_accounts_title = 'РћР±Р»С–РєРѕРІС– Р·Р°РїРёСЃРё';
+$s_p = 'Р—Р°С….';
+$s_date_created = 'Р”Р°С‚Р° СЃС‚РІРѕСЂРµРЅРЅСЏ';
+$s_last_visit = 'РћСЃС‚Р°РЅРЅС–Р№ РІС–Р·РёС‚';
+$s_edit_user_link = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
@@ -759,442 +759,442 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Проект був успішно створений...';
+$s_project_added_msg = 'РџСЂРѕРµРєС‚ Р±СѓРІ СѓСЃРїС–С€РЅРѕ СЃС‚РІРѕСЂРµРЅРёР№...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Категорія була успішно створена...';
+$s_category_added_msg = 'РљР°С‚РµРіРѕСЂС–СЏ Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ СЃС‚РІРѕСЂРµРЅР°...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Категорія була успішно видалена...';
+$s_category_deleted_msg = 'РљР°С‚РµРіРѕСЂС–СЏ Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ РІРёРґР°Р»РµРЅР°...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Ви справді хочете видалити цю категорію?';
-$s_delete_category_button = 'Видалити категорію';
+$s_category_delete_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†СЋ РєР°С‚РµРіРѕСЂС–СЋ?';
+$s_delete_category_button = 'Р’РёРґР°Р»РёС‚Рё РєР°С‚РµРіРѕСЂС–СЋ';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Редагування категорії проекту';
-$s_update_category_button = 'Оновити категорію';
+$s_edit_project_category_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РєР°С‚РµРіРѕСЂС–С— РїСЂРѕРµРєС‚Сѓ';
+$s_update_category_button = 'РћРЅРѕРІРёС‚Рё РєР°С‚РµРіРѕСЂС–СЋ';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Категорію оновлено...';
+$s_category_updated_msg = 'РљР°С‚РµРіРѕСЂС–СЋ РѕРЅРѕРІР»РµРЅРѕ...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Проект був успішно видалений...';
+$s_project_deleted_msg = 'РџСЂРѕРµРєС‚ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РІРёРґР°Р»РµРЅРёР№...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Ви справді хочете видалити цей проект і всі його проблеми?';
-$s_project_delete_button = 'Видалити проект';
+$s_project_delete_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ РїСЂРѕРµРєС‚ С– РІСЃС– Р№РѕРіРѕ РїСЂРѕР±Р»РµРјРё?';
+$s_project_delete_button = 'Р’РёРґР°Р»РёС‚Рё РїСЂРѕРµРєС‚';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = 'Редагування проекту';
-$s_project_name = 'Назва проекту';
-$s_view_status = 'Рівень доступу';
-$s_public = 'спільна';
-$s_private = 'закрита';
-$s_update_project_button = 'Оновити проект';
-$s_delete_project_button = 'Видалити проект';
-$s_categories_and_version_title = 'Категорії та версії';
-$s_categories = 'Категорії';
-$s_add_category_button = 'Додати категорію';
-$s_versions = 'Версії';
-$s_add_version_button = 'Додати версію';
-$s_add_and_edit_version_button = 'Додати і Редагувати версію';
-$s_edit_link = 'Редагувати';
-$s_actions = 'Дії';
-$s_version = 'Версія';
-$s_timestamp = 'Дата';
-$s_update = 'Оновити';
+$s_edit_project_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РїСЂРѕРµРєС‚Сѓ';
+$s_project_name = 'РќР°Р·РІР° РїСЂРѕРµРєС‚Сѓ';
+$s_view_status = 'Р С–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ';
+$s_public = 'СЃРїС–Р»СЊРЅР°';
+$s_private = 'Р·Р°РєСЂРёС‚Р°';
+$s_update_project_button = 'РћРЅРѕРІРёС‚Рё РїСЂРѕРµРєС‚';
+$s_delete_project_button = 'Р’РёРґР°Р»РёС‚Рё РїСЂРѕРµРєС‚';
+$s_categories_and_version_title = 'РљР°С‚РµРіРѕСЂС–С— С‚Р° РІРµСЂСЃС–С—';
+$s_categories = 'РљР°С‚РµРіРѕСЂС–С—';
+$s_add_category_button = 'Р”РѕРґР°С‚Рё РєР°С‚РµРіРѕСЂС–СЋ';
+$s_versions = 'Р’РµСЂСЃС–С—';
+$s_add_version_button = 'Р”РѕРґР°С‚Рё РІРµСЂСЃС–СЋ';
+$s_add_and_edit_version_button = 'Р”РѕРґР°С‚Рё С– Р РµРґР°РіСѓРІР°С‚Рё РІРµСЂСЃС–СЋ';
+$s_edit_link = 'Р РµРґР°РіСѓРІР°С‚Рё';
+$s_actions = 'Р”С–С—';
+$s_version = 'Р’РµСЂСЃС–СЏ';
+$s_timestamp = 'Р”Р°С‚Р°';
+$s_update = 'РћРЅРѕРІРёС‚Рё';
 $s_subprojects = 'Subprojects';
 $s_add_subproject = 'Add as Subproject';
 $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Додати проект';
-$s_upload_file_path = 'Шлях до закачуваних файлів';
-$s_add_project_button = 'Додати проект';
-$s_projects_title = 'Проекти';
-$s_name = 'Назва';
+$s_add_project_title = 'Р”РѕРґР°С‚Рё РїСЂРѕРµРєС‚';
+$s_upload_file_path = 'РЁР»СЏС… РґРѕ Р·Р°РєР°С‡СѓРІР°РЅРёС… С„Р°Р№Р»С–РІ';
+$s_add_project_button = 'Р”РѕРґР°С‚Рё РїСЂРѕРµРєС‚';
+$s_projects_title = 'РџСЂРѕРµРєС‚Рё';
+$s_name = 'РќР°Р·РІР°';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Проект був успішно оновлений...';
+$s_project_updated_msg = 'РџСЂРѕРµРєС‚ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅРёР№...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Версія була успішно додана...';
+$s_version_added_msg = 'Р’РµСЂСЃС–СЏ Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ РґРѕРґР°РЅР°...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'Версія була успішно видалена...';
+$s_version_deleted_msg = 'Р’РµСЂСЃС–СЏ Р±СѓР»Р° СѓСЃРїС–С€РЅРѕ РІРёРґР°Р»РµРЅР°...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Ви справді хочете видалити цю версію?';
-$s_delete_version_button = 'Видалити версію';
+$s_version_delete_sure = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†СЋ РІРµСЂСЃС–СЋ?';
+$s_delete_version_button = 'Р’РёРґР°Р»РёС‚Рё РІРµСЂСЃС–СЋ';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Редагування версії проекту';
-$s_update_version_button = 'Оновити версію';
-$s_released = 'Реліз вийшов';
+$s_edit_project_version_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РІРµСЂСЃС–С— РїСЂРѕРµРєС‚Сѓ';
+$s_update_version_button = 'РћРЅРѕРІРёС‚Рё РІРµСЂСЃС–СЋ';
+$s_released = 'Р РµР»С–Р· РІРёР№С€РѕРІ';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Версію оновлено...';
+$s_version_updated_msg = 'Р’РµСЂСЃС–СЋ РѕРЅРѕРІР»РµРЅРѕ...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Запис захищений. Не можу його видалити.';
-$s_account_deleted_msg = 'Запис був видалений...';
+$s_account_delete_protected_msg = 'Р—Р°РїРёСЃ Р·Р°С…РёС‰РµРЅРёР№. РќРµ РјРѕР¶Сѓ Р№РѕРіРѕ РІРёРґР°Р»РёС‚Рё.';
+$s_account_deleted_msg = 'Р—Р°РїРёСЃ Р±СѓРІ РІРёРґР°Р»РµРЅРёР№...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Ви справді хочете видалити цей запис?';
+$s_delete_account_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ Р·Р°РїРёСЃ?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Всі користувачі, які існують більше тижня і не входили в систему, були видалені';
-$s_prune_accounts_button = 'Видалити';
-$s_confirm_account_pruning = 'Ви справді хочете видалити старі облікові записи, користувачі яких жодного разу не входили в систему?';
+$s_accounts_pruned_msg = 'Р’СЃС– РєРѕСЂРёСЃС‚СѓРІР°С‡С–, СЏРєС– С–СЃРЅСѓСЋС‚СЊ Р±С–Р»СЊС€Рµ С‚РёР¶РЅСЏ С– РЅРµ РІС…РѕРґРёР»Рё РІ СЃРёСЃС‚РµРјСѓ, Р±СѓР»Рё РІРёРґР°Р»РµРЅС–';
+$s_prune_accounts_button = 'Р’РёРґР°Р»РёС‚Рё';
+$s_confirm_account_pruning = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё СЃС‚Р°СЂС– РѕР±Р»С–РєРѕРІС– Р·Р°РїРёСЃРё, РєРѕСЂРёСЃС‚СѓРІР°С‡С– СЏРєРёС… Р¶РѕРґРЅРѕРіРѕ СЂР°Р·Сѓ РЅРµ РІС…РѕРґРёР»Рё РІ СЃРёСЃС‚РµРјСѓ?';
 
 # manage_user_page.php
-$s_edit_user_title = 'Редагування користувача';
-$s_reset_password_button = 'Скинути пароль';
-$s_delete_user_button = 'Видалити користувача';
-$s_reset_password_msg = 'Скидання паролю надсилає лінк для підтвердження електронною поштою.';
-$s_reset_password_msg2 = 'Скидання паролю зробить ваш пароль порожнім.';
-$s_show_all_users = 'ВСІ';
+$s_edit_user_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
+$s_reset_password_button = 'РЎРєРёРЅСѓС‚Рё РїР°СЂРѕР»СЊ';
+$s_delete_user_button = 'Р’РёРґР°Р»РёС‚Рё РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
+$s_reset_password_msg = 'РЎРєРёРґР°РЅРЅСЏ РїР°СЂРѕР»СЋ РЅР°РґСЃРёР»Р°С” Р»С–РЅРє РґР»СЏ РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ РµР»РµРєС‚СЂРѕРЅРЅРѕСЋ РїРѕС€С‚РѕСЋ.';
+$s_reset_password_msg2 = 'РЎРєРёРґР°РЅРЅСЏ РїР°СЂРѕР»СЋ Р·СЂРѕР±РёС‚СЊ РІР°С€ РїР°СЂРѕР»СЊ РїРѕСЂРѕР¶РЅС–Рј.';
+$s_show_all_users = 'Р’РЎР†';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Запис захищений. Не можу скинути пароль.';
-$s_account_reset_msg = 'Лист для підтвердження відправлений вам на вашу електронну адресу...';
-$s_account_reset_msg2 = 'Запису задано пустий пароль...';
+$s_account_reset_protected_msg = 'Р—Р°РїРёСЃ Р·Р°С…РёС‰РµРЅРёР№. РќРµ РјРѕР¶Сѓ СЃРєРёРЅСѓС‚Рё РїР°СЂРѕР»СЊ.';
+$s_account_reset_msg = 'Р›РёСЃС‚ РґР»СЏ РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ РІС–РґРїСЂР°РІР»РµРЅРёР№ РІР°Рј РЅР° РІР°С€Сѓ РµР»РµРєС‚СЂРѕРЅРЅСѓ Р°РґСЂРµСЃСѓ...';
+$s_account_reset_msg2 = 'Р—Р°РїРёСЃСѓ Р·Р°РґР°РЅРѕ РїСѓСЃС‚РёР№ РїР°СЂРѕР»СЊ...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Запис захищений. Рівень доступу і стан блокування не змінені. Всі інші дані були оновлені...';
-$s_manage_user_updated_msg = 'Запис був успішно оновлений...';
+$s_manage_user_protected_msg = 'Р—Р°РїРёСЃ Р·Р°С…РёС‰РµРЅРёР№. Р С–РІРµРЅСЊ РґРѕСЃС‚СѓРїСѓ С– СЃС‚Р°РЅ Р±Р»РѕРєСѓРІР°РЅРЅСЏ РЅРµ Р·РјС–РЅРµРЅС–. Р’СЃС– С–РЅС€С– РґР°РЅС– Р±СѓР»Рё РѕРЅРѕРІР»РµРЅС–...';
+$s_manage_user_updated_msg = 'Р—Р°РїРёСЃ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅРёР№...';
 
 # menu_inc.php
-$s_main_link = 'Вітальня';
-$s_view_bugs_link = 'Браузер проблем';
-$s_report_bug_link = 'Нова проблема';
-$s_changelog_link = 'Хронологія';
-$s_summary_link = 'Статистика';
-$s_account_link = 'Мій запис';
-$s_users_link = 'Користувачі';
-$s_manage_link = 'Управління';
-$s_edit_news_link = 'Новини';
-$s_docs_link = 'Документація';
-$s_logout_link = 'Вийти';
-$s_my_view_link = 'Моя сторінка';
+$s_main_link = 'Р’С–С‚Р°Р»СЊРЅСЏ';
+$s_view_bugs_link = 'Р‘СЂР°СѓР·РµСЂ РїСЂРѕР±Р»РµРј';
+$s_report_bug_link = 'РќРѕРІР° РїСЂРѕР±Р»РµРјР°';
+$s_changelog_link = 'РҐСЂРѕРЅРѕР»РѕРіС–СЏ';
+$s_summary_link = 'РЎС‚Р°С‚РёСЃС‚РёРєР°';
+$s_account_link = 'РњС–Р№ Р·Р°РїРёСЃ';
+$s_users_link = 'РљРѕСЂРёСЃС‚СѓРІР°С‡С–';
+$s_manage_link = 'РЈРїСЂР°РІР»С–РЅРЅСЏ';
+$s_edit_news_link = 'РќРѕРІРёРЅРё';
+$s_docs_link = 'Р”РѕРєСѓРјРµРЅС‚Р°С†С–СЏ';
+$s_logout_link = 'Р’РёР№С‚Рё';
+$s_my_view_link = 'РњРѕСЏ СЃС‚РѕСЂС–РЅРєР°';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Непризначені';
-$s_my_view_title_recent_mod = 'Нещодавно оновились';
-$s_my_view_title_reported = 'Повідомлені вами';
-$s_my_view_title_assigned = 'Призначені вам (невирішені)';
-$s_my_view_title_resolved = 'Вирішені';
-$s_my_view_title_monitored = 'За якими ви стежите';
+$s_my_view_title_unassigned = 'РќРµРїСЂРёР·РЅР°С‡РµРЅС–';
+$s_my_view_title_recent_mod = 'РќРµС‰РѕРґР°РІРЅРѕ РѕРЅРѕРІРёР»РёСЃСЊ';
+$s_my_view_title_reported = 'РџРѕРІС–РґРѕРјР»РµРЅС– РІР°РјРё';
+$s_my_view_title_assigned = 'РџСЂРёР·РЅР°С‡РµРЅС– РІР°Рј (РЅРµРІРёСЂС–С€РµРЅС–)';
+$s_my_view_title_resolved = 'Р’РёСЂС–С€РµРЅС–';
+$s_my_view_title_monitored = 'Р—Р° СЏРєРёРјРё РІРё СЃС‚РµР¶РёС‚Рµ';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
-$s_news_added_msg = 'Новину додано...';
+$s_news_added_msg = 'РќРѕРІРёРЅСѓ РґРѕРґР°РЅРѕ...';
 
 # news_delete.php
-$s_news_deleted_msg = 'Новину видалено...';
+$s_news_deleted_msg = 'РќРѕРІРёРЅСѓ РІРёРґР°Р»РµРЅРѕ...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Ви справді хочете видалити цю новину?';
-$s_delete_news_item_button = 'Видалити новину';
+$s_delete_news_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†СЋ РЅРѕРІРёРЅСѓ?';
+$s_delete_news_item_button = 'Р’РёРґР°Р»РёС‚Рё РЅРѕРІРёРЅСѓ';
 
 # news_edit_page.php
-$s_edit_news_title = 'Редагування новин';
-$s_headline = 'Заголовок:';
-$s_body = 'Повідомлення';
-$s_update_news_button = 'Зберегти новину';
+$s_edit_news_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РЅРѕРІРёРЅ';
+$s_headline = 'Р—Р°РіРѕР»РѕРІРѕРє:';
+$s_body = 'РџРѕРІС–РґРѕРјР»РµРЅРЅСЏ';
+$s_update_news_button = 'Р—Р±РµСЂРµРіС‚Рё РЅРѕРІРёРЅСѓ';
 
 # news_menu_page.php
-$s_add_news_title = 'Створення новини';
-$s_post_to = 'Розмістити в';
-$s_post_news_button = 'Розмістити новину';
-$s_edit_or_delete_news_title = 'Редагування та видалення новин';
-$s_edit_post = 'Редагувати новину';
-$s_delete_post = 'Видалити новину';
-$s_select_post = 'Виберіть новину';
+$s_add_news_title = 'РЎС‚РІРѕСЂРµРЅРЅСЏ РЅРѕРІРёРЅРё';
+$s_post_to = 'Р РѕР·РјС–СЃС‚РёС‚Рё РІ';
+$s_post_news_button = 'Р РѕР·РјС–СЃС‚РёС‚Рё РЅРѕРІРёРЅСѓ';
+$s_edit_or_delete_news_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ С‚Р° РІРёРґР°Р»РµРЅРЅСЏ РЅРѕРІРёРЅ';
+$s_edit_post = 'Р РµРґР°РіСѓРІР°С‚Рё РЅРѕРІРёРЅСѓ';
+$s_delete_post = 'Р’РёРґР°Р»РёС‚Рё РЅРѕРІРёРЅСѓ';
+$s_select_post = 'Р’РёР±РµСЂС–С‚СЊ РЅРѕРІРёРЅСѓ';
 
 # news_update.php
-$s_news_updated_msg = 'Новину оновлено...';
+$s_news_updated_msg = 'РќРѕРІРёРЅСѓ РѕРЅРѕРІР»РµРЅРѕ...';
 
 # news_view_page.php
-$s_back_link = 'Назад';
+$s_back_link = 'РќР°Р·Р°Рґ';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Файл прийнято';
+$s_file_uploaded_msg = 'Р¤Р°Р№Р» РїСЂРёР№РЅСЏС‚Рѕ';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Закачати файл';
-$s_title = 'Назва';
+$s_upload_file_title = 'Р—Р°РєР°С‡Р°С‚Рё С„Р°Р№Р»';
+$s_title = 'РќР°Р·РІР°';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Файл проекта був видалений';
+$s_project_file_deleted_msg = 'Р¤Р°Р№Р» РїСЂРѕРµРєС‚Р° Р±СѓРІ РІРёРґР°Р»РµРЅРёР№';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Ви справді хочете видалити цей файл?';
+$s_confirm_file_delete_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ С„Р°Р№Р»?';
 
 # proj_doc_edit_page.php
-$s_filename = 'Назва файла';
-$s_file_update_button = 'Оновити файл';
-$s_file_delete_button = 'Видалити файл';
+$s_filename = 'РќР°Р·РІР° С„Р°Р№Р»Р°';
+$s_file_update_button = 'РћРЅРѕРІРёС‚Рё С„Р°Р№Р»';
+$s_file_delete_button = 'Р’РёРґР°Р»РёС‚Рё С„Р°Р№Р»';
 
 # proj_doc_page.php
-$s_project_documentation_title = 'Документація проекту';
-$s_user_documentation = 'Документація користувача';
-$s_project_documentation = 'Документація проекту';
-$s_add_file = 'Додати файл';
+$s_project_documentation_title = 'Р”РѕРєСѓРјРµРЅС‚Р°С†С–СЏ РїСЂРѕРµРєС‚Сѓ';
+$s_user_documentation = 'Р”РѕРєСѓРјРµРЅС‚Р°С†С–СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°';
+$s_project_documentation = 'Р”РѕРєСѓРјРµРЅС‚Р°С†С–СЏ РїСЂРѕРµРєС‚Сѓ';
+$s_add_file = 'Р”РѕРґР°С‚Рё С„Р°Р№Р»';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Проект був успішно оновлений';
+$s_project_document_updated = 'РџСЂРѕРµРєС‚ Р±СѓРІ СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅРёР№';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Користувач успішно доданий до проекту';
+$s_project_user_added_msg = 'РљРѕСЂРёСЃС‚СѓРІР°С‡ СѓСЃРїС–С€РЅРѕ РґРѕРґР°РЅРёР№ РґРѕ РїСЂРѕРµРєС‚Сѓ';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Користувача видалено з проекту';
+$s_project_removed_user_msg = 'РљРѕСЂРёСЃС‚СѓРІР°С‡Р° РІРёРґР°Р»РµРЅРѕ Р· РїСЂРѕРµРєС‚Сѓ';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Ви справді хочете усунути цього користувача?';
+$s_remove_user_sure_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ СѓСЃСѓРЅСѓС‚Рё С†СЊРѕРіРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Непризначені користувачі';
-$s_add_user_button = 'Призначити';
-$s_project_selection_title = 'Виберіть проект';
-$s_remove_link = 'Усунути';
-$s_remove_all_link = 'Усунути всі';
+$s_add_user_title = 'РќРµРїСЂРёР·РЅР°С‡РµРЅС– РєРѕСЂРёСЃС‚СѓРІР°С‡С–';
+$s_add_user_button = 'РџСЂРёР·РЅР°С‡РёС‚Рё';
+$s_project_selection_title = 'Р’РёР±РµСЂС–С‚СЊ РїСЂРѕРµРєС‚';
+$s_remove_link = 'РЈСЃСѓРЅСѓС‚Рё';
+$s_remove_all_link = 'РЈСЃСѓРЅСѓС‚Рё РІСЃС–';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Запис користувача оновлено';
+$s_updated_user_msg = 'Р—Р°РїРёСЃ РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РѕРЅРѕРІР»РµРЅРѕ';
 
 # report_add.php
-$s_must_enter_category = 'Ви маєте вибрати категорію';
-$s_must_enter_severity = 'Ви маєте вказати рівень серйозності';
-$s_must_enter_reproducibility = 'Ви маєте вказати відтворюваність';
-$s_must_enter_summary = 'Ви маєте додати тему';
-$s_must_enter_description = 'Ви маєте додати опис';
-$s_report_more_bugs = 'Оформити декілька помилок';
-$s_submission_thanks_msg = 'Дякуємо за ваш звіт';
+$s_must_enter_category = 'Р’Рё РјР°С”С‚Рµ РІРёР±СЂР°С‚Рё РєР°С‚РµРіРѕСЂС–СЋ';
+$s_must_enter_severity = 'Р’Рё РјР°С”С‚Рµ РІРєР°Р·Р°С‚Рё СЂС–РІРµРЅСЊ СЃРµСЂР№РѕР·РЅРѕСЃС‚С–';
+$s_must_enter_reproducibility = 'Р’Рё РјР°С”С‚Рµ РІРєР°Р·Р°С‚Рё РІС–РґС‚РІРѕСЂСЋРІР°РЅС–СЃС‚СЊ';
+$s_must_enter_summary = 'Р’Рё РјР°С”С‚Рµ РґРѕРґР°С‚Рё С‚РµРјСѓ';
+$s_must_enter_description = 'Р’Рё РјР°С”С‚Рµ РґРѕРґР°С‚Рё РѕРїРёСЃ';
+$s_report_more_bugs = 'РћС„РѕСЂРјРёС‚Рё РґРµРєС–Р»СЊРєР° РїРѕРјРёР»РѕРє';
+$s_submission_thanks_msg = 'Р”СЏРєСѓС”РјРѕ Р·Р° РІР°С€ Р·РІС–С‚';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'Спрощений звіт';
-$s_enter_report_details_title = 'Заповніть анкету проблеми';
-$s_required = 'обов\'язкове поле';
-$s_select_category = 'Виберіть категорію';
-$s_select_reproducibility = 'Вкажіть відтворюваність';
-$s_select_severity = 'Вкажіть рівень серйозності';
-$s_or_fill_in = 'або заповніть';
-$s_assign_to = 'Кому призначити';
-$s_additional_information = 'Додаткова інформація';
-$s_submit_report_button = 'Відправити звіт';
-$s_check_report_more_bugs = 'увімкніть, якщо оформляєте декілька проблем';
+$s_simple_report_link = 'РЎРїСЂРѕС‰РµРЅРёР№ Р·РІС–С‚';
+$s_enter_report_details_title = 'Р—Р°РїРѕРІРЅС–С‚СЊ Р°РЅРєРµС‚Сѓ РїСЂРѕР±Р»РµРјРё';
+$s_required = 'РѕР±РѕРІ\'СЏР·РєРѕРІРµ РїРѕР»Рµ';
+$s_select_category = 'Р’РёР±РµСЂС–С‚СЊ РєР°С‚РµРіРѕСЂС–СЋ';
+$s_select_reproducibility = 'Р’РєР°Р¶С–С‚СЊ РІС–РґС‚РІРѕСЂСЋРІР°РЅС–СЃС‚СЊ';
+$s_select_severity = 'Р’РєР°Р¶С–С‚СЊ СЂС–РІРµРЅСЊ СЃРµСЂР№РѕР·РЅРѕСЃС‚С–';
+$s_or_fill_in = 'Р°Р±Рѕ Р·Р°РїРѕРІРЅС–С‚СЊ';
+$s_assign_to = 'РљРѕРјСѓ РїСЂРёР·РЅР°С‡РёС‚Рё';
+$s_additional_information = 'Р”РѕРґР°С‚РєРѕРІР° С–РЅС„РѕСЂРјР°С†С–СЏ';
+$s_submit_report_button = 'Р’С–РґРїСЂР°РІРёС‚Рё Р·РІС–С‚';
+$s_check_report_more_bugs = 'СѓРІС–РјРєРЅС–С‚СЊ, СЏРєС‰Рѕ РѕС„РѕСЂРјР»СЏС”С‚Рµ РґРµРєС–Р»СЊРєР° РїСЂРѕР±Р»РµРј';
 
 # report_bug_page.php
-$s_advanced_report_link = 'Розширена форма';
-$s_report_stay = 'Продовжити оформлення звітів';
+$s_advanced_report_link = 'Р РѕР·С€РёСЂРµРЅР° С„РѕСЂРјР°';
+$s_report_stay = 'РџСЂРѕРґРѕРІР¶РёС‚Рё РѕС„РѕСЂРјР»РµРЅРЅСЏ Р·РІС–С‚С–РІ';
 
 # set_project.php
-$s_selected_project = 'Вибраний проект';
-$s_valid_project_msg = 'Ви повинні вибрати правильний проект';
+$s_selected_project = 'Р’РёР±СЂР°РЅРёР№ РїСЂРѕРµРєС‚';
+$s_valid_project_msg = 'Р’Рё РїРѕРІРёРЅРЅС– РІРёР±СЂР°С‚Рё РїСЂР°РІРёР»СЊРЅРёР№ РїСЂРѕРµРєС‚';
 
 # signup.php
-$s_signup_done_title = 'Реєстраційну інформацію оброблено';
-$s_password_emailed_msg = 'Вітаємо! Ви успішно зареєструвались. Зараз вам був відпралений лист для перевірки електронної адреси. Відвідайте лінк, який ви знайдете в листі, щоб активізувати свій запис.';
-$s_no_reponse_msg = 'У вас є сім днів, щоб активізувати запис. Якщо ви не акивізуєте запис протягом семи днів, він може бути знищений.';
+$s_signup_done_title = 'Р РµС”СЃС‚СЂР°С†С–Р№РЅСѓ С–РЅС„РѕСЂРјР°С†С–СЋ РѕР±СЂРѕР±Р»РµРЅРѕ';
+$s_password_emailed_msg = 'Р’С–С‚Р°С”РјРѕ! Р’Рё СѓСЃРїС–С€РЅРѕ Р·Р°СЂРµС”СЃС‚СЂСѓРІР°Р»РёСЃСЊ. Р—Р°СЂР°Р· РІР°Рј Р±СѓРІ РІС–РґРїСЂР°Р»РµРЅРёР№ Р»РёСЃС‚ РґР»СЏ РїРµСЂРµРІС–СЂРєРё РµР»РµРєС‚СЂРѕРЅРЅРѕС— Р°РґСЂРµСЃРё. Р’С–РґРІС–РґР°Р№С‚Рµ Р»С–РЅРє, СЏРєРёР№ РІРё Р·РЅР°Р№РґРµС‚Рµ РІ Р»РёСЃС‚С–, С‰РѕР± Р°РєС‚РёРІС–Р·СѓРІР°С‚Рё СЃРІС–Р№ Р·Р°РїРёСЃ.';
+$s_no_reponse_msg = 'РЈ РІР°СЃ С” СЃС–Рј РґРЅС–РІ, С‰РѕР± Р°РєС‚РёРІС–Р·СѓРІР°С‚Рё Р·Р°РїРёСЃ. РЇРєС‰Рѕ РІРё РЅРµ Р°РєРёРІС–Р·СѓС”С‚Рµ Р·Р°РїРёСЃ РїСЂРѕС‚СЏРіРѕРј СЃРµРјРё РґРЅС–РІ, РІС–РЅ РјРѕР¶Рµ Р±СѓС‚Рё Р·РЅРёС‰РµРЅРёР№.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Введіть код, який наведено в полі праворуч';
-$s_signup_info = 'Після заповнення анкети і перевірки ваших відповідей на вашу адресу буде відправлений лист.<br/>За допомогою цього листа ви зможете активізувати свій запис. Якщо ви не активізуєте запис протягом семи днів, він може бути знищений.<br/>Щоб отримати вказаний лист, ви маєте вказати дійсну електронну адресу.';
-$s_signup_title = 'Реєстрація';
-$s_signup_button = 'Зареєструватись';
-$s_no_password_request = 'Ваш пароль контролюється іншою системою. Зверніться, будь ласка, до свого адміністратора.';
+$s_signup_captcha_request = 'Р’РІРµРґС–С‚СЊ РєРѕРґ, СЏРєРёР№ РЅР°РІРµРґРµРЅРѕ РІ РїРѕР»С– РїСЂР°РІРѕСЂСѓС‡';
+$s_signup_info = 'РџС–СЃР»СЏ Р·Р°РїРѕРІРЅРµРЅРЅСЏ Р°РЅРєРµС‚Рё С– РїРµСЂРµРІС–СЂРєРё РІР°С€РёС… РІС–РґРїРѕРІС–РґРµР№ РЅР° РІР°С€Сѓ Р°РґСЂРµСЃСѓ Р±СѓРґРµ РІС–РґРїСЂР°РІР»РµРЅРёР№ Р»РёСЃС‚.<br/>Р—Р° РґРѕРїРѕРјРѕРіРѕСЋ С†СЊРѕРіРѕ Р»РёСЃС‚Р° РІРё Р·РјРѕР¶РµС‚Рµ Р°РєС‚РёРІС–Р·СѓРІР°С‚Рё СЃРІС–Р№ Р·Р°РїРёСЃ. РЇРєС‰Рѕ РІРё РЅРµ Р°РєС‚РёРІС–Р·СѓС”С‚Рµ Р·Р°РїРёСЃ РїСЂРѕС‚СЏРіРѕРј СЃРµРјРё РґРЅС–РІ, РІС–РЅ РјРѕР¶Рµ Р±СѓС‚Рё Р·РЅРёС‰РµРЅРёР№.<br/>Р©РѕР± РѕС‚СЂРёРјР°С‚Рё РІРєР°Р·Р°РЅРёР№ Р»РёСЃС‚, РІРё РјР°С”С‚Рµ РІРєР°Р·Р°С‚Рё РґС–Р№СЃРЅСѓ РµР»РµРєС‚СЂРѕРЅРЅСѓ Р°РґСЂРµСЃСѓ.';
+$s_signup_title = 'Р РµС”СЃС‚СЂР°С†С–СЏ';
+$s_signup_button = 'Р—Р°СЂРµС”СЃС‚СЂСѓРІР°С‚РёСЃСЊ';
+$s_no_password_request = 'Р’Р°С€ РїР°СЂРѕР»СЊ РєРѕРЅС‚СЂРѕР»СЋС”С‚СЊСЃСЏ С–РЅС€РѕСЋ СЃРёСЃС‚РµРјРѕСЋ. Р—РІРµСЂРЅС–С‚СЊСЃСЏ, Р±СѓРґСЊ Р»Р°СЃРєР°, РґРѕ СЃРІРѕРіРѕ Р°РґРјС–РЅС–СЃС‚СЂР°С‚РѕСЂР°.';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'Параметри сервера';
-$s_save_settings_button = 'Зберегти параметри';
+$s_edit_site_settings_title = 'РџР°СЂР°РјРµС‚СЂРё СЃРµСЂРІРµСЂР°';
+$s_save_settings_button = 'Р—Р±РµСЂРµРіС‚Рё РїР°СЂР°РјРµС‚СЂРё';
 
 # site_settings_page.php
-$s_site_settings_title = 'Параметри сервера';
-$s_system_info_link = 'Системна інформація';
-$s_site_settings_link = 'Параметри сервера';
+$s_site_settings_title = 'РџР°СЂР°РјРµС‚СЂРё СЃРµСЂРІРµСЂР°';
+$s_system_info_link = 'РЎРёСЃС‚РµРјРЅР° С–РЅС„РѕСЂРјР°С†С–СЏ';
+$s_site_settings_link = 'РџР°СЂР°РјРµС‚СЂРё СЃРµСЂРІРµСЂР°';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'Параметри сервера були успішно оновлені';
+$s_site_settings_updated_msg = 'РџР°СЂР°РјРµС‚СЂРё СЃРµСЂРІРµСЂР° Р±СѓР»Рё СѓСЃРїС–С€РЅРѕ РѕРЅРѕРІР»РµРЅС–';
 
 # summary_page.php
-$s_summary_title = 'Статистика';
-$s_summary_jpgraph_link = 'Зведена статистика';
-$s_by_project = 'За проектами';
-$s_by_status = 'За статусами';
-$s_by_date = 'За датами (у днях)';
-$s_by_severity = 'За рівнями серйозності';
-$s_by_resolution = 'За резолюціями';
-$s_by_category = 'За категоріями';
-$s_by_priority = 'За пріоритетами';
-$s_by_developer = 'За розробниками';
-$s_by_reporter = 'За репортерами';
-$s_reporter_by_resolution = 'Репортери за резолюціями';
-$s_reporter_effectiveness = 'Ефективність репортерів';
-$s_developer_by_resolution = 'Розробники за резолюціями';
-$s_percentage_fixed = '% вирішених';
-$s_percentage_errors = '% помилкових';
-$s_errors = 'помилкові';
-$s_total = 'Всього';
-$s_time_stats = 'Часова статистика вирішених проблем (у днях)';
-$s_longest_open_bug = 'Найдовше відкрита проблема';
-$s_longest_open = 'Відкрита протягом';
-$s_average_time = 'Середній час';
-$s_total_time = 'Загальний час';
-$s_developer_stats = 'Статистика розробників';
-$s_reporter_stats = 'Статистика репортерів';
-$s_orct = '(Відкрито/Вирішено/Закрито/Загалом)';
+$s_summary_title = 'РЎС‚Р°С‚РёСЃС‚РёРєР°';
+$s_summary_jpgraph_link = 'Р—РІРµРґРµРЅР° СЃС‚Р°С‚РёСЃС‚РёРєР°';
+$s_by_project = 'Р—Р° РїСЂРѕРµРєС‚Р°РјРё';
+$s_by_status = 'Р—Р° СЃС‚Р°С‚СѓСЃР°РјРё';
+$s_by_date = 'Р—Р° РґР°С‚Р°РјРё (Сѓ РґРЅСЏС…)';
+$s_by_severity = 'Р—Р° СЂС–РІРЅСЏРјРё СЃРµСЂР№РѕР·РЅРѕСЃС‚С–';
+$s_by_resolution = 'Р—Р° СЂРµР·РѕР»СЋС†С–СЏРјРё';
+$s_by_category = 'Р—Р° РєР°С‚РµРіРѕСЂС–СЏРјРё';
+$s_by_priority = 'Р—Р° РїСЂС–РѕСЂРёС‚РµС‚Р°РјРё';
+$s_by_developer = 'Р—Р° СЂРѕР·СЂРѕР±РЅРёРєР°РјРё';
+$s_by_reporter = 'Р—Р° СЂРµРїРѕСЂС‚РµСЂР°РјРё';
+$s_reporter_by_resolution = 'Р РµРїРѕСЂС‚РµСЂРё Р·Р° СЂРµР·РѕР»СЋС†С–СЏРјРё';
+$s_reporter_effectiveness = 'Р•С„РµРєС‚РёРІРЅС–СЃС‚СЊ СЂРµРїРѕСЂС‚РµСЂС–РІ';
+$s_developer_by_resolution = 'Р РѕР·СЂРѕР±РЅРёРєРё Р·Р° СЂРµР·РѕР»СЋС†С–СЏРјРё';
+$s_percentage_fixed = '% РІРёСЂС–С€РµРЅРёС…';
+$s_percentage_errors = '% РїРѕРјРёР»РєРѕРІРёС…';
+$s_errors = 'РїРѕРјРёР»РєРѕРІС–';
+$s_total = 'Р’СЃСЊРѕРіРѕ';
+$s_time_stats = 'Р§Р°СЃРѕРІР° СЃС‚Р°С‚РёСЃС‚РёРєР° РІРёСЂС–С€РµРЅРёС… РїСЂРѕР±Р»РµРј (Сѓ РґРЅСЏС…)';
+$s_longest_open_bug = 'РќР°Р№РґРѕРІС€Рµ РІС–РґРєСЂРёС‚Р° РїСЂРѕР±Р»РµРјР°';
+$s_longest_open = 'Р’С–РґРєСЂРёС‚Р° РїСЂРѕС‚СЏРіРѕРј';
+$s_average_time = 'РЎРµСЂРµРґРЅС–Р№ С‡Р°СЃ';
+$s_total_time = 'Р—Р°РіР°Р»СЊРЅРёР№ С‡Р°СЃ';
+$s_developer_stats = 'РЎС‚Р°С‚РёСЃС‚РёРєР° СЂРѕР·СЂРѕР±РЅРёРєС–РІ';
+$s_reporter_stats = 'РЎС‚Р°С‚РёСЃС‚РёРєР° СЂРµРїРѕСЂС‚РµСЂС–РІ';
+$s_orct = '(Р’С–РґРєСЂРёС‚Рѕ/Р’РёСЂС–С€РµРЅРѕ/Р—Р°РєСЂРёС‚Рѕ/Р—Р°РіР°Р»РѕРј)';
 
 # view_all_bug_page.php
-$s_any = 'не має значення';
-$s_show = 'Показувати';
-$s_changed = 'Змінена протягом (год)';
-$s_viewing_bugs_title = 'Перегляд проблем';
-$s_updated = 'Оновлена';
+$s_any = 'РЅРµ РјР°С” Р·РЅР°С‡РµРЅРЅСЏ';
+$s_show = 'РџРѕРєР°Р·СѓРІР°С‚Рё';
+$s_changed = 'Р—РјС–РЅРµРЅР° РїСЂРѕС‚СЏРіРѕРј (РіРѕРґ)';
+$s_viewing_bugs_title = 'РџРµСЂРµРіР»СЏРґ РїСЂРѕР±Р»РµРј';
+$s_updated = 'РћРЅРѕРІР»РµРЅР°';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
-$s_issue_id = 'Проблема #';
+$s_issue_id = 'РџСЂРѕР±Р»РµРјР° #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = 'Немає';
+$s_none = 'РќРµРјР°С”';
 $s_current = 'current';
-$s_search = 'Знайти';
-$s_view_prev_link = 'Попередні';
-$s_view_next_link = 'Наступні';
-$s_prev = 'Попередня';
-$s_next = 'Наступна';
-$s_first = 'Перша';
-$s_last = 'Остання';
-$s_start_date = 'Початкова дата';
-$s_end_date = 'Кінцева дата';
-$s_use_date_filters = 'Фільтрувати за датами';
-$s_yes = 'Так';
-$s_no = 'Ні';
-$s_open_filters = 'Редагувати фільтр';
-$s_or_unassigned = 'Або непризначена';
+$s_search = 'Р—РЅР°Р№С‚Рё';
+$s_view_prev_link = 'РџРѕРїРµСЂРµРґРЅС–';
+$s_view_next_link = 'РќР°СЃС‚СѓРїРЅС–';
+$s_prev = 'РџРѕРїРµСЂРµРґРЅСЏ';
+$s_next = 'РќР°СЃС‚СѓРїРЅР°';
+$s_first = 'РџРµСЂС€Р°';
+$s_last = 'РћСЃС‚Р°РЅРЅСЏ';
+$s_start_date = 'РџРѕС‡Р°С‚РєРѕРІР° РґР°С‚Р°';
+$s_end_date = 'РљС–РЅС†РµРІР° РґР°С‚Р°';
+$s_use_date_filters = 'Р¤С–Р»СЊС‚СЂСѓРІР°С‚Рё Р·Р° РґР°С‚Р°РјРё';
+$s_yes = 'РўР°Рє';
+$s_no = 'РќС–';
+$s_open_filters = 'Р РµРґР°РіСѓРІР°С‚Рё С„С–Р»СЊС‚СЂ';
+$s_or_unassigned = 'РђР±Рѕ РЅРµРїСЂРёР·РЅР°С‡РµРЅР°';
 $s_ok = 'OK';
-$s_select_all = 'Виділити всі';
+$s_select_all = 'Р’РёРґС–Р»РёС‚Рё РІСЃС–';
 
 # stored query strings
-$s_use_query = 'Застосувати фільтр';
-$s_delete_query = 'Видалити фільтр';
-$s_query_deleted = 'Фільтр видалений';
-$s_save_query = 'Зберегти поточний фільтр';
-$s_reset_query = 'Скинути фільтр';
-$s_query_name = 'Назва фільтру';
-$s_query_exists = 'Такий запит, здається, вже існує.';
-$s_query_dupe_name = 'Фільтр з такою назвою вже існує. Дайте іншу назву цьому фільтру.';
-$s_query_blank_name = 'Кожний фільтр має мати назву. Вкажіть назву фільтра.';
-$s_query_store_error = 'Під час збереження фільтра трапилась помилка.';
-$s_open_queries = 'Фільтри';
-$s_query_delete_msg = 'Ви справді хочете видалити цей фільтр?';
+$s_use_query = 'Р—Р°СЃС‚РѕСЃСѓРІР°С‚Рё С„С–Р»СЊС‚СЂ';
+$s_delete_query = 'Р’РёРґР°Р»РёС‚Рё С„С–Р»СЊС‚СЂ';
+$s_query_deleted = 'Р¤С–Р»СЊС‚СЂ РІРёРґР°Р»РµРЅРёР№';
+$s_save_query = 'Р—Р±РµСЂРµРіС‚Рё РїРѕС‚РѕС‡РЅРёР№ С„С–Р»СЊС‚СЂ';
+$s_reset_query = 'РЎРєРёРЅСѓС‚Рё С„С–Р»СЊС‚СЂ';
+$s_query_name = 'РќР°Р·РІР° С„С–Р»СЊС‚СЂСѓ';
+$s_query_exists = 'РўР°РєРёР№ Р·Р°РїРёС‚, Р·РґР°С”С‚СЊСЃСЏ, РІР¶Рµ С–СЃРЅСѓС”.';
+$s_query_dupe_name = 'Р¤С–Р»СЊС‚СЂ Р· С‚Р°РєРѕСЋ РЅР°Р·РІРѕСЋ РІР¶Рµ С–СЃРЅСѓС”. Р”Р°Р№С‚Рµ С–РЅС€Сѓ РЅР°Р·РІСѓ С†СЊРѕРјСѓ С„С–Р»СЊС‚СЂСѓ.';
+$s_query_blank_name = 'РљРѕР¶РЅРёР№ С„С–Р»СЊС‚СЂ РјР°С” РјР°С‚Рё РЅР°Р·РІСѓ. Р’РєР°Р¶С–С‚СЊ РЅР°Р·РІСѓ С„С–Р»СЊС‚СЂР°.';
+$s_query_store_error = 'РџС–Рґ С‡Р°СЃ Р·Р±РµСЂРµР¶РµРЅРЅСЏ С„С–Р»СЊС‚СЂР° С‚СЂР°РїРёР»Р°СЃСЊ РїРѕРјРёР»РєР°.';
+$s_open_queries = 'Р¤С–Р»СЊС‚СЂРё';
+$s_query_delete_msg = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ С„С–Р»СЊС‚СЂ?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'Спрощений перегляд';
-$s_viewing_bug_advanced_details_title = 'Детальний перегляд проблеми';
-$s_product_build = 'Збірка продукту';
-$s_system_profile = 'Опис системи';
-$s_update_bug_button = 'Оновити проблему';
-$s_bug_assign_to_button = 'Кому призначити:';
-$s_bug_status_to_button = 'Змінити статус на:';
-$s_reopen_bug_button = 'Відкрити проблему знову';
-$s_move_bug_button = 'Перенести проблему';
-$s_attached_files = 'Прикріплені файли';
-$s_publish = 'Опублікувати';
-$s_cached = 'В кеші';
+$s_view_simple_link = 'РЎРїСЂРѕС‰РµРЅРёР№ РїРµСЂРµРіР»СЏРґ';
+$s_viewing_bug_advanced_details_title = 'Р”РµС‚Р°Р»СЊРЅРёР№ РїРµСЂРµРіР»СЏРґ РїСЂРѕР±Р»РµРјРё';
+$s_product_build = 'Р—Р±С–СЂРєР° РїСЂРѕРґСѓРєС‚Сѓ';
+$s_system_profile = 'РћРїРёСЃ СЃРёСЃС‚РµРјРё';
+$s_update_bug_button = 'РћРЅРѕРІРёС‚Рё РїСЂРѕР±Р»РµРјСѓ';
+$s_bug_assign_to_button = 'РљРѕРјСѓ РїСЂРёР·РЅР°С‡РёС‚Рё:';
+$s_bug_status_to_button = 'Р—РјС–РЅРёС‚Рё СЃС‚Р°С‚СѓСЃ РЅР°:';
+$s_reopen_bug_button = 'Р’С–РґРєСЂРёС‚Рё РїСЂРѕР±Р»РµРјСѓ Р·РЅРѕРІСѓ';
+$s_move_bug_button = 'РџРµСЂРµРЅРµСЃС‚Рё РїСЂРѕР±Р»РµРјСѓ';
+$s_attached_files = 'РџСЂРёРєСЂС–РїР»РµРЅС– С„Р°Р№Р»Рё';
+$s_publish = 'РћРїСѓР±Р»С–РєСѓРІР°С‚Рё';
+$s_cached = 'Р’ РєРµС€С–';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Розширений перегляд';
-$s_viewing_bug_simple_details_title = 'Спрощений перегляд проблеми';
+$s_view_advanced_link = 'Р РѕР·С€РёСЂРµРЅРёР№ РїРµСЂРµРіР»СЏРґ';
+$s_viewing_bug_simple_details_title = 'РЎРїСЂРѕС‰РµРЅРёР№ РїРµСЂРµРіР»СЏРґ РїСЂРѕР±Р»РµРјРё';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'За цією проблемою ніхто не стежить.';
-$s_users_monitoring_bug = 'За цією проблемою стежать наступні користувачі';
-$s_monitoring_user_list = 'Список користувачів';
+$s_no_users_monitoring_bug = 'Р—Р° С†С–С”СЋ РїСЂРѕР±Р»РµРјРѕСЋ РЅС–С…С‚Рѕ РЅРµ СЃС‚РµР¶РёС‚СЊ.';
+$s_users_monitoring_bug = 'Р—Р° С†С–С”СЋ РїСЂРѕР±Р»РµРјРѕСЋ СЃС‚РµР¶Р°С‚СЊ РЅР°СЃС‚СѓРїРЅС– РєРѕСЂРёСЃС‚СѓРІР°С‡С–';
+$s_monitoring_user_list = 'РЎРїРёСЃРѕРє РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'У цієї проблеми немає спонсорів.';
-$s_users_sponsoring_bug = 'Спонсори проблеми';
-$s_sponsors_list = 'Список спонсорів';
-$s_total_sponsorship_amount = 'Всього спонсується = %s';
+$s_no_users_sponsoring_bug = 'РЈ С†С–С”С— РїСЂРѕР±Р»РµРјРё РЅРµРјР°С” СЃРїРѕРЅСЃРѕСЂС–РІ.';
+$s_users_sponsoring_bug = 'РЎРїРѕРЅСЃРѕСЂРё РїСЂРѕР±Р»РµРјРё';
+$s_sponsors_list = 'РЎРїРёСЃРѕРє СЃРїРѕРЅСЃРѕСЂС–РІ';
+$s_total_sponsorship_amount = 'Р’СЃСЊРѕРіРѕ СЃРїРѕРЅСЃСѓС”С‚СЊСЃСЏ = %s';
 
 # custom field strings
-$s_add_custom_field_button = 'Створити власне поле';
-$s_delete_custom_field_button = 'Видалити власне поле';
-$s_delete_custom_field_everywhere = 'Видалити власне поле всюди';
-$s_update_custom_field_button = 'Зберегти власне поле';
-$s_add_existing_custom_field = 'Додати це існуюче власне поле';
-$s_edit_custom_field_title = 'Редагування власного поля';
-$s_custom_field = 'Поле';
-$s_custom_fields_setup = 'Власні поля';
-$s_custom_field_name = 'Назва';
-$s_custom_field_project_count = 'Кількість проектів';
-$s_custom_field_type = 'Тип';
-$s_custom_field_possible_values = 'Допустимі значення';
-$s_custom_field_default_value = 'Початкове значення';
-$s_custom_field_valid_regexp = 'Регулярний вираз';
-$s_custom_field_access_level_r = 'Право читання';
-$s_custom_field_access_level_rw = 'Право запису';
-$s_custom_field_length_min = 'Мінімальна довжина';
-$s_custom_field_length_max = 'Максимальна довжина';
-$s_custom_field_advanced = 'Показувати тільки в детальному перегляді';
-$s_custom_field_display_report = 'Показувати у вікні нової проблеми';
-$s_custom_field_display_update = 'Показувати у вікні редагування проблеми';
-$s_custom_field_display_resolved = 'Показувати у вікні вирішення проблеми';
-$s_custom_field_display_closed = 'Показувати у вікні закриття проблеми';
-$s_custom_field_require_report = 'Вимагати при створенні';
-$s_custom_field_require_update = 'Вимагати при редагуванні';
-$s_custom_field_require_resolved = 'Вимагати при вирішенні';
-$s_custom_field_require_closed = 'Вимагати при закритті';
+$s_add_custom_field_button = 'РЎС‚РІРѕСЂРёС‚Рё РІР»Р°СЃРЅРµ РїРѕР»Рµ';
+$s_delete_custom_field_button = 'Р’РёРґР°Р»РёС‚Рё РІР»Р°СЃРЅРµ РїРѕР»Рµ';
+$s_delete_custom_field_everywhere = 'Р’РёРґР°Р»РёС‚Рё РІР»Р°СЃРЅРµ РїРѕР»Рµ РІСЃСЋРґРё';
+$s_update_custom_field_button = 'Р—Р±РµСЂРµРіС‚Рё РІР»Р°СЃРЅРµ РїРѕР»Рµ';
+$s_add_existing_custom_field = 'Р”РѕРґР°С‚Рё С†Рµ С–СЃРЅСѓСЋС‡Рµ РІР»Р°СЃРЅРµ РїРѕР»Рµ';
+$s_edit_custom_field_title = 'Р РµРґР°РіСѓРІР°РЅРЅСЏ РІР»Р°СЃРЅРѕРіРѕ РїРѕР»СЏ';
+$s_custom_field = 'РџРѕР»Рµ';
+$s_custom_fields_setup = 'Р’Р»Р°СЃРЅС– РїРѕР»СЏ';
+$s_custom_field_name = 'РќР°Р·РІР°';
+$s_custom_field_project_count = 'РљС–Р»СЊРєС–СЃС‚СЊ РїСЂРѕРµРєС‚С–РІ';
+$s_custom_field_type = 'РўРёРї';
+$s_custom_field_possible_values = 'Р”РѕРїСѓСЃС‚РёРјС– Р·РЅР°С‡РµРЅРЅСЏ';
+$s_custom_field_default_value = 'РџРѕС‡Р°С‚РєРѕРІРµ Р·РЅР°С‡РµРЅРЅСЏ';
+$s_custom_field_valid_regexp = 'Р РµРіСѓР»СЏСЂРЅРёР№ РІРёСЂР°Р·';
+$s_custom_field_access_level_r = 'РџСЂР°РІРѕ С‡РёС‚Р°РЅРЅСЏ';
+$s_custom_field_access_level_rw = 'РџСЂР°РІРѕ Р·Р°РїРёСЃСѓ';
+$s_custom_field_length_min = 'РњС–РЅС–РјР°Р»СЊРЅР° РґРѕРІР¶РёРЅР°';
+$s_custom_field_length_max = 'РњР°РєСЃРёРјР°Р»СЊРЅР° РґРѕРІР¶РёРЅР°';
+$s_custom_field_advanced = 'РџРѕРєР°Р·СѓРІР°С‚Рё С‚С–Р»СЊРєРё РІ РґРµС‚Р°Р»СЊРЅРѕРјСѓ РїРµСЂРµРіР»СЏРґС–';
+$s_custom_field_display_report = 'РџРѕРєР°Р·СѓРІР°С‚Рё Сѓ РІС–РєРЅС– РЅРѕРІРѕС— РїСЂРѕР±Р»РµРјРё';
+$s_custom_field_display_update = 'РџРѕРєР°Р·СѓРІР°С‚Рё Сѓ РІС–РєРЅС– СЂРµРґР°РіСѓРІР°РЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_custom_field_display_resolved = 'РџРѕРєР°Р·СѓРІР°С‚Рё Сѓ РІС–РєРЅС– РІРёСЂС–С€РµРЅРЅСЏ РїСЂРѕР±Р»РµРјРё';
+$s_custom_field_display_closed = 'РџРѕРєР°Р·СѓРІР°С‚Рё Сѓ РІС–РєРЅС– Р·Р°РєСЂРёС‚С‚СЏ РїСЂРѕР±Р»РµРјРё';
+$s_custom_field_require_report = 'Р’РёРјР°РіР°С‚Рё РїСЂРё СЃС‚РІРѕСЂРµРЅРЅС–';
+$s_custom_field_require_update = 'Р’РёРјР°РіР°С‚Рё РїСЂРё СЂРµРґР°РіСѓРІР°РЅРЅС–';
+$s_custom_field_require_resolved = 'Р’РёРјР°РіР°С‚Рё РїСЂРё РІРёСЂС–С€РµРЅРЅС–';
+$s_custom_field_require_closed = 'Р’РёРјР°РіР°С‚Рё РїСЂРё Р·Р°РєСЂРёС‚С‚С–';
 
-$s_custom_field_sequence = 'Послідовність';
-$s_custom_field_type_enum_string = '0:Рядок,1:Ціле,2:Дійсне,3:Перелік,4:Email,5:Опція,6:Список,7:Багатоваріантний список,8:Date';
+$s_custom_field_sequence = 'РџРѕСЃР»С–РґРѕРІРЅС–СЃС‚СЊ';
+$s_custom_field_type_enum_string = '0:Р СЏРґРѕРє,1:Р¦С–Р»Рµ,2:Р”С–Р№СЃРЅРµ,3:РџРµСЂРµР»С–Рє,4:Email,5:РћРїС†С–СЏ,6:РЎРїРёСЃРѕРє,7:Р‘Р°РіР°С‚РѕРІР°СЂС–Р°РЅС‚РЅРёР№ СЃРїРёСЃРѕРє,8:Date';
 
-$s_confirm_used_custom_field_deletion = 'Це поле пов\'язане принаймні з одним проектом.  Якщо продовжите, всі значення цього поля будуть видалені.  Цю дію не можна відмінити.  Якщо ви не збираєтесь видаляти це поле, то просто клацніть в браузері кнопку Назад (Back).  Щоб продовжити, натисніть кнопку нижче';
-$s_confirm_custom_field_deletion = 'Ви справді хочете видалити це поле і всі пов\'язані значення?';
-$s_field_delete_button = 'Видалити поле';
+$s_confirm_used_custom_field_deletion = 'Р¦Рµ РїРѕР»Рµ РїРѕРІ\'СЏР·Р°РЅРµ РїСЂРёРЅР°Р№РјРЅС– Р· РѕРґРЅРёРј РїСЂРѕРµРєС‚РѕРј.  РЇРєС‰Рѕ РїСЂРѕРґРѕРІР¶РёС‚Рµ, РІСЃС– Р·РЅР°С‡РµРЅРЅСЏ С†СЊРѕРіРѕ РїРѕР»СЏ Р±СѓРґСѓС‚СЊ РІРёРґР°Р»РµРЅС–.  Р¦СЋ РґС–СЋ РЅРµ РјРѕР¶РЅР° РІС–РґРјС–РЅРёС‚Рё.  РЇРєС‰Рѕ РІРё РЅРµ Р·Р±РёСЂР°С”С‚РµСЃСЊ РІРёРґР°Р»СЏС‚Рё С†Рµ РїРѕР»Рµ, С‚Рѕ РїСЂРѕСЃС‚Рѕ РєР»Р°С†РЅС–С‚СЊ РІ Р±СЂР°СѓР·РµСЂС– РєРЅРѕРїРєСѓ РќР°Р·Р°Рґ (Back).  Р©РѕР± РїСЂРѕРґРѕРІР¶РёС‚Рё, РЅР°С‚РёСЃРЅС–С‚СЊ РєРЅРѕРїРєСѓ РЅРёР¶С‡Рµ';
+$s_confirm_custom_field_deletion = 'Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†Рµ РїРѕР»Рµ С– РІСЃС– РїРѕРІ\'СЏР·Р°РЅС– Р·РЅР°С‡РµРЅРЅСЏ?';
+$s_field_delete_button = 'Р’РёРґР°Р»РёС‚Рё РїРѕР»Рµ';
 
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
 
-$s_hide_status = 'Ховати';
-$s_filter_closed = "Закриті";
-$s_filter_resolved = "Вирішені";
-$s_hide_closed = "Сховати закриті";
-$s_hide_resolved = "Сховати вирішені";
-$s_and_above = 'і вище';
-$s_advanced_filters = 'Розширені фільтри';
-$s_simple_filters = 'Прості фільтри';
-$s_monitored_by = 'Хто стежить';
+$s_hide_status = 'РҐРѕРІР°С‚Рё';
+$s_filter_closed = "Р—Р°РєСЂРёС‚С–";
+$s_filter_resolved = "Р’РёСЂС–С€РµРЅС–";
+$s_hide_closed = "РЎС…РѕРІР°С‚Рё Р·Р°РєСЂРёС‚С–";
+$s_hide_resolved = "РЎС…РѕРІР°С‚Рё РІРёСЂС–С€РµРЅС–";
+$s_and_above = 'С– РІРёС‰Рµ';
+$s_advanced_filters = 'Р РѕР·С€РёСЂРµРЅС– С„С–Р»СЊС‚СЂРё';
+$s_simple_filters = 'РџСЂРѕСЃС‚С– С„С–Р»СЊС‚СЂРё';
+$s_monitored_by = 'РҐС‚Рѕ СЃС‚РµР¶РёС‚СЊ';
 
-$s_attachments = "прикріплення";
-$s_attachment_alt = "П";
+$s_attachments = "РїСЂРёРєСЂС–РїР»РµРЅРЅСЏ";
+$s_attachment_alt = "Рџ";
 
 # PHPMailer
 $s_phpmailer_language = 'uk';
 
 # Sponsorship Strings
-$s_sponsors = 'Спонсорів: %d';
-$s_sponsorship_added = 'Спонсорство додане';
-$s_sponsorship_updated = 'Спонсорство оновлене';
-$s_sponsorship_deleted = 'Спонсорство видалене';
+$s_sponsors = 'РЎРїРѕРЅСЃРѕСЂС–РІ: %d';
+$s_sponsorship_added = 'РЎРїРѕРЅСЃРѕСЂСЃС‚РІРѕ РґРѕРґР°РЅРµ';
+$s_sponsorship_updated = 'РЎРїРѕРЅСЃРѕСЂСЃС‚РІРѕ РѕРЅРѕРІР»РµРЅРµ';
+$s_sponsorship_deleted = 'РЎРїРѕРЅСЃРѕСЂСЃС‚РІРѕ РІРёРґР°Р»РµРЅРµ';
 $s_sponsorship_paid = 'Sponsorship Paid';
-$s_sponsorship_more_info = 'Докладніше про спонсорство';
+$s_sponsorship_more_info = 'Р”РѕРєР»Р°РґРЅС–С€Рµ РїСЂРѕ СЃРїРѕРЅСЃРѕСЂСЃС‚РІРѕ';
 $s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1203,37 +1203,37 @@ $s_sponsorship_total = 'Sponsorship Total';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Хронологія';
+$s_changelog = 'РҐСЂРѕРЅРѕР»РѕРіС–СЏ';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-$s_bug = "проблема";
-$s_add_new_relationship = "Новий зв'язок";
-$s_add_new_relationship_button = "Додати";
-$s_this_bug = "Поточна проблема";
-$s_relationship_added = "Зв'язок доданий";
-$s_relationship_deleted = "Зв'язок видалений";
-$s_no_relationship = "немає зв'язків";
-$s_relationship_replaced = "Зв'язок замінений";
-$s_replace_relationship_button = "Замінити";
-$s_replace_relationship_sure_msg = "Між цими проблемами вже є зв'язок. Ви справді хочете замінити його?";
-$s_relationship_with_parent = "Зв'язок з батьківською проблемою";
-$s_delete_relationship_button = "Видалити";
-$s_delete_relationship_sure_msg = "Ви справді хочете видалити цей зв'язок?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Не всі нащадки цієї проблеми були вирішені чи закриті.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>УВАГА</b>. Не всі нащадки цієї проблеми були вирішені чи закриті.<br>Перед <b>вирішенням/закриттям</b> батьківської проблеми потрібно вирішити/закрити всі проблеми-нащадки.";
-$s_create_child_bug_button = "Створити клон";
-$s_bug_cloned_to = "Проблему склоновано";
-$s_bug_created_from = "Проблему згенеровано з";
+$s_bug = "РїСЂРѕР±Р»РµРјР°";
+$s_add_new_relationship = "РќРѕРІРёР№ Р·РІ'СЏР·РѕРє";
+$s_add_new_relationship_button = "Р”РѕРґР°С‚Рё";
+$s_this_bug = "РџРѕС‚РѕС‡РЅР° РїСЂРѕР±Р»РµРјР°";
+$s_relationship_added = "Р—РІ'СЏР·РѕРє РґРѕРґР°РЅРёР№";
+$s_relationship_deleted = "Р—РІ'СЏР·РѕРє РІРёРґР°Р»РµРЅРёР№";
+$s_no_relationship = "РЅРµРјР°С” Р·РІ'СЏР·РєС–РІ";
+$s_relationship_replaced = "Р—РІ'СЏР·РѕРє Р·Р°РјС–РЅРµРЅРёР№";
+$s_replace_relationship_button = "Р—Р°РјС–РЅРёС‚Рё";
+$s_replace_relationship_sure_msg = "РњС–Р¶ С†РёРјРё РїСЂРѕР±Р»РµРјР°РјРё РІР¶Рµ С” Р·РІ'СЏР·РѕРє. Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ Р·Р°РјС–РЅРёС‚Рё Р№РѕРіРѕ?";
+$s_relationship_with_parent = "Р—РІ'СЏР·РѕРє Р· Р±Р°С‚СЊРєС–РІСЃСЊРєРѕСЋ РїСЂРѕР±Р»РµРјРѕСЋ";
+$s_delete_relationship_button = "Р’РёРґР°Р»РёС‚Рё";
+$s_delete_relationship_sure_msg = "Р’Рё СЃРїСЂР°РІРґС– С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё С†РµР№ Р·РІ'СЏР·РѕРє?";
+$s_relationship_warning_blocking_bugs_not_resolved = "РќРµ РІСЃС– РЅР°С‰Р°РґРєРё С†С–С”С— РїСЂРѕР±Р»РµРјРё Р±СѓР»Рё РІРёСЂС–С€РµРЅС– С‡Рё Р·Р°РєСЂРёС‚С–.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>РЈР’РђР“Рђ</b>. РќРµ РІСЃС– РЅР°С‰Р°РґРєРё С†С–С”С— РїСЂРѕР±Р»РµРјРё Р±СѓР»Рё РІРёСЂС–С€РµРЅС– С‡Рё Р·Р°РєСЂРёС‚С–.<br>РџРµСЂРµРґ <b>РІРёСЂС–С€РµРЅРЅСЏРј/Р·Р°РєСЂРёС‚С‚СЏРј</b> Р±Р°С‚СЊРєС–РІСЃСЊРєРѕС— РїСЂРѕР±Р»РµРјРё РїРѕС‚СЂС–Р±РЅРѕ РІРёСЂС–С€РёС‚Рё/Р·Р°РєСЂРёС‚Рё РІСЃС– РїСЂРѕР±Р»РµРјРё-РЅР°С‰Р°РґРєРё.";
+$s_create_child_bug_button = "РЎС‚РІРѕСЂРёС‚Рё РєР»РѕРЅ";
+$s_bug_cloned_to = "РџСЂРѕР±Р»РµРјСѓ СЃРєР»РѕРЅРѕРІР°РЅРѕ";
+$s_bug_created_from = "РџСЂРѕР±Р»РµРјСѓ Р·РіРµРЅРµСЂРѕРІР°РЅРѕ Р·";
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Діаграма зв'язків";
-$s_relation_graph = "Діаграма зв'язків";
-$s_dependency_graph = "Діаграма залежностей";
-$s_vertical = "Вертикально";
-$s_horizontal = "Горизонтально";
-$s_view_issue = "Переглянути проблему";
+$s_viewing_bug_relationship_graph_title = "Р”С–Р°РіСЂР°РјР° Р·РІ'СЏР·РєС–РІ";
+$s_relation_graph = "Р”С–Р°РіСЂР°РјР° Р·РІ'СЏР·РєС–РІ";
+$s_dependency_graph = "Р”С–Р°РіСЂР°РјР° Р·Р°Р»РµР¶РЅРѕСЃС‚РµР№";
+$s_vertical = "Р’РµСЂС‚РёРєР°Р»СЊРЅРѕ";
+$s_horizontal = "Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕ";
+$s_view_issue = "РџРµСЂРµРіР»СЏРЅСѓС‚Рё РїСЂРѕР±Р»РµРјСѓ";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

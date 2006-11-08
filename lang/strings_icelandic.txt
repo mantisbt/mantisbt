@@ -11,436 +11,436 @@
 	# Icelandic strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: siebrand $
-	# $Date: 2006-09-30 09:31:49 $
+	# $Revision: 1.15 $
+	# $Author: achumakov $
+	# $Date: 2006-11-08 13:32:45 $
 	#
-	# $Id: strings_icelandic.txt,v 1.14 2006-09-30 09:31:49 siebrand Exp $
+	# $Id: strings_icelandic.txt,v 1.15 2006-11-08 13:32:45 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'ISO-8859-1';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Færa';
+$s_actiongroup_menu_move = 'FÃ¦ra';
 $s_actiongroup_menu_copy = 'Afrita';
-$s_actiongroup_menu_assign = 'Úthlutağ';
-$s_actiongroup_menu_close = 'Lokağ';
-$s_actiongroup_menu_delete = 'Eyğa';
+$s_actiongroup_menu_assign = 'ÃšthlutaÃ°';
+$s_actiongroup_menu_close = 'LokaÃ°';
+$s_actiongroup_menu_delete = 'EyÃ°a';
 $s_actiongroup_menu_resolve = 'Leyst';
-$s_actiongroup_menu_update_priority = 'Uppfæra forgang';
-$s_actiongroup_menu_update_status = 'Stağa uppfærslu';
-$s_actiongroup_menu_update_view_status = 'Skoğa uppfærğa stöğu';
-$s_actiongroup_menu_update_category = 'Uppfæra flokkun';
-$s_actiongroup_menu_set_sticky = 'Líming á/af';
-$s_actiongroup_menu_update_field = 'Uppfæra %s';
-$s_actiongroup_bugs = 'Sérvalin atriği';
+$s_actiongroup_menu_update_priority = 'UppfÃ¦ra forgang';
+$s_actiongroup_menu_update_status = 'StaÃ°a uppfÃ¦rslu';
+$s_actiongroup_menu_update_view_status = 'SkoÃ°a uppfÃ¦rÃ°a stÃ¶Ã°u';
+$s_actiongroup_menu_update_category = 'UppfÃ¦ra flokkun';
+$s_actiongroup_menu_set_sticky = 'LÃ­ming Ã¡/af';
+$s_actiongroup_menu_update_field = 'UppfÃ¦ra %s';
+$s_actiongroup_bugs = 'SÃ©rvalin atriÃ°i';
 
 # new strings:
-$s_all_projects = 'Öll verkefni';
-$s_move_bugs = 'Færa atriği';
-$s_operation_successful = 'Ağgerğ tókst.';
-$s_date_order = 'Rağa eftir dagsetningu';
-$s_print_all_bug_page_link = 'Prenta skırslu';
+$s_all_projects = 'Ã–ll verkefni';
+$s_move_bugs = 'FÃ¦ra atriÃ°i';
+$s_operation_successful = 'AÃ°gerÃ° tÃ³kst.';
+$s_date_order = 'RaÃ°a eftir dagsetningu';
+$s_print_all_bug_page_link = 'Prenta skÃ½rslu';
 $s_csv_export = 'CSV flutningur';
-$s_login_anonymously = 'Nafnlaus innskráning';
+$s_login_anonymously = 'Nafnlaus innskrÃ¡ning';
 $s_anonymous = 'Anonymous'; 'Nafnlaus';
-$s_jump_to_bugnotes = 'Fara í athugasemd';
-$s_public_project_msg = 'ALMENNT verkefni. Allir notendur hafa ağgang.';
-$s_private_project_msg = 'LÆST verkefni, sem ağeins stjórnendur og sérstaklega valdir notendur hafa ağgang.';
-$s_access_level_project = 'Ağgangsstig verkefnis';
-$s_view_submitted_bug_link = 'Skoğa tilkynningar';
-$s_assigned_projects = 'Úthlutuğ verkefni';
-$s_unassigned_projects = 'Óúthlutuğ verkefni';
+$s_jump_to_bugnotes = 'Fara Ã­ athugasemd';
+$s_public_project_msg = 'ALMENNT verkefni. Allir notendur hafa aÃ°gang.';
+$s_private_project_msg = 'LÃ†ST verkefni, sem aÃ°eins stjÃ³rnendur og sÃ©rstaklega valdir notendur hafa aÃ°gang.';
+$s_access_level_project = 'AÃ°gangsstig verkefnis';
+$s_view_submitted_bug_link = 'SkoÃ°a tilkynningar';
+$s_assigned_projects = 'ÃšthlutuÃ° verkefni';
+$s_unassigned_projects = 'Ã“ÃºthlutuÃ° verkefni';
 $s_print = 'Prenta';
 $s_jump = 'Fara til';
 $s_copy_users = 'Afrita notendur';
-$s_copy_categories_from = 'Afrita flokka frá';
+$s_copy_categories_from = 'Afrita flokka frÃ¡';
 $s_copy_categories_to = 'Afrita flokka til';
-$s_copy_users_from = 'Afrita notendur frá';
+$s_copy_users_from = 'Afrita notendur frÃ¡';
 $s_copy_users_to = 'Afrita notendur til';
-$s_bug_history = 'Ferill atriğa';
-$s_field = 'Svæği';
+$s_bug_history = 'Ferill atriÃ°a';
+$s_field = 'SvÃ¦Ã°i';
 $s_old_value = 'Gamalt gildi';
-$s_new_value = 'Nıtt gildi';
+$s_new_value = 'NÃ½tt gildi';
 $s_date_modified = 'Breytingar dagsetning';
 $s_bugnote = 'Athugasemdir';
 $s_change = 'Breyting';
-$s_bugnote_view_state = 'Skoğa stöğu athugasemda';
-$s_bug_monitor = 'Vöktun útgáfu';
-$s_bug_end_monitor = 'Vöktun lokaútgáfu';
+$s_bugnote_view_state = 'SkoÃ°a stÃ¶Ã°u athugasemda';
+$s_bug_monitor = 'VÃ¶ktun ÃºtgÃ¡fu';
+$s_bug_end_monitor = 'VÃ¶ktun lokaÃºtgÃ¡fu';
 $s_announcement = 'Tilkynning';
-$s_stays_on_top = 'Verğur efst';
-$s_delete_bugnote_button = 'Eyğa athugasemd';
-$s_delete_bugnote_sure_msg = 'Ertu viss um ağ vilja eyğa şessari athugasemd?';
+$s_stays_on_top = 'VerÃ°ur efst';
+$s_delete_bugnote_button = 'EyÃ°a athugasemd';
+$s_delete_bugnote_sure_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essari athugasemd?';
 $s_bug_relationships = 'Tengsl';
-$s_empty_password_sure_msg = 'Notandinn hefur ekkert lykilorğ. Ertu viss um ağ şú viljir şağ?';
-$s_empty_password_button = 'Ekkert lykilorğ notağ';
+$s_empty_password_sure_msg = 'Notandinn hefur ekkert lykilorÃ°. Ertu viss um aÃ° Ã¾Ãº viljir Ã¾aÃ°?';
+$s_empty_password_button = 'Ekkert lykilorÃ° notaÃ°';
 
 $s_duplicate_of = 'afrit af';
 $s_has_duplicate = 'hefur afrit';
-$s_related_to = 'tengt viğ';
-$s_dependant_on = 'háğur af';
-$s_blocks = 'tálmağur af';
+$s_related_to = 'tengt viÃ°';
+$s_dependant_on = 'hÃ¡Ã°ur af';
+$s_blocks = 'tÃ¡lmaÃ°ur af';
 
-$s_new_bug = 'Nıtt atriği';
-$s_bugnote_added = 'Bætt viğ athugasemd';
-$s_bugnote_edited = 'Athugasemd skrifuğ';
+$s_new_bug = 'NÃ½tt atriÃ°i';
+$s_bugnote_added = 'BÃ¦tt viÃ° athugasemd';
+$s_bugnote_edited = 'Athugasemd skrifuÃ°';
 $s_bugnote_deleted = 'Athugasemd eytt';
-$s_summary_updated = 'Yfirlit uppfært';
-$s_description_updated = 'Lısing uppfærğ';
-$s_additional_information_updated = 'Viğbótar upplısingar uppfærğar';
-$s_steps_to_reproduce_updated = 'Uppfærğ skref til endursköpunar';
-$s_file_added = 'Viğbótar skjal';
+$s_summary_updated = 'Yfirlit uppfÃ¦rt';
+$s_description_updated = 'LÃ½sing uppfÃ¦rÃ°';
+$s_additional_information_updated = 'ViÃ°bÃ³tar upplÃ½singar uppfÃ¦rÃ°ar';
+$s_steps_to_reproduce_updated = 'UppfÃ¦rÃ° skref til endurskÃ¶punar';
+$s_file_added = 'ViÃ°bÃ³tar skjal';
 $s_file_deleted = 'Skjali eytt';
-$s_bug_deleted = 'Útgáfu eytt';
+$s_bug_deleted = 'ÃštgÃ¡fu eytt';
 
-$s_make_private = 'Læsa skrá';
-$s_make_public = 'Almenn skrá';
+$s_make_private = 'LÃ¦sa skrÃ¡';
+$s_make_public = 'Almenn skrÃ¡';
 
-$s_create_new_project_link = 'Nıtt verkefni';
+$s_create_new_project_link = 'NÃ½tt verkefni';
 
-$s_login_link = 'Innskráning';
+$s_login_link = 'InnskrÃ¡ning';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Şú hafğir ekki leyfi til ağ framkvæma şessa ağgerğ á eftirfarandi atriğum: ';
-$s_bug_actiongroup_access = 'Şú hafğir ekki leyfi til ağ framkvæma şessa ağgerğ.';
-$s_bug_actiongroup_status = 'Şessu atriği er ekki hægt ağ breyta í şessa stöğu.';
-$s_bug_actiongroup_category = 'Şessu atriği er ekki hægt ağ breyta í şennan flokk.';
-$s_close_bugs_conf_msg = 'Ertu viss um ağ vilja loka şessu atriği?';
-$s_delete_bugs_conf_msg = 'Ertu viss um ağ vilja eyğa şessu atriği?';
-$s_move_bugs_conf_msg = 'Færa atriği til';
-$s_copy_bugs_conf_msg = 'Afrita atriği til';
-$s_assign_bugs_conf_msg = 'Úthluta atriği til';
-$s_resolve_bugs_conf_msg = 'Velja úrlausn atriğis';
-$s_priority_bugs_conf_msg = 'Velja forgang atriğis';
-$s_status_bugs_conf_msg = 'Velja stöğu atriğis';
-$s_view_status_bugs_conf_msg = 'Velja uppfærğa stöğu atriğis';
-$s_category_bugs_conf_msg = 'Velja flokk atriğis';
-$s_set_sticky_bugs_conf_msg = 'Ertu viss um ağ vilja setja límingu atriğis á/af?';
-$s_close_group_bugs_button = 'Loka atriği';
-$s_delete_group_bugs_button = 'Eyğa atriği';
-$s_move_group_bugs_button = 'Færa atriği';
-$s_copy_group_bugs_button = 'Afrita atriği';
-$s_assign_group_bugs_button = 'Úthluta atriği';
-$s_resolve_group_bugs_button = 'Leysa atriği';
-$s_priority_group_bugs_button = 'Uppfæra forgang';
-$s_status_group_bugs_button = 'Uppfæra stöğu';
-$s_category_group_bugs_button = 'Uppfæra flokk';
-$s_view_status_group_bugs_button = 'Uppfæra stöğu atriğis';
-$s_set_sticky_group_bugs_button = 'Setja límingu á/af';
+$s_bug_actiongroup_failed = 'ÃÃº hafÃ°ir ekki leyfi til aÃ° framkvÃ¦ma Ã¾essa aÃ°gerÃ° Ã¡ eftirfarandi atriÃ°um: ';
+$s_bug_actiongroup_access = 'ÃÃº hafÃ°ir ekki leyfi til aÃ° framkvÃ¦ma Ã¾essa aÃ°gerÃ°.';
+$s_bug_actiongroup_status = 'Ãessu atriÃ°i er ekki hÃ¦gt aÃ° breyta Ã­ Ã¾essa stÃ¶Ã°u.';
+$s_bug_actiongroup_category = 'Ãessu atriÃ°i er ekki hÃ¦gt aÃ° breyta Ã­ Ã¾ennan flokk.';
+$s_close_bugs_conf_msg = 'Ertu viss um aÃ° vilja loka Ã¾essu atriÃ°i?';
+$s_delete_bugs_conf_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essu atriÃ°i?';
+$s_move_bugs_conf_msg = 'FÃ¦ra atriÃ°i til';
+$s_copy_bugs_conf_msg = 'Afrita atriÃ°i til';
+$s_assign_bugs_conf_msg = 'Ãšthluta atriÃ°i til';
+$s_resolve_bugs_conf_msg = 'Velja Ãºrlausn atriÃ°is';
+$s_priority_bugs_conf_msg = 'Velja forgang atriÃ°is';
+$s_status_bugs_conf_msg = 'Velja stÃ¶Ã°u atriÃ°is';
+$s_view_status_bugs_conf_msg = 'Velja uppfÃ¦rÃ°a stÃ¶Ã°u atriÃ°is';
+$s_category_bugs_conf_msg = 'Velja flokk atriÃ°is';
+$s_set_sticky_bugs_conf_msg = 'Ertu viss um aÃ° vilja setja lÃ­mingu atriÃ°is Ã¡/af?';
+$s_close_group_bugs_button = 'Loka atriÃ°i';
+$s_delete_group_bugs_button = 'EyÃ°a atriÃ°i';
+$s_move_group_bugs_button = 'FÃ¦ra atriÃ°i';
+$s_copy_group_bugs_button = 'Afrita atriÃ°i';
+$s_assign_group_bugs_button = 'Ãšthluta atriÃ°i';
+$s_resolve_group_bugs_button = 'Leysa atriÃ°i';
+$s_priority_group_bugs_button = 'UppfÃ¦ra forgang';
+$s_status_group_bugs_button = 'UppfÃ¦ra stÃ¶Ã°u';
+$s_category_group_bugs_button = 'UppfÃ¦ra flokk';
+$s_view_status_group_bugs_button = 'UppfÃ¦ra stÃ¶Ã°u atriÃ°is';
+$s_set_sticky_group_bugs_button = 'Setja lÃ­mingu Ã¡/af';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Samşætt graf eftir stöğu';
-$s_graph_imp_priority_title = 'Samşætt graf eftir forgangi';
-$s_graph_imp_severity_title = 'Samşætt graf eftir alvöru';
-$s_graph_imp_category_title = 'Samşætt graf eftir flokki';
-$s_graph_imp_resolution_title = 'Samşætt graf eftir úrlausn';
-$s_by_status_pct = 'eftir prósentu stöğu';
-$s_by_priority_pct = 'eftir forgangs prósentu';
-$s_by_severity_pct = 'eftir mikilvægis prósentu';
-$s_by_category_pct = 'eftir flokks prósentu';
-$s_by_resolution_pct = 'eftir úrlausnar prósentu';
-$s_by_severity_mix = 'eftir mikilvægi og stöğu';
-$s_by_priority_mix = 'eftir forgangi og stöğu';
-$s_by_resolution_mix = 'eftir úrlausn og stöğu';
-$s_synthesis_link = 'Samşætting';
-$s_status_link = 'Eftir stöğu';
+$s_graph_imp_status_title = 'SamÃ¾Ã¦tt graf eftir stÃ¶Ã°u';
+$s_graph_imp_priority_title = 'SamÃ¾Ã¦tt graf eftir forgangi';
+$s_graph_imp_severity_title = 'SamÃ¾Ã¦tt graf eftir alvÃ¶ru';
+$s_graph_imp_category_title = 'SamÃ¾Ã¦tt graf eftir flokki';
+$s_graph_imp_resolution_title = 'SamÃ¾Ã¦tt graf eftir Ãºrlausn';
+$s_by_status_pct = 'eftir prÃ³sentu stÃ¶Ã°u';
+$s_by_priority_pct = 'eftir forgangs prÃ³sentu';
+$s_by_severity_pct = 'eftir mikilvÃ¦gis prÃ³sentu';
+$s_by_category_pct = 'eftir flokks prÃ³sentu';
+$s_by_resolution_pct = 'eftir Ãºrlausnar prÃ³sentu';
+$s_by_severity_mix = 'eftir mikilvÃ¦gi og stÃ¶Ã°u';
+$s_by_priority_mix = 'eftir forgangi og stÃ¶Ã°u';
+$s_by_resolution_mix = 'eftir Ãºrlausn og stÃ¶Ã°u';
+$s_synthesis_link = 'SamÃ¾Ã¦tting';
+$s_status_link = 'Eftir stÃ¶Ã°u';
 $s_priority_link = 'Eftir forgangi';
-$s_severity_link = 'Eftir mikilvægi';
+$s_severity_link = 'Eftir mikilvÃ¦gi';
 $s_category_link = 'Eftir flokki';
-$s_resolution_link = 'Eftir úrlausn';
-$s_legend_still_open = 'Enn opiğ';
+$s_resolution_link = 'Eftir Ãºrlausn';
+$s_legend_still_open = 'Enn opiÃ°';
 $s_legend_resolved = 'Leyst';
-$s_legend_assigned = 'Úthlutağ';
+$s_legend_assigned = 'ÃšthlutaÃ°';
 $s_legend_total = 'Alls';
-$s_legend_opened = 'Opnağ';
-$s_legend_closed = 'Lokağ';
+$s_legend_opened = 'OpnaÃ°';
+$s_legend_closed = 'LokaÃ°';
 $s_legend_reported = 'Tilkynnt';
-$s_cumulative = 'Uppsöfnun';
-$s_not_enough_data = 'Ekki eru næg gögn til ağ búa til graf';
+$s_cumulative = 'UppsÃ¶fnun';
+$s_not_enough_data = 'Ekki eru nÃ¦g gÃ¶gn til aÃ° bÃºa til graf';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Sına eingöngu valiğ';
+$s_hide_button = 'SÃ½na eingÃ¶ngu valiÃ°';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Veldu svæği til ağ prenta';
+$s_printing_preferences_title = 'Veldu svÃ¦Ã°i til aÃ° prenta';
 $s_printing_options_link = 'Prent valkostir';
 
 # word and excel export
-$s_bugnote_title = 'Meğferğ athugasemdar';
+$s_bugnote_title = 'MeÃ°ferÃ° athugasemdar';
 $s_bugnote_date = 'Dagsetning athugasemdar';
-$s_bugnote_description = 'Lısing athugasemdar';
+$s_bugnote_description = 'LÃ½sing athugasemdar';
 
-$s_error_no_proceed = 'Notağu "Bakk" hnappinn á vafranum til ağ komast á fyrri síğu. Şar getur şú leiğrétt şau vandamál sem komu upp viğ şessa villu eğa valiğ ağra ağgerğ. Şú getur einnig valiğ möguleika frá valrönd til ağ fara beint yfir í nı atriği.';
+$s_error_no_proceed = 'NotaÃ°u "Bakk" hnappinn Ã¡ vafranum til aÃ° komast Ã¡ fyrri sÃ­Ã°u. Ãar getur Ã¾Ãº leiÃ°rÃ©tt Ã¾au vandamÃ¡l sem komu upp viÃ° Ã¾essa villu eÃ°a valiÃ° aÃ°ra aÃ°gerÃ°. ÃÃº getur einnig valiÃ° mÃ¶guleika frÃ¡ valrÃ¶nd til aÃ° fara beint yfir Ã­ nÃ½ atriÃ°i.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'Villa hefur orğiğ viğ şessa ağgerğ. Şú ættir ağ tilkynna şağ til verkefnisstjóra.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL villa hefur orğiğ. Tilkynntu şağ til ';
-$MANTIS_ERROR[ERROR_REPORT] = 'Şağ var villa í tilkynningunni.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Engin skrá valin';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Şessi tegund skráar er ekki leyfğ';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Şessi mappa er ekki til. Athugağu verkefna stillinguna.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Şetta er afrit. Eyddu skránni fyrst.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Verkefni meğ sama nafni er til.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nauğsynlegt svæği \'%s\' var autt. Athugağu betur ílagsgögnin.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Şessi ağgangur er lokağur. Şú hefur ekki ağgang şar til læsingu hefur veriğ aflétt.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Ağgangur óheimill.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Upphlağning skráar mistókst. Skráin er ekki samrımanleg viğ Mantis. Athugaği stillingar verksins.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Upphlağning skráar mistókst. Líklega vegna şess ağ stærğ skrár var meira enn heimilt er meğ şessari PHP uppsetningu.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tilskilin breyta á şessari síğu (%s) fannst ekki.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Şetta notendanafn er şegar í notkun. Farğu til baka og veldu annağ.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar möguleiki \'%s\' fannst ekki.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Ekki er hægt ağ breyta stillingar möguleikanum \'%s\' í gagnagrunninum. Şağ verğur ağ breyta honum í config_inc.php.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Villa hefur orÃ°iÃ° viÃ° Ã¾essa aÃ°gerÃ°. ÃÃº Ã¦ttir aÃ° tilkynna Ã¾aÃ° til verkefnisstjÃ³ra.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL villa hefur orÃ°iÃ°. Tilkynntu Ã¾aÃ° til ';
+$MANTIS_ERROR[ERROR_REPORT] = 'ÃaÃ° var villa Ã­ tilkynningunni.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Engin skrÃ¡ valin';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ãessi tegund skrÃ¡ar er ekki leyfÃ°';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Ãessi mappa er ekki til. AthugaÃ°u verkefna stillinguna.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ãetta er afrit. Eyddu skrÃ¡nni fyrst.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Verkefni meÃ° sama nafni er til.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'NauÃ°synlegt svÃ¦Ã°i \'%s\' var autt. AthugaÃ°u betur Ã­lagsgÃ¶gnin.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ãessi aÃ°gangur er lokaÃ°ur. ÃÃº hefur ekki aÃ°gang Ã¾ar til lÃ¦singu hefur veriÃ° aflÃ©tt.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'AÃ°gangur Ã³heimill.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'UpphlaÃ°ning skrÃ¡ar mistÃ³kst. SkrÃ¡in er ekki samrÃ½manleg viÃ° Mantis. AthugaÃ°i stillingar verksins.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'UpphlaÃ°ning skrÃ¡ar mistÃ³kst. LÃ­klega vegna Ã¾ess aÃ° stÃ¦rÃ° skrÃ¡r var meira enn heimilt er meÃ° Ã¾essari PHP uppsetningu.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tilskilin breyta Ã¡ Ã¾essari sÃ­Ã°u (%s) fannst ekki.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ãetta notendanafn er Ã¾egar Ã­ notkun. FarÃ°u til baka og veldu annaÃ°.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar mÃ¶guleiki \'%s\' fannst ekki.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Ekki er hÃ¦gt aÃ° breyta stillingar mÃ¶guleikanum \'%s\' Ã­ gagnagrunninum. ÃaÃ° verÃ°ur aÃ° breyta honum Ã­ config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengur \'%s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svæğiğ \'%s\' fannst ekki.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Get ekki tengst FTP şjóni.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Sá sem fer meğ atriğiğ hefur ekki nægilegan ağgang til şess ağ meğhöndla şağ á şessu stigi.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Verkefni meğ sama nafni er şegar til stağar. Farğu til baka og settu inn nıtt nafn.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ógilt verkefnisnafn uppgefiğ. Verkefnisnöfn geta ekki veriğ auğ.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svÃ¦Ã°iÃ° \'%s\' fannst ekki.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Get ekki tengst FTP Ã¾jÃ³ni.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'SÃ¡ sem fer meÃ° atriÃ°iÃ° hefur ekki nÃ¦gilegan aÃ°gang til Ã¾ess aÃ° meÃ°hÃ¶ndla Ã¾aÃ° Ã¡ Ã¾essu stigi.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Verkefni meÃ° sama nafni er Ã¾egar til staÃ°ar. FarÃ°u til baka og settu inn nÃ½tt nafn.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ã“gilt verkefnisnafn uppgefiÃ°. VerkefnisnÃ¶fn geta ekki veriÃ° auÃ°.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Notandi finnst ekki.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Upplısingar um innskráningu geymdar á vafranum eru ógildar. Hugsanlega var ağgangi şínum eytt?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Stillingar fyrir şennan notanda fundust ekki.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Fréttaefni fannst ekki.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lykilorğ stenst ekki stağfestingu.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Búist var viğ fylki en í stağin kom strengur fyrir %s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Búist var viğ streng en fylki kom í stağin fyrir %s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Búist var viğ tölu fyrir %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Atriği %d finnst ekki.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Sía %d finnst ekki.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Sían sem şú ert ağ reyna ağ nota er of gömul til ağ vera uppfærğ, endurskapağu hana';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ógilt tölvupóstfang.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Sniğiğ finnst ekki.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Upphlağning şessarar skráartegundar er ekki heimil.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Şetta er afrit. Eyddu skránni fyrst.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Óleyfileg slóğ upphlağningar. Annağhvort er skráin ekki til eğa ekki skrifanleg á vefşjón.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Engri skrá var upphlağiğ. Fariğ til baka og veljiğ skrá áğur en ıtt er á upphlağningu.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Upphlağna skrá er ekki hægt ağ færa yfir á geymslu skrá. Skráin er annağ hvort ekki  til eğa ekki skrifanleg á vefşjón.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Şú getur ekki sett inn atriği sem afrit af sjálfu sér.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Sérsniğiğ svæği finnst ekki';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Şetta er nafn afrits.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Ağ minnsta kosti eitt verkefni notar şetta svæği.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir şetta svæği';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Sérsniğin svæğisskilgreining er ógilt';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP stağfesting mistókst.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging şjóns mistókst.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Uppfærsla gagna á LDAP mistókst.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Upplısingar um LDAP notenda fundust ekki.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Tenging viğ gagnagrunn mistókst. Villa móttekin frá gagnagrunni var #%d: %s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Fyrirspurn á gagnagrunni mistókst. Villa móttekin frá gagnagrunni vegna fyrirspurnar um #%d: %s var %s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Gagnagrunnsval mistókst. Villa móttekinn frá gagnagrunni var #%d: %s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Flokkur meğ şessu nafni er til stağar.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'UpplÃ½singar um innskrÃ¡ningu geymdar Ã¡ vafranum eru Ã³gildar. Hugsanlega var aÃ°gangi Ã¾Ã­num eytt?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Stillingar fyrir Ã¾ennan notanda fundust ekki.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'FrÃ©ttaefni fannst ekki.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'LykilorÃ° stenst ekki staÃ°festingu.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'BÃºist var viÃ° fylki en Ã­ staÃ°in kom strengur fyrir %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'BÃºist var viÃ° streng en fylki kom Ã­ staÃ°in fyrir %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'BÃºist var viÃ° tÃ¶lu fyrir %s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'AtriÃ°i %d finnst ekki.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'SÃ­a %d finnst ekki.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'SÃ­an sem Ã¾Ãº ert aÃ° reyna aÃ° nota er of gÃ¶mul til aÃ° vera uppfÃ¦rÃ°, endurskapaÃ°u hana';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ã“gilt tÃ¶lvupÃ³stfang.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'SniÃ°iÃ° finnst ekki.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'UpphlaÃ°ning Ã¾essarar skrÃ¡artegundar er ekki heimil.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Ãetta er afrit. Eyddu skrÃ¡nni fyrst.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ã“leyfileg slÃ³Ã° upphlaÃ°ningar. AnnaÃ°hvort er skrÃ¡in ekki til eÃ°a ekki skrifanleg Ã¡ vefÃ¾jÃ³n.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Engri skrÃ¡ var upphlaÃ°iÃ°. FariÃ° til baka og veljiÃ° skrÃ¡ Ã¡Ã°ur en Ã½tt er Ã¡ upphlaÃ°ningu.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'UpphlaÃ°na skrÃ¡ er ekki hÃ¦gt aÃ° fÃ¦ra yfir Ã¡ geymslu skrÃ¡. SkrÃ¡in er annaÃ° hvort ekki  til eÃ°a ekki skrifanleg Ã¡ vefÃ¾jÃ³n.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'ÃÃº getur ekki sett inn atriÃ°i sem afrit af sjÃ¡lfu sÃ©r.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'SÃ©rsniÃ°iÃ° svÃ¦Ã°i finnst ekki';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ãetta er nafn afrits.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'AÃ° minnsta kosti eitt verkefni notar Ã¾etta svÃ¦Ã°i.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ã“leyfileg gildi fyrir Ã¾etta svÃ¦Ã°i';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'SÃ©rsniÃ°in svÃ¦Ã°isskilgreining er Ã³gilt';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP staÃ°festing mistÃ³kst.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging Ã¾jÃ³ns mistÃ³kst.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'UppfÃ¦rsla gagna Ã¡ LDAP mistÃ³kst.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'UpplÃ½singar um LDAP notenda fundust ekki.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Tenging viÃ° gagnagrunn mistÃ³kst. Villa mÃ³ttekin frÃ¡ gagnagrunni var #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Fyrirspurn Ã¡ gagnagrunni mistÃ³kst. Villa mÃ³ttekin frÃ¡ gagnagrunni vegna fyrirspurnar um #%d: %s var %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Gagnagrunnsval mistÃ³kst. Villa mÃ³ttekinn frÃ¡ gagnagrunni var #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Flokkur meÃ° Ã¾essu nafni er til staÃ°ar.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Enginn afritun var tilgreind.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Flokkur fannst ekki.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Útgáfa meğ şessu nafni er til stağar.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Útgáfa \'%s\' fannst ekki.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Notendanafniğ er ógilt. Şau mega ağeins innihalda bókstafi, tölur, bil, bandstrik og undirstrik.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Notandi hefur ekki viğeigandi ağgangsstig.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Nafniğ sem valiğ var er şağ sama og notendanafn annars notanda. Veldu annağ nafn.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ÃštgÃ¡fa meÃ° Ã¾essu nafni er til staÃ°ar.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'ÃštgÃ¡fa \'%s\' fannst ekki.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'NotendanafniÃ° er Ã³gilt. Ãau mega aÃ°eins innihalda bÃ³kstafi, tÃ¶lur, bil, bandstrik og undirstrik.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Notandi hefur ekki viÃ°eigandi aÃ°gangsstig.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'NafniÃ° sem valiÃ° var er Ã¾aÃ° sama og notendanafn annars notanda. Veldu annaÃ° nafn.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Stillimöguleiki \'%s\'hefur ógilt gildi \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt ağ framkvæma ağgerğina şar sem atriği \'%d\' er ağeins lesanlegt.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Şağ eru şegar tengsl milli şessara atriğa.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'StillimÃ¶guleiki \'%s\'hefur Ã³gilt gildi \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hÃ¦gt aÃ° framkvÃ¦ma aÃ°gerÃ°ina Ã¾ar sem atriÃ°i \'%d\' er aÃ°eins lesanlegt.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ÃaÃ° eru Ã¾egar tengsl milli Ã¾essara atriÃ°a.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Engin tengsl fundust.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Ağgangi hafnağ: Atriği %d krefst hærri ağgangs heimildar.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Atriği getur ekki tengst sjálfu sér.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Stağfestingin hefur ekki gildi. Reyndu aftur.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Möguleikinn  \'tınt lykilorğ\' er ekki tiltækur.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Şú verğur ağ gefa upp tölvupóstfang til ağ endurstilla lykilorğiğ.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Gefnar upplısingar passa ekki viğ neinn skráğan ağgang!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Stağfesting veffangs er ógild eğa hefur áğur veriğ notuğ. Skráğu şig aftur.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Hámarksfjölda verkefna í gangi hefur veriğ náğ. Hafğu samband viğ verkefnisstjóra.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "AÃ°gangi hafnaÃ°: AtriÃ°i %d krefst hÃ¦rri aÃ°gangs heimildar.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "AtriÃ°i getur ekki tengst sjÃ¡lfu sÃ©r.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'StaÃ°festingin hefur ekki gildi. Reyndu aftur.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'MÃ¶guleikinn  \'tÃ½nt lykilorÃ°\' er ekki tiltÃ¦kur.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'ÃÃº verÃ°ur aÃ° gefa upp tÃ¶lvupÃ³stfang til aÃ° endurstilla lykilorÃ°iÃ°.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Gefnar upplÃ½singar passa ekki viÃ° neinn skrÃ¡Ã°an aÃ°gang!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'StaÃ°festing veffangs er Ã³gild eÃ°a hefur Ã¡Ã°ur veriÃ° notuÃ°. SkrÃ¡Ã°u Ã¾ig aftur.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'HÃ¡marksfjÃ¶lda verkefna Ã­ gangi hefur veriÃ° nÃ¡Ã°. HafÃ°u samband viÃ° verkefnisstjÃ³ra.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'Ağgangi şínum hefur hugsanlega veriğ lokağ eğa hindrağur eğa notendanafn/lykilorğ sem şú notar er rangt.';
-$s_login_cookies_disabled = 'Vafrarinn şinn veit hugsanlega ekki hvernig á ağ höndla kökur (cookies), eğa neitar ağ taka viğ şeim.';
+$s_login_error = 'AÃ°gangi Ã¾Ã­num hefur hugsanlega veriÃ° lokaÃ° eÃ°a hindraÃ°ur eÃ°a notendanafn/lykilorÃ° sem Ã¾Ãº notar er rangt.';
+$s_login_cookies_disabled = 'Vafrarinn Ã¾inn veit hugsanlega ekki hvernig Ã¡ aÃ° hÃ¶ndla kÃ¶kur (cookies), eÃ°a neitar aÃ° taka viÃ° Ã¾eim.';
 
 # General Strings
-$s_go_back = 'Farğu til baka';
-$s_proceed = 'Smelltu hér til ağ halda áfram';
+$s_go_back = 'FarÃ°u til baka';
+$s_proceed = 'Smelltu hÃ©r til aÃ° halda Ã¡fram';
 
 $s_switch = 'Skipta';
-$s_logged_in_as = 'Skráğur inn sem';
+$s_logged_in_as = 'SkrÃ¡Ã°ur inn sem';
 
 $s_prefix_for_deleted_users = 'notandi';
 
-$s_administrator = 'umsjónarmağur';
-$s_myself = "Ég sjálfur";
-$s_default_access_level = 'Sjálfgefiğ ağgangsstig';
+$s_administrator = 'umsjÃ³narmaÃ°ur';
+$s_myself = "Ã‰g sjÃ¡lfur";
+$s_default_access_level = 'SjÃ¡lfgefiÃ° aÃ°gangsstig';
 
-$s_issue_status_percentage = 'Prósentustağa ağgerğa';
+$s_issue_status_percentage = 'PrÃ³sentustaÃ°a aÃ°gerÃ°a';
 
 # Enum Strings
-$s_access_levels_enum_string = '10:skoğandi,25:skırslugjafi,40:uppfærslumağur,55:forritari,70:stjórnandi,90:umsjónarmağur';
-$s_project_status_enum_string = '10:şróun,30:útgáfa,50:stöğugur,70:úreltur';
-$s_project_view_state_enum_string = '10:almennt,50:læst';
-$s_view_state_enum_string = '10:almennt, 50:læst';
+$s_access_levels_enum_string = '10:skoÃ°andi,25:skÃ½rslugjafi,40:uppfÃ¦rslumaÃ°ur,55:forritari,70:stjÃ³rnandi,90:umsjÃ³narmaÃ°ur';
+$s_project_status_enum_string = '10:Ã¾rÃ³un,30:ÃºtgÃ¡fa,50:stÃ¶Ã°ugur,70:Ãºreltur';
+$s_project_view_state_enum_string = '10:almennt,50:lÃ¦st';
+$s_view_state_enum_string = '10:almennt, 50:lÃ¦st';
 
-$s_priority_enum_string = '10:enginn,20:lágt,30:eğlilegt,40:hátt,50:áríğandi,60:tafarlaust';
-$s_severity_enum_string = '10:eiginleiki,20:smávægilegur,30:texti,40:fínstilling,50:minni háttar,60:meiri háttar, 70:hrun,80:lokar';
-$s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hægt ağ endurskapa,100:á ekki viğ';
-$s_status_enum_string = '10:nıtt,20:svar,30:móttekiğ,40:stağfest,50:úthlutağ,80:leyst,90:lokağ';
-$s_resolution_enum_string = '10:opiğ,20:leyst,30:enduropnağ,40:ekki hægt ağ endurskapa,50:ekki hægt ağ laga,60:afrit,70:şarfnast ekki breytinga,80:sett til hliğar,90:hefur ekki lagast';
-$s_projection_enum_string = '10:enginn,30:fínstilling,50:lítiğ verk,70:mikiğ verk,90:endurhönnun';
-$s_eta_enum_string = '10:enginn,20:< 1 dagur,30:2-3 dagar,40:< 1 vika,50:< 1 mánuğur,60:> 1 mánuğur';
+$s_priority_enum_string = '10:enginn,20:lÃ¡gt,30:eÃ°lilegt,40:hÃ¡tt,50:Ã¡rÃ­Ã°andi,60:tafarlaust';
+$s_severity_enum_string = '10:eiginleiki,20:smÃ¡vÃ¦gilegur,30:texti,40:fÃ­nstilling,50:minni hÃ¡ttar,60:meiri hÃ¡ttar, 70:hrun,80:lokar';
+$s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hÃ¦gt aÃ° endurskapa,100:Ã¡ ekki viÃ°';
+$s_status_enum_string = '10:nÃ½tt,20:svar,30:mÃ³ttekiÃ°,40:staÃ°fest,50:ÃºthlutaÃ°,80:leyst,90:lokaÃ°';
+$s_resolution_enum_string = '10:opiÃ°,20:leyst,30:enduropnaÃ°,40:ekki hÃ¦gt aÃ° endurskapa,50:ekki hÃ¦gt aÃ° laga,60:afrit,70:Ã¾arfnast ekki breytinga,80:sett til hliÃ°ar,90:hefur ekki lagast';
+$s_projection_enum_string = '10:enginn,30:fÃ­nstilling,50:lÃ­tiÃ° verk,70:mikiÃ° verk,90:endurhÃ¶nnun';
+$s_eta_enum_string = '10:enginn,20:< 1 dagur,30:2-3 dagar,40:< 1 vika,50:< 1 mÃ¡nuÃ°ur,60:> 1 mÃ¡nuÃ°ur';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
-$s_new_account_subject = 'Ağgangs skráning';
-$s_new_account_greeting = 'Şakka şér fyrir skráninguna. Şú hefur ağgang meğ notendanafninu \'';
-$s_new_account_greeting2 = '\'. Til şess ağ ljúka skráningu, farğu á eftirfarandi veffang (skráğu şağ í einni línu) og settu upp şitt eigiğ notendanafn:';
+$s_new_account_subject = 'AÃ°gangs skrÃ¡ning';
+$s_new_account_greeting = 'Ãakka Ã¾Ã©r fyrir skrÃ¡ninguna. ÃÃº hefur aÃ°gang meÃ° notendanafninu \'';
+$s_new_account_greeting2 = '\'. Til Ã¾ess aÃ° ljÃºka skrÃ¡ningu, farÃ°u Ã¡ eftirfarandi veffang (skrÃ¡Ã°u Ã¾aÃ° Ã­ einni lÃ­nu) og settu upp Ã¾itt eigiÃ° notendanafn:';
 $s_new_account_username = 'Notendanafn: ';
-$s_new_account_message = 'Ef şú hefur ekki beğiğ um skráningu, hunsağu şessi boğ og ekkert mun gerast.' . "\n\n";
-$s_new_account_do_not_reply = 'EKKI SVARA ŞESSUM SKILABOĞUM';
-$s_new_account_email = 'Tölvupóstfang: ';
+$s_new_account_message = 'Ef Ã¾Ãº hefur ekki beÃ°iÃ° um skrÃ¡ningu, hunsaÃ°u Ã¾essi boÃ° og ekkert mun gerast.' . "\n\n";
+$s_new_account_do_not_reply = 'EKKI SVARA ÃESSUM SKILABOÃUM';
+$s_new_account_email = 'TÃ¶lvupÃ³stfang: ';
 $s_new_account_IP = 'Fjartengd IP tala: ';
-$s_new_account_signup_msg = 'Eftirfarandi ağgangur hefur veriğ leyfğur:';
+$s_new_account_signup_msg = 'Eftirfarandi aÃ°gangur hefur veriÃ° leyfÃ°ur:';
 
-$s_reset_request_msg = 'Einhver (líklega şú) óskağir eftir ağ breyta lykilorği meğ stağfestum tölvupósti. Ef şetta var ekki şú, hunsağu şessi boğ og ekkert mun gerast.' . "\n\n" . 'Ef şú óskağir eftir şessari stağfestingu, heimsóttu eftirfarandi veffang til şess ağ breyta lykilorğinu:';
-$s_reset_request_in_progress_msg = 'Ef şú hefur gefiğ upp rétt lykilorğ og tölvupóstfang fyrir ağgang şinn, munum viğ nú hafa sent stağfest boğ til uppgefins tölvupóstfangs. Şegar şessi boğ hafa veriğ móttekinn, fylgdu eftir leiğbeiningunum til şess ağ breyta lykilorği fyrir şinn ağgang.';
+$s_reset_request_msg = 'Einhver (lÃ­klega Ã¾Ãº) Ã³skaÃ°ir eftir aÃ° breyta lykilorÃ°i meÃ° staÃ°festum tÃ¶lvupÃ³sti. Ef Ã¾etta var ekki Ã¾Ãº, hunsaÃ°u Ã¾essi boÃ° og ekkert mun gerast.' . "\n\n" . 'Ef Ã¾Ãº Ã³skaÃ°ir eftir Ã¾essari staÃ°festingu, heimsÃ³ttu eftirfarandi veffang til Ã¾ess aÃ° breyta lykilorÃ°inu:';
+$s_reset_request_in_progress_msg = 'Ef Ã¾Ãº hefur gefiÃ° upp rÃ©tt lykilorÃ° og tÃ¶lvupÃ³stfang fyrir aÃ°gang Ã¾inn, munum viÃ° nÃº hafa sent staÃ°fest boÃ° til uppgefins tÃ¶lvupÃ³stfangs. Ãegar Ã¾essi boÃ° hafa veriÃ° mÃ³ttekinn, fylgdu eftir leiÃ°beiningunum til Ã¾ess aÃ° breyta lykilorÃ°i fyrir Ã¾inn aÃ°gang.';
 
-$s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriği er (aftur) í stöğu NİTT';
-$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriği krefst SVARS frá şér.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi atriği hefur veriğ MÓTTEKIĞ.';
-$s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriği er STAĞFEST.';
-$s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriği hefur veriğ ÚTHLUTAĞ.';
-$s_email_notification_title_for_status_bug_resolved = 'Eftirfarandi atriği hefur veriğ LEYST.';
-$s_email_notification_title_for_status_bug_closed = 'Eftirfarandi atriği hefur veriğ LOKAĞ.';
+$s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriÃ°i er (aftur) Ã­ stÃ¶Ã°u NÃTT';
+$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriÃ°i krefst SVARS frÃ¡ Ã¾Ã©r.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi atriÃ°i hefur veriÃ° MÃ“TTEKIÃ.';
+$s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriÃ°i er STAÃFEST.';
+$s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriÃ°i hefur veriÃ° ÃšTHLUTAÃ.';
+$s_email_notification_title_for_status_bug_resolved = 'Eftirfarandi atriÃ°i hefur veriÃ° LEYST.';
+$s_email_notification_title_for_status_bug_closed = 'Eftirfarandi atriÃ°i hefur veriÃ° LOKAÃ.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Eftirfarandi atriği hefur veriğ SENT.';
-$s_email_notification_title_for_action_bug_assigned = 'Eftirfarandi atriği hefur veriğ ÚTHLUTAĞ.';
-$s_email_notification_title_for_action_bug_reopened = 'Eftirfarandi atriği hefur veriğ OPNAĞ AFTUR.';
-$s_email_notification_title_for_action_bug_deleted = 'Eftirfarandi atriği hefur veriğ EYTT.';
-$s_email_notification_title_for_action_bug_updated = 'Eftirfarandi atriği hefur veriğ UPPFÆRT.';
+$s_email_notification_title_for_action_bug_submitted = 'Eftirfarandi atriÃ°i hefur veriÃ° SENT.';
+$s_email_notification_title_for_action_bug_assigned = 'Eftirfarandi atriÃ°i hefur veriÃ° ÃšTHLUTAÃ.';
+$s_email_notification_title_for_action_bug_reopened = 'Eftirfarandi atriÃ°i hefur veriÃ° OPNAÃ AFTUR.';
+$s_email_notification_title_for_action_bug_deleted = 'Eftirfarandi atriÃ°i hefur veriÃ° EYTT.';
+$s_email_notification_title_for_action_bug_updated = 'Eftirfarandi atriÃ°i hefur veriÃ° UPPFÃ†RT.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur veriğ bætt viğ şetta atriği.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi atriği hefur veriğ sett sem AFRIT AF atriği %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Atriğiğ %s hefur veriğ sett sem AFRIT AF eftirfarandi atriği.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi atriği hefur veriğ sett sem TENGT VIĞ atriği %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi atriği hefur veriğ sett sem HÁĞUR AF atriği %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi atriği hefur veriğ sett sem TÁLMAĞUR AF atriği %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi atriği hefur veriğ tekiğ af sem AFRIT af atriği %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Atriğiğ %s hefur veriğ fjarlægt sem AFRIT af eftirfarandi atriği.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi atriği hafa veriğ merkt sem ÓTENGD atriği %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi atriği hefur veriğ fjarlægt sem TENGSL VIĞ atriği %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi atriği hefur veriğ fjarlægt sem TÁLMAĞUR AF atriği %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "Atriği TENGT %s hefur veriğ LEYST.";
-$s_email_notification_title_for_action_relationship_child_closed = "Atriği TENGT %s hefur veriğ LOKAĞ.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Athugasemd hefur veriÃ° bÃ¦tt viÃ° Ã¾etta atriÃ°i.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Eftirfarandi atriÃ°i hefur veriÃ° sett sem AFRIT AF atriÃ°i %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "AtriÃ°iÃ° %s hefur veriÃ° sett sem AFRIT AF eftirfarandi atriÃ°i.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Eftirfarandi atriÃ°i hefur veriÃ° sett sem TENGT VIÃ atriÃ°i %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Eftirfarandi atriÃ°i hefur veriÃ° sett sem HÃÃUR AF atriÃ°i %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Eftirfarandi atriÃ°i hefur veriÃ° sett sem TÃLMAÃUR AF atriÃ°i %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eftirfarandi atriÃ°i hefur veriÃ° tekiÃ° af sem AFRIT af atriÃ°i %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "AtriÃ°iÃ° %s hefur veriÃ° fjarlÃ¦gt sem AFRIT af eftirfarandi atriÃ°i.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Eftirfarandi atriÃ°i hafa veriÃ° merkt sem Ã“TENGD atriÃ°i %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eftirfarandi atriÃ°i hefur veriÃ° fjarlÃ¦gt sem TENGSL VIÃ atriÃ°i %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Eftirfarandi atriÃ°i hefur veriÃ° fjarlÃ¦gt sem TÃLMAÃUR AF atriÃ°i %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "AtriÃ°i TENGT %s hefur veriÃ° LEYST.";
+$s_email_notification_title_for_action_relationship_child_closed = "AtriÃ°i TENGT %s hefur veriÃ° LOKAÃ.";
 
 $s_email_reporter = 'Tilkynnt af';
-$s_email_handler = 'Úthlutağ til';
+$s_email_handler = 'ÃšthlutaÃ° til';
 $s_email_project = 'Verkefni';
-$s_email_bug = 'Útgáfu númer (ID)';
+$s_email_bug = 'ÃštgÃ¡fu nÃºmer (ID)';
 $s_email_category = 'Flokkur';
-$s_email_reproducibility = 'Möguleg endursköpun';
-$s_email_severity = 'Mikilvægi';
+$s_email_reproducibility = 'MÃ¶guleg endurskÃ¶pun';
+$s_email_severity = 'MikilvÃ¦gi';
 $s_email_priority = 'Forgangur';
-$s_email_status = 'Stağa';
-$s_email_resolution = 'Úrlausn';
+$s_email_status = 'StaÃ°a';
+$s_email_resolution = 'Ãšrlausn';
 $s_email_duplicate = 'Afrit';
-$s_email_fixed_in_version = 'Leyst í útgáfu';
+$s_email_fixed_in_version = 'Leyst Ã­ ÃºtgÃ¡fu';
 $s_email_date_submitted = 'Sendingardagur';
-$s_email_last_modified = 'Síğast breytt';
+$s_email_last_modified = 'SÃ­Ã°ast breytt';
 $s_email_summary = 'Yfirlit';
-$s_email_description = 'Lısing';
+$s_email_description = 'LÃ½sing';
 
 # account_delete.php
-$s_account_protected_msg = 'Læstur ağgangur. Ekki er hægt ağ breyta stillingum...';
-$s_account_removed_msg = 'Ağgangur şinn hefur veriğ fjarlægğur...';
+$s_account_protected_msg = 'LÃ¦stur aÃ°gangur. Ekki er hÃ¦gt aÃ° breyta stillingum...';
+$s_account_removed_msg = 'AÃ°gangur Ã¾inn hefur veriÃ° fjarlÃ¦gÃ°ur...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Ertu viss um ağ vilja eyğa ağgangi şínum?';
-$s_delete_account_button = 'Eyği Ağgangi';
+$s_confirm_delete_msg = 'Ertu viss um aÃ° vilja eyÃ°a aÃ°gangi Ã¾Ã­num?';
+$s_delete_account_button = 'EyÃ°i AÃ°gangi';
 
 # account_page.php
-$s_manage_profiles_link = 'Sniğ';
+$s_manage_profiles_link = 'SniÃ°';
 $s_change_preferences_link = 'Stillingar';
-$s_edit_account_title = 'Skrifa ağgengi';
+$s_edit_account_title = 'Skrifa aÃ°gengi';
 $s_username = 'Notendanafn';
 $s_realname = 'Raunverulegt nafn';
-$s_email = 'Tölvupóstfang';
-$s_password = 'Lykilorğ';
-$s_no_password_change = 'Lykilorğinu er stjórnağ af öğru kerfi, şví er ekki hægt ağ skrifa şağ hér.';
-$s_confirm_password = 'Stağfestu lykilorğ';
-$s_access_level = 'Ağgangsstig';
-$s_update_user_button = 'Uppfæri notanda';
-$s_verify_warning = 'Upplısingar şínar um ağgang hafa veriğ stağfestar. Stağfestingar pósturinn sem şú fékkst er nú ógildur.';
-$s_verify_change_password = 'Şú verğur ağ setja lykilorğiğ hér til şess ağ geta skráğ şig inn aftur.';
+$s_email = 'TÃ¶lvupÃ³stfang';
+$s_password = 'LykilorÃ°';
+$s_no_password_change = 'LykilorÃ°inu er stjÃ³rnaÃ° af Ã¶Ã°ru kerfi, Ã¾vÃ­ er ekki hÃ¦gt aÃ° skrifa Ã¾aÃ° hÃ©r.';
+$s_confirm_password = 'StaÃ°festu lykilorÃ°';
+$s_access_level = 'AÃ°gangsstig';
+$s_update_user_button = 'UppfÃ¦ri notanda';
+$s_verify_warning = 'UpplÃ½singar Ã¾Ã­nar um aÃ°gang hafa veriÃ° staÃ°festar. StaÃ°festingar pÃ³sturinn sem Ã¾Ãº fÃ©kkst er nÃº Ã³gildur.';
+$s_verify_change_password = 'ÃÃº verÃ°ur aÃ° setja lykilorÃ°iÃ° hÃ©r til Ã¾ess aÃ° geta skrÃ¡Ã° Ã¾ig inn aftur.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Ağgangsstillingar';
-$s_default_project = 'Sjálfgefiğ verkefni';
-$s_advanced_report = 'Ítarleg skırsla';
-$s_advanced_view = 'Ítarleg skoğun';
-$s_advanced_update = 'Ítarleg uppfærsla';
-$s_refresh_delay = 'Endurglæğa biğ';
-$s_redirect_delay = 'Framsenda biğ';
-$s_with_minimum_severity = 'Meğ lágmarks mikilvægi';
-$s_bugnote_order = 'Röğun athugasemda:';
-$s_bugnote_order_asc = 'Hækkandi';
-$s_bugnote_order_desc = 'Lækkandi';
-$s_email_on_new = 'Tölvupóstur um nıtt';
-$s_email_on_assigned = 'Tölvupóstur um breytingu á úthlutun';
-$s_email_on_feedback = 'Tölvupóstur um svar';
-$s_email_on_resolved = 'Tölvupóstur um leyst';
-$s_email_on_closed = 'Tölvupóstur um lokağ';
-$s_email_on_reopened = 'Tölvupóstur um enduropnağ';
-$s_email_on_bugnote_added = 'Tölvupóstur um viğbótar athugasemd';
-$s_email_on_status_change = 'Tölvupóstur um breytingu á stöğu';
-$s_email_on_priority_change = 'Tölvupóstur um breytingu á forgangi';
-$s_email_bugnote_limit = 'Tölvupóstur um takmörkun athugasemda';
-$s_language = 'Tungumál';
-$s_update_prefs_button = 'Uppfæra stillingar';
+$s_default_account_preferences_title = 'AÃ°gangsstillingar';
+$s_default_project = 'SjÃ¡lfgefiÃ° verkefni';
+$s_advanced_report = 'Ãtarleg skÃ½rsla';
+$s_advanced_view = 'Ãtarleg skoÃ°un';
+$s_advanced_update = 'Ãtarleg uppfÃ¦rsla';
+$s_refresh_delay = 'EndurglÃ¦Ã°a biÃ°';
+$s_redirect_delay = 'Framsenda biÃ°';
+$s_with_minimum_severity = 'MeÃ° lÃ¡gmarks mikilvÃ¦gi';
+$s_bugnote_order = 'RÃ¶Ã°un athugasemda:';
+$s_bugnote_order_asc = 'HÃ¦kkandi';
+$s_bugnote_order_desc = 'LÃ¦kkandi';
+$s_email_on_new = 'TÃ¶lvupÃ³stur um nÃ½tt';
+$s_email_on_assigned = 'TÃ¶lvupÃ³stur um breytingu Ã¡ Ãºthlutun';
+$s_email_on_feedback = 'TÃ¶lvupÃ³stur um svar';
+$s_email_on_resolved = 'TÃ¶lvupÃ³stur um leyst';
+$s_email_on_closed = 'TÃ¶lvupÃ³stur um lokaÃ°';
+$s_email_on_reopened = 'TÃ¶lvupÃ³stur um enduropnaÃ°';
+$s_email_on_bugnote_added = 'TÃ¶lvupÃ³stur um viÃ°bÃ³tar athugasemd';
+$s_email_on_status_change = 'TÃ¶lvupÃ³stur um breytingu Ã¡ stÃ¶Ã°u';
+$s_email_on_priority_change = 'TÃ¶lvupÃ³stur um breytingu Ã¡ forgangi';
+$s_email_bugnote_limit = 'TÃ¶lvupÃ³stur um takmÃ¶rkun athugasemda';
+$s_language = 'TungumÃ¡l';
+$s_update_prefs_button = 'UppfÃ¦ra stillingar';
 $s_reset_prefs_button = 'Endursetja stillingar';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = 'Stillingar hafa veriğ endurstilltar...';
+$s_prefs_reset_msg = 'Stillingar hafa veriÃ° endurstilltar...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Stillingar hafa veriğ uppfærğar...';
+$s_prefs_updated_msg = 'Stillingar hafa veriÃ° uppfÃ¦rÃ°ar...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Bætt viğ sniği...';
+$s_profile_added_msg = 'BÃ¦tt viÃ° sniÃ°i...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Sniği eytt...';
+$s_profile_deleted_msg = 'SniÃ°i eytt...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Skrifa sniğ';
+$s_edit_profile_title = 'Skrifa sniÃ°';
 $s_platform = 'Verkvangur';
-$s_operating_system = 'Stırikerfi';
-$s_additional_description = 'Viğbótar lısing';
-$s_update_profile_button = 'Uppfæra sniğ';
+$s_operating_system = 'StÃ½rikerfi';
+$s_additional_description = 'ViÃ°bÃ³tar lÃ½sing';
+$s_update_profile_button = 'UppfÃ¦ra sniÃ°';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = 'Sjálfgefiğ sniğ uppfært...';
+$s_profile_defaulted_msg = 'SjÃ¡lfgefiÃ° sniÃ° uppfÃ¦rt...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Bæta viğ sniği';
-$s_add_profile_button = 'Bæta viğ sniği';
-$s_edit_or_delete_profiles_title = 'Skrifa eğa eyğa sniği';
-$s_edit_profile = 'Skrifa sniğ';
-$s_make_default = 'Gera sjálfgefiğ';
-$s_delete_profile = 'Eyğa sniği';
-$s_select_profile = 'Velja sniğ';
+$s_add_profile_title = 'BÃ¦ta viÃ° sniÃ°i';
+$s_add_profile_button = 'BÃ¦ta viÃ° sniÃ°i';
+$s_edit_or_delete_profiles_title = 'Skrifa eÃ°a eyÃ°a sniÃ°i';
+$s_edit_profile = 'Skrifa sniÃ°';
+$s_make_default = 'Gera sjÃ¡lfgefiÃ°';
+$s_delete_profile = 'EyÃ°a sniÃ°i';
+$s_select_profile = 'Velja sniÃ°';
 $s_submit_button = 'Senda';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Sniğ uppfært...';
+$s_profile_updated_msg = 'SniÃ° uppfÃ¦rt...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -461,561 +461,561 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = 'Ağgangur şinn hefur veriğ uppfærğur...';
-$s_email_updated = 'Tölvupóstfang uppfært';
-$s_realname_duplicated = 'Rétt nafn er notağ af öğrum notenda';
-$s_realname_updated = 'Rétt nafn uppfært';
-$s_password_updated = 'Lykilorğ uppfært';
+$s_account_updated_msg = 'AÃ°gangur Ã¾inn hefur veriÃ° uppfÃ¦rÃ°ur...';
+$s_email_updated = 'TÃ¶lvupÃ³stfang uppfÃ¦rt';
+$s_realname_duplicated = 'RÃ©tt nafn er notaÃ° af Ã¶Ã°rum notenda';
+$s_realname_updated = 'RÃ©tt nafn uppfÃ¦rt';
+$s_password_updated = 'LykilorÃ° uppfÃ¦rt';
 
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'Atriğin sem şú hefur valiğ tilheyra öğrum verkefnum. Breyturnar fyrir neğan endurspegla stillingar fyrir öll verkefnin. Ef şetta er rangt, reyndu aftur ağ breyta en meğ færri valin atriği.';
+$s_multiple_projects = 'AtriÃ°in sem Ã¾Ãº hefur valiÃ° tilheyra Ã¶Ã°rum verkefnum. Breyturnar fyrir neÃ°an endurspegla stillingar fyrir Ã¶ll verkefnin. Ef Ã¾etta er rangt, reyndu aftur aÃ° breyta en meÃ° fÃ¦rri valin atriÃ°i.';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Efninu hefur veriğ úthlutağ...';
+$s_bug_assign_msg = 'Efninu hefur veriÃ° ÃºthlutaÃ°...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'Nıtt atriği';
-$s_feedback_bug_title = 'Óska svars viğ atriği';
-$s_acknowledged_bug_title = 'Móttekiğ atriği';
-$s_confirmed_bug_title = 'Stağfesta atriği';
-$s_assigned_bug_title = 'Úthluta atriği';
-$s_new_bug_button = 'Nıtt atriği';
-$s_feedback_bug_button = 'Óska svars';
-$s_acknowledged_bug_button = 'Móttaka atriği';
-$s_confirmed_bug_button = 'Stağfesta atriği';
-$s_assigned_bug_button = 'Úthluta atriği';
+$s_new_bug_title = 'NÃ½tt atriÃ°i';
+$s_feedback_bug_title = 'Ã“ska svars viÃ° atriÃ°i';
+$s_acknowledged_bug_title = 'MÃ³ttekiÃ° atriÃ°i';
+$s_confirmed_bug_title = 'StaÃ°festa atriÃ°i';
+$s_assigned_bug_title = 'Ãšthluta atriÃ°i';
+$s_new_bug_button = 'NÃ½tt atriÃ°i';
+$s_feedback_bug_button = 'Ã“ska svars';
+$s_acknowledged_bug_button = 'MÃ³ttaka atriÃ°i';
+$s_confirmed_bug_button = 'StaÃ°festa atriÃ°i';
+$s_assigned_bug_button = 'Ãšthluta atriÃ°i';
 
 # bug_close.php
-$s_bug_close_msg = 'Atriğinu hefur veriğ lokağ...';
+$s_bug_close_msg = 'AtriÃ°inu hefur veriÃ° lokaÃ°...';
 $s_close_immediately = 'Lokist strax:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Loka atriği';
+$s_closed_bug_title = 'Loka atriÃ°i';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Atriğinu hefur veriğ eytt...';
+$s_bug_deleted_msg = 'AtriÃ°inu hefur veriÃ° eytt...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Ertu viss um ağ şú viljir eyğa şessu atriği?';
-$s_delete_bug_button = 'Eyğa atriği';
+$s_delete_bug_sure_msg = 'Ertu viss um aÃ° Ã¾Ãº viljir eyÃ°a Ã¾essu atriÃ°i?';
+$s_delete_bug_button = 'EyÃ°a atriÃ°i';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Vakta atriği';
-$s_unmonitor_bug_button = 'Hætta vöktun';
+$s_monitor_bug_button = 'Vakta atriÃ°i';
+$s_unmonitor_bug_button = 'HÃ¦tta vÃ¶ktun';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Upphal skráar tókst';
+$s_file_upload_msg = 'Upphal skrÃ¡ar tÃ³kst';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Upphala skrá';
-$s_select_file = 'Velja skrá';
-$s_upload_file_button = 'Upphala skrá';
-$s_max_file_size = 'Hámarks stærğ';
+$s_upload_file = 'Upphala skrÃ¡';
+$s_select_file = 'Velja skrÃ¡';
+$s_upload_file_button = 'Upphala skrÃ¡';
+$s_max_file_size = 'HÃ¡marks stÃ¦rÃ°';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Atriğiğ hefur veriğ opnağ aftur...';
-$s_reopen_add_bugnote_title = 'Settu ástæğu til ağ opna atriği aftur';
-$s_bugnote_add_reopen_button = 'Settu athugasemd og opnağu atriğiğ aftur';
+$s_bug_reopened_msg = 'AtriÃ°iÃ° hefur veriÃ° opnaÃ° aftur...';
+$s_reopen_add_bugnote_title = 'Settu Ã¡stÃ¦Ã°u til aÃ° opna atriÃ°i aftur';
+$s_bugnote_add_reopen_button = 'Settu athugasemd og opnaÃ°u atriÃ°iÃ° aftur';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Leysa atriği';
-$s_resolved_bug_button = 'Leysa atriği';
+$s_resolved_bug_title = 'Leysa atriÃ°i';
+$s_resolved_bug_button = 'Leysa atriÃ°i';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Atriği hefur veriğ leyst. Settu athugasemd fyrir neğan...';
-$s_resolve_add_bugnote_title = 'Settu athugasemd um ağ atriğiğ var leyst';
-$s_bugnote_add_resolve_button = 'Bæta viğ athugasemd';
+$s_bug_resolved_msg = 'AtriÃ°i hefur veriÃ° leyst. Settu athugasemd fyrir neÃ°an...';
+$s_resolve_add_bugnote_title = 'Settu athugasemd um aÃ° atriÃ°iÃ° var leyst';
+$s_bugnote_add_resolve_button = 'BÃ¦ta viÃ° athugasemd';
 
 # bug_reminder_page.php
-$s_from = 'Frá';
+$s_from = 'FrÃ¡';
 $s_to = 'Til';
-$s_on = 'Á';
-$s_sent_you_this_reminder_about = 'sendi şetta minnisatriği um';
-$s_bug_reminder = 'Senda minnisatriği';
-$s_reminder_sent_to = 'Minnisatriği sent til';
+$s_on = 'Ã';
+$s_sent_you_this_reminder_about = 'sendi Ã¾etta minnisatriÃ°i um';
+$s_bug_reminder = 'Senda minnisatriÃ°i';
+$s_reminder_sent_to = 'MinnisatriÃ°i sent til';
 $s_bug_send_button = 'Senda';
-$s_reminder = 'Minnisatriği';
-$s_reminder_explain = 'Şessi athugasemd mun verğa send til allra sem hafa óskağ eftir svari viğ şessu atriği.';
-$s_reminder_monitor = 'Şessir viğtakendur munu einnig vakta atriğiğ. Şeir geta afskráğ sig meğ şví ağ nota hnappinn Hætta vöktun.';
-$s_reminder_store = 'Şessi athugasemd verğur vistuğ meğ atriğinu.';
+$s_reminder = 'MinnisatriÃ°i';
+$s_reminder_explain = 'Ãessi athugasemd mun verÃ°a send til allra sem hafa Ã³skaÃ° eftir svari viÃ° Ã¾essu atriÃ°i.';
+$s_reminder_monitor = 'Ãessir viÃ°takendur munu einnig vakta atriÃ°iÃ°. Ãeir geta afskrÃ¡Ã° sig meÃ° Ã¾vÃ­ aÃ° nota hnappinn HÃ¦tta vÃ¶ktun.';
+$s_reminder_store = 'Ãessi athugasemd verÃ°ur vistuÃ° meÃ° atriÃ°inu.';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Atriğiğ hefur veriğ uppfært...';
+$s_bug_updated_msg = 'AtriÃ°iÃ° hefur veriÃ° uppfÃ¦rt...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Aftur til atriğis';
-$s_update_simple_link = 'Einföld uppfærsla';
-$s_updating_bug_advanced_title = 'Uppfæri upplısingar um atriği';
+$s_back_to_bug_link = 'Aftur til atriÃ°is';
+$s_update_simple_link = 'EinfÃ¶ld uppfÃ¦rsla';
+$s_updating_bug_advanced_title = 'UppfÃ¦ri upplÃ½singar um atriÃ°i';
 $s_id = 'ID';
 $s_category = 'Flokkur';
-$s_severity = 'Mikilvægi';
-$s_reproducibility = 'Möguleg endursköpun';
+$s_severity = 'MikilvÃ¦gi';
+$s_reproducibility = 'MÃ¶guleg endurskÃ¶pun';
 $s_date_submitted = 'Sendingardagur';
-$s_last_update = 'Síğast uppfært';
+$s_last_update = 'SÃ­Ã°ast uppfÃ¦rt';
 $s_reporter = 'Tilkynnt af';
-$s_assigned_to = 'Úthlutağ til';
+$s_assigned_to = 'ÃšthlutaÃ° til';
 $s_priority = 'Forgangur';
-$s_resolution = 'Úrlausn';
-$s_status = 'Stağa';
+$s_resolution = 'Ãšrlausn';
+$s_status = 'StaÃ°a';
 $s_duplicate_id = 'Afrits "ID"';
 $s_os = 'OS';
 $s_projection = 'Skipulagning';
-$s_os_version = 'Stırikerfi';
-$s_eta = 'Áætlun';
-$s_product_version = 'Kerfis útgáfa';
-$s_build = 'Útgáfa';
-$s_fixed_in_version = 'Lagağ í útgáfu';
-$s_votes = 'Atkvæği';
+$s_os_version = 'StÃ½rikerfi';
+$s_eta = 'ÃÃ¦tlun';
+$s_product_version = 'Kerfis ÃºtgÃ¡fa';
+$s_build = 'ÃštgÃ¡fa';
+$s_fixed_in_version = 'LagaÃ° Ã­ ÃºtgÃ¡fu';
+$s_votes = 'AtkvÃ¦Ã°i';
 $s_summary = 'Yfirlit';
-$s_description = 'Lısing';
-$s_steps_to_reproduce = 'Skref til endursköpunar';
-$s_update_information_button = 'Uppfæra upplısingar';
-$s_sticky_issue = 'Límt atriği';
-$s_profile = 'Sniğ';
+$s_description = 'LÃ½sing';
+$s_steps_to_reproduce = 'Skref til endurskÃ¶punar';
+$s_update_information_button = 'UppfÃ¦ra upplÃ½singar';
+$s_sticky_issue = 'LÃ­mt atriÃ°i';
+$s_profile = 'SniÃ°';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Hærri uppfærsla';
-$s_updating_bug_simple_title = 'Uppfæri upplısingar um atriği';
+$s_update_advanced_link = 'HÃ¦rri uppfÃ¦rsla';
+$s_updating_bug_simple_title = 'UppfÃ¦ri upplÃ½singar um atriÃ°i';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Atkvæği hefur bæst viğ...';
+$s_vote_added_msg = 'AtkvÃ¦Ã°i hefur bÃ¦st viÃ°...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Bætt viğ athugasemd...';
+$s_bugnote_added_msg = 'BÃ¦tt viÃ° athugasemd...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Athugasemd hefur veriğ eytt...';
+$s_bugnote_deleted_msg = 'Athugasemd hefur veriÃ° eytt...';
 $s_bug_notes_title = 'Athugasemd';
 
 # bugnote_edit_page.php
 $s_edit_bugnote_title = 'Skrifa athugasemd';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Şağ er enginn athugasemd tengt şessu atriği.';
-$s_delete_link = 'Eyğa';
-$s_add_bugnote_title = 'Bæta viğ athugasemd';
-$s_add_bugnote_button = 'Bæta viğ athugasemd';
+$s_no_bugnotes_msg = 'ÃaÃ° er enginn athugasemd tengt Ã¾essu atriÃ°i.';
+$s_delete_link = 'EyÃ°a';
+$s_add_bugnote_title = 'BÃ¦ta viÃ° athugasemd';
+$s_add_bugnote_button = 'BÃ¦ta viÃ° athugasemd';
 $s_bugnote_edit_link = 'Skrifa';
-$s_closed_bug_button = 'Loka atriği';
+$s_closed_bug_button = 'Loka atriÃ°i';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Athugasemdin hefur veriğ uppfærğ...';
-$s_edited_on = 'leiğrétting á: ';
+$s_bugnote_updated_msg = 'Athugasemdin hefur veriÃ° uppfÃ¦rÃ°...';
+$s_edited_on = 'leiÃ°rÃ©tting Ã¡: ';
 
 # file_api.php
-$s_show_content ='Sına innihald';
+$s_show_content ='SÃ½na innihald';
 
 # index.php
-$s_click_to_login = 'İtiğ hér til innskráningar';
+$s_click_to_login = 'ÃtiÃ° hÃ©r til innskrÃ¡ningar';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Velkominn í tilkynningakerfiğ.';
-$s_login_title = 'Innskráning';
-$s_save_login = 'Vista innskráningu';
+$s_login_page_info = 'Velkominn Ã­ tilkynningakerfiÃ°.';
+$s_login_title = 'InnskrÃ¡ning';
+$s_save_login = 'Vista innskrÃ¡ningu';
 $s_choose_project = 'Velja verkefni';
-$s_login_button = 'Innskráning';
-$s_signup_link = 'Skráning fyrir nıjan ağgang';
-$s_lost_password_link = 'Tınt lykilorğ?';
+$s_login_button = 'InnskrÃ¡ning';
+$s_signup_link = 'SkrÃ¡ning fyrir nÃ½jan aÃ°gang';
+$s_lost_password_link = 'TÃ½nt lykilorÃ°?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Velja verkefni';
 
 # logout_page.php
-$s_logged_out_title = 'Útskráning...';
+$s_logged_out_title = 'ÃštskrÃ¡ning...';
 $s_redirecting = '...framsending';
-$s_here = 'Hér';
+$s_here = 'HÃ©r';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Lykilorğ endurstillt";
-$s_lost_password_done_title = "Skilaboğ um lykilorğ sent";
-$s_lost_password_subject = "Lykilorğ endurstillt";
-$s_lost_password_info = "Til ağ endurstilla tınt lykilorğ, gefğu upp nafn og tölvupóstfang fyrir ağganginn.<br/><br/>Ef gögnin samsvara gildum ağgangi, verğur şú sendur á sérstakt veffang meğ tölvupósti sem inniheldur stağfestingar kóğa fyrir şinn ağgang. Fylgdu şessari slóğ til ağ breyta lykilorğinu.";
-$s_lost_password_confirm_hash_OK = "Stağfesting şín hefur veriğ samşykkt. Uppfærğu lykilorğiğ.";
+$s_lost_password_title = "LykilorÃ° endurstillt";
+$s_lost_password_done_title = "SkilaboÃ° um lykilorÃ° sent";
+$s_lost_password_subject = "LykilorÃ° endurstillt";
+$s_lost_password_info = "Til aÃ° endurstilla tÃ½nt lykilorÃ°, gefÃ°u upp nafn og tÃ¶lvupÃ³stfang fyrir aÃ°ganginn.<br/><br/>Ef gÃ¶gnin samsvara gildum aÃ°gangi, verÃ°ur Ã¾Ãº sendur Ã¡ sÃ©rstakt veffang meÃ° tÃ¶lvupÃ³sti sem inniheldur staÃ°festingar kÃ³Ã°a fyrir Ã¾inn aÃ°gang. Fylgdu Ã¾essari slÃ³Ã° til aÃ° breyta lykilorÃ°inu.";
+$s_lost_password_confirm_hash_OK = "StaÃ°festing Ã¾Ã­n hefur veriÃ° samÃ¾ykkt. UppfÃ¦rÃ°u lykilorÃ°iÃ°.";
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Opiğ og úthlutağ á mig';
-$s_open_and_reported_to_me = 'Opiğ og tilkynnt af mér';
-$s_newer_news_link = 'Nırri fréttir';
-$s_older_news_link = 'Eldri fréttir';
+$s_open_and_assigned_to_me = 'OpiÃ° og ÃºthlutaÃ° Ã¡ mig';
+$s_open_and_reported_to_me = 'OpiÃ° og tilkynnt af mÃ©r';
+$s_newer_news_link = 'NÃ½rri frÃ©ttir';
+$s_older_news_link = 'Eldri frÃ©ttir';
 $s_archives = 'Skjalasafn';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Stofna notanda';
-$s_created_user_part2 = 'meğ ağgangsheimildina';
+$s_created_user_part2 = 'meÃ° aÃ°gangsheimildina';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Stofna nıjan ağgang';
-$s_verify_password = 'Stağfesta lykilorğ';
+$s_create_new_account_title = 'Stofna nÃ½jan aÃ°gang';
+$s_verify_password = 'StaÃ°festa lykilorÃ°';
 $s_enabled = 'Virkur';
 $s_protected = 'Varinn';
 $s_create_user_button = 'Stofna notanda';
 
 # manage_page.php
-$s_hide_disabled = 'Fela óvirkur';
-$s_filter_button = 'Nota síu';
-$s_manage_users_link = 'Stjórna notendum';
-$s_manage_projects_link = 'Stjórna verkefnum';
-$s_manage_custom_field_link = 'Stjórna sérsniğum svæğum';
-$s_manage_global_profiles_link = 'Stjórna öllum forstillingum';
-$s_permissions_summary_report = 'Skırsla yfir leyfi';
-$s_manage_config_link = 'Stjórna stillingum';
-$s_manage_threshold_config = 'Şröskuldur verkefnaflæğis';
-$s_manage_email_config = 'Tölvupósts athugasemdir';
-$s_manage_workflow_config = 'Verkefnaflæği';
-$s_create_new_account_link = 'Stofna nıjan ağgang';
+$s_hide_disabled = 'Fela Ã³virkur';
+$s_filter_button = 'Nota sÃ­u';
+$s_manage_users_link = 'StjÃ³rna notendum';
+$s_manage_projects_link = 'StjÃ³rna verkefnum';
+$s_manage_custom_field_link = 'StjÃ³rna sÃ©rsniÃ°um svÃ¦Ã°um';
+$s_manage_global_profiles_link = 'StjÃ³rna Ã¶llum forstillingum';
+$s_permissions_summary_report = 'SkÃ½rsla yfir leyfi';
+$s_manage_config_link = 'StjÃ³rna stillingum';
+$s_manage_threshold_config = 'ÃrÃ¶skuldur verkefnaflÃ¦Ã°is';
+$s_manage_email_config = 'TÃ¶lvupÃ³sts athugasemdir';
+$s_manage_workflow_config = 'VerkefnaflÃ¦Ã°i';
+$s_create_new_account_link = 'Stofna nÃ½jan aÃ°gang';
 $s_projects_link = 'Verkefni';
-$s_documentation_link = 'Skjöl';
-$s_new_accounts_title = 'Nır ağgangur';
+$s_documentation_link = 'SkjÃ¶l';
+$s_new_accounts_title = 'NÃ½r aÃ°gangur';
 $s_1_week_title = '1 vika';
-$s_never_logged_in_title = 'Aldrei skráğur inn';
-$s_prune_accounts = 'Snyrta ağgangsheimildir';
-$s_hide_inactive = 'Fela óvirkur';
-$s_manage_accounts_title = 'Stjórna ağgangi';
+$s_never_logged_in_title = 'Aldrei skrÃ¡Ã°ur inn';
+$s_prune_accounts = 'Snyrta aÃ°gangsheimildir';
+$s_hide_inactive = 'Fela Ã³virkur';
+$s_manage_accounts_title = 'StjÃ³rna aÃ°gangi';
 $s_p = 'p';
 $s_date_created = 'Stofndagur';
-$s_last_visit = 'Síğast heimsótt';
+$s_last_visit = 'SÃ­Ã°ast heimsÃ³tt';
 $s_edit_user_link = 'Skrifa notenda';
 
 # manage_config_email_page
-$s_config_all_projects = 'Athugiğ: Şessar stillingar gilda fyrir ÖLL VERKEFNI.';
-$s_config_project = 'Athugiğ: Şessi stilling gildir ağeins fyrir %s verkefni.';
-$s_colour_coding = 'Í töflunni fyrir neğan, gilda eftirfarandi litakóğar:';
-$s_colour_project = 'Verkefnastillingin skrifar yfir ağra.';
-$s_colour_global = 'Allar verkefnastillingarnar skrifa yfir sjálfgefna stillingu.';
-$s_issue_reporter = 'Notandinn sem tilkynnti um atriğiğ';
-$s_issue_handler = 'Notandinn sem meğhöndlar atiğiğ';
-$s_users_added_bugnote = 'Notandinn sem bætti viğ athugasemd';
-$s_change_configuration = 'Uppfæra stillingar';
-$s_message = 'Skilaboğ';
-$s_default_notify = 'Stilla sjálfgefin merki um athugasemdir í';
-$s_action_notify = 'Stilla merki um ağgerğ viğ athugasemd í';
-$s_notify_defaults_change_access = 'Hver getur breytt sjálfgefnum athugasemdum';
+$s_config_all_projects = 'AthugiÃ°: Ãessar stillingar gilda fyrir Ã–LL VERKEFNI.';
+$s_config_project = 'AthugiÃ°: Ãessi stilling gildir aÃ°eins fyrir %s verkefni.';
+$s_colour_coding = 'Ã tÃ¶flunni fyrir neÃ°an, gilda eftirfarandi litakÃ³Ã°ar:';
+$s_colour_project = 'Verkefnastillingin skrifar yfir aÃ°ra.';
+$s_colour_global = 'Allar verkefnastillingarnar skrifa yfir sjÃ¡lfgefna stillingu.';
+$s_issue_reporter = 'Notandinn sem tilkynnti um atriÃ°iÃ°';
+$s_issue_handler = 'Notandinn sem meÃ°hÃ¶ndlar atiÃ°iÃ°';
+$s_users_added_bugnote = 'Notandinn sem bÃ¦tti viÃ° athugasemd';
+$s_change_configuration = 'UppfÃ¦ra stillingar';
+$s_message = 'SkilaboÃ°';
+$s_default_notify = 'Stilla sjÃ¡lfgefin merki um athugasemdir Ã­';
+$s_action_notify = 'Stilla merki um aÃ°gerÃ° viÃ° athugasemd Ã­';
+$s_notify_defaults_change_access = 'Hver getur breytt sjÃ¡lfgefnum athugasemdum';
 $s_notify_actions_change_access = 'Hver getur breytt athugasemdum';
-$s_revert_to_system = "Eyğa öllum verkefna stillingum";
-$s_revert_to_all_project = "Eyğa sérstökum verkefna stillingum";
+$s_revert_to_system = "EyÃ°a Ã¶llum verkefna stillingum";
+$s_revert_to_all_project = "EyÃ°a sÃ©rstÃ¶kum verkefna stillingum";
 
 # manage_config_workflow_page
 $s_non_existent = 'er ekki til';
-$s_current_status = 'Núverandi stağa';
-$s_next_status = 'Næsta stağa';
-$s_workflow = 'Verkefnaflæği';
-$s_workflow_thresholds = 'Şröskuldar sem hafa áhrif á verkefnaflæği';
-$s_threshold = 'Şröskuldur';
-$s_status_level = 'Stağa';
-$s_alter_level = 'Hver getur breytt şessu gildi';
-$s_validation = 'Stağfesting á verkefnaflæği';
-$s_comment = 'Ábending um verkefnaflæği';
-$s_superfluous = 'ör frá stöğu ağ şví sjálfu er undanskiliğ og şarfnast şví ekki ağgerğa.';
-$s_unreachable = 'Şú getur ekki fært atriği í şessa stöğu';
-$s_no_exit = 'Şú getur ekki fært atriğ úr şessari stöğu';
-$s_access_levels = 'Ağgangsstig';
-$s_access_change = 'Lágmarks ağgangsstig til ağ breyta şessari stöğu';
-$s_desc_bug_submit_status = 'Stağa sem nı atriği fá';
-$s_desc_bug_reopen_status = 'Stağa sem enduropnuğu atriği fá';
-$s_desc_bug_resolved_status_threshold = 'Stağa şar sem atriği er álitiğ leyst';
-$s_workflow_change_access = 'Hver getur breytt verkefnaflæği';
-$s_access_change_access = 'Hver getur breytt ağgangsstigi';
+$s_current_status = 'NÃºverandi staÃ°a';
+$s_next_status = 'NÃ¦sta staÃ°a';
+$s_workflow = 'VerkefnaflÃ¦Ã°i';
+$s_workflow_thresholds = 'ÃrÃ¶skuldar sem hafa Ã¡hrif Ã¡ verkefnaflÃ¦Ã°i';
+$s_threshold = 'ÃrÃ¶skuldur';
+$s_status_level = 'StaÃ°a';
+$s_alter_level = 'Hver getur breytt Ã¾essu gildi';
+$s_validation = 'StaÃ°festing Ã¡ verkefnaflÃ¦Ã°i';
+$s_comment = 'Ãbending um verkefnaflÃ¦Ã°i';
+$s_superfluous = 'Ã¶r frÃ¡ stÃ¶Ã°u aÃ° Ã¾vÃ­ sjÃ¡lfu er undanskiliÃ° og Ã¾arfnast Ã¾vÃ­ ekki aÃ°gerÃ°a.';
+$s_unreachable = 'ÃÃº getur ekki fÃ¦rt atriÃ°i Ã­ Ã¾essa stÃ¶Ã°u';
+$s_no_exit = 'ÃÃº getur ekki fÃ¦rt atriÃ° Ãºr Ã¾essari stÃ¶Ã°u';
+$s_access_levels = 'AÃ°gangsstig';
+$s_access_change = 'LÃ¡gmarks aÃ°gangsstig til aÃ° breyta Ã¾essari stÃ¶Ã°u';
+$s_desc_bug_submit_status = 'StaÃ°a sem nÃ½ atriÃ°i fÃ¡';
+$s_desc_bug_reopen_status = 'StaÃ°a sem enduropnuÃ°u atriÃ°i fÃ¡';
+$s_desc_bug_resolved_status_threshold = 'StaÃ°a Ã¾ar sem atriÃ°i er Ã¡litiÃ° leyst';
+$s_workflow_change_access = 'Hver getur breytt verkefnaflÃ¦Ã°i';
+$s_access_change_access = 'Hver getur breytt aÃ°gangsstigi';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'Sjálfgefin stağa %s er ekki valinn fyrir næstu stöğu %s. Şví verğur hafnağ';
+$s_default_not_in_flow = 'SjÃ¡lfgefin staÃ°a %s er ekki valinn fyrir nÃ¦stu stÃ¶Ã°u %s. ÃvÃ­ verÃ°ur hafnaÃ°';
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Úthluta atriği';
-$s_allow_close_immediate = 'Heimila ağ Leystu atriği sé lokağ';
-$s_allow_reporter_close = 'Heimila tilkynnanda ağ loka atriği';
-$s_allow_reporter_reopen = 'Heimila tilkynnanda ağ opna aftur atriği';
-$s_set_status_assigned = 'Setja úthlutunarstöğu á höndlara atriğis';
-$s_allow_user_edit = 'Heimila notanda ağ skrifa sínar eigin athugasemdir';
-$s_limit_access = 'Takmarka ağgang tilkynnanda ağ sínum eigin atriğum';
-$s_submit_status = 'Stağa sem nı atriği fá';
-$s_assigned_status = 'Stağa sem sjálfvirk úthlutuğ atriğ fá';
-$s_resolved_status = 'Stağa şar sem atriği er álitiğ leyst';
-$s_readonly_status = 'Stağa şar sem atriği verğur ağeins lesanlegt';
-$s_reopen_status = 'Stağa sem enduropnuğ atriği fá';
-$s_reopen_resolution = 'Úrlausn sem enduropnuğ atriği fá';
+$s_assign_issue = 'Ãšthluta atriÃ°i';
+$s_allow_close_immediate = 'Heimila aÃ° Leystu atriÃ°i sÃ© lokaÃ°';
+$s_allow_reporter_close = 'Heimila tilkynnanda aÃ° loka atriÃ°i';
+$s_allow_reporter_reopen = 'Heimila tilkynnanda aÃ° opna aftur atriÃ°i';
+$s_set_status_assigned = 'Setja ÃºthlutunarstÃ¶Ã°u Ã¡ hÃ¶ndlara atriÃ°is';
+$s_allow_user_edit = 'Heimila notanda aÃ° skrifa sÃ­nar eigin athugasemdir';
+$s_limit_access = 'Takmarka aÃ°gang tilkynnanda aÃ° sÃ­num eigin atriÃ°um';
+$s_submit_status = 'StaÃ°a sem nÃ½ atriÃ°i fÃ¡';
+$s_assigned_status = 'StaÃ°a sem sjÃ¡lfvirk ÃºthlutuÃ° atriÃ° fÃ¡';
+$s_resolved_status = 'StaÃ°a Ã¾ar sem atriÃ°i er Ã¡litiÃ° leyst';
+$s_readonly_status = 'StaÃ°a Ã¾ar sem atriÃ°i verÃ°ur aÃ°eins lesanlegt';
+$s_reopen_status = 'StaÃ°a sem enduropnuÃ° atriÃ°i fÃ¡';
+$s_reopen_resolution = 'Ãšrlausn sem enduropnuÃ° atriÃ°i fÃ¡';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Ertu viss um ağ vilja eyğa stillingum fyrir';
-$s_in_project = 'í framkvæmd';
-$s_delete_config_button = 'Eyğa stillingum';
+$s_config_delete_sure = 'Ertu viss um aÃ° vilja eyÃ°a stillingum fyrir';
+$s_in_project = 'Ã­ framkvÃ¦md';
+$s_delete_config_button = 'EyÃ°a stillingum';
 
 # adm_config_report.php
-$s_configuration_report = 'Skırsla um stillingar';
+$s_configuration_report = 'SkÃ½rsla um stillingar';
 $s_database_configuration = 'Gagnagrunns stillingar';
-$s_configuration_option = 'Stillingar möguleikar';
+$s_configuration_option = 'Stillingar mÃ¶guleikar';
 $s_configuration_option_type = 'Tegund';
 $s_configuration_option_value = 'Gildi';
 $s_all_users = 'Allir notendur';
-$s_set_configuration_option = 'Setja stillingar möguleika';
-$s_delete_config_sure_msg = 'Ertu viss um ağ vilja eyğa şessum stillingar möguleika?';
+$s_set_configuration_option = 'Setja stillingar mÃ¶guleika';
+$s_delete_config_sure_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essum stillingar mÃ¶guleika?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Verkefninu hefur veriğ bætt viğ...';
+$s_project_added_msg = 'Verkefninu hefur veriÃ° bÃ¦tt viÃ°...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Flokkinum hefur veriğ bætt viğ...';
+$s_category_added_msg = 'Flokkinum hefur veriÃ° bÃ¦tt viÃ°...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Flokkinum hefur veriğ eytt...';
+$s_category_deleted_msg = 'Flokkinum hefur veriÃ° eytt...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Ertu viss um ağ şú viljir eyğa şessum flokki?';
-$s_delete_category_button = 'Eyğa flokki';
+$s_category_delete_sure_msg = 'Ertu viss um aÃ° Ã¾Ãº viljir eyÃ°a Ã¾essum flokki?';
+$s_delete_category_button = 'EyÃ°a flokki';
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = 'Skrifa Verkefna flokk';
-$s_update_category_button = 'Uppfæra flokk';
+$s_update_category_button = 'UppfÃ¦ra flokk';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Flokkurinn hefur veriğ uppfærğur...';
+$s_category_updated_msg = 'Flokkurinn hefur veriÃ° uppfÃ¦rÃ°ur...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Bæti viğ undirverkefnum';
+$s_add_subproject_title = 'BÃ¦ti viÃ° undirverkefnum';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Verkefniğ hefur veriğ fjarlægt...';
+$s_project_deleted_msg = 'VerkefniÃ° hefur veriÃ° fjarlÃ¦gt...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Ertu viss um ağ vilja eyğa şessu verkefni og öllum efnis skırslum?';
-$s_project_delete_button = 'Eyğa verkefni';
+$s_project_delete_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essu verkefni og Ã¶llum efnis skÃ½rslum?';
+$s_project_delete_button = 'EyÃ°a verkefni';
 
 # manage_proj_edit_page.php
 $s_edit_project_title = 'Skrifa verkefni';
 $s_project_name = 'Nafn verkefnis';
-$s_view_status = 'Sjá stöğu';
+$s_view_status = 'SjÃ¡ stÃ¶Ã°u';
 $s_public = 'almennt';
-$s_private = 'læst';
-$s_update_project_button = 'Uppfæra verkefni';
-$s_delete_project_button = 'Eyğa verkefni';
-$s_categories_and_version_title = 'Flokkar og útgáfur';
+$s_private = 'lÃ¦st';
+$s_update_project_button = 'UppfÃ¦ra verkefni';
+$s_delete_project_button = 'EyÃ°a verkefni';
+$s_categories_and_version_title = 'Flokkar og ÃºtgÃ¡fur';
 $s_categories = 'Flokkar';
-$s_add_category_button = 'Bæta viğ flokki';
-$s_versions = 'Útgáfur';
-$s_add_version_button = 'Bæta viğ útgáfu';
-$s_add_and_edit_version_button = 'Bæta viğ og skrifa útgáfu';
+$s_add_category_button = 'BÃ¦ta viÃ° flokki';
+$s_versions = 'ÃštgÃ¡fur';
+$s_add_version_button = 'BÃ¦ta viÃ° ÃºtgÃ¡fu';
+$s_add_and_edit_version_button = 'BÃ¦ta viÃ° og skrifa ÃºtgÃ¡fu';
 $s_edit_link = 'Skrifa';
-$s_actions = 'Ağgerğir';
-$s_version = 'Útgáfa';
-$s_timestamp = 'Tímastimpill';
-$s_update = 'Uppfæra';
+$s_actions = 'AÃ°gerÃ°ir';
+$s_version = 'ÃštgÃ¡fa';
+$s_timestamp = 'TÃ­mastimpill';
+$s_update = 'UppfÃ¦ra';
 $s_subprojects = 'Undirverkefni';
-$s_add_subproject = 'Bæta viğ sem undirverkefni';
-$s_create_new_subproject_link = 'Skapa nıjan undirflokk';
+$s_add_subproject = 'BÃ¦ta viÃ° sem undirverkefni';
+$s_create_new_subproject_link = 'Skapa nÃ½jan undirflokk';
 $s_unlink_link = 'Aftengja';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Bæta viğ verkefni';
-$s_upload_file_path = 'Upphala skrár slóğ';
-$s_add_project_button = 'Bæta viğ verkefni';
+$s_add_project_title = 'BÃ¦ta viÃ° verkefni';
+$s_upload_file_path = 'Upphala skrÃ¡r slÃ³Ã°';
+$s_add_project_button = 'BÃ¦ta viÃ° verkefni';
 $s_projects_title = 'Verkefni';
 $s_name = 'Nafn';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Verkefniğ hefur veriğ uppfært...';
+$s_project_updated_msg = 'VerkefniÃ° hefur veriÃ° uppfÃ¦rt...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Útgáfunni hefur veriğ bætt viğ...';
+$s_version_added_msg = 'ÃštgÃ¡funni hefur veriÃ° bÃ¦tt viÃ°...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'Útgáfunni hefur veriğ eytt...';
+$s_version_deleted_msg = 'ÃštgÃ¡funni hefur veriÃ° eytt...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Ertu viss um ağ vilja eyğa şessari útgáfu?';
-$s_delete_version_button = 'Eyğa útgáfu';
+$s_version_delete_sure = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essari ÃºtgÃ¡fu?';
+$s_delete_version_button = 'EyÃ°a ÃºtgÃ¡fu';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Skrifa verkefna útgáfu';
-$s_update_version_button = 'Uppfæra útgáfu';
-$s_released = 'Útgefiğ';
+$s_edit_project_version_title = 'Skrifa verkefna ÃºtgÃ¡fu';
+$s_update_version_button = 'UppfÃ¦ra ÃºtgÃ¡fu';
+$s_released = 'ÃštgefiÃ°';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Útgáfan hefur veriğ uppfærğ...';
+$s_version_updated_msg = 'ÃštgÃ¡fan hefur veriÃ° uppfÃ¦rÃ°...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Ağgangur varinn. Ekki er hægt ağ eyğa şessum  ağgangi.';
-$s_account_deleted_msg = 'Ağgangi eytt...';
+$s_account_delete_protected_msg = 'AÃ°gangur varinn. Ekki er hÃ¦gt aÃ° eyÃ°a Ã¾essum  aÃ°gangi.';
+$s_account_deleted_msg = 'AÃ°gangi eytt...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Ertu viss um ağ vilja eyğa şessum ağgangi?';
+$s_delete_account_sure_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essum aÃ°gangi?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Allar ağgangsheimildir sem ekki hefur veriğ innskráğ á og eru eldri en 1 vika hafa veriğ fjarlægğar';
+$s_accounts_pruned_msg = 'Allar aÃ°gangsheimildir sem ekki hefur veriÃ° innskrÃ¡Ã° Ã¡ og eru eldri en 1 vika hafa veriÃ° fjarlÃ¦gÃ°ar';
 $s_prune_accounts_button = 'Snyrta';
-$s_confirm_account_pruning = 'Ertu viss um ağ vilja eyğa gömlum ağgangsheimildum sem ekki hefur veriğ innskráğ á?';
+$s_confirm_account_pruning = 'Ertu viss um aÃ° vilja eyÃ°a gÃ¶mlum aÃ°gangsheimildum sem ekki hefur veriÃ° innskrÃ¡Ã° Ã¡?';
 
 # manage_user_page.php
 $s_edit_user_title = 'Skrifa notanda';
-$s_reset_password_button = 'Endurstilla lykilorğ';
-$s_delete_user_button = 'Eyğa notanda';
-$s_reset_password_msg = 'Endurstilling lykilorğs sendir stağfestingu á sérstakt veffang meğ tölvupósti.';
-$s_reset_password_msg2 = 'Endurstillt lykilorğ er núllstillt.';
+$s_reset_password_button = 'Endurstilla lykilorÃ°';
+$s_delete_user_button = 'EyÃ°a notanda';
+$s_reset_password_msg = 'Endurstilling lykilorÃ°s sendir staÃ°festingu Ã¡ sÃ©rstakt veffang meÃ° tÃ¶lvupÃ³sti.';
+$s_reset_password_msg2 = 'Endurstillt lykilorÃ° er nÃºllstillt.';
 $s_show_all_users = 'Allir';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Ağgangur varinn. Ekki er hægt ağ endurstilla lykilorğ.';
-$s_account_reset_msg = 'Beiğni um stağfestingu hefur veriğ send í tölvupósti til notandans. Notandinn getur şví breytt lykilorği sínu.';
-$s_account_reset_msg2 = 'Ağgangs lykilorğiğ hefur veriğ núllstillt...';
+$s_account_reset_protected_msg = 'AÃ°gangur varinn. Ekki er hÃ¦gt aÃ° endurstilla lykilorÃ°.';
+$s_account_reset_msg = 'BeiÃ°ni um staÃ°festingu hefur veriÃ° send Ã­ tÃ¶lvupÃ³sti til notandans. Notandinn getur Ã¾vÃ­ breytt lykilorÃ°i sÃ­nu.';
+$s_account_reset_msg2 = 'AÃ°gangs lykilorÃ°iÃ° hefur veriÃ° nÃºllstillt...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Ağgangur varinn. Ağgangsstig og virk vörn. Annars, hefur ağgangsheimildin veriğ uppfærğ...';
-$s_manage_user_updated_msg = 'Ağgangsheimild uppfærğ...';
+$s_manage_user_protected_msg = 'AÃ°gangur varinn. AÃ°gangsstig og virk vÃ¶rn. Annars, hefur aÃ°gangsheimildin veriÃ° uppfÃ¦rÃ°...';
+$s_manage_user_updated_msg = 'AÃ°gangsheimild uppfÃ¦rÃ°...';
 
 # menu_inc.php
-$s_main_link = 'Ağalsíğa';
-$s_view_bugs_link = 'Skoğa atriği';
-$s_report_bug_link = 'Tilkynna atriği';
-$s_changelog_link = 'Breytingaskrá';
+$s_main_link = 'AÃ°alsÃ­Ã°a';
+$s_view_bugs_link = 'SkoÃ°a atriÃ°i';
+$s_report_bug_link = 'Tilkynna atriÃ°i';
+$s_changelog_link = 'BreytingaskrÃ¡';
 $s_summary_link = 'Yfirlit';
-$s_account_link = 'Minn ağgangur';
+$s_account_link = 'Minn aÃ°gangur';
 $s_users_link = 'Notendur';
-$s_manage_link = 'Umsjón';
-$s_edit_news_link = 'Skrifa fréttir';
-$s_docs_link = 'Skjöl';
-$s_logout_link = 'Útskráning';
+$s_manage_link = 'UmsjÃ³n';
+$s_edit_news_link = 'Skrifa frÃ©ttir';
+$s_docs_link = 'SkjÃ¶l';
+$s_logout_link = 'ÃštskrÃ¡ning';
 $s_my_view_link = 'Mitt yfirlit';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Óúthlutağ';
-$s_my_view_title_recent_mod = 'Nıleg tillaga';
-$s_my_view_title_reported = 'Tilkynnt af mér';
-$s_my_view_title_assigned = 'Úthlutağ til mín (óleyst)';
+$s_my_view_title_unassigned = 'Ã“ÃºthlutaÃ°';
+$s_my_view_title_recent_mod = 'NÃ½leg tillaga';
+$s_my_view_title_reported = 'Tilkynnt af mÃ©r';
+$s_my_view_title_assigned = 'ÃšthlutaÃ° til mÃ­n (Ã³leyst)';
 $s_my_view_title_resolved = 'Leyst';
-$s_my_view_title_monitored = 'Vaktağ af mér';
-$s_my_view_title_feedback = 'Beğiğ eftir svari frá mér';
-$s_my_view_title_verify = 'Beğiğ eftir stağfestingu á úrlausn frá mér';
+$s_my_view_title_monitored = 'VaktaÃ° af mÃ©r';
+$s_my_view_title_feedback = 'BeÃ°iÃ° eftir svari frÃ¡ mÃ©r';
+$s_my_view_title_verify = 'BeÃ°iÃ° eftir staÃ°festingu Ã¡ Ãºrlausn frÃ¡ mÃ©r';
 
 # news_add.php
-$s_news_added_msg = 'Fréttaefni bætt viğ...';
+$s_news_added_msg = 'FrÃ©ttaefni bÃ¦tt viÃ°...';
 
 # news_delete.php
-$s_news_deleted_msg = 'Eyği fréttaefni...';
+$s_news_deleted_msg = 'EyÃ°i frÃ©ttaefni...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Ertu viss um ağ şú viljir eyğa şessu fréttefni?';
-$s_delete_news_item_button = 'Eyğa fréttaefni';
+$s_delete_news_sure_msg = 'Ertu viss um aÃ° Ã¾Ãº viljir eyÃ°a Ã¾essu frÃ©ttefni?';
+$s_delete_news_item_button = 'EyÃ°a frÃ©ttaefni';
 
 # news_edit_page.php
-$s_edit_news_title = 'Skrifa frétt';
-$s_headline = 'Fyrirsögn';
+$s_edit_news_title = 'Skrifa frÃ©tt';
+$s_headline = 'FyrirsÃ¶gn';
 $s_body = 'Innihald';
-$s_update_news_button = 'Uppfæra fréttir';
+$s_update_news_button = 'UppfÃ¦ra frÃ©ttir';
 
 # news_menu_page.php
-$s_add_news_title = 'Bæta viğ frétt';
+$s_add_news_title = 'BÃ¦ta viÃ° frÃ©tt';
 $s_post_to = 'Senda til';
-$s_post_news_button = 'Senda fréttir';
-$s_edit_or_delete_news_title = 'Skrifa eğa eyğa fréttum';
-$s_edit_post = 'Skrifa póst';
-$s_delete_post = 'Eyğa pósti';
-$s_select_post = 'Velja póst';
+$s_post_news_button = 'Senda frÃ©ttir';
+$s_edit_or_delete_news_title = 'Skrifa eÃ°a eyÃ°a frÃ©ttum';
+$s_edit_post = 'Skrifa pÃ³st';
+$s_delete_post = 'EyÃ°a pÃ³sti';
+$s_select_post = 'Velja pÃ³st';
 
 # news_update.php
-$s_news_updated_msg = 'Fréttaefni uppfært...';
+$s_news_updated_msg = 'FrÃ©ttaefni uppfÃ¦rt...';
 
 # news_view_page.php
 $s_back_link = 'Til baka';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Skrá upphlağiğ';
+$s_file_uploaded_msg = 'SkrÃ¡ upphlaÃ°iÃ°';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Upphleğ skrá';
+$s_upload_file_title = 'UpphleÃ° skrÃ¡';
 $s_title = 'Titill';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Verkefna skrá eytt';
+$s_project_file_deleted_msg = 'Verkefna skrÃ¡ eytt';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Ertu viss um ağ vilja eyğa şessari skrá?';
+$s_confirm_file_delete_msg = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essari skrÃ¡?';
 
 # proj_doc_edit_page.php
-$s_filename = 'Skráarnafn';
-$s_file_update_button = 'Uppfæra skrá';
-$s_file_delete_button = 'Eyğa skrá';
+$s_filename = 'SkrÃ¡arnafn';
+$s_file_update_button = 'UppfÃ¦ra skrÃ¡';
+$s_file_delete_button = 'EyÃ°a skrÃ¡';
 
 # proj_doc_page.php
-$s_project_documentation_title = 'Verkefna skjöl';
-$s_user_documentation = 'Notenda skjöl';
-$s_project_documentation = 'Verkefna skjöl';
-$s_add_file = 'Bæta viğ skrá';
+$s_project_documentation_title = 'Verkefna skjÃ¶l';
+$s_user_documentation = 'Notenda skjÃ¶l';
+$s_project_documentation = 'Verkefna skjÃ¶l';
+$s_add_file = 'BÃ¦ta viÃ° skrÃ¡';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Verkiğ uppfært';
+$s_project_document_updated = 'VerkiÃ° uppfÃ¦rt';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Notanda bætt viğ verkefniğ';
+$s_project_user_added_msg = 'Notanda bÃ¦tt viÃ° verkefniÃ°';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Notandi fjarlægğur frá verkefni';
+$s_project_removed_user_msg = 'Notandi fjarlÃ¦gÃ°ur frÃ¡ verkefni';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Ertu viss um ağ vilja fjarlægja şennan notenda?';
-$s_remove_user_button = 'Fjarlægja notenda';
-$s_remove_all_users_sure_msg = 'Ertu viss um ağ vilja fjarlægja alla notendur şessa verkefnis?';
-$s_remove_all_users_button = 'Fjarlægja alla notendur';
+$s_remove_user_sure_msg = 'Ertu viss um aÃ° vilja fjarlÃ¦gja Ã¾ennan notenda?';
+$s_remove_user_button = 'FjarlÃ¦gja notenda';
+$s_remove_all_users_sure_msg = 'Ertu viss um aÃ° vilja fjarlÃ¦gja alla notendur Ã¾essa verkefnis?';
+$s_remove_all_users_button = 'FjarlÃ¦gja alla notendur';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Bæti viğ notenda viğ verkefniğ';
-$s_add_user_button = 'Bæta viğ notenda';
-$s_project_selection_title = 'Verkefni valiğ';
-$s_remove_link = 'Fjarlægja';
-$s_remove_all_link = 'Fjarlægi alla';
+$s_add_user_title = 'BÃ¦ti viÃ° notenda viÃ° verkefniÃ°';
+$s_add_user_button = 'BÃ¦ta viÃ° notenda';
+$s_project_selection_title = 'Verkefni valiÃ°';
+$s_remove_link = 'FjarlÃ¦gja';
+$s_remove_all_link = 'FjarlÃ¦gi alla';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Notandi uppfærğur';
+$s_updated_user_msg = 'Notandi uppfÃ¦rÃ°ur';
 
 # report_add.php
-$s_must_enter_category = 'Şú verğur ağ velja flokk';
-$s_must_enter_severity = 'Şú verğur ağ velja mikilvægi';
-$s_must_enter_reproducibility = 'Şú verğur ağ velja mögulega endursköpun';
-$s_must_enter_summary = 'Şú verğur ağ skrifa yfirlit';
-$s_must_enter_description = 'Şú verğur ağ skrifa lısingu';
-$s_report_more_bugs = 'Tilkynna fleiri atriği';
-$s_submission_thanks_msg = 'Takk fyrir şitt framlag';
+$s_must_enter_category = 'ÃÃº verÃ°ur aÃ° velja flokk';
+$s_must_enter_severity = 'ÃÃº verÃ°ur aÃ° velja mikilvÃ¦gi';
+$s_must_enter_reproducibility = 'ÃÃº verÃ°ur aÃ° velja mÃ¶gulega endurskÃ¶pun';
+$s_must_enter_summary = 'ÃÃº verÃ°ur aÃ° skrifa yfirlit';
+$s_must_enter_description = 'ÃÃº verÃ°ur aÃ° skrifa lÃ½singu';
+$s_report_more_bugs = 'Tilkynna fleiri atriÃ°i';
+$s_submission_thanks_msg = 'Takk fyrir Ã¾itt framlag';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'Einföld skırsla';
-$s_enter_report_details_title = 'Skrifa ítarlega skırslu';
+$s_simple_report_link = 'EinfÃ¶ld skÃ½rsla';
+$s_enter_report_details_title = 'Skrifa Ã­tarlega skÃ½rslu';
 $s_required = 'krafa';
 $s_select_category = 'Veldu flokk';
-$s_select_reproducibility = 'Veldu mögulega endursköpun';
-$s_select_severity = 'Veldu mikilvægi';
-$s_or_fill_in = 'EĞA fylla út';
-$s_assign_to = 'Úthlutağ til';
-$s_additional_information = 'Viğbótar upplısingar';
-$s_submit_report_button = 'Senda skırslu';
-$s_check_report_more_bugs = 'fara yfir til ağ tilkynna fleiri atriği';
+$s_select_reproducibility = 'Veldu mÃ¶gulega endurskÃ¶pun';
+$s_select_severity = 'Veldu mikilvÃ¦gi';
+$s_or_fill_in = 'EÃA fylla Ãºt';
+$s_assign_to = 'ÃšthlutaÃ° til';
+$s_additional_information = 'ViÃ°bÃ³tar upplÃ½singar';
+$s_submit_report_button = 'Senda skÃ½rslu';
+$s_check_report_more_bugs = 'fara yfir til aÃ° tilkynna fleiri atriÃ°i';
 
 # report_bug_page.php
-$s_advanced_report_link = 'Ítarleg skırsla';
-$s_report_stay = 'Uppsetning skırslu';
+$s_advanced_report_link = 'Ãtarleg skÃ½rsla';
+$s_report_stay = 'Uppsetning skÃ½rslu';
 
 # set_project.php
 $s_selected_project = 'Veldu verkefni';
-$s_valid_project_msg = 'Şú verğur ağ velja gilt verkefni';
+$s_valid_project_msg = 'ÃÃº verÃ°ur aÃ° velja gilt verkefni';
 
 # signup.php
-$s_signup_done_title = 'Ağgangs skráning framkvæmd';
-$s_password_emailed_msg = 'Skráning şín hefur tekist. Şér verğur nú sent stağfesting í tölvupósti til ağ sannreyna tölvupóstfangiğ şitt. Heimsókn şín á slóğina sem gefin er upp í tölvupóstinum mun virkja ağgang şinn.';
-$s_no_reponse_msg = 'Şú hefur sjö daga til ağ ljúka stağfestinu á ağgangs ferlinu; ef şú lıkur ekki viğ stağfestinguna innan sjö daga, verğur şessari nıju ağgangsheimild líklega eytt.';
+$s_signup_done_title = 'AÃ°gangs skrÃ¡ning framkvÃ¦md';
+$s_password_emailed_msg = 'SkrÃ¡ning Ã¾Ã­n hefur tekist. ÃÃ©r verÃ°ur nÃº sent staÃ°festing Ã­ tÃ¶lvupÃ³sti til aÃ° sannreyna tÃ¶lvupÃ³stfangiÃ° Ã¾itt. HeimsÃ³kn Ã¾Ã­n Ã¡ slÃ³Ã°ina sem gefin er upp Ã­ tÃ¶lvupÃ³stinum mun virkja aÃ°gang Ã¾inn.';
+$s_no_reponse_msg = 'ÃÃº hefur sjÃ¶ daga til aÃ° ljÃºka staÃ°festinu Ã¡ aÃ°gangs ferlinu; ef Ã¾Ãº lÃ½kur ekki viÃ° staÃ°festinguna innan sjÃ¶ daga, verÃ°ur Ã¾essari nÃ½ju aÃ°gangsheimild lÃ­klega eytt.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Sláğu inn kódann sem sést í hólfinu til hægri';
-$s_signup_info = 'Şegar şú hefur fyllt şetta form út og sannreynt svör şín, verğur şér sendur tölvupóstur til stağfestingar, í tölvupóstfangiğ sem şú gafst upp.<br/>Meğ şví ağ nota şennan stağfestingar póst, getur şú virkjağ ağgang şinn. Ef şú virkjar hann ekki innan sjö daga, verğur honum eytt.<br/>Şú verğur ağ gefa upp gilt tölvupóstfang til şess ağ fá stağfestingu á ağganginum.';
-$s_signup_title = 'Skráning';
-$s_signup_button = 'Skráning';
-$s_no_password_request = 'Lykilorği şínu er stjórnağ af öğru kerfi. Hafğu samband viğ kerfisstjóra.';
+$s_signup_captcha_request = 'SlÃ¡Ã°u inn kÃ³dann sem sÃ©st Ã­ hÃ³lfinu til hÃ¦gri';
+$s_signup_info = 'Ãegar Ã¾Ãº hefur fyllt Ã¾etta form Ãºt og sannreynt svÃ¶r Ã¾Ã­n, verÃ°ur Ã¾Ã©r sendur tÃ¶lvupÃ³stur til staÃ°festingar, Ã­ tÃ¶lvupÃ³stfangiÃ° sem Ã¾Ãº gafst upp.<br/>MeÃ° Ã¾vÃ­ aÃ° nota Ã¾ennan staÃ°festingar pÃ³st, getur Ã¾Ãº virkjaÃ° aÃ°gang Ã¾inn. Ef Ã¾Ãº virkjar hann ekki innan sjÃ¶ daga, verÃ°ur honum eytt.<br/>ÃÃº verÃ°ur aÃ° gefa upp gilt tÃ¶lvupÃ³stfang til Ã¾ess aÃ° fÃ¡ staÃ°festingu Ã¡ aÃ°ganginum.';
+$s_signup_title = 'SkrÃ¡ning';
+$s_signup_button = 'SkrÃ¡ning';
+$s_no_password_request = 'LykilorÃ°i Ã¾Ã­nu er stjÃ³rnaÃ° af Ã¶Ã°ru kerfi. HafÃ°u samband viÃ° kerfisstjÃ³ra.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Skrifa stillingar fyrir vefsetur';
@@ -1023,108 +1023,108 @@ $s_save_settings_button = 'Vista stillingar';
 
 # site_settings_page.php
 $s_site_settings_title = 'Stillingar vefseturs';
-$s_system_info_link = 'Kerfis upplısingar';
+$s_system_info_link = 'Kerfis upplÃ½singar';
 $s_site_settings_link = 'Stillingar vefseturs';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'Stillingar vefseturs hafa veriğ uppfærğar';
+$s_site_settings_updated_msg = 'Stillingar vefseturs hafa veriÃ° uppfÃ¦rÃ°ar';
 
 # summary_page.php
 $s_summary_title = 'Yfirlit';
-$s_summary_jpgraph_link = 'Ítarlegt yfirlit';
+$s_summary_jpgraph_link = 'Ãtarlegt yfirlit';
 $s_by_project = 'Eftir verkefni';
-$s_by_status = 'Eftir stöğu';
-$s_by_date = 'Eftir dagsetningu (dögum)';
-$s_by_severity = 'Eftir mikilvægi';
-$s_by_resolution = 'Eftir úrlausn';
+$s_by_status = 'Eftir stÃ¶Ã°u';
+$s_by_date = 'Eftir dagsetningu (dÃ¶gum)';
+$s_by_severity = 'Eftir mikilvÃ¦gi';
+$s_by_resolution = 'Eftir Ãºrlausn';
 $s_by_category = 'Eftir flokki';
 $s_by_priority = 'Eftir forgangi';
 $s_by_developer = 'Eftir forritara';
 $s_by_reporter = 'Eftir tilkynnanda';
-$s_reporter_by_resolution = 'Tilkynnt eftir úrlausn';
-$s_reporter_effectiveness = 'Árangur tilkynnanda';
-$s_developer_by_resolution = 'Úrlausn eftir forritara';
-$s_percentage_fixed = '% lagağ';
-$s_percentage_errors = '% óleyst';
-$s_errors = 'Óleyst';
+$s_reporter_by_resolution = 'Tilkynnt eftir Ãºrlausn';
+$s_reporter_effectiveness = 'Ãrangur tilkynnanda';
+$s_developer_by_resolution = 'Ãšrlausn eftir forritara';
+$s_percentage_fixed = '% lagaÃ°';
+$s_percentage_errors = '% Ã³leyst';
+$s_errors = 'Ã“leyst';
 $s_total = 'Alls';
-$s_time_stats = 'Tíma-tölfræği á úrlausn atriğa (dagar)';
-$s_longest_open_bug = 'Atriği lengst opiğ';
-$s_longest_open = 'Lengst opiğ';
-$s_average_time = 'Meğal tími';
-$s_total_time = 'Heildar tími';
-$s_developer_stats = 'Forritari, tölfræği';
-$s_reporter_stats = 'Tilkynnendur, tölfræği';
-$s_orct = '(opiğ/leyst/lokağ/alls)';
+$s_time_stats = 'TÃ­ma-tÃ¶lfrÃ¦Ã°i Ã¡ Ãºrlausn atriÃ°a (dagar)';
+$s_longest_open_bug = 'AtriÃ°i lengst opiÃ°';
+$s_longest_open = 'Lengst opiÃ°';
+$s_average_time = 'MeÃ°al tÃ­mi';
+$s_total_time = 'Heildar tÃ­mi';
+$s_developer_stats = 'Forritari, tÃ¶lfrÃ¦Ã°i';
+$s_reporter_stats = 'Tilkynnendur, tÃ¶lfrÃ¦Ã°i';
+$s_orct = '(opiÃ°/leyst/lokaÃ°/alls)';
 
 # view_all_bug_page.php
 $s_any = 'allir';
-$s_show = 'Sına';
-$s_changed = 'Breytt (tími)';
-$s_viewing_bugs_title = 'Skoğa atriği';
-$s_updated = 'Uppfært';
-$s_sticky = 'Sına límd atriği';
-$s_sort = 'Rağa eftir';
-$s_issue_id = 'Atriği #';
-$s_recently_visited = 'Nılega sótt';
+$s_show = 'SÃ½na';
+$s_changed = 'Breytt (tÃ­mi)';
+$s_viewing_bugs_title = 'SkoÃ°a atriÃ°i';
+$s_updated = 'UppfÃ¦rt';
+$s_sticky = 'SÃ½na lÃ­md atriÃ°i';
+$s_sort = 'RaÃ°a eftir';
+$s_issue_id = 'AtriÃ°i #';
+$s_recently_visited = 'NÃ½lega sÃ³tt';
 
 # view_all_inc.php
 $s_none = 'enginn';
-$s_current = 'núverandi';
+$s_current = 'nÃºverandi';
 $s_search = 'Leita';
-$s_view_prev_link = 'Sjá fyrri';
-$s_view_next_link = 'Sjá næsta';
+$s_view_prev_link = 'SjÃ¡ fyrri';
+$s_view_next_link = 'SjÃ¡ nÃ¦sta';
 $s_prev = 'Fyrri';
-$s_next = 'Næsti';
+$s_next = 'NÃ¦sti';
 $s_first = 'Fyrst';
-$s_last = 'Síğast';
+$s_last = 'SÃ­Ã°ast';
 $s_start_date = 'Upphafs dagur';
 $s_end_date = 'Loka dagur';
-$s_use_date_filters = 'Nota dagasíu';
-$s_yes = 'Já';
+$s_use_date_filters = 'Nota dagasÃ­u';
+$s_yes = 'JÃ¡';
 $s_no = 'Nei';
-$s_open_filters = 'Breyta síu';
-$s_or_unassigned = 'Eğa óúthlutağ';
-$s_ok = 'Í lagi';
+$s_open_filters = 'Breyta sÃ­u';
+$s_or_unassigned = 'EÃ°a Ã³ÃºthlutaÃ°';
+$s_ok = 'Ã lagi';
 $s_select_all = 'Velja allt';
 
 # stored query strings
-$s_use_query = 'Nota síu';
-$s_delete_query = 'Eyğa síu';
-$s_query_deleted = 'Síu eytt';
-$s_save_query = 'Vista núverandi síu';
-$s_reset_query = 'Endurstilla síu';
-$s_query_name = 'Nafn síu';
-$s_query_exists = 'Şessi tiltekna fyrirspurn er şegar til stağar.';
-$s_query_dupe_name = 'Önnur fyrirspurn hefur nú şegar şetta nafn. Veldu annağ nafn fyrir şessa fyrirspurn.';
-$s_query_blank_name = 'Şú getur ekki vistağ síu án nafns. Gefğu síunni nafn áğur en şú vistar hana.';
-$s_query_store_error = 'Upp kom villa viğ ağ vista şessa fyrirspurn.';
-$s_open_queries = 'Stjórna síum';
-$s_query_delete_msg = 'Ertu viss um ağ şú viljir eyğa şessari fyrirspurn?';
+$s_use_query = 'Nota sÃ­u';
+$s_delete_query = 'EyÃ°a sÃ­u';
+$s_query_deleted = 'SÃ­u eytt';
+$s_save_query = 'Vista nÃºverandi sÃ­u';
+$s_reset_query = 'Endurstilla sÃ­u';
+$s_query_name = 'Nafn sÃ­u';
+$s_query_exists = 'Ãessi tiltekna fyrirspurn er Ã¾egar til staÃ°ar.';
+$s_query_dupe_name = 'Ã–nnur fyrirspurn hefur nÃº Ã¾egar Ã¾etta nafn. Veldu annaÃ° nafn fyrir Ã¾essa fyrirspurn.';
+$s_query_blank_name = 'ÃÃº getur ekki vistaÃ° sÃ­u Ã¡n nafns. GefÃ°u sÃ­unni nafn Ã¡Ã°ur en Ã¾Ãº vistar hana.';
+$s_query_store_error = 'Upp kom villa viÃ° aÃ° vista Ã¾essa fyrirspurn.';
+$s_open_queries = 'StjÃ³rna sÃ­um';
+$s_query_delete_msg = 'Ertu viss um aÃ° Ã¾Ãº viljir eyÃ°a Ã¾essari fyrirspurn?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'Einföld skoğun';
-$s_viewing_bug_advanced_details_title = 'Ítarleg yfirsın yfir atriği í şessu verkefni';
-$s_product_build = 'Útgáfa verkefnis';
-$s_system_profile = 'Lısing kerfis';
-$s_update_bug_button = 'Uppfæra atriği';
-$s_bug_assign_to_button = 'Úthluta til';
-$s_bug_status_to_button = 'Breyta stöğu í';
-$s_reopen_bug_button = 'Enduropna atriği';
-$s_move_bug_button = 'Færa atriği';
-$s_attached_files = 'Viğhengdar skrár';
-$s_publish = 'Útgefiğ';
-$s_cached = 'Faliğ';
+$s_view_simple_link = 'EinfÃ¶ld skoÃ°un';
+$s_viewing_bug_advanced_details_title = 'Ãtarleg yfirsÃ½n yfir atriÃ°i Ã­ Ã¾essu verkefni';
+$s_product_build = 'ÃštgÃ¡fa verkefnis';
+$s_system_profile = 'LÃ½sing kerfis';
+$s_update_bug_button = 'UppfÃ¦ra atriÃ°i';
+$s_bug_assign_to_button = 'Ãšthluta til';
+$s_bug_status_to_button = 'Breyta stÃ¶Ã°u Ã­';
+$s_reopen_bug_button = 'Enduropna atriÃ°i';
+$s_move_bug_button = 'FÃ¦ra atriÃ°i';
+$s_attached_files = 'ViÃ°hengdar skrÃ¡r';
+$s_publish = 'ÃštgefiÃ°';
+$s_cached = 'FaliÃ°';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Ítarleg skoğun';
-$s_viewing_bug_simple_details_title = 'Einföld skoğun yfir atriği í şessu verkefni';
+$s_view_advanced_link = 'Ãtarleg skoÃ°un';
+$s_viewing_bug_simple_details_title = 'EinfÃ¶ld skoÃ°un yfir atriÃ°i Ã­ Ã¾essu verkefni';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Şağ er enginn notandi ağ vakta şetta atriği.';
-$s_users_monitoring_bug = 'Notendur sem vakta şetta atriği';
+$s_no_users_monitoring_bug = 'ÃaÃ° er enginn notandi aÃ° vakta Ã¾etta atriÃ°i.';
+$s_users_monitoring_bug = 'Notendur sem vakta Ã¾etta atriÃ°i';
 $s_monitoring_user_list = 'Notenda listi';
 
 # bug_sponsorship_list_view_inc.php
@@ -1134,55 +1134,55 @@ $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
 
 # custom field strings
-$s_add_custom_field_button = 'Nıtt sérsniğiğ svæği';
-$s_delete_custom_field_button = 'Eyğa sérsniğnu svæği';
-$s_delete_custom_field_everywhere = 'Eyği öllum sérsniğnum svæğum';
-$s_update_custom_field_button = 'Uppfæra sérsniğiğ svæği';
-$s_add_existing_custom_field = 'Bæti viğ sérsniğnu svæği';
-$s_edit_custom_field_title = 'Skrifa sérsniğiğ svæği';
-$s_custom_field = 'Svæği';
-$s_custom_fields_setup = 'Sérsniğiğ svæği';
+$s_add_custom_field_button = 'NÃ½tt sÃ©rsniÃ°iÃ° svÃ¦Ã°i';
+$s_delete_custom_field_button = 'EyÃ°a sÃ©rsniÃ°nu svÃ¦Ã°i';
+$s_delete_custom_field_everywhere = 'EyÃ°i Ã¶llum sÃ©rsniÃ°num svÃ¦Ã°um';
+$s_update_custom_field_button = 'UppfÃ¦ra sÃ©rsniÃ°iÃ° svÃ¦Ã°i';
+$s_add_existing_custom_field = 'BÃ¦ti viÃ° sÃ©rsniÃ°nu svÃ¦Ã°i';
+$s_edit_custom_field_title = 'Skrifa sÃ©rsniÃ°iÃ° svÃ¦Ã°i';
+$s_custom_field = 'SvÃ¦Ã°i';
+$s_custom_fields_setup = 'SÃ©rsniÃ°iÃ° svÃ¦Ã°i';
 $s_custom_field_name = 'Nafn';
-$s_custom_field_project_count = 'Verkefna fjöldi';
+$s_custom_field_project_count = 'Verkefna fjÃ¶ldi';
 $s_custom_field_type = 'Tegund';
-$s_custom_field_possible_values = 'Möguleg gildi';
-$s_custom_field_default_value = 'Sjálfgefin gildi';
+$s_custom_field_possible_values = 'MÃ¶guleg gildi';
+$s_custom_field_default_value = 'SjÃ¡lfgefin gildi';
 $s_custom_field_valid_regexp = 'Regluleg birting';
-$s_custom_field_access_level_r = 'Lesağgangur';
-$s_custom_field_access_level_rw = 'Skrifağgangur';
-$s_custom_field_length_min = 'Lágmarks lengd';
-$s_custom_field_length_max = 'Hámarks lengd';
-$s_custom_field_advanced = 'Sına ağeins á hærra stigi';
-$s_custom_field_display_report = 'Sına şegar atriği er tilkynnt';
-$s_custom_field_display_update = 'Sına şegar atriği er uppfært';
-$s_custom_field_display_resolved = 'Sına şegar atriği er leyst';
-$s_custom_field_display_closed = 'Sına şegar atriği er lokağ';
-$s_custom_field_require_report = 'Krafa í skırslu';
-$s_custom_field_require_update = 'Krafa í uppfærslu';
-$s_custom_field_require_resolved = 'Krafa viğ lausn';
-$s_custom_field_require_closed = 'Krafa viğ lokun';
+$s_custom_field_access_level_r = 'LesaÃ°gangur';
+$s_custom_field_access_level_rw = 'SkrifaÃ°gangur';
+$s_custom_field_length_min = 'LÃ¡gmarks lengd';
+$s_custom_field_length_max = 'HÃ¡marks lengd';
+$s_custom_field_advanced = 'SÃ½na aÃ°eins Ã¡ hÃ¦rra stigi';
+$s_custom_field_display_report = 'SÃ½na Ã¾egar atriÃ°i er tilkynnt';
+$s_custom_field_display_update = 'SÃ½na Ã¾egar atriÃ°i er uppfÃ¦rt';
+$s_custom_field_display_resolved = 'SÃ½na Ã¾egar atriÃ°i er leyst';
+$s_custom_field_display_closed = 'SÃ½na Ã¾egar atriÃ°i er lokaÃ°';
+$s_custom_field_require_report = 'Krafa Ã­ skÃ½rslu';
+$s_custom_field_require_update = 'Krafa Ã­ uppfÃ¦rslu';
+$s_custom_field_require_resolved = 'Krafa viÃ° lausn';
+$s_custom_field_require_closed = 'Krafa viÃ° lokun';
 
 $s_custom_field_sequence = 'Runa';
-$s_custom_field_type_enum_string = '0:Strengur,1:Tala,2:Fljóta,3:Upptalning,4:Tölvupóstur,5:Gátreitur,6:Listi,7:Vallisti,8:Dagsetning';
+$s_custom_field_type_enum_string = '0:Strengur,1:Tala,2:FljÃ³ta,3:Upptalning,4:TÃ¶lvupÃ³stur,5:GÃ¡treitur,6:Listi,7:Vallisti,8:Dagsetning';
 
-$s_confirm_used_custom_field_deletion = 'Şetta svæği er tengt a.m.k. einu verkefni. Ef şú heldur áfram, munu öll gildi fyrir şetta svæği eyğast. Ekki er hægt ağ bakka meğ şessa ağgerğ. Ef şú vilt ekki eyğa şessu svæği, ıttu şá á Bakk hnappinn á vafranum. Til ağ halda áfram, ıttu şá á hnappinn fyrir neğan';
-$s_confirm_custom_field_deletion = 'Ertu viss um ağ vilja eyğa şessu sérsniğna svæği og öllum gildum sem tengjast şví?';
-$s_field_delete_button = 'Eyğa svæği';
+$s_confirm_used_custom_field_deletion = 'Ãetta svÃ¦Ã°i er tengt a.m.k. einu verkefni. Ef Ã¾Ãº heldur Ã¡fram, munu Ã¶ll gildi fyrir Ã¾etta svÃ¦Ã°i eyÃ°ast. Ekki er hÃ¦gt aÃ° bakka meÃ° Ã¾essa aÃ°gerÃ°. Ef Ã¾Ãº vilt ekki eyÃ°a Ã¾essu svÃ¦Ã°i, Ã½ttu Ã¾Ã¡ Ã¡ Bakk hnappinn Ã¡ vafranum. Til aÃ° halda Ã¡fram, Ã½ttu Ã¾Ã¡ Ã¡ hnappinn fyrir neÃ°an';
+$s_confirm_custom_field_deletion = 'Ertu viss um aÃ° vilja eyÃ°a Ã¾essu sÃ©rsniÃ°na svÃ¦Ã°i og Ã¶llum gildum sem tengjast Ã¾vÃ­?';
+$s_field_delete_button = 'EyÃ°a svÃ¦Ã°i';
 
-$s_confirm_custom_field_unlinking = 'Ertu viss um ağ şú viljir fjarlægja (aftengja) şessi sérsniğnu svæği frá verkefninu og eyğa öllum gildum sem tengjast şví?';
-$s_field_remove_button = 'Fjarlægja svæği';
+$s_confirm_custom_field_unlinking = 'Ertu viss um aÃ° Ã¾Ãº viljir fjarlÃ¦gja (aftengja) Ã¾essi sÃ©rsniÃ°nu svÃ¦Ã°i frÃ¡ verkefninu og eyÃ°a Ã¶llum gildum sem tengjast Ã¾vÃ­?';
+$s_field_remove_button = 'FjarlÃ¦gja svÃ¦Ã°i';
 
-$s_hide_status = 'Fela stöğu';
-$s_filter_closed = "Lokağ";
+$s_hide_status = 'Fela stÃ¶Ã°u';
+$s_filter_closed = "LokaÃ°";
 $s_filter_resolved = "Leyst";
-$s_hide_closed = "Fela lokağ";
+$s_hide_closed = "Fela lokaÃ°";
 $s_hide_resolved = "Fela leyst";
 $s_and_above = 'og fyrir ofan';
-$s_advanced_filters = 'Aukin sía';
-$s_simple_filters = 'Einföld sía';
-$s_monitored_by = 'Vaktağ af';
+$s_advanced_filters = 'Aukin sÃ­a';
+$s_simple_filters = 'EinfÃ¶ld sÃ­a';
+$s_monitored_by = 'VaktaÃ° af';
 
-$s_attachments = "Viğhengi";
+$s_attachments = "ViÃ°hengi";
 $s_attachment_alt = "V";
 
 # PHPMailer
@@ -1203,104 +1203,104 @@ $s_sponsorship_total = 'Sponsorship Total';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Breyta dagbók';
+$s_changelog = 'Breyta dagbÃ³k';
 
 # Http auth
-$s_http_auth_realm = "Mantis innskráning";
+$s_http_auth_realm = "Mantis innskrÃ¡ning";
 
-$s_bug = "atriği";
-$s_add_new_relationship = "Nı tengsl";
-$s_add_new_relationship_button = "Viğbót";
-$s_this_bug = "Núverandi atriği";
-$s_relationship_added = "Tengslum bætt viğ";
+$s_bug = "atriÃ°i";
+$s_add_new_relationship = "NÃ½ tengsl";
+$s_add_new_relationship_button = "ViÃ°bÃ³t";
+$s_this_bug = "NÃºverandi atriÃ°i";
+$s_relationship_added = "Tengslum bÃ¦tt viÃ°";
 $s_relationship_deleted = "Tengslum eytt";
 $s_no_relationship = "enginn tengsl";
-$s_relationship_replaced = "Tengsl endurnıjuğ";
-$s_replace_relationship_button = "Endurnıja";
-$s_replace_relationship_sure_msg = "Şağ eru şegar tengsl milli şessara tveggja atriğa. Ertu viss um ağ şú viljir endurnıja şau?";
-$s_relationship_with_parent = "Tengsl viğ æğra atriği";
-$s_delete_relationship_button = "Eyğa";
-$s_delete_relationship_sure_msg = "Ertu viss um ağ vilja eyğa şessum tengslum?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Ekki er búiğ ağ leysa eğa loka öllum undiratriğum şessa atriğis.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATHUGAĞU</b>. Ekki hafa öll undiratriği şessa atriğis enn veriğ leyst eğa lokuğ.<br />Áğur en hægt er ağ <b>leysa/loka<b> æğra atriği şarf ağ vera búiğ ağ leysa eğa loka öllum undiratriğum tengdum şessu atriği.";
-$s_create_child_bug_button = "Útbúa samrit";
-$s_bug_cloned_to = "Samrit atriğis";
-$s_bug_created_from = "Atriği myndağ af";
+$s_relationship_replaced = "Tengsl endurnÃ½juÃ°";
+$s_replace_relationship_button = "EndurnÃ½ja";
+$s_replace_relationship_sure_msg = "ÃaÃ° eru Ã¾egar tengsl milli Ã¾essara tveggja atriÃ°a. Ertu viss um aÃ° Ã¾Ãº viljir endurnÃ½ja Ã¾au?";
+$s_relationship_with_parent = "Tengsl viÃ° Ã¦Ã°ra atriÃ°i";
+$s_delete_relationship_button = "EyÃ°a";
+$s_delete_relationship_sure_msg = "Ertu viss um aÃ° vilja eyÃ°a Ã¾essum tengslum?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Ekki er bÃºiÃ° aÃ° leysa eÃ°a loka Ã¶llum undiratriÃ°um Ã¾essa atriÃ°is.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATHUGAÃU</b>. Ekki hafa Ã¶ll undiratriÃ°i Ã¾essa atriÃ°is enn veriÃ° leyst eÃ°a lokuÃ°.<br />ÃÃ°ur en hÃ¦gt er aÃ° <b>leysa/loka<b> Ã¦Ã°ra atriÃ°i Ã¾arf aÃ° vera bÃºiÃ° aÃ° leysa eÃ°a loka Ã¶llum undiratriÃ°um tengdum Ã¾essu atriÃ°i.";
+$s_create_child_bug_button = "ÃštbÃºa samrit";
+$s_bug_cloned_to = "Samrit atriÃ°is";
+$s_bug_created_from = "AtriÃ°i myndaÃ° af";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Skyldleika graf";
 $s_relation_graph = "Tengsla graf";
-$s_dependency_graph = "Tengsla graf æğri/undir";
-$s_vertical = "Lóğrétt";
-$s_horizontal = "Lárétt";
-$s_view_issue = "Skoğa atriği";
+$s_dependency_graph = "Tengsla graf Ã¦Ã°ri/undir";
+$s_vertical = "LÃ³Ã°rÃ©tt";
+$s_horizontal = "LÃ¡rÃ©tt";
+$s_view_issue = "SkoÃ°a atriÃ°i";
 
 # Source Control Integration
-$s_checkin = 'Skráning inn';
+$s_checkin = 'SkrÃ¡ning inn';
 
 # Pemissions report
-$s_perm_rpt_capability = 'Möguleikar';
-$s_view = 'Skoğa';
-$s_issues = 'ATRIĞI';
-$s_report_issue = 'Tilkynna atriği';
-$s_update_issue = 'Uppfæra atriği';
-$s_monitor_issue = 'Vakta atriği';
-$s_handle_issue = 'Annast atriği';
-$s_move_issue = 'Færa atriği';
-$s_delete_issue = 'Eyğa atriği';
-$s_reopen_issue = 'Enduropna atriği';
-$s_view_private_issues = 'Skoğa læst atriği';
-$s_update_readonly_issues = 'Uppfæri lesağgang atriğis';
-$s_update_issue_status = 'Uppfæri stöğu atriğis';
-$s_set_view_status = 'Setja skoğunarstöğu (almennt eğa læst)';
-$s_update_view_status = 'Uppfæri skoğunarstöğu (almennt eğa læst)';
-$s_show_list_of_users_monitoring_issue = 'Sına lista meğ notendum sem vakta atriğiğ';
+$s_perm_rpt_capability = 'MÃ¶guleikar';
+$s_view = 'SkoÃ°a';
+$s_issues = 'ATRIÃI';
+$s_report_issue = 'Tilkynna atriÃ°i';
+$s_update_issue = 'UppfÃ¦ra atriÃ°i';
+$s_monitor_issue = 'Vakta atriÃ°i';
+$s_handle_issue = 'Annast atriÃ°i';
+$s_move_issue = 'FÃ¦ra atriÃ°i';
+$s_delete_issue = 'EyÃ°a atriÃ°i';
+$s_reopen_issue = 'Enduropna atriÃ°i';
+$s_view_private_issues = 'SkoÃ°a lÃ¦st atriÃ°i';
+$s_update_readonly_issues = 'UppfÃ¦ri lesaÃ°gang atriÃ°is';
+$s_update_issue_status = 'UppfÃ¦ri stÃ¶Ã°u atriÃ°is';
+$s_set_view_status = 'Setja skoÃ°unarstÃ¶Ã°u (almennt eÃ°a lÃ¦st)';
+$s_update_view_status = 'UppfÃ¦ri skoÃ°unarstÃ¶Ã°u (almennt eÃ°a lÃ¦st)';
+$s_show_list_of_users_monitoring_issue = 'SÃ½na lista meÃ° notendum sem vakta atriÃ°iÃ°';
 $s_notes = 'ATHUGASEMDIR';
-$s_add_notes = 'Bæta viğ athugasemdum';
-$s_update_notes = 'Uppfæri athugasemdir';
-$s_delete_note = 'Eyği athugasemdum';
-$s_view_private_notes = 'Eyği læstum athugasemdum';
-$s_news = 'FRÉTTIR';
-$s_view_private_news = 'Skoğa læstar fréttir';
-$s_manage_news = 'Stjórna fréttum';
-$s_view_list_of_attachments = 'Skoğa lista meğ viğhengjum';
-$s_download_attachments = 'Niğurhala viğhengi';
-$s_delete_attachments = 'Eyğa viğhengi';
-$s_delete_attachment_button = "Eyğa";
-$s_delete_attachment_sure_msg = "Ertu viss um ağ şú viljir eyğa şessu viğhengi?";
-$s_upload_issue_attachments = 'Upphala viğhengi meğ atriğinu';
-$s_filters = 'síur';
-$s_save_filters = 'Vista síur';
-$s_save_filters_as_shared = 'Vista síur sem samnıttar';
-$s_use_saved_filters = 'Nota vistağar síur';
+$s_add_notes = 'BÃ¦ta viÃ° athugasemdum';
+$s_update_notes = 'UppfÃ¦ri athugasemdir';
+$s_delete_note = 'EyÃ°i athugasemdum';
+$s_view_private_notes = 'EyÃ°i lÃ¦stum athugasemdum';
+$s_news = 'FRÃ‰TTIR';
+$s_view_private_news = 'SkoÃ°a lÃ¦star frÃ©ttir';
+$s_manage_news = 'StjÃ³rna frÃ©ttum';
+$s_view_list_of_attachments = 'SkoÃ°a lista meÃ° viÃ°hengjum';
+$s_download_attachments = 'NiÃ°urhala viÃ°hengi';
+$s_delete_attachments = 'EyÃ°a viÃ°hengi';
+$s_delete_attachment_button = "EyÃ°a";
+$s_delete_attachment_sure_msg = "Ertu viss um aÃ° Ã¾Ãº viljir eyÃ°a Ã¾essu viÃ°hengi?";
+$s_upload_issue_attachments = 'Upphala viÃ°hengi meÃ° atriÃ°inu';
+$s_filters = 'sÃ­ur';
+$s_save_filters = 'Vista sÃ­ur';
+$s_save_filters_as_shared = 'Vista sÃ­ur sem samnÃ½ttar';
+$s_use_saved_filters = 'Nota vistaÃ°ar sÃ­ur';
 $s_create_project = 'Skapa verkefni';
-$s_delete_project = 'Eyğa verkefni';
-$s_manage_project = 'Stjórna verkefni';
-$s_manage_user_access_to_project = 'Stjórna ağgangi notanda ağ verkefni';
-$s_automatically_included_in_private_projects = 'Fylgir sjálfkrafa meğ í læstum verkefnum';
-$s_project_documents = 'VERKEFNA SKJÖL';
-$s_view_project_documents = 'Skoğa verkefna skjöl';
-$s_upload_project_documents = 'Upphala verkefna skjöl';
-$s_link_custom_fields_to_projects = 'Tengja sérsniğiğ svæği viğ verkefni';
+$s_delete_project = 'EyÃ°a verkefni';
+$s_manage_project = 'StjÃ³rna verkefni';
+$s_manage_user_access_to_project = 'StjÃ³rna aÃ°gangi notanda aÃ° verkefni';
+$s_automatically_included_in_private_projects = 'Fylgir sjÃ¡lfkrafa meÃ° Ã­ lÃ¦stum verkefnum';
+$s_project_documents = 'VERKEFNA SKJÃ–L';
+$s_view_project_documents = 'SkoÃ°a verkefna skjÃ¶l';
+$s_upload_project_documents = 'Upphala verkefna skjÃ¶l';
+$s_link_custom_fields_to_projects = 'Tengja sÃ©rsniÃ°iÃ° svÃ¦Ã°i viÃ° verkefni';
 $s_sponsorships = 'SPONSORSHIPS';
 $s_view_sponsorship_details = 'View sponsorship details';
 $s_view_sponsorship_total = 'View sponsorship total';
 $s_sponsor_issue = 'Sponsor issue';
 $s_assign_sponsored_issue = 'Assign sponsored issue';
 $s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'AĞRIR';
-$s_see_email_addresses_of_other_users = 'Sjá tölvupóstfang annarra notenda';
+$s_others = 'AÃRIR';
+$s_see_email_addresses_of_other_users = 'SjÃ¡ tÃ¶lvupÃ³stfang annarra notenda';
 $s_send_reminders = 'Senda athugasemd';
-$s_add_profiles = 'Bæta viğ sniği';
-$s_notify_of_new_user_created = 'Tilkynna ağ nıjum notenda hafi veriğ bætt viğ';
-$s_email_notification = 'TÖLVUPÓSTS-ATHUGASEMDIR';
-$s_status_changed_to = 'Breyting á stöğu';
-$s_email_on_deleted = 'Tölvupóstur um eyğingu';
+$s_add_profiles = 'BÃ¦ta viÃ° sniÃ°i';
+$s_notify_of_new_user_created = 'Tilkynna aÃ° nÃ½jum notenda hafi veriÃ° bÃ¦tt viÃ°';
+$s_email_notification = 'TÃ–LVUPÃ“STS-ATHUGASEMDIR';
+$s_status_changed_to = 'Breyting Ã¡ stÃ¶Ã°u';
+$s_email_on_deleted = 'TÃ¶lvupÃ³stur um eyÃ°ingu';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Tölvupóstur um ağ tengsl hafi breyst';
+$s_email_on_relationship_changed = 'TÃ¶lvupÃ³stur um aÃ° tengsl hafi breyst';
 
 # DHTML filters
-$s_loading = 'Hleğsla...';
+$s_loading = 'HleÃ°sla...';
 
 # filter_api.php
 $s_between = 'Between' ;

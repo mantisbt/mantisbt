@@ -5,32 +5,34 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
-	# Turkish: Oktay Altunergil - oktay@bellatlantic.net
+	# Portuguese Standard: Lu�s Martins, lmar@ualg.pt
+	# Portuguese Standard: Rui Alexandre Coelho, rac@iosoft.pt
+	#
 	###########################################################################
-	# Turkish strings for Mantis
+	# Portugese Standard strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.93 $
+	# $Revision: 1.1 $
 	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:47 $
+	# $Date: 2006-11-08 13:32:46 $
 	#
-	# $Id: strings_turkish.txt,v 1.93 2006-11-08 13:32:47 achumakov Exp $
+	# $Id: strings_portuguese_standard_8859-1.txt,v 1.1 2006-11-08 13:32:46 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'utf-8';
+$s_charset = 'iso-8859-15';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Move';
+$s_actiongroup_menu_move = 'Mover';
 $s_actiongroup_menu_copy = 'Copy';
-$s_actiongroup_menu_assign = 'Assign';
-$s_actiongroup_menu_close = 'Close';
-$s_actiongroup_menu_delete = 'Delete';
-$s_actiongroup_menu_resolve = 'Resolve';
-$s_actiongroup_menu_update_priority = 'Update Priority';
-$s_actiongroup_menu_update_status = 'Update Status';
+$s_actiongroup_menu_assign = 'Atribuir a';
+$s_actiongroup_menu_close = 'Fechar';
+$s_actiongroup_menu_delete = 'Apagar';
+$s_actiongroup_menu_resolve = 'Resolver';
+$s_actiongroup_menu_update_priority = 'Actualizar Prioridade';
+$s_actiongroup_menu_update_status = 'Actualizar Estado';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
 $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
@@ -38,119 +40,119 @@ $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
-$s_all_projects = 'Bütün Projeler';
-$s_move_bugs = 'Bug Taşı';
-$s_operation_successful = 'İşlem Başarıyla Tamamlandı';
-$s_date_order = 'Tarih Sıralaması';
-$s_print_all_bug_page_link = 'Raporları Yazdır';
-$s_csv_export = 'CSV Çıktı';
-$s_login_anonymously = 'Anonim Giriş';
+$s_all_projects = 'Todos os Projectos';
+$s_move_bugs = 'Mover Bugs';
+$s_operation_successful = 'OK. Opera��o Conclu�da com SUCESSO!';
+$s_date_order = 'Date Order';
+$s_print_all_bug_page_link = 'Imprimir Relat�rio de Bugs';
+$s_csv_export = 'Exporta��o em formato CSV';
+$s_login_anonymously = 'Login Anonymously';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = 'Bug Notlarına Git';
-$s_public_project_msg = 'Bu proje bütün kullanıcıların erişimine açıktır.';
-$s_private_project_msg = 'Bu projeye sadece yöneticiler ve yöneticiler tarafından eklenmiş kullanıcılar erişebilir.';
-$s_access_level_project = 'Proje Erişim Sınırı';
-$s_view_submitted_bug_link = 'Gönderilmiş Bugları İzle';
-$s_assigned_projects = 'Atanmış Projeler';
-$s_unassigned_projects = 'Atanmamış Projeler';
-$s_print = 'Yazdır';
-$s_jump = 'Git';
-$s_copy_users = 'Kullanıcıları Kopyala';
-$s_copy_categories_from = 'Copy Categories From';
-$s_copy_categories_to = 'Copy Categories To';
+$s_jump_to_bugnotes = 'Ver Bugnotes';
+$s_public_project_msg = 'Este Projecto � P�BLICO.  TODOS os utilizadores tem acesso a este Projecto.';
+$s_private_project_msg = 'Este Projecto � PRIVATE.  Apenas os administradores e os utilizadores adicionados manualmente tem acesso.';
+$s_access_level_project = 'Project Access Level';
+$s_view_submitted_bug_link = 'View Submitted Bug';
+$s_assigned_projects = 'Projectos Atribuidos';
+$s_unassigned_projects = 'Projectos N�O Atribuidos';
+$s_print = 'Imprimir';
+$s_jump = 'Ver Bug N�';
+$s_copy_users = 'Copiar Utilizadores';
+$s_copy_categories_from = 'Copiar Categorias DE';
+$s_copy_categories_to = 'Copiar Categorias PARA';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'Issue History';
-$s_field = 'Field';
-$s_old_value = 'Old Value';
-$s_new_value = 'New Value';
-$s_date_modified = 'Date Modified';
-$s_bugnote = 'Note';
-$s_change = 'Change';
-$s_bugnote_view_state = 'Note View State';
-$s_bug_monitor = 'Issue Monitored';
-$s_bug_end_monitor = 'Issue End Monitor';
-$s_announcement = 'Announcement';
+$s_bug_history = 'Hist�ria do Bug';
+$s_field = 'Campo';
+$s_old_value = 'Valor Anterior';
+$s_new_value = 'Novo Valor';
+$s_date_modified = 'Data da Modifica��o';
+$s_bugnote = 'Bugnote';
+$s_change = 'Altera��o Efectuada';
+$s_bugnote_view_state = 'Bugnote View State';
+$s_bug_monitor = 'Bug Monitored';
+$s_bug_end_monitor = 'Bug End Monitor';
+$s_announcement = 'An�ncio';
 $s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = 'Delete Note';
-$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
+$s_delete_bugnote_button = 'Apagar Bugnote';
+$s_delete_bugnote_sure_msg = 'Tem a Certeza de Querer APAGAR este Bugnote?';
 $s_bug_relationships = 'Relationships';
-$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-$s_empty_password_button = 'Use Empty Password';
+$s_empty_password_sure_msg = 'Este Utilizador tem uma Password VAZIA.  Tem a Certeza de ser isso que Pretende?';
+$s_empty_password_button = 'Usar Password Vazia';
 
-$s_duplicate_of = "duplicate of";
-$s_has_duplicate = "has duplicate";
-$s_related_to = "related to";
-$s_dependant_on = "parent of";
-$s_blocks = "child of";
+$s_duplicate_of = 'duplicate of %id';
+$s_has_duplicate = 'has duplicate %id';
+$s_related_to = 'related to %id';
+$s_dependant_on = 'dependant on %id';
+$s_blocks = 'blocks %id';
 
-$s_new_bug = 'New Issue';
-$s_bugnote_added = 'Note Added';
-$s_bugnote_edited = 'Note Edited';
-$s_bugnote_deleted = 'Note Deleted';
-$s_summary_updated = 'Summary Updated';
-$s_description_updated = 'Description Updated';
-$s_additional_information_updated = 'Additional Information Updated';
-$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-$s_file_added = 'File Added';
-$s_file_deleted = 'File Deleted';
-$s_bug_deleted = 'Issue Deleted';
+$s_new_bug = 'Novo Bug';
+$s_bugnote_added = 'Bugnote Adicionado';
+$s_bugnote_edited = 'Bugnote Alterado';
+$s_bugnote_deleted = 'Bugnote Apagado';
+$s_summary_updated = 'Summary Actualizado';
+$s_description_updated = 'Descri��o Actualizada';
+$s_additional_information_updated = 'Informa��es Adicionais Actualizadas';
+$s_steps_to_reproduce_updated = 'Passos Para Reprodu��o Actualizados';
+$s_file_added = 'Ficheiro Adicionado: ';
+$s_file_deleted = 'Ficheiro Apagado: ';
+$s_bug_deleted = 'Bug Apagado';
 
-$s_make_private = 'Make Private';
-$s_make_public = 'Make Public';
+$s_make_private = 'Tornar Privado';
+$s_make_public = 'Tornar P�blico';
 
-$s_create_new_project_link = 'Create New Project';
+$s_create_new_project_link = 'Criar um Novo Projecto';
 
 $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
+$s_bug_actiongroup_failed = 'Desculpe mas N�O tem as Permiss�es Necess�rias Para Efectuar a Ac��o Pretendida nos Seguintes Bugs: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
-$s_move_bugs_conf_msg = 'Move issues to';
+$s_close_bugs_conf_msg = 'Tem a Certeza de querer FECHAR os Bugs Selecionados ?';
+$s_delete_bugs_conf_msg = 'Tem a Certeza de querer APAGAR os Bugs Selecionados ?';
+$s_move_bugs_conf_msg = 'Mover os Bugs Selecionados para o Projecto ...';
 $s_copy_bugs_conf_msg = 'Copy issues to';
-$s_assign_bugs_conf_msg = 'Assign issues to';
-$s_resolve_bugs_conf_msg = 'Choose issues resolution';
-$s_priority_bugs_conf_msg = 'Choose issues priority';
-$s_status_bugs_conf_msg = 'Choose issues status';
+$s_assign_bugs_conf_msg = 'Atribuir Bugs Selecionados ao Utilizador ...';
+$s_resolve_bugs_conf_msg = 'Como Pretende Resolver os Bugs Selecionados ?';
+$s_priority_bugs_conf_msg = 'Escolha a Nova Prioridade para os Bugs Selecionados';
+$s_status_bugs_conf_msg = 'Escolha o Novo Estado para os Bugs Selecionados';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Close Issues' ;
-$s_delete_group_bugs_button = 'Delete Issues' ;
-$s_move_group_bugs_button = 'Move Issues' ;
+$s_close_group_bugs_button = 'Fechar os Bugs Selecionados' ;
+$s_delete_group_bugs_button = 'Apagar os Bugs Selecionados' ;
+$s_move_group_bugs_button = 'Mover os Bugs Selecionados' ;
 $s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Assign Issues' ;
-$s_resolve_group_bugs_button = 'Resolve Issues' ;
-$s_priority_group_bugs_button = 'Update Priority' ;
-$s_status_group_bugs_button = 'Update Status' ;
+$s_assign_group_bugs_button = 'Atribuir Bugs Selecionados' ;
+$s_resolve_group_bugs_button = 'Resolver os Bugs Selecionados' ;
+$s_priority_group_bugs_button = 'Actualizar Prioridade' ;
+$s_status_group_bugs_button = 'Actualizar Estado' ;
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = 'Gr�ficos por Estado' ;
+$s_graph_imp_priority_title = 'Gr�ficos por Prioridade' ;
+$s_graph_imp_severity_title = 'Gr�ficos por Import�ncia';
+$s_graph_imp_category_title = 'Gr�ficos por categoria';
+$s_graph_imp_resolution_title = 'Gr�ficos por Resolu��o';
+$s_by_status_pct = 'por Estado percentage';
+$s_by_priority_pct = 'por Prioridade percentage';
+$s_by_severity_pct = 'por Import�ncia percentage';
+$s_by_category_pct = 'por categoria percentage';
+$s_by_resolution_pct = 'por Resolu��o percentage';
+$s_by_severity_mix = 'por Import�ncia e Estado';
+$s_by_priority_mix = 'por Prioridade e Estado';
+$s_by_resolution_mix = 'por Resolu��o e Estado';
+$s_synthesis_link = 'S�ntese';
+$s_status_link = 'Por Estado';
+$s_priority_link = 'Por Prioridade';
+$s_severity_link = 'Por Import�ncia';
+$s_category_link = 'Por Categoria';
+$s_resolution_link = 'Por Resolu��o';
 $s_legend_still_open = 'Still Open';
 $s_legend_resolved = 'Resolved';
 $s_legend_assigned = 'Assigned';
@@ -162,34 +164,34 @@ $s_cumulative = 'Cumulative';
 $s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = 'Mostar Apenas os Selecionados';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
+$s_printing_preferences_title = 'Escolha os Elementos a Imprimir';
+$s_printing_options_link = 'Op��es de Impress�o';
 
 # word and excel export
-$s_bugnote_title = 'Note handler' ;
-$s_bugnote_date = 'Date of note';
-$s_bugnote_description = 'Note description';
+$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_date = 'Data da bugnote';
+$s_bugnote_description = 'Descri��o da Bugnote';
 
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'Bu işlemi gerçekleştirmeye çalışırken bir hata meydana geldi. Bu hatayı yerel yöneticinize bildirebilirsiniz.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL hatası belirlendi. Lütfen hatayı bildiriniz ';
-$MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adı belirtilmedi.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadı. Lütfen proje ayarlarınızı kontrol ediniz.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Bu daha önce girilmiş bir dosya adı. Lütfen önce dosyayı siliniz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.  Please report this to ';
+$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli bir girdi alanı boş bırakıldı. Lütfen girdilerinizi kontrol ediniz.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanıcı hesabı koruma altında. Koruma kaldırılana kadar erişime izin verilmeyecektir.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  File is not readable by Mantis. Please check the project settings';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
@@ -266,40 +268,40 @@ $s_login_error = 'Your account may be disabled or blocked or the username/passwo
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
-$s_go_back = 'Geri Git';
-$s_proceed = 'Devam etmek için buraya tıklayınız';
+$s_go_back = 'Anterior';
+$s_proceed = 'Clique para continuar';
 
-$s_switch = 'Değiştir';
-$s_logged_in_as = 'Şu anki kullanıcı';
+$s_switch = 'Selecionar';
+$s_logged_in_as = 'Registado Como';
 
 $s_prefix_for_deleted_users = 'user';
 
-$s_administrator = 'yönetici';
+$s_administrator = 'administrador';
 $s_myself = "Myself";
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:izleyici,25:bildirici,40:güncelleyici,55:programcı,70:menejer,90:yönetici';
-$s_project_status_enum_string     = '10:geliştirme,30:sürüm,50:tutarlı,70:eski';
-$s_project_view_state_enum_string = '10:genel,50:özel';
-$s_view_state_enum_string         = '10:public,50:private';
+$s_access_levels_enum_string = '10:Visualizador,25:Notificador,40:Actualizador,55:Eng. de Desenvolvimento,70:Gestor,90:Administrador';
+$s_project_status_enum_string = '10:Desenvolvimento,30:Lancamento,50:Est�vel,70:Obsoleto';
+$s_project_view_state_enum_string = '10:P�blico,50:Privado';
+$s_view_state_enum_string         = '10:P�blico,50:Privado';
 
-$s_priority_enum_string           = '10:yok,20:düşük,30:normal,40:yüksek,50:acil,60:derhal';
-$s_severity_enum_string           = '10:özellik,20:kolay,30:metin,40:ayar,50:küçük,60:büyük,70:çökme,80:engel';
-$s_reproducibility_enum_string    = '10:her zaman,30:bazen,50:rastgele,70:denenmedi,90:tekrarlanamadı,100:N/A';
-$s_status_enum_string             = '10:yeni,20:ek bilgi gerektiren,30:onaylanmış,40:doğrulanmış,50:tahsis edilmiş,80:cözümlenmiş,90:kapalı';
-$s_resolution_enum_string         = '10:açık,20:çözümlendi,30:tekrar açıldı,40:tekrarlanamadı,50:çözümlenemedi,60:tekrar,70:bug değil ,80:ertelendi,90:çözülmeyecek';
-$s_projection_enum_string         = '10:yok,30:ayar,50:basit çözüm,70:fazla iş,90:dizayn değişikliği';
-$s_eta_enum_string                = '10:yok,20:< 1 güm,30:2-3 gün,40:< 1 hafta,50:< 1 ay,60:> 1 ay';
+$s_priority_enum_string = '10:Nenhuma,20:Baixa,30:Normal,40:Alta,50:Urgente,60:Imediato';
+$s_severity_enum_string = '10:Funcionalidade,20:Trivial,30:Texto,40:Ajuste,50:Pequena,60:Grande,70:Crash,80:Bloqueio';
+$s_reproducibility_enum_string = '10:Sempre,30:Algumas Vezes,50:Esporadicamente,70:N�o Tentado,90:Imposs�vel de Reproduzir,100:N/A';
+$s_status_enum_string = '10:Novo,20:Resposta,30:Reconhecido,40:Confirmado,50:Destinado,80:Resolvido,90:Encerrado';
+$s_resolution_enum_string = '10:Aberto,20:Consertado,30:Re-Aberto,40:Imposs�vel de Reproduzir,50:N�o Resolvido,60:Duplicado,70:N�o � Bug,80:Suspenso,90:N�o Consertado';
+$s_projection_enum_string = '10:Nada,30:Ajuste M�nimo,50:Pequenos Consertos,70:Refeito,90:Re-Desenhado';
+$s_eta_enum_string = '10:Nada,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mes,60:> 1 m�s';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
 $s_new_account_subject = 'Account registration';
 $s_new_account_greeting = 'Thank you for registering. You have account with username \'';
 $s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
-$s_new_account_username = 'Kullanıcı Adı: ';
+$s_new_account_username = 'Utilizador: ';
 $s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
@@ -310,17 +312,17 @@ $s_reset_request_msg = 'Someone (presumably you) requested a password change thr
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
@@ -333,113 +335,113 @@ $s_email_notification_title_for_action_related_to_relationship_added = "The foll
 $s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
-$s_email_reporter = 'Bildirici';
-$s_email_handler = 'İlgili';
-$s_email_project = 'Proje';
-$s_email_bug = 'Bug No';
-$s_email_category = 'Kategori';
-$s_email_reproducibility = 'Tekrarlanabilirlik';
-$s_email_severity = 'Şiddet';
-$s_email_priority = 'Öncelik';
-$s_email_status = 'Statü';
-$s_email_resolution = 'Çözüm';
-$s_email_duplicate = 'Tekrar';
+$s_email_reporter = 'Notificador';
+$s_email_handler = 'Operador';
+$s_email_project = 'Projecto';
+$s_email_bug = 'Bug ID';
+$s_email_category = 'Categoria';
+$s_email_reproducibility = 'Frequ�ncia';
+$s_email_severity = 'Import�ncia';
+$s_email_priority = 'Prioridade';
+$s_email_status = 'Estado';
+$s_email_resolution = 'Solu��o';
+$s_email_duplicate = 'Duplica��o';
 $s_email_fixed_in_version = 'Fixed in Version';
-$s_email_date_submitted = 'Gönderme Tarihi';
-$s_email_last_modified = 'Son Degişme Tarihi';
-$s_email_summary =  'Özet';
-$s_email_description = 'Açıklama';
+$s_email_date_submitted = 'Data de Envio';
+$s_email_last_modified = 'Ultima Modifica��o.';
+$s_email_summary = 'Sum�rio';
+$s_email_description = 'Descri��o';
 
 # account_delete.php
-$s_account_protected_msg = 'Hesap korunuyor. Ayarlar değiştirilemedi...';
-$s_account_removed_msg = 'Hesabınız sistemden silindi...';
+$s_account_protected_msg = 'Conta Protegida. Imposs�vel Alterar as Configura��es...';
+$s_account_removed_msg = 'A sua Conta Foi Removida...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Hesabınızı silmek istediğinizden emin misiniz?';
-$s_delete_account_button = 'Hesap Sil';
+$s_confirm_delete_msg = 'Voc� tem certeza de querer Remover a sua conta?';
+$s_delete_account_button = 'Remover Conta';
 
 # account_page.php
-$s_manage_profiles_link = 'Profilleri Düzenle';
-$s_change_preferences_link = 'Tercihleri değiştir';
-$s_edit_account_title = 'Hesap düzenle';
-$s_username = 'Kullanıcı Adı';
+$s_manage_profiles_link = 'Gestor de perfil';
+$s_change_preferences_link = 'Mudar Prefer�ncias';
+$s_edit_account_title = 'Editar Conta';
+$s_username = 'Utilizador';
 $s_realname = 'Real Name';
-$s_email = 'Email';
-$s_password = 'Şifre';
+$s_email = 'E-mail';
+$s_password = 'Senha de acesso';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
-$s_confirm_password  = 'Şifre Onayla';
-$s_access_level = 'Erişim Seviyesi';
-$s_update_user_button = 'Kullanıcıyı Güncelle';
+$s_confirm_password = 'Confirme a Senha';
+$s_access_level = 'N�vel de Acesso';
+$s_update_user_button = 'Actualiza Utilizador';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Varsayılan Kullanıcı Hesabı Tercihleri';
-$s_default_project = 'Varsayılan Proje';
-$s_advanced_report = 'Detaylı Rapor';
-$s_advanced_view = 'Detaylı İzle';
-$s_advanced_update = 'Detaylı Güncelleme';
-$s_refresh_delay = 'Yeniden Yükleme Gecikmesi';
-$s_redirect_delay = 'Yönlendirme Gecikmesi';
+$s_default_account_preferences_title = 'Prefer�ncias da sua Conta ';
+$s_default_project = 'Projecto Padr�o';
+$s_advanced_report = 'Relat�rio Avan�ado';
+$s_advanced_view = 'Visualiza��o Avan�ada';
+$s_advanced_update = 'Actualiza��o Avan�ada';
+$s_refresh_delay = 'Tempo de Actualiza��o (em min.)';
+$s_redirect_delay = 'Tempo de Espera de Redireccionamento de P�gina (em seg.)';
 $s_with_minimum_severity = 'With Minimum Severity of';
-$s_bugnote_order = 'Notes Sort Order';
+$s_bugnote_order = 'Bugnotes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
-$s_email_on_new = 'Yenileri Emaille';
-$s_email_on_assigned = 'Atananları Emaille';
-$s_email_on_feedback = 'Bilgi gerektirenleri Emaille';
-$s_email_on_resolved = 'Çözümlenenleri Emaille';
-$s_email_on_closed = 'Kapatılanları Emaille';
-$s_email_on_reopened = 'Yeniden açılanları Emaille';
-$s_email_on_bugnote_added = 'Bug notu eklenenleri Emaille';
-$s_email_on_status_change = 'Statü değişikliklerini Emaille';
-$s_email_on_priority_change = 'Öncelik değişikliklerini Emaille';
-$s_email_bugnote_limit = 'Email Notes Limit';
-$s_language = 'Dil';
-$s_update_prefs_button = 'Tercihleri Güncelle';
-$s_reset_prefs_button = 'Tercihleri Sıfırla';
+$s_email_on_new = 'Email Quando Novo';
+$s_email_on_assigned = 'Email Quando Atribuido';
+$s_email_on_feedback = 'Email Quando Receber uma Resposta ';
+$s_email_on_resolved = 'Email Quando Solucionado';
+$s_email_on_closed = 'Email Quando Encerrado';
+$s_email_on_reopened = 'Email Quando Reaberto';
+$s_email_on_bugnote_added = 'Email Quando uma Nota for Adicionada';
+$s_email_on_status_change = 'Email Quando Houver Troca do Estado';
+$s_email_on_priority_change = 'Email Quando Houver Mudan�a na Prioridade';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_language = 'Idioma';
+$s_update_prefs_button = 'Actualizar Prefer�ncias';
+$s_reset_prefs_button = 'Descartar Prefer�ncias';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = 'Tercihler sıfırlandı...';
+$s_prefs_reset_msg = 'As Prefer�ncias Foram Descartadas...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Tercihler güncellendi...';
+$s_prefs_updated_msg = 'As Prefer�ncias Foram Actualizadas...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Profil eklendi...';
+$s_profile_added_msg = 'Perfil Adicionado...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Profil silindi...';
+$s_profile_deleted_msg = 'Perfil Removido...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Profil Düzenle';
-$s_platform = 'Platform';
-$s_operating_system = 'İşletim Sistemi';
-$s_additional_description = 'Ek Bilgi';
-$s_update_profile_button = 'Profili Güncelle';
+$s_edit_profile_title = 'Editar perfil';
+$s_platform = 'Computador (CPU, RAM, disco, etc)';
+$s_operating_system = 'Sistema Operativo';
+$s_additional_description = 'Descri��o Adicional';
+$s_update_profile_button = 'Actualiza Perfil';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = 'Varsayılan Profil Güncellendi...';
+$s_profile_defaulted_msg = 'Perfil Padr�o Actualizado...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Profil Ekle';
-$s_add_profile_button = 'Profil Ekle';
-$s_edit_or_delete_profiles_title = 'Profil Güncelleme veya Silme';
-$s_edit_profile = 'Profil Düzenle';
-$s_make_default = 'Varsayılan Haline Getir';
-$s_delete_profile = 'Profil Sil';
-$s_select_profile = 'Profil Seç';
-$s_submit_button = 'Gönder';
+$s_add_profile_title = 'Adicionar Perfil';
+$s_add_profile_button = 'Adicionar Perfil';
+$s_edit_or_delete_profiles_title = 'Editar ou Remover Perfil';
+$s_edit_profile = 'Editar Perfil';
+$s_make_default = 'Tornar Padr�o';
+$s_delete_profile = 'Remover Perfil';
+$s_select_profile = 'Selecionar Perfil';
+$s_submit_button = 'Enviar';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Profil güncelle...';
+$s_profile_updated_msg = 'Perfil Actualizado...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -460,11 +462,11 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = 'Hesabınız başarıyla güncellendi...';
-$s_email_updated = 'Email address successfully updated';
+$s_account_updated_msg = 'A sua Conta Foi Actualizada com Sucesso...';
+$s_email_updated = 'Endere�o de Email Alterado com Sucesso';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
-$s_password_updated = 'Password successfully updated';
+$s_password_updated = 'Password Alterada com Sucesso';
 
 # adm_permission_report.php
 
@@ -472,70 +474,70 @@ $s_password_updated = 'Password successfully updated';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Bug başarıyla atandı...';
+$s_bug_assign_msg = 'O Bug Foi Atribuido Com Sucesso...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Request Feedback on Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
 $s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Request Feedback';
+$s_feedback_bug_button = 'Provide Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
-$s_bug_close_msg = 'Bug kapatıldı...';
-$s_close_immediately   = 'Hemen Kapat:';
+$s_bug_close_msg = 'O Bug foi Encerrado...';
+$s_close_immediately   = 'Fecho imediato:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Bug Kapat';
+$s_closed_bug_title = 'Fechar Bug';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Bug silindi...';
+$s_bug_deleted_msg = 'O Bug Foi Removido...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Bu bug\'ı silmek istediğinizden emin misiniz?';
-$s_delete_bug_button = 'Bug Sil';
+$s_delete_bug_sure_msg = 'Voc� tem certeza que deseja Remover este Bug?';
+$s_delete_bug_button = 'Remover Bug';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Bug İzle';
-$s_unmonitor_bug_button = 'İzlemeyi Sonlandır';
+$s_monitor_bug_button = 'Monitor Bug';
+$s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Dosya başarıyla gönderildi';
+$s_file_upload_msg = 'Ficheiro Enviado com Sucesso';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Dosya Gönder';
-$s_select_file = 'Dosya Seç';
-$s_upload_file_button = 'Dosya Gönder';
-$s_max_file_size = 'Max size';
+$s_upload_file = 'Enviar Ficheiro';
+$s_select_file = 'Selecionar Ficheiro';
+$s_upload_file_button = 'Enviar Ficheiro';
+$s_max_file_size = 'Tamanho M�x.';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Bug yeniden açıldı...';
-$s_reopen_add_bugnote_title = 'Bug\'ı yeniden açma sebebini giriniz';
-$s_bugnote_add_reopen_button = 'Bug Notu ekle ve Bug\'ı yeniden aç';
+$s_bug_reopened_msg = 'O Bug Foi Reaberto...';
+$s_reopen_add_bugnote_title = 'Adicione uma nota com o motivo da reabertura do problema';
+$s_bugnote_add_reopen_button = 'Adicionar Nota e Reabrir o Bug';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Bug çözümle';
-$s_resolved_bug_button = 'Bug çözümle';
+$s_resolved_bug_title = 'Solu��o do Bug';
+$s_resolved_bug_button = 'Solucionar';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Bug çözümlendi. Bug Notu giriniz...';
-$s_resolve_add_bugnote_title = 'Bug çözümleme sebebini giriniz';
-$s_bugnote_add_resolve_button = 'Bug Notu ekle';
+$s_bug_resolved_msg = 'O Bug foi resolvido. Entre com uma nota abaixo...';
+$s_resolve_add_bugnote_title = 'Nota e Motivo para Solu��o do Bug';
+$s_bugnote_add_resolve_button = 'Adicionar Nota';
 
 # bug_reminder_page.php
-$s_from = 'From';
-$s_to = 'To';
-$s_on = 'On';
-$s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
-$s_reminder_sent_to = 'Reminder sent to';
-$s_bug_send_button = 'Send';
-$s_reminder = 'Reminder';
+$s_from = 'De';
+$s_to = 'Para';
+$s_on = 'Em';
+$s_sent_you_this_reminder_about = 'enviou-lhe este Aviso acerca de';
+$s_bug_reminder = 'Enviar um e-mail de Aviso';
+$s_reminder_sent_to = 'Aviso enviado a';
+$s_bug_send_button = 'Enviar';
+$s_reminder = 'Aviso';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
 $s_reminder_store = 'This note will be stored with the issue.';
@@ -544,93 +546,93 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Bug başarıyla güncellendi...';
+$s_bug_updated_msg = 'O Bug foi actualizado com sucesso...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Bug\'a Dön';
-$s_update_simple_link = 'Basit Güncelleme';
-$s_updating_bug_advanced_title = 'Bug Bilgileri Güncelleme';
-$s_id = 'NO';
-$s_category = 'Kategori';
-$s_severity = 'Şiddet';
-$s_reproducibility = 'Tekrarlanabilirlik';
-$s_date_submitted = 'Sisteme Giriş Tarihi';
-$s_last_update = 'Son Güncelleme';
-$s_reporter = 'Bildiren';
-$s_assigned_to = 'Atanan';
-$s_priority = 'Öncelik';
-$s_resolution = 'Çözüm';
-$s_status = 'Statü';
-$s_duplicate_id = 'Eşdeğer NO';
-$s_os = 'İşletim Sistemi';
-$s_projection = 'Tahmin';
-$s_os_version = 'Versiyon';
-$s_eta = 'Tahmini Tamamlama Süresi';
-$s_product_version = 'Ürün Versiyonu';
-$s_build = 'Alt Versiyon';
+$s_back_to_bug_link = 'Voltar para o Bug';
+$s_update_simple_link = 'Actualizar';
+$s_updating_bug_advanced_title = 'Actualizando o Bug';
+$s_id = 'ID';
+$s_category = 'Categoria';
+$s_severity = 'Import�ncia';
+$s_reproducibility = 'Frequ�ncia';
+$s_date_submitted = 'Data do Envio';
+$s_last_update = '�ltima Actualiza��o';
+$s_reporter = 'Notificador';
+$s_assigned_to = 'Atribuido a';
+$s_priority = 'Prioridade';
+$s_resolution = 'Solu��o';
+$s_status = 'Estado';
+$s_duplicate_id = 'Duplicar ID';
+$s_os = 'Sistema Operativo';
+$s_projection = 'Projec��o';
+$s_os_version = 'Vers�o';
+$s_eta = 'Estimado';
+$s_product_version = 'Vers�o do Produto';
+$s_build = 'Compila��o';
 $s_fixed_in_version = 'Fixed in Version';
-$s_votes = 'Oylar';
-$s_summary = 'Özet';
-$s_description = 'Açıklama';
-$s_steps_to_reproduce = 'Tekrarlamaya Yönelik Adımlar';
-$s_update_information_button = 'Bilgi Güncelle';
+$s_votes = 'Votos';
+$s_summary = 'Sum�rio';
+$s_description = 'Descri��o';
+$s_steps_to_reproduce = 'Passos Para Reprodu��o';
+$s_update_information_button = 'Actualizar Informa��o';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Detaylı Güncelleme';
-$s_updating_bug_simple_title = 'Bug bilgileri güncelleniyor';
+$s_update_advanced_link = 'Actualiza��o Avan�ada';
+$s_updating_bug_simple_title = 'Actualizando Informa��es do Bug';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Oy eklendi...';
+$s_vote_added_msg = 'Voto foi adicionado...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Bug Notu eklendi...';
+$s_bugnote_added_msg = 'Nota Adicionada...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Bug Notu başarıyla Silindi...';
-$s_bug_notes_title = 'Bug Notları';
+$s_bugnote_deleted_msg = 'Nota foi apagada com sucesso...';
+$s_bug_notes_title = 'Notas do Bug';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Bug Notu Güncelle';
+$s_edit_bugnote_title = 'Editar Nota do Bug';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Bu bug ile ilgili not bulunmamaktadır.';
-$s_delete_link = 'Sil';
-$s_add_bugnote_title = 'Bug Notu Ekle';
-$s_add_bugnote_button = 'Bug Notu Ekle';
-$s_bugnote_edit_link = 'Güncelle';
-$s_closed_bug_button = 'Bug Kapat';
+$s_no_bugnotes_msg = 'N�o existem coment�rios sobre este Bug.';
+$s_delete_link = 'Remover';
+$s_add_bugnote_title = 'Adicionar nota';
+$s_add_bugnote_button = 'Adicionar nota';
+$s_bugnote_edit_link = 'Edit';
+$s_closed_bug_button = 'Close Bug';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Bug notu başarıyla güncellendi...';
-$s_edited_on = 'güncelleme tarihi: ';
+$s_bugnote_updated_msg = 'A nota referente ao Bug foi actualizada com sucesso...';
+$s_edited_on = 'Editada em: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = 'Sisteme Girmek İçin Tıklayınız';
+$s_click_to_login = 'Clique aqui para entrar';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Bug Takip Sistemine hoşgeldiniz.';
-$s_login_title = 'Sisteme Giriş';
-$s_save_login = 'Kullanıcı Adını Kaydet';
-$s_choose_project = 'Proje Seç';
-$s_login_button = 'Sisteme Gir';
-$s_signup_link = 'Yeni bir hesap aç';
+$s_login_page_info = 'Bem-vindo ao BugTracker.';
+$s_login_title = 'Login';
+$s_save_login = 'Guardar Registo de utilizador ?';
+$s_choose_project = 'Escolha um Projecto';
+$s_login_button = 'Entrar';
+$s_signup_link = 'Se � a 1� vez que nos visita, crie uma nova Conta aqui';
 $s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
-$s_select_project_button = 'Proje Seç';
+$s_select_project_button = 'Seleccionar projecto';
 
 # logout_page.php
-$s_logged_out_title = 'Sistemden çıkıldı...';
-$s_redirecting = '...Giriş Sayfasına';
-$s_here = 'Yönlendir';
+$s_logged_out_title = 'Saindo ...';
+$s_redirecting = '...Redireccionando';
+$s_here = 'Aqui';
 
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
@@ -640,29 +642,29 @@ $s_lost_password_info = "To reinstate your lost password, please supply the name
 $s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Açık ve bana atanmış olanlar';
-$s_open_and_reported_to_me = 'Açık ve benim tarafımdan bildirilenler';
-$s_newer_news_link = 'Yeni Haberler';
-$s_older_news_link = 'Eski Haberler';
-$s_archives = 'Archives';
+$s_open_and_assigned_to_me = 'Abrir e Atribuir a Mim';
+$s_open_and_reported_to_me = 'Aberto e Informado por Mim';
+$s_newer_news_link = 'Novas Not�cias';
+$s_older_news_link = 'Not�cias Antigas';
+$s_archives = 'Arquivos';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'Kullanıcı ';
-$s_created_user_part2 = 'bu erişim seviyesiyle aktive edildi: ';
+$s_created_user_part1 = 'Utilizador Criado';
+$s_created_user_part2 = 'Com um n�vel de acesso de';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Yeni Hesap Aç';
-$s_verify_password = 'Şifreyi Onayla';
-$s_enabled = 'Aktif';
-$s_protected = 'Korumalı';
-$s_create_user_button = 'Kullanıcı Ekle';
+$s_create_new_account_title = 'Criar Nova Conta';
+$s_verify_password = 'Verificar Senha';
+$s_enabled = 'Activa(o)';
+$s_protected = 'Protegida';
+$s_create_user_button = 'Criar Utilizador';
 
 # manage_page.php
-$s_hide_disabled = 'Etkisizleştirilenleri Gizle';
-$s_filter_button = 'Filtrele';
-$s_manage_users_link = 'Manage Users';
-$s_manage_projects_link = 'Manage Projects';
+$s_hide_disabled = 'Esconder Desabilitados';
+$s_filter_button = 'Filtro';
+$s_manage_users_link = 'Gest�o de Utilizadores';
+$s_manage_projects_link = 'Gest�o de Projectos';
 $s_manage_custom_field_link = 'Manage Custom Fields';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
@@ -670,19 +672,19 @@ $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = 'Hesap Ekle';
-$s_projects_link = 'Projeler';
-$s_documentation_link = 'Dökümantasyon';
-$s_new_accounts_title = 'Yeni Hesaplar';
-$s_1_week_title = '1 Hafta';
-$s_never_logged_in_title = 'Sisteme hiç girmeyen kullanıcılar';
-$s_prune_accounts = 'Hesapları Temizle';
-$s_hide_inactive = 'Aktif Olmayanları Gizle';
-$s_manage_accounts_title = 'Hesapları Düzenle';
-$s_p = 'k';
-$s_date_created = 'Açılış Tarihi';
-$s_last_visit = 'Son Ziyaret';
-$s_edit_user_link = 'Kullanıcı Düzenle';
+$s_create_new_account_link = 'Criar Conta';
+$s_projects_link = 'Projectos';
+$s_documentation_link = 'Documenta��o';
+$s_new_accounts_title = 'Novas Contas';
+$s_1_week_title = '1 Semana';
+$s_never_logged_in_title = 'Nunca Entrou';
+$s_prune_accounts = 'Cortar Contas';
+$s_hide_inactive = 'Esconder Inactivas';
+$s_manage_accounts_title = 'Gestor de Contas';
+$s_p = 'p';
+$s_date_created = 'Data de Cria��o';
+$s_last_visit = '�ltima Visita';
+$s_edit_user_link = 'Editar Utilizador';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
@@ -758,52 +760,52 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Proje başarıyla eklendi...';
+$s_project_added_msg = 'O Projecto foi adicionado com sucesso...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Kategori başarıyla eklendi...';
+$s_category_added_msg = 'A Categoria foi adicionada com sucesso...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Kategori başarıyla eklendi silindi...';
+$s_category_deleted_msg = 'A Categoria foi apagada com sucesso...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Bu kategoriyi silmek istediğinizden emin misiniz? Bu kategoriye ait bütün buglar silinecek.';
-$s_delete_category_button = 'Kategori Sil';
+$s_category_delete_sure_msg = 'Voc� tem certeza que deseja Remover essa categoria ? Todos os Bugs Associados Ser�o Removidos.';
+$s_delete_category_button = 'Remover Categoria';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Proje Kategorisi Düzenle';
-$s_update_category_button = 'Kategori Güncelle';
+$s_edit_project_category_title = 'Editar Categoria de Projecto';
+$s_update_category_button = 'Actualizar Categoria';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Kategori başarıyla güncellendi...';
+$s_category_updated_msg = 'A Categoria Foi Actualizada com Sucesso...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Proje başarıyla silindi...';
+$s_project_deleted_msg = 'O Projecto foi Removido com Sucesso...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Projeyi ve projeye ait bütün bugları silmek istediginizden emin misiniz?';
-$s_project_delete_button = 'Proje Sil';
+$s_project_delete_msg = 'Voc� tem certeza que deseja Remover o projecto e todos os relat�rios em anexo?';
+$s_project_delete_button = 'Remover Projecto';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = 'Proje Düzenle';
-$s_project_name = 'Proje Adı';
-$s_view_status = 'Statü İzle';
-$s_public = 'Herkese Açık';
-$s_private = 'Özel';
-$s_update_project_button = 'Proje Güncelle';
-$s_delete_project_button = 'Proje Sil';
-$s_categories_and_version_title = 'Kategoriler ve Versiyonlar';
-$s_categories = 'Kategoriler';
-$s_add_category_button = 'Kategori Ekle';
-$s_versions = 'Versiyonlar';
-$s_add_version_button = 'Versiyon Ekle';
+$s_edit_project_title = 'Editar Projecto';
+$s_project_name = 'Nome do Projecto';
+$s_view_status = 'Visualiza��o';
+$s_public = 'P�blico';
+$s_private = 'Privado';
+$s_update_project_button = 'Actualizar Projecto';
+$s_delete_project_button = 'Remover Projecto';
+$s_categories_and_version_title = 'Categorias e Vers�es';
+$s_categories = 'Categorias';
+$s_add_category_button = 'Adicionar Categoria';
+$s_versions = 'Vers�o';
+$s_add_version_button = 'Adicionar Vers�o';
 $s_add_and_edit_version_button = 'Add and Edit Version';
-$s_edit_link = 'Düzenle';
-$s_actions = 'Actions';
-$s_version = 'Versiyon/Alt Versiyon';
+$s_edit_link = 'Alterar';
+$s_actions = 'Ac��es';
+$s_version = 'Vers�o';
 $s_timestamp = 'Timestamp';
 $s_update = 'Update';
 $s_subprojects = 'Subprojects';
@@ -812,74 +814,74 @@ $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Proje Ekle';
-$s_upload_file_path = 'Gönderilecek dosyanın yolu';
-$s_add_project_button = 'Proje Ekle';
-$s_projects_title = 'Projeler';
-$s_name = 'İsim';
+$s_add_project_title = 'Adicionar Projecto';
+$s_upload_file_path = 'Caminho do Ficheiro para Upload';
+$s_add_project_button = 'Adicionar Projecto';
+$s_projects_title = 'Projectos';
+$s_name = 'Nome';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Proje başarıyla güncellendi...';
+$s_project_updated_msg = 'Projecto Actualizado com Sucesso...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Versiyon başarıyla eklendi...';
+$s_version_added_msg = 'Vers�o actualizada com sucesso...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'Versiyon başarıyla silindi...';
+$s_version_deleted_msg = 'Vers�o apagada com sucesso...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Bu versiyonu silmek istediginizden emin misiniz? Bu versiyona ilişkin bütün buglar da silinecektir.';
-$s_delete_version_button = 'Versiyon Sil';
+$s_version_delete_sure = 'Tem certeza que deseja Remover esta vers�o?';
+$s_delete_version_button = 'Remover Vers�o';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Proje Versiyonu Düzenle';
-$s_update_version_button = 'Versiyon Güncelle';
+$s_edit_project_version_title = 'Editar Vers�o do Projecto';
+$s_update_version_button = 'Actualizar Vers�o';
 $s_released = 'Released';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Versiyon başarıyla güncellendi...';
+$s_version_updated_msg = 'Vers�o actualizada com sucesso...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Hesap korumalı. Bu hesap silinemez.';
-$s_account_deleted_msg = 'Hesap silindi...';
+$s_account_delete_protected_msg = 'Conta Protegida. N�o � poss�vel apag�-la.';
+$s_account_deleted_msg = 'Conta Apagada...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Bu hesabı silmek istediginizden emin misiniz?';
+$s_delete_account_sure_msg = 'Tem certeza que deseja Remover esta conta?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Bir haftadan fazla süre önce açılmış oldukları halde hala hiç kullanılmayan kullanıcı hesapları silindi';
+$s_accounts_pruned_msg = 'Todas as Contas n�o utilizadas durante o Per�odo de 1 Semana Foram Removidas';
 $s_prune_accounts_button = 'Prune';
-$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+$s_confirm_account_pruning = 'Tem a certeza de querer APAGAR as contas Antigas que nunca tenham Entrado no BugTracker?';
 
 # manage_user_page.php
-$s_edit_user_title = 'Kullanıcı Düzenle';
-$s_reset_password_button = 'Şifre Sıfırla';
-$s_delete_user_button = 'Kullanıcı Sil';
+$s_edit_user_title = 'Editar Utilizador';
+$s_reset_password_button = 'Limpar Senha';
+$s_delete_user_button = 'Remover Utilizador';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
-$s_reset_password_msg2 = 'Şifre Sıfırla sifreyi boş hale getirir .';
-$s_show_all_users = 'ALL';
+$s_reset_password_msg2 = 'Limpar Senha configura uma senha em branco.';
+$s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Hesap korumalı. Sifre sıfırlanamaz.';
-$s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s email address. Using this, the user will be able to change their password.';
-$s_account_reset_msg2 = 'Hesap şifresi boş olarak düzenlendi...';
+$s_account_reset_protected_msg = 'Conta Protegida. N�o � poss�vel limpar a senha.';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg2 = 'Senha da conta em branco...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Hesap Korumalı. Erişim seviyesi ve enabled korumalı. Aksi taktirde, hesap güncellendi...';
-$s_manage_user_updated_msg = 'Hesap başarıyla güncellendi...';
+$s_manage_user_protected_msg = 'Conta Protegida. N�vel de Acesso habilitado e protegido. Caso Contr�rio a conta foi actualizada...';
+$s_manage_user_updated_msg = 'Conta Actualizada com Sucesso...';
 
 # menu_inc.php
-$s_main_link = 'Ana Sayfa';
-$s_view_bugs_link = 'Bug İzle';
-$s_report_bug_link = 'Bug Bildir';
+$s_main_link = 'Principal';
+$s_view_bugs_link = 'Visualizar Bugs';
+$s_report_bug_link = 'Relatar Bugs';
 $s_changelog_link = 'Change Log';
-$s_summary_link = 'Özet';
-$s_account_link = 'Hesap';
-$s_users_link = 'Users';
-$s_manage_link = 'Düzenle';
-$s_edit_news_link = 'Haberleri Düzenle';
-$s_docs_link = 'Belgeler';
-$s_logout_link = 'Sistemden Çık';
+$s_summary_link = 'Sum�rio';
+$s_account_link = 'Conta Pessoal';
+$s_users_link = 'Utilizadores';
+$s_manage_link = 'Gerenciador';
+$s_edit_news_link = 'Editar Not�cias';
+$s_docs_link = 'Docs.';
+$s_logout_link = 'Sair';
 $s_my_view_link = 'My View';
 
 # meta_inc.php
@@ -895,114 +897,114 @@ $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
-$s_news_added_msg = 'Haber eklendi...';
+$s_news_added_msg = 'Not�cia Adicionada...';
 
 # news_delete.php
-$s_news_deleted_msg = 'Haber silindi...';
+$s_news_deleted_msg = 'Not�cia Apagada...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Bu haberi silmek istediğinizden emin misiniz?';
-$s_delete_news_item_button = 'Haber Sil';
+$s_delete_news_sure_msg = 'Voc� tem certeza que deseja Remover essa not�cia?';
+$s_delete_news_item_button = 'Remover Not�cia';
 
 # news_edit_page.php
-$s_edit_news_title = 'Haber Düzenle';
-$s_headline = 'Başlık';
-$s_body = 'Metin';
-$s_update_news_button = 'Haber Güncelle';
+$s_edit_news_title = 'Editar Not�cias';
+$s_headline = 'Not�cia';
+$s_body = 'Corpo';
+$s_update_news_button = 'Actualizar Not�cias';
 
 # news_menu_page.php
-$s_add_news_title = 'Haber Ekle';
-$s_post_to = 'Yayınlanacak Yer';
-$s_post_news_button = 'Haber Yayınla';
-$s_edit_or_delete_news_title = 'Haber Düzenle veya Sil';
-$s_edit_post = 'Haber Düzenle';
-$s_delete_post = 'Haber Sil';
-$s_select_post = 'Haber Seç';
+$s_add_news_title = 'Adicionar Not�cias';
+$s_post_to = 'Colocar em';
+$s_post_news_button = 'Colocar Not�cias';
+$s_edit_or_delete_news_title = 'Editar ou Remover Not�cias';
+$s_edit_post = 'Editar Coloca��o';
+$s_delete_post = 'Remover Coloca��o';
+$s_select_post = 'Selecionar Coloca��o';
 
 # news_update.php
-$s_news_updated_msg = 'Haber güncellendi...';
+$s_news_updated_msg = 'Not�cias Actualizadas...';
 
 # news_view_page.php
-$s_back_link = 'Geri';
+$s_back_link = 'Voltar';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Dosya başarıyla gönderildi';
+$s_file_uploaded_msg = 'Ficheiro Enviado com Sucesso';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Dosya Gönder';
-$s_title = 'Başlık';
+$s_upload_file_title = 'Enviar Ficheiro';
+$s_title = 'T�tulo';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Proje dosyası silindi';
+$s_project_file_deleted_msg = 'Ficheiro do Projecto Apagado';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Bu dosyayı silmek istediğinizden emin misiniz?';
+$s_confirm_file_delete_msg = 'Tem Certeza que Deseja Remover Este Ficheiro ?';
 
 # proj_doc_edit_page.php
-$s_filename = 'Dosya Adı';
-$s_file_update_button = 'Dosya güncelle';
-$s_file_delete_button = 'Dosya Sil';
+$s_filename = 'Nome do Ficheiro';
+$s_file_update_button = 'Actualizar Ficheiro';
+$s_file_delete_button = 'Remover Ficheiro';
 
 # proj_doc_page.php
-$s_project_documentation_title = 'Proje Belgeleri';
-$s_user_documentation = 'Kullanıcı Belgeleri';
-$s_project_documentation = 'Proje Belgeleri';
-$s_add_file = 'Dosya ekle';
+$s_project_documentation_title = 'Documenta��o do Projecto';
+$s_user_documentation = 'Documenta��o do Utilizador';
+$s_project_documentation = 'Documenta��o do Projecto';
+$s_add_file = 'Adicionar Ficheiro';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Proje başarıyla güncellendi';
+$s_project_document_updated = 'Projecto Actualizado com Sucesso';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Kullanıcı projeye başarıyla eklendi';
+$s_project_user_added_msg = 'Utilizador Adicionado ao Projecto com Sucesso';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Kullanıcı projeden başarıyla silindi';
+$s_project_removed_user_msg = 'Utilizador Removido do Projecto com Sucesso';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Bu kullanıcıyı silmek istediğinizden emin misiniz?';
+$s_remove_user_sure_msg = 'Tem Certeza que Deseja Remover o Utilizador ?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Kullanıcıyı projeye ekle';
-$s_add_user_button = 'Kullanıcı Ekle';
-$s_project_selection_title = 'Proje Seçimi';
-$s_remove_link = 'sil';
+$s_add_user_title = 'Adicionar Utilizador ao Projecto';
+$s_add_user_button = 'Adicionar Utilizador';
+$s_project_selection_title = 'Selecionar Projecto';
+$s_remove_link = 'Remover';
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Kullanıcı başarıyla güncellendi';
+$s_updated_user_msg = 'Utilizador Actualizado com Sucesso';
 
 # report_add.php
-$s_must_enter_category = 'Bir \'kategori\' seçmelisiniz';
-$s_must_enter_severity = 'Bir \'şiddet\' seviyesi seçmelisiniz';
-$s_must_enter_reproducibility = 'Bir \'tekrarlanabilirlik\' eklemelisiniz';
-$s_must_enter_summary = 'Bir \'özet\' eklemelisiniz';
-$s_must_enter_description = 'Bir \'tanım\' eklemelisiniz';
-$s_report_more_bugs = 'Daha bug bildir ';
-$s_submission_thanks_msg = 'Raporunuz için teşekkürler.';
+$s_must_enter_category = 'Deve seleccionar uma Categoria';
+$s_must_enter_severity = 'Deve seleccionar uma Import�ncia';
+$s_must_enter_reproducibility = 'Deve seleccionar uma Frequ�ncia';
+$s_must_enter_summary = 'Deve escrever um Sum�rio';
+$s_must_enter_description = 'Deve escrever uma Descri��o';
+$s_report_more_bugs = 'Envie Mais Bugs';
+$s_submission_thanks_msg = 'Obrigado Pelo Envio do Bug';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'Basit Rapor';
-$s_enter_report_details_title = 'Rapor Detaylarını Gir';
-$s_required = 'gerekli';
-$s_select_category = 'Kategori Seç';
-$s_select_reproducibility = 'Tekrarlanabilirlik';
-$s_select_severity = 'Şiddet Seviyesi Seç';
-$s_or_fill_in = 'VEYA Aşağıdakileri Doldur';
-$s_assign_to = 'Ata (Tahsis Et)';
-$s_additional_information = 'Ek Bilgi';
-$s_submit_report_button = 'Bildir';
-$s_check_report_more_bugs = 'daha başka bug bildirmek için seçiniz';
+$s_simple_report_link = 'Relat�rio Simples';
+$s_enter_report_details_title = 'Adicionar Detalhes do Problema';
+$s_required = 'Preenchimento Obrigat�rio';
+$s_select_category = 'Seleccione uma Categoria';
+$s_select_reproducibility = 'Seleccione uma Frequ�ncia';
+$s_select_severity = 'Seleccione uma Import�ncia';
+$s_or_fill_in = 'OU Preencha';
+$s_assign_to = 'Atribuido a';
+$s_additional_information = 'Informa��es adicionais';
+$s_submit_report_button = 'Enviar Relat�rio';
+$s_check_report_more_bugs = 'Marque para Adicionar Mais Bugs';
 
 # report_bug_page.php
-$s_advanced_report_link = 'Detaylı Rapor';
-$s_report_stay = 'Bildirmeye Devam';
+$s_advanced_report_link = 'Relat�rio Avan�ado';
+$s_report_stay = 'Mais Bugs ?';
 
 # set_project.php
-$s_selected_project = 'Seçilen Proje';
-$s_valid_project_msg = 'Geçerli bir proje seçmelisiniz';
+$s_selected_project = 'Seleccionar Projecto';
+$s_valid_project_msg = 'Deve Selecionar um Projecto V�lido';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed';
@@ -1012,34 +1014,34 @@ $s_no_reponse_msg = 'You will have seven days to complete the account confirmati
 # signup_page.php
 $s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
-$s_signup_title = 'Yeni Hesap Açma';
-$s_signup_button = 'Hesap Aç';
+$s_signup_title = 'Criar Utilizador pela 1� vez';
+$s_signup_button = 'Criar Utilizador';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'Site Ayarlarını Değiştir';
-$s_save_settings_button = 'Ayarları Kaydet';
+$s_edit_site_settings_title = 'Editar Configura��es do Site';
+$s_save_settings_button = 'Gravar Configura��es';
 
 # site_settings_page.php
-$s_site_settings_title = 'Site Ayarları';
-$s_system_info_link = 'Sistem Bilgileri';
-$s_site_settings_link = 'Site Ayarları';
+$s_site_settings_title = 'Configura��es do Site';
+$s_system_info_link = 'Informa��es do Sistema';
+$s_site_settings_link = 'Configura��es do Site';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'Site ayarları güncellendi';
+$s_site_settings_updated_msg = 'As Configura��es Foram Actualizadas';
 
 # summary_page.php
-$s_summary_title = 'Özet';
-$s_summary_jpgraph_link = 'Geniş Özet';
-$s_by_project = 'by project';
-$s_by_status = 'statüye göre';
-$s_by_date = 'tarihe göre';
-$s_by_severity = 'şiddete göre';
-$s_by_resolution = 'çözümlenmeye göre';
-$s_by_category = 'kategoriye göre';
-$s_by_priority = 'önceliğe göre';
-$s_by_developer = 'geliştiriciye göre';
-$s_by_reporter = 'bildirene göre';
+$s_summary_title = 'Sum�rio';
+$s_summary_jpgraph_link = 'Sum�rio Avan�ado';
+$s_by_project = 'por Projecto';
+$s_by_status = 'por Estado';
+$s_by_date = 'por Data de Entrada (n� de dias)';
+$s_by_severity = 'por Import�ncia';
+$s_by_resolution = 'por Resolu��o';
+$s_by_category = 'por Categoria';
+$s_by_priority = 'por Prioridade';
+$s_by_developer = 'por Gestor';
+$s_by_reporter ='por Relator';
 $s_reporter_by_resolution = 'Reporter By Resolution';
 $s_reporter_effectiveness = 'Reporter Effectiveness';
 $s_developer_by_resolution = 'Developer By Resolution';
@@ -1047,32 +1049,32 @@ $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
 $s_total = 'Total';
-$s_time_stats = 'çözümlenmiş buglar için süre istatistikleri (gün) ';
-$s_longest_open_bug = 'en uzun süredir açık olan bug';
-$s_longest_open = 'en uzun süredir açık olan';
-$s_average_time = 'ortalama süre';
-$s_total_time = 'toplam süre';
-$s_developer_stats = 'programcı istatistikleri';
-$s_reporter_stats = 'bildirici istatistikleri';
-$s_orct = '(açık/çözümlenmiş/kapalı/toplam)';
+$s_time_stats = 'Estado para Bug Resolvido(dias)';
+$s_longest_open_bug = 'Bug de Maior tempo sem Solu��o';
+$s_longest_open = 'Mais tempo Aberto';
+$s_average_time = 'Media de Tempo';
+$s_total_time = 'Tempo Total';
+$s_developer_stats = 'Estat�sticas dos Eng. de Desenvolvimento';
+$s_reporter_stats = 'Estat�sticas dos Relatores';
+$s_orct = '(aberto/resolvido/fechado/total)';
 
 # view_all_bug_page.php
-$s_any = 'hepsi';
-$s_show = 'Göster';
-$s_changed = 'Değişme(saat)';
-$s_viewing_bugs_title = 'Buglar İzleniyor';
-$s_updated = 'Son Güncelleme';
+$s_any = 'Qualquer';
+$s_show = 'Mostrar';
+$s_changed = 'Modificado(hrs)';
+$s_viewing_bugs_title = 'Visualizar Bugs';
+$s_updated = 'Actualizado';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = 'hiçbiri';
+$s_none = 'Nenhum';
 $s_current = 'current';
-$s_search = 'Ara';
-$s_view_prev_link = 'Öncekini Göster';
-$s_view_next_link = 'Sonrakini Göster';
+$s_search ='Pesquisar';
+$s_view_prev_link = 'Ver anterior';
+$s_view_next_link = 'Ver seguinte';
 $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
@@ -1102,29 +1104,29 @@ $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'Basit İzle';
-$s_viewing_bug_advanced_details_title = 'Detaylı Bug Bilgileri İzleme';
-$s_product_build = 'Ürün Alt Versiyonu';
-$s_system_profile = 'Sistem Özellikleri';
-$s_update_bug_button = 'Bug Güncelle';
+$s_view_simple_link = 'Visualiza��o Simples';
+$s_viewing_bug_advanced_details_title = 'Visualiza��o de Bugs Avan�ada';
+$s_product_build = 'Compila��o do Produto';
+$s_system_profile = 'Descri��o do Sistema';
+$s_update_bug_button = 'Actualizar';
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
-$s_reopen_bug_button = 'Bug Yeniden Aç';
+$s_reopen_bug_button = 'Reabrir Bug';
 $s_move_bug_button = 'Move Issue';
-$s_attached_files = 'Eklenen Dosyalar';
+$s_attached_files = 'Ficheiros anexos';
 $s_publish = 'Publish';
 $s_cached = 'Cached';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Detaylı Link';
-$s_viewing_bug_simple_details_title = 'Basit Bug Detayları İzleniyor';
+$s_view_advanced_link = 'Visualiza��o Avan�ada';
+$s_viewing_bug_simple_details_title = 'Detalhes Simplificados do Bug';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this issue.';
-$s_users_monitoring_bug = 'Users monitoring this issue';
-$s_monitoring_user_list = 'User List';
+$s_no_users_monitoring_bug = 'N�o h� Utilizadores a Monitorar este Bug.';
+$s_users_monitoring_bug = 'Utilizadores a Monitorar este Bug';
+$s_monitoring_user_list = 'Lista de Utilizadores';
 
 # bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
@@ -1133,25 +1135,25 @@ $s_sponsors_list = 'Sponsors List';
 $s_total_sponsorship_amount = 'Total Sponsorship = %s';
 
 # custom field strings
-$s_add_custom_field_button = 'New Custom Field';
-$s_delete_custom_field_button = 'Delete Custom Field';
-$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-$s_update_custom_field_button = 'Update Custom Field';
-$s_add_existing_custom_field = 'Add This Existing Custom Field';
-$s_edit_custom_field_title = 'Edit custom field';
+$s_add_custom_field_button = 'Novo Custom Field';
+$s_delete_custom_field_button = 'Apagar Custom Field';
+$s_delete_custom_field_everywhere = 'Apagar Custom Field Everywhere';
+$s_update_custom_field_button = 'Actualizar Custom Field';
+$s_add_existing_custom_field = 'Adicionar este Custom Field';
+$s_edit_custom_field_title = 'Editar Custom Field';
 $s_custom_field = 'Field';
 $s_custom_fields_setup = 'Custom Fields';
-$s_custom_field_name = 'Name';
+$s_custom_field_name = 'Designa��o';
 $s_custom_field_project_count = 'Project Count';
-$s_custom_field_type = 'Type';
-$s_custom_field_possible_values = 'Possible Values';
-$s_custom_field_default_value = 'Default Value';
+$s_custom_field_type = 'Tipo';
+$s_custom_field_possible_values = 'Valores Poss�veis';
+$s_custom_field_default_value = 'Valor Default';
 $s_custom_field_valid_regexp = 'Regular Expression';
-$s_custom_field_access_level_r = 'Read Access';
-$s_custom_field_access_level_rw = 'Write Access';
-$s_custom_field_length_min = 'Min. Length';
-$s_custom_field_length_max = 'Max. Length';
-$s_custom_field_advanced = 'Display Only On Advanced Page';
+$s_custom_field_access_level_r = 'Acesso de Leitura';
+$s_custom_field_access_level_rw = 'Acesso de Escrita';
+$s_custom_field_length_min = 'Comprimento M�nimo';
+$s_custom_field_length_max = 'Comprimento M�ximo';
+$s_custom_field_advanced = 'Avan�ado ?';
 $s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';
 $s_custom_field_display_resolved = 'Display When Resolving Issues';
@@ -1161,19 +1163,19 @@ $s_custom_field_require_update = 'Required On Update';
 $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
 
-$s_custom_field_sequence = 'Sequence';
+$s_custom_field_sequence = 'Sequ�ncia';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-$s_field_delete_button = 'Delete Field';
+$s_field_delete_button = 'Apagar Field';
 
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
 
-$s_hide_status = 'Hide Status';
-$s_filter_closed = 'Closed';
-$s_filter_resolved = 'Resolved';
+$s_hide_status = 'N�o Visualizar Bugs...';
+$s_filter_closed = "Encerrado(s)";
+$s_filter_resolved = "Resolvido(s)";
 $s_hide_closed = "Hide Closed";
 $s_hide_resolved = "Hide Resolved";
 $s_and_above = 'And Above';
@@ -1185,7 +1187,7 @@ $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'tr';
+$s_phpmailer_language = 'br';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

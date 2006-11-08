@@ -11,147 +11,147 @@
 	# Slovak strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:49 $
+	# $Date: 2006-11-08 13:32:46 $
 	#
-	# $Id: strings_slovak.txt,v 1.52 2006-09-25 05:16:49 achumakov Exp $
+	# $Id: strings_slovak.txt,v 1.53 2006-11-08 13:32:46 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-2';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Premiestni»';
-$s_actiongroup_menu_copy = 'Kopírova»';
-$s_actiongroup_menu_assign = 'Priradi»';
-$s_actiongroup_menu_close = 'Zatvori»';
-$s_actiongroup_menu_delete = 'Zmaza»';
-$s_actiongroup_menu_resolve = 'Vyrie¹i»';
-$s_actiongroup_menu_update_priority = 'Aktualizova» prioritu';
-$s_actiongroup_menu_update_status = 'Aktualizova» status';
-$s_actiongroup_menu_update_view_status = 'Aktualizova» stav';
+$s_actiongroup_menu_move = 'PremiestniÅ¥';
+$s_actiongroup_menu_copy = 'KopÃ­rovaÅ¥';
+$s_actiongroup_menu_assign = 'PriradiÅ¥';
+$s_actiongroup_menu_close = 'ZatvoriÅ¥';
+$s_actiongroup_menu_delete = 'ZmazaÅ¥';
+$s_actiongroup_menu_resolve = 'VyrieÅ¡iÅ¥';
+$s_actiongroup_menu_update_priority = 'AktualizovaÅ¥ prioritu';
+$s_actiongroup_menu_update_status = 'AktualizovaÅ¥ status';
+$s_actiongroup_menu_update_view_status = 'AktualizovaÅ¥ stav';
 $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
-$s_actiongroup_bugs = 'Vybrané problémy';
+$s_actiongroup_bugs = 'VybranÃ© problÃ©my';
 
 # new strings:
-$s_all_projects = 'V¹etky projekty';
-$s_move_bugs = 'Presunú» bugy';
-$s_operation_successful = 'Operácia prebehla úspe¹ne.';
-$s_date_order = 'Usporiada» podµa dátumu';
-$s_print_all_bug_page_link = 'Vytlaèi» reporty';
+$s_all_projects = 'VÅ¡etky projekty';
+$s_move_bugs = 'PresunÃºÅ¥ bugy';
+$s_operation_successful = 'OperÃ¡cia prebehla ÃºspeÅ¡ne.';
+$s_date_order = 'UsporiadaÅ¥ podÄ¾a dÃ¡tumu';
+$s_print_all_bug_page_link = 'VytlaÄiÅ¥ reporty';
 $s_csv_export = 'CSV Export';
-$s_login_anonymously = 'Prihlási» sa anonymne';
+$s_login_anonymously = 'PrihlÃ¡siÅ¥ sa anonymne';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = 'Preskoèi» na poznámky k bugom';
-$s_public_project_msg = 'Tento projekt je VEREJNİ.  V¹etci pou¾ívatelia majú prístup k tomuto projektu..';
-$s_private_project_msg = 'Tento projekt je PRIVÁTNY.  Iba administrátori a manuálne pridaní pou¾ívatelia majú prístup k tomuto projektu.';
-$s_access_level_project = 'Úroveò prístupovıch práv ku projektu';
-$s_view_submitted_bug_link = 'Pozrie» odoslanı bug';
-$s_assigned_projects = 'Priradené projekty';
-$s_unassigned_projects = 'Nepriradené projekty';
-$s_print = 'Vytlaèi»';
-$s_jump = 'Preskoèi»';
-$s_copy_users = 'Kopírova» pou¾ívateµov';
-$s_copy_categories_from = 'Kopírova» kategórie z';
-$s_copy_categories_to = 'Kopírova» kategórie do';
+$s_jump_to_bugnotes = 'PreskoÄiÅ¥ na poznÃ¡mky k bugom';
+$s_public_project_msg = 'Tento projekt je VEREJNÃ.  VÅ¡etci pouÅ¾Ã­vatelia majÃº prÃ­stup k tomuto projektu..';
+$s_private_project_msg = 'Tento projekt je PRIVÃTNY.  Iba administrÃ¡tori a manuÃ¡lne pridanÃ­ pouÅ¾Ã­vatelia majÃº prÃ­stup k tomuto projektu.';
+$s_access_level_project = 'ÃšroveÅˆ prÃ­stupovÃ½ch prÃ¡v ku projektu';
+$s_view_submitted_bug_link = 'PozrieÅ¥ odoslanÃ½ bug';
+$s_assigned_projects = 'PriradenÃ© projekty';
+$s_unassigned_projects = 'NepriradenÃ© projekty';
+$s_print = 'VytlaÄiÅ¥';
+$s_jump = 'PreskoÄiÅ¥';
+$s_copy_users = 'KopÃ­rovaÅ¥ pouÅ¾Ã­vateÄ¾ov';
+$s_copy_categories_from = 'KopÃ­rovaÅ¥ kategÃ³rie z';
+$s_copy_categories_to = 'KopÃ­rovaÅ¥ kategÃ³rie do';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
-$s_bug_history = 'História bugov';
+$s_bug_history = 'HistÃ³ria bugov';
 $s_field = 'Pole';
-$s_old_value = 'Stará hodnota';
-$s_new_value = 'Nová hodnota';
-$s_date_modified = 'Dátum poslednej úpravy';
-$s_bugnote = 'Poznámka k bugu';
-$s_change = 'Zmeni»';
-$s_bugnote_view_state = 'Status prezerania poznámky k bugu';
-$s_bug_monitor = 'Bug Monitorovanı';
-$s_bug_end_monitor = 'Ukonèi» monitorovanie bugu';
+$s_old_value = 'StarÃ¡ hodnota';
+$s_new_value = 'NovÃ¡ hodnota';
+$s_date_modified = 'DÃ¡tum poslednej Ãºpravy';
+$s_bugnote = 'PoznÃ¡mka k bugu';
+$s_change = 'ZmeniÅ¥';
+$s_bugnote_view_state = 'Status prezerania poznÃ¡mky k bugu';
+$s_bug_monitor = 'Bug MonitorovanÃ½';
+$s_bug_end_monitor = 'UkonÄiÅ¥ monitorovanie bugu';
 $s_announcement = 'Oznam';
-$s_stays_on_top = 'Ostáva na vrchu';
-$s_delete_bugnote_button = 'Zmaza» poznámku k bugu';
-$s_delete_bugnote_sure_msg = 'Ste si istí, ¾e chcete zmaza» túto poznámku k bugu?';
-$s_bug_relationships = 'Vz»ahy';
-$s_empty_password_sure_msg = 'U¾ívateµ má prázdné heslo.  Naozaj je to to, co si prajete?';
-$s_empty_password_button = 'Pou¾íva» prázdne heslá';
+$s_stays_on_top = 'OstÃ¡va na vrchu';
+$s_delete_bugnote_button = 'ZmazaÅ¥ poznÃ¡mku k bugu';
+$s_delete_bugnote_sure_msg = 'Ste si istÃ­, Å¾e chcete zmazaÅ¥ tÃºto poznÃ¡mku k bugu?';
+$s_bug_relationships = 'VzÅ¥ahy';
+$s_empty_password_sure_msg = 'UÅ¾Ã­vateÄ¾ mÃ¡ prÃ¡zdnÃ© heslo.  Naozaj je to to, co si prajete?';
+$s_empty_password_button = 'PouÅ¾Ã­vaÅ¥ prÃ¡zdne heslÃ¡';
 
 $s_duplicate_of = 'duplicita %id';
-$s_has_duplicate = 'má duplicitné %id';
-$s_related_to = 'vo vz»ahu s %id';
-$s_dependant_on = 'závislé od %id';
+$s_has_duplicate = 'mÃ¡ duplicitnÃ© %id';
+$s_related_to = 'vo vzÅ¥ahu s %id';
+$s_dependant_on = 'zÃ¡vislÃ© od %id';
 $s_blocks = 'blokuje %id';
 
-$s_new_bug = 'Novı bug';
-$s_bugnote_added = 'Poznámka k bugu pridaná';
-$s_bugnote_edited = 'Poznámka k bugu upravená';
-$s_bugnote_deleted = 'Poznámka k bugu zmazaná';
-$s_summary_updated = 'Súhrn aktualizovanı';
-$s_description_updated = 'Popis aktualizovanı';
-$s_additional_information_updated = 'Dodatoèné informácie aktualizované';
-$s_steps_to_reproduce_updated = 'Kroky k opätovnému vyvolaniu aktualizované';
-$s_file_added = 'Pridanı súbor: ';
-$s_file_deleted = 'Zmazanı súbor: ';
+$s_new_bug = 'NovÃ½ bug';
+$s_bugnote_added = 'PoznÃ¡mka k bugu pridanÃ¡';
+$s_bugnote_edited = 'PoznÃ¡mka k bugu upravenÃ¡';
+$s_bugnote_deleted = 'PoznÃ¡mka k bugu zmazanÃ¡';
+$s_summary_updated = 'SÃºhrn aktualizovanÃ½';
+$s_description_updated = 'Popis aktualizovanÃ½';
+$s_additional_information_updated = 'DodatoÄnÃ© informÃ¡cie aktualizovanÃ©';
+$s_steps_to_reproduce_updated = 'Kroky k opÃ¤tovnÃ©mu vyvolaniu aktualizovanÃ©';
+$s_file_added = 'PridanÃ½ sÃºbor: ';
+$s_file_deleted = 'ZmazanÃ½ sÃºbor: ';
 $s_bug_deleted = 'Bug Deleted';
 
-$s_make_private = 'Zmeni» na PRIVÁTNE';
-$s_make_public = 'Zmeni» na VEREJNÉ';
+$s_make_private = 'ZmeniÅ¥ na PRIVÃTNE';
+$s_make_public = 'ZmeniÅ¥ na VEREJNÃ‰';
 
-$s_create_new_project_link = 'Vytvori» novı projekt';
+$s_create_new_project_link = 'VytvoriÅ¥ novÃ½ projekt';
 
-$s_login_link = 'Prihlásenie';
+$s_login_link = 'PrihlÃ¡senie';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Nemáte prístupové práva na vykonanie akcie pre nalsedujúce bugy: ';
-$s_bug_actiongroup_access = 'Nemáte potrebné oprávnenie k tejto èinnosti.';
-$s_bug_actiongroup_status = 'Tento problém nejde previes» do po¾adovaného stavu';
+$s_bug_actiongroup_failed = 'NemÃ¡te prÃ­stupovÃ© prÃ¡va na vykonanie akcie pre nalsedujÃºce bugy: ';
+$s_bug_actiongroup_access = 'NemÃ¡te potrebnÃ© oprÃ¡vnenie k tejto Äinnosti.';
+$s_bug_actiongroup_status = 'Tento problÃ©m nejde previesÅ¥ do poÅ¾adovanÃ©ho stavu';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
-$s_close_bugs_conf_msg = 'Ste si istı ¾e chcete zavrie» tieto bugy?';
-$s_delete_bugs_conf_msg = 'Ste si istı ¾e chcete zmaza» tieto bugy?';
-$s_move_bugs_conf_msg = 'Presunú» bugy do';
-$s_copy_bugs_conf_msg = 'Kopírova» problém do';
-$s_assign_bugs_conf_msg = 'Priradi» bugy ku';
-$s_resolve_bugs_conf_msg = 'Vybra» rozlí¹enie bugov';
-$s_priority_bugs_conf_msg = 'Vybra» prioritu bugov';
-$s_status_bugs_conf_msg = 'Vybra» status bugov';
-$s_view_status_bugs_conf_msg = 'Vybrat stav zobrazenia problému';
+$s_close_bugs_conf_msg = 'Ste si istÃ½ Å¾e chcete zavrieÅ¥ tieto bugy?';
+$s_delete_bugs_conf_msg = 'Ste si istÃ½ Å¾e chcete zmazaÅ¥ tieto bugy?';
+$s_move_bugs_conf_msg = 'PresunÃºÅ¥ bugy do';
+$s_copy_bugs_conf_msg = 'KopÃ­rovaÅ¥ problÃ©m do';
+$s_assign_bugs_conf_msg = 'PriradiÅ¥ bugy ku';
+$s_resolve_bugs_conf_msg = 'VybraÅ¥ rozlÃ­Å¡enie bugov';
+$s_priority_bugs_conf_msg = 'VybraÅ¥ prioritu bugov';
+$s_status_bugs_conf_msg = 'VybraÅ¥ status bugov';
+$s_view_status_bugs_conf_msg = 'Vybrat stav zobrazenia problÃ©mu';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Zatvori» bugy' ;
-$s_delete_group_bugs_button = 'Zmaza» bugy' ;
-$s_move_group_bugs_button = 'Presunú» bugy' ;
-$s_copy_group_bugs_button = 'Kopírova» probém' ;
-$s_assign_group_bugs_button = 'Priradi» bugy' ;
-$s_resolve_group_bugs_button = 'Vysvetli» bugy' ;
-$s_priority_group_bugs_button = 'Priorita aktualizácie' ;
-$s_status_group_bugs_button = 'Status aktualizácie' ;
+$s_close_group_bugs_button = 'ZatvoriÅ¥ bugy' ;
+$s_delete_group_bugs_button = 'ZmazaÅ¥ bugy' ;
+$s_move_group_bugs_button = 'PresunÃºÅ¥ bugy' ;
+$s_copy_group_bugs_button = 'KopÃ­rovaÅ¥ probÃ©m' ;
+$s_assign_group_bugs_button = 'PriradiÅ¥ bugy' ;
+$s_resolve_group_bugs_button = 'VysvetliÅ¥ bugy' ;
+$s_priority_group_bugs_button = 'Priorita aktualizÃ¡cie' ;
+$s_status_group_bugs_button = 'Status aktualizÃ¡cie' ;
 $s_category_group_bugs_button = 'Update Category';
-$s_view_status_group_bugs_button = 'Obnovi» zobrazenie problému';
+$s_view_status_group_bugs_button = 'ObnoviÅ¥ zobrazenie problÃ©mu';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Graf podµa stavu' ;
-$s_graph_imp_priority_title = 'Graf podµa priority' ;
-$s_graph_imp_severity_title = 'Graf podµa dôle¾itosti';
-$s_graph_imp_category_title = 'Graf podµa kategorie';
-$s_graph_imp_resolution_title = 'Graf podµa rie¹ení';
-$s_by_status_pct = 'podµa stavu';
-$s_by_priority_pct = 'podµa priority';
-$s_by_severity_pct = 'podµa dôle¾itosti';
-$s_by_category_pct = 'podµa kategórie';
-$s_by_resolution_pct = 'podµa rie¹enia';
-$s_by_severity_mix = 'podµa dôle¾itosti a stavu';
-$s_by_priority_mix = 'podµa priority a stavu';
-$s_by_resolution_mix = 'podµa rie¹enia a stavu';
+$s_graph_imp_status_title = 'Graf podÄ¾a stavu' ;
+$s_graph_imp_priority_title = 'Graf podÄ¾a priority' ;
+$s_graph_imp_severity_title = 'Graf podÄ¾a dÃ´leÅ¾itosti';
+$s_graph_imp_category_title = 'Graf podÄ¾a kategorie';
+$s_graph_imp_resolution_title = 'Graf podÄ¾a rieÅ¡enÃ­';
+$s_by_status_pct = 'podÄ¾a stavu';
+$s_by_priority_pct = 'podÄ¾a priority';
+$s_by_severity_pct = 'podÄ¾a dÃ´leÅ¾itosti';
+$s_by_category_pct = 'podÄ¾a kategÃ³rie';
+$s_by_resolution_pct = 'podÄ¾a rieÅ¡enia';
+$s_by_severity_mix = 'podÄ¾a dÃ´leÅ¾itosti a stavu';
+$s_by_priority_mix = 'podÄ¾a priority a stavu';
+$s_by_resolution_mix = 'podÄ¾a rieÅ¡enia a stavu';
 $s_synthesis_link = 'Tvorba';
-$s_status_link = 'podµa stavu';
-$s_priority_link = 'podµa priority';
-$s_severity_link = 'podµa dôle¾itosti';
-$s_category_link = 'podµa kategórie';
-$s_resolution_link = 'podµa rie¹enia';
+$s_status_link = 'podÄ¾a stavu';
+$s_priority_link = 'podÄ¾a priority';
+$s_severity_link = 'podÄ¾a dÃ´leÅ¾itosti';
+$s_category_link = 'podÄ¾a kategÃ³rie';
+$s_resolution_link = 'podÄ¾a rieÅ¡enia';
 $s_legend_still_open = 'Still Open';
 $s_legend_resolved = 'Resolved';
 $s_legend_assigned = 'Assigned';
@@ -163,171 +163,171 @@ $s_cumulative = 'Cumulative';
 $s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Zobrazi» iba oznaèené';
+$s_hide_button = 'ZobraziÅ¥ iba oznaÄenÃ©';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Vyberte si políèka na tlaèenie';
-$s_printing_options_link = 'Nastavenia tlaèe';
+$s_printing_preferences_title = 'Vyberte si polÃ­Äka na tlaÄenie';
+$s_printing_options_link = 'Nastavenia tlaÄe';
 
 # word and excel export
-$s_bugnote_title = 'Mana¾ér poznámok k bugom' ;
-$s_bugnote_date = 'Dátum poznámky k bugu';
-$s_bugnote_description = 'Popis poznámky k bugu';
+$s_bugnote_title = 'ManaÅ¾Ã©r poznÃ¡mok k bugom' ;
+$s_bugnote_date = 'DÃ¡tum poznÃ¡mky k bugu';
+$s_bugnote_description = 'Popis poznÃ¡mky k bugu';
 
-$s_error_no_proceed = 'K návratu na predchádzejúcu stránku prosím pou¾ijte tlaèítko "Back" va¹eho prehliadaèa.  Mù¾ete tak opravit chyby indikované touto chybovou zprávou, nebo zvolit jinı pokyn.  Mô¾ete tie¾ zvolit inú voµbu z ponuky a prej» priamo na inú sekciu..';
+$s_error_no_proceed = 'K nÃ¡vratu na predchÃ¡dzejÃºcu strÃ¡nku prosÃ­m pouÅ¾ijte tlaÄÃ­tko "Back" vaÅ¡eho prehliadaÄa.  MÅ¯Å¾ete tak opravit chyby indikovanÃ© touto chybovou zprÃ¡vou, nebo zvolit jinÃ½ pokyn.  MÃ´Å¾ete tieÅ¾ zvolit inÃº voÄ¾bu z ponuky a prejÅ¥ priamo na inÃº sekciu..';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'Poèas tejto akcie nastala chyba. Mo¾no si ¾eláte oznámi» túto chybu va¹emu lokálnemu administrátorovi.';
-$MANTIS_ERROR[ERROR_SQL] = 'chyba SQL detekovaná. Prosím oznámte to ';
-$MANTIS_ERROR[ERROR_REPORT] = 'Vo va¹ej správe bola chyba.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '®iadny súbor nebol urèenı.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Tento typ súboru nie je povolenı.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresár neexistuje. Prosím skontrolujte nastavenia projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Toto je duplikátny súbor. Prosím zma¾te najprv súbor.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Projekt s takım menom u¾ existuje.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebné pole nebolo vyplnené. Prosím, zvova skontrolujte vá¹ vstup.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Toto konto je chránené. Nemáte povolenı vstup dokiaµ nebude ochrana odstránená.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Prístup zakázanı.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Upload súboru sa nepodaril. Popıtajte va¹eho administrátora aby spustil skript admin_check pre vyrie¹enie tohto problému.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Zlyhalo uploadovanie súboru.  Toto je pravdepodobne kvoli tomu, ¾e veµkos» súboru bola väè¹ia ako je povolené v PHP kofigurácii.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'Chıba potrebnı parameter pre túto stránku.';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'PoÄas tejto akcie nastala chyba. MoÅ¾no si Å¾elÃ¡te oznÃ¡miÅ¥ tÃºto chybu vaÅ¡emu lokÃ¡lnemu administrÃ¡torovi.';
+$MANTIS_ERROR[ERROR_SQL] = 'chyba SQL detekovanÃ¡. ProsÃ­m oznÃ¡mte to ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Vo vaÅ¡ej sprÃ¡ve bola chyba.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Å½iadny sÃºbor nebol urÄenÃ½.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'Tento typ sÃºboru nie je povolenÃ½.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'AdresÃ¡r neexistuje. ProsÃ­m skontrolujte nastavenia projektu.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Toto je duplikÃ¡tny sÃºbor. ProsÃ­m zmaÅ¾te najprv sÃºbor.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Projekt s takÃ½m menom uÅ¾ existuje.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'PotrebnÃ© pole nebolo vyplnenÃ©. ProsÃ­m, zvova skontrolujte vÃ¡Å¡ vstup.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Toto konto je chrÃ¡nenÃ©. NemÃ¡te povolenÃ½ vstup dokiaÄ¾ nebude ochrana odstrÃ¡nenÃ¡.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'PrÃ­stup zakÃ¡zanÃ½.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Upload sÃºboru sa nepodaril. PopÃ½tajte vaÅ¡eho administrÃ¡tora aby spustil skript admin_check pre vyrieÅ¡enie tohto problÃ©mu.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Zlyhalo uploadovanie sÃºboru.  Toto je pravdepodobne kvoli tomu, Å¾e veÄ¾kosÅ¥ sÃºboru bola vÃ¤ÄÅ¡ia ako je povolenÃ© v PHP kofigurÃ¡cii.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ChÃ½ba potrebnÃ½ parameter pre tÃºto strÃ¡nku.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfiguraèná voµba \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'KonfiguraÄnÃ¡ voÄ¾ba \'%s\' not found.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Textovı retazec  \'%s\' sa nena¹iel.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Poznámka k bugu nenájdená.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projekt nenájdenı.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databázovı ståpec nenájdenı.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Nedá sa pripoji» na FTP server.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'TextovÃ½ retazec  \'%s\' sa nenaÅ¡iel.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'PoznÃ¡mka k bugu nenÃ¡jdenÃ¡.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projekt nenÃ¡jdenÃ½.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'DatabÃ¡zovÃ½ stÄºpec nenÃ¡jdenÃ½.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'NedÃ¡ sa pripojiÅ¥ na FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt s vybranım menom u¾ existuje.  Prosím choïte spä» a vyberte si iné meno.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadané neprípustné méno projektu. Meno projektu nesmie by» prázdne.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'U¾ívateµ nenájdenı.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Informácie ulo¾ené va¹ím prehliadaèom niesu platné.  Mo¾no bol vá¹ úèet zru¹enı?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nejde nájst nastavenie rpe tohoto u¾ívateµa.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Správa nenájdená.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Heslá niesu zhodné.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Pole bolo oèakávané, ale re»azec bol obdr¾anı.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Oèakával sa re»azec, ale bolo prijaté pole.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt s vybranÃ½m menom uÅ¾ existuje.  ProsÃ­m choÄte spÃ¤Å¥ a vyberte si inÃ© meno.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ZadanÃ© neprÃ­pustnÃ© mÃ©no projektu. Meno projektu nesmie byÅ¥ prÃ¡zdne.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'UÅ¾Ã­vateÄ¾ nenÃ¡jdenÃ½.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'InformÃ¡cie uloÅ¾enÃ© vaÅ¡Ã­m prehliadaÄom niesu platnÃ©.  MoÅ¾no bol vÃ¡Å¡ ÃºÄet zruÅ¡enÃ½?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Nejde nÃ¡jst nastavenie rpe tohoto uÅ¾Ã­vateÄ¾a.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'SprÃ¡va nenÃ¡jdenÃ¡.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'HeslÃ¡ niesu zhodnÃ©.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Pole bolo oÄakÃ¡vanÃ©, ale reÅ¥azec bol obdrÅ¾anÃ½.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'OÄakÃ¡val sa reÅ¥azec, ale bolo prijatÃ© pole.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug nenájdenı.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug nenÃ¡jdenÃ½.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Neplatná e-mailová adresa.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nena¹iel.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'Súbor tohto typu nie je povolené uploadova».';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Toto je duplikátny súbor.  Najskôr odstránte súbor.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Neplatná cesta pre uploadovanie súborov.  Adresár buï neexistuje, alebo sa doò nedá zapisova» web serverom.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'NeplatnÃ¡ e-mailovÃ¡ adresa.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nenaÅ¡iel.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'SÃºbor tohto typu nie je povolenÃ© uploadovaÅ¥.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'Toto je duplikÃ¡tny sÃºbor.  NajskÃ´r odstrÃ¡nte sÃºbor.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'NeplatnÃ¡ cesta pre uploadovanie sÃºborov.  AdresÃ¡r buÄ neexistuje, alebo sa doÅˆ nedÃ¡ zapisovaÅ¥ web serverom.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Nie je mo¾né nastavi» bug ako svoj vlastnı duplikát.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'U¾ívateµom definované pole sa nena¹lo';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitné meno.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'toto pole pou¾íva aspoò jeden projekt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nesprávna hodnota pre pole';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Neprípustná hodnota u¾ívateµkého poµa';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'Zlyhalo overenie toto¾nosti cez LDAP';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nenadviazala sa komunikácia s LDAP serverom';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'Zlyhalo aktualizovanie záznamu cez LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Záznam u¾ívateµa sa nena¹iel.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Zlyhalo pripojenie k databáze.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Zlyhalo vykonanie dotazu pre databázu.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Zlyhal vıber databázy.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategória s tımyo menom u¾ existuje.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '®iadna akcia kopírovania nebola ¹pecifikovaná.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategória nenájdená.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Verzia s tımyo menom u¾ existuje.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Verzia nenájdená.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Pou¾ívateµské meno je neplatné.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'U¾ívateµ nemá potrebnú prístupovú úroveò';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Nie je moÅ¾nÃ© nastaviÅ¥ bug ako svoj vlastnÃ½ duplikÃ¡t.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'UÅ¾Ã­vateÄ¾om definovanÃ© pole sa nenaÅ¡lo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'DuplicitnÃ© meno.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'toto pole pouÅ¾Ã­va aspoÅˆ jeden projekt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'NesprÃ¡vna hodnota pre pole';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'NeprÃ­pustnÃ¡ hodnota uÅ¾Ã­vateÄ¾kÃ©ho poÄ¾a';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'Zlyhalo overenie totoÅ¾nosti cez LDAP';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nenadviazala sa komunikÃ¡cia s LDAP serverom';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'Zlyhalo aktualizovanie zÃ¡znamu cez LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP ZÃ¡znam uÅ¾Ã­vateÄ¾a sa nenaÅ¡iel.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Zlyhalo pripojenie k databÃ¡ze.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Zlyhalo vykonanie dotazu pre databÃ¡zu.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Zlyhal vÃ½ber databÃ¡zy.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'KategÃ³ria s tÃ½myo menom uÅ¾ existuje.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Å½iadna akcia kopÃ­rovania nebola Å¡pecifikovanÃ¡.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'KategÃ³ria nenÃ¡jdenÃ¡.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Verzia s tÃ½myo menom uÅ¾ existuje.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Verzia nenÃ¡jdenÃ¡.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'PouÅ¾Ã­vateÄ¾skÃ© meno je neplatnÃ©.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'UÅ¾Ã­vateÄ¾ nemÃ¡ potrebnÃº prÃ­stupovÃº ÃºroveÅˆ';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Podpora sponzoringu nieje dostupná.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzor (%s) sa nachádza pod minimálnou èiastkou (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Riadiaci nemá minimálnu prístupovú úroveò po¾adovanú pre manipuláciu so sponzorovanımi problémmy.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Nepovolenı prístup: Pridelenı sponzorovaného problému vy¾aduje vy¹¹iu prístupovú úroveò.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nemá elektronickú adresu. Opravte prosím vá¹ profil';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraèná voµba \'%s\' má nedovolenú hodnotu \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akcia nemô¾e bı» uskutoènená, preto¾e problém \'%d\' je v stave LEN ÈÍTANIE';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Vz»ah mezi tımito dvoma problémami u¾ je.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Vz»ah nenájdutı.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "CHYAB: Prístup zakázanı. Problém %d vy¾aduje vy¹¹iu prístupovou úroveò.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Problém nemô¾e by» vo vz»ahu sám so sebou.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrdeenie sa nepodarilo. Prosím opakujte.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkcia \'stratené heslo\' nieje dostupná.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pri objednávke zru¹enia hesla musíte uviest svojou elektronickou adresou';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Udané informacie neodpovedajú ¾iádnemu z registrovanıch úètov!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrdzovacia URL je chybná alebo bola u¾ pou¾ita. Prosím prihláste sa znova.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosiahnete maximum vnútornıch procesov. Obra»te sa na správcu systému.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Podpora sponzoringu nieje dostupnÃ¡.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzor (%s) sa nachÃ¡dza pod minimÃ¡lnou Äiastkou (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Riadiaci nemÃ¡ minimÃ¡lnu prÃ­stupovÃº ÃºroveÅˆ poÅ¾adovanÃº pre manipulÃ¡ciu so sponzorovanÃ½mi problÃ©mmy.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'NepovolenÃ½ prÃ­stup: PridelenÃ½ sponzorovanÃ©ho problÃ©mu vyÅ¾aduje vyÅ¡Å¡iu prÃ­stupovÃº ÃºroveÅˆ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nemÃ¡ elektronickÃº adresu. Opravte prosÃ­m vÃ¡Å¡ profil';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'KonfiguraÄnÃ¡ voÄ¾ba \'%s\' mÃ¡ nedovolenÃº hodnotu \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akcia nemÃ´Å¾e bÃ½Å¥ uskutoÄnenÃ¡, pretoÅ¾e problÃ©m \'%d\' je v stave LEN ÄŒÃTANIE';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "VzÅ¥ah mezi tÃ½mito dvoma problÃ©mami uÅ¾ je.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "VzÅ¥ah nenÃ¡jdutÃ½.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "CHYAB: PrÃ­stup zakÃ¡zanÃ½. ProblÃ©m %d vyÅ¾aduje vyÅ¡Å¡iu prÃ­stupovou ÃºroveÅˆ.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ProblÃ©m nemÃ´Å¾e byÅ¥ vo vzÅ¥ahu sÃ¡m so sebou.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrdeenie sa nepodarilo. ProsÃ­m opakujte.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkcia \'stratenÃ© heslo\' nieje dostupnÃ¡.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pri objednÃ¡vke zruÅ¡enia hesla musÃ­te uviest svojou elektronickou adresou';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'UdanÃ© informacie neodpovedajÃº Å¾iÃ¡dnemu z registrovanÃ½ch ÃºÄtov!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrdzovacia URL je chybnÃ¡ alebo bola uÅ¾ pouÅ¾ita. ProsÃ­m prihlÃ¡ste sa znova.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosiahnete maximum vnÃºtornÃ½ch procesov. ObraÅ¥te sa na sprÃ¡vcu systÃ©mu.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
-$s_login_cookies_disabled = 'Vá¹ browser nepodporuje cookies, alebo ich zamietol.';
+$s_login_error = 'vaÅ¡e konto mÃ´Å¾e byÅ¥ vypnutÃ©, alebo pouÅ¾Ã­vatÄ¾skÃ© meno/heslo ktorÃ© ste zadali nie je sprÃ¡vne.';
+$s_login_cookies_disabled = 'VÃ¡Å¡ browser nepodporuje cookies, alebo ich zamietol.';
 
 # General Strings
-$s_go_back = 'Spä»';
-$s_proceed = 'Kliknite sem pre pokraèovanie';
+$s_go_back = 'SpÃ¤Å¥';
+$s_proceed = 'Kliknite sem pre pokraÄovanie';
 
-$s_switch = 'Prepnú»';
-$s_logged_in_as = 'Prihlásenı';
+$s_switch = 'PrepnÃºÅ¥';
+$s_logged_in_as = 'PrihlÃ¡senÃ½';
 
-$s_prefix_for_deleted_users = 'u¾ívateµ';
+$s_prefix_for_deleted_users = 'uÅ¾Ã­vateÄ¾';
 
-$s_administrator = 'administrátor';
-$s_myself = "Ja sám";
+$s_administrator = 'administrÃ¡tor';
+$s_myself = "Ja sÃ¡m";
 $s_default_access_level = 'Default access level';
 
 $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vıvojár,70:vedúci,90:administrátor';
-$s_project_status_enum_string     = '10:vıvoj,30:verzia,50:stabilná,70:nepou¾ívaná';
-$s_project_view_state_enum_string = '10:verejnı,50:súkromnı';
-$s_view_state_enum_string         = '10:verejnı,50:súkromnı';
+$s_access_levels_enum_string      = '10:recenzent,25:reportÃ©r,40:aktualizÃ¡tor,55:vÃ½vojÃ¡r,70:vedÃºci,90:administrÃ¡tor';
+$s_project_status_enum_string     = '10:vÃ½voj,30:verzia,50:stabilnÃ¡,70:nepouÅ¾Ã­vanÃ¡';
+$s_project_view_state_enum_string = '10:verejnÃ½,50:sÃºkromnÃ½';
+$s_view_state_enum_string         = '10:verejnÃ½,50:sÃºkromnÃ½';
 
-$s_priority_enum_string           = '10:¾iadna,20:nízka,30:normálna,40:vysoká,50:urgentná,60:okam¾ite';
-$s_severity_enum_string           = '10:vlastnos»,20:triviálna,30:text,40:slabá,50:malá,60:veµká,70:pád aplikácie,80:blokujúca';
-$s_reproducibility_enum_string    = '10:v¾dy,30:obèas,50:náhodne,70:nevyskú¹ané,90:nedá sa opakova»,100:N/A';
-$s_status_enum_string             = '10:novı,20:reakcia,30:potvrdenı,40:schválenı,50:priradenı,80:vyrie¹nı,90:uzavretı';
-$s_resolution_enum_string         = '10:otvorenı,20:vyrie¹enı,30:znovuotvorenı,40:nedá sa nasimulova»,50:nedá sa vyrie¹i»,60:duplicitnı,70:nie je bug,80:odlo¾enı,90:neopravova»';
-$s_projection_enum_string         = '10:¾iadny,30:slabı,50:malá zmena,70:veµká zmena,90:zmena designu';
-$s_eta_enum_string                = '10:¾iadny,20:< 1 deò,30:2-3 dni,40:< 1 tı¾deò,50:< 1 mesiac,60:> 1 mesiac';
+$s_priority_enum_string           = '10:Å¾iadna,20:nÃ­zka,30:normÃ¡lna,40:vysokÃ¡,50:urgentnÃ¡,60:okamÅ¾ite';
+$s_severity_enum_string           = '10:vlastnosÅ¥,20:triviÃ¡lna,30:text,40:slabÃ¡,50:malÃ¡,60:veÄ¾kÃ¡,70:pÃ¡d aplikÃ¡cie,80:blokujÃºca';
+$s_reproducibility_enum_string    = '10:vÅ¾dy,30:obÄas,50:nÃ¡hodne,70:nevyskÃºÅ¡anÃ©,90:nedÃ¡ sa opakovaÅ¥,100:N/A';
+$s_status_enum_string             = '10:novÃ½,20:reakcia,30:potvrdenÃ½,40:schvÃ¡lenÃ½,50:priradenÃ½,80:vyrieÅ¡nÃ½,90:uzavretÃ½';
+$s_resolution_enum_string         = '10:otvorenÃ½,20:vyrieÅ¡enÃ½,30:znovuotvorenÃ½,40:nedÃ¡ sa nasimulovaÅ¥,50:nedÃ¡ sa vyrieÅ¡iÅ¥,60:duplicitnÃ½,70:nie je bug,80:odloÅ¾enÃ½,90:neopravovaÅ¥';
+$s_projection_enum_string         = '10:Å¾iadny,30:slabÃ½,50:malÃ¡ zmena,70:veÄ¾kÃ¡ zmena,90:zmena designu';
+$s_eta_enum_string                = '10:Å¾iadny,20:< 1 deÅˆ,30:2-3 dni,40:< 1 tÃ½Å¾deÅˆ,50:< 1 mesiac,60:> 1 mesiac';
 $s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 # Email Strings
-$s_new_account_subject = 'registrácia nového u¾ívateµského úètu';
-$s_new_account_greeting = 'Ïakujeme za registráciu. Máte úèet s u¾ivatelskım menom \'';
-$s_new_account_greeting2 = '\'. Pre dokonèenie va¹ej registrácie prejdite na nasledujúcu adresu (uistite sa, aby bola zadana na jednom riadku) a nastavte va¹e prístupové heslo:';
-$s_new_account_username = 'Pou¾ívateµské meno: ';
-$s_new_account_message = 'Pokial si neprajete registráciu, ignorujte túto správu a niè sa nestane.' . "\n\n";
-$s_new_account_do_not_reply = 'NEODPOVEDAJTE NA TÚTO SPRÁVU';
+$s_new_account_subject = 'registrÃ¡cia novÃ©ho uÅ¾Ã­vateÄ¾skÃ©ho ÃºÄtu';
+$s_new_account_greeting = 'Äakujeme za registrÃ¡ciu. MÃ¡te ÃºÄet s uÅ¾ivatelskÃ½m menom \'';
+$s_new_account_greeting2 = '\'. Pre dokonÄenie vaÅ¡ej registrÃ¡cie prejdite na nasledujÃºcu adresu (uistite sa, aby bola zadana na jednom riadku) a nastavte vaÅ¡e prÃ­stupovÃ© heslo:';
+$s_new_account_username = 'PouÅ¾Ã­vateÄ¾skÃ© meno: ';
+$s_new_account_message = 'Pokial si neprajete registrÃ¡ciu, ignorujte tÃºto sprÃ¡vu a niÄ sa nestane.' . "\n\n";
+$s_new_account_do_not_reply = 'NEODPOVEDAJTE NA TÃšTO SPRÃVU';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'IP adresa vzdialeného poèítaèa: ';
-$s_new_account_signup_msg = 'Bol vytvornı nasledujúci úèet:';
+$s_new_account_IP = 'IP adresa vzdialenÃ©ho poÄÃ­taÄa: ';
+$s_new_account_signup_msg = 'Bol vytvornÃ½ nasledujÃºci ÃºÄet:';
 
-$s_reset_request_msg = 'Niekdo (dúfam ¾e vy) po¾iadal o zmenu hesla s overenım dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a niè sa nestane.' . "\n\n" . 'Pokud jste si skuteèn¹ pøáli tuto zmìnu, nav¹tivte Nasledujúci stránku a dokonèete zmìnu pøístupového hesla:';
-$s_reset_request_in_progress_msg = 'Pokiad bola zadaná správna kombinácia u¾ivateµského mena a elektronickej adresy pre Vá¹ úèet, odo¹leme vám na túto adresu potvrdzovací dopis. Keï tento dopis dostanete, riadte sa pokynmy v òom pre dokonèenie zmeny prístupového hesla.';
+$s_reset_request_msg = 'Niekdo (dÃºfam Å¾e vy) poÅ¾iadal o zmenu hesla s overenÃ½m dopisom. Pokiad ste to vy nebol, ignorujte tento dopis a niÄ sa nestane.' . "\n\n" . 'Pokud jste si skuteÄnÅ¡ pÅ™Ã¡li tuto zmÄ›nu, navÅ¡tivte NasledujÃºci strÃ¡nku a dokonÄete zmÄ›nu pÅ™Ã­stupovÃ©ho hesla:';
+$s_reset_request_in_progress_msg = 'Pokiad bola zadanÃ¡ sprÃ¡vna kombinÃ¡cia uÅ¾ivateÄ¾skÃ©ho mena a elektronickej adresy pre VÃ¡Å¡ ÃºÄet, odoÅ¡leme vÃ¡m na tÃºto adresu potvrdzovacÃ­ dopis. KeÄ tento dopis dostanete, riadte sa pokynmy v Åˆom pre dokonÄenie zmeny prÃ­stupovÃ©ho hesla.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'Nasledujúci problém vy¾aduje va¹u ODOZVU';
-$s_email_notification_title_for_status_bug_acknowledged = 'Nasledujúci problém bol PRIJATİ.';
-$s_email_notification_title_for_status_bug_confirmed = 'Nasledujúci problém bol POTVRDENİ';
-$s_email_notification_title_for_status_bug_assigned = 'Nasledujúci problém bol PRIRADENİ.';
-$s_email_notification_title_for_status_bug_resolved = 'Nasledujúci problém bol VYRIE©ENİ.';
-$s_email_notification_title_for_status_bug_closed = 'Nasledujúci problém byo UZAVRENİ.';
+$s_email_notification_title_for_status_bug_feedback = 'NasledujÃºci problÃ©m vyÅ¾aduje vaÅ¡u ODOZVU';
+$s_email_notification_title_for_status_bug_acknowledged = 'NasledujÃºci problÃ©m bol PRIJATÃ.';
+$s_email_notification_title_for_status_bug_confirmed = 'NasledujÃºci problÃ©m bol POTVRDENÃ';
+$s_email_notification_title_for_status_bug_assigned = 'NasledujÃºci problÃ©m bol PRIRADENÃ.';
+$s_email_notification_title_for_status_bug_resolved = 'NasledujÃºci problÃ©m bol VYRIEÅ ENÃ.';
+$s_email_notification_title_for_status_bug_closed = 'NasledujÃºci problÃ©m byo UZAVRENÃ.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Nasledujúci problém bol PRIDANİ.';
-$s_email_notification_title_for_action_bug_assigned = 'Nasledujúci problém bol PRIRADENİ.';
-$s_email_notification_title_for_action_bug_reopened = 'Nasledujúci problém bol ZNOVUOTVORENİ.';
-$s_email_notification_title_for_action_bug_deleted = 'Nasledujúci problém bol ZRU©ENİ.';
-$s_email_notification_title_for_action_bug_updated = 'Nasledujúci problém bol AKTUALIZOVANİ.';
-$s_email_notification_title_for_action_sponsorship_added = 'Nasledujúci problém je SPONZOROVANİ.';
-$s_email_notification_title_for_action_sponsorship_updated = 'Sponzoring tohoto problému bol zmenenı.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'Sponzoring tohoto problému byl uzavrenı.';
+$s_email_notification_title_for_action_bug_submitted = 'NasledujÃºci problÃ©m bol PRIDANÃ.';
+$s_email_notification_title_for_action_bug_assigned = 'NasledujÃºci problÃ©m bol PRIRADENÃ.';
+$s_email_notification_title_for_action_bug_reopened = 'NasledujÃºci problÃ©m bol ZNOVUOTVORENÃ.';
+$s_email_notification_title_for_action_bug_deleted = 'NasledujÃºci problÃ©m bol ZRUÅ ENÃ.';
+$s_email_notification_title_for_action_bug_updated = 'NasledujÃºci problÃ©m bol AKTUALIZOVANÃ.';
+$s_email_notification_title_for_action_sponsorship_added = 'NasledujÃºci problÃ©m je SPONZOROVANÃ.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Sponzoring tohoto problÃ©mu bol zmenenÃ½.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Sponzoring tohoto problÃ©mu byl uzavrenÃ½.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'K problému bola pridána poznámka.';
+$s_email_notification_title_for_action_bugnote_submitted = 'K problÃ©mu bola pridÃ¡na poznÃ¡mka.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
 $s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
 $s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
@@ -342,105 +342,105 @@ $s_email_notification_title_for_action_relationship_child_resolved = "The RELATE
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Autor';
-$s_email_handler = 'Operátor';
+$s_email_handler = 'OperÃ¡tor';
 $s_email_project = 'Projekt';
 $s_email_bug = 'ID bugu';
-$s_email_category = 'Kategória';
+$s_email_category = 'KategÃ³ria';
 $s_email_reproducibility = 'Vyvolanie';
-$s_email_severity = 'Dôle¾itos»';
+$s_email_severity = 'DÃ´leÅ¾itosÅ¥';
 $s_email_priority = 'Priorita';
 $s_email_status = 'Stav';
 $s_email_resolution = 'Rozhodnutie';
 $s_email_duplicate = 'Duplicita';
-$s_email_fixed_in_version = 'Vyrie¹ené na verzií';
-$s_email_date_submitted = 'Vlo¾ené';
-$s_email_last_modified = 'Posledná zmena';
+$s_email_fixed_in_version = 'VyrieÅ¡enÃ© na verziÃ­';
+$s_email_date_submitted = 'VloÅ¾enÃ©';
+$s_email_last_modified = 'PoslednÃ¡ zmena';
 $s_email_summary =  'Zhrnutie';
 $s_email_description = 'Popis';
 
 # account_delete.php
-$s_account_protected_msg = 'Úèet je chránenı. Nie je mo¾né zmeni» nastavenia...';
-$s_account_removed_msg = 'Vá¹ úèet bol odstránenı...';
+$s_account_protected_msg = 'ÃšÄet je chrÃ¡nenÃ½. Nie je moÅ¾nÃ© zmeniÅ¥ nastavenia...';
+$s_account_removed_msg = 'VÃ¡Å¡ ÃºÄet bol odstrÃ¡nenÃ½...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Naozaj si prajete zmaza» Vá¹ úèet?';
-$s_delete_account_button = 'Zmaza» úèet';
+$s_confirm_delete_msg = 'Naozaj si prajete zmazaÅ¥ VÃ¡Å¡ ÃºÄet?';
+$s_delete_account_button = 'ZmazaÅ¥ ÃºÄet';
 
 # account_page.php
 $s_manage_profiles_link = 'Profily';
 $s_change_preferences_link = 'Nastavenia';
-$s_edit_account_title = 'Upravi» úèet';
-$s_username = 'Pou¾ívateµské meno';
-$s_realname = 'Skutoèné meno';
-$s_email = 'Elektronická adresa';
+$s_edit_account_title = 'UpraviÅ¥ ÃºÄet';
+$s_username = 'PouÅ¾Ã­vateÄ¾skÃ© meno';
+$s_realname = 'SkutoÄnÃ© meno';
+$s_email = 'ElektronickÃ¡ adresa';
 $s_password = 'Heslo';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Heslo znovu';
-$s_access_level = 'Úroveò prístupu';
-$s_update_user_button = 'Aktualizova» pou¾ívateµa';
+$s_access_level = 'ÃšroveÅˆ prÃ­stupu';
+$s_update_user_button = 'AktualizovaÅ¥ pouÅ¾Ã­vateÄ¾a';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Nastavenia úètu';
-$s_default_project = 'Defaultnı projekt';
-$s_advanced_report = 'Roz¹írenı report';
-$s_advanced_view = 'Roz¹írenı pohµad';
-$s_advanced_update = 'Roz¹írená aktualizácia';
+$s_default_account_preferences_title = 'Nastavenia ÃºÄtu';
+$s_default_project = 'DefaultnÃ½ projekt';
+$s_advanced_report = 'RozÅ¡Ã­renÃ½ report';
+$s_advanced_view = 'RozÅ¡Ã­renÃ½ pohÄ¾ad';
+$s_advanced_update = 'RozÅ¡Ã­renÃ¡ aktualizÃ¡cia';
 $s_refresh_delay = 'Interval pre refresh';
 $s_redirect_delay = 'Pauza pre presmerovanie';
-$s_with_minimum_severity = 'S minimálnou dôle¾itos»ou';
-$s_bugnote_order = 'Spôsob radenia problémov';
+$s_with_minimum_severity = 'S minimÃ¡lnou dÃ´leÅ¾itosÅ¥ou';
+$s_bugnote_order = 'SpÃ´sob radenia problÃ©mov';
 $s_bugnote_order_asc = 'Vzostupne';
 $s_bugnote_order_desc = 'Zostupne';
 $s_email_on_new = 'Email pri novom';
 $s_email_on_assigned = 'Email pri priradenom';
 $s_email_on_feedback = 'Email pri reakcii';
-$s_email_on_resolved = 'Email pri vyrie¹enom';
+$s_email_on_resolved = 'Email pri vyrieÅ¡enom';
 $s_email_on_closed = 'Email pri uzatvorenom';
 $s_email_on_reopened = 'Email pri znovuotvorenom';
-$s_email_on_bugnote_added = 'Email pri novej poznámke k bugu';
+$s_email_on_bugnote_added = 'Email pri novej poznÃ¡mke k bugu';
 $s_email_on_status_change = 'Email pri zmene stavu';
 $s_email_on_priority_change = 'Email pri zmene priority';
-$s_email_bugnote_limit = 'Limit po¹tovıch správ o problémoch';
+$s_email_bugnote_limit = 'Limit poÅ¡tovÃ½ch sprÃ¡v o problÃ©moch';
 $s_language = 'Jazyk';
-$s_update_prefs_button = 'Upravi» nastavenia';
-$s_reset_prefs_button = 'Zmaza» nastavenia';
+$s_update_prefs_button = 'UpraviÅ¥ nastavenia';
+$s_reset_prefs_button = 'ZmazaÅ¥ nastavenia';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = 'Nastavenia boli zmazané...';
+$s_prefs_reset_msg = 'Nastavenia boli zmazanÃ©...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Nastavenia boli aktualizované...';
+$s_prefs_updated_msg = 'Nastavenia boli aktualizovanÃ©...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Profil bol pridanı...';
+$s_profile_added_msg = 'Profil bol pridanÃ½...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Profil bol zmazanı...';
+$s_profile_deleted_msg = 'Profil bol zmazanÃ½...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Upravi» profil';
+$s_edit_profile_title = 'UpraviÅ¥ profil';
 $s_platform = 'Platforma';
-$s_operating_system = 'Operaènı systém';
-$s_additional_description = 'Dal¹í popis';
-$s_update_profile_button = 'Ulo¾i» profil';
+$s_operating_system = 'OperaÄnÃ½ systÃ©m';
+$s_additional_description = 'DalÅ¡Ã­ popis';
+$s_update_profile_button = 'UloÅ¾iÅ¥ profil';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = 'Defaultnı profil aktualizovanı...';
+$s_profile_defaulted_msg = 'DefaultnÃ½ profil aktualizovanÃ½...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Prida» profil';
-$s_add_profile_button = 'Prida»';
-$s_edit_or_delete_profiles_title = 'Zmeni» alebo zmaza» profily';
-$s_edit_profile = 'Upravi» profil';
-$s_make_default = 'Nastavi» ako default';
-$s_delete_profile = 'Zmaza» profil';
-$s_select_profile = 'Vybra» profil';
-$s_submit_button = 'Ulo¾i»';
+$s_add_profile_title = 'PridaÅ¥ profil';
+$s_add_profile_button = 'PridaÅ¥';
+$s_edit_or_delete_profiles_title = 'ZmeniÅ¥ alebo zmazaÅ¥ profily';
+$s_edit_profile = 'UpraviÅ¥ profil';
+$s_make_default = 'NastaviÅ¥ ako default';
+$s_delete_profile = 'ZmazaÅ¥ profil';
+$s_select_profile = 'VybraÅ¥ profil';
+$s_submit_button = 'UloÅ¾iÅ¥';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Profil aktualizovanı...';
+$s_profile_updated_msg = 'Profil aktualizovanÃ½...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'My Sponsorships';
@@ -461,11 +461,11 @@ $s_sponsor_show = 'Show All';
 $s_payment_updated = 'Payment information updated.';
 
 # account_update.php
-$s_account_updated_msg = 'Vá¹ úèet bol úspe¹ne aktualizovanı...';
-$s_email_updated = 'Elektronická adresa bola úspe¹ne aktualizovaná';
-$s_realname_duplicated = 'Skutoèné meno je pou¾ité inım u¾ívateµom';
-$s_realname_updated = 'Skutoèné meno bolo úspe¹ne aktualizováné';
-$s_password_updated = 'Heslo bolo úspe¹ne aktualizováné';
+$s_account_updated_msg = 'VÃ¡Å¡ ÃºÄet bol ÃºspeÅ¡ne aktualizovanÃ½...';
+$s_email_updated = 'ElektronickÃ¡ adresa bola ÃºspeÅ¡ne aktualizovanÃ¡';
+$s_realname_duplicated = 'SkutoÄnÃ© meno je pouÅ¾itÃ© inÃ½m uÅ¾Ã­vateÄ¾om';
+$s_realname_updated = 'SkutoÄnÃ© meno bolo ÃºspeÅ¡ne aktualizovÃ¡nÃ©';
+$s_password_updated = 'Heslo bolo ÃºspeÅ¡ne aktualizovÃ¡nÃ©';
 
 # adm_permission_report.php
 
@@ -473,69 +473,69 @@ $s_password_updated = 'Heslo bolo úspe¹ne aktualizováné';
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
 # bug_assign.php
-$s_bug_assign_msg       = 'Bug bol úspe¹ne priradenı...';
+$s_bug_assign_msg       = 'Bug bol ÃºspeÅ¡ne priradenÃ½...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'Novı problém';
-$s_feedback_bug_title = 'Zaistenie odozvy na problém';
-$s_acknowledged_bug_title = 'Prijatie problému';
-$s_confirmed_bug_title = 'Potvrdenie problému';
-$s_assigned_bug_title = 'Priradenie problému';
-$s_new_bug_button = 'Novı problém';
+$s_new_bug_title = 'NovÃ½ problÃ©m';
+$s_feedback_bug_title = 'Zaistenie odozvy na problÃ©m';
+$s_acknowledged_bug_title = 'Prijatie problÃ©mu';
+$s_confirmed_bug_title = 'Potvrdenie problÃ©mu';
+$s_assigned_bug_title = 'Priradenie problÃ©mu';
+$s_new_bug_button = 'NovÃ½ problÃ©m';
 $s_feedback_bug_button = 'Odozva';
 $s_acknowledged_bug_button = 'Prijatie';
 $s_confirmed_bug_button = 'Potvrdenie';
 $s_assigned_bug_button = 'Priradenie';
 
 # bug_close.php
-$s_bug_close_msg       = 'Bug bol uzavretı...';
-$s_close_immediately   = 'Okam¾ite uzavrie»:';
+$s_bug_close_msg       = 'Bug bol uzavretÃ½...';
+$s_close_immediately   = 'OkamÅ¾ite uzavrieÅ¥:';
 
 # bug_close_page.php
-$s_closed_bug_title = 'Zavrie» Bug';
+$s_closed_bug_title = 'ZavrieÅ¥ Bug';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Bug bol zmazanı...';
+$s_bug_deleted_msg = 'Bug bol zmazanÃ½...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Skutoène chcete zmaza» tento bug?';
-$s_delete_bug_button = 'Zmaza»';
+$s_delete_bug_sure_msg = 'SkutoÄne chcete zmazaÅ¥ tento bug?';
+$s_delete_bug_button = 'ZmazaÅ¥';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitorova» Bug';
-$s_unmonitor_bug_button = 'Skonèi» monitorovanie';
+$s_monitor_bug_button = 'MonitorovaÅ¥ Bug';
+$s_unmonitor_bug_button = 'SkonÄiÅ¥ monitorovanie';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Upload súboru prebehol úspe¹ne';
+$s_file_upload_msg = 'Upload sÃºboru prebehol ÃºspeÅ¡ne';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Upload súboru';
-$s_select_file = 'Vyberte súbor';
-$s_upload_file_button = 'Ulo¾it';
-$s_max_file_size = 'Maximálna veµkos»';
+$s_upload_file = 'Upload sÃºboru';
+$s_select_file = 'Vyberte sÃºbor';
+$s_upload_file_button = 'UloÅ¾it';
+$s_max_file_size = 'MaximÃ¡lna veÄ¾kosÅ¥';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Bug bol znovu otvorenı...';
-$s_reopen_add_bugnote_title = 'Prida» dôvod pre znovuotvorenie bugu';
-$s_bugnote_add_reopen_button = 'Prida» poznámku a znovuotvori» bug';
+$s_bug_reopened_msg = 'Bug bol znovu otvorenÃ½...';
+$s_reopen_add_bugnote_title = 'PridaÅ¥ dÃ´vod pre znovuotvorenie bugu';
+$s_bugnote_add_reopen_button = 'PridaÅ¥ poznÃ¡mku a znovuotvoriÅ¥ bug';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Vyrie¹nie bugu';
-$s_resolved_bug_button = 'Vyrie¹i» bug';
+$s_resolved_bug_title = 'VyrieÅ¡nie bugu';
+$s_resolved_bug_button = 'VyrieÅ¡iÅ¥ bug';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Bug bol vyrie¹enı. Vlo¾te poznámku...';
-$s_resolve_add_bugnote_title = 'Pridanie dôvodu pre vyrie¹enie bugu';
-$s_bugnote_add_resolve_button = 'Prida» poznámku';
+$s_bug_resolved_msg = 'Bug bol vyrieÅ¡enÃ½. VloÅ¾te poznÃ¡mku...';
+$s_resolve_add_bugnote_title = 'Pridanie dÃ´vodu pre vyrieÅ¡enie bugu';
+$s_bugnote_add_resolve_button = 'PridaÅ¥ poznÃ¡mku';
 
 # bug_reminder_page.php
 $s_from = 'od';
 $s_to = 'komu';
 $s_on = 'v';
-$s_sent_you_this_reminder_about = 'Vám poslal túto správu na';
-$s_bug_reminder = 'Odosla» upozornenie';
-$s_reminder_sent_to = 'Odosla» upozornenie';
-$s_bug_send_button = 'Odosla»';
+$s_sent_you_this_reminder_about = 'VÃ¡m poslal tÃºto sprÃ¡vu na';
+$s_bug_reminder = 'OdoslaÅ¥ upozornenie';
+$s_reminder_sent_to = 'OdoslaÅ¥ upozornenie';
+$s_bug_send_button = 'OdoslaÅ¥';
 $s_reminder = 'Upozornenie';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
@@ -545,73 +545,73 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Bug bol úspe¹ne aktualizovanı...';
+$s_bug_updated_msg = 'Bug bol ÃºspeÅ¡ne aktualizovanÃ½...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Spä» na bug';
-$s_update_simple_link = 'Jednoduchá aktulizácia';
-$s_updating_bug_advanced_title = 'Aktualizácia informácií o bugu';
+$s_back_to_bug_link = 'SpÃ¤Å¥ na bug';
+$s_update_simple_link = 'JednoduchÃ¡ aktulizÃ¡cia';
+$s_updating_bug_advanced_title = 'AktualizÃ¡cia informÃ¡ciÃ­ o bugu';
 $s_id = 'ID';
-$s_category = 'Kategória';
-$s_severity = 'Dôle¾itos»';
-$s_reproducibility = 'Reprodukovateµnos»';
-$s_date_submitted = 'Dátum vlo¾enia';
-$s_last_update = 'Posledná zmena';
+$s_category = 'KategÃ³ria';
+$s_severity = 'DÃ´leÅ¾itosÅ¥';
+$s_reproducibility = 'ReprodukovateÄ¾nosÅ¥';
+$s_date_submitted = 'DÃ¡tum vloÅ¾enia';
+$s_last_update = 'PoslednÃ¡ zmena';
 $s_reporter = 'Autor';
-$s_assigned_to = 'Priradené';
+$s_assigned_to = 'PriradenÃ©';
 $s_priority = 'Priorita';
-$s_resolution = 'Rie¹enie';
+$s_resolution = 'RieÅ¡enie';
 $s_status = 'Stav';
-$s_duplicate_id = 'Duplicitné ID';
+$s_duplicate_id = 'DuplicitnÃ© ID';
 $s_os = 'OS';
 $s_projection = 'Dopad';
 $s_os_version = 'Verzia';
 $s_eta = 'Doba opravy';
 $s_product_version = 'Verzia produktu';
 $s_build = 'Zostavenie';
-$s_fixed_in_version = 'Vyrie¹ené vo verzií';
+$s_fixed_in_version = 'VyrieÅ¡enÃ© vo verziÃ­';
 $s_votes = 'Hlasy';
 $s_summary = 'Zhrnutie';
 $s_description = 'Popis';
 $s_steps_to_reproduce = 'Kroky k vyvolaniu';
-$s_update_information_button = 'Ulo¾it';
+$s_update_information_button = 'UloÅ¾it';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Roz¹írená aktualizácia';
-$s_updating_bug_simple_title = 'Aktualizácia bugu';
+$s_update_advanced_link = 'RozÅ¡Ã­renÃ¡ aktualizÃ¡cia';
+$s_updating_bug_simple_title = 'AktualizÃ¡cia bugu';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'Hlas bol pridanı...';
+$s_vote_added_msg = 'Hlas bol pridanÃ½...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Poznámka k bugu bola pridaná...';
+$s_bugnote_added_msg = 'PoznÃ¡mka k bugu bola pridanÃ¡...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Poznámka k bugu bola úspe¹ne zmazaná...';
-$s_bug_notes_title = 'Poznámky k bugu';
+$s_bugnote_deleted_msg = 'PoznÃ¡mka k bugu bola ÃºspeÅ¡ne zmazanÃ¡...';
+$s_bug_notes_title = 'PoznÃ¡mky k bugu';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Upravi» poznámku k bugu';
+$s_edit_bugnote_title = 'UpraviÅ¥ poznÃ¡mku k bugu';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Neexistujú ¾iadne poznámky k tomuto bugu.';
-$s_delete_link = 'Zmaza»';
-$s_add_bugnote_title = 'Prida» poznámku';
-$s_add_bugnote_button = 'Prida» poznámku';
-$s_bugnote_edit_link = 'Upravi»';
-$s_closed_bug_button = 'Uzavrie» bug';
+$s_no_bugnotes_msg = 'NeexistujÃº Å¾iadne poznÃ¡mky k tomuto bugu.';
+$s_delete_link = 'ZmazaÅ¥';
+$s_add_bugnote_title = 'PridaÅ¥ poznÃ¡mku';
+$s_add_bugnote_button = 'PridaÅ¥ poznÃ¡mku';
+$s_bugnote_edit_link = 'UpraviÅ¥';
+$s_closed_bug_button = 'UzavrieÅ¥ bug';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Poznámka bola úspe¹ne upravená...';
-$s_edited_on = 'upravené: ';
+$s_bugnote_updated_msg = 'PoznÃ¡mka bola ÃºspeÅ¡ne upravenÃ¡...';
+$s_edited_on = 'upravenÃ©: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = 'Kliknite sem pre prihlásenie';
+$s_click_to_login = 'Kliknite sem pre prihlÃ¡senie';
 
 # login.php
 
@@ -619,71 +619,71 @@ $s_click_to_login = 'Kliknite sem pre prihlásenie';
 #@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Vitajte v bugtrackeri.';
 $s_login_title = 'Login';
-$s_save_login = 'Ulo¾i» Login';
-$s_choose_project = 'Vybra» projekt';
+$s_save_login = 'UloÅ¾iÅ¥ Login';
+$s_choose_project = 'VybraÅ¥ projekt';
 $s_login_button = 'Login';
-$s_signup_link = 'zalo¾i» novı úèet';
-$s_lost_password_link = 'Stratili ste va¹e heslo';
+$s_signup_link = 'zaloÅ¾iÅ¥ novÃ½ ÃºÄet';
+$s_lost_password_link = 'Stratili ste vaÅ¡e heslo';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Vyber projekt';
 
 # logout_page.php
-$s_logged_out_title = 'Odhlásenie...';
+$s_logged_out_title = 'OdhlÃ¡senie...';
 $s_redirecting = '...presmerovanie';
 $s_here = 'tu';
 
 # lost_pwd_page.php
 $s_lost_password_title = "Zmena hesla";
-$s_lost_password_done_title = "Odoslanı dopis o zmene hesla";
+$s_lost_password_done_title = "OdoslanÃ½ dopis o zmene hesla";
 $s_lost_password_subject = "Zmena hesla";
-$s_lost_password_info = "Ak chcete obnovit va¹e stratené heslo, zadajte prosím u¾ivatelské méno va¹eho úètu a va¹ú elektronickú adresu.<br/><br/>Pokud bude tato zadaná kombinace odpovídat nìkterému úètu, za¹leme vám dopis s unikátní webovou adresou pro potvrzení zmìny hesla. Pøejdìte na tuto adresu a dokonèete zmìnu va¹eho hesla.";
-$s_lost_password_confirm_hash_OK = "Va¹e potvrdenie bolo prijaté. Teraz mô¾ete zmìnit va¹e prístupové heslo.";
+$s_lost_password_info = "Ak chcete obnovit vaÅ¡e stratenÃ© heslo, zadajte prosÃ­m uÅ¾ivatelskÃ© mÃ©no vaÅ¡eho ÃºÄtu a vaÅ¡Ãº elektronickÃº adresu.<br/><br/>Pokud bude tato zadanÃ¡ kombinace odpovÃ­dat nÄ›kterÃ©mu ÃºÄtu, zaÅ¡leme vÃ¡m dopis s unikÃ¡tnÃ­ webovou adresou pro potvrzenÃ­ zmÄ›ny hesla. PÅ™ejdÄ›te na tuto adresu a dokonÄete zmÄ›nu vaÅ¡eho hesla.";
+$s_lost_password_confirm_hash_OK = "VaÅ¡e potvrdenie bolo prijatÃ©. Teraz mÃ´Å¾ete zmÄ›nit vaÅ¡e prÃ­stupovÃ© heslo.";
 
 # main_page.php
-$s_open_and_assigned_to_me = 'Moje otvorené a priradené';
-$s_open_and_reported_to_me = 'Moje otvorené a vytvorené';
-$s_newer_news_link = 'Nov¹ie novinky';
-$s_older_news_link = 'Star¹ie novinky';
-$s_archives = 'Archív';
+$s_open_and_assigned_to_me = 'Moje otvorenÃ© a priradenÃ©';
+$s_open_and_reported_to_me = 'Moje otvorenÃ© a vytvorenÃ©';
+$s_newer_news_link = 'NovÅ¡ie novinky';
+$s_older_news_link = 'StarÅ¡ie novinky';
+$s_archives = 'ArchÃ­v';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'Vytvorenı pou¾ívateµ';
-$s_created_user_part2 = 's prístupovou úrovòou';
+$s_created_user_part1 = 'VytvorenÃ½ pouÅ¾Ã­vateÄ¾';
+$s_created_user_part2 = 's prÃ­stupovou ÃºrovÅˆou';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Vytvori» novı úèet';
+$s_create_new_account_title = 'VytvoriÅ¥ novÃ½ ÃºÄet';
 $s_verify_password = 'Heslo znovu';
-$s_enabled = 'Povolenı';
+$s_enabled = 'PovolenÃ½';
 $s_protected = 'Ochrana';
-$s_create_user_button = 'Vytvori»';
+$s_create_user_button = 'VytvoriÅ¥';
 
 # manage_page.php
-$s_hide_disabled = 'Skry» nepovolené';
-$s_filter_button = 'Pou¾i» filter';
-$s_manage_users_link = 'Správa pou¾ívateµov';
-$s_manage_projects_link = 'Správa projektov';
-$s_manage_custom_field_link = 'Správa u¾ívateµskıch polí';
+$s_hide_disabled = 'SkryÅ¥ nepovolenÃ©';
+$s_filter_button = 'PouÅ¾iÅ¥ filter';
+$s_manage_users_link = 'SprÃ¡va pouÅ¾Ã­vateÄ¾ov';
+$s_manage_projects_link = 'SprÃ¡va projektov';
+$s_manage_custom_field_link = 'SprÃ¡va uÅ¾Ã­vateÄ¾skÃ½ch polÃ­';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
-$s_create_new_account_link = 'Vytvori» úèet';
+$s_create_new_account_link = 'VytvoriÅ¥ ÃºÄet';
 $s_projects_link = 'Projekty';
-$s_documentation_link = 'Dokumentácia';
-$s_new_accounts_title = 'Nové úèty';
-$s_1_week_title = '1 tı¾deò';
-$s_never_logged_in_title = 'Nikdy nepprihlásení';
-$s_prune_accounts = 'Preèisti» úèty';
-$s_hide_inactive = 'Skry» neaktívnych';
-$s_manage_accounts_title = 'Správa úètov';
+$s_documentation_link = 'DokumentÃ¡cia';
+$s_new_accounts_title = 'NovÃ© ÃºÄty';
+$s_1_week_title = '1 tÃ½Å¾deÅˆ';
+$s_never_logged_in_title = 'Nikdy nepprihlÃ¡senÃ­';
+$s_prune_accounts = 'PreÄistiÅ¥ ÃºÄty';
+$s_hide_inactive = 'SkryÅ¥ neaktÃ­vnych';
+$s_manage_accounts_title = 'SprÃ¡va ÃºÄtov';
 $s_p = 'p';
-$s_date_created = 'Dátum vytvorenia';
-$s_last_visit = 'Posledná náv¹teva';
-$s_edit_user_link = 'Upravi»';
+$s_date_created = 'DÃ¡tum vytvorenia';
+$s_last_visit = 'PoslednÃ¡ nÃ¡vÅ¡teva';
+$s_edit_user_link = 'UpraviÅ¥';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
@@ -759,430 +759,430 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Projekt bol úspe¹ne pridanı...';
+$s_project_added_msg = 'Projekt bol ÃºspeÅ¡ne pridanÃ½...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Kategória bola úspe¹ne pridaná...';
+$s_category_added_msg = 'KategÃ³ria bola ÃºspeÅ¡ne pridanÃ¡...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Kategória bola úspe¹ne zmazaná...';
+$s_category_deleted_msg = 'KategÃ³ria bola ÃºspeÅ¡ne zmazanÃ¡...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Naozaj chcete zmaza» túto kategóriu? V¹etky priradené bugy budú zmazané.';
-$s_delete_category_button = 'Zmaza» kategóriu';
+$s_category_delete_sure_msg = 'Naozaj chcete zmazaÅ¥ tÃºto kategÃ³riu? VÅ¡etky priradenÃ© bugy budÃº zmazanÃ©.';
+$s_delete_category_button = 'ZmazaÅ¥ kategÃ³riu';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Aktualizácia kategórií projektu';
-$s_update_category_button = 'Aktualizova» kategóriu';
+$s_edit_project_category_title = 'AktualizÃ¡cia kategÃ³riÃ­ projektu';
+$s_update_category_button = 'AktualizovaÅ¥ kategÃ³riu';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Kategória bola úspe¹ne aktualizovaná...';
+$s_category_updated_msg = 'KategÃ³ria bola ÃºspeÅ¡ne aktualizovanÃ¡...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Projekt bol úspe¹ne odstránenı...';
+$s_project_deleted_msg = 'Projekt bol ÃºspeÅ¡ne odstrÃ¡nenÃ½...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Naozaj chcete zmaza» tento projekt a v¹etky priradené bugy?';
-$s_project_delete_button = 'Zmaza» projekt';
+$s_project_delete_msg = 'Naozaj chcete zmazaÅ¥ tento projekt a vÅ¡etky priradenÃ© bugy?';
+$s_project_delete_button = 'ZmazaÅ¥ projekt';
 
 # manage_proj_edit_page.php
-$s_edit_project_title = 'Editova» projekt';
+$s_edit_project_title = 'EditovaÅ¥ projekt';
 $s_project_name = 'Meno projektu';
-$s_view_status = 'Zobrazi» status';
-$s_public = 'verejnı';
-$s_private = 'súkromnı';
-$s_update_project_button = 'Aktualizova» projekt';
-$s_delete_project_button = 'Zmaza» projekt';
-$s_categories_and_version_title = 'Kategória a verzia';
-$s_categories = 'Kategória';
-$s_add_category_button = 'Prida» kategóriu';
+$s_view_status = 'ZobraziÅ¥ status';
+$s_public = 'verejnÃ½';
+$s_private = 'sÃºkromnÃ½';
+$s_update_project_button = 'AktualizovaÅ¥ projekt';
+$s_delete_project_button = 'ZmazaÅ¥ projekt';
+$s_categories_and_version_title = 'KategÃ³ria a verzia';
+$s_categories = 'KategÃ³ria';
+$s_add_category_button = 'PridaÅ¥ kategÃ³riu';
 $s_versions = 'Verzia';
-$s_add_version_button = 'Prida» verziu';
+$s_add_version_button = 'PridaÅ¥ verziu';
 $s_add_and_edit_version_button = 'Add and Edit Version';
-$s_edit_link = 'upravi»';
+$s_edit_link = 'upraviÅ¥';
 $s_actions = 'Akcie';
 $s_version = 'Verzia/Build';
-$s_timestamp = 'Èasová znaèka';
-$s_update = 'Aktualizácia';
+$s_timestamp = 'ÄŒasovÃ¡ znaÄka';
+$s_update = 'AktualizÃ¡cia';
 $s_subprojects = 'Subprojects';
 $s_add_subproject = 'Add as Subproject';
 $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Prida» projekt';
-$s_upload_file_path = 'Cesta pre ukladanie súborov';
-$s_add_project_button = 'Prida» projekt';
+$s_add_project_title = 'PridaÅ¥ projekt';
+$s_upload_file_path = 'Cesta pre ukladanie sÃºborov';
+$s_add_project_button = 'PridaÅ¥ projekt';
 $s_projects_title = 'Projekty';
 $s_name = 'Meno';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Projekt bol úspe¹ne aktualizovanı...';
+$s_project_updated_msg = 'Projekt bol ÃºspeÅ¡ne aktualizovanÃ½...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Verzia bola úspe¹ne pridaná...';
+$s_version_added_msg = 'Verzia bola ÃºspeÅ¡ne pridanÃ¡...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'Verzia bola úspe¹ne zmazaná...';
+$s_version_deleted_msg = 'Verzia bola ÃºspeÅ¡ne zmazanÃ¡...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Naozaj chcete zmaza» túto verziu? V¹etky súvisejúce bugy budú vymazané.';
-$s_delete_version_button = 'Zmaza» verziu';
+$s_version_delete_sure = 'Naozaj chcete zmazaÅ¥ tÃºto verziu? VÅ¡etky sÃºvisejÃºce bugy budÃº vymazanÃ©.';
+$s_delete_version_button = 'ZmazaÅ¥ verziu';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Upravi» verziu projektu';
-$s_update_version_button = 'Aktualizova» verziu';
+$s_edit_project_version_title = 'UpraviÅ¥ verziu projektu';
+$s_update_version_button = 'AktualizovaÅ¥ verziu';
 $s_released = 'Released';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Verzia bola úspe¹ne upravená...';
+$s_version_updated_msg = 'Verzia bola ÃºspeÅ¡ne upravenÃ¡...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'Úèet je chránenı. Nie je mo¾né zmaza» tento úèet.';
-$s_account_deleted_msg = 'Úèet zmazanı...';
+$s_account_delete_protected_msg = 'ÃšÄet je chrÃ¡nenÃ½. Nie je moÅ¾nÃ© zmazaÅ¥ tento ÃºÄet.';
+$s_account_deleted_msg = 'ÃšÄet zmazanÃ½...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Naozaj si prajete zmaza» tento úèet?';
+$s_delete_account_sure_msg = 'Naozaj si prajete zmazaÅ¥ tento ÃºÄet?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'V¹etky úèty, na ktoré sa nikto neprihlásil a sú star¹ie ako 1 tı¾deò boli odstránené';
+$s_accounts_pruned_msg = 'VÅ¡etky ÃºÄty, na ktorÃ© sa nikto neprihlÃ¡sil a sÃº starÅ¡ie ako 1 tÃ½Å¾deÅˆ boli odstrÃ¡nenÃ©';
 $s_prune_accounts_button = 'Prune';
-$s_confirm_account_pruning = 'Naozaj chcete odstráni» v¹etky staré úèty, na ktoré sa doposial nikdo neprihlásil?';
+$s_confirm_account_pruning = 'Naozaj chcete odstrÃ¡niÅ¥ vÅ¡etky starÃ© ÃºÄty, na ktorÃ© sa doposial nikdo neprihlÃ¡sil?';
 
 # manage_user_page.php
-$s_edit_user_title = 'Úpravy pou¾ívateµa';
-$s_reset_password_button = 'Vynulova» heslo';
-$s_delete_user_button = 'Zmaza» pou¾ívateµa';
-$s_reset_password_msg = 'Zmena hesla odo¹le potvrdzovací URL elektronickım dopisom.';
-$s_reset_password_msg2 = 'Nastavi» heslo na prázdne.';
-$s_show_all_users = 'V¹etko';
+$s_edit_user_title = 'Ãšpravy pouÅ¾Ã­vateÄ¾a';
+$s_reset_password_button = 'VynulovaÅ¥ heslo';
+$s_delete_user_button = 'ZmazaÅ¥ pouÅ¾Ã­vateÄ¾a';
+$s_reset_password_msg = 'Zmena hesla odoÅ¡le potvrdzovacÃ­ URL elektronickÃ½m dopisom.';
+$s_reset_password_msg2 = 'NastaviÅ¥ heslo na prÃ¡zdne.';
+$s_show_all_users = 'VÅ¡etko';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Úèet je chránenı. Nie je mo¾né vynulova» heslo.';
-$s_account_reset_msg = 'Potvrdzovací dopis bol odoslanı na va¹u elektronickú adresu...';
-$s_account_reset_msg2 = 'Heslo k úètu bolo nastavené na prázdne...';
+$s_account_reset_protected_msg = 'ÃšÄet je chrÃ¡nenÃ½. Nie je moÅ¾nÃ© vynulovaÅ¥ heslo.';
+$s_account_reset_msg = 'PotvrdzovacÃ­ dopis bol odoslanÃ½ na vaÅ¡u elektronickÃº adresu...';
+$s_account_reset_msg2 = 'Heslo k ÃºÄtu bolo nastavenÃ© na prÃ¡zdne...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Úèet je chránenı. Prístupová úroveò a príznak sú chránené. Pokiaµ nie, úèet bol aktualizovanı...';
-$s_manage_user_updated_msg = 'Úèet bol úspe¹ne aktualizovanı...';
+$s_manage_user_protected_msg = 'ÃšÄet je chrÃ¡nenÃ½. PrÃ­stupovÃ¡ ÃºroveÅˆ a prÃ­znak sÃº chrÃ¡nenÃ©. PokiaÄ¾ nie, ÃºÄet bol aktualizovanÃ½...';
+$s_manage_user_updated_msg = 'ÃšÄet bol ÃºspeÅ¡ne aktualizovanÃ½...';
 
 # menu_inc.php
-$s_main_link = 'Hlavné';
-$s_view_bugs_link = 'Zobrazi» bugy';
-$s_report_bug_link = 'Vlo¾i» bug';
+$s_main_link = 'HlavnÃ©';
+$s_view_bugs_link = 'ZobraziÅ¥ bugy';
+$s_report_bug_link = 'VloÅ¾iÅ¥ bug';
 $s_changelog_link = 'Zmena Logu';
 $s_summary_link = 'Zhrnutie';
-$s_account_link = 'Úèet';
-$s_users_link = 'Pou¾ívatelia';
-$s_manage_link = 'Správa';
-$s_edit_news_link = 'Upravi» novinky';
+$s_account_link = 'ÃšÄet';
+$s_users_link = 'PouÅ¾Ã­vatelia';
+$s_manage_link = 'SprÃ¡va';
+$s_edit_news_link = 'UpraviÅ¥ novinky';
 $s_docs_link = 'Dokumenty';
-$s_logout_link = 'Odhlási»';
+$s_logout_link = 'OdhlÃ¡siÅ¥';
 $s_my_view_link = 'My View';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Nepriradené';
-$s_my_view_title_recent_mod = 'Nedávno zmenené';
-$s_my_view_title_reported = 'Mnou oznámené';
-$s_my_view_title_assigned = 'Priradené mne (nevyrie¹ené)';
-$s_my_view_title_resolved = 'Vyrie¹ené';
-$s_my_view_title_monitored = 'Mnou sledované';
+$s_my_view_title_unassigned = 'NepriradenÃ©';
+$s_my_view_title_recent_mod = 'NedÃ¡vno zmenenÃ©';
+$s_my_view_title_reported = 'Mnou oznÃ¡menÃ©';
+$s_my_view_title_assigned = 'PriradenÃ© mne (nevyrieÅ¡enÃ©)';
+$s_my_view_title_resolved = 'VyrieÅ¡enÃ©';
+$s_my_view_title_monitored = 'Mnou sledovanÃ©';
 $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 
 # news_add.php
-$s_news_added_msg = 'Novinka bola pridaná...';
+$s_news_added_msg = 'Novinka bola pridanÃ¡...';
 
 # news_delete.php
-$s_news_deleted_msg = 'Novinka bola vymazaná...';
+$s_news_deleted_msg = 'Novinka bola vymazanÃ¡...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Naozaj chcete zmaza» túto novú polo¾ku?';
-$s_delete_news_item_button = 'Zmaza»';
+$s_delete_news_sure_msg = 'Naozaj chcete zmazaÅ¥ tÃºto novÃº poloÅ¾ku?';
+$s_delete_news_item_button = 'ZmazaÅ¥';
 
 # news_edit_page.php
-$s_edit_news_title = 'Úpravy novinek';
+$s_edit_news_title = 'Ãšpravy novinek';
 $s_headline = 'Titulok';
 $s_body = 'Obsah';
-$s_update_news_button = 'Aktualizova»';
+$s_update_news_button = 'AktualizovaÅ¥';
 
 # news_menu_page.php
 $s_add_news_title = 'Pridanie novinek';
-$s_post_to = 'Vlo¾i» do';
-$s_post_news_button = 'Ulo¾i»';
-$s_edit_or_delete_news_title = 'Upravi» alebo zmaza» novinky';
-$s_edit_post = 'Upravi»';
-$s_delete_post = 'Zmaza»';
-$s_select_post = 'Vybra»';
+$s_post_to = 'VloÅ¾iÅ¥ do';
+$s_post_news_button = 'UloÅ¾iÅ¥';
+$s_edit_or_delete_news_title = 'UpraviÅ¥ alebo zmazaÅ¥ novinky';
+$s_edit_post = 'UpraviÅ¥';
+$s_delete_post = 'ZmazaÅ¥';
+$s_select_post = 'VybraÅ¥';
 
 # news_update.php
-$s_news_updated_msg = 'Novinka bola aktualizovaná...';
+$s_news_updated_msg = 'Novinka bola aktualizovanÃ¡...';
 
 # news_view_page.php
-$s_back_link = 'Spä»';
+$s_back_link = 'SpÃ¤Å¥';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Súbor bol nahratı úspe¹ne';
+$s_file_uploaded_msg = 'SÃºbor bol nahratÃ½ ÃºspeÅ¡ne';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'Vlo¾enie súboru';
-$s_title = 'Názov';
+$s_upload_file_title = 'VloÅ¾enie sÃºboru';
+$s_title = 'NÃ¡zov';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = 'Projektovı súbor bol zmazanı';
+$s_project_file_deleted_msg = 'ProjektovÃ½ sÃºbor bol zmazanÃ½';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Naozaj chcete zmaza» tento súbor?';
+$s_confirm_file_delete_msg = 'Naozaj chcete zmazaÅ¥ tento sÃºbor?';
 
 # proj_doc_edit_page.php
-$s_filename = 'Názov súboru';
-$s_file_update_button = 'Aktualizova» súbor';
-$s_file_delete_button = 'Zmaza» súbor';
+$s_filename = 'NÃ¡zov sÃºboru';
+$s_file_update_button = 'AktualizovaÅ¥ sÃºbor';
+$s_file_delete_button = 'ZmazaÅ¥ sÃºbor';
 
 # proj_doc_page.php
-$s_project_documentation_title = 'Projektová dokumentácia';
-$s_user_documentation = 'Pou¾ívateµská dokumentácia';
-$s_project_documentation = 'Projektová dokumentácia';
-$s_add_file = 'Prida» súbor';
+$s_project_documentation_title = 'ProjektovÃ¡ dokumentÃ¡cia';
+$s_user_documentation = 'PouÅ¾Ã­vateÄ¾skÃ¡ dokumentÃ¡cia';
+$s_project_documentation = 'ProjektovÃ¡ dokumentÃ¡cia';
+$s_add_file = 'PridaÅ¥ sÃºbor';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Projekt bol úspe¹ne aktualizovnı';
+$s_project_document_updated = 'Projekt bol ÃºspeÅ¡ne aktualizovnÃ½';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'Pou¾ívateµ bol úspe¹ne priradenı k projektu';
+$s_project_user_added_msg = 'PouÅ¾Ã­vateÄ¾ bol ÃºspeÅ¡ne priradenÃ½ k projektu';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'Pou¾ívateµ bol úspe¹ne odobratı z projektu';
+$s_project_removed_user_msg = 'PouÅ¾Ã­vateÄ¾ bol ÃºspeÅ¡ne odobratÃ½ z projektu';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Naozaj odobra» tohto pou¾ívateµa?';
+$s_remove_user_sure_msg = 'Naozaj odobraÅ¥ tohto pouÅ¾Ã­vateÄ¾a?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Prida» pou¾ívateµa k projektu';
-$s_add_user_button = 'Pridaj pou¾ívateµa';
-$s_project_selection_title = 'Vıber projektu';
-$s_remove_link = 'odstráni»';
+$s_add_user_title = 'PridaÅ¥ pouÅ¾Ã­vateÄ¾a k projektu';
+$s_add_user_button = 'Pridaj pouÅ¾Ã­vateÄ¾a';
+$s_project_selection_title = 'VÃ½ber projektu';
+$s_remove_link = 'odstrÃ¡niÅ¥';
 $s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
-$s_updated_user_msg = 'Aktualizácia pou¾ívateµa prebehla úspe¹ne.';
+$s_updated_user_msg = 'AktualizÃ¡cia pouÅ¾Ã­vateÄ¾a prebehla ÃºspeÅ¡ne.';
 
 # report_add.php
-$s_must_enter_category = 'Musíte vybra» kategóriu';
-$s_must_enter_severity = 'Musíte vybra» dôle¾itos»';
-$s_must_enter_reproducibility = 'Musíte vybra» reprodukovateµnos»';
-$s_must_enter_summary = 'Musíte vlo¾i» zhrnutie.';
-$s_must_enter_description = 'Musíte zada» popis';
-$s_report_more_bugs = 'Vlo¾it viac bugov';
-$s_submission_thanks_msg = 'Ïakujeme za vlo¾enie.';
+$s_must_enter_category = 'MusÃ­te vybraÅ¥ kategÃ³riu';
+$s_must_enter_severity = 'MusÃ­te vybraÅ¥ dÃ´leÅ¾itosÅ¥';
+$s_must_enter_reproducibility = 'MusÃ­te vybraÅ¥ reprodukovateÄ¾nosÅ¥';
+$s_must_enter_summary = 'MusÃ­te vloÅ¾iÅ¥ zhrnutie.';
+$s_must_enter_description = 'MusÃ­te zadaÅ¥ popis';
+$s_report_more_bugs = 'VloÅ¾it viac bugov';
+$s_submission_thanks_msg = 'Äakujeme za vloÅ¾enie.';
 
 # report_bug_advanced_page.php
-$s_simple_report_link = 'Jednoduchı report';
-$s_enter_report_details_title = 'Vlo¾te detaily reportu';
-$s_required = 'vy¾adovanı';
-$s_select_category = 'Vyber kategóriu';
-$s_select_reproducibility = 'Vyber reprodukovateµnos»';
-$s_select_severity = 'Vyber dôle¾itos»';
-$s_or_fill_in = 'ALEBO vyplò';
-$s_assign_to = 'Priradenı';
-$s_additional_information = 'Dal¹ie informácie';
-$s_submit_report_button = 'Ulo¾i»';
-$s_check_report_more_bugs = 'za¹krtnite pre vlo¾enie viacerıch bugov';
+$s_simple_report_link = 'JednoduchÃ½ report';
+$s_enter_report_details_title = 'VloÅ¾te detaily reportu';
+$s_required = 'vyÅ¾adovanÃ½';
+$s_select_category = 'Vyber kategÃ³riu';
+$s_select_reproducibility = 'Vyber reprodukovateÄ¾nosÅ¥';
+$s_select_severity = 'Vyber dÃ´leÅ¾itosÅ¥';
+$s_or_fill_in = 'ALEBO vyplÅˆ';
+$s_assign_to = 'PriradenÃ½';
+$s_additional_information = 'DalÅ¡ie informÃ¡cie';
+$s_submit_report_button = 'UloÅ¾iÅ¥';
+$s_check_report_more_bugs = 'zaÅ¡krtnite pre vloÅ¾enie viacerÃ½ch bugov';
 
 # report_bug_page.php
-$s_advanced_report_link = 'Roz¹írenı report';
-$s_report_stay = 'Zosta» v reporte';
+$s_advanced_report_link = 'RozÅ¡Ã­renÃ½ report';
+$s_report_stay = 'ZostaÅ¥ v reporte';
 
 # set_project.php
 $s_selected_project = 'Vyber projekt';
-$s_valid_project_msg = 'Musíte vybra» platnı projekt';
+$s_valid_project_msg = 'MusÃ­te vybraÅ¥ platnÃ½ projekt';
 
 # signup.php
-$s_signup_done_title = 'Registrácia úètu dokonèená';
-$s_password_emailed_msg = 'Blaho¾eláme, registrácia bola úspe¹ná. Na va¹u elektronickú adresu bol práve odoslanı kontrolnı list. V tomto liste obdr¾íte jedineènú webovou adresu, kterú musíte nav¹tívit pre aktiváciu va¹eho úètu.';
-$s_no_reponse_msg = 'Na dokonèenie potvrdenia va¹eho úètu máte termín sedem dní. Ak sa Vám nepodarí aktivova» úèet v priebehu siedmych dní, bude tento novı úèet zmazanı.';
+$s_signup_done_title = 'RegistrÃ¡cia ÃºÄtu dokonÄenÃ¡';
+$s_password_emailed_msg = 'BlahoÅ¾elÃ¡me, registrÃ¡cia bola ÃºspeÅ¡nÃ¡. Na vaÅ¡u elektronickÃº adresu bol prÃ¡ve odoslanÃ½ kontrolnÃ½ list. V tomto liste obdrÅ¾Ã­te jedineÄnÃº webovou adresu, kterÃº musÃ­te navÅ¡tÃ­vit pre aktivÃ¡ciu vaÅ¡eho ÃºÄtu.';
+$s_no_reponse_msg = 'Na dokonÄenie potvrdenia vaÅ¡eho ÃºÄtu mÃ¡te termÃ­n sedem dnÃ­. Ak sa VÃ¡m nepodarÃ­ aktivovaÅ¥ ÃºÄet v priebehu siedmych dnÃ­, bude tento novÃ½ ÃºÄet zmazanÃ½.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Zadajte kód ktorı vidíte v rámiku na pravej strane';
-$s_signup_info = 'Po dokonèení tejto kontroly va¹ich odpovedí Vám po¹leme kontrolnı elektronickı dopis.<br/>Pou¾itím tohoto kontrolného dopisu budete môc» aktivova» Vá¹ úèet. Nepodarí sa Vám aktivova» úèet v priebehu siedmych dní, bude úèet zmazanı.<br/>Abyste dostali tento kontrolní dopis, musí bıt vámi zadaná elektronická adresa platná.';
-$s_signup_title = 'Vytvorenie pou¾ívateµa';
-$s_signup_button = 'Vytvori»';
+$s_signup_captcha_request = 'Zadajte kÃ³d ktorÃ½ vidÃ­te v rÃ¡miku na pravej strane';
+$s_signup_info = 'Po dokonÄenÃ­ tejto kontroly vaÅ¡ich odpovedÃ­ VÃ¡m poÅ¡leme kontrolnÃ½ elektronickÃ½ dopis.<br/>PouÅ¾itÃ­m tohoto kontrolnÃ©ho dopisu budete mÃ´cÅ¥ aktivovaÅ¥ VÃ¡Å¡ ÃºÄet. NepodarÃ­ sa VÃ¡m aktivovaÅ¥ ÃºÄet v priebehu siedmych dnÃ­, bude ÃºÄet zmazanÃ½.<br/>Abyste dostali tento kontrolnÃ­ dopis, musÃ­ bÃ½t vÃ¡mi zadanÃ¡ elektronickÃ¡ adresa platnÃ¡.';
+$s_signup_title = 'Vytvorenie pouÅ¾Ã­vateÄ¾a';
+$s_signup_button = 'VytvoriÅ¥';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = 'Nastavenie stránky';
-$s_save_settings_button = 'Ulo¾i» nastavenia';
+$s_edit_site_settings_title = 'Nastavenie strÃ¡nky';
+$s_save_settings_button = 'UloÅ¾iÅ¥ nastavenia';
 
 # site_settings_page.php
-$s_site_settings_title = 'Nastavenia stránky';
-$s_system_info_link = 'Informácie o systéme';
-$s_site_settings_link = 'Nastavenia stránky';
+$s_site_settings_title = 'Nastavenia strÃ¡nky';
+$s_system_info_link = 'InformÃ¡cie o systÃ©me';
+$s_site_settings_link = 'Nastavenia strÃ¡nky';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'Nastavenie stránky bolo aktualizovené';
+$s_site_settings_updated_msg = 'Nastavenie strÃ¡nky bolo aktualizovenÃ©';
 
 # summary_page.php
 $s_summary_title = 'Zhrnutie';
-$s_summary_jpgraph_link = 'Roz¹írené zhrnutie';
+$s_summary_jpgraph_link = 'RozÅ¡Ã­renÃ© zhrnutie';
 $s_by_project = 'by project';
-$s_by_status = 'podµa stavu';
-$s_by_date = 'podµa dátumu(dni)';
-$s_by_severity = 'podµa dôle¾itosti';
-$s_by_resolution = 'podµa rie¹enia';
-$s_by_category = 'podµa kategórie';
-$s_by_priority = 'podµa priority';
-$s_by_developer = 'podµa vıvojára';
-$s_by_reporter ='podµa autora';
-$s_reporter_by_resolution = 'Autor podµa rie¹enia';
-$s_reporter_effectiveness = 'Autor podµa efektivity';
-$s_developer_by_resolution = 'Vıvojar podµa rie¹enia';
-$s_percentage_fixed = '% Opravenıch ';
-$s_percentage_errors = '% chybnıch';
+$s_by_status = 'podÄ¾a stavu';
+$s_by_date = 'podÄ¾a dÃ¡tumu(dni)';
+$s_by_severity = 'podÄ¾a dÃ´leÅ¾itosti';
+$s_by_resolution = 'podÄ¾a rieÅ¡enia';
+$s_by_category = 'podÄ¾a kategÃ³rie';
+$s_by_priority = 'podÄ¾a priority';
+$s_by_developer = 'podÄ¾a vÃ½vojÃ¡ra';
+$s_by_reporter ='podÄ¾a autora';
+$s_reporter_by_resolution = 'Autor podÄ¾a rieÅ¡enia';
+$s_reporter_effectiveness = 'Autor podÄ¾a efektivity';
+$s_developer_by_resolution = 'VÃ½vojar podÄ¾a rieÅ¡enia';
+$s_percentage_fixed = '% OpravenÃ½ch ';
+$s_percentage_errors = '% chybnÃ½ch';
 $s_errors = 'Chybne';
 $s_total = 'Total';
-$s_time_stats = 'èasové ¹tatistiky pre vyrie¹ené bugy(dni)';
-$s_longest_open_bug = 'najdlh¹ie otvorenı bug';
-$s_longest_open = 'najdlh¹ie otvorenı';
-$s_average_time = 'priemernı èas';
-$s_total_time = 'celkovı èas';
-$s_developer_stats = 'vıvojárske ¹tatistiky';
-$s_reporter_stats = 'reportérske ¹tatistiky';
-$s_orct = '(otvorené/vyrie¹ené/uzatvorené/celkom)';
+$s_time_stats = 'ÄasovÃ© Å¡tatistiky pre vyrieÅ¡enÃ© bugy(dni)';
+$s_longest_open_bug = 'najdlhÅ¡ie otvorenÃ½ bug';
+$s_longest_open = 'najdlhÅ¡ie otvorenÃ½';
+$s_average_time = 'priemernÃ½ Äas';
+$s_total_time = 'celkovÃ½ Äas';
+$s_developer_stats = 'vÃ½vojÃ¡rske Å¡tatistiky';
+$s_reporter_stats = 'reportÃ©rske Å¡tatistiky';
+$s_orct = '(otvorenÃ©/vyrieÅ¡enÃ©/uzatvorenÃ©/celkom)';
 
 # view_all_bug_page.php
-$s_any = 'v¹etko';
-$s_show = 'Ukáza»';
-$s_changed = 'Zmenené(h)';
+$s_any = 'vÅ¡etko';
+$s_show = 'UkÃ¡zaÅ¥';
+$s_changed = 'ZmenenÃ©(h)';
 $s_viewing_bugs_title = 'Prehladanie bugov';
-$s_updated = 'Aktualizácia';
+$s_updated = 'AktualizÃ¡cia';
 $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = '¾iadny';
+$s_none = 'Å¾iadny';
 $s_current = 'current';
-$s_search ='Hµada»';
-$s_view_prev_link = 'Predchádzajúci';
-$s_view_next_link = 'Následujúci';
-$s_prev = 'Predchádzajúci';
-$s_next = 'Nalsedujúci';
-$s_first = 'Prvı';
-$s_last = 'Poslednı';
-$s_start_date = 'Poèiatoènı dátum';
-$s_end_date = 'Koncovı dátu ';
-$s_use_date_filters = 'Filter podµa u¾ívateµa';
+$s_search ='HÄ¾adaÅ¥';
+$s_view_prev_link = 'PredchÃ¡dzajÃºci';
+$s_view_next_link = 'NÃ¡sledujÃºci';
+$s_prev = 'PredchÃ¡dzajÃºci';
+$s_next = 'NalsedujÃºci';
+$s_first = 'PrvÃ½';
+$s_last = 'PoslednÃ½';
+$s_start_date = 'PoÄiatoÄnÃ½ dÃ¡tum';
+$s_end_date = 'KoncovÃ½ dÃ¡tu ';
+$s_use_date_filters = 'Filter podÄ¾a uÅ¾Ã­vateÄ¾a';
 $s_yes = 'ano';
 $s_no = 'nie';
 $s_open_filters = 'Zmena filtru';
-$s_or_unassigned = 'Alebo nepriradené';
+$s_or_unassigned = 'Alebo nepriradenÃ©';
 $s_ok = 'OK';
-$s_select_all = 'Vybra» v¹etko';
+$s_select_all = 'VybraÅ¥ vÅ¡etko';
 
 # stored query strings
-$s_use_query = 'Pou¾i» filter';
-$s_delete_query = 'zru¹i» filter';
-$s_query_deleted = 'Fiter zru¹enı';
-$s_save_query = 'Uchova» teraj¹í filter';
-$s_reset_query = 'Vynulova» filter';
+$s_use_query = 'PouÅ¾iÅ¥ filter';
+$s_delete_query = 'zruÅ¡iÅ¥ filter';
+$s_query_deleted = 'Fiter zruÅ¡enÃ½';
+$s_save_query = 'UchovaÅ¥ terajÅ¡Ã­ filter';
+$s_reset_query = 'VynulovaÅ¥ filter';
 $s_query_name = 'Meno filtru';
-$s_query_exists = 'Zdá sa, ¾e filter tıchto vlastnos»í u¾ existuje';
-$s_query_dupe_name = 'Toto méno u¾ má inı filter, zvolte prosím iné méno.';
-$s_query_blank_name = 'Nemô¾ete ulo¾it filter bez mena. Prosím pomenujte ped ulo¾ením tento filter.';
-$s_query_store_error = 'Vyskytla¨sa chyba pri ukladaní toho filtru';
-$s_open_queries = 'Správa filtrov';
-$s_query_delete_msg = 'Naozaj chcete zru¹i» tento filter';
+$s_query_exists = 'ZdÃ¡ sa, Å¾e filter tÃ½chto vlastnosÅ¥Ã­ uÅ¾ existuje';
+$s_query_dupe_name = 'Toto mÃ©no uÅ¾ mÃ¡ inÃ½ filter, zvolte prosÃ­m inÃ© mÃ©no.';
+$s_query_blank_name = 'NemÃ´Å¾ete uloÅ¾it filter bez mena. ProsÃ­m pomenujte ped uloÅ¾enÃ­m tento filter.';
+$s_query_store_error = 'VyskytlaÂ¨sa chyba pri ukladanÃ­ toho filtru';
+$s_open_queries = 'SprÃ¡va filtrov';
+$s_query_delete_msg = 'Naozaj chcete zruÅ¡iÅ¥ tento filter';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'Zobrazi» Jednoducho';
-$s_viewing_bug_advanced_details_title = 'Roz¹írené detaily bugu';
+$s_view_simple_link = 'ZobraziÅ¥ Jednoducho';
+$s_viewing_bug_advanced_details_title = 'RozÅ¡Ã­renÃ© detaily bugu';
 $s_product_build = 'Build produktu';
-$s_system_profile = 'Popis systému';
-$s_update_bug_button = 'Aktualizova»';
-$s_bug_assign_to_button = 'Priradi» k:';
-$s_bug_status_to_button = 'Zmeni» stav na:';
-$s_reopen_bug_button = 'Znovuotvorí»';
-$s_move_bug_button = 'Presunú» problém';
-$s_attached_files = 'Pripojené súbory';
-$s_publish = 'Poblikova»';
-$s_cached = 'V medzipamäti';
+$s_system_profile = 'Popis systÃ©mu';
+$s_update_bug_button = 'AktualizovaÅ¥';
+$s_bug_assign_to_button = 'PriradiÅ¥ k:';
+$s_bug_status_to_button = 'ZmeniÅ¥ stav na:';
+$s_reopen_bug_button = 'ZnovuotvorÃ­Å¥';
+$s_move_bug_button = 'PresunÃºÅ¥ problÃ©m';
+$s_attached_files = 'PripojenÃ© sÃºbory';
+$s_publish = 'PoblikovaÅ¥';
+$s_cached = 'V medzipamÃ¤ti';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Roz¹írené';
-$s_viewing_bug_simple_details_title = 'Základné detaily bugu';
+$s_view_advanced_link = 'RozÅ¡Ã­renÃ©';
+$s_viewing_bug_simple_details_title = 'ZÃ¡kladnÃ© detaily bugu';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = '¾iadny u¾ívateµ nesleduje tento problém.';
-$s_users_monitoring_bug = 'U¾ivatelia sledujú tento problém';
-$s_monitoring_user_list = 'U¾ivatelia';
+$s_no_users_monitoring_bug = 'Å¾iadny uÅ¾Ã­vateÄ¾ nesleduje tento problÃ©m.';
+$s_users_monitoring_bug = 'UÅ¾ivatelia sledujÃº tento problÃ©m';
+$s_monitoring_user_list = 'UÅ¾ivatelia';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = '¾iadny u¾ívatel nesponzoruje tento problém';
-$s_users_sponsoring_bug = 'U¾ívateliasponzorujú tento problém';
+$s_no_users_sponsoring_bug = 'Å¾iadny uÅ¾Ã­vatel nesponzoruje tento problÃ©m';
+$s_users_sponsoring_bug = 'UÅ¾Ã­vateliasponzorujÃº tento problÃ©m';
 $s_sponsors_list = 'Zoznam sponzorov';
-$s_total_sponsorship_amount = 'Celkom sponzorované = %s';
+$s_total_sponsorship_amount = 'Celkom sponzorovanÃ© = %s';
 
 # custom field strings
-$s_add_custom_field_button = 'Nové u¾ivateµské pole';
-$s_delete_custom_field_button = 'Zru¹i» u¾ivateµské pole';
-$s_delete_custom_field_everywhere = 'Zru¹i» u¾ívateµské pole v¹ade';
-$s_update_custom_field_button = 'Aktualizova» u¾ivateµské  pole';
-$s_add_existing_custom_field = 'Prida» toto existujúce u¾ívatelské pole';
-$s_edit_custom_field_title = 'Editácia u¾ívateµského pola';
+$s_add_custom_field_button = 'NovÃ© uÅ¾ivateÄ¾skÃ© pole';
+$s_delete_custom_field_button = 'ZruÅ¡iÅ¥ uÅ¾ivateÄ¾skÃ© pole';
+$s_delete_custom_field_everywhere = 'ZruÅ¡iÅ¥ uÅ¾Ã­vateÄ¾skÃ© pole vÅ¡ade';
+$s_update_custom_field_button = 'AktualizovaÅ¥ uÅ¾ivateÄ¾skÃ©  pole';
+$s_add_existing_custom_field = 'PridaÅ¥ toto existujÃºce uÅ¾Ã­vatelskÃ© pole';
+$s_edit_custom_field_title = 'EditÃ¡cia uÅ¾Ã­vateÄ¾skÃ©ho pola';
 $s_custom_field = 'Pole';
-$s_custom_fields_setup = 'U¾ívatelské pola';
+$s_custom_fields_setup = 'UÅ¾Ã­vatelskÃ© pola';
 $s_custom_field_name = 'Meno';
-$s_custom_field_project_count = 'Vıskyt v projektoch';
+$s_custom_field_project_count = 'VÃ½skyt v projektoch';
 $s_custom_field_type = 'Typ';
-$s_custom_field_possible_values = 'MO¾né hodnoty';
-$s_custom_field_default_value = 'Implicitná hodnota';
-$s_custom_field_valid_regexp = 'Regulárnı vıraz';
-$s_custom_field_access_level_r = 'Oprávnenie ku èítaniu';
-$s_custom_field_access_level_rw = 'Orávnenie k zápisu';
-$s_custom_field_length_min = 'Min. då¾ka';
-$s_custom_field_length_max = 'Max. då¾ka';
-$s_custom_field_advanced = 'Roz¹írené';
-$s_custom_field_display_report = 'Zobrazi» pri hlásení problému';
-$s_custom_field_display_update = 'Zobrazi» pri aktualizácií problému';
-$s_custom_field_display_resolved = 'Zobrazi» pri vyrie¹ení problému';
-$s_custom_field_display_closed = 'Zobrazi» pri uzavretí problému';
-$s_custom_field_require_report = 'Potrebné pri hlásení';
-$s_custom_field_require_update = 'Potrebné pri aktualizácií';
-$s_custom_field_require_resolved = 'Potrebné pri vyrie¹ení';
-$s_custom_field_require_closed = 'Potrebné pri uzavrení';
+$s_custom_field_possible_values = 'MOÅ¾nÃ© hodnoty';
+$s_custom_field_default_value = 'ImplicitnÃ¡ hodnota';
+$s_custom_field_valid_regexp = 'RegulÃ¡rnÃ½ vÃ½raz';
+$s_custom_field_access_level_r = 'OprÃ¡vnenie ku ÄÃ­taniu';
+$s_custom_field_access_level_rw = 'OrÃ¡vnenie k zÃ¡pisu';
+$s_custom_field_length_min = 'Min. dÄºÅ¾ka';
+$s_custom_field_length_max = 'Max. dÄºÅ¾ka';
+$s_custom_field_advanced = 'RozÅ¡Ã­renÃ©';
+$s_custom_field_display_report = 'ZobraziÅ¥ pri hlÃ¡senÃ­ problÃ©mu';
+$s_custom_field_display_update = 'ZobraziÅ¥ pri aktualizÃ¡ciÃ­ problÃ©mu';
+$s_custom_field_display_resolved = 'ZobraziÅ¥ pri vyrieÅ¡enÃ­ problÃ©mu';
+$s_custom_field_display_closed = 'ZobraziÅ¥ pri uzavretÃ­ problÃ©mu';
+$s_custom_field_require_report = 'PotrebnÃ© pri hlÃ¡senÃ­';
+$s_custom_field_require_update = 'PotrebnÃ© pri aktualizÃ¡ciÃ­';
+$s_custom_field_require_resolved = 'PotrebnÃ© pri vyrieÅ¡enÃ­';
+$s_custom_field_require_closed = 'PotrebnÃ© pri uzavrenÃ­';
 
 $s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:Text,1:Celé èíslo,2:Reálné èíslo,3:Vıraz,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
+$s_custom_field_type_enum_string = '0:Text,1:CelÃ© ÄÃ­slo,2:ReÃ¡lnÃ© ÄÃ­slo,3:VÃ½raz,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
 
-$s_confirm_used_custom_field_deletion = 'Toto pole je momentálne prepojené aspoò k jednému projektu. Ak budete pokraèovat, v¹etky hodnoty tohoto pola budú trvale znièené. Táto akcia nemô¾e bıt vrátená. Ak si neprajete zru¹it toto pole, stlaète tlaèítko "Spe»" va¹eho prehliadaèa.  Pokraèovat mô¾ete tlaèítkom ni¾¹ie';
-$s_confirm_custom_field_deletion = 'Naozaj si prajete zru¹it toto u¾ivatelské pole a v¹etky k nemu pripadajúce hodnoty?';
-$s_field_delete_button = 'Zru¹i» pole';
+$s_confirm_used_custom_field_deletion = 'Toto pole je momentÃ¡lne prepojenÃ© aspoÅˆ k jednÃ©mu projektu. Ak budete pokraÄovat, vÅ¡etky hodnoty tohoto pola budÃº trvale zniÄenÃ©. TÃ¡to akcia nemÃ´Å¾e bÃ½t vrÃ¡tenÃ¡. Ak si neprajete zruÅ¡it toto pole, stlaÄte tlaÄÃ­tko "SpeÅ¥" vaÅ¡eho prehliadaÄa.  PokraÄovat mÃ´Å¾ete tlaÄÃ­tkom niÅ¾Å¡ie';
+$s_confirm_custom_field_deletion = 'Naozaj si prajete zruÅ¡it toto uÅ¾ivatelskÃ© pole a vÅ¡etky k nemu pripadajÃºce hodnoty?';
+$s_field_delete_button = 'ZruÅ¡iÅ¥ pole';
 
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
 
-$s_hide_status = 'Skry» status';
-$s_filter_closed = "Uzavreté";
-$s_filter_resolved = "Vyrie¹ené";
-$s_hide_closed = "Skry» uzavrené";
-$s_hide_resolved = "skry» vyriadené";
+$s_hide_status = 'SkryÅ¥ status';
+$s_filter_closed = "UzavretÃ©";
+$s_filter_resolved = "VyrieÅ¡enÃ©";
+$s_hide_closed = "SkryÅ¥ uzavrenÃ©";
+$s_hide_resolved = "skryÅ¥ vyriadenÃ©";
 $s_and_above = 'a nad';
-$s_advanced_filters = 'Roz¹írené filtre';
-$s_simple_filters = 'Jednoduché filtre';
-$s_monitored_by = 'Monitorované';
+$s_advanced_filters = 'RozÅ¡Ã­renÃ© filtre';
+$s_simple_filters = 'JednoduchÃ© filtre';
+$s_monitored_by = 'MonitorovanÃ©';
 
-$s_attachments = "prílohy";
+$s_attachments = "prÃ­lohy";
 $s_attachment_alt = "A";
 
 # PHPMailer
@@ -1190,11 +1190,11 @@ $s_phpmailer_language = 'sk';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(i)';
-$s_sponsorship_added = 'Sponzoring pridanı';
-$s_sponsorship_updated = 'Sponzoring aktualizovanı';
-$s_sponsorship_deleted = 'Sponzoring zru¹enı';
+$s_sponsorship_added = 'Sponzoring pridanÃ½';
+$s_sponsorship_updated = 'Sponzoring aktualizovanÃ½';
+$s_sponsorship_deleted = 'Sponzoring zruÅ¡enÃ½';
 $s_sponsorship_paid = 'Sponsorship Paid';
-$s_sponsorship_more_info = 'Viac inormácií o sponzoringu';
+$s_sponsorship_more_info = 'Viac inormÃ¡ciÃ­ o sponzoringu';
 $s_sponsorship_total = 'Sponsorship Total';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
@@ -1203,29 +1203,29 @@ $s_sponsorship_total = 'Sponsorship Total';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Protokol o zmenách';
+$s_changelog = 'Protokol o zmenÃ¡ch';
 
 # Http auth
-$s_http_auth_realm = "Prihláasenie do Mantis";
+$s_http_auth_realm = "PrihlÃ¡asenie do Mantis";
 
-$s_bug = "problém";
-$s_add_new_relationship = "Novı vz»ah";
-$s_add_new_relationship_button = "Prida»";
-$s_this_bug = "Aktuálny problém";
-$s_relationship_added = "Vz»ah pridanı";
-$s_relationship_deleted = "Vz»ah odobranı";
+$s_bug = "problÃ©m";
+$s_add_new_relationship = "NovÃ½ vzÅ¥ah";
+$s_add_new_relationship_button = "PridaÅ¥";
+$s_this_bug = "AktuÃ¡lny problÃ©m";
+$s_relationship_added = "VzÅ¥ah pridanÃ½";
+$s_relationship_deleted = "VzÅ¥ah odobranÃ½";
 $s_no_relationship = "no relationship";
 $s_relationship_replaced = "Relationship replaced";
 $s_replace_relationship_button = "Replace";
 $s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
 $s_relationship_with_parent = "Relationship with the parent issue";
-$s_delete_relationship_button = "Odobra»";
-$s_delete_relationship_sure_msg = "Naozaj chcete odobra» tento vz»ah_";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nie v¹etci potomkovia tohoto problému sú vyrie¹enı alebo uzavretí ";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie v¹etci potomkovia tohoto problému sú vyrie¹ení alebo uzavretí.<br>Pred <b>vyrie¹ením/uzavrením</b> otcovského problému musia by» vyrie¹ené alebo uzavreté v¹etky problémy, pova¾ované za jeho potomkov.";
-$s_create_child_bug_button = "Vytvori» potomka";
-$s_bug_cloned_to = "Problém je klonovanı";
-$s_bug_created_from = "Problém generovanı z";
+$s_delete_relationship_button = "OdobraÅ¥";
+$s_delete_relationship_sure_msg = "Naozaj chcete odobraÅ¥ tento vzÅ¥ah_";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nie vÅ¡etci potomkovia tohoto problÃ©mu sÃº vyrieÅ¡enÃ½ alebo uzavretÃ­ ";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Nie vÅ¡etci potomkovia tohoto problÃ©mu sÃº vyrieÅ¡enÃ­ alebo uzavretÃ­.<br>Pred <b>vyrieÅ¡enÃ­m/uzavrenÃ­m</b> otcovskÃ©ho problÃ©mu musia byÅ¥ vyrieÅ¡enÃ© alebo uzavretÃ© vÅ¡etky problÃ©my, povaÅ¾ovanÃ© za jeho potomkov.";
+$s_create_child_bug_button = "VytvoriÅ¥ potomka";
+$s_bug_cloned_to = "ProblÃ©m je klonovanÃ½";
+$s_bug_created_from = "ProblÃ©m generovanÃ½ z";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";

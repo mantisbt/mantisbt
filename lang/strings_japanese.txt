@@ -13,11 +13,11 @@
 	# Japanese strings for Mantis
 	# Based on strings_english.txt rev. 1.281
 	# -------------------------------------------------
-	# $Revision: 1.38 $
-	# $Author: siebrand $
-	# $Date: 2006-10-09 06:02:21 $
+	# $Revision: 1.1 $
+	# $Author: achumakov $
+	# $Date: 2006-11-08 13:32:45 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.38 2006-10-09 06:02:21 siebrand Exp $
+	# $Id: strings_japanese.txt,v 1.1 2006-11-08 13:32:45 achumakov Exp $
 	###########################################################################
 
 ?>

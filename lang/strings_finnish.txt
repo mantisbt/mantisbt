@@ -13,89 +13,89 @@
 	# Finnish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: achumakov $
-	# $Date: 2006-09-25 05:16:48 $
+	# $Date: 2006-11-08 13:32:44 $
 	#
-	# $Id: strings_finnish.txt,v 1.50 2006-09-25 05:16:48 achumakov Exp $
+	# $Id: strings_finnish.txt,v 1.51 2006-11-08 13:32:44 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Siirr‰';
+$s_actiongroup_menu_move = 'Siirr√§';
 $s_actiongroup_menu_copy = 'Kopioi';
 $s_actiongroup_menu_assign = 'Osoita';
 $s_actiongroup_menu_close = 'Sulje';
 $s_actiongroup_menu_delete = 'Poista';
 $s_actiongroup_menu_resolve = 'Ratkaise';
-$s_actiongroup_menu_update_priority = 'P‰ivit‰ prioriteetti';
-$s_actiongroup_menu_update_status = 'P‰ivit‰ tila';
-$s_actiongroup_menu_update_view_status = 'P‰ivit‰ n‰yttˆtila';
-$s_actiongroup_menu_update_category = 'P‰ivit‰ kategoria';
-$s_actiongroup_menu_set_sticky = 'Aseta/poista pysyvyys p‰‰llimm‰isen‰';
-$s_actiongroup_menu_update_field = 'P‰ivit‰ %s';
+$s_actiongroup_menu_update_priority = 'P√§ivit√§ prioriteetti';
+$s_actiongroup_menu_update_status = 'P√§ivit√§ tila';
+$s_actiongroup_menu_update_view_status = 'P√§ivit√§ n√§ytt√∂tila';
+$s_actiongroup_menu_update_category = 'P√§ivit√§ kategoria';
+$s_actiongroup_menu_set_sticky = 'Aseta/poista pysyvyys p√§√§llimm√§isen√§';
+$s_actiongroup_menu_update_field = 'P√§ivit√§ %s';
 $s_actiongroup_bugs = 'Valitut tapahtumat';
 
 # new strings:
 $s_all_projects = 'Kaikki projektit';
-$s_move_bugs = 'Siirr‰ tapahtumat';
+$s_move_bugs = 'Siirr√§ tapahtumat';
 $s_operation_successful = 'Komento suoritettu onnistuneesti.';
-$s_date_order = 'P‰iv‰m‰‰r‰j‰rjestys';
+$s_date_order = 'P√§iv√§m√§√§r√§j√§rjestys';
 $s_print_all_bug_page_link = 'Raporttien tulostus';
 $s_csv_export = 'CSV vienti';
-$s_login_anonymously = 'Kirjaudu sis‰‰n nimettˆm‰n‰';
+$s_login_anonymously = 'Kirjaudu sis√§√§n nimett√∂m√§n√§';
 $s_anonymous = 'Anonyymi';
 $s_jump_to_bugnotes = 'Siirry muistiinpanoihin';
-$s_public_project_msg = 'T‰m‰ projekti on JULKINEN.  Kaikilla k‰ytt‰jill‰ on p‰‰sy projektin tietoihin.';
-$s_private_project_msg = 'T‰m‰ projekti on YKSITYINEN.  Vain p‰‰k‰ytt‰jill‰ ja erikseen lis‰tyill‰ k‰ytt‰jill‰ on p‰‰sy projektin tietoihin.';
-$s_access_level_project = 'Projektin k‰yttˆoikeustaso';
-$s_view_submitted_bug_link = 'N‰yt‰ lis‰tty tapahtuma';
+$s_public_project_msg = 'T√§m√§ projekti on JULKINEN.  Kaikilla k√§ytt√§jill√§ on p√§√§sy projektin tietoihin.';
+$s_private_project_msg = 'T√§m√§ projekti on YKSITYINEN.  Vain p√§√§k√§ytt√§jill√§ ja erikseen lis√§tyill√§ k√§ytt√§jill√§ on p√§√§sy projektin tietoihin.';
+$s_access_level_project = 'Projektin k√§ytt√∂oikeustaso';
+$s_view_submitted_bug_link = 'N√§yt√§ lis√§tty tapahtuma';
 $s_assigned_projects = 'Osoitetut projektit';
 $s_unassigned_projects = 'Osoittamattomat projektit';
 $s_print = 'Tulosta';
 $s_jump = 'Siirry';
-$s_copy_users = 'Kopioi k‰ytt‰j‰t';
-$s_copy_categories_from = 'Kopioi kategoriat t‰‰lt‰';
-$s_copy_categories_to = 'Kopioi kategoriat t‰nne';
-$s_copy_users_from = 'Kopioi k‰ytt‰j‰t t‰‰lt‰';
-$s_copy_users_to = 'Kopioi k‰ytt‰j‰t t‰nne';
+$s_copy_users = 'Kopioi k√§ytt√§j√§t';
+$s_copy_categories_from = 'Kopioi kategoriat t√§√§lt√§';
+$s_copy_categories_to = 'Kopioi kategoriat t√§nne';
+$s_copy_users_from = 'Kopioi k√§ytt√§j√§t t√§√§lt√§';
+$s_copy_users_to = 'Kopioi k√§ytt√§j√§t t√§nne';
 $s_bug_history = 'Tapahtuman historia';
-$s_field = 'Kentt‰';
+$s_field = 'Kentt√§';
 $s_old_value = 'Vanha arvo';
 $s_new_value = 'Uusi arvo';
 $s_date_modified = 'Muokkausajankohta';
 $s_bugnote = 'Muistiinpano';
 $s_change = 'Muuta';
-$s_bugnote_view_state = 'N‰yt‰ muistiinpanon tila';
+$s_bugnote_view_state = 'N√§yt√§ muistiinpanon tila';
 $s_bug_monitor = 'Tapahtumaa seurataan';
 $s_bug_end_monitor = 'Lopeta tapahtuman seuranta';
 $s_announcement = 'Ilmoitus';
-$s_stays_on_top = 'Pysyy p‰‰llimm‰isen‰';
+$s_stays_on_top = 'Pysyy p√§√§llimm√§isen√§';
 $s_delete_bugnote_button = 'Poista muistiinpano';
-$s_delete_bugnote_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n muistiinpanon?';
+$s_delete_bugnote_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n muistiinpanon?';
 $s_bug_relationships = 'Relaatiot';
-$s_empty_password_sure_msg = 'K‰ytt‰j‰ll‰ on tyhj‰ salasana. Oletko varma, ett‰ t‰m‰ on haluttua?';
-$s_empty_password_button = 'K‰yt‰ tyhj‰‰ salasanaa';
+$s_empty_password_sure_msg = 'K√§ytt√§j√§ll√§ on tyhj√§ salasana. Oletko varma, ett√§ t√§m√§ on haluttua?';
+$s_empty_password_button = 'K√§yt√§ tyhj√§√§ salasanaa';
 
 $s_duplicate_of = 'kaksoiskappale tapahtumasta %id';
 $s_has_duplicate = 'on kaksoiskappale %id';
 $s_related_to = 'sukulainen tapahtumalle %id';
 $s_dependant_on = 'riippuu tapahtumasta %id';
-$s_blocks = 'est‰‰ tapahtuman %id';
+$s_blocks = 'est√§√§ tapahtuman %id';
 
 $s_new_bug = 'Uusi tapahtuma';
-$s_bugnote_added = 'Muistiinpano lis‰tty';
+$s_bugnote_added = 'Muistiinpano lis√§tty';
 $s_bugnote_edited = 'Muistiinpano muokattu';
 $s_bugnote_deleted = 'Muistiinpano poistettu';
-$s_summary_updated = 'Yhteenveto p‰ivitetty';
-$s_description_updated = 'Kuvaus p‰ivitetty';
-$s_additional_information_updated = 'Lis‰tiedot p‰ivitetty';
-$s_steps_to_reproduce_updated = 'Toisto-ohjeet p‰ivitetty';
-$s_file_added = 'Tiedosto lis‰tty';
+$s_summary_updated = 'Yhteenveto p√§ivitetty';
+$s_description_updated = 'Kuvaus p√§ivitetty';
+$s_additional_information_updated = 'Lis√§tiedot p√§ivitetty';
+$s_steps_to_reproduce_updated = 'Toisto-ohjeet p√§ivitetty';
+$s_file_added = 'Tiedosto lis√§tty';
 $s_file_deleted = 'Tiedosto poistettu';
 $s_bug_deleted = 'Tapahtuma poistettu';
 
@@ -104,35 +104,35 @@ $s_make_public = 'Tee julkinen';
 
 $s_create_new_project_link = 'Luo uusi projekti';
 
-$s_login_link = 'Kirjaudu sis‰‰n';
+$s_login_link = 'Kirjaudu sis√§√§n';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Sinulla ei ole tarvittavia oikeuksia suorittaa t‰t‰ komentoa n‰ille tapahtumille: ';
+$s_bug_actiongroup_failed = 'Sinulla ei ole tarvittavia oikeuksia suorittaa t√§t√§ komentoa n√§ille tapahtumille: ';
 $s_bug_actiongroup_access = 'Sinulla ei ole tarvittavia oikeuksia komennon suorittamiseksi.';
-$s_bug_actiongroup_status = 'T‰m‰n tapahtuman tilaa ei voi muuttaa m‰‰ritellyksi';
-$s_bug_actiongroup_category = 'T‰t‰ tapahtumaa ei voida siirt‰‰ valittuun kategoriaan';
-$s_close_bugs_conf_msg = 'Oletko varma, ett‰ haluat sulkea n‰m‰ tapahtumat?';
-$s_delete_bugs_conf_msg = 'Oletko varma, ett‰ haluat poistaa n‰m‰ tapahtumat?';
-$s_move_bugs_conf_msg = 'Siirr‰ tapahtumat t‰nne';
+$s_bug_actiongroup_status = 'T√§m√§n tapahtuman tilaa ei voi muuttaa m√§√§ritellyksi';
+$s_bug_actiongroup_category = 'T√§t√§ tapahtumaa ei voida siirt√§√§ valittuun kategoriaan';
+$s_close_bugs_conf_msg = 'Oletko varma, ett√§ haluat sulkea n√§m√§ tapahtumat?';
+$s_delete_bugs_conf_msg = 'Oletko varma, ett√§ haluat poistaa n√§m√§ tapahtumat?';
+$s_move_bugs_conf_msg = 'Siirr√§ tapahtumat t√§nne';
 $s_copy_bugs_conf_msg = 'Kopioi tapahtumat';
-$s_assign_bugs_conf_msg = 'Osoita tapahtumat k‰ytt‰j‰lle';
+$s_assign_bugs_conf_msg = 'Osoita tapahtumat k√§ytt√§j√§lle';
 $s_resolve_bugs_conf_msg = 'Valitse tapahtuman ratkaisuaste';
 $s_priority_bugs_conf_msg = 'Valitse tapahtuman prioriteetti';
 $s_status_bugs_conf_msg = 'Valitse tapahtuman tila';
-$s_view_status_bugs_conf_msg = 'Valitse tapahtuman tilan‰kym‰';
+$s_view_status_bugs_conf_msg = 'Valitse tapahtuman tilan√§kym√§';
 $s_category_bugs_conf_msg = 'Valitse tapahtumien kategoria';
-$s_set_sticky_bugs_conf_msg = 'Oletko varma, ett‰ haluat asettaa/poistaa n‰ille tapahtumille pysyvyys p‰‰llimm‰isin‰?';
+$s_set_sticky_bugs_conf_msg = 'Oletko varma, ett√§ haluat asettaa/poistaa n√§ille tapahtumille pysyvyys p√§√§llimm√§isin√§?';
 $s_close_group_bugs_button = 'Sulje tapahtumat' ;
 $s_delete_group_bugs_button = 'Poista tapahtumat' ;
-$s_move_group_bugs_button = 'Siirr‰ tapahtumat' ;
+$s_move_group_bugs_button = 'Siirr√§ tapahtumat' ;
 $s_copy_group_bugs_button = 'Kopioi tapahtumat' ;
 $s_assign_group_bugs_button = 'Osoita tapahtumat' ;
 $s_resolve_group_bugs_button = 'Ratkaise tapahtumat' ;
-$s_priority_group_bugs_button = 'P‰ivit‰ prioriteetti' ;
-$s_status_group_bugs_button = 'P‰ivit‰ tila' ;
-$s_category_group_bugs_button = 'P‰ivit‰ kategoria';
-$s_view_status_group_bugs_button = 'P‰ivit‰ tilan‰kym‰';
-$s_set_sticky_group_bugs_button = 'Aseta/poista pysyvyys p‰‰llimm‰isen‰';
+$s_priority_group_bugs_button = 'P√§ivit√§ prioriteetti' ;
+$s_status_group_bugs_button = 'P√§ivit√§ tila' ;
+$s_category_group_bugs_button = 'P√§ivit√§ kategoria';
+$s_view_status_group_bugs_button = 'P√§ivit√§ tilan√§kym√§';
+$s_set_sticky_group_bugs_button = 'Aseta/poista pysyvyys p√§√§llimm√§isen√§';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Synteesitaulukot tilan mukaan' ;
@@ -154,10 +154,10 @@ $s_priority_link = 'Prioriteetin mukaan';
 $s_severity_link = 'Vakavuusasteen mukaan';
 $s_category_link = 'Kategorian mukaan';
 $s_resolution_link = 'Ratkaisuasteen mukaan';
-$s_legend_still_open = 'Yh‰ avoin';
+$s_legend_still_open = 'Yh√§ avoin';
 $s_legend_resolved = 'Ratkaistu';
 $s_legend_assigned = 'Osoitettu';
-$s_legend_total = 'Yhteens‰';
+$s_legend_total = 'Yhteens√§';
 $s_legend_opened = 'Avoin';
 $s_legend_closed = 'Suljettu';
 $s_legend_reported = 'Raportoitu';
@@ -165,154 +165,154 @@ $s_cumulative = 'Kumulatiivinen';
 $s_not_enough_data = 'Ei tarpeeksi tietoa graafin luomiseksi';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'N‰yt‰ vain valitut';
+$s_hide_button = 'N√§yt√§ vain valitut';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Valitse tulostettavat kent‰t';
+$s_printing_preferences_title = 'Valitse tulostettavat kent√§t';
 $s_printing_options_link = 'Tulostusasetukset';
 
 # word and excel export
 $s_bugnote_title = 'Muistiinpanojen hallinta' ;
-$s_bugnote_date = 'Muistiinpanon p‰iv‰ys';
+$s_bugnote_date = 'Muistiinpanon p√§iv√§ys';
 $s_bugnote_description = 'Muistiinpanon kuvaus';
 
-$s_error_no_proceed = 'Ole hyv‰, siirry edelliselle sivulle, jossa voit korjata virheviestiss‰ osoitetut kohdat tai valita uuden tapahtuman. Voit myˆs suoraan siirty‰ toiseen osioon klikkaamalla menupalkkia.';
+$s_error_no_proceed = 'Ole hyv√§, siirry edelliselle sivulle, jossa voit korjata virheviestiss√§ osoitetut kohdat tai valita uuden tapahtuman. Voit my√∂s suoraan siirty√§ toiseen osioon klikkaamalla menupalkkia.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'Virhe suoritettaessa t‰t‰ komentoa. Saatat haluta ilmoittaa t‰st‰ virheest‰ paikallisen j‰rjestelm‰si yll‰pit‰j‰lle.';
-$MANTIS_ERROR[ERROR_SQL]                = 'SQL-virhe havaitty.  Ole hyv‰ ja raportoi t‰m‰ virhe ';
+$MANTIS_ERROR[ERROR_GENERIC]            = 'Virhe suoritettaessa t√§t√§ komentoa. Saatat haluta ilmoittaa t√§st√§ virheest√§ paikallisen j√§rjestelm√§si yll√§pit√§j√§lle.';
+$MANTIS_ERROR[ERROR_SQL]                = 'SQL-virhe havaitty.  Ole hyv√§ ja raportoi t√§m√§ virhe ';
 $MANTIS_ERROR[ERROR_REPORT]             = 'Raportissasi oli virhe.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Tiedostoa ei ole m‰‰ritelty';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'T‰m‰ tiedostotyyppi ei ole sallittu';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Hakemistoa ei ole olemassa. Ole hyv‰ ja tarkista projektin asetukset.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'T‰m‰ tiedosto on kaksoiskappale.  Ole hyv‰ ja poista alkuper‰inen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Tiedostoa ei ole m√§√§ritelty';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'T√§m√§ tiedostotyyppi ei ole sallittu';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'Hakemistoa ei ole olemassa. Ole hyv√§ ja tarkista projektin asetukset.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'T√§m√§ tiedosto on kaksoiskappale.  Ole hyv√§ ja poista alkuper√§inen tiedosto ensin.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Samanniminen projekti on jo olemassa.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Tarvittu kentt‰ on tyhj‰. Ole hyv‰ ja tarkista syˆttˆsi.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'T‰m‰ k‰ytt‰j‰tunnus on suojattu.  P‰‰sy on sallittu vasta kun suojaus poistetaan.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'P‰‰sy kielletty.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Tiedoston l‰hetys ep‰onnistui. PHP:n tiedostol‰hetystoiminnot saattavat olla pois p‰‰lt‰.  Ole hyv‰ ja pyyd‰ j‰rjestelm‰si yll‰pit‰j‰‰ ajamaan admin_check-skripti debuggaustoimenpiteit‰ varten.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Tiedoston l‰hetys ep‰onnistui. T‰m‰ johtuu luutavasti siit‰, ett‰ tiedoston koko ylitt‰‰ PHP:n nykyisen enimm‰iskoon.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'T‰m‰n sivun vaatimaa muuttujaa ei lˆydy.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'K‰ytt‰j‰nimi on jo k‰ytˆss‰. Palaa edelliselle sivulla ja valitse uusi k‰ytt‰j‰nimi.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%s\' ei lˆytynyt.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Tarvittu kentt√§ on tyhj√§. Ole hyv√§ ja tarkista sy√∂tt√∂si.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'T√§m√§ k√§ytt√§j√§tunnus on suojattu.  P√§√§sy on sallittu vasta kun suojaus poistetaan.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'P√§√§sy kielletty.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Tiedoston l√§hetys ep√§onnistui. PHP:n tiedostol√§hetystoiminnot saattavat olla pois p√§√§lt√§.  Ole hyv√§ ja pyyd√§ j√§rjestelm√§si yll√§pit√§j√§√§ ajamaan admin_check-skripti debuggaustoimenpiteit√§ varten.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Tiedoston l√§hetys ep√§onnistui. T√§m√§ johtuu luutavasti siit√§, ett√§ tiedoston koko ylitt√§√§ PHP:n nykyisen enimm√§iskoon.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'T√§m√§n sivun vaatimaa muuttujaa ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'K√§ytt√§j√§nimi on jo k√§yt√∂ss√§. Palaa edelliselle sivulla ja valitse uusi k√§ytt√§j√§nimi.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%s\' ei l√∂ytynyt.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%s\' ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Muistiinpanoa ei lˆydy.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektia ei lˆydy.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakentt‰‰ ei lˆydy.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Yhteys FTP-palvelimelle ep‰onnistui.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Tapahtumank‰sittelij‰ll‰ ei ole tarpeeksi oikeuksia tapahtuman k‰sittelyyn t‰ll‰ tilalla.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%s\' ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Muistiinpanoa ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektia ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakentt√§√§ ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Yhteys FTP-palvelimelle ep√§onnistui.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Tapahtumank√§sittelij√§ll√§ ei ole tarpeeksi oikeuksia tapahtuman k√§sittelyyn t√§ll√§ tilalla.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhj‰.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'K‰ytt‰j‰tunnusta ei lˆydy.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Selaimesi v‰litt‰m‰ kirjautumistietosi on virheellinen.  K‰ytt‰j‰tilisi on ehk‰ poistettu.';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'K‰ytt‰j‰n asetustietoja ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Uutisartikkelia ei lˆydy.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhj√§.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'K√§ytt√§j√§tunnusta ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Selaimesi v√§litt√§m√§ kirjautumistietosi on virheellinen.  K√§ytt√§j√§tilisi on ehk√§ poistettu.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'K√§ytt√§j√§n asetustietoja ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Uutisartikkelia ei l√∂ydy.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Salasanavirhe.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'Odotin matriisia, mutta sain merkkijonon.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Taulukkodataa merkkijonodatan tilalla.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Odotettiin numeroa: %s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Tapahtumaa ei lˆydy.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Suodinta %d ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'K‰ytt‰m‰si suodin on liian vanha p‰ivitett‰v‰ksi. Ole hyv‰ ja luo se uudestaan.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Virheellinen s‰hkˆpostiosoite.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'K‰ytt‰j‰profiilia ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'T‰m‰n tyyppiset tiedostot eiv‰t ole sallittuja.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'T‰m‰ tiedosto on kaksoiskappale.  Ole hyv‰ ja poista alkuper‰inen tiedosto ensin.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Virheellinen l‰hetett‰v‰n tiedoston hakemistopolku. Hakemistoa ei ole tai siihen ei voida kirjoittaa.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Tiedostoa ei l‰hetetty. Ole hyv‰ ja siirry edelliselle sivulle sek‰ valitse l‰heteett‰v‰ tiedosto ennen \'L‰het‰\'-painikkeen painamista.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Vastaanotettua tiedostoa ei voitu siirt‰‰ s‰ilytyshakemistoon. Hakemistoa ei ole olemassa tai siihen ei voi kirjoittaa.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Et voi m‰‰ritell‰ tapahtumaa itsens‰ kaksoiskappaleeksi.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'R‰‰t‰lˆity‰ kentt‰‰ ei lˆytynyt.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Tapahtumaa ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Suodinta %d ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'K√§ytt√§m√§si suodin on liian vanha p√§ivitett√§v√§ksi. Ole hyv√§ ja luo se uudestaan.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Virheellinen s√§hk√∂postiosoite.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'K√§ytt√§j√§profiilia ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'T√§m√§n tyyppiset tiedostot eiv√§t ole sallittuja.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'T√§m√§ tiedosto on kaksoiskappale.  Ole hyv√§ ja poista alkuper√§inen tiedosto ensin.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Virheellinen l√§hetett√§v√§n tiedoston hakemistopolku. Hakemistoa ei ole tai siihen ei voida kirjoittaa.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Tiedostoa ei l√§hetetty. Ole hyv√§ ja siirry edelliselle sivulle sek√§ valitse l√§heteett√§v√§ tiedosto ennen \'L√§het√§\'-painikkeen painamista.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Vastaanotettua tiedostoa ei voitu siirt√§√§ s√§ilytyshakemistoon. Hakemistoa ei ole olemassa tai siihen ei voi kirjoittaa.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'Et voi m√§√§ritell√§ tapahtumaa itsens√§ kaksoiskappaleeksi.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'R√§√§t√§l√∂ity√§ kentt√§√§ ei l√∂ytynyt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Nimiduplikaatti.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Kentt‰ on k‰ytˆss‰ ainakin yhdess‰ projektissa.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kent‰ll‰ on virheellinen arvo';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Virheellinen mukautetun kent‰n m‰‰rite.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP-autentikaatio ep‰onnistui';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys ep‰onnistui.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP-tietueen p‰ivitt‰minen ep‰onnistui.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-k‰ytt‰j‰tietoja ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Tietokantayhteys ep‰onnistui.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Tietokantakysely ep‰onnistui.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Tietokantavalinta ep‰onnistui.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Kentt√§ on k√§yt√∂ss√§ ainakin yhdess√§ projektissa.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Kent√§ll√§ on virheellinen arvo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Virheellinen mukautetun kent√§n m√§√§rite.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'LDAP-autentikaatio ep√§onnistui';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys ep√§onnistui.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'LDAP-tietueen p√§ivitt√§minen ep√§onnistui.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-k√§ytt√§j√§tietoja ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'Tietokantayhteys ep√§onnistui.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'Tietokantakysely ep√§onnistui.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'Tietokantavalinta ep√§onnistui.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole m‰‰ritelty.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei lˆydy.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole m√§√§ritelty.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei l√∂ydy.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Samanniminen versio on jo olemassa.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versiota ei lˆydy.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Virheellinen k‰ytt‰j‰tunnus.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'K‰ytt‰j‰taso liian alhainen';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Syˆtt‰m‰si nimi on jo k‰ytˆss‰ toisella k‰ytt‰j‰ll‰ k‰ytt‰j‰nimen‰. Ole hyv‰, ja syˆt‰ uusi nimi.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Versiota ei l√∂ydy.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'Virheellinen k√§ytt√§j√§tunnus.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'K√§ytt√§j√§taso liian alhainen';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Sy√∂tt√§m√§si nimi on jo k√§yt√∂ss√§ toisella k√§ytt√§j√§ll√§ k√§ytt√§j√§nimen√§. Ole hyv√§, ja sy√∂t√§ uusi nimi.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorointitukea ei ole aktivoitu.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponssia %d ei lˆytynyt.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorituki (%s) on alle minimim‰‰r‰n (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'K‰sittelij‰ll‰ ei ole tarpeenksi korkeata k‰ytt‰j‰tasoa sponsoroitujen tapahtumien k‰sittelyyn.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'P‰‰sy estetty: Sponsoroitujen tapahtumien osoittaminen vaatii korkeamman k‰ytt‰j‰tason.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole syˆtt‰nyt s‰hkˆpostiosoitetta. Ole hyv‰, ja p‰ivit‰ k‰ytt‰j‰tietosi.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponssia %d ei l√∂ytynyt.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorituki (%s) on alle minimim√§√§r√§n (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'K√§sittelij√§ll√§ ei ole tarpeenksi korkeata k√§ytt√§j√§tasoa sponsoroitujen tapahtumien k√§sittelyyn.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'P√§√§sy estetty: Sponsoroitujen tapahtumien osoittaminen vaatii korkeamman k√§ytt√§j√§tason.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole sy√∂tt√§nyt s√§hk√∂postiosoitetta. Ole hyv√§, ja p√§ivit√§ k√§ytt√§j√§tietosi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraatioasetuksessa \'%s\' on virheellinen arvo \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehd‰ muutoksia';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "N‰iden kahden tapahtuman v‰lill‰ on jo relaatio.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relaatiota ei lˆytynyt.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "P‰‰sy estetty: tapahtuman %d k‰sittely vaatii korkeamman k‰ytt‰j‰tason, kuin sinulla on.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Tapahtumaa ei voi kytke‰ relaationa itseens‰.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Vahvistushash-koodi on virheellinen. Yrit‰ uudelleen.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Unohdettu salasana\' -toiminto ei ole k‰ytˆss‰.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Syˆt‰ s‰hkˆpostiosoite, jotta salasanasi uudistetaan';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Rekisterˆity‰ k‰ytt‰j‰tili‰ ei lˆytynyt antamillasi tiedoilla!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Vahvistuslinkki on jo kertaalleen k‰ytetty tai virheellinen. Ole hyv‰, ja kirjaudu uudestaan.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Kyselyjen/pyyntˆjen maksimim‰‰r‰ saavutettu. Ole hyv‰, ja ota yhteys yll‰pitoon';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'T‰m‰ toiminto aiheuttaisi p‰‰ttym‰ttˆm‰n silmukan aliprojektihierarkiassa.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ainoan yll‰pit‰j‰n oikeustasoa ei voi muuttaa.';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%d\' ei ole sallittu tehd√§ muutoksia';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "N√§iden kahden tapahtuman v√§lill√§ on jo relaatio.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relaatiota ei l√∂ytynyt.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "P√§√§sy estetty: tapahtuman %d k√§sittely vaatii korkeamman k√§ytt√§j√§tason, kuin sinulla on.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Tapahtumaa ei voi kytke√§ relaationa itseens√§.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Vahvistushash-koodi on virheellinen. Yrit√§ uudelleen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'Unohdettu salasana\' -toiminto ei ole k√§yt√∂ss√§.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Sy√∂t√§ s√§hk√∂postiosoite, jotta salasanasi uudistetaan';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Rekister√∂ity√§ k√§ytt√§j√§tili√§ ei l√∂ytynyt antamillasi tiedoilla!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Vahvistuslinkki on jo kertaalleen k√§ytetty tai virheellinen. Ole hyv√§, ja kirjaudu uudestaan.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Kyselyjen/pyynt√∂jen maksimim√§√§r√§ saavutettu. Ole hyv√§, ja ota yhteys yll√§pitoon';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'T√§m√§ toiminto aiheuttaisi p√§√§ttym√§tt√∂m√§n silmukan aliprojektihierarkiassa.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ainoan yll√§pit√§j√§n oikeustasoa ei voi muuttaa.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 
-$s_login_error = 'K‰ytt‰j‰tunnuksesi saattaa olla pois k‰ytˆst‰ tai antamasi k‰ytt‰j‰tunnus/salasanayhdistelm‰ on virheellinen.';
-$s_login_cookies_disabled = 'Selaimesi ei tunnu ymm‰rt‰v‰n tai hyv‰ksyv‰n ev‰steit‰.';
+$s_login_error = 'K√§ytt√§j√§tunnuksesi saattaa olla pois k√§yt√∂st√§ tai antamasi k√§ytt√§j√§tunnus/salasanayhdistelm√§ on virheellinen.';
+$s_login_cookies_disabled = 'Selaimesi ei tunnu ymm√§rt√§v√§n tai hyv√§ksyv√§n ev√§steit√§.';
 
 # General Strings
 $s_go_back = 'Takaisin';
-$s_proceed = 'Klikkaa t‰st‰ jatkaaksesi';
+$s_proceed = 'Klikkaa t√§st√§ jatkaaksesi';
 
 $s_switch = 'Vaihda';
-$s_logged_in_as = 'Olet sis‰‰nkirjautuneena k‰ytt‰j‰tunnuksella';
+$s_logged_in_as = 'Olet sis√§√§nkirjautuneena k√§ytt√§j√§tunnuksella';
 
-$s_prefix_for_deleted_users = 'k‰ytt‰j‰';
+$s_prefix_for_deleted_users = 'k√§ytt√§j√§';
 
-$s_administrator = 'p‰‰k‰ytt‰j‰';
-$s_myself = "Min‰";
-$s_default_access_level = 'Oletusk‰ytt‰j‰taso';
+$s_administrator = 'p√§√§k√§ytt√§j√§';
+$s_myself = "Min√§";
+$s_default_access_level = 'Oletusk√§ytt√§j√§taso';
 
 $s_issue_status_percentage = 'Tapahtuman tilan prosenttiosuus';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:seuraaja,25:raportoija,40:p‰ivitt‰j‰,55:kehitt‰j‰,70:yll‰pit‰j‰,90:p‰‰k‰ytt‰j‰';
+$s_access_levels_enum_string      = '10:seuraaja,25:raportoija,40:p√§ivitt√§j√§,55:kehitt√§j√§,70:yll√§pit√§j√§,90:p√§√§k√§ytt√§j√§';
 $s_project_status_enum_string     = '10:kehitysversio,30:julkaisuversio,50:vakaa versio,70:vanhentunut versio';
 $s_project_view_state_enum_string = '10:julkinen,50:yksityinen';
 $s_view_state_enum_string         = '10:julkinen,50:yksityinen';
 
-$s_priority_enum_string           = '10:ei ole,20:alhainen,30:normaali,40:korkea,50:kiireellinen,60:v‰litˆn';
-$s_severity_enum_string           = '10:ominaisuus,20:triviaali,30:tekstivirhe,40:pieni muutos,50:v‰h‰inen virhe,60:vakava,70:kaataa ohjelman,80:est‰‰ k‰ytˆn';
+$s_priority_enum_string           = '10:ei ole,20:alhainen,30:normaali,40:korkea,50:kiireellinen,60:v√§lit√∂n';
+$s_severity_enum_string           = '10:ominaisuus,20:triviaali,30:tekstivirhe,40:pieni muutos,50:v√§h√§inen virhe,60:vakava,70:kaataa ohjelman,80:est√§√§ k√§yt√∂n';
 $s_reproducibility_enum_string    = '10:aina,30:joskus,50:satunnaisesti,70:ei kokeiltu,90:ei toistettavissa,100:N/A';
 $s_status_enum_string             = '10:uusi,20:palaute,30:huomioitu,40:varmistettu,50:osoitettu,80:ratkaistu,85:testattu,90:suljettu';
-$s_resolution_enum_string         = '10:avoin,20:korjattu,30:uudelleenavattu,40:ei toistettavissa,50:ei korjattavissa,60:kaksoiskappale,70:ei ole virhe,80:j‰‰dytetty,90:ei korjata';
-$s_projection_enum_string         = '10:ei m‰‰ritelty,30:pieni muutos,50:pieni korjaus,70:suuri muutos,90:vaatii uudelleensuunnittelun';
-$s_eta_enum_string                = '10:ei m‰‰ritelty,20:< 1 p‰iv‰,30:2-3 p‰iv‰‰,40:< 1 viikko,50:< 1 kuukausi,60:> 1 kuukausi';
+$s_resolution_enum_string         = '10:avoin,20:korjattu,30:uudelleenavattu,40:ei toistettavissa,50:ei korjattavissa,60:kaksoiskappale,70:ei ole virhe,80:j√§√§dytetty,90:ei korjata';
+$s_projection_enum_string         = '10:ei m√§√§ritelty,30:pieni muutos,50:pieni korjaus,70:suuri muutos,90:vaatii uudelleensuunnittelun';
+$s_eta_enum_string                = '10:ei m√§√§ritelty,20:< 1 p√§iv√§,30:2-3 p√§iv√§√§,40:< 1 viikko,50:< 1 kuukausi,60:> 1 kuukausi';
 $s_sponsorship_enum_string = '0:Maksamatta,1:Pyydetty,2:Maksettu';
 
 # Email Strings
-$s_new_account_subject = 'K‰ytt‰j‰tilin rekisterˆinti';
-$s_new_account_greeting = 'Kiitos rekisterˆinnist‰. Sinulle on luotu k‰ytt‰j‰tili nimell‰ \'';
-$s_new_account_greeting2 = '\'. Viimeistele rekisterˆinti k‰ym‰ll‰ ao. osoitteessa (varmista, ett‰ koko osoite tulee linkkiin mukaan) ja vaihda salasana halutuksi:';
-$s_new_account_username = 'K‰ytt‰j‰tunnus: ';
-$s_new_account_message = 'Jos et ole yritt‰nyt rekisterˆity‰ t‰ll‰ s‰hkˆpostiosoitteella, sinun ei tarvitse tehd‰ mit‰‰n.' . "\n\n";
-$s_new_account_do_not_reply = 'ƒLƒ VASTAA TƒHƒN SƒHK÷POSTIVIESTIIN';
-$s_new_account_email = 'S‰hkˆpostiosoite: ';
+$s_new_account_subject = 'K√§ytt√§j√§tilin rekister√∂inti';
+$s_new_account_greeting = 'Kiitos rekister√∂innist√§. Sinulle on luotu k√§ytt√§j√§tili nimell√§ \'';
+$s_new_account_greeting2 = '\'. Viimeistele rekister√∂inti k√§ym√§ll√§ ao. osoitteessa (varmista, ett√§ koko osoite tulee linkkiin mukaan) ja vaihda salasana halutuksi:';
+$s_new_account_username = 'K√§ytt√§j√§tunnus: ';
+$s_new_account_message = 'Jos et ole yritt√§nyt rekister√∂ity√§ t√§ll√§ s√§hk√∂postiosoitteella, sinun ei tarvitse tehd√§ mit√§√§n.' . "\n\n";
+$s_new_account_do_not_reply = '√ÑL√Ñ VASTAA T√ÑH√ÑN S√ÑHK√ñPOSTIVIESTIIN';
+$s_new_account_email = 'S√§hk√∂postiosoite: ';
 $s_new_account_IP = 'IP-osoite: ';
-$s_new_account_signup_msg = 'K‰ytt‰j‰tili on luotu:';
+$s_new_account_signup_msg = 'K√§ytt√§j√§tili on luotu:';
 
-$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole t‰t‰ tehnyt, voit j‰tt‰‰ t‰m‰n viestin huomioimatta.' . "\n\n" . 'Vaihtaaksesi salasanansi, ole hyv‰ ja vieraile ao. osoitteessa:';
-$s_reset_request_in_progress_msg = 'Mik‰li syˆtit k‰ytt‰j‰tilisi nimen ja s‰hkˆpostiosoitteen oikein, s‰hkˆpostiosoitteeseesi on l‰hetetty vahvistusviesti. Ole hyv‰ ja noudata viestiss‰ olevia ohjeita vaihtaaksesi k‰ytt‰j‰tilisi salasanan.';
+$s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole t√§t√§ tehnyt, voit j√§tt√§√§ t√§m√§n viestin huomioimatta.' . "\n\n" . 'Vaihtaaksesi salasanansi, ole hyv√§ ja vieraile ao. osoitteessa:';
+$s_reset_request_in_progress_msg = 'Mik√§li sy√∂tit k√§ytt√§j√§tilisi nimen ja s√§hk√∂postiosoitteen oikein, s√§hk√∂postiosoitteeseesi on l√§hetetty vahvistusviesti. Ole hyv√§ ja noudata viestiss√§ olevia ohjeita vaihtaaksesi k√§ytt√§j√§tilisi salasanan.';
 
-$s_email_notification_title_for_status_bug_new = 'Seuraavan tapahtuman tila on j‰lleen UUSI';
+$s_email_notification_title_for_status_bug_new = 'Seuraavan tapahtuman tila on j√§lleen UUSI';
 $s_email_notification_title_for_status_bug_feedback = 'Seuraava tapahtuma vaatii palautettasi.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Seuraava tapahtuma on huomioitu.';
 $s_email_notification_title_for_status_bug_confirmed = 'Seuraava tapahtuma on vahvistettu.';
@@ -320,31 +320,31 @@ $s_email_notification_title_for_status_bug_assigned = 'Seuraava tapahtuma on oso
 $s_email_notification_title_for_status_bug_resolved = 'Seuraava tapahtuma on ratkaistu.';
 $s_email_notification_title_for_status_bug_closed = 'Seuraava tapahtuma on suljettu';
 
-$s_email_notification_title_for_action_bug_submitted = 'Seuraava tapahtuma on l‰hetetty.';
+$s_email_notification_title_for_action_bug_submitted = 'Seuraava tapahtuma on l√§hetetty.';
 $s_email_notification_title_for_action_bug_assigned = 'Seuraava tapahtuma on osoitettu.';
 $s_email_notification_title_for_action_bug_reopened = 'Seuraava tapahtuma on avattu uudelleen.';
 $s_email_notification_title_for_action_bug_deleted = 'Seuraava tapahtuma on poistettu.';
-$s_email_notification_title_for_action_bug_updated = 'Seuraava tapahtuma on p‰ivitetty.';
+$s_email_notification_title_for_action_bug_updated = 'Seuraava tapahtuma on p√§ivitetty.';
 $s_email_notification_title_for_action_sponsorship_added = 'Seuraavaa tapahtumaa on sponsoroitu.';
 $s_email_notification_title_for_action_sponsorship_updated = 'Seuraavan tapahtuman sponsorointia on muokattu.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Seuraavan tapahtuman sponsorointi on peruttu.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'T‰h‰n tapahtumaan on lis‰tty muistiinpano.';
+$s_email_notification_title_for_action_bugnote_submitted = 'T√§h√§n tapahtumaan on lis√§tty muistiinpano.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = "Seuraava tapahtuma on duplikaatti tapahtumasta %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "Tapahtuma %s on m‰‰ritelty duplikaatiksi seuraavalle tapahtumalle.";
-$s_email_notification_title_for_action_related_to_relationship_added = "Seuraava tapahtuma on m‰‰ritelty relaatioksi tapahtumalle %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "Seuraava tapahtuma on m‰‰ritelty is‰tapahtumaksi tapahtumalle %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "Seuraava tapahtuma on m‰‰ritelty lapsitapahtumaksi tapahtumalle %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Tapahtuma %s on m√§√§ritelty duplikaatiksi seuraavalle tapahtumalle.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Seuraava tapahtuma on m√§√§ritelty relaatioksi tapahtumalle %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Seuraava tapahtuma on m√§√§ritelty is√§tapahtumaksi tapahtumalle %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Seuraava tapahtuma on m√§√§ritelty lapsitapahtumaksi tapahtumalle %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.";
 $s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.";
 $s_email_notification_title_for_action_related_to_relationship_deleted = "Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Seuraava tapahtuma ei ole en‰‰ tapahtuman %s is‰tapahtuma.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "Seuraava tapahtuma ei en‰‰ ole tapahtuman %s lapsitapahtuma.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Seuraava tapahtuma ei ole en√§√§ tapahtuman %s is√§tapahtuma.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Seuraava tapahtuma ei en√§√§ ole tapahtuman %s lapsitapahtuma.";
 $s_email_notification_title_for_action_relationship_child_resolved = "Relaatiotapahtuma %s on ratkaistu.";
 $s_email_notification_title_for_action_relationship_child_closed = "Relaatiotapahtuma %s on suljettu.";
 
 $s_email_reporter = 'Raportoija';
-$s_email_handler = 'K‰sittelij‰';
+$s_email_handler = 'K√§sittelij√§';
 $s_email_project = 'Projekti';
 $s_email_bug = 'Tapahtuman ID';
 $s_email_category = 'Kategoria';
@@ -361,62 +361,62 @@ $s_email_summary =  'Yhteenveto';
 $s_email_description = 'Kuvaus';
 
 # account_delete.php
-$s_account_protected_msg = 'K‰ytt‰j‰tunnus on suojattu. Asetuksia ei voi muuttaa...';
-$s_account_removed_msg = 'K‰ytt‰j‰tunnuksesi on poistettu...';
+$s_account_protected_msg = 'K√§ytt√§j√§tunnus on suojattu. Asetuksia ei voi muuttaa...';
+$s_account_removed_msg = 'K√§ytt√§j√§tunnuksesi on poistettu...';
 
 # account_delete_page.php
-$s_confirm_delete_msg = 'Oletko varma, ett‰ haluat poistaa k‰ytt‰j‰tunnuksesi?';
-$s_delete_account_button = 'Poista k‰ytt‰j‰tunnus';
+$s_confirm_delete_msg = 'Oletko varma, ett√§ haluat poistaa k√§ytt√§j√§tunnuksesi?';
+$s_delete_account_button = 'Poista k√§ytt√§j√§tunnus';
 
 # account_page.php
 $s_manage_profiles_link = 'Profiilit';
 $s_change_preferences_link = 'Asetukset';
-$s_edit_account_title = 'Muokkaa k‰ytt‰j‰tili‰';
-$s_username = 'K‰ytt‰j‰tunnus';
+$s_edit_account_title = 'Muokkaa k√§ytt√§j√§tili√§';
+$s_username = 'K√§ytt√§j√§tunnus';
 $s_realname = 'Nimi';
-$s_email = 'S‰hkˆpostiosoite';
+$s_email = 'S√§hk√∂postiosoite';
 $s_password = 'Salasana';
-$s_no_password_change = 'Salasanaa ei voi muokata, koska sen yll‰pidosta vastaa toinen j‰rjestelm‰.';
+$s_no_password_change = 'Salasanaa ei voi muokata, koska sen yll√§pidosta vastaa toinen j√§rjestelm√§.';
 $s_confirm_password  = 'Vahvista salasana';
-$s_access_level = 'K‰yttˆoikeustaso';
-$s_update_user_button = 'P‰ivit‰ k‰ytt‰j‰tunnustiedot';
-$s_verify_warning = 'K‰ytt‰j‰tilitietosi on vahvistettu. S‰hkˆpostina vastaanottamasi k‰ytt‰j‰tilin vahvistusviestin vahvistustietoja ei voi en‰‰ k‰ytt‰‰.';
-$s_verify_change_password = 'Sinun pit‰‰ syˆtt‰‰ salasana sis‰‰nkirjautumista varten.';
+$s_access_level = 'K√§ytt√∂oikeustaso';
+$s_update_user_button = 'P√§ivit√§ k√§ytt√§j√§tunnustiedot';
+$s_verify_warning = 'K√§ytt√§j√§tilitietosi on vahvistettu. S√§hk√∂postina vastaanottamasi k√§ytt√§j√§tilin vahvistusviestin vahvistustietoja ei voi en√§√§ k√§ytt√§√§.';
+$s_verify_change_password = 'Sinun pit√§√§ sy√∂tt√§√§ salasana sis√§√§nkirjautumista varten.';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'K‰ytt‰j‰tilin asetukset';
+$s_default_account_preferences_title = 'K√§ytt√§j√§tilin asetukset';
 $s_default_project = 'Oletusprojekti';
-$s_advanced_report = 'N‰yt‰ yksityiskohtaiset tapahtumaraportit';
-$s_advanced_view = 'N‰yt‰ tapahtumien yksityiskohdat';
-$s_advanced_update = 'N‰yt‰ yksityiskohtainen tapahtumap‰ivitys';
+$s_advanced_report = 'N√§yt√§ yksityiskohtaiset tapahtumaraportit';
+$s_advanced_view = 'N√§yt√§ tapahtumien yksityiskohdat';
+$s_advanced_update = 'N√§yt√§ yksityiskohtainen tapahtumap√§ivitys';
 $s_refresh_delay = 'Virkistyksen viive';
 $s_redirect_delay = 'Edelleenohjauksen viive';
 $s_with_minimum_severity = 'Alin vakavuusaste';
-$s_bugnote_order = 'Tapahtumien muistiinpanojen lajitteluj‰rjestys';
-$s_bugnote_order_asc = 'Nouseva j‰rjestys';
-$s_bugnote_order_desc = 'Laskeva j‰rjestys';
-$s_email_on_new = 'L‰het‰ s‰hkˆposti kun uusi tapahtuma raportoidaan';
-$s_email_on_assigned = 'L‰het‰ s‰hkˆposti kun tapahtuma osoitetaan';
-$s_email_on_feedback = 'L‰het‰ s‰hkˆposti kun tapahtumalle annetaan palaute';
-$s_email_on_resolved = 'L‰het‰ s‰hkˆposti kun tapahtuma ratkaistaan';
-$s_email_on_closed = 'L‰het‰ s‰hkˆposti kun tapahtuma suljetaan';
-$s_email_on_reopened = 'L‰het‰ s‰hkˆposti kun tapahtuma uudelleenavataan';
-$s_email_on_bugnote_added = 'L‰het‰ s‰hkˆposti kun tapahtumaan lis‰t‰‰n muistiinpano';
-$s_email_on_status_change = 'L‰het‰ s‰hkˆposti tilan muuttuessa';
-$s_email_on_priority_change = 'L‰het‰ s‰hkˆposti prioriteetin muuttuessa';
-$s_email_bugnote_limit = 'S‰hkˆpostitse v‰litett‰vien tapahtumien raja';
+$s_bugnote_order = 'Tapahtumien muistiinpanojen lajitteluj√§rjestys';
+$s_bugnote_order_asc = 'Nouseva j√§rjestys';
+$s_bugnote_order_desc = 'Laskeva j√§rjestys';
+$s_email_on_new = 'L√§het√§ s√§hk√∂posti kun uusi tapahtuma raportoidaan';
+$s_email_on_assigned = 'L√§het√§ s√§hk√∂posti kun tapahtuma osoitetaan';
+$s_email_on_feedback = 'L√§het√§ s√§hk√∂posti kun tapahtumalle annetaan palaute';
+$s_email_on_resolved = 'L√§het√§ s√§hk√∂posti kun tapahtuma ratkaistaan';
+$s_email_on_closed = 'L√§het√§ s√§hk√∂posti kun tapahtuma suljetaan';
+$s_email_on_reopened = 'L√§het√§ s√§hk√∂posti kun tapahtuma uudelleenavataan';
+$s_email_on_bugnote_added = 'L√§het√§ s√§hk√∂posti kun tapahtumaan lis√§t√§√§n muistiinpano';
+$s_email_on_status_change = 'L√§het√§ s√§hk√∂posti tilan muuttuessa';
+$s_email_on_priority_change = 'L√§het√§ s√§hk√∂posti prioriteetin muuttuessa';
+$s_email_bugnote_limit = 'S√§hk√∂postitse v√§litett√§vien tapahtumien raja';
 $s_language = 'Kieli';
-$s_update_prefs_button = 'P‰ivit‰ asetukset';
+$s_update_prefs_button = 'P√§ivit√§ asetukset';
 $s_reset_prefs_button = 'Oletusasetukset';
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = 'Asetukset palautettu oletuksiin...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Asetukset p‰ivitetty...';
+$s_prefs_updated_msg = 'Asetukset p√§ivitetty...';
 
 # account_profile_add.php
-$s_profile_added_msg = 'Profiili lis‰tty...';
+$s_profile_added_msg = 'Profiili lis√§tty...';
 
 # account_profile_delete.php
 $s_profile_deleted_msg = 'Profiili poistettu...';
@@ -424,74 +424,74 @@ $s_profile_deleted_msg = 'Profiili poistettu...';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Muokkaa profiilia';
 $s_platform = 'Alusta';
-$s_operating_system = 'K‰yttˆj‰rjestelm‰';
-$s_additional_description = 'Lis‰tietoja';
-$s_update_profile_button = 'P‰ivit‰ profiili';
+$s_operating_system = 'K√§ytt√∂j√§rjestelm√§';
+$s_additional_description = 'Lis√§tietoja';
+$s_update_profile_button = 'P√§ivit√§ profiili';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = 'Oletusprofiili p‰ivitetty...';
+$s_profile_defaulted_msg = 'Oletusprofiili p√§ivitetty...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Lis‰‰ profiili';
-$s_add_profile_button = 'Lis‰‰ profiili';
+$s_add_profile_title = 'Lis√§√§ profiili';
+$s_add_profile_button = 'Lis√§√§ profiili';
 $s_edit_or_delete_profiles_title = 'Muokkaa tai poista profiileja';
 $s_edit_profile = 'Muokkaa profiilia';
 $s_make_default = 'Tee oletus';
 $s_delete_profile = 'Poista profiiili';
 $s_select_profile = 'Valitse profiili';
-$s_submit_button = 'L‰het‰';
+$s_submit_button = 'L√§het√§';
 
 # account_profile_update.php
-$s_profile_updated_msg = 'Profiili p‰ivitetty...';
+$s_profile_updated_msg = 'Profiili p√§ivitetty...';
 
 # account_sponsor_page.php
 $s_my_sponsorship = 'Omat sponsoritapahtumat';
 $s_update_sponsorship_button = 'Muokkaa maksatustilaa';
-$s_no_sponsored = 'Yht‰‰n sinulle osoitettua sponsoroitua tapahtumaa ei lˆytynyt.';
+$s_no_sponsored = 'Yht√§√§n sinulle osoitettua sponsoroitua tapahtumaa ei l√∂ytynyt.';
 $s_own_sponsored = 'Tapahtumat, joita olet sponsoroinut:';
 $s_issues_handled = 'Sponsoroidut tapahtumat jotka on osoitettu sinulle:';
-$s_no_own_sponsored = 'Et ole sponsoroinut yht‰‰n tapahtumaa.';
+$s_no_own_sponsored = 'Et ole sponsoroinut yht√§√§n tapahtumaa.';
 $s_sponsor = 'Sponsori';	# like in 'The sponsor of...'
 $s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
-$s_amount = 'M‰‰r‰';
-$s_total_owing = 'Maksamattomia/velkasaldo yhteens‰';
-$s_total_paid = 'Maksettu yhteens‰';
+$s_amount = 'M√§√§r√§';
+$s_total_owing = 'Maksamattomia/velkasaldo yhteens√§';
+$s_total_paid = 'Maksettu yhteens√§';
 $s_sponsor_hide = 'Piilota ratkaistut ja maksetut';
-$s_sponsor_show = 'N‰yt‰ kaikki';
+$s_sponsor_show = 'N√§yt√§ kaikki';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Maksutieto p‰ivitetty.';
+$s_payment_updated = 'Maksutieto p√§ivitetty.';
 
 # account_update.php
-$s_account_updated_msg = 'K‰ytt‰j‰tunnuksesi on onnistuneesti p‰ivitetty...';
-$s_email_updated = 'S‰hkˆpostiosoite onnistuneesti p‰ivitetty ';
-$s_realname_duplicated = 'Nimi on jo k‰ytˆss‰ toisella k‰ytt‰j‰ll‰';
-$s_realname_updated = 'Nimi onnistuneesti p‰ivitetty';
+$s_account_updated_msg = 'K√§ytt√§j√§tunnuksesi on onnistuneesti p√§ivitetty...';
+$s_email_updated = 'S√§hk√∂postiosoite onnistuneesti p√§ivitetty ';
+$s_realname_duplicated = 'Nimi on jo k√§yt√∂ss√§ toisella k√§ytt√§j√§ll√§';
+$s_realname_updated = 'Nimi onnistuneesti p√§ivitetty';
 $s_password_updated = 'Salasana onnistuneesti vaihdettu';
 
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'Valitsemasi tapahtumat ovat eri projekteista. Alla n‰kyv‰t parametrit ovat kaikkiin projekteihin vaikuttavia parametreja. Mik‰li n‰m‰ eiv‰t ole oikein, ole hyv‰ ja v‰henn‰ valittujen tapahtumien m‰‰r‰‰ sek‰ yrit‰ uudestaan.';
+$s_multiple_projects = 'Valitsemasi tapahtumat ovat eri projekteista. Alla n√§kyv√§t parametrit ovat kaikkiin projekteihin vaikuttavia parametreja. Mik√§li n√§m√§ eiv√§t ole oikein, ole hyv√§ ja v√§henn√§ valittujen tapahtumien m√§√§r√§√§ sek√§ yrit√§ uudestaan.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Tapahtuma on onnistuneesti osoitettu...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Uusi tapahtuma';
-$s_feedback_bug_title = 'L‰het‰ tapahtumapalautetta';
+$s_feedback_bug_title = 'L√§het√§ tapahtumapalautetta';
 $s_acknowledged_bug_title = 'Kuittaa tapahtuma';
 $s_confirmed_bug_title = 'Vahvista tapahtuma';
 $s_assigned_bug_title = 'Osoita tapahtuma';
 $s_new_bug_button = 'Uusi tapahtuma';
-$s_feedback_bug_button = 'L‰het‰ palautetta';
+$s_feedback_bug_button = 'L√§het√§ palautetta';
 $s_acknowledged_bug_button = 'Kuittaa tapahtuma';
 $s_confirmed_bug_button = 'Vahvista tapahtuma';
 $s_assigned_bug_button = 'Osoita tapahtuma';
 
 # bug_close.php
 $s_bug_close_msg       = 'Tapahtuma on suljettu...';
-$s_close_immediately   = 'Sulje v‰littˆm‰sti:';
+$s_close_immediately   = 'Sulje v√§litt√∂m√§sti:';
 
 # bug_close_page.php
 $s_closed_bug_title = 'Sulje tapahtuma';
@@ -500,7 +500,7 @@ $s_closed_bug_title = 'Sulje tapahtuma';
 $s_bug_deleted_msg = 'Tapahtuma on poistettu...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n tapahtuman?';
+$s_delete_bug_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n tapahtuman?';
 $s_delete_bug_button = 'Poista tapahtuma';
 
 # bug_monitor.php
@@ -508,87 +508,87 @@ $s_monitor_bug_button = 'Seuraa tapahtumaa';
 $s_unmonitor_bug_button = 'Lopeta tapahtuman seuranta';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Tiedoston l‰hetys onnistui';
+$s_file_upload_msg = 'Tiedoston l√§hetys onnistui';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'L‰het‰ tiedosto';
+$s_upload_file = 'L√§het√§ tiedosto';
 $s_select_file = 'Valitse tiedosto';
-$s_upload_file_button = 'L‰het‰ tiedosto';
-$s_max_file_size = 'Enimm‰iskoko';
+$s_upload_file_button = 'L√§het√§ tiedosto';
+$s_max_file_size = 'Enimm√§iskoko';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Tapahtuma on uudelleenavattu...';
-$s_reopen_add_bugnote_title = 'Lis‰‰ muistiinpanoksi uudelleenavaamisen syy';
-$s_bugnote_add_reopen_button = 'Lis‰‰ muistiinpano ja avaa tapahtuma uudelleen';
+$s_reopen_add_bugnote_title = 'Lis√§√§ muistiinpanoksi uudelleenavaamisen syy';
+$s_bugnote_add_reopen_button = 'Lis√§√§ muistiinpano ja avaa tapahtuma uudelleen';
 
 # bug_resolve_page.php
 $s_resolved_bug_title = 'Ratkaise tapahtuma';
 $s_resolved_bug_button = 'Ratkaise tapahtuma';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Tapahtuma on ratkaistu. Lis‰‰ muistiinpanoja alla...';
-$s_resolve_add_bugnote_title = 'Lis‰‰ muistiinpanoksi ratkaisuaste';
-$s_bugnote_add_resolve_button = 'Lis‰‰ muistiinpano';
+$s_bug_resolved_msg = 'Tapahtuma on ratkaistu. Lis√§√§ muistiinpanoja alla...';
+$s_resolve_add_bugnote_title = 'Lis√§√§ muistiinpanoksi ratkaisuaste';
+$s_bugnote_add_resolve_button = 'Lis√§√§ muistiinpano';
 
 # bug_reminder_page.php
-$s_from = 'Kenelt‰';
+$s_from = 'Kenelt√§';
 $s_to = 'Kenelle';
 $s_on = 'Milloin';
-$s_sent_you_this_reminder_about = 'l‰hetti sinulle muistutuksen seuraavasta asiasta';
-$s_bug_reminder = 'L‰het‰ muistutus';
-$s_reminder_sent_to = 'Muistutus l‰hetetty';
-$s_bug_send_button = 'L‰het‰';
+$s_sent_you_this_reminder_about = 'l√§hetti sinulle muistutuksen seuraavasta asiasta';
+$s_bug_reminder = 'L√§het√§ muistutus';
+$s_reminder_sent_to = 'Muistutus l√§hetetty';
+$s_bug_send_button = 'L√§het√§';
 $s_reminder = 'Muistutus';
-$s_reminder_explain = 'T‰m‰ muistutus l‰hetet‰‰n niille vastaanottajille, jotka seuraavat t‰t‰ tapahtumaa.';
-$s_reminder_monitor = 'N‰m‰ vastaanottajat lis‰t‰‰n tapahtuman seuraajien listalle. Tapahtumaseurannan voi peruuttaa painamalla painiketta Lopeta tapahtuman seuranta.';
-$s_reminder_store = 'T‰m‰ muistutus talletetaan tapahtuman tietoihin.';
+$s_reminder_explain = 'T√§m√§ muistutus l√§hetet√§√§n niille vastaanottajille, jotka seuraavat t√§t√§ tapahtumaa.';
+$s_reminder_monitor = 'N√§m√§ vastaanottajat lis√§t√§√§n tapahtuman seuraajien listalle. Tapahtumaseurannan voi peruuttaa painamalla painiketta Lopeta tapahtuman seuranta.';
+$s_reminder_store = 'T√§m√§ muistutus talletetaan tapahtuman tietoihin.';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Vahvista tapahtuman %d sponsorointi %s:lla.';
 
 # bug_update.php
-$s_bug_updated_msg = 'Tapahtuma on onnistuneesti p‰ivitetty...';
+$s_bug_updated_msg = 'Tapahtuma on onnistuneesti p√§ivitetty...';
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = 'Takaisin tapahtumaan';
-$s_update_simple_link = 'Yksinkertainen p‰ivitys';
-$s_updating_bug_advanced_title = 'P‰ivitet‰‰n tapahtuman tietoja';
+$s_update_simple_link = 'Yksinkertainen p√§ivitys';
+$s_updating_bug_advanced_title = 'P√§ivitet√§√§n tapahtuman tietoja';
 $s_id = 'ID';
 $s_category = 'Kategoria';
 $s_severity = 'Vakavuusaste';
 $s_reproducibility = 'Toistettavuus';
-$s_date_submitted = 'L‰hetysajankohta';
-$s_last_update = 'P‰ivitysajankohta';
+$s_date_submitted = 'L√§hetysajankohta';
+$s_last_update = 'P√§ivitysajankohta';
 $s_reporter = 'Raportoija';
 $s_assigned_to = 'Osoitettu';
 $s_priority = 'Prioriteetti';
 $s_resolution = 'Ratkaisuaste';
 $s_status = 'Tila';
 $s_duplicate_id = 'Kaksoiskappaleen ID';
-$s_os = 'K‰yttˆj‰rjestelm‰';
+$s_os = 'K√§ytt√∂j√§rjestelm√§';
 $s_projection = 'Projektio';
 $s_os_version = 'Versio';
 $s_eta = 'ETA';
 $s_product_version = 'Tuoteversio';
 $s_build = 'Kooste';
 $s_fixed_in_version = 'Korjattu versiossa';
-$s_votes = 'ƒ‰ni‰';
+$s_votes = '√Ñ√§ni√§';
 $s_summary = 'Yhteenveto';
 $s_description = 'Kuvaus';
 $s_steps_to_reproduce = 'Toisto-ohjeet';
-$s_update_information_button = 'P‰ivit‰ tiedot';
-$s_sticky_issue = 'P‰‰llimm‰isen‰ pysyv‰ tapahtuma';
+$s_update_information_button = 'P√§ivit√§ tiedot';
+$s_sticky_issue = 'P√§√§llimm√§isen√§ pysyv√§ tapahtuma';
 $s_profile = 'Profiili';
 
 # bug_update_page.php
-$s_update_advanced_link = 'P‰ivit‰ yksityiskohtaiset tiedot';
-$s_updating_bug_simple_title = 'P‰ivitet‰‰n tapahtuman tietoja';
+$s_update_advanced_link = 'P√§ivit√§ yksityiskohtaiset tiedot';
+$s_updating_bug_simple_title = 'P√§ivitet√§√§n tapahtuman tietoja';
 
 # bug_vote_add.php
-$s_vote_added_msg = 'ƒ‰ni lis‰tty...';
+$s_vote_added_msg = '√Ñ√§ni lis√§tty...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Muistiinpano lis‰tty...';
+$s_bugnote_added_msg = 'Muistiinpano lis√§tty...';
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = 'Muistiinpano poistettu...';
@@ -598,33 +598,33 @@ $s_bug_notes_title = 'Tapahtuman muistiinpanot';
 $s_edit_bugnote_title = 'Muokkaa muistiinpanoa';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'T‰ll‰ tapahtumalla ei ole muistiinpanoja.';
+$s_no_bugnotes_msg = 'T√§ll√§ tapahtumalla ei ole muistiinpanoja.';
 $s_delete_link = 'Poista';
-$s_add_bugnote_title = 'Lis‰‰ muistiinpano';
-$s_add_bugnote_button = 'Lis‰‰ muistiinpano';
+$s_add_bugnote_title = 'Lis√§√§ muistiinpano';
+$s_add_bugnote_button = 'Lis√§√§ muistiinpano';
 $s_bugnote_edit_link = 'Muokkaa';
 $s_closed_bug_button = 'Sulje tapahtuma';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Muistiinpano onnistuneesti p‰ivitetty...';
+$s_bugnote_updated_msg = 'Muistiinpano onnistuneesti p√§ivitetty...';
 $s_edited_on = 'muokattu: ';
 
 # file_api.php
 $s_show_content ='Show Content';
 
 # index.php
-$s_click_to_login = 'Klikkaa t‰st‰ kirjautuaksesi sis‰‰n';
+$s_click_to_login = 'Klikkaa t√§st√§ kirjautuaksesi sis√§√§n';
 
 # login.php
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Tervetuloa projektitapahtumaseurantaan.';
-$s_login_title = 'Kirjaudu sis‰‰n';
-$s_save_login = 'Tallenna sis‰‰nkirjautumistiedot';
+$s_login_title = 'Kirjaudu sis√§√§n';
+$s_save_login = 'Tallenna sis√§√§nkirjautumistiedot';
 $s_choose_project = 'Valitse projekti';
-$s_login_button = 'Kirjaudu sis‰‰n';
-$s_signup_link = 'Rekisterˆi uusi k‰ytt‰j‰tunnus';
+$s_login_button = 'Kirjaudu sis√§√§n';
+$s_signup_link = 'Rekister√∂i uusi k√§ytt√§j√§tunnus';
 $s_lost_password_link = 'Oletko unohtanut salasanasi?';
 
 # login_select_proj_page.php
@@ -633,14 +633,14 @@ $s_select_project_button = 'Valitse projekti';
 # logout_page.php
 $s_logged_out_title = 'Uloskirjauduttu...';
 $s_redirecting = '... edelleenohjataan';
-$s_here = 'T‰nne';
+$s_here = 'T√§nne';
 
 # lost_pwd_page.php
 $s_lost_password_title = "Uusi unohtunut salasana";
-$s_lost_password_done_title = "Salasanaviesti l‰hetetty";
+$s_lost_password_done_title = "Salasanaviesti l√§hetetty";
 $s_lost_password_subject = "Unohtunut salasana";
-$s_lost_password_info = "Salasanasi uusimista varten syˆt‰ k‰ytt‰j‰tunnuksesi sek‰ s‰hkˆpostiosoitteesi.<br/><br/>Sinulle l‰hetet‰‰n linkki, jonka kautta p‰‰set uusimaan salasanasi.";
-$s_lost_password_confirm_hash_OK = "Salasanamuutoksen vahvistus hyv‰ksytty. P‰ivit‰ salasanasi.";
+$s_lost_password_info = "Salasanasi uusimista varten sy√∂t√§ k√§ytt√§j√§tunnuksesi sek√§ s√§hk√∂postiosoitteesi.<br/><br/>Sinulle l√§hetet√§√§n linkki, jonka kautta p√§√§set uusimaan salasanasi.";
+$s_lost_password_confirm_hash_OK = "Salasanamuutoksen vahvistus hyv√§ksytty. P√§ivit√§ salasanasi.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Avoimia ja minulle osoitettuja';
@@ -651,57 +651,57 @@ $s_archives = 'Arkistot';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = 'Luotu k‰ytt‰j‰tunnus';
-$s_created_user_part2 = 'k‰yttˆoikeustasolla';
+$s_created_user_part1 = 'Luotu k√§ytt√§j√§tunnus';
+$s_created_user_part2 = 'k√§ytt√∂oikeustasolla';
 
 # manage_create_user_page.php
-$s_create_new_account_title = 'Luo uusi k‰ytt‰j‰tunnus';
+$s_create_new_account_title = 'Luo uusi k√§ytt√§j√§tunnus';
 $s_verify_password = 'Varmista salasana';
-$s_enabled = 'K‰ytˆss‰';
+$s_enabled = 'K√§yt√∂ss√§';
 $s_protected = 'Suojattu';
-$s_create_user_button = 'Luo k‰ytt‰j‰';
+$s_create_user_button = 'Luo k√§ytt√§j√§';
 
 # manage_page.php
-$s_hide_disabled = 'Piilota pois k‰ytˆst‰ olevat';
+$s_hide_disabled = 'Piilota pois k√§yt√∂st√§ olevat';
 $s_filter_button = 'Sovella suodinta';
-$s_manage_users_link = 'K‰ytt‰j‰hallinta';
+$s_manage_users_link = 'K√§ytt√§j√§hallinta';
 $s_manage_projects_link = 'Projektinhallinta';
-$s_manage_custom_field_link = 'Muokkaa mukautettuja kentti‰';
-$s_manage_global_profiles_link = 'Muokkaa yleisi‰ profiileja';
-$s_permissions_summary_report = 'K‰yttˆoikeusraportti';
-$s_manage_config_link = 'Hallinnoi k‰yttˆoikeuksia';
+$s_manage_custom_field_link = 'Muokkaa mukautettuja kentti√§';
+$s_manage_global_profiles_link = 'Muokkaa yleisi√§ profiileja';
+$s_permissions_summary_report = 'K√§ytt√∂oikeusraportti';
+$s_manage_config_link = 'Hallinnoi k√§ytt√∂oikeuksia';
 $s_manage_threshold_config = 'Tapahtumaketjun kynnysrajat';
-$s_manage_email_config = 'S‰hkˆpostimuistutukset';
+$s_manage_email_config = 'S√§hk√∂postimuistutukset';
 $s_manage_workflow_config = 'Tapahtumaketju';
-$s_create_new_account_link = 'Luo uusi k‰ytt‰j‰tunnus';
+$s_create_new_account_link = 'Luo uusi k√§ytt√§j√§tunnus';
 $s_projects_link = 'Projektit';
 $s_documentation_link = 'Dokumentaatio';
-$s_new_accounts_title = 'Uudet k‰ytt‰j‰tunnukset';
+$s_new_accounts_title = 'Uudet k√§ytt√§j√§tunnukset';
 $s_1_week_title = '1 viikko';
-$s_never_logged_in_title = 'Ei koskaan sis‰‰nkirjautunut';
-$s_prune_accounts = 'Karsi k‰ytt‰j‰tunnuksia';
+$s_never_logged_in_title = 'Ei koskaan sis√§√§nkirjautunut';
+$s_prune_accounts = 'Karsi k√§ytt√§j√§tunnuksia';
 $s_hide_inactive = 'Piilota passiiviset';
-$s_manage_accounts_title = 'K‰ytt‰j‰hallinta';
+$s_manage_accounts_title = 'K√§ytt√§j√§hallinta';
 $s_p = 'p';
 $s_date_created = 'Luontiajankohta';
-$s_last_visit = 'Edellinen k‰ynti';
-$s_edit_user_link = 'Muokkaa k‰ytt‰j‰‰';
+$s_last_visit = 'Edellinen k√§ynti';
+$s_edit_user_link = 'Muokkaa k√§ytt√§j√§√§';
 
 # manage_config_email_page
-$s_config_all_projects = 'HUOMAA: N‰m‰ asetukset vaikuttavat KAIKKIIN PROJEKTEIHIN.';
-$s_config_project = 'HUOMAA: N‰m‰ asetukset vaikuttavat projektiin %s.';
-$s_colour_coding = 'Alla olevassa taulukossa seuraavat v‰riarvo ovat voimassa:';
+$s_config_all_projects = 'HUOMAA: N√§m√§ asetukset vaikuttavat KAIKKIIN PROJEKTEIHIN.';
+$s_config_project = 'HUOMAA: N√§m√§ asetukset vaikuttavat projektiin %s.';
+$s_colour_coding = 'Alla olevassa taulukossa seuraavat v√§riarvo ovat voimassa:';
 $s_colour_project = 'Projektin asetus ohittaa muut asetukset.';
 $s_colour_global = 'Kaikki projektiasetukset ohittavat oletusasetukset.';
-$s_issue_reporter = 'K‰ytt‰j‰lle, joka lis‰si tapahtuman';
-$s_issue_handler = 'K‰ytt‰j‰lle, joka k‰sittelee tapahtumaa';
-$s_users_added_bugnote = 'K‰ytt‰j‰lle, joka on lis‰nnyt tapahtumaan muistiinpanon';
-$s_change_configuration = 'P‰ivit‰ asetukset';
+$s_issue_reporter = 'K√§ytt√§j√§lle, joka lis√§si tapahtuman';
+$s_issue_handler = 'K√§ytt√§j√§lle, joka k√§sittelee tapahtumaa';
+$s_users_added_bugnote = 'K√§ytt√§j√§lle, joka on lis√§nnyt tapahtumaan muistiinpanon';
+$s_change_configuration = 'P√§ivit√§ asetukset';
 $s_message = 'Viesti';
 $s_default_notify = 'Oletustiedonantoasetus:';
 $s_action_notify = 'Toimenpidetiedonantoasetus:';
-$s_notify_defaults_change_access = 'K‰ytt‰j‰taso, jolla voidaan muokata oletusmuistutusten muokkaustasoa';
-$s_notify_actions_change_access = 'K‰ytt‰j‰taso, jolla voidaan muokata muistutuksia';
+$s_notify_defaults_change_access = 'K√§ytt√§j√§taso, jolla voidaan muokata oletusmuistutusten muokkaustasoa';
+$s_notify_actions_change_access = 'K√§ytt√§j√§taso, jolla voidaan muokata muistutuksia';
 $s_revert_to_system = "Poista kaikki projektien asetukset.";
 $s_revert_to_all_project = "Poista projektikohtaiset asetukset.";
 
@@ -713,40 +713,40 @@ $s_workflow = 'Tapahtumaketju';
 $s_workflow_thresholds = 'Kynnysrajat, jotka vaikuttavat tapahtumaketjuun';
 $s_threshold = 'Kynnysraja';
 $s_status_level = 'Tila';
-$s_alter_level = 'T‰t‰ arvoa voi muokata';
+$s_alter_level = 'T√§t√§ arvoa voi muokata';
 $s_validation = 'Tapahtumaketjun vahvistus';
 $s_comment = 'Vahvistuksen selite';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
-$s_unreachable = 'Et voi vaihtaa tapahtumalle t‰t‰ tilaa';
-$s_no_exit = 'Et voi vaihtaa tapahtumaa t‰st‰ tilasta';
-$s_access_levels = 'K‰yttˆoikeustasot';
-$s_access_change = 'Pienin k‰yttˆoikeustaso, jolla t‰m‰ tila voidaan valita tapahtumalle';
+$s_unreachable = 'Et voi vaihtaa tapahtumalle t√§t√§ tilaa';
+$s_no_exit = 'Et voi vaihtaa tapahtumaa t√§st√§ tilasta';
+$s_access_levels = 'K√§ytt√∂oikeustasot';
+$s_access_change = 'Pienin k√§ytt√∂oikeustaso, jolla t√§m√§ tila voidaan valita tapahtumalle';
 $s_desc_bug_submit_status = 'Tapahtuman tila, jolle uusi tapahtuma asetetaan';
 $s_desc_bug_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat asetetaan';
-$s_desc_bug_resolved_status_threshold = 'Tapahtuman tila, jolla tapahtumaa pidet‰‰n ratkaistuna';
-$s_workflow_change_access = 'Tapahtumaketjua voi muokata k‰ytt‰j‰tasolla';
-$s_access_change_access = 'K‰ytt‰j‰taso, jolla voidaan vaihtaa tilojen k‰yttˆoikeustason muokkaustasoa';
+$s_desc_bug_resolved_status_threshold = 'Tapahtuman tila, jolla tapahtumaa pidet√§√§n ratkaistuna';
+$s_workflow_change_access = 'Tapahtumaketjua voi muokata k√§ytt√§j√§tasolla';
+$s_access_change_access = 'K√§ytt√§j√§taso, jolla voidaan vaihtaa tilojen k√§ytt√∂oikeustason muokkaustasoa';
 
 # manage_config_workflow_set
 $s_default_not_in_flow = '%s:n oletustilaa ei ole valittu %s:n seuraavissa tiloissa ja se ohitetaan.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Osoita tapahtuma';
-$s_allow_close_immediate = 'Salli tapahtuman sulkeminen ratkaisun j‰lkeen';
+$s_allow_close_immediate = 'Salli tapahtuman sulkeminen ratkaisun j√§lkeen';
 $s_allow_reporter_close = 'Salli raportoijien sulkea tapahtuma';
 $s_allow_reporter_reopen = 'Salli raportoijien uudelleenavata tapahtuma';
 $s_set_status_assigned = 'Salli tapahtuman tilan muokkaus, kun tapahtuma osoitetaan';
-$s_allow_user_edit = 'Salli k‰ytt‰jien muokata omien tapahtumien muistiinpanoja';
-$s_limit_access = 'Rajoita raportoijien oikeuksia heid‰n omiin tapahtumiin';
+$s_allow_user_edit = 'Salli k√§ytt√§jien muokata omien tapahtumien muistiinpanoja';
+$s_limit_access = 'Rajoita raportoijien oikeuksia heid√§n omiin tapahtumiin';
 $s_submit_status = 'Tapahtuman tila, jolle uusi tapahtuma asetetaan';
 $s_assigned_status = 'Tapahtuman tila, jolle automaattisesti osoitetut tapahtumat asetetaan';
-$s_resolved_status = 'Tapahtuman tila, jolla tapahtumaa pidet‰‰n ratkaistuna';
-$s_readonly_status = 'Tapahtuman tila, jolla tapahtumaa ei voida en‰‰ muokata (vain lukuoikeus)';
+$s_resolved_status = 'Tapahtuman tila, jolla tapahtumaa pidet√§√§n ratkaistuna';
+$s_readonly_status = 'Tapahtuman tila, jolla tapahtumaa ei voida en√§√§ muokata (vain lukuoikeus)';
 $s_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat asetetaan';
 $s_reopen_resolution = 'Ratkaisuaste, jolle uudelleeavattu tapahtuma asetetaan';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Oletko varma, ett‰ haluat poistaa asetukset kohteelta';
+$s_config_delete_sure = 'Oletko varma, ett√§ haluat poistaa asetukset kohteelta';
 $s_in_project = 'projektissa';
 $s_delete_config_button = 'Poista asetukset';
 
@@ -761,33 +761,33 @@ $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Projekti lis‰tty...';
+$s_project_added_msg = 'Projekti lis√§tty...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Kategoria lis‰tty...';
+$s_category_added_msg = 'Kategoria lis√§tty...';
 
 # manage_proj_category_delete.php
 $s_category_deleted_msg = 'Kategoria poistettu...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n kategorian?';
+$s_category_delete_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n kategorian?';
 $s_delete_category_button = 'Poista kategoria';
 
 # manage_proj_category_edit_page.php
 $s_edit_project_category_title = 'Muokkaa projektin kategoriaa';
-$s_update_category_button = 'P‰ivit‰ kategoria';
+$s_update_category_button = 'P√§ivit√§ kategoria';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'Kategoria p‰ivitetty...';
+$s_category_updated_msg = 'Kategoria p√§ivitetty...';
 
 # manage_proj_create_page.php
-$s_add_subproject_title = 'Lis‰‰ aliprojekti';
+$s_add_subproject_title = 'Lis√§√§ aliprojekti';
 
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Projekti poistettu...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n projektin ja kaikki siihen liitetyt tapahtumat?';
+$s_project_delete_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n projektin ja kaikki siihen liitetyt tapahtumat?';
 $s_project_delete_button = 'Poista projekti';
 
 # manage_proj_edit_page.php
@@ -796,94 +796,94 @@ $s_project_name = 'Projektin nimi';
 $s_view_status = 'Tila';
 $s_public = 'julkinen';
 $s_private = 'yksityinen';
-$s_update_project_button = 'P‰ivit‰ projekti';
+$s_update_project_button = 'P√§ivit√§ projekti';
 $s_delete_project_button = 'Poista projekti';
 $s_categories_and_version_title = 'Kategoriat ja versiot';
 $s_categories = 'Kategoriat';
-$s_add_category_button = 'Lis‰‰ kategoria';
+$s_add_category_button = 'Lis√§√§ kategoria';
 $s_versions = 'Versiot';
-$s_add_version_button = 'Lis‰‰ versio';
-$s_add_and_edit_version_button = 'Lis‰‰ ja muokkaa versiota';
+$s_add_version_button = 'Lis√§√§ versio';
+$s_add_and_edit_version_button = 'Lis√§√§ ja muokkaa versiota';
 $s_edit_link = 'Muokkaa';
 $s_actions = 'Toimet';
 $s_version = 'Versio';
 $s_timestamp = 'Ajankohta';
-$s_update = 'P‰ivit‰';
+$s_update = 'P√§ivit√§';
 $s_subprojects = 'Aliprojektit';
-$s_add_subproject = 'Lis‰‰ aliprojektina';
+$s_add_subproject = 'Lis√§√§ aliprojektina';
 $s_create_new_subproject_link = 'Luo uusi aliprojekti';
 $s_unlink_link = 'Pura linkitys';
 
 # manage_proj_menu_page.php
-$s_add_project_title = 'Lis‰‰ projekti';
-$s_upload_file_path = 'L‰hetett‰v‰n tiedoston polku';
-$s_add_project_button = 'Lis‰‰ projekti';
+$s_add_project_title = 'Lis√§√§ projekti';
+$s_upload_file_path = 'L√§hetett√§v√§n tiedoston polku';
+$s_add_project_button = 'Lis√§√§ projekti';
 $s_projects_title = 'Projektit';
 $s_name = 'Nimi';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Projekti p‰ivitetty...';
+$s_project_updated_msg = 'Projekti p√§ivitetty...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'Versio lis‰tty...';
+$s_version_added_msg = 'Versio lis√§tty...';
 
 # manage_proj_version_delete.php
 $s_version_deleted_msg = 'Versio poistettu...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Oletko varma, ett‰ haluat poistaa t‰m‰n version?';
+$s_version_delete_sure = 'Oletko varma, ett√§ haluat poistaa t√§m√§n version?';
 $s_delete_version_button = 'Poista versio';
 
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Muokkaa projektin versiota';
-$s_update_version_button = 'P‰ivit‰ versio';
+$s_update_version_button = 'P√§ivit√§ versio';
 $s_released = 'Julkaistu';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'Versio on p‰ivitetty...';
+$s_version_updated_msg = 'Versio on p√§ivitetty...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = 'K‰ytt‰j‰tunnus on suojattu. T‰m‰ k‰ytt‰j‰tunnus ei ole poistettavissa.';
-$s_account_deleted_msg = 'K‰ytt‰j‰tunnus poistettu...';
+$s_account_delete_protected_msg = 'K√§ytt√§j√§tunnus on suojattu. T√§m√§ k√§ytt√§j√§tunnus ei ole poistettavissa.';
+$s_account_deleted_msg = 'K√§ytt√§j√§tunnus poistettu...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n k‰ytt‰j‰tunnuksen?';
+$s_delete_account_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n k√§ytt√§j√§tunnuksen?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = 'Kaikki yli viikon vanhat k‰ytt‰j‰tunnukset joilla ei ole sis‰‰nkirjauduttu kertaakaan on poistettu';
+$s_accounts_pruned_msg = 'Kaikki yli viikon vanhat k√§ytt√§j√§tunnukset joilla ei ole sis√§√§nkirjauduttu kertaakaan on poistettu';
 $s_prune_accounts_button = 'Karsi';
-$s_confirm_account_pruning = 'Oletko varma, ett‰ haluat poistaa kaikki vanhat k‰ytt‰j‰tunnukset joilla ei ole sis‰‰nkirjauduttu kertaakaan?';
+$s_confirm_account_pruning = 'Oletko varma, ett√§ haluat poistaa kaikki vanhat k√§ytt√§j√§tunnukset joilla ei ole sis√§√§nkirjauduttu kertaakaan?';
 
 # manage_user_page.php
-$s_edit_user_title = 'Muokkaa k‰ytt‰j‰‰';
+$s_edit_user_title = 'Muokkaa k√§ytt√§j√§√§';
 $s_reset_password_button = 'Resetoi salasana';
-$s_delete_user_button = 'Poista k‰ytt‰j‰';
-$s_reset_password_msg = 'Resetoi salasana l‰hett‰‰ vahvistuslinkin osoitteen s‰hkˆpostitse.';
-$s_reset_password_msg2 = 'Resetoi salasana asettaa k‰ytt‰j‰lle tyhj‰n salasanan.';
+$s_delete_user_button = 'Poista k√§ytt√§j√§';
+$s_reset_password_msg = 'Resetoi salasana l√§hett√§√§ vahvistuslinkin osoitteen s√§hk√∂postitse.';
+$s_reset_password_msg2 = 'Resetoi salasana asettaa k√§ytt√§j√§lle tyhj√§n salasanan.';
 $s_show_all_users = 'KAIKKI';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'K‰ytt‰j‰tunnus on suojattu. Salasanaa ei voida resetoida.';
-$s_account_reset_msg = 'Vahvistusviesti on l‰hetetty s‰hkˆpostiosoitteeseesi...';
-$s_account_reset_msg2 = 'K‰ytt‰j‰tunnukselle on asetettu tyhj‰ salasana...';
+$s_account_reset_protected_msg = 'K√§ytt√§j√§tunnus on suojattu. Salasanaa ei voida resetoida.';
+$s_account_reset_msg = 'Vahvistusviesti on l√§hetetty s√§hk√∂postiosoitteeseesi...';
+$s_account_reset_msg2 = 'K√§ytt√§j√§tunnukselle on asetettu tyhj√§ salasana...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'K‰ytt‰j‰tunnus on suojattu. K‰yttˆoikeustaso ja K‰ytˆss‰ -valinnat suojattu. Kaikki muu k‰ytt‰j‰tunnuksessa p‰ivitetty...';
-$s_manage_user_updated_msg = 'K‰ytt‰j‰tunnus p‰ivitetty...';
+$s_manage_user_protected_msg = 'K√§ytt√§j√§tunnus on suojattu. K√§ytt√∂oikeustaso ja K√§yt√∂ss√§ -valinnat suojattu. Kaikki muu k√§ytt√§j√§tunnuksessa p√§ivitetty...';
+$s_manage_user_updated_msg = 'K√§ytt√§j√§tunnus p√§ivitetty...';
 
 # menu_inc.php
-$s_main_link = 'P‰‰sivu';
-$s_view_bugs_link = 'N‰yt‰ tapahtumat';
-$s_report_bug_link = 'Lis‰‰ tapahtuma';
+$s_main_link = 'P√§√§sivu';
+$s_view_bugs_link = 'N√§yt√§ tapahtumat';
+$s_report_bug_link = 'Lis√§√§ tapahtuma';
 $s_changelog_link = 'Muutosloki';
 $s_summary_link = 'Yhteenveto';
-$s_account_link = 'K‰ytt‰j‰tilini';
-$s_users_link = 'K‰ytt‰j‰t';
+$s_account_link = 'K√§ytt√§j√§tilini';
+$s_users_link = 'K√§ytt√§j√§t';
 $s_manage_link = 'Hallinta';
 $s_edit_news_link = 'Muokkaa uutisia';
 $s_docs_link = 'Dokumentaatio';
 $s_logout_link = 'Kirjaudu ulos';
-$s_my_view_link = 'Oma n‰kym‰';
+$s_my_view_link = 'Oma n√§kym√§';
 
 # meta_inc.php
 
@@ -898,84 +898,84 @@ $s_my_view_title_feedback = 'Odottaa palautetta minulta';
 $s_my_view_title_verify = 'Odottaa ratkaisun vahvistusta minulta';
 
 # news_add.php
-$s_news_added_msg = 'Uutisartikkeli lis‰tty...';
+$s_news_added_msg = 'Uutisartikkeli lis√§tty...';
 
 # news_delete.php
 $s_news_deleted_msg = 'Uutisartikkeli poistettu...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n uutisartikkelin?';
+$s_delete_news_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n uutisartikkelin?';
 $s_delete_news_item_button = 'Poista uutisartikkeli';
 
 # news_edit_page.php
 $s_edit_news_title = 'Muokkaa uutisia';
 $s_headline = 'Otsikko';
-$s_body = 'Leip‰teksti';
-$s_update_news_button = 'P‰ivit‰ uutiset';
+$s_body = 'Leip√§teksti';
+$s_update_news_button = 'P√§ivit√§ uutiset';
 
 # news_menu_page.php
-$s_add_news_title = 'Lis‰‰ uutisia';
-$s_post_to = 'L‰het‰ osoitteeseen:';
-$s_post_news_button = 'Lis‰‰ uutinen';
+$s_add_news_title = 'Lis√§√§ uutisia';
+$s_post_to = 'L√§het√§ osoitteeseen:';
+$s_post_news_button = 'Lis√§√§ uutinen';
 $s_edit_or_delete_news_title = 'Muokkaa tai poista uutisia';
 $s_edit_post = 'Muokkaa artikkelia';
 $s_delete_post = 'Poista artikkeli';
 $s_select_post = 'Valitse artikkeli';
 
 # news_update.php
-$s_news_updated_msg = 'Uutinen p‰ivitetty...';
+$s_news_updated_msg = 'Uutinen p√§ivitetty...';
 
 # news_view_page.php
 $s_back_link = 'Takaisin';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = 'Tiedosto onnistuneesti l‰hetetty';
+$s_file_uploaded_msg = 'Tiedosto onnistuneesti l√§hetetty';
 
 # proj_doc_add_page.php
-$s_upload_file_title = 'L‰het‰ tiedosto';
+$s_upload_file_title = 'L√§het√§ tiedosto';
 $s_title = 'Otsikko';
 
 # proj_doc_delete.php
 $s_project_file_deleted_msg = 'Projektin tiedosto poistettu';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n tiedoston?';
+$s_confirm_file_delete_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n tiedoston?';
 
 # proj_doc_edit_page.php
 $s_filename = 'Tiedostonimi';
-$s_file_update_button = 'P‰ivit‰ tiedosto';
+$s_file_update_button = 'P√§ivit√§ tiedosto';
 $s_file_delete_button = 'Poista tiedosto';
 
 # proj_doc_page.php
 $s_project_documentation_title = 'Projektin dokumentaatio';
-$s_user_documentation = 'K‰ytt‰jien dokumentaatio';
+$s_user_documentation = 'K√§ytt√§jien dokumentaatio';
 $s_project_documentation = 'Projektin dokumentaatio';
-$s_add_file = 'Lis‰‰ tiedosto';
+$s_add_file = 'Lis√§√§ tiedosto';
 
 # proj_doc_update.php
-$s_project_document_updated = 'Projekti p‰ivitetty onnistuneesti';
+$s_project_document_updated = 'Projekti p√§ivitetty onnistuneesti';
 
 # proj_user_add.php
-$s_project_user_added_msg = 'K‰ytt‰j‰ onnistuneesti lis‰tty t‰h‰n projektiin';
+$s_project_user_added_msg = 'K√§ytt√§j√§ onnistuneesti lis√§tty t√§h√§n projektiin';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = 'K‰ytt‰j‰ onnistuneesti poistettu t‰st‰ projektista';
+$s_project_removed_user_msg = 'K√§ytt√§j√§ onnistuneesti poistettu t√§st√§ projektista';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n k‰ytt‰j‰tunnuksen?';
-$s_remove_user_button = 'Poista k‰ytt‰j‰';
-$s_remove_all_users_sure_msg = 'Oletko varma, ett‰ haluat poistaa kaikki k‰ytt‰j‰t t‰st‰ projektista?';
-$s_remove_all_users_button = 'Poista kaikki k‰ytt‰j‰t';
+$s_remove_user_sure_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n k√§ytt√§j√§tunnuksen?';
+$s_remove_user_button = 'Poista k√§ytt√§j√§';
+$s_remove_all_users_sure_msg = 'Oletko varma, ett√§ haluat poistaa kaikki k√§ytt√§j√§t t√§st√§ projektista?';
+$s_remove_all_users_button = 'Poista kaikki k√§ytt√§j√§t';
 
 # proj_user_menu_page.php
-$s_add_user_title = 'Lis‰‰ k‰ytt‰j‰ projektiin';
-$s_add_user_button = 'Lis‰‰ k‰ytt‰j‰tunnus';
+$s_add_user_title = 'Lis√§√§ k√§ytt√§j√§ projektiin';
+$s_add_user_button = 'Lis√§√§ k√§ytt√§j√§tunnus';
 $s_project_selection_title = 'Projektin valinta';
 $s_remove_link = 'Poista';
 $s_remove_all_link = 'Poista kaikki';
 
 # proj_user_update.php
-$s_updated_user_msg = 'K‰ytt‰j‰tunnus p‰ivitetty';
+$s_updated_user_msg = 'K√§ytt√§j√§tunnus p√§ivitetty';
 
 # report_add.php
 $s_must_enter_category = 'Sinun on valittava kategoria';
@@ -983,21 +983,21 @@ $s_must_enter_severity = 'Sinun on valittava vakavuusaste';
 $s_must_enter_reproducibility = 'Sinun on annettava toistettavuus';
 $s_must_enter_summary = 'Sinun on annettava yhteenveto';
 $s_must_enter_description = 'Sinun on annettava kuvaus';
-$s_report_more_bugs = 'Raportoi lis‰‰ tapahtumia';
+$s_report_more_bugs = 'Raportoi lis√§√§ tapahtumia';
 $s_submission_thanks_msg = 'Kiitos';
 
 # report_bug_advanced_page.php
 $s_simple_report_link = 'Yksinkertainen tapahtumaraportti';
-$s_enter_report_details_title = 'Syˆt‰ tapahtumaraportin tiedot';
+$s_enter_report_details_title = 'Sy√∂t√§ tapahtumaraportin tiedot';
 $s_required = 'pakollinen tieto';
 $s_select_category = 'Valitse kategoria';
 $s_select_reproducibility = 'Valitse toistettavuus';
 $s_select_severity = 'Valitse vakavuusaste';
-$s_or_fill_in = 'TAI t‰yt‰ seuraavat kent‰t';
-$s_assign_to = 'Osoita k‰ytt‰j‰lle';
-$s_additional_information = 'Lis‰tietoja';
-$s_submit_report_button = 'L‰het‰ raportti';
-$s_check_report_more_bugs = 'rastita raportoidaksesi lis‰‰ tapahtumia';
+$s_or_fill_in = 'TAI t√§yt√§ seuraavat kent√§t';
+$s_assign_to = 'Osoita k√§ytt√§j√§lle';
+$s_additional_information = 'Lis√§tietoja';
+$s_submit_report_button = 'L√§het√§ raportti';
+$s_check_report_more_bugs = 'rastita raportoidaksesi lis√§√§ tapahtumia';
 
 # report_bug_page.php
 $s_advanced_report_link = 'Yksityiskohtainen raportti';
@@ -1005,19 +1005,19 @@ $s_report_stay = 'Raportoi useita tapahtumia';
 
 # set_project.php
 $s_selected_project = 'Valittu projekti';
-$s_valid_project_msg = 'Sinun t‰ytyy valita voimassaoleva projekti';
+$s_valid_project_msg = 'Sinun t√§ytyy valita voimassaoleva projekti';
 
 # signup.php
-$s_signup_done_title = 'K‰ytt‰j‰tilin rekisterˆinti suoritettu';
-$s_password_emailed_msg = 'Olet rekisterˆitynyt onnistuneesti. Syˆtt‰m‰‰si s‰hkˆpostiosoitteen l‰hetet‰‰n vahvistusviesti. S‰hkˆpostiviestiss‰ on linkki, jonka avulla k‰ytt‰j‰tilisi aktivoidaan k‰yttˆˆn.';
-$s_no_reponse_msg = 'Sinulla on 7 p‰iv‰‰ aikaa vahvistaa k‰ytt‰j‰tilisi. Jos et vahvista rekisterˆinti‰si, k‰ytt‰j‰tilisi voidaan poistaa ja joudut syˆtt‰m‰‰n k‰ytt‰j‰tietosi uudelleen.';
+$s_signup_done_title = 'K√§ytt√§j√§tilin rekister√∂inti suoritettu';
+$s_password_emailed_msg = 'Olet rekister√∂itynyt onnistuneesti. Sy√∂tt√§m√§√§si s√§hk√∂postiosoitteen l√§hetet√§√§n vahvistusviesti. S√§hk√∂postiviestiss√§ on linkki, jonka avulla k√§ytt√§j√§tilisi aktivoidaan k√§ytt√∂√∂n.';
+$s_no_reponse_msg = 'Sinulla on 7 p√§iv√§√§ aikaa vahvistaa k√§ytt√§j√§tilisi. Jos et vahvista rekister√∂inti√§si, k√§ytt√§j√§tilisi voidaan poistaa ja joudut sy√∂tt√§m√§√§n k√§ytt√§j√§tietosi uudelleen.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Syˆt‰ koodi siin‰ muodossa, kuin se on oikealla olevassa laatikossa';
-$s_signup_info = 'Sinulle l‰hetet‰‰n syˆtt‰m‰‰si s‰hkˆpostiosoitteeseen vahvistusviesti.<br/>Viestiss‰ on ohjeet, miten vahvistat rekisterˆintisi. Jos et aktivoi tunnustasi 7 p‰iv‰n sis‰ll‰, tunnuksesi poistetaan ja joudut rekisterˆitym‰‰n uudelleen.<br/>';
-$s_signup_title = 'Uuden k‰ytt‰j‰tunnuksen rekisterˆinti';
-$s_signup_button = 'Rekisterˆidy';
-$s_no_password_request = 'Salasanaasi yll‰pidet‰‰n toisessa j‰rjestelm‰ss‰. Ole hyv‰, ja ota yhteys yll‰pitoon.';
+$s_signup_captcha_request = 'Sy√∂t√§ koodi siin√§ muodossa, kuin se on oikealla olevassa laatikossa';
+$s_signup_info = 'Sinulle l√§hetet√§√§n sy√∂tt√§m√§√§si s√§hk√∂postiosoitteeseen vahvistusviesti.<br/>Viestiss√§ on ohjeet, miten vahvistat rekister√∂intisi. Jos et aktivoi tunnustasi 7 p√§iv√§n sis√§ll√§, tunnuksesi poistetaan ja joudut rekister√∂itym√§√§n uudelleen.<br/>';
+$s_signup_title = 'Uuden k√§ytt√§j√§tunnuksen rekister√∂inti';
+$s_signup_button = 'Rekister√∂idy';
+$s_no_password_request = 'Salasanaasi yll√§pidet√§√§n toisessa j√§rjestelm√§ss√§. Ole hyv√§, ja ota yhteys yll√§pitoon.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Muokkaa sivuston asetuksia';
@@ -1025,65 +1025,65 @@ $s_save_settings_button = 'Tallenna asetukset';
 
 # site_settings_page.php
 $s_site_settings_title = 'Sivuston asetukset';
-$s_system_info_link = 'J‰rjestelm‰tiedot';
+$s_system_info_link = 'J√§rjestelm√§tiedot';
 $s_site_settings_link = 'Sivuston asetukset';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'Sivuston asetukset p‰ivitetty';
+$s_site_settings_updated_msg = 'Sivuston asetukset p√§ivitetty';
 
 # summary_page.php
 $s_summary_title = 'Yhteenveto';
 $s_summary_jpgraph_link = 'Yksityiskohtainen yhteenveto';
 $s_by_project = 'Projektin mukaan';
 $s_by_status = 'Tilan mukaan';
-$s_by_date = 'P‰ivien mukaan';
+$s_by_date = 'P√§ivien mukaan';
 $s_by_severity = 'Vakavuusasteen mukaan';
 $s_by_resolution = 'Ratkaisuasteen mukaan';
 $s_by_category = 'Kategorian mukaan';
 $s_by_priority = 'Prioriteetin mukaan';
-$s_by_developer = 'Kehitt‰j‰n mukaan';
+$s_by_developer = 'Kehitt√§j√§n mukaan';
 $s_by_reporter ='Raportoijan mukaan';
 $s_reporter_by_resolution = 'Raportoija / ratkaisuaste';
 $s_reporter_effectiveness = 'Raportoijan tehokkuus';
-$s_developer_by_resolution = 'Kehitt‰j‰ / ratkaisuaste';
+$s_developer_by_resolution = 'Kehitt√§j√§ / ratkaisuaste';
 $s_percentage_fixed = '% korjattu';
 $s_percentage_errors = '% viallisia';
 $s_errors = 'Viallisia';
-$s_total = 'Yhteens‰';
-$s_time_stats = 'Ratkaistujen tapahtumien aikatilastot (p‰ivi‰)';
-$s_longest_open_bug = 'Pisimp‰‰n avoinna ollut tapahtuma';
-$s_longest_open = 'Pisimp‰‰n avoin';
-$s_average_time = 'Keskim‰‰r‰inen aika';
+$s_total = 'Yhteens√§';
+$s_time_stats = 'Ratkaistujen tapahtumien aikatilastot (p√§ivi√§)';
+$s_longest_open_bug = 'Pisimp√§√§n avoinna ollut tapahtuma';
+$s_longest_open = 'Pisimp√§√§n avoin';
+$s_average_time = 'Keskim√§√§r√§inen aika';
 $s_total_time = 'Yhteenlaskettu aika';
-$s_developer_stats = 'Kehitt‰jien tilastot';
+$s_developer_stats = 'Kehitt√§jien tilastot';
 $s_reporter_stats = 'Raportoijien tilastot';
-$s_orct = '(avoin/ratkaistu/suljettu/yhteens‰)';
+$s_orct = '(avoin/ratkaistu/suljettu/yhteens√§)';
 
 # view_all_bug_page.php
-$s_any = 'mik‰ tahansa';
-$s_show = 'N‰yt‰';
+$s_any = 'mik√§ tahansa';
+$s_show = 'N√§yt√§';
 $s_changed = 'Muutettu (tuntia)';
-$s_viewing_bugs_title = 'N‰ytet‰‰n tapahtumat';
-$s_updated = 'P‰ivitetty';
-$s_sticky = 'N‰yt‰ p‰‰llimm‰isin‰ pysyv‰t tapahtumat';
-$s_sort = 'Lajitteluj‰rjestys';
+$s_viewing_bugs_title = 'N√§ytet√§√§n tapahtumat';
+$s_updated = 'P√§ivitetty';
+$s_sticky = 'N√§yt√§ p√§√§llimm√§isin√§ pysyv√§t tapahtumat';
+$s_sort = 'Lajitteluj√§rjestys';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 
 # view_all_inc.php
-$s_none = 'ei mik‰‰n';
+$s_none = 'ei mik√§√§n';
 $s_current = 'current';
 $s_search ='Haku';
-$s_view_prev_link = 'N‰yt‰ edelliset';
-$s_view_next_link = 'N‰yt‰ seuraavat';
+$s_view_prev_link = 'N√§yt√§ edelliset';
+$s_view_next_link = 'N√§yt√§ seuraavat';
 $s_prev = 'Edellinen';
 $s_next = 'Seuraava';
-$s_first = 'Ensimm‰inen';
+$s_first = 'Ensimm√§inen';
 $s_last = 'Viimeinen';
-$s_start_date = 'Aloitusp‰iv‰m‰‰r‰';
-$s_end_date = 'Lopetusp‰iv‰m‰‰r‰';
-$s_use_date_filters = 'K‰yt‰ p‰iv‰m‰‰r‰suotimia';
-$s_yes = 'Kyll‰';
+$s_start_date = 'Aloitusp√§iv√§m√§√§r√§';
+$s_end_date = 'Lopetusp√§iv√§m√§√§r√§';
+$s_use_date_filters = 'K√§yt√§ p√§iv√§m√§√§r√§suotimia';
+$s_yes = 'Kyll√§';
 $s_no = 'Ei';
 $s_open_filters = 'Muokkaa suodinta';
 $s_or_unassigned = 'tai osoittamattomat';
@@ -1091,88 +1091,88 @@ $s_ok = 'OK';
 $s_select_all = 'Valitse kaikki';
 
 # stored query strings
-$s_use_query = 'K‰yt‰ suodinta';
+$s_use_query = 'K√§yt√§ suodinta';
 $s_delete_query = 'Poista suodin';
 $s_query_deleted = 'Suodin poistettu';
 $s_save_query = 'Talleta suodinasetukset';
 $s_reset_query = 'Nollaa suodin';
 $s_query_name = 'Suotimen nimi';
-$s_query_exists = 'T‰llainen kysely on jo tehty.';
-$s_query_dupe_name = 'Toinen kysely on jo talletettu t‰ll‰ nimell‰. Ole hyv‰, ja syˆt‰ uusi nimi.';
-$s_query_blank_name = 'Jokaisella talletettavalla suotimella on oltava nimi. Ole hyv‰, ja syˆt‰ nimi ennen sen tallettamista.';
+$s_query_exists = 'T√§llainen kysely on jo tehty.';
+$s_query_dupe_name = 'Toinen kysely on jo talletettu t√§ll√§ nimell√§. Ole hyv√§, ja sy√∂t√§ uusi nimi.';
+$s_query_blank_name = 'Jokaisella talletettavalla suotimella on oltava nimi. Ole hyv√§, ja sy√∂t√§ nimi ennen sen tallettamista.';
 $s_query_store_error = 'Kyselyn tallettamisessa tapahtui virhe.';
 $s_open_queries = 'Muokkaa suotimia';
-$s_query_delete_msg = 'Oletko varma, ett‰ haluat poistaa t‰m‰n kyselyn?';
+$s_query_delete_msg = 'Oletko varma, ett√§ haluat poistaa t√§m√§n kyselyn?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = 'N‰yt‰ yksinkertaiset tiedot';
-$s_viewing_bug_advanced_details_title = 'N‰ytet‰‰n tapahtuman yksityiskohtaiset tiedot';
+$s_view_simple_link = 'N√§yt√§ yksinkertaiset tiedot';
+$s_viewing_bug_advanced_details_title = 'N√§ytet√§√§n tapahtuman yksityiskohtaiset tiedot';
 $s_product_build = 'Tuotteen kooste';
-$s_system_profile = 'J‰rjestelm‰kuvaus';
+$s_system_profile = 'J√§rjestelm√§kuvaus';
 $s_update_bug_button = 'Muokkaa tapahtumaa';
-$s_bug_assign_to_button = 'Osoita henkilˆlle:';
+$s_bug_assign_to_button = 'Osoita henkil√∂lle:';
 $s_bug_status_to_button = 'Muuta tilaksi:';
 $s_reopen_bug_button = 'Uudelleenavaa tapahtuma';
-$s_move_bug_button = 'Siirr‰ tapahtuma';
+$s_move_bug_button = 'Siirr√§ tapahtuma';
 $s_attached_files = 'Liitetiedostot';
 $s_publish = 'Julkaise';
-$s_cached = 'V‰limuistissa';
+$s_cached = 'V√§limuistissa';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'N‰yt‰ yksityiskohdat';
-$s_viewing_bug_simple_details_title = 'N‰ytet‰‰n tapahtuman yksinkertaiset tiedot';
+$s_view_advanced_link = 'N√§yt√§ yksityiskohdat';
+$s_viewing_bug_simple_details_title = 'N√§ytet√§√§n tapahtuman yksinkertaiset tiedot';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'Yksik‰‰n k‰ytt‰j‰ ei seuraa t‰t‰ tapahtumaa.';
-$s_users_monitoring_bug = 'K‰ytt‰j‰t jotka seuraavat t‰t‰ tapahtumaa';
-$s_monitoring_user_list = 'K‰ytt‰j‰listaus';
+$s_no_users_monitoring_bug = 'Yksik√§√§n k√§ytt√§j√§ ei seuraa t√§t√§ tapahtumaa.';
+$s_users_monitoring_bug = 'K√§ytt√§j√§t jotka seuraavat t√§t√§ tapahtumaa';
+$s_monitoring_user_list = 'K√§ytt√§j√§listaus';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'T‰t‰ tapahtumaa ei sponsoroida.';
-$s_users_sponsoring_bug = 'T‰t‰ tapahtumaa sponsoroivat k‰ytt‰j‰t';
+$s_no_users_sponsoring_bug = 'T√§t√§ tapahtumaa ei sponsoroida.';
+$s_users_sponsoring_bug = 'T√§t√§ tapahtumaa sponsoroivat k√§ytt√§j√§t';
 $s_sponsors_list = 'Sponsorilista';
-$s_total_sponsorship_amount = 'Sponsorit yhteens‰ = %s';
+$s_total_sponsorship_amount = 'Sponsorit yhteens√§ = %s';
 
 # custom field strings
-$s_add_custom_field_button = 'Lis‰‰ mukautettu kentt‰';
-$s_delete_custom_field_button = 'Poista mukautettu kentt‰';
-$s_delete_custom_field_everywhere = 'Poista mukautettu kentt‰ kaikkialta';
-$s_update_custom_field_button = 'P‰ivit‰ mukautettu kentt‰';
-$s_add_existing_custom_field = 'Lis‰‰ t‰m‰ olemassaolevaan mukautettuun kentt‰‰n';
-$s_edit_custom_field_title = 'Muokkaa mukautettua kentt‰‰';
-$s_custom_field = 'Kentt‰';
-$s_custom_fields_setup = 'Mukautetut kent‰t';
+$s_add_custom_field_button = 'Lis√§√§ mukautettu kentt√§';
+$s_delete_custom_field_button = 'Poista mukautettu kentt√§';
+$s_delete_custom_field_everywhere = 'Poista mukautettu kentt√§ kaikkialta';
+$s_update_custom_field_button = 'P√§ivit√§ mukautettu kentt√§';
+$s_add_existing_custom_field = 'Lis√§√§ t√§m√§ olemassaolevaan mukautettuun kentt√§√§n';
+$s_edit_custom_field_title = 'Muokkaa mukautettua kentt√§√§';
+$s_custom_field = 'Kentt√§';
+$s_custom_fields_setup = 'Mukautetut kent√§t';
 $s_custom_field_name = 'Nimi';
-$s_custom_field_project_count = 'Projektien lukum‰‰r‰';
+$s_custom_field_project_count = 'Projektien lukum√§√§r√§';
 $s_custom_field_type = 'Tyyppi';
 $s_custom_field_possible_values = 'Mahdolliset arvot';
 $s_custom_field_default_value = 'Oletusarvo';
-$s_custom_field_valid_regexp = 'S‰‰nnˆllinen lauseke (regexp)';
+$s_custom_field_valid_regexp = 'S√§√§nn√∂llinen lauseke (regexp)';
 $s_custom_field_access_level_r = 'Lukuoikeus';
 $s_custom_field_access_level_rw = 'Kirjoitusoikeus';
-$s_custom_field_length_min = 'V‰himm‰ispituus';
-$s_custom_field_length_max = 'Enimm‰ispituus';
+$s_custom_field_length_min = 'V√§himm√§ispituus';
+$s_custom_field_length_max = 'Enimm√§ispituus';
 $s_custom_field_advanced = 'Yksityiskohdat';
-$s_custom_field_display_report = 'N‰yt‰ uusien tapahtumien kirjaamisessa';
-$s_custom_field_display_update = 'N‰yt‰ tapahtumien p‰ivityksess‰';
-$s_custom_field_display_resolved = 'N‰yt‰ tapahtumien ratkaisuissa';
-$s_custom_field_display_closed = 'N‰yt‰ tapahtumien sulkemisissa';
-$s_custom_field_require_report = 'Vaadittu kentt‰ raportilla';
-$s_custom_field_require_update = 'Vaadittu kentt‰ p‰ivitett‰ess‰';
-$s_custom_field_require_resolved = 'Vaadittu kentt‰ ratkaistaessa';
-$s_custom_field_require_closed = 'Vaadittu kentt‰ sulkemisessa';
+$s_custom_field_display_report = 'N√§yt√§ uusien tapahtumien kirjaamisessa';
+$s_custom_field_display_update = 'N√§yt√§ tapahtumien p√§ivityksess√§';
+$s_custom_field_display_resolved = 'N√§yt√§ tapahtumien ratkaisuissa';
+$s_custom_field_display_closed = 'N√§yt√§ tapahtumien sulkemisissa';
+$s_custom_field_require_report = 'Vaadittu kentt√§ raportilla';
+$s_custom_field_require_update = 'Vaadittu kentt√§ p√§ivitett√§ess√§';
+$s_custom_field_require_resolved = 'Vaadittu kentt√§ ratkaistaessa';
+$s_custom_field_require_closed = 'Vaadittu kentt√§ sulkemisessa';
 
-$s_custom_field_sequence = 'J‰rjestys';
-$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:S‰hkˆpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:P‰iv‰m‰‰r‰';
+$s_custom_field_sequence = 'J√§rjestys';
+$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:S√§hk√∂postiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:P√§iv√§m√§√§r√§';
 
-$s_confirm_used_custom_field_deletion = 'T‰m‰ kentt‰ on liitetty ainakin yhteen projektiin.  Jos jatkat, kaikki t‰h‰n kentt‰‰n liitetyt arvot poistetaan. T‰t‰ komentoa ei voida j‰lkeenp‰in kumota.  Jos et halua poistaa t‰t‰ kentt‰‰, paina selaimesi Takaisin-painiketta.  Jatkaaksesi, paina allaolevaa painiketta';
-$s_confirm_custom_field_deletion = 'Oletko varma, ett‰ haluat poistaa t‰m‰n mukautetun kent‰n ja kaikki siihen liitetyt arvot?';
-$s_field_delete_button = 'Poista kentt‰';
+$s_confirm_used_custom_field_deletion = 'T√§m√§ kentt√§ on liitetty ainakin yhteen projektiin.  Jos jatkat, kaikki t√§h√§n kentt√§√§n liitetyt arvot poistetaan. T√§t√§ komentoa ei voida j√§lkeenp√§in kumota.  Jos et halua poistaa t√§t√§ kentt√§√§, paina selaimesi Takaisin-painiketta.  Jatkaaksesi, paina allaolevaa painiketta';
+$s_confirm_custom_field_deletion = 'Oletko varma, ett√§ haluat poistaa t√§m√§n mukautetun kent√§n ja kaikki siihen liitetyt arvot?';
+$s_field_delete_button = 'Poista kentt√§';
 
-$s_confirm_custom_field_unlinking = 'Oletko varma, ett‰ haluat poistaa t‰m‰n mukautetun kent‰n projektista sek‰ kaikki mukautettuun kentt‰‰n syˆtetyt arvot?';
-$s_field_remove_button = 'Poista kentt‰';
+$s_confirm_custom_field_unlinking = 'Oletko varma, ett√§ haluat poistaa t√§m√§n mukautetun kent√§n projektista sek√§ kaikki mukautettuun kentt√§√§n sy√∂tetyt arvot?';
+$s_field_remove_button = 'Poista kentt√§';
 
 $s_hide_status = 'Piilota tila';
 $s_filter_closed = "Suljettu";
@@ -1180,7 +1180,7 @@ $s_filter_resolved = "Ratkaistu";
 $s_hide_closed = "Piilota suljetut";
 $s_hide_resolved = "Piilota ratkaistut";
 $s_and_above = 'ja korkeammat';
-$s_advanced_filters = 'Lis‰suotimet';
+$s_advanced_filters = 'Lis√§suotimet';
 $s_simple_filters = 'Yksinkertaiset suotimet';
 $s_monitored_by = 'Seuraaja';
 
@@ -1192,12 +1192,12 @@ $s_phpmailer_language = 'fi';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsoria';
-$s_sponsorship_added = 'Sponsori lis‰tty';
-$s_sponsorship_updated = 'Sponsori p‰ivitetty';
+$s_sponsorship_added = 'Sponsori lis√§tty';
+$s_sponsorship_updated = 'Sponsori p√§ivitetty';
 $s_sponsorship_deleted = 'Sponsori poistettu';
 $s_sponsorship_paid = 'Sponsoritapahtuma maksettu';
-$s_sponsorship_more_info = 'Lis‰‰ tietoa sponsoroinnista';
-$s_sponsorship_total = 'Sponsorointi yhteens‰';
+$s_sponsorship_more_info = 'Lis√§√§ tietoa sponsoroinnista';
+$s_sponsorship_total = 'Sponsorointi yhteens√§';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1212,19 +1212,19 @@ $s_http_auth_realm = "Mantis kirjautuminen";
 
 $s_bug = "tapahtuma";
 $s_add_new_relationship = "Uusi relaatio";
-$s_add_new_relationship_button = "Lis‰‰";
+$s_add_new_relationship_button = "Lis√§√§";
 $s_this_bug = "Nykyinen tapahtuma";
-$s_relationship_added = "Relaatio lis‰tty";
+$s_relationship_added = "Relaatio lis√§tty";
 $s_relationship_deleted = "Relaatio poistettu";
 $s_no_relationship = "ei relaatiota";
 $s_relationship_replaced = "Relaatio korvattu";
 $s_replace_relationship_button = "Korvaa";
-$s_replace_relationship_sure_msg = "N‰iden kahden tapahtuman v‰lill‰ on jo relaatio. Oletko varma, ett‰ haluat korvata sen?";
-$s_relationship_with_parent = "Relaatio is‰tapahtuman kanssa";
+$s_replace_relationship_sure_msg = "N√§iden kahden tapahtuman v√§lill√§ on jo relaatio. Oletko varma, ett√§ haluat korvata sen?";
+$s_relationship_with_parent = "Relaatio is√§tapahtuman kanssa";
 $s_delete_relationship_button = "Poista";
-$s_delete_relationship_sure_msg = "Oletko varma, ett‰ haluat poistaa t‰m‰n relaation?";
-$s_relationship_warning_blocking_bugs_not_resolved = "T‰ll‰ tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. T‰ll‰ tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen is‰tapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkit‰ ratkaistuiksi tai suljetuiksi.";
+$s_delete_relationship_sure_msg = "Oletko varma, ett√§ haluat poistaa t√§m√§n relaation?";
+$s_relationship_warning_blocking_bugs_not_resolved = "T√§ll√§ tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. T√§ll√§ tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen is√§tapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkit√§ ratkaistuiksi tai suljetuiksi.";
 $s_create_child_bug_button = "Luo klooni";
 $s_bug_cloned_to = "Tapahtuma kloonattu";
 $s_bug_created_from = "Tapahtuma luotu tapahtumasta";
@@ -1235,81 +1235,81 @@ $s_relation_graph = "Relaatiograafi";
 $s_dependency_graph = "Riippuvuusgraafi";
 $s_vertical = "Pysty";
 $s_horizontal = "Vaaka";
-$s_view_issue = "N‰yt‰ tapahtuma";
+$s_view_issue = "N√§yt√§ tapahtuma";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
 
 # Pemissions report
 $s_perm_rpt_capability = 'Oikeus';
-$s_view = 'N‰yt‰';
+$s_view = 'N√§yt√§';
 $s_issues = 'TAPAHTUMAT';
-$s_report_issue = 'Lis‰‰ tapahtumia';
-$s_update_issue = 'P‰ivit‰ tapahtumia';
+$s_report_issue = 'Lis√§√§ tapahtumia';
+$s_update_issue = 'P√§ivit√§ tapahtumia';
 $s_monitor_issue = 'Seuraa tapahtumia';
 $s_handle_issue = 'Muokkaa tapahtumia';
 $s_move_issue = 'Tapahtuman siirto';
 $s_delete_issue = 'Tapahtuman poisto';
 $s_reopen_issue = 'Tapahtuman uudelleenavaus';
-$s_view_private_issues = 'N‰yt‰ ykstyiset tapahtumat';
-$s_update_readonly_issues = 'Vain lukuoikeuksilla varustettujen tapahtumien p‰ivitysoikeus';
-$s_update_issue_status = 'Tapahtuman tilan p‰ivitys';
-$s_set_view_status = 'N‰yttˆtilan m‰‰ritys (julkinen/yksityinen)';
-$s_update_view_status = 'N‰yttˆtilan p‰ivitys (julkinen/yksityinen)';
-$s_show_list_of_users_monitoring_issue = 'N‰yt‰ lista tapahtumaa seuraavista k‰ytt‰jist‰';
+$s_view_private_issues = 'N√§yt√§ ykstyiset tapahtumat';
+$s_update_readonly_issues = 'Vain lukuoikeuksilla varustettujen tapahtumien p√§ivitysoikeus';
+$s_update_issue_status = 'Tapahtuman tilan p√§ivitys';
+$s_set_view_status = 'N√§ytt√∂tilan m√§√§ritys (julkinen/yksityinen)';
+$s_update_view_status = 'N√§ytt√∂tilan p√§ivitys (julkinen/yksityinen)';
+$s_show_list_of_users_monitoring_issue = 'N√§yt√§ lista tapahtumaa seuraavista k√§ytt√§jist√§';
 $s_notes = 'MUISTIINPANOT';
-$s_add_notes = 'Lis‰‰ muistiinpanoja';
-$s_update_notes = 'P‰ivit‰ muistiinpanoja';
+$s_add_notes = 'Lis√§√§ muistiinpanoja';
+$s_update_notes = 'P√§ivit√§ muistiinpanoja';
 $s_delete_note = 'Poista muistiinpano';
-$s_view_private_notes = 'N‰yt‰ yksityiset muistiinpanot';
+$s_view_private_notes = 'N√§yt√§ yksityiset muistiinpanot';
 $s_news = 'UUTISET';
-$s_view_private_news = 'N‰yt‰ yksityiset uutiset';
+$s_view_private_news = 'N√§yt√§ yksityiset uutiset';
 $s_manage_news = 'Hallinnoi uutisia';
-$s_view_list_of_attachments = 'N‰yt‰ liitetiedostolistaukset';
+$s_view_list_of_attachments = 'N√§yt√§ liitetiedostolistaukset';
 $s_download_attachments = 'Imuroi liitetiedostoja';
 $s_delete_attachments = 'Poista liitetiedostoja';
 $s_delete_attachment_button = "Poista";
-$s_delete_attachment_sure_msg = "Oletko varma, ett‰ haluat poistaa t‰m‰n liitetiedoston?";
-$s_upload_issue_attachments = 'P‰ivit‰ tapahtuman liitetiedostoja';
+$s_delete_attachment_sure_msg = "Oletko varma, ett√§ haluat poistaa t√§m√§n liitetiedoston?";
+$s_upload_issue_attachments = 'P√§ivit√§ tapahtuman liitetiedostoja';
 $s_filters = 'suotimet';
 $s_save_filters = 'Tallenna suotimet';
 $s_save_filters_as_shared = 'Tallenna suotimet jaettuina';
-$s_use_saved_filters = 'K‰yt‰ talletettuja suotimia';
+$s_use_saved_filters = 'K√§yt√§ talletettuja suotimia';
 $s_create_project = 'Luo projekti';
 $s_delete_project = 'Poista projekti';
 $s_manage_project = 'Hallinnoi projektia';
-$s_manage_user_access_to_project = 'Hallinnoi projektin k‰ytt‰j‰oikeuksia';
-$s_automatically_included_in_private_projects = 'Lis‰‰ automaattisesti yksityisiin projekteihin';
+$s_manage_user_access_to_project = 'Hallinnoi projektin k√§ytt√§j√§oikeuksia';
+$s_automatically_included_in_private_projects = 'Lis√§√§ automaattisesti yksityisiin projekteihin';
 $s_project_documents = 'PROJEKTIDOKUMENTIT';
-$s_view_project_documents = 'N‰yt‰ projektin dokumentit';
-$s_upload_project_documents = 'L‰het‰ projektidokumentteja';
-$s_link_custom_fields_to_projects = 'Liit‰ mukautettuja kentti‰ projekteihin';
+$s_view_project_documents = 'N√§yt√§ projektin dokumentit';
+$s_upload_project_documents = 'L√§het√§ projektidokumentteja';
+$s_link_custom_fields_to_projects = 'Liit√§ mukautettuja kentti√§ projekteihin';
 $s_sponsorships = 'SPONSOROINNIT';
-$s_view_sponsorship_details = 'N‰yt‰ sponsoroinnin yksityiskohdat';
-$s_view_sponsorship_total = 'N‰yt‰ sponssit yhteens‰';
+$s_view_sponsorship_details = 'N√§yt√§ sponsoroinnin yksityiskohdat';
+$s_view_sponsorship_total = 'N√§yt√§ sponssit yhteens√§';
 $s_sponsor_issue = 'Sponsoroi tapahtumaa';
 $s_assign_sponsored_issue = 'Osoita sponsoroitu tapahtuma';
-$s_handle_sponsored_issue = 'K‰sittele sponsoroitua tapahtumaa';
+$s_handle_sponsored_issue = 'K√§sittele sponsoroitua tapahtumaa';
 $s_others = 'MUUT';
-$s_see_email_addresses_of_other_users = 'N‰yt‰ muiden k‰ytt‰jien s‰hkˆpostiosoitteet';
-$s_send_reminders = 'L‰het‰ muistutuksia';
-$s_add_profiles = 'Lis‰‰ profiileja';
-$s_notify_of_new_user_created = 'Uuden k‰ytt‰j‰n luonnin j‰lkeen ilmoitus';
-$s_email_notification = 'SƒHK÷POSTI-ILMOITUKSET';
+$s_see_email_addresses_of_other_users = 'N√§yt√§ muiden k√§ytt√§jien s√§hk√∂postiosoitteet';
+$s_send_reminders = 'L√§het√§ muistutuksia';
+$s_add_profiles = 'Lis√§√§ profiileja';
+$s_notify_of_new_user_created = 'Uuden k√§ytt√§j√§n luonnin j√§lkeen ilmoitus';
+$s_email_notification = 'S√ÑHK√ñPOSTI-ILMOITUKSET';
 $s_status_changed_to = 'Tila muutettu';
-$s_email_on_deleted = 'S‰hkˆpostia, kun tapahtuma poistetaan';
-$s_email_on_sponsorship_changed = 'S‰hkˆpostia, kun tapahtuman sponssi muuttuu';
-$s_email_on_relationship_changed = 'S‰hkˆpostia, kun tapahtuman relaatioita muokataan';
+$s_email_on_deleted = 'S√§hk√∂postia, kun tapahtuma poistetaan';
+$s_email_on_sponsorship_changed = 'S√§hk√∂postia, kun tapahtuman sponssi muuttuu';
+$s_email_on_relationship_changed = 'S√§hk√∂postia, kun tapahtuman relaatioita muokataan';
 
 # DHTML filters
 $s_loading = 'Ladataan...';
 
 # filter_api.php
-$s_between = 'V‰lill‰' ;
-$s_on_or_before = 'T‰llˆin tai ennen' ;
+$s_between = 'V√§lill√§' ;
+$s_on_or_before = 'T√§ll√∂in tai ennen' ;
 $s_before = 'Ennen' ;
-$s_after = 'J‰lkeen' ;
-$s_on_or_after = 'T‰llˆin tai j‰lkeen' ;
+$s_after = 'J√§lkeen' ;
+$s_on_or_after = 'T√§ll√∂in tai j√§lkeen' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';

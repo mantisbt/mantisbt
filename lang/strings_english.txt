@@ -11,17 +11,17 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.282 $
-	# $Author: vboctor $
-	# $Date: 2006-10-31 08:43:58 $
+	# $Revision: 1.283 $
+	# $Author: achumakov $
+	# $Date: 2006-11-08 13:32:44 $
 	#
-	# $Id: strings_english.txt,v 1.282 2006-10-31 08:43:58 vboctor Exp $
+	# $Id: strings_english.txt,v 1.283 2006-11-08 13:32:44 achumakov Exp $
 	###########################################################################
 
 ?>
 <?php
 # Charset
-$s_charset = 'windows-1252';
+$s_charset = 'utf-8';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
