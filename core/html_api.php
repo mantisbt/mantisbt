@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.198 2006-10-31 08:43:58 vboctor Exp $
+	# $Id: html_api.php,v 1.199 2006-11-11 07:38:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -488,6 +488,8 @@
 	function print_menu() {
 		if ( auth_is_user_authenticated() ) {
 			$t_protected = current_user_get_field( 'protected' );
+			$t_current_project = helper_get_current_project();
+
 			PRINT '<table class="width100" cellspacing="0">';
 			PRINT '<tr>';
 			PRINT '<td class="menu">';
@@ -513,7 +515,7 @@
 				}
 
 				# Roadmap Page
-				if ( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+				if ( ( $t_current_project == ALL_PROJECTS ) || access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
 					$t_menu_options[] = '<a href="roadmap_page.php">' . lang_get( 'roadmap_link' ) . '</a>';
 				}
 
@@ -529,7 +531,6 @@
 
 				# Project Wiki
 				if ( wiki_is_enabled() ) {
-					$t_current_project = helper_get_current_project();
 					$t_menu_options[] = '<a href="wiki.php?type=project&id=' . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
 				}
 

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.53 2006-05-02 14:05:08 vboctor Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.54 2006-11-11 07:37:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -336,13 +336,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				$row = db_fetch_array( $result5 );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
-					switch ( $g_file_upload_method ) {
-					case DISK:	PRINT "$v2_filename ($v2_filesize KB) $v2_date_added";
-							break;
-					case DATABASE:	PRINT "$v2_filename ($v2_filesize KB) $v2_date_added";
-							break;
-				} #case
+				$v2_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v2_date_added ) );
+				echo "$v2_filename ($v2_filesize KB) $v2_date_added";
+
 				if ( $j != ( $num_files - 1 ) &&  ( $f_type_page == 'html' ) ) {
 					PRINT '<br />';
 				}

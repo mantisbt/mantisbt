@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.16 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: columns_api.php,v 1.17 2006-11-11 07:38:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -616,6 +616,16 @@
 				, lang_get( 'private' )
 				, lang_get( 'private' )
 			);
+		}
+		echo '</td>';
+	}
+	
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_target_version( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		echo '<td>';
+		if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $p_row['id'] ) ) {
+			echo $p_row['target_version'];
 		}
 		echo '</td>';
 	}

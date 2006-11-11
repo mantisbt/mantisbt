@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.1 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: roadmap_page.php,v 1.2 2006-11-11 07:37:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -33,6 +33,8 @@
 
 	$t_user_id = auth_get_current_user_id();
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+	
+	$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
 
 	if ( ALL_PROJECTS == $f_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
@@ -40,9 +42,16 @@
 			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
 		}
 
-		$t_project_ids = array_unique( $t_project_ids );
+		$t_project_ids_to_check = array_unique( $t_project_ids );
+		$t_project_ids = array();
+
+		foreach ( $t_project_ids_to_check as $t_project_id ) {
+			if ( access_has_project_level( $t_roadmap_view_access_level, $t_project_id ) ) {
+				$t_project_ids[] = $t_project_id;
+			}
+		}
 	} else {
-		access_ensure_project_level( config_get( 'roadmap_view_threshold' ), $f_project_id );
+		access_ensure_project_level( $t_roadmap_view_access_level, $f_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
 		array_unshift( $t_project_ids, $f_project_id );
 	}

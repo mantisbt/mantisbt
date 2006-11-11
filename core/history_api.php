@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.37 2006-10-31 08:43:58 vboctor Exp $
+	# $Id: history_api.php,v 1.38 2006-11-11 07:38:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -107,7 +107,8 @@
 		$t_mantis_user_table		= config_get( 'mantis_user_table' );
 		$t_history_order			= config_get( 'history_order' );
 		$c_bug_id					= db_prepare_int( $p_bug_id );
-		$t_user_id = (( NULL == $p_user_id) ? auth_get_current_user_id() : $p_userid);
+		$t_user_id = ( NULL === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+		$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
 		
 		# grab history and display by date_modified then field_name
 		# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
@@ -138,6 +139,11 @@
 					!custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
 				continue; 
 			}
+			
+			if ( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+				continue;
+			}
+
 			// bugnotes
 			if ( $t_user_id != $v_user_id ) { // bypass if user originated note
 				if ( ( $v_type == BUGNOTE_ADDED ) ||

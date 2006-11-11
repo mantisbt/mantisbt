@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.67 2006-05-18 13:00:28 vboctor Exp $
+	# $Id: helper_api.php,v 1.68 2006-11-11 07:38:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -341,6 +341,14 @@
 
 		if ( OFF == config_get( 'enable_relationship' ) ) {
 			$t_keys = array_keys( $t_columns, 'duplicate_id' );
+			foreach ( $t_keys as $t_key ) {
+				unset( $t_columns[$t_key] );
+			}
+		}
+
+		$t_current_project_id = helper_get_current_project();
+		if ( $t_current_project_id != ALL_PROJECTS && !access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_current_project_id ) ) {
+			$t_keys = array_keys( $t_columns, 'target_version' );
 			foreach ( $t_keys as $t_key ) {
 				unset( $t_columns[$t_key] );
 			}

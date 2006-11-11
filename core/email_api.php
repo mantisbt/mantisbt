@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.124 2006-10-31 08:43:58 vboctor Exp $
+	# $Id: email_api.php,v 1.125 2006-11-11 07:38:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1096,7 +1096,7 @@
 		$t_bug_data['email_resolution'] = $row['resolution'];
 		$t_bug_data['email_fixed_in_version'] = $row['fixed_in_version'];
 
-		if ( !is_blank( $row['target_version'] ) ) {
+		if ( !is_blank( $row['target_version'] ) && access_compare_level( $t_user_access_level, config_get( 'roadmap_view_threshold' ) ) ) {
 			$t_bug_data['email_target_version'] = $row['target_version'];
 		}
 

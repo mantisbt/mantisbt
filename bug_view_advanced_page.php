@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.81 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.82 2006-11-11 07:37:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -380,6 +380,9 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 
+<?php
+	if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id ) ) {
+?>
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
 
@@ -390,6 +393,14 @@
 	<td>
 		<?php echo $t_bug->target_version ?>
 	</td>
+<?php
+	} else {
+?>
+	<!-- spacer -->
+	<td colspan="4">&nbsp;</td>
+<?php
+	}
+?>
 
 	<!-- Product Build -->
 	<td class="category">
