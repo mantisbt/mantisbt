@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.28 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.29 2006-11-18 06:33:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,7 +31,9 @@
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_attribute( $t_bug->summary );
+
+		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
+		echo '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_attribute( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
@@ -53,13 +55,22 @@
 	# Prints one entry in the roadmap.
 	function custom_function_default_roadmap_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_attribute( $t_bug->summary );
+		
+		if ( bug_is_resolved( $p_issue_id ) ) {
+			$t_strike_start = '<strike>';
+			$t_strike_end = '</strike>';
+		} else {
+			$t_strike_start = $t_strike_end = '';
+		}
+		
+		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
+		echo '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_attribute( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 		}
 
-		echo '<br />';
+		echo ' - ', get_enum_element( 'status', $t_bug->status ), $t_strike_end, '.<br />';
 	}
 
 	# --------------------

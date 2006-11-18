@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.2 2006-11-11 07:37:59 vboctor Exp $
+	# $Id: roadmap_page.php,v 1.3 2006-11-18 06:33:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -16,21 +16,27 @@
 	require_once( $t_core_path.'bug_api.php' );
 
 	# Print header for the specified project version.
-	function print_version_header( $p_version_id ) {
-		$t_project_id   = version_get_field( $p_version_id, 'project_id' );
-		$t_version_name = version_get_field( $p_version_id, 'version' );
+	function print_version_header( $p_version_row ) {
+		$t_project_id   = $p_version_row['project_id'];
+		$t_version_name = $p_version_row['version'];
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
 		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
 		echo $t_release_title, '<br />';
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 
-		$t_description = version_get_field( $p_version_id, 'description' );
+		$t_description = $p_version_row['description'];
 		if ( ( $t_description !== false ) && !is_blank( $t_description ) ) {
 			echo string_display( "<br />$t_description<br /><br />" );
 		}
 	}
 
+	# print project header
+	function print_project_header( $p_project_name ) {
+		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br /><br />';
+		echo '<tt>';
+	}
+	
 	$t_user_id = auth_get_current_user_id();
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 	
@@ -56,11 +62,6 @@
 		array_unshift( $t_project_ids, $f_project_id );
 	}
 
-	# this page is invalid for the 'All Project' selection
-	#if ( ALL_PROJECTS == $f_project_id ) {
-	#	print_header_redirect( 'login_select_proj_page.php?ref=roadmap_page.php' );
-	#}
-
 	html_page_top1( lang_get( 'roadmap' ) );  // title
 	html_page_top2();
 
@@ -83,26 +84,33 @@
 
 		$t_version_rows = version_get_all_rows( $t_project_id );
 
-		echo '<br /><span class="pagetitle">', string_display( $t_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br /><br />';
-		echo '<tt>';
+		$t_project_header_printed = false;
 
 		$i = 0;
+		
+		$t_issues_planned = 0;
+		$t_issues_resolved = 0;
 
 		foreach( $t_version_rows as $t_version_row ) {
+			if ( $t_version_row['released'] == 1 ) {
+				continue;
+			}
+
 			$t_version = $t_version_row['version'];
 			$c_version = db_prepare_string( $t_version );
 
-			$t_version_id = version_get_id( $t_version, $t_project_id );
+			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
 
-			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY last_updated DESC";
-
-			$t_description = version_get_field( $t_version_id, 'description' );
+			$t_description = $t_version_row['description'];
 			if ( !is_blank( $t_description ) ) {
 				if ( $i > 0 ) {
 					echo '<br />';
 				}
+				
+				print_project_header( $t_project_name );
+				$t_project_header_printed = true;
 
-				print_version_header( $t_version_id );
+				print_version_header( $t_version_row );
 				$t_version_header_printed = true;
 			} else {
 				$t_version_header_printed = false;
@@ -131,6 +139,12 @@
 				if ( !helper_call_custom_function( 'roadmap_include_issue', array( $t_issue_id ) ) ) {
 					continue;
 				}
+				
+				$t_issues_planned++;
+				
+				if ( bug_is_resolved( $t_issue_id ) ) {
+					$t_issues_resolved++;
+				}
 
 				# Print the header for the version with the first roadmap entry to be added.
 				if ( $t_first_entry && !$t_version_header_printed ) {
@@ -138,7 +152,12 @@
 						echo '<br />';
 					}
 
-					print_version_header( $t_version_id );
+					if ( !$t_project_header_printed ) {
+						print_project_header( $t_project_name );
+						$t_project_header_printed = true;
+					}
+
+					print_version_header( $t_version_row );
 
 					$t_version_header_printed = true;
 					$t_first_entry = false;
@@ -149,8 +168,13 @@
 
 			$i++;
 		}
+		
+		if ( $t_issues_planned > 0 ) {
+			echo '<br />';
+			echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_issues_resolved * 100 / $t_issues_planned );
+			echo '<br /></tt>';
+		}
 
-		echo '</tt>';
 		$t_project_index++;
 	}
 

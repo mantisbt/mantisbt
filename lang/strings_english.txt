@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.283 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
+	# $Revision: 1.284 $
+	# $Author: vboctor $
+	# $Date: 2006-11-18 06:33:22 $
 	#
-	# $Id: strings_english.txt,v 1.283 2006-11-08 13:32:44 achumakov Exp $
+	# $Id: strings_english.txt,v 1.284 2006-11-18 06:33:22 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -1210,6 +1210,7 @@ $s_changelog = 'Change Log';
 
 # Roadmap
 $s_roadmap = 'Roadmap';
+$s_resolved_progress = '%d of %d issue(s) resolved.  Progress (%d%%).';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.101 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: bug_api.php,v 1.102 2006-11-18 06:33:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -283,6 +283,13 @@
 		}
 
 		return true;
+	}
+
+	# --------------------
+	# Check if the bug is resolved
+	function bug_is_resolved( $p_bug_id ) {
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+		return ( $t_status >= config_get( 'bug_resolved_status_threshold' ) );
 	}
 
 	# --------------------
