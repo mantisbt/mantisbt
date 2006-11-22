@@ -8,11 +8,11 @@
 	# Romanian: Claudiu Cristea <claudiu@cristea.info>
 	#
 	# -------------------------------------------------
-	# $Revision: 1.95 $
+	# $Revision: 1.96 $
 	# $Author: achumakov $
-	# $Date: 2006-11-22 23:00:20 $
+	# $Date: 2006-11-22 23:26:04 $
 	#
-	# $Id: strings_romanian.txt,v 1.95 2006-11-22 23:00:20 achumakov Exp $
+	# $Id: strings_romanian.txt,v 1.96 2006-11-22 23:26:04 achumakov Exp $
 	###########################################################################
 ?>
 <?php
@@ -746,7 +746,7 @@ $s_delete_config_button = 'Şterge configurări';
 # adm_config_report.php
 $s_configuration_report = 'Raport configurare';
 $s_database_configuration = 'Configurare bază de date';
-$s_configuration_option = 'Op'iune configurare';
+$s_configuration_option = 'Opţiune configurare';
 $s_configuration_option_type = 'Tip';
 $s_configuration_option_value = 'Valoare';
 $s_all_users = 'Toţi utilizatorii';
