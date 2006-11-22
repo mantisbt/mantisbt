@@ -37,7 +37,6 @@ strings_norwegian_8859-15.txt
 strings_polish_8859-2.txt
 strings_portuguese_brazil_8859-1.txt
 strings_portuguese_standard_8859-1.txt
-strings_romanian_8859-2.txt
 strings_russian_1251.txt
 strings_russian_koi8.txt
 strings_serbian_8859-2.txt
