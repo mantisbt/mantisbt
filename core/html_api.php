@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.200 2006-12-08 06:10:55 vboctor Exp $
+	# $Id: html_api.php,v 1.201 2006-12-08 06:28:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -295,7 +295,7 @@
 			}
 
 			echo '<div align="', $t_align, '">';
-			echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img border="0" width="238" height="78" alt="Mantis Bugtracker" src="images/mantis_logo.gif" /></a>';
+			echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img border="0" width="242" height="102" alt="Mantis Bugtracker" src="images/mantis_logo.gif" /></a>';
 			echo '</div>';
 		}
 	}
