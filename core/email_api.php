@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.125 2006-11-11 07:38:00 vboctor Exp $
+	# $Id: email_api.php,v 1.126 2006-12-08 06:04:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -671,7 +671,7 @@
 			# if unable to place the email in the email server queue, then the connection to the server is down,
 			# and hence no point to continue trying with the rest of the emails.
 			if ( !email_send( $t_email_data ) ) {
-				return;
+				continue;
 			}
 		}
 	}
