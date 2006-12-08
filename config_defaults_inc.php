@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.320 2006-11-08 14:24:22 achumakov Exp $
+	# $Id: config_defaults_inc.php,v 1.321 2006-12-08 06:37:40 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -23,7 +23,7 @@
 	# In general a value of OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# For more details see http://manual.mantisbugtracker.com/
+	# For more details see http://manual.mantisbt.org/
 
 	################################
 	# Mantis Database Settings
@@ -103,7 +103,7 @@
 	$g_core_path			= $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
 	# Used to link to manual for User Documentation.
-	$g_manual_url = 'http://manual.mantisbugtracker.com/';
+	$g_manual_url = 'http://manual.mantisbt.org/';
 
 	#############################
 	# Web Server
@@ -320,7 +320,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.1.0a2-CVS';
+	$g_mantis_version		= '1.1.0a2';
 	$g_show_version			= ON;
 
 	################################

@@ -1,8 +1,42 @@
 Mantis ChangeLog
 
-2006.xx.xx  -  1.1.0a2
+2006.12.07  -  1.1.0a2
 
-- Added Italian UTF8 localization (thanks to lele)
+In this release, localization files has been changed to all use the UTF-8 encoding.  This allows the use of several languages within the same Mantis instance.  The upgrade path to non-English installations is not yet implemented, hence, this alpha release SHOULD ONLY BE USED FOR ENGLISH installations.  Among the major updates is the roadmap feature.  There has been a database schema changes since 1.1.0a1 release, hence, the install script will need to be executed.
+
+- 0003375: [security] Bughistory bypasses security on custom fields (thraxisp)
+- 0005163: [security] Default value for $g_bug_reminder_threshold should be higher than "reporter" (vboctor)
+- 0007364: [security] Custom field visible in history independent from user role (thraxisp)
+- 0003160: [bugtracker] Please use ISO dates in this installation (achumakov)
+- 0006529: [bugtracker] default.css doesn't validate (vboctor)
+- 0006721: [bugtracker] Can't set an sticky issue to unsticky (vboctor)
+- 0007345: [bugtracker] Bug history shows records of private notes. (thraxisp)
+- 0007429: [bugtracker] display wiki link when $g_wiki_enable = OFF in config_*.php (vboctor)
+- 0007436: [bugtracker] Detect missing attachments in case of DISK file upload method (vboctor)
+- 0007437: [bugtracker] Add recently visited issues to bug_change_status_page.php (vboctor)
+- 0007462: [bugtracker] bugnote_delete.php redirection fails again (vboctor)
+- 0005050: [custom fields] Custom Fields display in bug history (thraxisp)
+- 0006724: [custom fields] Issue history ignores custom field read/write access (thraxisp)
+- 0006726: [custom fields] Access level read in Issue History not used (thraxisp)
+- 0005218: [customization] Bad default date format (achumakov)
+- 0007638: [email] When a queued email causes an error, it can hold up others mails (vboctor)
+- 0004988: [feature] Private bug notes/relationships in "issue history" (thraxisp)
+- 0005716: [localization] [de] New german lang strings (achumakov)
+- 0006410: [localization] [CJK] Email address detecting error when text in non-latin language. (achumakov)
+- 0006566: [localization] [patch] Update for strings_dutch.txt (siebrand)
+- 0007167: [localization] [all lang] feeds in utf-8 are invalid xml (achumakov)
+- 0007375: [localization] Italian UTF8 localization file (vboctor)
+- 0007396: [localization] [hu] SYSTEM WARNING: charset `iso-8859-2' not supported, assuming iso-8859-1 (achumakov)
+- 0007448: [localization] [all lang] Unlocalizable text (achumakov)
+- 0007449: [localization] Hard-coded capitalization in stats page breaks localization (vboctor)
+- 0007490: [localization] update strings_catalan.txt (achumakov)
+- 0007502: [localization] [all lang] Dates should use ISO format by default (achumakov)
+- 0007526: [localization] japanese_utf8 is more suitable than japanese_sjis ($g_language_auto_map) (vboctor)
+- 0007317: [other] Issue History (thraxisp)
+- 0007641: [other] New Mantis Logo
+- 0005766: [relationships] Graphviz Error on Windows (grangeway)
+- 0004711: [roadmap] Create roadmap from feature requests in versions (vboctor)
+- 0006494: [webpage] charset iso-8859-2 not supported (achumakov)
 
 2006.10.28 - 1.0.6
 
