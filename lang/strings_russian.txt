@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.103 $
+	# $Revision: 1.104 $
 	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:46 $
+	# $Date: 2006-12-10 11:50:58 $
 	#
-	# $Id: strings_russian.txt,v 1.103 2006-11-08 13:32:46 achumakov Exp $
+	# $Id: strings_russian.txt,v 1.104 2006-12-10 11:50:58 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -1243,6 +1243,7 @@ $s_changelog = 'Журнал изменений';
 
 # Roadmap
 $s_roadmap = 'План развития';
+$s_resolved_progress = 'Решено %d из %d вопросов. Продвижение (%d%%).';
 
 # Http auth
 $s_http_auth_realm = "Вход в Mantis";
