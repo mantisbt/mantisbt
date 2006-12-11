@@ -16,11 +16,11 @@
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.148 $
-	# $Author: achumakov $
-	# $Date: 2006-12-10 11:50:58 $
+	# $Revision: 1.149 $
+	# $Author: ryandesign $
+	# $Date: 2006-12-11 08:51:23 $
 	#
-	# $Id: strings_german.txt,v 1.148 2006-12-10 11:50:58 achumakov Exp $
+	# $Id: strings_german.txt,v 1.149 2006-12-11 08:51:23 ryandesign Exp $
 	###########################################################################
 
 ?>
@@ -245,7 +245,7 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Eine Version mit diesem Namen existier
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Der Benutzername ist ungültig. Erlaubt sind nur Buchstaben, Ziffern, Leerzeichen, Binde- und Unterstriche.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Benutzer hat nicht die erforderliche Zugriffsberechtigung';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Der eingegebene "Wirkliche Name" ist der Benutzername eines anderen Benutzers. Bitte geben Sie einen anderen ein.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Der eingegebene "Vollständige Name" ist der Benutzername eines anderen Benutzers. Bitte geben Sie einen anderen ein.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsor-Unterstützung nicht aktiviert.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %d nicht gefunden.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorschaft (%s) liegt unter dem Mindestbetrag (%s).';
@@ -376,7 +376,7 @@ $s_manage_profiles_link = 'Profil-Verwaltung';
 $s_change_preferences_link = 'Einstellungen ändern';
 $s_edit_account_title = 'Konto bearbeiten';
 $s_username = 'Benutzername';
-$s_realname = 'Wirklicher Name';
+$s_realname = 'Vollständiger Name';
 $s_email = 'E-Mail';
 $s_password = 'Passwort';
 $s_no_password_change = 'Das Passwort wird durch ein anderes System kontrolliert und kann daher hier nicht bearbeitet werden.';
@@ -468,8 +468,8 @@ $s_payment_updated = 'Bazahlinformation aktualisiert.';
 # account_update.php
 $s_account_updated_msg = 'Ihr Konto wurde erfolgreich aktualisiert...';
 $s_email_updated = 'E-Mail Adresse erfolgreich aktualisiert.';
-$s_realname_duplicated = '"Wirklicher Name" wird von einem anderen Benutzer verwendet';
-$s_realname_updated = '"Wirklicher Name" erfolgreich aktualisiert.';
+$s_realname_duplicated = '"Vollständiger Name" wird von einem anderen Benutzer verwendet';
+$s_realname_updated = '"Vollständiger Name" erfolgreich aktualisiert.';
 $s_password_updated = 'Passwort erfolgreich aktualisiert.';
 
 # adm_permission_report.php
