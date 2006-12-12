@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.26 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.27 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -29,7 +29,7 @@
 <?php } ?>
 
 <div id="bugnote_add_open">
-<form method="post" action="bugnote_add.php">
+<form name=bugnoteadd method="post" action="bugnote_add.php">
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 <table class="width100" cellspacing="1">
 <tr>
@@ -69,6 +69,25 @@
 	</td>
 </tr>
 <?php } ?>
+
+<?php if ( config_get('time_tracking_enabled') ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'time_tracking' ) ?>
+	</td>
+	<td>
+		<?php if ( config_get('time_tracking_stopwatch') && ON == config_get( 'use_javascript' )) { ?>
+		<script type="text/javascript" language="JavaScript" src="javascript/time_tracking_stopwatch.js"></script>
+		<input type="text" name="time_tracking">
+		<input type="button" name="time_tracking_ssbutton" value="Start" onClick="time_tracking_swstartstop()">
+		<input type="button" name="time_tracking_reset" value="R" onClick="time_tracking_swreset()">
+		<?php } else { ?>
+		<input type="text" name="time_tracking" size="5" value="0:00" />
+		<?php } ?>
+	</td>
+</tr>
+<?php } ?>
+
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.20 2006-03-16 19:20:09 thraxisp Exp $
+	# $Id: bug_reminder.php,v 1.21 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,7 +64,7 @@
 			$f_to = $t_to;
 		}
 		$t_attr = '|' . implode( '|', $f_to ) . '|';
-		bugnote_add( $f_bug_id, $f_body, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr );
+		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr );
 	}
 
 	html_page_top1();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.321 2006-12-08 06:37:40 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.322 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 
@@ -1769,4 +1769,22 @@
 	
 	# The maximum number of issues to keep in the recently visited list.
 	$g_recently_visited_count = 5;
+
+	#####################
+	# Time tracking
+	#####################
+
+	# Turn on Time Tracking accounting
+	$g_time_tracking_enabled = OFF;
+
+	# When a single value is entered into the time tracking field
+	# is it treated as hours or minutes
+	$g_time_tracking_hours = ON;
+
+	# A billing sums
+	$g_time_tracking_with_billing = OFF;
+
+	# Stop watch to build time tracking field
+	$g_time_tracking_stopwatch = OFF;
+
 ?>

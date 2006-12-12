@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.92 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.93 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -406,6 +406,18 @@
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 		}
 ?>
+	</td>
+</tr>
+<?php } ?>
+
+<!-- Bugnote Time Tracking (if permitted) -->
+<?php if ( config_get('time_tracking_enabled') ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'time_tracking' ) ?>
+	</td>
+	<td colspan="5">
+		<input type="text" name="time_tracking" size="5" value="0:00" />
 	</td>
 </tr>
 <?php } ?>

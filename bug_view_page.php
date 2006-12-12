@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.81 2006-09-15 05:19:45 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.82 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -445,6 +445,10 @@
 	<br />
 <?php } ?>
 <?php
+	# Time Tracking stats
+	if ( config_get('time_tracking_enabled') ) {
+		include( $t_mantis_dir . 'bugnote_stats_inc.php' );
+	}
 	# History
 	if ( $f_history ) {
 		include( $t_mantis_dir . 'history_inc.php' );

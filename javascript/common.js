@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.7 2005-05-10 17:56:40 thraxisp Exp $
+ * $Id: common.js,v 1.8 2006-12-12 18:26:29 davidnewcomb Exp $
  * --------------------------------------------------------
  */
 
@@ -85,6 +85,7 @@ function SetCookie( p_cookie, p_value ) {
 var g_div_history		= 0x0001;
 var g_div_bugnotes		= 0x0002;
 var g_div_bugnote_add	= 0x0004;
+var g_div_bugnotestats	= 0x0008;
 var g_div_upload_form	= 0x0010;
 var g_div_monitoring	= 0x0020;
 var g_div_sponsorship	= 0x0040;

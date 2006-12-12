@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.90 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: bug_update.php,v 1.91 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,6 +73,7 @@
 
 	$f_private						= gpc_get_bool( 'private' );
 	$f_bugnote_text					= gpc_get_string( 'bugnote_text', '' );
+	$f_time_tracking			= gpc_get_string( 'time_tracking', '0:00' );
 	$f_close_now					= gpc_get_string( 'close_now', false );
 
 	# Handle auto-assigning
@@ -137,7 +138,8 @@
 			case $t_resolved:
 				# bug_resolve updates the status, fixed_in_version, resolution, handler_id and bugnote and sends message
 				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
-						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id, $f_private );
+						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id,
+						$f_private, $f_time_tracking );
 				$t_notify = false;
 				$t_bug_note_set = true;
 
@@ -153,7 +155,7 @@
 
 			case CLOSED:
 				# bug_close updates the status and bugnote and sends message
-				bug_close( $f_bug_id, $f_bugnote_text, $f_private );
+				bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
 				$t_notify = false;
 				$t_bug_note_set = true;
 				break;
@@ -162,7 +164,7 @@
 				if ( $t_old_bug_status >= $t_resolved ) {
 					bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id ); # fix: update handler_id before calling bug_reopen
 					# bug_reopen updates the status and bugnote and sends message
-					bug_reopen( $f_bug_id, $f_bugnote_text, $f_private );
+					bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 					$t_notify = false;
 					$t_bug_note_set = true;
 
@@ -177,7 +179,7 @@
 
 	# Add a bugnote if there is one
 	if ( ( !is_blank( $f_bugnote_text ) ) && ( false == $t_bug_note_set ) ) {
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 	}
 
 	# Update the bug entry, notify if we haven't done so already

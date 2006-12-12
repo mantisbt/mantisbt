@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.91 2006-11-11 07:37:59 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.92 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -533,6 +533,19 @@
 ?>
 	</td>
 </tr>
+<?php } ?>
+
+<!-- Bugnote Time Tracking (if permitted) -->
+<?php if ( config_get('time_tracking_enabled') ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'time_tracking' ) ?>
+	</td>
+	<td colspan="5">
+		<input type="text" name="time_tracking" size="5" value="0:00" />
+	</td>
+</tr>
+<?php } ?>
 <?php } ?>
 
 

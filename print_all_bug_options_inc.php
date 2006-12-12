@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.24 2004-08-10 10:46:12 jlatour Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.25 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,8 @@ function get_field_names()
 	                       	'attached_files',
 	                       	'bugnote_title',
 	                       	'bugnote_date',
-	                       	'bugnote_description' );
+	                       	'bugnote_description',
+				'time_tracking' );
 }
 
 

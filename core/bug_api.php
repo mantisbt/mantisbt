@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.102 2006-11-18 06:33:22 vboctor Exp $
+	# $Id: bug_api.php,v 1.103 2006-12-12 18:26:29 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1153,7 +1153,7 @@
 
 			# Add bugnote if supplied
 			if ( !is_blank( $p_bugnote_text ) ) {
-				bugnote_add( $p_bug_id, $p_bugnote_text, $p_bugnote_private );
+				bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private );
 			}
 
 			# updated the last_updated date
@@ -1170,14 +1170,14 @@
 
 	# --------------------
 	# close the given bug
-	function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false ) {
+	function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		bug_set_field( $p_bug_id, 'status', CLOSED );
 
 		# Add bugnote if supplied
 		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_bugnote_private );
+			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
 		}
 
 		email_close( $p_bug_id );
@@ -1193,7 +1193,7 @@
 
 	# --------------------
 	# resolve the given bug
-	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false ) {
+	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		if( !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 ) ) {
@@ -1253,7 +1253,7 @@
 
 		# Add bugnote if supplied
 		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_bugnote_private );
+			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
 		}
 
 		email_resolved( $p_bug_id );
@@ -1269,7 +1269,7 @@
 
 	# --------------------
 	# reopen the given bug
-	function bug_reopen( $p_bug_id, $p_bugnote_text='', $p_bugnote_private = false ) {
+	function bug_reopen( $p_bug_id, $p_bugnote_text='', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
@@ -1277,7 +1277,7 @@
 
 		# Add bugnote if supplied
 		if ( !is_blank( $p_bugnote_text ) ) {
-			bugnote_add( $p_bug_id, $p_bugnote_text, $p_bugnote_private );
+			bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private );
 		}
 
 		email_reopen( $p_bug_id );

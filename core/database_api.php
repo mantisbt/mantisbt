@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.49 2006-04-25 12:01:06 vboctor Exp $
+	# $Id: database_api.php,v 1.50 2006-12-12 18:26:29 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -317,6 +317,18 @@
 				error_parameters( 'db_type', $t_db_type );
 				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 		}
+	}
+
+	# --------------------
+	# prepare a string before DB insertion
+	# @@@ should default be return addslashes( $p_string ); or generate an error
+	function db_convert_time( $p_hhmmss ) {
+		// MySQL
+		if ( "" == $p_hhmmss || "00:00:00" == $p_hhmmss ) {
+			return "";
+		}
+		$t_a = explode(":", $p_hhmmss);
+		return $t_a[0] . ":". $t_a[1];
 	}
 
 	# --------------------

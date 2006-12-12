@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.46 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bugnote_add.php,v 1.47 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_private		= gpc_get_bool( 'private' );
+	$f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
 	if ( bug_is_readonly( $f_bug_id ) ) {
@@ -43,7 +44,7 @@
 
 	# check for blank bugnote
 	if ( !is_blank( $f_bugnote_text ) ) {
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 		email_bugnote_add( $f_bug_id );
 	}
 

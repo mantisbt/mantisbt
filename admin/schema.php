@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.12 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: schema.php,v 1.13 2006-12-12 18:26:29 davidnewcomb Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of

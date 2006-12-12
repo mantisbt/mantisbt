@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.284 $
-	# $Author: vboctor $
-	# $Date: 2006-11-18 06:33:22 $
+	# $Revision: 1.285 $
+	# $Author: davidnewcomb $
+	# $Date: 2006-12-12 18:26:29 $
 	#
-	# $Id: strings_english.txt,v 1.284 2006-11-18 06:33:22 vboctor Exp $
+	# $Id: strings_english.txt,v 1.285 2006-12-12 18:26:29 davidnewcomb Exp $
 	###########################################################################
 
 ?>
@@ -1318,4 +1318,13 @@ $s_on_or_after = 'On Or After' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Billing';
+$s_time_tracking = 'Time tracking';
+$s_time_tracking_bugnote_stats = 'Bugnote Statistics';
+$s_time_tracking_get_bugnote_stats_button = 'Get bugnote statistics';
+$s_time_tracking_cost_per_hour = 'Cost / Hour (&pound;)';
+$s_time_tracking_cost = 'Cost';
+
 ?>

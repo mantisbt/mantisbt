@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.49 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bugnote_edit_page.php,v 1.50 2006-12-12 18:26:28 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -57,6 +57,8 @@
 	}
 
 	$t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
+	$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
+	$t_time_tracking = db_convert_time( $t_time_tracking );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
@@ -82,6 +84,14 @@
 		<textarea cols="80" rows="10" name="bugnote_text" wrap="virtual"><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
+<?php if ( config_get('time_tracking_enabled') ) { ?>
+<tr class="row-2">
+	<td class="center" colspan="2">
+		<b><?php echo lang_get( 'time_tracking') ?> (HH:MM)</b><br />
+		<input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
+	</td>
+</tr>
+<?php } ?>
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.29 2006-11-18 06:33:22 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.30 2006-12-12 18:26:29 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -100,7 +100,7 @@
 	function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version, $p_fixed ) {
 		if ( bug_exists( $p_issue_id ) ) {
 			history_log_event_special( $p_issue_id, CHECKIN, $p_file, $p_new_version );
-			bugnote_add( $p_issue_id, $p_comment, VS_PRIVATE == config_get( 'source_control_notes_view_status' ) );
+			bugnote_add( $p_issue_id, $p_comment, 0, VS_PRIVATE == config_get( 'source_control_notes_view_status' ) );
 
 			$t_status = config_get( 'source_control_set_status_to' );
 			if ( ( OFF != $t_status ) && $p_fixed ) {

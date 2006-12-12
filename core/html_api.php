@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.201 2006-12-08 06:28:42 vboctor Exp $
+	# $Id: html_api.php,v 1.202 2006-12-12 18:26:29 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -569,6 +569,8 @@
 				# Add custom options
 				$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
 				$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
+				if ( config_get('time_tracking_enabled') && config_get('time_tracking_with_billing') )
+					$t_menu_options[] = '<a href="billing_page.php">' . lang_get( 'time_tracking_billing_link' ) . '</a>';
 
 				# Logout (no if anonymously logged in)
 				if ( !current_user_is_anonymous() ) {
