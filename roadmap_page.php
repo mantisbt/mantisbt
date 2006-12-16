@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.3 2006-11-18 06:33:22 vboctor Exp $
+	# $Id: roadmap_page.php,v 1.4 2006-12-16 19:52:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -85,16 +85,17 @@
 		$t_version_rows = version_get_all_rows( $t_project_id );
 
 		$t_project_header_printed = false;
-
-		$i = 0;
 		
-		$t_issues_planned = 0;
-		$t_issues_resolved = 0;
+		$i = 0;
 
 		foreach( $t_version_rows as $t_version_row ) {
 			if ( $t_version_row['released'] == 1 ) {
 				continue;
 			}
+			
+			$t_issues_planned = 0;
+			$t_issues_resolved = 0;
+
 
 			$t_version = $t_version_row['version'];
 			$c_version = db_prepare_string( $t_version );
@@ -167,14 +168,14 @@
 			}
 
 			$i++;
+
+			if ( $t_issues_planned > 0 ) {
+				echo '<br />';
+				echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_issues_resolved * 100 / $t_issues_planned );
+				echo '<br /></tt>';
+			}
 		}
 		
-		if ( $t_issues_planned > 0 ) {
-			echo '<br />';
-			echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_issues_resolved * 100 / $t_issues_planned );
-			echo '<br /></tt>';
-		}
-
 		$t_project_index++;
 	}
 
