@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_set.php,v 1.3 2006-09-12 04:38:49 vboctor Exp $
+	# $Id: adm_config_set.php,v 1.4 2006-12-16 19:54:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -20,6 +20,11 @@
 	$f_config_option = gpc_get_string( 'config_option' );
 	$f_type = gpc_get_string( 'type' );
 	$f_value = gpc_get_string( 'value' );
+	
+	if ( is_blank( $f_config_option ) ) {
+		error_parameters( 'config_option' );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
 
 	if ( $f_project_id == ALL_PROJECTS ) {
 		access_ensure_global_level( config_get('set_configuration_threshold' ) );
