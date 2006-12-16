@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.92 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bug_update_advanced_page.php,v 1.93 2006-12-16 19:48:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -546,8 +546,6 @@
 	</td>
 </tr>
 <?php } ?>
-<?php } ?>
-
 
 <!-- Submit Button -->
 <tr>
