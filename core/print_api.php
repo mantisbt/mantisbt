@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.158 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: print_api.php,v 1.159 2006-12-16 20:12:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -863,6 +863,15 @@
 
 		if ( ALL_PROJECTS != $t_project_id ) {
 			$t_user_id = auth_get_current_user_id();
+
+			if ( access_has_project_level( config_get( 'update_bug_threshold' ), $t_project_id ) ) {
+				$commands['UP_FIXED_IN_VERSION'] = lang_get( 'actiongroup_menu_update_fixed_in_version' );
+			}
+
+			if ( access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_project_id ) ) {
+				$commands['UP_TARGET_VERSION'] = lang_get( 'actiongroup_menu_update_target_version' );
+			}
+
 			$t_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 
 			foreach( $t_custom_field_ids as $t_custom_field_id ) {

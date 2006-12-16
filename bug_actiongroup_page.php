@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.53 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.54 2006-12-16 20:12:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -145,6 +145,20 @@
 			$t_form				= 'view_status';
 			$t_request			= 'view_status';
 			break;
+		
+		case 'UP_FIXED_IN_VERSION':
+			$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
+			$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
+			$t_form					= 'fixed_in_version';
+			$t_request				= 'fixed_in_version';
+			break;
+
+		case 'UP_TARGET_VERSION':
+			$t_question_title		= lang_get( 'target_version_bugs_conf_msg' );
+			$t_button_title			= lang_get( 'target_version_group_bugs_button' );
+			$t_form					= 'target_version';
+			$t_request				= 'target_version';
+			break;
 
 		case 'CUSTOM' :
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
@@ -214,6 +228,10 @@ if ( !$t_finished ) {
 					break;
 				case 'UP_CATEGORY':
 					print_category_option_list();
+					break;
+				case 'UP_TARGET_VERSION':
+				case 'UP_FIXED_IN_VERSION':
+					print_version_option_list( '', $t_project_id, VERSION_ALL );
 					break;
 			}
 

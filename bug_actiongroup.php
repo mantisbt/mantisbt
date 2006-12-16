@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.48 2006-09-15 05:39:30 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.49 2006-12-16 20:12:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -174,6 +174,32 @@
 				}
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			}
+			break;
+		
+		case 'UP_FIXED_IN_VERSION':
+			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
+			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+			
+			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
+				if ( version_exists( $t_project_id, $f_version ) ) {
+					bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_failed' );
+				}
+			}
+			break;
+
+		case 'UP_TARGET_VERSION':
+			$f_fixed_in_version = gpc_get_string( 'target_version' );
+			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+
+			if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_bug_id ) ) {
+				if ( version_exists( $t_project_id, $f_version ) ) {
+					bug_set_field( $t_bug_id, 'target_version', $f_fixed_in_version );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_failed' );
+				}
 			}
 			break;
 
