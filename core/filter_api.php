@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.145 2006-10-31 08:43:58 vboctor Exp $
+	# $Id: filter_api.php,v 1.146 2006-12-17 10:55:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -827,10 +827,10 @@
 
 		# Guard against silly values of $f_per_page.
 		if ( 0 == $p_per_page ) {
-			$p_per_page = 1;
+			$p_per_page = $bug_count;	// 0 - means show all
 		}
-		$p_per_page = (int)abs( $p_per_page );
 
+		$p_per_page = (int)abs( $p_per_page );
 
 		# Use $bug_count and $p_per_page to determine how many pages
 		# to split this list up into.
@@ -1758,7 +1758,7 @@
 		</tr>
 		<tr class="row-1">
 			<td class="small-caption" valign="top" id="per_page_filter_target">
-				<?php PRINT $t_filter['per_page']; ?>
+				<?php echo ( $t_filter['per_page'] == 0 ) ? lang_get( 'all' ) : $t_filter['per_page']; ?>
 				<input type="hidden" name="per_page" value="<?php echo $t_filter['per_page'];?>" />
 			</td>
 			<td class="small-caption" valign="top" id="view_state_filter_target">

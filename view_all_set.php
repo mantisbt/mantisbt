@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.62 2006-10-31 08:43:57 vboctor Exp $
+	# $Id: view_all_set.php,v 1.63 2006-12-17 10:55:39 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -271,7 +271,7 @@
 	$t_hide_status_default = config_get( 'hide_status_default' );
 
 	# show bugs per page
-	if ( $f_per_page < 1 ) {
+	if ( $f_per_page < 0 ) {
 		$f_per_page = config_get( 'default_limit_view' );
 	}
 
