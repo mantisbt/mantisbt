@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.58 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: constant_inc.php,v 1.59 2006-12-19 09:15:54 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -359,6 +359,7 @@
 	#  logging levels, can be OR'd together
 	define( 'LOG_EMAIL',                    1 );  # all emails sent
 	define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
+	define( 'LOG_FILTERING',				3 );  # logging for filtering.
 
 	# COLUMNS_TARGET_*
 	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );

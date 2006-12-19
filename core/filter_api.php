@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.146 2006-12-17 10:55:39 vboctor Exp $
+	# $Id: filter_api.php,v 1.147 2006-12-19 09:15:54 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -75,6 +75,8 @@
 	# $p_show_sticky
 	#	- get sticky issues only.
 	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+		log_event( LOG_FILTERING, 'FILTERING: START NEW FILTER QUERY' );
+
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
@@ -128,77 +130,141 @@
 		$t_join_clauses = array();
 		$t_from_clauses = array();
 
-		if ( 'simple' == $t_view_type || in_array( META_FILTER_CURRENT, $t_filter['project_id'] ) ) {
-			if ( ALL_PROJECTS == $t_project_id ) {
-				if ( !user_is_administrator( $t_user_id ) ) {
-					$t_topprojects = $t_projects = user_get_accessible_projects( $t_user_id );
-					foreach ( $t_topprojects as $t_project ) {
-						$t_projects = array_merge( $t_projects, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
-					}
-	
-					$t_projects = array_unique( $t_projects );
-	
-					if ( 0 == count( $t_projects ) ) {
-						return array();  # no accessible projects, return an empty array
-					} else if ( 1 == count( $t_projects ) ) {
-						$t_project = $t_projects[0];
-						array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
-					} else {
-						array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
-					}
-				}
+		// normalize the project filtering into an array $t_project_ids
+		if ( 'simple' == $t_view_type ) {
+			log_event( LOG_FILTERING, 'FILTERING: Simple Filter' );
+			$t_project_ids = array( $t_project_id );
+			$t_include_sub_projects = true;
+		} else {
+			log_event( LOG_FILTERING, 'FILTERING: Advanced Filter' );
+			if ( !is_array( $t_filter['project_id'] ) ) {
+				$t_project_ids = array( db_prepare_int( $t_filter['project_id'] ) );
 			} else {
-				access_ensure_project_level( VIEWER, $t_project_id, $t_user_id );
-
-				$t_projects = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
-				$t_projects[] = $t_project_id;
-	
-				$t_projects = array_unique( $t_projects );
-	
-				if ( 1 == count( $t_projects ) ) {
-					$t_project = $t_projects[0];
-					array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
-				} else {
-					array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
-				}
-			}
-		}
-		if ( 'advanced' == $t_view_type ) {
-			$t_projects = $t_filter['project_id'];
-			if ( !is_array($t_projects) ) {
-				$t_projects = Array( db_prepare_int( $t_filter['project_id'] ) );
-			} else {
-				$t_projects = array_map( 'db_prepare_int', $t_projects );
+				$t_project_ids = array_map( 'db_prepare_int', $t_filter['project_id'] );
 			}
 
-			if ( 1 == count( $t_projects ) ) {
-				$t_project = $t_projects[0];
-				array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
-			} else {
-				array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
-			}
+			$t_include_sub_projects = ( ( count( $t_project_ids ) == 1 ) && ( $t_project_ids[0] == META_FILTER_CURRENT ) );
 		}
 
-		# private bug selection
-		if ( !access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-			$t_public = VS_PUBLIC;
-			$t_private = VS_PRIVATE;
-			switch ( $t_filter['view_state'] ) {
-				case META_FILTER_ANY:
-					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
-					break;
-				case VS_PUBLIC:
-					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public')" );
-					break;
-				case VS_PRIVATE:
-					array_push( $t_where_clauses, "($t_bug_table.view_state='$t_private' AND $t_bug_table.reporter_id='$t_user_id')" );
-					break;
+		log_event( LOG_FILTERING, 'FILTERING: project_ids = ' . implode( ',', $t_project_ids ) );
+		log_event( LOG_FILTERING, 'FILTERING: include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
+
+		// if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
+		// replace META_FILTER_CURRENT with the actualy current project id.
+		$t_all_projects_found = false;
+		$t_new_project_ids = array();
+		foreach ( $t_project_ids as $t_pid ) {
+			if ( $t_pid == META_FILTER_CURRENT ) { 
+				$t_pid = $t_project_id;
+			}
+
+			if ( $t_pid == ALL_PROJECTS ) {
+				$t_all_projects_found = true;
+				log_event( LOG_FILTERING, 'FILTERING: all projects selected' );
+				break;
+			}
+
+			// filter out inaccessible projects.
+			if ( !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
+				continue;
+			}
+
+			$t_new_project_ids[] = $t_pid;
+		}
+
+		$t_projects_query_required = true;
+		if ( $t_all_projects_found ) {
+			if ( user_is_administrator( $t_user_id ) ) {
+				log_event( LOG_FILTERING, 'FILTERING: all projects + administrator, hence no project filter.' );
+				$t_projects_query_required = false;
+			} else {
+				$t_project_ids = user_get_accessible_projects( $t_user_id );
 			}
 		} else {
-			$t_view_state = db_prepare_int( $t_filter['view_state'] );
-			if ( ( $t_filter['view_state'] !== META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
-				array_push( $t_where_clauses, "($t_bug_table.view_state='$t_view_state')" );
+			$t_project_ids = $t_new_project_ids;
+		}
+	
+		if ( $t_projects_query_required ) {
+			// expand project ids to include sub-projects
+			if ( $t_include_sub_projects ) {
+				$t_top_project_ids = $t_project_ids;
+
+				foreach ( $t_top_project_ids as $t_pid ) {
+					log_event( LOG_FILTERING, 'FILTERING: Getting sub-projects for project id ' . $t_pid );
+					$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_pid ) );
+				}
+
+				$t_project_ids = array_unique( $t_project_ids );
 			}
+
+			// if no projects are accessible, then return an empty array.
+			if ( count( $t_project_ids ) == 0 ) {
+				log_event( LOG_FILTERING, 'FILTERING: no accessible projects' );
+				return array();
+			}
+
+			log_event( LOG_FILTERING, 'FILTERING: project_ids after including sub-projects = ' . implode( ',', $t_project_ids ) );
+
+			// this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
+			// access of the current user.
+			$t_public_only_project_ids = array();
+
+			// this array is populated with project ids that the current user has full access to.
+			$t_private_and_public_project_ids = array();
+
+			$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold' );
+			foreach ( $t_project_ids as $t_pid ) {
+				if ( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
+					$t_private_and_public_project_ids[] = $t_pid;
+				} else {
+					$t_public_only_project_ids[] = $t_pid;
+				}
+			}
+
+			log_event( LOG_FILTERING, 'FILTERING: project_ids (with public/private access) = ' . implode( ',', $t_private_and_public_project_ids ) );
+			log_event( LOG_FILTERING, 'FILTERING: project_ids (with public access) = ' . implode( ',', $t_public_only_project_ids ) );
+
+			$t_count_private_and_public_project_ids = count( $t_private_and_public_project_ids );
+			if ( $t_count_private_and_public_project_ids == 1 ) {
+				$t_private_and_public_query = "( $t_bug_table.project_id = " . $t_private_and_public_project_ids[0] . " )";
+			} else if ( $t_count_private_and_public_project_ids > 1 ) {
+				$t_private_and_public_query = "( $t_bug_table.project_id in (". implode( ', ', $t_private_and_public_project_ids ) . ") )";
+			} else {
+				$t_private_and_public_query = null;
+			}
+
+			$t_count_public_only_project_ids = count( $t_public_only_project_ids );
+			$t_public_view_state_check = "( ( $t_bug_table.view_state = " . VS_PUBLIC . " ) OR ( $t_bug_table.reporter_id = $t_user_id ) )";
+			if ( $t_count_public_only_project_ids == 1 ) {
+				$t_public_only_query = "( ( $t_bug_table.project_id = " . $t_public_only_project_ids[0] . " ) AND $t_public_view_state_check )";
+			} else if ( $t_count_public_only_project_ids > 1 ) {
+				$t_public_only_query = "( ( $t_bug_table.project_id in (". implode( ', ', $t_public_only_project_ids ) . ") ) AND $t_public_view_state_check )";
+			} else {
+				$t_public_only_query = null;
+			}
+
+			// both queries can't be null, so we either have one of them or both.
+			
+			if ( $t_private_and_public_query === null ) {
+				$t_project_query = $t_public_only_query;
+			} else if ( $t_public_only_query === null ) {
+				$t_project_query = $t_private_and_public_query;
+			} else {
+				$t_project_query = "( $t_public_only_query OR $t_private_and_public_query )";
+			}
+
+			log_event( LOG_FILTERING, 'FILTERING: project query = ' . $t_project_query );
+			array_push( $t_where_clauses, $t_project_query );
+		}
+
+		# view state
+		$t_view_state = db_prepare_int( $t_filter['view_state'] );
+		if ( ( $t_filter['view_state'] !== META_FILTER_ANY ) && ( !is_blank( $t_filter['view_state'] ) ) ) {
+			$t_view_state_query = "($t_bug_table.view_state='$t_view_state')";
+			log_event( LOG_FILTERING, 'FILTERING: view_state query = ' . $t_view_state_query );
+			array_push( $t_where_clauses, $t_view_state_query );
+		} else {
+			log_event( LOG_FILTERING, 'FILTERING: no view_state query' );
 		}
 
 		# reporter
@@ -209,9 +275,11 @@
 				$t_any_found = true;
 			}
 		}
+
 		if ( count( $t_filter['reporter_id'] ) == 0 ) {
 			$t_any_found = true;
 		}
+
 		if ( !$t_any_found ) {
 			$t_clauses = array();
 
@@ -227,11 +295,17 @@
 					}
 				}
 			}
+			
 			if ( 1 < count( $t_clauses ) ) {
-				array_push( $t_where_clauses, "( $t_bug_table.reporter_id in (". implode( ', ', $t_clauses ) .") )" );
+				$t_reporter_query = "( $t_bug_table.reporter_id in (". implode( ', ', $t_clauses ) .") )";
 			} else {
-				array_push( $t_where_clauses, "( $t_bug_table.reporter_id=$t_clauses[0] )" );
+				$t_reporter_query = "( $t_bug_table.reporter_id=$t_clauses[0] )";
 			}
+
+			log_event( LOG_FILTERING, 'FILTERING: reporter query = ' . $t_reporter_query );
+			array_push( $t_where_clauses, $t_reporter_query );
+		} else {
+			log_event( LOG_FILTERING, 'FILTERING: no reporter query' );
 		}
 
 		# limit reporter
@@ -254,6 +328,7 @@
 		if ( count( $t_filter['handler_id'] ) == 0 ) {
 			$t_any_found = true;
 		}
+
 		if ( !$t_any_found ) {
 			$t_clauses = array();
 
@@ -269,11 +344,17 @@
 					}
 				}
 			}
+			
 			if ( 1 < count( $t_clauses ) ) {
-				array_push( $t_where_clauses, "( $t_bug_table.handler_id in (". implode( ', ', $t_clauses ) .") )" );
+				$t_handler_query = "( $t_bug_table.handler_id in (". implode( ', ', $t_clauses ) .") )";
 			} else {
-				array_push( $t_where_clauses, "( $t_bug_table.handler_id=$t_clauses[0] )" );
+				$t_handler_query = "( $t_bug_table.handler_id=$t_clauses[0] )";
 			}
+
+			log_event( LOG_FILTERING, 'FILTERING: handler query = ' . $t_handler_query );
+			array_push( $t_where_clauses, $t_handler_query );
+		} else {
+			log_event( LOG_FILTERING, 'FILTERING: no handler query' );
 		}
 
 		# category
@@ -434,7 +515,6 @@
 				array_push( $t_where_clauses, "( $t_bug_table.priority=$t_clauses[0] )" );
 			}
 		}
-
 
 		# product build
 		$t_any_found = false;
