@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.1 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bugnote_stats_inc.php,v 1.2 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -99,9 +99,7 @@ if ( "" != $f_get_bugnote_stats_button ) {
 </tr>
 <?php foreach ( $t_bugnote_stats as $t_item ) { ?>
 <?php
-if ( "" == $t_item['sum_time_tracking'] ) {
-	$t_item['sum_time_tracking'] = "&nbsp;";
-}
+	$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
 ?>
 
 <tr <?php echo helper_alternate_class() ?>>

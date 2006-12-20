@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.38 2006-12-12 18:26:29 davidnewcomb Exp $
+	# $Id: bugnote_api.php,v 1.39 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -90,27 +90,13 @@
 	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
 		$c_bugnote_text      	= db_prepare_string( $p_bugnote_text );
-		$c_time_tracking	= db_prepare_string( $p_time_tracking );
+		$c_time_tracking	= db_prepare_time( $p_time_tracking );
 		$c_private           	= db_prepare_bool( $p_private );
 		$c_type            	= db_prepare_int( $p_type );
 		$c_attr      	= db_prepare_string( $p_attr );
 
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
-
-		# Have they just entered a number
-		$t_1 = explode(":", $c_time_tracking);
-		if (count($t_1) == 1) {
-			if (config_get_global( 'time_tracking_hours')) {
-				# Hours
-				$t_time_tracking = $c_time_tracking . ":00:00";
-			} else {
-				# Minutes
-				$t_time_tracking = "00:" . $c_time_tracking . ":00";
-			}
-		} else {
-			$t_time_tracking = $c_time_tracking;
-		}
 
 		# insert bugnote text
 		$query = "INSERT INTO $t_bugnote_text_table
@@ -141,7 +127,7 @@
 		$query = "INSERT INTO $t_bugnote_table
 					(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 		          	 VALUES
-					('$c_bug_id', '$c_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr', '$t_time_tracking' )";
+					('$c_bug_id', '$c_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr', '$c_time_tracking' )";
 		db_query( $query );
 
 		# get bugnote id
@@ -348,7 +334,7 @@
 				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
 				$t_bugnote->note_type     = $row['note_type'];
 				$t_bugnote->note_attr     = $row['note_attr'];
-				$t_bugnote->time_tracking = $row['time_tracking'];
+				$t_bugnote->time_tracking = db_minutes_to_hhmm( $row['time_tracking'] );
 
 				$t_bugnotes[] = $t_bugnote;
 			}
@@ -366,7 +352,7 @@
 	# Update the time_tracking field of the bugnote
 	function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 		$c_bugnote_id            = db_prepare_int( $p_bugnote_id );
-		$c_bugnote_time_tracking = db_prepare_string( $p_time_tracking );
+		$c_bugnote_time_tracking = db_prepare_time( $p_time_tracking );
 		$t_bugnote_table         = config_get( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
@@ -477,8 +463,7 @@
 		}
 		$t_results = array();
 
-		$query = "SELECT username,
-				TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(time_tracking))),'%H:%i') sum_time_tracking
+		$query = "SELECT username, SUM(time_tracking) sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
 				WHERE u.id = bn.reporter_id AND
 				bn.bug_id = '$p_bugnote_id'
@@ -515,7 +500,7 @@
 		}
 		$t_results = array();
 
-		$query = "SELECT username, bn.bug_id, TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(time_tracking))),'%H:%i') sum_time_tracking
+		$query = "SELECT username, bn.bug_id, SUM(time_tracking) sum_time_tracking
 			FROM $t_user_table u, $t_bugnote_table bn $t_bug_table
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0
 			$c_project $c_from $c_to
@@ -523,8 +508,7 @@
 		$result = db_query($query);
 		$t_cost_min = $p_cost / 60;
 		while ($row = db_fetch_array($result)) {
-			$ar = explode(":", $row[sum_time_tracking]);
-			$t_total_cost = ($ar[0] * $p_cost) + ($ar[1] * $t_cost_min);
+			$t_total_cost = $t_cost_min * $row[sum_time_tracking];
 			$row['cost'] = number_format($t_total_cost, 2);
 			$t_results[] = $row;
 		}

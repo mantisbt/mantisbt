@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.50 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bugnote_edit_page.php,v 1.51 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -58,7 +58,7 @@
 
 	$t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
 	$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
-	$t_time_tracking = db_convert_time( $t_time_tracking );
+	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $t_bug_id );

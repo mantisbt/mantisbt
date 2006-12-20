@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.33 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bugnote_view_inc.php,v 1.34 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -102,9 +102,12 @@
 		$v3_note = $row['note'];
 		$v3_note = string_display_links( $v3_note );
 		$t_bugnote_id_formatted = bugnote_format_id( $v3_id );
-		$v3_time_tracking = db_convert_time( $v3_time_tracking );
-		if ( "" != $v3_time_tracking )
-			$v3_time_tracking = "[ $v3_time_tracking ]";
+
+		if ( 0 != $v3_time_tracking ) {
+			$v3_time_tracking = "[" . db_minutes_to_hhmm( $v3_time_tracking ) . "]";
+		} else {
+			$v3_time_tracking = "";
+		}
 
 		if ( VS_PRIVATE == $v3_view_state ) {
 			$t_bugnote_css		= 'bugnote-private';

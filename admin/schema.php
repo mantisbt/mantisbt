@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.13 2006-12-12 18:26:29 davidnewcomb Exp $
+	# $Id: schema.php,v 1.14 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -326,4 +326,5 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_email_table'),"
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',config_get('mantis_email_table'),'email_id'));
 $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bug_table'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
+$upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bugnote_table'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
 ?>

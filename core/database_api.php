@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.50 2006-12-12 18:26:29 davidnewcomb Exp $
+	# $Id: database_api.php,v 1.51 2006-12-20 19:49:54 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -320,15 +320,28 @@
 	}
 
 	# --------------------
-	# prepare a string before DB insertion
-	# @@@ should default be return addslashes( $p_string ); or generate an error
-	function db_convert_time( $p_hhmmss ) {
-		// MySQL
-		if ( "" == $p_hhmmss || "00:00:00" == $p_hhmmss ) {
-			return "";
+	# prepare a time string in "[h]h:mm" to an integer (minutes) before DB insertion
+	function db_prepare_time( $p_hhmm ) {
+
+		if ( "" == $p_hhmm ) {
+			return 0;
 		}
-		$t_a = explode(":", $p_hhmmss);
-		return $t_a[0] . ":". $t_a[1];
+		$t_a = explode(":", $p_hhmm);
+		$t_min = 0;
+		switch (count($t_a))
+		{
+			case 1:
+				$t_min = $t_a[0];
+			break;
+			case 2:
+				$t_sec = $t_a[0] * 60 + $t_a[1];
+			break;
+			default:
+				error_parameters( 'p_hhmm', $p_hhmm );
+				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			break;
+		}
+		return (int)$t_min;
 	}
 
 	# --------------------
@@ -377,6 +390,23 @@
 			$p_timestamp = time();
 		}
 		return $p_timestamp ;
+	}
+
+	
+	# --------------------
+	# convert seconds to a time format [h]h:mm
+	function db_minutes_to_hhmm( $p_min = 0 ) {
+		$t_h = 0;
+		$t_m = $p_min;
+		while ($t_m - 60 >= 0)
+		{
+			++$t_h;
+			$t_m = $t_m - 60;
+		}
+
+		if ($t_m < 10)
+			$t_m = "0" . $t_m;
+		return $t_h . ":" . $t_m;
 	}
 
 	# --------------------
