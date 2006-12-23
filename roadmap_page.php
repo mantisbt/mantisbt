@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.4 2006-12-16 19:52:00 vboctor Exp $
+	# $Id: roadmap_page.php,v 1.5 2006-12-23 06:23:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -24,11 +24,6 @@
 		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
 		echo $t_release_title, '<br />';
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
-
-		$t_description = $p_version_row['description'];
-		if ( ( $t_description !== false ) && !is_blank( $t_description ) ) {
-			echo string_display( "<br />$t_description<br /><br />" );
-		}
 	}
 
 	# print project header
@@ -103,22 +98,12 @@
 			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
 
 			$t_description = $t_version_row['description'];
-			if ( !is_blank( $t_description ) ) {
-				if ( $i > 0 ) {
-					echo '<br />';
-				}
-				
-				print_project_header( $t_project_name );
-				$t_project_header_printed = true;
 
-				print_version_header( $t_version_row );
-				$t_version_header_printed = true;
-			} else {
-				$t_version_header_printed = false;
-			}
 			$t_first_entry = true;
 
 			$t_result = db_query( $query );
+
+			$t_issue_ids = array();
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
@@ -147,6 +132,49 @@
 					$t_issues_resolved++;
 				}
 
+
+				$t_issue_ids[] = $t_issue_id;
+			}
+
+			$i++;
+
+			if ( $t_issues_planned > 0 ) {
+				$t_progress = (integer) ( $t_issues_resolved * 100 / $t_issues_planned );
+
+				print_project_header( $t_project_name );
+				$t_project_header_printed = true;
+
+				print_version_header( $t_version_row );
+				$t_version_header_printed = true;
+
+				// show progress bar
+				echo '<div class="progress400">';
+				echo '  <span class="bar" style="width: ' . $t_progress . '%;">' . $t_progress . '%</span>';
+				echo '</div>';
+			} else {
+				$t_project_header_printed = false;
+				$t_version_header_printed = false;
+			}
+
+			if ( !is_blank( $t_description ) ) {
+				echo string_display( "<br />$t_description<br /><br />" );
+
+				#if ( $i > 0 ) {
+				#	echo '<br />';
+				#}
+				
+				if ( !$t_project_header_printed ) {
+					print_project_header( $t_project_name );
+					$t_project_header_printed = true;
+				}
+
+				if ( !$t_version_header_printed ) {
+					print_version_header( $t_version_row );
+					$t_version_header_printed = true;
+				}
+			}
+
+			foreach ( $t_issue_ids as $t_issue_id ) {
 				# Print the header for the version with the first roadmap entry to be added.
 				if ( $t_first_entry && !$t_version_header_printed ) {
 					if ( $i > 0 ) {
@@ -158,20 +186,20 @@
 						$t_project_header_printed = true;
 					}
 
-					print_version_header( $t_version_row );
+					if ( !$t_version_header_printed ) {
+						print_version_header( $t_version_row );
+						$t_version_header_printed = true;
+					}
 
-					$t_version_header_printed = true;
 					$t_first_entry = false;
 				}
 
 				helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_id ) );
 			}
 
-			$i++;
-
 			if ( $t_issues_planned > 0 ) {
 				echo '<br />';
-				echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_issues_resolved * 100 / $t_issues_planned );
+				echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_progress );
 				echo '<br /></tt>';
 			}
 		}
