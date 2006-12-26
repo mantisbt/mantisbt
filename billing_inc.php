@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.2 2006-12-20 19:49:54 davidnewcomb Exp $
+	# $Id: billing_inc.php,v 1.3 2006-12-26 10:56:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bugnote_api.php' );
 ?>
 <?php
@@ -33,7 +33,7 @@
 	<td class="form-title" colspan="4">
 		<a href="" onClick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'time_tracking_bugnote_stats' ) ?>
+		<?php echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
 </table>
@@ -61,7 +61,7 @@
 		<a href="" onClick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
 		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
-		<?php echo lang_get( 'time_tracking_bugnote_stats' ) ?>
+		<?php echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -92,7 +92,7 @@
 <?php } ?>
 <tr>
         <td class="center" colspan="2">
-                <input type="submit" class="button" name="get_bugnote_stats_button" value="<?php echo lang_get( 'time_tracking_get_bugnote_stats_button' ) ?>" />
+                <input type="submit" class="button" name="get_bugnote_stats_button" value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
         </td>
 </tr>
 

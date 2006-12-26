@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.51 2006-12-20 19:49:54 davidnewcomb Exp $
+	# $Id: database_api.php,v 1.52 2006-12-26 10:56:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -26,10 +26,10 @@
 
 	# set adodb fetch mode
 	# most drivers don't implement this, but for mysql there is a small internal php performance gain for using it
-	if( $g_db_type == 'mysql' ) {	
-		$ADODB_FETCH_MODE = ADODB_FETCH_BOTH; 
+	if( $g_db_type == 'mysql' ) {
+		$ADODB_FETCH_MODE = ADODB_FETCH_BOTH;
 	}
-	
+
 	# --------------------
 	# Make a connection to the database
 	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
@@ -42,7 +42,7 @@
 			$g_db = ADONewConnection( $p_dsn );
 			$t_result = $g_db->IsConnected();
 		}
-		
+
 		if ( !$t_result ) {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -152,14 +152,14 @@
 
 		if ( $p_result->EOF ) {
 			return false;
-		}		
+		}
 
 		# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-		if( $g_db_type == 'mysql' ) {	
+		if( $g_db_type == 'mysql' ) {
 			$t_array = $p_result->fields;
  			$p_result->MoveNext();
 			return $t_array;
-		} else { 
+		} else {
 			$test = $p_result->GetRowAssoc(false);
 			$p_result->MoveNext();
 			return $test;
@@ -294,7 +294,7 @@
 				}
 
 			case 'mysql':
-				# mysql_escape_string was deprecated in v4.3.0 
+				# mysql_escape_string was deprecated in v4.3.0
 				if ( php_version_at_least( '4.3.0' ) ) {
 					return mysql_real_escape_string( $p_string );
 				} else {
@@ -322,25 +322,52 @@
 	# --------------------
 	# prepare a time string in "[h]h:mm" to an integer (minutes) before DB insertion
 	function db_prepare_time( $p_hhmm ) {
-
-		if ( "" == $p_hhmm ) {
+		if ( is_blank( $p_hhmm ) ) {
 			return 0;
 		}
-		$t_a = explode(":", $p_hhmm);
+
+		$t_a = explode( ':', $p_hhmm );
 		$t_min = 0;
-		switch (count($t_a))
-		{
-			case 1:
-				$t_min = $t_a[0];
-			break;
-			case 2:
-				$t_sec = $t_a[0] * 60 + $t_a[1];
-			break;
-			default:
+
+		// time can be composed of max 3 parts (hh:mm:ss)
+		if ( count( $t_a ) > 3 ) {
+			error_parameters( 'p_hhmm', $p_hhmm );
+			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		}
+
+		for ( $i = 0; $i < count( $t_a ); $i++ ) {
+			// all time parts should be integers and non-negative.
+			if ( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0) ) {
 				error_parameters( 'p_hhmm', $p_hhmm );
 				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			}
+
+			// minutes and seconds are not allowed to exceed 59.
+			if ( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
+				error_parameters( 'p_hhmm', $p_hhmm );
+				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			}
+		}
+
+		switch ( count( $t_a ) )
+		{
+			case 1:
+				$t_min = (integer)$t_a[0];
+			break;
+
+			case 2:
+				$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
+			break;
+
+			case 3:  // if seconds included, approxiate it to minutes
+				$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
+
+				if ( (integer)$t_a[2] >= 30 ) {
+					$t_min++;
+				}
 			break;
 		}
+
 		return (int)$t_min;
 	}
 
@@ -392,21 +419,11 @@
 		return $p_timestamp ;
 	}
 
-	
-	# --------------------
-	# convert seconds to a time format [h]h:mm
-	function db_minutes_to_hhmm( $p_min = 0 ) {
-		$t_h = 0;
-		$t_m = $p_min;
-		while ($t_m - 60 >= 0)
-		{
-			++$t_h;
-			$t_m = $t_m - 60;
-		}
 
-		if ($t_m < 10)
-			$t_m = "0" . $t_m;
-		return $t_h . ":" . $t_m;
+	# --------------------
+	# convert minutes to a time format [h]h:mm
+	function db_minutes_to_hhmm( $p_min = 0 ) {
+		return sprintf( '%02d:%02d', $p_min / 60, $p_min % 60 );
 	}
 
 	# --------------------

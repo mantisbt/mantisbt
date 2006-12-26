@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.34 2006-12-20 19:49:54 davidnewcomb Exp $
+	# $Id: bugnote_view_inc.php,v 1.35 2006-12-26 10:56:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,6 +80,9 @@
 	</td>
 </tr>
 <?php
+	$t_normal_date_format = config_get( 'normal_date_format' );
+	$t_total_time = 0;
+
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
@@ -89,8 +92,8 @@
 		else
 			$t_bugnote_modified = false;
 
-		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
-		$v3_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_last_modified ) ) );
+		$v3_date_submitted = date( $t_normal_date_format, ( db_unixtimestamp( $v3_date_submitted ) ) );
+		$v3_last_modified = date( $t_normal_date_format, ( db_unixtimestamp( $v3_last_modified ) ) );
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note
@@ -104,9 +107,11 @@
 		$t_bugnote_id_formatted = bugnote_format_id( $v3_id );
 
 		if ( 0 != $v3_time_tracking ) {
-			$v3_time_tracking = "[" . db_minutes_to_hhmm( $v3_time_tracking ) . "]";
+			$v3_time_tracking_hhmm = db_minutes_to_hhmm( $v3_time_tracking );
+			$v3_note_type = TIME_TRACKING;   // for older entries that didn't set the type
+			$t_total_time += $v3_time_tracking;
 		} else {
-			$v3_time_tracking = "";
+			$v3_time_tracking_hhmm = '';
 		}
 
 		if ( VS_PRIVATE == $v3_view_state ) {
@@ -129,9 +134,7 @@
 		<br />
 		<span class="small"><?php echo $v3_date_submitted ?></span><br />
 		<?php
-		if ( config_get('time_tracking_enabled') )
-			echo '<span class="small">'.$v3_time_tracking.'</span><br />';
-		if ( true == $t_bugnote_modified ) {
+		if ( $t_bugnote_modified ) {
 			echo '<span class="small">'.lang_get( 'edited_on').' '.$v3_last_modified.'</span><br />';
 		}
 		?>
@@ -161,16 +164,19 @@
 		<?php
 			switch ( $v3_note_type ) {
 				case REMINDER:
-					echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
+					echo '<em>' . lang_get( 'reminder_sent_to' ) . ': ';
 					$v3_note_attr = substr( $v3_note_attr, 1, strlen( $v3_note_attr ) - 2 );
 					$t_to = array();
 					foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
 						$t_to[] = prepare_user_name( $t_recipient );
 					}
-					echo implode( ', ', $t_to ) . '</div><br />';
-				default:
-					echo $v3_note;
+					echo implode( ', ', $t_to ) . '</em><br /><br />';
+				case TIME_TRACKING:
+					echo '<b><big>', $v3_time_tracking_hhmm, '</big></b><br /><br />';
+					break;
 			}
+
+			echo $v3_note;
 		?>
 	</td>
 </tr>
@@ -179,6 +185,10 @@
 </tr>
 <?php
 		} # end for loop
+
+		if ( $t_total_time > 0 ) {
+			echo '<tr><td colspan="2">', sprintf ( lang_get( 'total_time_for_issue' ), db_minutes_to_hhmm( $t_total_time ) ), '</td></tr>';
+		}
 	} # end else
 ?>
 </table>

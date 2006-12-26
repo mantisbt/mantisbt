@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.59 2006-12-19 09:15:54 vboctor Exp $
+	# $Id: constant_inc.php,v 1.60 2006-12-26 10:56:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -74,7 +74,7 @@
 	define( 'MAJOR',	60 );
 	define( 'CRASH',	70 );
 	define( 'BLOCK',	80 );
-	
+
 	# reproducibility
 	define( 'REPRODUCIBILITY_ALWAYS',		10 );
 	define( 'REPRODUCIBILITY_SOMETIMES',	30 );
@@ -333,6 +333,7 @@
 	# bugnote types
 	define( 'BUGNOTE', 0 );
 	define( 'REMINDER', 1 );
+	define( 'TIME_TRACKING', 2 );
 
 	# token types
 	define( 'TOKEN_UNKNOWN',		0 );
@@ -365,10 +366,10 @@
 	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );
 	define( 'COLUMNS_TARGET_PRINT_PAGE',  2 );
 	define( 'COLUMNS_TARGET_CSV_PAGE',    3 );
-	
+
 	# sponsorship "paid" values
 	define( 'SPONSORSHIP_UNPAID',         0 );
 	define( 'SPONSORSHIP_REQUESTED',      1 );
 	define( 'SPONSORSHIP_PAID',           2 );
-	
+
 ?>
