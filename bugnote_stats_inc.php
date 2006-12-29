@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.3 2006-12-26 10:56:07 vboctor Exp $
+	# $Id: bugnote_stats_inc.php,v 1.4 2006-12-29 19:33:33 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -62,7 +62,7 @@
 </tr>
 <tr class="row-2">
         <td class="category" width="25%">
-                <?php echo lang_get( 'from' ). " (mm/dd/yyyy)"; ?>
+                <?php echo lang_get( 'from_date' ). " (mm/dd/yyyy)"; ?>
         </td>
         <td width="75%">
                 <input type="text" name="bugnote_stats_from" value="<?php echo $f_bugnote_stats_from ?>" />
@@ -70,7 +70,7 @@
 </tr>
 <tr class="row-1">
         <td class="category">
-                <?php echo lang_get( 'to' ). " (mm/dd/yyyy)"; ?>
+                <?php echo lang_get( 'to_date' ). " (mm/dd/yyyy)"; ?>
         </td>
         <td>
                 <input type="text" name="bugnote_stats_to" value="<?php echo $f_bugnote_stats_to ?>" />

@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.287 $
-	# $Author: vboctor $
-	# $Date: 2006-12-26 10:56:07 $
+	# $Revision: 1.288 $
+	# $Author: davidnewcomb $
+	# $Date: 2006-12-29 19:33:33 $
 	#
-	# $Id: strings_english.txt,v 1.287 2006-12-26 10:56:07 vboctor Exp $
+	# $Id: strings_english.txt,v 1.288 2006-12-29 19:33:33 davidnewcomb Exp $
 	###########################################################################
 
 ?>
@@ -1333,4 +1333,6 @@ $s_time_tracking_get_info_button = 'Get Time Tracking Information';
 $s_time_tracking_cost_per_hour = 'Cost / Hour';
 $s_time_tracking_cost = 'Cost';
 $s_total_time_for_issue = 'Total time for issue = %s';
+$s_from_date = 'From';
+$s_to_date = 'To';
 ?>
