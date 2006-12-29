@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.51 2006-12-20 19:49:54 davidnewcomb Exp $
+	# $Id: bugnote_edit_page.php,v 1.52 2006-12-29 19:24:16 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -57,8 +57,13 @@
 	}
 
 	$t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
-	$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
-	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
+
+	# No need to gather the extra information if not used
+	if ( config_get('time_tracking_enabled') &&
+		access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) {
+		$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
+		$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
+	}
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
@@ -85,12 +90,14 @@
 	</td>
 </tr>
 <?php if ( config_get('time_tracking_enabled') ) { ?>
+<?php if ( access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) { ?>
 <tr class="row-2">
 	<td class="center" colspan="2">
 		<b><?php echo lang_get( 'time_tracking') ?> (HH:MM)</b><br />
 		<input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
 	</td>
 </tr>
+<?php } ?>
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">

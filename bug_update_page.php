@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.93 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bug_update_page.php,v 1.94 2006-12-29 19:24:16 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -410,8 +410,9 @@
 </tr>
 <?php } ?>
 
-<!-- Bugnote Time Tracking (if permitted) -->
+<!-- Time Tracking (if permitted) -->
 <?php if ( config_get('time_tracking_enabled') ) { ?>
+<?php if ( access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'time_tracking' ) ?>
@@ -420,6 +421,7 @@
 		<input type="text" name="time_tracking" size="5" value="0:00" />
 	</td>
 </tr>
+<?php } ?>
 <?php } ?>
 
 

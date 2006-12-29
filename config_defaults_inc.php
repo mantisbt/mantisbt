@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.322 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: config_defaults_inc.php,v 1.323 2006-12-29 19:24:16 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 
@@ -1787,4 +1787,12 @@
 	# Stop watch to build time tracking field
 	$g_time_tracking_stopwatch = OFF;
 
+	# access level required to view time tracking information
+	$g_time_tracking_view_threshold = DEVELOPER;
+
+	# access level required to add/edit time tracking information
+	$g_time_tracking_edit_threshold = DEVELOPER;
+
+	# access level required to run reports
+	$g_time_tracking_reporting_threshold = MANAGER;
 ?>
