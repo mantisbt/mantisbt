@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.22 2005-05-13 00:14:40 jlatour Exp $
+	# $Id: version_api.php,v 1.23 2006-12-29 09:34:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -170,6 +170,17 @@
 					  SET fixed_in_version='$c_version_name'
 					  WHERE ( project_id='$c_project_id' ) AND ( fixed_in_version='$c_old_version_name' )";
 			db_query( $query );
+
+			$query = "UPDATE $t_bug_table
+					  SET target_version='$c_version_name'
+					  WHERE ( project_id='$c_project_id' ) AND ( target_version='$c_old_version_name' )";
+			db_query( $query );
+
+			# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
+			# 		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.
+			#		- when an issue is copied or moved from one project to another, we can keep the last version with the issue even if it doesn't exist in the new project.  Also previous history entries remain valid.
+			# @@@ We should update the history for version, fixed_in_version, and target_version.
+			# @@@ We probably need to update the saved filters too?
 		}
 
 		# db_query() errors on failure so:
