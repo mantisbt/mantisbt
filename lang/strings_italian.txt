@@ -12,13 +12,13 @@
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.281
+	# Based on strings_english.txt rev. 1.286
 	# -------------------------------------------------
-	# $Revision: 1.117 $
+	# $Revision: 1.118 $
 	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:45 $
+	# $Date: 2006-12-30 09:14:31 $
 	#
-	# $Id: strings_italian.txt,v 1.117 2006-11-08 13:32:45 achumakov Exp $
+	# $Id: strings_italian.txt,v 1.118 2006-12-30 09:14:31 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -39,6 +39,8 @@ $s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
 $s_actiongroup_menu_update_category = "Aggiorna categoria";
 $s_actiongroup_menu_set_sticky = "Imposta/resetta sticky";
 $s_actiongroup_menu_update_field = "Aggiorna %s";
+$s_actiongroup_menu_update_target_version = "Assegna a versione";
+$s_actiongroup_menu_update_fixed_in_version = "Aggiorna versione di risoluzione";
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -68,7 +70,7 @@ $s_bug_history = "Storia dell'anomalia";
 $s_field = "Campo";
 $s_old_value = "Valore precedente";
 $s_new_value = "Nuovo valore";
-$s_date_modified = "Modificato il";
+$s_date_modified = "Modificata il";
 $s_bugnote = "Nota";
 $s_change = "Modifica";
 $s_bugnote_view_state = "Nota View State";
@@ -83,7 +85,7 @@ $s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia qu
 $s_empty_password_button = "Conferma password vuota";
 
 $s_duplicate_of = "duplicato di";
-$s_has_duplicate = "è duplicata da";
+$s_has_duplicate = "duplicata da";
 $s_related_to = "in relazione con";
 $s_dependant_on = "madre di";
 $s_blocks = "figlia di";
@@ -91,7 +93,7 @@ $s_blocks = "figlia di";
 $s_new_bug = "Nuova anomalia";
 $s_bugnote_added = "Nota aggiunta";
 $s_bugnote_edited = "Nota modificata";
-$s_bugnote_deleted = "Nota eliminata ";
+$s_bugnote_deleted = "Nota eliminata";
 $s_summary_updated = "Riassunto modificato";
 $s_description_updated = "Descrizione modificata";
 $s_additional_information_updated = "Informazioni addizionali modificate";
@@ -100,8 +102,8 @@ $s_file_added = "File allegato";
 $s_file_deleted = "Allegato eliminato";
 $s_bug_deleted = "Anomalia eliminata";
 
-$s_make_private = "Rendi privato";
-$s_make_public = "Rendi pubblico";
+$s_make_private = "Rendi privata";
+$s_make_public = "Rendi pubblica";
 
 $s_create_new_project_link = "Crea nuovo progetto";
 
@@ -123,6 +125,8 @@ $s_status_bugs_conf_msg = "Scegli lo stato";
 $s_view_status_bugs_conf_msg = "Seleziona visibilità";
 $s_category_bugs_conf_msg = "Seleziona categoria delle anomalie";
 $s_set_sticky_bugs_conf_msg = "Sei sicuro di voler impostare/resettare le anomalie come in primo piano (sticky)?";
+$s_fixed_in_version_bugs_conf_msg = "Risolte nella versione";
+$s_target_version_bugs_conf_msg = "Assegna a versione";
 $s_close_group_bugs_button = "Chiudi anomalie";
 $s_delete_group_bugs_button = "Elimina anomalie";
 $s_move_group_bugs_button = "Sposta anomalie";
@@ -134,6 +138,8 @@ $s_status_group_bugs_button = "Aggiorna stato";
 $s_category_group_bugs_button = "Aggiorna categoria";
 $s_view_status_group_bugs_button = "Cambia visibilità";
 $s_set_sticky_group_bugs_button = "Imposta/resetta in primo piano (Sticky)";
+$s_fixed_in_version_group_bugs_button = "Aggiorna versione di risoluzione";
+$s_target_version_group_bugs_button = "Aggiorna versione assegnata";
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "Grafico di sintesi per stato";
@@ -279,7 +285,7 @@ $s_logged_in_as = "Utente";
 $s_prefix_for_deleted_users = "utente";
 
 $s_administrator = "Amministratore";
-$s_myself = "Me stesso";
+$s_myself = "me stesso";
 $s_default_access_level = "Livello di accesso di default";
 
 $s_issue_status_percentage = "Stato anomalie (%)";
@@ -572,7 +578,8 @@ $s_os_version = "Versione";
 $s_eta = "Stima tempo necessario";
 $s_product_version = "Versione del prodotto";
 $s_build = "Release";
-$s_fixed_in_version = "Risolta in versione";
+$s_fixed_in_version = "Risolta nella versione";
+$s_target_version = "Assegnata alla versione";
 $s_votes = "Voti";
 $s_summary = "Riassunto";
 $s_description = "Descrizione";
@@ -919,9 +926,9 @@ $s_add_news_title = "Nuova notizia";
 $s_post_to = "Invia in";
 $s_post_news_button = "Inserisci notizia";
 $s_edit_or_delete_news_title = "Elimina o modifica la notizia";
-$s_edit_post = "Modifica il post";
-$s_delete_post = "Elimina il post";
-$s_select_post = "Seleziona il post";
+$s_edit_post = "Modifica";
+$s_delete_post = "Elimina";
+$s_select_post = "Seleziona la notizia";
 
 # news_update.php
 $s_news_updated_msg = "Notizia aggiornata...";
@@ -1044,11 +1051,11 @@ $s_by_category = "Per categoria";
 $s_by_priority = "Per priorità";
 $s_by_developer = "Per sviluppatore";
 $s_by_reporter = "Per segnalatore";
-$s_reporter_by_resolution = "Reporter per motivazione";
-$s_reporter_effectiveness = "Reporter per efficacia";
-$s_developer_by_resolution = "Developer per motivazione";
-$s_percentage_fixed = "% Fixed";
-$s_percentage_errors = "% False";
+$s_reporter_by_resolution = "Segnalatore per motivazione";
+$s_reporter_effectiveness = "Segnalatore per efficacia";
+$s_developer_by_resolution = "Sviluppatore per motivazione";
+$s_percentage_fixed = "% corrette";
+$s_percentage_errors = "% false";
 $s_errors = "False";
 $s_total = "Totale";
 $s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
@@ -1061,19 +1068,20 @@ $s_reporter_stats = "Statistiche per segnalatore";
 $s_orct = "(aperte/risolte/chiuse/totale)";
 
 # view_all_bug_page.php
-$s_any = "Qualsiasi";
+$s_any = "qualsiasi";
+$s_all = 'tutte';
 $s_show = "Quante anomalie";
 $s_changed = "Modificata (ore)";
 $s_viewing_bugs_title = "Elenco delle anomalie";
-$s_updated = "Aggiornato";
+$s_updated = "Ultima modifica";
 $s_sticky = "Visualizza anomalie sticky";
 $s_sort = "Ordina per";
 $s_issue_id = "Anomalia #";
 $s_recently_visited = "Esaminate di recente";
 
 # view_all_inc.php
-$s_none = "nessuno";
-$s_current = 'current';
+$s_none = "in bianco";
+$s_current = "attuale";
 $s_search = "Ricerca";
 $s_view_prev_link = "Precedenti";
 $s_view_next_link = "Successive";
@@ -1092,7 +1100,7 @@ $s_ok = "OK";
 $s_select_all = "Seleziona tutte";
 
 # stored query strings
-$s_use_query = "Usa filtro";
+$s_use_query = "Applica";
 $s_delete_query = "Elimina filtro";
 $s_query_deleted = "Filtro eliminato";
 $s_save_query = "Memorizza filtro corrente";
@@ -1113,8 +1121,8 @@ $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna anomalia";
 $s_bug_assign_to_button = "Assegna a:";
 $s_bug_status_to_button = "Cambia stato in:";
-$s_reopen_bug_button = "Riapri anomalia";
-$s_move_bug_button = "Sposta anomalia";
+$s_reopen_bug_button = "Riapri";
+$s_move_bug_button = "Sposta";
 $s_attached_files = "File allegati";
 $s_publish = "Pubblica";
 $s_cached = "Cached";
@@ -1208,13 +1216,17 @@ $s_sponsorship_process_url = "";
 # Changelog
 $s_changelog = "Registro modifiche";
 
+# Roadmap
+$s_roadmap = 'Roadmap';
+$s_resolved_progress = '%d di %d anomalie risolte (%d%%).';
+
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
 $s_bug = "anomalia";
 $s_add_new_relationship = "Nuova relazione";
 $s_add_new_relationship_button = "Crea";
-$s_this_bug = "Anomalia corrente";
+$s_this_bug = "Questa anomalia è";
 $s_relationship_added = "Relazione aggiunta";
 $s_relationship_deleted = "Relazione eliminata";
 $s_no_relationship = "nessuna relazione";
@@ -1226,8 +1238,8 @@ $s_delete_relationship_button = "Elimina";
 $s_delete_relationship_sure_msg = "Eliminare questa relazione?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Non tutte le anomalie figlie di questa anomalia risultano risolte oppure chiuse.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. Non tutte le anomalie figlie di questa anomalia risultano risolte oppure chiuse.<br>Prima di <b>risolvere/chiudere</b> una anomalia madre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
-$s_create_child_bug_button = "Genera clone";
-$s_bug_cloned_to = "Anomalia clonata";
+$s_create_child_bug_button = "Duplica";
+$s_bug_cloned_to = "Anomalia duplicata";
 $s_bug_created_from = "Anomalia generata da";
 
 # Relationship Graphs
@@ -1256,7 +1268,7 @@ $s_view_private_issues = "Visualizza anomalie private";
 $s_update_readonly_issues = "Aggiorna anomalie in sola lettura";
 $s_update_issue_status = "Aggiorna stato anomalia";
 $s_set_view_status = "Imposta stato di visualizzazione (pubblico o privato)";
-$s_update_view_status = "Aggiorna stato di visualizzione (pubblico o privato)";
+$s_update_view_status = "Aggiorna stato di visualizzazione (pubblico o privato)";
 $s_show_list_of_users_monitoring_issue = "Visualizza lista degli utenti che tengono sotto controllo anomalia";
 $s_notes = "NOTE";
 $s_add_notes = "Aggiunge nota";
@@ -1314,4 +1326,13 @@ $s_on_or_after = "Il o dopo il";
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Riepilogo costi';
+$s_time_tracking = 'Tempistiche';
+$s_time_tracking_bugnote_stats = 'Statistiche sulle annotazioni';
+$s_time_tracking_get_bugnote_stats_button = 'Statistiche sulle annotazioni';
+$s_time_tracking_cost_per_hour = 'Costo orario (&euro;)';
+$s_time_tracking_cost = 'Costo';
+
 ?>
