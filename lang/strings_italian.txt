@@ -6,19 +6,19 @@
 	# See the README and LICENSE files for details
 	#
 	# Italian: Luca Pescatore, l.pescatore@network.it
-	# Italian: Marco Vassura,  m.vassura@itools.it
+	# Italian: Marco Vassura, m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
-	# Italian: Marcello Scata' marcello@marcelloscata.com
+	# Italian: Marcello Scatà, marcello@marcelloscata.com
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.286
+	# Based on strings_english.txt rev. 1.288
 	# -------------------------------------------------
-	# $Revision: 1.118 $
+	# $Revision: 1.119 $
 	# $Author: achumakov $
-	# $Date: 2006-12-30 09:14:31 $
+	# $Date: 2006-12-30 23:55:20 $
 	#
-	# $Id: strings_italian.txt,v 1.118 2006-12-30 09:14:31 achumakov Exp $
+	# $Id: strings_italian.txt,v 1.119 2006-12-30 23:55:20 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -37,7 +37,7 @@ $s_actiongroup_menu_update_priority = "Cambia priorità";
 $s_actiongroup_menu_update_status = "Cambia stato";
 $s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
 $s_actiongroup_menu_update_category = "Aggiorna categoria";
-$s_actiongroup_menu_set_sticky = "Imposta/resetta sticky";
+$s_actiongroup_menu_set_sticky = "Imposta/resetta primo piano";
 $s_actiongroup_menu_update_field = "Aggiorna %s";
 $s_actiongroup_menu_update_target_version = "Assegna a versione";
 $s_actiongroup_menu_update_fixed_in_version = "Aggiorna versione di risoluzione";
@@ -53,8 +53,8 @@ $s_csv_export = "Esporta in formato CSV";
 $s_login_anonymously = "Accedi anonimamente";
 $s_anonymous = "Anonimo";
 $s_jump_to_bugnotes = "Vai alle note";
-$s_public_project_msg = "Questo progetto è PUBBLICO. Tutti gli utenti possono accedervi.";
-$s_private_project_msg = "Questo progetto è PRIVATO. Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.";
+$s_public_project_msg = "Questo progetto è PUBBLICO.  Tutti gli utenti possono accedervi.";
+$s_private_project_msg = "Questo progetto è PRIVATO.  Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.";
 $s_access_level_project = "Livello di accesso al progetto";
 $s_view_submitted_bug_link = "Consulta anomalia";
 $s_assigned_projects = "Progetti assegnati";
@@ -98,7 +98,7 @@ $s_summary_updated = "Riassunto modificato";
 $s_description_updated = "Descrizione modificata";
 $s_additional_information_updated = "Informazioni addizionali modificate";
 $s_steps_to_reproduce_updated = "Passi per riprodurla modificati";
-$s_file_added = "File allegato";
+$s_file_added = "Allegato aggiunto";
 $s_file_deleted = "Allegato eliminato";
 $s_bug_deleted = "Anomalia eliminata";
 
@@ -124,7 +124,7 @@ $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
 $s_view_status_bugs_conf_msg = "Seleziona visibilità";
 $s_category_bugs_conf_msg = "Seleziona categoria delle anomalie";
-$s_set_sticky_bugs_conf_msg = "Sei sicuro di voler impostare/resettare le anomalie come in primo piano (sticky)?";
+$s_set_sticky_bugs_conf_msg = "Sei sicuro di voler impostare/resettare le anomalie in primo piano?";
 $s_fixed_in_version_bugs_conf_msg = "Risolte nella versione";
 $s_target_version_bugs_conf_msg = "Assegna a versione";
 $s_close_group_bugs_button = "Chiudi anomalie";
@@ -137,7 +137,7 @@ $s_priority_group_bugs_button = "Aggiorna priorità";
 $s_status_group_bugs_button = "Aggiorna stato";
 $s_category_group_bugs_button = "Aggiorna categoria";
 $s_view_status_group_bugs_button = "Cambia visibilità";
-$s_set_sticky_group_bugs_button = "Imposta/resetta in primo piano (Sticky)";
+$s_set_sticky_group_bugs_button = "Imposta/resetta in primo piano";
 $s_fixed_in_version_group_bugs_button = "Aggiorna versione di risoluzione";
 $s_target_version_group_bugs_button = "Aggiorna versione assegnata";
 
@@ -183,7 +183,7 @@ $s_bugnote_title = "Nota";
 $s_bugnote_date = "Data della nota";
 $s_bugnote_description = "Testo della nota";
 
-$s_error_no_proceed = "Per favore usa il pulsante \"Indietro\" del tuo browser per ritornare alla pagina precedente.  Là potrai risolvere i problemi riportati o selezionare un'altra azione.  Puoi anche selezionare una opzione dal menu e andare direttamente in un'altra sezione.";
+$s_error_no_proceed = "Usa il pulsante \"Indietro\" del tuo browser per ritornare alla pagina precedente.  Là potrai risolvere i problemi riportati o selezionare un'altra azione.  Puoi anche selezionare una opzione dal menu e andare direttamente in un'altra sezione.";
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC] = "Si è verificato un errore nell'esecuzione dell'azione.  Potresti ritenere opportuno avvisare dell'errore l'amministratore locale.";
@@ -249,7 +249,7 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "Una versione con quel nome esiste già
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = "Versione \"%s\" non trovata.";
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = "Il nome dell'utente non è valido.  I nomi utente possono contenere solo lettere non accentate, cifre, spazi, trattini e underscore (\"_\").";
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "L'utente non ha il livello di accesso necessario.";
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "Il nominativo specificato corrisponde a quello un unatro utente.  Specificane uno diverso.";
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "Il nominativo specificato corrisponde a quello di un altro utente.  Specificane uno diverso.";
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Il supporto alle sponsorizzazioni non è abilitato.";
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = "Sponsorizzazione %d non trovata.";
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = "Sponsorizzazione (%s) inferiore all'importo minimo consentito (%s).";
@@ -264,7 +264,7 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Accesso ne
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Un'anomalia non può essere relazionata con sè stessa.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = "Il codice di convalida inserito non è corretto.  Riprova di nuovo.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = "Funzione non disponibile.";
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "È possibile eseguire la procedura di recupero password solo per gli account che hanno indicato un indirizzo e-mail";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "È possibile eseguire la procedura di recupero password solo per gli account che hanno indicato un indirizzo email";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = "I dati inseriti e/o inviati non corrispondono ad alcun utente registrato.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = "Codice di convalida (hash code) non valido.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Raggiunto il numero massimo di richieste di reset pendenti.";
@@ -303,23 +303,23 @@ $s_status_enum_string             = "10:nuova,20:da discutere,30:riconosciuta,40
 $s_resolution_enum_string         = "10:aperta,20:risolta,30:riaperta,40:incapace di riprodurla,50:non correggibile,60:duplicata,70:non è una anomalia,80:sospesa,90:non verrà corretta";
 $s_projection_enum_string         = "10:nessuna,30:ritocco,50:fix minore,70:considerevole,90:riscrittura";
 $s_eta_enum_string                = "10:nessuna,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un mese,60:più di un mese";
-$s_sponsorship_enum_string = "0:non pagata,1:richiesta,2:pagata";
+$s_sponsorship_enum_string        = "0:non pagata,1:richiesta,2:pagata";
 
 # Email Strings
 $s_new_account_subject = "Nuovo account registrato";
 $s_new_account_greeting = "Benvenuto e grazie per esserti registrato.  È stato creato con successo il tuo account con il nome utente \"";
-$s_new_account_greeting2 = "\". Per completare la registrazione, visita il seguente indirizzo (assicurati di inserirlo in una singola riga) e imposta la tua password di accesso:";
+$s_new_account_greeting2 = "\".  Per completare la registrazione, visita il seguente indirizzo (assicurati di inserirlo in una singola riga) e imposta la tua password di accesso:";
 $s_new_account_username = "Nome utente: ";
 $s_new_account_message = "Se la richiesta di iscrizione non è stata fatta da te, ignora semplicemente questo messaggio.\n\n";
 $s_new_account_do_not_reply = "NON RISPONDERE A QUESTO MESSAGGIO\n";
-$s_new_account_email = "E-mail: ";
+$s_new_account_email = "Email: ";
 $s_new_account_IP = "Indirizzo IP: ";
 $s_new_account_signup_msg = "È stato creato il seguente account:";
 
 $s_reset_request_msg = "Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email.  Se non sei stato tu a richiederlo, ignora semplicemente questo messaggio.\n\nSe invece hai effettivamente richiesto tu la modifica, visita l'indirizzo di seguito riportato e potrai cambiare la tua password:";
-$s_reset_request_in_progress_msg = "Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all'indirizzo del tuo account con un codice di convalida. Quando riceverai questa email, segui le istruzioni in essa riportate.";
+$s_reset_request_in_progress_msg = "Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all'indirizzo del tuo account con un codice di convalida.  Quando riceverai l'email, segui le istruzioni in essa riportate.";
 
-$s_email_notification_title_for_status_bug_new = "La seguente anomalia è stata ri-posta nello stato NUOVO";
+$s_email_notification_title_for_status_bug_new = "La seguente anomalia è stata ri-posta nello stato NUOVA";
 $s_email_notification_title_for_status_bug_feedback = "La seguente anomalia è stata posta in DISCUSSIONE.";
 $s_email_notification_title_for_status_bug_acknowledged = "La seguente anomalia è stata RICONOSCIUTA.";
 $s_email_notification_title_for_status_bug_confirmed = "La seguente anomalia è stata CONFERMATA.";
@@ -343,12 +343,12 @@ $s_email_notification_title_for_action_related_to_relationship_added = "La segue
 $s_email_notification_title_for_action_dependant_on_relationship_added = "La seguente anomalia è MADRE dell'anomalia %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "La seguente anomalia è FIGLIA dell'anomalia %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "La seguente anomalia NON è più un DUPLICATO dall'anomalia %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "L'anomalia %s NON è iù un DUPLICATO della seguente anomalia.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "L'anomalia %s NON è più un DUPLICATO della seguente anomalia.";
 $s_email_notification_title_for_action_related_to_relationship_deleted = "La seguente anomalia NON è più IN RELAZIONE con l'anomalia %s.";
 $s_email_notification_title_for_action_dependant_on_relationship_deleted = "La seguente anomalia NON è più MADRE dell'anomalia %s.";
 $s_email_notification_title_for_action_blocks_relationship_deleted = "La seguente anomalia NON è più FIGLIA dell'anomalia %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "L'anomalia %s CORRELATA è stata RISOLTA.";
-$s_email_notification_title_for_action_relationship_child_closed = "L'anomalia %s CORRELATA è CHIUSA.";
+$s_email_notification_title_for_action_relationship_child_closed = "L'anomalia %s CORRELATA è stata CHIUSA.";
 
 $s_email_reporter = "Segnalata da";
 $s_email_handler = "In carico a";
@@ -364,7 +364,7 @@ $s_email_duplicate = "Duplicato";
 $s_email_fixed_in_version = "Risolta nella versione";
 $s_email_date_submitted = "Data di inserimento";
 $s_email_last_modified = "Ultima modifica";
-$s_email_summary =  "Riassunto";
+$s_email_summary = "Riassunto";
 $s_email_description = "Descrizione";
 
 # account_delete.php
@@ -402,12 +402,12 @@ $s_with_minimum_severity = "Con severità minima di";
 $s_bugnote_order = "Ordinamento note";
 $s_bugnote_order_asc = "Cronologico";
 $s_bugnote_order_desc = "Cronologico inverso";
-$s_email_on_new = "Email su \"Nuovo\"";
-$s_email_on_assigned = "Email su \"Assegnato\"";
+$s_email_on_new = "Email su \"Nuova\"";
+$s_email_on_assigned = "Email su \"Assegnata\"";
 $s_email_on_feedback = "Email su \"Da Discutere\"";
-$s_email_on_resolved = "Email su \"Risolto\"";
-$s_email_on_closed = "Email su \"Chiuso\"";
-$s_email_on_reopened = "Email su \"Riaperto\"";
+$s_email_on_resolved = "Email su \"Risolta\"";
+$s_email_on_closed = "Email su \"Chiusa\"";
+$s_email_on_reopened = "Email su \"Riaperta\"";
 $s_email_on_bugnote_added = "Email su \"Aggiunta Nota ad anomalia\"";
 $s_email_on_status_change = "Email su \"Cambio Stato\"";
 $s_email_on_priority_change = "Email su \"Cambio Priorità\"";
@@ -458,8 +458,8 @@ $s_no_sponsored = "Non vi sono anomalie sponsorizzate assegnate a te.";
 $s_own_sponsored = "Anomalie che hai sponsorizzato:";
 $s_issues_handled = "Anomalie sponsorizzate assegnate a te:";
 $s_no_own_sponsored = "Non hai sponsorizzato nessuna anomalia.";
-$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsorizza';	# like in 'Sponsor it!'
+$s_sponsor = "Sponsor";           # like in 'The sponsor of...'
+$s_sponsor_verb = "Sponsorizza";  # like in 'Sponsor it!'
 $s_amount = "Somma";
 $s_total_owing = "Totale dovuto";
 $s_total_paid = "Totale pagato";
@@ -479,7 +479,7 @@ $s_password_updated = "La password è stata aggiornata correttamente";
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = "Le anomalie che hai selezionato sono relative a progetti differenti. I seguenti parametri rispecchiano le impostazioni di tutti i progetti. Se questo non è corretto, riproponi la modifica selezionando un minor numero di anomalie.";
+$s_multiple_projects = "Le anomalie che hai selezionato sono relative a progetti differenti.  I seguenti parametri rispecchiano le impostazioni di tutti i progetti.  Se questo non è corretto, riproponi la modifica selezionando un minor numero di anomalie.";
 
 # bug_assign.php
 $s_bug_assign_msg = "L'anomalia è stato assegnata correttamente...";
@@ -533,7 +533,7 @@ $s_resolved_bug_title = "Risolvi anomalia";
 $s_resolved_bug_button = "Risolvi";
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "L'anomalia è stata risolta. Inserisci nota...";
+$s_bug_resolved_msg = "L'anomalia è stata risolta.  Inserisci nota...";
 $s_resolve_add_bugnote_title = "Aggiungi una nota con le ragioni per la risoluzione dell'anomalia";
 $s_bugnote_add_resolve_button = "Inserisci nota";
 
@@ -572,7 +572,7 @@ $s_priority = "Priorità";
 $s_resolution = "Motivazione";
 $s_status = "Stato";
 $s_duplicate_id = "ID Duplicato";
-$s_os = "OS";
+$s_os = "S.O.";
 $s_projection = "Stima difficoltà";
 $s_os_version = "Versione";
 $s_eta = "Stima tempo necessario";
@@ -585,8 +585,8 @@ $s_summary = "Riassunto";
 $s_description = "Descrizione";
 $s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
 $s_update_information_button = "Aggiorna informazione";
-$s_sticky_issue = "Anomalia sticky";
-$s_profile = 'Profilo';
+$s_sticky_issue = "Anomalia in primo piano";
+$s_profile = "Profilo";
 
 # bug_update_page.php
 $s_update_advanced_link = "Aggiornamento dettagliato";
@@ -627,7 +627,7 @@ $s_click_to_login = "Login";
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = "Benvenuti nel software di gestione problematiche e progetti.";
+$s_login_page_info = "Benvenuti nel software di gestione anomalie e progetti.";
 $s_login_title = "Login";
 $s_save_login = "Salva login";
 $s_choose_project = "Seleziona progetto";
@@ -639,7 +639,7 @@ $s_lost_password_link = "Hai dimenticato la password?";
 $s_select_project_button = "Seleziona progetto";
 
 # logout_page.php
-$s_logged_out_title = "Esci...";
+$s_logged_out_title = "Disconnesso...";
 $s_redirecting = "... redirezione in corso";
 $s_here = "Qui";
 
@@ -647,12 +647,12 @@ $s_here = "Qui";
 $s_lost_password_title = "Reset password";
 $s_lost_password_done_title = "Reset password messaggio spedito";
 $s_lost_password_subject = "Reset password";
-$s_lost_password_info = "Per reimpostare la password di accesso dimenticata, occorre fornire il tuo nome utente e l'indirizzo email associato con quell'account (deve essere quello correntemente in uso).<br/><br/>Se i dati indicati corrispondono ad un account valido, ti verrà inviato via email un indirizzo URL speciale che contiene un codice di convalida per il tuo account. Visitando quel indirizzo potrai cambiare la tua password di accesso al sito.";
-$s_lost_password_confirm_hash_OK = "Codice di convalida accettato. Ora puoi cambiare la password di accesso.";
+$s_lost_password_info = "Per reimpostare la password di accesso dimenticata, occorre fornire il tuo nome utente e l'indirizzo email associato con quell'account (deve essere quello correntemente in uso).<br/><br/>Se i dati indicati corrispondono ad un account valido, ti verrà inviato via email un indirizzo URL speciale che contiene un codice di convalida per il tuo account.  Visitando quel indirizzo potrai cambiare la tua password di accesso al sito.";
+$s_lost_password_confirm_hash_OK = "Codice di convalida accettato.  Ora puoi cambiare la password di accesso.";
 
 # main_page.php
-$s_open_and_assigned_to_me = "Assegnati a me ancora aperti";
-$s_open_and_reported_to_me = "Segnalati da me ancora aperti";
+$s_open_and_assigned_to_me = "Assegnate a me ancora aperte";
+$s_open_and_reported_to_me = "Segnalate da me ancora aperte";
 $s_newer_news_link = "Notizie recenti";
 $s_older_news_link = "Notizie precedenti";
 $s_archives = "Archivio";
@@ -705,16 +705,16 @@ $s_issue_reporter = "Utente che ha segnalato l'anomalia";
 $s_issue_handler = "Utente a cui è assegnata l'anomalia";
 $s_users_added_bugnote = "Utenti che hanno aggiunto una nota";
 $s_change_configuration = "Aggiorna configurazione";
-$s_message = 'Messaggio';
-$s_default_notify = "Setting default notification flags to";
+$s_message = "Messaggio";
+$s_default_notify = "Opzioni di notifica di default impostate a";
 $s_action_notify = "Setting action notification flags to";
 $s_notify_defaults_change_access = "Chi può modificare valori di default notifiche via email";
 $s_notify_actions_change_access = "Chi può modificare le notifiche via email";
-$s_revert_to_system = "Rimuovi impostazioni generali";
-$s_revert_to_all_project = "Rimuovi impostazioni specifiche di progetto";
+$s_revert_to_system = "Rimuovi impostazioni specifiche da tutti i progetti";
+$s_revert_to_all_project = "Rimuovi impostazioni specifiche di questo progetto";
 
 # manage_config_workflow_page
-$s_non_existent = 'non esistente';
+$s_non_existent = "non esistente";
 $s_current_status = "Stato attuale";
 $s_next_status = "Stato successivo";
 $s_workflow = "Workflow";
@@ -736,7 +736,7 @@ $s_workflow_change_access = "Chi può modificare il workflow";
 $s_access_change_access = "Chi può modificare i livelli di accesso";
 
 # manage_config_workflow_set
-$s_default_not_in_flow = "Lo stato di default di %s non è previsto nello stato seguente ad %s. Sarà ignorato";
+$s_default_not_in_flow = "Lo stato di default di %s non è previsto nello stato seguente ad %s.  Sarà ignorato.";
 
 # manage_config_work_threshold_page
 $s_assign_issue = "Assegna anomalia";
@@ -815,7 +815,7 @@ $s_add_and_edit_version_button = "Aggiungi e modifica versione";
 $s_edit_link = "Modifica";
 $s_actions = "Azioni";
 $s_version = "Versione";
-$s_timestamp = "Timestamp";
+$s_timestamp = "Data e ora";
 $s_update = "Aggiorna";
 $s_subprojects = "Sottoprogetti";
 $s_add_subproject = "Aggiungi come sottoprogetto";
@@ -851,7 +851,7 @@ $s_released = "Rilasciata";
 $s_version_updated_msg = "La versione è stata aggiornata...";
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "Account protetto. Non è possibile eliminarlo.";
+$s_account_delete_protected_msg = "Account protetto.  Non è possibile eliminarlo.";
 $s_account_deleted_msg = "L'account è stato eliminato...";
 
 # manage_user_delete_page.php
@@ -871,12 +871,12 @@ $s_reset_password_msg2 = "Resettando la password, questa verrà impostata come v
 $s_show_all_users = "TUTTI";
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = "Account protetto. Non è possibile resettare la password.";
-$s_account_reset_msg = "Il codice di convalida è stata inviato via email all'utente... Con quello l'utente sarà in grado di cambiare la propria password.";
+$s_account_reset_protected_msg = "Account protetto.  Non è possibile resettare la password.";
+$s_account_reset_msg = "Il codice di convalida è stata inviato via email all'utente...  Con quello l'utente sarà in grado di cambiare la propria password.";
 $s_account_reset_msg2 = "La password è stata rimossa...";
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "Account protetto. Il livello di accesso e l'abilitazione non sono modificabili. Per il resto, l'account è stato aggiornato...";
+$s_manage_user_protected_msg = "Account protetto.  Il livello di accesso e l'abilitazione non sono modificabili.  Per il resto, l'account è stato aggiornato...";
 $s_manage_user_updated_msg = "Account aggiornato correttamente...";
 
 # menu_inc.php
@@ -896,11 +896,11 @@ $s_my_view_link = "Riepilogo personale";
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = "Non assegnati";
-$s_my_view_title_recent_mod = "Modificati recentemente";
-$s_my_view_title_reported = "Segnalati da me";
-$s_my_view_title_assigned = "Assegnati a me (non risolti)";
-$s_my_view_title_resolved = "Risolti";
+$s_my_view_title_unassigned = "Non assegnate";
+$s_my_view_title_recent_mod = "Modificate recentemente";
+$s_my_view_title_reported = "Segnalate da me";
+$s_my_view_title_assigned = "Assegnate a me (non risolte)";
+$s_my_view_title_resolved = "Risolte";
 $s_my_view_title_monitored = "Sotto controllo da parte mia";
 $s_my_view_title_feedback = "In attesa di un mio riscontro";
 $s_my_view_title_verify = "In attesa di una mia conferma della risoluzione";
@@ -1017,15 +1017,15 @@ $s_valid_project_msg = "Selezionare un progetto valido";
 
 # signup.php
 $s_signup_done_title = "Registrazione dell'account eseguita";
-$s_password_emailed_msg = "Congratulazioni. Registrazione completata con successo. Riceverai una email di conferma per verificare che l'indirizzo email da te indicato è corretto. Per attivare l'account appena creato ed impostare la password di accesso è necessario visitare l'indirizzo URL indicato all'interno della email.";
+$s_password_emailed_msg = "Congratulazioni.  Registrazione completata con successo: riceverai una email di conferma per verificare che l'indirizzo email da te indicato è corretto. Per attivare l'account appena creato ed impostare la password di accesso dovrai visitare l'indirizzo URL indicato all'interno della email.";
 $s_no_reponse_msg = "Hai sette giorni di tempo per completare e confermare la registrazione dell'account; non rispondendo a questo messaggio entro una settimana, il nuovo account potrebbe essere eliminato.";
 
 # signup_page.php
 $s_signup_captcha_request = "Inserire il codice alfanumerico come appare nel box a destra";
-$s_signup_info = "Dopo aver completato il modulo di registrazione, ti verrà inviata una email di conferma all'indirizzo email specificato.<br/>L'email conterrà le istruzioni per attivare l'account appena creato. Non rispondendo a questo messaggio entro una settimana, l'account potrebbe essere eliminato.<br/><b>Occorre indicare un indirizzo email valido ed esistente per poter ricevere l'email di conferma.</b>";
+$s_signup_info = "Dopo aver completato il modulo di registrazione, ti verrà inviata una email di conferma all'indirizzo email specificato.<br/>L'email conterrà le istruzioni per attivare l'account appena creato.  Non rispondendo a questo messaggio entro una settimana, l'account potrebbe essere eliminato.<br/><b>Occorre indicare un indirizzo email valido ed esistente per poter ricevere l'email di conferma.</b>";
 $s_signup_title = "Registrazione";
 $s_signup_button = "Registrati";
-$s_no_password_request = "La password è gestita da un altro sistema. Contattare il proprio amministratore.";
+$s_no_password_request = "La password è gestita da un altro sistema.  Contattare il proprio amministratore.";
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = "Modifica impostazioni sito";
@@ -1069,12 +1069,12 @@ $s_orct = "(aperte/risolte/chiuse/totale)";
 
 # view_all_bug_page.php
 $s_any = "qualsiasi";
-$s_all = 'tutte';
+$s_all = "tutte";
 $s_show = "Quante anomalie";
 $s_changed = "Modificata (ore)";
 $s_viewing_bugs_title = "Elenco delle anomalie";
 $s_updated = "Ultima modifica";
-$s_sticky = "Visualizza anomalie sticky";
+$s_sticky = "In primo piano";
 $s_sort = "Ordina per";
 $s_issue_id = "Anomalia #";
 $s_recently_visited = "Esaminate di recente";
@@ -1107,8 +1107,8 @@ $s_save_query = "Memorizza filtro corrente";
 $s_reset_query = "Annulla filtro";
 $s_query_name = "Nome filtro";
 $s_query_exists = "Questa query sembra già esistere.";
-$s_query_dupe_name = "Esiste un'altra query con questo nome. Indicare un nome differente.";
-$s_query_blank_name = "Non è possibile memorizzare un filtro senza nome. Indicare un nome.";
+$s_query_dupe_name = "Esiste un'altra query con questo nome.  Inserisci un nome differente.";
+$s_query_blank_name = "Non è possibile memorizzare un filtro senza nome.  Inserisci un nome.";
 $s_query_store_error = "Si è verificato un errore durante la memorizzazione del filtro";
 $s_open_queries = "Gestione filtri";
 $s_query_delete_msg = "Sei sicuro di voler eliminare questo filtro?";
@@ -1180,7 +1180,7 @@ $s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato 
 $s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo campo personalizzato e tutti i valori associati?";
 $s_field_delete_button = "Elimina campo personalizzato";
 
-$s_confirm_custom_field_unlinking = "Sei sicuro di voler rimuovere questo campo personalizzato dal presente progetto e cancellare tutti i valori associati?";
+$s_confirm_custom_field_unlinking = "Sei sicuro di voler rimuovere questo campo personalizzato dal progetto corrente e cancellare tutti i valori associati?";
 $s_field_remove_button = "Rimuovi campo personalizzato";
 
 $s_hide_status = "Non mostrare";
@@ -1217,8 +1217,8 @@ $s_sponsorship_process_url = "";
 $s_changelog = "Registro modifiche";
 
 # Roadmap
-$s_roadmap = 'Roadmap';
-$s_resolved_progress = '%d di %d anomalie risolte (%d%%).';
+$s_roadmap = "Roadmap";
+$s_resolved_progress = "%d di %d anomalie risolte (%d%%).";
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
@@ -1232,12 +1232,12 @@ $s_relationship_deleted = "Relazione eliminata";
 $s_no_relationship = "nessuna relazione";
 $s_relationship_replaced = "Relazione aggiornata";
 $s_replace_relationship_button = "Sostituisci";
-$s_replace_relationship_sure_msg = "Esiste già una relazione tra queste anomalie. Procedere con la sostituzione?";
-$s_relationship_with_parent = "Relazione con l'anomalia padre";
+$s_replace_relationship_sure_msg = "Esiste già una relazione tra queste anomalie.  Procedere con la sostituzione?";
+$s_relationship_with_parent = "Relazione con l'anomalia madre";
 $s_delete_relationship_button = "Elimina";
 $s_delete_relationship_sure_msg = "Eliminare questa relazione?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Non tutte le anomalie figlie di questa anomalia risultano risolte oppure chiuse.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. Non tutte le anomalie figlie di questa anomalia risultano risolte oppure chiuse.<br>Prima di <b>risolvere/chiudere</b> una anomalia madre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>: non tutte le anomalie figlie di questa anomalia risultano risolte oppure chiuse.<br/>Prima di <b>risolvere/chiudere</b> una anomalia madre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
 $s_create_child_bug_button = "Duplica";
 $s_bug_cloned_to = "Anomalia duplicata";
 $s_bug_created_from = "Anomalia generata da";
@@ -1285,9 +1285,9 @@ $s_delete_attachment_button = "Elimina allegato";
 $s_delete_attachment_sure_msg = "Sei sicuro di voler eliminare questo allegato?";
 $s_upload_issue_attachments = "Aggiungere allegati ad una anomalia";
 $s_filters = "filtri";
-$s_save_filters = "Salvare nuovi filtri";
-$s_save_filters_as_shared = "Salvare nuovi filtri come condivisi";
-$s_use_saved_filters = "Utilizzare i filtri salvati";
+$s_save_filters = "Crea nuovi filtri";
+$s_save_filters_as_shared = "Crea nuovi filtri condivisi";
+$s_use_saved_filters = "Utilizza i filtri memorizzati";
 $s_create_project = "Crea progetto";
 $s_delete_project = "Elimina progetto";
 $s_manage_project = "Gestione progetto";
@@ -1325,14 +1325,16 @@ $s_after = "Dopo il";
 $s_on_or_after = "Il o dopo il";
 
 # wiki related strings
-$s_wiki = 'Wiki';
+$s_wiki = "Wiki";
 
 # Time Tracking
-$s_time_tracking_billing_link = 'Riepilogo costi';
-$s_time_tracking = 'Tempistiche';
-$s_time_tracking_bugnote_stats = 'Statistiche sulle annotazioni';
-$s_time_tracking_get_bugnote_stats_button = 'Statistiche sulle annotazioni';
-$s_time_tracking_cost_per_hour = 'Costo orario (&euro;)';
-$s_time_tracking_cost = 'Costo';
+$s_time_tracking_billing_link = "Riepilogo costi";
+$s_time_tracking = "Tempistiche";
+$s_time_tracking_get_info_button = "Informazioni sulle tempistiche";
+$s_time_tracking_cost_per_hour = "Costo orario";
+$s_time_tracking_cost = "Costo";
+$s_total_time_for_issue = "Tempo totale speso sull'anomalia = %s";
+$s_from_date = "Dal";
+$s_to_date = "Al";
 
 ?>
