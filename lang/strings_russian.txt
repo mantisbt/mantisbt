@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.106 $
+	# $Revision: 1.107 $
 	# $Author: achumakov $
-	# $Date: 2006-12-30 10:35:42 $
+	# $Date: 2006-12-30 10:44:54 $
 	#
-	# $Id: strings_russian.txt,v 1.106 2006-12-30 10:35:42 achumakov Exp $
+	# $Id: strings_russian.txt,v 1.107 2006-12-30 10:44:54 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -589,7 +589,7 @@ $s_id = 'Номер';
 $s_category = 'Категория';
 $s_severity = 'Серьезность';
 $s_reproducibility = 'Воспроизводимость';
-$s_date_submitted = 'Дата создания';
+$s_date_submitted = 'Создан';
 $s_last_update = 'Изменен';
 $s_reporter = 'Инициатор';
 $s_assigned_to = 'Ответственный';
