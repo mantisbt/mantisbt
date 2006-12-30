@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: achumakov $
-	# $Date: 2006-12-30 10:44:54 $
+	# $Date: 2006-12-30 11:11:36 $
 	#
-	# $Id: strings_russian_1251.txt,v 1.4 2006-12-30 10:44:54 achumakov Exp $
+	# $Id: strings_russian_1251.txt,v 1.5 2006-12-30 11:11:36 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -69,6 +69,8 @@ $s_actiongroup_menu_update_view_status = 'изменить видимость';
 $s_actiongroup_menu_update_category = 'изменить категорию';
 $s_actiongroup_menu_set_sticky = 'прикрепить / открепить';
 $s_actiongroup_menu_update_field = 'Изменить %s';
+$s_actiongroup_menu_update_target_version = 'изменить целевую версию';
+$s_actiongroup_menu_update_fixed_in_version = 'изменить "решен в версии"';
 $s_actiongroup_bugs = 'Выбранные вопросы';
 
 # new strings:
@@ -153,6 +155,8 @@ $s_status_bugs_conf_msg = 'Выберите состояние вопросов';
 $s_view_status_bugs_conf_msg = 'Выберите видимость вопросов';
 $s_category_bugs_conf_msg = 'Выберите категорию вопросов';
 $s_set_sticky_bugs_conf_msg = 'Вы уверены, что хотите прикрепить/открепить эти вопросы?';
+$s_fixed_in_version_bugs_conf_msg = 'Изменить "решен в версии" на';
+$s_target_version_bugs_conf_msg = 'Изменить целевую версию на';
 $s_close_group_bugs_button = 'Закрыть вопросы' ;
 $s_delete_group_bugs_button = 'Удалить вопросы' ;
 $s_move_group_bugs_button = 'Переместить вопросы' ;
@@ -164,6 +168,8 @@ $s_status_group_bugs_button = 'Изменить состояние' ;
 $s_category_group_bugs_button = 'Изменить категорию';
 $s_view_status_group_bugs_button = 'Изменить видимость';
 $s_set_sticky_group_bugs_button = 'Прикрепить/открепить';
+$s_fixed_in_version_group_bugs_button = 'Изменить "решен в версии"';
+$s_target_version_group_bugs_button = 'Изменить целевую версию';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Суммарный график по состоянию' ;
@@ -1095,6 +1101,7 @@ $s_orct = '(открытых/отработанных/закрытых/всего)';
 
 # view_all_bug_page.php
 $s_any = 'любые';
+$s_all = 'все';
 $s_show = 'Выводить по';
 $s_changed = 'Изменялись за посл. часов';
 $s_viewing_bugs_title = 'Список вопросов';
@@ -1350,5 +1357,15 @@ $s_after = 'после' ;
 $s_on_or_after = 'на дату или после' ;
 
 # wiki related strings
-$s_wiki = 'Вики';
+$s_wiki = 'вики';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Расчеты';
+$s_time_tracking = 'Учет времени';
+$s_time_tracking_get_info_button = 'Получить сведения об учете времени';
+$s_time_tracking_cost_per_hour = 'Цена / час';
+$s_time_tracking_cost = 'Цена';
+$s_total_time_for_issue = 'Общее время вопроса = %s';
+$s_from_date = 'с';
+$s_to_date = 'по';
 ?>
