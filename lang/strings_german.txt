@@ -16,11 +16,11 @@
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.149 $
-	# $Author: ryandesign $
-	# $Date: 2006-12-11 08:51:23 $
+	# $Revision: 1.150 $
+	# $Author: achumakov $
+	# $Date: 2006-12-30 09:11:22 $
 	#
-	# $Id: strings_german.txt,v 1.149 2006-12-11 08:51:23 ryandesign Exp $
+	# $Id: strings_german.txt,v 1.150 2006-12-30 09:11:22 achumakov Exp $
 	###########################################################################
 
 ?>
@@ -41,6 +41,8 @@ $s_actiongroup_menu_update_view_status = 'Anzeigestatus ändern';
 $s_actiongroup_menu_update_category = 'Kategorie ändern';
 $s_actiongroup_menu_set_sticky = 'Fixierung setzen/lösen';
 $s_actiongroup_menu_update_field = 'Aktualisiere %s';
+$s_actiongroup_menu_update_target_version = 'Zielversion ändern';
+$s_actiongroup_menu_update_fixed_in_version = 'Erledigungs-Version ändern';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
 
 # new strings:
@@ -125,6 +127,8 @@ $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
 $s_category_bugs_conf_msg = 'Problem-Kategorie wählen';
 $s_set_sticky_bugs_conf_msg = 'Sind Sie sicher, dass Sie die Fixierung dieser Probleme ändern wollen?';
+$s_fixed_in_version_bugs_conf_msg = 'Erledigungs-Version auswählen';
+$s_target_version_bugs_conf_msg = 'Zielversion auswählen';
 $s_close_group_bugs_button = 'Probleme schließen' ;
 $s_delete_group_bugs_button = 'Probleme löschen' ;
 $s_move_group_bugs_button = 'Probleme verschieben' ;
@@ -136,6 +140,8 @@ $s_status_group_bugs_button = 'Status ändern' ;
 $s_category_group_bugs_button = 'Kategorie ändern';
 $s_view_status_group_bugs_button = 'Anzeigestatus ändern';
 $s_set_sticky_group_bugs_button = 'Fixierung ändern';
+$s_fixed_in_version_group_bugs_button = 'Erledigungs-Version ändern';
+$s_target_version_group_bugs_button = 'Zielversion ändern';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Grafikzusammenstellung nach Status' ;
@@ -358,6 +364,7 @@ $s_email_status = 'Status';
 $s_email_resolution = 'Lösung';
 $s_email_duplicate = 'Duplikat';
 $s_email_fixed_in_version = 'Erledigt in Version';
+$s_email_target_version = 'Zielversion';
 $s_email_date_submitted = 'Erstellt am';
 $s_email_last_modified = 'Letzte Aktualisierung';
 $s_email_summary =  'Zusammenfassung';
@@ -575,6 +582,7 @@ $s_eta = 'Aufwand';
 $s_product_version = 'Produktversion';
 $s_build = 'Build';
 $s_fixed_in_version = 'Behoben in Version';
+$s_target_version = 'Zielversion';
 $s_votes = 'Stimmen';
 $s_summary = 'Zusammenfassung';
 $s_description = 'Beschreibung';
