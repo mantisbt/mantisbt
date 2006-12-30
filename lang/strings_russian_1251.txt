@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:46 $
+	# $Date: 2006-12-30 10:25:40 $
 	#
-	# $Id: strings_russian_1251.txt,v 1.1 2006-11-08 13:32:46 achumakov Exp $
+	# $Id: strings_russian_1251.txt,v 1.2 2006-12-30 10:25:40 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -385,6 +385,7 @@ $s_email_priority = 'Приоритет';
 $s_email_status = 'Состояние';
 $s_email_resolution = 'Решение';
 $s_email_duplicate = 'Дублирует';
+$s_email_target_version = 'Целевая версия';
 $s_email_fixed_in_version = 'Решен в версии';
 $s_email_date_submitted = 'Создан';
 $s_email_last_modified = 'Изменен';
@@ -532,7 +533,7 @@ $s_bug_deleted_msg = 'Вопрос удален...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Вы уверены, что хотите удалить этот вопрос?';
-$s_delete_bug_button = 'Удалить вопрос';
+$s_delete_bug_button = 'Удалить';
 
 # bug_monitor.php
 $s_monitor_bug_button = 'Отслеживать';
@@ -603,6 +604,7 @@ $s_eta = 'Примерный срок';
 $s_product_version = 'Версия продукта';
 $s_build = 'Сборка';
 $s_fixed_in_version = 'Решен в версии';
+$s_target_version = 'Целевая версия';
 $s_votes = 'Голоса';
 $s_summary = 'Суть';
 $s_description = 'Подробности';
@@ -907,6 +909,7 @@ $s_main_link = 'главная';
 $s_view_bugs_link = 'список вопросов';
 $s_report_bug_link = 'создать вопрос';
 $s_changelog_link = 'журнал изменений';
+$s_roadmap_link = 'план развития';
 $s_summary_link = 'статистика';
 $s_account_link = 'моя учетная запись';
 $s_users_link = 'пользователи';
@@ -1144,7 +1147,7 @@ $s_update_bug_button = 'Изменить вопрос';
 $s_bug_assign_to_button = 'Назначить:';
 $s_bug_status_to_button = 'Изм. состояние на:';
 $s_reopen_bug_button = 'Повторно открыть';
-$s_move_bug_button = 'Переместить вопрос';
+$s_move_bug_button = 'Переместить';
 $s_attached_files = 'Вложенные файлы';
 $s_publish = 'Опубликовать';
 $s_cached = 'Запомнен';
@@ -1237,6 +1240,10 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Журнал изменений';
+
+# Roadmap
+$s_roadmap = 'План развития';
+$s_resolved_progress = 'Решено %d из %d вопросов. Продвижение (%d%%).';
 
 # Http auth
 $s_http_auth_realm = "Вход в Mantis";

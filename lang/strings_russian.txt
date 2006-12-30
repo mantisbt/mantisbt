@@ -13,11 +13,11 @@
 	###########################################################################
 	# Russian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.104 $
+	# $Revision: 1.105 $
 	# $Author: achumakov $
-	# $Date: 2006-12-10 11:50:58 $
+	# $Date: 2006-12-30 10:25:40 $
 	#
-	# $Id: strings_russian.txt,v 1.104 2006-12-10 11:50:58 achumakov Exp $
+	# $Id: strings_russian.txt,v 1.105 2006-12-30 10:25:40 achumakov Exp $
 	###########################################################################
 	#
 	# Russian glossary
@@ -533,7 +533,7 @@ $s_bug_deleted_msg = 'Вопрос удален...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Вы уверены, что хотите удалить этот вопрос?';
-$s_delete_bug_button = 'Удалить вопрос';
+$s_delete_bug_button = 'Удалить';
 
 # bug_monitor.php
 $s_monitor_bug_button = 'Отслеживать';
@@ -1147,7 +1147,7 @@ $s_update_bug_button = 'Изменить вопрос';
 $s_bug_assign_to_button = 'Назначить:';
 $s_bug_status_to_button = 'Изм. состояние на:';
 $s_reopen_bug_button = 'Повторно открыть';
-$s_move_bug_button = 'Переместить вопрос';
+$s_move_bug_button = 'Переместить';
 $s_attached_files = 'Вложенные файлы';
 $s_publish = 'Опубликовать';
 $s_cached = 'Запомнен';
