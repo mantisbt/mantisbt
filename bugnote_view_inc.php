@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.36 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: bugnote_view_inc.php,v 1.37 2007-01-04 10:07:44 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -172,7 +172,7 @@
 					}
 					echo implode( ', ', $t_to ) . '</em><br /><br />';
 				case TIME_TRACKING:
-					if ( access_has_global_level( config_get( 'time_tracking_view_threshold' ) ) ) {
+					if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
 						echo '<b><big>', $v3_time_tracking_hhmm, '</big></b><br /><br />';
 					}
 					break;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.26 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: bug_change_status_page.php,v 1.27 2007-01-04 10:07:44 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -286,7 +286,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 
 <?php if ( config_get('time_tracking_enabled') ) { ?>
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
-<?php if ( access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'time_tracking' ) ?>

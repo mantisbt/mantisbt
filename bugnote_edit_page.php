@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.52 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: bugnote_edit_page.php,v 1.53 2007-01-04 10:07:44 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -60,7 +60,7 @@
 
 	# No need to gather the extra information if not used
 	if ( config_get('time_tracking_enabled') &&
-		access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) {
+		access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
 		$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
 		$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 	}
@@ -90,7 +90,7 @@
 	</td>
 </tr>
 <?php if ( config_get('time_tracking_enabled') ) { ?>
-<?php if ( access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
 <tr class="row-2">
 	<td class="center" colspan="2">
 		<b><?php echo lang_get( 'time_tracking') ?> (HH:MM)</b><br />

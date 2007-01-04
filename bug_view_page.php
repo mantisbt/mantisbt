@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.83 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: bug_view_page.php,v 1.84 2007-01-04 10:07:44 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -447,7 +447,7 @@
 <?php
 	# Time Tracking stats
 	if ( config_get('time_tracking_enabled') &&
-		access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
+		access_has_bug_level( config_get( 'time_tracking_reporting_threshold' ), $f_bug_id ) ) {
 		include( $t_mantis_dir . 'bugnote_stats_inc.php' );
 	}
 	# History

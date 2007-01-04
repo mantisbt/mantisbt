@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.28 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: bugnote_add_inc.php,v 1.29 2007-01-04 10:07:44 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -71,7 +71,7 @@
 <?php } ?>
 
 <?php if ( config_get('time_tracking_enabled') ) { ?>
-<?php if ( access_has_global_level( config_get( 'time_tracking_edit_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'time_tracking' ) ?>
