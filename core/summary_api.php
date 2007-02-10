@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.44 2006-01-08 14:46:13 thraxisp Exp $
+	# $Id: summary_api.php,v 1.45 2007-02-10 11:59:58 prichards Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -41,7 +41,7 @@
 
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';		  
-		$query = "SELECT COUNT(id) as count, $p_enum $t_status_query 
+		$query = "SELECT COUNT(id) as bugcount, $p_enum $t_status_query 
 				FROM $t_mantis_bug_table
 				WHERE $t_project_filter
 				GROUP BY $p_enum $t_status_query 
@@ -112,13 +112,13 @@
 				$t_bugs_total		= 0;
 			}
 
-			$t_bugs_total += $row['count'];
+			$t_bugs_total += $row['bugcount'];
 			if ( $t_closed_val <= $row['status'] ) {
-				$t_bugs_closed += $row['count'];
+				$t_bugs_closed += $row['bugcount'];
 			} else if ( $t_resolved_val <= $row['status'] ) {
-				$t_bugs_resolved += $row['count'];
+				$t_bugs_resolved += $row['bugcount'];
 			} else {
-				$t_bugs_open += $row['count'];
+				$t_bugs_open += $row['bugcount'];
 			}
 			$t_last_value = $row[$p_enum];
 		}
@@ -228,7 +228,7 @@
 			return;
 		}
 
-		$query = "SELECT COUNT(id) as count, handler_id, status
+		$query = "SELECT COUNT(id) as bugcount, handler_id, status
 				FROM $t_mantis_bug_table
 				WHERE handler_id>0 AND $specific_where
 				GROUP BY handler_id, status
@@ -272,13 +272,13 @@
 				$t_bugs_total = 0;
 			}
 
-			$t_bugs_total += $v_count;
+			$t_bugs_total += $v_bugcount;
 			if ( $t_closed_val <= $row['status'] ) {
-				$t_bugs_closed += $v_count;
+				$t_bugs_closed += $v_bugcount;
 			} else if ( $t_resolved_val <= $row['status'] ) {
-				$t_bugs_resolved += $v_count;
+				$t_bugs_resolved += $v_bugcount;
 			} else {
-				$t_bugs_open += $v_count;
+				$t_bugs_open += $v_bugcount;
 			}
 			$t_last_handler = $v_handler_id;
 		}
@@ -327,7 +327,7 @@
 
 		while ( $row = db_fetch_array( $result ) ) {
 			$v_reporter_id = $row['reporter_id'];
-			$query = "SELECT COUNT(id) as count, status FROM $t_mantis_bug_table
+			$query = "SELECT COUNT(id) as bugcount, status FROM $t_mantis_bug_table
 					WHERE reporter_id=$v_reporter_id
 					AND $specific_where
 					GROUP BY status
@@ -344,13 +344,13 @@
 			$t_closed_val = CLOSED;
 
 			while ( $row2 = db_fetch_array( $result2 ) ) {
-                $t_bugs_total += $row2['count'];
+                $t_bugs_total += $row2['bugcount'];
                 if ( $t_closed_val <= $row2['status'] ) {
-                    $t_bugs_closed += $row2['count'];
+                    $t_bugs_closed += $row2['bugcount'];
                 } else if ( $t_resolved_val <= $row2['status'] ) {
-                    $t_bugs_resolved += $row2['count'];
+                    $t_bugs_resolved += $row2['bugcount'];
                 } else {
-                    $t_bugs_open += $row2['count'];
+                    $t_bugs_open += $row2['bugcount'];
                 }
 			}
 
@@ -391,7 +391,7 @@
 		}
 		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'project_id, ' : '';
 
-		$query = "SELECT COUNT(id) as count, $t_project_query category, status
+		$query = "SELECT COUNT(id) as bugcount, $t_project_query category, status
 				FROM $t_mantis_bug_table
 				WHERE category>'' AND $specific_where
 				GROUP BY $t_project_query category, status
@@ -440,13 +440,13 @@
 				$t_bugs_total = 0;
 			}
 
-            $t_bugs_total += $row['count'];
+            $t_bugs_total += $row['bugcount'];
             if ( $t_closed_val <= $row['status'] ) {
-                $t_bugs_closed += $row['count'];
+                $t_bugs_closed += $row['bugcount'];
             } else if ( $t_resolved_val <= $row['status'] ) {
-                $t_bugs_resolved += $row['count'];
+                $t_bugs_resolved += $row['bugcount'];
             } else {
-                $t_bugs_open += $row['count'];
+                $t_bugs_open += $row['bugcount'];
             }
 
 			$last_category = $v_category;
@@ -498,7 +498,7 @@
 
 		# Retrieve statistics one time to improve performance.
 		if ( null === $p_cache ) {
-			$query = "SELECT project_id, status, COUNT( status ) AS count
+			$query = "SELECT project_id, status, COUNT( status ) AS bugcount
 					FROM $t_mantis_bug_table
 					GROUP BY project_id, status";
 
@@ -512,21 +512,21 @@
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
                 if ( $t_closed_val <= $v_status ) {
                     if ( isset( $p_cache[ $v_project_id ][ 'closed'   ] ) ) {
-                        $p_cache[ $v_project_id ][ 'closed'   ]  += $v_count;
+                        $p_cache[ $v_project_id ][ 'closed'   ]  += $v_bugcount;
                     } else {
-                        $p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+                        $p_cache[ $v_project_id ][ 'closed'   ]  = $v_bugcount;
                     }
                 } else if ( $t_resolved_val <= $v_status ) {
                     if ( isset( $p_cache[ $v_project_id ][ 'resolved' ] ) ) {
-                        $p_cache[ $v_project_id ][ 'resolved' ]  += $v_count;
+                        $p_cache[ $v_project_id ][ 'resolved' ]  += $v_bugcount;
                     } else {
-                        $p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+                        $p_cache[ $v_project_id ][ 'resolved' ]  = $v_bugcount;
                     }
                 } else {
                     if ( isset( $p_cache[ $v_project_id ][ 'open'     ] ) ) {
-                        $p_cache[ $v_project_id ][ 'open'     ]  += $v_count;
+                        $p_cache[ $v_project_id ][ 'open'     ]  += $v_bugcount;
                     } else {
-                        $p_cache[ $v_project_id ][ 'open'     ]  = $v_count;
+                        $p_cache[ $v_project_id ][ 'open'     ]  = $v_bugcount;
                     }
                 }
 			}
@@ -577,7 +577,7 @@
 
 		$specific_where .= ' AND handler_id > 0';
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT COUNT(id) as count, handler_id, resolution
+		$query = "SELECT COUNT(id) as bugcount, handler_id, resolution
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY handler_id, resolution
@@ -594,8 +594,8 @@
 			if ( !isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
 				$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] = 0;
 			}
-			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] += $t_arr['count'];
-			$t_handler_res_arr[$t_arr['handler_id']]['total'] += $t_arr['count'];
+			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] += $t_arr['bugcount'];
+			$t_handler_res_arr[$t_arr['handler_id']]['total'] += $t_arr['bugcount'];
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -685,7 +685,7 @@
 		}
 
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT COUNT(id) as count, reporter_id, resolution
+		$query = "SELECT COUNT(id) as bugcount, reporter_id, resolution
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution";
@@ -702,8 +702,8 @@
 			if ( !isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
 				$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] += $t_arr['count'];
-			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['count'];
+			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] += $t_arr['bugcount'];
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['bugcount'];
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -822,7 +822,7 @@
 		}
 
 		# Get all of the bugs and split them up into an array
-		$query = "SELECT COUNT(id) as count, reporter_id, resolution, severity
+		$query = "SELECT COUNT(id) as bugcount, reporter_id, resolution, severity
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution, severity";
@@ -843,9 +843,9 @@
 			if ( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
 				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] += $t_arr['count'];
-			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] += $t_arr['count'];
-			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['count'];
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] += $t_arr['bugcount'];
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] += $t_arr['bugcount'];
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']] += $t_arr['bugcount'];
 
 			$t_arr = db_fetch_array( $result );
 		}
