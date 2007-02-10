@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: db_stats.php,v 1.2 2005-05-03 14:16:42 thraxisp Exp $
+	# $Id: db_stats.php,v 1.3 2007-02-10 12:19:10 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
@@ -58,7 +58,6 @@
 	print_table_stats( config_get( 'mantis_project_version_table' ) );
 	print_table_stats( config_get( 'mantis_sponsorship_table' ) );
 	print_table_stats( config_get( 'mantis_tokens_table' ) );
-	print_table_stats( config_get( 'mantis_upgrade_table' ) );
 	print_table_stats( config_get( 'mantis_user_pref_table' ) );
 	print_table_stats( config_get( 'mantis_user_print_pref_table' ) );
 	print_table_stats( config_get( 'mantis_user_profile_table' ) );
