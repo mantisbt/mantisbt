@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.20 2006-08-15 07:11:22 vboctor Exp $
+	# $Id: upgrade_inc.php,v 1.21 2007-02-20 06:01:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'db_table_names_inc.php' );
@@ -353,6 +353,35 @@
 			}
 
 			echo '</form>';
+		}
+
+		# Runs the upgrade steps without user intervention - used by Linux distributions to automate the upgrade process.
+		function run_all_unattended() {
+			$t_error = false;
+
+			foreach ( $this->item_array as $item ) {
+				$t_state='';
+
+				if ( $item->is_applied() ) {
+					$t_message	= 'Previously Applied:';
+				} else {
+					if ( $t_error ) {
+						$t_message	= 'Skipped due to previous error';
+						continue;  # next one
+					}
+
+					if ( $item->execute() ) {
+						$t_message	= 'Applied:';
+					} else {
+						$t_message	= 'ERROR - ' . $item->error . ':';
+						$t_error = true;
+					}
+				} 
+
+				echo $t_message, ' ', $item->description, "\n";
+			}
+
+			return $t_error;
 		}
 
 		function output( $p_limit=null ) {
