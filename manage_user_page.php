@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.61 2006-01-05 03:45:36 thraxisp Exp $
+	# $Id: manage_user_page.php,v 1.62 2007-02-20 05:43:25 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -115,7 +115,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php
 	$query = "SELECT *
 		FROM $t_user_table
-		WHERE login_count=0
+		WHERE ( login_count = 0 ) AND ( date_created = last_visit )
 		ORDER BY date_created DESC";
 	$result = db_query( $query );
 	$user_count = db_num_rows( $result );

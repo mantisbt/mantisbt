@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_prune.php,v 1.8 2006-04-25 12:17:09 vboctor Exp $
+	# $Id: manage_user_prune.php,v 1.9 2007-02-20 05:43:25 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -23,7 +23,7 @@
 
 	$query = "SELECT id
 			FROM $t_user_table
-			WHERE login_count = 0 AND $date_calc";
+			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND $date_calc";
 	$result = db_query($query);
 
 	$count = db_num_rows( $result );
