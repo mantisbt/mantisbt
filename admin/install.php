@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.30 2006-05-17 00:49:38 vboctor Exp $
+	# $Id: install.php,v 1.31 2007-02-20 06:05:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -635,7 +635,7 @@ if ( 5 == $t_install_state ) {
 		$t_write_failed = true;
 
 		if ( !$t_config_exists ) {
-			if ( $fd = @fopen( $t_config_filename, 'x' ) ) {
+			if ( $fd = @fopen( $t_config_filename, 'w' ) ) {
 				fwrite( $fd, $t_config );
 				fclose( $fd );
 			}
