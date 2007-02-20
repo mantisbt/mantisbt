@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.40 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bug_delete.php,v 1.41 2007-02-20 05:24:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,11 +35,7 @@
 
 	$t_bug = bug_get( $f_bug_id, true );
 
-	helper_call_custom_function( 'issue_delete_validate', array( $f_bug_id ) );
-
 	bug_delete( $f_bug_id );
-
-	helper_call_custom_function( 'issue_delete_notify', array( $f_bug_id ) );
 
 	print_successful_redirect( 'view_all_bug_page.php' );
 ?>

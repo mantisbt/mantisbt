@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.103 2006-12-12 18:26:29 davidnewcomb Exp $
+	# $Id: bug_api.php,v 1.104 2007-02-20 05:24:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -662,10 +662,18 @@
 		$t_bug_table		= config_get( 'mantis_bug_table' );
 		$t_bug_text_table	= config_get( 'mantis_bug_text_table' );
 
+		# call pre-deletion custom function
+		helper_call_custom_function( 'issue_delete_validate', array( $p_bug_id ) );
+
 		# log deletion of bug
 		history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
 		email_bug_deleted( $p_bug_id );
+
+		# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before 
+		# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
+		# provide it with bug data rather than an id, but this will break backward compatibility.
+		helper_call_custom_function( 'issue_delete_notify', array( $f_bug_id ) );
 
 		# Unmonitor bug for all users
 		bug_unmonitor( $p_bug_id, null );
