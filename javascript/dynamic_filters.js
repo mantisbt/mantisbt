@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: dynamic_filters.js,v 1.4 2005-04-26 01:17:52 thraxisp Exp $
+ * $Id: dynamic_filters.js,v 1.4.14.1 2007-02-24 06:24:23 vboctor Exp $
  * --------------------------------------------------------
  */
 /*
@@ -79,11 +79,6 @@
 var processURI    = './return_dynamic_filters.php';
 var liveReq = false;
 
-// on !IE we only have to initialize it once
-if (window.XMLHttpRequest) {
-	liveReq = new XMLHttpRequest();
-}
-
 /**
  * Build the XMLHttpRequest and send it
  */
@@ -92,10 +87,12 @@ function liveReqDoReq() {
 	if (liveReq && liveReq.readyState < 4) {
 		liveReq.abort();
 	}
-
+	
 	if (window.XMLHttpRequest) {
-		// branch for IE/Windows ActiveX version
+		// branch for IE7, Firefox, Opera, etc.
+		liveReq = new XMLHttpRequest();
 	} else if (window.ActiveXObject) {
+		// branch for IE5, IE6 via ActiveX
 		liveReq = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
