@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.165 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.166 2007-03-03 14:58:28 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,9 +21,11 @@
 
 	$t_filter = current_user_get_bug_filter();
 
-	list( $t_sort, ) = split( ',', $t_filter['sort'] );
-	list( $t_dir, ) = split( ',', $t_filter['dir'] );
-
+	if( $t_filter ) {
+		list( $t_sort, ) = split( ',', $t_filter['sort'] );
+		list( $t_dir, ) = split( ',', $t_filter['dir'] );
+	}
+	
 	$t_checkboxes_exist = false;
 
 	$t_icon_path = config_get( 'icon_path' );
@@ -74,7 +76,10 @@
 			$v_end   = 0;
 
 			if ( sizeof( $rows ) > 0 ) {
-				$v_start = $t_filter['per_page'] * (int)($f_page_number-1) +1;
+				if( $t_filter )
+					$v_start = $t_filter['per_page'] * (int)($f_page_number-1) +1;
+				else 
+					$v_start = 1;
 				$v_end   = $v_start + sizeof( $rows ) -1;
 			}
 
@@ -118,7 +123,7 @@
 	{
 		global $t_columns, $t_filter;
 
-		$t_in_stickies = ( 'on' == $t_filter['sticky_issues'] );
+		$t_in_stickies = ( $t_filter && ( 'on' == $t_filter['sticky_issues'] ) );
 
 		mark_time( 'begin loop' );
 
