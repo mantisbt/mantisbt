@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.36 2005-08-07 16:01:37 ryandesign Exp $
+	# $Id: login.php,v 1.37 2007-03-03 14:54:15 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,7 @@
 		} else {
 			auth_http_set_logout_pending( false );
 			auth_http_prompt();
-			break;
+			return;
 		}
 	}
 
