@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.49 2005-11-26 23:48:30 ryandesign Exp $
+	# $Id: error_api.php,v 1.50 2007-03-03 15:00:43 prichards Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -181,6 +181,10 @@
 	# ---------------
 	# Print out the variable context given
 	function error_print_context( $p_context ) {
+		if( !is_array( $p_context ) ) {
+		  return;
+		}
+	
 		PRINT '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
 		# print normal variables
@@ -249,7 +253,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
+				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
