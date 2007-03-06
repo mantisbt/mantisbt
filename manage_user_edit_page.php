@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.15 2005-05-13 01:57:16 thraxisp Exp $
+	# $Id: manage_user_edit_page.php,v 1.15.14.1 2007-03-06 07:00:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -54,7 +54,7 @@
 		<?php echo lang_get( 'realname' ) ?>:
 	</td>
 	<td width="70%">
-		<input type="text" size="16" maxlength="100" name="realname" value="<?php echo $t_user['realname'] ?>" />
+		<input type="text" size="16" maxlength="100" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.89 2005-06-12 21:04:43 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.89.12.1 2007-03-06 07:00:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -349,7 +349,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_update']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if ( $t_def['require_update'] ) {?><span class="required">*</span><?php } ?><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td colspan="5">
 		<?php

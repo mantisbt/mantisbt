@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.59.8.1.2.1 2006-01-05 03:54:19 thraxisp Exp $
+	# $Id: manage_user_page.php,v 1.59.8.1.2.1.4.1 2007-03-06 07:00:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -103,7 +103,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		echo ' : ';
 	}
 
-	echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', $row['username'], '</a>';
+	echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', string_display( $row['username'] ), '</a>';
 }
 ?>
 	</td>
@@ -139,7 +139,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 			echo ' : ';
 		}
 
-		echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', $row['username'], '</a>';
+		echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', string_display( $row['username'] ), '</a>';
 	}
 ?>
 	</td>
@@ -263,9 +263,9 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
-		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
+		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display( $u_username ) ?></a>
 	</td>
-	<td><?php echo $u_realname ?></td>
+	<td><?php echo string_display( $u_realname ) ?></td>
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>
 	<td><?php echo get_enum_element( 'access_levels', $u_access_level ) ?></td>
 	<td><?php echo trans_bool( $u_enabled ) ?></td>

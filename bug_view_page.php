@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.77.6.1 2006-01-01 02:58:50 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.77.6.1.4.1 2007-03-06 07:00:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -347,7 +347,7 @@
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+			<?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 		</td>
 		<td colspan="5">
 			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id ); ?>

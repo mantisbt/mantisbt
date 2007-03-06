@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.184.4.1.2.1.2.1.2.2 2006-09-09 05:47:14 vboctor Exp $
+	# $Id: html_api.php,v 1.184.4.1.2.1.2.1.2.3 2007-03-06 07:00:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -321,8 +321,8 @@
 						PRINT ' | <a href="signup_page.php">' . lang_get( 'signup_link' ) . '</a>';
 					}
 				} else {
-					echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">$t_username</span> <span class=\"small\">";
-					echo is_blank( $t_realname ) ? "($t_access_level)" : "($t_realname - $t_access_level)";
+					echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_display( $t_username ), "</span> <span class=\"small\">";
+					echo is_blank( $t_realname ) ? "($t_access_level)" : "(", string_display( $t_realname ), " - $t_access_level)";
 					echo "</span>";
 				}
 			PRINT '</td>';
