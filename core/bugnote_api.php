@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.39 2006-12-20 19:49:54 davidnewcomb Exp $
+	# $Id: bugnote_api.php,v 1.40 2007-03-06 18:08:43 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -447,19 +447,14 @@
 	# --------------------
 	# Returns an array of bugnote stats
 	function bugnote_stats_get_events_array( $p_bugnote_id, $p_from, $p_to ) {
-		// MySQL
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
 		if ( "" != $p_from ) {
-			$t_ar = explode( "/", $p_from ); # Expecting mm/dd/yyyy
-			$t_from = $t_ar[2] ."-". $t_ar[0] ."-". $t_ar[1];
-			$c_from = " AND bn.date_submitted > '$t_from' ";
+			$c_from = " AND bn.date_submitted > '$p_from' ";
 		}
 		if ( "" != $p_to ) {
-			$t_ar = explode( "/", $p_to ); # Expecting mm/dd/yyyy
-			$t_to = $t_ar[2] ."-". $t_ar[0] ."-". $t_ar[1];
-			$c_to = " AND bn.date_submitted < '$t_to' ";
+			$c_to = " AND bn.date_submitted < '$p_to' ";
 		}
 		$t_results = array();
 
