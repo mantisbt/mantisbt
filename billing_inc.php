@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.4 2007-01-07 11:36:48 davidnewcomb Exp $
+	# $Id: billing_inc.php,v 1.5 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -131,7 +131,7 @@ if ( $f_bugnote_cost == "" )
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">&nbsp;</td>
 	<td class="small-caption">
-		<?php echo $t_item['username'] ?>
+		<?php echo string_display( $t_item['username'] ) ?>
 	</td>
 	<td class="small-caption">
 		<?php echo $t_item['sum_time_tracking'] ?>

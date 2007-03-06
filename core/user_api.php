@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.107 2005-10-29 09:52:52 prichards Exp $
+	# $Id: user_api.php,v 1.108 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -183,6 +183,21 @@
 	}
 
 	# --------------------
+	# Check if the realname is a valid (does not account for uniqueness)
+	# true: valid, false: not valid
+	function user_is_realname_valid( $p_realname ) {
+		return ( !string_contains_scripting_chars( $p_realname ) );
+	}
+
+	# --------------------
+	# Check if the realname is a valid (does not account for uniqueness), if not, trigger an error
+	function user_ensure_realname_valid( $p_realname ) {
+		if ( !user_is_realname_valid( $p_realname ) ) {
+			trigger_error( ERROR_USER_REAL_NAME_INVALID, ERROR );
+		}
+	}
+
+	# --------------------
 	# Check if the username is a valid username (does not account for uniqueness)
 	#  realname can match
 	# Return true if it is, false otherwise
@@ -343,6 +358,7 @@
 
 		user_ensure_name_valid( $p_username );
 		user_ensure_name_unique( $p_username );
+		user_ensure_realname_valid( $p_realname );
 		user_ensure_realname_unique( $p_username, $p_realname );
 		email_ensure_valid( $p_email );
 

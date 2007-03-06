@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.82 2006-11-11 07:37:59 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.83 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -485,7 +485,7 @@
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
-			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+			<?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 		</td>
 		<td colspan="5">
 		<?php print_custom_field_value( $t_def, $t_id, $f_bug_id ); ?>

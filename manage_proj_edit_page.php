@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.97 2006-04-21 10:36:19 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.98 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -477,7 +477,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
-					<?php echo $t_desc['name'] ?>
+					<?php echo string_display( $t_desc['name'] ) ?>
 				</td>
 				<td>
 <form method="post" action="manage_proj_custom_field_update.php">

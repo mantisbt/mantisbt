@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.38 2006-03-26 10:35:33 vboctor Exp $
+	# $Id: manage_user_update.php,v 1.39 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,6 +37,9 @@
         && false == user_is_name_unique( $f_username ) ) {
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
+
+	user_ensure_name_valid( $f_username );
+	user_ensure_realname_valid( $f_realname );
 	user_ensure_realname_unique( $f_username, $f_realname );
 
 	$f_email = email_append_domain( $f_email );

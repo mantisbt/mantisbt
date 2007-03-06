@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.95 2007-01-04 10:07:44 davidnewcomb Exp $
+	# $Id: bug_update_page.php,v 1.96 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -356,7 +356,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_update']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if ( $t_def['require_update'] ) {?><span class="required">*</span><?php } ?><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td colspan="5">
 		<?php

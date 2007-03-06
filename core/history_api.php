@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.38 2006-11-11 07:38:00 vboctor Exp $
+	# $Id: history_api.php,v 1.39 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -81,10 +81,10 @@
 	# Retrieves the history events for the specified bug id and returns it in an array
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
 	# 'note', 'change'.
-	function history_get_events_array( $p_bug_id ) {
+	function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 		$t_normal_date_format = config_get( 'normal_date_format' );
 
-		$raw_history = history_get_raw_events_array( $p_bug_id );
+		$raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
 		$raw_history_count = count( $raw_history );
 		$history = array();
 

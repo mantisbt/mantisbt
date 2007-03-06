@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.159 2006-12-16 20:12:55 vboctor Exp $
+	# $Id: print_api.php,v 1.160 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -884,7 +884,7 @@
 				$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 				$t_command_id = 'custom_field_' . $t_custom_field_id;
 				$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
-				$commands[$t_command_id] = $t_command_caption;
+				$commands[$t_command_id] = string_display( $t_command_caption );
 			}
 		}
 

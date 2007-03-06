@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.60 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.61 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -239,6 +239,10 @@
 	# the definition are the default values and can be changes later
 	# return the ID of the new definition
 	function custom_field_create( $p_name ) {
+		if ( string_contains_scripting_chars( $p_def_array['name'] ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
+		}
+
 		$c_name = db_prepare_string( trim( $p_name ) );
 
 		if ( is_blank( $p_name ) ) {
@@ -262,6 +266,10 @@
 	# Update the field definition
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
+		if ( string_contains_scripting_chars( $p_def_array['name'] ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
+		}
+
 		$c_field_id			= db_prepare_int( $p_field_id );
 		$c_name				= db_prepare_string( trim( $p_def_array['name'] ) );
 		$c_type				= db_prepare_int(    $p_def_array['type']            );

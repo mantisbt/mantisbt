@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.5 2006-09-12 03:38:57 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.6 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -41,7 +41,7 @@
 				return;
 			case CONFIG_TYPE_STRING:
 				$t_value = config_eval( $p_value );
-				echo "'$t_value'";
+				echo "'" . string_display( $t_value ) . "'";
 				return;
 			case CONFIG_TYPE_COMPLEX:
 				$t_value = unserialize( $p_value );

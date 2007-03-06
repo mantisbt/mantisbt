@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.22 2005-03-21 20:48:55 vwegert Exp $
+	# $Id: manage_user_create.php,v 1.23 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -36,6 +36,7 @@
 	#  blank password (don't want to prompt the user if the process will fail
 	#  anyway)
 	user_ensure_name_valid( $f_username );
+	user_ensure_realname_valid( $f_username );
 
 	if ( $f_password != $f_password_verify ) {
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.84 2006-10-01 09:23:12 achumakov Exp $
+	# $Id: string_api.php,v 1.85 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -721,5 +721,15 @@
 		}
 
 		return $t_string;
+	}
+
+	# --------------------
+	# Checks the supplied string for scripting characters, if it contains any, then return true, otherwise return false.
+	function string_contains_scripting_chars( $p_string ) {
+		if ( ( strstr( $p_string, '<' ) !== false ) || ( strstr( $p_string, '>' ) !== false ) ) {
+			return true;
+		}
+
+		return false;
 	}
 ?>

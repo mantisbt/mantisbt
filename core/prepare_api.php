@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: prepare_api.php,v 1.1 2004-11-30 12:17:04 vboctor Exp $
+	# $Id: prepare_api.php,v 1.2 2007-03-06 07:05:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -47,11 +47,11 @@
 			if ( !is_blank( $t_email ) ) {
 				return prepare_email_link( $t_email, $t_username );
 			} else {
-				return $t_username;
+				return string_display( $t_username );
 			}
 		} else {
 			$t_result = '<font STYLE="text-decoration: line-through">';
-			$t_result .= $t_username;
+			$t_result .= string_display( $t_username );
 			$t_result .= '</font>';
 			return $t_result;
 		}

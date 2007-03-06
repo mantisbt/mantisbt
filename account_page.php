@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.51 2005-07-17 21:56:21 thraxisp Exp $
+	# $Id: account_page.php,v 1.52 2007-03-06 07:05:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -187,7 +187,7 @@
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
 		<td>
-			<input type="text" size="32" maxlength="64" name="realname" value="<?php echo $u_realname ?>" />
+			<input type="text" size="32" maxlength="64" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
 		</td>
 	</tr>
 
