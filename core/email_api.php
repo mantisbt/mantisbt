@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.121 2005-08-04 20:57:50 thraxisp Exp $
+	# $Id: email_api.php,v 1.121.10.1 2007-03-06 05:54:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1081,7 +1081,7 @@
 
 		# put history data
 		if ( ( ON == config_get( 'history_default_visible' ) ) &&  access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ) {
-			$t_bug_data['history']  = history_get_raw_events_array( $p_bug_id );
+			$t_bug_data['history']  = history_get_raw_events_array( $p_bug_id, $p_user_id );
 		}
 
 		# Sponsorship Information
