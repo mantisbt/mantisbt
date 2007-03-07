@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.52 2006-12-26 10:56:07 vboctor Exp $
+	# $Id: database_api.php,v 1.53 2007-03-07 10:40:00 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -369,6 +369,46 @@
 		}
 
 		return (int)$t_min;
+	}
+
+	# --------------------
+	# prepare a date string in "yyyy-mm-dd"
+	function db_prepare_date( $p_yyyymmdd ) {
+		if ( is_blank( $p_yyyymmdd ) ) {
+			return "";
+		}
+
+		$t_a = explode( '-', $p_yyyymmdd );
+
+		// date can be composed of max 3 parts (yyyy-mm-dd)
+		if ( count( $t_a ) > 3 ) {
+			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
+			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		}
+
+		// Check years
+		if ( !is_numeric( $t_a[0] ) || ( (integer)$t_a[0] < 1900 || (integer)$t_a[0] > 2100) ) {
+			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
+			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		}
+
+		// Check months
+		if ( !is_numeric( $t_a[1] ) || ( (integer)$t_a[1] < 1 || (integer)$t_a[1] > 12) ) {
+			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
+			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		}
+
+		// Check days
+		if ( !is_numeric( $t_a[2] ) || ( (integer)$t_a[2] < 1 || (integer)$t_a[2] > 31) ) {
+			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
+			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		}
+
+		// Format
+		$t_formatted = $t_a[0] . "-";
+		$t_formatted .= ($t_a[1] < 10 ? "0" . $t_a[1] : $t_a[1]);
+		$t_formatted .= ($t_a[2] < 10 ? "0" . $t_a[2] : $t_a[2]);
+		return $t_formatted;
 	}
 
 	# --------------------
