@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.96 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.97 2007-03-10 03:55:11 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -153,7 +153,7 @@
 	<td>
 		<?php
 			if ( ON == config_get( 'use_javascript' ) ) {
-				$t_username = user_get_name( $t_bug->reporter_id );
+				$t_username = prepare_user_name( $t_bug->reporter_id );
 				echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $f_bug_id );
 			} else {
 				echo '<select <?php echo helper_get_tab_index() ?> name="reporter_id">';
