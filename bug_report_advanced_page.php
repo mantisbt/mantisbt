@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.59 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.60 2007-03-10 04:30:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -140,14 +140,20 @@
 <!-- Category -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="30%">
-		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
+		<?php echo '<span class="required">*</span>', lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
 	</td>
 	<td width="70%">
 		<?php if ( $t_changed_project ) {
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
 		<select <?php echo helper_get_tab_index() ?> name="category">
-			<?php print_category_option_list( $f_category ) ?>
+			<?php 
+				if ( is_blank( $f_category ) ) {
+					echo '<option value="" selected="selected">', string_attribute( lang_get( 'select_option' ) ), '</option>';
+				}
+
+				print_category_option_list( $f_category ); 
+			?>
 		</select>
 	</td>
 </tr>

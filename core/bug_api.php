@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.104 2007-02-20 05:24:15 vboctor Exp $
+	# $Id: bug_api.php,v 1.105 2007-03-10 04:30:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -361,6 +361,11 @@
 		# Description cannot be blank
 		if ( is_blank( $c_description ) ) {
 			error_parameters( lang_get( 'description' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+		
+		if ( is_blank( $c_category ) ) {
+			error_parameters( lang_get( 'category' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
