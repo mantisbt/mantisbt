@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.54 2006-11-11 07:37:59 vboctor Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.55 2007-03-13 04:39:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -145,9 +145,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
             # line feeds are desactivated in case of excel export, to avoid multiple lines
             if ( $f_type_page != 'html' ) {
-				$v2_description = stripslashes( str_replace( '\n',' ',$v2_description ));
-				$v2_steps_to_reproduce  = stripslashes( str_replace( '\n',' ',$v2_steps_to_reproduce ) );
-				$v2_additional_information = stripslashes( str_replace( '\n',' ',$v2_additional_information ));
+				$v2_description = stripslashes( htmlspecialchars( str_replace( '\n',' ',$v2_description ) ) );
+				$v2_steps_to_reproduce  = stripslashes( htmlspecialchars( str_replace( '\n',' ',$v2_steps_to_reproduce ) ) );
+				$v2_additional_information = stripslashes( htmlspecialchars( str_replace( '\n',' ',$v2_additional_information ) ) );
             } else {
                 $v2_description 			= string_display_links( $v2_description );
                 $v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
