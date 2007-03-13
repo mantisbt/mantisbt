@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.53 2007-03-07 10:40:00 davidnewcomb Exp $
+	# $Id: database_api.php,v 1.54 2007-03-13 03:42:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -464,6 +464,25 @@
 	# convert minutes to a time format [h]h:mm
 	function db_minutes_to_hhmm( $p_min = 0 ) {
 		return sprintf( '%02d:%02d', $p_min / 60, $p_min % 60 );
+	}
+	
+	# --------------------
+	# A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
+	# $p_field_name - The name of the field to filter on.
+	# $p_value - The value that includes the pattern (can include % for wild cards) - not including the quotations.
+	# $p_case_sensitive - true: case sensitive, false: case insensitive
+	# returns (field LIKE 'value') OR (field ILIKE 'value')
+	# The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
+	function db_helper_like( $p_field_name, $p_value, $p_case_sensitive = false ) {
+		$t_like_keyword = 'LIKE';
+
+		if ( $p_case_sensitive === false ) {
+			if ( db_is_pgsql() ) {
+				$t_like_keyword = 'ILIKE';
+			}
+		}
+
+		return "($p_field_name $t_like_keyword '$p_value')";
 	}
 
 	# --------------------

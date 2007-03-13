@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.147 2006-12-19 09:15:54 vboctor Exp $
+	# $Id: filter_api.php,v 1.148 2007-03-13 03:42:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -794,19 +794,14 @@
 							} else {
 								$t_custom_where_clause .= ' OR ';
 							}
-							$t_custom_where_clause .= "$t_table_name.value ";
 							switch( $t_def['type'] ) {
 							case CUSTOM_FIELD_TYPE_MULTILIST:
 							case CUSTOM_FIELD_TYPE_CHECKBOX:
-								$t_custom_where_clause .= "LIKE '%|";
-								$t_custom_where_clause_closing = "|%'";
+								$t_custom_where_clause .= db_helper_like( "$t_table_name.value", '%|' . db_prepare_string( $t_filter_member ) . '|%' );
 								break;
 							default:
-								$t_custom_where_clause .= "= '";
-								$t_custom_where_clause_closing = "'";
+								$t_custom_where_clause .= "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'";
 							}
-							$t_custom_where_clause .= db_prepare_string( $t_filter_member );
-							$t_custom_where_clause .= $t_custom_where_clause_closing;
 						}
 					}
 					if ( !is_blank( $t_custom_where_clause ) ) {
@@ -822,18 +817,18 @@
 		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
 			$c_search_int = db_prepare_int( $t_filter['search'] );
-			$t_textsearch_where_clause = "((summary LIKE '%$c_search%')
-							 OR ($t_bug_text_table.description LIKE '%$c_search%')
-							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
-							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
-							 OR ($t_bug_table.id = '$c_search_int'))";
+			$t_textsearch_where_clause = '(' . db_helper_like( 'summary', "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_text_table.description", "%$c_search%" ) . 
+							 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce", "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information", "%$c_search%" ) .
+							 " OR ( $t_bug_table.id = '$c_search_int' ) )";
 
-			$t_textsearch_wherejoin_clause = "((summary LIKE '%$c_search%')
-							 OR ($t_bug_text_table.description LIKE '%$c_search%')
-							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
-							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
-							 OR ($t_bug_table.id LIKE '%$c_search%')
-							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))";
+			$t_textsearch_wherejoin_clause = '(' . db_helper_like( 'summary', "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_text_table.description", "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce", "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_text_table.additional_information", "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bug_table.id", "%$c_search%" ) .
+							 ' OR ' . db_helper_like( "$t_bugnote_text_table.note", "%$c_search%" ) . ' )';
 
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
