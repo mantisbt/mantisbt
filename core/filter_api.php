@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.148 2007-03-13 03:42:20 vboctor Exp $
+	# $Id: filter_api.php,v 1.149 2007-03-13 05:52:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -981,7 +981,7 @@
 		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 
-		$query2  = "SELECT $t_select
+		$query2  = "SELECT DISTINCT $t_select
 					$t_from
 					$t_join
 					$t_where
