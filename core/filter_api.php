@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.149 2007-03-13 05:52:46 vboctor Exp $
+	# $Id: filter_api.php,v 1.150 2007-03-13 06:06:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -946,6 +946,8 @@
 		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
 			$t_order_array[] = "sticky DESC";
 		}
+		
+		$t_join = '';
 		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
 			$c_sort = db_prepare_string( $t_sort_fields[$i] );
 
