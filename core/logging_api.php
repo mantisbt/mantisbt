@@ -6,12 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: logging_api.php,v 1.1 2005-05-13 22:02:55 thraxisp Exp $
+	# $Id: logging_api.php,v 1.2 2007-03-14 21:25:13 zakman Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
-	require_once( $t_core_dir . 'current_user_api.php' );
 	
 	$g_log_levels = array(
 		LOG_EMAIL => 'mail',
