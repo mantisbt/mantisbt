@@ -1,4 +1,4 @@
-<?php
+CONFIG_TYPE_STRING<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.6 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: adm_config_report.php,v 1.7 2007-03-23 22:55:55 zakman Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -41,7 +41,7 @@
 				return;
 			case CONFIG_TYPE_STRING:
 				$t_value = config_eval( $p_value );
-				echo "'" . string_display( $t_value ) . "'";
+				echo htmlspecialchars( "'$t_value'" );
 				return;
 			case CONFIG_TYPE_COMPLEX:
 				$t_value = unserialize( $p_value );
