@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.76 2006-09-15 05:02:47 vboctor Exp $
+	# $Id: file_api.php,v 1.77 2007-03-23 05:31:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -644,7 +644,8 @@ document.getElementById( span ).style.display = displayType;
 					if ( !move_uploaded_file( $p_tmp_file, $t_disk_file_name ) ) {
 					    trigger_error( FILE_MOVE_FAILED, ERROR );
 					}
-					chmod( $t_disk_file_name, 0400 );
+
+					chmod( $t_disk_file_name, 0644 );
 
 					$c_content = '';
 				} else {
