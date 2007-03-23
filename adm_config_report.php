@@ -1,4 +1,4 @@
-CONFIG_TYPE_STRING<?php
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,7 +6,7 @@ CONFIG_TYPE_STRING<?php
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.7 2007-03-23 22:55:55 zakman Exp $
+	# $Id: adm_config_report.php,v 1.8 2007-03-23 23:49:54 zakman Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
