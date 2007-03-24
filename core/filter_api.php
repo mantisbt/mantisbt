@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.150 2007-03-13 06:06:58 vboctor Exp $
+	# $Id: filter_api.php,v 1.151 2007-03-24 18:43:25 zakman Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1820,10 +1820,10 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'sticky_issues'; ?>" id="sticky_issues_filter"><?php PRINT lang_get( 'sticky' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top" colspan="2">
 				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>" id="highlight_changed_filter"><?php PRINT lang_get( 'changed' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top" colspan="2">
+			<td class="small-caption" valign="top" >
 				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>" id="do_filter_by_date_filter"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top" colspan="2">
@@ -1858,11 +1858,11 @@
 				?>
 				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
 			</td>
-			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
+			<td class="small-caption" valign="top" colspan="2" id="highlight_changed_filter_target">
 				<?php PRINT $t_filter['highlight_changed']; ?>
 				<input type="hidden" name="highlight_changed" value="<?php echo $t_filter['highlight_changed'];?>" />
 			</td>
-			<td class="small-caption" valign="top" colspan="2" id="do_filter_by_date_filter_target">
+			<td class="small-caption" valign="top"  id="do_filter_by_date_filter_target">
 							<?php
 							if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
 								?>
@@ -2173,10 +2173,10 @@
 			<?php
 				if ( 'advanced' == $t_view_type ) {
 				?>
-					<td class="small-caption" valign="top">
+					<td class="small-caption" valign="top" colspan="2">
 						<a href="<?php PRINT $t_filters_url . 'project_id'; ?>" id="project_id_filter"><?php PRINT lang_get( 'email_project' ) ?>:</a>
 					</td>
-					<td class="small-caption" valign="top" colspan="2" id="project_id_filter_target">
+					<td class="small-caption" valign="top"  id="project_id_filter_target">
 						<?php
 							$t_output = '';
 							if ( !is_array( $t_filter['project_id'] ) ) {
