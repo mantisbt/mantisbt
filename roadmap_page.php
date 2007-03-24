@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.5 2006-12-23 06:23:15 vboctor Exp $
+	# $Id: roadmap_page.php,v 1.6 2007-03-24 17:20:51 zakman Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -107,7 +107,7 @@
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
-				if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
+				if ( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
 					continue;
 				}
 
@@ -116,7 +116,7 @@
 				# check limit_Reporter (Issue #4770)
 				# reporters can view just issues they reported
 				if ( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
-					 !bug_is_user_reporter( $t_result->fields['id'], $t_user_id )) {
+					 !bug_is_user_reporter( $t_row['id'], $t_user_id )) {
 					continue;
 				}
 
