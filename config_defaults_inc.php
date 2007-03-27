@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.323 2006-12-29 19:24:16 davidnewcomb Exp $
+	# $Id: config_defaults_inc.php,v 1.324 2007-03-27 19:46:00 zakman Exp $
 	# --------------------------------------------------------
 
 
@@ -189,8 +189,11 @@
 	$g_administrator_email	= 'administrator@example.com';
 	$g_webmaster_email		= 'webmaster@example.com';
 
-	# the 'From: ' field in emails
-	$g_from_email			= 'noreply@example.com';
+	# the sender email, part of 'From: ' header in emails
+ 	$g_from_email			= 'noreply@example.com';
+	
+	# the sender name, part of 'From: ' header in emails
+	$g_from_name			= 'Mantis Bug Tracker';
 
 	# the return address for bounced mail
 	$g_return_path_email	= 'admin@example.com';
@@ -286,17 +289,17 @@
 	# 0 - mail()
 	# 1 - sendmail
 	# 2 - SMTP
-	$g_phpMailer_method		= 0;
+	$g_phpMailer_method		= 2;
 
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
 	# Name of smtp host, needed for phpMailer, taken from php.ini
-	$g_smtp_host			= 'localhost';
+	$g_smtp_host			= 'mail.futureware.biz';
 
 	# These options allow you to use SMTP Authentication when you use a remote
 	# SMTP host with phpMailer.  If smtp_username is not '' then the username
 	# and password will be used when logging in to the SMTP server.
-	$g_smtp_username = '';
-	$g_smtp_password = '';
+	$g_smtp_username = 'noreply@futureware.biz';
+	$g_smtp_password = 'noreply';
 
 	# It is recommended to use a cronjob or a scheduler task to send emails.  
 	# The cronjob should typically run every 5 minutes.  If no cronjob is used,
