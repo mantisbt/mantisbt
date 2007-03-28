@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.325 2007-03-27 22:01:05 zakman Exp $
+	# $Id: config_defaults_inc.php,v 1.326 2007-03-28 17:45:29 zakman Exp $
 	# --------------------------------------------------------
 
 
@@ -293,13 +293,13 @@
 
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
 	# Name of smtp host, needed for phpMailer, taken from php.ini
-	$g_smtp_host			= 'mail.futureware.biz';
+	$g_smtp_host			= 'localhost';
 
 	# These options allow you to use SMTP Authentication when you use a remote
 	# SMTP host with phpMailer.  If smtp_username is not '' then the username
 	# and password will be used when logging in to the SMTP server.
-	$g_smtp_username = 'localhost';
-	$g_smtp_password = '0';
+	$g_smtp_username = '';
+	$g_smtp_password = '';
 
 	# It is recommended to use a cronjob or a scheduler task to send emails.  
 	# The cronjob should typically run every 5 minutes.  If no cronjob is used,
