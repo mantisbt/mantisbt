@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.39 2007-03-06 07:05:19 vboctor Exp $
+	# $Id: history_api.php,v 1.40 2007-04-01 08:03:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -102,12 +102,14 @@
 	# Retrieves the raw history events for the specified bug id and returns it in an array
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
 	# 'field','type','old_value','new_value'
-	function history_get_raw_events_array( $p_bug_id, $p_user_id=NULL ) {
+	function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 		$t_mantis_bug_history_table	= config_get( 'mantis_bug_history_table' );
 		$t_mantis_user_table		= config_get( 'mantis_user_table' );
 		$t_history_order			= config_get( 'history_order' );
 		$c_bug_id					= db_prepare_int( $p_bug_id );
-		$t_user_id = ( NULL === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+
+		$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+
 		$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
 		
 		# grab history and display by date_modified then field_name
@@ -133,8 +135,8 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			// check that the item should be visible to the user
-			// custom fields
-			$t_field_id = custom_field_get_id_from_name( $v_field_name );
+			// custom fields - we are passing 32 here to notify the API that the custom field name is truncated by the history column from 64 to 32 characters.
+			$t_field_id = custom_field_get_id_from_name( $v_field_name, 32 );
 			if ( false !== $t_field_id && 
 					!custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
 				continue; 
@@ -154,6 +156,7 @@
 								continue;
 						}
 				}
+
 				if ( $v_type == BUGNOTE_STATE_CHANGED ) {
 					if ( !$t_private_bugnote_visible && 
 							( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
@@ -161,6 +164,7 @@
 					}
 				}
 			}
+
 			$raw_history[$j]['date']	= db_unixtimestamp( $v_date_modified );
 			$raw_history[$j]['userid']	= $v_user_id;
 
@@ -171,6 +175,7 @@
 			$raw_history[$j]['type']		= $v_type;
 			$raw_history[$j]['old_value']	= $v_old_value;
 			$raw_history[$j]['new_value']	= $v_new_value;
+
 			$j++;
 		} # end for loop
 
