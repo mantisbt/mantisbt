@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.34 2005-08-27 01:15:59 thraxisp Exp $
+	# $Id: history_api.php,v 1.34.10.1 2007-04-01 07:06:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -102,11 +102,13 @@
 	# Retrieves the raw history events for the specified bug id and returns it in an array
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
 	# 'field','type','old_value','new_value'
-	function history_get_raw_events_array( $p_bug_id ) {
+	function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 		$t_mantis_bug_history_table	= config_get( 'mantis_bug_history_table' );
 		$t_mantis_user_table		= config_get( 'mantis_user_table' );
 		$t_history_order			= config_get( 'history_order' );
 		$c_bug_id					= db_prepare_int( $p_bug_id );
+
+		$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_userid );
 
 		# grab history and display by date_modified then field_name
 		# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
@@ -122,20 +124,53 @@
 		$raw_history_count = db_num_rows( $result );
 		$raw_history = array();
 
-		for ( $i=0; $i < $raw_history_count; ++$i ) {
+		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
+		$t_private_bugnote_visible = access_has_bug_level( 
+			config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
+
+		for ( $i=0, $j=0; $i < $raw_history_count; ++$i ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$raw_history[$i]['date']	= db_unixtimestamp( $v_date_modified );
-			$raw_history[$i]['userid']	= $v_user_id;
+			// check that the item should be visible to the user
+			// custom fields
+			$t_field_id = custom_field_get_id_from_name( $v_field_name );
+			if ( false !== $t_field_id && 
+				 !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
+				continue; 
+			}
+
+			// bugnotes
+			if ( $t_user_id != $v_user_id ) { // bypass if user originated note
+				if ( ( $v_type == BUGNOTE_ADDED ) ||
+					( $v_type == BUGNOTE_UPDATED ) ||
+					( $v_type == BUGNOTE_DELETED ) ) {
+						if ( !$t_private_bugnote_visible && 
+							( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+								continue;
+						}
+				}
+
+				if ( $v_type == BUGNOTE_STATE_CHANGED ) {
+					if ( !$t_private_bugnote_visible && 
+							( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+						continue;
+					}
+				}
+			}
+
+			$raw_history[$j]['date']	= db_unixtimestamp( $v_date_modified );
+			$raw_history[$j]['userid']	= $v_user_id;
 
 			# user_get_name handles deleted users, and username vs realname
-			$raw_history[$i]['username'] = user_get_name( $v_user_id );
+			$raw_history[$j]['username'] = user_get_name( $v_user_id );
 
-			$raw_history[$i]['field']		= $v_field_name;
-			$raw_history[$i]['type']		= $v_type;
-			$raw_history[$i]['old_value']	= $v_old_value;
-			$raw_history[$i]['new_value']	= $v_new_value;
+			$raw_history[$j]['field']		= $v_field_name;
+			$raw_history[$j]['type']		= $v_type;
+			$raw_history[$j]['old_value']	= $v_old_value;
+			$raw_history[$j]['new_value']	= $v_new_value;
+
+			$j++;
 		} # end for loop
 
 		return $raw_history;
