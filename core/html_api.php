@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.203 2007-03-06 07:05:19 vboctor Exp $
+	# $Id: html_api.php,v 1.204 2007-04-01 07:45:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -400,7 +400,7 @@
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ', config_get( 'mantis_version' ), '</a>',
 					'[<a href="http://www.mantisbt.org/"  title="Free Web Based Bug Tracker" target="_blank">^</a>]</span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2006 Mantis Group</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2007 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
 		if ( ! is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {
