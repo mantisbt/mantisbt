@@ -1,5 +1,13 @@
 Mantis ChangeLog
 
+2007.04.xx - 1.0.7
+
+- 0007743: [security] Port: CVE-2006-6574 (vboctor)
+- 0007772: [security] email notifications bypass security on custom fields (vboctor)
+- 0007784: [security] XSS vulnerabilities (vboctor)
+- 0007774: [custom fields] custom fields not stored correctly in bug history (vboctor)
+- 0007783: [filters] Port: Dynamic filter selection (XMLHTTPRequest) broken when using IE7 (vboctor)
+
 2006.10.28 - 1.0.6
 
 - 0007466: [security] Port: 6719: Manager of a project can assign the Administrator role to a user. (vboctor)
