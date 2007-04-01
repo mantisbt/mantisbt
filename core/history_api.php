@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.34.10.1 2007-04-01 07:06:21 vboctor Exp $
+	# $Id: history_api.php,v 1.34.10.2 2007-04-01 08:00:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -81,10 +81,10 @@
 	# Retrieves the history events for the specified bug id and returns it in an array
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
 	# 'note', 'change'.
-	function history_get_events_array( $p_bug_id ) {
+	function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 		$t_normal_date_format = config_get( 'normal_date_format' );
 
-		$raw_history = history_get_raw_events_array( $p_bug_id );
+		$raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
 		$raw_history_count = count( $raw_history );
 		$history = array();
 
@@ -108,7 +108,7 @@
 		$t_history_order			= config_get( 'history_order' );
 		$c_bug_id					= db_prepare_int( $p_bug_id );
 
-		$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_userid );
+		$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 		# grab history and display by date_modified then field_name
 		# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
@@ -133,8 +133,8 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			// check that the item should be visible to the user
-			// custom fields
-			$t_field_id = custom_field_get_id_from_name( $v_field_name );
+			// custom fields - we are passing 32 here to notify the API that the custom field name is truncated by the history column from 64 to 32 characters.
+			$t_field_id = custom_field_get_id_from_name( $v_field_name, 32 );
 			if ( false !== $t_field_id && 
 				 !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
 				continue; 

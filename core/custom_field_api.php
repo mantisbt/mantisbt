@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.57.12.1 2007-03-06 07:00:33 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.57.12.2 2007-04-01 08:00:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -586,12 +586,20 @@
 	# --------------------
 	# Get the id of the custom field with the specified name.
 	# false is returned if no custom field found with the specified name.
-	function custom_field_get_id_from_name( $p_field_name ) {
+	function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = null ) {
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 
 		$c_field_name = db_prepare_string( $p_field_name );
 
-		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
+		if ( ( null === $p_truncated_length ) || ( strlen( $c_field_name ) != $p_truncated_length ) ) {
+			$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
+		} else {
+			# @@@ This is to handle the case where we only have a truncated part of the name.  This happens in the case where
+			# we are getting the custom field name from the history logs, since history is 32 and custom field name is 64.
+			# This fix will handle entries already in the database, future entries should be handled by making the field name max lengths match.
+			$query = "SELECT id FROM $t_custom_field_table WHERE name LIKE '$c_field_name%'";
+		}
+
 		$t_result = db_query( $query, 1 );
 
 		if ( db_num_rows( $t_result ) == 0 ) {
