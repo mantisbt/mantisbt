@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.105 2007-03-10 04:30:19 vboctor Exp $
+	# $Id: bug_api.php,v 1.106 2007-04-04 06:45:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1444,18 +1444,18 @@
 	# Return a copy of the bug structure with all the instvars prepared for editing
 	#  in an HTML form
 	function bug_prepare_display( $p_bug_data ) {
-		$p_bug_data->category			= string_display( $p_bug_data->category );
-		$p_bug_data->date_submitted		= string_display( $p_bug_data->date_submitted );
-		$p_bug_data->last_updated		= string_display( $p_bug_data->last_updated );
-		$p_bug_data->os					= string_display( $p_bug_data->os );
-		$p_bug_data->os_build			= string_display( $p_bug_data->os_build );
-		$p_bug_data->platform			= string_display( $p_bug_data->platform );
-		$p_bug_data->version			= string_display( $p_bug_data->version );
-		$p_bug_data->build				= string_display( $p_bug_data->build );
-		$p_bug_data->fixed_in_version	= string_display( $p_bug_data->fixed_in_version );
-		$p_bug_data->summary			= string_display_links( $p_bug_data->summary );
-		$p_bug_data->sponsorship_total	= string_display( $p_bug_data->sponsorship_total );
-		$p_bug_data->sticky				= string_display( $p_bug_data->sticky );
+		$p_bug_data->category			= string_display_line( $p_bug_data->category );
+		$p_bug_data->date_submitted		= string_display_line( $p_bug_data->date_submitted );
+		$p_bug_data->last_updated		= string_display_line( $p_bug_data->last_updated );
+		$p_bug_data->os					= string_display_line( $p_bug_data->os );
+		$p_bug_data->os_build			= string_display_line( $p_bug_data->os_build );
+		$p_bug_data->platform			= string_display_line( $p_bug_data->platform );
+		$p_bug_data->version			= string_display_line( $p_bug_data->version );
+		$p_bug_data->build				= string_display_line( $p_bug_data->build );
+		$p_bug_data->fixed_in_version	= string_display_line( $p_bug_data->fixed_in_version );
+		$p_bug_data->summary			= string_display_line_links( $p_bug_data->summary );
+		$p_bug_data->sponsorship_total	= string_display_line( $p_bug_data->sponsorship_total );
+		$p_bug_data->sticky				= string_display_line( $p_bug_data->sticky );
 
 		$p_bug_data->description		= string_display_links( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_display_links( $p_bug_data->steps_to_reproduce );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.85 2007-03-06 07:05:19 vboctor Exp $
+	# $Id: string_api.php,v 1.86 2007-04-04 06:45:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -81,13 +81,23 @@
 	}
 
 	# --------------------
-	# Prepare a string for display to HTML
+	# Prepare a multiple line string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
 		$p_string = string_html_specialchars( $p_string );
-		$p_string = string_restore_valid_html_tags( $p_string );
+		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ true );
 		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = string_nl2br( $p_string );
+
+		return $p_string;
+	}
+
+	# --------------------
+	# Prepare a single line string for display to HTML
+	function string_display_line( $p_string ) {
+		$p_string = string_strip_hrefs( $p_string );
+		$p_string = string_html_specialchars( $p_string );
+		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ false );
 
 		return $p_string;
 	}
@@ -97,6 +107,19 @@
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
 		$p_string = string_display( $p_string );
+		$p_string = string_insert_hrefs( $p_string );
+		$p_string = string_process_bug_link( $p_string );
+		$p_string = string_process_bugnote_link( $p_string );
+		$p_string = string_process_cvs_link( $p_string );
+
+		return $p_string;
+	}
+
+	# --------------------
+	# Prepare a single line string for display to HTML and add href anchors for 
+	# URLs, emails, bug references, and cvs references
+	function string_display_line_links( $p_string ) {
+		$p_string = string_display_line( $p_string );
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_bugnote_link( $p_string );
@@ -427,8 +450,8 @@
 	# This function looks for text with htmlentities
 	# like &lt;b&gt; and converts is into corresponding
 	# html <b> based on the configuration presets
-	function string_restore_valid_html_tags( $p_string ) {
-		$t_html_valid_tags = config_get( 'html_valid_tags' );
+	function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
+		$t_html_valid_tags = config_get( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
 
 		if ( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
 			return $p_string;

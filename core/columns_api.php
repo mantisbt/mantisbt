@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.17 2006-11-11 07:38:00 vboctor Exp $
+	# $Id: columns_api.php,v 1.18 2007-04-04 06:45:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -607,7 +607,11 @@
 	function print_column_summary( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		global $t_icon_path;
 
-		$t_summary = string_attribute( $p_row['summary'] );
+		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
+			$t_summary = string_attribute( $p_row['summary'] );
+		} else {
+			$t_summary = string_display_line_links( $p_row['summary'] );
+		}
 
 		echo '<td class="left">', $t_summary;
 		if ( VS_PRIVATE == $p_row['view_state'] ) {

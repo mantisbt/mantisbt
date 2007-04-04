@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.30 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: history_inc.php,v 1.31 2007-04-04 06:45:21 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -85,7 +85,7 @@
 		<?php echo string_display( $t_item['note'] ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo string_display( $t_item['change'] ) ?>
+		<?php echo string_display_line_links( $t_item['change'] ) ?>
 	</td>
 </tr>
 <?php

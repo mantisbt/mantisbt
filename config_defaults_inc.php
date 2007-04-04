@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.326 2007-03-28 17:45:29 zakman Exp $
+	# $Id: config_defaults_inc.php,v 1.327 2007-04-04 06:45:21 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -793,9 +793,15 @@
 	# email adresses into clickable links
 	$g_html_make_links		= ON;
 
+	# These are the valid html tags for multi-line fields (e.g. description)
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
-	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u';
+	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u, em';
+
+	# These are the valid html tags for single line fields (e.g. issue summary).
+	# do NOT include href or img tags here
+	# do NOT include tags that have parameters (eg. <font face="arial">)
+	$g_html_valid_tags_single_line		= 'i, b, u, em';
 
 	# maximum length of the description in a dropdown menu (for search)
 	# set to 0 to disable truncations

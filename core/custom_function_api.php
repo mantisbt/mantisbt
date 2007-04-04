@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.30 2006-12-12 18:26:29 davidnewcomb Exp $
+	# $Id: custom_function_api.php,v 1.31 2007-04-04 06:45:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -33,7 +33,7 @@
 		$t_bug = bug_get( $p_issue_id );
 
 		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_attribute( $t_bug->summary );
+		echo '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
@@ -64,7 +64,7 @@
 		}
 		
 		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
-		echo '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_attribute( $t_bug->summary );
+		echo '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
@@ -81,7 +81,7 @@
 				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
 				break;
 			case SUMMARY_FIELD:
-				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
+				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_display_line_links( bug_get_field( $p_issue_id, 'summary' ) );
 				break;
 			case SUMMARY_EMAIL:
 				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
