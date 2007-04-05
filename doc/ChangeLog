@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2007.04.xx - 1.0.7
+2007.04.04 - 1.0.7
 
 - 0007743: [security] Port: CVE-2006-6574 (vboctor)
 - 0007772: [security] email notifications bypass security on custom fields (vboctor)
