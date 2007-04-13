@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.54 2006-12-16 20:12:55 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.55 2007-04-13 13:41:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,8 +52,15 @@
 	$t_finished = false;
 	$t_request = '';
 
-	$t_custom_group_actions = config_get( 'custom_group_actions' );
+	$t_external_action_prefix = 'EXT_';
+	if ( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
+		$t_form_page = 'bug_actiongroup_ext_page.php';
+		require_once( $t_form_page );
+		exit;
+	}
 
+	$t_custom_group_actions = config_get( 'custom_group_actions' );
+	
 	foreach( $t_custom_group_actions as $t_custom_group_action ) {
 		if ( $f_action == $t_custom_group_action['action'] ) {
 			require_once( $t_custom_group_action['form_page'] );

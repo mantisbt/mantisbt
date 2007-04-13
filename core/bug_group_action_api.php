@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_group_action_api.php,v 1.1 2005-06-12 00:20:47 vboctor Exp $
+	# $Id: bug_group_action_api.php,v 1.2 2007-04-13 13:41:58 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -77,5 +77,66 @@
 		foreach( $p_bug_ids_array as $t_bug_id ) {
 			echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
 		}
+	}
+
+	######
+	# Call-Outs for EXT_* custom group actions
+	######
+
+	/**
+	 * Prints the list of fields in the custom action form.  These are the user inputs
+	 * and the submit button.  This ends up calling action_<action>_print_fields()
+	 * from bug_actiongroup_<action>_inc.php	 
+	 *
+	 * @param $p_action   The custom action name without the "EXT_" prefix.
+	 */
+	function bug_group_action_print_action_fields( $p_action ) {
+		require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+		$t_function_name = 'action_' . $p_action . '_print_fields';
+		$t_function_name();
+	}
+  
+	/**
+	 * Prints some title text for the custom action page.  This ends up calling 
+	 * action_<action>_print_title() from bug_actiongroup_<action>_inc.php	 
+	 *
+	 * @param $p_action   The custom action name without the "EXT_" prefix.
+	 */
+	function bug_group_action_print_title( $p_action ) {
+		require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+		$t_function_name = 'action_' . $p_action . '_print_title';
+		$t_function_name();
+	}
+
+	/**
+	 * Validates the combination of an action and a bug.  This ends up calling 
+	 * action_<action>_validate() from bug_actiongroup_<action>_inc.php	 
+	 *
+	 * @param $p_action   The custom action name without the "EXT_" prefix.
+	 * @param $p_bug_id   The id of the bug to validate the action on.
+	 * 
+	 * @returns true      Action can be applied.
+	 * @returns array( bug_id => reason for failure to validate )         	 
+	 */
+	function bug_group_action_validate( $p_action, $p_bug_id ) {
+		require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+		$t_function_name = 'action_' . $p_action . '_validate';
+		return $t_function_name( $p_bug_id );
+	}
+
+	/**
+	 * Executes an action on a bug.  This ends up calling 
+	 * action_<action>_process() from bug_actiongroup_<action>_inc.php	 
+	 *
+	 * @param $p_action   The custom action name without the "EXT_" prefix.
+	 * @param $p_bug_id   The id of the bug to validate the action on.
+	 * 
+	 * @returns true      Action can be applied.
+	 * @returns array( bug_id => reason for failure to process )         	 
+	 */
+	function bug_group_action_process( $p_action, $p_bug_id ) {
+		require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'bug_actiongroup_' . $p_action . '_inc.php' );
+		$t_function_name = 'action_' . $p_action . '_process';
+		return $t_function_name( $p_bug_id );
 	}
 ?>

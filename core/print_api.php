@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.160 2007-03-06 07:05:19 vboctor Exp $
+	# $Id: print_api.php,v 1.161 2007-04-13 13:41:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -857,7 +857,8 @@
 							'UP_PRIOR' => lang_get('actiongroup_menu_update_priority'),
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
 							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
-							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
+							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ),
+							'EXT_ADD_NOTE' => lang_get( 'actiongroup_menu_add_note' ) );
 
 		$t_project_id = helper_get_current_project();
 
@@ -891,7 +892,12 @@
 		$t_custom_group_actions = config_get( 'custom_group_actions' );
 
 		foreach( $t_custom_group_actions as $t_custom_group_action ) {
-			$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
+			# use label if provided to get the localized text, otherwise fallback to action name.
+			if ( isset( $t_custom_group_action['label'] ) ) {
+				$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['label'] );
+			} else {
+				$commands[$t_custom_group_action['action']] = lang_get_defaulted( $t_custom_group_action['action'] );
+			}
 		}
 
 		while (list ($key,$val) = each ($commands)) {

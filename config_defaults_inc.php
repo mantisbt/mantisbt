@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.327 2007-04-04 06:45:21 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.328 2007-04-13 13:41:53 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1739,16 +1739,29 @@
 	$g_forward_year_count 				= 4 ;
 
 	# Custom Group Actions
+	#
+	# This extensibility model allows developing new group custom actions.  This
+	# can be implemented with a totally custom form and action pages or with a 
+	# pre-implemented form and action page and call-outs to some functions.  These
+	# functions are to be implemented in a predefined file whose name is based on
+	# the action name.  For example, for an action to add a note, the action would
+	# be EXT_ADD_NOTE and the file implementing it would be bug_actiongroup_add_note_inc.php.
+	# See implementation of this file for details.
+	#
 	# Sample:
 	#
 	# array(
 	#	array(	'action' => 'my_custom_action',
+	#			'label' => 'my_label',   // string to be passed to lang_get_defaulted()
 	#			'form_page' => 'my_custom_action_page.php',
 	#			'action_page' => 'my_custom_action.php'
 	#   )
 	#	array(	'action' => 'my_custom_action2',
 	#			'form_page' => 'my_custom_action2_page.php',
 	#			'action_page' => 'my_custom_action2.php'
+	#   )
+	#	array(	'action' => 'EXT_ADD_NOTE',  // you need to implement bug_actiongroup_<action_without_'EXT_')_inc.php
+	#		'label' => 'actiongroup_menu_add_note' // see strings_english.txt for this label
 	#   )
 	# );
 	$g_custom_group_actions = array();

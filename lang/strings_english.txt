@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.290 $
+	# $Revision: 1.291 $
 	# $Author: vboctor $
-	# $Date: 2007-03-10 04:30:19 $
+	# $Date: 2007-04-13 13:42:00 $
 	#
-	# $Id: strings_english.txt,v 1.290 2007-03-10 04:30:19 vboctor Exp $
+	# $Id: strings_english.txt,v 1.291 2007-04-13 13:42:00 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -38,6 +38,7 @@ $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_menu_update_target_version = 'Update Target Version';
 $s_actiongroup_menu_update_fixed_in_version = 'Update Fixed in Version';
+$s_actiongroup_menu_add_note = 'Add Note';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
@@ -1337,4 +1338,6 @@ $s_time_tracking_cost = 'Cost';
 $s_total_time_for_issue = 'Total time for issue = %s';
 $s_from_date = 'From';
 $s_to_date = 'To';
+
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 ?>
