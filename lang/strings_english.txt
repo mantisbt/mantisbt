@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.291 $
+	# $Revision: 1.292 $
 	# $Author: vboctor $
-	# $Date: 2007-04-13 13:42:00 $
+	# $Date: 2007-04-14 07:44:55 $
 	#
-	# $Id: strings_english.txt,v 1.291 2007-04-13 13:42:00 vboctor Exp $
+	# $Id: strings_english.txt,v 1.292 2007-04-14 07:44:55 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -1174,6 +1174,9 @@ $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
 $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
+$s_link_custom_field_to_project_title = 'Link custom field to project';
+$s_link_custom_field_to_project_button = 'Link Custom Field';
+$s_linked_projects = 'Linked Projects';
 
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';

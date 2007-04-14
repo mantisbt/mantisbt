@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.161 2007-04-13 13:41:58 vboctor Exp $
+	# $Id: print_api.php,v 1.162 2007-04-14 07:44:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1010,6 +1010,52 @@
 				echo ' [<a class="small" href="manage_user_proj_delete.php?project_id='.$t_project_id.'&amp;user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]';
 			}
 			echo '<br />';
+		}
+	}
+	
+	# --------------------
+	# List of projects with which the specified field id is linked.
+	# For every project, the project name is listed and then the list of custom 
+	# fields linked in order with their sequence numbers.  The specified field
+	# is always highlighted in italics and project names in bold.
+	#
+	# $p_field_id - The field to list the projects associated with.
+	function print_custom_field_projects_list( $p_field_id ) {
+		$c_field_id = (integer)$p_field_id;
+		$t_project_ids = custom_field_get_project_ids( $p_field_id );
+
+		foreach ( $t_project_ids as $t_project_id ) {
+			$t_project_name = project_get_field( $t_project_id, 'name' );
+			$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
+			echo '<b>', $t_project_name, '</b>: ';
+			print_button( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id", lang_get( 'remove_link' ) );
+			echo '<br />- ';
+			
+			$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
+
+			$t_current_project_fields = array();
+
+			$t_first = true;
+			foreach ( $t_linked_field_ids as $t_current_field_id ) {
+				if ( $t_first ) {
+					$t_first = false;
+				} else {
+					echo ', ';
+				}
+
+				if ( $t_current_field_id == $p_field_id ) {
+					echo '<em>';
+				}
+
+				echo string_display( custom_field_get_field( $t_current_field_id, 'name' ) );
+				echo ' (', custom_field_get_sequence( $t_current_field_id, $t_project_id ), ')';
+
+				if ( $t_current_field_id == $p_field_id ) {
+					echo '</em>';
+				}
+			}
+
+			echo '<br /><br />';
 		}
 	}
 

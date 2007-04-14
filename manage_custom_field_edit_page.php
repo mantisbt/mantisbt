@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.23 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.24 2007-04-14 07:44:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -211,6 +211,63 @@
 		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
 	</form>
+</div>
+
+<!-- @@@ There is access checking in the ADD action page and at the top of this file.
+         We may need to add extra checks to exclude projects from the list that the user
+		 can't link/unlink fields from/to. -->
+<br />
+<div align="center">
+<form method="post" action="manage_custom_field_proj_add.php">
+<table class="width75" cellspacing="1">
+<!-- Title -->
+<tr>
+	<td class="form-title" colspan="2">
+		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+		<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
+	</td>
+</tr>
+
+<!-- Assigned Projects -->
+<tr <?php echo helper_alternate_class( 1 ) ?> valign="top">
+	<td class="category" width="30%">
+		<?php echo lang_get( 'linked_projects' ) ?>:
+	</td>
+	<td width="70%">
+		<?php print_custom_field_projects_list( $f_field_id ) ?>
+	</td>
+</tr>
+
+<!-- Unassigend Project Selection -->
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td class="category">
+		<?php echo lang_get( 'projects_title' ) ?>:
+	</td>
+	<td>
+		<select name="project_id[]" multiple="multiple" size="5">
+			<?php print_project_option_list(); ?>
+		</select>
+	</td>
+</tr>
+
+<!-- Sequence Number -->
+<tr <?php echo helper_alternate_class() ?> valign="top">
+	<td class="category">
+		<?php echo lang_get( 'custom_field_sequence' ) ?>:
+	</td>
+	<td>
+		<input type="text" name="sequence" value="0" />
+	</td>
+</tr>
+
+<!-- Submit Buttom -->
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" class="button" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
+	</td>
+</tr>
+</table>
+</form>
 </div>
 
 <?php html_page_bottom1( __FILE__ ) ?>
