@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_ext_page.php,v 1.1 2007-04-13 13:41:56 vboctor Exp $
+	# $Id: bug_actiongroup_ext_page.php,v 1.2 2007-04-14 03:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -36,29 +36,23 @@
 	bug_group_action_print_top();
 ?>
 
-  <br />
+	<br />
 
-  <div align="center">
-  <form method="post" action="bug_actiongroup_ext.php">
-    <input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
+	<div align="center">
+	<form method="post" action="bug_actiongroup_ext.php">
+		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
+		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
 <table class="width75" cellspacing="1">
-<tr class="row-1">
-	<td class="category">
-		<?php bug_group_action_print_title( $t_external_action ) ?>
-	</td>
-</tr>
-    <input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
-
-    <?php
-      bug_group_action_print_hidden_fields( $f_bug_arr );
-      bug_group_action_print_action_fields( $t_external_action );
-    ?>
-
+	<?php
+		bug_group_action_print_title( $t_external_action );
+		bug_group_action_print_hidden_fields( $f_bug_arr );
+		bug_group_action_print_action_fields( $t_external_action );
+	?>
 </table>
-  </form>
-  </div>
+	</form>
+	</div>
 
-  <br />
+	<br />
 
 <?php
 	bug_group_action_print_bug_list( $f_bug_arr );

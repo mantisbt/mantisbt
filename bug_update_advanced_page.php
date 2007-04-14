@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.97 2007-03-10 03:55:11 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.98 2007-04-14 03:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -175,7 +175,7 @@
 			</select>
 <?php
 		} else {
-			echo get_enum_element( 'project_view_state', $t_bug->view_state );
+			echo get_enum_element( 'view_state', $t_bug->view_state );
 		}
 ?>
 	</td>
@@ -528,7 +528,7 @@
 <?php
 			echo lang_get( 'private' );
 		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+			echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 		}
 ?>
 	</td>

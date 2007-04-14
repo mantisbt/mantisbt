@@ -6,14 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_add_note_inc.php,v 1.1 2007-04-13 13:41:53 vboctor Exp $
+	# $Id: bug_actiongroup_add_note_inc.php,v 1.2 2007-04-14 03:00:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	/**
 	 * Prints the title for the custom action page.	 
 	 */
 	function action_add_note_print_title() {
-		echo lang_get( 'add_bugnote_title' );
+        echo '<tr class="form-title">';
+        echo '<td colspan="2">';
+        echo lang_get( 'add_bugnote_title' );
+        echo '</td></tr>';		
 	}
 
 	/**
@@ -23,8 +26,29 @@
 	 * A row has two columns.         	 
 	 */
 	function action_add_note_print_fields() {
-		echo '<tr><td><center><textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea></center></td></tr>';
-		echo '<tr><td><center><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></center></td></tr>';
+		echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'add_bugnote_title' ), '</td><td><textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea></td></tr>';
+	?>
+	<!-- View Status -->
+	<tr class="row-2">
+	<td class="category">
+		<?php echo lang_get( 'view_status' ) ?>
+	</td>
+	<td>
+<?php
+		if ( access_has_project_level( config_get( 'change_view_status_threshold' ) ) ) { ?>
+			<select name="view_state">
+				<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
+			</select>
+<?php
+		} else {
+			echo get_enum_element( 'view_state', $t_bug->view_state );
+			echo '<input type="hidden" name="view_state" value="', $t_bug->view_state, '" />';
+		}
+?>
+	</td>
+	</tr>
+	<?php
+		echo '<tr><td colspan="2"><center><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></center></td></tr>';
 	}
 
 	/**
@@ -68,7 +92,8 @@
 	 */
 	function action_add_note_process( $p_bug_id ) {
 		$f_bugnote_text = gpc_get_string( 'bugnote_text' );
-		bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', /* $p_private = */ false );
+		$f_view_state = gpc_get_int( 'view_state' );
+		bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', /* $p_private = */ $f_view_state != VS_PUBLIC  );
         return true;
     }
 ?>
