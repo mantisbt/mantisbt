@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.61 2007-04-11 05:08:10 vboctor Exp $
+	# $Id: constant_inc.php,v 1.62 2007-04-14 02:53:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -226,6 +226,7 @@
 	define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS',		806 );
 	define( 'ERROR_USER_REAL_MATCH_USER',		807 );
 	define( 'ERROR_USER_CHANGE_LAST_ADMIN',		808 );
+	define( 'ERROR_USER_REAL_NAME_INVALID',         809 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );
