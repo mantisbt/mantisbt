@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.68 2006-11-11 07:38:00 vboctor Exp $
+	# $Id: helper_api.php,v 1.69 2007-04-18 06:35:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -354,7 +354,9 @@
 			}
 		}
 
-		return $t_columns;
+		# get the array values to remove gaps in the array which causes issue
+		# if the array is accessed using an index.
+		return array_values( $t_columns );
 	}
 
 	# --------------------

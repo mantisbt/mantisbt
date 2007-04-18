@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.39 2005-07-13 20:45:02 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.40 2007-04-18 06:35:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -315,6 +315,25 @@
 	#===================================
 	# Helper Functions
 	#===================================
+
+	# ------------------
+	# Convert a POST/GET parameter to an array if it is not already one.
+	# $p_var_name - The name of the parameter
+	# no return value.  The $_POST/$_GET are updated as appropriate. 
+	function gpc_make_array( $p_var_name ) {
+		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
+		if ( !php_version_at_least( '4.1.0' ) ) {
+			global $_POST, $_GET;
+		}
+
+		if ( isset( $_POST[$p_var_name] ) && !is_array( $_POST[$p_var_name] ) ) {
+			$_POST[$p_var_name] = array( $_POST[$p_var_name] );
+		}
+
+		if ( isset( $_GET[$p_var_name] ) && !is_array( $_GET[$p_var_name] ) ) {
+			$_GET[$p_var_name] = array( $_GET[$p_var_name] );
+		}
+	}
 
 	# ------------------
 	# Convert a string to a bool

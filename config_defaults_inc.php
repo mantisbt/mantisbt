@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.328 2007-04-13 13:41:53 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.329 2007-04-18 06:35:00 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1275,6 +1275,9 @@
 	# Rather than launching a separate page, the filters are updated in-line in the
 	# view_all_bugs_page.
 	$g_dhtml_filters = ON;
+	
+	# The service to use to create a short URL.  The %s will be replaced by the long URL.
+	$g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
 	#######################################
 	# Mantis Database Table Variables

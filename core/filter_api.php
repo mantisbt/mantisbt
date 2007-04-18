@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.151 2007-03-24 18:43:25 zakman Exp $
+	# $Id: filter_api.php,v 1.152 2007-04-18 06:35:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -16,6 +16,283 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'collapse_api.php' );
 	require_once( $t_core_dir . 'relationship_api.php' );
+
+	###########################################################################
+	# Filter Property Names
+	###########################################################################
+
+	define( 'FILTER_PROPERTY_FREE_TEXT', 'search' );
+	define( 'FILTER_PROPERTY_CATEGORY', 'show_category' );
+	define( 'FILTER_PROPERTY_SEVERITY_ID', 'show_severity' );
+	define( 'FILTER_PROPERTY_STATUS_ID', 'show_status' );
+	define( 'FILTER_PROPERTY_PRIORITY_ID', 'show_priority' );
+	define( 'FILTER_PROPERTY_HIGHLIGHT_CHANGED', 'highlight_changed' );
+	define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
+	define( 'FILTER_PROPERTY_HANDLER_ID', 'handler_id' );
+	define( 'FILTER_PROPERTY_PROJECT_ID', 'project_id' );
+	define( 'FILTER_PROPERTY_RESOLUTION_ID', 'show_resolution' );
+	define( 'FILTER_PROPERTY_PRODUCT_BUILD', 'show_build' );
+	define( 'FILTER_PROPERTY_PRODUCT_VERSION', 'show_version' );
+	define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'user_monitor' );
+	define( 'FILTER_PROPERTY_HIDE_STATUS_ID', 'hide_status' );
+	define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
+	define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
+	define( 'FILTER_PROPERTY_SHOW_STICKY_ISSUES', 'sticky_issues' );
+	define( 'FILTER_PROPERTY_VIEW_STATE_ID', 'view_state' );
+	define( 'FILTER_PROPERTY_FIXED_IN_VERSION', 'fixed_in_version' );
+	define( 'FILTER_PROPERTY_TARGET_VERSION', 'target_version' );
+	define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' );
+	define( 'FILTER_PROPERTY_PROFILE', 'profile_id' );
+	define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
+	define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
+	define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
+	define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
+	define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
+	define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
+	define( 'FILTER_PROPERTY_NOT_ASSIGNED', 'and_not_assigned' );
+	define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'do_filter_by_date' );
+	define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
+	define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
+
+	###########################################################################
+	# Filter Query Parameter Names
+	###########################################################################
+
+	define( 'FILTER_SEARCH_FREE_TEXT', 'search' );
+	define( 'FILTER_SEARCH_CATEGORY', 'category' );
+	define( 'FILTER_SEARCH_SEVERITY_ID', 'severity_id');
+	define( 'FILTER_SEARCH_STATUS_ID', 'status_id' );
+	define( 'FILTER_SEARCH_REPORTER_ID', 'reporter_id' );
+	define( 'FILTER_SEARCH_HANDLER_ID', 'handler_id' );
+	define( 'FILTER_SEARCH_PROJECT_ID', 'project_id' );
+	define( 'FILTER_SEARCH_RESOLUTION_ID', 'resolution_id' );
+	define( 'FILTER_SEARCH_FIXED_IN_VERSION', 'fixed_in_version' );
+	define( 'FILTER_SEARCH_TARGET_VERSION', 'target_version' );
+	define( 'FILTER_SEARCH_START_DAY', 'start_day' );
+	define( 'FILTER_SEARCH_START_MONTH', 'start_month' );
+	define( 'FILTER_SEARCH_START_YEAR', 'start_year' );
+	define( 'FILTER_SEARCH_END_DAY', 'end_day' );
+	define( 'FILTER_SEARCH_END_MONTH', 'end_month' );
+	define( 'FILTER_SEARCH_END_YEAR', 'end_year' );
+	define( 'FILTER_SEARCH_PRIORITY_ID', 'priority_id' );
+	define( 'FILTER_SEARCH_PROFILE', 'profile_id' );
+	define( 'FILTER_SEARCH_MONITOR_USER_ID', 'monitor_user_id' );
+	define( 'FILTER_SEARCH_PRODUCT_BUILD', 'product_build' );
+	define( 'FILTER_SEARCH_PRODUCT_VERSION', 'product_version' );
+	define( 'FILTER_SEARCH_VIEW_STATE_ID', 'view_state_id' );
+	define( 'FILTER_SEARCH_SHOW_STICKY_ISSUES', 'sticky_issues' );
+	define( 'FILTER_SEARCH_SORT_FIELD_NAME', 'sortby' );
+	define( 'FILTER_SEARCH_SORT_DIRECTION', 'dir' );
+	define( 'FILTER_SEARCH_ISSUES_PER_PAGE', 'per_page' );
+	define( 'FILTER_SEARCH_HIGHLIGHT_CHANGED', 'highlight_changed' );
+	define( 'FILTER_SEARCH_HIDE_STATUS_ID', 'hide_status_id' );
+	define( 'FILTER_SEARCH_NOT_ASSIGNED', 'not_assigned' );
+	define( 'FILTER_SEARCH_FILTER_BY_DATE', 'filter_by_date' );
+	define( 'FILTER_SEARCH_RELATIONSHIP_TYPE', 'relationship_type' );
+	define( 'FILTER_SEARCH_RELATIONSHIP_BUG', 'relationship_bug' );
+
+	# Checks the supplied value to see if it is an ANY value.
+	# $p_field_value - The value to check.
+	# Returns true for "ANY" values and false for others.  "ANY" means filter criteria not active.
+	function filter_str_field_is_any( $p_field_value ) {
+		if ( is_array( $p_field_value ) ) {
+			if ( count( $p_field_value ) == 0 ) {
+				return true;
+			}
+
+			foreach( $p_field_value as $t_value ) {
+				if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+					return true;
+				}
+			}
+		} else {
+			if ( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
+				return true;
+			}
+			
+			if ( is_bool( $p_field_value ) && !$p_field_value ) {
+				return true;
+			}
+
+			if ( ( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	# Encodes a field and it's value for the filter URL.  This handles the URL encoding
+	# and arrays.
+	# $p_field_name - The field name.
+	# $p_field_value - The field value (can be an array)
+	function filter_encode_field_and_value( $p_field_name, $p_field_value ) {
+		$t_query_array = array();		
+		if ( is_array( $p_field_value ) ) {
+			$t_count = count( $p_field_value );
+			if ( $t_count > 1 ) {
+				foreach ( $p_field_value as $t_value ) {
+					$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
+				}
+			} else if ( $t_count == 1 ) {
+				$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
+			}
+		} else {
+			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
+		}
+
+		return implode( $t_query_array, '&amp;' );
+	}
+
+	# Get a permalink for the current active filter.  The results of using these fields by other users
+	# can be inconsistent with the original results due to fields like "Myself", "Current Project",
+	# and due to access level.
+	# Returns the search.php?xxxx or an empty string if no criteria applied. 
+	function filter_get_url( $p_custom_filter ) {
+		$t_query = array();
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PROJECT_ID, $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FREE_TEXT, $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_CATEGORY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_CATEGORY, $p_custom_filter[FILTER_PROPERTY_CATEGORY] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_REPORTER_ID, $p_custom_filter[FILTER_PROPERTY_REPORTER_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_STATUS_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_STATUS_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_MONITOR_USER_ID, $p_custom_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HANDLER_ID, $p_custom_filter[FILTER_PROPERTY_HANDLER_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SEVERITY_ID, $p_custom_filter[FILTER_PROPERTY_SEVERITY_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RESOLUTION_ID, $p_custom_filter[FILTER_PROPERTY_RESOLUTION_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRIORITY_ID, $p_custom_filter[FILTER_PROPERTY_PRIORITY_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_VIEW_STATE_ID, $p_custom_filter[FILTER_PROPERTY_VIEW_STATE_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SHOW_STICKY_ISSUES, $p_custom_filter[FILTER_PROPERTY_SHOW_STICKY_ISSUES] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_VERSION, $p_custom_filter[FILTER_PROPERTY_PRODUCT_VERSION] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PRODUCT_BUILD, $p_custom_filter[FILTER_PROPERTY_PRODUCT_BUILD] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FIXED_IN_VERSION, $p_custom_filter[FILTER_PROPERTY_FIXED_IN_VERSION] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TARGET_VERSION, $p_custom_filter[FILTER_PROPERTY_TARGET_VERSION] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_FIELD_NAME, $p_custom_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_SORT_DIRECTION, $p_custom_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] ) ) {
+			if ( $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] != config_get( 'default_limit_view' ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_ISSUES_PER_PAGE, $p_custom_filter[FILTER_SEARCH_ISSUES_PER_PAGE] );
+			}
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
+			if ( $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] != config_get( 'default_show_changed' ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIGHLIGHT_CHANGED, $p_custom_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
+			}
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_HIDE_STATUS_ID, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS_ID] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_NOT_ASSIGNED, $p_custom_filter[FILTER_PROPERTY_NOT_ASSIGNED] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
+
+			# The start and end dates are only applicable if filter by date is set.
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_DAY, $p_custom_filter[FILTER_PROPERTY_START_DAY] );
+			}
+	
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_DAY] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_DAY, $p_custom_filter[FILTER_PROPERTY_END_DAY] );
+			}
+	
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_MONTH] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_MONTH, $p_custom_filter[FILTER_PROPERTY_START_MONTH] );
+			}
+	
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_MONTH] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_MONTH, $p_custom_filter[FILTER_PROPERTY_END_MONTH] );
+			}
+	
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_YEAR] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_START_YEAR, $p_custom_filter[FILTER_PROPERTY_START_YEAR] );
+			}
+	
+			if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_END_YEAR, $p_custom_filter[FILTER_PROPERTY_END_YEAR] );
+			}	
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
+			if ( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
+				$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+			}
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_BUG, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
+		}
+
+		# @@@ Add support for Custom Fields
+
+		if ( count( $t_query ) > 0 ) {
+			$t_query_str = implode( $t_query, '&amp;' );
+			$t_url = config_get( 'path' ) . 'search.php?' . $t_query_str;
+		} else {
+			$t_url = '';
+		}
+
+		return $t_url;
+	}
 
 	###########################################################################
 	# Filter API
@@ -2246,6 +2523,11 @@
 						} else {
 							print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 						}
+
+						print_bracket_link( 
+							sprintf( config_get( 'create_short_url' ), filter_get_url( $t_filter ) ), 
+							lang_get( 'create_filter_link' ), 
+							/* new window = */ true );
 					}
 				?>
 			</td>

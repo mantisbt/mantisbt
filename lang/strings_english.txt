@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.292 $
+	# $Revision: 1.293 $
 	# $Author: vboctor $
-	# $Date: 2007-04-14 07:44:55 $
+	# $Date: 2007-04-18 06:35:01 $
 	#
-	# $Id: strings_english.txt,v 1.292 2007-04-14 07:44:55 vboctor Exp $
+	# $Id: strings_english.txt,v 1.293 2007-04-18 06:35:01 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -673,6 +673,7 @@ $s_create_user_button = 'Create User';
 # manage_page.php
 $s_hide_disabled = 'Hide Disabled';
 $s_filter_button = 'Apply Filter';
+$s_create_filter_link = 'Create Permlink';	# Permlink = Permenant Link
 $s_manage_users_link = 'Manage Users';
 $s_manage_projects_link = 'Manage Projects';
 $s_manage_custom_field_link = 'Manage Custom Fields';
