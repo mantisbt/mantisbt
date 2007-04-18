@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.6 2007-04-18 18:14:48 davidnewcomb Exp $
+	# $Id: billing_inc.php,v 1.7 2007-04-18 20:26:58 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,18 +42,38 @@
 
 <div id="bugnotestats_open">
 <?php
-	$f_bugnote_stats_from = gpc_get_string('bugnote_stats_from', '');
-	$f_bugnote_stats_to = gpc_get_string('bugnote_stats_to', '');
-	$f_bugnote_cost = gpc_get_string('bugnote_cost', '');
+	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
+	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
+	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
+	$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
+	$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
+
+	$t_bugnote_stats_from_d = gpc_get_string('start_day', $t_bugnote_stats_from_def_d);
+	$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
+	$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
+
+	$t_bugnote_stats_to_def = date( "d:m:Y" );
+	$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
+	$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
+	$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
+	$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
+
+	$t_bugnote_stats_to_d = gpc_get_string('end_day', $t_bugnote_stats_to_def_d);
+	$t_bugnote_stats_to_m = gpc_get_string('end_month', $t_bugnote_stats_to_def_m);
+	$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
+
 	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
+	$f_bugnote_cost = gpc_get_string('bugnote_cost', '');
 	$f_project_id = helper_get_current_project();
 
-	if ( config_get('time_tracking_with_billing') )
+	if ( ON == config_get( 'time_tracking_with_billing' ) )
 		$t_cost_col = true;
 	else
 		$t_cost_col = false;
+
 ?>
 <form method="post" action="<?php echo $PHP_SELF ?>">
+<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 <table border=0 class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
@@ -66,28 +86,25 @@
 </tr>
 <tr class="row-2">
         <td class="category" width="25%">
-                <?php echo lang_get( 'from_date' ). " (mm/dd/yyyy)"; ?>
-        </td>
-        <td width="75%">
-                <input type="text" name="bugnote_stats_from" value="<?php echo $f_bugnote_stats_from ?>" />
-        </td>
-</tr>
-<tr class="row-1">
-        <td class="category">
-                <?php echo lang_get( 'to_date' ). " (mm/dd/yyyy)"; ?>
-        </td>
-        <td>
-                <input type="text" name="bugnote_stats_to" value="<?php echo $f_bugnote_stats_to ?>" />
+                <?php
+		$t_filter = array();
+		$t_filter['do_filter_by_date'] = 'on';
+		$t_filter['start_day'] = $t_bugnote_stats_from_d;
+		$t_filter['start_month'] = $t_bugnote_stats_from_m;
+		$t_filter['start_year'] = $t_bugnote_stats_from_y;
+		$t_filter['end_day'] = $t_bugnote_stats_to_d;
+		$t_filter['end_month'] = $t_bugnote_stats_to_m;
+		$t_filter['end_year'] = $t_bugnote_stats_to_y;
+		print_filter_do_filter_by_date(true);
+		?>
         </td>
 </tr>
 <?php if ($t_cost_col) { ?>
-<tr class="row-2">
-        <td class="category">
-                <?php echo lang_get( 'time_tracking_cost_per_hour' ); ?>
-        </td>
-        <td>
-                <input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
-        </td>
+<tr class="row-1">
+	<td>
+		<?php echo lang_get( 'time_tracking_cost' ) ?>:
+		<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
+	</td>
 </tr>
 <?php } ?>
 <tr>
@@ -100,50 +117,56 @@
 </form>
 <?php
 if ( "" != $f_get_bugnote_stats_button ) {
-	$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $f_bugnote_stats_from, $f_bugnote_stats_to, $f_bugnote_cost );
+	$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
+	$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
+	$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
-if ( $f_bugnote_cost == "" )
-	$t_cost_col = false;
+	if ( $f_bugnote_cost == "" )
+        	$t_cost_col = false;
+
+	$t_prev_id = -1;
+
 ?>
 <table border=0 class="width100" cellspacing="0">
-<?php $t_prev_id = -1; ?>
+<tr class="row-category-history">
+	<td class="small-caption">
+		<?php echo lang_get( 'username' ) ?>
+	</td>
+	<td class="small-caption">
+		<?php echo lang_get( 'time_tracking' ) ?>
+	</td>
+<?php if ( $t_cost_col) { ?>
+	<td class="small-caption">
+		<?php echo lang_get( 'time_tracking_cost' ) ?>
+	</td>
+<?php } ?>
+
+</tr>
 <?php foreach ( $t_bugnote_stats as $t_item ) { ?>
 <?php
-	$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
-	if ( $t_item['bug_id'] != $t_prev_id) {
-		$t_link = string_get_bug_view_link($t_item['bug_id']) . ": " . $t_item['summary'];
-		echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
-?>
-<tr class="row-category-history">
-	<td class="small-caption">&nbsp;</td>
-	<td class="small-caption"><?php echo lang_get( 'username' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'time_tracking' ) ?></td>
-<?php if ( $t_cost_col) { ?>
-	<td class="small-caption"><?php echo lang_get( 'time_tracking_cost' ) ?></td>
-<?php } ?>
-</tr>
-<?php
+        $t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
+        if ( $t_item['bug_id'] != $t_prev_id) {
+                $t_link = string_get_bug_view_link($t_item['bug_id']) . ": " . $t_item['summary'];
+                echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
 		$t_prev_id = $t_item['bug_id'];
 	}
 ?>
-
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="small-caption">&nbsp;</td>
 	<td class="small-caption">
-		<?php echo string_display( $t_item['username'] ) ?>
+		<?php echo $t_item['username'] ?>
 	</td>
 	<td class="small-caption">
 		<?php echo $t_item['sum_time_tracking'] ?>
 	</td>
 <?php if ($t_cost_col) { ?>
-	<td class="small-caption">
+	<td>
 		<?php echo $t_item['cost'] ?>
 	</td>
 <?php } ?>
 </tr>
-<?php } # end for?>
+<?php } # end for loop ?>
 </table>
-<?php } # end if f_get_bugnote_stats_button?>
+<?php } # end if ?>
 </div>
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>

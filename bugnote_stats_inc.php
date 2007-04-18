@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.5 2007-03-06 18:08:43 davidnewcomb Exp $
+	# $Id: bugnote_stats_inc.php,v 1.6 2007-04-18 20:26:58 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,6 @@
 
 	require_once( $t_core_path.'bugnote_api.php' );
 ?>
-
 <?php
 	if ( ! config_get('time_tracking_enabled') )
 		return;
