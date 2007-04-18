@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.41 2007-03-07 10:40:00 davidnewcomb Exp $
+	# $Id: bugnote_api.php,v 1.42 2007-04-18 18:14:48 davidnewcomb Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -478,6 +478,7 @@
 	# Returns an array of bugnote stats
 	function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
 		// MySQL
+		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
@@ -493,13 +494,12 @@
 		}
 		if ( ALL_PROJECTS != $p_project_id ) {
 			$c_project = " AND b.project_id = '$p_project_id' AND bn.bug_id = b.id ";
-			$t_bug_table = ", ". config_get( 'mantis_bug_table' ). " b";
 		}
 		$t_results = array();
 
-		$query = "SELECT username, bn.bug_id, SUM(time_tracking) sum_time_tracking
-			FROM $t_user_table u, $t_bugnote_table bn $t_bug_table
-			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0
+		$query = "SELECT username, summary, bn.bug_id, SUM(time_tracking) sum_time_tracking
+			FROM $t_user_table u, $t_bugnote_table bn, $t_bug_table b
+			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			$c_project $c_from $c_to
 			GROUP BY bn.bug_id, u.id";
 		$result = db_query($query);

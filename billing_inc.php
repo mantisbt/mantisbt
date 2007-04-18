@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.5 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: billing_inc.php,v 1.6 2007-04-18 18:14:48 davidnewcomb Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -111,8 +111,7 @@ if ( $f_bugnote_cost == "" )
 <?php
 	$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 	if ( $t_item['bug_id'] != $t_prev_id) {
-		$t_link = bug_format_summary( $t_item['bug_id'], SUMMARY_CAPTION );
-		//$t_link = string_get_bug_view_link( $t_item['bug_id'] , null, true);
+		$t_link = string_get_bug_view_link($t_item['bug_id']) . ": " . $t_item['summary'];
 		echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
 ?>
 <tr class="row-category-history">
