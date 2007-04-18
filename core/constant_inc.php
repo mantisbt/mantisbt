@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.52.4.1.6.2 2006-10-23 07:14:42 vboctor Exp $
+	# $Id: constant_inc.php,v 1.52.4.1.6.3 2007-04-18 07:43:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -218,6 +218,7 @@
 	define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS',		806 );
 	define( 'ERROR_USER_REAL_MATCH_USER',		807 );
 	define( 'ERROR_USER_CHANGE_LAST_ADMIN',		808 );
+	define( 'ERROR_USER_REAL_NAME_INVALID',		809 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );
