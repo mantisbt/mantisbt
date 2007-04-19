@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.7 2007-04-18 20:26:58 davidnewcomb Exp $
+	# $Id: billing_inc.php,v 1.8 2007-04-19 14:08:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,10 @@
 
 <div id="bugnotestats_open">
 <?php
-	$t_bugnote_stats_from_def = date( "d:m:Y", $t_bug->date_submitted );
+	$t_today = date( "d:m:Y" );
+	$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
+
+	$t_bugnote_stats_from_def = $t_date_submitted;
 	$t_bugnote_stats_from_def_ar = explode ( ":", $t_bugnote_stats_from_def );
 	$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
 	$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
@@ -52,7 +55,7 @@
 	$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
 	$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
 
-	$t_bugnote_stats_to_def = date( "d:m:Y" );
+	$t_bugnote_stats_to_def = $t_today;
 	$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
 	$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 	$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
@@ -72,8 +75,8 @@
 		$t_cost_col = false;
 
 ?>
-<form method="post" action="<?php echo $PHP_SELF ?>">
-<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 <table border=0 class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
