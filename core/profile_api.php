@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.17 2006-04-22 03:10:43 vboctor Exp $
+	# $Id: profile_api.php,v 1.18 2007-04-20 08:28:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -207,6 +207,33 @@
 	}
 	
 	# --------------------
+	# Return an array of strings containing unique values for the specified field based
+	# on private and public profiles accessible to the specified user.
+	function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
+		$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : db_prepare_int( $p_user_id );
+		$c_field = db_prepare_string( $p_field );
+
+		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
+
+		$query = "SELECT DISTINCT $c_field
+				  FROM $t_user_profile_table
+				  WHERE ( user_id='$c_user_id' ) OR ( user_id = '0' )
+				  ORDER BY $c_field";
+		$result = db_query( $query );
+
+		$t_rows = array();
+		
+		$t_row_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			$t_row = db_fetch_array( $result );
+			array_push( $t_rows, $t_row[$c_field] );
+		}
+
+		return $t_rows;
+	}
+	
+	# --------------------
 	# Return an array containing all profiles used in a given project
 	function profile_get_all_for_project( $p_project_id ) {
 		$t_project_where = helper_project_specific_where( $p_project_id );
@@ -219,7 +246,7 @@
 				  FROM $t_user_profile_table up, $t_bug_table b
 				  WHERE $t_project_where
 				  AND up.id = b.profile_id";
-	    $result = db_query( $query );
+		$result = db_query( $query );
 
 		$t_rows = array();
 		$t_row_count = db_num_rows( $result );

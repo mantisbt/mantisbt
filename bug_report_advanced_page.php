@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.60 2007-03-10 04:30:18 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.61 2007-04-20 08:28:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -19,6 +19,7 @@
 	require_once( $t_core_path.'file_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'last_visited_api.php' );
+	require_once( $t_core_path.'projax_api.php' );
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
@@ -232,7 +233,9 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="platform" size="32" maxlength="32" value="<?php echo $f_platform ?>" />
+		<?php
+			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $f_platform, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 </tr>
 
@@ -243,7 +246,9 @@
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="os" size="32" maxlength="32" value="<?php echo $f_os ?>" />
+		<?php
+			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $f_os, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 </tr>
 
@@ -254,7 +259,9 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>" />
+		<?php
+			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $f_os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 </tr>
 

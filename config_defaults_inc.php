@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.329 2007-04-18 06:35:00 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.330 2007-04-20 08:28:22 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1499,11 +1499,12 @@
 	# This controls the logging of information to a separate file for debug or audit
 	# $g_log_level controls what information is logged
 	#  see constant_inc.php for details on the log channels available
-	#  e.g., $g_log_level = LOG_EMAIL | LOG_PROJECT;
+	#  e.g., $g_log_level = LOG_EMAIL | LOG_PROJECT | LOG_FILTERING | LOG_AJAX;
 	#
 	# $g_log_destination specifies the file where the data goes
 	#   right now, only "file:<file path>" is supported
-	#   e.g., $g_log_destination = 'file:/tmp/mantis_log';
+	#   e.g. (Linux), $g_log_destination = 'file:/tmp/mantis.log';
+	#   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantis.log';
 	#   see http://www.php.net/error_log for details
 	$g_log_level = 0;
 	$g_log_destination = '';

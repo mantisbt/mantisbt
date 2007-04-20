@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: logging_api.php,v 1.2 2007-03-14 21:25:13 zakman Exp $
+	# $Id: logging_api.php,v 1.3 2007-04-20 08:28:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,7 +14,9 @@
 	
 	$g_log_levels = array(
 		LOG_EMAIL => 'mail',
-		LOG_EMAIL_RECIPIENT => 'mail_recipient'
+		LOG_EMAIL_RECIPIENT => 'mail_recipient',
+		LOG_FILTERING => 'filtering',
+		LOG_AJAX => 'ajax'
 	);
 
 	###########################################################################

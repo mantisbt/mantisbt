@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.69 2007-04-18 06:35:01 vboctor Exp $
+	# $Id: helper_api.php,v 1.70 2007-04-20 08:28:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -377,15 +377,17 @@
 	}
 	
 	# --------------------
+	# returns a tab index value and increments it by one.  This is used to give sequential tab index on
+	# a form.
+	function helper_get_tab_index_value() {
+		static $tab_index = 0;
+		return ++$tab_index;
+	}
+
+	# --------------------
 	# returns a tab index and increments internal state by 1.  This is used to give sequential tab index on
 	# a form.  For example, this function returns: tabindex="1"
 	function helper_get_tab_index() {
-		static $tab_index = 1;
-
-		$t_tab_index_attribute = 'tabindex="' . $tab_index . '"';
-
-		$tab_index++;
-
-		return $t_tab_index_attribute;
+		return 'tabindex="' . helper_get_tab_index_value() . '"';
 	}
 ?>

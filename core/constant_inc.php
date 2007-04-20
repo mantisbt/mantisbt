@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.62 2007-04-14 02:53:39 vboctor Exp $
+	# $Id: constant_inc.php,v 1.63 2007-04-20 08:28:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -362,6 +362,7 @@
 	define( 'LOG_EMAIL',                    1 );  # all emails sent
 	define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
 	define( 'LOG_FILTERING',                4 );  # logging for filtering.
+	define( 'LOG_AJAX',                     8 );  # logging for AJAX / XmlHttpRequests
 
 	# COLUMNS_TARGET_*
 	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );

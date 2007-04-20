@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.204 2007-04-01 07:45:58 vboctor Exp $
+	# $Id: html_api.php,v 1.205 2007-04-20 08:28:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -63,6 +63,10 @@
 
 	# flag for error handler to skip header menus
 	$g_error_send_page_header = true;
+	
+	# Projax library disabled by default.  It will be enabled if projax_api.php
+	# is included.  But it must be included after html_api.php
+	$g_enable_projax = false;
 
 	# --------------------
 	# Sets the url for the rss link associated with the current page.
@@ -258,6 +262,13 @@
 			echo '</script>' . "\n";
 			echo "\t" . '<script type="text/JavaScript" src="javascript/ajax.js">';
 			echo '</script>' . "\n";
+
+			global $g_enable_projax;
+
+			if ( $g_enable_projax ) {
+				echo '<script type="text/javascript" src="javascript/projax/prototype.js"></script>';
+				echo '<script type="text/javascript" src="javascript/projax/scriptaculous.js"></script>';
+			}
 		}
 	}
 
