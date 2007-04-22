@@ -6,11 +6,11 @@
        # See the README and LICENSE files for details
 
        # --------------------------------------------------------
-       # $Revision: 1.2 $
+       # $Revision: 1.3 $
        # $Author: vboctor $
-       # $Date: 2007-04-18 06:35:00 $
+       # $Date: 2007-04-22 08:33:32 $
        #
-       # $Id: search.php,v 1.2 2007-04-18 06:35:00 vboctor Exp $
+       # $Id: search.php,v 1.3 2007-04-22 08:33:32 vboctor Exp $
        # --------------------------------------------------------
 ?>
 <?php
@@ -80,7 +80,7 @@
 
 	$my_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = gpc_get_string( FILTER_SEARCH_SORT_FIELD_NAME, '' );
 	$my_filter[FILTER_PROPERTY_SORT_DIRECTION] = gpc_get_string( FILTER_SEARCH_SORT_DIRECTION, '' );
-	$my_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_SEARCH_ISSUES_PER_PAGE );
+	$my_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_SEARCH_ISSUES_PER_PAGE, config_get( 'default_limit_view' ) );
 	
 	$t_highlight_changed = gpc_get_int( FILTER_SEARCH_HIGHLIGHT_CHANGED, -1 );
 	if ( $t_highlight_changed != -1 ) {
