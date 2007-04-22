@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.106 2007-04-04 06:45:22 vboctor Exp $
+	# $Id: bug_api.php,v 1.107 2007-04-22 06:07:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -678,7 +678,7 @@
 		# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before 
 		# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
 		# provide it with bug data rather than an id, but this will break backward compatibility.
-		helper_call_custom_function( 'issue_delete_notify', array( $f_bug_id ) );
+		helper_call_custom_function( 'issue_delete_notify', array( $p_bug_id ) );
 
 		# Unmonitor bug for all users
 		bug_unmonitor( $p_bug_id, null );
