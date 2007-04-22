@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.43 2007-04-18 20:26:59 davidnewcomb Exp $
+	# $Id: bugnote_api.php,v 1.44 2007-04-22 07:45:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -446,28 +446,40 @@
 
 	# --------------------
 	# Returns an array of bugnote stats
-	function bugnote_stats_get_events_array( $p_bugnote_id, $p_from, $p_to ) {
+	# $p_from - Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+	# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+	function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+		$c_from = db_prepare_date( $p_from );
+		$c_to = db_prepare_date( $p_to );
+
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
-		$t_from = db_prepare_date( $p_from );
-		$t_to = db_prepare_date( $p_to );
 
-		if ( "" != $t_from ) {
-			$c_from = " AND bn.date_submitted > '$t_from' ";
+		if ( !is_blank( $c_from ) ) {
+			$t_from_where = " AND bn.date_submitted >= '$c_from 00:00:00'";
+		} else {
+			$t_from_where = '';
 		}
-		if ( "" != $t_to ) {
-			$c_to = " AND bn.date_submitted < '$t_to' ";
+
+		if ( !is_blank( $c_to ) ) {
+			$t_to_where = " AND bn.date_submitted <= '$c_to 23:59:59'";
+		} else {
+			$t_to_where = '';
 		}
+
 		$t_results = array();
 
 		$query = "SELECT username, SUM(time_tracking) sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
 				WHERE u.id = bn.reporter_id AND
-				bn.bug_id = '$p_bugnote_id'
-				$c_from $c_to
+				bn.bug_id = '$c_bug_id'
+				$t_from_where $t_to_where
 			GROUP BY u.id";
-		$result = db_query($query);
-		while ($row = db_fetch_array($result)) {
+
+		$result = db_query( $query );
+
+		while ( $row = db_fetch_array( $result ) ) {
 			$t_results[] = $row;
 		}
 
@@ -476,41 +488,54 @@
 
 	# --------------------
 	# Returns an array of bugnote stats
+	# $p_from - Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+	# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
 	function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_to = db_prepare_date( $p_to );
+		$c_from = db_prepare_date( $p_from );
+		$c_cost = db_prepare_double( $p_cost );
+
 		// MySQL
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
-		if ( "" != $p_from ) {
-			$t_ar = explode( "-", $p_from ); # Expecting yyyy-mm-dd
-			$t_from = (int)$t_ar[0] ."-". (int)$t_ar[1] ."-". (int)$t_ar[2];
-			$c_from = " AND bn.date_submitted > '$t_from' ";
+		if ( !is_blank( $c_from ) ) {
+			$t_from_where = " AND bn.date_submitted >= '$c_from 00:00:00'";
+		} else {
+			$t_from_where = '';
 		}
-		if ( "" != $p_to ) {
-			$t_ar = explode( "-", $p_to ); # Expecting yyyy-mm-dd
-			$t_to = (int)$t_ar[0] ."-". (int)$t_ar[1] ."-". (int)$t_ar[2];
-			$c_to = " AND bn.date_submitted < '$t_to' ";
+
+		if ( !is_blank( $c_to ) ) {
+			$t_to_where = " AND bn.date_submitted <= '$c_to 23:59:59'";
+		} else {
+			$t_to_where = '';
 		}
-		if ( ALL_PROJECTS != $p_project_id ) {
-			$c_project = " AND b.project_id = '$p_project_id' AND bn.bug_id = b.id ";
+
+		if ( ALL_PROJECTS != $c_project_id ) {
+			$t_project_where = " AND b.project_id = '$c_project_id' AND bn.bug_id = b.id ";
+		} else {
+			$t_project_where = '';
 		}
+
 		$t_results = array();
 
 		$query = "SELECT username, summary, bn.bug_id, SUM(time_tracking) sum_time_tracking
 			FROM $t_user_table u, $t_bugnote_table bn, $t_bug_table b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
-			$c_project $c_from $c_to
+			$t_project_where $t_from_where $t_to_where
 			GROUP BY bn.bug_id, u.id";
-		$result = db_query($query);
-		$t_cost_min = $p_cost / 60;
-		while ($row = db_fetch_array($result)) {
-			$t_total_cost = $t_cost_min * $row[sum_time_tracking];
-			$row['cost'] = number_format($t_total_cost, 2);
+		$result = db_query( $query );
+
+		$t_cost_min = $c_cost / 60;
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$t_total_cost = $t_cost_min * $row['sum_time_tracking'];
+			$row['cost'] = $t_total_cost;
 			$t_results[] = $row;
 		}
 
 		return $t_results;
 	}
-
 ?>

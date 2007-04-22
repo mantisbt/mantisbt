@@ -1,27 +1,26 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.7 2007-04-22 01:59:14 vboctor Exp $
+	# $Id: bugnote_stats_inc.php,v 1.8 2007-04-22 07:45:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug bugnote_stats
 
 	# $f_bug_id must already be defined
-?>
-<?php
+
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'bugnote_api.php' );
-?>
-<?php
-	if ( ! config_get('time_tracking_enabled') )
+
+	if ( ON != config_get('time_tracking_enabled') ) {
 		return;
+	}
 ?>
 
 <a name="bugnotestats" id="bugnotestats" /><br />
@@ -100,7 +99,7 @@
 </table>
 </form>
 <?php
-if ( "" != $f_get_bugnote_stats_button ) {
+if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
 	$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 	$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );

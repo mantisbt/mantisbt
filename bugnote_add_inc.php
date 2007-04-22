@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.29 2007-01-04 10:07:44 davidnewcomb Exp $
+	# $Id: bugnote_add_inc.php,v 1.30 2007-04-22 07:45:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -79,11 +79,11 @@
 	<td>
 		<?php if ( config_get('time_tracking_stopwatch') && ON == config_get( 'use_javascript' )) { ?>
 		<script type="text/javascript" language="JavaScript" src="javascript/time_tracking_stopwatch.js"></script>
-		<input type="text" name="time_tracking">
-		<input type="button" name="time_tracking_ssbutton" value="Start" onClick="time_tracking_swstartstop()">
-		<input type="button" name="time_tracking_reset" value="R" onClick="time_tracking_swreset()">
+		<input type="text" name="time_tracking" size="5" value="00:00" />
+		<input type="button" name="time_tracking_ssbutton" value="Start" onClick="time_tracking_swstartstop()" />
+		<input type="button" name="time_tracking_reset" value="R" onClick="time_tracking_swreset()" />
 		<?php } else { ?>
-		<input type="text" name="time_tracking" size="5" value="0:00" />
+		<input type="text" name="time_tracking" size="5" value="00:00" />
 		<?php } ?>
 	</td>
 </tr>

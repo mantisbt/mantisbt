@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.8 2007-04-19 14:08:51 vboctor Exp $
+	# $Id: billing_inc.php,v 1.9 2007-04-22 07:45:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,13 +66,14 @@
 	$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
 
 	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
-	$f_bugnote_cost = gpc_get_string('bugnote_cost', '');
+	$f_bugnote_cost = gpc_get_string( 'bugnote_cost', '' );
 	$f_project_id = helper_get_current_project();
 
-	if ( ON == config_get( 'time_tracking_with_billing' ) )
+	if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 		$t_cost_col = true;
-	else
+	} else {
 		$t_cost_col = false;
+	}
 
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -102,7 +103,7 @@
 		?>
         </td>
 </tr>
-<?php if ($t_cost_col) { ?>
+<?php if ( $t_cost_col ) { ?>
 <tr class="row-1">
 	<td>
 		<?php echo lang_get( 'time_tracking_cost' ) ?>:
@@ -119,16 +120,16 @@
 </table>
 </form>
 <?php
-if ( "" != $f_get_bugnote_stats_button ) {
+if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
 	$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 	$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
-	if ( $f_bugnote_cost == "" )
-        	$t_cost_col = false;
+	if ( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
+		$t_cost_col = false;
+    }
 
 	$t_prev_id = -1;
-
 ?>
 <table border=0 class="width100" cellspacing="0">
 <tr class="row-category-history">
@@ -147,10 +148,10 @@ if ( "" != $f_get_bugnote_stats_button ) {
 </tr>
 <?php foreach ( $t_bugnote_stats as $t_item ) { ?>
 <?php
-        $t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
-        if ( $t_item['bug_id'] != $t_prev_id) {
-                $t_link = string_get_bug_view_link($t_item['bug_id']) . ": " . $t_item['summary'];
-                echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
+	$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
+	if ( $t_item['bug_id'] != $t_prev_id) {
+		$t_link = string_get_bug_view_link( $t_item['bug_id'] ) . ": " . string_display( $t_item['summary'] );
+		echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
 		$t_prev_id = $t_item['bug_id'];
 	}
 ?>
@@ -163,7 +164,7 @@ if ( "" != $f_get_bugnote_stats_button ) {
 	</td>
 <?php if ($t_cost_col) { ?>
 	<td>
-		<?php echo $t_item['cost'] ?>
+		<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
 	</td>
 <?php } ?>
 </tr>

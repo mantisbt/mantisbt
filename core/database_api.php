@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.54 2007-03-13 03:42:20 vboctor Exp $
+	# $Id: database_api.php,v 1.55 2007-04-22 07:45:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -405,9 +405,10 @@
 		}
 
 		// Format
-		$t_formatted = $t_a[0] . "-";
-		$t_formatted .= ($t_a[1] < 10 ? "0" . $t_a[1] : $t_a[1]);
+		$t_formatted = $t_a[0] . '-';
+		$t_formatted .= ($t_a[1] < 10 ? "0" . $t_a[1] : $t_a[1]) . '-';
 		$t_formatted .= ($t_a[2] < 10 ? "0" . $t_a[2] : $t_a[2]);
+
 		return $t_formatted;
 	}
 
@@ -416,6 +417,12 @@
 	function db_prepare_int( $p_int ) {
 		return (int)$p_int;
 	}
+	
+	# --------------------
+	# prepare a double before DB insertion
+	function db_prepare_double( $p_double ) {
+		return (double)$p_double;
+	}	
 
 	# --------------------
 	# prepare a boolean before DB insertion
