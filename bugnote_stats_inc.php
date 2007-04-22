@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.6 2007-04-18 20:26:58 davidnewcomb Exp $
+	# $Id: bugnote_stats_inc.php,v 1.7 2007-04-22 01:59:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,7 +64,7 @@
 
 	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
 ?>
-<form method="post" action="<?php echo $PHP_SELF ?>">
+<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
 <input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 <table border=0 class="width100" cellspacing="0">
 <tr>
