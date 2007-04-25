@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.98 2007-04-14 03:00:28 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.99 2007-04-25 06:22:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -18,6 +18,7 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'last_visited_api.php' );
+	require_once( $t_core_path.'projax_api.php' );
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -235,7 +236,9 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="platform" size="16" maxlength="32" value="<?php echo $t_bug->platform ?>" />
+		<?php
+			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $t_bug->platform, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 
 </tr>
@@ -274,7 +277,9 @@
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="os" size="16" maxlength="32" value="<?php echo $t_bug->os ?>" />
+		<?php
+			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $t_bug->os, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 
 </tr>
@@ -300,7 +305,9 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="text" name="os_build" size="16" maxlength="16" value="<?php echo $t_bug->os_build ?>" />
+		<?php
+			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $t_bug->os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+		?>
 	</td>
 
 </tr>
