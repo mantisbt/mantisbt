@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.162 2007-04-14 07:44:55 vboctor Exp $
+	# $Id: print_api.php,v 1.163 2007-04-25 06:15:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -656,6 +656,43 @@
 			PRINT ">$t_category</option>";
 		}
 	}
+	
+	# --------------------
+	# Print the option list for platforms accessible for the specified user.
+	function print_platform_option_list( $p_platform, $p_user_id = null ) {
+		$t_platforms_array = profile_get_field_all_for_user( 'platform', $p_user_id );
+
+		foreach ( $t_platforms_array as $t_platform ) {
+			echo "<option value=\"$t_platform\"";
+			check_selected( $p_platform, $t_platform );
+			echo ">$t_platform</option>";
+		}
+	}
+
+	# --------------------
+	# Print the option list for OSes accessible for the specified user.
+	function print_os_option_list( $p_os, $p_user_id = null ) {
+		$t_os_array = profile_get_field_all_for_user( 'os', $p_user_id );
+
+		foreach ( $t_os_array as $t_os ) {
+			echo "<option value=\"$t_os\"";
+			check_selected( $p_os, $t_os );
+			echo ">$t_os</option>";
+		}
+	}
+
+	# --------------------
+	# Print the option list for os_build accessible for the specified user.
+	function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
+		$t_os_build_array = profile_get_field_all_for_user( 'os_build', $p_user_id );
+
+		foreach ( $t_os_build_array as $t_os_build ) {
+			echo "<option value=\"$t_os_build\"";
+			check_selected( $p_os_build, $t_os_build );
+			echo ">$t_os_build</option>";
+		}
+	}
+
 	# --------------------
 	# Print the option list for versions
 	# $p_version = currently selected version.

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.64 2007-04-18 06:35:00 vboctor Exp $
+	# $Id: view_all_set.php,v 1.65 2007-04-25 06:15:13 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -41,6 +41,30 @@
 	} else {
 		$f_show_category = gpc_get_string( 'show_category', META_FILTER_ANY );
 		$f_show_category = array( $f_show_category );
+	}
+
+	$f_platform = array();
+	if ( is_array( gpc_get( 'platform', null ) ) ) {
+		$f_platform = gpc_get_string_array( 'platform', META_FILTER_ANY );
+	} else {
+		$f_platform = gpc_get_string( 'platform', META_FILTER_ANY );
+		$f_platform = array( $f_platform );
+	}
+
+	$f_os = array();
+	if ( is_array( gpc_get( 'os', null ) ) ) {
+		$f_os = gpc_get_string_array( 'os', META_FILTER_ANY );
+	} else {
+		$f_os = gpc_get_string( 'os', META_FILTER_ANY );
+		$f_os = array( $f_os );
+	}
+
+	$f_os_build = array();
+	if ( is_array( gpc_get( 'os_build', null ) ) ) {
+		$f_os_build = gpc_get_string_array( 'os_build', META_FILTER_ANY );
+	} else {
+		$f_os_build = gpc_get_string( 'os_build', META_FILTER_ANY );
+		$f_os_build = array( $f_os_build );
 	}
 
 	$f_show_severity = array();
@@ -345,11 +369,13 @@
 	switch ( $f_type ) {
 		# New cookie
 		case '0':
+				log_event( LOG_FILTERING, 'view_all_set.php: New cookie' );
 				$t_setting_arr = array();
 
 				break;
 		# Update filters
 		case '1':
+				log_event( LOG_FILTERING, 'view_all_set.php: Update filters' );
 				$t_setting_arr['_version'] = $t_cookie_version;
 				$t_setting_arr['_view_type'] = $f_view_type;
 				$t_setting_arr['show_category'] = $f_show_category;
@@ -385,10 +411,14 @@
 				$t_setting_arr['relationship_type'] = $f_relationship_type;
 				$t_setting_arr['relationship_bug'] = $f_relationship_bug;
 				$t_setting_arr['show_profile'] = $f_show_profile;
-
+				$t_setting_arr['platform'] = $f_platform;
+				$t_setting_arr['os'] = $f_os;
+				$t_setting_arr['os_build'] = $f_os_build;
 				break;
 		# Set the sort order and direction
 		case '2':
+				log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
+
 				# We only need to set those fields that we are overriding
 				$t_setting_arr['sort'] = $f_sort;
 				$t_setting_arr['dir'] = $f_dir;
@@ -397,6 +427,8 @@
 		# This is when we want to copy another query from the
 		# database over the top of our current one
 		case '3':
+				log_event( LOG_FILTERING, 'view_all_set.php: Copy another query from database' );
+
 				$t_filter_string = filter_db_get_filter( $f_source_query_id );
 				# If we can use the query that we've requested,
 				# grab it. We will overwrite the current one at the
@@ -412,6 +444,8 @@
 				break;
 		# Generalise the filter
 		case '4':
+				log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
+
 				$t_setting_arr['show_category']	= array( META_FILTER_ANY );
 				$t_setting_arr['reporter_id'] 	= array( META_FILTER_ANY );
 				$t_setting_arr['handler_id'] 	= array( META_FILTER_ANY );
@@ -436,16 +470,19 @@
 				break;
 		# Just set the search string value
 		case '5':
+				log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
 				$t_setting_arr['search'] = $f_search;
 
 				break;
 		# Just set the view_state (simple / advanced) value
 		case '6':
+				log_event( LOG_FILTERING, 'view_all_set.php: View state (simple/advanced)' );
 				$t_setting_arr['_view_type'] = $f_view_type;
 
 				break;
 		# does nothing. catch all case
 		default:
+				log_event( LOG_FILTERING, 'view_all_set.php: default - do nothing' );
 				break;
 	}
 

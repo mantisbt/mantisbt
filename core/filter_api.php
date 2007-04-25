@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.152 2007-04-18 06:35:01 vboctor Exp $
+	# $Id: filter_api.php,v 1.153 2007-04-25 06:15:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -43,6 +43,9 @@
 	define( 'FILTER_PROPERTY_TARGET_VERSION', 'target_version' );
 	define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' );
 	define( 'FILTER_PROPERTY_PROFILE', 'profile_id' );
+	define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
+	define( 'FILTER_PROPERTY_OS', 'os' );
+	define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );
 	define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
 	define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
 	define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
@@ -76,6 +79,9 @@
 	define( 'FILTER_SEARCH_END_YEAR', 'end_year' );
 	define( 'FILTER_SEARCH_PRIORITY_ID', 'priority_id' );
 	define( 'FILTER_SEARCH_PROFILE', 'profile_id' );
+	define( 'FILTER_SEARCH_PLATFORM', 'platform' );
+	define( 'FILTER_SEARCH_OS', 'os' );
+	define( 'FILTER_SEARCH_OS_BUILD', 'os_build' );
 	define( 'FILTER_SEARCH_MONITOR_USER_ID', 'monitor_user_id' );
 	define( 'FILTER_SEARCH_PRODUCT_BUILD', 'product_build' );
 	define( 'FILTER_SEARCH_PRODUCT_VERSION', 'product_version' );
@@ -280,6 +286,18 @@
 
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_RELATIONSHIP_BUG, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PLATFORM] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PLATFORM, $p_custom_filter[FILTER_PROPERTY_PLATFORM] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS, $p_custom_filter[FILTER_PROPERTY_OS] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
 		}
 
 		# @@@ Add support for Custom Fields
@@ -635,17 +653,7 @@
 		}
 
 		# category
-		$t_any_found = false;
-
-		foreach( $t_filter['show_category'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_category'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !_filter_is_any( $t_filter['show_category'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
@@ -657,6 +665,7 @@
 					array_push( $t_clauses, "'$c_show_category'" );
 				}
 			}
+
 			if ( 1 < count( $t_clauses ) ) {
 				array_push( $t_where_clauses, "( $t_bug_table.category in (". implode( ', ', $t_clauses ) .") )" );
 			} else {
@@ -823,16 +832,7 @@
 		}
 
 		# product version
-		$t_any_found = false;
-		foreach( $t_filter['show_version'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_version'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !_filter_is_any( $t_filter['show_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
@@ -844,6 +844,7 @@
 					array_push( $t_clauses, "'$c_show_version'" );
 				}
 			}
+
 			if ( 1 < count( $t_clauses ) ) {
 				array_push( $t_where_clauses, "( $t_bug_table.version in (". implode( ', ', $t_clauses ) .") )" );
 			} else {
@@ -852,16 +853,7 @@
 		}
 
 		# profile
-		$t_any_found = false;
-		foreach( $t_filter['show_profile'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['show_profile'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !_filter_is_any( $t_filter['show_profile'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['show_profile'] as $t_filter_member ) {
@@ -877,6 +869,69 @@
 				array_push( $t_where_clauses, "( $t_bug_table.profile_id in (". implode( ', ', $t_clauses ) .") )" );
 			} else {
 				array_push( $t_where_clauses, "( $t_bug_table.profile_id=$t_clauses[0] )" );
+			}
+		}
+
+		# platform
+		if ( !_filter_is_any( $t_filter['platform'] ) ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['platform'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
+				if ( META_FILTER_NONE == $t_filter_member ) {
+					array_push( $t_clauses, '' );
+				} else {
+					$c_platform = db_prepare_string( $t_filter_member );
+					array_push( $t_clauses, "'$c_platform'" );
+				}
+			}
+
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.platform in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.platform = $t_clauses[0] )" );
+			}
+		}
+
+		# os
+		if ( !_filter_is_any( $t_filter['os'] ) ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['os'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
+				if ( META_FILTER_NONE == $t_filter_member ) {
+					array_push( $t_clauses, '' );
+				} else {
+					$c_os = db_prepare_string( $t_filter_member );
+					array_push( $t_clauses, "'$c_os'" );
+				}
+			}
+
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.os in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.os = $t_clauses[0] )" );
+			}
+		}
+
+		# os_build
+		if ( !_filter_is_any( $t_filter['os_build'] ) ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['os_build'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
+				if ( META_FILTER_NONE == $t_filter_member ) {
+					array_push( $t_clauses, '' );
+				} else {
+					$c_os_build = db_prepare_string( $t_filter_member );
+					array_push( $t_clauses, "'$c_os_build'" );
+				}
+			}
+
+			if ( 1 < count( $t_clauses ) ) {
+				array_push( $t_where_clauses, "( $t_bug_table.os_build in (". implode( ', ', $t_clauses ) .") )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.os_build = $t_clauses[0] )" );
 			}
 		}
 
@@ -897,16 +952,7 @@
 		}
 
 		# fixed in version
-		$t_any_found = false;
-		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['fixed_in_version'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !_filter_is_any( $t_filter['fixed_in_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
@@ -926,16 +972,7 @@
 		}
 
 		# target version
-		$t_any_found = false;
-		foreach( $t_filter['target_version'] as $t_filter_member ) {
-			if ( ( META_FILTER_ANY == $t_filter_member ) && ( is_numeric( $t_filter_member ) ) ) {
-				$t_any_found = true;
-			}
-		}
-		if ( count( $t_filter['target_version'] ) == 0 ) {
-			$t_any_found = true;
-		}
-		if ( !$t_any_found ) {
+		if ( !_filter_is_any( $t_filter['target_version'] ) ) {
 			$t_clauses = array();
 
 			foreach( $t_filter['target_version'] as $t_filter_member ) {
@@ -2228,6 +2265,41 @@
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
 			} ?>
 		</tr>
+		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
+			<td class="small-caption" valign="top">
+				<a href="<?php echo $t_filters_url . 'platform'; ?>" id="platform_filter"><?php echo lang_get( 'platform' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'os'; ?>" id="os_filter"><?php echo lang_get( 'os' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'os_build'; ?>" id="os_build_filter"><?php echo lang_get( 'os_version' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top" colspan="5"">
+			</td>
+			<?php if ( $t_filter_cols > 8 ) {
+				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
+			} ?>
+		</tr>
+		<tr class="row-1">
+			<td class="small-caption" valign="top" id="platform_filter_target">
+				<?php
+					print_multivalue_field( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] );
+				?>
+			</td>
+			<td class="small-caption" valign="top" id="os_filter_target">
+				<?php
+					print_multivalue_field( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
+				?>
+			</td>
+			<td class="small-caption" valign="top" id="os_build_filter_target">
+				<?php
+					print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
+				?>
+			</td>
+			<td class="small-caption" colspan="5">
+			</td>
+		</tr>
 		<?php
 
 		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
@@ -2880,6 +2952,18 @@
 		if ( !isset( $p_filter_arr['dir'] ) ) {
 			$p_filter_arr['dir'] = "DESC";
 		}
+		
+		if ( !isset( $p_filter_arr['platform'] ) ) {
+			$p_filter_arr['platform'] = array( 0 => META_FILTER_ANY );
+		}
+
+		if ( !isset( $p_filter_arr['os'] ) ) {
+			$p_filter_arr['os'] = array( 0 => META_FILTER_ANY );
+		}
+
+		if ( !isset( $p_filter_arr['os_build'] ) ) {
+			$p_filter_arr['os_build'] = array( 0 => META_FILTER_ANY );
+		}
 
 		if ( !isset( $p_filter_arr['project_id'] ) ) {
 			$p_filter_arr['project_id'] = array( 0 => META_FILTER_CURRENT );
@@ -3156,6 +3240,45 @@
 			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
 			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
+		</select>
+		<?php
+	}
+	
+	function print_filter_platform() {
+		global $t_select_modifier, $t_filter;
+
+		?>
+		<!-- Platform -->
+		<select <?php echo $t_select_modifier;?> name="platform[]">
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['platform'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<?php 
+				log_event( LOG_FILTERING, 'Platform = ' . var_export( $t_filter['platform'], true ) );
+				print_platform_option_list( $t_filter['platform'] );
+			?>
+		</select>
+		<?php
+	}
+
+	function print_filter_os() {
+		global $t_select_modifier, $t_filter;
+
+		?>
+		<!-- OS -->
+		<select <?php echo $t_select_modifier;?> name="os[]">
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['os'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<?php print_os_option_list( $t_filter['os'] ) ?>
+		</select>
+		<?php
+	}
+
+	function print_filter_os_build() {
+		global $t_select_modifier, $t_filter;
+
+		?>
+		<!-- OS Build -->
+		<select <?php echo $t_select_modifier;?> name="os_build[]">
+			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['os_build'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<?php print_os_build_option_list( $t_filter['os_build'] ) ?>
 		</select>
 		<?php
 	}
@@ -3626,6 +3749,51 @@
 		</select>
 		<?php
 	}
+	
+	# Prints a multi-value filter field.  For example, platform, etc.
+	# $p_field_name - The name of the field, e.g. "platform"
+	# $p_field_value - an array of values.
+	function print_multivalue_field( $p_field_name, $p_field_value ) {
+		$t_output = '';
+		$t_any_found = false;
+
+		if ( count( $p_field_value ) == 0 ) {
+			echo lang_get( 'any' );
+		} else {
+			$t_first_flag = true;
+			
+			$t_field_value = is_array( $p_field_value ) ? $p_field_value : array( $p_field_value );
+
+			foreach( $t_field_value as $t_current ) {
+				$t_current = stripslashes( $t_current );
+				?>
+				<input type="hidden" name="<?php echo $p_field_name ?>[]" value="<?php echo string_display( $t_current );?>" />
+				<?php
+				$t_this_string = '';
+
+				if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
+						|| ( is_blank( $t_current ) ) ) {
+					$t_any_found = true;
+				} else {
+					$t_this_string = string_display( $t_current );
+				}
+
+				if ( $t_first_flag != true ) {
+					$t_output .= '<br />';
+				} else {
+					$t_first_flag = false;
+				}
+
+				$t_output .= $t_this_string;
+			}
+
+			if ( true == $t_any_found ) {
+				echo lang_get( 'any' );
+			} else {
+				echo $t_output;
+			}
+		}
+	}
 
 	#===================================
 	# Caching
@@ -3706,5 +3874,27 @@
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
 		}
+	}
+	
+	# --------------------
+	# Checks if a filter value is "any".  Supports both single value as well as multiple value
+	# fields (array).
+	# $p_filter_value - The value which can be a simple value or an array.
+	function _filter_is_any( $p_filter_value ) {
+		if ( ( META_FILTER_ANY == $p_filter_value ) && is_numeric( $p_filter_value ) ) {
+			return true;
+		}
+
+		if ( count( $p_filter_value ) == 0 ) {
+			return true;
+		}
+
+		foreach( $p_filter_value as $t_value ) {
+			if ( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 ?>

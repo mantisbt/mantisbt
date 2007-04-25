@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.70 2007-04-20 08:28:22 vboctor Exp $
+	# $Id: helper_api.php,v 1.71 2007-04-25 06:15:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -103,15 +103,21 @@
 	#  to the boolean value true
 	function check_selected( $p_var, $p_val=true ) {
 		if ( is_array( $p_var ) ) {
-			foreach( $p_var as $p_this_var ) {
-				if ( $p_this_var == $p_val ) {
-					PRINT ' selected="selected" ';
+			foreach( $p_var as $t_this_var ) {
+				# catch the case where one entry is 0 and the other is a string.
+				if ( ( is_numeric( $t_this_var ) && !is_numeric( $p_val ) ) ||
+					( !is_numeric( $t_this_var ) && is_numeric( $p_val ) ) ) {
+					continue;
+				}
+
+				if ( $t_this_var == $p_val ) {
+					echo ' selected="selected" ';
 					return;
 				}
 			}
 		} else {
 			if ( $p_var == $p_val ) {
-				PRINT ' selected="selected" ';
+				echo ' selected="selected" ';
 			}
 		}
 	}

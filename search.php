@@ -6,11 +6,11 @@
        # See the README and LICENSE files for details
 
        # --------------------------------------------------------
-       # $Revision: 1.3 $
+       # $Revision: 1.4 $
        # $Author: vboctor $
-       # $Date: 2007-04-22 08:33:32 $
+       # $Date: 2007-04-25 06:15:13 $
        #
-       # $Id: search.php,v 1.3 2007-04-22 08:33:32 vboctor Exp $
+       # $Id: search.php,v 1.4 2007-04-25 06:15:13 vboctor Exp $
        # --------------------------------------------------------
 ?>
 <?php
@@ -37,6 +37,9 @@
 	gpc_make_array( FILTER_SEARCH_FIXED_IN_VERSION );
 	gpc_make_array( FILTER_SEARCH_TARGET_VERSION );
 	gpc_make_array( FILTER_SEARCH_PROFILE );
+	gpc_make_array( FILTER_SEARCH_PLATFORM );
+	gpc_make_array( FILTER_SEARCH_OS );
+	gpc_make_array( FILTER_SEARCH_OS_BUILD );
 	gpc_make_array( FILTER_SEARCH_PRIORITY_ID );
 	gpc_make_array( FILTER_SEARCH_MONITOR_USER_ID );
 	gpc_make_array( FILTER_SEARCH_VIEW_STATE_ID );
@@ -58,6 +61,9 @@
 	$my_filter[FILTER_PROPERTY_PRIORITY_ID] = gpc_get_string_array( FILTER_SEARCH_PRIORITY_ID, META_FILTER_ANY );
 	$my_filter[FILTER_PROPERTY_MONITOR_USER_ID] = gpc_get_string_array( FILTER_SEARCH_MONITOR_USER_ID, META_FILTER_ANY );
 	$my_filter[FILTER_PROPERTY_PROFILE] = gpc_get_string_array( FILTER_SEARCH_PROFILE, META_FILTER_ANY );
+	$my_filter[FILTER_PROPERTY_PLATFORM] = gpc_get_string_array( FILTER_SEARCH_PLATFORM, META_FILTER_ANY );
+	$my_filter[FILTER_PROPERTY_OS] = gpc_get_string_array( FILTER_SEARCH_OS, META_FILTER_ANY );
+	$my_filter[FILTER_PROPERTY_OS_BUILD] = gpc_get_string_array( FILTER_SEARCH_OS_BUILD, META_FILTER_ANY );
 	$my_filter[FILTER_PROPERTY_VIEW_STATE_ID] = gpc_get_string_array( FILTER_SEARCH_VIEW_STATE_ID, META_FILTER_ANY );
 	$my_filter[FILTER_PROPERTY_PRODUCT_VERSION] = gpc_get_string_array( FILTER_SEARCH_PRODUCT_VERSION, META_FILTER_ANY );
 
@@ -95,6 +101,14 @@
 	$t_settings_serialized = serialize( $tc_setting_arr );
 	$t_settings_string = config_get( 'cookie_version' ) . '#' . $t_settings_serialized;
 
+	# Store the filter string in the database: its the current filter, so some values won't change
+	$t_project_id = helper_get_current_project();
+	$t_project_id = ( $t_project_id * -1 );
+	$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
+
+	# set cookie values
+	gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
+
 	# redirect to print_all or view_all page
 	if ( $f_print ) {
 		$t_redirect_url = 'print_all_bug_page.php';
@@ -102,7 +116,5 @@
 		$t_redirect_url = 'view_all_bug_page.php';
 	}
 
-	$t_token_id = token_add( $t_settings_serialized, TOKEN_FILTER);
-	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
-	html_meta_redirect( $t_redirect_url, 0 );
+	print_header_redirect( $t_redirect_url );
 ?>
