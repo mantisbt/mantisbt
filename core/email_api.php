@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.128 2007-03-27 19:45:08 zakman Exp $
+	# $Id: email_api.php,v 1.129 2007-05-01 07:27:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -646,6 +646,18 @@
 		$t_email_data->metadata['priority'] = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
 		$t_email_data->metadata['charset'] =  lang_get( 'charset', lang_get_current() );
 
+        $t_hostname = '';
+        $t_server = isset( $_SERVER ) ? $_SERVER : $HTTP_SERVER_VARS;
+        if ( isset( $t_server['SERVER_NAME'] ) ) {
+            $t_hostname = $t_server['SERVER_NAME'];
+        } else {
+            $t_address = explode( '@', config_get( 'from_email' ) );
+            if ( isset( $t_address[1] ) ) {
+                $t_hostname = $t_address[1];
+            }
+        }
+        $t_email_data->metadata['hostname'] = $t_hostname;
+
 		$t_email_id = email_queue_add( $t_email_data );
 		
 		return $t_email_id; 
@@ -693,8 +705,11 @@
 		# if you have problems with phpMailer
 
 		$mail = new PHPMailer;
-
 		$mail->PluginDir = PHPMAILER_PATH;
+		
+		if ( isset( $t_email_data->metadata['hostname'] ) ) {
+			$mail->Hostname = $t_email_data->metadata['hostname'];
+		}
 
 		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
 		$mail->SetLanguage( lang_get( 'phpmailer_language', config_get( 'default_language' ) ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
