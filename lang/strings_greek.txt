@@ -1,0 +1,1326 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+	#
+	# Greek: Kostas Vorilas, math1890@yahoo.gr
+	# 
+	#
+	###########################################################################
+	# Greek strings for Mantis (source language for translations)
+	# -------------------------------------------------
+	# $Revision: 1.1 $
+	# $Author: vboctor $
+	# $Date: 2007-05-01 06:44:36 $
+	#
+	# $Id: strings_greek.txt,v 1.1 2007-05-01 06:44:36 vboctor Exp $
+	###########################################################################
+
+?>
+<?php
+# Charset
+$s_charset = 'utf-8';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Μετακίνηση';
+$s_actiongroup_menu_copy = 'Αντιγραφή';
+$s_actiongroup_menu_assign = 'Ανάθεση';
+$s_actiongroup_menu_close = 'Κλείσιμο';
+$s_actiongroup_menu_delete = 'Διαγραφή';
+$s_actiongroup_menu_resolve = 'Επίλυση';
+$s_actiongroup_menu_update_priority = 'Αλλαγή Προτεραιότητας';
+$s_actiongroup_menu_update_status = 'Αλλαγή Κατάστασης';
+$s_actiongroup_menu_update_view_status = 'Αλλαγή Προβολής Κατάστασης';
+$s_actiongroup_menu_update_category = 'Αλλαγή Κατηγορίας';
+$s_actiongroup_menu_set_sticky = 'Εν/Απενεργοποιήσε σε Προσκήνιο';
+$s_actiongroup_menu_update_field = 'Ενημέρωση %s';
+$s_actiongroup_bugs = 'Επιλεγμένα Θέματα';
+
+# new strings:
+$s_all_projects = 'Όλες';
+$s_move_bugs = 'Μετακίνηση Θεμάτων';
+$s_operation_successful = 'Διαδικασία Επιτυχής.';
+$s_date_order = 'Χρονολογική Σειρά';
+$s_print_all_bug_page_link = 'Εκτύπωση Αναφορών';
+$s_csv_export = 'Εξαγωγή CSV';
+$s_login_anonymously = 'Ανώνυμη Είσοδος';
+$s_anonymous = 'Ανώνυμος';
+$s_jump_to_bugnotes = 'Σημειώσεις';
+$s_public_project_msg = 'Η εφαρμογή είναι ΔΗΜΟΣΙΑ. Όλοι οι χρήστες έχουν πρόσβαση.';
+$s_private_project_msg = 'Η εφαρμογή είναι ΙΔΙΩΤΙΚΗ. Μονο οι διαχειριστές και συγκεκριμένοι χρήστες έχουν πρόσβαση.';
+$s_access_level_project = 'Επίπεδο στην Εφαρμογή';
+$s_view_submitted_bug_link = 'Προβολή Απεσταλμένου Θέματος';
+$s_assigned_projects = 'Ανατεθέντες Εφαρμογές';
+$s_unassigned_projects = 'Μη Ανατεθέντες Εφαρμογές';
+$s_print = 'Εκτύπωση';
+$s_jump = 'Μετάβαση';
+$s_copy_users = 'Αντιγραφή Χρηστών';
+$s_copy_categories_from = 'Αντιγραφή Κατηγοριών Από';
+$s_copy_categories_to = 'Αντιγραφή Κατηγοριών Προς';
+$s_copy_users_from = 'Αντιγραφή Χρηστών Από';
+$s_copy_users_to = 'Αντιγραφή Χρηστών Προς';
+$s_bug_history = 'Ιστορικό Αναφορών';
+$s_field = 'Πεδίο';
+$s_old_value = 'Παλιά Τιμή';
+$s_new_value = 'Νέα Τιμή';
+$s_date_modified = 'Ημερομηνία Αλλαγής';
+$s_bugnote = 'Σημείωση';
+$s_change = 'Αλλαγή';
+$s_bugnote_view_state = 'Σημείωση Προβολής Κατάστασης';
+$s_bug_monitor = 'Θέμα Υπό Παρακολούθηση';
+$s_bug_end_monitor = 'Τέλος Παρακολούθησης Θέματος';
+$s_announcement = 'Ανακοίνωση';
+$s_stays_on_top = 'Παραμονή στο Προσκήνιο';
+$s_delete_bugnote_button = 'Διαγραφή Σημείωσης';
+$s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το θέμα;';
+$s_bug_relationships = 'Σχέσεις';
+$s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
+$s_empty_password_button = 'Χρήση Κενού Κωδικού';
+
+$s_duplicate_of = "αντίγραφο του";
+$s_has_duplicate = "έχει αντίγραφο";
+$s_related_to = "σε σχέση με";
+$s_dependant_on = "πατέρας του";
+$s_blocks = "παιδί του";
+
+$s_new_bug = 'Νέο Θέμα';
+$s_bugnote_added = 'Σημείωση Προστέθηκε';
+$s_bugnote_edited = 'Σημείωση Επεξεργάστηκε';
+$s_bugnote_deleted = 'Σημείωση Διαγράφηκε';
+$s_summary_updated = 'Αναφορά Ενημερώθηκε';
+$s_description_updated = 'Περιγραφή Ενημερώθηκε';
+$s_additional_information_updated = 'Πρόσθετες Πληροφορίες Ενημερώθηκαν';
+$s_steps_to_reproduce_updated = 'Βήματα Αναπαραγωγής Ενημερώθηκαν';
+$s_file_added = 'Αρχείο Προστέθηκε';
+$s_file_deleted = 'Αρχείο Διαγράφηκε';
+$s_bug_deleted = 'Θέμα Διαγράφηκε';
+
+$s_make_private = 'Όρισε Ιδιωτικό';
+$s_make_public = 'Όρισε Δημόσιο';
+
+$s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
+
+$s_login_link = 'Login';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
+$s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
+$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
+$s_move_bugs_conf_msg = 'Move issues to';
+$s_copy_bugs_conf_msg = 'Copy issues to';
+$s_assign_bugs_conf_msg = 'Assign issues to';
+$s_resolve_bugs_conf_msg = 'Choose issues resolution';
+$s_priority_bugs_conf_msg = 'Choose issues priority';
+$s_status_bugs_conf_msg = 'Choose issues status';
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_category_bugs_conf_msg = 'Choose issues category';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_close_group_bugs_button = 'Close Issues' ;
+$s_delete_group_bugs_button = 'Delete Issues' ;
+$s_move_group_bugs_button = 'Move Issues' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
+$s_assign_group_bugs_button = 'Assign Issues' ;
+$s_resolve_group_bugs_button = 'Resolve Issues' ;
+$s_priority_group_bugs_button = 'Update Priority' ;
+$s_status_group_bugs_button = 'Update Status' ;
+$s_category_group_bugs_button = 'Update Category';
+$s_view_status_group_bugs_button = 'Update View Status';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+$s_graph_imp_category_title = 'Synthesis graphs by category';
+$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+$s_by_status_pct = 'by status percentage';
+$s_by_priority_pct = 'by priority percentage';
+$s_by_severity_pct = 'by severity percentage';
+$s_by_category_pct = 'by category percentage';
+$s_by_resolution_pct = 'by resolution percentage';
+$s_by_severity_mix = 'by severity and status';
+$s_by_priority_mix = 'by priority and status';
+$s_by_resolution_mix = 'by resolution and status';
+$s_synthesis_link = 'Synthesis';
+$s_status_link = 'Per state';
+$s_priority_link = 'Per priority';
+$s_severity_link = 'Per severity';
+$s_category_link = 'Per category';
+$s_resolution_link = 'Per resolution';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Προβολή επιλεγμένων μόνο';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Επιλογή πεδίων προς εκτύπωση';
+$s_printing_options_link = 'Επιλογές Εκτύπωσης';
+
+# word and excel export
+$s_bugnote_title = 'Note handler' ;
+$s_bugnote_date = 'Ημερομηνία σημείωσης';
+$s_bugnote_description = 'Περιγραφή σημείωσης';
+
+$s_error_no_proceed = 'Παρακαλώ πιέστε το "Back" στον φυλλομετρήτη σας για να επιστρέψετε στην προηγούμενη σελίδα. Εκεί μπορείτε να διορθώσετε τα λάθη που σας υποδεικνύει το μήνυμα λάθους ή να επίλεξετε άλλη σελίδα. Επίσης, μπορείτε να επιλέξετε άλλη σελίδα απευθείας απο τη μενού-μπάρα.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.  Please report this to ';
+$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  File is not readable by Mantis. Please check the project settings';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Το όνομα χρήστη είναι ήδη δεσμευμένο. Παρακαλώ επιστρέψτε στην προηγούμενη σελίδα και επιλέξτε κάποιο άλλο.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%s\' not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Τα δεδομένα δεν ταιριάζουν με κανένα λογαριασμό';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+
+$s_login_error = 'Ο λογαριασμός είναι απενεργοποιήμενος ή το όνομα/κωδικός χρήστη είναι λάθος.';
+$s_login_cookies_disabled = 'Ο browser δεν μπορεί να διαχειριστεί τα cookies ή δεν γνωρίζει πως να τα χειριστεί.';
+
+# General Strings
+$s_go_back = 'Πίσω';
+$s_proceed = 'Πατήστε εδώ';
+
+$s_switch = 'Αλλαγή';
+$s_logged_in_as = 'Χρήστης';
+
+$s_prefix_for_deleted_users = 'χρήστης';
+
+$s_administrator = 'Διαχειριστής';
+$s_myself = "Εγώ";
+$s_default_access_level = 'Προεπιλεγμένο Επίπεδο Πρόσβασης';
+
+$s_issue_status_percentage = 'Issue Status Percentage';
+
+# Enum Strings
+$s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+$s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
+$s_project_view_state_enum_string = '10:δημόσια,50:ιδιωτική';
+$s_view_state_enum_string = '10:δημόσια,50:ιδιωτική';
+
+$s_priority_enum_string = '10:καμία,20:χαμήλη,30:κανονική,40:υψηλή,50:επείγουσα,60:άμμεση';
+$s_severity_enum_string = '10:αισθητικό,20:τετριμμένο,30:κείμενο,40:βελτίωση,50:ελάχιστο,60:μέγιστο,70:κατάρρευση,80:αποκλεισμός';
+$s_reproducibility_enum_string = '10:συνέχεια,30:μερικές φορές,50:τυχαία,70:δεν δοκίμασα,90:απέτυχα να εμφανίσω,100:Δ/Ξ';
+$s_status_enum_string = '10:νέο,20:σε επικοινωνία,30:αναγνωρισμένο,40:επιβεβαιωμένο,50:ανατεθειμένο,80:επιλυμένο,90:ολοκληρωμένο';
+$s_resolution_enum_string = '10:σε εξέλιξη,20:επιδιορθώθηκε,30:επανεξέταση,40:αδύνατη αναπαραγωγή,50:δεν επιδιορθώνεται,60:αντιγραφή,70:δεν χρειάζεται αλλαγή,80:αναβάλλεται,90:δεν θα επιδιορθωθει';
+$s_projection_enum_string = '10:καμία,30:απλή,50:εύκολη επιδιόρθωση,70:δύσκολη επιδιόρθωση,90:επανασχεδιασμός';
+$s_eta_enum_string = '10:καμία,20:< 1 ημέρα,30:2-3 ημέρες,40:< 1 εβδομάδα,50:< 1 μήνας,60:> 1 μήνας';
+$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+
+# Email Strings
+$s_new_account_subject = 'Εγγραφή Λογαριασμού';
+$s_new_account_greeting = 'Ευχαριστούμε για την εγγραφή. ο λογαριασμός σας έχει ονομα χρήστη \'';
+$s_new_account_greeting2 = '\'. Για να ολοκληρώσετε την εγγραφή σας, παρακαλώ επισκευθείτε τον παρακάτω σύνδεσμο URL (σιγουρευθείτε πως το βάλατε σαν μια γραμμή) και ορίστε τον προσωπικό σας κωδικό:';
+$s_new_account_username = 'Username: ';
+$s_new_account_message = 'Αν δεν ζητήσατε εγγραφή, παρακαλώ αγνοήστε το παρόν μήνυμα.' . "\n\n";
+$s_new_account_do_not_reply = 'ΜΗΝ ΑΠΑΝΤΗΣΕΤΕ ΣΕ ΑΥΤΟ ΤΟ ΜΗΝΥΜΑ';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
+
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'Στην περίπτωση που συμπληρώσατε σωστά το όνομα και την email διεύθυνση του λογαριασμού σας, θα σας στείλουμε ένα μήνυμα επιβεβαίωσης. Μόλις λάβετε το μήνυμα, παρακαλούμε ακολουθήστε πιστά τις οδηγίες που περιέχει ώστε να είναι δυνατή η αλλαγή του κωδικού σας.';
+
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+
+$s_email_reporter = 'Reported By';
+$s_email_handler = 'Assigned To';
+$s_email_project = 'Εφαρμογή';
+$s_email_bug = 'Issue ID';
+$s_email_category = 'Category';
+$s_email_reproducibility = 'Reproducibility';
+$s_email_severity = 'Severity';
+$s_email_priority = 'Priority';
+$s_email_status = 'Status';
+$s_email_resolution = 'Resolution';
+$s_email_duplicate = 'Duplicate';
+$s_email_fixed_in_version = 'Fixed in Version';
+$s_email_target_version = 'Target Version';
+$s_email_date_submitted = 'Date Submitted';
+$s_email_last_modified = 'Last Modified';
+$s_email_summary = 'Summary';
+$s_email_description = 'Description';
+
+# account_delete.php
+$s_account_protected_msg = 'Ο λογαριασμός είναι προστατευμένος. Δεν γίνονται αλλαγές...';
+$s_account_removed_msg = 'Ο λογαριασμός σας διαγράφηκε...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το λογαριασμό σας;';
+$s_delete_account_button = 'Διαγραφή Λογαριασμού';
+
+# account_page.php
+$s_manage_profiles_link = 'Προφίλ';
+$s_change_preferences_link = 'Επιλογές';
+$s_edit_account_title = 'Αλλαγή στοιχείων';
+$s_username = 'Όνομα χρήστη';
+$s_realname = 'Ονοματεπώνυμο';
+$s_email = 'Email';
+$s_password = 'Κωδικός';
+$s_no_password_change = 'Ο κωδικός ελέγχεται από άλλο σύστημα και δεν είναι δυνατή η αλλαγή του εδώ.';
+$s_confirm_password = 'Επιβεβαίωση Κωδικού';
+$s_access_level = 'Επίπεδο χρήστη';
+$s_update_user_button = 'Ενημέρωση';
+$s_verify_warning = 'Οι πληροφορίες του λογαριασμού επιβεβαιώθηκαν. Το μήνυμα επιβεβαίωσης λόγαριασμού δεν ισχύει πλέον.';
+$s_verify_change_password = 'Είναι απαραίτητο να ορίσετε κωδικό εδώ, για να μπορείτε να συνδεθείτε ξανά.';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Επιλογές λογαριασμού';
+$s_default_project = 'Προεπιλεγμένη Εφαρμογή';
+$s_advanced_report = 'Σύνθετη Αναφορά';
+$s_advanced_view = 'Σύνθετη Προβολή';
+$s_advanced_update = 'Σύνθετη Ενημέρωση';
+$s_refresh_delay = 'Συχνότητα Ανανέωσης';
+$s_redirect_delay = 'Συχνότητα Αναδρομολόγησης';
+$s_with_minimum_severity = 'Με Ελάχιστη Διαβάθμιση σε';
+$s_bugnote_order = 'Σειρά Σημειώσεων';
+$s_bugnote_order_asc = 'Αύξουσα';
+$s_bugnote_order_desc = 'Φθίνουσα';
+$s_email_on_new = 'Email σε Νέο';
+$s_email_on_assigned = 'Email σε Αλλαγή Κατόχου';
+$s_email_on_feedback = 'Email σε Σχόλιο';
+$s_email_on_resolved = 'Email σε Επίλυση';
+$s_email_on_closed = 'Email σε Κλείσιμο';
+$s_email_on_reopened = 'Email σε Επαναφορά';
+$s_email_on_bugnote_added = 'Email σε Προσθήκη Σημείωσης';
+$s_email_on_status_change = 'Email σε Αλλαγή Κατάστασης';
+$s_email_on_priority_change = 'Email σε Αλλαγή Προτεραιότητας';
+$s_email_bugnote_limit = 'Email Όριο Σημειώσεων';
+$s_language = 'Γλώσσα';
+$s_update_prefs_button = 'Ενημέρωση αλλαγών';
+$s_reset_prefs_button = 'Επαναφόρα αλλαγών';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Οι Επιλογές ακυρώθηκαν...';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Οι Επιλογές ανανεώθηκαν...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Προφίλ προστέθηκε...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Προφίλ διαγράφηκε...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Επεξεργασία Προφίλ';
+$s_platform = 'Πλατφόρμα';
+$s_operating_system = 'Λειτουργικό Σύστημα';
+$s_additional_description = 'Αναλυτικότερη Περιγραφή';
+$s_update_profile_button = 'Ενημέρωση Προφίλ';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Η ανανέωση προεπιλεγμένου προφίλ έγινε επιτυχώς...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Προσθήκη Προφίλ';
+$s_add_profile_button = 'Προσθήκη Προφίλ';
+$s_edit_or_delete_profiles_title = 'Αλλαγή ή Διαγραφή των Προφίλ';
+$s_edit_profile = 'Αλλαγή Προφίλ';
+$s_make_default = 'Προεπιλεγμένο';
+$s_delete_profile = 'Διαγραφή Προφίλ';
+$s_select_profile = 'Επιλογή Προφίλ';
+$s_submit_button = 'Καταχώρηση';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Προφίλ ενημερώθηκε...';
+
+# account_sponsor_page.php
+$s_my_sponsorship = 'My Sponsorships';
+$s_update_sponsorship_button = 'Change Payment Status';
+$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
+$s_own_sponsored = 'Issues You have Sponsored:';
+$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
+$s_no_own_sponsored = 'You have not sponsored any issues.';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
+$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_amount = 'Amount';
+$s_total_owing = 'Total Owing';
+$s_total_paid = 'Total Paid';
+$s_sponsor_hide = 'Hide Resolved and Paid';
+$s_sponsor_show = 'Show All';
+
+# account_sponsor_update.php
+$s_payment_updated = 'Payment information updated.';
+
+# account_update.php
+$s_account_updated_msg = 'Ο λογαριασμός σας ανανεώθηκε επιτυχώς...';
+$s_email_updated = 'Η αλλαγή email ήταν επιτυχής';
+$s_realname_duplicated = 'Το πραγματικό όνομα το έχει ήδη άλλος χρήστης';
+$s_realname_updated = 'Η αλλαγή του ονόματος ήταν επιτυχής';
+$s_password_updated = 'Ο κωδικός άλλαξε με επιτυχία';
+
+# adm_permission_report.php
+
+# bug_action_group_page
+$s_multiple_projects = 'Τα θέματα που έχετε επιλέξει είναι από διαφορετικές εφαρμογές. Οι κάτωθι παράμετροι αντιστοιχούν στις ρυθμίσεις όλων των εφρμογών. Αν αυτο δεν είναι σώστο, παρακαλώ δοκιμάστε να κάνετε αλλαγές σε λιγότερα θέματα.';
+
+# bug_assign.php
+$s_bug_assign_msg = 'Το θέμα ορίστηκε επιτυχώς...';
+
+# bug_change_status_page.php
+$s_new_bug_title = 'Νέο Θέμα';
+$s_feedback_bug_title = 'Αναζήτηση Ενημέρωσης';
+$s_acknowledged_bug_title = 'Αναγνώριση Θέματος';
+$s_confirmed_bug_title = 'Επιβεβαίση Θέματος';
+$s_assigned_bug_title = 'Ορισμός Θέματος';
+$s_new_bug_button = 'Νέο Θέμα';
+$s_feedback_bug_button = 'Αναζήτηση Ενημέρωσης';
+$s_acknowledged_bug_button = 'Αναγνώριση Θέματος';
+$s_confirmed_bug_button = 'Επιβεβαίση Θέματος';
+$s_assigned_bug_button = 'Ορισμός Θέματος';
+
+# bug_close.php
+$s_bug_close_msg = 'Το Θέμα Έκλεισε...';
+$s_close_immediately = 'Άμεσο κλείσιμο:';
+
+# bug_close_page.php
+$s_closed_bug_title = 'Κλείσιμο Θέματος';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Το θέμα διαγράφηκε...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγραφή το παρόν θέμα;';
+$s_delete_bug_button = 'Διαγραφή';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Παρακολούθηση';
+$s_unmonitor_bug_button = 'Τέλος Παρακ/σης';
+
+# bug_file_add.php
+$s_file_upload_msg = 'Η Φόρτωση του Αρχείου ήταν επιτυχής';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'Φόρτωση Αρχείου';
+$s_select_file = 'Επιλογή Αρχείου';
+$s_upload_file_button = 'Φόρτωση Αρχείου';
+$s_max_file_size = 'Μέγιστο Μέγεθος';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Το θέμα επανεξετάζεται...';
+$s_reopen_add_bugnote_title = 'Προσθήκη Αιτιολόγησης Επαναξέτασης';
+$s_bugnote_add_reopen_button = 'Πρόσθηκη Σημείωσης Και Επανέξεταση';
+
+# bug_resolve_page.php
+$s_resolved_bug_title = 'Επίλυση Θέματος';
+$s_resolved_bug_button = 'Επίλυση Θέματος';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Το Θέμα επιλύθηκε. Σημείωστε παρακάτω...';
+$s_resolve_add_bugnote_title = 'Προσθήκη Αιτιολόγησης Επίλυσης Θέματος';
+$s_bugnote_add_resolve_button = 'Προσθήκη';
+
+# bug_reminder_page.php
+$s_from = 'Από';
+$s_to = 'Προς';
+$s_on = 'On';
+$s_sent_you_this_reminder_about = 'sent you this reminder about';
+$s_bug_reminder = 'Αποστολή Υπενθύμησης';
+$s_reminder_sent_to = 'Στάλθηκε υπενθύμηση στον';
+$s_bug_send_button = 'Αποστολή';
+$s_reminder = 'Υπενθύμηση';
+$s_reminder_explain = 'Η σημείωση θα σταλεί στους παραλήπτες που ζήτησαν ενημέρωση για το συγκεκριμένο θέμα.';
+$s_reminder_monitor = 'Επίσης οι συγκεκριμένοι παραλήπτες θα παρακολουθούν το θέμα. Μπορούν να διαγραφούν με το κουμπι Τέλος Παρακ/σης.';
+$s_reminder_store = 'Η σημείωση θα αποθηκευτεί μαζί με το θέμα.';
+
+# bug_set_sponsorship.php
+$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+
+# bug_update.php
+$s_bug_updated_msg = 'Το θέμα ανανεώθηκε επιτυχώς...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Πίσω στο Θέμα';
+$s_update_simple_link = 'Ανανέωση Απλού';
+$s_updating_bug_advanced_title = 'Ενημέρωση Πληροφοριών Θέματος';
+$s_id = 'ID';
+$s_category = 'Κατηγορία';
+$s_severity = 'Βαθμός';
+$s_reproducibility = 'Επανεμφάνιση';
+$s_date_submitted = 'Ημερομηνία Καταχώρησης';
+$s_last_update = 'Τελευταία ενημέρωση';
+$s_reporter = 'Αναφέρων';
+$s_assigned_to = 'Ανατεθέν σε';
+$s_priority = 'Διαβάθμιση';
+$s_resolution = 'Απόφαση';
+$s_status = 'Κατάσταση';
+$s_duplicate_id = 'Διπλοεγγραμμένο ID';
+$s_os = 'Λ.Σ.';
+$s_projection = 'Projection';
+$s_os_version = 'Εκδοση Λ.Σ.';
+$s_eta = 'ETA';
+$s_product_version = 'Έκδοση Προϊόντος';
+$s_build = 'Εσ. Έκδοση';
+$s_fixed_in_version = 'Έκδοση Διόρθωσης';
+$s_target_version = 'Εκδοχή Στόχου';
+$s_votes = 'Ψήφοι';
+$s_summary = 'Περίληψη (μέχρι 64 χαρακτήρες)';
+$s_description = 'Αναλυτική Περιγραφή';
+$s_steps_to_reproduce = 'Βήματα για Αναπαραγωγή';
+$s_update_information_button = 'Ενήμερωση Πληροφοριών';
+$s_sticky_issue = 'Θέμα Στο Προσκήνιο';
+$s_profile = 'Προφίλ';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Ανανέωση Σύνθετου';
+$s_updating_bug_simple_title = 'Ενημέρωση Πληροφοριών Θέματος';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Η Ψήφος προστέθηκε...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Η Σημείωση προστέθηκε...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'Η σημείωση διαγράφηκε με επιτυχία...';
+$s_bug_notes_title = 'Σημειώσεις';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Επεξεργασία Σημείωσης';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Δεν υπάρχουν σημειώσεις για το συγκεκριμένο θέμα.';
+$s_delete_link = 'Διαγραφή';
+$s_add_bugnote_title = 'Προσθήκη Σημείωσης';
+$s_add_bugnote_button = 'Προσθήκη';
+$s_bugnote_edit_link = 'Επεξεργασία';
+$s_closed_bug_button = 'Κλείσιμο Θέματος';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'Η σημείωση ενημερώθηκε με επιτυχία...';
+$s_edited_on = 'ενημερώθηκε : ';
+
+# file_api.php
+$s_show_content ='Εμφάνιση Περιεχομένων';
+
+# index.php
+$s_click_to_login = 'Πατήστε εδώ';
+
+# login.php
+
+# login_page.php
+#@@@ should the following string be related to $g_window_title?
+$s_login_page_info = 'Welcome to the Issue Tracker.';
+$s_login_title = 'Είσοδος';
+$s_save_login = 'Αποθήκευση στοιχείων';
+$s_choose_project = 'Εφαρμογή';
+$s_login_button = 'Είσοδος';
+$s_signup_link = 'Νέος χρήστης';
+$s_lost_password_link = 'Ξεχάσατε τον κωδικό;';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Επιλογή Εφαρμογής';
+
+# logout_page.php
+$s_logged_out_title = 'Αποσύνδεση...';
+$s_redirecting = '...Αναδρομολόγηση';
+$s_here = 'Εδώ';
+
+# lost_pwd_page.php
+$s_lost_password_title = "Ακύρωση Κωδικού";
+$s_lost_password_done_title = "Αποστολή Μηνύματος Κωδικού";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "Για να επαναφέρετε χαμένο κωδικό, παρακαλώ συμπληρώστε σώστα το όνομα χρήστη και την email 
+διεύθυνση.<br/><br/>Εαν τα δεδομένα αντιστοιχούν σε πραγματικό λογαριασμό, θα λάβετε ένα ειδικό URL μέσω email 
+που περιέχει ένα κωδικό επιβεβαίωσης για τον λογαριασμό σας. Παρακαλώ ακολουθήστε τον σύνδεσμο για να 
+αλλάξετε τον κωδικό σας.";
+$s_lost_password_confirm_hash_OK = "Η επιβεβαίωση έγινε δεκτή.Παρακαλώ ανανεώστε τον κωδικό σας.";
+
+# main_page.php
+$s_open_and_assigned_to_me = 'Εκκρεμή και ανατεθέντα';
+$s_open_and_reported_to_me = 'Εκκρεμή και αναφερθέντα';
+$s_newer_news_link = 'Πρόσφατα Νέα';
+$s_older_news_link = 'Παλαιά Νέα';
+$s_archives = 'Αρχεία';
+$s_rss = 'RSS';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Δημιοργήθηκε ο χρήστης';
+$s_created_user_part2 = 'με επίπεδο πρόσβασης';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Δημιουργία νέου λογαριασμού';
+$s_verify_password = 'Επιβεβαίωση Κωδικού';
+$s_enabled = 'Ενεργός';
+$s_protected = 'Προστατευμένος';
+$s_create_user_button = 'Δημιουργία Χρήστη';
+
+# manage_page.php
+$s_hide_disabled = 'Απόκρυψη Ανενεργών';
+$s_filter_button = 'Εφαρμογή Φίλτρου';
+$s_manage_users_link = 'Διαχείριση Χρηστών';
+$s_manage_projects_link = 'Διαχείριση Εφαρμογών';
+$s_manage_custom_field_link = 'Διαχείριση Ειδικών Πεδίων';
+$s_manage_global_profiles_link = 'Διαχείριση Ολικών Προφίλ';
+$s_permissions_summary_report = 'Αναφορά Αδειών';
+$s_manage_config_link = 'Διαχείριση Ρυθμίσεων';
+$s_manage_threshold_config = 'Κατώτατο Όριο Ροής Εργασίας';
+$s_manage_email_config = 'Email Ειδοποιήσεις';
+$s_manage_workflow_config = 'Μεταβάσεις Ροής Εργασίας';
+$s_create_new_account_link = 'Δημιουργία νέου λογαριασμού';
+$s_projects_link = 'Εφαρμογές';
+$s_documentation_link = 'Τεκμηρίωση';
+$s_new_accounts_title = 'Νέοι Λογαριασμοί';
+$s_1_week_title = '1 Βδομάδα';
+$s_never_logged_in_title = 'Δεν Συνδέθηκαν Ποτέ';
+$s_prune_accounts = 'Καθαρισμός Λογαριασμών';
+$s_hide_inactive = 'Απόκρυψη Ανενεργών';
+$s_manage_accounts_title = 'Διαχείρηση Λογαριασμών';
+$s_p = 'p';
+$s_date_created = 'Ημερομηνία δημιουργίας';
+$s_last_visit = 'Τελευταία επίσκεψη';
+$s_edit_user_link = 'Ενημέρωση Χρήστη';
+
+# manage_config_email_page
+$s_config_all_projects = 'Σημείωση: Οι συγκεκριμένες ρυθμίσεις επηρεάζουν ΟΛΕΣ ΤΙΣ ΕΦΑΡΜΟΓΕΣ, εκτός αν παρακαμφθούν στο επίπεδο εφαρμογής.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
+$s_colour_coding = 'Στον κάτωθι πίνακα,το επόμενο χρώμα ορίζει:';
+$s_colour_project = 'Project setting overrides others.';
+$s_colour_global = 'Όλες οι ρυθμίσεις Εφαρμογής παρακάμπτουν την προεπιλεγμένη ρύθμιση.';
+$s_issue_reporter = 'Χρήστης που ανέφερε το θέμα';
+$s_issue_handler = 'Χρήστης που χειρίζεται το θέμα';
+$s_users_added_bugnote = 'Χρήστες που πρόσθεσαν Σημειώσεις';
+$s_change_configuration = 'Ενημέρωση Ρυθμίσεων';
+$s_message = 'Μήνυμα';
+$s_default_notify = 'Setting default notification flags to';
+$s_action_notify = 'Setting action notification flags to';
+$s_notify_defaults_change_access = 'Who can change notification defaults';
+$s_notify_actions_change_access = 'Ποιος μπορεί να αλλάξει τις ειδοποιήσεις';
+$s_revert_to_system = "Ολική Διαγραφή Ρυθμίσεων Εφαρμογών";
+$s_revert_to_all_project = "Delete Project Specific Settings";
+
+# manage_config_workflow_page
+$s_non_existent = 'ανύπαρκτο';
+$s_current_status = 'Παρούσα Κατάσταση';
+$s_next_status = 'Επόμενη Κατάσταση';
+$s_workflow = 'Διάγραμμα Ροής';
+$s_workflow_thresholds = 'Κατώτατα Όρια που Επηρεάζουν τη Ροή Εργάσιας';
+$s_threshold = 'Κατώτατο Όριο';
+$s_status_level = 'Κατάσταση';
+$s_alter_level = 'Ποιος μπορεί να αλλάξει την τιμή';
+$s_validation = 'Εξακρίβωση Ροής Εργασίας';
+$s_comment = 'Σχόλια Εξακρίβωσης';
+$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_unreachable = 'You cannot move an issue into this status';
+$s_no_exit = 'You cannot move an issue out of this status';
+$s_access_levels = 'Επίπεδα Πρόσβασης';
+$s_access_change = 'Ελάχιστο Επίπεδο Πρόσβασης για την Αλλαγή Κατάστασης';
+$s_desc_bug_submit_status = 'Κατάσταση στην οποία ένα νέο θέμα μπορεί να οριστεί';
+$s_desc_bug_reopen_status = 'Κατάσταση στην οποία επανεξεταζόμενα θέματα ορίζονται';
+$s_desc_bug_resolved_status_threshold = 'Κατάσταση στην οποία ένα θέμα θεωρείται επιλυμένο';
+$s_workflow_change_access = 'Ποιος μπορεί να αλλάξει το διάγραμμα ροής';
+$s_access_change_access = 'Ποιος μπορεί να αλλάξει το επίπεδο πρόσβασης';
+
+# manage_config_workflow_set
+$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+
+# manage_config_work_threshold_page
+$s_assign_issue = 'Ορίσμος θέματος';
+$s_allow_close_immediate = 'Επιτρέπεται το θέμα να κλείνει στην Επίλυση';
+$s_allow_reporter_close = 'Επιτρέπεται ο Reporter να κλείνει το Θέμα';
+$s_allow_reporter_reopen = 'Επιτρέπεται ο Reporter να επανεξετάζει το Θέμα';
+$s_set_status_assigned = 'Όρισε κατάσταση στον καθορισμό Υπευθύνου';
+$s_allow_user_edit = 'Επιτρέπεται ο χρήστης να γράφει τις δικές του σημειώσεις λαθών';
+$s_limit_access = 'Περιορισμός των reporter στα θέματα τους';
+$s_submit_status = 'Κατάσταση στην οποία νέο θέμα ορίζεται';
+$s_assigned_status = 'Κατάσταση στην οποία τίθονται τα αυτομάτως θέματα';
+$s_resolved_status = 'Κατάσταση στην οποία ένα θέμα θεωρείται επιλυμένο';
+$s_readonly_status = 'Κατάσταση στην οποία ένα θέμα γίνεται μόνο προβαλλόμενο';
+$s_reopen_status = 'Κατάσταση στην οποία ενα επανεξεταζόμενο θέμα ορίζεται';
+$s_reopen_resolution = 'Επίλυση στην οποία ένα επανεξεταζόμενο θέμα ορίζεται';
+
+# manage_config_revert_page
+$s_config_delete_sure = 'Are you sure you want to delete the settings for';
+$s_in_project = 'in project';
+$s_delete_config_button = 'Διαγραφή Ρυθμίσεων';
+
+# adm_config_report.php
+$s_configuration_report = 'Ρύθμιση Αναφοράς';
+$s_database_configuration = 'Ρύθμιση Βάσης';
+$s_configuration_option = 'Ρύθμιση Επιλογών';
+$s_configuration_option_type = 'Τύπος';
+$s_configuration_option_value = 'Τιμή';
+$s_all_users = 'Όλοι Χρήστες';
+$s_set_configuration_option = 'Εφαρμογή Ρυθμίσεων';
+$s_delete_config_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε την συγκεκριμένη ρύθμιση;';
+
+# manage_proj_add.php
+$s_project_added_msg = 'Η εφαρμογή προστέθηκε επιτυχώς...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'Η κατηγορία προστέθηκε επιτυχώς...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'Η κατηγορία διαγράφηκε επιτυχώς...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Είστε σίγουρος πως θέλετε να γίνειη διαγραφή';
+$s_delete_category_button = 'Διαγραφή Κατηγορίας';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Επεξεργασία Κατηγορίας ΕφαρμοEdit Project Category';
+$s_update_category_button = 'Ενημέρωση Κατηγορίας';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'Η κατηγορία ανανεώθηκε επιτυχώς...';
+
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Πρόσθεση Υπο-Εφαρμογής';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'Η εφαρμογή διαγράφηκε επιτυχώς...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε την εφαρμογή και τις συννημένες σημειώσεις της;';
+$s_project_delete_button = 'Διαγραφή Εφαρμογής';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Επεξεργασία Εφαρμογής';
+$s_project_name = 'Όνομα Εφαρμογής';
+$s_view_status = 'Προβολή Κατάστασης';
+$s_public = 'δημόσια';
+$s_private = 'ιδιωτική';
+$s_update_project_button = 'Ενημέρωση Εφαρμογής';
+$s_delete_project_button = 'Διαγραφή Εφαρμογής';
+$s_categories_and_version_title = 'Κατηγορίες και Εκδόσεις';
+$s_categories = 'Κατηγορίες';
+$s_add_category_button = 'Προσθήκη Κατηγορίας';
+$s_versions = 'Εκδόσεις';
+$s_add_version_button = 'Προσθήκη Έκδοσης';
+$s_add_and_edit_version_button = 'Προσθήκη και Επεξεργασία Έκδοσης';
+$s_edit_link = 'Επεξεργασία';
+$s_actions = 'Ενέργειες';
+$s_version = 'Έκδοση';
+$s_timestamp = 'Ημερομηνία';
+$s_update = 'Ενημέρωση';
+$s_subprojects = 'Υπο-εφαρμογές';
+$s_add_subproject = 'Προσθήκη ως Υπο-εφαρμογή';
+$s_create_new_subproject_link = 'Δημιουργία Υπό-εφαρμογής';
+$s_unlink_link = 'Αποδέσμευση';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Προσθήκη Εφαρμογής';
+$s_upload_file_path = 'Φάκελος Φόρτωσης Αρχείου';
+$s_add_project_button = 'Προσθήκη Εφαρμογής';
+$s_projects_title = 'Εφαρμογές';
+$s_name = 'Όνομα';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'Project has been successfully updated...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'Version has been successfully added...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'Η έκδοση διαγράφηκε με επιτυχία...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Είστε σίγουρος πως θέλετε να διαγράψετε την έκδοση;';
+$s_delete_version_button = 'Διαγραφή Έκδοσης';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Ενημέρωση Έκδοσης Εφαρμογής';
+$s_update_version_button = 'Ενημέρωση Έκδοσης';
+$s_released = 'Εκδόθηκε';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'Η έκδοση ενημερώθηκε επιτυχώς...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'Ο λογαριασμός προστατεύεται και δεν μπορεί να διαγραφεί.';
+$s_account_deleted_msg = 'Ο λογαριασμός διαγράφηκε...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το λογαριασμό;';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
+$s_prune_accounts_button = 'Prune';
+$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Ενημέρωση Χρήστη';
+$s_reset_password_button = 'Μηδενισμός Κωδικού';
+$s_delete_user_button = 'Διαγραφή Χρήστη';
+$s_reset_password_msg = 'Ο Μηδενισμός Κωδικού στέλνει email επιβεβαίωσης.';
+$s_reset_password_msg2 = 'Ο Μηδενισμός Κωδικού δημιουργεί κενό κωδικό.';
+$s_show_all_users = 'ΟΛΟΙ';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Προστατευμένος λογαριασμός. Δεν μπορεί να μηδενιστεί ο κωδικός.';
+$s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s email address. Using this, the user will be able to change their password.';
+$s_account_reset_msg2 = 'Ο κωδικός λογαριασμού ορίστηκε κενός...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'Account protected. Access level and enabled protected. Otherwise, account has been updated...';
+$s_manage_user_updated_msg = 'Ο λογαριασμός ανανεώθηκε επιτυχώς...';
+
+# menu_inc.php
+$s_main_link = 'Κεντρική σελίδα';
+$s_view_bugs_link = 'Προβολή λαθών';
+$s_report_bug_link = 'Αναφορά λαθών';
+$s_changelog_link = 'Άρχειο αλλαγών';
+$s_roadmap_link = 'Ιστορικό';
+$s_summary_link = 'Περίληψη';
+$s_account_link = 'Ο λογαριασμός μου';
+$s_users_link = 'Users';
+$s_manage_link = 'Διαχείριση';
+$s_edit_news_link = 'Επεξεργασία ανακοινώσεων';
+$s_docs_link = 'Έγγραφα';
+$s_logout_link = 'Έξοδος';
+$s_my_view_link = 'Η προβολή μου';
+
+# meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Μη ανατεθέντα';
+$s_my_view_title_recent_mod = 'Πρόσφατες Αλλαγές';
+$s_my_view_title_reported = 'Οι αναφορές μου';
+$s_my_view_title_assigned = 'Ανατεθέντα και μη υλοποιημένα';
+$s_my_view_title_resolved = 'Υλοποιημένα';
+$s_my_view_title_monitored = 'Οι προβολές μου';
+$s_my_view_title_feedback = 'Awaiting Feedback from Me';
+$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+
+# news_add.php
+$s_news_added_msg = 'News item added...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Deleted news item...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Are you sure you wish to delete this news item?';
+$s_delete_news_item_button = 'Delete News Item';
+
+# news_edit_page.php
+$s_edit_news_title = 'Επεξεργασία Νέων';
+$s_headline = 'Τίτλος';
+$s_body = 'Κύριο Μέρος';
+$s_update_news_button = 'Ενημέρωση Νέων';
+
+# news_menu_page.php
+$s_add_news_title = 'Προσθήκη Νέων';
+$s_post_to = 'Post to';
+$s_post_news_button = 'Δημοσίευση Νέων';
+$s_edit_or_delete_news_title = 'Επεξεργασία ή Διαγραφή Νέων';
+$s_edit_post = 'Επεξεργασία Άρθρου';
+$s_delete_post = 'Διαγραφή Άρθρου';
+$s_select_post = 'Επιλογή Άρθρου';
+
+# news_update.php
+$s_news_updated_msg = 'News item updated...';
+
+# news_view_page.php
+$s_back_link = 'Πίσω';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'Η Φόρτωση Αρχείου ήταν επιτυχής';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'Φόρτωση Αρχείου';
+$s_title = 'Τίτλος';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'Project file deleted';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Are you sure you wish to delete this file?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Filename';
+$s_file_update_button = 'Update File';
+$s_file_delete_button = 'Delete File';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Τεκμηρίωση Εφαρμογής';
+$s_user_documentation = 'Εγχειρίδιο Χρήστη';
+$s_project_documentation = 'Τεκμηρίωση Εφαρμογής';
+$s_add_file = 'Προσθήκη Αρχείου';
+
+# proj_doc_update.php
+$s_project_document_updated = 'Project update successful';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'Successfully added user to project';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'Successfully removed user from project';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Είστε σίγουρος πως επιθυμείτε να αφαιρέσετε τον χρήστη;';
+$s_remove_user_button = 'Αφαίρεση Χρήστη';
+$s_remove_all_users_sure_msg = 'Είστε σίγουρος πως θέλετε να αφαιρέθούν όλοι οι χρήστες;';
+$s_remove_all_users_button = 'Αφαίρεση Όλων των Χρηστών';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Προσθήκη Χρήστη στην Εφαρμογή';
+$s_add_user_button = 'Προσθήκη Χρήστη';
+$s_project_selection_title = 'Επιλογή Εφαρμογής';
+$s_remove_link = 'Αφαίρεση';
+$s_remove_all_link = 'Αφαίρεση Όλων';
+
+# proj_user_update.php
+$s_updated_user_msg = 'Επιτυχής ανανέωση χρήστη';
+
+# report_add.php
+$s_must_enter_category = 'Πρέπει να επιλέξετε κατηγορία';
+$s_must_enter_severity = 'Πρέπει να επιλέξετε διαβάθμιση';
+$s_must_enter_reproducibility = 'Πρέπει να επιλέξετε αναπαραγώγη';
+$s_must_enter_summary = 'Πρέπει να εισάγετε στατιστικά';
+$s_must_enter_description = 'Πρέπει να επιλέξετε περιγραφή';
+$s_report_more_bugs = 'Αναφορά Περισσότερων Θεμάτων';
+$s_submission_thanks_msg = 'Ευχαριστούμε για την καταχώρηση';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Απλή Αναφορά';
+$s_enter_report_details_title = 'Λεπτομέρειες Αναφοράς';
+$s_required = 'υποχρεωτικό';
+$s_select_category = 'Επιλογή Κατηγορίας';
+$s_select_reproducibility = 'Επιλογή Αναπαραγωγής';
+$s_select_severity = 'Επιλογή Διαβάθμισης';
+$s_or_fill_in = 'Ή Συμπληρώστε';
+$s_assign_to = 'Ανάθεση σε';
+$s_additional_information = 'Πρόσθετες Πληροφορίες';
+$s_submit_report_button = 'Αποστολή Αναφοράς';
+$s_check_report_more_bugs = 'επιλέξτε για περισσότερες αναφορές';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Σύνθετη Αναφορά';
+$s_report_stay = 'Παραμονή στις Αναφορές';
+
+# set_project.php
+$s_selected_project = 'Επιλεγμένη Εφαρμογή';
+$s_valid_project_msg = 'Πρέπει να επιλέξετε ισχύουσα εφαρμογή';
+
+# signup.php
+$s_signup_done_title = 'Η δημιουργία λογαριασμού πραγματοποιήθηκε';
+$s_password_emailed_msg = 'Συγχαρητήρια. Η εγγραφή σας ήταν επιτυχής. Θα σας σταλλεί ένα email επιβεβαίωσης ώστε να εξακριβωθεί η διεύθυνσή σας. Ο λογαριασμός σας θα ενεργοποιηθεί όταν επισκευθείτε τον σύνδεσμο που περιέχει το email.';
+$s_no_reponse_msg = 'Έχετε επτά ημέρες για να ολοκληρώσετε την επιβεβαίωση του λογαριασμού. Αν αποτύχετε να ολοκληρώσετε την επιβεβαίωση στο διάστημα των επτά ημερών, ο νέος λογαριασμός θα διαγραφεί.';
+
+# signup_page.php
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'Μετά τη συμπλήρωση της φόρμας και την διασταύρωση των στοιχείων, θα σας σταλλεί ένα email επιβεβαίωσης στην διεύθυνση που έχετε ορίσει.<br/>
+Ακολουθώντας τις οδηγίες του email,θα ενεργοποιηθεί ο λογαριασμός σας. Σε περίπτωση αποτυχίας της ενεργοποίησης εντός επτά ημερών, ο λογαριασμός θα διαγραφεί.<br/>
+Είναι υποχρεωτικό να συμπληρώσετε πραγματική διεύθυνση email ώστε να είναι δυνατή η παράδοση του email επιβεβαίωσης.';
+$s_signup_title = 'Εγγραφή';
+$s_signup_button = 'Εγγραφή';
+$s_no_password_request = 'Ο κωδικός σας διαχειρίζεται από άλλο σύστημα. Παρακαλώ επικοινωνήστε με τον διαχειριστή του συστήματος σας.';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Επεξεργασία Ρυθμίσεων Δικτυακού Τόπου';
+$s_save_settings_button = 'Αποθήκευση Ρυθμίσεων';
+
+# site_settings_page.php
+$s_site_settings_title = 'Ρυθμίσεις Δικτυακού Τόπου';
+$s_system_info_link = 'Πληροφορίες Συστήματος';
+$s_site_settings_link = 'Ρυθμίσεις Δικτυακού Τόπου';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Οι ρυθμίσεις του δικτυακού τόπου ανανεώθηκαν';
+
+# summary_page.php
+$s_summary_title = 'Στατιστικά';
+$s_summary_jpgraph_link = 'Σύνθετα Στατιστικά';
+$s_by_project = 'Εφαρμογή';
+$s_by_status = 'Κατάσταση';
+$s_by_date = 'Σε Ημέρες';
+$s_by_severity = 'Διαβάθμηση';
+$s_by_resolution = 'Επίλυση';
+$s_by_category = 'Κατηγορία';
+$s_by_priority = 'Προτεραιότητα';
+$s_by_developer = 'Προγραμματιστής';
+$s_by_reporter = 'Αναφέρων';
+$s_reporter_by_resolution = 'Αναφέρων - Επίλυση';
+$s_reporter_effectiveness = 'Αποτελεσματικότητα Αναφέροντος';
+$s_developer_by_resolution = 'Προγραμ/στής - Επίλυση';
+$s_percentage_fixed = '% Επιλυμένα';
+$s_percentage_errors = '% Λάθη';
+$s_errors = 'Λάθη';
+$s_total = 'Σύνολο';
+$s_time_stats = 'Χρονικά Στατιστικά για Επιλυμένα Θέματα (ημέρες)';
+$s_longest_open_bug = 'Μακροβιότερο Θέμα';
+$s_longest_open = 'Μακροβιότερο';
+$s_average_time = 'Μέσος χρόνος';
+$s_total_time = 'Συνολικός χρόνος';
+$s_developer_stats = 'Στατιστικά Προγραμματιστή';
+$s_reporter_stats = 'Στατιστικά Αναφέροντος';
+$s_orct = '(ανοιχτό/επιλυμένο/ολοκληρωμένο/σύνολο)';
+
+# view_all_bug_page.php
+$s_any = 'Οτιδήποτε';
+$s_show = 'Αριθμός προβολών';
+$s_changed = 'Μεταβολή(ώρες)';
+$s_viewing_bugs_title = 'Προβολή Θεμάτων';
+$s_updated = 'Ενημέρωση';
+$s_sticky = 'Προβολή Σημειωμένων Θεμάτων';
+$s_sort = 'Ιεράρχηση';
+$s_issue_id = 'Issue #';
+$s_recently_visited = 'Πρόσφατες επισκέψεις';
+
+# view_all_inc.php
+$s_none = 'Κανένα';
+$s_current = 'Παρόν';
+$s_search = 'Αναζήτηση';
+$s_view_prev_link = 'Προβολή Προηγ.';
+$s_view_next_link = 'Προβολή Επόμ.';
+$s_prev = 'Προηγ';
+$s_next = 'Επομ';
+$s_first = 'Πρώτο';
+$s_last = 'Τελευταίο';
+$s_start_date = 'Από';
+$s_end_date = 'Εώς';
+$s_use_date_filters = 'Φίλτρα Ημερομηνίας';
+$s_yes = 'Ναι';
+$s_no = 'Όχι';
+$s_open_filters = 'Αλλαγή Φίλτρου';
+$s_or_unassigned = 'Ή Μη Ανατεθέν';
+$s_ok = 'OK';
+$s_select_all = 'Επιλογή Όλων';
+
+# stored query strings
+$s_use_query = 'Χρήση Φίλτρου';
+$s_delete_query = 'Διαγραφή Φίλτρου';
+$s_query_deleted = 'Φίλτρο Διαγράφηκε';
+$s_save_query = 'Αποθήκευση Παρόντος Φίλτρου';
+$s_reset_query = 'Ακύρωση Φίλτρου';
+$s_query_name = 'Όνομα Φίλτρου';
+$s_query_exists = 'This particular query appears to already exist.';
+$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
+$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_store_error = 'There was an error saving this query.';
+$s_open_queries = 'Διαχείριση Φίλτρων';
+$s_query_delete_msg = 'Are you sure you wish to delete this query?';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Προβολή Απλού';
+$s_viewing_bug_advanced_details_title = 'Προβολή Θεμάτων σε Σύνθετη Αναφορά';
+$s_product_build = 'Έκδοση Προϊόντος';
+$s_system_profile = 'Περιγραφή Συστήματος';
+$s_update_bug_button = 'Ενημέρωση Θέματος';
+$s_bug_assign_to_button = 'Όρισε σε:';
+$s_bug_status_to_button = 'Αλλαγή Κατάστασης σε:';
+$s_reopen_bug_button = 'Επανεξέταση Θέματος';
+$s_move_bug_button = 'Μετακίνηση Θέματος';
+$s_attached_files = 'Συννημένα Αρχεία';
+$s_publish = 'Δημοσίευση';
+$s_cached = 'Cached';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Προβολή Σύνθετης';
+$s_viewing_bug_simple_details_title = 'Προβολή Θεμάτων σε Απλή Αναφορά';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'Δεν υπάρχουν χρήστες να παρακολουθούν το Θέμα.';
+$s_users_monitoring_bug = 'Χρήστες που παρακολουθούν το Θέμα';
+$s_monitoring_user_list = 'Λίστα Χρηστών';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+
+# custom field strings
+$s_add_custom_field_button = 'Νέο Ειδικό Πεδίο';
+$s_delete_custom_field_button = 'Διαγραφή Ειδικού Πεδίου';
+$s_delete_custom_field_everywhere = 'Διαγραφή Ειδικού Πεδίου Παντού';
+$s_update_custom_field_button = 'Ενημέρωση Ειδικού Πεδίου';
+$s_add_existing_custom_field = 'Πρόσθεση του Υπάρχοντος Ειδικού Πεδίου';
+$s_edit_custom_field_title = 'Επεξεργασία Ειδικού Πεδίου';
+$s_custom_field = 'Πεδίο';
+$s_custom_fields_setup = 'Ειδικά Πεδία';
+$s_custom_field_name = 'Όνομα';
+$s_custom_field_project_count = 'Αριθμός Εφαρμογών';
+$s_custom_field_type = 'Τύπος';
+$s_custom_field_possible_values = 'Πιθανές Τιμές';
+$s_custom_field_default_value = 'Προεπιλεγμένη Τιμή';
+$s_custom_field_valid_regexp = 'Απλή Έκφραση';
+$s_custom_field_access_level_r = 'Προσπέλαση Ανάγνωσης';
+$s_custom_field_access_level_rw = 'Προσπέλαση Εγγραφής';
+$s_custom_field_length_min = 'Ελαχ. Μήκος';
+$s_custom_field_length_max = 'Μεγ. Μήκος';
+$s_custom_field_advanced = 'Προβολή Μόνο Σε Σύνθετη Σελίδα';
+$s_custom_field_display_report = 'Προβολή Μόνο Σε Αναφορά Θεμάτων';
+$s_custom_field_display_update = 'Προβολή Μόνο Σε Ενημέρωση Θεμάτων';
+$s_custom_field_display_resolved = 'Προβολή Μόνο Σε Επίλυση Θεμάτων';
+$s_custom_field_display_closed = 'Προβολή Μόνο Σε Ολοκλήρωση Θεμάτων';
+$s_custom_field_require_report = 'Απαραίτητο Σε Αναφορά';
+$s_custom_field_require_update = 'Απαραίτητο Σε Ενημέρωση';
+$s_custom_field_require_resolved = 'Απαραίτητο Σε Επίλυση';
+$s_custom_field_require_closed = 'Απαραίτητο Σε Ολοκλήρωση';
+
+$s_custom_field_sequence = 'Ακολουθία';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
+
+$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+$s_field_delete_button = 'Διαγραφή Πεδίου';
+
+$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_field_remove_button = 'Αφαίρεση Πεδίου';
+
+$s_hide_status = 'Απόκρυψη Κατάστασης';
+$s_filter_closed = "Ολοκληρωμένο";
+$s_filter_resolved = "Επιλυμένο";
+$s_hide_closed = "Απόκρυψη Ολοκληρωμένων";
+$s_hide_resolved = "Απόκρυψη Επιλυμένων";
+$s_and_above = 'Και Άνω';
+$s_advanced_filters = 'Σύνθετα Φίλτρα';
+$s_simple_filters = 'Απλά Φίλτρα';
+$s_monitored_by = 'Επιβλέπων';
+
+$s_attachments = "συννημένα";
+$s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsorship_total = 'Sponsorship Total';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Αρχείο αλλαγών';
+
+# Roadmap
+$s_roadmap = 'Roadmap';
+$s_resolved_progress = '%d of %d issue(s) resolved.  Progress (%d%%).';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
+
+$s_bug = "θέμα";
+$s_add_new_relationship = "Νέα σχέση";
+$s_add_new_relationship_button = "Πρόσθεση";
+$s_this_bug = "Παρόν θέμα";
+$s_relationship_added = "Πρόσθεση σχέσης";
+$s_relationship_deleted = "Διαγραφή σχέσης";
+$s_no_relationship = "καμία σχέση";
+$s_relationship_replaced = "Αντικατάσταση σχέσης";
+$s_replace_relationship_button = "Αντικατάσταση";
+$s_replace_relationship_sure_msg = "Υπάρχει ήδη σχέση μεταξύ των δυο θεμάτων. Είστε σίγουρος πως θέλετε να την αντικαταστείσετε;";
+$s_relationship_with_parent = "Σχέση με πατρικό θέμα";
+$s_delete_relationship_button = "Διαγραφή";
+$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br />Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_create_child_bug_button = "Δημιουργία Κλώνου";
+$s_bug_cloned_to = "Issue cloned";
+$s_bug_created_from = "Το θέμα δημιουργήθηκε από";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
+
+# Source Control Integration
+$s_checkin = 'Checkin';
+
+# Pemissions report
+$s_perm_rpt_capability = 'Ικανότητα';
+$s_view = 'Προβολή';
+$s_issues = 'ΘΕΜΑΤΑ';
+$s_report_issue = 'Αναφορά θέματος';
+$s_update_issue = 'Ενημέρωση θέματος';
+$s_monitor_issue = 'Παρακολούθηση θέματος';
+$s_handle_issue = 'Διαχείριση θέματος';
+$s_move_issue = 'Μετακίνηση θέματος';
+$s_delete_issue = 'Διαγραφή θέματος';
+$s_reopen_issue = 'Επανεξέταση θέματος';
+$s_view_private_issues = 'Προβολή ιδιωτικών θεμάτων';
+$s_update_readonly_issues = 'Ενημέρωση μη εγγράψιμων θεμάτων';
+$s_update_issue_status = 'Ενημέρωση κατάστασης θέματος';
+$s_set_view_status = 'Ορισμός προβολής κατάστασης (δημόσια ή ιδιωτική)';
+$s_update_view_status = 'Αλλαγή κατάστασης θέματος (δημόσια ή ιδιωτική)';
+$s_show_list_of_users_monitoring_issue = 'Προβολή λίστας χρήστων που παρακολουθούν το θέμα';
+$s_notes = 'ΣΗΜΕΙΩΣΕΙΣ';
+$s_add_notes = 'Προσθήκη σημειώσεων';
+$s_update_notes = 'Ενημέρωση σημειώσεων';
+$s_delete_note = 'Διαγραφή σημείωσης';
+$s_view_private_notes = 'Προβολή ιδιωτικών σημειώσεων';
+$s_news = 'ΝΕΑ';
+$s_view_private_news = 'Προβολή ιδιωτικών νέων';
+$s_manage_news = 'Διαχείριση νέων';
+$s_view_list_of_attachments = 'Προβολή λίστας συννημένων';
+$s_download_attachments = 'Κατέβασμα συννημένων';
+$s_delete_attachments = 'Διαγραφή συννημένων';
+$s_delete_attachment_button = "Διαγραφή";
+$s_delete_attachment_sure_msg = "Είστε σίγουρος πως θέλετε να διαγράψετε το συννημένο;";
+$s_upload_issue_attachments = 'Φόρτωση συννημένων θέματος';
+$s_filters = 'Φίλτρα';
+$s_save_filters = 'Αποθήκευση φίλτρων';
+$s_save_filters_as_shared = 'Αποθήκευση φίλτρων ως κοινά';
+$s_use_saved_filters = 'Χρήση αποθηκευμένων φίλτρων';
+$s_create_project = 'Δημιουργία Εφαρμογών';
+$s_delete_project = 'Διαγραφή Εφαρμογών';
+$s_manage_project = 'Διαχείριση εφαρμογής';
+$s_manage_user_access_to_project = 'Διαχείριση πρόσβασης χρήστη στην εφαρμογή';
+$s_automatically_included_in_private_projects = 'Αυτόματη πρόσβαση σε ιδιωτικές εφαρμογές';
+$s_project_documents = 'ΚΕΙΜΕΝΑ ΕΦΑΡΜΟΓΗΣ';
+$s_view_project_documents = 'Προβολή κειμένων εφαρμογής';
+$s_upload_project_documents = 'Φόρτωση κειμένων εφαρμογής';
+$s_link_custom_fields_to_projects = 'Σύνδεση ειδικών πεδίων σε εφαρμογές';
+$s_sponsorships = 'SPONSORSHIPS';
+$s_view_sponsorship_details = 'View sponsorship details';
+$s_view_sponsorship_total = 'View sponsorship total';
+$s_sponsor_issue = 'Sponsor issue';
+$s_assign_sponsored_issue = 'Assign sponsored issue';
+$s_handle_sponsored_issue = 'Handle sponsored issue';
+$s_others = 'ΔΙΑΦΟΡΑ';
+$s_see_email_addresses_of_other_users = 'Προβολή email διευθύνσεων άλλων χρηστών';
+$s_send_reminders = 'Αποστολή υπενθυμίσεων';
+$s_add_profiles = 'Προσθήκη προφίλ';
+$s_notify_of_new_user_created = 'Ενημέρωση στην δημιουργία νέου χρήστη';
+$s_email_notification = 'EMAIL ΕΙΔΟΠΟΙΗΣΗ';
+$s_status_changed_to = 'Αλλαγή κατάστασης σε';
+$s_email_on_deleted = 'Email στα Διαγραμμένα';
+$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
+$s_email_on_relationship_changed = 'Email on Relationship changed';
+
+# DHTML filters
+$s_loading = 'Φόρτωση...';
+
+# filter_api.php
+$s_between = 'Between' ;
+$s_on_or_before = 'On Or Before' ;
+$s_before = 'Before' ;
+$s_after = 'After' ;
+$s_on_or_after = 'On Or After' ;
+
+# wiki related strings
+$s_wiki = 'Wiki';
+?>
