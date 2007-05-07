@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.205 2007-04-20 08:28:22 vboctor Exp $
+	# $Id: html_api.php,v 1.206 2007-05-07 17:46:02 prichards Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -340,7 +340,7 @@
 					}
 				} else {
 					echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">", string_display( $t_username ), "</span> <span class=\"small\">";
-					echo is_blank( $t_realname ) ? "($t_access_level)" : "(", string_display( $t_realname ), " - $t_access_level)";
+					echo is_blank( $t_realname ) ? "($t_access_level)" : "(" . string_display( $t_realname ) . " - $t_access_level)";
 					echo "</span>";
 				}
 			PRINT '</td>';
