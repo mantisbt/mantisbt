@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.108 2007-03-06 07:05:19 vboctor Exp $
+	# $Id: user_api.php,v 1.109 2007-05-07 20:03:05 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -163,7 +163,7 @@
 				# set flags for non-unique realnames
 				if ( config_get( 'differentiate_duplicates' ) ) {
 					user_set_field( $t_user_id, 'duplicate_realname', ON );
-					for ( $i=0 ; $i < $count ; $i++ ) {
+					for ( $i=0 ; $i < $t_count ; $i++ ) {
 						$t_id = db_result( $result, $i );
 						user_set_field( $t_id, 'duplicate_realname', ON );
 					}
