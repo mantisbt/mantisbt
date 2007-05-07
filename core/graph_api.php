@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.33 2006-04-19 00:50:18 thraxisp Exp $
+	# $Id: graph_api.php,v 1.34 2007-05-07 17:27:32 prichards Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -54,7 +54,9 @@
 
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin(40,40,40,170);
-		$graph->img->SetAntiAliasing();
+		if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+			$graph->img->SetAntiAliasing();
+		}
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
@@ -111,7 +113,9 @@
 		#defines margin according to height
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin( 45, 35, 35, $p_baseline );
-		$graph->img->SetAntiAliasing();
+		if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+			$graph->img->SetAntiAliasing();
+		}
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
@@ -176,7 +180,9 @@
 
 		$graph = new Graph(250,400);
 		$graph->img->SetMargin(35,35,35,150);
-		$graph->img->SetAntiAliasing();
+		if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+			$graph->img->SetAntiAliasing();
+		}
 		$graph->SetScale('textlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
@@ -267,7 +273,9 @@
 
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin(40,40,40,170);
-		$graph->img->SetAntiAliasing();
+		if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+			$graph->img->SetAntiAliasing();
+		}
 		$graph->SetScale('linlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);

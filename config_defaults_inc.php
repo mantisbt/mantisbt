@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.331 2007-05-01 06:44:34 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.332 2007-05-07 17:27:31 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -523,6 +523,10 @@
 
 	$g_use_jpgraph			= OFF;
 	$g_jpgraph_path			= '.' . DIRECTORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;   # dont forget the ending slash!
+
+	# use antialiasing - Enabling anti-aliasing will greatly improve the visual apperance of certain graphs.
+	# Note: Using anti-aliasing makes line drawing roughly 8 time slower than normal lines
+	$g_jpgraph_antialias	= ON;
 
 	# what truetype font will the graphs use. Allowed values are 'arial', 'verdana', 'courier', 'book', 'comic', 'times',
 	#  'georgia', 'trebuche', 'vera', 'veramono', or 'veraserif'. Refer to the jpgraph manual for details.

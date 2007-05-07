@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_by_cumulative.php,v 1.9 2005-02-12 20:03:48 jlatour Exp $
+	# $Id: graph_by_cumulative.php,v 1.10 2007-05-07 17:28:16 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -141,7 +141,9 @@
 	$graph = new Graph(800,600,"auto");
 	$graph->img->SetMargin(40,20,40,90);
 
-	$graph->img->SetAntiAliasing("white");
+	if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+		$graph->img->SetAntiAliasing("white");
+	}
 	$graph->SetScale("textlin");
 	$graph->SetShadow();
 	$graph->SetColor('whitesmoke');
