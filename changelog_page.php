@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.19 2007-03-24 17:20:51 zakman Exp $
+	# $Id: changelog_page.php,v 1.20 2007-05-07 23:03:13 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -29,6 +29,11 @@
 		if ( ( $t_description !== false ) && !is_blank( $t_description ) ) {
 			echo string_display( "<br />$t_description<br /><br />" );
 		}
+	}
+	
+	function print_project_header ( $p_project_name ) {
+		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br /><br />';
+		echo '<tt>';
 	}
 
 	$t_user_id = auth_get_current_user_id();
@@ -73,10 +78,13 @@
 		$t_bug_table	= config_get( 'mantis_bug_table' );
 
 		$t_version_rows = version_get_all_rows( $t_project_id );
-
-		echo '<br /><span class="pagetitle">', string_display( $t_project_name ), ' - ', lang_get( 'changelog' ), '</span><br /><br />';
-		echo '<tt>';
-
+		
+		# skip projects with no versions
+		if (sizeof($t_version_rows) == 0) {
+		    continue;
+		}
+		
+		$t_project_header_printed = false;
 		$i = 0;
 
 		foreach( $t_version_rows as $t_version_row ) {
@@ -89,6 +97,11 @@
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 			if ( !is_blank( $t_description ) ) {
+				if ( !$t_project_header_printed ) {
+					print_project_header ($t_project_name);
+				}
+				$t_project_header_printed = true;
+				
 				if ( $i > 0 ) {
 					echo '<br />';
 				}
@@ -125,6 +138,11 @@
 
 				# Print the header for the version with the first changelog entry to be added.
 				if ( $t_first_entry && !$t_version_header_printed ) {
+					if ( !$t_project_header_printed ) {
+						print_project_header ($t_project_name);
+					}
+					$t_project_header_printed = true;
+
 					if ( $i > 0 ) {
 						echo '<br />';
 					}
@@ -141,9 +159,14 @@
 			$i++;
 		}
 
-		echo '</tt>';
-		$t_project_index++;
+		if ( $t_project_header_printed ) {
+			echo '</tt>';
+			$t_project_index++;
+		}		
 	}
 
+	if ( $t_project_index == 0 ) {
+		echo '<br /><span class="pagetitle">' . lang_get('changelog_empty') . '</span>';
+	}
 	html_page_bottom1( __FILE__ );
 ?>

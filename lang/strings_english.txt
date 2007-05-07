@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.293 $
-	# $Author: vboctor $
-	# $Date: 2007-04-18 06:35:01 $
+	# $Revision: 1.294 $
+	# $Author: prichards $
+	# $Date: 2007-05-07 23:03:13 $
 	#
-	# $Id: strings_english.txt,v 1.293 2007-04-18 06:35:01 vboctor Exp $
+	# $Id: strings_english.txt,v 1.294 2007-05-07 23:03:13 prichards Exp $
 	###########################################################################
 
 ?>
@@ -1221,6 +1221,7 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Change Log';
+$s_changelog_empty = 'No Change Log information available';
 
 # Roadmap
 $s_roadmap = 'Roadmap';
