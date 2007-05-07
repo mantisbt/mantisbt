@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.38 2006-03-28 02:05:25 thraxisp Exp $
+	# $Id: file_download.php,v 1.39 2007-05-07 16:51:02 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -91,7 +91,7 @@
 	# attached files via HTTPS, we disable the "Pragma: no-cache"
 	# command when IE is used over HTTPS.
 	global $g_allow_file_cache;
-	if ( ( isset( $_SERVER["HTTPS"] ) && "on" == $_SERVER["HTTPS"] ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+	if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == strtolower( $_SERVER["HTTPS"] ) ) ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
 		# Suppress "Pragma: no-cache" header.
 	} else {
 		if ( ! isset( $g_allow_file_cache ) ) {
