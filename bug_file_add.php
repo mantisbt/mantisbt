@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.48 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bug_file_add.php,v 1.49 2007-05-08 21:42:24 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,9 +20,14 @@
 	require_once( $t_core_path.'file_api.php' );
 ?>
 <?php
-	$f_bug_id	= gpc_get_int( 'bug_id' );
-	$f_file		= gpc_get_file( 'file' );
+	$f_bug_id	= gpc_get_int( 'bug_id', -1 );
+	$f_file		= gpc_get_file( 'file', -1 );
 
+	if ( $f_bug_id == -1 && $f_file	== -1 ) {
+		# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
+		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	}
+	
 	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();
 	}
