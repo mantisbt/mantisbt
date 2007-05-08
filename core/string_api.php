@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.86 2007-04-04 06:45:23 vboctor Exp $
+	# $Id: string_api.php,v 1.87 2007-05-08 22:19:18 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -283,7 +283,7 @@
 
 				if ( isset( $t_match[2] ) ) {
 					$t_bug_id = $t_match[2];
-					if ( bug_exists( $t_bug_id ) ) {
+					if ( bug_exists( (int)$t_bug_id ) ) {
 						$t_result .= string_get_bug_view_link( $t_bug_id, null, $p_detail_info, $p_fqdn );
 					} else {
 						$t_result .= $t_bug_id;
