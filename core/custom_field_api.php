@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.62 2007-04-01 08:03:27 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.63 2007-05-08 22:29:11 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -589,6 +589,10 @@
 	# Get the id of the custom field with the specified name.
 	# false is returned if no custom field found with the specified name.
 	function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = null ) {
+		if ( $p_field_name == '' ) {
+		  return false;
+		}
+
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 
 		$c_field_name = db_prepare_string( $p_field_name );
