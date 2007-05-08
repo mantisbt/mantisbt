@@ -5,7 +5,7 @@
 
 Summary: Mantis Bugtracker
 Name: mantis
-Version: 1.1.0
+Version: 1.1.0a3
 Release: 20051130
 License: GPL
 Group: Applications/Internet
