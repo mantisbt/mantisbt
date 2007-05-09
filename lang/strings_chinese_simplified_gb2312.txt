@@ -11,26 +11,19 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
-	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
 	#
-	# $Id: strings_chinese_simplified_gb2312.txt,v 1.1 2006-11-08 13:32:44 achumakov Exp $
+	###########################################################################
+	# Mantis 1.1.0 简体中文语言包
+	# 有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
+	# Based on strings_english.txt rev. 1.294
+	# -------------------------------------------------
+	# $Revision: 1.2 $
+	# $Author: vboctor $
+	# $Date: 2007-05-09 05:44:18 $
+	#
+	# $Id: strings_chinese_simplified_gb2312.txt,v 1.2 2007-05-09 05:44:18 vboctor Exp $
 	###########################################################################
 
-	###########################################################################
-	#Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2006-01-05)
-	#
-	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
-	#  人 Pao-Hsi Huang；
-	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
-	#3.咨询网友后，“Sticky”翻译为置顶；
-	#4.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
-	#
-	#有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
-	#
-	###########################################################################
 ?>
 <?php
 # Charset
@@ -49,6 +42,9 @@ $s_actiongroup_menu_update_view_status = '更新视图状态';
 $s_actiongroup_menu_update_category = '更新类别';
 $s_actiongroup_menu_set_sticky = '设置/取消置顶';
 $s_actiongroup_menu_update_field = '更新 %s';
+$s_actiongroup_menu_update_target_version = '更改目标版本';
+$s_actiongroup_menu_update_fixed_in_version = '更改修正版本';
+$s_actiongroup_menu_add_note = '添加注释';
 $s_actiongroup_bugs = '选择问题';
 
 # new strings:
@@ -116,6 +112,7 @@ $s_make_public = '标记为公有';
 $s_create_new_project_link = '创建新项目';
 
 $s_login_link = '登录';
+$s_select_option = '(请选择)';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '您没有适当的权限对这个问题进行该操作：';
@@ -133,6 +130,8 @@ $s_status_bugs_conf_msg = '选择问题状态';
 $s_view_status_bugs_conf_msg = '选择问题浏览状态';
 $s_category_bugs_conf_msg = '选择问题类别';
 $s_set_sticky_bugs_conf_msg = '你确定要设置/取消这些问题的置顶吗？';
+$s_fixed_in_version_bugs_conf_msg = '更改修正版本为';
+$s_target_version_bugs_conf_msg = '更改目标版本为';
 $s_close_group_bugs_button = '关闭问题';
 $s_delete_group_bugs_button = '删除问题';
 $s_move_group_bugs_button = '移动问题';
@@ -144,6 +143,8 @@ $s_status_group_bugs_button = '修改状态';
 $s_category_group_bugs_button = '更新类别';
 $s_view_status_group_bugs_button = '修改浏览状态';
 $s_set_sticky_group_bugs_button = '设置/取消置顶';
+$s_fixed_in_version_group_bugs_button = '更改修正版本';
+$s_target_version_group_bugs_button = '更改目标版本';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '综合报表（按问题状态）';
@@ -206,7 +207,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '没有找到当前页的一个必须参数。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%s”。';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '配置选项“%s”只能在 config_inc.php 文件中设置，不能保存到数据库中。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%s”。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目。';
@@ -252,6 +253,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '没有找到类别。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '已存在同名版本。';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '没有找到版本“%s” 。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '帐号名称无效；帐号名称只能由字串、数字、空格、“-”或“_”组成。';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = '用户真实姓名无效。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '用户没有足够的存取权限';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '选定的“真实姓名”与另一个帐号的登录帐号名称相同；请重新选择。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '资助尚未启用。';
@@ -274,7 +276,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '确认 URL 无效或已经进
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '已达到最高请求数量；请联络系统管理员。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '你不能更改系统中唯一一个系统管理员的存取权限。';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = '页面重定向错误，请确定在 config_inc.php 或 custom_*.php 文件的 PHP 代码块 (&lt;?php ?&gt;部分)中没有多余的空格。';
 
 $s_login_error = '很遗憾，你无法登陆，请确认是否你正确地输入了用户名和密码并尝试重新登录；如果仍然无法登录，请咨询管理员是否你的账号被锁定。';
 $s_login_cookies_disabled = '你的浏览器禁用了 Cookies 功能，或者你可能使用了不支持 Cookie 的旧版浏览器；请启用 Cookie，或者升级你的浏览器。';
@@ -366,6 +368,7 @@ $s_email_status = '状态';
 $s_email_resolution = '完成度';
 $s_email_duplicate = '复制';
 $s_email_fixed_in_version = '修正该问题的版本号';
+$s_email_target_version = '目标版本';
 $s_email_date_submitted = '报告日期';
 $s_email_last_modified = '上次更新';
 $s_email_summary =  '摘要';
@@ -463,7 +466,7 @@ $s_own_sponsored = '你已经资助的问题：';
 $s_issues_handled = '分派给你的已资助的问题：';
 $s_no_own_sponsored = '你没有资助任何问题。';
 $s_sponsor = '资助';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor_verb = '资助';	# like in 'Sponsor it!'
 $s_amount = '数量';
 $s_total_owing = '未支付合计';
 $s_total_paid = '已支付合计';
@@ -583,12 +586,13 @@ $s_eta = '估计完成时间';
 $s_product_version = '产品版本';
 $s_build = '构建号';
 $s_fixed_in_version = '修正此问题的软件版本';
+$s_target_version = '目标版本';
 $s_votes = '投票';
 $s_summary = '摘要';
 $s_description = '说明';
 $s_steps_to_reproduce = '问题重现步骤说明';
 $s_update_information_button = '更新信息';
-$s_sticky_issue = 'Sticky问题';
+$s_sticky_issue = '置顶问题';
 $s_profile = '配置';
 
 # bug_update_page.php
@@ -621,10 +625,10 @@ $s_bugnote_updated_msg = '已经被成功更新问题注释...';
 $s_edited_on = '编辑于：';
 
 # file_api.php
-$s_show_content ='Show Content';
+$s_show_content ='显示内容';
 
 # index.php
-$s_click_to_login = '点击这里进入';
+$s_click_to_login = '点击这里登录';
 
 # login.php
 
@@ -675,6 +679,7 @@ $s_create_user_button = '创建用户';
 # manage_page.php
 $s_hide_disabled = '隐藏未启用的账号';
 $s_filter_button = '筛选';
+$s_create_filter_link = '创建固定链接';	# Permlink = Permenant Link
 $s_manage_users_link = '用户管理';
 $s_manage_projects_link = '项目管理';
 $s_manage_custom_field_link = '自定义字段管理';
@@ -727,7 +732,7 @@ $s_status_level = '状态';
 $s_alter_level = '谁可以修改这个值';
 $s_validation = '工作流校验';
 $s_comment = '校验注释';
-$s_superfluous = 'Arc from status to itself is implied, 不需要明确指出';
+$s_superfluous = '问题状态到其自身的转换是系统默认包含的，不需要明确定义';
 $s_unreachable = '不能将一个问题转移到该状态';
 $s_no_exit = '不能将一个问题转移出该状态';
 $s_access_levels = '存取权限级别';
@@ -762,14 +767,14 @@ $s_in_project = '在项目';
 $s_delete_config_button = '删除设置';
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
-$s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_report = '配置报告';
+$s_database_configuration = '数据库配置';
+$s_configuration_option = '配置选项';
+$s_configuration_option_type = '类型';
+$s_configuration_option_value = '值';
+$s_all_users = '所有用户';
+$s_set_configuration_option = '设置配置选项';
+$s_delete_config_sure_msg = '确定要删除该配置选项吗？';
 
 # manage_proj_add.php
 $s_project_added_msg = '已添加项目...';
@@ -823,7 +828,7 @@ $s_update = '更新';
 $s_subprojects = '子项目';
 $s_add_subproject = '添加为子项目';
 $s_create_new_subproject_link = '新建子项目';
-$s_unlink_link = 'Unlink';
+$s_unlink_link = '取消连接';
 
 # manage_proj_menu_page.php
 $s_add_project_title = '添加项目';
@@ -887,6 +892,7 @@ $s_main_link = '首页';
 $s_view_bugs_link = '查看问题';
 $s_report_bug_link = '报告问题';
 $s_changelog_link = '修改日志';
+$s_roadmap_link = '路线图';
 $s_summary_link = '统计报表';
 $s_account_link = '个人帐号';
 $s_users_link = '用户';
@@ -1072,14 +1078,15 @@ $s_orct = '(未解决/已解决/已关闭/合计)';
 
 # view_all_bug_page.php
 $s_any = '任意';
+$s_all = '全部';
 $s_show = '显示';
 $s_changed = '已变更(小时)';
 $s_viewing_bugs_title = '查看问题';
 $s_updated = '最后更新';
 $s_sticky = '显示置顶问题';
 $s_sort = '排序字段';
-$s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_issue_id = '问题 #';
+$s_recently_visited = '最近浏览的';
 
 # view_all_inc.php
 $s_none = '无';
@@ -1174,6 +1181,9 @@ $s_custom_field_require_report = '报告问题时必需';
 $s_custom_field_require_update = '修改问题时必需';
 $s_custom_field_require_resolved = '解决问题时必需';
 $s_custom_field_require_closed = '关闭问题时必需';
+$s_link_custom_field_to_project_title = '关联自定义字段到项目';
+$s_link_custom_field_to_project_button = '关联自定义字段';
+$s_linked_projects = '关联项目';
 
 $s_custom_field_sequence = '顺序';
 $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:选择框,6:列表,7:多选列表';
@@ -1217,6 +1227,11 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = '修改记录';
+$s_changelog_empty = '无可用更新记录';
+
+# Roadmap
+$s_roadmap = '路线图';
+$s_resolved_progress = '已解决 %d 个问题(共 %d 个问题)，进度(%d%%)。';
 
 # Http auth
 $s_http_auth_realm = 'Mantis 问题跟踪系统登录';
@@ -1324,4 +1339,16 @@ $s_on_or_after = '等于或者晚于' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Time Tracking
+$s_time_tracking_billing_link = '发票';
+$s_time_tracking = '时间跟踪';
+$s_time_tracking_get_info_button = '获取时间跟踪信息';
+$s_time_tracking_cost_per_hour = '每小时成本';
+$s_time_tracking_cost = '成本';
+$s_total_time_for_issue = '问题 %s 共计花费时间';
+$s_from_date = '从';
+$s_to_date = '到';
+
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 ?>
