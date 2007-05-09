@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.87 2007-05-08 22:19:18 prichards Exp $
+	# $Id: string_api.php,v 1.88 2007-05-09 20:07:16 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -269,7 +269,7 @@
 	function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 		$t_tag = config_get( 'bug_link_tag' );
 		# bail if the link tag is blank
-		if ( '' == $t_tag ) {
+		if ( '' == $t_tag || $p_string == '' ) {
 			return $p_string;
 		}
 
