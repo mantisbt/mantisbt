@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.333 2007-05-08 05:57:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.334 2007-05-09 17:58:09 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -1807,10 +1807,6 @@
 
 	# Turn on Time Tracking accounting
 	$g_time_tracking_enabled = OFF;
-
-	# When a single value is entered into the time tracking field
-	# is it treated as hours or minutes
-	$g_time_tracking_hours = ON;
 
 	# A billing sums
 	$g_time_tracking_with_billing = OFF;
