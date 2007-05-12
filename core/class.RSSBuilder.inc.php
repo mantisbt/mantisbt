@@ -9,11 +9,14 @@
 //| what the exactly say. But it's simple. It's free for non commercial  |
 //| projects, but as soon as you make money with it, i want my share :-) |
 //| (License : Free for non-commercial use)                              |
+//|                                                                      |
+//| *** LICENSE CHANGED TO GPL, see news post by owner at: *****         |
+//| http://sourceforge.net/forum/forum.php?forum_id=694707               |
 //+----------------------------------------------------------------------+
 //| Authors: Michael Wimmer <flaimo@gmx.net>                             |
 //+----------------------------------------------------------------------+
 //
-// $Id: class.RSSBuilder.inc.php,v 1.4 2005-06-20 15:13:41 vboctor Exp $
+// $Id: class.RSSBuilder.inc.php,v 1.5 2007-05-12 06:21:38 vboctor Exp $
 
 /**
 * @package RSSBuilder
