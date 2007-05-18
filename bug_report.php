@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.46 2006-04-22 06:19:40 vboctor Exp $
+	# $Id: bug_report.php,v 1.47 2007-05-18 02:40:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -38,8 +38,8 @@
 	$t_bug_data->priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 	$t_bug_data->summary				= gpc_get_string( 'summary' );
 	$t_bug_data->description			= gpc_get_string( 'description' );
-	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get ( 'default_bug_additional_info' ) );
-	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', config_get( 'default_bug_view_status' ) );
+	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
+	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 
 	$f_file					= gpc_get_file( 'file', null ); #@@@ (thraxisp) Note that this always returns a structure
 															# size = 0, if no file
