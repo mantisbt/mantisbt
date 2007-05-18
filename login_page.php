@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.56 2006-07-24 01:31:28 thraxisp Exp $
+	# $Id: login_page.php,v 1.57 2007-05-18 02:35:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -193,9 +193,16 @@
 
 		if ( ( 0 < $t_db_version ) &&
 				( $t_db_version != $t_upgrades_reqd ) ) {
-			echo '<div class="warning" align="center">';
-			echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
-			echo '</div>';
+
+			if ( $t_db_version < $t_upgrades_reqd ) {
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.</font></p>';
+				echo '</div>';
+			} else {
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red"><strong>WARNING:</strong> The database structure is more up-to-date than the code installed.  Please upgrade the code.</font></p>';
+				echo '</div>';
+			}
 		}
 	}
 ?>
