@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_custom_field_remove.php,v 1.15 2004-12-14 20:37:07 marcelloscata Exp $
+	# $Id: manage_proj_custom_field_remove.php,v 1.16 2007-05-18 03:14:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -25,7 +25,12 @@
 	access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
 
 	$t_definition = custom_field_get_definition( $f_field_id );
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+
+	if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
+		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	} else {
+		$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
+	}
 
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
