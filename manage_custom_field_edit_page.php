@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.24 2007-04-14 07:44:56 vboctor Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.25 2007-05-18 03:17:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -245,7 +245,7 @@
 	</td>
 	<td>
 		<select name="project_id[]" multiple="multiple" size="5">
-			<?php print_project_option_list(); ?>
+			<?php print_project_option_list( null, false ); ?>
 		</select>
 	</td>
 </tr>
