@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_custom_field_remove.php,v 1.16 2007-05-18 03:14:27 vboctor Exp $
+	# $Id: manage_proj_custom_field_remove.php,v 1.17 2007-05-18 04:53:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -17,6 +17,7 @@
 
 	$f_field_id = gpc_get_int( 'field_id' );
 	$f_project_id = gpc_get_int( 'project_id' );
+	$f_return = gpc_get_string( 'return', '' );
 
 	# We should check both since we are in the project section and an
 	# admin might raise the first threshold and not realize they need
@@ -26,16 +27,16 @@
 
 	$t_definition = custom_field_get_definition( $f_field_id );
 
-	if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
-		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
-	} else {
-		$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
-	}
-
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
 		'<br/>' . lang_get( 'custom_field' ) . ': ' . string_attribute( $t_definition['name'] ),
 		lang_get( 'field_remove_button' ) );
+
+	if ( $f_return == 'custom_field' ) {
+		$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
+	} else {
+		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	}
 
 	custom_field_unlink( $f_field_id, $f_project_id );
 

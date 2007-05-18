@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.163 2007-04-25 06:15:12 vboctor Exp $
+	# $Id: print_api.php,v 1.164 2007-05-18 04:53:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1065,7 +1065,7 @@
 			$t_project_name = project_get_field( $t_project_id, 'name' );
 			$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 			echo '<b>', $t_project_name, '</b>: ';
-			print_button( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id", lang_get( 'remove_link' ) );
+			print_button( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field", lang_get( 'remove_link' ) );
 			echo '<br />- ';
 			
 			$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
