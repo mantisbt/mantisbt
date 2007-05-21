@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.153 2007-04-25 06:15:12 vboctor Exp $
+	# $Id: filter_api.php,v 1.154 2007-05-21 06:34:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -158,7 +158,13 @@
 		$t_query = array();
 
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PROJECT_ID, $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] );
+			$t_project_id = $p_custom_filter[FILTER_PROPERTY_PROJECT_ID];
+
+			if ( count( $t_project_id ) == 1 && $t_project_id[0] == META_FILTER_CURRENT ) {
+				$t_project_id = array( helper_get_current_project() );
+			}
+
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_PROJECT_ID, $t_project_id );
 		}
 
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_FREE_TEXT] ) ) {
@@ -300,7 +306,13 @@
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
 		}
 
-		# @@@ Add support for Custom Fields
+		if ( isset( $p_custom_filter['custom_fields'] ) ) {
+			foreach( $p_custom_filter['custom_fields'] as $t_custom_field_id => $t_custom_field_values ) {
+				if ( !filter_str_field_is_any( $t_custom_field_values ) ) {
+					$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id, $t_custom_field_values );
+				}
+			}
+		}
 
 		if ( count( $t_query ) > 0 ) {
 			$t_query_str = implode( $t_query, '&amp;' );
@@ -394,6 +406,7 @@
 		$c_user_id = db_prepare_int( $t_user_id );
 
 		if ( null === $p_project_id ) {
+			# @@@ If project_id is not specified, then use the project id(s) in the filter if set, otherwise, use current project.
 			$t_project_id	= helper_get_current_project();
 		} else {
 			$t_project_id	= $p_project_id;
@@ -1048,6 +1061,9 @@
 		# custom field filters
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
+			# @@@ At the moment this gets the linked fields relating to the current project
+			#     It should get the ones relating to the project in the filter or all projects
+			#     if multiple projects.
 			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 			foreach( $t_custom_fields as $t_cfid ) {
@@ -2597,7 +2613,7 @@
 						}
 
 						print_bracket_link( 
-							sprintf( config_get( 'create_short_url' ), filter_get_url( $t_filter ) ), 
+							'permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ), 
 							lang_get( 'create_filter_link' ), 
 							/* new window = */ true );
 					}

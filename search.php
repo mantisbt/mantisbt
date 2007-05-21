@@ -1,16 +1,16 @@
 <?php
        # Mantis - a php based bugtracking system
        # Copyright (C) 2000 - 2002 Kenzaburo Ito - kenito@300baud.org
-       # Copyright (C) 2002 - 2006 Mantis Team - mantisbt-dev@lists.sourceforge.net
+       # Copyright (C) 2002 - 2007 Mantis Team - mantisbt-dev@lists.sourceforge.net
        # This program is distributed under the terms and conditions of the GPL
        # See the README and LICENSE files for details
 
        # --------------------------------------------------------
-       # $Revision: 1.4 $
+       # $Revision: 1.5 $
        # $Author: vboctor $
-       # $Date: 2007-04-25 06:15:13 $
+       # $Date: 2007-05-21 06:34:12 $
        #
-       # $Id: search.php,v 1.4 2007-04-25 06:15:13 vboctor Exp $
+       # $Id: search.php,v 1.5 2007-05-21 06:34:12 vboctor Exp $
        # --------------------------------------------------------
 ?>
 <?php
@@ -93,8 +93,20 @@
 		$my_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = $t_highlight_changed;
 	}
 
-	# @@@ Handle custom fields.
-	#$my_filter['custom_fields'] = $f_custom_fields_data;
+	# Handle custom fields.
+	$t_custom_fields = array();
+	foreach( $_GET as $t_var_name => $t_var_value ) {
+		if ( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
+			$t_custom_field_id = substr( $t_var_name, 13 );
+			$t_custom_fields[$t_custom_field_id] = $t_var_value;
+		}
+	}
+
+	$my_filter['custom_fields'] = $t_custom_fields;
+
+	# Must use advanced filter so that the project_id is applied and multiple
+	# selections are handled.
+	$my_filter['_view_type'] = 'advanced';
 
 	$tc_setting_arr = filter_ensure_valid_filter( $my_filter );
 
