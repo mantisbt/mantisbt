@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.55 2007-04-22 07:45:34 vboctor Exp $
+	# $Id: database_api.php,v 1.56 2007-05-22 07:13:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -16,7 +16,9 @@
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
-	require_once( $t_core_dir . 'adodb/adodb.inc.php' );
+	# Do not explicitly include $t_core_dir to allow using system ADODB by including
+	# it in include path and removing the one distributed with Mantis (see #7907).
+	require_once( 'adodb/adodb.inc.php' );
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
