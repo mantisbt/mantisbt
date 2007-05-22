@@ -1,11 +1,11 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.15 2007-03-16 05:13:46 vboctor Exp $
+	# $Id: schema.php,v 1.16 2007-05-22 06:26:49 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -24,7 +24,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
 			  user_id I DEFAULT '0' PRIMARY,
 			  access_reqd I DEFAULT '0',
 			  type I DEFAULT '90',
-			  value XS NOTNULL",
+			  value XL NOTNULL",
 Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_config',config_get('mantis_config_table'),'config_id'));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_file_table'),"
@@ -100,9 +100,9 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_status',config_get('mantis_bu
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project',config_get('mantis_bug_table'),'project_id'));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_text_table'),"
   id 			 I  PRIMARY UNSIGNED NOTNULL AUTOINCREMENT,
-  description 		XS NOTNULL,
-  steps_to_reproduce 	XS NOTNULL,
-  additional_information XS NOTNULL
+  description 		XL NOTNULL,
+  steps_to_reproduce 	XL NOTNULL,
+  additional_information XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -119,7 +119,7 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_bug',config_get('mantis_bugnote_t
 $upgrade[] = Array('CreateIndexSQL',Array('idx_last_mod',config_get('mantis_bugnote_table'),'last_modified'));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bugnote_text_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
-  note 			XS NOTNULL
+  note 			XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_project_table'),"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
@@ -160,7 +160,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_filters_table'),"
   project_id 		 I  NOTNULL DEFAULT '0',
   is_public 		L DEFAULT NULL,
   name 			C(64) NOTNULL DEFAULT \" '' \",
-  filter_string 	XS NOTNULL
+  filter_string 	XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -171,7 +171,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   view_state 		I2 NOTNULL DEFAULT '10',
   announcement 		L NOTNULL DEFAULT '0',
   headline 		C(64) NOTNULL DEFAULT \" '' \",
-  body 			XS NOTNULL
+  body 			XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_category_table'),"
   project_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
@@ -203,7 +203,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_table'),"
   view_state 		I2 NOTNULL DEFAULT '10',
   access_min 		I2 NOTNULL DEFAULT '10',
   file_path 		C(250) NOTNULL DEFAULT \" '' \",
-  description 		XS NOTNULL
+  description 		XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',config_get('mantis_project_table'),'id'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_name',config_get('mantis_project_table'),'name',Array('UNIQUE')));
@@ -219,7 +219,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_version_tab
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   version 		C(64) NOTNULL DEFAULT \" '' \",
   date_order 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  description 		XS NOTNULL,
+  description 		XL NOTNULL,
   released 		L NOTNULL DEFAULT '1'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_version',config_get('mantis_project_version_table'),'project_id,version',Array('UNIQUE')));
@@ -242,7 +242,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_tokens_table'),"
 			  type I NOTNULL,
 			  timestamp T NOTNULL,
 			  expiry T,
-			  value XS NOTNULL",
+			  value XL NOTNULL",
 Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_pref_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -287,7 +287,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_profile_table'
   platform 		C(32) NOTNULL DEFAULT \" '' \",
   os 			C(32) NOTNULL DEFAULT \" '' \",
   os_build 		C(32) NOTNULL DEFAULT \" '' \",
-  description 		XS NOTNULL
+  description 		XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_table'),"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -321,8 +321,8 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_email_table'),"
   email		 	C(64) NOTNULL DEFAULT \" '' \",
   subject		C(250) NOTNULL DEFAULT \" '' \",
   submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  metadata 		XS NOTNULL,
-  body 			XS NOTNULL
+  metadata 		XL NOTNULL,
+  body 			XL NOTNULL
   ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',config_get('mantis_email_table'),'email_id'));
 $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bug_table'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
