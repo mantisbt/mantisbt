@@ -1,6 +1,6 @@
 <?php
 /* 
-V4.80 8 Mar 2006  (c) 2000-2006 John Lim (jlim@natsoft.com.my). All rights reserved.
+V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -60,7 +60,7 @@ Setting SQL_CUR_USE_ODBC
 ========================
 To set SQL_CUR_USE_ODBC for drivers that require it, do this:
 
-$db = NewADOConnection('db2');
+$db = NewADOConnection('odbc_db2');
 $db->curMode = SQL_CUR_USE_ODBC;
 $db->Connect($dsn, $userid, $pwd);
 
@@ -80,6 +80,10 @@ Connect() when using the CLI interface. From Halmai Csongor csongor.halmai#nexum
 > In case of DB2 I had to swap the first and last arguments in order to connect properly. 
 
 
+System Error 5
+==============
+IF you get a System Error 5 when trying to Connect/Load, it could be a permission problem. Give the user connecting
+to DB2 full rights to the DB2 SQLLIB directory, and place the user in the DBUSERS group.
 */
 
 // security - hide paths
@@ -88,13 +92,14 @@ if (!defined('ADODB_DIR')) die();
 if (!defined('_ADODB_ODBC_LAYER')) {
 	include(ADODB_DIR."/drivers/adodb-odbc.inc.php");
 }
-if (!defined('ADODB_DB2')){
-define('ADODB_DB2',1);
+if (!defined('ADODB_ODBC_DB2')){
+define('ADODB_ODBC_DB2',1);
 
-class ADODB_DB2 extends ADODB_odbc {
+class ADODB_ODBC_DB2 extends ADODB_odbc {
 	var $databaseType = "db2";	
 	var $concat_operator = '||';
-	var $sysDate = 'CURRENT_DATE';
+	var $sysTime = 'CURRENT TIME';
+	var $sysDate = 'CURRENT DATE';
 	var $sysTimeStamp = 'CURRENT TIMESTAMP';
 	// The complete string representation of a timestamp has the form 
 	// yyyy-mm-dd-hh.mm.ss.nnnnnn.
@@ -103,6 +108,7 @@ class ADODB_DB2 extends ADODB_odbc {
 	var $identitySQL = 'values IDENTITY_VAL_LOCAL()';
 	var $_bindInputArray = true;
 	 var $hasInsertID = true;
+	var $rsPrefix = 'ADORecordset_odbc_';
 	
 	function ADODB_DB2()
 	{
@@ -294,7 +300,7 @@ class ADODB_DB2 extends ADODB_odbc {
 };
  
 
-class  ADORecordSet_db2 extends ADORecordSet_odbc {	
+class  ADORecordSet_odbc_db2 extends ADORecordSet_odbc {	
 	
 	var $databaseType = "db2";		
 	

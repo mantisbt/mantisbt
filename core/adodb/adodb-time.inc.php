@@ -241,6 +241,9 @@ b. Implement daylight savings, which looks awfully complicated, see
 
 
 CHANGELOG
+- 19 March 2006 0.24
+Changed strftime() locale detection, because some locales prepend the day of week to the date when %c is used.
+
 - 10 Feb 2006 0.23
 PHP5 compat: when we detect PHP5, the RFC2822 format for gmt 0000hrs is changed from -0000 to +0000. 
 	In PHP4, we will still use -0000 for 100% compat with PHP4.
@@ -365,7 +368,7 @@ First implementation.
 /*
 	Version Number
 */
-define('ADODB_DATE_VERSION',0.23);
+define('ADODB_DATE_VERSION',0.24);
 
 /*
 	This code was originally for windows. But apparently this problem happens 
@@ -1239,8 +1242,15 @@ global $ADODB_DATE_LOCALE;
 	}
 	
 	if (empty($ADODB_DATE_LOCALE)) {
+	/*
 		$tstr = strtoupper(gmstrftime('%c',31366800)); // 30 Dec 1970, 1 am
 		$sep = substr($tstr,2,1);
+		$hasAM = strrpos($tstr,'M') !== false;
+	*/
+		# see http://phplens.com/lens/lensforum/msgs.php?id=14865 for reasoning, and changelog for version 0.24
+		$dstr = gmstrftime('%x',31366800); // 30 Dec 1970, 1 am
+		$sep = substr($dstr,2,1);
+		$tstr = strtoupper(gmstrftime('%X',31366800)); // 30 Dec 1970, 1 am
 		$hasAM = strrpos($tstr,'M') !== false;
 		
 		$ADODB_DATE_LOCALE = array();

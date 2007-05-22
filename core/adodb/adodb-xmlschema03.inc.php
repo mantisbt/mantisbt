@@ -10,9 +10,9 @@
  * build a database on any ADOdb-supported platform using a simple
  * XML schema.
  *
- * Last Editor: $Author: prichards $
+ * Last Editor: $Author: vboctor $
  * @author Richard Tango-Lowy & Dan Cech
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @package axmls
  * @tutorial getting_started.pkg
@@ -1309,7 +1309,7 @@ class dbQuerySet extends dbObject {
 * @tutorial getting_started.pkg
 *
 * @author Richard Tango-Lowy & Dan Cech
-* @version $Revision: 1.1 $
+* @version $Revision: 1.2 $
 *
 * @package axmls
 */
@@ -2092,16 +2092,20 @@ class adoSchema {
 	* in the schema. 
 	*
 	* @param boolean $data Include data in schema dump
+	* @indent string indentation to use
+	* @prefix string extract only tables with given prefix
+	* @stripprefix strip prefix string when storing in XML schema
 	* @return string Generated XML schema
 	*/
-	function ExtractSchema( $data = FALSE, $indent = '  ' ) {
+	function ExtractSchema( $data = FALSE, $indent = '  ', $prefix = '' , $stripprefix=false) {
 		$old_mode = $this->db->SetFetchMode( ADODB_FETCH_NUM );
 		
 		$schema = '<?xml version="1.0"?>' . "\n"
 				. '<schema version="' . $this->schemaVersion . '">' . "\n";
 		
-		if( is_array( $tables = $this->db->MetaTables( 'TABLES' ) ) ) {
+		if( is_array( $tables = $this->db->MetaTables( 'TABLES' , ($prefix) ? $prefix.'%' : '') ) ) {
 			foreach( $tables as $table ) {
+				if ($stripprefix) $table = str_replace(str_replace('\\_', '_', $pfx ), '', $table);
 				$schema .= $indent . '<table name="' . htmlentities( $table ) . '">' . "\n";
 				
 				// grab details from database

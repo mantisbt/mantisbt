@@ -203,12 +203,12 @@ $arr = $db->GetRow("select * from emp where empno=:emp", array('emp' => 7900));
 <pre>
 $arr = $db->GetOne("select ename from emp where empno=:emp", array('emp' => 7900));
 </pre>
-<p>For easy pagination support, we provide the SelectLimit function. The following will perform a select query, limiting it to 100 rows, starting from row 200:
+<p>For easy pagination support, we provide the SelectLimit function. The following will perform a select query, limiting it to 100 rows, starting from row 201 (row 1 being the 1st row):
 <pre>
 $offset = 200; $limitrows = 100;
-$rs = $db->SelectLimit('select * from table', $offset, $limitrows);
+$rs = $db->SelectLimit('select * from table', $limitrows, $offset);
 </pre>
-<p>The $limitrows parameter is optional.
+<p>The $offset parameter is optional.
 <h4>Array Fetch Mode</h4>
 <p>When data is being returned in an array, you can choose the type of array the data is returned in. 
 <ol>

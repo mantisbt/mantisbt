@@ -1,7 +1,7 @@
 <?php
 /*
 
-@version V4.80 8 Mar 2006  (c) 2000-2006 John Lim (jlim#natsoft.com.my). All rights reserved.
+@version V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
   Latest version is available at http://adodb.sourceforge.net
  
   Released under both BSD license and Lesser GPL library license. 
@@ -10,14 +10,19 @@
   
   Active Record implementation. Superset of Zend Framework's.
   
-  Version 0.02
+  Version 0.07
+  
+  See http://www-128.ibm.com/developerworks/java/library/j-cb03076/?ca=dgr-lnxw01ActiveRecord 
+  	for info on Ruby on Rails Active Record implementation
 */
 
 global $_ADODB_ACTIVE_DBS;
+global $ADODB_ACTIVE_CACHESECS; // set to true to enable caching of metadata such as field info
+global $ACTIVE_RECORD_SAFETY; // set to false to disable safety checks
 
 // array of ADODB_Active_DB's, indexed by ADODB_Active_Record->_dbat
 $_ADODB_ACTIVE_DBS = array();
-
+$ACTIVE_RECORD_SAFETY = true;
 
 class ADODB_Active_DB {
 	var $db; // ADOConnection
@@ -28,6 +33,7 @@ class ADODB_Active_Table {
 	var $name; // table name
 	var $flds; // assoc array of adofieldobjs, indexed by fieldname
 	var $keys; // assoc array of primary keys, indexed by fieldname
+	var $_created; // only used when stored as a cached file
 }
 
 // returns index into $_ADODB_ACTIVE_DBS
@@ -36,7 +42,12 @@ function ADODB_SetDatabaseAdapter(&$db)
 	global $_ADODB_ACTIVE_DBS;
 	
 		foreach($_ADODB_ACTIVE_DBS as $k => $d) {
-			if ($d->db == $db) return $k;
+			if (PHP_VERSION >= 5) {
+				if ($d->db === $db) return $k;
+			} else {
+				if ($d->db->_connectionID === $db->_connectionID && $db->database == $d->db->database) 
+					return $k;
+			}
 		}
 		
 		$obj = new ADODB_Active_DB();
@@ -48,13 +59,15 @@ function ADODB_SetDatabaseAdapter(&$db)
 		return sizeof($_ADODB_ACTIVE_DBS)-1;
 }
 
+
 class ADODB_Active_Record {
 	var $_dbat; // associative index pointing to ADODB_Active_DB eg. $ADODB_Active_DBS[_dbat]
-	var $_table; // tablename
+	var $_table; // tablename, if set in class definition then use it as table name
 	var $_tableat; // associative index pointing to ADODB_Active_Table, eg $ADODB_Active_DBS[_dbat]->tables[$this->_tableat]
 	var $_where; // where clause set in Load()
 	var $_saved = false; // indicates whether data is already inserted.
 	var $_lasterr = false; // last error message
+	var $_original = false; // the original values loaded or inserted, refreshed on update
 	
 	// should be static
 	function SetDatabaseAdapter(&$db) 
@@ -78,8 +91,10 @@ class ADODB_Active_Record {
 			$pkeyarr = false;
 		}
 		
-		if (!$table) $table = $this->_pluralize(get_class($this));
-		
+		if (!$table) { 
+			if (!empty($this->_table)) $table = $this->_table;
+			else $table = $this->_pluralize(get_class($this));
+		}
 		if ($db) {
 			$this->_dbat = ADODB_Active_Record::SetDatabaseAdapter($db);
 		} else
@@ -91,6 +106,12 @@ class ADODB_Active_Record {
 		$this->_table = $table;
 		$this->_tableat = $table; # reserved for setting the assoc value to a non-table name, eg. the sql string in future
 		$this->UpdateActiveTable($pkeyarr);
+	}
+	
+	function __wakeup()
+	{
+  		$class = get_class($this);
+  		new $class;
 	}
 	
 	function _pluralize($table)
@@ -119,7 +140,7 @@ class ADODB_Active_Record {
 	// update metadata
 	function UpdateActiveTable($pkeys=false,$forceUpdate=false)
 	{
-	global $ADODB_ASSOC_CASE,$_ADODB_ACTIVE_DBS;
+	global $ADODB_ASSOC_CASE,$_ADODB_ACTIVE_DBS , $ADODB_CACHE_DIR, $ADODB_ACTIVE_CACHESECS;
 	
 		$activedb =& $_ADODB_ACTIVE_DBS[$this->_dbat];
 
@@ -133,10 +154,27 @@ class ADODB_Active_Record {
 			return;
 		}
 		
+		$db =& $activedb->db;
+		$fname = $ADODB_CACHE_DIR . '/adodb_' . $db->databaseType . '_active_'. $table . '.cache';
+		if (!$forceUpdate && $ADODB_ACTIVE_CACHESECS && $ADODB_CACHE_DIR && file_exists($fname)) {
+			$fp = fopen($fname,'r');
+			@flock($fp, LOCK_SH);
+			$acttab = unserialize(fread($fp,100000));
+			fclose($fp);
+			if ($acttab->_created + $ADODB_ACTIVE_CACHESECS - (abs(rand()) % 16) > time()) { 
+				// abs(rand()) randomizes deletion, reducing contention to delete/refresh file
+				// ideally, you should cache at least 32 secs
+				$activedb->tables[$table] = $acttab;
+				
+				//if ($db->debug) ADOConnection::outp("Reading cached active record file: $fname");
+			  	return;
+			} else if ($db->debug) {
+				ADOConnection::outp("Refreshing cached active record file: $fname");
+			}
+		}
 		$activetab = new ADODB_Active_Table();
 		$activetab->name = $table;
 		
-		$db =& $activedb->db;
 		
 		$cols = $db->MetaColumns($table);
 		if (!$cols) {
@@ -186,18 +224,25 @@ class ADODB_Active_Record {
 			break;
 		default:
 			foreach($cols as $name => $fldobj) {
-				$name = ($name);
+				$name = ($fldobj->name);
 				$this->$name = null;
 				$attr[$name] = $fldobj;
 			}
 			foreach($pkeys as $k => $name) {
-				$keys[$name] = ($name);
+				$keys[$name] = $cols[$name]->name;
 			}
 			break;
 		}
 		
 		$activetab->keys = $keys;
 		$activetab->flds = $attr;
+
+		if ($ADODB_ACTIVE_CACHESECS && $ADODB_CACHE_DIR) {
+			$activetab->_created = time();
+			$s = serialize($activetab);
+			if (!function_exists('adodb_write_file')) include(ADODB_DIR.'/adodb-csvlib.inc.php');
+			adodb_write_file($fname,$s);
+		}
 		$activedb->tables[$table] = $activetab;
 	}
 	
@@ -241,6 +286,15 @@ class ADODB_Active_Record {
 		return $this->_lasterr;
 	}
 	
+	function ErrorNo() 
+	{
+		if ($this->_dbat < 0) return -9999; // no database connection...
+		$db = $this->DB();
+		
+		return (int) $db->ErrorNo();
+	}
+
+
 	// retrieve ADOConnection from _ADODB_Active_DBs
 	function &DB()
 	{
@@ -269,6 +323,8 @@ class ADODB_Active_Record {
 	// set a numeric array (using natural table field ordering) as object properties
 	function Set(&$row)
 	{
+	global $ACTIVE_RECORD_SAFETY;
+	
 		$db =& $this->DB();
 		
 		if (!$row) {
@@ -279,7 +335,7 @@ class ADODB_Active_Record {
 		$this->_saved = true;
 		
 		$table =& $this->TableInfo();
-		if (sizeof($table->flds) != sizeof($row)) {
+		if ($ACTIVE_RECORD_SAFETY && sizeof($table->flds) != sizeof($row)) {
 			$this->Error("Table structure of $this->_table has changed","Load");
 			return false;
 		}
@@ -289,7 +345,7 @@ class ADODB_Active_Record {
 			$this->$name = $row[$cnt];
 			$cnt += 1;
 		}
-		#$this->_original =& $row;
+		$this->_original = $row;
 		return true;
 	}
 	
@@ -375,23 +431,29 @@ class ADODB_Active_Record {
 		$db =& $this->DB(); if (!$db) return false;
 		$cnt = 0;
 		$table =& $this->TableInfo();
+		
+		$valarr = array();
+		$names = array();
+		$valstr = array();
 
 		foreach($table->flds as $name=>$fld) {
 			$val = $this->$name;
-			/*
-			if (is_null($val)) {
-				if (isset($fld->not_null) && $fld->not_null) {
-					if (isset($fld->default_value) && strlen($fld->default_value)) continue;
-					else $this->Error("Cannot insert null into $name","Insert");
-				}
-			}*/
-			
-			$valarr[] = $val;
-			$names[] = $name;
-			$valstr[] = $db->Param($cnt);
-			$cnt += 1;
+			if(!is_null($val) || !array_key_exists($name, $table->keys)) {
+				$valarr[] = $val;
+				$names[] = $name;
+				$valstr[] = $db->Param($cnt);
+				$cnt += 1;
+			}
 		}
 		
+		if (empty($names)){
+			foreach($table->flds as $name=>$fld) {
+				$valarr[] = null;
+				$names[] = $name;
+				$valstr[] = $db->Param($cnt);
+				$cnt += 1;
+			}
+		}
 		$sql = 'INSERT INTO '.$this->_table."(".implode(',',$names).') VALUES ('.implode(',',$valstr).')';
 		$ok = $db->Execute($sql,$valarr);
 		
@@ -410,7 +472,7 @@ class ADODB_Active_Record {
 			}
 		}
 		
-		#$this->_original =& $valarr;
+		$this->_original = $valarr;
 		return !empty($ok);
 	}
 	
@@ -421,9 +483,18 @@ class ADODB_Active_Record {
 		
 		$where = $this->GenWhere($db,$table);
 		$sql = 'DELETE FROM '.$this->_table.' WHERE '.$where;
-		$db->Execute($sql);
+		$ok = $db->Execute($sql);
+		
+		return $ok ? true : false;
 	}
 	
+	// returns an array of active record objects
+	function &Find($whereOrderBy,$bindarr=false,$pkeysArr=false)
+	{
+		$db =& $this->DB(); if (!$db || empty($this->_table)) return false;
+		$arr =& $db->GetActiveRecordsClass(get_class($this),$this->_table, $whereOrderBy,$bindarr,$pkeysArr);
+		return $arr;
+	}
 	
 	// returns 0 on error, 1 on update, 2 on insert
 	function Replace()
@@ -447,6 +518,9 @@ class ADODB_Active_Record {
 					}
 				}
 			}*/
+			if (is_null($val) && !empty($fld->auto_increment)) {
+            	continue;
+            }
 			$t = $db->MetaType($fld->type);
 			$arr[$name] = $this->doquote($db,$val,$t);
 			$valarr[] = $val;
@@ -479,12 +553,12 @@ class ADODB_Active_Record {
 				}
 			}
 			
-			#$this->_original =& $valarr;
+			$this->_original =& $valarr;
 		} 
 		return $ok;
 	}
 
-	// returns false on error
+	// returns 0 on error, 1 on update, -1 if no change in data (no update)
 	function Update()
 	{
 		$db =& $this->DB(); if (!$db) return false;
@@ -496,11 +570,19 @@ class ADODB_Active_Record {
 			$this->error("Where missing for table $table", "Update");
 			return false;
 		}
+		$valarr = array(); 
+		$neworig = array();
+		$pairs = array();
+		$i = -1;
 		$cnt = 0;
 		foreach($table->flds as $name=>$fld) {
-			if (isset($table->keys[$name])) continue;
-			
+			$i += 1;
 			$val = $this->$name;
+			$neworig[] = $val;
+			
+			if (isset($table->keys[$name])) {
+				continue;
+			}
 			
 			if (is_null($val)) {
 				if (isset($fld->not_null) && $fld->not_null) {
@@ -511,17 +593,24 @@ class ADODB_Active_Record {
 					}
 				}
 			}
+			
+			if (isset($this->_original[$i]) && $val == $this->_original[$i]) {
+				continue;
+			}			
 			$valarr[] = $val;
 			$pairs[] = $name.'='.$db->Param($cnt);
 			$cnt += 1;
 		}
 		
-		#$this->_original =& $valarr;
 		
+		if (!$cnt) return -1;
 		$sql = 'UPDATE '.$this->_table." SET ".implode(",",$pairs)." WHERE ".$where;
 		$ok = $db->Execute($sql,$valarr);
-		
-		return !empty($ok);
+		if ($ok) {
+			$this->_original =& $neworig;
+			return 1;
+		}
+		return 0;
 	}
 	
 	function GetAttributeNames()
