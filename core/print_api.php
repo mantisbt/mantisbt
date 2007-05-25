@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.164 2007-05-18 04:53:21 vboctor Exp $
+	# $Id: print_api.php,v 1.165 2007-05-25 01:29:30 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1065,7 +1065,7 @@
 			$t_project_name = project_get_field( $t_project_id, 'name' );
 			$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 			echo '<b>', $t_project_name, '</b>: ';
-			print_button( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field", lang_get( 'remove_link' ) );
+			print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&amp;project_id=$t_project_id&amp;return=custom_field", lang_get( 'remove_link' ) );
 			echo '<br />- ';
 			
 			$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1262,10 +1262,20 @@
 	}
 	# --------------------
 	# print a button which presents a standalone form.
-	# if the $p_link is blank then the text is printed but no link is created
-	# if $p_new_window is true, link will open in a new window, default false.
-	function print_button( $p_action_page, $p_label ) {
-		echo '<form method="POST" action="', $p_action_page, '"><input type="submit" class="button-small" value="', $p_label, '" /></form>';
+	# $p_action_page - The action page
+	# $p_label - The button label
+	# $p_args_to_post - An associative array with key => value to be posted, can be null.
+	function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
+		echo '<form method="POST" action="', $p_action_page, '">';
+		echo '<input type="submit" class="button-small" value="', $p_label, '" />';
+		
+		if ( $p_args_to_post !== null ) {
+			foreach( $p_args_to_post as $t_var => $t_value ) {
+				echo "<input type=\"hidden\" name=\"$t_var\" value=\"$t_value\" />";
+			}
+		}
+
+		echo '</form>';
 	}
 	# --------------------
 	# print the bracketed links used near the top
