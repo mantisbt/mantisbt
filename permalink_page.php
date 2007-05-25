@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: permalink_page.php,v 1.1 2007-05-21 06:34:15 vboctor Exp $
+	# $Id: permalink_page.php,v 1.2 2007-05-25 01:07:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -22,7 +22,7 @@
 	<p><?php echo "<a href=\"$f_url\">$f_url</a>"; ?></p><br />
 <?php
 	print_bracket_link( 
-		sprintf( config_get( 'create_short_url' ), urlencode( $f_url ) ), 
+		sprintf( config_get( 'create_short_url' ), $f_url ), 
 		lang_get( 'create_short_link' ), 
 		/* new window = */ true );
 
