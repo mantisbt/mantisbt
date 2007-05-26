@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.61 2007-04-20 08:28:22 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.62 2007-05-26 03:32:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -234,7 +234,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $f_platform, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="platform">
+					<option value=""></option>
+				<?php
+						print_platform_option_list( $f_platform );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $f_platform, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 </tr>
@@ -247,7 +258,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $f_os, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="os">
+					<option value=""></option>
+				<?php
+						print_os_option_list( $f_os );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $f_os, 'size' => '32', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 </tr>
@@ -260,7 +282,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $f_os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="os_build">
+					<option value=""></option>
+				<?php
+						print_os_build_option_list( $f_os_build );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $f_os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 </tr>

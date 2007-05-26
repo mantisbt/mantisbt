@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.334 2007-05-09 17:58:09 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.335 2007-05-26 03:32:42 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1012,9 +1012,6 @@
 	# Update bugnote threshold (if the bugnote is not your own)
 	$g_update_bugnote_threshold = DEVELOPER;
 
-	# Add profile threshold
-	$g_add_profile_threshold = REPORTER;
-
 	# Threshold needed to view project documentation
 	$g_view_proj_doc_threshold = ANYBODY;
 
@@ -1074,9 +1071,6 @@
 	# Threshold needed to update readonly bugs.  Readonly bugs are identified via
 	# $g_bug_readonly_status_threshold.
 	$g_update_readonly_bug_threshold = MANAGER;
-
-	# Threshold needed to be able to create and modify global profiles
-	$g_manage_global_profile_threshold = MANAGER;
 
 	# threshold for viewing changelog
 	$g_view_changelog_threshold = VIEWER;
@@ -1822,4 +1816,18 @@
 
 	# access level required to run reports
 	$g_time_tracking_reporting_threshold = MANAGER;
+
+	#############################
+	# Profile Related Settings
+	#############################
+
+	# Add profile threshold
+	$g_add_profile_threshold = REPORTER;
+
+	# Threshold needed to be able to create and modify global profiles
+	$g_manage_global_profile_threshold = MANAGER;
+
+	# Allows the users to enter free text when reporting/updating issues 
+	# for the profile related fields (i.e. platform, os, os build)
+	$g_allow_freetext_in_profile_fields = ON;
 ?>

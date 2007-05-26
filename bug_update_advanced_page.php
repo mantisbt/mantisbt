@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.99 2007-04-25 06:22:20 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.100 2007-05-26 03:32:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -237,7 +237,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $t_bug->platform, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="platform">
+					<option value=""></option>
+				<?php
+						print_platform_option_list( $t_bug->platform );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'platform_get_with_prefix', 'platform', array( 'value' => $t_bug->platform, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 
@@ -278,7 +289,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $t_bug->os, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="os">
+					<option value=""></option>
+				<?php
+						print_os_option_list( $t_bug->os );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'os_get_with_prefix', 'os', array( 'value' => $t_bug->os, 'size' => '16', 'maxlength' => '32', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 
@@ -306,7 +328,18 @@
 	</td>
 	<td>
 		<?php
-			projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $t_bug->os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+		?>
+				<select name="os_build">
+					<option value=""></option>
+				<?php
+						print_os_build_option_list( $t_bug->os_build );
+				?>
+				</select>
+		<?php
+			} else {
+				projax_autocomplete( 'os_build_get_with_prefix', 'os_build', array( 'value' => $t_bug->os_build, 'size' => '16', 'maxlength' => '16', 'tabindex' => helper_get_tab_index_value() ) );
+			}
 		?>
 	</td>
 
