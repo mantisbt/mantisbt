@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: permalink_page.php,v 1.2 2007-05-25 01:07:41 vboctor Exp $
+	# $Id: permalink_page.php,v 1.3 2007-05-26 03:48:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -19,8 +19,12 @@
 	$f_url = gpc_get_string( 'url' );
 ?>
 <div align="center">
-	<p><?php echo "<a href=\"$f_url\">$f_url</a>"; ?></p><br />
+	<p>
+	<?php
+		echo lang_get( 'filter_permalink' ), '<br />';
+		echo "<a href=\"$f_url\">$f_url</a>"; ?></p><br />
 <?php
+
 	print_bracket_link( 
 		sprintf( config_get( 'create_short_url' ), $f_url ), 
 		lang_get( 'create_short_link' ), 

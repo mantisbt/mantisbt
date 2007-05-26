@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.295 $
+	# $Revision: 1.296 $
 	# $Author: vboctor $
-	# $Date: 2007-05-21 06:34:12 $
+	# $Date: 2007-05-26 03:48:04 $
 	#
-	# $Id: strings_english.txt,v 1.295 2007-05-21 06:34:12 vboctor Exp $
+	# $Id: strings_english.txt,v 1.296 2007-05-26 03:48:04 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -675,6 +675,7 @@ $s_hide_disabled = 'Hide Disabled';
 $s_filter_button = 'Apply Filter';
 $s_create_filter_link = 'Create Permalink';	# Permalink = Permenant Link
 $s_create_short_link = 'Create Short Link';
+$s_filter_permalink = 'Following is a permanent link to the currently configured filter:';
 $s_manage_users_link = 'Manage Users';
 $s_manage_projects_link = 'Manage Projects';
 $s_manage_custom_field_link = 'Manage Custom Fields';
