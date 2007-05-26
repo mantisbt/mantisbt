@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.46.6.1 2006-01-05 03:54:19 thraxisp Exp $
+	# $Id: database_api.php,v 1.46.6.1.4.1 2007-05-26 22:23:50 giallu Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -16,7 +16,7 @@
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
-	require_once( $t_core_dir . 'adodb/adodb.inc.php' );
+	require_once( 'adodb/adodb.inc.php' );
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
