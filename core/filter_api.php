@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.154 2007-05-21 06:34:10 vboctor Exp $
+	# $Id: filter_api.php,v 1.155 2007-05-27 22:31:59 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1102,11 +1102,11 @@
 							break ;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
+							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) ;
 							break ;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2] . ')' ;
+							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
 							break ;
 						}
 					} else {
