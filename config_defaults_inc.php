@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.335 2007-05-26 03:32:42 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.336 2007-05-30 03:22:18 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -374,7 +374,8 @@
 		'spanish',
 		'swedish',
 		'turkish',
-		'ukrainian'
+		'ukrainian',
+		'urdu',
 	);
 
 	# Browser language mapping for 'auto' language selection
