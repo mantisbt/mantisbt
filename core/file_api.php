@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.77 2007-03-23 05:31:02 vboctor Exp $
+	# $Id: file_api.php,v 1.78 2007-06-08 15:42:15 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -645,7 +645,7 @@ document.getElementById( span ).style.display = displayType;
 					    trigger_error( FILE_MOVE_FAILED, ERROR );
 					}
 
-					chmod( $t_disk_file_name, 0644 );
+					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
 					$c_content = '';
 				} else {

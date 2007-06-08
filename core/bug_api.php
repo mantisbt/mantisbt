@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.107 2007-04-22 06:07:47 vboctor Exp $
+	# $Id: bug_api.php,v 1.108 2007-06-08 15:42:15 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -595,7 +595,7 @@
 				$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
 				if ( ( config_get( 'file_upload_method' ) == DISK ) ) {
 					copy( $t_bug_file['diskfile'], $t_new_diskfile_name );
-					chmod( $t_new_diskfile_name, 0400 ); # make file read only in the file system
+					chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
 				}
 
 				$query = "INSERT INTO $t_mantis_bug_file_table

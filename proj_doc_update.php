@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.29 2005-05-01 16:20:22 thraxisp Exp $
+	# $Id: proj_doc_update.php,v 1.30 2007-06-08 15:42:14 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -107,7 +107,7 @@
 				if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
 					trigger_error( FILE_MOVE_FAILED, ERROR );
 				}
-				chmod( $t_disk_file_name, 0400 );
+				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
 				$c_content = '';
 				break;

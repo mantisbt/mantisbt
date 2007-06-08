@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.336 2007-05-30 03:22:18 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.337 2007-06-08 15:42:14 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -765,6 +765,10 @@
 	# Upload destination: specify actual location in project settings
 	# DISK, DATABASE, or FTP.
 	$g_file_upload_method	= DATABASE;
+
+	# When using FTP or DISK for storing uploaded files, they will be created
+	# on the server with the following permissions
+	$g_attachments_file_permissions = 0400;
 
 	# FTP settings, used if $g_file_upload_method = FTP
 	$g_file_upload_ftp_server	= 'ftp.myserver.com';
