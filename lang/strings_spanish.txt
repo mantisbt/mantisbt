@@ -16,11 +16,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.91.10.2 $
-	# $Author: vboctor $
-	# $Date: 2006-10-23 07:14:47 $
+	# $Revision: 1.91.10.3 $
+	# $Author: giallu $
+	# $Date: 2007-06-08 13:38:02 $
 	#
-	# $Id: strings_spanish.txt,v 1.91.10.2 2006-10-23 07:14:47 vboctor Exp $
+	# $Id: strings_spanish.txt,v 1.91.10.3 2007-06-08 13:38:02 giallu Exp $
 	###########################################################################
 
 ?>
@@ -1040,7 +1040,7 @@ $s_summary_jpgraph_link = 'Reporte General Avanzado';
 $s_by_project = 'por proyecto';
 $s_by_status = 'por Status';
 $s_by_date = 'por fecha';
-$s_by_severity = 'por sedveridad';
+$s_by_severity = 'por severidad';
 $s_by_resolution = 'por resolución';
 $s_by_category = 'por categoría';
 $s_by_priority = 'por prioridad';
