@@ -11,17 +11,42 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra, netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
+	# Chinese_Simplified: Riceball LEE riceballl@hotmail.com
 	#
 	###########################################################################
 	# Mantis 1.1.0 简体中文语言包
 	# 有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
 	# Based on strings_english.txt rev. 1.294
 	# -------------------------------------------------
-	# $Revision: 1.86 $
-	# $Author: vboctor $
-	# $Date: 2007-05-09 05:44:18 $
+	# $Revision: 1.87 $
+	# $Author: giallu $
+	# $Date: 2007-06-08 10:02:26 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.86 2007-05-09 05:44:18 vboctor Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.87 2007-06-08 10:02:26 giallu Exp $
+	###########################################################################
+	#Mantis 1.0.0 简体中文语言包的翻译说明(by NetCobra,2006-01-05)
+	#
+	#1.在此版本中将错误信息部分参照繁体中文语言包全部翻译，感谢繁体中文语言包的翻译
+	#  人 Pao-Hsi Huang；
+	#2.对于所有的“Issue”，我翻译为“问题”，但感觉仍然不是很准确；
+	#3.咨询网友后，“Sticky”翻译为置顶；
+	#4.对于$s_superfluous一句，因为无法明确地用中文表达，只翻译了后半句；
+	#
+	#有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
+	#
+	# Riceball LEE:
+	#   * Resolution -- 翻译为解决状况(而不是完成度，完成度和进度相当)
+	#   * Bug Tracking System -- 翻译为缺陷管理系统
+	#   * Always -- 应该翻译为 "总是"
+	#   * this_bug -- 应该是特指的“添加问题”。
+  #   * “管理全局配置”-- 实际上设置的是平台信息，所以改为 管理平台配置
+  #   * 优先权 -- 优先级
+  #   * Changelog -- 变更日志
+  #   * on_or_before -- 不晚于
+  #   * on_or_after -- 不早于
+  #   * Time tracking -- 实际上这里就是对时间做个记录，并根据记录的时间计算一个成本。翻译成记录更容易理解。
+	#   * the "phpmailer_language" is not the string to dispaly! Do not translate it!
+	#   * Update to 1.1.0a3-cvs
 	###########################################################################
 
 ?>
@@ -90,7 +115,7 @@ $s_empty_password_button = '使用空白密码';
 
 $s_duplicate_of = '是该问题的重复：';
 $s_has_duplicate = '有重复问题：';
-$s_related_to = '与该问题关联：';
+$s_related_to = '与该问题有关联：';
 $s_dependant_on = '是该问题的子项：';
 $s_blocks = '是该问题的父项：';
 
@@ -151,21 +176,21 @@ $s_graph_imp_status_title = '综合报表（按问题状态）';
 $s_graph_imp_priority_title = '综合报表（按问题优先级别）';
 $s_graph_imp_severity_title = '综合报表（按问题严重性）';
 $s_graph_imp_category_title = '综合报表（按项目分类）';
-$s_graph_imp_resolution_title = '综合报表（按完成度）';
+$s_graph_imp_resolution_title = '综合报表（按解决状况）';
 $s_by_status_pct = '按问题状态百分比';
 $s_by_priority_pct = '按问题优先级别百分比';
 $s_by_severity_pct = '按问题严重性百分比';
 $s_by_category_pct = '按项目分类百分比';
-$s_by_resolution_pct = '按完成度百分比';
+$s_by_resolution_pct = '按解决状况百分比';
 $s_by_severity_mix = '按问题严重性和状态';
 $s_by_priority_mix = '按问题优先级别和状态';
-$s_by_resolution_mix = '按问题完成度和状态';
+$s_by_resolution_mix = '按问题解决状况和状态';
 $s_synthesis_link = '综合报表';
 $s_status_link = '按状态统计';
 $s_priority_link = '按优先级别统计';
 $s_severity_link = '按严重性统计';
 $s_category_link = '按分类统计';
-$s_resolution_link = '按完成度统计';
+$s_resolution_link = '按解决状况统计';
 $s_legend_still_open = '仍然打开';
 $s_legend_resolved = '已解决';
 $s_legend_assigned = '已分派';
@@ -304,7 +329,7 @@ $s_view_state_enum_string         = '10:公共,50:私有';
 
 $s_priority_enum_string           = '10:无,20:低,30:中,40:高,50:加急,60:特急';
 $s_severity_enum_string           = '10:新特性,20:微不足道,30:文字错误,40:不合理或别扭,50:次要错误,60:严重错误,70:系统崩溃,80:系统死锁';
-$s_reproducibility_enum_string    = '10:经常,30:有时,50:随机,70:没有试验,90:无法重复,100:不适用';
+$s_reproducibility_enum_string    = '10:总是,30:有时,50:随机,70:没有试验,90:无法重复,100:不适用';
 $s_status_enum_string             = '10:新建,20:打回,30:公认,40:已确认,50:已分派,80:已解决,90:已关闭';
 $s_resolution_enum_string         = '10:未处理,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复问题,70:不是问题,80:暂停,90:不做修改';
 $s_projection_enum_string         = '10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计';
@@ -312,7 +337,7 @@ $s_eta_enum_string                = '10:无,20:小于 1 天,30:2-3 天,40:小于
 $s_sponsorship_enum_string = '0:未支付,1:已请求,2:已支付';
 
 # Email Strings
-$s_new_account_subject = '问题跟踪系统帐号注册';
+$s_new_account_subject = '缺陷跟踪系统帐号注册';
 $s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是“';
 $s_new_account_greeting2 = '”。为了完成你的注册，请访问以下网页设置新的密码：';
 $s_new_account_username = '用户名: ';
@@ -365,7 +390,7 @@ $s_email_reproducibility = '出现频率';
 $s_email_severity = '严重性';
 $s_email_priority = '优先级';
 $s_email_status = '状态';
-$s_email_resolution = '完成度';
+$s_email_resolution = '解决状况';
 $s_email_duplicate = '复制';
 $s_email_fixed_in_version = '修正该问题的版本号';
 $s_email_target_version = '目标版本';
@@ -575,8 +600,8 @@ $s_date_submitted = '报告日期';
 $s_last_update = '上次更新';
 $s_reporter = '报告人';
 $s_assigned_to = '分派给';
-$s_priority = '优先权';
-$s_resolution = '完成度';
+$s_priority = '优先级';
+$s_resolution = '解决状况';
 $s_status = '状态';
 $s_duplicate_id = '重复编号';
 $s_os = '操作系统';
@@ -634,7 +659,7 @@ $s_click_to_login = '点击这里登录';
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = '欢迎访问 Mantis 问题跟踪管理系统';
+$s_login_page_info = '欢迎访问缺陷跟踪管理系统';
 $s_login_title = '登录';
 $s_save_login = '记住此次登录';
 $s_choose_project = '选择项目';
@@ -683,7 +708,7 @@ $s_create_filter_link = '创建固定链接';	# Permlink = Permenant Link
 $s_manage_users_link = '用户管理';
 $s_manage_projects_link = '项目管理';
 $s_manage_custom_field_link = '自定义字段管理';
-$s_manage_global_profiles_link = '管理全局配置';
+$s_manage_global_profiles_link = '管理平台配置';
 $s_permissions_summary_report = '权限报表';
 $s_manage_config_link = '管理配置';
 $s_manage_threshold_config = '工作流开始';
@@ -759,7 +784,7 @@ $s_assigned_status = '将自动分派的问题状态设置为';
 $s_resolved_status = '问题已经被认为已解决的状态';
 $s_readonly_status = '只读问题的状态设置为';
 $s_reopen_status = '重新打开的问题状态设置为';
-$s_reopen_resolution = '重新打开的问题的解决状态设置为';
+$s_reopen_resolution = '重新打开的问题的解决状况设置为';
 
 # manage_config_revert_page
 $s_config_delete_sure = '确定要删除该条目的设置';
@@ -891,7 +916,7 @@ $s_manage_user_updated_msg = '帐号成功更新...';
 $s_main_link = '首页';
 $s_view_bugs_link = '查看问题';
 $s_report_bug_link = '报告问题';
-$s_changelog_link = '修改日志';
+$s_changelog_link = '变更日志';
 $s_roadmap_link = '路线图';
 $s_summary_link = '统计报表';
 $s_account_link = '个人帐号';
@@ -1055,14 +1080,14 @@ $s_by_project = '按项目';
 $s_by_status = '按问题状态';
 $s_by_date = '按日期';
 $s_by_severity = '按严重性';
-$s_by_resolution = '按完成度';
+$s_by_resolution = '按解决状况';
 $s_by_category = '按项目分类';
-$s_by_priority = '按优先权';
+$s_by_priority = '按优先级';
 $s_by_developer = '按开发人员';
 $s_by_reporter ='按报告人';
-$s_reporter_by_resolution = '报告人/完成度';
+$s_reporter_by_resolution = '报告人/解决状况';
 $s_reporter_effectiveness = '报告人效率';
-$s_developer_by_resolution = '开发人员/完成度';
+$s_developer_by_resolution = '开发人员/解决状况';
 $s_percentage_fixed = '% 已修正';
 $s_percentage_errors = '% 错误';
 $s_errors = '错误';
@@ -1209,7 +1234,7 @@ $s_attachments = '附件';
 $s_attachment_alt = 'A';
 
 # PHPMailer
-$s_phpmailer_language = '中文';
+$s_phpmailer_language = 'ch';
 
 # Sponsorship Strings
 $s_sponsors = '%d 项资助';
@@ -1226,20 +1251,20 @@ $s_sponsorship_total = '资助合计';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = '修改记录';
-$s_changelog_empty = '无可用更新记录';
+$s_changelog = '变更日志';
+$s_changelog_empty = '无变更日志信息';
 
 # Roadmap
 $s_roadmap = '路线图';
 $s_resolved_progress = '已解决 %d 个问题(共 %d 个问题)，进度(%d%%)。';
 
 # Http auth
-$s_http_auth_realm = 'Mantis 问题跟踪系统登录';
+$s_http_auth_realm = 'Mantis 缺陷跟踪系统登录';
 
 $s_bug = '问题';
 $s_add_new_relationship = '新建关联';
 $s_add_new_relationship_button = '添加';
-$s_this_bug = '当前问题';
+$s_this_bug = '添加问题';
 $s_relationship_added = '关联已添加';
 $s_relationship_deleted = '关联已删除';
 $s_no_relationship = '无关联';
@@ -1332,23 +1357,24 @@ $s_loading = '正在载入...';
 
 # filter_api.php
 $s_between = '介于' ;
-$s_on_or_before = '等于或者早于' ;
+$s_on_or_before = '不晚于' ;
 $s_before = '早于' ;
 $s_after = '晚于' ;
-$s_on_or_after = '等于或者晚于' ;
+$s_on_or_after = '不早于' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
 
-# Time Tracking
-$s_time_tracking_billing_link = '发票';
-$s_time_tracking = '时间跟踪';
-$s_time_tracking_get_info_button = '获取时间跟踪信息';
+# Time Tracking： 时间记录
+$s_time_tracking_billing_link = '时间记录';
+$s_time_tracking = '时间记录';
+$s_time_tracking_get_info_button = '获取时间记录信息';
 $s_time_tracking_cost_per_hour = '每小时成本';
 $s_time_tracking_cost = '成本';
-$s_total_time_for_issue = '问题 %s 共计花费时间';
+$s_total_time_for_issue = '问题共计花费时间： %s';
 $s_from_date = '从';
 $s_to_date = '到';
+
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 ?>
