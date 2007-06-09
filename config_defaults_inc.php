@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.337 2007-06-08 15:42:14 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.338 2007-06-09 15:00:03 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -41,8 +41,9 @@
 	$g_db_username			= 'root';
 	$g_db_password			= '';
 	$g_database_name		= 'bugtracker';
+	$g_db_schema			= ''; // used in the case of db2
 
-	# Supported types: mysql for MySQL, mysqli for MySQL, pgsql for PostgreSQL, mssql for MS SQL Server, oci8 for Oracle.
+	# Supported types: mysql for MySQL, mysqli for MySQL, pgsql for PostgreSQL, mssql for MS SQL Server, oci8 for Oracle, db2.
 	$g_db_type				= 'mysql';
 
 	############################

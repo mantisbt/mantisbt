@@ -6,8 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.37 2006-05-18 05:14:27 vboctor Exp $
+	# $Id: config_api.php,v 1.38 2007-06-09 15:00:03 vboctor Exp $
 	# --------------------------------------------------------
+
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
 
 	# cache for config variables
 	$g_cache_config = array();

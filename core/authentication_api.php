@@ -6,8 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.55 2006-04-23 12:32:59 vboctor Exp $
+	# $Id: authentication_api.php,v 1.56 2007-06-09 15:00:03 vboctor Exp $
 	# --------------------------------------------------------
+
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
 
 	### Authentication API ###
 

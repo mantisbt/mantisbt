@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.56 2007-05-22 07:13:42 vboctor Exp $
+	# $Id: database_api.php,v 1.57 2007-06-09 15:00:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -34,12 +34,21 @@
 
 	# --------------------
 	# Make a connection to the database
-	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
+	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null ) {
 		global $g_db_connected, $g_db;
 
 		if(  $p_dsn === false ) {
-			$g_db = ADONewConnection( config_get_global( 'db_type' ) );
-			$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $p_database_name );
+			$t_db_type = config_get_global( 'db_type' );
+			$g_db = ADONewConnection( $t_db_type );
+			$t_result = $g_db->Connect( $p_hostname, $p_username, $p_password, $p_database_name );
+			if ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+				$result = &$g_db->execute('set schema ' . $p_db_schema);
+				if ( $result === FALSE ) {
+					db_error();
+					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+					return false;
+				}
+			}
 		} else {
 			$g_db = ADONewConnection( $p_dsn );
 			$t_result = $g_db->IsConnected();
@@ -58,12 +67,22 @@
 
 	# --------------------
 	# Make a persistent connection to the database
-	function db_pconnect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null ) {
+	function db_pconnect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null ) {
 		global $g_db_connected, $g_db;
 
 		if(  $p_dsn === false ) {
-			$g_db = ADONewConnection( config_get_global( 'db_type' ) );
+			$t_db_type = config_get_global( 'db_type' );
+			$g_db = ADONewConnection( $t_db_type );
 			$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
+	
+			if ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+				$result = &$g_db->execute('set schema ' . $p_db_schema);
+				if ( $result === FALSE ) {
+					db_error();
+					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+					return false;
+				}
+			}
 		} else {
 			$g_db = ADONewConnection( $p_dsn );
 			$t_result = $g_db->IsConnected();
@@ -96,6 +115,20 @@
 			case 'postgres64':
 			case 'postgres7':
 			case 'pgsql':
+				return true;
+		}
+
+		return false;
+	}
+
+	# --------------------
+	# Check is the database is DB2
+	function db_is_db2() {
+		$t_db_type = config_get( 'db_type' );
+
+		switch( $t_db_type ) {
+			case 'db2':
+			case 'odbc_db2':
 				return true;
 		}
 
@@ -294,7 +327,17 @@
 					ini_set( 'magic_quotes_sybase', false );
 					return $t_string;
 				}
-
+				# just making a point with the superfluous break;s  I know it does not execute after a return  ;-)
+				break;
+			case 'db2':
+			case 'odbc_db2':
+				$t_escaped = $g_db->qstr( $p_string, false );                       
+				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );           
+				break;
+			case 'mssql':
+				break;
+			case 'odbc_mssql':
+				break;
 			case 'mysql':
 				# mysql_escape_string was deprecated in v4.3.0
 				if ( php_version_at_least( '4.3.0' ) ) {
@@ -507,6 +550,8 @@
 			case 'ado_mssql':
 				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
+			case 'db2':
+			case 'odbc_db2':
 			case 'mysql':
 			case 'mysqli':
 				return "(TO_DAYS($p_date1) - TO_DAYS($p_date2) ". $p_limitstring . ")";
@@ -567,9 +612,9 @@
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
-			db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
 		} else {
-			db_pconnect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_pconnect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
 		}
 	}
 ?>
