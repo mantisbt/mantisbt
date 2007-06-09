@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.25 2006-08-15 07:11:22 vboctor Exp $
+	# $Id: check.php,v 1.26 2007-06-09 16:11:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -381,14 +381,21 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 <tr>
 	<td bgcolor="#f4f4f4">
 		<span class="title">Testing Email</span>
-		<p>You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.</p>
+		<p>You can test the ability for Mantis to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
 		<?php
 		if ( $f_mail_test ) {
 			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
  # @@@ thraxisp - workaround to ensure a language is set without authenticating
  #  will disappear when this is properly localized
 			lang_push( 'english' );
-			$result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
+
+			$t_email_data = new EmailData;
+			$t_email_data->email = config_get_global( 'administrator_email' );
+			$t_email_data->subject = 'Testing PHP mail() function';
+			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
+			$t_email_data->metadata['priority'] = config_get( 'mail_priority' ); $t_email_data->metadata['charset'] = lang_get( 'charset', lang_get_current() );
+			$result = email_send($t_email_data);
+			#$result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
 
 			if ( !$result ) {
 				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
