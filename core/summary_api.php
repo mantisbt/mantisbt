@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.45 2007-02-10 11:59:58 prichards Exp $
+	# $Id: summary_api.php,v 1.46 2007-06-09 16:19:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -418,7 +418,7 @@
 					$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 				}
 
-				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
+				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category );
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
 				}
@@ -461,7 +461,7 @@
 				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 			}
 
-			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
+			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category );
 			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
