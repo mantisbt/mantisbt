@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.39 2007-05-07 16:51:02 prichards Exp $
+	# $Id: file_download.php,v 1.40 2007-06-09 16:56:39 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -82,8 +82,15 @@
 		$t_disposition = ' attachment;';
 	}
 
-	# Added Quotes (") around file name.
-	header( 'Content-Disposition:' . $t_disposition . ' filename="' . $t_filename . '"' );
+	# Added Quotes (") around file name.  Also in case of IE url encode the filename
+	# firefox seems to do fine without the urlencoding.  I am not sure if always
+	# urlencoding is an issue.
+	if ( preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+		header( 'Content-Disposition:' . $t_disposition . ' filename="' . urlencode($t_filename) . '"' );
+	} else {
+		header( 'Content-Disposition:' . $t_disposition . ' filename="' . $t_filename . '"' );
+	}
+
 	header( 'Content-Description: Download Data' );
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', db_unixtimestamp( $v_date_added ) ) );
 
