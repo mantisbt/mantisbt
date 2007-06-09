@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.165 2007-05-25 01:29:30 vboctor Exp $
+	# $Id: print_api.php,v 1.166 2007-06-09 16:39:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -597,6 +597,14 @@
 			$row = db_fetch_array( $result );
 			$cat_arr[] = string_attribute( $row['category'] );
 		}
+
+		# Add the default option if not in the list retrieved from DB		
+		# This is useful for default categories and when updating an
+		# issue with a deleted category.
+		if ( !in_array( $p_category, $cat_arr ) ) {
+			$cat_arr[] = $p_category;
+		}
+
 		sort( $cat_arr );
 		$cat_arr = array_unique( $cat_arr );
 
