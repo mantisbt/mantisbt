@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.338 2007-06-09 15:00:03 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.339 2007-06-11 06:49:53 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -294,6 +294,7 @@
 
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
 	# Name of smtp host, needed for phpMailer, taken from php.ini
+	# You can specify a different port by using this format: [hostname:port]
 	$g_smtp_host			= 'localhost';
 
 	# These options allow you to use SMTP Authentication when you use a remote
@@ -767,8 +768,13 @@
 	# DISK, DATABASE, or FTP.
 	$g_file_upload_method	= DATABASE;
 
-	# When using FTP or DISK for storing uploaded files, they will be created
-	# on the server with the following permissions
+	# When using FTP or DISK for storing uploaded files, this setting control 
+	# the access permissions they will have on the web server: with the default
+	# value (0400) files will be read-only, and accessible only by the user
+	# running the apache process (probably "apache" in Linux and "Administrator"
+	# in Windows).
+	# For more details on unix style permissions:
+	# http://www.perlfect.com/articles/chmod.shtml
 	$g_attachments_file_permissions = 0400;
 
 	# FTP settings, used if $g_file_upload_method = FTP
