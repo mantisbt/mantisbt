@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.39 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: manage_user_update.php,v 1.40 2007-06-16 23:04:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,6 +44,7 @@
 
 	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
+	email_ensure_not_disposable( $f_email );
 
 	$c_email		= db_prepare_string( $f_email );
 	$c_username		= db_prepare_string( $f_username );

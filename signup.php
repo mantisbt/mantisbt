@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup.php,v 1.40 2005-05-25 19:57:13 marcelloscata Exp $
+	# $Id: signup.php,v 1.41 2007-06-16 23:04:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -14,6 +14,7 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'email_api.php' );
+	require_once( $t_core_path . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 
 	$f_username		= strip_tags( gpc_get_string( 'username' ) );
 	$f_email		= strip_tags( gpc_get_string( 'email' ) );
@@ -44,6 +45,8 @@
 			trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 		}
 	}
+
+	email_ensure_not_disposable( $f_email );
 
 	# notify the selected group a new user has signed-up
 	if( user_signup( $f_username, $f_email ) ) {

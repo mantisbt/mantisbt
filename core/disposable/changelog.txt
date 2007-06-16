@@ -1,0 +1,9 @@
+Mantis ChangeLog
+
+2007.06.16  -  1.0.0
+
+- Initial implementation
+- 8 disposable forwarding email providers.
+- 11 disposable trash email providers.
+- 1 disposable shredder email provider.
+- 3 free email providers

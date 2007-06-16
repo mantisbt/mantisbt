@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.129 2007-05-01 07:27:58 vboctor Exp $
+	# $Id: email_api.php,v 1.130 2007-06-16 23:04:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -19,6 +19,7 @@
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'email_queue_api.php' );
+	require_once( 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 	require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
 	# reusable object of class SMTP
@@ -150,6 +151,21 @@
 			trigger_error( ERROR_EMAIL_INVALID, ERROR );
 		}
 	}
+
+	# --------------------
+	# Check if the email address is disposable
+	function email_is_disposable( $p_email ) {
+		return DisposableEmailChecker::is_disposable_email( $p_email ); 
+	}
+
+	# --------------------
+	# Check if the email address is disposable
+	function email_ensure_not_disposable( $p_email ) {
+		if ( email_is_disposable( $p_email ) ) {
+			trigger_error( ERROR_EMAIL_DISPOSABLE, ERROR );
+		}
+	}
+
 	# --------------------
 	# email_notify_flag
 	# Get the value associated with the specific action and flag.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.23 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: manage_user_create.php,v 1.24 2007-06-16 23:04:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -43,6 +43,7 @@
 	}
 
 	$f_email = email_append_domain( $f_email );
+	email_ensure_not_disposable( $f_email );
 
 	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		# Check code will be sent to the user directly via email. Dummy password set to random

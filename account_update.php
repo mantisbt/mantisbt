@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.40 2004-11-30 13:02:57 vboctor Exp $
+	# $Id: account_update.php,v 1.41 2007-06-16 23:04:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,6 +33,8 @@
 	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
 	$f_email = email_append_domain( $f_email );
+
+	email_ensure_not_disposable( $f_email );
 
 	# get the user id once, so that if we decide in the future to enable this for
 	# admins / managers to change details of other users.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.63 2007-04-20 08:28:22 vboctor Exp $
+	# $Id: constant_inc.php,v 1.64 2007-06-16 23:04:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -242,6 +242,7 @@
 
 	# ERROR_EMAIL_*
 	define( 'ERROR_EMAIL_INVALID',					1200 );
+	define( 'ERROR_EMAIL_DISPOSABLE',               1201 );
 
 	# ERROR_CUSTOM_FIELD_*
 	define( 'ERROR_CUSTOM_FIELD_NOT_FOUND',			1300 );
