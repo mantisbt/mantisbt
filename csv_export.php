@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.25 2005-06-08 22:09:13 vboctor Exp $
+	# $Id: csv_export.php,v 1.26 2007-06-23 03:48:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,11 +43,11 @@
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
-	header( 'Content-Type: text/plain; name=' . $t_filename );
+	header( 'Content-Type: text/plain; name=' . urlencode( $t_filename ) );
 	header( 'Content-Transfer-Encoding: BASE64;' );
 
 	# Added Quotes (") around file name.
-	header( 'Content-Disposition: attachment; filename="' . $t_filename .'"');
+	header( 'Content-Disposition: attachment; filename="' . urlencode( $t_filename ) . '"' );
 
 	# Get columns to be exported
 	$t_columns = csv_get_columns();
