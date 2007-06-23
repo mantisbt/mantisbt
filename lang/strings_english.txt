@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.297 $
+	# $Revision: 1.298 $
 	# $Author: vboctor $
-	# $Date: 2007-06-16 23:04:34 $
+	# $Date: 2007-06-23 03:21:45 $
 	#
-	# $Id: strings_english.txt,v 1.297 2007-06-16 23:04:34 vboctor Exp $
+	# $Id: strings_english.txt,v 1.298 2007-06-23 03:21:45 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -109,7 +109,6 @@ $s_login_link = 'Login';
 $s_select_option = '(select)';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';

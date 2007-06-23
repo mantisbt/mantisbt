@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.50 2007-02-20 05:24:14 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.51 2007-06-23 03:21:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -195,30 +195,38 @@
 		case 'UP_FIXED_IN_VERSION':
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
-			
+			$t_success = false;
+
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-				if ( version_exists( $t_project_id, $f_version ) ) {
+				if ( version_get_id( $f_fixed_in_version, $t_project_id ) !== false ) {
 					# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
-				} else {
-					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_failed' );
+					$t_success = true;
 				}
+			}
+
+			if ( !$t_success ) {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
 
 		case 'UP_TARGET_VERSION':
-			$f_fixed_in_version = gpc_get_string( 'target_version' );
+			$f_target_version = gpc_get_string( 'target_version' );
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+			$t_success = false;
 
 			if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_bug_id ) ) {
-				if ( version_exists( $t_project_id, $f_version ) ) {
+				if ( version_get_id( $f_target_version, $t_project_id ) !== false ) {
 					# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'target_version', $f_fixed_in_version );
+					bug_set_field( $t_bug_id, 'target_version', $f_target_version );
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
-				} else {
-					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_failed' );
+					$t_success = true;
 				}
+			}
+
+			if ( !$t_success ) {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
 
@@ -268,10 +276,12 @@
 		html_page_top1();
 		html_page_top2();
 
-		echo '<div align="center">';
+		echo '<div align="center"><br />';
+		echo '<table class="width75">';
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
-			printf("<p> %s: %s </p>\n", string_get_bug_view_link( $t_id ), $t_reason);
+			printf( "<tr><td width=\"50%%\">%s: %s</td><td>%s</td></tr>\n", string_get_bug_view_link( $t_id ), bug_get_field( $t_id, 'summary' ), $t_reason );
 		}
+		echo '</table><br />';
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 
