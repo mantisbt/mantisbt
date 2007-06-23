@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_warning.php,v 1.5 2007-02-10 12:38:32 prichards Exp $
+	# $Id: upgrade_warning.php,v 1.6 2007-06-23 03:42:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,7 +14,7 @@
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	$g_error_send_page_header = false; # suppress page headers in the error handler
 
-    # @@@ upgrade list moved to the bottom of upgrade_inc.php
+	# @@@ upgrade list moved to the bottom of upgrade_inc.php
 
 	$f_advanced = gpc_get_bool( 'advanced', false );
 

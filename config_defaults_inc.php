@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.339 2007-06-11 06:49:53 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.340 2007-06-23 03:42:48 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1788,7 +1788,7 @@
 	# Wiki Integration Enabled?
 	$g_wiki_enable = OFF;
 
-	# Wiki Engine
+	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki')
 	$g_wiki_engine = 'dokuwiki';
  
 	# Wiki namespace to be used as root for all pages relating to this mantis installation.
