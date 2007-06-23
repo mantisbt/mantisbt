@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.38 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: relationship_api.php,v 1.39 2007-06-23 04:25:43 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -682,14 +682,21 @@
 
  	# --------------------
  	# print HTML relationship listbox
-	function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false) {
+	function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
 ?>
 <select name="<?php echo $p_select_name?>">
-<?php if ($p_include_any) { ?>
+<?php if ( $p_include_any ) { ?>
 <option value="-1" <?php echo ( $p_default_rel_type == -1 ? ' selected="selected"' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 <?php
     }
+
+	if ( $p_include_none ) { ?>
+<option value="-2" <?php echo ( $p_default_rel_type == -2 ? ' selected="selected"' : '' ) ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+<?php
+    }
 ?>
+$p_include_none
+
 <option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
 <option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
 <option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>

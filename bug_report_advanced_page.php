@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.62 2007-05-26 03:32:42 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.63 2007-06-23 04:25:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -489,7 +489,7 @@
 		<?php echo lang_get( 'relationship_with_parent' ) ?>
 	</td>
 	<td>
-		<?php relationship_list_box( BUG_BLOCKS ) ?>
+		<?php relationship_list_box( /* none */ -2, "rel_type", false, true ) ?>
 		<?php PRINT '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
 	</td>
 </tr>
