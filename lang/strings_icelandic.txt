@@ -11,11 +11,11 @@
 	# Icelandic strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 14:02:39 $
+	# $Revision: 1.17 $
+	# $Author: vboctor $
+	# $Date: 2007-06-24 01:50:19 $
 	#
-	# $Id: strings_icelandic.txt,v 1.16 2006-11-08 14:02:39 achumakov Exp $
+	# $Id: strings_icelandic.txt,v 1.17 2007-06-24 01:50:19 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -282,7 +282,7 @@ $s_default_access_level = 'Sjálfgefið aðgangsstig';
 $s_issue_status_percentage = 'Prósentustaða aðgerða';
 
 # Enum Strings
-$s_access_levels_enum_string = '10:skoðandi,25:skýrslugjafi,40:uppfærslumaður,55:forritari,70:stjórnandi,90:umsjónarmaður';
+$s_access_levels_enum_string = '10:skoðandi,25:skýrslugjafi,40:uppfærslumaður,55:úrlausnaraðili,70:stjórnandi,90:umsjónarmaður';
 $s_project_status_enum_string = '10:þróun,30:útgáfa,50:stöðugur,70:úreltur';
 $s_project_view_state_enum_string = '10:almennt,50:læst';
 $s_view_state_enum_string = '10:almennt, 50:læst';
@@ -290,7 +290,7 @@ $s_view_state_enum_string = '10:almennt, 50:læst';
 $s_priority_enum_string = '10:enginn,20:lágt,30:eðlilegt,40:hátt,50:áríðandi,60:tafarlaust';
 $s_severity_enum_string = '10:eiginleiki,20:smávægilegur,30:texti,40:fínstilling,50:minni háttar,60:meiri háttar, 70:hrun,80:lokar';
 $s_reproducibility_enum_string = '10:alltaf,30:stundum,50:af og til,70:hef ekki reynt,90:ekki hægt að endurskapa,100:á ekki við';
-$s_status_enum_string = '10:nýtt,20:svar,30:móttekið,40:staðfest,50:úthlutað,80:leyst,90:lokað';
+$s_status_enum_string = '10:nýtt,20:bíða eftir viðbrögðum,30:móttekið,40:staðfest,50:úthlutað,80:leyst,90:lokað';
 $s_resolution_enum_string = '10:opið,20:leyst,30:enduropnað,40:ekki hægt að endurskapa,50:ekki hægt að laga,60:afrit,70:þarfnast ekki breytinga,80:sett til hliðar,90:hefur ekki lagast';
 $s_projection_enum_string = '10:enginn,30:fínstilling,50:lítið verk,70:mikið verk,90:endurhönnun';
 $s_eta_enum_string = '10:enginn,20:< 1 dagur,30:2-3 dagar,40:< 1 vika,50:< 1 mánuður,60:> 1 mánuður';
@@ -311,7 +311,7 @@ $s_reset_request_msg = 'Einhver (líklega þú) óskaðir eftir að breyta lykil
 $s_reset_request_in_progress_msg = 'Ef þú hefur gefið upp rétt lykilorð og tölvupóstfang fyrir aðgang þinn, munum við nú hafa sent staðfest boð til uppgefins tölvupóstfangs. Þegar þessi boð hafa verið móttekinn, fylgdu eftir leiðbeiningunum til þess að breyta lykilorði fyrir þinn aðgang.';
 
 $s_email_notification_title_for_status_bug_new = 'Eftirfarandi atriði er (aftur) í stöðu NÝTT';
-$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriði krefst SVARS frá þér.';
+$s_email_notification_title_for_status_bug_feedback = 'Eftirfarandi atriði krefst VIÐBRAGÐA frá þér.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Eftirfarandi atriði hefur verið MÓTTEKIÐ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Eftirfarandi atriði er STAÐFEST.';
 $s_email_notification_title_for_status_bug_assigned = 'Eftirfarandi atriði hefur verið ÚTHLUTAÐ.';
@@ -395,7 +395,7 @@ $s_bugnote_order_asc = 'Hækkandi';
 $s_bugnote_order_desc = 'Lækkandi';
 $s_email_on_new = 'Tölvupóstur um nýtt';
 $s_email_on_assigned = 'Tölvupóstur um breytingu á úthlutun';
-$s_email_on_feedback = 'Tölvupóstur um svar';
+$s_email_on_feedback = 'Tölvupóstur um viðbrögð';
 $s_email_on_resolved = 'Tölvupóstur um leyst';
 $s_email_on_closed = 'Tölvupóstur um lokað';
 $s_email_on_reopened = 'Tölvupóstur um enduropnað';
@@ -477,12 +477,12 @@ $s_bug_assign_msg = 'Efninu hefur verið úthlutað...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nýtt atriði';
-$s_feedback_bug_title = 'Óska svars við atriði';
+$s_feedback_bug_title = 'Óska viðbragða við atriði';
 $s_acknowledged_bug_title = 'Móttekið atriði';
 $s_confirmed_bug_title = 'Staðfesta atriði';
 $s_assigned_bug_title = 'Úthluta atriði';
 $s_new_bug_button = 'Nýtt atriði';
-$s_feedback_bug_button = 'Óska svars';
+$s_feedback_bug_button = 'Óska viðbragða';
 $s_acknowledged_bug_button = 'Móttaka atriði';
 $s_confirmed_bug_button = 'Staðfesta atriði';
 $s_assigned_bug_button = 'Úthluta atriði';
@@ -537,7 +537,7 @@ $s_bug_reminder = 'Senda minnisatriði';
 $s_reminder_sent_to = 'Minnisatriði sent til';
 $s_bug_send_button = 'Senda';
 $s_reminder = 'Minnisatriði';
-$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir svari við þessu atriði.';
+$s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessu atriði.';
 $s_reminder_monitor = 'Þessir viðtakendur munu einnig vakta atriðið. Þeir geta afskráð sig með því að nota hnappinn Hætta vöktun.';
 $s_reminder_store = 'Þessi athugasemd verður vistuð með atriðinu.';
 
@@ -892,7 +892,7 @@ $s_my_view_title_reported = 'Tilkynnt af mér';
 $s_my_view_title_assigned = 'Úthlutað til mín (óleyst)';
 $s_my_view_title_resolved = 'Leyst';
 $s_my_view_title_monitored = 'Vaktað af mér';
-$s_my_view_title_feedback = 'Beðið eftir svari frá mér';
+$s_my_view_title_feedback = 'Beðið eftir viðbrögðum frá mér';
 $s_my_view_title_verify = 'Beðið eftir staðfestingu á úrlausn frá mér';
 
 # news_add.php
@@ -1039,11 +1039,11 @@ $s_by_severity = 'Eftir mikilvægi';
 $s_by_resolution = 'Eftir úrlausn';
 $s_by_category = 'Eftir verkþætti';
 $s_by_priority = 'Eftir forgangi';
-$s_by_developer = 'Eftir forritara';
+$s_by_developer = 'Eftir úrlausnaraðila';
 $s_by_reporter = 'Eftir tilkynnanda';
 $s_reporter_by_resolution = 'Tilkynnt eftir úrlausn';
 $s_reporter_effectiveness = 'Árangur tilkynnanda';
-$s_developer_by_resolution = 'Úrlausn eftir forritara';
+$s_developer_by_resolution = 'Úrlausn eftir úrlausnaraðila';
 $s_percentage_fixed = '% lagað';
 $s_percentage_errors = '% óleyst';
 $s_errors = 'Óleyst';
@@ -1053,7 +1053,7 @@ $s_longest_open_bug = 'Atriði lengst opið';
 $s_longest_open = 'Lengst opið';
 $s_average_time = 'Meðal tími';
 $s_total_time = 'Heildar tími';
-$s_developer_stats = 'Forritari, tölfræði';
+$s_developer_stats = 'Úrlausnaraðili, tölfræði';
 $s_reporter_stats = 'Tilkynnendur, tölfræði';
 $s_orct = '(opið/leyst/lokað/alls)';
 
