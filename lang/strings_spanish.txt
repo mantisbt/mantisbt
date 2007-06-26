@@ -16,11 +16,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.102 $
-	# $Author: achumakov $
-	# $Date: 2006-12-30 09:24:19 $
+	# $Revision: 1.103 $
+	# $Author: zakman $
+	# $Date: 2007-06-26 10:46:09 $
 	#
-	# $Id: strings_spanish.txt,v 1.102 2006-12-30 09:24:19 achumakov Exp $
+	# $Id: strings_spanish.txt,v 1.103 2007-06-26 10:46:09 zakman Exp $
 	###########################################################################
 
 ?>
@@ -1218,7 +1218,7 @@ $s_http_auth_realm                                   = "Acceso a Mantis";
 $s_bug                                               = "Incidencia";
 $s_add_new_relationship                              = "Nueva relación";
 $s_add_new_relationship_button                       = "Añadir";
-$s_this_bug                                          = "Icidencia actual";
+$s_this_bug                                          = "Incidencia actual";
 $s_relationship_added                                = "Relación añadida";
 $s_relationship_deleted                              = "Relación borrada";
 $s_no_relationship                                   = 'sin relación';
