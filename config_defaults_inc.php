@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.340 2007-06-23 03:42:48 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.341 2007-06-28 23:13:39 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -293,8 +293,10 @@
 	$g_phpMailer_method		= 0;
 
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
-	# Name of smtp host, needed for phpMailer, taken from php.ini
-	# You can specify a different port by using this format: [hostname:port]
+	# One or more hosts, separated by a semicolon, can be listed. 
+	# You can also specify a different port for each host by using this 
+	# format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com").
+	# Hosts will be tried in order.
 	$g_smtp_host			= 'localhost';
 
 	# These options allow you to use SMTP Authentication when you use a remote
