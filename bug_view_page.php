@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.85 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.86 2007-06-29 17:44:51 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -431,20 +431,15 @@
 	# User list monitoring the bug
 	include( $t_mantis_dir . 'bug_monitor_list_view_inc.php' );
 
-	# Bugnotes
-	include( $t_mantis_dir . 'bugnote_add_inc.php' );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
-?>
-	<!-- Jump to Bugnote add form -->
-<?php
-	if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
-		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) )
-	{
-?>
-	<span class="small"><?php print_bracket_link( "#addbugnote", lang_get( 'add_bugnote_button' ) ) ?></span>
-	<br />
-<?php } ?>
-<?php
+	# Bugnotes and "Add Note" box
+	if ( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
+		include( $t_mantis_dir . 'bugnote_view_inc.php' );
+		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+	} else {
+		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	}
+
 	# Time Tracking stats
 	if ( config_get('time_tracking_enabled') &&
 		access_has_bug_level( config_get( 'time_tracking_reporting_threshold' ), $f_bug_id ) ) {

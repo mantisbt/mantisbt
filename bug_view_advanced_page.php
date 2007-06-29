@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.83 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.84 2007-06-29 17:44:50 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -553,9 +553,14 @@
 	# User list monitoring the bug
 	include( $t_mantis_dir . 'bug_monitor_list_view_inc.php' );
 
-	# Bugnotes
-	include( $t_mantis_dir . 'bugnote_add_inc.php' );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	# Bugnotes and "Add Note" box
+	if ( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
+		include( $t_mantis_dir . 'bugnote_view_inc.php' );
+		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+	} else {
+		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	}
 
 	# History
 	if ( $f_history ) {
