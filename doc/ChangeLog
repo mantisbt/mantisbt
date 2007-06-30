@@ -1,5 +1,13 @@
 Mantis ChangeLog
 
+2007.07.01 - 1.0.8
+
+- 0007902: [bugtracker] constant_inc is missing statement in 1.0.7 (vboctor)
+- 0008020: [installation] Port 7907: Allow using system adodb (giallu)
+- 0008029: [localization] Spelling mistake in value of string $s_by_severity file lang/strings_spanish.txt (giallu)
+- 0008019: [other] Port 5333: Invalid zip file core/adodb/adodb-time.zip in CVS (giallu)
+- 0007939: [rss] Port 7738: Replace non free RSS creation class (vboctor)
+
 2007.04.04 - 1.0.7
 
 - 0007743: [security] Port: CVE-2006-6574 (vboctor)
