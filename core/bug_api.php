@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.108 2007-06-08 15:42:15 giallu Exp $
+	# $Id: bug_api.php,v 1.109 2007-07-02 08:46:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -17,6 +17,7 @@
 	require_once( $t_core_dir . 'file_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'sponsorship_api.php' );
+	require_once( $t_core_dir . 'twitter_api.php' );
 
 	# MASC RELATIONSHIP
 	require_once( $t_core_dir.'relationship_api.php' );
@@ -1209,8 +1210,8 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		if( !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 ) ) {
-			# MASC RELATIONSHIP
+		$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
+		if ( $t_duplicate ) {
 			if ( $p_bug_id == $p_duplicate_id ) {
 			    trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );  # never returns
 			}
@@ -1218,7 +1219,7 @@
 			# the related bug exists...
 			bug_ensure_exists( $p_duplicate_id );
 
-			if( ON == config_get( 'enable_relationship' ) ) {
+			if ( ON == config_get( 'enable_relationship' ) ) {
 				# check if there is other relationship between the bugs...
 				$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
@@ -1247,12 +1248,13 @@
 			}
 
 			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
-			# MASC RELATIONSHIP
 		}
+		
+		$c_resolution = db_prepare_int( $p_resolution );
 
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
-		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
+		bug_set_field( $p_bug_id, 'resolution', $c_resolution );
 
 		# only set handler if specified explicitly or if bug was not assigned to a handler
 		if ( null == $p_handler_id ) {
@@ -1270,6 +1272,10 @@
 		}
 
 		email_resolved( $p_bug_id );
+
+		if ( $c_resolution == FIXED ) {
+			twitter_issue_resolved( $p_bug_id );
+		}
 
 		# MASC RELATIONSHIP
 		if ( ON == config_get( 'enable_relationship' ) ) {

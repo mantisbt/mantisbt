@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.298 $
+	# $Revision: 1.299 $
 	# $Author: vboctor $
-	# $Date: 2007-06-23 03:21:45 $
+	# $Date: 2007-07-02 08:46:59 $
 	#
-	# $Id: strings_english.txt,v 1.298 2007-06-23 03:21:45 vboctor Exp $
+	# $Id: strings_english.txt,v 1.299 2007-07-02 08:46:59 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -1347,4 +1347,7 @@ $s_from_date = 'From';
 $s_to_date = 'To';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
+
+# Twitter Integration
+$s_twitter_resolved = "%d: [%s] %s (resolved by %s in %s)";
 ?>

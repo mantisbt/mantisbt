@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.341 2007-06-28 23:13:39 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.342 2007-07-02 08:46:52 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -327,7 +327,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.1.0a3';
+	$g_mantis_version		= '1.1.0a4-CVS';
 	$g_show_version			= ON;
 
 	################################
@@ -1844,4 +1844,18 @@
 	# Allows the users to enter free text when reporting/updating issues 
 	# for the profile related fields (i.e. platform, os, os build)
 	$g_allow_freetext_in_profile_fields = ON;
+
+	#############################
+	# Twitter Settings
+	#############################
+
+	# The integration with twitter allows for a Mantis installation to post
+	# updates to a twitter account.  This feature will be disabled if username
+	# is empty or if the curl extension is not enabled.
+
+	# The twitter account user name.
+	$g_twitter_username = '';
+	
+	# The twitter account password.
+	$g_twitter_password = '';
 ?>
