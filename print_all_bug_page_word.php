@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.64 2006-05-02 14:05:08 vboctor Exp $
+	# $Id: print_all_bug_page_word.php,v 1.65 2007-07-03 11:36:50 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,12 @@
 		header( 'Pragma: public' );
 
 		header( 'Content-Type: application/msword' );
-		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
+
+		if ( preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+                        header( 'Content-Disposition: attachment; filename="' . urlencode( $t_export_title ) . '.doc"' );
+                } else {
+                        header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
+                }
 	}
 
 	# This is where we used to do the entire actual filter ourselves

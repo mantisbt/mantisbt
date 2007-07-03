@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.55 2007-03-13 04:39:49 vboctor Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.56 2007-07-03 11:36:46 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,7 +43,12 @@
 		header( 'Pragma: public' );
 
 		header( 'Content-Type: application/vnd.ms-excel' );
-		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.xls"' );
+
+                if ( preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+                        header( 'Content-Disposition: attachment; filename="' . urlencode( $t_export_title ) . '.xls"' ) ;
+                } else {
+                        header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.xls"' );
+                }
 	}
 
 	#settings for choosing the fields to print
