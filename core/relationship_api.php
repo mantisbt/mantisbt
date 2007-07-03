@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.39 2007-06-23 04:25:43 vboctor Exp $
+	# $Id: relationship_api.php,v 1.40 2007-07-03 10:38:17 giallu Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -540,7 +540,7 @@
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
-		$t_relationship_info_html = $t_td . '<nobr>' . $t_relationship_descr . '</nobr>&nbsp;</td>';
+		$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&nbsp;</td>';
 		if ( $p_html_preview == false ) {
 			$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
 			$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
@@ -556,7 +556,7 @@
 		# get the handler name of the related bug
 		$t_relationship_info_html .= $t_td;
 		if ( $t_bug->handler_id > 0 )  {
-			$t_relationship_info_html .= '<nobr>' . prepare_user_name(  $t_bug->handler_id ) . '</nobr>';
+			$t_relationship_info_html .= string_no_break( prepare_user_name( $t_bug->handler_id ) );
 		}
 		$t_relationship_info_html .= '&nbsp;</td>';
 
