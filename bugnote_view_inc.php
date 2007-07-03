@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.38 2007-02-20 05:49:00 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.39 2007-07-03 12:36:09 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -140,20 +140,37 @@
 		?>
 		<br /><span class="small">
 		<?php
-			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
 			if ( !bug_is_readonly( $f_bug_id ) ) {
+				$t_can_edit_note = false;
+				$t_can_delete_note = false;
+
+				# admins and the bugnote creator can edit/delete this bugnote
 				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
+					$t_can_edit_note = true;
+					$t_can_delete_note = true;
+				}
+
+				# users above update_bugnote_threshold should be able to edit this bugnote
+				if ( $t_can_edit_note || access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id ) ) {
 					print_button( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
+				}
+
+				# users above delete_bugnote_threshold should be able to delete this bugnote
+				if ( $t_can_delete_note || access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id ) ) {
+					echo " ";
 					print_button( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
-					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) &&
-						access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
-						if ( VS_PRIVATE == $v3_view_state ) {
-							print_button('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
-						} else {
-							print_button('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
-						}
+				}
+
+				if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) &&
+					access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
+					if ( VS_PRIVATE == $v3_view_state ) {
+						echo " ";
+						print_button('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
+					} else {
+						echo " ";
+						print_button('bugnote_set_view_state.php?private=1&amp;bugnote_id='.$v3_id, lang_get( 'make_private' ));
 					}
 				}
 			}
