@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.299 $
+	# $Revision: 1.300 $
 	# $Author: vboctor $
-	# $Date: 2007-07-02 08:46:59 $
+	# $Date: 2007-07-03 03:57:06 $
 	#
-	# $Id: strings_english.txt,v 1.299 2007-07-02 08:46:59 vboctor Exp $
+	# $Id: strings_english.txt,v 1.300 2007-07-03 03:57:06 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -62,6 +62,8 @@ $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
+$s_copy_versions_from = 'Copy Versions From';
+$s_copy_versions_to = 'Copy Versions To';
 $s_copy_users_from = 'Copy Users From';
 $s_copy_users_to = 'Copy Users To';
 $s_bug_history = 'Issue History';

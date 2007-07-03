@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.23 2006-12-29 09:34:45 vboctor Exp $
+	# $Id: version_api.php,v 1.24 2007-07-03 03:57:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -108,11 +108,17 @@
 
 	# --------------------
 	# Add a version to the project
-	function version_add( $p_project_id, $p_version, $p_released = VERSION_RELEASED, $p_description = '' ) {
+	function version_add( $p_project_id, $p_version, $p_released = VERSION_RELEASED, $p_description = '', $p_date_order = null) {
 		$c_project_id   = db_prepare_int( $p_project_id );
 		$c_released     = db_prepare_int( $p_released );
 		$c_version      = db_prepare_string( $p_version );
 		$c_description  = db_prepare_string( $p_description );
+
+		if ( null === $p_date_order ) {
+			$c_date_order = db_now();
+		} else {
+			$c_date_order = db_timestamp( $p_date_order );
+		}
 
 		version_ensure_unique( $p_version, $p_project_id );
 
@@ -121,7 +127,7 @@
 		$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released )
 				  VALUES
-					( '$c_project_id', '$c_version', " . db_now() . ", '$c_description', '$c_released' )";
+					( '$c_project_id', '$c_version', " . $c_date_order . ", '$c_description', '$c_released' )";
 		db_query( $query );
 
 		# db_query() errors on failure so:

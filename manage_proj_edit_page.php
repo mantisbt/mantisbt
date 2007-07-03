@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.98 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.99 2007-07-03 03:57:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -424,6 +424,18 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<input type="text" name="version" size="32" maxlength="64" />
 			<input type="submit" name="add_version" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
 			<input type="submit" name="add_and_edit_version" class="button" value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>" />
+		</form>
+	</td>
+</tr>
+<tr>
+	<td class="left" colspan="3">
+		<form method="post" action="manage_proj_ver_copy.php">
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<select name="other_project_id">
+				<?php print_project_option_list( null, false, $f_project_id ); ?>
+			</select>
+			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
+			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_versions_to' ) ?>" />
 		</form>
 	</td>
 </tr>
