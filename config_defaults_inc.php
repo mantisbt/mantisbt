@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.342 2007-07-02 08:46:52 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.343 2007-07-03 13:07:43 zakman Exp $
 	# --------------------------------------------------------
 
 
@@ -488,7 +488,7 @@
 	$g_show_bug_project_links	= ON;
 
 	# --- Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
-	# --- see constant_inc.php. (*: BOTTOM or TOP)
+	# --- see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
 
 	# --- Position of the filter box, can be: FILTER_POSITION_*

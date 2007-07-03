@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.14 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: my_view_page.php,v 1.15 2007-07-03 13:07:43 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,7 +52,7 @@
 <table class="hide" border="0" cellspacing="3" cellpadding="0">
 
 <?php
-	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
+	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		echo '<tr>';
 		echo '<td colspan="2">';
 		html_status_legend();
@@ -151,7 +151,7 @@
 ?>
 
 <?php
-	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
+	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		echo '<tr>';
 		echo '<td colspan="2">';
 		html_status_legend();

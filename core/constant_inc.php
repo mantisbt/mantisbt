@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.64 2007-06-16 23:04:33 vboctor Exp $
+	# $Id: constant_inc.php,v 1.65 2007-07-03 13:07:44 zakman Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -295,6 +295,7 @@
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);
+	define( 'STATUS_LEGEND_POSITION_BOTH', 		3);
 
 	# Filter Position
 	define( 'FILTER_POSITION_NONE',				0 );

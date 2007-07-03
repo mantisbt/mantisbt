@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.166 2007-03-03 14:58:28 prichards Exp $
+	# $Id: view_all_inc.php,v 1.167 2007-07-03 13:07:43 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,7 @@
 
 	# -- ====================== BUG LIST ============================ --
 
-	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
+	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();
 	}
 
@@ -199,7 +199,7 @@
 
 	mark_time( 'end loop' );
 
-	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
+	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();
 	}
 
