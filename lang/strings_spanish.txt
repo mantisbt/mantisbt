@@ -16,11 +16,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.103 $
+	# $Revision: 1.104 $
 	# $Author: zakman $
-	# $Date: 2007-06-26 10:46:09 $
+	# $Date: 2007-07-03 13:29:03 $
 	#
-	# $Id: strings_spanish.txt,v 1.103 2007-06-26 10:46:09 zakman Exp $
+	# $Id: strings_spanish.txt,v 1.104 2007-07-03 13:29:03 zakman Exp $
 	###########################################################################
 
 ?>
@@ -629,7 +629,7 @@ $s_login_title        = 'Inicio de sesión';
 $s_save_login         = 'Guardar datos';
 $s_choose_project     = 'Seleccione Proyecto';
 $s_login_button       = 'Iniciar sesión';
-$s_signup_link        = 'Solicitar una cuenta cueva';
+$s_signup_link 	      = 'Solicitar una cuenta nueva';
 $s_lost_password_link = '¿Olvidó la contraseña?';
 
 # login_select_proj_page.php
