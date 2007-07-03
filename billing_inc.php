@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.9 2007-04-22 07:45:33 vboctor Exp $
+	# $Id: billing_inc.php,v 1.10 2007-07-03 04:21:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -131,7 +131,8 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 
 	$t_prev_id = -1;
 ?>
-<table border=0 class="width100" cellspacing="0">
+<br />
+<table border="0" class="width100" cellspacing="0">
 <tr class="row-category-history">
 	<td class="small-caption">
 		<?php echo lang_get( 'username' ) ?>
@@ -146,14 +147,18 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 <?php } ?>
 
 </tr>
-<?php foreach ( $t_bugnote_stats as $t_item ) { ?>
 <?php
-	$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
-	if ( $t_item['bug_id'] != $t_prev_id) {
-		$t_link = string_get_bug_view_link( $t_item['bug_id'] ) . ": " . string_display( $t_item['summary'] );
-		echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
-		$t_prev_id = $t_item['bug_id'];
-	}
+	$t_sum_in_minutes = 0;
+
+	foreach ( $t_bugnote_stats as $t_item ) {
+		$t_sum_in_minutes += $t_item['sum_time_tracking'];
+
+		$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
+		if ( $t_item['bug_id'] != $t_prev_id) {
+			$t_link = string_get_bug_view_link( $t_item['bug_id'] ) . ": " . string_display( $t_item['summary'] );
+			echo "<tr class='row-category-history'><td colspan=4>".$t_link."</td></tr>";
+			$t_prev_id = $t_item['bug_id'];
+		}
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">
@@ -168,7 +173,16 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 <?php } ?>
 </tr>
-<?php } # end for loop ?>
+<?php } # end for loop 
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="small-caption">
+		<?php echo lang_get( 'total_time' ); ?>
+	</td>
+	<td class="small-caption">
+		<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
+	</td>
+</tr>
 </table>
 <?php } # end if ?>
 </div>

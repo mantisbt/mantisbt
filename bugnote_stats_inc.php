@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.8 2007-04-22 07:45:33 vboctor Exp $
+	# $Id: bugnote_stats_inc.php,v 1.9 2007-07-03 04:21:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -104,6 +104,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 	$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 ?>
+<br />
 <table border=0 class="width100" cellspacing="0">
 <tr class="row-category-history">
 	<td class="small-caption">
@@ -113,9 +114,11 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 		<?php echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
-<?php foreach ( $t_bugnote_stats as $t_item ) { ?>
 <?php
-	$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
+	$t_sum_in_minutes = 0;
+	foreach ( $t_bugnote_stats as $t_item ) {
+		$t_sum_in_minutes = $t_item['sum_time_tracking'];
+		$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
 ?>
 
 <tr <?php echo helper_alternate_class() ?>>
@@ -127,6 +130,14 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 	</td>
 </tr>
 <?php } # end for loop ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="small-caption">
+		<?php echo lang_get( 'total_time' ) ?>
+	</td>
+	<td class="small-caption">
+		<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
+	</td>
+</tr>
 </table>
 <?php } # end if ?>
 </div>
