@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: twitter_api.php,v 1.1 2007-07-02 08:46:59 vboctor Exp $
+	# $Id: twitter_api.php,v 1.2 2007-07-04 05:36:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -15,38 +15,71 @@
 
 	$g_twitter_enabled = null;
 
+	# --------------------
 	# Checks if twitter is used for the current installation.
 	# returns true for enabled, false otherwise.
 	function twitter_enabled() {
 		global $g_twitter_enabled;
 
 		if ( null === $g_twitter_enabled ) {
-			$g_twitter_enabled = !is_blank( config_get( 'twitter_username' ) ) &&
-								 function_exists( 'curl_init' );
+			$g_twitter_enabled = !is_blank( config_get( 'twitter_username' ) );
+		}
+		
+		if ( $g_twitter_enabled && !function_exists( 'curl_init' ) ) {
+			trigger_error( ERROR_TWITTER_NO_CURL_EXT, ERROR );
 		}
 
 		return $g_twitter_enabled;
 	}
-
+	
+	# --------------------
 	# Posts a twitter update when a bug is resolved.
 	# @param $p_bug_id The bug id that was resolved.
 	function twitter_issue_resolved( $p_bug_id ) {
 		if ( !twitter_enabled() ) {
 			return true;
 		}
+		
+		$t_bug = bug_get( $t_bug_id, false );
+
+		# Do not twitter except fixed issues
+		if ( $t_bug->resolution != FIXED ) {
+			return true;
+		}
+
+		# Do not twitter private bugs.
+		if ( $t_bug->view_state != VS_PUBLIC ) {
+			return true;
+		}
+		
+		# Do not twitter bugs belonging to private projects.
+		if ( VS_PRIVATE == project_get_field( $t_bug->project_id, 'view_state' ) ) {
+			return true;
+		}
 
 		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_message = sprintf( 
-						lang_get( 'twitter_resolved' ), 
-						$c_bug_id, 
-						bug_get_field( $c_bug_id, 'category' ),
-						bug_get_field( $c_bug_id, 'summary' ), 
-						user_get_name( bug_get_field( $c_bug_id, 'handler_id' ) ),
-						bug_get_field( $c_bug_id, 'fixed_in_version' ) );
+
+		if ( is_blank( $t_bug->fixed_in_version ) ) {
+			$t_message = sprintf( 
+							lang_get( 'twitter_resolved_no_version' ), 
+							$c_bug_id, 
+							$t_bug->category,
+							$t_bug->summary, 
+							user_get_name( $t_bug->handler_id ) );
+		} else {
+			$t_message = sprintf(
+							lang_get( 'twitter_resolved' ), 
+							$c_bug_id, 
+							$t_bug->category,
+							$t_bug->summary, 
+							user_get_name( $t_bug->handler_id ),
+							$t_bug->fixed_in_version );
+		}
 
 		return twitter_update( $t_message );
 	}
 
+	# --------------------
 	# Posts an update to twitter
 	# @param $p_message  The message to post.
 	function twitter_update( $p_message ) {
@@ -80,7 +113,7 @@
 		$t_buffer = curl_exec( $t_curl );
 
 		curl_close( $t_curl );
-
+		
 		return !is_blank( $t_buffer );
 	}
 ?>

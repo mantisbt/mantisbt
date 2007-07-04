@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.65 2007-07-03 13:07:44 zakman Exp $
+	# $Id: constant_inc.php,v 1.66 2007-07-04 05:36:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -288,9 +288,12 @@
 	define( 'ERROR_SIGNUP_NOT_MATCHING_CAPTCHA', 1904 );
 	define( 'ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED', 1905 );
 
-	# ERROR_FILTER_NOT_FOUND
+	# ERROR_FILTER_*
 	define( 'ERROR_FILTER_NOT_FOUND', 2000 );
 	define( 'ERROR_FILTER_TOO_OLD', 2001 );
+	
+	# ERROR_TWITTER_*
+	define( 'ERROR_TWITTER_NO_CURL_EXT', 2100 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
