@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.167 2007-07-03 13:07:43 zakman Exp $
+	# $Id: view_all_inc.php,v 1.168 2007-07-04 03:38:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,6 +45,8 @@
 
 
 	# -- ====================== BUG LIST ============================ --
+
+	$t_status_legend_position = config_get( 'status_legend_position' );
 
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		html_status_legend();
