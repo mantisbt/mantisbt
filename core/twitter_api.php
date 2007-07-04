@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: twitter_api.php,v 1.2 2007-07-04 05:36:07 vboctor Exp $
+	# $Id: twitter_api.php,v 1.3 2007-07-04 06:09:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -40,7 +40,7 @@
 			return true;
 		}
 		
-		$t_bug = bug_get( $t_bug_id, false );
+		$t_bug = bug_get( $p_bug_id, false );
 
 		# Do not twitter except fixed issues
 		if ( $t_bug->resolution != FIXED ) {
