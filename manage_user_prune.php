@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_prune.php,v 1.9 2007-02-20 05:43:25 vboctor Exp $
+	# $Id: manage_user_prune.php,v 1.10 2007-07-05 19:19:28 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -26,6 +26,10 @@
 			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND $date_calc";
 	$result = db_query($query);
 
+	if ( !$result ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+	
 	$count = db_num_rows( $result );
 
 	if ( $count > 0 ) {
@@ -39,9 +43,7 @@
 	}
 
 	$t_redirect_url = 'manage_user_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+
+	print_header_redirect( $t_redirect_url );
+	
 ?>

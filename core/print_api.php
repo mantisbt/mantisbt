@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.166 2007-06-09 16:39:32 vboctor Exp $
+	# $Id: print_api.php,v 1.167 2007-07-05 19:19:31 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1517,18 +1517,6 @@
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
 		PRINT "<br />$p_query;<br />";
 	}
-	# --------------------
-	# This is our generic error printing function
-	# Errors should terminate the script immediately
-	function print_mantis_error( $p_error_num=0 ) {
-		global $MANTIS_ERROR;
-
-		PRINT '<html><head></head><body>';
-		PRINT $MANTIS_ERROR[$p_error_num];
-		PRINT '</body></html>';
-		exit;
-	}
-
 	# --------------------
 	# Get icon corresponding to the specified filename
 	function print_file_icon( $p_filename ) {
