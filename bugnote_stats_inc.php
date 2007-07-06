@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.9 2007-07-03 04:21:57 vboctor Exp $
+	# $Id: bugnote_stats_inc.php,v 1.10 2007-07-06 21:33:03 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,7 @@
 <table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
-		<a href="" onClick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
 		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'time_tracking' ) ?>
 	</td>
@@ -69,7 +69,7 @@
 <tr>
 	<td class="form-title" colspan="4">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onClick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
+		<a href="" onclick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
 		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'time_tracking' ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.78 2007-06-08 15:42:15 giallu Exp $
+	# $Id: file_api.php,v 1.79 2007-07-06 21:33:04 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -207,7 +207,7 @@ document.getElementById( span ).style.display = displayType;
 
  -->
  </script>";
-					PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onClick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
+					PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onclick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
 					switch ( config_get( 'file_upload_method' ) ) {
 						case DISK:
 							if ( file_exists( $v_diskfile ) ) {
