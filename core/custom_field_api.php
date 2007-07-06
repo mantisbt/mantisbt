@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.63 2007-05-08 22:29:11 prichards Exp $
+	# $Id: custom_field_api.php,v 1.64 2007-07-06 07:30:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -239,7 +239,7 @@
 	# the definition are the default values and can be changes later
 	# return the ID of the new definition
 	function custom_field_create( $p_name ) {
-		if ( string_contains_scripting_chars( $p_def_array['name'] ) ) {
+		if ( string_contains_scripting_chars( $p_name ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 		}
 
