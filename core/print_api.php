@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.167 2007-07-05 19:19:31 prichards Exp $
+	# $Id: print_api.php,v 1.168 2007-07-06 22:19:34 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1274,7 +1274,7 @@
 	# $p_label - The button label
 	# $p_args_to_post - An associative array with key => value to be posted, can be null.
 	function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
-		echo '<form method="POST" action="', $p_action_page, '">';
+		echo '<form method="post" action="', $p_action_page, '">';
 		echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 		
 		if ( $p_args_to_post !== null ) {
