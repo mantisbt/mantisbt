@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.39 2007-07-03 12:36:09 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.40 2007-07-06 21:15:15 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -122,7 +122,7 @@
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 ?>
-<tr class="bugnote" name="<?php echo $v3_id ?>" id="<?php echo $v3_id ?>">
+<tr class="bugnote" id="c<?php echo $v3_id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
 		<?php

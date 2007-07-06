@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.88 2007-05-09 20:07:16 prichards Exp $
+	# $Id: string_api.php,v 1.89 2007-07-06 21:15:17 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -564,7 +564,7 @@
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
-		return 'view.php?id=' . $p_bug_id . '#'. $p_bugnote_id;
+		return 'view.php?id=' . $p_bug_id . '#c'. $p_bugnote_id;
 	}
 
 	# --------------------
