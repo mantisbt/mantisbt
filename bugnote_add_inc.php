@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.31 2007-07-06 21:33:03 giallu Exp $
+	# $Id: bugnote_add_inc.php,v 1.32 2007-07-06 22:22:16 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -29,7 +29,7 @@
 <?php } ?>
 
 <div id="bugnote_add_open">
-<form name=bugnoteadd method="post" action="bugnote_add.php">
+<form name="bugnoteadd" method="post" action="bugnote_add.php">
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 <table class="width100" cellspacing="1">
 <tr>
