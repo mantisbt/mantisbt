@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.79 2007-07-06 21:33:04 giallu Exp $
+	# $Id: file_api.php,v 1.80 2007-07-06 22:29:53 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -198,7 +198,7 @@
                                 	$c_id = number_format( $v_id );
 					$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
-					echo "<script language='JavaScript'>
+					echo "<script type=\"text/javascript\" language=\"JavaScript\">
 <!--
 function swap_content( span ) {
 displayType = ( document.getElementById( span ).style.display == 'none' ) ? 'block' : 'none';
