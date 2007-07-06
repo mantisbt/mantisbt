@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.15 2007-07-03 13:07:43 zakman Exp $
+	# $Id: my_view_page.php,v 1.16 2007-07-06 07:27:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,6 +52,8 @@
 <table class="hide" border="0" cellspacing="3" cellpadding="0">
 
 <?php
+	$t_status_legend_position = config_get( 'status_legend_position' );
+
 	if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 		echo '<tr>';
 		echo '<td colspan="2">';
