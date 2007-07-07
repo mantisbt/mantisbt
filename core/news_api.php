@@ -1,19 +1,20 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.23 2005-07-22 15:34:03 thraxisp Exp $
+	# $Id: news_api.php,v 1.24 2007-07-07 02:48:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	### News API ###
 
 	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'current_user_api.php' );
+	require_once( $t_core_path . 'current_user_api.php' );
+	require_once( $t_core_path . 'twitter_api.php' );
 
 	# --------------------
 	# Add a news item
@@ -46,6 +47,10 @@
 				  ( '$c_project_id', '$c_poster_id', " . db_now() . "," . db_now() .",
 				    '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
 		db_query( $query );
+
+		if ( $c_view_state == VS_PUBLIC ) {
+			twitter_update( $c_headline );
+		}
 
 		# db_query() errors on failure so:
 		return db_insert_id();
