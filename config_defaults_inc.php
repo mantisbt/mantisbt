@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.343 2007-07-03 13:07:43 zakman Exp $
+	# $Id: config_defaults_inc.php,v 1.344 2007-07-08 21:27:42 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -71,7 +71,9 @@
 			$t_port = '';
 		}
 
-		if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+		if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { // Support ProxyPass
+			$t_host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+		} else if ( isset( $_SERVER['HTTP_HOST'] ) ) {
 			$t_host = $_SERVER['HTTP_HOST'];
 		} else if ( isset( $_SERVER['SERVER_NAME'] ) ) {
 			$t_host = $_SERVER['SERVER_NAME'] . $t_port;
