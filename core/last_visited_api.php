@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: last_visited_api.php,v 1.1 2006-08-12 08:04:49 vboctor Exp $
+	# $Id: last_visited_api.php,v 1.2 2007-07-09 22:41:22 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,8 +14,18 @@
 	require_once( $t_core_dir . 'tokens_api.php' );
 
 	#---------------------------------
+	# Determine if last visited feature is enabled
+	function last_visited_enabled() {
+		return !( OFF == config_get( 'recently_visited' ) || current_user_is_anonymous() );
+	}
+
+	#---------------------------------
 	# This method should be called from view, update, print pages for issues, mantisconnect.
 	function last_visited_issue( $p_issue_id, $p_user_id = null ) {
+		if ( !last_visited_enabled() ) {
+			return;
+		}
+
 		$c_issue_id = db_prepare_int( $p_issue_id );
 
 		$t_value = token_get_value_by_type( TOKEN_LAST_VISITED, $p_user_id );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.168 2007-07-06 22:19:34 giallu Exp $
+	# $Id: print_api.php,v 1.169 2007-07-09 22:41:23 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1541,7 +1541,7 @@
 	# --------------------
 	# Prints the recently visited issues.
 	function print_recently_visited() {
-		if ( OFF == config_get( 'recently_visited' ) ) {
+		if ( !last_visited_enabled() ) {
 			return;
 		}
 
