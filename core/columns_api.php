@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2005  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.18 2007-04-04 06:45:22 vboctor Exp $
+	# $Id: columns_api.php,v 1.19 2007-07-10 07:15:05 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -534,6 +534,16 @@
 		echo '<td class="center">';
 		print_formatted_severity_string( $p_row['status'], $p_row['severity'] );
 		echo '</td>';
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_eta( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+			echo '<td class="center">', get_enum_element( 'eta', $p_row['eta'] ), '</td>';
+		} else {
+			echo get_enum_element( 'eta', $p_row['eta'] );
+		}
 	}
 
 	# --------------------
