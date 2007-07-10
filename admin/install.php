@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.32 2007-06-09 15:00:02 vboctor Exp $
+	# $Id: install.php,v 1.33 2007-07-10 07:04:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -422,9 +422,9 @@ if ( 1 == $t_install_state ) {
 			}
 
 			if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
-				echo '<option value="odbc_db2" selected="selected">db2/400 (experimental)</option>';
+				echo '<option value="db2" selected="selected">db2/400 (experimental)</option>';
 			} else {
-				echo '<option value="odbc_db2">db2/400 (experimental)</option>';
+				echo '<option value="db2">db2/400 (experimental)</option>';
 			}
 		?>
 		</select>
@@ -534,11 +534,11 @@ if ( 3 == $t_install_state ) {
 			if ( $rs->EOF ) {
 				$t_result = false;
 				echo '<b>Failed to set schema: ', $g_db->errorMsg();
+			} else {
+				$t_result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			}
-		} else {
-			$t_result = &$g_db->execute('set schema ' . $f_db_schema);
 		}
-	
+
 		$g_db->Close();
 
 	if ( $t_result == true ) {
