@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.24 2007-07-07 02:48:17 vboctor Exp $
+	# $Id: news_api.php,v 1.25 2007-07-10 07:32:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -48,12 +48,11 @@
 				    '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
 		db_query( $query );
 
-		if ( $c_view_state == VS_PUBLIC ) {
-			twitter_update( $c_headline );
-		}
+		$t_news_id = db_insert_id();
+ 
+		twitter_news( $t_news_id );
 
-		# db_query() errors on failure so:
-		return db_insert_id();
+		return $t_news_id;
 	}
 	# --------------------
 	# Delete the news entry

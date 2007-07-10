@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: twitter_api.php,v 1.3 2007-07-04 06:09:28 vboctor Exp $
+	# $Id: twitter_api.php,v 1.4 2007-07-10 07:32:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -77,6 +77,32 @@
 		}
 
 		return twitter_update( $t_message );
+	}
+	
+	# --------------------
+	# Posts a twitter update when a news entry is submitted.
+	# @param $p_news_id The newly posted news id.
+	function twitter_news( $p_news_id ) {
+		if ( !twitter_enabled() ) {
+			return true;
+		}
+
+		$t_news_view_state = news_get_field( $p_news_id, 'view_state' );
+		if ( VS_PUBLIC != $t_news_view_state ) {
+			return true;
+		}
+
+		$t_news_project_id = news_get_field( $p_news_id, 'project_id' );
+		if ( $t_news_project_id != ALL_PROJECTS ) {
+			$t_project_view_state = project_get_field( $t_news_project_id, 'view_state' );
+			if ( VS_PUBLIC != $t_project_view_state ) {
+				return true;
+			}
+		}
+
+		$t_news_headline = news_get_field( $p_news_id, 'headline' );
+
+		return twitter_update( $t_news_headline );
 	}
 
 	# --------------------
