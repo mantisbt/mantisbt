@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.50 2007-03-03 15:00:43 prichards Exp $
+	# $Id: error_api.php,v 1.51 2007-07-11 22:21:32 prichards Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -104,9 +104,13 @@
 			}
 
 			# don't send the page header information if it has already been sent
-			if ( $g_error_send_page_header ) {
+			if ( $g_error_send_page_header ) {			
 				html_page_top1();
-				html_page_top2();
+				if ( $p_error != ERROR_DB_QUERY_FAILED ) {
+					html_page_top2();
+				} else {
+					html_page_top2a();
+				}
 			}
 
 			PRINT '<br /><div align="center"><table class="width50" cellspacing="1">';
@@ -139,7 +143,12 @@
 				PRINT '</div>';
 			}
 
-			html_page_bottom1();
+			if ( $p_error != ERROR_DB_QUERY_FAILED ) {
+				html_page_bottom1();
+			} else {
+				html_body_end();
+				html_end();
+			}
 			exit();
 		} else if ( 'inline' == $t_method ) {
 			PRINT "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
