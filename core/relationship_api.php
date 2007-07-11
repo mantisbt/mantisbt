@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.41 2007-07-06 22:19:34 giallu Exp $
+	# $Id: relationship_api.php,v 1.42 2007-07-11 21:13:25 giallu Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -619,7 +619,7 @@
 
 		if ( !is_blank( $t_summary ) ) {
 			if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-				$t_summary .= '<tr class="row-2"><td colspan=' . (5 + $t_show_project) . '><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+				$t_summary .= '<tr class="row-2"><td colspan="' . (5 + $t_show_project) . '"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 			}
 			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}

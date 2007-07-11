@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.19 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: manage_config_workflow_page.php,v 1.20 2007-07-11 21:13:24 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -254,9 +254,9 @@
 	function access_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=2>'
+		echo '<tr><td class="form-title" colspan="2">'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
-		echo '<tr><td class="form-title" colspan=2>' . lang_get( 'access_change' ) . '</td></tr>';
+		echo '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>';
 	}
 
 	function access_row( ) {
