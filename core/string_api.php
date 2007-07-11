@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.89 2007-07-06 21:15:17 giallu Exp $
+	# $Id: string_api.php,v 1.90 2007-07-11 21:53:49 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -50,7 +50,7 @@
 	# Prepare a string to be printed without being broken into multiple lines
 	function string_no_break( $p_string ) {
 		if ( strpos( $p_string, ' ' ) !== false ) {
-			return "<nobr>$p_string</nobr>";
+			return '<span class="nowrap">' . $p_string . "</span>";
 		} else {
 			return $p_string;
 		}
