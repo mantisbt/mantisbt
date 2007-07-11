@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.98 2007-04-14 03:00:28 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.99 2007-07-11 17:03:43 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -142,8 +142,8 @@
 
 
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="6">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="6"></td>
 </tr>
 
 
@@ -302,8 +302,8 @@
 */ ?>
 
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="6">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="6"></td>
 </tr>
 
 
@@ -340,8 +340,8 @@
 </tr>
 
 
-<tr>
-	<td class="spacer" colspan="6">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="6">&nbsp;</td>
 </tr>
 
 
@@ -372,8 +372,8 @@
 
 <?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="6">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="6"></td>
 </tr>
 <?php } # custom fields found ?>
 

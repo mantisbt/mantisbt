@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.168 2007-07-04 03:38:17 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.169 2007-07-11 17:03:51 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -117,8 +117,8 @@
 </tr>
 
 <?php # -- Spacer row -- ?>
-<tr>
-	<td class="spacer" colspan="<?php echo $col_count; ?>"> &nbsp; </td>
+<tr class="spacer">
+	<td colspan="<?php echo $col_count; ?>"></td>
 </tr>
 <?php
 	function write_bug_rows ( $p_rows )

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.86 2007-06-29 17:44:51 giallu Exp $
+	# $Id: bug_view_page.php,v 1.87 2007-07-11 17:03:47 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -187,7 +187,7 @@
 
 
 <!-- spacer -->
-<tr height="5" class="spacer">
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 
@@ -304,7 +304,7 @@
 
 
 <!-- spacer -->
-<tr height="5" class="spacer">
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 
@@ -343,7 +343,7 @@
 
 
 <!-- spacer -->
-<tr height="5" class="spacer">
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 
@@ -373,7 +373,7 @@
 
 <?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
-<tr height="5" class="spacer">
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 <?php } # custom fields found ?>

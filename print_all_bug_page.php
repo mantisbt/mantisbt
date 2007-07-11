@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.88 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.89 2007-07-11 17:03:48 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -184,8 +184,8 @@
 		}
 	?>
 </tr>
-<tr>
-	<td class="spacer" colspan="9">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="9"></td>
 </tr>
 <?php
 	for( $i=0; $i < $row_count; $i++ ) {

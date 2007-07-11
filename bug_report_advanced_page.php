@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.63 2007-06-23 04:25:41 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.64 2007-07-11 17:03:21 giallu Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -201,8 +201,8 @@
 
 
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2"></td>
 </tr>
 
 
@@ -300,8 +300,8 @@
 
 
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2"></td>
 </tr>
 
 
@@ -340,8 +340,8 @@
 <!-- Handler (if permissions allow) -->
 <?php if ( access_has_project_level( config_get( 'update_bug_assign_threshold' ) ) ) { ?>
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2"></td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -358,8 +358,8 @@
 
 
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2"></td>
 </tr>
 
 
@@ -407,8 +407,8 @@
 </tr>
 
 
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2"></td>
 </tr>
 
 
@@ -438,8 +438,8 @@
 
 <?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
-<tr>
-	<td class="spacer" colspan="2">&nbsp;</td>
+<tr class="spacer">
+	<td colspan="2">&nbsp;</td>
 </tr>
 <?php } # custom fields found ?>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.15 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: bug_view_inc.php,v 1.16 2007-07-11 17:03:46 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -92,7 +92,7 @@
 
 
 <!-- spacer -->
-<tr height="5" class="spacer">
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 
@@ -186,8 +186,8 @@
 </tr>
 
 
-<!-- spacer -->
-<tr height="5" class="spacer">
+<!-- spacer giallu-->
+<tr class="spacer">
 	<td colspan="6"></td>
 </tr>
 
