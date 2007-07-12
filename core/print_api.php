@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.170 2007-07-12 08:13:02 giallu Exp $
+	# $Id: print_api.php,v 1.171 2007-07-12 22:25:34 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -337,7 +337,7 @@
 		# only show VS_PRIVATE posts to configured threshold and above
 		if ( ( VS_PRIVATE == $row['view_state'] ) &&
 			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-			continue;
+			return;
 		}
 
 		print_news_entry_from_row( $row );
