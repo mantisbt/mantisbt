@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.130 2007-06-16 23:04:33 vboctor Exp $
+	# $Id: email_api.php,v 1.131 2007-07-12 06:27:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1038,7 +1038,18 @@
 		# format bugnotes
 		foreach ( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
 			$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
-			$t_string = ' '. user_get_name( $t_bugnote->reporter_id ) . ' - ' . $t_last_modified . ' ';
+
+			$t_formatted_bugnote_id = bugnote_format_id( $t_bugnote->id );
+			$t_bugnote_link = string_process_bugnote_link ( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
+
+			$t_time_tracking_minutes = bugnote_get_field ( $t_bugnote->id, 'time_tracking' );
+			if ( $t_time_tracking_minutes > 0 ) {
+				$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_time_tracking_minutes ) . "\n";
+			} else {
+				$t_time_tracking = '';
+			}
+
+			$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . ' - ' . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
 
 			$t_message .= $t_email_separator2 . " \n";
 			$t_message .= $t_string . " \n";

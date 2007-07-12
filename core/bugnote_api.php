@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.44 2007-04-22 07:45:33 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.45 2007-07-12 06:27:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -260,10 +260,17 @@
 		$t_private_bugnote_threshold	= config_get( 'private_bugnote_threshold' );
 
 		$t_private_bugnote_visible = access_compare_level( $p_user_access_level, config_get( 'private_bugnote_threshold' ) );
+		$t_time_tracking_visible = access_compare_level( $p_user_access_level, config_get( 'time_tracking_view_threshold' ) );
 
 		$t_bugnotes = array();
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
 			if ( $t_private_bugnote_visible || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
+				# If the access level specified is not enough to see time tracking information
+				# then reset it to 0.
+				if ( !$t_time_tracking_visible ) {
+					$t_bugnote->time_tracking = 0;
+				}
+
 				$t_bugnotes[$t_note_index] = $t_bugnote;
 			}
 		}
