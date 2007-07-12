@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.80 2007-07-06 22:29:53 giallu Exp $
+	# $Id: file_api.php,v 1.81 2007-07-12 08:13:02 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -255,14 +255,15 @@ document.getElementById( span ).style.display = displayType;
 					}
 
 					$t_preview_style = 'style="' . $t_preview_style . '"';
+					$t_title = file_get_field( $v_id, 'title' ); 
 
-					PRINT "<br />$t_href_start<img $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
+					PRINT "\n<br />$t_href_start<img alt=\"$t_title\" $t_preview_style src=\"file_download.php?file_id=$v_id&amp;type=bug\" />$t_href_end";
 					$image_previewed = true;
 				}
 			}
 
 			if ( $i != ( $num_files - 1 ) ) {
-				PRINT '<br />';
+				PRINT "<br />\n";
 			}
 		}
 	}

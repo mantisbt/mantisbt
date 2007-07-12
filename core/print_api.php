@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.169 2007-07-09 22:41:23 giallu Exp $
+	# $Id: print_api.php,v 1.170 2007-07-12 08:13:02 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1528,7 +1528,8 @@
 		}
 
 		$t_name = $t_file_type_icons[$ext];
-		PRINT '<img src="' . config_get( 'path' ) . 'images/fileicons/'. $t_name . '" width="16" height="16" border="0" />';
+		PRINT '<img src="' . config_get( 'path' ) . 'images/fileicons/'. $t_name .
+			'" alt="' . $ext . ' file icon" width="16" height="16" border="0" />';
 	}
 
 	# --------------------
