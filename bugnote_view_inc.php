@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.41 2007-07-11 17:03:48 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.42 2007-07-13 16:47:47 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -138,7 +138,7 @@
 			echo '<span class="small">'.lang_get( 'edited_on').' '.$v3_last_modified.'</span><br />';
 		}
 		?>
-		<br /><span class="small">
+		<br /><div class="small">
 		<?php
 			# bug must be open to be editable
 			if ( !bug_is_readonly( $f_bug_id ) ) {
@@ -175,7 +175,7 @@
 				}
 			}
 		?>
-		</span>
+		</div>
 	</td>
 	<td class="<?php echo $t_bugnote_note_css ?>">
 		<?php
