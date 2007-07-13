@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.46 2007-06-09 16:19:57 vboctor Exp $
+	# $Id: summary_api.php,v 1.47 2007-07-13 22:22:26 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -656,6 +656,7 @@
 				PRINT '<td>';
 				printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
 				PRINT '</td>';
+				PRINT '</tr>';
 			}
 		}
 	}
