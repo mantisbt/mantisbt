@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.31 2004-12-15 21:40:44 marcelloscata Exp $
+	# $Id: proj_doc_add_page.php,v 1.32 2007-07-13 07:58:34 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -54,7 +54,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="7" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="7"></textarea>
 	</td>
 </tr>
 <tr class="row-1">

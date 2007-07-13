@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.11 2005-08-10 14:20:15 thraxisp Exp $
+	# $Id: manage_proj_create_page.php,v 1.12 2007-07-13 07:58:30 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -90,7 +90,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="5" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="5"></textarea>
 	</td>
 </tr>
 <tr>

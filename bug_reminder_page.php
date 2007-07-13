@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.22 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bug_reminder_page.php,v 1.23 2007-07-13 07:58:26 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,7 +63,7 @@
 		</select>
 	</td>
 	<td class="center">
-		<textarea name="body" cols="65" rows="10" wrap="virtual"></textarea>
+		<textarea name="body" cols="65" rows="10"></textarea>
 	</td>
 </tr>
 <tr>

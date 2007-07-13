@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.53 2007-01-04 10:07:44 davidnewcomb Exp $
+	# $Id: bugnote_edit_page.php,v 1.54 2007-07-13 07:58:29 giallu Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -86,7 +86,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea cols="80" rows="10" name="bugnote_text" wrap="virtual"><?php echo $t_bugnote_text ?></textarea>
+		<textarea cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <?php if ( config_get('time_tracking_enabled') ) { ?>

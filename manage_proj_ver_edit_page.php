@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.29 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.30 2007-07-13 07:58:32 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -53,7 +53,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_attribute( $t_version->description ) ?></textarea>
+		<textarea name="description" cols="60" rows="5"><?php echo string_attribute( $t_version->description ) ?></textarea>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>

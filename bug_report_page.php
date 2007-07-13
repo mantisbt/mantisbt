@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.63 2007-07-11 17:03:32 giallu Exp $
+	# $Id: bug_report_page.php,v 1.64 2007-07-13 07:58:27 giallu Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -234,7 +234,7 @@
 		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
 	</td>
 	<td>
-		<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10" wrap="virtual"><?php echo $f_description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="description" cols="80" rows="10"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
 
@@ -245,7 +245,7 @@
 		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
 	</td>
 	<td>
-		<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10" wrap="virtual"><?php echo $f_additional_info ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="additional_info" cols="80" rows="10"><?php echo $f_additional_info ?></textarea>
 	</td>
 </tr>
 

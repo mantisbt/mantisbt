@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_add_note_inc.php,v 1.2 2007-04-14 03:00:28 vboctor Exp $
+	# $Id: bug_actiongroup_add_note_inc.php,v 1.3 2007-07-13 07:58:25 giallu Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -26,7 +26,7 @@
 	 * A row has two columns.         	 
 	 */
 	function action_add_note_print_fields() {
-		echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'add_bugnote_title' ), '</td><td><textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea></td></tr>';
+		echo '<tr class="row-1" valign="top"><td class="category">', lang_get( 'add_bugnote_title' ), '</td><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 	?>
 	<!-- View Status -->
 	<tr class="row-2">

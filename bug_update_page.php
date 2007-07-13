@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.99 2007-07-11 17:03:43 giallu Exp $
+	# $Id: bug_update_page.php,v 1.100 2007-07-13 07:58:28 giallu Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -324,7 +324,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="description"><?php echo $t_bug->description ?></textarea>
 	</td>
 </tr>
 
@@ -335,7 +335,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> cols="80" rows="10" name="additional_information"><?php echo $t_bug->additional_information ?></textarea>
 	</td>
 </tr>
 
@@ -383,7 +383,7 @@
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea <?php echo helper_get_tab_index() ?> name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea <?php echo helper_get_tab_index() ?> name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 

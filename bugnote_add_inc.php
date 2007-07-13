@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.32 2007-07-06 22:22:16 giallu Exp $
+	# $Id: bugnote_add_inc.php,v 1.33 2007-07-13 07:58:29 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -46,7 +46,7 @@
 		<?php echo lang_get( 'bugnote' ) ?>
 	</td>
 	<td width="75%">
-		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>

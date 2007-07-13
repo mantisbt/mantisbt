@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.27 2007-01-04 10:07:44 davidnewcomb Exp $
+	# $Id: bug_change_status_page.php,v 1.28 2007-07-13 07:58:26 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -260,7 +260,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 	<td class="center">
-		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 	</td>
 </tr>
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>

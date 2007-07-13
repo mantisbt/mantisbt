@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_edit_page.php,v 1.40 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: news_edit_page.php,v 1.41 2007-07-13 07:58:33 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -67,7 +67,7 @@
 		<span class="required">*</span><?php echo lang_get( 'body' ) ?>
 	</td>
 	<td>
-		<textarea name="body" cols="60" rows="10" wrap="virtual"><?php echo $v_body ?></textarea>
+		<textarea name="body" cols="60" rows="10"><?php echo $v_body ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">

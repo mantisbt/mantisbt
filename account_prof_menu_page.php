@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.37 2005-03-21 12:44:20 vboctor Exp $
+	# $Id: account_prof_menu_page.php,v 1.38 2007-07-13 07:58:25 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -105,7 +105,7 @@
 		<?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="8" wrap="virtual"></textarea>
+		<textarea name="description" cols="60" rows="8"></textarea>
 	</td>
 </tr>
 <tr>

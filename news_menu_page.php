@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_menu_page.php,v 1.33 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: news_menu_page.php,v 1.34 2007-07-13 07:58:33 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -39,7 +39,7 @@
 		<span class="required">*</span><?php echo lang_get( 'body' ) ?>
 	</td>
 	<td>
-		<textarea name="body" cols="60" rows="8" wrap="virtual"></textarea>
+		<textarea name="body" cols="60" rows="8"></textarea>
 	</td>
 </tr>
 <tr class="row-2">

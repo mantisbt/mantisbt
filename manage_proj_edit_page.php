@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.99 2007-07-03 03:57:06 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.100 2007-07-13 07:58:31 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -109,7 +109,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_textarea( $row['description'] ) ?></textarea>
+		<textarea name="description" cols="60" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea>
 	</td>
 </tr>
 
