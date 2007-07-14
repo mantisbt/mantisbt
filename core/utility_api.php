@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.20 2005-07-17 21:56:21 thraxisp Exp $
+	# $Id: utility_api.php,v 1.21 2007-07-14 16:13:54 giallu Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -199,16 +199,16 @@
 	# It doesn't use gd_info() so it works with PHP < 4.3.0 as well
 	function get_gd_version()
 	{
-    $t_GDfuncList = get_extension_funcs('gd');
-    if( ! is_array( $t_GDfuncList ) ) {
-    	return 0;
-    } else {
-	    if( in_array('imagegd2',$t_GDfuncList) ) {
-	    	return 2;
-	   	} else {
-	   		return 1;
-	   	}
-	  }
+		$t_GDfuncList = get_extension_funcs('gd');
+		if( ! is_array( $t_GDfuncList ) ) {
+			return 0;
+		} else {
+			if( in_array('imagegd2',$t_GDfuncList) ) {
+				return 2;
+			} else {
+				return 1;
+			}
+		}
 	}
 	
 	# ---------------------
