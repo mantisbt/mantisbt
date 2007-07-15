@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.43 2005-05-12 16:04:09 thraxisp Exp $
+	# $Id: access_api.php,v 1.44 2007-07-15 20:54:52 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,18 +31,35 @@
 
 		if ( !auth_is_user_authenticated() ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
-				if( !isset( $_SERVER['REQUEST_URI'] ) ) {
-					if( !isset( $_SERVER['QUERY_STRING'] ) ) $_SERVER['QUERY_STRING'] = '';
-					$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'] . '?' . $_SERVER['QUERY_STRING'];
+				$t_return_page = $_SERVER['PHP_SELF'];
+				if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+					$t_return_page .=  '?' . $_SERVER['QUERY_STRING'];
 				}
-				$t_return_page = string_url( $_SERVER['REQUEST_URI'] );
+				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 				print_header_redirect( 'login_page.php?return=' . $t_return_page );
 			}
 		} else {
-			echo '<center>';
-			echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
-			print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
-			echo '</center>';
+			if( auth_get_current_user_id() == user_get_id_by_name( config_get_global( 'anonymous_account') ) ) {
+				if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
+					$t_return_page = $_SERVER['PHP_SELF'];
+					if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+						$t_return_page .=  '?' . $_SERVER['QUERY_STRING'];
+					}
+					$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
+					echo '<center>';
+					echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
+					print_bracket_link( 'login_page.php?return=' . $t_return_page, lang_get( 'click_to_login' ) );
+					echo '<p></p>';
+					print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+					
+					echo '</center>';
+				}
+			} else {
+				echo '<center>';
+				echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
+				print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+				echo '</center>';
+			}
 		}
 		exit;
 	}
