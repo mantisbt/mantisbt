@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.26 2007-06-09 16:11:49 vboctor Exp $
+	# $Id: check.php,v 1.27 2007-07-15 21:07:12 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -251,6 +251,14 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 				( OFF == config_get_global( 'allow_signup' ) ) || ( ON == config_get_global( 'send_reset_password' ) ) );
 		print_test_row( 'check language configuration: fallback_language is not \'auto\'',
 				'auto' <> config_get_global( 'fallback_language' ) );
+		print_test_row( 'check configuration: allow_anonymous_login = ON requires anonymous_account to be set',
+				( OFF == config_get_global( 'allow_anonymous_login' ) ) || ( strlen( config_get_global( 'anonymous_account') ) > 0 ) );
+		$t_anon_user = false;
+		print_test_row( 'check configuration: anonymous_account is a valid username if set',
+				( (strlen( config_get_global( 'anonymous_account') ) > 0 ) ? ( ($t_anon_user = user_get_id_by_name( config_get_global( 'anonymous_account') ) ) !== false ) : TRUE ) );
+		print_test_row( 'check configuration: anonymous_account should not be an administrator',
+				( $t_anon_user ? ( !access_compare_level( user_get_field( $t_anon_user, 'access_level' ), ADMINISTRATOR) ) : TRUE ) );
+
 
 		print_test_row( '$g_bug_link_tag is not empty ("' . config_get_global( 'bug_link_tag' ) . '")',
 				'' <> config_get_global( 'bug_link_tag' ) );
