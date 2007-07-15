@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.47 2007-07-13 22:22:26 giallu Exp $
+	# $Id: summary_api.php,v 1.48 2007-07-15 07:20:49 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -344,14 +344,14 @@
 			$t_closed_val = CLOSED;
 
 			while ( $row2 = db_fetch_array( $result2 ) ) {
-                $t_bugs_total += $row2['bugcount'];
-                if ( $t_closed_val <= $row2['status'] ) {
-                    $t_bugs_closed += $row2['bugcount'];
-                } else if ( $t_resolved_val <= $row2['status'] ) {
-                    $t_bugs_resolved += $row2['bugcount'];
-                } else {
-                    $t_bugs_open += $row2['bugcount'];
-                }
+				$t_bugs_total += $row2['bugcount'];
+				if ( $t_closed_val <= $row2['status'] ) {
+					$t_bugs_closed += $row2['bugcount'];
+				} else if ( $t_resolved_val <= $row2['status'] ) {
+					$t_bugs_resolved += $row2['bugcount'];
+			   	} else {
+					$t_bugs_open += $row2['bugcount'];
+			    	}
 			}
 
 			if ( 0 < $t_bugs_total ) {
@@ -440,19 +440,19 @@
 				$t_bugs_total = 0;
 			}
 
-            $t_bugs_total += $row['bugcount'];
-            if ( $t_closed_val <= $row['status'] ) {
-                $t_bugs_closed += $row['bugcount'];
-            } else if ( $t_resolved_val <= $row['status'] ) {
-                $t_bugs_resolved += $row['bugcount'];
-            } else {
-                $t_bugs_open += $row['bugcount'];
-            }
+			$t_bugs_total += $row['bugcount'];
+			if ( $t_closed_val <= $row['status'] ) {
+				$t_bugs_closed += $row['bugcount'];
+			} else if ( $t_resolved_val <= $row['status'] ) {
+				$t_bugs_resolved += $row['bugcount'];
+			} else {
+				$t_bugs_open += $row['bugcount'];
+			}
 
 			$last_category = $v_category;
 			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
-                $last_project = $v_project_id;
-            }
+				$last_project = $v_project_id;
+			}
 		}
 
 		if ( 0 < $t_bugs_total ) {
@@ -510,25 +510,25 @@
 
 			while ( $row = db_fetch_array( $result ) ) {
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
-                if ( $t_closed_val <= $v_status ) {
-                    if ( isset( $p_cache[ $v_project_id ][ 'closed'   ] ) ) {
-                        $p_cache[ $v_project_id ][ 'closed'   ]  += $v_bugcount;
-                    } else {
-                        $p_cache[ $v_project_id ][ 'closed'   ]  = $v_bugcount;
-                    }
-                } else if ( $t_resolved_val <= $v_status ) {
-                    if ( isset( $p_cache[ $v_project_id ][ 'resolved' ] ) ) {
-                        $p_cache[ $v_project_id ][ 'resolved' ]  += $v_bugcount;
-                    } else {
-                        $p_cache[ $v_project_id ][ 'resolved' ]  = $v_bugcount;
-                    }
-                } else {
-                    if ( isset( $p_cache[ $v_project_id ][ 'open'     ] ) ) {
-                        $p_cache[ $v_project_id ][ 'open'     ]  += $v_bugcount;
-                    } else {
-                        $p_cache[ $v_project_id ][ 'open'     ]  = $v_bugcount;
-                    }
-                }
+				if ( $t_closed_val <= $v_status ) {
+					if ( isset( $p_cache[ $v_project_id ][ 'closed'   ] ) ) {
+						$p_cache[ $v_project_id ][ 'closed'   ]  += $v_bugcount;
+					} else {
+						$p_cache[ $v_project_id ][ 'closed'   ]  = $v_bugcount;
+					}
+				} else if ( $t_resolved_val <= $v_status ) {
+					if ( isset( $p_cache[ $v_project_id ][ 'resolved' ] ) ) {
+						$p_cache[ $v_project_id ][ 'resolved' ]  += $v_bugcount;
+					} else {
+						$p_cache[ $v_project_id ][ 'resolved' ]  = $v_bugcount;
+					}
+				} else {
+					if ( isset( $p_cache[ $v_project_id ][ 'open'     ] ) ) {
+						$p_cache[ $v_project_id ][ 'open'     ]  += $v_bugcount;
+					} else {
+						$p_cache[ $v_project_id ][ 'open'     ]  = $v_bugcount;
+					}
+				}
 			}
 		}
 
@@ -600,7 +600,7 @@
 			$t_arr = db_fetch_array( $result );
 		}
 
-        $t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
+		$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 		$t_row_count = 0;
 		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
 		foreach( $t_handler_res_arr as $t_handler_id => $t_arr2 ) {
