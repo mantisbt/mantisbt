@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_graph.php,v 1.4 2005-07-25 16:34:10 thraxisp Exp $
+	# $Id: bug_relationship_graph.php,v 1.5 2007-07-15 22:16:59 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -68,7 +68,12 @@
 <tr>
 	<!-- Title -->
 	<td class="form-title">
-		<?php echo lang_get( 'viewing_bug_relationship_graph_title' ) ?>
+		<?php 
+		if ( $t_graph_relation ) 
+			echo lang_get( 'viewing_bug_relationship_graph_title' );
+		else
+			echo lang_get( 'viewing_bug_dependancy_graph_title' );
+		?>
 	</td>
 	<!-- Links -->
 	<td class="right">

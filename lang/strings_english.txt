@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.301 $
-	# $Author: vboctor $
-	# $Date: 2007-07-04 05:36:08 $
+	# $Revision: 1.302 $
+	# $Author: prichards $
+	# $Date: 2007-07-15 22:16:59 $
 	#
-	# $Id: strings_english.txt,v 1.301 2007-07-04 05:36:08 vboctor Exp $
+	# $Id: strings_english.txt,v 1.302 2007-07-15 22:16:59 prichards Exp $
 	###########################################################################
 
 ?>
@@ -1256,6 +1256,7 @@ $s_bug_created_from = "Issue generated from";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_viewing_bug_dependency_graph_title = "Dependency Graph";
 $s_relation_graph = "Relation Graph";
 $s_dependency_graph = "Dependency Graph";
 $s_vertical = "Vertical";
