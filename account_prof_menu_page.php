@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.38 2007-07-13 07:58:25 giallu Exp $
+	# $Id: account_prof_menu_page.php,v 1.39 2007-07-15 19:59:33 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -122,6 +122,10 @@
 <?php # Add Profile Form END ?>
 
 <?php # Edit or Delete Profile Form BEGIN ?>
+<?php 
+	$t_profiles = profile_get_all_for_user( $t_user_id );
+	if( $t_profiles ) { 
+?>
 <br />
 <div align="center">
 <form method="post" action="account_prof_edit_page.php">
@@ -150,7 +154,7 @@
 	</td>
 	<td width="75%">
 		<select name="profile_id">
-			<?php print_profile_option_list( $t_user_id ) ?>
+			<?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
 		</select>
 	</td>
 </tr>
@@ -162,6 +166,7 @@
 </table>
 </form>
 </div>
+<?php } ?>
 <?php # Edit or Delete Profile Form END ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

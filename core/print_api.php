@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.171 2007-07-12 22:25:34 prichards Exp $
+	# $Id: print_api.php,v 1.172 2007-07-15 19:59:34 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -503,45 +503,48 @@
 		
 	# --------------------
 	# prints the profiles given the user id
-	function print_profile_option_list( $p_user_id, $p_select_id='' ) {
+	function print_profile_option_list( $p_user_id, $p_select_id='', $p_profiles = null ) {
 		if ( '' === $p_select_id ) {
 			$p_select_id = profile_get_default( $p_user_id );
 		}
-		$t_profiles = profile_get_all_for_user( $p_user_id );
-
+		if ( $p_profiles != null ) {
+			$t_profiles = $p_profiles;
+		} else {
+			$t_profiles = profile_get_all_for_user( $p_user_id );
+		}
+		print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
+	}
+	
+	# --------------------
+	# prints the profiles used in a certain project
+	function print_profile_option_list_for_project( $p_project_id, $p_select_id='', $p_profiles = null) {
+		if ( '' === $p_select_id ) {
+			$p_select_id = profile_get_default( $p_user_id );
+		}
+		if ( $p_profiles != null ) {
+			$t_profiles = $p_profiles;
+		} else {
+			$t_profiles = profile_get_all_for_project( $p_project_id );
+		}
+		print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
+	}
+	
+	# --------------------
+	# print the profile option list from profiles array
+	function print_profile_option_list_from_profiles ( $p_profiles, $p_select_id) {
 		echo '<option value=""></option>';
-		foreach ( $t_profiles as $t_profile ) {
+		foreach ( $p_profiles as $t_profile ) {
 			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 			$v_platform	= string_display( $v_platform );
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
-
+	
 			echo '<option value="' . $v_id . '"';
 			check_selected( $p_select_id, $v_id );
 			echo '>' . $v_platform . ' ' . $v_os . ' ' . $v_os_build . '</option>';
 		}
 	}
-	# --------------------
-	# prints the profiles used in a certain project
-	function print_profile_option_list_for_project( $p_project_id, $p_select_id='') {
-		if ( '' === $p_select_id ) {
-			$p_select_id = profile_get_default( $p_user_id );
-		}
-
-		$t_profiles = profile_get_all_for_project( $p_project_id );
-
-		echo '<option value=""></option>';
-		foreach ( $t_profiles as $t_profile ) {
-			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
-			$v_platform	= string_display( $v_platform );
-			$v_os		= string_display( $v_os );
-			$v_os_build	= string_display( $v_os_build );
-
-			PRINT "<option value=\"$v_id\"";
-			check_selected( $p_select_id, $v_id );
-			PRINT ">$v_platform $v_os $v_os_build</option>";
-		}
-	}
+	
 	# --------------------
 	function print_news_project_option_list( $p_project_id ) {
 		$t_mantis_project_table = config_get( 'mantis_project_table' );
