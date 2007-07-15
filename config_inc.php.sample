@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.18 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: config_inc.php.sample,v 1.19 2007-07-15 21:56:28 prichards Exp $
 	# --------------------------------------------------------
 
 	# This sample file contains the essential files that you MUST
@@ -29,7 +29,7 @@
 
 	# set these values to match your setup
 	$g_hostname      = "localhost";
-	$g_db_username   = "root";
+	$g_db_username   = "mantisdbuser";
 	$g_db_password   = "";
 	$g_database_name = "bugtracker";
 	$g_db_type       = "mysql";
