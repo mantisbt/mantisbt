@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.121.10.1 2007-03-06 05:54:14 vboctor Exp $
+	# $Id: email_api.php,v 1.121.10.2 2007-07-16 01:43:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -678,7 +678,7 @@
 		$mail->CharSet = lang_get( 'charset', lang_get_current() );
 		$mail->Host     = config_get( 'smtp_host' );
 		$mail->From     = config_get( 'from_email' );
-		$mail->Sender   = config_get( 'return_path_email' );
+		$mail->Sender   = escapeshellcmd( config_get( 'return_path_email' ) );
 		$mail->FromName = '';
 		if ( !is_blank( config_get( 'smtp_username' ) ) ) {     # Use SMTP Authentication
 			$mail->SMTPAuth = true;
