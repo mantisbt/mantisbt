@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.302 $
-	# $Author: prichards $
-	# $Date: 2007-07-15 22:16:59 $
+	# $Revision: 1.303 $
+	# $Author: giallu $
+	# $Date: 2007-07-16 08:23:42 $
 	#
-	# $Id: strings_english.txt,v 1.302 2007-07-15 22:16:59 prichards Exp $
+	# $Id: strings_english.txt,v 1.303 2007-07-16 08:23:42 giallu Exp $
 	###########################################################################
 
 ?>
@@ -1066,6 +1066,7 @@ $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
 $s_total = 'Total';
+$s_balance = 'Balance';
 $s_time_stats = 'Time Stats For Resolved Issues (days)';
 $s_longest_open_bug = 'Longest open issue';
 $s_longest_open = 'Longest open';

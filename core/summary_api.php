@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.48 2007-07-15 07:20:49 giallu Exp $
+	# $Id: summary_api.php,v 1.49 2007-07-16 08:23:39 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -171,10 +171,12 @@
 			summary_helper_print_row( get_enum_element( $p_enum, $t_last_value), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
+
+
 	# --------------------
 	# prints the bugs submitted in the last X days (default is 1 day) for the
 	# current project
-	function summary_bug_count_by_date( $p_time_length=1 ) {
+	function summary_new_bug_count_by_date( $p_time_length=1 ) {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
 		$c_time_length = (int)$p_time_length;
@@ -193,26 +195,81 @@
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
+
+
+	# --------------------
+	# returns the number of bugs resolved in the last X days (default is 1 day) for the
+	# current project
+	function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_history_table = config_get( 'mantis_bug_history_table' );
+		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+		$c_time_length = (int)$p_time_length;
+
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
+		}
+
+		$query = "SELECT COUNT(*)
+				FROM $t_bug_table b
+				LEFT JOIN $t_bug_history_table h
+				ON b.id = h.bug_id 
+				AND h.type = " . NORMAL_TYPE ."
+				AND h.field_name = 'status' 
+				AND h.new_value = '$t_resolved'
+				WHERE b.status >= '$t_resolved' 
+				AND ".db_helper_compare_days(db_now(),"date_modified","<= '$c_time_length'")." 
+				AND $specific_where";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+
 	# --------------------
 	# This function shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	function summary_print_by_date( $p_date_array ) {
 		$arr_count = count( $p_date_array );
-		for ($i=0;$i<$arr_count;$i++) {
-			$t_enum_count = summary_bug_count_by_date( $p_date_array[$i] );
+		foreach ( $p_date_array as $t_days ) {
+			$t_new_count = summary_new_bug_count_by_date( $t_days );
+			$t_resolved_count = summary_resolved_bug_count_by_date( $t_days );
 
-			$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $p_date_array[$i] ), date( 'Y' ) );
-			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;do_filter_by_date=on&amp;start_year=' . date( 'Y', $t_start_date ) . '&amp;start_month=' . date( 'm', $t_start_date ) . '&amp;start_day=' . date( 'd', $t_start_date ) . '&amp;hide_status=">';
+			$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
+			$t_new_bugs_link = '<a class="subtle" href="' 
+				. config_get( 'bug_count_hyperlink_prefix' ) 
+				. '&amp;do_filter_by_date=on&amp;start_year=' . date( 'Y', $t_start_date ) 
+				. '&amp;start_month=' . date( 'm', $t_start_date ) 
+				. '&amp;start_day=' . date( 'd', $t_start_date ) 
+				. '&amp;hide_status=">';
+			
+			print( "<tr " . helper_alternate_class() . ">\n" );
+			print( "    <td width=\"50%\">".  $t_days . "</td>\n" );
 
-			printf( '<tr %s>', helper_alternate_class() );
-			printf( '<td width="50%%">%s</td>', $p_date_array[$i] );
-			if ( 0 < $t_enum_count ) {
-				printf( '<td class="right">%s</td>', $t_bug_link . $t_enum_count . '</a>' );
+			if ( $t_new_count > 0 ) {
+				print( "    <td class=\"right\">$t_new_bugs_link$t_new_count</a></td>\n" );
 			} else {
-				printf( '<td class="right">%s</td>', $t_enum_count );
+				print( "    <td class=\"right\">$t_new_count</td>\n" );
 			}
-			print( '</tr>' );
-		} # end for
+			print( "    <td class=\"right\">$t_resolved_count</td>\n" );
+
+			$t_balance = $t_new_count - $t_resolved_count;
+			$t_style = "";
+			if ( $t_balance > 0 ) {
+				# we are talking about bugs: a balance > 0 is "negative" for the project...
+				$t_style = " negative";
+				$t_balance = sprintf( '%+d', $t_balance ); # "+" modifier added in PHP >= 4.3.0
+			} elseif ( $t_balance < 0 ) {
+				$t_style = " positive";
+				$t_balance = sprintf( '%+d', $t_balance );
+			}
+
+			print( "\n<td class=\"right$t_style\">$t_balance</td>\n" );
+			print( "</tr>\n" );
+		} # end foreach
 	}
 	# --------------------
 	# print bug counts by assigned to each developer

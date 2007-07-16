@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.49 2006-09-20 04:31:44 vboctor Exp $
+	# $Id: summary_page.php,v 1.50 2007-07-16 08:23:38 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -239,9 +239,10 @@
 		<?php # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="5">
-				<?php echo lang_get( 'by_date' ) ?>
-			</td>
+			<td class="form-title"><?php echo lang_get( 'by_date' ); ?></td>
+			<td class="right"><?php echo lang_get( 'legend_opened' ); ?></td>
+			<td class="right"><?php echo lang_get( 'legend_resolved' ); ?></td>
+			<td class="right"><?php echo lang_get( 'balance' ); ?></td>
 		</tr>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
 		</table>

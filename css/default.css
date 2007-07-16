@@ -112,5 +112,15 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 	white-space: nowrap;
 }
 
+.positive
+{
+	color: green;
+}
+
+.negative
+{
+	color: red;
+}
+
 .progress400				{ position: relative; width: 400px; border: 1px solid #d7d7d7; margin-top: 1em; margin-bottom: 1em; padding: 1px; }
 .progress400 .bar			{ display: block; position: relative; background: #6bba70; text-align: center; font-weight: normal; color: #333; height: 2em; line-height: 2em; }
