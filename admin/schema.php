@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.17 2007-05-22 07:07:44 vboctor Exp $
+	# $Id: schema.php,v 1.18 2007-07-16 18:07:05 prichards Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -329,4 +329,5 @@ $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bug_table'), "target_
 $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bugnote_table'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_diskfile',config_get('mantis_bug_file_table'),'diskfile'));
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_user_print_pref_table' ), "print_pref C(64) NOTNULL" ) );
+$upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "field_name C(64) NOTNULL DEFAULT \" '' \"" ) );
 ?>
