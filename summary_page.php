@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.46 2005-08-15 20:55:44 thraxisp Exp $
+	# $Id: summary_page.php,v 1.46.10.1 2007-07-16 17:30:16 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 	$query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status 
         FROM $t_bug_table b LEFT JOIN $t_history_table h 
             ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value='$t_resolved'  
-            WHERE b.status >='$t_resolved' 
+            WHERE b.status >='$t_resolved' AND $specific_where
             GROUP BY b.id, b.status, b.date_submitted, b.last_updated 
             ORDER BY b.id ASC";
 	$result = db_query( $query );
