@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.206 2007-05-07 17:46:02 prichards Exp $
+	# $Id: html_api.php,v 1.207 2007-07-17 13:35:09 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -542,7 +542,7 @@
 
 				# Project Wiki
 				if ( wiki_is_enabled() ) {
-					$t_menu_options[] = '<a href="wiki.php?type=project&id=' . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
+					$t_menu_options[] = '<a href="wiki.php?type=project&amp;id=' . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
 				}
 
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
