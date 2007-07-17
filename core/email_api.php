@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.132 2007-07-16 02:04:09 thraxisp Exp $
+	# $Id: email_api.php,v 1.133 2007-07-17 20:08:01 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1060,7 +1060,7 @@
 		# format history
 		if ( array_key_exists( 'history', $p_visible_bug_data ) ) {
 			$t_message .=	lang_get( 'bug_history' ) . " \n";
-			$t_message .=	str_pad( lang_get( 'date_modified' ), 16 ) .
+			$t_message .=	str_pad( lang_get( 'date_modified' ), 17 ) .
 							str_pad( lang_get( 'username' ), 15 ) .
 							str_pad( lang_get( 'field' ), 25 ) .
 							str_pad( lang_get( 'change' ), 20 ). " \n";
@@ -1073,7 +1073,7 @@
 															$t_raw_history_item['old_value'],
 															$t_raw_history_item['new_value'] );
 
-				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 16 ) .
+				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) .
 								str_pad( $t_raw_history_item['username'], 15 ) .
 								str_pad( $t_localized_item['note'], 25 ) .
 								str_pad( $t_localized_item['change'], 20 ) . "\n";
