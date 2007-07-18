@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.26 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prefs_reset.php,v 1.27 2007-07-18 21:23:04 prichards Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -41,5 +41,5 @@
 
 	user_pref_set_default( $f_user_id );
 
-	print_header_redirect( $f_redirect_url );
+	print_header_redirect( $f_redirect_url, true, true );
 ?>
