@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.55 2005-12-05 12:17:55 vboctor Exp $
+	# $Id: set_project.php,v 1.56 2007-07-18 21:20:17 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,7 +71,7 @@
 		}
 	}
 
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( $t_redirect_url, true, true );
 ?>
 <?php html_page_top1() ?>
 <?php
