@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: permalink_page.php,v 1.3 2007-05-26 03:48:04 vboctor Exp $
+	# $Id: permalink_page.php,v 1.4 2007-07-18 21:32:22 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -16,7 +16,7 @@
 	html_page_top1();
 	html_page_top2();
 
-	$f_url = gpc_get_string( 'url' );
+	$f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 ?>
 <div align="center">
 	<p>
