@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.156 2007-07-18 21:02:05 giallu Exp $
+	# $Id: filter_api.php,v 1.157 2007-07-18 23:07:22 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2291,7 +2291,7 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'os_build'; ?>" id="os_build_filter"><?php echo lang_get( 'os_version' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top" colspan="5"">
+			<td class="small-caption" valign="top" colspan="5">
 			</td>
 			<?php if ( $t_filter_cols > 8 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
