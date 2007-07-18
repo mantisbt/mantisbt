@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_page.php,v 1.4 2005-07-23 15:09:51 thraxisp Exp $
+	# $Id: account_sponsor_page.php,v 1.5 2007-07-18 22:55:23 giallu Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -128,7 +128,7 @@
 			echo '<td><a href="' . string_get_bug_view_url( $row['bug'] ) . '">' . bug_format_id( $row['bug'] ) . '</a></td>';
 			echo '<td>' . project_get_field( $t_bug->project_id, 'name' ) . '&nbsp;</td>';
 			echo '<td class="right">' . $t_released_label . '&nbsp;</td>';
-			echo '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+			echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 			echo '<td>';
 			print_user( $t_bug->handler_id );
 			echo '</td>';

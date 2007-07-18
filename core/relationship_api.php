@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.42 2007-07-11 21:13:25 giallu Exp $
+	# $Id: relationship_api.php,v 1.43 2007-07-18 22:55:24 giallu Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -543,7 +543,7 @@
 		$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&nbsp;</td>';
 		if ( $p_html_preview == false ) {
 			$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
-			$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
+			$t_relationship_info_html .= '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 		}
 		else {
 			$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';

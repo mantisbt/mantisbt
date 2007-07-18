@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.19 2007-07-10 07:15:05 vboctor Exp $
+	# $Id: columns_api.php,v 1.20 2007-07-18 22:55:24 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -556,7 +556,7 @@
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function print_column_status( $p_row, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		echo '<td class="center">';
-		printf( '<u><a title="%s">%s</a></u>'
+		printf( '<span class="issue-status" title="%s">%s</span>'
 			, get_enum_element( 'resolution', $p_row['resolution'] )
 			, get_enum_element( 'status', $p_row['status'] )
 		);
