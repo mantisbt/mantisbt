@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.155 2007-05-27 22:31:59 giallu Exp $
+	# $Id: filter_api.php,v 1.156 2007-07-18 21:02:05 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1486,7 +1486,6 @@
 
 		<br />
 		<form method="post" name="filters<?php echo $t_form_name_suffix ?>" id="filters_form<?php echo $t_form_name_suffix ?>" action="<?php PRINT $t_action; ?>">
-		<table class="width100" cellspacing="1">
 		<input type="hidden" name="type" value="1" />
 		<?php
 			if ( $p_for_screen == false ) {
@@ -1496,6 +1495,7 @@
 		?>
 		<input type="hidden" name="page_number" value="<?php PRINT $t_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
+		<table class="width100" cellspacing="1">
 
 		<?php
 		$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
