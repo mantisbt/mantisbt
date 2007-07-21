@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.345 2007-07-11 03:18:12 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.346 2007-07-21 22:54:28 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -1635,8 +1635,8 @@
 	# --------------------
 	# Sort direction to icon mapping
 	$g_sort_icon_arr = array (
-		ASC        => 'up.gif',
-		DESC       => 'down.gif'
+		ASCENDING  => 'up.gif',
+		DESCENDING => 'down.gif'
 	);
 	# --------------------
 	# Read status to icon mapping

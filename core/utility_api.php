@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.21 2007-07-14 16:13:54 giallu Exp $
+	# $Id: utility_api.php,v 1.22 2007-07-21 22:54:29 giallu Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -172,8 +172,8 @@
 
 	# --------------------
 	# Sort a multi-dimensional array by one of its keys
-	function multi_sort( $p_array, $p_key, $p_direction=ASC ) {
-		if ( DESC == $p_direction ) {
+	function multi_sort( $p_array, $p_key, $p_direction=ASCENDING ) {
+		if ( DESCENDING == $p_direction ) {
 			$t_factor = -1;
 		} else {
 			# might as well allow everything else to mean ASC rather than erroring

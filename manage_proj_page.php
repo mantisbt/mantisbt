@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.19 2005-05-16 12:56:06 vboctor Exp $
+	# $Id: manage_proj_page.php,v 1.20 2007-07-21 22:54:28 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,9 +22,9 @@
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 
 	if ( 'ASC' == $f_dir ) {
-		$t_direction = ASC;
+		$t_direction = ASCENDING;
 	} else {
-		$t_direction = DESC;
+		$t_direction = DESCENDING;
 	}
 
 ?>

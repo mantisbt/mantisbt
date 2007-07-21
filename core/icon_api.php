@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.14 2005-09-19 03:17:16 ryandesign Exp $
+	# $Id: icon_api.php,v 1.15 2007-07-21 22:54:29 giallu Exp $
 	# --------------------------------------------------------
 
 	### Icon API ###
@@ -44,10 +44,10 @@
 			return;
 		}
 
-		if ( ( 'DESC' == $p_dir ) || ( DESC == $p_dir ) ) {
-			$t_dir = DESC;
+		if ( ( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
+			$t_dir = DESCENDING;
 		} else {
-			$t_dir = ASC;
+			$t_dir = ASCENDING;
 		}
 
 		$t_none = NONE;

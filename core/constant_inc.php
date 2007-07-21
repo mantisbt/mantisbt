@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.68 2007-07-21 13:38:26 prichards Exp $
+	# $Id: constant_inc.php,v 1.69 2007-07-21 22:54:29 giallu Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -86,10 +86,9 @@
 	# project view_state
 	define( 'VS_PUBLIC',	10 );
 	define( 'VS_PRIVATE',	50 );
-
 	# direction
-	define( 'ASC',	101 );
-	define( 'DESC',	102 );
+	define( 'ASCENDING', 101 );
+	define( 'DESCENDING', 102 );
 
 	# unread status
 	define( 'READ',		201 );

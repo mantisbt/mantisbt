@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.100 2007-07-13 07:58:31 giallu Exp $
+	# $Id: manage_proj_edit_page.php,v 1.101 2007-07-21 22:54:28 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -235,7 +235,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 	$t_projects = project_get_all_rows();
 
-	$t_projects = multi_sort( $t_projects, 'name', ASC );
+	$t_projects = multi_sort( $t_projects, 'name', ASCENDING );
 
 	foreach ( $t_projects as $t_project ) {
 		if ( in_array( $t_project['id'], $t_all_subprojects ) ||

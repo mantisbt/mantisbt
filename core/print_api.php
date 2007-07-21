@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.172 2007-07-15 19:59:34 prichards Exp $
+	# $Id: print_api.php,v 1.173 2007-07-21 22:54:29 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1246,7 +1246,7 @@
 	# --------------------
 	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
 		if ( $p_sort_by == $p_field ) {   # If this is the selected field flip the order
-			if ( 'ASC' == $p_dir || ASC == $p_dir ) {
+			if ( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
 				$t_dir = 'DESC';
 			} else {
 				$t_dir = 'ASC';
@@ -1260,7 +1260,7 @@
 	# --------------------
 	function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
 		if ( $p_sort_by == $p_field ) {   # If this is the selected field flip the order
-			if ( 'ASC' == $p_dir || ASC == $p_dir ) {
+			if ( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
 				$t_dir = 'DESC';
 			} else {
 				$t_dir = 'ASC';
