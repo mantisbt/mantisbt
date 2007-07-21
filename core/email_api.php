@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.133 2007-07-17 20:08:01 prichards Exp $
+	# $Id: email_api.php,v 1.134 2007-07-21 23:27:10 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -699,7 +699,7 @@
 			# if unable to place the email in the email server queue, then the connection to the server is down,
 			# and hence no point to continue trying with the rest of the emails.
 			if ( !email_send( $t_email_data ) ) {
-				continue;
+				break;
 			}
 		}
 	}
