@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.19 2006-04-22 01:52:14 vboctor Exp $
+	# $Id: ldap_api.php,v 1.20 2007-07-21 13:38:26 prichards Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,6 +19,10 @@
 		$t_ldap_server	= config_get( 'ldap_server' );
 		$t_ldap_port	= config_get( 'ldap_port' );
 
+		if (!extension_loaded('ldap')) {
+			trigger_error(ERROR_LDAP_EXTENSION_NOT_LOADED,ERROR);
+		}
+		
 		$t_ds = @ldap_connect ( $t_ldap_server, $t_ldap_port );
 		if ( $t_ds > 0 ) {
 			$t_protocol_version = config_get( 'ldap_protocol_version' );

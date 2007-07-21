@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.67 2007-07-11 03:18:13 vboctor Exp $
+	# $Id: constant_inc.php,v 1.68 2007-07-21 13:38:26 prichards Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -256,7 +256,8 @@
 	define( 'ERROR_LDAP_SERVER_CONNECT_FAILED',		1401 );
 	define( 'ERROR_LDAP_UPDATE_FAILED',				1402 );
 	define( 'ERROR_LDAP_USER_NOT_FOUND',			1403 );
-
+	define( 'ERROR_LDAP_EXTENSION_NOT_LOADED',		1404 );
+	
 	# ERROR_CATEGORY_*
 	define( 'ERROR_CATEGORY_DUPLICATE',				1500 );
 	define( 'ERROR_CATEGORY_NO_ACTION',				1501 );
