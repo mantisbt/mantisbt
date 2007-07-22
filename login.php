@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.37 2007-03-03 14:54:15 prichards Exp $
+	# $Id: login.php,v 1.38 2007-07-22 10:16:08 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,9 +41,9 @@
 	}
 
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
-		$t_redirect_url = 'login_cookie_test.php?return=' . urlencode( $f_return );
+		$t_redirect_url = 'login_cookie_test.php?return=' . string_sanitize_url( $f_return );
 	} else {
-		$t_redirect_url = 'login_page.php?return=' . urlencode( $f_return ) . '&error=1';
+		$t_redirect_url = 'login_page.php?return=' . string_sanitize_url( $f_return ) . '&error=1';
 
 		if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 			auth_http_prompt();
