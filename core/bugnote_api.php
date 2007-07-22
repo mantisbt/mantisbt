@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.45 2007-07-12 06:27:01 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.46 2007-07-22 22:47:54 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -482,7 +482,7 @@
 				WHERE u.id = bn.reporter_id AND
 				bn.bug_id = '$c_bug_id'
 				$t_from_where $t_to_where
-			GROUP BY u.id";
+			GROUP BY u.id, u.username";
 
 		$result = db_query( $query );
 
@@ -532,7 +532,9 @@
 			FROM $t_user_table u, $t_bugnote_table bn, $t_bug_table b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			$t_project_where $t_from_where $t_to_where
-			GROUP BY bn.bug_id, u.id";
+			GROUP BY bn.bug_id, u.id, u.username, b.summary
+			ORDER BY bn.bug_id";
+
 		$result = db_query( $query );
 
 		$t_cost_min = $c_cost / 60;
