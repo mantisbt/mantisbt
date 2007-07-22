@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.158 2007-07-22 20:58:47 giallu Exp $
+	# $Id: filter_api.php,v 1.159 2007-07-22 21:03:28 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1312,7 +1312,7 @@
 		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 
-		$query2  = "SELECT $t_select
+		$query2  = "SELECT DISTINCT $t_select
 					$t_from
 					$t_join
 					$t_where
@@ -2594,8 +2594,8 @@
 				<input type="text" size="16" name="search" value="<?php PRINT string_html_specialchars( $t_filter['search'] ); ?>" />
 
 				<input type="submit" name="filter" class="button-small" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
-			</form>
 			</td>
+			</form>
 			<td class="center" colspan="<?php echo ( $t_filter_cols - 6 ) ?>"> <!-- use this label for padding -->
 				<?php
 					if ( ON == config_get( 'dhtml_filters' ) ) {
