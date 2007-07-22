@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.40 2007-04-01 08:03:27 vboctor Exp $
+	# $Id: history_api.php,v 1.41 2007-07-22 22:46:30 prichards Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -56,9 +56,9 @@
 		$t_mantis_bug_history_table = config_get( 'mantis_bug_history_table' );
 
 		$query = "INSERT INTO $t_mantis_bug_history_table
-					( user_id, bug_id, date_modified, type, old_value, new_value )
+					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( '$t_user_id', '$c_bug_id', " . db_now() . ", '$c_type', '$c_optional', '$c_optional2' )";
+					( '$t_user_id', '$c_bug_id', " . db_now() . ", '$c_type', '$c_optional', '$c_optional2', '' )";
 		$result = db_query( $query );
 	}
 	# --------------------
