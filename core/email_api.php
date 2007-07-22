@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.134 2007-07-21 23:27:10 prichards Exp $
+	# $Id: email_api.php,v 1.135 2007-07-22 14:39:12 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -688,6 +688,7 @@
 		$t_ids = email_queue_get_ids();
 
 		$t_emails_recipients_failed = array();
+		$t_start = microtime_float();
 		foreach ( $t_ids as $t_id ) {
 			$t_email_data = email_queue_get( $t_id );
 
@@ -699,7 +700,10 @@
 			# if unable to place the email in the email server queue, then the connection to the server is down,
 			# and hence no point to continue trying with the rest of the emails.
 			if ( !email_send( $t_email_data ) ) {
-				break;
+				if ( microtime_float() - $t_start > 5)
+					break;
+				else 
+					continue;
 			}
 		}
 	}

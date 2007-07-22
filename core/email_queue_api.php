@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_queue_api.php,v 1.1 2006-08-14 08:32:57 vboctor Exp $
+	# $Id: email_queue_api.php,v 1.2 2007-07-22 14:39:14 prichards Exp $
 	# --------------------------------------------------------
 
 	class EmailData {
@@ -154,7 +154,7 @@
 
 		$query = "SELECT email_id
 				  FROM $t_email_table
-				  ORDER BY email_id";
+				  ORDER BY email_id DESC";
 		$result = db_query( $query );
 
 		$t_ids = array();
