@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.157 2007-07-18 23:07:22 giallu Exp $
+	# $Id: filter_api.php,v 1.158 2007-07-22 20:58:47 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1044,17 +1044,16 @@
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
-		    # use the complementary type
-		    $c_rel_type = relationship_get_complementary_type($c_rel_type);
+			# use the complementary type
+			$t_comp_type = relationship_get_complementary_type( $c_rel_type );
 			$t_clauses = array();
 			$t_table_name = 'relationship';
 			array_push( $t_from_clauses, $t_bug_relationship_table );
 			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
+			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table ${t_table_name}2 ON ${t_table_name}2.source_bug_id = $t_bug_table.id" );
 			// get reverse relationships
-			if ( $c_rel_type == 1 ) array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name"."2 ON $t_table_name"."2.source_bug_id = $t_bug_table.id" );
- 			array_push( $t_clauses, "($t_table_name.relationship_type='$c_rel_type' AND $t_table_name.source_bug_id='$c_rel_bug')" );
- 			// get reverse relationships
-			if ( $c_rel_type == 1 ) array_push( $t_clauses, "($t_table_name"."2.relationship_type='$c_rel_type' AND $t_table_name"."2.destination_bug_id='$c_rel_bug')" );
+ 			array_push( $t_clauses, "($t_table_name.relationship_type='$t_comp_type' AND $t_table_name.source_bug_id='$c_rel_bug')" );
+			array_push( $t_clauses, "($t_table_name"."2.relationship_type='$c_rel_type' AND $t_table_name"."2.destination_bug_id='$c_rel_bug')" );
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
 		}
 
@@ -1313,7 +1312,7 @@
 		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 
-		$query2  = "SELECT DISTINCT $t_select
+		$query2  = "SELECT $t_select
 					$t_from
 					$t_join
 					$t_where
@@ -2595,8 +2594,8 @@
 				<input type="text" size="16" name="search" value="<?php PRINT string_html_specialchars( $t_filter['search'] ); ?>" />
 
 				<input type="submit" name="filter" class="button-small" value="<?php PRINT lang_get( 'filter_button' ) ?>" />
-			</td>
 			</form>
+			</td>
 			<td class="center" colspan="<?php echo ( $t_filter_cols - 6 ) ?>"> <!-- use this label for padding -->
 				<?php
 					if ( ON == config_get( 'dhtml_filters' ) ) {
