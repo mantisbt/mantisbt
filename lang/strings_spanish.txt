@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.91.10.4 $
+	# $Revision: 1.91.10.5 $
 	# $Author: jbrugger $
-	# $Date: 2007-07-23 13:17:36 $
+	# $Date: 2007-07-23 15:22:32 $
 	#
-	# $Id: strings_spanish.txt,v 1.91.10.4 2007-07-23 13:17:36 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.91.10.5 2007-07-23 15:22:32 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -682,9 +682,6 @@ $s_create_user_button = 'Crear usuario';
 # manage_page.php
 $s_hide_disabled = 'Ocultar Desactivados';
 $s_filter_button = 'Filtrar';
-$s_create_filter_link = 'Crear Permalink';
-$s_create_short_link = 'Crear enlace corto';
-$s_filter_permalink = 'El siguiente es un enlace permanente para el filtro actualmente definido:';
 $s_manage_users_link = 'Administrar Usuarios';
 $s_manage_projects_link = 'Administrar Proyectos';
 $s_manage_custom_field_link = 'Administrar Campos Personalizados';
@@ -1344,20 +1341,4 @@ $s_on_or_after = 'Durante o Después';
 
 # wiki related strings
 $s_wiki = 'Wiki';
-
-# Time Tracking
-$s_time_tracking_billing_link = 'Facturación';
-$s_time_tracking = 'Seguimiento de Tiempos';
-$s_time_tracking_get_info_button = 'Obtener información de seguimiento de tiempos';
-$s_time_tracking_cost_per_hour = 'Costo/Hora';
-$s_time_tracking_cost = 'Costo';
-$s_total_time_for_issue = 'Tiempo total para la incidencia = %s';
-$s_from_date = 'Desde';
-$s_to_date = 'Hasta';
-
-$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
-
-# Twitter Integration
-$s_twitter_resolved = "%d: [%s] %s (resuelto por %s en %s)";
-$s_twitter_resolved_no_version = "%d: [%s] %s (resuelto por %s)";
 ?>
