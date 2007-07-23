@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.59 2007-07-23 21:42:45 prichards Exp $
+	# $Id: database_api.php,v 1.60 2007-07-23 22:24:22 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -367,7 +367,6 @@
 	# --------------------
 	# prepare a binary string before DB insertion
 	function db_prepare_binary_string( $p_string ) {
-		global $g_db;
 		$t_db_type = config_get( 'db_type' );
 
 		switch( $t_db_type ) {
