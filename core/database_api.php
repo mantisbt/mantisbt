@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.58 2007-07-22 21:02:45 prichards Exp $
+	# $Id: database_api.php,v 1.59 2007-07-23 21:42:45 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -364,6 +364,25 @@
 		}
 	}
 
+	# --------------------
+	# prepare a binary string before DB insertion
+	function db_prepare_binary_string( $p_string ) {
+		global $g_db;
+		$t_db_type = config_get( 'db_type' );
+
+		switch( $t_db_type ) {
+			case 'mssql':
+			case 'odbc_mssql':
+			case 'ado_mssql':
+				$content = unpack("H*hex", $p_string);
+				return '0x' . $content['hex'];
+				break;
+			default:
+				return '\'' . db_prepare_string( $p_string ) . '\'';
+				break;
+		}
+	}
+	
 	# --------------------
 	# prepare a time string in "[h]h:mm" to an integer (minutes) before DB insertion
 	function db_prepare_time( $p_hhmm ) {

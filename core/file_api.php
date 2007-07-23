@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.81 2007-07-12 08:13:02 giallu Exp $
+	# $Id: file_api.php,v 1.82 2007-07-23 21:42:45 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -654,7 +654,7 @@ document.getElementById( span ).style.display = displayType;
 				}
 				break;
 			case DATABASE:
-				$c_content = db_prepare_string( fread ( fopen( $p_tmp_file, 'rb' ), $t_file_size ) );
+				$c_content = db_prepare_binary_string ( fread ( fopen( $p_tmp_file, 'rb' ), $t_file_size ) ) ;
 				break;
 			default:
 				trigger_error( ERROR_GENERIC, ERROR );
@@ -662,10 +662,11 @@ document.getElementById( span ).style.display = displayType;
 
 		$t_file_table	= config_get( 'mantis_' . $p_table . '_file_table' );
 		$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
+					
 		$query = "INSERT INTO $t_file_table
 						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
+						($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", $c_content)";
 		db_query( $query );
 
 		if ( 'bug' == $p_table ) {
