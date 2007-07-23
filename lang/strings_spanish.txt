@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.105 $
+	# $Revision: 1.106 $
 	# $Author: jbrugger $
-	# $Date: 2007-07-20 19:02:26 $
+	# $Date: 2007-07-23 13:29:38 $
 	#
-	# $Id: strings_spanish.txt,v 1.105 2007-07-20 19:02:26 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.106 2007-07-23 13:29:38 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -245,6 +245,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Ha fallado la autenticación LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Falló la conexión al servidor LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Ha fallado la actualización del registro LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'No se encontró el registro LDAP del usuario.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensión LDAP No Cargada.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Ha fallado la conexión a la base de datos. El error devuelto por la base de datos fue #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Ha fallado la consulta a la base de datos. El error devuelto por la base de datos fue #%d: %s para la consulta: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Ha fallado la selección de la base de datos. El error devuelto por la base de datos fue #%d: %s';
