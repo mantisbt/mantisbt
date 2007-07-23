@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.27 2007-07-15 21:07:12 prichards Exp $
+	# $Id: check.php,v 1.28 2007-07-23 21:58:10 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -164,6 +164,41 @@
 	?>
 </tr>
 
+<!-- Test DATABASE part 2 -->
+<?php if ( db_is_connected ) { 
+	$t_serverinfo = $g_db->ServerInfo()
+?>
+<tr>
+	<td bgcolor="#ffffff">
+		Database Type (adodb)
+	</td>
+	<td bgcolor="#ffffff">
+			<?php echo $g_db->databaseType ?>
+	</td>
+</tr><tr>
+	<td bgcolor="#ffffff">
+			Database Provider (adodb)
+	</td>
+	<td bgcolor="#ffffff">
+				<?php echo $g_db->dataProvider ?>
+	</td>
+</tr><tr>
+	<td bgcolor="#ffffff">
+		Database Server Description (adodb)
+	</td>
+	<td bgcolor="#ffffff">
+			<?php echo $t_serverinfo['description'] ?>
+	</td>
+</tr><tr>
+	<td bgcolor="#ffffff">
+		Database Server Description (version)
+	</td>
+	<td bgcolor="#ffffff">
+			<?php echo $t_serverinfo['version'] ?>
+	</td>	
+</tr>
+<?php } ?>
+
 <!-- Absolute path check -->
 <tr>
 	<td bgcolor="#ffffff">
@@ -223,7 +258,9 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 					'gpc_order',
 					'variables_order',
 					'include_path',
-					'short_open_tag');
+					'short_open_tag',
+					'mssql.textsize',
+					'mssql.textlimit');
 
 	while ( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 ?>
