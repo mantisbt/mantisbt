@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.207 2007-07-17 13:35:09 giallu Exp $
+	# $Id: html_api.php,v 1.208 2007-07-24 12:04:40 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -877,7 +877,7 @@
 			echo '<br />';
 			echo '<table class="width100" cellspacing="1">';
 			echo '<tr>';
-			echo '<td colspan="'.$enum_count.'"><strong>'.lang_get( 'issue_status_percentage' ).'</strong></td>';
+			echo '<td class="form-title" colspan="'.$enum_count.'">'.lang_get( 'issue_status_percentage' ).'</td>';
 			echo '</tr>';
 			echo '<tr>';
 
