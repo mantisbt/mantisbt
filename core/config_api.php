@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.38 2007-06-09 15:00:03 vboctor Exp $
+	# $Id: config_api.php,v 1.39 2007-07-25 23:39:44 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
@@ -15,6 +15,7 @@
 	$g_cache_config = array();
 	$g_cache_config_access = array();
 	$g_cache_filled = false;
+	$g_cache_can_set_in_database = '';
 	
 	# cache environment to speed up lookups
 	$g_cache_db_table_exists = false;
@@ -311,9 +312,12 @@
 	# Checks if the specific configuration option can be set in the database, otherwise it can only be set
 	# in the configuration file (config_inc.php / config_defaults_inc.php).
 	function config_can_set_in_database( $p_option ) {
+		global $g_cache_can_set_in_database;
 		# bypass table lookup for certain options
-		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
-		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+		if ( $g_cache_can_set_in_database == '' ) {
+			$g_cache_can_set_in_database = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
+		}
+		$t_bypass_lookup = ( 0 < preg_match( $g_cache_can_set_in_database, $p_option ) );
 
 		return !$t_bypass_lookup;
 	}
