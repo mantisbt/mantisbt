@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.51 2007-07-25 08:27:57 vboctor Exp $
+	# $Id: summary_page.php,v 1.52 2007-07-25 15:53:32 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,8 @@
 
 	$t_user_id = auth_get_current_user_id();
 
+	# @@@ giallu: this block of code is duplicated from helper_project_specific_where
+	# the only diff is the commented line below: can we do better than this ?
 	if ( ALL_PROJECTS == $f_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
 		foreach ( $t_topprojects as $t_project ) {
@@ -34,6 +36,7 @@
 
 		$t_project_ids = array_unique( $t_project_ids );
 	} else {
+		# access_ensure_project_level( VIEWER, $p_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
 		array_unshift( $t_project_ids, $f_project_id );
 	}
@@ -47,6 +50,7 @@
 	} else {
 		$specific_where = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
 	}
+	# end @@@ block
 
 	$t_bug_table = config_get( 'mantis_bug_table' );
 	$t_history_table = config_get( 'mantis_bug_history_table' );
