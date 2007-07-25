@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.60 2007-07-23 22:24:22 prichards Exp $
+	# $Id: database_api.php,v 1.61 2007-07-25 08:35:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -15,6 +15,8 @@
 	# Use this as a starting point to port to other databases
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+
+	require_once( $t_core_dir . 'gpc_api.php' );
 
 	# Do not explicitly include $t_core_dir to allow using system ADODB by including
 	# it in include path and removing the one distributed with Mantis (see #7907).
@@ -34,27 +36,42 @@
 
 	# --------------------
 	# Make a connection to the database
-	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null ) {
+	function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
 		global $g_db_connected, $g_db;
 
-		if(  $p_dsn === false ) {
+		if ( $p_dsn === false ) {
 			$t_db_type = config_get_global( 'db_type' );
 			$g_db = ADONewConnection( $t_db_type );
-			$t_result = $g_db->Connect( $p_hostname, $p_username, $p_password, $p_database_name );
-			if ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-				$result = &$g_db->execute('set schema ' . $p_db_schema);
-				if ( $result === FALSE ) {
-					db_error();
-					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-					return false;
-				}
+			
+			if ( $p_pconnect ) {
+				$t_result = $g_db->PConnect( $p_hostname, $p_username, $p_password, $p_database_name );
+			} else {
+				$t_result = $g_db->Connect( $p_hostname, $p_username, $p_password, $p_database_name );
 			}
 		} else {
 			$g_db = ADONewConnection( $p_dsn );
 			$t_result = $g_db->IsConnected();
 		}
 
-		if ( !$t_result ) {
+		if ( $t_result ) {
+			# For MySQL, the charset for the connection needs to be specified.
+			if ( db_is_mysql() ) {
+				$c_charset = db_prepare_string( lang_get( 'charset' ) );
+
+				# @@@ Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
+				# @@@ Is this needed for other databases?
+				if ( strtolower( $c_charset ) === 'utf-8' ) {
+					db_query( 'SET NAMES UTF8' );
+				}
+			} elseif ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
+				$t_result2 = db_query( 'set schema ' . $p_db_schema );
+				if ( $t_result2 === false ) {
+					db_error();
+					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+					return false;
+				}
+			}
+		} else {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 			return false;
@@ -68,33 +85,7 @@
 	# --------------------
 	# Make a persistent connection to the database
 	function db_pconnect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null ) {
-		global $g_db_connected, $g_db;
-
-		if(  $p_dsn === false ) {
-			$t_db_type = config_get_global( 'db_type' );
-			$g_db = ADONewConnection( $t_db_type );
-			$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
-	
-			if ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-				$result = &$g_db->execute('set schema ' . $p_db_schema);
-				if ( $result === FALSE ) {
-					db_error();
-					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-					return false;
-				}
-			}
-		} else {
-			$g_db = ADONewConnection( $p_dsn );
-			$t_result = $g_db->IsConnected();
-		}
-
-		if ( !$t_result ) {
-			db_error();
-			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-			return false;
-		}
-		$g_db_connected = true;
-		return true;
+		return db_connect( $p_dsn, $p_hostname, $p_username, $p_password, $p_database_name, $p_db_schema, /* $p_pconnect */ true );
 	}
 
 	# --------------------
@@ -103,6 +94,19 @@
 		global $g_db_connected;
 
 		return $g_db_connected;
+	}
+
+	# --------------------
+	# Checks if the database is MySQL
+	function db_is_mysql() {
+		$t_db_type = config_get( 'db_type' );
+
+		switch( $t_db_type ) {
+			case 'mysql':
+				return true;
+		}
+
+		return false;
 	}
 
 	# --------------------
