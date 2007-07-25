@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_page.php,v 1.2 2007-07-25 08:27:57 vboctor Exp $
+	# $Id: project_page.php,v 1.3 2007-07-25 15:39:41 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -86,7 +86,7 @@
 	$t_access_level_for_dev_team = config_get( 'development_team_threshold' );
 
 	$t_users = project_get_all_user_rows( $f_project_id, $t_access_level_for_dev_team );
-	$t_show_real_names = config_get( 'show_real_names' ) == ON;
+	$t_show_real_names = config_get( 'show_realname' ) == ON;
 
 	if ( count( $t_users ) > 0 ) {
 		echo '<h2>', lang_get( 'development_team' ), '</h2>';
