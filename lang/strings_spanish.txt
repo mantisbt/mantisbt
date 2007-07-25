@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.106 $
+	# $Revision: 1.107 $
 	# $Author: jbrugger $
-	# $Date: 2007-07-23 13:29:38 $
+	# $Date: 2007-07-25 12:55:27 $
 	#
-	# $Id: strings_spanish.txt,v 1.106 2007-07-23 13:29:38 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.107 2007-07-25 12:55:27 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -42,8 +42,8 @@ $s_actiongroup_menu_update_view_status = 'Cambiar Visibilidad';
 $s_actiongroup_menu_update_category = 'Cambiar Categoría';
 $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %s';
-$s_actiongroup_menu_update_target_version = 'Actualizar Versión del Reporte';
-$s_actiongroup_menu_update_fixed_in_version = 'Actualizar Versión de Resolución';
+$s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
+$s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelto en Versión';
 $s_actiongroup_menu_add_note = 'Añadir Nota';
 $s_actiongroup_bugs = 'Incidencias Seleccionadas';
 
@@ -90,7 +90,7 @@ $s_bug_relationships = 'Relaciones';
 $s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está seguro que es lo que desea?';
 $s_empty_password_button = 'Usar Contraseña en Blanco';
 
-$s_duplicate_of = "duplicada de";
+$s_duplicate_of = "es un duplicado de";
 $s_has_duplicate = "está duplicada en";
 $s_related_to = "relacionada con";
 $s_dependant_on = "depende de";
@@ -131,7 +131,7 @@ $s_view_status_bugs_conf_msg = 'Elegir la visibilidad de las incidencias';
 $s_category_bugs_conf_msg = 'Elegir categoría de las incidencias';
 $s_set_sticky_bugs_conf_msg = '¿Está seguro que desea fijar/desfijar estas incidencias?';
 $s_fixed_in_version_bugs_conf_msg = 'Actualizar Resuelto en Versión a';
-$s_target_version_bugs_conf_msg = 'Actualizar Versión a';
+$s_target_version_bugs_conf_msg = 'Actualizar Previsto para Versión a';
 $s_close_group_bugs_button = 'Cerrar Incidencias';
 $s_delete_group_bugs_button = 'Eliminar Incidencias';
 $s_move_group_bugs_button = 'Mover Incidencias';
@@ -144,7 +144,7 @@ $s_category_group_bugs_button = 'Actualizar Categoría';
 $s_view_status_group_bugs_button = 'Actualizar Visibilidad';
 $s_set_sticky_group_bugs_button = 'Fijado/Desfijado';
 $s_fixed_in_version_group_bugs_button = 'Actualizar Resuelto en Versión';
-$s_target_version_group_bugs_button = 'Actualizar Versión';
+$s_target_version_group_bugs_button = 'Actualizar Previsto para Versión';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráficos por estado';
@@ -227,8 +227,8 @@ $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Se esperaba un número para %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No se encuentra la incidencia %d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %d no encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtro que Ud. está tratando de usar es obsoleto y no puede ser actualizado, por favor vuelva a crearlo';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Email no válido.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No está permitido el uso de direcciones de email \"descartables\".';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'E-mail no válido.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No está permitido el uso de direcciones de e-mail \"descartables\".';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Tipo de archivo no permitido para subir.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Este archivo está duplicado.  Por favor, elimine antes el archivo original.';
@@ -263,7 +263,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'No se encontró el patrocinio %d.'
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'El patrocinio (%s) es menor que el valor mínimo de %s.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'El gestor no tiene el nivel de acceso requerido para gestionar incidencias patrocinadas.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acceso denegado: se necesita un nivel de acceso mayor para administrar incidencias patrocinadas.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'El patrocinador no ha proporcionado una dirección de email. Por favor actualice su perfil.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'El patrocinador no ha proporcionado una dirección de e-mail. Por favor actualice su perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'La opción de configuración \'%s\' tiene un valor \'%s\', que no es válido.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'La acción no se puede efectuar puesto que la incidencia \'%d\' es de sólo lectura';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Ya existe una relación entre esas dos incidencias.";
@@ -272,7 +272,7 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acceso den
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Una incidencia no puede estar relacionada consigo misma.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'La cadena de confirmación no coincide. Por favor, vuelva a intentarlo.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'La opción \'recuperar contraseña\' no está disponible.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Debe proporcionar una dirección de email para restaurar la contraseña';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Debe proporcionar una dirección de e-mail para restaurar la contraseña';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'La información proporcionada no coincide con ninguna cuenta registrada';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'La URL de confirmación no es válida o ya ha sido usada. Por favor regístrese nuevamente.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Número máximo de peticiones en progreso alcanzado. Por favor contacte con el administrador del sistema';
@@ -370,8 +370,8 @@ $s_email_priority = 'Prioridad';
 $s_email_status = 'Estado';
 $s_email_resolution = 'Resolución';
 $s_email_duplicate = 'Duplicada de';
-$s_email_fixed_in_version = 'Corregida en versión';
-$s_email_target_version = 'Versión Objetivo';
+$s_email_fixed_in_version = 'Resuelto en versión';
+$s_email_target_version = 'Previsto para Versión';
 $s_email_date_submitted = 'Fecha de Envío';
 $s_email_last_modified = 'Última Modificación';
 $s_email_summary = 'Resumen';
@@ -391,7 +391,7 @@ $s_change_preferences_link = 'Preferencias';
 $s_edit_account_title = 'Editar Cuenta';
 $s_username = 'Usuario';
 $s_realname = 'Nombre Real';
-$s_email = 'Email';
+$s_email = 'E-mail';
 $s_password = 'Contraseña';
 $s_no_password_change = 'La contraseña está controlada por otro sistema, por lo tanto no puede editarse aqui';
 $s_confirm_password = 'Confirmar contraseña';
@@ -481,7 +481,7 @@ $s_payment_updated = 'Información de pago actualizada.';
 
 # account_update.php
 $s_account_updated_msg = 'Su cuenta ha sido actualizada...';
-$s_email_updated = 'Su dirección de Email ha sido actualizada';
+$s_email_updated = 'Su dirección de E-mail ha sido actualizada';
 $s_realname_duplicated = 'Otro usuario está usando ese nombre real.';
 $s_realname_updated = 'Nombre real actualizado correctamente';
 $s_password_updated = 'Contraseña actualizada';
@@ -588,8 +588,8 @@ $s_os_version = 'Versión de S.O.';
 $s_eta = 'Tiempo Estimado';
 $s_product_version = 'Versión del producto';
 $s_build = 'Build';
-$s_fixed_in_version = 'Corregido en versión';
-$s_target_version = 'Versión Objetivo';
+$s_fixed_in_version = 'Resuelto en versión';
+$s_target_version = 'Previsto para Versión';
 $s_votes = 'Votos';
 $s_summary = 'Resumen';
 $s_description = 'Descripción';
@@ -665,7 +665,7 @@ $s_open_and_assigned_to_me = 'Incidencias Abiertas Asignadas a Mí';
 $s_open_and_reported_to_me = 'Incidencias Abiertas y Reportadas por Mí';
 $s_newer_news_link = 'Noticias más Recientes';
 $s_older_news_link = 'Noticias Anteriores';
-$s_archives = 'Noticias Archivadas';
+$s_archives = 'Archivo de Noticias';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
@@ -819,6 +819,8 @@ $s_public = 'Público';
 $s_private = 'Privado';
 $s_update_project_button = 'Actualizar Proyecto';
 $s_delete_project_button = 'Eliminar Proyecto';
+$s_copy_from = 'Copiar de';
+$s_copy_to = 'Copiar a';
 $s_categories_and_version_title = 'Categorías y Versiones';
 $s_categories = 'Categorías';
 $s_add_category_button = 'Agregar Categoría';
@@ -1192,7 +1194,7 @@ $s_link_custom_field_to_project_button = 'Vincular Campo Personalizado';
 $s_linked_projects = 'Proyectos Vinculados';
 
 $s_custom_field_sequence = 'Secuencia';
-$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:Email,5:Casilla de verificación,6:Lista,7:Selección múltiple,8:Fecha';
+$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:E-mail,5:Casilla de verificación,6:Lista,7:Selección múltiple,8:Fecha';
 
 $s_confirm_used_custom_field_deletion = 'Este campo está vinculado al menos a un proyecto.  Si continúa todos los valores para este campo serán borrados permanentemente.  Esta acción no puede deshacerse.  Si no desea eliminar el campo, haga click sobre el botón Atrás de su navegador.  Para proceder, haga click sobre el botón que aparece abajo';
 $s_confirm_custom_field_deletion = '¿Está seguro que desea eliminar este campo personalizado y todos los valores asociados?';
@@ -1360,4 +1362,7 @@ $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 # Twitter Integration
 $s_twitter_resolved = "%d: [%s] %s (resuelto por %s en %s)";
 $s_twitter_resolved_no_version = "%d: [%s] %s (resuelto por %s)";
+
+# Project Page
+$s_development_team = 'Equipo de Desarrollo';
 ?>
