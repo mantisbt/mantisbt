@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.135 2007-07-22 14:39:12 prichards Exp $
+	# $Id: email_api.php,v 1.136 2007-07-25 08:30:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -196,14 +196,17 @@
 		if ( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
 			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 			$t_recipients[$t_reporter_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add reporter=$t_reporter_id" );
+			log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, add reporter=$t_reporter_id" );
 		}
 
 		# add Handler
 		if ( ON == email_notify_flag( $p_notify_type, 'handler' )) {
 			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-			$t_recipients[$t_handler_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add handler=$t_handler_id" );
+			
+			if ( $t_handler_id > 0 ) {
+				$t_recipients[$t_handler_id] = true;
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, add handler=$t_handler_id" );
+			}
 		}
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -220,7 +223,7 @@
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
 				$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add monitor=$t_user_id" );
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, add monitor=$t_user_id" );
 			}
 		}
 
@@ -241,7 +244,7 @@
 			for( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
 				$t_recipients[$t_user_id] = true;
-				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add note=$t_user_id" );
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, add note author=$t_user_id" );
 			}
 		}
 
@@ -254,7 +257,7 @@
 			if ( $t_user['access_level'] <= $t_threshold_max ) {
 				if ( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
 					$t_recipients[$t_user['id']] = true;
-					log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, add project=" . $t_user['id'] );
+					log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, add project user=" . $t_user['id'] );
 				}
 			}
 		}
@@ -287,18 +290,17 @@
 		# Check whether users should receive the emails
 		# and put email address to $t_recipients[user_id]
 		foreach ( $t_recipients as $t_id => $t_ignore ) {
-
 			# Possibly eliminate the current user
 			if ( ( auth_get_current_user_id() == $t_id ) &&
 				 ( OFF == config_get( 'email_receive_own' ) ) ) {
-				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (own)" );
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (own)" );
 				continue;
 			}
 
 			# Eliminate users who don't exist anymore or who are disabled
 			if ( !user_exists( $t_id ) ||
 				 !user_is_enabled( $t_id ) ) {
-				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (disabled)" );
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (disabled)" );
 				continue;
 			}
 
@@ -306,7 +308,7 @@
 			if ( $t_pref_field ) {
 				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 				if ( OFF == $t_notify ) {
-					log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (pref $t_pref_field off)" );
+					log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (pref $t_pref_field off)" );
 					continue;
 				} else {
 					# Users can define the severity of an issue before they are emailed for
@@ -316,7 +318,7 @@
 					$t_bug_severity       = bug_get_field( $p_bug_id, 'severity' );
 
 					if ( $t_bug_severity < $t_min_sev_notify ) {
-						log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (pref threshold)" );
+						log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (pref threshold)" );
 						continue;
 					}
 				}
@@ -325,7 +327,7 @@
 			# check that user can see bugnotes if the last update included a bugnote
 			if ( $t_bug_date == $t_bugnote_date ) {
 				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
-						log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (access level)" );
+						log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (access level)" );
 					continue;
 				}
 			}
@@ -333,13 +335,14 @@
 			# Finally, let's get their emails, if they've set one
 			$t_email = user_get_email( $t_id );
 			if ( is_blank( $t_email ) ) {
-				log_event( LOG_EMAIL_RECIPIENT, "bug= $p_bug_id, drop $t_id (no email)" );
+				log_event( LOG_EMAIL_RECIPIENT, "bug=$p_bug_id, drop $t_id (no email)" );
 			} else {
 				# @@@ we could check the emails for validity again but I think
 				#   it would be too slow
 				$t_final_recipients[$t_id] = $t_email;
 			}
 		}
+
 		return $t_final_recipients;
 	}
 
