@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.102 2007-07-25 08:27:57 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.103 2007-07-25 10:50:52 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -481,11 +481,15 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					<?php echo lang_get( 'actions' ); ?>
 				</td>
 			</tr>
+	<form method="post" action="manage_proj_custom_field_update.php">
 	<?php
-		}
+		$t_index = 0;	
 
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id );
+			$t_field_id = 'field_id_' . $t_index;
+			$t_sequence = 'sequence_' . $t_index;
+			$t_checkbox_id = 'checkbox_' . $t_index;			
 	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
@@ -498,6 +502,9 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
 	<input type="submit" class="button-small" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
+	<?php 
+		$t_index++; 
+	?>
 				</td>
 				<td class="center">
 				<?php
@@ -509,6 +516,20 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<?php
 		} # end for loop
 	?>
+	<tr <?php echo helper_alternate_class() ?>>
+	<td></td><td>
+	<input type="hidden" name="max_id" value ="<?php echo $t_index ?>" />
+	<input type="submit" name="Update" class="button" value="<?php echo lang_get( 'update' ) ?>" />
+	</td>
+	<td>
+	<input type="submit" name="Remove" class="button" value="<?php echo lang_get( 'field_remove_button' ) ?>" />
+	</td>
+	</tr>
+</form>
+
+<?php
+		}
+?>
 	<tr>
 		<td class="left" colspan="3">
 			<form method="post" action="manage_proj_custom_field_add_existing.php">
@@ -530,6 +551,18 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 			</form>
 		</td>
 	</tr>
+	<tr>
+		<td class="left" colspan="3">
+			<form method="post" action="manage_proj_custom_field_copy.php">
+				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+				<select name="other_project_id">
+					<?php print_project_option_list( null, false, $f_project_id ); ?>
+				</select>
+				<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_from' ) ?>" />
+				<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_to' ) ?>" />
+			</form>
+		</td>
+	</tr>	
 	</table>
 	</div>
 <?php

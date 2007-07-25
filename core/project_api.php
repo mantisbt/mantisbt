@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.76 2005-10-29 09:52:52 prichards Exp $
+	# $Id: project_api.php,v 1.77 2007-07-25 10:50:48 zakman Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -192,9 +192,9 @@
 		}
 	}
 
-	#===================================
-	# Creation / Deletion / Updating
-	#===================================
+	#=======================================
+	# Creation / Deletion / Updating / Copy
+	#=======================================
 
 	# --------------------
 	# Create a new project
@@ -333,6 +333,18 @@
 		return true;
 	}
 
+	#--------------------
+	# Copy custom fields
+	function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
+		$t_custom_field_ids = custom_field_get_linked_ids( $p_source_id );
+ 		foreach ( $t_custom_field_ids as $t_custom_field_id ) {
+			if( !custom_field_is_linked( $t_custom_field_id, $p_destination_id ) ){
+ 				custom_field_link( $t_custom_field_id, $p_destination_id );
+ 				$t_sequence = custom_field_get_sequence( $t_custom_field_id, $p_source_id );
+ 				custom_field_set_sequence( $t_custom_field_id, $p_destination_id, $t_sequence );
+			}
+ 		}
+	}
 
 	#===================================
 	# Data Access

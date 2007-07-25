@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.305 $
-	# $Author: vboctor $
-	# $Date: 2007-07-25 08:27:57 $
+	# $Revision: 1.306 $
+	# $Author: zakman $
+	# $Date: 2007-07-25 10:50:49 $
 	#
-	# $Id: strings_english.txt,v 1.305 2007-07-25 08:27:57 vboctor Exp $
+	# $Id: strings_english.txt,v 1.306 2007-07-25 10:50:49 zakman Exp $
 	###########################################################################
 
 ?>
@@ -814,6 +814,8 @@ $s_public = 'public';
 $s_private = 'private';
 $s_update_project_button = 'Update Project';
 $s_delete_project_button = 'Delete Project';
+$s_copy_from = 'Copy From';
+$s_copy_to = 'Copy To';
 $s_categories_and_version_title = 'Categories and Versions';
 $s_categories = 'Categories';
 $s_add_category_button = 'Add Category';
