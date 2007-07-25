@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.346 2007-07-21 22:54:28 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.347 2007-07-25 08:27:57 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1102,6 +1102,10 @@
 
 	# access level needed to set a bug sticky
 	$g_set_bug_sticky_threshold			= MANAGER;
+	
+	# The minimum access level for someone to be a member of the development team
+	# and appear on the project information page.
+	$g_development_team_threshold = DEVELOPER;
 
 	# this array sets the access thresholds needed to enter each status listed.
 	# if a status is not listed, it falls back to $g_update_bug_status_threshold

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.50 2007-07-16 08:23:38 giallu Exp $
+	# $Id: summary_page.php,v 1.51 2007-07-25 08:27:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,10 +19,14 @@
 <?php
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-	$t_project_id = helper_get_current_project();
+	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+
+	# Override the current page to make sure we get the appropriate project-specific configuration
+	$g_project_override = $f_project_id;
+
 	$t_user_id = auth_get_current_user_id();
 
-	if ( ALL_PROJECTS == $t_project_id ) {
+	if ( ALL_PROJECTS == $f_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
 		foreach ( $t_topprojects as $t_project ) {
 			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
@@ -30,8 +34,8 @@
 
 		$t_project_ids = array_unique( $t_project_ids );
 	} else {
-		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
-		array_unshift( $t_project_ids, $t_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
+		array_unshift( $t_project_ids, $f_project_id );
 	}
 
 	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );

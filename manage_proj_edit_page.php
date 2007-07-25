@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.101 2007-07-21 22:54:28 giallu Exp $
+	# $Id: manage_proj_edit_page.php,v 1.102 2007-07-25 08:27:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 
 	$row = project_get_row( $f_project_id );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( project_get_field( $f_project_id, 'name' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
