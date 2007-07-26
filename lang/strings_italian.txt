@@ -12,13 +12,13 @@
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.288
+	# Based on strings_english.txt rev. 1.306
 	# -------------------------------------------------
-	# $Revision: 1.119 $
-	# $Author: achumakov $
-	# $Date: 2006-12-30 23:55:20 $
+	# $Revision: 1.120 $
+	# $Author: giallu $
+	# $Date: 2007-07-26 07:39:49 $
 	#
-	# $Id: strings_italian.txt,v 1.119 2006-12-30 23:55:20 achumakov Exp $
+	# $Id: strings_italian.txt,v 1.120 2007-07-26 07:39:49 giallu Exp $
 	###########################################################################
 
 ?>
@@ -41,6 +41,7 @@ $s_actiongroup_menu_set_sticky = "Imposta/resetta primo piano";
 $s_actiongroup_menu_update_field = "Aggiorna %s";
 $s_actiongroup_menu_update_target_version = "Assegna a versione";
 $s_actiongroup_menu_update_fixed_in_version = "Aggiorna versione di risoluzione";
+$s_actiongroup_menu_add_note = "Aggiungi nota";
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -64,6 +65,8 @@ $s_jump = "Vai";
 $s_copy_users = "Copia utenti";
 $s_copy_categories_from = "Copia categorie da";
 $s_copy_categories_to = "Copia categorie su";
+$s_copy_versions_from = "Copia versioni da";
+$s_copy_versions_to = "Copia versioni su";
 $s_copy_users_from = "Copia utenti da";
 $s_copy_users_to = "Copia utenti su";
 $s_bug_history = "Storia dell'anomalia";
@@ -108,9 +111,9 @@ $s_make_public = "Rendi pubblica";
 $s_create_new_project_link = "Crea nuovo progetto";
 
 $s_login_link = "Accedi";
+$s_select_option = "(seleziona)";
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
 $s_bug_actiongroup_access = "Non disponi dell'autorizzazione necessaria per eseguire questa azione";
 $s_bug_actiongroup_status = "Non è possibile impostare lo stato richiesto per la presente anomalia";
 $s_bug_actiongroup_category = "Non è possibile impostare la categoria richiesta per la presente anomalia";
@@ -223,6 +226,7 @@ $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = "Anomalia %d non trovata.";
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = "Filtro %d non trovato.";
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = "Il filtro che stai cercando di usare è troppo vecchio per poterlo aggiornare, ricrealo.";
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = "Indirizzo email non valido.";
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = "Non è consentito l'utilizzo di indirizzi email usa&getta.";
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = "Profilo non trovato.";
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = "Non è consentito il caricamento di questo tipo di file.";
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = "Il file è un duplicato.  Cancella prima il file presente.";
@@ -239,6 +243,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = "Autenticazione LDAP fallita.";
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = "Connessione al server LDAP fallita.";
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = "Aggiornamento del record LDAP fallito.";
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = "Record utente LDAP non trovato.";
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = "Estensione LDAP non caricata.";
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = "Connessione al database fallita.  L'errore ricevuto dal database è #%d: %s";
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = "Interrogazione database fallita.  L'errore ricevuto dal database è #%d: %s per la query: %s";
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = "Selezione del database fallita.  L'errore ricevuto dal database è #%d: %s";
@@ -248,6 +253,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "Categoria non trovata.";
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "Una versione con quel nome esiste già.";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = "Versione \"%s\" non trovata.";
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = "Il nome dell'utente non è valido.  I nomi utente possono contenere solo lettere non accentate, cifre, spazi, trattini e underscore (\"_\").";
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = "Il nome proprio dell'utente non è valido.";
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "L'utente non ha il livello di accesso necessario.";
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = "Il nominativo specificato corrisponde a quello di un altro utente.  Specificane uno diverso.";
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Il supporto alle sponsorizzazioni non è abilitato.";
@@ -271,6 +277,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Raggiunto
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = "Questa operazione creerebbe una circolarità nella gerarchia dei sottoprogetti.";
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = "Non puoi modificare il livello di accesso nell'unico amministratore del sistema.";
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = "Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php";
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = "L'integrazione con Twitter necessita dell'estensione CURL per PHP che non risulta installata.";
 
 $s_login_error = "L'account potrebbe essere stato disabilitato o bloccato oppure potresti aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -672,6 +679,9 @@ $s_create_user_button = "Crea utente";
 # manage_page.php
 $s_hide_disabled = "Nascondi disabilitati";
 $s_filter_button = "Applica il filtro";
+$s_create_filter_link = "Crea link permanente";
+$s_create_short_link = "Crea link breve";
+$s_filter_permalink = "Quello che segue è un link permanente alla configurazione attuale dei filtri:";
 $s_manage_users_link = "Gestione utenti";
 $s_manage_projects_link = "Gestione progetti";
 $s_manage_custom_field_link = "Gestione campi personalizzati";
@@ -806,6 +816,8 @@ $s_public = "pubblico";
 $s_private = "privato";
 $s_update_project_button = "Aggiorna progetto";
 $s_delete_project_button = "Elimina progetto";
+$s_copy_from = "Copia da";
+$s_copy_to = "Copia su";
 $s_categories_and_version_title = "Categorie e versioni";
 $s_categories = "Categorie";
 $s_add_category_button = "Nuova categoria";
@@ -1058,6 +1070,7 @@ $s_percentage_fixed = "% corrette";
 $s_percentage_errors = "% false";
 $s_errors = "False";
 $s_total = "Totale";
+$s_balance = "Differenza";
 $s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
 $s_longest_open_bug = "anomalia più lunga nella risoluzione";
 $s_longest_open = "durata massima in stato aperto";
@@ -1172,6 +1185,9 @@ $s_custom_field_require_report = "Obbligatorio nei report";
 $s_custom_field_require_update = "Obbligatorio in \"Aggiorna anomalia\"";
 $s_custom_field_require_resolved = "Obbligatorio in \"Risolvi anomalia\"";
 $s_custom_field_require_closed = "Obbligatorio in \"Chiudi anomalia\"";
+$s_link_custom_field_to_project_title = "Associa il campo personalizzato al progetto";
+$s_link_custom_field_to_project_button = "Associa campo personalizzato";
+$s_linked_projects = "Utilizzato nei progetti";
 
 $s_custom_field_sequence = "Sequenza";
 $s_custom_field_type_enum_string = "0:stringa,1:numerico,2:virgola mobile,3:valori prestabiliti,4:email,5:checkbox,6:lista,7:lista a scelta multipla,8:data";
@@ -1215,6 +1231,7 @@ $s_sponsorship_process_url = "";
 
 # Changelog
 $s_changelog = "Registro modifiche";
+$s_changelog_empty = "Il registro non contiene nessuna informazione";
 
 # Roadmap
 $s_roadmap = "Roadmap";
@@ -1244,6 +1261,7 @@ $s_bug_created_from = "Anomalia generata da";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Grafico delle relazioni";
+$s_viewing_bug_dependency_graph_title = "Grafico delle dipendenze";
 $s_relation_graph = "Grafico relazioni";
 $s_dependency_graph = "Grafico dipendenze";
 $s_vertical = "Verticale";
@@ -1337,4 +1355,12 @@ $s_total_time_for_issue = "Tempo totale speso sull'anomalia = %s";
 $s_from_date = "Dal";
 $s_to_date = "Al";
 
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
+
+# Twitter Integration
+$s_twitter_resolved = "%d: [%s] %s (risolta da %s in %s)";
+$s_twitter_resolved_no_version = "%d: [%s] %s (risolta da %s)";
+
+# Project Page
+$s_development_team = "Gruppo di sviluppo";
 ?>
