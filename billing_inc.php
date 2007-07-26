@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.12 2007-07-11 21:13:24 giallu Exp $
+	# $Id: billing_inc.php,v 1.13 2007-07-26 21:59:43 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,9 +51,9 @@
 	$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
 	$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-	$t_bugnote_stats_from_d = gpc_get_string('start_day', $t_bugnote_stats_from_def_d);
-	$t_bugnote_stats_from_m = gpc_get_string('start_month', $t_bugnote_stats_from_def_m);
-	$t_bugnote_stats_from_y = gpc_get_string('start_year', $t_bugnote_stats_from_def_y);
+	$t_bugnote_stats_from_d = gpc_get_int('start_day', $t_bugnote_stats_from_def_d);
+	$t_bugnote_stats_from_m = gpc_get_int('start_month', $t_bugnote_stats_from_def_m);
+	$t_bugnote_stats_from_y = gpc_get_int('start_year', $t_bugnote_stats_from_def_y);
 
 	$t_bugnote_stats_to_def = $t_today;
 	$t_bugnote_stats_to_def_ar = explode ( ":", $t_bugnote_stats_to_def );
@@ -61,12 +61,12 @@
 	$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
 	$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-	$t_bugnote_stats_to_d = gpc_get_string('end_day', $t_bugnote_stats_to_def_d);
-	$t_bugnote_stats_to_m = gpc_get_string('end_month', $t_bugnote_stats_to_def_m);
-	$t_bugnote_stats_to_y = gpc_get_string('end_year', $t_bugnote_stats_to_def_y);
+	$t_bugnote_stats_to_d = gpc_get_int('end_day', $t_bugnote_stats_to_def_d);
+	$t_bugnote_stats_to_m = gpc_get_int('end_month', $t_bugnote_stats_to_def_m);
+	$t_bugnote_stats_to_y = gpc_get_int('end_year', $t_bugnote_stats_to_def_y);
 
 	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
-	$f_bugnote_cost = gpc_get_string( 'bugnote_cost', '' );
+	$f_bugnote_cost = gpc_get_int( 'bugnote_cost', '' );
 	$f_project_id = helper_get_current_project();
 
 	if ( ON == config_get( 'time_tracking_with_billing' ) ) {
