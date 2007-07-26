@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.108 $
-	# $Author: giallu $
-	# $Date: 2007-07-26 08:18:41 $
+	# $Revision: 1.109 $
+	# $Author: jbrugger $
+	# $Date: 2007-07-26 11:43:51 $
 	#
-	# $Id: strings_spanish.txt,v 1.108 2007-07-26 08:18:41 giallu Exp $
+	# $Id: strings_spanish.txt,v 1.109 2007-07-26 11:43:51 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -43,7 +43,7 @@ $s_actiongroup_menu_update_category = 'Cambiar Categoría';
 $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %s';
 $s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
-$s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelto en Versión';
+$s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelta en Versión';
 $s_actiongroup_menu_add_note = 'Añadir Nota';
 $s_actiongroup_bugs = 'Incidencias Seleccionadas';
 
@@ -130,7 +130,7 @@ $s_status_bugs_conf_msg = 'Elegir el estado de las incidencias';
 $s_view_status_bugs_conf_msg = 'Elegir la visibilidad de las incidencias';
 $s_category_bugs_conf_msg = 'Elegir categoría de las incidencias';
 $s_set_sticky_bugs_conf_msg = '¿Está seguro que desea fijar/desfijar estas incidencias?';
-$s_fixed_in_version_bugs_conf_msg = 'Actualizar Resuelto en Versión a';
+$s_fixed_in_version_bugs_conf_msg = 'Actualizar Resuelta en Versión a';
 $s_target_version_bugs_conf_msg = 'Actualizar Previsto para Versión a';
 $s_close_group_bugs_button = 'Cerrar Incidencias';
 $s_delete_group_bugs_button = 'Eliminar Incidencias';
@@ -143,7 +143,7 @@ $s_status_group_bugs_button = 'Actualizar Estado';
 $s_category_group_bugs_button = 'Actualizar Categoría';
 $s_view_status_group_bugs_button = 'Actualizar Visibilidad';
 $s_set_sticky_group_bugs_button = 'Fijado/Desfijado';
-$s_fixed_in_version_group_bugs_button = 'Actualizar Resuelto en Versión';
+$s_fixed_in_version_group_bugs_button = 'Actualizar Resuelta en Versión';
 $s_target_version_group_bugs_button = 'Actualizar Previsto para Versión';
 
 # improved JPgraphs strings
@@ -370,7 +370,7 @@ $s_email_priority = 'Prioridad';
 $s_email_status = 'Estado';
 $s_email_resolution = 'Resolución';
 $s_email_duplicate = 'Duplicada de';
-$s_email_fixed_in_version = 'Resuelto en versión';
+$s_email_fixed_in_version = 'Resuelta en versión';
 $s_email_target_version = 'Previsto para Versión';
 $s_email_date_submitted = 'Fecha de Envío';
 $s_email_last_modified = 'Última Modificación';
@@ -588,7 +588,7 @@ $s_os_version = 'Versión de S.O.';
 $s_eta = 'Tiempo Estimado';
 $s_product_version = 'Versión del producto';
 $s_build = 'Build';
-$s_fixed_in_version = 'Resuelto en versión';
+$s_fixed_in_version = 'Resuelta en versión';
 $s_target_version = 'Previsto para Versión';
 $s_votes = 'Votos';
 $s_summary = 'Resumen';
