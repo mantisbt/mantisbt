@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.51 2007-07-11 22:21:32 prichards Exp $
+	# $Id: error_api.php,v 1.52 2007-07-26 22:11:09 prichards Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -330,7 +330,7 @@
 
 		$t_error = $MANTIS_ERROR[$p_error];
 
-		return call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
+		return string_html_specialchars( call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) ) );
 	}
 
 	# ---------------

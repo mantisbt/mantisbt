@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_revert.php,v 1.2 2005-08-01 13:42:55 thraxisp Exp $
+	# $Id: manage_config_revert.php,v 1.3 2007-07-26 22:14:58 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -31,7 +31,7 @@
 	if ( '' != $f_revert ) {
 		# Confirm with the user
 		helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . ': ' .
-			implode( ', ', $t_revert_vars ) . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
+			string_html_specialchars( implode( ', ', $t_revert_vars ) ) . ' ' . lang_get( 'in_project' ) . ' ' . project_get_name( $f_project_id ),
 			lang_get( 'delete_config_button' ) );
 
 		foreach ( $t_revert_vars as $t_revert ) {

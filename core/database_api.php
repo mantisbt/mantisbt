@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.61 2007-07-25 08:35:50 vboctor Exp $
+	# $Id: database_api.php,v 1.62 2007-07-26 22:11:09 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -295,7 +295,7 @@
 	# display both the error num and error msg
 	function db_error( $p_query=null ) {
 		if ( null !== $p_query ) {
-			error_parameters( db_error_num(), db_error_msg(), string_html_specialchars( $p_query ) );
+			error_parameters( db_error_num(), db_error_msg(), $p_query );
 		} else {
 			error_parameters( db_error_num(), db_error_msg() );
 		}
