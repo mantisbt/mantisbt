@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.107 $
-	# $Author: jbrugger $
-	# $Date: 2007-07-25 12:55:27 $
+	# $Revision: 1.108 $
+	# $Author: giallu $
+	# $Date: 2007-07-26 08:18:41 $
 	#
-	# $Id: strings_spanish.txt,v 1.107 2007-07-25 12:55:27 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.108 2007-07-26 08:18:41 giallu Exp $
 	###########################################################################
 
 ?>
