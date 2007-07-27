@@ -11,11 +11,11 @@
 	# Croatian strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
+	# $Revision: 1.47 $
+	# $Author: prichards $
+	# $Date: 2007-07-27 17:41:07 $
 	#
-	# $Id: strings_croatian.txt,v 1.46 2006-11-08 13:32:44 achumakov Exp $
+	# $Id: strings_croatian.txt,v 1.47 2007-07-27 17:41:07 prichards Exp $
 	###########################################################################
 
 ?>
@@ -793,7 +793,7 @@ $s_edit_project_title = "Editiraj projekt";
 $s_project_name = "Ime projekta";
 $s_view_status = "Vidi status";
 $s_public = "javni";
-$s_private = "privatni";;
+$s_private = "privatni";
 $s_update_project_button = "Ažuriraj projekt";
 $s_delete_project_button = "Obriši projekt";
 $s_categories_and_version_title = "Kategorije i verzije";

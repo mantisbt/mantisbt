@@ -13,11 +13,11 @@
 	# Danish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
+	# $Revision: 1.2 $
+	# $Author: prichards $
+	# $Date: 2007-07-27 17:41:07 $
 	#
-	# $Id: strings_danish_8859-15.txt,v 1.1 2006-11-08 13:32:44 achumakov Exp $
+	# $Id: strings_danish_8859-15.txt,v 1.2 2007-07-27 17:41:07 prichards Exp $
 	###########################################################################
 
 ?>
@@ -795,7 +795,7 @@ $s_edit_project_title = 'Rediger projekt';
 $s_project_name = 'Projekt-start';
 $s_view_status = 'Vis status';
 $s_public = 'offentlig';
-$s_private = 'privat';;
+$s_private = 'privat';
 $s_update_project_button = 'Opdater projekt';
 $s_delete_project_button = 'Slet projekt';
 $s_categories_and_version_title = 'Kategorier og versioner';
