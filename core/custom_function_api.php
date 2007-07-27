@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.31 2007-04-04 06:45:22 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.32 2007-07-27 20:04:31 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -29,17 +29,17 @@
 
 	# --------------------
 	# Prints one entry in the changelog.
-	function custom_function_default_changelog_print_issue( $p_issue_id ) {
+	function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 ) {
 		$t_bug = bug_get( $p_issue_id );
 
 		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
+		echo str_pad( '', $p_issue_level * 6, '&nbsp;' ), '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 		}
 
-		echo '<br />';
+		echo ' - ', get_enum_element( 'status', $t_bug->status ), '.<br />';
 	}
 
 	# --------------------
@@ -53,7 +53,7 @@
 
 	# --------------------
 	# Prints one entry in the roadmap.
-	function custom_function_default_roadmap_print_issue( $p_issue_id ) {
+	function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 ) {
 		$t_bug = bug_get( $p_issue_id );
 		
 		if ( bug_is_resolved( $p_issue_id ) ) {
@@ -64,7 +64,7 @@
 		}
 		
 		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
-		echo '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
+		echo str_pad( '', $p_issue_level * 6, '&nbsp;' ), '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';

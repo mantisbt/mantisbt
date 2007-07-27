@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.6 2007-03-24 17:20:51 zakman Exp $
+	# $Id: roadmap_page.php,v 1.7 2007-07-27 20:04:30 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -22,21 +22,19 @@
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 
 		$t_release_title = string_display( $t_project_name ) . ' - ' . string_display( $t_version_name );
-		echo $t_release_title, '<br />';
+		echo '<tt>';
+		echo '<br />', $t_release_title, '<br />';
 		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 	}
 
 	# print project header
 	function print_project_header( $p_project_name ) {
-		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br /><br />';
-		echo '<tt>';
+		echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
 	}
 	
 	$t_user_id = auth_get_current_user_id();
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
-	
-	$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
-
+		
 	if ( ALL_PROJECTS == $f_project_id ) {
 		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
 		foreach ( $t_topprojects as $t_project ) {
@@ -47,12 +45,13 @@
 		$t_project_ids = array();
 
 		foreach ( $t_project_ids_to_check as $t_project_id ) {
+			$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold', null, null, $t_project_id );
 			if ( access_has_project_level( $t_roadmap_view_access_level, $t_project_id ) ) {
 				$t_project_ids[] = $t_project_id;
 			}
 		}
 	} else {
-		access_ensure_project_level( $t_roadmap_view_access_level, $f_project_id );
+		access_ensure_project_level( config_get( 'roadmap_view_threshold' ), $f_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
 		array_unshift( $t_project_ids, $f_project_id );
 	}
@@ -63,10 +62,6 @@
 	$t_project_index = 0;
 
 	foreach( $t_project_ids as $t_project_id ) {
-		if ( $t_project_index > 0 ) {
-			echo '<br />';
-		}
-
 		$c_project_id   = db_prepare_int( $t_project_id );
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
@@ -76,8 +71,9 @@
 
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_bug_table	= config_get( 'mantis_bug_table' );
-
-		$t_version_rows = version_get_all_rows( $t_project_id );
+		$t_relation_table = config_get( 'mantis_bug_relationship_table' );
+		
+		$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
 
 		$t_project_header_printed = false;
 		
@@ -91,11 +87,14 @@
 			$t_issues_planned = 0;
 			$t_issues_resolved = 0;
 
+			$t_version_header_printed = false;
 
 			$t_version = $t_version_row['version'];
 			$c_version = db_prepare_string( $t_version );
 
-			$query = "SELECT * FROM $t_bug_table WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
+			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
+						LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
+						WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
 
 			$t_description = $t_version_row['description'];
 
@@ -104,6 +103,7 @@
 			$t_result = db_query( $query );
 
 			$t_issue_ids = array();
+			$t_issue_parents = array();
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
@@ -121,6 +121,7 @@
 				}
 
 				$t_issue_id = $t_row['id'];
+				$t_issue_parent = $t_row['source_bug_id'];
 
 				if ( !helper_call_custom_function( 'roadmap_include_issue', array( $t_issue_id ) ) ) {
 					continue;
@@ -132,69 +133,78 @@
 					$t_issues_resolved++;
 				}
 
-
 				$t_issue_ids[] = $t_issue_id;
+				$t_issue_parents[] = $t_issue_parent;
 			}
 
 			$i++;
 
+			$t_progress = $t_issues_planned > 0 ? ( (integer) ( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
+
 			if ( $t_issues_planned > 0 ) {
 				$t_progress = (integer) ( $t_issues_resolved * 100 / $t_issues_planned );
+				
+ 				if ( !$t_project_header_printed ) {
+					print_project_header( $t_project_name );
+					$t_project_header_printed = true;
+				}
+				
+				if ( !$t_version_header_printed ) {
+					print_version_header( $t_version_row );
+					$t_version_header_printed = true;
+				}
 
-				print_project_header( $t_project_name );
-				$t_project_header_printed = true;
-
-				print_version_header( $t_version_row );
-				$t_version_header_printed = true;
+				if ( !is_blank( $t_description ) ) {
+					echo string_display( '<br />' .$t_description . '<br />' );
+				}
 
 				// show progress bar
 				echo '<div class="progress400">';
 				echo '  <span class="bar" style="width: ' . $t_progress . '%;">' . $t_progress . '%</span>';
 				echo '</div>';
-			} else {
-				$t_project_header_printed = false;
-				$t_version_header_printed = false;
-			}
+			} 
 
-			if ( !is_blank( $t_description ) ) {
-				echo string_display( "<br />$t_description<br /><br />" );
-
-				#if ( $i > 0 ) {
-				#	echo '<br />';
-				#}
+			$t_issue_set_ids = array();
+			$t_issue_set_levels = array();
+			$k = 0;
+			
+			while ( 0 < count( $t_issue_ids ) ) {
+				$t_issue_id = $t_issue_ids[$k];
+				$t_issue_parent = $t_issue_parents[$k];
 				
-				if ( !$t_project_header_printed ) {
-					print_project_header( $t_project_name );
-					$t_project_header_printed = true;
+				if ( !in_array( $t_issue_parent, $t_issue_ids ) ) {
+					$l = array_search( $t_issue_parent, $t_issue_set_ids );
+					if ( $l !== false ) {
+						for ( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
+							#do nothing
+						}
+						$t_issue_set_ids_end = array_splice( $t_issue_set_ids, $m );
+						$t_issue_set_levels_end = array_splice( $t_issue_set_levels, $m );
+						$t_issue_set_ids[] = $t_issue_id;
+						$t_issue_set_levels[] = $t_issue_set_levels[$l] + 1;
+						$t_issue_set_ids = array_merge( $t_issue_set_ids, $t_issue_set_ids_end );
+						$t_issue_set_levels = array_merge( $t_issue_set_levels, $t_issue_set_levels_end );
+					}
+					else {
+						$t_issue_set_ids[] = $t_issue_id;
+						$t_issue_set_levels[] = 0;
+					}
+					array_splice( $t_issue_ids, $k, 1 );
+					array_splice( $t_issue_parents, $k, 1 );
 				}
-
-				if ( !$t_version_header_printed ) {
-					print_version_header( $t_version_row );
-					$t_version_header_printed = true;
+				else {
+					$k++;
+				}
+				if ( count( $t_issue_ids ) <= $k ) {
+					$k = 0;
 				}
 			}
 
-			foreach ( $t_issue_ids as $t_issue_id ) {
-				# Print the header for the version with the first roadmap entry to be added.
-				if ( $t_first_entry && !$t_version_header_printed ) {
-					if ( $i > 0 ) {
-						echo '<br />';
-					}
-
-					if ( !$t_project_header_printed ) {
-						print_project_header( $t_project_name );
-						$t_project_header_printed = true;
-					}
-
-					if ( !$t_version_header_printed ) {
-						print_version_header( $t_version_row );
-						$t_version_header_printed = true;
-					}
-
-					$t_first_entry = false;
-				}
-
-				helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_id ) );
+			for ( $j = 0; $j < count( $t_issue_set_ids ); $j++ ) {
+				$t_issue_set_id = $t_issue_set_ids[$j];
+				$t_issue_set_level = $t_issue_set_levels[$j];
+				 
+				helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
 			}
 
 			if ( $t_issues_planned > 0 ) {
