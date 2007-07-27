@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.90 2007-07-11 21:53:49 giallu Exp $
+	# $Id: string_api.php,v 1.91 2007-07-27 17:58:09 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -82,7 +82,7 @@
 
 	# --------------------
 	# Prepare a multiple line string for display to HTML
-	function string_display( $p_string ) {
+	function string_display( $p_string ) {	
 		$p_string = string_strip_hrefs( $p_string );
 		$p_string = string_html_specialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ true );
@@ -273,41 +273,27 @@
 			return $p_string;
 		}
 
-		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag, '/') . '(\d+)|$)/s',
-								$p_string, $t_matches, PREG_SET_ORDER );
-		$t_result = '';
-
-		if ( $p_include_anchor ) {
-			foreach ( $t_matches as $t_match ) {
-				$t_result .= $t_match[1];
-
-				if ( isset( $t_match[2] ) ) {
-					$t_bug_id = $t_match[2];
-					if ( bug_exists( (int)$t_bug_id ) ) {
-						$t_result .= string_get_bug_view_link( $t_bug_id, null, $p_detail_info, $p_fqdn );
-					} else {
-						$t_result .= $t_bug_id;
-					}
-				}
-			}
+		if ($p_include_anchor) {
+			$callback = create_function('$p_array','	
+										if (bug_exists( (int)$p_array[2] ) ) { 
+											return $p_array[1] . string_get_bug_view_link( $p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . '); 
+										} else {    	
+											return $p_array[0];
+										}
+										');
 		} else {
-			foreach ( $t_matches as $t_match ) {
-				$t_result .= $t_match[1];
-
-				if ( isset( $t_match[2] ) ) {
-					$t_bug_id = $t_match[2];
-					# We might as well create the link here even if the bug
-					#  doesn't exist.  In the case above we don't want to do
-					#  the summary lookup on a non-existant bug.  But here, we
-					#  can create the link and by the time it is clicked on, the
-					#  bug may exist.
-
-					$t_result .= string_get_bug_view_url_with_fqdn( $t_bug_id, null );
-				}
-			}
+			$callback = create_function('$p_array','
+										# We might as well create the link here even if the bug
+										#  doesnt exist.  In the case above we dont want to do
+										#  the summary lookup on a non-existant bug.  But here, we
+										#  can create the link and by the time it is clicked on, the
+										#  bug may exist.			
+										return $p_array[1] . string_get_bug_view_url_with_fqdn( $p_array[2], null );
+										');
 		}
 
-		return $t_result;
+		$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote($t_tag, '/') . '(\d+)\b/', $callback, $p_string);
+		return $p_string;
 	}
 
 	# --------------------
@@ -325,50 +311,41 @@
 	# if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
 	function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
 		$t_tag = config_get( 'bugnote_link_tag' );
+
 		# bail if the link tag is blank
-		if ( '' == $t_tag ) {
+		if ( '' == $t_tag || $p_string == '' ) {
 			return $p_string;
 		}
-
-		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
-								$p_string, $t_matches, PREG_SET_ORDER );
-		$t_result = '';
-
-		if ( $p_include_anchor ) {
-			foreach ( $t_matches as $t_match ) {
-				$t_result .= $t_match[1];
-
-				if ( isset( $t_match[2] ) ) {
-					$t_bugnote_id = $t_match[2];
-					if ( bugnote_exists( $t_bugnote_id ) ) {
-						$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
-						if ( bug_exists( $t_bug_id ) ) {
-							$t_result .= string_get_bugnote_view_link( $t_bug_id, $t_bugnote_id, null, $p_detail_info, $p_fqdn );
-						} else {
-							$t_result .= $t_bugnote_id;
-						}
-					}
-				}
-			}
+		if ($p_include_anchor) {
+			$callback = create_function('$p_array','
+										if ( bugnote_exists( (int)$p_array[2] ) ) {
+											$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+											if ( bug_exists( $t_bug_id ) ) {
+												return $p_array[1] . string_get_bugnote_view_link( $t_bug_id, (int)$p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . ' );
+											} else {
+												return $p_array[0];
+											}
+										} else {
+											return $p_array[0];
+										}
+										');
 		} else {
-			foreach ( $t_matches as $t_match ) {
-				$t_result .= $t_match[1];
-
-				if ( isset( $t_match[2] ) ) {
-					$t_bugnote_id = $t_match[2];
-					$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
-					# We might as well create the link here even if the bug
-					#  doesn't exist.  In the case above we don't want to do
-					#  the summary lookup on a non-existant bug.  But here, we
-					#  can create the link and by the time it is clicked on, the
-					#  bug may exist.
-
-					$t_result .= string_get_bugnote_view_url_with_fqdn( $t_bug_id, $t_bugnote_id, null );
-				}
-			}
+			$callback = create_function('$p_array','
+										# We might as well create the link here even if the bug
+										#  doesnt exist.  In the case above we dont want to do
+										#  the summary lookup on a non-existant bug.  But here, we
+										#  can create the link and by the time it is clicked on, the
+										#  bug may exist.	
+										$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+										if ( bug_exists( $t_bug_id ) ) {
+											return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
+										} else {
+											return $p_array[0];
+										}
+										');
 		}
-
-		return $t_result;
+		$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote($t_tag, '/') .'(\d+)\b/', $callback, $p_string);
+		return $p_string;
 	}
 
 	#===================================
@@ -722,9 +699,9 @@
 			# achumakov: @ added to avoid warning output in unsupported codepages
 			# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 			# This is VERY important for Eastern European, Baltic and Korean languages
-			return @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
+			return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) ) );
 		} else {
-			return htmlspecialchars( $p_string );
+			return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars( $p_string ) );
 		}
 	}
 	
