@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.43 2007-07-18 22:55:24 giallu Exp $
+	# $Id: relationship_api.php,v 1.44 2007-07-27 23:23:20 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -67,43 +67,72 @@
 		var $dest_project_id;
 		var $type;
 	}
+	
+	$g_relationships = array();
+	$g_relationships[ BUG_DEPENDANT ] = array(
+		'#forward' => TRUE,
+		'#complementary' => BUG_BLOCKS,
+		'#description' => 'dependant_on',
+		'#notify_added' => 'email_notification_title_for_action_dependant_on_relationship_added',
+		'#notify_deleted' => 'email_notification_title_for_action_dependant_on_relationship_deleted',
+		'#edge_style' => array ('color' => '#C00000','dir' => 'back'),
+	);
+	$g_relationships[ BUG_BLOCKS ] = array(
+		'#forward' => FALSE,
+		'#complementary' => BUG_DEPENDANT,
+		'#description' => 'blocks',
+		'#notify_added' => 'email_notification_title_for_action_blocks_relationship_added',
+		'#notify_deleted' => 'email_notification_title_for_action_blocks_relationship_deleted',
+		'#edge_style' => array ('color' => '#C00000','dir' => 'forward'),
+	);
+	$g_relationships[ BUG_DUPLICATE ] = array(
+		'#forward' => TRUE,
+		'#complementary' => BUG_HAS_DUPLICATE,
+		'#description' => 'duplicate_of',
+		'#notify_added' => 'email_notification_title_for_action_duplicate_of_relationship_added',
+		'#notify_deleted' => 'email_notification_title_for_action_duplicate_of_relationship_deleted',
+		'#edge_style' => array ('style' => 'dashed','color' => '#808080'),
+	);
+	$g_relationships[ BUG_HAS_DUPLICATE ] = array(
+		'#forward' => FALSE,
+		'#complementary' => BUG_DUPLICATE,
+		'#description' => 'has_duplicate',
+		'#notify_added' => 'email_notification_title_for_action_has_duplicate_relationship_added',
+		'#notify_deleted' => 'email_notification_title_for_action_has_duplicate_relationship_deleted',
+	);
+	$g_relationships[ BUG_RELATED ] = array(
+		'#forward' => TRUE,
+		'#complementary' => BUG_RELATED,
+		'#description' => 'related_to',
+		'#notify_added' => 'email_notification_title_for_action_related_to_relationship_added',
+		'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
+	);
+
+	if ( file_exists( dirname( dirname( __FILE__ ) ).DIRECTORY_SEPARATOR.'custom_relationships_inc.php' ) ) {
+		require_once( dirname( dirname( __FILE__ ) ).DIRECTORY_SEPARATOR.'custom_relationships_inc.php' );
+	}    
+
 
 	# --------------------
 	# Return the complementary type of the provided relationship
 	function relationship_get_complementary_type( $p_relationship_type ) {
-		switch ( $p_relationship_type ) {
-			case BUG_BLOCKS:
-				return BUG_DEPENDANT;
-				break;
-			case BUG_DEPENDANT:
-				return BUG_BLOCKS;
-				break;
-			case BUG_HAS_DUPLICATE:
-				return BUG_DUPLICATE;
-				break;
-			case BUG_DUPLICATE:
-				return BUG_HAS_DUPLICATE;
-				break;
-			case BUG_RELATED:
-				return BUG_RELATED;
-				break;
-			default:
-				trigger_error( ERROR_GENERIC, ERROR );
-				break;
+		global $g_relationships;
+		if ( !isset( $g_relationships[ $p_relationship_type ] ) ) {
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
+		return $g_relationships[ $p_relationship_type ][ '#complementary' ];
 	}
 
 	# --------------------
 	function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
-		if( $p_relationship_type == BUG_BLOCKS || $p_relationship_type == BUG_HAS_DUPLICATE ) {
-			# BUG_BLOCKS or BUG_HAS_DUPLICATE -> swap src and dest
+		global $g_relationships;
+		if ( $g_relationships[ $p_relationship_type ][ '#forward' ] === FALSE ) {
 			$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
 			$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
 			$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
-		}
-		else {
+		} else {
 			$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 			$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 			$c_relationship_type = db_prepare_int( $p_relationship_type );
@@ -129,13 +158,12 @@
 	function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
-		if( $p_relationship_type == BUG_BLOCKS || $p_relationship_type == BUG_HAS_DUPLICATE ) {
-			# BUG_BLOCKS or BUG_HAS_DUPLICATE -> swap src and dest
+		global $g_relationships;
+		if ( $g_relationships[ $p_relationship_type ][ '#forward' ] === FALSE ) {
 			$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
 			$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
 			$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
-		}
-		else {
+		} else {
 			$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 			$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 			$c_relationship_type = db_prepare_int( $p_relationship_type );
@@ -412,61 +440,28 @@
 	# --------------------
 	# get class description of a relationship (source side)
 	function relationship_get_description_src_side( $p_relationship_type ) {
-		switch ( $p_relationship_type ) {
-			case BUG_DUPLICATE:
-				return lang_get( 'duplicate_of' );
-				break;
-			case BUG_RELATED:
-				return lang_get( 'related_to' ) ;
-				break;
-			case BUG_DEPENDANT:
-				return lang_get( 'dependant_on' ) ;
-				break;
-			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		global $g_relationships;
+		if ( !isset( $g_relationships[ $p_relationship_type ] ) ) {
+			trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 		}
+		return lang_get( $g_relationships[ $p_relationship_type ][ '#description' ] ); 
 	}
 
 	# --------------------
 	# get class description of a relationship (destination side)
 	function relationship_get_description_dest_side( $p_relationship_type ) {
-		switch ( $p_relationship_type ) {
-			case BUG_DUPLICATE:
-				return lang_get( 'has_duplicate' ) ;
-				break;
-			case BUG_RELATED:
-				return lang_get( 'related_to' ) ;
-				break;
-			case BUG_DEPENDANT:
-				return lang_get( 'blocks' ) ;
-				break;
-			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		global $g_relationships;
+		if ( !isset( $g_relationships[ $p_relationship_type ] ) ||
+		     !isset( $g_relationships[ $g_relationships[ $p_relationship_type ][ '#complementary' ] ] ) ) {
+			trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 		}
+		return lang_get( $g_relationships[ $g_relationships[ $p_relationship_type ][ '#complementary' ] ][ '#description' ] ); 
 	}
 
 	# --------------------
 	# get class description of a relationship as it's stored in the history
 	function relationship_get_description_for_history( $p_relationship_code ) {
-		switch ( $p_relationship_code ) {
-			case BUG_HAS_DUPLICATE:
-				return lang_get( 'has_duplicate' ) ;
-				break;
-			case BUG_DUPLICATE:
-				return lang_get( 'duplicate_of' );
-				break;
-			case BUG_BLOCKS:
-				return lang_get( 'blocks' ) ;
-				break;
-			case BUG_DEPENDANT:
-				return lang_get( 'dependant_on' ) ;
-				break;
-			case BUG_RELATED:
-				return lang_get( 'related_to' ) ;
-				break;
-			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-		}
+		return relationship_get_description_src_side( $p_relationship_code );
 	}
 
 	# --------------------
@@ -683,6 +678,7 @@
  	# --------------------
  	# print HTML relationship listbox
 	function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
+		global $g_relationships;
 ?>
 <select name="<?php echo $p_select_name?>">
 <?php if ( $p_include_any ) { ?>
@@ -694,27 +690,11 @@
 <option value="-2" <?php echo ( $p_default_rel_type == -2 ? ' selected="selected"' : '' ) ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 <?php
     }
-?>
-$p_include_none
 
-<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
-<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
-<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
-<option value="<?php echo BUG_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_DUPLICATE ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'duplicate_of' ) ?></option>
-<option value="<?php echo BUG_HAS_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_HAS_DUPLICATE ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'has_duplicate' ) ?></option>
-</select>
-<?php
-	}
-
- 	# --------------------
- 	# print HTML relationship listbox
-	function relationship_list_box_for_cloned_bug( $p_default_rel_type = -1 ) {
+	foreach ( $g_relationships as $type => $relationship ) { 
 ?>
-<select name="rel_type">
-<option value="-1"<?php echo ( $p_default_rel_type == -1 ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'no_relationship' ) ?></option>
-<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
-<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
-<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected="selected"' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
+<option value="<?php echo $type ?>"<?php echo ( $p_default_rel_type == $type ? ' selected="selected"' : '' ) ?>><?php echo lang_get( $relationship['#description'] ) ?></option>
+<? } ?>
 </select>
 <?php
 	}

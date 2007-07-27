@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.136 2007-07-25 08:30:59 vboctor Exp $
+	# $Id: email_api.php,v 1.137 2007-07-27 23:23:20 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -19,6 +19,7 @@
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'email_queue_api.php' );
+	require_once( $t_core_dir . 'relationship_api.php' );
 	require_once( 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 	require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
@@ -499,26 +500,11 @@
 	function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 		$t_opt = array();
 		$t_opt[] = bug_format_id( $p_related_bug_id );
-		switch ( $p_rel_type ) {
-			case BUG_BLOCKS:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_blocks_relationship_added', $t_opt );
-				break;
-			case BUG_DEPENDANT:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_dependant_on_relationship_added', $t_opt );
-				break;
-			case BUG_HAS_DUPLICATE:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_has_duplicate_relationship_added', $t_opt );
-				break;
-			case BUG_DUPLICATE:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_duplicate_of_relationship_added', $t_opt );
-				break;
-			case BUG_RELATED:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_related_to_relationship_added', $t_opt );
-				break;
-			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-				break;
-			}
+		global $g_relationships;
+		if ( !isset( $g_relationships[ $p_rel_type ] ) ) {
+			trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		}
+		email_generic( $p_bug_id, 'relation', $g_relationships[ $p_rel_type ][ '#notify_added' ], $t_opt );
 	}
 
 	# --------------------
@@ -527,26 +513,11 @@
 	function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 		$t_opt = array();
 		$t_opt[] = bug_format_id( $p_related_bug_id );
-		switch ( $p_rel_type ) {
-			case BUG_BLOCKS:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_blocks_relationship_deleted', $t_opt );
-				break;
-			case BUG_DEPENDANT:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_dependant_on_relationship_deleted', $t_opt );
-				break;
-			case BUG_HAS_DUPLICATE:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_has_duplicate_relationship_deleted', $t_opt );
-				break;
-			case BUG_DUPLICATE:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_duplicate_of_relationship_deleted', $t_opt );
-				break;
-			case BUG_RELATED:
-				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_related_to_relationship_deleted', $t_opt );
-				break;
-			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-				break;
-			}
+		global $g_relationships;
+		if ( !isset( $g_relationships[ $p_rel_type ] ) ) {
+			trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		}
+		email_generic( $p_bug_id, 'relation', $g_relationships[ $p_rel_type ][ '#notify_deleted' ], $t_opt );
 	}
 
 	# --------------------

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_graph_api.php,v 1.4 2005-04-22 21:34:04 prichards Exp $
+	# $Id: relationship_graph_api.php,v 1.5 2007-07-27 23:23:20 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship Graph API ###
@@ -157,32 +157,12 @@
 
 					$t_related_id	= bug_format_id( $t_dst );
 
-					switch ( $t_relation ) {
-						case BUG_DUPLICATE:
-							$t_edge_style = array (
-								'style' => 'dashed',
-								'color' => '#808080'
-							);
-							break;
-
-						case BUG_DEPENDANT:
-							$t_edge_style = array (
-								'color' => '#C00000',
-								'dir' => 'back'
-							);
-							break;
-
-						case BUG_BLOCKS:
-							$t_edge_style = array (
-								'color' => '#C00000',
-								'dir' => 'forward'
-							);
-							break;
-
-						default:
-							$t_edge_style = array ( );
-							break;
-					}
+          global $g_relationships;
+          if ( isset( $g_relationships[ $t_relation ] ) && isset( $g_relationships[ $t_relation ][ '#edge_style' ] ) ) {
+            $t_edge_style = $g_relationships[ $t_relation ][ '#edge_style' ];
+          } else {
+            $t_edge_style = array ( );
+          }
 
 					$t_graph->add_edge( $t_id_string, $t_related_id, $t_edge_style );
 				}
