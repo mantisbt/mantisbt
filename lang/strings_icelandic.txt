@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -11,11 +11,11 @@
 	# Icelandic strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.17 $
-	# $Author: vboctor $
-	# $Date: 2007-06-24 01:50:19 $
+	# $Revision: 1.18 $
+	# $Author: giallu $
+	# $Date: 2007-07-28 09:17:38 $
 	#
-	# $Id: strings_icelandic.txt,v 1.17 2007-06-24 01:50:19 vboctor Exp $
+	# $Id: strings_icelandic.txt,v 1.18 2007-07-28 09:17:38 giallu Exp $
 	###########################################################################
 
 ?>
