@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.42 2007-07-13 16:47:47 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.43 2007-07-28 21:36:50 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -128,6 +128,10 @@
 		<?php
 			echo print_user( $v3_reporter_id );
 		?>
+		<span class="small">(<?php
+			$t_access_level = access_get_project_level( null, $v3_reporter_id );
+			echo get_enum_element( 'access_levels', $t_access_level ); 
+		?>)</span>
 		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>

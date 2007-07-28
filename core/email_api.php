@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.137 2007-07-27 23:23:20 prichards Exp $
+	# $Id: email_api.php,v 1.138 2007-07-28 21:36:50 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1027,7 +1027,12 @@
 				$t_time_tracking = '';
 			}
 
-			$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . ' - ' . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
+			$t_access_level = access_get_project_level( null,  $t_bugnote->reporter_id );
+			$t_string = ' (' . $t_formatted_bugnote_id . ') ' . 
+				user_get_name( $t_bugnote->reporter_id ) .
+				' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ' .
+				$t_last_modified . "\n" .
+				$t_time_tracking . ' ' . $t_bugnote_link;
 
 			$t_message .= $t_email_separator2 . " \n";
 			$t_message .= $t_string . " \n";
