@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.208 2007-07-24 12:04:40 giallu Exp $
+	# $Id: html_api.php,v 1.209 2007-07-28 10:15:15 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -842,6 +842,9 @@
 
 		PRINT '</tr>';
 		PRINT '</table>';
+		if ( ON == config_get( 'status_percentage_legend' ) ) {
+			html_status_percentage_legend();
+		}
 	}
 
  	# --------------------

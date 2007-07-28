@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.16 2007-07-06 07:27:12 vboctor Exp $
+	# $Id: my_view_page.php,v 1.17 2007-07-28 10:15:15 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -58,13 +58,6 @@
 		echo '<tr>';
 		echo '<td colspan="2">';
 		html_status_legend();
-		echo '</td>';
-		echo '</tr>';
-	}
-	if ( ON == config_get( 'status_percentage_legend' ) ) {
-		echo '<tr>';
-		echo '<td colspan="2">';
-		html_status_percentage_legend();
 		echo '</td>';
 		echo '</tr>';
 	}
