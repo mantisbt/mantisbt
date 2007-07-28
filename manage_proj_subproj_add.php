@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_subproj_add.php,v 1.1 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: manage_proj_subproj_add.php,v 1.2 2007-07-28 00:11:09 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -18,6 +18,12 @@
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+	project_ensure_exists( $f_project_id );
+	project_ensure_exists( $f_subproject_id );
+	
+	if ( $f_project_id == $f_subproject_id ) {
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
 	project_hierarchy_add( $f_subproject_id, $f_project_id );
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
