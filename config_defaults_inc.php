@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.347 2007-07-25 08:27:57 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.348 2007-07-28 21:28:31 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -493,14 +493,14 @@
 	# --- see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
 
-	# --- Position of the filter box, can be: FILTER_POSITION_*
-	# FILTER_POSITION_TOP, FILTER_POSITION_BOTTOM, or 0 for none.
-	$g_filter_position	= FILTER_POSITION_TOP;
-
 	# --- Show a legend with percentage of bug status
 	# --- x% of all bugs are new, y% of all bugs are assigned and so on.
 	# --- If set to ON it will printed below the status colour legend.
 	$g_status_percentage_legend = OFF;
+
+	# --- Position of the filter box, can be: FILTER_POSITION_*
+	# FILTER_POSITION_TOP, FILTER_POSITION_BOTTOM, or 0 for none.
+	$g_filter_position	= FILTER_POSITION_TOP;
 
 	# --- show product versions in create, view and update screens
 	#  ON forces display even if none are defined
