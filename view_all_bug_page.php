@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.61 $
-	# $Author: vboctor $
-	# $Date: 2006-08-12 08:04:13 $
+	# $Revision: 1.62 $
+	# $Author: prichards $
+	# $Date: 2007-07-29 18:10:41 $
 	#
-	# $Id: view_all_bug_page.php,v 1.61 2006-08-12 08:04:13 vboctor Exp $
+	# $Id: view_all_bug_page.php,v 1.62 2007-07-29 18:10:41 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,8 @@
 	}
 
 	$t_bugslist = Array();
-	for($i=0; $i < sizeof( $rows ); $i++) {
+	$t_row_count = sizeof( $rows );
+	for($i=0; $i < $t_row_count; $i++) {
 		array_push($t_bugslist, $rows[$i]["id"] );
 	}
 
