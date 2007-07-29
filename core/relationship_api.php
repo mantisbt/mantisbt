@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.44 2007-07-27 23:23:20 prichards Exp $
+	# $Id: relationship_api.php,v 1.45 2007-07-29 05:29:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -680,7 +680,7 @@
 	function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
 		global $g_relationships;
 ?>
-<select name="<?php echo $p_select_name?>">
+<select name="<?php echo $p_select_name ?>">
 <?php if ( $p_include_any ) { ?>
 <option value="-1" <?php echo ( $p_default_rel_type == -1 ? ' selected="selected"' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 <?php
@@ -694,7 +694,7 @@
 	foreach ( $g_relationships as $type => $relationship ) { 
 ?>
 <option value="<?php echo $type ?>"<?php echo ( $p_default_rel_type == $type ? ' selected="selected"' : '' ) ?>><?php echo lang_get( $relationship['#description'] ) ?></option>
-<? } ?>
+<?php } ?>
 </select>
 <?php
 	}
