@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.169 2007-07-11 17:03:51 giallu Exp $
+	# $Id: view_all_inc.php,v 1.170 2007-07-29 17:32:10 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -101,8 +101,8 @@
 	<td class="right" colspan="2">
 		<span class="small"> <?php
 			# -- Page number links --
-
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number );
+			$f_filter	= gpc_get_int( 'filter', 0);
+			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
 		?> </span>
 	</td>
 </tr>
@@ -189,7 +189,10 @@
 		<?php # -- Page number links -- ?>
 		<td class="right" colspan="2">
 			<span class="small">
-				<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number ) ?>
+				<?php
+					$f_filter	= gpc_get_int( 'filter', 0);
+					print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
+				?>
 			</span>
 		</td>
 	</tr>

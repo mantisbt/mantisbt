@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.173 2007-07-21 22:54:29 giallu Exp $
+	# $Id: print_api.php,v 1.174 2007-07-29 17:32:14 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -783,6 +783,7 @@
 			echo ">$t_elem2</option>";
 		} # end for
 	}
+	
 	# --------------------
 	# Select the proper enum values for status based on workflow
 	# or the input parameter if workflows are not used
@@ -1316,20 +1317,25 @@
 	}
 	# --------------------
 	# print a HTML page link
-	function print_page_link( $p_page_url, $p_text = '', $p_page_no=0, $p_page_cur=0 ) {
+	function print_page_link( $p_page_url, $p_text = '', $p_page_no=0, $p_page_cur=0, $p_temp_filter_id = 0 ) {
 		if (is_blank( $p_text )) {
 			$p_text = $p_page_no;
 		}
 
 		if ( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-			PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
+			if ( $p_temp_filter_id > 0 ) {
+				PRINT " <a href=\"$p_page_url?filter=$p_temp_filter_id&amp;page_number=$p_page_no\">$p_text</a> ";		
+			} else {
+				PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";		
+			}
+		
 		} else {
 			PRINT " $p_text ";
 		}
 	}
 	# --------------------
 	# print a list of page number links (eg [1 2 3])
-	function print_page_links( $p_page, $p_start, $p_end, $p_current ) {
+	function print_page_links( $p_page, $p_start, $p_end, $p_current,$p_temp_filter_id = 0 ) {
 		$t_items = array();
 		$t_link = '';
 
@@ -1351,8 +1357,8 @@
 		print( "[ " );
 
 		# First and previous links
-		print_page_link( $p_page, $t_first, 1, $p_current );
-		print_page_link( $p_page, $t_prev, $p_current - 1, $p_current );
+		print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
+		print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
 
 		# Page numbers ...
 
@@ -1371,7 +1377,11 @@
 			if ( $i == $p_current ) {
 				array_push( $t_items, $i );
 			} else {
-				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
+				if ( $p_temp_filter_id > 0 ) {
+					array_push( $t_items, "<a href=\"$p_page?filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );				
+				} else {
+					array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
+				}
 			}
 		}
 		PRINT implode( '&nbsp;', $t_items );
@@ -1382,11 +1392,11 @@
 
 		# Next and Last links
 		if ( $p_current < $p_end ) {
-			print_page_link( $p_page, $t_next, $p_current + 1, $p_current );
+			print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
 		} else {
-			print_page_link( $p_page, $t_next );
+			print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
 		}
-		print_page_link( $p_page, $t_last, $p_end, $p_current );
+		print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
     	print( " ]" );
 	}
