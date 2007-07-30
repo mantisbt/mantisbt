@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.56 2007-07-18 21:20:17 prichards Exp $
+	# $Id: set_project.php,v 1.57 2007-07-30 18:00:32 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -61,8 +61,25 @@
 					$t_redirect_url = 'view_all_set.php?type=3&amp;source_query_id=' . $t_source_filter_id;
 				}
 			} else if ( eregi( '_page.php', $t_referrer_page ) ) {
-				# if any other page, return to that page
-				$t_redirect_url = $t_referrer_page;
+				# get just the page component
+				if ( strpos( $t_referrer_page, '?' ) !== FALSE ) {
+					list( $t_path, $t_param ) = split( '\?', $t_referrer_page, 2 );
+				} else {
+					$t_path = $t_referrer_page;
+					$t_param = '';
+				} 
+						
+				switch ($t_path ) {
+					case 'bug_view_advanced_page.php':
+					case 'bug_update_page.php':
+					case 'bug_update_advanced_page.php':
+					case 'bug_change_status_page.php':
+						$t_path = $t_home_page;
+						break;
+					default:					
+						break;
+				}
+				$t_redirect_url = $t_path;
 			} else {
 				$t_redirect_url = $t_home_page;
 			}
