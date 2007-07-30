@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.21 2007-07-27 20:04:30 prichards Exp $
+	# $Id: changelog_page.php,v 1.22 2007-07-30 17:17:31 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -78,10 +78,6 @@
 		$i = 0;
 
 		foreach( $t_version_rows as $t_version_row ) {
-			if ( $t_version_row['released'] == 1 ) {
-				continue;
-			}
-
 			$t_issues_planned = 0;
 			$t_issues_resolved = 0;
 
@@ -94,7 +90,7 @@
 
 			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
 					LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-					WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
+					WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY status ASC, last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 					
@@ -125,7 +121,7 @@
 				if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
 					continue;
 				}
-				
+
 				$t_issues_resolved++;
 				
 				$t_issue_ids[] = $t_issue_id;
