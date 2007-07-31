@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.210 2007-07-30 16:02:27 zakman Exp $
+	# $Id: html_api.php,v 1.211 2007-07-31 07:51:16 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -589,7 +589,7 @@
 				}
 				PRINT implode( $t_menu_options, ' | ' );
 			PRINT '</td>';
-			PRINT '<td class="menu a">';
+			PRINT '<td class="menu right nowrap">';
 				PRINT '<form method="post" action="jump_to_bug.php">';
 
 				if ( ON == config_get( 'use_javascript' ) ) {
