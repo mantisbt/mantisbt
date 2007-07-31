@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.7 2007-07-27 20:04:30 prichards Exp $
+	# $Id: roadmap_page.php,v 1.8 2007-07-31 10:50:11 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -77,8 +77,6 @@
 
 		$t_project_header_printed = false;
 		
-		$i = 0;
-
 		foreach( $t_version_rows as $t_version_row ) {
 			if ( $t_version_row['released'] == 1 ) {
 				continue;
@@ -136,8 +134,6 @@
 				$t_issue_ids[] = $t_issue_id;
 				$t_issue_parents[] = $t_issue_parent;
 			}
-
-			$i++;
 
 			$t_progress = $t_issues_planned > 0 ? ( (integer) ( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.22 2007-07-30 17:17:31 prichards Exp $
+	# $Id: changelog_page.php,v 1.23 2007-07-31 10:50:06 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -75,7 +75,6 @@
 		$t_version_rows = version_get_all_rows( $t_project_id );
 				
 		$t_project_header_printed = false;
-		$i = 0;
 
 		foreach( $t_version_rows as $t_version_row ) {
 			$t_issues_planned = 0;
@@ -126,26 +125,25 @@
 				
 				$t_issue_ids[] = $t_issue_id;
 				$t_issue_parents[] = $t_issue_parent;
+				
+			} 
 
-				$i++;
+			if ( $t_issues_resolved > 0 ) {
+				if ( !$t_project_header_printed ) {
+					print_project_header( $t_project_name );
+					$t_project_header_printed = true;
+				}
 
-				if ( $t_issues_resolved > 0 ) {
-					if ( !$t_project_header_printed ) {
-						print_project_header( $t_project_name );
-						$t_project_header_printed = true;
-					}
-	
-					if ( !$t_version_header_printed ) {
-						print_version_header( $t_version_id );
-	 					$t_version_header_printed = true;
-					}
-
+				if ( !$t_version_header_printed ) {
+					print_version_header( $t_version_id );
+ 					$t_version_header_printed = true;
 				}
 
 				if ( !is_blank( $t_description ) ) {
-					echo string_display( "<br />$t_description<br />" );
+					echo string_display( "<br />$t_description<br /><br />" );
 				}
-			} 
+			}
+
 
 			$t_issue_set_ids = array();
 			$t_issue_set_levels = array();
