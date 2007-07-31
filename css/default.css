@@ -1,4 +1,10 @@
-body 				{ background-color: #ffffff; color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; margin-left: 4px; margin-right: 4px; margin-top: 6px; margin-bottom: 6px; }
+body {
+	background-color: #ffffff; 
+	color: #000000; 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	margin: 6px 4px; 
+}
 
 p 					{ font-family: Verdana, Arial, Helvetica, sans-serif; }
 
@@ -74,8 +80,19 @@ td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 
-td.menu					{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }
-td.menu a				{ white-space: nowrap; }
+td.menu	
+{ 
+	background-color: #e8e8e8;
+	color: #000000;
+	text-align: center;
+	width: 100%;
+	padding: 5px;
+}
+
+td.menu a
+{
+	white-space: nowrap;
+}
 
 td.news-heading-public	{ background-color: #c8c8e8; color: #000000; text-align: left; border-bottom: 1px solid #000000; }
 td.news-heading-private	{ background-color: #d8d8d8;       color: #000000; text-align: left; border-bottom: 1px solid #000000; }
