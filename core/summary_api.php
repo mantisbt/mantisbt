@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.49 2007-07-16 08:23:39 giallu Exp $
+	# $Id: summary_api.php,v 1.50 2007-07-31 22:55:03 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -221,7 +221,6 @@
 				ON b.id = h.bug_id 
 				AND h.type = " . NORMAL_TYPE ."
 				AND h.field_name = 'status' 
-				AND h.new_value = '$t_resolved'
 				WHERE b.status >= '$t_resolved' 
 				AND ".db_helper_compare_days(db_now(),"date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
@@ -271,6 +270,46 @@
 			print( "</tr>\n" );
 		} # end foreach
 	}
+
+
+	# Print list of open bugs with the highest activity score
+	# the score is calculated assigning one "point" for each history event 
+	# associated with the bug
+	function summary_print_by_activity() {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_history_table = config_get( 'mantis_bug_history_table' );
+
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
+		}
+		$query = "SELECT COUNT(h.id) as count, b.id, b.summary
+				FROM $t_mantis_bug_table AS b, $t_mantis_history_table AS h
+				WHERE h.bug_id = b.id
+				AND b.status < $t_resolved
+				AND $specific_where
+				GROUP BY h.bug_id
+				ORDER BY count DESC, b.last_updated DESC";
+		$result = db_query( $query );
+
+		$t_count = 0;
+		while ( $row = db_fetch_array( $result ) ) {
+			if ( $t_count++ == 10 ) break; 
+			$t_bugid = string_get_bug_view_link( $row['id'] );
+			$t_summary = $row['summary'];
+			$t_notescount = $row['count'];
+
+			print "<tr " . helper_alternate_class() . ">\n";
+			print "<td class=\"small\">$t_bugid - $t_summary</td><td class=\"right\">$t_notescount</td>\n";
+			print "</tr>\n";
+		}
+	}
+	
+
 	# --------------------
 	# print bug counts by assigned to each developer
 	function summary_print_by_developer() {

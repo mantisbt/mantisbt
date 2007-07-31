@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.52 2007-07-25 15:53:32 giallu Exp $
+	# $Id: summary_page.php,v 1.53 2007-07-31 22:55:00 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -253,6 +253,17 @@
 			<td class="right"><?php echo lang_get( 'balance' ); ?></td>
 		</tr>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
+		</table>
+
+		<br />
+
+		<?php # ACTIVITY # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" width="86%"><?php echo lang_get( 'most_active' ); ?></td>
+			<td class="right" width="14%"><?php echo lang_get( 'score' ); ?></td>
+		</tr>
+		<?php summary_print_by_activity() ?>
 		</table>
 
 		<br />
