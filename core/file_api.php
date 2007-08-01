@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.82 2007-07-23 21:42:45 prichards Exp $
+	# $Id: file_api.php,v 1.83 2007-08-01 08:02:58 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -648,7 +648,7 @@ document.getElementById( span ).style.display = displayType;
 
 					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
-					$c_content = '';
+					$c_content = "''";
 				} else {
 					trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 				}
