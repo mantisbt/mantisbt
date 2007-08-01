@@ -1,4 +1,13 @@
-Mantis ChangeLog
+DisposableEmailChecker ChangeLog
+
+2007.07.31  -  1.0.1
+
+- Initial implementation
+- 37 disposable forwarding email providers (29 new).
+- 111 disposable trash email providers (100 new).
+- 1 disposable shredder email provider (0 new).
+- 43 disposable time bound email provider (38 new).
+- 69 free email providers (66 new).
 
 2007.06.16  -  1.0.0
 
@@ -7,3 +16,5 @@ Mantis ChangeLog
 - 11 disposable trash email providers.
 - 1 disposable shredder email provider.
 - 3 free email providers
+
+
