@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.50 2007-07-31 22:55:03 giallu Exp $
+	# $Id: summary_api.php,v 1.51 2007-08-01 07:41:07 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -297,8 +297,16 @@
 		$result = db_query( $query );
 
 		$t_count = 0;
+		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
 		while ( $row = db_fetch_array( $result ) ) {
-			if ( $t_count++ == 10 ) break; 
+			// Skip private bugs unless user has proper permissions
+			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
+			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
+				continue;
+			}
+
+			if ( $t_count++ == 10 ) break;
+
 			$t_bugid = string_get_bug_view_link( $row['id'] );
 			$t_summary = $row['summary'];
 			$t_notescount = $row['count'];
