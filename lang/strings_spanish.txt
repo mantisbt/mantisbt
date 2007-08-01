@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.109 $
+	# $Revision: 1.110 $
 	# $Author: jbrugger $
-	# $Date: 2007-07-26 11:43:51 $
+	# $Date: 2007-08-01 11:26:22 $
 	#
-	# $Id: strings_spanish.txt,v 1.109 2007-07-26 11:43:51 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.110 2007-08-01 11:26:22 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -239,7 +239,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'No se puede establecer una incidencia
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado no encontrado';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ese nombre está duplicado.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al menos un proyecto tiene ese campo en uso.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor no válido para este campo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor no válido para %s';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definición de campo personalizado no válida';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Ha fallado la autenticación LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Falló la conexión al servidor LDAP';
@@ -1075,6 +1075,8 @@ $s_percentage_errors = '% Incorrecto';
 $s_errors = 'Incorrecto';
 $s_total = 'Total';
 $s_balance = 'Balance';
+$s_most_active = 'Más Activos';
+$s_score = 'Puntaje';
 $s_time_stats = 'Estadísticas de Tiempo para Incidencias Resueltas (días)';
 $s_longest_open_bug = 'Incidencia abierta durante más tiempo';
 $s_longest_open = 'Mayor tiempo abierta';
