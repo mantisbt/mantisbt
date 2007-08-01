@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.51 2007-08-01 07:41:07 giallu Exp $
+	# $Id: summary_api.php,v 1.52 2007-08-01 15:20:45 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -292,7 +292,7 @@
 				WHERE h.bug_id = b.id
 				AND b.status < $t_resolved
 				AND $specific_where
-				GROUP BY h.bug_id
+				GROUP BY h.bug_id, b.id, b.summary, b.last_updated
 				ORDER BY count DESC, b.last_updated DESC";
 		$result = db_query( $query );
 
