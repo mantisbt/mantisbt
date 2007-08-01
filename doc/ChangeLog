@@ -1,5 +1,107 @@
 Mantis ChangeLog
 
+2007.08.xx  -  1.1.0a4
+
+- 0008154: [security] Port: CVE-2007-3215: PHPMailer vulnerability (thraxisp) - resolved.
+- 0008164: [security] Potential URL redirection flaw in set_project.php (grangeway) - resolved.
+- 0008165: [security] Potential URL redirection flaw in account_prefs_reset.php (grangeway) - resolved.
+- 0008166: [security] Potential URL redirection flaw in permalink_page.php (grangeway) - resolved.
+- 0008180: [security] Potential URL redirection flaw in login.php (grangeway) - resolved.
+- 0008181: [security] Display of database error message could be used to generate Cross site scripting issue (grangeway) - resolved.
+- 0007985: [administration] Database Schema that is more up-to-date than code is reported as out-of-date (vboctor) - resolved.
+- 0008094: [administration] Managing versions / release schedule accross multiple projects. (vboctor) - resolved.
+- 0008144: [administration] Remove obsolete CSS edit tool (vboctor) - resolved.
+- 0002950: [bugtracker] Hide Edit or Delete Profile when not needed (grangeway) - resolved.
+- 0002996: [bugtracker] page link from email (in browser) - display more than "access denied" (grangeway) - resolved.
+- 0003477: [bugtracker] print_mantis_error() function does not display msg. (grangeway) - resolved.
+- 0003902: [bugtracker] all logins fail with "Cannot modify header information" (grangeway) - resolved.
+- 0007125: [bugtracker] Application Error #200 (grangeway) - resolved.
+- 0007531: [bugtracker] Get a wrong (?) error message by upload a big file (grangeway) - resolved.
+- 0007812: [bugtracker] Remove white box around jump button in main menu (zakman) - resolved.
+- 0007895: [bugtracker] Recently Visited when logged in as Anonymous shows issues i have not visited (giallu) - resolved.
+- 0007928: [bugtracker] print_column_eta function missing (vboctor) - resolved.
+- 0007842: [bugtracker] File attachment permissions (giallu) - resolved.
+- 0007871: [bugtracker] Move "Add Note" pane below previous notes (giallu) - resolved.
+- 0007984: [bugtracker] Wrong default value for additional info during report (vboctor) - resolved.
+- 0008005: [bugtracker] items cannot be added to projects without categories (vboctor) - resolved.
+- 0008018: [bugtracker] Add configuration option to allow/disallow free text in platform, os, and os_build (vboctor) - resolved.
+- 0008044: [bugtracker] Edit/Delete bugnote buttons missing (giallu) - resolved.
+- 0008067: [bugtracker] show status legend on top AND bottom (zakman) - resolved.
+- 0008103: [bugtracker] Cannot modify the bugnote order. (giallu) - resolved.
+- 0008111: [bugtracker] No space between date and username in email notifications (grangeway) - resolved.
+- 0008147: [bugtracker] 'continue' while outside loop in function print_news_string_by_news_id() (grangeway) - resolved.
+- 0008150: [bugtracker] Summary By Date could show also resolved bugs count (giallu) - resolved.
+- 0008174: [bugtracker] & is displayed as & stopping us from using Unicode Characters (grangeway) - resolved.
+- 0008190: [bugtracker] Showing Access Level in Note details (giallu) - resolved.
+- 0008195: [bugtracker] Create Project Info Page (vboctor) - resolved.
+- 0006633: [change log] Editing a bug in advanced bug update page (grangeway) - resolved.
+- 0008214: [change log] Change Log displays the version description as many times as the number of issues show (grangeway) - resolved.
+- 0008091: [csv] csv_export doesn't work when project name contains accentuated characters (vboctor) - resolved.
+- 0007346: [custom fields] Copy custom fields from one project to another (zakman) - resolved.
+- 0007849: [custom fields] filters on custom date field causes SQL error (giallu) - resolved.
+- 0007981: [custom fields] Manage projects custom field: Link custom field to project Errors (vboctor) - resolved.
+- 0007986: [custom fields] Removing a custom field to project link from manage_custom_field_edit_page.php returns to wrong page (vboctor) - resolved.
+- 0007987: [custom fields] Projects that a custom field can be linked to in manage_custom_field_edit_page.php shouldn't include ALL PROJECTS (vboctor) - resolved.
+- 0008002: [custom fields] Unable to report issue. Error "data too long" on custom field name (grangeway) - resolved.
+- 0008121: [custom fields] Error message doesn't show field name after entering invalid value in custom field (zakman) - resolved.
+- 0008047: [db db2] DB2 Support (experimental) (vboctor) - resolved.
+- 0005544: [db mssql] MSSQL APPLICATION ERROR 0000401 When Uploading Files (grangeway) - resolved.
+- 0007140: [db mssql] Upload File Less than 8 K (grangeway) - resolved.
+- 0007912: [db mssql] Time tracking doesn't work- SQL syntax error (grangeway) - resolved.
+- 0007417: [documentation] operating mysql user needs DELETE privilege (grangeway) - resolved.
+- 0005138: [email] Bugnote Id doesn't appear in emails (vboctor) - resolved.
+- 0007597: [email] Notification e-mail contain no messages. (grangeway) - resolved.
+- 0008016: [email] Check Email broken in 1.1.0a3 (vboctor) - resolved.
+- 0008077: [email] Block use of disposable email addresses (vboctor) - resolved.
+- 0008176: [email] Email Server offline causes a delay in mantis interface (grangeway) - resolved.
+- 0008101: [feature] List of involved developers (vboctor) - resolved.
+- 0006468: [filters] My View page incorrectly sets filters (grangeway) - resolved.
+- 0006725: [filters] Filtering on "duplicate of" fails while "has duplicate" works (giallu) - resolved.
+- 0006836: [filters] Switching to "Advanced Filters" (or "Simple Filters") forgets the ?filter=N setting (grangeway) - resolved.
+- 0007735: [filters] Filters are lost when clicking on page navigation (vboctor) - resolved.
+- 0007982: [filters] "Create Permlink" not reliable (vboctor) - resolved.
+- 0007992: [filters] "Create Permalink" should support custom fields (vboctor) - resolved.
+- 0007993: [filters] "Create Permalink" should show URL in a Mantis page (vboctor) - resolved.
+- 0007487: [graphs] wrong title of dependency-graph (grangeway) - resolved.
+- 0004831: [installation] accessing mantis webserver through a proxy websserver (vboctor) - resolved.
+- 0007907: [installation] Allow using system adodb (vboctor) - resolved.
+- 0008115: [integration] Implement Twitter Integration (vboctor) - resolved.
+- 0007733: [ldap] when using LDAP auth blank page upon login if LDAP extension not loaded (grangeway) - resolved.
+- 0006217: [localization] [all lang] Wrong fIlename on download (vboctor) - resolved.
+- 0007681: [localization] [es] Full review of spanish translation (Bithunter) - resolved.
+- 0007730: [localization] [de] Translation change from "Aktualisieren" to "Bearbeiten" (zakman) - resolved.
+- 0007961: [localization] Spanish translation (Bithunter) - resolved.
+- 0008023: [localization] [all lang] Wrong URL on summary (vboctor) - resolved.
+- 0008031: [localization] Update simplified chinese localization to 1.1.0a3 (giallu) - resolved.
+- 0008051: [localization] [all lang] Wrong fIlename on print report (zakman) - resolved.
+- 0008084: [localization] Spelling mistake in value of string $s_this_bug file lang/strings_spanish.txt (zakman) - resolved.
+- 0008113: [localization] Error typo $s_signup_link in Spanish traslation ..... (zakman) - resolved.
+- 0008168: [localization] german localisation in the current installation at www.mantisbt.org/bug (giallu) - resolved.
+- 0008177: [localization] Extra characters in lang/strings_spanish.txt (giallu) - resolved.
+- 0008201: [localization] Sync italian messages (giallu) - resolved.
+- 0005333: [other] Invalid zip file core/adodb/adodb-time.zip in CVS (giallu) - resolved.
+- 0006772: [other] Bugnote ids are numeric, which is not valid HTML (giallu) - resolved.
+- 0007138: [other] pages are not valid xhtml 1.0 transitional (giallu) - resolved.
+- 0007885: [other] System logging constants (vboctor) - resolved.
+- 0008054: [other] Mediawiki integration (vboctor) - resolved.
+- 0006773: [relationships] When cloning an issue, cannot make it "not related" to parent issue (vboctor) - resolved.
+- 0007548: [relationships] Status is underlined using a deprecated HTML element (giallu) - resolved.
+- 0008130: [relationships] Custom relationships (grangeway) - resolved.
+- 0007947: [roadmap] when bulk assigning target version I get permission messages (vboctor) - resolved.
+- 0008194: [roadmap] Roadmap and Changelog list nesting for parent/child issues (grangeway) - resolved.
+- 0006116: [rss] "Issues" RSS feed doesn't work when $g_anonymous_account = '' (grangeway) - resolved.
+- 0007255: [rss] APPLICATION WARNING #user_get_field() for NO_USER (grangeway) - resolved.
+- 0007938: [rss] Replace non free RSS creation class (vboctor) - resolved.
+- 0006063: [scripting] APPLICATION ERROR 0000401 on MSSQL while uploading files (grangeway) - resolved.
+- 0008159: [scripting] Provide MantisConnect webservice out of the box as the Mantis SOAP API (vboctor) - resolved.
+- 0006782: [sql] MantisBT should do "SET NAMES $charset" on connect to database (vboctor) - resolved.
+- 0007931: [time tracking] $g_time_tracking_hours config option is never used (davidnewcomb) - resolved.
+- 0007944: [time tracking] 'Update Perfs' error in 1.1.0a3 (vboctor) - resolved.
+- 0007965: [time tracking] Time tracking information not shown on email notifications (vboctor) - resolved.
+- 0008105: [time tracking] Total time on billing page (vboctor) - resolved.
+- 0008131: [upgrade] install/upgrade tries to use "set schema" on a non db2 installation. (vboctor) - resolved.
+- 0007340: [webpage] my view: status percentage legend shown on top and not as stated (giallu) - resolved.
+
 2007.05.07  -  1.1.0a3
 
 - 0007794: [security] Port 7772: Email notifications bypass security on custom fields (vboctor)

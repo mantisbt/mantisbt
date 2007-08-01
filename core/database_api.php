@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.62 2007-07-26 22:11:09 prichards Exp $
+	# $Id: database_api.php,v 1.63 2007-08-01 06:38:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -103,6 +103,7 @@
 
 		switch( $t_db_type ) {
 			case 'mysql':
+			case 'mysqli':
 				return true;
 		}
 
