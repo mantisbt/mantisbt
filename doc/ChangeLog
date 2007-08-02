@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2007.08.xx  -  1.1.0a4
+2007.08.01  -  1.1.0a4
 
 - 0008154: [security] Port: CVE-2007-3215: PHPMailer vulnerability (thraxisp) - resolved.
 - 0008164: [security] Potential URL redirection flaw in set_project.php (grangeway) - resolved.
@@ -11,6 +11,7 @@ Mantis ChangeLog
 - 0007985: [administration] Database Schema that is more up-to-date than code is reported as out-of-date (vboctor) - resolved.
 - 0008094: [administration] Managing versions / release schedule accross multiple projects. (vboctor) - resolved.
 - 0008144: [administration] Remove obsolete CSS edit tool (vboctor) - resolved.
+- 0008224: [authentication] anonymous login is not automatic (vboctor) - resolved.
 - 0002950: [bugtracker] Hide Edit or Delete Profile when not needed (grangeway) - resolved.
 - 0002996: [bugtracker] page link from email (in browser) - display more than "access denied" (grangeway) - resolved.
 - 0003477: [bugtracker] print_mantis_error() function does not display msg. (grangeway) - resolved.
@@ -34,6 +35,7 @@ Mantis ChangeLog
 - 0008174: [bugtracker] & is displayed as & stopping us from using Unicode Characters (grangeway) - resolved.
 - 0008190: [bugtracker] Showing Access Level in Note details (giallu) - resolved.
 - 0008195: [bugtracker] Create Project Info Page (vboctor) - resolved.
+- 0008208: [bugtracker] Most popular bug table on summary page (giallu) - resolved.
 - 0006633: [change log] Editing a bug in advanced bug update page (grangeway) - resolved.
 - 0008214: [change log] Change Log displays the version description as many times as the number of issues show (grangeway) - resolved.
 - 0008091: [csv] csv_export doesn't work when project name contains accentuated characters (vboctor) - resolved.
@@ -48,6 +50,7 @@ Mantis ChangeLog
 - 0005544: [db mssql] MSSQL APPLICATION ERROR 0000401 When Uploading Files (grangeway) - resolved.
 - 0007140: [db mssql] Upload File Less than 8 K (grangeway) - resolved.
 - 0007912: [db mssql] Time tracking doesn't work- SQL syntax error (grangeway) - resolved.
+- 0008220: [db mssql] New summary item contains invalid sql (giallu) - resolved.
 - 0007417: [documentation] operating mysql user needs DELETE privilege (grangeway) - resolved.
 - 0005138: [email] Bugnote Id doesn't appear in emails (vboctor) - resolved.
 - 0007597: [email] Notification e-mail contain no messages. (grangeway) - resolved.
@@ -79,11 +82,13 @@ Mantis ChangeLog
 - 0008168: [localization] german localisation in the current installation at www.mantisbt.org/bug (giallu) - resolved.
 - 0008177: [localization] Extra characters in lang/strings_spanish.txt (giallu) - resolved.
 - 0008201: [localization] Sync italian messages (giallu) - resolved.
+- 0008221: [localization] Sync italian messages (vboctor) - resolved.
 - 0005333: [other] Invalid zip file core/adodb/adodb-time.zip in CVS (giallu) - resolved.
 - 0006772: [other] Bugnote ids are numeric, which is not valid HTML (giallu) - resolved.
 - 0007138: [other] pages are not valid xhtml 1.0 transitional (giallu) - resolved.
 - 0007885: [other] System logging constants (vboctor) - resolved.
 - 0008054: [other] Mediawiki integration (vboctor) - resolved.
+- 0008138: [other] Add more services to disposable email address checker (zakman) - resolved.
 - 0006773: [relationships] When cloning an issue, cannot make it "not related" to parent issue (vboctor) - resolved.
 - 0007548: [relationships] Status is underlined using a deprecated HTML element (giallu) - resolved.
 - 0008130: [relationships] Custom relationships (grangeway) - resolved.
@@ -95,6 +100,7 @@ Mantis ChangeLog
 - 0006063: [scripting] APPLICATION ERROR 0000401 on MSSQL while uploading files (grangeway) - resolved.
 - 0008159: [scripting] Provide MantisConnect webservice out of the box as the Mantis SOAP API (vboctor) - resolved.
 - 0006782: [sql] MantisBT should do "SET NAMES $charset" on connect to database (vboctor) - resolved.
+- 0008215: [sql] APPLICATION ERROR 401 on MySQL with file_upload_method = DISK (1.1.0a4-CVS) (giallu) - resolved.
 - 0007931: [time tracking] $g_time_tracking_hours config option is never used (davidnewcomb) - resolved.
 - 0007944: [time tracking] 'Update Perfs' error in 1.1.0a3 (vboctor) - resolved.
 - 0007965: [time tracking] Time tracking information not shown on email notifications (vboctor) - resolved.
