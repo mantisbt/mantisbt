@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
@@ -12,15 +12,14 @@
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.306
+	# Based on strings_english.txt rev. 1.308
 	# -------------------------------------------------
-	# $Revision: 1.120 $
-	# $Author: giallu $
-	# $Date: 2007-07-26 07:39:49 $
+	# $Revision: 1.121 $
+	# $Author: vboctor $
+	# $Date: 2007-08-02 05:26:33 $
 	#
-	# $Id: strings_italian.txt,v 1.120 2007-07-26 07:39:49 giallu Exp $
+	# $Id: strings_italian.txt,v 1.121 2007-08-02 05:26:33 vboctor Exp $
 	###########################################################################
-
 ?>
 <?php
 # Charset
@@ -237,7 +236,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = "Non puoi rendere un'anomalia duplicat
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = "Campo personalizzato non trovato.";
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = "Questo nome è duplicato.";
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = "Almeno un progetto fa ancora uso di questo campo.";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "Valore non valido per il campo.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "Valore non valido per %s.";
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Definizione di campo personalizzato non valida.";
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = "Autenticazione LDAP fallita.";
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = "Connessione al server LDAP fallita.";
@@ -1071,6 +1070,8 @@ $s_percentage_errors = "% false";
 $s_errors = "False";
 $s_total = "Totale";
 $s_balance = "Differenza";
+$s_most_active = "Più attivo";
+$s_score = "Punteggio";
 $s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
 $s_longest_open_bug = "anomalia più lunga nella risoluzione";
 $s_longest_open = "durata massima in stato aperto";
