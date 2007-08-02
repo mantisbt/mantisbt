@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.57 2007-07-24 11:29:11 prichards Exp $
+	# $Id: authentication_api.php,v 1.58 2007-08-02 05:51:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -15,8 +15,6 @@
 
 	$g_script_login_cookie = null;
 	$g_cache_anonymous_user_cookie_string = null;
-	$g_cache_current_user_cookie_string = null; 
-	$g_cache_cookie_valid = null;
 
 	#===================================
 	# Boolean queries and ensures
@@ -56,9 +54,6 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
- 		global $g_cache_cookie_valid;
- 		if($g_cache_cookie_valid)
- 		  return true;		
 		return ( auth_is_cookie_valid( auth_get_current_user_cookie() ) );
 	}
 
@@ -143,7 +138,7 @@
 	# --------------------
 	# Allows scripts to login using a login name or ( login name + password )
 	function auth_attempt_script_login( $p_username, $p_password = null ) {
-		global $g_script_login_cookie, $g_cache_cookie_valid, $g_cache_current_user_id, $g_cache_current_user_cookie_string;
+		global $g_script_login_cookie, $g_cache_current_user_id;
 
 		$t_user_id = user_get_id_by_name( $p_username );
 
@@ -170,11 +165,9 @@
 
 		# set the cookies
 		$g_script_login_cookie = $t_user['cookie_string'];
-		$g_cache_current_user_cookie_string = $g_script_login_cookie;
 
 		# cache user id for future reference
 		$g_cache_current_user_id = $t_user_id;
-		$g_cache_cookie_valid = true;
 
 		return true;
 	}
@@ -378,12 +371,8 @@
 	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
-		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string, $g_cache_current_user_cookie_string;
+		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
  
-		if( isset( $g_cache_current_user_cookie_string ) ) {
-			return $g_cache_current_user_cookie_string;
-		}
-
 		# if logging in via a script, return that cookie
 		if ( $g_script_login_cookie !== null ) {
 			return $g_script_login_cookie;
@@ -417,7 +406,6 @@
 			}
 		}
 
-		$g_cache_current_user_cookie_string = $t_cookie;
 		return $t_cookie;
 	}
 
@@ -430,19 +418,19 @@
 	# is cookie valid?
 
 	function auth_is_cookie_valid( $p_cookie_string ) {
-		global $g_cache_current_user_id, $g_cache_cookie_valid;	
+		global $g_cache_current_user_id;
 		
-	    # fail if DB isn't accessible
-	    if ( !db_is_connected() ) {
+		# fail if DB isn't accessible
+		if ( !db_is_connected() ) {
 			return false;
 		}
 
-	    # fail if cookie is blank
-	    if ( '' === $p_cookie_string ) {
+		# fail if cookie is blank
+		if ( '' === $p_cookie_string ) {
 			return false;
 		}
 
-        # succeeed if user has already been authenticated
+		# succeeed if user has already been authenticated
 		if ( null !== $g_cache_current_user_id ) {
 			return true;
 		}
@@ -458,15 +446,9 @@
 		$result = db_query( $query );
 
 		# return true if a matching cookie was found
- 		$g_cache_cookie_valid = false;
- 		if( 1 == db_num_rows( $result ) ) {
- 			$g_cache_cookie_valid = true;
- 			$t_user_id = (int)db_result( $result );
-			$g_cache_current_user_id = $t_user_id;
- 			return ( true );
- 		}
-}
-	
+ 		return ( 1 == db_num_rows( $result ) );
+	}
+
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
