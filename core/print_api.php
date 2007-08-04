@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.174 2007-07-29 17:32:14 prichards Exp $
+	# $Id: print_api.php,v 1.175 2007-08-04 09:05:18 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1524,9 +1524,9 @@
 	# this function should rarely (if ever) be reached.  instead the db_()
 	# functions should trap (although inelegantly).
 	function print_sql_error( $p_query ) {
-		global $MANTIS_ERROR, $g_administrator_email;
+		global $g_administrator_email;
 
-		PRINT $MANTIS_ERROR[ERROR_SQL];
+		PRINT error_string( ERROR_SQL );
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
 		PRINT "<br />$p_query;<br />";
 	}
