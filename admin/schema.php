@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.19 2007-07-22 19:51:18 prichards Exp $
+	# $Id: schema.php,v 1.20 2007-08-04 09:15:47 giallu Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -330,4 +330,7 @@ $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bugnote_table'), "tim
 $upgrade[] = Array('CreateIndexSQL',Array('idx_diskfile',config_get('mantis_bug_file_table'),'diskfile'));
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_user_print_pref_table' ), "print_pref C(64) NOTNULL" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "field_name C(64) NOTNULL" ) );
+
+# Release marker: 1.1.0a4
+
 ?>
