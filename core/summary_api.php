@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.52 2007-08-01 15:20:45 giallu Exp $
+	# $Id: summary_api.php,v 1.53 2007-08-04 21:06:52 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -215,13 +215,14 @@
 			return;
 		}
 
-		$query = "SELECT COUNT(*)
+		$query = "SELECT COUNT(DISTINCT(b.id))
 				FROM $t_bug_table b
 				LEFT JOIN $t_bug_history_table h
 				ON b.id = h.bug_id 
 				AND h.type = " . NORMAL_TYPE ."
 				AND h.field_name = 'status' 
 				WHERE b.status >= '$t_resolved' 
+				AND h.new_value >= '$t_resolved'
 				AND ".db_helper_compare_days(db_now(),"date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
 		$result = db_query( $query );
