@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.350 2007-08-04 03:39:10 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.351 2007-08-05 21:09:35 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -511,6 +511,12 @@
 	# -- show users with their real name or not
 	$g_show_realname = OFF;
 	$g_differentiate_duplicates = OFF;  # leave off for now
+
+	# Show user avatar
+	# the current implementation is based on http://www.gravatar.com
+	# users will beed to register there the same address used in 
+	# this mantis installation to have their avatar shown
+	$g_show_avatar = OFF;
 
 	# -- sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted with the "D"s
 	$g_sort_by_last_name = OFF;

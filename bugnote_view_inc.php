@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.43 2007-07-28 21:36:50 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.44 2007-08-05 21:09:35 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,6 +124,7 @@
 ?>
 <tr class="bugnote" id="c<?php echo $v3_id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
+		<?php if ( ON  == config_get("show_avatar") ) print_avatar( $v3_reporter_id ); ?>
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
 		<?php
 			echo print_user( $v3_reporter_id );

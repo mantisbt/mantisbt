@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.175 2007-08-04 09:05:18 giallu Exp $
+	# $Id: print_api.php,v 1.176 2007-08-05 21:09:35 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -103,11 +103,26 @@
 	function print_header_redirect_report() {
 		print_header_redirect( string_get_bug_report_url() );
 	}
+
+	
+	# Print avatar image for the given user ID
+	function print_avatar( $p_user_id ) {
+		$t_avatar = user_get_avatar( $p_user_id );
+		$t_avatar_url = $t_avatar[0];
+		$t_width = $t_avatar[1];
+		$t_height = $t_avatar[2];
+		echo '<img class="avatar" src="' . $t_avatar_url . '" alt="Gravatar image"' .
+			' width="' . $t_width . '" height="' . $t_height . '" />';
+	}
+
+
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
 	    echo prepare_user_name( $p_user_id );
 	}
+
+
 	# --------------------
 	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
