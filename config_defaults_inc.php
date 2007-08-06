@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.351 2007-08-05 21:09:35 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.352 2007-08-06 06:21:10 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -514,7 +514,7 @@
 
 	# Show user avatar
 	# the current implementation is based on http://www.gravatar.com
-	# users will beed to register there the same address used in 
+	# users will need to register there the same address used in 
 	# this mantis installation to have their avatar shown
 	$g_show_avatar = OFF;
 
