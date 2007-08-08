@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.352 2007-08-06 06:21:10 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.353 2007-08-08 22:28:53 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -512,14 +512,19 @@
 	$g_show_realname = OFF;
 	$g_differentiate_duplicates = OFF;  # leave off for now
 
+	# -- sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted with the "D"s
+	$g_sort_by_last_name = OFF;
+
 	# Show user avatar
 	# the current implementation is based on http://www.gravatar.com
 	# users will need to register there the same address used in 
 	# this mantis installation to have their avatar shown
+	# Please note: upon registration or avatar change, it takes some time for
+	# the updated gravatar images to show on sites
 	$g_show_avatar = OFF;
-
-	# -- sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted with the "D"s
-	$g_sort_by_last_name = OFF;
+	
+	# Only users above this threshold will have their avatar shown
+	$g_show_avatar_threshold = DEVELOPER;
 
 	############################
 	# Mantis JPGRAPH Addon

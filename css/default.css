@@ -147,6 +147,7 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 .avatar
 {
 	float: right;
+	border: 0;
 }
 
 .progress400				{ position: relative; width: 400px; border: 1px solid #d7d7d7; margin-top: 1em; margin-bottom: 1em; padding: 1px; }
