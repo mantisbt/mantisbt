@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.53 2007-07-31 22:55:00 giallu Exp $
+	# $Id: summary_page.php,v 1.54 2007-08-08 20:59:22 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -264,6 +264,17 @@
 			<td class="right" width="14%"><?php echo lang_get( 'score' ); ?></td>
 		</tr>
 		<?php summary_print_by_activity() ?>
+		</table>
+
+		<br />
+
+		<?php # LONGEST OPEN # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" width="86%"><?php echo lang_get( 'longest_open' ); ?></td>
+			<td class="right" width="14%"><?php echo lang_get( 'days' ); ?></td>
+		</tr>
+		<?php summary_print_by_age() ?>
 		</table>
 
 		<br />

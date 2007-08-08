@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.53 2007-08-04 21:06:52 giallu Exp $
+	# $Id: summary_api.php,v 1.54 2007-08-08 20:59:23 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -317,7 +317,46 @@
 			print "</tr>\n";
 		}
 	}
-	
+
+
+	# Print list of bugs opened from the longest time
+	function summary_print_by_age() {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
+		}
+		$query = "SELECT * FROM $t_mantis_bug_table
+				WHERE status < $t_resolved
+				AND $specific_where
+				ORDER BY date_submitted ASC, priority DESC";
+		$result = db_query( $query );
+
+		$t_count = 0;
+		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+		while ( $row = db_fetch_array( $result ) ) {
+			// Skip private bugs unless user has proper permissions
+			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
+			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
+				continue;
+			}
+
+			if ( $t_count++ == 10 ) break;
+
+			$t_bugid = string_get_bug_view_link( $row['id'] );
+			$t_summary = $row['summary'];
+			$t_days_open = intval ( ( time() - strtotime( $row['date_submitted'] ) ) / 86400 );
+
+			print "<tr " . helper_alternate_class() . ">\n";
+			print "<td class=\"small\">$t_bugid - $t_summary</td><td class=\"right\">$t_days_open</td>\n";
+			print "</tr>\n";
+		}
+	}
 
 	# --------------------
 	# print bug counts by assigned to each developer
