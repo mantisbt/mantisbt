@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.54 2007-08-08 20:59:23 giallu Exp $
+	# $Id: summary_api.php,v 1.55 2007-08-09 08:29:56 giallu Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -222,6 +222,7 @@
 				AND h.type = " . NORMAL_TYPE ."
 				AND h.field_name = 'status' 
 				WHERE b.status >= '$t_resolved' 
+				AND h.old_value < '$t_resolved'
 				AND h.new_value >= '$t_resolved'
 				AND ".db_helper_compare_days(db_now(),"date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
