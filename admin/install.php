@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.33 2007-07-10 07:04:56 vboctor Exp $
+	# $Id: install.php,v 1.34 2007-08-09 02:59:55 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -566,8 +566,13 @@ if ( 3 == $t_install_state ) {
 			if( $ret == 2) {
 				print_test_result( GOOD );
 			} else {
-				print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' .  db_error_msg() . ' )' );
-				$t_install_state--;	# db creation failed, allow user to re-enter user/password info
+				$t_error = db_error_msg();
+				if( strstr( $t_error, 'atabase exists' ) ) {
+					print_test_result( BAD, false, 'Database already exists? ( ' .  db_error_msg() . ' )' );
+				} else {
+					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' .  db_error_msg() . ' )' );
+					$t_install_state--;	# db creation failed, allow user to re-enter user/password info
+				}
 			}
 			$g_db->Close();
 		}
@@ -626,13 +631,22 @@ if ( 3 == $t_install_state ) {
 
 		while ( ( $i <= $lastid ) && ! $g_failed ) {
 			if ( ! $f_log_queries ) {
-				echo '<tr><td bgcolor="#ffffff">Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )</td>';
+				echo '<tr><td bgcolor="#ffffff">';
 			}
 
 			$dict = NewDataDictionary($g_db);
+			$t_sql = true;
+			$t_target = $upgrade[$i][1][0];
 			if ( $upgrade[$i][0] == 'InsertData' ) {
 				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-			} else {
+			} else if ( $upgrade[$i][0] == 'UpdateSQL' ) {
+    			$sqlarray = array( $upgrade[$i][1] );
+    			$t_target = $upgrade[$i][1];
+    		} else if ( $upgrade[$i][0] == 'UpdateFunction' ) {
+        		$sqlarray = array( $upgrade[$i][1] );
+        		$t_sql = false;
+    			$t_target = $upgrade[$i][1];
+    		} else {
 				$sqlarray = call_user_func_array(Array($dict,$upgrade[$i][0]),$upgrade[$i][1]);
 			}
 			if ( $f_log_queries ) {
@@ -640,7 +654,11 @@ if ( 3 == $t_install_state ) {
 					echo htmlentities( $sql ) . ";\r\n\r\n";
 				}
 			} else {
-				$ret = $dict->ExecuteSQLArray($sqlarray);
+    			echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
+			    if ($t_sql)
+				    $ret = $dict->ExecuteSQLArray($sqlarray);
+				else 
+				    $ret = call_user_func( 'install_' . $sqlarray[0] );
 				if ( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
