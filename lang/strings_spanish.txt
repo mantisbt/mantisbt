@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.110 $
+	# $Revision: 1.111 $
 	# $Author: jbrugger $
-	# $Date: 2007-08-01 11:26:22 $
+	# $Date: 2007-08-10 11:25:15 $
 	#
-	# $Id: strings_spanish.txt,v 1.110 2007-08-01 11:26:22 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.111 2007-08-10 11:25:15 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -1077,6 +1077,7 @@ $s_total = 'Total';
 $s_balance = 'Balance';
 $s_most_active = 'Más Activos';
 $s_score = 'Puntaje';
+$s_days = 'Días';
 $s_time_stats = 'Estadísticas de Tiempo para Incidencias Resueltas (días)';
 $s_longest_open_bug = 'Incidencia abierta durante más tiempo';
 $s_longest_open = 'Mayor tiempo abierta';
