@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.110 2007-08-05 21:09:35 giallu Exp $
+	# $Id: user_api.php,v 1.111 2007-08-10 22:17:22 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -633,7 +633,7 @@
 	# return value is an array( URL, width, height )
 	# in this first implementation, only gravatar.com avatars are supported
 	function user_get_avatar( $p_user_id ) {
-		$t_email = user_get_email( $p_user_id );
+		$t_email = strtolower( user_get_email( $p_user_id ) );
 		$t_default_image = "/images/gravatar_logo.gif";
 		$t_size = 80;
 		$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
