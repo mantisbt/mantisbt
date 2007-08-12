@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.83 2007-08-01 08:02:58 giallu Exp $
+	# $Id: file_api.php,v 1.84 2007-08-12 21:30:24 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -176,7 +176,7 @@
 
 			if ( !$t_exists ) {
 				print_file_icon ( $t_file_display_name );
-				PRINT '&nbsp;<font STYLE="text-decoration: line-through">' . $t_file_display_name . '</font> (attachment missing)';
+				PRINT '&nbsp;<span class="strike">' . $t_file_display_name . '</span> (attachment missing)';
 			} else {
 				PRINT $t_href_start;
 				print_file_icon ( $t_file_display_name );
