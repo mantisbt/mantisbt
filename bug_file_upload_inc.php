@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.38 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: bug_file_upload_inc.php,v 1.39 2007-08-12 22:43:47 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,30 +25,16 @@
 ?>
 <br />
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="upload_form_closed" style="display: none;">
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<a href="" onclick="ToggleDiv( 'upload_form', g_div_upload_form ); return false;"
-		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'upload_file' ) ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<div id="upload_form_open">
+<?php
+	collapse_open( 'upload_form' );
+?>
 <form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onclick="ToggleDiv( 'upload_form', g_div_upload_form ); return false;"
-		><img border="0" src="images/minus.png" alt="-" /></a>
-<?php } ?>
-		<?php echo lang_get( 'upload_file' ) ?>
+<?php
+		collapse_icon( 'upload_form' );
+		echo lang_get( 'upload_file' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -65,12 +51,19 @@
 </tr>
 </table>
 </form>
-</div>
+<?php
+	collapse_closed( 'upload_form' );
+?>
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+		<?php
+			collapse_icon( 'upload_form' );
+			echo lang_get( 'upload_file' ) ?>
+	</td>
+</tr>
+</table>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
-<!--
-	SetDiv( "upload_form", g_div_upload_form );
--->
-</script>
-<?php } ?>
+<?php
+	collapse_end( 'upload_form' );
+?>

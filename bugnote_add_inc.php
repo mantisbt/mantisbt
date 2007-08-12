@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.33 2007-07-13 07:58:29 giallu Exp $
+	# $Id: bugnote_add_inc.php,v 1.34 2007-08-12 22:43:48 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -14,31 +14,17 @@
 <?php # Bugnote Add Form BEGIN ?>
 <a name="addbugnote"></a> <br />
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="bugnote_add_closed" style="display: none;">
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<a href="" onclick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
-		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'add_bugnote_title' ) ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<div id="bugnote_add_open">
+<?php
+	collapse_open( 'bugnote_add' );
+?>
 <form name="bugnoteadd" method="post" action="bugnote_add.php">
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onclick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
-		><img border="0" src="images/minus.png" alt="-" /></a>
-		<?php echo lang_get( 'add_bugnote_title' ) ?>
-<?php } ?>
+<?php
+	collapse_icon( 'bugnote_add' );
+	echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -98,14 +84,20 @@
 </table>
 </form>
 </div>
-
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
-<!--
-	SetDiv( "bugnote_add", g_div_bugnote_add );
-// -->
-</script>
-<?php } ?>
+<?php
+	collapse_closed( 'bugnote_add' );
+?>
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+	<?php	collapse_icon( 'bugnote_add' );
+		echo lang_get( 'add_bugnote_title' ) ?>
+	</td>
+</tr>
+</table>
+<?php 
+	collapse_end( 'bugnote_add' );
+?>
 
 <?php # Bugnote Add Form END ?>
 <?php } ?>

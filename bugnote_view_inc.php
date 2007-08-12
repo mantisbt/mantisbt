@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.44 2007-08-05 21:09:35 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.45 2007-08-12 22:43:48 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,21 +44,9 @@
 <?php # Bugnotes BEGIN ?>
 <a name="bugnotes" id="bugnotes" /><br />
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="bugnotes_closed" style="display: none;">
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<a href="" onclick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
-		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<div id="bugnotes_open">
+<?php 
+	collapse_open( 'bugnotes' );
+?>
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -72,10 +60,8 @@
 <?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onclick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
-		><img border="0" src="images/minus.png" alt="-" /></a>
-<?php } ?>
+<?php
+		collapse_icon( 'bugnotes' ); ?>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
 </tr>
@@ -216,14 +202,21 @@
 	} # end else
 ?>
 </table>
-</div>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
-<!--
-	SetDiv( "bugnotes", g_div_bugnotes );
-// -->
-</script>
-<?php } ?>
+<?php 
+	collapse_closed( 'bugnotes' );
+?>
+
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+		<?php collapse_icon( 'bugnotes' ); ?>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
+	</td>
+</tr>
+</table>
+<?php
+	collapse_end( 'bugnotes' );
+?>
 
 <?php # Bugnotes END ?>

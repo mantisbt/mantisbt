@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: billing_inc.php,v 1.13 2007-07-26 21:59:43 prichards Exp $
+	# $Id: billing_inc.php,v 1.14 2007-08-12 22:43:47 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,22 +26,21 @@
 
 <a name="bugnotestats" id="bugnotestats" /><br />
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="bugnotestats_closed" style="display: none;">
+<?php 
+	collapse_open( 'bugnotestats' );
+?>
+
 <table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
-		<a href="" onclick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
-		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'time_tracking' ) ?>
+		<?php collapse_icon( 'bugnotestats' );
+		echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
 </table>
-</div>
-<?php } ?>
-
-<div id="bugnotestats_open">
 <?php
+	collapse_closed( 'bugnotestats' );
+
 	$t_today = date( "d:m:Y" );
 	$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
 
@@ -81,10 +80,9 @@
 <table border=0 class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onclick="ToggleDiv( 'bugnotestats', g_div_bugnotestats ); return false;"
-		><img border="0" src="images/minus.png" alt="-" /></a>
-<?php } ?>
+<?php
+		collapse_icon( 'bugnotestats' );
+?>
 		<?php echo lang_get( 'time_tracking' ) ?>
 	</td>
 </tr>
@@ -185,10 +183,6 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 </tr>
 </table>
 <?php } # end if ?>
-</div>
-
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
-	SetDiv( "bugnotestats", g_div_bugnotestats );
-</script>
-<?php } ?>
+<?php
+	collapse_end( 'bugnotestats' );
+?>

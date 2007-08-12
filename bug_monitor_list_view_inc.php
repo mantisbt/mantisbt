@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.15 2006-08-15 07:11:23 vboctor Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.16 2007-08-12 22:43:47 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,21 +30,9 @@
 	echo '<a name="monitors" id="monitors" /><br />';
 ?>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="monitoring_closed" style="display: none;">
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<a href="" onclick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
-		><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<div id="monitoring_open">
+<?php
+	collapse_open( 'monitoring' );
+?>
 <table class="width100" cellspacing="1">
 <?php 	if ( 0 == $num_users ) { ?>
 <tr>
@@ -55,10 +43,9 @@
 <?php	} else { ?>
 <tr>
 	<td class="form-title" colspan="2">
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-		<a href="" onclick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
-		><img border="0" src="images/minus.png" alt="-" /></a>
-<?php } ?>
+<?php
+	collapse_icon( 'monitoring' );
+ ?>
 		<?php echo lang_get( 'users_monitoring_bug' ); ?>
 	</td>
 </tr>
@@ -78,14 +65,18 @@
 </tr>
 <?php 	} ?>
 </table>
-</div>
-
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/javascript" language="JavaScript">
-<!--
-	SetDiv( "monitoring", g_div_monitoring );
--->
-</script>
-<?php } ?>
+<?php
+	collapse_closed( 'monitoring' ); 
+?>
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2"><?php collapse_icon( 'monitoring' ); ?>
+		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+	</td>
+</tr>
+</table>
+<?php
+	collapse_end( 'monitoring' );
+?>
 
 <?php } # show monitor list ?>
