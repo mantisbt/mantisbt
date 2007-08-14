@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.34 2007-05-07 17:27:32 prichards Exp $
+	# $Id: graph_api.php,v 1.35 2007-08-14 01:46:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -324,6 +324,62 @@
 		$graph->Stroke();
 	}
 
+
+	# --------------------
+	function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p_graph_height = 380 ){
+
+		$t_graph_font = graph_get_font();
+		error_check( is_array( $p_metrics ) ? count($p_metrics) : 0, lang_get( 'by_date' ) );
+
+		$graph = new Graph( $p_graph_width, $p_graph_height );
+		$graph->img->SetMargin(40,140,40,100);
+		if ( ON == config_get_global( 'jpgraph_antialias' ) ) {
+			$graph->img->SetAntiAliasing();
+		}
+		$graph->SetScale('linlin');
+		$graph->SetMarginColor('white');
+		$graph->SetFrame(false);
+		$graph->title->Set( lang_get( 'by_date' ) );
+		$graph->title->SetFont( $t_graph_font, FS_BOLD );
+
+		$graph->legend->Pos(0.01,0.05,'right','top');
+		$graph->legend->SetShadow(false);
+		$graph->legend->SetFillColor('white');
+		$graph->legend->SetLayout(LEGEND_VERT);
+		$graph->legend->SetFont( $t_graph_font );
+
+		$graph->yaxis->scale->ticks->SetDirection(-1);
+		$graph->yaxis->SetFont( $t_graph_font );
+        $graph->yaxis->scale->SetAutoMin(0); 
+        
+		if ( FF_FONT2 <= $t_graph_font ) {
+			$graph->xaxis->SetLabelAngle(60);
+		} else {
+			$graph->xaxis->SetLabelAngle(90);	# can't rotate non truetype fonts
+		}
+		$graph->xaxis->SetLabelFormatCallback('graph_date_format');
+		$graph->xaxis->SetFont( $t_graph_font );
+
+        $t_line_colours = config_get( 'graph_colors' );
+        $t_count_colours = count($t_line_colours);
+        $t_lines = count($p_metrics) - 1;
+        $t_line = array();
+        for ( $i = 1; $i <= $t_lines; $i++) {
+		    $t_line[$i] = new LinePlot($p_metrics[$i], $p_metrics[0]);
+		    $t_line[$i]->SetColor($t_line_colours[$i % $t_count_colours]);
+		    $t_line[$i]->SetCenter();
+	        $t_line[$i]->SetLegend( lang_get_defaulted( $p_labels[$i] ) );
+		    $graph->Add($t_line[$i]);
+        }
+
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
+			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
+		}
+		$graph->Stroke();
+	}
+	
+	
 	# --------------------
 	# utilities
 	# --------------------

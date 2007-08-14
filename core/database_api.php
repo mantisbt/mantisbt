@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.63 2007-08-01 06:38:36 vboctor Exp $
+	# $Id: database_api.php,v 1.64 2007-08-14 01:46:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -532,6 +532,18 @@
 			$p_timestamp = time();
 		}
 		return $p_timestamp ;
+	}
+
+    # convert unix timestamp to db compatible date
+	function db_date( $p_timestamp=null ) {
+		global $g_db;
+
+		if ( null !== $p_timestamp ) {
+			$p_date = $g_db->UserTimeStamp($p_timestamp);
+		} else {
+			$p_date = $g_db->UserTimeStamp(time());
+		}
+		return $p_date;
 	}
 
 

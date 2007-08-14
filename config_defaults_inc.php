@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.353 2007-08-08 22:28:53 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.354 2007-08-14 01:46:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -558,6 +558,10 @@
 
 	# how many graphs to put in each row in the advanced summary page
 	$g_graph_summary_graphs_per_row = 2;
+	
+	# graph colours, once the list is exhausted it will repeat
+	$g_graph_color = array('coral', 'red', 'blue', 'black', 'green', 'orange', 'pink', 'brown', 'gray',
+	        'blueviolet','chartreuse','fuschia','indigo');
 
 	############################
 	# Mantis Time Settings

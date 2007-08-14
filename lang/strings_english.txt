@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.309 $
-	# $Author: giallu $
-	# $Date: 2007-08-08 20:59:25 $
+	# $Revision: 1.310 $
+	# $Author: thraxisp $
+	# $Date: 2007-08-14 01:46:36 $
 	#
-	# $Id: strings_english.txt,v 1.309 2007-08-08 20:59:25 giallu Exp $
+	# $Id: strings_english.txt,v 1.310 2007-08-14 01:46:36 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -1365,4 +1365,28 @@ $s_twitter_resolved_no_version = "%d: [%s] %s (resolved by %s)";
 
 # Project Page
 $s_development_team = 'Development Team';
+
+# bug_graph pages
+$s_all_dates = 'All Dates';
+$s_period_none = 'None';
+$s_period_this_week = 'This Week';
+$s_period_last_week = 'Last Week';
+$s_period_two_weeks = 'Last Two Weeks';
+$s_period_this_month = 'This Month';
+$s_period_last_month = 'Last Month';
+$s_period_this_quarter = 'This Quarter';
+$s_period_last_quarter = 'Last Quarter';
+$s_period_year_to_date = 'Year to Date';
+$s_period_select = "Arbitrary Dates";
+$s_period_last_year = 'Last Year';
+$s_select = 'Please Select';
+$s_select_bystatus = 'by Status';
+$s_select_summbystatus = 'Summary by Status';
+$s_select_bycat = "Summary by Category";
+$s_show_as_graph = 'Show as Graph';
+$s_show_as_table = 'Show as Table';
+$s_show_graph = 'Show Graph';
+$s_graph_page = 'Graph Bug History';
+$s_graph_bug_page_link = 'Graph';
+
 ?>

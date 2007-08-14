@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.170 2007-07-29 17:32:10 prichards Exp $
+	# $Id: view_all_inc.php,v 1.171 2007-08-14 01:46:33 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -93,6 +93,8 @@
 				# -- Print and Export links --
 
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+				echo '&nbsp;';
+				print_bracket_link( 'bug_graph_page.php', lang_get( 'graph_bug_page_link' ) );
 				echo '&nbsp;';
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 		?> </span>

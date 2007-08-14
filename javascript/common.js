@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.8 2006-12-12 18:26:29 davidnewcomb Exp $
+ * $Id: common.js,v 1.9 2007-08-14 01:46:35 thraxisp Exp $
  * --------------------------------------------------------
  */
 
@@ -135,3 +135,31 @@ function checkall( p_formname, p_state) {
    		}
   	}
 }
+
+// global code to determine how to set visibility
+var a = navigator.userAgent.indexOf("MSIE");
+var style_display;
+
+if (a!= -1) {
+  style_display = 'block';
+} else {
+  style_display = 'table-row';
+}
+style_display = 'block';
+
+function setDisplay(idTag, state) 
+{
+  if(!document.getElementById(idTag)) alert('SetDisplay(): id '+idTag+' is empty');
+  // change display visibility
+  if ( state != 0 ) {
+      document.getElementById(idTag).style.display = style_display;
+  } else {
+      document.getElementById(idTag).style.display = 'none';
+  }
+}
+
+function toggleDisplay(idTag) 
+{
+  setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+}
+
