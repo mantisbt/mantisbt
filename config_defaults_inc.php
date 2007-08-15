@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.354 2007-08-14 01:46:33 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.355 2007-08-15 02:57:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -559,8 +559,12 @@
 	# how many graphs to put in each row in the advanced summary page
 	$g_graph_summary_graphs_per_row = 2;
 	
+	# initial graph type selected on bug_graph_page (see that page for possible values)
+	# 0 asks user to select
+	$g_default_graph_type = 0;
+	
 	# graph colours, once the list is exhausted it will repeat
-	$g_graph_color = array('coral', 'red', 'blue', 'black', 'green', 'orange', 'pink', 'brown', 'gray',
+	$g_graph_colors = array('coral', 'red', 'blue', 'black', 'green', 'orange', 'pink', 'brown', 'gray',
 	        'blueviolet','chartreuse','fuschia','indigo');
 
 	############################

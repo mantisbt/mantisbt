@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_graph_bycategory.php,v 1.1 2007-08-14 01:46:31 thraxisp Exp $
+	# $Id: bug_graph_bycategory.php,v 1.2 2007-08-15 02:57:09 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -165,8 +165,7 @@
             }
         }
 	}
-
-    $t_bin_count = $t_ptr - 1;
+    $t_bin_count = $t_ptr;
 // drop any categories that have no counts
 //  These arise when bugs are opened and closed within the data intervals
     $t_count_cat = count( $t_category );
@@ -174,15 +173,15 @@
         $t_cat = $t_category[ $t ];
         $t_not_zero = false;
         for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-            if ( isset( $t_data[$t][$t_cat] ) && ( $t_data[$t][$t_cat] > 0 ) ) {
+            if ( isset( $t_data[$t_ptr][$t_cat] ) && ( $t_data[$t_ptr][$t_cat] > 0 ) ) {
                 $t_not_zero = true;
                 break;
             }
         }  
-        if ( !$t_not_zero ) 
+        if ( !$t_not_zero ) {
             unset( $t_category[ $t ] );
+        }
     }
-
 // sort and display the results
     sort($t_category);
     if ($f_show_as_table) {
@@ -203,7 +202,7 @@
 	    // reverse the array and reorder the data, if necessary
 	    $t_metrics = array();
 	    for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-	        $t = $t_bin_count - $t_ptr;
+	        $t = $t_bin_count - $t_ptr - 1;
 	        $t_metrics[0][$t_ptr] = $t_marker[$t];
             $i = 0;
             foreach ( $t_category as $t_cat ) {

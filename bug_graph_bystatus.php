@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_graph_bystatus.php,v 1.1 2007-08-14 01:46:32 thraxisp Exp $
+	# $Id: bug_graph_bystatus.php,v 1.2 2007-08-15 02:57:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,9 +28,9 @@
 	
 	$t_interval_days = $t_interval->get_elapsed_days();
 	if ( $t_interval_days <= 14 ) {
-	    $t_incr = 60 * 60; // less than 7 days, use hourly
-	} else if ( $t_interval_days <= 62 ) {
-	    $t_incr = 24 * 60 * 60; // less than one month, use daily
+	    $t_incr = 60 * 60; // less than 14 days, use hourly
+	} else if ( $t_interval_days <= 92 ) {
+	    $t_incr = 24 * 60 * 60; // less than three months, use daily
 	} else {
 	    $t_incr = 7 * 24 * 60 * 60; // otherwise weekly
 	}
