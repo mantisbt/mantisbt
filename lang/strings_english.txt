@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.311 $
+	# $Revision: 1.312 $
 	# $Author: thraxisp $
-	# $Date: 2007-08-15 02:56:54 $
+	# $Date: 2007-08-15 16:25:29 $
 	#
-	# $Id: strings_english.txt,v 1.311 2007-08-15 02:56:54 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.312 2007-08-15 16:25:29 thraxisp Exp $
 	###########################################################################
 
 ?>
@@ -1383,7 +1383,7 @@ $s_select = 'Please Select';
 $s_select_bystatus = 'by Status';
 $s_select_summbystatus = 'Summary by Status';
 $s_select_bycat = "Summary by Category";
-$s_select_both = "Sunnary by Status and Category";
+$s_select_both = "Summary by Status and Category";
 $s_show_as_graph = 'Show as Graph';
 $s_show_as_table = 'Show as Table';
 $s_show_graph = 'Show Graph';
