@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.111 $
+	# $Revision: 1.112 $
 	# $Author: jbrugger $
-	# $Date: 2007-08-10 11:25:15 $
+	# $Date: 2007-08-16 11:31:53 $
 	#
-	# $Id: strings_spanish.txt,v 1.111 2007-08-10 11:25:15 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.112 2007-08-16 11:31:53 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -1368,4 +1368,29 @@ $s_twitter_resolved_no_version = "%d: [%s] %s (resuelto por %s)";
 
 # Project Page
 $s_development_team = 'Equipo de Desarrollo';
+
+# bug_graph pages
+$s_all_dates = 'Cualquier Fecha';
+$s_period_none = 'Ninguna';
+$s_period_this_week = 'Esta Semana';
+$s_period_last_week = 'Última Semana';
+$s_period_two_weeks = 'Últimas dos Semanas';
+$s_period_this_month = 'Este Mes';
+$s_period_last_month = 'Útimo Mes';
+$s_period_this_quarter = 'Este Trimestre';
+$s_period_last_quarter = 'Último Trimestre';
+$s_period_year_to_date = 'Lo que va del Año';
+$s_period_select = "Fechas Arbitrarias";
+$s_period_last_year = 'Último Año';
+$s_select = 'Por favor Seleccione';
+$s_select_bystatus = 'por Estado';
+$s_select_summbystatus = 'Sumario por Estado';
+$s_select_bycat = "Sumario por Categoría";
+$s_select_both = "Sumario por Estado y Categoría";
+$s_show_as_graph = 'Ver como Gráfico';
+$s_show_as_table = 'Ver como Tabla';
+$s_show_graph = 'Ver Gráfico';
+$s_graph_page = 'Historial Gráfico de la Incidencia';
+$s_graph_bug_page_link = 'Gráfico';
+
 ?>
