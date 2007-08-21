@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.40 2007-06-09 16:56:39 vboctor Exp $
+	# $Id: file_download.php,v 1.41 2007-08-21 07:03:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,7 +68,10 @@
 	}
 
 	# flush output buffer to protect download
-	@ob_end_clean();
+	if ( ob_get_length() ) {
+		@ob_end_clean();
+	}
+
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 
