@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.171 2007-08-14 01:46:33 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.172 2007-08-21 01:41:31 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -94,8 +94,10 @@
 
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 				echo '&nbsp;';
-				print_bracket_link( 'bug_graph_page.php', lang_get( 'graph_bug_page_link' ) );
-				echo '&nbsp;';
+				if ( ON == config_get( 'use_jpgraph' ) ) {
+				    print_bracket_link( 'bug_graph_page.php', lang_get( 'graph_bug_page_link' ) );
+				    echo '&nbsp;';
+				}
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 		?> </span>
 	</td>
