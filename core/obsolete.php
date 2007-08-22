@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.31 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: obsolete.php,v 1.32 2007-08-22 04:10:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -102,4 +102,7 @@
 # changes in 0.19.3
 	config_obsolete( 'relationship_graph_fontpath', 'system_font_folder' );
 
+# changes in 1.1.0rc1
+	config_obsolete( 'show_notices', 'display_errors' );
+	config_obsolete( 'show_warnings', 'display_errors' );
 ?>

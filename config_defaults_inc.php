@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.355 2007-08-15 02:57:07 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.356 2007-08-22 04:10:00 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1494,8 +1494,6 @@
 	#  'halt' - stop and display traceback
 	#  'inline' - display 1 line error and continue
 	#  'none' - no error displayed
-	# obsoletes $g_show_notices (E_NOTICE and E_USER_NOTICE) and
-	#   $g_show_warnings (E_WARNING and E_USER_WARNING)
 	# A developer might set this in config_inc.php as:
 	#	$g_display_errors = array(
 	#		E_WARNING => 'halt',
@@ -1512,18 +1510,6 @@
 		E_USER_WARNING => 'inline',
 		E_USER_NOTICE => 'none'
 	);
-
-	# --- notice display ---
-	# Control whether errors of level NOTICE, the lowest level of error,
-	#  are displayed to the user.  Default is OFF, but turning it ON may
-	#  be useful while debugging
-	$g_show_notices			= OFF;
-
-	# --- warning display ---
-	# Control whether errors of level WARNING, the middle level of error,
-	#  are displayed to the user.  Default is ON.  Turning it OFF may
-	#  hide useful information from the user.
-	$g_show_warnings		= ON;
 
 	# --- debug messages ---
 	# If this option is turned OFF (default) page redirects will continue to

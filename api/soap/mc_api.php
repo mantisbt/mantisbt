@@ -7,17 +7,22 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_api.php,v 1.1 2007-07-18 06:52:48 vboctor Exp $
+	# $Id: mc_api.php,v 1.2 2007-08-22 04:09:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	# use standard error handler rather than the one defined in Mantis.
 	restore_error_handler();
 
 	# override some Mantis configurations
-	$g_show_detailed_errors	= ON;
-	$g_show_notices = ON;
-	$g_show_warnings = ON;
+	$g_show_detailed_errors	= OFF;
 	$g_stop_on_errors = ON;
+	$g_display_errors = array(
+		E_WARNING => 'halt',
+		E_NOTICE => 'halt',
+		E_USER_ERROR => 'halt',
+		E_USER_WARNING => 'halt',
+		E_USER_NOTICE => 'halt'
+	);
 
 	/**
 	 * Get the MantisConnect webservice version.
