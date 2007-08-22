@@ -6,17 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.28 2007-07-23 21:58:10 prichards Exp $
+	# $Id: check.php,v 1.29 2007-08-22 04:12:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	error_reporting( E_ALL );
 
 	$g_skip_open_db = true;  # don't open the database in database_api.php
+
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core/email_api.php' );
 
 	$t_core_path = config_get_global( 'core_path' );
+
+	require_once ( $t_core_path . 'email_api.php' );
+	require_once ( $t_core_path . 'database_api.php' );
 
 	$f_mail_test	= gpc_get_bool( 'mail_test' );
 	$f_password		= gpc_get_string( 'password', null );
@@ -126,7 +129,7 @@
 <br /><br />
 
 <?php
-	require_once( $g_core_path . 'obsolete.php' );
+	require_once( $t_core_path . 'obsolete.php' );
 ?>
 
 <!-- Version Check -->
@@ -165,7 +168,7 @@
 </tr>
 
 <!-- Test DATABASE part 2 -->
-<?php if ( db_is_connected ) { 
+<?php if ( db_is_connected() ) { 
 	$t_serverinfo = $g_db->ServerInfo()
 ?>
 <tr>
