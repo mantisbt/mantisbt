@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.17 2006-05-18 06:32:19 vboctor Exp $
+	# $Id: my_view_inc.php,v 1.18 2007-08-22 04:19:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -233,7 +233,7 @@
 			}
 
 			if ( ON == config_get( 'show_priority_text' ) ) {
-				print_formatted_priority_string( $p_row['status'], $v_priority );
+				print_formatted_priority_string( $v_status, $v_priority );
 			} else {
 				print_status_icon( $v_priority );
 			}
