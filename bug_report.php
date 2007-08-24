@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.48 2007-06-23 04:25:40 vboctor Exp $
+	# $Id: bug_report.php,v 1.49 2007-08-24 14:44:45 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -49,6 +49,8 @@
 	$t_bug_data->reporter_id		= auth_get_current_user_id();
 
 	$t_bug_data->summary			= trim( $t_bug_data->summary );
+
+	$t_bug_data->target_version		= access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ? gpc_get_string( 'target_version', '' ) : '';
 
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
@@ -165,6 +167,7 @@
 		<input type="hidden" name="os" 			value="<?php echo $t_bug_data->os ?>" />
 		<input type="hidden" name="os_build" 		value="<?php echo $t_bug_data->os_build ?>" />
 		<input type="hidden" name="product_version" 	value="<?php echo $t_bug_data->version ?>" />
+		<input type="hidden" name="target_version" 	value="<?php echo $t_bug_data->target_version ?>" />
 		<input type="hidden" name="build" 		value="<?php echo $t_bug_data->build ?>" />
 		<input type="hidden" name="report_stay" 	value="1" />
 		<input type="hidden" name="view_state"		value="<?php echo $t_bug_data->view_state ?>" />

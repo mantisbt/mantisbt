@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.109 2007-07-02 08:46:55 vboctor Exp $
+	# $Id: bug_api.php,v 1.110 2007-08-24 14:44:46 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -370,6 +370,13 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
+		# Only set target_version if user has access to do so
+		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
+			$c_target_version	= db_prepare_string( $p_bug_data->target_version );
+		} else { 
+			$c_target_version	= '';
+		}
+
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 		$t_bug_text_table			= config_get( 'mantis_bug_text_table' );
 		$t_project_category_table	= config_get( 'mantis_project_category_table' );
@@ -441,7 +448,7 @@
 				      '$c_platform', '$c_version',
 				      '$c_build',
 				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total', '$c_sticky', '',
-				      ''
+				      '$c_target_version'
 				    )";
 		db_query( $query );
 
@@ -802,8 +809,16 @@
 					platform='$c_bug_data->platform',
 					version='$c_bug_data->version',
 					build='$c_bug_data->build',
-					fixed_in_version='$c_bug_data->fixed_in_version',
-					target_version='$c_bug_data->target_version',
+					fixed_in_version='$c_bug_data->fixed_in_version',";
+
+		$t_roadmap_updated = false;
+		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
+			$query .= "
+					target_version='$c_bug_data->target_version',";
+			$t_roadmap_updated = true;
+		}
+
+		$query .= "
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary',
 					sponsorship_total='$c_bug_data->sponsorship_total',
@@ -832,7 +847,9 @@
 		history_log_event_direct( $p_bug_id, 'version', $t_old_data->version, $p_bug_data->version );
 		history_log_event_direct( $p_bug_id, 'build', $t_old_data->build, $p_bug_data->build );
 		history_log_event_direct( $p_bug_id, 'fixed_in_version', $t_old_data->fixed_in_version, $p_bug_data->fixed_in_version );
-		history_log_event_direct( $p_bug_id, 'target_version', $t_old_data->target_version, $p_bug_data->target_version );
+		if ( $t_roadmap_updated ) {
+			history_log_event_direct( $p_bug_id, 'target_version', $t_old_data->target_version, $p_bug_data->target_version );
+		}
 		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
 		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
 		history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );

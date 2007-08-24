@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.102 2007-07-13 07:58:28 giallu Exp $
+	# $Id: bug_update_advanced_page.php,v 1.103 2007-08-24 14:44:46 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -417,7 +417,7 @@
 <tr <?php echo helper_alternate_class() ?>>
 
 <?php
-	if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id ) ) {
+	if ( access_has_bug_level( config_get( 'roadmap_update_threshold' ), $f_bug_id ) ) {
 ?>
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>

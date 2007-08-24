@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.65 2007-07-13 07:58:27 giallu Exp $
+	# $Id: bug_report_advanced_page.php,v 1.66 2007-08-24 14:44:46 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -66,6 +66,7 @@
 		$f_os					= $t_bug->os;
 		$f_os_build				= $t_bug->os_build;
 		$f_product_version		= $t_bug->version;
+		$f_target_version		= $t_bug->target_version;
 		$f_profile_id			= 0;
 		$f_handler_id			= $t_bug->handler_id;
 
@@ -88,6 +89,7 @@
 		$f_os					= gpc_get_string( 'os', '' );
 		$f_os_build				= gpc_get_string( 'os_build', '' );
 		$f_product_version		= gpc_get_string( 'product_version', '' );
+		$f_target_version		= gpc_get_string( 'target_version', '' );
 		$f_profile_id			= gpc_get_int( 'profile_id', 0 );
 		$f_handler_id			= gpc_get_int( 'handler_id', 0 );
 
@@ -351,6 +353,20 @@
 		<select <?php echo helper_get_tab_index() ?> name="handler_id">
 			<option value="0" selected="selected"></option>
 			<?php print_assign_to_option_list( $f_handler_id ) ?>
+		</select>
+	</td>
+</tr>
+<?php } ?>
+
+<!-- Target Version (if permissions allow) -->
+<?php if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'target_version' ) ?>
+	</td>
+	<td>
+		<select <?php echo helper_get_tab_index() ?> name="target_version">
+			<?php print_version_option_list() ?>
 		</select>
 	</td>
 </tr>

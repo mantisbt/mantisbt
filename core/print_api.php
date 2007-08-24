@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.178 2007-08-14 01:46:35 thraxisp Exp $
+	# $Id: print_api.php,v 1.179 2007-08-24 14:44:46 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -936,7 +936,7 @@
 				$commands['UP_FIXED_IN_VERSION'] = lang_get( 'actiongroup_menu_update_fixed_in_version' );
 			}
 
-			if ( access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_project_id ) ) {
+			if ( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_project_id ) ) {
 				$commands['UP_TARGET_VERSION'] = lang_get( 'actiongroup_menu_update_target_version' );
 			}
 

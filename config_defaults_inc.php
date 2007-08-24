@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.356 2007-08-22 04:10:00 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.357 2007-08-24 14:44:46 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 
@@ -1112,6 +1112,9 @@
 
 	# threshold for viewing roadmap
 	$g_roadmap_view_threshold = VIEWER;
+	
+	# threshold for updating roadmap, target_version, etc
+	$g_roadmap_update_threshold = DEVELOPER;
 	
 	# status change thresholds
 	$g_update_bug_status_threshold = DEVELOPER;

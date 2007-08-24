@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.51 2007-06-23 03:21:44 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.52 2007-08-24 14:44:45 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -216,7 +216,7 @@
 			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 			$t_success = false;
 
-			if ( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_bug_id ) ) {
+			if ( access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id ) ) {
 				if ( version_get_id( $f_target_version, $t_project_id ) !== false ) {
 					# @@@ we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'target_version', $f_target_version );
