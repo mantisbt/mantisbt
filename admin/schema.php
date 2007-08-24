@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.21 2007-08-24 19:04:41 nuclear_eclipse Exp $
+	# $Id: schema.php,v 1.22 2007-08-24 23:05:24 giallu Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -330,6 +330,9 @@ $upgrade[] = Array('AddColumnSQL',Array(config_get('mantis_bugnote_table'), "tim
 $upgrade[] = Array('CreateIndexSQL',Array('idx_diskfile',config_get('mantis_bug_file_table'),'diskfile'));
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_user_print_pref_table' ), "print_pref C(64) NOTNULL" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "field_name C(64) NOTNULL" ) );
+
+# Release marker: 1.1.0a4
+
 $upgrade[] = Array('CreateTableSQL', Array( config_get( 'mantis_tag_table' ), "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
@@ -344,7 +347,4 @@ $upgrade[] = Array('CreateTableSQL', Array( config_get( 'mantis_bug_tag_table' )
 	user_id			I	UNSIGNED NOTNULL DEFAULT '0',
 	date_attached	T	NOTNULL DEFAULT '1970-01-01 00:00:01'
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
-
-# Release marker: 1.1.0a4
-
 ?>
