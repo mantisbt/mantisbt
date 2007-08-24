@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.41 2007-07-22 22:46:30 prichards Exp $
+	# $Id: history_api.php,v 1.42 2007-08-24 19:04:42 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -162,6 +162,15 @@
 							( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 						continue;
 					}
+				}
+			}
+
+			// tags
+			if ( $v_type == TAG_ATTACHED ||
+				$v_type == TAG_DETACHED ||
+				$v_type == TAG_RENAMED ) {
+				if ( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
+					continue;
 				}
 			}
 
@@ -389,6 +398,16 @@
 					break;
 				case CHECKIN:
 					$t_note = lang_get( 'checkin' );
+					break;
+				case TAG_ATTACHED:
+					$t_note = lang_get( 'tag_history_attached' ) .': '. $p_old_value;
+					break;
+				case TAG_DETACHED:
+					$t_note = lang_get( 'tag_history_detached' ) .': '. $p_old_value;
+					break;
+				case TAG_RENAMED:
+					$t_note = lang_get( 'tag_history_renamed' );
+					$t_change = $p_old_value . ' => ' . $p_new_value;
 					break;
 			}
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.65 2007-04-25 06:15:13 vboctor Exp $
+	# $Id: view_all_set.php,v 1.66 2007-08-24 19:04:41 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -202,6 +202,9 @@
 	$f_and_not_assigned		= gpc_get_bool( 'and_not_assigned' );
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
 	$f_view_state			= gpc_get_int( 'view_state', META_FILTER_ANY );
+
+	$f_tag_string			= gpc_get_string( 'tag_string', '' );
+	$f_tag_select			= gpc_get_int( 'tag_select', '0' );
 
 	$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 	$f_custom_fields_data 	= array();
@@ -414,6 +417,8 @@
 				$t_setting_arr['platform'] = $f_platform;
 				$t_setting_arr['os'] = $f_os;
 				$t_setting_arr['os_build'] = $f_os_build;
+				$t_setting_arr['tag_string'] = $f_tag_string;
+				$t_setting_arr['tag_select'] = $f_tag_select;
 				break;
 		# Set the sort order and direction
 		case '2':

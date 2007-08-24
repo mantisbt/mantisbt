@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.357 2007-08-24 14:44:46 nuclear_eclipse Exp $
+	# $Id: config_defaults_inc.php,v 1.358 2007-08-24 19:04:38 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 
@@ -1334,6 +1334,7 @@
 	$g_mantis_bug_monitor_table				= '%db_table_prefix%_bug_monitor%db_table_suffix%';
 	$g_mantis_bug_relationship_table		= '%db_table_prefix%_bug_relationship%db_table_suffix%';
 	$g_mantis_bug_table						= '%db_table_prefix%_bug%db_table_suffix%';
+	$g_mantis_bug_tag_table					= '%db_table_prefix%_bug_tag%db_table_suffix%';
 	$g_mantis_bug_text_table				= '%db_table_prefix%_bug_text%db_table_suffix%';
 	$g_mantis_bugnote_table					= '%db_table_prefix%_bugnote%db_table_suffix%';
 	$g_mantis_bugnote_text_table			= '%db_table_prefix%_bugnote_text%db_table_suffix%';
@@ -1343,6 +1344,7 @@
 	$g_mantis_project_table					= '%db_table_prefix%_project%db_table_suffix%';
 	$g_mantis_project_user_list_table		= '%db_table_prefix%_project_user_list%db_table_suffix%';
 	$g_mantis_project_version_table			= '%db_table_prefix%_project_version%db_table_suffix%';
+	$g_mantis_tag_table						= '%db_table_prefix%_tag%db_table_suffix%';
 	$g_mantis_user_table					= '%db_table_prefix%_user%db_table_suffix%';
 	$g_mantis_user_profile_table			= '%db_table_prefix%_user_profile%db_table_suffix%';
 	$g_mantis_user_pref_table				= '%db_table_prefix%_user_pref%db_table_suffix%';
@@ -1822,6 +1824,34 @@
 	
 	# The maximum number of issues to keep in the recently visited list.
 	$g_recently_visited_count = 5;
+
+	#####################
+	# Bug Tagging
+	#####################
+
+	# String that will separate tags as entered for input
+	$g_tag_separator = ',';
+
+	# Access level required to view tags attached to a bug
+	$g_tag_view_threshold = VIEWER;
+
+	# Access level required to attach tags to a bug
+	$g_tag_attach_threshold = REPORTER;
+
+	# Access level required to detach tags from a bug
+	$g_tag_detach_threshold = DEVELOPER;
+
+	# Access level required to detach tags attached by the same user
+	$g_tag_detach_own_threshold = REPORTER;
+
+	# Access level required to create new tags
+	$g_tag_create_threshold = REPORTER;
+
+	# Access level required to edit tag names and descriptions
+	$g_tag_edit_threshold = DEVELOPER;
+
+	# Access level required to edit descriptions by the creating user
+	$g_tag_edit_own_threshold = REPORTER;
 
 	#####################
 	# Time tracking

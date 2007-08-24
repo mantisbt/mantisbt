@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.110 2007-08-24 14:44:46 nuclear_eclipse Exp $
+	# $Id: bug_api.php,v 1.111 2007-08-24 19:04:41 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -18,6 +18,7 @@
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'sponsorship_api.php' );
 	require_once( $t_core_dir . 'twitter_api.php' );
+	require_once( $t_core_dir . 'tag_api.php' );
 
 	# MASC RELATIONSHIP
 	require_once( $t_core_dir.'relationship_api.php' );
@@ -708,6 +709,9 @@
 		# Delete files
 		file_delete_attachments( $p_bug_id );
 
+		# Detach tags
+		tag_bug_detach_all( $p_bug_id, false );
+		
 		# Delete the bug history
 		history_delete( $p_bug_id );
 

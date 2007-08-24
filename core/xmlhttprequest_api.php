@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: xmlhttprequest_api.php,v 1.2 2007-04-20 08:28:23 vboctor Exp $
+	# $Id: xmlhttprequest_api.php,v 1.3 2007-08-24 19:04:43 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -28,6 +28,18 @@
 
 		echo '<select name="reporter_id">';
 		print_reporter_option_list( $t_reporter_id, $t_project_id );
+		echo '</select>';
+	}
+
+	/**
+	 * Print a generic combobox with a list of users above a given access level.
+	 */
+	function xmlhttprequest_user_combobox() {
+		$f_user_id = gpc_get_int( 'user_id' );
+		$f_user_access = gpc_get_int( 'access_level' );
+		
+		echo '<select name="user_id">';
+		print_user_option_list( $f_user_id, ALL_PROJECTS, $f_user_access );
 		echo '</select>';
 	}
 

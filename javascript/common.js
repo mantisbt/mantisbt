@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.9 2007-08-14 01:46:35 thraxisp Exp $
+ * $Id: common.js,v 1.10 2007-08-24 19:04:44 nuclear_eclipse Exp $
  * --------------------------------------------------------
  */
 
@@ -161,5 +161,18 @@ function setDisplay(idTag, state)
 function toggleDisplay(idTag) 
 {
   setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+}
+
+/* Append a tag name to the tag input box, with repect for tag separators, etc */
+function tag_string_append( p_string ) {
+	t_tag_separator = document.getElementById('tag_separator').value;
+	t_tag_string = document.getElementById('tag_string');
+	t_tag_select = document.getElementById('tag_select');
+	if ( t_tag_string.value != '' ) {
+		t_tag_string.value = t_tag_string.value + t_tag_separator + p_string;
+	} else {
+		t_tag_string.value = t_tag_string.value + p_string;
+	}
+	t_tag_select.selectedIndex=0;
 }
 

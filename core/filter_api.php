@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.159 2007-07-22 21:03:28 giallu Exp $
+	# $Id: filter_api.php,v 1.160 2007-08-24 19:04:42 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -16,6 +16,7 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'collapse_api.php' );
 	require_once( $t_core_dir . 'relationship_api.php' );
+	require_once( $t_core_dir . 'tag_api.php' );
 
 	###########################################################################
 	# Filter Property Names
@@ -56,6 +57,8 @@
 	define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'do_filter_by_date' );
 	define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 	define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
+	define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
+	define( 'FILTER_PROPERTY_TAG_SELECT', 'tag_select' );
 
 	###########################################################################
 	# Filter Query Parameter Names
@@ -96,6 +99,8 @@
 	define( 'FILTER_SEARCH_FILTER_BY_DATE', 'filter_by_date' );
 	define( 'FILTER_SEARCH_RELATIONSHIP_TYPE', 'relationship_type' );
 	define( 'FILTER_SEARCH_RELATIONSHIP_BUG', 'relationship_bug' );
+	define( 'FILTER_SEARCH_TAG_STRING', 'tag_string' );
+	define( 'FILTER_SEARCH_TAG_SELECT', 'tag_select' );
 
 	# Checks the supplied value to see if it is an ANY value.
 	# $p_field_value - The value to check.
@@ -304,6 +309,14 @@
 
 		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_OS_BUILD, $p_custom_filter[FILTER_PROPERTY_OS_BUILD] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_STRING] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_STRING, $p_custom_filter[FILTER_PROPERTY_TAG_STRING] );
+		}
+
+		if ( !filter_str_field_is_any( $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_SELECT, $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] );
 		}
 
 		if ( isset( $p_custom_filter['custom_fields'] ) ) {
@@ -1055,6 +1068,63 @@
  			array_push( $t_clauses, "($t_table_name.relationship_type='$t_comp_type' AND $t_table_name.source_bug_id='$c_rel_bug')" );
 			array_push( $t_clauses, "($t_table_name"."2.relationship_type='$c_rel_type' AND $t_table_name"."2.destination_bug_id='$c_rel_bug')" );
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+		}
+
+		# tags
+		$c_tag_string = trim( $t_filter['tag_string'] );
+		if ( !is_blank( $c_tag_string ) ) {
+			require_once( $t_core_path . 'tag_api.php' );
+			$t_tags = tag_parse_filters( $c_tag_string );
+
+			if ( !count( $t_tags ) ) { break; }
+
+			$t_tags_all = array();
+			$t_tags_any = array();
+			$t_tags_none = array();
+
+			foreach( $t_tags as $t_tag_row ) {
+				switch ( $t_tag_row['filter'] ) {
+					case 1:
+						$t_tags_all[] = $t_tag_row;
+						break;
+					case 0:
+						$t_tags_any[] = $t_tag_row;
+						break;
+					case -1:
+						$t_tags_none[] = $t_tag_row;
+						break;
+				}
+			}
+
+			if ( 0 < $t_filter['tag_select'] && tag_exists( $t_filter['tag_select'] ) ) {
+				$t_tags_any[] = tag_get( $t_filter['tag_select'] );
+			}
+
+			$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
+			
+			if ( count( $t_tags_all ) ) {
+				$t_clauses = array();
+				foreach ( $t_tags_all as $t_tag_row ) {
+					array_push( $t_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE $t_bug_tag_table.tag_id = $t_tag_row[id] )" );
+				}
+				array_push( $t_where_clauses, '('. implode( ' AND ', $t_clauses ) .')' );
+			}
+			
+			if ( count( $t_tags_any ) ) {
+				$t_clauses = array();
+				foreach ( $t_tags_any as $t_tag_row ) {
+					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+				}
+				array_push( $t_where_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
+			}
+			
+			if ( count( $t_tags_none ) ) {
+				$t_clauses = array();
+				foreach ( $t_tags_none as $t_tag_row ) {
+					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+				}
+				array_push( $t_where_clauses, "$t_bug_table.id NOT IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
+			}
 		}
 
 		# custom field filters
@@ -2291,6 +2361,7 @@
 				<a href="<?php PRINT $t_filters_url . 'os_build'; ?>" id="os_build_filter"><?php echo lang_get( 'os_version' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top" colspan="5">
+				<a href="<?php PRINT $t_filters_url . 'tag_string'; ?>" id="tag_string_filter"><?php echo lang_get( 'tags' ) ?>:</a>
 			</td>
 			<?php if ( $t_filter_cols > 8 ) {
 				echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&nbsp;</td>';
@@ -2312,7 +2383,16 @@
 					print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
 				?>
 			</td>
-			<td class="small-caption" colspan="5">
+			<td class="small-caption" valign="top" id="tag_string_filter_target" colspan="5">
+				<?php 
+					$t_tag_string = $t_filter['tag_string'];
+					if ( $t_filter['tag_select'] != 0 ) {
+						$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
+						$t_tag_string .= tag_get_field( $t_filter['tag_select'], 'name' );
+					}
+					PRINT $t_tag_string 
+				?>
+				<input type="hidden" name="tag_string" value="<?php echo $t_tag_string ?>"/>
 			</td>
 		</tr>
 		<?php
@@ -3025,6 +3105,9 @@
 		if ( !isset( $p_filter_arr['target_version'] ) ) {
 			$p_filter_arr['target_version'] = META_FILTER_ANY;
 		}
+		if ( !isset( $p_filter_arr['tag_string'] ) ) {
+			$p_filter_arr['tag_string'] = gpc_get_string( 'tag_string', '' );
+		}
 
 		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 		$f_custom_fields_data 	= array();
@@ -3529,6 +3612,22 @@
 		<input type="text" name="relationship_bug" size="5" maxlength="10" value="<?php echo $t_filter['relationship_bug']?>" />
 		<?php
 
+	}
+
+	function print_filter_tag_string() {
+		global $t_filter;
+		$t_tag_string = $t_filter['tag_string'];
+		if ( $t_filter['tag_select'] != 0 ) {
+			$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
+			$t_tag_string .= tag_get_field( $t_filter['tag_select'], 'name' );
+		}
+		?>
+		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
+		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo $t_tag_string ?>" />
+		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
+			<?php print_tag_option_list( $p_bug_id ); ?>
+		</select>
+		<?php
 	}
 
 	function print_filter_custom_field($p_field_id){

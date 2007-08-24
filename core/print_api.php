@@ -6,11 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.179 2007-08-24 14:44:46 nuclear_eclipse Exp $
+	# $Id: print_api.php,v 1.180 2007-08-24 19:04:42 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
+	require_once( $t_core_dir . 'ajax_api.php' );
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'prepare_api.php' );
@@ -255,6 +256,69 @@
 			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id."</option>";
 		}
 	}
+
+	/**
+	 * Print the entire form for attaching a tag to a bug.
+	 * @param integer Bug ID
+	 * @param string Default contents of the input box
+	 */
+	function print_tag_attach_form( $p_bug_id, $p_string="" ) {
+		?>
+		<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get('tag_separator') ) ?></small> 
+		<form method="post" action="tag_attach.php">
+		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id ?>" />
+		<?php
+			print_tag_input( $p_bug_id, $p_string );
+		?>
+		<input type="submit" value="<?php echo lang_get( 'tag_attach' ) ?>" class="button" />
+		</form>
+		<?php
+		return true;
+	}
+
+	/**
+	 * Print the separator comment, input box, and existing tag dropdown menu.
+	 * @param integer Bug ID
+	 * @param string Default contents of the input box
+	 */
+	function print_tag_input( $p_bug_id = 0, $p_string="" ) {
+		?>
+		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
+		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo $p_string ?>" />
+		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
+			<?php print_tag_option_list( $p_bug_id ); ?>
+		</select>
+		<?php
+
+		return true;
+	}
+
+	/**
+	 * Print the dropdown combo-box of existing tags.
+	 * When passed a bug ID, the option list will not contain any tags attached to the given bug.
+	 * @param integer Bug ID
+	 */
+	function print_tag_option_list( $p_bug_id = 0 ) {
+		$t_tag_table = config_get( 'mantis_tag_table' );
+
+		$query = "SELECT id, name FROM $t_tag_table ";
+		if ( 0 != $p_bug_id ) {
+			$c_bug_id = db_prepare_int( $p_bug_id );
+			$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
+			
+			$query .= "	WHERE id NOT IN ( 
+						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='$c_bug_id' ) ";
+		}
+
+		$query .= " ORDER BY name ASC ";
+		$result = db_query( $query );
+
+		echo '<option value="0">',lang_get( 'tag_existing' ),'</option>';
+		while ( $row = db_fetch_array( $result ) ) {
+			echo '<option value="',$row['id'],'" onclick="tag_string_append(\'',$row['name'],'\')">',$row['name'],'</option>';
+		}
+	}
+
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
@@ -925,7 +989,9 @@
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
 							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ),
-							'EXT_ADD_NOTE' => lang_get( 'actiongroup_menu_add_note' ) );
+							'EXT_ADD_NOTE' => lang_get( 'actiongroup_menu_add_note' ),
+							'EXT_ATTACH_TAGS' => lang_get( 'actiongroup_menu_attach_tags' ),
+					);
 
 		$t_project_id = helper_get_current_project();
 

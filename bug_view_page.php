@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.87 2007-07-11 17:03:47 giallu Exp $
+	# $Id: bug_view_page.php,v 1.88 2007-08-24 19:04:38 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,6 +22,7 @@
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'relationship_api.php' );
 	require_once( $t_core_path.'last_visited_api.php' );
+	require_once( $t_core_path.'tag_api.php' );
 ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
@@ -340,6 +341,29 @@
 		<?php echo $t_bug->additional_information ?>
 	</td>
 </tr>
+
+<!-- Tagging -->
+<?php if ( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category"><?php echo lang_get( 'tags' ) ?></td>
+	<td colspan="5">
+<?php
+	tag_display_attached( $f_bug_id );
+?>
+	</td>
+</tr>
+<?php } # has tag_view access ?>
+
+<?php if ( access_has_global_level( config_get( 'tag_attach_threshold' ) ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category"><?php echo lang_get( 'tag_attach_long' ) ?></td>
+	<td colspan="5">
+<?php
+	print_tag_attach_form( $f_bug_id );
+?>
+	</td>
+</tr>
+<?php } # has tag attach access ?>
 
 
 <!-- spacer -->

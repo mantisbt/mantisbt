@@ -16,6 +16,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
+	require_once( $t_core_path.'tag_api.php' );
 
 	auth_ensure_user_authenticated();
 
@@ -406,7 +407,8 @@ if ( 'simple' == $f_view_type ) {
 </tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 1 ) * $t_custom_cols ); ?>"></td>
+<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php echo lang_get( 'tags' ) ?></td>
+<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
 <tr>
 	<!-- Search field -->
@@ -414,13 +416,12 @@ if ( 'simple' == $f_view_type ) {
 		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
 	</td>
 
-	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 3 ) * $t_custom_cols ); ?>"></td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php print_filter_tag_string() ?></td>
 
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
 </table>
 </form>

@@ -100,6 +100,7 @@ td.news-body			{ background-color: #ffffff;         color: #000000; padding: 16p
 
 img						{}
 img.icon				{ width: 11px; height: 11px; }
+img.delete-icon			{ position: relative; top: 5px; border: 0; }
 
 div						{ padding: 3px; }
 div.menu				{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }

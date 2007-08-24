@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.312 $
-	# $Author: thraxisp $
-	# $Date: 2007-08-15 16:25:29 $
+	# $Revision: 1.313 $
+	# $Author: nuclear_eclipse $
+	# $Date: 2007-08-24 19:04:44 $
 	#
-	# $Id: strings_english.txt,v 1.312 2007-08-15 16:25:29 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.313 2007-08-24 19:04:44 nuclear_eclipse Exp $
 	###########################################################################
 
 ?>
@@ -39,6 +39,7 @@ $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_menu_update_target_version = 'Update Target Version';
 $s_actiongroup_menu_update_fixed_in_version = 'Update Fixed in Version';
 $s_actiongroup_menu_add_note = 'Add Note';
+$s_actiongroup_menu_attach_tags = 'Attach Tags';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
@@ -275,6 +276,11 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter integration requires PHP CURL extension which is not installed.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Could not find a tag with that name.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'A tag already exists with that name.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'That tag name is invalid.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that bug.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that bug.';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -1346,6 +1352,38 @@ $s_on_or_after = 'On Or After' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Tagging
+$s_tags = 'Tags';
+$s_tag_details = 'Tag Details: %s';
+$s_tag_id = 'Tag ID';
+$s_tag_name = 'Name';
+$s_tag_creator = 'Creator';
+$s_tag_created = 'Date Created';
+$s_tag_updated = 'Last Updated';
+$s_tag_description = 'Tag Description';
+$s_tag_statistics = 'Usage Statistics';
+$s_tag_update = 'Update Tag: %s';
+$s_tag_update_return = 'Back to Tag';
+$s_tag_update_button = 'Update Tag';
+$s_tag_delete_button = 'Delete Tag';
+$s_tag_delete_message = 'Are you sure you wish to delete this tag?';
+$s_tag_existing = 'Existing tags';
+$s_tag_none_attached = 'No tags attached.';
+$s_tag_attach = 'Attach';
+$s_tag_attach_long = 'Attach Tags';
+$s_tag_attach_failed = 'Tag attachment failed.';
+$s_tag_detach = 'Detach \'%s\'';
+$s_tag_separate_by = "(Separate by '%s')";
+$s_tag_invalid_name = 'Invalid tag name.';
+$s_tag_create_denied = 'Create permission denied.';
+$s_tag_filter_default = 'Attached Issues (%s)';
+$s_tag_history_attached = 'Tag Attached';
+$s_tag_history_detached = 'Tag Detached';
+$s_tag_history_renamed = 'Tag Renamed';
+$s_tag_related = 'Related Tags';
+$s_tag_related_issues = 'Shared Issues (%s)';
+$s_tag_stats_attached = 'Issues attached: %s';
 
 # Time Tracking
 $s_time_tracking_billing_link = 'Billing';

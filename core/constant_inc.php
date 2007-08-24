@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.69 2007-07-21 22:54:29 giallu Exp $
+	# $Id: constant_inc.php,v 1.70 2007-08-24 19:04:42 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -153,6 +153,9 @@
 	define( 'CHECKIN',				22 );
 	define( 'BUG_REPLACE_RELATIONSHIP', 		23 );
 	define( 'BUG_PAID_SPONSORSHIP', 		24 );
+	define( 'TAG_ATTACHED', 				25 );
+	define( 'TAG_DETACHED', 				26 );
+	define( 'TAG_RENAMED', 					27 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );
@@ -294,6 +297,13 @@
 	
 	# ERROR_TWITTER_*
 	define( 'ERROR_TWITTER_NO_CURL_EXT', 2100 );
+
+	# ERROR_TAG_*
+	define( 'ERROR_TAG_NOT_FOUND', 2200 );
+	define( 'ERROR_TAG_DUPLICATE', 2201 );
+	define( 'ERROR_TAG_NAME_INVALID', 2202 );
+	define( 'ERROR_TAG_NOT_ATTACHED', 2203 );
+	define( 'ERROR_TAG_ALREADY_ATTACHED', 2204 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
