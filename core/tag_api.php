@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.1 2007-08-24 19:04:43 nuclear_eclipse Exp $
+	# $Id: tag_api.php,v 1.2 2007-08-24 23:01:56 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -76,16 +76,16 @@
 	/**
 	 * Determine if a given name is valid.
 	 * Name must start with letter/number and consist of letters, numbers, 
-	 * hyphens, underscores, periods, or spaces.  The prefix parameter is optional,
+	 * hyphens, underscores, periods, or spaces.  The matches parameter allows 
+	 * you to also receive an array of regex matches, which by default only 
+	 * includes the valid tag name itself.  The prefix parameter is optional,
 	 * but allows you to prefix the regex check, which is useful for filters, etc.
-	 * The matches parameter allows you to also receive an array of regex matches,
-	 * which by default only includes the valid tag name itself.
 	 * @param string Tag name
-	 * @param string Prefix regex pattern
 	 * @param array Array reference for regex matches
+	 * @param string Prefix regex pattern
 	 * @return boolean True if the name is valid
 	 */
-	function tag_name_is_valid( $p_name, $p_prefix="", &$p_matches=null ) {
+	function tag_name_is_valid( $p_name, &$p_matches, $p_prefix="" ) {
 		$t_pattern = "/^$p_prefix([a-zA-Z0-9][a-zA-Z0-9-_. ]*)$/";
 		return preg_match( $t_pattern, $p_name, $p_matches );
 	}
@@ -95,7 +95,8 @@
 	 * @param string Tag name
 	 */
 	function tag_ensure_name_is_valid( $p_name ) {
-		if ( !tag_name_is_valid( $p_name ) ) {
+		$t_matches = array();
+		if ( !tag_name_is_valid( $p_name, $t_matches ) ) {
 			trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
 		}
 	}
@@ -128,11 +129,12 @@
 			$t_name = trim( $t_name );
 			if ( is_blank( $t_name ) ) { continue; }
 			
+			$t_matches = array();
 			$t_tag_row = tag_get_by_name( $t_name );
 			if ( $t_tag_row !== false ) {
 				$t_tags[] = $t_tag_row;
 			} else {
-				if ( tag_name_is_valid( $t_name ) ) {
+				if ( tag_name_is_valid( $t_name, $t_matches ) ) {
 					$t_id = -1;
 				} else {
 					$t_id = -2;
@@ -161,10 +163,9 @@
 		$t_strings = explode( config_get( 'tag_separator' ), $p_string );
 		foreach( $t_strings as $t_name ) {
 			$t_name = trim( $t_name );
-			if ( is_blank( $t_name ) || !tag_name_is_valid( $t_name, $t_prefix ) ) { continue; }
-			
 			$t_matches = array();
-			if ( tag_name_is_valid( $t_name, $t_prefix, $t_matches ) ) {
+
+			if ( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) { 
 				$t_tag_row = tag_get_by_name( $t_matches[1] );
 				if ( $t_tag_row !== false ) {
 					$t_filter = substr( $t_name, 0, 1 );
@@ -179,6 +180,8 @@
 
 					$t_tags[] = $t_tag_row;
 				}
+			} else {
+				continue; 
 			}
 		}
 		usort( $t_tags, "tag_cmp_name" );
