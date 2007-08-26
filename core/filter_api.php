@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.160 2007-08-24 19:04:42 nuclear_eclipse Exp $
+	# $Id: filter_api.php,v 1.161 2007-08-26 16:35:22 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -3107,6 +3107,9 @@
 		}
 		if ( !isset( $p_filter_arr['tag_string'] ) ) {
 			$p_filter_arr['tag_string'] = gpc_get_string( 'tag_string', '' );
+		}
+		if ( !isset( $p_filter_arr['tag_select'] ) ) {
+			$p_filter_arr['tag_select'] = gpc_get_string( 'tag_select', '' );
 		}
 
 		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
