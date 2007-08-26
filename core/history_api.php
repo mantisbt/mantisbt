@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.42 2007-08-24 19:04:42 nuclear_eclipse Exp $
+	# $Id: history_api.php,v 1.43 2007-08-26 21:17:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -386,7 +386,13 @@
 					break;
 				case BUG_DEL_RELATIONSHIP:
 					$t_note = lang_get( 'relationship_deleted' );
-					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+
+					# Fix for #7846: There are some cases where old value is empty, this may be due to an old bug.
+					if ( !is_blank( $p_old_value ) && $p_old_value > 0 ) {
+						$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+					} else {
+						$t_change = bug_format_id( $p_new_value );
+					}
 					break;
 				case BUG_CLONED_TO:
 					$t_note = lang_get( 'bug_cloned_to' );
