@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.34 2007-08-09 02:59:55 thraxisp Exp $
+	# $Id: install.php,v 1.35 2007-08-27 20:42:49 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,6 +80,9 @@
 	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack') );
 	$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
 	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	if ( CONFIGURED_PASSWORD == $f_db_password ) {
+		$f_db_password = config_get( 'db_password' ); 
+	}
 	$f_admin_username = gpc_get( 'admin_username', '' );
 	$f_admin_password = gpc_get( 'admin_password', '');
 	$f_log_queries = gpc_get_bool( 'log_queries', false );
@@ -454,7 +457,7 @@ if ( 1 == $t_install_state ) {
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php echo $f_db_password ?>"></input>
+		<input name="db_password" type="password" value="<?php echo ( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" ) ?>"></input>
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.70 2007-08-24 19:04:42 nuclear_eclipse Exp $
+	# $Id: constant_inc.php,v 1.71 2007-08-27 20:42:50 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -18,6 +18,8 @@
 	define( 'OFF',	0 );
 	define( 'AUTO', 3 );
 
+	# installation
+	define( 'CONFIGURED_PASSWORD', "______" );
 
 	# error types
 	define( 'ERROR',	E_USER_ERROR );
