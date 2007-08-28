@@ -12,13 +12,13 @@
 	#
 	###########################################################################
 	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.308
+	# Based on strings_english.txt rev. 1.312
 	# -------------------------------------------------
-	# $Revision: 1.121 $
-	# $Author: vboctor $
-	# $Date: 2007-08-02 05:26:33 $
+	# $Revision: 1.122 $
+	# $Author: jbrugger $
+	# $Date: 2007-08-28 12:43:41 $
 	#
-	# $Id: strings_italian.txt,v 1.121 2007-08-02 05:26:33 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.122 2007-08-28 12:43:41 jbrugger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1072,6 +1072,7 @@ $s_total = "Totale";
 $s_balance = "Differenza";
 $s_most_active = "Più attivo";
 $s_score = "Punteggio";
++$s_days = "Giorni";
 $s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
 $s_longest_open_bug = "anomalia più lunga nella risoluzione";
 $s_longest_open = "durata massima in stato aperto";
@@ -1364,4 +1365,29 @@ $s_twitter_resolved_no_version = "%d: [%s] %s (risolta da %s)";
 
 # Project Page
 $s_development_team = "Gruppo di sviluppo";
+
+# bug_graph pages
+$s_all_dates = "Qualsiasi";
+$s_period_none = "Nessuno";
+$s_period_this_week = "Questa settimana";
+$s_period_last_week = "Ultima settimana";
+$s_period_two_weeks = "Ultime due settimane";
+$s_period_this_month = "Questo mese";
+$s_period_last_month = "Ultimo mese";
+$s_period_this_quarter = "Questo trimestre";
+$s_period_last_quarter = "Ultimo trimestre";
+$s_period_year_to_date = "Quest'anno";
+$s_period_select = "Date arbitrarie";
+$s_period_last_year = "Ultimo anno";
+$s_select = "Seleziona";
+$s_select_bystatus = "Per stato";
+$s_select_summbystatus = "Sommario per stato";
+$s_select_bycat = "Sommario per categoria";
+$s_select_both = "Sommario per stato e categoria";
+$s_show_as_graph = "Mostra come grafico";
+$s_show_as_table = "Mostra come tabella";
+$s_show_graph = "Mostra il grafico";
+$s_graph_page = "Grafico della storia delle anomalie";
+$s_graph_bug_page_link = "Grafico";
+
 ?>
