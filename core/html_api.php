@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.212 2007-08-24 19:04:42 nuclear_eclipse Exp $
+	# $Id: html_api.php,v 1.213 2007-08-30 08:18:47 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -546,10 +546,10 @@
 				}
 
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
-				$t_show_access = min( config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ), ADMINISTRATOR );
+				$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 				if ( access_has_global_level( $t_show_access) || access_has_any_project( $t_show_access ) )  {
 					$t_current_project = helper_get_current_project();
-					if ( access_has_project_level( ADMINISTRATOR, $t_current_project ) ) {
+					if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 						$t_link = 'manage_user_page.php';
 					} else {
 						if ( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project )
@@ -688,7 +688,7 @@
 		}
 
 		PRINT '<br /><div align="center">';
-		if ( access_has_global_level( ADMINISTRATOR ) ) {
+		if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 		}
 		if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
