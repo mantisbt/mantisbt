@@ -14,11 +14,11 @@
 	# Italian strings for Mantis
 	# Based on strings_english.txt rev. 1.312
 	# -------------------------------------------------
-	# $Revision: 1.122 $
+	# $Revision: 1.123 $
 	# $Author: jbrugger $
-	# $Date: 2007-08-28 12:43:41 $
+	# $Date: 2007-09-03 11:11:01 $
 	#
-	# $Id: strings_italian.txt,v 1.122 2007-08-28 12:43:41 jbrugger Exp $
+	# $Id: strings_italian.txt,v 1.123 2007-09-03 11:11:01 jbrugger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1072,7 +1072,7 @@ $s_total = "Totale";
 $s_balance = "Differenza";
 $s_most_active = "Più attivo";
 $s_score = "Punteggio";
-+$s_days = "Giorni";
+$s_days = "Giorni";
 $s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
 $s_longest_open_bug = "anomalia più lunga nella risoluzione";
 $s_longest_open = "durata massima in stato aperto";
