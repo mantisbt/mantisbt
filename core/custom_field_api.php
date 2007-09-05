@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.64 2007-07-06 07:30:16 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.65 2007-09-05 11:53:41 zakman Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1209,7 +1209,7 @@
 
 			$t_selected_values = explode( '|', $t_custom_field_value );
  			foreach( $t_values as $t_option ) {
-				if( in_array( $t_option, $t_selected_values ) ) {
+				if( in_array( $t_option, $t_selected_values, true ) ) {
  					echo '<option value="' . $t_option . '" selected="selected"> ' . $t_option . '</option>';
  				} else {
  					echo '<option value="' . $t_option . '">' . $t_option . '</option>';
@@ -1222,7 +1222,7 @@
 			$t_checked_values = explode( '|', $t_custom_field_value );
 			foreach( $t_values as $t_option ) {
 				echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $t_id . '[]"';
-				if( in_array( $t_option, $t_checked_values ) ) {
+				if( in_array( $t_option, $t_checked_values, true ) ) {
 					echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				} else {
 					echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
