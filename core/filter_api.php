@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.161 2007-08-26 16:35:22 nuclear_eclipse Exp $
+	# $Id: filter_api.php,v 1.162 2007-09-06 18:13:33 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1073,58 +1073,59 @@
 		# tags
 		$c_tag_string = trim( $t_filter['tag_string'] );
 		if ( !is_blank( $c_tag_string ) ) {
-			require_once( $t_core_path . 'tag_api.php' );
 			$t_tags = tag_parse_filters( $c_tag_string );
 
-			if ( !count( $t_tags ) ) { break; }
+			if ( count( $t_tags ) ) {
 
-			$t_tags_all = array();
-			$t_tags_any = array();
-			$t_tags_none = array();
-
-			foreach( $t_tags as $t_tag_row ) {
-				switch ( $t_tag_row['filter'] ) {
-					case 1:
-						$t_tags_all[] = $t_tag_row;
-						break;
-					case 0:
-						$t_tags_any[] = $t_tag_row;
-						break;
-					case -1:
-						$t_tags_none[] = $t_tag_row;
-						break;
+				$t_tags_all = array();
+				$t_tags_any = array();
+				$t_tags_none = array();
+	
+				foreach( $t_tags as $t_tag_row ) {
+					switch ( $t_tag_row['filter'] ) {
+						case 1:
+							$t_tags_all[] = $t_tag_row;
+							break;
+						case 0:
+							$t_tags_any[] = $t_tag_row;
+							break;
+						case -1:
+							$t_tags_none[] = $t_tag_row;
+							break;
+					}
 				}
-			}
-
-			if ( 0 < $t_filter['tag_select'] && tag_exists( $t_filter['tag_select'] ) ) {
-				$t_tags_any[] = tag_get( $t_filter['tag_select'] );
-			}
-
-			$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
+	
+				if ( 0 < $t_filter['tag_select'] && tag_exists( $t_filter['tag_select'] ) ) {
+					$t_tags_any[] = tag_get( $t_filter['tag_select'] );
+				}
+	
+				$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
+				
+				if ( count( $t_tags_all ) ) {
+					$t_clauses = array();
+					foreach ( $t_tags_all as $t_tag_row ) {
+						array_push( $t_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE $t_bug_tag_table.tag_id = $t_tag_row[id] )" );
+					}
+					array_push( $t_where_clauses, '('. implode( ' AND ', $t_clauses ) .')' );
+				}
+				
+				if ( count( $t_tags_any ) ) {
+					$t_clauses = array();
+					foreach ( $t_tags_any as $t_tag_row ) {
+						array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+					}
+					array_push( $t_where_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
+				}
 			
-			if ( count( $t_tags_all ) ) {
-				$t_clauses = array();
-				foreach ( $t_tags_all as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE $t_bug_tag_table.tag_id = $t_tag_row[id] )" );
-				}
-				array_push( $t_where_clauses, '('. implode( ' AND ', $t_clauses ) .')' );
-			}
-			
-			if ( count( $t_tags_any ) ) {
-				$t_clauses = array();
-				foreach ( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
-				}
-				array_push( $t_where_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
-			}
-			
-			if ( count( $t_tags_none ) ) {
-				$t_clauses = array();
-				foreach ( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
-				}
-				array_push( $t_where_clauses, "$t_bug_table.id NOT IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
-			}
+				if ( count( $t_tags_none ) ) {
+					$t_clauses = array();
+					foreach ( $t_tags_none as $t_tag_row ) {
+						array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+					}
+					array_push( $t_where_clauses, "$t_bug_table.id NOT IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( ". implode( ' OR ', $t_clauses ) .') )' );
+				} 
+
+			}	
 		}
 
 		# custom field filters
@@ -3628,7 +3629,7 @@
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
 		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo $t_tag_string ?>" />
 		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
-			<?php print_tag_option_list( $p_bug_id ); ?>
+			<?php print_tag_option_list(); ?>
 		</select>
 		<?php
 	}

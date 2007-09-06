@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.2 2007-08-24 23:01:56 nuclear_eclipse Exp $
+	# $Id: tag_api.php,v 1.3 2007-09-06 18:13:34 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -580,7 +580,7 @@
 	 * @param integer Bug ID
 	 */
 	function tag_display_link( $p_tag_row, $p_bug_id=0 ) {
-		if ( auth_get_current_user_id() == $p_tag_row[user_attached] ) {
+		if ( auth_get_current_user_id() == $p_tag_row['user_attached'] ) {
 			$t_detach = config_get( 'tag_detach_own_threshold' );
 		} else {
 			$t_detach = config_get( 'tag_detach_threshold' );
@@ -675,7 +675,11 @@
 
 		$t_tag_counts = array();
 		while ( $row = db_fetch_array( $result ) ) {
-			$t_tag_counts[$row['tag_id']]++;
+			if ( !isset( $t_tag_counts[$row['tag_id']] ) ) {
+				$t_tag_counts[$row['tag_id']] = 1;
+			} else {
+				$t_tag_counts[$row['tag_id']]++;
+			}
 		}
 
 		arsort( $t_tag_counts );
