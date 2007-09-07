@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.358 2007-08-24 19:04:38 nuclear_eclipse Exp $
+	# $Id: config_defaults_inc.php,v 1.359 2007-09-07 12:00:52 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1806,7 +1806,7 @@
 	# Wiki Integration Enabled?
 	$g_wiki_enable = OFF;
 
-	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki')
+	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki', 'xwiki')
 	$g_wiki_engine = 'dokuwiki';
  
 	# Wiki namespace to be used as root for all pages relating to this mantis installation.
