@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.40 2007-04-18 06:35:01 vboctor Exp $
+	# $Id: gpc_api.php,v 1.41 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -20,11 +20,6 @@
 	#  you pass in *no* default then an error will be triggered if the field
 	#  cannot be found
 	function gpc_get( $p_var_name, $p_default = null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_POST, $_GET;
-		}
-
 		if ( isset( $_POST[$p_var_name] ) ) {
 			$t_result = gpc_strip_slashes( $_POST[$p_var_name] );
 		} else if ( isset( $_GET[$p_var_name] ) ) {
@@ -214,11 +209,6 @@
 	#  you pass in *no* default then an error will be triggered if the cookie
 	#  cannot be found
 	function gpc_get_cookie( $p_var_name, $p_default = null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_COOKIE;
-		}
-
 		if ( isset( $_COOKIE[$p_var_name] ) ) {
 			$t_result = gpc_strip_slashes( $_COOKIE[$p_var_name] );
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
@@ -260,11 +250,6 @@
 	# ------------------
 	# Clear a cookie variable
 	function gpc_clear_cookie( $p_name, $p_path=null, $p_domain=null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_COOKIE;
-		}
-
 		if ( null === $p_path ) {
 			$p_path = config_get( 'cookie_path' );
 		}
@@ -294,11 +279,6 @@
 	#  you pass in *no* default then an error will be triggered if the file
 	#  cannot be found
 	function gpc_get_file( $p_var_name, $p_default = null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_FILES;
-		}
-
 		if ( isset ( $_FILES[$p_var_name] ) ) {
 			# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
 			$t_result = $_FILES[$p_var_name];
@@ -321,11 +301,6 @@
 	# $p_var_name - The name of the parameter
 	# no return value.  The $_POST/$_GET are updated as appropriate. 
 	function gpc_make_array( $p_var_name ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_POST, $_GET;
-		}
-
 		if ( isset( $_POST[$p_var_name] ) && !is_array( $_POST[$p_var_name] ) ) {
 			$_POST[$p_var_name] = array( $_POST[$p_var_name] );
 		}

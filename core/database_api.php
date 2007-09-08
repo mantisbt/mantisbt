@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.64 2007-08-14 01:46:35 thraxisp Exp $
+	# $Id: database_api.php,v 1.65 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -344,12 +344,7 @@
 			case 'odbc_mssql':
 				break;
 			case 'mysql':
-				# mysql_escape_string was deprecated in v4.3.0
-				if ( php_version_at_least( '4.3.0' ) ) {
-					return mysql_real_escape_string( $p_string );
-				} else {
-					return mysql_escape_string( $p_string );
-				}
+				return mysql_real_escape_string( $p_string );
 
 			# For some reason mysqli_escape_string( $p_string ) always returns an empty
 			# string.  This is happening with PHP v5.0.2.

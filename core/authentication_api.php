@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.58 2007-08-02 05:51:31 vboctor Exp $
+	# $Id: authentication_api.php,v 1.59 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -27,10 +27,6 @@
 	#  If parameter is given it is used as a URL to redirect to following
 	#   successful login.  If none is given, the URL of the current page is used
 	function auth_ensure_user_authenticated( $p_return_page = '' ) {
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_SERVER;
-		}
-
 		# if logged in
 		if ( auth_is_user_authenticated() ) {
 			# check for access enabled

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.18 2005-06-08 22:04:05 vboctor Exp $
+	# $Id: php_api.php,v 1.19 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -14,7 +14,7 @@
 	# Functions to help in backwards compatibility of PHP versions, etc.
 
 	# Constant for our minimum required PHP version
-	define( 'PHP_MIN_VERSION', '4.0.6' );
+	define( 'PHP_MIN_VERSION', '4.3.0' );
 
 	# cache array of comparisons
 	$g_cached_version = array();
@@ -53,53 +53,13 @@
 	# --------------------
 	# Enforce our minimum requirements
 	if ( !php_version_at_least( PHP_MIN_VERSION ) ) {
-		ob_end_clean();
-		PRINT '<b>Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b>';
-		phpinfo();
+		@ob_end_clean();
+		PRINT '<b>FATAL ERROR: Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b><br />Your version of PHP is version ' . phpversion();
 		die();
 	}
 
 	# --------------------
 	ini_set('magic_quotes_runtime', 0);
-
-	# --------------------
-	# Experimental support for $_* auto-global variables in PHP < 4.1.0
-	if ( !php_version_at_least( '4.1.0' ) ) {
-		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER, $_FILES;
-
-		$_GET = $HTTP_GET_VARS;
-		$_POST = $HTTP_POST_VARS;
-		$_COOKIE = $HTTP_COOKIE_VARS;
-		$_SERVER = $HTTP_SERVER_VARS;
-		$_FILES = $HTTP_POST_FILES;
-
-		$_REQUEST = $HTTP_COOKIE_VARS;
-		foreach ($HTTP_POST_VARS as $key => $value) {
-			$_REQUEST[$key] = $value;
-		}
-		foreach ($HTTP_GET_VARS as $key => $value) {
-			$_REQUEST[$key] = $value;
-		}
-	}
-
-	# --------------------
-	# ob_get_clean() added in PHP 4.3.0
-	if ( !function_exists( 'ob_get_clean' ) ) {
-		function ob_get_clean() {
-			$t_contents = ob_get_contents();
-			ob_end_clean();
-
-			return $t_contents;
-		}
-	}
-
-	# --------------------
-	# array_key_exists was not available on PHP 4.0.6
-	if ( !function_exists( 'array_key_exists' ) ) {
-		function array_key_exists( $key, $search ) {
-			return key_exists( $key, $search );
-		}
-	}
 
 	# --------------------
 	# file_put_contents is normally in PEAR
@@ -124,18 +84,5 @@
 			return call_user_func_array( 'sprintf', $args );
 		}
 	}
-
-	# --------------------
-	# support for file upload error definitions
-	#  errors are defined in PHP 4.2.0, but the definition constants are not available
-	#   until 4.3.0
-	if ( !php_version_at_least( '4.2.999' ) ) {
-		define( 'UPLOAD_ERR_INI_SIZE', 1 );
-		define( 'UPLOAD_ERR_FORM_SIZE', 2 );
-		define( 'UPLOAD_ERR_PARTIAL', 3 );
-		define( 'UPLOAD_ERR_NO_FILE', 4 );
-	}
-
-
 
 ?>

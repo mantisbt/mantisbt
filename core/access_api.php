@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.44 2007-07-15 20:54:52 prichards Exp $
+	# $Id: access_api.php,v 1.45 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -25,10 +25,6 @@
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_SERVER;
-		}
-
 		if ( !auth_is_user_authenticated() ) {
 			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
 				$t_return_page = $_SERVER['PHP_SELF'];

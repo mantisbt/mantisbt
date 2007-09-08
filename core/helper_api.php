@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.72 2007-09-05 11:51:27 zakman Exp $
+	# $Id: helper_api.php,v 1.73 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -251,10 +251,6 @@
 	function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		if (true == gpc_get_bool( '_confirmed' ) ) {
 			return true;
-		}
-
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_POST, $_GET;
 		}
 
 		html_page_top1();

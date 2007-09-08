@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.213 2007-08-30 08:18:47 giallu Exp $
+	# $Id: html_api.php,v 1.214 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -162,10 +162,6 @@
 	#  the menu.  This is used during the login process and other times when the
 	#  user may not be authenticated.
 	function html_page_bottom1a( $p_file = null ) {
-		if ( !php_version_at_least( '4.1.0' ) ) {
-			global $_SERVER;
-		}
-
 		if ( null === $p_file ) {
 			$p_file = basename( $_SERVER['PHP_SELF'] );
 		}
@@ -324,10 +320,6 @@
 		PRINT '<tr>';
 			PRINT '<td class="login-info-left">';
 				if ( current_user_is_anonymous() ) {
-					if ( !php_version_at_least( '4.1.0' ) ) {
-						global $_SERVER;
-					}
-
 					$t_return_page = $_SERVER['PHP_SELF'];
 					if ( isset( $_SERVER['QUERY_STRING'] ) ) {
 						$t_return_page .=  '?' . $_SERVER['QUERY_STRING'];

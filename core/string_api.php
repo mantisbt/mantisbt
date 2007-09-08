@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.91 2007-07-27 17:58:09 prichards Exp $
+	# $Id: string_api.php,v 1.92 2007-09-08 23:21:01 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -682,27 +682,19 @@
 
 	# --------------------
 	# Calls htmlentities on the specified string, passing along
-	# the current charset, if the current PHP version supports it.
+	# the current charset.
 	function string_html_entities( $p_string ) {
-		if ( php_version_at_least( '4.1.0' ) ) {
-			return htmlentities( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
-		} else {
-			return htmlentities( $p_string );
-		}
+		return htmlentities( $p_string, ENT_COMPAT, lang_get( 'charset' ) );
 	}
 
 	# --------------------
 	# Calls htmlspecialchars on the specified string, passing along
 	# the current charset, if the current PHP version supports it.
 	function string_html_specialchars( $p_string ) {
-		if ( php_version_at_least( '4.1.0' ) ) {
-			# achumakov: @ added to avoid warning output in unsupported codepages
-			# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
-			# This is VERY important for Eastern European, Baltic and Korean languages
-			return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) ) );
-		} else {
-			return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars( $p_string ) );
-		}
+		# achumakov: @ added to avoid warning output in unsupported codepages
+		# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
+		# This is VERY important for Eastern European, Baltic and Korean languages
+		return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, lang_get( 'charset' ) ) );
 	}
 	
 	# --------------------

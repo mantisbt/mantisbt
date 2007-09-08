@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.52 2007-07-26 22:11:09 prichards Exp $
+	# $Id: error_api.php,v 1.53 2007-09-08 23:21:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -251,7 +251,7 @@
 				PRINT '<td>( ' . string_html_entities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
 			PRINT '</table></center>';
-		} else if ( php_version_at_least( '4.3' ) ) {
+		} else {
 			$t_stack = debug_backtrace();
 
 			array_shift( $t_stack ); #remove the call to this function from the stack trace
