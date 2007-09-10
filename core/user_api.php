@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.111 2007-08-10 22:17:22 giallu Exp $
+	# $Id: user_api.php,v 1.112 2007-09-10 00:29:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1086,16 +1086,25 @@
 	# --------------------
 	# Set the user's password to the given string, encoded as appropriate
 	function user_set_password( $p_user_id, $p_password, $p_allow_protected=false ) {
-		$c_user_id = db_prepare_int( $p_user_id );
-
 		if ( !$p_allow_protected ) {
 			user_ensure_unprotected( $p_user_id );
 		}
 
-		$t_password		= auth_process_plain_password( $p_password );
-		$t_user_table	= config_get( 'mantis_user_table' );
-		$query = "UPDATE $t_user_table
-				  SET password='$t_password'
+		$t_email = user_get_field( $p_user_id, 'email' );
+		$t_username = user_get_field( $p_user_id, 'username' );
+
+		# When the password is changed, invalidate the cookie to expire sessions that
+		# may be active on all browsers.
+		$t_seed				= $t_email . $t_username;
+		$c_cookie_string	= db_prepare_string( auth_generate_unique_cookie_string( $t_seed ) );
+
+		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_password		= db_prepare_string( auth_process_plain_password( $p_password ) );
+		$c_user_table	= config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $c_user_table
+				  SET password='$c_password',
+				  cookie_string='$c_cookie_string'
 				  WHERE id='$c_user_id'";
 		db_query( $query );
 
