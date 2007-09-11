@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.359 2007-09-07 12:00:52 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.360 2007-09-11 12:17:02 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -451,7 +451,7 @@
 	$g_show_project_menu_bar = OFF;
 
 	# --- show extra dropdown for subprojects ---
-	# Shows only top projects in the project dropdown and adds an extra dropdown for subprojects, can be: ON, OFF, AUTO
+	# Shows only top projects in the project dropdown and adds an extra dropdown for subprojects.
 	$g_show_extended_project_browser = OFF;
 
 	# --- show assigned to names ------
