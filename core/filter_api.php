@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.162 2007-09-06 18:13:33 nuclear_eclipse Exp $
+	# $Id: filter_api.php,v 1.163 2007-09-15 21:48:26 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1137,7 +1137,6 @@
 			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 			foreach( $t_custom_fields as $t_cfid ) {
-				$t_first_time = true;
 				$t_custom_where_clause = '';
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
@@ -1182,27 +1181,27 @@
 					} else {
 
 						array_push( $t_join_clauses, $t_cf_join_clause );
+
+						$t_filter_array = array();
 						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 							$t_filter_member = stripslashes( $t_filter_member );
-							if ( META_FILTER_NONE === $t_filter_member ) { # coerce filter value if selecting META_FILTER_NONE
+							if ( META_FILTER_NONE == $t_filter_member ) { 
+								# coerce filter value if selecting META_FILTER_NONE so it will match empty fields
 								$t_filter_member = '';
+								# but also add those _not_ present in the custom field string table
+								array_push( $t_filter_array , "$t_bug_table.id NOT IN (SELECT bug_id FROM $t_custom_field_string_table WHERE field_id=$t_cfid)" );
 							}
 
-							if( $t_first_time ) {
-								$t_first_time = false;
-								$t_custom_where_clause = '(';
-							} else {
-								$t_custom_where_clause .= ' OR ';
-							}
 							switch( $t_def['type'] ) {
-							case CUSTOM_FIELD_TYPE_MULTILIST:
-							case CUSTOM_FIELD_TYPE_CHECKBOX:
-								$t_custom_where_clause .= db_helper_like( "$t_table_name.value", '%|' . db_prepare_string( $t_filter_member ) . '|%' );
-								break;
-							default:
-								$t_custom_where_clause .= "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'";
+								case CUSTOM_FIELD_TYPE_MULTILIST:
+								case CUSTOM_FIELD_TYPE_CHECKBOX:
+									array_push( $t_filter_array , db_helper_like( "$t_table_name.value", '%|' . db_prepare_string( $t_filter_member ) . '|%' ) );
+									break;
+								default:
+									array_push( $t_filter_array, "$t_table_name.value = '" . db_prepare_string( $t_filter_member ) . "'" );
 							}
 						}
+						$t_custom_where_clause .= '(' . implode( ' OR ', $t_filter_array );
 					}
 					if ( !is_blank( $t_custom_where_clause ) ) {
 						array_push( $t_where_clauses, $t_custom_where_clause . ')' );
