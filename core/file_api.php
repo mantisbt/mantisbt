@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.84 2007-08-12 21:30:24 giallu Exp $
+	# $Id: file_api.php,v 1.85 2007-09-17 02:38:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -195,7 +195,7 @@
 					( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 					( $v_filesize != 0 ) &&
 					( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
-                                	$c_id = number_format( $v_id );
+					$c_id = db_prepare_int( $v_id );
 					$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
 					echo "<script type=\"text/javascript\" language=\"JavaScript\">
