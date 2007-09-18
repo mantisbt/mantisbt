@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.65 2007-09-08 23:21:00 prichards Exp $
+	# $Id: database_api.php,v 1.66 2007-09-18 06:23:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -594,6 +594,11 @@
 
 			case 'oci8':
 				return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
+
+			case 'db2':
+			case 'odbc_db2':
+				// all DB2 UDB use days function
+				return "(days($p_date1) - days($p_date2) " . $p_limitstring . ")";
 
 			default:
 				error_parameters( 'db_type', $t_db_type );
