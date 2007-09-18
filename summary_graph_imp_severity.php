@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on severities : bars, 3Dpie and a mix severities per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_severity.php,v 1.22 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: summary_graph_imp_severity.php,v 1.23 2007-09-18 13:06:18 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -27,10 +27,8 @@
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs
-	$t_user_id = auth_get_current_user_id();
-	token_delete_by_type_owner( TOKEN_GRAPH, $t_user_id );
 	$t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
-	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );
+	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 
 ?>
 
@@ -43,17 +41,17 @@
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byseverity.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0" /></center>
+		<center><img src="summary_graph_byseverity.php?width=<?php echo $t_graph_width?>" border="0" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byseverity_pct.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0" /></center>
+		<center><img src="summary_graph_byseverity_pct.php?width=<?php echo $t_graph_width?>" border="0" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_byseverity_mix.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0" /></center>
+		<center><img src="summary_graph_byseverity_mix.php?width=<?php echo $t_graph_width?>" border="0" /></center>
 	</td>
 </tr>
 </table>

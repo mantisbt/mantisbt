@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.71 2007-08-27 20:42:50 nuclear_eclipse Exp $
+	# $Id: constant_inc.php,v 1.72 2007-09-18 13:06:23 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -307,6 +307,9 @@
 	define( 'ERROR_TAG_NOT_ATTACHED', 2203 );
 	define( 'ERROR_TAG_ALREADY_ATTACHED', 2204 );
 
+	# ERROR_TOKEN_*
+	define( 'ERROR_TOKEN_NOT_FOUND', 2300 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);
@@ -358,6 +361,9 @@
 	define( 'TOKEN_FILTER',			1 );
 	define( 'TOKEN_GRAPH',			2 );
 	define( 'TOKEN_LAST_VISITED',	3 );
+	define( 'TOKEN_USER',			1000 );
+
+	define( 'TOKEN_EXPIRY', 		60*60 ); # Default expiration of 60 minutes ( 3600 seconds )
 
 	# config types
 	define( 'CONFIG_TYPE_INT', 1 );

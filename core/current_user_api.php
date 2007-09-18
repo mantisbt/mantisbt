@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.29 2006-03-21 12:50:24 vboctor Exp $
+	# $Id: current_user_api.php,v 1.30 2007-09-18 13:06:24 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -113,7 +113,7 @@
 
 		if ( !is_blank( $f_filter_string ) ) {
 			if( is_numeric( $f_filter_string ) ) {
-				$t_filter = unserialize( token_get_value( $f_filter_string ) );
+				$t_filter = unserialize( token_get_value( TOKEN_FILTER ) );
 			} else {
 				$t_filter = unserialize( $f_filter_string );
 			}

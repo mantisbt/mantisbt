@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_bycategory.php,v 1.16 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: summary_graph_bycategory.php,v 1.17 2007-09-18 13:06:07 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,11 +21,8 @@
 	$f_width = gpc_get_int( 'width', 300 );
 	$t_ar = config_get( 'graph_bar_aspect' );
 
-	$f_token = gpc_get_int( 'token', 0 );
-	if ( 0 == $f_token ) {
-		$t_metrics = create_category_summary();
-	} else {
-		$t_metrics = unserialize( token_get_value( $f_token ) );
-	}
+	$t_token = token_get_value( TOKEN_GRAPH );
+	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_category_summary();
+
 	graph_bar( $t_metrics, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
 ?>

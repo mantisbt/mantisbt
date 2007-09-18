@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_bycategory_pct.php,v 1.16 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: summary_graph_bycategory_pct.php,v 1.17 2007-09-18 13:06:08 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,11 +19,9 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$f_width = gpc_get_int( 'width', 300 );
-	$f_token = gpc_get_int( 'token', 0 );
-	if ( 0 == $f_token ) {
-		$t_metrics = create_category_summary();
-	} else {
-		$t_metrics = unserialize( token_get_value( $f_token ) );
-	}
+	
+	$t_token = token_get_value( TOKEN_GRAPH );
+	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_category_summary();
+
 	graph_pie( $t_metrics, lang_get( 'by_category_pct' ), $f_width, $f_width );
 ?>

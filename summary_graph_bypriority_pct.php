@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_bypriority_pct.php,v 1.15 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: summary_graph_bypriority_pct.php,v 1.16 2007-09-18 13:06:10 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,11 +20,8 @@
 
 	$f_width = gpc_get_int( 'width', 300 );
 
-	$f_token = gpc_get_int( 'token', 0 );
-	if ( 0 == $f_token ) {
-		$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority');
-	} else {
-		$t_metrics = graph_total_metrics( unserialize( token_get_value( $f_token ) ) );
-	}
+	$t_token = token_get_value( TOKEN_GRAPH );
+	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority');
+
 	graph_pie( $t_metrics, lang_get( 'by_priority_pct' ), $f_width, $f_width );
 ?>

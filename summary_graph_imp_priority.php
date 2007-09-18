@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_priority.php,v 1.22 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: summary_graph_imp_priority.php,v 1.23 2007-09-18 13:06:16 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -28,10 +28,8 @@
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs
-	$t_user_id = auth_get_current_user_id();
-	token_delete_by_type_owner( TOKEN_GRAPH, $t_user_id );
 	$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');
-	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );
+	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 
  ?>
 
@@ -44,17 +42,17 @@
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_bypriority.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0" /></center>
+		<center><img src="summary_graph_bypriority.php?width=<?php echo $t_graph_width?>" border="0" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		 <center><img src="summary_graph_bypriority_pct.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0"" /></center>
+		 <center><img src="summary_graph_bypriority_pct.php?width=<?php echo $t_graph_width?>" border="0"" /></center>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<center><img src="summary_graph_bypriority_mix.php?width=<?php echo $t_graph_width?>&token=<?php echo $t_token?>" border="0"/></center>
+		<center><img src="summary_graph_bypriority_mix.php?width=<?php echo $t_graph_width?>" border="0"/></center>
 	</td>
 </tr>
 </table>

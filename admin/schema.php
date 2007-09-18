@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.22 2007-08-24 23:05:24 giallu Exp $
+	# $Id: schema.php,v 1.23 2007-09-18 13:06:22 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 	
 	# Each entry below defines the schema. The upgrade array consists of
@@ -347,4 +347,6 @@ $upgrade[] = Array('CreateTableSQL', Array( config_get( 'mantis_bug_tag_table' )
 	user_id			I	UNSIGNED NOTNULL DEFAULT '0',
 	date_attached	T	NOTNULL DEFAULT '1970-01-01 00:00:01'
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
+
+$upgrade[] = Array('CreateIndexSQL', Array( 'idx_typeowner', config_get( 'mantis_tokens_table' ), 'type, owner' ) );
 ?>

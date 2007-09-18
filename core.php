@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.50 2006-10-05 21:46:42 achumakov Exp $
+	# $Id: core.php,v 1.51 2007-09-18 13:06:06 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -92,7 +92,6 @@
 	# load utility functions used by everything else
 	require_once( $t_core_path.'utility_api.php' );
 	require_once( $t_core_path.'compress_api.php' );
-	require_once( $t_core_path.'tokens_api.php' );
 
 	# Load internationalization functions (needed before database_api, in case database connection fails)
 	require_once( $t_core_path.'lang_api.php' );

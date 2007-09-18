@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.313 $
+	# $Revision: 1.314 $
 	# $Author: nuclear_eclipse $
-	# $Date: 2007-08-24 19:04:44 $
+	# $Date: 2007-09-18 13:06:26 $
 	#
-	# $Id: strings_english.txt,v 1.313 2007-08-24 19:04:44 nuclear_eclipse Exp $
+	# $Id: strings_english.txt,v 1.314 2007-09-18 13:06:26 nuclear_eclipse Exp $
 	###########################################################################
 
 ?>
@@ -281,6 +281,7 @@ $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'A tag already exists with that name.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'That tag name is invalid.';
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that bug.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that bug.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';

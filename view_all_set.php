@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.66 2007-08-24 19:04:41 nuclear_eclipse Exp $
+	# $Id: view_all_set.php,v 1.67 2007-09-18 13:06:20 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -515,7 +515,7 @@
 	}
 
 	if ( $f_temp_filter ) {
-		$t_token_id = token_add( $t_settings_serialized, TOKEN_FILTER);
+		$t_token_id = token_set( TOKEN_FILTER, $t_settings_serialized );
 		$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
 		html_meta_redirect( $t_redirect_url, 0 );
 	} else {

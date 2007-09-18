@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: last_visited_api.php,v 1.2 2007-07-09 22:41:22 giallu Exp $
+	# $Id: last_visited_api.php,v 1.3 2007-09-18 13:06:24 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -28,7 +28,7 @@
 
 		$c_issue_id = db_prepare_int( $p_issue_id );
 
-		$t_value = token_get_value_by_type( TOKEN_LAST_VISITED, $p_user_id );
+		$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 		if ( is_null( $t_value ) ) {
 			$t_value = $c_issue_id;
 		} else {
@@ -38,14 +38,14 @@
 			$t_value = implode( ',', $t_ids );
 		}
 		
-		token_set_value_by_type( $t_value, TOKEN_LAST_VISITED, $p_user_id );
+		token_set( TOKEN_LAST_VISITED, $t_value, $p_user_id );
 	}
 	
 	#---------------------------------
 	# Get an array of the last visited bug ids.  We intentionally don't check if the ids still exists to avoid performance
 	# degradation.
 	function last_visited_get_array( $p_user_id = null ) {
-		$t_value = token_get_value_by_type( TOKEN_LAST_VISITED, $p_user_id );
+		$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 
 		if ( is_null( $t_value ) ) {
 			return array();
