@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_graph_api.php,v 1.5 2007-07-27 23:23:20 prichards Exp $
+	# $Id: relationship_graph_api.php,v 1.6 2007-09-20 05:59:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship Graph API ###
@@ -133,6 +133,7 @@
 		) );
 
 		# Add all issue nodes and edges to the graph.
+		ksort( $v_bug_list );
 		foreach ( $v_bug_list as $t_id => $t_bug ) {
 			$t_id_string	= bug_format_id( $t_id );
 
