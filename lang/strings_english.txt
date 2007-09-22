@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.314 $
-	# $Author: nuclear_eclipse $
-	# $Date: 2007-09-18 13:06:26 $
+	# $Revision: 1.315 $
+	# $Author: vboctor $
+	# $Date: 2007-09-22 22:06:11 $
 	#
-	# $Id: strings_english.txt,v 1.314 2007-09-18 13:06:26 nuclear_eclipse Exp $
+	# $Id: strings_english.txt,v 1.315 2007-09-22 22:06:11 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -1100,6 +1100,7 @@ $s_sticky = 'Show Sticky Issues';
 $s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
+$s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'none';

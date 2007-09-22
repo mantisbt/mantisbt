@@ -6,10 +6,8 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.20 2007-07-18 22:55:24 giallu Exp $
+	# $Id: columns_api.php,v 1.21 2007-09-22 22:06:09 vboctor Exp $
 	# --------------------------------------------------------
-?>
-<?php
 
 	# --------------------
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
@@ -97,7 +95,7 @@
 	function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 			echo '<td>';
-			print_view_bug_sort_link( 'P', 'priority', $p_sort, $p_dir, $p_columns_target );
+			print_view_bug_sort_link( lang_get( 'priority_abbreviation' ), 'priority', $p_sort, $p_dir, $p_columns_target );
 			print_sort_icon( $p_dir, $p_sort, 'priority' );
 			echo '</td>';
 		} else {
