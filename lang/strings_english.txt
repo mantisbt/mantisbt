@@ -11,11 +11,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.315 $
-	# $Author: vboctor $
-	# $Date: 2007-09-22 22:06:11 $
+	# $Revision: 1.316 $
+	# $Author: nuclear_eclipse $
+	# $Date: 2007-09-22 22:51:15 $
 	#
-	# $Id: strings_english.txt,v 1.315 2007-09-22 22:06:11 vboctor Exp $
+	# $Id: strings_english.txt,v 1.316 2007-09-22 22:51:15 nuclear_eclipse Exp $
 	###########################################################################
 
 ?>
@@ -84,6 +84,8 @@ $s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
+$s_reauthenticate_title = 'Authenticate';
+$s_reauthenticate_message = 'You are visting a secure page, and your secure session has expired.  Please authenticate yourself to continue.';
 
 $s_duplicate_of = "duplicate of";
 $s_has_duplicate = "has duplicate";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.59 2007-09-08 23:21:00 prichards Exp $
+	# $Id: authentication_api.php,v 1.60 2007-09-22 22:51:15 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -127,6 +127,7 @@
 
 		# set the cookies
 		auth_set_cookies( $t_user_id, $p_perm_login );
+		auth_set_tokens( $t_user_id );
 
 		return true;
 	}
@@ -405,6 +406,123 @@
 		return $t_cookie;
 	}
 
+	#===================================
+	# Re-Authentication Tokens
+	#===================================
+
+	/**
+	 * Set authentication tokens for secure session.
+	 * @param integer User ID
+	 */
+	function auth_set_tokens( $p_user_id ) {
+		$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
+		if ( null == $t_auth_token ) {
+			token_set( TOKEN_AUTHENTICATED, true, TOKEN_EXPIRY_AUTHENTICATED, $p_user_id );
+		} else {
+			token_touch( $t_auth_token['id'], TOKEN_EXPIRY_AUTHENTICATED );
+		}
+	}
+
+	/**
+	 * Check for authentication tokens, and display re-authentication page if needed.
+	 * Currently, if using BASIC or HTTP authentication methods, or if logged in anonymously, 
+	 * this function will always "authenticate" the user (do nothing).
+	 */
+	function auth_reauthenticate() {
+		if ( BASIC_AUTH == config_get( 'login_method' ) ||
+				HTTP_AUTH == config_get( 'login_method' ) ) {
+			return true;
+		}
+
+		$t_auth_token = token_get( TOKEN_AUTHENTICATED );
+		if ( null != $t_auth_token ) {
+			token_touch( $t_auth_token['id'], TOKEN_EXPIRY_AUTHENTICATED );
+			return true;
+		} else {
+			$t_anon_account = config_get( 'anonymous_account' );
+			$t_anon_allowed = config_get( 'allow_anonymous_login' );
+
+			$t_user_id = auth_get_current_user_id();
+			$t_username = user_get_field( $t_user_id, 'username' );
+
+			# check for anonymous login
+			if ( ON == $t_anon_allowed && $t_anon_account == $t_username ) {
+				return true;
+			}
+	
+			return auth_reauthenticate_page( $t_user_id, $t_username );
+		}
+	}
+
+	/**
+	 * Generate the intermediate authentication page.
+	 * @param integer User ID
+	 * @param string Username
+	 */
+	function auth_reauthenticate_page( $p_user_id, $p_username ) {
+		$t_error = false;
+
+		if ( true == gpc_get_bool( '_authenticate' ) ) {
+			$f_password     = gpc_get_string( 'password', '' );
+					    
+			if ( auth_attempt_login( $p_username, $f_password ) ) {
+				auth_set_tokens( $p_user_id );
+				return true;
+			} else {
+				$t_error = true;
+			}
+		}
+
+		html_page_top1();
+		html_page_top2();
+
+?>
+<div align="center">
+<p>
+<?php 
+		echo lang_get( 'reauthenticate_message' ); 
+		if ( $t_error != false ) {
+			echo '<br/><font color="red">',lang_get( 'login_error' ),'</font>';
+		}
+?>
+</p>
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+<?php
+		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
+		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
+?>
+
+<input type="hidden" name="_authenticate" value="1" />
+
+<table class="width50 center">
+<tr>
+	<td class="form-title"><?php echo lang_get( 'reauthenticate_title' ); ?></td>
+</tr>
+
+<tr class="row-1">
+	<td class="category"><?php echo lang_get( 'username' ); ?></td>
+	<td><input type="text" disabled="disabled" size="32" maxlength="32" value="<?php echo $p_username; ?>" /></td>
+</tr>
+
+<tr class="row-2">
+	<td class="category"><?php echo lang_get( 'password' ); ?></td>
+	<td><input type="password" name="password" size="16" maxlength="32" /></td>
+</tr>
+
+<tr>
+	<td class="center" colspan="2"><input type="submit" class="button" value="Authenticate" /></td>
+</tr>
+</table>
+
+</form>
+</div>
+
+		<?php
+		html_page_bottom1();
+
+		exit;
+	}
 
 	#===================================
 	# Data Access
