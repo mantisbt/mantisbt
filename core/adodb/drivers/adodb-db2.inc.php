@@ -33,7 +33,10 @@ class ADODB_db2 extends ADOConnection {
 	var $sysDate = 'CURRENT DATE';
 	var $sysTimeStamp = 'CURRENT TIMESTAMP';
 	
-	var $fmtTimeStamp = "'Y-m-d-H:i:s'";
+        // See #8386 for more details
+	// original: var $fmtTimeStamp = "'Y-m-d-H:i:s'";
+	// DB2 valid formats: Y-m-d-H.i.s (IBM SQL format, center dash and dots) or Y-m-d H:i:s (ISO format, center space and colons). We'll use ISO: Y-m-d H:i:s  
+	var $fmtTimeStamp = "'Y-m-d H:i:s'";
 	var $replaceQuote = "''"; // string to use to replace quotes
 	var $dataProvider = "db2";
 	var $hasAffectedRows = true;
@@ -54,6 +57,7 @@ class ADODB_db2 extends ADOConnection {
 	
     function _insertid()
     {
+        // See #8385 for more details.
         // original: return ADOConnection::GetOne('VALUES IDENTITY_VAL_LOCAL()');
         return ADOConnection::GetOne('SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1');
     }
