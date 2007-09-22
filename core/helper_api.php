@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.73 2007-09-08 23:21:00 prichards Exp $
+	# $Id: helper_api.php,v 1.74 2007-09-22 17:13:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -105,12 +105,12 @@
 		if ( is_array( $p_var ) ) {
 			foreach( $p_var as $t_this_var ) {
 				# catch the case where one entry is 0 and the other is a string.
-				if ( ( is_string( $p_this_var ) && !is_string( $p_val ) ) ) {
-					if ( $p_this_var === $p_val ) {
+				if ( ( is_string( $t_this_var ) && !is_string( $p_val ) ) ) {
+					if ( $t_this_var === $p_val ) {
 						PRINT ' selected="selected" ';
 						return ;
 					}
-				} else if ( $p_this_var == $p_val ) {
+				} else if ( $t_this_var == $p_val ) {
 					PRINT ' selected="selected" ';
 					return ; 
 				}
