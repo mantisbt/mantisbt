@@ -398,13 +398,18 @@ class ADODB_db2 extends ADOConnection {
 	}
 	
 	
-	function &MetaTables($ttype=false,$schema=false)
+        // See #8384 for more details
+        // @@@ original: function MetaTables($ttype=false,$schema=false)
+        // DB2/400 Allow table and schema as optional parameters. 
+	function MetaTables($ttype=false,$showSchema=false, $qtable="%", $qschema="%")
 	{
 	global $ADODB_FETCH_MODE;
 	
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-		$qid = db2_tables($this->_connectionID);
+
+                // @@@ original: $qid = db2_tables($this->_connectionID);
+		$qid = db2_tables($this->_connectionID, null, $qschema, $qtable);		
 		
 		$rs = new ADORecordSet_db2($qid);
 		
@@ -425,7 +430,9 @@ class ADODB_db2 extends ADOConnection {
 		for ($i=0; $i < sizeof($arr); $i++) {
 			if (!$arr[$i][2]) continue;
 			$type = $arr[$i][3];
-			$schemaval = ($schema) ? $arr[$i][1].'.' : '';
+                        // @@@ original: DB2/400 $schemaval = ($schema) ? $arr[$i][1].'.' : '';
+                        // use $showSchema instead of $schema, for consistency with odbc_db2.inc.php
+			$schemaval = ($showSchema) ? $arr[$i][1].'.' : '';
 			if ($ttype) { 
 				if ($isview) {
 					if (strncmp($type,'V',1) === 0) $arr2[] = $schemaval.$arr[$i][2];
