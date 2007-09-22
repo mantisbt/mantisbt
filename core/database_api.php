@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.66 2007-09-18 06:23:22 vboctor Exp $
+	# $Id: database_api.php,v 1.67 2007-09-22 08:05:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -233,10 +233,32 @@
 	}
 
 	# --------------------
+	# Check if the specified table exists.
+	# @param $p_table_name  Table name.
+	# @returns true: table found, false: table not found.
 	function db_table_exists( $p_table_name ) {
-		global $g_db;
+		global $g_db, $g_db_schema;
 
-		return in_array ( $p_table_name , $g_db->MetaTables( "TABLE" ) ) ;
+		if ( is_blank( $p_table_name ) ) {
+			return false; // no tables found
+		}
+
+		if ( db_is_db2() ) {
+			// must pass schema
+			$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
+		} else {
+			$t_tables = $g_db->MetaTables( 'TABLE' );
+		}
+
+		# Can't use in_array() since it is case sensitive
+		$t_table_name = strtolower( $p_table_name );
+		foreach ( $t_tables as $t_current_table ) {
+			if ( strtolower( $t_current_table ) == $t_table_name ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	# --------------------
