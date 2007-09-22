@@ -54,7 +54,8 @@ class ADODB_db2 extends ADOConnection {
 	
     function _insertid()
     {
-        return ADOConnection::GetOne('VALUES IDENTITY_VAL_LOCAL()');
+        // original: return ADOConnection::GetOne('VALUES IDENTITY_VAL_LOCAL()');
+        return ADOConnection::GetOne('SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1');
     }
 	
 	function ADODB_db2() 
