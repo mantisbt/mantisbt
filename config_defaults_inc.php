@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.360 2007-09-11 12:17:02 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.361 2007-09-22 22:21:14 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -43,7 +43,8 @@
 	$g_database_name		= 'bugtracker';
 	$g_db_schema			= ''; // used in the case of db2
 
-	# Supported types: mysql for MySQL, mysqli for MySQL, pgsql for PostgreSQL, mssql for MS SQL Server, oci8 for Oracle, db2.
+	# Supported types: 'mysql' or 'mysqli' for MySQL, 'pgsql' for PostgreSQL,
+	# 'mssql' for MS SQL Server, 'oci8' for Oracle, and 'db2' for DB2.
 	$g_db_type				= 'mysql';
 
 	############################

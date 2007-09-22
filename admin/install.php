@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.35 2007-08-27 20:42:49 nuclear_eclipse Exp $
+	# $Id: install.php,v 1.36 2007-09-22 22:21:14 vboctor Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	error_reporting( E_ALL );
 
 	//@@@ put this somewhere
@@ -89,7 +88,7 @@
 	$f_db_exists = gpc_get_bool( 'db_exists', false );
 
 	$f_db_schema='';	
-	if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+	if ( $f_db_type == 'db2' ) {
 		# If schema name is supplied, then separate it from database name.
 		if ( strpos( $f_database_name, '/' ) != false ) {
 			$f_db2AS400 = $f_database_name;
@@ -221,7 +220,6 @@ if ( 2 == $t_install_state ) {
 					$t_support = function_exists('OCILogon');
 					break;
 				case 'db2':
-				case 'odbc_db2':
 					$t_support = function_exists( 'db2_connect' );
 					break;
 				default:
@@ -240,7 +238,7 @@ if ( 2 == $t_install_state ) {
 <?php print_test( 'Setting Database Password', '' !== $f_db_password , false, 'database password is blank' ) ?>
 <?php print_test( 'Setting Database Name', '' !== $f_database_name , true, 'database name is blank' )?>
 <?php
-	if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+	if ( $f_db_type == 'db2' ) {
 		print_test( 'Setting Database Name', '' !== $f_db_schema , true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
 	}
 ?>
@@ -295,7 +293,7 @@ if ( 2 == $t_install_state ) {
 			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
 		}
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if ( $result === FALSE ) {
 				print "Failed to set schema: " . $g_db->errorMsg();
@@ -331,7 +329,6 @@ if ( 2 == $t_install_state ) {
 			case 'pgsql':
 			case 'mssql':
 			case 'db2':
-			case 'odbc_db2':
 			default:
 				break;
 		}
@@ -356,7 +353,7 @@ if ( 2 == $t_install_state ) {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
 		}
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			echo "<br />SET SCHEMA " . $f_db_schema;
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if ( $result === FALSE ) {
@@ -424,7 +421,7 @@ if ( 1 == $t_install_state ) {
 				echo '<option value="oci8">Oracle - oci8 (Experimental)</option>';
 			}
 
-			if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+			if ( $f_db_type == 'db2' ) {
 				echo '<option value="db2" selected="selected">db2/400 (experimental)</option>';
 			} else {
 				echo '<option value="db2">db2/400 (experimental)</option>';
@@ -528,7 +525,7 @@ if ( 3 == $t_install_state ) {
 	<?php
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$rs = $g_db->Execute("select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" ); 
 			if ( $rs === false ) {
 				echo "<br />false";
@@ -553,7 +550,7 @@ if ( 3 == $t_install_state ) {
 
 		$dict = NewDataDictionary( $g_db );
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$rs = &$g_db->Execute("CREATE SCHEMA "   . $f_db_schema  );   
 
 			if ( !$rs ) {
@@ -590,7 +587,7 @@ if ( 3 == $t_install_state ) {
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if ( $result === FALSE ) {
 				echo 'Failed to set schema: ', $g_db->errorMsg();
@@ -625,7 +622,7 @@ if ( 3 == $t_install_state ) {
 			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
 		}
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			if ( $result === FALSE ) {
 				echo 'Failed to set schema: ', $g_db->errorMsg();
@@ -741,7 +738,7 @@ if ( 5 == $t_install_state ) {
 		$t_config .= "\t\$g_db_username = '$f_db_username';\r\n";
 		$t_config .= "\t\$g_db_password = '$f_db_password';\r\n";
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$t_config .= "\t\$g_db_schema = '$f_db_schema';\r\n";
 		}
 
@@ -819,7 +816,7 @@ if ( 6 == $t_install_state ) {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
 		}
 
-		if ( $f_db_type == 'db2' || $f_db_type == 'odbc_db2' ) {
+		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute('set schema ' . $f_db_schema);
 			if ( $result === FALSE ) {
 				echo 'Failed to set schema: ', $g_db->errorMsg();

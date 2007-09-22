@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.67 2007-09-22 08:05:42 vboctor Exp $
+	# $Id: database_api.php,v 1.68 2007-09-22 22:21:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -133,7 +133,6 @@
 
 		switch( $t_db_type ) {
 			case 'db2':
-			case 'odbc_db2':
 				return true;
 		}
 
@@ -357,7 +356,6 @@
 				# just making a point with the superfluous break;s  I know it does not execute after a return  ;-)
 				break;
 			case 'db2':
-			case 'odbc_db2':
 				$t_escaped = $g_db->qstr( $p_string, false );                       
 				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );           
 				break;
@@ -602,8 +600,6 @@
 			case 'ado_mssql':
 				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
-			case 'db2':
-			case 'odbc_db2':
 			case 'mysql':
 			case 'mysqli':
 				return "(TO_DAYS($p_date1) - TO_DAYS($p_date2) ". $p_limitstring . ")";
@@ -618,7 +614,6 @@
 				return "(($p_date1 - $p_date2)" . $p_limitstring . ")";
 
 			case 'db2':
-			case 'odbc_db2':
 				// all DB2 UDB use days function
 				return "(days($p_date1) - days($p_date2) " . $p_limitstring . ")";
 
