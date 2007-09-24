@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.73 2007-09-22 22:51:15 nuclear_eclipse Exp $
+	# $Id: constant_inc.php,v 1.74 2007-09-24 19:24:30 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -366,6 +366,7 @@
 
 	# token expirations
 	define( 'TOKEN_EXPIRY', 		60*60 ); # Default expiration of 60 minutes ( 3600 seconds )
+	define( 'TOKEN_EXPIRY_LAST_VISITED', 24*60*60 );
 	define( 'TOKEN_EXPIRY_AUTHENTICATED', 5*60 );
 
 	# config types

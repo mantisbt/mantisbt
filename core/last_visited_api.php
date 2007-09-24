@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: last_visited_api.php,v 1.3 2007-09-18 13:06:24 nuclear_eclipse Exp $
+	# $Id: last_visited_api.php,v 1.4 2007-09-24 19:24:30 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -38,7 +38,7 @@
 			$t_value = implode( ',', $t_ids );
 		}
 		
-		token_set( TOKEN_LAST_VISITED, $t_value, $p_user_id );
+		token_set( TOKEN_LAST_VISITED, $t_value, TOKEN_EXPIRY_LAST_VISITED, $p_user_id );
 	}
 	
 	#---------------------------------
