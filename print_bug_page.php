@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.59 2007-03-06 07:05:18 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.60 2007-09-24 09:14:48 zakman Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,6 +46,8 @@
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v2' );
+	
+	$t_history = history_get_events_array( $f_bug_id );
 
 	$v_os 						= string_display( $v_os );
 	$v_os_build					= string_display( $v_os_build );
@@ -338,6 +340,53 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<?php file_list_attachments ( $f_bug_id ); ?>
 	</td>
 </tr>
+<tr>
+	<td class="print-spacer" colspan="6">
+		<hr size="1" />
+	</td>
+</tr>
+<?php 
+	# ISSUE HISTORY 
+?>
+<tr>
+	<td class="form-title">
+		<?php echo lang_get( 'bug_history' ) ?>
+	</td>
+</tr>
+<tr class="print-category">
+	<td class="row-category-history">
+		<?php echo lang_get( 'date_modified' ) ?>
+	</td>
+	<td class="row-category-history">
+		<?php echo lang_get( 'username' ) ?>
+	</td>
+	<td class="row-category-history">
+		<?php echo lang_get( 'field' ) ?>
+	</td>
+	<td class="row-category-history">
+		<?php echo lang_get( 'change' ) ?>
+	</td>
+</tr>
+<?php
+	foreach ( $t_history as $t_item ) {
+?>
+<tr class="print">
+	<td class="print">
+		<?php echo $t_item['date'] ?>
+	</td>
+	<td  class="print">
+		<?php print_user( $t_item['userid'] ) ?>
+	</td>
+	<td class="print">
+		<?php echo string_display( $t_item['note'] ) ?>
+	</td>
+	<td class="print">
+		<?php echo string_display_line_links( $t_item['change'] ) ?>
+	</td>
+</tr>
+<?php
+	} 
+?>
 </table>
 
 <?php
