@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.36 2007-09-22 22:21:14 vboctor Exp $
+	# $Id: install.php,v 1.37 2007-09-25 04:50:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	error_reporting( E_ALL );
@@ -239,7 +239,7 @@ if ( 2 == $t_install_state ) {
 <?php print_test( 'Setting Database Name', '' !== $f_database_name , true, 'database name is blank' )?>
 <?php
 	if ( $f_db_type == 'db2' ) {
-		print_test( 'Setting Database Name', '' !== $f_db_schema , true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
+		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
 	}
 ?>
 <tr>
