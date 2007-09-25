@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.3 2007-09-06 18:13:34 nuclear_eclipse Exp $
+	# $Id: tag_api.php,v 1.4 2007-09-25 04:25:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -308,7 +308,6 @@
 	 * @param string Description
 	 */
 	function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
-		tag_ensure_exists( $p_tag_id );
 		user_ensure_exists( $p_user_id );
 		
 		if ( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' ) ) {
@@ -316,6 +315,7 @@
 		} else {
 			$t_update_level = config_get( 'tag_edit_threshold' );
 		}
+
 		access_ensure_global_level( $t_update_level );
 		
 		tag_ensure_name_is_valid( $p_name );
@@ -479,15 +479,9 @@
 	 * @param integer User ID
 	 */
 	function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id=null ) {
-		tag_ensure_exists( $p_tag_id );
-		bug_ensure_exists( $p_bug_id );
-		if ( null == $p_user_id ) {
-			$p_user_id = auth_get_current_user_id();
-		} else {
-			user_ensure_exists( $p_user_id );
-		}
+		access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
 
-		access_ensure_global_level( config_get( 'tag_detach_threshold' ) );
+		tag_ensure_exists( $p_tag_id );
 
 		if ( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
 			trigger_error( TAG_ALREADY_ATTACHED, ERROR );
@@ -525,21 +519,26 @@
 	 * @param integer Tag ID
 	 * @param integer Bug ID
 	 * @param boolean Add history entries to bug
+	 * @param integer User Id (or null for current logged in user)	 
 	 */
-	function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history=true ) {
-		tag_ensure_exists( $p_tag_id );
-		bug_ensure_exists( $p_bug_id );
-
-		if ( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-			trigger_error( TAG_NOT_ATTACHED, ERROR );
+	function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history=true, $p_user_id = null ) {
+		if ( $p_user_id === null ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = $p_user_id;
 		}
 
-		if ( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' ) ) {
+		if ( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) ) {
 			$t_detach_level = config_get( 'tag_detach_own_threshold' );
 		} else {
 			$t_detach_level = config_get( 'tag_detach_threshold' );
 		}
-		access_ensure_global_level( $t_detach_level );
+
+		access_ensure_bug_level( config_get( 'tag_detach_threshold' ), $p_bug_id, $t_user_id );
+
+		if ( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
+			trigger_error( TAG_NOT_ATTACHED, ERROR );
+		}
 		
 		$c_tag_id 		= db_prepare_int( $p_tag_id );
 		$c_bug_id 		= db_prepare_int( $p_bug_id );
@@ -562,11 +561,12 @@
 	 * Detach all tags from a given bug.
 	 * @param integer Bug ID
 	 * @param boolean Add history entries to bug
+	 * @param integer User Id (or null for current logged in user)	 
 	 */
-	function tag_bug_detach_all( $p_bug_id, $p_add_history=true ) {
+	function tag_bug_detach_all( $p_bug_id, $p_add_history=true, $p_user_id = null ) {
 		$t_tags = tag_bug_get_attached( $p_bug_id );
 		foreach ( $t_tags as $t_tag_row ) {
-			tag_bug_detach( $t_tag_row['id'], $p_bug_id, $p_add_history );
+			tag_bug_detach( $t_tag_row['id'], $p_bug_id, $p_add_history, $p_user_id );
 		}
 	}
 
