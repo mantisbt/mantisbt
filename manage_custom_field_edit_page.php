@@ -1,22 +1,22 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.25 2007-05-18 03:17:59 vboctor Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.26 2007-09-25 23:52:09 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'custom_field_api.php' );
-?>
-<?php
+
+	auth_reauthenticate();
+
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	$f_field_id	= gpc_get_int( 'field_id' );

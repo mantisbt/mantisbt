@@ -1,18 +1,20 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.9 2005-09-03 11:30:03 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.10 2007-09-25 23:52:08 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path.'email_api.php' );
+
+	auth_reauthenticate();
 
 	$t_redirect_url = 'manage_config_work_threshold_page.php';
 	$t_project = helper_get_current_project();

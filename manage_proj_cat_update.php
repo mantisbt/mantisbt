@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_update.php,v 1.32 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_proj_cat_update.php,v 1.33 2007-09-25 23:52:10 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'category_api.php' );
-?>
-<?php
+
+	auth_reauthenticate();
+
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_category			= gpc_get_string( 'category' );
 	$f_new_category		= gpc_get_string( 'new_category' );
@@ -40,8 +40,7 @@
 	}
 
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
-?>
-<?php
+
 	html_page_top1();
 
 	html_meta_redirect( $t_redirect_url );

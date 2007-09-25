@@ -6,10 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_custom_field_copy.php,v 1.1 2007-07-25 12:28:29 zakman Exp $
+	# $Id: manage_proj_custom_field_copy.php,v 1.2 2007-09-25 23:52:11 nuclear_eclipse Exp $
  	# --------------------------------------------------------
 
 	require_once('core.php');
+
+	auth_reauthenticate();
 
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_other_project_id	= gpc_get_int( 'other_project_id' );

@@ -1,18 +1,20 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.9 2006-01-01 02:56:39 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.10 2007-09-25 23:52:06 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path . 'email_api.php' );
+
+	auth_reauthenticate();
 
 /**
  * array_merge_recursive2()

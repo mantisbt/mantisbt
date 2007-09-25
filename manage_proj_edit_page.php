@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.103 2007-07-25 10:50:52 zakman Exp $
+	# $Id: manage_proj_edit_page.php,v 1.104 2007-09-25 23:52:11 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -18,19 +17,20 @@
 	require_once( $t_core_path . 'version_api.php' );
 	require_once( $t_core_path . 'custom_field_api.php' );
 	require_once( $t_core_path . 'icon_api.php' );
-?>
-<?php
+
+	auth_reauthenticate();
+
 	$f_project_id = gpc_get_int( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
+	
+	html_page_top1( project_get_field( $f_project_id, 'name' ) );
+	html_page_top2();
+
+	print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
-<?php html_page_top1( project_get_field( $f_project_id, 'name' ) ) ?>
-<?php html_page_top2() ?>
-
-<?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
-
 <br />
 
 

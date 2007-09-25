@@ -1,23 +1,22 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.20 2007-07-21 22:54:28 giallu Exp $
+	# $Id: manage_proj_page.php,v 1.21 2007-09-25 23:52:11 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'icon_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	auth_reauthenticate();
+
 	$f_sort	= gpc_get_string( 'sort', 'name' );
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 
@@ -27,13 +26,12 @@
 		$t_direction = DESCENDING;
 	}
 
-?>
-<?php html_page_top1( lang_get( 'manage_projects_link' ) ) ?>
-<?php html_page_top2() ?>
+	html_page_top1( lang_get( 'manage_projects_link' ) );
+	html_page_top2();
 
-<?php print_manage_menu( 'manage_proj_page.php' ) ?>
+	print_manage_menu( 'manage_proj_page.php' );
 
-<?php # Project Menu Form BEGIN ?>
+# Project Menu Form BEGIN ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>

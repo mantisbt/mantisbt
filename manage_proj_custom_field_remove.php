@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_custom_field_remove.php,v 1.17 2007-05-18 04:53:21 vboctor Exp $
+	# $Id: manage_proj_custom_field_remove.php,v 1.18 2007-09-25 23:52:11 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -14,6 +14,8 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'custom_field_api.php' );
+
+	auth_reauthenticate();
 
 	$f_field_id = gpc_get_int( 'field_id' );
 	$f_project_id = gpc_get_int( 'project_id' );

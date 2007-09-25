@@ -1,22 +1,22 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_edit_page.php,v 1.31 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_proj_cat_edit_page.php,v 1.32 2007-09-25 23:52:10 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'category_api.php' );
-?>
-<?php
+
+	auth_reauthenticate();
+
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
 
@@ -24,11 +24,10 @@
 
 	$t_row = category_get_row( $f_project_id, $f_category );
 	$t_assigned_to = $t_row['user_id'];
-?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
+	
+	html_page_top1();
+	html_page_top2();
 
-<?php
 	print_manage_menu( 'manage_proj_cat_edit_page.php' );
 ?>
 

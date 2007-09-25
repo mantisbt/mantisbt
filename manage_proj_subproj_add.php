@@ -1,17 +1,19 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_subproj_add.php,v 1.2 2007-07-28 00:11:09 prichards Exp $
+	# $Id: manage_proj_subproj_add.php,v 1.3 2007-09-25 23:52:12 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
+
+	auth_reauthenticate();
 
 	$f_project_id    = gpc_get_int( 'project_id' );
 	$f_subproject_id = gpc_get_int( 'subproject_id' );

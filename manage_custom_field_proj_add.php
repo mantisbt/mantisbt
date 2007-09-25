@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_proj_add.php,v 1.1 2007-04-14 07:44:56 vboctor Exp $
+	# $Id: manage_custom_field_proj_add.php,v 1.2 2007-09-25 23:52:09 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
 
-	auth_ensure_user_authenticated();
+	auth_reauthenticate();
 
 	$f_field_id = gpc_get_int( 'field_id' );
 	$f_project_id = gpc_get_int_array( 'project_id', array() );

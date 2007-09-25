@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_copy.php,v 1.1 2007-07-03 03:57:07 vboctor Exp $
+	# $Id: manage_proj_ver_copy.php,v 1.2 2007-09-25 23:52:13 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -14,6 +14,8 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'version_api.php' );
+
+	auth_reauthenticate();
 
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_other_project_id	= gpc_get_int( 'other_project_id' );

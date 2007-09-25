@@ -1,27 +1,30 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.30 2007-07-13 07:58:32 giallu Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.31 2007-09-25 23:52:13 nuclear_eclipse Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
+	auth_reauthenticate();
+
 	$f_version_id = gpc_get_int( 'version_id' );
 
 	$t_version = version_get( $f_version_id );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
+
+	html_page_top1();
+	html_page_top2();
+
+	print_manage_menu( 'manage_proj_ver_edit_page.php' );
+
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
-
-<?php print_manage_menu( 'manage_proj_ver_edit_page.php' ) ?>
-
 <br />
 <div align="center">
 <form method="post" action="manage_proj_ver_update.php">
