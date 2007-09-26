@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.180 2007-08-24 19:04:42 nuclear_eclipse Exp $
+	# $Id: print_api.php,v 1.181 2007-09-26 02:54:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -108,6 +108,10 @@
 	
 	# Print avatar image for the given user ID
 	function print_avatar( $p_user_id ) {
+		if ( !user_exists( $p_user_id ) ) {
+			return;
+		}
+
 		if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
 			$t_avatar = user_get_avatar( $p_user_id );
 			$t_avatar_url = $t_avatar[0];

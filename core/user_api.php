@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.112 2007-09-10 00:29:04 vboctor Exp $
+	# $Id: user_api.php,v 1.113 2007-09-26 02:54:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -48,11 +48,13 @@
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
+			$g_cache_user[$c_user_id] = false;
+
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_USER_NOT_FOUND, ERROR );
-			} else {
-				return false;
 			}
+			
+			return false;
 		}
 
 		$row = db_fetch_array( $result );

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.45 2007-08-12 22:43:48 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.46 2007-09-26 02:54:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -115,10 +115,12 @@
 		<?php
 			echo print_user( $v3_reporter_id );
 		?>
-		<span class="small">(<?php
-			$t_access_level = access_get_project_level( null, $v3_reporter_id );
-			echo get_enum_element( 'access_levels', $t_access_level ); 
-		?>)</span>
+		<span class="small"><?php
+			if ( user_exists( $v3_reporter_id ) ) {
+				$t_access_level = access_get_project_level( null, $v3_reporter_id );
+				echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
+			} 
+		?></span>
 		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>
