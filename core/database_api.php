@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.68 2007-09-22 22:21:15 vboctor Exp $
+	# $Id: database_api.php,v 1.69 2007-09-27 21:34:32 giallu Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -160,7 +160,13 @@
 			$t_result = $g_db->Execute( $p_query );
 		}
 		$t_elapsed = number_format( microtime_float() - $t_start, 4);
-		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
+                
+		$t_backtrace = debug_backtrace();
+		$t_caller = basename( $t_backtrace[0]['file'] );
+		$t_caller .= ":" . $t_backtrace[0]['line'];
+		$t_caller .= " " . $t_backtrace[1]['function'] . "()";
+                
+		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 
 		if ( !$t_result ) {
 			db_error($p_query);

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.215 2007-09-20 07:18:27 vboctor Exp $
+	# $Id: html_api.php,v 1.216 2007-09-27 21:34:32 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -424,10 +424,10 @@
 			for ( $i = 0; $i < $t_count; $i++ ) {
 				if ( ! in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
 					$t_unique_queries++;
-					$g_queries_array[$i][2] = false;
+					$g_queries_array[$i][3] = false;
 					array_push( $t_shown_queries, $g_queries_array[$i][0] );
 				} else {
-					$g_queries_array[$i][2] = true;
+					$g_queries_array[$i][3] = true;
 				}
 			}
 			echo "\t",  $t_unique_queries . ' unique queries executed.<br />', "\n";
@@ -436,12 +436,15 @@
 				$t_total = 0;
 				for ( $i = 0; $i < $t_count; $i++ ) {
 					$t_time = $g_queries_array[$i][1];
+					$t_caller = $g_queries_array[$i][2];
 					$t_total += $t_time;
-					if ( true == $g_queries_array[$i][2] ) {
-						echo "\t",  '<tr valign="top"><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
-					} else {
-						echo "\t",  '<tr valign="top"><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
+					$t_style_tag = '';
+					if ( true == $g_queries_array[$i][3] ) {
+						$t_style_tag = ' style="color: red;"';
 					}
+					echo "\t",  '<tr valign="top"><td', $t_style_tag, '>', ($i+1), '</td>';
+					echo '<td', $t_style_tag, '>', $t_time , '</td>';
+					echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 				}
 				echo "\t", '<tr><td></td><td>', $t_total, '</td><td></td></tr>', "\n";
 				echo "\t",  '</table>', "\n";
