@@ -666,7 +666,7 @@ class ADODB_Session {
 		// now we only update expiry date, thx to sebastian thom in adodb 2.32
 		if ($crc !== false && $crc == (strlen($val) . crc32($val))) {
 			if ($debug) {
-				echo '<p>Session: Only updating date - crc32 not changed</p>';
+				ADOConnection::outp( '<p>Session: Only updating date - crc32 not changed</p>');
 			}
 			
 			$expirevar = '';

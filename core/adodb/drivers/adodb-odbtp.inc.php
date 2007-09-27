@@ -192,7 +192,7 @@ class ADODB_odbtp extends ADOConnection{
 				$this->_canSelectDb = true;
 				$this->substr = "substring";
 				$this->length = 'len';
-				$this->identitySQL = 'select @@IDENTITY';
+				$this->identitySQL = 'select SCOPE_IDENTITY()';
 				$this->metaDatabasesSQL = "select name from master..sysdatabases where name <> 'master'";
 				$this->_canPrepareSP = true;
 				break;
@@ -240,7 +240,7 @@ class ADODB_odbtp extends ADOConnection{
 				$this->rightOuter = '=*';
 				$this->hasInsertID = true;
 				$this->hasTransactions = true;
-				$this->identitySQL = 'select @@IDENTITY';
+				$this->identitySQL = 'select SCOPE_IDENTITY()';
 				break;
 			default:
 				$this->databaseType = 'odbtp';

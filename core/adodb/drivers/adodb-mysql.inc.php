@@ -132,6 +132,8 @@ class ADODB_mysql extends ADOConnection {
 	// if magic quotes disabled, use mysql_real_escape_string()
 	function qstr($s,$magic_quotes=false)
 	{
+		if (is_null($s)) return 'NULL';
+
 		if (!$magic_quotes) {
 		
 			if (ADODB_PHPVER >= 0x4300) {

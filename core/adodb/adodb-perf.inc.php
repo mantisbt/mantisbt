@@ -647,6 +647,7 @@ Committed_AS:   348732 kB
 	
 	function UI($pollsecs=5)
 	{
+	global $ADODB_LOG_CONN;
 	
     $perf_table = adodb_perf::table();
 	$conn = $this->conn;
@@ -702,9 +703,13 @@ Committed_AS:   348732 kB
 	 	switch ($do) {
 		default:
 		case 'stats':
+		
+			if (empty($ADODB_LOG_CONN))
+				echo "<p>&nbsp; <a href=\"?do=viewsql&clearsql=1\">Clear SQL Log</a><br>";
 			echo $this->HealthCheck();
 			//$this->conn->debug=1;
 			echo $this->CheckMemory();
+			global $ADODB_LOG_CONN;
 			break;
 		case 'poll':
 			echo "<iframe width=720 height=80% 

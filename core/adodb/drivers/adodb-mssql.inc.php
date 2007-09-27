@@ -33,6 +33,11 @@ if (!defined('ADODB_DIR')) die();
 //	 http://support.microsoft.com/default.aspx?scid=kb;EN-US;q220918
 // Alternatively use:
 // 	   CONVERT(char(12),datecol,120)
+//
+// Also if your month is showing as month-1, 
+//   e.g. Jan 13, 2002 is showing as 13/0/2002, then see
+//     http://phplens.com/lens/lensforum/msgs.php?id=7048&x=1
+//   it's a localisation problem.
 //----------------------------------------------------------------
 
 
@@ -99,7 +104,7 @@ class ADODB_mssql extends ADOConnection {
 	var $rightOuter = '=*';
 	var $ansiOuter = true; // for mssql7 or later
 	var $poorAffectedRows = true;
-	var $identitySQL = 'select @@IDENTITY'; // 'select SCOPE_IDENTITY'; # for mssql 2000
+	var $identitySQL = 'select SCOPE_IDENTITY()'; // 'select SCOPE_IDENTITY'; # for mssql 2000
 	var $uniqueOrderBy = true;
 	var $_bindInputArray = true;
 	

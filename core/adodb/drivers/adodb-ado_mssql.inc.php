@@ -46,7 +46,7 @@ class  ADODB_ado_mssql extends ADODB_ado {
 	
 	function _insertid()
 	{
-	        return $this->GetOne('select @@identity');
+	        return $this->GetOne('select SCOPE_IDENTITY()');
 	}
 	
 	function _affectedrows()

@@ -920,7 +920,9 @@
 		} 
 		
 		if ($this->_queryID === true) { // return simplified recordset for inserts/updates/deletes with lower overhead
-			$rs = new ADORecordSet_empty();
+			$rsclass = $this->rsPrefix.'empty';
+			$rs = (class_exists($rsclass)) ? new $rsclass():  new ADORecordSet_empty();
+			
 			return $rs;
 		}
 		
@@ -1303,7 +1305,9 @@
 		$ret = false;
 		$rs = &$this->Execute($sql,$inputarr);
 		if ($rs) {	
-			if (!$rs->EOF) $ret = reset($rs->fields);
+			if ($rs->EOF) $ret = null;
+			else $ret = reset($rs->fields);
+			
 			$rs->Close();
 		}
 		$ADODB_COUNTRECS = $crecs;
@@ -1315,7 +1319,8 @@
 		$ret = false;
 		$rs = &$this->CacheExecute($secs2cache,$sql,$inputarr);
 		if ($rs) {		
-			if (!$rs->EOF) $ret = reset($rs->fields);
+			if ($rs->EOF) $ret = null;
+			else $ret = reset($rs->fields);
 			$rs->Close();
 		} 
 		
@@ -1443,7 +1448,12 @@
 		return $arr;
 	}
 	
-	
+	function GetRandRow($sql, $arr= false)
+	{
+		$rezarr = $this->GetAll($sql, $arr);
+		$sz = sizeof($rez);
+		return $rezarr[abs(rand()) % $sz];
+	}
 	
 	/**
 	* Return one row of sql statement. Recordset is disposed for you.

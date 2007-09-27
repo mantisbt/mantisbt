@@ -92,6 +92,37 @@ class perf_postgres extends adodb_perf{
 		$this->conn =& $conn;
 	}
 	
+	var $optimizeTableLow  = 'VACUUM %s'; 
+	var $optimizeTableHigh = 'VACUUM ANALYZE %s';
+
+/**
+ * @see adodb_perf#optimizeTable
+ */
+
+	function optimizeTable($table, $mode = ADODB_OPT_LOW) 
+	{
+	    if(! is_string($table)) return false;
+	    
+	    $conn = $this->conn;
+	    if (! $conn) return false;
+	    
+	    $sql = '';
+	    switch($mode) {
+	        case ADODB_OPT_LOW : $sql = $this->optimizeTableLow;  break;
+	        case ADODB_OPT_HIGH: $sql = $this->optimizeTableHigh; break;
+	        default            : 
+	        {
+	            ADOConnection::outp(sprintf("<p>%s: '%s' using of undefined mode '%s'</p>", __CLASS__, 'optimizeTable', $mode));
+	            return false;
+	        }
+	    }
+	    $sql = sprintf($sql, $table);
+	    
+	    return $conn->Execute($sql) !== false;  
+	}
+	
+
+	
 	function Explain($sql,$partial=false)
 	{
 		$save = $this->conn->LogSQL(false);
