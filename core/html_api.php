@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.217 2007-09-28 01:57:56 vboctor Exp $
+	# $Id: html_api.php,v 1.218 2007-09-28 02:52:37 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -382,7 +382,7 @@
 	# --------------------
 	# (13) Print the page footer information
 	function html_footer( $p_file ) {
-		global $g_timer, $g_queries_array;
+		global $g_timer, $g_queries_array, $g_request_time;
 
 		# If a user is logged in, update their last visit time.
 		# We do this at the end of the page so that:
@@ -446,7 +446,10 @@
 					echo '<td', $t_style_tag, '>', $t_time , '</td>';
 					echo '<td', $t_style_tag, '><span style="color: gray;">', $t_caller, '</span><br />', string_html_specialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 				}
-				echo "\t", '<tr><td></td><td>', $t_total, '</td><td></td></tr>', "\n";
+
+				# @@@ Note sure if we should localize them given that they are debug info.  Will add if requested by users.
+				echo "\t", '<tr><td></td><td>', $t_total, '</td><td>SQL Queries Total Time</td></tr>', "\n";
+				echo "\t", '<tr><td></td><td>', round( microtime_float() - $g_request_time, 4 ), '</td><td>Page Request Total Time</td></tr>', "\n";
 				echo "\t",  '</table>', "\n";
 			}
 		}

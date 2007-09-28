@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.69 2007-09-27 21:34:32 giallu Exp $
+	# $Id: database_api.php,v 1.70 2007-09-28 02:52:37 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -137,13 +137,6 @@
 		}
 
 		return false;
-	}
-
-	# --------------------
-	# timer analysis
-	function microtime_float() {
-		list( $usec, $sec ) = explode( " ", microtime() );
-		return ( (float)$usec + (float)$sec );
 	}
 
 	# --------------------
