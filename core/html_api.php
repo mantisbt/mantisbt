@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.216 2007-09-27 21:34:32 giallu Exp $
+	# $Id: html_api.php,v 1.217 2007-09-28 01:57:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -416,7 +416,7 @@
 		}
 
 		# print db queries that were run
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$t_count = count( $g_queries_array );
 			echo "\t",  $t_count, ' total queries executed.<br />', "\n";
 			$t_unique_queries = 0;

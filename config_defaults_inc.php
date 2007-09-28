@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.361 2007-09-22 22:21:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.362 2007-09-28 01:57:56 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1222,10 +1222,6 @@
 	# $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1';				# permanently change the filter
 	$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';	# only change the filter this time
 
-	# --- Queries --------------------
-	# Shows the total number/unique number of queries executed to serve the page.
-	$g_show_queries_count	= ON;
-
 	# The regular expression to use when validating new user login names
 	# The default regular expression allows a-z, A-z, 0-9, as well as space and
 	#  underscore.  If you change this, you may want to update the
@@ -1481,12 +1477,22 @@
 	# original To, Cc, Bcc included in the message body.
 	$g_debug_email			= OFF;
 
+	# --- Queries --------------------
+	# Shows the total number/unique number of queries executed to serve the page.
+	$g_show_queries_count	= ON;
+
+	# Indicates the access level required for a user to see the queries count / list.
+	# This only has an effect if $g_show_queries_count is ON.  Note that this threshold
+	# is compared against the user's default global access level rather than the
+	# threshold based on the current active project.
+	$g_show_queries_threshold = ADMINISTRATOR;
+
 	# Shows the list of all queries that are executed in chronological order from top
 	# to bottom.  This option is only effective when $g_show_queries_count is ON.
 	# WARNING: Potential security hazard.  Only turn this on when you really
 	# need it (for debugging/profiling)
 	$g_show_queries_list	= OFF;
-
+	
 	# --- detailed error messages -----
 	# Shows a list of variables and their values when an error is triggered
 	# Only applies to error types configured to 'halt' in $g_display_errors, below

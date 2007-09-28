@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.74 2007-09-22 17:13:05 vboctor Exp $
+	# $Id: helper_api.php,v 1.75 2007-09-28 01:57:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -397,5 +397,12 @@
 	# a form.  For example, this function returns: tabindex="1"
 	function helper_get_tab_index() {
 		return 'tabindex="' . helper_get_tab_index_value() . '"';
+	}
+
+	# --------------------
+	# returns a boolean indicating whether SQL queries executed should be shown
+	# or not.
+	function helper_show_queries() {
+		return ON == config_get( 'show_queries_count' ) && access_has_global_level( config_get( 'show_queries_threshold' ) );
 	}
 ?>

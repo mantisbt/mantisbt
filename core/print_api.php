@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.181 2007-09-26 02:54:57 vboctor Exp $
+	# $Id: print_api.php,v 1.182 2007-09-28 01:57:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -80,7 +80,7 @@
 	#  configured system wait time.
 	# If the show query count is OFF, redirect right away.
 	function print_successful_redirect( $p_redirect_to ) {
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			html_meta_redirect( $p_redirect_to );
 			html_page_top1();
 			html_page_top2();

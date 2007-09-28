@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.35 2007-08-14 01:46:35 thraxisp Exp $
+	# $Id: graph_api.php,v 1.36 2007-09-28 01:57:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -79,7 +79,7 @@
 		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -160,7 +160,7 @@
 		$gbplot = new GroupBarPlot(array($p1,$p3,$p2));
 		$graph->Add($gbplot);
 
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -210,7 +210,7 @@
         $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
 
         $graph->Add($gbplot);
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
 		}
 		$graph->Stroke();
@@ -249,7 +249,7 @@
 		$p1->value->SetFont( $t_graph_font );
 
 		$graph->Add($p1);
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -317,7 +317,7 @@
 		$p2->SetLegend( lang_get( 'legend_resolved' ) );
 		$graph->Add($p2);
 
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
@@ -372,7 +372,7 @@
 		    $graph->Add($t_line[$i]);
         }
 
-		if ( ON == config_get( 'show_queries_count' ) ) {
+		if ( helper_show_queries() ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
