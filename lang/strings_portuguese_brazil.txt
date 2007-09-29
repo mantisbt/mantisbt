@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
@@ -9,16 +9,17 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano F. Ravasi, dev at juliano info
 	# Brazilian Portuguese: André Sencioles, andre spiritlinux com br
+	# Brazilian Portuguese: Jeferson Oliveira, jefersonfoliveira@gmail.com
 	#
 	###########################################################################
 	# Brazilian Portuguese strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.316 $
 	# -------------------------------------------------
-	# $Revision: 1.105 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:46 $
+	# $Revision: 1.106 $
+	# $Author: vboctor $
+	# $Date: 2007-09-29 07:18:22 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.105 2006-11-08 13:32:46 achumakov Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.106 2007-09-29 07:18:22 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -39,6 +40,10 @@ $s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
 $s_actiongroup_menu_update_category = 'Atualizar Categoria';
 $s_actiongroup_menu_set_sticky = 'Marcar/Desmarcar Pegajoso';
 $s_actiongroup_menu_update_field = 'Atualizar %s';
+$s_actiongroup_menu_update_target_version = 'Atualizar Previsto para Versão';
+$s_actiongroup_menu_update_fixed_in_version = 'Atualizar Corrigido na Versão';
+$s_actiongroup_menu_add_note = 'Adicionar Anotação';
+$s_actiongroup_menu_attach_tags = 'Aplicar marcadores';
 $s_actiongroup_bugs = 'Casos Selecionados';
 
 # new strings:
@@ -62,6 +67,8 @@ $s_jump = "Ir para";
 $s_copy_users = 'Copiar Usuários';
 $s_copy_categories_from = 'Copiar Categorias De';
 $s_copy_categories_to = 'Copiar Categorias Para';
+$s_copy_versions_from = 'Copiar Versões De';
+$s_copy_versions_to = 'Copiar Versões Para';
 $s_copy_users_from = 'Copiar Usuários De';
 $s_copy_users_to = 'Copiar Usuários Para';
 $s_bug_history = 'Histórico do Caso';
@@ -81,6 +88,8 @@ $s_delete_bugnote_sure_msg = 'Você tem certeza que você quer apagar essa anota
 $s_bug_relationships = 'Relações';
 $s_empty_password_sure_msg = 'Este usuário possui uma senha em branco.  Você tem certeza que é isso que você deseja?';
 $s_empty_password_button = 'Usar Senha em Branco';
+$s_reauthenticate_title = 'Authenticação';
+$s_reauthenticate_message = 'Você está visitando uma página segura, e sua sessão expirou. Por favor autentique-se novamente.';
 
 $s_duplicate_of = 'é duplicado de';
 $s_has_duplicate = 'possui duplicado';
@@ -106,9 +115,9 @@ $s_make_public = 'Tornar Público';
 $s_create_new_project_link = 'Criar Novo Projeto';
 
 $s_login_link = 'Login';
+$s_select_option = '(selecione)';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
 $s_bug_actiongroup_access = 'Você não possui as permissões apropriadas para realizar esta ação.';
 $s_bug_actiongroup_status = 'Este caso não pode ser alterado para o status solicitado';
 $s_bug_actiongroup_category = 'Este caso não pode ser alterado para a categoria solicitada';
@@ -123,6 +132,8 @@ $s_status_bugs_conf_msg = 'Escolher status dos casos';
 $s_view_status_bugs_conf_msg = 'Escolher visibilidade dos casos';
 $s_category_bugs_conf_msg = 'Escolher a categoria do caso';
 $s_set_sticky_bugs_conf_msg = 'Você tem certeza que deseja marcar/desmarcar estes casos como "pegajosos"?';
+$s_fixed_in_version_bugs_conf_msg = 'Atualizar Corrigido na Versão';
+$s_target_version_bugs_conf_msg = 'Atualizar Previsto para a Versão';
 $s_close_group_bugs_button = 'Fechar Casos' ;
 $s_delete_group_bugs_button = 'Apagar Casos' ;
 $s_move_group_bugs_button = 'Mover Casos' ;
@@ -134,6 +145,8 @@ $s_status_group_bugs_button = 'Atualizar Status' ;
 $s_category_group_bugs_button = 'Atualizar Categoria';
 $s_view_status_group_bugs_button = 'Atualizar Visibilidade';
 $s_set_sticky_group_bugs_button = 'Marcar/Desmarcar Pegajosos';
+$s_fixed_in_version_group_bugs_button = 'Atualizar Corrigido na Versão';
+$s_target_version_group_bugs_button = 'Atualizar Previsto para a Versão';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Gráfico de síntese por status' ;
@@ -217,6 +230,7 @@ $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtro %d não encontrado.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'O filtro que você está tentando usar é muito velho e precisa ser atualizado, por favor, recrie-o';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Não é permitida a utilização de endereços de e-mail descartáveis.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
@@ -233,6 +247,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'Autenticação LDAP Authentication Fal
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Atualização de Registro LDAP falhou.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de Usuário LDAP Não Encontrado.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensão LDAP Não Carregada.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%d: "%s"';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Consulta ao banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: "%s" para a consulta: "%s"';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: "%s"';
@@ -242,6 +257,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão \'%s\' não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é válido. Nomes de usuário podem conter apenas letras, números, espaços, hífens e sublinhados.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'O nome real de usuário não é válido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuário não possui o nível de acesso necessário';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Nome Verdadeiro" escolhido é igual ao nome de login de outro usuário. Por favor escolha outro.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'O suporte a patrocínio não está habilitado.';
@@ -265,6 +281,13 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esta operação criaria um laço na hierarquia de subprojetos.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Você não pode alterar o nível de acesso do único ADMINISTRADOR do sistema.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erro de redirecionamento de página, certifique-se que não haja espaços fora do bloco PHP (&lt;?php ?&gt;) nos arquivos config_inc.php ou custom_*.php.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integração com Twitter requer a extensão PHP CURL que não está isntalada.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Não foi possível encontrar um marcador com esse name.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Um marcador com esse nome já existe.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Nome de marcador não é válido.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esse marcador não está aplicado a esse caso.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esse marcador já está aplicado a esse caso.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Símbolo nõ foi encontrado.';
 
 $s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.';
 $s_login_cookies_disabled = 'Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
@@ -356,6 +379,7 @@ $s_email_status = 'Status';
 $s_email_resolution = 'Resolução';
 $s_email_duplicate = 'Duplicado';
 $s_email_fixed_in_version = 'Corrigido na Versão';
+$s_email_target_version = 'Previsto para a Versão';
 $s_email_date_submitted = 'Data de Envio';
 $s_email_last_modified = 'Última Modificação';
 $s_email_summary = 'Resumo';
@@ -573,6 +597,7 @@ $s_eta = 'Tempo Estimado';
 $s_product_version = 'Versão do Produto';
 $s_build = 'Build';
 $s_fixed_in_version = 'Corrigido na Versão';
+$s_target_version = 'Previsto para a Versão';
 $s_votes = 'Votos';
 $s_summary = 'Resumo';
 $s_description = 'Descrição';
@@ -665,6 +690,9 @@ $s_create_user_button = 'Criar Usuário';
 # manage_page.php
 $s_hide_disabled = 'Ocultar Desabilitados';
 $s_filter_button = 'Aplicar Filtro';
+$s_create_filter_link = 'Criar Link Permanente';
+$s_create_short_link = 'Criar Link Reduzido';
+$s_filter_permalink = 'O endereço a seguir é um link permanente para o filtro atualmente configurado:';
 $s_manage_users_link = 'Gerenciar Usuários';
 $s_manage_projects_link = 'Gerenciar Projetos';
 $s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
@@ -799,6 +827,8 @@ $s_public = 'público';
 $s_private = 'privado';
 $s_update_project_button = 'Atualizar Projeto';
 $s_delete_project_button = 'Apagar Projeto';
+$s_copy_from = 'Copiar De';
+$s_copy_to = 'Copiar Para';
 $s_categories_and_version_title = 'Categorias e Versões';
 $s_categories = 'Categorias';
 $s_add_category_button = 'Adicionar Categoria';
@@ -877,6 +907,7 @@ $s_main_link = 'Principal';
 $s_view_bugs_link = 'Ver Casos';
 $s_report_bug_link = 'Relatar Caso';
 $s_changelog_link = 'Registro de Mudanças';
+$s_roadmap_link = 'Planejamento';
 $s_summary_link = 'Resumo';
 $s_account_link = 'Minha Conta';
 $s_users_link = 'Usuários';
@@ -1051,6 +1082,10 @@ $s_percentage_fixed = '% Corrigidos';
 $s_percentage_errors = '% Falsos';
 $s_errors = 'Falso';
 $s_total = 'Total';
+$s_balance = 'Saldo';
+$s_most_active = 'Mais Ativos';
+$s_score = 'Mudanças';
+$s_days = 'Dias';
 $s_time_stats = 'Estatísticas de Tempo para Casos Resolvidos (dias)';
 $s_longest_open_bug = 'Caso aberto há mais tempo';
 $s_longest_open = 'Aberto há quanto tempo';
@@ -1062,6 +1097,7 @@ $s_orct = '(aberto/resolvido/fechado/total)';
 
 # view_all_bug_page.php
 $s_any = 'qualquer';
+$s_all = 'todos';
 $s_show = 'Mostrar';
 $s_changed = 'Alterado(hrs)';
 $s_viewing_bugs_title = 'Visualizando Casos';
@@ -1070,6 +1106,7 @@ $s_sticky = 'Mostrar Casos "Pegajosos"';
 $s_sort = 'Ordenar por';
 $s_issue_id = 'Caso #';
 $s_recently_visited = 'Recentemente Visitado';
+$s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'nenhum';
@@ -1164,6 +1201,9 @@ $s_custom_field_require_report = 'Requerido no relato';
 $s_custom_field_require_update = 'Requerido na atualização';
 $s_custom_field_require_resolved = 'Requerido na resolução';
 $s_custom_field_require_closed = 'Requerido no fechamento';
+$s_link_custom_field_to_project_title = 'Vincular Campo Personalizado ao projeto';
+$s_link_custom_field_to_project_button = 'Vincular Campo Personalizado';
+$s_linked_projects = 'Projetos Vinculados';
 
 $s_custom_field_sequence = 'Seqüência';
 $s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla,8:Data';
@@ -1207,6 +1247,11 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Registro de Mudanças';
+$s_changelog_empty = 'Não há informações disponíveis sobre registros de mudanças';
+
+# Roadmap
+$s_roadmap = 'Planejamento';
+$s_resolved_progress = '%d de %d caso(s) resolvidos. Progresso (%d%%).';
 
 # Http auth
 $s_http_auth_realm = "Login do Mantis";
@@ -1232,6 +1277,7 @@ $s_bug_created_from = "Caso gerado à partir de";
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = "Gráfico de Relacionamentos";
+$s_viewing_bug_dependency_graph_title = "Gráfico de Dependências";
 $s_relation_graph = "Gráfico de Relações";
 $s_dependency_graph = "Gráfico de Dependências";
 $s_vertical = "Vertical";
@@ -1314,4 +1360,79 @@ $s_on_or_after = 'Em ou Depois' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Tagging
+$s_tags = 'Marcadores';
+$s_tag_details = 'Detalhes do marcador: %s';
+$s_tag_id = 'ID do Marcador';
+$s_tag_name = 'Nome';
+$s_tag_creator = 'Criador';
+$s_tag_created = 'Date de Criação';
+$s_tag_updated = 'Última Atualização';
+$s_tag_description = 'Descrição do marcador';
+$s_tag_statistics = 'Estatísticas de Uso';
+$s_tag_update = 'Atualizar Marcador: %s';
+$s_tag_update_return = 'Voltar ao Marcador';
+$s_tag_update_button = 'Atualizar Marcador';
+$s_tag_delete_button = 'Apagar Marcador';
+$s_tag_delete_message = 'Você tem certeza que quer apagar esse marcador?';
+$s_tag_existing = 'Marcadores atuais';
+$s_tag_none_attached = 'Nenhum marcador aplicado.';
+$s_tag_attach = 'Aplicar';
+$s_tag_attach_long = 'Aplicar Marcadores';
+$s_tag_attach_failed = 'Aplicação do Marcador falhou.';
+$s_tag_detach = 'Remover \'%s\'';
+$s_tag_separate_by = "(Separar por '%s')";
+$s_tag_invalid_name = 'Nome de marcador inválido.';
+$s_tag_create_denied = 'Acesso negado para a criação.';
+$s_tag_filter_default = 'Casos relacionados (%s)';
+$s_tag_history_attached = 'Marcador Aplicado';
+$s_tag_history_detached = 'Marcador Removido';
+$s_tag_history_renamed = 'Marcador Renomeado';
+$s_tag_related = 'Marcadores Relacionados';
+$s_tag_related_issues = 'Casos compartilhados (%s)';
+$s_tag_stats_attached = 'Casos relacionados: %s';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Fatura';
+$s_time_tracking = 'Acompanhamento de tempo';
+$s_time_tracking_get_info_button = 'Obter informações de acompanhamento de tempo';
+$s_time_tracking_cost_per_hour = 'Custo / Hora';
+$s_time_tracking_cost = 'Custo';
+$s_total_time_for_issue = 'Tempo total para o caso = %s';
+$s_from_date = 'De';
+$s_to_date = 'Até';
+
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
+
+# Twitter Integration
+$s_twitter_resolved = "%d: [%s] %s (resolvido por %s em %s)";
+$s_twitter_resolved_no_version = "%d: [%s] %s (resolvido por %s)";
+
+# Project Page
+$s_development_team = 'Equipe de desenvolvimento';
+
+# bug_graph pages
+$s_all_dates = 'Todas as Datas';
+$s_period_none = 'Nenhum';
+$s_period_this_week = 'Esta Semana';
+$s_period_last_week = 'Semana Passada';
+$s_period_two_weeks = 'Últimas Duas Semanas';
+$s_period_this_month = 'Este Mês';
+$s_period_last_month = 'Mês Passado';
+$s_period_this_quarter = 'Esta Quinzena';
+$s_period_last_quarter = 'Última Quinzena';
+$s_period_year_to_date = 'Este ano';
+$s_period_select = "Especificar período";
+$s_period_last_year = 'Ano Passado';
+$s_select = 'Por favor Selecione';
+$s_select_bystatus = 'por Status';
+$s_select_summbystatus = 'Resumo por Status';
+$s_select_bycat = "Resumo por Categoria";
+$s_select_both = "Resumo por Status e Categoria";
+$s_show_as_graph = 'Mostrar como Gráfico';
+$s_show_as_table = 'Mostrar como Tabela';
+$s_show_graph = 'Mostrar Gráfico';
+$s_graph_page = 'Gráfico do histórico do caso';
+$s_graph_bug_page_link = 'Gráfico';
 ?>
