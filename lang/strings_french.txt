@@ -17,16 +17,17 @@
 	# French-Canadian: Francis Labrie, francis.labrie@smoguli.com
 	# French-Canadian: Langis Gagnon, gagnon.langis@ic.gc.ca
 	# French-Canadian: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
+	# French: Maurice A. LeBlanc, leblancma@cooptel.qc.ca
 	#
 	###########################################################################
 	# French strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.120 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
+	# $Revision: 1.121 $
+	# $Author: vboctor $
+	# $Date: 2007-09-29 18:15:32 $
 	#
-	# $Id: strings_french.txt,v 1.120 2006-11-08 13:32:44 achumakov Exp $
+	# $Id: strings_french.txt,v 1.121 2007-09-29 18:15:32 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -47,6 +48,10 @@ $s_actiongroup_menu_update_view_status = 'Mettre à jour Afficher l\'état';
 $s_actiongroup_menu_update_category = 'Mettre à jour la Catégorie';
 $s_actiongroup_menu_set_sticky = 'Activer / désactiver la récurrence';
 $s_actiongroup_menu_update_field = 'Mettre à jour %s';
+$s_actiongroup_menu_update_target_version = 'Mettre à jour la version cible';
+$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolu';
+$s_actiongroup_menu_add_note = 'Ajouter une note';
+$s_actiongroup_menu_attach_tags = 'Ajouter des balises';
 $s_actiongroup_bugs = 'Bogues sélectionnés';
 
 # new strings:
@@ -70,8 +75,10 @@ $s_jump = 'Chercher';
 $s_copy_users = 'Copier les utilisateurs';
 $s_copy_categories_from = 'Copier les catégories à partir de';
 $s_copy_categories_to = 'Copier les catégories vers';
-$s_copy_users_from = 'Copier les Utilisateurs à partir de';
-$s_copy_users_to = 'Copier les Utilisateurs vers';
+$s_copy_versions_from = 'Copier les versions à partir de';
+$s_copy_versions_to = 'Copier les versions vers';
+$s_copy_users_from = 'Copier les utilisateurs à partir de';
+$s_copy_users_to = 'Copier les utilisateurs vers';
 $s_bug_history = 'Historique du bogue';
 $s_field = 'Champ';
 $s_old_value = 'Ancienne valeur';
@@ -89,6 +96,8 @@ $s_delete_bugnote_sure_msg = 'Êtes vous sûr de vouloir supprimer cette note ?
 $s_bug_relationships = 'Relations';
 $s_empty_password_sure_msg = 'L\'utilisateur a un mot de passe vide.  Est-ce bien ce que vous voulez ?';
 $s_empty_password_button = 'Utiliser un mot de passe vide';
+$s_reauthenticate_title = 'Identification';
+$s_reauthenticate_message = 'Vous vistez un site sécurisé, et votre session sécurisée est expirée.  Veuillez vous identifier à nouveau pour poursuivre.';
 
 $s_duplicate_of = 'doublon de';
 $s_has_duplicate = 'a pour doublon';
@@ -114,9 +123,9 @@ $s_make_public = 'Rendre public';
 $s_create_new_project_link = 'Créer un nouveau projet';
 
 $s_login_link = 'Ouvrir la session';
+$s_select_option = 'Choisir';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bogues suivants : ';
 $s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
 $s_bug_actiongroup_status = 'Ce bogue ne peut pas être changé pour l\'état demandé';
 $s_bug_actiongroup_category = 'Ce bogue ne peut pas être changé pour la catégorie demandée';
@@ -131,6 +140,8 @@ $s_status_bugs_conf_msg = 'Choisir l\'état des bogues';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bogues';
 $s_category_bugs_conf_msg = 'Choisir la catégorie des bogues';
 $s_set_sticky_bugs_conf_msg = 'Voulez-vous vraiement activer / désactiver la  récurrance de ces bogues ?';
+$s_fixed_in_version_bugs_conf_msg = 'Inscrire la version de résolution';
+$s_target_version_bugs_conf_msg = 'Inscrire la version ciblée';
 $s_close_group_bugs_button = 'Fermer les bogues';
 $s_delete_group_bugs_button = 'Supprimer les bogues';
 $s_move_group_bugs_button = 'Déplacer les bogues';
@@ -142,6 +153,8 @@ $s_status_group_bugs_button = 'Mettre à jour le statut';
 $s_category_group_bugs_button = 'Mettre à jour la Catégorie';
 $s_view_status_group_bugs_button = 'Mettre à jour Afficher le statut';
 $s_set_sticky_group_bugs_button = 'Activer / désactiver la récurrence';
+$s_fixed_in_version_group_bugs_button = 'Mettre à jour la version de résolution';
+$s_target_version_group_bugs_button = 'Mettre à jour la version ciblée';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graphiques de synthèse par état';
@@ -224,23 +237,25 @@ $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%s doit être un nombre.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bogue non trouvé.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %d introuvable.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Le filtre utilisé est trop ancien pour être mis à jour, Veuillez créer un nouveau filtre.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Courriel invalide.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Courriel non valide.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Utiliser une adresse de courriel jetable est interdit.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil non trouvé.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Type de fichier non autorisé pour les dépôts de fichier.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Chemin de dépôt invalide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Chemin de dépôt non valide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Impossible de marquer ce bogue comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champs personnalisé non trouvé';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ceci est un nom dupliqué.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champs.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur invalide pour ce champ.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champs personnalisé invalide';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur non valide pour %s.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champs personnalisé non valide';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d\'indentification par LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l\'enregistrement LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Enregistrement d\'utilisateur LDAP non trouvé.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'L\'extension LDAP n\'est pas chargé.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Échec de connexion à la base de données.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Échec de la requête de base de données.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Échec de la sélection de la base de données.';
@@ -249,7 +264,8 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Aucune copie spécifiée.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Catégorie non trouvée.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Version dupliquée.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version non trouvée.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilisateur invalide.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilisateur non valide.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Nom réel non valide.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'L\'utilisateur n\'a pas le niveau d\'accès requis';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Le nom réel saisi correspond au code d\'un autre utilisateur. Veuillez en choisir un autre.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Support de commanditaire non activé.';
@@ -272,7 +288,14 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'hyperlien de confi
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Cette opération va créer une recursion dans la hiérarchie des sous projets.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Vous ne pouvez pas modifier le niveau d\'accès de l\'unique administrateur du système.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erreur de réacheminement, vérifier qu\'il n\'y a pas d\'espaces à l\'extérieur du bloc PHP block (&lt;?php ?&gt;) dans les fichiers config_inc.php ou custom_*.php.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'L\'integration avec Twitter nécessite l\'extension PHP CURL qui n\'est pas installée.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'La balise avec ce nom est introuvable.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Une balise avec ce nom existe déjà.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Ce nom de balise est non valide.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Cette balise n\'est pas associée à ce bogue.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Cette balise est déjà associée à ce bogue.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Jeton non trouvé.'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Entité ???
 
 $s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisi sont incorrects.';
 $s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins ou refuse de les gérer.';
@@ -364,6 +387,7 @@ $s_email_status = 'État';
 $s_email_resolution = 'Résolution';
 $s_email_duplicate = 'Redondance';
 $s_email_fixed_in_version = 'Résolu dans la version';
+$s_email_target_version = 'Version ciblée';
 $s_email_date_submitted = 'Date de soumission';
 $s_email_last_modified = 'Dernière modification';
 $s_email_summary = 'Résumé';
@@ -389,7 +413,7 @@ $s_no_password_change = 'Le mot de passe est contrôlé par un autre système :
 $s_confirm_password = 'Confirmation du mot de passe';
 $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
-$s_verify_warning = 'L\'information relative à votre compte a été vérifiée. Le message de confirmation de compte reçu est désormais invalide.';
+$s_verify_warning = 'L\'information relative à votre compte a été vérifiée. Le message de confirmation de compte reçu est désormais non valide.';
 $s_verify_change_password = 'Vous devez fixer un mot de passe pour vous permettre de vous brancher de nouveau.';
 
 # account_prefs_page.php
@@ -581,6 +605,7 @@ $s_eta = 'ETA';
 $s_product_version = 'Version du produit';
 $s_build = 'Build';
 $s_fixed_in_version = 'Résolu dans la version';
+$s_target_version = 'Version ciblée';
 $s_votes = 'Votes';
 $s_summary = 'Résumé';
 $s_description = 'Description';
@@ -673,6 +698,9 @@ $s_create_user_button = 'Créer l\'utilisateur';
 # manage_page.php
 $s_hide_disabled = 'Cacher désactivés';
 $s_filter_button = 'Filtrer';
+$s_create_filter_link = 'Créer lien permanent';	# Permalink = Permenant Link
+$s_create_short_link = 'Créer lien court'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Voir le fonctionnement
+$s_filter_permalink = 'Ci-dessous un lien permanent vers le filtre actuel : ';
 $s_manage_users_link = 'Gérer les utilisateurs';
 $s_manage_projects_link = 'Gérer les projets';
 $s_manage_custom_field_link = 'Gérer les champs personnalisés';
@@ -760,14 +788,14 @@ $s_in_project = 'du projet';
 $s_delete_config_button = 'Supprimer la configuration';
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
+$s_configuration_report = 'Rapport de configuration';
+$s_database_configuration = 'Configuration de la base de données';
+$s_configuration_option = 'Option de configuration';
 $s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_option_value = 'Valeur';
+$s_all_users = 'Tous les utilisateurs';
+$s_set_configuration_option = 'Changer l\'option de configuration';
+$s_delete_config_sure_msg = 'Voulez-vous vraiment supprimer cette option de configuration ? ';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
@@ -807,6 +835,8 @@ $s_public = 'public';
 $s_private = 'privé';
 $s_update_project_button = 'Mettre à jour le projet';
 $s_delete_project_button = 'Supprimer le projet';
+$s_copy_from = 'Copier à partir de';
+$s_copy_to = 'Copier vers';
 $s_categories_and_version_title = 'Catégories et versions';
 $s_categories = 'Catégories';
 $s_add_category_button = 'Ajouter la catégorie';
@@ -885,6 +915,7 @@ $s_main_link = 'Accueil';
 $s_view_bugs_link = 'Afficher les bogues';
 $s_report_bug_link = 'Rapporter un bogue';
 $s_changelog_link = 'Changements';
+$s_roadmap_link = 'Calendrier';
 $s_summary_link = 'Synthèse';
 $s_account_link = 'Mon compte';
 $s_users_link = 'Utilisateurs';
@@ -1059,6 +1090,10 @@ $s_percentage_fixed = '% corrigé(s)';
 $s_percentage_errors = '% faux';
 $s_errors = 'Faux';
 $s_total = 'Total';
+$s_balance = 'Solde';
+$s_most_active = 'Plus actifs';
+$s_score = 'Pointage';
+$s_days = 'Jours';
 $s_time_stats = 'Statistiques (en jours) pour les résolutions';
 $s_longest_open_bug = 'Bogue ouvert le plus longtemps';
 $s_longest_open = 'Temps maximal';
@@ -1069,7 +1104,8 @@ $s_reporter_stats = 'Statistiques par rapporteur';
 $s_orct = '(ouvert/résolu/fermé/total)';
 
 # view_all_bug_page.php
-$s_any = 'Tous';
+$s_any = 'Tous'; # @@@ (leblancma) TRADUCTION A VÉRIFIER *****
+$s_all = 'Tous'; # @@@ (leblancma) TRADUCTION A VÉRIFIER *****
 $s_show = 'Afficher';
 $s_changed = 'Modifiés (heures)';
 $s_viewing_bugs_title = 'Liste des bogues';
@@ -1078,6 +1114,7 @@ $s_sticky = 'Afficher les bogues récurrants';
 $s_sort = 'Trier par';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
+$s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'aucun';
@@ -1172,6 +1209,9 @@ $s_custom_field_require_report = 'Nécessaire au rapport';
 $s_custom_field_require_update = 'Nécessaire à la mise à jour';
 $s_custom_field_require_resolved = 'Nécessaire à la résolution';
 $s_custom_field_require_closed = 'Nécessaire à la fermeture';
+$s_link_custom_field_to_project_title = 'Lier un champ personnalisé au projet';
+$s_link_custom_field_to_project_button = 'Lier champ personnalisé';
+$s_linked_projects = 'Projets liés';
 
 $s_custom_field_sequence = 'Suite';
 $s_custom_field_type_enum_string = '0:Chaîne de caractères,1:Nombre entier,2:Nombre réel,3:Énumération,4:Courriel,5:Case à cocher,6:Liste,7:Liste à sélection multiple,8:Date';
@@ -1215,6 +1255,11 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Liste des changements';
+$s_changelog_empty = 'Liste des changements indisponible';
+
+# Roadmap
+$s_roadmap = 'Calendrier';
+$s_resolved_progress = '%d de %d bogue(s) résolus.  Progrès (%d%%).';
 
 # Http auth
 $s_http_auth_realm = 'Branchement Mantis';
@@ -1240,6 +1285,7 @@ $s_bug_created_from = 'Bogue généré depuis';
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = 'Graphique relationnel';
+$s_viewing_bug_dependency_graph_title = "Graphique des dépendances";
 $s_relation_graph = 'Graphique des relations';
 $s_dependency_graph = 'Graphique des dépendances';
 $s_vertical = 'Vertical';
@@ -1315,11 +1361,86 @@ $s_loading = 'Chargement en cours...';
 
 # filter_api.php
 $s_between = 'Entre';
-$s_on_or_before = 'Pendant ou avant';
+$s_on_or_before = 'Pendant ou avant'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou avant ???
 $s_before = 'Avant';
 $s_after = 'Après';
-$s_on_or_after = 'Pendant ou après';
+$s_on_or_after = 'Pendant ou après'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou après ???
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Tagging
+$s_tags = 'Balises';
+$s_tag_details = 'Details de la balise : %s';
+$s_tag_id = 'ID de balise';
+$s_tag_name = 'Nom';
+$s_tag_creator = 'Auteur'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Créateur ???
+$s_tag_created = 'Date de création';
+$s_tag_updated = 'Date de dernière modification';
+$s_tag_description = 'Description de balise';
+$s_tag_statistics = 'Statistiques d\'utilisation';
+$s_tag_update = 'Mettre à jour la balise : %s';
+$s_tag_update_return = 'Retour à la balise';
+$s_tag_update_button = 'Mettre à jour la balise';
+$s_tag_delete_button = 'Supprimer la balise';
+$s_tag_delete_message = 'Êtes vous sûr de vouloir supprimer cette balise ?';
+$s_tag_existing = 'Balises existantes';
+$s_tag_none_attached = 'Aucune balise n\'est associée.';
+$s_tag_attach = 'Associer';
+$s_tag_attach_long = 'Associer balises';
+$s_tag_attach_failed = 'Échec de l\'association de la balise.';
+$s_tag_detach = 'Dissocier \'%s\'';
+$s_tag_separate_by = "(Séparer by '%s')";
+$s_tag_invalid_name = 'Nom de balise non valide.';
+$s_tag_create_denied = 'La création de la balise est refusée.';
+$s_tag_filter_default = 'Bogues associés (%s)';
+$s_tag_history_attached = 'Balise associée';
+$s_tag_history_detached = 'Balise dissociée';
+$s_tag_history_renamed = 'Balise renommée';
+$s_tag_related = 'Balises associées';
+$s_tag_related_issues = 'Bogues partagés (%s)';
+$s_tag_stats_attached = 'Bogues associés : %s';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Facturation';
+$s_time_tracking = 'Suivi du temps';
+$s_time_tracking_get_info_button = 'Obtenir l\'information sur le suivi du temps';
+$s_time_tracking_cost_per_hour = 'Coût à l\'heure';
+$s_time_tracking_cost = 'Coût';
+$s_total_time_for_issue = 'Temps total pour le bogue = %s';
+$s_from_date = 'De';
+$s_to_date = 'A';
+
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED]; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Doit-on traduire
+
+# Twitter Integration
+$s_twitter_resolved = "%d : [%s] %s (résolu par %s version %s)";
+$s_twitter_resolved_no_version = "%d : [%s] %s (résolu par %s)";
+
+# Project Page
+$s_development_team = 'Équipe de développement';
+
+# bug_graph pages
+$s_all_dates = 'Tous les dates';
+$s_period_none = 'Aucun';
+$s_period_this_week = 'Cette semaine';
+$s_period_last_week = 'La semaine dernière';
+$s_period_two_weeks = 'Les deux dernières semaines';
+$s_period_this_month = 'Ce mois';
+$s_period_last_month = 'Le mois dernier';
+$s_period_this_quarter = 'Ce trimestre';
+$s_period_last_quarter = 'Le trimestre dernier';
+$s_period_year_to_date = 'Annuel cumulatif';
+$s_period_select = "Dates diverses"; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Choisir dates ???
+$s_period_last_year = 'L\'année dernière';
+$s_select = 'Choisir';
+$s_select_bystatus = 'Par état';
+$s_select_summbystatus = 'Synthèse par état';
+$s_select_bycat = "Synthèse par catégorie";
+$s_select_both = "Synthèse par état et catégorie";
+$s_show_as_graph = 'Afficher en graphique';
+$s_show_as_table = 'Afficher en tableau';
+$s_show_graph = 'Afficher graphique';
+$s_graph_page = 'Afficher graphique de l\'historique';
+$s_graph_bug_page_link = 'Graphique';
 ?>
