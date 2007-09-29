@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.88 2007-08-24 19:04:38 nuclear_eclipse Exp $
+	# $Id: bug_view_page.php,v 1.89 2007-09-29 00:07:57 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -354,7 +354,7 @@
 </tr>
 <?php } # has tag_view access ?>
 
-<?php if ( access_has_global_level( config_get( 'tag_attach_threshold' ) ) ) { ?>
+<?php if ( access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category"><?php echo lang_get( 'tag_attach_long' ) ?></td>
 	<td colspan="5">

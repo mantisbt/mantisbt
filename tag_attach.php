@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_attach.php,v 1.1 2007-08-24 19:04:39 nuclear_eclipse Exp $
+	# $Id: tag_attach.php,v 1.2 2007-09-29 00:07:57 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -19,7 +19,7 @@
 	$f_tag_select = gpc_get_int( 'tag_select' );
 	$t_user_id = auth_get_current_user_id();
 
-	access_ensure_global_level( config_get( 'tag_attach_threshold' ) );
+	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id, $t_user_id );
 
 	$t_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
 	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
