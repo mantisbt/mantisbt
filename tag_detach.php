@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_detach.php,v 1.1 2007-08-24 19:04:39 nuclear_eclipse Exp $
+	# $Id: tag_detach.php,v 1.2 2007-09-29 00:35:50 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -17,13 +17,14 @@
 
 	$f_tag_id = gpc_get_int( 'tag_id' );
 	$f_bug_id = gpc_get_int( 'bug_id' );
+	$t_user_id = auth_get_current_user_id();
 
 	$t_tag_row = tag_get( $f_tag_id );
 	$t_tag_bug_row = tag_bug_get_row( $f_tag_id, $f_bug_id );
 
-	if ( ! ( access_has_global_level( config_get( 'tag_detach_threshold' ) ) 
-		|| ( auth_get_current_user_id() == $t_tag_bug_row['user_id'] )
-			&& access_has_global_level( config_get( 'tag_detach_own_threshold' ) ) ) ) 
+	if ( ! ( access_has_bug_level( config_get( 'tag_detach_threshold' ), $f_bug_id, $t_user_id ) 
+		|| ( $t_user_id == $t_tag_bug_row['user_id'] )
+			&& access_has_bug_level( config_get( 'tag_detach_own_threshold' ), $f_bug_id, $t_user_id ) ) ) 
 	{
 		access_denied();
 	}
