@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.362 2007-09-28 01:57:56 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.363 2007-09-29 07:01:39 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -360,6 +360,7 @@
 		'finnish',
 		'french',
 		'german',
+		'german_eintrag',
 		'greek',
 		'hebrew',
 		'hungarian',
