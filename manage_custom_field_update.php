@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_update.php,v 1.18 2007-09-25 23:52:10 nuclear_eclipse Exp $
+	# $Id: manage_custom_field_update.php,v 1.19 2007-09-30 02:55:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -47,16 +47,15 @@
 	html_meta_redirect( $f_return );
 
 	html_page_top2();
-?>
 
-<br />
+	echo '<br />';
+	echo '<div align="center">';
 
-<div align="center">
-<?php
 	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $f_return, lang_get( 'proceed' ) );
-?>
-</div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	echo '</div>';
+
+	html_page_bottom1( __FILE__ );
+?>

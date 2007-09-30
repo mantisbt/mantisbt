@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.65 2007-09-05 11:53:41 zakman Exp $
+	# $Id: custom_field_api.php,v 1.66 2007-09-30 02:55:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -245,11 +245,12 @@
 
 		$c_name = db_prepare_string( trim( $p_name ) );
 
-		if ( is_blank( $p_name ) ) {
+		if ( is_blank( $c_name ) ) {
+			error_parameters( 'name' );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		custom_field_ensure_name_unique( $p_name );
+		custom_field_ensure_name_unique( $c_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "INSERT INTO $t_custom_field_table
@@ -290,8 +291,12 @@
 		$c_require_resolved = db_prepare_bool( 	 $p_def_array['require_resolved'] );
 		$c_require_closed	= db_prepare_bool( 	 $p_def_array['require_closed']   );
 
-		if (( is_blank( $c_name ) ) ||
-			( $c_access_level_rw < $c_access_level_r ) ||
+		if ( is_blank( $c_name ) ) {
+			error_parameters( 'name' );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		if (( $c_access_level_rw < $c_access_level_r ) ||
 			( $c_length_min < 0 ) ||
 			( ( $c_length_max != 0 ) && ( $c_length_min > $c_length_max ) ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
@@ -300,7 +305,6 @@
 		if ( $c_advanced == true && ( $c_require_report == true || $c_require_update ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 		}
-
 
 		if ( !custom_field_is_name_unique( $c_name, $c_field_id ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );

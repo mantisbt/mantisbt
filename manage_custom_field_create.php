@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_create.php,v 1.16 2007-09-25 23:52:09 nuclear_eclipse Exp $
+	# $Id: manage_custom_field_create.php,v 1.17 2007-09-30 02:55:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,15 +21,6 @@
 
 	$f_name	= gpc_get_string( 'name' );
 
-	$f_name = trim( $f_name );
-	if ( is_blank( $f_name ) ) {
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
-
-	if ( ! custom_field_is_name_unique( $f_name ) ) {
-		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
-	}
-
 	$t_field_id = custom_field_create( $f_name );
 
 	if ( ON == config_get( 'custom_field_edit_after_create' ) ) {
@@ -37,21 +28,19 @@
 	} else {
 		$t_redirect_url = 'manage_custom_field_page.php';
 	}
-?>
-<?php
+
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();
-?>
 
-<br />
+	echo '<br />';
+	echo '<div align="center">';
 
-<div align="center">
-<?php
 	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	echo '</div>';
+
+	html_page_bottom1( __FILE__ );
+?>
