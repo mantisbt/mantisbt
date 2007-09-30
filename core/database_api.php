@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.70 2007-09-28 02:52:37 vboctor Exp $
+	# $Id: database_api.php,v 1.71 2007-09-30 01:32:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -157,7 +157,14 @@
 		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
 		$t_caller .= ":" . $t_backtrace[0]['line'];
-		$t_caller .= " " . $t_backtrace[1]['function'] . "()";
+		
+		# Is this called from another function?
+		if ( isset( $t_backtrace[1] ) ) {
+			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+		} else {
+			# or from a script directly?
+			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+		}
                 
 		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 
