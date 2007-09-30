@@ -1,31 +1,27 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.28 2005-02-25 00:18:39 jlatour Exp $
+	# $Id: account_prof_update.php,v 1.29 2007-09-30 02:56:01 vboctor Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# This page updates the users profile information then redirects to
 	# account_prof_menu_page.php
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'profile_api.php' );
-?>
-<?php
+
 	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
-?>
-<?php
+
 	$f_profile_id	= gpc_get_int( 'profile_id' );
 	$f_platform		= gpc_get_string( 'platform' );
 	$f_os			= gpc_get_string( 'os' );
