@@ -6,10 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.13 2007-09-25 23:52:11 nuclear_eclipse Exp $
+	# $Id: manage_proj_create_page.php,v 1.14 2007-10-02 04:51:29 vboctor Exp $
 	# --------------------------------------------------------
 
-	require_once( 'core.php' )
+	require_once( 'core.php' );
 
 	auth_reauthenticate();
 
