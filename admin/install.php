@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.37 2007-09-25 04:50:47 vboctor Exp $
+	# $Id: install.php,v 1.38 2007-10-02 02:30:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	error_reporting( E_ALL );
@@ -295,8 +295,8 @@ if ( 2 == $t_install_state ) {
 
 		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === FALSE ) {
-				print "Failed to set schema: " . $g_db->errorMsg();
+			if ( $result === false ) {
+				echo $g_db->errorMsg();
 			}
 		}			
 		
@@ -356,8 +356,8 @@ if ( 2 == $t_install_state ) {
 		if ( $f_db_type == 'db2' ) {
 			echo "<br />SET SCHEMA " . $f_db_schema;
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === FALSE ) {
-				echo 'Failed to set schema: ', $g_db->errorMsg();
+			if ( $result === false ) {
+				echo $g_db->errorMsg();
 			}
 		}		
 		
@@ -533,7 +533,7 @@ if ( 3 == $t_install_state ) {
 
 			if ( $rs->EOF ) {
 				$t_result = false;
-				echo '<b>Failed to set schema: ', $g_db->errorMsg();
+				echo $g_db->errorMsg();
 			} else {
 				$t_result = &$g_db->execute( 'set schema ' . $f_db_schema );
 			}
@@ -554,7 +554,7 @@ if ( 3 == $t_install_state ) {
 			$rs = &$g_db->Execute("CREATE SCHEMA "   . $f_db_schema  );   
 
 			if ( !$rs ) {
-				$t_result = FALSE;
+				$t_result = false;
 				print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' .  db_error_msg() . ' )' );
 				$t_install_state--;	# db creation failed, allow user to re-enter user/password info
 			} else {
@@ -589,8 +589,8 @@ if ( 3 == $t_install_state ) {
 
 		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === FALSE ) {
-				echo 'Failed to set schema: ', $g_db->errorMsg();
+			if ( $result === false ) {
+				echo $g_db->errorMsg();
 			}
 		}
 
@@ -624,8 +624,8 @@ if ( 3 == $t_install_state ) {
 
 		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === FALSE ) {
-				echo 'Failed to set schema: ', $g_db->errorMsg();
+			if ( $result === false ) {
+				echo $g_db->errorMsg();
 			}
 		}
 
@@ -818,8 +818,8 @@ if ( 6 == $t_install_state ) {
 
 		if ( $f_db_type == 'db2' ) {
 			$result = &$g_db->execute('set schema ' . $f_db_schema);
-			if ( $result === FALSE ) {
-				echo 'Failed to set schema: ', $g_db->errorMsg();
+			if ( $result === false ) {
+				echo $g_db->errorMsg();
 			}
 		}
 	?>
