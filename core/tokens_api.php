@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.7 2007-10-02 01:01:34 nuclear_eclipse Exp $
+	# $Id: tokens_api.php,v 1.8 2007-10-02 04:36:24 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
@@ -69,13 +69,20 @@
 		}
 	}
 
+	/**
+	 * Get a token's value or null if not found
+	 * @param integer Token type
+	 * @param integer User ID (null for current user)
+	 * @return array Token row
+	 */
 	function token_get_value( $p_type, $p_user_id = null ) {
 		$t_token = token_get( $p_type, $p_user_id );
+
 		if ( null != $t_token ) {
 			return $t_token['value'];
-		} else {
-			return null;
 		}
+
+		return null;
 	}
 
 	/**
@@ -90,10 +97,10 @@
 		$t_token = token_get( $p_type, $p_user_id );
 		if ( $t_token == null ) {
 			return token_create( $p_type, $p_value, $p_expiry, $p_user_id );
-		} else { 
-			token_update( $t_token['id'], $p_value, $p_expiry );
-			return $t_token['id'];
 		}
+ 
+		token_update( $t_token['id'], $p_value, $p_expiry );
+		return $t_token['id'];
 	}
 
 	/**
@@ -105,10 +112,11 @@
 		token_ensure_exists( $p_token_id );
 
 		$c_token_id = db_prepare_int( $p_token_id );
-		$c_token_expiry = db_timestamp( db_date(time() + $p_expiry) );
+		$c_token_expiry = db_timestamp( db_date( time() + $p_expiry ) );
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "UPDATE $t_tokens_table SET expiry=$c_token_expiry
+		$query = "UPDATE $t_tokens_table
+					SET expiry=$c_token_expiry
 					WHERE id='$c_token_id'";
 		db_query( $query );
 
@@ -191,11 +199,12 @@
 		$c_token_id = db_prepare_int( $p_token_id );
 		$c_value = db_prepare_string( $p_value );
 		$c_expiry = db_timestamp( db_date(time() + $p_expiry) );
-		
+
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
 		$query = "UPDATE $t_tokens_table 
-					SET value='$c_value', expiry=$c_expiry";
+					SET value='$c_value', expiry=$c_expiry
+					WHERE id=$c_token_id";
 		db_query( $query );
 
 		return true;
@@ -223,18 +232,21 @@
 	 * @param integer Token type
 	 */
 	function token_purge_expired( $p_token_type = null ) {
+		global $g_tokens_purged;
+
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
-		# Remove
+
 		$query = "DELETE FROM $t_tokens_table WHERE ";
 		if ( !is_null( $p_token_type ) ) {
 			$c_token_type = db_prepare_int( $p_token_type );
 			$query .= " type='$c_token_type' AND ";
 		}
-		$query .= db_now() . " > expiry ";
+
+		$query .= db_now() . ' > expiry';
 		db_query( $query );
-		
-		global $t_tokens_purged;
-		$t_tokens_purged = true;
+
+		$g_tokens_purged = true;
+
 		return true;
 	}
 
@@ -243,12 +255,11 @@
 	 * @param integer Token type
 	 */
 	function token_purge_expired_once( $p_token_type = null ) {
-		global $t_tokens_purged;
-		if ( ! $t_tokens_purged ) {
+		global $g_tokens_purged;
+		if ( !$g_tokens_purged ) {
 			token_purge_expired();
 		}
 	}
 
 	# Set up global for token_purge_expired_once()
-	global $t_tokens_purged;
-	$t_tokens_purged = false;
+	$g_tokens_purged = false;
