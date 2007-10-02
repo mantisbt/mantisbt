@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.6 2007-09-18 13:06:25 nuclear_eclipse Exp $
+	# $Id: tokens_api.php,v 1.7 2007-10-02 01:01:34 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
@@ -71,7 +71,11 @@
 
 	function token_get_value( $p_type, $p_user_id = null ) {
 		$t_token = token_get( $p_type, $p_user_id );
-		return $t_token['value'];
+		if ( null != $t_token ) {
+			return $t_token['value'];
+		} else {
+			return null;
+		}
 	}
 
 	/**
