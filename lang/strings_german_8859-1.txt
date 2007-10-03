@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
@@ -14,13 +14,13 @@
 	#
 	###########################################################################
 	# German strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.4 $
-	# $Author: achumakov $
-	# $Date: 2006-12-30 09:11:22 $
+	# $Revision: 1.5 $
+	# $Author: vboctor $
+	# $Date: 2007-10-03 04:56:42 $
 	#
-	# $Id: strings_german_8859-1.txt,v 1.4 2006-12-30 09:11:22 achumakov Exp $
+	# $Id: strings_german_8859-1.txt,v 1.5 2007-10-03 04:56:42 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -40,9 +40,11 @@ $s_actiongroup_menu_update_status = 'Status ändern';
 $s_actiongroup_menu_update_view_status = 'Anzeigestatus ändern';
 $s_actiongroup_menu_update_category = 'Kategorie ändern';
 $s_actiongroup_menu_set_sticky = 'Fixierung setzen/lösen';
-$s_actiongroup_menu_update_field = 'Aktualisiere %s';
+$s_actiongroup_menu_update_field = 'Bearbeiten %s';
 $s_actiongroup_menu_update_target_version = 'Zielversion ändern';
 $s_actiongroup_menu_update_fixed_in_version = 'Erledigungs-Version ändern';
+$s_actiongroup_menu_add_note = 'Notiz hinzufügen';
+$s_actiongroup_menu_attach_tags = 'Tag zuordnen';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
 
 # new strings:
@@ -53,7 +55,7 @@ $s_date_order = 'Sortieren nach Datum';
 $s_print_all_bug_page_link = 'Berichte drucken';
 $s_csv_export = 'CSV-Export';
 $s_login_anonymously = 'Anonym anmelden';
-$s_anonymous = 'Anonymous';
+$s_anonymous = 'anonym';
 $s_jump_to_bugnotes = 'Zu Notizen wechseln';
 $s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH. Alle Benutzer haben Zugang zu diesem Projekt.';
 $s_private_project_msg = 'Dieses Projekt ist PRIVAT. Nur Administratoren und berechtigte Benutzer haben Zugang.';
@@ -66,6 +68,8 @@ $s_jump = 'Zu Problem springen';
 $s_copy_users = 'Benutzer kopieren';
 $s_copy_categories_from = 'Kategorien kopieren von';
 $s_copy_categories_to = 'Kategorien kopieren nach';
+$s_copy_versions_from = 'Versionen kopieren von';
+$s_copy_versions_to = 'Versionen kopieren nach';
 $s_copy_users_from = 'Benutzer kopieren von';
 $s_copy_users_to = 'Benutzer kopieren nach';
 $s_bug_history = 'Problem-Historie';
@@ -85,6 +89,8 @@ $s_delete_bugnote_sure_msg = 'Möchten Sie diese Notiz wirklich löschen?';
 $s_bug_relationships = 'Problem-Beziehungen';
 $s_empty_password_sure_msg = 'Der Benutzer hat ein leeres Passwort. Möchten Sie trotzdem fortfahren?';
 $s_empty_password_button = 'Leeres Passwort benutzen';
+$s_reauthenticate_title = 'Authentifizieren';
+$s_reauthenticate_message = 'Sie betreten eine abgesicherte Seite und Ihre sichere Session ist abgelaufen. Bitte authentifizieren Sie sich, um fortzufahren.';
 
 $s_duplicate_of = 'Duplikat von';
 $s_has_duplicate = 'hat Duplikat';
@@ -129,14 +135,14 @@ $s_category_bugs_conf_msg = 'Problem-Kategorie wählen';
 $s_set_sticky_bugs_conf_msg = 'Sind Sie sicher, dass Sie die Fixierung dieser Probleme ändern wollen?';
 $s_fixed_in_version_bugs_conf_msg = 'Erledigungs-Version auswählen';
 $s_target_version_bugs_conf_msg = 'Zielversion auswählen';
-$s_close_group_bugs_button = 'Probleme schließen' ;
-$s_delete_group_bugs_button = 'Probleme löschen' ;
-$s_move_group_bugs_button = 'Probleme verschieben' ;
-$s_copy_group_bugs_button = 'Probleme kopieren' ;
-$s_assign_group_bugs_button = 'Probleme zuordnen' ;
-$s_resolve_group_bugs_button = 'Probleme erledigen' ;
-$s_priority_group_bugs_button = 'Priorität ändern' ;
-$s_status_group_bugs_button = 'Status ändern' ;
+$s_close_group_bugs_button = 'Probleme schließen';
+$s_delete_group_bugs_button = 'Probleme löschen';
+$s_move_group_bugs_button = 'Probleme verschieben';
+$s_copy_group_bugs_button = 'Probleme kopieren';
+$s_assign_group_bugs_button = 'Probleme zuordnen';
+$s_resolve_group_bugs_button = 'Probleme erledigen';
+$s_priority_group_bugs_button = 'Priorität ändern';
+$s_status_group_bugs_button = 'Status ändern';
 $s_category_group_bugs_button = 'Kategorie ändern';
 $s_view_status_group_bugs_button = 'Anzeigestatus ändern';
 $s_set_sticky_group_bugs_button = 'Fixierung ändern';
@@ -144,11 +150,11 @@ $s_fixed_in_version_group_bugs_button = 'Erledigungs-Version ändern';
 $s_target_version_group_bugs_button = 'Zielversion ändern';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Grafikzusammenstellung nach Status' ;
-$s_graph_imp_priority_title = 'Grafikzusammenstellung  nach Priorität' ;
+$s_graph_imp_status_title = 'Grafikzusammenstellung nach Status';
+$s_graph_imp_priority_title = 'Grafikzusammenstellung nach Priorität';
 $s_graph_imp_severity_title = 'Grafikzusammenstellung nach Schweregrad';
 $s_graph_imp_category_title = 'Grafikzusammenstellung nach Kategorie';
-$s_graph_imp_resolution_title = 'Grafikzusammenstellung  nach Lösung';
+$s_graph_imp_resolution_title = 'Grafikzusammenstellung nach Lösung';
 $s_by_status_pct = 'nach Status Prozent';
 $s_by_priority_pct = 'nach Priorität Prozent';
 $s_by_severity_pct = 'nach Schweregrad Prozent';
@@ -181,14 +187,14 @@ $s_printing_preferences_title = 'Felder zum Drucken auswählen';
 $s_printing_options_link = 'Druckoptionen';
 
 # word and excel export
-$s_bugnote_title = 'Problemnotiz Bearbeiter' ;
+$s_bugnote_title = 'Problemnotiz Bearbeiter';
 $s_bugnote_date = 'Datum der Problemnotiz';
 $s_bugnote_description = 'Problemnotiz Beschreibung';
 
 $s_error_no_proceed = 'Bitte benutzen Sie die "Zurück"-Taste Ihres Browsers, um auf die vorhergehende Seite zurückzukehren. Dort können Sie das hier angezeigte Problem korrigieren oder eine andere Aktion ausführen. Über das Menü können Sie auch direkt in eine neue Abteilung wechseln.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies dem Ihnen zugeordneten Adminstrator mitteilen.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies dem Ihnen zugeordneten Administrator mitteilen.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL Fehler entdeckt. Melden Sie dieses an ';
 $MANTIS_ERROR[ERROR_REPORT] = 'Während des Reports trat ein Fehler auf.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Keine Datei angegeben';
@@ -199,12 +205,12 @@ $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ein Projekt mit diesem Namen ist berei
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ein notwendiges Feld war leer. Überprüfen Sie Ihre Eingabe.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dieses Konto ist geschützt. Sie können nicht darauf zugreifen, bevor der Schutz aufgehoben ist.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Zugang verweigert.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. PHP Dateiuploads könnten deaktiviert sein. Bitten Sie den Administrator, mit dem admin_check  Skript dieses Problem zu untersuchen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. PHP Dateiuploads könnten deaktiviert sein. Bitten Sie den Administrator, mit dem admin_check Skript dieses Problem zu untersuchen.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrscheinlich liegt die Dateigröße über der erlaubten für diese PHP-Installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption \'%s\' nicht gefunden.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Die Konfigurationsoption \'%s\' wurde nicht in der Datenbank gefunden. Sie muss in config_inc.php definiert werden.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette \'%s\' nicht gefunden.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
@@ -212,7 +218,7 @@ $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Keine Verbindung zum FTP-Server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Der Problembearbeiter hat keine ausreichenden Rechte, um ein Problem mit diesem Status zu bearbeiten.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname.  Projektnamen können nicht leer sein.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname. Projektnamen können nicht leer sein.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Benutzer nicht gefunden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Die von Ihrem Browser gespeicherte Anmeldeinformation ist ungültig. Möglicherweise wurde Ihr Konto gelöscht.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Für diesen Benutzer konnten keine Voreinstellungen gefunden werden.';
@@ -225,6 +231,7 @@ $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Problem %d nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Der Filter, den Sie verwenden wollen, ist zu alt für eine Überarbeitung. Bitte neu erstellen.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Ungültige E-Mail-Adresse.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Es ist nicht erlaubt, Einweg-Emailadressen zu verwenden.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Dateityp für Uploads nicht erlaubt.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
@@ -237,10 +244,11 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ein Projekt benutzt noch dieses Feld.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ungültiger Feldeintrag';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ungültige Definition für benutzerdefiniertes Feld';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentifizierung fehlgeschlagen';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP-Authentifizierung fehlgeschlagen';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindung zum LDAP Server fehlgeschlagen';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Aktualisierung des LDAP Eintrags fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Benutzereintrag nicht gefunden.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-Erweiterung ist nicht geladen.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Verbindung zur Datenbank fehlgeschlagen. Reportmeldung lautet #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Datenbankabfrage fehlgeschlagen. Die Reportmeldung lautet #%d: %s für die Abfrage: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Datenbankauswahl fehlgeschlagen. Reportmeldung der Datenbank lautet #%d: %s';
@@ -250,6 +258,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nicht gefunden.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Eine Version mit diesem Namen existiert bereits.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Der Benutzername ist ungültig. Erlaubt sind nur Buchstaben, Ziffern, Leerzeichen, Binde- und Unterstriche.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Der vollständige Name ist ungültig..';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Benutzer hat nicht die erforderliche Zugriffsberechtigung';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Der eingegebene "Vollständige Name" ist der Benutzername eines anderen Benutzers. Bitte geben Sie einen anderen ein.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsor-Unterstützung nicht aktiviert.';
@@ -272,9 +281,16 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Die Bestätigungs-URL 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. Anzahl der in Bearbeitung befindlichen Anfragen erreicht. Bitte setzen Sie sich mit Ihrem Systemadministrator in Verbindung.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Diese Operation würde eine Schleife in der Unterprojekthierarchie erzeugen.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sie können die Zugangsrechte des einzigen System-ADMINISTRATORS nicht ändern.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fehler bei der Seitenweiterleitung, versichern Sie sich, dass keine Leerzeichen außerhalb des PHP-Blocks (&lt;?php ?&gt;) in config_inc.php oder custom_*.php-Dateien existieren.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Die Twitter-Integration verlangt die PHP CURL-Erweiterung, die derzeit nicht installiert ist.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Es konnte kein Tag dieses Namens gefunden werden.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Es existiert bereits ein Tag dieses Namens.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Der Tag-Name ist ungültig.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Der Tag ist Eintrag nicht zugewiesen.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Dieser Tag ist bereits dem Eintrag zugewiesen.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Das Token konnte nicht gefunden werden.';
 
-$s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eigegebene Benutzer/Password ist falsch.';
+$s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eingegebene Benutzer/das Passwort ist falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 
 # General Strings
@@ -305,7 +321,7 @@ $s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zuge
 $s_resolution_enum_string = '10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
 $s_projection_enum_string = '10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Neuentwicklung';
 $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat';
-$s_sponsorship_enum_string = '0:Unbezahlt,1:Gefordert,2:Bezahlt';
+$s_sponsorship_enum_string = '0:unbezahlt,1:gefordert,2:bezahlt';
 
 # Email Strings
 $s_new_account_subject = 'Konto Registrierung';
@@ -367,7 +383,7 @@ $s_email_fixed_in_version = 'Erledigt in Version';
 $s_email_target_version = 'Zielversion';
 $s_email_date_submitted = 'Erstellt am';
 $s_email_last_modified = 'Letzte Aktualisierung';
-$s_email_summary =  'Zusammenfassung';
+$s_email_summary = 'Zusammenfassung';
 $s_email_description = 'Beschreibung';
 
 # account_delete.php
@@ -391,7 +407,7 @@ $s_confirm_password = 'Bestätige Passwort';
 $s_access_level = 'Zugangsberechtigung';
 $s_update_user_button = 'Benutzer aktualisieren';
 $s_verify_warning = 'Ihre Kontoinformationen wurden überprüft. Die von Ihnen erhaltene Konto Bestätigungsmeldung ist jetzt ungültig.';
-$s_verify_change_password = 'Sie müssen hier ein Paßwort vergeben, um sich wieder anmelden zu können.';
+$s_verify_change_password = 'Sie müssen hier ein Passwort vergeben, um sich wieder anmelden zu können.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kontoeinstellungen';
@@ -462,15 +478,15 @@ $s_own_sponsored = 'Von Ihnen gesponserte Probleme:';
 $s_issues_handled = 'Gesponserte Probleme, die Ihnen zugeordnet sind:';
 $s_no_own_sponsored = 'Sie haben keine Probleme gesponsert.';
 $s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
+$s_sponsor_verb = 'unterstützen';	# like in 'Sponsor it!'
 $s_amount = 'Betrag';
 $s_total_owing = 'Außenstände gesamt';
-$s_total_paid = 'Bezahlt gesamt';
+$s_total_paid = 'bezahlt gesamt';
 $s_sponsor_hide = 'Bezahlt und Erledigt verbergen';
 $s_sponsor_show = 'Alle anzeigen';
 
 # account_sponsor_update.php
-$s_payment_updated = 'Bazahlinformation aktualisiert.';
+$s_payment_updated = 'Bezahlinformation aktualisiert.';
 
 # account_update.php
 $s_account_updated_msg = 'Ihr Konto wurde erfolgreich aktualisiert...';
@@ -482,7 +498,7 @@ $s_password_updated = 'Passwort erfolgreich aktualisiert.';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'Die von Ihnen ausgewählten Probleme gehören zu verschiedenen Projekten.  Die unten stehenden Parameter berücksichtigen die Einstellungen aller Projekte. Falls das falsch ist, versuchen Sie eine Änderung mit weniger ausgewählten Problemen.';
+$s_multiple_projects = 'Die von Ihnen ausgewählten Probleme gehören zu verschiedenen Projekten. Die unten stehenden Parameter berücksichtigen die Einstellungen aller Projekte. Falls das falsch ist, versuchen Sie eine Änderung mit weniger ausgewählten Problemen.';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Das Problem wurde zugewiesen...';
@@ -501,7 +517,7 @@ $s_assigned_bug_button = 'Problem zuweisen';
 
 # bug_close.php
 $s_bug_close_msg = 'Das Problem wurde geschlossen...';
-$s_close_immediately   = 'Sofort schließen:';
+$s_close_immediately  = 'Sofort schließen:';
 
 # bug_close_page.php
 $s_closed_bug_title = 'Problem schließen';
@@ -544,7 +560,7 @@ $s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 $s_from = 'Von:';
 $s_to = 'An:';
 $s_on = 'Am';
-$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung bezüglich des folgenden Problems gesandt:';
+$s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung bezüglich des folgenden Problems gesandt';
 $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an';
 $s_bug_send_button = 'Absenden';
@@ -554,7 +570,7 @@ $s_reminder_monitor = 'Diese Empfänger beginnen auch, das Problem zu beobachten.
 $s_reminder_store = 'Diese Notiz wird mit dem Problem abgespeichert.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Bitte bestätigen Sie, dass Sie Problem %d für %s sponsern wollen.';
+$s_confirm_sponsorship = 'Bitte bestätigen Sie, dass Sie Problem %d mit %s sponsern möchten.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Problemeintrag erfolgreich aktualisiert...';
@@ -621,7 +637,7 @@ $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
 $s_edited_on = 'bearbeitet am: ';
 
 # file_api.php
-$s_show_content ='Show Content';
+$s_show_content = 'Zeige Inhalt';
 
 # index.php
 $s_click_to_login = 'Anmeldung: bitte hier klicken';
@@ -643,7 +659,7 @@ $s_select_project_button = 'Projekt wählen';
 
 # logout_page.php
 $s_logged_out_title = 'Abgemeldet...';
-$s_redirecting = '...Weiterleitung';
+$s_redirecting = '... Weiterleitung';
 $s_here = 'hier klicken';
 
 # lost_pwd_page.php
@@ -675,6 +691,8 @@ $s_create_user_button = 'Benutzer anlegen';
 # manage_page.php
 $s_hide_disabled = 'inaktive ausblenden';
 $s_filter_button = 'Filter';
+$s_create_filter_link = 'Permalink erzeugen';	# Permalink = Permanenter Link
+$s_create_short_link = 'Kurzen Link erzeugen';
 $s_manage_users_link = 'Benutzer verwalten';
 $s_manage_projects_link = 'Projekte verwalten';
 $s_manage_custom_field_link = 'Benutzerdefinierte Felder';
@@ -739,7 +757,7 @@ $s_workflow_change_access = 'Wer darf den Arbeitsablauf ändern';
 $s_access_change_access = 'Wer darf den Status ändern';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'Der Vorgabestatus von %s ist nicht in den nächsten Stati von %s ausgewählt. Er wird ignoriert.';
+$s_default_not_in_flow = 'Der Vorgabestatus von %s ist nicht in den nächsten zulässigen Statuswerten von %s enthalten. Er wird ignoriert.';
 
 # manage_config_work_threshold_page
 $s_assign_issue = 'Ein Problem zuweisen';
@@ -762,14 +780,14 @@ $s_in_project = 'im Projekt';
 $s_delete_config_button = 'Einstellungen löschen';
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
-$s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_report = 'Konfigurations-Report';
+$s_database_configuration = 'Datenbank-Konfiguration';
+$s_configuration_option = 'Konfigurations-Option';
+$s_configuration_option_type = 'Typ';
+$s_configuration_option_value = 'Wert';
+$s_all_users = 'Alle Benutzer';
+$s_set_configuration_option = 'Speichere Konfigurations-Option';
+$s_delete_config_sure_msg = 'Sind Sie sicher, dass Sie diese Konfigurationsoption löschen möchten?';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt wurde hinzugefügt...';
@@ -809,6 +827,8 @@ $s_public = 'öffentlich';
 $s_private = 'privat';
 $s_update_project_button = 'Projekt aktualisieren';
 $s_delete_project_button = 'Projekt löschen';
+$s_copy_from = 'Kopiere von';
+$s_copy_to = 'Kopiere nach';
 $s_categories_and_version_title = 'Kategorien und Versionen';
 $s_categories = 'Kategorien';
 $s_add_category_button = 'Kategorie hinzufügen';
@@ -1054,7 +1074,7 @@ $s_by_resolution = 'Nach Lösung';
 $s_by_category = 'Nach Kategorie';
 $s_by_priority = 'Nach Priorität';
 $s_by_developer = 'Nach Entwickler';
-$s_by_reporter ='Nach Reporter';
+$s_by_reporter = 'Nach Reporter';
 $s_reporter_by_resolution = 'Reporter nach Lösungen';
 $s_reporter_effectiveness = 'Reporter Effektivität';
 $s_developer_by_resolution = 'Entwickler nach Lösungen';
@@ -1062,6 +1082,10 @@ $s_percentage_fixed = '% repariert';
 $s_percentage_errors = '% fehlerhaft';
 $s_errors = 'Fehlerhaft';
 $s_total = 'Gesamt';
+$s_balance = 'Bilanz';
+$s_most_active = 'Am aktivsten';
+$s_score = 'Punktzahl';
+$s_days = 'Tage';
 $s_time_stats = 'Zeitwerte für Fehlerbehebung (Tage)';
 $s_longest_open_bug = 'am längsten offenes Problem';
 $s_longest_open = 'am längsten geöffnet';
@@ -1073,19 +1097,21 @@ $s_orct = '(offen/erledigt/geschlossen/gesamt)';
 
 # view_all_bug_page.php
 $s_any = 'alle';
+$s_all = 'alle';
 $s_show = 'Zeige';
 $s_changed = 'geändert (Std.)';
 $s_viewing_bugs_title = 'Probleme anzeigen';
 $s_updated = 'Aktualisiert';
 $s_sticky = 'Fixierte Probleme anzeigen';
 $s_sort = 'Sortieren nach';
-$s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_issue_id = 'Problem #';
+$s_recently_visited = 'Kürzlich geöffnet';
+$s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'keine';
-$s_current = 'current';
-$s_search ='Suche';
+$s_current = 'aktuelle';
+$s_search = 'Suche';
 $s_view_prev_link = 'Zeige vorherige';
 $s_view_next_link = 'Zeige nächste';
 $s_prev = 'Zurück';
@@ -1119,7 +1145,7 @@ $s_query_delete_msg = 'Möchten Sie diesen Filter wirklich löschen?';
 # view_bug_advanced_page.php
 $s_view_simple_link = 'einfache Anzeige';
 $s_viewing_bug_advanced_details_title = 'Erweiterte Problemanzeige';
-$s_product_build = 'Produktbuild';
+$s_product_build = 'Produkt-Build';
 $s_system_profile = 'Systembeschreibung';
 $s_update_bug_button = 'Aktualisieren';
 $s_bug_assign_to_button = 'Zuordnen zu';
@@ -1144,7 +1170,7 @@ $s_monitoring_user_list = 'Benutzer';
 # bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'Keine Benutzer sponsern dieses Problem.';
 $s_users_sponsoring_bug = 'Benutzer sponsern dieses Problem';
-$s_sponsors_list = 'Sponsoren Liste';
+$s_sponsors_list = 'Sponsoren-Liste';
 $s_total_sponsorship_amount = 'Gesamte Sponsorenschaft = %s';
 
 # custom field strings
@@ -1175,11 +1201,14 @@ $s_custom_field_require_report = 'Erforderlich für neue Reports';
 $s_custom_field_require_update = 'Erforderlich beim Aktualisieren';
 $s_custom_field_require_resolved = 'Erforderlich beim Erledigen';
 $s_custom_field_require_closed = 'Erforderlich beim Schließen';
+$s_link_custom_field_to_project_title = 'Benutzerdefiniertes Feld dem Projekt zuordnen';
+$s_link_custom_field_to_project_button = 'Benutzerdefiniertes Feld zuordnen';
+$s_linked_projects = 'Verknüpfte Projekte';
 
 $s_custom_field_sequence = 'Reihenfolge';
 $s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkommazahlen,3:Aufzählung,4:E-Mail,5:Kontrollkästchen,6:Liste,7:Mehrfachauswahl-Liste,8:Datum';
 
-$s_confirm_used_custom_field_deletion = 'Dieses Feld wird derzeit von mindestens einem Projekt verwendet. Wenn Sie fortfahren, werden alle Werte für dieses Feld dauerhaft   gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden. Um das Feld nicht zu löschen, klicken Sie bitten den "Zurück"-Knopf  in Ihrem Web-Browser. Um fortzufahren, klicken Sie bitten den "Feld löschen"-Knopf.';
+$s_confirm_used_custom_field_deletion = 'Dieses Feld wird derzeit von mindestens einem Projekt verwendet. Wenn Sie fortfahren, werden alle Werte für dieses Feld dauerhaft gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden. Um das Feld nicht zu löschen, klicken Sie bitten den "Zurück"-Knopf in Ihrem Web-Browser. Um fortzufahren, klicken Sie bitten den "Feld löschen"-Knopf.';
 $s_confirm_custom_field_deletion = 'Möchten Sie dieses benutzerdefinierte Feld und alle zugehörigen Werte wirklich löschen?';
 $s_field_delete_button = 'Feld löschen';
 
@@ -1211,17 +1240,18 @@ $s_sponsorship_paid = 'Sponsorenschaft bezahlt';
 $s_sponsorship_more_info = 'Mehr Informationen über die Sponsorenschaft';
 $s_sponsorship_total = 'Gesamtsponsorenschaft';
 
-# URL explaining the process of sponsoring an issue.  This is defined here rather than
-# in the config to allow for a URL per language.  This can be set to an empty string if there
+# URL explaining the process of sponsoring an issue. This is defined here rather than
+# in the config to allow for a URL per language. This can be set to an empty string if there
 # is not need to provide such process information.
 $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Änderungsprotokoll';
+$s_changelog_empty = 'Keine Änderungshistorie verfügbar';
 
 # Roadmap
 $s_roadmap = 'Roadmap';
-$s_resolved_progress = '%d von %d Einträgen erledigt.  Fortschritt (%d%%).';
+$s_resolved_progress = '%d von %d Einträgen erledigt. Fortschritt (%d%%).';
 
 # Http auth
 $s_http_auth_realm = 'Mantis Login';
@@ -1247,6 +1277,7 @@ $s_bug_created_from = 'Problem angelegt von';
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = 'Beziehungs-Grafik';
+$s_viewing_bug_dependency_graph_title = 'Abhängigkeits-Grafik';
 $s_relation_graph = 'Grafik der Beziehungen';
 $s_dependency_graph = 'Grafik der Abhängigkeiten';
 $s_vertical = 'Vertikal';
@@ -1256,16 +1287,16 @@ $s_view_issue = 'Problem ansehen';
 # Source Control Integration
 $s_checkin = 'Einchecken';
 
-# Pemissions report
+# Permissions report
 $s_perm_rpt_capability = 'Fähigkeiten';
 $s_view = 'Ansehen';
 $s_issues = 'PROBLEME';
 $s_report_issue = 'Problem melden';
 $s_update_issue = 'Problem aktualisieren';
 $s_monitor_issue = 'Problem beobachten';
-$s_handle_issue = 'Problem  bearbeiten';
+$s_handle_issue = 'Problem bearbeiten';
 $s_move_issue = 'Problem verschieben';
-$s_delete_issue = 'Problem  löschen';
+$s_delete_issue = 'Problem löschen';
 $s_reopen_issue = 'Problem erneut öffnen';
 $s_view_private_issues = 'Private Probleme ansehen';
 $s_update_readonly_issues = 'Schreibgeschützte Probleme aktualisieren';
@@ -1329,4 +1360,80 @@ $s_on_or_after = 'Ab';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Tagging
+$s_tags = 'Tags';
+$s_tag_details = 'Tag-Details: %s';
+$s_tag_id = 'Tag-ID';
+$s_tag_name = 'Name';
+$s_tag_creator = 'angelegt von';
+$s_tag_created = 'angelegt am';
+$s_tag_updated = 'zuletzt geändert';
+$s_tag_description = 'Tag-Beschreibung';
+$s_tag_statistics = 'Verwendungs-Statistik';
+$s_tag_update = 'Tag aktualisieren: %s';
+$s_tag_update_return = 'Zurück zu Tag';
+$s_tag_update_button = 'Tag aktualisieren';
+$s_tag_delete_button = 'Tag löschen';
+$s_tag_delete_message = 'Sind sie sicher, dass Sie diesen Tag löschen wollen?';
+$s_tag_existing = 'Existierende Tags';
+$s_tag_none_attached = 'Keine Tags zugeordnet.';
+$s_tag_attach = 'Zuordnen';
+$s_tag_attach_long = 'Tags zuordnen';
+$s_tag_attach_failed = 'Tag-Zuordnung misslang.';
+$s_tag_detach = 'Entferne \'%s\'';
+$s_tag_separate_by = "(Trenne durch '%s')";
+$s_tag_invalid_name = 'Ungültiger Tag-Name.';
+$s_tag_create_denied = 'Anlegen nicht gestattet.';
+$s_tag_filter_default = 'Zugeordnete Einträge (%s)';
+$s_tag_history_attached = 'Tag zugeordnet';
+$s_tag_history_detached = 'Tag entfernt';
+$s_tag_history_renamed = 'Tag umbenannt';
+$s_tag_related = 'Verwandte Tags';
+$s_tag_related_issues = 'Gemeinsame Einträge (%s)';
+$s_tag_stats_attached = 'Zugeordnete Einträge: %s';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Abrechnung';
+$s_time_tracking = 'Zeiterfassung';
+$s_time_tracking_get_info_button = 'Zeiterfassungs-Informationen abfragen';
+$s_time_tracking_cost_per_hour = 'Kosten / Stunde';
+$s_time_tracking_cost = 'Kosten';
+$s_total_time_for_issue = 'Gesamtzeit für den Eintrag = %s';
+$s_from_date = 'Von';
+$s_to_date = 'Bis';
+
+$s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
+
+# Twitter Integration
+$s_twitter_resolved = "%d: [%s] %s (erledigt von %s in %s)";
+$s_twitter_resolved_no_version = "%d: [%s] %s (erledigt von %s)";
+
+# Project Page
+$s_development_team = 'Entwicklungs-Team';
+
+# bug_graph pages
+$s_all_dates = 'Alle Datumswerte';
+$s_period_none = 'Keine';
+$s_period_this_week = 'Diese Woche';
+$s_period_last_week = 'Letzte Woche';
+$s_period_two_weeks = 'Letzte zwei Wochen';
+$s_period_this_month = 'Dieser Monat';
+$s_period_last_month = 'Letzter Monat';
+$s_period_this_quarter = 'Dieses Quartal';
+$s_period_last_quarter = 'Letztes Quartal';
+$s_period_year_to_date = 'Jahr nach Datum';
+$s_period_select = 'Beliebiges Datum';
+$s_period_last_year = 'Letztes Jahr';
+$s_select = 'Bitte wählen Sie';
+$s_select_bystatus = 'nach Status';
+$s_select_summbystatus = 'Übersicht nach Status';
+$s_select_bycat = 'Übersicht nach Kategorie';
+$s_select_both = 'Übersicht nach Status und Kategorie';
+$s_show_as_graph = 'Als Grafik anzeigen';
+$s_show_as_table = 'Als Tabelle anzeigen';
+$s_show_graph = 'Grafik anzeigen';
+$s_graph_page = 'Grafische Eintrags-Historie';
+$s_graph_bug_page_link = 'Grafik';
+
 ?>
