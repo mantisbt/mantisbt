@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.72 2007-10-03 08:00:53 vboctor Exp $
+	# $Id: database_api.php,v 1.73 2007-10-03 14:33:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -147,14 +147,6 @@
 		global $g_queries_array, $g_db;
 
 		$t_start = microtime_float();
-
-		// If DB2, set fetch mode to numeric.
-		// DB2 driver seems to default to associative fetch mode
-		// (Get database type from $g_db->databaseType because
-		// during installation, $g_db_type is not yet available.)
-		if ( $g_db->databaseType == 'db2' ) {
-			$g_db->SetFetchMode( ADODB_FETCH_NUM );
-		}
 
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
