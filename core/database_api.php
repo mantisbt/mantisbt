@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.71 2007-09-30 01:32:42 vboctor Exp $
+	# $Id: database_api.php,v 1.72 2007-10-03 08:00:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -147,11 +147,21 @@
 		global $g_queries_array, $g_db;
 
 		$t_start = microtime_float();
+
+		// If DB2, set fetch mode to numeric.
+		// DB2 driver seems to default to associative fetch mode
+		// (Get database type from $g_db->databaseType because
+		// during installation, $g_db_type is not yet available.)
+		if ( $g_db->databaseType == 'db2' ) {
+			$g_db->SetFetchMode( ADODB_FETCH_NUM );
+		}
+
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
 		} else {
 			$t_result = $g_db->Execute( $p_query );
 		}
+
 		$t_elapsed = number_format( microtime_float() - $t_start, 4);
                 
 		$t_backtrace = debug_backtrace();
@@ -216,12 +226,20 @@
 		global $g_db;
 
 		if ( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-			$p_result->Move($p_index1);
+			$p_result->Move( $p_index1 );
 			$t_result = $p_result->GetArray();
-			return $t_result[0][$p_index2];
-		} else {
-			return false;
+
+			if ( isset( $t_result[0][$p_index2] ) ) {
+				return $t_result[0][$p_index2];
+			}
+
+			// The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
+			// Get 2nd dimension and make it numerically indexed
+			$t_result = array_values( $t_result[0] );
+			return $t_result[$p_index2];
 		}
+
+		return false;
 	}
 
 	# --------------------
