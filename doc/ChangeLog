@@ -1,5 +1,63 @@
 Mantis ChangeLog
 
+2007.08.01  -  1.1.0rc1
+
+- 0008286: [security] Add .htaccess to block access to core/, doc/, lang/, packages/ (vboctor) - resolved.
+- 0008312: [security] Install script shouldn't include password in the form (jreese) - resolved.
+- 0008336: [security] Require re-login for high impact tasks (jreese) - resolved.
+- 0008340: [security] Changing password should create a new cookie_string (vboctor) - resolved.
+- 0008291: [administration] check.php: Use of undefined constant db_is_connected - assumed 'db_is_connected' (vboctor) - resolved.
+- 0008324: [administration] Rendering of "Manage Users" menu link ignores $g_manage_user_threshold (giallu) - resolved.
+- 0008343: [administration] Admin created users bypass realname validity check (vboctor) - resolved.
+- 0008380: [administration] Deleting old user Account results in Database inconsistency (vboctor) - resolved.
+- 0008231: [bugtracker] Summary "By Date" shows suspicious totals (giallu) - resolved.
+- 0008233: [bugtracker] Long standing issues report on summary page (giallu) - resolved.
+- 0008395: [bugtracker] Recently Visited is not displayed. (jreese) - resolved.
+- 0007809: [custom fields] Filter "none" on custom fields doesn't work (giallu) - resolved.
+- 0007996: [custom fields] Confusion in string values of enumerated custom field due to non strict comparison of strings (zakman) - resolved.
+- 0008371: [db db2] Use "days" instead of "to_days" when comparing dates for db2 (vboctor) - resolved.
+- 0008384: [db db2] db_table_exists() doesn't work in case of DB2 (vboctor) - resolved.
+- 0008385: [db db2] ADODB_db2._insert_id doesn't work (vboctor) - resolved.
+- 0008386: [db db2] ADODB_db2 uses an invalid time format which is not accepted by db2 (vboctor) - resolved.
+- 0008387: [db db2] adodb2-db2.DBTimeStamp uses TO_DATE() which doesn't work on DB2 (vboctor) - resolved.
+- 0008389: [db db2] Remove references to odbc_db2 driver from code (we only support db2) (vboctor) - resolved.
+- 0007690: [db mssql] number_format(); bad for SQL statments (vboctor) - resolved.
+- 0008327: [documentation] show_extended_project_browser can only be set to OFF or ON (vboctor) - resolved.
+- 0008252: [feature] Gravatars and case sensitivity of email addresses (giallu) - resolved.
+- 0008237: [graphs] Error in dependency graphs (vboctor) - resolved.
+- 0008206: [integration] Add (gr)avatars for users (giallu) - resolved.
+- 0006850: [localization] obsolete MANTIS_ERROR (giallu) - resolved.
+- 0007647: [localization] [de] Translation change from "Problem" (problem) to "Eintrag" (issue) (vboctor) - resolved.
+- 0007720: [localization] Japanese language translation patch (vboctor) - resolved.
+- 0007855: [localization] Priority colum header String not taken from strings file (vboctor) - resolved.
+- 0008423: [localization] Update German Localization (vboctor) - resolved.
+- 0008425: [localization] Update portuguese_brazil localization (vboctor) - resolved.
+- 0008428: [localization] Update French Localization (vboctor) - resolved.
+- 0008429: [localization] fix miscellanious errors in the german translation files (vboctor) - resolved.
+- 0008407: [performance] Add caller function info to queries list (giallu) - resolved.
+- 0008412: [performance] When showing queries show the time spent in SQL vs. PHP (vboctor) - resolved.
+- 0008413: [performance] Provide a way to show queries for an access level threshold (vboctor) - resolved.
+- 0007995: [other] Confusion in product_version values due to string comparisons with == operator (zakman) - resolved.
+- 0008188: [other] Consistent use of collapse_api.php (DGtlRift) - resolved.
+- 0008283: [other] $g_show_notices and $g_show_warnings should be marked as obsolete (vboctor) - resolved.
+- 0008285: [other] File Download generates an E_NOTICE (vboctor) - resolved.
+- 0008292: [other] my_view_inc: syntax error (vboctor) - resolved.
+- 0008341: [other] Xwiki integration (vboctor) - resolved.
+- 0008344: [other] Tokens API Clean-up and Changes (jreese) - resolved.
+- 0008388: [other] Undefined variable $p_this_var in helper_api.php (vboctor) - resolved.
+- 0008421: [other] Recently visted is showing some serialized filter instead of bug ids (vboctor) - resolved.
+- 0008295: [printing] Include the bug history in the printout (zakman) - resolved.
+- 0004614: [relationships] Relationship graph: sometimes arrows direction is not correct (vboctor) - resolved.
+- 0007846: [relationships] APPLICATION ERROR #1802: Relationship not found (vboctor) - resolved.
+- 0008269: [roadmap] Reporting a new issue, ADMIN/MANAGER/DEVELOPER should see field "Target Version" (jreese) - resolved.
+- 0008274: [tagging] Implement Keyword Tagging Features (jreese) - resolved.
+- 0008311: [tagging] System Notice: Undefined index 'tag_select' in view_all_bug_page.php (jreese) - resolved.
+- 0008337: [tagging] Blank page (no data) when invalid tag filter chosen (jreese) - resolved.
+- 0008368: [tagging] "Access Denied." when trying to attach a tag to an issue I reported (vboctor) - resolved.
+- 0008396: [tagging] Don't allow creating tags if user can't attach them (jreese) - resolved.
+- 0008246: [upgrade] Add support for running arbitrary functions (thraxisp) - resolved.
+- 0005093: [webpage] Rights in custom menu does not work (vboctor) - resolved.
+
 2007.08.01  -  1.1.0a4
 
 - 0008154: [security] Port: CVE-2007-3215: PHPMailer vulnerability (thraxisp) - resolved.
