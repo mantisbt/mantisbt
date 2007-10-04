@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2007.08.01  -  1.1.0rc1
+2007.10.03  -  1.1.0rc1
 
 - 0008286: [security] Add .htaccess to block access to core/, doc/, lang/, packages/ (vboctor) - resolved.
 - 0008312: [security] Install script shouldn't include password in the form (jreese) - resolved.
