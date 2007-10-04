@@ -17,11 +17,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.112 $
+	# $Revision: 1.113 $
 	# $Author: jbrugger $
-	# $Date: 2007-08-16 11:31:53 $
+	# $Date: 2007-10-04 12:27:38 $
 	#
-	# $Id: strings_spanish.txt,v 1.112 2007-08-16 11:31:53 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.113 2007-10-04 12:27:38 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -45,6 +45,7 @@ $s_actiongroup_menu_update_field = 'Actualizar %s';
 $s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
 $s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelta en Versión';
 $s_actiongroup_menu_add_note = 'Añadir Nota';
+$s_actiongroup_menu_attach_tags = 'Adjuntar Etiquetas';
 $s_actiongroup_bugs = 'Incidencias Seleccionadas';
 
 # new strings:
@@ -89,6 +90,8 @@ $s_delete_bugnote_sure_msg = '¿Está seguro que desea eliminar esta nota?';
 $s_bug_relationships = 'Relaciones';
 $s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está seguro que es lo que desea?';
 $s_empty_password_button = 'Usar Contraseña en Blanco';
+$s_reauthenticate_title = 'Autenticar';
+$s_reauthenticate_message = 'Está viendo una página segura, pero su sesión ha expirado. Por favor autentíquese para continuar.';
 
 $s_duplicate_of = "es un duplicado de";
 $s_has_duplicate = "está duplicada en";
@@ -280,6 +283,12 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación puede crear u
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No puede cambiar el nivel de acceso del único administrador en el sistema.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Error de redirección. Asegúrese que no haya espacios fuera del bloque PHP (&lt;?php ?&gt;) en config_inc.php o en los archivos custom_*.php.';
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'La integración con Twitter requiere la extensión CURL de PHP, que no está instalada.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'No se encuentra una etiqueta con ese nombre.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Ya existe una etiqueta con ese nombre.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'El nombre de la etiqueta no es válido.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esa etiqueta no está adjuntada a esa incidencia.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esa etiqueta ya estaba adjuntada a esa incidencia.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token no encontrado.';
 
 $s_login_error = 'Su cuenta puede estar deshabilitada o o bloqueada o el nombre de usuario/contraseña introducidos son incorrectos.';
 $s_login_cookies_disabled = 'Su navegador no soporta cookies, o las ha rechazado.';
@@ -724,7 +733,7 @@ $s_action_notify = 'Estableciendo marcadores de notificaciones de acción a';
 $s_notify_defaults_change_access = 'Quienes pueden modificar los valores por defecto de notificación';
 $s_notify_actions_change_access = 'Quienes pueden modificar notificaciones';
 $s_revert_to_system = "Borrar la configuración general de todos los proyectos";
-$s_revert_to_all_project = "Borrar la configuración individual de un proyecto específico";
+$s_revert_to_all_project = "Borrar la configuración específica de este proyecto";
 
 # manage_config_workflow_page
 $s_non_existent = 'no existente';
@@ -1098,6 +1107,7 @@ $s_sticky = 'Ver Incidencias Fijadas';
 $s_sort = 'Ordenado por';
 $s_issue_id = 'Incidencia #';
 $s_recently_visited = 'Visitadas recientemente';
+$s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'Ninguno';
@@ -1349,6 +1359,38 @@ $s_on_or_after = 'Durante o Después';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
+# Tagging
+$s_tags = 'Etiquetas';
+$s_tag_details = 'Detalles de la Etiqueta: %s';
+$s_tag_id = 'ID de Etiqueta';
+$s_tag_name = 'Nombre';
+$s_tag_creator = 'Creador';
+$s_tag_created = 'Fecha de Creación';
+$s_tag_updated = 'Fecha de Actualización';
+$s_tag_description = 'Descripción de la etiqueta';
+$s_tag_statistics = 'Estadísticas de Uso';
+$s_tag_update = 'Actualizar Etiqueta: %s';
+$s_tag_update_return = 'Volver a la Etiqueta';
+$s_tag_update_button = 'Actualizar Etiqueta';
+$s_tag_delete_button = 'Eliminar Etiqueta';
+$s_tag_delete_message = '¿Está seguro que desea eliminar esta etiqueta?';
+$s_tag_existing = 'Etiquetas existentes';
+$s_tag_none_attached = 'Sin etiquetas adjuntas.';
+$s_tag_attach = 'Adjuntar';
+$s_tag_attach_long = 'Adjuntar Etiquetas';
+$s_tag_attach_failed = 'Error al adjuntar etiquetas.';
+$s_tag_detach = 'Separar \'%s\'';
+$s_tag_separate_by = "(Separado por '%s')";
+$s_tag_invalid_name = 'Nombre de etiqueta no válido.';
+$s_tag_create_denied = 'Permiso de creación denegado.';
+$s_tag_filter_default = 'Incidencias Adjuntas (%s)';
+$s_tag_history_attached = 'Etiqueta Adjuntada';
+$s_tag_history_detached = 'Etiqueta Separada';
+$s_tag_history_renamed = 'Etiqueta Renombrada';
+$s_tag_related = 'Etiquetas Relacionadas';
+$s_tag_related_issues = 'Incidencias Compartidas (%s)';
+$s_tag_stats_attached = 'Incidencias Adjuntas: %s';
 
 # Time Tracking
 $s_time_tracking_billing_link = 'Facturación';
