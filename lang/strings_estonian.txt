@@ -5,18 +5,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	#
-	# Estonian: Villem Vannas, willu60@hotmail.com (14.09.2004)
- 	# Estonian: Klemens Kasemaa, Elion Ettevutted AS, klem (at) estpak.ee (27.01.2005)
+	# Estonian: Villem Vannas, willu60 (at) hotmail.com (14.09.2004)
+ 	# Estonian: Klemens Kasemaa, Elion Ettevõtted AS, klem (at) estpak.ee (27.01.2005)
 	#
 	###########################################################################
 	# Estonian strings for Mantis
-	# Based on strings_english.txt rev. 1.???
+	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.44 $
-	# $Author: achumakov $
-	# $Date: 2006-11-08 13:32:44 $
+	# $Revision: 1.45 $
+	# $Author: vboctor $
+	# $Date: 2007-10-05 06:50:58 $
 	#
-	# $Id: strings_estonian.txt,v 1.44 2006-11-08 13:32:44 achumakov Exp $
+	# $Id: strings_estonian.txt,v 1.45 2007-10-05 06:50:58 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -34,7 +34,7 @@ $s_actiongroup_menu_resolve = 'Lahenda';
 $s_actiongroup_menu_update_priority = 'Uuenda prioriteet';
 $s_actiongroup_menu_update_status = 'Uuenda olek';
 $s_actiongroup_menu_update_view_status = 'Uuenda vaate olek';
-$s_actiongroup_menu_update_category = 'Update Category';
+$s_actiongroup_menu_update_category = 'Uuenda kategooria';#20071004
 $s_actiongroup_menu_set_sticky = 'Määra/tühista kleepuvus';
 $s_actiongroup_menu_update_field = 'Uuenda %s';
 $s_actiongroup_bugs = 'Valitud kanded';
@@ -119,7 +119,7 @@ $s_resolve_bugs_conf_msg = 'Vali kande lahendus';
 $s_priority_bugs_conf_msg = 'Vali kande prioriteet';
 $s_status_bugs_conf_msg = 'Vali kande olek';
 $s_view_status_bugs_conf_msg = 'Vali kande vaate olek';
-$s_category_bugs_conf_msg = 'Choose issues category';
+$s_category_bugs_conf_msg = 'Vali kande kategooria'; #20071004
 $s_set_sticky_bugs_conf_msg = 'Oled kindel, et soovid määrata/tühistada selle kande kleepuvust?';
 $s_close_group_bugs_button = 'Sulge kanded' ;
 $s_delete_group_bugs_button = 'Kustuta kanded' ;
@@ -129,7 +129,7 @@ $s_assign_group_bugs_button = 'Määra kanded' ;
 $s_resolve_group_bugs_button = 'Lahenda kanded' ;
 $s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
 $s_status_group_bugs_button = 'Uuenda olekut' ;
-$s_category_group_bugs_button = 'Update Category';
+$s_category_group_bugs_button = 'Uuenda kategooria';
 $s_view_status_group_bugs_button = 'Uuenda vaate olekut';
 $s_set_sticky_group_bugs_button = 'Määra/tühista kleepuvus';
 
@@ -194,7 +194,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Faili üleslaadimine ebaõnnestus.  Põhjus
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Selle lehekülje jaoks kohustuslik parameeter on määramata.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Valitud kasutajanimi on juba kasutusel.  Palun mine tagasi ja vali mõni muu.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfiguratsiooni seadet \'%s\' ei leitud.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfiguratsiooni seadet \'%s\' ei saa andmebaasis määrata.  See tuleb määrata failis config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Stringi ei leitud.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Märkust ei leitud.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekti ei leitud.';
@@ -212,15 +212,15 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Eeldati massiivi, aga vastu võeti s
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu võeti massiiv.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Peab olema number: %s';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Kannet %d ei leitud.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filter %d not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded, please re-create it';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND]	 = 'Filtrit %d ei leitud.'; #20071004
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtrit, mida sa soovid kasutada, on liiga vana uuendamiseks, palun loo see uuesti'; #20071004
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Vigane e-posti aadress.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Faili tüüp pole üleslaadimiseks lubatud.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'See on korduv fail.  Palun kustuta kõigepealt varasem fail.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Vigane failitee.  Kataloog kas puudub või pole veebiserveri poolt kirjutatav';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Faili ei laetud üles. Palun mine tagasu ja vali fail enne vajutamist nupule Lae üles'; #20071004
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Üleslaetud faili ei saa kanda üle failide kausta. Kausta kas puudub või pole veebiserverile kirjutamisõigusega'; #20071004
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Pole võimalik määrata kannet iseenda duplikaadiks.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Kasutaja välja ei leitud';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'See on duplikeeriv kasutaja väli.';
@@ -230,7 +230,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Vigane kasutaja välja d
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP kirje uuendamine ebaõnnestus.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP kasutaja kirjet ei leitud.'; #20071004
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Andmebaasi ühendus ebaõnnestus. Andmebaasist tagastatud viga #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Andmebaasi päring ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s päringule: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Andmebaasi valik ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s';
@@ -261,8 +261,8 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Esitatud informatsioon e
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Kinnituse URL on vigane või varem kasutatud. Palun registreeru uuesti.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks. arv töödeldavaid päringuid saavutatud. Palun kontakteeru süsteemi administraatoriga';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'See tegevus toob kaasa alamprojektide hierarhias katkematu rekursiooni';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot change the access level of the only ADMINISTRATOR in the system.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sa ei saa muuta süsteemi ainukese ADMINISTRAATORI pöördusõiguste taset.'; #20071004
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Lehele ümbersuunamise viga, kontrolli, et poleks tühikuid väljapool PHP plokki (&lt;?php ?&gt;) failis config_inc.php või custom_*.php.'; #20071004
 
 $s_login_error = 'Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
@@ -295,7 +295,7 @@ $s_status_enum_string = '10:uus,20:tagasiside,30:tunnistatud,40:kinnitatud,50:m�
 $s_resolution_enum_string = '10:avatud,20:korras,30:uuesti avatud,40:ei kordu,50:võimatu korrastada,60:duplikaatne,70:pole bugi,80:peatataud,90:ei saa korda';
 $s_projection_enum_string = '10:pole,30:lihtne,50:kerge korrastada,70:raske ümbertegemine,90:üle projekteerida';
 $s_eta_enum_string = '10:pole,20:< 1 päev,30:2-3 päeva,40:< 1 nädal,50:< 1 kuu,60:> 1 kuu';
-$s_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$s_sponsorship_enum_string = '0:Maksmata,1:Küsitud,2:Makstud'; #20071004
 
 # Email Strings
 $s_new_account_subject = 'Kasutajakonto registreerimine';
@@ -379,8 +379,8 @@ $s_no_password_change = 'Kuna paroole hallatakse teise süsteemi poolt, ei ole s
 $s_confirm_password = 'Kinnita parool';
 $s_access_level = 'Pöördusõiguste tase';
 $s_update_user_button = 'Uuenda kasutaja';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
-$s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_verify_warning = 'Sinu kasutajakonto info on kontrollitud. Kasutajakonto kinnitusteade, mis sulle saabus, on nüüd invaliidne.'; #20071004
+$s_verify_change_password = 'Sa pead vahetama siin parooli, et uuesti sisse meldida.'; #20071004
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kasutajakonto eelistused';
@@ -444,22 +444,22 @@ $s_submit_button = 'Saada';
 $s_profile_updated_msg = 'Profiil uuendatud...';
 
 # account_sponsor_page.php
-$s_my_sponsorship = 'My Sponsorships';
-$s_update_sponsorship_button = 'Change Payment Status';
-$s_no_sponsored = 'No sponsored issues Assigned To yourself were found.';
-$s_own_sponsored = 'Issues You have Sponsored:';
-$s_issues_handled = 'Sponsored Issues You Have Been Assigned To:';
-$s_no_own_sponsored = 'You have not sponsored any issues.';
-$s_sponsor = 'Sponsor';		# like in 'The sponsor of...'
-$s_sponsor_verb = 'Sponsor';	# like in 'Sponsor it!'
-$s_amount = 'Amount';
-$s_total_owing = 'Total Owing';
-$s_total_paid = 'Total Paid';
-$s_sponsor_hide = 'Hide Resolved and Paid';
-$s_sponsor_show = 'Show All';
+$s_my_sponsorship = 'Minu sponsorlused'; #20071004
+$s_update_sponsorship_button = 'Muuda makse olekut'; #20071004
+$s_no_sponsored = 'Sinule määratud sponsorlusega kandeid ei leitud.'; #20071004
+$s_own_sponsored = 'Kanded, mida sa sponsoreerisid:'; #20071004
+$s_issues_handled = 'Sponsorlusega kanded, mis on sinule määratud:'; #20071004
+$s_no_own_sponsored = 'Sa pole sponsoreerinud ühtegi kannet.';
+$s_sponsor = 'Sponsor';		# like in 'The sponsor of...' #20071004
+$s_sponsor_verb = 'Sponsoreeri';	# like in 'Sponsor it!' #20071004
+$s_amount = 'Kogus'; #20071004
+$s_total_owing = 'Kokku omad';#20071004
+$s_total_paid = 'Kokku makstud';#20071004
+$s_sponsor_hide = 'Peida lahendatud ja makstud';#20071004
+$s_sponsor_show = 'Näita kõiki';#20071004
 
 # account_sponsor_update.php
-$s_payment_updated = 'Payment information updated.';
+$s_payment_updated = 'Makse info uuendatud.';#20071004
 
 # account_update.php
 $s_account_updated_msg = 'Sinu kasutajakonto on uuendatud...';
@@ -471,7 +471,7 @@ $s_password_updated = 'Sinu parool on vahetatud';
 # adm_permission_report.php
 
 # bug_action_group_page
-$s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
+$s_multiple_projects = 'Kanded, mida sa valisid on erinevatest projektidest. Alljärgnev parameeter mõjutab kõikide projektide seadeid. Kui see on vale, palun korda muudatust väiksema valitud kannete arvuga.';#20071004
 
 # bug_assign.php
 $s_bug_assign_msg = 'Kanne on määratud...';
@@ -543,7 +543,7 @@ $s_reminder_monitor = 'Need aadressaadid hakkavad seda kannet jälgima. Jälgimi
 $s_reminder_store = 'See märkus lisatakse kande juurde.';
 
 # bug_set_sponsorship.php
-$s_confirm_sponsorship = 'Please confirm you want to sponsor issue %d for %s.';
+$s_confirm_sponsorship = 'Palun kinnita, et soovid sponsoreerida kannet %d - %s.';#20071004
 
 # bug_update.php
 $s_bug_updated_msg = 'Kanne on uuendatud...';
@@ -576,8 +576,8 @@ $s_summary = 'Kokkuvõte';
 $s_description = 'Kirjeldus';
 $s_steps_to_reproduce = 'Kordamise sammud';
 $s_update_information_button = 'Uuenda info';
-$s_sticky_issue = 'Sticky Issue';
-$s_profile = 'Profile';
+$s_sticky_issue = 'Kleepuv kanne';#20071004
+$s_profile = 'Profiil';#20071004
 
 # bug_update_page.php
 $s_update_advanced_link = 'Spetsiaalne uuendus';
@@ -609,7 +609,7 @@ $s_bugnote_updated_msg = 'Märkus uuendatud...';
 $s_edited_on = 'redigeeritud: ';
 
 # file_api.php
-$s_show_content ='Show Content';
+$s_show_content ='Kuva sisu';#20071004
 
 # index.php
 $s_click_to_login = 'Sisselogimiseks klõpsa siia';
@@ -669,7 +669,7 @@ $s_manage_custom_field_link = 'Kohandatud väljade haldus';
 $s_manage_global_profiles_link = 'Seadista globaalseid profiile';
 $s_permissions_summary_report = 'Kasutajaõiguste raport';
 $s_manage_config_link = 'Seadista konfiguratsiooni';
-$s_manage_threshold_config = 'Workflow Thresholds';
+$s_manage_threshold_config = 'Töövoo künnised';#20071004
 $s_manage_email_config = 'E-posti teated';
 $s_manage_workflow_config = 'Töövoog';
 $s_create_new_account_link = 'Loo uus kasutaja';
@@ -687,22 +687,22 @@ $s_last_visit = 'Viimane külastus';
 $s_edit_user_link = 'Redigeeri kasutajat';
 
 # manage_config_email_page
-$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_config_project = 'Note: These configurations affect only the %s project.';
-$s_colour_coding = 'In the table below, the following color code applies:';
-$s_colour_project = 'Project setting overrides others.';
-$s_colour_global = 'All Project settings override default configuration.';
-$s_issue_reporter = 'User who reported issue';
-$s_issue_handler = 'User who is handling the issue';
-$s_users_added_bugnote = 'Users added Bugnote';
+$s_config_all_projects = 'Märkus: Need seaded mõjuvad KÕIKIDELE PROJEKTIDELE.';#20071004
+$s_config_project = 'Märkus: Need seaded mõjuvad ainult %s projektile.';#20071004
+$s_colour_coding = 'Alljärgnevale tabelile on raendatud järgmist värvikoodi:';#20071004
+$s_colour_project = 'Projekti seade on üle teistest.';#20071004
+$s_colour_global = 'Kõikide projektide seaded on üle vaikimisi konfiguratsioonist.';#20071004
+$s_issue_reporter = 'Kasutaja kes raporteeris kande';#20071004
+$s_issue_handler = 'Kasutaja kes käsitles kande';#20071004
+$s_users_added_bugnote = 'Kasutajad kes lisasid märkusi';#20071004
 $s_change_configuration = 'Uuenda konfiguratsiooni';
-$s_message = 'Message';
+$s_message = 'Teade';#20071004
 $s_default_notify = 'Määra vaikimise teavitamise väärtus';
 $s_action_notify = 'Määra tegevuste teavitamise väärtus';
 $s_notify_defaults_change_access = 'Määra kasutajad, kes saavad muuta teavitamise vaikeväärtusi';
 $s_notify_actions_change_access = 'Määra kasutajad, kes saavad muuta teavitamise väärtusi';
-$s_revert_to_system = "Delete All Projects Settings";
-$s_revert_to_all_project = "Delete Project Specific Settings";
+$s_revert_to_system = "Kustuta kõikide projektide seaded";#20071004
+$s_revert_to_all_project = "Kustuta projektispetsiifilised seaded";#20071004
 
 # manage_config_workflow_page
 $s_non_existent = 'mitte-eksisteeriv';
@@ -715,7 +715,7 @@ $s_status_level = 'Staatus';
 $s_alter_level = 'Kes saab seda väärtust muuta';
 $s_validation = 'Töövoo kinnitamine';
 $s_comment = 'Kinnitamise kommentaar';
-$s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
+$s_superfluous = 'Kaar olekust iseendale on kaudne ja vaja on mitte anda konkreetselt';#20071004
 $s_unreachable = 'Kandele ei saa määrata staatust';
 $s_no_exit = 'Kandelt ei saa eemaldada staatust';
 $s_access_levels = 'Ligipääsu tasemed';
@@ -727,37 +727,37 @@ $s_workflow_change_access = 'Muuda kasutajaid, kes saavad töövoogu muuta';
 $s_access_change_access = 'Muuda kasutajaid, kes saavad muuta staatuse muutmise ligipääsu tasemeid';
 
 # manage_config_workflow_set
-$s_default_not_in_flow = 'The default status of %s is not selected in the next statuses for %s. It will be ignored';
+$s_default_not_in_flow = 'Vaikimisi olek %s pole valitud järgmises olekus kandele %s. Seda ignoreeritakse';#20071004
 
 # manage_config_work_threshold_page
-$s_assign_issue = 'Assign an issue';
-$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
-$s_allow_reporter_close = 'Allow Reporter to close Issue';
-$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
-$s_set_status_assigned = 'Set status on assignment of Handler';
-$s_allow_user_edit = 'Allow user to edit their own bugnotes';
-$s_limit_access = 'Limit reporter\'s access to their own issues';
-$s_submit_status = 'Status to which a new issue is set';
-$s_assigned_status = 'Status to set auto-assigned issues to';
-$s_resolved_status = 'Status where an issue is considered resolved';
-$s_readonly_status = 'Status where an issue becomes read only';
-$s_reopen_status = 'Status to which a reopened issue is set';
-$s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_assign_issue = 'Määra kanne';#20071004
+$s_allow_close_immediate = 'Luba kanne sulgeda või lahendada';#20071004
+$s_allow_reporter_close = 'Luba teavitajal sulgeda kanne';#20071004
+$s_allow_reporter_reopen = 'Luba teavitajal taasavada kanne';#20071004
+$s_set_status_assigned = 'Olek, mis käsitleja määramisel antakse';#20071004
+$s_allow_user_edit = 'Luba kasutajal redigeerida oma märkuseid';#20071004
+$s_limit_access = 'Piira teavitajal oma kannete kättesaadavust';#20071004
+$s_submit_status = 'Olek, mis uuele kandele omistatakse';#20071004
+$s_assigned_status = 'Olek, mis omistatakse automaatselt määratud kannetele';#20071004
+$s_resolved_status = 'Olek, milles kannet võib määrata lahendatuks';#20071004
+$s_readonly_status = 'Olek, milles kanne saab ainult loetavaks';#20071004
+$s_reopen_status = 'Olek, millesse taasavtud kanne pannakse';#20071004
+$s_reopen_resolution = 'Lahendus, millesse taasavatud kanne pannakse';#20071004
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for';
-$s_in_project = 'in project';
-$s_delete_config_button = 'Delete Settings';
+$s_config_delete_sure = 'Oled kindel, et tahad kustutadda seaded';#20071004
+$s_in_project = 'projektis';#20071004
+$s_delete_config_button = 'Kustuta seaded';#20071004
 
 # adm_config_report.php
-$s_configuration_report = 'Configuration Report';
-$s_database_configuration = 'Database Configuration';
-$s_configuration_option = 'Configuration Option';
-$s_configuration_option_type = 'Type';
-$s_configuration_option_value = 'Value';
-$s_all_users = 'All Users';
-$s_set_configuration_option = 'Set Configuration Option';
-$s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
+$s_configuration_report = 'Konfiguratsiooni aruanne';#20071004
+$s_database_configuration = 'Andmebaasi konfiguratsioon';#20071004
+$s_configuration_option = 'Konfiguratsiooni seade';#20071004
+$s_configuration_option_type = 'Tüüp';#20071004
+$s_configuration_option_value = 'Väärtus';#20071004
+$s_all_users = 'Kõik kasutajad';#20071004
+$s_set_configuration_option = 'Määra konfiguratsiooni seade';#20071004
+$s_delete_config_sure_msg = 'Oled kindel, et soovid kustutada selle konfiguratsiooni seade?';#20071004
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt lisatud...';
@@ -893,8 +893,8 @@ $s_my_view_title_reported = 'Raporteeritud minu poolt';
 $s_my_view_title_assigned = 'Määratud mulle (lahendamata)';
 $s_my_view_title_resolved = 'Lahendatud';
 $s_my_view_title_monitored = 'Minu poolt tegeletud';
-$s_my_view_title_feedback = 'Awaiting Feedback from Me';
-$s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
+$s_my_view_title_feedback = 'Ootab minu tagasisidet';#20071004
+$s_my_view_title_verify = 'Ootab lahendamise kinnitust minult';#20071004
 
 # news_add.php
 $s_news_added_msg = 'Lisatud uudised...';
@@ -1066,12 +1066,12 @@ $s_viewing_bugs_title = 'Kannete vaatamine';
 $s_updated = 'Uuendatud';
 $s_sticky = 'Näita kleebitud kandeid';
 $s_sort = 'Sorteeri';
-$s_issue_id = 'Issue #';
-$s_recently_visited = 'Recently Visited';
+$s_issue_id = 'Kanne #';#20071004
+$s_recently_visited = 'Viimati külastatud';#20071004
 
 # view_all_inc.php
 $s_none = 'Pole';
-$s_current = 'current';
+$s_current = 'jooksev';#20071004
 $s_search = 'Otsing';
 $s_view_prev_link = 'Näita eelmisi';
 $s_view_next_link = 'Näita järgmisi';
@@ -1194,9 +1194,9 @@ $s_sponsors = '%d sponsor(eid)';
 $s_sponsorship_added = 'Sponsorlus lisatud';
 $s_sponsorship_updated = 'Sponsorlus Uuendatud';
 $s_sponsorship_deleted = 'Sponsorlus Kustutatud';
-$s_sponsorship_paid = 'Sponsorship Paid';
+$s_sponsorship_paid = 'Sponsorlus makstud';#20071004
 $s_sponsorship_more_info = 'Rohkem informatsiooni sponsorluse kohta';
-$s_sponsorship_total = 'Sponsorship Total';
+$s_sponsorship_total = 'Sponsorlus kokku';#20071004
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
