@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.4 2007-09-25 04:25:52 vboctor Exp $
+	# $Id: tag_api.php,v 1.5 2007-10-05 18:06:17 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -485,6 +485,12 @@
 
 		if ( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
 			trigger_error( TAG_ALREADY_ATTACHED, ERROR );
+		}
+
+		if ( null == $p_user_id ) {
+			$p_used_id = auth_get_current_user_id();
+		} else {
+			user_ensure_exists( $p_user_id );
 		}
 
 		$c_tag_id 		= db_prepare_int( $p_tag_id );

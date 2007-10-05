@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_attach_tags_inc.php,v 1.1 2007-08-24 19:04:38 nuclear_eclipse Exp $
+	# $Id: bug_actiongroup_attach_tags_inc.php,v 1.2 2007-10-05 18:06:17 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_path = config_get( 'core_path' );
@@ -86,14 +86,17 @@
 	function action_attach_tags_process( $p_bug_id ) {
 		global $g_action_attach_tags_attach, $g_action_attach_tags_create; 
 
+		$t_user_id = auth_get_current_user_id();
+
 		foreach( $g_action_attach_tags_create as $t_tag_row ) {
-			$t_tag_row['id'] = tag_create( $t_tag_row['name'] );
+			$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
 			$g_action_attach_tags_attach[] = $t_tag_row;
 		}
+		$g_action_attach_tags_create = array();
 
 		foreach( $g_action_attach_tags_attach as $t_tag_row ) {
 			if ( ! tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
-				tag_bug_attach( $t_tag_row['id'], $p_bug_id );
+				tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id );
 			}
 		}
 
