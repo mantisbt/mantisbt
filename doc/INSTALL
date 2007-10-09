@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a php based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 INSTALLATION
@@ -13,13 +13,13 @@ Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using Mantis.
 
 These instructions are also available at:
-http://manual.mantisbugtracker.com/manual.installation.php
+http://manual.mantisbt.org/manual.installation.php
 
 # --- Requirements ----------
 
-* MySQL 3.23.2 and higher
-* PHP 4.0.6 and higher
-* a webserver
+* MySQL 4.1.0 and higher
+* PHP 4.3.0 and higher
+* a webserver (e.g. Apache, IIS)
 
 # --- Summary ---------------
 
@@ -36,7 +36,8 @@ This installation process has changed with release 1.0.0.
 
 1. First, transfer the file to your webserver using whatever method you like
 best (ftp, scp, etc).  You will need to telnet/ssh into the server machine for
-the next steps.
+the next steps.  If you don't have shell access, then expand the archive on your
+local machine and copy the files via FTP, then go to step 3.
 
 2. Next, untar/gunzip it to the directory that you want.
 The usual command is (1 step):
@@ -102,40 +103,10 @@ with a .php extension and load it up in your web browser.  It will, among a
 multitude of other things, have the correct value of register_globals that you
 are using.
 
-5. Mantis now uses only .php files.
-
-If your webserver is configured for other extensions (.PHP3, .PHTML) then you
-will have to have the administrator add support for .PHP files.  This should
-be a trivial modification.
-
-Documentation can be found at: http://www.php.net/manual/en/installation.php
-
-6.  Login to your bugtracker and go to the manage section.  Click on the
+5.  Login to your bugtracker and go to the manage section.  Click on the
 projects link.  You will need to ADD a new project.  Then EDIT the new project
 and remember to ADD at least one category.  Otherwise you won't be able to add
 any bug reports.
 
 That should be it.  You're off and running.  For some help on custom editing
 of the site please read the CUSTOMIZATION file.
-
--------------------------------------------------------------------------------
-### Upgrading ###
--------------------------------------------------------------------------------
-
-See the file: UPGRADING 
-
--------------------------------------------------------------------------------
-### Troubleshooting ###
--------------------------------------------------------------------------------
-
-See TROUBLESHOOTING
-
--------------------------------------------------------------------------------
-### Useful links ###
--------------------------------------------------------------------------------
-
-http://www.php.net/        -  excellent documentation.
-http://www.phpwizard.net/  -  an excellent web front end to mysql.
-http://www.phpbuilder.net/ -  good help forums.
-http://www.mysql.com/      -  good documentation.
-http://www.apache.org/     -  you should be able to find what you need.
