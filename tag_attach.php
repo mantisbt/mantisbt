@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_attach.php,v 1.2 2007-09-29 00:07:57 nuclear_eclipse Exp $
+	# $Id: tag_attach.php,v 1.3 2007-10-09 02:57:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -17,13 +17,18 @@
 
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_tag_select = gpc_get_int( 'tag_select' );
+	$f_tag_string = gpc_get_string( 'tag_string' );
+
 	$t_user_id = auth_get_current_user_id();
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id, $t_user_id );
 
-	$t_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
+	# @@@ The handling of tag strings which can include multiple tags should be moved
+	#     to the APIs.  This is to allow other clients of the API to support such
+	#     functionality.  The access level checks should also be moved to the API.
+	$t_tags = tag_parse_string( $f_tag_string );
 	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
-	
+
 	$t_tags_create = array();
 	$t_tags_attach = array();
 	$t_tags_failed = array();
@@ -47,7 +52,7 @@
 	}
 
 	if ( count( $t_tags_failed ) > 0 ) {
-		html_page_top1( lang_get( 'tag_attach_long' ).' '.bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+		html_page_top1( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		html_page_top2();
 ?>
 <br/>
@@ -59,7 +64,7 @@
 <?php		
 		$t_tag_string = "";
 		foreach( $t_tags_attach as $t_tag_row ) {
-			if ( "" != $t_tag_string ) {
+			if ( !is_blank( $t_tag_string ) ) {
 				$t_tag_string .= config_get( 'tag_separator' );
 			}
 			$t_tag_string .= $t_tag_row['name'];
@@ -68,13 +73,13 @@
 		foreach( $t_tags_failed as $t_tag_row ) {
 			echo '<tr ',helper_alternate_class(),'>';
 			if ( -1 == $t_tag_row['id'] ) {
-				echo '<td class="category">',lang_get( 'tag_invalid_name' ),'</td>';
+				echo '<td class="category">', lang_get( 'tag_invalid_name' ), '</td>';
 			} elseif ( -2 == $t_tag_row['id'] ) {
-				echo '<td class="category">',lang_get( 'tag_create_denied' ),'</td>';
+				echo '<td class="category">', lang_get( 'tag_create_denied' ), '</td>';
 			}
-			echo '<td>',$t_tag_row['name'],'</td></tr>';
+			echo '<td>', $t_tag_row['name'], '</td></tr>';
 			
-			if ( "" != $t_tag_string ) {
+			if ( !is_blank( $t_tag_string ) ) {
 				$t_tag_string .= config_get( 'tag_separator' );
 			}
 			$t_tag_string .= $t_tag_row['name'];
@@ -91,7 +96,7 @@
 	</tr>
 </table>
 <?php
-		html_page_bottom1(__FILE__);
+		html_page_bottom1( __FILE__ );
 	} else {
 		foreach( $t_tags_create as $t_tag_row ) {
 			$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
@@ -99,7 +104,7 @@
 		}
 
 		foreach( $t_tags_attach as $t_tag_row ) {
-			if ( ! tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
+			if ( !tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
 				tag_bug_attach( $t_tag_row['id'], $f_bug_id, $t_user_id );
 			}
 		}
