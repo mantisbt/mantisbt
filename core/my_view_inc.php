@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.18 2007-08-22 04:19:22 vboctor Exp $
+	# $Id: my_view_inc.php,v 1.19 2007-10-09 20:10:45 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,7 @@
 ?>
 <?php
 	$t_filter = current_user_get_bug_filter();
+	$t_filter = $t_filter === false ? array() : $t_filter;
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
@@ -157,6 +158,7 @@
 	$url_link_parameters['verify'] = 'reporter_id=' . $t_current_user_id . '&amp;show_status=' . $t_bug_resolved_status_threshold;
 
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
+		$t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
         $box_title = lang_get( 'my_view_title_' . $t_box_title );
 ?>
