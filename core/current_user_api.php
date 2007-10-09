@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.31 2007-10-02 01:01:34 nuclear_eclipse Exp $
+	# $Id: current_user_api.php,v 1.32 2007-10-09 02:55:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -17,78 +17,150 @@
 
 	# Wrappers around the User API that pass in the logged-in user for you
 
-	# --------------------
-	# Return the access level of the current user in the current project
+	/**
+	 * Returns the access level of the current user in the current project
+	 * 	 
+	 * @return access level code
+	 * @access public	 
+	 */
 	function current_user_get_access_level() {
 		return user_get_access_level( auth_get_current_user_id(),
 										helper_get_current_project() );
 	}
-	# --------------------
-	# Return the number of open assigned bugs to the current user in
-	#  the current project
+
+	/**
+	 * Returns the number of open issues that are assigned to the current user
+	 * in the current project.
+	 * 	 	 
+	 * @return Number of issues assigned to current user that are still open.
+	 * @access public	 
+	 */
 	function current_user_get_assigned_open_bug_count() {
 		return user_get_assigned_open_bug_count( auth_get_current_user_id(),
 													helper_get_current_project() );
 	}
-	# --------------------
-	# Return the number of open reported bugs by the current user in
-	#  the current project
+
+	/**
+	 * Returns the number of open reported bugs by the current user in
+	 * the current project
+	 * 	 	 
+	 * @return Number of issues reported by current user that are still open.
+	 * @access public	 
+	 */
 	function current_user_get_reported_open_bug_count() {
 		return user_get_reported_open_bug_count( auth_get_current_user_id(),
 													helper_get_current_project() );
 	}
-	# --------------------
-	# Return the specified field of the currently logged in user
+
+	/**
+	 * Returns the specified field of the currently logged in user
+	 *
+	 * @param field_name  Name of user property as in the table definition.	 
+	 * @return Get the value of the specified field for current user.
+	 * @access public	 
+	 */
 	function current_user_get_field( $p_field_name ) {
 		return user_get_field( auth_get_current_user_id(),
 								$p_field_name );
 	}
-	# --------------------
-	# Return the specified field of the currently logged in user
+
+	/**
+	 * Returns the specified field of the currently logged in user
+	 *
+	 * @param pref_name	Name of user preference as in the preferences table 
+	 *					definition.	 
+	 * @return Get the value of the specified preference for current user.
+	 * @access public	 
+	 */
 	function current_user_get_pref( $p_pref_name ) {
 		return user_pref_get_pref( auth_get_current_user_id(), $p_pref_name );
 	}
-	# --------------------
-	# Return the specified field of the currently logged in user
+
+	/**
+	 * Sets the specified preference for the current logged in user.
+	 * 
+	 * @param pref_name		The name of the preference as in the preferences table.
+	 * @param pref_value	The preference new value.
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_set_pref( $p_pref_name, $p_pref_value ) {
 		return user_pref_set_pref( auth_get_current_user_id(), $p_pref_name, $p_pref_value );
 	}
-	# --------------------
-	# Return the specified field of the currently logged in user
+
+	/**
+	 * Return the specified field of the currently logged in user
+	 * 
+	 * @param project_id	The new default project id.
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_set_default_project( $p_project_id ) {
 		return user_set_default_project( auth_get_current_user_id(), $p_project_id );
 	}
-	# --------------------
-	# Return an array of projects to which the currently logged in user
-	#  has access
+
+	/**
+	 * Returns an array of projects that are accessible to the current logged in
+	 * user.
+	 * 	 
+	 * @param show_disabled	Include disabled projects.
+	 * @return an array of accessible project ids.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_get_accessible_projects( $p_show_disabled = false ) {
 		return user_get_accessible_projects( auth_get_current_user_id(), $p_show_disabled );
 	}
-	# --------------------
-	# Return an array of subprojects of the specified project to which the
-	# currently logged in user has access
+
+	/**
+	 * Returns an array of subprojects of the specified project to which the
+	 * currently logged in user has access to.
+	 *
+	 * @param project_id	Parent project id.	 
+	 * @param show_disabled	Include disabled projects.
+	 * @return an array of accessible sub-project ids.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_get_accessible_subprojects( $p_project_id, $p_show_disabled = false ) {
 		return user_get_accessible_subprojects( auth_get_current_user_id(), $p_project_id, $p_show_disabled );
 	}
-	# --------------------
-	# Return an array of subprojects of the specified project to which the
-	# currently logged in user has access, including subprojects of subprojects
+
+	/**
+	 * Returns an array of subprojects of the specified project to which the
+	 * currently logged in user has access, including subprojects of subprojects
+	 *
+	 * @param project_id	Parent project id.	 
+	 * @return an array of accessible sub-project ids.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_get_all_accessible_subprojects( $p_project_id ) {
 		return user_get_all_accessible_subprojects( auth_get_current_user_id(), $p_project_id );
 	}
-	# --------------------
-	# Return true if the currently logged in user is has a role of administrator
-	#  or higher, false otherwise
+
+	/**
+	 * Returns true if the currently logged in user is has a role of administrator
+	 * or higher, false otherwise
+	 *
+	 * @return true: administrator; false: otherwise.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_is_administrator() {
 		return user_is_administrator( auth_get_current_user_id() );
 	}
-	# --------------------
-	# Return true if the currently logged in user protected, false otherwise
+
+	/**
+	 * Returns true if the currently logged in user protected, false otherwise
+	 *
+	 * @return true: user protected; false: otherwise.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_is_protected() {
 		return user_is_protected( auth_get_current_user_id() );
 	}
-	# --------------------
-	# Return true if the currently user is the anonymous user
+
+	/**
+	 * Returns true if the currently user is the anonymous user
+	 *
+	 * @return true: user anonymous; false: otherwise.	 
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_is_anonymous() {
 		if ( auth_is_user_authenticated() ) {
 			return ( ( ON == config_get( 'allow_anonymous_login' ) ) &&
@@ -98,13 +170,22 @@
 			return false;
 		}
 	}
-	# --------------------
-	# Trigger an ERROR if the current user account is protected
+
+	/**
+	 * Triggers an ERROR if the current user account is protected
+	 *
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_ensure_unprotected() {
 		user_ensure_unprotected( auth_get_current_user_id() );
 	}
-	# --------------------
-	# return the bug filter parameters for the current user
+
+	/**
+	 * Returns the issue filter parameters for the current user
+	 *
+	 * @return Active issue filter for current user.
+	 * @access public	 
+	 */	 	 	 	 
 	function current_user_get_bug_filter( $p_project_id = null ) {
 		$f_filter_string	= gpc_get_string( 'filter', '' );
 		$t_view_all_cookie	= '';
@@ -130,4 +211,3 @@
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		return $t_filter;
 	}
-?>

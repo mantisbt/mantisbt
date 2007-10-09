@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: twitter_api.php,v 1.4 2007-07-10 07:32:26 vboctor Exp $
+	# $Id: twitter_api.php,v 1.5 2007-10-09 02:51:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -15,9 +15,13 @@
 
 	$g_twitter_enabled = null;
 
-	# --------------------
-	# Checks if twitter is used for the current installation.
-	# returns true for enabled, false otherwise.
+	/**
+	 * Checks if twitter is used for the current installation.
+	 * returns true for enabled, false otherwise.
+	 * 
+	 * @return true: twitter enabled, false: otherwise.
+	 * @access public	 
+	 */	 	 	 	 	
 	function twitter_enabled() {
 		global $g_twitter_enabled;
 
@@ -32,9 +36,12 @@
 		return $g_twitter_enabled;
 	}
 	
-	# --------------------
-	# Posts a twitter update when a bug is resolved.
-	# @param $p_bug_id The bug id that was resolved.
+	/**
+	 * Posts a twitter update when a bug is resolved.
+	 * 
+	 * @param $p_bug_id The bug id that was resolved.
+	 * @access public
+	 */	 	 	 	 	
 	function twitter_issue_resolved( $p_bug_id ) {
 		if ( !twitter_enabled() ) {
 			return true;
@@ -79,9 +86,12 @@
 		return twitter_update( $t_message );
 	}
 	
-	# --------------------
-	# Posts a twitter update when a news entry is submitted.
-	# @param $p_news_id The newly posted news id.
+	/**
+	 * Posts a twitter update when a news entry is submitted.
+	 * 
+	 * @param $p_news_id The newly posted news id.
+	 * @access public
+	 */	 	  	 
 	function twitter_news( $p_news_id ) {
 		if ( !twitter_enabled() ) {
 			return true;
@@ -105,9 +115,12 @@
 		return twitter_update( $t_news_headline );
 	}
 
-	# --------------------
-	# Posts an update to twitter
-	# @param $p_message  The message to post.
+	/**
+	 * Posts an update to twitter
+	 * 
+	 * @param $p_message  The message to post.
+	 * @access private
+	 */	 	 	 	 	
 	function twitter_update( $p_message ) {
 		if ( !twitter_enabled() ) {
 			return true;
@@ -116,7 +129,7 @@
 		if ( is_blank( $p_message ) ) {
 			return true;
 		}
-		
+
 		$c_message = db_prepare_string( $p_message );
 
 		// Set username and password
@@ -142,4 +155,3 @@
 		
 		return !is_blank( $t_buffer );
 	}
-?>

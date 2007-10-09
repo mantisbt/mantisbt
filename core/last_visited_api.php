@@ -1,26 +1,37 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: last_visited_api.php,v 1.4 2007-09-24 19:24:30 nuclear_eclipse Exp $
+	# $Id: last_visited_api.php,v 1.5 2007-10-09 02:55:14 vboctor Exp $
 	# --------------------------------------------------------
 
-	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'tokens_api.php' );
 
-	#---------------------------------
-	# Determine if last visited feature is enabled
+	/**
+	 * Determine if last visited feature is enabled
+	 *
+	 * @return true: enabled; false: otherwise.
+	 * @access public	 
+	 */
 	function last_visited_enabled() {
 		return !( OFF == config_get( 'recently_visited' ) || current_user_is_anonymous() );
 	}
 
-	#---------------------------------
-	# This method should be called from view, update, print pages for issues, mantisconnect.
+	/**
+	 * This method should be called from view, update, print pages for issues,
+	 * mantisconnect.
+	 *
+	 * @param issue_id	The issue id that was justed visited.
+	 * @param user_id	The user id that visited the issue, or null for current 
+	 *					logged in user.	 
+	 * @access public
+	 */
 	function last_visited_issue( $p_issue_id, $p_user_id = null ) {
 		if ( !last_visited_enabled() ) {
 			return;
@@ -40,10 +51,16 @@
 		
 		token_set( TOKEN_LAST_VISITED, $t_value, TOKEN_EXPIRY_LAST_VISITED, $p_user_id );
 	}
-	
-	#---------------------------------
-	# Get an array of the last visited bug ids.  We intentionally don't check if the ids still exists to avoid performance
-	# degradation.
+
+	/**
+	 * Get an array of the last visited bug ids.  We intentionally don't check 
+	 * if the ids still exists to avoid performance degradation.
+	 *
+	 * @param user_id	The user id to get the last visited issues for,
+	 *					or null for current logged in user.
+	 * @return An array of issue ids or an empty array if none found.	 
+	 * @access public
+	 */
 	function last_visited_get_array( $p_user_id = null ) {
 		$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 
@@ -57,4 +74,3 @@
 
 		return $t_ids;
 	}
-?>
