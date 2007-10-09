@@ -6,11 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.8 2007-10-02 04:36:24 vboctor Exp $
+	# $Id: tokens_api.php,v 1.9 2007-10-09 03:00:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
 	# DB schema: id, type, owner, timestamp, value
+
+	# Set up global for token_purge_expired_once()
+	$g_tokens_purged = false;
 
 	/**
 	 * Check if a token exists.
@@ -21,12 +24,12 @@
 		$c_token_id   	= db_prepare_int( $p_token_id );
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
-		$query 	= "SELECT id
+		$t_query 	= "SELECT id
 		          	FROM $t_tokens_table
 		          	WHERE id='$c_token_id'";
-		$result	= db_query( $query, 1 );
+		$t_result	= db_query( $t_query, 1 );
 
-		return( 1 == db_num_rows( $result ) );
+		return( 1 == db_num_rows( $t_result ) );
 	}
 
 	/**
@@ -58,15 +61,15 @@
 
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "SELECT * FROM $t_tokens_table 
+		$t_query = "SELECT * FROM $t_tokens_table 
 					WHERE type='$c_type' AND owner='$c_user_id'";
-		$result = db_query( $query );
+		$t_result = db_query( $t_query );
 
-		if ( db_num_rows( $result ) > 0 ) {
-			return db_fetch_array( $result );
-		} else {
-			return null;
+		if ( db_num_rows( $t_result ) > 0 ) {
+			return db_fetch_array( $t_result );
 		}
+
+		return null;
 	}
 
 	/**
@@ -78,7 +81,7 @@
 	function token_get_value( $p_type, $p_user_id = null ) {
 		$t_token = token_get( $p_type, $p_user_id );
 
-		if ( null != $t_token ) {
+		if ( null !== $t_token ) {
 			return $t_token['value'];
 		}
 
@@ -95,7 +98,7 @@
 	 */
 	function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
 		$t_token = token_get( $p_type, $p_user_id );
-		if ( $t_token == null ) {
+		if ( $t_token === null ) {
 			return token_create( $p_type, $p_value, $p_expiry, $p_user_id );
 		}
  
@@ -107,6 +110,7 @@
 	 * Touch a token to update its expiration time.
 	 * @param integer Token ID
 	 * @param integer Token expiration in seconds
+	 * @return always true	 
 	 */
 	function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 		token_ensure_exists( $p_token_id );
@@ -115,10 +119,10 @@
 		$c_token_expiry = db_timestamp( db_date( time() + $p_expiry ) );
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "UPDATE $t_tokens_table
+		$t_query = "UPDATE $t_tokens_table
 					SET expiry=$c_token_expiry
 					WHERE id='$c_token_id'";
-		db_query( $query );
+		db_query( $t_query, 1 );
 
 		return true;
 	}
@@ -126,7 +130,8 @@
 	/**
 	 * Delete a token.
 	 * @param integer Token type
-	 * @param integer User ID
+	 * @param integer User ID or null for current logged in user.
+	 * @return always true	 
 	 */
 	function token_delete( $p_type, $p_user_id = null ) {
 		$c_type = db_prepare_int( $p_type );
@@ -134,16 +139,17 @@
 
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "DELETE FROM $t_tokens_table 
+		$t_query = "DELETE FROM $t_tokens_table 
 					WHERE type='$c_type' AND owner='$c_user_id'";
-		db_query( $result );
+		db_query( $t_query );
 
 		return true;
 	}
 
 	/**
 	 * Delete all tokens owned by a specified user.
-	 * @param integer User ID
+	 * @param integer User ID or null for current logged in user.
+	 * @return always true	 
 	 */
 	function token_delete_by_owner( $p_user_id = null ) {
 		if( $p_user_id == null ) {
@@ -155,9 +161,9 @@
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
 		# Remove
-		$query = "DELETE FROM $t_tokens_table
+		$t_query = "DELETE FROM $t_tokens_table
 		          	WHERE owner='$c_user_id'";
-		db_query( $query );
+		db_query( $t_query );
 
 		return true;
 	}
@@ -181,10 +187,10 @@
 
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "INSERT INTO $t_tokens_table
+		$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
 					VALUES ( '$c_type', '$c_value', $c_timestamp, $c_expiry, '$c_user_id' )";
-		db_query( $query );
+		db_query( $t_query );
 		return db_insert_id( $t_tokens_table );
 	}
 
@@ -193,6 +199,7 @@
 	 * @param integer Token ID
 	 * @param string Token value
 	 * @param integer Token expiration in seconds
+	 * @return always true.	 
 	 */
 	function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 		token_ensure_exists( $p_token_id );
@@ -202,10 +209,10 @@
 
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
-		$query = "UPDATE $t_tokens_table 
+		$t_query = "UPDATE $t_tokens_table 
 					SET value='$c_value', expiry=$c_expiry
 					WHERE id=$c_token_id";
-		db_query( $query );
+		db_query( $t_query, 1 );
 
 		return true;
 	}
@@ -213,6 +220,7 @@
 	/**
 	 * Delete all tokens of a specified type.
 	 * @param integer Token Type
+	 * @return always true.	 
 	 */
 	function token_delete_by_type( $p_token_type ) {
 		$c_token_type = db_prepare_int( $p_token_type );
@@ -220,9 +228,9 @@
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
 		# Remove
-		$query = "DELETE FROM $t_tokens_table
+		$t_query = "DELETE FROM $t_tokens_table
 		          	WHERE type='$c_token_type'";
-		db_query( $query );
+		db_query( $t_query );
 
 		return true;
 	}
@@ -230,20 +238,21 @@
 	/**
 	 * Purge all expired tokens.
 	 * @param integer Token type
+	 * @return always true.	 
 	 */
 	function token_purge_expired( $p_token_type = null ) {
 		global $g_tokens_purged;
 
 		$t_tokens_table	= config_get( 'mantis_tokens_table' );
 
-		$query = "DELETE FROM $t_tokens_table WHERE ";
+		$t_query = "DELETE FROM $t_tokens_table WHERE ";
 		if ( !is_null( $p_token_type ) ) {
 			$c_token_type = db_prepare_int( $p_token_type );
-			$query .= " type='$c_token_type' AND ";
+			$t_query .= " type='$c_token_type' AND ";
 		}
 
-		$query .= db_now() . ' > expiry';
-		db_query( $query );
+		$t_query .= db_now() . ' > expiry';
+		db_query( $t_query );
 
 		$g_tokens_purged = true;
 
@@ -260,6 +269,3 @@
 			token_purge_expired();
 		}
 	}
-
-	# Set up global for token_purge_expired_once()
-	$g_tokens_purged = false;
