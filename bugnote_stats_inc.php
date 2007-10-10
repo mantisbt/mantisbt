@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.11 2007-08-12 22:43:48 giallu Exp $
+	# $Id: bugnote_stats_inc.php,v 1.11.2.1 2007-10-10 17:24:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -115,7 +115,7 @@ if ( !is_blank( $f_get_bugnote_stats_button ) ) {
 <?php
 	$t_sum_in_minutes = 0;
 	foreach ( $t_bugnote_stats as $t_item ) {
-		$t_sum_in_minutes = $t_item['sum_time_tracking'];
+		$t_sum_in_minutes += $t_item['sum_time_tracking'];
 		$t_item['sum_time_tracking'] = db_minutes_to_hhmm ( $t_item['sum_time_tracking'] );
 ?>
 
