@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.55 2007-08-09 08:29:56 giallu Exp $
+	# $Id: summary_api.php,v 1.55.2.1 2007-10-10 17:29:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -678,7 +678,7 @@
 		}
 
 		foreach ( $p_projects as $t_project ) {
-			$t_name = str_repeat( "» ", $p_level ) . project_get_name( $t_project );
+			$t_name = str_repeat( "&raquo; ", $p_level ) . project_get_name( $t_project );
 
 			$t_pdata = isset( $p_cache[ $t_project ] ) ? $p_cache[ $t_project ]
 			             : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
