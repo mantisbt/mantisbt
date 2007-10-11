@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.182 2007-09-28 01:57:56 vboctor Exp $
+	# $Id: print_api.php,v 1.183 2007-10-11 04:01:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -580,7 +580,7 @@
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
 			$t_nbsp = chr( 160 );
-			$t_name = addslashes( str_repeat( $t_nbsp , $t_level ) . str_repeat( '»', $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
+			$t_name = addslashes( str_repeat( $t_nbsp , $t_level ) . str_repeat( '&raquo;', $t_level ) . ' ' . project_get_field( $t_id, 'name' ) );
 			echo 'subprojects[\'' . $t_top_id . '\'][\'' . $p_trace . ';' . $t_id . '\'] = \'' . $t_name . '\';' . "\n";
 
 			print_extended_project_browser_subproject_javascript( $p_trace . ';' . $t_id );
