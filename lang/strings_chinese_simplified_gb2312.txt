@@ -1,9 +1,21 @@
 <?php
-	# Mantis - a php based Issuetracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	#
 	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
 	# Chinese_Simplified: Singoo, singoo@163.com
@@ -17,11 +29,11 @@
 	# 有任何建议或意见请与我联系：netcobra@gmail.com，谢谢！
 	# Based on strings_english.txt rev. 1.294
 	# -------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: vboctor $
-	# $Date: 2007-05-09 05:44:18 $
+	# $Revision: 1.2.2.1 $
+	# $Author: giallu $
+	# $Date: 2007-10-13 22:35:59 $
 	#
-	# $Id: strings_chinese_simplified_gb2312.txt,v 1.2 2007-05-09 05:44:18 vboctor Exp $
+	# $Id: strings_chinese_simplified_gb2312.txt,v 1.2.2.1 2007-10-13 22:35:59 giallu Exp $
 	###########################################################################
 
 ?>

@@ -1,9 +1,21 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	#
 	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
@@ -15,11 +27,11 @@
 	# Brazilian Portuguese strings for Mantis
 	# Based on strings_english.txt rev. 1.316 $
 	# -------------------------------------------------
-	# $Revision: 1.106 $
-	# $Author: vboctor $
-	# $Date: 2007-09-29 07:18:22 $
+	# $Revision: 1.106.2.1 $
+	# $Author: giallu $
+	# $Date: 2007-10-13 22:36:30 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.106 2007-09-29 07:18:22 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.106.2.1 2007-10-13 22:36:30 giallu Exp $
 	###########################################################################
 
 ?>
