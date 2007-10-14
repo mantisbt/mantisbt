@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.60 2007-09-22 22:51:15 nuclear_eclipse Exp $
+	# $Id: authentication_api.php,v 1.61 2007-10-14 19:07:36 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -511,7 +511,7 @@
 </tr>
 
 <tr>
-	<td class="center" colspan="2"><input type="submit" class="button" value="Authenticate" /></td>
+	<td class="center" colspan="2"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ); ?>" /></td>
 </tr>
 </table>
 
