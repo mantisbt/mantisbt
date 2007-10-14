@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.75 2007-09-28 01:57:56 vboctor Exp $
+	# $Id: helper_api.php,v 1.76 2007-10-14 19:01:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -403,6 +403,10 @@
 	# returns a boolean indicating whether SQL queries executed should be shown
 	# or not.
 	function helper_show_queries() {
-		return ON == config_get( 'show_queries_count' ) && access_has_global_level( config_get( 'show_queries_threshold' ) );
+		# Check is authenticated before checking access level, otherwise user gets 
+		# redirected to login_page.php.  See #8461.
+		return	ON == config_get( 'show_queries_count' ) && 
+				auth_is_user_authenticated() &&
+				access_has_global_level( config_get( 'show_queries_threshold' ) );
 	}
 ?>
