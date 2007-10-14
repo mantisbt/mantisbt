@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.60.2.1 2007-10-13 22:35:12 giallu Exp $
+	# $Id: authentication_api.php,v 1.60.2.2 2007-10-14 19:09:24 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -523,7 +523,7 @@
 </tr>
 
 <tr>
-	<td class="center" colspan="2"><input type="submit" class="button" value="Authenticate" /></td>
+	<td class="center" colspan="2"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ); ?>" /></td>
 </tr>
 </table>
 
