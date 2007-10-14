@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.364.2.2 2007-10-13 22:33:12 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.364.2.3 2007-10-14 22:35:35 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -539,6 +539,9 @@
 	
 	# Only users above this threshold will have their avatar shown
 	$g_show_avatar_threshold = DEVELOPER;
+
+        # Default avatar for users without a gravatar account
+        $g_default_avatar = "%path%images/no_avatar.png";
 
 	############################
 	# Mantis JPGRAPH Addon

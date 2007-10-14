@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.113.2.2 2007-10-14 20:50:58 giallu Exp $
+	# $Id: user_api.php,v 1.113.2.3 2007-10-14 22:35:35 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -653,7 +653,7 @@
 		if ( is_blank( $t_email ) ) {
 			$t_result = false;
 		} else {
-			$t_default_image = "/images/gravatar_logo.gif";
+			$t_default_image = config_get( 'default_avatar' );
 			$t_size = 80;
 			$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
 				"&amp;default=" . urlencode( $t_default_image ) .
