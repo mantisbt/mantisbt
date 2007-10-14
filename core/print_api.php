@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.182.2.2 2007-10-13 22:35:39 giallu Exp $
+	# $Id: print_api.php,v 1.182.2.3 2007-10-14 20:50:58 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -126,12 +126,14 @@
 
 		if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
 			$t_avatar = user_get_avatar( $p_user_id );
-			$t_avatar_url = $t_avatar[0];
-			$t_width = $t_avatar[1];
-			$t_height = $t_avatar[2];
-			echo '<a rel="nofollow" href="http://site.gravatar.com">' .
-				'<img class="avatar" src="' . $t_avatar_url . '" alt="Gravatar image"' .
-				' width="' . $t_width . '" height="' . $t_height . '" /></a>';
+			if ( false !== $t_avatar ) {
+				$t_avatar_url = $t_avatar[0];
+				$t_width = $t_avatar[1];
+				$t_height = $t_avatar[2];
+				echo '<a rel="nofollow" href="http://site.gravatar.com">' .
+					'<img class="avatar" src="' . $t_avatar_url . '" alt="User avatar"' .
+					' width="' . $t_width . '" height="' . $t_height . '" /></a>';
+			}
 		}
 	}
 

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.113.2.1 2007-10-13 22:35:46 giallu Exp $
+	# $Id: user_api.php,v 1.113.2.2 2007-10-14 20:50:58 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -643,19 +643,26 @@
 	}
 
 
-	# return the user avatar image 
-	# return value is an array( URL, width, height )
-	# in this first implementation, only gravatar.com avatars are supported
+	/**
+	* Return the user avatar image URL
+	* in this first implementation, only gravatar.com avatars are supported
+	* @return array|bool an array( URL, width, height ) or false when the given user has no avatar
+	*/
 	function user_get_avatar( $p_user_id ) {
 		$t_email = strtolower( user_get_email( $p_user_id ) );
-		$t_default_image = "/images/gravatar_logo.gif";
-		$t_size = 80;
-		$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
+		if ( is_blank( $t_email ) ) {
+			$t_result = false;
+		} else {
+			$t_default_image = "/images/gravatar_logo.gif";
+			$t_size = 80;
+			$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
 				"&amp;default=" . urlencode( $t_default_image ) .
 				"&amp;size=" . $t_size .
 				"&amp;rating=G";
+			$t_result = array( $t_avatar_url, $t_size, $t_size );
+		}
 
-		return array( $t_avatar_url, $t_size, $t_size );
+		return $t_result;
 	}
 
 
