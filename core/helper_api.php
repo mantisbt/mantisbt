@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.75.2.1 2007-10-13 22:35:31 giallu Exp $
+	# $Id: helper_api.php,v 1.75.2.2 2007-10-14 19:00:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -415,6 +415,10 @@
 	# returns a boolean indicating whether SQL queries executed should be shown
 	# or not.
 	function helper_show_queries() {
-		return ON == config_get( 'show_queries_count' ) && access_has_global_level( config_get( 'show_queries_threshold' ) );
+		# Check is authenticated before checking access level, otherwise user gets 
+		# redirected to login_page.php.  See #8461.
+		return	ON == config_get( 'show_queries_count' ) && 
+				auth_is_user_authenticated() &&
+				access_has_global_level( config_get( 'show_queries_threshold' ) );
 	}
 ?>
