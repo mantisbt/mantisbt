@@ -46,7 +46,7 @@ large files.
 * Most of the action scripts have a confirmation page to make sure the action
 completed successfully.  The pages will automatically redirect you after a
 short amount of time.  You can shorten of lengthen the time by editing
-$g_wait_time in config_inc.php.
+$g_default_redirect_delay in config_inc.php.
 
 * Edit css_inc.php to make your own page formatting.
 

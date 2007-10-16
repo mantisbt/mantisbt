@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.218.2.1 2007-10-13 22:35:31 giallu Exp $
+	# $Id: html_api.php,v 1.218.2.2 2007-10-16 22:15:31 giallu Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -248,7 +248,7 @@
 		}
 
 		if ( null === $p_time ) {
-			$p_time = config_get( 'wait_time' );
+			$p_time = current_user_get_pref( 'redirect_delay' );
 		}
 
 		if ( $p_sanitize ) {

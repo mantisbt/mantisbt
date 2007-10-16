@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.32.2.1 2007-10-13 22:35:38 giallu Exp $
+	# $Id: obsolete.php,v 1.32.2.2 2007-10-16 22:15:41 giallu Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -117,4 +117,7 @@
 # changes in 1.1.0rc1
 	config_obsolete( 'show_notices', 'display_errors' );
 	config_obsolete( 'show_warnings', 'display_errors' );
+
+# changes in 1.1.0rc2
+	config_obsolete( 'wait_time', 'default_redirect_delay' );
 ?>

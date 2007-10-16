@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.364.2.3 2007-10-14 22:35:35 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.364.2.4 2007-10-16 22:15:29 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -588,13 +588,8 @@
 	# Mantis Time Settings
 	############################
 
-	# --- time varaibles --------------
-
 	# time for 'permanent' cookie to live in seconds (1 year)
 	$g_cookie_time_length	= 30000000;
-
-	# time to delay between page redirects (in seconds)
-	$g_wait_time			= 2;
 
 	# minutes to wait before document is stale (in minutes)
 	$g_content_expire		= 0;
