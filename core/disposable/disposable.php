@@ -11,7 +11,7 @@
 	# Version 1.0.1 - Release Date: 31-July-2007 
 
 	# --------------------------------------------------------
-	# $Id: disposable.php,v 1.2 2007-08-01 23:10:09 zakman Exp $
+	# $Id: disposable.php,v 1.3 2007-10-17 17:44:28 zakman Exp $
 	# --------------------------------------------------------
 
 /**
@@ -216,6 +216,7 @@ class DisposableEmailChecker
 			case 'trashdevil.de':
 			case 'whopy.com':
 			case 'wilemail.com':
+			case 'bugmenot.com':
 				return true;
 		}
 
@@ -296,6 +297,7 @@ class DisposableEmailChecker
 			case 'trashdevil.com':
 			case 'trashdevil.de':
 			case 'walala.org':
+			case 'bugmenot.com':
 				return true;
 		}
 
