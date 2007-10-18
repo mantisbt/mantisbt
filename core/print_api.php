@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.182.2.3 2007-10-14 20:50:58 giallu Exp $
+	# $Id: print_api.php,v 1.182.2.4 2007-10-18 15:33:23 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -302,7 +302,7 @@
 	function print_tag_input( $p_bug_id = 0, $p_string="" ) {
 		?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' ) ?>" />
-		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo $p_string ?>" />
+		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string ) ?>" />
 		<select <?php echo helper_get_tab_index() ?> name="tag_select" id="tag_select">
 			<?php print_tag_option_list( $p_bug_id ); ?>
 		</select>

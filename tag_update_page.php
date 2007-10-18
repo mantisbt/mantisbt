@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tag_update_page.php,v 1.1.2.1 2007-10-13 22:34:46 giallu Exp $
+	# $Id: tag_update_page.php,v 1.1.2.2 2007-10-18 15:33:22 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -75,7 +75,7 @@
 			if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 				if ( ON == config_get( 'use_javascript' ) ) {
 					$t_username = prepare_user_name( $t_tag_row['user_id'] );
-					echo ajax_click_to_edit( $t_username, 'user_id', 'entrypoint=user_combobox&user_id=' . $t_tag_row['user_id'] . '&access_level=' . config_get( 'tag_create_threshold' ) );
+					echo ajax_click_to_edit( $t_username, 'user_id', 'entrypoint=user_combobox&amp;user_id=' . $t_tag_row['user_id'] . '&amp;access_level=' . config_get( 'tag_create_threshold' ) );
 				} else {
 					echo '<select ', helper_get_tab_index(), ' name="user_id">';
 					print_user_option_list( $t_tag_row['user_id'], ALL_PROJECTS, config_get( 'tag_create_threshold' ) );
@@ -98,7 +98,7 @@
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category"><?php echo lang_get( 'tag_description' ) ?></td>
 	<td colspan="4">
-		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo $t_tag_row['description'] ?></textarea>
+		<textarea name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_tag_row['description'] ) ?></textarea>
 	</td>
 </tr>
 

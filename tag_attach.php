@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tag_attach.php,v 1.2.2.1 2007-10-13 22:34:43 giallu Exp $
+	# $Id: tag_attach.php,v 1.2.2.2 2007-10-18 15:33:22 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -84,7 +84,7 @@
 			} elseif ( -2 == $t_tag_row['id'] ) {
 				echo '<td class="category">',lang_get( 'tag_create_denied' ),'</td>';
 			}
-			echo '<td>',$t_tag_row['name'],'</td></tr>';
+			echo '<td>',string_html_specialchars( $t_tag_row['name'] ),'</td></tr>';
 			
 			if ( "" != $t_tag_string ) {
 				$t_tag_string .= config_get( 'tag_separator' );
