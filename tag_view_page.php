@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_view_page.php,v 1.1 2007-08-24 19:04:40 nuclear_eclipse Exp $
+	# $Id: tag_view_page.php,v 1.2 2007-10-18 15:42:10 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -38,7 +38,7 @@
 
 	</td>
 	<td class="right" colspan="3">
-		<?php print_bracket_link( 'search.php?hide_status_id=90&tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
+		<?php print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
 	</td>
 </tr>
 
@@ -86,7 +86,7 @@
 			echo ( $i > 0 ? '<tr '.helper_alternate_class().'>' : '' );
 			echo "<td><a href='tag_view_page.php?tag_id=$t_tag[id]' title='$t_description'>$t_name</a></td>\n";
 			echo '<td colspan="3">';
-			print_bracket_link( 'search.php?hide_status_id=90&tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
+			print_bracket_link( 'search.php?hide_status_id=90&amp;tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name"), sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ) );
 			echo '</a></td></tr>';
 			
 			$i++;

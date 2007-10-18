@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tag_attach.php,v 1.3 2007-10-09 02:57:44 vboctor Exp $
+	# $Id: tag_attach.php,v 1.4 2007-10-18 15:42:09 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -77,7 +77,7 @@
 			} elseif ( -2 == $t_tag_row['id'] ) {
 				echo '<td class="category">', lang_get( 'tag_create_denied' ), '</td>';
 			}
-			echo '<td>', $t_tag_row['name'], '</td></tr>';
+			echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
 			
 			if ( !is_blank( $t_tag_string ) ) {
 				$t_tag_string .= config_get( 'tag_separator' );
