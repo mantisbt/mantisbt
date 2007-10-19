@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.56 2007-07-03 11:36:46 zakman Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.57 2007-10-19 05:55:35 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,10 +50,6 @@
                         header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.xls"' );
                 }
 	}
-
-	#settings for choosing the fields to print
-	# get the fields list
-	$t_field_name_arr = get_field_names();
 
 	# This is where we used to do the entire actual filter ourselves
 	$t_page_number = gpc_get_int( 'page_number', 1 );
@@ -119,7 +115,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	$f_bug_arr = explode_enum_string( $f_export );
 
-	# @@debug var_dump($t_field_name_arr);
 	for( $i=0; $i < $row_count; $i++ ) {
 
 		# prefix bug data with v_
