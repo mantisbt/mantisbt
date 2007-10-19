@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.91 2006-12-12 18:26:28 davidnewcomb Exp $
+	# $Id: bug_update.php,v 1.92 2007-10-19 07:00:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -178,7 +178,7 @@
 	}
 
 	# Add a bugnote if there is one
-	if ( ( !is_blank( $f_bugnote_text ) ) && ( false == $t_bug_note_set ) ) {
+	if ( ( !is_blank( $f_bugnote_text ) || !is_blank( $f_time_tracking ) ) && ( false == $t_bug_note_set ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 	}
 
