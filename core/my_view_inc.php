@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.19 2007-10-09 20:10:45 nuclear_eclipse Exp $
+	# $Id: my_view_inc.php,v 1.20 2007-10-19 06:13:01 vboctor Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'current_user_api.php' );
@@ -17,10 +16,12 @@
 	require_once( $t_core_path . 'string_api.php' );
 	require_once( $t_core_path . 'date_api.php' );
 	require_once( $t_core_path . 'icon_api.php' );
-?>
-<?php
+
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = $t_filter === false ? array() : $t_filter;
+
+	if ( $t_filter === false ) {
+		$t_filter = filter_get_default();
+	}
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];

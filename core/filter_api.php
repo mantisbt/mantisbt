@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.163 2007-09-15 21:48:26 giallu Exp $
+	# $Id: filter_api.php,v 1.164 2007-10-19 06:13:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -362,7 +362,8 @@
 			'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 			'user_monitor'		=> Array ( '0' => META_FILTER_ANY ),
 			'sort'              => 'last_updated',
-			'dir'               => 'DESC'
+			'dir'               => 'DESC',
+			'per_page'			=> config_get( 'default_limit_view' )
 		);
 
 		return $t_filter;
