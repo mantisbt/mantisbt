@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.60.2.2 2007-10-14 19:09:24 nuclear_eclipse Exp $
+	# $Id: authentication_api.php,v 1.60.2.3 2007-10-19 06:54:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -217,6 +217,13 @@
 
 			# pass the stored password in as the salt
 			if ( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
+				# Do not support migration to PLAIN, since this would be a crazy thing to do.
+				# Also if we do, then a user will be able to login by providing the MD5 value
+				# that is copied from the database.  See #8467 for more details.
+				if ( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) {
+					continue;
+				}
+
 				# Check for migration to another login method and test whether the password was encrypted
 				# with our previously insecure implemention of the CRYPT method
 				if ( ( $t_login_method != $t_configured_login_method ) ||
