@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.104 2007-09-25 23:52:11 nuclear_eclipse Exp $
+	# $Id: manage_proj_edit_page.php,v 1.105 2007-10-19 07:24:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -481,15 +481,11 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					<?php echo lang_get( 'actions' ); ?>
 				</td>
 			</tr>
-	<form method="post" action="manage_proj_custom_field_update.php">
 	<?php
 		$t_index = 0;	
 
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id );
-			$t_field_id = 'field_id_' . $t_index;
-			$t_sequence = 'sequence_' . $t_index;
-			$t_checkbox_id = 'checkbox_' . $t_index;			
 	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
@@ -509,25 +505,12 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					print_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
+					print_button( "manage_proj_custom_field_remove.php?field_id={$t_field_id}&amp;project_id={$f_project_id}", lang_get( 'remove_link' ) );
 				?>
 				</td>
 			</tr>
 	<?php
 		} # end for loop
-	?>
-	<tr <?php echo helper_alternate_class() ?>>
-	<td></td><td>
-	<input type="hidden" name="max_id" value ="<?php echo $t_index ?>" />
-	<input type="submit" name="Update" class="button" value="<?php echo lang_get( 'update' ) ?>" />
-	</td>
-	<td>
-	<input type="submit" name="Remove" class="button" value="<?php echo lang_get( 'field_remove_button' ) ?>" />
-	</td>
-	</tr>
-</form>
-
-<?php
 		}
 ?>
 	<tr>
