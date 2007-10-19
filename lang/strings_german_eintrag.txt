@@ -29,11 +29,11 @@
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.2.2.1 $
-	# $Author: giallu $
-	# $Date: 2007-10-13 22:36:18 $
+	# $Revision: 1.2.2.2 $
+	# $Author: vboctor $
+	# $Date: 2007-10-19 07:07:18 $
 	#
-	# $Id: strings_german_eintrag.txt,v 1.2.2.1 2007-10-13 22:36:18 giallu Exp $
+	# $Id: strings_german_eintrag.txt,v 1.2.2.2 2007-10-19 07:07:18 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -129,6 +129,7 @@ $s_make_public = 'Öffentlich machen';
 $s_create_new_project_link = 'Neues Projekt erstellen';
 
 $s_login_link = 'Anmelden';
+$s_select_option = '(auswählen)';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Einträgen auszuführen: ';
