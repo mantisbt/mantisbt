@@ -16,11 +16,11 @@
 	# German strings for Mantis
 	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.5 $
+	# $Revision: 1.6 $
 	# $Author: vboctor $
-	# $Date: 2007-10-03 04:56:42 $
+	# $Date: 2007-10-19 07:05:47 $
 	#
-	# $Id: strings_german_8859-1.txt,v 1.5 2007-10-03 04:56:42 vboctor Exp $
+	# $Id: strings_german_8859-1.txt,v 1.6 2007-10-19 07:05:47 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -116,6 +116,7 @@ $s_make_public = 'Öffentlich machen';
 $s_create_new_project_link = 'Neues Projekt erstellen';
 
 $s_login_link = 'Anmelden';
+$s_select_option = '(auswählen)';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
