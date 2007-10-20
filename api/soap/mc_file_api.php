@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_file_api.php,v 1.1 2007-07-18 06:52:53 vboctor Exp $
+	# $Id: mc_file_api.php,v 1.2 2007-10-20 23:16:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	# --------------------
@@ -78,6 +78,11 @@
 			    $t_file_path = config_get( 'absolute_path_default_upload_folder' );
 			}
 		}
+
+		if ( !file_exists( $t_file_path ) ) {
+			return new soap_fault( 'Server', '', "Upload folder '{$t_file_path}' doesn't exist." );
+		}
+
 		$c_file_path = db_prepare_string( $t_file_path );
 		$c_new_file_name = db_prepare_string( $p_name );
 
@@ -101,9 +106,10 @@
 						file_ftp_put ( $conn_id, $t_disk_file_name, $t_disk_file_name );
 						file_ftp_disconnect ( $conn_id );
 						file_delete_local( $p_disk_file_name );
-					} else {
-						chmod( $t_disk_file_name, 0400 );
 					}
+
+					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
+
 					$c_content = '';
 				}
 				break;
