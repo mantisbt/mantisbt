@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.8.2.1 2007-10-13 22:35:45 giallu Exp $
+	# $Id: tokens_api.php,v 1.8.2.2 2007-10-20 05:38:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
@@ -148,7 +148,7 @@
 
 		$query = "DELETE FROM $t_tokens_table 
 					WHERE type='$c_type' AND owner='$c_user_id'";
-		db_query( $result );
+		db_query( $query );
 
 		return true;
 	}
