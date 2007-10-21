@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.139.2.1 2007-10-13 22:35:24 giallu Exp $
+	# $Id: email_api.php,v 1.139.2.2 2007-10-21 22:30:39 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -929,9 +929,19 @@
 
 		$t_message .= email_format_bug_message(  $p_visible_bug_data );
 
+		# build headers
+		$t_bug_id = $p_visible_bug_data['email_bug'];
+		$t_message_md5 = md5( $t_bug_id . $p_visible_bug_data['email_date_submitted'] );
+		$t_mail_headers = array( 'keywords' => $p_visible_bug_data['set_category'] );
+		if ( $p_message_id == 'email_notification_title_for_action_bug_submitted' ) {
+			$t_mail_headers[] = array('Message-ID' => "<{$t_message_md5}>" );
+		} else {
+			$t_mail_headers[] = array('In-Reply-To' => "<{$t_message_md5}>" );
+		}
+
 		# send mail
 		# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
-		$t_ok = email_store( $t_user_email, $t_subject, $t_message, array( 'keywords' => $p_visible_bug_data['set_category'] ) );
+		$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
 
 		return $t_ok;
 	}
