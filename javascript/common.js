@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.10.2.1 2007-10-13 22:35:56 giallu Exp $
+ * $Id: common.js,v 1.10.2.2 2007-10-21 22:39:47 giallu Exp $
  * --------------------------------------------------------
  */
 
@@ -94,21 +94,34 @@ function SetCookie( p_cookie, p_value ) {
  * Collapsible element functions
  */
 
-var g_div_history		= 0x0001;
-var g_div_bugnotes		= 0x0002;
-var g_div_bugnote_add	= 0x0004;
-var g_div_bugnotestats	= 0x0008;
-var g_div_upload_form	= 0x0010;
-var g_div_monitoring	= 0x0020;
-var g_div_sponsorship	= 0x0040;
-var g_div_relationships	= 0x0080;
+var g_div_history       = 0x0001;
+var g_div_bugnotes      = 0x0002;
+var g_div_bugnote_add   = 0x0004;
+var g_div_bugnotestats  = 0x0008;
+var g_div_upload_form   = 0x0010;
+var g_div_monitoring    = 0x0020;
+var g_div_sponsorship   = 0x0040;
+var g_div_relationships = 0x0080;
 var g_div_filter        = 0x0100;
+
+
+/* List here the sections open by default */
+var g_default_view_settings = 
+	g_div_history | 
+	g_div_bugnotes |
+	g_div_bugnote_add |
+	g_div_bugnotestats |
+	g_div_upload_form |
+	g_div_monitoring |
+	g_div_sponsorship |
+	g_div_relationships;
+
 
 function GetViewSettings() {
 	var t_cookie = GetCookie( "VIEW_SETTINGS" );
 
 	if ( -1 == t_cookie ) {
-		t_cookie = 0xffff;
+		t_cookie = g_default_view_settings;
 	} else {
 		t_cookie = parseInt( t_cookie );
 	}
