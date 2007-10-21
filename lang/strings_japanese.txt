@@ -25,11 +25,11 @@
     # Japanese strings for Mantis
     # Based on strings_english.txt rev. 1.281
     # -------------------------------------------------
-    # $Revision: 1.2.2.1 $
-    # $Author: giallu $
-    # $Date: 2007-10-13 22:36:23 $
+    # $Revision: 1.2.2.2 $
+    # $Author: vboctor $
+    # $Date: 2007-10-21 05:40:09 $
     #
-    # $Id: strings_japanese.txt,v 1.2.2.1 2007-10-13 22:36:23 giallu Exp $
+    # $Id: strings_japanese.txt,v 1.2.2.2 2007-10-21 05:40:09 vboctor Exp $
     ###########################################################################
 
 ?>
@@ -98,8 +98,8 @@ $s_delete_bugnote_sure_msg = 'コメントを削除してよろしいですか�
 $s_bug_relationships = '関連';
 $s_empty_password_sure_msg = 'ユーザーのパスワードが空ですがよろしいですか。';
 $s_empty_password_button = '空のパスワードの使用';
-$s_reauthenticate_title = 'Authenticate';
-$s_reauthenticate_message = 'You are visting a secure page, and your secure session has expired.  Please authenticate yourself to continue.';
+$s_reauthenticate_title = '認証';
+$s_reauthenticate_message = '認証が必要な画面にアクセスしようとしていますが、セッションが期限切れになっています。認証を実行してください。';
 
 $s_duplicate_of = "重複先";
 $s_has_duplicate = "重複元";
@@ -661,7 +661,7 @@ $s_save_login = 'パスワードの保存';
 $s_choose_project = 'プロジェクト選択';
 $s_login_button = 'ログイン';
 $s_signup_link = '新しいユーザーの作成';
-$s_lost_password_link = 'パスワードを紛失しましたか?';
+$s_lost_password_link = 'パスワードの紛失';
 
 # login_select_proj_page.php
 $s_select_project_button = '選択';
@@ -1120,7 +1120,7 @@ $s_priority_abbreviation = 'P';
 
 # view_all_inc.php
 $s_none = 'なし';
-$s_current = 'current';
+$s_current = '現在のプロジェクト';
 $s_search = '検索';
 $s_view_prev_link = '↑';
 $s_view_next_link = '↓';
@@ -1261,7 +1261,7 @@ $s_changelog_empty = '変更履歴はありません。';
 
 # Roadmap
 $s_roadmap = 'ロードマップ';
-$s_resolved_progress = '%d of %d issue(s) resolved.  Progress (%d%%).';
+$s_resolved_progress = '%d件解決済 (全 %d件) 進捗率 %d%%.';
 
 # Http auth
 $s_http_auth_realm = "Mantis ログイン";
@@ -1436,7 +1436,7 @@ $s_period_year_to_date = '1年前から今日まで';
 $s_period_select = "日付選択";
 $s_period_last_year = '去年';
 $s_select = '選択してください。';
-$s_select_bystatus = 'by Status';
+$s_select_bystatus = 'ステータス';
 $s_select_summbystatus = '概要(ステータス)';
 $s_select_bycat = "概要(カテゴリ)";
 $s_select_both = "概要(ステータスとカテゴリ)";
