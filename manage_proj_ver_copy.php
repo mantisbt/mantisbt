@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_copy.php,v 1.2.2.1 2007-10-13 22:33:46 giallu Exp $
+	# $Id: manage_proj_ver_copy.php,v 1.2.2.2 2007-10-21 05:29:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -50,7 +50,7 @@
 	$t_rows = version_get_all_rows( $t_src_project_id );
 
 	foreach ( $t_rows as $t_row ) {
-		if ( version_is_unique( $t_version, $t_dst_project_id ) ) {
+		if ( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
 			version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], $t_row['date_order'] );
 		}
 	}
