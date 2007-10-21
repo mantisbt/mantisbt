@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_copy.php,v 1.2 2007-09-25 23:52:13 nuclear_eclipse Exp $
+	# $Id: manage_proj_ver_copy.php,v 1.3 2007-10-21 05:27:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -38,7 +38,7 @@
 	$t_rows = version_get_all_rows( $t_src_project_id );
 
 	foreach ( $t_rows as $t_row ) {
-		if ( version_is_unique( $t_version, $t_dst_project_id ) ) {
+		if ( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
 			version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], $t_row['date_order'] );
 		}
 	}
