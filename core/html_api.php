@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.218 2007-09-28 02:52:37 vboctor Exp $
+	# $Id: html_api.php,v 1.219 2007-10-22 07:05:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -524,7 +524,7 @@
 				}
 
 				# Roadmap Page
-				if ( ( $t_current_project == ALL_PROJECTS ) || access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+				if ( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
 					$t_menu_options[] = '<a href="roadmap_page.php">' . lang_get( 'roadmap_link' ) . '</a>';
 				}
 
