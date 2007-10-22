@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.218.2.2 2007-10-16 22:15:31 giallu Exp $
+	# $Id: html_api.php,v 1.218.2.3 2007-10-22 07:08:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -536,7 +536,7 @@
 				}
 
 				# Roadmap Page
-				if ( ( $t_current_project == ALL_PROJECTS ) || access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+				if ( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
 					$t_menu_options[] = '<a href="roadmap_page.php">' . lang_get( 'roadmap_link' ) . '</a>';
 				}
 
