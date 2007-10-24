@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.182.2.4 2007-10-18 15:33:23 nuclear_eclipse Exp $
+	# $Id: print_api.php,v 1.182.2.5 2007-10-24 05:28:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -704,7 +704,7 @@
 		# Add the default option if not in the list retrieved from DB		
 		# This is useful for default categories and when updating an
 		# issue with a deleted category.
-		if ( !in_array( $p_category, $cat_arr ) ) {
+		if ( !is_blank( $p_category ) && !in_array( $p_category, $cat_arr ) ) {
 			$cat_arr[] = $p_category;
 		}
 
