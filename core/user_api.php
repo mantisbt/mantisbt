@@ -1,12 +1,24 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.113 2007-09-26 02:54:57 vboctor Exp $
+	# $Id: user_api.php,v 1.114 2007-10-24 22:30:59 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -631,19 +643,26 @@
 	}
 
 
-	# return the user avatar image 
-	# return value is an array( URL, width, height )
-	# in this first implementation, only gravatar.com avatars are supported
+	/**
+	* Return the user avatar image URL
+	* in this first implementation, only gravatar.com avatars are supported
+	* @return array|bool an array( URL, width, height ) or false when the given user has no avatar
+	*/
 	function user_get_avatar( $p_user_id ) {
 		$t_email = strtolower( user_get_email( $p_user_id ) );
-		$t_default_image = "/images/gravatar_logo.gif";
-		$t_size = 80;
-		$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
+		if ( is_blank( $t_email ) ) {
+			$t_result = false;
+		} else {
+			$t_default_image = config_get( 'default_avatar' );
+			$t_size = 80;
+			$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
 				"&amp;default=" . urlencode( $t_default_image ) .
 				"&amp;size=" . $t_size .
 				"&amp;rating=G";
+			$t_result = array( $t_avatar_url, $t_size, $t_size );
+		}
 
-		return array( $t_avatar_url, $t_size, $t_size );
+		return $t_result;
 	}
 
 

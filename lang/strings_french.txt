@@ -1,9 +1,21 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2006  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	#
 	# French: Hellekin O. Wolf, hellekin@mmania.com
 	# French: Eric Hartmann, eric@rhinfo.com
@@ -23,11 +35,11 @@
 	# French strings for Mantis
 	# Based on strings_english.txt rev. 1.316
 	# -------------------------------------------------
-	# $Revision: 1.121 $
-	# $Author: vboctor $
-	# $Date: 2007-09-29 18:15:32 $
+	# $Revision: 1.122 $
+	# $Author: giallu $
+	# $Date: 2007-10-24 22:31:13 $
 	#
-	# $Id: strings_french.txt,v 1.121 2007-09-29 18:15:32 vboctor Exp $
+	# $Id: strings_french.txt,v 1.122 2007-10-24 22:31:13 giallu Exp $
 	###########################################################################
 
 ?>

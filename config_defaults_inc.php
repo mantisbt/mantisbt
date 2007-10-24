@@ -1,12 +1,24 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.365 2007-10-04 05:59:04 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.366 2007-10-24 22:30:46 giallu Exp $
 	# --------------------------------------------------------
 
 
@@ -528,6 +540,9 @@
 	# Only users above this threshold will have their avatar shown
 	$g_show_avatar_threshold = DEVELOPER;
 
+        # Default avatar for users without a gravatar account
+        $g_default_avatar = "%path%images/no_avatar.png";
+
 	############################
 	# Mantis JPGRAPH Addon
 	############################
@@ -573,13 +588,8 @@
 	# Mantis Time Settings
 	############################
 
-	# --- time varaibles --------------
-
 	# time for 'permanent' cookie to live in seconds (1 year)
 	$g_cookie_time_length	= 30000000;
-
-	# time to delay between page redirects (in seconds)
-	$g_wait_time			= 2;
 
 	# minutes to wait before document is stale (in minutes)
 	$g_content_expire		= 0;

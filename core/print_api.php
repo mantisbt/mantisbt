@@ -1,12 +1,24 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.185 2007-10-24 05:29:18 vboctor Exp $
+	# $Id: print_api.php,v 1.186 2007-10-24 22:30:59 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -114,12 +126,14 @@
 
 		if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
 			$t_avatar = user_get_avatar( $p_user_id );
-			$t_avatar_url = $t_avatar[0];
-			$t_width = $t_avatar[1];
-			$t_height = $t_avatar[2];
-			echo '<a rel="nofollow" href="http://site.gravatar.com">' .
-				'<img class="avatar" src="' . $t_avatar_url . '" alt="Gravatar image"' .
-				' width="' . $t_width . '" height="' . $t_height . '" /></a>';
+			if ( false !== $t_avatar ) {
+				$t_avatar_url = $t_avatar[0];
+				$t_width = $t_avatar[1];
+				$t_height = $t_avatar[2];
+				echo '<a rel="nofollow" href="http://site.gravatar.com">' .
+					'<img class="avatar" src="' . $t_avatar_url . '" alt="User avatar"' .
+					' width="' . $t_width . '" height="' . $t_height . '" /></a>';
+			}
 		}
 	}
 

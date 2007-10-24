@@ -1,5 +1,33 @@
 Mantis ChangeLog
 
+2007.10.23  -  1.1.0rc2
+
+- 0008467: [security] Users can login using the MD5 hash of the password (vboctor) - resolved.
+- 0008480: [security] XSS Vulnerability in Tag details, Attach Tags (jreese) - resolved.
+- 0008457: [administration] Removing a userdefined field from project results in APPLICATION ERROR #203 (vboctor) - resolved.
+- 0008490: [administration] Undefined variable: t_version in manage_proj_ver_copy.php (vboctor) - resolved.
+- 0008492: [api soap] Add attachment succeeds but creates broken attachment if upload path not found (vboctor) - resolved.
+- 0008493: [api soap] Attachments created via SOAP API don't honor attachments_file_permissions config option (vboctor) - resolved.
+- 0008241: [customization] Disable Roadmap (vboctor) - resolved.
+- 0007787: [feature] Robust threading of e-mails using MIME headers (giallu) - resolved.
+- 0008465: [filters] collapse filter section as default (giallu) - resolved.
+- 0008254: [integration] Gravatar integration should handle empty email addresses (giallu) - resolved.
+- 0008446: [localization] Update Estonian Language (vboctor) - resolved.
+- 0008459: [localization] Update catalan translation (vboctor) - resolved.
+- 0008463: [localization] re-authentication button does not appear in user's language (jreese) - resolved.
+- 0008468: [localization] $s_select_option is missing in german language (vboctor) - resolved.
+- 0008489: [localization] Update Japanese Localization for 1.1.0rc2 (vboctor) - resolved.
+- 0005612: [other] Redirect time ignored in preferences (giallu) - resolved.
+- 0007497: [other] Summary page is little of Garble (vboctor) - resolved.
+- 0007999: [other] Project list view corrupted (vboctor) - resolved.
+- 0008378: [other] Select custom avatar for default Gravatar image. (giallu) - resolved.
+- 0008476: [other] Add a service to disposable email address checker (zakman) - resolved.
+- 0008500: [other] Empty entry in "Category" drop down (vboctor) - resolved.
+- 0008475: [printing] Function used two times in the same file (only one is necessary) (vboctor) - resolved.
+- 0008461: [signup] signup_page and lost_pwd_page don't work if anonymous access not enabled (vboctor) - resolved.
+- 0008443: [tagging] creating new tags for multi-selection (jreese) - resolved.
+- 0008454: [time tracking] time tracking sum on request wrong (vboctor) - resolved.
+
 2007.10.03  -  1.1.0rc1
 
 - 0008286: [security] Add .htaccess to block access to core/, doc/, lang/, packages/ (vboctor) - resolved.

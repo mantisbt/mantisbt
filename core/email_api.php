@@ -1,12 +1,24 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.139 2007-09-26 02:54:57 vboctor Exp $
+	# $Id: email_api.php,v 1.140 2007-10-24 22:30:59 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -917,9 +929,19 @@
 
 		$t_message .= email_format_bug_message(  $p_visible_bug_data );
 
+		# build headers
+		$t_bug_id = $p_visible_bug_data['email_bug'];
+		$t_message_md5 = md5( $t_bug_id . $p_visible_bug_data['email_date_submitted'] );
+		$t_mail_headers = array( 'keywords' => $p_visible_bug_data['set_category'] );
+		if ( $p_message_id == 'email_notification_title_for_action_bug_submitted' ) {
+			$t_mail_headers['Message-ID'] = "<{$t_message_md5}>";
+		} else {
+			$t_mail_headers['In-Reply-To'] = "<{$t_message_md5}>";
+		}
+
 		# send mail
 		# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
-		$t_ok = email_store( $t_user_email, $t_subject, $t_message, array( 'keywords' => $p_visible_bug_data['set_category'] ) );
+		$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
 
 		return $t_ok;
 	}

@@ -1,12 +1,24 @@
 /*
- * Mantis - a php based bugtracking system
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
- * This program is distributed under the terms and conditions of the GPL
- * See the README and LICENSE files for details
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.10 2007-08-24 19:04:44 nuclear_eclipse Exp $
+ * $Id: common.js,v 1.11 2007-10-24 22:31:02 giallu Exp $
  * --------------------------------------------------------
  */
 
@@ -82,21 +94,34 @@ function SetCookie( p_cookie, p_value ) {
  * Collapsible element functions
  */
 
-var g_div_history		= 0x0001;
-var g_div_bugnotes		= 0x0002;
-var g_div_bugnote_add	= 0x0004;
-var g_div_bugnotestats	= 0x0008;
-var g_div_upload_form	= 0x0010;
-var g_div_monitoring	= 0x0020;
-var g_div_sponsorship	= 0x0040;
-var g_div_relationships	= 0x0080;
+var g_div_history       = 0x0001;
+var g_div_bugnotes      = 0x0002;
+var g_div_bugnote_add   = 0x0004;
+var g_div_bugnotestats  = 0x0008;
+var g_div_upload_form   = 0x0010;
+var g_div_monitoring    = 0x0020;
+var g_div_sponsorship   = 0x0040;
+var g_div_relationships = 0x0080;
 var g_div_filter        = 0x0100;
+
+
+/* List here the sections open by default */
+var g_default_view_settings = 
+	g_div_history | 
+	g_div_bugnotes |
+	g_div_bugnote_add |
+	g_div_bugnotestats |
+	g_div_upload_form |
+	g_div_monitoring |
+	g_div_sponsorship |
+	g_div_relationships;
+
 
 function GetViewSettings() {
 	var t_cookie = GetCookie( "VIEW_SETTINGS" );
 
 	if ( -1 == t_cookie ) {
-		t_cookie = 0xffff;
+		t_cookie = g_default_view_settings;
 	} else {
 		t_cookie = parseInt( t_cookie );
 	}
