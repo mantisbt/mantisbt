@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.184 2007-10-18 15:42:10 nuclear_eclipse Exp $
+	# $Id: print_api.php,v 1.185 2007-10-24 05:29:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -690,7 +690,7 @@
 		# Add the default option if not in the list retrieved from DB		
 		# This is useful for default categories and when updating an
 		# issue with a deleted category.
-		if ( !in_array( $p_category, $cat_arr ) ) {
+		if ( !is_blank( $p_category ) && !in_array( $p_category, $cat_arr ) ) {
 			$cat_arr[] = $p_category;
 		}
 
