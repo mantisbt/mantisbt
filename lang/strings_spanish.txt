@@ -29,11 +29,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.114 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:19 $
+	# $Revision: 1.115 $
+	# $Author: jbrugger $
+	# $Date: 2007-10-25 17:29:23 $
 	#
-	# $Id: strings_spanish.txt,v 1.114 2007-10-24 22:31:19 giallu Exp $
+	# $Id: strings_spanish.txt,v 1.115 2007-10-25 17:29:23 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -228,7 +228,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nota no encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyecto no encontrado';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de datos \'%s\' no encontrado.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Imposible conectarse al servidor FTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'El gestor de incidencias no tiene los permisos suficientes para gestionarincidencias con este estado ';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'El gestor de incidencias no tiene los permisos suficientes para gestionar incidencias con este estado ';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ya existe un proyecto con ese nombre. Por favor, regrese y seleccione un nombre diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nombre de proyecto no válido. Los nombres de proyecto no pueden estar en blanco.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'Usuario no encontrado.';
@@ -608,7 +608,7 @@ $s_projection = 'Proyección';
 $s_os_version = 'Versión de S.O.';
 $s_eta = 'Tiempo Estimado';
 $s_product_version = 'Versión del producto';
-$s_build = 'Build';
+$s_build = 'Compilación';
 $s_fixed_in_version = 'Resuelta en versión';
 $s_target_version = 'Previsto para Versión';
 $s_votes = 'Votos';
@@ -703,7 +703,7 @@ $s_create_user_button = 'Crear usuario';
 # manage_page.php
 $s_hide_disabled = 'Ocultar Desactivados';
 $s_filter_button = 'Filtrar';
-$s_create_filter_link = 'Crear Permalink';
+$s_create_filter_link = 'Crear Enlace Permanente';
 $s_create_short_link = 'Crear enlace corto';
 $s_filter_permalink = 'El siguiente es un enlace permanente para el filtro actualmente definido:';
 $s_manage_users_link = 'Administrar Usuarios';
@@ -1033,7 +1033,7 @@ $s_submission_thanks_msg = 'Gracias por su reporte';
 
 # report_bug_advanced_page.php
 $s_simple_report_link = 'Informe Simple';
-$s_enter_report_details_title = 'Introduzca el detalle de la incidencia.';
+$s_enter_report_details_title = 'Introduzca los detalles de la incidencia.';
 $s_required = 'Requerido';
 $s_select_category = 'Seleccione Categoría';
 $s_select_reproducibility = 'Seleccione Reproducibilidad';
@@ -1112,11 +1112,11 @@ $s_orct = '(Abiertas/Resueltas/Cerradas/Total)';
 $s_any = 'Cualquiera';
 $s_all = 'todas';
 $s_show = 'Ver';
-$s_changed = 'Cambiado (hs.)';
+$s_changed = 'Modificadas (hs.)';
 $s_viewing_bugs_title = 'Mostrando Incidencias';
-$s_updated = 'Actualizado';
+$s_updated = 'Actualizada';
 $s_sticky = 'Ver Incidencias Fijadas';
-$s_sort = 'Ordenado por';
+$s_sort = 'Ordenadas por';
 $s_issue_id = 'Incidencia #';
 $s_recently_visited = 'Visitadas recientemente';
 $s_priority_abbreviation = 'P';
@@ -1158,7 +1158,7 @@ $s_query_delete_msg = '¿Está seguro que desea borrar ese filtro?';
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Cambiar a Vista Simple';
 $s_viewing_bug_advanced_details_title = 'Vista Avanzada de la Incidencia';
-$s_product_build = 'Build del Producto';
+$s_product_build = 'Compilación del Producto';
 $s_system_profile = 'Descripción del Sistema';
 $s_update_bug_button = 'Actualizar Incidencia';
 $s_bug_assign_to_button = 'Asignar A:';
