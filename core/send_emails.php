@@ -1,3 +1,4 @@
+<?php
 #!/usr/local/bin/php -q
 # Mantis - a php based bugtracking system
 
@@ -19,7 +20,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: send_emails.php,v 1.2 2007-10-24 22:30:59 giallu Exp $
+	# $Id: send_emails.php,v 1.3 2007-10-26 13:35:54 giallu Exp $
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;
