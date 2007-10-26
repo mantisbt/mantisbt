@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.93 2007-10-24 22:30:44 giallu Exp $
+	# $Id: bug_update.php,v 1.94 2007-10-26 09:02:34 giallu Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -190,7 +190,7 @@
 	}
 
 	# Add a bugnote if there is one
-	if ( ( !is_blank( $f_bugnote_text ) || !is_blank( $f_time_tracking ) ) && ( false == $t_bug_note_set ) ) {
+	if ( ( !is_blank( $f_bugnote_text ) ) && ( false == $t_bug_note_set ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
 	}
 
