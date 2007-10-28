@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.364.2.5 2007-10-24 05:35:39 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.364.2.6 2007-10-28 15:39:30 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 
@@ -342,7 +342,6 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.1.0rc2';
 	$g_show_version			= ON;
 
 	################################

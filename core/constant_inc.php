@@ -18,10 +18,10 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.74.2.1 2007-10-13 22:35:19 giallu Exp $
+	# $Id: constant_inc.php,v 1.74.2.2 2007-10-28 15:39:31 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
-	### CONSTANTS  ###
+	define( 'MANTIS_VERSION', '1.1.0rc2' );
 
 	# --- constants -------------------
 
