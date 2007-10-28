@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.66 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_all_bug_page_word.php,v 1.67 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -108,8 +108,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
             $t_bug_text_table = config_get( 'mantis_bug_text_table' );
             $query3 = "SELECT *
                 FROM $t_bug_text_table
-                WHERE id='$v_bug_text_id'";
-            $result3 = db_query( $query3 );
+                WHERE id=" . db_param(0);
+            $result3 = db_query_bound( $query3, Array( $v_bug_text_id ) );
             $row = db_fetch_array( $result3 );
             extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
@@ -350,8 +350,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	   $t_user_prof_table = config_get( 'mantis_user_profile_table' );
 		$query4 = "SELECT description
 				FROM $t_user_prof_table
-				WHERE id='$v_profile_id'";
-		$result4 = db_query( $query4 );
+				WHERE id=" . db_param(0);
+		$result4 = db_query_bound( $query4, Array( $v_profile_id ) );
 		$t_profile_description = '';
 		if ( db_num_rows( $result4 ) > 0 ) {
 			$t_profile_description = db_result( $result4, 0 );
@@ -379,8 +379,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	        $t_bug_file_table = config_get( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
 					FROM $t_bug_file_table
-					WHERE bug_id='$v_id'";
-			$result5 = db_query( $query5 );
+					WHERE bug_id=" . db_param(0);
+			$result5 = db_query_bound( $query5, Array( $v_id ) );
 			$num_files = db_num_rows( $result5 );
 			for ( $i=0;$i<$num_files;$i++ ) {
 				$row = db_fetch_array( $result5 );
@@ -417,9 +417,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 	$query6 = "SELECT *
 			FROM $t_bugnote_table
-			WHERE bug_id='$v_id' $t_restriction
+			WHERE bug_id=" . db_param(0) . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$result6 = db_query( $query6 );
+	$result6 = db_query_bound( $query6, Array( $v_id ) );
 	$num_notes = db_num_rows( $result6 );
 ?>
 
@@ -453,8 +453,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id
 					FROM $t_bugnote_text_table
-					WHERE id='$v3_bugnote_text_id'";
-			$result7 = db_query( $query6 );
+					WHERE id=" . db_param(0);
+			$result7 = db_query_bound( $query6, Array( $v3_bugnote_text_id ) );
 			$v3_note = db_result( $result7, 0, 0 );
 			$v3_bugnote_text_id = db_result( $result7, 0, 1 );
 

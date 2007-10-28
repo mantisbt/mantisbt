@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.79 2007-10-28 01:06:37 prichards Exp $
+	# $Id: project_api.php,v 1.80 2007-10-28 17:06:43 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -195,7 +195,7 @@
 				  FROM $t_project_user_list_table
 				  WHERE project_id=" . db_param(0) . " AND
 						user_id=" . db_param(1);
-		$result = db_query_bound( $query, Array( $c_project_id, $c_user_id );
+		$result = db_query_bound( $query, Array( $c_project_id, $c_user_id ) );
 
 		if ( 0 == db_result( $result ) ) {
 			return false;

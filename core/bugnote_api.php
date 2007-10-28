@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.48 2007-10-28 01:06:36 prichards Exp $
+	# $Id: bugnote_api.php,v 1.49 2007-10-28 17:06:43 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -198,14 +198,14 @@
 
 			# Delete the corresponding bugnote texts
 			$query = "DELETE FROM $t_bugnote_text_table
-			          	WHERE id='$t_bugnote_text_id'";
-			db_query( $query );
+			          	WHERE id=" . db_param(0);
+			db_query_bound( $query, Array( $t_bugnote_text_id ) );
 		}
 
 		# Delete the corresponding bugnotes
 		$query = "DELETE FROM $t_bugnote_table
-		          	WHERE bug_id='$c_bug_id'";
-		$result = db_query( $query );
+		          	WHERE bug_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		# db_query errors on failure so:
 		return true;

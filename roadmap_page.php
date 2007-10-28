@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: roadmap_page.php,v 1.9 2007-10-24 22:30:52 giallu Exp $
+	# $Id: roadmap_page.php,v 1.10 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -104,13 +104,13 @@
 
 			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
 						LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-						WHERE project_id='$c_project_id' AND target_version='$c_version' ORDER BY status ASC, last_updated DESC";
+						WHERE project_id=" . db_param(0) . " AND target_version=" . db_param(1) . " ORDER BY status ASC, last_updated DESC";
 
 			$t_description = $t_version_row['description'];
 
 			$t_first_entry = true;
 
-			$t_result = db_query( $query );
+			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
 
 			$t_issue_ids = array();
 			$t_issue_parents = array();

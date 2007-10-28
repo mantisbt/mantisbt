@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.8 2007-10-28 01:06:37 prichards Exp $
+	# $Id: sponsorship_api.php,v 1.9 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -66,8 +66,8 @@
 
 		$query = "SELECT *
 				  FROM $t_sponsorship_table
-				  WHERE id='$c_sponsorship_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_sponsorship_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			$g_cache_sponsorships[$c_sponsorship_id] = false;

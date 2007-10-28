@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.115 2007-10-28 01:06:38 prichards Exp $
+	# $Id: user_api.php,v 1.116 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -128,8 +128,8 @@
 
 		$query = "SELECT username
 				FROM $t_user_table
-				WHERE username='$c_username'";
-		$result = db_query( $query, 1 );
+				WHERE username=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_username ), 1 );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			return false;
@@ -524,8 +524,8 @@
 
 		# Remove account
 		$query = "DELETE FROM $t_user_table
-				  WHERE id='$c_user_id'";
-		db_query( $query );
+				  WHERE id=" .db_param(0);
+		db_query_bound( $query, Array( $c_user_id ) );
 
 		return true;
 	}
@@ -1043,13 +1043,12 @@
 	# --------------------
 	# Increment the failed login count by 1
 	function user_increment_lost_password_in_progress_count( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=lost_password_request_count+1
-				WHERE id='$c_user_id'";
-		db_query( $query );
+				WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -1107,10 +1106,10 @@
 		$c_user_table	= config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $c_user_table
-				  SET password='$c_password',
-				  cookie_string='$c_cookie_string'
-				  WHERE id='$c_user_id'";
-		db_query( $query );
+				  SET password=" . db_param(0) . ",
+				  cookie_string=" . db_param(1) . "
+				  WHERE id=" . db_param(2);
+		db_query_bound( $query, Array( $c_password, $c_cookie_string, $c_user_id ) );
 
 		#db_query errors on failure so:
 		return true;

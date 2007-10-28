@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd.php,v 1.8 2007-10-24 22:30:47 giallu Exp $
+	# $Id: lost_pwd.php,v 1.9 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -51,8 +51,8 @@
 	$t_user_table = config_get( 'mantis_user_table' );
 
 	# @@@ Consider moving this query to user_api.php
-	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = \'' . $c_username . '\' AND email = \'' . $c_email . '\' AND enabled=1';
-	$result = db_query( $query );
+	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param(0) . ' AND email = ' . db_param(1) . ' AND enabled=1';
+	$result = db_query_bound( $query, Array( $c_username, $c_email ) );
 
 	if ( 0 == db_num_rows( $result ) ) {
 		trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );

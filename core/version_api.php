@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.26 2007-10-28 01:06:38 prichards Exp $
+	# $Id: version_api.php,v 1.27 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -185,14 +185,14 @@
 			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
-					  SET fixed_in_version='$c_version_name'
-					  WHERE ( project_id='$c_project_id' ) AND ( fixed_in_version='$c_old_version_name' )";
-			db_query( $query );
+					  SET fixed_in_version=" . db_param(0) . '
+					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
-					  SET target_version='$c_version_name'
-					  WHERE ( project_id='$c_project_id' ) AND ( target_version='$c_old_version_name' )";
-			db_query( $query );
+					  SET target_version=" . db_param(0) . '
+					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			# @@@ We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
 			# 		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.

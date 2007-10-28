@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.64 2007-10-28 01:06:36 prichards Exp $
+	# $Id: authentication_api.php,v 1.65 2007-10-28 17:06:43 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -402,9 +402,8 @@
 				if ( $g_cache_anonymous_user_cookie_string === null ) {
                     if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
                         # get anonymous information if database is available
-                        $query = sprintf('SELECT id, cookie_string FROM %s WHERE username = \'%s\'',
-								config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-                        $result = db_query( $query );
+                        $query = 'SELECT id, cookie_string FROM ' . config_get( 'mantis_user_table' ) . ' WHERE username = ' . db_param(0);
+                        $result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
                         
                         if ( 1 == db_num_rows( $result ) ) {
                             $row = db_fetch_array( $result );

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.27 2007-10-28 01:06:35 prichards Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.28 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -106,9 +106,9 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 				INTO $t_user_print_pref_table
 				(user_id, print_pref)
 				VALUES
-				('$c_user_id','$t_default')";
+				(" . db_param(0) . "," . db_param(1) . ")";
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_user_id, $t_default ) );
 
 		# Rerun select query
 		$query = "SELECT print_pref

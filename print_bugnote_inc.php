@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.35 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_bugnote_inc.php,v 1.36 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,9 +51,9 @@
 
 	$query = "SELECT *
 			FROM $t_bugnote_table
-			WHERE bug_id='$c_bug_id' $t_restriction
+			WHERE bug_id=" . db_param(0) . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$result = db_query($query);
+	$result = db_query_bound($query, Array( $c_bug_id ) );
 	$num_notes = db_num_rows($result);
 ?>
 
@@ -86,8 +86,8 @@
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id
 				FROM $t_bugnote_text_table
-				WHERE id='$v3_bugnote_text_id'";
-		$result2 = db_query( $query );
+				WHERE id=" . db_param(0);
+		$result2 = db_query_bound( $query, Array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
 

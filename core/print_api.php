@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.187 2007-10-28 01:06:37 prichards Exp $
+	# $Id: print_api.php,v 1.188 2007-10-28 17:06:43 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -263,7 +263,7 @@
 	    $query = "SELECT id
 	    		FROM " . config_get ( 'mantis_bug_table' ) . "
 	    		ORDER BY id ASC";
-	    $result = db_query( $query );
+	    $result = db_query_bound( $query );
 	    $duplicate_id_count = db_num_rows( $result );
 	    PRINT '<option value="0"></option>';
 

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.27 2007-10-24 22:30:51 giallu Exp $
+	# $Id: proj_doc_delete.php,v 1.28 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -36,8 +36,8 @@
 
 	$t_project_file_table = config_get( 'mantis_project_file_table' );
 	$query = "SELECT title FROM $t_project_file_table 
-				WHERE id=$f_file_id";
-	$result = db_query( $query );
+				WHERE id=" . db_param(0);
+	$result = db_query_bound( $query, Array( $f_file_id ) );
 	$t_title = db_result( $result );
 
 	# Confirm with the user

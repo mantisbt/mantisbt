@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.40 2007-10-24 22:30:51 giallu Exp $
+	# $Id: proj_doc_edit_page.php,v 1.41 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -44,8 +44,8 @@
 	$t_proj_file_table = config_get( 'mantis_project_file_table' );
 	$query = "SELECT *
 			FROM $t_proj_file_table
-			WHERE id='$c_file_id'";
-	$result = db_query( $query );
+			WHERE id=" . db_param(0);
+	$result = db_query_bound( $query, Array( $c_file_id ) );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 

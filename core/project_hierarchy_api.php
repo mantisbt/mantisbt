@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.9 2007-10-28 01:06:37 prichards Exp $
+	# $Id: project_hierarchy_api.php,v 1.10 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -52,10 +52,10 @@
 		$c_parent_id = db_prepare_int( $p_parent_id );
 
 		$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = $c_child_id
-						AND parent_id = $c_parent_id";
+		                WHERE child_id = " . db_param(0) . "
+						AND parent_id = " . db_param(1);
 
-		db_query($query);
+		db_query_bound($query, Array( $c_child_id, $c_parent_id ) );
 	}
 
 	# --------------------
@@ -65,10 +65,10 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = $c_project_id
-						  OR parent_id = $c_project_id";
+		                WHERE child_id = " . db_param(0) . "
+						  OR parent_id = " . db_param(1);
 
-		db_query($query);
+		db_query_bound($query, Array( $c_project_id, $c_project_id ) );
 	}
 
 	# --------------------

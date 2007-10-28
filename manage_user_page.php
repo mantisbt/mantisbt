@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.65 2007-10-24 22:30:49 giallu Exp $
+	# $Id: manage_user_page.php,v 1.66 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -129,7 +129,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		FROM $t_user_table
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit )
 		ORDER BY date_created DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 	$user_count = db_num_rows( $result );
 
 	if ( $user_count > 0 ) {

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.7 2007-10-28 01:06:38 prichards Exp $
+	# $Id: tag_api.php,v 1.8 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -650,8 +650,8 @@
 		$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
 
 		$query = "SELECT COUNT(*) FROM $t_bug_tag_table
-					WHERE tag_id='$c_tag_id'";
-		$result = db_query( $query );
+					WHERE tag_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_tag_id ) );
 
 		return db_result( $result );
 	}

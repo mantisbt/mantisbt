@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.11 2007-10-28 01:06:38 prichards Exp $
+	# $Id: tokens_api.php,v 1.12 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
@@ -152,8 +152,8 @@
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
 		$t_query = "DELETE FROM $t_tokens_table 
-					WHERE type='$c_type' AND owner='$c_user_id'";
-		db_query( $t_query );
+					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
+		db_query_bound( $t_query, Array( $c_type, $c_user_id ) );
 
 		return true;
 	}
@@ -174,8 +174,8 @@
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
-		          	WHERE owner='$c_user_id'";
-		db_query( $t_query );
+		          	WHERE owner=" . db_param(0);
+		db_query_bound( $t_query, Array( $c_user_id ) );
 
 		return true;
 	}
@@ -241,8 +241,8 @@
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
-		          	WHERE type='$c_token_type'";
-		db_query( $t_query );
+		          	WHERE type=" . db_param(0);
+		db_query_bound( $t_query, Array( $c_token_type ) );
 
 		return true;
 	}

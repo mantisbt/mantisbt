@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.59 2007-10-28 01:06:36 prichards Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.60 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -144,8 +144,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
             $t_bug_text_table = config_get( 'mantis_bug_text_table' );
             $query4 = "SELECT *
                 FROM $t_bug_text_table
-                WHERE id='$v_bug_text_id'";
-            $result4 = db_query( $query4 );
+                WHERE id=" . db_param(0);
+            $result4 = db_query_bound( $query4, Array( $v_bug_text_id ) );
             $row = db_fetch_array( $result4 );
             extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
@@ -341,8 +341,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
         	$t_file_table = config_get( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
 					FROM $t_file_table
-					WHERE bug_id='$v_id'";
-			$result5 = db_query( $query5 );
+					WHERE bug_id=" . db_param(0);
+			$result5 = db_query_bound( $query5, Array( $v_id ) );
 			$num_files = db_num_rows( $result5 );
 			for ( $j=0;$j<$num_files;$j++ ) {
 				$row = db_fetch_array( $result5 );
@@ -379,9 +379,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 		$query6 = "SELECT *
 				FROM $t_bugnote_table
-				WHERE bug_id='$v_id' $t_restriction
+				WHERE bug_id=" . db_param(0) . " $t_restriction
 				ORDER BY date_submitted $t_bugnote_order";
-		$result6 = db_query( $query6 );
+		$result6 = db_query_bound( $query6, Array( $v_id ) );
 		$num_notes = db_num_rows( $result6 );
 
 		# save the index, and use an own bugnote_index
@@ -396,8 +396,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id
 					FROM $t_bugnote_text_table
-					WHERE id='$v3_bugnote_text_id'";
-			$result7 = db_query( $query6 );
+					WHERE id=" . db_param(0);
+			$result7 = db_query_bound( $query6, Array( $v3_bugnote_text_id ) );
 			$v3_note = db_result( $result7, 0, 0 );
 			$v3_bugnote_text_id = db_result( $result7, 0, 1 );
 			$t_note = '';

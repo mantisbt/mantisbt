@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.31 2007-10-24 22:30:51 giallu Exp $
+	# $Id: proj_doc_update.php,v 1.32 2007-10-28 17:06:45 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -124,24 +124,24 @@
 				$c_content = '';
 				break;
 			case DATABASE:
-				$c_content = db_prepare_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
+				$c_content = db_prepare_binary_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
 				break;
 			default:
 				# @@@ Such errors should be checked in the admin checks
 				trigger_error( ERROR_GENERIC, ERROR );
-		}
-		$t_now = db_now();
+		}		
 		$query = "UPDATE $t_project_file_table
-			SET title='$c_title', description='$c_description', date_added=$t_now,
-				filename='$c_file_name', filesize=$c_file_size, file_type='$c_file_type', content='$c_content'
-				WHERE id='$c_file_id'";
+			SET title=" . db_param(0) . ", description=" . db_param(1) . ", date_added=" . db_param(2) . ",
+				filename=" . db_param(3) . ", filesize=" . db_param(4) . ", file_type=" .db_param(5) . ", content=" .db_param(6) . "
+				WHERE id=" . db_param(7);
+		$result = db_query_bound( $query, Array( $c_title, $c_description, db_now(), $c_file_name, $c_file_size, $c_file_type, $c_content, $c_file_id ) );
 	} else {
 		$query = "UPDATE $t_project_file_table
-				SET title='$c_title', description='$c_description'
-				WHERE id='$c_file_id'";
+				SET title=" . db_param(0) . ", description=" . db_param(1) . "
+				WHERE id=" . db_param(2);
+		$result = db_query_bound( $query, Array( $c_title, $c_description, $c_file_id ) );
 	}
-
-	$result = db_query( $query );
+	
 	if ( !$result ) {
 		trigger_error( ERROR_GENERIC, ERROR  );
 	}

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.25 2007-10-28 01:06:35 prichards Exp $
+	# $Id: changelog_page.php,v 1.26 2007-10-28 17:06:44 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -109,7 +109,7 @@
 			$t_issue_ids = array();
 			$t_issue_parents = array();
 
-			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version );
+			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.
