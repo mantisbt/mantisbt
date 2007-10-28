@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.85.2.2 2007-10-28 19:05:46 giallu Exp $
+	# $Id: file_api.php,v 1.85.2.3 2007-10-28 19:08:29 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -249,7 +249,7 @@ document.getElementById( span ).style.display = displayType;
 					}
 					echo htmlspecialchars($v_content);
 
-					PRINT "</pre>";
+					PRINT "</pre></span>\n";
 				}
 
 
