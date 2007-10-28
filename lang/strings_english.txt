@@ -23,11 +23,11 @@
 	###########################################################################
 	# English strings for Mantis (source language for translations)
 	# -------------------------------------------------
-	# $Revision: 1.316.2.1 $
+	# $Revision: 1.316.2.2 $
 	# $Author: giallu $
-	# $Date: 2007-10-13 22:36:08 $
+	# $Date: 2007-10-28 19:05:46 $
 	#
-	# $Id: strings_english.txt,v 1.316.2.1 2007-10-13 22:36:08 giallu Exp $
+	# $Id: strings_english.txt,v 1.316.2.2 2007-10-28 19:05:46 giallu Exp $
 	###########################################################################
 
 ?>
@@ -644,6 +644,7 @@ $s_bugnote_updated_msg = 'Note has been successfully updated...';
 $s_edited_on = 'edited on: ';
 
 # file_api.php
+$s_hide_content ='Hide Content';
 $s_show_content ='Show Content';
 
 # index.php

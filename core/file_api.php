@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.85.2.1 2007-10-13 22:35:26 giallu Exp $
+	# $Id: file_api.php,v 1.85.2.2 2007-10-28 19:05:46 giallu Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -213,13 +213,16 @@
 					echo "<script type=\"text/javascript\" language=\"JavaScript\">
 <!--
 function swap_content( span ) {
-displayType = ( document.getElementById( span ).style.display == 'none' ) ? 'block' : 'none';
+displayType = ( document.getElementById( span ).style.display == 'none' ) ? '' : 'none';
 document.getElementById( span ).style.display = displayType;
 }
 
  -->
  </script>";
-					PRINT "[<a class=\"small\" href='#' id='attmlink_".$c_id."' onclick='swap_content(\"attm_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]<blockquote style='display:none' id='attm_".$c_id."' class=''><pre>";
+					PRINT " <span id=\"hideSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_".$c_id."' onclick='swap_content(\"hideSection_".$c_id."\");swap_content(\"showSection_".$c_id."\");return false;'>". lang_get( 'show_content' ) ."</a>]</span>";
+					PRINT " <span style='display:none' id=\"showSection_$c_id\">[<a class=\"small\" href='#' id='attmlink_".$c_id."' onclick='swap_content(\"hideSection_".$c_id."\");swap_content(\"showSection_".$c_id."\");return false;'>". lang_get( 'hide_content' ) ."</a>]";
+
+					PRINT "<pre>";
 					switch ( config_get( 'file_upload_method' ) ) {
 						case DISK:
 							if ( file_exists( $v_diskfile ) ) {
@@ -246,7 +249,7 @@ document.getElementById( span ).style.display = displayType;
 					}
 					echo htmlspecialchars($v_content);
 
-					PRINT "</pre></blockquote>";
+					PRINT "</pre>";
 				}
 
 
