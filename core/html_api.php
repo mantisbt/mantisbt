@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.220 2007-10-24 22:30:59 giallu Exp $
+	# $Id: html_api.php,v 1.221 2007-10-28 15:35:13 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -412,7 +412,7 @@
 
 		echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr valign="top"><td>';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ', config_get( 'mantis_version' ), '</a>',
+			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ', MANTIS_VERSION, '</a>',
 					'[<a href="http://www.mantisbt.org/"  title="Free Web Based Bug Tracker" target="_blank">^</a>]</span>', "\n";
 		}
 		echo "\t", '<address>Copyright &copy; 2000 - 2007 Mantis Group</address>', "\n";

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.366 2007-10-24 22:30:46 giallu Exp $
+	# $Id: config_defaults_inc.php,v 1.367 2007-10-28 15:35:13 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 
@@ -342,7 +342,6 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '1.2.0-CVS';
 	$g_show_version			= ON;
 
 	################################
