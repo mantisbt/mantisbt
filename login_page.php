@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.58 2007-10-24 22:30:47 giallu Exp $
+	# $Id: login_page.php,v 1.59 2007-10-28 15:42:50 prichards Exp $
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php
@@ -169,7 +169,7 @@
 		if ( $t_db_version == 0 ) {
 			if ( db_table_exists( config_get( 'mantis_upgrade_table' ) ) ) {
 				$query = "SELECT COUNT(*) from " . config_get( 'mantis_upgrade_table' ) . ";";
-				$result = db_query( $query );
+				$result = db_query_bound( $query );
 				if ( db_num_rows( $result ) < 1 ) {
 					$t_upgrade_count = 0;
 				} else {
@@ -180,21 +180,17 @@
 			}
 
 			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
-				if ( file_exists( 'admin/upgrade_inc.php' ) ) {
-					require_once( 'admin/upgrade_inc.php' );
-					$t_upgrades_reqd = $upgrade_set->count_items();
-				} else {
-					// can't find upgrade file, assume system is up to date
-					$t_upgrades_reqd = $t_upgrade_count;
-				}
-			} else {
-				$t_upgrades_reqd = 1000; # arbitrarily large number to force an upgrade
-			}
-
-			if ( ( $t_upgrade_count != $t_upgrades_reqd ) &&
-					( $t_upgrade_count != ( $t_upgrades_reqd + 10 ) ) ) { # there are 10 optional data escaping fixes that may be present
+			
+				# new config table database version is 0.
+				# old upgrade tables exist. 
+				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
 				echo '<div class="warning" align="center">';
-				echo '<p><font color="red"><strong>WARNING:</strong> The database structure may be out of date. Please upgrade <a href="admin/upgrade.php">here</a> before logging in.</font></p>';
+				echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of mantis introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.</font></p>';
+				echo '</div>';
+			} else {
+				# old upgrade tables do not exist, yet config database_version is 0
+				echo '<div class="warning" align="center">';
+				echo '<p><font color="red"><strong>ERROR:</strong> The database structure appears to be out of date(config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.</font></p>';
 				echo '</div>';
 			}
 		}
