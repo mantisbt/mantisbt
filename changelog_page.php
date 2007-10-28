@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.24 2007-10-24 22:30:46 giallu Exp $
+	# $Id: changelog_page.php,v 1.25 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -101,7 +101,7 @@
 
 			$query = "SELECT $t_bug_table.*, $t_relation_table.source_bug_id FROM $t_bug_table
 					LEFT JOIN $t_relation_table ON $t_bug_table.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-					WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY status ASC, last_updated DESC";
+					WHERE project_id=" . db_param(0) . " AND fixed_in_version=" . db_param(1) . " ORDER BY status ASC, last_updated DESC";
 
 			$t_description = version_get_field( $t_version_id, 'description' );
 					
@@ -109,7 +109,7 @@
 			$t_issue_ids = array();
 			$t_issue_parents = array();
 
-			$t_result = db_query( $query );
+			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version );
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tag_api.php,v 1.6 2007-10-24 22:30:59 giallu Exp $
+	# $Id: tag_api.php,v 1.7 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 
 	/**
@@ -42,8 +42,8 @@
 		$c_tag_id = db_prepare_int( $p_tag_id );
 		$t_tag_table = config_get( 'mantis_tag_table' );
 
-		$query = "SELECT * FROM $t_tag_table WHERE id='$c_tag_id'";
-		$result = db_query( $query ) ;
+		$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_tag_id ) ) ;
 
 		return db_num_rows( $result ) > 0;
 	}
@@ -215,8 +215,8 @@
 		$t_tag_table	= config_get( 'mantis_tag_table' );
 
 		$query = "SELECT * FROM $t_tag_table
-					WHERE id='$c_tag_id'";
-		$result = db_query( $query );
+					WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_tag_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;

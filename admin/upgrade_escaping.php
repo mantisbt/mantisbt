@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: upgrade_escaping.php,v 1.8 2007-10-24 22:30:58 giallu Exp $
+	# $Id: upgrade_escaping.php,v 1.9 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -81,7 +81,7 @@
 				  description char(255) NOT NULL,
 				  PRIMARY KEY (upgrade_id))";
 
-        $result = db_query( $query );
+        $result = db_query_bound( $query );
     }
 
 

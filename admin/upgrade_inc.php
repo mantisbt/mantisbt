@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.22 2007-10-24 22:30:58 giallu Exp $
+	# $Id: upgrade_inc.php,v 1.23 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'db_table_names_inc.php' );
@@ -32,7 +32,7 @@
 		$c_table_name = db_prepare_string( $p_table_name );
 		$c_field_name = db_prepare_string( $p_field_name );
 
-		$result = db_query( "DESCRIBE $c_table_name $c_field_name" );
+		$result = db_query_bound( "DESCRIBE $c_table_name $c_field_name" );
 
 		if ( $result && ( 0 < db_num_rows( $result ) ) ) {
 			return true;

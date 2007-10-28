@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.47 2007-10-24 22:30:46 giallu Exp $
+	# $Id: bugnote_view_inc.php,v 1.48 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,9 +47,9 @@
 	# get the bugnote data
 	$query = "SELECT *
 			FROM $t_bugnote_table
-			WHERE bug_id='$f_bug_id' $t_restriction
+			WHERE bug_id=" . db_param(0) . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order, id $t_bugnote_order";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $f_bug_id ) );
 	$num_notes = db_num_rows( $result );
 ?>
 

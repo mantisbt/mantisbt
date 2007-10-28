@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.10 2007-10-24 22:30:43 giallu Exp $
+	# $Id: adm_config_report.php,v 1.11 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -74,7 +74,7 @@
 
 	$t_config_table = config_get_global( 'mantis_config_table' );
 	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 ?>
 <br />
 <div align="center">

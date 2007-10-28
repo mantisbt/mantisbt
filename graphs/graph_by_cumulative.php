@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: graph_by_cumulative.php,v 1.11 2007-10-24 22:31:01 giallu Exp $
+	# $Id: graph_by_cumulative.php,v 1.12 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -90,10 +90,10 @@
 
 	$query = "SELECT status, date_submitted, last_updated
 			FROM mantis_bug_table
-			WHERE project_id='$t_project_id' AND
-					date_submitted>='$g_start_date'
+			WHERE project_id=" . db_param(0) . " AND
+					date_submitted>=" . db_param(1) . "
 			ORDER BY date_submitted ASC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id, $g_start_date ) );
 	$bug_count = db_num_rows( $result );
 
 	$data_date_arr = array();

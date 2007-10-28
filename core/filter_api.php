@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.165 2007-10-24 22:30:59 giallu Exp $
+	# $Id: filter_api.php,v 1.166 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -3951,10 +3951,10 @@
 			return $g_cache_filter[$c_filter_id];
 		}
 
-		$query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE id='$c_filter_id'";
-		$result = db_query( $query );
+		$query = 'SELECT *
+				  FROM ' . $t_filters_table . '
+				  WHERE id=' . db_param(0);
+		$result = db_query_bound( $query, Array( $c_filter_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			if ( $p_trigger_errors ) {

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: db_stats.php,v 1.4 2007-10-24 22:30:58 giallu Exp $
+	# $Id: db_stats.php,v 1.5 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
@@ -28,7 +28,7 @@
 		$t_table = $p_table;
 
 		$query = "SELECT COUNT(*) FROM $t_table";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 
 		$t_users = db_result( $result );
 

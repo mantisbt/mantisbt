@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.112 2007-10-24 22:30:58 giallu Exp $
+	# $Id: bug_api.php,v 1.113 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -123,13 +123,13 @@
 			return $g_cache_bug[$p_bug_id];
 		}
 
-		$c_bug_id		= db_prepare_int( $p_bug_id );
+		$c_bug_id		= (int) $p_bug_id;
 		$t_bug_table	= config_get( 'mantis_bug_table' );
 
 		$query = "SELECT *
 				  FROM $t_bug_table
-				  WHERE id='$c_bug_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			$g_cache_bug[$c_bug_id] = false;
@@ -158,7 +158,7 @@
 		if ( !is_array( $p_bug_row ) )
 			return false;
 
-		$c_bug_id = db_prepare_int( $p_bug_row['id'] );
+		$c_bug_id = (int) $p_bug_row['id'];
 		$g_cache_bug[ $c_bug_id ] = $p_bug_row;
 
 		return true;
@@ -172,7 +172,7 @@
 		if ( null === $p_bug_id ) {
 			$g_cache_bug = array();
 		} else {
-			$c_bug_id = db_prepare_int( $p_bug_id );
+			$c_bug_id = (int) $p_bug_id ;
 			unset( $g_cache_bug[$c_bug_id] );
 		}
 
@@ -187,7 +187,7 @@
 	function bug_text_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug_text;
 
-		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$c_bug_id			= (int) $p_bug_id;
 		$t_bug_table		= config_get( 'mantis_bug_table' );
 		$t_bug_text_table	= config_get( 'mantis_bug_text_table' );
 
@@ -197,9 +197,9 @@
 
 		$query = "SELECT bt.*
 				  FROM $t_bug_text_table bt, $t_bug_table b
-				  WHERE b.id='$c_bug_id' AND
+				  WHERE b.id=" . db_param(0) . " AND
 				  		b.bug_text_id = bt.id";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			$g_cache_bug_text[$c_bug_id] = false;
@@ -398,9 +398,8 @@
 		$query = "INSERT INTO $t_bug_text_table
 				    ( description, steps_to_reproduce, additional_information )
 				  VALUES
-				    ( '$c_description', '$c_steps_to_reproduce',
-				      '$c_additional_info' )";
-		db_query( $query );
+				    ( " . db_param(0) . ',' . db_param(1) . ','. db_param(2) . ')';
+		db_query_bound( $query, Array( $c_description, $c_steps_to_reproduce, $c_additional_info ) );
 
 		# Get the id of the text information we just inserted
 		# NOTE: this is guarranteed to be the correct one.
@@ -417,8 +416,8 @@
 			# that that the bug was not assigned to somebody, then assign it automatically.
 			$query = "SELECT user_id
 					  FROM $t_project_category_table
-					  WHERE project_id='$c_project_id' AND category='$c_category'";
-			$result = db_query( $query );
+					  WHERE project_id=" .db_param(0) . " AND category=" . db_param(1);
+			$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
 				$c_handler_id = $p_handler_id = db_result( $result );
@@ -531,8 +530,8 @@
 		if ( $p_copy_custom_fields ) {
 			$query = "SELECT field_id, bug_id, value
 					   FROM $t_mantis_custom_field_string_table
-					   WHERE bug_id = '$t_bug_id';";
-			$result = db_query( $query );
+					   WHERE bug_id=" . db_param(0);
+			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
 			for ( $i = 0 ; $i < $t_count ; $i++ ) {
@@ -560,8 +559,8 @@
 		if ( $p_copy_bugnotes ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bugnote_table
-					  WHERE bug_id = '$t_bug_id';";
-			$result = db_query( $query );
+					  WHERE bug_id=" . db_param(0);
+			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
 			for ( $i = 0; $i < $t_count; $i++ ) {
@@ -570,8 +569,8 @@
 
 				$query2 = "SELECT *
 						   FROM $t_mantis_bugnote_text_table
-						   WHERE id = '$t_bugnote_text_id';";
-				$result2 = db_query( $query2 );
+						   WHERE id=" . db_param(0);
+				$result2 = db_query_bound( $query2, Array( $t_bugnote_text_id ) );
 				$t_count2 = db_num_rows( $result2 );
 
 				$t_bugnote_text_insert_id = -1;
@@ -657,8 +656,8 @@
 		if ( $p_copy_history ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
-					  WHERE bug_id = '$t_bug_id';";
-			$result = db_query( $query );
+					  WHERE bug_id = " . db_param(0);
+			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
 			for ( $i = 0; $i < $t_count; $i++ ) {
@@ -731,18 +730,18 @@
 		$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
 		$query = "DELETE FROM $t_bug_text_table
-				  WHERE id='$t_bug_text_id'";
-		db_query( $query );
+				  WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $t_bug_text_id ) );
 
 		# Delete the bug entry
 		$query = "DELETE FROM $t_bug_table
-				  WHERE id='$c_bug_id'";
-		db_query( $query );
+				  WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $c_bug_id ) );
 
 		bug_clear_cache( $p_bug_id );
 		bug_text_clear_cache( $p_bug_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -1030,8 +1029,8 @@
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 		$query = "SELECT COUNT(*)
 				  FROM $t_bugnote_table
-				  WHERE bug_id ='$c_bug_id' $t_restriction";
-		$result = db_query( $query );
+				  WHERE bug_id =" . db_param(0) . " $t_restriction";
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		return db_result( $result );
 	}
@@ -1079,9 +1078,9 @@
 
 		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
-				  WHERE bug_id='$c_bug_id'
+				  WHERE bug_id=" . db_param(0) . "
 				  ORDER BY last_modified DESC";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 		$row = db_fetch_array( $result );
 
 		if ( false === $row )
@@ -1148,9 +1147,9 @@
 
 		# Update fields
 		$query = "UPDATE $t_bug_table
-				  SET $c_field_name=$c_status
-				  WHERE id='$c_bug_id'";
-		db_query( $query );
+				  SET $c_field_name=" . db_param(0) . "
+				  WHERE id=" .db_param(1);
+		db_query_bound( $query, Array( $c_status, $c_bug_id ) );
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
@@ -1282,12 +1281,10 @@
 
 			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
 		}
-		
-		$c_resolution = db_prepare_int( $p_resolution );
 
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
-		bug_set_field( $p_bug_id, 'resolution', $c_resolution );
+		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
 
 		# only set handler if specified explicitly or if bug was not assigned to a handler
 		if ( null == $p_handler_id ) {
@@ -1372,8 +1369,8 @@
 				"INTO $t_bug_monitor_table ".
 				"( user_id, bug_id ) ".
 				"VALUES ".
-				"( '$c_user_id', '$c_bug_id' )";
-		db_query( $query );
+				"(" . db_param(0) . ',' . db_param(1) . ')';
+		db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
 		# log new monitoring action
 		history_log_event_special( $p_bug_id, BUG_MONITOR, $c_user_id );

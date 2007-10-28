@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.19 2007-10-24 22:30:59 giallu Exp $
+	# $Id: profile_api.php,v 1.20 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -92,10 +92,10 @@
 
 		# Delete the profile
 		$query = "DELETE FROM $t_user_profile_table
-				  WHERE id='$c_profile_id' AND user_id='$c_user_id'";
-		db_query( $query );
+				  WHERE id=" . db_param(0) . " AND user_id=" . db_param(1) ;
+		db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -142,7 +142,7 @@
 				  WHERE id='$c_profile_id' AND user_id='$c_user_id'";
 		$result = db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -160,8 +160,8 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id='$c_profile_id' AND user_id='$c_user_id'";
-	    $result = db_query( $query );
+				  WHERE id=" . db_param(0) . " AND user_id=" . db_param(1);
+	    $result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 		return db_fetch_array( $result );
 	}
@@ -175,8 +175,8 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id='$c_profile_id'";
-	    $result = db_query( $query );
+				  WHERE id=" . db_param(0);
+	    $result = db_query( $query, Array( $c_profile_id ) );
 
 		return db_fetch_array( $result );
 	}
@@ -190,9 +190,9 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id='$c_user_id'
-				  ORDER BY platform, os, os_build";
-	    $result = db_query( $query );
+				  WHERE user_id=" . db_param(0) .
+				 "ORDER BY platform, os, os_build";
+	    $result = db_query_bound( $query, Array( $c_user_id ) );
 
 		$t_rows = array();
 		$t_row_count = db_num_rows( $result );
@@ -284,8 +284,8 @@
 
 		$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
-			WHERE user_id='$c_user_id'";
-		$result = db_query( $query );
+			WHERE user_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	    $t_default_profile = db_result( $result, 0, 0 );
 

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: email_queue_api.php,v 1.3 2007-10-24 22:30:59 giallu Exp $
+	# $Id: email_queue_api.php,v 1.4 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	class EmailData {
@@ -167,7 +167,7 @@
 		$query = "SELECT email_id
 				  FROM $t_email_table
 				  ORDER BY email_id DESC";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 
 		$t_ids = array();
 		while ( ( $t_row = db_fetch_array( $result ) ) !== false ) {

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: graph_by_severity_status.php,v 1.9 2007-10-24 22:31:01 giallu Exp $
+	# $Id: graph_by_severity_status.php,v 1.10 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -69,10 +69,10 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$t_project_id' AND
+				WHERE project_id=" . db_param(0) . " AND
 						status<80 AND
-						severity='$t_severity'";
-		$result = db_query( $query );
+						severity=" . db_param(1);
+		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 		switch ( $t_severity ) {
 			case 20:$critical_count_arr[0] = $count;
@@ -95,10 +95,10 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$t_project_id' AND
+				WHERE project_id=" . db_param(0) . " AND
 						status=80 AND
-						severity='$t_severity'";
-		$result = db_query( $query );
+						severity=" . db_param(1);
+		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 
 		switch ( $t_severity ) {
@@ -122,10 +122,10 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$t_project_id' AND
+				WHERE project_id=" . db_param(0) . " AND
 						status=90 AND
-						severity='$t_severity'";
-		$result = db_query( $query );
+						severity=" . db_param(1);
+		$result = db_query_bound( $query, Array( $t_project_id, $t_severity ) );
 		$count = db_result( $result, 0, 0 );
 
 		switch ( $t_severity ) {

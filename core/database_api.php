@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.74 2007-10-24 22:30:59 giallu Exp $
+	# $Id: database_api.php,v 1.75 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -54,7 +54,7 @@
 		if ( $p_dsn === false ) {
 			$t_db_type = config_get_global( 'db_type' );
 			$g_db = ADONewConnection( $t_db_type );
-			
+
 			if ( $p_pconnect ) {
 				$t_result = $g_db->PConnect( $p_hostname, $p_username, $p_password, $p_database_name );
 			} else {
@@ -73,10 +73,10 @@
 				# @@@ Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 				# @@@ Is this needed for other databases?
 				if ( strtolower( $c_charset ) === 'utf-8' ) {
-					db_query( 'SET NAMES UTF8' );
+					db_query_bound( 'SET NAMES UTF8' );
 				}
 			} elseif ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-				$t_result2 = db_query( 'set schema ' . $p_db_schema );
+				$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
 				if ( $t_result2 === false ) {
 					db_error();
 					trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -167,11 +167,11 @@
 		}
 
 		$t_elapsed = number_format( microtime_float() - $t_start, 4);
-                
+
 		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
 		$t_caller .= ":" . $t_backtrace[0]['line'];
-		
+
 		# Is this called from another function?
 		if ( isset( $t_backtrace[1] ) ) {
 			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
@@ -179,7 +179,7 @@
 			# or from a script directly?
 			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
 		}
-                
+
 		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 
 		if ( !$t_result ) {
@@ -189,6 +189,85 @@
 		} else {
 			return $t_result;
 		}
+	}
+
+	function db_query_bound($p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 )
+	{
+		global $g_queries_array, $g_db;
+		$t_db_type = config_get( 'db_type' );
+
+		$t_start = microtime_float();
+		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
+			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
+		} else {
+			$t_result = $g_db->Execute( $p_query, $arr_parms );
+		}
+		$t_elapsed = number_format( microtime_float() - $t_start, 4);
+
+		$lastoffset = 0; $i = 1;
+		if ( false && !is_null( $arr_parms ) ) {
+			if ($arr_parms[0] === null) {
+			  debug_print_backtrace();
+			}
+			while (preg_match('/(\?)/', $p_query, $matches, PREG_OFFSET_CAPTURE, $lastoffset)) {
+				if ( $i <= count($arr_parms)) {
+					if (is_null($arr_parms[$i-1]))
+						$replace = 'NULL';
+					else if(is_string($arr_parms[$i-1]))
+						$replace = "'" . $arr_parms[$i-1] . "'";
+					else if(is_integer($arr_parms[$i-1]) || is_float($arr_parms[$i-1]))
+						$replace = (float)$arr_parms[$i-1];
+					else if(is_bool($arr_parms[$i-1]))
+						switch( $t_db_type ) {
+								case 'pgsql':
+									$replace = "'" . $arr_parms[$i-1] . "'";
+									break;
+								default:
+									$replace = $arr_parms[$i-1];
+									break;
+						}
+
+					else {
+						echo("Invalid argument type passed to query_bound(): $i");
+						exit(1);
+					}
+					$p_query = substr($p_query, 0, $matches[1][1]) . $replace . substr($p_query, $matches[1][1] + strlen($matches[1][0]));
+					$lastoffset = $matches[1][1] + strlen($replace);
+				} else {
+					$lastoffset = $matches[1][1] + 1;
+				}
+				$i++;
+			}
+		}
+
+		$t_backtrace = debug_backtrace();
+		$t_caller = basename( $t_backtrace[0]['file'] );
+		$t_caller .= ":" . $t_backtrace[0]['line'];
+
+		# Is this called from another function?
+		if ( isset( $t_backtrace[1] ) ) {
+			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+		} else {
+			# or from a script directly?
+			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+		}
+
+		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
+
+
+		if ( !$t_result ) {
+			db_error($p_query);
+			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
+			return false;
+		} else {
+			return $t_result;
+		}
+	}
+
+	# --------------------
+	function db_param($p_param) {
+		global $g_db;
+		return $g_db->Param($p_param);
 	}
 
 	# --------------------
@@ -219,9 +298,27 @@
  			$p_result->MoveNext();
 			return $t_array;
 		} else {
-			$test = $p_result->GetRowAssoc(false);
+			$t_row = $p_result->GetRowAssoc(false);
+
+			for( $i = 0 ; $i < $p_result->FieldCount() ; $i++ ) {
+				switch( $p_result->FetchField($i)->type ) {
+					case 'bool':
+						switch( $t_row[$p_result->FetchField($i)->name] ) {
+							case 'f':
+								$t_row[$p_result->FetchField($i)->name] = false;
+								break;
+							case 't':
+								$t_row[$p_result->FetchField($i)->name] = true;
+								break;
+						}
+						break;
+
+					default:
+						break;
+				}
+			}
 			$p_result->MoveNext();
-			return $test;
+			return $t_row;
 		}
 	}
 
@@ -253,7 +350,7 @@
 
 		if ( isset($p_table) && db_is_pgsql() ) {
 			$query = "SELECT currval('".$p_table."_id_seq')";
-			$result = db_query( $query );
+			$result = db_query_bound( $query );
 			return db_result($result);
 		}
 		return $g_db->Insert_ID( );
@@ -315,7 +412,7 @@
 		$c_key   = db_prepare_string( $p_key );
 
 		$query = "DESCRIBE $c_table";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 		$count = db_num_rows( $result );
 		for ( $i=0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
@@ -384,8 +481,8 @@
 				# just making a point with the superfluous break;s  I know it does not execute after a return  ;-)
 				break;
 			case 'db2':
-				$t_escaped = $g_db->qstr( $p_string, false );                       
-				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );           
+				$t_escaped = $g_db->qstr( $p_string, false );
+				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );
 				break;
 			case 'mssql':
 				break;
@@ -429,7 +526,7 @@
 				break;
 		}
 	}
-	
+
 	# --------------------
 	# prepare a time string in "[h]h:mm" to an integer (minutes) before DB insertion
 	function db_prepare_time( $p_hhmm ) {
@@ -528,12 +625,12 @@
 	function db_prepare_int( $p_int ) {
 		return (int)$p_int;
 	}
-	
+
 	# --------------------
 	# prepare a double before DB insertion
 	function db_prepare_double( $p_double ) {
 		return (double)$p_double;
-	}	
+	}
 
 	# --------------------
 	# prepare a boolean before DB insertion
@@ -595,7 +692,7 @@
 	function db_minutes_to_hhmm( $p_min = 0 ) {
 		return sprintf( '%02d:%02d', $p_min / 60, $p_min % 60 );
 	}
-	
+
 	# --------------------
 	# A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
 	# $p_field_name - The name of the field to filter on.

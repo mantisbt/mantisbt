@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.63 2007-10-24 22:30:58 giallu Exp $
+	# $Id: authentication_api.php,v 1.64 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gpc_api.php' );
@@ -362,12 +362,10 @@
 	function auth_is_cookie_string_unique( $p_cookie_string ) {
 		$t_user_table = config_get( 'mantis_user_table' );
 
-		$c_cookie_string = db_prepare_string( $p_cookie_string );
-
 		$query = "SELECT COUNT(*)
 				  FROM $t_user_table
-				  WHERE cookie_string='$c_cookie_string'";
-		$result = db_query( $query );
+				  WHERE cookie_string=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_cookie_string ) );
 		$t_count = db_result( $result );
 
 		if ( $t_count > 0 ) {
@@ -571,12 +569,10 @@
 		# look up cookie in the database to see if it is valid
 		$t_user_table = config_get( 'mantis_user_table' );
 
-		$c_cookie_string = db_prepare_string( $p_cookie_string );
-
 		$query = "SELECT id
 				  FROM $t_user_table
-				  WHERE cookie_string='$c_cookie_string'";
-		$result = db_query( $query );
+				  WHERE cookie_string=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_cookie_string ) );
 
 		# return true if a matching cookie was found
  		return ( 1 == db_num_rows( $result ) );
@@ -602,12 +598,10 @@
 		# @@@ error with an error saying they aren't logged in?
 		#     Or redirect to the login page maybe?
 
-		$c_cookie_string = db_prepare_string( $t_cookie_string );
-
 		$query = "SELECT id
 				  FROM $t_user_table
-				  WHERE cookie_string='$c_cookie_string'";
-		$result = db_query( $query );
+				  WHERE cookie_string=" . db_param(0);
+		$result = db_query_bound( $query, Array( $t_cookie_string ) );
 
 		# The cookie was invalid. Clear the cookie (to allow people to log in again)
 		# and give them an Access Denied message.

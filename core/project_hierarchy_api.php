@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.8 2007-10-24 22:30:59 giallu Exp $
+	# $Id: project_hierarchy_api.php,v 1.9 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -39,9 +39,9 @@
 		$query = "INSERT INTO $t_project_hierarchy_table
 		                ( child_id, parent_id )
 						VALUES
-						( $c_child_id, $c_parent_id )";
+						( " . db_param(0) . ", " . db_param(1) . " )";
 
-		db_query($query);
+		db_query_bound($query, Array( $c_child_id, $c_parent_id ) );
 	}
 
 	# --------------------
@@ -94,7 +94,7 @@
 
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
-		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = 1';
+		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param(0);
 
 		$query = "SELECT DISTINCT p.id, ph.parent_id, p.name
 				  FROM $t_project_table p
@@ -103,7 +103,7 @@
 				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( true ) );
 		$row_count = db_num_rows( $result );
 
 		$g_cache_project_hierarchy = array();

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: graph_by_category.php,v 1.9 2007-10-24 22:31:00 giallu Exp $
+	# $Id: graph_by_category.php,v 1.10 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,10 +38,10 @@
 	$data_count_arr = array();
 	$query = "SELECT category, COUNT(category) as count
 			FROM mantis_bug_table
-			WHERE project_id='$t_project_id'
+			WHERE project_id=" . db_param(0) . "
 			GROUP BY category
 			ORDER BY category";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id ) );
 	$category_count = db_num_rows( $result );
 	$total = 0;
 	$longest_size = 0;

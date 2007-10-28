@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.40 2007-10-24 22:30:59 giallu Exp $
+	# $Id: config_api.php,v 1.41 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
@@ -93,7 +93,7 @@
 				if ( ! $g_cache_filled ) {
 					
 					$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
-					$result = db_query( $query );
+					$result = db_query_bound( $query );
 					while ( false <> ( $row = db_fetch_array( $result ) ) ) {
 						$t_config = $row['config_id'];
 						$t_user = $row['user_id'];

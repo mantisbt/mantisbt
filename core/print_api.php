@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.186 2007-10-24 22:30:59 giallu Exp $
+	# $Id: print_api.php,v 1.187 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1143,9 +1143,9 @@
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled=1 AND
-					u.user_id='$c_user_id'
+					u.user_id=" . db_param(0) . " 
 				ORDER BY p.name";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_user_id ) );
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
@@ -1263,9 +1263,9 @@
 
 		$query = "SELECT category
 				FROM $t_mantis_project_category_table
-				WHERE project_id='$c_project_id'
+				WHERE project_id=" . db_param(0) . "
 				ORDER BY category";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_project_id ) );
 		$category_count = db_num_rows( $result );
 		$t_string = '';
 
@@ -1291,8 +1291,8 @@
 
 		$query = "SELECT version
 				FROM $t_mantis_project_version_table
-				WHERE project_id='$c_project_id'";
-		$result = db_query( $query );
+				WHERE project_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_project_id ) );
 		$version_count = db_num_rows( $result );
 		$t_string = '';
 

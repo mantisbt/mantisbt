@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.26 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.27 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -89,8 +89,8 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	# Grab the data
 	$query = "SELECT print_pref
 			FROM $t_user_print_pref_table
-			WHERE user_id='$c_user_id'";
-	$result = db_query( $query );
+			WHERE user_id=" . db_param(0);
+	$result = db_query_bound( $query, Array( $c_user_id ) );
 
 	## OOPS, No entry in the database yet.  Lets make one
 	if ( 0 == db_num_rows( $result ) ) {
@@ -113,8 +113,8 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 		# Rerun select query
 		$query = "SELECT print_pref
 				FROM $t_user_print_pref_table
-				WHERE user_id='$c_user_id'";
-		$result = db_query( $query );
+				WHERE user_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_user_id ) );
 	}
 
 	# putting the query result into an array with the same size as $t_fields_arr

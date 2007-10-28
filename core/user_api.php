@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.114 2007-10-24 22:30:59 giallu Exp $
+	# $Id: user_api.php,v 1.115 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -46,21 +46,19 @@
 	function user_cache_row( $p_user_id, $p_trigger_errors=true) {
 		global $g_cache_user;
 
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		if ( isset ( $g_cache_user[$c_user_id] ) ) {
-			return $g_cache_user[$c_user_id];
+		if ( isset ( $g_cache_user[$p_user_id] ) ) {
+			return $g_cache_user[$p_user_id];
 		}
 
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_table
-				  WHERE id='$c_user_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
-			$g_cache_user[$c_user_id] = false;
+			$g_cache_user[$p_user_id] = false;
 
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_USER_NOT_FOUND, ERROR );
@@ -71,7 +69,7 @@
 
 		$row = db_fetch_array( $result );
 
-		$g_cache_user[$c_user_id] = $row;
+		$g_cache_user[$p_user_id] = $row;
 
 		return $row;
 	}
@@ -84,8 +82,7 @@
 		if ( null === $p_user_id ) {
 			$g_cache_user = array();
 		} else {
-			$c_user_id = db_prepare_int( $p_user_id );
-			unset( $g_cache_user[$c_user_id] );
+			unset( $g_cache_user[$p_user_id] );
 		}
 
 		return true;
@@ -170,8 +167,8 @@
 			$t_user_table 		= config_get( 'mantis_user_table' );
 			$query = "SELECT id
 				FROM $t_user_table
-				WHERE realname='$c_realname'";
-			$result = db_query( $query );
+				WHERE realname=" . db_param(0);
+			$result = db_query_bound( $query, Array( $c_realname ) );
 			$t_count = db_num_rows( $result );
 			if ( $t_count > 0 ) {
 				# set flags for non-unique realnames
@@ -249,9 +246,9 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_monitor_table
-				  WHERE user_id='$c_user_id' AND bug_id='$c_bug_id'";
+				  WHERE user_id=" . db_param(0) . " AND bug_id=" . db_param(1);
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_user_id, $c_bug_id ) );
 
 		if ( 0 == db_result( $result ) ) {
 			return false;
@@ -305,8 +302,8 @@
 	function user_count_level( $p_level=ANYBODY ) {
 		$t_level = db_prepare_int( $p_level );
 		$t_user_table = config_get( 'mantis_user_table' );
-		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=$t_level";
-		$result = db_query( $query );
+		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param(0);
+		$result = db_query_bound( $query, Array( $t_level ) );
 
 		# Get the list of connected users
 		$t_users = db_result( $result );
@@ -459,8 +456,8 @@
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
 
 		$query = "DELETE FROM $t_project_user_list_table
-				  WHERE user_id='$c_user_id'";
-		db_query( $query );
+				  WHERE user_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -479,8 +476,8 @@
 
 		# Remove associated profiles
 		$query = "DELETE FROM $t_user_profile_table
-				  WHERE user_id='$c_user_id'";
-		db_query( $query );
+				  WHERE user_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -510,8 +507,8 @@
 			$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
 			$query = "SELECT id
 					FROM $t_user_table
-					WHERE realname='$c_realname'";
-			$result = db_query( $query );
+					WHERE realname=" . db_param(0);
+			$result = db_query_bound( $query, Array( $c_realname ) );
 			$t_count = db_num_rows( $result );
 
 			if ( $t_count == 2 ) {
@@ -541,13 +538,12 @@
 	# get a user id from a username
 	#  return false if the username does not exist
 	function user_get_id_by_name( $p_username ) {
-		$c_username		= db_prepare_string( $p_username );
 		$t_user_table	= config_get( 'mantis_user_table' );
 
 		$query = "SELECT id
 				  FROM $t_user_table
-				  WHERE username='$c_username'";
-		$result = db_query( $query );
+				  WHERE username=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_username ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;
@@ -701,7 +697,6 @@
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
 		} else {
-			$c_user_id = db_prepare_int( $p_user_id );
 
 			$t_project_table			= config_get( 'mantis_project_table' );
 			$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
@@ -714,18 +709,18 @@
 			$query = "SELECT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id=u.project_id AND u.user_id=$c_user_id
+					    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
 					  WHERE $t_enabled_clause
-						( p.view_state='$t_public'
-						    OR (p.view_state='$t_private'
+						( p.view_state=" . db_param(1) . "
+						    OR (p.view_state=" . db_param(2) . "
 							    AND
-						        u.user_id='$c_user_id' )
+						        u.user_id=" . db_param(3) . " )
 						)
 					  ORDER BY p.name";
 
-			$result = db_query( $query );
+			$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
 			$row_count = db_num_rows( $result );
 
 			$t_projects = array();
@@ -774,9 +769,6 @@
 			}
 		}
 
-		$c_user_id    = db_prepare_int( $p_user_id );
-		$c_project_id = db_prepare_int( $p_project_id );
-
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
@@ -793,21 +785,23 @@
 					  WHERE $t_enabled_clause
 					  	 ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
+			$result = db_query_bound( $query );
 		} else {
 			$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id = u.project_id AND u.user_id='$c_user_id'
+					    ON p.id = u.project_id AND u.user_id=" . db_param(0) . "
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
 					  WHERE $t_enabled_clause
 					  	ph.parent_id IS NOT NULL AND
-						( p.view_state='$t_public'
-						    OR (p.view_state='$t_private'
+						( p.view_state=" . db_param(1) . "
+						    OR (p.view_state=" . db_param(2) . "
 							    AND
-						        u.user_id='$c_user_id' )
+						        u.user_id=" . db_param(3) . " )
 						)
 					  ORDER BY p.name";
+			$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
 		}
 
 		$result = db_query( $query );
@@ -857,9 +851,6 @@
 	# --------------------
 	# return the number of open assigned bugs to a user in a project
 	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
-		$c_user_id		= db_prepare_int($p_user_id);
-		$c_project_id	= db_prepare_int($p_project_id);
-
 		$t_bug_table	= config_get('mantis_bug_table');
 
 		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
@@ -870,8 +861,8 @@
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 				  		status<'$t_resolved' AND
-				  		handler_id='$c_user_id'";
-		$result = db_query( $query );
+				  		handler_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		return db_result( $result );
 	}
@@ -879,9 +870,6 @@
 	# --------------------
 	# return the number of open reported bugs by a user in a project
 	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
-		$c_user_id		= db_prepare_int($p_user_id);
-		$c_project_id	= db_prepare_int($p_project_id);
-
 		$t_bug_table	= config_get('mantis_bug_table');
 
 		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
@@ -892,8 +880,8 @@
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
 						  status<'$t_resolved' AND
-						  reporter_id='$c_user_id'";
-		$result = db_query( $query );
+						  reporter_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $p_user_id ) );
 
 		return db_result( $result );
 	}
@@ -908,9 +896,9 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id='$c_profile_id' AND
-				  		user_id='$c_user_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0) . " AND
+				  		user_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
@@ -979,13 +967,13 @@
 
 		$query = "UPDATE $t_user_table
 				  SET last_visit= " . db_now() . "
-				  WHERE id='$c_user_id'";
+				  WHERE id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
-		# db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 
@@ -993,32 +981,29 @@
 	# Increment the number of times the user has logegd in
 	# This function is only called from the login.php script
 	function user_increment_login_count( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
-
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET login_count=login_count+1
-				WHERE id='$c_user_id'";
+				WHERE id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
-		#db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 
 	# --------------------
 	# Reset to zero the failed login attempts
 	function user_reset_failed_login_count_to_zero( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=0
-				WHERE id='$c_user_id'";
-		db_query( $query );
+				WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -1028,13 +1013,12 @@
 	# --------------------
 	# Increment the failed login count by 1
 	function user_increment_failed_login_count( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=failed_login_count+1
-				WHERE id='$c_user_id'";
-		db_query( $query );
+				WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -1044,13 +1028,12 @@
 	# --------------------
 	# Reset to zero the 'lost password' in progress attempts
 	function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=0
-				WHERE id='$c_user_id'";
-		db_query( $query );
+				WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $p_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
@@ -1087,14 +1070,14 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
-				  SET $c_field_name='$c_field_value'
-				  WHERE id='$c_user_id'";
+				  SET $c_field_name=" . db_param(0) . "
+				  WHERE id=" . db_param(1);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_field_value, $c_user_id ) );
 
 		user_clear_cache( $p_user_id );
 
-		#db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 
@@ -1129,7 +1112,7 @@
 				  WHERE id='$c_user_id'";
 		db_query( $query );
 
-		#db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 

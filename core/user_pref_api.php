@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.33 2007-10-24 22:30:59 giallu Exp $
+	# $Id: user_pref_api.php,v 1.34 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -118,36 +118,33 @@
 	function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true) {
 		global $g_cache_user_pref;
 
-		$c_user_id		= db_prepare_int( $p_user_id );
-		$c_project_id	= db_prepare_int( $p_project_id );
-
-		if ( isset ( $g_cache_user_pref[$c_user_id][$c_project_id] ) ) {
-			return $g_cache_user_pref[$c_user_id][$c_project_id];
+		if ( isset ( $g_cache_user_pref[$p_user_id][$p_project_id] ) ) {
+			return $g_cache_user_pref[$p_user_id][$p_project_id];
 		}
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_pref_table
-				  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
-		$result = db_query( $query );
+				  WHERE user_id=" . db_param(0) . " AND project_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $p_user_id, $p_project_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
 			} else {
-				$g_cache_user_pref[$c_user_id][$c_project_id] = false;
+				$g_cache_user_pref[$p_user_id][$p_project_id] = false;
 				return false;
 			}
 		}
 
 		$row = db_fetch_array( $result );
 
-		if ( !isset( $g_cache_user_pref[$c_user_id] ) ) {
-			$g_cache_user_pref[$c_user_id] = array();
+		if ( !isset( $g_cache_user_pref[$p_user_id] ) ) {
+			$g_cache_user_pref[$p_user_id] = array();
 		}
 
-		$g_cache_user_pref[$c_user_id][$c_project_id] = $row;
+		$g_cache_user_pref[$p_user_id][$p_project_id] = $row;
 
 		return $row;
 	}
@@ -222,7 +219,7 @@
 				    ('$c_user_id', '$c_project_id', $t_values_string)";
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -260,7 +257,7 @@
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -276,13 +273,13 @@
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id='$c_user_id' AND
-				  		project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE user_id=" . db_param(0) . " AND
+				  		project_id=" . db_param(1);
+		db_query_bound( $query, Array( $c_user_id, $c_project_id ) );
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -306,7 +303,7 @@
 
 		user_pref_clear_cache( $p_user_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -323,10 +320,10 @@
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 

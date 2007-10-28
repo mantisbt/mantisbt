@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.86 2007-10-24 22:30:59 giallu Exp $
+	# $Id: file_api.php,v 1.87 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -323,10 +323,10 @@ document.getElementById( span ).style.display = displayType;
 
 		# Delete the corresponding db records
 		$query = "DELETE FROM $t_bug_file_table
-				  WHERE bug_id='$c_bug_id'";
-		$result = db_query( $query );
+				  WHERE bug_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 	# --------------------

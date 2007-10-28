@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.7 2007-10-24 22:30:59 giallu Exp $
+	# $Id: sponsorship_api.php,v 1.8 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -163,8 +163,8 @@
 		$t_sponsorship_table = config_get( 'mantis_sponsorship_table' );
 
 		$query = "SELECT id FROM $t_sponsorship_table
-				WHERE bug_id = '$c_bug_id'";
-		$t_result = db_query( $query );
+				WHERE bug_id = " . db_param(0);
+		$t_result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		$t_sponsorship_ids = array();
 		while ( $row = db_fetch_array( $t_result ) ) {
@@ -313,8 +313,8 @@
 
 		# Delete the bug entry
 		$query = "DELETE FROM $t_sponsorship_table
-				  WHERE id='$c_sponsorship_id'";
-		db_query( $query );
+				  WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $c_sponsorship_id ) );
 
 		sponsorship_clear_cache( $p_sponsorship_id );
 

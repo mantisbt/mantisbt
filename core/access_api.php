@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.46 2007-10-24 22:30:58 giallu Exp $
+	# $Id: access_api.php,v 1.47 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -98,8 +98,8 @@
 
 			$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE project_id='$c_project_id'";
-			$result = db_query( $query );
+					  WHERE project_id=" . db_param(0);
+			$result = db_query_bound( $query, Array( $c_project_id ) );
 			$count = db_num_rows( $result );
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
@@ -132,8 +132,8 @@
 
 			$query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
-					  WHERE user_id='$c_user_id'";
-			$result = db_query( $query );
+					  WHERE user_id=" . db_param(0);
+			$result = db_query_bound( $query, Array( $c_user_id ) );
 
 			$count = db_num_rows( $result );
 

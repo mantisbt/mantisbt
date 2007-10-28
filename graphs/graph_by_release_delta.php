@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: graph_by_release_delta.php,v 1.10 2007-10-24 22:31:01 giallu Exp $
+	# $Id: graph_by_release_delta.php,v 1.11 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,9 +37,9 @@
 	# Grab the Projections/Releases
 	$query = "SELECT DISTINCT projection
 			FROM mantis_bug_table
-			WHERE project_id='$t_project_id'
+			WHERE project_id=" . db_param(0) . "
 			ORDER BY projection";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id ) );
 	$projection_count = db_num_rows( $result );
 	$projection_arr = array();
 	for ($i=0;$i<$projection_count;$i++) {

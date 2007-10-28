@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_reset.php,v 1.16 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_all_bug_options_reset.php,v 1.17 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 
 	# Reset prefs to defaults then redirect to account_prefs_page.php3
@@ -51,10 +51,10 @@
 	# reset to defaults
 	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
 	$query = "UPDATE $t_user_print_pref_table
-			SET print_pref='$t_default'
-			WHERE user_id='$t_user_id'";
+			SET print_pref=" . db_param(0) . "
+			WHERE user_id=" . db_param(1);
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_default, $t_user_id ) );
 
 	$t_redirect_url = 'print_all_bug_options_page.php';
 

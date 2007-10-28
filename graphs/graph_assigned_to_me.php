@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: graph_assigned_to_me.php,v 1.9 2007-10-24 22:31:00 giallu Exp $
+	# $Id: graph_assigned_to_me.php,v 1.10 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,11 +39,11 @@
 	$t_user_id = auth_get_current_user_id();
 	$query = "SELECT status, COUNT( status ) as count
 			FROM mantis_bug_table
-			WHERE project_id='$t_project_id' AND
-				  handler_id='$t_user_id'
+			WHERE project_id=" . db_param(0) . " AND
+				  handler_id=" . db_param(1) . "
 			GROUP BY status
 			ORDER BY status";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
 	$status_count = db_num_rows( $result );
 
 	$status_arr = array();

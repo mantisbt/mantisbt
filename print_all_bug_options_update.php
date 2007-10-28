@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_update.php,v 1.17 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_all_bug_options_update.php,v 1.18 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -60,10 +60,10 @@
 	# update preferences
 	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
 	$query = "UPDATE $t_user_print_pref_table
-			SET print_pref='$c_export'
-			WHERE user_id='$t_user_id'";
+			SET print_pref=" . db_param(0) . "
+			WHERE user_id=" . db_param(1);
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $c_export, $t_user_id ) );
 
 	html_page_top1();
 	html_meta_redirect( $f_redirect_url );

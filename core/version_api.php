@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.25 2007-10-24 22:30:59 giallu Exp $
+	# $Id: version_api.php,v 1.26 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -58,8 +58,8 @@
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE id='$c_version_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_version_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			$g_cache_versions[$c_version_id] = false;
@@ -142,7 +142,7 @@
 					( '$c_project_id', '$c_version', " . $c_date_order . ", '$c_description', '$c_released' )";
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -171,18 +171,18 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_version_table
-				  SET version='$c_version_name',
-					description='$c_description',
-					released='$c_released',
-					date_order='$c_date_order'
-				  WHERE id='$c_version_id'";
-		db_query( $query );
+				  SET version=" . db_param(0) . ",
+					description=" .db_param(1) . ",
+					released=" . db_param(2) . ",
+					date_order=" . db_param(3) . "
+				  WHERE id=" . db_param(4);
+		db_query_bound( $query, Array( $c_version_name, $c_description, $c_released, $c_date_order, $c_version_id ) );
 
 		if ( $c_version_name != $c_old_version_name ) {
 			$query = "UPDATE $t_bug_table
-					  SET version='$c_version_name'
-					  WHERE ( project_id='$c_project_id' ) AND ( version='$c_old_version_name' )";
-			db_query( $query );
+					  SET version=" . db_param(0) . '
+					  WHERE ( project_id=' . db_param(1) . ') AND ( version=' . db_param(2) . ')';
+			db_query_bound( $query, Array( $c_version_name, $c_project_id, $c_old_version_name ) );
 
 			$query = "UPDATE $t_bug_table
 					  SET fixed_in_version='$c_version_name'
@@ -201,7 +201,7 @@
 			# @@@ We probably need to update the saved filters too?
 		}
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -223,20 +223,20 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
-				  WHERE id='$c_version_id'";
-		db_query( $query );
+				  WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $c_version_id ) );
 
 		$query = "UPDATE $t_bug_table
-				  SET version='$c_new_version'
-				  WHERE project_id='$c_project_id' AND version='$c_old_version'";
-		db_query( $query );
+				  SET version=" . db_param(0) . "
+				  WHERE project_id=" . db_param(1) . " AND version=" . db_param(2);
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $c_old_version ) );
 
 		$query = "UPDATE $t_bug_table
-				  SET fixed_in_version='$c_new_version'
-				  WHERE ( project_id='$c_project_id' ) AND ( fixed_in_version='$c_old_version' )";
-		db_query( $query );
+				  SET fixed_in_version=" . db_param(0) . '
+				  WHERE ( project_id=' . db_param(1) . ' ) AND ( fixed_in_version=' . db_param(2) .')';
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $c_old_version ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -249,21 +249,21 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
-	  			  WHERE project_id='$c_project_id'";
+	  			  WHERE project_id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET version=''
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=''
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -344,10 +344,10 @@
 
 		$query = "SELECT id
 					FROM $t_project_version_table
-					WHERE project_id='$c_project_id' AND
-						version='$c_version'";
+					WHERE project_id=" . db_param(0) . " AND
+						version=" . db_param(1);
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;

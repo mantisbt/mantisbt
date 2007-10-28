@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.24 2007-10-24 22:30:58 giallu Exp $
+	# $Id: schema.php,v 1.25 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
-	
+
 	# Each entry below defines the schema. The upgrade array consists of
 	#  two elements
 	# The first is the function to generate SQL statements (see adodb schema doc for more details)
@@ -27,8 +27,8 @@
 	#  DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL, AlterColumnSQL, DropColumnSQL
 	#  A local function "InsertData" has been provided to add data to the db
 	# The second parameter is an array of the parameters to be passed to the function.
-	
-	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE 
+
+	# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
 	#  END OF THE TABLE!!!
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_config_table'),"
 			  config_id C(64) NOTNULL PRIMARY,
@@ -104,7 +104,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_bug_table'),"
   view_state 		I2 NOTNULL DEFAULT '10',
   summary 		C(128) NOTNULL DEFAULT \" '' \",
   sponsorship_total 	 I  NOTNULL DEFAULT '0',
-  sticky		L  NOTNULL DEFAULT '0'
+  sticky		L  NOTNULL DEFAULT  \"'0'\"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_sponsorship_total',config_get('mantis_bug_table'),'sponsorship_total'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_bug_fixed_in_version',config_get('mantis_bug_table'),'fixed_in_version'));
@@ -155,15 +155,15 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_custom_field_table'
   access_level_rw 	I2 NOTNULL DEFAULT '0',
   length_min 		 I  NOTNULL DEFAULT '0',
   length_max 		 I  NOTNULL DEFAULT '0',
-  advanced 		L NOTNULL DEFAULT '0',
-  require_report 	L NOTNULL DEFAULT '0',
-  require_update 	L NOTNULL DEFAULT '0',
-  display_report 	L NOTNULL DEFAULT '1',
-  display_update 	L NOTNULL DEFAULT '1',
-  require_resolved 	L NOTNULL DEFAULT '0',
-  display_resolved 	L NOTNULL DEFAULT '0',
-  display_closed 	L NOTNULL DEFAULT '0',
-  require_closed 	L NOTNULL DEFAULT '0'
+  advanced 		L NOTNULL DEFAULT \" '0' \",
+  require_report 	L NOTNULL DEFAULT \" '0' \",
+  require_update 	L NOTNULL DEFAULT \" '0' \",
+  display_report 	L NOTNULL DEFAULT \" '0' \",
+  display_update 	L NOTNULL DEFAULT \" '1' \",
+  require_resolved 	L NOTNULL DEFAULT \" '0' \",
+  display_resolved 	L NOTNULL DEFAULT \" '0' \",
+  display_closed 	L NOTNULL DEFAULT \" '0' \",
+  require_closed 	L NOTNULL DEFAULT \" '0' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_custom_field_name',config_get('mantis_custom_field_table'),'name'));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_filters_table'),"
@@ -181,7 +181,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_news_table'),"
   date_posted 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
   last_modified 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
   view_state 		I2 NOTNULL DEFAULT '10',
-  announcement 		L NOTNULL DEFAULT '0',
+  announcement 		L NOTNULL DEFAULT \" '0' \",
   headline 		C(64) NOTNULL DEFAULT \" '' \",
   body 			XL NOTNULL
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
@@ -211,7 +211,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_table'),"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   name 			C(128) NOTNULL DEFAULT \" '' \",
   status 		I2 NOTNULL DEFAULT '10',
-  enabled 		L NOTNULL DEFAULT '1',
+  enabled 		L NOTNULL DEFAULT \" '1' \",
   view_state 		I2 NOTNULL DEFAULT '10',
   access_min 		I2 NOTNULL DEFAULT '10',
   file_path 		C(250) NOTNULL DEFAULT \" '' \",
@@ -232,7 +232,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_project_version_tab
   version 		C(64) NOTNULL DEFAULT \" '' \",
   date_order 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
   description 		XL NOTNULL,
-  released 		L NOTNULL DEFAULT '1'
+  released 		L NOTNULL DEFAULT \" '1' \"
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_version',config_get('mantis_project_version_table'),'project_id,version',Array('UNIQUE')));
 $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_sponsorship_table'),"
@@ -242,7 +242,7 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_sponsorship_table')
   amount 		 I  NOTNULL DEFAULT '0',
   logo 			C(128) NOTNULL DEFAULT \" '' \",
   url 			C(128) NOTNULL DEFAULT \" '' \",
-  paid 			L NOTNULL DEFAULT '0',
+  paid 			L NOTNULL DEFAULT \" '0' \",
   date_submitted 	T NOTNULL DEFAULT '1970-01-01 00:00:01',
   last_updated 		T NOTNULL DEFAULT '1970-01-01 00:00:01'
 ",Array('mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS')));
@@ -262,21 +262,21 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_pref_table'),"
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   default_profile 	 I  UNSIGNED NOTNULL DEFAULT '0',
   default_project 	 I  UNSIGNED NOTNULL DEFAULT '0',
-  advanced_report 	L NOTNULL DEFAULT '0',
-  advanced_view 	L NOTNULL DEFAULT '0',
-  advanced_update 	L NOTNULL DEFAULT '0',
+  advanced_report 	L NOTNULL DEFAULT \" '0' \",
+  advanced_view 	L NOTNULL DEFAULT \" '0' \",
+  advanced_update 	L NOTNULL DEFAULT \" '0' \",
   refresh_delay 	 I  NOTNULL DEFAULT '0',
-  redirect_delay 	L NOTNULL DEFAULT '0',
+  redirect_delay 	L NOTNULL DEFAULT \" '0' \",
   bugnote_order 	C(4) NOTNULL DEFAULT 'ASC',
-  email_on_new 		L NOTNULL DEFAULT '0',
-  email_on_assigned 	L NOTNULL DEFAULT '0',
-  email_on_feedback 	L NOTNULL DEFAULT '0',
-  email_on_resolved	L NOTNULL DEFAULT '0',
-  email_on_closed 	L NOTNULL DEFAULT '0',
-  email_on_reopened 	L NOTNULL DEFAULT '0',
-  email_on_bugnote 	L NOTNULL DEFAULT '0',
-  email_on_status 	L NOTNULL DEFAULT '0',
-  email_on_priority 	L NOTNULL DEFAULT '0',
+  email_on_new 		L NOTNULL DEFAULT \" '0' \",
+  email_on_assigned 	L NOTNULL DEFAULT \" '0' \",
+  email_on_feedback 	L NOTNULL DEFAULT \" '0' \",
+  email_on_resolved	L NOTNULL DEFAULT \" '0' \",
+  email_on_closed 	L NOTNULL DEFAULT \" '0' \",
+  email_on_reopened 	L NOTNULL DEFAULT \" '0' \",
+  email_on_bugnote 	L NOTNULL DEFAULT \" '0' \",
+  email_on_status 	L NOTNULL DEFAULT \" '0' \",
+  email_on_priority 	L NOTNULL DEFAULT \" '0' \",
   email_on_priority_min_severity 	I2 NOTNULL DEFAULT '10',
   email_on_status_min_severity 	I2 NOTNULL DEFAULT '10',
   email_on_bugnote_min_severity 	I2 NOTNULL DEFAULT '10',
@@ -309,8 +309,8 @@ $upgrade[] = Array('CreateTableSQL',Array(config_get('mantis_user_table'),"
   password 		C(32) NOTNULL DEFAULT \" '' \",
   date_created 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
   last_visit 		T NOTNULL DEFAULT '1970-01-01 00:00:01',
-  enabled		L NOTNULL DEFAULT '1',
-  protected 		L NOTNULL DEFAULT '0',
+  enabled		L NOTNULL DEFAULT \" '1' \",
+  protected 		L NOTNULL DEFAULT \" '0' \",
   access_level 		I2 NOTNULL DEFAULT '10',
   login_count 		 I  NOTNULL DEFAULT '0',
   lost_password_request_count 	I2 NOTNULL DEFAULT '0',
@@ -321,9 +321,9 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_user_cookie_string',config_get('m
 $upgrade[] = Array('CreateIndexSQL',Array('idx_user_username',config_get('mantis_user_table'),'username',Array('UNIQUE')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_enable',config_get('mantis_user_table'),'enabled'));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_access',config_get('mantis_user_table'),'access_level'));
-$upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'), 
-    "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES 
-        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", 1, 0, 90, 3, 0, 0, '" . 
+$upgrade[] = Array('InsertData', Array( config_get('mantis_user_table'),
+    "(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
+        ('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . db_now() . ", " . db_now() . ", '1', '0', 90, 3, 0, 0, '" .
              md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "old_value C(255) NOTNULL" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( config_get( 'mantis_bug_history_table' ), "new_value C(255) NOTNULL" ) );

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.17 2007-10-24 22:30:44 giallu Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.18 2007-10-28 01:06:35 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,9 +34,9 @@
 	# get the bugnote data
 	$query = "SELECT user_id, enabled
 			FROM $t_bug_monitor_table m, $t_user_table u
-			WHERE m.bug_id=$c_bug_id AND m.user_id = u.id
+			WHERE m.bug_id=" . db_param(0) . " AND m.user_id = u.id
 			ORDER BY u.realname, u.username";
-	$result = db_query($query);
+	$result = db_query_bound($query, Array( $c_bug_id ) );
 	$num_users = db_num_rows($result);
 
 	echo '<a name="monitors" id="monitors" /><br />';

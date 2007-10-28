@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.78 2007-10-24 22:30:59 giallu Exp $
+	# $Id: project_api.php,v 1.79 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -62,8 +62,8 @@
 
 		$query = "SELECT *
 				  FROM $t_project_table
-				  WHERE id='$c_project_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_project_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			$g_cache_project_missing[(int)$p_project_id] = true;
@@ -92,7 +92,7 @@
 
 			$query = "SELECT *
 					  FROM $t_project_table";
-			$result = db_query( $query );
+			$result = db_query_bound( $query );
 			$count = db_num_rows( $result );
 			for ( $i = 0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
@@ -162,8 +162,8 @@
 
 		$query ="SELECT COUNT(*)
 				 FROM $t_project_table
-				 WHERE name='$c_name'";
-		$result = db_query( $query );
+				 WHERE name=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_name ) );
 
 		if ( 0 == db_result( $result ) ) {
 			return true;
@@ -193,9 +193,9 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_project_user_list_table
-				  WHERE project_id='$c_project_id' AND
-						user_id='$c_user_id'";
-		$result = db_query( $query );
+				  WHERE project_id=" . db_param(0) . " AND
+						user_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_project_id, $c_user_id );
 
 		if ( 0 == db_result( $result ) ) {
 			return false;
@@ -287,15 +287,15 @@
 
 		# Delete the project entry
 		$query = "DELETE FROM $t_project_table
-				  WHERE id='$c_project_id'";
+				  WHERE id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		config_set_cache( 'enable_email_notification', $t_email_notifications );
 
 		project_clear_cache( $p_project_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.10 2007-10-24 22:30:59 giallu Exp $
+	# $Id: tokens_api.php,v 1.11 2007-10-28 01:06:38 prichards Exp $
 	# --------------------------------------------------------
 
 	# This implements temporary storage of strings.
@@ -38,8 +38,8 @@
 
 		$t_query 	= "SELECT id
 		          	FROM $t_tokens_table
-		          	WHERE id='$c_token_id'";
-		$t_result	= db_query( $t_query, 1 );
+		          	WHERE id=" . db_param(0);
+		$t_result	= db_query_bound( $t_query, Array( $c_token_id ), 1 );
 
 		return( 1 == db_num_rows( $t_result ) );
 	}
@@ -74,8 +74,8 @@
 		$t_tokens_table = config_get( 'mantis_tokens_table' );
 
 		$t_query = "SELECT * FROM $t_tokens_table 
-					WHERE type='$c_type' AND owner='$c_user_id'";
-		$t_result = db_query( $t_query );
+					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
+		$t_result = db_query_bound( $t_query, Array( $c_type, $c_user_id ) );
 
 		if ( db_num_rows( $t_result ) > 0 ) {
 			return db_fetch_array( $t_result );

@@ -20,7 +20,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.9 2007-10-24 22:30:58 giallu Exp $
+	# $Id: move_db2disk.php,v 1.10 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,7 +80,7 @@
 
 		$query = 'SELECT * FROM ' . $t_file_table . ' WHERE content <> \'\'';
 
-		$result = @db_query( $query );
+		$result = @db_query_bound( $query );
 
 		if ( false == $result ) {
 			echo '<p>No attachments need to be moved.</p>';

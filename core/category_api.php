@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.15 2007-10-24 22:30:58 giallu Exp $
+	# $Id: category_api.php,v 1.16 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	### Category API ###
@@ -38,9 +38,9 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_project_category_table
-				  WHERE project_id='$c_project_id' AND
-						category='$c_category'";
-		$result = db_query( $query );
+				  WHERE project_id=" . db_param(0) . " AND
+						category=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
 		$category_count =  db_result( $result );
 
 		if ( 0 < $category_count ) {
@@ -93,10 +93,10 @@
 		$query = "INSERT INTO $t_project_category_table
 					( project_id, category )
 				  VALUES
-					( '$c_project_id', '$c_category' )";
-		db_query( $query );
+					( " . db_param(0) . ',' . db_param(1) . ')';
+		db_query_bound( $query, Array( $c_project_id, $c_category ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -114,21 +114,21 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_category_table
-				  SET category='$c_new_category',
-				  	  user_id=$c_assigned_to
-				  WHERE category='$c_category' AND
-						project_id='$c_project_id'";
-		db_query( $query );
+				  SET category=" . db_param(0) . ",
+				  	  user_id=" . db_param(1) . "
+				  WHERE category=" . db_param(2) . " AND
+						project_id=" . db_param(3);
+		db_query_bound( $query, Array( $c_new_category, $c_assigned_to, $c_category, $c_project_id ) );
 
 		if ( $p_category != $p_new_category ) {
 			$query = "UPDATE $t_bug_table
-					  SET category='$c_new_category'
-					  WHERE category='$c_category' AND
-					  		project_id='$c_project_id'";
-			db_query( $query );
+					  SET category=" . db_param(0) . "
+					  WHERE category=" . db_param(1) . " AND
+					  		project_id=" . db_param(2);
+			db_query_bound( $query, Array( $c_new_category, $c_category, $c_project_id ) );
 		}
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -148,17 +148,17 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_category_table
-				  WHERE project_id='$c_project_id' AND
-						category='$c_category'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0) . " AND
+						category=" . db_param(1);
+		db_query_bound( $query, Array( $c_project_id, $c_category ) );
 
 		$query = "UPDATE $t_bug_table
-				  SET category='$c_new_category'
-				  WHERE category='$c_category' AND
-				  		project_id='$c_project_id'";
-		db_query( $query );
+				  SET category=" . db_param(0) . "
+				  WHERE category=" . db_param(1) . " AND
+				  		project_id=" . db_param(2);
+		db_query_bound( $query, Array( $c_new_category, $c_category, $c_project_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -173,15 +173,15 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_category_table
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET category=''
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -200,9 +200,9 @@
 
 		$query = "SELECT category, user_id
 				FROM $t_project_category_table
-				WHERE project_id='$c_project_id' AND
-					category='$c_category'";
-		$result = db_query( $query );
+				WHERE project_id=" . db_param(0) . " AND
+					category=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
 		$count = db_num_rows( $result );
 		if ( 0 == $count ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
@@ -220,9 +220,9 @@
 
 		$query = "SELECT category, user_id
 				FROM $t_project_category_table
-				WHERE project_id='$c_project_id'
+				WHERE project_id=" . db_param(0) . "
 				ORDER BY category";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $c_project_id ) );
 		$count = db_num_rows( $result );
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {

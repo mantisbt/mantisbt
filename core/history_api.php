@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.44 2007-10-24 22:30:59 giallu Exp $
+	# $Id: history_api.php,v 1.45 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -446,10 +446,10 @@
 		$t_bug_history_table = config_get( 'mantis_bug_history_table' );
 
 		$query = "DELETE FROM $t_bug_history_table
-				  WHERE bug_id='$c_bug_id'";
-		db_query($query);
+				  WHERE bug_id=" . db_param(0);
+		db_query_bound($query, Array( $c_bug_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 ?>

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.67 2007-10-24 22:30:59 giallu Exp $
+	# $Id: custom_field_api.php,v 1.68 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -66,8 +66,8 @@
 
 		$query = "SELECT *
 				  FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_field_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			if ( $p_trigger_errors ) {
@@ -119,9 +119,9 @@
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$query = "SELECT COUNT(*)
 				FROM $t_custom_field_project_table
-				WHERE field_id='$c_field_id' AND
-					  project_id='$c_project_id'";
-		$result = db_query( $query );
+				WHERE field_id=" . db_param(0) . " AND
+					  project_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 		$count = db_result( $result );
 
 		if ( $count > 0 ) {
@@ -268,9 +268,9 @@
 		$query = "INSERT INTO $t_custom_field_table
 					( name )
 				  VALUES
-					( '$c_name' )";
+					( " . db_param(0) . " )";
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_name ) );
 
 		return db_insert_id( $t_custom_field_table );
 	}
@@ -481,7 +481,7 @@
 			return false;   # there is nothing to update...
 		}
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -506,7 +506,7 @@
 					( '$c_field_id', '$c_project_id' )";
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -527,7 +527,7 @@
 				  		project_id = '$c_project_id'";
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -558,7 +558,7 @@
 
 		custom_field_clear_cache( $p_field_id );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -576,7 +576,7 @@
 				  WHERE project_id='$c_project_id'";
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 
@@ -593,7 +593,7 @@
 				  WHERE bug_id='$c_bug_id'";
 		db_query( $query );
 
-		#db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 
@@ -1154,7 +1154,7 @@
 
 		custom_field_clear_cache( $p_field_id );
 
-		#db_query() errors on failure so:
+		#db_query errors on failure so:
 		return true;
 	}
 

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.26 2007-10-24 22:30:59 giallu Exp $
+	# $Id: news_api.php,v 1.27 2007-10-28 01:06:37 prichards Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -74,11 +74,11 @@
 		$t_news_table = config_get( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
-	    		  WHERE id='$c_news_id'";
+	    		  WHERE id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_news_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 	# --------------------
@@ -89,11 +89,11 @@
 		$t_news_table = config_get( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
-	    		  WHERE project_id='$c_project_id'";
+	    		  WHERE project_id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id ) );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 	# --------------------
@@ -130,7 +130,7 @@
 
 		db_query( $query );
 
-		# db_query() errors on failure so:
+		# db_query errors on failure so:
 		return true;
 	}
 	# --------------------
@@ -142,8 +142,8 @@
 
 		$query = "SELECT *
 				  FROM $t_news_table
-				  WHERE id='$c_news_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_news_id ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );

@@ -35,11 +35,11 @@
 	$t_user_id = auth_get_current_user_id();
 	$query = "SELECT status, COUNT( status ) as count
 			FROM mantis_bug_table
-			WHERE project_id='$t_project_id' AND
-				  reporter_id='$t_user_id'
+			WHERE project_id=" . db_param(0) . " AND
+				  reporter_id=" . db_param(1) . "
 			GROUP BY status
 			ORDER BY status";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
 	$status_count = db_num_rows( $result );
 
 	$status_arr = array();

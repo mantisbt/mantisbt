@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.58 2007-10-24 22:30:50 giallu Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.59 2007-10-28 01:06:36 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -85,9 +85,9 @@
 	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
 	$query3 ="SELECT print_pref ".
 			"FROM $t_user_print_pref_table ".
-			"WHERE user_id='$t_user_id' ";
+			"WHERE user_id=" . db_param(0);
 
-	$result3 = db_query( $query3 );
+	$result3 = db_query_bound( $query3, Array( $t_user_id ) );
 	$row = db_fetch_array( $result3 );
 	$t_prefs = $row['print_pref'];
 ?>
