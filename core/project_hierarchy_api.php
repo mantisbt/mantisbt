@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.10 2007-10-28 17:06:44 prichards Exp $
+	# $Id: project_hierarchy_api.php,v 1.11 2007-10-29 23:47:00 prichards Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -103,7 +103,7 @@
 				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
-		$result = db_query_bound( $query, Array( true ) );
+		$result = db_query_bound( $query, ($p_show_disabled ? null : Array( true ) ) );
 		$row_count = db_num_rows( $result );
 
 		$g_cache_project_hierarchy = array();
