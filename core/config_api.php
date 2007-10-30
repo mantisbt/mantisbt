@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.41 2007-10-28 01:06:36 prichards Exp $
+	# $Id: config_api.php,v 1.42 2007-10-30 23:56:43 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error_api.php' );
@@ -32,6 +32,9 @@
 	# cache environment to speed up lookups
 	$g_cache_db_table_exists = false;
 
+	$g_cache_config_user = null;
+	$g_cache_config_project = null;
+	
 	### Configuration API ###
 
 	# ------------------
@@ -46,18 +49,19 @@
 	#    3.use GLOBAL[config_id]
 	function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
 		global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
-
+		global $g_cache_config_user, $g_cache_config_project;
+		
 		# @@ debug @@ echo "lu o=$p_option ";
 
 		# bypass table lookup for certain options
 		$t_bypass_lookup = !config_can_set_in_database( $p_option );
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 
-		if ( ! $t_bypass_lookup ) {
-			$t_config_table = config_get_global( 'mantis_config_table' );
+		if ( ! $t_bypass_lookup ) {			
 			# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 			if ( ! $g_cache_db_table_exists ) {
+				$t_config_table = config_get_global( 'mantis_config_table' );
 				$g_cache_db_table_exists = ( TRUE === db_is_connected() ) &&
 					db_table_exists( $t_config_table );
 			}
@@ -69,29 +73,46 @@
 				# prepare the user's list
 				$t_users = array();
 				if ( null === $p_user ) {
-					$t_users[] = auth_is_user_authenticated() ? auth_get_current_user_id() : ALL_USERS;
+					if (! isset( $g_cache_config_user ) ) {
+						$t_users[] = auth_is_user_authenticated() ? auth_get_current_user_id() : ALL_USERS;
+						if ( ! in_array( ALL_USERS, $t_users ) ) {
+							$t_users[] = ALL_USERS;
+						}
+						$g_cache_config_user = $t_users;
+					} else {
+						$t_users = $g_cache_config_user;
+					}
 				} else {
 					$t_users[] = $p_user;
+					if ( ! in_array( ALL_USERS, $t_users ) ) {
+						$t_users[] = ALL_USERS;
+					}
 				}
-				if ( ! in_array( ALL_USERS, $t_users ) ) {
-					$t_users[] = ALL_USERS;
-				}
+				
 
 				# prepare the projects list
 				$t_projects = array();
 				if ( ( null === $p_project )  ) {
-					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
+					if (! isset( $g_cache_config_project ) ) {
+						$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
+						if ( ! in_array( ALL_PROJECTS, $t_projects ) ) {
+							$t_projects[] = ALL_PROJECTS;
+						}
+						$g_cache_config_project = $t_projects;
+					} else {
+						$t_projects = $g_cache_config_project;
+					}
 				} else {
 					$t_projects[] = $p_project;
-				}
-				if ( ! in_array( ALL_PROJECTS, $t_projects ) ) {
-					$t_projects[] = ALL_PROJECTS;
+					if ( ! in_array( ALL_PROJECTS, $t_projects ) ) {
+						$t_projects[] = ALL_PROJECTS;
+					}
 				}
 				# @@ debug @@ echo 'pr= '; var_dump($t_projects);
 				# @@ debug @@ echo 'u= '; var_dump($t_users);
 				
 				if ( ! $g_cache_filled ) {
-					
+					$t_config_table = config_get_global( 'mantis_config_table' );
 					$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
 					$result = db_query_bound( $query );
 					while ( false <> ( $row = db_fetch_array( $result ) ) ) {
