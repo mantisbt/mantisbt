@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.20 2007-10-28 01:06:37 prichards Exp $
+	# $Id: profile_api.php,v 1.21 2007-10-30 19:10:29 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -190,8 +190,8 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE user_id=" . db_param(0) .
-				 "ORDER BY platform, os, os_build";
+				  WHERE user_id=" . db_param(0) . "
+				  ORDER BY platform, os, os_build";
 	    $result = db_query_bound( $query, Array( $c_user_id ) );
 
 		$t_rows = array();
