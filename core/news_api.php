@@ -48,7 +48,7 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		# Add item
 		$query = "INSERT
@@ -71,7 +71,7 @@
 	function news_delete( $p_news_id ) {
 		$c_news_id = db_prepare_int( $p_news_id );
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
 	    		  WHERE id=" . db_param(0);
@@ -86,7 +86,7 @@
 	function news_delete_all( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		$query = "DELETE FROM $t_news_table
 	    		  WHERE project_id=" . db_param(0);
@@ -116,7 +116,7 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		# Update entry
 		$query = "UPDATE $t_news_table
@@ -138,7 +138,7 @@
 	function news_get_row( $p_news_id ) {
 		$c_news_id = db_prepare_int( $p_news_id );
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		$query = "SELECT *
 				  FROM $t_news_table
@@ -158,7 +158,7 @@
 	function news_get_count( $p_project_id, $p_sitewide=true ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 		$t_project_where = helper_project_specific_where( $p_project_id );
 
 		$query = "SELECT COUNT(*)
@@ -176,7 +176,7 @@
 	# --------------------
 	# get news items (selected project plus sitewide posts)
 	function news_get_rows( $p_project_id, $p_sitewide=true ) {
-		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_table = config_get_global( 'mantis_news_table' );
 
 		$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
 		$t_projects[] = $p_project_id;
@@ -241,7 +241,7 @@
 
 		$t_projects = array_map( 'db_prepare_int', $t_projects );
 
-		$t_news_table			= config_get( 'mantis_news_table' );
+		$t_news_table			= config_get_global( 'mantis_news_table' );
 		$t_news_view_limit		= config_get( 'news_view_limit' );
 		$t_news_view_limit_days = config_get( 'news_view_limit_days' );
 

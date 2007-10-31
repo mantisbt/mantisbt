@@ -50,7 +50,7 @@
 		global $g_cache_versions;
 
 		$c_version_id = db_prepare_int( $p_version_id );
-		$t_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
 		if ( isset( $g_cache_versions[$c_version_id] ) ) {
 			return $g_cache_versions[$c_version_id];
@@ -134,7 +134,7 @@
 
 		version_ensure_unique( $p_version, $p_project_id );
 
-		$t_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
 		$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released )
@@ -167,8 +167,8 @@
 		$c_date_order   = db_prepare_string( $p_version_info->date_order );
 		$c_project_id	= db_prepare_int( $p_version_info->project_id );
 
-		$t_project_version_table	= config_get( 'mantis_project_version_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_version_table	= config_get_global( 'mantis_project_version_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_version_table
 				  SET version=" . db_param(0) . ",
@@ -219,8 +219,8 @@
 		$c_old_version = db_prepare_string( $t_old_version );
 		$c_project_id = db_prepare_int( $t_project_id );
 
-		$t_project_version_table	= config_get( 'mantis_project_version_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_version_table	= config_get_global( 'mantis_project_version_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
 				  WHERE id=" . db_param(0);
@@ -245,8 +245,8 @@
 	function version_remove_all( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_project_version_table	= config_get( 'mantis_project_version_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_version_table	= config_get_global( 'mantis_project_version_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_version_table
 	  			  WHERE project_id=" . db_param(0);
@@ -284,7 +284,7 @@
 			$t_released_where = "AND ( released = $c_released )";
 		}
 
-		$t_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
@@ -312,7 +312,7 @@
 			$t_released_where = "AND ( released = $c_released )";
 		}
 
-		$t_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
@@ -340,7 +340,7 @@
 			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
-		$t_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
 		$query = "SELECT id
 					FROM $t_project_version_table

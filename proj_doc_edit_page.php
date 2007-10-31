@@ -41,7 +41,7 @@
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
-	$t_proj_file_table = config_get( 'mantis_project_file_table' );
+	$t_proj_file_table = config_get_global( 'mantis_project_file_table' );
 	$query = "SELECT *
 			FROM $t_proj_file_table
 			WHERE id=" . db_param(0);

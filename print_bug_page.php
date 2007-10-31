@@ -43,7 +43,7 @@
 
 	$c_bug_id = (integer)$f_bug_id;
 
-	$t_bug_table = config_get( 'mantis_bug_table' );
+	$t_bug_table = config_get_global( 'mantis_bug_table' );
 	$query = "SELECT *
 			FROM $t_bug_table
 			WHERE id=" . db_param(0);
@@ -51,7 +51,7 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+	$t_bug_text_table = config_get_global( 'mantis_bug_text_table' );
 	$query = "SELECT *
 			FROM $t_bug_text_table
 			WHERE id=" . db_param(0);
@@ -313,7 +313,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 	# account profile description
 	if ( $v_profile_id > 0 ) {
-	    $t_user_prof_table = config_get( 'mantis_user_profile_table' );
+	    $t_user_prof_table = config_get_global( 'mantis_user_profile_table' );
 		$query = "SELECT description
 				FROM $t_user_prof_table
 				WHERE id=" . db_param(0);

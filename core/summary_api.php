@@ -51,7 +51,7 @@
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
 
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';		  
 		$query = "SELECT COUNT(id) as bugcount, $p_enum $t_status_query 
 				FROM $t_mantis_bug_table
@@ -189,7 +189,7 @@
 	# prints the bugs submitted in the last X days (default is 1 day) for the
 	# current project
 	function summary_new_bug_count_by_date( $p_time_length=1 ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
 
 		$c_time_length = (int)$p_time_length;
 
@@ -213,8 +213,8 @@
 	# returns the number of bugs resolved in the last X days (default is 1 day) for the
 	# current project
 	function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
-		$t_bug_table = config_get( 'mantis_bug_table' );
-		$t_bug_history_table = config_get( 'mantis_bug_history_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_bug_history_table = config_get_global( 'mantis_bug_history_table' );
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 		$c_time_length = (int)$p_time_length;
@@ -290,8 +290,8 @@
 	# the score is calculated assigning one "point" for each history event 
 	# associated with the bug
 	function summary_print_by_activity() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_history_table = config_get( 'mantis_bug_history_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_history_table = config_get_global( 'mantis_bug_history_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -334,7 +334,7 @@
 
 	# Print list of bugs opened from the longest time
 	function summary_print_by_age() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -374,8 +374,8 @@
 	# --------------------
 	# print bug counts by assigned to each developer
 	function summary_print_by_developer() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -463,8 +463,8 @@
 	# --------------------
 	# print bug counts by reporter id
 	function summary_print_by_reporter() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 		$t_project_id = helper_get_current_project();
@@ -535,8 +535,8 @@
 	# --------------------
 	# print a bug count per category
 	function summary_print_by_category() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
 		$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
 		$t_project_id = helper_get_current_project();
@@ -640,8 +640,8 @@
 	# --------------------
 	# print bug counts by project
 	function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = null ) {
-		$t_mantis_bug_table 	= config_get( 'mantis_bug_table' );
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_bug_table 	= config_get_global( 'mantis_bug_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
 
 		$t_project_id = helper_get_current_project();
 
@@ -712,8 +712,8 @@
 	# --------------------
 	# Print developer / resolution report
 	function summary_print_developer_resolution( $p_resolution_enum_string ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -820,8 +820,8 @@
 	# --------------------
 	# Print reporter / resolution report
 	function summary_print_reporter_resolution( $p_resolution_enum_string ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 		$t_project_id = helper_get_current_project();
@@ -935,8 +935,8 @@
 	}	# --------------------
 	# Print reporter effectiveness report
 	function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 		$t_project_id = helper_get_current_project();

@@ -25,8 +25,8 @@
 		$c_type           = db_prepare_int( $p_type );
 		$c_attr      	  = db_prepare_string( $p_attr );
 
-		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
-		$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
+		$t_bugnote_text_table	= config_get_global( 'mantis_bugnote_text_table' );
+		$t_bugnote_table     	= config_get_global( 'mantis_bugnote_table' );
 
 		# insert bugnote text
 		$query = "INSERT INTO $t_bugnote_text_table
@@ -90,7 +90,7 @@
 
 			$c_bug_id = db_prepare_int( $p_issue_id );
 
-			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+			$t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
 
 			$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
 							FROM $t_bug_file_table
@@ -159,8 +159,8 @@
 	if ( !function_exists( 'bugnote_get_all_bugnotes' ) ) {
         function bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit ) {
             $c_bug_id               = db_prepare_int( $p_bug_id );
-            $t_bugnote_table        = config_get( 'mantis_bugnote_table' );
-            $t_bugnote_text_table   = config_get( 'mantis_bugnote_text_table' );
+            $t_bugnote_table        = config_get_global( 'mantis_bugnote_table' );
+            $t_bugnote_text_table   = config_get_global( 'mantis_bugnote_text_table' );
             if ( 0 == $p_user_bugnote_limit ) {
                     ## Show all bugnotes
                     $t_bugnote_limit = -1;
@@ -228,7 +228,7 @@
                         $t_released_where = "AND ( released = $c_released )";
                 }
 
-                $t_project_version_table = config_get( 'mantis_project_version_table' );
+                $t_project_version_table = config_get_global( 'mantis_project_version_table' );
 
                 $query = "SELECT *
                                   FROM $t_project_version_table
@@ -257,7 +257,7 @@
 		function project_get_id_by_name( $p_project_name ) {
 			$c_project_name = db_prepare_string( $p_project_name );
 
-			$t_project_table = config_get( 'mantis_project_table' );
+			$t_project_table = config_get_global( 'mantis_project_table' );
 
 			$query = "SELECT id FROM $t_project_table WHERE name = '$c_project_name'";
 			$t_result = db_query( $query, 1 );
@@ -273,7 +273,7 @@
 	# --------------------
 	# In 0.19.0 this api has no parameters in Mantis, in 0.19.1-cvs, I changed it to the current implementation.
 	function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-		$t_filters_table = config_get( 'mantis_filters_table' );
+		$t_filters_table = config_get_global( 'mantis_filters_table' );
 		$t_overall_query_arr = array();
 
 		if ( null === $p_project_id ) {

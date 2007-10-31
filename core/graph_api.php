@@ -411,7 +411,7 @@
 	# summarize metrics by a single field in the bug table
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 		$t_project_id = helper_get_current_project();
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
@@ -433,10 +433,10 @@
 
 	# Function which gives the absolute values according to the status (opened/closed/resolved)
 	function enum_bug_group( $p_enum_string, $p_enum ) {
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 
 		$t_project_id = helper_get_current_project();
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_clo_val = CLOSED;
@@ -481,8 +481,8 @@
 	function create_developer_summary() {
 
 		$t_project_id = helper_get_current_project();
-		$t_user_table = config_get( 'mantis_user_table' );
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
@@ -543,8 +543,8 @@
 
 
 		$t_project_id = helper_get_current_project();
-		$t_user_table = config_get( 'mantis_user_table' );
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
@@ -591,8 +591,8 @@
 		global $category_name, $category_bug_count;
 
 		$t_project_id = helper_get_current_project();
-		$t_cat_table = config_get( 'mantis_project_category_table' );
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_cat_table = config_get_global( 'mantis_project_category_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
@@ -645,8 +645,8 @@
 
 		$t_clo_val = CLOSED;
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
-		$t_bug_table = config_get( 'mantis_bug_table' );
-		$t_history_table = config_get( 'mantis_bug_history_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_history_table = config_get_global( 'mantis_bug_history_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();

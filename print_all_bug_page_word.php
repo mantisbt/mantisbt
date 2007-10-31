@@ -105,7 +105,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
             $t_project_name = project_get_field( $v_project_id, 'name' );
 
             # bug text infos
-            $t_bug_text_table = config_get( 'mantis_bug_text_table' );
+            $t_bug_text_table = config_get_global( 'mantis_bug_text_table' );
             $query3 = "SELECT *
                 FROM $t_bug_text_table
                 WHERE id=" . db_param(0);
@@ -347,7 +347,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 	# account profile description
 	if ( $v_profile_id > 0 ) {
-	   $t_user_prof_table = config_get( 'mantis_user_profile_table' );
+	   $t_user_prof_table = config_get_global( 'mantis_user_profile_table' );
 		$query4 = "SELECT description
 				FROM $t_user_prof_table
 				WHERE id=" . db_param(0);
@@ -376,7 +376,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
-	        $t_bug_file_table = config_get( 'mantis_bug_file_table' );
+	        $t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
 					FROM $t_bug_file_table
 					WHERE bug_id=" . db_param(0);
@@ -411,8 +411,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
  		$t_restriction = '';
  	}
 
-	$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
-	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
+	$t_bugnote_table		= config_get_global( 'mantis_bugnote_table' );
+	$t_bugnote_text_table	= config_get_global( 'mantis_bugnote_text_table' );
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
 	$query6 = "SELECT *

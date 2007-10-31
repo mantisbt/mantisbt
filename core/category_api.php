@@ -34,7 +34,7 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_category		= db_prepare_string( $p_category );
 
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_project_category_table
@@ -88,7 +88,7 @@
 
 		category_ensure_unique( $p_project_id, $p_category );
 
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		$query = "INSERT INTO $t_project_category_table
 					( project_id, category )
@@ -110,8 +110,8 @@
 
 		category_ensure_exists( $p_project_id, $p_category );
 
-		$t_project_category_table	= config_get( 'mantis_project_category_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_category_table	= config_get_global( 'mantis_project_category_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_category_table
 				  SET category=" . db_param(0) . ",
@@ -144,8 +144,8 @@
 			category_ensure_exists( $p_project_id, $p_new_category );
 		}
 
-		$t_project_category_table	= config_get( 'mantis_project_category_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_category_table	= config_get_global( 'mantis_project_category_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_category_table
 				  WHERE project_id=" . db_param(0) . " AND
@@ -169,8 +169,8 @@
 
 		project_ensure_exists( $p_project_id );
 
-		$t_project_category_table	= config_get( 'mantis_project_category_table' );
-		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_project_category_table	= config_get_global( 'mantis_project_category_table' );
+		$t_bug_table				= config_get_global( 'mantis_bug_table' );
 
 		$query = "DELETE FROM $t_project_category_table
 				  WHERE project_id=" . db_param(0);
@@ -196,7 +196,7 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_category		= db_prepare_string( $p_category );
 
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		$query = "SELECT category, user_id
 				FROM $t_project_category_table
@@ -216,7 +216,7 @@
 	function category_get_all_rows( $p_project_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		$query = "SELECT category, user_id
 				FROM $t_project_category_table

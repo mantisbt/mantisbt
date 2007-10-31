@@ -64,8 +64,8 @@
 	}
 	# end @@@ block
 
-	$t_bug_table = config_get( 'mantis_bug_table' );
-	$t_history_table = config_get( 'mantis_bug_history_table' );
+	$t_bug_table = config_get_global( 'mantis_bug_table' );
+	$t_history_table = config_get_global( 'mantis_bug_history_table' );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	# the issue may have passed through the status we consider resolved

@@ -39,7 +39,7 @@
 			$c_bug_id		= db_prepare_int( $p_bug_id );
 			$c_user_id		= db_prepare_int( $p_user_id );
 
-			$t_mantis_bug_history_table = config_get( 'mantis_bug_history_table' );
+			$t_mantis_bug_history_table = config_get_global( 'mantis_bug_history_table' );
 
 			$query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value )
@@ -65,7 +65,7 @@
 		$c_optional2	= db_prepare_string( $p_optional2 );
 		$t_user_id		= auth_get_current_user_id();
 
-		$t_mantis_bug_history_table = config_get( 'mantis_bug_history_table' );
+		$t_mantis_bug_history_table = config_get_global( 'mantis_bug_history_table' );
 
 		$query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
@@ -76,8 +76,8 @@
 	# --------------------
 	# return all bug history for a given bug id ordered by date
 	function history_get_events( $p_bug_id ) {
-		$t_mantis_bug_history_table	= config_get( 'mantis_bug_history_table' );
-		$t_mantis_user_table		= config_get( 'mantis_user_table' );
+		$t_mantis_bug_history_table	= config_get_global( 'mantis_bug_history_table' );
+		$t_mantis_user_table		= config_get_global( 'mantis_user_table' );
 
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -115,8 +115,8 @@
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
 	# 'field','type','old_value','new_value'
 	function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
-		$t_mantis_bug_history_table	= config_get( 'mantis_bug_history_table' );
-		$t_mantis_user_table		= config_get( 'mantis_user_table' );
+		$t_mantis_bug_history_table	= config_get_global( 'mantis_bug_history_table' );
+		$t_mantis_user_table		= config_get_global( 'mantis_user_table' );
 		$t_history_order			= config_get( 'history_order' );
 		$c_bug_id					= db_prepare_int( $p_bug_id );
 
@@ -443,7 +443,7 @@
 	function history_delete( $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
-		$t_bug_history_table = config_get( 'mantis_bug_history_table' );
+		$t_bug_history_table = config_get_global( 'mantis_bug_history_table' );
 
 		$query = "DELETE FROM $t_bug_history_table
 				  WHERE bug_id=" . db_param(0);

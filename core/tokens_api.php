@@ -34,7 +34,7 @@
 	 */
 	function token_exists( $p_token_id ) {
 		$c_token_id   	= db_prepare_int( $p_token_id );
-		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+		$t_tokens_table	= config_get_global( 'mantis_tokens_table' );
 
 		$t_query 	= "SELECT id
 		          	FROM $t_tokens_table
@@ -71,7 +71,7 @@
 		$c_type = db_prepare_int( $p_type );
 		$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-		$t_tokens_table = config_get( 'mantis_tokens_table' );
+		$t_tokens_table = config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "SELECT * FROM $t_tokens_table 
 					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
@@ -129,7 +129,7 @@
 
 		$c_token_id = db_prepare_int( $p_token_id );
 		$c_token_expiry = db_timestamp( db_date( time() + $p_expiry ) );
-		$t_tokens_table = config_get( 'mantis_tokens_table' );
+		$t_tokens_table = config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table
 					SET expiry=$c_token_expiry
@@ -149,7 +149,7 @@
 		$c_type = db_prepare_int( $p_type );
 		$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-		$t_tokens_table = config_get( 'mantis_tokens_table' );
+		$t_tokens_table = config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "DELETE FROM $t_tokens_table 
 					WHERE type=" . db_param(0) . " AND owner=" . db_param(1);
@@ -170,7 +170,7 @@
 			$c_user_id = db_prepare_int( $p_user_id );
 		}
 
-		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+		$t_tokens_table	= config_get_global( 'mantis_tokens_table' );
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
@@ -197,7 +197,7 @@
 		$c_expiry = db_timestamp( db_date(time() + $p_expiry) );
 		$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
 
-		$t_tokens_table = config_get( 'mantis_tokens_table' );
+		$t_tokens_table = config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
@@ -219,7 +219,7 @@
 		$c_value = db_prepare_string( $p_value );
 		$c_expiry = db_timestamp( db_date(time() + $p_expiry) );
 
-		$t_tokens_table = config_get( 'mantis_tokens_table' );
+		$t_tokens_table = config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table 
 					SET value='$c_value', expiry=$c_expiry
@@ -237,7 +237,7 @@
 	function token_delete_by_type( $p_token_type ) {
 		$c_token_type = db_prepare_int( $p_token_type );
 
-		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+		$t_tokens_table	= config_get_global( 'mantis_tokens_table' );
 
 		# Remove
 		$t_query = "DELETE FROM $t_tokens_table
@@ -255,7 +255,7 @@
 	function token_purge_expired( $p_token_type = null ) {
 		global $g_tokens_purged;
 
-		$t_tokens_table	= config_get( 'mantis_tokens_table' );
+		$t_tokens_table	= config_get_global( 'mantis_tokens_table' );
 
 		$t_query = "DELETE FROM $t_tokens_table WHERE ";
 		if ( !is_null( $p_token_type ) ) {

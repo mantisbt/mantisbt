@@ -317,12 +317,12 @@
 	 * @param integer Bug ID
 	 */
 	function print_tag_option_list( $p_bug_id = 0 ) {
-		$t_tag_table = config_get( 'mantis_tag_table' );
+		$t_tag_table = config_get_global( 'mantis_tag_table' );
 
 		$query = "SELECT id, name FROM $t_tag_table ";
 		if ( 0 != $p_bug_id ) {
 			$c_bug_id = db_prepare_int( $p_bug_id );
-			$t_bug_tag_table = config_get( 'mantis_bug_tag_table' );
+			$t_bug_tag_table = config_get_global( 'mantis_bug_tag_table' );
 			
 			$query .= "	WHERE id NOT IN ( 
 						SELECT tag_id FROM $t_bug_tag_table WHERE bug_id='$c_bug_id' ) ";
@@ -340,7 +340,7 @@
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		$t_mantis_news_table = config_get( 'mantis_news_table' );
+		$t_mantis_news_table = config_get_global( 'mantis_news_table' );
 
 		$t_project_id = helper_get_current_project();
 
@@ -445,7 +445,7 @@
 	# --------------------
 	# Used for update pages
 	function print_field_option_list( $p_list, $p_item='' ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
 
 		$t_category_string = get_enum_string( $t_mantis_bug_table, $p_list );
 	    $t_arr = explode_enum_string( $t_category_string );
@@ -647,8 +647,8 @@
 	
 	# --------------------
 	function print_news_project_option_list( $p_project_id ) {
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
-		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
+		$t_mantis_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
 
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT *
@@ -678,7 +678,7 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_option_list( $p_category='', $p_project_id = null ) {
-		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_mantis_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
@@ -722,8 +722,8 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_complete_option_list( $p_category='', $p_project_id = null ) {
-		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_mantis_project_category_table = config_get_global( 'mantis_project_category_table' );
+		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
 
 		if ( null === $p_project_id ) {
 			$t_project_id = helper_get_current_project();
@@ -837,7 +837,7 @@
 	}
 	# --------------------
 	function print_build_option_list( $p_build='' ) {
-		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_table = config_get_global( 'mantis_bug_table' );
 		$t_overall_build_arr = array();
 
 		$t_project_id = helper_get_current_project();
@@ -1060,8 +1060,8 @@
 	# if no project is specified use the current project
 	# also exclude any administrators
 	function print_project_user_list_option_list( $p_project_id=null ) {
-		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_mantis_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_mantis_user_table = config_get_global( 'mantis_user_table' );
 
 		if ( null === $p_project_id ) {
 			$p_project_id = helper_get_current_project();
@@ -1109,8 +1109,8 @@
 	# --------------------
 	# list of projects that a user is NOT in
 	function print_project_user_list_option_list2( $p_user_id ) {
-		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1133,8 +1133,8 @@
 	# --------------------
 	# list of projects that a user is in
 	function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
-		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1257,7 +1257,7 @@
 	}
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
-		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_mantis_project_category_table = config_get_global( 'mantis_project_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
@@ -1284,8 +1284,8 @@
 	}
 	# --------------------
 	function print_project_version_string( $p_project_id ) {
-		$t_mantis_project_version_table = config_get( 'mantis_project_version_table' );
-		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_project_version_table = config_get_global( 'mantis_project_version_table' );
+		$t_mantis_project_table = config_get_global( 'mantis_project_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 

@@ -51,7 +51,7 @@
 	$c_title = db_prepare_string( $f_title );
 	$c_description = db_prepare_string( $f_description );
 
-	$t_project_file_table = config_get( 'mantis_project_file_table' );
+	$t_project_file_table = config_get_global( 'mantis_project_file_table' );
 
 	#@@@ (thraxisp) this code should probably be integrated into file_api to share
 	#  methods used to store files

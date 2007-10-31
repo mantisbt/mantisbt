@@ -82,8 +82,8 @@
 		$t_user_access_level_is_reporter = ( REPORTER == access_get_project_level( $t_project_id ) );
 
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
-		$t_bug_table	= config_get( 'mantis_bug_table' );
-		$t_relation_table = config_get( 'mantis_bug_relationship_table' );
+		$t_bug_table	= config_get_global( 'mantis_bug_table' );
+		$t_relation_table = config_get_global( 'mantis_bug_relationship_table' );
 		
 		$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
 
