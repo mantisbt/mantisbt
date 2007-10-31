@@ -58,7 +58,7 @@
 	$c_export = implode('',$t_prefs_arr);
 
 	# update preferences
-	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
+	$t_user_print_pref_table = config_get_global( 'mantis_user_print_pref_table' );
 	$query = "UPDATE $t_user_print_pref_table
 			SET print_pref=" . db_param(0) . "
 			WHERE user_id=" . db_param(1);

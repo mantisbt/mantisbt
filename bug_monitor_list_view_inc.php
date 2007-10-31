@@ -28,8 +28,8 @@
 <?php	if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) { ?>
 <?php
 	$c_bug_id = db_prepare_int( $f_bug_id );
-	$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
-	$t_user_table = config_get( 'mantis_user_table' );
+	$t_bug_monitor_table = config_get_global( 'mantis_bug_monitor_table' );
+	$t_user_table = config_get_global( 'mantis_user_table' );
 
 	# get the bugnote data
 	$query = "SELECT user_id, enabled

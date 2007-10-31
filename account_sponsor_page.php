@@ -76,8 +76,8 @@
 	# get issues user has sponsored
 	$t_user = auth_get_current_user_id();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table = config_get( 'mantis_bug_table' );
-	$t_sponsor_table = config_get( 'mantis_sponsorship_table' );
+	$t_bug_table = config_get_global( 'mantis_bug_table' );
+	$t_sponsor_table = config_get_global( 'mantis_sponsorship_table' );
 	$t_payment = config_get( 'payment_enable', 0 );
 	
 	$t_show_clause =  $t_show_all ? '' : 'AND ( b.status < ' . $t_resolved . ' OR s.paid < ' . SPONSORSHIP_PAID . ')';

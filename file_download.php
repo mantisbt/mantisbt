@@ -44,13 +44,13 @@
 	$query = '';
 	switch ( $f_type ) {
 		case 'bug':
-			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+			$t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
 			$query = "SELECT *
 				FROM $t_bug_file_table
 				WHERE id='$c_file_id'";
 			break;
 		case 'doc':
-			$t_project_file_table = config_get( 'mantis_project_file_table' );
+			$t_project_file_table = config_get_global( 'mantis_project_file_table' );
 			$query = "SELECT *
 				FROM $t_project_file_table
 				WHERE id='$c_file_id'";

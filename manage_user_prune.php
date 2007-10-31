@@ -27,7 +27,7 @@
 
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	$t_user_table = config_get( 'mantis_user_table' );
+	$t_user_table = config_get_global( 'mantis_user_table' );
 
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
