@@ -29,11 +29,11 @@
 	# Spanish strings for Mantis
 	# Based on strings_english.txt rev. 1.???
 	# -------------------------------------------------
-	# $Revision: 1.112.2.3 $
+	# $Revision: 1.115 $
 	# $Author: jbrugger $
-	# $Date: 2007-10-25 17:22:15 $
+	# $Date: 2007-10-25 17:29:23 $
 	#
-	# $Id: strings_spanish.txt,v 1.112.2.3 2007-10-25 17:22:15 jbrugger Exp $
+	# $Id: strings_spanish.txt,v 1.115 2007-10-25 17:29:23 jbrugger Exp $
 	###########################################################################
 
 ?>
@@ -649,6 +649,7 @@ $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
 $s_edited_on = 'editada el: ';
 
 # file_api.php
+$s_hide_content = 'Ocultar Contenido';
 $s_show_content = 'Mostrar Contenido';
 
 # index.php
