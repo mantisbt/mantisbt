@@ -649,6 +649,7 @@ $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
 $s_edited_on = 'editada el: ';
 
 # file_api.php
+$s_hide_content = 'Ocultar Contenido';
 $s_show_content = 'Mostrar Contenido';
 
 # index.php
