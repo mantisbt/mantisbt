@@ -39,6 +39,9 @@
 
 	# Stores whether a database connection was succesfully opened.
 	$g_db_connected = false;
+	
+	# Store whether to log queries ( used for show_queries_count/query list)
+	$g_db_log_queries = config_get_global( 'show_queries_count' );
 
 	# set adodb fetch mode
 	# most drivers don't implement this, but for mysql there is a small internal php performance gain for using it
@@ -156,9 +159,9 @@
 	# If $p_error_on_failure is true (default) an error will be triggered
 	#  if there is a problem executing the query.
 	function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
-		global $g_queries_array, $g_db;
+		global $g_queries_array, $g_db, $g_db_log_queries;
 
-		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+		if ( ON == $g_db_log_queries ) {		
 			$t_start = microtime_float();
 
 			$t_backtrace = debug_backtrace();
@@ -180,7 +183,7 @@
 			$t_result = $g_db->Execute( $p_query );
 		}
 
-		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+		if ( ON == $g_db_log_queries ) {		
 			$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
 			array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
@@ -197,9 +200,9 @@
 
 	function db_query_bound($p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 )
 	{
-		global $g_queries_array, $g_db;
+		global $g_queries_array, $g_db, $g_db_log_queries;
 
-		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+		if ( ON == $g_db_log_queries ) {		
 			$t_db_type = config_get( 'db_type' );
 
 			$t_start = microtime_float();
@@ -223,7 +226,7 @@
 			$t_result = $g_db->Execute( $p_query, $arr_parms );
 		}
 
-		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+		if ( ON == $g_db_log_queries ) {		
 			$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
 			$lastoffset = 0; $i = 1;
