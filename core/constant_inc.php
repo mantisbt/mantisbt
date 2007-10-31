@@ -21,7 +21,7 @@
 	# $Id: constant_inc.php,v 1.76 2007-10-28 15:35:13 nuclear_eclipse Exp $
 	# --------------------------------------------------------
 
-	define( 'MANTIS_VERSION', '1.2.0-CVS' );
+	define( 'MANTIS_VERSION', '1.2.0-SVN' );
 
 	# --- constants -------------------
 
