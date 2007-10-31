@@ -25,13 +25,13 @@
 	#
 	###########################################################################
 	# Dutch strings for Mantis
-	# Based on strings_english.txt rev. 1.282
+	# Based on strings_english.txt rev. 1.314
 	# -------------------------------------------------
 	# $Revision: 1.111 $
 	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:10 $
+	# $Date: 2007/10/24 22:31:10 $
 	#
-	# $Id: strings_dutch.txt,v 1.111 2007-10-24 22:31:10 giallu Exp $
+	# $Id: strings_dutch.txt,v 1.111 2007/10/24 22:31:10 giallu Exp $
 	###########################################################################
 
 ?>
@@ -1333,4 +1333,77 @@ $s_on_or_after = 'Op of na' ;
 
 # wiki related strings
 $s_wiki = 'Wiki';
+# Tagging
+$s_tags = 'Tags';
+$s_tag_details = 'Tagdetails: %s';
+$s_tag_id = 'Tagnummer';
+$s_tag_name = 'Naam';
+$s_tag_creator = 'Aangemaakt door';
+$s_tag_created = 'Aangemaakt op';
+$s_tag_updated = 'Bijgewerkt op';
+$s_tag_description = 'Tagbeschrijving';
+$s_tag_statistics = 'Statistieken';
+$s_tag_update = 'Tag bijwerken: %s';
+$s_tag_update_return = 'Terug naar tag';
+$s_tag_update_button = 'Tag bijwerken';
+$s_tag_delete_button = 'Tag verwijderen';
+$s_tag_delete_message = 'Weet u zeker dat u deze tag wilt verwijderen?';
+$s_tag_existing = 'Bestaande tags';
+$s_tag_none_attached = 'Geen tags toegevoegd.';
+$s_tag_attach = 'Toevoegen';
+$s_tag_attach_long = 'Tags toevoegen';
+$s_tag_attach_failed = 'Toevoegen tag mislukt.';
+$s_tag_detach = 'Verwijder \'%s\'';
+$s_tag_separate_by = "(Scheiden door '%s')";
+$s_tag_invalid_name = 'Onjuiste tagnaam.';
+$s_tag_create_denied = 'Aanmaken recht mislukt.';
+$s_tag_filter_default = 'Gekoppelde meldingen (%s)';
+$s_tag_history_attached = 'Tag toegevoegd';
+$s_tag_history_detached = 'Tag verwijderd';
+$s_tag_history_renamed = 'Tag hernoemd';
+$s_tag_related = 'Gerelateerde tags';
+$s_tag_related_issues = 'Gedeelde meldingen (%s)';
+$s_tag_stats_attached = 'Bijgevoegde meldingen: %s';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Billing';
+$s_time_tracking = 'Tijdsbesteding bijhouden';
+$s_time_tracking_get_info_button = 'Tijdsbesteding ophalen';
+$s_time_tracking_cost_per_hour = 'Tarief / uur';
+$s_time_tracking_cost = 'Kosten';
+$s_total_time_for_issue = 'Totale tijd voor melding = %s';
+$s_from_date = 'Van';
+$s_to_date = 'Tot';
+
+# Twitter Integration
+$s_twitter_resolved = "%d: [%s] %s (opgelost door %s in %s)";
+$s_twitter_resolved_no_version = "%d: [%s] %s (opgelost door %s)";
+
+# Project Page
+$s_development_team = 'Ontwikkelteam';
+
+# bug_graph pages
+$s_all_dates = 'Alle datums';
+$s_period_none = 'Geen';
+$s_period_this_week = 'Deze week';
+$s_period_last_week = 'Afgelopen week';
+$s_period_two_weeks = 'Afgelopen twee weken';
+$s_period_this_month = 'Deze maand';
+$s_period_last_month = 'Afgelopen maand';
+$s_period_this_quarter = 'Dit kwartaal';
+$s_period_last_quarter = 'Afgelopen kwartaal';
+$s_period_year_to_date = 'Dit jaar';
+$s_period_select = "Op te geven datums";
+$s_period_last_year = 'Afgelopen jaar';
+$s_select = 'Selecteer alstublieft';
+$s_select_bystatus = 'op status';
+$s_select_summbystatus = 'Samenvatting per status';
+$s_select_bycat = "Samenvatting per categorie";
+$s_select_both = "Samenvatting per status en categorie";
+$s_show_as_graph = 'Als grafiek tonen';
+$s_show_as_table = 'Als tabel tonen';
+$s_show_graph = 'Grafiek tonen';
+$s_graph_page = 'Meldingsgeschiedenis als grafiek';
+$s_graph_bug_page_link = 'Grafiek';
+
 ?>
