@@ -27,6 +27,7 @@
 
 	$g_script_login_cookie = null;
 	$g_cache_anonymous_user_cookie_string = null;
+	$g_cache_cookie_valid = null;
 
 	#===================================
 	# Boolean queries and ensures
@@ -62,7 +63,11 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
-		return ( auth_is_cookie_valid( auth_get_current_user_cookie() ) );
+		global $g_cache_cookie_valid;   
+		if($g_cache_cookie_valid == true)
+			return $g_cache_cookie_valid;
+		$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie() );
+		return $g_cache_cookie_valid;
 	}
 
 
@@ -185,10 +190,11 @@
 	# Logout the current user and remove any remaining cookies from their browser
 	# Returns true on success, false otherwise
 	function auth_logout() {
-        global $g_cache_current_user_id;
+        global $g_cache_current_user_id, $g_cache_cookie_valid;
         
         # clear cached userid
         $g_cache_current_user_id = null;
+        $g_cache_cookie_valid = null; 
         
         # clear cookies, if they were set  
         if (auth_clear_cookies()) {
@@ -318,9 +324,10 @@
 	# --------------------
 	# Clear login cookies, return true if they were cleared
 	function auth_clear_cookies() {
-		global $g_script_login_cookie;
+		global $g_script_login_cookie, $g_cache_cookie_valid;
 
         $t_cookies_cleared = false;
+        $g_cache_cookie_valid = null;
         
         # clear cookie, if not logged in from script
         if ($g_script_login_cookie == null) {
