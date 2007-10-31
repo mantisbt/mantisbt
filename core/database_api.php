@@ -158,30 +158,34 @@
 	function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		global $g_queries_array, $g_db;
 
-		$t_start = microtime_float();
+		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+			$t_start = microtime_float();
 
+			$t_backtrace = debug_backtrace();
+			$t_caller = basename( $t_backtrace[0]['file'] );
+			$t_caller .= ":" . $t_backtrace[0]['line'];
+			
+			# Is this called from another function?
+			if ( isset( $t_backtrace[1] ) ) {
+				$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+			} else {
+				# or from a script directly?
+				$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+			}
+		}
+		
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
 		} else {
 			$t_result = $g_db->Execute( $p_query );
 		}
 
-		$t_elapsed = number_format( microtime_float() - $t_start, 4);
+		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+			$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
-		$t_backtrace = debug_backtrace();
-		$t_caller = basename( $t_backtrace[0]['file'] );
-		$t_caller .= ":" . $t_backtrace[0]['line'];
-
-		# Is this called from another function?
-		if ( isset( $t_backtrace[1] ) ) {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		} else {
-			# or from a script directly?
-			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+			array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 		}
-
-		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
-
+		
 		if ( !$t_result ) {
 			db_error($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
@@ -194,66 +198,71 @@
 	function db_query_bound($p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 )
 	{
 		global $g_queries_array, $g_db;
-		$t_db_type = config_get( 'db_type' );
 
-		$t_start = microtime_float();
+		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+			$t_db_type = config_get( 'db_type' );
+
+			$t_start = microtime_float();
+			
+			$t_backtrace = debug_backtrace();
+			$t_caller = basename( $t_backtrace[0]['file'] );
+			$t_caller .= ":" . $t_backtrace[0]['line'];
+	
+			# Is this called from another function?
+			if ( isset( $t_backtrace[1] ) ) {
+				$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+			} else {
+				# or from a script directly?
+				$t_caller .= ' ' . $_SERVER['PHP_SELF'];
+			}
+		}
+		
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
 		} else {
 			$t_result = $g_db->Execute( $p_query, $arr_parms );
 		}
-		$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
-		$lastoffset = 0; $i = 1;
-		if ( false && !is_null( $arr_parms ) ) {
-			if ($arr_parms[0] === null) {
-			  debug_print_backtrace();
-			}
-			while (preg_match('/(\?)/', $p_query, $matches, PREG_OFFSET_CAPTURE, $lastoffset)) {
-				if ( $i <= count($arr_parms)) {
-					if (is_null($arr_parms[$i-1]))
-						$replace = 'NULL';
-					else if(is_string($arr_parms[$i-1]))
-						$replace = "'" . $arr_parms[$i-1] . "'";
-					else if(is_integer($arr_parms[$i-1]) || is_float($arr_parms[$i-1]))
-						$replace = (float)$arr_parms[$i-1];
-					else if(is_bool($arr_parms[$i-1]))
-						switch( $t_db_type ) {
-								case 'pgsql':
-									$replace = "'" . $arr_parms[$i-1] . "'";
-									break;
-								default:
-									$replace = $arr_parms[$i-1];
-									break;
-						}
+		if ( ON == config_get_global( 'show_queries_count' ) ) {		
+			$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
-					else {
-						echo("Invalid argument type passed to query_bound(): $i");
-						exit(1);
-					}
-					$p_query = substr($p_query, 0, $matches[1][1]) . $replace . substr($p_query, $matches[1][1] + strlen($matches[1][0]));
-					$lastoffset = $matches[1][1] + strlen($replace);
-				} else {
-					$lastoffset = $matches[1][1] + 1;
+			$lastoffset = 0; $i = 1;
+			if ( false && !is_null( $arr_parms ) ) {
+				if ($arr_parms[0] === null) {
+				  debug_print_backtrace();
 				}
-				$i++;
+				while (preg_match('/(\?)/', $p_query, $matches, PREG_OFFSET_CAPTURE, $lastoffset)) {
+					if ( $i <= count($arr_parms)) {
+						if (is_null($arr_parms[$i-1]))
+							$replace = 'NULL';
+						else if(is_string($arr_parms[$i-1]))
+							$replace = "'" . $arr_parms[$i-1] . "'";
+						else if(is_integer($arr_parms[$i-1]) || is_float($arr_parms[$i-1]))
+							$replace = (float)$arr_parms[$i-1];
+						else if(is_bool($arr_parms[$i-1]))
+							switch( $t_db_type ) {
+									case 'pgsql':
+										$replace = "'" . $arr_parms[$i-1] . "'";
+										break;
+									default:
+										$replace = $arr_parms[$i-1];
+										break;
+							}
+						else {
+							echo("Invalid argument type passed to query_bound(): $i");
+							exit(1);
+						}
+						$p_query = substr($p_query, 0, $matches[1][1]) . $replace . substr($p_query, $matches[1][1] + strlen($matches[1][0]));
+						$lastoffset = $matches[1][1] + strlen($replace);
+					} else {
+						$lastoffset = $matches[1][1] + 1;
+					}
+					$i++;
+				}
 			}
+
+			array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
 		}
-
-		$t_backtrace = debug_backtrace();
-		$t_caller = basename( $t_backtrace[0]['file'] );
-		$t_caller .= ":" . $t_backtrace[0]['line'];
-
-		# Is this called from another function?
-		if ( isset( $t_backtrace[1] ) ) {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		} else {
-			# or from a script directly?
-			$t_caller .= ' ' . $_SERVER['PHP_SELF'];
-		}
-
-		array_push ( $g_queries_array, array( $p_query, $t_elapsed, $t_caller ) );
-
 
 		if ( !$t_result ) {
 			db_error($p_query);
