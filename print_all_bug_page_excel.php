@@ -82,7 +82,7 @@
 
 	# get printing preferences
 	$t_user_id = auth_get_current_user_id();
-	$t_user_print_pref_table = config_get( 'mantis_user_print_pref_table' );
+	$t_user_print_pref_table = config_get_global( 'mantis_user_print_pref_table' );
 	$query3 ="SELECT print_pref ".
 			"FROM $t_user_print_pref_table ".
 			"WHERE user_id=" . db_param(0);
@@ -141,7 +141,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
             # grab the project name
             $project_name = project_get_field( $v_project_id, 'name' );
 
-            $t_bug_text_table = config_get( 'mantis_bug_text_table' );
+            $t_bug_text_table = config_get_global( 'mantis_bug_text_table' );
             $query4 = "SELECT *
                 FROM $t_bug_text_table
                 WHERE id=" . db_param(0);
@@ -338,7 +338,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 <?php
-        	$t_file_table = config_get( 'mantis_bug_file_table' );
+        	$t_file_table = config_get_global( 'mantis_bug_file_table' );
 			$query5 = "SELECT filename, filesize, date_added
 					FROM $t_file_table
 					WHERE bug_id=" . db_param(0);
@@ -373,8 +373,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
  			$t_restriction = '';
  		}
 
-		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
-		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
+		$t_bugnote_table		= config_get_global( 'mantis_bugnote_table' );
+		$t_bugnote_text_table	= config_get_global( 'mantis_bugnote_text_table' );
 		$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
 		$query6 = "SELECT *
