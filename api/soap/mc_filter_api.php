@@ -27,7 +27,7 @@
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
 		$t_result = array();
-		foreach( mci_filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
+		foreach( filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
 			$t_filter = array();
 			$t_filter['id'] = $t_filter_row['id'];
 			$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );

@@ -99,17 +99,6 @@
 		}
 
 		$t_result = array();
-		$t_result[] = array(
-		    'id'=>ALL_PROJECTS,
-		    'name'=>'*All Projects*',
-		    'status'=>array('id'=>50,'name'=>'stable'),
-		    'enabled'=>true,
-		    'view_state'=>array('id'=>10,'name'=>'public'),
-		    'access_min'=>array('id'=>10,'name'=>'viewer'),
-		    'file_path'=>'',
-		    'descriptionn'=>'All Projects Filter',
-		    'subprojects'=>array()
-		);
 		foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
 			$t_project_row = project_cache_row( $t_project_id );
 			$t_project = array();
@@ -179,12 +168,12 @@
 		}
 
 		$t_result = array();
-		foreach( mci_version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version) {
+		foreach( version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version) {
 			$t_result[] = array(
 				'id'			=> $t_version['id'],
 				'name'			=> $t_version['version'],
 				'project_id'	=> $p_project_id,
-				'date_order'	=> timestamp_to_iso8601( db_unixtimestamp( $t_version['date_order'] ) ),
+				'date_order'	=> timestamp_to_iso8601( $t_version['date_order'] ),
 				'description'	=> mci_null_if_empty( $t_version['description'] ),
 				'released'		=> $t_version['released'],
 			);
@@ -218,7 +207,7 @@
 
 		$t_result = array();
 
-		foreach( mci_version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version) {
+		foreach( version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version) {
 			$t_result[] = array(
 				'id'			=> $t_version['id'],
 				'name'			=> $t_version['version'],
@@ -257,12 +246,12 @@
 
 		$t_result = array();
 
-		foreach( mci_version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version) {
+		foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version) {
 			$t_result[] = array(
 				'id'			=> $t_version['id'],
 				'name'			=> $t_version['version'],
 				'project_id'	=> $p_project_id,
-				'date_order'	=> timestamp_to_iso8601( db_unixtimestamp( $t_version['date_order'] ) ),
+				'date_order'	=> timestamp_to_iso8601( $t_version['date_order'] ),
 				'description'	=> mci_null_if_empty( $t_version['description'] ),
 				'released'		=> $t_version['released'],
 			);

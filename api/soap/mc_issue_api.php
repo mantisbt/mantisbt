@@ -535,7 +535,7 @@
 			 	}
 
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-				mci_bugnote_add( $t_issue_id, $t_note['text'], $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
+				bugnote_add( $t_issue_id, $t_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
 			}
 		}
 
@@ -699,7 +699,7 @@
 
 				// TODO: consider supporting updating of bugnotes and detecting the ones that haven't changed.
                 $t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-                mci_bugnote_add( $p_issue_id, $t_note['text'], $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
+                bugnote_add( $p_issue_id, $t_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
             }
         }
 
@@ -775,7 +775,7 @@
 	 	}
 
 		$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-		return mci_bugnote_add( $p_issue_id, $p_note['text'], $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
+		return bugnote_add( $p_issue_id, $p_note['text'], '0:00', $t_view_state_id == VS_PRIVATE, BUGNOTE, '', $t_user_id );
  	}
 
  	/**
