@@ -45,7 +45,7 @@
 
 	# set adodb fetch mode
 	# most drivers don't implement this, but for mysql there is a small internal php performance gain for using it
-	if( $g_db_type == 'mysql' ) {
+	if ( $g_db_type == 'mysql' ) {
 		$ADODB_FETCH_MODE = ADODB_FETCH_BOTH;
 	}
 
@@ -313,14 +313,15 @@
 			$t_row = $p_result->GetRowAssoc(false);
 
 			for( $i = 0 ; $i < $p_result->FieldCount() ; $i++ ) {
-				switch( $p_result->FetchField($i)->type ) {
+				$t_field = $p_result->FetchField( $i );
+				switch( $t_field->type ) {
 					case 'bool':
-						switch( $t_row[$p_result->FetchField($i)->name] ) {
+						switch( $t_row[$t_field->name] ) {
 							case 'f':
-								$t_row[$p_result->FetchField($i)->name] = false;
+								$t_row[$t_field->name] = false;
 								break;
 							case 't':
-								$t_row[$p_result->FetchField($i)->name] = true;
+								$t_row[$t_field->name] = true;
 								break;
 						}
 						break;
@@ -766,7 +767,7 @@
 		global $g_queries_array;
 
 		return count( $g_queries_array );
-		}
+	}
 
 	# --------------------
 	# count unique queries
@@ -782,7 +783,7 @@
 			}
 		}
 		return $t_unique_queries;
-		}
+	}
 
 	# --------------------
 	# get total time for queries
