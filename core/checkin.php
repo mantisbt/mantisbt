@@ -1,4 +1,5 @@
 #!/usr/local/bin/php -q
+<?php
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
