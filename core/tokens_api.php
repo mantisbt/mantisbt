@@ -134,7 +134,7 @@
 		$t_query = "UPDATE $t_tokens_table
 					SET expiry=$c_token_expiry
 					WHERE id='$c_token_id'";
-		db_query( $t_query, 1 );
+		db_query( $t_query );
 
 		return true;
 	}
@@ -224,7 +224,7 @@
 		$t_query = "UPDATE $t_tokens_table 
 					SET value='$c_value', expiry=$c_expiry
 					WHERE id=$c_token_id";
-		db_query( $t_query, 1 );
+		db_query( $t_query );
 
 		return true;
 	}
