@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.30 2007-10-24 22:30:43 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This page updates the users profile information then redirects to

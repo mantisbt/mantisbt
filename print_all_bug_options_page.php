@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_page.php,v 1.8 2007-10-24 22:30:50 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

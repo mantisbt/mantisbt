@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: xmlhttprequest.php,v 1.3 2007-10-24 22:30:55 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This is the first page a user sees when they login to the bugtracker

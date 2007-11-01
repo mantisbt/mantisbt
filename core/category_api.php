@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.16 2007-10-28 01:06:36 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### Category API ###

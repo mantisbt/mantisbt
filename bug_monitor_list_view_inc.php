@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.18 2007-10-28 01:06:35 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

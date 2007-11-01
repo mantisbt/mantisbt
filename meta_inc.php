@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: meta_inc.php,v 1.19 2007-10-24 22:30:50 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
     global $g_allow_browser_cache;

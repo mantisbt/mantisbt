@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_byseverity.php,v 1.18 2007-10-24 22:30:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

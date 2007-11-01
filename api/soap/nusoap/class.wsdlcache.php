@@ -7,7 +7,7 @@
 * 
 * @author   Scott Nichol <snichol@computer.org>
 * @author	Ingo Fischer <ingo@apollon.de>
-* @version  $Id: class.wsdlcache.php,v 1.1 2007-07-18 06:53:09 vboctor Exp $
+* @version  $Id$
 * @access public 
 */
 class wsdlcache {

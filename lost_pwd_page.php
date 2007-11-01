@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.11 2007-10-24 22:30:47 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.40 2007-10-24 22:30:44 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

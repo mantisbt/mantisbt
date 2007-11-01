@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_issue_attachment_api.php,v 1.1 2007-07-18 06:52:56 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'mc_core.php' );

@@ -11,7 +11,7 @@
 * NOTE: WSDL functionality is experimental
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-* @version  $Id: class.soap_server.php,v 1.1 2007-07-18 06:53:02 vboctor Exp $
+* @version  $Id$
 * @access   public
 */
 class soap_server extends nusoap_base {

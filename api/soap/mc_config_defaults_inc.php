@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_config_defaults_inc.php,v 1.1 2007-07-18 06:52:50 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Minimum global access level required to access webservice for readonly operations.

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: account_sponsor_update.php,v 1.3 2007-10-24 22:30:43 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

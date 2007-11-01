@@ -20,7 +20,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: send_emails.php,v 1.3 2007-10-26 13:35:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;

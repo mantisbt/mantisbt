@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_core.php,v 1.1 2007-07-18 06:52:51 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Path to Mantis is assumed to be the grand parent directory.  If this is not

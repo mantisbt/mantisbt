@@ -19,7 +19,7 @@
 * unset($soapclient);
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-* @version  $Id: class.soapclient.php,v 1.1 2007-07-18 06:53:07 vboctor Exp $
+* @version  $Id$
 * @access   public
 */
 class soapclient extends nusoap_base  {

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: db_table_names_inc.php,v 1.9 2007-10-24 22:30:58 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Load all the table names for use by the upgrade statements

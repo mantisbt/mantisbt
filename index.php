@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: index.php,v 1.17 2007-10-24 22:30:47 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>

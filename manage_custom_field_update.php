@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_update.php,v 1.20 2007-10-24 22:30:48 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

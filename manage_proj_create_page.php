@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.15 2007-10-24 22:30:48 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

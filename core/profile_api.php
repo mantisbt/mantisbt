@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.21 2007-10-30 19:10:29 nuclear_eclipse Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### Profile API ###

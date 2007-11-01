@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.21 2007-10-25 17:12:44 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This sample file contains the essential files that you MUST

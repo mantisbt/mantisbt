@@ -20,7 +20,7 @@
 	# This page displays "improved" charts on categories : categories on bars and 3Dpie
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_category.php,v 1.24 2007-10-24 22:30:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

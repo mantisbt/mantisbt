@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.55 2007-10-24 22:30:46 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# CALLERS

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bugnote_stats_inc.php,v 1.13 2007-10-24 22:30:46 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

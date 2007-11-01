@@ -20,7 +20,7 @@
 	# This page displays "improved" charts on severities : bars, 3Dpie and a mix severities per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_severity.php,v 1.24 2007-10-24 22:30:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

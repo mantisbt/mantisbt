@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.68 2007-10-24 22:30:55 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>

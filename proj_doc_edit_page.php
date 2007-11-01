@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.41 2007-10-28 17:06:45 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

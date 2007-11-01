@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.20 2007-10-24 22:30:59 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###

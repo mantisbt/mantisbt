@@ -20,7 +20,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: checkin.php,v 1.6 2007-10-24 22:30:58 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;

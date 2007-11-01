@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_project_api.php,v 1.1 2007-07-18 06:52:56 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 	
 	function mc_project_get_issues( $p_username, $p_password, $p_project_id , $p_page_number, $p_per_page ) {

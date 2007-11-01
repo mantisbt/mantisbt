@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.34 2007-10-28 01:06:38 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### User Preferences API ###

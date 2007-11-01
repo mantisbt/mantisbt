@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 # --------------------------------------------------------
-# $Id: class.period.php,v 1.2 2007-10-24 22:30:58 giallu Exp $
+# $Id$
 # --------------------------------------------------------
 /**
 * Class for actions dealing with date periods
@@ -29,7 +29,7 @@
 * @copyright Logical Outcome Ltd. 2005 - 2007
 * @author Glenn Henshaw <thraxisp@logicaloutcome.ca>
 *
-* @version $Id: class.period.php,v 1.2 2007-10-24 22:30:58 giallu Exp $
+* @version $Id$
 */
 class Period {
 /**

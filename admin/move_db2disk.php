@@ -20,7 +20,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.10 2007-10-28 01:06:36 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

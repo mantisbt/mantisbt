@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: install.php,v 1.39 2007-10-24 22:30:58 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	error_reporting( E_ALL );

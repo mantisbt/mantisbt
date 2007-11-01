@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.39 2007-10-24 22:30:47 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Allows the user to select a project that is visible to him

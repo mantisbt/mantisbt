@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.26 2007-10-28 17:06:44 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

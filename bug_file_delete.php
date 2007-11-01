@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_file_delete.php,v 1.31 2007-10-24 22:30:44 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Delete a file from a bug and then view the bug

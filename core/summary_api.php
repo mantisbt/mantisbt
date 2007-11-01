@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.57 2007-10-24 22:30:59 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### Summary printing API ###

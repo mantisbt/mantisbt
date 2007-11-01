@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: adm_config_set.php,v 1.5 2007-10-24 22:30:43 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This page stores the reported bug

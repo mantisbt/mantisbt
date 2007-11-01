@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.45 2007-10-28 01:06:37 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### History API ###

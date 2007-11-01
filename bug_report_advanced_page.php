@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.67 2007-10-24 22:30:44 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.367 2007-10-28 15:35:13 nuclear_eclipse Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 

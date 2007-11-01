@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.42 2007-10-24 22:30:59 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###

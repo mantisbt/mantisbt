@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.27 2007-10-28 17:06:44 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### Version API ###

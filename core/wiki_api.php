@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  
 	# --------------------------------------------------------
-	# $Id: wiki_api.php,v 1.2 2007-10-24 22:30:59 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
  
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'helper_api.php' );

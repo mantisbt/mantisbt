@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mantisconnect.php,v 1.1 2007-07-18 06:52:47 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	$t_current_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;

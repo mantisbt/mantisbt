@@ -16,7 +16,7 @@
 //| Authors: Michael Wimmer <flaimo@gmx.net>                             |
 //+----------------------------------------------------------------------+
 //
-// $Id: class.RSSBuilder.inc.php,v 1.5 2007-05-12 06:21:38 vboctor Exp $
+// $Id$
 
 /**
 * @package RSSBuilder

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.36 2007-10-28 17:06:45 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

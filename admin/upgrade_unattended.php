@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: upgrade_unattended.php,v 1.2 2007-10-24 22:30:58 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	set_time_limit ( 0 ) ;

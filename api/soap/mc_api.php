@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_api.php,v 1.2 2007-08-22 04:09:59 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# use standard error handler rather than the one defined in Mantis.

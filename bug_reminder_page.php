@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.24 2007-10-24 22:30:44 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

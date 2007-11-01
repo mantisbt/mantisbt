@@ -20,7 +20,7 @@
 	# This page displays "improved" charts on resolutions : bars, 3Dpie and a mix resolutions per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_resolution.php,v 1.25 2007-10-24 22:30:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

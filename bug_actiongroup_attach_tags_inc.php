@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_attach_tags_inc.php,v 1.3 2007-10-24 22:30:43 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	$t_core_path = config_get( 'core_path' );

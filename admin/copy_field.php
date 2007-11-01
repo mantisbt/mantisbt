@@ -20,7 +20,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.7 2007-10-24 22:30:58 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

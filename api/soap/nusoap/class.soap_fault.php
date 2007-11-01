@@ -8,7 +8,7 @@
 * Mainly used for returning faults from deployed functions
 * in a server instance.
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-* @version  $Id: class.soap_fault.php,v 1.1 2007-07-18 06:52:59 vboctor Exp $
+* @version  $Id$
 * @access public
 */
 class soap_fault extends nusoap_base {

@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.11 2007-10-29 23:47:00 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###

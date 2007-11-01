@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.28 2007-10-24 22:30:42 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 ?>
 <?php

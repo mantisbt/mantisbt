@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.59 2007-10-28 15:42:50 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Login page POSTs results to login.php

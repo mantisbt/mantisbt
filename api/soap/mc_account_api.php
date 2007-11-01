@@ -7,7 +7,7 @@
 	# See docs/ folder for more details
 
 	# --------------------------------------------------------
-	# $Id: mc_account_api.php,v 1.1 2007-07-18 06:52:48 vboctor Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	function mci_account_get_array_by_id( $p_user_id ) {

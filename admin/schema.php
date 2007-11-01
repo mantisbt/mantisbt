@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	# --------------------------------------------------------
-	# $Id: schema.php,v 1.25 2007-10-28 01:06:36 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Each entry below defines the schema. The upgrade array consists of

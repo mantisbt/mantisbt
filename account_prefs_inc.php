@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.35 2007-10-24 22:30:42 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	$t_core_path = config_get( 'core_path' );

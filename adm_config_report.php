@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: adm_config_report.php,v 1.11 2007-10-28 01:06:35 prichards Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

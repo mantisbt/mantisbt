@@ -21,7 +21,7 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 
 	# --------------------------------------------------------
-	# $Id: summary_jpgraph_page.php,v 1.25 2007-10-24 22:30:54 giallu Exp $
+	# $Id$
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
