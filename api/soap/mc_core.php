@@ -30,9 +30,6 @@
 		require_once( $t_user_configs );
 	}
 
-	# APIs for compatability with older versions of Mantis
-	require_once( $t_current_dir . 'mc_compat_api.php' );
-
 	# MantisConnect APIs
 	#   mc_* = public methods
 	#   mci_* = internal methods
