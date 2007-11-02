@@ -26,6 +26,7 @@
 	//@@@ put this somewhere
 	set_time_limit ( 0 ) ;
 	$g_skip_open_db = true;  # don't open the database in database_api.php
+	define( 'PLUGINS_DISABLED' );
 	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	$g_error_send_page_header = false; # bypass page headers in error handler
 

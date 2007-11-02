@@ -283,6 +283,8 @@
 	# --------------------
 	# (7) End the <head> section
 	function html_head_end() {
+		event_signal( 'EVENT_PAGE_HEAD' );
+
 		echo '</head>', "\n";
 	}
 
@@ -317,6 +319,8 @@
 			echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img border="0" width="242" height="102" alt="Mantis Bugtracker" src="images/mantis_logo.gif" /></a>';
 			echo '</div>';
 		}
+
+		event_signal( 'EVENT_PAGE_TOP' );
 	}
 
 	# --------------------
@@ -389,6 +393,8 @@
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		}
+
+		event_signal( 'EVENT_PAGE_BOTTOM' );
 	}
 
 	# --------------------
@@ -474,6 +480,8 @@
 	# --------------------
 	# (14) End the <body> section
 	function html_body_end() {
+		event_signal( 'EVENT_PAGE_END' );
+
 		echo '</body>', "\n";
 	}
 
@@ -672,7 +680,8 @@
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
-		$t_manage_config_page = 'adm_config_report.php';
+		$t_manage_plugin_page		= 'manage_plugin_page.php';
+		$t_manage_config_page		= 'adm_config_report.php';
 		$t_manage_prof_menu_page    = 'manage_prof_menu_page.php';
 		# $t_documentation_page 		= 'documentation_page.php';
 
@@ -688,6 +697,9 @@
 				break;
 			case $t_manage_config_page:
 				$t_manage_config_page = '';
+				break;
+			case $t_manage_plugin_page:
+				$t_manage_plugin_page = '';
 				break;
 			case $t_manage_prof_menu_page:
 				$t_manage_prof_menu_page = '';
@@ -709,6 +721,9 @@
 		}
 		if ( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
 			print_bracket_link( $t_manage_prof_menu_page, lang_get( 'manage_global_profiles_link' ) );
+		}
+		if ( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
+			print_bracket_link( $t_manage_plugin_page, lang_get( 'manage_plugin_link' ) );
 		}
 		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
 			print_bracket_link( $t_manage_config_page, lang_get( 'manage_config_link' ) );

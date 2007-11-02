@@ -101,7 +101,7 @@
 		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = string_nl2br( $p_string );
 
-		return $p_string;
+		return event_signal( 'EVENT_TEXT_GENERAL', $p_string );
 	}
 
 	# --------------------
@@ -111,7 +111,7 @@
 		$p_string = string_html_specialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ false );
 
-		return $p_string;
+		return event_signal( 'EVENT_TEXT_GENERAL', $p_string );
 	}
 
 	# --------------------
@@ -124,7 +124,7 @@
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 
-		return $p_string;
+		return event_signal( 'EVENT_TEXT_LINKS', $p_string );
 	}
 
 	# --------------------
@@ -137,7 +137,7 @@
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 
-		return $p_string;
+		return event_signal( 'EVENT_TEXT_LINKS', $p_string );
 	}
 
 	# --------------------
@@ -159,7 +159,7 @@
 		# another escaping to escape the special characters created by the generated links
 		$t_string = string_html_specialchars( $t_string );
 
-		return $t_string;
+		return event_signal( 'EVENT_TEXT_RSS', $p_string );
 	}
 
 	# --------------------

@@ -322,6 +322,14 @@
 	# ERROR_TOKEN_*
 	define( 'ERROR_TOKEN_NOT_FOUND', 2300 );
 
+	# ERROR_EVENT_*
+	define( 'ERROR_EVENT_UNDECLARED', 2400 );
+
+	# ERROR_PLUGIN *
+	define( 'ERROR_PLUGIN_NOT_REGISTERED', 2500 );
+	define( 'ERROR_PLUGIN_ALREAD_INSTALLED', 2501 );
+	define( 'ERROR_PLUGIN_PAGE_NOT_FOUND', 2502 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);
@@ -414,4 +422,9 @@
 	define( 'SPONSORSHIP_REQUESTED',      1 );
 	define( 'SPONSORSHIP_PAID',           2 );
 
+	# Plugin events
+	define( 'EVENT_TYPE_DEFAULT',		0 );
+	define( 'EVENT_TYPE_EXECUTE',		1 );
+	define( 'EVENT_TYPE_OUTPUT',		2 );
+	define( 'EVENT_TYPE_CHAIN',			3 );
 ?>

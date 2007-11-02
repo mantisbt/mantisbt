@@ -36,17 +36,25 @@
 	# ------------------
 	# Loads the specified language and stores it in $g_lang_strings,
 	# to be used by lang_get
-	function lang_load( $p_lang ) {
+	function lang_load( $p_lang, $p_dir=null ) {
 		global $g_lang_strings, $g_active_language;
 
 		$g_active_language  = $p_lang;
-		if ( isset( $g_lang_strings[ $p_lang ] ) ) {
+		if ( isset( $g_lang_strings[ $p_lang ] ) && is_null( $p_dir ) ) {
 			return;
 		}
 
-		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+		$t_lang_dir = $p_dir;
 
-		require_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+		if ( is_null( $t_lang_dir ) ) {
+			$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+			require_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+		} else {
+			if ( is_file( $t_lang_dir . 'strings_' . $p_lang . '.txt' ) ) {
+				include_once( $t_lang_dir . 'strings_' . $p_lang . '.txt' );
+			}
+		}
+
 
 		# Allow overriding strings declared in the language file.
 		# custom_strings_inc.php can use $g_active_language
@@ -231,6 +239,14 @@
 		if ( lang_exists( $p_string, $t_lang ) ) {
 			return $g_lang_strings[ $t_lang ][ $p_string];
 		} else {
+			$t_plugin_current = plugin_get_current();
+			if ( !is_null( $t_plugin_current ) ) {
+				lang_load( $t_lang, config_get( 'plugin_path' ).$t_plugin_current.DIRECTORY_SEPARATOR.'lang'.DIRECTORY_SEPARATOR );
+				if ( lang_exists( $p_string, $t_lang ) ) {
+					return $g_lang_strings[ $t_lang ][ $p_string];
+				}
+			}
+
 			if ( $t_lang == 'english' ) {
 				error_parameters( $p_string );
 				trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );

@@ -143,7 +143,7 @@
 	$g_global_settings = array(
 		'_table$', 'cookie', '^db_', 'hostname', 'database_name', 'show_queries_count',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
-		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed'
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers', 'rss_key_seed', 'plugins_enabled'
 	);
 
 	#############################
@@ -1346,6 +1346,7 @@
 	$g_mantis_bugnote_table					= '%db_table_prefix%_bugnote%db_table_suffix%';
 	$g_mantis_bugnote_text_table			= '%db_table_prefix%_bugnote_text%db_table_suffix%';
 	$g_mantis_news_table					= '%db_table_prefix%_news%db_table_suffix%';
+	$g_mantis_plugin_table					= '%db_table_prefix%_plugin%db_table_suffix%';
 	$g_mantis_project_category_table		= '%db_table_prefix%_project_category%db_table_suffix%';
 	$g_mantis_project_file_table			= '%db_table_prefix%_project_file%db_table_suffix%';
 	$g_mantis_project_table					= '%db_table_prefix%_project%db_table_suffix%';
@@ -1919,4 +1920,18 @@
 	
 	# The twitter account password.
 	$g_twitter_password = '';
+
+	#############################
+	# Plugin System
+	#############################
+
+	# enable/disable plugins
+	$g_plugins_enabled 	= ON;
+
+	# absolute path to plugin files.
+	$g_plugin_path		= $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
+
+	# management threshold.
+	$g_manage_plugin_threshold = ADMINISTRATOR;
+
 ?>

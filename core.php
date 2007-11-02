@@ -159,6 +159,10 @@
 		}
 	}
 	
+	# Initialize Event System
+	require_once( $t_core_path.'event_api.php' );
+	require_once( $t_core_path.'events_inc.php' );
+
 	require_once( $t_core_path.'project_api.php' );
 	require_once( $t_core_path.'project_hierarchy_api.php' );
 	require_once( $t_core_path.'access_api.php' );
@@ -171,5 +175,11 @@
 
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
+	}
+
+	# Plugin initialization
+	require_once( $t_core_path.'plugin_api.php' );
+	if ( !defined( 'PLUGINS_DISABLED' ) ) {
+		plugin_init_all();
 	}
 ?>
