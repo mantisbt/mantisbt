@@ -366,7 +366,7 @@ $upgrade[] = Array('CreateIndexSQL', Array( 'idx_typeowner', config_get_global( 
 
 $upgrade[] = Array('CreateTableSQL', Array( config_get( 'mantis_plugin_table' ), "
 	basename		C(40)	NOTNULL PRIMARY,
-	enabled			L		NOTNULL DEFAULT '0'
+	enabled			L		NOTNULL DEFAULT \" '0' \"
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
 $upgrade[] = Array('AlterColumnSQL', Array( config_get_global( 'mantis_user_pref_table' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
