@@ -60,7 +60,7 @@
 				$t_accessible_custom_fields_ids[] = $t_cfid;
 				$t_accessible_custom_fields_names[] = $t_field_info['name'];
 				$t_accessible_custom_fields_types[] = $t_field_info['type'];
-				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid, $t_project_id );
+				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
 			}
 		}
 

@@ -38,6 +38,32 @@
 #*******************************************
 
 	#===================================
+	# Custom Field Types
+	#===================================
+	
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_STRING] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_NUMERIC] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_FLOAT] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_ENUM] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_EMAIL] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_CHECKBOX] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_LIST] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
+	$g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
+
+	foreach ($g_custom_field_types as $type ) {
+		require_once( $t_core_dir . 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' ) ;
+	}
+	
+	function custom_field_allow_manage_display( $p_type, $p_display ) {
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_type]['#display_' . $p_display] ) ) {
+			return $g_custom_field_type_definition[$p_type]['#display_' . $p_display];
+		}			
+		return false;
+	}	
+	
+	#===================================
 	# Caching
 	#===================================
 
@@ -978,38 +1004,17 @@
 
 	# --------------------
 	# Get All Possible Values for a Field.
-	function custom_field_distinct_values( $p_field_id, $p_project_id = ALL_PROJECTS ) {
-		$c_field_id						= db_prepare_int( $p_field_id );
+	function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECTS ) {
+		global $g_custom_field_type_definition;
+		$c_field_id						= $p_field_def['id'];
 		$c_project_id					= db_prepare_int( $p_project_id );
 		$t_custom_field_string_table	= config_get_global( 'mantis_custom_field_string_table' );
-		$t_custom_field_table			= config_get_global( 'mantis_custom_field_table' );
 		$t_mantis_bug_table				= config_get_global( 'mantis_bug_table' );
 		$t_return_arr					= array();
-
-		$query = "SELECT type, possible_values
-				  FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
-
-		$t_row_count = db_num_rows( $result );
-		if ( 0 == $t_row_count ) {
-			return false;
-		}
-		$row = db_fetch_array( $result );
-
+	
 		# If an enumeration type, we get all possible values, not just used values
-		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ||
-			 CUSTOM_FIELD_TYPE_CHECKBOX == $row['type'] ||
-			 CUSTOM_FIELD_TYPE_LIST == $row['type'] ||
-			 CUSTOM_FIELD_TYPE_MULTILIST == $row['type']
-			) {
-			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
-
-			$t_values_arr = explode( '|', $t_possible_values );
-
-			foreach( $t_values_arr as $t_option ) {
-				array_push( $t_return_arr, $t_option );
-			}
+		if ( isset($g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
+			return call_user_func($g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'], $p_field_def);
 		} else {
 			$t_where = '';
 			$t_from = $t_custom_field_string_table;
@@ -1045,34 +1050,22 @@
 	# Convert the value to save it into the database, depending of the type
 	# return value for database
 	function custom_field_value_to_database( $p_value, $p_type ) {
-		switch ($p_type) {
-		case CUSTOM_FIELD_TYPE_MULTILIST:
-		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			if ( '' == $p_value ) {
-				$result = '';
-			} else {
-				$result = '|' . $p_value . '|';
-			}
-			break;
-		default:
-			$result = $p_value;
-		}
-		return $result;
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_type]['#function_value_to_database'] ) ) {
+			return call_user_func($g_custom_field_type_definition[$p_type]['#function_value_to_database'], $p_value);
+		}			
+		return $p_value;
 	}
 
 	# --------------------
 	# Convert the database-value to value, depending of the type
 	# return value for further operation
 	function custom_field_database_to_value( $p_value, $p_type ) {
-		switch ($p_type) {
-		case CUSTOM_FIELD_TYPE_MULTILIST:
-		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			$result = str_replace( '||', '', '|' . $p_value . '|' );
-			break;
-		default:
-			$result = $p_value;
-		}
-		return $result;
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_type]['#function_database_to_value'] ) ) {
+			return call_user_func($g_custom_field_type_definition[$p_type]['#function_database_to_value'], $p_value);
+		}			
+		return $p_value;
 	}
 
 	# --------------------
@@ -1192,75 +1185,19 @@
 	#              non-existant) bug
 	# NOTE: This probably belongs in the print_api.php
 	function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
-		$t_id = $p_field_def['id'];
-
 		if( null === $p_bug_id ) {
 			$t_custom_field_value = $p_field_def['default_value'];
 		} else {
-			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
+			$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
 		}
 
 		$t_custom_field_value = string_attribute( $t_custom_field_value );
 
-		switch ($p_field_def['type']) {
-		case CUSTOM_FIELD_TYPE_ENUM:
-		case CUSTOM_FIELD_TYPE_LIST:
-		case CUSTOM_FIELD_TYPE_MULTILIST:
- 			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
-			$t_list_size = $t_possible_values_count = count( $t_values );
-
-			if ( $t_possible_values_count > 5 ) {
-				$t_list_size = 5;
-			}
-
-			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) {
-				$t_list_size = 0;	# for enums the size is 0
-			}
-
-			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple="multiple">';
-			} else {
-				echo '<select ', helper_get_tab_index(), ' name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
-			}
-
-			$t_selected_values = explode( '|', $t_custom_field_value );
- 			foreach( $t_values as $t_option ) {
-				if( in_array( $t_option, $t_selected_values, true ) ) {
- 					echo '<option value="' . $t_option . '" selected="selected"> ' . $t_option . '</option>';
- 				} else {
- 					echo '<option value="' . $t_option . '">' . $t_option . '</option>';
- 				}
- 			}
- 			echo '</select>';
-			break;
-		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
-			$t_checked_values = explode( '|', $t_custom_field_value );
-			foreach( $t_values as $t_option ) {
-				echo '<input ', helper_get_tab_index(), ' type="checkbox" name="custom_field_' . $t_id . '[]"';
-				if( in_array( $t_option, $t_checked_values, true ) ) {
-					echo ' value="' . $t_option . '" checked="checked">&nbsp;' . $t_option . '&nbsp;&nbsp;';
-				} else {
-					echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
-				}
-			}
- 			break;
-		case CUSTOM_FIELD_TYPE_NUMERIC:
-		case CUSTOM_FIELD_TYPE_FLOAT:
-		case CUSTOM_FIELD_TYPE_EMAIL:
-		case CUSTOM_FIELD_TYPE_STRING:
-			echo '<input ', helper_get_tab_index(), ' type="text" name="custom_field_' . $t_id . '" size="80"';
-			if( 0 < $p_field_def['length_max'] ) {
-				echo ' maxlength="' . $p_field_def['length_max'] . '"';
-			} else {
-				echo ' maxlength="255"';
-			}
-			echo ' value="' . $t_custom_field_value .'"></input>';
-			break ;
-
-		case CUSTOM_FIELD_TYPE_DATE:
-			print_date_selection_set("custom_field_" . $t_id, config_get('short_date_format'), $t_custom_field_value, false, true) ;
-			break ;
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
+			call_user_func($g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def, $t_custom_field_value);
+		}	else {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 		}
 	}
 
@@ -1272,24 +1209,11 @@
 	# NOTE: This probably belongs in the string_api.php
 	function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
-		switch( $p_def['type'] ) {
-			case CUSTOM_FIELD_TYPE_EMAIL:
-				return "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
-				break;
-			case CUSTOM_FIELD_TYPE_ENUM:
-			case CUSTOM_FIELD_TYPE_LIST:
-			case CUSTOM_FIELD_TYPE_MULTILIST:
-			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				return str_replace( '|', ', ', $t_custom_field_value );
-				break;
-			case CUSTOM_FIELD_TYPE_DATE:
-				if ($t_custom_field_value != null) {
-					return date( config_get( 'short_date_format'), $t_custom_field_value) ;
-				}
-				break ;
-			default:
-				return string_display_links( $t_custom_field_value );
-		}
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_def['type']]['#function_string_value'] ) ) {
+			return call_user_func($g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value);
+		}			
+		return string_display_links( $t_custom_field_value );
 	}
 
 	# --------------------
@@ -1308,24 +1232,10 @@
 	# $p_type		type of custom field
 	# NOTE: This probably belongs in the string_api.php
 	function string_custom_field_value_for_email( $p_value, $p_type ) {
-		switch( $p_type ) {
-			case CUSTOM_FIELD_TYPE_EMAIL:
-				return 'mailto:'.$p_value;
-				break;
-			case CUSTOM_FIELD_TYPE_ENUM:
-			case CUSTOM_FIELD_TYPE_LIST:
-			case CUSTOM_FIELD_TYPE_MULTILIST:
-			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				return str_replace( '|', ', ', $p_value );
-				break;
-			case CUSTOM_FIELD_TYPE_DATE:
-				if ($p_value != null) {
-					return date( config_get( 'short_date_format' ), $p_value) ;
-				}
-				break ;
-			default:
-				return $p_value;
-		}
+		global $g_custom_field_type_definition;
+		if ( isset($g_custom_field_type_definition[$p_type]['#function_string_value_for_email'] ) ) {
+			return call_user_func($g_custom_field_type_definition[$p_type]['#function_string_value_for_email'], $p_value);
+		}			
 		return $p_value;
 	}
 
