@@ -401,7 +401,7 @@ function plugin_uninstall( $p_basename ) {
  * Post-signals EVENT_PLUGIN_INIT.
  */
 function plugin_init_all() {
-	if ( OFF == config_get_global( 'plugins_enabled' ) ) {
+	if ( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( config_get_global( 'mantis_plugin_table' ) ) ) {
 		return;
 	}
 
