@@ -459,7 +459,7 @@
 
 		$t_view_type = $t_filter['_view_type'];
 
-		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
+		$t_where_clauses = array( "$t_project_table.enabled = '1'", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
 		$t_join_clauses = array();
 		$t_from_clauses = array();
@@ -1261,6 +1261,9 @@
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
 		# have bugnotes that match the text search if necessary.
 		$t_id_array = array();
+		$q1 = "";
+		$q2 = "";
+		$bug_count = 0;
 		for ( $i = 0; $i < 2; $i++ ) {
 			$t_id_where = $t_where;
 			$t_id_join = $t_join;
@@ -1273,30 +1276,38 @@
 				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id";
 				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id";
 			}
-			$query  = "SELECT DISTINCT $t_bug_table.id AS id
-						$t_from
+			$query  = "	$t_from
 						$t_id_join
 						$t_id_where";
+			
 			if ( ( $i == 0 ) || ( !is_blank( $t_textsearch_wherejoin_clause ) ) ) {
-				$result = db_query( $query );
-				$row_count = db_num_rows( $result );
-
-				for ( $j=0; $j < $row_count; $j++ ) {
-					$row = db_fetch_array( $result );
-					$t_id_array[] = db_prepare_int ( $row['id'] );
+				if( $i == 0) {
+					$q1 = "SELECT DISTINCT $t_bug_table.id AS id" . $query;
+				} else {
+					$q2 = "SELECT DISTINCT $t_bug_table.id AS id" . $query;
 				}
+				
+				$result = db_query( "SELECT Count(DISTINCT $t_bug_table.id) as idcnt" . $query );
+				$row = db_fetch_array( $result );
+				$bug_count += $row['idcnt'];
 			}
 		}
 
-		$t_id_array = array_unique( $t_id_array );
-
 		# Get the total number of bugs that meet the criteria.
-		$bug_count = count( $t_id_array );
 
 		$rows = array();
-
+		$t_where = '';
 		if ( $bug_count > 0 ) {
-			$t_where = "WHERE $t_bug_table.id in (" . implode( ", ", $t_id_array ) . ")";
+			$t_where .= "WHERE $t_bug_table.id in ( ";
+			if ( !is_blank($q1) ) {
+				$t_where .= "$q1";
+				if ( !is_blank($q2) ) {
+					$t_where .= " OR $q2";
+				}
+				$t_where .= ")";
+			} else {
+				$t_where .= " $q2)";			
+			}
 		} else {
 			return $rows;
 		}
@@ -1415,9 +1426,7 @@
 		$result2 = db_query( $query2, $c_per_page, $t_offset );
 
 		$row_count = db_num_rows( $result2 );
-
-		$t_id_array_lastmod = array();
-		
+	
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
 			$row = db_fetch_array( $result2 );
 			$t_id_array_lastmod[] = db_prepare_int ( $row['id'] );
@@ -1425,37 +1434,10 @@
 			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
 			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
 					
+			bug_cache_database_result( $row, $row['id'] );
 			array_push( $rows, $row );
 		}
-
-		$t_id_array_lastmod = array_unique( $t_id_array_lastmod );
-		
-		// paulr: it should be impossible for t_id_array_lastmod to be array():
-		// that would imply that $t_id_array is null which aborts this function early
-		//if ( count( $t_id_array_lastmod ) > 0 ) {
-		$t_where = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ")";
-		
-		$query3 = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where GROUP BY bug_id";
-
-		# perform query
-		$result3 = db_query( $query3 );
-
-		$row_count = db_num_rows( $result3 );
-
-		for ( $i=0 ; $i < $row_count ; $i++ ) {
-			$row = db_fetch_array( $result3 );
-			
-			$t_stats[ $row['bug_id'] ] = $row;
-		}
-
-		foreach($rows as $row) {
-			if( !isset( $t_stats[ $row['id'] ] ) ) {
-				bug_cache_database_result( $row, false );
-			} else {
-				bug_cache_database_result( $row, $t_stats[ $row['id'] ] );
-			}
-		}
-
+	
 		return $rows;
 	}
 
