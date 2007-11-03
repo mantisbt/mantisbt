@@ -44,9 +44,9 @@
 	$g_mc_category_when_not_found = '';
 
 	# If ON and the supplied version is not found, then a SoapException will be raised.
-	$g_mc_when_version_not_found = ON;
+	$g_mc_error_when_version_not_found = ON;
 
-	# Default version to be used if the specified version is not found and $g_mc_when_version_not_found == OFF.
+	# Default version to be used if the specified version is not found and $g_mc_error_when_version_not_found == OFF.
 	# (at the moment this value does not depend on the project).
 	$g_mc_version_when_not_found = '';
 ?>
