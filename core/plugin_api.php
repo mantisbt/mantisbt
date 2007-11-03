@@ -241,8 +241,8 @@ function plugin_get_installed() {
 function plugin_get_enabled() {
 	$t_plugin_table = config_get_global( 'mantis_plugin_table' );
 
-	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=1";
-	$t_result = db_query( $t_query );
+	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=" . db_param(0);
+	$t_result = db_query_bound( $t_query, Array( 1 ) );
 
 	$t_plugins = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
