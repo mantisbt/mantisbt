@@ -183,6 +183,39 @@ function plugin_get_info( $p_basename ) {
 	$t_info_function = 'plugin_callback_'.$p_basename.'_info';
 	if ( function_exists( $t_info_function ) ) {
 		$t_plugin_info = $t_info_function();
+		
+		if ( !isset( $t_plugin_info['name'] ) ) {
+			$t_plugin_info['name'] = $p_basename;
+		}
+
+		if ( !isset( $t_plugin_info['description'] ) ) {
+			$t_plugin_info['description'] = '';
+		}
+
+		if ( !isset( $t_plugin_info['version'] ) ) {
+			$t_plugin_info['version'] = '';
+		}
+
+		if ( !isset( $t_plugin_info['author'] ) ) {
+			$t_plugin_info['author'] = '';
+		}
+	
+		if ( !isset( $t_plugin_info['contact'] ) ) {
+			$t_plugin_info['contact'] = '';
+		}
+	
+		if ( !isset( $t_plugin_info['url'] ) ) {
+			$t_plugin_info['url'] = '';
+		}
+
+		if ( !isset( $t_plugin_info['page'] ) ) {
+			$t_plugin_info['page'] = '';
+		}
+
+		if ( !isset( $t_plugin_info['requires'] ) ) {
+			$t_plugin_info['requires'] = array();
+		}
+		
 	}
 
 	plugin_pop_current();
