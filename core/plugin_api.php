@@ -419,9 +419,11 @@ function plugin_init_all() {
 	$g_plugin_cache['mantis'] = array(
 		'name' => 'Mantis Bug Tracker',
 		'description' => 'Core plugin API for the Mantis Bug Tracker.',
+		'contact' => 'mantisbt-dev@lists.sourceforge.net',
 		'version' => MANTIS_VERSION,
 		'requires' => array(),
 		'author' => 'Mantis Team',
+		'page' => '',
 		'url' => 'http://www.mantisbt.org',
 	);
 

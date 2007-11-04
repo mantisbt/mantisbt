@@ -73,7 +73,7 @@
 		}
 
 		$row = db_fetch_array( $result );
-		// $row['date_order'] = db_unixtimestamp( $row['date_order'] );
+		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$g_cache_versions[$c_version_id] = $row;
 
 		return $row;
@@ -295,6 +295,7 @@
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
+			$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 			$rows[] = $row;
 		}
 		return $rows;
