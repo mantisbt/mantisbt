@@ -156,10 +156,10 @@
 		$t_string = string_process_bugnote_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
 		$t_string = string_process_cvs_link( $t_string );
 
-		# another escaping to escape the special characters created by the generated links
-		$t_string = string_html_specialchars( $t_string );
+		$t_string = event_signal( 'EVENT_TEXT_RSS', $t_string );
 
-		return event_signal( 'EVENT_TEXT_RSS', $p_string );
+		# another escaping to escape the special characters created by the generated links
+		return string_html_specialchars( $t_string ); 
 	}
 
 	# --------------------
