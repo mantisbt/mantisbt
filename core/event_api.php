@@ -73,6 +73,7 @@ function event_hook( $p_name, $p_callback, $p_plugin=false ) {
 	global $g_event_cache;
 
 	if ( !isset( $g_event_cache[$p_name] ) ) { 
+		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;
 	}
