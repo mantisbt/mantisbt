@@ -136,6 +136,8 @@
 			}
 		}
 		print_menu();
+
+		event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 	}
 
 	# --------------------
@@ -160,6 +162,8 @@
 		if ( !db_is_connected() ) {
 			return;
 		}
+
+		event_signal( 'EVENT_LAYOUT_CONTENT_END' );
 
 		if ( config_get( 'show_footer_menu' ) ) {
 			PRINT '<br />';
@@ -283,7 +287,7 @@
 	# --------------------
 	# (7) End the <head> section
 	function html_head_end() {
-		event_signal( 'EVENT_PAGE_HEAD' );
+		event_signal( 'EVENT_LAYOUT_RESOURCES' );
 
 		echo '</head>', "\n";
 	}
@@ -320,7 +324,7 @@
 			echo '</div>';
 		}
 
-		event_signal( 'EVENT_PAGE_TOP' );
+		event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 	}
 
 	# --------------------
@@ -393,8 +397,6 @@
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		}
-
-		event_signal( 'EVENT_PAGE_BOTTOM' );
 	}
 
 	# --------------------
@@ -480,7 +482,7 @@
 	# --------------------
 	# (14) End the <body> section
 	function html_body_end() {
-		event_signal( 'EVENT_PAGE_END' );
+		event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
 		echo '</body>', "\n";
 	}
@@ -561,6 +563,16 @@
 				# Project Wiki
 				if ( wiki_is_enabled() ) {
 					$t_menu_options[] = '<a href="wiki.php?type=project&amp;id=' . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
+				}
+
+				# Plugin / Event added options
+				$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
+				foreach ( $t_event_menu_options as $t_callback => $t_callback_menu_options ) {
+					if ( is_array( $t_callback_menu_options ) ) {
+						$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+					} else {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
 				}
 
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
