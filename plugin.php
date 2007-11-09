@@ -39,5 +39,6 @@ if ( !is_file( $t_page ) ) {
 		trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
 }
 
+plugin_push_current( $t_basename );
 include( $t_page );
 
