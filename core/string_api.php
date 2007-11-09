@@ -211,7 +211,6 @@
 	# --------------------
 	# validate the url as part of this site before continuing
 	function string_sanitize_url( $p_url ) {
-
 		$t_url = strip_tags( urldecode( $p_url ) );
 		if ( preg_match( '?http(s)*://?', $t_url ) > 0 ) { 
 			// no embedded addresses
@@ -227,15 +226,22 @@
 		// split and encode parameters
 		if ( strpos( $t_url, '?' ) !== FALSE ) {
 			list( $t_path, $t_param ) = split( '\?', $t_url, 2 );
-			if ( $t_param !== "" ) {
+			if ( !is_blank($t_param ) ) {
 				$t_vals = array();
-				parse_str( $t_param, $t_vals );
+				parse_str( html_entity_decode( $t_param ), $t_vals );
 				$t_param = '';
-				foreach($t_vals as $k => $v) {
-					if ($t_param != '') {
-						$t_param .= '&'; 
+				foreach( $t_vals as $k => $v ) {
+					if ( $t_param != '' ) {
+						$t_param .= '&amp;'; 
 					}
-					$t_param .= "$k=" . urlencode( strip_tags( urldecode( $v ) ) );
+					if ( is_array( $v ) ) {
+						for ( $i = 0, $t_size = sizeof( $v ); $i < $t_size; $i++ ) {
+							$t_param .= $k . urlencode( '[]' ) . '=' . urlencode( strip_tags( urldecode( $v[$i] ) ) );
+							$t_param .= ( $i != $t_size - 1 ) ? '&amp;' : '';
+						}
+					} else {
+						$t_param .= "$k=" . urlencode( strip_tags( urldecode( $v ) ) );
+					}
 				}
 				return $t_path . '?' . $t_param;
 			} else {
