@@ -60,7 +60,7 @@
 		<?php echo lang_get( 'date_order' ) ?>
 	</td>
 	<td>
-		<input type="text" name="date_order" size="32" value="<?php echo string_attribute( $t_version->date_order ) ?>" />
+		<input type="text" name="date_order" size="32" value="<?php echo string_attribute( date( 'Y-m-d H:i:s', $t_version->date_order ) ) ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
