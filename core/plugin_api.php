@@ -107,7 +107,7 @@ function plugin_page( $p_page, $p_basename=null ) {
 	} else {
 		$t_current = $p_basename;
 	}
-	return 'plugin.php?page='.$t_current.'/'.$p_page;
+	return helper_mantis_url( 'plugin.php?page='.$t_current.'/'.$p_page );
 }
 
 /**

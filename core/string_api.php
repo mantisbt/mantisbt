@@ -509,6 +509,8 @@
 			$t_link = '<a href="';
 			if ( $p_fqdn ) {
 				$t_link .= config_get( 'path' );
+			} else {
+				$t_link .= config_get( 'short_path' );
 			}
 			$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
 			if ( $p_detail_info ) {
@@ -532,6 +534,8 @@
 			$t_link = '<a href="';
 			if ( $p_fqdn ) {
 				$t_link .= config_get( 'path' );
+			} else {
+				$t_link .= config_get( 'short_path' );
 			}
 
 			$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
@@ -592,7 +596,7 @@
 	#  account for the user preference and site override
 	function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
 		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+		return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id, $p_user_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 
 	# --------------------
@@ -613,7 +617,7 @@
 	# return an href anchor that links to a bug REPORT page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_report_link( $p_user_id = null ) {
-		return '<a href="' . string_get_bug_report_url( $p_user_id ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+		return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
 	}
 
 	# --------------------

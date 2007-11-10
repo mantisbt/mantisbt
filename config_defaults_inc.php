@@ -96,9 +96,18 @@
 			$t_host = 'www.example.com';
 		}
 
-		$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
-		if ( '/' == $t_path || '\\' == $t_path ) {
-			$t_path = '';
+		# Get server root to compare with path to this file
+		$t_docroot = $_SERVER['DOCUMENT_ROOT'];
+		$t_file_path = str_replace( DIRECTORY_SEPARATOR, '/', __FILE__ );
+
+		# Extract the unique directory path of this file relative to the server's documunt root
+		if ( preg_match( '@'.$t_docroot.'(.*)@', $t_file_path, $t_matches ) ) {
+			$t_path = dirname( strip_tags( $t_matches[1] ) );
+		} else {
+			$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
+			if ( '/' == $t_path || '\\' == $t_path ) {
+				$t_path = '';
+			}
 		}
 
 		$g_path	= $t_protocol . '://' . $t_host . $t_path.'/';
@@ -109,6 +118,9 @@
 	# path to your images directory (for icons)
 	# requires trailing /
 	$g_icon_path			= '%path%images/';
+
+	# Short web path without the domain name
+	$g_short_path			= $t_path . '/';
 
 	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3

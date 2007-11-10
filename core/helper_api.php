@@ -421,4 +421,9 @@
 				auth_is_user_authenticated() &&
 				access_has_global_level( config_get( 'show_queries_threshold' ) );
 	}
+
+	# Return a URL relative to the web root, compatible with other applications
+	function helper_mantis_url( $p_url ) {
+		return config_get_global( 'short_path' ) . $p_url;
+	}
 ?>
