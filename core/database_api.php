@@ -230,7 +230,7 @@
 			$t_elapsed = number_format( microtime_float() - $t_start, 4);
 
 			$lastoffset = 0; $i = 1;
-			if ( false && !is_null( $arr_parms ) ) {
+			if ( !is_null( $arr_parms ) ) {
 				if ($arr_parms[0] === null) {
 				  debug_print_backtrace();
 				}
