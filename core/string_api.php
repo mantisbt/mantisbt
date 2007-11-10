@@ -648,8 +648,7 @@
 	# --------------------
 	# Format date for display
 	function string_format_complete_date( $p_date ) {
-		$t_timestamp = db_unixtimestamp( $p_date );
-		return date( config_get( 'complete_date_format' ), $t_timestamp );
+		return date( config_get( 'complete_date_format' ), $p_date );
 	}
 
 	# --------------------

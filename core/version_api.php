@@ -73,7 +73,7 @@
 		}
 
 		$row = db_fetch_array( $result );
-		// $row['date_order'] = db_unixtimestamp( $row['date_order'] );
+		$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 		$g_cache_versions[$c_version_id] = $row;
 
 		return $row;
@@ -164,7 +164,7 @@
 		$c_old_version_name = db_prepare_string( $t_old_version_name );
 		$c_description  = db_prepare_string( $p_version_info->description );
 		$c_released     = db_prepare_int( $p_version_info->released );
-		$c_date_order   = db_prepare_string( $p_version_info->date_order );
+		$c_date_order   = db_timestamp( $p_version_info->date_order );
 		$c_project_id	= db_prepare_int( $p_version_info->project_id );
 
 		$t_project_version_table	= config_get( 'mantis_project_version_table' );
@@ -174,7 +174,7 @@
 				  SET version='$c_version_name',
 					description='$c_description',
 					released='$c_released',
-					date_order='$c_date_order'
+					date_order=$c_date_order
 				  WHERE id='$c_version_id'";
 		db_query( $query );
 
@@ -295,6 +295,7 @@
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
+			$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 			$rows[] = $row;
 		}
 		return $rows;
@@ -323,6 +324,7 @@
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
+			$row['date_order'] = db_unixtimestamp( $row['date_order'] );
 			$rows[] = $row;
 		}
 		return $rows;
