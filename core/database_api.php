@@ -44,10 +44,7 @@
 	$g_db_log_queries = config_get_global( 'show_queries_count' );
 
 	# set adodb fetch mode
-	# most drivers don't implement this, but for mysql there is a small internal php performance gain for using it
-	if ( $g_db_type == 'mysql' ) {
-		$ADODB_FETCH_MODE = ADODB_FETCH_BOTH;
-	}
+	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 	# --------------------
 	# Make a connection to the database
