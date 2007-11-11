@@ -29,7 +29,7 @@
 	foreach( $g_file_type_icons as $t_ext => $t_filename ) {
 		$t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 
-		echo "Testing language '$t_ext'... $t_file_path ... ";
+		echo "Testing icon for extension '$t_ext'... $t_file_path ... ";
 		flush();
 
 		if ( file_exists( $t_file_path ) ) {
