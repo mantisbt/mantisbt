@@ -803,5 +803,7 @@
 		} else {
 			db_pconnect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
 		}
+	} else {
+		define( 'PLUGINS_DISABLED', true );	
 	}
 ?>
