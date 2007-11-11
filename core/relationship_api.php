@@ -295,6 +295,7 @@
 
 		$t_bug_relationship_data = array( new BugRelationshipData );
 		$t_relationship_count = db_num_rows( $result );
+		$t_bug_array = Array();
 		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$t_bug_relationship_data[$i]->id = $row['id'];
@@ -303,8 +304,12 @@
 			$t_bug_relationship_data[$i]->dest_bug_id = $row['destination_bug_id'];
 			$t_bug_relationship_data[$i]->dest_project_id = $row['project_id'];
 			$t_bug_relationship_data[$i]->type = $row['relationship_type'];
+			$t_bug_array[] = $row['destination_bug_id'];
+
 		}
 		unset( $t_bug_relationship_data[$t_relationship_count] );
+		if (!empty( $t_bug_array ) )
+			bug_cache_array_rows ( $t_bug_array );
 
 		return $t_bug_relationship_data;
 	}
@@ -329,6 +334,7 @@
 
 		$t_bug_relationship_data = array( new BugRelationshipData );
 		$t_relationship_count = db_num_rows( $result );
+		$t_bug_array = Array();
 		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$t_bug_relationship_data[$i]->id = $row['id'];
@@ -337,9 +343,12 @@
 			$t_bug_relationship_data[$i]->dest_bug_id = $row['destination_bug_id'];
 			$t_bug_relationship_data[$i]->dest_project_id = $t_dest_project_id;
 			$t_bug_relationship_data[$i]->type = $row['relationship_type'];
+			$t_bug_array[] = $row['source_bug_id'];
 		}
 		unset( $t_bug_relationship_data[$t_relationship_count] );
 
+		if (!empty( $t_bug_array ) )
+			bug_cache_array_rows ( $t_bug_array );
 		return $t_bug_relationship_data;
 	}
 

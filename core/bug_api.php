@@ -150,6 +150,34 @@
 		return $row;
 	}
 
+	function bug_cache_array_rows( $p_bug_id_array ) {
+		global $g_cache_bug;
+		$c_bug_id_array = array();
+		
+		foreach( $p_bug_id_array as $t_bug_id ) {
+			if ( !isset( $g_cache_bug[(int)$t_bug_id] ) ) {
+				$c_bug_id_array[] = (int)$t_bug_id;
+			}
+		}
+
+		if( empty( $c_bug_id_array ) )
+			return;
+		
+		$t_bug_table	= config_get_global( 'mantis_bug_table' );
+
+		$query = "SELECT *
+				  FROM $t_bug_table
+				  WHERE id IN (" . implode( ',', $c_bug_id_array ) . ')';
+		$result = db_query( $query );
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$row['date_submitted']	= db_unixtimestamp( $row['date_submitted'] );
+			$row['last_updated']	= db_unixtimestamp( $row['last_updated'] );
+			$g_cache_bug[(int)$row['id']] = $row;			
+		}
+		return;
+	}
+
 	# --------------------
 	# Inject a bug into the bug cache
 	function bug_add_to_cache( $p_bug_row ) {
