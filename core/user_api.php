@@ -88,6 +88,16 @@
 		return true;
 	}
 
+	function user_update_cache( $p_user_id, $p_field, $p_value ) {
+		global $g_cache_user;
+
+		if ( isset( $g_cache_user[$p_user_id] ) && isset ( $g_cache_user[$p_user_id][$p_field] ) ) {
+			$g_cache_user[$p_user_id][$p_field] = $p_value;
+		} else {
+			user_clear_cache( $p_user_id );
+		}
+	}
+	
 	#===================================
 	# Boolean queries and ensures
 	#===================================
@@ -962,16 +972,17 @@
 	# Update the last_visited field to be now
 	function user_update_last_visit( $p_user_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
+		$c_value = db_now();
 
 		$t_user_table = config_get_global( 'mantis_user_table' );
-
+		
 		$query = "UPDATE $t_user_table
-				  SET last_visit= " . db_now() . "
-				  WHERE id=" . db_param(0);
+				  SET last_visit= " . $c_value . "
+				  WHERE id=" . db_param(1);
 
 		db_query_bound( $query, Array( $c_user_id ) );
 
-		user_clear_cache( $p_user_id );
+		user_update_cache($p_user_id, 'last_visit', $c_value);
 
 		#db_query errors on failure so:
 		return true;
