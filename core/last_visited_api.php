@@ -84,5 +84,6 @@
 		# visited to track, then he/she will get the extra entries until visiting an issue.
 		$t_ids = explode( ',', $t_value );
 
+		bug_cache_array_rows($t_ids);
 		return $t_ids;
 	}
