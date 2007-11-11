@@ -53,6 +53,7 @@
 	print_table_stats( config_get_global( 'mantis_bug_monitor_table' ) );
 	print_table_stats( config_get_global( 'mantis_bug_relationship_table' ) );
 	print_table_stats( config_get_global( 'mantis_bug_table' ) );
+	print_table_stats( config_get_global( 'mantis_bug_tag_table' ) );
 	print_table_stats( config_get_global( 'mantis_bug_text_table' ) );
 	print_table_stats( config_get_global( 'mantis_bugnote_table' ) );
 	print_table_stats( config_get_global( 'mantis_bugnote_text_table' ) );
@@ -74,6 +75,9 @@
 	print_table_stats( config_get_global( 'mantis_user_print_pref_table' ) );
 	print_table_stats( config_get_global( 'mantis_user_profile_table' ) );
 	print_table_stats( config_get_global( 'mantis_user_table' ) );
+	print_table_stats( config_get_global( 'mantis_plugin_table' ) );
+	print_table_stats( config_get_global( 'mantis_tag_table' ) );
+	print_table_stats( config_get_global( 'mantis_email_table' ) );
 
 	# echo '</table>';
 	echo '</body></html>';
