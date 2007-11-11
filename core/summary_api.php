@@ -301,7 +301,7 @@
 		if ( ' 1<>1' == $specific_where ) {
 			return;
 		}
-		$query = "SELECT COUNT(h.id) as count, b.id, b.summary
+		$query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
 				FROM $t_mantis_bug_table AS b, $t_mantis_history_table AS h
 				WHERE h.bug_id = b.id
 				AND b.status < $t_resolved
@@ -312,19 +312,28 @@
 
 		$t_count = 0;
 		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+		$t_summarydata = Array();
+		$t_summarybugs = Array();
 		while ( $row = db_fetch_array( $result ) ) {
 			// Skip private bugs unless user has proper permissions
-			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
+			if ( ( VS_PRIVATE ==  $row['view_state'] ) && 
 			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
 				continue;
 			}
 
 			if ( $t_count++ == 10 ) break;
 
+			$t_summarydata[] = array( 'id' => $row['id'], 'summary' => $row['summary'], 'count' => $row['count'] );
+			$t_summarybugs[] = $row['id'];						
+		}
+
+		bug_cache_array_rows( $t_summarybugs );
+		
+		foreach ($t_summarydata as $row) {
 			$t_bugid = string_get_bug_view_link( $row['id'] );
 			$t_summary = $row['summary'];
 			$t_notescount = $row['count'];
-
+	
 			print "<tr " . helper_alternate_class() . ">\n";
 			print "<td class=\"small\">$t_bugid - $t_summary</td><td class=\"right\">$t_notescount</td>\n";
 			print "</tr>\n";
@@ -353,6 +362,8 @@
 		$t_count = 0;
 		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
 		while ( $row = db_fetch_array( $result ) ) {
+			// as we select all from bug_table, inject into the cache. 
+			bug_add_to_cache ( $row );
 			// Skip private bugs unless user has proper permissions
 			if ( ( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && 
 			( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
