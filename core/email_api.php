@@ -32,7 +32,7 @@
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'email_queue_api.php' );
 	require_once( $t_core_dir . 'relationship_api.php' );
-	require_once( 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
+	require_once( $t_core_dir . 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
 	require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
 
 	# reusable object of class SMTP
