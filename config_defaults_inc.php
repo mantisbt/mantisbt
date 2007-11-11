@@ -97,6 +97,19 @@
 		}
 
 		# Get server root to compare with path to this file
+		# using SCRIPT_NAME not PHP_SELF as php self can duplicate paths ( see http://bugs.php.net/bug.php?id=42699 etc )
+		if( !isset( $_SERVER['DOCUMENT_ROOT'] ) ) { 
+			if( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
+				$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr( $_SERVER['SCRIPT_FILENAME'], 0, 0 - strlen( $_SERVER['SCRIPT_NAME'] ) ) );
+			}
+		}
+
+		if( !isset( $_SERVER['DOCUMENT_ROOT'] ) ) { 
+			if( isset( $_SERVER['PATH_TRANSLATED'] ) ) {
+				$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr( str_replace( '\\\\', '\\', $_SERVER['PATH_TRANSLATED'] ), 0, 0 - strlen( $_SERVER['SCRIPT_NAME'] ) ) );
+			}
+		}
+
 		$t_docroot = $_SERVER['DOCUMENT_ROOT'];
 		$t_file_path = str_replace( DIRECTORY_SEPARATOR, '/', __FILE__ );
 
