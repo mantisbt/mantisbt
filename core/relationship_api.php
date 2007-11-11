@@ -543,7 +543,7 @@
 		}
 
 		# get the information from the related bug and prepare the link
-		$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, true ) );
+		$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, false ) );
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
