@@ -370,4 +370,5 @@ $upgrade[] = Array('CreateTableSQL', Array( config_get( 'mantis_plugin_table' ),
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
 $upgrade[] = Array('AlterColumnSQL', Array( config_get_global( 'mantis_user_pref_table' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
+$upgrade[] = Array('AlterColumnSQL', Array( config_get_global( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
 ?>

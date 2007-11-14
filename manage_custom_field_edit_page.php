@@ -78,7 +78,7 @@
 				<?php echo lang_get( 'custom_field_possible_values' ) ?>
 			</td>
 			<td>
-				<input type="text" name="possible_values" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
+				<input type="text" name="possible_values" size="32" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
