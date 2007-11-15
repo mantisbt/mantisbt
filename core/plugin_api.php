@@ -345,7 +345,7 @@ function plugin_install( $p_basename ) {
 				VALUES ( ".db_param(0).", 1 )";
 	db_query_bound( $t_query, array( $c_basename ) );
 
-	if ( false === ( config_get_global( 'schema_plugin_'.$p_basename, false ) ) ) {
+	if ( false === ( config_get( 'schema_' . $p_basename . '_schema', false ) ) ) {
 		config_set( 'plugin_' . $p_basename . '_schema', -1 );
 	}
 	plugin_upgrade( $p_basename );
@@ -364,7 +364,7 @@ function plugin_needs_upgrade( $p_basename ) {
 		return false;
 	}
 
-	$t_plugin_schema_version = config_get_global( 'plugin_schema_'.$p_basename, -1 );
+	$t_plugin_schema_version = config_get( 'plugin_' . $p_basename . '_schema', -1 );
 
 	return ( $t_plugin_schema_version < count( $t_plugin_schema ) - 1 );
 }
@@ -375,7 +375,7 @@ function plugin_needs_upgrade( $p_basename ) {
  * @return multi True if upgrade completed, null if problem
  */
 function plugin_upgrade( $p_basename ) {
-	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
+	access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 	$t_schema_version = config_get_global( 'plugin_' . $p_basename . '_schema', -1 );
 	$t_schema = plugin_get_schema( $p_basename );
