@@ -33,8 +33,9 @@ span.pagetitle		{ font-size: 12pt; font-weight: bold; text-align: center }
 span.bracket-link	{ white-space: nowrap; }
 
 span.dependency_dated		{ color: brown; }
-span.dependency_met		{ color: green; }
+span.dependency_met			{ color: green; }
 span.dependency_unmet		{ color: red; }
+span.dependency_upgrade		{ color: orange; }
 
 table				{ }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }

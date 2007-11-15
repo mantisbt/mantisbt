@@ -94,13 +94,29 @@ foreach ( $t_plugins_installed as $t_basename => $t_enabled ) {
 		$t_url = '<br/>' . string_display_links( sprintf( lang_get( 'plugin_url' ), $t_url ) );
 	}
 
+	$t_upgrade = '';
+	if ( plugin_needs_upgrade( $t_basename ) ) {
+		$t_upgrade = '<form action="manage_plugin_upgrade.php?name='.$t_basename.'" method="post">'.
+			'<input type="submit" value="'.lang_get( 'plugin_upgrade' ).'"></form>';
+	}
+
+	$t_uninstall = '';
+	if ( 'mantis' != $t_basename ) {
+		$t_uninstall = '<form action="manage_plugin_uninstall.php?name='.$t_basename.'" method="post">'.
+			'<input type="submit" value="'.lang_get( 'plugin_uninstall' ).'"></form>';
+	}
+
 	if ( !is_null( $t_requires ) ) {
 		if ( is_array( $t_requires ) ) {
 			foreach( $t_requires as $t_plugin => $t_version ) {
 				if ( isset( $t_plugins[$t_plugin] ) ) {
 					if ( isset( $t_plugins_installed[$t_plugin] ) &&
 						$t_plugins[$t_plugin]['version'] >= $t_version ) {
-						$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
+							if ( is_blank( $t_upgrade ) ) {
+								$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
+							} else {
+								$t_depends[] = '<span class="dependency_upgrade">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
+							}
 					} else {
 						$t_depends[] = '<span class="dependency_dated">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
 					}
@@ -115,18 +131,6 @@ foreach ( $t_plugins_installed as $t_basename => $t_enabled ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
 		$t_depends = '<span class="dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
-	}
-
-	$t_upgrade = '';
-	if ( plugin_needs_upgrade( $t_basename ) ) {
-		$t_upgrade = '<form action="manage_plugin_upgrade.php?name='.$t_basename.'" method="post">'.
-			'<input type="submit" value="'.lang_get( 'plugin_upgrade' ).'"></form>';
-	}
-	
-	$t_uninstall = '';
-	if ( 'mantis' != $t_basename ) {
-		$t_uninstall = '<form action="manage_plugin_uninstall.php?name='.$t_basename.'" method="post">'.
-			'<input type="submit" value="'.lang_get( 'plugin_uninstall' ).'"></form>';
 	}
 
 	echo '<tr ',helper_alternate_class(),'>';
@@ -229,6 +233,12 @@ foreach ( $t_plugins_available as $t_basename => $t_info ) {
 
 </table>
 <?php } ?>
+
+<br/>Key:
+<span class='dependency_met'>Plugin ready</span>,
+<span class='dependency_unmet'>unmet dependencies</span>,
+<span class='dependency_dated'>out-dated dependencies</span>,
+<span class='dependency_upgrade'>upgrade needed</span>.
 
 <?php
 html_page_bottom1();

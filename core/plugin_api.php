@@ -356,7 +356,12 @@ function plugin_install( $p_basename ) {
  * @param string Plugin basename
  * @return boolean True if plugin needs schema ugrades.
  */
-function plugin_needs_upgrade( $p_basename ) {
+function plugin_needs_upgrade( $p_basename = null ) {
+	if ( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
 	$t_plugin = plugin_get_info( $p_basename );
 
 	$t_plugin_schema = plugin_get_schema( $p_basename );
