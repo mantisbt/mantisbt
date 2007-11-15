@@ -92,6 +92,7 @@ function event_signal( $p_name, $p_params=null, $p_type=null ) {
 	global $g_event_cache;
 
 	if ( !isset( $g_event_cache[$p_name] ) ) {
+		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;
 	}
