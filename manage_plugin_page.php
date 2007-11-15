@@ -234,11 +234,11 @@ foreach ( $t_plugins_available as $t_basename => $t_info ) {
 </table>
 <?php } ?>
 
-<br/>Key:
-<span class='dependency_met'>Plugin ready</span>,
-<span class='dependency_unmet'>unmet dependencies</span>,
-<span class='dependency_dated'>out-dated dependencies</span>,
-<span class='dependency_upgrade'>upgrade needed</span>.
+<br/><?php echo lang_get( 'plugin_key' ) ?>:
+<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
+<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
+<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,
+<span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
 
 <?php
 html_page_bottom1();

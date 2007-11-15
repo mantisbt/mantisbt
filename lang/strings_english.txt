@@ -817,6 +817,11 @@ $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the \'%s\' plugin?';
+$s_plugin_key = 'Key';
+$s_plugin_key_met = 'plugin ready';
+$s_plugin_key_unmet = 'unmet dependencies';
+$s_plugin_key_dated = 'outdated dependencies';
+$s_plugin_key_upgrade = 'upgrade needed';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
