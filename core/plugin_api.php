@@ -375,9 +375,9 @@ function plugin_needs_upgrade( $p_basename ) {
  * @return multi True if upgrade completed, null if problem
  */
 function plugin_upgrade( $p_basename ) {
-	access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
+	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
-	$t_schema_version = config_get_global( 'plugin_' . $p_basename . '_schema', -1 );
+	$t_schema_version = config_get( 'plugin_' . $p_basename . '_schema', -1 );
 	$t_schema = plugin_get_schema( $p_basename );
 
 	global $g_db;
