@@ -97,15 +97,7 @@
 		$t_disposition = ' attachment;';
 	}
 
-	# Added Quotes (") around file name.  Also in case of IE url encode the filename
-	# firefox seems to do fine without the urlencoding.  I am not sure if always
-	# urlencoding is an issue.
-	if ( preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
-		header( 'Content-Disposition:' . $t_disposition . ' filename="' . urlencode($t_filename) . '"' );
-	} else {
-		header( 'Content-Disposition:' . $t_disposition . ' filename="' . $t_filename . '"' );
-	}
-
+	header( 'Content-Disposition:' . $t_disposition . ' filename="' . urlencode( $t_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
 	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', db_unixtimestamp( $v_date_added ) ) );
 
