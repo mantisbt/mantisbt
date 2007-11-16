@@ -294,7 +294,7 @@
 		if ($p_include_anchor) {
 			$callback = create_function('$p_array','	
 										if (bug_exists( (int)$p_array[2] ) ) { 
-											return $p_array[1] . string_get_bug_view_link( $p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . '); 
+											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ($p_detail_info ? 'true' : 'false') . ', ' . ($p_fqdn ? 'true' : 'false') . '); 
 										} else {    	
 											return $p_array[0];
 										}
@@ -306,7 +306,7 @@
 										#  the summary lookup on a non-existant bug.  But here, we
 										#  can create the link and by the time it is clicked on, the
 										#  bug may exist.			
-										return $p_array[1] . string_get_bug_view_url_with_fqdn( $p_array[2], null );
+										return $p_array[1] . string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
 										');
 		}
 
