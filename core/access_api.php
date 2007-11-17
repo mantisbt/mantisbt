@@ -44,7 +44,7 @@
 					$t_return_page .=  '?' . $_SERVER['QUERY_STRING'];
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
-				print_header_redirect( 'login_page.php?return=' . $t_return_page );
+				print_header_redirect( helper_mantis_url('login_page.php') . '?return=' . $t_return_page );
 			}
 		} else {
 			if( auth_get_current_user_id() == user_get_id_by_name( config_get_global( 'anonymous_account') ) ) {
@@ -56,16 +56,16 @@
 					$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 					echo '<center>';
 					echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
-					print_bracket_link( 'login_page.php?return=' . $t_return_page, lang_get( 'click_to_login' ) );
+					print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 					echo '<p></p>';
-					print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+					print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
 					
 					echo '</center>';
 				}
 			} else {
 				echo '<center>';
 				echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
-				print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
 				echo '</center>';
 			}
 		}
