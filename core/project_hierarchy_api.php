@@ -31,7 +31,7 @@
 			trigger_error( ERROR_PROJECT_RECURSIVE_HIERARCHY, ERROR );
 		}
 
-		$t_project_hierarchy_table = config_get_global( 'mantis_project_hierarchy_table' );
+		$t_project_hierarchy_table = db_get_table( 'mantis_project_hierarchy_table' );
 
 		$c_child_id  = db_prepare_int( $p_child_id  );
 		$c_parent_id = db_prepare_int( $p_parent_id );
@@ -46,7 +46,7 @@
 
 	# --------------------
 	function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
-		$t_project_hierarchy_table = config_get_global( 'mantis_project_hierarchy_table' );
+		$t_project_hierarchy_table = db_get_table( 'mantis_project_hierarchy_table' );
 
 		$c_child_id  = db_prepare_int( $p_child_id  );
 		$c_parent_id = db_prepare_int( $p_parent_id );
@@ -60,7 +60,7 @@
 
 	# --------------------
 	function project_hierarchy_remove_all( $p_project_id ) {
-		$t_project_hierarchy_table = config_get_global( 'mantis_project_hierarchy_table' );
+		$t_project_hierarchy_table = db_get_table( 'mantis_project_hierarchy_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
@@ -92,8 +92,8 @@
 	function project_hierarchy_cache( $p_show_disabled = false ) {
 		global $g_cache_project_hierarchy;
 
-		$t_project_table			= config_get_global( 'mantis_project_table' );
-		$t_project_hierarchy_table	= config_get_global( 'mantis_project_hierarchy_table' );
+		$t_project_table			= db_get_table( 'mantis_project_table' );
+		$t_project_hierarchy_table	= db_get_table( 'mantis_project_hierarchy_table' );
 		$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param(0);
 
 		$query = "SELECT DISTINCT p.id, ph.parent_id, p.name

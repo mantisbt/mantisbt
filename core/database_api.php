@@ -794,6 +794,25 @@
 		return $t_total;
 	}
 
+	function db_get_table( $p_option ) {
+		if ( isset( $GLOBALS['g_db_table'][$p_option] ) ) {
+			$t_value = config_eval( $GLOBALS['g_db_table'][$p_option] );
+			if ( $t_value !== $GLOBALS['g_db_table'][$p_option] ) {
+    			$GLOBALS['g_db_table'][$p_option] = $t_value;
+    		}
+			return $t_value;
+		} else {
+			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
+		}
+	}
+	
+	function db_get_table_list() {
+		$t_tables = Array();
+		foreach( $GLOBALS['g_db_table'] as $t_table ) {
+			$t_tables[] = config_eval( $t_table );
+		}
+		return $t_tables;
+	}
 
 	# --------------------
 

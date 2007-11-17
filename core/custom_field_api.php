@@ -84,7 +84,7 @@
 
 		$c_field_id = db_prepare_int( $p_field_id );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 
 		if ( isset ( $g_cache_custom_field[$c_field_id] ) ) {
 			return $g_cache_custom_field[$c_field_id];
@@ -142,7 +142,7 @@
 		$c_field_id		= db_prepare_int( $p_field_id );
 
 		# figure out if this bug_id/field_id combination exists
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "SELECT COUNT(*)
 				FROM $t_custom_field_project_table
 				WHERE field_id=" . db_param(0) . " AND
@@ -199,7 +199,7 @@
 	function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 		$c_name	= db_prepare_string( $p_name );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "SELECT COUNT(*)
 				  FROM $t_custom_field_table
 				  WHERE name='$c_name'";
@@ -290,7 +290,7 @@
 
 		custom_field_ensure_name_unique( $c_name );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "INSERT INTO $t_custom_field_table
 					( name )
 				  VALUES
@@ -349,7 +349,7 @@
 		}
 
 		$t_update_something = false;
-		$t_mantis_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_mantis_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "UPDATE $t_mantis_custom_field_table
 				  SET ";
 		if( array_key_exists( 'name', $p_def_array ) ) {
@@ -525,7 +525,7 @@
 			return false;
 		}
 
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "INSERT INTO $t_custom_field_project_table
 					( field_id, project_id )
 				  VALUES
@@ -547,7 +547,7 @@
 		$c_field_id		= db_prepare_int( $p_field_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE field_id = '$c_field_id' AND
 				  		project_id = '$c_project_id'";
@@ -565,18 +565,18 @@
 		$c_field_id = db_prepare_int( $p_field_id );
 
 		# delete all values
-		$t_custom_field_string_table = config_get_global( 'mantis_custom_field_string_table' );
+		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$query = "DELETE FROM $t_custom_field_string_table
 				  WHERE field_id='$c_field_id'";
 		db_query( $query );
 
 		# delete all project associations
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE field_id='$c_field_id'";
 		db_query( $query );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		# delete the definition
 		$query = "DELETE FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
@@ -597,7 +597,7 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		# delete all project associations
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE project_id='$c_project_id'";
 		db_query( $query );
@@ -614,7 +614,7 @@
 	function custom_field_delete_all_values( $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
-		$t_custom_field_string_table = config_get_global( 'mantis_custom_field_string_table' );
+		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$query = "DELETE FROM $t_custom_field_string_table
 				  WHERE bug_id='$c_bug_id'";
 		db_query( $query );
@@ -635,7 +635,7 @@
 		  return false;
 		}
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 
 		$c_field_name = db_prepare_string( $p_field_name );
 
@@ -668,13 +668,13 @@
         
         if ( ! isset( $g_cache_cf_linked[$p_project_id] ) ) {
         
-     		$t_custom_field_table			= config_get_global( 'mantis_custom_field_table' );
-     		$t_custom_field_project_table	= config_get_global( 'mantis_custom_field_project_table' );
+     		$t_custom_field_table			= db_get_table( 'mantis_custom_field_table' );
+     		$t_custom_field_project_table	= db_get_table( 'mantis_custom_field_project_table' );
 
     		if ( ALL_PROJECTS == $p_project_id ) {
-                $t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
-                $t_project_table = config_get_global( 'mantis_project_table' );
-                $t_user_table = config_get_global( 'mantis_user_table' );
+                $t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
+                $t_project_table = db_get_table( 'mantis_project_table' );
+                $t_user_table = db_get_table( 'mantis_user_table' );
                 $t_user_id = auth_get_current_user_id();
                 $t_pub = VS_PUBLIC;
                 $t_priv = VS_PRIVATE;
@@ -743,7 +743,7 @@
         global $g_cache_cf_list;
        
         if ( $g_cache_cf_list === NULL ) {
-            $t_custom_field_table			= config_get_global( 'mantis_custom_field_table' );
+            $t_custom_field_table			= db_get_table( 'mantis_custom_field_table' );
             $query = "SELECT id, name
 				  FROM $t_custom_field_table
 				  ORDER BY name ASC";
@@ -770,7 +770,7 @@
 	function custom_field_get_project_ids( $p_field_id ) {
 		$c_field_id = db_prepare_int( $p_field_id );
 
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "SELECT project_id
 				  FROM $t_custom_field_project_table
 				  WHERE field_id = '$c_field_id'";
@@ -822,7 +822,7 @@
 
 		custom_field_ensure_exists( $p_field_id );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "SELECT access_level_r, default_value, type
 				  FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
@@ -836,7 +836,7 @@
 			return false;
 		}
 
-		$t_custom_field_string_table = config_get_global( 'mantis_custom_field_string_table' );
+		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$query = "SELECT value
 				  FROM $t_custom_field_string_table
 				  WHERE bug_id='$c_bug_id' AND
@@ -883,9 +883,9 @@
 			$c_bug_id     = db_prepare_int( $p_bug_id );
 			$c_project_id = db_prepare_int( bug_get_field( $p_bug_id, 'project_id' ) );
 
-			$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
-			$t_custom_field_table         = config_get_global( 'mantis_custom_field_table' );
-			$t_custom_field_string_table  = config_get_global( 'mantis_custom_field_string_table' );
+			$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
+			$t_custom_field_table         = db_get_table( 'mantis_custom_field_table' );
+			$t_custom_field_string_table  = db_get_table( 'mantis_custom_field_string_table' );
 
 			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
 					FROM $t_custom_field_project_table p INNER JOIN $t_custom_field_table f
@@ -929,7 +929,7 @@
 		$c_field_id = db_prepare_int( $p_field_id );
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "SELECT sequence
 				  FROM $t_custom_field_project_table
 				  WHERE field_id='$c_field_id' AND
@@ -954,7 +954,7 @@
 
 		custom_field_ensure_exists( $p_field_id );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "SELECT name, type, possible_values, valid_regexp,
 				  		 access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
@@ -1008,8 +1008,8 @@
 		global $g_custom_field_type_definition;
 		$c_field_id						= $p_field_def['id'];
 		$c_project_id					= db_prepare_int( $p_project_id );
-		$t_custom_field_string_table	= config_get_global( 'mantis_custom_field_string_table' );
-		$t_mantis_bug_table				= config_get_global( 'mantis_bug_table' );
+		$t_custom_field_string_table	= db_get_table( 'mantis_custom_field_string_table' );
+		$t_mantis_bug_table				= db_get_table( 'mantis_bug_table' );
 		$t_return_arr					= array();
 	
 		# If an enumeration type, we get all possible values, not just used values
@@ -1077,7 +1077,7 @@
 
 		custom_field_ensure_exists( $p_field_id );
 
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "SELECT name, type, possible_values, valid_regexp,
 				  access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
@@ -1115,7 +1115,7 @@
 			return false;
 		}
 
-		$t_custom_field_string_table = config_get_global( 'mantis_custom_field_string_table' );
+		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 
 		# do I need to update or insert this value?
 		$query = "SELECT value
@@ -1159,7 +1159,7 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_sequence = db_prepare_int( $p_sequence );
 
-		$t_custom_field_project_table = config_get_global( 'mantis_custom_field_project_table' );
+		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 
 		$query = "UPDATE $t_custom_field_project_table
 				  SET sequence='$c_sequence'

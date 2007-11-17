@@ -40,7 +40,7 @@
 	 */
 	function tag_exists( $p_tag_id ) {
 		$c_tag_id = db_prepare_int( $p_tag_id );
-		$t_tag_table = config_get_global( 'mantis_tag_table' );
+		$t_tag_table = db_get_table( 'mantis_tag_table' );
 
 		$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param(0);
 		$result = db_query_bound( $query, Array( $c_tag_id ) ) ;
@@ -67,7 +67,7 @@
 	 */
 	function tag_is_unique( $p_name ) {
 		$c_name = trim( db_prepare_string( $p_name ) );
-		$t_tag_table = config_get_global( 'mantis_tag_table' );
+		$t_tag_table = db_get_table( 'mantis_tag_table' );
 
 		$query = "SELECT id FROM $t_tag_table WHERE ".db_helper_like( 'name', $c_name );
 		$result = db_query( $query ) ;
@@ -212,7 +212,7 @@
 
 		$c_tag_id		= db_prepare_int( $p_tag_id );
 		
-		$t_tag_table	= config_get_global( 'mantis_tag_table' );
+		$t_tag_table	= db_get_table( 'mantis_tag_table' );
 
 		$query = "SELECT * FROM $t_tag_table
 					WHERE id=" . db_param(0);
@@ -234,7 +234,7 @@
 	function tag_get_by_name( $p_name ) {
 		$c_name 		= db_prepare_string( $p_name );
 
-		$t_tag_table	= config_get_global( 'mantis_tag_table' );
+		$t_tag_table	= db_get_table( 'mantis_tag_table' );
 
 		$query = "SELECT * FROM $t_tag_table
 					WHERE ".db_helper_like( 'name', $c_name );
@@ -291,7 +291,7 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_date_created	= db_now();
 		
-		$t_tag_table	= config_get_global( 'mantis_tag_table' );
+		$t_tag_table	= db_get_table( 'mantis_tag_table' );
 
 		$query = "INSERT INTO $t_tag_table
 				( user_id, 	
@@ -346,7 +346,7 @@
 		$c_description	= db_prepare_string( $p_description );
 		$c_date_updated	= db_now();
 
-		$t_tag_table	= config_get_global( 'mantis_tag_table' );
+		$t_tag_table	= db_get_table( 'mantis_tag_table' );
 
 		$query = "UPDATE $t_tag_table
 					SET user_id='$c_user_id',
@@ -383,8 +383,8 @@
 		
 		$c_tag_id			= db_prepare_int( $p_tag_id );
 
-		$t_tag_table		= config_get_global( 'mantis_tag_table' );
-		$t_bug_tag_table	= config_get_global( 'mantis_bug_tag_table' );
+		$t_tag_table		= db_get_table( 'mantis_tag_table' );
+		$t_bug_tag_table	= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "DELETE FROM $t_tag_table
 					WHERE id='$c_tag_id'";
@@ -405,7 +405,7 @@
 		$c_tag_id 		= db_prepare_int( $p_tag_id );
 		$c_bug_id 		= db_prepare_int( $p_bug_id );
 
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id='$c_tag_id' AND bug_id='$c_bug_id'";
@@ -423,7 +423,7 @@
 		$c_tag_id 		= db_prepare_int( $p_tag_id );
 		$c_bug_id 		= db_prepare_int( $p_bug_id );
 
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id='$c_tag_id' AND bug_id='$c_bug_id'";
@@ -443,8 +443,8 @@
 	function tag_bug_get_attached( $p_bug_id ) {
 		$c_bug_id 		= db_prepare_int( $p_bug_id );
 
-		$t_tag_table	= config_get_global( 'mantis_tag_table' );
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_tag_table	= db_get_table( 'mantis_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "SELECT t.*, b.user_id as user_attached, b.date_attached
 					FROM $t_tag_table as t
@@ -470,7 +470,7 @@
 	function tag_get_bugs_attached( $p_tag_id ) {
 		$c_tag_id 		= db_prepare_int( $p_tag_id );
 
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "SELECT bug_id FROM $t_bug_tag_table
 					WHERE tag_id='$c_tag_id'";
@@ -510,7 +510,7 @@
 		$c_user_id	 	= db_prepare_int( $p_user_id );
 		$c_date_attached= db_now();
 
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "INSERT INTO $t_bug_tag_table
 					( tag_id,
@@ -561,7 +561,7 @@
 		$c_tag_id 		= db_prepare_int( $p_tag_id );
 		$c_bug_id 		= db_prepare_int( $p_bug_id );
 
-		$t_bug_tag_table= config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table= db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "DELETE FROM $t_bug_tag_table 
 					WHERE tag_id='$c_tag_id' AND bug_id='$c_bug_id'";
@@ -647,7 +647,7 @@
 	 */
 	function tag_stats_attached( $p_tag_id ) {
 		$c_tag_id = db_prepare_int( $p_tag_id );
-		$t_bug_tag_table = config_get_global( 'mantis_bug_tag_table' );
+		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 
 		$query = "SELECT COUNT(*) FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param(0);
@@ -666,11 +666,11 @@
 	 * @return array Array of tag rows, with share count added
 	 */
 	function tag_stats_related( $p_tag_id, $p_limit=5 ) {
-		$t_bug_table = config_get_global( 'mantis_bug_table' );
-		$t_tag_table = config_get_global( 'mantis_tag_table' );
-		$t_bug_tag_table = config_get_global( 'mantis_bug_tag_table' );
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_bug_table = db_get_table( 'mantis_bug_table' );
+		$t_tag_table = db_get_table( 'mantis_tag_table' );
+		$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$c_tag_id = db_prepare_int( $p_tag_id );
 		$c_user_id = auth_get_current_user_id();

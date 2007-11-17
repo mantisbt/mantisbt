@@ -58,7 +58,7 @@
 		}
 
 		$c_project_id = db_prepare_int( $p_project_id );
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "SELECT *
 				  FROM $t_project_table
@@ -88,7 +88,7 @@
 		global $g_cache_project, $g_cache_project_all;
 
 		if ( !$g_cache_project_all ) {
-			$t_project_table = config_get_global( 'mantis_project_table' );
+			$t_project_table = db_get_table( 'mantis_project_table' );
 
 			$query = "SELECT *
 					  FROM $t_project_table";
@@ -158,7 +158,7 @@
 	function project_is_name_unique( $p_name ) {
 		$c_name = db_prepare_string( $p_name );
 
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query ="SELECT COUNT(*)
 				 FROM $t_project_table
@@ -186,7 +186,7 @@
 	# check to see if the user/project combo already exists
 	# returns true is duplicate is found, otherwise false
 	function project_includes_user( $p_project_id, $p_user_id ) {
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
@@ -231,7 +231,7 @@
 			file_ensure_valid_upload_path( $p_file_path );
 		}
 
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "INSERT INTO $t_project_table
 					( name, status, enabled, view_state, file_path, description )
@@ -253,7 +253,7 @@
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		# Delete the bugs
 		bug_delete_all( $p_project_id );
@@ -327,7 +327,7 @@
 			file_ensure_valid_upload_path( $p_file_path );
 		}
 
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "UPDATE $t_project_table
 				  SET name='$c_name',
@@ -367,7 +367,7 @@
 	function project_get_id_by_name( $p_project_name ) {
 		$c_project_name = db_prepare_string( $p_project_name );
 
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "SELECT id FROM $t_project_table WHERE name = '$c_project_name'";
 		$t_result = db_query( $query, 1 );
@@ -427,7 +427,7 @@
 			return false;
 		}
 
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$query = "SELECT access_level
 				  FROM $t_project_user_list_table
@@ -447,7 +447,7 @@
 	function project_get_local_user_rows( $p_project_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$query = "SELECT *
 				FROM $t_project_user_list_table
@@ -480,9 +480,9 @@
 			return array();
 		}
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
-		$t_project_table = config_get_global( 'mantis_project_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 		
 		$t_global_access_level = $p_access_level;
 
@@ -593,7 +593,7 @@
 	# --------------------
 	# add user with the specified access level to a project
 	function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
@@ -620,7 +620,7 @@
 	# update entry
 	# must make sure entry exists beforehand
 	function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
@@ -652,7 +652,7 @@
 	# --------------------
 	# remove user from project
 	function project_remove_user( $p_project_id, $p_user_id ) {
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
@@ -671,7 +671,7 @@
 	# delete all users from the project user list for a given project
 	# this is useful when deleting or closing a project
 	function project_remove_all_users( $p_project_id ) {
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 
@@ -724,7 +724,7 @@
 		# --------------------
 	# Return true if the file name identifier is unique, false otherwise
 	function project_file_is_name_unique( $p_name ) {
-		$t_file_table = config_get_global( 'mantis_project_file_table' );
+		$t_file_table = db_get_table( 'mantis_project_file_table' );
 
 		$c_name = db_prepare_string( $p_name );
 

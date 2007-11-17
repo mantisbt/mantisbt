@@ -61,7 +61,7 @@
 			# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 			if ( ! $g_cache_db_table_exists ) {
-				$t_config_table = config_get_global( 'mantis_config_table' );
+				$t_config_table = db_get_table( 'mantis_config_table' );
 				$g_cache_db_table_exists = ( TRUE === db_is_connected() ) &&
 					db_table_exists( $t_config_table );
 			}
@@ -112,7 +112,7 @@
 				# @@ debug @@ echo 'u= '; var_dump($t_users);
 				
 				if ( ! $g_cache_filled ) {
-					$t_config_table = config_get_global( 'mantis_config_table' );
+					$t_config_table = db_get_table( 'mantis_config_table' );
 					$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
 					$result = db_query_bound( $query );
 					while ( false <> ( $row = db_fetch_array( $result ) ) ) {
@@ -302,7 +302,7 @@
 			$c_project = db_prepare_int( $p_project );
 			$c_access = db_prepare_int( $p_access );
 
-			$t_config_table = config_get_global( 'mantis_config_table' );
+			$t_config_table = db_get_table( 'mantis_config_table' );
 			$query = "SELECT COUNT(*) from $t_config_table
 				WHERE config_id = '$c_option' AND
 					project_id = $c_project AND
@@ -372,12 +372,12 @@
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
 		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
-				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
+				&& ( db_table_exists( db_get_table( 'mantis_config_table' ) ) ) ) {
 			if ( !config_can_delete( $p_option ) ) {
 				return;
 			}
 
-			$t_config_table = config_get_global( 'mantis_config_table' );
+			$t_config_table = db_get_table( 'mantis_config_table' );
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
 			# @@ debug @@ error_print_stack_trace();
 
@@ -399,7 +399,7 @@
 	# delete the config entry
 	function config_delete_project( $p_project = ALL_PROJECTS ) {
 		global $g_cache_config, $g_cache_config_access;
-		$t_config_table = config_get_global( 'mantis_config_table' );
+		$t_config_table = db_get_table( 'mantis_config_table' );
 		$c_project = db_prepare_int( $p_project );
 		$query = "DELETE FROM $t_config_table
 				WHERE project_id=$c_project";

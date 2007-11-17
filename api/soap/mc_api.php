@@ -249,7 +249,7 @@
 	# --------------------
 	# category_get_all_rows did't respect subprojects.
 	function mci_category_get_all_rows( $p_project_id, $p_user_id ) {
-		$t_mantis_project_category_table = config_get_global( 'mantis_project_category_table' );
+		$t_mantis_project_category_table = db_get_table( 'mantis_project_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 

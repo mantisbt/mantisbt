@@ -37,7 +37,7 @@
 	$f_save = gpc_get_bool( 'save' );
 	$f_prefix = strtoupper( gpc_get_string( 'prefix', config_get( 'default_manage_user_prefix' ) ) );
 
-	$t_user_table = config_get_global( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'mantis_user_table' );
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
 

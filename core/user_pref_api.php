@@ -122,7 +122,7 @@
 			return $g_cache_user_pref[$p_user_id][$p_project_id];
 		}
 
-		$t_user_pref_table = config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_pref_table
@@ -201,7 +201,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_pref_table 	= config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table 	= db_get_table( 'mantis_user_pref_table' );
 
 		$t_vars		= get_object_vars( $p_prefs );
 		$t_values	= array();
@@ -233,7 +233,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_pref_table	= config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table	= db_get_table( 'mantis_user_pref_table' );
 		$t_vars				= get_object_vars( $p_prefs );
 
 		$t_pairs = array();
@@ -270,7 +270,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_pref_table = config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id=" . db_param(0) . " AND
@@ -295,7 +295,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_pref_table = config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id='$c_user_id'";
@@ -317,7 +317,7 @@
 	function user_pref_delete_project( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_user_pref_table = config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 
 		$query = "DELETE FROM $t_user_pref_table
 				  WHERE project_id=" . db_param(0);

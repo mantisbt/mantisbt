@@ -466,10 +466,10 @@
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
 
-		$t_project_file_table = config_get_global( 'mantis_project_file_table' );
-		$t_project_table = config_get_global( 'mantis_project_table' );
-		$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_project_file_table = db_get_table( 'mantis_project_file_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
+		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 		$t_pub = VS_PUBLIC;
 		$t_priv = VS_PRIVATE;
 		$t_admin = ADMINISTRATOR;

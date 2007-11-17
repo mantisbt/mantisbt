@@ -888,7 +888,7 @@
 	# Print the legend for the status percentage
 	function html_status_percentage_legend() {
 
-		$t_mantis_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 

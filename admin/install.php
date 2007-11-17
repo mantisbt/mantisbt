@@ -842,7 +842,7 @@ if ( 6 == $t_install_state ) {
 		checking ability to SELECT records
 	</td>
 	<?php
-		$t_mantis_config_table = config_get_global( 'mantis_config_table' );
+		$t_mantis_config_table = db_get_table( 'mantis_config_table' );
 		$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
 		$t_result = @$g_db->Execute( $t_query );
 

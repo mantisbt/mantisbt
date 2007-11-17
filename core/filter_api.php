@@ -410,15 +410,15 @@
 	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 		log_event( LOG_FILTERING, 'FILTERING: START NEW FILTER QUERY' );
 
-		$t_bug_table			= config_get_global( 'mantis_bug_table' );
-		$t_bug_text_table		= config_get_global( 'mantis_bug_text_table' );
-		$t_bugnote_table		= config_get_global( 'mantis_bugnote_table' );
-		$t_custom_field_string_table	= config_get_global( 'mantis_custom_field_string_table' );
-		$t_bugnote_text_table	= config_get_global( 'mantis_bugnote_text_table' );
-		$t_project_table		= config_get_global( 'mantis_project_table' );
-		$t_bug_monitor_table	= config_get_global( 'mantis_bug_monitor_table' );
+		$t_bug_table			= db_get_table( 'mantis_bug_table' );
+		$t_bug_text_table		= db_get_table( 'mantis_bug_text_table' );
+		$t_bugnote_table		= db_get_table( 'mantis_bugnote_table' );
+		$t_custom_field_string_table	= db_get_table( 'mantis_custom_field_string_table' );
+		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
+		$t_project_table		= db_get_table( 'mantis_project_table' );
+		$t_bug_monitor_table	= db_get_table( 'mantis_bug_monitor_table' );
 		$t_limit_reporters		= config_get( 'limit_reporters' );
-		$t_bug_relationship_table	= config_get_global( 'mantis_bug_relationship_table' );
+		$t_bug_relationship_table	= db_get_table( 'mantis_bug_relationship_table' );
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
 		$t_current_user_id = auth_get_current_user_id();
@@ -1112,7 +1112,7 @@
 					$t_tags_any[] = tag_get( $t_filter['tag_select'] );
 				}
 	
-				$t_bug_tag_table = config_get_global( 'mantis_bug_tag_table' );
+				$t_bug_tag_table = db_get_table( 'mantis_bug_tag_table' );
 				
 				if ( count( $t_tags_all ) ) {
 					$t_clauses = array();
@@ -2759,7 +2759,7 @@
 		$c_name = db_prepare_string( $p_name );
 		$c_filter_string = db_prepare_string( $p_filter_string );
 
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 
 		# check that the user can save non current filters (if required)
 		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) &&
@@ -2822,7 +2822,7 @@
 	# return null
 	function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		global $g_cache_filter_db_filters;
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
 		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
@@ -2862,7 +2862,7 @@
 	}
 
 	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 		$c_project_id 	= $c_project_id * -1;
 
@@ -2889,7 +2889,7 @@
 	}
 
 	function filter_db_get_name( $p_filter_id ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
 		$query = "SELECT *
@@ -2914,7 +2914,7 @@
 
 	# Will return true if the user can delete this query
 	function filter_db_can_delete_filter( $p_filter_id ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 		$t_user_id = auth_get_current_user_id();
 
@@ -2939,7 +2939,7 @@
 	}
 
 	function filter_db_delete_filter( $p_filter_id ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 		$t_user_id = auth_get_current_user_id();
 
@@ -2959,7 +2959,7 @@
 	}
 
 	function filter_db_delete_current_filters( ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$t_all_id = ALL_PROJECTS;
 
 		$query = "DELETE FROM $t_filters_table
@@ -2969,7 +2969,7 @@
 	}
 
 	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 		$t_overall_query_arr = array();
 
 		if ( null === $p_project_id ) {
@@ -3927,7 +3927,7 @@
 
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
-		$t_filters_table = config_get_global( 'mantis_filters_table' );
+		$t_filters_table = db_get_table( 'mantis_filters_table' );
 
 		if ( isset ( $g_cache_filter[$c_filter_id] ) ) {
 			return $g_cache_filter[$c_filter_id];

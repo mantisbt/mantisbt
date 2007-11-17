@@ -48,36 +48,11 @@
 	echo '<h1>Mantis Database Statistics</h1>';
 	# echo '<table border="1" width="50%" cellpadding="3" cellspacing="0">';
 
-	print_table_stats( config_get_global( 'mantis_bug_file_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_history_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_monitor_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_relationship_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_tag_table' ) );
-	print_table_stats( config_get_global( 'mantis_bug_text_table' ) );
-	print_table_stats( config_get_global( 'mantis_bugnote_table' ) );
-	print_table_stats( config_get_global( 'mantis_bugnote_text_table' ) );
-	print_table_stats( config_get_global( 'mantis_config_table' ) );
-	print_table_stats( config_get_global( 'mantis_custom_field_project_table' ) );
-	print_table_stats( config_get_global( 'mantis_custom_field_string_table' ) );
-	print_table_stats( config_get_global( 'mantis_custom_field_table' ) );
-	print_table_stats( config_get_global( 'mantis_filters_table' ) );
-	print_table_stats( config_get_global( 'mantis_news_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_category_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_file_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_hierarchy_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_user_list_table' ) );
-	print_table_stats( config_get_global( 'mantis_project_version_table' ) );
-	print_table_stats( config_get_global( 'mantis_sponsorship_table' ) );
-	print_table_stats( config_get_global( 'mantis_tokens_table' ) );
-	print_table_stats( config_get_global( 'mantis_user_pref_table' ) );
-	print_table_stats( config_get_global( 'mantis_user_print_pref_table' ) );
-	print_table_stats( config_get_global( 'mantis_user_profile_table' ) );
-	print_table_stats( config_get_global( 'mantis_user_table' ) );
-	print_table_stats( config_get_global( 'mantis_plugin_table' ) );
-	print_table_stats( config_get_global( 'mantis_tag_table' ) );
-	print_table_stats( config_get_global( 'mantis_email_table' ) );
+	foreach( db_get_table_list() as $t_table ) {
+		if( db_table_exists( $t_table ) ) {
+			print_table_stats($t_table);
+		}
+	}
 
 	# echo '</table>';
 	echo '</body></html>';

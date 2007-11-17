@@ -48,7 +48,7 @@
 	$c_username = db_prepare_string( $f_username );
 	$c_email = db_prepare_string( $f_email );
 
-	$t_user_table = config_get_global( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# @@@ Consider moving this query to user_api.php
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param(0) . ' AND email = ' . db_param(1) . ' AND enabled=1';

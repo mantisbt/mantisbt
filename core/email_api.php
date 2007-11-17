@@ -225,7 +225,7 @@
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 		# add users monitoring the bug
-		$t_bug_monitor_table = config_get_global( 'mantis_bug_monitor_table' );
+		$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 		if ( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
 			$query = "SELECT DISTINCT user_id
 					  FROM $t_bug_monitor_table
@@ -246,7 +246,7 @@
 		$t_bugnote_date = db_unixtimestamp( bugnote_get_field( $t_bugnote_id, 'last_modified' ) );
 		$t_bug_date = bug_get_field( $p_bug_id, 'last_updated' );
 
-		$t_bugnote_table = config_get_global( 'mantis_bugnote_table' );
+		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 		if ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
 			$query = "SELECT DISTINCT reporter_id
 					  FROM $t_bugnote_table
@@ -292,7 +292,7 @@
 		} else {
 			$t_pref_field = 'email_on_' . $p_notify_type;
 		}
-		$t_user_pref_table = config_get_global( 'mantis_user_pref_table' );
+		$t_user_pref_table = db_get_table( 'mantis_user_pref_table' );
 		if ( !db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
 			$t_pref_field = false;
 		}

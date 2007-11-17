@@ -118,7 +118,7 @@
 				break;
 		}
 
-		$t_file_table	= config_get_global( 'mantis_' . $p_table . '_file_table' );
+		$t_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 		$c_id = ( 'bug' == $p_table ) ? $c_issue_id : $c_project_id;
 		$query = "INSERT INTO $t_file_table
 						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
@@ -145,13 +145,13 @@
 		$query = '';
 		switch ( $p_type ) {
 			case 'bug':
-				$t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
+				$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 				$query = "SELECT *
 					FROM $t_bug_file_table
 					WHERE id='$p_file_id'";
 				break;
 			case 'doc':
-				$t_project_file_table = config_get_global( 'mantis_project_file_table' );
+				$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 				$query = "SELECT *
 					FROM $t_project_file_table
 					WHERE id='$p_file_id'";

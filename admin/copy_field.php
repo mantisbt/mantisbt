@@ -60,8 +60,8 @@
 	}
 	#@@@ check that source and destination are compatible
 
-	$t_string_table = config_get_global( 'mantis_custom_field_string_table' );
-	$t_bug_table = config_get_global( 'mantis_bug_table' );
+	$t_string_table = db_get_table( 'mantis_custom_field_string_table' );
+	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . $f_source_field_id . ' and value <> \'\'';
 
 	$result = @db_query( $query );

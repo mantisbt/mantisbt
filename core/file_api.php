@@ -60,7 +60,7 @@
 		global $g_cache_file_count;
 
 		$c_bug_id			= db_prepare_int( $p_bug_id );
-		$t_bug_file_table	= config_get_global( 'mantis_bug_file_table' );
+		$t_bug_file_table	= db_get_table( 'mantis_bug_file_table' );
 
 		# First check if we have a cache hit
 		if ( isset( $g_cache_file_count[ $p_bug_id ] ))
@@ -208,7 +208,7 @@
 					( $v_filesize != 0 ) &&
 					( in_array( strtolower( file_get_extension( $t_file_display_name ) ), $t_preview_text_ext, true ) ) ) {
 					$c_id = db_prepare_int( $v_id );
-					$t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
+					$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
 					echo "<script type=\"text/javascript\" language=\"JavaScript\">
 <!--
@@ -287,7 +287,7 @@ document.getElementById( span ).style.display = displayType;
 	function file_delete_attachments( $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
-		$t_bug_file_table = config_get_global( 'mantis_bug_file_table' );
+		$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
 		$t_method = config_get( 'file_upload_method' );
 
@@ -334,7 +334,7 @@ document.getElementById( span ).style.display = displayType;
 	}
 	# --------------------
 	function file_delete_project_files( $p_project_id ) {
-		$t_project_file_table	= config_get_global( 'mantis_project_file_table' );
+		$t_project_file_table	= db_get_table( 'mantis_project_file_table' );
 		$t_method				= config_get( 'file_upload_method' );
 
 		# Delete the file physically (if stored via DISK or FTP)
@@ -424,7 +424,7 @@ document.getElementById( span ).style.display = displayType;
 	function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 		$c_file_id			= db_prepare_int( $p_file_id );
 		$c_field_name		= db_prepare_string( $p_field_name );
-		$t_bug_file_table	= config_get_global( 'mantis_' . $p_table . '_file_table' );
+		$t_bug_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 
 		# get info
 		$query = "SELECT $c_field_name
@@ -460,7 +460,7 @@ document.getElementById( span ).style.display = displayType;
 			history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name ( $t_filename ) );
 		}
 
-		$t_file_table	= config_get_global( 'mantis_' . $p_table . '_file_table' );
+		$t_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 		$query = "DELETE FROM $t_file_table
 				WHERE id='$c_file_id'";
 		db_query( $query );
@@ -531,7 +531,7 @@ document.getElementById( span ).style.display = displayType;
 	# --------------------
 	# Return true if the diskfile name identifier is unique, false otherwise
 	function diskfile_is_name_unique( $p_name , $p_filepath ) {
-		$t_file_table = config_get_global( 'mantis_bug_file_table' );
+		$t_file_table = db_get_table( 'mantis_bug_file_table' );
 
 		$c_name = db_prepare_string( $p_filepath . $p_name );
 
@@ -551,7 +551,7 @@ document.getElementById( span ).style.display = displayType;
 	# --------------------
 	# Return true if the file name identifier is unique, false otherwise
 	function file_is_name_unique( $p_name, $p_bug_id ) {
-		$t_file_table = config_get_global( 'mantis_bug_file_table' );
+		$t_file_table = db_get_table( 'mantis_bug_file_table' );
 
 		$c_name = db_prepare_string( $p_name );
 		$c_bug = db_prepare_string( $p_bug_id );
@@ -675,7 +675,7 @@ document.getElementById( span ).style.display = displayType;
 				trigger_error( ERROR_GENERIC, ERROR );
 		}
 
-		$t_file_table	= config_get_global( 'mantis_' . $p_table . '_file_table' );
+		$t_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 		$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
 					
 		$query = "INSERT INTO $t_file_table

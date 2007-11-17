@@ -253,7 +253,7 @@ function plugin_get_schema( $p_basename ) {
  * @return array Installed plugins
  */
 function plugin_get_installed() {
-	$t_plugin_table = config_get_global( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
 	$t_query = "SELECT * FROM $t_plugin_table";
 	$t_result = db_query( $t_query );
@@ -272,7 +272,7 @@ function plugin_get_installed() {
  * @return array Enabled plugin basenames
  */
 function plugin_get_enabled() {
-	$t_plugin_table = config_get_global( 'mantis_plugin_table' );
+	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
 	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=" . db_param(0);
 	$t_result = db_query_bound( $t_query, Array( 1 ) );
@@ -316,7 +316,7 @@ function plugin_find_all() {
  * @retrun boolean True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	$t_plugin_table	= config_get_global( 'mantis_plugin_table' );
+	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$c_basename 	= db_prepare_string( $p_basename );
 
 	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param(0);
@@ -336,7 +336,7 @@ function plugin_install( $p_basename ) {
 		return null;
 	}
 
-	$t_plugin_table	= config_get_global( 'mantis_plugin_table' );
+	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$t_plugin = plugin_get_info( $p_basename );
 
 	$c_basename = db_prepare_string( $p_basename );
@@ -425,7 +425,7 @@ function plugin_uninstall( $p_basename ) {
 		return;
 	}
 
-	$t_plugin_table	= config_get_global( 'mantis_plugin_table' );
+	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$c_basename = db_prepare_string( $p_basename );
 
 	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param(0);
@@ -439,7 +439,7 @@ function plugin_uninstall( $p_basename ) {
  * Post-signals EVENT_PLUGIN_INIT.
  */
 function plugin_init_all() {
-	if ( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( config_get_global( 'mantis_plugin_table' ) ) ) {
+	if ( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'mantis_plugin_table' ) ) ) {
 		return;
 	}
 

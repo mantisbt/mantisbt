@@ -82,7 +82,7 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		$t_email_table = config_get_global( 'mantis_email_table' );
+		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$c_email = $t_email_data->email;
 		$c_subject = $t_email_data->subject;
@@ -138,7 +138,7 @@
 	# --------------------
 	function email_queue_get( $p_email_id ) {
 		$c_email_id = db_prepare_int( $p_email_id );
-		$t_email_table = config_get_global( 'mantis_email_table' );
+		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$query = "SELECT *
 				  FROM $t_email_table
@@ -153,7 +153,7 @@
 	# --------------------
 	function email_queue_delete( $p_email_id ) {
 		$c_email_id = db_prepare_int( $p_email_id );
-		$t_email_table = config_get_global( 'mantis_email_table' );
+		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$query = "DELETE FROM $t_email_table
 				  WHERE email_id='$c_email_id'";
@@ -162,7 +162,7 @@
 
 	# --------------------
 	function email_queue_get_ids() {
-		$t_email_table = config_get_global( 'mantis_email_table' );
+		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$query = "SELECT email_id
 				  FROM $t_email_table

@@ -367,7 +367,7 @@
 	# --------------------
 	# Return true if the cookie login identifier is unique, false otherwise
 	function auth_is_cookie_string_unique( $p_cookie_string ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_user_table
@@ -409,7 +409,7 @@
 				if ( $g_cache_anonymous_user_cookie_string === null ) {
                     if ( function_exists( 'db_is_connected' ) && db_is_connected() ) { 
                         # get anonymous information if database is available
-                        $query = 'SELECT id, cookie_string FROM ' . config_get_global( 'mantis_user_table' ) . ' WHERE username = ' . db_param(0);
+                        $query = 'SELECT id, cookie_string FROM ' . db_get_table( 'mantis_user_table' ) . ' WHERE username = ' . db_param(0);
                         $result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
                         
                         if ( 1 == db_num_rows( $result ) ) {
@@ -573,7 +573,7 @@
 		}
 		
 		# look up cookie in the database to see if it is valid
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "SELECT id
 				  FROM $t_user_table
@@ -597,7 +597,7 @@
 			return $g_cache_current_user_id;
 		}
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$t_cookie_string = auth_get_current_user_cookie();
 

@@ -63,8 +63,8 @@
 		exit();
 	}
 	
-	$t_bug_table			= config_get_global( 'mantis_bug_table' );
-	$t_bug_hist_table			= config_get_global( 'mantis_bug_history_table' );
+	$t_bug_table			= db_get_table( 'mantis_bug_table' );
+	$t_bug_hist_table			= db_get_table( 'mantis_bug_history_table' );
 
 	$t_marker = array();
 	$t_data = array();

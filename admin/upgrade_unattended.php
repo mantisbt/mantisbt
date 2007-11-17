@@ -71,9 +71,9 @@
 	# check to see if the new installer was used
 	if ( -1 == config_get( 'database_version', -1 ) ) {
 		# Old database detected: run the old style upgrade set
-		if ( ! db_table_exists( config_get_global( 'mantis_upgrade_table' ) ) ) {
+		if ( ! db_table_exists( db_get_table( 'mantis_upgrade_table' ) ) ) {
 			# Create the upgrade table if it does not exist
-			$query = "CREATE TABLE " . config_get_global( 'mantis_upgrade_table' ) .
+			$query = "CREATE TABLE " . db_get_table( 'mantis_upgrade_table' ) .
 				"(upgrade_id char(20) NOT NULL,
 				description char(255) NOT NULL,
 				PRIMARY KEY (upgrade_id))";

@@ -66,7 +66,7 @@
 	$c_user_id			= db_prepare_int( $f_user_id );
 	$c_access_level	= db_prepare_int( $f_access_level );
 
-	$t_user_table = config_get_global( 'mantis_user_table' );
+	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$t_old_protected = user_get_field( $f_user_id, 'protected' );
 	

@@ -50,7 +50,7 @@
 			return $g_cache_user[$p_user_id];
 		}
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_table
@@ -134,7 +134,7 @@
 	function user_is_name_unique( $p_username ) {
 		$c_username = db_prepare_string( $p_username );
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "SELECT username
 				FROM $t_user_table
@@ -174,7 +174,7 @@
 			}
 
 			# check to see if the realname is unique
-			$t_user_table 		= config_get_global( 'mantis_user_table' );
+			$t_user_table 		= db_get_table( 'mantis_user_table' );
 			$query = "SELECT id
 				FROM $t_user_table
 				WHERE realname=" . db_param(0);
@@ -252,7 +252,7 @@
 		$c_user_id	= db_prepare_int( $p_user_id );
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 
-		$t_bug_monitor_table = config_get_global( 'mantis_bug_monitor_table' );
+		$t_bug_monitor_table = db_get_table( 'mantis_bug_monitor_table' );
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_monitor_table
@@ -311,7 +311,7 @@
 	# count the number of users at or greater than a specific level
 	function user_count_level( $p_level=ANYBODY ) {
 		$t_level = db_prepare_int( $p_level );
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 		$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param(0);
 		$result = db_query_bound( $query, Array( $t_level ) );
 
@@ -340,7 +340,7 @@
 		$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) -1 * $t_session_duration_in_minutes, date("s"), date("m"), date("d"),  date("Y") );
 		$c_last_timestamp_threshold = date( "Y-m-d H:i:s" , $t_last_timestamp_threshold );
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		# Execute query
 		$query = "SELECT id FROM $t_user_table WHERE last_visit > '$c_last_timestamp_threshold'";
@@ -385,7 +385,7 @@
 
 		$t_seed				= $p_email . $p_username;
 		$t_cookie_string	= auth_generate_unique_cookie_string( $t_seed );
-		$t_user_table 		= config_get_global( 'mantis_user_table' );
+		$t_user_table 		= db_get_table( 'mantis_user_table' );
 
 		$query = "INSERT INTO $t_user_table
 				    ( username, email, password, date_created, last_visit,
@@ -463,7 +463,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_project_user_list_table 	= config_get_global('mantis_project_user_list_table');
+		$t_project_user_list_table 	= db_get_table('mantis_project_user_list_table');
 
 		$query = "DELETE FROM $t_project_user_list_table
 				  WHERE user_id=" . db_param(0);
@@ -482,7 +482,7 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_profile_table = config_get_global('mantis_user_profile_table');
+		$t_user_profile_table = db_get_table('mantis_user_profile_table');
 
 		# Remove associated profiles
 		$query = "DELETE FROM $t_user_profile_table
@@ -499,7 +499,7 @@
 	# returns true when the account was successfully deleted
 	function user_delete( $p_user_id ) {
 		$c_user_id 					= db_prepare_int($p_user_id);
-		$t_user_table = config_get_global('mantis_user_table');
+		$t_user_table = db_get_table('mantis_user_table');
 
 		user_ensure_unprotected( $p_user_id );
 
@@ -548,7 +548,7 @@
 	# get a user id from a username
 	#  return false if the username does not exist
 	function user_get_id_by_name( $p_username ) {
-		$t_user_table	= config_get_global( 'mantis_user_table' );
+		$t_user_table	= db_get_table( 'mantis_user_table' );
 
 		$query = "SELECT id
 				  FROM $t_user_table
@@ -708,9 +708,9 @@
 			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
 		} else {
 
-			$t_project_table			= config_get_global( 'mantis_project_table' );
-			$t_project_user_list_table	= config_get_global( 'mantis_project_user_list_table' );
-			$t_project_hierarchy_table	= config_get_global( 'mantis_project_hierarchy_table' );
+			$t_project_table			= db_get_table( 'mantis_project_table' );
+			$t_project_user_list_table	= db_get_table( 'mantis_project_user_list_table' );
+			$t_project_hierarchy_table	= db_get_table( 'mantis_project_hierarchy_table' );
 
 			$t_public	= VS_PUBLIC;
 			$t_private	= VS_PRIVATE;
@@ -779,9 +779,9 @@
 			}
 		}
 
-		$t_project_table			= config_get_global( 'mantis_project_table' );
-		$t_project_user_list_table	= config_get_global( 'mantis_project_user_list_table' );
-		$t_project_hierarchy_table	= config_get_global( 'mantis_project_hierarchy_table' );
+		$t_project_table			= db_get_table( 'mantis_project_table' );
+		$t_project_user_list_table	= db_get_table( 'mantis_project_user_list_table' );
+		$t_project_hierarchy_table	= db_get_table( 'mantis_project_hierarchy_table' );
 
 		$t_public	= VS_PUBLIC;
 		$t_private	= VS_PRIVATE;
@@ -861,7 +861,7 @@
 	# --------------------
 	# return the number of open assigned bugs to a user in a project
 	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
-		$t_bug_table	= config_get_global('mantis_bug_table');
+		$t_bug_table	= db_get_table('mantis_bug_table');
 
 		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
 
@@ -880,7 +880,7 @@
 	# --------------------
 	# return the number of open reported bugs by a user in a project
 	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
-		$t_bug_table	= config_get_global('mantis_bug_table');
+		$t_bug_table	= db_get_table('mantis_bug_table');
 
 		$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . " AND";
 
@@ -902,7 +902,7 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_profile_id	= db_prepare_int( $p_profile_id );
 
-		$t_user_profile_table = config_get_global( 'mantis_user_profile_table' );
+		$t_user_profile_table = db_get_table( 'mantis_user_profile_table' );
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
@@ -974,7 +974,7 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 		$c_value = db_now();
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 		
 		$query = "UPDATE $t_user_table
 				  SET last_visit= " . $c_value . "
@@ -992,7 +992,7 @@
 	# Increment the number of times the user has logegd in
 	# This function is only called from the login.php script
 	function user_increment_login_count( $p_user_id ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET login_count=login_count+1
@@ -1009,7 +1009,7 @@
 	# --------------------
 	# Reset to zero the failed login attempts
 	function user_reset_failed_login_count_to_zero( $p_user_id ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=0
@@ -1024,7 +1024,7 @@
 	# --------------------
 	# Increment the failed login count by 1
 	function user_increment_failed_login_count( $p_user_id ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET failed_login_count=failed_login_count+1
@@ -1039,7 +1039,7 @@
 	# --------------------
 	# Reset to zero the 'lost password' in progress attempts
 	function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=0
@@ -1054,7 +1054,7 @@
 	# --------------------
 	# Increment the failed login count by 1
 	function user_increment_lost_password_in_progress_count( $p_user_id ) {
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				SET lost_password_request_count=lost_password_request_count+1
@@ -1077,7 +1077,7 @@
 			user_ensure_unprotected( $p_user_id );
 		}
 
-		$t_user_table = config_get_global( 'mantis_user_table' );
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
 				  SET $c_field_name=" . db_param(0) . "
@@ -1114,7 +1114,7 @@
 
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_password		= db_prepare_string( auth_process_plain_password( $p_password ) );
-		$c_user_table	= config_get_global( 'mantis_user_table' );
+		$c_user_table	= db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $c_user_table
 				  SET password=" . db_param(0) . ",

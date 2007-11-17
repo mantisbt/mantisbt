@@ -250,7 +250,7 @@
 	}
 
 	function cfdef_prepare_list_distinct_values($p_field_def) {
-		$t_custom_field_table = config_get_global( 'mantis_custom_field_table' );
+		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 
 		$query = "SELECT possible_values
 				  FROM $t_custom_field_table

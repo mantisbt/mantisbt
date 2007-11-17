@@ -346,7 +346,7 @@
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
 
-		$t_bug_table = config_get_global( 'mantis_bug_table' );
+		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 		$c_summary = db_prepare_string( $p_summary );
 
@@ -863,7 +863,7 @@
  			relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
  			// The above function call into Mantis doesn't seem to return a valid BugRelationshipData object.
  			// So we call db_insert_id in order to find the id of the created relationship.
- 			$t_relationship_id = db_insert_id( config_get_global( 'mantis_bug_relationship_table' ) );
+ 			$t_relationship_id = db_insert_id( db_get_table( 'mantis_bug_relationship_table' ) );
  			
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_issue_id, BUG_ADD_RELATIONSHIP, $t_rel_type['id'], $t_dest_issue_id );

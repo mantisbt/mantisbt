@@ -94,7 +94,7 @@
 		}
 
 		if ( !in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
-			$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+			$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 			$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
@@ -128,7 +128,7 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		if ( !in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
-			$t_project_user_list_table = config_get_global( 'mantis_project_user_list_table' );
+			$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
 			$query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
