@@ -544,10 +544,10 @@
 
 		$query = "SELECT id, username, realname, access_level
 				FROM $t_user_table
-				WHERE enabled = $t_on
+				WHERE enabled = " . db_param(0) . "
 					AND access_level $t_global_access_clause";
 
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $t_on ) );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
@@ -559,10 +559,10 @@
 			$query = "SELECT u.id, u.username, u.realname, l.access_level
 				FROM $t_project_user_list_table l, $t_user_table u
 				WHERE l.user_id = u.id
-				AND u.enabled = $t_on
-				AND l.project_id = $c_project_id";
+				AND u.enabled = " . db_param(0) . "
+				AND l.project_id = " . db_param(1);
 
-			$result = db_query( $query );
+			$result = db_query_bound( $query, Array( $t_on, $c_project_id ) );
 			$t_row_count = db_num_rows( $result );
 			for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 				$row = db_fetch_array( $result );
