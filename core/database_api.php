@@ -200,7 +200,7 @@
 		global $g_queries_array, $g_db, $g_db_log_queries;
 
 		if ( ON == $g_db_log_queries ) {		
-			$t_db_type = config_get( 'db_type' );
+			$t_db_type = config_get_global( 'db_type' );
 
 			$t_start = microtime_float();
 			
