@@ -111,7 +111,7 @@
 	# --------------------
 	# Checks if the database is MySQL
 	function db_is_mysql() {
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'mysql':
@@ -125,7 +125,7 @@
 	# --------------------
 	# Check is the database is PostgreSQL
 	function db_is_pgsql() {
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'postgres':
@@ -141,7 +141,7 @@
 	# --------------------
 	# Check is the database is DB2
 	function db_is_db2() {
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'db2':
@@ -474,7 +474,7 @@
 	# @@@ Consider using ADODB escaping for all databases.
 	function db_prepare_string( $p_string ) {
 		global $g_db;
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'mssql':
@@ -522,7 +522,7 @@
 	# --------------------
 	# prepare a binary string before DB insertion
 	function db_prepare_binary_string( $p_string ) {
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'mssql':
@@ -727,7 +727,7 @@
 	# limitstring can be '> 1' '<= 2 ' etc
 	# @@@ Check if there is a way to do that using ADODB rather than implementing it here.
 	function db_helper_compare_days($p_date1, $p_date2, $p_limitstring) {
-		$t_db_type = config_get( 'db_type' );
+		$t_db_type = config_get_global( 'db_type' );
 
 		switch( $t_db_type ) {
 			case 'mssql':
