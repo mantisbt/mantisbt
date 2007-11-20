@@ -424,7 +424,7 @@
 
 	# --------------------
 	# print a news item given a row in the news table.
-        function print_news_entry_from_row( $p_news_row ) {
+      function print_news_entry_from_row( $p_news_row ) {
 		extract( $p_news_row, EXTR_PREFIX_ALL, 'v' );
 		print_news_entry( $v_headline, $v_body, $v_poster_id, $v_view_state, $v_announcement, $v_date_posted );
 	}
@@ -673,12 +673,14 @@
 			PRINT ">$v_name</option>";
 		} # end for
 	}
+
 	# --------------------
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_option_list( $p_category='', $p_project_id = null ) {
-		$t_mantis_project_category_table = db_get_table( 'mantis_project_category_table' );
+	function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
@@ -690,81 +692,61 @@
 
 		# grab all categories in the project category table
 		$cat_arr = array();
-		$query = "SELECT DISTINCT category
-				FROM $t_mantis_project_category_table
+		$query = "SELECT id,name FROM $t_category_table
 				WHERE $t_project_where
-				ORDER BY category";
+				ORDER BY name";
 		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-		for ($i=0;$i<$category_count;$i++) {
-			$row = db_fetch_array( $result );
-			$cat_arr[] = string_attribute( $row['category'] );
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$cat_arr[$row['id']] = $row['name'];
 		}
+		asort($cat_arr);
 
-		# Add the default option if not in the list retrieved from DB		
-		# This is useful for default categories and when updating an
-		# issue with a deleted category.
-		if ( !is_blank( $p_category ) && !in_array( $p_category, $cat_arr ) ) {
-			$cat_arr[] = $p_category;
-		}
-
-		sort( $cat_arr );
-		$cat_arr = array_unique( $cat_arr );
-
-		foreach( $cat_arr as $t_category ) {
-			PRINT "<option value=\"$t_category\"";
-			check_selected( $t_category, $p_category );
-			PRINT ">$t_category</option>";
+		foreach( $cat_arr as $t_category_id => $t_name ) {
+			PRINT "<option value=\"$t_category_id\"";
+			check_selected( $p_category_id, $t_category_id );
+			PRINT ">$t_name</option>";
 		}
 	}
 	# --------------------
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_complete_option_list( $p_category='', $p_project_id = null ) {
-		$t_mantis_project_category_table = db_get_table( 'mantis_project_category_table' );
-		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
+	function print_category_complete_option_list( $p_category_id = 0, $p_project_id = null ) {
+		return print_category_option_list( $p_category_id, $p_project_id );
+	}
+
+	# ---------
+	# Now that categories are identified by numerical ID, we need an old-style name
+	# based option list to keep existing filter functionality.
+	function print_category_filter_option_list( $p_category_name = '', $p_project_id = null ) {
+		$t_category_table = config_get( 'mantis_category_table' );
+		$t_project_table = config_get( 'mantis_project_table' );
 
 		if ( null === $p_project_id ) {
-			$t_project_id = helper_get_current_project();
+			$c_project_id = helper_get_current_project();
 		} else {
-			$t_project_id = $p_project_id;
+			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
-		$t_project_where = helper_project_specific_where( $t_project_id );
+		$t_project_where = helper_project_specific_where( $c_project_id );
 
 		# grab all categories in the project category table
 		$cat_arr = array();
-		$query = "SELECT DISTINCT category
-				FROM $t_mantis_project_category_table
+		$query = "SELECT DISTINCT name FROM $t_category_table
 				WHERE $t_project_where
-				ORDER BY category";
+				ORDER BY name";
 		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-		for ($i=0;$i<$category_count;$i++) {
-			$row = db_fetch_array( $result );
-			$cat_arr[] = string_attribute( $row['category'] );
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$cat_arr[] = $row['name'];
 		}
+		sort($cat_arr);
 
-		# grab all categories in the bug table
-		$query = "SELECT DISTINCT category
-				FROM $t_mantis_bug_table
-				WHERE $t_project_where
-				ORDER BY category";
-		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-
-		for ($i=0;$i<$category_count;$i++) {
-			$row = db_fetch_array( $result );
-			$cat_arr[] = string_attribute( $row['category'] );
-		}
-		sort( $cat_arr );
-		$cat_arr = array_unique( $cat_arr );
-
-		foreach( $cat_arr as $t_category ) {
-			PRINT "<option value=\"$t_category\"";
-			check_selected( $p_category, $t_category );
-			PRINT ">$t_category</option>";
+		foreach( $cat_arr as $t_name ) {
+			PRINT "<option value=\"$t_name\"";
+			check_selected( $p_category_name, $t_name );
+			PRINT ">$t_name</option>";
 		}
 	}
 	
@@ -1257,26 +1239,26 @@
 	}
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
-		$t_mantis_project_category_table = db_get_table( 'mantis_project_category_table' );
+		$t_mantis_category_table = db_get_table( 'mantis_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$query = "SELECT category
-				FROM $t_mantis_project_category_table
-				WHERE project_id=" . db_param(0) . "
-				ORDER BY category";
-		$result = db_query_bound( $query, Array( $c_project_id ) );
+		$query = "SELECT name
+				FROM $t_mantis_category_table
+				WHERE project_id='$c_project_id'
+				ORDER BY name";
+		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
 		$t_string = '';
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_category = $row['category'];
+			$t_name = $row['name'];
 
 			if ( $i+1 < $category_count ) {
-				$t_string .= $t_category.', ';
+				$t_string .= $t_name.', ';
 			} else {
-				$t_string .= $t_category;
+				$t_string .= $t_name;
 			}
 		}
 
@@ -1500,7 +1482,7 @@
 		}
 		print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
 
-    	print( " ]" );
+  	print( " ]" );
 	}
 	# --------------------
 	# print a mailto: href link

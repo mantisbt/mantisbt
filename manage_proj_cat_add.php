@@ -30,25 +30,25 @@
 	auth_reauthenticate();
 
 	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_category		= gpc_get_string( 'category' );
+	$f_name			= gpc_get_string( 'name' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	if ( is_blank( $f_category ) ) {
+	if ( is_blank( $f_name ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_categories = explode( '|', $f_category );
-	$t_category_count = count( $t_categories );
+	$t_names = explode( '|', $f_name );
+	$t_category_count = count( $t_names );
 
-	foreach ( $t_categories as $t_category ) {
-		if ( is_blank( $t_category ) ) {
+	foreach ( $t_names as $t_name ) {
+		if ( is_blank( $t_name ) ) {
 			continue;
 		}
 
-		$t_category = trim( $t_category );
-		if ( category_is_unique( $f_project_id, $t_category ) ) {
-			category_add( $f_project_id, $t_category );
+		$t_name = trim( $t_name );
+		if ( category_is_unique( $f_project_id, $t_name ) ) {
+			category_add( $f_project_id, $t_name );
 		} else if ( 1 == $t_category_count ) {
 			# We only error out on duplicates when a single value was
 			#  given.  If multiple values were given, we just add the

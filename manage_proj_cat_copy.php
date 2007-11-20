@@ -50,10 +50,10 @@
 	$rows = category_get_all_rows( $t_src_project_id );
 
 	foreach ( $rows as $row ) {
-		$t_category = $row['category'];
+		$t_name = $row['name'];
 
-		if ( category_is_unique( $t_dst_project_id, $t_category ) ) {
-			category_add( $t_dst_project_id, $t_category );
+		if ( category_is_unique( $t_dst_project_id, $t_name ) ) {
+			category_add( $t_dst_project_id, $t_name );
 		}
 	}
 

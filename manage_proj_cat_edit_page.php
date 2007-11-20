@@ -29,13 +29,14 @@
 
 	auth_reauthenticate();
 
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_category		= gpc_get_string( 'category' );
+	$f_category_id		= gpc_get_string( 'id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	$t_row = category_get_row( $f_project_id, $f_category );
+	$t_row = category_get_row( $f_category_id );
 	$t_assigned_to = $t_row['user_id'];
+	$t_project_id = $t_row['project_id'];
+	$t_name = $t_row['name'];
 	
 	html_page_top1();
 	html_page_top2();
@@ -54,12 +55,11 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-		<input type="hidden" name="category" value="<?php echo string_attribute( $f_category ) ?>" />
+		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td>
-		<input type="text" name="new_category" size="32" maxlength="64" value="<?php echo string_attribute( $f_category ) ?>" />
+		<input type="text" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -69,7 +69,7 @@
 	<td>
 		<select name="assigned_to">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_assigned_to, $f_project_id ) ?>
+			<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
 		</select>
 	</td>
 </tr>
@@ -89,8 +89,7 @@
 
 <div class="border-center">
 	<form method="post" action="manage_proj_cat_delete.php">
-		<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-		<input type="hidden" name="category" value="<?php echo string_attribute( $f_category ) ?>" />
+		<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 		<input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 </div>

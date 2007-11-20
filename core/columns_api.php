@@ -534,7 +534,7 @@
 			echo ']</small><br />';
 		}
 
-		echo string_display( $p_row['category'] );
+		echo string_display( category_full_name( $p_row['category_id'], false ) );
 		echo '</td>';
 	}
 

@@ -684,9 +684,6 @@
 	# Default bug reproducibility when reporting a new bug
 	$g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
 
-	# Default bug category when reporting a new bug
-	$g_default_bug_category = '';
-
 	# --- viewing defaults ------------
 	# site defaults for viewing preferences
 	$g_default_limit_view	= 50;
@@ -1370,6 +1367,7 @@
 	$g_db_table['mantis_bug_text_table']				= '%db_table_prefix%_bug_text%db_table_suffix%';
 	$g_db_table['mantis_bugnote_table']					= '%db_table_prefix%_bugnote%db_table_suffix%';
 	$g_db_table['mantis_bugnote_text_table']			= '%db_table_prefix%_bugnote_text%db_table_suffix%';
+	$g_db_table['mantis_category_table']				= '%db_table_prefix%_category%db_table_suffix%';
 	$g_db_table['mantis_news_table']					= '%db_table_prefix%_news%db_table_suffix%';
 	$g_db_table['mantis_plugin_table']					= '%db_table_prefix%_plugin%db_table_suffix%';
 	$g_db_table['mantis_project_category_table']		= '%db_table_prefix%_project_category%db_table_suffix%';

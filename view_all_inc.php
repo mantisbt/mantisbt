@@ -43,6 +43,9 @@
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 
+	# Improve performance by caching category data in one pass
+	category_get_all_rows( helper_get_current_project() );
+
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
 
 	$col_count = sizeof( $t_columns );

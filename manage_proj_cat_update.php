@@ -29,29 +29,28 @@
 
 	auth_reauthenticate();
 
-	$f_project_id		= gpc_get_int( 'project_id' );
-	$f_category			= gpc_get_string( 'category' );
-	$f_new_category		= gpc_get_string( 'new_category' );
+	$f_category_id		= gpc_get_int( 'category_id' );
+	$f_name				= trim( gpc_get_string( 'name' ) );
 	$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	if ( is_blank( $f_new_category ) ) {
+	if ( is_blank( $f_name ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$f_category		= trim( $f_category );
-	$f_new_category	= trim( $f_new_category );
+	$t_row = category_get_row( $f_category_id );
+	$t_old_name = $t_row['name'];
+	$t_project_id = $t_row['project_id'];
 
 	# check for duplicate
-	if ( strtolower( $f_category ) == strtolower( $f_new_category ) ||
-		 category_is_unique( $f_project_id, $f_new_category ) ) {
-		category_update( $f_project_id, $f_category, $f_new_category, $f_assigned_to );
-	} else {
-		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
+	if ( strtolower( $f_name ) != strtolower( $t_old_name ) ) {
+		category_ensure_unique( $t_project_id, $f_name );
 	}
+	
+	category_update( $f_category_id, $f_name, $f_assigned_to );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id;
 
 	html_page_top1();
 

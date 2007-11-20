@@ -302,7 +302,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	}
 
 	foreach ( $t_categories as $t_category ) {
-		$t_name = $t_category['category'];
+		$t_id = $t_category['id'];
+		$t_name = $t_category['name'];
 
 		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
 			$t_user_name = user_get_name( $t_category['user_id'] );
@@ -320,11 +321,11 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			</td>
 			<td class="center">
 				<?php
-					$t_name = urlencode( $t_name );
+					$t_id = urlencode( $t_id );
 
-					print_button( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'edit_link' ) );
+					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -337,7 +338,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="text" name="category" size="32" maxlength="64" />
+			<input type="text" name="name" size="32" maxlength="128" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
 		</form>
 	</td>

@@ -67,7 +67,7 @@
 	$t_bug_data->status				= gpc_get_int( 'status', $t_bug_data->status );
 	$t_bug_data->resolution			= gpc_get_int( 'resolution', $t_bug_data->resolution );
 	$t_bug_data->projection			= gpc_get_int( 'projection', $t_bug_data->projection );
-	$t_bug_data->category			= gpc_get_string( 'category', $t_bug_data->category );
+	$t_bug_data->category_id		= gpc_get_int( 'category_id', $t_bug_data->category_id );
 	$t_bug_data->eta				= gpc_get_int( 'eta', $t_bug_data->eta );
 	$t_bug_data->os					= gpc_get_string( 'os', $t_bug_data->os );
 	$t_bug_data->os_build			= gpc_get_string( 'os_build', $t_bug_data->os_build );

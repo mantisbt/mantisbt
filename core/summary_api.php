@@ -547,6 +547,7 @@
 	# print a bug count per category
 	function summary_print_by_category() {
 		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
+		$t_mantis_category_table = db_get_table( 'mantis_category_table' );
 		$t_mantis_project_table = db_get_table( 'mantis_project_table' );
 		$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
@@ -559,15 +560,17 @@
 		}
 		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'project_id, ' : '';
 
-		$query = "SELECT COUNT(id) as bugcount, $t_project_query category, status
+		$query = "SELECT COUNT(id) as bugcount, $t_project_query c.name AS category_name, c.id AS category_id, status
 				FROM $t_mantis_bug_table
-				WHERE category>'' AND $specific_where
-				GROUP BY $t_project_query category, status
-				ORDER BY $t_project_query category, status";
+				JOIN $t_mantis_category_table AS c ON category_id=c.id
+				WHERE $specific_where
+				GROUP BY $t_project_query category_id, category_name, status
+				ORDER BY $t_project_query category_id, category_name, status";
 
 		$result = db_query( $query );
 
-		$last_category = -1;
+		$last_category_name = -1;
+		$last_category_id = -1;
 		$last_project = -1;
 		$t_bugs_open = 0;
 		$t_bugs_resolved = 0;
@@ -580,13 +583,13 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( ( $v_category != $last_category ) && ( $last_category != -1 ) ) {
-				$label = $last_category;
+			if ( ( $v_category_id != $last_category_id ) && ( $last_category_id != -1 ) ) {
+				$label = $last_category_name;
 				if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 					$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 				}
 
-				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category );
+				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_id );
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
 				}
@@ -617,19 +620,20 @@
 				$t_bugs_open += $row['bugcount'];
 			}
 
-			$last_category = $v_category;
+			$last_category_id = $v_category_id;
+			$last_category_name = $v_category_name;
 			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 				$last_project = $v_project_id;
 			}
 		}
 
 		if ( 0 < $t_bugs_total ) {
-			$label = $last_category;
+			$label = $last_category_name;
 			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
 			}
 
-			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category );
+			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . urlencode( $last_category_id );
 			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';

@@ -52,7 +52,7 @@
 		var $status = NEW_;
 		var $resolution = OPEN;
 		var $projection = 10;
-		var $category = '';
+		var $category_id = 1;
 		var $date_submitted = '';
 		var $last_updated = '';
 		var $eta = 10;
@@ -381,7 +381,7 @@
 		$c_priority				= db_prepare_int( $p_bug_data->priority );
 		$c_severity				= db_prepare_int( $p_bug_data->severity );
 		$c_reproducibility		= db_prepare_int( $p_bug_data->reproducibility );
-		$c_category				= db_prepare_string( $p_bug_data->category );
+		$c_category_id			= db_prepare_int( $p_bug_data->category_id );
 		$c_os					= db_prepare_string( $p_bug_data->os );
 		$c_os_build				= db_prepare_string( $p_bug_data->os_build );
 		$c_platform				= db_prepare_string( $p_bug_data->platform );
@@ -406,11 +406,6 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 		
-		if ( is_blank( $c_category ) ) {
-			error_parameters( lang_get( 'category' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-
 		# Only set target_version if user has access to do so
 		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$c_target_version	= db_prepare_string( $p_bug_data->target_version );
@@ -420,7 +415,7 @@
 
 		$t_bug_table				= db_get_table( 'mantis_bug_table' );
 		$t_bug_text_table			= db_get_table( 'mantis_bug_text_table' );
-		$t_project_category_table	= db_get_table( 'mantis_project_category_table' );
+		$t_category_table			= db_get_table( 'mantis_category_table' );
 
 		# Insert text information
 		$query = "INSERT INTO $t_bug_text_table
@@ -443,9 +438,9 @@
 			# if a default user is associated with the category and we know at this point
 			# that that the bug was not assigned to somebody, then assign it automatically.
 			$query = "SELECT user_id
-					  FROM $t_project_category_table
-					  WHERE project_id=" .db_param(0) . " AND category=" . db_param(1);
-			$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
+					  FROM $t_category_table
+					  WHERE project_id=" . db_param(0) . ' AND id=' . db_param(1);
+			$result = db_query_bound( $query, array( $c_project_id, $c_category_id ) );
 
 			if ( db_num_rows( $result ) > 0 ) {
 				$c_handler_id = $p_handler_id = db_result( $result );
@@ -466,7 +461,7 @@
 				      duplicate_id, priority,
 				      severity, reproducibility,
 				      status, resolution,
-				      projection, category,
+				      projection, category_id,
 				      date_submitted, last_updated,
 				      eta, bug_text_id,
 				      os, os_build,
@@ -481,7 +476,7 @@
 				      '0', '$c_priority',
 				      '$c_severity', '$c_reproducibility',
 				      '$t_status', '$t_resolution',
-				      10, '$c_category',
+				      10, '$c_category_id',
 				      " . db_now() . "," . db_now() . ",
 				      10, '$t_text_id',
 				      '$c_os', '$c_os_build',
@@ -782,8 +777,8 @@
 
 		$query = "SELECT id
 				  FROM $t_bug_table
-				  WHERE project_id='$c_project_id'";
-		$result = db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		$result = db_query_bound( $query, array( $c_project_id ) );
 
 		$bug_count = db_num_rows( $result );
 
@@ -845,7 +840,7 @@
 					status='$c_bug_data->status',
 					resolution='$c_bug_data->resolution',
 					projection='$c_bug_data->projection',
-					category='$c_bug_data->category',
+					category_id='$c_bug_data->category_id',
 					eta='$c_bug_data->eta',
 					os='$c_bug_data->os',
 					os_build='$c_bug_data->os_build',
@@ -882,7 +877,7 @@
 		history_log_event_direct( $p_bug_id, 'status', $t_old_data->status, $p_bug_data->status );
 		history_log_event_direct( $p_bug_id, 'resolution', $t_old_data->resolution, $p_bug_data->resolution );
 		history_log_event_direct( $p_bug_id, 'projection', $t_old_data->projection, $p_bug_data->projection );
-		history_log_event_direct( $p_bug_id, 'category', $t_old_data->category, $p_bug_data->category );
+		history_log_event_direct( $p_bug_id, 'category', category_full_name( $t_old_data->category_id, false ), category_full_name( $p_bug_data->category_id, false ) );
 		history_log_event_direct( $p_bug_id, 'eta',	$t_old_data->eta, $p_bug_data->eta );
 		history_log_event_direct( $p_bug_id, 'os', $t_old_data->os, $p_bug_data->os );
 		history_log_event_direct( $p_bug_id, 'os_build', $t_old_data->os_build, $p_bug_data->os_build );
@@ -1457,7 +1452,7 @@
 		$t_bug_data->status				= db_prepare_int( $p_bug_data->status );
 		$t_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
 		$t_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
-		$t_bug_data->category			= db_prepare_string( $p_bug_data->category );
+		$t_bug_data->category_id		= db_prepare_int( $p_bug_data->category_id );
 		$t_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
 		$t_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
 		$t_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
@@ -1484,7 +1479,7 @@
 	# Return a copy of the bug structure with all the instvars prepared for editing
 	#  in an HTML form
 	function bug_prepare_edit( $p_bug_data ) {
-		$p_bug_data->category			= string_attribute( $p_bug_data->category );
+		$p_bug_data->category_id		= string_attribute( $p_bug_data->category_id );
 		$p_bug_data->date_submitted		= string_attribute( $p_bug_data->date_submitted );
 		$p_bug_data->last_updated		= string_attribute( $p_bug_data->last_updated );
 		$p_bug_data->os					= string_attribute( $p_bug_data->os );
@@ -1508,7 +1503,7 @@
 	# Return a copy of the bug structure with all the instvars prepared for editing
 	#  in an HTML form
 	function bug_prepare_display( $p_bug_data ) {
-		$p_bug_data->category			= string_display_line( $p_bug_data->category );
+		$p_bug_data->category_id		= string_display_line( $p_bug_data->category_id );
 		$p_bug_data->date_submitted		= string_display_line( $p_bug_data->date_submitted );
 		$p_bug_data->last_updated		= string_display_line( $p_bug_data->last_updated );
 		$p_bug_data->os					= string_display_line( $p_bug_data->os );

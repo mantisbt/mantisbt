@@ -413,6 +413,7 @@
 		$t_bug_table			= db_get_table( 'mantis_bug_table' );
 		$t_bug_text_table		= db_get_table( 'mantis_bug_text_table' );
 		$t_bugnote_table		= db_get_table( 'mantis_bugnote_table' );
+		$t_category_table		= db_get_table( 'mantis_category_table' );
 		$t_custom_field_string_table	= db_get_table( 'mantis_custom_field_string_table' );
 		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
 		$t_project_table		= db_get_table( 'mantis_project_table' );
@@ -696,9 +697,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
-				$t_filter_member = stripslashes( $t_filter_member );
 				if ( META_FILTER_NONE == $t_filter_member ) {
-					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_category = db_prepare_string( $t_filter_member );
 					array_push( $t_clauses, "'$c_show_category'" );
@@ -706,9 +705,9 @@
 			}
 
 			if ( 1 < count( $t_clauses ) ) {
-				array_push( $t_where_clauses, "( $t_bug_table.category in (". implode( ', ', $t_clauses ) .") )" );
+				array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name in (". implode( ', ', $t_clauses ) .") ) )" );
 			} else {
-				array_push( $t_where_clauses, "( $t_bug_table.category=$t_clauses[0] )" );
+				array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name=$t_clauses[0] ) )" );
 			}
 		}
 
@@ -1765,13 +1764,11 @@
 								} else {
 									$t_first_flag = true;
 									foreach( $t_filter['show_category'] as $t_current ) {
-										$t_current = stripslashes( $t_current );
 										?>
-										<input type="hidden" name="show_category[]" value="<?php echo string_display( $t_current );?>" />
+										<input type="hidden" name="show_category[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) 
-												|| ( is_blank( $t_current ) ) ) {
+										if ( is_blank( $t_current ) || $t_current === "0" || $t_current === META_FILTER_ANY ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = string_display( $t_current );
@@ -3334,8 +3331,7 @@
 		<!-- Category -->
 		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
 			<option value="<?php echo META_FILTER_ANY ?>" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<?php # This shows orphaned categories as well as selectable categories ?>
-			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
+			<?php print_category_filter_option_list( $t_filter['show_category'] ) ?>
 		</select>
 		<?php
 	}

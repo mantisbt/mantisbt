@@ -73,7 +73,7 @@
 	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	    $f_product_version		= $t_bug->version;
-		$f_category				= $t_bug->category;
+		$f_category_id			= $t_bug->category_id;
 		$f_reproducibility		= $t_bug->reproducibility;
 		$f_severity				= $t_bug->severity;
 		$f_priority				= $t_bug->priority;
@@ -87,7 +87,7 @@
 	    access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 		$f_product_version		= gpc_get_string( 'product_version', '' );
-		$f_category				= gpc_get_string( 'category', config_get( 'default_bug_category' ) );
+		$f_category_id			= gpc_get_int( 'category_id', 0 );
 		$f_reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
 		$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
 		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
@@ -143,13 +143,13 @@
 		<?php if ( $t_changed_project ) {
 			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 		} ?>
-		<select <?php echo helper_get_tab_index() ?> name="category">
+		<select <?php echo helper_get_tab_index() ?> name="category_id">
 			<?php 
-				if ( is_blank( $f_category ) ) {
+				if ( 0 === $f_category_id ) {
 					echo '<option value="" selected="selected">', string_attribute( lang_get( 'select_option' ) ), '</option>';
 				}
 
-				print_category_option_list( $f_category ); 
+				print_category_option_list( $f_category_id ); 
 			?>
 		</select>
 	</td>
@@ -385,7 +385,7 @@
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/javascript" language="JavaScript">
 <!--
-	window.document.report_bug_form.category.focus();
+	window.document.report_bug_form.category_id.focus();
 -->
 </script>
 <?php } ?>

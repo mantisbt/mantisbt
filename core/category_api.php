@@ -23,6 +23,9 @@
 
 	### Category API ###
 
+	# Category data cache (to prevent excessive db queries)
+	$g_category_cache = array();
+
 	#===================================
 	# Boolean queries and ensures
 	#===================================
@@ -30,31 +33,32 @@
 	# --------------------
 	# Check whether the category exists in the project
 	# Return true if the category exists, false otherwise
-	function category_exists( $p_project_id, $p_category ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_category		= db_prepare_string( $p_category );
-
-		$t_project_category_table = db_get_table( 'mantis_project_category_table' );
-
-		$query = "SELECT COUNT(*)
-				  FROM $t_project_category_table
-				  WHERE project_id=" . db_param(0) . " AND
-						category=" . db_param(1);
-		$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
-		$category_count =  db_result( $result );
-
-		if ( 0 < $category_count ) {
+	function category_exists( $p_category_id ) {
+		global $g_category_cache;
+		if ( isset( $g_category_cache[$p_category_id] ) ) {
 			return true;
+		}
+
+		$c_category_id	= db_prepare_int( $p_category_id );
+
+		$t_category_table = db_get_table( 'mantis_category_table' );
+
+		$query = "SELECT COUNT(*) FROM $t_category_table
+					WHERE id=" . db_param(0);
+		$count = db_result( db_query_bound( $query, array( $c_category_id ) ) );
+
+		if ( 0 < $count ) {
+				return true;
 		} else {
-			return false;
+				return false;
 		}
 	}
 
 	# --------------------
 	# Check whether the category exists in the project
 	# Trigger an error if it does not
-	function category_ensure_exists( $p_project_id, $p_category ) {
-		if ( !category_exists( $p_project_id, $p_category ) ) {
+	function category_ensure_exists( $p_category_id ) {
+		if ( !category_exists( $p_category_id ) ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 		}
 	}
@@ -62,15 +66,28 @@
 	# --------------------
 	# Check whether the category is unique within a project
 	# Returns true if the category is unique, false otherwise
-	function category_is_unique( $p_project_id, $p_category ) {
-		return !category_exists( $p_project_id, $p_category );
+	function category_is_unique( $p_project_id, $p_name ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_name			= db_prepare_string( $p_name );
+
+		$t_category_table = db_get_table( 'mantis_category_table' );
+
+		$query = "SELECT COUNT(*) FROM $t_category_table
+					WHERE project_id=" . db_param(0) . " AND " . db_helper_like( 'name', $c_name );
+		$count = db_result( db_query_bound( $query, array( $c_project_id ) ) );
+
+		if ( 0 < $count ) {
+				return false;
+		} else {
+				return true;
+		}
 	}
 
 	# --------------------
 	# Check whether the category is unique within a project
 	# Trigger an error if it is not
-	function category_ensure_unique( $p_project_id, $p_category ) {
-		if ( !category_is_unique( $p_project_id, $p_category ) ) {
+	function category_ensure_unique( $p_project_id, $p_name ) {
+		if ( !category_is_unique( $p_project_id, $p_name ) ) {
 			trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 		}
 	}
@@ -82,50 +99,50 @@
 
 	# --------------------
 	# Add a new category to the project
-	function category_add( $p_project_id, $p_category ) {
+	function category_add( $p_project_id, $p_name ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_category		= db_prepare_string( $p_category );
+		$c_name			= db_prepare_string( $p_name );
 
-		category_ensure_unique( $p_project_id, $p_category );
+		category_ensure_unique( $p_project_id, $p_name );
 
-		$t_project_category_table = db_get_table( 'mantis_project_category_table' );
+		$t_category_table = db_get_table( 'mantis_category_table' );
 
-		$query = "INSERT INTO $t_project_category_table
-					( project_id, category )
+		$query = "INSERT INTO $t_category_table
+					( project_id, name )
 				  VALUES
-					( " . db_param(0) . ',' . db_param(1) . ')';
-		db_query_bound( $query, Array( $c_project_id, $c_category ) );
+					( " . db_param(0) . ', ' . db_param(1) . ' )';
+		db_query_bound( $query, array( $c_project_id, $c_name ) );
 
 		# db_query errors on failure so:
-		return true;
+		return db_insert_id( $t_category_table );
 	}
 
 	# --------------------
 	# Update the name and user associated with the category
-	function category_update( $p_project_id, $p_category, $p_new_category, $p_assigned_to ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_category		= db_prepare_string( $p_category );
-		$c_new_category	= db_prepare_string( $p_new_category );
+	function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+		$t_old_category = category_get_row( $p_category_id );
+
+		$c_category_id	= db_prepare_int( $p_category_id );
+		$c_name			= db_prepare_string( $p_name );
 		$c_assigned_to	= db_prepare_int( $p_assigned_to );
 
-		category_ensure_exists( $p_project_id, $p_category );
+		$t_category_table	= db_get_table( 'mantis_category_table' );
+		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
-		$t_project_category_table	= db_get_table( 'mantis_project_category_table' );
-		$t_bug_table				= db_get_table( 'mantis_bug_table' );
+		$query = "UPDATE $t_category_table
+				  SET name=" . db_param(0) . ',
+					user_id=' . db_param(1) . '
+				  WHERE id=' . db_param(2);
+		db_query_bound( $query, array( $c_name, $c_assigned_to, $c_category_id ) );
 
-		$query = "UPDATE $t_project_category_table
-				  SET category=" . db_param(0) . ",
-				  	  user_id=" . db_param(1) . "
-				  WHERE category=" . db_param(2) . " AND
-						project_id=" . db_param(3);
-		db_query_bound( $query, Array( $c_new_category, $c_assigned_to, $c_category, $c_project_id ) );
+		# Add bug history entries if we update the category's name
+		if ( $t_old_category['name'] != $c_name ) {
+			$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param(0);
+			$t_result = db_query_bound( $query, array( $c_category_id ) );
 
-		if ( $p_category != $p_new_category ) {
-			$query = "UPDATE $t_bug_table
-					  SET category=" . db_param(0) . "
-					  WHERE category=" . db_param(1) . " AND
-					  		project_id=" . db_param(2);
-			db_query_bound( $query, Array( $c_new_category, $c_category, $c_project_id ) );
+			while ( $t_bug_row = db_fetch_array( $t_result ) ) {
+				history_log_event_direct( $t_bug_row['id'], 'category', $t_old_category['name'], $c_name );
+			}
 		}
 
 		# db_query errors on failure so:
@@ -134,29 +151,38 @@
 
 	# --------------------
 	# Remove a category from the project
-	function category_remove( $p_project_id, $p_category, $p_new_category='' ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_category		= db_prepare_string( $p_category );
-		$c_new_category	= db_prepare_string( $p_new_category );
+	function category_remove( $p_category_id, $p_new_category_id = 1 ) {
+		$t_category_row = category_get_row( $p_category_id );
 
-		category_ensure_exists( $p_project_id, $p_category );
-		if ( !is_blank( $p_new_category ) ) {
-			category_ensure_exists( $p_project_id, $p_new_category );
+		$c_category_id	= db_prepare_int( $p_category_id );
+		$c_new_category_id	= db_prepare_int( $p_new_category_id );
+
+		category_ensure_exists( $p_category_id );
+		if ( 0 != $p_new_category_id ) {
+			category_ensure_exists( $p_new_category_id );
 		}
 
-		$t_project_category_table	= db_get_table( 'mantis_project_category_table' );
-		$t_bug_table				= db_get_table( 'mantis_bug_table' );
+		$t_category_table	= db_get_table( 'mantis_category_table' );
+		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
-		$query = "DELETE FROM $t_project_category_table
-				  WHERE project_id=" . db_param(0) . " AND
-						category=" . db_param(1);
-		db_query_bound( $query, Array( $c_project_id, $c_category ) );
+		$query = "DELETE FROM $t_category_table
+				  WHERE id=" . db_param(0);
+		db_query_bound( $query, array( $c_category_id ) );
 
+		# update bug history entries
+		$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param(0);
+		$t_result = db_query_bound( $query, array( $c_category_id ) );
+
+		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
+			var_dump( $t_bug_row );
+			history_log_event_direct( $t_bug_row['id'], 'category', $t_category_row['name'], category_full_name( $p_new_category_id, false ) );
+		}
+
+		# update bug data
 		$query = "UPDATE $t_bug_table
-				  SET category=" . db_param(0) . "
-				  WHERE category=" . db_param(1) . " AND
-				  		project_id=" . db_param(2);
-		db_query_bound( $query, Array( $c_new_category, $c_category, $c_project_id ) );
+				  SET category_id=" . db_param(0) . "
+				  WHERE category_id=" . db_param(1);
+		db_query_bound( $query, array( $c_new_category_id, $c_category_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -164,22 +190,39 @@
 
 	# --------------------
 	# Remove all categories associated with a project
-	function category_remove_all( $p_project_id ) {
+	function category_remove_all( $p_project_id, $p_new_category_id = 1 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
+		$c_new_category_id = db_prepare_int( $p_new_category_id );
 
 		project_ensure_exists( $p_project_id );
+		if ( 0 != $p_new_category_id ) {
+			category_ensure_exists( $p_new_category_id );
+		}
 
-		$t_project_category_table	= db_get_table( 'mantis_project_category_table' );
-		$t_bug_table				= db_get_table( 'mantis_bug_table' );
+		$t_category_table	= db_get_table( 'mantis_category_table' );
+		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 
-		$query = "DELETE FROM $t_project_category_table
+		$query = "DELETE FROM $t_category_table
 				  WHERE project_id=" . db_param(0);
-		db_query_bound( $query, Array( $c_project_id ) );
+		db_query_bound( $query, array( $c_project_id ) );
 
+		# cache category names
+		category_get_all_rows();
+
+		# update bug history entries
+		$query = "SELECT id, category_id FROM $t_bug_table WHERE project_id=" . db_param(0);
+		$t_result = db_query_bound( $query, array( $c_project_id ) );
+
+		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
+			var_dump( $t_bug_row );
+			history_log_event_direct( $t_bug_row['id'], 'category', category_full_name( $t_bug_row['category_id'], false ), category_full_name( $p_new_category_id, false ) );
+		}
+
+		# update bug data
 		$query = "UPDATE $t_bug_table
-				  SET category=''
-				  WHERE project_id=" . db_param(0);
-		db_query_bound( $query, Array( $c_project_id ) );
+				  SET category=" . db_param(0) . '
+				  WHERE project_id=' . db_param(1);
+		db_query_bound( $query, array( $c_new_category_id, $c_project_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -192,45 +235,69 @@
 
 	# --------------------
 	# Return the definition row for the category
-	function category_get_row( $p_project_id, $p_category ) {
-		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_category		= db_prepare_string( $p_category );
+	function category_get_row( $p_category_id ) {
+		global $g_category_cache;
+		if ( isset( $g_category_cache[$p_category_id] ) ) {
+			return $g_category_cache[$p_category_id];
+		}
 
-		$t_project_category_table = db_get_table( 'mantis_project_category_table' );
+		$c_category_id	= db_prepare_int( $p_category_id );
 
-		$query = "SELECT category, user_id
-				FROM $t_project_category_table
-				WHERE project_id=" . db_param(0) . " AND
-					category=" . db_param(1);
-		$result = db_query_bound( $query, Array( $c_project_id, $c_category ) );
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
+
+		$query = "SELECT * FROM $t_category_table
+				WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, array( $c_category_id ) );
 		$count = db_num_rows( $result );
 		if ( 0 == $count ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 		}
 
-		return db_fetch_array( $result );
+		$row = db_fetch_array( $result );
+		$g_category_cache[$p_category_id] = $row;
+		return $row;
 	}
 
 	# --------------------
 	# Return all categories for the specified project id
 	function category_get_all_rows( $p_project_id ) {
+		global $g_category_cache;
+
 		$c_project_id	= db_prepare_int( $p_project_id );
 
-		$t_project_category_table = db_get_table( 'mantis_project_category_table' );
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
-		$query = "SELECT category, user_id
-				FROM $t_project_category_table
-				WHERE project_id=" . db_param(0) . "
-				ORDER BY category";
-		$result = db_query_bound( $query, Array( $c_project_id ) );
+		$t_project_where = helper_project_specific_where( $c_project_id );
+
+		$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
+				JOIN $t_project_table AS p
+					ON c.project_id=p.id
+				WHERE $t_project_where
+				ORDER BY c.name ";
+		$result = db_query_bound( $query );
 		$count = db_num_rows( $result );
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
 			$rows[] = $row;
+			$g_category_cache[$row['id']] = $row;
 		}
 
 		return $rows;
 	}
-?>
+
+	# Helpers
+
+	function category_full_name( $p_category_id, $p_show_project=true ) {
+		$t_row = category_get_row( $p_category_id );
+		$t_project_id = $t_row['project_id'];
+
+		if ( $p_show_project && ALL_PROJECTS != $t_project_id ) {
+			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
+		} else {
+			return $t_row['name'];
+		}
+	}

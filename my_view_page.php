@@ -34,6 +34,9 @@
 
 	$t_current_user_id = auth_get_current_user_id();
 
+	# Improve performance by caching category data in one pass
+	category_get_all_rows( helper_get_current_project() );
+
 	compress_enable();
 
 	html_page_top1( lang_get( 'my_view_link' ) );

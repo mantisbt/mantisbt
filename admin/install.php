@@ -28,6 +28,7 @@
 	$g_skip_open_db = true;  # don't open the database in database_api.php
 	define( 'PLUGINS_DISABLED', true );
 	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+	@require_once( 'install_functions.php' );
 	$g_error_send_page_header = false; # bypass page headers in error handler
 
 	define( 'BAD', 0 );

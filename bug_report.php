@@ -44,7 +44,7 @@
 	$t_bug_data->handler_id			= gpc_get_int( 'handler_id', 0 );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
-	$t_bug_data->category				= gpc_get_string( 'category', config_get( 'default_bug_category' ) );
+	$t_bug_data->category_id			= gpc_get_int( 'category_id', 0 );
 	$t_bug_data->reproducibility		= gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
 	$t_bug_data->severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
 	$t_bug_data->priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
@@ -171,7 +171,7 @@
 ?>
 	<p>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-		<input type="hidden" name="category" 		value="<?php echo $t_bug_data->category ?>" />
+		<input type="hidden" name="category_id" 	value="<?php echo $t_bug_data->category_id ?>" />
 		<input type="hidden" name="severity" 		value="<?php echo $t_bug_data->severity ?>" />
 		<input type="hidden" name="reproducibility" 	value="<?php echo $t_bug_data->reproducibility ?>" />
 		<input type="hidden" name="profile_id" 		value="<?php echo $t_bug_data->profile_id ?>" />

@@ -36,12 +36,13 @@
 
 	$data_category_arr = array();
 	$data_count_arr = array();
-	$query = "SELECT category, COUNT(category) as count
+	$query = "SELECT c.name AS name, COUNT(name) as count
 			FROM mantis_bug_table
-			WHERE project_id=" . db_param(0) . "
-			GROUP BY category
-			ORDER BY category";
-	$result = db_query_bound( $query, Array( $t_project_id ) );
+			JOIN mantis_category_table AS c
+			WHERE project_id='$t_project_id'
+			GROUP BY name
+			ORDER BY name";
+	$result = db_query( $query );
 	$category_count = db_num_rows( $result );
 	$total = 0;
 	$longest_size = 0;
@@ -50,11 +51,11 @@
 		extract( $row );
 
 		$total += $count;
-		$data_category_arr[] = $category;
+		$data_category_arr[] = $name;
 		$data_count_arr[] = $count;
 
-		if ( strlen( $category ) > $longest_size ) {
-			$longest_size = strlen( $category );
+		if ( strlen( $name ) > $longest_size ) {
+			$longest_size = strlen( $name );
 		}
 	}
 	$longest_size++;

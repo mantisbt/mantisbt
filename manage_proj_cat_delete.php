@@ -29,19 +29,22 @@
 
 	auth_reauthenticate();
 
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_category = gpc_get_string( 'category' );
+	$f_category_id = gpc_get_string( 'id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+	$t_row = category_get_row( $f_category_id );
+	$t_name = category_full_name( $f_category_id );
+	$t_project_id = $t_row['project_id'];
+
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ) .
-		'<br/>' . lang_get( 'category' ) . ': ' . $f_category,
+		'<br/>' . lang_get( 'category' ) . ': ' . $t_name,
 		lang_get( 'delete_category_button' ) );
 
-	category_remove( $f_project_id, $f_category );
+	category_remove( $f_category_id );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id;
 
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );

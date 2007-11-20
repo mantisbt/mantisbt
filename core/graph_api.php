@@ -591,30 +591,28 @@
 		global $category_name, $category_bug_count;
 
 		$t_project_id = helper_get_current_project();
-		$t_cat_table = db_get_table( 'mantis_project_category_table' );
+		$t_cat_table = db_get_table( 'mantis_category_table' );
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 		$t_user_id = auth_get_current_user_id();
 		$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-		$query = "SELECT DISTINCT category
+		$query = "SELECT id, name
 				FROM $t_cat_table
 				WHERE $specific_where
-				ORDER BY category";
+				ORDER BY name";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
-		if ( 0 == $category_count ) {
-			return array();
-		}
 
+		$t_metrics = array();
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_cat_name = $row['category'];
-			$c_category_name = addslashes($t_cat_name);
+			$t_cat_name = $row['name'];
+			$t_cat_id = $row['id'];
 			$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE category='$c_category_name' AND $specific_where";
+					WHERE category_id='$t_cat_id' AND $specific_where";
 			$result2 = db_query( $query );
-			$t_metrics[$t_cat_name] = db_result( $result2, 0, 0 );
+			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
 		} # end for
 		return $t_metrics;
 	}

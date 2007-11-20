@@ -371,4 +371,22 @@ $upgrade[] = Array('CreateTableSQL', Array( db_get_table( 'mantis_plugin_table' 
 
 $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_user_pref_table' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
 $upgrade[] = Array('AlterColumnSQL', Array( db_get_table( 'mantis_custom_field_table' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
+
+$upgrade[] = Array( 'CreateTableSQL', Array( db_get_table( 'mantis_category_table' ), "
+	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+	project_id		I		UNSIGNED NOTNULL DEFAULT '0',
+	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
+	name			C(128)	NOTNULL DEFAULT \" '' \",
+	status			I		UNSIGNED NOTNULL DEFAULT '0'
+	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_name', db_get_table( 'mantis_category_table' ), 'project_id, name', array( 'UNIQUE' ) ) );
+$upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_category_table' ), "
+	( project_id, user_id, name, status ) VALUES
+	( '0', '0', 'None', '0' ) " ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
+$upgrade[] = Array( 'UpdateFunction', "category_migrate" );
+$upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "category" ) );
+$upgrade[] = Array( 'DropTableSQL', Array( db_get_table( 'mantis_project_category_table' ) ) );
+$upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
+
 ?>

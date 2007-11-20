@@ -168,8 +168,7 @@
 	<!-- Category -->
 	<td>
 		<?php
-			$t_project_name = string_display( project_get_field( $t_bug->project_id, 'name' ) );
-			echo "[$t_project_name] $t_bug->category";
+			echo string_display( category_full_name( $t_bug->category_id ) );
 		?>
 	</td>
 
