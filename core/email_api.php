@@ -42,6 +42,14 @@
 	# Email API
 	###########################################################################
 
+	# Use a simple perl regex for valid email addresses.  This is not a complete regex,
+	# as it does not cover quoted addresses or domain literals, but it is simple and
+	# covers the vast majority of all email addresses without being overly complex.
+	# Callers must surround this with appropriate delimiters with case insentive options.
+	function email_regex_simple() {
+		return "(([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)" . 				# recipient
+			"\@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))";	# @domain
+	}
 
 	# --------------------
 	# Return a perl compatible regular expression that will

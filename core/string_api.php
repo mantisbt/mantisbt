@@ -391,35 +391,8 @@
 			ini_set( 'magic_quotes_sybase', true );
 		}
 
-		# Set up a simple subset of RFC 822 email address parsing
-		#  We don't allow domain literals or quoted strings
-		#  We also don't allow the & character in domains even though the RFC
-		#  appears to do so.  This was to prevent &gt; etc from being included.
-		#  Note: we could use email_get_rfc822_regex() but it doesn't work well
-		#  when applied to data that has already had entities inserted.
-		#
-		# bpfennig: '@' doesn't accepted anymore
-		# achumakov: characters 0x80-0xFF aren't acceptable, too
-		$t_atom = '[^\'@\'](?:[^()<>@,;:\\\".\[\]\000-\037\177-\377 &]+)';
-
-		# In order to avoid selecting URLs containing @ characters as email
-		#  addresses we limit our selection to addresses that are preceded by:
-		#  * the beginning of the string
-		#  * a &lt; entity (allowing '<foo@bar.baz>')
-		#  * whitespace
-		#  * a : (allowing 'send email to:foo@bar.baz')
-		#  * a \n, \r, or > (because newlines have been replaced with <br />
-		#    and > isn't valid in URLs anyway
-		#
-		# At the end of the string we allow the opposite:
-		#  * the end of the string
-		#  * a &gt; entity
-		#  * whitespace
-		#  * a , character (allowing 'email foo@bar.baz, or ...')
-		#  * a \n, \r, or <
-
-		$p_string = preg_replace( '/(?<=^|&quot;|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&quot;|&gt;|[\s\,\<\n\r])/s',
-								'<a href="mailto:\1">\1</a>',
+		$p_string = preg_replace( '/\b' . email_regex_simple() . '\b/i',
+								'<a href="mailto:\0">\0</a>',
 								$p_string);
 
 		return $p_string;
