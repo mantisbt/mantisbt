@@ -265,21 +265,27 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 </tr>
 <?php
+	$t_date_format = config_get( 'normal_date_format' );
+	$t_access_level = Array(); 
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_date_created  = date( config_get( 'normal_date_format' ), db_unixtimestamp( $u_date_created ) );
-		$u_last_visit    = date( config_get( 'normal_date_format' ), db_unixtimestamp( $u_last_visit ) );
+		$u_date_created  = date( $t_date_format, db_unixtimestamp( $u_date_created ) );
+		$u_last_visit    = date( $t_date_format, db_unixtimestamp( $u_last_visit ) );
+		
+		if( !isset( $t_access_level[$u_access_level] ) ) {
+			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
+		}
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>
-		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display( $u_username ) ?></a>
+		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a>
 	</td>
-	<td><?php echo string_display( $u_realname ) ?></td>
+	<td><?php echo string_display_line( $u_realname ) ?></td>
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>
-	<td><?php echo get_enum_element( 'access_levels', $u_access_level ) ?></td>
+	<td><?php echo $t_access_level[$u_access_level] ?></td>
 	<td><?php echo trans_bool( $u_enabled ) ?></td>
 	<td class="center">
           <?php
