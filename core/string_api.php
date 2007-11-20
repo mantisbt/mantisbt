@@ -28,6 +28,9 @@
 
 	### String Processing API ###
 
+	$g_cache_html_valid_tags = '';
+	$g_cache_html_valid_tags_single_line = '';
+	
 	### --------------------
 	# Preserve spaces at beginning of lines.
 	# Lines must be separated by \n rather than <br />
@@ -419,20 +422,30 @@
 	# like &lt;b&gt; and converts is into corresponding
 	# html <b> based on the configuration presets
 	function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
-		$t_html_valid_tags = config_get( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
+		global $g_cache_html_valid_tags_single_line, $g_cache_html_valid_tags;
+		$tags = '';
+		if( is_blank( ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line ) ) ) {
+			$t_html_valid_tags = config_get( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
 
-		if ( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
-			return $p_string;
+			if ( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
+				return $p_string;
+			}
+
+			$tags = explode( ',', $t_html_valid_tags );
+			foreach ($tags as $key => $value) { 
+        	   if ( !is_blank( $value ) ) {
+        	   	$tags[$key] = trim($value); 
+        	   }
+        	  }
+        	$tags = implode( '|', $tags);
+        	if ( $p_multiline )
+        		$g_cache_html_valid_tags = $tags;
+        	else
+        		$g_cache_html_valid_tags_single_line = $tags;
+		} else {
+			$tags = ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line );			
 		}
-
-		$tags = explode( ',', $t_html_valid_tags );
-		foreach ($tags as $key => $value) { 
-           if ( !is_blank( $value ) ) {
-           	$tags[$key] = trim($value); 
-           }
-          }
-        $tags = implode( '|', $tags);
-
+		
 		$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*&gt;', '<\\1>', $p_string );
 		$p_string = eregi_replace( '&lt;\/(' .$tags . ')[[:space:]]*&gt;', '</\\1>', $p_string );
 		$p_string = eregi_replace( '&lt;(' . $tags . ')[[:space:]]*\/&gt;', '<\\1 />', $p_string );
