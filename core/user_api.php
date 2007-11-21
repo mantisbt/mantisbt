@@ -714,23 +714,40 @@
 
 			$t_public	= VS_PUBLIC;
 			$t_private	= VS_PRIVATE;
-			$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param(4) . ' AND';
 
-			$query = "SELECT p.id, p.name, ph.parent_id
-					  FROM $t_project_table p
-					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
-					  LEFT JOIN $t_project_hierarchy_table ph
-					    ON ph.child_id = p.id
-					  WHERE $t_enabled_clause
-						( p.view_state=" . db_param(1) . "
-						    OR (p.view_state=" . db_param(2) . "
-							    AND
-						        u.user_id=" . db_param(3) . " )
-						)
+			$result = null;
+			if ( $p_show_disabled ) {
+				$query = "SELECT p.id, p.name, ph.parent_id
+								  FROM $t_project_table p
+								  LEFT JOIN $t_project_user_list_table u
+								    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
+								  LEFT JOIN $t_project_hierarchy_table ph
+								    ON ph.child_id = p.id
+								  WHERE 
+									( p.view_state=" . db_param(1) . "
+									    OR (p.view_state=" . db_param(2) . "
+										    AND
+									        u.user_id=" . db_param(3) . " )
+									)
 					  ORDER BY p.name";
-
-			$result = db_query_bound( $query, ($p_show_disabled ? Array( $p_user_id, $t_public, $t_private, $p_user_id ) : Array( $p_user_id, $t_public, $t_private, $p_user_id, true ) ) );
+				$result = db_query_bound( $query, Array( $p_user_id, $t_public, $t_private, $p_user_id ) );
+			} else {
+				$query = "SELECT p.id, p.name, ph.parent_id
+							  FROM $t_project_table p
+							  LEFT JOIN $t_project_user_list_table u
+							    ON p.id=u.project_id AND u.user_id=" . db_param(0) . "
+							  LEFT JOIN $t_project_hierarchy_table ph
+							    ON ph.child_id = p.id
+							  WHERE p.enabled = " . db_param(1) . " AND
+								( p.view_state=" . db_param(2) . "
+								    OR (p.view_state=" . db_param(3) . "
+									    AND
+								        u.user_id=" . db_param(4) . " )
+								)
+				  ORDER BY p.name";
+				$result = db_query_bound( $query, Array( $p_user_id, true, $t_public, $t_private, $p_user_id ) );
+			}
+			
 			$row_count = db_num_rows( $result );
 
 			$t_projects = array();
