@@ -8,10 +8,10 @@
 * Mainly used for returning faults from deployed functions
 * in a server instance.
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-* @version  $Id: class.soap_fault.php,v 1.1 2007-07-18 06:52:59 vboctor Exp $
+* @version  $Id: class.soap_fault.php,v 1.14 2007/04/11 15:49:47 snichol Exp $
 * @access public
 */
-class soap_fault extends nusoap_base {
+class nusoap_fault extends nusoap_base {
 	/**
 	 * The fault code (client|server)
 	 * @var string
@@ -40,12 +40,12 @@ class soap_fault extends nusoap_base {
 	/**
 	* constructor
     *
-    * @param string $faultcode (client | server)
+    * @param string $faultcode (SOAP-ENV:Client | SOAP-ENV:Server)
     * @param string $faultactor only used when msg routed between multiple actors
     * @param string $faultstring human readable error message
     * @param mixed $faultdetail detail, typically a string or array of string
 	*/
-	function soap_fault($faultcode,$faultactor='',$faultstring='',$faultdetail=''){
+	function nusoap_fault($faultcode,$faultactor='',$faultstring='',$faultdetail=''){
 		parent::nusoap_base();
 		$this->faultcode = $faultcode;
 		$this->faultactor = $faultactor;
@@ -80,7 +80,11 @@ class soap_fault extends nusoap_base {
 	}
 }
 
-
+/**
+ * Backward compatibility
+ */
+class soap_fault extends nusoap_fault {
+}
 
 
 ?>
