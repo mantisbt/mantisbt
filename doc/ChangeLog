@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2007.10.23  -  1.1.0rc3
+2007.11.23  -  1.1.0rc3
 
 - 0008494: [api soap] Remove backward compatibility code from SOAP API (vboctor) - resolved.
 - 0008519: [api soap] Name collision between NuSoap SoapClient and PHP 5 Soap extension (vboctor) - resolved.
