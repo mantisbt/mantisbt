@@ -763,7 +763,7 @@ document.getElementById( span ).style.display = displayType;
 	# --------------------
 	# checks whether the specified upload path exists and is writable
 	function file_ensure_valid_upload_path( $p_upload_path ) {
-		if ( is_blank( $p_upload_path ) || !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
+		if ( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
 			trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
 		}
 	}
