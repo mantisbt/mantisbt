@@ -1,5 +1,23 @@
 Mantis ChangeLog
 
+2007.10.23  -  1.1.0rc3
+
+- 0008494: [api soap] Remove backward compatibility code from SOAP API (vboctor) - resolved.
+- 0008519: [api soap] Name collision between NuSoap SoapClient and PHP 5 Soap extension (vboctor) - resolved.
+- 0008525: [api soap] mc_projects_get_user_accessible() shouldn't return ALL_PROJECTS (vboctor) - resolved.
+- 0008541: [api soap] $g_mc_error_when_version_not_found is not defined (vboctor) - resolved.
+- 0008566: [api soap] mc_project_version_add() doesn't set the date_order field correctly (vboctor) - resolved.
+- 0008592: [api soap] Error in api/soap/mc_file_api.php#mc_file_add() (vboctor) - resolved.
+- 0007646: [bugtracker] Show content link should change to Hide content when clicked (giallu) - resolved.
+- 0008509: [bugtracker] Empty Note is added when updating issue (giallu) - resolved.
+- 0008589: [bugtracker] file_download.php doesn't work with attachment names that contain accentuated characters when using Firefox (vboctor) - resolved.
+- 0008564: [db db2] Attempting installation of MANTIS400, table not being created (slashsplat) - resolved.
+- 0008511: [email] send_emails.php is missing <?php at the start of the file (giallu) - resolved.
+- 0008238: [filters] urldecode() error on creating PermaLink (MartinFuchs) - resolved.
+- 0008524: [integration] core/checkin.php is missing toplevel <? causing the script to fail. (vboctor) - resolved.
+- 0008063: [other] mantis_version shouldn't be in the configuration file (jreese) - resolved.
+- 0008263: [scripting] smaller issue in email address recognition (jreese) - resolved.
+
 2007.10.23  -  1.1.0rc2
 
 - 0008467: [security] Users can login using the MD5 hash of the password (vboctor) - resolved.
