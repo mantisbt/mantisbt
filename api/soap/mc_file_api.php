@@ -79,10 +79,6 @@
 			}
 		}
 
-		if ( !file_exists( $t_file_path ) ) {
-			return new soap_fault( 'Server', '', "Upload folder '{$t_file_path}' doesn't exist." );
-		}
-
 		$c_file_path = db_prepare_string( $t_file_path );
 		$c_new_file_name = db_prepare_string( $p_name );
 
@@ -98,7 +94,12 @@
 		switch ( $t_method ) {
 			case FTP:
 			case DISK:
+				if ( !file_exists( $t_upload_path ) || !is_dir( $t_upload_path ) || !is_writable( $t_upload_path ) || !is_readable( $t_upload_path ) ) {
+					return new soap_fault( 'Server', '', "Upload folder '{$t_file_path}' doesn't exist." );
+				}
+
 				file_ensure_valid_upload_path( $t_file_path );
+
 				if ( !file_exists( $t_disk_file_name ) ) {
 					mci_file_write_local( $t_disk_file_name, $p_content );
 					if ( FTP == $t_method ) {
