@@ -108,7 +108,7 @@
 <?php if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?> <!-- With LDAP -->
 
 	<!-- Username -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
 		</td>
@@ -118,7 +118,7 @@
 	</tr>
 
 	<!-- Password -->
-	<tr class="row-2">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'password' ) ?>
 		</td>
@@ -130,7 +130,7 @@
 <?php } else { ?> <!-- Without LDAP -->
 
 	<!-- Username -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
 		</td>
@@ -140,7 +140,7 @@
 	</tr>
 
 	<!-- Password -->
-	<tr class="row-2">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'password' ) ?>
 			<?php if ( $t_force_pw_reset ) { ?>
@@ -153,7 +153,7 @@
 	</tr>
 
 	<!-- Password confirmation -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'confirm_password' ) ?>
 			<?php if ( $t_force_pw_reset ) { ?>
@@ -170,7 +170,7 @@
 <?php if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) { ?> <!-- With LDAP Email-->
 
 	<!-- Email -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'email' ) ?>
 		</td>
@@ -182,7 +182,7 @@
 <?php } else { ?> <!-- Without LDAP Email -->
 
 	<!-- Email -->
-	<tr class="row-2">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'email' ) ?>
 		</td>
@@ -194,7 +194,7 @@
 <?php } ?> <!-- End LDAP Email conditional -->
 
 	<!-- Realname -->
-	<tr class="row-1" valign="top">
+	<tr <?php echo helper_alternate_class() ?> valign="top">
 		<td class="category">
 			<?php echo lang_get( 'realname' ) ?>
 		</td>
@@ -204,7 +204,7 @@
 	</tr>
 
 	<!-- Access level -->
-	<tr class="row-2">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'access_level' ) ?>
 		</td>
@@ -214,7 +214,7 @@
 	</tr>
 
 	<!-- Project access level -->
-	<tr class="row-1">
+	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get( 'access_level_project' ) ?>
 		</td>
@@ -224,7 +224,7 @@
 	</tr>
 
 	<!-- Assigned project list -->
-	<tr class="row-2" valign="top">
+	<tr <?php echo helper_alternate_class() ?> valign="top">
 		<td class="category">
 			<?php echo lang_get( 'assigned_projects' ) ?>
 		</td>
