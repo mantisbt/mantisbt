@@ -726,7 +726,11 @@
 		}
 
 		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
-		$mail->SetLanguage( lang_get( 'phpmailer_language', config_get( 'default_language' ) ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
+		$t_lang = config_get( 'default_language' );
+		if ( 'auto' == $t_lang ) {
+			$t_lang = config_get( 'fallback_language');
+		}
+		$mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
 
 		# Select the method to send mail
 		switch ( config_get( 'phpMailer_method' ) ) {
