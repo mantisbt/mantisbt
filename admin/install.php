@@ -29,12 +29,14 @@
 	define( 'PLUGINS_DISABLED', true );
 	@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	@require_once( 'install_functions.php' );
+	@require_once( 'install_helper_functions.php' );
 	$g_error_send_page_header = false; # bypass page headers in error handler
 
 	define( 'BAD', 0 );
 	define( 'GOOD', 1 );
 	$g_failed = false;
-
+	$g_database_upgrade = false; 
+	
 	# -------
 	# print test result
 	function print_test_result( $p_result, $p_hard_fail=true, $p_message='' ) {
@@ -53,7 +55,7 @@
 		}
 
 		if ( GOOD == $p_result ) {
-			echo 'bgcolor="green">GOOD';
+			echo 'bgcolor="green">GOOD';			
 		}
 		echo '</td>';
 	}
@@ -74,8 +76,6 @@
 		return Array( $query );
 	}
 
-
-
 	# install_state
 	#   0 = no checks done
 	#   1 = server ok, get database information
@@ -86,29 +86,6 @@
 	#	6 = post install checks
 	#	7 = done, link to login or db updater
 	$t_install_state = gpc_get_int( 'install', 0 );
-
-	# read control variables with defaults
-	$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-	$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack') );
-	$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
-	if ( CONFIGURED_PASSWORD == $f_db_password ) {
-		$f_db_password = config_get( 'db_password' ); 
-	}
-	$f_admin_username = gpc_get( 'admin_username', '' );
-	$f_admin_password = gpc_get( 'admin_password', '');
-	$f_log_queries = gpc_get_bool( 'log_queries', false );
-	$f_db_exists = gpc_get_bool( 'db_exists', false );
-
-	$f_db_schema='';	
-	if ( $f_db_type == 'db2' ) {
-		# If schema name is supplied, then separate it from database name.
-		if ( strpos( $f_database_name, '/' ) != false ) {
-			$f_db2AS400 = $f_database_name;
-			list( $f_database_name, $f_db_schema ) = split( '/', $f_db2AS400, 2 );
-		}
-	}
 ?>
 <html>
 <head>
@@ -163,28 +140,79 @@ if ( 0 == $t_install_state ) {
 		<span class="title">Checking Installation...</span>
 	</td>
 </tr>
+<?php
+}
+?>
+
+<?php
+
+	$t_config_filename = $g_absolute_path . 'config_inc.php';
+	$t_config_exists = file_exists ( $t_config_filename );
+	$f_hostname = null; $f_db_type = null; $f_database_name = null; $f_db_username = null; $f_db_password = null;
+	if ( $t_config_exists ) {
+		if ( 0 == $t_install_state ) {
+			print_test("Config File Exists - Upgrade", true);
+		}
+		#config already exists - probably an upgrade
+
+		$f_dsn = config_get( 'dsn', '' );
+		$f_hostname = config_get( 'hostname', '' );
+		$f_db_type = config_get( 'db_type', '' );
+		$f_database_name = config_get( 'database_name', '');
+		$f_db_username = config_get( 'db_username', '' );
+		$f_db_password = config_get( 'db_password', '' );
+	
+		if ( 0 == $t_install_state ) {
+			print_test( 'Setting Database Type', '' !== $f_db_type , true, 'database type is blank?' );
+			print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ) , true, 'database connection settings do not exist?' );
+			print_test( 'Checking PHP support for database type', check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.');
+		}
+		
+		$g_db = ADONewConnection($f_db_type);
+		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
+		if( $g_db->IsConnected() ) { 
+			$g_db_connected = true;
+		}
+		$t_cur_version = config_get( 'database_version', -1);
+		if( $t_cur_version > 1 ) {
+			$g_database_upgrade = true;
+			$f_db_exists = true;
+		} else {
+			if ( 0 == $t_install_state ) {
+				print_test( 'Config File Exists but Database does not', false , true, 'Bad config_inc.php?' );
+			}
+		}	
+		
+	} else {
+		# read control variables with defaults
+		$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+		$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+		$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack') );
+		$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+		$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+		if ( CONFIGURED_PASSWORD == $f_db_password ) {
+			$f_db_password = config_get( 'db_password' ); 
+		}
+	}
+	$f_admin_username = gpc_get( 'admin_username', '' );
+	$f_admin_password = gpc_get( 'admin_password', '');
+	$f_log_queries = gpc_get_bool( 'log_queries', false );
+	$f_db_exists = gpc_get_bool( 'db_exists', false );
+
+	$f_db_schema='';	
+	if ( $f_db_type == 'db2' ) {
+		# If schema name is supplied, then separate it from database name.
+		if ( strpos( $f_database_name, '/' ) != false ) {
+			$f_db2AS400 = $f_database_name;
+			list( $f_database_name, $f_db_schema ) = split( '/', $f_db2AS400, 2 );
+		}
+	}
+	
+	if ( 0 == $t_install_state ) {
+?>
 
 <!-- Check PHP Version -->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking PHP version (your version is <?php echo phpversion(); ?>)
-	</td>
-	<?php
-		if (phpversion() == '4.0.6') {
-			print_test_result( GOOD );
-		} else {
-			if ( function_exists ( 'version_compare' ) ) {
-				if ( version_compare ( phpversion() , '4.0.6', '>=' ) ) {
-					print_test_result( GOOD );
-				} else {
-					print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
-				}
-			} else {
-			 	print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
-			}
-		}
-	?>
-</tr>
+<?php print_test(' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' ); ?>
 
 <!-- Check Safe Mode -->
 <?php print_test( 'Checking if safe mode is enabled for install script',
@@ -211,42 +239,7 @@ if ( 2 == $t_install_state ) {
 <?php print_test( 'Setting Database Type', '' !== $f_db_type , true, 'database type is blank?' ) ?>
 
 <!-- Checking DB support-->
-<tr>
-	<td bgcolor="#ffffff">
-		Checking PHP support for database type
-	</td>
-	<?php
-			$t_support = false;
-			switch ($f_db_type) {
-				case 'mysql':
-					$t_support = function_exists('mysql_connect');
-					break;
-				case 'mysqli':
-					$t_support = function_exists('mysqli_connect');
-					break;
-				case 'pgsql':
-					$t_support = function_exists('pg_connect');
-					break;
-				case 'mssql':
-					$t_support = function_exists('mssql_connect');
-					break;
-				case 'oci8':
-					$t_support = function_exists('OCILogon');
-					break;
-				case 'db2':
-					$t_support = function_exists( 'db2_connect' );
-					break;
-				default:
-					$t_support = false;
-			}
-
-			if ( $t_support ) {
-				print_test_result( GOOD );
-			} else {
-				print_test_result( BAD, true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
-			}
-	?>
-</tr>
+<?php print_test( 'Checking PHP support for database type', check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.') ?>
 
 <?php print_test( 'Setting Database Username', '' !== $f_db_username , true, 'database username is blank' ) ?>
 <?php print_test( 'Setting Database Password', '' !== $f_db_password , false, 'database password is blank' ) ?>
@@ -394,10 +387,11 @@ if ( 1 == $t_install_state ) {
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Options</span>
+		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ?></span>
 	</td>
 </tr>
 
+<?php if ( ! $g_database_upgrade ) { ?>
 <tr>
 	<td>
 		Type of Database
@@ -444,7 +438,9 @@ if ( 1 == $t_install_state ) {
 		</select>
 	</td>
 </tr>
+<?php } ?>
 
+<?php if ( ! $g_database_upgrade ) { ?>
 <tr>
 	<td>
 		Hostname (for Database Server)
@@ -453,7 +449,9 @@ if ( 1 == $t_install_state ) {
 		<input name="hostname" type="textbox" value="<?php echo $f_hostname ?>"></input>
 	</td>
 </tr>
+<?php } ?>
 
+<?php if ( ! $g_database_upgrade ) { ?>
 <tr>
 	<td>
 		Username (for Database)
@@ -462,7 +460,9 @@ if ( 1 == $t_install_state ) {
 		<input name="db_username" type="textbox" value="<?php echo $f_db_username ?>"></input>
 	</td>
 </tr>
+<?php } ?>
 
+<?php if ( ! $g_database_upgrade ) { ?>
 <tr>
 	<td>
 		Password (for Database)
@@ -471,7 +471,9 @@ if ( 1 == $t_install_state ) {
 		<input name="db_password" type="password" value="<?php echo ( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" ) ?>"></input>
 	</td>
 </tr>
+<?php } ?>
 
+<?php if ( ! $g_database_upgrade ) { ?>
 <tr>
 	<td>
 		Database name (for Database)
@@ -480,9 +482,11 @@ if ( 1 == $t_install_state ) {
 		<input name="database_name" type="textbox" value="<?php echo $f_database_name ?>"></input>
 	</td>
 </tr>
+<?php } ?>
+
 <tr>
 	<td>
-		Admin Username (to create Database)
+		Admin Username (to <?php echo ( ! $g_database_upgrade ) ? 'create Database' : 'update Database' ?> if required)
 	</td>
 	<td>
 		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username ?>"></input>
@@ -491,7 +495,7 @@ if ( 1 == $t_install_state ) {
 
 <tr>
 	<td>
-		Admin Password (to create Database)
+		Admin Password (to <?php echo ( ! $g_database_upgrade ) ? 'create Database' : 'update Database' ?> if required)
 	</td>
 	<td>
 		<input name="admin_password" type="password" value="<?php echo $f_admin_password  ?>"></input>
@@ -781,7 +785,7 @@ if ( 5 == $t_install_state ) {
 					( $f_db_password != config_get( 'db_password', '' ) ) ) {
 				print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
 			} else {
-				print_test_result( GOOD, false, 'file not updated' );
+				print_test_result( GOOD, false );
 				$t_write_failed = false;
 			}
 		}
