@@ -558,7 +558,7 @@
 	# The returned url includes the fully qualified domain, hence it is suitable to be included
 	# in emails.
 	function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
-		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ).'#'.$p_bugnote_id;
+		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ).'#c'.$p_bugnote_id;
 	}
 
 	# --------------------
