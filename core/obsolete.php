@@ -120,6 +120,6 @@
 
 # changes in 1.1.0rc2
 	config_obsolete( 'wait_time', 'default_redirect_delay' );
-	config_obsolete( 'default_bug_category' );
+	config_obsolete( 'default_bug_category', '' );
 
 ?>
