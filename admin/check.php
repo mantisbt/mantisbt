@@ -25,7 +25,6 @@
 	error_reporting( E_ALL );
 
 	$g_skip_open_db = true;  # don't open the database in database_api.php
-	define( 'PLUGINS_DISABLED', true );
 
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
