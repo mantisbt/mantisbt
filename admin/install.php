@@ -179,7 +179,7 @@ if ( 0 == $t_install_state ) {
 			$f_db_exists = true;
 		} else {
 			if ( 0 == $t_install_state ) {
-				print_test( 'Config File Exists but Database does not', false , true, 'Bad config_inc.php?' );
+				print_test( 'Config File Exists but Database does not', false , false, 'Bad config_inc.php?' );
 			}
 		}	
 		
