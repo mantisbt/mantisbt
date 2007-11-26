@@ -109,17 +109,15 @@ foreach ( $t_plugins_installed as $t_basename => $t_enabled ) {
 	if ( !is_null( $t_requires ) ) {
 		if ( is_array( $t_requires ) ) {
 			foreach( $t_requires as $t_plugin => $t_version ) {
-				if ( isset( $t_plugins[$t_plugin] ) ) {
-					if ( isset( $t_plugins_installed[$t_plugin] ) &&
-						$t_plugins[$t_plugin]['version'] >= $t_version ) {
-							if ( is_blank( $t_upgrade ) ) {
-								$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
-							} else {
-								$t_depends[] = '<span class="dependency_upgrade">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
-							}
+				$t_dependency = plugin_dependency( $t_plugin, $t_version );
+				if ( 1 == $t_dependency ) {
+					if ( is_blank( $t_upgrade ) ) {
+						$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
 					} else {
-						$t_depends[] = '<span class="dependency_dated">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
+						$t_depends[] = '<span class="dependency_upgrade">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
 					}
+				} elseif ( -1 == $t_dependency ) {
+					$t_depends[] = '<span class="dependency_dated">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</span>';
 				} else {
 					$t_depends[] = '<span class="dependency_unmet">'.string_display( $t_plugin.' '.$t_version ).'</span>';
 				}
@@ -195,14 +193,12 @@ foreach ( $t_plugins_available as $t_basename => $t_info ) {
 	if ( !is_null( $t_requires ) ) {
 		if ( is_array( $t_requires ) ) {
 			foreach( $t_requires as $t_plugin => $t_version ) {
-				if ( isset( $t_plugins[$t_plugin] ) ) {
-					if ( isset( $t_plugins_installed[$t_plugin] ) &&
-						$t_plugins[$t_plugin]['version'] >= $t_version ) {
-						$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</font>';
-					} else {
-						$t_ready = false;
-						$t_depends[] = '<span class="dependency_dated">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</font>';
-					}
+				$t_dependency = plugin_dependency( $t_plugin, $t_version );
+				if ( 1 == $t_dependency ) {
+					$t_depends[] = '<span class="dependency_met">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</font>';
+				} elseif ( -1 == $t_dependency ) {
+					$t_ready = false;
+					$t_depends[] = '<span class="dependency_dated">'.string_display( $t_plugins[$t_plugin]['name'].' '.$t_version ).'</font>';
 				} else {
 					$t_ready = false;
 					$t_depends[] = '<span class="dependency_unmet">'.string_display( $t_plugin.' '.$t_version ).'</font>';

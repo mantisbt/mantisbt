@@ -224,6 +224,120 @@ function plugin_get_info( $p_basename ) {
 }
 
 /**
+ * Converts a version string to an array, using some punctuation and
+ * number/lettor boundaries as splitting points.
+ * @param string Version string
+ * @return array Version array
+ */
+function plugin_version_array( $p_version ) {
+	$t_version = preg_replace( '/([a-zA-Z]+)([0-9]+)/', '\1.\2', $p_version );
+	$t_version = preg_replace( '/([0-9]+)([a-zA-Z]+)/', '\1.\2', $p_version );
+
+	$t_search = array(
+		',',
+		'-',
+		'_',
+	);
+
+	$t_replace = array(
+		'.',
+		'.',
+		'.',
+	);
+
+	$t_version = explode( '.', str_replace( $t_search, $t_replace, $t_version ) );
+
+	return $t_version;
+}
+
+/**
+ * Checks two version arrays sequentially for minimum or maximum version dependencies.
+ * @param array Version array to check
+ * @param array Version array required
+ * @param boolean Minimum (false) or maximum (true) version check
+ */
+function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
+	while ( count( $p_version1 ) > 0 && count ( $p_version2 ) > 0 ) {
+		# Grab the next version bits
+		$t_version1 = array_shift( $p_version1 );
+		$t_version2 = array_shift( $p_version2 );
+
+		# Convert to integers if possible
+		if ( is_numeric( $t_version1 ) ) {
+			$t_version1 = (int) $t_version1;
+		}
+		if ( is_numeric( $t_version2 ) ) {
+			$t_version2 = (int) $t_version2;
+		}
+
+		# Check for immediate version differences
+		if ( $p_maximum ) {
+			if ( $t_version1 < $t_version2 ){
+				return 1;
+			} elseif ( $t_version1 > $t_version2 ) {
+				return -1;
+			}
+		} else {
+			if ( $t_version1 > $t_version2 ) {
+				return 1;
+			} elseif ( $t_version1 < $t_version2 ) {
+				return -1;
+			}
+		}
+	}
+
+	# Handle unmatched version bits
+	if ( $p_maximum ) {
+		if ( count( $p_version2 ) > 0 ) {
+			return 1;
+		}
+	} else {
+		if ( count( $p_version1 ) > 0 ) {
+			return 1;
+		} elseif( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+			return 1;
+		}
+	}
+
+	# No more comparisons
+	return -1;
+}
+
+/**
+ * Check a plugin dependency given a basename and required version.
+ * Versions are checked using PHP's library version_compare routine
+ * and allows both minimum and maximum version requirements.
+ * Returns 1 if plugin dependency is met, 0 if dependency not met,
+ * or -1 if dependency is the wrong version.
+ * @param string Plugin basename
+ * @param string Required version
+ * @return integer Plugin dependency status
+ */
+function plugin_dependency( $p_basename, $p_required ) {
+	global $g_plugin_cache;
+
+	# check for registered dependency
+	if ( plugin_is_registered( $p_basename ) ) {
+		$t_required = trim( $p_required );
+		$t_maximum =  false;
+
+		# check for a less-than version requirement
+		$t_ltpos = strpos( $t_required, '<' );
+		if ( $t_ltpos !== false ) {
+			$t_required = substr( $t_required, $t_ltpos + 1 );
+			$t_maximum = true;
+		}
+
+		$t_version1 = plugin_version_array( $g_plugin_cache[$p_basename]['version'] );
+		$t_version2 = plugin_version_array( $t_required );
+
+		return plugin_version_check( $t_version1, $t_version2, $t_maximum );
+	} else {
+		return 0;
+	}
+}
+
+/**
  * Get the upgrade schema for a given plugin.
  * @param string Plugin basename
  * @return array Upgrade schema in same format as Mantis schema
@@ -506,9 +620,7 @@ function plugin_init( $p_basename ) {
 		# handle dependent plugins
 		if ( isset( $t_plugin_info['requires'] ) ) {
 			foreach ( $t_plugin_info['requires'] as $t_required => $t_version ) {
-				if ( !isset( $g_plugin_cache[$t_required] ) ||
-					( !is_null( $t_version ) &&
-					$g_plugin_cache[$t_required]['version'] < $t_version ) ) {
+				if ( plugin_dependency( $t_required, $t_version ) !== 1 ) {
 					return false;
 				}
 			}
