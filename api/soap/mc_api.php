@@ -10,8 +10,8 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	# use standard error handler rather than the one defined in Mantis.
-	restore_error_handler();
+	# set up error_handler() as the new default error handling function
+	set_error_handler( 'mc_error_handler' );
 
 	# override some Mantis configurations
 	$g_show_detailed_errors	= OFF;
@@ -277,9 +277,6 @@
 		return $rows;
 	}
 		
-	# set up error_handler() as the new default error handling function
-	set_error_handler( 'mc_error_handler' );
-
 	#########################################
 	# SECURITY NOTE: these globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
@@ -301,6 +298,7 @@
 		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 		global $g_lang_overrides;
 		global $g_error_send_page_header;
+		global $l_oServer;
 
 		# check if errors were disabled with @ somewhere in this call chain
 		# also suppress php 5 strict warnings
@@ -357,6 +355,8 @@
 
 		$t_error_description = nl2br( $t_error_description );
 
-		return new soap_fault( 'Server', '', $t_error_type . ': ' . $t_error_description );
+		$l_oServer->fault( 'Server', "Error Type: $t_error_type, Error Description: $t_error_description" );
+		$l_oServer->send_response();
+		exit();
 	}
 ?>
