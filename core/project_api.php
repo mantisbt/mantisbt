@@ -249,7 +249,7 @@
 	function project_delete( $p_project_id ) {
 		$t_email_notifications = config_get( 'enable_email_notification' );
 		# temporarily disable all notifications
-		config_set_cache( 'enable_email_notification', OFF );
+		config_set_cache( 'enable_email_notification', OFF, CONFIG_TYPE_INT );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
@@ -291,7 +291,7 @@
 
 		db_query_bound( $query, Array( $c_project_id ) );
 
-		config_set_cache( 'enable_email_notification', $t_email_notifications );
+		config_set_cache( 'enable_email_notification', $t_email_notifications, CONFIG_TYPE_INT );
 
 		project_clear_cache( $p_project_id );
 

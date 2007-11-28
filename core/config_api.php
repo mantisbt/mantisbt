@@ -325,7 +325,7 @@
 			$result = db_query( $t_set_query );
 		}
 
-		config_set_cache( $p_option, $p_value, $p_user, $p_project, $p_access );
+		config_set_cache( $p_option, $p_value, $t_type, $p_user, $p_project, $p_access );
 
 		return true;
 	}
@@ -333,9 +333,9 @@
 	# ------------------
 	# Sets the value of the given config option to the given value
 	#  If the config option does not exist, an ERROR is triggered
-	function config_set_cache( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
+	function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
 		global $g_cache_config, $g_cache_config_access;
-		$g_cache_config[$p_option][$p_user][$p_project] = $p_value;
+		$g_cache_config[$p_option][$p_user][$p_project] = $p_type . ';' . $p_value;
 		$g_cache_config_access[$p_option][$p_user][$p_project] = $p_access;
 
 		return true;
