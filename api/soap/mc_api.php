@@ -27,9 +27,8 @@
 	/**
 	 * Get the MantisConnect webservice version.
 	 */
-	function mc_version()
-	{
-		return '1.1.0-SVN';
+	function mc_version() {
+		return MANTIS_VERSION;
 	}
 
 	# --------------------
