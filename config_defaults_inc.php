@@ -95,8 +95,17 @@
 		} else {
 			$t_host = 'www.example.com';
 		}
-
+		
 		$t_path = dirname( strip_tags( $_SERVER['PHP_SELF'] ) );
+
+		# Remove /api/soap/ from the path to handle the case where the config_defaults_inc.php is included from the
+		# soap api.
+		$t_soap_api_path = '/api/soap';
+		$t_soap_api_path_pos = stripos( $t_path, $t_soap_api_path );
+		if ( $t_soap_api_path_pos == ( strlen( $t_path ) - strlen( $t_soap_api_path ) ) ) {
+			$t_path = substr( $t_path, 0, $t_soap_api_path_pos );
+		}
+
 		if ( '/' == $t_path || '\\' == $t_path ) {
 			$t_path = '';
 		}
