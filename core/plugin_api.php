@@ -139,6 +139,24 @@ function plugin_event_hook( $p_name, $p_callback ) {
 	event_hook( $p_name, $t_function, $t_basename );
 }
 
+/**
+ * Hook multiple plugin callbacks at once.
+ * @param array Array of event name/callback key/value pairs
+ */
+function plugin_event_hook_many( $p_hooks ) {
+	if ( ! is_array( $p_hooks ) ) {
+		return;
+	}
+
+	$t_basename = plugin_get_current();
+	$t_function_base = 'plugin_event_' . $t_basename . '_';
+
+	foreach( $p_hooks as $t_event => $t_callback ) {
+		$t_function = $t_function_base . $t_callback;
+		event_hook( $t_event, $t_function, $t_basename );
+	}
+}
+
 ### Plugin management functions
 
 /**
@@ -630,6 +648,13 @@ function plugin_init( $p_basename ) {
 		if ( function_exists( $t_init_function ) ) {
 			plugin_push_current( $p_basename );
 			$t_init_function();
+			plugin_pop_current();
+		}
+
+		$t_hook_function = 'plugin_callback_' . $p_basename . '_hook';
+		if ( function_exists( $t_hook_function ) ) {
+			plugin_push_current( $p_basename );
+			plugin_event_hook_many( $t_hook_function() );
 			plugin_pop_current();
 		}
 	}
