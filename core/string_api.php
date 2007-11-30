@@ -104,7 +104,7 @@
 		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = string_nl2br( $p_string );
 
-		return event_signal( 'EVENT_DISPLAY_GENERAL', $p_string );
+		return event_signal( 'EVENT_DISPLAY_TEXT', $p_string );
 	}
 
 	# --------------------
@@ -114,7 +114,7 @@
 		$p_string = string_html_specialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ false );
 
-		return event_signal( 'EVENT_DISPLAY_GENERAL', $p_string );
+		return event_signal( 'EVENT_DISPLAY_TEXT', $p_string );
 	}
 
 	# --------------------
@@ -127,7 +127,7 @@
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 
-		return event_signal( 'EVENT_DISPLAY_GENERAL_LINKS', $p_string );
+		return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string );
 	}
 
 	# --------------------
@@ -140,7 +140,7 @@
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 
-		return event_signal( 'EVENT_DISPLAY_GENERAL_LINKS', $p_string );
+		return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string );
 	}
 
 	# --------------------
