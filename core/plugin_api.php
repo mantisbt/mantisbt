@@ -157,6 +157,56 @@ function plugin_event_hook_many( $p_hooks ) {
 	}
 }
 
+/**
+ * Get a plugin configuration option.
+ * @param string Configuration option name
+ * @param multi Default option value
+ */
+function plugin_config_get( $p_option, $p_default=null, $p_global=false ) {
+	$t_basename = plugin_get_current();
+	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
+
+	if ( $p_global ) {
+		return config_get_global( $t_full_option, $p_default );
+	} else {
+		return config_get( $t_full_option, $p_default );
+	}
+}
+
+/**
+ * Set a plugin configuration option in the database.
+ * @param string Configuration option name
+ * @param multi Option value
+ * @param int User ID
+ * @param int Project ID
+ * @param int Access threshold
+ */
+function plugin_config_set( $p_option, $p_value, $p_user=NO_USER, $p_project=ALL_PROJECTS, $p_access=ADMINISTRATOR ) {
+	$t_basename = plugin_get_current();
+	$t_full_option = 'plugin_' . $t_basename . '_' . $p_option;
+
+	config_set( $t_full_option, $p_value, $p_user, $p_project, $p_access );
+}
+
+/**
+ * Set plugin default values to global values without overriding anything.
+ * @param array Array of configuration option name/value pairs.
+ */
+function plugin_config_defaults( $p_options ) {
+	if ( ! is_array( $p_options ) ) {
+		return;
+	}
+
+	$t_basename = plugin_get_current();
+	$t_option_base = 'plugin_' . $t_basename . '_';
+
+	foreach( $p_options as $t_option => $t_value ) {
+		$t_full_option = $t_option_base . $t_option;
+
+		config_set_global( $t_full_option, $t_value, false );
+	}
+}
+
 ### Plugin management functions
 
 /**
@@ -201,6 +251,10 @@ function plugin_get_info( $p_basename ) {
 	$t_info_function = 'plugin_callback_'.$p_basename.'_info';
 	if ( function_exists( $t_info_function ) ) {
 		$t_plugin_info = $t_info_function();
+
+		if ( ! is_array( $t_plugin_info ) ) {
+			return null;
+		}
 		
 		if ( !isset( $t_plugin_info['name'] ) ) {
 			$t_plugin_info['name'] = $p_basename;
@@ -642,6 +696,13 @@ function plugin_init( $p_basename ) {
 					return false;
 				}
 			}
+		}
+
+		$t_config_function = 'plugin_callback_'.$p_basename.'_config';
+		if ( function_exists( $t_config_function ) ) {
+			plugin_push_current( $p_basename );
+			plugin_config_defaults( $t_config_function() );
+			plugin_pop_current();
 		}
 
 		$t_init_function = 'plugin_callback_'.$p_basename.'_init';

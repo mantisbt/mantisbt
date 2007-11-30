@@ -329,6 +329,18 @@
 
 		return true;
 	}
+
+	# ------------------
+	# Sets the value of the given config option in the global namespace.
+	#  Does *not* persist the value between sessions. If override set to
+	#  false, then the value will only be set if not already existent.
+	function config_set_global( $p_option, $p_value, $p_override=true ) {
+		if ( $p_override || !isset( $GLOBALS['g_' . $p_option] ) ) {
+			$GLOBALS['g_' . $p_option] = $p_value;
+		}
+
+		return true;
+	}
 	
 	# ------------------
 	# Sets the value of the given config option to the given value
