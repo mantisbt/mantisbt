@@ -522,6 +522,15 @@ function plugin_install( $p_basename ) {
 		return null;
 	}
 
+	plugin_include( $p_basename );
+
+	$t_install_function = 'plugin_callback_' . $p_basename . '_install';
+	if ( function_exists( $t_install_function ) ) {
+		if ( ! $t_install_function() ) {
+			return null;
+		}
+	}
+
 	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
 	$t_plugin = plugin_get_info( $p_basename );
 
@@ -597,6 +606,15 @@ function plugin_upgrade( $p_basename ) {
 		$i++;
 	}
 
+	plugin_include( $p_basename );
+
+	$t_upgrade_function = 'plugin_callback_' . $p_basename . '_upgrade';
+	if ( function_exists( $t_upgrade_function ) ) {
+		if ( ! $t_upgrade_function() ) {
+			return null;
+		}
+	}
+
 	return true;
 }
 
@@ -616,6 +634,15 @@ function plugin_uninstall( $p_basename ) {
 
 	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param(0);
 	db_query_bound( $t_query, array( $c_basename ) );
+
+	plugin_include( $p_basename );
+
+	$t_uninstall_function = 'plugin_callback_' . $p_basename . '_uninstall';
+	if ( function_exists( $t_uninstall_function ) ) {
+		if ( ! $t_uninstall_function() ) {
+			return null;
+		}
+	}
 }
 
 ### Core usage only.
