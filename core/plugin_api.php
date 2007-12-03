@@ -610,7 +610,7 @@ function plugin_upgrade( $p_basename ) {
 
 	$t_upgrade_function = 'plugin_callback_' . $p_basename . '_upgrade';
 	if ( function_exists( $t_upgrade_function ) ) {
-		if ( ! $t_upgrade_function() ) {
+		if ( ! $t_upgrade_function( $t_schema_version ) ) {
 			return null;
 		}
 	}
