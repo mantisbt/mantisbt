@@ -275,6 +275,53 @@
 		}
 		return $rows;
 	}
+	
+	/**
+	 * Basically this is a copy of core/filter_api.php#filter_db_get_available_queries().
+	 * The only difference is that the result of this function is not an array of filter
+	 * names but an array of filter structures. 
+	 */
+	function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$t_overall_query_arr = array();
+
+		if ( null === $p_project_id ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = db_prepare_int( $p_project_id );
+		}
+
+		if ( null === $p_user_id ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = db_prepare_int( $p_user_id );
+		}
+
+		# If the user doesn't have access rights to stored queries, just return
+		if ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
+			return $t_overall_query_arr;
+		}
+
+		# Get the list of available queries. By sorting such that public queries are
+		# first, we can override any query that has the same name as a private query
+		# with that private one
+		$query = "SELECT * FROM $t_filters_table
+					WHERE (project_id='$t_project_id'
+					OR project_id='0')
+					AND name!=''
+					ORDER BY is_public DESC, name ASC";
+		$result = db_query( $query );
+		$query_count = db_num_rows( $result );
+
+		for ( $i = 0; $i < $query_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
+				$t_overall_query_arr[$row['name']] = $row;
+			}
+		}
+
+		return array_values( $t_overall_query_arr );
+	}
 		
 	#########################################
 	# SECURITY NOTE: these globals are initialized here to prevent them
