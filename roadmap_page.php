@@ -96,6 +96,7 @@
 			
 			$t_issues_planned = 0;
 			$t_issues_resolved = 0;
+			$t_issues_counted = array();
 
 			$t_version_header_printed = false;
 
@@ -136,11 +137,15 @@
 				if ( !helper_call_custom_function( 'roadmap_include_issue', array( $t_issue_id ) ) ) {
 					continue;
 				}
+
+				if ( !isset( $t_issues_counted[$t_issue_id] ) ) {
+					$t_issues_planned++;
 				
-				$t_issues_planned++;
-				
-				if ( bug_is_resolved( $t_issue_id ) ) {
-					$t_issues_resolved++;
+					if ( bug_is_resolved( $t_issue_id ) ) {
+						$t_issues_resolved++;
+					}
+
+					$t_issues_counted[$t_issue_id] = true;
 				}
 
 				$t_issue_ids[] = $t_issue_id;
