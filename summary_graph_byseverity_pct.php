@@ -33,7 +33,11 @@
 	$f_width = gpc_get_int( 'width', 300 );
 
 	$t_token = token_get_value( TOKEN_GRAPH );
-	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_bug_enum_summary( lang_get( 'severity_enum_string' ), 'severity' );
+	if ( $t_token == null ) {
+		$t_metrics = create_bug_enum_summary( lang_get( 'severity_enum_string' ), 'severity' );	
+	} else {
+		$t_metrics = graph_total_metrics( unserialize( $t_token ) );
+	}
 
 	graph_pie( $t_metrics, lang_get( 'by_severity_pct' ), $f_width, $f_width );
 ?>

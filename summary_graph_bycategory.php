@@ -34,7 +34,11 @@
 	$t_ar = config_get( 'graph_bar_aspect' );
 
 	$t_token = token_get_value( TOKEN_GRAPH );
-	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_category_summary();
+	if ( $t_token == null ) {
+		$t_metrics = create_category_summary();
+	} else {
+		$t_metrics = unserialize( $t_token );
+	}
 
 	graph_bar( $t_metrics, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
 ?>

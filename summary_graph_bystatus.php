@@ -34,7 +34,11 @@
 	$t_ar = config_get( 'graph_bar_aspect' );
 
 	$t_token = token_get_value( TOKEN_GRAPH );
-	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
+	if ( $t_token == null ) {
+		$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );		
+	} else {
+		$t_metrics = unserialize( $t_token );
+	}
 
 	graph_bar( $t_metrics, lang_get( 'by_status' ), $f_width, $f_width * $t_ar );
 ?>
