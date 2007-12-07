@@ -16,22 +16,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
-	#
-	# Italian: Luca Pescatore, l.pescatore@network.it
-	# Italian: Marco Vassura, m.vassura@itools.it
-	# Italian: Lele Gaifax, lele@seldati.it
-	# Italian: Marcello Scatà, marcello@marcelloscata.com
-	#
-	###########################################################################
-	# Italian strings for Mantis
-	# Based on strings_english.txt rev. 1.312
-	# -------------------------------------------------
-	# $Revision: 1.124 $
-	# $Author: giallu $
-	# $Date: 2007-10-24 22:31:14 $
-	#
-	# $Id$
-	###########################################################################
+#
+# Italian: Luca Pescatore, l.pescatore@network.it
+# Italian: Marco Vassura, m.vassura@itools.it
+# Italian: Lele Gaifax, lele@seldati.it
+# Italian: Marcello Scatà, marcello@marcelloscata.com
+#
+###########################################################################
+# Italian strings for Mantis
+# Based on strings_english.txt rev. 1.316
+# -------------------------------------------------
+# $Revision: 1.124 $
+# $Author: giallu $
+# $Date: 2007-10-24 22:31:14 $
+#
+# $Id$
+###########################################################################
 ?>
 <?php
 # Charset
@@ -53,6 +53,7 @@ $s_actiongroup_menu_update_field = "Aggiorna %s";
 $s_actiongroup_menu_update_target_version = "Assegna a versione";
 $s_actiongroup_menu_update_fixed_in_version = "Aggiorna versione di risoluzione";
 $s_actiongroup_menu_add_note = "Aggiungi nota";
+$s_actiongroup_menu_attach_tags = "Aggiungi etichetta";
 $s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
@@ -97,6 +98,8 @@ $s_delete_bugnote_sure_msg = "Eliminare questa nota?";
 $s_bug_relationships = "Relazioni";
 $s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia quello che vuoi?";
 $s_empty_password_button = "Conferma password vuota";
+$s_reauthenticate_title = "Autenticazione";
+$s_reauthenticate_message = "Stai visitando una pagina protetta, e la tua sessione è scaduta.  Per continuare devi rifare l'autenticazione.";
 
 $s_duplicate_of = "duplicato di";
 $s_has_duplicate = "duplicata da";
@@ -289,6 +292,12 @@ $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = "Questa operazione creerebbe 
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = "Non puoi modificare il livello di accesso nell'unico amministratore del sistema.";
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = "Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php";
 $MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = "L'integrazione con Twitter necessita dell'estensione CURL per PHP che non risulta installata.";
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = "Non esiste un'etichetta con quel nome.";
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = "Esiste già un'etichetta con quel nome.";
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = "Il nome dell'etichetta non è valido.";
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = "L'etichetta non è associata a quell'anomalia.";
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = "L'anomalia è già contrassegnata con quell'etichetta.";
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = "Token non trovato.";
 
 $s_login_error = "L'account potrebbe essere stato disabilitato o bloccato oppure potresti aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -1105,6 +1114,7 @@ $s_sticky = "In primo piano";
 $s_sort = "Ordina per";
 $s_issue_id = "Anomalia #";
 $s_recently_visited = "Esaminate di recente";
+$s_priority_abbreviation = "P";
 
 # view_all_inc.php
 $s_none = "in bianco";
@@ -1358,6 +1368,38 @@ $s_on_or_after = "Il o dopo il";
 
 # wiki related strings
 $s_wiki = "Wiki";
+
+# Tagging
+$s_tags = "Etichette";
+$s_tag_details = "Dettagli etichetta: %s";
+$s_tag_id = "ID etichetta";
+$s_tag_name = "Nome";
+$s_tag_creator = "Creatore";
+$s_tag_created = "Data creazione";
+$s_tag_updated = "Ultima modifica";
+$s_tag_description = "Descrizione etichetta";
+$s_tag_statistics = "Statistiche utilizzo";
+$s_tag_update = "Aggiorna etichetta: %s";
+$s_tag_update_return = "Torna all'etichetta";
+$s_tag_update_button = "Aggiorna etichetta";
+$s_tag_delete_button = "Elimina etichetta";
+$s_tag_delete_message = "Confermi di voler cancellare questa etichetta?";
+$s_tag_existing = "Etichette esistenti";
+$s_tag_none_attached = "Nessuna etichetta assegnata";
+$s_tag_attach = "Contrassegna";
+$s_tag_attach_long = "Assegna etichette";
+$s_tag_attach_failed = "Assegnazione etichetta fallita";
+$s_tag_detach = "Rimuovi \"%s\"";
+$s_tag_separate_by = "(Separa con \"%s\")";
+$s_tag_invalid_name = "Nome etichetta non valido";
+$s_tag_create_denied = "Permesso di creazione negato.";
+$s_tag_filter_default = "Anomalie collegate";
+$s_tag_history_attached = "Etichetta assegnata";
+$s_tag_history_detached = "Etichetta rimossa";
+$s_tag_history_renamed = "Etichetta rinominata";
+$s_tag_related = "Etichette correlate";
+$s_tag_related_issues = "Anomalie correlate (%s)";
+$s_tag_stats_attached = "Anomalie contrassegnate: %s";
 
 # Time Tracking
 $s_time_tracking_billing_link = "Riepilogo costi";
