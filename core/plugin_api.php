@@ -151,9 +151,17 @@ function plugin_event_hook_many( $p_hooks ) {
 	$t_basename = plugin_get_current();
 	$t_function_base = 'plugin_event_' . $t_basename . '_';
 
-	foreach( $p_hooks as $t_event => $t_callback ) {
-		$t_function = $t_function_base . $t_callback;
-		event_hook( $t_event, $t_function, $t_basename );
+	foreach( $p_hooks as $t_event => $t_callbacks ) {
+		if ( !is_array( $t_callbacks ) ) {
+			$t_function = $t_function_base . $t_callbacks;
+			event_hook( $t_event, $t_function, $t_basename );
+			continue;
+		}
+
+		foreach( $t_callbacks as $t_callback ) {
+			$t_function = $t_function_base . $t_callback;
+			event_hook( $t_event, $t_function, $t_basename );
+		}
 	}
 }
 

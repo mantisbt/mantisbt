@@ -82,6 +82,28 @@ function event_hook( $p_name, $p_callback, $p_plugin=false ) {
 }
 
 /**
+ * Hook multiple callback functions to multiple events.
+ * @param array Event name/callback pairs
+ * @param string Plugin basename
+ */
+function event_hook_many( $p_hooks, $p_plugin=false ) {
+	if ( ! is_array( $p_hooks ) ) {
+		return;
+	}
+
+	foreach( $p_hooks as $t_name => $t_callbacks ) {
+		if ( !is_array( $t_callbacks ) ) {
+			event_hook( $t_name, $t_callback, $p_plugin );
+			continue;
+		}
+
+		foreach( $t_callbacks as $t_callback ) {
+			event_hook( $t_name, $t_callback, $p_plugin );
+		}
+	}
+}
+
+/**
  * Signal an event to execute and handle callbacks as necessary.
  * @param string Event name
  * @param multi Event parameters
@@ -137,7 +159,10 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params=null ) {
 
 	$t_value = null;
 	if ( function_exists( $p_callback ) ) {
-		$t_value = $p_callback( $p_event, $p_params );
+		if ( !is_array( $p_params ) ) {
+			$p_params = array( $p_params );
+		}
+		$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
 	}
 
 	if ( $p_plugin !== false ) {
