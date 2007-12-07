@@ -33,7 +33,11 @@
 	$f_width = gpc_get_int( 'width', 300 );
 	
 	$t_token = token_get_value( TOKEN_GRAPH );
-	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_category_summary();
+	if ( $t_token == null ) {
+		$t_metrics = create_category_summary();
+	} else {
+		$t_metrics = unserialize( $t_token );
+	}
 
 	graph_pie( $t_metrics, lang_get( 'by_category_pct' ), $f_width, $f_width );
 ?>

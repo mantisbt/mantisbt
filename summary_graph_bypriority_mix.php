@@ -34,7 +34,11 @@
 	$t_ar = config_get( 'graph_bar_aspect' );
 
 	$t_token = token_get_value( TOKEN_GRAPH );
-	$t_metrics = $t_token != null ? unserialize( $t_token ) : create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority');
+	if ( $t_token == null ) {
+		$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');	
+	} else {
+		$t_metrics = unserialize( $t_token );
+	}
 
 	graph_group( $t_metrics, lang_get( 'by_priority_mix' ), $f_width, $f_width * $t_ar );
 ?>
