@@ -132,15 +132,15 @@
 		
 		if ( 'bug' == $p_table ) {
 			# updated the last_updated date
-			$result = bug_update_date( $p_bug_id );
+			$result = bug_update_date( $c_issue_id );
 			# log new bug
-			history_log_event_special( $p_bug_id, FILE_ADDED, $p_file_name );
+			history_log_event_special( $c_issue_id, FILE_ADDED, $c_new_file_name );
 		}
 
 		return $t_attachment_id;
 	}
 	
-	function mci_file_get( $p_file_id, $p_type ) {
+	function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		# we handle the case where the file is attached to a bug
 		# or attached to a project as a project doc.
 		$query = '';
@@ -168,7 +168,7 @@
 		# Check access rights
 		switch ( $p_type ) {
 			case 'bug':
-				if ( !mci_file_can_download_bug_attachments( $v_bug_id, $t_user_id ) ) {
+				if ( !mci_file_can_download_bug_attachments( $v_bug_id, $p_user_id ) ) {
 					return new soap_fault( 'Client', '', 'Access Denied' );
 				}
 				break;
@@ -177,7 +177,7 @@
 				if ( OFF == config_get( 'enable_project_documentation' ) ) {
 					return new soap_fault( 'Client', '', 'Access Denied' );
 				}
-				if ( !access_has_project_level(  config_get( 'view_proj_doc_threshold' ), $v_project_id, $t_user_id ) ) {
+				if ( !access_has_project_level(  config_get( 'view_proj_doc_threshold' ), $v_project_id, $p_user_id ) ) {
 					return new soap_fault( 'Client', '', 'Access Denied' );
 				}
 				break;

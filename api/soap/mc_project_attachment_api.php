@@ -21,7 +21,7 @@
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
-		return mci_file_get( $p_project_attachment_id, 'doc' );
+		return mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
  	}
  	
   	/**
@@ -68,7 +68,7 @@
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
-		$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+		$t_project_id = file_get_field( $p_project_attachment_id, 'project_id', 'project' );
 		if ( !access_has_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id, $t_user_id ) ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
