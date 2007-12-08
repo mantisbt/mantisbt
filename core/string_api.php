@@ -76,23 +76,31 @@
 	# <pre> tags.
 	# additionally, wrap the text an $p_wrap character intervals if the config is set
 	function string_nl2br( $p_string, $p_wrap = 100 ) {
-		$p_string = nl2br( $p_string );
-
-		# fix up eols within <pre> tags (#1146)
-		$pre2 = array();
-		preg_match_all("/<pre[^>]*?>(.|\n)*?<\/pre>/", $p_string, $pre1);
-		for ( $x = 0; $x < count($pre1[0]); $x++ ) {
-			$pre2[$x] = preg_replace("/<br[^>]*?>/", "", $pre1[0][$x]);
-			# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
-			#     if other encoded characters are a problem
-			$pre2[$x] = preg_replace("/&nbsp;/", " ", $pre2[$x]);
-			if ( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-				$pre2[$x] = preg_replace("/([^\n]{".$p_wrap."})(?!<\/pre>)/", "$1\n", $pre2[$x]);
+		$output = '';
+		$pieces = preg_split('/(<pre[^>]*>.*?<\/pre>)/is', $p_string, -1, PREG_SPLIT_DELIM_CAPTURE); 	
+		if(isset($pieces[1])) 
+		{
+			foreach($pieces as $piece)
+			{
+				if(preg_match('/(<pre[^>]*>.*?<\/pre>)/is', $piece)) 
+				{
+					$piece = preg_replace("/<br[^>]*?>/", "", $piece);
+					# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
+					#     if other encoded characters are a problem
+					$piece = preg_replace("/&nbsp;/", " ", $piece);
+					if ( ON == config_get( 'wrap_in_preformatted_text' ) ) {
+						$output .= preg_replace('/([^\n]{'.$p_wrap.'})(?!<\/pre>)/', "$1\n", $piece);
+					} else {
+						$output .= $piece;
+					}
+				} else {
+					$output .= nl2br($piece);
+				}
 			}
-			$pre1[0][$x] = "/" . preg_quote($pre1[0][$x], "/") . "/";
+			return $output;
+		} else {
+			return nl2br($p_string);
 		}
-
-		return preg_replace( $pre1[0], $pre2, $p_string );
 	}
 
 	# --------------------
