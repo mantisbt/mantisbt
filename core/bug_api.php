@@ -94,20 +94,20 @@
 
 	# --------------------
 	# Cache an object as a bug.
-	function bug_cache_database_result( $p_bug_datebase_result, $p_stats = null ) {
+	function bug_cache_database_result( $p_bug_database_result, $p_stats = null ) {
 		global $g_cache_bug;
 		
-		if ( isset( $g_cache_bug[ $p_bug_datebase_result['id'] ] ) ) {
-			return $g_cache_bug[ $p_bug_datebase_result['id'] ];
+		if ( isset( $g_cache_bug[ $p_bug_database_result['id'] ] ) ) {
+			return $g_cache_bug[ $p_bug_database_result['id'] ];
 		}	
 		
-		if( !is_int( $p_bug_datebase_result['date_submitted'] ) )
-			$p_bug_datebase_result['date_submitted']	= db_unixtimestamp( $p_bug_datebase_result['date_submitted']['date_submitted'] );
-		if( !is_int( $p_bug_datebase_result['last_updated'] ) )
-			$p_bug_datebase_result['last_updated']	= db_unixtimestamp( $p_bug_datebase_result['last_updated'] );
-		$g_cache_bug[ $p_bug_datebase_result['id'] ] = $p_bug_datebase_result;
+		if( !is_int( $p_bug_database_result['date_submitted'] ) )
+			$p_bug_database_result['date_submitted']	= db_unixtimestamp( $p_bug_database_result['date_submitted']['date_submitted'] );
+		if( !is_int( $p_bug_database_result['last_updated'] ) )
+			$p_bug_database_result['last_updated']	= db_unixtimestamp( $p_bug_database_result['last_updated'] );
+		$g_cache_bug[ $p_bug_database_result['id'] ] = $p_bug_database_result;
 		if( !is_null( $p_stats ) ) {
-			$g_cache_bug[ $p_bug_datebase_result['id'] ]['_stats'] = $p_stats;
+			$g_cache_bug[ $p_bug_database_result['id'] ]['_stats'] = $p_stats;
 		}
 	}
 
