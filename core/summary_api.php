@@ -554,16 +554,16 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		$specific_where = helper_project_specific_where( $t_project_id );
+		$specific_where = trim( helper_project_specific_where( $t_project_id ) );
 		if ( ' 1<>1' == $specific_where ) {
 			return;
 		}
-		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'project_id, ' : '';
+		$t_project_query = ( ON == $t_summary_category_include_project ) ? 'b.project_id, ' : '';
 
-		$query = "SELECT COUNT(id) as bugcount, $t_project_query c.name AS category_name, c.id AS category_id, status
-				FROM $t_mantis_bug_table
+		$query = "SELECT COUNT(b.id) as bugcount, $t_project_query c.name AS category_name, c.id AS category_id, b.status
+				FROM $t_mantis_bug_table b
 				JOIN $t_mantis_category_table AS c ON category_id=c.id
-				WHERE $specific_where
+				WHERE b.$specific_where
 				GROUP BY $t_project_query category_id, category_name, status
 				ORDER BY $t_project_query category_id, category_name, status";
 
