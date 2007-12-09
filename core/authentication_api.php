@@ -193,6 +193,7 @@
         global $g_cache_current_user_id, $g_cache_cookie_valid;
         
         # clear cached userid
+        user_clear_cache( $g_cache_current_user_id );
         $g_cache_current_user_id = null;
         $g_cache_cookie_valid = null; 
         
@@ -572,16 +573,25 @@
 			return true;
 		}
 		
+		if ( user_search_cache('cookie_string', $p_cookie_string ) ) {
+			return true;
+		}
+
 		# look up cookie in the database to see if it is valid
 		$t_user_table = db_get_table( 'mantis_user_table' );
 
-		$query = "SELECT id
+		$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param(0);
 		$result = db_query_bound( $query, Array( $p_cookie_string ) );
 
 		# return true if a matching cookie was found
- 		return ( 1 == db_num_rows( $result ) );
+		if ( 1 == db_num_rows( $result ) ) {
+			user_cache_database_result( db_fetch_array( $result ) );
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	#########################################
@@ -597,9 +607,15 @@
 			return $g_cache_current_user_id;
 		}
 
-		$t_user_table = db_get_table( 'mantis_user_table' );
-
 		$t_cookie_string = auth_get_current_user_cookie();
+
+		if ( $t_result = user_search_cache('cookie_string', $t_cookie_string ) ) {
+			$t_user_id = (int) $t_result['id'];
+			$g_cache_current_user_id = $t_user_id;
+			return $t_user_id;
+		}
+
+		$t_user_table = db_get_table( 'mantis_user_table' );
 
 		# @@@ error with an error saying they aren't logged in?
 		#     Or redirect to the login page maybe?

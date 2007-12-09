@@ -100,7 +100,18 @@
 		}
 		return;
 	}
-	
+
+	# --------------------
+	# Cache an object as a bug.
+	function user_cache_database_result( $p_user_database_result ) {
+		global $g_cache_user;
+
+		if ( isset( $g_cache_user[ $p_user_database_result['id'] ] ) ) {
+			return $g_cache_user[ $p_user_database_result['id'] ];
+		}	
+		
+		$g_cache_user[ $p_user_database_result['id'] ] = $p_user_database_result;
+	}	
 	# --------------------
 	# Clear the user cache (or just the given id if specified)
 	function user_clear_cache( $p_user_id = null ) {
@@ -125,6 +136,15 @@
 		}
 	}
 	
+	function user_search_cache( $p_field, $p_value ) {
+		global $g_cache_user;
+		foreach ($g_cache_user as $t_user ) {
+			if ($t_user[$p_field] == $p_value ) {
+				return $t_user;
+			}
+		}
+		return false;
+	}
 	#===================================
 	# Boolean queries and ensures
 	#===================================
@@ -576,15 +596,13 @@
 	#  return false if the username does not exist
 	function user_get_id_by_name( $p_username ) {
 		global $g_cache_user;
-		foreach ($g_cache_user as $t_user ) {
-			if ($t_user['username'] == $p_username ) {
-				return $t_user['id'];
-			}
+		if ( $t_user = user_search_cache('username', $p_username ) ) {
+			return $t_user['id'];
 		}
 
 		$t_user_table	= db_get_table( 'mantis_user_table' );
 		
-		$query = "SELECT id
+		$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE username=" . db_param(0);
 		$result = db_query_bound( $query, Array( $p_username ) );
@@ -592,7 +610,9 @@
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;
 		} else {
-			return db_result( $result );
+			$row = db_fetch_array( $result );
+			user_cache_database_result( $row );
+			return $row['id'];
 		}
 	}
 
