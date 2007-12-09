@@ -149,6 +149,7 @@
 	#  otherwise let execution continue undisturbed
 	function project_ensure_exists( $p_project_id ) {
 		if ( !project_exists( $p_project_id ) ) {
+			error_parameters( $p_project_id );
 			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 		}
 	}
@@ -472,7 +473,7 @@
 	#  higher than the given value.
 	# if the first parameter is given as 'ALL_PROJECTS', return the global access level (without
 	# any reference to the specific project
-	function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY ) {
+	function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		# Optimization when access_level is NOBODY
@@ -483,10 +484,13 @@
 		$t_user_table = db_get_table( 'mantis_user_table' );
 		$t_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 		$t_project_table = db_get_table( 'mantis_project_table' );
-		
-		$t_global_access_level = $p_access_level;
 
-		if ( $c_project_id != ALL_PROJECTS ) {
+		$t_on = ON;
+		$t_users = array();
+
+		if ( $c_project_id != ALL_PROJECTS && $p_include_global_users ) {
+			$t_global_access_level = $p_access_level;
+
 			# looking for specific project
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
 				# @@@ (thraxisp) this is probably more complex than it needs to be
@@ -523,36 +527,34 @@
 					}
 				}
 			}
-		}
-				
-		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
-		if ( is_array( $t_global_access_level ) ) {
-			if ( 0 == count( $t_global_access_level ) ) {
-				$t_global_access_clause = ">= " . NOBODY . " ";
-			} else if ( 1 == count( $t_global_access_level ) ) {
-				$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
+
+			$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
+			if ( is_array( $t_global_access_level ) ) {
+				if ( 0 == count( $t_global_access_level ) ) {
+					$t_global_access_clause = ">= " . NOBODY . " ";
+				} else if ( 1 == count( $t_global_access_level ) ) {
+					$t_global_access_clause = "= " . array_shift( $t_global_access_level ) . " ";
+				} else {
+					$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
+				}
 			} else {
-				$t_global_access_clause = "IN (" . implode( ',', $t_global_access_level ) . ")";
+				$t_global_access_clause = ">= $t_global_access_level ";
+			}			
+
+			$t_adm = ADMINISTRATOR;
+
+			$query = "SELECT id, username, realname, access_level
+					FROM $t_user_table
+					WHERE enabled = " . db_param(0) . "
+						AND access_level $t_global_access_clause";
+
+			$result = db_query_bound( $query, Array( $t_on ) );
+			$t_row_count = db_num_rows( $result );
+			for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+				$row = db_fetch_array( $result );
+				$t_users[$row['id']] = $row;
 			}
-		} else {
-			$t_global_access_clause = ">= $t_global_access_level ";
-		}			
-
-		$t_on = ON;
-		$t_adm = ADMINISTRATOR;
-		$t_users = array();
-
-		$query = "SELECT id, username, realname, access_level
-				FROM $t_user_table
-				WHERE enabled = " . db_param(0) . "
-					AND access_level $t_global_access_clause";
-
-		$result = db_query_bound( $query, Array( $t_on ) );
-		$t_row_count = db_num_rows( $result );
-		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-			$row = db_fetch_array( $result );
-			$t_users[$row['id']] = $row;
-		}
+		}				
 
 		if( $c_project_id != ALL_PROJECTS ) {
 			# Get the project overrides

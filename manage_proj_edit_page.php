@@ -33,11 +33,15 @@
 	auth_reauthenticate();
 
 	$f_project_id = gpc_get_int( 'project_id' );
+	$f_show_global_users = gpc_get_bool( 'show_global_users' );
 
+	project_ensure_exists( $f_project_id );
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
 	
+	$t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
+
 	html_page_top1( project_get_field( $f_project_id, 'name' ) );
 	html_page_top2();
 
@@ -589,8 +593,9 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 <?php
 # We want to allow people with global permissions and people with high enough
 #  permissions on the project we are editing
-if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+if ( $t_can_manage_users ) {
 ?>
+<br />
 <br />
 <div align="center">
 	<table class="width75" cellspacing="1">
@@ -671,7 +676,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 			</td>
 		</tr>
 <?php
-	$t_users = project_get_all_user_rows( $f_project_id );
+	$t_users = project_get_all_user_rows( $f_project_id, ANYBODY, $f_show_global_users );
 	$t_display = array();
 	$t_sort = array();
 	foreach ( $t_users as $t_user ) {
@@ -689,12 +694,16 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 		$t_display[] = $t_user_name;
 		$t_sort[] = $t_sort_name;
 	}
+
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
 	# reset the class counter
 	helper_alternate_class( 0 );
 
-	for ($i = 0; $i < count( $t_sort ); $i++ ) {
+	$t_users_count = count( $t_sort );
+	$t_removable_users_exist = false;
+
+	for ( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -714,9 +723,10 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 			<?php
 				# You need global or project-specific permissions to remove users
 				#  from this project
-				if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+				if ( $t_can_manage_users ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
 						print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+						$t_removable_users_exist = true;
 					}
 				}
 			?>
@@ -733,7 +743,14 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 	<?php
 		# You need global or project-specific permissions to remove users
 		#  from this project
-		if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+		if ( !$f_show_global_users ) {
+			print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '&amp;show_global_users=true', lang_get( 'show_global_users' ) );
+		} else {
+			print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'hide_global_users' ) );
+		}
+
+		if ( $t_removable_users_exist ) {
+			echo '&nbsp;';
 			print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
 		}
 	?>
