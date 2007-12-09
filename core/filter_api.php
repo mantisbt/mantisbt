@@ -2823,6 +2823,8 @@
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
 		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
+			if ( $g_cache_filter_db_filters[$p_filter_id] === false ) 
+				return null;
 			return $g_cache_filter_db_filters[$p_filter_id];
 		}
 
@@ -2853,9 +2855,10 @@
 
 			$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
 			return $row['filter_string'];
-		}
-
-		return null;
+		} else {
+			$g_cache_filter_db_filters[$p_filter_id] = false;
+			return false;
+		}		
 	}
 
 	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
