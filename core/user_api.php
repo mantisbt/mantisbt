@@ -548,8 +548,15 @@
 	# get a user id from a username
 	#  return false if the username does not exist
 	function user_get_id_by_name( $p_username ) {
-		$t_user_table	= db_get_table( 'mantis_user_table' );
+		global $g_cache_user;
+		foreach ($g_cache_user as $t_user ) {
+			if ($t_user['username'] == $p_username ) {
+				return $t_user['id'];
+			}
+		}
 
+		$t_user_table	= db_get_table( 'mantis_user_table' );
+		
 		$query = "SELECT id
 				  FROM $t_user_table
 				  WHERE username=" . db_param(0);
