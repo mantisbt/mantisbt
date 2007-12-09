@@ -74,6 +74,33 @@
 		return $row;
 	}
 
+	function user_cache_array_rows( $p_user_id_array ) {
+		global $g_cache_user;
+		$c_user_id_array = array();
+		
+		foreach( $p_user_id_array as $t_user_id ) {
+			if ( !isset( $g_cache_user[(int)$t_user_id] ) ) {
+				$c_user_id_array[] = (int)$t_user_id;
+			}
+		}
+
+		if( empty( $c_user_id_array ) )
+			return;
+		
+
+		$t_user_table = db_get_table( 'mantis_user_table' );
+
+		$query = "SELECT *
+				  FROM $t_user_table
+				  WHERE id IN (" . implode( ',', $c_user_id_array ) . ')';
+		$result = db_query_bound( $query );
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$g_cache_user[(int)$row['id']] = $row;	
+		}
+		return;
+	}
+	
 	# --------------------
 	# Clear the user cache (or just the given id if specified)
 	function user_clear_cache( $p_user_id = null ) {

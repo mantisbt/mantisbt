@@ -413,6 +413,13 @@
 		$t_closed_val = CLOSED;
 
 		while ( $row = db_fetch_array( $result ) ) {
+			$t_summarydata[] = $row;
+			$t_summaryusers[] = $row['handler_id'];	
+		}
+
+		user_cache_array_rows( array_unique( $t_summaryusers ) );
+		
+		foreach ($t_summarydata as $row) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			if ( ($v_handler_id != $t_last_handler) && (-1 != $t_last_handler) ) {
