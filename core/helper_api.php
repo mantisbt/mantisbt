@@ -424,6 +424,9 @@
 
 	# Return a URL relative to the web root, compatible with other applications
 	function helper_mantis_url( $p_url ) {
+		if ( is_blank( $p_url ) ) {
+			return $p_url;
+		}
 		return config_get_global( 'short_path' ) . $p_url;
 	}
 ?>
