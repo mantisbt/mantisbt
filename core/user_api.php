@@ -138,9 +138,11 @@
 	
 	function user_search_cache( $p_field, $p_value ) {
 		global $g_cache_user;
-		foreach ($g_cache_user as $t_user ) {
-			if ($t_user[$p_field] == $p_value ) {
-				return $t_user;
+		if ( isset ( $g_cache_user ) ) {
+			foreach ($g_cache_user as $t_user ) {
+				if ($t_user[$p_field] == $p_value ) {
+					return $t_user;
+				}
 			}
 		}
 		return false;
