@@ -545,10 +545,10 @@ function plugin_install( $p_basename ) {
 	$c_basename = db_prepare_string( $p_basename );
 
 	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
-				VALUES ( ".db_param(0).", 1 )";
+				VALUES ( ".db_param(0).", '1' )";
 	db_query_bound( $t_query, array( $c_basename ) );
 
-	if ( false === ( config_get( 'schema_' . $p_basename . '_schema', false ) ) ) {
+	if ( false === ( config_get( 'plugin_' . $p_basename . '_schema', false ) ) ) {
 		config_set( 'plugin_' . $p_basename . '_schema', -1 );
 	}
 	plugin_upgrade( $p_basename );

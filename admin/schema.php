@@ -379,7 +379,7 @@ $upgrade[] = Array( 'CreateTableSQL', Array( db_get_table( 'mantis_category_tabl
 	name			C(128)	NOTNULL DEFAULT \" '' \",
 	status			I		UNSIGNED NOTNULL DEFAULT '0'
 	", Array( 'mysql' => 'TYPE=MyISAM', 'pgsql' => 'WITHOUT OIDS' ) ) );
-$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_project_name', db_get_table( 'mantis_category_table' ), 'project_id, name', array( 'UNIQUE' ) ) );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_category_project_name', db_get_table( 'mantis_category_table' ), 'project_id, name', array( 'UNIQUE' ) ) );
 $upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_category_table' ), "
 	( project_id, user_id, name, status ) VALUES
 	( '0', '0', 'None', '0' ) " ) );
