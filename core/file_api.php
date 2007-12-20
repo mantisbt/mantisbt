@@ -163,7 +163,7 @@
 			$row = $t_attachment_rows[$i];
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$t_file_display_name = file_get_display_name( $v_filename );
+			$t_file_display_name = string_display_line( file_get_display_name( $v_filename ) );
 			$t_filesize		= number_format( $v_filesize );
 			$t_date_added	= date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 
