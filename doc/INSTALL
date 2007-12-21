@@ -17,8 +17,8 @@ http://manual.mantisbt.org/manual.installation.php
 
 # --- Requirements ----------
 
-* MySQL 4.1.0 and higher
-* PHP 4.3.0 and higher
+* MySQL 4.1.1 and higher
+* PHP 5.2.0 and higher
 * a webserver (e.g. Apache, IIS)
 
 # --- Summary ---------------
