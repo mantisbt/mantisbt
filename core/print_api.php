@@ -1056,7 +1056,7 @@
 				LEFT JOIN $t_mantis_project_user_list_table p
 				ON p.user_id=u.id AND p.project_id='$c_project_id'
 				WHERE u.access_level<$t_adm AND
-					u.enabled = 1 AND
+					u.enabled = '1' AND
 					p.user_id IS NULL
 				ORDER BY u.realname, u.username";
 		$result = db_query( $query );
@@ -1100,7 +1100,7 @@
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id AND u.user_id='$c_user_id'
-				WHERE p.enabled=1 AND
+				WHERE p.enabled = '1' AND
 					u.user_id IS NULL
 				ORDER BY p.name";
 		$result = db_query( $query );
@@ -1124,7 +1124,7 @@
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
-				WHERE p.enabled=1 AND
+				WHERE p.enabled = '1' AND
 					u.user_id=" . db_param(0) . " 
 				ORDER BY p.name";
 		$result = db_query_bound( $query, Array( $c_user_id ) );
