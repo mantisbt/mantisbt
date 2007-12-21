@@ -17,8 +17,8 @@ http://manual.mantisbugtracker.com/manual.installation.php
 
 # --- Requirements ----------
 
-* MySQL 3.23.2 and higher
-* PHP 4.0.6 and higher
+* MySQL 4.1.1 and higher
+* PHP 4.3.0 and higher
 * a webserver
 
 # --- Summary ---------------
