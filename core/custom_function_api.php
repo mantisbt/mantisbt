@@ -44,7 +44,8 @@
 	function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 ) {
 		$t_bug = bug_get( $p_issue_id );
 
-		$t_category = is_blank( $t_bug->category ) ? '' : '<b>[' . $t_bug->category . ']</b> ';
+		$t_category_name = category_full_name( $t_bug->category_id, false );
+		$t_category = is_blank( $t_category_name ? '' : '<b>[' . $t_category_name . ']</b> ';
 		echo str_pad( '', $p_issue_level * 6, '&nbsp;' ), '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
