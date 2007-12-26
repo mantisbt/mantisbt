@@ -132,9 +132,9 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table
-					SET expiry=$c_token_expiry
-					WHERE id='$c_token_id'";
-		db_query( $t_query );
+					SET expiry=" . db_param(0) . "
+					WHERE id=" . db_param(1);
+		db_query_bound( $t_query, Array( $c_token_expiry, $c_token_id ) );
 
 		return true;
 	}
@@ -192,7 +192,6 @@
 	 */
 	function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
 		$c_type = db_prepare_int( $p_type );
-		$c_value = db_prepare_string( $p_value );
 		$c_timestamp = db_now();
 		$c_expiry = db_timestamp( db_date(time() + $p_expiry) );
 		$c_user_id = db_prepare_int( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
@@ -201,8 +200,8 @@
 
 		$t_query = "INSERT INTO $t_tokens_table
 					( type, value, timestamp, expiry, owner )
-					VALUES ( '$c_type', '$c_value', $c_timestamp, $c_expiry, '$c_user_id' )";
-		db_query( $t_query );
+					VALUES ( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . " , " . db_param(3) . " , " . db_param(4) . " )";
+		db_query_bound( $t_query, Array( $c_type, $p_value, $c_timestamp, $c_expiry, $c_user_id ) );
 		return db_insert_id( $t_tokens_table );
 	}
 
@@ -222,9 +221,9 @@
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
 
 		$t_query = "UPDATE $t_tokens_table 
-					SET value='$c_value', expiry=$c_expiry
-					WHERE id=$c_token_id";
-		db_query( $t_query );
+					SET value=" . db_param(0) . ", expiry=" . db_param(1) . "
+					WHERE id=" . db_param(2);
+		db_query_bound( $t_query, Array( $c_value, $c_expiry, $c_token_id ) );
 
 		return true;
 	}
@@ -257,15 +256,15 @@
 
 		$t_tokens_table	= db_get_table( 'mantis_tokens_table' );
 
-		$t_query = "DELETE FROM $t_tokens_table WHERE ";
+		$t_query = "DELETE FROM $t_tokens_table WHERE " . db_param(0) . " > expiry";
 		if ( !is_null( $p_token_type ) ) {
 			$c_token_type = db_prepare_int( $p_token_type );
-			$t_query .= " type='$c_token_type' AND ";
+			$t_query .= " AND type=" . db_param(1);
+			db_query_bound( $t_query, Array( db_now(), $c_token_type ) );
+		} else {
+			db_query_bound( $t_query, Array( db_now() ) );
 		}
-
-		$t_query .= db_now() . ' > expiry';
-		db_query( $t_query );
-
+		
 		$g_tokens_purged = true;
 
 		return true;

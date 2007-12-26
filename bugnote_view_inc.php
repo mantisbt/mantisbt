@@ -96,8 +96,8 @@
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note
 				FROM $t_bugnote_text_table
-				WHERE id='$v3_bugnote_text_id'";
-		$result2 = db_query( $query );
+				WHERE id=" . db_param(0);
+		$result2 = db_query_bound( $query, Array( $v3_bugnote_text_id ) );
 		$row = db_fetch_array( $result2 );
 
 		$v3_note = $row['note'];

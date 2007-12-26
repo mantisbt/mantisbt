@@ -31,10 +31,10 @@
 		$t_project_category_table = db_get_table( 'mantis_project_category_table' );
 
 		$query = "SELECT project_id, category FROM $t_project_category_table ORDER BY project_id, category";
-		$t_category_result = db_query( $query );
+		$t_category_result = db_query_bound( $query );
 
 		$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
-		$t_bug_result = db_query( $query );
+		$t_bug_result = db_query_bound( $query );
 
 		$t_data = Array();
 

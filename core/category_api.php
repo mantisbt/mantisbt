@@ -68,13 +68,12 @@
 	# Returns true if the category is unique, false otherwise
 	function category_is_unique( $p_project_id, $p_name ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_name			= db_prepare_string( $p_name );
 
 		$t_category_table = db_get_table( 'mantis_category_table' );
 
 		$query = "SELECT COUNT(*) FROM $t_category_table
-					WHERE project_id=" . db_param(0) . " AND " . db_helper_like( 'name', $c_name );
-		$count = db_result( db_query_bound( $query, array( $c_project_id ) ) );
+					WHERE project_id=" . db_param(0) . " AND " . db_helper_like( 'name', 1 );
+		$count = db_result( db_query_bound( $query, array( $c_project_id, $p_name ) ) );
 
 		if ( 0 < $count ) {
 				return false;
@@ -101,7 +100,6 @@
 	# Add a new category to the project
 	function category_add( $p_project_id, $p_name ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_name			= db_prepare_string( $p_name );
 
 		category_ensure_unique( $p_project_id, $p_name );
 
@@ -111,7 +109,7 @@
 					( project_id, name )
 				  VALUES
 					( " . db_param(0) . ', ' . db_param(1) . ' )';
-		db_query_bound( $query, array( $c_project_id, $c_name ) );
+		db_query_bound( $query, array( $c_project_id, $p_name ) );
 
 		# db_query errors on failure so:
 		return db_insert_id( $t_category_table );

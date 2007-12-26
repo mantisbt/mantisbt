@@ -529,8 +529,8 @@
 		$query = "INSERT INTO $t_custom_field_project_table
 					( field_id, project_id )
 				  VALUES
-					( '$c_field_id', '$c_project_id' )";
-		db_query( $query );
+					( " . db_param(0) . ", " . db_param(1) . " )";
+		db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -549,9 +549,9 @@
 
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE field_id = '$c_field_id' AND
-				  		project_id = '$c_project_id'";
-		db_query( $query );
+				  WHERE field_id = " . db_param(0) . " AND
+				  		project_id = " . db_param(1);
+		db_query_bound( $query, Array( $c_field_id, $c_project_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -567,20 +567,20 @@
 		# delete all values
 		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$query = "DELETE FROM $t_custom_field_string_table
-				  WHERE field_id='$c_field_id'";
-		db_query( $query );
+				  WHERE field_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_field_id ) );
 
 		# delete all project associations
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE field_id='$c_field_id'";
-		db_query( $query );
+				  WHERE field_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_field_id ) );
 
 		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		# delete the definition
 		$query = "DELETE FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		db_query( $query );
+				  WHERE id=";
+		db_query_bound( $query, Array( $c_field_id ) );
 
 		custom_field_clear_cache( $p_field_id );
 
@@ -599,8 +599,8 @@
 		# delete all project associations
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE project_id='$c_project_id'";
-		db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -747,7 +747,7 @@
             $query = "SELECT id, name
 				  FROM $t_custom_field_table
 				  ORDER BY name ASC";
-            $result = db_query( $query );
+            $result = db_query_bound( $query );
             $t_row_count = db_num_rows( $result );
             $t_ids = array();
 
@@ -773,8 +773,8 @@
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "SELECT project_id
 				  FROM $t_custom_field_project_table
-				  WHERE field_id = '$c_field_id'";
-		$result = db_query( $query );
+				  WHERE field_id = " . db_param(0);
+		$result = db_query_bound( $query, Array( $c_field_id ) );
 
 		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
@@ -825,8 +825,8 @@
 		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$query = "SELECT access_level_r, default_value, type
 				  FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_field_id ) );
 		$row = db_fetch_array( $result );
 
 		$t_access_level_r	= $row['access_level_r'];
@@ -839,9 +839,9 @@
 		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 		$query = "SELECT value
 				  FROM $t_custom_field_string_table
-				  WHERE bug_id='$c_bug_id' AND
-				  		field_id='$c_field_id'";
-		$result = db_query( $query );
+				  WHERE bug_id=" . db_param(0) ." AND
+				  		field_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $c_bug_id, $c_field_id ) );
 
 		if( db_num_rows( $result ) > 0 ) {
 			return custom_field_database_to_value( db_result( $result ) , $row['type'] );
@@ -932,9 +932,9 @@
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$query = "SELECT sequence
 				  FROM $t_custom_field_project_table
-				  WHERE field_id='$c_field_id' AND
-						project_id='$c_project_id'";
-		$result = db_query( $query, 1 );
+				  WHERE field_id=" . db_param(0) . " AND
+						project_id=" . db_param(1) ;
+		$result = db_query_bound( $query, Array( $c_field_id, $c_project_id ), 1 );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;
@@ -958,8 +958,8 @@
 		$query = "SELECT name, type, possible_values, valid_regexp,
 				  		 access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_field_id ) );
 		$row = db_fetch_array( $result );
 
 		$t_name				= $row['name'];

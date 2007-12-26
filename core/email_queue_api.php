@@ -36,28 +36,9 @@
 	# --------------------
 	# Return a copy of the bug structure with all the instvars prepared for db insertion
 	function email_queue_prepare_db( $p_email_data ) {
-		$t_email_data = new EmailData;
+		$p_email_data->email_id = db_prepare_int( $p_email_data->email_id );
 
-		$t_email_data->email_id = db_prepare_int( $p_email_data->email_id );
-		$t_email_data->email = db_prepare_string( $p_email_data->email );
-		$t_email_data->subject = db_prepare_string( $p_email_data->subject );
-		$t_email_data->body = db_prepare_string( $p_email_data->body );
-
-		$t_email_data->metadata = array();
-
-		foreach( $p_email_data->metadata as $t_key => $t_value ) {
-			if ( $t_key != 'headers' ) {
-				$t_email_data->metadata[$t_key] = db_prepare_string( $t_value );
-			}
-		}
-
-		foreach( $p_email_data->metadata['headers'] as $t_key => $t_value ) {
-			$t_email_data->metadata['headers'][$t_key] = db_prepare_string( $t_value );
-		}
-
-		$t_email_data->submitted = db_prepare_string( $p_email_data->submitted );
-
-		return $t_email_data;
+		return $p_email_data;
 	}
 
 	# --------------------
@@ -96,13 +77,13 @@
 					  submitted,
 					  metadata)
 				  VALUES
-				    ( '$c_email',
-				      '$c_subject',
-				      '$c_body',
-					  " . db_now() . ",
-					  '$c_metadata'
+				    ( " . db_param(0) . ",
+				      " . db_param(1) . ",
+				      " . db_param(2) . ",
+					  " . db_param(3) . ",
+					  " . db_param(4) . "
 					)";
-		db_query( $query );
+		db_query_bound( $query, Array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 
 		return db_insert_id( $t_email_table );
 	}
@@ -142,8 +123,8 @@
 
 		$query = "SELECT *
 				  FROM $t_email_table
-				  WHERE email_id='$c_email_id'";
-		$result = db_query( $query );
+				  WHERE email_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_email_id ) );
 
 		$t_row = db_fetch_array( $result );
 
@@ -156,8 +137,8 @@
 		$t_email_table = db_get_table( 'mantis_email_table' );
 
 		$query = "DELETE FROM $t_email_table
-				  WHERE email_id='$c_email_id'";
-		db_query( $query );
+				  WHERE email_id=" . db_param(0);
+		db_query_bound( $query, Array( $c_email_id ) );
 	}
 
 	# --------------------

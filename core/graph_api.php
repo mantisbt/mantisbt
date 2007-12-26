@@ -523,7 +523,7 @@
 				FROM $t_user_table
 				WHERE id IN ($t_imploded_handlers)
 				ORDER BY username";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 		$user_count = db_num_rows( $result );
 
 		for ($i=0;$i<$user_count;$i++) {
@@ -574,7 +574,7 @@
 				FROM $t_user_table
 				WHERE id IN ($t_imploded_reporters)
 				ORDER BY username";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 		$user_count = db_num_rows( $result );
 
 		for ($i=0;$i<$user_count;$i++) {

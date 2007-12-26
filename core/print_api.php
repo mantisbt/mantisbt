@@ -650,19 +650,22 @@
 		$t_mantis_project_table = db_get_table( 'mantis_project_table' );
 		$t_mantis_project_user_list_table = db_get_table( 'mantis_project_user_list_table' );
 
+		$result = '';
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT *
 					FROM $t_mantis_project_table
 					ORDER BY name";
+			$result = db_query_bound( $query );
 		} else {
 			$t_user_id = auth_get_current_user_id();
 			$query = "SELECT p.id, p.name
 					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
-							m.user_id='$t_user_id' AND
-							p.enabled='1'";
+							m.user_id=" . db_param(0) . " AND
+							p.enabled=" . db_param(1);
+			$result = db_query_bound( $query, Array( $t_user_id, 1 ) );
 		}
-		$result = db_query( $query );
+		
 		$project_count = db_num_rows( $result );
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );

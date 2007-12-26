@@ -30,15 +30,12 @@
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# Delete the users who have never logged in and are older than 1 week
-	$days_old = 7;
-	$days_old = (integer)$days_old;
-
-	$date_calc = db_helper_compare_days( db_now(), "date_created", "> $days_old" );
+	$days_old = (int)7;
 
 	$query = "SELECT id
 			FROM $t_user_table
-			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND $date_calc";
-	$result = db_query($query);
+			WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
+	$result = db_query_bound($query, Array( db_now() ) );
 
 	if ( !$result ) {
 		trigger_error( ERROR_GENERIC, ERROR );

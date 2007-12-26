@@ -91,10 +91,10 @@
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
-		WHERE ".db_helper_compare_days(db_now(),"date_created","<= '$days_old'")."
+		WHERE ".db_helper_compare_days(0,"date_created","<= '$days_old'")."
 		ORDER BY date_created DESC";
-	$result = db_query( $query );
-	$new_user_count = db_num_rows( $result );
+	$result = db_query_bound( $query, Array( db_now()  );
+	$new_user_count = db_num_rows( $result);
 
 	if ( $new_user_count > 0 ) {
 ?>
@@ -198,19 +198,20 @@ for ($i=0;$i<$new_user_count;$i++) {
 	}
 
 	# Get the user data in $c_sort order
+	$result = '';
 	if ( 0 == $c_hide ) {
 		$query = "SELECT *
 				FROM $t_user_table
 				WHERE $t_where
 				ORDER BY $c_sort $c_dir";
+		$result = db_query($query);
 	} else {
 		$query = "SELECT *
 				FROM $t_user_table
-				WHERE (" . db_helper_compare_days(db_now(),"last_visit","< '$days_old'") . ") AND $t_where
+				WHERE (" . db_helper_compare_days(0,"last_visit","< '$days_old'") . ") AND $t_where
 				ORDER BY $c_sort $c_dir";
-	}
-
-    $result = db_query($query);
+		$result = db_query_bound($query, Array( db_now() ) );
+	}   
 	$user_count = db_num_rows( $result );
 ?>
 <br />

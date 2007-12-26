@@ -101,21 +101,19 @@
 	# return the ID of the new bugnote
 	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
-		$c_bugnote_text      	= db_prepare_string( $p_bugnote_text );
+
 		$c_time_tracking	= db_prepare_time( $p_time_tracking );
 		$c_private           	= db_prepare_bool( $p_private );
 		$c_type            	= db_prepare_int( $p_type );
-		$c_attr      	= db_prepare_string( $p_attr );
 
 		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
 		$t_bugnote_table     	= db_get_table( 'mantis_bugnote_table' );
-
 		# insert bugnote text
 		$query = "INSERT INTO $t_bugnote_text_table
 		          		( note )
 		          	 VALUES
 		          		( " . db_param(0) . " )";
-		db_query_bound( $query, Array( $c_bugnote_text ) );
+		db_query_bound( $query, Array( $p_bugnote_text ) );
 
 		# retrieve bugnote text id number
 		$t_bugnote_text_id = db_insert_id( $t_bugnote_text_table );
@@ -139,8 +137,8 @@
 		$query = "INSERT INTO $t_bugnote_table
 					(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 		          	 VALUES
-					('$c_bug_id', '$c_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr', '$c_time_tracking' )";
-		db_query( $query );
+					(" . db_param(0) . ", " . db_param(1) . "," . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . "," . db_param(5) . ", " . db_param(6) . ", " . db_param(7) . ", " . db_param(8) . " )";
+		db_query_bound( $query, Array( $c_bug_id, $c_user_id, $t_bugnote_text_id, $t_view_state, db_now(), db_now(), $c_type, $p_attr, $c_time_tracking ) );
 
 		# get bugnote id
 		$t_bugnote_id = db_insert_id( $t_bugnote_table );
@@ -240,8 +238,8 @@
 
 		$query = "SELECT $c_field_name
 		          	FROM $t_bugnote_table
-		          	WHERE id='$c_bugnote_id' ";
-		$result = db_query( $query, 1 );
+		          	WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_bugnote_id ), 1 );
 
 		return db_result( $result );
 	}
@@ -254,9 +252,9 @@
 
 		$query = "SELECT id
 		          	FROM $t_bugnote_table
-		          	WHERE bug_id='$c_bug_id'
+		          	WHERE bug_id=" . db_param(0) . "
 		          	ORDER by last_modified DESC";
-		$result = db_query( $query, 1 );
+		$result = db_query_bound( $query, Array( $c_bug_id ), 1 );
 
 		return db_result( $result );
 	}
@@ -390,9 +388,9 @@
 		$t_bugnote_table	= db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-		          	SET last_modified=" . db_now() . "
-		          	WHERE id='$c_bugnote_id'";
-		db_query( $query );
+		          	SET last_modified=" . db_param(0) . "
+		          	WHERE id=" . db_param(1);
+		db_query_bound( $query, Array( db_now(), $c_bugnote_id ) );
 
 		# db_query errors if there was a problem so:
 		return true;

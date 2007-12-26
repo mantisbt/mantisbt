@@ -1050,10 +1050,10 @@
 		$t_user_table = db_get_table( 'mantis_user_table' );
 		
 		$query = "UPDATE $t_user_table
-				  SET last_visit= " . $c_value . "
+				  SET last_visit= " . db_param(0) . "
 				  WHERE id=" . db_param(1);
 
-		db_query_bound( $query, Array( $c_user_id ) );
+		db_query_bound( $query, Array( $c_value, $c_user_id ) );
 
 		user_update_cache($p_user_id, 'last_visit', $c_value);
 
@@ -1183,10 +1183,10 @@
 		# When the password is changed, invalidate the cookie to expire sessions that
 		# may be active on all browsers.
 		$t_seed				= $t_email . $t_username;
-		$c_cookie_string	= db_prepare_string( auth_generate_unique_cookie_string( $t_seed ) );
+		$c_cookie_string	= auth_generate_unique_cookie_string( $t_seed );
 
 		$c_user_id		= db_prepare_int( $p_user_id );
-		$c_password		= db_prepare_string( auth_process_plain_password( $p_password ) );
+		$c_password		= auth_process_plain_password( $p_password );
 		$c_user_table	= db_get_table( 'mantis_user_table' );
 
 		$query = "UPDATE $c_user_table

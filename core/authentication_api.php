@@ -510,7 +510,7 @@
 		}
 ?>
 </p>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<form method="post" action="<?php echo string_sanitize_url( $_SERVER['PHP_SELF'] ); ?>">
 
 <?php
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );

@@ -370,8 +370,8 @@
 
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
-		$query = "SELECT id FROM $t_project_table WHERE name = '$c_project_name'";
-		$t_result = db_query( $query, 1 );
+		$query = "SELECT id FROM $t_project_table WHERE name = " . db_param(0);
+		$t_result = db_query_bound( $query, Array( $c_project_name ), 1 );
 
 		if ( db_num_rows( $t_result ) == 0 ) {
 			return 0;
@@ -610,9 +610,9 @@
 				  INTO $t_project_user_list_table
 				    ( project_id, user_id, access_level )
 				  VALUES
-				    ( '$c_project_id', '$c_user_id', '$c_access_level')";
+				    ( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ")";
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id, $c_user_id, $c_access_level ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -629,11 +629,11 @@
 		$c_access_level	= db_prepare_int( $p_access_level );
 
 		$query = "UPDATE $t_project_user_list_table
-				  SET access_level='$c_access_level'
-				  WHERE	project_id='$c_project_id' AND
-						user_id='$c_user_id'";
+				  SET access_level=" . db_param(0) . "
+				  WHERE	project_id=" . db_param(1) . " AND
+						user_id=" . db_param(2);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_access_level, $c_project_id, $c_user_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -660,10 +660,10 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 
 		$query = "DELETE FROM $t_project_user_list_table
-				  WHERE project_id='$c_project_id' AND
-						user_id='$c_user_id'";
+				  WHERE project_id=" . db_param(0) . " AND
+						user_id=" . db_param(1);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id, $c_user_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -678,9 +678,9 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		$query = "DELETE FROM $t_project_user_list_table
-				WHERE project_id='$c_project_id'";
+				WHERE project_id=" . db_param(0);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_project_id ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -732,8 +732,8 @@
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE filename='$c_name'";
-		$result = db_query( $query );
+				  WHERE filename=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_name ) );
 		$t_count = db_result( $result );
 
 		if ( $t_count > 0 ) {

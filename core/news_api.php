@@ -264,19 +264,19 @@
 			case 1 :
 				# BY_DATE - Select the news posts
 				$query = "SELECT *
-						FROM $t_news_table";
-
+						FROM $t_news_table WHERE 
+						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days") . "
+						 OR announcement = " . db_param(1) . " ) ";
+				$t_params = Array( db_now(), 1 ) ;
 				if ( 1 == count( $t_projects ) ) {
 					$c_project_id = $t_projects[0];
-					$query .= " WHERE project_id='$c_project_id'";
+					$query .= " AND project_id=" . db_param(1);
+					$t_params[] = $c_project_id;
 				} else {
-					$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+					$query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';
 				}
-
-				$query .= " AND " . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") .
-						  " OR  announcement = 1
-						ORDER BY announcement DESC, id DESC";
-				$result = db_query( $query, $t_news_view_limit, $c_offset );
+					$query .= " ORDER BY announcement DESC, id DESC";
+				$result = db_query_bound( $query, $t_params,  $t_news_view_limit, $c_offset );
 				break;
 		} # end switch
 

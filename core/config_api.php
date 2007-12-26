@@ -287,42 +287,45 @@
 	function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = ADMINISTRATOR ) {
 		if ( is_array( $p_value ) || is_object( $p_value ) ) {
 			$t_type = CONFIG_TYPE_COMPLEX;
-			$c_value = db_prepare_string( serialize( $p_value ) );
+			$c_value = serialize( $p_value );
 		} else if ( is_int( $p_value ) || is_numeric( $p_value ) ) {
 			$t_type = CONFIG_TYPE_INT;
 			$c_value = db_prepare_int( $p_value );
 		} else {
 			$t_type = CONFIG_TYPE_STRING;
-			$c_value = db_prepare_string( $p_value );
+			$c_value = $p_value;
 		}
 
 		if ( config_can_set_in_database( $p_option ) ) {
-			$c_option = db_prepare_string( $p_option );
+			$c_option = $p_option;
 			$c_user = db_prepare_int( $p_user );
 			$c_project = db_prepare_int( $p_project );
 			$c_access = db_prepare_int( $p_access );
 
 			$t_config_table = db_get_table( 'mantis_config_table' );
 			$query = "SELECT COUNT(*) from $t_config_table
-				WHERE config_id = '$c_option' AND
-					project_id = $c_project AND
-					user_id = $c_user";
-			$result = db_query( $query );
+				WHERE config_id = " . db_param(0) . " AND
+					project_id = " . db_param(1) . " AND
+					user_id = " . db_param(2);
+			$result = db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 
+			$t_params = Array();
 			if ( 0 < db_result( $result ) ) {
 				$t_set_query = "UPDATE $t_config_table
-					SET value='$c_value', type=$t_type, access_reqd=$c_access
-					WHERE config_id = '$c_option' AND
-						project_id = $c_project AND
-						user_id = $c_user";
+					SET value=" . db_param(0) . ", type=" . db_param(1) . ", access_reqd=" . db_param(2) . "
+					WHERE config_id = " . db_param(3) . " AND
+						project_id = " . db_param(4) . " AND
+						user_id = " . db_param(5);
+				$t_params = Array( $c_value, $t_type, $c_access, $c_option, $c_project, $c_user );
 			} else {
 				$t_set_query = "INSERT INTO $t_config_table
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES 
-					('$c_value', $t_type, $c_access, '$c_option', $c_project, $c_user )";
+					(" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . "," . db_param(5) . " )";
+				$t_params = Array( $c_value, $t_type, $c_access, $c_option, $c_project, $c_user );
 			}
 
-			$result = db_query( $t_set_query );
+			$result = db_query_bound( $t_set_query, Array( $t_params ) );
 		}
 
 		config_set_cache( $p_option, $p_value, $t_type, $p_user, $p_project, $p_access );
@@ -397,11 +400,11 @@
 			$c_user = db_prepare_int( $p_user );
 			$c_project = db_prepare_int( $p_project );
 			$query = "DELETE FROM $t_config_table
-				WHERE config_id = '$c_option' AND
-					project_id=$c_project AND
-					user_id=$c_user";
+				WHERE config_id = " . db_param(0) . " AND
+					project_id=" . db_param(1) . " AND
+					user_id=" . db_param(2);
 
-			$result = @db_query( $query);
+			$result = @db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 		}
 
 		config_flush_cache( $p_option, $p_user, $p_project );
@@ -414,9 +417,9 @@
 		$t_config_table = db_get_table( 'mantis_config_table' );
 		$c_project = db_prepare_int( $p_project );
 		$query = "DELETE FROM $t_config_table
-				WHERE project_id=$c_project";
+				WHERE project_id=" . db_param(0);
 
-		$result = @db_query( $query);
+		$result = @db_query_bound( $query, Array( $c_project ) );
 		
 		# flush cache here in case some of the deleted configs are in use.
 		config_flush_cache(); 

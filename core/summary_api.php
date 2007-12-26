@@ -203,8 +203,8 @@
 
 		$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
-				WHERE ".db_helper_compare_days(db_now(),"date_submitted","<= '$c_time_length'")." AND $specific_where";
-		$result = db_query( $query );
+				WHERE ".db_helper_compare_days(0,"date_submitted","<= '$c_time_length'")." AND $specific_where";
+		$result = db_query_bound( $query, Array( db_now() ) );
 		return db_result( $result, 0 );
 	}
 
@@ -233,12 +233,12 @@
 				ON b.id = h.bug_id 
 				AND h.type = " . NORMAL_TYPE ."
 				AND h.field_name = 'status' 
-				WHERE b.status >= '$t_resolved' 
-				AND h.old_value < '$t_resolved'
-				AND h.new_value >= '$t_resolved'
-				AND ".db_helper_compare_days(db_now(),"date_modified","<= '$c_time_length'")." 
+				WHERE b.status >= " . db_param(0) . " 
+				AND h.old_value < " . db_param(1) . "
+				AND h.new_value >= " . db_param(2) . "
+				AND ".db_helper_compare_days(3,"date_modified","<= '$c_time_length'")." 
 				AND $specific_where";
-		$result = db_query( $query );
+		$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved, db_now() ) );
 		return db_result( $result, 0 );
 	}
 
@@ -681,7 +681,7 @@
 					FROM $t_mantis_bug_table
 					GROUP BY project_id, status";
 
-			$result = db_query( $query );
+			$result = db_query_bound( $query );
 			$p_cache = Array();
 
 			$t_resolved_val = RESOLVED;

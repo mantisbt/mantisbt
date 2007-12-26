@@ -78,7 +78,7 @@
 				description char(255) NOT NULL,
 				PRIMARY KEY (upgrade_id))";
 
-			$result = db_query( $query );
+			$result = db_query_bound( $query );
 		}
 
 		# link the data structures and upgrade list

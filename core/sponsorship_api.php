@@ -122,8 +122,8 @@
 
 		$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
 
-		$query = "SELECT id FROM $t_sponsorship_table WHERE bug_id = '$c_bug_id' AND user_id = '$c_user_id'";
-		$t_result = db_query( $query, 1 );
+		$query = "SELECT id FROM $t_sponsorship_table WHERE bug_id = " . db_param(0) . " AND user_id = " . db_param(1);
+		$t_result = db_query_bound( $query, Array( $c_bug_id, $c_user_id ), 1 );
 
 		if ( db_num_rows( $t_result ) == 0 ) {
 			return false;
@@ -239,8 +239,8 @@
 		$c_bug_id = db_prepare_int( $p_sponsorship->bug_id );
 		$c_user_id = db_prepare_int( $p_sponsorship->user_id );
 		$c_amount = db_prepare_int( $p_sponsorship->amount );
-		$c_logo = db_prepare_string( $p_sponsorship->logo );
-		$c_url = db_prepare_string( $p_sponsorship->url );
+		$c_logo = $p_sponsorship->logo;
+		$c_url = $p_sponsorship->url;
 		$c_now = db_now();
 
 		# if new sponsorship
@@ -249,9 +249,9 @@
 			$query = "INSERT INTO $t_sponsorship_table
 				    ( bug_id, user_id, amount, logo, url, date_submitted, last_updated )
 				  VALUES
-				    ( '$c_bug_id', '$c_user_id', '$c_amount', '$c_logo', '$c_url', $c_now, $c_now )";
+				    (" . db_param(0) . ',' . db_param(1) . ',' . db_param(2) . ',' . db_param(3) . ',' . db_param(4) . ',' . db_param(5) . ',' . db_param(6) . ')';
 
-			db_query( $query );
+			db_query_bound( $query, Array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_now ) );
 			$t_sponsorship_id = db_insert_id( $t_sponsorship_table );
 
 			history_log_event_special( $c_bug_id, BUG_ADD_SPONSORSHIP, $c_user_id, $c_amount );
@@ -265,17 +265,17 @@
 
 			# Update
 			$query = "UPDATE $t_sponsorship_table
-					SET	bug_id = '$c_bug_id',
-						user_id = '$c_user_id',
-						amount = '$c_amount',
-						logo = '$c_logo',
-						url = '$c_url',
-						last_updated = $c_now
-					WHERE	id = '$c_id'";
+					SET	bug_id = " . db_param(0) . ",
+						user_id = " . db_param(1) . ",
+						amount = " . db_param(2) . ",
+						logo = " . db_param(3) . ",
+						url = " . db_param(4) . ",
+						last_updated = " . db_param(5) . " 
+					WHERE	id = " . db_param(6);
 
 			sponsorship_clear_cache( $c_id );
 
-			db_query( $query );
+			db_query_bound( $query, Array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_id ) );
 
 			history_log_event_special( $c_bug_id, BUG_UPDATE_SPONSORSHIP, $c_user_id, $c_amount );
 		}
@@ -335,9 +335,9 @@
 		$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
 
 		$query = "UPDATE $t_sponsorship_table
-				  SET last_updated= " . db_now() . ", paid=$c_paid
-				  WHERE id='$c_sponsorship_id'";
-		db_query( $query );
+				  SET last_updated= " . db_param(0) . ", paid=" . db_param(1) . "
+				  WHERE id=" . db_param(2);
+		db_query_bound( $query, Array( db_now(), $c_paid, $c_sponsorship_id ) );
 
 		history_log_event_special( $t_sponsorship->bug_id, BUG_PAID_SPONSORSHIP, $t_sponsorship->user_id, $p_paid );
 		sponsorship_clear_cache( $p_sponsorship_id );
@@ -353,9 +353,9 @@
 		$t_sponsorship_table = db_get_table( 'mantis_sponsorship_table' );
 
 		$query = "UPDATE $t_sponsorship_table
-				  SET last_updated= " . db_now() . "
-				  WHERE id='$c_sponsorship_id'";
-		db_query( $query );
+				  SET last_updated= " . db_param(0) . "
+				  WHERE id=" . db_param(1);
+		db_query_bound( $query, Array( db_now(), $c_sponsorship_id ) );
 
 		sponsorship_clear_cache( $p_sponsorship_id );
 

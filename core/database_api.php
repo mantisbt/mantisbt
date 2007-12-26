@@ -68,11 +68,9 @@
 		if ( $t_result ) {
 			# For MySQL, the charset for the connection needs to be specified.
 			if ( db_is_mysql() ) {
-				$c_charset = db_prepare_string( lang_get( 'charset' ) );
-
 				# @@@ Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 				# @@@ Is this needed for other databases?
-				if ( strtolower( $c_charset ) === 'utf-8' ) {
+				if ( strtolower( lang_get( 'charset' ) ) === 'utf-8' ) {
 					db_query_bound( 'SET NAMES UTF8' );
 				}
 			} elseif ( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
@@ -653,7 +651,7 @@
 	function db_now() {
 		global $g_db;
 
-		return $g_db->DBTimeStamp(time());
+		return $g_db->BindTimeStamp(time());
 	}
 
 	# --------------------
@@ -670,7 +668,7 @@
 		} else {
 			$p_timestamp = time();
 		}
-		return $g_db->DBTimeStamp($p_timestamp) ;
+		return $g_db->BindTimeStamp($p_timestamp) ;
 	}
 
 	function db_unixtimestamp( $p_date=null ) {
@@ -710,7 +708,7 @@
 	# $p_case_sensitive - true: case sensitive, false: case insensitive
 	# returns (field LIKE 'value') OR (field ILIKE 'value')
 	# The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
-	function db_helper_like( $p_field_name, $p_value, $p_case_sensitive = false ) {
+	function db_helper_like( $p_field_name, $p_param_id, $p_case_sensitive = false ) {
 		$t_like_keyword = 'LIKE';
 
 		if ( $p_case_sensitive === false ) {
@@ -719,16 +717,24 @@
 			}
 		}
 
-		return "($p_field_name $t_like_keyword '$p_value')";
+		return "($p_field_name $t_like_keyword " . db_param( $p_param_id ) . ')';
 	}
 
 	# --------------------
 	# helper function to compare two dates against a certain number of days
 	# limitstring can be '> 1' '<= 2 ' etc
 	# @@@ Check if there is a way to do that using ADODB rather than implementing it here.
-	function db_helper_compare_days($p_date1, $p_date2, $p_limitstring) {
+	function db_helper_compare_days($p_date1_id_or_column, $p_date2_id_or_column, $p_limitstring) {
 		$t_db_type = config_get_global( 'db_type' );
 
+		$p_date1 = $p_date1_id_or_column;
+		$p_date2 = $p_date2_id_or_column;
+		if( is_int( $p_date1_id_or_column ) ) {
+			$p_date1 = db_param( $p_date1_id_or_column );
+		}
+		if( is_int( $p_date2_id_or_column ) ) { 
+			$p_date2 = db_param( $p_date2_id_or_column );
+		}
 		switch( $t_db_type ) {
 			case 'mssql':
 			case 'odbc_mssql':

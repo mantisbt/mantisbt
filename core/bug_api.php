@@ -168,7 +168,7 @@
 		$query = "SELECT *
 				  FROM $t_bug_table
 				  WHERE id IN (" . implode( ',', $c_bug_id_array ) . ')';
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 
 		while ( $row = db_fetch_array( $result ) ) {
 			$row['date_submitted']	= db_unixtimestamp( $row['date_submitted'] );
@@ -373,8 +373,8 @@
 	#
 	function bug_create( $p_bug_data ) {
 
-		$c_summary				= db_prepare_string( $p_bug_data->summary );
-		$c_description			= db_prepare_string( $p_bug_data->description );
+		$c_summary				= $p_bug_data->summary;
+		$c_description			= $p_bug_data->description;
 		$c_project_id			= db_prepare_int( $p_bug_data->project_id );
 		$c_reporter_id			= db_prepare_int( $p_bug_data->reporter_id );
 		$c_handler_id			= db_prepare_int( $p_bug_data->handler_id );
@@ -382,15 +382,15 @@
 		$c_severity				= db_prepare_int( $p_bug_data->severity );
 		$c_reproducibility		= db_prepare_int( $p_bug_data->reproducibility );
 		$c_category_id			= db_prepare_int( $p_bug_data->category_id );
-		$c_os					= db_prepare_string( $p_bug_data->os );
-		$c_os_build				= db_prepare_string( $p_bug_data->os_build );
-		$c_platform				= db_prepare_string( $p_bug_data->platform );
-		$c_version				= db_prepare_string( $p_bug_data->version );
-		$c_build				= db_prepare_string( $p_bug_data->build );
+		$c_os					= $p_bug_data->os;
+		$c_os_build				= $p_bug_data->os_build;
+		$c_platform				= $p_bug_data->platform;
+		$c_version				= $p_bug_data->version;
+		$c_build				= $p_bug_data->build;
 		$c_profile_id			= db_prepare_int( $p_bug_data->profile_id );
 		$c_view_state			= db_prepare_int( $p_bug_data->view_state );
-		$c_steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
-		$c_additional_info		= db_prepare_string( $p_bug_data->additional_information );
+		$c_steps_to_reproduce	= $p_bug_data->steps_to_reproduce;
+		$c_additional_info		= $p_bug_data->additional_information;
 		$c_sponsorship_total 	= 0;
 		$c_sticky 				= 0;
 
@@ -408,7 +408,7 @@
 		
 		# Only set target_version if user has access to do so
 		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
-			$c_target_version	= db_prepare_string( $p_bug_data->target_version );
+			$c_target_version	= $p_bug_data->target_version;
 		} else { 
 			$c_target_version	= '';
 		}
@@ -471,21 +471,36 @@
 				      target_version 
 				    )
 				  VALUES
-				    ( '$c_project_id',
-				      '$c_reporter_id', '$c_handler_id',
-				      '0', '$c_priority',
-				      '$c_severity', '$c_reproducibility',
-				      '$t_status', '$t_resolution',
-				      10, '$c_category_id',
-				      " . db_now() . "," . db_now() . ",
-				      10, '$t_text_id',
-				      '$c_os', '$c_os_build',
-				      '$c_platform', '$c_version',
-				      '$c_build',
-				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total', '$c_sticky', '',
-				      '$c_target_version'
-				    )";
-		db_query( $query );
+				    ( " . db_param(0) . ",
+				      " . db_param(1) . ",
+				      " . db_param(2) . ",
+				      " . db_param(3) . ", 
+				      " . db_param(4) . ",
+				      " . db_param(5) . ", 
+				      " . db_param(6) . ",
+				      " . db_param(7) . ", 
+				      " . db_param(8) . ",
+				      " . db_param(9) . ",
+				      " . db_param(10) .",
+				      " . db_param(11) . ",
+				      " . db_param(12) . ",
+				      " . db_param(13) . ", 
+				      " . db_param(14) . ",
+				      " . db_param(15) . ",
+				      " . db_param(16) . ",
+				      " . db_param(17) . ",
+				      " . db_param(18) . ",
+				      " . db_param(19) . ",
+				      " . db_param(20) . ",
+				      " . db_param(21) . ",
+				      " . db_param(22) . ",
+				      " . db_param(23) . ",
+				      " . db_param(24) . ",
+				      " . db_param(25) . ",
+				      " . db_param(26) . ")";
+		db_query_bound( $query, Array( $c_project_id, $c_reporter_id, $c_handler_id, 0, $c_priority, $c_severity, $c_reproducibility, $t_status,
+								 $t_resolution, 10, $c_category_id, db_now(), db_now(), 10, $t_text_id, $c_os, $c_os_build, $c_platform, $c_version,$c_build,
+								 $c_profile_id, $c_summary, $c_view_state, $c_sponsorship_total, $c_sticky, '', $c_target_version ) );
 
 		$t_bug_id = db_insert_id($t_bug_table);
 
@@ -562,12 +577,12 @@
 
 				$c_field_id = db_prepare_int( $t_bug_custom['field_id'] );
 				$c_new_bug_id = db_prepare_int( $t_new_bug_id );
-				$c_value = db_prepare_string( $t_bug_custom['value'] );
+				$c_value = $t_bug_custom['value'];
 
 				$query = "INSERT INTO $t_mantis_custom_field_string_table
 						   ( field_id, bug_id, value )
-						   VALUES ('$c_field_id', '$c_new_bug_id', '$c_value')";
-				db_query( $query );
+						   VALUES (" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ")";
+				db_query_bound( $query, Array( $c_field_id, $c_new_bug_id, $c_value ) );
 			}
 		}
 
@@ -599,24 +614,23 @@
 				$t_bugnote_text_insert_id = -1;
 				if ( $t_count2 > 0 ) {
 					$t_bugnote_text = db_fetch_array( $result2 );
-					$t_bugnote_text['note'] = db_prepare_string( $t_bugnote_text['note'] );
 
 					$query2 = "INSERT INTO $t_mantis_bugnote_text_table
 							   ( note )
-							   VALUES ( '" . $t_bugnote_text['note'] . "' );";
-					db_query( $query2 );
+							   VALUES ( " . db_param(0) . " );";
+					db_query_bound( $query2, Array( $t_bugnote_text['note'] ) );
 					$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
 				}
 
 				$query2 = "INSERT INTO $t_mantis_bugnote_table
 						   ( bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
-						   VALUES ( '$t_new_bug_id',
-						   			'" . $t_bug_note['reporter_id'] . "',
-						   			'$t_bugnote_text_insert_id',
-						   			'" . $t_bug_note['view_state'] . "',
-						   			'" . $t_bug_note['date_submitted'] . "',
-						   			'" . $t_bug_note['last_modified'] . "' );";
-				db_query( $query2 );
+						   VALUES ( " . db_param(0) . ",
+						   			" . db_param(1) . ",
+						   			" . db_param(2) . ",
+						   			" . db_param(3) . ",
+						   			" . db_param(4) . ",
+						   			" . db_param(5) . ");";
+				db_query_bound( $query2, Array( $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ) );
 			}
 		}
 
@@ -624,8 +638,8 @@
 		if ( $p_copy_attachments ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_file_table
-					  WHERE bug_id = '$t_bug_id';";
-			$result = db_query( $query );
+					  WHERE bug_id = " . db_param(0);
+			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
 			$t_bug_file = array();
@@ -643,17 +657,17 @@
 
 				$query = "INSERT INTO $t_mantis_bug_file_table
 						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-						VALUES ( '$t_new_bug_id',
-								 '" . db_prepare_string( $t_bug_file['title'] ) . "',
-								 '" . db_prepare_string( $t_bug_file['description'] ) . "',
-								 '" . db_prepare_string( $t_new_diskfile_name ) . "',
-								 '" . db_prepare_string( $t_new_file_name ) . "',
-								 '" . db_prepare_string( $t_bug_file['folder'] ) . "',
-								 '" . db_prepare_int( $t_bug_file['filesize'] ) . "',
-								 '" . db_prepare_string( $t_bug_file['file_type'] ) . "',
-								 '" . db_prepare_string( $t_bug_file['date_added'] ) . "',
-								 '" . db_prepare_string( $t_bug_file['content'] ) . "');";
-				db_query( $query );
+						VALUES ( " . db_param(0) . ",
+								 " . db_param(1) . ",
+								 " . db_param(2) . ",
+								 " . db_param(3) . ",
+								 " . db_param(4) . ",
+								 " . db_param(5) . ",
+								 " . db_param(6) . ",
+								 " . db_param(7) . ",
+								 " . db_param(8) . ",
+								 " . db_param(9) . ");";
+				db_query_bound( $query, Array( $t_new_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
 			}
 		}
 
@@ -661,16 +675,16 @@
 		if ( $p_copy_monitoring_users ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_monitor_table
-					  WHERE bug_id = '$t_bug_id';";
-			$result = db_query( $query );
+					  WHERE bug_id = " . db_param(0);
+			$result = db_query_bound( $query, Array( $t_bug_id ) );
 			$t_count = db_num_rows( $result );
 
 			for ( $i = 0; $i < $t_count; $i++ ) {
 				$t_bug_monitor = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_monitor_table
 						 ( user_id, bug_id )
-						 VALUES ( '" . $t_bug_monitor['user_id'] . "', '$t_new_bug_id' );";
-				db_query( $query );
+						 VALUES ( " . db_param(0) . ", " . db_param(1) . ")";
+				db_query_bound( $query, Array( $t_bug_monitor['user_id'], $t_new_bug_id ) );
 			}
 		}
 
@@ -687,14 +701,14 @@
 				$t_bug_history = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_history_table
 						  ( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
-						  VALUES ( '" . db_prepare_int( $t_bug_history['user_id'] ) . "',
-						  		   '$t_new_bug_id',
-						  		   '" . db_prepare_string( $t_bug_history['date_modified'] ) . "',
-						  		   '" . db_prepare_string( $t_bug_history['field_name'] ) . "',
-						  		   '" . db_prepare_string( $t_bug_history['old_value'] ) . "',
-						  		   '" . db_prepare_string( $t_bug_history['new_value'] ) . "',
-						  		   '" . db_prepare_int( $t_bug_history['type'] ) . "' );";
-				db_query( $query );
+						  VALUES ( " . db_param(0) . ",
+						  		   " . db_param(1) . ",
+						  		   " . db_param(2) . ",
+						  		   " . db_param(3) . ",
+						  		   " . db_param(4) . ",
+						  		   " . db_param(5) . ",
+						  		   " . db_param(6) . " );";
+				db_query_bound( $query, Array( $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ) );
 			}
 		}
 
@@ -706,7 +720,7 @@
 	# delete the bug, bugtext, bugnote, and bugtexts selected
 	# used in bug_delete.php & mass treatments
 	function bug_delete( $p_bug_id ) {
-		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$c_bug_id			= (int)$p_bug_id;
 		$t_bug_table		= db_get_table( 'mantis_bug_table' );
 		$t_bug_text_table	= db_get_table( 'mantis_bug_text_table' );
 
@@ -771,7 +785,7 @@
 	# --------------------
 	# Delete all bugs associated with a project
 	function bug_delete_all( $p_project_id ) {
-		$c_project_id = db_prepare_int( $p_project_id );
+		$c_project_id = (int)$p_project_id;
 
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
@@ -830,39 +844,50 @@
 		#  shouldn't get updated like this anyway.  If you really need to change
 		#  them use bug_set_field()
 		$query = "UPDATE $t_bug_table
-				SET project_id='$c_bug_data->project_id',
-					reporter_id='$c_bug_data->reporter_id',
-					handler_id='$c_bug_data->handler_id',
-					duplicate_id='$c_bug_data->duplicate_id',
-					priority='$c_bug_data->priority',
-					severity='$c_bug_data->severity',
-					reproducibility='$c_bug_data->reproducibility',
-					status='$c_bug_data->status',
-					resolution='$c_bug_data->resolution',
-					projection='$c_bug_data->projection',
-					category_id='$c_bug_data->category_id',
-					eta='$c_bug_data->eta',
-					os='$c_bug_data->os',
-					os_build='$c_bug_data->os_build',
-					platform='$c_bug_data->platform',
-					version='$c_bug_data->version',
-					build='$c_bug_data->build',
-					fixed_in_version='$c_bug_data->fixed_in_version',";
+				SET project_id=" . db_param(0) . ",
+					reporter_id=" . db_param(1) . ",
+					handler_id=" . db_param(2) . ",
+					duplicate_id=" . db_param(3) . ",
+					priority=" . db_param(4) . ",
+					severity=" . db_param(5) . ",
+					reproducibility=" . db_param(6) . ",
+					status=" . db_param(7) . ",
+					resolution=" . db_param(8) . ",
+					projection=" . db_param(9) . ",
+					category_id=" . db_param(10) . ",
+					eta=" . db_param(11) . ",
+					os=" . db_param(12) . ",
+					os_build=" . db_param(13) . ",
+					platform=" . db_param(14) . ",
+					version=" . db_param(15) . ",
+					build=" . db_param(16) . ",
+					fixed_in_version=" . db_param(17) . ",";
 
+		$t_fields = Array( $c_bug_data->project_id, $c_bug_data->reporter_id, $c_bug_data->handler_id, $c_bug_data->duplicate_id, $c_bug_data->priority, $c_bug_data->severity, $c_bug_data->reproducibility,
+								 $c_bug_data->status, $c_bug_data->resolution, $c_bug_data->projection, $c_bug_data->category_id, $c_bug_data->eta, $c_bug_data->os, $c_bug_data->os_build, $c_bug_data->platform,
+								 $c_bug_data->version, $c_bug_data->build, $c_bug_data->fixed_in_version);
+		$t_field_count = 18;
 		$t_roadmap_updated = false;
 		if ( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$query .= "
-					target_version='$c_bug_data->target_version',";
+					target_version=" . db_param( $t_field_count++ ) . ",";
+			$t_fields[] = $c_bug_data->target_version;
 			$t_roadmap_updated = true;
 		}
 
 		$query .= "
-					view_state='$c_bug_data->view_state',
-					summary='$c_bug_data->summary',
-					sponsorship_total='$c_bug_data->sponsorship_total',
-					sticky='$c_bug_data->sticky'
-				WHERE id='$c_bug_id'";
-		db_query( $query );
+					view_state=" . db_param( $t_field_count++ ) .",
+					summary=" . db_param( $t_field_count++ ) .",
+					sponsorship_total=" . db_param( $t_field_count++ ) .",
+					sticky=" . db_param( $t_field_count++ ) ."
+				WHERE id=" . db_param( $t_field_count++ );
+		$t_fields[] = $c_bug_data->view_state;
+		$t_fields[] = $c_bug_data->summary;
+		$t_fields[] = $c_bug_data->sponsorship_total;
+		$t_fields[] = $c_bug_data->sticky;
+		$t_fields[] = $c_bug_id;
+		
+		db_query_bound( $query, $t_fields );
 
 		bug_clear_cache( $p_bug_id );
 
@@ -900,11 +925,11 @@
 			$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
 			$query = "UPDATE $t_bug_text_table
-						SET description='$c_bug_data->description',
-							steps_to_reproduce='$c_bug_data->steps_to_reproduce',
-							additional_information='$c_bug_data->additional_information'
-						WHERE id='$t_bug_text_id'";
-			db_query( $query );
+						SET description=" . db_param(0) . ",
+							steps_to_reproduce=" . db_param(1) . ",
+							additional_information=" . db_param(2) . "
+						WHERE id=" . db_param(3);
+			db_query_bound( $query, Array( $c_bug_data->description, $c_bug_data->steps_to_reproduce, $c_bug_data->additional_information, $t_bug_text_id ) );
 
 			bug_text_clear_cache( $p_bug_id );
 
@@ -1067,9 +1092,9 @@
 
 		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
-				  WHERE bug_id='$c_bug_id'
+				  WHERE bug_id=" . db_param(0) . "
 				  ORDER BY last_modified DESC";
-		$result = db_query( $query, 1 );
+		$result = db_query_bound( $query, Array( $c_bug_id ), 1 );
 		$row = db_result( $result );
 
 		if ( false === $row ) {
@@ -1130,9 +1155,9 @@
 
 		$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added
 		                FROM $t_bug_file_table
-		                WHERE bug_id='$c_bug_id'
+		                WHERE bug_id=" . db_param(0) . "
 		                ORDER BY date_added";
-		$db_result = db_query( $query );
+		$db_result = db_query_bound( $query, Array( $c_bug_id ) );
 		$num_notes = db_num_rows( $db_result );
 
 		$t_result = array();
@@ -1150,14 +1175,10 @@
 
 	# --------------------
 	# set the value of a bug field
-	function bug_set_field( $p_bug_id, $p_field_name, $p_status, $p_prepare = true ) {
+	function bug_set_field( $p_bug_id, $p_field_name, $p_status ) {
 		$c_bug_id			= db_prepare_int( $p_bug_id );
 		$c_field_name		= db_prepare_string( $p_field_name );
-		if( $p_prepare ) {
-			$c_status		= '\'' . db_prepare_string( $p_status ) . '\''; #generic, unknown type
-		} else {
-			$c_status		=  $p_status; #generic, unknown type
-		}
+		$c_status		=  $p_status; #generic, unknown type
 
 		$h_status = bug_get_field( $p_bug_id, $p_field_name );
 
@@ -1212,9 +1233,9 @@
 
 			# get user id
 			$query = "UPDATE $t_bug_table
-					  SET handler_id='$c_user_id', status='$t_ass_val'
-					  WHERE id='$c_bug_id'";
-			db_query( $query );
+					  SET handler_id=" . db_param(0) . ", status=" . db_param(1) . "
+					  WHERE id=" . db_param(2);
+			db_query_bound( $query, Array( $c_user_id, $t_ass_val, $c_bug_id ) );
 
 			# log changes
 			history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
@@ -1365,9 +1386,9 @@
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_bug_table
-				  SET last_updated= " . db_now() . "
-				  WHERE id='$c_bug_id'";
-		db_query( $query );
+				  SET last_updated= " . db_param(0) . "
+				  WHERE id=" . db_param(1);
+		db_query_bound( $query, Array( db_now(), $c_bug_id) );
 
 		bug_clear_cache( $p_bug_id );
 
@@ -1441,38 +1462,23 @@
 	# --------------------
 	# Return a copy of the bug structure with all the instvars prepared for db insertion
 	function bug_prepare_db( $p_bug_data ) {
-		$t_bug_data = new BugData;
-		$t_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
-		$t_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
-		$t_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
-		$t_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
-		$t_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
-		$t_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
-		$t_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
-		$t_bug_data->status				= db_prepare_int( $p_bug_data->status );
-		$t_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
-		$t_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
-		$t_bug_data->category_id		= db_prepare_int( $p_bug_data->category_id );
-		$t_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
-		$t_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
-		$t_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
-		$t_bug_data->os					= db_prepare_string( $p_bug_data->os );
-		$t_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
-		$t_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
-		$t_bug_data->version			= db_prepare_string( $p_bug_data->version );
-		$t_bug_data->build				= db_prepare_string( $p_bug_data->build );
-		$t_bug_data->fixed_in_version	= db_prepare_string( $p_bug_data->fixed_in_version );
-		$t_bug_data->target_version		= db_prepare_string( $p_bug_data->target_version );
-		$t_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
-		$t_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
-		$t_bug_data->sponsorship_total	= db_prepare_int( $p_bug_data->sponsorship_total );
-		$t_bug_data->sticky				= db_prepare_int( $p_bug_data->sticky );
+		$p_bug_data->project_id			= (int)$p_bug_data->project_id;
+		$p_bug_data->reporter_id		= (int)$p_bug_data->reporter_id;
+		$p_bug_data->handler_id			= (int)$p_bug_data->handler_id;
+		$p_bug_data->duplicate_id		= (int)$p_bug_data->duplicate_id;
+		$p_bug_data->priority			= (int)$p_bug_data->priority;
+		$p_bug_data->severity			= (int)$p_bug_data->severity;
+		$p_bug_data->reproducibility	= (int)$p_bug_data->reproducibility;
+		$p_bug_data->status				= (int)$p_bug_data->status;
+		$p_bug_data->resolution			= (int)$p_bug_data->resolution;
+		$p_bug_data->projection			= (int)$p_bug_data->projection;
+		$p_bug_data->category_id		= (int)$p_bug_data->category_id;
+		$p_bug_data->eta				= (int)$p_bug_data->eta;
+		$p_bug_data->view_state			= (int)$p_bug_data->view_state;
+		$p_bug_data->sponsorship_total	= (int)$p_bug_data->sponsorship_total;
+		$p_bug_data->sticky				= (int)$p_bug_data->sticky;
 
-		$t_bug_data->description		= db_prepare_string( $p_bug_data->description );
-		$t_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
-		$t_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
-
-		return $t_bug_data;
+		return $p_bug_data;
 	}
 
 	# --------------------

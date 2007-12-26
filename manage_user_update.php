@@ -58,12 +58,12 @@
 	email_ensure_valid( $f_email );
 	email_ensure_not_disposable( $f_email );
 
-	$c_email		= db_prepare_string( $f_email );
-	$c_username		= db_prepare_string( $f_username );
-	$c_realname		= db_prepare_string( $f_realname );
+	$c_email		= $f_email;
+	$c_username		= $f_username;
+	$c_realname		= $f_realname;
 	$c_protected	= db_prepare_bool( $f_protected );
 	$c_enabled		= db_prepare_bool( $f_enabled );
-	$c_user_id			= db_prepare_int( $f_user_id );
+	$c_user_id		= db_prepare_int( $f_user_id );
 	$c_access_level	= db_prepare_int( $f_access_level );
 
 	$t_user_table = db_get_table( 'mantis_user_table' );
@@ -86,20 +86,23 @@
 	#  protected flag then don't update the access level and enabled flag.
 	#  If the user was unprotected or the protected flag is being turned off
 	#  then proceed with a full update.
+	$query_params = Array();
 	if ( $f_protected && $t_old_protected ) {
 	    $query = "UPDATE $t_user_table
-	    		SET username='$c_username', email='$c_email',
-	    			protected='$c_protected', realname='$c_realname'
-	    		WHERE id='$c_user_id'";
+	    		SET username=" . db_param(0) . ", email=" . db_param(1) . ",
+	    			protected=" . db_param(2) . ", realname=" . db_param(3) . "
+	    		WHERE id=" . db_param(4);
+	    $query_params = Array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
 	} else {
 	    $query = "UPDATE $t_user_table
-	    		SET username='$c_username', email='$c_email',
-	    			access_level='$c_access_level', enabled='$c_enabled',
-	    			protected='$c_protected', realname='$c_realname'
-	    		WHERE id='$c_user_id'";
+	    		SET username=" . db_param(0) . ", email=" . db_param(1) . ",
+	    			access_level=" . db_param(2) . ", enabled=" . db_param(3) . ",
+	    			protected=" . db_param(4) . ", realname=" . db_param(5) . "
+	    		WHERE id=" . db_param(6);
+	    $query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id ); 
 	}
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, $query_params );
 	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 ?>
 <?php html_page_top1() ?>

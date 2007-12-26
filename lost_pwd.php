@@ -45,14 +45,11 @@
 	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
 
-	$c_username = db_prepare_string( $f_username );
-	$c_email = db_prepare_string( $f_email );
-
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	# @@@ Consider moving this query to user_api.php
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param(0) . ' AND email = ' . db_param(1) . ' AND enabled=1';
-	$result = db_query_bound( $query, Array( $c_username, $c_email ) );
+	$result = db_query_bound( $query, Array( $f_username, $f_email ) );
 
 	if ( 0 == db_num_rows( $result ) ) {
 		trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );

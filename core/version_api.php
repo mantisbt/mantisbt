@@ -123,8 +123,6 @@
 	function version_add( $p_project_id, $p_version, $p_released = VERSION_RELEASED, $p_description = '', $p_date_order = null) {
 		$c_project_id   = db_prepare_int( $p_project_id );
 		$c_released     = db_prepare_int( $p_released );
-		$c_version      = db_prepare_string( $p_version );
-		$c_description  = db_prepare_string( $p_description );
 
 		if ( null === $p_date_order ) {
 			$c_date_order = db_now();
@@ -139,8 +137,8 @@
 		$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order, description, released )
 				  VALUES
-					( '$c_project_id', '$c_version', " . $c_date_order . ", '$c_description', '$c_released' )";
-		db_query( $query );
+					(" . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
+		db_query_bound( $query, Array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -160,9 +158,9 @@
 		}
 
 		$c_version_id   = db_prepare_int( $p_version_info->id );
-		$c_version_name = db_prepare_string( $p_version_info->version );
-		$c_old_version_name = db_prepare_string( $t_old_version_name );
-		$c_description  = db_prepare_string( $p_version_info->description );
+		$c_version_name = $p_version_info->version;
+		$c_old_version_name = $t_old_version_name;
+		$c_description  = $p_version_info->description;
 		$c_released     = db_prepare_int( $p_version_info->released );
 		$c_date_order   = db_timestamp( $p_version_info->date_order );
 		$c_project_id	= db_prepare_int( $p_version_info->project_id );
@@ -215,8 +213,6 @@
 
 		$t_old_version = version_get_field( $p_version_id, 'version' );
 		$t_project_id = version_get_field( $p_version_id, 'project_id' );
-
-		$c_old_version = db_prepare_string( $t_old_version );
 		$c_project_id = db_prepare_int( $t_project_id );
 
 		$t_project_version_table	= db_get_table( 'mantis_project_version_table' );
@@ -229,12 +225,12 @@
 		$query = "UPDATE $t_bug_table
 				  SET version=" . db_param(0) . "
 				  WHERE project_id=" . db_param(1) . " AND version=" . db_param(2);
-		db_query_bound( $query, Array( $c_new_version, $c_project_id, $c_old_version ) );
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $p_old_version ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=" . db_param(0) . '
 				  WHERE ( project_id=' . db_param(1) . ' ) AND ( fixed_in_version=' . db_param(2) .')';
-		db_query_bound( $query, Array( $c_new_version, $c_project_id, $c_old_version ) );
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $p_old_version ) );
 
 		# db_query errors on failure so:
 		return true;
@@ -276,21 +272,21 @@
 	# Return all versions for the specified project
 	function version_get_all_rows( $p_project_id, $p_released = null ) {
 		$c_project_id = db_prepare_int( $p_project_id );
-
-		if ( $p_released === null ) {
-			$t_released_where = '';
-		} else {
-			$c_released = db_prepare_int( $p_released );
-			$t_released_where = "AND ( released = $c_released )";
-		}
-
 		$t_project_version_table = db_get_table( 'mantis_project_version_table' );
 
 		$query = "SELECT *
 				  FROM $t_project_version_table
-				  WHERE project_id='$c_project_id' $t_released_where
-				  ORDER BY date_order DESC";
-		$result = db_query( $query );
+				  WHERE project_id=" . db_param(0);
+		$query_params[] = $c_project_id;
+		
+		if ( $p_released !== null ) {
+			$c_released = db_prepare_int( $p_released );
+			$query .= " AND released = " . db_param(1);
+			$query_params[] = $c_released;
+		}
+		$query .= " ORDER BY date_order DESC";
+		
+		$result = db_query_bound( $query, $query_params );
 		$count = db_num_rows( $result );
 		$rows = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
@@ -334,8 +330,6 @@
 	# Get the version_id, given the project_id and $p_version_id
 	# returns false if not found, otherwise returns the id.
 	function version_get_id( $p_version, $p_project_id = null ) {
-		$c_version       = db_prepare_string( $p_version );
-
 		if ( $p_project_id === null ) {
 			$c_project_id = helper_get_current_project();
 		} else {
@@ -349,7 +343,7 @@
 					WHERE project_id=" . db_param(0) . " AND
 						version=" . db_param(1);
 
-		$result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
+		$result = db_query_bound( $query, Array( $c_project_id, $p_version ) );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;
@@ -399,10 +393,7 @@
 	function version_prepare_db( $p_version_info ) {
 		$p_version_info->id		= db_prepare_int( $p_version_info->id );
 		$p_version_info->project_id	= db_prepare_int( $p_version_info->project_id );
-		$p_version_info->version	= db_prepare_string( $p_version_info->version );
-		$p_version_info->description	= db_prepare_string( $p_version_info->description );
 		$p_version_info->released	= db_prepare_int( $p_version_info->released );
-		$p_version_info->date_order	= db_prepare_string( $p_version_info->date_order );
 
 		return $p_version_info;
 	}

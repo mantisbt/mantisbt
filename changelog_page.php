@@ -95,7 +95,6 @@
 			$t_version_header_printed = false;
 		
 			$t_version = $t_version_row['version'];
-			$c_version = db_prepare_string( $t_version );
 
 			$t_version_id = version_get_id( $t_version, $t_project_id );
 
@@ -109,7 +108,7 @@
 			$t_issue_ids = array();
 			$t_issue_parents = array();
 
-			$t_result = db_query_bound( $query, Array( $c_project_id, $c_version ) );
+			$t_result = db_query_bound( $query, Array( $c_project_id, $t_version ) );
 
 			while ( $t_row = db_fetch_array( $t_result ) ) {
 				# hide private bugs if user doesn't have access to view them.

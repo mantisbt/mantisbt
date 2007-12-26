@@ -153,8 +153,8 @@
 		$query = "INSERT INTO $t_mantis_bug_relationship_table
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
-				( '$c_src_bug_id', '$c_dest_bug_id', '$c_relationship_type' )";
-		$result = db_query( $query );
+				( " . db_param(0) . ',' . db_param(1) . ',' . db_param(2) . ')';
+		$result = db_query_bound( $query, Array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 		$t_relationship = db_fetch_array( $result );
 
 		$t_bug_relationship_data = new BugRelationshipData;

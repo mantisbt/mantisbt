@@ -62,9 +62,9 @@
 
 	$t_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
-	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . $f_source_field_id . ' and value <> \'\'';
+	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param(0) . ' and value <> ' . db_param(1);
 
-	$result = @db_query( $query );
+	$result = @db_query_bound( $query, Array( $f_source_field_id, '' ) );
 	if ( FALSE == $result ) {
 		echo '<p>No fields need to be updated.</p>';
 	} else {

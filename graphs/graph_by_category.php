@@ -39,10 +39,10 @@
 	$query = "SELECT c.name AS name, COUNT(name) as count
 			FROM mantis_bug_table
 			JOIN mantis_category_table AS c
-			WHERE project_id='$t_project_id'
+			WHERE project_id=" . db_param(0) . "
 			GROUP BY name
 			ORDER BY name";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, Array( $t_project_id ) );
 	$category_count = db_num_rows( $result );
 	$total = 0;
 	$longest_size = 0;

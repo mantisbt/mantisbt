@@ -450,7 +450,7 @@ function plugin_get_installed() {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
 	$t_query = "SELECT * FROM $t_plugin_table";
-	$t_result = db_query( $t_query );
+	$t_result = db_query_bound( $t_query );
 
 	$t_plugins = array( 'mantis' => '1' );
 	while( $t_row = db_fetch_array( $t_result ) ) {

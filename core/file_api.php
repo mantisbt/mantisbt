@@ -242,8 +242,8 @@ document.getElementById( span ).style.display = displayType;
 						default:
                   					$query = "SELECT *
 	                  						FROM $t_bug_file_table
-				            			WHERE id='$c_id'";
-        	               				$result = db_query( $query );
+				            			WHERE id=" . db_param(0);
+        	               				$result = db_query_bound( $query, Array( $c_id ) );
 			                 		$row = db_fetch_array( $result );
                         	                        $v_content=$row['content'];
 					}
@@ -294,8 +294,8 @@ document.getElementById( span ).style.display = displayType;
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
-				WHERE bug_id='$c_bug_id'";
-		$result = db_query( $query );
+				WHERE bug_id=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 		$file_count = db_num_rows( $result );
 		if ( 0 == $file_count ) {
@@ -369,8 +369,8 @@ document.getElementById( span ).style.display = displayType;
 
 		# Delete the corresponding db records
 		$query = "DELETE FROM $t_project_file_table
-				WHERE project_id=$p_project_id";
-		$result = db_query($query);
+				WHERE project_id=" . db_param(0);
+		$result = db_query_bound($query, Array( $p_project_id ) );
 	}
 	# --------------------
 	# Delete all cached files that are older than configured number of days.
@@ -462,8 +462,8 @@ document.getElementById( span ).style.display = displayType;
 
 		$t_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 		$query = "DELETE FROM $t_file_table
-				WHERE id='$c_file_id'";
-		db_query( $query );
+				WHERE id=" . db_param(0);
+		db_query_bound( $query, Array( $c_file_id ) );
 		return true;
 	}
 	# --------------------
@@ -533,12 +533,12 @@ document.getElementById( span ).style.display = displayType;
 	function diskfile_is_name_unique( $p_name , $p_filepath ) {
 		$t_file_table = db_get_table( 'mantis_bug_file_table' );
 
-		$c_name = db_prepare_string( $p_filepath . $p_name );
+		$c_name = $p_filepath . $p_name;
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE diskfile='$c_name'";
-		$result = db_query( $query );
+				  WHERE diskfile=" . db_param(0);
+		$result = db_query_bound( $query, Array( $c_name ) );
 		$t_count = db_result( $result );
 
 		if ( $t_count > 0 ) {
@@ -553,13 +553,10 @@ document.getElementById( span ).style.display = displayType;
 	function file_is_name_unique( $p_name, $p_bug_id ) {
 		$t_file_table = db_get_table( 'mantis_bug_file_table' );
 
-		$c_name = db_prepare_string( $p_name );
-		$c_bug = db_prepare_string( $p_bug_id );
-
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
-				  WHERE filename='$c_name' and bug_id=$c_bug";
-		$result = db_query( $query );
+				  WHERE filename=" . db_param(0) . " AND bug_id=" . db_param(1);
+		$result = db_query_bound( $query, Array( $p_name, $p_bug_id ) );
 		$t_count = db_result( $result );
 
 		if ( $t_count > 0 ) {
