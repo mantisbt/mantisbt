@@ -94,7 +94,7 @@
 		switch ( $t_method ) {
 			case FTP:
 			case DISK:
-				if ( !file_exists( $t_upload_path ) || !is_dir( $t_upload_path ) || !is_writable( $t_upload_path ) || !is_readable( $t_upload_path ) ) {
+				if ( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
 					return new soap_fault( 'Server', '', "Upload folder '{$t_file_path}' doesn't exist." );
 				}
 
