@@ -1149,7 +1149,8 @@
 		$t_bug_data['email_reporter'] = user_get_name( $row['reporter_id'] );
 		$t_bug_data['email_project']  = project_get_field( $row['project_id'], 'name' );
 
-		$t_bug_data['email_category'] = $row['category'];
+		$t_category_name = category_full_name( $row['category_id'], false );
+		$t_bug_data['email_category'] = $t_category_name;
 
 		$t_bug_data['email_date_submitted'] = $row['date_submitted'];
 		$t_bug_data['email_last_modified']   = $row['last_updated'];
@@ -1173,7 +1174,7 @@
 		$t_bug_data['email_summary'] = $row['summary'];
 		$t_bug_data['email_description'] = $row['description'];
 
-		$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $row['category'];
+		$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $t_category_name;
 
 		$t_bug_data['custom_fields'] = custom_field_get_linked_fields( $p_bug_id, $t_user_access_level );
 		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level, $t_user_bugnote_order, $t_user_bugnote_limit );
