@@ -510,7 +510,7 @@
 	}
 	# --------------------
 	# Print extended project browser
-	function print_extended_project_browser( $p_trace=Array(), $p_project_id = 0 ) {
+	function print_extended_project_browser( $p_trace=Array(), $p_project_id = null ) {
 		project_cache_all();
 		$t_project_ids = current_user_get_accessible_projects();
 
