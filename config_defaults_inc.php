@@ -606,7 +606,7 @@
 	
 	# graph colours, once the list is exhausted it will repeat
 	$g_graph_colors = array('coral', 'red', 'blue', 'black', 'green', 'orange', 'pink', 'brown', 'gray',
-	        'blueviolet','chartreuse','fuschia','indigo');
+	        'blueviolet','chartreuse','magenta','purple3','teal','tan','olivedrab','magenta');
 
 	############################
 	# Mantis Time Settings
