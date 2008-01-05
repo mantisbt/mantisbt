@@ -217,7 +217,7 @@
 			return false;
 		} else {
 			$t_user_id = auth_get_current_user_id();
-			return user_get_bug_filter( $t_user_id, $p_project_id );
+			$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );
