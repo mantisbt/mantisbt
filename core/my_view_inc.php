@@ -32,7 +32,10 @@
 ?>
 <?php
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = $t_filter === false ? array() : $t_filter;
+
+	if ( $t_filter === false ) {
+		$t_filter = filter_get_default();
+	}
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];

@@ -377,7 +377,7 @@
 			'dir'               => 'DESC'
 		);
 
-		return $t_filter;
+		return filter_ensure_valid_filter( $t_filter );
 	}
 
 	# @@@ Had to make all these parameters required because we can't use
