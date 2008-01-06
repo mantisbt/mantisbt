@@ -286,36 +286,70 @@ if ( 2 == $t_install_state ) {
 		Attempting to connect to database as admin
 	</td>
 	<?php
+        $t_db_open = false;
 		$g_db = ADONewConnection($f_db_type);
 		$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password);
 
 		if ( $t_result ) {
-			print_test_result( GOOD );
 			# check if db exists for the admin
 			$t_result = @$g_db->Connect($f_hostname, $f_admin_username, $f_admin_password, $f_database_name);
 			if ( $t_result ) {
+    			$t_db_open = true;
 				$f_db_exists = true;
+			}
+    		if ( $f_db_type == 'db2' ) {
+    			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
+    			if ( $result === false ) {
+        			print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
+    			}
+    		} else {			
+			    print_test_result( GOOD );
 			}
 		} else {
 			print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' .  db_error_msg() . ' )' );
 		}
 
-		if ( $f_db_type == 'db2' ) {
-			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === false ) {
-				echo $g_db->errorMsg();
-			}
-		}			
 		
 	?>
 </tr>
+<?php
+	if ( $f_db_exists ) {
+?>
+<tr>
+	<td bgcolor="#ffffff">
+		Attempting to connect to database as user
+	</td>
+	<?php
+		$g_db = ADONewConnection($f_db_type);
+		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
 
+		if ( $t_result == true ) {
+			$t_db_open = true;
+    		if ( $f_db_type == 'db2' ) {
+    			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
+    			if ( $result === false ) {
+        			print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
+    			}
+    		} else {		
+			    print_test_result( GOOD );
+		    }
+		} else {
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
+		}
+	?>
+</tr>
+
+<?php 
+    }
+    if( $t_db_open ) {
+?>
 <!-- display database version -->
 <tr>
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
 			# due to a bug in ADODB, this call prompts warnings, hence the @
+			# the check only works on mysql if the database is open
 			$t_version_info = @$g_db->ServerInfo();
 			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
 		?>
@@ -340,34 +374,6 @@ if ( 2 == $t_install_state ) {
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 	?>
 </tr>
-<?php
-	if ( $f_db_exists ) {
-?>
-<tr>
-	<td bgcolor="#ffffff">
-		Attempting to connect to database as user
-	</td>
-	<?php
-		$g_db = ADONewConnection($f_db_type);
-		$t_result = @$g_db->Connect($f_hostname, $f_db_username, $f_db_password, $f_database_name);
-
-		if ( $t_result == true ) {
-			print_test_result( GOOD );
-		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' .  db_error_msg() . ' )' );
-		}
-
-		if ( $f_db_type == 'db2' ) {
-			echo "<br />SET SCHEMA " . $f_db_schema;
-			$result = &$g_db->execute( 'set schema ' . $f_db_schema );
-			if ( $result === false ) {
-				echo $g_db->errorMsg();
-			}
-		}		
-		
-	?>
-</tr>
-
 <?php
 	}
 	if ( false == $g_failed ) {
@@ -580,6 +586,7 @@ if ( 3 == $t_install_state ) {
 			$ret = $dict->ExecuteSQLArray( $sqlarray );
 			if( $ret == 2) {
 				print_test_result( GOOD );
+				$t_db_open = true;
 			} else {
 				$t_error = db_error_msg();
 				if( strstr( $t_error, 'atabase exists' ) ) {
@@ -589,11 +596,47 @@ if ( 3 == $t_install_state ) {
 					$t_install_state--;	# db creation failed, allow user to re-enter user/password info
 				}
 			}
-			$g_db->Close();
 		}
 	}
 	?>
 </tr>
+<?php 
+    if( $t_db_open ) {
+?>
+<!-- display database version -->
+<tr>
+	<td bgcolor="#ffffff">
+		Checking Database Server Version
+		<?php
+			# due to a bug in ADODB, this call prompts warnings, hence the @
+			$t_version_info = @$g_db->ServerInfo();
+			echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		?>
+	</td>
+	<?php
+		$t_warning = '';
+		$t_error = '';
+		switch ( $f_db_type ) {
+			case 'mysql':
+			case 'mysqli':
+				if ( version_compare ( $t_version_info['version'] , '4.1.0', '<' ) ) {
+					$t_error = 'MySQL 4.1.0 or later is required for installation.';
+				}
+				break;
+			case 'pgsql':
+			case 'mssql':
+			case 'db2':
+			default:
+				break;
+		}
+			
+		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
+	?>
+</tr>
+<?php
+    }
+	$g_db->Close();
+?>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
