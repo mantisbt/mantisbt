@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a php based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002-2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 INSTALLATION
@@ -12,101 +12,34 @@ instructions may seem unix-centric but should work fine on Windows systems.
 Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using Mantis.
 
-These instructions are also available at:
+These instructions are available at:
 http://manual.mantisbt.org/manual.installation.php
 
 # --- Requirements ----------
 
 * MySQL 4.1.1 and higher
-* PHP 5.2.0 and higher
-* a webserver (e.g. Apache, IIS)
+* PHP 4.3.0 and higher
+* a webserver
 
-# --- Summary ---------------
+-------------------------------------------------------------------------------
+### Upgrading ###
+-------------------------------------------------------------------------------
 
-1. Tranfer files
-2. Uncompress files
-3. Generate database tables
-4. Edit configuration file
-5. PHP File extensions
-6. Login
+These instructions are available at:
+http://manual.mantisbt.org/manual.installation.upgrading.php
 
-******************************************************************************
+-------------------------------------------------------------------------------
+### Troubleshooting ###
+-------------------------------------------------------------------------------
 
-This installation process has changed with release 1.0.0.
+See TROUBLESHOOTING
 
-1. First, transfer the file to your webserver using whatever method you like
-best (ftp, scp, etc).  You will need to telnet/ssh into the server machine for
-the next steps.  If you don't have shell access, then expand the archive on your
-local machine and copy the files via FTP, then go to step 3.
+-------------------------------------------------------------------------------
+### Useful links ###
+-------------------------------------------------------------------------------
 
-2. Next, untar/gunzip it to the directory that you want.
-The usual command is (1 step):
-
-	tar zxvf <filename.tar.gz>
-
-OR  (2 steps):
-
-	gunzip <filename.tar.gz>
-	tar xvf <filename.tar>
-
-Winzip, Stuffit, and other programs should also be able to handle
-decompression of the archive.
-
-At this point you may want to rename the directory to something simpler like
-'mantis'.  You will use the mv command to rename a directory (Windows users
-substitute the "ren" command or use explorer).
-
-mv <directoryname> mantis
-
-If you are upgrading see the UPGRADING document.
-
-3. Next we will create the necessary database tables and a basic configuration
-file.
-
-From your web server, access http://yoursite/mantis/admin/install.php
-
-This page will walk through the following steps:
-a) check basic parameters for the web server
-b) prompt for the database type and location, and a database user/password 
-pair. For installiion, an administrative user/password pair can also be 
-provided. The operating user requires DELETE, SELECT, INSERT, and UPDATE
-privileges. For installation, INDEX, CREATE, ALTER, and DROP privileges are
-also required.
-c) create the database and tables.
-
-* WARNING: A DEFAULT ADMINISTRATOR level account is created.  The account name
-and password are administrator / root.  Use this when you first login to
-Mantis. Immediately go to Manage and create at least one administrator level
-account.  Immediately after that DISABLE or DELETE the administrator account.  
-You can recreate it but you should delete the account to prevent the 
-cookie_string from being used to trick the package.  It would be even better 
-to rename the account or delete it permanently.  REMEMBER: After setting up 
-the package, REMOVE the default administrator account.
-
-d) write a basic "config_inc.php file to define the database.
-e) perform some post installation checks on the system.
-
-4. The next part involves configuring the installation to work with your
-specific setup.
-
-Open the file in an editor and add anyother values that are required. There are 
-many more that you can use to customize your Mantis installation.  See the 
-doc/CUSTOMIZATION file for in depth explanations.
-
-The file will overwrite the default values with those necessary for setup.
-
-You can load up admin/check.php to see if you set things up correctly.
-
-*** NOTE: check.php sometimes reports the value of register_globals
-incorrectly.  Create a page with this line in it: <? phpinfo() ?>, save it
-with a .php extension and load it up in your web browser.  It will, among a
-multitude of other things, have the correct value of register_globals that you
-are using.
-
-5.  Login to your bugtracker and go to the manage section.  Click on the
-projects link.  You will need to ADD a new project.  Then EDIT the new project
-and remember to ADD at least one category.  Otherwise you won't be able to add
-any bug reports.
-
-That should be it.  You're off and running.  For some help on custom editing
-of the site please read the CUSTOMIZATION file.
+http://www.php.net/        -  excellent documentation.
+http://www.phpwizard.net/  -  an excellent web front end to mysql.
+http://www.phpbuilder.net/ -  good help forums.
+http://www.mysql.com/      -  good documentation.
+http://www.apache.org/     -  you should be able to find what you need.
