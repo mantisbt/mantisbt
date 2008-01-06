@@ -248,34 +248,31 @@
 	# --------------------
 	# category_get_all_rows did't respect subprojects.
 	function mci_category_get_all_rows( $p_project_id, $p_user_id ) {
-		$t_mantis_project_category_table = db_get_table( 'mantis_project_category_table' );
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_project_where = helper_project_specific_where( $c_project_id, $p_user_id );
 
-		# grab all categories in the project category table
-		$cat_arr = array();
-		$query = "SELECT DISTINCT category
-				FROM $t_mantis_project_category_table
+		$query = "SELECT c.name as category FROM $t_category_table AS c
+				JOIN $t_project_table AS p
+					ON c.project_id=p.id
 				WHERE $t_project_where
-				ORDER BY category";
-		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-		for ($i=0;$i<$category_count;$i++) {
+				ORDER BY c.name ";
+		$result = db_query_bound( $query );
+		$count = db_num_rows( $result );
+		$cat_arr = array();
+		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$cat_arr[] = string_attribute( $row['category'] );
 		}
-		sort( $cat_arr );
-		$cat_arr = array_unique( $cat_arr );
 
-		$rows = array();
-		foreach( $cat_arr as $t_category ) {
-			$rows[] = $t_category;
-		}
-		return $rows;
+		sort( $cat_arr );
+
+		return $cat_arr;
 	}
-		
+
 	#########################################
 	# SECURITY NOTE: these globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
