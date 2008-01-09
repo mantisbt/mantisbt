@@ -93,7 +93,7 @@
 		FROM $t_user_table
 		WHERE ".db_helper_compare_days(0,"date_created","<= '$days_old'")."
 		ORDER BY date_created DESC";
-	$result = db_query_bound( $query, Array( db_now()  );
+	$result = db_query_bound( $query, Array( db_now() ) );
 	$new_user_count = db_num_rows( $result);
 
 	if ( $new_user_count > 0 ) {
