@@ -74,30 +74,32 @@
 	}
 	# --------------------
 	function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0) {
-		$t_current = date( "Y" ) ;
-		$t_forward_years = config_get( 'forward_year_count' ) ;
+		$t_current = date( 'Y' );
+		$t_forward_years = config_get( 'forward_year_count' );
 
-		$t_start_year = $p_start ;
-		if ($t_start_year == 0) {
-			$t_start_year = $t_current ;
+		$t_start_year = $p_start;
+		if ( $t_start_year == 0 ) {
+			$t_backward_years = config_get( 'backward_year_count' );
+			$t_start_year = $t_current - $t_backward_years;
 		}
+
 		if ( ( $p_year < $t_start_year ) && ( $p_year != 0 ) ) {
 			$t_start_year = $p_year ;
 		}
 
-		$t_end_year = $p_end ;
-		if ($t_end_year == 0) {
-			$t_end_year = $t_current + $t_forward_years ;
+		$t_end_year = $p_end;
+		if ( $t_end_year == 0 ) {
+			$t_end_year = $t_current + $t_forward_years;
 		}
-		if ($p_year > $t_end_year) {
-			$t_end_year = $p_year + $t_forward_years ;
+		if ( $p_year > $t_end_year ) {
+			$t_end_year = $p_year + $t_forward_years;
 		}
 
-		for ($i=$t_start_year; $i <= $t_end_year; $i++) {
-			if ($i == $p_year) {
-				PRINT "<option value=\"$i\" selected=\"selected\"> $i </option>" ;
+		for ( $i = $t_start_year; $i <= $t_end_year; $i++ ) {
+			if ( $i == $p_year ) {
+				echo "<option value=\"$i\" selected=\"selected\">$i</option>";
 			} else {
-				PRINT "<option value=\"$i\"> $i </option>" ;
+				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 	}

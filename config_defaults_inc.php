@@ -1808,9 +1808,13 @@
 	$g_dot_tool							= '/usr/bin/dot';
 	$g_neato_tool						= '/usr/bin/neato';
 
+	# Number of years in the past that custom date fields will display in
+	# drop down boxes.
+	$g_backward_year_count 				= 4;
+
 	# Number of years in the future that custom date fields will display in
 	# drop down boxes.
-	$g_forward_year_count 				= 4 ;
+	$g_forward_year_count 				= 4;
 
 	# Custom Group Actions
 	#
