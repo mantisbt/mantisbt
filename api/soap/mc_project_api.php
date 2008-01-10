@@ -89,7 +89,6 @@
 	 */
 	function mc_projects_get_user_accessible( $p_username, $p_password ) {
 		$t_user_id = mci_check_login( $p_username, $p_password );
-		$t_lang = mci_get_user_lang( $t_user_id );
 		if ( $t_user_id === false ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
@@ -97,6 +96,8 @@
 		if ( !mci_has_readonly_access( $t_user_id ) ) {
 			return new soap_fault( 'Client', '', 'Access Denied' );
 		}
+
+		$t_lang = mci_get_user_lang( $t_user_id );
 
 		$t_result = array();
 		foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
@@ -112,9 +113,10 @@
 				array_key_exists( 'file_path', $t_project_row ) ? $t_project_row['file_path'] : "";
 			$t_project['description'] =
 				array_key_exists( 'description', $t_project_row ) ? $t_project_row['description'] : "";
-			$t_project['subprojects'] = mci_user_get_accessible_subprojects( $t_user_id, $t_project_id );
+			$t_project['subprojects'] = mci_user_get_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
 			$t_result[] = $t_project;
 		}
+
 		return $t_result;
 	}
 

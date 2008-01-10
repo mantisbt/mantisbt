@@ -224,7 +224,15 @@
 		return '@' . $p_val . '@';
 	}
 	
-	function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) {
+	# --------------------
+	# Gets the sub-projects that are accessible to the specified user / project.
+	function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, $p_lang = null ) {
+		if ( $p_lang === null ) {
+			$t_lang = mci_get_user_lang( $p_user_id );
+		} else {
+			$t_lang = $p_lang;
+		}
+
 		$t_result = array();
 		foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
 			$t_subproject_row = project_cache_row( $t_subproject_id );
@@ -239,41 +247,39 @@
 				array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : "";
 			$t_subproject['description'] =
 				array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : "";
-			$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id );
+			$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id, $t_lang );
 			$t_result[] = $t_subproject;
 		}
+
 		return $t_result;
 	}
 	
 	# --------------------
 	# category_get_all_rows did't respect subprojects.
 	function mci_category_get_all_rows( $p_project_id, $p_user_id ) {
-		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_category_table = config_get( 'mantis_category_table' );
+		$t_project_table = config_get( 'mantis_project_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_project_where = helper_project_specific_where( $c_project_id, $p_user_id );
 
-		# grab all categories in the project category table
-		$cat_arr = array();
-		$query = "SELECT DISTINCT category
-				FROM $t_mantis_project_category_table
+		$query = "SELECT c.name as category FROM $t_category_table AS c
+				JOIN $t_project_table AS p
+					ON c.project_id=p.id
 				WHERE $t_project_where
-				ORDER BY category";
-		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-		for ($i=0;$i<$category_count;$i++) {
+				ORDER BY c.name ";
+		$result = db_query_bound( $query );
+		$count = db_num_rows( $result );
+		$cat_arr = array();
+		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$cat_arr[] = string_attribute( $row['category'] );
 		}
-		sort( $cat_arr );
-		$cat_arr = array_unique( $cat_arr );
 
-		$rows = array();
-		foreach( $cat_arr as $t_category ) {
-			$rows[] = $t_category;
-		}
-		return $rows;
+		sort( $cat_arr );
+
+		return $cat_arr;
 	}
 	
 	/**
