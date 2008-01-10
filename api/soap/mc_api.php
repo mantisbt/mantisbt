@@ -224,7 +224,15 @@
 		return '@' . $p_val . '@';
 	}
 	
-	function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) {
+	# --------------------
+	# Gets the sub-projects that are accessible to the specified user / project.
+	function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, $p_lang = null ) {
+		if ( $p_lang === null ) {
+			$t_lang = mci_get_user_lang( $p_user_id );
+		} else {
+			$t_lang = $p_lang;
+		}
+
 		$t_result = array();
 		foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
 			$t_subproject_row = project_cache_row( $t_subproject_id );
@@ -239,9 +247,10 @@
 				array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : "";
 			$t_subproject['description'] =
 				array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : "";
-			$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id );
+			$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id, $t_lang );
 			$t_result[] = $t_subproject;
 		}
+
 		return $t_result;
 	}
 	
