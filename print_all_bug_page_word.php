@@ -103,6 +103,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
             # grab the project name
             $t_project_name = project_get_field( $v_project_id, 'name' );
+			$t_category_name = category_full_name( $v_category_id, false );
 
             # bug text infos
             $t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
@@ -160,7 +161,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_id ?>
 	</td>
 	<td class="print">
-		<?php echo "[$t_project_name] $v_category" ?>
+		<?php echo "[$t_project_name] $t_category_name" ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'severity', $v_severity ) ?>
