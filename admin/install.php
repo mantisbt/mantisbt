@@ -554,10 +554,11 @@ if ( 3 == $t_install_state ) {
 			}
 		}
 
-		$g_db->Close();
-
+		$t_db_open = false;
+		
 	if ( $t_result == true ) {
 		print_test_result( GOOD );
+		$t_db_open = true;
 	} else {
 		// create db
 		$g_db = ADONewConnection( $f_db_type );
@@ -574,6 +575,7 @@ if ( 3 == $t_install_state ) {
 				$t_install_state--;	# db creation failed, allow user to re-enter user/password info
 			} else {
 				print_test_result( GOOD );
+				$t_db_open = true;
 			}
 		} else {
 			$sqlarray = $dict->CreateDatabase( $f_database_name );
