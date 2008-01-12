@@ -351,7 +351,7 @@
 		$graph->SetScale('linlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set( lang_get( 'by_date' ) );
+		$graph->title->Set( $p_title . ' ' . lang_get( 'by_date' ) );
 		$graph->title->SetFont( $t_graph_font, FS_BOLD );
 
 		$graph->legend->Pos(0.01,0.05,'right','top');

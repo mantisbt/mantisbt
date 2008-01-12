@@ -46,9 +46,9 @@
 	$t_period->set_period_from_selector( 'interval' );
     $t_types = array(
         0 => lang_get( 'select' ),
-        1 => lang_get( 'select_bystatus'),
-        2 => lang_get( 'select_summbystatus'),
-        3 => lang_get( 'select_bycat'),
+        2 => lang_get( 'select_bystatus'),
+        3 => lang_get( 'select_summbystatus'),
+        4 => lang_get( 'select_bycat'),
         6 => lang_get( 'select_both')
     );
     
@@ -78,9 +78,10 @@
     </table>
     </form>
 <?php
-    if ( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {   // show selected info
+    // build the graphs if both an interval and graph type are selected
+    if ( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) { 
         $t_width = config_get( 'graph_window_width' );
-        $t_summary = ( $f_type % 2 ) == 0;
+        $t_summary = ( $f_type % 2 ) != 0;
         $t_body = (int)( $f_type / 2 );
         $f_start = $t_period->get_start_formatted();
         $f_end = $t_period->get_end_formatted();

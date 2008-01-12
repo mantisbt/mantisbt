@@ -197,7 +197,13 @@
 // sort and display the results
     sort($t_category);
     if ($f_show_as_table) {
-	    echo '<html><body><table class="width100"><tr><td></td>';
+        html_begin();
+        html_head_begin();
+        html_css();
+        html_content_type();
+    	html_head_end();
+    	html_body_begin();
+	    echo '<table class="width100"><tr><td></td>';
         foreach ( $t_category as $t_cat ) {
             echo '<th>'.$t_cat.'</th>';
         }
@@ -209,7 +215,9 @@
             }
             echo '</tr>';  
         }     
-	    echo '</table></body></html>';
+	    echo '</table>';
+    	html_body_end();
+    	html_end();
 	} else {
 	    // reverse the array and reorder the data, if necessary
 	    $t_metrics = array();
