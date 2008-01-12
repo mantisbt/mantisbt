@@ -63,8 +63,8 @@
 		exit();
 	}
 	
-	$t_bug_table			= db_get_table( 'mantis_bug_table' );
-	$t_bug_hist_table			= db_get_table( 'mantis_bug_history_table' );
+	$t_bug_table			= config_get( 'mantis_bug_table' );
+	$t_bug_hist_table			= config_get( 'mantis_bug_history_table' );
 
 	$t_marker = array();
 	$t_data = array();
@@ -76,24 +76,20 @@
 	$t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
     
     $t_bug = array();
+    $t_view_status = array();
 
 	// walk through all issues and grab their status for 'now'
 	$t_marker[$t_ptr] = time();
-    foreach ( $t_status_arr as $t_status => $t_label ) {
-        $t_data[$t_ptr][$t_status] = 0;
-    }
 	foreach ($rows as $t_row) {
-        $t_data[$t_ptr][$t_row['status']] ++;
+	    if ( isset( $t_data[$t_ptr][$t_row['status']] ) ) {
+            $t_data[$t_ptr][$t_row['status']] ++;	        
+	    } else {
+            $t_data[$t_ptr][$t_row['status']] = 1;
+            $t_view_status[$t_row['status']] = 
+                isset($t_status_arr[$t_row['status']]) ? $t_status_arr[$t_row['status']] : '@'.$t_row['status'].'@';
+        }
         $t_bug[] = $t_row['id'];
 	}
-
-    if ($f_show_as_table) {
-	    echo '<html><body><table class="width100"><tr><td></td>';
-        foreach ( $t_status_arr as $t_status => $t_label ) {
-            echo '<th>'.$t_label.' ('.$t_status.')</th>';
-        }
-        echo '</tr>';
-    }      
 
     // get the history for these bugs over the interval required to offset the data
     // type = 0 and field=status are status changes
@@ -104,81 +100,133 @@
             or type='.NEW_BUG.' ) and date_modified >= \''.db_date( $t_start ).'\''.
         ' order by date_modified DESC';
     $t_result = db_query( $t_select );
-	$row = db_fetch_array( $t_result );
+	$t_row = db_fetch_array( $t_result );
     
 	for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	    // walk through the data points and use the data retrieved to update counts
-	    while( ( $row !== false ) && ( db_unixtimestamp($row['date_modified']) >= $t_now ) ) {
-	        switch ($row['type']) {
+	    while( ( $t_row !== false ) && ( db_unixtimestamp($t_row['date_modified']) >= $t_now ) ) {
+	        switch ($t_row['type']) {
     	        case 0: // updated bug
-	                $t_data[$t_ptr][$row['new_value']]--;
-                    $t_data[$t_ptr][$row['old_value']]++;
+        	        if ( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
+                        if ( $t_data[$t_ptr][$t_row['new_value']] > 0 )
+                            $t_data[$t_ptr][$t_row['new_value']] --;	        
+        	        } else {
+                        $t_data[$t_ptr][$t_row['new_value']] = 0;
+                        $t_view_status[$t_row['new_value']] = 
+                            isset($t_status_arr[$t_row['new_value']]) ? $t_status_arr[$t_row['new_value']] : '@'.$t_row['new_value'].'@';
+                    }
+        	        if ( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
+                        $t_data[$t_ptr][$t_row['old_value']] ++;	        
+        	        } else {
+                        $t_data[$t_ptr][$t_row['old_value']] = 1;
+                        $t_view_status[$t_row['old_value']] = 
+                            isset($t_status_arr[$t_row['old_value']]) ? $t_status_arr[$t_row['old_value']] : '@'.$t_row['old_value'].'@';
+                    }
                     break;
     	        case 1: // new bug
-        	        $t_data[$t_ptr][NEW_]--;
+    	            if ( isset( $t_data[$t_ptr][NEW_] ) ) {
+    	                if ( $t_data[$t_ptr][NEW_] > 0 )
+                            $t_data[$t_ptr][NEW_] --;	        
+    	            } else {
+                        $t_data[$t_ptr][NEW_] = 0;
+                        $t_view_status[NEW_] = 
+                            isset($t_status_arr[NEW_]) ? $t_status_arr[NEW_] : '@'.NEW_.'@';
+                    }
                     break;
             }
-        	$row = db_fetch_array( $t_result );
+        	$t_row = db_fetch_array( $t_result );
         }
-
-        if ( $f_show_as_table && ($t_now <= $t_end) ) {
-            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('.db_date( $t_now ).')'.'</td>';
-            foreach ( $t_status_arr as $t_status => $t_label ) {
-                echo '<td>'.$t_data[$t_ptr][$t_status].'</td>';
-            }
-            echo '</tr>';  
-        }     
 
 	    if ($t_now <= $t_end) {
 	        $t_ptr++;
     	    $t_marker[$t_ptr] = $t_now;
-	        foreach ( $t_status_arr as $t_status => $t_label ) {
+	        foreach ( $t_view_status as $t_status => $t_label ) {
 	            $t_data[$t_ptr][$t_status] = $t_data[$t_ptr-1][$t_status];
             }
         }
 	}
 	
+    ksort($t_view_status);
+    
+    // add headers for table
     if ($f_show_as_table) {
-	    echo '</table></body></html>';
-	} else {
-	    $t_resolved = config_get( 'bug_resolved_status_threshold' );
-	    $t_closed = CLOSED;
-	    $t_bin_count = $t_ptr;
-	    $t_labels = array();
-	    $i = 0;
+        html_begin();
+        html_head_begin();
+        html_css();
+        html_content_type();
+    	html_head_end();
+    	html_body_begin();
+	    echo '<table class="width100"><tr><td></td>';
         if ($f_summary) {
-            $t_labels[++$i] = 'open';
-            $t_labels[++$i] = 'resolved';
-            $t_labels[++$i] = 'closed';
+            echo '<th>' . lang_get_defaulted('open') . '</th>';
+            echo '<th>' . lang_get_defaulted('resolved') . '</th>';
+            echo '<th>' . lang_get_defaulted('closed') . '</th>';
         } else {
-            foreach ( $t_status_arr as $t_status => $t_label ) {
-    	        $t_labels[++$i] = $t_label;
-            } 
-        }              
-	    // reverse the array and consolidate the data, if necessary
-	    $t_metrics = array();
-	    for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-	        $t = $t_bin_count - $t_ptr;
-	        $t_metrics[0][$t_ptr] = $t_marker[$t];
-	        if ($f_summary) {
-	            $t_metrics[1][$t_ptr] = 0;
-	            $t_metrics[2][$t_ptr] = 0;
-	            $t_metrics[3][$t_ptr] = 0;	            
-                foreach ( $t_status_arr as $t_status => $t_label ) {
-                    if ( $t_status < $t_resolved )
-            	        $t_metrics[1][$t_ptr] += $t_data[$t][$t_status];
-                    else if ( $t_status < $t_closed )
-            	        $t_metrics[2][$t_ptr] += $t_data[$t][$t_status];
-                    else 
-            	        $t_metrics[3][$t_ptr] += $t_data[$t][$t_status];
-                }
-            } else {
-                $i = 0;
-                foreach ( $t_status_arr as $t_status => $t_label ) {
-            	    $t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
-                }               
+            foreach ( $t_view_status as $t_status => $t_label ) {
+                echo '<th>'.$t_label.' ('.$t_status.')</th>';
             }
-	    }
+        }
+        echo '</tr>';
+    }      
+
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	$t_closed = CLOSED;
+	$t_bin_count = $t_ptr;
+	$t_labels = array();
+	$i = 0;
+    if ($f_summary) {
+        $t_labels[++$i] = 'open';
+        $t_labels[++$i] = 'resolved';
+        $t_labels[++$i] = 'closed';
+    } else {
+        foreach ( $t_view_status as $t_status => $t_label ) {
+            $t_labels[++$i] = $t_label;
+        } 
+    }   
+    $t_label_count = $i;
+               
+	// reverse the array and consolidate the data, if necessary
+	$t_metrics = array();
+	for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
+	    $t = $t_bin_count - $t_ptr;
+	    $t_metrics[0][$t_ptr] = $t_marker[$t];
+	    if ($f_summary) {
+	        $t_metrics[1][$t_ptr] = 0;
+	        $t_metrics[2][$t_ptr] = 0;
+	        $t_metrics[3][$t_ptr] = 0;	            
+            foreach ( $t_view_status as $t_status => $t_label ) {
+                if ( isset( $t_data[$t][$t_status] ) ) {
+                    if ( $t_status < $t_resolved )
+        	            $t_metrics[1][$t_ptr] += $t_data[$t][$t_status];
+                    else if ( $t_status < $t_closed )
+        	            $t_metrics[2][$t_ptr] += $t_data[$t][$t_status];
+                    else 
+        	            $t_metrics[3][$t_ptr] += $t_data[$t][$t_status];
+        	    }
+            }
+        } else {
+            $i = 0;
+            foreach ( $t_view_status as $t_status => $t_label ) {
+                if ( isset( $t_data[$t][$t_status] ) )
+        	        $t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
+        	    else
+        	        $t_metrics[++$i][$t_ptr] = 0;
+            }               
+        }
+        if ( $f_show_as_table ) {
+            echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('.db_date( $t_metrics[0][$t_ptr] ).')'.'</td>';
+            for ( $i=1; $i<=$t_label_count; $i++ ) {
+                echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
+            }
+            echo '</tr>';  
+        }     
+
+	}
+    if ($f_show_as_table) {
+        echo '</table>';
+    	html_body_end();
+    	html_end();
+    } else {
 	    graph_bydate( $t_metrics, $t_labels, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
-    }
+	}
 ?>
