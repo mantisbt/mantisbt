@@ -42,6 +42,11 @@
 	#  option is turned on, return false and don't redirect.
 	# $p_sanitize - true/false - true in the case where the URL is extracted from GET/POST or untrusted source.
 	# This would be false if the URL is trusted (e.g. read from config_inc.php).
+	#
+	# @param string The page to redirect: has to be a relative path
+	# @param boolean if true, stop the script after redirecting
+	# @param boolean apply string_sanitize_url to passed url
+	# @return boolean
 	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false ) {
 		$t_use_iis = config_get( 'use_iis');
 
@@ -50,7 +55,8 @@
 		}
 
 		# validate the url as part of this site before continuing
-		$t_url = $p_sanitize ? string_sanitize_url( $p_url ) : $p_url;
+                $t_url = config_get( 'path' );
+		$t_url .= $p_sanitize ? string_sanitize_url( $p_url ) : $p_url;
 
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {
