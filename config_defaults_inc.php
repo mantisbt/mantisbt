@@ -1463,8 +1463,11 @@
 	# Redirections
 	###########################
 
+	# Default page after Login or Set Project
+	$g_default_home_page = 'my_view_page.php';
+
 	# Specify where the user should be sent after logging out.
-	$g_logout_redirect_page			= '%path%login_page.php';
+	$g_logout_redirect_page = 'login_page.php';
 
 	###########################
 	# Headers
@@ -1724,8 +1727,6 @@
 	# Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent boxes start at the same vertical position)
 	$g_my_view_boxes_fixed_position = ON;
 
-	# Default page after Login or Set Project
-	$g_default_home_page = 'my_view_page.php';
 
 	######################
 	# RSS Feeds
