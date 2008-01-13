@@ -141,6 +141,90 @@
 
 		return $t_can_download;
 	}
+	
+	# --------------------
+	# Get icon corresponding to the specified filename
+	# returns an associative array with "url" and "alt" text.
+	function file_get_icon_url( $p_display_filename ) {
+		$t_file_type_icons = config_get( 'file_type_icons' );
+
+		$ext = strtolower( file_get_extension( $p_display_filename ) );
+		if ( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
+			$ext = '?';
+		}
+
+		$t_name = $t_file_type_icons[$ext];
+		return array( 'url' => config_get( 'path' ) . 'images/fileicons/'. $t_name, 'alt' => $ext );
+	}
+
+	function file_get_visible_attachments( $p_bug_id ) {
+		$t_attachment_rows = bug_get_attachments( $p_bug_id );
+		$t_visible_attachments = array();
+		
+		$t_attachments_count = sizeof( $t_attachment_rows );
+		if ( $t_attachments_count === 0 ) {
+			return $t_visible_attachments;
+		}
+
+		$t_attachments = array();
+
+		$t_can_download = file_can_download_bug_attachments( $p_bug_id );
+		$t_can_delete   = file_can_delete_bug_attachments( $p_bug_id );
+		$t_preview_text_ext = config_get( 'preview_text_extensions' );
+		$t_preview_image_ext = config_get( 'preview_image_extensions' );
+
+		$image_previewed = false;
+		for ( $i = 0 ; $i < $t_attachments_count; $i++ ) {
+			$row = $t_attachment_rows[$i];
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+			$t_attachment = array();
+			$t_attachment['display_name'] = file_get_display_name( $v_filename );
+			$t_attachment['size'] = $v_filesize;
+			$t_attachment['date_added'] = db_unixtimestamp( $v_date_added );
+			$t_attachment['can_download'] = $t_can_download;
+			
+			if ( $t_can_download ) {
+				$t_attachment['download_url'] = "file_download.php?file_id=$v_id&amp;type=bug";
+			}
+
+			if ( $image_previewed ) {
+				$image_previewed = false;
+			}
+
+			$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $v_diskfile );
+			$t_attachment['icon'] = file_get_icon_url( $t_attachment['display_name'] );
+			$t_attachment['can_delete'] = $t_can_delete;
+
+			$t_attachment['preview'] = false;
+			$t_attachment['type'] = '';
+			
+			$t_ext = strtolower( file_get_extension( $t_attachment['display_name'] ) );
+			$t_attachment['alt'] = $t_ext;
+
+			if ( $t_attachment['exists'] ) {
+				if ( $t_can_download && 
+					( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+					( $v_filesize != 0 ) &&
+					( in_array( $t_ext, $t_preview_text_ext, true ) ) ) {
+					$t_attachment['preview'] = true;
+					$t_attachment['type'] = 'text';
+				}
+
+				if ( $t_can_download &&
+					( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+					( $v_filesize != 0 ) &&
+					( in_array( strtolower( file_get_extension( $t_attachment['display_name'] ) ), $t_preview_image_ext, true ) ) ) {
+					$t_attachment['preview'] = true;
+					$t_attachment['type'] = 'image';
+				}
+			}
+
+			$t_attachments[] = $t_attachment;
+		}
+
+		return $t_attachments;
+	}
 
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within

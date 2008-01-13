@@ -265,16 +265,25 @@
 	#
 	# Return BugnoteData class object with raw values from the tables except the field
 	# last_modified - it is UNIX_TIMESTAMP.
-	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_access_level, $p_user_bugnote_order, $p_user_bugnote_limit ) {
+	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
+		if ( $p_user_id === null ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = $p_user_id;
+		}
+
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
+
 		$t_all_bugnotes	            	= bugnote_get_all_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit );
 		$t_private_bugnote_threshold	= config_get( 'private_bugnote_threshold' );
 
-		$t_private_bugnote_visible = access_compare_level( $p_user_access_level, config_get( 'private_bugnote_threshold' ) );
-		$t_time_tracking_visible = access_compare_level( $p_user_access_level, config_get( 'time_tracking_view_threshold' ) );
+		$t_private_bugnote_visible = access_compare_level( $t_user_access_level, config_get( 'private_bugnote_threshold' ) );
+		$t_time_tracking_visible = access_compare_level( $t_user_access_level, config_get( 'time_tracking_view_threshold' ) );
 
 		$t_bugnotes = array();
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
-			if ( $t_private_bugnote_visible || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
+			if ( $t_private_bugnote_visible || $t_bugnote['reporter_id'] == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
 				# If the access level specified is not enough to see time tracking information
 				# then reset it to 0.
 				if ( !$t_time_tracking_visible ) {
