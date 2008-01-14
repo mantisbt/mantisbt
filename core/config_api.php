@@ -325,7 +325,7 @@
 				$t_params = Array( $c_value, $t_type, $c_access, $c_option, $c_project, $c_user );
 			}
 
-			$result = db_query_bound( $t_set_query, Array( $t_params ) );
+			$result = db_query_bound( $t_set_query, $t_params );
 		}
 
 		config_set_cache( $p_option, $p_value, $t_type, $p_user, $p_project, $p_access );
