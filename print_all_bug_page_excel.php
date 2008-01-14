@@ -138,9 +138,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
             # grab the bugnote count
             $bugnote_count = bug_get_bugnote_count( $v_id );
 
-            # grab the project name
-            $project_name = project_get_field( $v_project_id, 'name' );
-
             $t_bug_text_table = db_get_table( 'mantis_bug_text_table' );
             $query4 = "SELECT *
                 FROM $t_bug_text_table
@@ -180,7 +177,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
-	<?php echo $v_category;
+	<?php echo category_full_name( $v_category_id, false );
 		  echo "</td>";
 			}
 	$name_index++;  ?>
