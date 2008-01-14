@@ -534,9 +534,12 @@ function plugin_install( $p_basename ) {
 
 	$t_install_function = 'plugin_callback_' . $p_basename . '_install';
 	if ( function_exists( $t_install_function ) ) {
+		plugin_push_current( $p_basename );
 		if ( ! $t_install_function() ) {
+			plugin_pop_current( $p_basename );
 			return null;
 		}
+		plugin_pop_current( $p_basename );
 	}
 
 	$t_plugin_table	= db_get_table( 'mantis_plugin_table' );
@@ -618,9 +621,12 @@ function plugin_upgrade( $p_basename ) {
 
 	$t_upgrade_function = 'plugin_callback_' . $p_basename . '_upgrade';
 	if ( function_exists( $t_upgrade_function ) ) {
+		plugin_push_current( $p_basename );
 		if ( ! $t_upgrade_function( $t_schema_version ) ) {
+			plugin_pop_current( $p_basename );
 			return null;
 		}
+		plugin_pop_current( $p_basename );
 	}
 
 	return true;
@@ -647,9 +653,12 @@ function plugin_uninstall( $p_basename ) {
 
 	$t_uninstall_function = 'plugin_callback_' . $p_basename . '_uninstall';
 	if ( function_exists( $t_uninstall_function ) ) {
+		plugin_push_current( $p_basename );
 		if ( ! $t_uninstall_function() ) {
+			plugin_pop_current( $p_basename );
 			return null;
 		}
+		plugin_pop_current( $p_basename );
 	}
 }
 
