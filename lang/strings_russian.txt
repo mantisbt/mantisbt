@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 	#
+	# Russian: Oleg Gashev gashev@zahav.net.il
 	# Russian: Alexey Chumakov alex@chumakov.ru
 	# Russian: Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
 	# Russian: Alexander Leschinsky aml@lair.pp.ru
@@ -106,6 +107,8 @@ $s_jump = 'Перейти';
 $s_copy_users = 'Копировать пользователей';
 $s_copy_categories_from = 'Копировать категории из';
 $s_copy_categories_to = 'Копировать категории в';
+$s_copy_versions_from = 'Копировать версии из';
+$s_copy_versions_to = 'Копировать версии в';
 $s_copy_users_from = 'Копировать пользователей из';
 $s_copy_users_to = 'Копировать пользователей в';
 $s_bug_history = 'история';
@@ -125,6 +128,8 @@ $s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удал�
 $s_bug_relationships = 'Связи';
 $s_empty_password_sure_msg = 'У пользователя пустой пароль. Вы уверены, что хотите именно этого?';
 $s_empty_password_button = 'Использовать пустой пароль';
+$s_reauthenticate_title = 'Авторизация';
+$s_reauthenticate_message = 'Вы навестили защищенную страницу и время сессии завершено. Пожалуйста, авторизируйте себя для продолжения работы.';
 
 $s_duplicate_of = 'дублирует';
 $s_has_duplicate = 'имеет дубль';
@@ -150,6 +155,8 @@ $s_make_public = 'Общая видимость';
 $s_create_new_project_link = 'создать новый проект';
 
 $s_login_link = 'вход';
+$s_select_option = '(выбрать)';  # comboboxes default to this to instruct user to explicitly select an entry.
+
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'У вас недостаточно прав для выполнения этого действия над следующими вопросами: ';
@@ -1102,6 +1109,10 @@ $s_percentage_fixed = '% решенных';
 $s_percentage_errors = '% ошибочных';
 $s_errors = 'ошибочные';
 $s_total = 'всего';
+$s_balance = 'Баланс';
+$s_score = 'Результат';
+$s_days = 'Дней';
+$s_most_active = 'Наиболее активные';
 $s_time_stats = 'Длительность отработки вопросов (в днях)';
 $s_longest_open_bug = 'Дольше всего открытый вопрос';
 $s_longest_open = 'Наибольшее время';
@@ -1370,6 +1381,38 @@ $s_on_or_after = 'на дату или после' ;
 
 # wiki related strings
 $s_wiki = 'вики';
+
+# Tagging
+$s_tags = 'Tэги';
+$s_tag_details = 'Сведения о тэге: %s';
+$s_tag_id = 'Тэг ID';
+$s_tag_name = 'Название';
+$s_tag_creator = 'Автор';
+$s_tag_created = 'Дата создания';
+$s_tag_updated = 'Последнее изменения';
+$s_tag_description = 'Описание тэга';
+$s_tag_statistics = 'Usage Statistics';
+$s_tag_update = 'Обновить тэг: %s';
+$s_tag_update_return = 'Назад';
+$s_tag_update_button = 'Изменить тэг';
+$s_tag_delete_button = 'Удалить тэг';
+$s_tag_delete_message = 'Вы уверены, что хотите удалить этот тэг?';
+$s_tag_existing = 'Тэги';
+$s_tag_none_attached = 'Нет прикрепленных тэгов.';
+$s_tag_attach = 'Прикрепить';
+$s_tag_attach_long = 'Прикрепить тэги';
+$s_tag_attach_failed = 'Невозможно прикрепить тэг.';
+$s_tag_detach = 'Открепить \'%s\'';
+$s_tag_separate_by = "(Раделять '%s')";
+$s_tag_invalid_name = 'Ошибочное название тэга.';
+$s_tag_create_denied = 'Create permission denied.';
+$s_tag_filter_default = 'Прикрепленные вопросы (%s)';
+$s_tag_history_attached = 'Тэг прикреплен';
+$s_tag_history_detached = 'Tag откреплен';
+$s_tag_history_renamed = 'Тэг переименован';
+$s_tag_related = 'Связанные тэги';
+$s_tag_related_issues = 'Общие вопросы (%s)';
+$s_tag_stats_attached = 'Прикрепленные вопросы: %s';
 
 # Time Tracking
 $s_time_tracking_billing_link = 'Расчеты';
