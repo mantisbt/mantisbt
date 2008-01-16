@@ -242,11 +242,6 @@
 	# $p_time is the number of seconds to wait before redirecting.
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	#
-	# @param string The page to redirect: has to be a relative path
-	# @param integer seconds to wait for before redirecting
-	# @param boolean apply string_sanitize_url to passed url
-	# @return boolean
 	function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = false ) {
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
@@ -256,12 +251,10 @@
 			$p_time = current_user_get_pref( 'redirect_delay' );
 		}
 
-
-                $t_url = config_get( 'path' );
 		if ( $p_sanitize ) {
-			$t_url .= string_sanitize_url( $p_url );
+			$t_url = string_sanitize_url( $p_url );
 		} else {
-			$t_url .= $p_url;
+			$t_url = $p_url;
 		}
 
 		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
