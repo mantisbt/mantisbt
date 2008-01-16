@@ -168,18 +168,14 @@ if ( 0 == $t_install_state ) {
 		Checking PHP version (your version is <?php echo phpversion(); ?>)
 	</td>
 	<?php
-		if (phpversion() == '4.0.6') {
-			print_test_result( GOOD );
-		} else {
-			if ( function_exists ( 'version_compare' ) ) {
-				if ( version_compare ( phpversion() , '4.0.6', '>=' ) ) {
-					print_test_result( GOOD );
-				} else {
-					print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
-				}
+		if ( function_exists ( 'version_compare' ) ) {
+			if ( version_compare ( phpversion() , '4.3.0', '>=' ) ) {
+				print_test_result( GOOD );
 			} else {
-			 	print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
+				print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
 			}
+		} else {
+		 	print_test_result( BAD, true, 'Upgrade to a more recent version of PHP' );
 		}
 	?>
 </tr>
