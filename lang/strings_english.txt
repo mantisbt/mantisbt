@@ -53,6 +53,7 @@ $s_actiongroup_menu_update_fixed_in_version = 'Update Fixed in Version';
 $s_actiongroup_menu_add_note = 'Add Note';
 $s_actiongroup_menu_attach_tags = 'Attach Tags';
 $s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_error_issue_is_readonly = 'Issue is readonly.';
 
 # new strings:
 $s_all_projects = 'All Projects';
