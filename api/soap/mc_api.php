@@ -257,19 +257,16 @@
 	# --------------------
 	# category_get_all_rows did't respect subprojects.
 	function mci_category_get_all_rows( $p_project_id, $p_user_id ) {
-		$t_category_table = config_get( 'mantis_category_table' );
-		$t_project_table = config_get( 'mantis_project_table' );
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_project_where = helper_project_specific_where( $c_project_id, $p_user_id );
 
-		$query = "SELECT c.name as category FROM $t_category_table AS c
-				JOIN $t_project_table AS p
-					ON c.project_id=p.id
+		$query = "SELECT category FROM $t_project_category_table
 				WHERE $t_project_where
-				ORDER BY c.name ";
-		$result = db_query_bound( $query );
+				ORDER BY category ASC";
+		$result = db_query( $query );
 		$count = db_num_rows( $result );
 		$cat_arr = array();
 		for ( $i = 0 ; $i < $count ; $i++ ) {
@@ -405,10 +402,68 @@
 				$t_error_description = $p_error;
 		}
 
-		$t_error_description = nl2br( $t_error_description );
+		$t_error_description = $t_error_description;
+		$t_error_stack = error_get_stack_trace();
 
-		$l_oServer->fault( 'Server', "Error Type: $t_error_type, Error Description: $t_error_description" );
+		$l_oServer->fault( 'Server', "Error Type: $t_error_type,\nError Description:\n$t_error_description,\nStack Trace:\n$t_error_stack" );
 		$l_oServer->send_response();
 		exit();
 	}
-?>
+
+	# ---------------
+	# Get a stack trace if PHP provides the facility or xdebug is present
+	function error_get_stack_trace() {
+		$t_stack = '';
+
+		if ( extension_loaded( 'xdebug' ) ) { #check for xdebug presence
+			$t_stack = xdebug_get_function_stack();
+
+			# reverse the array in a separate line of code so the
+			#  array_reverse() call doesn't appear in the stack
+			$t_stack = array_reverse( $t_stack );
+			array_shift( $t_stack ); #remove the call to this function from the stack trace
+
+			foreach ( $t_stack as $t_frame ) {
+				$t_stack .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+
+				$t_args = array();
+				if ( isset( $t_frame['params'] ) ) {
+					$t_stack .= ' Params: ';
+					foreach( $t_frame['params'] as $t_value ) {
+						$t_args[] = error_build_parameter_string( $t_value );
+					}
+					
+					$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
+				} else {
+					$t_stack .= '()';
+				}
+
+				$t_stack .= "\n";
+			}
+		} else {
+			$t_stack = debug_backtrace();
+
+			array_shift( $t_stack ); #remove the call to this function from the stack trace
+			array_shift( $t_stack ); #remove the call to the error handler from the stack trace
+
+			foreach ( $t_stack as $t_frame ) {
+				$t_stack .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+
+				$t_args = array();
+				if ( isset( $t_frame['args'] ) ) {
+					foreach( $t_frame['args'] as $t_value ) {
+						$t_args[] = error_build_parameter_string( $t_value );
+					}
+					
+					$t_stack .= '(' . implode( $t_args, ', ' ) . ')';
+				} else {
+					$t_stack .= '()';
+				}
+
+				$t_stack .= "\n";
+			}
+		}
+
+		return $t_stack;
+	}
+	?>
