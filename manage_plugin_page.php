@@ -91,7 +91,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_enabled ) {
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . string_display_links( sprintf( lang_get( 'plugin_url' ), $t_url ) );
+		$t_url = '<br/>' . lang_get( 'plugin_url' ) . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_upgrade = '';
@@ -184,7 +184,7 @@ foreach ( $t_plugins_available as $t_basename => $t_info ) {
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . string_display_links( sprintf( lang_get( 'plugin_url' ), $t_url ) );
+		$t_url = '<br/>' . lang_get( 'plugin_url' ) . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_ready = true;
