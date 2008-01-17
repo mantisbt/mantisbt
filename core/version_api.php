@@ -225,12 +225,12 @@
 		$query = "UPDATE $t_bug_table
 				  SET version=" . db_param(0) . "
 				  WHERE project_id=" . db_param(1) . " AND version=" . db_param(2);
-		db_query_bound( $query, Array( $c_new_version, $c_project_id, $p_old_version ) );
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 		$query = "UPDATE $t_bug_table
 				  SET fixed_in_version=" . db_param(0) . '
 				  WHERE ( project_id=' . db_param(1) . ' ) AND ( fixed_in_version=' . db_param(2) .')';
-		db_query_bound( $query, Array( $c_new_version, $c_project_id, $p_old_version ) );
+		db_query_bound( $query, Array( $c_new_version, $c_project_id, $t_old_version ) );
 
 		# db_query errors on failure so:
 		return true;
