@@ -233,11 +233,11 @@
 	 * @return enum id
 	 */
 	function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
-		if ( (int)$p_object_ref['id'] != 0 ) {
+		if ( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int)$p_object_ref['id'] != 0 ) {
 			$t_id =  (int)$p_object_ref['id'];
 		} else {
 			$t_enum = config_get( $p_enum . '_enum_string' );
-			if ( !is_blank( $p_object_ref['name'] ) ) {
+			if ( !is_null( $p_object_ref ) && isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {
 				$t_id = mci_get_enum_value_from_label( $t_enum, $p_object_ref['name'] );
 				if ( $t_id == 0 ) {
 					$t_id = config_get( 'mc_' . $p_enum . '_enum_default_when_not_found' );
