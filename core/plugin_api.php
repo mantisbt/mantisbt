@@ -101,13 +101,17 @@ function plugin_info( $p_basename=null ) {
  * @param string Page name
  * @param string Plugin basename (defaults to current plugin)
  */
-function plugin_page( $p_page, $p_basename=null ) {
+function plugin_page( $p_page, $p_redirect=false, $p_basename=null ) {
 	if ( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
 		$t_current = $p_basename;
 	}
-	return helper_mantis_url( 'plugin.php?page='.$t_current.'/'.$p_page );
+	if ( $p_redirect ) {
+		return 'plugin.php?page=' . $t_current . '/' . $p_page;
+	} else {
+		return helper_mantis_url( 'plugin.php?page=' . $t_current . '/' . $p_page );
+	}
 }
 
 /**

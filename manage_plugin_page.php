@@ -75,7 +75,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_enabled ) {
 
 	$t_name = string_display_line( $t_plugins[$t_basename]['name'].' '.$t_plugins[$t_basename]['version'] );
 	if ( !is_blank( $t_page ) ) {
-		$t_name = '<a href="' . string_attribute( plugin_page( $t_page, $t_basename ) ) . '">' . $t_name . '</a>';
+		$t_name = '<a href="' . string_attribute( plugin_page( $t_page, false, $t_basename ) ) . '">' . $t_name . '</a>';
 	}
 
 	if ( !is_blank( $t_author ) ) {
