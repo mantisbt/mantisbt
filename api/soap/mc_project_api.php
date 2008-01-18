@@ -297,7 +297,7 @@
 			$t_version_id = version_get_id( $v_name, $v_project_id );
 			if ( !is_blank( $v_date_order ) ) {
 				$t_version = version_get( $t_version_id );
-				$t_version->date_order = $v_date_order;
+				$t_version->date_order = date("Y-m-d H:i:s", strtotime($v_date_order));
 				version_update( $t_version );
 			}
 			return $t_version_id;
@@ -355,7 +355,7 @@
 		$t_version_data->version = $v_name;
 		$t_version_data->description = $v_description;
 		$t_version_data->released = $v_released;
-		$t_version_data->date_order = $v_date_order;
+		$t_version_data->date_order = date("Y-m-d H:i:s", strtotime($v_date_order));
 		return version_update( $t_version_data );
 	}
 	
