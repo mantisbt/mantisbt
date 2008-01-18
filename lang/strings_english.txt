@@ -572,6 +572,7 @@ $s_bugnote_add_resolve_button = 'Add Note';
 $s_from = 'From';
 $s_to = 'To';
 $s_on = 'On';
+$s_off = 'Off';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Send a reminder';
 $s_reminder_sent_to = 'Reminder sent to';
