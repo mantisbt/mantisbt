@@ -377,8 +377,9 @@
 			error_parameters( lang_get( 'description' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
-		
-		if ( is_blank( $c_category ) ) {
+
+		# If category is not specified and not defaulted + project has categories defined, then error.
+		if ( is_blank( $c_category ) && ( category_get_count( $c_project_id ) > 0 ) ) {
 			error_parameters( lang_get( 'category' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}

@@ -233,4 +233,17 @@
 
 		return $rows;
 	}
+
+	# --------------------
+	# Returns the number of defined categories for the specified project id.
+	function category_get_count( $p_project_id ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
+
+		$t_query = "SELECT count(*)
+				FROM $t_project_category_table
+				WHERE project_id='$c_project_id'";
+		$t_result = db_query( $t_query );
+		return db_result( $t_result );
+	}
 ?>
