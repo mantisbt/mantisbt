@@ -1,5 +1,27 @@
 Mantis ChangeLog
 
+2008.01.19  -  1.1.1
+
+This is a maintenance release for the 1.1.x branch.  It includes a fix for PHP 4 support (#8681 stripos), several fixes for SOAP API, a security fix, and other minor bug fixes.
+
+- 0008756: [security] "Most active bugs" summary XSS vulnerability (giallu) - resolved.
+- 0008759: [api soap] Improve error handler to report location of errors (vboctor) - resolved.
+- 0008767: [api soap] incorrect date and time handling in mc_project_version_add and mc_project_version_update (planser) - resolved.
+- 0008683: [api soap] mc_projects_get_user_accessible raises SYSTEM NOTICE, but it should not (vboctor) - resolved.
+- 0008695: [api soap] Error with attachments - Method DISK (planser) - resolved.
+- 0008662: [bugtracker] Unneeded executable bits on mantis modules (giallu) - resolved.
+- 0008738: [bugtracker] Could not create bug if project have not categorys and g_default_bug_category is empty (vboctor) - resolved.
+- 0008770: [email] Sending queued emails is still attempted even if email notifications are turned OFF, causing errors (vboctor) - resolved.
+- 0008707: [filters] "My View" shows warnings about "sort" / "dir" not defined (vboctor) - resolved.
+- 0008708: [graphs] graph fails with error claiming bad colour name (thraxisp) - resolved.
+- 0008732: [graphs] Many options on bug_graph_page.php broken, inconsistent, incomplete (thraxisp) - resolved.
+- 0008684: [installation] UPGRADING file missing in doc (thraxisp) - resolved.
+- 0008742: [localization] "actiongroup_error_issue_is_readonly" isn't defined (vboctor) - resolved.
+- 0008758: [localization] Application error 18 with russian language (vboctor) - resolved.
+- 0008692: [localization] Russian translation update. (vboctor) - resolved.
+- 0008681: [upgrade] Mantis 1.1.0 has a dependency on stripos which was added in PHP 5 (vboctor) - resolved.
+- 0008721: [upgrade] css and icon paths incorrect (vboctor) - resolved.
+
 2007.12.19  -  1.1.0
 
 - 0008679: [security] XSS Vulnerability in view.php , Attached Files (vboctor) - resolved.
