@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -482,6 +482,7 @@
 	# Return false if it were problems sending email
 	function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null ) {
 		$t_ok = true;
+
 		if ( ON === config_get( 'enable_email_notification' ) ) {
 			ignore_user_abort( true );
 
@@ -505,10 +506,11 @@
 					lang_pop();
 				}
 			}
-		}
 
-		if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
-			email_send_all();
+			# Only trigger the draining of the email queue if cronjob is disabled and email notifications are enabled.
+			if ( OFF == config_get( 'email_send_using_cronjob' ) ) {
+				email_send_all();
+			}
 		}
 
 		return $t_ok;
