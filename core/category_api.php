@@ -233,7 +233,7 @@
 
 	# --------------------
 	# Return the definition row for the category
-	function category_get_row( $p_category_id ) {
+	function category_get_row	( $p_category_id ) {
 		global $g_category_cache;
 		if ( isset( $g_category_cache[$p_category_id] ) ) {
 			return $g_category_cache[$p_category_id];
@@ -287,6 +287,21 @@
 		return $rows;
 	}
 
+	# --------------------
+	# Given a category id and a field name, this function returns the field value.
+	# An error will be triggered for a non-existent category id or category id = 0.
+	function category_get_field( $p_category_id, $p_field_name ) {
+		$t_row = category_get_row( $p_category_id );
+		return $t_row[$p_field_name];
+	}
+
+	# --------------------
+	# Given a category id, this function returns the category name.
+	# An error will be triggered for a non-existent category id or category id = 0.
+	function category_get_name( $p_category_id ) {
+		return category_get_field( $p_category_id, 'name' );
+	}
+
 	# Helpers
 
 	function category_full_name( $p_category_id, $p_show_project=true ) {
@@ -295,7 +310,7 @@
 
 		if ( $p_show_project && ALL_PROJECTS != $t_project_id ) {
 			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
-		} else {
-			return $t_row['name'];
 		}
+
+		return $t_row['name'];
 	}

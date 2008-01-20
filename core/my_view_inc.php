@@ -277,11 +277,13 @@
 		<br />
 		<?php
 			# type project name if viewing 'all projects' or bug is in subproject
-			if ( ON == config_get( 'show_bug_project_links' ) &&
-				helper_get_current_project() != $v_project_id ) {
-				echo string_display( category_full_name( $v_category_id ) );
-			} else {
-				echo string_display( category_full_name( $v_category_id, false ) );
+			if ( $v_category_id != 0 ) {
+				if ( ON == config_get( 'show_bug_project_links' ) &&
+					helper_get_current_project() != $v_project_id ) {
+					echo string_display( category_full_name( $v_category_id ) );
+				} else {
+					echo string_display( category_full_name( $v_category_id, false ) );
+				}
 			}
 
 			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
