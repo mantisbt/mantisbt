@@ -2,7 +2,7 @@
 # Mantis - a php based bugtracking system
 
 # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2008  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 
 # Mantis is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -430,7 +430,7 @@
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">Mantis ', MANTIS_VERSION, '</a>',
 					'[<a href="http://www.mantisbt.org/"  title="Free Web Based Bug Tracker" target="_blank">^</a>]</span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2007 Mantis Group</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2008 Mantis Group</address>', "\n";
 
 		# only display webmaster email is current user is not the anonymous user
 		if ( ! is_page_name( 'login_page.php' ) && !current_user_is_anonymous() ) {
