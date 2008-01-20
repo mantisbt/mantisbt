@@ -102,6 +102,9 @@
 	# Create the bug
 	$t_bug_id = bug_create( $t_bug_data );
 
+	# Mark the added issue as visited so that it appears on the last visited list.
+	last_visited_issue( $t_bug_id );
+
 	# Handle the file upload
 	if ( !is_blank( $f_file['tmp_name'] ) && ( 0 < $f_file['size'] ) ) {
     	$f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
