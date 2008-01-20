@@ -534,7 +534,10 @@
 			echo ']</small><br />';
 		}
 
-		echo string_display( category_full_name( $p_row['category_id'], false ) );
+		if ( $p_row['category_id'] != 0 ) {
+			echo string_display( category_get_name( $p_row['category_id'] ) );
+		}
+
 		echo '</td>';
 	}
 
