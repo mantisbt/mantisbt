@@ -2888,7 +2888,6 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_is_public = db_prepare_bool( $p_is_public, false );
 		$c_name = db_prepare_string( $p_name );
-		$c_filter_string = db_prepare_string( $p_filter_string );
 
 		$t_filters_table = db_get_table( 'mantis_filters_table' );
 
@@ -2917,7 +2916,7 @@
 					  SET is_public=" . db_param(0) . ",
 					  	filter_string=" . db_param(1) . "
 					  WHERE id=" . db_param(2);
-			db_query_bound( $query, Array( $c_is_public, $c_filter_string, $row['id'] ) );
+			db_query_bound( $query, Array( $c_is_public, $p_filter_string, $row['id'] ) );
 
 			return $row['id'];
 		} else {
@@ -2925,7 +2924,7 @@
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
 						( " . db_param(0) . ", " . db_param(1) . ", " . db_param(2) . ", " . db_param(3) . ", " . db_param(4) . " )";
-			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $c_filter_string ) );
+			db_query_bound( $query, Array( $t_user_id, $c_project_id, $c_is_public, $c_name, $p_filter_string ) );
 
 			# Recall the query, we want the filter ID
 			$query = "SELECT id
