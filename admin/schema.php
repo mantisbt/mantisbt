@@ -389,7 +389,7 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), 
 $upgrade[] = Array( 'DropTableSQL', Array( db_get_table( 'mantis_project_category_table' ) ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
 // remove unnecessary indexes
-$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',config_get('mantis_project_table'),'id', array('DROP')));
+$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('mantis_project_table'),'id', array('DROP')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_config',db_get_table( 'mantis_config_table' ),'config_id', array('DROP')));
 
 ?>
