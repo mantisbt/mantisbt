@@ -440,7 +440,7 @@
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( '$c_username', '$c_email', '$c_password', " . db_now() . "," . db_now() . ",
+				    ( '$c_username', '$c_email', '$c_password', '" . db_now() . "', '" . db_now() . "',
 				     $c_enabled, $c_access_level, 0, '$t_cookie_string', '$c_realname')";
 		db_query( $query );
 
