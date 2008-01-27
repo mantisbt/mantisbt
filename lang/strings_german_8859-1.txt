@@ -26,7 +26,7 @@
 	#
 	###########################################################################
 	# German strings for Mantis
-	# Based on strings_english.txt rev. 1.316
+	# Based on strings_english.txt Revision 4927
 	# -------------------------------------------------
 	# $Revision: 1.7 $
 	# $Author: giallu $
@@ -58,6 +58,7 @@ $s_actiongroup_menu_update_fixed_in_version = 'Erledigungs-Version ändern';
 $s_actiongroup_menu_add_note = 'Notiz hinzufügen';
 $s_actiongroup_menu_attach_tags = 'Tag zuordnen';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
+$s_actiongroup_error_issue_is_readonly = 'Problem ist schreibgeschützt.';
 
 # new strings:
 $s_all_projects = 'Alle Projekte';
@@ -131,7 +132,6 @@ $s_login_link = 'Anmelden';
 $s_select_option = '(auswählen)';  # comboboxes default to this to instruct user to explicitly select an entry.
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
 $s_bug_actiongroup_access = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion auszuführen.';
 $s_bug_actiongroup_status = 'Der gewünschte Status ist für dieses Problem nicht wählbar.';
 $s_bug_actiongroup_category = 'Dieses Problem kann nicht in die gewünschte Kategorie verändert werden.';
@@ -302,6 +302,10 @@ $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Der Tag-Name ist ungültig.';
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Der Tag ist Eintrag nicht zugewiesen.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Dieser Tag ist bereits dem Eintrag zugewiesen.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Das Token konnte nicht gefunden werden.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Der Event \'%s\' ist bisher noch nicht deklariert.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Das Plugin ist nicht in Mantis registriert.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Das Plugin is bereits installiert.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Die Plugin-Seite wurde nicht gefunden.';
 
 $s_login_error = 'Ihr Konto ist deaktiviert oder gesperrt (aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen) oder der eingegebene Benutzer/das Passwort ist falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
@@ -650,7 +654,8 @@ $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert...';
 $s_edited_on = 'bearbeitet am: ';
 
 # file_api.php
-$s_show_content = 'Zeige Inhalt';
+$s_hide_content = 'Blende Inhalt aus';
+$s_show_content = 'Blende Inhalt ein';
 
 # index.php
 $s_click_to_login = 'Anmeldung: bitte hier klicken';
@@ -680,7 +685,7 @@ $s_lost_password_title = 'Passwort zurücksetzen';
 $s_lost_password_done_title = 'Passwort Nachricht gesendet';
 $s_lost_password_subject = 'Passwort zurücksetzen';
 $s_lost_password_info = 'Um ihr verlorenes Passwort zu erhalten, geben Sie bitte Benutzername und E-Mail Adresse Ihres Kontos an.<br/><br/>Wenn die Daten mit einem gültigen Konto übereinstimmen, wird Ihnen eine spezielle URL über E-Mail geschickt die einen Bestätigungscode für Ihr Konto enthält. Bitte folgen Sie dem Link und ändern Sie ihr Passwort.';
-$s_lost_password_confirm_hash_OK = 'Ihr Bestätigung wurde akzeptiert. Bitte aktualisieren Sie Ihr Passwort.';
+$s_lost_password_confirm_hash_OK = 'Ihre Bestätigung wurde akzeptiert. Bitte aktualisieren Sie Ihr Passwort.';
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Offen und mir zugewiesen';
@@ -706,10 +711,12 @@ $s_hide_disabled = 'inaktive ausblenden';
 $s_filter_button = 'Filter';
 $s_create_filter_link = 'Permalink erzeugen';	# Permalink = Permanenter Link
 $s_create_short_link = 'Kurzen Link erzeugen';
+$s_filter_permalink = 'Dies ist ein permanenter Link zum derzeit aktiven Filter:';
 $s_manage_users_link = 'Benutzer verwalten';
 $s_manage_projects_link = 'Projekte verwalten';
 $s_manage_custom_field_link = 'Benutzerdefinierte Felder';
 $s_manage_global_profiles_link = 'Globale Profile verwalten';
+$s_manage_plugin_link = 'Plugin-Verwaltung';
 $s_permissions_summary_report = 'Rechte-Bericht';
 $s_manage_config_link = 'Konfiguration verwalten';
 $s_manage_threshold_config = 'Arbeitsablauf-Schwellenwerte';
@@ -802,6 +809,26 @@ $s_all_users = 'Alle Benutzer';
 $s_set_configuration_option = 'Speichere Konfigurations-Option';
 $s_delete_config_sure_msg = 'Sind Sie sicher, dass Sie diese Konfigurationsoption löschen möchten?';
 
+# manage_plugin_page.php
+$s_plugin = 'Plugin';
+$s_plugins_installed = 'Installiertes Plugins';
+$s_plugins_available = 'Verfügbare Plugins';
+$s_plugin_description = 'Beschreibung';
+$s_plugin_author = 'Autor: %s';
+$s_plugin_url = 'Website: ';
+$s_plugin_depends = 'Abhängigkeiten';
+$s_plugin_no_depends = 'keine Abhängigkeiten';
+$s_plugin_actions = 'Aktionen';
+$s_plugin_install = 'Installation';
+$s_plugin_upgrade = 'Upgrade';
+$s_plugin_uninstall = 'Deinstallation';
+$s_plugin_uninstall_message = 'Sind Sie sicher, dass Sie das Plugin \'%s\' deinstallieren wollen?';
+$s_plugin_key = 'Schlüsselworte';
+$s_plugin_key_met = 'Plugin bereit';
+$s_plugin_key_unmet = 'nicht erfüllte Abhängigkeiten';
+$s_plugin_key_dated = 'veraltete Abhängigkeiten';
+$s_plugin_key_upgrade = 'Upgrade notwendig';
+
 # manage_proj_add.php
 $s_project_added_msg = 'Projekt wurde hinzugefügt...';
 
@@ -857,6 +884,8 @@ $s_subprojects = 'Unterprojekte';
 $s_add_subproject = 'Als Unterprojekt hinzufügen';
 $s_create_new_subproject_link = 'Neues Unterprojekt erzeugen';
 $s_unlink_link = 'Verknüpfung lösen';
+$s_show_global_users = 'Blende Benutzer mit globalem Zugriff ein';
+$s_hide_global_users = 'Blende Benutzer mit globalem Zugriff aus';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Projekt hinzufügen';
