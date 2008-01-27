@@ -650,8 +650,8 @@ $s_bugnote_updated_msg = 'Note has been successfully updated...';
 $s_edited_on = 'edited on: ';
 
 # file_api.php
-$s_hide_content ='Hide Content';
-$s_show_content ='Show Content';
+$s_hide_content = 'Hide Content';
+$s_show_content = 'Show Content';
 
 # index.php
 $s_click_to_login = 'Click here to login';
@@ -705,7 +705,7 @@ $s_create_user_button = 'Create User';
 # manage_page.php
 $s_hide_disabled = 'Hide Disabled';
 $s_filter_button = 'Apply Filter';
-$s_create_filter_link = 'Create Permalink';	# Permalink = Permenant Link
+$s_create_filter_link = 'Create Permalink';	# Permalink = Permanent Link
 $s_create_short_link = 'Create Short Link';
 $s_filter_permalink = 'Following is a permanent link to the currently configured filter:';
 $s_manage_users_link = 'Manage Users';
