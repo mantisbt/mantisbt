@@ -1,0 +1,138 @@
+<?php
+# Mantis - a php based bugtracking system
+
+# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright (C) 2002 - 2007  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Plain text processing.
+ * @param string Event name
+ * @param string Unformatted text
+ * @param boolean Multiline text
+ * @return multi Array with formatted text and multiline paramater
+ */
+function plugin_event_format_text( $p_event, $p_string, $p_multiline = true ) {
+	$t_string = $p_string;
+
+	if ( ON == plugin_config_get( 'process_text' ) ) {
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_html_specialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
+
+		if ( $p_multiline ) {
+			$t_string = string_preserve_spaces_at_bol( $t_string );
+			$t_string = string_nl2br( $t_string );
+		}
+	}
+
+	return array( $t_string, $p_multiline );
+}
+
+/**
+ * Formatted text processing.
+ * @param string Event name
+ * @param string Unformatted text
+ * @param boolean Multiline text
+ * @return multi Array with formatted text and multiline paramater
+ */
+function plugin_event_format_formatted( $p_event, $p_string, $p_multiline = true ) {
+	$t_string = $p_string;
+
+	if ( ON == plugin_config_get( 'process_text' ) ) {
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_html_specialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
+
+		if ( $p_multiline ) {
+			$t_string = string_preserve_spaces_at_bol( $t_string );
+			$t_string = string_nl2br( $t_string );
+		}
+	}
+
+	if ( ON == plugin_config_get( 'process_urls' ) ) {
+		$t_string = string_insert_hrefs( $t_string );
+	}
+
+	if ( ON == plugin_config_get( 'process_buglinks' ) ) {
+		$t_string = string_process_bug_link( $t_string );
+		$t_string = string_process_bugnote_link( $t_string );
+	}
+
+	if ( ON == plugin_config_get( 'process_vcslinks' ) ) {
+		$t_string = string_process_cvs_link( $t_string );
+	}
+
+	return array( $t_string, $p_multiline );
+}
+
+/**
+ * RSS text processing.
+ * @param string Event name
+ * @param string Unformatted text
+ * @return string Formatted text
+ */
+function plugin_event_format_rss( $p_event, $p_string ) {
+	$t_string = $p_string;
+
+	if ( ON == plugin_config_get( 'process_text' ) ) {
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_html_specialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string );
+		$t_string = string_nl2br( $t_string );
+	}
+
+	if ( ON == plugin_config_get( 'process_urls' ) ) {
+		$t_string = string_insert_hrefs( $t_string );
+	}
+
+	if ( ON == plugin_config_get( 'process_buglinks' ) ) {
+		$t_string = string_process_bug_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
+		$t_string = string_process_bugnote_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
+	}
+
+	if ( ON == plugin_config_get( 'process_vcslinks' ) ) {
+		$t_string = string_process_cvs_link( $t_string );
+	}
+
+	return $t_string;
+}
+
+/**
+ * Email text processing.
+ * @param string Event name
+ * @param string Unformatted text
+ * @return string Formatted text
+ */
+function plugin_event_format_email( $p_event, $p_string ) {
+	$t_string = $p_string;
+
+	if ( ON == plugin_config_get( 'process_text' ) ) {
+		$t_string = string_strip_hrefs( $t_string );
+	}
+
+	if ( ON == plugin_config_get( 'process_buglinks' ) ) {
+		$t_string = string_process_bug_link( $t_string, false );
+		$t_string = string_process_bugnote_link( $t_string, false );
+	}
+
+	if ( ON == plugin_config_get( 'process_vcslinks' ) ) {
+		$t_string = string_process_cvs_link( $t_string, false );
+	}
+
+	return $t_string;
+}
+
+

@@ -392,4 +392,8 @@ $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' 
 $upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('mantis_project_table'),'id', array('DROP')));
 $upgrade[] = Array('CreateIndexSQL',Array('idx_config',db_get_table( 'mantis_config_table' ),'config_id', array('DROP')));
 
+$upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_plugin_table' ), "
+	( basename, enabled ) VALUES
+	( 'format', '1' )" ) );
+
 ?>

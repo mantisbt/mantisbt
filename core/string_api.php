@@ -106,49 +106,31 @@
 	# --------------------
 	# Prepare a multiple line string for display to HTML
 	function string_display( $p_string ) {	
-		$p_string = string_strip_hrefs( $p_string );
-		$p_string = string_html_specialchars( $p_string );
-		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ true );
-		$p_string = string_preserve_spaces_at_bol( $p_string );
-		$p_string = string_nl2br( $p_string );
-
-		return event_signal( 'EVENT_DISPLAY_TEXT', $p_string );
+		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', array( $p_string, true ) );
+		return $t_data[0];
 	}
 
 	# --------------------
 	# Prepare a single line string for display to HTML
 	function string_display_line( $p_string ) {
-		$p_string = string_strip_hrefs( $p_string );
-		$p_string = string_html_specialchars( $p_string );
-		$p_string = string_restore_valid_html_tags( $p_string, /* multiline = */ false );
-
-		return event_signal( 'EVENT_DISPLAY_TEXT', $p_string );
+		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', array( $p_string, false ) );
+		return $t_data[0];
 	}
 
 	# --------------------
 	# Prepare a string for display to HTML and add href anchors for URLs, emails,
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
-		$p_string = string_display( $p_string );
-		$p_string = string_insert_hrefs( $p_string );
-		$p_string = string_process_bug_link( $p_string );
-		$p_string = string_process_bugnote_link( $p_string );
-		$p_string = string_process_cvs_link( $p_string );
-
-		return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string );
+		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', array( $p_string, true ) );
+		return $t_data[0];
 	}
 
 	# --------------------
 	# Prepare a single line string for display to HTML and add href anchors for 
 	# URLs, emails, bug references, and cvs references
 	function string_display_line_links( $p_string ) {
-		$p_string = string_display_line( $p_string );
-		$p_string = string_insert_hrefs( $p_string );
-		$p_string = string_process_bug_link( $p_string );
-		$p_string = string_process_bugnote_link( $p_string );
-		$p_string = string_process_cvs_link( $p_string );
-
-		return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string );
+		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', array( $p_string, false ) );
+		return $t_data[0];
 	}
 
 	# --------------------
@@ -156,16 +138,6 @@
 	function string_rss_links( $p_string ) {
 		# rss can not start with &nbsp; which spaces will be replaced into by string_display().
 		$t_string = trim( $p_string );
-
-		# same steps as string_display_links() without the preservation of spaces since &nbsp; is undefined in XML.
-		$t_string = string_strip_hrefs( $t_string );
-		$t_string = string_html_specialchars( $t_string );
-		$t_string = string_restore_valid_html_tags( $t_string );
-		$t_string = string_nl2br( $t_string );
-		$t_string = string_insert_hrefs( $t_string );
-		$t_string = string_process_bug_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
-		$t_string = string_process_bugnote_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
-		$t_string = string_process_cvs_link( $t_string );
 
 		$t_string = event_signal( 'EVENT_DISPLAY_RSS', $t_string );
 
@@ -185,12 +157,7 @@
 	# Prepare a string for plain text display in email and add URLs for bug
 	#  links and cvs links
 	function string_email_links( $p_string ) {
-		$p_string = string_email( $p_string );
-		$p_string = string_process_bug_link( $p_string, false );
-		$p_string = string_process_bugnote_link( $p_string, false );
-		$p_string = string_process_cvs_link( $p_string, false );
-
-		return $p_string;
+		return event_signal( 'EVENT_DISPLAY_EMAIL', $p_string );
 	}
 
 
