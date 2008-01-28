@@ -42,5 +42,5 @@
 		$t_url = wiki_get_url_for_issue( $f_id );
 	}
 
-	print_header_redirect( $t_url );
+	print_header_redirect( $t_url, true, false, true );
 ?>

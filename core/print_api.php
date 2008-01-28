@@ -47,7 +47,7 @@
 	# @param boolean if true, stop the script after redirecting
 	# @param boolean apply string_sanitize_url to passed url
 	# @return boolean
-	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false ) {
+	function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute=false ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
@@ -55,7 +55,11 @@
 		}
 
 		# validate the url as part of this site before continuing
-                $t_url = config_get( 'path' );
+		if ( $p_absolute ) {
+			$t_url = '';
+		} else {
+			$t_url = config_get( 'path' );
+		}
 		$t_url .= $p_sanitize ? string_sanitize_url( $p_url ) : $p_url;
 
 		# don't send more headers if they have already been sent (guideweb)
