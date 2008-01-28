@@ -31,8 +31,26 @@ html_page_top2();
 
 print_manage_menu( 'manage_plugin_page.php' );
 
+function plugin_sort( $p1, $p2 ) {
+	return strcasecmp( $p1['name'], $p2['name'] );
+}
+
 $t_plugins = plugin_find_all();
+uasort( $t_plugins, 'plugin_sort' );
+
+function plugin_sort_installed( $p1, $p2 ) {
+	static $t_plugins;
+	if ( is_null( $p2 ) ) {
+		$t_plugins = $p1;
+		return;
+	}
+
+	return strcasecmp( $t_plugins[$p1]['name'], $t_plugins[$p2]['name'] );
+}
+
 $t_plugins_installed = plugin_get_installed();
+plugin_sort_installed( $t_plugins, null );
+uksort( $t_plugins_installed, 'plugin_sort_installed' );
 
 $t_plugins_available = array();
 foreach( $t_plugins as $t_basename => $t_info ) {
