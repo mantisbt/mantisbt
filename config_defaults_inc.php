@@ -471,6 +471,11 @@
 	$g_window_title			= 'Mantis';	 # browser window title
 	$g_page_title			= '';	 # title at top of html page (empty by default, since there is a logo now)
 
+	# --- site branding ---------------
+	$g_favicon_image		= 'images/favicon.ico';
+	$g_logo_image			= 'images/mantis_logo.gif';
+	$g_logo_url				= 'http://www.mantisbt.org';
+
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
 	$g_show_report			= BOTH;

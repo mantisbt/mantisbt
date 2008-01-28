@@ -112,7 +112,10 @@
 		html_content_type();
 		include( config_get( 'meta_include_file' ) );
 		html_rss_link();
-		echo '<link rel="shortcut icon" href="', helper_mantis_url( 'images/favicon.ico' ), '" type="image/x-icon" />';
+		$t_favicon_image = config_get( 'favicon_image' );
+		if ( !is_blank( $t_favicon_image ) ) {
+			echo '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />';
+		}
 		html_title( $p_page_title );
 		html_head_javascript();
 	}
@@ -316,10 +319,23 @@
 	# (10) Print a user-defined banner at the top of the page if there is one.
 	function html_top_banner() {
 		$t_page = config_get( 'top_include_page' );
+		$t_logo_image = config_get( 'logo_image' );
+		$t_logo_url = config_get( 'logo_url' );
+
+		if ( is_blank( $t_logo_image ) ) {
+			$t_show_logo = false;
+		} else {
+			$t_show_logo = true;
+			if ( is_blank( $t_logo_url ) ) {
+				$t_show_url = false;
+			} else {
+				$t_show_url = true;
+			}
+		}
 
 		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
-		} else {
+		} else if ( $t_show_logo ) {
 			if ( is_page_name( 'login_page' ) ) {
 				$t_align = 'center';
 			} else {
@@ -327,7 +343,11 @@
 			}
 
 			echo '<div align="', $t_align, '">';
-			echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img border="0" alt="Mantis Bugtracker" src="' . helper_mantis_url( 'images/mantis_logo.gif' ) . '" /></a>';
+			if ( $t_show_url )
+				echo '<a href="', config_get( 'logo_url' ), '">';
+			echo '<img border="0" alt="Mantis Bugtracker" src="' . helper_mantis_url( config_get( 'logo_image' ) ) . '" />';
+			if ( $t_show_url )
+				echo '</a>';
 			echo '</div>';
 		}
 
