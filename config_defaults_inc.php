@@ -1455,7 +1455,7 @@
 	$g_bottom_include_page			= '%absolute_path%';
 	$g_top_include_page				= '%absolute_path%';
 	# CSS file
-	$g_css_include_file				= '%path%css/default.css';
+	$g_css_include_file				= 'css/default.css';
 	# meta tags
 	$g_meta_include_file			= '%absolute_path%meta_inc.php';
 

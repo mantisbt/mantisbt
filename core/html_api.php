@@ -232,7 +232,7 @@
 	# (5) Print the link to include the css file
 	function html_css() {
 		$t_css_url = config_get( 'css_include_file' );
-		echo "\t", '<link rel="stylesheet" type="text/css" href="', $t_css_url, '" />', "\n";
+		echo "\t", '<link rel="stylesheet" type="text/css" href="', helper_mantis_url( $t_css_url ), '" />', "\n";
 
 		# fix for NS 4.x css
 		echo "\t", '<script type="text/javascript" language="JavaScript"><!--', "\n";
