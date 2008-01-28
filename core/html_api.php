@@ -306,6 +306,8 @@
 	# (8) Begin the <body> section
 	function html_body_begin() {
 		echo '<body>', "\n";
+
+		event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 	}
 
 	# --------------------
@@ -504,12 +506,14 @@
 		echo '</td><td><div align="right">';
 		echo '<a href="http://www.mantisbt.org" title="Free Web Based Bug Tracker"><img src="' . helper_mantis_url( 'images/mantis_logo_button.gif' ) . '" width="88" height="35" alt="Powered by Mantis Bugtracker" border="0" /></a>';
 		echo '</div></td></tr></table>';
+
+		event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 	}
 
 	# --------------------
 	# (14) End the <body> section
 	function html_body_end() {
-		event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
+		event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 		echo '</body>', "\n";
 	}
