@@ -474,7 +474,7 @@
 	# --- site branding ---------------
 	$g_favicon_image		= 'images/favicon.ico';
 	$g_logo_image			= 'images/mantis_logo.gif';
-	$g_logo_url				= 'http://www.mantisbt.org';
+	$g_logo_url				= '%default_home_page%';
 
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY
