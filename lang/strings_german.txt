@@ -23,6 +23,7 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
+	# German: Martin Fuchs, martin-fuchs@gmx.net
 	#
 	###########################################################################
 	# German strings for Mantis
@@ -1311,8 +1312,8 @@ $s_replace_relationship_sure_msg = 'Es besteht bereits eine Beziehung zwischen d
 $s_relationship_with_parent = 'Beziehung zum Original-Problem';
 $s_delete_relationship_button = 'Löschen';
 $s_delete_relationship_sure_msg = 'Sind Sie sicher, dass Sie diese Beziehung löschen wollen?';
-$s_relationship_warning_blocking_bugs_not_resolved = 'Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.';
+$s_relationship_warning_blocking_bugs_not_resolved = 'Nicht alle blockierenden Probleme sind bereits behoben oder geschlossen.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ACHTUNG</b>. Nicht alle blockierenden Probleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Problem <b>beheben/schließen</b>, sollten alle Probleme, die es blockieren, erledigt, behoben oder geschlossen werden.';
 $s_create_child_bug_button = 'Klon erzeugen';
 $s_bug_cloned_to = 'Problem dupliziert';
 $s_bug_created_from = 'Problem angelegt von';
