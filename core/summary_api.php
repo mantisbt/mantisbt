@@ -412,6 +412,8 @@
 		$t_resolved_val = RESOLVED;
 		$t_closed_val = CLOSED;
 
+		$t_summaryusers = array();
+		$t_summarydata = array();
 		while ( $row = db_fetch_array( $result ) ) {
 			$t_summarydata[] = $row;
 			$t_summaryusers[] = $row['handler_id'];	
