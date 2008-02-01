@@ -149,7 +149,7 @@
 
 	# --------------------
 	# Remove a category from the project
-	function category_remove( $p_category_id, $p_new_category_id = 1 ) {
+	function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 		$t_category_row = category_get_row( $p_category_id );
 
 		$c_category_id	= db_prepare_int( $p_category_id );
@@ -188,7 +188,7 @@
 
 	# --------------------
 	# Remove all categories associated with a project
-	function category_remove_all( $p_project_id, $p_new_category_id = 1 ) {
+	function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_new_category_id = db_prepare_int( $p_new_category_id );
 
@@ -233,7 +233,7 @@
 
 	# --------------------
 	# Return the definition row for the category
-	function category_get_row	( $p_category_id ) {
+	function category_get_row( $p_category_id ) {
 		global $g_category_cache;
 		if ( isset( $g_category_cache[$p_category_id] ) ) {
 			return $g_category_cache[$p_category_id];
@@ -305,12 +305,16 @@
 	# Helpers
 
 	function category_full_name( $p_category_id, $p_show_project=true ) {
-		$t_row = category_get_row( $p_category_id );
-		$t_project_id = $t_row['project_id'];
+		if ( 0 == $p_category_id ) { # No Category
+			return lang_get( 'no_category' );
+		} else {
+			$t_row = category_get_row( $p_category_id );
+			$t_project_id = $t_row['project_id'];
 
-		if ( $p_show_project && ALL_PROJECTS != $t_project_id ) {
-			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
+			if ( $p_show_project && ALL_PROJECTS != $t_project_id ) {
+				return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
+			}
+
+			return $t_row['name'];
 		}
-
-		return $t_row['name'];
 	}
