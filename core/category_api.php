@@ -149,7 +149,7 @@
 
 	# --------------------
 	# Remove a category from the project
-	function category_remove( $p_category_id, $p_new_category_id = 0 ) {
+	function category_remove( $p_category_id, $p_new_category_id = 1 ) {
 		$t_category_row = category_get_row( $p_category_id );
 
 		$c_category_id	= db_prepare_int( $p_category_id );
@@ -188,7 +188,7 @@
 
 	# --------------------
 	# Remove all categories associated with a project
-	function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
+	function category_remove_all( $p_project_id, $p_new_category_id = 1 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_new_category_id = db_prepare_int( $p_new_category_id );
 
