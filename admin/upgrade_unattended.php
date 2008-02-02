@@ -21,7 +21,7 @@
 	# $Id$
 	# --------------------------------------------------------
 
-	set_time_limit ( 0 ) ;
+	@set_time_limit ( 0 ) ;
 
 	$g_skip_open_db = true;  # don't open the database in database_api.php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
