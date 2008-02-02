@@ -140,7 +140,7 @@
 		global $t_project;
 		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
 		echo'<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_reporter' ) . '&nbsp;</td>';
 		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_handler' ) . '&nbsp;</td>';

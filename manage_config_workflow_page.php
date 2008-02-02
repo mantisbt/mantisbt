@@ -160,7 +160,7 @@
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_enum_status ) + 2 ) . '">'
-			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+			. $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
 		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) + 1 ) . '">'
 			. lang_get( 'next_status' ) . '</td></tr>';
@@ -216,7 +216,7 @@
 
 	function threshold_begin( $p_section_name ) {
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="3">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+		echo '<tr><td class="form-title" colspan="3">' . $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%">' . lang_get( 'threshold' ) . '</td>';
 		echo '<td class="form-title" >' . lang_get( 'status_level' ) . '</td>';
 		echo '<td class="form-title" >' . lang_get( 'alter_level' ) . '</td></tr>';
@@ -269,7 +269,7 @@
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="2">'
-			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+			. $p_section_name . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>';
 	}
 
@@ -433,7 +433,7 @@
 
 	if ( '' <> $t_validation_result ) {
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan="3">' . strtoupper( lang_get( 'validation' ) ) . '</td></tr>' . "\n";
+		echo '<tr><td class="form-title" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%">' . lang_get( 'status' ) . '</td>';
 		echo '<td class="form-title" >' . lang_get( 'comment' ) . '</td></tr>';
 		echo "\n";
