@@ -1,0 +1,728 @@
+<chapter>
+    <title>Customizing Mantis</title>
+    
+    <section>
+        <title>Custom Fields</title>
+        
+        
+        <para>There have been multiple requests to add certain fields to
+            Mantis bugs. These requests were not realised because of the
+            concern that they might over complicate the usage of Mantis while
+            not add value for most users.Hence, Mantis 0.18.0 introduces custom
+            fields to enable project managers to define extra fields for their
+            projects.Following are some facts about the implementation of
+            custom fields in Mantis:
+            <itemizedlist>
+                <listitem>
+                    <para>Custom fields are defined system wide.</para>
+                </listitem>
+                <listitem>
+                    <para>Custom fields can be linked to multiple
+                        projects.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>The sequence of displaying custom fields can be different
+                        per project.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Custom fields must be defined by users with access level
+                        ADMINISTRATOR.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Custom fields can be linked to projects by users with
+                        access level MANAGER or above (by default, this can be
+                        configurable).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Number of custom fields is not restricted.</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+        <para>
+            The definition of a custom field includes the following logical
+            attributes:
+            <itemizedlist>
+                <listitem>
+                    <para>Caption variable name (eg: This is the value that is
+                        supplied to lang_get() API, or displayed as-is if not found in
+                        language file).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Custom field type (string, numeric, float, enum,
+                        email)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Enumeration possible values (eg: RED|YELLOW|BLUE).
+                        Use the pipe ('|') character to separate possible values for an
+                        enumeration. One of the possible values can be an empty string.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Default value.</para>
+                </listitem>
+                <listitem>
+                    <para>Minimum/maximum length for the custom field value (use 0
+                        to disable).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Regular expression to use for validating user input (use
+                        <ulink url="http://au.php.net/manual/en/function.ereg.php">ereg()</ulink>
+                        syntax).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Advanced? no: Show in simple/advanced pages, yes: Show
+                        only in advanced pages.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>All custom fields are currently saved to a field of type
+                        VARCHAR(255) in the database. However, in future releases, it is
+                        possible to support custom fields of different types (eg: memo,
+                        date, datetime, file).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Read Access level: Minimum access level for users to be
+                        able to see the value of the custom field.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Write Access level: Minimum access level for users to be
+                        able to edit the value of the custom field.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+        <para>
+            If the value of a custom field for a certain defect is not found,
+            the default value is assumed.
+        </para>
+        
+        <formalpara>
+            <title>Adding/Editing Custom Fields Definitions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>The logged in user needs manage_custom_fields_threshold
+                            access level.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Select "Manage" from the main menu.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Select "Manage Custom Fields" from the management
+                            menu.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Click on the name of an existing custom field to edit its
+                            information.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Enter the name of the new custom field then click "New
+                            Custom Field" to add a new field.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </formalpara>
+        
+        <formalpara>
+            <title>Linking/Unlinking/Ordering Existing Custom Fields in Projects</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>The logged in user needs to have access level that is
+                            greater than or equal to $g_custom_field_link_threshold and
+                            $g_manage_project_threshold.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Select "Manage" from the main menu.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Select "Manage Projects" in case you are
+                            administrator.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Select the name of the project to manage.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Scroll down to the "Custom Fields" box.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Select the field to add from the list, then click "Add
+                            This Existing Custom Field".
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>To change the order of the custom fields, edit the
+                            "Sequence" value and click update. Custom fields with smaller
+                            values are displayed first.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>To unlink a custom field, click on "Remove" link next to
+                            the field.
+                            Unlinking a custom field will not delete the values that are
+                            associated with the bugs for this field. These values are only
+                            deleted if the custom field definition is removed (not unlinked!)
+                            from the database. This is useful if you decide to re-link the
+                            custom field. These values may also re-appear if bugs are moved to
+                            another project which has this field linked.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </formalpara>
+        
+        <formalpara>
+            <title>Moving Bugs</title>
+            <para>
+                When a bug is moved from one project to another, custom
+                fields that are not defined for the new project are not deleted.
+                These fields will re-appear with their correct values if the bug is
+                moved back to the original project, or if these custom fields are
+                linked to the new project.
+            </para>
+        </formalpara>
+        
+        <formalpara>
+            <title>Custom Severities, Priorites, Statuses, etc...</title>
+            
+            <para>
+                This is a completely different issue. See
+                <ulink url="manual.customizing.mantis.enumerations.html">Enumerations</ulink>
+                for more details about this issue.
+            </para>
+        </formalpara>
+        
+        <formalpara>
+            <title>Possible Future Enhancements</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Make custom field searchable.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Ability to filter on values of custom fields.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Support more field types: date, datetime, memo,
+                            file.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Support custom fields in resolve/close bugs
+                            pages.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Control the visibility / mandatory state of custom fields
+                            depending on the stage in which the bug is at (eg: reporting,
+                            updating, resolving, closing).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Ability to export custom fields to csv, Excel,
+                            Word.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Ability to make a custom field visible in View Bugs page
+                            (this also applies for non-custom fields).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Ability to filter on custom fields in View Bugs page
+                            (this also applies for non-custom fields that are not supported in
+                            the filter.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Support populating custom fields from LDAP.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Support populating custom fields via a SELECT SQL query.
+                            The query can use a set of variables like be a $sql_user_id,
+                            $sql_project_id, $sql_xxx.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            
+        </formalpara>
+        <note><para>
+                If you are interested in any of the above enhancements and have the
+                time/skills required to implemented it, please contact the
+                development team to make sure that your work can be integrated into
+                Mantis future releases.
+            </para>
+        </note>
+        
+    </section>
+    <section>
+        <title>Enumerations</title>
+        
+        
+        <para>Enumerations are used in Mantis to represent a set of
+            possible values for an attribute. Enumerations are used for access
+            levels, severities, priorities, project statuses, project view
+            state, reproducibility, resolution, ETA, and projection.Mantis
+            provides the administrator with the flexibility of altering the
+            values in these enumerations. The rest of this topic explains how
+            enumerations work, and then how they can be customised.
+        </para>
+        
+        <formalpara>
+            <title>How enumerations work?</title>
+            
+            <para>
+                <filename>core/constant_inc.php</filename> defines the
+                constants that correspond to those in the enumeration. These are
+                useful to refer to these enumerations in the configs and the code.
+                <programlisting>
+                    define( 'VIEWER', 10 ) 
+                    define( 'REPORTER', 25 ) 
+                    define( 'UPDATER',  40 ) 
+                    define( 'DEVELOPER', 55 ) 
+                    define( 'MANAGER', 70 ) 
+                    define( 'ADMINISTRATOR', 90 )
+                </programlisting>
+            </para>
+        </formalpara>
+        
+        <para>
+            <filename>config_defaults_inc.php</filename> includes the defaults for the
+            enumerations. The configuration options that are defaulted here are
+            used in specifying which enumerations are active and should be used
+            in Mantis. However, the strings included in the enumerations here
+            are just for documentation purpose, they are not shown to the user
+            (due to the need for localisation). Hence, if an entry in this
+            enumeration is not found in the corresponding localised enumeration
+            (i.e. 70:manager), then it will be printed to the user as @70@.
+            
+            <programlisting>
+                $g_access_levels_enum_string =
+                '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+            </programlisting>
+        </para>
+        <para>
+            <filename>lang/strings_german.txt</filename> provide the
+            localised strings (in this case, in german) for enumerations. But again, the master list is
+            the enumeration in the configs, the ones in the language files are
+            just used for finding the localised equivalent for an entry. Hence,
+            if a user changes the config to have only two types of users
+            developers and administrators, then only those will be prompted to
+            the users even if the enumerations in the language files still
+            includes the full list.
+            <programlisting>
+                
+                $s_access_levels_enum_string =
+                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
+            </programlisting>
+        </para>
+        
+        <formalpara>
+            <title>How can they be customised?</title> <para>Let say we want to remove access level
+                "Updater" and add access level "Senior
+                Developer".
+            </para>
+        </formalpara>
+        <para>
+            The file <filename>custom_constant_inc.php</filename> is supported for the
+            exclusive purpose of allowing administrators to define their own
+            constants while maintaining a simple upgrade path for future
+            releases of Mantis. Note that this file is not distributed with
+            Mantis and you will need to create it if you need such
+            customisation. In our example, we need to define a constant for the
+            new access level.
+            <programlisting>
+                define ( 'SENIOR_DEVELOPER', 60 );
+            </programlisting>
+        </para>
+        
+        <para>
+            In <filename>config_inc.php</filename>
+            <programlisting>
+                // Remove Updater and add Senior Developer
+                $g_access_levels_enum_string =
+                '10:viewer,25:reporter,55:developer,60:senior_developer,70:manager,90:administrator';
+                // Give access to Senior developers to create/delete custom field.
+                $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
+            </programlisting>
+        </para>
+        
+        <para>
+            The file <filename>custom_strings_inc.php</filename> is introduced for a similar reason
+            to that of custom_constant_inc.php, which is to define custom
+            strings. The advantage of defining them here is to provide a simple
+            upgrade path, and avoid having to re-do the changes when upgrading
+            to the next Mantis release. Note that you will need to create this
+            file if you need such customisation. The file is automatically
+            detected and included by Mantis code (v0.18.0aX).
+            <programlisting>
+                # Note that we don't have to remove the Updater entry from the
+                localisation file if ( lang_get_current() === 'english' ) {
+                $s_access_levels_enum_string =
+                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,60:Senior
+                Developer,70:Manager,90:Administrator'; }
+            </programlisting>
+        </para>
+        
+        <formalpara>
+            <title>Conclusion</title><para>We have covered how enumerations work in general, and how
+                to customise one of them. If you are interested in customising
+                other enumerations, a good starting point would be to go to "Mantis
+                Enum Strings" section inconfig_defaults_inc.php. This section
+                defines all enumerations that are used by Mantis.
+                For versions that are older than 0.18.0, custom_*_inc.php files are
+                not supported, and hence you will need to change in the actual
+                constants / language files directly.
+            </para>
+        </formalpara>
+        
+    </section>
+    
+    
+    <section>
+        <title>Email Notifications</title>
+        
+        <para>See
+            <ulink url="manual.configuration.email.html">Email</ulink>
+            in the
+            <ulink url="manual.configuration.html">Configuration</ulink>
+            section.
+        </para>
+        
+        <para>Examples:
+            <itemizedlist>
+                <listitem>
+                    <para>Notify only managers of new issues.
+                        <programlisting>
+                            $g_notify_flags['new']['threshold_min'] = MANAGER;
+                            $g_notify_flags['new']['threshold_max'] = MANAGER;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Notify Developers and managers of all project events,
+                        except, exclude developers from the 'closed' events.
+                        <programlisting>$g_default_notify_flags['threshold_min'] = DEVELOPER;
+                            $g_default_notify_flags['threshold_max'] = MANAGER;
+                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
+                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Exclude those who contributed bug notes from getting
+                        messages about other changes in the bug.
+                        <programlisting>$g_default_notify_flags['bugnotes'] = OFF;</programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Exclude those monitoring bugs from seeing the 'closed'
+                        message
+                        <programlisting>$g_notify_flags['closed']['monitor'] = OFF;</programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Only notify developers when bugnotes are added.
+                        <programlisting>$g_notify_flags['bugnote']['threshold_min'] = DEVELOPER;
+                            $g_notify_flags['bugnote']['threshold_max'] = DEVELOPER;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Notify managers of changes in sponsorship.
+                        <programlisting>$g_notify_flags['sponsor']['threshold_max'] = MANAGER;
+                            $g_notify_flags['sponsor']['threshold_max'] = MANAGER;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Notify originator and managers of changes in ownership
+                        ("Assigned To:").
+                        <programlisting>$g_notify_flags['owner']['threshold_max'] = MANAGER;
+                            $g_notify_flags['owner']['threshold_max'] = MANAGER;
+                            $g_notify_flags['owner']['reporter'] = ON;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>I'm paranoid about mail. Only send information on issues
+                        to those involved in them. Don't send mail people already know
+                        about. Also send new bug notifications to managers so they can
+                        screen them.
+                        <programlisting>$g_mail_receive_own = OFF; 
+                            $g_default_notify_flags =
+                            array('reporter' =&gt; ON, 'handler' =&gt; ON, 'monitor' =&gt; ON,
+                            'bugnotes' =&gt; ON, 'threshold_min' =&gt; NOBODY, 'threshold_max'
+                            =&gt; NOBODY);
+                            $g_notify_flags['new']['threshold_min'] = MANAGER;
+                            $g_notify_flags['new']['threshold_max'] = MANAGER;
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>How do I replace the $g_to_email configuration variable
+                        to log all messages to an email logger.
+                    </para>
+                    <para>You will need to create a
+                        dummy user with the appropriate access level for the notices you
+                        want to log. Once this user is added to projects, they will receive
+                        mail using the appropriate rules.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        <title>Customizing Status Values</title>
+        <para>The default is no workflow, where all states
+            are accessible from any others. The following example can be
+            transferred to config_inc.php. The workflow needs to have a path
+            from the statuses greater than or equal to the resolved state back
+            to the feedback state. Otherwise, the re-open operation won't work.
+            <programlisting>$g_status_enum_workflow[NEW_]=
+                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+                $g_status_enum_workflow[FEEDBACK] =
+                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+                $g_status_enum_workflow[ACKNOWLEDGED] =
+                '20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+                $g_status_enum_workflow[CONFIRMED] =
+                '20:feedback,40:confirmed,50:assigned,80:resolved';
+                $g_status_enum_workflow[ASSIGNED] =
+                '20:feedback,50:assigned,80:resolved,90:closed';
+                $g_status_enum_workflow[RESOLVED] =
+                '50:assigned,80:resolved,90:closed';
+                $g_status_enum_workflow[CLOSED] = '50:assigned';
+            </programlisting>
+            
+            <para>To add a status:
+                <orderedlist>
+                    <listitem>
+                        <para>Define a constant to map the new status to.In a new file
+                            custom_constant_inc.php in the main mantisbt directory:
+                            <programlisting>&lt;?php define ( 'TEST', 60 ); ?&gt;</programlisting>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Define the language strings required. This may need to be
+                            defined in several languages.In a new file custom_strings_inc.php
+                            in the main mantisbt directory:
+                            <programlisting>&lt;?php if ( lang_get_current() == 'german' ) {
+                                $s_status_enum_string =
+                                '10:neu,20:R&cedil;ckmeldung,30:anerkannt,40:best&permil;tigt,50:zugewiesen,
+                                60:zu testen,80:behoben,90:geschlossen'; } else {
+                                $s_status_enum_string =
+                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
+                                be tested,80:resolved,90:closed'; $s_to_be_tested_bug_button =
+                                "Issue Ready to Test"; $s_to_be_tested_bug_title = "Set Issue Ready
+                                to Test"; $s_email_notification_title_for_status_bug_to_be_tested =
+                                "The following issue is ready TO BE TESTED."; } ?&gt;
+                            </programlisting>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Define any configurations required.In the existing file
+                            config_inc.php in the main mantisbt directory:
+                            <programlisting>$g_status_enum_string =
+                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
+                                be tested,80:resolved,90:closed'; # Status color additions
+                                $g_status_colors['to be tested'] = '#ACE7AE';
+                            </programlisting>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Add the status to any workflow defined.In config_inc.php:
+                            <programlisting>$g_status_enum_workflow[NEW_]=
+                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
+                                be tested'; $g_status_enum_workflow[FEEDBACK] =
+                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
+                                be tested'; $g_status_enum_workflow[ACKNOWLEDGED] =
+                                '20:feedback,30:acknowledged,40:confi rmed,50:assigned,60:to be
+                                tested'; $g_status_enum_workflow[CONFIRMED] =
+                                '20:feedback,40:confirmed,50:assigned,60:to be tested';
+                                $g_status_enum_workflow[ASSIGNED] = '20:feedback,50:assigned,60:to
+                                be tested,90:closed'; $g_status_enum_workflow[TEST] =
+                                '10:new,20:feedback,50:assigned,60:to be
+                                tested,80:resolved,90:closed'; $g_status_enum_workflow[RESOLVED] =
+                                '50:assigned,60:to be tested,80:resolved,90:closed';
+                                $g_status_enum_workflow[CLOSED] = '50:assigned,90:closed';
+                            </programlisting>
+                        </para>
+                    </listitem>
+                    
+                </orderedlist>
+            </para>
+            
+        </section>
+        
+        
+        <section>
+            <title>LDAP</title>
+            <para>Functionality is provided by using the php-ldap module
+                (/usr/lib/php4/ldap.so). An extra login method is defined within
+                core/user_API.php inside of function is_password_match $f_username,
+                $p_test_password, $p_password ).This has a simple, non encrypted
+                (yet) test of the LDAP directory for that user by asking for an
+                entry with uid=username and password=test_password, if this exists,
+                it is presumed that the user should be granted access.
+                <formalpara>
+                    <title>Configuration basics</title>
+                    <para>the LDIF format that was tested is as follows:
+                        <programlisting>dn: uid=tests,
+                            dc=test, dc=com, dc=au
+                            department: testdep
+                            organizationname: Testing Organization
+                            cn: Test Smith
+                            assignedgroup: users
+                            givename: Test
+                            sn: Smith
+                            mail: tests@example.com.au
+                            uid: testsuser
+                            Password: password
+                            objectclass: testPerson
+                        </programlisting>
+                        
+                        The password may be in clear, taken
+                        from the /etc/passwd or /etc/shadow file, or simply encrypted and
+                        added using current LDAP tools.There are some specialized software
+                        for replicating passwd to LDAP and inversely (eg.
+                        <ulink url="http://freshmeat.net/projects/cpu/">http://freshmeat.net/projects/cpu/</ulink>
+                        ).
+                    </para>
+                </formalpara>
+                
+                <para>Also setup the LDAP parameters explained in the
+                    <ulink url="manual.configuration.authentication.html">Authentication</ulink>
+                    section. Don't forget to change your $g_login_method to
+                    LDAP.
+                </para>
+                
+                <formalpara>
+                    <title>Creating new accounts</title><para>There is still a bit of problem when you
+                        want to create a new user to Mantis using LDAP, you must create the
+                        LDIF entry to LDAP, and also sign up for a new account, if both of
+                        these line up correctly, authentication will proceed.Email
+                        issuesEmail address is queried from the LDAP database if the
+                        authentication is set to use LDAP instead of the user record in the
+                        database
+                        entry.</para>
+                </formalpara>
+                
+            </section>
+            
+            
+            <section>
+                <title>Custom Functions</title>
+                
+                <para>Custom functions are used to extend the functionality of
+                    Mantis by integrating user writtenfunctions into the issue
+                    processing at strategic places. This allows the system
+                    administrator to changethe functionality without re-writing parts
+                    of the internals of the code.
+                </para>
+                <para>User versions of these functions are
+                    placed in a file called custom_functions_inc.php in the
+                    root directory of Mantis. This is the same place that the
+                    "config_inc.php" file modifying Mantisdefaults is placed. In normal
+                    processing, Mantis will look for override functions and execute
+                    theminstead of the provided default functions.
+                    <para>Custom functions have
+                        names like custom_function_override_descriptive_name where
+                        descriptive namedescribed the particular function. The specific
+                        functions are described below. The simplest way tocreate a custom
+                        function is to copy the default function, named
+                        custom_function_default_descriptive_namefrom the
+                        core/custom_function_api.php file to your override file
+                        (custom_functions_inc.php), andrename it. The specific
+                        functionality you need can then be coded into the override
+                        function.
+                    </para>
+                    
+                    <section>
+                        
+                        <title>Defined Functions</title>
+                        
+                        
+                        <para>custom_function_default_changelog_include_issue( $p_issue_id
+                            ) returns true or false if the issue if to be included in the
+                            Changelogcustom_function_default_changelog_print_issue( $p_issue_id
+                            ) returns a formatted string to be included for the issue in the
+                            Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
+                            $p_file, $p_new_version ) registers a checkin in source control in
+                            Mantiscustom_function_default_issue_update_validate( $p_issue_id,
+                            $p_new_bug, $p_bug_note_text ) validate bug field settings before
+                            an update occurs. It returns true or fails with an
+                            error.custom_function_default_issue_update_notify( $p_issue_id )
+                            notify after a bug has been
+                            updatedcustom_function_default_issue_create_validate( $p_new_bug )
+                            validate bug field settings before an issue is created. It returns
+                            true or fails with an
+                            error.custom_function_default_issue_create_notify( $p_issue_id )
+                            notify after a bug has been
+                            openedcustom_function_default_issue_delete_validate( $p_issue_id )
+                            validate bug field settings before an issue can be deleted. It
+                            returns true or fails with an
+                            error.custom_function_default_issue_delete_notify( $p_issue_id )
+                            notify after a bug has been deleted
+                        </para>
+                    </section>
+                    
+                    <section>
+                        
+                        <title>Example Custom Function</title>
+                        
+                        
+                        <para>The following function is used to validate an issue before
+                            it is resolved.
+                            <programlisting width="102"><![CDATA[<?php 
+# -------------------- 
+# Hook to validate Validate field settings before resolving 
+# verify that the resolution is not set to OPEN 
+# verify that the fixed in version is set (if versions of the product exist)
+
+function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_data, $p_bugnote_text ) {
+if ( $p_bug_data->status == RESOLVED ) { 
+if ( $p_bug_data->resolution == OPEN ) {
+error_parameters( 'the resolution cannot be open to resolve the issue' ); 
+trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR ); 
+}
+$t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
+if ( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
+error_parameters( 'fixed in version must be set to resolve the issue' ); 
+trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR ); 
+} 
+} 
+}
+?>]]>
+                            </programlisting>
+                            The errors will also need to be defined by adding the following to <filename>custom_constant_inc.php</filename>
+                            <programlisting>
+                                define ( 'ERROR_VALIDATE_FAILURE', 2000 );
+                                To custom_strings_inc.php
+                                $MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
+                            </programlisting>
+                        </para>
+                    </section>
+                </section>
+            </chapter>

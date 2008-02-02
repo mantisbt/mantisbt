@@ -1,0 +1,2421 @@
+<chapter>
+    <title>Configuration</title>
+    <section>
+        
+        <title>Database</title>
+        <para>The database settings must be set in order for the package
+            to work properly. These settings should be provided to you by your
+            system administrator or your hosting company.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_hostname</term>
+                <listitem>
+                    <para>Host name or connection string for Database server. The
+                        default value is localhost. For mysql, this should be hostname or
+                        hostname:port. For other databases (experimental, not supported),
+                        this may be a connection string or hostname
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_db_username</term>
+                <listitem>
+                    <para>User name to use for connecting to the database. The user
+                        needs to have read/write access to the Mantis database. The default
+                        user name is "root".
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_db_password</term>
+                <listitem>
+                    <para>Password for the specified user name. The default password
+                        is empty.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_database_name</term>
+                <listitem>
+                    <para>Name of database that contains Mantis tables.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_db_type</term>
+                <listitem>
+                    <para>Experimental Defines the database type. The supported
+                        default is 'mysql'. Experimental options include 'mssql',
+                        'odbc_mssql', 'postgres', 'postgres64', 'postgres7', and 'pgsql'.
+                        Introduced in 0.19.0
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+    
+    <section>
+        <title>Path</title>
+        <para>These path settings are important for proper linking within
+            Mantis. In most scenarios the default values should work fine, and
+            you should not need to override them.
+        </para>
+        <variablelist> 
+            <varlistentry>
+                <term>$g_path</term>
+                <listitem>
+                    <para>URL to your installation as seen from the web browser; this
+                        is what you type into the URL field. Requires trailing '/'
+                        character.&nbsp;eg. $g_path =
+                        'http://www.example.com/mantis/';&nbsp;In the following example
+                        https protocol is used:&nbsp;eg. $g_path =
+                        'https://www.example.com/mantis/';&nbsp;Mantis will default this to
+                        the correct value. However, in some cases you might need to
+                        override the default.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_icon_path</term>
+                <listitem>
+                    <para>This is the URL to the icons (images) directory as seen from
+                        the web browser. All Mantis images/icons are loaded from this URL.
+                        The default value for this URL is based on $g_path, hence, if you
+                        override $g_path, you will have to override this one as
+                        well.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_absolute_path</term>
+                <listitem>
+                    <para>This is the absolute path to your installation, it is
+                        defaulted to the directory where config_defaults_inc.php resides.
+                        This is the path that you see when you make a telnet or ssh
+                        connection to the server. You can type pwd to find out. Requires
+                        trailing '/' character.&nbsp;eg. $g_absolute_path =
+                        '/usr/apache/htdocs/mantis/';&nbsp;
+                        Before Mantis 0.17.3 symbolic links were not allowed due to the way
+                        file downloads were handled. This has been fixed.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_core_path</term>
+                <listitem>
+                    <para>This is the path to the core directory of your installation.
+                        The default value is usually OK, unless you move the 'core'
+                        directory out of your webroot. Requires trailing '/'
+                        character.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_manual_url</term>
+                <listitem>
+                    <para>This is the url to the Mantis manual. It is defaulted to the
+                        Mantis Online manual. Mantis links to this URL for full
+                        documentation, it will also be used in the future to link for the
+                        [?] form hints. Requires trailing '/' character.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    <section>
+        
+        <title>Webserver</title>
+        <variablelist> 
+            
+            <varlistentry>
+                <term>$g_use_iis</term>
+                <listitem>
+                    <para>You need to set this to ON if you use Microsoft's IIS. This
+                        helps correct a bug in IIS. You should not need to change the
+                        default value since it now auto-detects IIS server software.
+                        This issue has been known since at least Jan 1999 and has not been
+                        fixed:
+                        <ulink url="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q176113">BUG
+                            Q176113
+                        </ulink>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    <section>
+        <title>Version</title>
+        <variablelist>
+            <varlistentry>
+                <term>$g_mantis_version</term>
+                <listitem>
+                    <para>The version for the Mantis installation. There shouldn't be
+                        a need to override this value. Development versions will have
+                        '-CVS' suffix attached to it.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_version</term>
+                <listitem>
+                    <para>Whether to show the Mantis version at the bottom of each
+                        page or not. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    <section>
+        <title>Email</title>
+        <variablelist>
+            <varlistentry>
+                <term>$g_administrator_email</term>
+                <listitem>
+                    <para>The administrator's e-mail address. This is mainly prompted
+                        to the user in case of errors that might require the intervention
+                        of the system administrator. For example, SQL
+                        errors.&nbsp;sysadmin@example.com&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_webmaster_email</term>
+                <listitem>
+                    <para>The webmaster's e-mail address. This address is displayed in
+                        the bottom of all Mantis
+                        pages.&nbsp;webmaster@example.com&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_from_email</term>
+                <listitem>
+                    <para>The email address to be used as the source of all emails
+                        sent by Mantis.&nbsp;noreply@example.com&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_to_email</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. All emails are going to be sent to this
+                        email address. This can be an email list or an archive address to
+                        be used to archive all notifications. If this functionality is not
+                        needed, then it can be set to nothing ('').
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_return_path_email</term>
+                <listitem>
+                    <para>Email address to receive bounced emails.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_enable_email_notification</term>
+                <listitem>
+                    <para>Set to ON to enable e-mail notifications, OFF to disable
+                        them. Default is ON.
+                        Up to version 0.18.0a4 setting this option to OFF would disable all
+                        emails sent by Mantis. However, in 0.18.0a5 this was changed to
+                        have no effect on user sign-up notifications.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_signup</term>
+                <listitem>
+                    <para>Allow users to signup for their own accounts. Default is ON.
+                        (added in 0.19)
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_send_reset_password</term>
+                <listitem>
+                    <para>When set to ON, Mantis will email the users their new
+                        passwords when their accounts are reset. If set to OFF, the
+                        password will be reset to blank and no e-mail will be sent. Default
+                        is ON. (added in 0.19)
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_validate_email</term>
+                <listitem>
+                    <para>Set to OFF to disable email checking. Default is ON.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_check_mx_record</term>
+                <listitem>
+                    <para>Set to OFF to disable email checking. Default is
+                        OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_blank_email</term>
+                <listitem>
+                    <para>If ON, allows the user to omit an email address field.
+                        If you allow users to create their own accounts, they must specify
+                        an email at that point, no matter what the value of this option is.
+                        Otherwise they wouldn't get their passwords.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_limit_email_domain</term>
+                <listitem>
+                    <para>Only allow and send email to addresses in the given domain.
+                        This is useful as a security feature and it is also useful in cases
+                        like Sourceforge where its servers are only limited to send emails
+                        to SourceForge email addresses in order to avoid
+                        spam.&nbsp;$g_limit_email_domain =
+                        'users.sourceforge.net';&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_user_email_threshold</term>
+                <listitem>
+                    <para>This specifies the access level that is needed to have user
+                        names hyperlinked with mailto: links. The default value is NOBODY,
+                        hence, even administrators won't have this feature enabled.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_x_priority</term>
+                <listitem>
+                    <para>Dropped in 0.19.0.Set to OFF to remove X-Priority header.
+                        Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mail_priority</term>
+                <listitem>
+                    <para>If use_x_priority is set to ON, what should the value be?
+                        Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3 
+                        Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_bcc</term>
+                <listitem>
+                    <para>Dropped in 0.19.0.Specifies whether email recipients should
+                        be added in the To: field (OFF) or the Bcc: field (ON). The default
+                        value is ON.
+                        You might need to turn this option OFF on Windows systems, as long
+                        as php-mail-function has its bcc-bug (~PHP 4.0.6). However, if you
+                        are using PHPMailer for sending emails you probably would not have
+                        a problem.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_phpMailer</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. This is now the only mailing
+                        mechanism.Use PHPMailer instead of standard mail() function. Get
+                        the PHPMailer-package from http://phpmailer.sourceforge.net. The
+                        installation is very simple you only need 2 plain text php-files:
+                        class.smtp.php and class.phpmailer.php.Copy these files to your
+                        php-include-dir i.e. 'c:\php\includes' or '/usr/lib/php/includes'
+                        and add this path to the 'include_path'-entry in the php.ini
+                        file.The installation is described in the readme and there is also
+                        a simple example.PHPMailer comes with a detailed documentation in
+                        phpdoc format.Default is OFF.
+                        Although the default value is OFF. It is recommended to use
+                        PHPMailer. It is also planned that in future Mantis releases
+                        PHPMailer will be the only supported option for sending emails.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_phpMailer_path</term>
+                <listitem>
+                    <para>Dropped in 0.19.0.Path to PHPMailer directory (default is
+                        empty). This directory must include class.phpmailer.hpp and
+                        class.smtp.php. The default should work if the PHPMailer directory
+                        is in the include_path. If a path is specified, it should be
+                        terminated by a directory separator.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_phpMailer_method</term>
+                <listitem>
+                    <para>Select the method to mail by: 0 - mail(), 1 - sendmail 2 -
+                        SMTP. Default is 0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_smtp_host</term>
+                <listitem>
+                    <para>This option allows you to use a remote SMTP host. Must use
+                        the phpMailer script. Name of smtp host, needed for phpMailer,
+                        taken from php.ini Default is 'localhost'
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_smtp_username</term>
+                <listitem>
+                    <para>This option allows the use of SMTP Authentication when using
+                        a remote SMTP host with PHPMailer. If smtp_username is not '' then
+                        the username and password will be used when logging in to the SMTP
+                        server. Default is ''.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_smtp_password</term>
+                <listitem>
+                    <para>This is the password that is used in SMTP Authentication .
+                        Default is ''.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_email_set_category</term>
+                <listitem>
+                    <para>Specify whether e-mails should be sent with the category set
+                        or not. This is tested with Microsoft Outlook. More testing for
+                        this feature + other formats will be added in the future. OFF,
+                        EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category).
+                        Default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_email_separator1</term>
+                <listitem>
+                    <para>Default is str_pad('', 70, '='); This means 70 equal
+                        signs.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_email_separator2</term>
+                <listitem>
+                    <para>Default is str_pad('', 70, '-'); This means 70 minus
+                        signs.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_email_padding_length</term>
+                <listitem>
+                    <para>Default is 28.</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+        
+        <para>Mantis uses flags and a threshold system to generate emails on
+            events. For each new event, email is sent to:
+            <itemizedlist>
+                <listitem>
+                    <para>the reporter, qualified by the notify flag 'reporter'
+                        below
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>the handler (or Assigned to), qualified by the notify
+                        flag 'handler' below
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>anyone monitoring the bug, qualified by the notify flag
+                        'monitor' below
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>anyone who has ever added a bugnote the bug, qualified by
+                        the notify flag 'bugnotes' below
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>anyone assigned to the project whose access level is
+                        greater than or equal to the notify flag 'threshold_min' and less
+                        than or equal to the notify flag 'threshold_max' below
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+        <para>
+            From this list, those recipients who meet the following criteria
+            are eliminated:
+            <itemizedlist>
+                <listitem>
+                    <para>the originator of the change, if $g_email_receive_own is
+                        OFF
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>the recipient either no longer exists, or is
+                        disabled
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>the recipient has turned their email_on_&lt;new
+                        status&gt; preference OFF
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>the recipient has no email address extered</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_email_receive_own</term>
+                <listitem>
+                    <para>This defines whether users should receive emails for their
+                        own actions. This option is defaulted to OFF, hence, users do not
+                        receive email notification for their own actions.
+                        This can be a source for confusions for users upgrading from Mantis
+                        0.17.x versions, since in these versions users used to get notified
+                        of their own actions.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_notify_flags</term>
+                <listitem>
+                    <para>Associated with each action a list of flags to control who
+                        should be notified.The default will be used if the action is not
+                        included in $g_notify_flags orif the flag is not included in the
+                        specific action definition. The list of actions include: new,
+                        assigned, resolved, bugnote, reopened, closed, deleted,
+                        feedback.The default is:
+                        $g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
+                        =&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'threshold_min'
+                        =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
+                        threshold_min and threshold_max are used to send messages to all
+                        members of the project whose status is greater than or equal to
+                        "threshold_min" and less than or equal to "threshold_max". Sending
+                        messages to everyone would set "threshold_min" to ANYBODY and
+                        "threshold_max to "NOBODY". To send to all DEVELOPERS and above (as
+                        0.17.5), use DEVELOPER and NOBODY respectively.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_notify_flags</term>
+                <listitem>
+                    <para>Defines the notification flags that are different from the
+                        defaults that are defined in $g_default_notify_flags. The following
+                        code overrides the default by disabling notifications to bugnote
+                        authors and users monitoring the bug on submitting a new bug:
+                        $g_notify_flags['new'] = array('bugnotes' =&gt; OFF, 'monitor'
+                        =&gt; OFF);
+                        Available actions include:
+                        <itemizedlist>
+                            <listitem>
+                                <para>'new': a new bug has been added</para>
+                            </listitem>
+                            <listitem>
+                                <para>'reopened': the bug has been reopened</para>
+                            </listitem>
+                            <listitem>
+                                <para>'deleted': a bug has been deleted</para>
+                            </listitem>
+                            <listitem>
+                                <para>'owner': the bug has been assigned a new owner (was
+                                    'assigned' in 0.18)
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>'bugnote': a bugnote has been added to a bug</para>
+                            </listitem>
+                            <listitem>
+                                <para>'sponsor': the sponsorship for the bug has changed
+                                    (added, deleted or updated) (added in 0.19)
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>'relation': a relationship for the bug has changed
+                                    (added, deleted or updated) (added in 0.19)
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        In addition, an action can match the bug status in
+                        $g_status_enum_string. Note that spaces in the string are replaced
+                        with underscores ('_') in creating the action. Thus, using the
+                        defaults, 'feedback' would be a valid action. (was
+                        'status_&lt;status&gt;' in 0.18)
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+        <para>See also:
+            <ulink url="manual.customizing.mantis.email.notifications.html">Email Notifications</ulink>
+        </para>
+        
+    </section>
+    
+    <section>
+        <title>Language</title>
+        <variablelist> 
+            <varlistentry>
+                <term>$g_default_language</term>
+                <listitem>
+                    <para>This is the language used by default in Mantis.As of 0.19.0,
+                        this may be set to 'auto' where Mantis will try to determine the
+                        language from the browser.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_language_choices_arr</term>
+                <listitem>
+                    <para>This is to be set to an array of languages that are
+                        available for users to choose from. The default value includes all
+                        languages supported by Mantis. The administrator can limit the
+                        languages available for users to choose from by overriding this
+                        value. For example, to support English, French and German include
+                        the following code:&nbsp;array( 'english', 'french', 'german'
+                        );&nbsp;Of course, administrators can also add their own languages
+                        by translating the strings and creating their own language files.
+                        You are encouraged to share any translation work that you do with
+                        the Mantis team. This will ensure that the newly created language
+                        file is maintained with future Mantis releases.All language files
+                        reside in the lang/ folder. They are all named according to the
+                        following pattern: strings_&lt;language&gt;.txt.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_fallback_language</term>
+                <listitem>
+                    <para>This is the language used if Mantis cannot determine the
+                        language from the browser. It defaults to 'english'.As of 0.19.0,
+                        this may be set to 'auto' where Mantis will try to determine the
+                        language from the browser.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        <note>
+            <para>If a string does not exist in the active language, the
+                English string is used instead.
+            </para>
+        </note>
+    </section>
+    
+    <section>
+        
+        <title>Display</title>
+        <variablelist> 
+            <varlistentry>
+                <term>$g_window_title</term>
+                <listitem>
+                    <para>This is the browser window title (&lt;TITLE&gt;
+                        tag).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_page_title</term>
+                <listitem>
+                    <para>This is a heading that is displayed in the viewing area of
+                        the page.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_report</term>
+                <listitem>
+                    <para>This option is used as a default value for user preferences.
+                        This field indicates whether users should get the simple bug report
+                        page, advanced bug report page, or both. Possible values are: BOTH,
+                        SIMPLE_ONLY, or ADVANCED_ONLY. The default is BOTH.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_update</term>
+                <listitem>
+                    <para>This option is used as a default value for user preferences.
+                        This field indicates whether users should get the simple bug update
+                        page, or the advanced bug update page, or both. Possible values
+                        are: BOTH, SIMPLE_ONLY, or ADVANCED_ONLY. The default is
+                        BOTH.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_view</term>
+                <listitem>
+                    <para>This option is used as a default value for user preferences.
+                        This field indicates whether users should get the simple bug view
+                        page, or advanced bug view page, or both. Possible values are:
+                        BOTH, SIMPLE_ONLY, or ADVANCED_ONLY. The default is BOTH.
+                    </para>
+                    <note>
+                        <para>Users can set their own default preferences for the show
+                            report/update/view if the configuration value is BOTH. However, if
+                            the value is set to SIMPLE or ADVANCED, then the users should be
+                            forced to use the configured values. Note that these settings apply
+                            to all projects.
+                        </para>
+                    </note>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_footer_menu</term>
+                <listitem>
+                    <para>Show the menu at the bottom of the page as well as at the
+                        top. Default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_project_menu_bar</term>
+                <listitem>
+                    <para>This option specifies whether to add menu at the top of the
+                        page which includes links to all the projects. The default value is
+                        OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_assigned_names</term>
+                <listitem>
+                    <para>When a bug is assigned then replace the word "assigned" with
+                        the name of the developer in parenthesis. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_priority_text</term>
+                <listitem>
+                    <para>Specifies whether to show priority as text (ON) or icon
+                        (OFF) in the view all bugs page. Default is OFF (icon).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_bug_project_links</term>
+                <listitem>
+                    <para>Show project links when in All Projects mode. Default is
+                        ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_status_legend_position</term>
+                <listitem>
+                    <para>Specifies the position of the status colour legend, can be:
+                        STATUS_LEGEND_POSITION_TOP or STATUS_LEGEND_POSITION_BOTTOM.
+                        Default is STATUS_LEGEND_POSITION_BOTTOM.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_attachments_indicator</term>
+                <listitem>
+                    <para>In view all bug page, show a clip icon next to bugs that has
+                        one or more attachments. The default value is OFF.
+                        The reason why this is defaulted to OFF is that it adds an extra
+                        query for every bug dispayed in the list.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_product_version</term>
+                <listitem>
+                    <para>This controls display of the version dropdown menus in the
+                        report, view and update pages. Valid values are ON, OFF, and AUTO.
+                        ON forces the display of the dropdown even if no versions are
+                        defined. OFF will suppress the dropdown always. AUTO will suppress
+                        the dropdown, if no versions are defined for the project.
+                        Introduced in 0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_realname</term>
+                <listitem>
+                    <para>This control will replace the user's userid with their
+                        realname. If it is set to ON, and the real name fiels has been
+                        populated, the replacement will occur. It defaults to OFF.
+                        Introduced in 0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    <section>
+        <title>Time</title>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_cookie_time_length</term>
+                <listitem>
+                    <para>Time for 'permanent' cookie to live in seconds. This is what
+                        is used when a user selects "save login". Default is the equivalent
+                        of 1 year (30000000).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_wait_time</term>
+                <listitem>
+                    <para>Time to delay between page redirects (in seconds). Users can
+                        override this setting in their user preferences. Default is 2
+                        seconds.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_content_expire</term>
+                <listitem>
+                    <para>Time to wait before document is stale (in minutes). This is
+                        used in meta_inc.php. Default is 0 (expires right away).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_long_process_timeout</term>
+                <listitem>
+                    <para>This timeout is used by pages which does time consuming
+                        operations like upgrading the database. The default value of 0
+                        disables timeout. Note that this timeout is specified in
+                        seconds.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>JpGraph</title>
+        <para>Jpgraph is a package that is used to render graphs. It is
+            used by Mantis to provide the users with graphs that capture the
+            state of the bugs database. Following are the configuration options
+            that are related to configuring it:
+        </para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_use_jpgraph</term>
+                <listitem>
+                    <para>Enable the use of jpgraph. Default is OFF.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_jpgraph_path</term>
+                <listitem>
+                    <para>Path to jpgraph base directory. Don't forget to add the
+                        trailing '/'.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+        <note>
+            <para>To use the Jpgraph addon you need the
+                <ulink url="http://www.aditus.nu/jpgraph/index.php">JpGraph</ulink>
+                package. You can place the package whereever you want, but you have
+                to set the var in jpgraph.php&nbsp;eg.
+                DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");&nbsp;
+            </para>
+        </note>
+    </section>
+    
+    
+    <section>
+        <title>Date</title>
+        <para>These variables control how the date is displayed (default
+            is 'US' formatting). Go to the
+            <ulink url="http://www.php.net/manual/en/function.date.php">date()</ulink>
+            function in PHP online manual for detailed instructions on date
+            formatting.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_short_date_format</term>
+                <listitem>
+                    <para>This format is used in the bug listing pages (eg: View
+                        Bugs). Default is 'm-d-y'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_normal_date_format</term>
+                <listitem>
+                    <para>This format is used in the view/update bug pages, bug notes,
+                        manage section, and news section. Default is 'm-d-y H:i'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_complete_date_format</term>
+                <listitem>
+                    <para>This format is used on the top of each page (current time)
+                        and the emails that are sent out. Default is 'm-d-y H:i T'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>News</title>
+        <para>These options are used to control the query that selects the
+            news entries to be displayed.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_news_limit_method</term>
+                <listitem>
+                    <para>Limit the news entry that are displayed by number of entries
+                        (BY_LIMIT) or by date (BY_DATE). The default is BY_LIMIT.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_news_view_limit</term>
+                <listitem>
+                    <para>The limit for the number of news entries to be displayed.
+                        This option is only used if $g_news_limit_method is set to
+                        BY_LIMIT.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_news_view_limit_days</term>
+                <listitem>
+                    <para>Specifies the number of dates after which the news are not
+                        displayed. This option is only used if $g_news_limit_method is set
+                        to BY_DATE.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_private_news_threshold</term>
+                <listitem>
+                    <para>Specifies the access level required to view private news.
+                        The default is DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+    
+    
+    <section>
+        <title>Default Preferences</title>
+        <variablelist>
+            <varlistentry>
+                <term>$g_default_new_account_access_level</term>
+                <listitem>
+                    <para>This is the default access level users are given when their
+                        account is created by email. The default access level is REPORTER.
+                        Look in constant_inc.php for other values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_view_status</term>
+                <listitem>
+                    <para>The default viewing status for the new bug (VS_PUBLIC or
+                        VS_PRIVATE). The default is VS_PUBLIC. Introduced in
+                        0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bugnote_view_status</term>
+                <listitem>
+                    <para>The default viewing status for the new bugnote (VS_PUBLIC or
+                        VS_PRIVATE). The default is VS_PUBLIC. Introduced in
+                        0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_reminder_view_status</term>
+                <listitem>
+                    <para>The default viewing status for the new reminders (VS_PUBLIC
+                        or VS_PRIVATE). The default is VS_PUBLIC. Introduced in
+                        0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_severity</term>
+                <listitem>
+                    <para>The severity for a newly created issue. The default is
+                        MINOR. Look in constant_inc.php for other values. Introduced in
+                        0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bug_priority</term>
+                <listitem>
+                    <para>The priority for a newly created issue. The default is
+                        NORMAL. Look in constant_inc.php for other values. Introduced in
+                        0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_limit_view</term>
+                <listitem>
+                    <para>Number of bugs to show in the View Bugs page. The default
+                        value is 50.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_show_changed</term>
+                <listitem>
+                    <para>Highlight bugs that have changed during the last N hours.
+                        The default value is 6.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_hide_status_default</term>
+                <listitem>
+                    <para>Controls which issues will be displayed in the View Issues
+                        page. Default value is CLOSED, implying that all issues at "closed"
+                        or higher state will not be shown. This replaced
+                        $g_hide_closed_default in 0.19.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_min_refresh_delay</term>
+                <listitem>
+                    <para>This is the delay between automatic refreshes of the View
+                        Issues page. Make sure refresh delay in user preferences isn't too
+                        short. If a users set their preferences to be lower then it is
+                        bumped back up to this minimum value. The default value is 10
+                        minutes.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        <para>
+            These settings are used as the default values for preferences for
+            new users. Each user can override these settings through the user
+            preferences form. Default language is set to default site language
+            ($g_default_language).
+        </para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_default_advanced_report</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for
+                        reporting bugs. Default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_advanced_view</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for view
+                        bugs. Default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_advanced_update</term>
+                <listitem>
+                    <para>Default user preferences to use the advanced page for
+                        updating bugs. Default value is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_refresh_delay</term>
+                <listitem>
+                    <para>Default page refresh delay (in minutes). This is for the bug
+                        listing pages. Default value is 30 minutes.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_redirect_delay</term>
+                <listitem>
+                    <para>Default delay before a user is redirected to a page after
+                        being prompted by a message (eg: operational successful). Default
+                        value is 2 seconds.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_bugnote_order</term>
+                <listitem>
+                    <para>This controls the time order in which bug notes are
+                        displayed. It can be either ASC (oldest first, the default) or DESC
+                        (newest first).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_new$g_default_email_on_assigned$g_default_email_on_feedback$g_default_email_on_resolved$g_default_email_on_closed</term>
+                <listitem>
+                    <para>Default user preferences to enable receiving emails when a
+                        bug is set to the corresponding status. This option only has an
+                        effect if users have the required access level to receive such
+                        emails. Default value is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_reopened</term>
+                <listitem>
+                    <para>Default user preferences to enable receiving emails when
+                        bugs are re-opened. Default value is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_bugnote</term>
+                <listitem>
+                    <para>Default user preferences to enable receiving emails when
+                        bugnotes are added to bugs. Default value is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_status$g_default_email_on_priority</term>
+                <listitem>
+                    <para>Default user preferences to enable receiving emails when
+                        status or priority is changed. Default is ON. Note that this option
+                        is not implemented.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_new_minimum_severity$g_default_email_on_assigned_minimum_severity$g_default_email_on_feedback_minimum_severity$g_default_email_on_resolved_minimum_severity$g_default_email_on_closed_minimum_severity$g_default_email_on_reopened_minimum_severity$g_default_email_on_bugnote_minimum_severity</term>
+                <listitem>
+                    <para>Default user preferences to enable filtering based on issue
+                        severity. These correspond to the email_on_&lt;status&gt; settings.
+                        Default is 'any'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_bugnote_minimum_severity</term>
+                <listitem>
+                    <para>Default user preference to enable filtering based on issue
+                        severity. These corresponds to the email_on_bugnote setting.
+                        Default is 'any'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_email_on_status_minimum_severity$g_default_email_on_priority_minimum_severity</term>
+                <listitem>
+                    <para>Default user preferences to enable filtering based on issue
+                        severity. These correspond to the email_on_status and
+                        email_on_priority settings. Default is 'any'. Note that this option
+                        is not yet implemented.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        <para>See also:
+            <ulink url="manual.customizing.mantis.email.notifications.html">Email
+                Notifications
+            </ulink>
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Summary</title>
+        <para>These are the settings that are used to configuration
+            options related to the Summary page. This page contains statistics
+            about the bugs in Mantis.
+        </para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_reporter_summary_limit</term>
+                <listitem>
+                    <para>Limit how many reporters to show in the summary page. This
+                        is useful when there are dozens or hundreds of reporters. The
+                        default value is 10.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_date_partitions</term>
+                <listitem>
+                    <para>An array of date lengths to count bugs by (in days) for the
+                        summary by date. The default is to count for 1, 2, 3, 7, 30, 60,
+                        90, 180, and 365.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_summary_category_include_project</term>
+                <listitem>
+                    <para>Specifies whether category names should be preceeded by
+                        project names (eg: [Project] Category) when the summary page is
+                        viewed for all projects. This is useful in the case where category
+                        names are common accross projects. The default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_view_summary_threshold</term>
+                <listitem>
+                    <para>Specifies the access level required to view the summary
+                        page. Default is VIEWER.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Bugnote</title>
+        <variablelist>
+            
+            <varlistentry>
+                <term>$g_bugnote_order</term>
+                <listitem>
+                    <para>Order to use for sorting bugnotes by submit date. Possible
+                        values include ASC for ascending and DESC for descending order. The
+                        default value is ASC.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>File Upload</title>
+        
+        <para>Mantis allows users to upload file attachements and
+            associated them with bugs as well as projects. Bug attachments /
+            project documents can be uploaded to the webserver, database, or an
+            FTP server. When bugs are uploaded to the webserver they are
+            uploaded to the path that is configured in the project
+            properties.In case of problems getting the file upload feature to
+            work, check the following resources:
+            <ulink url="http://www.php.net/manual/en/features.file-upload.php">PHP
+                Manual
+            </ulink>
+            .
+        </para>
+        <para>Mantis FAQ</para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_allow_file_upload</term>
+                <listitem>
+                    <para>Whether to allow/disallow uploading of attachments. Default
+                        value is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_file_upload_method</term>
+                <listitem>
+                    <para>Specify the location for uploading attachements. This can be
+                        DISK, DATABASE, or FTP. In case of FTP, the files are saved on the
+                        webserver (same as disk) as well as on the specified FTP server.
+                        Default value is DATABASE.
+                        In case of DISK / FTP upload methods you need to provide the
+                        webserver with write access rights to the configured upload path
+                        (configured in the project) and temporary upload path (used by
+                        PHP).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_max_file_size</term>
+                <listitem>
+                    <para>The maximum file size to allow as an attachment.
+                        You may also have to configure your php.ini file to increase the
+                        execution time, memory limit, max post size, and max upload size.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_file_upload_ftp_server</term>
+                <listitem>
+                    <para>Address of the FTP server to write to (eg: ftp.example.com).
+                        This option is only effective if upload method is FTP.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_file_upload_ftp_user</term>
+                <listitem>
+                    <para>FTP user name for account to be used in uploading files to
+                        the FTP server. This account must have read/write access to the FTP
+                        server. The default path for the account is used for uploading the
+                        files.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_file_upload_ftp_pass</term>
+                <listitem>
+                    <para>Password to use when loggin in to the FTP server.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_max_file_size</term>
+                <listitem>
+                    <para>Maximum file size that can be uploaded. Default value is
+                        about 5MB.
+                        The max file upload size is also affected by the value specified in
+                        php.ini. The PHP value is usually defaulted to 2MB.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allowed_files</term>
+                <listitem>
+                    <para>Files that are allowed. Separate items by commas. eg.
+                        "zip,bmp,gif,jpg,txt" If $g_allowed_files is filled in NO other
+                        file types will be allowed. If empty it will assume any files are
+                        accepted that pass the $g_disallowed_files list.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_disallowed_files</term>
+                <listitem>
+                    <para>Files that are not allowed. Separate items by commas. eg.
+                        "php,php3,phtml,html,class,java,exe,pl" $g_disallowed_files takes
+                        precedence over $g_allowed_files.
+                        It is recommended to disable all extensions that can be executed by
+                        your server.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_document_files_prefix</term>
+                <listitem>
+                    <para>Prefix to give to uploaded files when saved to the upload
+                        directory. This is used for documents that are attached to projects
+                        in order to be able to differentiate them from files that are
+                        attached to bugs. The name of the file has the following format
+                        prefix-projectcode-filename. The default value is 'doc'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_preview_attachments_inline_max_size</term>
+                <listitem>
+                    <para>This feature applies to bmp, jpg, gif, and png files that
+                        are attached to bugs. If the file size is smaller than the
+                        specified values, the actual image is also previewed with the bugs.
+                        This feature can be disabled by setting the max size to 0. The
+                        default value is 0.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>HTML</title>
+        
+        <variablelist> 
+            <varlistentry>
+                <term>$g_allow_html_tags</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. Allow specified HTML tags to be
+                        used.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_html_tags</term>
+                <listitem>
+                    <para>This is the list of HTML tags that are allowed.Do NOT
+                        include href or img tags here.Do NOT include tags that have
+                        parameters (eg. )The HTML code is allowed to enter the database as
+                        is. The $g_allow_href_tags does not have to be enabled to make URL
+                        links. The package will automatically hyperlink properly formatted
+                        URLs&nbsp;eg. http://blah.blah/ or
+                        mailto://me@more.com/&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_href_tags</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. Allow A HREF tags.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_img_tags</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. NOT ENABLED</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_primary_table_tags</term>
+                <listitem>
+                    <para>Dropped in 0.19.0. This is inserted into the outermost
+                        tables for tags like border, cellspacing, ...
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_hr_size</term>
+                <listitem>
+                    <para>hr size.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_hr_width</term>
+                <listitem>
+                    <para>hr width. Leave off the percentage (%) symbol.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bottom_include_page</term>
+                <listitem>
+                    <para>If this page eixsts it will be displayed at the bottom of
+                        every page. It makes a good company branding include page.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_top_include_page</term>
+                <listitem>
+                    <para>If this page eixsts it will be displayed at the top of every
+                        page. It makes a good company branding include page.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_css_include_file</term>
+                <listitem>
+                    <para>Set this to point to the CSS file of your choice.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_meta_include_file</term>
+                <listitem>
+                    <para>Set this to point to the META tag file of your
+                        choice.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_main_menu_custom_options</term>
+                <listitem>
+                    <para>This option will add custom options to the main menu. It is
+                        an array of arrays listing the caption, access level required, and
+                        the link to be executed. For example:
+                        $g_main_menu_custom_options = array( array( "My Link", MANAGER,
+                        'my_link.php' ), array( "My Link2", ADMINISTRATOR, 'my_link2.php' )
+                        );
+                        Note that if the caption is found in custom_strings_inc.php, then
+                        it will be replaced by the translated string. Options will only be
+                        added to the menu if the current logged in user has the appropriate
+                        access level.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Authentication</title>
+        <variablelist> 
+            <varlistentry>
+                <term>$g_login_method</term>
+                <listitem><para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>MD5</para>
+                            </listitem>
+                            <listitem>
+                                <para>LDAP</para>
+                            </listitem>
+                            <listitem>
+                                <para>PLAIN</para>
+                            </listitem>
+                            <listitem>
+                                <para>CRYPT</para>
+                            </listitem>
+                            <listitem>
+                                <para>CRYPT_FULL_SALT</para>
+                            </listitem>
+                            <listitem>
+                                <para>BASIC_AUTH</para>
+                            </listitem>
+                            <listitem>
+                                <para>Some systems (mostly non-unix) do not have crypt support
+                                    in PHP. MD5 will accomplish almost the same thing. PLAIN is plain
+                                    text and there is no attempt to secure the password in the
+                                    database. You will not be able to easily convert between encryption
+                                    methods so this needs to be chosen at install time. CRYPT was the
+                                    default until 0.17.0; MD5 is now the default. Try CRYPT_FULL_SALT
+                                    if CRYPT is not working.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+        <para>LDAP authentication method parameters</para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_ldap_server</term>
+                <listitem>
+                    <para>The ldap server (eg:
+                        &nbsp;ldaps://ldap.example.com&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_port</term>
+                <listitem>
+                    <para>LDAP port (default 636).</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_root_dn</term>
+                <listitem>
+                    <para>&nbsp;"dc=example, dc=com"&nbsp;</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_organisation</term>
+                <listitem>
+                    <para>&nbsp;"organizationname=*Example)"&nbsp;</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_ldap_email</term>
+                <listitem>
+                    <para>Use email address in LDAP rather than the email stored in
+                        the database.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_bind_dn</term>
+                <listitem>
+                    <para>&nbsp;"cn=Manager, dc=example, dc=com"&nbsp;</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_ldap_bind_passwd</term>
+                <listitem>
+                    <para></para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Status Settings</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_bug_submit_status</term>
+                <listitem>
+                    <para>Status to assign to the bug when submitted. Default value is
+                        NEW_. Added in 0.18.1
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_assigned_status</term>
+                <listitem>
+                    <para>Status to assign to the bug when assigned. Default value is
+                        ASSIGNED. Added in 0.18.1
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_reopen_status</term>
+                <listitem>
+                    <para>Status to assign to the bug when reopened. Default value is
+                        FEEDBACK. Added in 0.18.1
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_reopen_resolution</term>
+                <listitem>
+                    <para>Resolution to assign to the bug when reopened. Default value
+                        is REOPENED. Added in 0.18.1
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_auto_set_status_to_assigned</term>
+                <listitem>
+                    <para>Automatically set status to $g_bug_assigned_status whenever
+                        a bug is assigned to a person. Installations where assigned status
+                        is to be used when the defect is in progress, rather than just put
+                        in a person's queue should set it to OFF. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_resolved_status_threshold</term>
+                <listitem>
+                    <para>Bug is resolved, ready to be closed or reopened. In some
+                        custom installations a bug maybe considered as resolved when it is
+                        moved to a custom (FIXED OR TESTED) status.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>
+                    $g_bug_readonly_status_threshold $g_update_readonly_bug_threshold
+                </term>
+                <listitem>
+                    <para>Bug becomes readonly if its status is &gt;=
+                        $g_bug_readonly_status_threshold. The bug becomes read/write again
+                        if re-opened and its status becomes less than this threshold. The
+                        default is RESOLVED. Once the bug becomes readonly, a user with an
+                        access level greater than or equal to
+                        $g_update_readonly_bug_threshold can still edit the bug. Added in
+                        0.19
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_status_enum_workflow</term>
+                <listitem>
+                    <para>'status_enum_workflow' defines the workflow, and reflects a
+                        simple 2-dimensional matrix. For each existing status, you define
+                        which statuses you can go to from that status, e.g. from NEW_ you
+                        might list statuses '10:new,20:feedback,30:acknowledged' but not
+                        higher ones.The default is no workflow, where all states are
+                        accessible from any others. Added in 0.19
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_report_bug_threshold</term>
+                <listitem>
+                    <para>This is the access level required to open a bug. The default
+                        is REPORTER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_update_bug_threshold</term>
+                <listitem>
+                    <para>This is the access level generally required to update the
+                        content of a bug. The default is UPDATER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_handle_bug_threshold</term>
+                <listitem>
+                    <para>This is the access level generally required to be access
+                        level needed to be listed in the assign to field. The default is
+                        DEVELOPER. If a more restrictive setting can be determined from
+                        $g_set_status_threshold, it will be used.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_update_bug_status_threshold $g_set_status_threshold
+                </term>
+                <listitem>
+                    <para>These settings control the access level required to promote
+                        a bug to a new status once the bug is
+                        opened.$g_set_status_threshold is an array indexed by the status
+                        value that allows a distinct setting for each status. It defaults
+                        to blank.If the appropriate status is not defined above,
+                        $g_update_bug_status_threshold is used instead. The default is
+                        DEVELOPER. Added in 0.19
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_close_immediately</term>
+                <listitem>
+                    <para>If set, bugs are allowed to be resolved and closed in one
+                        action. The default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_reporter_close</term>
+                <listitem>
+                    <para>If set, the bug reporter is allowed to close their own bugs,
+                        regardless of their access level. The default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_reporter_reopen</term>
+                <listitem>
+                    <para>If set, the bug reporter is allowed to reopen their own bugs
+                        once resolved, regardless of their access level. This allows the
+                        reporter to disagree with the resolution. The default is
+                        ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+        <para>See also:
+            <ulink url="manual.customizing.mantis.customizing.status.values.html">Customizing
+                Status Values
+            </ulink>
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Filters</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_filter_by_custom_fields</term>
+                <listitem>
+                    <para>Show custom fields in the filter dialog and use these in
+                        filtering. Defaults to ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_filter_custom_fields_per_row</term>
+                <listitem>
+                    <para>The number of custom fields to display per row. The default
+                        is 7. The value should be greater than or equal to 7.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_view_filters = SIMPLE_DEFAULT;</term>
+                <listitem>
+                    <para>Controls the display of the filter pages. Possible values
+                        are:
+                        <itemizedlist>
+                            <listitem>
+                                <para>SIMPLE_ONLY - only simple view</para>
+                            </listitem>
+                            <listitem>
+                                <para>ADVANCED_ONLY - only advanced view (allows multiple value
+                                    selections)
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>SIMPLE_DEFAULT - defaults to simple view, but shows a
+                                    link for advanced
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>ADVANCED_DEFAULT - defaults to advanced view, but shows a
+                                    link for simple
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_dhtml_filters = OFF;</term>
+                <listitem>
+                    <para>Controls the use of DHTML filters that will display the
+                        filter in view page using DHTML and javascript. Default is OFF.
+                        This requires $g_use_javascript to ne set to ON. This may not work
+                        in all browsers as it requires xmlhttprequest
+                        functionality.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Misc</title>
+        <variablelist>
+            <varlistentry>
+                <term>$g_reopen_bug_threshold</term>
+                <listitem>
+                    <para>Obsolete in 0.19.0 - Access level needed to re-open bugs.
+                        Look in the constant_inc.php file if you want to set a different
+                        value.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_close_bug_threshold</term>
+                <listitem>
+                    <para>Obsolete in 0.19.0 - Access level needed to close bugs. Look
+                        in the constant_inc.php file if you want to set a different
+                        value.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_limit_reporters</term>
+                <listitem>
+                    <para>Limit reporters to only viewing bugs that they
+                        report.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_reporter_close</term>
+                <listitem>
+                    <para>Allow reporters to close the bugs they reported.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_close_immediately</term>
+                <listitem>
+                    <para>Allow developers and above to close bugs immediately when
+                        resolving bugs.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_bug_delete_access_level</term>
+                <listitem>
+                    <para>Allow the specified access level and above to delete
+                        bugs.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_move_access_level</term>
+                <listitem>
+                    <para>Allow the specified access level and above to move bugs
+                        between projects.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_account_delete</term>
+                <listitem>
+                    <para>Allow users to delete their own accounts.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_allow_anonymous_login</term>
+                <listitem>
+                    <para>Allow easy anonymous access.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_anonymous_account</term>
+                <listitem>
+                    <para>Set the account that users will login as. Make sure this is
+                        a viewer or reporter account.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_cvs_web</term>
+                <listitem>
+                    <para>This allows for quick linking to CVS files via CVSweb or
+                        ViewCVS.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_bug_link_tag</term>
+                <listitem>
+                    <para>If a number follows this tag it will create a link to a
+                        bug.&nbsp; eg. for # a link would be #45&nbsp;&nbsp; eg. for bug: a
+                        link would be bug:98&nbsp;
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_timer</term>
+                <listitem>
+                    <para>Time page loads. Shows at the bottom of the page.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_queries_count</term>
+                <listitem>
+                    <para>Shows the total number/unique number of queries executed to
+                        serve the page. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_queries_list</term>
+                <listitem>
+                    <para>Shows the list of all queries that are executed in
+                        chronological order from top to bottom. This option is only
+                        effective when $g_show_queries_count is ON. Default is OFF.
+                        WARNING: Potential security hazard. Only turn this on when you
+                        really need it (for debugging or profiling)
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_register_globals</term>
+                <listitem>
+                    <para>If your register_globals is Off then set this to OFF. Check
+                        your register_globals setting in php.ini or phpinfo().
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_enable_project_documentation</term>
+                <listitem>
+                    <para>Specifies whether to enable support for project documents or
+                        not. Default is ON. Introduced in 0.18.2.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Cookies</title>
+        <para>The configuration variables $g_string_cookie,
+            $g_project_cookie, $g_view_all_cookie, $g_manage_cookie are
+            calculated based on $g_cookie_prefix. When you change the cookie
+            prefix in config_inc.php, you need to follow it with a copy of the
+            four lines that calculate the names for these cookies.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_cookie_path</term>
+                <listitem>
+                    <para>This is specifies to the path under which a cookie is
+                        visible. All scripts in this directory and its sub-directories will
+                        be able to access Mantis cookies. Default value is '/'. It is
+                        recommended to set this to the actual Mantis path. Also see the
+                        <ulink url="http://www.php.net/manual/en/function.setcookie.php">http://www.php.net/manual/en/function.setcookie.php</ulink>
+                        in PHP Manual.
+                        If you are running more than one Mantis installation on the same
+                        server, it is recommended to set the cookie path in each
+                        installation to its path. This is important to stop users from one
+                        installation to get automatic access rights to other installations
+                        which have users with the same name. This used to happen in
+                        versions prior to 0.18.0.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_cookie_domain</term>
+                <listitem>
+                    <para>Unused</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_cookie_version</term>
+                <listitem>
+                    <para>Cookie version is used as a prefix for cookies that should
+                        be expire when the code is changed in a certain way. The developers
+                        would increase this version when necessary, which in effect will
+                        cause the creation of new cookies that are compatible with the new
+                        code. It is not expected for the user to need to change this
+                        setting.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_cookie_prefix</term>
+                <listitem>
+                    <para>This should be set to a unique identifier which does not
+                        include spaces. Again, this should be unique per Mantis
+                        installation, specially if the $g_cookie_path is not restricting
+                        the cookies scope to the actual Mantis directory.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Database Tables</title>
+        
+        <para>Mantis enables users to configure a table prefix for all its
+            tables. This is useful to be able to have multiple Mantis
+            installation in the same database. The advantage of that is for
+            users who are limited by their ISP to have one database.
+        </para>
+        
+        <variablelist>
+            
+            <varlistentry>
+                <term>$g_db_table_prefix</term>
+                <listitem>
+                    <para>Specifies the prefix to be use for all table names. The
+                        default value is 'mantis'. If you override the default prefix, make
+                        sure to update doc/db_generate.sql file before generating your
+                        database. The other option is to import db_generate.sql as is, then
+                        rename the tables to match the new prefix.
+                    </para>
+                    
+                    <para>The prefix is used to help make sure table names are unique.
+                        This is useful for users who are limited to one database.
+                    </para>
+                    <note><para>
+                            The table name for each of the tables is stored in a variable which
+                            is calculated based on this configuration option. If you change the
+                            prefix you have to make sure these variables are re-calculated (by
+                            adding these calculation statements to config_inc.php after
+                            assigning the new prefix). An example of these variables is:
+                            $g_mantis_bug_file_table
+                        </para>
+                    </note>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    <section>
+        <title>Speed Optimisation</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_compress_html</term>
+                <listitem>
+                    <para>This option is used to enable buffering/compression of HTML
+                        output if the user's browser supports it. Default value is ON.
+                        This option will be ignored in the following scenarios:
+                        <itemizedlist>
+                            <listitem>
+                                <para>If php.ini has zlib.output_compression
+                                    enabled.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>If php.ini has output_handler set to a
+                                    handler.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>If PHP does not include the zlib extension (PHP 4.3.0 and
+                                    later include zlib extension by default).
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        You can check the loaded modules in your PHP by running "php -m" on
+                        the command line, or by using php_info() command in a php script.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_use_persistent_connections</term>
+                <listitem>
+                    <para>Use persistent database connections, setting this to ON will
+                        open the database once per connection, rather than once per page.
+                        There might be some scalability issues here and that is why it is
+                        defaulted to OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Reminders</title>
+        
+        <para>Sending reminders is a feature where a user can notify /
+            remind other users about a bug. In the past, only selected users
+            like the managers, or developers would get notified about bugs.
+            However, these people can not invite other people (through Mantis)
+            to look at or monitor these bugs.
+        </para>
+        <para>This feature is useful if the Manager needs to get feedback
+            from testers / requirements team about a certain bug. It avoid
+            needing this person to do this manual outside Mantis. It also
+            records the history of such reminders.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_store_reminders</term>
+                <listitem>
+                    <para>Specifies if reminders should be stored as bugnotes. The
+                        bugnote will still reflect that it is a reminder and list the names
+                        of users that got it. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_reminder_recipients_monitor_bug</term>
+                <listitem>
+                    <para>Specifies if users who receive reminders about a bug, should
+                        be automatically added to the monitor list of that bug. Default is
+                        ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Bug History</title>
+        
+        
+        <para>Bug history is a feature where Mantis tracks all
+            modifications that are made to bugs. These include everything
+            starting from its creation, till it is closed. For each change, the
+            bug history will record the time stamp, user who made the change,
+            field that changed, old value, and new value.
+        </para>
+        <para>Independent of the these settings, Mantis will always track
+            the changes to a bug and add them to its history.
+        </para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_history_default_visible</term>
+                <listitem>
+                    <para>Make the bug history visible by default. If this option is
+                        not enabled, then the user will have to click on the Bug History
+                        link to see the bug history. Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_history_order</term>
+                <listitem>
+                    <para>Show bug history entries in ascending or descending order.
+                        Default value is 'ASC'.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>    
+        <title>Sponsorship</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_enable_sponsorship</term>
+                <listitem>
+                    <para>enable/disable the whole issue sponsorship feature. The
+                        default os OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_sponsorship_currency</term>
+                <listitem>
+                    <para>The currency string used for all sponsorships. The default
+                        is 'US$'.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_minimum_sponsorship_amount</term>
+                <listitem>
+                    <para>The minimum sponsorship amount that can be entered. If the
+                        user enters a value less than this, an error will be flagged. The
+                        default is 5.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_view_sponsorship_total_threshold</term>
+                <listitem>
+                    <para>The access level threshold needed to view the total
+                        sponsorship for an issue by all users. The default is
+                        VIEWER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_view_sponsorship_details_threshold</term>
+                <listitem>
+                    <para>The access level threshold needed to view the details of the
+                        sponsorship (i.e., who will donate what) for an issue by all users.
+                        The default is VIEWER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_sponsor_threshold</term>
+                <listitem>
+                    <para>The access level threshold needed to allow user to sponsor
+                        issues. The default is REPORTER. Note that sponsoring user must
+                        have their email set in their profile.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_handle_sponsored_bugs_threshold</term>
+                <listitem>
+                    <para>The access level required to be able to handle sponsored
+                        issues. The default is DEVELOPER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_assign_sponsored_bugs_threshold</term>
+                <listitem>
+                    <para>The access level required to be able to assign a sponsored
+                        issue to a user with access level greater or equal to
+                        'handle_sponsored_bugs_threshold'. The default is MANAGER.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Source Control Integration</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_source_control_account</term>
+                <listitem>
+                    <para>Account to be used by the source control script. The account
+                        must be enabled and must have the appropriate access level to add
+                        notes to all issues even private ones (DEVELOPER access
+                        recommended). The default is '' (not set).
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_source_control_notes_view_status</term>
+                <listitem>
+                    <para>This sets whether the note added will be public or private
+                        (VS_PUBLIC or VS_PRIVATE). For open source projects it is expected
+                        that the notes be public, however, for non-open source it will
+                        probably be VS_PRIVATE. The default is VS_PRIVATE.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_source_control_set_status_to</term>
+                <listitem>
+                    <para>If set to a status, then after a checkin, the issue status
+                        is set to the specified status, otherwise if set to OFF, the issue
+                        status is not affected. The default is OFF.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_source_control_regexp</term>
+                <listitem>
+                    <para>Regular expression used to detect issue ids within checkin
+                        comments. See
+                        <ulink url="http://www.php.net/manual/en/function.preg-match-all.php">preg_match_all()</ulink>
+                        documentation for more details on setting a pattern. The default is
+                        "/\bissue [#]{0,1}(\d+)\b/i" (e.g., issue #745).
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Custom Fields</title>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_manage_custom_fields_threshold</term>
+                <listitem>
+                    <para>Access level needed to manage custom fields. The default is
+                        ADMINISTRATOR.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_custom_field_link_threshold</term>
+                <listitem>
+                    <para>Access level needed to link a custom field to a project. The
+                        default is MANAGER.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$$g_custom_field_edit_after_create</term>
+                <listitem>
+                    <para>This flag determines whether to start editng a custom field
+                        immediately after creating it, or return to the definition list.
+                        The default is ON (edit the custom field after creating).
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>My View Settings</title>
+        
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_my_view_boxes</term>
+                <listitem>
+                    <para>This is an array of values defining the order that the boxes
+                        to be shown. A box that is not to be shown can have its value set
+                        to 0. The default is:
+                        <programlisting>$g_my_view_boxes = array ( 'assigned' =&gt; '1',
+                            'unassigned' =&gt; '2',
+                            'reported' =&gt; '3',
+                            'resolved' =&gt; '4',
+                            'recent_mod' =&gt; '5',
+                            'monitored' =&gt; '6'
+                            );
+                        </programlisting>
+                        If you want to change the definition, copy the default value and
+                        apply the changes.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_my_view_bug_count</term>
+                <listitem>
+                    <para>Number of bugs shown in each box. The default is 10.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_home_page</term>
+                <listitem>
+                    <para>Default page to transfer to after Login or Set Project. The
+                        default is 'my_view_page.php'. An alternative would be
+                        'view_all_bugs_page.php' or 'main_page.php'.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>Relationships</title>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_enable_relationship</term>
+                <listitem>
+                    <para>Enable support for bug relationships where a bug can be
+                        "related to", "parent of", "child of", or "duplicate of" another.
+                        See relationship_api.php for more details. The default is
+                        ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+    
+    
+    <section>
+        <title>System Logging</title>
+        <para>The system logging interface is used to extract detailed
+            debugging information for the Mantis system. It can also serve as
+            an audit trail for user actions.
+        </para>
+        
+        <variablelist>
+            <varlistentry>
+                <term>$g_log_level</term>
+                <listitem>
+                    <para>This controls the type of logging information recorded.
+                        Possible values include:
+                        
+                        <variablelist>
+                            <varlistentry>
+                                <term>LOG_EMAIL</term>
+                                <listitem>
+                                    <para>logs issue id, message type and recipients for all emails
+                                        sent
+                                    </para>
+                                </listitem>
+                            </varlistentry>
+                            <varlistentry>
+                                <term>LOG_EMAIL_RECIPIENT</term>
+                                <listitem>
+                                    <para>logs the details of email recipient determination. Each user
+                                        id is listed as well as why they are added, or deleted from the
+                                        recipient list
+                                    </para>
+                                </listitem>
+                            </varlistentry>
+                        </variablelist>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_log_destination</term>
+                <listitem>
+                    <para>specifies the file where the log data goes. This file must
+                        be writable by the web server userid running mantis. Right now,
+                        only "file:&lt;file path&gt;" is supported. For example,
+                        $g_log_destination = 'file:/tmp/mantis_log';
+                        See http://www.php.net/error_log for details.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+        
+    </section>
+</chapter>

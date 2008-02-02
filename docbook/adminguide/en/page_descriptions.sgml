@@ -1,0 +1,1100 @@
+<chapter>
+    <title>Page descriptions</title>
+    <section>
+        
+        <title>Login page</title>
+        
+        
+        <para>Just enter your username and password and hit the login
+            button. There is also a Save Login checkbox to have the package
+            remember that you are logged in between browser sessions. You will
+            have to have cookies enabled to login.If the account doesn't exist,
+            the account is disabled, or the password is incorrect then you will
+            remain at the login page. An error message will be displayed.The
+            administrator may allow users to sign up for their own accounts. If
+            so, a link to Signup for your own account will be available.The
+            administrator may also have annonymous login allowed. Annonymous
+            users will be logged in under a common account.You will be allowed
+            to select a project to work in after logging in. You can make a
+            project your default selection from the Select Project screen or
+            from your Account Options.SignupHere you can signup for a new
+            account. You must supply a valid email address and select a unique
+            username. Your randomly generated password will be emailed to your
+            email account. If Mantis is setup so that the email password is not
+            to be emailed, newly generated accounts will have an empty
+            password.
+        </para>
+        
+    </section>
+    
+    <section>
+        <title>Main page</title>
+        
+        <para>This is the first page you see upon logging in. It shows you
+            the latest news updates for the bugtracker. This is a simple news
+            module (based off of work by Scott Roberts) and is to keep users
+            abreast of changes in the bugtracker or project. Some news postings
+            are specific to projects and others are global across the entire
+            bugtracker. This is set at the time of posting in the Edit News
+            section.The number of news posts is controlled by a global
+            variable. When the number of posts is more than the limit, a link
+            to show "older news" is displayed at the bottom. Similarly a "newer
+            news" is displayed when you have clicked on "older news".There is
+            an Archives option at the bottom of the page to view all
+            listings.ArchivesA title/date/poster listing of ALL past news
+            articles will be listed here. Clicking on the link will bring up
+            the specified article. This listing will also only display items
+            that are either global or specific to the selected project.
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>View Bugs page</title>
+        
+        <para>Here we can view the bug listings. The page has a set of
+            viewing filters at the top and the bugs are listed below.FiltersThe
+            filters control the behavior of the bug list. The filters are saved
+            between browsing sessions but do not currently save sort order or
+            direction.If the number of bugs exceeds the "Show" count in the
+            filter a set of navigation to go to "First", "Last", "Previous",
+            "Next" and specific page numbers are added.The Search field will
+            look for simple keyword matches in the summary, description, steps
+            to reproduce, additional information, bug id, or bug text id
+            fields. It does not search through bugnotes.Bug ListThe bugs are
+            listed in a table and the attributes are listed in the following
+            order: priority, id, number of bugnotes, category, severity,
+            status, last updated, and summary. Each (except for number of
+            bugnotes) can be clicked on to sort by that column. Clicking again
+            will reverse the direction of the sort. The default is to sort by
+            last modification time, where the last modified bug appears at the
+            top.The bug id is a link that leads to a more detailed report about
+            the bug. Depending on what you have set in your Account Preferences
+            you will be sent to the simple or advanced view. You can also add
+            bugnotes here.The number in the bugnote count column will be bold
+            if a bugnote has been added in the specified time frame. The
+            addition of a bugnote will make the bugnote link of the bug appear
+            in the unvisited state.The text in the "Severity" column will be
+            bold if the severity is major, crash, or block and the bug not
+            resolved.The text in the "Updated" column will be bold if the bug
+            has changed in the last "Changed(hrs)" field which is specified in
+            the viewing filters.Each table row is color coded according to the
+            bug status. The colors can be customised through Mantis
+            <ulink url="manual.configuration.html">Configuration</ulink>
+            .Severitiesblock
+            - prevents further work/progress from being madecrash - crashes the
+            application or OSmajor - major bugminor - minor bugtweak - needs
+            tweakingtext - error in the texttrivial - being nitpickyfeature -
+            requesting new featureStatusnew - new bugsfeedback - bug requires
+            more information, the original posters should pay
+            attentionacknowledged - bug has been looked at but not confirmed or
+            assignedconfirmed - confirmed and reproducible (typically set by an
+            Updater or other Developer)assigned - assigned to a
+            Developerresolved - bug should be fixed, waiting on confirmation of
+            fixclosed - bug is closedMoving the mouse over the status text will
+            show the resolution as a title. This is rendered by some browsers
+            as a bubble and in others as a status line text.
+        </para>
+        
+    </section>
+    
+    <section>
+        
+        <title>Bug View Simple page</title>
+        
+        
+        <para>Here is the simple listing of the bug report. Most of the
+            fields are self-explanatory. "Assigned To" will contain the
+            developer assigned to handle the bug. Priority is fully functional
+            but currently does nothing of importance. Duplicate ID is used when
+            a bug is a duplicate of another. It links to the duplicate bug
+            which allows users to read up on the original bug report.Below the
+            bug report is a set of buttons that a user can select to work on
+            the issue.
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>Update Issue - brings up a page to edit all aspects of
+                    the issue
+                </para>
+            </listitem>
+            <listitem>
+                <para>Assign to - in conjunction with the dropdown list next
+                    top the button, this is a shortcut to change the assignment of an
+                    issue
+                </para>
+            </listitem>
+            <listitem>
+                <para>Change Status to - in conjunction with the dropdown list
+                    next top the button, this is a shortcut to change the status of an
+                    issue. Another page (Change Status) will be presented to allow the
+                    user to add notes or change relevant information
+                </para>
+            </listitem>
+            <listitem>
+                <para>Monitor / Unmonitor Issue - allows the user to monitor
+                    any additions to the issue by email
+                </para>
+            </listitem>
+            <listitem>
+                <para>Create Clone - create a copy of the current issue. This
+                    presents the user with a new issue reporting form with all of the
+                    information in the current issue filled in. Upon submission, a new
+                    issue, related to the current issue, will be created.
+                </para>
+            </listitem>
+            <listitem>
+                <para>Reopen Issue - Allows the user to re-open a resolved
+                    issue
+                </para>
+            </listitem>
+            <listitem>
+                <para>Move Issue - allows the user to move the issue to another
+                    project
+                </para>
+            </listitem>
+            <listitem>
+                <para>Delete Issue - Allows the user to delete the issue
+                    permanently. It is recommended against deleting bugs unless the
+                    entry is frivolous. Instead bugs should be set to resolved and an
+                    appropriate resolution category chosen.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            A panel is provided to view and update the sponsorship of an
+            issue.Another panel is provided to view, delete and add
+            relationships for an issue. Issues can have a parent/child
+            relationship, where the user is warned about resolving a parent
+            issue before all of the children are resolved. A peer relationship
+            is also possible.Below this, there may be a form for uploading file
+            attachments. The Administrator needs to configure the bugtracker to
+            handle file uploads. If uploading to disk is selected, each project
+            needs to set its own upload path.Bugnotes are shown at the bottom
+            of the bug report. A panel to add bugnotes is also shown.
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        <title>Bug View Advanced page</title>
+        
+        <para>The advanced view is much the same as the simple view with a
+            few additional fields. Here you can see Projection, ETA, Platform,
+            OS, OSBuild, Product Version, Product Build, and Steps to
+            Reproduce.
+        </para>
+        <para>See also:
+            <ulink url="manual.page.descriptions.bug.view.simple.page.html">Bug
+                View Simple page
+            </ulink>
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        <title>Bug Change Status page</title>
+        
+        
+        <para>This page is used to change the status of an issue. A user
+            can add a bugnote to describe the reason for change.In addition,
+            the following fields may be displayed for update:
+            <itemizedlist>
+                <listitem>
+                    <para>Resolution and Duplicate ID - for issues being resolved
+                        or closed
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Issue Handler (Assigned to)</para>
+                </listitem>
+                <listitem>
+                    <para>any Custom Fields that are to be visible on update or
+                        resolution
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Fixed in Version - for issues being resolved</para>
+                </listitem>
+                <listitem>
+                    <para>Close Immediately - to immediately close a resolved
+                        issue
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        
+        <title>Bug Update Simple page</title>
+        
+        <para>The layout of this page resemples the Simple Issue View
+            page, but here you can update various bug fields. The Reporter,
+            Category, Severity, and Reproducibility fields are editable but
+            shouldn't be unless there is a gross mis-categorization.Also
+            modifiable are the Assigned To, Priority, Projection, ETA,
+            Resolution, and Duplicate ID fields.As per version 0.18.0, the user
+            can also add a bugnote as part of a bug update.
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        <title>Bug Update Advanced page</title>
+        
+        <para>Similar to Bug Update Simple page but has the extra advanced
+            fields. The difference between the simple/advanced update pages
+            should be consistent with the difference between the
+            simple/advanced view pages.
+        </para>
+        
+    </section>
+    
+    
+    <section>
+        <title>My Account Page</title>
+        
+        <para>This page changes user alterable parameters for the system.
+            These selections are user specific.My AccountThis allows the user
+            to change their password, screen name, and email address. It also
+            reports the user's access levels on the current and other
+            projects.
+        </para>
+        
+        <section>
+            <title>Preferences</title>
+            <para>
+                This sets the following information:
+                <itemizedlist>
+                    <listitem>
+                        <para>Default project</para>
+                    </listitem>
+                    <listitem>
+                        <para>whether the pages used for reporting, viewing, and
+                            updating are the simple or advanced views
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>the delay in minutes between refreshes of the view all
+                            bugs page
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>the delay in seconds when redirecting from a confirmation
+                            page to the display page
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>the time order in which notes will be sorted</para>
+                    </listitem>
+                    <listitem>
+                        <para>whether to filter email messages based on type of message
+                            and severity
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>the number of notes to append to notification
+                            emails
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>the default language for the system. The additional
+                            setting of "auto" will use the browser's default language for the
+                            system.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            
+        </section>
+        <section>
+            <title>Profiles</title>
+            <para>
+                Profiles are shortcuts to define the values for Platform,
+                OS, and version. This page allows you to define and edit personal
+                shortcuts.
+            </para>
+        </section>
+    </section>
+    
+    
+    <section>
+        <title>System Management Pages</title>
+        
+        
+        <para>A number of pages exist under the "Manage" link. These will
+            only be visible to those who have an appropriate access
+            level.
+        </para>
+        
+        <section>
+            <title>Manage Users</title>
+            
+            
+            <para>This page allow an administrator to manage the users in the
+                system.It essentially supplies a list of users defined in the
+                system. The user names are linked to a page where you can change
+                the user's name, access level, and projects to which they are
+                assigned. You can also reset their passwords through this page.At
+                the top, there is also a list of new users (who have created an
+                account in the last week), and accounts where the user has yet to
+                log in.New users are created using the "Create User" link above the
+                list of existing users. Note that the username must be unique in
+                the system. Further, note that the user's real name (as displayed
+                on the screen) cannot match another user's user name.
+            </para>
+        </section>
+        
+        <section>
+            <title>Manage Projects Page</title>
+            
+            
+            <para>This page allows the user to manage the projects listed in
+                the system.Each project is listed along with a link to manage that
+                specific project. The specific project pages allow the user to
+                change:
+                <itemizedlist>
+                    <listitem>
+                        <para>the project name</para>
+                    </listitem>
+                    <listitem>
+                        <para>the project description</para>
+                    </listitem>
+                    <listitem>
+                        <para>its status</para>
+                    </listitem>
+                    <listitem>
+                        <para>whether the project is public or private. Private
+                            projects are only visible to users who are assigned to it or users
+                            who have the access level to automatically have access to private
+                            projects (eg: administrators).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>afile directory used to store attachments for issues and
+                            documents associated with the project. This folder is located on
+                            the webserver, it can be absolute path or path relative to the main
+                            Mantis folder. Note that this is only used if the files are stored
+                            on disk or via FTP. In case of FTP, the cached version that is
+                            saved on the webserver, is stored in the specified path.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>common subprojects. These are other projects who can be
+                            considered a sub-project of this one. They can be shared amongst
+                            multiple projects. For example, a "documentation" project may be
+                            shared amongst several development projects.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>project categories. These are used to sub-divide the
+                            issues stored in the system.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>project versions. These are used to create ChangeLog
+                            reports and can be used to filter issues. They are used for both
+                            the Found In and Fixed In versions.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Custom Fields linked to this project</para>
+                    </listitem>
+                    <listitem>
+                        <para>Users linked to this project. Here is the place where a
+                            user's access level may be upgraded or downgraded depending on
+                            their particular role in the project.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        
+        <section>
+            <title>Manage Custom Fields</title>
+            
+            <para>This page is the base point for managing custom fields. It
+                lists the custom fields defined in the system. There is also a
+                place to enter a new field name to create a new field.The "Edit"
+                links take you to a page where you can define the details of a
+                custom field. These include it's name, type, value, and display
+                information. On the edit page, the following information is defined
+                to control the custom field:
+                <itemizedlist>
+                    <listitem>
+                        <para>name</para>
+                    </listitem>
+                    <listitem>
+                        <para>type. Possible values are listed below.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Value constraints (Possible values, default value,
+                            regular expression, minimum length, maximum length).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Access (who can read and write the field based on their
+                            access level).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Display control (where the field will show up and must be
+                            filled in
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                All fields are compared in length to be greater than or equal to
+                the minimum length, and less than or equal to the manimum length,
+                unless these values are 0. If the values are 0, the check is
+                skipped. All fields are also compared against the regular
+                expression. If the value matches the expression, then the value is
+                stored. For example, the expression "/^-?([0-9])*$/" can be used to
+                constrain an integer.The table below describes the field types and
+                the value constraints.
+            </para>
+            <informaltable>
+                <tgroup cols="3"><tbody>
+                        <row>
+                            <entry>Type</entry>
+                            <entry>Field Contents</entry>
+                            <entry>Value Constraints</entry>
+                        </row>
+                        <row>
+                            <entry>String</entry>
+                            <entry>text string up to 255 characters</entry>
+                            <entry></entry>
+                        </row>
+                        <row>
+                            <entry>Numeric</entry>
+                            <entry>an integer</entry>
+                            <entry></entry>
+                        </row>
+                        <row>
+                            <entry>Float</entry>
+                            <entry>a floating point number</entry>
+                            <entry></entry>
+                        </row>
+                        <row>
+                            <entry>Enumeration</entry>
+                            <entry>one of a list of text strings</entry>
+                            <entry>Enter the list of text strings separated by "|" (pipe
+                                character) in the Possible Values field. The Default value should
+                                match one of these strings as well. This will be displayed as a
+                                dropdown menu.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Email</entry>
+                            <entry>an email address string up to 255 characters</entry>
+                            <entry>When displayed, the value will also be encapsulated in a
+                                mailto: reference.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Checkbox</entry>
+                            <entry>zero or more of a list of text strings</entry>
+                            <entry>Enter the list of text strings separated by "|" (pipe
+                                character) in the Possible Values field. The Default value should
+                                match one of these strings as well. This will be displayed as a
+                                list of text strings with a checkbox beside them.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>List</entry>
+                            <entry>one of a list of text strings</entry>
+                            <entry>Enter the list of text strings separated by "|" (pipe
+                                character) in the Possible Values field. The Default value should
+                                match one of these strings as well. This will be displayed as a
+                                multi-line dropdown menu.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Multiselection List</entry>
+                            <entry>zero or more of a list of text strings</entry>
+                            <entry>Enter the list of text strings separated by "|" (pipe
+                                character) in the Possible Values field. The Default value should
+                                match one of these strings as well. This will be displayed as a
+                                multi-line dropdown menu.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Date</entry>
+                            <entry>text string defining a date</entry>
+                            <entry>This is displayed as a set of dropdown menus for day, month,
+                                and year. Defaults should be defined in yyyy-mm-dd format.
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable>
+            
+            <para>
+                The display entries are used as follows:
+                <informaltable>
+                    <tgroup cols="2"><tbody>
+                            <row>
+                                <entry>Entry</entry>
+                                <entry>Meaning</entry>
+                            </row>
+                            <row>
+                                <entry>Display Only On Advanced Page</entry>
+                                <entry>If checked, the field will NOT be shown on the simple bug
+                                    displays
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Display When Reporting Issues</entry>
+                                <entry>If checked, the field will be shown on the report issues
+                                    displays
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Display When Updating Issues</entry>
+                                <entry>If checked, the field will NOT be shown on the update issue
+                                    and change status displays
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Display When Resolving Issues</entry>
+                                <entry>If checked, the field will NOT be shown on the update issue
+                                    displays and change status displays, if the new status is
+                                    resolved.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Display When Closing Issues</entry>
+                                <entry>If checked, the field will NOT be shown on the update issue
+                                    displays and change status displays, if the new status is
+                                    closed.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Required On Report</entry>
+                                <entry>If checked, the field must be filled in on the issue
+                                    reports.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Required On Update</entry>
+                                <entry>If checked, the field must be filled in on the update issue
+                                    and change status displays.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Required On Resolve</entry>
+                                <entry>If checked, the field must be filled in on the update issue
+                                    and change status displays, if the new status is resolved.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Required On Close</entry>
+                                <entry>If checked, the field must be filled in on the update issue
+                                    and change status displays, if the new status is closed.
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </para>
+            
+            <para>Notes on Display
+                <itemizedlist>
+                    <listitem>
+                        <para>Be careful not to set both a required attribute and show
+                            only on advanced display. It may be possible to trigger a
+                            validation error that the user cannot recover from (i.e., field is
+                            not filled in).
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        
+        
+        <section>
+            <title>Manage Global Profiles</title>
+            
+            <para>This page allows the definition of global profiles
+                accessible to all users of the system. It is similar to the user
+                definition of a profile consisting of Platform, OS and
+                Version.
+            </para>
+        </section>
+        
+        
+        <section>
+            <title>Manage Configuration</title>
+            
+            
+            <para>This set of pages control the configuration of the Mantis
+                system. Note that the configuration items displayed may be on a
+                project by project basis.These pages serve two purposes. First,
+                they will display the settings for the particular aspects of the
+                system. If authorized, they will allow a user to change the
+                parameters. They also have settings for what access level is
+                required to change these settings ON A PROJECT basis. In general,
+                this should be left alone, but administrators may want to delegate
+                some of these settings to managers.
+            </para>
+            
+            <section>
+                
+                <title>Workflow Thresholds</title>
+                
+                
+                <para>This page covers the adjustment of the settings for many of
+                    the workflow related parameters. For most of these, the fields are
+                    self explanatory and relate to a similarly named setting in the
+                    configuration file. At the right of each row is a selector that
+                    allows the administrator to lower the access level required to
+                    change the particular parameter.The values changeable on this page
+                    are:
+                </para>
+                
+                <formalpara><title>Issues</title>
+                <para><informaltable>
+                    <tgroup cols="3"><tbody>
+                            <row>
+                                <entry>Title</entry>
+                                <entry>Variable</entry>
+                                <entry>Description</entry>
+                            </row>
+                            <row>
+                                <entry>Report an Issue</entry>
+                                <entry>$g_report_bug_threshold</entry>
+                                <entry>threshold to report an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Status to which a new issue is set</entry>
+                                <entry>$g_bug_submit_status</entry>
+                                <entry>status issue is set to when submitted</entry>
+                            </row>
+                            <row>
+                                <entry>Update an Issue</entry>
+                                <entry>$g_update_bug_threshold</entry>
+                                <entry>threshold to update an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Allow Issue to be closed on Resolve</entry>
+                                <entry>$g_allow_close_immediately</entry>
+                                <entry>allow close immediately on resolve</entry>
+                            </row>
+                            <row>
+                                <entry>Allow Reporter to close an issue</entry>
+                                <entry>$g_allow_reporter_close</entry>
+                                <entry>allow reporter to close issues they reported</entry>
+                            </row>
+                            <row>
+                                <entry>Monitor an issue</entry>
+                                <entry>$g_monitor_bug_threshold</entry>
+                                <entry>threshold to monitor an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Handle Issue</entry>
+                                <entry>$g_handle_bug_threshold</entry>
+                                <entry>threshold to handle (be assigned) an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Assign Issue</entry>
+                                <entry>$g_update_bug_assign_threshold</entry>
+                                <entry>threshold to be in the assign to list</entry>
+                            </row>
+                            <row>
+                                <entry>Move Issue</entry>
+                                <entry>$g_move_bug_threshold</entry>
+                                <entry>threshold to move an issue to another project. This setting
+                                    is for all projects.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Delete Issue</entry>
+                                <entry>$g_delete_bug_threshold</entry>
+                                <entry>threshold to delete an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Reopen Issue</entry>
+                                <entry>$g_reopen_bug_threshold</entry>
+                                <entry>threshold to reopen an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Allow reporter to reopen Issue</entry>
+                                <entry>$g_allow_reporter_reopen</entry>
+                                <entry>allow reporter to reopen issues they reported</entry>
+                            </row>
+                            <row>
+                                <entry>Status to which a reopened Issue is set</entry>
+                                <entry>$g_bug_reopen_status</entry>
+                                <entry>status issue is set to when reopened</entry>
+                            </row>
+                            <row>
+                                <entry>Resolution to which a reopened Issue is set</entry>
+                                <entry>$g_bug_reopen_resolution</entry>
+                                <entry>resolution issue is set to when reopened</entry>
+                            </row>
+                            <row>
+                                <entry>Status where an issue is considered resolved</entry>
+                                <entry>$g_bug_resolved_status_threshold</entry>
+                                <entry>status where bug is resolved</entry>
+                            </row>
+                            <row>
+                                <entry>Status where an issue becomes read-only</entry>
+                                <entry>$g_bug_readonly_status_threshold</entry>
+                                <entry>status where bug is read-only (see
+                                    update_readonly_bug_threshold)
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Update readonly issue</entry>
+                                <entry>$g_update_readonly_bug_threshold</entry>
+                                <entry>threshold to update an issue marked as read-only</entry>
+                            </row>
+                            <row>
+                                <entry>Update Issue Status</entry>
+                                <entry>$g_update_bug_status_threshold</entry>
+                                <entry>threshold to update an issue's status</entry>
+                            </row>
+                            <row>
+                                <entry>View Private Issues</entry>
+                                <entry>$g_private_bug_threshold</entry>
+                                <entry>threshold to view a private issue</entry>
+                            </row>
+                            <row>
+                                <entry>Set View Status</entry>
+                                <entry>$g_set_view_status_threshold</entry>
+                                <entry>threshold to set an issue to Private/Public</entry>
+                            </row>
+                            <row>
+                                <entry>Update View Status</entry>
+                                <entry>$g_change_view_status_threshold</entry>
+                                <entry>threshold needed to update the view status while updating a
+                                    bug or a bug note
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Show list of users monitoring issue</entry>
+                                <entry>$g_show_monitor_list_threshold</entry>
+                                <entry>threshold to see who is monitoring an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Set status on assignment of handler</entry>
+                                <entry>$g_auto_set_status_to_assigned</entry>
+                                <entry>change status when an issue is assigned</entry>
+                            </row>
+                            <row>
+                                <entry>Status to set auto-assigned issues to</entry>
+                                <entry>$g_bug_assigned_status</entry>
+                                <entry>status issue is set to when assigned</entry>
+                            </row>
+                            <row>
+                                <entry>Limit reporter's access to their own issues</entry>
+                                <entry>$g_limit_reporters</entry>
+                                <entry>reporters can see only issues they reported. This setting is
+                                    for all projects.
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable></para>
+                </formalpara>
+                
+                <formalpara><title>Notes</title>
+                <para>
+                <informaltable>
+                    <tgroup cols="3"><tbody>
+                            <row>
+                                <entry>Title</entry>
+                                <entry>Variable</entry>
+                                <entry>Description</entry>
+                            </row>
+                            <row>
+                                <entry>Add Notes</entry>
+                                <entry>$g_add_bugnote_threshold</entry>
+                                <entry>threshold to add a bugnote</entry>
+                            </row>
+                            <row>
+                                <entry>Update Notes</entry>
+                                <entry>$g_update_bugnote_threshold</entry>
+                                <entry>threshold to edit a bugnote</entry>
+                            </row>
+                            <row>
+                                <entry>Allow users to edit their own bugnotes</entry>
+                                <entry>$g_bugnote_allow_user_edit_delete</entry>
+                                <entry>can a user edit/delete their own bugnotes</entry>
+                            </row>
+                            <row>
+                                <entry>Delete Note</entry>
+                                <entry>$g_delete_bugnote_threshold</entry>
+                                <entry>threshold to delete a bugnote</entry>
+                            </row>
+                            <row>
+                                <entry>View private notes</entry>
+                                <entry>$g_private_bugnote_threshold</entry>
+                                <entry>threshold to view a private bugnote</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable></para>
+                </formalpara>
+               
+                <formalpara>
+                    <title>Others</title>
+                    <para>
+                <informaltable>
+                    <tgroup cols="3"><tbody>
+                            <row>
+                                <entry>View Change Log</entry>
+                                <entry>$g_view_changelog_threshold</entry>
+                                <entry>threshold to view the changelog</entry>
+                            </row>
+                            <row>
+                                <entry>View Assigned To</entry>
+                                <entry>$g_view_handler_threshold</entry>
+                                <entry>threshold to see who is handling an issue</entry>
+                            </row>
+                            <row>
+                                <entry>View Issue History</entry>
+                                <entry>$g_view_history_threshold</entry>
+                                <entry>threshold to view the issue history</entry>
+                            </row>
+                            <row>
+                                <entry>Send Reminders</entry>
+                                <entry>$g_bug_reminder_threshold</entry>
+                                <entry>threshold to send a reminder</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable></para>
+                </formalpara>
+                
+            </section>
+            
+            <section>
+                <title>Workflow Transitions</title>
+                
+                <para>This page covers the status workflow. For most of these, the
+                    fields are self explanatory and relate to a similarly named setting
+                    in the configuration file. At the right of each row is a selector
+                    that allows the administrator to lower the access level required to
+                    change the particular parameter.The values changeable on this page
+                    are:
+                </para>
+                <table>
+                    <title>Issues</title>
+                    <tgroup cols="3"><tbody>
+                            <row>
+                                <entry>Title</entry>
+                                <entry>Variable</entry>
+                                <entry>Description</entry>
+                            </row>
+                            <row>
+                                <entry>Status to which a new issue is set</entry>
+                                <entry>$g_bug_submit_status</entry>
+                                <entry>status issue is set to when submitted</entry>
+                            </row>
+                            <row>
+                                <entry>Status where an issue is considered resolved</entry>
+                                <entry>$g_bug_resolved_status_threshold</entry>
+                                <entry>status where bug is resolved</entry>
+                            </row>
+                            <row>
+                                <entry>Status to which a reopened Issue is set</entry>
+                                <entry>$g_bug_reopen_status</entry>
+                                <entry>status issue is set to when reopened</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <para>
+                    The matrix that follows has checkmarks where the transitions are
+                    allowed from the status on the left edge to the status listed
+                    across the top. This corresponds to the $g_enum_workflow array.At
+                    the bottom, there is a list of access levels that are required to
+                    change the status to the value listed across the top. This can be
+                    used, for instance, to restrict those who can close an issue to a
+                    specific level, say a manager. This corresponds to the
+                    $g_set_status_threshold array and the $g_report_bug_threshold
+                    setting.
+                </para>
+            </section>
+            
+            
+            <section>
+                <title>Email Notifications</title>
+                
+                <para>This page sets the system defaults for sending emails on
+                    issue related events.Mantis uses flags and a threshold system to
+                    generate emails on events. For each new event, email is sent to:
+                    <itemizedlist>
+                        <listitem>
+                            <para>the reporter</para>
+                        </listitem>
+                        <listitem>
+                            <para>the handler (or Assigned to)</para>
+                        </listitem>
+                        <listitem>
+                            <para>anyone monitoring the bug</para>
+                        </listitem>
+                        <listitem>
+                            <para>anyone who has ever added a bugnote the bug</para>
+                        </listitem>
+                        <listitem>
+                            <para>anyone assigned to the project whose access level matches
+                                a range
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    From this list, those recipients who meet the following criteria
+                    are eliminated:
+                    <itemizedlist>
+                        <listitem>
+                            <para>the originator of the change, if $g_email_receive_own is
+                                OFF
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>the recipient either no longer exists, or is
+                                disabled
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>the recipient has turned their email_on_&lt;new
+                                status&gt; preference OFF
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>the recipient has no email address extered</para>
+                        </listitem>
+                    </itemizedlist>
+                    The matrix on this page selects who will receive messages for each
+                    of the events listed down the left hand side. The first four
+                    columns correspond to the first four points listed above. The next
+                    columns correspond to the access levels defined. Note that because
+                    a minimum and maximum threshold are used, a discontinuous selection
+                    is not allowed.
+                </para>
+            </section>
+        </section>
+    </section>
+    
+    <section>
+        <title>Monitor Bug</title>
+        
+        <para>The monitor issues feature allows users to subscribe to
+            certain issues and hence get copied on all notification emails that
+            are sent for these issues.Depending on the configuration, sending a
+            reminder to a user about an issue can add this issue to the user's
+            list of monitored bugs.Users who reported the issue or are assigned
+            the issue typically don't need to monitor the issue to get the
+            notifications. This is because by default they get notified on
+            changes related to the issue anyway. However, administrators can
+            change the configuration to disable notifications to reporters or
+            handlers in specific scenarios.
+        </para>
+    </section>
+    
+    <section>
+        <title>Reopen Bug</title>
+        
+        <para>Re-open bug button is visible in the bug view pages if the
+            user has the appropriate access level and the bug is
+            resolved/closed. Re-opening a bug will allow users to enter a
+            bugnotes for the re-opening reason. The bug will automatically be
+            put into the Feedback status.
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Delete Bug</title>
+        
+        
+        <para>The delete bugs button appears on the bug view pages for the
+            users who have the appropriate access level. This allows you to
+            delete an existing bug. This should only be used on frivolous or
+            test bugs. A confirmation screen will prompt you if you really want
+            to delete the bug. Updaters, Developers, Managers, and
+            Administrators can remove bugs (you can also configure
+            this).
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Close Bug</title>
+        
+        <para>This is a button that appears on the bug view pages for
+            users that are authorized to close bugs. Depending on the
+            configuration, users may be able to close bugs without having to
+            resolve them first, or may be able to only close resolved bugs.
+            After the button is clicked, the user is redirected to a page where
+            a bugnote maybe added.
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Assign to Me</title>
+        
+        <para>This button appears in the bug view pages in case of users
+            with access level that is equal to handle_bug_threshold or higher.
+            When this button is clicked the bug is assigned to the
+            user.
+        </para>
+    </section>
+    
+    <section>
+        <title>Resolve Bug</title>
+        
+        
+        <para>This option on the View Bugs page allows you to resolve the
+            bug. It will lead you to a page where you can set the resolution
+            state and a duplicate id (if applicable). After choosing that the
+            user can choose to enter a bugnote detailing the reason for the
+            closure. The bug is then set to the Resolved state. The reporter
+            should check off on the bug by using the
+            <ulink url="manual.page.descriptions.close.bug.html">Close
+                Bug
+            </ulink>
+            button.
+        </para>
+    </section>
+    
+    <section>
+        
+        <title>News Syndication</title>
+        
+        
+        <para>News syndication was added in Mantis 0.18.2. The syndication
+            is done using the RSS v2.0 protocol.Up until Mantis 1.0.x releases,
+            the news syndication were only available for:
+            <itemizedlist>
+                <listitem>
+                    <para>Public Projects</para>
+                </listitem>
+                <listitem>
+                    <para>Installations with anonymous access</para>
+                </listitem>
+            </itemizedlist>
+            If the above two conditions are not satisfied, then an "Access
+            Denied" message will be prompted.In Mantis 1.1, support for
+            authenticated news feeds was added. Authenticated feeds takes a
+            user name and a key token that are used to authenticate the user
+            and generate the feed results in the context of the user's access
+            rights (i.e. the same as what the user would see if they were to
+            logged into Mantis).To get access to the News RSS as anonymous
+            user, visit the following
+            page:&nbsp;http://www.example.com/mantis/news_rss.php&nbsp;While a
+            user is logged in, the RSS links provided in the UI will always
+            provide links to the authenticated feeds, if no user is logged in
+            (i.e. anonymous), then anonymous links will be provided.
+        </para>
+    </section>
+</chapter>

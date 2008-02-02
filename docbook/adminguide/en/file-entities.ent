@@ -1,0 +1,5 @@
+<!ENTITY about SYSTEM "about.sgml">
+<!ENTITY installation SYSTEM "installation.sgml">
+<!ENTITY configuration SYSTEM "configuration.sgml">
+<!ENTITY pagedescriptions SYSTEM "page_descriptions.sgml">
+<!ENTITY customizing SYSTEM "customizing_mantis.sgml">

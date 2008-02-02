@@ -1,0 +1,416 @@
+<chapter>
+    <title>Installation</title>
+    
+    
+    <para>Following are the steps for a new Mantis installation:</para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <ulink url="manual.about.mantis.download.html">Download</ulink>
+                Mantis
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Go through Mantis <ulink url="manual.configuration.html">Configuration</ulink>
+                and set the database options + whatever options where you need to
+                override the default values.
+            </para>
+        </listitem>
+        <listitem>
+            <para>Test your configuration through the admin
+                folder
+            </para>
+        </listitem>
+        <listitem>
+            <para>Create a new administrator account and remove the
+                standard user 'administrator'
+            </para>
+        </listitem>
+    </itemizedlist>
+    
+    <para>Following are the steps to upgrade a Mantis installation:See
+        <ulink url="manual.installation.upgrading.html">Upgrading</ulink>.The
+        following details the basic steps for installation on any system.
+        Theinstructions may seem unix-centric but should work fine on
+        Windows systems.Barring complications, it should take you about
+        10-20 minutes to install,configure, and be using Mantis.
+    </para>
+    
+    <section>
+        <title>Summary</title>
+        
+        <orderedlist>
+            <listitem>
+                <para>Tranfer files</para>
+            </listitem>
+            <listitem>
+                <para>Uncompress files</para>
+            </listitem>
+            <listitem>
+                <para>Generate database tables</para>
+            </listitem>
+            <listitem>
+                <para>Edit configuration file, if needed</para>
+            </listitem>
+            <listitem>
+                <para>PHP File extensions</para>
+            </listitem>
+            <listitem>
+                <para>Login</para>
+            </listitem>
+            <listitem>
+                <para>Add projects and users</para>
+            </listitem>
+            
+            
+            <para>
+                Details for older versions of Mantis are <link linkend="older">here</link>.
+            </para>
+        </section>
+         
+        
+        <section>
+            <title>Details for New Installations of v1.0.0a2 or later</title>
+            
+            <orderedlist>
+                <listitem>
+                    <para>First, transfer the file to your webserver using whatever
+                        method you likebest (ftp, scp, etc). You will need to telnet/ssh
+                        into the server machine forthe next steps.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Next, untar/gunzip it to the directory that you want.The
+                        usual command is (1 step):
+                        tar zxvf &lt;filename.tar.gz&gt;
+                        OR (2 steps):
+                        gunzip &lt;filename.tar.gz&gt; tar xvf &lt;filename.tar&gt;
+                        Winzip, Stuffit, and other programs should also be able to
+                        handledecompression of the archive.At this point you may want to
+                        rename the directory to something simpler like'mantis'. You will
+                        use the mv command to rename a directory (Windows userssubstitute
+                        the "ren" command or use explorer).
+                        mv &lt;directoryname&gt; mantis
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Next we will create the necessary database tables and a
+                        basic configurationfile.From your web server, access
+                        http://yoursite/mantis/admin/install.phpThis page will walk through
+                        the following steps:
+                        
+                        <orderedlist>
+                            <listitem>
+                                <para>check basic parameters for the web server</para>
+                            </listitem>
+                            <listitem>
+                                <para>prompt for the database type and location, and a database
+                                    user/passwordpair. For installiion, an administrative user/password
+                                    pair can also beprovided. The operating user requires SELECT,
+                                    INSERT, UPDATE, and DELETEprivileges. For installation, INDEX,
+                                    CREATE, ALTER, and DROP privileges arealso required.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>create the database and tables.
+                                    WARNING: A DEFAULT ADMINISTRATOR level account is created. The
+                                    account name and password are administrator / root.
+                                    Use this when you first login to Mantis. Immediately go to Manage
+                                    and create at least one administrator level account. Immediately
+                                    after that DISABLE or DELETE the administrator account. You can
+                                    recreate it but you should delete the account to prevent the
+                                    cookie_string from being used to trick the package. It would be
+                                    even better to rename the account or delete it permanently.
+                                    REMEMBER: After setting up the package, REMOVE the default
+                                    administrator account.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>write a basic "config_inc.php file to define the
+                                    database.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>perform some post installation checks on the
+                                    system.
+                                </para>
+                            </listitem>
+                        </orderedlist>
+                        
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>The next part involves configuring the installation to
+                        work with yourspecific setup.Open the file in an editor and add
+                        anyother values that are required. There aremany more that you can
+                        use to customize your Mantis installation.
+                        See<ulink url="manual.configuration.html">Configuration</ulink> for
+                        in depth explanations.The file will overwrite the default values
+                        with those necessary for setup.You can load up admin/check.php to
+                        see if you set things up correctly.
+                        NOTE: check.php sometimes reports the value of
+                        register_globalsincorrectly.
+                        Create a page with this line in it: &lt;? phpinfo() ?&gt;, save
+                        itwith a .php extension and load it up in your web browser. It
+                        will, among amultitude of other things, have the correct value of
+                        register_globals that youare using.
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Mantis now uses only .php files.If your webserver is
+                        configured for other extensions (.PHP3, .PHTML) then youwill have
+                        to have the administrator add support for .PHP files. This shouldbe
+                        a trivial modification.Documentation can be found at:
+                        http://www.php.net/manual/en/installation.php
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Login to your bugtracker and go to the manage section.
+                        Click on theprojects link. You will need to ADD a new project. Then
+                        EDIT the new projectand remember to ADD at least one category.
+                        Otherwise you won't be able to addany bug reports.That should be
+                        it. You're off and running.
+                    </para>
+                </listitem>
+            </orderedlist>
+            
+        </section>
+        
+        <section id="older">
+            <title>Details for New Installations of v1.0.0a1 or earlier</title>
+            
+            <orderedlist>
+                <listitem>
+                    <para>First, transfer the file to your webserver using whatever
+                        method you likebest (ftp, scp, etc). You will need to telnet/ssh
+                        into the server machine forthe next steps.
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Next, untar/gunzip it to the directory that you want.The
+                        usual command is (1 step):
+                        tar zxvf &lt;filename.tar.gz&gt;
+                        OR (2 steps):
+                        gunzip &lt;filename.tar.gz&gt; tar xvf &lt;filename.tar&gt;
+                        Winzip, Stuffit, and other programs should also be able to
+                        handledecompression of the archive.At this point you may want to
+                        rename the directory to something simpler like'mantis'. You will
+                        use the mv command to rename a directory (Windows userssubstitute
+                        the "ren" command or use explorer).
+                        mv &lt;directoryname&gt; mantis
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Next we will create the necessary database tables. Make
+                        sure you havecreated the database ahead of time. You should know
+                        your mysql username andpassword as well.Go into the sql directory
+                        and run the following command:
+                        mysql -u&lt;username&gt; -p&lt;password&gt; &lt;databasename&gt;
+                        &lt; db_generate.sql
+                        You could also cut and paste the sql statements from
+                        db_generate.sql into apackage like phpMyAdmin or into your terminal
+                        window.e.g. if your username is bob, password is mypass, database
+                        name is bugtracker:
+                        mysql -ubob -pmypass bugtracker &lt; db_generate.sql
+                        You may require an additional host parameter if your SQL server is
+                        on anothermachine. e.g. if your server is sqlserver
+                        mysql -h sqlserver -ubob -pmypass bugtracker &lt; db_generate.sql
+                        WARNING: A DEFAULT ADMINISTRATOR level account is created. The
+                        account name and password are administrator / root. Use this when
+                        you first login to Mantis. Immediately go to Manage and create at
+                        least one administrator level account. Immediately after that
+                        DELETE the administrator account. You can recreate it but you
+                        should delete the account to prevent the cookie_string from being
+                        used to trick the package. It would be even better to rename the
+                        account or delete it permanently. REMEMBER: After setting up the
+                        package, REMOVE the default administrator account.
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>The next part involves configuring the installation to
+                        work with yourspecific setup.In the installation directory, locate
+                        config_inc.php.sample and copy it toconfig_inc.php.Open the file in
+                        an editor and edit the values to match your settings. Thesample
+                        file contains only essential settings. There are many more thatyou
+                        can use to customize your Mantis installation. See the
+                        customization.htmlfile for in depth explanations.The file will
+                        overwrite the default values with those necessary for setup.You can
+                        load up admin/check.php to see if you set things up correctly.
+                        NOTE: check.php sometimes reports the value of
+                        register_globalsincorrectly. Create a page with this line in it:
+                        &lt;? phpinfo() ?&gt;, save itwith a .php extension and load it up
+                        in your web browser. It will, among amultitude of other things,
+                        have the correct value of register_globals that youare using.
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Mantis now uses only .php files.If your webserver is
+                        configured for other extensions (.PHP3, .PHTML) then youwill have
+                        to have the administrator add support for .PHP files. This shouldbe
+                        a trivial modification.Documentation can be found at:
+                        http://www.php.net/manual/en/installation.php
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>Login to your bugtracker and go to the manage section.
+                        Click on theprojects link. You will need to ADD a new project. Then
+                        EDIT the new projectand remember to ADD at least one category.
+                        Otherwise you won't be able to addany bug reports.
+                    </para>
+                </listitem>
+            </orderedlist>
+            
+            <para>That should be it. You're off and running. For some help on custom
+                editingof the site please read the CUSTOMIZATION file.
+            </para>
+            
+            
+        </section>
+        
+        <section>
+            
+            <title>Requirements</title>
+            
+            
+            <para>The following versions are required for proper operation:</para>
+            <informaltable>
+                <tgroup cols="3"><tbody>
+                        <row>
+                            <entry>Package</entry>
+                            <entry>Minimum Version</entry>
+                            <entry>Tested with</entry>
+                        </row>
+                        <row>
+                            <entry>MySQL</entry>
+                            <entry>3.23.2</entry>
+                            <entry>4.0 and 4.1.11</entry>
+                        </row>
+                        <row>
+                            <entry>PostgreSQL (experimental)</entry>
+                            <entry>7.0</entry>
+                            <entry>8.0</entry>
+                        </row>
+                        <row>
+                            <entry>PHP</entry>
+                            <entry>4.0.6</entry>
+                            <entry>4.3.11 and 5.0.4</entry>
+                        </row>
+                        <row>
+                            <entry>Web Server</entry>
+                            <entry></entry>
+                            <entry>Apache 1.3, Apache 2.0.54, IIS 6.0</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable>
+            
+        </section>
+        
+        <section>
+            
+            <title>Backups</title>
+            
+            
+            <para>It is recommended to backup your Mantis database on a
+                regular basis. This is easy to accomplish using the mysqldump
+                command:
+                mysqldump -u&lt;username&gt; -p&lt;password&gt; &lt;database
+                name&gt; &gt; &lt;output file&gt;
+                To restore a backup you will need to have a clean database. Then
+                run:
+                mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt;
+                &lt; &lt;input file&gt;
+                You can also perform both of these tasks using
+                <ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
+                A good idea is to make a backup script and run it regularly through
+                cron or a task scheduler (for Windows see
+                <ulink url="http://www.wincron.com/">WinCron</ulink>
+                ).
+                Using the current date in the filename can prevent overwriting and
+                make cataloguing easier.
+                !!! Backups should always be performed before an upgrade !!!
+                Make sure to backup Mantis code (which includes your configs +
+                possibly customization), bug attachments / project documents, and
+                database contents.
+            </para>
+            
+        </section>
+        
+        <section>
+            
+            <title>CVS Integration</title>
+            
+            
+            <para>CVS integration allows Mantis to register commits to the CVS
+                source control system into corresponding bug notes in the issue
+                tracker.The setup requires that the mantis installation be
+                accessible on the computer running the CVS server. A copy of the
+                Mantis config_inc.php file must be present.Note that the mysql
+                database also needs to be accessible from the cvs machine. That is,
+                "localhost" for $g_hostname won't work unless CVS and Mantis are
+                hosted on the same machine.To activate the integration, the
+                following line to the cvs "commitinfo" file. (Instructions to edit
+                this file are in any number of CVS primers).
+                ALL /usr/bin/php /path_to_mantis/core/checkin.php
+                This will pass the commit message to checkin.php for all commits.
+                If the stringissue #nnnn is found in the commit message, the Mantis
+                corresponding to "nnnn" will have the CVS commit message added as a
+                bug note to the issue. Multiple issues can be listed.This feature
+                is configured through config_inc.php and through custom
+                functions.
+            </para>
+            
+            <para>See also:
+                <ulink url="manual.configuration.source.control.integration.html">Source
+                    Control Integration
+                </ulink>
+                for configuration, and
+                <ulink url="manual.customizing.mantis.custom.functions.html">Custom
+                    Functions
+                </ulink>
+            </para>
+        </section>
+        
+        <section>
+            
+            <title>Uninstall</title>
+            
+            
+            <para>
+                It is recommended that you make an backup in case you wish to use
+                your data in the future. See the
+                <ulink url="manual.installation.backups.html">Backups</ulink>
+                page for details.
+                To uninstall Mantis:
+                <itemizedlist>
+                    <listitem>
+                        <para>Delete the Mantis directory and all files and
+                            subdirectories.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Drop all Mantis tables from the database, these can be
+                            identified by the configured prefix for the installation. The
+                            default prefix is 'mantis'.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Remove any customizations or additions that you may have
+                            made.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                If you have the permissions to create/drop databases and you have a
+                specific database for Mantis that does not contain any other data,
+                you can drop the whole database.
+            </para>
+            
+        </section>
