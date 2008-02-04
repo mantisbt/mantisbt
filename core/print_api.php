@@ -129,13 +129,13 @@
 
 	
 	# Print avatar image for the given user ID
-	function print_avatar( $p_user_id ) {
+	function print_avatar( $p_user_id, $p_size = 80 ) {
 		if ( !user_exists( $p_user_id ) ) {
 			return;
 		}
 
 		if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-			$t_avatar = user_get_avatar( $p_user_id );
+			$t_avatar = user_get_avatar( $p_user_id, $p_size );
 			if ( false !== $t_avatar ) {
 				$t_avatar_url = $t_avatar[0];
 				$t_width = $t_avatar[1];

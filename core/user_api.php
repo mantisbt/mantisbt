@@ -710,13 +710,13 @@
 	* in this first implementation, only gravatar.com avatars are supported
 	* @return array|bool an array( URL, width, height ) or false when the given user has no avatar
 	*/
-	function user_get_avatar( $p_user_id ) {
+	function user_get_avatar( $p_user_id, $p_size = 80 ) {
 		$t_email = strtolower( user_get_email( $p_user_id ) );
 		if ( is_blank( $t_email ) ) {
 			$t_result = false;
 		} else {
 			$t_default_image = config_get( 'default_avatar' );
-			$t_size = 80;
+			$t_size = $p_size;
 			$t_avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5( $t_email ) .
 				"&amp;default=" . urlencode( $t_default_image ) .
 				"&amp;size=" . $t_size .
