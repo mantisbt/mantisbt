@@ -283,7 +283,7 @@
 
 		$t_bugnotes = array();
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
-			if ( $t_private_bugnote_visible || $t_bugnote['reporter_id'] == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
+			if ( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
 				# If the access level specified is not enough to see time tracking information
 				# then reset it to 0.
 				if ( !$t_time_tracking_visible ) {
