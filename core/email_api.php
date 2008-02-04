@@ -768,7 +768,7 @@
 		$mail->CharSet = $t_email_data->metadata['charset'];
 		$mail->Host     = config_get( 'smtp_host' );
 		$mail->From     = config_get( 'from_email' );
-		$mail->Sender   = escapeshellcmd( config_get( 'return_path_email' ) );
+		$mail->Sender   = config_get( 'return_path_email' );
 		$mail->FromName = config_get( 'from_name');
 
 
