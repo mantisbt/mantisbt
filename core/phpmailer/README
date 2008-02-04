@@ -2,6 +2,25 @@ PHPMailer
 Full Featured Email Transfer Class for PHP
 ==========================================
 
+** NOTE:
+
+As of November 2007, PHPMailer has a new project team headed by industry
+veteran Andy Prevost (codeworxtech). The first release in more than two
+years will focus on fixes, adding ease-of-use enhancements, provide
+basic compatibility with PHP4 and PHP5 using PHP5 backwards compatibility
+features. A new release is planned before year-end 2007 that will provide
+full compatiblity with PHP4 and PHP5, as well as more bug fixes.
+
+We are looking for project developers to assist in restoring PHPMailer to
+its leadership position. Our goals are to simplify use of PHPMailer, provide
+good documentation and examples, and retain backward compatibility to level
+1.7.3 standards.
+
+If you are interested in helping out, visit http://sourceforge.net/phpmailer 
+and indicate your interest.
+
+**
+
 http://phpmailer.sourceforge.net/
 
 This software is licenced under the LGPL.  Please read LICENSE for information on the
@@ -99,4 +118,4 @@ See ChangeLog.txt
 
 Download: http://sourceforge.net/project/showfiles.php?group_id=26031
 
-Brent R. Matzelle
+Andy Prevost

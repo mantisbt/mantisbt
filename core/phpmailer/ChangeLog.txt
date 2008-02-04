@@ -1,5 +1,73 @@
 ChangeLog
 
+Version 2.0.0 (Sun, Dec 02 2007)
+* implemented updated EncodeQP (thanks to coolbru, aka Marcus Bointon)
+* finished all testing, all known bugs corrected, enhancements tested
+- note: designed for PHP4, but will work with PHP5 (not compatible with
+  E_STRICT) ... full PHP5 version of PHPMailer released separately. 
+  PHP5 version will NOT work with PHP4.
+
+Version 2.0.0 rc2 (Fri, Nov 16 2007), interim release
+* implements new property to control VERP in class.smtp.php
+  example (requires instantiating class.smtp.php):
+  $mail->do_verp = true;
+* POP-before-SMTP functionality included, thanks to Richard Davey
+  (see class.pop3.php & pop3_before_smtp_test.php for examples)
+* included example showing how to use PHPMailer with GMAIL
+* fixed the missing Cc in SendMail() and Mail()
+
+******************
+A note on sending bulk emails:
+
+If the email you are sending is not personalized, consider using the 
+"undisclosed-recipient:;" strategy. That is, put all of your recipients
+in the Bcc field and set the To field to "undisclosed-recipients:;". 
+It's a lot faster (only one send) and saves quite a bit on resources.
+Contrary to some opinions, this will not get you listed in spam engines -
+it's a legitimate way for you to send emails.
+
+A partial example for use with PHPMailer:
+
+$mail->AddAddress("undisclosed-recipients:;");
+$mail->AddBCC("email1@anydomain.com,email2@anyotherdomain.com,email3@anyalternatedomain.com");
+
+Many email service providers restrict the number of emails that can be sent
+in any given time period. Often that is between 50 - 60 emails maximum
+per hour or per send session.
+
+If that's the case, then break up your Bcc lists into chunks that are one
+less than your limit, and put a pause in your script.
+*******************
+
+Version 2.0.0 rc1 (Thu, Nov 08 2007), interim release
+* dramatically simplified using inline graphics ... it's fully automated and requires no user input
+* added automatic document type detection for attachments and pictures
+* added MsgHTML() function to replace Body tag for HTML emails
+* fixed the SendMail security issues (input validation vulnerability)
+* enhanced the AddAddresses functionality so that the "Name" portion is used in the email address
+* removed the need to use the AltBody method (set from the HTML, or default text used)
+* set the PHP Mail() function as the default (still support SendMail, SMTP Mail)
+* removed the need to set the IsHTML property (set automatically)
+* added Estonian language file by Indrek P&auml;ri
+* added header injection patch
+* added "set" method to permit users to create their own pseudo-properties like 'X-Headers', etc.
+  example of use:
+  $mail->set('X-Priority', '3');
+  $mail->set('X-MSMail-Priority', 'Normal');
+* fixed warning message in SMTP get_lines method
+* added TLS/SSL SMTP support
+  example of use:
+  $mail = new PHPMailer();
+	$mail->Mailer = "smtp";
+	$mail->Host = "smtp.example.com";
+	$mail->SMTPSecure   = "tls"; // option
+	//$mail->SMTPSecure   = "ssl";  // option
+	...
+  $mail->Send();
+* PHPMailer has been tested with PHP4 (4.4.7) and PHP5 (5.2.7)
+* Works with PHP installed as a module or as CGI-PHP
+- NOTE: will NOT work with PHP5 in E_STRICT error mode
+
 Version 1.73 (Sun, Jun 10 2005)
 * Fixed denial of service bug: http://www.cybsec.com/vuln/PHPMailer-DOS.pdf
 * Now has a total of 20 translations

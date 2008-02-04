@@ -20,3 +20,4 @@ $PHPMAILER_LANG["file_access"] = 'Нет доступа к файлу: ';
 $PHPMAILER_LANG["file_open"] = 'Файловая ошибка: не удается открыть файл: ';
 $PHPMAILER_LANG["encoding"] = 'Неизвестный вид кодировки: ';
 ?>
+
