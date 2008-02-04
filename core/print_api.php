@@ -733,8 +733,8 @@
 	# Now that categories are identified by numerical ID, we need an old-style name
 	# based option list to keep existing filter functionality.
 	function print_category_filter_option_list( $p_category_name = '', $p_project_id = null ) {
-		$t_category_table = config_get( 'mantis_category_table' );
-		$t_project_table = config_get( 'mantis_project_table' );
+		$t_category_table = db_get_table( 'mantis_category_table' );
+		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
