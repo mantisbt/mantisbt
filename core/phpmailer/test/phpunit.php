@@ -5,7 +5,7 @@
 // Written by Fred Yankowski <fred@ontosys.com>
 //            OntoSys, Inc  <http://www.OntoSys.com>
 //
-// $Id: phpunit.php,v 1.1 2002/03/30 19:32:17 bmatzelle Exp $
+// $Id$
 
 // Copyright (c) 2000 Fred Yankowski
 
