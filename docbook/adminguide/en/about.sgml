@@ -6,31 +6,22 @@
         
         <para>Mantis is compressed in .tar.gz format which any reasonable
             decompression program can handle (Unix tar/gunzip,
-            <ulink url="http://www.winzip.com/">Winzip</ulink>
-            ,
-            <ulink url="http://www.aladdinsys.com/">StuffIt</ulink>
+            <ulink url="http://www.7-zip.org/">7-Zip</ulink>
             ).<ulink url="http://sourceforge.net/project/showfiles.php?group_id=14963">Download
                 Mantis
             </ulink>
         </para>
-        <para>Mirroring</para>
-        <para>If you choose to mirror the software, then
-            please sign up on the announcements mailing list. You should also
-            place a link back to this site. Let the project administrators know
-            so they can be aware of where mirrors are located.
-        </para>
-        
     </section>
     <section>
         <title>History</title>
-        
-        <para>Kenzaburo Ito and a friend originally created a bugtracker
+
+        <para>Kenzaburo Ito and a friend originally created a bug tracker
             as an internal tool for their pet project. A search for good, free
             packages came up with nothing suitable so they wrote their own.
             After a rewrite and cleanup it was made available to the public via
             the GNU General Public License (GPL). The GPL was chosen partly
             because of his belief that development tools should be cheap or
-            free.In 2002, Ken was joined by Jeroen Latour, Victor Boctor and
+            free. In 2002, Ken was joined by Jeroen Latour, Victor Boctor and
             Julian Fitzell to be the administrators and the core development
             team of Mantis. This marks a new era in Mantis lifetime where it is
             now a team project.
@@ -41,13 +32,11 @@
     <section>
         
         <title>About Mantis</title>
-        
-        
+
         <section>
             <title>What is it?</title>
             <para>Mantis is a web based bugtracking system. It is
-                currently in development and is considered a beta.It is written in
-                the 
+                currently in development and is considered a beta. It is written in the
                 <ulink url="http://www.php.net/">PHP</ulink>
                 scripting language and requires a
                 <ulink url="http://www.mysql.com/">MySQL</ulink>
@@ -57,12 +46,11 @@
                 under the terms of the
                 <ulink url="http://www.gnu.org/copyleft/gpl.html">GNU General
                     Public License (GPL)
-                </ulink>
-                .Mantis is free to use and
+                </ulink>.
+                Mantis is free to use and
                 modify. It is free to redistribute as long as you abide by the
                 distribution terms of the
-                <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>
-                .
+                <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>.
             </para>
             
             <section>
@@ -96,7 +84,7 @@
                         <para>Viewing filters</para>
                     </listitem>
                     <listitem>
-                        <para>PHP4</para>
+                        <para>Developed in PHP</para>
                     </listitem>
                 </itemizedlist>
                 
@@ -171,7 +159,6 @@
             
             <title>Minimum Requirements</title>
             
-            
             <para>Mantis runs on Windows, MacOS, OS/2, Linux, Solaris, the
                 BSDs, and just about anything that supports the required server
                 software.Mantis has modest software and hardware requirements. You
@@ -195,20 +182,20 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <ulink url="http://www.php.net/">PHP</ulink> 4.0.6 and
+                        <ulink url="http://www.php.net/">PHP</ulink> 5.2.x and
                         higher
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <ulink url="http://www.mysql.com/">MySQL</ulink> database
-                        3.23.2 and higher (alternate database support is planned for
-                        2.0)
+                        4.1.x and higher (MS SQL, PostgreSQL, DB2 are also supported).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Web server (<ulink url="http://www.apache.org/">Apache</ulink>, IIS, etc.)
+                        Web server (<ulink url="http://www.apache.org/">Apache</ulink>,
+                        <ulink url="http://www.microsoft.com/iis">IIS</ulink>, etc.)
                     </para>
                 </listitem>
             </itemizedlist>
@@ -277,8 +264,7 @@
     <section>
         
         <title>About the Name</title>
-        
-        
+
         <para>When initially seeking to name this project Ken ran into a
             problem every programmer encounters. What is a good name?It has to
             be descriptive, unique, and not too verbose. Additionally having
