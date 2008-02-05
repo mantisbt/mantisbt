@@ -344,6 +344,10 @@
 	# and password will be used when logging in to the SMTP server.
 	$g_smtp_username = '';
 	$g_smtp_password = '';
+	
+	# This control the connection mode to SMTP server. Can be 'ssl' or 'tls'
+	$g_smtp_connection_mode = '';
+
 
 	# It is recommended to use a cronjob or a scheduler task to send emails.  
 	# The cronjob should typically run every 5 minutes.  If no cronjob is used,

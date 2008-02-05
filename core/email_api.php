@@ -778,6 +778,10 @@
 			$mail->Password = config_get( 'smtp_password' );
 		}
 
+		if ( ! is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+			$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
+		}
+
 		if ( OFF !== $t_debug_email ) {
 			$t_message = 'To: '. $t_recipient . "\n\n" . $t_message;
 			$mail->AddAddress( $t_debug_email, '' );
