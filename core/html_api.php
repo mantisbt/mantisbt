@@ -408,7 +408,7 @@
 				if ( OFF != config_get( 'rss_enabled' ) ) {
 					# Link to RSS issues feed for the selected project, including authentication details.
 					PRINT '<a href="' . rss_get_issues_feed_url() . '">';
-					PRINT '<img src="' . helper_mantis_url( 'images/rss.gif' ) . '" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
+					PRINT '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" style="border-style: none; margin: 5px; vertical-align: middle;" />';
 					PRINT '</a>';
 				}
 
