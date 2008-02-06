@@ -412,6 +412,8 @@ function plugin_upgrade( $p_plugin ) {
 		} else {
 			return null;
 		}
+
+		$i++;
 	}
 
 	plugin_pop_current();
