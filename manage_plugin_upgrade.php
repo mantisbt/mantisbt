@@ -27,7 +27,10 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 $f_basename = gpc_get_string( 'name' );
+$t_plugin = plugin_register( $f_basename, true );
 
-$t_status = plugin_upgrade( $f_basename );
+if ( !is_null( $t_plugin ) ) {
+	$t_status = plugin_upgrade( $t_plugin );
+}
 
 print_successful_redirect( 'manage_plugin_page.php' );

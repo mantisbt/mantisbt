@@ -24,13 +24,16 @@ $f_page= gpc_get_string( 'page' );
 $t_matches = array();
 
 if ( ! preg_match( '/^([a-zA-Z0-9_-]*)\/([a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+	trigger_error( ERROR_GENERIC, ERROR );
 }
 
 $t_basename = $t_matches[1];
 $t_action = $t_matches[2];
 
-plugin_ensure_registered( $t_basename );
+global $g_plugin_cache;
+if ( !isset( $g_plugin_cache[$t_basename] ) ) {
+	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+}
 
 $t_page = $t_plugin_path.$t_basename.DIRECTORY_SEPARATOR.
 		'pages'.DIRECTORY_SEPARATOR.$t_action.'.php';

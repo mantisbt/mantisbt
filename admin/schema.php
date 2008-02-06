@@ -394,7 +394,7 @@ $upgrade[] = Array('CreateIndexSQL',Array('idx_config',db_get_table( 'mantis_con
 
 $upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_plugin_table' ), "
 	( basename, enabled ) VALUES
-	( 'format', '1' )" ) );
+	( 'MantisFormatting', '1' )" ) );
 
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' ), "inherit_global I UNSIGNED NOTNULL DEFAULT '0'" ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_hierarchy_table' ), "inherit_parent I UNSIGNED NOTNULL DEFAULT '0'" ) );

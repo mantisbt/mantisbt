@@ -69,7 +69,7 @@ function event_declare_many( $p_events ) {
  * @param string Callback function
  * @param string Plugin basename
  */
-function event_hook( $p_name, $p_callback, $p_plugin=false ) {
+function event_hook( $p_name, $p_callback, $p_plugin=0 ) {
 	global $g_event_cache;
 
 	if ( !isset( $g_event_cache[$p_name] ) ) { 
@@ -78,7 +78,7 @@ function event_hook( $p_name, $p_callback, $p_plugin=false ) {
 		return null;
 	}
 
-	$g_event_cache[$p_name]['callbacks'][$p_callback] = $p_plugin;
+	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
 }
 
 /**
@@ -86,7 +86,7 @@ function event_hook( $p_name, $p_callback, $p_plugin=false ) {
  * @param array Event name/callback pairs
  * @param string Plugin basename
  */
-function event_hook_many( $p_hooks, $p_plugin=false ) {
+function event_hook_many( $p_hooks, $p_plugin=0 ) {
 	if ( ! is_array( $p_hooks ) ) {
 		return;
 	}
@@ -152,21 +152,25 @@ function event_signal( $p_name, $p_params=null, $p_type=null ) {
  * @return multi Null if callback not found, value from callback otherwise
  */
 function event_callback( $p_event, $p_callback, $p_plugin, $p_params=null ) {
-	if ( $p_plugin !== false ) {
-		plugin_include( $p_plugin, true );
-		plugin_push_current( $p_plugin );
-	}
-
 	$t_value = null;
-	if ( function_exists( $p_callback ) ) {
-		if ( !is_array( $p_params ) ) {
-			$p_params = array( $p_params );
-		}
-		$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
+	if ( !is_array( $p_params ) ) {
+		$p_params = array( $p_params );
 	}
 
-	if ( $p_plugin !== false ) {
+	if ( $p_plugin !== 0 ) {
+		global $g_plugin_cache;
+
+		plugin_push_current( $p_plugin );
+
+		if ( method_exists( $g_plugin_cache[$p_plugin], $p_callback ) ) {
+			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback), array_merge( array( $p_event ), $p_params ) );
+		}
+
 		plugin_pop_current();
+	} else {
+		if ( function_exists( $p_callback ) ) {
+			$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
+		}
 	}
 
 	return $t_value;
@@ -180,8 +184,10 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params=null ) {
  * @param array Array of callback function/plugin basename key/value pairs
  */
 function event_type_execute( $p_event, $p_callbacks ) {
-	foreach( $p_callbacks as $t_callback => $t_plugin ) {
-		event_callback( $p_event, $t_callback, $t_plugin );
+	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
+		foreach( $t_callbacks as $t_callback ) {
+			event_callback( $p_event, $t_callback, $t_plugin );
+		}
 	}
 }
 
@@ -213,8 +219,10 @@ function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
 	}
 
 	$t_output = array();
-	foreach( $p_callbacks as $t_callback => $t_plugin ) {
-		$t_output[] = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
+	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
+		foreach( $t_callbacks as $t_callback ) {
+			$t_output[] = event_callback( $p_event, $t_callback, $t_plugin, $p_params );
+		}
 	}
 	if ( count( $p_callbacks ) > 0 ) {
 		echo $t_prefix, implode( $t_separator, $t_output ), $t_postfix;
@@ -233,8 +241,10 @@ function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
  */
 function event_type_chain( $p_event, $p_callbacks, $p_input ) {
 	$t_output = $p_input;
-	foreach( $p_callbacks as $t_callback => $t_plugin ) {
-		$t_output = event_callback( $p_event, $t_callback, $t_plugin, $t_output );
+	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
+		foreach( $t_callbacks as $t_callback ) {
+			$t_output = event_callback( $p_event, $t_callback, $t_plugin, $t_output );
+		}
 	}
 	return $t_output;
 }
@@ -251,8 +261,10 @@ function event_type_chain( $p_event, $p_callbacks, $p_input ) {
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {
 	$t_output = array();	
-	foreach( $p_callbacks as $t_callback => $t_plugin ) {
-		$t_output[$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );
+	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
+		foreach( $t_callbacks as $t_callback ) {
+			$t_output[$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );
+		}
 	}
 	return $t_output;
 }

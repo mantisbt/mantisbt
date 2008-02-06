@@ -180,6 +180,6 @@
 	# Plugin initialization
 	require_once( $t_core_path.'plugin_api.php' );
 	if ( !defined( 'PLUGINS_DISABLED' ) ) {
-		plugin_init_all();
+		plugin_init_installed();
 	}
 ?>

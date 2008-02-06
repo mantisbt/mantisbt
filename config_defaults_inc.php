@@ -143,6 +143,9 @@
 	# unless you moved the 'core' directory out of your webroot (recommended).
 	$g_core_path			= $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
+	# Path to class files
+	$g_class_path			= $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
+
 	# Used to link to manual for User Documentation.
 	$g_manual_url = 'http://manual.mantisbt.org/';
 

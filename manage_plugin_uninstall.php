@@ -27,10 +27,14 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 $f_basename = gpc_get_string( 'name' );
-$t_plugin_info = plugin_get_info( $f_basename );
+$t_plugin = plugin_register( $f_basename, true );
 
-helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), $t_plugin_info['name'] ), lang_get( 'plugin_uninstall' ) );
+helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), $t_plugin->name ), lang_get( 'plugin_uninstall' ) );
 
-plugin_uninstall( $f_basename );
+if ( !is_null( $t_plugin ) ) {
+	plugin_uninstall( $t_plugin );
+} else {
+	plugin_force_uninstall( $f_basename );
+}
 
 print_successful_redirect( 'manage_plugin_page.php' );
