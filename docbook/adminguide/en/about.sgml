@@ -1,17 +1,150 @@
 <chapter>
-    <title>About Mantis</title>
+    <title>About MantisBT</title>
     
     <section>
-        <title>Download</title>
-        
-        <para>Mantis is compressed in .tar.gz format which any reasonable
-            decompression program can handle (Unix tar/gunzip,
-            <ulink url="http://www.7-zip.org/">7-Zip</ulink>
-            ).<ulink url="http://sourceforge.net/project/showfiles.php?group_id=14963">Download
-                Mantis
-            </ulink>
+        <title>What is MantisBT?</title>
+
+        <para>
+            MantisBT is a web based bug tracking system that was first made
+            available to the public in November 2000.  Over time it has matured
+            and gained a lot of popularity, and now it has become one of the most
+            popular open source bug trackering systems.  MantisBT is developed 
+            in PHP, with support to multiple database backends including MySQL,
+            MS SQL, PostgreSQL and DB2.
+        </para>
+
+        <para>
+            MantisBT, as a PHP script, can run on any operating system that
+            is supported by PHP and has support for one of the DBMSes that
+            are supported.  MantisBT is known to run fine on Windows, Linux,
+            OS/2, System i and a variety of Unix operating systems.
         </para>
     </section>
+    
+    <section>
+        <title>Who should read this manual?</title>
+	
+	<para>
+	    This manual is targetted for the person responsible for evaluating,
+	    installing and maintaing MantisBT in a company. Typically we refer
+	    to this person as the MantisBT administrator.
+	</para>
+    </section>
+
+    <section>
+        <title>License</title>
+
+        <para>    
+            MantisBT is released under the terms of
+            <ulink url="http://www.gnu.org/copyleft/gpl.html">GNU General
+            Public License (GPL)</ulink>.  MantisBT is free to use and modify.
+	    It is free to redistribute as long as you abide by the distribution
+	    terms of the <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>.
+        </para>
+    </section>
+
+    <section>
+        <title>Minimum Requirements</title>
+            
+        <para>
+	    MantisBT has modest software and hardware requirements. It
+	    requires a computer that is able to run the server software.  All of the required
+            software is free for commercial or non-commercial use.  The
+	    server can be a shared public web server or a dedicated co-located box. The
+	    disk space required will depend on the size of the database,
+	    however, it is typically driven by the expected number and size of
+	    the attachments.
+        </para>
+
+        <itemizedlist>
+	    <listitem>
+                <para>Operating System: MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris, the
+                BSDs, and just about anything that supports the required server
+                software.</para>
+            </listitem>
+	    <listitem>
+	        <para>Web Server: MantisBT is mainly tested with
+                <ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
+	        <ulink url="http://www.apache.org/">Apache</ulink>.  However,
+                it is expected to work with any decent web server software.</para>
+            </listitem>
+	    <listitem>
+	        <para><ulink url="http://www.php.net/">PHP</ulink>: The web server
+                must have PHP installed on it.  It can be installed as CGI or 
+                whatever other integration technology that is supported by PHP
+                and the web server.  Required version is PHP 5.2.x or higher.</para>
+	    </listitem>
+	    <listitem>
+	        <para>Database: MantisBT requires a database to store its data. 
+                The supported DBMSes include MySQL (4.1.x or higher), MS SQL,
+                PostgreSQL and DB2.</para> 
+	    </listitem>
+	    <listitem>
+	        <para>Browser: MantisBT aims to support most of the browsers in
+		the market.  The mainly supported ones are Internet Explorer and
+		Mozilla Firefox.  However, browsers like Safari and Opera should
+		also work fine although they are not used by most developers during
+		development and testing.</para> 
+	    </listitem>
+        </itemizedList>
+    </section>
+
+    <section>
+        <title>How to get it?</title>
+
+        <para>
+            MantisBT is available in several Linux distributions
+            including: Debian, Ubuntu, Fedora, Gentoo, Frugalware and others.
+            Hence, if you are running Linux, start by checking if your distribution
+            has a package for MantisBT.  If not, or if the package is
+            not up-to-date with the latest MantisBT version, then you may want
+            to download it directly from
+            <ulink url="http://www.mantisbt.org/download.php">here</ulink>.
+        </para>
+
+        <para>
+            For Windows, Mac and other operating systems, use the link provided
+            above to download MantisBT.  The download is compressed in tar.gz 
+	    or zip format.  Both formats can be unpacked using tools like
+	    <ulink url="http://www.7-zip.org/">7-Zip</ulink> (in case of Windows).
+        </para>
+
+
+        <para>
+	    Note that at any point in time there are typically two "latest"
+	    MantisBT releases that are available for download.  The latest
+	    production release (stable), and the latest development release
+	    which can be an alpha or a release candidate.  It is not recommended
+	    to use development releases in production specially if it is still
+	    in the alpha stage unless the administrator is familiar with PHP
+	    and is able to troubleshoot and fix any issues that may arise.
+	</para>
+    </section>
+
+    <section>       
+        <title>About the Name</title>
+
+        <para>
+	    When initially seeking to name this project Ken ran into a
+            problem every programmer encounters. What is a good name?  It has to
+            be descriptive, unique, and not too verbose.  Additionally having
+            multiple meanings would be a nice touch.  Quickly
+            ruled out were php*Something* names which, incidentally, although
+            popular, do not seem to be condoned by the PHP Group
+            developers.  Drawing inspiration from Open Source projects like
+            Apache, Mozilla, Gnome, and so forth resulted in two eventual
+            choices: Dragonfly and Mantis. Dragonfly was already the name of a
+            webmail package. So the name became Mantis.  Praying Mantis are
+            insects that feed primarily on other insects and bugs. They are
+            extremely desirable in agriculture as they devour insects that feed
+            on crops. They are also extremely elegant looking creatures.  So, we
+            have a name that is fairly distinctive and descriptive in multiple
+            ways.  The BT suffix stands for "Bug Tracker" and distinguishes
+	    this project from general usage of the word Mantis.  However, over
+	    time the project was typically referred to as Mantis.
+        </para>
+    </section>
+    
     <section>
         <title>History</title>
 
@@ -23,264 +156,173 @@
             because of his belief that development tools should be cheap or
             free. In 2002, Ken was joined by Jeroen Latour, Victor Boctor and
             Julian Fitzell to be the administrators and the core development
-            team of Mantis. This marks a new era in Mantis lifetime where it is
+            team of MantisBT. This marks a new era in MantisBT lifetime where it is
             now a team project.
         </para>
-        
     </section>
     
     <section>
-        
-        <title>About Mantis</title>
-
-        <section>
-            <title>What is it?</title>
-            <para>Mantis is a web based bugtracking system. It is
-                currently in development and is considered a beta. It is written in the
-                <ulink url="http://www.php.net/">PHP</ulink>
-                scripting language and requires a
-                <ulink url="http://www.mysql.com/">MySQL</ulink>
-                database and a webserver. Mantis has been installed on Windows,
-                MacOS, OS/2, and a variety of Unix operating systems. Any web
-                browser should be able to function as a client. It is released
-                under the terms of the
-                <ulink url="http://www.gnu.org/copyleft/gpl.html">GNU General
-                    Public License (GPL)
-                </ulink>.
-                Mantis is free to use and
-                modify. It is free to redistribute as long as you abide by the
-                distribution terms of the
-                <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>.
-            </para>
-            
-            <section>
-                <title>Features and Benefits</title>
-                <itemizedlist>
-                    <listitem>
-                        <para>Free</para>
-                    </listitem>
-                    <listitem>
-                        <para>Easy to install</para>
-                    </listitem>
-                    <listitem>
-                        <para>Web based</para>
-                    </listitem>
-                    <listitem>
-                        <para>Platform independent</para>
-                    </listitem>
-                    <listitem>
-                        <para>Multiple projects</para>
-                    </listitem>
-                    <listitem>
-                        <para>Multiple languages</para>
-                    </listitem>
-                    <listitem>
-                        <para>Emailing</para>
-                    </listitem>
-                    <listitem>
-                        <para>Simple Search</para>
-                    </listitem>
-                    <listitem>
-                        <para>Viewing filters</para>
-                    </listitem>
-                    <listitem>
-                        <para>Developed in PHP</para>
-                    </listitem>
-                </itemizedlist>
-                
-            </section>
-            
-            <section>
-                <title>Goals</title>
-                
-                <para>The goals for this project are to produce and maintain a
-                    lightweight, simple bugtracking system. Additions of
-                    complexity/features are modular so that users can be shielded from
-                    unwanted clutter. Thus, much of the package has a simple version of
-                    a feature along with a more fully developed version.In the 'core'
-                    package the goal is to have the most important, most used, most
-                    time saving portions of a bugtracking system. The product is
-                    designed to be easily modifiable, customizable, and upgradeable.
-                    Anyone with intermediate PHP and MySQL experience should be able to
-                    customize Mantis to suit their needs.GuidelinesHere are some of the
-                    guidelines that are followed in Mantis:
-                </para>
-                <itemizedlist>
-                    <listitem>
-                        <para>Quick access to "What I want to do"</para>
-                    </listitem>
-                    <listitem>
-                        <para>Simple navigation</para>
-                    </listitem>
-                    <listitem>
-                        <para>Layered complexity</para>
-                    </listitem>
-                    <listitem>
-                        <para>Consistency</para>
-                    </listitem>
-                    <listitem>
-                        <para>Scale to browser window size</para>
-                    </listitem>
-                    <listitem>
-                        <para>Minimal clutter</para>
-                    </listitem>
-                    <listitem>
-                        <para>Minimal graphics</para>
-                    </listitem>
-                    <listitem>
-                        <para>No frames</para>
-                    </listitem>
-                    <listitem>
-                        <para>No animations</para>
-                    </listitem>
-                    <listitem>
-                        <para>No Javascript</para>
-                    </listitem>
-                </itemizedlist>
-            </section>
-            
-            <section>
-                <title>Versioning</title>
-                <para>The release numbering convention we use is
-                    major.minor.micro (eg. 0.15.8).Major - Indicates a very large
-                    change in the core package. Rewrites or major milestones.Minor -
-                    Significant amount of feature addition/modification. Anything that
-                    requries an ugprade script.Micro - Mostly bug fixes or minor
-                    featuresWe will release a new version for a significant bugfix as
-                    often as daily.Currently, Mantis is considered beta software.
-                    Version 1.0.0 will be used when we consider Mantis to be production
-                    quality. This means it should be feature full and stable enough for
-                    full production use.
-                </para>
-            </section>
-        </section>
-        
-        <section>
-            
-            <title>Minimum Requirements</title>
-            
-            <para>Mantis runs on Windows, MacOS, OS/2, Linux, Solaris, the
-                BSDs, and just about anything that supports the required server
-                software.Mantis has modest software and hardware requirements. You
-                need a computer to run the server software. All of the required
-                software is free for commercial or non-commercial use.The computer
-                can be a shared public web server or a dedicated co-loc box. It can
-                even run on an office machine. Any Pentium class computer should be
-                adequate for moderate usage. You'll just need enough diskspace for
-                the database to grow and enough memory to avoid virtual memory
-                thrashingDiskspaceMantis requires about 6MBs of diskspace for file
-                storage. MySQL will require additional diskspace to store the
-                issues. A typical installation with 2,000 issues and light file
-                upload usage should take up around 10-20MBs of disk space.
-                Attachments will inflate the size required according to their
-                size.
-            </para>
-        </section>
-        
-        <section>
-            <title>Software</title>
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <ulink url="http://www.php.net/">PHP</ulink> 5.2.x and
-                        higher
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <ulink url="http://www.mysql.com/">MySQL</ulink> database
-                        4.1.x and higher (MS SQL, PostgreSQL, DB2 are also supported).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Web server (<ulink url="http://www.apache.org/">Apache</ulink>,
-                        <ulink url="http://www.microsoft.com/iis">IIS</ulink>, etc.)
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </section>
-        
-        <section>
-            <title>Cost</title>
-            
-            <para>Mantis is free. The net cost to use Mantis is the time to
-                download, install, and configure the software plus any potential
-                hardware costs. Continued maintenance should be minimal unless you
-                are tweaking the package.TimeIf you've done this sort of thing
-                before it will probably take about 5-60 minutes. If not, plan on
-                around 1-8 hours depending on the problems you run into. If you're
-                unlucky then plan on more, or just give up now *wink*.PHPYou don't
-                have to know a thing about PHP to use Mantis, unless something goes
-                wrong. Then it helps to be able to tinker with PHP scripts (when
-                there's a little bug or you want to tweak something).PHP is a
-                simple scripting language and syntacticaly resembles C. It is very
-                easy to pickup and learn. In fact, it makes normally difficult
-                tasks so ridiculously easy that you'll want to use it for lots of
-                simple tasks (like washing dishes).The
-                <ulink url="http://www.php.net/manual/en/">PHP Manual</ulink>
-                is phenomenal. If you ever have a question
-                about a PHP function then run to it. The user comments always shed
-                light into issues that others like you have experienced.There are
-                many sites that offer basic tutorials for learning PHP and/or MySQL
-                (
-                <ulink url="http://www.devshed.com/">DevShed</ulink>
-                |
-                <ulink url="http://www.webmonkey.com/">WebMonkey</ulink>
-                ).
-            </para>
-        </section>
-        
-        <section>
-            <title>MySQL</title>
-            <para>Basic administration of MySQL is necessary. At a minimum you should be
-                able to:
-                <itemizedlist>
-                    <listitem>
-                        <para>Login</para>
-                    </listitem>
-                    <listitem>
-                        <para>Create a new user</para>
-                    </listitem>
-                    <listitem>
-                        <para>Give the user permissions</para>
-                    </listitem>
-                </itemizedlist>
-                <ulink url="http://www.mysql.com/doc/">MySQL.com</ulink> has
-                excellent documentation. It is also highly recommended to use
-                <ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
-                to administer your MySQL database. You can create a new database
-                and edit tables with this excellent package. All you need to do
-                beforehand is setup the database user(s).WebserverThe webserver
-                needs to be configured to handle PHP files. In Apache, this
-                monumental task requires all of one line in the configuration file.
-                There are also instructions for IIS, iPlanet/Netscape, Xitami, and
-                more. All listed at the
-                <ulink url="http://www.php.net/manual/en/">PHP Manual</ulink>
-            </para>
-        </section>
+        <title>Support</title>
+        <para>
+	TODO: forums and mailing lists.
+	</para>
     </section>
-    
-    <section>
-        
-        <title>About the Name</title>
 
-        <para>When initially seeking to name this project Ken ran into a
-            problem every programmer encounters. What is a good name?It has to
-            be descriptive, unique, and not too verbose. Additionally having
-            multiple meanings would be a nice touch or the perceptive.Quickly
-            ruled out were php*Something* names which, incidentally, although
-            popular, do not seem to be condoned by the PHP Group
-            developers.Drawing inspiration from Open Source projects like
-            Apache, Mozilla, Gnome, and so forth resulted in two eventual
-            choices: Dragonfly and Mantis. Dragonfly was already the name of a
-            webmail package. So the name became Mantis.Praying Mantis are
-            insects that feed primarily on other insects and bugs. They are
-            extremely desirable in agriculture as they devour insects that feed
-            on crops. They are also extremely elegant looking creatures.So, we
-            have a name that is fairly distinctive and descriptive in multiple
-            ways. And that is how the project was named.
+    <section>
+        <title>MantisBT News</title>
+        <para>
+	TODO: blog, twitter, announce mailing list.
+	</para>
+    </section>
+
+    <section>
+        <title>Contributing</title>
+        <para>
+	TODO: Put together a section based on the Wiki page.
+	</para>
+    </section>
+
+    <section>
+        <title>Features and Benefits</title>
+
+        <para>TODO: Revise list based on latest feature - not all features have
+	to be listed here.</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Free</para>
+            </listitem>
+            <listitem>
+                <para>Easy to install</para>
+            </listitem>
+            <listitem>
+                <para>Web based</para>
+            </listitem>
+            <listitem>
+                <para>Platform independent</para>
+            </listitem>
+            <listitem>
+                <para>Multiple projects</para>
+            </listitem>
+            <listitem>
+                <para>Multiple languages</para>
+            </listitem>
+            <listitem>
+                <para>Emailing</para>
+            </listitem>
+            <listitem>
+                <para>Simple Search</para>
+            </listitem>
+            <listitem>
+                <para>Viewing filters</para>
+            </listitem>
+            <listitem>
+                <para>Developed in PHP</para>
+            </listitem>
+        </itemizedlist>
+    </section>
+            
+    <section>
+        <title>Goals</title>
+                
+        <para>The goals for this project are to produce and maintain a
+            lightweight, simple bugtracking system. Additions of
+            complexity/features are modular so that users can be shielded from
+            unwanted clutter. Thus, much of the package has a simple version of
+            a feature along with a more fully developed version.  In the 'core'
+            package the goal is to have the most important, most used, most
+            time saving portions of a bug tracking system. The product is
+            designed to be easily modifiable, customizable, and upgradeable.
+            Anyone with intermediate PHP and MySQL experience should be able to
+            customize MantisBT to suit their needs.  Here are some of the
+            guidelines that are followed in Mantis:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>Quick access to "What I want to do?"</para>
+            </listitem>
+            <listitem>
+                <para>Simple navigation</para>
+            </listitem>
+            <listitem>
+                <para>Layered complexity</para>
+            </listitem>
+            <listitem>
+                <para>Consistency</para>
+            </listitem>
+            <listitem>
+                <para>Scale to browser window size</para>
+            </listitem>
+            <listitem>
+                <para>Minimal clutter</para>
+            </listitem>
+            <listitem>
+                <para>Minimal graphics</para>
+            </listitem>
+            <listitem>
+                <para>No frames</para>
+            </listitem>
+            <listitem>
+                <para>No animations</para>
+            </listitem>
+            <listitem>
+                <para>Work with Javascript turned off.</para>
+            </listitem>
+        </itemizedlist>
+    </section>
+            
+    <section>
+       <title>Versioning</title>
+
+       <para>
+           The release numbering convention we use is major.minor.micro (eg.
+	   1.0.8).
+       </para>
+
+       <itemizedlist>
+            <listitem>
+                <para>
+                     Major - Indicates a very large change in the core package.
+                     Rewrites or major milestones.
+                </para>
+	    </listitem>
+            <listitem>
+                <para>
+                    Minor - Significant amount of feature addition/modification.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Micro - Mostly bug fixes and maintenance releases.
+                </para>
+            </listitem>
+        </itemizedlist>
+   </section>
+
+   <section>
+        <title>Cost</title>
+            
+        <para>
+	    MantisBT is free. The net cost to use MantisBT is the time to
+            download, install, and configure the software plus any potential
+            hardware costs. Continued maintenance should be minimal unless you
+            are tweaking the package.  If you've done this sort of thing
+            before it will probably take about 5-60 minutes.  If not, plan on
+            around 1-8 hours depending on the problems you run into. You don't
+            have to know a thing about PHP to use MantisBT, unless something goes
+            wrong. Then it helps to be able to tinker with PHP scripts (when
+            there's a little bug or you want to tweak something).  PHP is a
+            simple scripting language and syntacticaly resembles C / C++. It is very
+            easy to pickup and learn.  The
+            <ulink url="http://www.php.net/manual/en/">PHP Manual</ulink>
+            is a great reference for any PHP related issue. The user comments always shed
+            light into issues that others have experienced.  There are
+            many sites that offer basic tutorials for learning PHP and/or MySQL
+            (
+            <ulink url="http://www.devshed.com/">DevShed</ulink>
+            |
+            <ulink url="http://www.webmonkey.com/">WebMonkey</ulink>
+            ).
         </para>
     </section>
-    
 </chapter>
