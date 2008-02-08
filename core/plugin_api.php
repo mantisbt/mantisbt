@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-$t_class_path = config_get( 'class_path' );
+$t_class_path = config_get_global( 'class_path' );
 require_once( $t_class_path . 'MantisPlugin.class.php' );
 
 /**
@@ -480,7 +480,7 @@ function plugin_find_all() {
  * @param string Plugin basename
  */
 function plugin_include( $p_basename ) {
-		$t_path = config_get( 'plugin_path' ) . DIRECTORY_SEPARATOR . $p_basename . DIRECTORY_SEPARATOR;
+		$t_path = config_get_global( 'plugin_path' ) . DIRECTORY_SEPARATOR . $p_basename . DIRECTORY_SEPARATOR;
 		$t_plugin_file = $t_path . $p_basename . '.php';
 
 		$t_included = false;
