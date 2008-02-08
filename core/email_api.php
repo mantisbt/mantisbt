@@ -497,6 +497,7 @@
 
 				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
+				    echo "email sent to $t_user_email<br/>";
 					# load (push) user language here as build_visible_bug_data assumes current language
 					lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
@@ -794,7 +795,18 @@
 
 		if ( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 			foreach ( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
-				$mail->AddCustomHeader( "$t_key: $t_value" );
+				switch ( $t_key ) {
+					case 'Message-ID':
+						// Overwrite default Message ID
+						$mail->set( 'MessageID', $t_value );
+						break;
+					case 'In-Reply-To':
+						$mail->AddCustomHeader( "$t_key: <{$t_value}@{$mail->Hostname}>" );
+						break;
+					default:
+						$mail->AddCustomHeader( "$t_key: $t_value" );
+						break;
+				}
 			}
 		}
 
@@ -952,9 +964,9 @@
 		$t_message_md5 = md5( $t_bug_id . $p_visible_bug_data['email_date_submitted'] );
 		$t_mail_headers = array( 'keywords' => $p_visible_bug_data['set_category'] );
 		if ( $p_message_id == 'email_notification_title_for_action_bug_submitted' ) {
-			$t_mail_headers['Message-ID'] = "<{$t_message_md5}>";
+			$t_mail_headers['Message-ID'] = $t_message_md5;
 		} else {
-			$t_mail_headers['In-Reply-To'] = "<{$t_message_md5}>";
+			$t_mail_headers['In-Reply-To'] = $t_message_md5;
 		}
 
 		# send mail
