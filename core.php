@@ -118,10 +118,34 @@
 	require_once( $t_core_path.'lang_api.php' );
 
 	# error functions should be loaded to allow database to print errors
-	require_once( $t_core_path.'authentication_api.php' );
-	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'error_api.php' );
+	require_once( $t_core_path.'helper_api.php' );
+
+	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
+	# OPENED ANYWHERE ELSE.
+	require_once( $t_core_path.'database_api.php' );
+
+	# Initialize Event System
+	require_once( $t_core_path.'event_api.php' );
+	require_once( $t_core_path.'events_inc.php' );
+
+	# Plugin initialization
+	require_once( $t_core_path.'plugin_api.php' );
+	if ( !defined( 'PLUGINS_DISABLED' ) ) {
+		plugin_init_installed();
+	}
+
+	# Authentication and user setup
+	require_once( $t_core_path.'authentication_api.php' );
+	require_once( $t_core_path.'project_api.php' );
+	require_once( $t_core_path.'project_hierarchy_api.php' );
+	require_once( $t_core_path.'user_api.php' );
+	require_once( $t_core_path.'access_api.php' );
+
+	# Display API's
+	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'gpc_api.php' );
+	require_once( $t_core_path.'print_api.php' );
 
 	# custom functions (in main directory)
 	# @@@ Move all such files to core/
@@ -137,10 +161,6 @@
 	# seed random number generator
 	list( $usec, $sec ) = explode( ' ', microtime() );
 	mt_srand( $sec*$usec );
-
-	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
-	# OPENED ANYWHERE ELSE.
-	require_once( $t_core_path.'database_api.php' );
 
 	# Headers to prevent caching
 	#  with option to bypass if running from script
@@ -159,27 +179,11 @@
 		}
 	}
 	
-	# Initialize Event System
-	require_once( $t_core_path.'event_api.php' );
-	require_once( $t_core_path.'events_inc.php' );
-
-	require_once( $t_core_path.'project_api.php' );
-	require_once( $t_core_path.'project_hierarchy_api.php' );
-	require_once( $t_core_path.'access_api.php' );
-	require_once( $t_core_path.'print_api.php' );
-	require_once( $t_core_path.'helper_api.php' );
-	require_once( $t_core_path.'user_api.php' );
 
 	# push push default language to speed calls to lang_get
 	lang_push( lang_get_default() );
 
 	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Content-type: text/html;charset=' . lang_get( 'charset' ) );
-	}
-
-	# Plugin initialization
-	require_once( $t_core_path.'plugin_api.php' );
-	if ( !defined( 'PLUGINS_DISABLED' ) ) {
-		plugin_init_installed();
 	}
 ?>

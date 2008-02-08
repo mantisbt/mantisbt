@@ -81,13 +81,13 @@
 		$t_lang = false;
 
 		# Confirm that the user's language can be determined
-		if ( auth_is_user_authenticated() ) {
+		if ( function_exists('auth_is_user_authenticated' ) && auth_is_user_authenticated() ) {
 			$t_lang = user_pref_get_language( auth_get_current_user_id() );
 		}
 
 		# Otherwise fall back to default
 		if ( false === $t_lang ) {
-			$t_lang = config_get( 'default_language' );
+			$t_lang = config_get_global( 'default_language' );
 		}
 
 		if ( 'auto' == $t_lang ) {
