@@ -164,7 +164,61 @@
     <section>
         <title>Support</title>
         <para>
-	TODO: forums and mailing lists.
+	There are plenty of resources to help answer support queries.  Following
+	are the main ones:</para>
+	
+        <itemizedlist>
+	    <listitem>
+	        <para><ulink
+		url="http://www.mantisbt.org/forums/">Forums</ulink> - The
+		forums are one of the most popular destinations for getting
+		MantisBT support.  Start off by searching the forums for your
+		questions, if not found, then go ahead and submit a question.
+		</para>
+            </listitem>
+	    <listitem>
+	        <para><ulink
+		url="http://www.mantisbt.org/mailinglists.php">Mailing
+		lists</ulink> - Available mailing lists are "mantisbt-announce"
+		for announcements, "mantisbt-dev" for development issues,
+		mantisbt-lang for localization () and "mantisbt-help" for
+		general help/support questions.  There are public archives for such
+		mailing lists.  Note that only members of the mailing lists can
+		post to them, hence, subscribe to the lists before you attempt
+		to email them.</para>
+	    </listitem>
+	    <listitem>
+	        <para><ulink url="http://www.mantisbt.org/irc.php">IRC</ulink> -
+		The IRC channel is mainly used by developers to engage in
+		in-person discussion.  The recommended tool for IRC is XChat (for Linux),
+		XChat 2 (for Windows).  However, you can also use <ulink
+		url="http://www.mibbit.com/">Mibbit</ulink> to connect to IRC
+		via your web browser.  This is also useful when your work
+		firewall blocks the IRC port (although there are other
+		workarounds involving tunneling to fix this issue).  Many people
+		prefer to use IRC to ask questions to the developers and other
+		users who are in the IRC channel.
+		</para>
+            </listitem>	
+	    <listitem>
+	        <para><ulink url="http://www.mantisbt.org">Wiki</ulink> - The
+		MantisBT Wiki has information related to "How To (recipes)",
+		FAQ, feature requirements, etc.</para>
+            </listitem>
+	    <listitem>
+	        <para>Search - A good way for locating an answer for your question
+		or finding more information about a topic is to search accross
+		all MantisBT website and the Internet via
+		<ulink url="http://www.google.com">Google</ulink> or <ulink
+		url="http://www.live.com">Live</ulink>.</para>
+	    </listitem> 
+	</itemizedlist>
+	
+	<para>
+	    It is important to note that support questions should not be sent
+	    directly to MantisBT developers or through the MantisBT contact us
+	    pages.  Use of "Contact Us" page or emailing the developer directly
+	    is available if you are after a paid support or consulting service.
 	</para>
     </section>
 
