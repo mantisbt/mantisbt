@@ -250,6 +250,7 @@ class PHPMailer {
   var $language        = array();
   var $error_count     = 0;
   var $LE              = "\n";
+  var $MessageID       = '';
 
   /////////////////////////////////////////////////
   // METHODS, VARIABLES
@@ -834,7 +835,13 @@ class PHPMailer {
       $result .= $this->HeaderLine('Subject', $this->EncodeHeader($this->SecureHeader($this->Subject)));
     }
 
-    $result .= sprintf("Message-ID: <%s@%s>%s", $uniq_id, $this->ServerHostname(), $this->LE);
+    if ($this->MessageID == '') {
+      $msg_id = $uniq_id;
+    } else {
+      $msg_id = $this->EncodeHeader($this->SecureHeader($this->MessageID));
+    }
+
+    $result .= sprintf("Message-ID: <%s@%s>%s", $msg_id, $this->ServerHostname(), $this->LE);
     $result .= $this->HeaderLine('X-Priority', $this->Priority);
     $result .= $this->HeaderLine('X-Mailer', 'PHPMailer (phpmailer.sourceforge.net) [version ' . $this->Version . ']');
 
