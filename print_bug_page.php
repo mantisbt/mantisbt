@@ -349,7 +349,32 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<?php echo lang_get( 'attached_files' ) ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php file_list_attachments ( $f_bug_id ); ?>
+		<?php
+			$t_attachments = file_get_visible_attachments( $f_bug_id );
+			$t_first_attachment = true;
+			$t_path = config_get_global( 'path' );
+
+			foreach ( $t_attachments as $t_attachment  ) {
+				if ( $t_first_attachment ) {
+					$t_first_attachment = false;
+				} else {
+					echo '<br />';
+				}
+
+				$c_filename = string_display_line( $t_attachment['display_name'] );
+				$c_download_url = $t_path . $t_attachment['download_url'];
+				$c_filesize = number_format( $t_attachment['size'] );
+				$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
+				if ( isset( $t_attachment['icon'] ) ) {
+					echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&nbsp;';
+				}
+				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
+
+				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
+					echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" border="0" /><br />';
+				}
+			}
+		?>
 	</td>
 </tr>
 <tr>

@@ -547,7 +547,7 @@
 		<?php echo lang_get( 'attached_files' ) ?>
 	</td>
 	<td colspan="5">
-		<?php file_list_attachments ( $f_bug_id ); ?>
+		<?php print_bug_attachments_list( $f_bug_id ); ?>
 	</td>
 </tr>
 <?php

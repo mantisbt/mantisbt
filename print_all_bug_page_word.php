@@ -348,13 +348,14 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	} # profile description
 ?>
 <tr class="print">
-	<td class="print-category">
+	<td class="print-category" valign="top">
 		<?php echo lang_get( 'attached_files' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php
 			$t_attachments = file_get_visible_attachments( $t_id );
 			$t_first_attachment = true;
+			$t_path = config_get_global( 'path' );
 
 			foreach ( $t_attachments as $t_attachment  ) {
 				if ( $t_first_attachment ) {
@@ -364,9 +365,10 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				}
 
 				$c_filename = string_display_line( $t_attachment['display_name'] );
+				$c_download_url = $t_path . $t_attachment['download_url'];
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
-				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span>";
+				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
 
 				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
 					echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" border="0" /><br />';
