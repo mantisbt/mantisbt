@@ -118,7 +118,7 @@
 		<?php echo $v_id ?>
 	</td>
 	<td class="print">
-		<?php echo $v_category ?>
+		<?php echo category_full_name( $v_category_id ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'severity', $v_severity ) ?>
