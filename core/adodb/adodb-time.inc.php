@@ -1211,7 +1211,7 @@ function adodb_mktime($hr,$min,$sec,$mon=false,$day=false,$year=false,$is_dst=fa
 			); 
 			
 		
-		if ($usephpfns && ($year + $mon/12+$day/365.25+$hr*24*365.25 >= 2038)) $usephpfns = false;
+		if ($usephpfns && ($year + $mon/12+$day/365.25+$hr/24 >= 2038)) $usephpfns = false;
 			
 		if ($usephpfns) {
 				return $is_gmt ?
