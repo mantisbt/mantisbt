@@ -15,7 +15,7 @@ pre {
 <body bgcolor="#ffffff" text="black">
 
 <h2>ADOdb Library for PHP</h2>
-<p>V4.94 23 Jan 2007 (c) 2000-2007 John Lim (jlim#natsoft.com)</p>
+<p>V5.03 22 Jan 2008  (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
 <p><font size="1">This software is dual licensed using BSD-Style and LGPL. This 
   means you can use it in compiled proprietary and commercial products.</font></p>
   
@@ -234,7 +234,7 @@ Optional:
  to a particular database is in the adodb/driver/adodb-????.inc.php file.</p>
  <a name="adonewconnection"></a>
 <p>For example, to connect to a mysql database:</p>
-<pre>include('/path/to/set/here/adodb.inc.php');<br>$conn = &amp;ADONewConnection('mysql');<br></pre>
+<pre>include('/path/to/set/here/adodb.inc.php');<br>$conn =ADONewConnection('mysql');<br></pre>
 <p>Whenever you need to connect to a database, you create a Connection object 
   using the <b>ADONewConnection</b>($driver) function. 
   <b>NewADOConnection</b>($driver) is an alternative name for the same function.</p>
@@ -307,7 +307,7 @@ ADOdb DSN's are compatible with version 1.0 of PEAR DB's DSN format.
 <h4><a name="connect_ex">MySQL and Most Other Database Drivers</a></h4>
 <p><a name="connect_ex">MySQL connections are very straightforward, and the parameters are identical 
   to mysql_connect:</a></p>
-<pre><a name="connect_ex">	$conn = &amp;ADONewConnection('mysql'); <br>	$conn-&gt;PConnect('localhost','userid','password','database');<br>	<br>	<font color="#008000"># or dsn </font>
+<pre><a name="connect_ex">	$conn =ADONewConnection('mysql'); <br>	$conn-&gt;PConnect('localhost','userid','password','database');<br>	<br>	<font color="#008000"># or dsn </font>
 	$dsn = 'mysql://user:pwd@localhost/mydb'; 
 	$conn = ADONewConnection($dsn);  # no need for Connect()
 	
@@ -328,19 +328,19 @@ a </a><a href="dsnsupport">DSN</a> since ADOdb 4.51. Exceptions to this are list
 <h4>PDO</h4>
 <p>PDO, which only works with PHP5, accepts a driver specific connection string:
 <pre>
-	$conn =& NewADConnection('pdo');
+	$conn = NewADOConnection('pdo');
 	$conn->Connect('mysql:host=localhost',$user,$pwd,$mydb);
 	$conn->Connect('mysql:host=localhost;dbname=mydb',$user,$pwd);
 	$conn->Connect("mysql:host=localhost;dbname=mydb;username=$user;password=$pwd");
 </pre>
 <p>The DSN mechanism is also supported:
 <pre>
-	$conn =& NewADConnection("pdo_mysql://user:pwd@localhost/mydb?persist"); # persist is optional
+	$conn = NewADOConnection("pdo_mysql://user:pwd@localhost/mydb?persist"); # persist is optional
 </pre>
 <h4>PostgreSQL</h4>
 <p>PostgreSQL 7 and 8 accepts connections using: </p>
 <p>a. the standard connection string:</p>
-<pre>	$conn = &amp;ADONewConnection('postgres');  <br>	$conn-&gt;PConnect('host=localhost port=5432 dbname=mary');</pre>
+<pre>	$conn = ADONewConnection('postgres');  <br>	$conn-&gt;PConnect('host=localhost port=5432 dbname=mary');</pre>
 <p> b. the classical 4 parameters:</p>
  <pre>	$conn-&gt;PConnect('localhost','userid','password','database');<br> </pre>
 <p>c. dsn:
@@ -402,12 +402,12 @@ $db = NewADOConnection($dsn);
 </pre>
 <h4>Interbase/Firebird</h4>
 You define the database in the $host parameter:
-<pre>	$conn = &amp;ADONewConnection('ibase'); <br>	$conn-&gt;PConnect('localhost:c:\ibase\employee.gdb','sysdba','masterkey');<br></pre>
+<pre>	$conn =ADONewConnection('ibase'); <br>	$conn-&gt;PConnect('localhost:c:\ibase\employee.gdb','sysdba','masterkey');<br></pre>
 <p>Or dsn:
 </p><pre>	$dsn = 'firebird://user:pwd@localhost/mydb?persist&amp;dialect=3';  # persist is optional<br>	$conn = ADONewConnection($dsn);  # no need for Connect/PConnect<br></pre>
 <h4>SQLite</h4>
 Sqlite will create the database file if it does not exist.
-<pre>	$conn = &amp;ADONewConnection('sqlite');
+<pre>	$conn =ADONewConnection('sqlite');
 	$conn-&gt;PConnect('c:\path\to\sqlite.db'); # sqlite will create if does not exist<br></pre>
 <p>Or dsn:
 </p><pre>	$path = urlencode('c:\path\to\sqlite.db');
@@ -440,17 +440,17 @@ newer versions of the Oracle, eg. 9i and 10g.</p>
   connection.To use DSN-less connections with ODBC you need PHP 4.3 or later. 
 </p>
 <p>For Microsoft Access:</p>
-<pre>	$db =&amp; ADONewConnection('access');<br>	$dsn = <strong>"Driver={Microsoft Access Driver (*.mdb)};Dbq=d:\\northwind.mdb;Uid=Admin;Pwd=;";</strong>
+<pre>	$db = ADONewConnection('access');<br>	$dsn = <strong>"Driver={Microsoft Access Driver (*.mdb)};Dbq=d:\\northwind.mdb;Uid=Admin;Pwd=;";</strong>
 	$db-&gt;Connect($dsn);
 </pre>
 For Microsoft SQL Server: 
-<pre>	$db =&amp; ADONewConnection('odbc_mssql');<br>	$dsn = <strong>"Driver={SQL Server};Server=localhost;Database=northwind;"</strong>;<br>	$db-&gt;Connect($dsn,'userid','password');<br></pre>
+<pre>	$db = ADONewConnection('odbc_mssql');<br>	$dsn = <strong>"Driver={SQL Server};Server=localhost;Database=northwind;"</strong>;<br>	$db-&gt;Connect($dsn,'userid','password');<br></pre>
 or if you prefer to use the mssql extension (which is limited to mssql 6.5 functionality):
-<pre>	$db =&amp; ADONewConnection('mssql');<br>	$db-&gt;Execute('localhost', 'userid', 'password', 'northwind');<br></pre>
+<pre>	$db = ADONewConnection('mssql');<br>	$db-&gt;Execute('localhost', 'userid', 'password', 'northwind');<br></pre>
 For DB2:
 <pre>
 	$dbms = 'db2'; # or 'odbc_db2' if db2 extension not available
-	$db =&amp; ADONewConnection($dbms);
+	$db = ADONewConnection($dbms);
 	$dsn = "driver={IBM db2 odbc DRIVER};Database=sample;hostname=localhost;port=50000;protocol=TCPIP;".
 				"uid=root; pwd=secret";<br>	$db-&gt;Connect($dsn);
 </pre>
@@ -458,7 +458,7 @@ For DB2:
 If you are using versions of PHP earlier than PHP 4.3.0, DSN-less connections 
 only work with Microsoft's ADO, which is Microsoft's COM based API. An example 
 using the ADOdb library and Microsoft's ADO: 
-<pre>&lt;?php<br>	include('adodb.inc.php'); <br>	$db = &amp;ADONewConnection("ado_mssql");<br>	print "&lt;h1&gt;Connecting DSN-less $db-&gt;databaseType...&lt;/h1&gt;";<br>		<br>	<b>$myDSN="PROVIDER=MSDASQL;DRIVER={SQL Server};"<br>		. "SERVER=flipper;DATABASE=ai;UID=sa;PWD=;"  ;</b>
+<pre>&lt;?php<br>	include('adodb.inc.php'); <br>	$db =ADONewConnection("ado_mssql");<br>	print "&lt;h1&gt;Connecting DSN-less $db-&gt;databaseType...&lt;/h1&gt;";<br>		<br>	<b>$myDSN="PROVIDER=MSDASQL;DRIVER={SQL Server};"<br>		. "SERVER=flipper;DATABASE=ai;UID=sa;PWD=;"  ;</b>
 	$db-&gt;Connect($myDSN);
 	
 	$rs = $db-&gt;Execute("select * from table");
@@ -495,8 +495,8 @@ using the ADOdb library and Microsoft's ADO:
  <p>Some examples:</p>
  <table align="center" border="1"><tbody><tr><td><b>Fastest data retrieval using PHP</b></td><td><b>Fastest data retrieval using ADOdb extension</b></td></tr>
 <tr><td>
-<pre>$rs =&amp; $rs-&gt;Execute($sql);<br>while (!$rs-&gt;EOF) {<br>	var_dump($rs-&gt;fields);<br>	$rs-&gt;MoveNext();<br>}</pre></td><td>
-<pre>$rs =&amp; $rs-&gt;Execute($sql);<br>$array = adodb_getall($rs);<br>var_dump($array);<br><br><br></pre></td></tr></tbody></table>
+<pre>$rs = $rs-&gt;Execute($sql);<br>while (!$rs-&gt;EOF) {<br>	var_dump($rs-&gt;fields);<br>	$rs-&gt;MoveNext();<br>}</pre></td><td>
+<pre>$rs = $rs-&gt;Execute($sql);<br>$array = adodb_getall($rs);<br>var_dump($array);<br><br><br></pre></td></tr></tbody></table>
  <p><b>Advanced Tips</b>
  </p><p>If you have the <a href="http://adodb.sourceforge.net/#extension">ADOdb C extension</a> installed, 
  you can replace your calls to $rs-&gt;MoveNext() with adodb_movenext($rs). 
@@ -527,7 +527,7 @@ can be controlled using $rsPrefix. Here we set it to 'hack_rs_', which will make
 <i>hack_rs_mysql</i> and <i>hack_rs_postgres7</i> as the recordset classes.
 
 
-</p><pre>class hack_mysql extends adodb_mysql {<br>var $rsPrefix = 'hack_rs_';<br>  /* Your mods here */<br>}<br><br>class hack_rs_mysql extends ADORecordSet_mysql {<br>	 /* Your mods here */<br>}<br><br>class hack_postgres7 extends adodb_postgres7 {<br>var $rsPrefix = 'hack_rs_';<br>  /* Your mods here */<br>}<br><br>class hack_rs_postgres7 extends ADORecordSet_postgres7 {<br> /* Your mods here */<br>}<br><br>$ADODB_NEWCONNECTION = 'hack_factory';<br><br>function&amp; hack_factory($driver)<br>{<br>	if ($driver !== 'mysql' &amp;&amp; $driver !== 'postgres7') return false;<br>	<br>	$driver = 'hack_'.$driver;<br>	$obj = new $driver();<br>	return $obj;<br>}<br><br>include_once('adodb.inc.php');<br></pre>
+</p><pre>class hack_mysql extends adodb_mysql {<br>var $rsPrefix = 'hack_rs_';<br>  /* Your mods here */<br>}<br><br>class hack_rs_mysql extends ADORecordSet_mysql {<br>	 /* Your mods here */<br>}<br><br>class hack_postgres7 extends adodb_postgres7 {<br>var $rsPrefix = 'hack_rs_';<br>  /* Your mods here */<br>}<br><br>class hack_rs_postgres7 extends ADORecordSet_postgres7 {<br> /* Your mods here */<br>}<br><br>$ADODB_NEWCONNECTION = 'hack_factory';<br><br>function hack_factory($driver)<br>{<br>	if ($driver !== 'mysql' &amp;&amp; $driver !== 'postgres7') return false;<br>	<br>	$driver = 'hack_'.$driver;<br>	$obj = new $driver();<br>	return $obj;<br>}<br><br>include_once('adodb.inc.php');<br></pre>
 <p></p><p>Don't forget to call the constructor of the parent class in
 your constructor. If you want to use the default ADOdb drivers return
 false in the above hack_factory() function.
@@ -542,7 +542,7 @@ If PHP5 is detected, the following features become available:
  not as powerful as native drivers, and should be treated as experimental.<br><br>
 <a name="php5iterators"></a>
 <li><b>Foreach iterators</b>: This is a very natural way of going through a recordset:
-<pre>	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;<br>	$rs = $db-&gt;Execute($sql);<br>	foreach($rs as $k =&gt; $row) {<br>		echo "r1=".$row[0]." r2=".$row[1]."&lt;br&gt;";<br>	}<br></pre>
+<pre>	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;<br>	$rs = $db-&gt;Execute($sql);<br>	foreach($rs as $k =gt; $row) {<br>		echo "r1=".$row[0]." r2=".$row[1]."&lt;br&gt;";<br>	}<br></pre>
 <p>
 <a name="php5exceptions"></a>
 </p></li><li><b>Exceptions</b>: Just include <i>adodb-exceptions.inc.php</i> and you can now 
@@ -968,7 +968,7 @@ The <i>name</i> below is the value you pass to NewADOConnection($name) to create
   to move from row to row.</p>
 <p>NB: A useful function that is not used in this example is <font face="Courier New, Courier, mono"><a href="#selectlimit">SelectLimit</a></font>, 
   which allows us to limit the number of rows shown. 
-</p><pre>&lt;?<br><font face="Courier New, Courier, mono"><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> = &amp;ADONewConnection('access');	# create a connection<br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind DSN<br>$<font color="#660000">recordSet</font> = &amp;$<font color="#660000">conn</font>-&gt;Execute('select * from products');<br>if (!$<font color="#660000">recordSet</font>) <br>	print $<font color="#660000">conn</font>-&gt;ErrorMsg();<br>else<br><b>while</b> (!$<font color="#660000">recordSet</font>-&gt;EOF) {<br>	<b>print</b> $<font color="#660000">recordSet</font>-&gt;fields[0].' '.$<font color="#660000">recordSet</font>-&gt;fields[1].'&lt;BR&gt;';<br>	$<font color="#660000">recordSet</font>-&gt;MoveNext();<br>}</font><font face="Courier New, Courier, mono">
+</p><pre>&lt;?<br><font face="Courier New, Courier, mono"><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> =ADONewConnection('access');	# create a connection<br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind DSN<br>$<font color="#660000">recordSet</font> =$<font color="#660000">conn</font>-&gt;Execute('select * from products');<br>if (!$<font color="#660000">recordSet</font>) <br>	print $<font color="#660000">conn</font>-&gt;ErrorMsg();<br>else<br><b>while</b> (!$<font color="#660000">recordSet</font>-&gt;EOF) {<br>	<b>print</b> $<font color="#660000">recordSet</font>-&gt;fields[0].' '.$<font color="#660000">recordSet</font>-&gt;fields[1].'&lt;BR&gt;';<br>	$<font color="#660000">recordSet</font>-&gt;MoveNext();<br>}</font><font face="Courier New, Courier, mono">
 
 $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color="#660000">conn</font>-&gt;Close(); # optional<br></font>
 ?&gt;
@@ -984,8 +984,8 @@ $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color=
   array by field name. To force indexing by name - that is associative arrays 
   - use the SetFetchMode function. Each recordset saves and uses whatever fetch 
   mode was set when the recordset was created in Execute() or SelectLimit(). 
-</p><pre>	$db-&gt;SetFetchMode(ADODB_FETCH_NUM);<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$db-&gt;SetFetchMode(ADODB_FETCH_ASSOC);<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=&gt;'v0',[1] =&gt;'v1')</i>
-	print_r($rs2-&gt;fields); # shows <i>array(['col1']=&gt;'v0',['col2'] =&gt;'v1')</i>
+</p><pre>	$db-&gt;SetFetchMode(ADODB_FETCH_NUM);<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$db-&gt;SetFetchMode(ADODB_FETCH_ASSOC);<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=gt;'v0',[1] =gt;'v1')</i>
+	print_r($rs2-&gt;fields); # shows <i>array(['col1']=gt;'v0',['col2'] =gt;'v1')</i>
 </pre>
 <p> </p>
 <p>To get the number of rows in the select statement, you can use <font face="Courier New, Courier, mono">$recordSet-&gt;<a href="#recordcount">RecordCount</a>()</font>. 
@@ -993,7 +993,7 @@ $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color=
 <h3>Example 2: Advanced Select with Field Objects<a name="ex2"></a></h3>
 <p>Select a table, display the first two columns. If the second column is a date 
   or timestamp, reformat the date to US format.</p>
-<pre>&lt;?<br><font face="Courier New, Courier, mono"><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> = &amp;ADONewConnection('access');	# create a connection<br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br>$<font color="#660000">recordSet</font> = &amp;$<font color="#660000">conn</font>-&gt;Execute('select CustomerID,OrderDate from Orders');<br>if (!$<font color="#660000">recordSet</font>) <br>	print $<font color="#660000">conn</font>-&gt;ErrorMsg();<br>else<br><b>while</b> (!$<font color="#660000">recordSet</font>-&gt;EOF) {<br>	$<font color="#660000">fld</font> = <font color="#336600"><b>$</b><font color="#660000">recordSet</font><b>-&gt;FetchField</b></font><font color="#006600">(</font>1<font color="#006600">);</font>
+<pre>&lt;?<br><font face="Courier New, Courier, mono"><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> =ADONewConnection('access');	# create a connection<br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br>$<font color="#660000">recordSet</font> =$<font color="#660000">conn</font>-&gt;Execute('select CustomerID,OrderDate from Orders');<br>if (!$<font color="#660000">recordSet</font>) <br>	print $<font color="#660000">conn</font>-&gt;ErrorMsg();<br>else<br><b>while</b> (!$<font color="#660000">recordSet</font>-&gt;EOF) {<br>	$<font color="#660000">fld</font> = <font color="#336600"><b>$</b><font color="#660000">recordSet</font><b>-&gt;FetchField</b></font><font color="#006600">(</font>1<font color="#006600">);</font>
 	$<font color="#660000">type</font> = <font color="#336600"><b>$</b><font color="#660000">recordSet</font><b>-&gt;MetaType</b></font>($fld-&gt;type);<br><br>	<b>if</b> ( $<font color="#660000">type</font> == 'D' || $<font color="#660000">type</font> == 'T') <br>		<b>print</b> $<font color="#660000">recordSet</font>-&gt;fields[0].' '.<br>			<b><font color="#336600">$</font></b><font color="#660000">recordSet</font><b><font color="#336600">-&gt;UserDate</font></b>($<font color="#660000">recordSet</font>-&gt;fields[1],'<b>m/d/Y</b>').'&lt;BR&gt;';<br>	<b>else </b>
 		<b>print</b> $<font color="#660000">recordSet</font>-&gt;fields[0].' '.$<font color="#660000">recordSet</font>-&gt;fields[1].'&lt;BR&gt;';<br><br>	$<font color="#660000">recordSet</font>-&gt;MoveNext();<br>}</font><font face="Courier New, Courier, mono">
 $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color="#660000">conn</font>-&gt;Close(); # optional<br></font>
@@ -1034,7 +1034,7 @@ $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color=
 <p>Insert a row to the Orders table containing dates and strings that need to 
   be quoted before they can be accepted by the database, eg: the single-quote 
   in the word <i>John's</i>.</p>
-<pre>&lt;?<br><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> = &amp;ADONewConnection('access');	# create a connection<br><br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br>$<font color="#660000">shipto</font> = <font color="#006600"><b>$conn-&gt;qstr</b></font>("<i>John's Old Shoppe</i>");<br><br>$<font color="#660000">sql</font> = "insert into orders (customerID,EmployeeID,OrderDate,ShipName) ";<br>$<font color="#660000">sql</font> .= "values ('ANATR',2,".<b><font color="#006600">$conn-&gt;DBDate(</font>time()<font color="#006600">)</font></b><font color="#006600">.</font>",$<font color="#660000">shipto</font>)";<br><br><b>if</b> ($<font color="#660000">conn</font>-&gt;Execute($<font color="#660000">sql</font>) <font color="#336600"><b>=== false</b></font>) {<br>	<b>print</b> 'error inserting: '.<font color="#336600"><b>$conn-&gt;ErrorMsg()</b></font>.'&lt;BR&gt;';<br>}<br>?&gt;<br></pre>
+<pre>&lt;?<br><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#660000">conn</font> =ADONewConnection('access');	# create a connection<br><br>$<font color="#660000">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br>$<font color="#660000">shipto</font> = <font color="#006600"><b>$conn-&gt;qstr</b></font>("<i>John's Old Shoppe</i>");<br><br>$<font color="#660000">sql</font> = "insert into orders (customerID,EmployeeID,OrderDate,ShipName) ";<br>$<font color="#660000">sql</font> .= "values ('ANATR',2,".<b><font color="#006600">$conn-&gt;DBDate(</font>time()<font color="#006600">)</font></b><font color="#006600">.</font>",$<font color="#660000">shipto</font>)";<br><br><b>if</b> ($<font color="#660000">conn</font>-&gt;Execute($<font color="#660000">sql</font>) <font color="#336600"><b>=== false</b></font>) {<br>	<b>print</b> 'error inserting: '.<font color="#336600"><b>$conn-&gt;ErrorMsg()</b></font>.'&lt;BR&gt;';<br>}<br>?&gt;<br></pre>
 <p>In this example, we see the advanced date and quote handling facilities of 
   ADOdb. The unix timestamp (which is a long integer) is appropriately formated 
   for Access with <font face="Courier New, Courier, mono"><a href="#dbdate">DBDate</a>()</font>, 
@@ -1048,7 +1048,7 @@ $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color=
   Note: <i>php_track_errors</i> might have to be enabled for error messages to 
   be saved.</p>
 <h3> Example 4: Debugging<a name="ex4"></a></h3>
-<pre>&lt;?<br><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#663300">conn</font> = &amp;ADONewConnection('access');	# create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br><font>$<font color="#663300">shipto</font> = <b>$conn-&gt;qstr</b>("John's Old Shoppe");<br>$<font color="#663300">sql</font> = "insert into orders (customerID,EmployeeID,OrderDate,ShipName) ";<br>$<font color="#663300">sql</font> .= "values ('ANATR',2,".$<font color="#663300">conn</font>-&gt;FormatDate(time()).",$shipto)";<br><b><font color="#336600">$<font color="#663300">conn</font>-&gt;debug = true;</font></b>
+<pre>&lt;?<br><b>include</b>('adodb.inc.php');	   # load code common to ADOdb<br>$<font color="#663300">conn</font> =ADONewConnection('access');	# create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('northwind');   # connect to MS-Access, northwind dsn<br><font>$<font color="#663300">shipto</font> = <b>$conn-&gt;qstr</b>("John's Old Shoppe");<br>$<font color="#663300">sql</font> = "insert into orders (customerID,EmployeeID,OrderDate,ShipName) ";<br>$<font color="#663300">sql</font> .= "values ('ANATR',2,".$<font color="#663300">conn</font>-&gt;FormatDate(time()).",$shipto)";<br><b><font color="#336600">$<font color="#663300">conn</font>-&gt;debug = true;</font></b>
 <b>if</b> ($<font color="#663300">conn</font>-&gt;Execute($sql) <b>=== false</b>) <b>print</b> 'error inserting';</font>
 ?&gt;
 </pre>
@@ -1062,13 +1062,13 @@ $<font color="#660000">recordSet</font>-&gt;Close(); # optional<br>$<font color=
 <p>Connect to MySQL database <i>agora</i>, and generate a &lt;select&gt; menu 
   from an SQL statement where the &lt;option&gt; captions are in the 1st column, 
   and the value to send back to the server is in the 2nd column.</p>
-<pre>&lt;?<br><b>include</b>('adodb.inc.php'); # load code common to ADOdb<br>$<font color="#663300">conn</font> = &amp;ADONewConnection('mysql');  # create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br><font>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers';<br>$<font color="#663300">rs</font> = $<font color="#663300">conn</font>-&gt;Execute($sql);<br><b>print</b> <b><font color="#336600">$<font color="#663300">rs</font>-&gt;GetMenu('GetCust','Mary Rosli');<br>?&gt;</font></b></font></pre>
+<pre>&lt;?<br><b>include</b>('adodb.inc.php'); # load code common to ADOdb<br>$<font color="#663300">conn</font> =ADONewConnection('mysql');  # create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br><font>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers';<br>$<font color="#663300">rs</font> = $<font color="#663300">conn</font>-&gt;Execute($sql);<br><b>print</b> <b><font color="#336600">$<font color="#663300">rs</font>-&gt;GetMenu('GetCust','Mary Rosli');<br>?&gt;</font></b></font></pre>
 <p>Here we define a menu named GetCust, with the menu option 'Mary Rosli' selected. 
   See <a href="#getmenu"><font face="Courier New, Courier, mono">GetMenu</font></a><font face="Courier New, Courier, mono">()</font>. 
   We also have functions that return the recordset as an array: <font face="Courier New, Courier, mono"><a href="#getarray">GetArray</a>()</font>, 
   and as an associative array with the key being the first column: <a href="#getassoc1">GetAssoc</a>().</p>
 <h3>Example 6: Connecting to 2 Databases At Once<a name="ex6"></a></h3>
-<pre>&lt;?<br><b>include</b>('adodb.inc.php');	 # load code common to ADOdb<br>$<font color="#663300">conn1</font> = &amp;ADONewConnection('mysql');  # create a mysql connection<br>$<font color="#663300">conn2</font> = &amp;ADONewConnection('oracle');  # create a oracle connection<br><br>$conn1-&gt;PConnect($server, $userid, $password, $database);<br>$conn2-&gt;PConnect(false, $ora_userid, $ora_pwd, $oraname);<br><br>$conn1-&gt;Execute('insert ...');<br>$conn2-&gt;Execute('update ...');<br>?&gt;</pre>
+<pre>&lt;?<br><b>include</b>('adodb.inc.php');	 # load code common to ADOdb<br>$<font color="#663300">conn1</font> =ADONewConnection('mysql');  # create a mysql connection<br>$<font color="#663300">conn2</font> =ADONewConnection('oracle');  # create a oracle connection<br><br>$conn1-&gt;PConnect($server, $userid, $password, $database);<br>$conn2-&gt;PConnect(false, $ora_userid, $ora_pwd, $oraname);<br><br>$conn1-&gt;Execute('insert ...');<br>$conn2-&gt;Execute('update ...');<br>?&gt;</pre>
 <p> 
 </p><h3>Example 7: Generating Update and Insert SQL<a name="ex7"></a></h3>
 <p>Since ADOdb 4.56, we support <a href="reference.functions.getupdatesql.html#autoexecute">AutoExecute()</a>, 
@@ -1101,7 +1101,7 @@ update or insert into the table automatically.
  Since ADOdb 2.42, you can pass a  table name instead of a recordset into 
 GetInsertSQL (in $rs), and it will generate an insert statement for that table.
 </p><p> 
-</p><pre>&lt;?<br>#==============================================<br># SAMPLE GetUpdateSQL() and GetInsertSQL() code<br>#==============================================<br>include('adodb.inc.php');<br>include('tohtml.inc.php');<br><br>#==========================<br># This code tests an insert<br><br>$sql = "SELECT * FROM ADOXYZ WHERE id = -1"; <br># Select an empty record from the database<br><br>$conn = &amp;ADONewConnection("mysql");  # create a connection<br>$conn-&gt;debug=1;<br>$conn-&gt;PConnect("localhost", "admin", "", "test"); # connect to MySQL, testdb<br>$rs = $conn-&gt;Execute($sql); # Execute the query and get the empty recordset<br><br>$record = array(); # Initialize an array to hold the record data to insert<br><br># Set the values for the fields in the record<br># Note that field names are case-insensitive<br>$record["firstname"] = "Bob";<br>$record["lastNamE"] = "Smith";<br>$record["creaTed"] = time();<br><br># Pass the empty recordset and the array containing the data to insert<br># into the GetInsertSQL function. The function will process the data and return<br># a fully formatted insert sql statement.<br>$insertSQL = $conn-&gt;GetInsertSQL($rs, $record);<br><br>$conn-&gt;Execute($insertSQL); # Insert the record into the database<br><br>#==========================<br># This code tests an update<br><br>$sql = "SELECT * FROM ADOXYZ WHERE id = 1"; <br># Select a record to update<br><br>$rs = $conn-&gt;Execute($sql); # Execute the query and get the existing record to update<br><br>$record = array(); # Initialize an array to hold the record data to update<br><br># Set the values for the fields in the record<br># Note that field names are case-insensitive<br>$record["firstname"] = "Caroline";<br>$record["LasTnAme"] = "Smith"; # Update Caroline's lastname from Miranda to Smith<br><br># Pass the single record recordset and the array containing the data to update<br># into the GetUpdateSQL function. The function will process the data and return<br># a fully formatted update sql statement with the correct WHERE clause.<br># If the data has not changed, no recordset is returned<br>$updateSQL = $conn-&gt;GetUpdateSQL($rs, $record);<br><br>$conn-&gt;Execute($updateSQL); # Update the record in the database<br>$conn-&gt;Close();<br>?&gt;<br></pre>
+</p><pre>&lt;?<br>#==============================================<br># SAMPLE GetUpdateSQL() and GetInsertSQL() code<br>#==============================================<br>include('adodb.inc.php');<br>include('tohtml.inc.php');<br><br>#==========================<br># This code tests an insert<br><br>$sql = "SELECT * FROM ADOXYZ WHERE id = -1"; <br># Select an empty record from the database<br><br>$conn =ADONewConnection("mysql");  # create a connection<br>$conn-&gt;debug=1;<br>$conn-&gt;PConnect("localhost", "admin", "", "test"); # connect to MySQL, testdb<br>$rs = $conn-&gt;Execute($sql); # Execute the query and get the empty recordset<br><br>$record = array(); # Initialize an array to hold the record data to insert<br><br># Set the values for the fields in the record<br># Note that field names are case-insensitive<br>$record["firstname"] = "Bob";<br>$record["lastNamE"] = "Smith";<br>$record["creaTed"] = time();<br><br># Pass the empty recordset and the array containing the data to insert<br># into the GetInsertSQL function. The function will process the data and return<br># a fully formatted insert sql statement.<br>$insertSQL = $conn-&gt;GetInsertSQL($rs, $record);<br><br>$conn-&gt;Execute($insertSQL); # Insert the record into the database<br><br>#==========================<br># This code tests an update<br><br>$sql = "SELECT * FROM ADOXYZ WHERE id = 1"; <br># Select a record to update<br><br>$rs = $conn-&gt;Execute($sql); # Execute the query and get the existing record to update<br><br>$record = array(); # Initialize an array to hold the record data to update<br><br># Set the values for the fields in the record<br># Note that field names are case-insensitive<br>$record["firstname"] = "Caroline";<br>$record["LasTnAme"] = "Smith"; # Update Caroline's lastname from Miranda to Smith<br><br># Pass the single record recordset and the array containing the data to update<br># into the GetUpdateSQL function. The function will process the data and return<br># a fully formatted update sql statement with the correct WHERE clause.<br># If the data has not changed, no recordset is returned<br>$updateSQL = $conn-&gt;GetUpdateSQL($rs, $record);<br><br>$conn-&gt;Execute($updateSQL); # Update the record in the database<br>$conn-&gt;Close();<br>?&gt;<br></pre>
 <a name="ADODB_FORCE_TYPE"></a>
 <b>$ADODB_FORCE_TYPE</b><p>
 The behaviour of AutoExecute(), GetUpdateSQL() and GetInsertSQL()  
@@ -1187,7 +1187,7 @@ for equivalent behaviour.
 <p>We provide some helper functions to export in comma-separated-value (CSV) and 
   tab-delimited formats:</p>
 <pre><b>include_once('/path/to/adodb/toexport.inc.php');</b><br>include_once('/path/to/adodb/adodb.inc.php');<br>
-$db = &amp;NewADOConnection('mysql');<br>$db-&gt;Connect($server, $userid, $password, $database);<br><br>$rs = $db-&gt;Execute('select fname as "First Name", surname as "Surname" from table');<br><br>print "&lt;pre&gt;";<br>print <b>rs2csv</b>($rs); # return a string, CSV format<p>print '&lt;hr&gt;';<br><br>$rs-&gt;MoveFirst(); # note, some databases do not support MoveFirst<br>print <b>rs2tab</b>($rs,<i>false</i>); # return a string, tab-delimited<br>						 # false == suppress field names in first line</p>print '&lt;hr&gt;';<br>$rs-&gt;MoveFirst();<br><b>rs2tabout</b>($rs); # send to stdout directly (there is also an rs2csvout function)<br>print "&lt;/pre&gt;";<br><br>$rs-&gt;MoveFirst();<br>$fp = fopen($path, "w");<br>if ($fp) {<br>  <b>rs2csvfile</b>($rs, $fp); # write to file (there is also an rs2tabfile function)<br>  fclose($fp);<br>}<br></pre>
+$db =NewADOConnection('mysql');<br>$db-&gt;Connect($server, $userid, $password, $database);<br><br>$rs = $db-&gt;Execute('select fname as "First Name", surname as "Surname" from table');<br><br>print "&lt;pre&gt;";<br>print <b>rs2csv</b>($rs); # return a string, CSV format<p>print '&lt;hr&gt;';<br><br>$rs-&gt;MoveFirst(); # note, some databases do not support MoveFirst<br>print <b>rs2tab</b>($rs,<i>false</i>); # return a string, tab-delimited<br>						 # false == suppress field names in first line</p>print '&lt;hr&gt;';<br>$rs-&gt;MoveFirst();<br><b>rs2tabout</b>($rs); # send to stdout directly (there is also an rs2csvout function)<br>print "&lt;/pre&gt;";<br><br>$rs-&gt;MoveFirst();<br>$fp = fopen($path, "w");<br>if ($fp) {<br>  <b>rs2csvfile</b>($rs, $fp); # write to file (there is also an rs2tabfile function)<br>  fclose($fp);<br>}<br></pre>
 <p> Carriage-returns or newlines are converted to spaces. Field names are returned 
   in the first line of text. Strings containing the delimiter character are quoted 
   with double-quotes. Double-quotes are double-quoted again. This conforms to 
@@ -1198,7 +1198,7 @@ $db = &amp;NewADOConnection('mysql');<br>$db-&gt;Connect($server, $userid, $pass
 </p><h3>Example 10: Recordset Filters<a name="ex10"></a></h3>
 <p>Sometimes we want to pre-process all rows in a recordset before we use it. 
   For example, we want to ucwords all text in recordset. 
-</p><pre>include_once('adodb/rsfilter.inc.php');<br>include_once('adodb/adodb.inc.php');<br><br>// ucwords() every element in the recordset<br>function do_ucwords(&amp;$arr,$rs)<br>{<br>	foreach($arr as $k =&gt; $v) {<br>		$arr[$k] = ucwords($v);<br>	}<br>}<br><br>$db = NewADOConnection('mysql');<br>$db-&gt;PConnect('server','user','pwd','db');<br><br>$rs = $db-&gt;Execute('select ... from table');<br>$rs = <b>RSFilter</b>($rs,'do_ucwords');<br></pre>
+</p><pre>include_once('adodb/rsfilter.inc.php');<br>include_once('adodb/adodb.inc.php');<br><br>// ucwords() every element in the recordset<br>function do_ucwords(&amp;$arr,$rs)<br>{<br>	foreach($arr as $k =gt; $v) {<br>		$arr[$k] = ucwords($v);<br>	}<br>}<br><br>$db = NewADOConnection('mysql');<br>$db-&gt;PConnect('server','user','pwd','db');<br><br>$rs = $db-&gt;Execute('select ... from table');<br>$rs = <b>RSFilter</b>($rs,'do_ucwords');<br></pre>
 <p>The <i>RSFilter</i> function takes 2 parameters, the recordset, and the name 
   of the <i>filter</i> function. It returns the processed recordset scrolled to 
   the first record. The <i>filter</i> function takes two parameters, the current 
@@ -1346,7 +1346,7 @@ else {
   ) and CacheSelectLimit( ) functions. There are similar to the non-cache functions, 
   except that they take a new first parameter, $secs2cache. 
 </p><p> An example: 
-</p><pre><b>include</b>('adodb.inc.php'); # load code common to ADOdb<br>$ADODB_CACHE_DIR = '/usr/ADODB_cache';<br>$<font color="#663300">conn</font> = &amp;ADONewConnection('mysql');  # create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br><font>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers';<br>$<font color="#663300">rs</font> = $<font color="#663300">conn</font>-&gt;CacheExecute(15,$sql);</font></pre>
+</p><pre><b>include</b>('adodb.inc.php'); # load code common to ADOdb<br>$ADODB_CACHE_DIR = '/usr/ADODB_cache';<br>$<font color="#663300">conn</font> =ADONewConnection('mysql');  # create a connection<br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br><font>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers';<br>$<font color="#663300">rs</font> = $<font color="#663300">conn</font>-&gt;CacheExecute(15,$sql);</font></pre>
 <p><font> The first parameter is the number of seconds to cache 
   the query. Subsequent calls to that query will used the cached version stored 
   in $ADODB_CACHE_DIR. To force a query to execute and flush the cache, call CacheExecute() 
@@ -1451,11 +1451,11 @@ tutorial</a>. We assume that your database supports the SQL case-when expression
 	and is not backward compatible.</font> The second example shows this:</p>
 <pre> $sql = PivotTableSQL(<br> 	$gDB,                                       # adodb connection<br> 	'products p ,categories c ,suppliers s',    # tables<br>	'SupplierName',                              #<font> rows (multiple fields allowed)</font>
    array(                                       # column ranges
-	' 0 '      =&gt; 'UnitsInStock &lt;= 0',
-	"1 to 5"   =&gt; '0 &lt; UnitsInStock and UnitsInStock &lt;= 5',
-	"6 to 10"  =&gt; '5 &lt; UnitsInStock and UnitsInStock &lt;= 10',
-	"11 to 15" =&gt; '10 &lt; UnitsInStock and UnitsInStock &lt;= 15',
-	"16+"      =&gt; '15 &lt; UnitsInStock'
+	' 0 '      =gt; 'UnitsInStock &lt;= 0',
+	"1 to 5"   =gt; '0 &lt; UnitsInStock and UnitsInStock &lt;= 5',
+	"6 to 10"  =gt; '5 &lt; UnitsInStock and UnitsInStock &lt;= 10',
+	"11 to 15" =gt; '10 &lt; UnitsInStock and UnitsInStock &lt;= 15',
+	"16+"      =gt; '15 &lt; UnitsInStock'
 	),
 	' p.CategoryID = c.CategoryID and s.SupplierID= p.SupplierID', # joins/where
 	'UnitsInStock',                             # sum this field
@@ -1524,8 +1524,8 @@ in adodb/lang/adodb-$lang.inc.php, where $lang is the supported langauge.
   define('ADODB_FETCH_BOTH',3); </font></p>
 <font> 
 </font><p><font> An example: 
-</font></p><pre><font>	$ADODB_<b>FETCH_MODE</b> = ADODB_FETCH_NUM;<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$ADODB_<b>FETCH_MODE</b> = ADODB_FETCH_ASSOC;<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=&gt;'v0',[1] =&gt;'v1')</i>
-	print_r($rs2-&gt;fields); # shows <i>array(['col1']=&gt;'v0',['col2'] =&gt;'v1')</i>
+</font></p><pre><font>	$ADODB_<b>FETCH_MODE</b> = ADODB_FETCH_NUM;<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$ADODB_<b>FETCH_MODE</b> = ADODB_FETCH_ASSOC;<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=gt;'v0',[1] =gt;'v1')</i>
+	print_r($rs2-&gt;fields); # shows <i>array(['col1']=gt;'v0',['col2'] =gt;'v1')</i>
 </font></pre>
 <p><font> As you can see in the above example, both recordsets store and use different 
 	fetch modes based on the $ADODB_FETCH_MODE setting when the recordset was 
@@ -1540,8 +1540,8 @@ connection, then use <a href="#setfetchmode">SetFetchMode</a>.
 	Once this function is called for a connection object, that connection object 
 	will ignore the global variable $ADODB_FETCH_MODE and will use the internal 
 	fetchMode property exclusively.</font></p>
-<pre><font>	$db-&gt;SetFetchMode(ADODB_FETCH_NUM);<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$db-&gt;SetFetchMode(ADODB_FETCH_ASSOC);<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=&gt;'v0',[1] =&gt;'v1')</i>
-	print_r($rs2-&gt;fields); # shows <i>array(['col1']=&gt;'v0',['col2'] =&gt;'v1')</i></font></pre>
+<pre><font>	$db-&gt;SetFetchMode(ADODB_FETCH_NUM);<br>	$rs1 = $db-&gt;Execute('select * from table');<br>	$db-&gt;SetFetchMode(ADODB_FETCH_ASSOC);<br>	$rs2 = $db-&gt;Execute('select * from table');<br>	print_r($rs1-&gt;fields); # shows <i>array([0]=gt;'v0',[1] =gt;'v1')</i>
+	print_r($rs2-&gt;fields); # shows <i>array(['col1']=gt;'v0',['col2'] =gt;'v1')</i></font></pre>
 <p><font>To retrieve the previous fetch mode, you can use check the $db-&gt;fetchMode 
 	property, or use the return value of SetFetchMode( ). 
 </font></p><p><font><strong><a name="adodb_assoc_case"></a>ADODB_ASSOC_CASE</strong></font></p>
@@ -1657,7 +1657,7 @@ See  <a href="#connect_ex">Connection Examples</a> for many examples.
 See Connect( ) above for more info.</font></p>
 <p><font>Since ADOdb 2.21, we also support autoRollback. If you set:</font></p>
  
-<pre> $conn = &amp;NewADOConnection('mysql');<br> $conn-&gt;autoRollback = true; # default is false<br> $conn-&gt;PConnect(...); # rollback here</pre>
+<pre> $conn =NewADOConnection('mysql');<br> $conn-&gt;autoRollback = true; # default is false<br> $conn-&gt;PConnect(...); # rollback here</pre>
 <p> Then when doing a persistent connection with PConnect( ), ADOdb will 
   perform a rollback first. This is because it is documented that PHP is 
   not guaranteed to rollback existing failed transactions when 
@@ -1687,7 +1687,7 @@ Since 4.23, null is returned if the extension is not loaded.
 	sql.</font></p>
 <p><font>The $inputarr parameter can be used for binding variables to parameters. Below 
 	is an Oracle example:</font></p>
-<pre><font> $conn-&gt;Execute("SELECT * FROM TABLE WHERE COND=:val", array('val'=&gt; $val));<br> </font></pre>
+<pre><font> $conn-&gt;Execute("SELECT * FROM TABLE WHERE COND=:val", array('val'=gt; $val));<br> </font></pre>
 <p><font>Another example, using ODBC,which uses the ? convention:</font></p>
 <pre><font>  $conn-&gt;Execute("SELECT * FROM TABLE WHERE COND=?", array($val));<br></font></pre>
 <font><a name="binding"></a>
@@ -1699,7 +1699,7 @@ Note that you do not have to quote strings if you use binding.
 </font></p><p><font> Variable binding in the odbc, interbase and oci8po drivers. 
 </font></p><pre><font>$rs = $db-&gt;Execute('select * from table where val=?', array('10'));<br></font></pre>
 <font>Variable binding in the oci8 driver: 
-</font><pre><font>$rs = $db-&gt;Execute('select name from table where val=:key', <br>  array('key' =&gt; 10));<br></font></pre>
+</font><pre><font>$rs = $db-&gt;Execute('select name from table where val=:key', <br>  array('key' =gt; 10));<br></font></pre>
 <font><a name="bulkbind"></a>
 <i>Bulk binding</i>
 </font><p><font>Since ADOdb 3.80, we support bulk binding in Execute(), in which you pass in a 2-dimensional array to
@@ -1715,7 +1715,7 @@ or until the first error. Very useful for importing data.
 	If CacheExecute() is called again with the same $sql, $inputarr, 
 	and also the same database, same userid, and the cached recordset 
 	has not expired, the cached recordset is returned. 
-</font></p><pre><font>  include('adodb.inc.php'); <br>  include('tohtml.inc.php');<br>  $ADODB_<b>CACHE_DIR</b> = '/usr/local/ADOdbcache';<br>  $conn = &amp;ADONewConnection('mysql'); <br>  $conn-&gt;PConnect('localhost','userid','password','database');<br>  $rs = $conn-&gt;<b>CacheExecute</b>(15, 'select * from table'); # cache 15 secs<br>  rs2html($rs); /* recordset to html table */  <br></font></pre>
+</font></p><pre><font>  include('adodb.inc.php'); <br>  include('tohtml.inc.php');<br>  $ADODB_<b>CACHE_DIR</b> = '/usr/local/ADOdbcache';<br>  $conn =ADONewConnection('mysql'); <br>  $conn-&gt;PConnect('localhost','userid','password','database');<br>  $rs = $conn-&gt;<b>CacheExecute</b>(15, 'select * from table'); # cache 15 secs<br>  rs2html($rs); /* recordset to html table */  <br></font></pre>
 <p><font> Alternatively, since ADOdb 1.80, the $secs2cache parameter is optional:</font></p>
 <pre><font>	$conn-&gt;Connect(...);<br>   	$conn-&gt;cacheSecs = 3600*24; // cache 24 hours<br>	$rs = $conn-&gt;CacheExecute('select * from table');<br></font></pre>
 <font>If $secs2cache is omitted, we use the value 
@@ -1731,7 +1731,7 @@ only with SELECT statements.
 <p><font>Execute an Oracle stored procedure, and returns an Oracle REF cursor variable as 
 	a regular ADOdb recordset. Does not work with any other database except oci8. 
 	Thanks to Robert Tuttle for the design.
-</font></p><pre><font>    $db = ADONewConnection("oci8"); <br>    $db-&gt;Connect("foo.com:1521", "uid", "pwd", "FOO"); <br>    $rs = $db-&gt;ExecuteCursor("begin :cursorvar := getdata(:param1); end;", <br>					'cursorvar',<br>					array('param1'=&gt;10)); <br>    # $rs is now just like any other ADOdb recordset object<br>    rs2html($rs);</font></pre>
+</font></p><pre><font>    $db = ADONewConnection("oci8"); <br>    $db-&gt;Connect("foo.com:1521", "uid", "pwd", "FOO"); <br>    $rs = $db-&gt;ExecuteCursor("begin :cursorvar := getdata(:param1); end;", <br>					'cursorvar',<br>					array('param1'=gt;10)); <br>    # $rs is now just like any other ADOdb recordset object<br>    rs2html($rs);</font></pre>
 <p><font>ExecuteCursor() is a helper function that does the following internally: 
 </font></p><pre><font>	$stmt = $db-&gt;Prepare("begin :cursorvar := getdata(:param1); end;", true); <br>	$db-&gt;Parameter($stmt, $cur, 'cursorvar', false, -1, OCI_B_CURSOR);<br>	$rs = $db-&gt;Execute($stmt,$bindarr);<br></font></pre>
 <p><font>ExecuteCursor only accepts 1 out parameter. So if you have 2 out parameters, use:
@@ -1754,10 +1754,10 @@ only with SELECT statements.
 <p><font>The last parameter $inputarr is for databases that support variable binding 
 	such as Oracle oci8. This substantially reduces SQL compilation overhead. 
 	Below is an Oracle example:</font></p>
-<pre><font> $conn-&gt;SelectLimit("SELECT * FROM TABLE WHERE COND=:val", 100,-1,array('val'=&gt; $val));<br> </font></pre>
+<pre><font> $conn-&gt;SelectLimit("SELECT * FROM TABLE WHERE COND=:val", 100,-1,array('val'=gt; $val));<br> </font></pre>
 <p><font>The oci8po driver (oracle portable driver) uses the more standard bind variable 
 	of ?: 
-</font></p><pre><font> $conn-&gt;SelectLimit("SELECT * FROM TABLE WHERE COND=?", 100,-1,array('val'=&gt; $val));<br></font></pre>
+</font></p><pre><font> $conn-&gt;SelectLimit("SELECT * FROM TABLE WHERE COND=?", 100,-1,array('val'=gt; $val));<br></font></pre>
 <p><font> 
 </font></p><p><font>Ron Wilson reports that SelectLimit does not work with UNIONs. 
 </font></p><p><font><b>CacheSelectLimit<a name="cacheselectlimit"></a>([$secs2cache,] $sql, $numrows=-1,$offset=-1,$inputarr=false)</b></font></p>
@@ -1919,7 +1919,7 @@ Similar to UpdateBlob (see above), but for Character Large OBjects.
 	auto-quoting will not quote nulls. Note that auto-quoting will not work if 
 	you use SQL functions or operators. 
 </font></p><p><font>Examples: 
-</font></p><pre><font># single field primary key<br>$ret = $db-&gt;Replace('atable', <br>	array('id'=&gt;1000,'firstname'=&gt;'Harun','lastname'=&gt;'Al-Rashid'),<br>	'id',$autoquote = true);	<br># generates UPDATE atable SET firstname='Harun',lastname='Al-Rashid' WHERE id=1000<br># or INSERT INTO atable (id,firstname,lastname) VALUES (1000,'Harun','Al-Rashid')<br><br># compound key<br>$ret = $db-&gt;Replace('atable2', <br>	array('firstname'=&gt;'Harun','lastname'=&gt;'Al-Rashid', 'age' =&gt; 33, 'birthday' =&gt; 'null'),<br>	array('lastname','firstname'),<br>	$autoquote = true);<br><br># no auto-quoting<br>$ret = $db-&gt;Replace('atable2', <br>	array('firstname'=&gt;"'Harun'",'lastname'=&gt;"'Al-Rashid'", 'age' =&gt; 'null'),<br>	array('lastname','firstname'));	<br></font></pre>
+</font></p><pre><font># single field primary key<br>$ret = $db-&gt;Replace('atable', <br>	array('id'=gt;1000,'firstname'=gt;'Harun','lastname'=gt;'Al-Rashid'),<br>	'id',$autoquote = true);	<br># generates UPDATE atable SET firstname='Harun',lastname='Al-Rashid' WHERE id=1000<br># or INSERT INTO atable (id,firstname,lastname) VALUES (1000,'Harun','Al-Rashid')<br><br># compound key<br>$ret = $db-&gt;Replace('atable2', <br>	array('firstname'=gt;'Harun','lastname'=gt;'Al-Rashid', 'age' =gt; 33, 'birthday' =gt; 'null'),<br>	array('lastname','firstname'),<br>	$autoquote = true);<br><br># no auto-quoting<br>$ret = $db-&gt;Replace('atable2', <br>	array('firstname'=gt;"'Harun'",'lastname'=gt;"'Al-Rashid'", 'age' =gt; 'null'),<br>	array('lastname','firstname'));	<br></font></pre>
 <p><font><b>AutoExecute<a name="autoexecute"></a>($table, $arrFields, $mode, $where=false, $forceUpdate=true,$magicq=false)</b></font></p>
 <p>Since ADOdb 4.56, you can automatically generate and execute INSERTs and UPDATEs on a given table with this
 function, which is a wrapper for GetInsertSQL() and GetUpdateSQL().
@@ -2093,18 +2093,18 @@ $db->CompleteTrans();
   row3: Rose, Flower, Edible</font></p>
 <p><font>GetAssoc will generate the following 2-dimensional associative 
   array:</font></p>
-<p><font>Apple =&gt; array[Fruit, Edible]<br>
-  Cactus =&gt; array[Plant, Inedible]<br>
-  Rose =&gt; array[Flower,Edible]</font></p>
+<p><font>Apple =gt; array[Fruit, Edible]<br>
+  Cactus =gt; array[Plant, Inedible]<br>
+  Rose =gt; array[Flower,Edible]</font></p>
 <p><font>If the dataset is:</font></p>
 <p><font>row1: Apple, Fruit<br>
 row2: Cactus, Plant<br>
 row3: Rose, Flower </font></p>
 <p><font>GetAssoc will generate the following 1-dimensional associative
   array (with $force_array==false):</font></p>
-<p><font>Apple =&gt; Fruit</font><br>
-  Cactus=&gt;Plant<br>
-  Rose=&gt;Flower </p>
+<p><font>Apple =gt; Fruit</font><br>
+  Cactus=gt;Plant<br>
+  Rose=gt;Flower </p>
 <p><font>The function returns:</font></p>
 <p><font>The associative array, or false if an error occurs.</font></p>
 <font>
@@ -2237,7 +2237,7 @@ $db-&gt;InParameter($stmt,$group,'group',64);
 <p>
 <font> If $type parameter is set to false, in mssql, $type will be dynamicly determined 
 based on the type of the PHP variable passed <font face="Courier New, Courier, mono">(string 
-=&gt; SQLCHAR, boolean =&gt;SQLINT1, integer =&gt;SQLINT4 or float/double=&gt;SQLFLT8)</font>.
+=gt; SQLCHAR, boolean =gt;SQLINT1, integer =gt;SQLINT4 or float/double=gt;SQLFLT8)</font>.
 </font></p><p><font> 
 In oci8, $type can be set to OCI_B_FILE (Binary-File), OCI_B_CFILE (Character-File), 
 OCI_B_CLOB (Character-LOB), OCI_B_BLOB (Binary-LOB) and OCI_B_ROWID (ROWID). To 
@@ -2364,7 +2364,7 @@ Also see <a href="docs-perf.htm">Performance Monitor</a>.
 <p>Here is an example of using fnExecute, to count all cached queries and non-cached 
   queries, you can do this:</p>
 <pre><font color="#006600"># $db is the connection object</font>
-function &CountExecs($db, $sql, $inputarray)
+function CountExecs($db, $sql, $inputarray)
 {
 global $EXECS;
 
@@ -2497,7 +2497,7 @@ when you are sending dates to the database (eg INSERT, UPDATE or where clause of
 <p><font>Returns an array of column names for $table. Since ADOdb 4.22, this is an associative array, with the
 keys in uppercase. Set $numericIndex=true if you want the old behaviour of numeric indexes (since 4.23).
 </font></p><p>
-<font>e.g. array('FIELD1' =&gt; 'Field1', 'FIELD2'=&gt;'Field2')
+<font>e.g. array('FIELD1' =gt; 'Field1', 'FIELD2'=gt;'Field2')
 </font></p><p>
 </p><p><font><b>MetaPrimaryKeys<a name="metaprimarykeys"></a>($table,
       $owner=false)</b></font> 
@@ -2521,7 +2521,7 @@ a string).</font></p>
   example, if table employee has a foreign key where employee.deptkey points to 
   dept_table.deptid, and employee.posn=posn_table.postionid and employee.poscategory=posn_table.category, 
   then $conn-&gt;MetaForeignKeys('employee') will return 
-</font></p><pre><font>	array(<br>		'dept_table' =&gt; array('deptkey=deptid'),<br>		'posn_table' =&gt; array('posn=positionid','poscategory=category')<br>	)<br></font></pre>
+</font></p><pre><font>	array(<br>		'dept_table' =gt; array('deptkey=deptid'),<br>		'posn_table' =gt; array('posn=positionid','poscategory=category')<br>	)<br></font></pre>
 <p><font>The optional schema or owner can be defined in $owner. If $upper is true, then 
   the table names (array keys) are upper-cased. 
 </font></p><hr />
@@ -2696,8 +2696,8 @@ not support this function.</font></p>
     row. The keys to the array are the column names. The column names are upper-cased
   for easy access. To get the next row, you will still need to call MoveNext(). </font></p>
 <p><font>For example:<br>
-Array ( [ID] =&gt; 1 [FIRSTNAME] =&gt; Caroline [LASTNAME] =&gt; Miranda [CREATED]
-=&gt; 2001-07-05 ) </font></p>
+Array ( [ID] =gt; 1 [FIRSTNAME] =gt; Caroline [LASTNAME] =gt; Miranda [CREATED]
+=gt; 2001-07-05 ) </font></p>
 <p><font>Note: do not use GetRowAssoc() with $ADODB_FETCH_MODE
     = ADODB_FETCH_ASSOC. Because they have the same functionality, they will
   interfere with each other.</font></p>
@@ -2830,7 +2830,7 @@ so you do not have to call Close() for such SQL statements.</font></p>
   mechanism, not a production table recordset viewer.</font></p>
 <p><font>You will need to include the file <i>tohtml.inc.php</i>.</font></p>
 <p><font>Example of rs2html:<b><font color="#336600"><a name="exrs2html"></a></font></b></font></p>
-<pre><font><b><font color="#336600">&lt;?<br>include('tohtml.inc.php')</font></b>; # load code common to ADOdb <br><b>include</b>('adodb.inc.php'); # load code common to ADOdb <br>$<font color="#663300">conn</font> = &amp;ADONewConnection('mysql');   # create a connection <br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers'; <br>$<font color="#663300">rs</font>   = $<font color="#663300">conn</font>-&gt;Execute($sql); <br><font color="#336600"><b>rs2html</b></font><b>($<font color="#663300">rs</font>,'<i>border=2 cellpadding=3</i>',array('<i>Customer Name','Customer ID</i>'));<br>?&gt;</b></font></pre>
+<pre><font><b><font color="#336600">&lt;?<br>include('tohtml.inc.php')</font></b>; # load code common to ADOdb <br><b>include</b>('adodb.inc.php'); # load code common to ADOdb <br>$<font color="#663300">conn</font> =ADONewConnection('mysql');   # create a connection <br>$<font color="#663300">conn</font>-&gt;PConnect('localhost','userid','','agora');# connect to MySQL, agora db<br>$<font color="#663300">sql</font> = 'select CustomerName, CustomerID from customers'; <br>$<font color="#663300">rs</font>   = $<font color="#663300">conn</font>-&gt;Execute($sql); <br><font color="#336600"><b>rs2html</b></font><b>($<font color="#663300">rs</font>,'<i>border=2 cellpadding=3</i>',array('<i>Customer Name','Customer ID</i>'));<br>?&gt;</b></font></pre>
 <hr />
 <h3><font>Differences between this ADOdb library and Microsoft
 ADO<a name="adodiff"></a></font></h3>
@@ -2929,10 +2929,28 @@ of MySQL.</font></p>
 
 <h2><font>Change Log<a name="Changes"></a><a name="changes"></a><a name="changelog"></a></font></h2>
 
-<p><a name="4.96"></a><b>4.96/5.02 ? ? 2007</b>
-<p>Fix adodb count optimisation. Preg_match did not work properly.
+<p><a name="4.97"></a><b>4.97/5.03 22 Jan 2008</b>
+<p>Active Record: $ADODB_ASSOC_CASE=1 did not work properly. Fixed. 
+<p>Modified Fields() in recordset class to support display null fields in FetchNextObject().
+<p>In ADOdb5, active record implementation, we now support column names with spaces in them - we autoconvert the spaces to _ using
+ __set(). Thx Daniel Cook. http://phplens.com/lens/lensforum/msgs.php?id=17200
+<p>Removed $arg3 from mysqli SelectLimit. See http://phplens.com/lens/lensforum/msgs.php?id=16243. Thx Zsolt Szeberenyi.
+<p>Changed oci8 FetchField, which returns the max_length of BLOB/CLOB/NCLOB as 4000 (incorrectly) to -1.
+<p>CacheExecute would sometimes return an error on Windows if it was unable to lock the cache file. This is harmless
+and has been changed to a warning that can be ignored. Also adodb_write_file() code revised.
+<p>ADOdb perf code changed to only log sql if execution time >= 0.05 seconds. New $ADODB_PERF_MIN variable holds min sql timing. 
+Any SQL with timing value below this and is not causing an error is not logged.
+<p>Also adodb_backtrace() now traces 1 level deeper as sometimes actual culprit function is not displayed.
+<p>Fixed a group by problem with adodb_getcount() for db's which are not postgres/oci8 based.
+<p>Changed mssql driver Parameter() from SQLCHAR to SQLVARCHAR: case 'string': $type = SQLVARCHAR; break.
+<p>Problem with mssql driver in php5 (for adodb 5.03) because some functions are not static. Fixed.
+
+
+<p><a name="4.96"></a><b>4.96/5.02 24 Sept 2007</b>
+p>Fix adodb count optimisation. Preg_match did not work properly. Also rewrote the ORDER BY stripping code in _adodb_getcount(), adodb-lib.inc.php.
 <p>SelectLimit for oci8 not optimal for large recordsets when offset=0. Changed $nrows check.
-<p>Rewrote the ORDER BY stripping code in _adodb_getcount(), adodb-lib.inc.php.
+<p>Active record optimizations. 
+Added support for assoc arrays in Set().
 <p>Now GetOne returns null if EOF (no records found), and false if error occurs. Use ErrorMsg()/ErrorNo() to get the error.
 <p>Added BIT data type support to adodb-ado.inc.php and adodb-ado5.inc.php.
 <p>Ldap driver did not return actual ldap error messages. Fixed.
@@ -2949,7 +2967,8 @@ of MySQL.</font></p>
 <p>Added support for customizing ADORecordset_empty using $this->rsPrefix.'empty'. By Josh Truwin.
 <p>Added proper support for ALterColumnSQL for Postgresql in datadict code. Thx. Josh Truwin. 
 <p>Added better support for MetaType() in mysqli when using an array recordset.
-<p><a name="4.95"></a><b>4.95/5.01 17 May 2007</b>
+
+<p><a name="5.01"></a><b>4.95/5.01 17 May 2007</b>
 <p>CacheFlush debug outp() passed in invalid parameters. Fixed.
 <p>Added Thai language file for adodb. Thx Trirat Petchsingh rosskouk#gmail.com and Marcos Pont</p>
 <p>Added zerofill checking support to MetaColumns for mysql and mysqli.
@@ -2962,7 +2981,9 @@ of MySQL.</font></p>
 <p>For ADOdb 5.01, fixed some adodb-datadict.inc.php MetaType compat issues with PHP5.
 <p>The $argHostname was wiped out in adodb-ado5.inc.php. Fixed.
 <p>Adodb5 version, added iterator support for adodb_recordset_empty.
-<p>Adodb5 version,more error checking code now will use exceptions if available.
+<p><a name="5.00"></a><b>5.00 5 Feb 2007</b>
+<p>Experimental PHP5 version - conforms to E_STRICT (PHP 5.1.6 version), 
+added static to functions outp(), UnixTimeStamp(), UnixDate(), and removed object references: =&amp; changed to =. Otherwise code is the same as 4.94.</p>
 <p><a name="4.94"></a><b>4.94 23 Jan 2007</b>
 <p>Active Record: $ADODB_ASSOC_CASE=2 did not work properly. Fixed. Thx gmane#auxbuss.com.
 <p>mysqli had bugs in BeginTrans() and EndTrans(). Fixed.</p>
@@ -3535,7 +3556,7 @@ data dictionary parser now detects `field name` and generates column names with 
 </p><p>Added $db-&gt;length, which holds name of function that returns strlen.
 </p><p>Fixed error handling for bad driver in ADONewConnection - passed too few params to error-handler.
 </p><p>Datadict did not handle types like 16.0 properly in _GetSize. Fixed.
-</p><p>Oci8 driver SelectLimit() bug &amp;= instead of =&amp; used. Thx to Swen Th&uuml;mmler.
+</p><p>Oci8 driver SelectLimit() bug &amp;= instead of = used. Thx to Swen Th&uuml;mmler.
 </p><p>Jesse Mullan suggested not flushing outp when output buffering enabled. Due to Apache 2.0 bug. Added.
 </p><p>MetaTables/MetaColumns return ref bug with PHP5 fixed in adodb-datadict.inc.php.
 </p><p>New mysqli driver contributed by Arjen de Rijke. Based on adodb 3.40 driver.

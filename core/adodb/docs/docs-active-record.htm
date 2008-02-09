@@ -14,7 +14,7 @@ font-family: Arial, Helvetica, sans-serif ;
 <title>ADOdb Active Record</title>
 <body>
 <h1>ADOdb Active Record</h1>
-<p> (c) 2000-2007 John Lim (jlim#natsoft.com)</p>
+<p> (c) 2000-2008 John Lim (jlim#natsoft.com)</p>
 <p><font size="1">This software is dual licensed using BSD-Style and LGPL. This 
   means you can use it in compiled proprietary and commercial products.</font></p>
 <p><hr>
@@ -233,7 +233,7 @@ var $_table = 'people';
 }
 
 $person = new Person();
-$peopleArray =& $person->Find("name like ? order by age", array('Sm%'));
+$peopleArray = $person->Find("name like ? order by age", array('Sm%'));
 </pre>
 
 <h3><li>Error Handling and Debugging</h3>
@@ -259,7 +259,7 @@ if $db->debug is enabled, then ADOdb_Active_Record errors are also outputted to 
 $row = $db->GetRow("select * from tablex where id=$id");
 
 # PHP4 or PHP5 without enabling exceptions
-$obj =& new ADOdb_Active_Record('Products');
+$obj = new ADOdb_Active_Record('Products');
 if ($obj->ErrorMsg()){
 	echo $obj->ErrorMsg();
 } else {
@@ -270,7 +270,7 @@ if ($obj->ErrorMsg()){
 
 include('adodb-exceptions.inc.php');
 try {
-	$obj =& new ADOdb_Active_Record('Products');
+	$obj = new ADOdb_Active_Record('Products');
 	$obj->Set($row);
 } catch(exceptions $e) {
 	echo $e->getMessage();
@@ -490,7 +490,7 @@ var_dump($person2);
 
 // retrieve an array of records
 $activeArr = $db->GetActiveRecordsClass($class = "Person",$table = "persons","id=".$db->Param(0),array(2));
-$person2 =& $activeArr[0];
+$person2 = $activeArr[0];
 echo "&lt;p>Name first (should be John): ",$person->name_first, "&lt;br>Class = ",get_class($person2);	
 </pre>
 

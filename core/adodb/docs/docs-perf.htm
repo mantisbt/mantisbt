@@ -18,7 +18,7 @@ font-size: 8pt;
 </head>
 <body>
 <h3>The ADOdb Performance Monitoring Library</h3>
-<p>V4.94 23 Jan 2007 (c) 2000-2007 John Lim (jlim#natsoft.com.my)</p>
+<p>V5.03 22 Jan 2008  (c) 2000-2008 John Lim (jlim#natsoft.com.my)</p>
 <p><font size="1">This software is dual licensed using BSD-Style and
 LGPL. This means you can use it in compiled proprietary and commercial
 products.</font></p>
@@ -90,7 +90,7 @@ parameters and automated tuning hints.</p>
 supported. To create a new performance monitor, call NewPerfMonitor( )
 as demonstrated below: </p>
 <pre>&lt;?php<br>include_once('adodb.inc.php');<br>session_start(); <font
- color="#006600"># session variables required for monitoring</font><br>$conn = ADONewConnection($driver);<br>$conn-&gt;Connect($server,$user,$pwd,$db);<br>$perf =&amp; NewPerfMonitor($conn);<br>$perf-&gt;UI($pollsecs=5);<br>?&gt;<br></pre>
+ color="#006600"># session variables required for monitoring</font><br>$conn = ADONewConnection($driver);<br>$conn-&gt;Connect($server,$user,$pwd,$db);<br>$perf =amp; NewPerfMonitor($conn);<br>$perf-&gt;UI($pollsecs=5);<br>?&gt;<br></pre>
 <p>It is also possible to retrieve a single database parameter:</p>
 <pre>$size = $perf-&gt;DBParameter('data cache size');<br></pre>
 <p>
@@ -229,7 +229,7 @@ need to echo or print the output of this function,</p>
 <p>Returns database health check parameters formatted for a command
 line interface. You will need to echo or print the output of this
 function. Sample output for mysql:</p>
-<pre>-- Ratios -- <br>          MyISAM cache hit ratio =&gt; 56.5635738832 <br>          InnoDB cache hit ratio =&gt; 0 <br>             sql cache hit ratio =&gt; 0 <br> -- IO -- <br>                      data reads =&gt; 2622 <br>                     data writes =&gt; 2415.5 <br> -- Data Cache -- <br>          MyISAM data cache size =&gt; 512K <br>             BDB data cache size =&gt; 8388600<br>          InnoDB data cache size =&gt; 8M<br> -- Memory Pools -- <br>                read buffer size =&gt; 131072 <br>                sort buffer size =&gt; 65528 <br>                     table cache =&gt; 4 <br> -- Connections -- <br>             current connections =&gt; 3<br>                 max connections =&gt; 100</pre>
+<pre>-- Ratios -- <br>          MyISAM cache hit ratio =gt; 56.5635738832 <br>          InnoDB cache hit ratio =gt; 0 <br>             sql cache hit ratio =gt; 0 <br> -- IO -- <br>                      data reads =gt; 2622 <br>                     data writes =gt; 2415.5 <br> -- Data Cache -- <br>          MyISAM data cache size =gt; 512K <br>             BDB data cache size =gt; 8388600<br>          InnoDB data cache size =gt; 8M<br> -- Memory Pools -- <br>                read buffer size =gt; 131072 <br>                sort buffer size =gt; 65528 <br>                     table cache =gt; 4 <br> -- Connections -- <br>             current connections =gt; 3<br>                 max connections =gt; 100</pre>
 <p><font face="Courier New, Courier, mono">function <b>Poll</b>($pollSecs=5)
 </font> </p>
 <p> Run in infinite loop, displaying the following information every
@@ -298,6 +298,9 @@ $this-&gt;DBParameter("data cache size").</p>
 <p>Returns the CPU load of the database client (NOT THE SERVER) as a
 percentage. Only works for Linux and Windows. For Windows, WMI must be
 available.</p>
+<h3>$ADODB_PERF_MIN</h3>
+<p>New in adodb 4.97/5.03 is this global variable, which controls whether sql timings which are too small are not saved. Currently it defaults 
+to 0.05 (seconds). This means that all sql's which are faster than 0.05 seconds to execute are not saved.
 <h3>Format of $settings Property</h3>
 <p> To create new database parameters, you need to understand
 $settings. The $settings data structure is an associative array. Each
@@ -334,7 +337,7 @@ will invoke $this-&gt;GetIndexDescription($val). This is useful for
 generating tuning suggestions. For an example, see WarnCacheRatio().</li>
 </ol>
 <p>Example from MySQL, table_cache database parameter:</p>
-<pre>'table cache' =&gt; array('CACHE',            # category code<br>   array("show variables", 'table_cache'), # array (type 1b)<br>   'Number of tables to keep open'),       # description</pre>
+<pre>'table cache' =gt; array('CACHE',            # category code<br>   array("show variables", 'table_cache'), # array (type 1b)<br>   'Number of tables to keep open'),       # description</pre>
 <h3>Example Health Check Output</h3>
 <p><a href="#db2">db2</a> <a href="#informix">informix</a> <a
  href="#mysql">mysql</a> <a href="#mssql">mssql</a> <a href="#oci8">oci8</a>

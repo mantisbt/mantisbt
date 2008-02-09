@@ -1,6 +1,6 @@
 <?php
 /* 
-V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
+V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -53,7 +53,7 @@ class ADODB_SAPDB extends ADODB_odbc {
 		return $this->GetCol("SELECT columnname FROM COLUMNS WHERE tablename=$table AND mode='KEY' ORDER BY pos");
 	}
 		
- 	function &MetaIndexes ($table, $primary = FALSE)
+ 	function MetaIndexes ($table, $primary = FALSE)
 	{
 		$table = $this->Quote(strtoupper($table));
 
@@ -92,7 +92,7 @@ class ADODB_SAPDB extends ADODB_odbc {
         return $indexes;
 	}
 	
- 	function &MetaColumns ($table)
+ 	function MetaColumns ($table)
 	{
 		global $ADODB_FETCH_MODE;
 		$save = $ADODB_FETCH_MODE;

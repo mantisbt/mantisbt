@@ -2,7 +2,7 @@
 
 
 /*
-V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
+V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -15,6 +15,10 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 	var $metaColumnsSQL = "SHOW COLUMNS FROM `%s`";
 	var $sysDate = 'CURDATE()';
 	var $sysTimeStamp = 'NOW()';
+	var $hasGenID = true;
+	var $_genIDSQL = "update %s set id=LAST_INSERT_ID(id+1);";
+	var $_dropSeqSQL = "drop table %s";
+
 	var $nameQuote = '`';
 
 	function _init($parentDriver)
@@ -44,7 +48,7 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 		return $arr;
 	}
 	
-	function &MetaTables($ttype=false,$showSchema=false,$mask=false) 
+	function MetaTables($ttype=false,$showSchema=false,$mask=false) 
 	{	
 		$save = $this->metaTablesSQL;
 		if ($showSchema && is_string($showSchema)) {
@@ -55,7 +59,7 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 			$mask = $this->qstr($mask);
 			$this->metaTablesSQL .= " like $mask";
 		}
-		$ret =& ADOConnection::MetaTables($ttype,$showSchema);
+		$ret = ADOConnection::MetaTables($ttype,$showSchema);
 		
 		$this->metaTablesSQL = $save;
 		return $ret;
@@ -72,7 +76,7 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 		$this->Execute("SET SESSION TRANSACTION ".$transaction_mode);
 	}
 	
- 	function &MetaColumns($table) 
+ 	function MetaColumns($table) 
 	{
 		$this->_findschema($table,$schema);
 		if ($schema) {
@@ -152,16 +156,16 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 		
 	
 	// parameters use PostgreSQL convention, not MySQL
-	function &SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs=0)
+	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs=0)
 	{
 		$offsetStr =($offset>=0) ? "$offset," : '';
 		// jason judge, see http://phplens.com/lens/lensforum/msgs.php?id=9220
 		if ($nrows < 0) $nrows = '18446744073709551615'; 
 		
 		if ($secs)
-			$rs =& $this->CacheExecute($secs,$sql." LIMIT $offsetStr$nrows",$inputarr);
+			$rs = $this->CacheExecute($secs,$sql." LIMIT $offsetStr$nrows",$inputarr);
 		else
-			$rs =& $this->Execute($sql." LIMIT $offsetStr$nrows",$inputarr);
+			$rs = $this->Execute($sql." LIMIT $offsetStr$nrows",$inputarr);
 		return $rs;
 	}
 }

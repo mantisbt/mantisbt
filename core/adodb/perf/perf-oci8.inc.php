@@ -1,6 +1,6 @@
 <?php
 /* 
-V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
+V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -109,7 +109,7 @@ AND    b.name = 'sorts (memory)'",
 			where name = 'free memory' and pool = 'shared pool'",
 		'Percentage of data cache actually in use - should be over 85%'),
 		
-				'shared pool utilization ratio' => array('RATIOU', 
+		'shared pool utilization ratio' => array('RATIOU', 
 		'select round((sga.bytes/case when p.value=0 then sga.bytes else to_number(p.value) end)*100,2)
 		from v$sgastat sga, v$parameter p
 		where sga.name = \'free memory\' and sga.pool = \'shared pool\'
@@ -156,7 +156,7 @@ having count(*) > 100)",'These are sql statements that should be using bind vari
 		'random page cost' => array('COST',
 			"select value from v\$parameter where name = 'optimizer_index_cost_adj'",
 			'=WarnPageCost'),
-	
+		
 	'Backup',
 		'Achivelog Mode' => array('BACKUP', 'select log_mode from v$database', 'To turn on archivelog:<br>
 	<pre>
@@ -185,7 +185,7 @@ FROM v\$parameter v1, v\$parameter v2 WHERE v1.name='log_archive_dest' AND v2.na
 		$savelog = $conn->LogSQL(false);	
 		$this->version = $conn->ServerInfo();
 		$conn->LogSQL($savelog);	
-		$this->conn =& $conn;
+		$this->conn = $conn;
 	}
 	
 	function WarnPageCost($val)
@@ -229,7 +229,7 @@ FROM v\$parameter v1, v\$parameter v2 WHERE v1.name='log_archive_dest' AND v2.na
 	function Explain($sql,$partial=false) 
 	{
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->SelectLimit("select ID FROM PLAN_TABLE");
+		$rs = $this->conn->SelectLimit("select ID FROM PLAN_TABLE");
 		if (!$rs) {
 			echo "<p><b>Missing PLAN_TABLE</b></p>
 <pre>
@@ -268,7 +268,7 @@ CREATE TABLE PLAN_TABLE (
 	
 		if ($partial) {
 			$sqlq = $this->conn->qstr($sql.'%');
-			$arr = $this->conn->GetArray("select distinct distinct sql1 from adodb_logsql where sql1 like $sqlq");
+			$arr = $this->conn->GetArray("select distinct sql1 from adodb_logsql where sql1 like $sqlq");
 			if ($arr) {
 				foreach($arr as $row) {
 					$sql = reset($row);
@@ -282,7 +282,7 @@ CREATE TABLE PLAN_TABLE (
 		$this->conn->BeginTrans();
 		$id = "ADODB ".microtime();
 
-		$rs =& $this->conn->Execute("EXPLAIN PLAN SET STATEMENT_ID='$id' FOR $sql");
+		$rs = $this->conn->Execute("EXPLAIN PLAN SET STATEMENT_ID='$id' FOR $sql");
 		$m = $this->conn->ErrorMsg();
 		if ($m) {
 			$this->conn->RollbackTrans();
@@ -290,7 +290,7 @@ CREATE TABLE PLAN_TABLE (
 			$s .= "<p>$m</p>";
 			return $s;
 		}
-		$rs =& $this->conn->Execute("
+		$rs = $this->conn->Execute("
 		select 
   '<pre>'||lpad('--', (level-1)*2,'-') || trim(operation) || ' ' || trim(options)||'</pre>'  as Operation, 
   object_name,COST,CARDINALITY,bytes
@@ -310,7 +310,7 @@ CONNECT BY prior id=parent_id and statement_id='$id'");
 	{
 		if ($this->version['version'] < 9) return 'Oracle 9i or later required';
 		
-		 $rs =& $this->conn->Execute("
+		 $rs = $this->conn->Execute("
 select  a.size_for_estimate as cache_mb_estimate,
 	case when a.size_factor=1 then 
    		'&lt;&lt;= current'
@@ -438,7 +438,7 @@ order by
 		if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
 		
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->SelectLimit($sql);
+		$rs = $this->conn->SelectLimit($sql);
 		$this->conn->LogSQL($savelog);
 		
 		if (isset($savem)) $this->conn->SetFetchMode($savem);
@@ -509,7 +509,7 @@ order by
 		if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
 		
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->Execute($sql);
+		$rs = $this->conn->Execute($sql);
 		$this->conn->LogSQL($savelog);
 		
 		if (isset($savem)) $this->conn->SetFetchMode($savem);
@@ -521,6 +521,29 @@ order by
 		}
 	
 		return $s;
+	}
+	
+	function clearsql() 
+	{
+		$perf_table = adodb_perf::table();
+	// using the naive "delete from $perf_table where created<".$this->conn->sysTimeStamp will cause the table to lock, possibly
+	// for a long time
+		$sql = 
+"DECLARE cnt pls_integer;
+BEGIN
+	cnt := 0;
+	FOR rec IN (SELECT ROWID AS rr FROM $perf_table WHERE created<SYSDATE) 
+	LOOP
+	  cnt := cnt + 1;
+	  DELETE FROM $perf_table WHERE ROWID=rec.rr;
+	  IF cnt = 10000 THEN
+	  	COMMIT;
+		cnt := 0;
+	  END IF;
+	END LOOP;
+END;";
+
+		$ok = $this->conn->Execute($sql);
 	}
 	
 }

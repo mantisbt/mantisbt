@@ -1,6 +1,6 @@
 <?php
 /* 
-V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
+V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
@@ -64,39 +64,7 @@ function adodb_pdo_type($t)
 
 
 
-class ADODB_pdo_base extends ADODB_pdo {
 
-	var $sysDate = "'?'";
-	var $sysTimeStamp = "'?'";
-	
-
-	function _init($parentDriver)
-	{
-		$parentDriver->_bindInputArray = true;
-		#$parentDriver->_connectionID->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
-	}
-	
-	function ServerInfo()
-	{
-		return ADOConnection::ServerInfo();
-	}
-	
-	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs2cache=0)
-	{
-		$ret = ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
-		return $ret;
-	}
-	
-	function MetaTables()
-	{
-		return false;
-	}
-	
-	function MetaColumns()
-	{
-		return false;
-	}
-}
 
 
 class ADODB_pdo extends ADOConnection {
@@ -124,7 +92,7 @@ class ADODB_pdo extends ADOConnection {
 	
 	function _UpdatePDO()
 	{
-		$d = &$this->_driver;
+		$d = $this->_driver;
 		$this->fmtDate = $d->fmtDate;
 		$this->fmtTimeStamp = $d->fmtTimeStamp;
 		$this->replaceQuote = $d->replaceQuote;
@@ -147,7 +115,7 @@ class ADODB_pdo extends ADOConnection {
 		if (!empty($this->_driver->_hasdual)) $sql = "select $this->sysTimeStamp from dual";
 		else $sql = "select $this->sysTimeStamp";
 		
-		$rs =& $this->_Execute($sql);
+		$rs = $this->_Execute($sql);
 		if ($rs && !$rs->EOF) return $this->UnixTimeStamp(reset($rs->fields));
 		
 		return false;
@@ -390,6 +358,40 @@ class ADODB_pdo extends ADOConnection {
 	}
 }
 
+class ADODB_pdo_base extends ADODB_pdo {
+
+	var $sysDate = "'?'";
+	var $sysTimeStamp = "'?'";
+	
+
+	function _init($parentDriver)
+	{
+		$parentDriver->_bindInputArray = true;
+		#$parentDriver->_connectionID->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
+	}
+	
+	function ServerInfo()
+	{
+		return ADOConnection::ServerInfo();
+	}
+	
+	function SelectLimit($sql,$nrows=-1,$offset=-1,$inputarr=false,$secs2cache=0)
+	{
+		$ret = ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
+		return $ret;
+	}
+	
+	function MetaTables()
+	{
+		return false;
+	}
+	
+	function MetaColumns()
+	{
+		return false;
+	}
+}
+
 class ADOPDOStatement {
 
 	var $databaseType = "pdo";		
@@ -506,7 +508,7 @@ class ADORecordSet_pdo extends ADORecordSet {
 	}
 
 	// returns the field object
-	function &FetchField($fieldOffset = -1) 
+	function FetchField($fieldOffset = -1) 
 	{
 		$off=$fieldOffset+1; // offsets begin at 1
 		

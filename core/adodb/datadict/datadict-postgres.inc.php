@@ -150,6 +150,12 @@ class ADODB2_postgres extends ADODB_DataDict {
 		}
 		return $sql;
 	}
+
+
+	function DropIndexSQL ($idxname, $tabname = NULL)
+	{
+	   return array(sprintf($this->dropIndex, $this->TableName($idxname), $this->TableName($tabname)));
+	}
 	
 	/**
 	 * Change the definition of one column
@@ -162,7 +168,8 @@ class ADODB2_postgres extends ADODB_DataDict {
 	 * @param array/ $tableoptions options for the new table see CreateTableSQL, default ''
 	 * @return array with SQL strings
 	 */
-	/*function AlterColumnSQL($tabname, $flds, $tableflds='',$tableoptions='')
+	 /*
+	function AlterColumnSQL($tabname, $flds, $tableflds='',$tableoptions='')
 	{
 		if (!$tableflds) {
 			if ($this->debug) ADOConnection::outp("AlterColumnSQL needs a complete table-definiton for PostgreSQL");
