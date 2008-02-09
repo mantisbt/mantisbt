@@ -3,3 +3,4 @@
 <!ENTITY configuration SYSTEM "configuration.sgml">
 <!ENTITY pagedescriptions SYSTEM "page_descriptions.sgml">
 <!ENTITY customizing SYSTEM "customizing_mantis.sgml">
+<!ENTITY contributing SYSTEM "contributing.sgml">

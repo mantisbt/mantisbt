@@ -225,57 +225,39 @@
     <section>
         <title>MantisBT News</title>
         <para>
-	TODO: blog, twitter, announce mailing list.
+	    There are several ways to keep up to date with MantisBT news.  These
+	    include:
 	</para>
+	    <itemizedlist>
+		 <listitem>
+		     <para>
+		         mantisbt-announce mailing list is a very low traffic
+			 list that is used for major announcements,  typically
+			 announcements about releases.  All Mantis users are
+			 encouraged to subscribe to this mailing list.  The
+			 average traffic should be no more than one to two posts
+			 per month.
+		     </para>
+		 </listitem>
+		 <listitem>
+		    <para><ulink
+url="http://www.mantisbt.org/blog/">Mantis Blog</ulink> is used to communicate
+announcements about new releases, topics relating to MantisBT, etc.  Users are
+encouraged to subscribe to the RSS feed to know when new posts are posted there.
+		    </para>
+		 </listitem>
+	         <listitem>
+ 		    <para><ulink
+url="http://twitter.com/mantisbt">Twitter</ulink> is used to notify users about
+up-to-date details about what is happening with MantisBT development.  For
+example, a Twitter update is automatically posted by the official bug tracker
+whenever an issue is resolved.  Twitter users are encouraged to follow
+"mantisbt".
+                    </para>
+		 </listitem>
+             </itemizedlist>
     </section>
 
-    <section>
-        <title>Contributing</title>
-        <para>
-	TODO: Put together a section based on the Wiki page.
-	</para>
-    </section>
-
-    <section>
-        <title>Features and Benefits</title>
-
-        <para>TODO: Revise list based on latest feature - not all features have
-	to be listed here.</para>
-
-        <itemizedlist>
-            <listitem>
-                <para>Free</para>
-            </listitem>
-            <listitem>
-                <para>Easy to install</para>
-            </listitem>
-            <listitem>
-                <para>Web based</para>
-            </listitem>
-            <listitem>
-                <para>Platform independent</para>
-            </listitem>
-            <listitem>
-                <para>Multiple projects</para>
-            </listitem>
-            <listitem>
-                <para>Multiple languages</para>
-            </listitem>
-            <listitem>
-                <para>Emailing</para>
-            </listitem>
-            <listitem>
-                <para>Simple Search</para>
-            </listitem>
-            <listitem>
-                <para>Viewing filters</para>
-            </listitem>
-            <listitem>
-                <para>Developed in PHP</para>
-            </listitem>
-        </itemizedlist>
-    </section>
-            
     <section>
         <title>Goals</title>
                 
@@ -352,31 +334,4 @@
             </listitem>
         </itemizedlist>
    </section>
-
-   <section>
-        <title>Cost</title>
-            
-        <para>
-	    MantisBT is free. The net cost to use MantisBT is the time to
-            download, install, and configure the software plus any potential
-            hardware costs. Continued maintenance should be minimal unless you
-            are tweaking the package.  If you've done this sort of thing
-            before it will probably take about 5-60 minutes.  If not, plan on
-            around 1-8 hours depending on the problems you run into. You don't
-            have to know a thing about PHP to use MantisBT, unless something goes
-            wrong. Then it helps to be able to tinker with PHP scripts (when
-            there's a little bug or you want to tweak something).  PHP is a
-            simple scripting language and syntacticaly resembles C / C++. It is very
-            easy to pickup and learn.  The
-            <ulink url="http://www.php.net/manual/en/">PHP Manual</ulink>
-            is a great reference for any PHP related issue. The user comments always shed
-            light into issues that others have experienced.  There are
-            many sites that offer basic tutorials for learning PHP and/or MySQL
-            (
-            <ulink url="http://www.devshed.com/">DevShed</ulink>
-            |
-            <ulink url="http://www.webmonkey.com/">WebMonkey</ulink>
-            ).
-        </para>
-    </section>
 </chapter>
