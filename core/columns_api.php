@@ -234,6 +234,19 @@
 
 	# --------------------
 	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+	function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+			echo '<td>';
+			print_view_bug_sort_link( lang_get( 'build' ), 'build', $p_sort, $p_dir, $p_columns_target );
+			print_sort_icon( $p_dir, $p_sort, 'build' );
+			echo '</td>';
+		} else {
+			echo lang_get( 'build' );
+		}
+	}
+
+	# --------------------
+	# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
 	function print_column_title_platform( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 			echo '<td>';
@@ -422,7 +435,9 @@
 		if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 			echo '<td>';
 			if ( ON == config_get( 'show_priority_text' ) ) {
+				echo '<center>';
 				print_formatted_priority_string( $p_row['status'], $p_row['priority'] );
+				echo '</center>';
 			} else {
 				print_status_icon( $p_row['priority'] );
 			}

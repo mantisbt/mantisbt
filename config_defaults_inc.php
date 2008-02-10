@@ -522,7 +522,7 @@
 	#
 	# Standard Column Names (i.e. names to choose from):
 	# selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta,
-	# resolution, fixed_in_version, view_state, os, os_build, platform, version, date_submitted, attachment,
+	# resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment,
 	# category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count
 	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
 	

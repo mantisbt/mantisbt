@@ -173,6 +173,12 @@
 	}
 
 	# --------------------
+	# return the os build (os version)
+	function csv_format_build( $p_build ) {
+		return csv_escape_string( $p_build );
+	}
+
+	# --------------------
 	# return the platform
 	function csv_format_platform( $p_platform ) {
 		return csv_escape_string( $p_platform );
