@@ -1,0 +1,237 @@
+<chapter>
+    <title>User Management</title>
+    
+    <section>
+        <title>Creating User Accounts</title>
+
+        <para>In MantisBT, there is no limit on the number of user
+	accounts that can be created.  Typically, installations with thousands
+	of users tend to have a limited number of users that have access level
+	above REPORTER.</para>
+
+	<para>By default users with ADMINISTRATOR access level have access to create
+	new user accounts.  The steps to do that are:
+	
+            <itemizedlist>
+	        <listitem>
+	            <para>Click "Manage" on Main Menu.</para>
+                </listitem>
+                <listitem>
+                    <para>Click "Manage Users" (if not selected by default).</para>
+                </listitem>
+                <listitem>
+                    <para>Click "Create New Account" button just below the alphabet
+		key.</para>
+                </listitem>
+                <listitem>
+                    <para>Enter user name, email address, global access level (more details about
+		access levels later).  Other fields are optional.</para>
+                </listitem>
+                <listitem>
+                    <para>Click "Create Users".</para>
+                </listitem>
+            </itemizedlist>
+	</para>
+
+        <para>Creating a user triggers the following actions:
+	<itemizedlist>
+	    <listitem>
+	        <para>Creating a user in the database.</para>
+	    </listitem>
+	    <listitem>
+	        <para>If email notifications ($g_enable_email_notification) is
+		set to ON, then the user will receive an email allowing them to
+		activate their account and set their password.  Otherwise, the
+		account will be created with a blank password.</para>
+	    </listitem>
+	    <listitem>
+	        <para>If email notifications ($g_enable_email_notification) is
+		set to ON, users with access level about 
+		$g_notify_new_user_created_threshold_min will get a
+		notification that a user account has been created.  Information
+		about the user like user name and email address are provided. 
+		The IP of the user that created the account is also
+		included.</para>
+	    </listitem>
+	</itemizedlist></para>
+	
+	<para>When the 'Protected' flag is set on a user account, it indicates
+	that the account is a shared account (e.g. demo account) and hence users
+	logged using such account will not be allowed to change account 
+	preferences and profile information.</para>
+    </section>
+
+    <section>
+        <title>Enabling/Disabling User Accounts</title>
+
+	<para>The recommended way of retiring user accounts is to disable them. 
+	Scenarios where this is useful is when a person leaves the team and it
+	is necessary to retire their account.</para>
+
+	<para>Once an account is disabled the following will be enforced:
+	<itemizedlist>
+	   <listitem>
+	       <para>All currently active sessions for the account will be
+	       invalidated (i.e. automatically logged out).</para>
+	   </listitem>
+	   <listitem>
+	       <para>It will no longer be possible login using this account.</para>
+	   </listitem>
+	   <listitem>
+	       <para>No further email notifications will be sent to the account
+	       once it is disabled.</para>
+	   </listitem>
+	   <listitem>
+	       <para>The user account will not show anymore in lists like
+	       "assign to", "send reminder to", etc.</para>
+	   </listitem>
+        </itemizedlist></para>
+	
+	<para>The disabling process is totally reversible.  Hence, the account
+	can be re-enabled and all the account history will remain intact.  For
+	example, the user will still have issues reported by them, assigned to
+	them, monitored by them, etc.</para>
+    </section>
+
+    <section>
+        <title>Deleting User Accounts</title>
+
+	<para>Another way to retire user accounts is by deleting them.  This
+	approach is only recommended for accounts that have not been active
+	(i.e. haven't reported issues).  Once the account is deleted, any
+	issues or actions associated with such account, will be associated with
+	user123 (where 123 is the code of the account that was deleted).  Note
+	that associated issues or actions are not deleted.</para>
+	
+	<para>As far as the underlying database, after the deletion of a user,
+	records with the user id as a foreign key will have a value that no
+	longer exists in the users table.  Hence, any tools that operate
+	directly on the database must take this into consideration.</para>
+	
+	<para>By default administrators are the only users who can delete user
+	accounts.  They can delete accounts by clicking Manage, Manage Users,
+	locating the user to be deleted and opening it details page, then
+	clicking on the "Delete User" button which deletes the user.</para>
+	
+	<para>Note that "Deleting Users" is not a reversible process.  Hence, if
+	it is required to re-add the user account, it is not possible to
+	recreate the user account so that it gets the same ID and hence retains
+	its history.  However, manually creating a record in the users table
+	with the same id, can possibly do that.  However, this approach is not
+	recommended or supported.</para>
+    </section>
+
+    <section>
+        <title>User Signup</title>
+
+	<para>For open source and freeware projects, it is very common to setup
+	MantisBT so that users can signup for an account and get a REPORTER
+	access by default (configurable by the
+	$g_default_new_account_access_level configuration option).  The signup
+	process can be enabled / disabled using the $g_allow_signup
+	configuration option, which is enabled by default.</para>
+
+        <para>If email notifications ($g_enable_email_notification) is
+        set to ON, users with access level about 
+	$g_notify_new_user_created_threshold_min will get a
+	notification that a user account has been created.  Information
+	about the user like user name, email address, IP address are included in
+	the email notification.</para>
+    </section>
+
+    <section>
+        <title>Forgot Password and Reset Password</title>
+
+	<para>It is pretty common for users to forget their password.  MantisBT
+	provides two ways to handle such scenario: "Forgot Password" and "Reset
+	Password".</para>
+	
+	<para>"Forgot Password" is a self service scenario where users go to the
+	login page, figure out they don't remember the password, and then click
+	the "Lost your password?" link.  Users are then asked for their user
+	name and email password.  If correct, then they are sent an email with a
+	link which allows them to login to MantisBT and change their password.</para>
+	
+	<para>"Reset Password" scenario is where a user reports to the
+	administrator that they are not able to login into MantisBT anymore. 
+	This can be due to forgetting their password and possibly user name or
+	email address that they used when signing up.  The administrator then
+	goes to Manage, Manage Users, locates the user account and opens its
+	details.  Under the user account details, there is a "Reset Password"
+	button which the administrator can click to reset the password and
+	trigger an email to the user to allow them to get into MantisBT and set
+	their password.  In the case where email notifications are disabled,
+	resetting password will set the password to an empty string.</para>
+    </section>
+
+    <section>
+        <title>Pruning User Accounts</title>
+
+	<para>The pruning function allows deleting of user accounts for accounts
+	that have been created more than a week ago, and they never logged in. 
+	This is particulary useful for users who signed up with an invalid email
+	or with a typo in their email address address.</para>
+	
+	<para>The account pruning can be done by administrators by going to
+	"Manage", "Manage Users", and clicking the "Prune Accounts" button
+	inside the "Never Logged In" box.</para>
+    </section>
+
+    <section>
+        <title>Authorization and Access Levels</title>
+
+	<para>MantisBT uses access levels to define what a user can do.  Each
+	user account has a global or default access level that is associated
+	with it.  This access level is used as the access level for such users
+	for all actions associated with public projects as well as actions that
+	are not related to a specific project.  Users with global access level
+	less than $g_private_project_threshold will not have access to private
+	projects by default.</para>
+	
+	<para>The default access levels shipped with MantisBT out of the box are
+	VIEWER, REPORTER, UPDATER, DEVELOPER, MANAGER and ADMINISTRATOR.  Each
+	features has several configuration options associated with it and
+	identifies the required access level to do certain actions.  For
+	example, viewing an issue, reporting an issue, updating an issue, adding
+	a note, etc.</para>
+	
+	<para>For example, in the case of reporting bugs, the required access
+	level is configurable using the $g_report_bug_threshold configuration
+	option (which is defaulted to REPORTER).  So for a user to be able to
+	report an issue against a public project, the user must have a
+	project-specific or a global access level that is greater than or equal
+	to REPORTER.  However, in the case of reporting an issue against a
+	private project, the user must have project specific access level (that
+	is explicitly granted against the project) that is higher than REPORTER
+	or have a global access level that is higher than both
+	$g_private_project_threshold and $g_report_bug_threshold.</para>
+	
+	<para>Note that project specific access levels override the global
+	access levels.  For example, a user may have REPORTER as the global
+	access level, but have a MANAGER access level to a specific project.  Or
+	a user may have MANAGER as the global access level by VIEWER access to
+	a specific project.  Access levels can be overriden for both public and
+	private projects.  However, overriding access level is not allowed for
+	users with global access ADMINISTRATOR.</para>
+	
+	<para>Each feature typically has multiple access control configuration
+	options to defines what access level can do certain operations.  For
+	example, adding a note may require REPORTER access level, updating a
+	note my require DEVELOPER access level, unless the own was owned by the
+	same user and in this case REPORTER access level.  Such threshold
+	configuration options can be set to a single access level, which means
+	users with such threshold and above are authorized to do such action. 
+	The other option is to specify an array of access level which indicates
+	that users with the explicitly specific thresholds are allowed to do
+	such actions.</para>
+	
+        <para>It is also worth mentioning that the access levels are defined by
+	the $g_access_levels_enum_string configuration option, and it is
+	possible to customize such list.  The default value for the available
+	access levels is '10:viewer, 25:reporter, 40:updater, 55:developer, 
+	70:manager, 90:administrator'.  The instructions about how to customize
+	the list of access levels will be covered in the customization section.</para>
+    </section>
+
+    <!-- TODO: Add 'Auto-Creation of Accounts on Login', e.g. LDAP -->
+</chapter>

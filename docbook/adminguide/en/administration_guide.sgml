@@ -50,6 +50,7 @@
 
         &about;
         &installation;
+        &usermanagement;
         &configuration;
         &pagedescriptions;
         &customizing;

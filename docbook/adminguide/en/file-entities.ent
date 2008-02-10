@@ -4,3 +4,4 @@
 <!ENTITY pagedescriptions SYSTEM "page_descriptions.sgml">
 <!ENTITY customizing SYSTEM "customizing_mantis.sgml">
 <!ENTITY contributing SYSTEM "contributing.sgml">
+<!ENTITY usermanagement SYSTEM "user_management.sgml">
