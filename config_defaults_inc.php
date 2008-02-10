@@ -1864,7 +1864,7 @@
 	# Wiki Integration Enabled?
 	$g_wiki_enable = OFF;
 
-	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki', 'xwiki')
+	# Wiki Engine (supported engines: 'dokuwiki', 'mediawiki', 'xwiki', 'wikka')
 	$g_wiki_engine = 'dokuwiki';
  
 	# Wiki namespace to be used as root for all pages relating to this mantis installation.
@@ -1973,5 +1973,4 @@
 
 	# management threshold.
 	$g_manage_plugin_threshold = ADMINISTRATOR;
-
 ?>
