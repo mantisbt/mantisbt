@@ -122,7 +122,12 @@
 
 				echo $t_value;
 			} else {
+				if ( $t_column == 'category' ) {
+					$t_column = 'category_id';
+				}
+
 				$t_function = 'csv_format_' . $t_column;
+
 				echo $t_function( $t_row[ $t_column ] );
 			}
 		}

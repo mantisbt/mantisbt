@@ -144,8 +144,8 @@
 
 	# --------------------
 	# return the category
-	function csv_format_category( $p_category ) {
-		return csv_escape_string( $p_category );
+	function csv_format_category_id( $p_category_id ) {
+		return csv_escape_string( category_full_name( $p_category_id, false ) );
 	}
 
 	# --------------------

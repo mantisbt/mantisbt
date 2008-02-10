@@ -311,7 +311,13 @@
 				if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 					$t_function( $p_issue_row, $p_columns_target );
 				} else {
-					$t_function( $p_issue_row[$p_column] );
+					if ( $p_column == 'category' ) {
+						$t_column = 'category_id';
+					} else {
+						$t_column = $p_column;
+					}
+
+					$t_function( $p_issue_row[$t_column] );
 				}
 			} else {
 				if ( isset( $p_issue_row[$p_column] ) ) {
