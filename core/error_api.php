@@ -57,13 +57,22 @@
 		$t_lang_pushed = false;
 
 		# flush any language overrides to return to user's natural default
+		$t_db_connected = false;
 		if ( function_exists( 'db_is_connected' ) ) {
 			if ( db_is_connected() ) {
-				lang_push( lang_get_default() );
-				$t_lang_pushed = true;
+				$t_db_connected = true;
 			}
 		}
+		$t_html_api = false;
+		if ( function_exists( 'html_end' ) ) {
+			$t_html_api = true;
+		}
 
+		if ( $t_db_connected ) {
+			lang_push( lang_get_default() );
+			$t_lang_pushed = true;
+		}
+		
 		$t_short_file	= basename( $p_file );
 		$t_method_array = config_get( 'display_errors' );
 		if ( isset( $t_method_array[$p_type] ) ) {
@@ -116,12 +125,16 @@
 			}
 
 			# don't send the page header information if it has already been sent
-			if ( $g_error_send_page_header ) {			
-				html_page_top1();
-				if ( $p_error != ERROR_DB_QUERY_FAILED ) {
-					html_page_top2();
+			if ( $g_error_send_page_header || $g_error_send_page_header == null ) {			
+				if ( $t_html_api ) {
+					html_page_top1();
+					if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+						html_page_top2();
+					} else {
+						html_page_top2a();
+					}
 				} else {
-					html_page_top2a();
+					echo '<html><head><title>' . $t_error_type . '</title></head><body>';
 				}
 			}
 
@@ -155,11 +168,15 @@
 				PRINT '</div>';
 			}
 
-			if ( $p_error != ERROR_DB_QUERY_FAILED ) {
-				html_page_bottom1();
+			if ( $t_html_api ) {
+				if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+					html_page_bottom1();
+				} else {
+					html_body_end();
+					html_end();
+				}
 			} else {
-				html_body_end();
-				html_end();
+				echo '</body></html>', "\n";
 			}
 			exit();
 		} else if ( 'inline' == $t_method ) {
@@ -184,7 +201,7 @@
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php PRINT string_html_entities( $p_file ) ?></td>
+					<td>Full path: <?php PRINT htmlentities( $p_file , ENT_COMPAT, lang_get( 'charset' ) ); ?></td>
 				</tr>
 				<tr>
 					<td>Line: <?php PRINT $p_line ?></td>
@@ -211,7 +228,7 @@
 		# print normal variables
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( !is_array( $t_val ) && !is_object( $t_val ) ) {
-				$t_val = string_html_entities( (string)$t_val );
+				$t_val = htmlentities( (string)$t_val , ENT_COMPAT, lang_get( 'charset' ) );
 				$t_type = gettype( $t_val );
 
 				# Mask Passwords
@@ -250,8 +267,12 @@
 			PRINT '<center><table class="width75">';
 
 			foreach ( $t_stack as $t_frame ) {
-				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
+				if ( function_exists( 'helper_alternate_class' ) ) {
+					PRINT '<tr ' . helper_alternate_class() . '>';
+				} else {
+					PRINT '<tr>';
+				}
+				PRINT '<td>' . htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['params'] ) ) {
@@ -260,7 +281,7 @@
 					}
 				}
 
-				PRINT '<td>( ' . string_html_entities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . htmlentities(  implode( $t_args, ', ' ) , ENT_COMPAT, lang_get( 'charset' ) )  . ' )</td></tr>';
 			}
 			PRINT '</table></center>';
 		} else {
@@ -273,8 +294,12 @@
 			PRINT '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
 
 			foreach ( $t_stack as $t_frame ) {
-				PRINT '<tr ' . helper_alternate_class() . '>';
-				PRINT '<td>' . string_html_entities( $t_frame['file'] ) . '</td><td>' . (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') . '</td><td>' . $t_frame['function'] . '</td>';
+				if ( function_exists( 'helper_alternate_class' ) ) {
+					PRINT '<tr ' . helper_alternate_class() . '>';
+				} else {
+					PRINT '<tr>';
+				}
+				PRINT '<td>' . htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) . '</td><td>' . (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
@@ -283,7 +308,7 @@
 					}
 				}
 
-				PRINT '<td>( ' . string_html_entities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . htmlentities(  implode( $t_args, ', ' ) , ENT_COMPAT, lang_get( 'charset' ) ) . ' )</td></tr>';
 			}
 
 			PRINT '</table></center>';
