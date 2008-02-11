@@ -263,7 +263,7 @@ function event_type_default( $p_event, $p_callbacks, $p_data ) {
 	$t_output = array();	
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
-			$t_output[$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );
+			$t_output[$t_plugin][$t_callback] = event_callback( $p_event, $t_callback, $t_plugin, $p_data );
 		}
 	}
 	return $t_output;
