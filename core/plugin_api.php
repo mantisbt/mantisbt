@@ -180,6 +180,23 @@ function plugin_event_hook_many( $p_hooks ) {
 	}
 }
 
+/**
+ * Allows a plugin to declare a 'child plugin' that 
+ * can be loaded from the same parent directory.
+ * @param string Child plugin basename.
+ */
+function plugin_child( $p_child ) {
+	$t_basename = plugin_get_current();
+
+	$t_plugin = plugin_register( $t_basename, false, $p_child );
+
+	if ( !is_null( $t_plugin ) ) {
+		plugin_init( $p_child );
+	}
+
+	return $t_plugin;
+}
+
 ### Plugin Management Helpers
 
 /**
@@ -479,17 +496,21 @@ function plugin_find_all() {
  * Load a plugin's core class file.
  * @param string Plugin basename
  */
-function plugin_include( $p_basename ) {
-		$t_path = config_get_global( 'plugin_path' ) . DIRECTORY_SEPARATOR . $p_basename . DIRECTORY_SEPARATOR;
+function plugin_include( $p_basename, $p_child=null ) {
+	$t_path = config_get_global( 'plugin_path' ) . $p_basename . DIRECTORY_SEPARATOR;
+
+	if ( is_null( $p_child ) ) {
 		$t_plugin_file = $t_path . $p_basename . '.php';
+	} else {
+		$t_plugin_file = $t_path . $p_child . '.php';
+	}
+	$t_included = false;
+	if ( is_file( $t_plugin_file ) ) {
+		include_once( $t_plugin_file );
+		$t_included = true;
+	}
 
-		$t_included = false;
-		if ( is_file( $t_plugin_file ) ) {
-			include_once( $t_plugin_file );
-			$t_included = true;
-		}
-
-		return $t_included;
+	return $t_included;
 }
 
 /**
@@ -497,15 +518,20 @@ function plugin_include( $p_basename ) {
  * The plugin class must already be loaded before calling.
  * @param string Plugin classname without 'Plugin' postfix
  */
-function plugin_register( $p_basename, $p_return=false ) {
+function plugin_register( $p_basename, $p_return=false, $p_child=null ) {
 	global $g_plugin_cache;
 
-	if ( !isset( $g_plugin_cache[$p_basename] ) ) {
-		$t_classname = $p_basename . 'Plugin';
+	$t_basename = is_null( $p_child ) ? $p_basename : $p_child;
+	if ( !isset( $g_plugin_cache[$t_plugin] ) ) {
+		if ( is_null( $p_child ) ) {
+			$t_classname = $p_basename . 'Plugin';
+		} else {
+			$t_classname = $p_child . 'Plugin';
+		}
 
 		# Include the plugin script if the class is not already declared.
 		if ( !class_exists( $t_classname ) ) {
-			if ( ! plugin_include( $p_basename ) ) {
+			if ( ! plugin_include( $p_basename, $p_child ) ) {
 				return null;
 			}
 		}
@@ -514,9 +540,9 @@ function plugin_register( $p_basename, $p_return=false ) {
 		if ( class_exists( $t_classname ) &&
 			is_subclass_of( $t_classname, 'MantisPlugin' )
 	   		) {
-				plugin_push_current( $p_basename );
+				plugin_push_current( is_null( $p_child ) ? $p_basename : $p_child );
 
-				$t_plugin = new $t_classname( $p_basename );
+				$t_plugin = new $t_classname( is_null( $p_child ) ? $p_basename : $p_child );
 
 				plugin_pop_current();
 
@@ -528,12 +554,12 @@ function plugin_register( $p_basename, $p_return=false ) {
 				if ( $p_return ) {
 					return $t_plugin;
 				} else {
-					$g_plugin_cache[$p_basename] = $t_plugin;
+					$g_plugin_cache[$t_basename] = $t_plugin;
 				}
 		}
 	}
 
-	return $g_plugin_cache[$p_basename];
+	return $g_plugin_cache[$t_basename];
 }
 
 /**
@@ -616,7 +642,9 @@ function plugin_init( $p_basename ) {
 		$t_plugin->__init();
 
 		plugin_pop_current();
-	}
 
-	return true;
+		return true;
+	} else {
+		return false;
+	}
 }
