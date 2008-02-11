@@ -1,8 +1,8 @@
 <?php
 
-require_once( config_get( 'class_path' ) . 'FormattingPlugin.class.php' );
+require_once( config_get( 'class_path' ) . 'MantisFormattingPlugin.class.php' );
 
-class MantisFormattingPlugin extends FormattingPlugin {
+class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	function register() {
 		$this->name			= lang_get( 'plugin_format_title' );

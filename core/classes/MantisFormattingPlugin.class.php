@@ -20,7 +20,7 @@
 /**
  * Abstract class for any plugin that's modifying textual output.
  */
-abstract class FormattingPlugin extends MantisPlugin {
+abstract class MantisFormattingPlugin extends MantisPlugin {
 
 	/**
 	 * Event hook declaration.
