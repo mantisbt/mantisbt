@@ -163,6 +163,21 @@
 	their password.  In the case where email notifications are disabled,
 	resetting password will set the password to an empty string.</para>
     </section>
+    
+    <section>
+        <title>Changing Password</title>
+	
+	<para>Users are able to change their own passwords (unless their account
+	is "protected").  This can be done by clicking on "My Account", and then
+	typing the new password in the "Password" and "Confirm Password" fields,
+	then clicking "Update User".  Changing the password automatically
+	invalidates all logged in sessions and hence the user will be required
+	to re-login.  Invalidating existing sessions is very useful in the case
+	where a user going onto a computer, logs into MantisBT and leaves the
+	computer without logging out.  By changing the password from another
+	computer, the session on the original computer automatically becomes
+	invalidated.</para>
+    </section>
 
     <section>
         <title>Pruning User Accounts</title>
@@ -233,5 +248,155 @@
 	the list of access levels will be covered in the customization section.</para>
     </section>
 
-    <!-- TODO: Add 'Auto-Creation of Accounts on Login', e.g. LDAP -->
+    <section>
+        <title>Auto Creation of Accounts on Login</title>
+
+	<para>In some cases MantisBT is setup in a way, where it allows users
+	that already exists in a directory or another application to be
+	automatically authenticated and added to MantisBT.  For example, a
+	company may setup their MantisBT installation in a way, where its staff
+	members that are already registered in their LDAP directory, should be
+	allowed to login into MantisBT with the same user name and password. 
+	Another example, is where MantisBT is integrated into some content
+	management system, where it is desired to have a single registration and
+	single sign-on experience.  In such scenarios, once a user logs in for
+	the first time, a user account is automatically created for them,
+	although the password verification is still done against LDAP or the
+	main users repository.</para>
+    </section>
+    
+    <section>
+        <title>User Preferences</title>
+	
+	<para>Users can fine tune they way MantisBT interacts with them via
+	modifying their user preferences.  User preferences can only be managed
+	by users and are not available for the administrators to tweak.  The
+	administrators can only tweak the default value for such preferences. 
+	However, once a user account is created, it is then the responsibility
+	of the user to manage their own preferences.  The user preferences
+	include the following:
+	
+	<itemizedlist>
+	    <listitem>
+	        <para>Default Project: A user can choose the default project
+		that is selected when the user first logs in.  This can be a
+		specific project or "All Projects".  For users that only work on
+		one project, it would make sense to set such project as the
+		default project (rather than "All Projects").  The active
+		project is part of the filter applied on the issues listed in
+		the "View Issues" page.  Also any newly reported issues will be
+		associated with the active project.</para>
+             </listitem>
+	     <listitem>
+	        <para>Advanced Report: If selected, then the user will use the
+		advanced report issue page by default (rather than the simple
+		one).  This preference is only applicable when the
+		administrator configures MantisBT to support both simple and
+		advanced views (i.e. $g_show_report is set to BOTH).  If
+		$g_show_report is set to SIMPLE_ONLY or ADVANCED_ONLY, then this
+		preference has no effect.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Advanced View: If selected, then the user will get the
+		issue advanced view page by default.  This preference is only
+		applicable when the administrator configures MantisBT to support
+		both simple and advanced view pages (i.e. $g_show_view is set
+		to BOTH).  If $g_show_view is set to SIMPLE_ONLY or
+		ADVANCED_ONLY, then this preference has no effect.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Advanced Update: If selected, then the user will get the
+		issue advanced update page by default.  This preference is only
+		applicable when the administrator configures MantisBT to support
+		both simple and advanced update pages (i.e. $g_show_update is
+		set to BOTH).  If $g_show_update is set to SIMPLE_ONLY or
+		ADVANCED_ONLY, then this preference has no effect.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Refresh Delay: The refresh delay is used to specify the
+		number of seconds between auto-refreshes of the View Issues
+		page.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Redirect Delay: The redirect delay is the number of
+		seconds to wait after displaying flash messages like "Issue created
+		successfully", and before the user gets redirected to the
+		next page.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Notes Sort Order: The preference relating to how notes
+		should be ordered on an issue is viewed or in email
+		notifications.  The ascending order is where notes are ordered
+		so that ordered notes appear before newer notes, the descending
+		order is the reverse.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on New: If unticked, then email notifications
+		relating to creation of a new issue would be disabled.  Note
+		that the preference is only used to disabled notifications that
+		as per the administrator's configuration, this user would have
+		qualified to receive them.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Change of Handler: TODO - is this preference
+		used?</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Feedback: TODO - is this preference used?</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Resolved: TODO</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Closed: TODO</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Reopened: TODO</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Note Added: TODO</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Status Change: TODO</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email on Priority Change: TODO - is this preference used?</para>
+	     </listitem>
+	     <listitem>
+	        <para>Email Notes Limit: This preference can be used to limit
+		the number of issue notes to view or to be included in an email
+		notifications.  Specifying N here means that the latest N
+		notes will be included.  The value 0 causes all notes to be
+		included.</para>
+	     </listitem>
+	     <listitem>
+	        <para>Language: The preferred language of the user.  This
+		language is used by the GUI and in email notifications.  Note
+		that MantisBT uses UTF8 for encoding the data, and hence, the
+		user can be interacting with MantisBT user interface in Chinese
+		while logging issue data in German.</para>
+	     </listitem>
+         </itemizedlist>
+	 </para>
+    </section>
+
+    <section>
+        <title>User Profiles</title>
+	
+	<para>A user profile describes an environment that the user uses to run
+	the software for which issues are being tracked.  The profile
+	information include "Platform", "Operating System", "OS Version", and
+	"Additional Description".  Each user has access to profiles that they
+	create (can be multiple), in addition to global ones that are shared
+	created by other users.  When reporting issues, users can elect to enter
+	information like platform, operating system, version manually, or they
+	can choose from the list of profiles that are already defined.</para>
+	
+	<para>Global profiles are typically used by the administrator to define
+	a set of standard profiles that are typically used by the MantisBT
+	users.  This makes it easier for the users to use such profiles without
+	having to define create them.  The access level required for users to be
+	able to create global profiles is configured by the $g_manage_global_profile_threshold
+	configuration option and it is defaulted to MANAGER.</para>
+    </section>
 </chapter>
