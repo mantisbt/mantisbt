@@ -128,7 +128,7 @@ function event_signal( $p_name, $p_params=null, $p_type=null ) {
 
 	switch ( $t_type ) {
 		case EVENT_TYPE_EXECUTE:
-			return event_type_execute( $p_name, $t_callbacks );
+			return event_type_execute( $p_name, $t_callbacks, $p_params );
 
 		case EVENT_TYPE_OUTPUT:
 			return event_type_output( $p_name, $t_callbacks, $p_params );
@@ -178,15 +178,16 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params=null ) {
 
 /**
  * Process an execute event type.
- * All callbacks will be called with no parameters, and their
+ * All callbacks will be called with parameters, and their
  * return values will be ignored.
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
+ * @param array Callback parameters
  */
-function event_type_execute( $p_event, $p_callbacks ) {
+function event_type_execute( $p_event, $p_callbacks, $p_params ) {
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
-			event_callback( $p_event, $t_callback, $t_plugin );
+			event_callback( $p_event, $t_callback, $t_plugin, $p_params );
 		}
 	}
 }
