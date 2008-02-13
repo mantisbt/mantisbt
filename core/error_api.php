@@ -43,20 +43,29 @@
 	# E_USER_* are triggered by us and will contain an error constant in $p_error
 	# The others, being system errors, will come with a string in $p_error
 	#
+	# @access private
+	# @param int p_type contains the level of the error raised, as an integer. 
+	# @param string p_error contains the error message, as a string.
+	# @param string p_file contains the filename that the error was raised in, as a string. 
+	# @param int p_line contains the line number the error was raised at, as an integer. 
+	# @param array p_context to the active symbol table at the point the error occurred (optional)
+	# @uses lang_api.php
+	# @uses config_api.php
+	# @uses compress_api.php
+	# @uses database_api.php (optional)
+	# @uses html_api.php (optional)
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 		global $g_lang_overrides;
 		global $g_error_send_page_header;
 
 		# check if errors were disabled with @ somewhere in this call chain
-		# also suppress php 5 strict warnings
-		if ( 0 == error_reporting() || 2048 == $p_type ) {
+		if ( 0 == error_reporting() ) {
 			return;
 		}
 
 		$t_lang_pushed = false;
-
-		# flush any language overrides to return to user's natural default
+		
 		$t_db_connected = false;
 		if ( function_exists( 'db_is_connected' ) ) {
 			if ( db_is_connected() ) {
@@ -68,6 +77,7 @@
 			$t_html_api = true;
 		}
 
+		# flush any language overrides to return to user's natural default
 		if ( $t_db_connected ) {
 			lang_push( lang_get_default() );
 			$t_lang_pushed = true;
@@ -78,7 +88,11 @@
 		if ( isset( $t_method_array[$p_type] ) ) {
 			$t_method = $t_method_array[$p_type];
 		} else {
-			$t_method		= 'none';
+			if ( isset( $t_method_array[E_ALL] ) ) {
+				$t_method		= $t_method_array[E_ALL];
+			} else {
+				$t_method		= 'none';
+			}
 		}
 
 		# build an appropriate error string
@@ -112,76 +126,74 @@
 
 		$t_error_description = nl2br( $t_error_description );
 
-		if ( 'halt' == $t_method ) {
-			$t_old_contents = ob_get_contents();
-			# ob_end_clean() still seems to call the output handler which
-			#  outputs the headers indicating compression. If we had
-			#  PHP > 4.2.0 we could use ob_clean() instead but as it is
-			#  we need to disable compression.
-			compress_disable();
+		switch ( $t_method ) {
+			case 'halt':
+				if ( error_handled() && ob_get_length() > 0 ) 
+					$t_old_contents = ob_get_contents();
 
-			if ( ob_get_length() ) {
-				ob_end_clean();
-			}
+				# We need to ensure compression is off - otherwise the compression headers are output.
+				compress_disable();
+				# then clean the buffer, leaving output buffering on.
+				ob_clean();
 
-			# don't send the page header information if it has already been sent
-			if ( $g_error_send_page_header || $g_error_send_page_header == null ) {			
-				if ( $t_html_api ) {
-					html_page_top1();
-					if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-						html_page_top2();
+				# don't send the page header information if it has already been sent
+				if ( $g_error_send_page_header || $g_error_send_page_header == null ) {			
+					if ( $t_html_api ) {
+						html_page_top1();
+						if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+							html_page_top2();
+						} else {
+							html_page_top2a();
+						}
 					} else {
-						html_page_top2a();
+						echo '<html><head><title>' , $t_error_type , '</title></head><body>';
+					}
+				}
+
+				echo '<br /><div align="center"><table class="width50" cellspacing="1">';
+				echo '<tr><td class="form-title">' , $t_error_type , '</td></tr>';
+				echo '<tr><td><p class="center" style="color:red">' , $t_error_description , '</p></td></tr>';
+
+				echo '<tr><td><p class="center">';
+				if ( null === $g_error_proceed_url ) {
+					echo lang_get( 'error_no_proceed' );
+				} else {
+					echo '<a href="', $g_error_proceed_url, '">' , lang_get( 'proceed' ) , '</a>';
+				}
+				echo '</p></td></tr>';
+
+				if ( ON == config_get( 'show_detailed_errors' ) ) {
+					echo '<tr><td>';
+					error_print_details( $p_file, $p_line, $p_context );
+					echo '</td></tr>';
+					echo '<tr><td>';
+					error_print_stack_trace();
+					echo '</td></tr>';
+				}
+				echo '</table></div>';
+
+				if ( null !== $t_old_contents  ) {
+					echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
+					echo '<div style="border: solid 1px black;padding: 4px">';
+					echo $t_old_contents;
+					echo '</div>';
+				}
+
+				if ( $t_html_api ) {
+					if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+						html_page_bottom1();
+					} else {
+						html_body_end();
+						html_end();
 					}
 				} else {
-					echo '<html><head><title>' . $t_error_type . '</title></head><body>';
+					echo '</body></html>', "\n";
 				}
-			}
-
-			PRINT '<br /><div align="center"><table class="width50" cellspacing="1">';
-			PRINT "<tr><td class=\"form-title\">$t_error_type</td></tr>";
-			PRINT "<tr><td><p class=\"center\" style=\"color:red\">$t_error_description</p></td></tr>";
-
-			PRINT '<tr><td><p class="center">';
-			if ( null === $g_error_proceed_url ) {
-				PRINT lang_get( 'error_no_proceed' );
-			} else {
-				PRINT "<a href=\"$g_error_proceed_url\">" . lang_get( 'proceed' ) . '</a>';
-			}
-			PRINT '</p></td></tr>';
-
-			if ( ON == config_get( 'show_detailed_errors' ) ) {
-				PRINT '<tr><td>';
-				error_print_details( $p_file, $p_line, $p_context );
-				PRINT '</td></tr>';
-				PRINT '<tr><td>';
-				error_print_stack_trace();
-				PRINT '</td></tr>';
-			}
-			PRINT '</table></div>';
-
-			if ( $g_error_handled && !is_blank( $t_old_contents ) ) {
-				PRINT '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
-
-				PRINT '<div style="border: solid 1px black;padding: 4px">';
-				PRINT $t_old_contents;
-				PRINT '</div>';
-			}
-
-			if ( $t_html_api ) {
-				if ( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-					html_page_bottom1();
-				} else {
-					html_body_end();
-					html_end();
-				}
-			} else {
-				echo '</body></html>', "\n";
-			}
-			exit();
-		} else if ( 'inline' == $t_method ) {
-			PRINT "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
-		} else {
+				exit();
+			case 'inline':
+				echo '<p style="color:red">' , $t_error_type, ': ', $t_error_description, '</p>';
+				break;
+			default:
 			# do nothing
 		}
 
@@ -201,10 +213,10 @@
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php PRINT htmlentities( $p_file , ENT_COMPAT, lang_get( 'charset' ) ); ?></td>
+					<td>Full path: <?php echo htmlentities( $p_file , ENT_COMPAT, lang_get( 'charset' ) ); ?></td>
 				</tr>
 				<tr>
-					<td>Line: <?php PRINT $p_line ?></td>
+					<td>Line: <?php echo $p_line ?></td>
 				</tr>
 				<tr>
 					<td>
@@ -223,120 +235,80 @@
 		  return;
 		}
 	
-		PRINT '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
+		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
 		# print normal variables
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( !is_array( $t_val ) && !is_object( $t_val ) ) {
-				$t_val = htmlentities( (string)$t_val , ENT_COMPAT, lang_get( 'charset' ) );
 				$t_type = gettype( $t_val );
+				$t_val = htmlentities( (string)$t_val , ENT_COMPAT, lang_get( 'charset' ) );
 
 				# Mask Passwords
 				if ( strpos( $t_var, 'password' ) !== false ) {
 					$t_val = '**********';
 				}
 
-				PRINT "<tr><td>$t_var</td><td>$t_val</td><td>$t_type</td></tr>\n";
+				echo '<tr><td>' , $t_var , '</td><td>' , $t_val , '</td><td>' , $t_type , '</td></tr>' , "\n";
 			}
 		}
 
 		# print arrays
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			    PRINT "<tr><td colspan=\"3\" align=\"left\"><br /><strong>$t_var</strong></td></tr>";
-				PRINT "<tr><td colspan=\"3\">";
+			    echo '<tr><td colspan="3" align="left"><br /><strong>' , $t_var , '</strong></td></tr>';
+				echo '<tr><td colspan="3">';
 				error_print_context( $t_val );
-				PRINT "</td></tr>";
+				echo '</td></tr>';
 			}
 		}
 
-		PRINT '</table>';
+		echo '</table>';
 	}
 
 	# ---------------
-	# Print out a stack trace if PHP provides the facility or xdebug is present
+	# Print out a stack trace
 	function error_print_stack_trace() {
-		if ( extension_loaded( 'xdebug' ) ) { #check for xdebug presence
-			$t_stack = xdebug_get_function_stack();
+		echo '<center><table class="width75">';
+		echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
-			# reverse the array in a separate line of code so the
-			#  array_reverse() call doesn't appear in the stack
-			$t_stack = array_reverse( $t_stack );
-			array_shift( $t_stack ); #remove the call to this function from the stack trace
+		$t_stack = debug_backtrace();
 
-			PRINT '<center><table class="width75">';
+		array_shift( $t_stack ); #remove the call to this function from the stack trace
+		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
 
-			foreach ( $t_stack as $t_frame ) {
-				if ( function_exists( 'helper_alternate_class' ) ) {
-					PRINT '<tr ' . helper_alternate_class() . '>';
-				} else {
-					PRINT '<tr>';
+		foreach ( $t_stack as $t_frame ) {
+			echo '<tr ' , error_alternate_class() , '>';
+			echo '<td>' , htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) , '</td><td>' , (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') , '</td><td>' , (isset( $t_frame['class'] ) ? $t_frame['class'] : '-') , '</td><td>' , (isset( $t_frame['type'] ) ? $t_frame['type'] : '-') , '</td><td>' , (isset( $t_frame['function'] ) ? $t_frame['function'] : '-') , '</td>';
+
+			$t_args = array();
+			if ( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+				foreach( $t_frame['args'] as $t_value ) {
+					$t_args[] = error_build_parameter_string( $t_value );
 				}
-				PRINT '<td>' . htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) . '</td><td>' . $t_frame['line'] . '</td><td>' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : '???' ) . '</td>';
-
-				$t_args = array();
-				if ( isset( $t_frame['params'] ) ) {
-					foreach( $t_frame['params'] as $t_value ) {
-						$t_args[] = error_build_parameter_string( $t_value );
-					}
-				}
-
-				PRINT '<td>( ' . htmlentities(  implode( $t_args, ', ' ) , ENT_COMPAT, lang_get( 'charset' ) )  . ' )</td></tr>';
+				echo '<td>( ' , htmlentities(  implode( $t_args, ', ' ) , ENT_COMPAT, lang_get( 'charset' ) ) , ' )</td></tr>';
+			} else {
+				echo '<td>-</td></tr>';			
 			}
-			PRINT '</table></center>';
-		} else {
-			$t_stack = debug_backtrace();
-
-			array_shift( $t_stack ); #remove the call to this function from the stack trace
-			array_shift( $t_stack ); #remove the call to the error handler from the stack trace
-
-			PRINT '<center><table class="width75">';
-			PRINT '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
-
-			foreach ( $t_stack as $t_frame ) {
-				if ( function_exists( 'helper_alternate_class' ) ) {
-					PRINT '<tr ' . helper_alternate_class() . '>';
-				} else {
-					PRINT '<tr>';
-				}
-				PRINT '<td>' . htmlentities(  $t_frame['file'] , ENT_COMPAT, lang_get( 'charset' ) ) . '</td><td>' . (isset( $t_frame['line'] ) ? $t_frame['line'] : '-') . '</td><td>' . $t_frame['function'] . '</td>';
-
-				$t_args = array();
-				if ( isset( $t_frame['args'] ) ) {
-					foreach( $t_frame['args'] as $t_value ) {
-						$t_args[] = error_build_parameter_string( $t_value );
-					}
-				}
-
-				PRINT '<td>( ' . htmlentities(  implode( $t_args, ', ' ) , ENT_COMPAT, lang_get( 'charset' ) ) . ' )</td></tr>';
-			}
-
-			PRINT '</table></center>';
 		}
+		echo '</table></center>';
 	}
 
 	# ---------------
 	# Build a string describing the parameters to a function
-	function error_build_parameter_string( $p_param ) {
+	function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 0 ) {	
+		if ( $p_depth++ > 10 ) {
+			return '<b>***Nesting Level Too Deep***</b>';
+		}		
+		
 		if ( is_array( $p_param ) ) {
 			$t_results = array();
 
 			foreach ( $p_param as $t_key => $t_value ) {
-				$t_results[] =	'[' . error_build_parameter_string( $t_key ) . ']' .
-								' => ' . error_build_parameter_string( $t_value );
+				$t_results[] =	'[' . error_build_parameter_string( $t_key, false, $p_depth ) . ']' .
+								' => ' . error_build_parameter_string( $t_value, false, $p_depth );
 			}
 
-			return '{ ' . implode( $t_results, ', ' ) . ' }';
-		} else if ( is_bool( $p_param ) ) {
-			if ( $p_param ) {
-				return 'true';
-			} else {
-				return 'false';
-			}
-		} else if ( is_float( $p_param ) || is_int( $p_param ) ) {
-			return $p_param;
-		} else if ( is_null( $p_param ) ) {
-			return 'null';
+			return '<Array> { ' . implode( $t_results, ', ' ) . ' }';		
 		} else if ( is_object( $p_param ) ) {
 			$t_results = array();
 
@@ -345,17 +317,21 @@
 
 			foreach ( $t_inst_vars as $t_name => $t_value ) {
 				$t_results[] =	"[$t_name]" .
-								' => ' . error_build_parameter_string( $t_value );
+								' => ' . error_build_parameter_string( $t_value, false, $p_depth );
 			}
 
-			return 'Object <$t_class_name> ( ' . implode( $t_results, ', ' ) . ' )';
-		} else if ( is_string( $p_param ) ) {
-			return "'$p_param'";
+			return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
+		} else {
+			if ( $p_showtype ) 
+				return '<' . gettype($p_param) . '>' . var_export($p_param, true);
+			else
+				return var_export($p_param, true);
 		}
 	}
 
 	# ---------------
-	# Return an error string (in the current language) for the given error
+	# Return an error string (in the current language) for the given error. 
+	# @access public
 	function error_string( $p_error ) {
 		global $g_error_parameters;
 
@@ -386,6 +362,7 @@
 	# When writing internationalized error strings, note that you can change the
 	#  order of parameters in the string.  See the PHP manual page for the
 	#  sprintf() function for more details.
+	# @access public
 	function error_parameters() {
 		global $g_error_parameters;
 
@@ -394,9 +371,27 @@
 
 	# ---------------
 	# Set a url to give to the user to proceed after viewing the error
+	# @access public
+	# @param string p_url url given to user after viewing the error
+	# @return null
 	function error_proceed_url( $p_url ) {
 		global $g_error_proceed_url;
 
 		$g_error_proceed_url = $p_url;
+	}
+
+	# ---------------
+	# Simple version of helper_alternate_class for use by error api only.
+	# @access private
+	# @return string representing css class
+	# @usedby error_print_stack_trace
+	function error_alternate_class() {
+		static $t_errindex = 1;
+
+		if ( 1 == $t_errindex++ % 2 ) {
+			return 'class="row-1"';
+		} else {
+			return 'class="row-2"';
+		}
 	}
 ?>
