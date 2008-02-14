@@ -587,46 +587,17 @@
 		return (int)$t_min;
 	}
 
-	# --------------------
-	# prepare a date string in "yyyy-mm-dd"
-	function db_prepare_date( $p_yyyymmdd ) {
-		if ( is_blank( $p_yyyymmdd ) ) {
-			return "";
-		}
-
-		$t_a = explode( '-', $p_yyyymmdd );
-
-		// date can be composed of max 3 parts (yyyy-mm-dd)
-		if ( count( $t_a ) > 3 ) {
-			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-		}
-
-		// Check years
-		if ( !is_numeric( $t_a[0] ) || ( (integer)$t_a[0] < 1900 || (integer)$t_a[0] > 2100) ) {
-			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-		}
-
-		// Check months
-		if ( !is_numeric( $t_a[1] ) || ( (integer)$t_a[1] < 1 || (integer)$t_a[1] > 12) ) {
-			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-		}
-
-		// Check days
-		if ( !is_numeric( $t_a[2] ) || ( (integer)$t_a[2] < 1 || (integer)$t_a[2] > 31) ) {
-			error_parameters( 'p_yyyymmdd', $p_yyyymmdd );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-		}
-
-		// Format
-		$t_formatted = $t_a[0] . '-';
-		$t_formatted .= ($t_a[1] < 10 ? "0" . $t_a[1] : $t_a[1]) . '-';
-		$t_formatted .= ($t_a[2] < 10 ? "0" . $t_a[2] : $t_a[2]);
-
-		return $t_formatted;
+	# prepare a date for binding in the format database accepts.
+	# @param p_date can be a Unix integer timestamp or an ISO format Y-m-d. If null or false or '' is passed in, it will be converted to an SQL null.
+	function db_bind_date( $p_date ) {
+		global $g_db;
+		return $g_db->BindDate( $p_date );		
 	}
+
+	function db_bind_timestamp( $p_date ) {
+		global $g_db;
+		return $g_db->BindTimeStamp( $p_date );		
+	}	
 
 	# --------------------
 	# prepare an integer before DB insertion

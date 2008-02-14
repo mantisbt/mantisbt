@@ -476,20 +476,20 @@
 	# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
 	function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
-		$c_from = db_prepare_date( $p_from );
-		$c_to = db_prepare_date( $p_to );
+		$c_from = db_bind_timestamp( $p_from . ' 00:00:00');
+		$c_to = db_bind_timestamp( $p_to . ' 23:59:59' );
 
 		$t_user_table = db_get_table( 'mantis_user_table' );
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 		if ( !is_blank( $c_from ) ) {
-			$t_from_where = " AND bn.date_submitted >= '$c_from 00:00:00'";
+			$t_from_where = " AND bn.date_submitted >= '$c_from '";
 		} else {
 			$t_from_where = '';
 		}
 
 		if ( !is_blank( $c_to ) ) {
-			$t_to_where = " AND bn.date_submitted <= '$c_to 23:59:59'";
+			$t_to_where = " AND bn.date_submitted <= '$c_to '";
 		} else {
 			$t_to_where = '';
 		}
@@ -518,8 +518,8 @@
 	# $p_to - Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
 	function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
 		$c_project_id = db_prepare_int( $p_project_id );
-		$c_to = db_prepare_date( $p_to );
-		$c_from = db_prepare_date( $p_from );
+		$c_to = db_bind_timestamp( $p_to . ' 23:59:59' );
+		$c_from = db_bind_timestamp( $p_from . ' 00:00:00');
 		$c_cost = db_prepare_double( $p_cost );
 
 		// MySQL
@@ -528,13 +528,13 @@
 		$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
 		if ( !is_blank( $c_from ) ) {
-			$t_from_where = " AND bn.date_submitted >= '$c_from 00:00:00'";
+			$t_from_where = " AND bn.date_submitted >= '$c_from'";
 		} else {
 			$t_from_where = '';
 		}
 
 		if ( !is_blank( $c_to ) ) {
-			$t_to_where = " AND bn.date_submitted <= '$c_to 23:59:59'";
+			$t_to_where = " AND bn.date_submitted <= '$c_to'";
 		} else {
 			$t_to_where = '';
 		}
