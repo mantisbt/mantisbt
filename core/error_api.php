@@ -172,7 +172,7 @@
 				}
 				echo '</table></div>';
 
-				if ( null !== $t_old_contents  ) {
+				if ( isset( $t_old_contents ) ) {
 					echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
 					echo '<div style="border: solid 1px black;padding: 4px">';
 					echo $t_old_contents;
