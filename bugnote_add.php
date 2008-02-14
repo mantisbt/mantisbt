@@ -50,7 +50,7 @@
 		$g_project_override = $t_bug->project_id;
 	}
 
-	$c_time_tracking = db_prepare_time( $f_time_tracking );
+	$c_time_tracking = helper_duration_to_minutes( $f_time_tracking );
 
 	# check for blank bugnote
 	# @@@ VB: Do we want to ban adding a time without an associated note?

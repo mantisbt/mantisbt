@@ -102,7 +102,7 @@
 	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
 
-		$c_time_tracking	= db_prepare_time( $p_time_tracking );
+		$c_time_tracking	= helper_duration_to_minutes( $p_time_tracking );
 		$c_private           	= db_prepare_bool( $p_private );
 		$c_type            	= db_prepare_int( $p_type );
 
@@ -378,7 +378,7 @@
 	# Update the time_tracking field of the bugnote
 	function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 		$c_bugnote_id            = db_prepare_int( $p_bugnote_id );
-		$c_bugnote_time_tracking = db_prepare_time( $p_time_tracking );
+		$c_bugnote_time_tracking = helper_duration_to_minutes( $p_time_tracking );
 		$t_bugnote_table         = db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table

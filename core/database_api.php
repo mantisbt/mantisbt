@@ -535,58 +535,6 @@
 		}
 	}
 
-	# --------------------
-	# prepare a time string in "[h]h:mm" to an integer (minutes) before DB insertion
-	function db_prepare_time( $p_hhmm ) {
-		if ( is_blank( $p_hhmm ) ) {
-			return 0;
-		}
-
-		$t_a = explode( ':', $p_hhmm );
-		$t_min = 0;
-
-		// time can be composed of max 3 parts (hh:mm:ss)
-		if ( count( $t_a ) > 3 ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-		}
-
-		for ( $i = 0; $i < count( $t_a ); $i++ ) {
-			// all time parts should be integers and non-negative.
-			if ( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0) ) {
-				error_parameters( 'p_hhmm', $p_hhmm );
-				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-			}
-
-			// minutes and seconds are not allowed to exceed 59.
-			if ( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
-				error_parameters( 'p_hhmm', $p_hhmm );
-				trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-			}
-		}
-
-		switch ( count( $t_a ) )
-		{
-			case 1:
-				$t_min = (integer)$t_a[0];
-			break;
-
-			case 2:
-				$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
-			break;
-
-			case 3:  // if seconds included, approxiate it to minutes
-				$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
-
-				if ( (integer)$t_a[2] >= 30 ) {
-					$t_min++;
-				}
-			break;
-		}
-
-		return (int)$t_min;
-	}
-
 	# prepare a date for binding in the format database accepts.
 	# @param p_date can be a Unix integer timestamp or an ISO format Y-m-d. If null or false or '' is passed in, it will be converted to an SQL null.
 	function db_bind_date( $p_date ) {
