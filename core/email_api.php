@@ -497,7 +497,6 @@
 
 				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
-				    echo "email sent to $t_user_email<br/>";
 					# load (push) user language here as build_visible_bug_data assumes current language
 					lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
