@@ -51,14 +51,23 @@
 		$t_news_table = db_get_table( 'mantis_news_table' );
 
 		# Add item
+		
 		$query = "INSERT
 				INTO $t_news_table
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
 				VALUES
-				  ( '$c_project_id', '$c_poster_id', " . db_now() . "," . db_now() .",
-				    '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
-		db_query( $query );
+				    ( " . db_param(0) . ",
+				      " . db_param(1) . ",
+				      " . db_param(2) . ",
+				      " . db_param(3) . ",
+				      " . db_param(4) . ",
+				      " . db_param(5) . ",
+				      " . db_param(6) . ",
+				      " . db_param(7) . "
+					)";
+		db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(),
+						$c_view_state, $c_announcement, $c_headline, $c_body) ); 
 
 		$t_news_id = db_insert_id();
  
@@ -120,15 +129,15 @@
 
 		# Update entry
 		$query = "UPDATE $t_news_table
-				  SET view_state='$c_view_state',
-					announcement='$c_announcement',
-					headline='$c_headline',
-					body='$c_body',
-					project_id='$c_project_id',
-					last_modified= " . db_now() . "
-				  WHERE id='$c_news_id'";
+				  SET view_state=" . db_param(0) . ",
+					announcement=" . db_param(1) . ",
+					headline=" . db_param(2) . ",
+					body=" . db_param(3) . ",
+					project_id=" . db_param(4) . ",
+					last_modified= " . db_param(5) . "
+				  WHERE id=" . db_param(6);
 
-		db_query( $query );
+		db_query_bound( $query, Array( $c_view_state, $c_announcement, $c_headline, $c_body, $c_project_id, db_now(), $c_news_id ) );
 
 		# db_query errors on failure so:
 		return true;
