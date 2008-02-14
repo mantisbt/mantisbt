@@ -76,7 +76,7 @@
 	$f_get_bugnote_stats_button = gpc_get_string('get_bugnote_stats_button', '');
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 <table border=0 class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
