@@ -885,10 +885,10 @@
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( META_FILTER_NONE == $t_filter_member ) {
-					array_push( $t_clauses, "''" );
+					array_push( $t_clauses, '' );
 				} else {
 					$c_show_build = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_show_build'" );
+					array_push( $t_clauses, $c_show_build );
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
@@ -910,10 +910,10 @@
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( META_FILTER_NONE == $t_filter_member ) {
-					array_push( $t_clauses, "''" );
+					array_push( $t_clauses, '' );
 				} else {
 					$c_show_version = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_show_version'" );
+					array_push( $t_clauses, $c_show_version );
 				}
 			}
 
@@ -964,7 +964,7 @@
 					array_push( $t_clauses, '' );
 				} else {
 					$c_platform = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_platform'" );
+					array_push( $t_clauses, $c_platform );
 				}
 			}
 
@@ -990,7 +990,7 @@
 					array_push( $t_clauses, '' );
 				} else {
 					$c_os = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_os'" );
+					array_push( $t_clauses, $c_os );
 				}
 			}
 
@@ -1016,7 +1016,7 @@
 					array_push( $t_clauses, '' );
 				} else {
 					$c_os_build = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_os_build'" );
+					array_push( $t_clauses, $c_os_build );
 				}
 			}
 
@@ -1057,10 +1057,10 @@
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( META_FILTER_NONE == $t_filter_member ) {
-					array_push( $t_clauses, "''" );
+					array_push( $t_clauses, '' );
 				} else {
 					$c_fixed_in_version = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_fixed_in_version'" );
+					array_push( $t_clauses, $c_fixed_in_version );
 				}
 			}
 			if ( 1 < count( $t_clauses ) ) {
@@ -1082,10 +1082,10 @@
 			foreach( $t_filter['target_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
 				if ( META_FILTER_NONE == $t_filter_member ) {
-					array_push( $t_clauses, "''" );
+					array_push( $t_clauses, '' );
 				} else {
 					$c_target_version = db_prepare_string( $t_filter_member );
-					array_push( $t_clauses, "'$c_target_version'" );
+					array_push( $t_clauses, $c_target_version );
 				}
 			}
 			
