@@ -522,7 +522,7 @@ function plugin_register( $p_basename, $p_return=false, $p_child=null ) {
 	global $g_plugin_cache;
 
 	$t_basename = is_null( $p_child ) ? $p_basename : $p_child;
-	if ( !isset( $g_plugin_cache[$t_plugin] ) ) {
+	if ( !isset( $g_plugin_cache[$t_basename] ) ) {
 		if ( is_null( $p_child ) ) {
 			$t_classname = $p_basename . 'Plugin';
 		} else {
