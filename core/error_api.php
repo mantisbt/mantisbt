@@ -128,13 +128,15 @@
 
 		switch ( $t_method ) {
 			case 'halt':
-				if ( error_handled() && ob_get_length() > 0 ) 
+				$t_oblen = ob_get_length();
+				if ( error_handled() && $t_oblen > 0 ) 
 					$t_old_contents = ob_get_contents();
 
 				# We need to ensure compression is off - otherwise the compression headers are output.
 				compress_disable();
 				# then clean the buffer, leaving output buffering on.
-				ob_clean();
+				if ( $t_oblen > 0 ) 
+					ob_clean();
 
 				# don't send the page header information if it has already been sent
 				if ( $g_error_send_page_header || $g_error_send_page_header == null ) {			
