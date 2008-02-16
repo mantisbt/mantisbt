@@ -276,7 +276,7 @@
 		print_hr();
 		PRINT "\n$p_message\n";
 
-		PRINT '<form method="post" action="' . $_SERVER[ 'PHP_SELF' ] . "\">\n";
+		PRINT '<form method="post" action="' . $_SERVER[ 'SCRIPT_NAME' ] . "\">\n";
 
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
