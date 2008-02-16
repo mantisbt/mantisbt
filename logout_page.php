@@ -26,9 +26,5 @@
 
 	auth_logout();
 
-	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
-		auth_http_set_logout_pending( true );
-	}
-
 	print_header_redirect( config_get( 'logout_redirect_page' ), /* die */ true, /* sanitize */ false );
 ?>

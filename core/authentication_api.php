@@ -201,6 +201,11 @@
         if (auth_clear_cookies()) {
             helper_clear_pref_cookies();
         }
+        
+        if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+			auth_http_set_logout_pending( true );
+		}
+
 		return true;
 	}
 
