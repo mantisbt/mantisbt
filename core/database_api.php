@@ -393,6 +393,26 @@
 		return false;
 	}
 
+	function db_index_exists( $p_table_name, $p_index_name ) {
+		global $g_db, $g_db_schema;
+
+		if ( is_blank( $p_index_name ) || is_blank( $p_table_name ) ) {
+			return false; // no index found
+		}
+
+		$t_indexes = $g_db->MetaIndexes( $p_table_name );
+
+		# Can't use in_array() since it is case sensitive
+		$t_index_name = strtolower( $p_index_name );
+		foreach ( $t_indexes as $t_current_index_name => $t_current_index_obj ) {
+			if ( strtolower( $t_current_index_name ) == $t_index_name ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	# --------------------
 	function db_field_exists( $p_field_name, $p_table_name ) {
 		global $g_db;

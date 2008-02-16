@@ -389,8 +389,8 @@ $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), 
 $upgrade[] = Array( 'DropTableSQL', Array( db_get_table( 'mantis_project_category_table' ) ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_project_table' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
 // remove unnecessary indexes
-$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('mantis_project_table'),'id', array('DROP')));
-$upgrade[] = Array('CreateIndexSQL',Array('idx_config',db_get_table( 'mantis_config_table' ),'config_id', array('DROP')));
+$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('mantis_project_table'),'id', array('DROP')), Array( 'db_index_exists', Array( db_get_table('mantis_project_table'), 'idx_project_id')));
+$upgrade[] = Array('CreateIndexSQL',Array('idx_config',db_get_table( 'mantis_config_table' ),'config_id', array('DROP')), Array( 'db_index_exists', Array( db_get_table('mantis_config_table'), 'idx_config')));
 
 $upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_plugin_table' ), "
 	( basename, enabled ) VALUES
