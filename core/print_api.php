@@ -1003,6 +1003,7 @@
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
 							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ),
+							'EXT_UPDATE_PRODUCT_BUILD' => lang_get( 'actiongroup_menu_update_product_build' ),
 							'EXT_ADD_NOTE' => lang_get( 'actiongroup_menu_add_note' ),
 							'EXT_ATTACH_TAGS' => lang_get( 'actiongroup_menu_attach_tags' ),
 					);
