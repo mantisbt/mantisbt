@@ -397,8 +397,8 @@
 		$t_bugnote_table	= db_get_table( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-		          	SET last_modified=" . db_param(0) . "
-		          	WHERE id=" . db_param(1);
+					SET last_modified=" . db_param(0) . "
+					WHERE id=" . db_param(1);
 		db_query_bound( $query, Array( db_now(), $c_bugnote_id ) );
 
 		# db_query errors if there was a problem so:
@@ -408,15 +408,14 @@
 	# --------------------
 	# Set the bugnote text
 	function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
-		$c_bugnote_text	     	= db_prepare_string( $p_bugnote_text );
 		$t_bug_id            	= bugnote_get_field( $p_bugnote_id, 'bug_id' );
 		$t_bugnote_text_id   	= bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 		$t_bugnote_text_table	= db_get_table( 'mantis_bugnote_text_table' );
 
 		$query = "UPDATE $t_bugnote_text_table
-		          	SET note='$c_bugnote_text'
-		          	WHERE id=" . db_param(0);
-		db_query_bound( $query, Array( $t_bugnote_text_id ) );
+			SET note=" . db_param(0) .
+			"WHERE id=" . db_param(1);
+		db_query_bound( $query, Array( $p_bugnote_text, $t_bugnote_text_id ) );
 
 		# updated the last_updated date
 		bugnote_date_update( $p_bugnote_id );
