@@ -26,7 +26,7 @@
 	# Functions to help in backwards compatibility of PHP versions, etc.
 
 	# Constant for our minimum required PHP version
-	define( 'PHP_MIN_VERSION', '4.3.0' );
+	define( 'PHP_MIN_VERSION', '5.1.0' );
 
 	# cache array of comparisons
 	$g_cached_version = array();
