@@ -293,11 +293,12 @@
 
 		$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
 
-		$t_bug_relationship_data = array( new BugRelationshipData );
+		$t_bug_relationship_data = array();
 		$t_relationship_count = db_num_rows( $result );
 		$t_bug_array = Array();
 		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
 			$row = db_fetch_array( $result );
+			$t_bug_relationship_data[$i] = new BugRelationshipData;
 			$t_bug_relationship_data[$i]->id = $row['id'];
 			$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
 			$t_bug_relationship_data[$i]->src_project_id = $t_src_project_id;
