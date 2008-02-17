@@ -147,9 +147,9 @@
 	Password".</para>
 	
 	<para>"Forgot Password" is a self service scenario where users go to the
-	login page, figure out they don't remember the password, and then click
+	login page, figure out they don't remember their password, and then click
 	the "Lost your password?" link.  Users are then asked for their user
-	name and email password.  If correct, then they are sent an email with a
+	name and email address.  If correct, then they are sent an email with a
 	link which allows them to login to MantisBT and change their password.</para>
 	
 	<para>"Reset Password" scenario is where a user reports to the
