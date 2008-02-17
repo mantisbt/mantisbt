@@ -5,3 +5,4 @@
 <!ENTITY customizing SYSTEM "customizing_mantis.sgml">
 <!ENTITY contributing SYSTEM "contributing.sgml">
 <!ENTITY usermanagement SYSTEM "user_management.sgml">
+<!ENTITY workflow SYSTEM "workflow.sgml">

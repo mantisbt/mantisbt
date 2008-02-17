@@ -51,6 +51,7 @@
         &about;
         &installation;
         &usermanagement;
+	&workflow;
         &configuration;
         &pagedescriptions;
         &customizing;
