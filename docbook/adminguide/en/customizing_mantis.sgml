@@ -3,15 +3,20 @@
     
     <section>
         <title>Custom Fields</title>
-        
-        
-        <para>There have been multiple requests to add certain fields to
-            Mantis bugs. These requests were not realised because of the
-            concern that they might over complicate the usage of Mantis while
-            not add value for most users.Hence, Mantis 0.18.0 introduces custom
-            fields to enable project managers to define extra fields for their
-            projects.Following are some facts about the implementation of
-            custom fields in Mantis:
+
+	<section>
+	<title>Overview</title>
+	
+        <para>Different teams typically like to capture different information
+	as users report issues, in some cases, the data required is even
+	different from one project to another.  Hence, MantisBT provides the
+	ability for managers and administrators to define custom fields as way
+	to extend MantisBT to deal with information that is specific to their
+	teams or their projects.  The aim is for this to keep MantisBT native
+	fields to a minimum.
+	
+	Following are some facts about the implementation of
+        custom fields in MantisBT:
             <itemizedlist>
                 <listitem>
                     <para>Custom fields are defined system wide.</para>
@@ -40,28 +45,50 @@
                 <listitem>
                     <para>Number of custom fields is not restricted.</para>
                 </listitem>
+		<listitem>
+		    <para>Users can define filters that include custom fields.</para>
+		</listitem>
+		<listitem>
+		    <para>Custom fields can be included in View Issues, Print
+		    Issues, and CSV exports.</para>
+		</listitem>
+		<listitem>
+		    <para>Enumeration custom fields can have a set of static
+		    values or values that are calculated dynamically based on
+		    a custom function.</para>
+		</listitem>
             </itemizedlist>
         </para>
-        
+        </section>
+	
+	<section>
+	    <title>Custom Field Definition</title>
+	  
         <para>
             The definition of a custom field includes the following logical
             attributes:
+
             <itemizedlist>
                 <listitem>
                     <para>Caption variable name (eg: This is the value that is
                         supplied to lang_get() API, or displayed as-is if not found in
-                        language file).
+                        language file).  This should not include any space or
+			any character that would be an invalid PHP identifier.
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Custom field type (string, numeric, float, enum,
-                        email)
+                    <para>Custom field type (string, numeric, float,
+		    enumeration, email, checkbox, list, multi-selection list, date)
                     </para>
                 </listitem>
                 <listitem>
                     <para>Enumeration possible values (eg: RED|YELLOW|BLUE).
                         Use the pipe ('|') character to separate possible values for an
-                        enumeration. One of the possible values can be an empty string.
+                        enumeration. One of the possible values can be an
+			empty string.  The set of possible values can also be
+			calculated at runtime.  For example, "=versions" would
+			automatically resolve into all the versions defined
+			for the current project.
                     </para>
                 </listitem>
                 <listitem>
@@ -79,18 +106,6 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Advanced? no: Show in simple/advanced pages, yes: Show
-                        only in advanced pages.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>All custom fields are currently saved to a field of type
-                        VARCHAR(255) in the database. However, in future releases, it is
-                        possible to support custom fields of different types (eg: memo,
-                        date, datetime, file).
-                    </para>
-                </listitem>
-                <listitem>
                     <para>Read Access level: Minimum access level for users to be
                         able to see the value of the custom field.
                     </para>
@@ -100,20 +115,74 @@
                         able to edit the value of the custom field.
                     </para>
                 </listitem>
+                <listitem>
+                    <para>Display only on Advanced Page? - If set, then this
+		    custom field will only show on the advanced pages.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Display when reporting issues? - If this custom
+		    field should be shown on the Report Issue page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Display when updating issues? - If this custom
+		    field should be shown on the Update Issue page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Display when resolving issues? - If this custom
+		    field should be shown when resolving an issue.  For
+		    example, a "root cause" custom field would make sense to
+		    set when resolving the issue.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Display when closing issues? - If this custom
+		    field should be shown when closing an issue.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Required on Report - If this custom
+		    field is a mandatory field on the Report Issue page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Required on Update - If this custom
+		    field is a mandatory field on the Update Issue page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Required on Resolve - If this custom
+		    field is a mandatory field when resolving an issue.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Required on Close - If this custom
+		    field is a mandatory field when closing an issue.
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
         
+        <para>All custom fields are currently saved to a field of type
+        VARCHAR(255) in the database. However, in future releases, it is
+        possible to support custom fields of different types (eg: memo,
+        file).</para>
+
         <para>
             If the value of a custom field for a certain defect is not found,
             the default value is assumed.
         </para>
-        
-        <formalpara>
-            <title>Adding/Editing Custom Fields Definitions</title>
+    </section>
+    
+    <section>
+        <title>Adding/Editing Custom Fields</title>
+    
             <para>
                 <itemizedlist>
                     <listitem>
-                        <para>The logged in user needs manage_custom_fields_threshold
+                        <para>The logged in user needs $g_manage_custom_fields_threshold
                             access level.
                         </para>
                     </listitem>
@@ -126,21 +195,26 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>Click on the name of an existing custom field to edit its
-                            information.
+                        <para>In case of edit, click on the name of an existing
+			custom field to edit its information.
                         </para>
                     </listitem>
                     <listitem>
-                        <para>Enter the name of the new custom field then click "New
-                            Custom Field" to add a new field.
+                        <para>In case of adding a new one, enter the name of the
+			new custom field then click "New Custom Field".
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
-        </formalpara>
-        
-        <formalpara>
-            <title>Linking/Unlinking/Ordering Existing Custom Fields in Projects</title>
+	    
+	    <note><para>Added custom fields will not show up in any of the issues
+	    until the added custom field is linked to the appropriate
+	    projects.</para></note>
+	</section>
+
+	<section>
+		<title>Linking/Unlinking/Ordering Existing Custom Fields in Projects</title>
+
             <para>
                 <itemizedlist>
                     <listitem>
@@ -153,8 +227,7 @@
                         <para>Select "Manage" from the main menu.</para>
                     </listitem>
                     <listitem>
-                        <para>Select "Manage Projects" in case you are
-                            administrator.
+                        <para>Select "Manage Projects".
                         </para>
                     </listitem>
                     <listitem>
@@ -187,8 +260,7 @@
                     </listitem>
                 </itemizedlist>
             </para>
-        </formalpara>
-        
+
         <formalpara>
             <title>Moving Bugs</title>
             <para>
@@ -199,80 +271,164 @@
                 linked to the new project.
             </para>
         </formalpara>
-        
-        <formalpara>
-            <title>Custom Severities, Priorites, Statuses, etc...</title>
-            
-            <para>
-                This is a completely different issue. See
-                <ulink url="manual.customizing.mantis.enumerations.html">Enumerations</ulink>
-                for more details about this issue.
-            </para>
-        </formalpara>
-        
-        <formalpara>
-            <title>Possible Future Enhancements</title>
-            <para>
-                <itemizedlist>
-                    <listitem>
-                        <para>Make custom field searchable.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Ability to filter on values of custom fields.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Support more field types: date, datetime, memo,
-                            file.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Support custom fields in resolve/close bugs
-                            pages.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Control the visibility / mandatory state of custom fields
-                            depending on the stage in which the bug is at (eg: reporting,
-                            updating, resolving, closing).
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Ability to export custom fields to csv, Excel,
-                            Word.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Ability to make a custom field visible in View Bugs page
-                            (this also applies for non-custom fields).
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Ability to filter on custom fields in View Bugs page
-                            (this also applies for non-custom fields that are not supported in
-                            the filter.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Support populating custom fields from LDAP.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Support populating custom fields via a SELECT SQL query.
-                            The query can use a set of variables like be a $sql_user_id,
-                            $sql_project_id, $sql_xxx.
-                        </para>
-                    </listitem>
-                </itemizedlist>
-            </para>
-            
-        </formalpara>
-        <note><para>
-                If you are interested in any of the above enhancements and have the
-                time/skills required to implemented it, please contact the
-                development team to make sure that your work can be integrated into
-                Mantis future releases.
-            </para>
-        </note>
-        
+ 
+ 	<section>
+	    <title>Localizing Custom Field Names</title>
+	    
+	    <para>It is possible to localize the label for the custom fields. 
+	    This can be as follows:
+	    
+	        <itemizedlist>
+		    <listitem><para>Give the custom field a valid variable name
+		    (i.e. start with an alpha character, no spaces, etc) - For
+		    example, we will use "my_start_date" for a custom field of
+		    type "Date" which stores the "Start Date" for working on an
+		    issue.</para></listitem>
+		    <listitem><para>Add the localized string for "my_start_date"
+		    - This can be done by creating custom_strings_inc.php in the
+		    MantisBT root folder and adding the following code to it:
+<programlisting>
+&lt;?php
+if ( lang_get_current() == 'german' ) {
+    $s_my_start_date = 'Start Date XX';  // German translation of Start Date
+} else {
+    # Default (use your preferred language as the default)
+    $s_my_start_date = 'Start Date';
+}
+?&gt;</programlisting></para></listitem>
+	    	</itemizedlist>
+	    </para>
+	    
+	    <note><para>If we would have decided to use start_date as the
+	    name of the custom field, then we have used an already localized
+	    string from MantisBT standard strings.  In this case, there is no
+	    need to create the custom_strings_inc.php or to add any strings to
+	    it.  To check for standard strings, inspect
+	    lang/strings_english.txt.</para></note>
+	</section>
+	
+	<section>
+	    <title>Dynamic values for Enumeration Custom Fields</title>
+	    
+	    <para>As discussed earlier, one of the possible types of a custom
+	    field is "enumeration".  This type of custom field allows the user
+	    to select one value from a provided list of possible values.  The
+	    standard way of defining such custom fields is to provide a '|'
+	    separated list of possible values.  However, this approach has two
+	    limitations: the list is static, and the maximum length of the list
+	    must be no longer than 255 characters.  Hence, the need for the
+	    ability to construct the list of possible values dynamically.</para>
+	    
+
+            <section>
+	       <title>Dynamic possible values included by default</title>
+	    
+	    <para>MantisBT ships with some dynamic possible values, these
+	    include the following:
+	    
+	    	<itemizedlist>
+		    <listitem><para>=categories - a list of categories defined
+		    in the current project (or the project to which the issue
+		    belongs).</para></listitem>
+		    <listitem><para>=versions - a list of all versions defined
+		    in the current project (or the project to which the issue
+		    belongs).</para></listitem>
+		    <listitem><para>=future_versions - a list of all versions that
+		    belong to the current project with
+		    released flag set to false.</para></listitem>
+		    <listitem><para>=released_versions - a list of all versions
+		    that belong to the current project with released flag set to
+		    true.</para></listitem>
+		</itemizedlist>
+	    </para>
+	    
+	    <note><para>The '=' before the name of the dynamic list of options is used
+	    to tell MantisBT that this is a dynamic list, rather than a static
+	    list with just one option.</para></note>
+	    
+	    </section>
+	    
+	    <section>
+	        <title>Defining Custom Dynamic Possible Values</title>
+
+		<para>If the user selects =versions, the actual custom function
+		that is executed is custom_function_*_enum_versions(). The reason 
+		why the "enum_" is not included is to have a fixed prefix for all 
+		custom functions used for this purpose and protect against users 
+		using custom functions that were not intended for this purpose. 
+		For example, you don't want the user to use 
+		custom_function_*_issue_delete_notify() which may be overridden
+		by the web master to delete associated data in other
+		databases.</para>
+
+		<para>Following is a sample custom function that is used to
+		populate a field with the categories belonging to the currently
+		selected project:
+
+<programlisting># --------------------
+# Construct an enumeration for all categories for the current project.
+# The enumeration will be empty if current project is ALL PROJECTS.
+# Enumerations format is: "abc|lmn|xyz"
+# To use this in a custom field type "=categories" in the possible values field.
+function custom_function_override_enum_categories() {
+    $t_categories = category_get_all_rows( helper_get_current_project() );
+ 
+    $t_enum = array();
+    foreach( $t_categories as $t_category ) {
+        $t_enum[] = $t_category['category'];
+    }
+ 
+    $t_possible_values = implode( '|', $t_enum );
+ 
+    return $t_possible_values;
+}</programlisting>
+</para>
+
+<para>Notice the following:
+
+<itemizedlist>
+	<listitem><para>The custom function doesn't take any
+	parameters.</para></listitem>
+	<listitem><para>The custom function returns the possible values in the
+	format (A|B|C).</para></listitem>
+   	<listitem><para>The custom function uses the current
+	project.</para></listitem>
+	<listitem><para>The custom function builds on top of the already
+	existing APIs.</para></listitem>
+</itemizedlist>
+</para>
+
+<para>To define your own function \u201c=mine\u201d, you will have to define it
+with the following signature:
+
+<programlisting>
+# --------------------
+# To use this in a custom field type "=mine" in the possible values field.
+function custom_function_override_enum_mine() {
+    $t_enum = array();
+ 
+    :
+ 
+    $t_possible_values = implode( '|', $t_enum );
+ 
+    return $t_possible_values;
+}
+</programlisting>
+</para>
+
+<para>Notice "override" in the function name. This is because this method is
+defined by the MantisBT adminstrator/webmaster and not part of the MantisBT source.
+It is OK to override a method that doesn't exist.</para>
+
+<para>As usual, when MantisBT is upgraded to future releases, the custom functions 
+will not be overwritten. The difference between the "default" implementation and 
+the "override" implementation is explained in more details in the custom
+functions section.</para>
+
+	</section>
+
+        </section>
+	
     </section>
     <section>
         <title>Enumerations</title>
