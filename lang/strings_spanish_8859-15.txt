@@ -269,7 +269,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No se ha especificado ninguna acción 
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoría no encontrada.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ya existe una versión con ese nombre.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versión \'%s\' no encontrada.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estandar, números, guiones medios y guiones bajos.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estándar, números, guiones medios y guiones bajos.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'El nombre real del usuario no es válido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'El usuario no tiene el nivel de acceso requerido';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'El \"Nombre Real\" coincide con el nombre de otro usuario. Por favor elija otro.';
@@ -432,7 +432,7 @@ $s_redirect_delay = 'Retardo de Redirección';
 $s_with_minimum_severity = 'Con una severidad mínima de';
 $s_bugnote_order = 'Orden de las Notas';
 $s_bugnote_order_asc = 'Ascendente';
-$s_bugnote_order_desc = 'Descencente';
+$s_bugnote_order_desc = 'Descendente';
 $s_email_on_new = 'Enviar correo sobre incidencias Nuevas';
 $s_email_on_assigned = 'Enviar correo sobre cambios de asignaciones';
 $s_email_on_feedback = 'Enviar correo sobre incidencias que requieran más información';
@@ -589,7 +589,7 @@ $s_bug_updated_msg = 'La Incidencia fue actualizada correctamente...';
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = 'Volver a la Incidencia';
-$s_update_simple_link = 'Cambiar a forma de Actualizacion Simple';
+$s_update_simple_link = 'Cambiar a forma de Actualización Simple';
 $s_updating_bug_advanced_title = 'Actualizando información de la incidencia';
 $s_id = 'ID';
 $s_category = 'Categoría';
@@ -821,7 +821,7 @@ $s_edit_project_category_title = 'Editar la categoría del proyecto';
 $s_update_category_button = 'Actualizar Categoría';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'La categoria ha sido actualizada...';
+$s_category_updated_msg = 'La categoría ha sido actualizada...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Agregar subproyecto';
@@ -1055,7 +1055,7 @@ $s_valid_project_msg = 'Debe seleccionar un proyecto válido';
 
 # signup.php
 $s_signup_done_title = 'Registro de cuenta procesado';
-$s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por e-mail para verificar su dirección de correo electrónico. Haga clic en el link que recibirá para activar su cuenta.';
+$s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por e-mail para verificar su dirección de correo electrónico. Haga click en el link que recibirá para activar su cuenta.';
 $s_no_reponse_msg = 'Tiene siete días para completar el proceso de registro. Si no lo completa en ese plazo, su nueva cuenta podría ser eliminada.';
 
 # signup_page.php
@@ -1431,7 +1431,7 @@ $s_period_this_week = 'Esta Semana';
 $s_period_last_week = 'Última Semana';
 $s_period_two_weeks = 'Últimas dos Semanas';
 $s_period_this_month = 'Este Mes';
-$s_period_last_month = 'Útimo Mes';
+$s_period_last_month = 'Último Mes';
 $s_period_this_quarter = 'Este Trimestre';
 $s_period_last_quarter = 'Último Trimestre';
 $s_period_year_to_date = 'Lo que va del Año';
