@@ -56,9 +56,11 @@ $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %s';
 $s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
 $s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelta en Versión';
+$s_actiongroup_menu_update_product_build = 'Actualizar Compilación del Proyecto';
 $s_actiongroup_menu_add_note = 'Añadir Nota';
 $s_actiongroup_menu_attach_tags = 'Adjuntar Etiquetas';
 $s_actiongroup_bugs = 'Incidencias Seleccionadas';
+$s_actiongroup_error_issue_is_readonly = 'Incidencia es sólo-lectura.';
 
 # new strings:
 $s_all_projects = 'Todos los Proyectos';
@@ -104,6 +106,7 @@ $s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está s
 $s_empty_password_button = 'Usar Contraseña en Blanco';
 $s_reauthenticate_title = 'Autenticar';
 $s_reauthenticate_message = 'Está viendo una página segura, pero su sesión ha expirado. Por favor autentíquese para continuar.';
+$s_no_category = 'Sin Categoría';
 
 $s_duplicate_of = "es un duplicado de";
 $s_has_duplicate = "está duplicada en";
@@ -225,7 +228,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'No se encuentra la opción de confi
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'La opción de configuración \'%s\' no puede estár definida en la base de datos. Debe estar definida en el archivo config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Cadena \'%s\' no encontrada.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nota no encontrada.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyecto no encontrado';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyecto \'%d\' no encontrado';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de datos \'%s\' no encontrado.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Imposible conectarse al servidor FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'El gestor de incidencias no tiene los permisos suficientes para gestionar incidencias con este estado ';
@@ -269,7 +272,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No se ha especificado ninguna acción
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoría no encontrada.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ya existe una versión con ese nombre.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versión \'%s\' no encontrada.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estandar, números, guiones medios y guiones bajos.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nombre de usuario no es válido. Los nombres de usuario sólo pueden contener caracteres estándar, números, guiones medios y guiones bajos.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'El nombre real del usuario no es válido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'El usuario no tiene el nivel de acceso requerido';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'El \"Nombre Real\" coincide con el nombre de otro usuario. Por favor elija otro.';
@@ -301,6 +304,11 @@ $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'El nombre de la etiqueta no es válido.
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esa etiqueta no está adjuntada a esa incidencia.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esa etiqueta ya estaba adjuntada a esa incidencia.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token no encontrado.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'El evento \'%s\' no ha sido declarado aún.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin no registrado en Mantis.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin ya instalado previamente.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Página del Plugin no encontrada.';
+
 
 $s_login_error = 'Su cuenta puede estar deshabilitada o o bloqueada o el nombre de usuario/contraseña introducidos son incorrectos.';
 $s_login_cookies_disabled = 'Su navegador no soporta cookies, o las ha rechazado.';
@@ -432,7 +440,7 @@ $s_redirect_delay = 'Retardo de Redirección';
 $s_with_minimum_severity = 'Con una severidad mínima de';
 $s_bugnote_order = 'Orden de las Notas';
 $s_bugnote_order_asc = 'Ascendente';
-$s_bugnote_order_desc = 'Descencente';
+$s_bugnote_order_desc = 'Descendente';
 $s_email_on_new = 'Enviar correo sobre incidencias Nuevas';
 $s_email_on_assigned = 'Enviar correo sobre cambios de asignaciones';
 $s_email_on_feedback = 'Enviar correo sobre incidencias que requieran más información';
@@ -572,6 +580,7 @@ $s_bugnote_add_resolve_button = 'Agregar Nota';
 $s_from = 'De';
 $s_to = 'Para';
 $s_on = 'El';
+$s_off = 'Off'; # Sin traducción por el momento (no estoy seguro dónde se usa)
 $s_sent_you_this_reminder_about = 'le ha enviado este recordatorio acerca de';
 $s_bug_reminder = 'Enviar un recordatorio';
 $s_reminder_sent_to = 'Recordatorio enviado a';
@@ -589,7 +598,7 @@ $s_bug_updated_msg = 'La Incidencia fue actualizada correctamente...';
 
 # bug_update_advanced_page.php
 $s_back_to_bug_link = 'Volver a la Incidencia';
-$s_update_simple_link = 'Cambiar a forma de Actualizacion Simple';
+$s_update_simple_link = 'Cambiar a forma de Actualización Simple';
 $s_updating_bug_advanced_title = 'Actualizando información de la incidencia';
 $s_id = 'ID';
 $s_category = 'Categoría';
@@ -711,6 +720,7 @@ $s_manage_users_link = 'Administrar Usuarios';
 $s_manage_projects_link = 'Administrar Proyectos';
 $s_manage_custom_field_link = 'Administrar Campos Personalizados';
 $s_manage_global_profiles_link = 'Administrar Perfiles Globales';
+$s_manage_plugin_link = 'Administrar Plugins';
 $s_permissions_summary_report = 'Informe de Permisos';
 $s_manage_config_link = 'Administrar Configuración';
 $s_manage_threshold_config = 'Límites del flujo de Trabajo';
@@ -803,6 +813,26 @@ $s_all_users = 'Todos los Usuarios';
 $s_set_configuration_option = 'Establecer Opción de Configuración';
 $s_delete_config_sure_msg = '¿Está seguro que desea borrar esta opción de configuración?';
 
+# manage_plugin_page.php
+$s_plugin = 'Plugin';
+$s_plugins_installed = 'Plugins Instalados';
+$s_plugins_available = 'Plugins Disponibles';
+$s_plugin_description = 'Descripción';
+$s_plugin_author = 'Autor: %s';
+$s_plugin_url = 'Sitio Web: ';
+$s_plugin_depends = 'Dependencias';
+$s_plugin_no_depends = 'Sin dependencias';
+$s_plugin_actions = 'Acciones';
+$s_plugin_install = 'Instalar';
+$s_plugin_upgrade = 'Actualizar';
+$s_plugin_uninstall = 'Desinstalar';
+$s_plugin_uninstall_message = '¿Está seguro que desea desinstalar el plugin \'%s\'?';
+$s_plugin_key = 'Clave';
+$s_plugin_key_met = 'plugin listo';
+$s_plugin_key_unmet = 'dependencias no satisfechas';
+$s_plugin_key_dated = 'dependencies desactualizadas';
+$s_plugin_key_upgrade = 'actualización requerida';
+
 # manage_proj_add.php
 $s_project_added_msg = 'El proyecto ha sido agregado...';
 
@@ -821,7 +851,7 @@ $s_edit_project_category_title = 'Editar la categoría del proyecto';
 $s_update_category_button = 'Actualizar Categoría';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'La categoria ha sido actualizada...';
+$s_category_updated_msg = 'La categoría ha sido actualizada...';
 
 # manage_proj_create_page.php
 $s_add_subproject_title = 'Agregar subproyecto';
@@ -858,6 +888,8 @@ $s_subprojects = 'Subproyectos';
 $s_add_subproject = 'Agregar como Subproyecto';
 $s_create_new_subproject_link = 'Crear Nuevo Subproyecto';
 $s_unlink_link = 'Quitar enlace';
+$s_show_global_users = 'Mostrar Usuarios con Acceso Global';
+$s_hide_global_users = 'Ocultar Usuarios con Acceso Global';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Agregar Proyecto';
@@ -1055,7 +1087,7 @@ $s_valid_project_msg = 'Debe seleccionar un proyecto válido';
 
 # signup.php
 $s_signup_done_title = 'Registro de cuenta procesado';
-$s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por e-mail para verificar su dirección de correo electrónico. Haga clic en el link que recibirá para activar su cuenta.';
+$s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por e-mail para verificar su dirección de correo electrónico. Haga click en el link que recibirá para activar su cuenta.';
 $s_no_reponse_msg = 'Tiene siete días para completar el proceso de registro. Si no lo completa en ese plazo, su nueva cuenta podría ser eliminada.';
 
 # signup_page.php
@@ -1431,7 +1463,7 @@ $s_period_this_week = 'Esta Semana';
 $s_period_last_week = 'Última Semana';
 $s_period_two_weeks = 'Últimas dos Semanas';
 $s_period_this_month = 'Este Mes';
-$s_period_last_month = 'Útimo Mes';
+$s_period_last_month = 'Último Mes';
 $s_period_this_quarter = 'Este Trimestre';
 $s_period_last_quarter = 'Último Trimestre';
 $s_period_year_to_date = 'Lo que va del Año';
