@@ -144,24 +144,27 @@
 	require_once( $t_core_path . 'obsolete.php' );
 ?>
 
-<!-- Version Check -->
-<table width="100%" bgcolor="#0000aa" border="0" cellpadding="20" cellspacing="1">
-<tr>
-	<td bgcolor="#f0f0ff">
-		<span class="title">Version</span>
-		<p>Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version or above, you or your administrator will need to upgrade your build of PHP.</p>
-		<p>You are running <b>PHP <?php echo $version ?></b></p>
-	</td>
-</tr>
-</table>
-
-<br />
-
 <table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking your installation</span>
 	</td>
+</tr>
+
+
+<!-- Test PHP Version -->
+<tr>
+	<td bgcolor="#ffffff">
+		Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>. You are running <b>PHP <?php echo $version ?>
+	</td>
+	<?php
+		$result = version_compare ( phpversion() , PHP_MIN_VERSION, '>=' );
+		if ( false == $result ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
 </tr>
 
 <!-- Test DATABASE part 1 -->
