@@ -57,12 +57,19 @@
 
 		# validate the url as part of this site before continuing
 		if ( $p_absolute ) {
-			$t_url = '';
+			if ( $p_sanitize ) {
+				$t_url = string_sanitize_url( $p_url );
+			} else {
+				$t_url = $p_url;
+			}			
 		} else {
-			$t_url = config_get( 'path' );
+			if ( $p_sanitize ) {
+				$t_url = string_sanitize_url( $p_url, true );
+			} else {
+				$t_url = config_get( 'path' ) . $p_url; 
+			}
 		}
-		$t_url .= $p_sanitize ? string_sanitize_url( $p_url ) : $p_url;
-
+		
 		# don't send more headers if they have already been sent (guideweb)
 		if ( ! headers_sent() ) {
 			header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );

@@ -188,18 +188,40 @@
 
 	# --------------------
 	# validate the url as part of this site before continuing
-	function string_sanitize_url( $p_url ) {
+	function string_sanitize_url( $p_url, $return_absolute = false ) {
 		$t_url = strip_tags( urldecode( $p_url ) );
 		if ( preg_match( '?http(s)*://?', $t_url ) > 0 ) { 
 			// no embedded addresses
 			if ( preg_match( '?^' . config_get( 'path' ) . '?', $t_url ) == 0 ) { 
 				// url is ok if it begins with our path, if not, replace it
-				$t_url = 'index.php';
+				if ( $return_absolute == true ) {
+					$t_url = config_get_global( 'path' ) . 'index.php';
+				} else {
+					$t_url = 'index.php';
+				}
+			} else {
+				if ( $return_absolute == false ) {
+					str_replace( config_get_global( 'path' ), '', $t_url ); 
+				}
+			}
+		} else {
+			// relative hyperlink
+			if ( $return_absolute == true ) {
+				if ( strpos( $p_url, config_get_global( 'short_path' ) ) === 0) {
+					$t_url = str_replace( config_get_global( 'short_path' ), '', config_get_global( 'path' ) ) . $t_url;
+				} else {
+					$t_url = config_get_global( 'path' ) . $t_url; 
+				}
 			}
 		}
 		if ( $t_url == '' ) {
-			$t_url = 'index.php';
+			if ( $return_absolute == true ) {
+				$t_url = config_get_global( 'path' ) . 'index.php';
+			} else {
+				$t_url = 'index.php';
+			}
 		}
+
 		
 		// split and encode parameters
 		if ( strpos( $t_url, '?' ) !== FALSE ) {
