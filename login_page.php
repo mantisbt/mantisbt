@@ -34,9 +34,8 @@
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
 	$f_return		= gpc_get_string( 'return', '' );
 
-	# Check for HTTP_AUTH. HTTP_AUTH is handled in login.php
-
-	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+	# Check for automatic logon methods where we want the logon to just be handled by login.php
+	if ( auth_automatic_logon_bypass_form() ) {
 		$t_uri = "login.php";
 
 		if ( !$f_return && ON == config_get( 'allow_anonymous_login' ) ) {

@@ -260,6 +260,13 @@
 		return true;
 	}
 
+	function auth_automatic_logon_bypass_form() {
+		switch ( config_get( 'login_method' ) ) {
+			case HTTP_AUTH:
+				return true;
+		}
+		return false;
+	}
 	#===================================
 	# Password functions
 	#===================================
