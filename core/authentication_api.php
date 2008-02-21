@@ -76,6 +76,57 @@
 	#===================================
 
 	# --------------------
+	# prepare/override the username provided from logon form (if necessary)
+	# @@@when we rewrite authentication api for plugins, this should be merged with prepare_password and return some object
+	function auth_prepare_username( $p_username ) {
+		switch ( config_get( 'login_method' ) ) {
+			case BASIC_AUTH:
+				$f_username = $_SERVER['REMOTE_USER'];
+				break;
+			case HTTP_AUTH:
+				if ( !auth_http_is_logout_pending() )
+				{
+					if ( isset( $_SERVER['PHP_AUTH_USER'] ) )
+						$f_username = $_SERVER['PHP_AUTH_USER'];
+				} else {
+					auth_http_set_logout_pending( false );
+					auth_http_prompt(); /* calls exit */
+					return;
+				}
+				break;
+			default:
+				$f_username = $p_username;
+				break;
+		}
+		return $f_username;
+	}
+
+	# --------------------
+	# prepare/override the password provided from logon form (if necessary)
+	# @@@when we rewrite authentication api for plugins, this should be merged with prepare_username and return some object
+	function auth_prepare_password( $p_password ) {
+		switch ( config_get( 'login_method' ) ) {
+			case BASIC_AUTH:
+				$f_password = $_SERVER['PHP_AUTH_PW'];
+				break;
+			case HTTP_AUTH:
+				if ( !auth_http_is_logout_pending() ) { /* this will never get hit - see auth_prepare_username */
+					if ( isset( $_SERVER['PHP_AUTH_PW'] ) )
+						$f_password = $_SERVER['PHP_AUTH_PW'];
+					} else {
+						auth_http_set_logout_pending( false );
+						auth_http_prompt(); /* calls exit */
+						return;
+				}	
+				break;
+			default:
+				$f_password = $p_password;
+				break;
+		}
+		return $f_password;
+	}
+	
+	# --------------------
 	# Attempt to login the user with the given password
 	#  If the user fails validation, false is returned
 	#  If the user passes validation, the cookies are set and
