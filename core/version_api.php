@@ -31,7 +31,7 @@
 		var $project_id = 0;
 		var $version = '';
 		var $description = '';
-		var $released = 1;
+		var $released = VERSION_FUTURE;
 		var $date_order = '';
 	}
 
@@ -120,7 +120,7 @@
 
 	# --------------------
 	# Add a version to the project
-	function version_add( $p_project_id, $p_version, $p_released = VERSION_RELEASED, $p_description = '', $p_date_order = null) {
+	function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null) {
 		$c_project_id   = db_prepare_int( $p_project_id );
 		$c_released     = db_prepare_int( $p_released );
 
