@@ -84,6 +84,24 @@
 		</select>
 	</td>
 </tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo lang_get( 'inherit_global' ) ?>
+	</td>
+	<td>
+		<input type="checkbox" name="inherit_global" checked="checked" />
+	</td>
+</tr>
+<?php if ( !is_null( $f_parent_id ) ) { ?>
+<tr class="row-1">
+	<td class="category">
+		<?php echo lang_get( 'inherit_parent' ) ?>
+	</td>
+	<td>
+		<input type="checkbox" name="inherit_parent" checked="checked" />
+	</td>
+</tr>
+<?php } ?>
 <?php
 	if ( config_get( 'allow_file_upload' ) ) {
 	?>

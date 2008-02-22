@@ -17,26 +17,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
-	# --------------------------------------------------------
-	# $Id$
-	# --------------------------------------------------------
-
 	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
+
+	require_once( $t_core_path.'project_hierarchy_api.php' );
 
 	auth_reauthenticate();
 
-	$f_project_id 	= gpc_get_int( 'project_id' );
-	$f_name 		= gpc_get_string( 'name' );
-	$f_description 	= gpc_get_string( 'description' );
-	$f_status 		= gpc_get_int( 'status' );
-	$f_view_state 	= gpc_get_int( 'view_state' );
-	$f_file_path 	= gpc_get_string( 'file_path', '' );
-	$f_enabled	 	= gpc_get_bool( 'enabled' );
-	$f_inherit_global = gpc_get_bool( 'inherit_global', 1 );
+	$f_project_id = gpc_get_int( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled, $f_inherit_global );
+	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
+	foreach ( $t_subproject_ids as $t_subproject_id ) {
+		$f_inherit_child = gpc_get_bool( 'inherit_child_' . $t_subproject_id, false );
+		var_dump( $t_subproject_id, $f_project_id, $f_inherit_child );
+		project_hierarchy_update( $t_subproject_id, $f_project_id, $f_inherit_child );
+	}
 
-	print_header_redirect( 'manage_proj_page.php' );
-?>
+	print_successful_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );

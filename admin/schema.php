@@ -382,7 +382,7 @@ $upgrade[] = Array( 'CreateTableSQL', Array( db_get_table( 'mantis_category_tabl
 $upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_category_project_name', db_get_table( 'mantis_category_table' ), 'project_id, name', array( 'UNIQUE' ) ) );
 $upgrade[] = Array( 'InsertData', Array( db_get_table( 'mantis_category_table' ), "
 	( project_id, user_id, name, status ) VALUES
-	( '0', '0', 'None', '0' ) " ) );
+	( '0', '0', 'General', '0' ) " ) );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
 $upgrade[] = Array( 'UpdateFunction', "category_migrate" );
 $upgrade[] = Array( 'DropColumnSQL', Array( db_get_table( 'mantis_bug_table' ), "category" ) );

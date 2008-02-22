@@ -1179,6 +1179,9 @@
 	# example: $g_set_status_threshold = array( ACKNOWLEDGED => MANAGER, CONFIRMED => DEVELOPER, CLOSED => MANAGER );
 	$g_set_status_threshold = array();
 
+	# Allow a bug to have no category
+	$g_allow_no_category = OFF;
+
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	# You can simply change this at will. Mantis will try to figure out how the passwords were encrypted.

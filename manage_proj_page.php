@@ -140,5 +140,83 @@
 	}
 ?>
 </table>
+<br/>
+
+<!-- GLOBAL CATEGORIES -->
+<a name="categories" />
+<div align="center">
+<table class="width75" cellspacing="1">
+
+<!-- Title -->
+<tr>
+	<td class="form-title" colspan="3">
+		<?php echo lang_get( 'global_categories' ) ?>
+	</td>
+</tr>
+<?php
+	$t_categories = category_get_all_rows( ALL_PROJECTS, false );
+
+	if ( count( $t_categories ) > 0 ) {
+?>
+		<tr class="row-category">
+			<td>
+				<?php echo lang_get( 'category' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'assign_to' ) ?>
+			</td>
+			<td class="center">
+				<?php echo lang_get( 'actions' ) ?>
+			</td>
+		</tr>
+<?php
+	}
+
+	foreach ( $t_categories as $t_category ) {
+		$t_id = $t_category['id'];
+
+		$t_name = $t_category['name'];
+		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
+			$t_user_name = user_get_name( $t_category['user_id'] );
+		} else {
+			$t_user_name = '';
+		}
+?>
+<!-- Repeated Info Row -->
+		<tr <?php echo helper_alternate_class() ?>>
+			<td>
+				<?php echo string_display( category_full_name( $t_category['id'], false ) )  ?>
+			</td>
+			<td>
+				<?php echo $t_user_name ?>
+			</td>
+			<td class="center">
+				<?php
+					$t_id = urlencode( $t_id );
+					$t_project_id = urlencode( ALL_PROJECTS );
+
+					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
+					echo '&nbsp;';
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
+				?>
+			</td>
+		</tr>
+<?php
+	} # end for loop
+?>
+
+<!-- Add Category Form -->
+<tr>
+	<td class="left" colspan="3">
+		<form method="post" action="manage_proj_cat_add.php">
+			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
+			<input type="text" name="name" size="32" maxlength="128" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+		</form>
+	</td>
+</tr>
+
+</table>
+</div>
 
 <?php html_page_bottom1( __FILE__ ) ?>

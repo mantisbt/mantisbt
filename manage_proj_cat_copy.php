@@ -57,5 +57,11 @@
 		}
 	}
 
-	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
+	if ( $f_project_id == ALL_PROJECTS ) {
+		$t_redirect_url = 'manage_proj_page.php';
+	} else {
+		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	}
+
+	print_header_redirect( $t_redirect_url );
 ?>

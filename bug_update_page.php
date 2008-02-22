@@ -118,9 +118,6 @@
 
 	<!-- Category -->
 	<td>
-		<?php if ( $t_changed_project ) {
-			echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
-		} ?>
 		<select <?php echo helper_get_tab_index() ?> name="category_id">
 			<?php print_category_option_list( $t_bug->category_id, $t_bug->project_id ) ?>
 		</select>

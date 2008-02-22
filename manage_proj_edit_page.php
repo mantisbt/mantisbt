@@ -95,6 +95,16 @@
 	</td>
 </tr>
 
+<!-- Category Inheritance -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'inherit_global' ) ?>
+	</td>
+	<td>
+		<input type="checkbox" name="inherit_global" <?php check_checked( $row['inherit_global'], ON ); ?> />
+	</td>
+</tr>
+
 <!-- View Status (public/private) -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -179,7 +189,10 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 </tr>
 
 <!-- Subprojects -->
+<form name="update_children_form" action="manage_proj_update_children.php" method="post">
+<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 <?php
+	project_hierarchy_cache();
 	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, /* show_disabled */ true );
 
 	if ( Array() != $t_subproject_ids ) {
@@ -195,9 +208,12 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<?php echo lang_get( 'enabled' ) ?>
 	</td>
 	<td width="10%">
+		<?php echo lang_get( 'inherit' ) ?>
+	</td>
+	<td width="10%">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
-	<td width="30%">
+	<td width="20%">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td width="20%">
@@ -208,18 +224,22 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php
 		foreach ( $t_subproject_ids as $t_subproject_id ) {
 			$t_subproject = project_get_row( $t_subproject_id );
+			$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>"><?php echo string_display( $t_subproject['name'] ) ?></a>
 	</td>
-	<td>
+	<td class="center">
 		<?php echo get_enum_element( 'project_status', $t_subproject['status'] ) ?>
 	</td>
-	<td>
+	<td class="center">
 		<?php echo trans_bool( $t_subproject['enabled'] ) ?>
 	</td>
-	<td>
+	<td class="center">
+		<input type="checkbox" name="inherit_child_<?php echo $t_subproject_id ?>" <?php echo ( $t_inherit_parent ? 'checked="checked"' : '' ) ?> />
+	</td>
+	<td class="center">
 		<?php echo get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ?>
 	</td>
 	<td>
@@ -227,9 +247,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</td>
 	<td class="center">
 		<?php
-				print_button( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
-				echo '&nbsp;';
-				print_button( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'], lang_get( 'unlink_link' ) );
+				print_bracket_link( 'manage_proj_edit_page.php?project_id=' . $t_subproject['id'], lang_get( 'edit_link' ) );
+				print_bracket_link( 'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&amp;subproject_id=' . $t_subproject['id'], lang_get( 'unlink_link' ) );
 		?>
 	</td>
 </tr>
@@ -238,9 +257,16 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	} # End of hiding subproject listing if there are no subprojects
 ?>
 
+<tr>
+	<td colspan="6">
+	<input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
+		</form>
+	</td>
+</tr>
+
 <!-- Add subproject -->
 <tr>
-	<td class="left" colspan="2">
+	<td colspan="7">
 		<form method="post" action="manage_proj_subproj_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="subproject_id">
@@ -307,8 +333,14 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 	foreach ( $t_categories as $t_category ) {
 		$t_id = $t_category['id'];
-		$t_name = $t_category['name'];
 
+		if ( $t_category['project_id'] != $f_project_id ) {
+			$t_inherited = true;
+		} else {
+			$t_inherited = false;
+		}
+
+		$t_name = $t_category['name'];
 		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
 			$t_user_name = user_get_name( $t_category['user_id'] );
 		} else {
@@ -318,19 +350,20 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <!-- Repeated Info Row -->
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( $t_name ) ?>
+				<?php echo string_display( category_full_name( $t_category['id'] , $t_inherited ) )  ?>
 			</td>
 			<td>
 				<?php echo $t_user_name ?>
 			</td>
 			<td class="center">
-				<?php
+				<?php if ( !$t_inherited ) {
 					$t_id = urlencode( $t_id );
+					$t_project_id = urlencode( $f_project_id );
 
-					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id, lang_get( 'edit_link' ) );
+					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_button( 'manage_proj_cat_delete.php?id=' . $t_id, lang_get( 'delete_link' ) );
-				?>
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
+				} ?>
 			</td>
 		</tr>
 <?php

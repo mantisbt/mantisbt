@@ -30,6 +30,7 @@
 	auth_reauthenticate();
 
 	$f_category_id		= gpc_get_int( 'category_id' );
+	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_name				= trim( gpc_get_string( 'name' ) );
 	$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
 
@@ -50,7 +51,11 @@
 	
 	category_update( $f_category_id, $f_name, $f_assigned_to );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id;
+	if ( $f_project_id == ALL_PROJECTS ) {
+		$t_redirect_url = 'manage_proj_page.php';
+	} else {
+		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	}
 
 	html_page_top1();
 

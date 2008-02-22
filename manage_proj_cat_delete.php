@@ -30,6 +30,7 @@
 	auth_reauthenticate();
 
 	$f_category_id = gpc_get_string( 'id' );
+	$f_project_id = gpc_get_int( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
@@ -44,7 +45,11 @@
 
 	category_remove( $f_category_id );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id;
+	if ( $f_project_id == ALL_PROJECTS ) {
+		$t_redirect_url = 'manage_proj_page.php';
+	} else {
+		$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	}
 
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );

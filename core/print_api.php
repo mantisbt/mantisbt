@@ -704,29 +704,27 @@
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		if ( null === $p_project_id ) {
-			$c_project_id = helper_get_current_project();
+			$t_project_id = helper_get_current_project();
 		} else {
-			$c_project_id = db_prepare_int( $p_project_id );
+			$t_project_id = $p_project_id;
 		}
 
-		$t_project_where = helper_project_specific_where( $c_project_id );
-
-		# grab all categories in the project category table
-		$cat_arr = array();
-		$query = "SELECT id,name FROM $t_category_table
-				WHERE $t_project_where
-				ORDER BY name";
-		$result = db_query( $query );
-
-		while ( $row = db_fetch_array( $result ) ) {
-			$cat_arr[$row['id']] = $row['name'];
+		if ( config_get( 'allow_no_category' ) ) {
+			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
+			echo category_full_name( 0, $t_category_row['project_id'] != $p_project_id ), '</option>';
+		} else {
+			if ( 0 == $p_category_id ) {
+				echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
+				echo string_attribute( lang_get( 'select_option' ) ), '</option>';
+			}
 		}
-		asort($cat_arr);
 
-		foreach( $cat_arr as $t_category_id => $t_name ) {
-			PRINT "<option value=\"$t_category_id\"";
-			check_selected( $p_category_id, $t_category_id );
-			PRINT ">$t_name</option>";
+		$cat_arr = category_get_all_rows( $t_project_id, true, !is_null( $p_project_id ) );
+
+		foreach( $cat_arr as $t_category_row ) {
+			$t_category_id = $t_category_row['id'];
+			echo "<option value=\"$t_category_id\"", check_selected( $p_category_id, $t_category_id ), '>';
+			echo category_full_name( $t_category_id, $t_category_row['project_id'] != $p_project_id ), '</option>';
 		}
 	}
 	# --------------------
@@ -750,7 +748,16 @@
 			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
-		$t_project_where = helper_project_specific_where( $c_project_id );
+		project_hierarchy_cache();
+		$t_project_ids = project_hierarchy_inheritance( $c_project_id );
+
+		$t_subproject_ids = array();
+		foreach ( $t_project_ids as $t_project_id ) {
+			$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
+		}
+
+		$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
+		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
 
 		# grab all categories in the project category table
 		$cat_arr = array();

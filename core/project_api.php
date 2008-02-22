@@ -211,7 +211,7 @@
 
 	# --------------------
 	# Create a new project
-	function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true ) {
+	function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true, $p_inherit_global = true ) {
 		# Make sure file path has trailing slash
 		$p_file_path = terminate_directory_path( $p_file_path );
 
@@ -221,6 +221,7 @@
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_file_path	= db_prepare_string( $p_file_path );
 		$c_enabled		= db_prepare_bool( $p_enabled );
+		$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
 		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
@@ -235,9 +236,9 @@
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
 		$query = "INSERT INTO $t_project_table
-					( name, status, enabled, view_state, file_path, description )
+					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
-					( '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description' )";
+					( '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description', '$c_inherit_global' )";
 
 		db_query( $query );
 
@@ -302,7 +303,7 @@
 
 	# --------------------
 	# Update a project
-	function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled ) {
+	function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled, $p_inherit_global ) {
 		# Make sure file path has trailing slash
 		$p_file_path	= terminate_directory_path( $p_file_path );
 
@@ -313,6 +314,7 @@
 		$c_view_state	= db_prepare_int( $p_view_state );
 		$c_file_path	= db_prepare_string( $p_file_path );
 		$c_enabled		= db_prepare_bool( $p_enabled );
+		$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
 		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
@@ -336,7 +338,8 @@
 					enabled='$c_enabled',
 					view_state='$c_view_state',
 					file_path='$c_file_path',
-					description='$c_description'
+					description='$c_description',
+					inherit_global='$c_inherit_global'
 				  WHERE id='$c_project_id'";
 		db_query( $query );
 

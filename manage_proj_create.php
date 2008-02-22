@@ -36,8 +36,10 @@
 	$f_view_state	= gpc_get_int( 'view_state' );
 	$f_status		= gpc_get_int( 'status' );
 	$f_file_path	= gpc_get_string( 'file_path', '' );
+	$f_inherit_global = gpc_get_bool( 'inherit_global', 1 );
+	$f_inherit_parent = gpc_get_bool( 'inherit_parent', 1 );
 
-	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path );
+	$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
 	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
 		$t_access_level = access_get_global_level();
@@ -48,7 +50,7 @@
 	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
 	if ( 0 != $f_parent_id ) {
-		project_hierarchy_add( $t_project_id, $f_parent_id );
+		project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
 	}
 
 	$t_redirect_url = 'manage_proj_page.php';

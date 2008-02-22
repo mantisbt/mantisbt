@@ -30,6 +30,7 @@
 	auth_reauthenticate();
 
 	$f_category_id		= gpc_get_string( 'id' );
+	$f_project_id		= gpc_get_string( 'project_id' );
 
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 

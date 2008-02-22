@@ -100,7 +100,13 @@ $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that
 $s_empty_password_button = 'Use Empty Password';
 $s_reauthenticate_title = 'Authenticate';
 $s_reauthenticate_message = 'You are visting a secure page, and your secure session has expired.  Please authenticate yourself to continue.';
-$s_no_category = 'No Category';
+
+$s_no_category = '(No Category)';
+$s_global_categories = 'Global Categories';
+$s_inherit = 'Inherit Categories';
+$s_inherit_global = 'Inherit Global Categories';
+$s_inherit_parent = 'Inherit Parent Categories';
+$s_update_subproject_inheritance = 'Update Subproject Inheritance';
 
 $s_duplicate_of = "duplicate of";
 $s_has_duplicate = "has duplicate";

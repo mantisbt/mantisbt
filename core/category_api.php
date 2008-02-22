@@ -149,7 +149,7 @@
 
 	# --------------------
 	# Remove a category from the project
-	function category_remove( $p_category_id, $p_new_category_id = 1 ) {
+	function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 		$t_category_row = category_get_row( $p_category_id );
 
 		$c_category_id	= db_prepare_int( $p_category_id );
@@ -172,7 +172,6 @@
 		$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-			var_dump( $t_bug_row );
 			history_log_event_direct( $t_bug_row['id'], 'category', $t_category_row['name'], category_full_name( $p_new_category_id, false ) );
 		}
 
@@ -188,7 +187,7 @@
 
 	# --------------------
 	# Remove all categories associated with a project
-	function category_remove_all( $p_project_id, $p_new_category_id = 1 ) {
+	function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_new_category_id = db_prepare_int( $p_new_category_id );
 
@@ -258,19 +257,55 @@
 	}
 
 	# --------------------
-	# Return all categories for the specified project id
-	function category_get_all_rows( $p_project_id ) {
+	# Sort categories based on what project they're in.
+	# Call beforehand with a single parameter to set a 'preferred' project.
+	function category_sort_rows_by_project( $p_category1, $p_category2=null ) {
+		static $p_project_id=null;
+		if ( is_null( $p_category2 ) ) { # Set a target project
+			$p_project_id = $p_category1;
+			return;
+		}
+
+		if ( !is_null( $p_project_id ) ) {
+			if ( $p_category1['project_id'] == $p_project_id &&
+				 $p_category2['project_id'] != $p_project_id ) {
+					 return -1;
+				 }
+			if ( $p_category1['project_id'] != $p_project_id &&
+				 $p_category2['project_id'] == $p_project_id ) {
+					 return 1;
+				 }
+		}
+
+		$t_proj_cmp = strcasecmp( $p_category1['project_name'], $p_category2['project_name'] );
+		if ( $t_proj_cmp != 0 ) {
+			return $t_proj_cmp;
+		}
+
+		return strcasecmp( $p_category1['name'], $p_category2['name'] );
+	}
+	# --------------------
+	# Return all categories for the specified project id.
+	# Obeys project hierarchies and such.
+	function category_get_all_rows( $p_project_id, $p_inherit=true, $p_sort_by_project=false ) {
 		global $g_category_cache;
+
+		project_hierarchy_cache();
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		$t_category_table = db_get_table( 'mantis_category_table' );
 		$t_project_table = db_get_table( 'mantis_project_table' );
 
-		$t_project_where = helper_project_specific_where( $c_project_id );
+		if ( $p_inherit ) {
+			$t_project_ids = project_hierarchy_inheritance( $p_project_id );
+			$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
+		} else {
+			$t_project_where = ' project_id=' . $p_project_id . ' ';
+		}
 
 		$query = "SELECT c.*, p.name AS project_name FROM $t_category_table AS c
-				JOIN $t_project_table AS p
+				LEFT JOIN $t_project_table AS p
 					ON c.project_id=p.id
 				WHERE $t_project_where
 				ORDER BY c.name ";
@@ -282,6 +317,12 @@
 
 			$rows[] = $row;
 			$g_category_cache[$row['id']] = $row;
+		}
+
+		if ( $p_sort_by_project ) {
+			category_sort_rows_by_project( $p_project_id );
+			usort( $rows, 'category_sort_rows_by_project' );
+			category_sort_rows_by_project( null );
 		}
 
 		return $rows;
@@ -311,7 +352,7 @@
 			$t_row = category_get_row( $p_category_id );
 			$t_project_id = $t_row['project_id'];
 
-			if ( $p_show_project && ALL_PROJECTS != $t_project_id ) {
+			if ( $p_show_project ) {
 				return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
 			}
 

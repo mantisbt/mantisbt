@@ -155,7 +155,7 @@
 <!-- Category -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="30%">
-		<?php echo '<span class="required">*</span>', lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
+		<?php echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>', lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
 	</td>
 	<td width="70%">
 		<?php if ( $t_changed_project ) {
@@ -163,10 +163,6 @@
 		} ?>
 		<select <?php echo helper_get_tab_index() ?> name="category_id">
 			<?php 
-				if ( 0 === $f_category_id ) {
-					echo '<option value="" selected="selected">', string_attribute( lang_get( 'select_option' ) ), '</option>';
-				}
-
 				print_category_option_list( $f_category_id ); 
 			?>
 		</select>
