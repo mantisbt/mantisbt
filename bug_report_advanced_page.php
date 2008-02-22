@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id$
+	# $Id: bug_report_advanced_page.php 4770 2007-11-20 01:09:10Z nuclear_eclipse $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -531,7 +531,7 @@
 		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>
 	</td>
 	<td>
-		<input <?php echo helper_get_tab_index() ?> type="checkbox" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
+		<input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> (<label for="report_stay"><?php echo lang_get( 'check_report_more_bugs' ) ?></label>)
 	</td>
 </tr>
 
