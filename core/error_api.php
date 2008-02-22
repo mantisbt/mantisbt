@@ -345,7 +345,9 @@
 
 		$t_error = $MANTIS_ERROR[$p_error];
 
-		return string_html_specialchars( call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) ) );
+		# ripped from string_api
+		$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
+		return preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, lang_get( 'charset' ) ) );
 	}
 
 	# ---------------
