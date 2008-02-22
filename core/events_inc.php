@@ -30,10 +30,10 @@
 # Declare supported plugin events
 event_declare_many( array(
 
-	##### Events specific to plugins #####
+	##### Events specific to plugins
 	'EVENT_PLUGIN_INIT' 				=> EVENT_TYPE_EXECUTE,
 
-	##### Mantis Layout Events #####
+	##### Mantis Layout Events
 	'EVENT_LAYOUT_RESOURCES'			=> EVENT_TYPE_OUTPUT,
 	'EVENT_LAYOUT_BODY_BEGIN'			=> EVENT_TYPE_OUTPUT,
 	'EVENT_LAYOUT_PAGE_HEADER'			=> EVENT_TYPE_OUTPUT,
@@ -42,13 +42,13 @@ event_declare_many( array(
 	'EVENT_LAYOUT_PAGE_FOOTER'			=> EVENT_TYPE_OUTPUT,
 	'EVENT_LAYOUT_BODY_END'				=> EVENT_TYPE_OUTPUT,
 
-	##### Events for displaying data #####
+	##### Events for displaying data
 	'EVENT_DISPLAY_TEXT'				=> EVENT_TYPE_CHAIN,
 	'EVENT_DISPLAY_FORMATTED'			=> EVENT_TYPE_CHAIN,
 	'EVENT_DISPLAY_RSS'					=> EVENT_TYPE_CHAIN,
 	'EVENT_DISPLAY_EMAIL'				=> EVENT_TYPE_CHAIN,
 
-	##### Menu Events #####
+	##### Menu Events
 	'EVENT_MENU_MAIN'					=> EVENT_TYPE_DEFAULT,
 	'EVENT_MENU_MANAGE'					=> EVENT_TYPE_DEFAULT,
 	'EVENT_MENU_MANAGE_CONFIG'			=> EVENT_TYPE_DEFAULT,
@@ -56,5 +56,12 @@ event_declare_many( array(
 	'EVENT_MENU_DOCS'					=> EVENT_TYPE_DEFAULT,
 	'EVENT_MENU_ACCOUNT'				=> EVENT_TYPE_DEFAULT,
 	
+	##### Bug view events
+	'EVENT_VIEW_BUG_DETAILS'			=> EVENT_TYPE_EXECUTE,
+	'EVENT_VIEW_BUGNOTES_START'			=> EVENT_TYPE_EXECUTE,
+	'EVENT_VIEW_BUGNOTE'				=> EVENT_TYPE_EXECUTE,
+	'EVENT_VIEW_BUGNOTES_END'			=> EVENT_TYPE_EXECUTE,
+	'EVENT_VIEW_BUGNOTE_ADD'			=> EVENT_TYPE_EXECUTE,
+
 ) );
 

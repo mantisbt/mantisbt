@@ -503,6 +503,9 @@
 	<td colspan="6"></td>
 </tr>
 
+<?php event_signal( 'EVENT_VIEW_BUG_DETAILS', $f_bug_id ); ?>
+
+
 <!-- Custom Fields -->
 <?php
 	$t_custom_fields_found = false;

@@ -57,6 +57,8 @@
 <a name="bugnotes" id="bugnotes" /><br />
 
 <?php 
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', $f_bug_id );
+
 	collapse_open( 'bugnotes' );
 ?>
 <table class="width100" cellspacing="1">
@@ -204,6 +206,7 @@
 		?>
 	</td>
 </tr>
+<?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $v3_id, VS_PRIVATE == $v3_view_state ) ); ?>
 <tr class="spacer">
 	<td colspan="2"></td>
 </tr>
@@ -231,6 +234,8 @@
 </table>
 <?php
 	collapse_end( 'bugnotes' );
+
+	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
 ?>
 
 <?php # Bugnotes END ?>
