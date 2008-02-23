@@ -110,7 +110,7 @@
 			}
 		}
 
-		$t_docroot = $_SERVER['DOCUMENT_ROOT'];
+		$t_docroot = rtrim( $_SERVER['DOCUMENT_ROOT'], '/' );
 		$t_file_path = str_replace( DIRECTORY_SEPARATOR, '/', __FILE__ );
 
 		# Extract the unique directory path of this file relative to the server's documunt root
