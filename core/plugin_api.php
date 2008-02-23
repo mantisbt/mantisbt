@@ -568,8 +568,8 @@ function plugin_register( $p_basename, $p_return=false, $p_child=null ) {
 function plugin_register_installed() {
 	$t_plugin_table = db_get_table( 'mantis_plugin_table' );
 
-	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=1";
-	$t_result = db_query( $t_query );
+	$t_query = "SELECT basename FROM $t_plugin_table WHERE enabled=" . db_param(0);
+	$t_result = db_query_bound( $t_query, Array(1) );
 
 	while ( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];

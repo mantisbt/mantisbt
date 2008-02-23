@@ -404,6 +404,13 @@
 	define( 'CUSTOM_FIELD_DATE_AFTER',		6 ) ;
 	define( 'CUSTOM_FIELD_DATE_ONORAFTER',	7 ) ;
 
+	# custom field types
+	define( 'CUSTOM_FIELD_TYPE_BUG',		0 );
+	define( 'CUSTOM_FIELD_TYPE_USER',		1 );
+	define( 'CUSTOM_FIELD_TYPE_BUGNOTE',	2 );
+	define( 'CUSTOM_FIELD_TYPE_PROJECT',	3 );
+	define( 'CUSTOM_FIELD_TYPE_FILE', 		4 );
+
 	# system logging
 	#  logging levels, can be OR'd together
 	define( 'LOG_NONE',                     0 );  # no logging
