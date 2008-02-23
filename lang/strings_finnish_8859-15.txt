@@ -134,21 +134,21 @@ $s_status_bugs_conf_msg = 'Valitse tapahtuman tila';
 $s_view_status_bugs_conf_msg = 'Valitse tapahtuman tilanäkymä';
 $s_category_bugs_conf_msg = 'Valitse tapahtumien kategoria';
 $s_set_sticky_bugs_conf_msg = 'Oletko varma, että haluat asettaa/poistaa näille tapahtumille pysyvyys päällimmäisinä?';
-$s_close_group_bugs_button = 'Sulje tapahtumat' ;
-$s_delete_group_bugs_button = 'Poista tapahtumat' ;
-$s_move_group_bugs_button = 'Siirrä tapahtumat' ;
-$s_copy_group_bugs_button = 'Kopioi tapahtumat' ;
-$s_assign_group_bugs_button = 'Osoita tapahtumat' ;
-$s_resolve_group_bugs_button = 'Ratkaise tapahtumat' ;
-$s_priority_group_bugs_button = 'Päivitä prioriteetti' ;
-$s_status_group_bugs_button = 'Päivitä tila' ;
+$s_close_group_bugs_button = 'Sulje tapahtumat';
+$s_delete_group_bugs_button = 'Poista tapahtumat';
+$s_move_group_bugs_button = 'Siirrä tapahtumat';
+$s_copy_group_bugs_button = 'Kopioi tapahtumat';
+$s_assign_group_bugs_button = 'Osoita tapahtumat';
+$s_resolve_group_bugs_button = 'Ratkaise tapahtumat';
+$s_priority_group_bugs_button = 'Päivitä prioriteetti';
+$s_status_group_bugs_button = 'Päivitä tila';
 $s_category_group_bugs_button = 'Päivitä kategoria';
 $s_view_status_group_bugs_button = 'Päivitä tilanäkymä';
 $s_set_sticky_group_bugs_button = 'Aseta/poista pysyvyys päällimmäisenä';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synteesitaulukot tilan mukaan' ;
-$s_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan' ;
+$s_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
+$s_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';
 $s_graph_imp_severity_title = 'Synteesitaulukot vakavuusasteen mukaan';
 $s_graph_imp_category_title = 'Synteesitaulukot kategorian mukaan';
 $s_graph_imp_resolution_title = 'Synteesitaulukot ratkaisuasteen mukaan';
@@ -184,7 +184,7 @@ $s_printing_preferences_title = 'Valitse tulostettavat kentät';
 $s_printing_options_link = 'Tulostusasetukset';
 
 # word and excel export
-$s_bugnote_title = 'Muistiinpanojen hallinta' ;
+$s_bugnote_title = 'Muistiinpanojen hallinta';
 $s_bugnote_date = 'Muistiinpanon päiväys';
 $s_bugnote_description = 'Muistiinpanon kuvaus';
 
@@ -1316,11 +1316,11 @@ $s_email_on_relationship_changed = 'Sähköpostia, kun tapahtuman relaatioita muok
 $s_loading = 'Ladataan...';
 
 # filter_api.php
-$s_between_date = 'Välillä' ;
-$s_on_or_before_date = 'Tällöin tai ennen' ;
-$s_before_date = 'Ennen' ;
-$s_after_date = 'Jälkeen' ;
-$s_on_or_after_date = 'Tällöin tai jälkeen' ;
+$s_between_date = 'Välillä';
+$s_on_or_before_date = 'Tällöin tai ennen';
+$s_before_date = 'Ennen';
+$s_after_date = 'Jälkeen';
+$s_on_or_after_date = 'Tällöin tai jälkeen';
 
 # Date constants
 $s_from_date = 'Keneltä';

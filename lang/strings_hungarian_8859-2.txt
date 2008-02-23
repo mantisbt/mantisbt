@@ -134,21 +134,21 @@ $s_status_bugs_conf_msg = 'Hibák Státuszának választása';
 $s_view_status_bugs_conf_msg = 'Állítsa be az hibák láthatóságát';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Hibák Bezárása' ;
-$s_delete_group_bugs_button = 'Hibák Törlése' ;
-$s_move_group_bugs_button = 'Hibák Mozgatása' ;
+$s_close_group_bugs_button = 'Hibák Bezárása';
+$s_delete_group_bugs_button = 'Hibák Törlése';
+$s_move_group_bugs_button = 'Hibák Mozgatása';
 $s_copy_group_bugs_button = 'Hibák másolása';
-$s_assign_group_bugs_button = 'Hibákhoz Megbízza:' ;
-$s_resolve_group_bugs_button = 'Hibák Megoldása' ;
-$s_priority_group_bugs_button = 'Prioritás Frissítése' ;
-$s_status_group_bugs_button = 'Státusz Frissítése' ;
+$s_assign_group_bugs_button = 'Hibákhoz Megbízza:';
+$s_resolve_group_bugs_button = 'Hibák Megoldása';
+$s_priority_group_bugs_button = 'Prioritás Frissítése';
+$s_status_group_bugs_button = 'Státusz Frissítése';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Láthatóság módosítása';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Összefoglaló grafikon státusz alapján' ;
-$s_graph_imp_priority_title = 'Összefoglaló grafikon prioritás alapján' ;
+$s_graph_imp_status_title = 'Összefoglaló grafikon státusz alapján';
+$s_graph_imp_priority_title = 'Összefoglaló grafikon prioritás alapján';
 $s_graph_imp_severity_title = 'Összefoglaló grafikon súlyosság alapján';
 $s_graph_imp_category_title = 'Összefoglaló grafikon kategória alapján';
 $s_graph_imp_resolution_title = 'Összefoglaló grafikon megoldás alapján';
@@ -1316,11 +1316,11 @@ $s_email_on_relationship_changed = 'E-mail kapcsolat változáskor';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'Feladó';

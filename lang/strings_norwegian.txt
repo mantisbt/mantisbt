@@ -147,8 +147,8 @@ $s_view_status_group_bugs_button = 'Endre visningsstatus';
 $s_set_sticky_group_bugs_button = 'Sette/slette fastlåst';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'graf etter status' ;
-$s_graph_imp_priority_title = 'graf etter prioritet' ;
+$s_graph_imp_status_title = 'graf etter status';
+$s_graph_imp_priority_title = 'graf etter prioritet';
 $s_graph_imp_severity_title = 'graf etter vanskelighetsgrad';
 $s_graph_imp_category_title = 'grad etter kategori';
 $s_graph_imp_resolution_title = 'graf etter løsningsstatus';
@@ -184,7 +184,7 @@ $s_printing_preferences_title = 'Velg felter for utskrift';
 $s_printing_options_link = 'Utskriftsalternativer';
 
 # word and excel export
-$s_bugnote_title = 'Notathåndterer' ;
+$s_bugnote_title = 'Notathåndterer';
 $s_bugnote_date = 'Notatdato';
 $s_bugnote_description = 'Notatbeskrivelse';
 

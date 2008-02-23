@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = 'øÔæ‹ bugs ™¨∫A';
 $s_view_status_bugs_conf_msg = 'øÔæ‹∞›√D¿Àµ¯™¨∫A';
 $s_category_bugs_conf_msg = 'øÔæ‹∞›√D√˛ßO';
 $s_set_sticky_bugs_conf_msg = 'ßAΩT©wßA∑Q≥]©w/®˙Æ¯≥o®«¥∆§‚∞›√D?';
-$s_close_group_bugs_button = 'µ≤Æ◊™∫ Bugs' ;
-$s_delete_group_bugs_button = 'ßR∞£™∫ Bugs' ;
-$s_move_group_bugs_button = '∑h≤æ™∫ Bugs' ;
-$s_copy_group_bugs_button = 'Ω∆ªs∞›√D' ;
-$s_assign_group_bugs_button = '§¿¨£™∫ Bugs' ;
-$s_resolve_group_bugs_button = '∏—®M Bugs' ;
-$s_priority_group_bugs_button = 'ßÛ∑s¿u•˝´◊' ;
-$s_status_group_bugs_button = 'ßÛ∑s™¨∫A' ;
+$s_close_group_bugs_button = 'µ≤Æ◊™∫ Bugs';
+$s_delete_group_bugs_button = 'ßR∞£™∫ Bugs';
+$s_move_group_bugs_button = '∑h≤æ™∫ Bugs';
+$s_copy_group_bugs_button = 'Ω∆ªs∞›√D';
+$s_assign_group_bugs_button = '§¿¨£™∫ Bugs';
+$s_resolve_group_bugs_button = '∏—®M Bugs';
+$s_priority_group_bugs_button = 'ßÛ∑s¿u•˝´◊';
+$s_status_group_bugs_button = 'ßÛ∑s™¨∫A';
 $s_category_group_bugs_button = 'ßÛ∑s√˛ßO';
 $s_view_status_group_bugs_button = 'ßÛ∑s¿Àµ¯™¨∫A';
 $s_set_sticky_group_bugs_button = '≥]©w/®˙Æ¯√¯√D';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = '™¨∫A¶X¶®πœ' ;
-$s_graph_imp_priority_title = '¿u•˝´◊¶X¶®πœ' ;
+$s_graph_imp_status_title = '™¨∫A¶X¶®πœ';
+$s_graph_imp_priority_title = '¿u•˝´◊¶X¶®πœ';
 $s_graph_imp_severity_title = 'ƒY≠´© ¶X¶®πœ';
 $s_graph_imp_category_title = '√˛ßO¶X¶®πœ';
 $s_graph_imp_resolution_title = '§¿™R¶X¶®πœ';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = 'øÔæ‹¶C¶LƒÊ¶Ï';
 $s_printing_options_link = '¶C¶LøÔ∂µ';
 
 # word and excel export
-$s_bugnote_title = 'Bug µß∞O≥B≤z™Ã' ;
+$s_bugnote_title = 'Bug µß∞O≥B≤z™Ã';
 $s_bugnote_date = 'Bug µß∞O§È¥¡';
 $s_bugnote_description = 'Bug µß∞Oª°©˙';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = '¨€√ˆ∞›√DßÛ∞ Æ…µo
 $s_loading = '∏¸§J§§...';
 
 # filter_api.php
-$s_between_date = '§ß∂°' ;
-$s_on_or_before_date = '©Û¶π©Œ§ß´e' ;
-$s_before_date = '§ß´e' ;
-$s_after_date = '§ß´·' ;
-$s_on_or_after_date = '©Û¶π©Œ§ß´·' ;
+$s_between_date = '§ß∂°';
+$s_on_or_before_date = '©Û¶π©Œ§ß´e';
+$s_before_date = '§ß´e';
+$s_after_date = '§ß´·';
+$s_on_or_after_date = '©Û¶π©Œ§ß´·';
 
 # Date constants
 $s_from_date = 'From';

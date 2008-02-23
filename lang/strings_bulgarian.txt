@@ -133,14 +133,14 @@ $s_status_bugs_conf_msg = 'Статус на проблема';
 $s_view_status_bugs_conf_msg = 'Визуален статус';
 $s_category_bugs_conf_msg = 'Категория на проблема';
 $s_set_sticky_bugs_conf_msg = 'Промяна на проблематичността на тези проблеми?';
-$s_close_group_bugs_button = 'Приключване на проблеми' ;
-$s_delete_group_bugs_button = 'Изтриване на проблеми' ;
-$s_move_group_bugs_button = 'Преместване на проблеми' ;
-$s_copy_group_bugs_button = 'Копиране на проблеми' ;
-$s_assign_group_bugs_button = 'Назначаване на проблеми' ;
-$s_resolve_group_bugs_button = 'Решаване на проблеми' ;
-$s_priority_group_bugs_button = 'Обновяване на приоритета' ;
-$s_status_group_bugs_button = 'Обновяване на статуса' ;
+$s_close_group_bugs_button = 'Приключване на проблеми';
+$s_delete_group_bugs_button = 'Изтриване на проблеми';
+$s_move_group_bugs_button = 'Преместване на проблеми';
+$s_copy_group_bugs_button = 'Копиране на проблеми';
+$s_assign_group_bugs_button = 'Назначаване на проблеми';
+$s_resolve_group_bugs_button = 'Решаване на проблеми';
+$s_priority_group_bugs_button = 'Обновяване на приоритета';
+$s_status_group_bugs_button = 'Обновяване на статуса';
 $s_category_group_bugs_button = 'Обновяване на категорията';
 $s_view_status_group_bugs_button = 'Обновяване на визуализиращ статус';
 $s_set_sticky_group_bugs_button = 'Установяване на проблематичност';
@@ -183,7 +183,7 @@ $s_printing_preferences_title = 'Избор на полета за печат';
 $s_printing_options_link = 'Настройки за печат';
 
 # word and excel export
-$s_bugnote_title = 'Заглавие на бележката' ;
+$s_bugnote_title = 'Заглавие на бележката';
 $s_bugnote_date = 'Дата';
 $s_bugnote_description = 'Описание';
 
@@ -1315,11 +1315,11 @@ $s_email_on_relationship_changed = 'Изпращане на еmail при смя
 $s_loading = 'Зареждане...';
 
 # filter_api.php
-$s_between_date = 'Между' ;
-$s_on_or_before_date = 'Върху или Преди' ;
-$s_before_date = 'Преди' ;
-$s_after_date = 'След' ;
-$s_on_or_after_date = 'Върху или След' ;
+$s_between_date = 'Между';
+$s_on_or_before_date = 'Върху или Преди';
+$s_before_date = 'Преди';
+$s_after_date = 'След';
+$s_on_or_after_date = 'Върху или След';
 
 # Date constants
 $s_from_date = 'От';

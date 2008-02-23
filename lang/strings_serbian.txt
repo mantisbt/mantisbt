@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = 'Izaberite status greske';
 $s_view_status_bugs_conf_msg = 'Izaberite status pregleda gresaka';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Zatvaranje grešaka' ;
-$s_delete_group_bugs_button = 'Brisanje grešaka' ;
-$s_move_group_bugs_button = 'Premeštanje grešaka' ;
-$s_copy_group_bugs_button = 'Kopiranje gresaka' ;
-$s_assign_group_bugs_button = 'Dodeljivanje grešaka' ;
-$s_resolve_group_bugs_button = 'Razlucivanje grešaka' ;
-$s_priority_group_bugs_button = 'Prioritet ažuriranja' ;
-$s_status_group_bugs_button = 'Status ažuriranja' ;
+$s_close_group_bugs_button = 'Zatvaranje grešaka';
+$s_delete_group_bugs_button = 'Brisanje grešaka';
+$s_move_group_bugs_button = 'Premeštanje grešaka';
+$s_copy_group_bugs_button = 'Kopiranje gresaka';
+$s_assign_group_bugs_button = 'Dodeljivanje grešaka';
+$s_resolve_group_bugs_button = 'Razlucivanje grešaka';
+$s_priority_group_bugs_button = 'Prioritet ažuriranja';
+$s_status_group_bugs_button = 'Status ažuriranja';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Izmena statusa pregleda';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_status_title = 'Synthesis graphs by status';
+$s_graph_imp_priority_title = 'Synthesis graphs by priority';
 $s_graph_imp_severity_title = 'Synthesis graphs by severity';
 $s_graph_imp_category_title = 'Synthesis graphs by category';
 $s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = 'Izbor polja za štampu';
 $s_printing_options_link = 'Opcije štampe';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_title = 'Bugnote handler';
 $s_bugnote_date = 'Datum komentara uz grešku';
 $s_bugnote_description = 'Opis komentara uz grešku';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'From';

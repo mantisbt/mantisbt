@@ -133,21 +133,21 @@ $s_status_bugs_conf_msg = 'Vali kande olek';
 $s_view_status_bugs_conf_msg = 'Vali kande vaate olek';
 $s_category_bugs_conf_msg = 'Vali kande kategooria'; #20071004
 $s_set_sticky_bugs_conf_msg = 'Oled kindel, et soovid määrata/tühistada selle kande kleepuvust?';
-$s_close_group_bugs_button = 'Sulge kanded' ;
-$s_delete_group_bugs_button = 'Kustuta kanded' ;
-$s_move_group_bugs_button = 'Liiguta kanded' ;
-$s_copy_group_bugs_button = 'Kopeeri kanded' ;
-$s_assign_group_bugs_button = 'Määra kanded' ;
-$s_resolve_group_bugs_button = 'Lahenda kanded' ;
-$s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
-$s_status_group_bugs_button = 'Uuenda olekut' ;
+$s_close_group_bugs_button = 'Sulge kanded';
+$s_delete_group_bugs_button = 'Kustuta kanded';
+$s_move_group_bugs_button = 'Liiguta kanded';
+$s_copy_group_bugs_button = 'Kopeeri kanded';
+$s_assign_group_bugs_button = 'Määra kanded';
+$s_resolve_group_bugs_button = 'Lahenda kanded';
+$s_priority_group_bugs_button = 'Uuenda prioriteeti';
+$s_status_group_bugs_button = 'Uuenda olekut';
 $s_category_group_bugs_button = 'Uuenda kategooria';
 $s_view_status_group_bugs_button = 'Uuenda vaate olekut';
 $s_set_sticky_group_bugs_button = 'Määra/tühista kleepuvus';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Graafikute süntees oleku järgi' ;
-$s_graph_imp_priority_title = 'Graafikute süntees prioriteedi järgi' ;
+$s_graph_imp_status_title = 'Graafikute süntees oleku järgi';
+$s_graph_imp_priority_title = 'Graafikute süntees prioriteedi järgi';
 $s_graph_imp_severity_title = 'Graafikute süntees raskusastme järgi';
 $s_graph_imp_category_title = 'Graafikute süntees kategooria järgi';
 $s_graph_imp_resolution_title = 'Graafikute süntees lahenduse järgi';
@@ -183,7 +183,7 @@ $s_printing_preferences_title = 'Vali trükitavad väljad';
 $s_printing_options_link = 'Trükise seaded';
 
 # word and excel export
-$s_bugnote_title = 'Märkuste haldamine' ;
+$s_bugnote_title = 'Märkuste haldamine';
 $s_bugnote_date = 'Märkuse kuupäev';
 $s_bugnote_description = 'Märkuse kirjeldus';
 

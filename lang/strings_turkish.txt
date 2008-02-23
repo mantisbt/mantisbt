@@ -131,21 +131,21 @@ $s_status_bugs_conf_msg = 'Choose issues status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Close Issues' ;
-$s_delete_group_bugs_button = 'Delete Issues' ;
-$s_move_group_bugs_button = 'Move Issues' ;
-$s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Assign Issues' ;
-$s_resolve_group_bugs_button = 'Resolve Issues' ;
-$s_priority_group_bugs_button = 'Update Priority' ;
-$s_status_group_bugs_button = 'Update Status' ;
+$s_close_group_bugs_button = 'Close Issues';
+$s_delete_group_bugs_button = 'Delete Issues';
+$s_move_group_bugs_button = 'Move Issues';
+$s_copy_group_bugs_button = 'Copy Issues';
+$s_assign_group_bugs_button = 'Assign Issues';
+$s_resolve_group_bugs_button = 'Resolve Issues';
+$s_priority_group_bugs_button = 'Update Priority';
+$s_status_group_bugs_button = 'Update Status';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_status_title = 'Synthesis graphs by status';
+$s_graph_imp_priority_title = 'Synthesis graphs by priority';
 $s_graph_imp_severity_title = 'Synthesis graphs by severity';
 $s_graph_imp_category_title = 'Synthesis graphs by category';
 $s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
@@ -181,7 +181,7 @@ $s_printing_preferences_title = 'Choose fields to print';
 $s_printing_options_link = 'Printing Options';
 
 # word and excel export
-$s_bugnote_title = 'Note handler' ;
+$s_bugnote_title = 'Note handler';
 $s_bugnote_date = 'Date of note';
 $s_bugnote_description = 'Note description';
 
@@ -1313,11 +1313,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'From';

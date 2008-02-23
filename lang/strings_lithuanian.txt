@@ -159,7 +159,7 @@ $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sukurti grafiką pagal būseną';
-$s_graph_imp_priority_title = 'Sukurti grafiką pagal prioritetą' ;
+$s_graph_imp_priority_title = 'Sukurti grafiką pagal prioritetą';
 $s_graph_imp_severity_title = 'Sukurti grafiką pagal svarbą';
 $s_graph_imp_category_title = 'Sukurti grafiką pagal kategoriją';
 $s_graph_imp_resolution_title = 'Sukurti grafiką pagal sprendimą';
@@ -195,7 +195,7 @@ $s_printing_preferences_title = 'Laukų pasirinkimas spausdinimui';
 $s_printing_options_link = 'Spausdinimo nustatymai';
 
 # word and excel export
-$s_bugnote_title = 'Komentaro antraštė' ;
+$s_bugnote_title = 'Komentaro antraštė';
 $s_bugnote_date = 'Komentaro data';
 $s_bugnote_description = 'Komentaro aprašymas';
 
@@ -1327,11 +1327,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'Nuo';

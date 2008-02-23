@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = 'Tölvupóstur um að tengsl hafi breyst';
 $s_loading = 'Hleðsla...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'Frá';

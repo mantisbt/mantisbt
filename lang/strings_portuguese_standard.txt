@@ -133,21 +133,21 @@ $s_status_bugs_conf_msg = 'Escolha o Novo Estado para os Bugs Selecionados';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Fechar os Bugs Selecionados' ;
-$s_delete_group_bugs_button = 'Apagar os Bugs Selecionados' ;
-$s_move_group_bugs_button = 'Mover os Bugs Selecionados' ;
-$s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Atribuir Bugs Selecionados' ;
-$s_resolve_group_bugs_button = 'Resolver os Bugs Selecionados' ;
-$s_priority_group_bugs_button = 'Actualizar Prioridade' ;
-$s_status_group_bugs_button = 'Actualizar Estado' ;
+$s_close_group_bugs_button = 'Fechar os Bugs Selecionados';
+$s_delete_group_bugs_button = 'Apagar os Bugs Selecionados';
+$s_move_group_bugs_button = 'Mover os Bugs Selecionados';
+$s_copy_group_bugs_button = 'Copy Issues';
+$s_assign_group_bugs_button = 'Atribuir Bugs Selecionados';
+$s_resolve_group_bugs_button = 'Resolver os Bugs Selecionados';
+$s_priority_group_bugs_button = 'Actualizar Prioridade';
+$s_status_group_bugs_button = 'Actualizar Estado';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Gráficos por Estado' ;
-$s_graph_imp_priority_title = 'Gráficos por Prioridade' ;
+$s_graph_imp_status_title = 'Gráficos por Estado';
+$s_graph_imp_priority_title = 'Gráficos por Prioridade';
 $s_graph_imp_severity_title = 'Gráficos por Importância';
 $s_graph_imp_category_title = 'Gráficos por categoria';
 $s_graph_imp_resolution_title = 'Gráficos por Resolução';
@@ -183,7 +183,7 @@ $s_printing_preferences_title = 'Escolha os Elementos a Imprimir';
 $s_printing_options_link = 'Opções de Impressão';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
+$s_bugnote_title = 'Bugnote handler';
 $s_bugnote_date = 'Data da bugnote';
 $s_bugnote_description = 'Descrição da Bugnote';
 
@@ -1315,11 +1315,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'De';

@@ -128,21 +128,21 @@ $s_status_bugs_conf_msg = 'Alege starea problemei';
 $s_view_status_bugs_conf_msg = 'Alege starea de vizualizare a problemei';
 $s_category_bugs_conf_msg = 'Alege categoria problemei';
 $s_set_sticky_bugs_conf_msg = 'Sigur doriţi modificarea setării \'sticky\' pentru aceste probleme?';
-$s_close_group_bugs_button = 'Închide probleme' ;
-$s_delete_group_bugs_button = 'Şterge probleme' ;
-$s_move_group_bugs_button = 'Mută probleme' ;
-$s_copy_group_bugs_button = 'Copiază probleme' ;
-$s_assign_group_bugs_button = 'Atribuie probleme' ;
-$s_resolve_group_bugs_button = 'Rezolvă probleme' ;
-$s_priority_group_bugs_button = 'Actualizează prioritate' ;
-$s_status_group_bugs_button = 'Actualizează stare' ;
+$s_close_group_bugs_button = 'Închide probleme';
+$s_delete_group_bugs_button = 'Şterge probleme';
+$s_move_group_bugs_button = 'Mută probleme';
+$s_copy_group_bugs_button = 'Copiază probleme';
+$s_assign_group_bugs_button = 'Atribuie probleme';
+$s_resolve_group_bugs_button = 'Rezolvă probleme';
+$s_priority_group_bugs_button = 'Actualizează prioritate';
+$s_status_group_bugs_button = 'Actualizează stare';
 $s_category_group_bugs_button = 'Actualizează categorie';
 $s_view_status_group_bugs_button = 'Actualizează stare vizualizată';
 $s_set_sticky_group_bugs_button = 'Atribuie/şterge stare \'sticky\'';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Grafic sinteză după stare' ;
-$s_graph_imp_priority_title = 'Grafic sinteză după prioritate' ;
+$s_graph_imp_status_title = 'Grafic sinteză după stare';
+$s_graph_imp_priority_title = 'Grafic sinteză după prioritate';
 $s_graph_imp_severity_title = 'Grafic sinteză după gradul de severitate';
 $s_graph_imp_category_title = 'Grafic sinteză după categorie';
 $s_graph_imp_resolution_title = 'Grafic sinteză după rezoluţie';
@@ -178,7 +178,7 @@ $s_printing_preferences_title = 'Alegeţi câmpurile pentru tipărire';
 $s_printing_options_link = 'Opţiuni de tipărire';
 
 # word and excel export
-$s_bugnote_title = 'Procesor pentru comentariu' ;
+$s_bugnote_title = 'Procesor pentru comentariu';
 $s_bugnote_date = 'Data comentariului';
 $s_bugnote_description = 'Descrierea comentariului';
 
@@ -1309,11 +1309,11 @@ $s_email_on_relationship_changed = 'Trimite e-mail la schimbarea realţionării'
 $s_loading = 'Încarcă...';
 
 # filter_api.php
-$s_between_date = 'Între' ;
-$s_on_or_before_date = 'În sau înainte' ;
-$s_before_date = 'Înainte' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Între';
+$s_on_or_before_date = 'În sau înainte';
+$s_before_date = 'Înainte';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'From';

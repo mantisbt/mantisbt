@@ -146,14 +146,14 @@ $s_category_bugs_conf_msg = 'Ügyek kategóriájának választása';
 $s_set_sticky_bugs_conf_msg = 'Valóban be/ki akarja kapcsolni ezen ügyek ragadósságát?';
 $s_fixed_in_version_bugs_conf_msg = 'Javított verzió frissítése a következőre:';
 $s_target_version_bugs_conf_msg = 'Cél verzió frissítése a következőre:';
-$s_close_group_bugs_button = 'Ügyek lezárása' ;
-$s_delete_group_bugs_button = 'Ügyek törlése' ;
-$s_move_group_bugs_button = 'Ügyek mozgatása' ;
-$s_copy_group_bugs_button = 'Ügyek másolása' ;
-$s_assign_group_bugs_button = 'Ügyek hozzárendelése' ;
-$s_resolve_group_bugs_button = 'Ügyek megoldása' ;
-$s_priority_group_bugs_button = 'Prioritás frissítése' ;
-$s_status_group_bugs_button = 'Státusz frissítése' ;
+$s_close_group_bugs_button = 'Ügyek lezárása';
+$s_delete_group_bugs_button = 'Ügyek törlése';
+$s_move_group_bugs_button = 'Ügyek mozgatása';
+$s_copy_group_bugs_button = 'Ügyek másolása';
+$s_assign_group_bugs_button = 'Ügyek hozzárendelése';
+$s_resolve_group_bugs_button = 'Ügyek megoldása';
+$s_priority_group_bugs_button = 'Prioritás frissítése';
+$s_status_group_bugs_button = 'Státusz frissítése';
 $s_category_group_bugs_button = 'Kategória frissítése';
 $s_view_status_group_bugs_button = 'Láthatóság frissítése';
 $s_set_sticky_group_bugs_button = 'Ragadós be/ki';
@@ -161,8 +161,8 @@ $s_fixed_in_version_group_bugs_button = 'Javított verzió frissítése';
 $s_target_version_group_bugs_button = 'Cél verzió frissítése';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Összesített diagram státusz szerint' ;
-$s_graph_imp_priority_title = 'Összesített diagram prioritás szerint' ;
+$s_graph_imp_status_title = 'Összesített diagram státusz szerint';
+$s_graph_imp_priority_title = 'Összesített diagram prioritás szerint';
 $s_graph_imp_severity_title = 'Összesített diagram súlyosság szerint';
 $s_graph_imp_category_title = 'Összesített diagram kategória szerint';
 $s_graph_imp_resolution_title = 'Összesített diagram döntés szerint';
@@ -198,7 +198,7 @@ $s_printing_preferences_title = 'Válassza ki a nyomtatandó mezőket';
 $s_printing_options_link = 'Nyomtatási beállítások';
 
 # word and excel export
-$s_bugnote_title = 'Megjegyzéskezelő' ;
+$s_bugnote_title = 'Megjegyzéskezelő';
 $s_bugnote_date = 'Megjegyzés dátuma';
 $s_bugnote_description = 'Megjegyzés leírása';
 
@@ -1364,11 +1364,11 @@ $s_email_on_relationship_changed = 'Értesítés kapcsolat változásakor';
 $s_loading = 'Betöltés...';
 
 # filter_api.php
-$s_between_date = 'A következők között:' ;
-$s_on_or_before_date = 'A következőkor vagy előtte:' ;
-$s_before_date = 'A következő előtt:' ;
-$s_after_date = 'A következő után:' ;
-$s_on_or_after_date = 'A következőkor vagy utána:' ;
+$s_between_date = 'A következők között:';
+$s_on_or_before_date = 'A következőkor vagy előtte:';
+$s_before_date = 'A következő előtt:';
+$s_after_date = 'A következő után:';
+$s_on_or_after_date = 'A következőkor vagy utána:';
 
 # Date constants
 $s_from_date = 'Ettől:';

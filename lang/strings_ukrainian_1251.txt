@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = 'Вкажіть статус проблем';
 $s_view_status_bugs_conf_msg = 'Вкажіть рівень доступу проблеми';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Закрити проблеми' ;
-$s_delete_group_bugs_button = 'Видалити проблеми' ;
-$s_move_group_bugs_button = 'Перенести проблеми' ;
-$s_copy_group_bugs_button = 'Скопіювати проблеми' ;
-$s_assign_group_bugs_button = 'Призначити проблеми' ;
-$s_resolve_group_bugs_button = 'Вирішити проблеми' ;
-$s_priority_group_bugs_button = 'Змінити пріоритет' ;
-$s_status_group_bugs_button = 'Змінити статус' ;
+$s_close_group_bugs_button = 'Закрити проблеми';
+$s_delete_group_bugs_button = 'Видалити проблеми';
+$s_move_group_bugs_button = 'Перенести проблеми';
+$s_copy_group_bugs_button = 'Скопіювати проблеми';
+$s_assign_group_bugs_button = 'Призначити проблеми';
+$s_resolve_group_bugs_button = 'Вирішити проблеми';
+$s_priority_group_bugs_button = 'Змінити пріоритет';
+$s_status_group_bugs_button = 'Змінити статус';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Змінити рівень доступу';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Діаграми за статусами' ;
-$s_graph_imp_priority_title = 'Діаграми пріоритетів' ;
+$s_graph_imp_status_title = 'Діаграми за статусами';
+$s_graph_imp_priority_title = 'Діаграми пріоритетів';
 $s_graph_imp_severity_title = 'Діаграми серйозності';
 $s_graph_imp_category_title = 'Діаграми категорій';
 $s_graph_imp_resolution_title = 'Діаграми резолюцій';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = 'Виберіть поля для друку';
 $s_printing_options_link = 'Параметри друку';
 
 # word and excel export
-$s_bugnote_title = 'Обробник коментарів' ;
+$s_bugnote_title = 'Обробник коментарів';
 $s_bugnote_date = 'Дата коментаря';
 $s_bugnote_description = 'Опис коментаря';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'Від кого';

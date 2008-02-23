@@ -131,21 +131,21 @@ $s_status_bugs_conf_msg = 'בחירת סטטוס';
 $s_view_status_bugs_conf_msg = 'בחירת הרשאת צפיה';
 $s_category_bugs_conf_msg = 'בחירת קטגוריה';
 $s_set_sticky_bugs_conf_msg = 'האם ברצונך לשנות את ה"דביקות" של הבאגים?';
-$s_close_group_bugs_button = 'סגירה' ;
-$s_delete_group_bugs_button = 'מחיקה!' ;
-$s_move_group_bugs_button = 'העברה' ;
-$s_copy_group_bugs_button = 'העתקה' ;
-$s_assign_group_bugs_button = 'שיוך' ;
-$s_resolve_group_bugs_button = 'פתרון' ;
-$s_priority_group_bugs_button = 'עדכון עדיפות' ;
-$s_status_group_bugs_button = 'עדכון סטטוס' ;
+$s_close_group_bugs_button = 'סגירה';
+$s_delete_group_bugs_button = 'מחיקה!';
+$s_move_group_bugs_button = 'העברה';
+$s_copy_group_bugs_button = 'העתקה';
+$s_assign_group_bugs_button = 'שיוך';
+$s_resolve_group_bugs_button = 'פתרון';
+$s_priority_group_bugs_button = 'עדכון עדיפות';
+$s_status_group_bugs_button = 'עדכון סטטוס';
 $s_category_group_bugs_button = 'עדכון קטגוריה';
 $s_view_status_group_bugs_button = 'עדכון הרשאת צפיה';
 $s_set_sticky_group_bugs_button = 'עדכון "דביקות"';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_status_title = 'Synthesis graphs by status';
+$s_graph_imp_priority_title = 'Synthesis graphs by priority';
 $s_graph_imp_severity_title = 'Synthesis graphs by severity';
 $s_graph_imp_category_title = 'Synthesis graphs by category';
 $s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
@@ -181,7 +181,7 @@ $s_printing_preferences_title = 'בחירת שדות להדפסה';
 $s_printing_options_link = 'אפשרויות הדפסה';
 
 # word and excel export
-$s_bugnote_title = 'כותב הערה' ;
+$s_bugnote_title = 'כותב הערה';
 $s_bugnote_date = 'תאריך הערה';
 $s_bugnote_description = 'תוכן הערה';
 
@@ -1313,11 +1313,11 @@ $s_email_on_relationship_changed = 'שינוי קשר בין באגים';
 $s_loading = 'טעינה...';
 
 # filter_api.php
-$s_between_date = 'בין' ;
-$s_on_or_before_date = 'עד וכולל' ;
-$s_before_date = 'לפני' ;
-$s_after_date = 'אחרי' ;
-$s_on_or_after_date = 'החל מ-' ;
+$s_between_date = 'בין';
+$s_on_or_before_date = 'עד וכולל';
+$s_before_date = 'לפני';
+$s_after_date = 'אחרי';
+$s_on_or_after_date = 'החל מ-';
 
 # Date constants
 $s_from_date = 'מאת';

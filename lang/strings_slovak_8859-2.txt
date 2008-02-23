@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = 'Vybra» status bugov';
 $s_view_status_bugs_conf_msg = 'Vybrat stav zobrazenia problému';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Zatvori» bugy' ;
-$s_delete_group_bugs_button = 'Zmaza» bugy' ;
-$s_move_group_bugs_button = 'Presunú» bugy' ;
-$s_copy_group_bugs_button = 'Kopírova» probém' ;
-$s_assign_group_bugs_button = 'Priradi» bugy' ;
-$s_resolve_group_bugs_button = 'Vysvetli» bugy' ;
-$s_priority_group_bugs_button = 'Priorita aktualizácie' ;
-$s_status_group_bugs_button = 'Status aktualizácie' ;
+$s_close_group_bugs_button = 'Zatvori» bugy';
+$s_delete_group_bugs_button = 'Zmaza» bugy';
+$s_move_group_bugs_button = 'Presunú» bugy';
+$s_copy_group_bugs_button = 'Kopírova» probém';
+$s_assign_group_bugs_button = 'Priradi» bugy';
+$s_resolve_group_bugs_button = 'Vysvetli» bugy';
+$s_priority_group_bugs_button = 'Priorita aktualizácie';
+$s_status_group_bugs_button = 'Status aktualizácie';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Obnovi» zobrazenie problému';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Graf podµa stavu' ;
-$s_graph_imp_priority_title = 'Graf podµa priority' ;
+$s_graph_imp_status_title = 'Graf podµa stavu';
+$s_graph_imp_priority_title = 'Graf podµa priority';
 $s_graph_imp_severity_title = 'Graf podµa dôle¾itosti';
 $s_graph_imp_category_title = 'Graf podµa kategorie';
 $s_graph_imp_resolution_title = 'Graf podµa rie¹ení';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = 'Vyberte si políèka na tlaèenie';
 $s_printing_options_link = 'Nastavenia tlaèe';
 
 # word and excel export
-$s_bugnote_title = 'Mana¾ér poznámok k bugom' ;
+$s_bugnote_title = 'Mana¾ér poznámok k bugom';
 $s_bugnote_date = 'Dátum poznámky k bugu';
 $s_bugnote_description = 'Popis poznámky k bugu';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'od';

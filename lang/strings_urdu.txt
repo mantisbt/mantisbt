@@ -43,7 +43,7 @@ $s_actiongroup_menu_delete = 'ختم کرو';
 $s_actiongroup_menu_resolve = 'حل کرو';
 $s_actiongroup_menu_update_priority = 'سب سیےپیلا نیا کرو';
 $s_actiongroup_menu_update_status = 'مقام نیا کرو';
-$s_actiongroup_menu_update_view_status = ' مقام دیکھنے والا نیا کرو' ;
+$s_actiongroup_menu_update_view_status = ' مقام دیکھنے والا نیا کرو';
 $s_actiongroup_menu_update_category = 'قسم نئ کرو';
 $s_actiongroup_menu_set_sticky = 'سیٹ کرو / سیٹ نا کرو ';
 $s_actiongroup_menu_update_field = ' نیا کرو %s';
@@ -117,7 +117,7 @@ $s_make_public = 'آزاد بناو';
 $s_create_new_project_link = 'نیا منصو بہ';
 
 $s_login_link = 'لاگن';
-$s_select_option = '(استمہال کرنے والوں کو بتاو کے بکس سے اپنی مرضی کی  قیمت منتحب کرو  )';   
+$s_select_option = '(استمہال کرنے والوں کو بتاو کے بکس سے اپنی مرضی کی  قیمت منتحب کرو  )';
 
 
 # bug_actiongroup_page.php : اکھٹی دیکھ بھال
@@ -138,14 +138,14 @@ $s_category_bugs_conf_msg = ' ایشوذ کی قسم منتہب کرو ';
 $s_set_sticky_bugs_conf_msg = 'کیا آپ یہ ایشوذ سیٹ کرو / سیٹ نا کرو  کرنا جاہتے ہین?';
 $s_fixed_in_version_bugs_conf_msg = ' نئ تبدیلی مین تبدیلی اس مین کرو';
 $s_target_version_bugs_conf_msg = ' نئ تبدیلی اس مین کرو ';
-$s_close_group_bugs_button = '  ایشوذ بند کر دو ' ;
-$s_delete_group_bugs_button = ' ایشوذ خارج کر دو ' ;
-$s_move_group_bugs_button = ' ایشوذ اس مین' ;
-$s_copy_group_bugs_button = ' ایشوذ نقل کرو ' ;
-$s_assign_group_bugs_button = 'ایشوذ اس کے حوالے ' ;
-$s_resolve_group_bugs_button = 'حل ایشوذ ' ;
-$s_priority_group_bugs_button = 'خصوصیت نی ھو گی ھے' ;
-$s_status_group_bugs_button = 'مقام نیا ھو گیا ھے' ;
+$s_close_group_bugs_button = '  ایشوذ بند کر دو ';
+$s_delete_group_bugs_button = ' ایشوذ خارج کر دو ';
+$s_move_group_bugs_button = ' ایشوذ اس مین';
+$s_copy_group_bugs_button = ' ایشوذ نقل کرو ';
+$s_assign_group_bugs_button = 'ایشوذ اس کے حوالے ';
+$s_resolve_group_bugs_button = 'حل ایشوذ ';
+$s_priority_group_bugs_button = 'خصوصیت نی ھو گی ھے';
+$s_status_group_bugs_button = 'مقام نیا ھو گیا ھے';
 $s_category_group_bugs_button = 'قسم نی ھو گی ھے';
 $s_view_status_group_bugs_button = '  دیکھنے والہ مقام نیا ھو گیا ھے';
 $s_set_sticky_group_bugs_button = ' سیٹ کرو / سیٹ نا کرو نی ھو گی ھے  ';
@@ -153,8 +153,8 @@ $s_fixed_in_version_group_bugs_button = ' نئ تبدیلی مین تبدیلی 
 $s_target_version_group_bugs_button = '  نئ تبدیلی ھو گی ھے ';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'ترکیب کا گراف مقامکے لہاظ سے ' ;
-$s_graph_imp_priority_title = ' ترکیب کا گراف خصوصیت کے لہاظ سے ' ;
+$s_graph_imp_status_title = 'ترکیب کا گراف مقامکے لہاظ سے ';
+$s_graph_imp_priority_title = ' ترکیب کا گراف خصوصیت کے لہاظ سے ';
 $s_graph_imp_severity_title = ' ترکیب کا گراف خرابی کے لہاظ سے ';
 $s_graph_imp_category_title = ' ترکیب کا گراف قسمکے لہاظ سے ';
 $s_graph_imp_resolution_title = ' ترکیب کا گراف ساہز کے لہاظ سے ';
@@ -190,7 +190,7 @@ $s_printing_preferences_title = 'جو چیز چھاپنی ھے منتحب کرو
 $s_printing_options_link = ' چھاپنے کے اختیار';
 
 # word and excel export
-$s_bugnote_title = 'معلومات کو سنبھالنے والہ' ;
+$s_bugnote_title = 'معلومات کو سنبھالنے والہ';
 $s_bugnote_date = '  معلومات کی تاریخ ';
 $s_bugnote_description = ' معلومات کی وضاحت';
 
@@ -202,7 +202,7 @@ $MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے م�
 $MANTIS_ERROR[ERROR_REPORT] = 'آپ کی معلومات مین خرابی تھی.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'کوی فاہل بتای نہی گی';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'اس قسم کی فاہل کی اجازت نہی';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے. 
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے.
 Please check the project settings.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'اس نام کا منصو بہ پہلے ہی موجود ھے.';
@@ -304,9 +304,9 @@ $s_default_access_level = 'یہ استہمال ھونے والہ لیول ڈیف
 $s_issue_status_percentage = 'ایشوذ کے مقام کی فی صد';
 
 # Enum Strings
-$s_access_levels_enum_string = 
+$s_access_levels_enum_string =
 '10:دیکھنے والے,25:    رپورٹ کرنے وال     ,40:نیا بنا نے والہ  ,55:بنا نے  والہ,70:مینجر,90:انتظا میہ';
-$s_project_status_enum_string = 
+$s_project_status_enum_string =
 '10:فروغ,30:رھای,50:مضبوط,70:منسوخ';
 $s_project_view_state_enum_string = '10: آزاد,50:غیر آزاد';
 $s_view_state_enum_string = '10: آزاد,50: غیر آزاد ';
@@ -1228,7 +1228,7 @@ $s_sponsorship_updated = ' سپانسر شپ اپ ڈیٹ ھو گی ھے ';
 $s_sponsorship_deleted = ' سپانسر شپ خارج ھو گی ھے ';
 $s_sponsorship_paid = ' سپانسر شپ ادا ھو گی ھے ';
 $s_sponsorship_more_info = '  سپانسر شپ سے متعلق اور معلومات  ';
-$s_sponsorship_total = 'مجمعوی سپانسر شپ 
+$s_sponsorship_total = 'مجمعوی سپانسر شپ
 
 # URL explaining the process of sponsoring an issue.اس جگہ پر بتایا گیا ھے بجاے اس کے کنفگ میں اس کو ھر ذبان کے لیے یو آر ایل کی اجاذت دی جاے   اس  پراسیس کی معلومات دینے کی کوی ضرورت نہی یہ ایک خالی سٹرنگ پر بھی سیٹ ھو سکتی ھے   یہ .';
 $s_sponsorship_process_url = ' سپانسر شپ کا یو آر ایل  ';
@@ -1338,11 +1338,11 @@ $s_email_on_relationship_changed = ' تعلق بد لنے پر ای میل';
 $s_loading = 'لوڈنگ...';
 
 # filter_api.php
-$s_between_date = 'درمیان' ;
-$s_on_or_before_date = 'پر یا پہلے' ;
-$s_before_date = 'پہلے' ;
-$s_after_date = 'بعد' ;
-$s_on_or_after_date = 'پر یا بعد' ;
+$s_between_date = 'درمیان';
+$s_on_or_before_date = 'پر یا پہلے';
+$s_before_date = 'پہلے';
+$s_after_date = 'بعد';
+$s_on_or_after_date = 'پر یا بعد';
 
 # Date constants
 $s_from_date = 'اس سے ';

@@ -136,21 +136,21 @@ $s_status_bugs_conf_msg = '이슈 상태 선택';
 $s_view_status_bugs_conf_msg = '이슈 보기 상태 선택';
 $s_category_bugs_conf_msg = '이슈 카테고리를 선택하세요';
 $s_set_sticky_bugs_conf_msg = '정말 이 이슈에 sticky를 설정/해제 하시겠습니까?';
-$s_close_group_bugs_button = '이슈 폐쇄' ;
-$s_delete_group_bugs_button = '이슈 삭제' ;
-$s_move_group_bugs_button = '이슈 이동' ;
-$s_copy_group_bugs_button = '이슈 복사' ;
-$s_assign_group_bugs_button = '이슈 할당' ;
-$s_resolve_group_bugs_button = '이슈 해결' ;
-$s_priority_group_bugs_button = '우선 순위 갱신' ;
-$s_status_group_bugs_button = '상태 갱신' ;
+$s_close_group_bugs_button = '이슈 폐쇄';
+$s_delete_group_bugs_button = '이슈 삭제';
+$s_move_group_bugs_button = '이슈 이동';
+$s_copy_group_bugs_button = '이슈 복사';
+$s_assign_group_bugs_button = '이슈 할당';
+$s_resolve_group_bugs_button = '이슈 해결';
+$s_priority_group_bugs_button = '우선 순위 갱신';
+$s_status_group_bugs_button = '상태 갱신';
 $s_category_group_bugs_button = '카테고리 갱신';
 $s_view_status_group_bugs_button = '보기 상태 갱신';
 $s_set_sticky_group_bugs_button = 'Sticky 설정/해제';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = '상태 종합 그래프' ;
-$s_graph_imp_priority_title = '우선순위 종합 그래프' ;
+$s_graph_imp_status_title = '상태 종합 그래프';
+$s_graph_imp_priority_title = '우선순위 종합 그래프';
 $s_graph_imp_severity_title = '심각성 종합 그래프';
 $s_graph_imp_category_title = '카테고리 종합 그래프';
 $s_graph_imp_resolution_title = '해결도 종합 그래프';
@@ -186,7 +186,7 @@ $s_printing_preferences_title = '인쇄할 필드 선택';
 $s_printing_options_link = '인쇄 옵션';
 
 # word and excel export
-$s_bugnote_title = '이슈노트 조작자' ;
+$s_bugnote_title = '이슈노트 조작자';
 $s_bugnote_date = '이슈노트 날짜';
 $s_bugnote_description = '이슈노트 설명';
 
@@ -1318,11 +1318,11 @@ $s_email_on_relationship_changed = '관계 변경에 대한 Email';
 $s_loading = '불러오는 중...';
 
 # filter_api.php
-$s_between_date = '사이' ;
-$s_on_or_before_date = '동안 또는 이전' ;
-$s_before_date = '이전' ;
-$s_after_date = '이후' ;
-$s_on_or_after_date = '동안 또는 이후' ;
+$s_between_date = '사이';
+$s_on_or_before_date = '동안 또는 이전';
+$s_before_date = '이전';
+$s_after_date = '이후';
+$s_on_or_after_date = '동안 또는 이후';
 
 # Date constants
 $s_from_date = '보낸 사람';

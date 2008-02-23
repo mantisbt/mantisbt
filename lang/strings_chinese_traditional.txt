@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = '選擇 bugs 狀態';
 $s_view_status_bugs_conf_msg = '選擇問題檢視狀態';
 $s_category_bugs_conf_msg = '選擇問題類別';
 $s_set_sticky_bugs_conf_msg = '你確定你想設定/取消這些棘手問題?';
-$s_close_group_bugs_button = '結案的 Bugs' ;
-$s_delete_group_bugs_button = '刪除的 Bugs' ;
-$s_move_group_bugs_button = '搬移的 Bugs' ;
-$s_copy_group_bugs_button = '複製問題' ;
-$s_assign_group_bugs_button = '分派的 Bugs' ;
-$s_resolve_group_bugs_button = '解決 Bugs' ;
-$s_priority_group_bugs_button = '更新優先度' ;
-$s_status_group_bugs_button = '更新狀態' ;
+$s_close_group_bugs_button = '結案的 Bugs';
+$s_delete_group_bugs_button = '刪除的 Bugs';
+$s_move_group_bugs_button = '搬移的 Bugs';
+$s_copy_group_bugs_button = '複製問題';
+$s_assign_group_bugs_button = '分派的 Bugs';
+$s_resolve_group_bugs_button = '解決 Bugs';
+$s_priority_group_bugs_button = '更新優先度';
+$s_status_group_bugs_button = '更新狀態';
 $s_category_group_bugs_button = '更新類別';
 $s_view_status_group_bugs_button = '更新檢視狀態';
 $s_set_sticky_group_bugs_button = '設定/取消難題';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = '狀態合成圖' ;
-$s_graph_imp_priority_title = '優先度合成圖' ;
+$s_graph_imp_status_title = '狀態合成圖';
+$s_graph_imp_priority_title = '優先度合成圖';
 $s_graph_imp_severity_title = '嚴重性合成圖';
 $s_graph_imp_category_title = '類別合成圖';
 $s_graph_imp_resolution_title = '分析合成圖';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = '選擇列印欄位';
 $s_printing_options_link = '列印選項';
 
 # word and excel export
-$s_bugnote_title = 'Bug 筆記處理者' ;
+$s_bugnote_title = 'Bug 筆記處理者';
 $s_bugnote_date = 'Bug 筆記日期';
 $s_bugnote_description = 'Bug 筆記說明';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = '相關問題更動時發出 E-Mail';
 $s_loading = '載入中...';
 
 # filter_api.php
-$s_between_date = '之間' ;
-$s_on_or_before_date = '於此或之前' ;
-$s_before_date = '之前' ;
-$s_after_date = '之後' ;
-$s_on_or_after_date = '於此或之後' ;
+$s_between_date = '之間';
+$s_on_or_before_date = '於此或之前';
+$s_before_date = '之前';
+$s_after_date = '之後';
+$s_on_or_after_date = '於此或之後';
 
 # Date constants
 $s_from_date = 'From';

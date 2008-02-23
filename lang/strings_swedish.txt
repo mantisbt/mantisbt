@@ -132,21 +132,21 @@ $s_status_bugs_conf_msg = 'Välj status för ärendena';
 $s_view_status_bugs_conf_msg = 'Välj vy-status för ärenden';
 $s_category_bugs_conf_msg = 'Välj kategori för ärenden';
 $s_set_sticky_bugs_conf_msg = 'Är du säker på att du vill sätta på/av klistrad för dessa ärenden?';
-$s_close_group_bugs_button = 'Stäng ärenden' ;
-$s_delete_group_bugs_button = 'Ta bort ärenden' ;
-$s_move_group_bugs_button = 'Flytta ärenden' ;
-$s_copy_group_bugs_button = 'Kopiera ärenden' ;
-$s_assign_group_bugs_button = 'Tilldela ärenden' ;
-$s_resolve_group_bugs_button = 'Lös ärenden' ;
-$s_priority_group_bugs_button = 'Uppdatera prioritet' ;
-$s_status_group_bugs_button = 'Uppdatera status' ;
+$s_close_group_bugs_button = 'Stäng ärenden';
+$s_delete_group_bugs_button = 'Ta bort ärenden';
+$s_move_group_bugs_button = 'Flytta ärenden';
+$s_copy_group_bugs_button = 'Kopiera ärenden';
+$s_assign_group_bugs_button = 'Tilldela ärenden';
+$s_resolve_group_bugs_button = 'Lös ärenden';
+$s_priority_group_bugs_button = 'Uppdatera prioritet';
+$s_status_group_bugs_button = 'Uppdatera status';
 $s_category_group_bugs_button = 'Uppdatera kategori';
 $s_view_status_group_bugs_button = 'Uppdatera vy-status';
 $s_set_sticky_group_bugs_button = 'Uppdatera klistrad';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Sammanfattningsgraf - status' ;
-$s_graph_imp_priority_title = 'Sammanfattningsgraf - prioritet' ;
+$s_graph_imp_status_title = 'Sammanfattningsgraf - status';
+$s_graph_imp_priority_title = 'Sammanfattningsgraf - prioritet';
 $s_graph_imp_severity_title = 'Sammanfattningsgraf - allvarlighet';
 $s_graph_imp_category_title = 'Sammanfattningsgraf - kategori';
 $s_graph_imp_resolution_title = 'Sammanfattningsgraf - lösning';
@@ -182,7 +182,7 @@ $s_printing_preferences_title = 'Välj fält att skriva ut';
 $s_printing_options_link = 'Utskriftsinställningar';
 
 # word and excel export
-$s_bugnote_title = 'Hanterare för meddelande' ;
+$s_bugnote_title = 'Hanterare för meddelande';
 $s_bugnote_date = 'Datum för meddelande';
 $s_bugnote_description = 'Beskrivning av meddelande';
 
@@ -1314,11 +1314,11 @@ $s_email_on_relationship_changed = 'E-post vid ändring av förhållande';
 $s_loading = 'Laddar...';
 
 # filter_api.php
-$s_between_date = 'Mellan' ;
-$s_on_or_before_date = 'Till och med' ;
-$s_before_date = 'Före' ;
-$s_after_date = 'Efter' ;
-$s_on_or_after_date = 'Från och med' ;
+$s_between_date = 'Mellan';
+$s_on_or_before_date = 'Till och med';
+$s_before_date = 'Före';
+$s_after_date = 'Efter';
+$s_on_or_after_date = 'Från och med';
 
 # Date constants
 $s_from_date = 'Från';

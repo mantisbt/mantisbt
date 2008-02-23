@@ -133,21 +133,21 @@ $s_status_bugs_conf_msg = 'Izberi status zadev';
 $s_view_status_bugs_conf_msg = 'Izberi zasebnost zadev';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Zapri zadeve' ;
-$s_delete_group_bugs_button = 'Izbriši zadeve' ;
-$s_move_group_bugs_button = 'Premakni zadeve' ;
-$s_copy_group_bugs_button = 'Kopiraj zadeve' ;
-$s_assign_group_bugs_button = 'Dodeli zadeve' ;
-$s_resolve_group_bugs_button = 'Razreši zadeve' ;
-$s_priority_group_bugs_button = 'Posodobi prioritete' ;
-$s_status_group_bugs_button = 'Posodobi status' ;
+$s_close_group_bugs_button = 'Zapri zadeve';
+$s_delete_group_bugs_button = 'Izbriši zadeve';
+$s_move_group_bugs_button = 'Premakni zadeve';
+$s_copy_group_bugs_button = 'Kopiraj zadeve';
+$s_assign_group_bugs_button = 'Dodeli zadeve';
+$s_resolve_group_bugs_button = 'Razreši zadeve';
+$s_priority_group_bugs_button = 'Posodobi prioritete';
+$s_status_group_bugs_button = 'Posodobi status';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Posodobi zasebnost';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+$s_graph_imp_status_title = 'Synthesis graphs by status';
+$s_graph_imp_priority_title = 'Synthesis graphs by priority';
 $s_graph_imp_severity_title = 'Synthesis graphs by severity';
 $s_graph_imp_category_title = 'Synthesis graphs by category';
 $s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
@@ -183,7 +183,7 @@ $s_printing_preferences_title = 'Izberi polja za tiskanje';
 $s_printing_options_link = 'Nastavitve tiskanja';
 
 # word and excel export
-$s_bugnote_title = 'Beležka' ;
+$s_bugnote_title = 'Beležka';
 $s_bugnote_date = 'Datum beležke';
 $s_bugnote_description = 'Opis beležke';
 
@@ -240,7 +240,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Še vsaj en projekt uporablja to pol
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Neveljavna vrednost za polje';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'Neuspešna LDAP avtentikacija';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Neuspešna povezava na LDAP server.' ;
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Neuspešna povezava na LDAP server.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Posodobitev LDAP zapisa je bila neuspešna.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Zapis uporabnika LDAP ni bil najden.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Povezava s podatkovno bazo je spodletela. Napaka iz podatkovne baze #%d: %s';
@@ -1315,11 +1315,11 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between_date = 'Between' ;
-$s_on_or_before_date = 'On Or Before' ;
-$s_before_date = 'Before' ;
-$s_after_date = 'After' ;
-$s_on_or_after_date = 'On Or After' ;
+$s_between_date = 'Between';
+$s_on_or_before_date = 'On Or Before';
+$s_before_date = 'Before';
+$s_after_date = 'After';
+$s_on_or_after_date = 'On Or After';
 
 # Date constants
 $s_from_date = 'Od';

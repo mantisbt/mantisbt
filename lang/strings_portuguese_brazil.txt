@@ -146,14 +146,14 @@ $s_category_bugs_conf_msg = 'Escolher a categoria do caso';
 $s_set_sticky_bugs_conf_msg = 'Você tem certeza que deseja marcar/desmarcar estes casos como "pegajosos"?';
 $s_fixed_in_version_bugs_conf_msg = 'Atualizar Corrigido na Versão';
 $s_target_version_bugs_conf_msg = 'Atualizar Previsto para a Versão';
-$s_close_group_bugs_button = 'Fechar Casos' ;
-$s_delete_group_bugs_button = 'Apagar Casos' ;
-$s_move_group_bugs_button = 'Mover Casos' ;
-$s_copy_group_bugs_button = 'Copiar Casos' ;
-$s_assign_group_bugs_button = 'Atribuir Casos' ;
-$s_resolve_group_bugs_button = 'Resolver Casos' ;
-$s_priority_group_bugs_button = 'Atualizar Prioridade' ;
-$s_status_group_bugs_button = 'Atualizar Status' ;
+$s_close_group_bugs_button = 'Fechar Casos';
+$s_delete_group_bugs_button = 'Apagar Casos';
+$s_move_group_bugs_button = 'Mover Casos';
+$s_copy_group_bugs_button = 'Copiar Casos';
+$s_assign_group_bugs_button = 'Atribuir Casos';
+$s_resolve_group_bugs_button = 'Resolver Casos';
+$s_priority_group_bugs_button = 'Atualizar Prioridade';
+$s_status_group_bugs_button = 'Atualizar Status';
 $s_category_group_bugs_button = 'Atualizar Categoria';
 $s_view_status_group_bugs_button = 'Atualizar Visibilidade';
 $s_set_sticky_group_bugs_button = 'Marcar/Desmarcar Pegajosos';
@@ -161,8 +161,8 @@ $s_fixed_in_version_group_bugs_button = 'Atualizar Corrigido na Versão';
 $s_target_version_group_bugs_button = 'Atualizar Previsto para a Versão';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Gráfico de síntese por status' ;
-$s_graph_imp_priority_title = 'Gráfico de síntese por prioridade' ;
+$s_graph_imp_status_title = 'Gráfico de síntese por status';
+$s_graph_imp_priority_title = 'Gráfico de síntese por prioridade';
 $s_graph_imp_severity_title = 'Gráfico de síntese por gravidade';
 $s_graph_imp_category_title = 'Gráfico de síntese por categoria';
 $s_graph_imp_resolution_title = 'Gráfico de síntese por resolução';
@@ -198,7 +198,7 @@ $s_printing_preferences_title = 'Escolher os campos para impressão';
 $s_printing_options_link = 'Opções de Impressão';
 
 # word and excel export
-$s_bugnote_title = 'Identificador da anotação' ;
+$s_bugnote_title = 'Identificador da anotação';
 $s_bugnote_date = 'Data da anotação';
 $s_bugnote_description = 'Descrição da anotação';
 
@@ -1363,11 +1363,11 @@ $s_email_on_relationship_changed = 'Enviar e-mail para mudança de relações';
 $s_loading = 'Carregando...';
 
 # filter_api.php
-$s_between_date = 'Entre' ;
-$s_on_or_before_date = 'Em ou Antes' ;
-$s_before_date = 'Antes' ;
-$s_after_date = 'Depois' ;
-$s_on_or_after_date = 'Em ou Depois' ;
+$s_between_date = 'Entre';
+$s_on_or_before_date = 'Em ou Antes';
+$s_before_date = 'Antes';
+$s_after_date = 'Depois';
+$s_on_or_after_date = 'Em ou Depois';
 
 # Date constants
 $s_from_date = 'De';

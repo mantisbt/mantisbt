@@ -134,21 +134,21 @@ $s_status_bugs_conf_msg = 'Vælg fejlenes status';
 $s_view_status_bugs_conf_msg = 'Vælg fejlenes visningsstatus';
 $s_category_bugs_conf_msg = 'Væld fejlkategori';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
-$s_close_group_bugs_button = 'Luk fejlene' ;
-$s_delete_group_bugs_button = 'Slet fejlene' ;
-$s_move_group_bugs_button = 'Flyt fejlene' ;
-$s_copy_group_bugs_button = 'Kopier fejlene' ;
-$s_assign_group_bugs_button = 'Tildel fejlene' ;
-$s_resolve_group_bugs_button = 'Løs fejlene' ;
-$s_priority_group_bugs_button = 'Opdater prioritering' ;
-$s_status_group_bugs_button = 'Opdater status' ;
+$s_close_group_bugs_button = 'Luk fejlene';
+$s_delete_group_bugs_button = 'Slet fejlene';
+$s_move_group_bugs_button = 'Flyt fejlene';
+$s_copy_group_bugs_button = 'Kopier fejlene';
+$s_assign_group_bugs_button = 'Tildel fejlene';
+$s_resolve_group_bugs_button = 'Løs fejlene';
+$s_priority_group_bugs_button = 'Opdater prioritering';
+$s_status_group_bugs_button = 'Opdater status';
 $s_category_group_bugs_button = 'Opdater kategori';
 $s_view_status_group_bugs_button = 'Opdater visningsstatus';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Sammenfattende grafik efter status' ;
-$s_graph_imp_priority_title = 'Sammenfattende grafik efter prioritering' ;
+$s_graph_imp_status_title = 'Sammenfattende grafik efter status';
+$s_graph_imp_priority_title = 'Sammenfattende grafik efter prioritering';
 $s_graph_imp_severity_title = 'Sammenfattende grafik efter alvorlighed';
 $s_graph_imp_category_title = 'Sammenfattende grafik efter kategori';
 $s_graph_imp_resolution_title = 'Sammenfattende grafik efter løsning';
@@ -184,7 +184,7 @@ $s_printing_preferences_title = 'Vælg felter der skal udskrives';
 $s_printing_options_link = 'Udskriftmuligheder';
 
 # word and excel export
-$s_bugnote_title = 'Behandler af fejlnote' ;
+$s_bugnote_title = 'Behandler af fejlnote';
 $s_bugnote_date = 'Dato for fejlnote';
 $s_bugnote_description = 'Fejlnote-beskrivelse';
 
@@ -1316,11 +1316,11 @@ $s_email_on_relationship_changed = 'E-mail når afhængigheder ændres';
 $s_loading = 'Indlæser...';
 
 # filter_api.php
-$s_between_date = 'Mellem' ;
-$s_on_or_before_date = 'På eller før' ;
-$s_before_date = 'Før' ;
-$s_after_date = 'Efter' ;
-$s_on_or_after_date = 'På eller efter' ;
+$s_between_date = 'Mellem';
+$s_on_or_before_date = 'På eller før';
+$s_before_date = 'Før';
+$s_after_date = 'Efter';
+$s_on_or_after_date = 'På eller efter';
 
 # Date constants
 $s_from_date = 'Fra';

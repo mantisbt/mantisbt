@@ -169,14 +169,14 @@ $s_category_bugs_conf_msg = 'Выберите категорию вопросов';
 $s_set_sticky_bugs_conf_msg = 'Вы уверены, что хотите прикрепить/открепить эти вопросы?';
 $s_fixed_in_version_bugs_conf_msg = 'Изменить "решен в версии" на';
 $s_target_version_bugs_conf_msg = 'Изменить целевую версию на';
-$s_close_group_bugs_button = 'Закрыть вопросы' ;
-$s_delete_group_bugs_button = 'Удалить вопросы' ;
-$s_move_group_bugs_button = 'Переместить вопросы' ;
-$s_copy_group_bugs_button = 'Копировать вопросы' ;
-$s_assign_group_bugs_button = 'Назначить вопросы' ;
-$s_resolve_group_bugs_button = 'Отработать вопросы' ;
-$s_priority_group_bugs_button = 'Изменить приоритет' ;
-$s_status_group_bugs_button = 'Изменить состояние' ;
+$s_close_group_bugs_button = 'Закрыть вопросы';
+$s_delete_group_bugs_button = 'Удалить вопросы';
+$s_move_group_bugs_button = 'Переместить вопросы';
+$s_copy_group_bugs_button = 'Копировать вопросы';
+$s_assign_group_bugs_button = 'Назначить вопросы';
+$s_resolve_group_bugs_button = 'Отработать вопросы';
+$s_priority_group_bugs_button = 'Изменить приоритет';
+$s_status_group_bugs_button = 'Изменить состояние';
 $s_category_group_bugs_button = 'Изменить категорию';
 $s_view_status_group_bugs_button = 'Изменить видимость';
 $s_set_sticky_group_bugs_button = 'Прикрепить/открепить';
@@ -184,8 +184,8 @@ $s_fixed_in_version_group_bugs_button = 'Изменить "решен в версии"';
 $s_target_version_group_bugs_button = 'Изменить целевую версию';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Суммарный график по состоянию' ;
-$s_graph_imp_priority_title = 'Суммарный график по приоритету' ;
+$s_graph_imp_status_title = 'Суммарный график по состоянию';
+$s_graph_imp_priority_title = 'Суммарный график по приоритету';
 $s_graph_imp_severity_title = 'Суммарный график по серьезности';
 $s_graph_imp_category_title = 'Суммарный график по категориям';
 $s_graph_imp_resolution_title = 'Суммарный график по решению';
@@ -221,7 +221,7 @@ $s_printing_preferences_title = 'Выберите поля для печати';
 $s_printing_options_link = 'параметры печати';
 
 # word and excel export
-$s_bugnote_title = 'Автор комментария' ;
+$s_bugnote_title = 'Автор комментария';
 $s_bugnote_date = 'Дата комментария';
 $s_bugnote_description = 'Текст комментария';
 
@@ -1361,11 +1361,11 @@ $s_email_on_relationship_changed = 'Извещать при изменении связей';
 $s_loading = 'Загрузка...';
 
 # filter_api.php
-$s_between_date = 'между' ;
-$s_on_or_before_date = 'на дату или до' ;
-$s_before_date = 'до' ;
-$s_after_date = 'после' ;
-$s_on_or_after_date = 'на дату или после' ;
+$s_between_date = 'между';
+$s_on_or_before_date = 'на дату или до';
+$s_before_date = 'до';
+$s_after_date = 'после';
+$s_on_or_after_date = 'на дату или после';
 
 # Date constants
 $s_from_date = 'с';

@@ -144,13 +144,13 @@ $s_set_sticky_bugs_conf_msg = 'チケットにStickyを設定/解除してよろ
 $s_fixed_in_version_bugs_conf_msg = '修正済バージョン';
 $s_target_version_bugs_conf_msg = '修正予定バージョン';
 $s_close_group_bugs_button = 'チケットの完了';
-$s_delete_group_bugs_button = 'チケットの削除' ;
+$s_delete_group_bugs_button = 'チケットの削除';
 $s_move_group_bugs_button = 'チケットの移動';
-$s_copy_group_bugs_button = 'チケットコピー' ;
+$s_copy_group_bugs_button = 'チケットコピー';
 $s_assign_group_bugs_button = 'チケットの割り当て';
 $s_resolve_group_bugs_button = 'チケットの実装';
-$s_priority_group_bugs_button = '重要度の更新' ;
-$s_status_group_bugs_button = 'ステータスの更新' ;
+$s_priority_group_bugs_button = '重要度の更新';
+$s_status_group_bugs_button = 'ステータスの更新';
 $s_category_group_bugs_button = 'カテゴリの更新';
 $s_view_status_group_bugs_button = '公開更新';
 $s_set_sticky_group_bugs_button = 'Stickyの設定/解除';
@@ -195,7 +195,7 @@ $s_printing_preferences_title = '印刷する項目を選択してください�
 $s_printing_options_link = '印刷オプション';
 
 # word and excel export
-$s_bugnote_title = 'コメント登録者' ;
+$s_bugnote_title = 'コメント登録者';
 $s_bugnote_date = 'コメント登録年月日';
 $s_bugnote_description = 'コメント内容';
 
@@ -1360,11 +1360,11 @@ $s_email_on_relationship_changed = '関連の変更通知メール';
 $s_loading = 'ロード中...';
 
 # filter_api.php
-$s_between_date = '期間' ;
-$s_on_or_before_date = '以前(当該日を含む)' ;
-$s_before_date = 'より前(当該日を含まない)' ;
-$s_after_date = 'より後(当該日を含まない)' ;
-$s_on_or_after_date = '以降(当該日を含む)' ;
+$s_between_date = '期間';
+$s_on_or_before_date = '以前(当該日を含む)';
+$s_before_date = 'より前(当該日を含まない)';
+$s_after_date = 'より後(当該日を含まない)';
+$s_on_or_after_date = '以降(当該日を含む)';
 
 # Date constants
 $s_from_date = '差出人';

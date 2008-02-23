@@ -136,21 +136,21 @@ $s_status_bugs_conf_msg = 'Status wijzigen naar';
 $s_view_status_bugs_conf_msg = 'Zichtbaarheid wijzigen naar';
 $s_category_bugs_conf_msg = 'Categorie wijzigen naar';
 $s_set_sticky_bugs_conf_msg = 'Weet u zeker dat u voor deze meldingen sticky wilt in- of uitschakelen?';
-$s_close_group_bugs_button = 'Meldingen sluiten' ;
-$s_delete_group_bugs_button = 'Meldingen verwijderen' ;
-$s_move_group_bugs_button = 'Meldingen verplaatsen' ;
-$s_copy_group_bugs_button = 'Meldingen kopiëren' ;
-$s_assign_group_bugs_button = 'Meldingen toewijzen' ;
-$s_resolve_group_bugs_button = 'Meldingen afmelden' ;
-$s_priority_group_bugs_button = 'Prioriteit wijzigen' ;
-$s_status_group_bugs_button = 'Status wijzigen' ;
+$s_close_group_bugs_button = 'Meldingen sluiten';
+$s_delete_group_bugs_button = 'Meldingen verwijderen';
+$s_move_group_bugs_button = 'Meldingen verplaatsen';
+$s_copy_group_bugs_button = 'Meldingen kopiëren';
+$s_assign_group_bugs_button = 'Meldingen toewijzen';
+$s_resolve_group_bugs_button = 'Meldingen afmelden';
+$s_priority_group_bugs_button = 'Prioriteit wijzigen';
+$s_status_group_bugs_button = 'Status wijzigen';
 $s_category_group_bugs_button = 'Categorie wijzigen';
 $s_view_status_group_bugs_button = 'Zichtbaarheid wijzigen';
 $s_set_sticky_group_bugs_button = 'Sticky in- of uitschakelen';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Overzicht grafieken: Status' ;
-$s_graph_imp_priority_title = 'Overzicht grafieken: Prioriteit' ;
+$s_graph_imp_status_title = 'Overzicht grafieken: Status';
+$s_graph_imp_priority_title = 'Overzicht grafieken: Prioriteit';
 $s_graph_imp_severity_title = 'Overzicht grafieken: Impact';
 $s_graph_imp_category_title = 'Overzicht grafieken: Categorie';
 $s_graph_imp_resolution_title = 'Overzicht grafieken: Oplossing';
@@ -1324,11 +1324,11 @@ $s_email_on_relationship_changed = 'E-mail bij wijziging relaties';
 $s_loading = 'Laden...';
 
 # filter_api.php
-$s_between_date = 'Tussen' ;
-$s_on_or_before_date = 'Op of voor' ;
-$s_before_date = 'Voor' ;
-$s_after_date = 'Na' ;
-$s_on_or_after_date = 'Op of na' ;
+$s_between_date = 'Tussen';
+$s_on_or_before_date = 'Op of voor';
+$s_before_date = 'Voor';
+$s_after_date = 'Na';
+$s_on_or_after_date = 'Op of na';
 
 # Date constants
 $s_from_date = 'Van';
