@@ -576,7 +576,7 @@ $s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 
 # bug_reminder_page.php
 $s_from = 'Von';
-$s_to = 'Bis';
+$s_to = 'An';
 $s_sent_you_this_reminder_about = 'hat Ihnen diese Erinnerung bezüglich des folgenden Problems gesandt';
 $s_bug_reminder = 'Erinnerung senden';
 $s_reminder_sent_to = 'Erinnerung gesendet an';
