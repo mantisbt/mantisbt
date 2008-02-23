@@ -128,14 +128,14 @@
 				}
 			}
 		} else {
-		if ( is_string( $p_var ) && is_string( $p_val ) ) {
-			if ( $p_var === $p_val ) {
+			if ( is_string( $p_var ) && is_string( $p_val ) ) {
+				if ( $p_var === $p_val ) {
+					PRINT ' selected="selected" ';
+					return ; 
+				}
+			} else if ( $p_var == $p_val ) {
 				PRINT ' selected="selected" ';
 				return ; 
-			}
-		} else if ( $p_var == $p_val ) {
-			PRINT ' selected="selected" ';
-			return ; 
 			}
 		}
 	}
