@@ -548,7 +548,6 @@ $s_bugnote_add_resolve_button = 'Opmerking toevoegen';
 # bug_reminder_page.php
 $s_from = 'Van';
 $s_to = 'Naar';
-$s_on = 'Op';
 $s_sent_you_this_reminder_about = 'stuurde u deze herinnering over';
 $s_bug_reminder = 'Stuur herinnering';
 $s_reminder_sent_to = 'Herinnering verstuurd aan';
@@ -1325,12 +1324,21 @@ $s_email_on_relationship_changed = 'E-mail bij wijziging relaties';
 $s_loading = 'Laden...';
 
 # filter_api.php
-$s_between = 'Tussen' ;
-$s_on_or_before = 'Op of voor' ;
-$s_before = 'Voor' ;
-$s_after = 'Na' ;
-$s_on_or_after = 'Op of na' ;
+$s_between_date = 'Tussen' ;
+$s_on_or_before_date = 'Op of voor' ;
+$s_before_date = 'Voor' ;
+$s_after_date = 'Na' ;
+$s_on_or_after_date = 'Op of na' ;
+
+# Date constants
+$s_from_date = 'Van';
+$s_to_date = 'Naar';
+$s_on_date = 'Op';
+
+# Switch constants
+$s_on = 'Op';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

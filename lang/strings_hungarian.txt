@@ -31,7 +31,7 @@
 	# $Author: vboctor $
 	# $Date: 2006/05/07 05:56:22 $
 	#
-	# $Id: strings_hungarian.txt,v 1.267.10.1 2006/05/07 05:56:22 vboctor Exp $
+	# $Id$
 	###########################################################################
 
 ?>
@@ -570,7 +570,6 @@ $s_bugnote_add_resolve_button = 'Megjegyzés hozzáadása';
 # bug_reminder_page.php
 $s_from = 'Feladó';
 $s_to = 'Címzett';
-$s_on = '';
 $s_sent_you_this_reminder_about = 'küldte Önnek ezt az emlékeztetőt a következőről:';
 $s_bug_reminder = 'Emlékeztető küldése';
 $s_reminder_sent_to = 'Emlékeztető elküldve a következőnek:';
@@ -1365,11 +1364,19 @@ $s_email_on_relationship_changed = 'Értesítés kapcsolat változásakor';
 $s_loading = 'Betöltés...';
 
 # filter_api.php
-$s_between = 'A következők között:' ;
-$s_on_or_before = 'A következőkor vagy előtte:' ;
-$s_before = 'A következő előtt:' ;
-$s_after = 'A következő után:' ;
-$s_on_or_after = 'A következőkor vagy utána:' ;
+$s_between_date = 'A következők között:' ;
+$s_on_or_before_date = 'A következőkor vagy előtte:' ;
+$s_before_date = 'A következő előtt:' ;
+$s_after_date = 'A következő után:' ;
+$s_on_or_after_date = 'A következőkor vagy utána:' ;
+
+# Date constants
+$s_from_date = 'Ettől:';
+$s_to_date = 'Eddig:';
+$s_on_date = '';
+
+# Switch constants
+$s_on = '';
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1413,8 +1420,6 @@ $s_time_tracking_get_info_button = 'Időkövetési információk megtekintése';
 $s_time_tracking_cost_per_hour = 'Óradíj';
 $s_time_tracking_cost = 'Költség';
 $s_total_time_for_issue = 'Ügyre fordított összes idő = %s';
-$s_from_date = 'Ettől:';
-$s_to_date = 'Eddig:';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 

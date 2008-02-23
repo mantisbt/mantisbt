@@ -559,7 +559,6 @@ $s_bugnote_add_resolve_button = '添加问题注释';
 # bug_reminder_page.php
 $s_from = '从';
 $s_to = '到';
-$s_on = '在';
 $s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
 $s_bug_reminder = '问题提醒';
 $s_reminder_sent_to = '发送提醒';
@@ -1343,11 +1342,19 @@ $s_email_on_relationship_changed = '关联改变时发送 Email';
 $s_loading = '正在载入...';
 
 # filter_api.php
-$s_between = '介于' ;
-$s_on_or_before = '等于或者早于' ;
-$s_before = '早于' ;
-$s_after = '晚于' ;
-$s_on_or_after = '等于或者晚于' ;
+$s_between_date = '介于' ;
+$s_on_or_before_date = '等于或者早于' ;
+$s_before_date = '早于' ;
+$s_after_date = '晚于' ;
+$s_on_or_after_date = '等于或者晚于' ;
+
+# Date constants
+$s_from_date = '从';
+$s_to_date = '到';
+$s_on_date = '在';
+
+# Switch constants
+$s_on = '在';
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1359,8 +1366,6 @@ $s_time_tracking_get_info_button = '获取时间跟踪信息';
 $s_time_tracking_cost_per_hour = '每小时成本';
 $s_time_tracking_cost = '成本';
 $s_total_time_for_issue = '问题 %s 共计花费时间';
-$s_from_date = '从';
-$s_to_date = '到';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 ?>

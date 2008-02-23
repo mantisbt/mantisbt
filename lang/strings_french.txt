@@ -578,7 +578,6 @@ $s_bugnote_add_resolve_button = 'Ajouter la note';
 # bug_reminder_page.php
 $s_from = 'De';
 $s_to = 'A';
-$s_on = 'Sujet';
 $s_sent_you_this_reminder_about = 'vous a envoyé un rappel à propos de';
 $s_bug_reminder = 'Envoyer un rappel';
 $s_reminder_sent_to = 'Rappel envoyé à';
@@ -1372,11 +1371,19 @@ $s_email_on_relationship_changed = 'Courriel au changement d\'une relation';
 $s_loading = 'Chargement en cours...';
 
 # filter_api.php
-$s_between = 'Entre';
-$s_on_or_before = 'Pendant ou avant'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou avant ???
-$s_before = 'Avant';
-$s_after = 'Après';
-$s_on_or_after = 'Pendant ou après'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou après ???
+$s_between_date = 'Entre';
+$s_on_or_before_date = 'Pendant ou avant'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou avant ???
+$s_before_date = 'Avant';
+$s_after_date = 'Après';
+$s_on_or_after_date = 'Pendant ou après'; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Le ou après ???
+
+# Date constants
+$s_from_date = 'De';
+$s_to_date = 'A';
+$s_on_date = 'Sujet';
+
+# Switch constants
+$s_on = 'Sujet';
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1420,8 +1427,6 @@ $s_time_tracking_get_info_button = 'Obtenir l\'information sur le suivi du temps
 $s_time_tracking_cost_per_hour = 'Coût à l\'heure';
 $s_time_tracking_cost = 'Coût';
 $s_total_time_for_issue = 'Temps total pour le bogue = %s';
-$s_from_date = 'De';
-$s_to_date = 'A';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED]; # @@@ (leblancma) TRADUCTION A VÉRIFIER ***** Doit-on traduire
 
@@ -1455,4 +1460,5 @@ $s_show_as_table = 'Afficher en tableau';
 $s_show_graph = 'Afficher graphique';
 $s_graph_page = 'Afficher graphique de l\'historique';
 $s_graph_bug_page_link = 'Graphique';
+
 ?>

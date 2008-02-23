@@ -906,7 +906,7 @@
 			} else {
 				$t_sender_email = '';
 			}
-			$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender $t_sender_email " .
+			$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " .
 						lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
 			$t_contents = $t_header .
 							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .

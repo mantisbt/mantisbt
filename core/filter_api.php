@@ -2615,27 +2615,27 @@
 								$t_values .= lang_get( 'none' ) ;
 								break;
 							case CUSTOM_FIELD_DATE_BETWEEN:
-								$t_values .= lang_get( 'between' ) . '<br />';
+								$t_values .= lang_get( 'between_date' ) . '<br />';
 								$t_values .= $t_start . '<br />' . $t_end;
 								break;
 							case CUSTOM_FIELD_DATE_ONORBEFORE:
-								$t_values .= lang_get( 'on_or_before' ) . '<br />';
+								$t_values .= lang_get( 'on_or_before_date' ) . '<br />';
 								$t_values .= $t_end;
 								break;
 							case CUSTOM_FIELD_DATE_BEFORE:
-								$t_values .= lang_get( 'before' ) . '<br />';
+								$t_values .= lang_get( 'before_date' ) . '<br />';
 								$t_values .= $t_end;
 								break;
 							case CUSTOM_FIELD_DATE_ON:
-								$t_values .= lang_get( 'on' ) . '<br />';
+								$t_values .= lang_get( 'on_date' ) . '<br />';
 								$t_values .= $t_start;
 								break;
 							case CUSTOM_FIELD_DATE_AFTER:
-								$t_values .= lang_get( 'after' ) . '<br />';
+								$t_values .= lang_get( 'after_date' ) . '<br />';
 								$t_values .= $t_start;
 								break ;
 							case CUSTOM_FIELD_DATE_ONORAFTER:
-								$t_values .= lang_get( 'on_or_after' ) . '<br />';
+								$t_values .= lang_get( 'on_or_after_date' ) . '<br />';
 								$t_values .= $t_start;
 								break ;
 							}
@@ -3957,22 +3957,22 @@
 			echo '>' . lang_get( 'none' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
-			echo '>' . lang_get( 'between' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'between_date' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
-			echo '>' . lang_get( 'on_or_before' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'on_or_before_date' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
-			echo '>' . lang_get( 'before' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'before_date' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
-			echo '>' . lang_get( 'on' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'on_date' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
-			echo '>' . lang_get( 'after' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'after_date' ) . '</option>' . "\n";
 		echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
 			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER	);
-			echo '>' . lang_get( 'on_or_after' ) . '</option>' . "\n";
+			echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 		echo '</select>' . "\n";
 
 		echo "</td></tr>\n<tr><td>";

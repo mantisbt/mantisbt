@@ -555,7 +555,6 @@ $s_bugnote_add_resolve_button = ' معلومات کو جمعع کرو  ';
 # bug_reminder_page.php
 $s_from = ' سے';
 $s_to = '	 کے لۓ';
-$s_on = 'پر';
 $s_sent_you_this_reminder_about = 'یہ یاد دلانے والہ آپ کو بھیجا گیا اس کے متعلق';
 $s_bug_reminder = 'یاد دلانے والہ بھیج دو';
 $s_reminder_sent_to = 'یاد دلانے والہ بھیجا ھے کی طرف  ';
@@ -1339,11 +1338,19 @@ $s_email_on_relationship_changed = ' تعلق بد لنے پر ای میل';
 $s_loading = 'لوڈنگ...';
 
 # filter_api.php
-$s_between = 'درمیان' ;
-$s_on_or_before = 'پر یا پہلے' ;
-$s_before = 'پہلے' ;
-$s_after = 'بعد' ;
-$s_on_or_after = 'پر یا بعد' ;
+$s_between_date = 'درمیان' ;
+$s_on_or_before_date = 'پر یا پہلے' ;
+$s_before_date = 'پہلے' ;
+$s_after_date = 'بعد' ;
+$s_on_or_after_date = 'پر یا بعد' ;
+
+# Date constants
+$s_from_date = 'اس سے ';
+$s_to_date = 'کی طرف';
+$s_on_date = 'پر';
+
+# Switch constants
+$s_on = 'پر';
 
 # wiki related strings
 $s_wiki = 'ویکی';
@@ -1355,8 +1362,7 @@ $s_time_tracking_get_info_button = '  وقت کی ٹریکنگ کی معلوما
 $s_time_tracking_cost_per_hour = 'قیمت / گھنٹہ';
 $s_time_tracking_cost = ' قیمت ';
 $s_total_time_for_issue = 'تمام وقت ایشوذ کے لیے  = %ایس';
-$s_from_date = 'اس سے ';
-$s_to_date = 'کی طرف';
 
 $s_access_denied = ' مینٹس کی غلطی[غلطی کی رسای منظور نہی ھوی]$ ';
+
 ?>

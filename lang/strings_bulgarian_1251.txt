@@ -544,7 +544,6 @@ $s_bugnote_add_resolve_button = 'Добавяне на бележка';
 # bug_reminder_page.php
 $s_from = 'От';
 $s_to = 'За';
-$s_on = 'На';
 $s_sent_you_this_reminder_about = 'Ви изпрати това напомнящо съобщение във връзка с ';
 $s_bug_reminder = 'Изпращане на напомнящо съобщение';
 $s_reminder_sent_to = 'Напомнящо съобщение изпратено на';
@@ -1316,12 +1315,21 @@ $s_email_on_relationship_changed = 'Изпращане на еmail при смяна на релацията';
 $s_loading = 'Зареждане...';
 
 # filter_api.php
-$s_between = 'Между' ;
-$s_on_or_before = 'Върху или Преди' ;
-$s_before = 'Преди' ;
-$s_after = 'След' ;
-$s_on_or_after = 'Върху или След' ;
+$s_between_date = 'Между' ;
+$s_on_or_before_date = 'Върху или Преди' ;
+$s_before_date = 'Преди' ;
+$s_after_date = 'След' ;
+$s_on_or_after_date = 'Върху или След' ;
+
+# Date constants
+$s_from_date = 'От';
+$s_to_date = 'За';
+$s_on_date = 'На';
+
+# Switch constants
+$s_on = 'На';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

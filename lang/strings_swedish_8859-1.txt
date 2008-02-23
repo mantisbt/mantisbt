@@ -543,7 +543,6 @@ $s_bugnote_add_resolve_button = 'Lägg till meddelande och lös ärendet';
 # bug_reminder_page.php
 $s_from = 'Från';
 $s_to = 'Till';
-$s_on = 'Den';
 $s_sent_you_this_reminder_about = ' har skickat denna påminnelse till dig angående';
 $s_bug_reminder = 'Skicka en påminnelse';
 $s_reminder_sent_to = 'Påminnelse skickad till';
@@ -1315,12 +1314,21 @@ $s_email_on_relationship_changed = 'E-post vid ändring av förhållande';
 $s_loading = 'Laddar...';
 
 # filter_api.php
-$s_between = 'Mellan' ;
-$s_on_or_before = 'Till och med' ;
-$s_before = 'Före' ;
-$s_after = 'Efter' ;
-$s_on_or_after = 'Från och med' ;
+$s_between_date = 'Mellan' ;
+$s_on_or_before_date = 'Till och med' ;
+$s_before_date = 'Före' ;
+$s_after_date = 'Efter' ;
+$s_on_or_after_date = 'Från och med' ;
+
+# Date constants
+$s_from_date = 'Från';
+$s_to_date = 'Till';
+$s_on_date = 'Den';
+
+# Switch constants
+$s_on = 'Den';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

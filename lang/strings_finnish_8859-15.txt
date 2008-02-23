@@ -545,7 +545,6 @@ $s_bugnote_add_resolve_button = 'Lisää muistiinpano';
 # bug_reminder_page.php
 $s_from = 'Keneltä';
 $s_to = 'Kenelle';
-$s_on = 'Milloin';
 $s_sent_you_this_reminder_about = 'lähetti sinulle muistutuksen seuraavasta asiasta';
 $s_bug_reminder = 'Lähetä muistutus';
 $s_reminder_sent_to = 'Muistutus lähetetty';
@@ -1317,12 +1316,21 @@ $s_email_on_relationship_changed = 'Sähköpostia, kun tapahtuman relaatioita muok
 $s_loading = 'Ladataan...';
 
 # filter_api.php
-$s_between = 'Välillä' ;
-$s_on_or_before = 'Tällöin tai ennen' ;
-$s_before = 'Ennen' ;
-$s_after = 'Jälkeen' ;
-$s_on_or_after = 'Tällöin tai jälkeen' ;
+$s_between_date = 'Välillä' ;
+$s_on_or_before_date = 'Tällöin tai ennen' ;
+$s_before_date = 'Ennen' ;
+$s_after_date = 'Jälkeen' ;
+$s_on_or_after_date = 'Tällöin tai jälkeen' ;
+
+# Date constants
+$s_from_date = 'Keneltä';
+$s_to_date = 'Kenelle';
+$s_on_date = 'Milloin';
+
+# Switch constants
+$s_on = 'Milloin';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

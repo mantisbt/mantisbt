@@ -545,7 +545,6 @@ $s_bugnote_add_resolve_button = 'コメント追加';
 # bug_reminder_page.php
 $s_from = '差出人';
 $s_to = '宛先';
-$s_on = '日時';
 $s_sent_you_this_reminder_about = 'が、次のリマインダーをあなたに送信しました。';
 $s_bug_reminder = 'リマインダー送信';
 $s_reminder_sent_to = 'リマインダーの送信';
@@ -1317,12 +1316,21 @@ $s_email_on_relationship_changed = '関連の変更通知メール';
 $s_loading = 'ロード中...';
 
 # filter_api.php
-$s_between = '期間' ;
-$s_on_or_before = '以前(当該日を含む)' ;
-$s_before = 'より前(当該日を含まない)' ;
-$s_after = 'より後(当該日を含まない)' ;
-$s_on_or_after = '以降(当該日を含む)' ;
+$s_between_date = '期間' ;
+$s_on_or_before_date = '以前(当該日を含む)' ;
+$s_before_date = 'より前(当該日を含まない)' ;
+$s_after_date = 'より後(当該日を含まない)' ;
+$s_on_or_after_date = '以降(当該日を含む)' ;
+
+# Date constants
+$s_from_date = '差出人';
+$s_to_date = '宛先';
+$s_on_date = '日時';
+
+# Switch constants
+$s_on = '日時';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

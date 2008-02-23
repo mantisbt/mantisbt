@@ -544,7 +544,6 @@ $s_bugnote_add_resolve_button = 'Adicionar Nota';
 # bug_reminder_page.php
 $s_from = 'De';
 $s_to = 'Para';
-$s_on = 'Em';
 $s_sent_you_this_reminder_about = 'enviou-lhe este Aviso acerca de';
 $s_bug_reminder = 'Enviar um e-mail de Aviso';
 $s_reminder_sent_to = 'Aviso enviado a';
@@ -1316,12 +1315,21 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between_date = 'Between' ;
+$s_on_or_before_date = 'On Or Before' ;
+$s_before_date = 'Before' ;
+$s_after_date = 'After' ;
+$s_on_or_after_date = 'On Or After' ;
+
+# Date constants
+$s_from_date = 'De';
+$s_to_date = 'Para';
+$s_on_date = 'Em';
+
+# Switch constants
+$s_on = 'Em';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

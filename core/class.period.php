@@ -88,12 +88,12 @@ function get_text_clause () {
 			$t_clause = lang_get( 'all_dates' );
 		} else {
 			list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
-			$t_clause = lang_get( 'before' ) . ' ' . $t_end_date;
+			$t_clause = lang_get( 'before_date' ) . ' ' . $t_end_date;
 		}
 	} else {
 		list( $t_start_date, $t_start_time ) = split( ' ', $this->start );
 		if ( '' == $this->end ) {
-			$t_clause = lang_get( 'after' ) . ' ' . $t_start_date;
+			$t_clause = lang_get( 'after_date' ) . ' ' . $t_start_date;
 		} else {
 			list( $t_end_date, $t_end_time ) = split( ' ', $this->end );
 			$t_clause = lang_get( 'from_date' ) . ' ' . $t_start_date . ' ' . lang_get( 'to_date' ) . ' ' . $t_end_date;

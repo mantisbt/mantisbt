@@ -567,7 +567,6 @@ $s_bugnote_add_resolve_button = "Inserisci nota";
 # bug_reminder_page.php
 $s_from = "Da";
 $s_to = "A";
-$s_on = "Il";
 $s_sent_you_this_reminder_about = "ti invia questo memorandum a proposito dell'anomalia";
 $s_bug_reminder = "Invia un memorandum";
 $s_reminder_sent_to = "Inviato memorandum a";
@@ -1360,11 +1359,19 @@ $s_email_on_relationship_changed = "Email su variazione delle relazioni";
 $s_loading = "In caricamento...";
 
 # filter_api.php
-$s_between = "Tra";
-$s_on_or_before = "Il o prima del";
-$s_before = "Prima del";
-$s_after = "Dopo il";
-$s_on_or_after = "Il o dopo il";
+$s_between_date = "Tra";
+$s_on_or_before_date = "Il o prima del";
+$s_before_date = "Prima del";
+$s_after_date = "Dopo il";
+$s_on_or_after_date = "Il o dopo il";
+
+# Date constants
+$s_from_date = "Dal";
+$s_to_date = "Al";
+$s_on_date = "Il";
+
+# Switch constants
+$s_on = "Il";
 
 # wiki related strings
 $s_wiki = "Wiki";
@@ -1408,8 +1415,6 @@ $s_time_tracking_get_info_button = "Informazioni sulle tempistiche";
 $s_time_tracking_cost_per_hour = "Costo orario";
 $s_time_tracking_cost = "Costo";
 $s_total_time_for_issue = "Tempo totale speso sull'anomalia = %s";
-$s_from_date = "Dal";
-$s_to_date = "Al";
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 

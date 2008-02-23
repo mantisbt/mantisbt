@@ -544,7 +544,6 @@ $s_bugnote_add_resolve_button = 'Lisa märkus';
 # bug_reminder_page.php
 $s_from = 'Saatja';
 $s_to = 'Adressaat';
-$s_on = 'Aeg';
 $s_sent_you_this_reminder_about = 'saatis Sulle järgmise meeldetuletuse';
 $s_bug_reminder = 'Saada meeldetuletus';
 $s_reminder_sent_to = 'Meeldetuletus saadetud';
@@ -1316,12 +1315,21 @@ $s_email_on_relationship_changed = 'E-post suguluse muutmisel';
 $s_loading = 'Laen...';
 
 # filter_api.php
-$s_between = 'Vahel';
-$s_on_or_before = 'Praegu või peale';
-$s_before = 'Enne';
-$s_after = 'Peale';
-$s_on_or_after = 'Praegu või enne';
+$s_between_date = 'Vahel';
+$s_on_or_before_date = 'Praegu või peale';
+$s_before_date = 'Enne';
+$s_after_date = 'Peale';
+$s_on_or_after_date = 'Praegu või enne';
+
+# Date constants
+$s_from_date = 'Saatja';
+$s_to_date = 'Adressaat';
+$s_on_date = 'Aeg';
+
+# Switch constants
+$s_on = 'Aeg';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

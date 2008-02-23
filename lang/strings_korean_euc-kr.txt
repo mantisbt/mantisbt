@@ -547,7 +547,6 @@ $s_bugnote_add_resolve_button = '이슈노트 추가';
 # bug_reminder_page.php
 $s_from = '보낸 사람';
 $s_to = '받는 사람';
-$s_on = '발송일 : ';
 $s_sent_you_this_reminder_about = ' 당신에게 아래와 같은 알림 메일이 발송 되었습니다.';
 $s_bug_reminder = '알림 메일 보내기';
 $s_reminder_sent_to = '알림 메일이 다음 사람에게 발송 되었습니다 : ';
@@ -1319,12 +1318,21 @@ $s_email_on_relationship_changed = '관계 변경에 대한 Email';
 $s_loading = '불러오는 중...';
 
 # filter_api.php
-$s_between = '사이' ;
-$s_on_or_before = '동안 또는 이전' ;
-$s_before = '이전' ;
-$s_after = '이후' ;
-$s_on_or_after = '동안 또는 이후' ;
+$s_between_date = '사이' ;
+$s_on_or_before_date = '동안 또는 이전' ;
+$s_before_date = '이전' ;
+$s_after_date = '이후' ;
+$s_on_or_after_date = '동안 또는 이후' ;
+
+# Date constants
+$s_from_date = '보낸 사람';
+$s_to_date = '받는 사람';
+$s_on_date = '발송일 : ';
+
+# Switch constants
+$s_on = '발송일 : ';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

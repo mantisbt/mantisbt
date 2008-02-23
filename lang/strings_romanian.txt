@@ -538,7 +538,6 @@ $s_bugnote_add_resolve_button = 'Adaugă comentariu';
 # bug_reminder_page.php
 $s_from = 'From';
 $s_to = 'To';
-$s_on = 'On';
 $s_sent_you_this_reminder_about = 'ţi-a trimis această notificare despre';
 $s_bug_reminder = 'Trimite o notificare';
 $s_reminder_sent_to = 'Notificare trimisă către';
@@ -1310,12 +1309,21 @@ $s_email_on_relationship_changed = 'Trimite e-mail la schimbarea realţionării'
 $s_loading = 'Încarcă...';
 
 # filter_api.php
-$s_between = 'Între' ;
-$s_on_or_before = 'În sau înainte' ;
-$s_before = 'Înainte' ;
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between_date = 'Între' ;
+$s_on_or_before_date = 'În sau înainte' ;
+$s_before_date = 'Înainte' ;
+$s_after_date = 'After' ;
+$s_on_or_after_date = 'On Or After' ;
+
+# Date constants
+$s_from_date = 'From';
+$s_to_date = 'To';
+$s_on_date = 'On';
+
+# Switch constants
+$s_on = 'On';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

@@ -542,7 +542,6 @@ $s_bugnote_add_resolve_button = 'שמירה';
 # bug_reminder_page.php
 $s_from = 'מאת';
 $s_to = 'אל';
-$s_on = 'בתאריך';
 $s_sent_you_this_reminder_about = 'שלח/ה אליך תזכורת זו בנוגע ל';
 $s_bug_reminder = 'שליחת תזכורת';
 $s_reminder_sent_to = 'תזכורת נשלחה אל';
@@ -1314,13 +1313,21 @@ $s_email_on_relationship_changed = 'שינוי קשר בין באגים';
 $s_loading = 'טעינה...';
 
 # filter_api.php
-$s_between = 'בין' ;
-$s_on_or_before = 'עד וכולל' ;
-$s_before = 'לפני' ;
-# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
-$s_after = 'אחרי' ;
-$s_on_or_after = 'החל מ-' ;
+$s_between_date = 'בין' ;
+$s_on_or_before_date = 'עד וכולל' ;
+$s_before_date = 'לפני' ;
+$s_after_date = 'אחרי' ;
+$s_on_or_after_date = 'החל מ-' ;
+
+# Date constants
+$s_from_date = 'מאת';
+$s_to_date = 'אל';
+$s_on_date = 'בתאריך';
+
+# Switch constants
+$s_on = 'בתאריך';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

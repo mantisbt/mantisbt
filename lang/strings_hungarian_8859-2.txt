@@ -545,7 +545,6 @@ $s_bugnote_add_resolve_button = 'Új megjegyzés';
 # bug_reminder_page.php
 $s_from = 'Feladó';
 $s_to = 'Címzett';
-$s_on = 'On';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Emlékeztetõ küldése';
 $s_reminder_sent_to = 'Emlékeztetõt küld ';
@@ -1317,12 +1316,21 @@ $s_email_on_relationship_changed = 'E-mail kapcsolat változáskor';
 $s_loading = 'Loading...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between_date = 'Between' ;
+$s_on_or_before_date = 'On Or Before' ;
+$s_before_date = 'Before' ;
+$s_after_date = 'After' ;
+$s_on_or_after_date = 'On Or After' ;
+
+# Date constants
+$s_from_date = 'Feladó';
+$s_to_date = 'Címzett';
+$s_on_date = 'On';
+
+# Switch constants
+$s_on = 'On';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

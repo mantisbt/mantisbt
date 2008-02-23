@@ -579,8 +579,6 @@ $s_bugnote_add_resolve_button = 'Agregar Nota';
 # bug_reminder_page.php
 $s_from = 'De';
 $s_to = 'Para';
-$s_on = 'El';
-$s_off = 'Off'; # Sin traducción por el momento (no estoy seguro dónde se usa)
 $s_sent_you_this_reminder_about = 'le ha enviado este recordatorio acerca de';
 $s_bug_reminder = 'Enviar un recordatorio';
 $s_reminder_sent_to = 'Recordatorio enviado a';
@@ -1396,11 +1394,20 @@ $s_email_on_relationship_changed = 'Enviar correo en cambios sobre Relaciones';
 $s_loading = 'Cargando..';
 
 # filter_api.php
-$s_between = 'Entre';
-$s_on_or_before = 'Antes o Durante';
-$s_before = 'Antes';
-$s_after = 'Después';
-$s_on_or_after = 'Durante o Después';
+$s_between_date = 'Entre';
+$s_on_or_before_date = 'Antes o Durante';
+$s_before_date = 'Antes';
+$s_after_date = 'Después';
+$s_on_or_after_date = 'Durante o Después';
+
+# Date constants
+$s_from_date = 'Desde';
+$s_to_date = 'Hasta';
+$s_on_date = 'El';
+
+# Switch constants
+$s_on = 'El';
+$s_off = 'Off'; # Sin traducción por el momento (no estoy seguro dónde se usa)
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1444,8 +1451,6 @@ $s_time_tracking_get_info_button = 'Obtener información de seguimiento de tiemp
 $s_time_tracking_cost_per_hour = 'Costo/Hora';
 $s_time_tracking_cost = 'Costo';
 $s_total_time_for_issue = 'Tiempo total para la incidencia = %s';
-$s_from_date = 'Desde';
-$s_to_date = 'Hasta';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 

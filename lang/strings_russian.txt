@@ -590,7 +590,6 @@ $s_bugnote_add_resolve_button = 'Добавить комментарий';
 # bug_reminder_page.php
 $s_from = 'От';
 $s_to = 'Кому';
-$s_on = 'На';
 $s_sent_you_this_reminder_about = 'напоминает вам о вопросе';
 $s_bug_reminder = 'напомнить';
 $s_reminder_sent_to = 'Напоминание отправлено';
@@ -1373,11 +1372,19 @@ $s_email_on_relationship_changed = 'Извещать при изменении �
 $s_loading = 'Загрузка...';
 
 # filter_api.php
-$s_between = 'между' ;
-$s_on_or_before = 'на дату или до' ;
-$s_before = 'до' ;
-$s_after = 'после' ;
-$s_on_or_after = 'на дату или после' ;
+$s_between_date = 'между' ;
+$s_on_or_before_date = 'на дату или до' ;
+$s_before_date = 'до' ;
+$s_after_date = 'после' ;
+$s_on_or_after_date = 'на дату или после' ;
+
+# Date constants
+$s_from_date = 'с';
+$s_to_date = 'по';
+$s_on_date = 'На';
+
+# Switch constants
+$s_on = 'На';
 
 # wiki related strings
 $s_wiki = 'вики';
@@ -1421,6 +1428,5 @@ $s_time_tracking_get_info_button = 'Получить сведения об уч�
 $s_time_tracking_cost_per_hour = 'Цена / час';
 $s_time_tracking_cost = 'Цена';
 $s_total_time_for_issue = 'Общее время вопроса = %s';
-$s_from_date = 'с';
-$s_to_date = 'по';
+
 ?>

@@ -543,7 +543,6 @@ $s_bugnote_add_resolve_button = 'Bæta við athugasemd';
 # bug_reminder_page.php
 $s_from = 'Frá';
 $s_to = 'Til';
-$s_on = 'Á';
 $s_sent_you_this_reminder_about = 'sendi þetta minnisatriði um';
 $s_bug_reminder = 'Senda minnisatriði';
 $s_reminder_sent_to = 'Minnisatriði sent til';
@@ -1315,12 +1314,21 @@ $s_email_on_relationship_changed = 'Tölvupóstur um að tengsl hafi breyst';
 $s_loading = 'Hleðsla...';
 
 # filter_api.php
-$s_between = 'Between' ;
-$s_on_or_before = 'On Or Before' ;
-$s_before = 'Before' ;
-$s_after = 'After' ;
-$s_on_or_after = 'On Or After' ;
+$s_between_date = 'Between' ;
+$s_on_or_before_date = 'On Or Before' ;
+$s_before_date = 'Before' ;
+$s_after_date = 'After' ;
+$s_on_or_after_date = 'On Or After' ;
+
+# Date constants
+$s_from_date = 'Frá';
+$s_to_date = 'Til';
+$s_on_date = 'Á';
+
+# Switch constants
+$s_on = 'Á';
 
 # wiki related strings
 $s_wiki = 'Wiki';
+
 ?>

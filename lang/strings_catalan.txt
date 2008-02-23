@@ -566,7 +566,6 @@ $s_bugnote_add_resolve_button = "Afegeix Nota";
 # bug_reminder_page.php
 $s_from = "De";
 $s_to = "Per a";
-$s_on = "a";
 $s_sent_you_this_reminder_about = "li ha enviat aquest recordatori sobre";
 $s_bug_reminder = "Envia un recordatori";
 $s_reminder_sent_to = "Recordatori enviat a";
@@ -1360,11 +1359,19 @@ $s_email_on_relationship_changed = "Enviament de correu per canvis en Relacions"
 $s_loading = "Carregant...";
 
 # filter_api.php
-$s_between = "Entre";
-$s_on_or_before = "Durant o Abans";
-$s_before = "Abans";
-$s_after = "Després";
-$s_on_or_after = "Durant o Després";
+$s_between_date = "Entre";
+$s_on_or_before_date = "Durant o Abans";
+$s_before_date = "Abans";
+$s_after_date = "Després";
+$s_on_or_after_date = "Durant o Després";
+
+# Date constants
+$s_from_date = 'De';
+$s_to_date = 'A';
+$s_on_date = 'a';
+
+# Switch constants
+$s_on = "a";
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1415,8 +1422,6 @@ $s_time_tracking_get_info_button = 'Mostra Informació del Seguiment de Temps';
 $s_time_tracking_cost_per_hour = 'Cost / Hora';
 $s_time_tracking_cost = 'Cost';
 $s_total_time_for_issue = 'Temps total per comanda = %s';
-$s_from_date = 'De';
-$s_to_date = 'A';
 
 $s_access_denied = $MANTIS_ERROR[ERROR_ACCESS_DENIED];
 
