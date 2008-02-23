@@ -25,7 +25,7 @@ BOOK:=administration_guide
 #
 STYLE=stylesheet.dsl
 
-FILES:=$(BOOK).sgml $(wildcard *.sgml) $(STYLE) builddate
+FILES:=$(BOOK).sgml $(wildcard *.sgml) $(STYLE) build builddate
 
 IMAGES:=$(wildcard images/*.png)
 EPSS:=$(IMAGES:.png=.eps)
@@ -46,6 +46,9 @@ ps: $(BUILD_DIR)/$(BOOK).ps
 rtf: $(BUILD_DIR)/$(BOOK).rtf
 
 text: $(BUILD_DIR)/$(BOOK).txt
+
+$(BUILD_DIR):
+	mkdir -p $@
 
 builddate:
 	echo -n $$(LANG="en_US";date "+%e %B %Y") > $@
