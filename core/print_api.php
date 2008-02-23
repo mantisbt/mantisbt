@@ -1554,20 +1554,28 @@
 	#  that ends with []
 	# The names and values are passed through htmlspecialchars() before being displayed
 	function print_hidden_inputs( $p_assoc_array ) {
-		foreach ( $p_assoc_array as $key => $val ) {
-			$key = string_html_specialchars( $key );
-			if ( is_array( $val ) ) {
-				foreach ( $val as $val2 ) {
-					$val2 = string_html_specialchars( $val2 );
-					PRINT "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
-				}
-			} else {
-				$val = string_html_specialchars( $val );
-				PRINT "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
-			}
+		foreach ( $p_assoc_array as $t_key => $t_val ) {
+			print_hidden_input( $t_key, $t_val );
 		}
 	}
 
+	function print_hidden_input( $p_field_key, $p_field_val ) {
+		if ( is_array( $p_field_val ) ) {
+			foreach( $p_field_val AS $t_key=>$t_value ) {
+				if ( is_array( $t_value ) ) {
+					$t_key = string_html_specialchars( $t_key );
+					$t_field_key = $p_field_key . "[" . $t_key . "]";
+					print_hidden_input( $t_field_key, $t_value );
+				} else {
+					$t_field_key = $p_field_key . "[" . $t_key . "]";
+					print_hidden_input( $t_field_key, $t_value );
+				}
+			}
+		} else {
+			$t_val = string_html_specialchars( $p_field_val );
+			PRINT "<input type=\"hidden\" name=\"$p_field_key\" value=\"$t_val\" />\n";
+		}
+	}
 
 	#=============================
 	# Functions that used to be in html_api
