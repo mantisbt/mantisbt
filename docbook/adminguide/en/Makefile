@@ -10,10 +10,15 @@
 # - Images should be in png format
 # 
 
+# Output directory
+BUILD_DIR:=build
+
+# Installation directory
+INSTALL_DIR:=install
 
 # Book name: will be used to build the input filename ($BOOK.sgml)
 # and the output filename ($BOOK.html, $BOOK.pdf and so on)
-BOOK=administration_guide
+BOOK:=administration_guide
 
 # Stylesheet name. Original file from:
 # /usr/share/sgml/docbook/utils-0.6.11/docbook-utils.dsl
@@ -30,17 +35,17 @@ default: help
 all: html pdf
 #all: html html_onefile text pdf ps sgml.gz html.tar.gz
 
-html: $(BOOK)/$(BOOK).html 
+html: $(BUILD_DIR)/$(BOOK)/$(BOOK).html 
 
-html_onefile: $(BOOK).html
+html_onefile: $(BUILD_DIR)/$(BOOK).html
 
-pdf: $(BOOK).pdf
+pdf: $(BUILD_DIR)/$(BOOK).pdf
 
-ps: $(BOOK).ps
+ps: $(BUILD_DIR)/$(BOOK).ps
 
-rtf: $(BOOK).rtf
+rtf: $(BUILD_DIR)/$(BOOK).rtf
 
-text: $(BOOK).txt
+text: $(BUILD_DIR)/$(BOOK).txt
 
 builddate:
 	echo -n $$(LANG="en_US";date "+%e %B %Y") > $@
@@ -51,24 +56,24 @@ html.tar.gz: html
 		gzip -f $$i.tar; \
 	done; )
 
-$(BOOK)/$(BOOK).html: $(FILES) $(IMAGES)
-	jw -d $(STYLE)#html -f docbook -b html -o $(BOOK) $<
-	-cp -r images $(BOOK)/
+$(BUILD_DIR)/$(BOOK)/$(BOOK).html: $(FILES) $(IMAGES)
+	jw -d $(STYLE)#html -f docbook -b html -o $(BUILD_DIR)/$(BOOK) $<
+	-cp -r images $(BUILD_DIR)/$(BOOK)/
 
-$(BOOK).pdf: $(FILES) $(IMAGES)
-	jw -d $(STYLE)#print -f docbook -b pdf $<
+$(BUILD_DIR)/$(BOOK).pdf: $(FILES) $(IMAGES)
+	jw -d $(STYLE)#print -f docbook -b pdf -o $(BUILD_DIR) $<
 
-$(BOOK).html: $(FILES) $(IMAGES)
-	jw -d $(STYLE)#html -f docbook -b html -u $<
+$(BUILD_DIR)/$(BOOK).html: $(FILES) $(IMAGES)
+	jw -d $(STYLE)#html -f docbook -b html -o $(BUILD_DIR) -u $<
 	
-$(BOOK).ps: $(FILES) $(EPSS)
-	jw -d $(STYLE) -f docbook -b ps $<
+$(BUILD_DIR)/$(BOOK).ps: $(FILES) $(EPSS)
+	jw -d $(STYLE) -f docbook -b ps -o $(BUILD_DIR) $<
 
-$(BOOK).rtf: $(FILES) $(IMAGES)
-	jw -d $(STYLE) -f docbook -b rtf $<
+$(BUILD_DIR)/$(BOOK).rtf: $(FILES) $(IMAGES)
+	jw -d $(STYLE) -f docbook -b rtf -o $(BUILD_DIR) $<
 
-$(BOOK).txt: $(FILES)
-	jw -f docbook -b txt $<
+$(BUILD_DIR)/$(BOOK).txt: $(FILES)
+	jw -f docbook -b txt -o $(BUILD_DIR) $<
 
 # pattern rules to convert PNGs to EPS
 # 
@@ -76,15 +81,19 @@ $(BOOK).txt: $(FILES)
 	pngtopnm $< | pnmtops -noturn > $@
 
 
-.PHONY: valid clean dist help
+.PHONY: valid install clean dist help
 valid:
 	nsgmls -s $(BOOK).sgml
+
+install:
+	-mkdir -p $(INSTALL_DIR)
+	-cp -r $(BUILD_DIR)/$(BOOK) $(BUILD_DIR)/$(BOOK).pdf $(BUILD_DIR)/$(BOOK).html $(BUILD_DIR)/$(BOOK).ps $(BUILD_DIR)/$(BOOK).rtf $(BUILD_DIR)/$(BOOK).txt $(INSTALL_DIR)
 
 clean:
 	-$(RM) *.log *.dvi *.aux *.tex *.out
 	-$(RM) $(GENERATED_IMG) builddate
-	-$(RM) -r $(BOOK)
-	-$(RM) $(BOOK).html $(BOOK).ps $(BOOK).pdf $(BOOK).rtf $(BOOK).txt
+	-$(RM) -r $(BUILD_DIR)/$(BOOK)
+	-$(RM) $(BUILD_DIR)/$(BOOK).html $(BUILD_DIR)/$(BOOK).ps $(BUILD_DIR)/$(BOOK).pdf $(BUILD_DIR)/$(BOOK).rtf $(BUILD_DIR)/$(BOOK).txt
 
 # Rebuild everything
 dist: clean all
