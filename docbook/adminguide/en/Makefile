@@ -25,7 +25,7 @@ BOOK:=administration_guide
 #
 STYLE=stylesheet.dsl
 
-FILES:=$(BOOK).sgml $(wildcard *.sgml) $(STYLE) $(BUILD_DIR) $(BUILD_DIR)/images builddate
+FILES:=$(BOOK).sgml $(wildcard *.sgml) $(STYLE) $(BUILD_DIR) builddate
 
 IMAGES:=$(wildcard images/*.png)
 EPSS:=$(IMAGES:.png=.eps)
@@ -47,8 +47,8 @@ rtf: $(BUILD_DIR)/$(BOOK).rtf
 
 text: $(BUILD_DIR)/$(BOOK).txt
 
-$(BUILD_DIR) $(BUILD_DIR)/images:
-	mkdir -p $@/images
+$(BUILD_DIR):
+	mkdir -p $@
 
 builddate:
 	echo -n $$(LANG="en_US";date "+%e %B %Y") > $@
@@ -61,6 +61,7 @@ html.tar.gz: html
 
 $(BUILD_DIR)/$(BOOK)/$(BOOK).html: $(FILES) $(IMAGES)
 	jw -d $(STYLE)#html -f docbook -b html -o $(BUILD_DIR)/$(BOOK) $<
+	mkdir -p $(BUILD_DIR)/$(BOOK)/images
 	-cp images/* $(BUILD_DIR)/$(BOOK)/images/
 
 $(BUILD_DIR)/$(BOOK).pdf: $(FILES) $(IMAGES)
