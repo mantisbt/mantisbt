@@ -1505,6 +1505,7 @@
 		$p_bug_data->platform			= string_attribute( $p_bug_data->platform );
 		$p_bug_data->version			= string_attribute( $p_bug_data->version );
 		$p_bug_data->build				= string_attribute( $p_bug_data->build );
+		$p_bug_data->target_version		= string_attribute( $p_bug_data->target_version );
 		$p_bug_data->fixed_in_version	= string_attribute( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total	= string_attribute( $p_bug_data->sponsorship_total );
@@ -1529,6 +1530,7 @@
 		$p_bug_data->platform			= string_display_line( $p_bug_data->platform );
 		$p_bug_data->version			= string_display_line( $p_bug_data->version );
 		$p_bug_data->build				= string_display_line( $p_bug_data->build );
+		$p_bug_data->target_version		= string_display_line( $p_bug_data->target_version );
 		$p_bug_data->fixed_in_version	= string_display_line( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_display_line_links( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total	= string_display_line( $p_bug_data->sponsorship_total );
