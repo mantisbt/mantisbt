@@ -747,6 +747,7 @@
     		}
 			return $t_value;
 		} else {
+			error_parameters( $p_option );
 			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
 		}
 	}
