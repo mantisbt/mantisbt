@@ -18,7 +18,7 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 	# --------------------------------------------------------
-	# $Id: $
+	# $Id$
 	# --------------------------------------------------------
 
 	# Excel (2003 SP2 and above) export page
