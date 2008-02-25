@@ -330,6 +330,10 @@
 	define( 'ERROR_PLUGIN_ALREADY_INSTALLED', 2501 );
 	define( 'ERROR_PLUGIN_PAGE_NOT_FOUND', 2502 );
 
+	# ERROR_COLUMNS_*
+	define ( 'ERROR_COLUMNS_DUPLICATE',	2600 );
+	define ( 'ERROR_COLUMNS_INVALID',	2601 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM',	2);
@@ -423,6 +427,7 @@
 	define( 'COLUMNS_TARGET_VIEW_PAGE',   1 );
 	define( 'COLUMNS_TARGET_PRINT_PAGE',  2 );
 	define( 'COLUMNS_TARGET_CSV_PAGE',    3 );
+	define( 'COLUMNS_TARGET_EXCEL_PAGE',  4 );
 
 	# sponsorship "paid" values
 	define( 'SPONSORSHIP_UNPAID',         0 );

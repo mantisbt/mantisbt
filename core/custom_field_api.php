@@ -242,7 +242,22 @@
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-        return access_has_project_level( $t_access_level_r, $t_project_id, $p_user_id );
+		return access_has_project_level( $t_access_level_r, $t_project_id, $p_user_id );
+	}
+
+	# --------------------
+	# Return true if the user can read the value of the field for the given project,
+	# false otherwise.
+	function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id, $p_user_id = null ) {
+		custom_field_ensure_exists( $p_field_id );
+
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
+
+		$t_access_level_r = custom_field_get_field( $p_field_id, 'access_level_r' );
+
+		return access_has_project_level( $t_access_level_r, $p_project_id, $p_user_id );
 	}
 
 	# --------------------
@@ -1214,6 +1229,34 @@
 			return call_user_func($g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value);
 		}			
 		return string_display_links( $t_custom_field_value );
+	}
+
+	# --------------------
+	# Prepare a string containing a custom field value for display
+	# $p_def 		contains the definition of the custom field
+	# $p_field_id 	contains the id of the field
+	# $p_bug_id		contains the bug id to display the custom field value for
+	# NOTE: This probably belongs in the string_api.php
+	function string_custom_field_value_text( $p_def, $p_field_id, $p_bug_id ) {
+		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
+		switch( $p_def['type'] ) {
+			case CUSTOM_FIELD_TYPE_EMAIL:
+				return $t_custom_field_value;
+				break;
+			case CUSTOM_FIELD_TYPE_ENUM:
+			case CUSTOM_FIELD_TYPE_LIST:
+			case CUSTOM_FIELD_TYPE_MULTILIST:
+			case CUSTOM_FIELD_TYPE_CHECKBOX:
+				return str_replace( '|', ', ', $t_custom_field_value );
+				break;
+			case CUSTOM_FIELD_TYPE_DATE:
+				if ($t_custom_field_value != null) {
+					return date( config_get( 'short_date_format'), $t_custom_field_value) ;
+				}
+				break ;
+			default:
+				return $t_custom_field_value;
+		}
 	}
 
 	# --------------------

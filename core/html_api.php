@@ -784,6 +784,7 @@
 		$t_manage_work_threshold     = 'manage_config_work_threshold_page.php';
 		$t_manage_email 		= 'manage_config_email_page.php';
 		$t_manage_workflow 		= 'manage_config_workflow_page.php';
+		$t_manage_columns		= 'manage_config_columns_page.php';
 
 		switch ( $p_page ) {
 			case $t_configuration_report:
@@ -801,6 +802,9 @@
 			case $t_manage_workflow:
 				$t_manage_workflow = '';
 				break;
+			case $t_manage_columns:
+				$t_manage_columns = '';
+				break;
 		}
 
 		PRINT '<br /><div align="center">';
@@ -810,6 +814,7 @@
 			print_bracket_link( helper_mantis_url( $t_manage_work_threshold ), lang_get( 'manage_threshold_config' ) );
 			print_bracket_link( helper_mantis_url( $t_manage_workflow ), lang_get( 'manage_workflow_config' ) );
 			print_bracket_link( helper_mantis_url( $t_manage_email ), lang_get( 'manage_email_config' ) );
+			print_bracket_link( $t_manage_columns, lang_get( 'manage_columns_config' ) );
 		}
 		PRINT '</div>';
 	}
@@ -822,19 +827,34 @@
 		$t_account_prefs_page 			= 'account_prefs_page.php';
 		$t_account_profile_menu_page 	= 'account_prof_menu_page.php';
 		$t_account_sponsor_page			= 'account_sponsor_page.php';
+		$t_account_manage_columns_page	= 'account_manage_columns_page.php';
 
 		switch ( $p_page ) {
-			case $t_account_page				: $t_account_page 				= ''; break;
-			case $t_account_prefs_page			: $t_account_prefs_page 		= ''; break;
-			case $t_account_profile_menu_page	: $t_account_profile_menu_page 	= ''; break;
-			case $t_account_sponsor_page		: $t_account_sponsor_page		= ''; break;
+			case $t_account_page:
+				$t_account_page = '';
+				break;
+			case $t_account_prefs_page:
+				$t_account_prefs_page = '';
+				break;
+			case $t_account_profile_menu_page:
+				$t_account_profile_menu_page 	= '';
+				break;
+			case $t_account_sponsor_page:
+				$t_account_sponsor_page = '';
+				break;
+			case $t_account_manage_columns_page:
+				$t_account_manage_columns_page = '';
+				break;
 		}
 
-		print_bracket_link( helper_mantis_url( $t_account_page ), lang_get( 'account_link' ) );
-		print_bracket_link( helper_mantis_url( $t_account_prefs_page ), lang_get( 'change_preferences_link' ) );
+		print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
+		print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
+		print_bracket_link( $t_account_manage_columns_page, lang_get( 'manage_columns_config' ) );
+
 		if ( access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
 			print_bracket_link( helper_mantis_url( $t_account_profile_menu_page ), lang_get( 'manage_profiles_link' ) );
 		}
+
 		if ( ( config_get( 'enable_sponsorship' ) == ON ) &&
 			 ( access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) ) &&
 			 !current_user_is_anonymous() ) {

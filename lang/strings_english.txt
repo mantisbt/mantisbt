@@ -63,6 +63,7 @@ $s_operation_successful = 'Operation successful.';
 $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
+$s_excel_export = 'Excel Export';
 $s_login_anonymously = 'Login Anonymously';
 $s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Jump to Notes';
@@ -309,6 +310,8 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event \'%s\' has not yet been declared.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin is not registered with Mantis.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field \'%s\' contains duplcate column \'%s\'.';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field \'%s\' contains invalid field \'%s\'';
 
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -1487,4 +1490,15 @@ $s_show_graph = 'Show Graph';
 $s_graph_page = 'Graph Bug History';
 $s_graph_bug_page_link = 'Graph';
 
+# manage columns page
+$s_manage_columns_config = 'Manage Columns';
+$s_all_columns_title = 'All Available Columns';
+$s_csv_columns_title = 'CSV Columns';
+$s_view_issues_columns_title = 'View Issues Columns';
+$s_print_issues_columns_title = 'Print Issues Columns';
+$s_excel_columns_title = 'Excel Columns';
+$s_update_columns_as_global_default = 'Update Columns as Global Default for All Projects';
+$s_update_columns_for_current_project = 'Update Columns For Current Project';
+$s_update_columns_as_my_default = 'Update Columns as Default for All Projects';
+$s_reset_columns_configuration = 'Reset Columns Configuration';
 ?>

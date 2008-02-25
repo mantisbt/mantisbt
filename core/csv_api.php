@@ -53,7 +53,13 @@
 	# --------------------
 	# escape a string before writing it to csv file.
 	function csv_escape_string( $p_str ) {
+		# enclose strings with separators with quotaiton marks
 		if ( strpos( $p_str, csv_get_separator() ) !== false ) {
+			$p_str = '"' . str_replace( '"', '""', $p_str ) . '"';
+		}
+
+		# enclose multi-line strings with quotaiton marks
+		if ( strpos( $p_str, "\n" ) !== false ) {
 			$p_str = '"' . str_replace( '"', '""', $p_str ) . '"';
 		}
 
@@ -200,6 +206,24 @@
 	# return the summary
 	function csv_format_summary( $p_summary ) {
 		return csv_escape_string( $p_summary );
+	}
+
+	# --------------------
+	# return the description
+	function csv_format_description( $p_summary ) {
+		return csv_escape_string( $p_summary );
+	}
+
+	# --------------------
+	# return the steps to reproduce
+	function csv_format_steps_to_reproduce( $p_steps_to_reproduce ) {
+		return csv_escape_string( $p_steps_to_reproduce );
+	}
+
+	# --------------------
+	# return the additional information
+	function csv_format_additional_information( $p_additional_information ) {
+		return csv_escape_string( $p_additional_information );
 	}
 
 	# --------------------

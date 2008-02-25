@@ -114,6 +114,8 @@
 				    echo '&nbsp;';
 				}
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
+				echo '&nbsp;';
+				print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
 		?> </span>
 	</td>
 
@@ -169,7 +171,7 @@
 			# choose color based on status
 			$status_color = get_status_color( $t_row['status'] );
 
-			echo '<tr bgcolor="', $status_color, '" border="1">';
+			echo '<tr bgcolor="', $status_color, '" border="1" valign="top">';
 
 			foreach( $t_columns as $t_column ) {
 				$t_column_value_function = 'print_column_value';

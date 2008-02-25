@@ -410,6 +410,26 @@
 		config_flush_cache( $p_option, $p_user, $p_project );
 	}		
 
+	/**
+	 * Delete the specified option for the specified user.across all projects.
+	 * @param $p_option - The configuration option to be deleted.
+	 * @param $p_user_id - The user id
+	 */
+	function config_delete_for_user( $p_option, $p_user_id ) {
+		if ( !config_can_delete( $p_option ) ) {
+			return;
+		}
+
+		$t_config_table = db_get_table( 'mantis_config_table' );
+		$c_option = db_prepare_string( $p_option );
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		# Delete the corresponding bugnote texts
+		$query = "DELETE FROM $t_config_table
+					WHERE config_id=" . db_param(0) . " AND user_id=" . db_param(1);
+		db_query_bound( $query, array( $c_option, $c_user_id ) );
+	}
+
 	# ------------------
 	# delete the config entry
 	function config_delete_project( $p_project = ALL_PROJECTS ) {

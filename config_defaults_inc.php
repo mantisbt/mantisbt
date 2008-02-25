@@ -351,7 +351,6 @@
 	# This control the connection mode to SMTP server. Can be 'ssl' or 'tls'
 	$g_smtp_connection_mode = '';
 
-
 	# It is recommended to use a cronjob or a scheduler task to send emails.  
 	# The cronjob should typically run every 5 minutes.  If no cronjob is used,
 	# then user will have to wait for emails to be sent after performing an action
@@ -513,28 +512,35 @@
 	# ON:  Shows priority as text in view all bugs page
 	$g_show_priority_text	= OFF;
 
-	# A configuration option that identifies the columns to be shown on the View Issues page.
-	# In Mantis 1.1, this option can be overriden using the Generic Configuration screen.
-	# This configuration can be overriden dynamically by overriding the custom function "get_columns_to_view".
+	# The default columns to be included in the View Issues Page.
+	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
+	# Also each user can configure their own columns using My Account -> Manage Columns
 	# Some of the columns specified here can be removed automatically if they conflict with other configuration.
+	# Or if the current user doesn't have the necessary access level to view them.
 	# For example, sponsorship_total will be removed if sponsorships are disabled.
 	# To include custom field 'xyz', include the column name as 'custom_xyz'.
 	#
 	# Standard Column Names (i.e. names to choose from):
 	# selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta,
 	# resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment,
-	# category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count
+	# category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description,
+	# steps_to_reproduce, additional_information
 	$g_view_issues_page_columns = array ( 'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
 	
-	# A configuration option that identifies the columns to be show on the print issues page.
-	# In Mantis 1.1, this option can be overriden using the Generic Configuration screen.
-	# This configuration can be overriden dynamically by overriding the custom function "get_columns_to_view".
+	# The default columns to be included in the Print Issues Page.
+	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
+	# Also each user can configure their own columns using My Account -> Manage Columns
 	$g_print_issues_page_columns = array ( 'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count', 'attachment', 'category', 'severity', 'status', 'last_updated', 'summary' );
 
-	# A configuration option that identifies the columns to be include in the CSV export.
-	# In Mantis 1.1, this option can be overriden using the Generic Configuration screen.
-	# This configuration can be overriden dynamically by overriding the custom function "get_columns_to_view".
+	# The default columns to be included in the CSV export.
+	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
+	# Also each user can configure their own columns using My Account -> Manage Columns
 	$g_csv_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version', 'duplicate_id' );
+
+	# The default columns to be included in the Excel export.
+	# This can be overriden using Manage -> Manage Configuration -> Manage Columns
+	# Also each user can configure their own columns using My Account -> Manage Columns
+	$g_excel_columns = array ( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'reproducibility', 'version', 'projection', 'category', 'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state', 'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version', 'duplicate_id' );
 
 	# --- show projects when in All Projects mode ---
 	$g_show_bug_project_links	= ON;

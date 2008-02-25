@@ -208,6 +208,8 @@
 	function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 			$t_columns = config_get( 'csv_columns' );
+		} else if ( $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
+			$t_columns = config_get( 'excel_columns' );
 		} else if ( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 			$t_columns = config_get( 'view_issues_page_columns' );
 		} else {
@@ -224,9 +226,8 @@
 	function custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 		global $t_sort, $t_dir;
 
-		if ( strpos( $p_column, 'custom_' ) === 0 ) {
-			$t_custom_field = substr( $p_column, 7 );
-
+		$t_custom_field = column_get_custom_field_name( $p_column );
+		if ( $t_custom_field !== null ) {
 			if ( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
 				echo '<td>';
 			}
@@ -280,9 +281,9 @@
 			$t_column_empty = '&nbsp;';
 		}
 
-		if ( strpos( $p_column, 'custom_' ) === 0 ) {
+		$t_custom_field = column_get_custom_field_name( $p_column );
+		if ( $t_custom_field !== null ) {
 			echo $t_column_start;
-			$t_custom_field = substr( $p_column, 7 );
 
 			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 			if ( $t_field_id === false ) {
@@ -311,13 +312,7 @@
 				if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 					$t_function( $p_issue_row, $p_columns_target );
 				} else {
-					if ( $p_column == 'category' ) {
-						$t_column = 'category_id';
-					} else {
-						$t_column = $p_column;
-					}
-
-					$t_function( $p_issue_row[$t_column] );
+					$t_function( $p_issue_row[$p_column] );
 				}
 			} else {
 				if ( isset( $p_issue_row[$p_column] ) ) {

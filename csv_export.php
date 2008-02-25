@@ -20,8 +20,7 @@
 	# --------------------------------------------------------
 	# $Id$
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -29,9 +28,9 @@
 	require_once( $t_core_path . 'filter_api.php' );
 	require_once( $t_core_path . 'csv_api.php' );
 	require_once( $t_core_path . 'columns_api.php' );
-?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	auth_ensure_user_authenticated();
+
 	helper_begin_long_process();
 
 	$t_page_number = 1;
@@ -75,13 +74,7 @@
 			$t_first_column = false;
 		}
 
-		if ( strpos( $t_column, 'custom_' ) === 0 ) {
-			$t_column_title_function = 'print_column_title';
-			helper_call_custom_function( $t_column_title_function, array( $t_column, COLUMNS_TARGET_CSV_PAGE ) );
-		} else {
-			$t_function = 'print_column_title_' . $t_column;
-			$t_function( '', 'ASC', COLUMNS_TARGET_CSV_PAGE );
-		}
+		echo column_get_title( $t_column );
 	}
 
 	echo $t_nl;
@@ -110,7 +103,8 @@
 				$t_first_column = false;
 			}
 
-			if ( strpos( $t_column, 'custom_' ) === 0 ) {
+			$t_custom_field = column_get_custom_field_name( $t_column );
+			if ( $t_custom_field !== null ) {
 				ob_start();
 				$t_column_value_function = 'print_column_value';
 				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
@@ -122,12 +116,11 @@
 
 				echo $t_value;
 			} else {
-				if ( $t_column == 'category' ) {
-					$t_column = 'category_id';
+				if ( column_is_extended( $t_column ) && !isset( $t_row['description'] ) ) {
+					$t_row = bug_get_extended_row( $t_row['id'] );
 				}
 
 				$t_function = 'csv_format_' . $t_column;
-
 				echo $t_function( $t_row[ $t_column ] );
 			}
 		}

@@ -79,7 +79,7 @@
 	$t_bug_count = null;
 	$t_page_count = null;
 
-	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	$row_count = sizeof( $result );
 
 	# for export
@@ -207,7 +207,7 @@
 		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );
 		if ( isset( $t_bug_arr_sort[ $t_row['id'] ] ) || ( $t_show_flag==0 ) ) {
 ?>
-<tr bgcolor="<?php echo $status_color ?>" border="1">
+<tr bgcolor="<?php echo $status_color ?>" border="1" valign="top">
 <?php
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';

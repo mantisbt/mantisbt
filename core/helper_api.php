@@ -338,37 +338,60 @@
 
 		return $t_project_filter;
 	}
-	
+
 	# --------------------
-	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true ) {
 		$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target ) );
+
+		# An associative array that is used to map older column names to newer ones.  This is useful when a column is renamed in the database
+		# or if the value is replaced with a foreign key.
+		$t_columns_map = array( 'category' => 'category_id' );
+
+		foreach ( $t_columns as $t_key => $t_value ) {
+			if ( isset( $t_columns_map[$t_value] ) ) {
+				$t_columns[$t_key] = $t_columns_map[$t_value];
+			}
+		}
+
+		if ( !$p_viewable_only ) {
+			return $t_columns;
+		}
+
+		$t_keys_to_remove = array();
+		
+		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
+			$t_keys_to_remove[] = 'selection';
+			$t_keys_to_remove[] = 'edit';
+			$t_keys_to_remove[] = 'bugnotes_count';
+		}
 
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 		if ( OFF == $t_enable_sponsorship ) {
-			$t_keys = array_keys( $t_columns, 'sponsorship_total' );
-			foreach ( $t_keys as $t_key ) {
-				unset( $t_columns[$t_key] );
-			}
+			$t_keys_to_remove[] = 'sponsorship_total';
 		}
-	
-		$t_show_attachments = config_get( 'show_attachment_indicator' );
-		if ( OFF == $t_show_attachments ) {
-			$t_keys = array_keys( $t_columns, 'attachment' );
-			foreach ( $t_keys as $t_key ) {
-				unset( $t_columns[$t_key] );
-			}
+
+		if ( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ||
+			 OFF == config_get( 'show_attachment_indicator' ) ) {
+			$t_keys_to_remove[] = 'attachment';
 		}
 
 		if ( OFF == config_get( 'enable_relationship' ) ) {
-			$t_keys = array_keys( $t_columns, 'duplicate_id' );
-			foreach ( $t_keys as $t_key ) {
-				unset( $t_columns[$t_key] );
-			}
+			$t_keys_to_remove[] = 'duplicate_id';
 		}
 
 		$t_current_project_id = helper_get_current_project();
+
+		if ( $t_current_project_id != ALL_PROJECTS && !access_has_project_level( config_get( 'view_handler_threshold' ), $t_current_project_id ) ) {
+			$t_keys_to_remove[] = 'handler_id';
+		}
+
 		if ( $t_current_project_id != ALL_PROJECTS && !access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_current_project_id ) ) {
-			$t_keys = array_keys( $t_columns, 'target_version' );
+			$t_keys_to_remove[] = 'target_version';
+		}
+
+		foreach ( $t_keys_to_remove as $t_key_to_remove ) {
+			$t_keys = array_keys( $t_columns, $t_key_to_remove );
+
 			foreach ( $t_keys as $t_key ) {
 				unset( $t_columns[$t_key] );
 			}
