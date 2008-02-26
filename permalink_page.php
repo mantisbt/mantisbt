@@ -28,6 +28,8 @@
 	html_page_top1();
 	html_page_top2();
 
+	access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
+
 	$f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 ?>
 <div align="center">

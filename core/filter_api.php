@@ -2810,13 +2810,16 @@
 						$f_switch_view_link = 'view_filters_page.php?view_type=';
 					}
 
-					if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+					$t_view_filters = config_get( 'view_filters' );
+					if ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 						if ( 'advanced' == $t_view_type ) {
 							print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
 						} else {
 							print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 						}
-
+					}
+					
+					if ( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 						print_bracket_link( 
 							'permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ), 
 							lang_get( 'create_filter_link' ), 

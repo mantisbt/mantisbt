@@ -1366,7 +1366,10 @@
 	# Rather than launching a separate page, the filters are updated in-line in the
 	# view_all_bugs_page.
 	$g_dhtml_filters = ON;
-	
+
+	# The threshold required for users to be able to create permalinks.  To turn of this feature use NOBODY.
+	$g_create_permalink_threshold = DEVELOPER;
+
 	# The service to use to create a short URL.  The %s will be replaced by the long URL.
 	$g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
