@@ -1,5 +1,5 @@
 <chapter>
-    <title>Customizing Mantis</title>
+    <title>Customizing MantisBT</title>
     
     <section>
         <title>Custom Fields</title>
@@ -271,6 +271,7 @@
                 linked to the new project.
             </para>
         </formalpara>
+	</section>
  
  	<section>
 	    <title>Localizing Custom Field Names</title>
@@ -434,10 +435,10 @@ functions section.</para>
         <title>Enumerations</title>
         
         
-        <para>Enumerations are used in Mantis to represent a set of
+        <para>Enumerations are used in MantisBT to represent a set of
             possible values for an attribute. Enumerations are used for access
             levels, severities, priorities, project statuses, project view
-            state, reproducibility, resolution, ETA, and projection.Mantis
+            state, reproducibility, resolution, ETA, and projection.  MantisBT
             provides the administrator with the flexibility of altering the
             values in these enumerations. The rest of this topic explains how
             enumerations work, and then how they can be customised.
@@ -465,7 +466,7 @@ functions section.</para>
             <filename>config_defaults_inc.php</filename> includes the defaults for the
             enumerations. The configuration options that are defaulted here are
             used in specifying which enumerations are active and should be used
-            in Mantis. However, the strings included in the enumerations here
+            in MantisBT.  However, the strings included in the enumerations here
             are just for documentation purpose, they are not shown to the user
             (due to the need for localisation). Hence, if an entry in this
             enumeration is not found in the corresponding localised enumeration
@@ -502,8 +503,8 @@ functions section.</para>
             The file <filename>custom_constant_inc.php</filename> is supported for the
             exclusive purpose of allowing administrators to define their own
             constants while maintaining a simple upgrade path for future
-            releases of Mantis. Note that this file is not distributed with
-            Mantis and you will need to create it if you need such
+            releases of MantisBT. Note that this file is not distributed with
+            MantisBT and you will need to create it if you need such
             customisation. In our example, we need to define a constant for the
             new access level.
             <programlisting>
@@ -527,9 +528,9 @@ functions section.</para>
             to that of custom_constant_inc.php, which is to define custom
             strings. The advantage of defining them here is to provide a simple
             upgrade path, and avoid having to re-do the changes when upgrading
-            to the next Mantis release. Note that you will need to create this
+            to the next MantisBT release. Note that you will need to create this
             file if you need such customisation. The file is automatically
-            detected and included by Mantis code (v0.18.0aX).
+            detected and included by MantisBT code.
             <programlisting>
                 # Note that we don't have to remove the Updater entry from the
                 localisation file if ( lang_get_current() === 'english' ) {
@@ -544,7 +545,7 @@ functions section.</para>
                 to customise one of them. If you are interested in customising
                 other enumerations, a good starting point would be to go to "Mantis
                 Enum Strings" section inconfig_defaults_inc.php. This section
-                defines all enumerations that are used by Mantis.
+                defines all enumerations that are used by MantisBT.
                 For versions that are older than 0.18.0, custom_*_inc.php files are
                 not supported, and hence you will need to change in the actual
                 constants / language files directly.
@@ -776,7 +777,7 @@ functions section.</para>
                 
                 <formalpara>
                     <title>Creating new accounts</title><para>There is still a bit of problem when you
-                        want to create a new user to Mantis using LDAP, you must create the
+                        want to create a new user to MantisBT using LDAP, you must create the
                         LDIF entry to LDAP, and also sign up for a new account, if both of
                         these line up correctly, authentication will proceed.Email
                         issuesEmail address is queried from the LDAP database if the
@@ -792,16 +793,16 @@ functions section.</para>
                 <title>Custom Functions</title>
                 
                 <para>Custom functions are used to extend the functionality of
-                    Mantis by integrating user writtenfunctions into the issue
+                    MantisBT by integrating user writtenfunctions into the issue
                     processing at strategic places. This allows the system
                     administrator to changethe functionality without re-writing parts
                     of the internals of the code.
                 </para>
                 <para>User versions of these functions are
                     placed in a file called custom_functions_inc.php in the
-                    root directory of Mantis. This is the same place that the
-                    "config_inc.php" file modifying Mantisdefaults is placed. In normal
-                    processing, Mantis will look for override functions and execute
+                    root directory of MantisBT. This is the same place that the
+                    "config_inc.php" file modifying MantisBT defaults is placed. In normal
+                    processing, MantisBT will look for override functions and execute
                     theminstead of the provided default functions.
                     <para>Custom functions have
                         names like custom_function_override_descriptive_name where
@@ -826,7 +827,7 @@ functions section.</para>
                             ) returns a formatted string to be included for the issue in the
                             Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
                             $p_file, $p_new_version ) registers a checkin in source control in
-                            Mantiscustom_function_default_issue_update_validate( $p_issue_id,
+                            MantisBT custom_function_default_issue_update_validate( $p_issue_id,
                             $p_new_bug, $p_bug_note_text ) validate bug field settings before
                             an update occurs. It returns true or fails with an
                             error.custom_function_default_issue_update_notify( $p_issue_id )

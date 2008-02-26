@@ -1,7 +1,6 @@
 <chapter>
     <title>Configuration</title>
     <section>
-        
         <title>Database</title>
         <para>The database settings must be set in order for the package
             to work properly. These settings should be provided to you by your
@@ -546,10 +545,10 @@
             </para>
         </note>
     </section>
-    
+
     <section>
-        
         <title>Display</title>
+
         <variablelist> 
             <varlistentry>
                 <term>$g_window_title</term>
@@ -565,6 +564,24 @@
                     <para>This is a heading that is displayed in the viewing area of
                         the page.
                     </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_favicon_image</term>
+                <listitem>
+                    <para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_logo_image</term>
+                <listitem>
+                    <para>Path to the logo image relative to MantisBT root folder (default 'images/mantis_logo.gif').</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_logo_url</term>
+                <listitem>
+                    <para>The default URL to be associated with the logo.  By default this is set to $g_default_home_page (which defaults to My View page). Clicking on the logo from any page in the bug tracker will navigate to the URL specified in this configuration option.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -640,6 +657,35 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_view_issues_page_columns</term>
+                <listitem>
+                    <para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
+                    <para>The supported columns are: selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta, resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment, category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description, steps_to_reproduce, additional_information.  As for custom fields they can be referenced by adding a 'custom_' to their name (e.g. xyz would be custom_xyz).</para>
+                    <para>By default the following columns are selected: selection, edit, priority, id, sponsorship_total, bugnotes_count, attachment, category_id, severity, status, last_updated, summary.</para> 
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_print_issues_page_columns</term>
+                <listitem>
+                    <para>This configuration option is used to select the columns to be included in the Print Issues page and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+                    <para>By default the following columns are selected: selection, priority, id, sponsorship_total, bugnotes_count, attachment, category_id, severity, status, last_updated, summary</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_csv_columns</term>
+                <listitem>
+                    <para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+                    <para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_excel_columns</term>
+                <listitem>
+                    <para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+                    <para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_show_bug_project_links</term>
                 <listitem>
                     <para>Show project links when in All Projects mode. Default is
@@ -686,13 +732,33 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_show_avatar</term>
+                <listitem>
+                    <para>Show user avatar (default OFF); the current implementation is based on http://www.gravatar.com,
+                    users will need to register there with the same email address used in 
+                    this MantisBT installation to have their avatar shown.</para>
+                    <note><para>Upon registration or avatar change, it takes some time for the updated gravatar images to show on sites.</para></note>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_show_avatar_threshold</term>
+                <listitem>
+                    <para>The threshold of users for which MantisBT should attempt to show the avatar (default DEVELOPER).  Note that the threshold is related to the user for whom the avatar is being shown, rather than the user who is currently logged in.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_default_avatar</term>
+                <listitem>
+                    <para>The full URL to the image to be used when a user doesn't have an avatar account.</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
-        
     </section>
-    
+
     <section>
         <title>Time</title>
-        
+
         <variablelist>
             <varlistentry>
                 <term>$g_cookie_time_length</term>
@@ -1660,11 +1726,21 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_create_permalink_threshold</term>
+                <listitem>
+                    <para>The threshold required for users to be able to create permalinks (default DEVELOPER).  To turn this feature off use NOBODY.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_create_short_url</term>
+                <listitem>
+                    <para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default http://www.tinyurl service is used to shorten URLs.</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
-        
     </section>
-    
-    
+ 
     <section>
         <title>Misc</title>
         <variablelist>
