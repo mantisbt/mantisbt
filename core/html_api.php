@@ -598,11 +598,13 @@
 
 				# Plugin / Event added options
 				$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
-				foreach ( $t_event_menu_options as $t_callback => $t_callback_menu_options ) {
-					if ( is_array( $t_callback_menu_options ) ) {
-						$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-					} else {
-						$t_menu_options[] = $t_callback_menu_options;
+				foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+					foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+						if ( is_array( $t_callback_menu_options ) ) {
+							$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+						} else {
+							$t_menu_options[] = $t_callback_menu_options;
+						}
 					}
 				}
 
