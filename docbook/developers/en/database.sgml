@@ -1,0 +1,21 @@
+<chapter>
+	<title>Database Schema Management</title>
+
+	<section>
+		<title>Schema Definition</title>
+
+		<para>
+			TODO: Discuss the ADODB datadict formats and the format Mantis expects for schema deinitions.
+		</para>
+	</section>
+
+	<section>
+		<title>Installation / Upgrade Process</section>
+
+		<para>
+			TODO: Discuss how Mantis handles a database installation / upgrade, including the use of the config system and schema definitions.
+		</para>
+	</section>
+
+</chapter>
+
