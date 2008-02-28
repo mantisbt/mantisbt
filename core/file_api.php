@@ -77,7 +77,7 @@
 		$query = "SELECT bug_id, COUNT(bug_id) AS attachments
 				FROM $t_bug_file_table
 				GROUP BY bug_id";
-		$result = db_query( $query );
+		$result = db_query_bound( $query );
 
 		$t_file_count = 0;
 		while( $row = db_fetch_array( $result )) {
@@ -302,8 +302,8 @@
 			# Delete files from disk
 			$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
-					WHERE project_id=$p_project_id";
-			$result = db_query( $query );
+					WHERE project_id=" . db_param(0);
+			$result = db_query_bound( $query, array( (int)$p_project_id ) );
 
 			$file_count = db_num_rows( $result );
 
@@ -330,7 +330,7 @@
 		# Delete the corresponding db records
 		$query = "DELETE FROM $t_project_file_table
 				WHERE project_id=" . db_param(0);
-		$result = db_query_bound($query, Array( $p_project_id ) );
+		$result = db_query_bound($query, Array( (int)$p_project_id ) );
 	}
 	# --------------------
 	# Delete all cached files that are older than configured number of days.
@@ -382,15 +382,14 @@
 	# --------------------
 	# Return the specified field value
 	function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
-		$c_file_id			= db_prepare_int( $p_file_id );
 		$c_field_name		= db_prepare_string( $p_field_name );
 		$t_bug_file_table	= db_get_table( 'mantis_' . $p_table . '_file_table' );
 
 		# get info
 		$query = "SELECT $c_field_name
 				  FROM $t_bug_file_table
-				  WHERE id='$c_file_id'";
-		$result = db_query( $query, 1 );
+				  WHERE id=" . db_param(0);
+		$result = db_query_bound( $query, Array( (int)$p_file_id ), 1 );
 
 		return db_result( $result );
 	}
@@ -528,21 +527,18 @@
 
 	# --------------------
 	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_file_error = 0, $p_title = '', $p_desc = '' ) {
-
-		if ( php_version_at_least( '4.2.0' ) ) {
-		    switch ( (int) $p_file_error ) {
-		        case UPLOAD_ERR_INI_SIZE:
-		        case UPLOAD_ERR_FORM_SIZE:
-                    trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-                    break;
-		        case UPLOAD_ERR_PARTIAL:
-		        case UPLOAD_ERR_NO_FILE:
-                    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-                    break;
-                default:
-                    break;
-            }
-        }
+	    switch ( (int) $p_file_error ) {
+	        case UPLOAD_ERR_INI_SIZE:
+	        case UPLOAD_ERR_FORM_SIZE:
+				trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+				break;
+			case UPLOAD_ERR_PARTIAL:
+			case UPLOAD_ERR_NO_FILE:
+				trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+				break;
+			default:
+			break;
+		}
 
 	    if ( ( '' == $p_tmp_file ) || ( '' == $p_file_name ) ) {
 		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
