@@ -215,7 +215,6 @@
 	function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 		token_ensure_exists( $p_token_id );
 		$c_token_id = db_prepare_int( $p_token_id );
-		$c_value = db_prepare_string( $p_value );
 		$c_expiry = db_timestamp( db_date(time() + $p_expiry) );
 
 		$t_tokens_table = db_get_table( 'mantis_tokens_table' );
@@ -223,7 +222,7 @@
 		$t_query = "UPDATE $t_tokens_table 
 					SET value=" . db_param(0) . ", expiry=" . db_param(1) . "
 					WHERE id=" . db_param(2);
-		db_query_bound( $t_query, Array( $c_value, $c_expiry, $c_token_id ) );
+		db_query_bound( $t_query, Array( $p_value, $c_expiry, $c_token_id ) );
 
 		return true;
 	}
