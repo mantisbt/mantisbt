@@ -10,7 +10,7 @@
 	</sect1>
 
 	<sect1 id="dev.database.install">
-		<title>Installation / Upgrade Process</section>
+		<title>Installation / Upgrade Process</title>
 
 		<para>
 			TODO: Discuss how Mantis handles a database installation / upgrade, including the use of the config system and schema definitions.

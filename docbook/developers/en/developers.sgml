@@ -39,6 +39,6 @@
 	&database;
 	&events;
 	&plugins;
-	&event-reference;
+	&eventref;
 
 </book>
