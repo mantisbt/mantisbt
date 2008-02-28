@@ -1,13 +1,13 @@
-<chapter>
+<chapter id="dev.events">
 	<title>Event System</title>
 
-	<section>
+	<sect1 id="dev.events.concepts">
 		<title>General Concepts</title>
 
 		<para>
 			TODO: discuss the event system.
 		</para>
-	</section>
+	</sect1>
 
 </chapter>
 

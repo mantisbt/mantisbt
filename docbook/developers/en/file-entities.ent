@@ -1,3 +1,4 @@
 <!ENTITY chapter SYSTEM "database.sgml">
 <!ENTITY chapter SYSTEM "events.sgml">
 <!ENTITY chapter SYSTEM "plugins.sgml">
+<!ENTITY chapter SYSTEM "event-reference.sgml">

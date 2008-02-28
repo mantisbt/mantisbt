@@ -1,0 +1,16 @@
+<chapter id="dev.eventref">
+	<title>Event Reference</title>
+
+	<sect1 id="dev.eventref.intro">
+		<title>Introduction</title>
+
+		<para>
+			In this chapter, an attempt will be made to list all events used (or planned for later use)
+			in the Mantis event system.  Each listed event will include details for the event type, when
+			the event is called, and the expected parameters and return values for event callbacks.
+		</para>
+	</sect1>
+
+</chapter>
+
+

@@ -1,13 +1,13 @@
-<chapter>
+<chapter id="dev.plugins">
 	<title>Plugin System</title>
 
-	<section>
+	<sect1 id="dev.plugins.concepts">
 		<title>General Concepts</title>
 
 		<para>
 			TODO: discuss the plugin system.
 		</para>
-	</section>
+	</sect1>
 
 </chapter>
 
