@@ -1,4 +1,4 @@
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN" [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN" [
 <!ENTITY builddate    SYSTEM "builddate">
 
 <!ENTITY % file-entities SYSTEM "file-entities.ent">
@@ -38,7 +38,7 @@
 
 	&database;
 	&events;
-	&plugins;
 	&eventref;
+	&plugins;
 
 </book>

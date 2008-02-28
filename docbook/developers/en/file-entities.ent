@@ -2,3 +2,4 @@
 <!ENTITY events SYSTEM "events.sgml">
 <!ENTITY plugins SYSTEM "plugins.sgml">
 <!ENTITY eventref SYSTEM "event-reference.sgml">
+<!ENTITY eventref-output SYSTEM "event-reference-output.sgml">
