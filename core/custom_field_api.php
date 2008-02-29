@@ -1232,34 +1232,6 @@
 	}
 
 	# --------------------
-	# Prepare a string containing a custom field value for display
-	# $p_def 		contains the definition of the custom field
-	# $p_field_id 	contains the id of the field
-	# $p_bug_id		contains the bug id to display the custom field value for
-	# NOTE: This probably belongs in the string_api.php
-	function string_custom_field_value_text( $p_def, $p_field_id, $p_bug_id ) {
-		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
-		switch( $p_def['type'] ) {
-			case CUSTOM_FIELD_TYPE_EMAIL:
-				return $t_custom_field_value;
-				break;
-			case CUSTOM_FIELD_TYPE_ENUM:
-			case CUSTOM_FIELD_TYPE_LIST:
-			case CUSTOM_FIELD_TYPE_MULTILIST:
-			case CUSTOM_FIELD_TYPE_CHECKBOX:
-				return str_replace( '|', ', ', $t_custom_field_value );
-				break;
-			case CUSTOM_FIELD_TYPE_DATE:
-				if ($t_custom_field_value != null) {
-					return date( config_get( 'short_date_format'), $t_custom_field_value) ;
-				}
-				break ;
-			default:
-				return $t_custom_field_value;
-		}
-	}
-
-	# --------------------
 	# Print a custom field value for display
 	# $p_def 		contains the definition of the custom field
 	# $p_field_id 	contains the id of the field
