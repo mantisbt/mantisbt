@@ -1,6 +1,6 @@
 <chapter>
     <title>Customizing MantisBT</title>
-    
+
     <section>
         <title>Custom Fields</title>
 
@@ -647,10 +647,8 @@ functions section.</para>
                 </listitem>
             </itemizedlist>
         </para>
-        
     </section>
-    
-    
+
     <section>
         <title>Customizing Status Values</title>
         <para>The default is no workflow, where all states
@@ -672,187 +670,126 @@ functions section.</para>
                 '50:assigned,80:resolved,90:closed';
                 $g_status_enum_workflow[CLOSED] = '50:assigned';
             </programlisting>
-            
-            <para>To add a status:
-                <orderedlist>
-                    <listitem>
-                        <para>Define a constant to map the new status to.In a new file
-                            custom_constant_inc.php in the main mantisbt directory:
-                            <programlisting>&lt;?php define ( 'TEST', 60 ); ?&gt;</programlisting>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Define the language strings required. This may need to be
-                            defined in several languages.In a new file custom_strings_inc.php
-                            in the main mantisbt directory:
-                            <programlisting>&lt;?php if ( lang_get_current() == 'german' ) {
-                                $s_status_enum_string =
-                                '10:neu,20:R&cedil;ckmeldung,30:anerkannt,40:best&permil;tigt,50:zugewiesen,
-                                60:zu testen,80:behoben,90:geschlossen'; } else {
-                                $s_status_enum_string =
-                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
-                                be tested,80:resolved,90:closed'; $s_to_be_tested_bug_button =
-                                "Issue Ready to Test"; $s_to_be_tested_bug_title = "Set Issue Ready
-                                to Test"; $s_email_notification_title_for_status_bug_to_be_tested =
-                                "The following issue is ready TO BE TESTED."; } ?&gt;
-                            </programlisting>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Define any configurations required.In the existing file
-                            config_inc.php in the main mantisbt directory:
-                            <programlisting>$g_status_enum_string =
-                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
-                                be tested,80:resolved,90:closed'; # Status color additions
-                                $g_status_colors['to be tested'] = '#ACE7AE';
-                            </programlisting>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Add the status to any workflow defined.In config_inc.php:
-                            <programlisting>$g_status_enum_workflow[NEW_]=
-                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
-                                be tested'; $g_status_enum_workflow[FEEDBACK] =
-                                '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
-                                be tested'; $g_status_enum_workflow[ACKNOWLEDGED] =
-                                '20:feedback,30:acknowledged,40:confi rmed,50:assigned,60:to be
-                                tested'; $g_status_enum_workflow[CONFIRMED] =
-                                '20:feedback,40:confirmed,50:assigned,60:to be tested';
-                                $g_status_enum_workflow[ASSIGNED] = '20:feedback,50:assigned,60:to
-                                be tested,90:closed'; $g_status_enum_workflow[TEST] =
-                                '10:new,20:feedback,50:assigned,60:to be
-                                tested,80:resolved,90:closed'; $g_status_enum_workflow[RESOLVED] =
-                                '50:assigned,60:to be tested,80:resolved,90:closed';
-                                $g_status_enum_workflow[CLOSED] = '50:assigned,90:closed';
-                            </programlisting>
-                        </para>
-                    </listitem>
-                    
-                </orderedlist>
-            </para>
-            
-        </section>
-        
-        
-        <section>
-            <title>LDAP</title>
-            <para>Functionality is provided by using the php-ldap module
-                (/usr/lib/php4/ldap.so). An extra login method is defined within
-                core/user_API.php inside of function is_password_match $f_username,
-                $p_test_password, $p_password ).This has a simple, non encrypted
-                (yet) test of the LDAP directory for that user by asking for an
-                entry with uid=username and password=test_password, if this exists,
-                it is presumed that the user should be granted access.
-                <formalpara>
-                    <title>Configuration basics</title>
-                    <para>the LDIF format that was tested is as follows:
-                        <programlisting>dn: uid=tests,
-                            dc=test, dc=com, dc=au
-                            department: testdep
-                            organizationname: Testing Organization
-                            cn: Test Smith
-                            assignedgroup: users
-                            givename: Test
-                            sn: Smith
-                            mail: tests@example.com.au
-                            uid: testsuser
-                            Password: password
-                            objectclass: testPerson
+        </para>
+
+        <para>To add a status:
+            <orderedlist>
+                <listitem>
+                    <para>Define a constant to map the new status to.In a new file
+                        custom_constant_inc.php in the main mantisbt directory:
+                        <programlisting>&lt;?php define ( 'TEST', 60 ); ?&gt;</programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Define the language strings required. This may need to be
+                        defined in several languages.In a new file custom_strings_inc.php
+                        in the main mantisbt directory:
+                        <programlisting>&lt;?php if ( lang_get_current() == 'german' ) {
+                            $s_status_enum_string =
+                            '10:neu,20:R&cedil;ckmeldung,30:anerkannt,40:best&permil;tigt,50:zugewiesen,
+                            60:zu testen,80:behoben,90:geschlossen'; } else {
+                            $s_status_enum_string =
+                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
+                            be tested,80:resolved,90:closed'; $s_to_be_tested_bug_button =
+                            "Issue Ready to Test"; $s_to_be_tested_bug_title = "Set Issue Ready
+                            to Test"; $s_email_notification_title_for_status_bug_to_be_tested =
+                            "The following issue is ready TO BE TESTED."; } ?&gt;
                         </programlisting>
-                        
-                        The password may be in clear, taken
-                        from the /etc/passwd or /etc/shadow file, or simply encrypted and
-                        added using current LDAP tools.There are some specialized software
-                        for replicating passwd to LDAP and inversely (eg.
-                        <ulink url="http://freshmeat.net/projects/cpu/">http://freshmeat.net/projects/cpu/</ulink>
-                        ).
                     </para>
-                </formalpara>
-                
-                <para>Also setup the LDAP parameters explained in the
-                    <ulink url="manual.configuration.authentication.html">Authentication</ulink>
-                    section. Don't forget to change your $g_login_method to
-                    LDAP.
-                </para>
-                
-                <formalpara>
-                    <title>Creating new accounts</title><para>There is still a bit of problem when you
-                        want to create a new user to MantisBT using LDAP, you must create the
-                        LDIF entry to LDAP, and also sign up for a new account, if both of
-                        these line up correctly, authentication will proceed.Email
-                        issuesEmail address is queried from the LDAP database if the
-                        authentication is set to use LDAP instead of the user record in the
-                        database
-                        entry.</para>
-                </formalpara>
-                
-            </section>
-            
-            
+                </listitem>
+                <listitem>
+                    <para>Define any configurations required.In the existing file
+                        config_inc.php in the main mantisbt directory:
+                        <programlisting>$g_status_enum_string =
+                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned, 60:to
+                            be tested,80:resolved,90:closed'; # Status color additions
+                            $g_status_colors['to be tested'] = '#ACE7AE';
+                        </programlisting>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Add the status to any workflow defined.In config_inc.php:
+                        <programlisting>$g_status_enum_workflow[NEW_]=
+                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
+                            be tested'; $g_status_enum_workflow[FEEDBACK] =
+                            '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:to
+                            be tested'; $g_status_enum_workflow[ACKNOWLEDGED] =
+                            '20:feedback,30:acknowledged,40:confi rmed,50:assigned,60:to be
+                            tested'; $g_status_enum_workflow[CONFIRMED] =
+                            '20:feedback,40:confirmed,50:assigned,60:to be tested';
+                            $g_status_enum_workflow[ASSIGNED] = '20:feedback,50:assigned,60:to
+                            be tested,90:closed'; $g_status_enum_workflow[TEST] =
+                            '10:new,20:feedback,50:assigned,60:to be
+                            tested,80:resolved,90:closed'; $g_status_enum_workflow[RESOLVED] =
+                            '50:assigned,60:to be tested,80:resolved,90:closed';
+                            $g_status_enum_workflow[CLOSED] = '50:assigned,90:closed';
+                        </programlisting>
+                    </para>
+                </listitem>
+            </orderedlist>
+        </para>
+    </section>
+
+        <section>
+            <title>Custom Functions</title>
+
+            <para>Custom functions are used to extend the functionality of
+                MantisBT by integrating user writtenfunctions into the issue
+                processing at strategic places. This allows the system
+                administrator to changethe functionality without re-writing parts
+                of the internals of the code.
+            </para>
+            <para>User versions of these functions are
+                placed in a file called custom_functions_inc.php in the
+                root directory of MantisBT. This is the same place that the
+                "config_inc.php" file modifying MantisBT defaults is placed. In normal
+                processing, MantisBT will look for override functions and execute
+                them instead of the provided default functions.</para>
+            <para>Custom functions have
+                    names like custom_function_override_descriptive_name where
+                    descriptive namedescribed the particular function. The specific
+                    functions are described below. The simplest way tocreate a custom
+                    function is to copy the default function, named
+                    custom_function_default_descriptive_namefrom the
+                    core/custom_function_api.php file to your override file
+                    (custom_functions_inc.php), andrename it. The specific
+                    functionality you need can then be coded into the override
+                    function.
+            </para>
+
             <section>
-                <title>Custom Functions</title>
-                
-                <para>Custom functions are used to extend the functionality of
-                    MantisBT by integrating user writtenfunctions into the issue
-                    processing at strategic places. This allows the system
-                    administrator to changethe functionality without re-writing parts
-                    of the internals of the code.
+                <title>Defined Functions</title>
+
+                <para>custom_function_default_changelog_include_issue( $p_issue_id
+                    ) returns true or false if the issue if to be included in the
+                    Changelogcustom_function_default_changelog_print_issue( $p_issue_id
+                    ) returns a formatted string to be included for the issue in the
+                    Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
+                    $p_file, $p_new_version ) registers a checkin in source control in
+                    MantisBT custom_function_default_issue_update_validate( $p_issue_id,
+                    $p_new_bug, $p_bug_note_text ) validate bug field settings before
+                    an update occurs. It returns true or fails with an
+                    error.custom_function_default_issue_update_notify( $p_issue_id )
+                    notify after a bug has been
+                    updatedcustom_function_default_issue_create_validate( $p_new_bug )
+                    validate bug field settings before an issue is created. It returns
+                    true or fails with an
+                    error.custom_function_default_issue_create_notify( $p_issue_id )
+                    notify after a bug has been
+                    openedcustom_function_default_issue_delete_validate( $p_issue_id )
+                    validate bug field settings before an issue can be deleted. It
+                    returns true or fails with an
+                    error.custom_function_default_issue_delete_notify( $p_issue_id )
+                    notify after a bug has been deleted
                 </para>
-                <para>User versions of these functions are
-                    placed in a file called custom_functions_inc.php in the
-                    root directory of MantisBT. This is the same place that the
-                    "config_inc.php" file modifying MantisBT defaults is placed. In normal
-                    processing, MantisBT will look for override functions and execute
-                    theminstead of the provided default functions.
-                    <para>Custom functions have
-                        names like custom_function_override_descriptive_name where
-                        descriptive namedescribed the particular function. The specific
-                        functions are described below. The simplest way tocreate a custom
-                        function is to copy the default function, named
-                        custom_function_default_descriptive_namefrom the
-                        core/custom_function_api.php file to your override file
-                        (custom_functions_inc.php), andrename it. The specific
-                        functionality you need can then be coded into the override
-                        function.
-                    </para>
-                    
-                    <section>
-                        
-                        <title>Defined Functions</title>
-                        
-                        
-                        <para>custom_function_default_changelog_include_issue( $p_issue_id
-                            ) returns true or false if the issue if to be included in the
-                            Changelogcustom_function_default_changelog_print_issue( $p_issue_id
-                            ) returns a formatted string to be included for the issue in the
-                            Changelogcustom_function_default_checkin( $p_issue_id, $p_comment,
-                            $p_file, $p_new_version ) registers a checkin in source control in
-                            MantisBT custom_function_default_issue_update_validate( $p_issue_id,
-                            $p_new_bug, $p_bug_note_text ) validate bug field settings before
-                            an update occurs. It returns true or fails with an
-                            error.custom_function_default_issue_update_notify( $p_issue_id )
-                            notify after a bug has been
-                            updatedcustom_function_default_issue_create_validate( $p_new_bug )
-                            validate bug field settings before an issue is created. It returns
-                            true or fails with an
-                            error.custom_function_default_issue_create_notify( $p_issue_id )
-                            notify after a bug has been
-                            openedcustom_function_default_issue_delete_validate( $p_issue_id )
-                            validate bug field settings before an issue can be deleted. It
-                            returns true or fails with an
-                            error.custom_function_default_issue_delete_notify( $p_issue_id )
-                            notify after a bug has been deleted
-                        </para>
-                    </section>
-                    
-                    <section>
-                        
-                        <title>Example Custom Function</title>
-                        
-                        
-                        <para>The following function is used to validate an issue before
-                            it is resolved.
-                            <programlisting width="102"><![CDATA[<?php 
+            </section>
+
+            <section>
+                <title>Example Custom Function</title>
+
+                <para>The following function is used to validate an issue before
+                    it is resolved.
+                    <programlisting width="102"><![CDATA[<?php 
 # -------------------- 
 # Hook to validate Validate field settings before resolving 
 # verify that the resolution is not set to OPEN 
@@ -872,14 +809,14 @@ trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
 } 
 }
 ?>]]>
-                            </programlisting>
-                            The errors will also need to be defined by adding the following to <filename>custom_constant_inc.php</filename>
-                            <programlisting>
-                                define ( 'ERROR_VALIDATE_FAILURE', 2000 );
-                                To custom_strings_inc.php
-                                $MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
-                            </programlisting>
-                        </para>
-                    </section>
-                </section>
-            </chapter>
+                    </programlisting>
+                    The errors will also need to be defined by adding the following to <filename>custom_constant_inc.php</filename>
+                    <programlisting>
+                        define ( 'ERROR_VALIDATE_FAILURE', 2000 );
+                        To custom_strings_inc.php
+                        $MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
+                    </programlisting>
+                </para>
+            </section>
+        </section>
+</chapter>
