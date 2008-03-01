@@ -462,6 +462,7 @@
 		# print timings
 		if ( ON == config_get( 'show_timer' ) ) {
 			$g_timer->print_times();
+			echo ' ' . number_format( memory_get_peak_usage() / 1000 ) . 'k peak<br />';
 		}
 
 		# print db queries that were run
