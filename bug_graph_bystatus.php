@@ -63,8 +63,8 @@
 		exit();
 	}
 	
-	$t_bug_table			= config_get( 'mantis_bug_table' );
-	$t_bug_hist_table			= config_get( 'mantis_bug_history_table' );
+	$t_bug_table			= db_get_table( 'mantis_bug_table' );
+	$t_bug_hist_table			= db_get_table( 'mantis_bug_history_table' );
 
 	$t_marker = array();
 	$t_data = array();
@@ -74,6 +74,7 @@
 	
 	// grab all status levels
 	$t_status_arr  = get_enum_to_array( config_get( 'status_enum_string' ) );
+	$t_status_labels  = get_enum_to_array( lang_get( 'status_enum_string' ) );
     
     $t_bug = array();
     $t_view_status = array();
@@ -175,12 +176,12 @@
 	$t_labels = array();
 	$i = 0;
     if ($f_summary) {
-        $t_labels[++$i] = 'open';
-        $t_labels[++$i] = 'resolved';
-        $t_labels[++$i] = 'closed';
+        $t_labels[++$i] = lang_get_defaulted('open');
+        $t_labels[++$i] = lang_get_defaulted('resolved');
+        $t_labels[++$i] = lang_get_defaulted('closed');
     } else {
         foreach ( $t_view_status as $t_status => $t_label ) {
-            $t_labels[++$i] = $t_label;
+            $t_labels[++$i] = isset($t_status_labels[$t_status]) ? $t_status_labels[$t_status] : lang_get_defaulted($t_label);
         } 
     }   
     $t_label_count = $i;

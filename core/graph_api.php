@@ -380,7 +380,7 @@
 		    $t_line[$i] = new LinePlot($p_metrics[$i], $p_metrics[0]);
 		    $t_line[$i]->SetColor($t_line_colours[$i % $t_count_colours]);
 		    $t_line[$i]->SetCenter();
-	        $t_line[$i]->SetLegend( lang_get_defaulted( $p_labels[$i] ) );
+	        $t_line[$i]->SetLegend( $p_labels[$i] );
 		    $graph->Add($t_line[$i]);
         }
 
