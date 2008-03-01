@@ -279,7 +279,7 @@
 	# --------------------
 	function print_duplicate_id_option_list() {
 	    $query = "SELECT id
-	    		FROM " . config_get ( 'mantis_bug_table' ) . "
+	    		FROM " . db_get_table( 'mantis_bug_table' ) . "
 	    		ORDER BY id ASC";
 	    $result = db_query_bound( $query );
 	    $duplicate_id_count = db_num_rows( $result );
