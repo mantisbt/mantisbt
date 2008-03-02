@@ -1,4 +1,4 @@
-#!/usr/local/bin/php -q
+#!/usr/bin/php -q
 <?php
 # Mantis - a php based bugtracking system
 
