@@ -1,0 +1,11 @@
+This directory contains some command line scripts useful for performance
+or integration issues. Please refer to the mantis manual for a more complete
+documentation about their purpose and usage.
+
+Included scripts:
+
+checkin.php
+    Provides source control (SCM) integration for closing bugs upon commits
+
+send_emails.php
+    Allows sending bug mails asynchronously
