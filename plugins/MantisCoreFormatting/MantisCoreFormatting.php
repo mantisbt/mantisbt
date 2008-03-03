@@ -71,7 +71,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			}
 		}
 
-		return array( $t_string, $p_multiline );
+		return $t_string;
 	}
 
 	/**
@@ -108,7 +108,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_cvs_link( $t_string );
 		}
 
-		return array( $t_string, $p_multiline );
+		return $t_string;
 	}
 
 	/**

@@ -110,7 +110,7 @@ function event_hook_many( $p_hooks, $p_plugin=0 ) {
  * @param int Event type override
  * @return multi Null if event undeclared, appropriate return value otherwise
  */
-function event_signal( $p_name, $p_params=null, $p_type=null ) {
+function event_signal( $p_name, $p_params=null, $p_params_dynamic=null, $p_type=null ) {
 	global $g_event_cache;
 
 	if ( !isset( $g_event_cache[$p_name] ) ) {
@@ -134,7 +134,7 @@ function event_signal( $p_name, $p_params=null, $p_type=null ) {
 			return event_type_output( $p_name, $t_callbacks, $p_params );
 
 		case EVENT_TYPE_CHAIN:
-			return event_type_chain( $p_name, $t_callbacks, $p_params );
+			return event_type_chain( $p_name, $t_callbacks, $p_params, $p_params_dynamic );
 		
 		default:
 			return event_type_default( $p_name, $t_callbacks, $p_params );
@@ -240,11 +240,20 @@ function event_type_output( $p_event, $p_callbacks, $p_params=null ) {
  * @param string Input string
  * @return string Output string
  */
-function event_type_chain( $p_event, $p_callbacks, $p_input ) {
+function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
+	if ( !is_array( $p_params ) ) {
+		$p_params = array( $p_params );
+	}
 	$t_output = $p_input;
+
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {
 		foreach( $t_callbacks as $t_callback ) {
-			$t_output = event_callback( $p_event, $t_callback, $t_plugin, $t_output );
+			if ( !is_array( $t_output ) ) {
+				$t_output = array( $t_output );
+			}
+
+			$t_params = array_merge( $t_output, $p_params );
+			$t_output = event_callback( $p_event, $t_callback, $t_plugin, $t_params );
 		}
 	}
 	return $t_output;

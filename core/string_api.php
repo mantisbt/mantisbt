@@ -106,31 +106,31 @@
 	# --------------------
 	# Prepare a multiple line string for display to HTML
 	function string_display( $p_string ) {	
-		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', array( $p_string, true ) );
-		return $t_data[0];
+		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', $p_string, true );
+		return $t_data;
 	}
 
 	# --------------------
 	# Prepare a single line string for display to HTML
 	function string_display_line( $p_string ) {
-		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', array( $p_string, false ) );
-		return $t_data[0];
+		$t_data = event_signal( 'EVENT_DISPLAY_TEXT', $p_string, false );
+		return $t_data;
 	}
 
 	# --------------------
 	# Prepare a string for display to HTML and add href anchors for URLs, emails,
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
-		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', array( $p_string, true ) );
-		return $t_data[0];
+		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, true );
+		return $t_data;
 	}
 
 	# --------------------
 	# Prepare a single line string for display to HTML and add href anchors for 
 	# URLs, emails, bug references, and cvs references
 	function string_display_line_links( $p_string ) {
-		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', array( $p_string, false ) );
-		return $t_data[0];
+		$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, false );
+		return $t_data;
 	}
 
 	# --------------------
